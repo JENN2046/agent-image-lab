@@ -1,0 +1,67 @@
+# autopilot_task_queue.schema.yaml
+# Machine-checkable contract for Goal Compiler v1 near-term queues.
+
+autopilot_task_queue:
+  version: v1
+  contract_type: autopilot_task_queue
+  policy_model: Smart Standing Authorization v3 — Budgeted Autonomy Envelope
+  compiler_stage: task_queue
+
+identity:
+  required:
+    - task_queue_id
+    - source_route_plan_id
+    - tasks
+
+required_fields:
+  - task_queue_id
+  - source_route_plan_id
+  - tasks
+
+task_required_fields:
+  - task_id
+  - objective
+  - lane
+  - allowed_files
+  - forbidden_files
+  - allowed_actions
+  - forbidden_actions
+  - envelope_ref
+  - validation_required
+  - commit_allowed
+  - push_allowed
+  - stop_conditions
+  - receipt_required
+
+lane_allowed_values:
+  - Green
+  - Amber
+  - Red
+
+task_defaults:
+  push_allowed: false
+  commit_allowed: false
+  receipt_required: false
+  envelope_ref: null
+
+amber_task_rules:
+  receipt_required: true
+  envelope_ref_required: true
+  validation_required_non_empty: true
+
+red_task_rules:
+  red_route_must_not_be_executable: true
+  push_allowed: false
+
+current_execution_signals_required_false:
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  real_manifest_read_performed: false
+  real_vcpchat_read_performed: false
+  real_vcptoolbox_read_performed: false
+  dependency_change_performed: false
+  runtime_probe_performed: false

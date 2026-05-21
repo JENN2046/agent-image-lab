@@ -2,6 +2,14 @@
 
 ## Decisions
 
+### DECISION-AIL-AUTO-011 — Goal Compiler v1 route and task queue baseline
+
+Context: Smart Autopilot v3 already has a governance kernel, autonomy envelope, and receipt validation, but it still needs a machine-verifiable way to compile a user goal into current truth, route options, selected route, near-term tasks, lane assignments, validation, and stop conditions.
+Chosen: Add Goal Compiler v1 as Green Lane local infrastructure with goal, route plan, and task queue schemas, example fixtures, and `scripts/validate_autopilot_goal_compiler.js` wired into `scripts/validate_mvp.ps1`.
+Reason: Future autonomous work should start from a checked goal/route/task queue baseline instead of prose-only planning.
+Risk: If Red routes are accidentally copied into executable task queues, the compiler could turn blocked work into apparent permission.
+Mitigation: The validator requires rejected Red routes, verifies that Red routes are excluded from executable tasks, keeps `push_allowed=false`, requires Amber tasks to include `receipt_required=true` and a non-empty `envelope_ref`, and checks all provider/plugin/API/image/memory/source-read/dependency/runtime execution signals remain false.
+
 ### DECISION-AIL-AUTO-001 — Overlay, not overwrite
 
 Context: The universal autopilot pack contains a root `AGENTS.md`, but Agent Image Lab already has project-specific rules.

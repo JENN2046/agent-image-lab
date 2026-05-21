@@ -1,0 +1,105 @@
+{
+  "autopilot_route_plan": {
+    "version": "v1",
+    "contract_type": "autopilot_route_plan",
+    "policy_model": "Smart Standing Authorization v3 — Budgeted Autonomy Envelope",
+    "route_plan_id": "route-plan-agent-image-lab-smart-autopilot-productization-001",
+    "source_goal_id": "goal-agent-image-lab-smart-autopilot-productization-001",
+    "current_truth": {
+      "branch": "master",
+      "baseline": "HEAD equals origin/master before local Goal Compiler v1 work",
+      "worktree_state": "clean_before_goal_compiler_v1",
+      "policy_model_active": true,
+      "governance_kernel_installed": true,
+      "external_side_effects_allowed_now": false
+    },
+    "route_options": [
+      {
+        "route_id": "route-green-goal-compiler-infrastructure",
+        "lane": "Green",
+        "objective": "Add local Goal Compiler schemas, examples, validator, MVP wiring, and status surfaces.",
+        "status": "selected",
+        "validation_path": [
+          "node scripts/validate_autopilot_goal_compiler.js",
+          "powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1"
+        ],
+        "stop_conditions": [
+          "unexpected dirty unrelated changes",
+          "validator failure requiring non-obvious judgment"
+        ]
+      },
+      {
+        "route_id": "route-amber-future-local-replay",
+        "lane": "Amber",
+        "objective": "Future local-only replay or bounded exact source-read dry-run with receipt.",
+        "status": "queued_future",
+        "validation_path": [
+          "node scripts/validate_autopilot_governance_kernel.js",
+          "node scripts/validate_autopilot_goal_compiler.js"
+        ],
+        "stop_conditions": [
+          "missing envelope",
+          "receipt requirement cannot be met",
+          "Red Lane condition appears"
+        ]
+      },
+      {
+        "route_id": "route-red-remote-or-production",
+        "lane": "Red",
+        "objective": "Push, release, provider generation, or memory write.",
+        "status": "rejected",
+        "validation_path": [],
+        "stop_conditions": [
+          "requires explicit user authorization"
+        ]
+      }
+    ],
+    "selected_route": {
+      "route_id": "route-green-goal-compiler-infrastructure",
+      "reason": "It adds machine-verifiable local planning infrastructure without external side effects."
+    },
+    "rejected_routes": [
+      {
+        "route_id": "route-red-remote-or-production",
+        "lane": "Red",
+        "reason": "Push, release, provider generation, and memory write are Red without exact authorization.",
+        "blocked_actions": [
+          "git push",
+          "release",
+          "provider generation",
+          "DailyNote / VCP memory write"
+        ]
+      }
+    ],
+    "risks": [
+      "status surfaces can drift if README, roadmap, and .agent_board are not updated together",
+      "Red routes must remain out of the executable task queue"
+    ],
+    "lane_distribution": {
+      "Green": 2,
+      "Amber": 1,
+      "Red": 1
+    },
+    "validation_strategy": [
+      "Validate Goal Compiler examples and links with scripts/validate_autopilot_goal_compiler.js",
+      "Run existing agent board and MVP validators",
+      "Keep all current execution signals false"
+    ],
+    "next_decision_point": "After Goal Compiler v1 commit, choose pending push safety gate or next autonomous envelope task.",
+    "guard": {
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "image_generation_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "real_manifest_read_performed": false,
+      "real_vcpchat_read_performed": false,
+      "real_vcptoolbox_read_performed": false,
+      "dependency_change_performed": false,
+      "runtime_probe_performed": false,
+      "secret_value_read_performed": false,
+      "push_tag_release_deploy_performed": false
+    }
+  }
+}

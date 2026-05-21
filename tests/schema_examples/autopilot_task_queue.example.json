@@ -1,0 +1,185 @@
+{
+  "autopilot_task_queue": {
+    "version": "v1",
+    "contract_type": "autopilot_task_queue",
+    "policy_model": "Smart Standing Authorization v3 — Budgeted Autonomy Envelope",
+    "task_queue_id": "task-queue-agent-image-lab-smart-autopilot-productization-001",
+    "source_route_plan_id": "route-plan-agent-image-lab-smart-autopilot-productization-001",
+    "tasks": [
+      {
+        "task_id": "harden_amber_02_receipt_surfaces",
+        "objective": "Harden Amber-02 receipt refs and status surfaces without external actions.",
+        "lane": "Green",
+        "allowed_files": [
+          "README.md",
+          "docs/00_project_roadmap.md",
+          ".agent_board/HANDOFF.md",
+          ".agent_board/RUN_STATE.md",
+          ".agent_board/TASK_QUEUE.md",
+          ".agent_board/CHECKPOINT.md"
+        ],
+        "forbidden_files": [
+          ".env*",
+          "production/**",
+          "reports/**",
+          "runs/**",
+          "asset_archive/**"
+        ],
+        "allowed_actions": [
+          "local documentation status sync",
+          "local validation"
+        ],
+        "forbidden_actions": [
+          "provider/plugin/API/image generation",
+          "DailyNote / VCP memory write",
+          "real manifest / VCPChat / VCPToolBox read",
+          "dependency change",
+          "runtime probe",
+          "push/tag/release/deploy"
+        ],
+        "envelope_ref": null,
+        "validation_required": [
+          "node scripts/validate_agent_board_state.js"
+        ],
+        "commit_allowed": true,
+        "push_allowed": false,
+        "stop_conditions": [
+          "status surface conflict requiring judgment",
+          "Red Lane condition appears"
+        ],
+        "receipt_required": false
+      },
+      {
+        "task_id": "add_goal_compiler_validation",
+        "objective": "Add Goal Compiler v1 schemas, examples, validator, and MVP wiring.",
+        "lane": "Green",
+        "allowed_files": [
+          "docs/AUTOPILOT_GOAL_COMPILER_V1.md",
+          "schemas/autopilot_goal.schema.yaml",
+          "schemas/autopilot_route_plan.schema.yaml",
+          "schemas/autopilot_task_queue.schema.yaml",
+          "tests/schema_examples/autopilot_goal.example.json",
+          "tests/schema_examples/autopilot_route_plan.example.json",
+          "tests/schema_examples/autopilot_task_queue.example.json",
+          "scripts/validate_autopilot_goal_compiler.js",
+          "scripts/validate_mvp.ps1",
+          "README.md",
+          "docs/00_project_roadmap.md",
+          ".agent_board/HANDOFF.md",
+          ".agent_board/RUN_STATE.md",
+          ".agent_board/TASK_QUEUE.md",
+          ".agent_board/CHECKPOINT.md",
+          ".agent_board/DECISIONS.md"
+        ],
+        "forbidden_files": [
+          "package.json",
+          "package-lock.json",
+          "production/**",
+          "reports/**",
+          "runs/**",
+          "asset_archive/**",
+          "review_console/**",
+          "plugins/**",
+          ".env*"
+        ],
+        "allowed_actions": [
+          "schema creation",
+          "example creation",
+          "local validator creation",
+          "MVP validator wiring",
+          "status surface sync",
+          "guarded local commit after validation"
+        ],
+        "forbidden_actions": [
+          "git add .",
+          "provider/plugin/API/image generation",
+          "DailyNote / VCP memory write",
+          "real manifest / VCPChat / VCPToolBox read",
+          "dependency change",
+          "runtime probe",
+          "secret read",
+          "push/tag/release/deploy"
+        ],
+        "envelope_ref": null,
+        "validation_required": [
+          "node --check scripts/validate_autopilot_goal_compiler.js",
+          "node scripts/validate_autopilot_goal_compiler.js",
+          "git diff --check",
+          "node scripts/validate_agent_board_state.js",
+          "powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1",
+          "powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1"
+        ],
+        "commit_allowed": true,
+        "push_allowed": false,
+        "stop_conditions": [
+          "validation failure requiring non-obvious judgment",
+          "unrelated dirty worktree",
+          "Red Lane condition appears"
+        ],
+        "receipt_required": false
+      },
+      {
+        "task_id": "future_local_only_replay_receipt",
+        "objective": "Future local-only replay or bounded exact source-read dry-run with receipt.",
+        "lane": "Amber",
+        "allowed_files": [
+          "docs/AMBER_*_LOCAL_*",
+          "tests/schema_examples/autopilot_execution_receipt.*.example.json",
+          ".agent_board/AUTOPILOT_LEDGER.md",
+          ".agent_board/HANDOFF.md",
+          ".agent_board/RUN_STATE.md",
+          ".agent_board/TASK_QUEUE.md",
+          ".agent_board/CHECKPOINT.md"
+        ],
+        "forbidden_files": [
+          ".env*",
+          "package.json",
+          "package-lock.json",
+          "external VCPChat / VCPToolBox repositories"
+        ],
+        "allowed_actions": [
+          "bounded local-only replay",
+          "receipt recording",
+          "local validation"
+        ],
+        "forbidden_actions": [
+          "provider/plugin/API/image generation",
+          "DailyNote / VCP memory write",
+          "unbounded source read",
+          "dependency change",
+          "runtime probe",
+          "push/tag/release/deploy"
+        ],
+        "envelope_ref": "envelope-future-local-only-replay-receipt",
+        "validation_required": [
+          "node scripts/validate_autopilot_governance_kernel.js",
+          "node scripts/validate_autopilot_goal_compiler.js"
+        ],
+        "commit_allowed": true,
+        "push_allowed": false,
+        "stop_conditions": [
+          "missing envelope",
+          "receipt cannot be recorded",
+          "budget exceeded",
+          "Red Lane condition appears"
+        ],
+        "receipt_required": true
+      }
+    ],
+    "guard": {
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "image_generation_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "real_manifest_read_performed": false,
+      "real_vcpchat_read_performed": false,
+      "real_vcptoolbox_read_performed": false,
+      "dependency_change_performed": false,
+      "runtime_probe_performed": false,
+      "secret_value_read_performed": false,
+      "push_tag_release_deploy_performed": false
+    }
+  }
+}

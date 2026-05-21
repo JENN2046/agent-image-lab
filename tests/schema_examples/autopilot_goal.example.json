@@ -1,0 +1,79 @@
+{
+  "autopilot_goal": {
+    "version": "v1",
+    "contract_type": "autopilot_goal",
+    "policy_model": "Smart Standing Authorization v3 — Budgeted Autonomy Envelope",
+    "goal_id": "goal-agent-image-lab-smart-autopilot-productization-001",
+    "objective": "Continue Agent Image Lab smart autopilot productization without external side effects.",
+    "requester_intent": "local_green_infrastructure",
+    "scope": [
+      "define goal compiler schema",
+      "define route plan schema",
+      "define task queue schema",
+      "add local validator",
+      "sync README, roadmap, and .agent_board resume surfaces"
+    ],
+    "non_goals": [
+      "provider/plugin/API/image generation",
+      "DailyNote / VCP memory write",
+      "real manifest / VCPChat / VCPToolBox read",
+      "dependency change",
+      "runtime probe",
+      "push/tag/release/deploy",
+      "secret read",
+      "destructive action"
+    ],
+    "allowed_lanes": [
+      "Green",
+      "Amber"
+    ],
+    "forbidden_actions": [
+      "git push",
+      "tag",
+      "release",
+      "deploy",
+      "provider generation",
+      "memory write",
+      "secret value read",
+      "destructive Git/filesystem action"
+    ],
+    "success_criteria": [
+      "Goal, route plan, and task queue schemas exist",
+      "Example JSON files parse and link by ID",
+      "Near-term queue includes Green and future Amber tasks",
+      "Rejected Red routes are not executable tasks",
+      "MVP validation invokes the goal compiler validator"
+    ],
+    "validation_expectations": [
+      "node --check scripts/validate_autopilot_goal_compiler.js",
+      "node scripts/validate_autopilot_goal_compiler.js",
+      "git diff --check",
+      "node scripts/validate_agent_board_state.js",
+      "powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1",
+      "powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1"
+    ],
+    "stop_conditions": [
+      "worktree dirty with unrelated or user-owned changes",
+      "branch behind origin",
+      "need provider/plugin/API/image/memory/source-read/dependency/runtime action",
+      "need secret value read",
+      "need push/tag/release/deploy",
+      "validation failure requiring non-obvious judgment"
+    ],
+    "guard": {
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "image_generation_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "real_manifest_read_performed": false,
+      "real_vcpchat_read_performed": false,
+      "real_vcptoolbox_read_performed": false,
+      "dependency_change_performed": false,
+      "runtime_probe_performed": false,
+      "secret_value_read_performed": false,
+      "push_tag_release_deploy_performed": false
+    }
+  }
+}

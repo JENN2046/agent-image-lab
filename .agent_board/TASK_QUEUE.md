@@ -1,6 +1,25 @@
 
 ---
 
+- [x] ID: autopilot_goal_compiler_v1
+      Title: Add Goal Compiler v1 schemas, examples, validator, and MVP wiring
+      Reason: Smart Autopilot needs a machine-verifiable way to compile goals into route plans and near-term Green/Amber/Red task queues before future Amber work continues.
+      Changed files: docs/AUTOPILOT_GOAL_COMPILER_V1.md; schemas/autopilot_goal.schema.yaml; schemas/autopilot_route_plan.schema.yaml; schemas/autopilot_task_queue.schema.yaml; tests/schema_examples/autopilot_goal.example.json; tests/schema_examples/autopilot_route_plan.example.json; tests/schema_examples/autopilot_task_queue.example.json; scripts/validate_autopilot_goal_compiler.js; scripts/validate_mvp.ps1; README.md; docs/00_project_roadmap.md; .agent_board/HANDOFF.md; .agent_board/RUN_STATE.md; .agent_board/TASK_QUEUE.md; .agent_board/CHECKPOINT.md; .agent_board/DECISIONS.md.
+      Decision: implement as Green Lane local infrastructure; keep provider/plugin/API/image/memory/source-read/dependency/runtime execution signals false.
+      Validation: node --check validator passed; node validator passed; git diff --check passed; git diff --cached --check passed; exact-file cached name review passed; validate_agent_board_state passed; validate-agent-image-lab-local passed with known warning scan; validate_mvp passed after guarded local commit.
+      Result: completed_validated_guarded_local_commit.
+      Commit message: test: add autopilot goal compiler validation.
+      Recommended next: pending_push_safety_gate_or_next_autonomous_envelope_task.
+      Stop condition: push/tag/release/deploy, secret read, destructive action, provider/plugin/API/image/memory/source-read/dependency/runtime requirement, dirty unrelated worktree, or validation failure requiring judgment.
+
+- [ ] ID: harden_amber_02_receipt_surfaces
+      Title: Harden Amber-02 receipt refs and status surfaces
+      Reason: Preserve the previously identified Amber-02 surface hardening follow-up as a future Green queue task after Goal Compiler v1.
+      Result: queued_after_goal_compiler_v1.
+      Stop condition: same Red Lane gates as Smart Standing Authorization v3.
+
+---
+
 - [x] ID: amber_receipt_closeout_status_sync_policy
       Title: Add automatic Green status sync after Amber receipts
       Reason: Amber-02 proved the receipt replay but left README, roadmap, and resume surfaces behind because the Amber write budget was interpreted too narrowly.

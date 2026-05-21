@@ -5,9 +5,9 @@
 ## 当前产品主线恢复点
 
 ```yaml
-current_phase: amber_receipt_closeout_status_sync_policy
+current_phase: autopilot_goal_compiler_v1
 phase_status: completed_validated_guarded_local_commit
-source_phase: amber_02_production_candidate_metadata_receipt_replay
+source_phase: amber_receipt_closeout_status_sync_policy
 validated_baseline:
   capsule_product_core_validator_route: completed
   full_asset_archive_manifest_bridge: aligned_to_verified_git_tracked_durable_archive
@@ -30,8 +30,13 @@ standing_owner_auto_authorization_policy_ref: docs/STANDING_OWNER_AUTOMATIC_AUTH
 standing_owner_auto_authorization_decision_ref: DECISION-AIL-AUTO-009
 smart_autopilot_governance_kernel_ref: docs/SMART_AUTOPILOT_GOVERNANCE_KERNEL.md
 smart_autopilot_governance_validator_ref: scripts/validate_autopilot_governance_kernel.js
+autopilot_goal_compiler_ref: docs/AUTOPILOT_GOAL_COMPILER_V1.md
+autopilot_goal_compiler_validator_ref: scripts/validate_autopilot_goal_compiler.js
 autopilot_autonomy_envelope_schema_ref: schemas/autopilot_autonomy_envelope.schema.yaml
 autopilot_execution_receipt_schema_ref: schemas/autopilot_execution_receipt.schema.yaml
+autopilot_goal_schema_ref: schemas/autopilot_goal.schema.yaml
+autopilot_route_plan_schema_ref: schemas/autopilot_route_plan.schema.yaml
+autopilot_task_queue_schema_ref: schemas/autopilot_task_queue.schema.yaml
 autopilot_ledger_ref: .agent_board/AUTOPILOT_LEDGER.md
 amber_01_local_receipt_trial_ref: docs/AMBER_01_LOCAL_RECEIPT_TRIAL.md
 amber_01_local_receipt_trial_fixture_ref: tests/schema_examples/autopilot_execution_receipt.amber_01_local_trial.example.json
@@ -51,6 +56,7 @@ standing_owner_smart_authorization_v3_active: true
 autonomy_envelope_active: true
 green_lane_direct: true
 amber_lane_autonomous_with_budget_and_receipts: true
+goal_compiler_v1_active: true
 amber_closeout_status_sync_required: true
 red_lane_requires_user: true
 A5_allowed_in_amber_envelope: true
@@ -83,10 +89,12 @@ default_autonomy_envelope:
 commit_readiness_validator_repair_closed: true
 validate_mvp_clean_post_commit_failure_closed: true
 goal_level_local_readiness_verified: true
-selected_next_product_move: pending_human_push_or_next_autonomous_envelope_task
-recommended_next: pending_human_push_or_next_autonomous_envelope_task
+selected_next_product_move: autopilot_goal_compiler_v1_green_infrastructure
+recommended_next: pending_push_safety_gate_or_next_autonomous_envelope_task
 validation_passed:
   - git status --short --branch
+  - node --check scripts/validate_autopilot_goal_compiler.js
+  - node scripts/validate_autopilot_goal_compiler.js
   - node --check scripts/validate_autopilot_governance_kernel.js
   - node scripts/validate_autopilot_governance_kernel.js
   - git diff --check

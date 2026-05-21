@@ -57,6 +57,7 @@ $requiredFiles = @(
   'scripts/validate-agent-image-lab-local.sh',
   'scripts/validate_agent_board_state.js',
   'scripts/validate_autopilot_governance_kernel.js',
+  'scripts/validate_autopilot_goal_compiler.js',
   'scripts/validate_local_checkpoint_manifest.js',
   'scripts/validate_local_commit_scope.js',
   'scripts/validate_post_push_state.js',
@@ -247,10 +248,17 @@ $requiredFiles = @(
   'scripts/validate_v14_227_review_console_failure_state_static_workbench.js',
   'scripts/validate_v14_228_review_console_failure_state_snapshot_static_regression.js',
   'docs/SMART_AUTOPILOT_GOVERNANCE_KERNEL.md',
+  'docs/AUTOPILOT_GOAL_COMPILER_V1.md',
   'schemas/autopilot_autonomy_envelope.schema.yaml',
   'schemas/autopilot_execution_receipt.schema.yaml',
+  'schemas/autopilot_goal.schema.yaml',
+  'schemas/autopilot_route_plan.schema.yaml',
+  'schemas/autopilot_task_queue.schema.yaml',
   'tests/schema_examples/autopilot_autonomy_envelope.example.json',
   'tests/schema_examples/autopilot_execution_receipt.example.json',
+  'tests/schema_examples/autopilot_goal.example.json',
+  'tests/schema_examples/autopilot_route_plan.example.json',
+  'tests/schema_examples/autopilot_task_queue.example.json',
   'scripts/validate_codex_session_image_import.js',
   'scripts/validate_review_result_protocol.js',
   'scripts/validate_review_decision_package.js',
@@ -11747,6 +11755,31 @@ process.exit(child.status || 0);
     }
     if ($autopilotGovernanceKernel.real_manifest_read_performed -ne $false -or $autopilotGovernanceKernel.real_vcpchat_read_performed -ne $false -or $autopilotGovernanceKernel.real_vcptoolbox_read_performed -ne $false -or $autopilotGovernanceKernel.dependency_change_performed -ne $false -or $autopilotGovernanceKernel.runtime_probe_performed -ne $false -or $autopilotGovernanceKernel.secret_value_read_performed -ne $false -or $autopilotGovernanceKernel.push_tag_release_deploy_performed -ne $false) {
       Add-Failure "Smart Autopilot governance kernel must not perform source read, dependency, runtime, secret, push, tag, release, or deploy actions"
+    }
+  }
+
+  $autopilotGoalCompilerOutput = & node (Join-Path $Root 'scripts/validate_autopilot_goal_compiler.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Autopilot Goal Compiler validation exited with failure"
+  } else {
+    $autopilotGoalCompiler = ($autopilotGoalCompilerOutput -join "`n") | ConvertFrom-Json
+    if ($autopilotGoalCompiler.passed -ne $true -or $autopilotGoalCompiler.phase -ne 'autopilot_goal_compiler_v1') {
+      Add-Failure "Autopilot Goal Compiler v1 validation must pass"
+    }
+    if ($autopilotGoalCompiler.doc_components_verified -lt 11 -or $autopilotGoalCompiler.task_count -lt 3 -or $autopilotGoalCompiler.validation_strategy_present -ne $true -or $autopilotGoalCompiler.stop_conditions_present -ne $true) {
+      Add-Failure "Autopilot Goal Compiler v1 must verify components, at least three tasks, validation strategy, and stop conditions"
+    }
+    if ($autopilotGoalCompiler.amber_tasks_with_receipts_verified -lt 1 -or $autopilotGoalCompiler.rejected_red_routes_verified -lt 1 -or $autopilotGoalCompiler.red_routes_excluded_from_executable_tasks -ne $true) {
+      Add-Failure "Autopilot Goal Compiler v1 must keep Amber receipts required and rejected Red routes non-executable"
+    }
+    if ($autopilotGoalCompiler.push_allowed_default_false -ne $true -or $autopilotGoalCompiler.no_current_external_execution_signals -ne $true) {
+      Add-Failure "Autopilot Goal Compiler v1 must keep push disabled and external execution signals false"
+    }
+    if ($autopilotGoalCompiler.provider_contact_performed -ne $false -or $autopilotGoalCompiler.plugin_call_performed -ne $false -or $autopilotGoalCompiler.api_call_performed -ne $false -or $autopilotGoalCompiler.image_generation_performed -ne $false -or $autopilotGoalCompiler.DailyNote_write_performed -ne $false -or $autopilotGoalCompiler.VCP_memory_write_performed -ne $false) {
+      Add-Failure "Autopilot Goal Compiler v1 must not perform provider, plugin, API, image, DailyNote, or VCP memory actions"
+    }
+    if ($autopilotGoalCompiler.real_manifest_read_performed -ne $false -or $autopilotGoalCompiler.real_vcpchat_read_performed -ne $false -or $autopilotGoalCompiler.real_vcptoolbox_read_performed -ne $false -or $autopilotGoalCompiler.dependency_change_performed -ne $false -or $autopilotGoalCompiler.runtime_probe_performed -ne $false -or $autopilotGoalCompiler.secret_value_read_performed -ne $false -or $autopilotGoalCompiler.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "Autopilot Goal Compiler v1 must not perform source read, dependency, runtime, secret, push, tag, release, or deploy actions"
     }
   }
 

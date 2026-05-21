@@ -1,6 +1,43 @@
 
 ---
 
+## Checkpoint - Autopilot Goal Compiler v1
+
+```text
+phase: autopilot_goal_compiler_v1
+phase_id: autopilot_goal_compiler_v1
+status: completed_validated_guarded_local_commit
+completed:
+- added Goal Compiler v1 document
+- added goal, route plan, and task queue schemas
+- added three linked JSON examples
+- added local Node validator
+- wired Goal Compiler validator into scripts/validate_mvp.ps1
+- synchronized README, roadmap, and .agent_board resume surfaces
+validation_completed:
+- node --check scripts/validate_autopilot_goal_compiler.js
+- node scripts/validate_autopilot_goal_compiler.js
+- git diff --check
+- git diff --cached --check
+- git diff --cached --name-only
+- node scripts/validate_agent_board_state.js
+- powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+- powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+not_performed:
+- no push
+- no tag/release/deploy
+- no provider/plugin/API/image generation
+- no DailyNote/VCP memory write
+- no real manifest/VCPChat/VCPToolBox read
+- no dependency change
+- no runtime probe
+- no secret read
+commit_message: test: add autopilot goal compiler validation
+recommended_next: pending_push_safety_gate_or_next_autonomous_envelope_task
+```
+
+---
+
 ## Checkpoint - Amber Receipt Closeout Status Sync Policy
 
 ```text

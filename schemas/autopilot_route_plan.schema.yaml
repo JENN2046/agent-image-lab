@@ -1,0 +1,60 @@
+# autopilot_route_plan.schema.yaml
+# Machine-checkable contract for Goal Compiler v1 route plans.
+
+autopilot_route_plan:
+  version: v1
+  contract_type: autopilot_route_plan
+  policy_model: Smart Standing Authorization v3 — Budgeted Autonomy Envelope
+  compiler_stage: route_plan
+
+identity:
+  required:
+    - route_plan_id
+    - source_goal_id
+
+required_fields:
+  - route_plan_id
+  - source_goal_id
+  - current_truth
+  - route_options
+  - selected_route
+  - rejected_routes
+  - risks
+  - lane_distribution
+  - validation_strategy
+  - next_decision_point
+
+route_option_required_fields:
+  - route_id
+  - lane
+  - objective
+  - status
+  - validation_path
+  - stop_conditions
+
+lane_allowed_values:
+  - Green
+  - Amber
+  - Red
+
+red_route_policy:
+  rejected_red_routes_required: true
+  red_routes_executable: false
+  push_release_provider_memory_routes_must_be_rejected_without_exact_authorization: true
+
+validation_strategy_required: true
+stop_conditions_required: true
+
+default_boundaries:
+  push_allowed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  real_manifest_read_performed: false
+  real_vcpchat_read_performed: false
+  real_vcptoolbox_read_performed: false
+  dependency_change_performed: false
+  runtime_probe_performed: false

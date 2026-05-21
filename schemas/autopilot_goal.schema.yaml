@@ -1,0 +1,60 @@
+# autopilot_goal.schema.yaml
+# Machine-checkable contract for Goal Compiler v1 goal inputs.
+
+autopilot_goal:
+  version: v1
+  contract_type: autopilot_goal
+  policy_model: Smart Standing Authorization v3 — Budgeted Autonomy Envelope
+  compiler_stage: goal
+
+identity:
+  required:
+    - goal_id
+    - objective
+    - requester_intent
+
+required_fields:
+  - goal_id
+  - objective
+  - requester_intent
+  - scope
+  - non_goals
+  - allowed_lanes
+  - forbidden_actions
+  - success_criteria
+  - validation_expectations
+  - stop_conditions
+
+lane_allowed_values:
+  - Green
+  - Amber
+  - Red
+
+field_types:
+  goal_id: string
+  objective: string
+  requester_intent: string
+  scope: array
+  non_goals: array
+  allowed_lanes: array
+  forbidden_actions: array
+  success_criteria: array
+  validation_expectations: array
+  stop_conditions: array
+
+default_boundaries:
+  push_allowed: false
+  tag_release_deploy_allowed: false
+  destructive_action_allowed: false
+  secret_value_read_allowed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  real_manifest_read_performed: false
+  real_vcpchat_read_performed: false
+  real_vcptoolbox_read_performed: false
+  dependency_change_performed: false
+  runtime_probe_performed: false

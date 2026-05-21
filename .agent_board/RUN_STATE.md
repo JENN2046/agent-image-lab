@@ -1,6 +1,36 @@
 
 ---
 
+## autopilot_goal_compiler_v1
+
+```text
+phase: autopilot_goal_compiler_v1
+phase_id: autopilot_goal_compiler_v1
+status: completed_validated_guarded_local_commit
+mode: Green Lane local implementation
+objective: add machine-verifiable goal intake, route planning, and near-term task queue infrastructure for Smart Autopilot v3
+branch: master
+origin_branch: origin/master
+baseline_before_edit: 8e13802
+standing_owner_smart_authorization_v3_active: true
+autonomy_envelope_active: true
+green_lane_direct: true
+amber_lane_autonomous_with_budget_and_receipts: true
+red_lane_requires_user: true
+goal_compiler_v1_active: true
+push_allowed: false
+tag_release_deploy_allowed: false
+destructive_action_allowed: false
+secret_value_read_allowed: false
+provider_plugin_API_image_memory_source_read_dependency_runtime_performed: false
+amber_02_surface_hardening_preserved_as_future_task: true
+validation_status: completed_validated_after_guarded_local_commit
+commit_message: test: add autopilot goal compiler validation
+recommended_next: pending_push_safety_gate_or_next_autonomous_envelope_task
+```
+
+---
+
 ## amber_receipt_closeout_status_sync_policy
 
 ```text

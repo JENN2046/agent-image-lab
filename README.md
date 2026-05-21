@@ -5,22 +5,25 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 ## 当前权限策略
 
 ```yaml
-current_phase: amber_receipt_closeout_status_sync_policy
+current_phase: autopilot_goal_compiler_v1
 standing_owner_smart_authorization_v3_active: true
 autonomy_envelope_active: true
 green_lane_direct: true
 amber_lane_autonomous_with_budget_and_receipts: true
+goal_compiler_v1_active: true
 amber_closeout_status_sync_required: true
 red_lane_requires_user: true
 push_tag_release_deploy_allowed_automatically: false
 secret_value_access_allowed_automatically: false
 destructive_action_allowed_automatically: false
-recommended_next: pending_human_push_or_next_autonomous_envelope_task
+recommended_next: pending_push_safety_gate_or_next_autonomous_envelope_task
 ```
 
 Smart Standing Authorization v3 means Codex can continue Green work directly and Amber work inside the budgeted envelope without step-by-step approval. It must stop at Red Lane conditions such as push/tag/release/deploy, destructive actions, secret value access, raw private data exposure, uncapped cost, unbounded loops, broad external repository modification, or dependency changes without an exact package/action list.
 
 `docs/SMART_AUTOPILOT_GOVERNANCE_KERNEL.md` defines the local governance kernel for v3: Goal Compiler, Truth Model, Lane Classifier, Budget Engine, Receipt Recorder, and Continuation Judge. `scripts/validate_autopilot_governance_kernel.js` validates the envelope and receipt schemas/examples and is wired into `scripts/validate_mvp.ps1`.
+
+`docs/AUTOPILOT_GOAL_COMPILER_V1.md` defines the first machine-verifiable Goal Compiler layer: goal intake, truth intake, route options, route selection, near-term task queues, Green/Amber/Red lane assignment, Amber envelope refs, validation plans, continuation policy, stop conditions, and resume-surface sync. `scripts/validate_autopilot_goal_compiler.js` validates the goal / route plan / task queue schemas and examples and is wired into `scripts/validate_mvp.ps1`.
 
 Amber receipt closeout now has an automatic Green Lane status-sync rule: after meaningful Amber receipt work, Codex must align README, roadmap, `.agent_board` resume surfaces, ledger, validators, and authoritative refs when they changed or gained new refs. This Green sync is local closeout work and does not consume the preceding Amber action's write budget.
 
@@ -28,6 +31,13 @@ Current Amber receipts:
 
 - Amber-01 local receipt trial: `docs/AMBER_01_LOCAL_RECEIPT_TRIAL.md`
 - Amber-02 production candidate metadata receipt replay: `docs/AMBER_02_PRODUCTION_CANDIDATE_RECEIPT_REPLAY.md`
+
+Current Goal Compiler v1 refs:
+
+- Goal schema: `schemas/autopilot_goal.schema.yaml`
+- Route plan schema: `schemas/autopilot_route_plan.schema.yaml`
+- Task queue schema: `schemas/autopilot_task_queue.schema.yaml`
+- Example queue keeps Amber-02 surface hardening as a later Green task and includes one future Amber receipt task without executing it.
 
 ## 当前结构导航
 
