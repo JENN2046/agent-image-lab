@@ -22,6 +22,12 @@ continue Green work directly and Amber work inside the budgeted envelope while t
 stop before Red Lane conditions such as secrets, destructive actions, push/tag/release/deploy, uncapped cost, unbounded loops, or broad external repository modification
 ```
 
+For non-single-step goals, run the Goal Decomposition Runtime before execution:
+compile `goal -> route_plan -> executable task_queue -> blocked_red_items ->
+next_safe_task`, execute only `next_safe_task`, validate, update `.agent_board`,
+record an Amber receipt when applicable, and continue until done, blocked, or
+Red.
+
 ---
 
 ## 0.5 Mandatory Autopilot Rule Intake

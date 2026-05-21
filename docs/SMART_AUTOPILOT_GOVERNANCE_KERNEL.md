@@ -41,6 +41,17 @@ stop_conditions
 The Goal Compiler must keep the smallest useful scope and must not convert vague
 continuation words into Red Lane permission.
 
+For any non-single-step goal, Goal Compiler must operate as a runtime flow, not
+only a schema example:
+
+```text
+goal -> route_plan -> executable task_queue -> blocked_red_items -> next_safe_task
+```
+
+Codex may execute only `next_safe_task`. It must validate, update `.agent_board`,
+record a receipt if the task is Amber, and continue until done, blocked, or a
+Red condition appears.
+
 ### Truth Model
 
 Uses repository reality as ground:

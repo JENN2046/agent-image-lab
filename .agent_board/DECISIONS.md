@@ -2,6 +2,14 @@
 
 ## Decisions
 
+### DECISION-AIL-AUTO-014 — Goal Compiler runtime decomposition is mandatory for non-single-step goals
+
+Context: Goal Compiler v1 could express goals, routes, and task queues through schemas and examples, but future sessions still needed a runtime rule that forces decomposition before execution.
+Chosen: Add Goal Decomposition Runtime v1. For non-single-step goals, Codex must compile `goal -> route_plan -> executable task_queue -> blocked_red_items -> next_safe_task`, execute only `next_safe_task`, validate, update `.agent_board`, record a receipt if Amber, and continue until done, blocked, or Red.
+Reason: This makes Smart Standing Authorization v3 more operational and prevents broad goals from turning directly into unbounded execution.
+Risk: A Red route could be accidentally copied into the executable task queue or multiple tasks could be treated as simultaneously in progress.
+Mitigation: `scripts/validate_autopilot_goal_compiler.js` now verifies blocked Red items, excludes Red route steps from executable tasks, requires `next_safe_task`, checks task statuses, and enforces at most one `in_progress` task.
+
 ### DECISION-AIL-AUTO-013 — Receipt registry and cost/rollback hardening
 
 Context: Smart Standing Authorization v3 had envelope and receipt examples, but governance validation still depended on hardcoded receipt fixtures and did not yet require explicit cost and rollback structures.

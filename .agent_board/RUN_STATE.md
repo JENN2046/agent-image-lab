@@ -1,6 +1,38 @@
 
 ---
 
+## autopilot_goal_decomposition_runtime_v1
+
+```text
+phase: autopilot_goal_decomposition_runtime_v1
+phase_id: autopilot_goal_decomposition_runtime_v1
+status: completed_validated_guarded_local_commit
+mode: Green Lane local governance/runtime hardening
+objective: make Goal Compiler v1 a runtime-enforced decomposition flow for non-single-step goals
+current_autonomy_model: Smart Standing Authorization v3
+startup_default_model: Smart Standing Authorization v3
+a4_8_status: retained_as_green_lane_substrate
+a5_status: classified_by_lane_and_envelope
+branch: master
+origin_branch: origin/master
+baseline_before_edit: d5d0aa5
+runtime_spec_ref: docs/AUTOPILOT_GOAL_DECOMPOSITION_RUNTIME.md
+runtime_example_ref: tests/schema_examples/autopilot_goal_decomposition_runtime.example.json
+blocked_red_items_required: true
+next_safe_task_required: true
+agent_board_sync_required: true
+provider_plugin_API_image_memory_source_read_dependency_runtime_performed: false
+push_allowed: false
+tag_release_deploy_allowed: false
+destructive_action_allowed: false
+secret_value_read_allowed: false
+validation_status: completed_validated_guarded_local_commit
+commit_message: test: add autopilot goal decomposition runtime
+recommended_next: pending_goal_compiler_driven_autonomous_task
+```
+
+---
+
 ## autopilot_registry_hardening_v1
 
 ```text

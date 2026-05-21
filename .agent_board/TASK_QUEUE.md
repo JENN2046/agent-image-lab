@@ -1,6 +1,19 @@
 
 ---
 
+- [x] ID: autopilot_goal_decomposition_runtime_v1
+      Title: Enforce Goal Compiler runtime decomposition
+      Reason: Non-single-step goals should compile into goal, route_plan, executable task_queue, blocked_red_items, and next_safe_task before execution.
+      Changed files: runtime spec; runtime example; Goal Compiler validator; MVP wiring; startup/governance docs; README/roadmap/.agent_board status surfaces.
+      Decision: Codex may execute only next_safe_task and must keep Red route steps in blocked_red_items, not executable task_queue.
+      Validation: node --check goal compiler validator; goal compiler validator; governance validator; agent board validator; git diff --check; validate-agent-image-lab-local; validate_mvp after guarded local commit.
+      Result: completed_validated_guarded_local_commit.
+      Commit message: test: add autopilot goal decomposition runtime.
+      Recommended next: pending_goal_compiler_driven_autonomous_task.
+      Stop condition: push/tag/release/deploy, secret read, destructive action, provider/plugin/API/image/memory/source-read/dependency/runtime requirement, dirty unrelated worktree, or validation failure requiring judgment.
+
+---
+
 - [x] ID: autopilot_registry_hardening_v1
       Title: Harden receipt registry, cost budget, and rollback validation
       Reason: Future real Amber actions need a registry-driven receipt validation path plus explicit cost and rollback boundaries.

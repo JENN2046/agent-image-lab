@@ -1,6 +1,27 @@
 
 ---
 
+## Current Handoff Update - Autopilot Goal Decomposition Runtime v1
+
+```text
+phase: autopilot_goal_decomposition_runtime_v1
+phase_id: autopilot_goal_decomposition_runtime_v1
+status: completed_validated_guarded_local_commit
+mode: Green Lane local governance/runtime hardening
+summary: Upgraded Goal Compiler v1 from schema/example validation into a runtime-enforced decomposition flow for non-single-step goals.
+current_autonomy_model: Smart Standing Authorization v3
+startup_default_model: Smart Standing Authorization v3
+runtime_spec_ref: docs/AUTOPILOT_GOAL_DECOMPOSITION_RUNTIME.md
+runtime_example_ref: tests/schema_examples/autopilot_goal_decomposition_runtime.example.json
+validator_ref: scripts/validate_autopilot_goal_compiler.js
+validated_now: node --check scripts/validate_autopilot_goal_compiler.js; node scripts/validate_autopilot_goal_compiler.js; node --check scripts/validate_autopilot_governance_kernel.js; node scripts/validate_autopilot_governance_kernel.js; node scripts/validate_agent_board_state.js; git diff --check; powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1; powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1 after guarded local commit.
+commit_message: test: add autopilot goal decomposition runtime
+not_performed: no push, no tag/release/deploy, no provider/plugin/API/image generation, no DailyNote/VCP memory write, no real manifest/VCPChat/VCPToolBox read, no dependency change, no runtime probe, no secret read.
+recommended_next: pending_goal_compiler_driven_autonomous_task.
+```
+
+---
+
 ## Current Handoff Update - Autopilot Registry Hardening v1
 
 ```text

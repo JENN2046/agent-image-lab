@@ -1,0 +1,145 @@
+{
+  "autopilot_goal_decomposition_runtime": {
+    "version": "v1",
+    "contract_type": "autopilot_goal_decomposition_runtime",
+    "policy_model": "Smart Standing Authorization v3 — Budgeted Autonomy Envelope",
+    "runtime_id": "runtime-agent-image-lab-goal-decomposition-001",
+    "runtime_status": "active_local_validation_fixture",
+    "trigger": "non_single_step_goal",
+    "goal": {
+      "goal_id": "goal-agent-image-lab-smart-autopilot-productization-001",
+      "objective": "Continue Agent Image Lab smart autopilot productization without external side effects."
+    },
+    "route_plan": {
+      "route_plan_id": "route-plan-agent-image-lab-smart-autopilot-productization-001",
+      "source_goal_id": "goal-agent-image-lab-smart-autopilot-productization-001",
+      "route_steps": [
+        {
+          "step_id": "step-green-hardening",
+          "objective": "Harden local governance docs, examples, and validators.",
+          "lane": "Green",
+          "status": "done",
+          "validation_required": [
+            "node scripts/validate_autopilot_goal_compiler.js",
+            "node scripts/validate_agent_board_state.js"
+          ],
+          "stop_conditions": [
+            "validation failure requiring non-obvious judgment"
+          ]
+        },
+        {
+          "step_id": "step-amber-future-receipt",
+          "objective": "Future bounded Amber receipt action with envelope and receipt registry coverage.",
+          "lane": "Amber",
+          "status": "todo",
+          "validation_required": [
+            "node scripts/validate_autopilot_governance_kernel.js"
+          ],
+          "envelope_ref": "envelope-future-local-only-replay-receipt",
+          "receipt_required": true,
+          "budget_checked": true,
+          "stop_conditions": [
+            "missing envelope",
+            "receipt cannot be recorded",
+            "Red Lane condition appears"
+          ]
+        },
+        {
+          "step_id": "step-red-push",
+          "objective": "Push the completed local commit to origin/master.",
+          "lane": "Red",
+          "status": "blocked",
+          "validation_skip_reason": "Remote write requires explicit user authorization and is not executable inside the local runtime queue.",
+          "stop_conditions": [
+            "requires explicit git push origin master authorization"
+          ]
+        }
+      ]
+    },
+    "task_queue": {
+      "task_queue_id": "task-queue-agent-image-lab-smart-autopilot-productization-001",
+      "source_route_plan_id": "route-plan-agent-image-lab-smart-autopilot-productization-001",
+      "tasks": [
+        {
+          "task_id": "add_goal_decomposition_runtime_validation",
+          "source_step_id": "step-green-hardening",
+          "objective": "Add Goal Decomposition Runtime v1 docs, example, validator checks, and status surfaces.",
+          "lane": "Green",
+          "status": "in_progress",
+          "validation_required": [
+            "node --check scripts/validate_autopilot_goal_compiler.js",
+            "node scripts/validate_autopilot_goal_compiler.js",
+            "node scripts/validate_agent_board_state.js",
+            "powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1"
+          ],
+          "envelope_ref": null,
+          "receipt_required": false,
+          "push_allowed": false,
+          "stop_conditions": [
+            "validation failure requiring non-obvious judgment",
+            "Red Lane condition appears"
+          ]
+        },
+        {
+          "task_id": "future_budgeted_amber_receipt_task",
+          "source_step_id": "step-amber-future-receipt",
+          "objective": "Future bounded Amber receipt task after exact envelope selection.",
+          "lane": "Amber",
+          "status": "todo",
+          "validation_required": [
+            "node scripts/validate_autopilot_governance_kernel.js"
+          ],
+          "envelope_ref": "envelope-future-local-only-replay-receipt",
+          "receipt_required": true,
+          "budget_checked": true,
+          "push_allowed": false,
+          "stop_conditions": [
+            "budget exceeded",
+            "receipt cannot be recorded",
+            "Red Lane condition appears"
+          ]
+        }
+      ]
+    },
+    "blocked_red_items": [
+      {
+        "item_id": "blocked-red-push-origin-master",
+        "source_step_id": "step-red-push",
+        "lane": "Red",
+        "blocked_action": "git push origin master",
+        "reason": "Push is a remote write and remains Red Lane.",
+        "required_authorization_or_action": "Explicit user authorization naming git push origin master."
+      }
+    ],
+    "next_safe_task": {
+      "task_id": "add_goal_decomposition_runtime_validation",
+      "lane": "Green",
+      "reason": "It is local, reversible, validated, and does not cross Red Lane gates."
+    },
+    "agent_board_sync_required": true,
+    "continuation_policy": {
+      "continue_until": [
+        "task_queue_done",
+        "blocked",
+        "Red condition appears"
+      ],
+      "execute_only_next_safe_task": true,
+      "record_receipt_if_amber": true
+    },
+    "guard": {
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "image_generation_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "real_manifest_read_performed": false,
+      "real_vcpchat_read_performed": false,
+      "real_vcptoolbox_read_performed": false,
+      "dependency_change_performed": false,
+      "runtime_probe_performed": false,
+      "secret_value_read_performed": false,
+      "push_tag_release_deploy_performed": false
+    }
+  }
+}

@@ -18,6 +18,12 @@ before continuing.
 Authority rule: v3 is the active startup and autonomy model. A4.8 only supplies
 Green Lane local-safe behavior.
 
+Runtime rule: Goal Compiler is not only a schema layer. For any non-single-step
+goal, Codex must compile `goal -> route_plan -> executable task_queue ->
+blocked_red_items -> next_safe_task`, execute only `next_safe_task`, validate,
+update `.agent_board`, record a receipt if Amber, and continue until done,
+blocked, or a Red condition appears.
+
 This document does not authorize provider contact, plugin calls, API calls,
 image generation, DailyNote writes, VCP memory writes, real manifest reads, real
 VCPChat reads, real VCPToolBox reads, dependency changes, runtime probes, push,

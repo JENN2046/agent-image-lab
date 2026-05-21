@@ -11779,6 +11779,9 @@ process.exit(child.status || 0);
     if ($autopilotGoalCompiler.amber_tasks_with_receipts_verified -lt 1 -or $autopilotGoalCompiler.rejected_red_routes_verified -lt 1 -or $autopilotGoalCompiler.red_routes_excluded_from_executable_tasks -ne $true) {
       Add-Failure "Autopilot Goal Compiler v1 must keep Amber receipts required and rejected Red routes non-executable"
     }
+    if ($autopilotGoalCompiler.runtime_decomposition_verified -ne $true -or $autopilotGoalCompiler.blocked_red_items_verified -lt 1 -or $autopilotGoalCompiler.executable_task_queue_verified -ne $true -or $autopilotGoalCompiler.at_most_one_in_progress_verified -ne $true -or -not $autopilotGoalCompiler.next_safe_task_verified -or $autopilotGoalCompiler.agent_board_sync_required -ne $true) {
+      Add-Failure "Autopilot Goal Compiler runtime must verify blocked Red items, executable queue, next safe task, and agent board sync"
+    }
     if ($autopilotGoalCompiler.push_allowed_default_false -ne $true -or $autopilotGoalCompiler.no_current_external_execution_signals -ne $true) {
       Add-Failure "Autopilot Goal Compiler v1 must keep push disabled and external execution signals false"
     }

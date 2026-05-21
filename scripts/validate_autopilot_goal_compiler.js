@@ -8,9 +8,11 @@ const files = {
   goalSchema: "schemas/autopilot_goal.schema.yaml",
   routePlanSchema: "schemas/autopilot_route_plan.schema.yaml",
   taskQueueSchema: "schemas/autopilot_task_queue.schema.yaml",
+  runtimeDoc: "docs/AUTOPILOT_GOAL_DECOMPOSITION_RUNTIME.md",
   goalExample: "tests/schema_examples/autopilot_goal.example.json",
   routePlanExample: "tests/schema_examples/autopilot_route_plan.example.json",
   taskQueueExample: "tests/schema_examples/autopilot_task_queue.example.json",
+  runtimeExample: "tests/schema_examples/autopilot_goal_decomposition_runtime.example.json",
   agents: "AGENTS.md",
   overlay: "AGENTS.autopilot-overlay.md",
   readme: "README.md",
@@ -84,6 +86,7 @@ const requiredTaskFields = [
 ];
 
 const legalLanes = ["Green", "Amber", "Red"];
+const legalTaskStatuses = ["todo", "in_progress", "done", "blocked", "skipped"];
 
 const guardFlags = [
   "provider_contact_performed",
@@ -139,12 +142,14 @@ function main() {
   }
 
   const doc = read(files.doc);
+  const runtimeDoc = read(files.runtimeDoc);
   const goalSchema = read(files.goalSchema);
   const routePlanSchema = read(files.routePlanSchema);
   const taskQueueSchema = read(files.taskQueueSchema);
   const goal = readJson(files.goalExample).autopilot_goal;
   const routePlan = readJson(files.routePlanExample).autopilot_route_plan;
   const taskQueue = readJson(files.taskQueueExample).autopilot_task_queue;
+  const runtime = readJson(files.runtimeExample).autopilot_goal_decomposition_runtime;
   const agents = read(files.agents);
   const overlay = read(files.overlay);
   const startupSurfaces = [
@@ -162,6 +167,15 @@ function main() {
 
   includesAll(doc, requiredDocComponents, "Goal Compiler doc components");
   includesAll(doc, ["Green Lane", "Amber Lane", "Red Lane"], "Goal Compiler doc lanes");
+  includesAll(doc + runtimeDoc, [
+    "goal",
+    "route_plan",
+    "executable task_queue",
+    "blocked_red_items",
+    "next_safe_task",
+    "execute only `next_safe_task`",
+    "update `.agent_board`"
+  ], "Goal decomposition runtime docs");
   assert(defaultModeBlock.includes("Smart Standing Authorization v3") && !defaultModeBlock.includes("A4.8"), "AGENTS.md Default mode must be Smart Standing Authorization v3, not A4.8");
   assert(overlay.includes("Active startup model: Smart Standing Authorization v3."), "Overlay must declare v3 active startup model");
   includesAll(startupSurfaces, [
@@ -220,6 +234,64 @@ function main() {
   assertGuardFalse(routePlan.guard, "Route plan example");
   assertGuardFalse(taskQueue.guard, "Task queue example");
 
+  assert(runtime.version === "v1", "Runtime example version must be v1");
+  assert(runtime.contract_type === "autopilot_goal_decomposition_runtime", "Runtime example contract_type mismatch");
+  assert(runtime.trigger === "non_single_step_goal", "Runtime example must trigger on non_single_step_goal");
+  assert(runtime.goal && runtime.goal.goal_id === goal.goal_id, "Runtime goal must link to goal example");
+  assert(runtime.route_plan && runtime.route_plan.source_goal_id === runtime.goal.goal_id, "Runtime route_plan must link to runtime goal");
+  assert(runtime.task_queue && runtime.task_queue.source_route_plan_id === runtime.route_plan.route_plan_id, "Runtime task_queue must link to runtime route_plan");
+  assert(Array.isArray(runtime.route_plan.route_steps) && runtime.route_plan.route_steps.length >= 3, "Runtime route_plan must include at least three route_steps");
+  assert(Array.isArray(runtime.task_queue.tasks) && runtime.task_queue.tasks.length >= 1, "Runtime task_queue must include executable tasks");
+  assert(Array.isArray(runtime.blocked_red_items) && runtime.blocked_red_items.length >= 1, "Runtime must include blocked_red_items");
+
+  const runtimeTaskIds = new Set(runtime.task_queue.tasks.map((task) => task.task_id));
+  const runtimeTaskStepIds = new Set(runtime.task_queue.tasks.map((task) => task.source_step_id));
+  const redStepIds = new Set(runtime.route_plan.route_steps.filter((step) => step.lane === "Red").map((step) => step.step_id));
+  for (const step of runtime.route_plan.route_steps) {
+    assert(step.step_id && step.objective && step.lane && step.status, `Runtime route step missing required identity fields`);
+    assert(legalLanes.includes(step.lane), `Runtime route step ${step.step_id} lane must be legal`);
+    assert(legalTaskStatuses.includes(step.status), `Runtime route step ${step.step_id} status must be legal`);
+    assert(Array.isArray(step.stop_conditions) && step.stop_conditions.length > 0, `Runtime route step ${step.step_id} must include stop_conditions`);
+    assert(
+      (Array.isArray(step.validation_required) && step.validation_required.length > 0) ||
+        (typeof step.validation_skip_reason === "string" && step.validation_skip_reason.length > 0),
+      `Runtime route step ${step.step_id} must include validation_required or validation_skip_reason`
+    );
+  }
+  for (const redStepId of redStepIds) {
+    assert(!runtimeTaskStepIds.has(redStepId), `Red route step ${redStepId} must not appear in executable task queue`);
+    assert(runtime.blocked_red_items.some((item) => item.source_step_id === redStepId), `Red route step ${redStepId} must be recorded in blocked_red_items`);
+  }
+  for (const task of runtime.task_queue.tasks) {
+    assert(task.task_id && task.source_step_id && task.objective && task.lane && task.status, "Runtime task missing required identity fields");
+    assert(["Green", "Amber"].includes(task.lane), `Runtime executable task ${task.task_id} must be Green or Amber`);
+    assert(legalTaskStatuses.includes(task.status), `Runtime task ${task.task_id} status must be legal`);
+    assert(Array.isArray(task.validation_required) && task.validation_required.length > 0, `Runtime task ${task.task_id} must include validation_required`);
+    assert(task.push_allowed === false, `Runtime task ${task.task_id} must keep push_allowed=false`);
+    if (task.lane === "Amber") {
+      assert(task.receipt_required === true, `Runtime Amber task ${task.task_id} must require receipt`);
+      assert(typeof task.envelope_ref === "string" && task.envelope_ref.length > 0, `Runtime Amber task ${task.task_id} must include envelope_ref`);
+      assert(task.budget_checked === true, `Runtime Amber task ${task.task_id} must be budget_checked`);
+    }
+  }
+  assert(runtime.task_queue.tasks.filter((task) => task.status === "in_progress").length <= 1, "Runtime must have at most one in_progress task");
+  assert(runtime.next_safe_task && runtime.next_safe_task.task_id, "Runtime next_safe_task must exist while executable tasks remain");
+  assert(runtimeTaskIds.has(runtime.next_safe_task.task_id), "Runtime next_safe_task must reference an executable task");
+  assert(["Green", "Amber"].includes(runtime.next_safe_task.lane), "Runtime next_safe_task must be Green or Amber");
+  const nextSafeTask = runtime.task_queue.tasks.find((task) => task.task_id === runtime.next_safe_task.task_id);
+  assert(nextSafeTask.lane === runtime.next_safe_task.lane, "Runtime next_safe_task lane must match executable task");
+  if (runtime.next_safe_task.lane === "Amber") {
+    assert(nextSafeTask.receipt_required === true && nextSafeTask.envelope_ref && nextSafeTask.budget_checked === true, "Runtime next_safe_task Amber must be valid budgeted Amber");
+  }
+  for (const item of runtime.blocked_red_items) {
+    assert(item.item_id && item.source_step_id && item.blocked_action && item.reason && item.required_authorization_or_action, "Blocked Red item missing required fields");
+    assert(item.lane === "Red", `Blocked Red item ${item.item_id} must have lane Red`);
+  }
+  assert(runtime.agent_board_sync_required === true, "Runtime must require agent board sync");
+  assert(runtime.continuation_policy && runtime.continuation_policy.execute_only_next_safe_task === true, "Runtime must execute only next_safe_task");
+  assert(runtime.continuation_policy.record_receipt_if_amber === true, "Runtime must record receipt if Amber");
+  assertGuardFalse(runtime.guard, "Goal decomposition runtime example");
+
   const result = {
     passed: true,
     phase: "autopilot_goal_compiler_v1",
@@ -235,8 +307,15 @@ function main() {
     examples_verified: [
       files.goalExample,
       files.routePlanExample,
-      files.taskQueueExample
+      files.taskQueueExample,
+      files.runtimeExample
     ],
+    runtime_decomposition_verified: true,
+    blocked_red_items_verified: runtime.blocked_red_items.length,
+    next_safe_task_verified: runtime.next_safe_task.task_id,
+    executable_task_queue_verified: true,
+    at_most_one_in_progress_verified: true,
+    agent_board_sync_required: true,
     task_count: taskQueue.tasks.length,
     amber_tasks_with_receipts_verified: taskQueue.tasks.filter((task) => task.lane === "Amber").length,
     rejected_red_routes_verified: routePlan.rejected_routes.filter((route) => route.lane === "Red").length,

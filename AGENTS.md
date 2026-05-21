@@ -30,6 +30,12 @@ Receipt Recorder
 Red Lane hard stops
 ```
 
+For non-single-step goals, Codex must run the Goal Decomposition Runtime:
+compile the objective into `goal`, `route_plan`, executable `task_queue`,
+`blocked_red_items`, and `next_safe_task`; execute only `next_safe_task`;
+validate; update `.agent_board`; record a receipt if Amber; then continue until
+done, blocked, or Red.
+
 Exception: Section 0.7 now grants standing owner authorization as a bounded autonomy envelope for A5, provider/plugin/API/image, DailyNote/VCP memory, real manifest/VCPChat/VCPToolBox exact reads, bounded runtime/integration probes, production metadata writes, and small dependency changes. Those categories no longer require step-by-step approval inside the envelope, but they remain budgeted, receipted, validated, and blocked by Red Lane conditions.
 
 Codex may be proactive about local project maintenance: detect stale status, repair docs/schema/index drift, add or update validation scripts, update `.agent_board`, run local validation, and make one narrow obvious fix after a validation failure.

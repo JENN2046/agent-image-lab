@@ -1,6 +1,41 @@
 
 ---
 
+## Checkpoint - Autopilot Goal Decomposition Runtime v1
+
+```text
+phase: autopilot_goal_decomposition_runtime_v1
+phase_id: autopilot_goal_decomposition_runtime_v1
+status: completed_validated_guarded_local_commit
+completed:
+- added Goal Decomposition Runtime v1 specification
+- added runtime example with goal, route_plan, executable task_queue, blocked_red_items, and next_safe_task
+- hardened Goal Compiler validator to enforce runtime invariants
+- updated startup/governance docs and .agent_board resume surfaces
+validation_completed:
+- node --check scripts/validate_autopilot_goal_compiler.js
+- node scripts/validate_autopilot_goal_compiler.js
+- node --check scripts/validate_autopilot_governance_kernel.js
+- node scripts/validate_autopilot_governance_kernel.js
+- node scripts/validate_agent_board_state.js
+- git diff --check
+- powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+- powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1 after guarded local commit
+not_performed:
+- no push
+- no tag/release/deploy
+- no provider/plugin/API/image generation
+- no DailyNote/VCP memory write
+- no real manifest/VCPChat/VCPToolBox read
+- no dependency change
+- no runtime probe
+- no secret read
+commit_message: test: add autopilot goal decomposition runtime
+recommended_next: pending_goal_compiler_driven_autonomous_task
+```
+
+---
+
 ## Checkpoint - Autopilot Registry Hardening v1
 
 ```text
