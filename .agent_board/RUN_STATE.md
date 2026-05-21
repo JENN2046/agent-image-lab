@@ -1,6 +1,107 @@
 
 ---
 
+## standing_owner_smart_authorization_v3_budgeted_autonomy_envelope
+
+```text
+phase: standing_owner_smart_authorization_v3_budgeted_autonomy_envelope
+phase_id: standing_owner_smart_authorization_v3_budgeted_autonomy_envelope
+status: completed_validated_amended_local_strategy_commit
+mode: owner-directed policy upgrade
+objective: upgrade standing owner authorization to Smart Standing Authorization v3 with Green/Amber/Red lanes, budgeted autonomy envelope, and receipt requirements
+policy_ref: docs/STANDING_OWNER_AUTOMATIC_AUTHORIZATION_POLICY.md
+decision_ref: DECISION-AIL-AUTO-009
+branch: master
+origin_branch: origin/master
+head_commit_before_edit: 38da1aa
+origin_master_before_edit: b983cee
+ahead_count_before_edit: 1
+behind_count_before_edit: 0
+push_authorized_now: false
+standing_owner_smart_authorization_v3_active: true
+autonomy_envelope_active: true
+green_lane_direct: true
+amber_lane_autonomous_with_budget_and_receipts: true
+red_lane_requires_user: true
+push_tag_release_deploy_allowed_automatically: false
+secret_value_access_allowed_automatically: false
+destructive_action_allowed_automatically: false
+recommended_next: pending_human_push_or_next_autonomous_envelope_task
+validation_passed: git diff --check; git diff --cached --check; git diff --cached --name-only exact-file review; node scripts/validate_agent_board_state.js; scripts/validate-agent-image-lab-local.ps1; scripts/validate_mvp.ps1
+validation_blocked: none
+commit_action: amended_current_unpushed_local_strategy_commit
+commit_message: docs: define smart standing authorization envelope
+not_performed: no push; no tag/release/deploy; no real A5/provider/plugin/API/image/DailyNote/VCP memory/source read/dependency/runtime/secret action
+```
+
+---
+
+## standing_owner_guarded_execution_packet_policy_tightening
+
+```text
+phase: standing_owner_guarded_execution_packet_policy_tightening
+phase_id: standing_owner_guarded_execution_packet_policy_tightening
+status: completed_local_validated_mvp_blocked_by_dirty_exact_slice_no_commit_constraint
+mode: owner-directed policy tightening
+objective: change standing owner authorization from prior direct-execution wording to a guarded execution packet workflow
+policy_ref: docs/STANDING_OWNER_AUTOMATIC_AUTHORIZATION_POLICY.md
+decision_ref: DECISION-AIL-AUTO-009
+branch: master
+origin_branch: origin/master
+head_commit_before_edit: 38da1aa
+ahead_count_before_edit: 1
+behind_count_before_edit: 0
+push_authorized_now: false
+standing_owner_authorization_active: true
+execution_packet_required: true
+A5_policy: superseded_by_v3_amber_envelope
+provider_plugin_api_image_policy: superseded_by_v3_amber_envelope
+DailyNote_or_VCP_memory_policy: superseded_by_v3_amber_envelope
+real_manifest_or_VCP_source_read_policy: superseded_by_v3_exact_read_amber_envelope
+dependency_change_policy: superseded_by_v3_small_exact_dependency_amber_envelope
+unchecked_direct_execution_allowed: false
+push_tag_release_deploy_allowed_automatically: false
+destructive_action_allowed_automatically: false
+secret_value_access_allowed_automatically: false
+external_repository_modification_allowed_automatically: false
+validation_passed: git status --short --branch; git diff --check; node scripts/validate_agent_board_state.js; scripts/validate-agent-image-lab-local.ps1
+validation_blocked: scripts/validate_mvp.ps1 failed because legacy commit-readiness validators reject the uncommitted 11-file policy/status dirty slice; git show --check HEAD still reports the pre-existing 38da1aa EOF blank-line issue because no commit/amend is allowed; no commit and no scripts changes are allowed in this task
+recommended_next: either_allow_local_commit_for_mvp_clean_state_or_update_commit_readiness_validators_in_a_separate_task
+```
+
+---
+
+## standing_owner_automatic_authorization_policy_alignment
+
+```text
+phase: standing_owner_automatic_authorization_policy_alignment
+phase_id: standing_owner_automatic_authorization_policy_alignment
+status: completed_validated
+mode: owner-directed policy update
+objective: superseded by the guarded packet tightening above; prior standing authorization now means packet workflow rather than direct execution
+policy_ref: docs/STANDING_OWNER_AUTOMATIC_AUTHORIZATION_POLICY.md
+decision_ref: DECISION-AIL-AUTO-009
+branch: master
+origin_branch: origin/master
+head_equals_origin_master_before_edit: true
+ahead_count_before_edit: 0
+behind_count_before_edit: 0
+standing_owner_auto_authorization_active: true
+A5_policy: superseded_by_v3_amber_envelope
+provider_plugin_api_image_policy: superseded_by_v3_amber_envelope
+DailyNote_or_VCP_memory_policy: superseded_by_v3_amber_envelope
+real_manifest_or_VCP_source_read_policy: superseded_by_v3_exact_read_amber_envelope
+dependency_change_policy: superseded_by_v3_small_exact_dependency_amber_envelope
+push_tag_release_deploy_allowed_automatically: false
+destructive_action_allowed_automatically: false
+secret_value_access_allowed_automatically: false
+external_repository_modification_allowed_automatically: false
+validation_passed: git diff --check; node scripts/validate_agent_board_state.js; scripts/validate_mvp.ps1; scripts/validate-agent-image-lab-local.ps1
+recommended_next: pending_human_push_or_next_autonomous_task
+```
+
+---
+
 ## controlled_visual_production_loop_post_push_status_surface_alignment
 
 ```text

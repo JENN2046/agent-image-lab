@@ -63,3 +63,17 @@ Still not authorized: push, tag, release, deploy, force push, destructive Git/fi
 Reason: Reduce unnecessary project-owner interruptions while preserving safety boundaries.
 Risk: A future agent may over-broaden "local" work into unrelated commits.
 Mitigation: Commits must remain exact-file, coherent, task-scoped, validated, and reviewable; remote actions remain separately authorized.
+
+### DECISION-AIL-AUTO-009 — Smart Standing Authorization v3 budgeted autonomy envelope
+
+Context: The project owner explicitly instructed that A5, provider/plugin/API/image, DailyNote/VCP memory, real manifest/VCPChat/VCPToolBox read, and dependency change should move from repeated permission prompts to standing authorization.
+Chosen: Treat those categories as Smart Standing Authorization v3 Green/Amber/Red lanes. Standing owner authorization grants Codex a bounded autonomy envelope. Inside that envelope, Codex must not ask for step-by-step approval; it should plan, execute, validate, repair once when safe, record receipts, and continue until the goal is complete or a Red condition appears.
+Policy ref: docs/STANDING_OWNER_AUTOMATIC_AUTHORIZATION_POLICY.md.
+Default envelope: max_provider_calls=3; max_plugin_calls=3; max_api_calls=5; max_image_candidates=3; max_external_read_files=20; max_write_files=10; max_dependency_actions=2; max_retry_per_transient_failure=1; max_runtime_probe_minutes=10; overwrite_existing_files_allowed=false; secret_value_read_allowed=false; raw_private_data_print_allowed=false; push_allowed=false; tag_release_deploy_allowed=false; destructive_action_allowed=false.
+Green Lane: docs/schema/validator/static prototype local maintenance, .agent_board sync, local validation, and small reversible fixes that do not touch external services, cost, memory, dependencies, or secrets.
+Amber Lane: provider/plugin/API/image actions, real manifest/VCPChat/VCPToolBox exact reads, DailyNote/VCP memory writes, small dependency changes, production metadata writes, and bounded runtime/integration probes inside the envelope with receipts.
+Receipt fields: task_id; lane; envelope_id; action_performed; target_systems; calls_used; files_read; files_written; dependency_actions_used; validation_run; validation_result; rollback_or_cleanup_available; next_auto_step_allowed; stop_reason.
+Still gated as Red Lane: git push, tag, release, deploy, force push, history rewrite, destructive Git/filesystem actions, secret value reads or edits, raw private data/raw chat history exposure, external repository broad modification, wide VCPChat/VCPToolBox writes without exact scope, uncapped cost, unbounded loops, overwrite without explicit overwrite allowance, dependency changes without exact package/action list, and validation failure requiring non-obvious judgment.
+Reason: The owner wants faster autonomous progress across production and integration surfaces.
+Risk: Production actions can create cost, external side effects, long-term memory pollution, dependency churn, or private-source exposure if envelope budgets and receipts are skipped.
+Mitigation: Standing authorization permits bounded autonomy, not unchecked execution; stop if a Red condition appears; do not print secrets, raw private data, or raw chat history; record receipts in status surfaces; run validation after changes; preserve exact-file staging and separate push authorization.

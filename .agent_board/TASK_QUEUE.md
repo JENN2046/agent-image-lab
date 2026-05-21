@@ -1,6 +1,42 @@
 
 ---
 
+- [x] ID: standing_owner_smart_authorization_v3_budgeted_autonomy_envelope
+      Title: Upgrade standing authorization to Budgeted Autonomy Envelope
+      Reason: the owner requested a smarter model: no step-by-step approval inside Green/Amber, but Red Lane remains a hard stop.
+      Changed files: AGENTS.md; AGENTS.autopilot-overlay.md; docs/STANDING_OWNER_AUTOMATIC_AUTHORIZATION_POLICY.md; .agent_board/DECISIONS.md; .agent_board/BLOCKERS.md; .agent_board/HANDOFF.md; .agent_board/RUN_STATE.md; .agent_board/TASK_QUEUE.md; .agent_board/CHECKPOINT.md; README.md; docs/00_project_roadmap.md.
+      Decision: standing owner authorization grants a bounded autonomy envelope with Green direct execution, Amber autonomous budgeted execution with receipts, and Red user-required stops.
+      Validation: git diff --check passed; git diff --cached --check passed; exact-file cached name review passed; node scripts/validate_agent_board_state.js passed; scripts/validate-agent-image-lab-local.ps1 passed with warnings for known negative/checklist terms; scripts/validate_mvp.ps1 passed after exact-file amend.
+      Result: completed_validated_amended_local_strategy_commit.
+      Recommended next: pending_human_push_or_next_autonomous_envelope_task.
+      Stop condition: push/tag/release/deploy; force push/history rewrite; destructive action; secret value access; raw private data/raw chat exposure; broad external repository modification; uncapped cost; unbounded loops; overwrite without explicit allowance; wide VCPChat/VCPToolBox write without exact scope; dependency change without exact package/action list; validation failure requiring non-obvious judgment.
+
+---
+
+- [x] ID: standing_owner_guarded_execution_packet_policy_tightening
+      Title: Tighten standing owner authorization into a guarded execution packet workflow
+      Reason: the owner requested maximum safe delegation: no repeated permission prompts for the listed production categories, but every real action must pass packet, target, validation, rollback, and stop-condition checks.
+      Changed files: AGENTS.md; AGENTS.autopilot-overlay.md; docs/STANDING_OWNER_AUTOMATIC_AUTHORIZATION_POLICY.md; .agent_board/DECISIONS.md; .agent_board/BLOCKERS.md; .agent_board/HANDOFF.md; .agent_board/RUN_STATE.md; .agent_board/TASK_QUEUE.md; .agent_board/CHECKPOINT.md; README.md; docs/00_project_roadmap.md.
+      Decision: standing authorization grants entry into guarded execution workflow only; execution requires a complete packet and no remaining hard-stop contact.
+      Validation: git status --short --branch passed; git diff --check passed; node scripts/validate_agent_board_state.js passed; scripts/validate-agent-image-lab-local.ps1 passed with warnings for known negative/checklist terms; scripts/validate_mvp.ps1 failed because legacy commit-readiness validators reject the uncommitted 11-file policy/status dirty slice.
+      Result: completed_local_validated_mvp_blocked_by_dirty_exact_slice_no_commit_constraint.
+      Recommended next: either_allow_local_commit_for_mvp_clean_state_or_update_commit_readiness_validators_in_a_separate_task.
+      Stop condition: incomplete execution packet; push/tag/release/deploy; force push/history rewrite; destructive action; secret value access; external repository modification; broad VCPChat/VCPToolBox writes; production executable integration without exact packet scope; unbounded provider calls; dependency change without exact package/action list.
+
+---
+
+- [x] ID: standing_owner_automatic_authorization_policy_alignment
+      Title: Align authority surfaces to the owner's standing automatic production authorization
+      Reason: superseded by the guarded packet tightening entry above; the owner-required standing authorization now means packet workflow rather than direct execution.
+      Changed files: AGENTS.md; AGENTS.autopilot-overlay.md; docs/STANDING_OWNER_AUTOMATIC_AUTHORIZATION_POLICY.md; .agent_board/DECISIONS.md; .agent_board/BLOCKERS.md; .agent_board/HANDOFF.md; .agent_board/RUN_STATE.md; .agent_board/TASK_QUEUE.md; .agent_board/CHECKPOINT.md; README.md; docs/00_project_roadmap.md.
+      Decision: DECISION-AIL-AUTO-009 is now the active standing owner authorization; push/tag/release/deploy/destructive actions/secret value access/external repository modification remain separately gated.
+      Validation: git diff --check passed; node scripts/validate_agent_board_state.js passed; scripts/validate_mvp.ps1 passed; scripts/validate-agent-image-lab-local.ps1 passed with warnings for known negative/checklist terms.
+      Result: completed_validated.
+      Recommended next: pending_human_push_or_next_autonomous_task.
+      Stop condition: any request to push, tag, release, deploy, force push, rewrite history, perform destructive actions, read/edit secrets, or modify an external repository without exact instruction.
+
+---
+
 - [x] ID: controlled_visual_production_loop_post_push_status_surface_alignment
       Title: Align current status surfaces after guarded push
       Reason: the validator repair was committed and pushed, so the current README, roadmap, and agent-board entry surfaces must stop pointing at the pre-push commit-readiness decision point.

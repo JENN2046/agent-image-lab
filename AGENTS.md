@@ -3,7 +3,7 @@
 Project: Agent Image Lab
 Version: Controlled Autopilot Constitution v1.2 — Gate Template Operating Model
 Language: Default to English for this file. Keep code, paths, commands, logs, field names, and errors in their original form.
-Purpose: Enable Codex to work faster and more intelligently inside safe local boundaries, keep real VCP production actions behind explicit authorization, and prevent stage documents from restating the full operating constitution.
+Purpose: Enable Codex to work faster and more intelligently inside project boundaries, honor the owner's Smart Standing Authorization v3 bounded autonomy envelope, and prevent stage documents from restating the full operating constitution.
 
 ---
 
@@ -29,25 +29,168 @@ validated by existing project checks
 inside the current task or project maintenance scope
 ```
 
+Exception: Section 0.7 now grants standing owner authorization as a bounded autonomy envelope for A5, provider/plugin/API/image, DailyNote/VCP memory, real manifest/VCPChat/VCPToolBox exact reads, bounded runtime/integration probes, production metadata writes, and small dependency changes. Those categories no longer require step-by-step approval inside the envelope, but they remain budgeted, receipted, validated, and blocked by Red Lane conditions.
+
 Codex may be proactive about local project maintenance: detect stale status, repair docs/schema/index drift, add or update validation scripts, update `.agent_board`, run local validation, and make one narrow obvious fix after a validation failure.
 
-Codex must not infer authorization for any of the following from vague words such as `continue`, `ok`, `go ahead`, `可以`, `继续`, or `去吧`:
+Codex must not infer authorization for push, tag, release, deploy, destructive Git or filesystem operations, secret value reads, or external repository modification from vague words such as `continue`, `ok`, `go ahead`, `可以`, `继续`, or `去吧`.
+
+The following actions have standing owner authorization under Section 0.7 to proceed in the Amber Lane when they remain inside the active autonomy envelope:
 
 ```text
-real VCPChat read or write
-real VCPToolBox read or write
+real VCPChat read
+real VCPToolBox read
 real manifest read
-plugin/API/DailyNote calls
+provider/plugin/API/DailyNote calls
 VCP memory writes
 image generation
-executable production integration
-remote push / tag push / release
-destructive Git or filesystem operations
+bounded runtime/integration probes
+production metadata writes
+small dependency changes with an exact package/action list
 ```
 
-When the next useful step requires A5, Codex should stop and prepare the smallest explicit A5 authorization package instead of executing.
+Remote push / tag push / release and destructive Git or filesystem operations still require explicit authorization.
 
 Stage documents should not copy this entire constitution. They should use the fixed gate template in Section 3.5 plus a narrow phase difference patch.
+
+---
+
+## 0.7 Smart Standing Authorization v3 — Budgeted Autonomy Envelope
+
+The project owner explicitly changed the default permission model on 2026-05-21.
+
+Core rule:
+
+```text
+Standing owner authorization grants Codex a bounded autonomy envelope.
+Within that envelope, Codex must not ask for step-by-step approval.
+Codex should plan, execute, validate, repair once when safe, record receipts, and continue until the goal is complete or a Red condition appears.
+```
+
+Standing authorization:
+
+```yaml
+standing_owner_smart_authorization_v3:
+  status: active
+  authorized_by: project_owner_explicit_chat_instruction
+  model: Budgeted Autonomy Envelope
+  autonomy_envelope_active: true
+  green_lane_direct: true
+  amber_lane_autonomous_with_budget_and_receipts: true
+  red_lane_requires_user: true
+  allowed_in_amber_when_inside_envelope:
+    - A5
+    - provider_contact
+    - plugin_call
+    - API_call
+    - image_generation
+    - DailyNote_write
+    - VCP_memory_write
+    - real_manifest_read
+    - real_VCPChat_read
+    - real_VCPToolBox_read
+    - bounded_runtime_or_integration_probe
+    - production_metadata_write
+    - small_dependency_change
+  default_autonomy_envelope:
+    max_provider_calls: 3
+    max_plugin_calls: 3
+    max_api_calls: 5
+    max_image_candidates: 3
+    max_external_read_files: 20
+    max_write_files: 10
+    max_dependency_actions: 2
+    max_retry_per_transient_failure: 1
+    max_runtime_probe_minutes: 10
+    overwrite_existing_files_allowed: false
+    secret_value_read_allowed: false
+    raw_private_data_print_allowed: false
+    push_allowed: false
+    tag_release_deploy_allowed: false
+    destructive_action_allowed: false
+  red_lane_requires_user:
+    - git_push
+    - tag
+    - release
+    - deploy
+    - force_push
+    - history_rewrite
+    - destructive_git_or_filesystem_action
+    - secret_value_read_or_secret_edit
+    - external_repository_modification
+    - broad_VCPChat_or_VCPToolBox_write
+    - wide_VCPChat_or_VCPToolBox_write_without_exact_scope
+    - production_executable_integration_without_exact_scope
+    - uncapped_cost
+    - unbounded_loop
+    - overwrite_existing_artifacts_without_explicit_overwrite_allowance
+    - dependency_change_without_exact_package_action_list
+    - validation_failure_requiring_non_obvious_judgment
+  amber_action_packet:
+    - task_id
+    - intent
+    - target_systems
+    - exact_allowed_paths_or_objects
+    - forbidden_paths_or_objects
+    - allowed_commands_or_operations
+    - max_call_count / max_write_count / max_cost_when_applicable
+    - selected_plugin_id / command / model when_applicable
+    - input_reference
+    - output_directory_or_write_target
+    - overwrite_existing_files_allowed
+    - secret_value_read_allowed=false unless separately exact-authorized
+    - raw_private_data_print_allowed=false
+    - dependency_manifest_change_allowed with exact package list when_applicable
+    - rollback_or_cleanup_plan
+    - validation_required
+    - stop_conditions
+    - evidence_to_record
+  receipt_required_after_meaningful_amber_action:
+    - task_id
+    - lane
+    - envelope_id
+    - action_performed
+    - target_systems
+    - calls_used
+    - files_read
+    - files_written
+    - dependency_actions_used
+    - validation_run
+    - validation_result
+    - rollback_or_cleanup_available
+    - next_auto_step_allowed
+    - stop_reason
+  operating_requirements:
+    - Green Lane executes directly and records after the fact
+    - Amber Lane plans, executes, validates, records receipts, and continues inside budget without step-by-step approval
+    - stop and ask when a Red Lane condition appears
+    - allow only one obvious, safe, local repair or retry after a validation or transient failure
+    - prefer the smallest useful action inside the envelope
+    - avoid printing secrets or private raw data
+    - validate after changes when validation exists
+    - record evidence in status surfaces after meaningful actions
+```
+
+Lane model:
+
+```text
+Green Lane:
+  Direct automatic execution with after-action recording. Includes docs/schema/validator/static prototype local maintenance, .agent_board status sync, local validation, and small reversible code or documentation fixes that do not touch external services, spend money, write memory, change dependencies, or read secrets.
+
+Amber Lane:
+  Continuous autonomous execution inside the budgeted envelope without step-by-step approval. Codex plans, executes, validates, performs one safe obvious repair or retry when needed, records receipts, and continues. Includes provider/plugin/API/image actions, real manifest/VCPChat/VCPToolBox exact reads, DailyNote/VCP memory writes, small dependency changes, production metadata writes, and bounded runtime/integration probes.
+
+Red Lane:
+  Stop and ask the user. Includes git push, tag, release, deploy, force push, history rewrite, destructive Git/filesystem action, secret value read or edit, raw private data or raw chat history exposure, external repository broad modification, uncapped cost, unbounded loops, overwriting existing artifacts without explicit overwrite allowance, wide VCPChat/VCPToolBox write without exact scope, dependency changes without exact package/action list, and validation failure requiring non-obvious judgment.
+```
+
+Continuation rule: Codex may continue through multiple Amber steps when the user goal is clear, each step stays inside the envelope budget, each step has a clear target and validation path, no Red condition appears, each meaningful Amber action records a receipt, and any validation or transient failure receives at most one obvious safe local repair or retry.
+
+Ambiguous instructions such as `继续`, `go ahead`, or `自动推进` may continue Green work and Amber work inside the active envelope. They never cross a Red Lane gate.
+
+Dependency changes: exact package/action list plus the `max_dependency_actions` budget may use Amber. Audit-fix, bulk upgrades, package-manager switching, or unclear dependency changes are Red.
+
+This standing authorization supersedes older blanket no-execution / no-external-read / dependency-hard-stop language only by replacing repeated permission prompts with the Smart Standing Authorization v3 budgeted autonomy envelope. It does not permit skipping budget, target, validation, rollback, receipt, stop-condition, secret, or Red Lane checks. Historical phase records that say those categories were blocked describe their own time slice and do not revoke this current standing authorization.
 
 ---
 
@@ -72,11 +215,11 @@ exact-file staging / no git add . summarized: true
 If `AGENTS.autopilot-overlay.md` exists, it must be read explicitly. If it is
 missing, the closeout must say so.
 
-The intake must summarize the active hard stops before work begins, including
-A5, provider contact, plugin call, image generation, DailyNote write, VCP memory
-write, runtime, real manifest read, CDP / bridge / MCP, production candidates,
-Batch 005, dependency changes, secrets, generated assets, tag, release, deploy,
-and destructive Git or filesystem actions.
+The intake must summarize the active Smart Standing Authorization v3 envelope and
+the remaining hard stops before work begins. Remaining hard stops include
+secrets, raw private data exposure, unauthorized external repository
+modification, tag, release, deploy, destructive Git or filesystem actions, force
+push, and history rewrite.
 
 The intake must also summarize exact-file staging:
 
@@ -173,28 +316,30 @@ A4.8 — Safe Project Operator Rail
 
 This means Codex may continue safe, local, reversible project work across the allowed documentation, schema, dry-run, authorization-template, validation, `.agent_board`, tests, fixtures, review packages, evidence packages, route decision, and static-prototype surfaces without asking for step-by-step confirmation.
 
-The default next action must remain:
+The default next action may now include owner-authorized Amber Lane work inside the active autonomy envelope:
 
 ```text
-no-execution
-no-external-read
-no real manifest
-no VCPChat read
-no VCPToolBox read
-no plugin call
-no API call
-no DailyNote call
-no VCP memory write
-no image creation
-no executable adapter entrypoint
+A5
+provider contact
+plugin call
+API call
+DailyNote call
+VCP memory write
+image creation
+real manifest read
+real VCPChat read
+real VCPToolBox read
+dependency change with exact package/action list
+bounded runtime/integration probe
+production metadata write
 ```
 
-Historical records may describe previously authorized A5 actions. Those records do not authorize any new A5 action.
+Historical records may describe previously blocked A5 actions. Those records do not revoke the current Smart Standing Authorization v3 envelope.
 
 Current next production gate:
 
 ```text
-BLOCKED until explicit prompt approval plus a separate real generation authorization package
+OPEN to Budgeted Autonomy Envelope Green/Amber workflow; Red Lane actions remain separately gated.
 ```
 
 ---
@@ -694,7 +839,7 @@ If any user-owned or unrelated change is present, Codex must not include it in a
 
 A4.8 is the Safe Project Operator Rail / 安全项目运营轨.
 
-It allows Codex to keep advancing low-risk local project operations when the task is clearly local, reversible, non-secret-bearing, non-production, and inside the current repository.
+It allows Codex to keep advancing project operations when the task is clearly project-relevant, non-destructive, and inside the current repository or an owner-authorized connected target.
 
 A4.8 may automatically perform:
 
@@ -708,15 +853,15 @@ exact-file staging
 guarded local commit
 safe push only when the task gives explicit push authorization and push preflight passes
 multiple consecutive A4 docs-only / tests / fixtures / dry-run / planning stages when each stage remains low risk
+Smart Standing Authorization v3 Green / Amber envelope work for A5 / provider / plugin / API / image / DailyNote / VCP memory / real manifest / VCPChat / VCPToolBox exact reads / bounded runtime probes / production metadata writes / small dependency actions
 ```
 
-A4.8 must stop at hard stops. It is not A5 and does not authorize:
+A4.8 must still stop at Red Lane conditions. Under Section 0.7, it now authorizes budgeted Amber Lane autonomy for these formerly blocked categories:
 
 ```text
 provider contact
 plugin call
 image generation
-.env.local secret value read
 DailyNote write
 VCP memory write
 memory_write_path
@@ -729,21 +874,22 @@ VCPChat runtime
 CDP / bridge / MCP
 real manifest read
 fifth or later generation trial
-package.json / dependency change
-release / deploy / tag
+package.json / dependency change with exact package/action list
 ```
 
-A5 remains the production executor. When useful work requires a real provider call, image generation, secret-bearing read, runtime integration, memory write, production candidate promotion, or external side effect, A4.8 must stop and prepare the smallest explicit A5 authorization request instead of executing.
+A4.8 does not authorize `.env.local` secret value reads, secret edits, release, deploy, tag, destructive action, force push, history rewrite, or external repository modification unless the owner separately gives that exact instruction.
+
+A5 remains the production executor. When useful work requires a real provider call, image generation, runtime integration probe, memory write, production metadata write, real manifest/VCP exact source read, or small dependency change, A4.8 may plan, execute, validate, repair once when safe, record receipts, and continue under Section 0.7 while the action stays inside the envelope and no Red condition appears.
 
 ---
 
 ### A5 — Autonomous Production Execution
 
-Default: forbidden.
+Default: allowed to operate inside the Smart Standing Authorization v3 Budgeted Autonomy Envelope under Section 0.7 for the categories named there.
 
 A5 is real production-grade autonomous execution.
 
-It is not just permission to read real VCPChat / VCPToolBox. It allows Codex, within an explicit authorization scope, to perform real production actions instead of only preparing dry-run plans or authorization templates.
+It is not permission for broad external repository modification. It allows Codex, within the active envelope and exact action scope, to perform real production actions instead of only preparing dry-run plans or authorization templates.
 
 Examples of A5 actions:
 
@@ -752,8 +898,8 @@ Examples of A5 actions:
 - Read real `plugin-manifest.json`
 - Read source entry files
 - Analyze real source code
-- Modify VCPChat
-- Modify VCPToolBox
+- Modify exact VCPChat paths when the envelope or a separate exact authorization explicitly allows that write scope
+- Modify exact VCPToolBox paths when the envelope or a separate exact authorization explicitly allows that write scope
 - Modify real integration code
 - Create real IPC / preload / renderer integration code
 - Create real Adapter execution entrypoints
@@ -767,7 +913,9 @@ Examples of A5 actions:
 - Push
 - Generate release packages
 
-A5 requires a separate explicit authorization package before any production action begins. The authorization must name the real target systems, exact allowed paths or objects, allowed commands or operations, forbidden paths or operations, write boundaries, validation requirements, rollback path, reviewer, and stop conditions.
+Older A5 gates required a separate explicit authorization package before any production action begins. Under Section 0.7, step-by-step user permission prompts are no longer required for A5, provider/plugin/API/image, DailyNote/VCP memory, real manifest/VCPChat/VCPToolBox exact reads, bounded runtime/integration probes, production metadata writes, or small dependency changes. However, each Amber action must stay inside the envelope, use exact targets, validate, and record a receipt.
+
+For higher-confidence execution, Codex must record the envelope receipt, target systems, relevant paths or objects, operations performed, validation, and rollback notes in the status surfaces after meaningful Amber or A5 work.
 
 Minimum A5 authorization package:
 
@@ -794,7 +942,7 @@ a5_authorization_package:
   stop_conditions: []
 ```
 
-Missing, ambiguous, stale, or overly broad fields invalidate the package.
+Missing, ambiguous, stale, or overly broad action scope becomes Red. Codex may prepare or repair the scope, but it must stop and ask before executing when required fields are incomplete or a Red condition is touched.
 
 For the current v10.8 gate, the next real image generation additionally requires:
 
@@ -809,33 +957,27 @@ daily_note_direct_write_allowed=false
 memory_delta_only=true
 ```
 
-A4 / A4.5 are the pre-production authorization gate. A5 is autonomous operation after that gate has been explicitly opened.
+A4 / A4.5 are no longer only pre-production authorization gates for the Section 0.7 categories. A5 is autonomous operation inside the active envelope when the goal, budget, target, validation path, receipt, and stop conditions are clear.
 
-Without an active A5 authorization package, every A5 action remains a Hard Stop.
+Outside the envelope or after a Red condition appears, A5 actions remain blocked even when covered by Section 0.7 standing owner authorization.
 
-Without explicit user authorization, do not enter A5.
+The explicit user authorization for the Section 0.7 bounded autonomy envelope is standing and active.
 
 ---
 
 ## 5. Permanent Hard Stops
 
-Stop immediately and do not continue automatically if any of the following is required or discovered:
+Stop immediately and do not continue automatically if any of the following remaining hard stops is required or discovered:
 
-Exception: an action listed below may proceed only when an active A5 authorization package explicitly covers that exact action, target, path or object, command or operation, validation requirement, rollback path, reviewer, and stop condition. If any part of the authorization is missing, ambiguous, expired, or broader than the current task, stop.
+Exception: Section 0.7 supersedes older hard-stop handling for A5, provider/plugin/API/image, DailyNote/VCP memory, real manifest/VCPChat/VCPToolBox exact reads, bounded runtime/integration probes, production metadata writes, and small dependency changes only while the action remains inside the active autonomy envelope and no Red condition appears.
 
 ```text
-need to read real VCPChat
-need to read real VCPToolBox
-need to fill in a real local path
-need to read a real manifest
 need to read .env / config.env / secret / token / cookie
-need to call a plugin
-need to call an API
-need to call DailyNote
-need to write VCP memory
-need to create an image
 need to create production executable code or a real executable adapter entrypoint
 need to modify an external repository
+need broad VCPChat / VCPToolBox writes
+need dependency changes without exact package/action list
+need uncapped cost or unbounded loops
 need to force push / reset / rebase
 suspected secret found
 customer privacy found
@@ -1287,11 +1429,17 @@ no-execution / no-external-read gate hardening
 non-executing static prototype UI text / structure refinement
 test example update
 read-only validation report
+A5 provider/plugin/API/image execution inside the Amber envelope with receipt
+DailyNote / VCP memory write inside the Amber envelope with receipt
+real manifest / VCPChat / VCPToolBox exact read inside the Amber envelope with receipt
+small dependency changes inside the Amber envelope with exact package/action list and receipt
+bounded runtime/integration probes inside the Amber envelope with receipt
+production metadata writes inside the Amber envelope with receipt
 ```
 
-For new stage documents, Codex should use the fixed gate template and a phase difference patch instead of creating a new full-stage constitution. A valid phase document should be short enough to review, precise enough to execute, and explicit about what it does not authorize.
+For new stage documents, Codex should use the fixed gate template and a phase difference patch instead of creating a new full-stage constitution. A valid phase document should be short enough to review, precise enough to execute, and explicit about remaining limits.
 
-Codex must stop before the following actions unless an active A5 authorization package explicitly covers the exact action:
+Codex may automatically plan, execute, validate, repair once when safe, record receipts, and continue for the following actions under Section 0.7 when they stay inside the envelope:
 
 ```text
 real VCPChat read
@@ -1300,8 +1448,8 @@ real manifest read
 real plugin execution
 real DailyNote write
 real VCP memory write
-real Review Console integration into VCPChat
-real AgentImageLabAdapter execution entrypoint
+bounded Review Console integration probe
+bounded AgentImageLabAdapter probe or exact production metadata write
 real image generation
 real customer asset handling
 ```
@@ -1327,13 +1475,13 @@ Current remote baseline tag:
 v10.8-a5-guarded-delivery-baseline
 ```
 
-Current next safe production gate:
+Current next production gate:
 
 ```text
-BLOCKED until explicit prompt approval plus separate real generation authorization
+OPEN to Smart Standing Authorization v3 Budgeted Autonomy Envelope for A5/provider/plugin/API/image/DailyNote/VCP memory/real source exact reads/small dependency changes/bounded runtime probes/production metadata writes.
 ```
 
-Any future stage involving real external source reading, real source analysis, real integration, real plugin execution, real image generation, DailyNote write, VCP memory write, release publication, or external repository modification must be separately authorized through A5.
+Future stages involving release publication, tag, deploy, force push, history rewrite, destructive actions, secret value reads or edits, raw private data exposure, broad VCPChat/VCPToolBox writes, dependency changes without an exact package/action list, uncapped cost, unbounded loops, overwriting existing artifacts without explicit overwrite allowance, or external repository broad modification still require separate explicit authorization.
 
 Default allowed continuation:
 

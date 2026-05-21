@@ -5,9 +5,9 @@
 ## 当前产品主线恢复点
 
 ```yaml
-current_phase: controlled_visual_production_loop_post_push_status_surface_alignment
-phase_status: completed_local_validated_ahead_of_origin_after_status_alignment
-source_phase: validator_readiness_clean_post_commit_repair
+current_phase: standing_owner_smart_authorization_v3_budgeted_autonomy_envelope
+phase_status: completed_validated_amended_local_strategy_commit
+source_phase: standing_owner_guarded_execution_packet_policy_tightening
 validated_baseline:
   capsule_product_core_validator_route: completed
   full_asset_archive_manifest_bridge: aligned_to_verified_git_tracked_durable_archive
@@ -26,23 +26,64 @@ tracking_policy_ref: docs/ASSET_ARCHIVE_GIT_TRACKING_POLICY.md
 production_candidate_authorization_package_ref: reports/production_candidate_authorization/2026-05-20_tennis_wallet_production_candidate_A5_authorization_package.json
 production_candidate_activation_preflight_ref: reports/production_candidate_authorization/2026-05-21_tennis_wallet_production_candidate_A5_activation_preflight.json
 memory_write_authorization_package_ref: reports/memory_write_authorization/2026-05-20_tennis_wallet_memory_write_A5_authorization_package.json
-pushed_validator_repair_commit: ca52f0ac00cb5d8ec18bc45e1c35b1ba8928b184
-pushed_validator_repair_subject: fix: handle committed visual loop readiness
-local_status_alignment_commit: this_commit
+standing_owner_auto_authorization_policy_ref: docs/STANDING_OWNER_AUTOMATIC_AUTHORIZATION_POLICY.md
+standing_owner_auto_authorization_decision_ref: DECISION-AIL-AUTO-009
 branch: master
 origin_branch: origin/master
-head_equals_origin_master: false
-ahead_count: 1
+head_commit_before_edit: 38da1aa
+head_equals_origin_master_before_edit: false
+ahead_count_before_edit: 1
 behind_count: 0
-worktree_state: clean_after_local_status_alignment_commit
+worktree_state: clean_before_guarded_packet_policy_tightening
 remote_action_completed: git push origin master
 remote_action_authorized_by_user: true
-status_alignment_commit_pushed: false
+status_alignment_commit_pushed: true
+standing_owner_smart_authorization_v3_active: true
+autonomy_envelope_active: true
+green_lane_direct: true
+amber_lane_autonomous_with_budget_and_receipts: true
+red_lane_requires_user: true
+A5_allowed_in_amber_envelope: true
+provider_plugin_API_image_allowed_in_amber_envelope: true
+DailyNote_VCP_memory_allowed_in_amber_envelope: true
+real_manifest_VCPChat_VCPToolBox_exact_read_allowed_in_amber_envelope: true
+bounded_runtime_probe_allowed_in_amber_envelope: true
+production_metadata_write_allowed_in_amber_envelope: true
+small_dependency_change_allowed_in_amber_envelope: true
+push_tag_release_deploy_allowed_automatically: false
+destructive_action_allowed_automatically: false
+secret_value_access_allowed_automatically: false
+external_repository_modification_allowed_automatically: false
+default_autonomy_envelope:
+  max_provider_calls: 3
+  max_plugin_calls: 3
+  max_api_calls: 5
+  max_image_candidates: 3
+  max_external_read_files: 20
+  max_write_files: 10
+  max_dependency_actions: 2
+  max_retry_per_transient_failure: 1
+  max_runtime_probe_minutes: 10
+  overwrite_existing_files_allowed: false
+  secret_value_read_allowed: false
+  raw_private_data_print_allowed: false
+  push_allowed: false
+  tag_release_deploy_allowed: false
+  destructive_action_allowed: false
 commit_readiness_validator_repair_closed: true
 validate_mvp_clean_post_commit_failure_closed: true
 goal_level_local_readiness_verified: true
-selected_next_product_move: pending_human_next_local_route_decision
-recommended_next: pending_human_next_local_route_decision
+selected_next_product_move: pending_human_push_or_next_autonomous_envelope_task
+recommended_next: pending_human_push_or_next_autonomous_envelope_task
+validation_passed:
+  - git status --short --branch
+  - git diff --check
+  - git diff --cached --check
+  - git diff --cached --name-only
+  - node scripts/validate_agent_board_state.js
+  - scripts/validate-agent-image-lab-local.ps1
+  - scripts/validate_mvp.ps1
+validation_blocked: []
 previous_recommended_next_closed: explicit_local_commit_instruction_for_19_file_post_activation_slice
 recommended_next_auto_execution_allowed: false
 actual_runs_scan_performed: false

@@ -3,6 +3,7 @@
 ## Active Blockers
 
 ```text
+CURRENT POLICY OVERRIDE. DECISION-AIL-AUTO-009 is active as Smart Standing Authorization v3 — Budgeted Autonomy Envelope: Green Lane work runs directly with after-action recording; Amber Lane work for A5/provider/plugin/API/image, DailyNote/VCP memory, real manifest/VCPChat/VCPToolBox exact reads, production metadata writes, bounded runtime/integration probes, and small dependency changes runs autonomously inside budget with receipts; Red Lane conditions still stop and require the user.
 0. v14.230 old artifact restoration is superseded by v14.231. The current route is a new durable archive baseline: Git-tracked preview evidence capsules with preview.webp long_edge 512, no Base64, no original sha256 requirement, and no runs/real_generation restoration before the next baseline. Spec: docs/v14_231_git_tracked_preview_evidence_capsule_baseline.md.
 1. Default A4 docs-only continuation is blocked unless the next task creates clear non-redundant product value.
 2. Active A5 product image execution is blocked by repeated Doubao quota/rate-limit failure; same provider/model/account retry is not allowed now.
@@ -46,7 +47,7 @@ next_requires_new_value_or_explicit_authorization: true
 ## Standing External-Read Gate
 
 ```text
-Real VCPChat, real VCPToolBox, and real manifest reads are blocked until the user provides explicit authorization with exact paths, allowed file list, allowed excerpts, forbidden excerpts, reviewer, and stop conditions.
+Real VCPChat, real VCPToolBox, and real manifest exact reads may proceed under DECISION-AIL-AUTO-009 in Amber Lane when inside the autonomy envelope and receipted. Secret value reads, raw private data/raw chat history exposure, wide VCPChat/VCPToolBox writes without exact scope, and external repository broad modification remain Red.
 ```
 
 ## Standing Remote-Action Gate
@@ -58,13 +59,13 @@ Guarded local commits are authorized only when all project auto-commit condition
 ## Standing Real-Execution Gate
 
 ```text
-Plugin calls, API calls, DailyNote writes, VCP memory writes, image creation, runtime execution, and executable Adapter entrypoints require explicit separate authorization.
+Plugin calls, API calls, DailyNote writes, VCP memory writes, image creation, production metadata writes, bounded runtime/integration probes, and A5 execution may proceed under DECISION-AIL-AUTO-009 in Amber Lane when inside budget and receipted. Push/tag/release/deploy, destructive actions, uncapped cost, unbounded loops, and secret value access remain Red.
 ```
 
 ## Standing A5 Production-Execution Gate
 
 ```text
-Without an active authorization package, production actions remain blocked. A5 authorization must name exact target systems, allowed paths or objects, allowed commands or operations, forbidden operations, write boundaries, validation requirements, rollback path, reviewer, and stop conditions.
+DECISION-AIL-AUTO-009 is the active Smart Standing Authorization v3 bounded autonomy envelope for A5/provider/plugin/API/image/DailyNote/VCP memory/real source exact reads/small dependency changes. Codex should continue Amber steps without step-by-step approval while inside budget, validating and recording receipts. Separate exact authorization is still required for Red Lane actions: push/tag/release/deploy, destructive actions, secret value access, broad external writes, uncapped cost, unbounded loops, and external repository broad modification.
 ```
 
 ## Historical Closed Gates
@@ -75,7 +76,7 @@ batch_005_allowed_now: false
 production_candidate_002_allowed_now: false
 memory_write_path_allowed_now: false
 
-Historical A5 actions consumed their respective authorizations. They do not authorize new provider contact, plugin/API calls, DailyNote writes, VCP memory writes, image creation, runtime integration, tag, push, release, or external repository modification.
+Historical A5 actions consumed their respective historical authorizations. Current provider contact, plugin/API calls, DailyNote writes, VCP memory writes, image creation, real source exact reads, production metadata writes, bounded runtime/integration probes, and small dependency changes are now covered by DECISION-AIL-AUTO-009 only inside the budgeted Amber Lane with receipts. Tag, push, release, deploy, destructive actions, secret value access, wide VCPChat/VCPToolBox writes without exact scope, uncapped cost, unbounded loops, and external repository broad modification remain Red.
 ```
 
 ## Blocker Template

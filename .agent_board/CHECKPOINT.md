@@ -1,6 +1,105 @@
 
 ---
 
+## Checkpoint - Smart Standing Authorization v3 Budgeted Autonomy Envelope
+
+```text
+phase: standing_owner_smart_authorization_v3_budgeted_autonomy_envelope
+phase_id: standing_owner_smart_authorization_v3_budgeted_autonomy_envelope
+status: completed_validated_amended_local_strategy_commit
+completed:
+- upgraded standing authorization language from packet-only workflow to Smart Standing Authorization v3
+- defined Green Lane direct local work, Amber Lane budgeted autonomous work with receipts, and Red Lane hard stops
+- added default autonomy envelope budgets
+- added receipt fields and continuation rules
+- preserved push/tag/release/deploy/destructive/secret Red gates
+validation_completed:
+- git status --short --branch
+- git diff --check
+- git diff --cached --check
+- git diff --cached --name-only
+- node scripts/validate_agent_board_state.js
+- powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+- powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+validation_blocked:
+- none
+commit_action:
+- amended current unpushed local strategy commit with exact-file staged 11-file policy slice
+not_performed:
+- no push
+- no tag/release/deploy
+- no real A5/provider/plugin/API/image/DailyNote/VCP memory action
+- no real manifest/VCPChat/VCPToolBox read
+- no dependency change
+- no runtime probe
+- no secret read
+recommended_next: pending_human_push_or_next_autonomous_envelope_task
+```
+
+---
+
+## Checkpoint - Standing Owner Guarded Execution Packet Policy Tightening
+
+```text
+phase: standing_owner_guarded_execution_packet_policy_tightening
+phase_id: standing_owner_guarded_execution_packet_policy_tightening
+status: completed_local_validated_mvp_blocked_by_dirty_exact_slice_no_commit_constraint
+completed:
+- changed standing authorization from prior direct-execution wording to guarded execution packet workflow
+- added the minimum execution packet fields to AGENTS.md and the policy document
+- clarified that ambiguous continuation only enters packet workflow and cannot directly trigger execution
+- restored real VCPChat/VCPToolBox write safety: broad external writes remain hard stops, exact writes require packet scope, rollback, and validation
+- preserved push/tag/release/deploy/destructive/secret/external repository hard stops
+validation_completed:
+- git status --short --branch
+- git diff --check
+- node scripts/validate_agent_board_state.js
+- powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+validation_blocked:
+- powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1 failed because legacy commit-readiness validators reject the uncommitted 11-file policy/status dirty slice
+- git show --check HEAD failed on the pre-existing 38da1aa EOF blank-line issue; the working-tree policy file is fixed, but HEAD cannot pass without a new commit or amend
+- no local commit and no scripts changes are allowed in this task, so the blocker is outside the authorized write/command scope
+not_performed:
+- no commit
+- no push
+- no A5/provider/plugin/API/image/DailyNote/VCP memory action
+- no real manifest/VCPChat/VCPToolBox read
+- no dependency change
+- no secret read
+next_safe_action: either allow a local commit so validate_mvp can run in clean/local-ahead mode, or authorize a separate validator policy-slice dirty-tree accommodation task.
+recommended_next: either_allow_local_commit_for_mvp_clean_state_or_update_commit_readiness_validators_in_a_separate_task
+```
+
+---
+
+## Checkpoint - Standing Owner Automatic Authorization Policy Alignment
+
+```text
+phase: standing_owner_automatic_authorization_policy_alignment
+phase_id: standing_owner_automatic_authorization_policy_alignment
+status: completed_validated
+completed:
+- added the standing owner automatic authorization policy
+- updated root and overlay AGENTS guidance
+- recorded DECISION-AIL-AUTO-009
+- superseded by the guarded packet tightening above; standing external-read, real-execution, and A5 gates now require execution packets before real action
+validation_completed:
+- git diff --check
+- node scripts/validate_agent_board_state.js
+- powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+- powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1
+remaining_gates:
+  push_tag_release_deploy: separately_gated
+  destructive_actions: separately_gated
+  force_push_or_history_rewrite: separately_gated
+  secret_value_access_or_secret_edit: separately_gated
+  external_repository_modification: separately_gated
+next_safe_action: wait for explicit push or continue the next autonomous task under the new standing owner authorization.
+recommended_next: pending_human_push_or_next_autonomous_task
+```
+
+---
+
 ## Checkpoint - Post-Push Status Surface Alignment
 
 ```text

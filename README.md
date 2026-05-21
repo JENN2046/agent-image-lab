@@ -2,6 +2,23 @@
 
 Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不重新造生图插件，也不重新造记忆系统，而是把 VCP 的生图 / 编辑插件、VCPChat 的窗口能力、VCP 的长期记忆系统组织成一条可评审、可迭代、可归档、可沉淀的视觉生产线。
 
+## 当前权限策略
+
+```yaml
+current_phase: standing_owner_smart_authorization_v3_budgeted_autonomy_envelope
+standing_owner_smart_authorization_v3_active: true
+autonomy_envelope_active: true
+green_lane_direct: true
+amber_lane_autonomous_with_budget_and_receipts: true
+red_lane_requires_user: true
+push_tag_release_deploy_allowed_automatically: false
+secret_value_access_allowed_automatically: false
+destructive_action_allowed_automatically: false
+recommended_next: pending_human_push_or_next_autonomous_envelope_task
+```
+
+Smart Standing Authorization v3 means Codex can continue Green work directly and Amber work inside the budgeted envelope without step-by-step approval. It must stop at Red Lane conditions such as push/tag/release/deploy, destructive actions, secret value access, raw private data exposure, uncapped cost, unbounded loops, broad external repository modification, or dependency changes without an exact package/action list.
+
 ## 当前结构导航
 
 当前操作入口以 `AGENTS.md`、`AGENTS.autopilot-overlay.md`、`.agent_board/` 和 `scripts/validate_mvp.ps1` 为准。
@@ -91,13 +108,60 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 - `docs/P8_A5_PRODUCTION_VCP_AUTHORIZATION_PREP.md` 固定 A5 production / VCP 授权包准备顺序；它不授权任何 A5 执行。
 - `asset_archive/accepted_samples/<sample_id>/manifest.json + preview.webp` 是新的 accepted sample portable evidence capsule 目标路径。
 - 历史 `docs/v*` 阶段记录、旧 closeout、旧 authorization 草案是审计记录，不等于当前授权。
-- 未经明确 A5 授权，不要运行 provider/plugin/API/image generation/DailyNote/VCP memory/runtime/push/tag/release/deploy 相关入口。
+- Smart Standing Authorization v3 下，Green Lane 可直接执行，Amber Lane 可在预算内连续自动执行并记录 receipt；Red Lane 仍必须停下，尤其是 push/tag/release/deploy、destructive、secret、raw private data、uncapped cost、unbounded loops 和 broad external repository modification。
 
 ## 当前状态
 
 当前仓库处于：
 
 ```text
+Current phase: standing_owner_smart_authorization_v3_budgeted_autonomy_envelope.
+phase_status: completed_validated_amended_local_strategy_commit.
+source_phase: standing_owner_guarded_execution_packet_policy_tightening.
+source_commit: 38da1aa.
+policy_ref: docs/STANDING_OWNER_AUTOMATIC_AUTHORIZATION_POLICY.md.
+decision_ref: DECISION-AIL-AUTO-009.
+standing_owner_smart_authorization_v3_active: true.
+autonomy_envelope_active: true.
+green_lane_direct: true.
+amber_lane_autonomous_with_budget_and_receipts: true.
+red_lane_requires_user: true.
+A5_allowed_in_amber_envelope: true.
+provider_plugin_API_image_allowed_in_amber_envelope: true.
+DailyNote_VCP_memory_allowed_in_amber_envelope: true.
+real_manifest_VCPChat_VCPToolBox_exact_read_allowed_in_amber_envelope: true.
+bounded_runtime_probe_allowed_in_amber_envelope: true.
+production_metadata_write_allowed_in_amber_envelope: true.
+small_dependency_change_allowed_in_amber_envelope: true.
+push_tag_release_deploy_allowed_automatically: false.
+destructive_action_allowed_automatically: false.
+secret_value_access_allowed_automatically: false.
+external_repository_modification_allowed_automatically: false.
+validation_passed: git diff --check; git diff --cached --check; git diff --cached --name-only exact-file review; node scripts/validate_agent_board_state.js; scripts/validate-agent-image-lab-local.ps1; scripts/validate_mvp.ps1.
+validation_blocked: none.
+recommended_next: pending_human_push_or_next_autonomous_envelope_task.
+recommended_next_auto_execution_allowed: true.
+---
+Current phase: standing_owner_automatic_authorization_policy_alignment.
+phase_status: completed_validated.
+source_phase: owner_explicit_permission_change.
+policy_ref: docs/STANDING_OWNER_AUTOMATIC_AUTHORIZATION_POLICY.md.
+decision_ref: DECISION-AIL-AUTO-009.
+superseded_by: standing_owner_smart_authorization_v3_budgeted_autonomy_envelope.
+standing_owner_auto_authorization_active: superseded_by_v3.
+A5_policy: superseded_by_v3_amber_envelope.
+provider_plugin_API_image_policy: superseded_by_v3_amber_envelope.
+DailyNote_VCP_memory_policy: superseded_by_v3_amber_envelope.
+real_manifest_VCPChat_VCPToolBox_read_policy: superseded_by_v3_exact_read_amber_envelope.
+dependency_change_policy: superseded_by_v3_small_exact_dependency_amber_envelope.
+push_tag_release_deploy_allowed_automatically: false.
+destructive_action_allowed_automatically: false.
+secret_value_access_allowed_automatically: false.
+external_repository_modification_allowed_automatically: false.
+validation_passed: git diff --check; node scripts/validate_agent_board_state.js; scripts/validate_mvp.ps1; scripts/validate-agent-image-lab-local.ps1.
+recommended_next: pending_human_push_or_next_autonomous_task.
+recommended_next_auto_execution_allowed: true.
+---
 Current phase: controlled_visual_production_loop_post_push_status_surface_alignment.
 phase_status: completed_local_validated_ahead_of_origin_after_status_alignment.
 source_phase: validator_readiness_clean_post_commit_repair.

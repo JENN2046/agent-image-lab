@@ -1,4 +1,4 @@
-# AGENTS.autopilot-overlay.md — Agent Image Lab Guarded Sustained Autopilot
+# AGENTS.autopilot-overlay.md — Agent Image Lab Smart Standing Autopilot
 
 Version: v0.1-refactor
 Scope: overlay guidance for `agent-image-lab`
@@ -10,15 +10,15 @@ Default user-facing language: Simplified Chinese
 
 ## 0. Plain Meaning
 
-Agent Image Lab is not a generic coding project. It is a VCP-native visual production orchestration system with strict no-execution boundaries.
+Agent Image Lab is not a generic coding project. It is a VCP-native visual production orchestration system with owner-approved Smart Standing Authorization v3.
 
-The agent may continue sustained local work only while the next step is safe, local, reversible, and inside the current project root.
+The agent may continue sustained work while the next step is project-relevant, non-destructive, inside the active autonomy envelope, and not a Red Lane condition. The owner has explicitly authorized Green direct work and Amber budgeted autonomy for A5/provider/plugin/API/image/DailyNote/VCP memory/real source exact read/small dependency actions.
 
 Short rule:
 
 ```text
-continue docs/schema/prototype work while safe
-stop before external reads, real execution, real memory writes, VCP repo changes, or hidden cost
+continue Green work directly and Amber work inside the budgeted envelope while the goal is clear
+stop before Red Lane conditions such as secrets, destructive actions, push/tag/release/deploy, uncapped cost, unbounded loops, or broad external repository modification
 ```
 
 ---
@@ -35,9 +35,55 @@ resume surfaces:
 .agent_board/CHECKPOINT.md
 ```
 
-Summarize hard stops, exact-file staging, `git add .` prohibition, and whether
-`.agent_board` must be updated for the current task. Do not edit files until
-that intake is complete.
+Summarize Smart Standing Authorization v3, the active autonomy envelope, remaining Red Lane stops,
+exact-file staging, `git add .` prohibition, and whether `.agent_board` must be
+updated for the current task. Do not edit files until that intake is complete.
+
+---
+
+## 0.7 Smart Standing Authorization v3 — Budgeted Autonomy Envelope
+
+Core rule:
+
+```text
+Standing owner authorization grants Codex a bounded autonomy envelope.
+Within that envelope, Codex must not ask for step-by-step approval.
+Codex should plan, execute, validate, repair once when safe, record receipts, and continue until the goal is complete or a Red condition appears.
+```
+
+The project owner explicitly requires the following categories to be allowed in Amber Lane without step-by-step permission prompts when they remain inside the default envelope:
+
+```text
+A5
+provider/plugin/API/image
+DailyNote/VCP memory
+real manifest/VCPChat/VCPToolBox read
+dependency change
+```
+
+Default envelope:
+
+```yaml
+max_provider_calls: 3
+max_plugin_calls: 3
+max_api_calls: 5
+max_image_candidates: 3
+max_external_read_files: 20
+max_write_files: 10
+max_dependency_actions: 2
+max_retry_per_transient_failure: 1
+max_runtime_probe_minutes: 10
+overwrite_existing_files_allowed: false
+secret_value_read_allowed: false
+raw_private_data_print_allowed: false
+push_allowed: false
+tag_release_deploy_allowed: false
+destructive_action_allowed: false
+```
+
+Green Lane executes directly and records after the fact. Amber Lane plans, executes, validates, records receipts, and continues inside budget without step-by-step approval. Red Lane stops and asks.
+
+Red Lane includes push, tag, release, deploy, destructive actions, force push/history rewrite, secret value read/edit, raw private data or raw chat history exposure, external repository broad modification, broad VCPChat/VCPToolBox writes, uncapped cost, unbounded loops, overwriting existing artifacts without explicit overwrite allowance, dependency changes without exact package/action lists, and validation failure requiring non-obvious judgment.
 
 ---
 
@@ -45,26 +91,16 @@ that intake is complete.
 
 Stop and request explicit human authorization before any of the following:
 
-- reading real `VCPToolBox` source
-- reading real `VCPChat` source
-- reading any real `plugin-manifest.json` outside the project
 - reading `.env`, `config.env`, logs, token files, cookies, secrets, private configs
 - listing or storing real local private paths
 - copying raw source from external repositories
 - modifying real `VCPToolBox`
 - modifying real `VCPChat`
 - creating IPC / preload / renderer integration code in VCPChat
-- creating executable Adapter entrypoints
-- calling a VCP plugin
-- calling an API
-- calling DailyNote
-- writing VCP memory
-- creating image files
-- changing dependencies
 - push / PR / merge / tag / release
 - any write outside the project root
 
-Ambiguous instructions such as `继续`, `去吧`, `自动推进`, `keep going` do not authorize crossing these gates.
+Ambiguous instructions such as `继续`, `去吧`, `自动推进`, `keep going` may continue Green work and Amber work inside the active envelope. They do not authorize crossing Red Lane gates such as push, tag, release, deploy, destructive action, secret value access, uncapped cost, unbounded loops, or broad external repository modification.
 
 ---
 
@@ -81,6 +117,12 @@ Allowed without additional authorization, if inside the project root:
 - local validation scripts
 - dry-run planning docs
 - authorization request templates that keep real paths empty or redacted
+- owner-authorized real manifest / VCPChat / VCPToolBox exact reads inside the Amber envelope with receipts
+- owner-authorized provider / plugin / API / image execution inside the Amber envelope with receipts
+- owner-authorized DailyNote / VCP memory writes inside the Amber envelope with receipts
+- owner-authorized bounded runtime/integration probes inside the Amber envelope with receipts
+- owner-authorized production metadata writes inside the Amber envelope with receipts
+- owner-authorized small dependency changes inside the Amber envelope with exact package/action list and receipts
 
 ---
 
@@ -176,7 +218,7 @@ planning baseline
 → real read only after explicit user approval
 ```
 
-Current safe state is no-execution / no-external-read.
+Current safe state includes owner-authorized Smart Standing Authorization v3 Green / Amber lanes.
 
 Default locks:
 
@@ -195,7 +237,7 @@ allowed_source_paths: []
 read_commands_allowed: false
 ```
 
-Do not advance status to `manifest_reviewed_safe`, `dry_run_checked`, `tested`, `plugin_selected`, or `execution_ready` without explicit authorization and validation.
+Under Smart Standing Authorization v3, Codex may advance status to `manifest_reviewed_safe`, `dry_run_checked`, `tested`, `plugin_selected`, or `execution_ready` only when the action stayed inside the envelope, the action was actually performed, validation passed or was honestly recorded, and the required receipt was recorded.
 
 ---
 
