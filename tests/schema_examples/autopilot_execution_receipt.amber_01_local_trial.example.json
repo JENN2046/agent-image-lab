@@ -1,0 +1,67 @@
+{
+  "autopilot_execution_receipt": {
+    "version": "v1",
+    "contract_type": "autopilot_execution_receipt",
+    "policy_model": "Smart Standing Authorization v3 — Budgeted Autonomy Envelope",
+    "receipt_id": "receipt-amber-01-local-receipt-trial-001",
+    "task_id": "amber_01_local_receipt_trial",
+    "lane": "Amber",
+    "envelope_id": "envelope-amber-01-local-receipt-trial",
+    "action_performed": "local_repository_truth_snapshot_and_receipt_record",
+    "target_systems": [
+      "local_repository_only"
+    ],
+    "calls_used": {
+      "provider_calls": 0,
+      "plugin_calls": 0,
+      "api_calls": 0,
+      "image_candidates": 0,
+      "runtime_probe_minutes": 0
+    },
+    "files_read": [
+      "AGENTS.md",
+      "AGENTS.autopilot-overlay.md",
+      ".agent_board/HANDOFF.md",
+      ".agent_board/RUN_STATE.md",
+      ".agent_board/TASK_QUEUE.md",
+      ".agent_board/CHECKPOINT.md",
+      "README.md",
+      "docs/00_project_roadmap.md"
+    ],
+    "files_written": [
+      "docs/AMBER_01_LOCAL_RECEIPT_TRIAL.md",
+      "tests/schema_examples/autopilot_execution_receipt.amber_01_local_trial.example.json",
+      ".agent_board/AUTOPILOT_LEDGER.md",
+      "scripts/validate_autopilot_governance_kernel.js"
+    ],
+    "dependency_actions_used": [],
+    "validation_run": [
+      "git status --short --branch",
+      "node --check scripts/validate_autopilot_governance_kernel.js",
+      "node scripts/validate_autopilot_governance_kernel.js",
+      "git diff --check",
+      "node scripts/validate_agent_board_state.js",
+      "powershell -ExecutionPolicy Bypass -File scripts/validate-agent-image-lab-local.ps1",
+      "powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1"
+    ],
+    "validation_result": "passed",
+    "rollback_or_cleanup_available": true,
+    "next_auto_step_allowed": true,
+    "stop_reason": "none",
+    "guard": {
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "image_generation_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "real_manifest_read_performed": false,
+      "real_vcpchat_read_performed": false,
+      "real_vcptoolbox_read_performed": false,
+      "dependency_change_performed": false,
+      "runtime_probe_performed": false,
+      "secret_value_read_performed": false,
+      "push_tag_release_deploy_performed": false
+    }
+  }
+}

@@ -8,7 +8,10 @@ const files = {
   envelopeSchema: "schemas/autopilot_autonomy_envelope.schema.yaml",
   receiptSchema: "schemas/autopilot_execution_receipt.schema.yaml",
   envelopeExample: "tests/schema_examples/autopilot_autonomy_envelope.example.json",
-  receiptExample: "tests/schema_examples/autopilot_execution_receipt.example.json"
+  receiptExample: "tests/schema_examples/autopilot_execution_receipt.example.json",
+  amber01Doc: "docs/AMBER_01_LOCAL_RECEIPT_TRIAL.md",
+  amber01ReceiptExample: "tests/schema_examples/autopilot_execution_receipt.amber_01_local_trial.example.json",
+  autopilotLedger: ".agent_board/AUTOPILOT_LEDGER.md"
 };
 
 const requiredKernelComponents = [
@@ -108,6 +111,20 @@ function assertGuardFalse(guard, label) {
   }
 }
 
+function assertZeroCalls(callsUsed, label) {
+  assert(callsUsed.provider_calls === 0, `${label} must not use provider calls`);
+  assert(callsUsed.plugin_calls === 0, `${label} must not use plugin calls`);
+  assert(callsUsed.api_calls === 0, `${label} must not use API calls`);
+  assert(callsUsed.image_candidates === 0, `${label} must not use image candidates`);
+  assert(callsUsed.runtime_probe_minutes === 0, `${label} must not use runtime probe minutes`);
+}
+
+function assertArrayIncludesAll(actual, expected, label) {
+  assert(Array.isArray(actual), `${label} must be an array`);
+  const missing = expected.filter((value) => !actual.includes(value));
+  assert(missing.length === 0, `${label} missing: ${missing.join(", ")}`);
+}
+
 function main() {
   for (const relativePath of Object.values(files)) {
     assert(fs.existsSync(path.join(root, relativePath)), `Missing required file: ${relativePath}`);
@@ -118,8 +135,10 @@ function main() {
   const receiptSchema = read(files.receiptSchema);
   const envelopeExampleRoot = readJson(files.envelopeExample);
   const receiptExampleRoot = readJson(files.receiptExample);
+  const amber01ReceiptExampleRoot = readJson(files.amber01ReceiptExample);
   const envelope = envelopeExampleRoot.autopilot_autonomy_envelope;
   const receipt = receiptExampleRoot.autopilot_execution_receipt;
+  const amber01Receipt = amber01ReceiptExampleRoot.autopilot_execution_receipt;
 
   includesAll(doc, requiredKernelComponents, "kernel doc components");
   includesAll(doc, ["Green Lane", "Amber Lane", "Red Lane"], "kernel doc lanes");
@@ -159,11 +178,7 @@ function main() {
   assert(receipt.task_id === envelope.task_id, "Receipt task_id must match envelope example task_id");
   assert(receipt.envelope_id === envelope.envelope_id, "Receipt envelope_id must match envelope example envelope_id");
   assert(["Green", "Amber"].includes(receipt.lane), "Receipt example lane must be Green or Amber for local fixture");
-  assert(receipt.calls_used.provider_calls === 0, "Receipt fixture must not use provider calls");
-  assert(receipt.calls_used.plugin_calls === 0, "Receipt fixture must not use plugin calls");
-  assert(receipt.calls_used.api_calls === 0, "Receipt fixture must not use API calls");
-  assert(receipt.calls_used.image_candidates === 0, "Receipt fixture must not use image candidates");
-  assert(receipt.calls_used.runtime_probe_minutes === 0, "Receipt fixture must not use runtime probe minutes");
+  assertZeroCalls(receipt.calls_used, "Receipt fixture");
   assert(Array.isArray(receipt.files_read), "Receipt files_read must be an array");
   assert(Array.isArray(receipt.files_written), "Receipt files_written must be an array");
   assert(Array.isArray(receipt.dependency_actions_used) && receipt.dependency_actions_used.length === 0, "Receipt fixture must not use dependency actions");
@@ -173,6 +188,37 @@ function main() {
   assert(receipt.stop_reason === "none", "Receipt fixture stop_reason must be none");
   assertGuardFalse(receipt.guard, "Receipt example");
 
+  const amber01ExpectedWrittenFiles = [
+    "docs/AMBER_01_LOCAL_RECEIPT_TRIAL.md",
+    "tests/schema_examples/autopilot_execution_receipt.amber_01_local_trial.example.json",
+    ".agent_board/AUTOPILOT_LEDGER.md",
+    "scripts/validate_autopilot_governance_kernel.js"
+  ];
+
+  assert(amber01Receipt.version === "v1", "Amber-01 receipt version must be v1");
+  assert(amber01Receipt.contract_type === "autopilot_execution_receipt", "Amber-01 receipt contract_type mismatch");
+  assert(amber01Receipt.policy_model === "Smart Standing Authorization v3 — Budgeted Autonomy Envelope", "Amber-01 policy model mismatch");
+  assert(amber01Receipt.task_id === "amber_01_local_receipt_trial", "Amber-01 task_id mismatch");
+  assert(amber01Receipt.lane === "Amber", "Amber-01 receipt lane must be Amber");
+  assert(amber01Receipt.envelope_id === "envelope-amber-01-local-receipt-trial", "Amber-01 envelope_id mismatch");
+  assert(amber01Receipt.action_performed === "local_repository_truth_snapshot_and_receipt_record", "Amber-01 action_performed mismatch");
+  assertArrayIncludesAll(amber01Receipt.target_systems, ["local_repository_only"], "Amber-01 target_systems");
+  assertZeroCalls(amber01Receipt.calls_used, "Amber-01 receipt");
+  assert(Array.isArray(amber01Receipt.files_read), "Amber-01 files_read must be an array");
+  assert(!amber01Receipt.files_read.some((file) => file.toLowerCase().includes(".env") || file.toLowerCase().includes("secret")), "Amber-01 files_read must not include secret paths");
+  assertArrayIncludesAll(amber01Receipt.files_written, amber01ExpectedWrittenFiles, "Amber-01 files_written");
+  assert(amber01Receipt.files_written.length <= 4, "Amber-01 files_written must not exceed max_write_files=4");
+  assert(Array.isArray(amber01Receipt.dependency_actions_used) && amber01Receipt.dependency_actions_used.length === 0, "Amber-01 must not use dependency actions");
+  assert(Array.isArray(amber01Receipt.validation_run) && amber01Receipt.validation_run.length > 0, "Amber-01 must record validation_run");
+  assert(["passed", "pending", "failed", "passed_with_warnings"].includes(amber01Receipt.validation_result), "Amber-01 validation_result must be recognized");
+  assert(amber01Receipt.validation_result === "passed", "Amber-01 validation_result must be passed");
+  assert(amber01Receipt.rollback_or_cleanup_available === true, "Amber-01 must record rollback/cleanup availability");
+  assert(typeof amber01Receipt.next_auto_step_allowed === "boolean", "Amber-01 next_auto_step_allowed must be boolean");
+  assert(amber01Receipt.stop_reason === "none", "Amber-01 stop_reason must be none");
+  assertGuardFalse(amber01Receipt.guard, "Amber-01 receipt");
+  assert(read(files.amber01Doc).includes("Continuation Judge"), "Amber-01 doc must record Continuation Judge");
+  assert(read(files.autopilotLedger).includes("amber_01_local_receipt_trial"), "Autopilot ledger must record Amber-01");
+
   const result = {
     passed: true,
     phase: "smart_autopilot_governance_kernel",
@@ -180,9 +226,13 @@ function main() {
     default_budget_verified: true,
     red_gates_verified: requiredRedGates,
     amber_receipt_required: true,
+    amber_01_local_receipt_trial_verified: true,
+    amber_01_files_written_count: amber01Receipt.files_written.length,
+    amber_01_max_write_files: 4,
     examples_verified: [
       files.envelopeExample,
-      files.receiptExample
+      files.receiptExample,
+      files.amber01ReceiptExample
     ],
     no_real_a5_execution_signals: true,
     provider_contact_performed: false,
