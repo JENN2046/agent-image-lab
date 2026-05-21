@@ -44,7 +44,7 @@ function lines(value) {
 }
 
 function findPostCommitProof(subject, expectedFiles) {
-  const commits = lines(runGit(["log", "--format=%H%x00%s", "-n", "20"]));
+  const commits = lines(runGit(["log", "--format=%H%x00%s", "-n", "60"]));
   for (const commit of commits) {
     const [hash, commitSubject] = commit.split("\u0000");
     if (commitSubject !== subject) continue;
