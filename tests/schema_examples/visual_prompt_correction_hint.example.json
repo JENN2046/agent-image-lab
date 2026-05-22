@@ -1,0 +1,164 @@
+{
+  "visual_prompt_correction_hints": {
+    "correction_hint_set_id": "visual_prompt_correction_hints_v0_4_3",
+    "version": "v0_1",
+    "phase": "v0_4_3_review_to_prompt_correction_hint",
+    "source_failure_taxonomy_ref": "tests/schema_examples/visual_failure_taxonomy.example.json",
+    "source_review_pack_ref": "reports/visual_asset_eval_dry_run/v0_4_1_safe_portrait_review_pack.json",
+    "hint_mode": "dry_run_no_generation",
+    "required_hint_fields": [
+      "prompt_constraints_to_add",
+      "prompt_fragments_to_avoid",
+      "lighting_adjustment",
+      "composition_adjustment",
+      "material_adjustment"
+    ],
+    "hints": [
+      {
+        "taxonomy_category_id": "composition_failure",
+        "prompt_constraints_to_add": [
+          "Specify the intended framing, focal subject, crop, and negative space."
+        ],
+        "prompt_fragments_to_avoid": [
+          "ambiguous framing",
+          "competing focal subjects"
+        ],
+        "lighting_adjustment": "Keep lighting secondary to readability; avoid shadows that obscure the subject hierarchy.",
+        "composition_adjustment": "Define subject placement, crop boundary, visual balance, and the intended viewer path.",
+        "material_adjustment": "Mention materials only when they support the composition and do not create visual clutter.",
+        "rationale": "Composition failures should become explicit framing and hierarchy constraints before any future run.",
+        "generation_action_allowed": false,
+        "future_execution_allowed_by_this_hint": false
+      },
+      {
+        "taxonomy_category_id": "lighting_failure",
+        "prompt_constraints_to_add": [
+          "Specify controlled, coherent lighting with readable subject detail."
+        ],
+        "prompt_fragments_to_avoid": [
+          "mixed lighting",
+          "uncontrolled harsh shadows"
+        ],
+        "lighting_adjustment": "Name the light direction, softness, contrast level, and shadow tolerance.",
+        "composition_adjustment": "Keep framing stable while lighting is corrected so composition does not drift.",
+        "material_adjustment": "Describe how the light should reveal material texture without overexposing highlights.",
+        "rationale": "Lighting failures should become explicit illumination constraints rather than another broad style prompt.",
+        "generation_action_allowed": false,
+        "future_execution_allowed_by_this_hint": false
+      },
+      {
+        "taxonomy_category_id": "material_realism_failure",
+        "prompt_constraints_to_add": [
+          "Name the material, finish, texture, and physical realism expectation."
+        ],
+        "prompt_fragments_to_avoid": [
+          "vague premium material",
+          "unrealistic glossy surface"
+        ],
+        "lighting_adjustment": "Use lighting that reveals believable texture and avoids plastic-looking glare.",
+        "composition_adjustment": "Move material-critical surfaces into clear view without crowding the frame.",
+        "material_adjustment": "Lock surface texture, finish, age, reflectivity, and physical plausibility.",
+        "rationale": "Material failures need concrete surface constraints before any future prompt can improve realism.",
+        "generation_action_allowed": false,
+        "future_execution_allowed_by_this_hint": false
+      },
+      {
+        "taxonomy_category_id": "product_fidelity_failure",
+        "prompt_constraints_to_add": [
+          "Lock key product or subject attributes and forbid substitutions."
+        ],
+        "prompt_fragments_to_avoid": [
+          "generic object wording",
+          "approximate product identity"
+        ],
+        "lighting_adjustment": "Light key product details clearly without washing out shape or markings.",
+        "composition_adjustment": "Frame the product so identity-critical details remain visible and undistorted.",
+        "material_adjustment": "Preserve product-specific materials and avoid invented substitutions.",
+        "rationale": "Product fidelity failures must become identity locks and substitution bans.",
+        "generation_action_allowed": false,
+        "future_execution_allowed_by_this_hint": false
+      },
+      {
+        "taxonomy_category_id": "commercial_fitness_failure",
+        "prompt_constraints_to_add": [
+          "State the target use, polish level, and production context."
+        ],
+        "prompt_fragments_to_avoid": [
+          "unclear usage context",
+          "low-polish styling"
+        ],
+        "lighting_adjustment": "Use commercially readable lighting that supports the intended placement or campaign mood.",
+        "composition_adjustment": "Align framing with the intended use case, such as product page, editorial crop, or review card.",
+        "material_adjustment": "Keep material treatment consistent with the target commercial quality level.",
+        "rationale": "Commercial fitness failures should become use-case and polish constraints.",
+        "generation_action_allowed": false,
+        "future_execution_allowed_by_this_hint": false
+      },
+      {
+        "taxonomy_category_id": "ai_artifact_failure",
+        "prompt_constraints_to_add": [
+          "Require clean edges, plausible geometry, and no text-like noise."
+        ],
+        "prompt_fragments_to_avoid": [
+          "overly ornate detail clusters",
+          "hallucination-prone micro-details"
+        ],
+        "lighting_adjustment": "Avoid lighting patterns that hide distorted edges or synthetic residue.",
+        "composition_adjustment": "Simplify the frame so artifacts are easier to detect and less likely to accumulate.",
+        "material_adjustment": "Reduce ambiguous textures that can become melted, noisy, or invented surfaces.",
+        "rationale": "AI artifact failures should reduce ambiguity and constrain geometry before any future run.",
+        "generation_action_allowed": false,
+        "future_execution_allowed_by_this_hint": false
+      },
+      {
+        "taxonomy_category_id": "registry_or_provenance_mismatch",
+        "prompt_constraints_to_add": [
+          "Do not generate; repair metadata binding before any prompt correction."
+        ],
+        "prompt_fragments_to_avoid": [
+          "continuing from mismatched provenance",
+          "field-flip promotion"
+        ],
+        "lighting_adjustment": "No lighting adjustment is valid until registry, receipt, attempt, and review records agree.",
+        "composition_adjustment": "No composition adjustment is valid until source metadata is reconciled.",
+        "material_adjustment": "No material adjustment is valid until provenance is repaired.",
+        "rationale": "Provenance mismatch blocks prompt correction because the system cannot prove which asset is being corrected.",
+        "generation_action_allowed": false,
+        "future_execution_allowed_by_this_hint": false
+      }
+    ],
+    "boundaries": {
+      "metadata_only": true,
+      "dry_run_only": true,
+      "image_binary_read_performed": false,
+      "provider_call_performed": false,
+      "image_generation_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "runtime_call_performed": false,
+      "secret_value_read_performed": false,
+      "accepted_sample_auto_promotion": false,
+      "production_candidate_created": false,
+      "memory_seed_promoted": false,
+      "real_executor_implemented_now": false,
+      "Push_L2_exercised": false,
+      "package_dependency_change_performed": false,
+      "commit_performed": false,
+      "push_performed": false
+    },
+    "side_effects": {
+      "provider_call_performed": false,
+      "image_generation_performed": false,
+      "VCP_memory_write_performed": false,
+      "DailyNote_write_performed": false,
+      "runtime_call_performed": false,
+      "secret_value_read_performed": false,
+      "production_candidate_created": false,
+      "accepted_sample_auto_promotion": false,
+      "memory_seed_promoted": false,
+      "package_dependency_change_performed": false,
+      "commit_performed": false,
+      "push_performed": false
+    }
+  }
+}

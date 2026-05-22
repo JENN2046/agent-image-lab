@@ -86,6 +86,7 @@ $requiredFiles = @(
   'scripts/validate_visual_asset_eval_dry_run.js',
   'scripts/validate_visual_asset_review_pack.js',
   'scripts/validate_visual_failure_taxonomy.js',
+  'scripts/validate_visual_prompt_correction_hints.js',
   'scripts/validate_visual_sample_memory_policy.js',
   'scripts/validate_15_day_architecture_checkpoint.js',
   'scripts/validate_local_checkpoint_manifest.js',
@@ -12460,6 +12461,34 @@ process.exit(child.status || 0);
     }
     if ($visualFailureTaxonomy.Push_L2_exercised -ne $false -or $visualFailureTaxonomy.real_executor_implemented_now -ne $false -or $visualFailureTaxonomy.provider_call_performed -ne $false -or $visualFailureTaxonomy.image_generation_performed -ne $false -or $visualFailureTaxonomy.VCP_memory_write_performed -ne $false -or $visualFailureTaxonomy.DailyNote_write_performed -ne $false -or $visualFailureTaxonomy.runtime_call_performed -ne $false -or $visualFailureTaxonomy.secret_value_read_performed -ne $false -or $visualFailureTaxonomy.production_candidate_created -ne $false -or $visualFailureTaxonomy.accepted_sample_auto_promotion -ne $false -or $visualFailureTaxonomy.memory_seed_promoted -ne $false -or $visualFailureTaxonomy.package_dependency_change_performed -ne $false -or $visualFailureTaxonomy.commit_performed -ne $false -or $visualFailureTaxonomy.push_performed -ne $false) {
       Add-Failure "Visual Failure Taxonomy must not perform Push_L2, executor, provider, image, memory, runtime, secret, production, accepted-sample, memory-seed, dependency, commit, or push actions"
+    }
+  }
+
+  $visualPromptCorrectionHintsOutput = & node (Join-Path $Root 'scripts/validate_visual_prompt_correction_hints.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Visual Prompt Correction Hints validation exited with failure"
+  } else {
+    $visualPromptCorrectionHints = ($visualPromptCorrectionHintsOutput -join "`n") | ConvertFrom-Json
+    if ($visualPromptCorrectionHints.passed -ne $true -or $visualPromptCorrectionHints.phase -ne 'v0_4_3_review_to_prompt_correction_hint') {
+      Add-Failure "Visual Prompt Correction Hints validation must pass"
+    }
+    if ($visualPromptCorrectionHints.prompt_correction_doc_present -ne $true -or $visualPromptCorrectionHints.prompt_correction_schema_present -ne $true -or $visualPromptCorrectionHints.prompt_correction_fixture_present -ne $true -or $visualPromptCorrectionHints.prompt_correction_fail_fixture_present -ne $true) {
+      Add-Failure "Visual Prompt Correction Hints must define doc, schema, pass fixture, and fail fixture"
+    }
+    if ($visualPromptCorrectionHints.source_failure_taxonomy_verified -ne $true -or $visualPromptCorrectionHints.source_review_pack_verified -ne $true -or $visualPromptCorrectionHints.hints_cover_all_taxonomy_categories -ne $true) {
+      Add-Failure "Visual Prompt Correction Hints must bind to taxonomy, review pack, and cover all categories"
+    }
+    if ($visualPromptCorrectionHints.required_hint_fields_present -ne $true -or $visualPromptCorrectionHints.prompt_constraints_to_add_present -ne $true -or $visualPromptCorrectionHints.prompt_fragments_to_avoid_present -ne $true -or $visualPromptCorrectionHints.lighting_adjustment_present -ne $true -or $visualPromptCorrectionHints.composition_adjustment_present -ne $true -or $visualPromptCorrectionHints.material_adjustment_present -ne $true) {
+      Add-Failure "Visual Prompt Correction Hints must include every required prompt correction field"
+    }
+    if ($visualPromptCorrectionHints.negative_case_count -lt 20 -or $visualPromptCorrectionHints.caught_negative_case_count -ne $visualPromptCorrectionHints.negative_case_count -or $visualPromptCorrectionHints.all_negative_cases_caught -ne $true -or $visualPromptCorrectionHints.missing_required_field_caught -ne $true -or $visualPromptCorrectionHints.generation_action_caught -ne $true -or $visualPromptCorrectionHints.taxonomy_source_drift_caught -ne $true) {
+      Add-Failure "Visual Prompt Correction Hints must catch every required negative case"
+    }
+    if ($visualPromptCorrectionHints.metadata_only -ne $true -or $visualPromptCorrectionHints.dry_run_only -ne $true -or $visualPromptCorrectionHints.image_binary_read_performed -ne $false) {
+      Add-Failure "Visual Prompt Correction Hints must remain metadata-only, dry-run-only, and avoid image binary reads"
+    }
+    if ($visualPromptCorrectionHints.Push_L2_exercised -ne $false -or $visualPromptCorrectionHints.real_executor_implemented_now -ne $false -or $visualPromptCorrectionHints.provider_call_performed -ne $false -or $visualPromptCorrectionHints.image_generation_performed -ne $false -or $visualPromptCorrectionHints.VCP_memory_write_performed -ne $false -or $visualPromptCorrectionHints.DailyNote_write_performed -ne $false -or $visualPromptCorrectionHints.runtime_call_performed -ne $false -or $visualPromptCorrectionHints.secret_value_read_performed -ne $false -or $visualPromptCorrectionHints.production_candidate_created -ne $false -or $visualPromptCorrectionHints.accepted_sample_auto_promotion -ne $false -or $visualPromptCorrectionHints.memory_seed_promoted -ne $false -or $visualPromptCorrectionHints.package_dependency_change_performed -ne $false -or $visualPromptCorrectionHints.commit_performed -ne $false -or $visualPromptCorrectionHints.push_performed -ne $false) {
+      Add-Failure "Visual Prompt Correction Hints must not perform Push_L2, executor, provider, image, memory, runtime, secret, production, accepted-sample, memory-seed, dependency, commit, or push actions"
     }
   }
 

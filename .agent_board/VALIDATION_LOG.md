@@ -1,5 +1,37 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260522-v0.4.3-REVIEW-TO-PROMPT-CORRECTION-HINT
+
+Task: v0.4.3 Review to Prompt Correction Hint
+Status: completed_validated
+Commands run:
+  - git diff --check: passed_with_line_ending_warnings_only
+  - node --check scripts/validate_visual_prompt_correction_hints.js: passed
+  - node scripts/validate_visual_prompt_correction_hints.js: passed
+  - node scripts/validate_visual_failure_taxonomy.js: passed
+  - node scripts/validate_smart_v3_push_safety_lane.js: passed
+  - node scripts/validate_agent_board_state.js: passed
+  - npm run validate:mvp: passed
+Boundary:
+  - source_local_commit: 64da6d8f0cd424385923127b0e34779aaaead9d7
+  - source_remote_commit: 2f86f9b516b8113d099addf1bbb519b9a46a68fd
+  - source_failure_taxonomy_verified: true
+  - source_review_pack_verified: true
+  - required_hint_fields_present: true
+  - hints_cover_all_taxonomy_categories: true
+  - metadata_only: true
+  - dry_run_only: true
+  - image_binary_read_performed: false
+  - provider_call_performed: false
+  - image_generation_performed: false
+  - DailyNote_write_performed: false
+  - VCP_memory_write_performed: false
+  - runtime_call_performed: false
+  - production_candidate_created: false
+  - accepted_sample_auto_promotion: false
+  - memory_seed_promoted: false
+  - push_performed: false
+
 ## VALIDATION-20260522-v0.4.2-VISUAL-FAILURE-TAXONOMY
 
 Task: v0.4.2 Visual Failure Taxonomy

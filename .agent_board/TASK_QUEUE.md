@@ -1,5 +1,48 @@
 ---
 
+- [x] ID: v0_4_3_review_to_prompt_correction_hint
+      Title: Define Review to Prompt Correction Hint
+      Reason: The workflow needs a deterministic way to turn visual failure reasons into next-round prompt guidance before any sample registry, consistency check, or no-op runner can reuse the result.
+      Lane: Green.
+      Status: completed_validated_pending_local_commit.
+      Source local commit: 64da6d8f0cd424385923127b0e34779aaaead9d7.
+      Source remote commit: 2f86f9b516b8113d099addf1bbb519b9a46a68fd.
+      Source phase: v0_4_2_visual_failure_taxonomy.
+      Previous phase commit: 64da6d8f0cd424385923127b0e34779aaaead9d7.
+      Previous phase push performed: false.
+      Current gate phase: v0_4_3_review_to_prompt_correction_hint.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Scope: doc/schema/fixture/validator/status compact batch only.
+      Changed: docs/V0_4_3_REVIEW_TO_PROMPT_CORRECTION_HINT.md; schemas/visual_prompt_correction_hint.schema.yaml; tests/schema_examples/visual_prompt_correction_hint.example.json; tests/schema_examples/visual_prompt_correction_hint_fail.example.json; scripts/validate_visual_prompt_correction_hints.js; scripts/validate_mvp.ps1; scripts/lib/governance_tooling_maintenance_slice.js; docs/00_project_roadmap.md; .agent_board resume surfaces.
+      source_failure_taxonomy_verified: true.
+      source_review_pack_verified: true.
+      required_hint_fields_present: true.
+      hints_cover_all_taxonomy_categories: true.
+      metadata_only: true.
+      dry_run_only: true.
+      image_binary_read_performed: false.
+      Push_L2_exercised: false.
+      real_executor_implemented_now: false.
+      provider_call_performed: false.
+      image_generation_performed: false.
+      VCP_memory_write_performed: false.
+      DailyNote_write_performed: false.
+      runtime_call_performed: false.
+      secret_value_read_performed: false.
+      production_candidate_created: false.
+      accepted_sample_auto_promotion: false.
+      memory_seed_promoted: false.
+      package_dependency_change_performed: false.
+      push_allowed: false.
+      commit_performed: pending.
+      push_performed: false.
+      Stop condition: provider call, image generation, memory write, DailyNote write, runtime/VCPToolBox/VCPChat/CDP/bridge/MCP action, real executor implementation, Push_L2 test, accepted_sample promotion, production_candidate creation, memory_seed promotion, dependency change, secret read, git add ., push, tag, release, deploy, or validation failure requiring judgment.
+      Recommended next: post-commit review and Push_L3 manual guarded push classification, then v0.4.4 Sample Registry Dry Run.
+
+---
+
 - [x] ID: v0_4_2_visual_failure_taxonomy
       Title: Define Visual Failure Taxonomy
       Reason: The review pack needs a stable failure vocabulary before prompt correction hints, sample registry dry-run, consistency checks, and no-op runner planning can reuse review outcomes.

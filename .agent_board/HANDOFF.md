@@ -1,5 +1,50 @@
 ---
 
+## Current Handoff Update - v0.4.3 Review to Prompt Correction Hint
+
+```text
+phase: v0_4_3_review_to_prompt_correction_hint
+phase_id: v0_4_3_review_to_prompt_correction_hint
+status: completed_validated_pending_local_commit
+mode: Green Lane doc/schema/fixture/validator/status compact batch
+summary: Converts v0.4.2 failure taxonomy categories into metadata-only prompt correction hints with required constraint, avoid-fragment, lighting, composition, and material adjustment fields.
+source_local_commit: 64da6d8f0cd424385923127b0e34779aaaead9d7
+source_remote_commit: 2f86f9b516b8113d099addf1bbb519b9a46a68fd
+source_phase: v0_4_2_visual_failure_taxonomy
+previous_phase_commit: 64da6d8f0cd424385923127b0e34779aaaead9d7
+previous_phase_push_performed: false
+current_gate_phase: v0_4_3_review_to_prompt_correction_hint
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+changed: docs/V0_4_3_REVIEW_TO_PROMPT_CORRECTION_HINT.md; schemas/visual_prompt_correction_hint.schema.yaml; tests/schema_examples/visual_prompt_correction_hint.example.json; tests/schema_examples/visual_prompt_correction_hint_fail.example.json; scripts/validate_visual_prompt_correction_hints.js; scripts/validate_mvp.ps1; scripts/lib/governance_tooling_maintenance_slice.js; docs/00_project_roadmap.md; .agent_board resume surfaces.
+source_failure_taxonomy_verified: true
+source_review_pack_verified: true
+required_hint_fields_present: true
+hints_cover_all_taxonomy_categories: true
+metadata_only: true
+dry_run_only: true
+image_binary_read_performed: false
+Push_L2_exercised: false
+real_executor_implemented_now: false
+provider_call_performed: false
+image_generation_performed: false
+VCP_memory_write_performed: false
+DailyNote_write_performed: false
+runtime_call_performed: false
+secret_value_read_performed: false
+production_candidate_created: false
+accepted_sample_auto_promotion: false
+memory_seed_promoted: false
+package_dependency_change_performed: false
+push_allowed: false
+commit_performed: pending
+push_performed: false
+recommended_next: post_commit_review_and_push_lane_classification_then_v0_4_4_sample_registry_dry_run
+```
+
+---
+
 ## Current Handoff Update - v0.4.2 Visual Failure Taxonomy
 
 ```text

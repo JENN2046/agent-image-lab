@@ -1,0 +1,71 @@
+schema_id: visual_prompt_correction_hint
+version: v0_1
+status: local_contract_schema_only
+phase: v0_4_3_review_to_prompt_correction_hint
+purpose: >
+  Defines metadata-only prompt correction hints derived from Visual Failure
+  Taxonomy categories. The hints are advisory dry-run records only and cannot
+  generate images, call providers, write memory, promote samples, create
+  production candidates, or run executors.
+
+required_top_level_fields:
+  - correction_hint_set_id
+  - version
+  - phase
+  - source_failure_taxonomy_ref
+  - source_review_pack_ref
+  - hint_mode
+  - required_hint_fields
+  - hints
+  - boundaries
+  - side_effects
+
+required_hint_fields:
+  - prompt_constraints_to_add
+  - prompt_fragments_to_avoid
+  - lighting_adjustment
+  - composition_adjustment
+  - material_adjustment
+
+hint_contract:
+  taxonomy_category_id: one_visual_failure_taxonomy_category
+  prompt_constraints_to_add:
+    - non_empty_string
+  prompt_fragments_to_avoid:
+    - non_empty_string
+  lighting_adjustment: non_empty_string
+  composition_adjustment: non_empty_string
+  material_adjustment: non_empty_string
+  rationale: non_empty_string
+  generation_action_allowed: false
+  future_execution_allowed_by_this_hint: false
+
+boundaries:
+  metadata_only: true
+  dry_run_only: true
+  image_binary_read_performed: false
+  provider_call_performed: false
+  image_generation_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  runtime_call_performed: false
+  secret_value_read_performed: false
+  accepted_sample_auto_promotion: false
+  production_candidate_created: false
+  memory_seed_promoted: false
+  real_executor_implemented_now: false
+  Push_L2_exercised: false
+  package_dependency_change_performed: false
+  commit_performed: false
+  push_performed: false
+
+non_authorization:
+  prompt_execution_allowed_by_schema: false
+  image_generation_allowed_by_schema: false
+  provider_or_plugin_call_allowed_by_schema: false
+  DailyNote_write_allowed_by_schema: false
+  VCP_memory_write_allowed_by_schema: false
+  accepted_sample_promotion_allowed_by_schema: false
+  production_candidate_allowed_by_schema: false
+  memory_seed_promotion_allowed_by_schema: false
+  real_executor_allowed_by_schema: false
