@@ -1,0 +1,121 @@
+{
+  "visual_asset_review_report": {
+    "report_id": "visual_asset_review_report_v0_1_example_reject_001",
+    "report_version": "v0_1",
+    "phase": "v0_3_7d_visual_asset_eval_v0_1_gate",
+    "asset_ref": {
+      "asset_id": "example_metadata_only_asset_001",
+      "asset_class": "review_candidate",
+      "asset_path_redacted": true,
+      "image_binary_included": false,
+      "raw_local_path_included": false,
+      "review_report_ref": "tests/schema_examples/visual_asset_review_report.example.json"
+    },
+    "evaluation_dimensions": {
+      "composition": {
+        "score": 2,
+        "verdict": "fail",
+        "rationale": "Subject placement is crowded and the main product silhouette is unclear."
+      },
+      "lighting": {
+        "score": 3,
+        "verdict": "watch",
+        "rationale": "Lighting direction is readable but highlight control is uneven."
+      },
+      "material_realism": {
+        "score": 2,
+        "verdict": "fail",
+        "rationale": "Surface texture looks synthetic and weakens product credibility."
+      },
+      "product_fidelity": {
+        "score": 2,
+        "verdict": "fail",
+        "rationale": "Key product geometry is inconsistent with the intended object."
+      },
+      "commercial_fitness": {
+        "score": 2,
+        "verdict": "fail",
+        "rationale": "The asset is not ready for commercial use without revision."
+      },
+      "AI_artifact_risk": {
+        "score": 1,
+        "verdict": "fail",
+        "rationale": "Visible generation artifacts create a high review risk."
+      },
+      "memory_suitability": {
+        "score": 1,
+        "verdict": "fail",
+        "rationale": "The failure is useful as a rejected-case lesson only, not as a positive memory seed."
+      }
+    },
+    "decision": {
+      "review_outcome": "reject",
+      "pass_reason_codes": [],
+      "rejection_reason_codes": [
+        "composition_failure",
+        "material_realism_failure",
+        "product_fidelity_failure",
+        "ai_artifact_risk_high"
+      ],
+      "primary_failure_dimension": "product_fidelity",
+      "commercial_use_suitability": "not_suitable"
+    },
+    "required_questions": {
+      "why_did_it_pass": "It did not pass; the positive route remains closed.",
+      "why_was_it_rejected": "The report rejects the asset because product fidelity, material realism, and artifact risk fail the minimum threshold.",
+      "failed_dimension": "product_fidelity",
+      "commercial_use_suitability": "not_suitable",
+      "accepted_sample_eligibility": "not_eligible_without_human_acceptance_and_accepted_gate",
+      "memory_seed_eligibility": "not_eligible_without_memory_gate_and_memory_write_authorization"
+    },
+    "promotion_recommendations": {
+      "accepted_sample": {
+        "eligible": false,
+        "accepted_sample": false,
+        "actual_accepted_sample_created": false,
+        "accepted_gate_id": null,
+        "human_accepted": false,
+        "requires": [
+          "accepted_gate_id",
+          "human_accepted:true",
+          "review_report_ref"
+        ]
+      },
+      "memory_seed": {
+        "eligible": false,
+        "memory_seed": false,
+        "actual_memory_seed_created": false,
+        "memory_gate_id": null,
+        "memory_write_allowed_now": false,
+        "requires": [
+          "memory_gate_id",
+          "memory_write_allowed_now:true",
+          "redacted_learning_summary"
+        ]
+      },
+      "production_candidate": {
+        "eligible": false,
+        "production_candidate": false,
+        "actual_production_candidate_created": false,
+        "requires": [
+          "independent_A5_production_gate_id"
+        ]
+      }
+    },
+    "boundary_flags": {
+      "image_binary_included": false,
+      "raw_local_path_included": false,
+      "image_binary_read_performed": false,
+      "provider_call_performed": false,
+      "image_generation_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "runtime_call_performed": false,
+      "secret_value_read_performed": false,
+      "accepted_sample_created": false,
+      "memory_seed_created": false,
+      "production_candidate_created": false,
+      "push_performed": false
+    }
+  }
+}

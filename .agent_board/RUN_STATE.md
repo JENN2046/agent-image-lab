@@ -1,30 +1,29 @@
 ---
 
-## Current Run State - v0.3.7c Push L1 Regression Usage Boundary Gate
+## Current Run State - Visual Asset Eval v0.1 Gate
 
 ```text
-phase: v0_3_7c_push_l1_regression_usage_boundary_gate
-phase_id: v0_3_7c_push_l1_regression_usage_boundary_gate
+phase: v0_3_7d_visual_asset_eval_v0_1_gate
+phase_id: v0_3_7d_visual_asset_eval_v0_1_gate
 status: completed_validated
-mode: Green Lane docs/validator/fixture patch
-source_local_commit: 43b56d040d79f172d906fc7890bfdcdc9609cc55
-source_phase: v0_3_7b_push_safety_lane_cycle_closeout
+mode: Green Lane docs/schema/validator
+source_local_commit: 4432599e764cb3d1f765c173412f43c3263d67c5
+source_phase: v0_3_7c_push_l1_regression_usage_boundary_gate
 active_current_phase: v0_3_3_first_live_generation_pilot
 resume_guard_source_phase: v0_3_2_live_candidate_action_packet
 next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
-objective: make Push_L1 repeatably classifiable without widening it beyond narrow status/governance exact-slice pushes
-created: docs/PUSH_L1_USAGE_RULE.md; docs/PUSH_L1_REGRESSION_CASES.md; tests/schema_examples/push_l1_status_sync_pass.example.json; tests/schema_examples/push_l1_forbidden_paths_fail.example.json.
-updated: scripts/validate_smart_v3_push_safety_lane.js; scripts/lib/governance_tooling_maintenance_slice.js.
-Push_L1_candidate_checklist_defined: true
-Push_L1_negative_cases_fixture_defined: true
-Push_L1_status_sync_pass_fixture_defined: true
-Push_L1_no_assets_runs_images_package_runtime: true
-Push_L1_fast_forward_only_check: true
-Push_L1_exactly_one_commit_ahead_check: true
-post_push_verification_required: true
-post_push_state_sync_required: true
-Push_L1_not_expanded_to_any_docs: true
-v0_3_7c_exact_slice_registered: true
+objective: define minimum Visual Asset Eval v0.1 review report contract for pass/reject reasons, failed dimensions, commercial fitness, accepted_sample gate, and memory_seed gate
+created: docs/VISUAL_ASSET_EVAL_V0_1.md; schemas/visual_asset_review_report.schema.yaml; tests/schema_examples/visual_asset_review_report.example.json; scripts/validate_visual_asset_eval_v0_1.js.
+updated: scripts/validate_mvp.ps1; scripts/lib/governance_tooling_maintenance_slice.js.
+visual_asset_eval_v0_1_defined: true
+review_report_schema_defined: true
+review_report_fixture_defined: true
+required_dimensions_defined: composition; lighting; material_realism; product_fidelity; commercial_fitness; AI_artifact_risk; memory_suitability
+required_questions_answered_by_schema: why_did_it_pass; why_was_it_rejected; failed_dimension; commercial_use_suitability; accepted_sample_eligibility; memory_seed_eligibility
+accepted_sample_gate_required: true
+memory_seed_gate_required: true
+production_candidate_blocked: true
+v0_3_7d_exact_slice_registered: true
 Push_L2_exercised: false
 real_executor_implemented_now: false
 push_allowed: false
@@ -37,8 +36,36 @@ secret_value_read_performed: false
 commit_performed_by_this_gate: false
 push_performed_by_this_gate: false
 validation_status: completed_validated
-latest_validation: git diff --check passed with line-ending warnings only; node --check scripts/lib/governance_tooling_maintenance_slice.js passed; node scripts/validate_smart_v3_push_safety_lane.js passed; npm run validate:mvp passed.
-recommended_next: external review for Push_L1 regression usage boundary commit readiness; do not test Push_L2.
+latest_validation: git diff --check passed with line-ending warnings only; node --check scripts/validate_visual_asset_eval_v0_1.js passed; node scripts/validate_visual_asset_eval_v0_1.js passed; node scripts/validate_agent_board_state.js passed; npm run validate:mvp passed.
+recommended_next: guarded local commit review; do not test Push_L2.
+```
+
+## Current 15-Day Goal State - Visual Asset Eval v0.1
+
+```text
+phase: v0_3_7d_visual_asset_eval_v0_1_gate
+status: completed_validated
+mode: Green Lane docs/schema/validator
+objective: define the minimum Visual Asset Eval v0.1 review report contract for pass/reject reasons, failed dimension, commercial fitness, accepted_sample gate, and memory_seed gate
+doc_ref: docs/VISUAL_ASSET_EVAL_V0_1.md
+schema_ref: schemas/visual_asset_review_report.schema.yaml
+fixture_ref: tests/schema_examples/visual_asset_review_report.example.json
+validator_ref: scripts/validate_visual_asset_eval_v0_1.js
+evaluates: composition; lighting; material_realism; product_fidelity; commercial_fitness; AI_artifact_risk; memory_suitability
+answers_required_questions: why_did_it_pass; why_was_it_rejected; failed_dimension; commercial_use_suitability; accepted_sample_eligibility; memory_seed_eligibility
+accepted_sample_auto_promotion: false
+memory_seed_created: false
+VCP_memory_write_performed: false
+DailyNote_write_performed: false
+production_candidate_created: false
+provider_call_performed: false
+image_generation_performed: false
+runtime_call_performed: false
+secret_value_read_performed: false
+Push_L2_exercised: false
+real_executor_implemented_now: false
+push_performed: false
+recommended_next: guarded_local_commit_review
 ```
 
 ---

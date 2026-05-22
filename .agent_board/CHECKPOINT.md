@@ -1,35 +1,33 @@
 ---
 
-## Checkpoint - v0.3.7c Push L1 Regression Usage Boundary Gate
+## Checkpoint - Visual Asset Eval v0.1 Gate
 
 ```text
-phase: v0_3_7c_push_l1_regression_usage_boundary_gate
-phase_id: v0_3_7c_push_l1_regression_usage_boundary_gate
+phase: v0_3_7d_visual_asset_eval_v0_1_gate
+phase_id: v0_3_7d_visual_asset_eval_v0_1_gate
 status: completed_validated
-mode: Green Lane docs/validator/fixture patch
-source_local_commit: 43b56d040d79f172d906fc7890bfdcdc9609cc55
-source_phase: v0_3_7b_push_safety_lane_cycle_closeout
+mode: Green Lane docs/schema/validator
+source_local_commit: 4432599e764cb3d1f765c173412f43c3263d67c5
+source_phase: v0_3_7c_push_l1_regression_usage_boundary_gate
 active_current_phase: v0_3_3_first_live_generation_pilot
 resume_guard_source_phase: v0_3_2_live_candidate_action_packet
 next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
 created:
-- docs/PUSH_L1_USAGE_RULE.md
-- docs/PUSH_L1_REGRESSION_CASES.md
-- tests/schema_examples/push_l1_status_sync_pass.example.json
-- tests/schema_examples/push_l1_forbidden_paths_fail.example.json
+- docs/VISUAL_ASSET_EVAL_V0_1.md
+- schemas/visual_asset_review_report.schema.yaml
+- tests/schema_examples/visual_asset_review_report.example.json
+- scripts/validate_visual_asset_eval_v0_1.js
 updated:
-- scripts/validate_smart_v3_push_safety_lane.js
+- scripts/validate_mvp.ps1
 - scripts/lib/governance_tooling_maintenance_slice.js
-Push_L1_candidate_checklist_defined: true
-Push_L1_negative_cases_fixture_defined: true
-Push_L1_status_sync_pass_fixture_defined: true
-Push_L1_no_assets_runs_images_package_runtime: true
-Push_L1_fast_forward_only_check: true
-Push_L1_exactly_one_commit_ahead_check: true
-post_push_verification_required: true
-post_push_state_sync_required: true
-Push_L1_not_expanded_to_any_docs: true
-v0_3_7c_exact_slice_registered: true
+visual_asset_eval_v0_1_defined: true
+review_report_schema_defined: true
+review_report_fixture_defined: true
+required_questions_answered_by_schema: true
+accepted_sample_gate_required: true
+memory_seed_gate_required: true
+production_candidate_blocked: true
+v0_3_7d_exact_slice_registered: true
 Push_L2_exercised: false
 real_executor_implemented_now: false
 push_allowed: false
@@ -43,10 +41,43 @@ commit_performed_by_this_gate: false
 push_performed_by_this_gate: false
 latest_validation:
 - git diff --check: passed_with_line_ending_warnings_only
-- node --check scripts/lib/governance_tooling_maintenance_slice.js: passed
-- node scripts/validate_smart_v3_push_safety_lane.js: passed
+- node --check scripts/validate_visual_asset_eval_v0_1.js: passed
+- node scripts/validate_visual_asset_eval_v0_1.js: passed
+- node scripts/validate_agent_board_state.js: passed
 - npm run validate:mvp: passed
-recommended_next: external review for Push_L1 regression usage boundary commit readiness; do not test Push_L2.
+recommended_next: guarded local commit review; do not test Push_L2.
+```
+
+## Checkpoint - Visual Asset Eval v0.1 Gate
+
+```text
+phase: v0_3_7d_visual_asset_eval_v0_1_gate
+status: completed_validated
+completed:
+- added Visual Asset Eval v0.1 documentation for composition, lighting, material_realism, product_fidelity, commercial_fitness, AI_artifact_risk, and memory_suitability
+- added visual_asset_review_report schema and metadata-only example fixture
+- added validator with negative cases for missing dimensions, score bounds, pass/reject reason gaps, accepted_sample field flip, memory_seed field flip, production_candidate field flip, side-effect drift, raw local path, and image binary path
+- wired MVP and exact-slice helper for this local gate
+validation_completed:
+- git diff --check
+- node --check scripts/validate_visual_asset_eval_v0_1.js
+- node scripts/validate_visual_asset_eval_v0_1.js
+- node scripts/validate_agent_board_state.js
+- npm run validate:mvp
+hard_stop_flags:
+  image_binary_read_performed: false
+  provider_call_performed: false
+  image_generation_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  runtime_call_performed: false
+  secret_value_read_performed: false
+  accepted_sample_created: false
+  memory_seed_created: false
+  production_candidate_created: false
+  Push_L2_exercised: false
+  real_executor_implemented_now: false
+recommended_next: complete_validation_then_post_diff_review
 ```
 
 ---

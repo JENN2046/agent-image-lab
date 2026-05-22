@@ -1,5 +1,33 @@
 ---
 
+- [x] ID: v0_3_7d_visual_asset_eval_v0_1_gate
+      Title: Define Visual Asset Eval v0.1 report contract
+      Reason: The 15-day plan must return to the image workflow and give the system a minimal way to explain pass/reject reasons, failed dimensions, commercial fitness, accepted_sample eligibility, and memory_seed eligibility.
+      Lane: Green.
+      Status: completed_validated.
+      Source local commit: 4432599e764cb3d1f765c173412f43c3263d67c5.
+      Source phase: v0_3_7c_push_l1_regression_usage_boundary_gate.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Created: docs/VISUAL_ASSET_EVAL_V0_1.md; schemas/visual_asset_review_report.schema.yaml; tests/schema_examples/visual_asset_review_report.example.json; scripts/validate_visual_asset_eval_v0_1.js.
+      Updated: scripts/validate_mvp.ps1; scripts/lib/governance_tooling_maintenance_slice.js.
+      Required dimensions: composition; lighting; material_realism; product_fidelity; commercial_fitness; AI_artifact_risk; memory_suitability.
+      Required questions: why_did_it_pass; why_was_it_rejected; failed_dimension; commercial_use_suitability; accepted_sample_eligibility; memory_seed_eligibility.
+      accepted_sample_gate_required: true.
+      memory_seed_gate_required: true.
+      production_candidate_blocked: true.
+      Push_L2_exercised: false.
+      real_executor_implemented_now: false.
+      push_allowed: false.
+      image_generation_performed: false.
+      secret_value_read_performed: false.
+      Validation: git diff --check passed with line-ending warnings only; node --check scripts/validate_visual_asset_eval_v0_1.js passed; node scripts/validate_visual_asset_eval_v0_1.js passed; node scripts/validate_agent_board_state.js passed; npm run validate:mvp passed.
+      Stop condition: Push_L2 test, real executor implementation, provider/image/memory/runtime execution, accepted_sample auto promotion, production_candidate creation, dependency change, secret read, git add ., push/tag/release/deploy, or validation failure requiring judgment.
+      Recommended next: guarded local commit review.
+
+---
+
 - [x] ID: v0_3_7c_push_l1_regression_usage_boundary_gate
       Title: Define Push_L1 usage rules and regression fixtures
       Reason: Push_L1 must become repeatably classifiable without widening from the proven narrow docs/status exact-slice case.
@@ -974,6 +1002,32 @@ runs_mutation_performed: false
 preview_generation_performed: false
 production_candidate_performed: false
 recommended_next: stop_before_real_durable_archive_copy_A5
+```
+
+## Current Task - Visual Asset Eval v0.1
+
+```text
+status: in_progress_local_docs_schema_validator
+mode: Green Lane docs/schema/validator
+done:
+- define Visual Asset Eval v0.1 report contract
+- add schema, metadata-only fixture, validator, MVP wiring, and exact-slice registration
+in_progress: validation
+blocked: none for local schema gate
+remaining:
+- run validator and MVP checks
+- produce closeout
+- guarded local commit only if checks pass
+do_not_do:
+- Push_L2 test
+- real executor implementation
+- provider call
+- image generation
+- DailyNote write
+- VCP memory write
+- accepted_sample auto promotion
+- production_candidate creation
+recommended_next: validation_then_local_commit_review
 ```
 
 ---

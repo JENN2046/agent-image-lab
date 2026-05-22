@@ -1,0 +1,101 @@
+schema_id: visual_asset_review_report
+version: v0_1
+status: local_contract_schema_only
+phase: v0_3_7d_visual_asset_eval_v0_1_gate
+purpose: >
+  Defines the minimum metadata-only visual asset review report for explaining
+  pass, rejection, failure dimension, commercial fitness, accepted_sample
+  eligibility, and memory_seed eligibility without reading image binaries,
+  writing memory, or promoting assets.
+
+required_top_level_fields:
+  - report_id
+  - report_version
+  - phase
+  - asset_ref
+  - evaluation_dimensions
+  - decision
+  - required_questions
+  - promotion_recommendations
+  - boundary_flags
+
+required_dimensions:
+  - composition
+  - lighting
+  - material_realism
+  - product_fidelity
+  - commercial_fitness
+  - AI_artifact_risk
+  - memory_suitability
+
+dimension_contract:
+  score: integer_0_to_5
+  verdict: pass | watch | fail
+  rationale: non_empty_string
+
+decision:
+  review_outcome: pass | reject | needs_revision
+  pass_reason_codes: array
+  rejection_reason_codes: array
+  primary_failure_dimension: composition | lighting | material_realism | product_fidelity | commercial_fitness | AI_artifact_risk | memory_suitability | null
+  commercial_use_suitability: suitable | needs_revision | not_suitable
+
+required_questions:
+  why_did_it_pass: string
+  why_was_it_rejected: string
+  failed_dimension: string | null
+  commercial_use_suitability: string
+  accepted_sample_eligibility: string
+  memory_seed_eligibility: string
+
+promotion_recommendations:
+  accepted_sample:
+    eligible: boolean
+    accepted_sample: false
+    actual_accepted_sample_created: false
+    accepted_gate_id: string | null
+    human_accepted: false
+    requires:
+      - accepted_gate_id
+      - human_accepted: true
+      - review_report_ref
+  memory_seed:
+    eligible: boolean
+    memory_seed: false
+    actual_memory_seed_created: false
+    memory_gate_id: string | null
+    memory_write_allowed_now: false
+    requires:
+      - memory_gate_id
+      - memory_write_allowed_now: true
+      - redacted_learning_summary
+  production_candidate:
+    eligible: false
+    production_candidate: false
+    actual_production_candidate_created: false
+    requires:
+      - independent_A5_production_gate_id
+
+boundary_flags:
+  image_binary_included: false
+  raw_local_path_included: false
+  image_binary_read_performed: false
+  provider_call_performed: false
+  image_generation_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  runtime_call_performed: false
+  secret_value_read_performed: false
+  accepted_sample_created: false
+  memory_seed_created: false
+  production_candidate_created: false
+  push_performed: false
+
+non_authorization:
+  image_binary_read_allowed_by_schema: false
+  provider_or_plugin_call_allowed_by_schema: false
+  image_generation_allowed_by_schema: false
+  DailyNote_write_allowed_by_schema: false
+  VCP_memory_write_allowed_by_schema: false
+  accepted_sample_promotion_allowed_by_schema: false
+  production_candidate_allowed_by_schema: false

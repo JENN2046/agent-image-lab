@@ -82,6 +82,7 @@ $requiredFiles = @(
   'scripts/validate_bounded_l4_autopilot_requirements.js',
   'scripts/validate_bounded_l4_executor_preflight_contract.js',
   'scripts/validate_smart_v3_push_safety_lane.js',
+  'scripts/validate_visual_asset_eval_v0_1.js',
   'scripts/validate_local_checkpoint_manifest.js',
   'scripts/validate_local_commit_scope.js',
   'scripts/validate_post_push_state.js',
@@ -287,6 +288,7 @@ $requiredFiles = @(
   'docs/V0_3_6_BOUNDED_L4_AUTOPILOT_REQUIREMENTS_AND_AMBER_SUBCLASS_GATE.md',
   'docs/V0_3_7_BOUNDED_L4_EXECUTOR_PREFLIGHT_CONTRACT_GATE.md',
   'docs/V0_3_7A_PUSH_SAFETY_LANE_GATE.md',
+  'docs/VISUAL_ASSET_EVAL_V0_1.md',
   'docs/V0_3_CONTROLLED_REAL_PROVIDER_PRODUCTION_LOOP.md',
   'docs/AUTOPILOT_EVOLUTION_ENGINE.md',
   'docs/AUTOPILOT_COMPLETE_READINESS_GATE.md',
@@ -296,6 +298,7 @@ $requiredFiles = @(
   'schemas/autopilot_receipt_registry.schema.yaml',
   'schemas/bounded_l4_executor_preflight_packet.schema.yaml',
   'schemas/smart_v3_push_safety_lane.schema.yaml',
+  'schemas/visual_asset_review_report.schema.yaml',
   'schemas/autopilot_amber_action_packet.schema.yaml',
   'schemas/autopilot_goal.schema.yaml',
   'schemas/autopilot_route_plan.schema.yaml',
@@ -327,6 +330,7 @@ $requiredFiles = @(
   'tests/schema_examples/bounded_l4_autopilot_requirements.example.json',
   'tests/schema_examples/bounded_l4_executor_preflight_packet.example.json',
   'tests/schema_examples/smart_v3_push_safety_lane.example.json',
+  'tests/schema_examples/visual_asset_review_report.example.json',
   'scripts/validate_codex_session_image_import.js',
   'scripts/validate_review_result_protocol.js',
   'scripts/validate_review_decision_package.js',
@@ -12353,6 +12357,31 @@ process.exit(child.status || 0);
     }
     if ($smartV3PushSafetyLane.provider_call_performed -ne $false -or $smartV3PushSafetyLane.image_generation_performed -ne $false -or $smartV3PushSafetyLane.DailyNote_write_performed -ne $false -or $smartV3PushSafetyLane.VCP_memory_write_performed -ne $false -or $smartV3PushSafetyLane.runtime_call_performed -ne $false -or $smartV3PushSafetyLane.secret_value_read_performed -ne $false -or $smartV3PushSafetyLane.commit_performed -ne $false -or $smartV3PushSafetyLane.push_performed -ne $false) {
       Add-Failure "Smart v3 push safety lane must not perform provider, image, memory, runtime, secret, commit, or push actions"
+    }
+  }
+
+  $visualAssetEvalOutput = & node (Join-Path $Root 'scripts/validate_visual_asset_eval_v0_1.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Visual Asset Eval v0.1 validation exited with failure"
+  } else {
+    $visualAssetEval = ($visualAssetEvalOutput -join "`n") | ConvertFrom-Json
+    if ($visualAssetEval.passed -ne $true -or $visualAssetEval.phase -ne 'v0_3_7d_visual_asset_eval_v0_1_gate') {
+      Add-Failure "Visual Asset Eval v0.1 validation must pass"
+    }
+    if ($visualAssetEval.visual_asset_eval_v0_1_defined -ne $true -or $visualAssetEval.review_report_schema_present -ne $true -or $visualAssetEval.review_report_fixture_present -ne $true) {
+      Add-Failure "Visual Asset Eval v0.1 must define its doc, schema, fixture, and validator surface"
+    }
+    if ($visualAssetEval.required_dimension_count -lt 7 -or $visualAssetEval.required_questions_answered -ne $true -or $visualAssetEval.pass_reject_reason_model_present -ne $true -or $visualAssetEval.commercial_fitness_present -ne $true) {
+      Add-Failure "Visual Asset Eval v0.1 must cover all review dimensions, required questions, pass/reject reasons, and commercial fitness"
+    }
+    if ($visualAssetEval.accepted_sample_gate_required -ne $true -or $visualAssetEval.memory_seed_gate_required -ne $true -or $visualAssetEval.production_candidate_blocked -ne $true) {
+      Add-Failure "Visual Asset Eval v0.1 must preserve accepted_sample, memory_seed, and production_candidate gates"
+    }
+    if ($visualAssetEval.negative_case_count -lt 13 -or $visualAssetEval.caught_negative_case_count -ne $visualAssetEval.negative_case_count -or $visualAssetEval.all_negative_cases_caught -ne $true) {
+      Add-Failure "Visual Asset Eval v0.1 must catch every required negative case"
+    }
+    if ($visualAssetEval.image_binary_read_performed -ne $false -or $visualAssetEval.provider_call_performed -ne $false -or $visualAssetEval.image_generation_performed -ne $false -or $visualAssetEval.DailyNote_write_performed -ne $false -or $visualAssetEval.VCP_memory_write_performed -ne $false -or $visualAssetEval.runtime_call_performed -ne $false -or $visualAssetEval.secret_value_read_performed -ne $false -or $visualAssetEval.accepted_sample_created -ne $false -or $visualAssetEval.memory_seed_created -ne $false -or $visualAssetEval.production_candidate_created -ne $false -or $visualAssetEval.commit_performed -ne $false -or $visualAssetEval.push_performed -ne $false) {
+      Add-Failure "Visual Asset Eval v0.1 must not perform image, provider, generation, memory, runtime, secret, promotion, commit, or push actions"
     }
   }
 

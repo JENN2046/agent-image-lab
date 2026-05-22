@@ -5,10 +5,10 @@
 ## 当前产品主线恢复点
 
 ```yaml
-current_phase: v0_3_7c_push_l1_regression_usage_boundary_gate
+current_phase: v0_3_7d_visual_asset_eval_v0_1_gate
 phase_status: COMPLETED_VALIDATED
-source_phase: v0_3_7b_push_safety_lane_cycle_closeout
-current_goal: define_repeatable_Push_L1_usage_rules_and_regression_fixtures
+source_phase: v0_3_7c_push_l1_regression_usage_boundary_gate
+current_goal: define_visual_asset_eval_v0_1_review_report_contract
 long_term_goal: v0_3_controlled_real_provider_production_loop
 semantic_tightening_active: true
 current_boundary_semantics_cleanup_active: true
@@ -33,6 +33,7 @@ v0_3_7a_push_safety_lane_gate_active: true
 v0_3_7a_post_push_state_sync_active: true
 v0_3_7b_push_safety_lane_cycle_closeout_active: true
 v0_3_7c_push_l1_regression_usage_boundary_gate_active: true
+v0_3_7d_visual_asset_eval_v0_1_gate_active: true
 post_push_state:
   current_remote_head: f26e9478c94c7a3dcfc4ba93b6a3efac806ebece
   pushed_commit: f26e9478c94c7a3dcfc4ba93b6a3efac806ebece
@@ -5796,3 +5797,37 @@ daily_note_called: false
 - 不让子 Agent 直接批准核心风格记忆。
 - 不让 Review Console renderer 直接调用 DailyNote、插件、API 或文件写入。
 - 不把 `tested` 理解为真实执行授权。
+
+## v0.3.7d - Visual Asset Eval v0.1 Gate
+
+Status: local docs/schema/validator gate completed and validated.
+
+Purpose:
+
+- Return the 15-day plan to the visual production mainline after the first
+  Push_L1 cycle and regression boundary work.
+- Define the minimum review report contract that explains why a visual asset
+  passes, why it is rejected, which dimension failed, whether it is commercially
+  suitable, whether it can enter accepted_sample review, and whether it can
+  enter memory_seed review.
+
+Deliverables:
+
+- `docs/VISUAL_ASSET_EVAL_V0_1.md`
+- `schemas/visual_asset_review_report.schema.yaml`
+- `tests/schema_examples/visual_asset_review_report.example.json`
+- `scripts/validate_visual_asset_eval_v0_1.js`
+
+Boundaries:
+
+- `Push_L2_exercised: false`
+- `real_executor_implemented_now: false`
+- `provider_call_performed: false`
+- `image_generation_performed: false`
+- `DailyNote_write_performed: false`
+- `VCP_memory_write_performed: false`
+- `accepted_sample_auto_promotion: false`
+- `production_candidate_created: false`
+
+Recommended next: validate v0.3.7d locally, then prepare a guarded local commit
+review. Do not enter v0.3.8 from this gate.
