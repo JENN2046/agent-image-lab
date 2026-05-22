@@ -2,9 +2,57 @@
 
 本文是 Agent Image Lab 的总路线图，用来把 v0.2 基线、v0.3 授权门槛、MVP-B dry-run 和未来真实闭环串成一条可执行路径。
 
+## v0.4.5 - Visual Eval Consistency Check
+
+Status: local doc/schema/fixture/validator gate completed and pending local commit.
+
+Purpose:
+- Verify that review pack, failure taxonomy, prompt correction hints, and sample registry dry-run all describe the same asset contract.
+- Prove `same_asset_same_contract`, `memory_suitability_stays_false`, `accepted_sample_eligible_stays_false`, `production_candidate_eligible_stays_false`, and `failure_taxonomy_stable`.
+- Preserve the metadata-only, dry-run-only, no-provider, no-generation, no-memory, no-production, no-promotion boundary.
+
+Artifacts:
+- `docs/V0_4_5_VISUAL_EVAL_CONSISTENCY_CHECK.md`
+- `schemas/visual_eval_consistency_check.schema.yaml`
+- `tests/schema_examples/visual_eval_consistency_check.example.json`
+- `tests/schema_examples/visual_eval_consistency_check_fail.example.json`
+- `scripts/validate_visual_eval_consistency_check.js`
+
+Boundary state:
+- `source_local_commit: f444edf`
+- `source_remote_commit: 2f86f9b516b8113d099addf1bbb519b9a46a68fd`
+- `source_phase: v0_4_4_sample_registry_dry_run`
+- `current_gate_phase: v0_4_5_visual_eval_consistency_check`
+- `active current phase: v0_3_3_first_live_generation_pilot`
+- `resume_guard_source_phase: v0_3_2_live_candidate_action_packet`
+- `next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial`
+- `same_asset_same_contract: true`
+- `memory_suitability_stays_false: true`
+- `accepted_sample_eligible_stays_false: true`
+- `production_candidate_eligible_stays_false: true`
+- `failure_taxonomy_stable: true`
+- `metadata_only: true`
+- `dry_run_only: true`
+- `image_binary_read_performed: false`
+- `Push_L2_exercised: false`
+- `real_executor_implemented_now: false`
+- `provider_call_performed: false`
+- `image_generation_performed: false`
+- `runtime_call_performed: false`
+- `secret_value_read_performed: false`
+- `VCP_memory_write_performed: false`
+- `DailyNote_write_performed: false`
+- `production_candidate_created: false`
+- `accepted_sample_auto_promotion: false`
+- `memory_seed_promoted: false`
+- `package_dependency_change_performed: false`
+- `push_allowed: false`
+
+Recommended next: post-commit review and Push_L3 manual guarded push classification, then v0.4.6 No-op Visual Workflow Runner Plan.
+
 ## v0.4.4 - Sample Registry Dry Run
 
-Status: local doc/schema/report/fixture/validator gate completed and pending local commit.
+Status: local commit completed; push pending manual authorization.
 
 Purpose:
 - Establish accepted and rejected sample registry dry-run sections.
@@ -21,6 +69,8 @@ Artifacts:
 
 Boundary state:
 - `source_local_commit: 6e69e5927882ba72ab99216a235bfab0b729d9cb`
+- `local_commit: f444edf`
+- `push_performed: false`
 - `source_remote_commit: 2f86f9b516b8113d099addf1bbb519b9a46a68fd`
 - `source_phase: v0_4_3_review_to_prompt_correction_hint`
 - `current_gate_phase: v0_4_4_sample_registry_dry_run`

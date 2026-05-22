@@ -88,6 +88,7 @@ $requiredFiles = @(
   'scripts/validate_visual_failure_taxonomy.js',
   'scripts/validate_visual_prompt_correction_hints.js',
   'scripts/validate_visual_sample_registry_dry_run.js',
+  'scripts/validate_visual_eval_consistency_check.js',
   'scripts/validate_visual_sample_memory_policy.js',
   'scripts/validate_15_day_architecture_checkpoint.js',
   'scripts/validate_local_checkpoint_manifest.js',
@@ -12521,6 +12522,34 @@ process.exit(child.status || 0);
     }
     if ($visualSampleRegistryDryRun.Push_L2_exercised -ne $false -or $visualSampleRegistryDryRun.real_executor_implemented_now -ne $false -or $visualSampleRegistryDryRun.provider_call_performed -ne $false -or $visualSampleRegistryDryRun.image_generation_performed -ne $false -or $visualSampleRegistryDryRun.runtime_call_performed -ne $false -or $visualSampleRegistryDryRun.secret_value_read_performed -ne $false -or $visualSampleRegistryDryRun.memory_seed_promoted -ne $false -or $visualSampleRegistryDryRun.package_dependency_change_performed -ne $false -or $visualSampleRegistryDryRun.commit_performed -ne $false -or $visualSampleRegistryDryRun.push_performed -ne $false) {
       Add-Failure "Visual Sample Registry Dry Run must not perform Push_L2, executor, provider, image, runtime, secret, memory-seed, dependency, commit, or push actions"
+    }
+  }
+
+  $visualEvalConsistencyOutput = & node (Join-Path $Root 'scripts/validate_visual_eval_consistency_check.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Visual Eval Consistency Check validation exited with failure"
+  } else {
+    $visualEvalConsistency = ($visualEvalConsistencyOutput -join "`n") | ConvertFrom-Json
+    if ($visualEvalConsistency.passed -ne $true -or $visualEvalConsistency.phase -ne 'v0_4_5_visual_eval_consistency_check') {
+      Add-Failure "Visual Eval Consistency Check validation must pass"
+    }
+    if ($visualEvalConsistency.consistency_doc_present -ne $true -or $visualEvalConsistency.consistency_schema_present -ne $true -or $visualEvalConsistency.consistency_fixture_present -ne $true -or $visualEvalConsistency.consistency_fail_fixture_present -ne $true) {
+      Add-Failure "Visual Eval Consistency Check must define doc, schema, pass fixture, and fail fixture"
+    }
+    if ($visualEvalConsistency.source_review_pack_verified -ne $true -or $visualEvalConsistency.source_failure_taxonomy_verified -ne $true -or $visualEvalConsistency.source_prompt_correction_hint_verified -ne $true -or $visualEvalConsistency.source_sample_registry_dry_run_verified -ne $true) {
+      Add-Failure "Visual Eval Consistency Check must bind to review pack, taxonomy, prompt hints, and sample registry dry-run"
+    }
+    if ($visualEvalConsistency.same_asset_same_contract -ne $true -or $visualEvalConsistency.memory_suitability_stays_false -ne $true -or $visualEvalConsistency.accepted_sample_eligible_stays_false -ne $true -or $visualEvalConsistency.production_candidate_eligible_stays_false -ne $true -or $visualEvalConsistency.failure_taxonomy_stable -ne $true) {
+      Add-Failure "Visual Eval Consistency Check must preserve same asset contract, false eligibility flags, and stable taxonomy"
+    }
+    if ($visualEvalConsistency.negative_case_count -lt 26 -or $visualEvalConsistency.caught_negative_case_count -ne $visualEvalConsistency.negative_case_count -or $visualEvalConsistency.all_negative_cases_caught -ne $true -or $visualEvalConsistency.same_asset_mismatch_caught -ne $true -or $visualEvalConsistency.memory_suitability_drift_caught -ne $true -or $visualEvalConsistency.accepted_sample_eligible_drift_caught -ne $true -or $visualEvalConsistency.production_candidate_eligible_drift_caught -ne $true -or $visualEvalConsistency.failure_taxonomy_drift_caught -ne $true) {
+      Add-Failure "Visual Eval Consistency Check must catch every required negative case"
+    }
+    if ($visualEvalConsistency.metadata_only -ne $true -or $visualEvalConsistency.dry_run_only -ne $true -or $visualEvalConsistency.image_binary_read_performed -ne $false) {
+      Add-Failure "Visual Eval Consistency Check must remain metadata-only, dry-run-only, and avoid image binary reads"
+    }
+    if ($visualEvalConsistency.Push_L2_exercised -ne $false -or $visualEvalConsistency.real_executor_implemented_now -ne $false -or $visualEvalConsistency.provider_call_performed -ne $false -or $visualEvalConsistency.image_generation_performed -ne $false -or $visualEvalConsistency.runtime_call_performed -ne $false -or $visualEvalConsistency.secret_value_read_performed -ne $false -or $visualEvalConsistency.VCP_memory_write_performed -ne $false -or $visualEvalConsistency.DailyNote_write_performed -ne $false -or $visualEvalConsistency.production_candidate_created -ne $false -or $visualEvalConsistency.accepted_sample_auto_promotion -ne $false -or $visualEvalConsistency.memory_seed_promoted -ne $false -or $visualEvalConsistency.package_dependency_change_performed -ne $false -or $visualEvalConsistency.commit_performed -ne $false -or $visualEvalConsistency.push_performed -ne $false) {
+      Add-Failure "Visual Eval Consistency Check must not perform Push_L2, executor, provider, image, runtime, secret, memory, DailyNote, production, accepted-sample, memory-seed, dependency, commit, or push actions"
     }
   }
 

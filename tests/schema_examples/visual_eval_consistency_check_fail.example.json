@@ -1,0 +1,78 @@
+{
+  "visual_eval_consistency_check": {
+    "consistency_check_id": "visual_eval_consistency_v0_4_5_fail",
+    "version": "v0_1",
+    "phase": "v0_4_5_visual_eval_consistency_check",
+    "consistency_mode": "dry_run_metadata_consistency",
+    "source_review_pack_ref": "reports/visual_asset_eval_dry_run/v0_4_1_safe_portrait_review_pack.json",
+    "source_failure_taxonomy_ref": "tests/schema_examples/visual_failure_taxonomy.example.json",
+    "source_prompt_correction_hint_ref": "tests/schema_examples/visual_prompt_correction_hint.example.json",
+    "source_sample_registry_dry_run_ref": "reports/visual_asset_eval_dry_run/v0_4_4_sample_registry_dry_run.json",
+    "checked_asset": {
+      "asset_id": "visual-asset-v0-3-3-safe-portrait-001-png",
+      "review_pack_asset_id": "different-asset",
+      "accepted_registry_asset_id": "visual-asset-v0-3-3-safe-portrait-001-png",
+      "rejected_registry_asset_id": "visual-asset-v0-3-3-safe-portrait-001-png",
+      "same_asset_same_contract": false
+    },
+    "invariants": {
+      "same_asset_same_contract": false,
+      "memory_suitability_stays_false": false,
+      "accepted_sample_eligible_stays_false": false,
+      "production_candidate_eligible_stays_false": false,
+      "failure_taxonomy_stable": false
+    },
+    "stable_failure_taxonomy": [
+      "composition_failure",
+      "lighting_failure",
+      "unknown_failure"
+    ],
+    "source_contract_snapshot": {
+      "review_pack_result": "accepted",
+      "review_pack_memory_suitability_value": true,
+      "review_pack_accepted_sample_eligible": true,
+      "review_pack_production_candidate_eligible": true,
+      "sample_registry_accepted_sample_eligible": true,
+      "sample_registry_actual_accepted_sample_created": true,
+      "sample_registry_actual_rejected_sample_created": true,
+      "sample_registry_accepted_sample_promotion": true,
+      "sample_registry_memory_write_performed": true,
+      "sample_registry_daily_note_write_performed": true,
+      "sample_registry_production_candidate_created": true,
+      "prompt_hint_generation_action_allowed": true
+    },
+    "boundaries": {
+      "metadata_only": true,
+      "dry_run_only": true,
+      "image_binary_read_performed": false,
+      "provider_call_performed": true,
+      "image_generation_performed": true,
+      "VCP_memory_write_performed": true,
+      "DailyNote_write_performed": true,
+      "runtime_call_performed": true,
+      "secret_value_read_performed": true,
+      "production_candidate_created": true,
+      "accepted_sample_auto_promotion": true,
+      "memory_seed_promoted": true,
+      "real_executor_implemented_now": true,
+      "Push_L2_exercised": true,
+      "package_dependency_change_performed": true,
+      "commit_performed": true,
+      "push_performed": true
+    },
+    "side_effects": {
+      "provider_call_performed": true,
+      "image_generation_performed": true,
+      "VCP_memory_write_performed": true,
+      "DailyNote_write_performed": true,
+      "runtime_call_performed": true,
+      "secret_value_read_performed": true,
+      "production_candidate_created": true,
+      "accepted_sample_auto_promotion": true,
+      "memory_seed_promoted": true,
+      "package_dependency_change_performed": true,
+      "commit_performed": true,
+      "push_performed": true
+    }
+  }
+}

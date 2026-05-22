@@ -1,0 +1,116 @@
+schema_id: visual_eval_consistency_check_v0_1
+phase: v0_4_5_visual_eval_consistency_check
+type: object
+required:
+  - visual_eval_consistency_check
+properties:
+  visual_eval_consistency_check:
+    type: object
+    required:
+      - consistency_check_id
+      - version
+      - phase
+      - consistency_mode
+      - source_review_pack_ref
+      - source_failure_taxonomy_ref
+      - source_prompt_correction_hint_ref
+      - source_sample_registry_dry_run_ref
+      - checked_asset
+      - invariants
+      - stable_failure_taxonomy
+      - source_contract_snapshot
+      - boundaries
+      - side_effects
+    properties:
+      consistency_check_id:
+        type: string
+      version:
+        const: v0_1
+      phase:
+        const: v0_4_5_visual_eval_consistency_check
+      consistency_mode:
+        const: dry_run_metadata_consistency
+      source_review_pack_ref:
+        const: reports/visual_asset_eval_dry_run/v0_4_1_safe_portrait_review_pack.json
+      source_failure_taxonomy_ref:
+        const: tests/schema_examples/visual_failure_taxonomy.example.json
+      source_prompt_correction_hint_ref:
+        const: tests/schema_examples/visual_prompt_correction_hint.example.json
+      source_sample_registry_dry_run_ref:
+        const: reports/visual_asset_eval_dry_run/v0_4_4_sample_registry_dry_run.json
+      checked_asset:
+        type: object
+        required:
+          - asset_id
+          - review_pack_asset_id
+          - accepted_registry_asset_id
+          - rejected_registry_asset_id
+          - same_asset_same_contract
+        properties:
+          same_asset_same_contract:
+            const: true
+      invariants:
+        type: object
+        required:
+          - same_asset_same_contract
+          - memory_suitability_stays_false
+          - accepted_sample_eligible_stays_false
+          - production_candidate_eligible_stays_false
+          - failure_taxonomy_stable
+        properties:
+          same_asset_same_contract:
+            const: true
+          memory_suitability_stays_false:
+            const: true
+          accepted_sample_eligible_stays_false:
+            const: true
+          production_candidate_eligible_stays_false:
+            const: true
+          failure_taxonomy_stable:
+            const: true
+      stable_failure_taxonomy:
+        type: array
+        items:
+          enum:
+            - composition_failure
+            - lighting_failure
+            - material_realism_failure
+            - product_fidelity_failure
+            - commercial_fitness_failure
+            - ai_artifact_failure
+            - registry_or_provenance_mismatch
+      boundaries:
+        type: object
+        required:
+          - metadata_only
+          - dry_run_only
+          - image_binary_read_performed
+          - provider_call_performed
+          - image_generation_performed
+          - VCP_memory_write_performed
+          - DailyNote_write_performed
+          - runtime_call_performed
+          - secret_value_read_performed
+          - production_candidate_created
+          - accepted_sample_auto_promotion
+          - memory_seed_promoted
+          - real_executor_implemented_now
+          - Push_L2_exercised
+          - package_dependency_change_performed
+          - commit_performed
+          - push_performed
+      side_effects:
+        type: object
+        required:
+          - provider_call_performed
+          - image_generation_performed
+          - VCP_memory_write_performed
+          - DailyNote_write_performed
+          - runtime_call_performed
+          - secret_value_read_performed
+          - production_candidate_created
+          - accepted_sample_auto_promotion
+          - memory_seed_promoted
+          - package_dependency_change_performed
+          - commit_performed
+          - push_performed

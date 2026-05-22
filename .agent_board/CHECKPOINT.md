@@ -27641,3 +27641,62 @@ hard_stop_flags:
   production_candidate_write_performed: false
 recommended_next: asset_hash_dimensions_verification_A5_requires_separate_authorization
 ```
+---
+
+## Checkpoint - v0.4.5 Visual Eval Consistency Check
+
+```text
+phase: v0_4_5_visual_eval_consistency_check
+phase_id: v0_4_5_visual_eval_consistency_check
+status: completed_validated_pending_local_commit
+mode: Green Lane doc/schema/fixture/validator/status compact batch
+source_local_commit: f444edf
+source_remote_commit: 2f86f9b516b8113d099addf1bbb519b9a46a68fd
+source_phase: v0_4_4_sample_registry_dry_run
+previous_phase_commit: f444edf
+previous_phase_push_performed: false
+current_gate_phase: v0_4_5_visual_eval_consistency_check
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+completed:
+- created Visual Eval Consistency Check doc
+- created visual_eval_consistency_check schema
+- created pass/fail consistency fixtures
+- created validator with source drift, asset mismatch, eligibility drift, taxonomy drift, side-effect, path, and secret negative cases
+- wired the validator into MVP and exact-slice governance helper
+changed:
+- docs/V0_4_5_VISUAL_EVAL_CONSISTENCY_CHECK.md
+- schemas/visual_eval_consistency_check.schema.yaml
+- tests/schema_examples/visual_eval_consistency_check.example.json
+- tests/schema_examples/visual_eval_consistency_check_fail.example.json
+- scripts/validate_visual_eval_consistency_check.js
+- scripts/validate_mvp.ps1
+- scripts/lib/governance_tooling_maintenance_slice.js
+- docs/00_project_roadmap.md
+- .agent_board resume surfaces
+same_asset_same_contract: true
+memory_suitability_stays_false: true
+accepted_sample_eligible_stays_false: true
+production_candidate_eligible_stays_false: true
+failure_taxonomy_stable: true
+metadata_only: true
+dry_run_only: true
+image_binary_read_performed: false
+Push_L2_exercised: false
+real_executor_implemented_now: false
+provider_call_performed: false
+image_generation_performed: false
+runtime_call_performed: false
+secret_value_read_performed: false
+VCP_memory_write_performed: false
+DailyNote_write_performed: false
+production_candidate_created: false
+accepted_sample_auto_promotion: false
+memory_seed_promoted: false
+package_dependency_change_performed: false
+push_allowed: false
+commit_performed: pending
+push_performed: false
+recommended_next: post_commit_review_and_push_lane_classification_then_v0_4_6_noop_runner_plan
+```
