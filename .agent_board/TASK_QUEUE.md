@@ -1,5 +1,48 @@
 ---
 
+- [x] ID: v0_5_7_noop_controlled_generation_runner_dry_run
+      Title: Define No-op Controlled Generation Runner Dry Run
+      Reason: The controlled-generation route needs a no-op runner that only emits would_generate, would_review, and would_stop before any real generation can ever be requested.
+      Lane: Green.
+      Status: completed_validated_pending_local_commit.
+      Source local commit: 1432170ac6b88ac333c4a2ab522525127ae52529.
+      Source remote commit: 51f4674d707ed17d3d6fcda55dddea10f8b0533c.
+      Source phase: v0_5_6_human_review_gate_packet.
+      Previous phase commit: 1432170ac6b88ac333c4a2ab522525127ae52529.
+      Previous phase push performed: false.
+      Current gate phase: v0_5_7_noop_controlled_generation_runner_dry_run.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Scope: doc/schema/report/fixture/validator/status compact batch only.
+      Changed: docs/V0_5_7_NOOP_CONTROLLED_GENERATION_RUNNER_DRY_RUN.md; schemas/noop_controlled_generation_runner_dry_run.schema.yaml; reports/visual_asset_eval_dry_run/v0_5_7_noop_controlled_generation_runner_dry_run.json; tests/schema_examples/noop_controlled_generation_runner_dry_run.example.json; tests/schema_examples/noop_controlled_generation_runner_dry_run_fail.example.json; scripts/validate_noop_controlled_generation_runner_dry_run.js; scripts/validate_mvp.ps1; scripts/lib/governance_tooling_maintenance_slice.js; docs/00_project_roadmap.md; .agent_board resume surfaces.
+      would_generate: true.
+      would_review: true.
+      would_stop: true.
+      actual_generation_calls_zero: true.
+      metadata_only: true.
+      dry_run_only: true.
+      noop_runner_only: true.
+      Push_L2_exercised: false.
+      real_executor_implemented_now: false.
+      provider_call_performed: false.
+      image_generation_performed: false.
+      VCP_memory_write_performed: false.
+      DailyNote_write_performed: false.
+      runtime_call_performed: false.
+      secret_value_read_performed: false.
+      production_candidate_created: false.
+      accepted_sample_auto_promotion: false.
+      memory_seed_promoted: false.
+      package_dependency_change_performed: false.
+      push_allowed: false.
+      commit_performed: pending.
+      push_performed: false.
+      Stop condition: provider call, image generation, memory write, DailyNote write, runtime/VCPToolBox/VCPChat/CDP/bridge/MCP action, real executor implementation, Push_L2 test, accepted_sample promotion, production_candidate creation, memory_seed promotion, dependency change, secret read, git add ., push, tag, release, deploy, or validation failure requiring judgment.
+      Recommended next: post-commit review and Push_L3 manual guarded push classification, then v0.5.8 Controlled Generation Evidence Contract.
+
+---
+
 - [x] ID: v0_5_6_human_review_gate_packet
       Title: Define Human Review Gate Packet
       Reason: The controlled-generation route needs a fail-closed human review packet that names the reviewer requirement, approval scope, call cap, output policy, stop conditions, and memory defaults before any real generation can be requested.

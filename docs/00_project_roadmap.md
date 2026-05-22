@@ -2,6 +2,50 @@
 
 本文是 Agent Image Lab 的总路线图，用来把 v0.2 基线、v0.3 授权门槛、MVP-B dry-run 和未来真实闭环串成一条可执行路径。
 
+## v0.5.7 - No-op Controlled Generation Runner Dry Run
+
+Status: completed_validated_pending_local_commit.
+
+Purpose:
+- Define a no-op controlled generation runner dry run.
+- Emit only `would_generate`, `would_review`, and `would_stop`.
+- Keep real generation, review writing, and executor stop actions at `0`.
+
+Artifacts:
+- `docs/V0_5_7_NOOP_CONTROLLED_GENERATION_RUNNER_DRY_RUN.md`
+- `schemas/noop_controlled_generation_runner_dry_run.schema.yaml`
+- `reports/visual_asset_eval_dry_run/v0_5_7_noop_controlled_generation_runner_dry_run.json`
+- `tests/schema_examples/noop_controlled_generation_runner_dry_run.example.json`
+- `tests/schema_examples/noop_controlled_generation_runner_dry_run_fail.example.json`
+- `scripts/validate_noop_controlled_generation_runner_dry_run.js`
+
+Boundary state:
+- `source_local_commit: 1432170`
+- `source_remote_commit: 51f4674`
+- `source_phase: v0_5_6_human_review_gate_packet`
+- `current_gate_phase: v0_5_7_noop_controlled_generation_runner_dry_run`
+- `active current phase: v0_3_3_first_live_generation_pilot`
+- `resume_guard_source_phase: v0_3_2_live_candidate_action_packet`
+- `next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial`
+- `would_generate: true`
+- `would_review: true`
+- `would_stop: true`
+- `actual_generation_calls_zero: true`
+- `provider_call_performed: false`
+- `image_generation_performed: false`
+- `runtime_call_performed: false`
+- `secret_value_read_performed: false`
+- `VCP_memory_write_performed: false`
+- `DailyNote_write_performed: false`
+- `production_candidate_created: false`
+- `accepted_sample_auto_promotion: false`
+- `memory_seed_promoted: false`
+- `Push_L2_exercised: false`
+- `real_executor_implemented_now: false`
+- `push_allowed: false`
+
+Recommended next: local commit, post-commit review, and Push_L3 manual guarded push classification, then v0.5.8 Controlled Generation Evidence Contract.
+
 ## v0.5.6 - Human Review Gate Packet
 
 Status: completed_validated_pending_local_commit.

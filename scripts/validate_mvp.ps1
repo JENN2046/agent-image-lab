@@ -100,6 +100,7 @@ $requiredFiles = @(
   'scripts/validate_next_15_day_visual_workflow_checkpoint.js',
   'scripts/validate_controlled_generation_readiness_semantics_hardening.js',
   'scripts/validate_human_review_gate_packet.js',
+  'scripts/validate_noop_controlled_generation_runner_dry_run.js',
   'scripts/validate_visual_sample_memory_policy.js',
   'scripts/validate_15_day_architecture_checkpoint.js',
   'scripts/validate_local_checkpoint_manifest.js',
@@ -12879,6 +12880,34 @@ process.exit(child.status || 0);
     }
     if ($humanReviewGatePacket.Push_L2_exercised -ne $false -or $humanReviewGatePacket.real_executor_implemented_now -ne $false -or $humanReviewGatePacket.provider_call_performed -ne $false -or $humanReviewGatePacket.image_generation_performed -ne $false -or $humanReviewGatePacket.VCP_memory_write_performed -ne $false -or $humanReviewGatePacket.DailyNote_write_performed -ne $false -or $humanReviewGatePacket.runtime_call_performed -ne $false -or $humanReviewGatePacket.secret_value_read_performed -ne $false -or $humanReviewGatePacket.production_candidate_created -ne $false -or $humanReviewGatePacket.accepted_sample_auto_promotion -ne $false -or $humanReviewGatePacket.memory_seed_promoted -ne $false -or $humanReviewGatePacket.package_dependency_change_performed -ne $false -or $humanReviewGatePacket.commit_performed -ne $false -or $humanReviewGatePacket.push_performed -ne $false) {
       Add-Failure "Human Review Gate Packet must not perform Push_L2, executor, provider, image, runtime, secret, memory, DailyNote, production, accepted-sample, memory-seed, dependency, commit, or push actions"
+    }
+  }
+
+  $noopControlledGenerationRunnerOutput = & node (Join-Path $Root 'scripts/validate_noop_controlled_generation_runner_dry_run.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "No-op Controlled Generation Runner Dry Run validation exited with failure"
+  } else {
+    $noopControlledGenerationRunner = ($noopControlledGenerationRunnerOutput -join "`n") | ConvertFrom-Json
+    if ($noopControlledGenerationRunner.passed -ne $true -or $noopControlledGenerationRunner.phase -ne 'v0_5_7_noop_controlled_generation_runner_dry_run') {
+      Add-Failure "No-op Controlled Generation Runner Dry Run validation must pass"
+    }
+    if ($noopControlledGenerationRunner.runner_doc_present -ne $true -or $noopControlledGenerationRunner.runner_schema_present -ne $true -or $noopControlledGenerationRunner.runner_report_present -ne $true -or $noopControlledGenerationRunner.runner_fixture_present -ne $true -or $noopControlledGenerationRunner.runner_fail_fixture_present -ne $true) {
+      Add-Failure "No-op Controlled Generation Runner Dry Run must define doc, schema, report, pass fixture, and fail fixture"
+    }
+    if ($noopControlledGenerationRunner.source_prompt_package_preview_verified -ne $true -or $noopControlledGenerationRunner.source_readiness_semantics_verified -ne $true -or $noopControlledGenerationRunner.source_review_gate_packet_verified -ne $true) {
+      Add-Failure "No-op Controlled Generation Runner Dry Run must bind to prompt preview, readiness semantics, and review gate packet"
+    }
+    if ($noopControlledGenerationRunner.would_generate -ne $true -or $noopControlledGenerationRunner.would_review -ne $true -or $noopControlledGenerationRunner.would_stop -ne $true -or $noopControlledGenerationRunner.actual_generation_calls_zero -ne $true) {
+      Add-Failure "No-op Controlled Generation Runner Dry Run must emit would_generate/would_review/would_stop while keeping actual generation calls at zero"
+    }
+    if ($noopControlledGenerationRunner.negative_case_count -lt 20 -or $noopControlledGenerationRunner.caught_negative_case_count -ne $noopControlledGenerationRunner.negative_case_count -or $noopControlledGenerationRunner.all_negative_cases_caught -ne $true -or $noopControlledGenerationRunner.runner_mode_guard_caught -ne $true -or $noopControlledGenerationRunner.would_generate_guard_caught -ne $true -or $noopControlledGenerationRunner.would_review_guard_caught -ne $true -or $noopControlledGenerationRunner.would_stop_guard_caught -ne $true -or $noopControlledGenerationRunner.provider_call_caught -ne $true -or $noopControlledGenerationRunner.image_generation_caught -ne $true -or $noopControlledGenerationRunner.memory_write_caught -ne $true -or $noopControlledGenerationRunner.runtime_call_caught -ne $true -or $noopControlledGenerationRunner.raw_local_path_caught -ne $true) {
+      Add-Failure "No-op Controlled Generation Runner Dry Run must catch every required negative case"
+    }
+    if ($noopControlledGenerationRunner.metadata_only -ne $true -or $noopControlledGenerationRunner.dry_run_only -ne $true -or $noopControlledGenerationRunner.noop_runner_only -ne $true) {
+      Add-Failure "No-op Controlled Generation Runner Dry Run must remain metadata-only, dry-run-only, and no-op-runner-only"
+    }
+    if ($noopControlledGenerationRunner.Push_L2_exercised -ne $false -or $noopControlledGenerationRunner.real_executor_implemented_now -ne $false -or $noopControlledGenerationRunner.provider_call_performed -ne $false -or $noopControlledGenerationRunner.image_generation_performed -ne $false -or $noopControlledGenerationRunner.VCP_memory_write_performed -ne $false -or $noopControlledGenerationRunner.DailyNote_write_performed -ne $false -or $noopControlledGenerationRunner.runtime_call_performed -ne $false -or $noopControlledGenerationRunner.secret_value_read_performed -ne $false -or $noopControlledGenerationRunner.production_candidate_created -ne $false -or $noopControlledGenerationRunner.accepted_sample_auto_promotion -ne $false -or $noopControlledGenerationRunner.memory_seed_promoted -ne $false -or $noopControlledGenerationRunner.package_dependency_change_performed -ne $false -or $noopControlledGenerationRunner.commit_performed -ne $false -or $noopControlledGenerationRunner.push_performed -ne $false) {
+      Add-Failure "No-op Controlled Generation Runner Dry Run must not perform Push_L2, executor, provider, image, runtime, secret, memory, DailyNote, production, accepted-sample, memory-seed, dependency, commit, or push actions"
     }
   }
 

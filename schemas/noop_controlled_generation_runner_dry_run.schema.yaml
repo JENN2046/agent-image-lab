@@ -1,0 +1,35 @@
+id: noop_controlled_generation_runner_dry_run
+version: v0_1
+phase: v0_5_7_noop_controlled_generation_runner_dry_run
+type: object
+required:
+  - runner_dry_run_id
+  - version
+  - phase
+  - source_prompt_package_preview_ref
+  - source_readiness_semantics_ref
+  - source_review_gate_packet_ref
+  - runner_mode
+  - allowed_noop_outputs
+  - selected_dry_run_sequence
+  - would_generate
+  - would_review
+  - would_stop
+  - boundaries
+  - side_effects
+properties:
+  would_generate:
+    required:
+      - emit
+      - actual_generation_call_performed
+      - provider_dispatch_allowed
+  would_review:
+    required:
+      - emit
+      - actual_review_report_written
+      - human_review_required_before_execution
+  would_stop:
+    required:
+      - emit
+      - actual_executor_stop_performed
+      - stop_reason

@@ -597,6 +597,23 @@ const EXPECTED_V0_5_6_HUMAN_REVIEW_GATE_PACKET_SLICE = [
   "tests/schema_examples/human_review_gate_packet_fail.example.json"
 ].sort();
 
+const EXPECTED_V0_5_7_NOOP_CONTROLLED_GENERATION_RUNNER_DRY_RUN_SLICE = [
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  ".agent_board/VALIDATION_LOG.md",
+  "docs/00_project_roadmap.md",
+  "docs/V0_5_7_NOOP_CONTROLLED_GENERATION_RUNNER_DRY_RUN.md",
+  "reports/visual_asset_eval_dry_run/v0_5_7_noop_controlled_generation_runner_dry_run.json",
+  "schemas/noop_controlled_generation_runner_dry_run.schema.yaml",
+  "scripts/lib/governance_tooling_maintenance_slice.js",
+  "scripts/validate_noop_controlled_generation_runner_dry_run.js",
+  "scripts/validate_mvp.ps1",
+  "tests/schema_examples/noop_controlled_generation_runner_dry_run.example.json",
+  "tests/schema_examples/noop_controlled_generation_runner_dry_run_fail.example.json"
+].sort();
+
 const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "governance_tooling_maintenance_slice_v1",
@@ -733,6 +750,10 @@ const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "v0_5_6_human_review_gate_packet_slice",
     files: EXPECTED_V0_5_6_HUMAN_REVIEW_GATE_PACKET_SLICE
+  },
+  {
+    id: "v0_5_7_noop_controlled_generation_runner_dry_run_slice",
+    files: EXPECTED_V0_5_7_NOOP_CONTROLLED_GENERATION_RUNNER_DRY_RUN_SLICE
   }
 ];
 
@@ -1111,6 +1132,7 @@ module.exports = {
   EXPECTED_V0_5_4_NEXT_15_DAY_VISUAL_WORKFLOW_CHECKPOINT_SLICE,
   EXPECTED_V0_5_5_CONTROLLED_GENERATION_READINESS_SEMANTICS_HARDENING_SLICE,
   EXPECTED_V0_5_6_HUMAN_REVIEW_GATE_PACKET_SLICE,
+  EXPECTED_V0_5_7_NOOP_CONTROLLED_GENERATION_RUNNER_DRY_RUN_SLICE,
   GOVERNANCE_TOOLING_ALLOWED_SLICES,
   buildGovernanceToolingMaintenanceSliceReport,
   fileAllowedInGovernanceToolingSlice,
