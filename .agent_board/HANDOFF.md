@@ -1,5 +1,48 @@
 ---
 
+## Current Handoff Update - v0.4.2 Visual Failure Taxonomy
+
+```text
+phase: v0_4_2_visual_failure_taxonomy
+phase_id: v0_4_2_visual_failure_taxonomy
+status: completed_validated_pending_local_commit
+mode: Green Lane doc/schema/fixture/validator/status compact batch
+summary: Defines the seven required visual failure categories and validates them against the v0.4.1 metadata-only review pack without image binary reads or promotions.
+source_local_commit: 6fe35c72359640e985beb409ceec50fef6f7b351
+source_remote_commit: 2f86f9b516b8113d099addf1bbb519b9a46a68fd
+source_phase: v0_4_1_visual_asset_review_pack
+previous_phase_commit: 6fe35c72359640e985beb409ceec50fef6f7b351
+previous_phase_push_performed: false
+current_gate_phase: v0_4_2_visual_failure_taxonomy
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+changed: docs/V0_4_2_VISUAL_FAILURE_TAXONOMY.md; schemas/visual_failure_taxonomy.schema.yaml; tests/schema_examples/visual_failure_taxonomy.example.json; tests/schema_examples/visual_failure_taxonomy_fail.example.json; scripts/validate_visual_failure_taxonomy.js; scripts/validate_mvp.ps1; scripts/lib/governance_tooling_maintenance_slice.js; docs/00_project_roadmap.md; .agent_board resume surfaces.
+required_category_count: 7
+exact_required_categories_defined: true
+source_review_pack_verified: true
+metadata_only: true
+image_binary_read_performed: false
+Push_L2_exercised: false
+real_executor_implemented_now: false
+provider_call_performed: false
+image_generation_performed: false
+VCP_memory_write_performed: false
+DailyNote_write_performed: false
+runtime_call_performed: false
+secret_value_read_performed: false
+production_candidate_created: false
+accepted_sample_auto_promotion: false
+memory_seed_promoted: false
+package_dependency_change_performed: false
+push_allowed: false
+commit_performed: pending
+push_performed: false
+recommended_next: post_commit_review_and_push_lane_classification_then_v0_4_3_prompt_correction_hint
+```
+
+---
+
 ## Current Handoff Update - v0.4.1 Visual Asset Review Pack
 
 ```text

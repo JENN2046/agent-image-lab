@@ -1,0 +1,213 @@
+{
+  "visual_failure_taxonomy": {
+    "taxonomy_id": "visual_failure_taxonomy_v0_4_2",
+    "version": "v0_1",
+    "phase": "v0_4_2_visual_failure_taxonomy",
+    "source_review_pack_ref": "reports/visual_asset_eval_dry_run/v0_4_1_safe_portrait_review_pack.json",
+    "required_categories": [
+      "composition_failure",
+      "lighting_failure",
+      "material_realism_failure",
+      "product_fidelity_failure",
+      "commercial_fitness_failure",
+      "ai_artifact_failure",
+      "registry_or_provenance_mismatch"
+    ],
+    "categories": [
+      {
+        "category_id": "composition_failure",
+        "definition": "The image arrangement, crop, focal hierarchy, or visual balance makes the asset hard to use or review.",
+        "applies_to_dimensions": [
+          "composition"
+        ],
+        "severity_scale": [
+          "minor",
+          "moderate",
+          "major",
+          "blocking"
+        ],
+        "dry_run_detection_signals": [
+          "composition score below review threshold",
+          "reviewer notes unclear subject hierarchy"
+        ],
+        "reviewer_question": "Does the composition clearly present the intended subject and use case?",
+        "correction_hint_bridge": {
+          "prompt_constraint_candidate": "state the intended framing, focal subject, and negative space requirement",
+          "avoid_fragment_candidate": "ambiguous framing or competing focal subjects",
+          "future_phase": "v0_4_3_review_to_prompt_correction_hint"
+        }
+      },
+      {
+        "category_id": "lighting_failure",
+        "definition": "The lighting direction, contrast, exposure, or shadow behavior undermines readability or realism.",
+        "applies_to_dimensions": [
+          "lighting"
+        ],
+        "severity_scale": [
+          "minor",
+          "moderate",
+          "major",
+          "blocking"
+        ],
+        "dry_run_detection_signals": [
+          "lighting score below review threshold",
+          "reviewer notes inconsistent or unusable illumination"
+        ],
+        "reviewer_question": "Does the lighting support the asset purpose without hiding important details?",
+        "correction_hint_bridge": {
+          "prompt_constraint_candidate": "specify controlled, coherent lighting with readable subject detail",
+          "avoid_fragment_candidate": "uncontrolled harsh shadows or mixed lighting",
+          "future_phase": "v0_4_3_review_to_prompt_correction_hint"
+        }
+      },
+      {
+        "category_id": "material_realism_failure",
+        "definition": "Surface texture, material behavior, or physical plausibility does not look credible enough for review.",
+        "applies_to_dimensions": [
+          "material_realism"
+        ],
+        "severity_scale": [
+          "minor",
+          "moderate",
+          "major",
+          "blocking"
+        ],
+        "dry_run_detection_signals": [
+          "material realism score below review threshold",
+          "reviewer notes plastic, melted, or physically inconsistent surfaces"
+        ],
+        "reviewer_question": "Do materials behave like the intended real-world surfaces?",
+        "correction_hint_bridge": {
+          "prompt_constraint_candidate": "name the material, finish, texture, and realism expectation",
+          "avoid_fragment_candidate": "vague premium material language without physical detail",
+          "future_phase": "v0_4_3_review_to_prompt_correction_hint"
+        }
+      },
+      {
+        "category_id": "product_fidelity_failure",
+        "definition": "The asset does not preserve expected product, subject, or brand-critical details.",
+        "applies_to_dimensions": [
+          "product_fidelity"
+        ],
+        "severity_scale": [
+          "minor",
+          "moderate",
+          "major",
+          "blocking"
+        ],
+        "dry_run_detection_signals": [
+          "product fidelity score below review threshold",
+          "reviewer notes missing, distorted, or substituted product details"
+        ],
+        "reviewer_question": "Does the asset preserve the intended product or subject identity?",
+        "correction_hint_bridge": {
+          "prompt_constraint_candidate": "lock key product attributes and forbid substitutions",
+          "avoid_fragment_candidate": "generic object wording that permits identity drift",
+          "future_phase": "v0_4_3_review_to_prompt_correction_hint"
+        }
+      },
+      {
+        "category_id": "commercial_fitness_failure",
+        "definition": "The asset is not suitable for the intended commercial, editorial, or reusable production context.",
+        "applies_to_dimensions": [
+          "commercial_fitness"
+        ],
+        "severity_scale": [
+          "minor",
+          "moderate",
+          "major",
+          "blocking"
+        ],
+        "dry_run_detection_signals": [
+          "commercial fitness score below review threshold",
+          "reviewer notes unclear use case, weak polish, or unsuitable presentation"
+        ],
+        "reviewer_question": "Can this asset plausibly support the intended commercial or review use?",
+        "correction_hint_bridge": {
+          "prompt_constraint_candidate": "state the target use, polish level, and production context",
+          "avoid_fragment_candidate": "unclear usage context or low-polish styling",
+          "future_phase": "v0_4_3_review_to_prompt_correction_hint"
+        }
+      },
+      {
+        "category_id": "ai_artifact_failure",
+        "definition": "Visible synthetic artifacts, anatomical errors, object corruption, text-like noise, or model hallucinations reduce trust.",
+        "applies_to_dimensions": [
+          "ai_artifact_risk"
+        ],
+        "severity_scale": [
+          "minor",
+          "moderate",
+          "major",
+          "blocking"
+        ],
+        "dry_run_detection_signals": [
+          "ai artifact risk score indicates review concern",
+          "reviewer notes hallucinated details, distorted edges, or synthetic residue"
+        ],
+        "reviewer_question": "Are there AI artifacts that would block reuse or require a new generation attempt?",
+        "correction_hint_bridge": {
+          "prompt_constraint_candidate": "require clean edges, plausible anatomy or object geometry, and no text-like noise",
+          "avoid_fragment_candidate": "overly ornate detail clusters that invite hallucination",
+          "future_phase": "v0_4_3_review_to_prompt_correction_hint"
+        }
+      },
+      {
+        "category_id": "registry_or_provenance_mismatch",
+        "definition": "The review pack, registry entry, receipt, attempt result, or dry-run record disagree about identity, class, provenance, or boundary flags.",
+        "applies_to_dimensions": [
+          "provenance"
+        ],
+        "severity_scale": [
+          "minor",
+          "moderate",
+          "major",
+          "blocking"
+        ],
+        "dry_run_detection_signals": [
+          "asset id, task id, receipt path, attempt path, or asset_class mismatch",
+          "side-effect or promotion boundary drift"
+        ],
+        "reviewer_question": "Do all metadata records prove the same asset identity and non-promotion boundary?",
+        "correction_hint_bridge": {
+          "prompt_constraint_candidate": "do not generate; repair metadata binding before any prompt correction",
+          "avoid_fragment_candidate": "continuing from mismatched provenance",
+          "future_phase": "v0_4_3_review_to_prompt_correction_hint"
+        }
+      }
+    ],
+    "taxonomy_boundaries": {
+      "metadata_only": true,
+      "source_review_pack_required": true,
+      "image_binary_read_performed": false,
+      "provider_call_performed": false,
+      "image_generation_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "runtime_call_performed": false,
+      "secret_value_read_performed": false,
+      "accepted_sample_auto_promotion": false,
+      "production_candidate_created": false,
+      "memory_seed_promoted": false,
+      "real_executor_implemented_now": false,
+      "Push_L2_exercised": false,
+      "package_dependency_change_performed": false,
+      "commit_performed": false,
+      "push_performed": false
+    },
+    "side_effects": {
+      "provider_call_performed": false,
+      "image_generation_performed": false,
+      "VCP_memory_write_performed": false,
+      "DailyNote_write_performed": false,
+      "runtime_call_performed": false,
+      "secret_value_read_performed": false,
+      "production_candidate_created": false,
+      "accepted_sample_auto_promotion": false,
+      "memory_seed_promoted": false,
+      "package_dependency_change_performed": false,
+      "commit_performed": false,
+      "push_performed": false
+    }
+  }
+}

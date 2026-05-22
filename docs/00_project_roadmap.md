@@ -2,9 +2,54 @@
 
 本文是 Agent Image Lab 的总路线图，用来把 v0.2 基线、v0.3 授权门槛、MVP-B dry-run 和未来真实闭环串成一条可执行路径。
 
+## v0.4.2 - Visual Failure Taxonomy
+
+Status: local doc/schema/fixture/validator gate completed and pending local commit.
+
+Purpose:
+- Define the seven required visual failure categories for the reusable judgment loop.
+- Bind the taxonomy to the v0.4.1 metadata-only review pack.
+- Preserve the no-provider, no-generation, no-memory, no-promotion, no-production boundary.
+
+Artifacts:
+- `docs/V0_4_2_VISUAL_FAILURE_TAXONOMY.md`
+- `schemas/visual_failure_taxonomy.schema.yaml`
+- `tests/schema_examples/visual_failure_taxonomy.example.json`
+- `tests/schema_examples/visual_failure_taxonomy_fail.example.json`
+- `scripts/validate_visual_failure_taxonomy.js`
+
+Boundary state:
+- `source_local_commit: 6fe35c72359640e985beb409ceec50fef6f7b351`
+- `source_remote_commit: 2f86f9b516b8113d099addf1bbb519b9a46a68fd`
+- `source_phase: v0_4_1_visual_asset_review_pack`
+- `current_gate_phase: v0_4_2_visual_failure_taxonomy`
+- `active current phase: v0_3_3_first_live_generation_pilot`
+- `resume_guard_source_phase: v0_3_2_live_candidate_action_packet`
+- `next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial`
+- `required_category_count: 7`
+- `exact_required_categories_defined: true`
+- `source_review_pack_verified: true`
+- `metadata_only: true`
+- `image_binary_read_performed: false`
+- `Push_L2_exercised: false`
+- `real_executor_implemented_now: false`
+- `provider_call_performed: false`
+- `image_generation_performed: false`
+- `VCP_memory_write_performed: false`
+- `DailyNote_write_performed: false`
+- `runtime_call_performed: false`
+- `secret_value_read_performed: false`
+- `production_candidate_created: false`
+- `accepted_sample_auto_promotion: false`
+- `memory_seed_promoted: false`
+- `package_dependency_change_performed: false`
+- `push_allowed: false`
+
+Recommended next: post-commit review and Push_L3 manual guarded push classification, then v0.4.3 Review to Prompt Correction Hint.
+
 ## v0.4.1 - Visual Asset Review Pack
 
-Status: local docs/report/validator gate completed and pending local commit.
+Status: local commit completed; push pending manual authorization.
 
 Purpose:
 - Generate a metadata-only dry-run review pack from existing authorized test asset metadata.
@@ -18,6 +63,8 @@ Artifacts:
 
 Boundary state:
 - `source_remote_commit: 2f86f9b516b8113d099addf1bbb519b9a46a68fd`
+- `local_commit: 6fe35c72359640e985beb409ceec50fef6f7b351`
+- `push_performed: false`
 - `source_phase: v0_4_0a_visual_asset_eval_dry_run_asset_class_binding`
 - `current_gate_phase: v0_4_1_visual_asset_review_pack`
 - `active current phase: v0_3_3_first_live_generation_pilot`

@@ -1,5 +1,35 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260522-v0.4.2-VISUAL-FAILURE-TAXONOMY
+
+Task: v0.4.2 Visual Failure Taxonomy
+Status: completed_validated
+Commands run:
+  - git diff --check: passed_with_line_ending_warnings_only
+  - node --check scripts/validate_visual_failure_taxonomy.js: passed
+  - node scripts/validate_visual_failure_taxonomy.js: passed
+  - node scripts/validate_visual_asset_review_pack.js: passed
+  - node scripts/validate_smart_v3_push_safety_lane.js: passed
+  - node scripts/validate_agent_board_state.js: passed
+  - npm run validate:mvp: passed
+Boundary:
+  - source_local_commit: 6fe35c72359640e985beb409ceec50fef6f7b351
+  - source_remote_commit: 2f86f9b516b8113d099addf1bbb519b9a46a68fd
+  - required_category_count: 7
+  - exact_required_categories_defined: true
+  - source_review_pack_verified: true
+  - metadata_only: true
+  - image_binary_read_performed: false
+  - provider_call_performed: false
+  - image_generation_performed: false
+  - DailyNote_write_performed: false
+  - VCP_memory_write_performed: false
+  - runtime_call_performed: false
+  - production_candidate_created: false
+  - accepted_sample_auto_promotion: false
+  - memory_seed_promoted: false
+  - push_performed: false
+
 ## VALIDATION-20260522-v0.4.1-VISUAL-ASSET-REVIEW-PACK
 
 Task: v0.4.1 Visual Asset Review Pack

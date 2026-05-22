@@ -1,0 +1,82 @@
+schema_id: visual_failure_taxonomy
+version: v0_1
+status: local_contract_schema_only
+phase: v0_4_2_visual_failure_taxonomy
+purpose: >
+  Defines a metadata-only failure vocabulary for structured visual asset review
+  packs. The taxonomy explains why an asset should be patched or rejected before
+  any prompt correction, sample registry, memory write, accepted-sample
+  promotion, production-candidate creation, or real executor exists.
+
+required_top_level_fields:
+  - taxonomy_id
+  - version
+  - phase
+  - source_review_pack_ref
+  - required_categories
+  - categories
+  - taxonomy_boundaries
+  - side_effects
+
+required_categories:
+  - composition_failure
+  - lighting_failure
+  - material_realism_failure
+  - product_fidelity_failure
+  - commercial_fitness_failure
+  - ai_artifact_failure
+  - registry_or_provenance_mismatch
+
+category_contract:
+  category_id: required_category_id
+  definition: non_empty_string
+  applies_to_dimensions:
+    - composition
+    - lighting
+    - material_realism
+    - product_fidelity
+    - commercial_fitness
+    - ai_artifact_risk
+    - provenance
+  severity_scale:
+    - minor
+    - moderate
+    - major
+    - blocking
+  dry_run_detection_signals:
+    - metadata_only_signal_string
+  reviewer_question: non_empty_string
+  correction_hint_bridge:
+    prompt_constraint_candidate: non_empty_string
+    avoid_fragment_candidate: non_empty_string
+    future_phase: v0_4_3_review_to_prompt_correction_hint
+
+taxonomy_boundaries:
+  metadata_only: true
+  source_review_pack_required: true
+  image_binary_read_performed: false
+  provider_call_performed: false
+  image_generation_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  runtime_call_performed: false
+  secret_value_read_performed: false
+  accepted_sample_auto_promotion: false
+  production_candidate_created: false
+  memory_seed_promoted: false
+  real_executor_implemented_now: false
+  Push_L2_exercised: false
+  package_dependency_change_performed: false
+  commit_performed: false
+  push_performed: false
+
+non_authorization:
+  image_binary_read_allowed_by_schema: false
+  provider_or_plugin_call_allowed_by_schema: false
+  image_generation_allowed_by_schema: false
+  DailyNote_write_allowed_by_schema: false
+  VCP_memory_write_allowed_by_schema: false
+  accepted_sample_promotion_allowed_by_schema: false
+  production_candidate_allowed_by_schema: false
+  memory_seed_promotion_allowed_by_schema: false
+  real_executor_allowed_by_schema: false

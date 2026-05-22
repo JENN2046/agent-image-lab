@@ -85,6 +85,7 @@ $requiredFiles = @(
   'scripts/validate_visual_asset_eval_v0_1.js',
   'scripts/validate_visual_asset_eval_dry_run.js',
   'scripts/validate_visual_asset_review_pack.js',
+  'scripts/validate_visual_failure_taxonomy.js',
   'scripts/validate_visual_sample_memory_policy.js',
   'scripts/validate_15_day_architecture_checkpoint.js',
   'scripts/validate_local_checkpoint_manifest.js',
@@ -12434,6 +12435,31 @@ process.exit(child.status || 0);
     }
     if ($visualAssetReviewPack.Push_L2_exercised -ne $false -or $visualAssetReviewPack.real_executor_implemented_now -ne $false -or $visualAssetReviewPack.provider_call_performed -ne $false -or $visualAssetReviewPack.image_generation_performed -ne $false -or $visualAssetReviewPack.VCP_memory_write_performed -ne $false -or $visualAssetReviewPack.DailyNote_write_performed -ne $false -or $visualAssetReviewPack.runtime_call_performed -ne $false -or $visualAssetReviewPack.secret_value_read_performed -ne $false -or $visualAssetReviewPack.production_candidate_created -ne $false -or $visualAssetReviewPack.accepted_sample_auto_promotion -ne $false -or $visualAssetReviewPack.package_dependency_change_performed -ne $false -or $visualAssetReviewPack.commit_performed -ne $false -or $visualAssetReviewPack.push_performed -ne $false) {
       Add-Failure "Visual Asset Review Pack must not perform Push_L2, executor, provider, image, memory, runtime, secret, production, accepted-sample, dependency, commit, or push actions"
+    }
+  }
+
+  $visualFailureTaxonomyOutput = & node (Join-Path $Root 'scripts/validate_visual_failure_taxonomy.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Visual Failure Taxonomy validation exited with failure"
+  } else {
+    $visualFailureTaxonomy = ($visualFailureTaxonomyOutput -join "`n") | ConvertFrom-Json
+    if ($visualFailureTaxonomy.passed -ne $true -or $visualFailureTaxonomy.phase -ne 'v0_4_2_visual_failure_taxonomy') {
+      Add-Failure "Visual Failure Taxonomy validation must pass"
+    }
+    if ($visualFailureTaxonomy.taxonomy_doc_present -ne $true -or $visualFailureTaxonomy.taxonomy_schema_present -ne $true -or $visualFailureTaxonomy.taxonomy_fixture_present -ne $true -or $visualFailureTaxonomy.taxonomy_fail_fixture_present -ne $true) {
+      Add-Failure "Visual Failure Taxonomy must define doc, schema, pass fixture, and fail fixture"
+    }
+    if ($visualFailureTaxonomy.required_category_count -ne 7 -or $visualFailureTaxonomy.exact_required_categories_defined -ne $true) {
+      Add-Failure "Visual Failure Taxonomy must define exactly the seven required categories"
+    }
+    if ($visualFailureTaxonomy.negative_case_count -lt 19 -or $visualFailureTaxonomy.caught_negative_case_count -ne $visualFailureTaxonomy.negative_case_count -or $visualFailureTaxonomy.all_negative_cases_caught -ne $true -or $visualFailureTaxonomy.missing_category_caught -ne $true -or $visualFailureTaxonomy.unknown_category_caught -ne $true -or $visualFailureTaxonomy.duplicate_category_caught -ne $true) {
+      Add-Failure "Visual Failure Taxonomy must catch every required negative case"
+    }
+    if ($visualFailureTaxonomy.source_review_pack_verified -ne $true -or $visualFailureTaxonomy.metadata_only -ne $true -or $visualFailureTaxonomy.image_binary_read_performed -ne $false) {
+      Add-Failure "Visual Failure Taxonomy must remain metadata-only and bind to the v0.4.1 review pack"
+    }
+    if ($visualFailureTaxonomy.Push_L2_exercised -ne $false -or $visualFailureTaxonomy.real_executor_implemented_now -ne $false -or $visualFailureTaxonomy.provider_call_performed -ne $false -or $visualFailureTaxonomy.image_generation_performed -ne $false -or $visualFailureTaxonomy.VCP_memory_write_performed -ne $false -or $visualFailureTaxonomy.DailyNote_write_performed -ne $false -or $visualFailureTaxonomy.runtime_call_performed -ne $false -or $visualFailureTaxonomy.secret_value_read_performed -ne $false -or $visualFailureTaxonomy.production_candidate_created -ne $false -or $visualFailureTaxonomy.accepted_sample_auto_promotion -ne $false -or $visualFailureTaxonomy.memory_seed_promoted -ne $false -or $visualFailureTaxonomy.package_dependency_change_performed -ne $false -or $visualFailureTaxonomy.commit_performed -ne $false -or $visualFailureTaxonomy.push_performed -ne $false) {
+      Add-Failure "Visual Failure Taxonomy must not perform Push_L2, executor, provider, image, memory, runtime, secret, production, accepted-sample, memory-seed, dependency, commit, or push actions"
     }
   }
 
