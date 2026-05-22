@@ -1,0 +1,39 @@
+{
+  "push_l1_status_sync_pass": {
+    "case_id": "push_l1_status_sync_pass",
+    "expected_classification": "Push_L1_green_auto",
+    "candidate": {
+      "level": "Push_L1_green_auto",
+      "auto_push_allowed": true,
+      "worktree_clean": true,
+      "commit_count_ahead": 1,
+      "fast_forward_only": true,
+      "upstream_branch": "origin/master",
+      "exact_slice_recognized": true,
+      "no_untracked_files": true,
+      "no_staged_files_before_push": true,
+      "git_diff_check_passed": true,
+      "npm_run_validate_mvp_passed": true,
+      "post_push_verification_required": true,
+      "post_push_state_sync_required": true,
+      "changed_files": [
+        ".agent_board/CHECKPOINT.md",
+        ".agent_board/HANDOFF.md",
+        ".agent_board/RUN_STATE.md",
+        ".agent_board/TASK_QUEUE.md",
+        ".agent_board/VALIDATION_LOG.md",
+        "docs/00_project_roadmap.md"
+      ],
+      "side_effect_flags": {
+        "provider_call_performed": false,
+        "image_generation_performed": false,
+        "DailyNote_write_performed": false,
+        "VCP_memory_write_performed": false,
+        "runtime_call_performed": false,
+        "secret_value_read_performed": false
+      },
+      "push_l2_exercised": false,
+      "real_executor_implemented_now": false
+    }
+  }
+}

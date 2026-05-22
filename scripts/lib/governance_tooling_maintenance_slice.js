@@ -234,6 +234,21 @@ const EXPECTED_V0_3_7A_PUSH_SAFETY_LANE_SLICE = [
   "tests/schema_examples/smart_v3_push_safety_lane.example.json"
 ].sort();
 
+const EXPECTED_V0_3_7C_PUSH_L1_REGRESSION_USAGE_BOUNDARY_SLICE = [
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  ".agent_board/VALIDATION_LOG.md",
+  "docs/00_project_roadmap.md",
+  "docs/PUSH_L1_REGRESSION_CASES.md",
+  "docs/PUSH_L1_USAGE_RULE.md",
+  "scripts/lib/governance_tooling_maintenance_slice.js",
+  "scripts/validate_smart_v3_push_safety_lane.js",
+  "tests/schema_examples/push_l1_forbidden_paths_fail.example.json",
+  "tests/schema_examples/push_l1_status_sync_pass.example.json"
+].sort();
+
 const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "governance_tooling_maintenance_slice_v1",
@@ -278,6 +293,10 @@ const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "v0_3_7a_push_safety_lane_slice",
     files: EXPECTED_V0_3_7A_PUSH_SAFETY_LANE_SLICE
+  },
+  {
+    id: "v0_3_7c_push_l1_regression_usage_boundary_slice",
+    files: EXPECTED_V0_3_7C_PUSH_L1_REGRESSION_USAGE_BOUNDARY_SLICE
   }
 ];
 
@@ -491,6 +510,11 @@ function governanceToolingMaintenanceSliceSelfCheck() {
         === "v0_3_7a_push_safety_lane_slice"
     },
     {
+      check: "exact_slice_matches_v0_3_7c_push_l1_regression_usage_boundary",
+      passed: findMatchingGovernanceToolingSlice(EXPECTED_V0_3_7C_PUSH_L1_REGRESSION_USAGE_BOUNDARY_SLICE)?.id
+        === "v0_3_7c_push_l1_regression_usage_boundary_slice"
+    },
+    {
       check: "exact_slice_rejects_missing_file",
       passed: findMatchingGovernanceToolingSlice(EXPECTED_GOVERNANCE_TOOLING_MAINTENANCE_SLICE.slice(1)) === null
     },
@@ -527,6 +551,7 @@ module.exports = {
   EXPECTED_V0_3_6_POST_PUSH_STATE_SYNC_SLICE,
   EXPECTED_V0_3_7_BOUNDED_L4_EXECUTOR_PREFLIGHT_CONTRACT_SLICE,
   EXPECTED_V0_3_7A_PUSH_SAFETY_LANE_SLICE,
+  EXPECTED_V0_3_7C_PUSH_L1_REGRESSION_USAGE_BOUNDARY_SLICE,
   GOVERNANCE_TOOLING_ALLOWED_SLICES,
   buildGovernanceToolingMaintenanceSliceReport,
   fileAllowedInGovernanceToolingSlice,

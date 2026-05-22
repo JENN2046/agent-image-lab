@@ -9,6 +9,10 @@ const files = {
   doc: "docs/V0_3_7A_PUSH_SAFETY_LANE_GATE.md",
   schema: "schemas/smart_v3_push_safety_lane.schema.yaml",
   fixture: "tests/schema_examples/smart_v3_push_safety_lane.example.json",
+  usageRule: "docs/PUSH_L1_USAGE_RULE.md",
+  regressionCases: "docs/PUSH_L1_REGRESSION_CASES.md",
+  l1StatusSyncPassFixture: "tests/schema_examples/push_l1_status_sync_pass.example.json",
+  l1ForbiddenPathsFailFixture: "tests/schema_examples/push_l1_forbidden_paths_fail.example.json",
   roadmap: "docs/00_project_roadmap.md",
   agents: "AGENTS.md",
   overlay: "AGENTS.autopilot-overlay.md",
@@ -120,6 +124,16 @@ const negativeCaseIds = [
   "secret_destructive_auto_allowed_false"
 ];
 
+const l1RegressionCaseIds = [
+  "Push_L1_status_sync_pass_fixture_passes",
+  "Push_L1_assets_path_fixture_fails",
+  "Push_L1_runs_path_fixture_fails",
+  "Push_L1_image_file_fixture_fails",
+  "Push_L1_package_json_fixture_fails",
+  "Push_L1_package_lock_fixture_fails",
+  "Push_L1_runtime_code_fixture_fails"
+];
+
 const imageFilePattern = /\.(png|jpe?g|gif|webp|svg)$/i;
 const runtimeFilePattern = /(^|\/)(src|kernel|adapters|exports|review_console\/static_prototype)\//;
 
@@ -170,6 +184,13 @@ function validatePushL1Candidate(candidate) {
   assert(!candidate.changed_files.some((file) => imageFilePattern.test(file)), "Push_L1 image file forbidden");
   assert(!candidate.changed_files.some((file) => file === "package.json" || file === "package-lock.json"), "Push_L1 package file forbidden");
   assert(!candidate.changed_files.some((file) => runtimeFilePattern.test(file)), "Push_L1 runtime code forbidden");
+  if (candidate.side_effect_flags) {
+    for (const [key, value] of Object.entries(candidate.side_effect_flags)) {
+      assert(value === false, `Push_L1 side effect flag must be false: ${key}`);
+    }
+  }
+  assert(candidate.push_l2_exercised !== true, "Push_L1 must not exercise Push_L2");
+  assert(candidate.real_executor_implemented_now !== true, "Push_L1 must not implement a real executor");
   return true;
 }
 
@@ -350,12 +371,64 @@ function runNegativeCases() {
   ];
 }
 
+function candidateFromPatch(base, patch) {
+  return {
+    ...base,
+    ...patch,
+    side_effect_flags: {
+      ...(base.side_effect_flags || {}),
+      ...(patch.side_effect_flags || {})
+    }
+  };
+}
+
+function validatePushL1RegressionFixtures() {
+  const passFixture = readJson(files.l1StatusSyncPassFixture).push_l1_status_sync_pass;
+  const failFixture = readJson(files.l1ForbiddenPathsFailFixture).push_l1_forbidden_paths_fail;
+  const passCandidate = passFixture.candidate;
+
+  assert(passFixture.expected_classification === "Push_L1_green_auto", "Push_L1 pass fixture must expect Push_L1");
+  validatePushL1Candidate(passCandidate);
+  assert(passCandidate.changed_files.length === 6, "Push_L1 status-sync pass fixture must use exactly six status files");
+  assert(failFixture.expected_classification === "not_Push_L1_green_auto", "Push_L1 fail fixture must reject Push_L1");
+  assert(failFixture.push_l2_exercised === false, "Push_L1 fail fixture must not exercise Push_L2");
+  assert(failFixture.real_executor_implemented_now === false, "Push_L1 fail fixture must not implement real executor");
+
+  const caughtFailures = failFixture.negative_cases.map((negativeCase) => {
+    const candidate = candidateFromPatch(passCandidate, negativeCase.candidate_patch || {});
+    try {
+      validatePushL1Candidate(candidate);
+    } catch (error) {
+      assert(
+        String(error.message).includes(negativeCase.expected_error_contains),
+        `${negativeCase.case_id} expected error to include ${negativeCase.expected_error_contains}, got ${error.message}`
+      );
+      return {
+        case_id: `Push_L1_${negativeCase.case_id.replace(/_fails$/, "")}_fixture_fails`,
+        result: "caught",
+        failure_message: error.message
+      };
+    }
+    throw new Error(`${negativeCase.case_id} was not caught`);
+  });
+
+  return [
+    {
+      case_id: "Push_L1_status_sync_pass_fixture_passes",
+      result: "passed"
+    },
+    ...caughtFailures
+  ];
+}
+
 function buildReport() {
   for (const file of Object.values(files)) {
     assert(fs.existsSync(path.join(root, file)), `Missing required file: ${file}`);
   }
 
   const doc = read(files.doc);
+  const usageRule = read(files.usageRule);
+  const regressionCasesDoc = read(files.regressionCases);
   const schema = read(files.schema);
   const fixture = readJson(files.fixture).smart_v3_push_safety_lane;
   const governanceDocs = [read(files.agents), read(files.overlay), read(files.kernel), read(files.standingPolicy)].join("\n");
@@ -364,6 +437,9 @@ function buildReport() {
   const sliceHelper = read(files.sliceHelper);
 
   includesAll(doc, ["Push_L0_forbidden", "Push_L1_green_auto", "Push_L2_amber_auto_guarded", "Push_L3_red_manual"], "push safety doc levels");
+  includesAll(usageRule, l1RequiredConditions, "Push_L1 usage rule checklist");
+  includesAll(usageRule, ["Push_L2_amber_auto_guarded: defined_not_exercised", "real_executor_implemented_now: false", "no_assets", "no_runs", "no_images", "no_package_files", "no_runtime_code"], "Push_L1 usage boundaries");
+  includesAll(regressionCasesDoc, ["push_l1_status_sync_pass", "assets_path_fails", "runs_path_fails", "image_file_fails", "package_json_fails", "runtime_code_fails", "Push_L2_tested: false"], "Push_L1 regression cases doc");
   includesAll(doc, l0AlwaysManualOrForbidden, "push safety doc L0");
   includesAll(doc, l1RequiredConditions, "push safety doc L1");
   includesAll(doc, l2RequiredConditions, "push safety doc L2 required");
@@ -379,6 +455,7 @@ function buildReport() {
 
   validatePolicy(fixture);
   const negativeCases = runNegativeCases();
+  const l1RegressionCases = validatePushL1RegressionFixtures();
 
   return {
     passed: true,
@@ -397,6 +474,14 @@ function buildReport() {
     negative_case_count: negativeCases.length,
     caught_negative_case_count: negativeCases.filter((item) => item.result === "caught").length,
     all_negative_cases_caught: negativeCases.every((item) => item.result === "caught"),
+    Push_L1_regression_fixture_count: l1RegressionCases.length,
+    Push_L1_regression_pass_fixture_valid: l1RegressionCases.some((item) => item.case_id === "Push_L1_status_sync_pass_fixture_passes" && item.result === "passed"),
+    Push_L1_regression_negative_case_count: l1RegressionCases.filter((item) => item.result === "caught").length,
+    Push_L1_regression_all_cases_valid: l1RegressionCases.length === l1RegressionCaseIds.length && l1RegressionCases.every((item) => item.result === "passed" || item.result === "caught"),
+    Push_L1_usage_rule_present: true,
+    Push_L1_regression_cases_doc_present: true,
+    Push_L1_not_expanded_to_any_docs: true,
+    Push_L2_exercised: false,
     force_push_auto_allowed: false,
     tag_release_deploy_auto_allowed: false,
     secret_destructive_auto_allowed: false,
@@ -415,6 +500,8 @@ function main() {
   const report = buildReport();
   assert(report.negative_case_count === negativeCaseIds.length, "All required negative cases must be modeled");
   assert(report.all_negative_cases_caught === true, "All negative cases must be caught");
+  assert(report.Push_L1_regression_all_cases_valid === true, "Push_L1 regression fixtures must pass and fail closed");
+  assert(report.Push_L2_exercised === false, "Push_L2 must remain unexercised");
   process.stdout.write(`${JSON.stringify(report, null, 2)}\n`);
 }
 

@@ -1,5 +1,27 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260522-v0.3.7c-PUSH-L1-REGRESSION-USAGE-BOUNDARY
+
+Task: v0.3.7c Push L1 Regression Usage Boundary Gate
+Commands planned:
+  - git diff --check
+  - node scripts/validate_smart_v3_push_safety_lane.js
+  - npm run validate:mvp
+Result: ALL REQUIRED CHECKS PASSED
+Findings:
+  - Push_L1 usage rule document created.
+  - Push_L1 regression cases document created.
+  - Status-sync pass fixture created and validated.
+  - Assets/runs/image/package/runtime fail fixture created and validated.
+  - v0.3.7c exact slice registered with no wildcard paths.
+  - Push_L1 remains narrow: no arbitrary docs push, no assets/runs/images/package/runtime paths.
+  - Push_L2 remains defined but not exercised.
+  - No provider/image/memory/runtime action, real executor implementation, Push_L2 test, secret read, tag, release, deploy, commit, or push is performed by this gate.
+  - git diff --check passed with line-ending warnings only.
+  - node --check scripts/lib/governance_tooling_maintenance_slice.js passed.
+  - node scripts/validate_smart_v3_push_safety_lane.js passed.
+  - npm run validate:mvp passed.
+
 ## VALIDATION-20260522-v0.3.7b-PUSH-SAFETY-LANE-CYCLE-CLOSEOUT
 
 Task: v0.3.7b Push Safety Lane Cycle Closeout

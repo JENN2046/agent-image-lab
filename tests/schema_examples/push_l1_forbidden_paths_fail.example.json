@@ -1,0 +1,52 @@
+{
+  "push_l1_forbidden_paths_fail": {
+    "case_id": "push_l1_forbidden_paths_fail",
+    "expected_classification": "not_Push_L1_green_auto",
+    "negative_cases": [
+      {
+        "case_id": "assets_path_fails",
+        "expected_error_contains": "assets path forbidden",
+        "candidate_patch": {
+          "changed_files": ["assets/visual_asset_authorization_registry.example.json"]
+        }
+      },
+      {
+        "case_id": "runs_path_fails",
+        "expected_error_contains": "runs path forbidden",
+        "candidate_patch": {
+          "changed_files": ["runs/real_generation/example/generation_attempt_result.json"]
+        }
+      },
+      {
+        "case_id": "image_file_fails",
+        "expected_error_contains": "image file forbidden",
+        "candidate_patch": {
+          "changed_files": ["docs/example.png"]
+        }
+      },
+      {
+        "case_id": "package_json_fails",
+        "expected_error_contains": "package file forbidden",
+        "candidate_patch": {
+          "changed_files": ["package.json"]
+        }
+      },
+      {
+        "case_id": "package_lock_fails",
+        "expected_error_contains": "package file forbidden",
+        "candidate_patch": {
+          "changed_files": ["package-lock.json"]
+        }
+      },
+      {
+        "case_id": "runtime_code_fails",
+        "expected_error_contains": "runtime code forbidden",
+        "candidate_patch": {
+          "changed_files": ["kernel/executor.js"]
+        }
+      }
+    ],
+    "push_l2_exercised": false,
+    "real_executor_implemented_now": false
+  }
+}

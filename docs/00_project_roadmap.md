@@ -5,10 +5,10 @@
 ## 当前产品主线恢复点
 
 ```yaml
-current_phase: v0_3_7b_push_safety_lane_cycle_closeout
+current_phase: v0_3_7c_push_l1_regression_usage_boundary_gate
 phase_status: COMPLETED_VALIDATED
-source_phase: v0_3_7a_Push_L1_auto_push_gate
-current_goal: close_out_first_Push_L1_auto_push_cycle_without_scope_expansion
+source_phase: v0_3_7b_push_safety_lane_cycle_closeout
+current_goal: define_repeatable_Push_L1_usage_rules_and_regression_fixtures
 long_term_goal: v0_3_controlled_real_provider_production_loop
 semantic_tightening_active: true
 current_boundary_semantics_cleanup_active: true
@@ -32,6 +32,7 @@ v0_3_7_post_push_state_sync_active: true
 v0_3_7a_push_safety_lane_gate_active: true
 v0_3_7a_post_push_state_sync_active: true
 v0_3_7b_push_safety_lane_cycle_closeout_active: true
+v0_3_7c_push_l1_regression_usage_boundary_gate_active: true
 post_push_state:
   current_remote_head: f26e9478c94c7a3dcfc4ba93b6a3efac806ebece
   pushed_commit: f26e9478c94c7a3dcfc4ba93b6a3efac806ebece
@@ -114,6 +115,18 @@ push_safety_lane:
   boundaries_preserved: true
   Push_L2_not_exercised: true
   real_executor_implemented_now: false
+  Push_L1_usage_rule_ref: docs/PUSH_L1_USAGE_RULE.md
+  Push_L1_regression_cases_ref: docs/PUSH_L1_REGRESSION_CASES.md
+  Push_L1_status_sync_pass_fixture_ref: tests/schema_examples/push_l1_status_sync_pass.example.json
+  Push_L1_forbidden_paths_fail_fixture_ref: tests/schema_examples/push_l1_forbidden_paths_fail.example.json
+  Push_L1_regression_slice_ref: scripts/lib/governance_tooling_maintenance_slice.js
+  Push_L1_candidate_checklist_defined: true
+  Push_L1_negative_cases_fixture_defined: true
+  Push_L1_status_sync_pass_fixture_defined: true
+  Push_L1_not_expanded_to_any_docs: true
+  Push_L1_regression_guarded: true
+  v0_3_7c_exact_slice_registered: true
+  Push_L2_still_defined_not_proven: true
   push_performed_by_this_gate: false
   future_push_allowed: false
 visual_asset_governance:

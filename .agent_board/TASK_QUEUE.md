@@ -1,5 +1,42 @@
 ---
 
+- [x] ID: v0_3_7c_push_l1_regression_usage_boundary_gate
+      Title: Define Push_L1 usage rules and regression fixtures
+      Reason: Push_L1 must become repeatably classifiable without widening from the proven narrow docs/status exact-slice case.
+      Lane: Green.
+      Status: completed_validated.
+      Source local commit: 43b56d040d79f172d906fc7890bfdcdc9609cc55.
+      Source phase: v0_3_7b_push_safety_lane_cycle_closeout.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Created: docs/PUSH_L1_USAGE_RULE.md; docs/PUSH_L1_REGRESSION_CASES.md; tests/schema_examples/push_l1_status_sync_pass.example.json; tests/schema_examples/push_l1_forbidden_paths_fail.example.json.
+      Updated: scripts/validate_smart_v3_push_safety_lane.js; scripts/lib/governance_tooling_maintenance_slice.js.
+      Push_L1_candidate_checklist_defined: true.
+      Push_L1_negative_cases_fixture_defined: true.
+      Push_L1_status_sync_pass_fixture_defined: true.
+      Push_L1_no_assets_runs_images_package_runtime: true.
+      Push_L1_fast_forward_only_check: true.
+      Push_L1_exactly_one_commit_ahead_check: true.
+      post_push_verification_required: true.
+      post_push_state_sync_required: true.
+      Push_L1_not_expanded_to_any_docs: true.
+      v0_3_7c_exact_slice_registered: true.
+      Push_L2_exercised: false.
+      real_executor_implemented_now: false.
+      push_allowed: false.
+      provider_call_performed: false.
+      image_generation_performed: false.
+      DailyNote_write_performed: false.
+      VCP_memory_write_performed: false.
+      runtime_call_performed: false.
+      secret_value_read_performed: false.
+      Validation: git diff --check passed with line-ending warnings only; node --check scripts/lib/governance_tooling_maintenance_slice.js passed; node scripts/validate_smart_v3_push_safety_lane.js passed; npm run validate:mvp passed.
+      Stop condition: Push_L2 test, Push_L1 widening, provider/image/memory/runtime execution, real executor implementation, dependency change, asset/runs/image/package path expansion, secret read, git add ., push/tag/release/deploy, or validation failure requiring judgment.
+      Recommended next: external review for Push_L1 regression usage boundary commit readiness; do not test Push_L2.
+
+---
+
 - [x] ID: v0_3_7b_push_safety_lane_cycle_closeout
       Title: Close out first Push_L1 auto push cycle
       Reason: f26e947 reached origin/master through Push_L1_green_auto; the project needs a narrow evidence boundary so the success is not generalized to Push_L2, runtime, provider/image/memory, package, assets, runs, real executor, production_candidate, or accepted_sample paths.
