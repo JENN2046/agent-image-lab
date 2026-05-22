@@ -96,6 +96,7 @@ $requiredFiles = @(
   'scripts/validate_controlled_generation_readiness_packet.js',
   'scripts/validate_prompt_package_preview.js',
   'scripts/validate_visual_review_replay_set.js',
+  'scripts/validate_visual_memory_readonly_plan.js',
   'scripts/validate_visual_sample_memory_policy.js',
   'scripts/validate_15_day_architecture_checkpoint.js',
   'scripts/validate_local_checkpoint_manifest.js',
@@ -12763,6 +12764,34 @@ process.exit(child.status || 0);
     }
     if ($visualReviewReplaySet.Push_L2_exercised -ne $false -or $visualReviewReplaySet.real_executor_implemented_now -ne $false -or $visualReviewReplaySet.provider_call_performed -ne $false -or $visualReviewReplaySet.image_generation_performed -ne $false -or $visualReviewReplaySet.runtime_call_performed -ne $false -or $visualReviewReplaySet.secret_value_read_performed -ne $false -or $visualReviewReplaySet.VCP_memory_write_performed -ne $false -or $visualReviewReplaySet.DailyNote_write_performed -ne $false -or $visualReviewReplaySet.production_candidate_created -ne $false -or $visualReviewReplaySet.accepted_sample_auto_promotion -ne $false -or $visualReviewReplaySet.memory_seed_promoted -ne $false -or $visualReviewReplaySet.package_dependency_change_performed -ne $false -or $visualReviewReplaySet.commit_performed -ne $false -or $visualReviewReplaySet.push_performed -ne $false) {
       Add-Failure "Visual Review Replay Set must not perform Push_L2, executor, provider, image, runtime, secret, memory, DailyNote, production, accepted-sample, memory-seed, dependency, commit, or push actions"
+    }
+  }
+
+  $visualMemoryReadOnlyPlanOutput = & node (Join-Path $Root 'scripts/validate_visual_memory_readonly_plan.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Visual Memory ReadOnly Plan validation exited with failure"
+  } else {
+    $visualMemoryReadOnlyPlan = ($visualMemoryReadOnlyPlanOutput -join "`n") | ConvertFrom-Json
+    if ($visualMemoryReadOnlyPlan.passed -ne $true -or $visualMemoryReadOnlyPlan.phase -ne 'v0_5_3_visual_memory_readonly_plan') {
+      Add-Failure "Visual Memory ReadOnly Plan validation must pass"
+    }
+    if ($visualMemoryReadOnlyPlan.memory_readonly_doc_present -ne $true -or $visualMemoryReadOnlyPlan.memory_readonly_schema_present -ne $true -or $visualMemoryReadOnlyPlan.memory_readonly_report_present -ne $true -or $visualMemoryReadOnlyPlan.memory_readonly_fixture_present -ne $true -or $visualMemoryReadOnlyPlan.memory_readonly_fail_fixture_present -ne $true) {
+      Add-Failure "Visual Memory ReadOnly Plan must define doc, schema, report, pass fixture, and fail fixture"
+    }
+    if ($visualMemoryReadOnlyPlan.source_review_replay_set_verified -ne $true -or $visualMemoryReadOnlyPlan.source_visual_sample_memory_policy_verified -ne $true) {
+      Add-Failure "Visual Memory ReadOnly Plan must bind to review replay set and visual sample memory policy"
+    }
+    if ($visualMemoryReadOnlyPlan.accepted_sample_recall_read_only -ne $true -or $visualMemoryReadOnlyPlan.rejected_pattern_recall_read_only -ne $true -or $visualMemoryReadOnlyPlan.style_dna_read_only -ne $true -or $visualMemoryReadOnlyPlan.no_memory_write -ne $true -or $visualMemoryReadOnlyPlan.no_DailyNote_write -ne $true -or $visualMemoryReadOnlyPlan.real_memory_read_performed -ne $false) {
+      Add-Failure "Visual Memory ReadOnly Plan must define all read-only plans without real memory read or writes"
+    }
+    if ($visualMemoryReadOnlyPlan.negative_case_count -lt 19 -or $visualMemoryReadOnlyPlan.caught_negative_case_count -ne $visualMemoryReadOnlyPlan.negative_case_count -or $visualMemoryReadOnlyPlan.all_negative_cases_caught -ne $true -or $visualMemoryReadOnlyPlan.missing_accepted_sample_recall_caught -ne $true -or $visualMemoryReadOnlyPlan.accepted_sample_readonly_drift_caught -ne $true -or $visualMemoryReadOnlyPlan.rejected_pattern_readonly_drift_caught -ne $true -or $visualMemoryReadOnlyPlan.style_dna_readonly_drift_caught -ne $true -or $visualMemoryReadOnlyPlan.real_memory_read_caught -ne $true -or $visualMemoryReadOnlyPlan.memory_write_caught -ne $true -or $visualMemoryReadOnlyPlan.daily_note_write_caught -ne $true -or $visualMemoryReadOnlyPlan.production_candidate_caught -ne $true -or $visualMemoryReadOnlyPlan.accepted_sample_promotion_caught -ne $true -or $visualMemoryReadOnlyPlan.raw_local_path_caught -ne $true) {
+      Add-Failure "Visual Memory ReadOnly Plan must catch every required negative case"
+    }
+    if ($visualMemoryReadOnlyPlan.planning_only -ne $true -or $visualMemoryReadOnlyPlan.metadata_only -ne $true -or $visualMemoryReadOnlyPlan.read_only_plan_only -ne $true -or $visualMemoryReadOnlyPlan.image_binary_read_performed -ne $false) {
+      Add-Failure "Visual Memory ReadOnly Plan must remain planning-only, metadata-only, read-only-plan-only, and avoid image reads"
+    }
+    if ($visualMemoryReadOnlyPlan.Push_L2_exercised -ne $false -or $visualMemoryReadOnlyPlan.real_executor_implemented_now -ne $false -or $visualMemoryReadOnlyPlan.provider_call_performed -ne $false -or $visualMemoryReadOnlyPlan.image_generation_performed -ne $false -or $visualMemoryReadOnlyPlan.runtime_call_performed -ne $false -or $visualMemoryReadOnlyPlan.secret_value_read_performed -ne $false -or $visualMemoryReadOnlyPlan.VCP_memory_write_performed -ne $false -or $visualMemoryReadOnlyPlan.DailyNote_write_performed -ne $false -or $visualMemoryReadOnlyPlan.production_candidate_created -ne $false -or $visualMemoryReadOnlyPlan.accepted_sample_auto_promotion -ne $false -or $visualMemoryReadOnlyPlan.memory_seed_promoted -ne $false -or $visualMemoryReadOnlyPlan.package_dependency_change_performed -ne $false -or $visualMemoryReadOnlyPlan.commit_performed -ne $false -or $visualMemoryReadOnlyPlan.push_performed -ne $false) {
+      Add-Failure "Visual Memory ReadOnly Plan must not perform Push_L2, executor, provider, image, runtime, secret, memory, DailyNote, production, accepted-sample, memory-seed, dependency, commit, or push actions"
     }
   }
 

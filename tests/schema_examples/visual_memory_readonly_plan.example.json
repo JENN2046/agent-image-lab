@@ -1,0 +1,97 @@
+{
+  "visual_memory_readonly_plan": {
+    "visual_memory_readonly_plan_id": "visual_memory_readonly_plan_v0_5_3_fixture",
+    "version": "v0_1",
+    "phase": "v0_5_3_visual_memory_readonly_plan",
+    "source_review_replay_set_ref": "reports/visual_asset_eval_dry_run/v0_5_2_review_replay_set.json",
+    "source_visual_sample_memory_policy_ref": "docs/VISUAL_SAMPLE_MEMORY_POLICY.md",
+    "source_accepted_sample_schema_ref": "schemas/accepted_sample_record.schema.yaml",
+    "source_rejected_sample_schema_ref": "schemas/rejected_sample_record.schema.yaml",
+    "accepted_sample_recall_read_only": {
+      "planned": true,
+      "read_only": true,
+      "purpose": "Future lookup of human-accepted visual traits after an explicit read-only memory gate.",
+      "lookup_keys": [
+        "asset_id",
+        "review_report_ref",
+        "visual_traits"
+      ],
+      "real_memory_read_performed": false,
+      "accepted_sample_created": false,
+      "accepted_sample_auto_promotion": false
+    },
+    "rejected_pattern_recall_read_only": {
+      "planned": true,
+      "read_only": true,
+      "purpose": "Future lookup of rejected visual patterns and do-not-reuse guidance without writing lessons.",
+      "lookup_keys": [
+        "failure_taxonomy",
+        "correction_hint_ref",
+        "do_not_reuse_conditions"
+      ],
+      "real_memory_read_performed": false,
+      "rejected_sample_created": false,
+      "failure_lesson_written": false
+    },
+    "style_dna_read_only": {
+      "planned": true,
+      "read_only": true,
+      "purpose": "Future lookup of reusable style traits without creating memory seeds.",
+      "lookup_keys": [
+        "composition",
+        "lighting",
+        "material_realism",
+        "commercial_fitness"
+      ],
+      "real_memory_read_performed": false,
+      "memory_seed_promoted": false
+    },
+    "no_memory_write": {
+      "enabled": true,
+      "VCP_memory_write_allowed": false,
+      "memory_seed_promotion_allowed": false,
+      "direct_memory_write_allowed": false
+    },
+    "no_DailyNote_write": {
+      "enabled": true,
+      "DailyNote_write_allowed": false,
+      "DailyNote_draft_allowed": false
+    },
+    "boundaries": {
+      "planning_only": true,
+      "metadata_only": true,
+      "read_only_plan_only": true,
+      "real_memory_read_performed": false,
+      "image_binary_read_performed": false,
+      "provider_call_performed": false,
+      "image_generation_performed": false,
+      "VCP_memory_write_performed": false,
+      "DailyNote_write_performed": false,
+      "runtime_call_performed": false,
+      "secret_value_read_performed": false,
+      "production_candidate_created": false,
+      "accepted_sample_auto_promotion": false,
+      "memory_seed_promoted": false,
+      "real_executor_implemented_now": false,
+      "Push_L2_exercised": false,
+      "package_dependency_change_performed": false,
+      "commit_performed": false,
+      "push_performed": false
+    },
+    "side_effects": {
+      "real_memory_read_performed": false,
+      "provider_call_performed": false,
+      "image_generation_performed": false,
+      "VCP_memory_write_performed": false,
+      "DailyNote_write_performed": false,
+      "runtime_call_performed": false,
+      "secret_value_read_performed": false,
+      "production_candidate_created": false,
+      "accepted_sample_auto_promotion": false,
+      "memory_seed_promoted": false,
+      "package_dependency_change_performed": false,
+      "commit_performed": false,
+      "push_performed": false
+    }
+  }
+}

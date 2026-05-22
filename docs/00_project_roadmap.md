@@ -2,6 +2,51 @@
 
 本文是 Agent Image Lab 的总路线图，用来把 v0.2 基线、v0.3 授权门槛、MVP-B dry-run 和未来真实闭环串成一条可执行路径。
 
+## v0.5.3 - Visual Memory ReadOnly Plan
+
+Status: completed_validated_pending_local_commit.
+
+Purpose:
+- Plan future visual memory read-only integration without reading real memory or writing memory.
+- Define accepted sample recall read-only, rejected pattern recall read-only, and style DNA read-only.
+- Preserve `no_memory_write` and `no_DailyNote_write`.
+
+Artifacts:
+- `docs/V0_5_3_VISUAL_MEMORY_READONLY_PLAN.md`
+- `schemas/visual_memory_readonly_plan.schema.yaml`
+- `reports/visual_asset_eval_dry_run/v0_5_3_visual_memory_readonly_plan.json`
+- `tests/schema_examples/visual_memory_readonly_plan.example.json`
+- `tests/schema_examples/visual_memory_readonly_plan_fail.example.json`
+- `scripts/validate_visual_memory_readonly_plan.js`
+
+Boundary state:
+- `source_local_commit: 3e1e968`
+- `source_phase: v0_5_2_visual_review_replay_set`
+- `current_gate_phase: v0_5_3_visual_memory_readonly_plan`
+- `active current phase: v0_3_3_first_live_generation_pilot`
+- `resume_guard_source_phase: v0_3_2_live_candidate_action_packet`
+- `next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial`
+- `accepted_sample_recall_read_only: true`
+- `rejected_pattern_recall_read_only: true`
+- `style_dna_read_only: true`
+- `no_memory_write: true`
+- `no_DailyNote_write: true`
+- `real_memory_read_performed: false`
+- `provider_call_performed: false`
+- `image_generation_performed: false`
+- `runtime_call_performed: false`
+- `secret_value_read_performed: false`
+- `VCP_memory_write_performed: false`
+- `DailyNote_write_performed: false`
+- `production_candidate_created: false`
+- `accepted_sample_auto_promotion: false`
+- `memory_seed_promoted: false`
+- `Push_L2_exercised: false`
+- `real_executor_implemented_now: false`
+- `push_allowed: false`
+
+Recommended next: local commit, post-commit review, and Push_L3 manual guarded push classification.
+
 ## v0.5.2 - Visual Review Replay Set
 
 Status: completed_validated_pending_local_commit.

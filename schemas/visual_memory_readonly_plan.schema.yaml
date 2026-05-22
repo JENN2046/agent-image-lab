@@ -1,0 +1,47 @@
+id: visual_memory_readonly_plan
+version: v0_1
+phase: v0_5_3_visual_memory_readonly_plan
+type: object
+required:
+  - visual_memory_readonly_plan_id
+  - version
+  - phase
+  - source_review_replay_set_ref
+  - source_visual_sample_memory_policy_ref
+  - accepted_sample_recall_read_only
+  - rejected_pattern_recall_read_only
+  - style_dna_read_only
+  - no_memory_write
+  - no_DailyNote_write
+  - boundaries
+  - side_effects
+properties:
+  accepted_sample_recall_read_only:
+    required:
+      - planned
+      - read_only
+      - real_memory_read_performed
+      - accepted_sample_created
+      - accepted_sample_auto_promotion
+  rejected_pattern_recall_read_only:
+    required:
+      - planned
+      - read_only
+      - real_memory_read_performed
+      - rejected_sample_created
+      - failure_lesson_written
+  style_dna_read_only:
+    required:
+      - planned
+      - read_only
+      - real_memory_read_performed
+      - memory_seed_promoted
+  no_memory_write:
+    required:
+      - enabled
+      - VCP_memory_write_allowed
+      - memory_seed_promotion_allowed
+  no_DailyNote_write:
+    required:
+      - enabled
+      - DailyNote_write_allowed

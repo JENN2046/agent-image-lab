@@ -1,0 +1,90 @@
+{
+  "visual_memory_readonly_plan": {
+    "visual_memory_readonly_plan_id": "visual_memory_readonly_plan_v0_5_3_negative_fixture",
+    "version": "v0_1",
+    "phase": "v0_5_3_visual_memory_readonly_plan",
+    "source_review_replay_set_ref": "reports/visual_asset_eval_dry_run/v0_5_2_review_replay_set.json",
+    "source_visual_sample_memory_policy_ref": "docs/VISUAL_SAMPLE_MEMORY_POLICY.md",
+    "source_accepted_sample_schema_ref": "schemas/accepted_sample_record.schema.yaml",
+    "source_rejected_sample_schema_ref": "schemas/rejected_sample_record.schema.yaml",
+    "accepted_sample_recall_read_only": {
+      "planned": true,
+      "read_only": false,
+      "purpose": "Invalid plan tries to create accepted samples.",
+      "lookup_keys": [
+        "asset_id"
+      ],
+      "real_memory_read_performed": true,
+      "accepted_sample_created": true,
+      "accepted_sample_auto_promotion": true
+    },
+    "rejected_pattern_recall_read_only": {
+      "planned": true,
+      "read_only": false,
+      "purpose": "Invalid plan writes rejected lessons.",
+      "lookup_keys": [
+        "failure_taxonomy"
+      ],
+      "real_memory_read_performed": true,
+      "rejected_sample_created": true,
+      "failure_lesson_written": true
+    },
+    "style_dna_read_only": {
+      "planned": true,
+      "read_only": false,
+      "purpose": "Invalid plan promotes style DNA memory seeds.",
+      "lookup_keys": [
+        "style_dna"
+      ],
+      "real_memory_read_performed": true,
+      "memory_seed_promoted": true
+    },
+    "no_memory_write": {
+      "enabled": false,
+      "VCP_memory_write_allowed": true,
+      "memory_seed_promotion_allowed": true,
+      "direct_memory_write_allowed": true
+    },
+    "no_DailyNote_write": {
+      "enabled": false,
+      "DailyNote_write_allowed": true,
+      "DailyNote_draft_allowed": true
+    },
+    "boundaries": {
+      "planning_only": false,
+      "metadata_only": true,
+      "read_only_plan_only": false,
+      "real_memory_read_performed": true,
+      "image_binary_read_performed": false,
+      "provider_call_performed": true,
+      "image_generation_performed": true,
+      "VCP_memory_write_performed": true,
+      "DailyNote_write_performed": true,
+      "runtime_call_performed": true,
+      "secret_value_read_performed": false,
+      "production_candidate_created": true,
+      "accepted_sample_auto_promotion": true,
+      "memory_seed_promoted": true,
+      "real_executor_implemented_now": false,
+      "Push_L2_exercised": true,
+      "package_dependency_change_performed": false,
+      "commit_performed": false,
+      "push_performed": false
+    },
+    "side_effects": {
+      "real_memory_read_performed": true,
+      "provider_call_performed": true,
+      "image_generation_performed": true,
+      "VCP_memory_write_performed": true,
+      "DailyNote_write_performed": true,
+      "runtime_call_performed": true,
+      "secret_value_read_performed": false,
+      "production_candidate_created": true,
+      "accepted_sample_auto_promotion": true,
+      "memory_seed_promoted": true,
+      "package_dependency_change_performed": false,
+      "commit_performed": false,
+      "push_performed": false
+    }
+  }
+}
