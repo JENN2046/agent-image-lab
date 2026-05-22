@@ -1,5 +1,48 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260523-v0.6.1-FIFTEEN-DAY-CONTROLLED-GENERATION-READINESS-CHECKPOINT
+
+Task: v0.6.1 Fifteen-Day Controlled Generation Readiness Checkpoint
+Status: completed_validated
+Commands run:
+  - git diff --check: passed_with_line_ending_warnings_only
+  - node --check scripts/validate_fifteen_day_controlled_generation_readiness_checkpoint.js: passed
+  - node scripts/validate_fifteen_day_controlled_generation_readiness_checkpoint.js: passed
+  - node scripts/validate_first_controlled_generation_authorization_packet.js: passed
+  - node scripts/validate_smart_v3_push_safety_lane.js: passed
+  - node scripts/validate_agent_board_state.js: passed
+  - powershell -NoProfile -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1: passed
+  - npm run validate:mvp: passed
+Boundary:
+  - source_local_commit: c776be7cc2f79c6a9fcfead34b031081aad8fbf7
+  - source_remote_commit: 51f4674d707ed17d3d6fcda55dddea10f8b0533c
+  - readiness_semantics_hardening_exists: true
+  - human_review_gate_packet_exists: true
+  - noop_generation_runner_exists: true
+  - evidence_contract_exists: true
+  - visual_memory_readonly_query_contract_exists: true
+  - first_generation_authorization_packet_exists: true
+  - metadata_only: true
+  - dry_run_only: true
+  - checkpoint_only: true
+  - image_generation: false
+  - memory_write: false
+  - real_executor: false
+  - provider_call_performed: false
+  - image_generation_performed: false
+  - VCP_memory_write_performed: false
+  - DailyNote_write_performed: false
+  - runtime_call_performed: false
+  - secret_value_read_performed: false
+  - production_candidate_created: false
+  - accepted_sample_auto_promotion: false
+  - memory_seed_promoted: false
+  - Push_L2_exercised: false
+  - commit_performed: pending
+  - push_performed: false
+Negative cases:
+  - fifteen_day_controlled_generation_readiness_checkpoint: 16 caught / 16
+
 ## VALIDATION-20260523-v0.6.0-FIRST-CONTROLLED-GENERATION-AUTHORIZATION-PACKET
 
 Task: v0.6.0 First Controlled Generation Authorization Packet

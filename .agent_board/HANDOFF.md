@@ -1,5 +1,55 @@
 ---
 
+## Current Handoff Update - v0.6.1 Fifteen-Day Controlled Generation Readiness Checkpoint
+
+```text
+phase: v0_6_1_fifteen_day_controlled_generation_readiness_checkpoint
+phase_id: v0_6_1_fifteen_day_controlled_generation_readiness_checkpoint
+status: completed_validated_pending_local_commit
+mode: Green Lane doc/schema/report/fixture/validator/status compact batch
+summary: Closes the 15-day controlled-generation readiness route by asserting six protocol artifacts exist and the no-generation/no-memory/no-executor boundaries still hold.
+source_local_commit: c776be7cc2f79c6a9fcfead34b031081aad8fbf7
+source_remote_commit: 51f4674d707ed17d3d6fcda55dddea10f8b0533c
+source_phase: v0_6_0_first_controlled_generation_authorization_packet
+previous_phase_commit: c776be7cc2f79c6a9fcfead34b031081aad8fbf7
+previous_phase_push_performed: false
+current_gate_phase: v0_6_1_fifteen_day_controlled_generation_readiness_checkpoint
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+changed: docs/V0_6_1_FIFTEEN_DAY_CONTROLLED_GENERATION_READINESS_CHECKPOINT.md; schemas/fifteen_day_controlled_generation_readiness_checkpoint.schema.yaml; reports/visual_asset_eval_dry_run/v0_6_1_fifteen_day_controlled_generation_readiness_checkpoint.json; tests/schema_examples/fifteen_day_controlled_generation_readiness_checkpoint.example.json; tests/schema_examples/fifteen_day_controlled_generation_readiness_checkpoint_fail.example.json; scripts/validate_fifteen_day_controlled_generation_readiness_checkpoint.js; scripts/validate_mvp.ps1; scripts/lib/governance_tooling_maintenance_slice.js; docs/00_project_roadmap.md; .agent_board resume surfaces.
+readiness_semantics_hardening_exists: true
+human_review_gate_packet_exists: true
+noop_generation_runner_exists: true
+evidence_contract_exists: true
+visual_memory_readonly_query_contract_exists: true
+first_generation_authorization_packet_exists: true
+metadata_only: true
+dry_run_only: true
+checkpoint_only: true
+image_generation: false
+memory_write: false
+real_executor: false
+Push_L2_exercised: false
+real_executor_implemented_now: false
+provider_call_performed: false
+image_generation_performed: false
+VCP_memory_write_performed: false
+DailyNote_write_performed: false
+runtime_call_performed: false
+secret_value_read_performed: false
+production_candidate_created: false
+accepted_sample_auto_promotion: false
+memory_seed_promoted: false
+package_dependency_change_performed: false
+push_allowed: false
+commit_performed: pending
+push_performed: false
+recommended_next: local_commit_then_post_commit_review_and_push_lane_classification_then_wait_for_explicit_remote_authorization
+```
+
+---
+
 ## Current Handoff Update - v0.6.0 First Controlled Generation Authorization Packet
 
 ```text

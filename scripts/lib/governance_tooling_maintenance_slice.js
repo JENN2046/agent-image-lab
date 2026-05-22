@@ -665,6 +665,23 @@ const EXPECTED_V0_6_0_FIRST_CONTROLLED_GENERATION_AUTHORIZATION_PACKET_SLICE = [
   "tests/schema_examples/first_controlled_generation_authorization_packet_fail.example.json"
 ].sort();
 
+const EXPECTED_V0_6_1_FIFTEEN_DAY_CONTROLLED_GENERATION_READINESS_CHECKPOINT_SLICE = [
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  ".agent_board/VALIDATION_LOG.md",
+  "docs/00_project_roadmap.md",
+  "docs/V0_6_1_FIFTEEN_DAY_CONTROLLED_GENERATION_READINESS_CHECKPOINT.md",
+  "reports/visual_asset_eval_dry_run/v0_6_1_fifteen_day_controlled_generation_readiness_checkpoint.json",
+  "schemas/fifteen_day_controlled_generation_readiness_checkpoint.schema.yaml",
+  "scripts/lib/governance_tooling_maintenance_slice.js",
+  "scripts/validate_fifteen_day_controlled_generation_readiness_checkpoint.js",
+  "scripts/validate_mvp.ps1",
+  "tests/schema_examples/fifteen_day_controlled_generation_readiness_checkpoint.example.json",
+  "tests/schema_examples/fifteen_day_controlled_generation_readiness_checkpoint_fail.example.json"
+].sort();
+
 const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "governance_tooling_maintenance_slice_v1",
@@ -817,6 +834,10 @@ const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "v0_6_0_first_controlled_generation_authorization_packet_slice",
     files: EXPECTED_V0_6_0_FIRST_CONTROLLED_GENERATION_AUTHORIZATION_PACKET_SLICE
+  },
+  {
+    id: "v0_6_1_fifteen_day_controlled_generation_readiness_checkpoint_slice",
+    files: EXPECTED_V0_6_1_FIFTEEN_DAY_CONTROLLED_GENERATION_READINESS_CHECKPOINT_SLICE
   }
 ];
 
@@ -1199,6 +1220,7 @@ module.exports = {
   EXPECTED_V0_5_8_CONTROLLED_GENERATION_EVIDENCE_CONTRACT_SLICE,
   EXPECTED_V0_5_9_VISUAL_MEMORY_READONLY_QUERY_CONTRACT_SLICE,
   EXPECTED_V0_6_0_FIRST_CONTROLLED_GENERATION_AUTHORIZATION_PACKET_SLICE,
+  EXPECTED_V0_6_1_FIFTEEN_DAY_CONTROLLED_GENERATION_READINESS_CHECKPOINT_SLICE,
   GOVERNANCE_TOOLING_ALLOWED_SLICES,
   buildGovernanceToolingMaintenanceSliceReport,
   fileAllowedInGovernanceToolingSlice,

@@ -1,0 +1,71 @@
+{
+  "fifteen_day_controlled_generation_readiness_checkpoint": {
+    "checkpoint_id": "fifteen_day_controlled_generation_readiness_checkpoint_v0_6_1_negative_fixture",
+    "version": "v0_1",
+    "phase": "v0_6_1_fifteen_day_controlled_generation_readiness_checkpoint",
+    "source_readiness_semantics_hardening_ref": "reports/visual_asset_eval_dry_run/v0_5_5_controlled_generation_readiness_semantics_hardening.json",
+    "source_human_review_gate_packet_ref": "reports/visual_asset_eval_dry_run/v0_5_6_human_review_gate_packet.json",
+    "source_noop_generation_runner_ref": "reports/visual_asset_eval_dry_run/v0_5_7_noop_controlled_generation_runner_dry_run.json",
+    "source_evidence_contract_ref": "reports/visual_asset_eval_dry_run/v0_5_8_controlled_generation_evidence_contract.json",
+    "source_visual_memory_readonly_query_contract_ref": "reports/visual_asset_eval_dry_run/v0_5_9_visual_memory_readonly_query_contract.json",
+    "source_first_generation_authorization_packet_ref": "reports/visual_asset_eval_dry_run/v0_6_0_first_controlled_generation_authorization_packet.json",
+    "checkpoint_assertions": {
+      "readiness_semantics_hardening_exists": false,
+      "human_review_gate_packet_exists": false,
+      "noop_generation_runner_exists": false,
+      "evidence_contract_exists": false,
+      "visual_memory_readonly_query_contract_exists": false,
+      "first_generation_authorization_packet_exists": false,
+      "image_generation": true,
+      "memory_write": true,
+      "real_executor": true
+    },
+    "workflow_capabilities": {
+      "readiness_semantics_hardened": false,
+      "human_review_gate_defined": false,
+      "noop_generation_runner_defined": false,
+      "evidence_contract_defined": false,
+      "readonly_query_contract_defined": false,
+      "first_authorization_packet_defined": false
+    },
+    "next_route_options": [
+      "execute_real_generation_now"
+    ],
+    "boundaries": {
+      "metadata_only": false,
+      "dry_run_only": false,
+      "checkpoint_only": false,
+      "image_generation": true,
+      "memory_write": true,
+      "real_executor": true,
+      "provider_call_performed": true,
+      "image_generation_performed": true,
+      "VCP_memory_write_performed": true,
+      "DailyNote_write_performed": true,
+      "runtime_call_performed": true,
+      "secret_value_read_performed": false,
+      "production_candidate_created": true,
+      "accepted_sample_auto_promotion": true,
+      "memory_seed_promoted": true,
+      "real_executor_implemented_now": true,
+      "Push_L2_exercised": true,
+      "package_dependency_change_performed": false,
+      "commit_performed": false,
+      "push_performed": false
+    },
+    "side_effects": {
+      "provider_call_performed": true,
+      "image_generation_performed": true,
+      "VCP_memory_write_performed": true,
+      "DailyNote_write_performed": true,
+      "runtime_call_performed": true,
+      "secret_value_read_performed": false,
+      "production_candidate_created": true,
+      "accepted_sample_auto_promotion": true,
+      "memory_seed_promoted": true,
+      "package_dependency_change_performed": false,
+      "commit_performed": false,
+      "push_performed": false
+    }
+  }
+}

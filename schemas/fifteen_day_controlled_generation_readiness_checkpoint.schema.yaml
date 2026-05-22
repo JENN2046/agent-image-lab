@@ -1,0 +1,75 @@
+id: fifteen_day_controlled_generation_readiness_checkpoint
+version: v0_1
+phase: v0_6_1_fifteen_day_controlled_generation_readiness_checkpoint
+type: object
+required:
+  - checkpoint_id
+  - version
+  - phase
+  - source_readiness_semantics_hardening_ref
+  - source_human_review_gate_packet_ref
+  - source_noop_generation_runner_ref
+  - source_evidence_contract_ref
+  - source_visual_memory_readonly_query_contract_ref
+  - source_first_generation_authorization_packet_ref
+  - checkpoint_assertions
+  - workflow_capabilities
+  - next_route_options
+  - boundaries
+  - side_effects
+properties:
+  checkpoint_assertions:
+    required:
+      - readiness_semantics_hardening_exists
+      - human_review_gate_packet_exists
+      - noop_generation_runner_exists
+      - evidence_contract_exists
+      - visual_memory_readonly_query_contract_exists
+      - first_generation_authorization_packet_exists
+      - image_generation
+      - memory_write
+      - real_executor
+  workflow_capabilities:
+    required:
+      - readiness_semantics_hardened
+      - human_review_gate_defined
+      - noop_generation_runner_defined
+      - evidence_contract_defined
+      - readonly_query_contract_defined
+      - first_authorization_packet_defined
+  boundaries:
+    required:
+      - metadata_only
+      - dry_run_only
+      - checkpoint_only
+      - image_generation
+      - memory_write
+      - real_executor
+      - provider_call_performed
+      - image_generation_performed
+      - VCP_memory_write_performed
+      - DailyNote_write_performed
+      - runtime_call_performed
+      - secret_value_read_performed
+      - production_candidate_created
+      - accepted_sample_auto_promotion
+      - memory_seed_promoted
+      - real_executor_implemented_now
+      - Push_L2_exercised
+      - package_dependency_change_performed
+      - commit_performed
+      - push_performed
+  side_effects:
+    required:
+      - provider_call_performed
+      - image_generation_performed
+      - VCP_memory_write_performed
+      - DailyNote_write_performed
+      - runtime_call_performed
+      - secret_value_read_performed
+      - production_candidate_created
+      - accepted_sample_auto_promotion
+      - memory_seed_promoted
+      - package_dependency_change_performed
+      - commit_performed
+      - push_performed
