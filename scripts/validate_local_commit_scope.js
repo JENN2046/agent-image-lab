@@ -83,6 +83,7 @@ const allowedUntrackedFiles = [
   "AGENTS.autopilot-overlay.md",
   "AUTOPILOT_REFACTOR_REPORT.md",
   "README_AGENT_IMAGE_LAB_AUTOPILOT.md",
+  "next_14_day_route_options.md",
   "assets/visual_asset_authorization_registry.example.json",
   "codex/AGENT_IMAGE_LAB_AUTOPILOT_PROMPT.md",
   "docs/117_v4_0_runtime_contract_smoke_hardening.md",

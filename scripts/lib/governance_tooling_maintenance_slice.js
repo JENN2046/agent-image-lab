@@ -432,8 +432,9 @@ const EXPECTED_V0_4_7_SEVEN_DAY_VISUAL_WORKFLOW_CHECKPOINT_SLICE = [
   ".agent_board/VALIDATION_LOG.md",
   "docs/00_project_roadmap.md",
   "docs/V0_4_7_SEVEN_DAY_VISUAL_WORKFLOW_CHECKPOINT.md",
-  "docs/next_14_day_route_options.md",
+  "next_14_day_route_options.md",
   "scripts/lib/governance_tooling_maintenance_slice.js",
+  "scripts/validate_local_commit_scope.js",
   "scripts/validate_mvp.ps1",
   "scripts/validate_seven_day_visual_workflow_checkpoint.js"
 ].sort();

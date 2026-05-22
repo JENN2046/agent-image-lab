@@ -47,7 +47,7 @@ provider/tool/runtime path.
 
 ## Recommended Next
 
-Use `docs/next_14_day_route_options.md` to choose the next route:
+Use `next_14_day_route_options.md` to choose the next route:
 
 - keep hardening dry-run review semantics
 - prepare a separately authorized manual guarded push

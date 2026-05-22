@@ -16586,7 +16586,7 @@ current_gate_phase: v0_4_7_seven_day_visual_workflow_checkpoint
 active_current_phase: v0_3_3_first_live_generation_pilot
 resume_guard_source_phase: v0_3_2_live_candidate_action_packet
 next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
-changed: docs/V0_4_7_SEVEN_DAY_VISUAL_WORKFLOW_CHECKPOINT.md; docs/next_14_day_route_options.md; scripts/validate_seven_day_visual_workflow_checkpoint.js; scripts/validate_mvp.ps1; scripts/lib/governance_tooling_maintenance_slice.js; docs/00_project_roadmap.md; .agent_board resume surfaces.
+changed: docs/V0_4_7_SEVEN_DAY_VISUAL_WORKFLOW_CHECKPOINT.md; next_14_day_route_options.md; scripts/validate_seven_day_visual_workflow_checkpoint.js; scripts/validate_mvp.ps1; scripts/lib/governance_tooling_maintenance_slice.js; scripts/validate_local_commit_scope.js; docs/00_project_roadmap.md; .agent_board resume surfaces.
 review_pack_exists: true
 failure_taxonomy_exists: true
 prompt_correction_hint_exists: true

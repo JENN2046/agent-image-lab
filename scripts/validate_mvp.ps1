@@ -7831,6 +7831,7 @@ if (-not $node) {
       'package-lock.json',
       'PROJECT_MASTER_PLAN.md',
       'next_30_day_route_options.md',
+      'next_14_day_route_options.md',
       'production/plans/french_summer_rattan_bag_v3_production_candidate_001_plan.yaml',
       'production/plans/accepted_product_still_life_tennis_wallet_001_production_candidate_001_plan.yaml',
       'production/reviews/accepted_product_still_life_tennis_wallet_001_production_candidate_001_review.md',

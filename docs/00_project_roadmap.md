@@ -13,7 +13,7 @@ Purpose:
 
 Artifacts:
 - `docs/V0_4_7_SEVEN_DAY_VISUAL_WORKFLOW_CHECKPOINT.md`
-- `docs/next_14_day_route_options.md`
+- `next_14_day_route_options.md`
 - `scripts/validate_seven_day_visual_workflow_checkpoint.js`
 
 Boundary state:

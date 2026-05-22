@@ -19028,6 +19028,7 @@ sample_registry_dry_run_exists: true
 consistency_check_exists: true
 noop_runner_plan_exists: true
 visual_judgment_loop_closed: true
+next_14_day_route_options_path: next_14_day_route_options.md
 image_generation: false
 memory_write: false
 real_executor: false

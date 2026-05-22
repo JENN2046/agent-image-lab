@@ -13577,7 +13577,7 @@ recommended_next: asset_hash_dimensions_verification_A5_requires_separate_author
       Resume guard source phase: v0_3_2_live_candidate_action_packet.
       Next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
       Scope: doc/validator/status compact batch only.
-      Changed: docs/V0_4_7_SEVEN_DAY_VISUAL_WORKFLOW_CHECKPOINT.md; docs/next_14_day_route_options.md; scripts/validate_seven_day_visual_workflow_checkpoint.js; scripts/validate_mvp.ps1; scripts/lib/governance_tooling_maintenance_slice.js; docs/00_project_roadmap.md; .agent_board resume surfaces.
+      Changed: docs/V0_4_7_SEVEN_DAY_VISUAL_WORKFLOW_CHECKPOINT.md; next_14_day_route_options.md; scripts/validate_seven_day_visual_workflow_checkpoint.js; scripts/validate_mvp.ps1; scripts/lib/governance_tooling_maintenance_slice.js; scripts/validate_local_commit_scope.js; docs/00_project_roadmap.md; .agent_board resume surfaces.
       review_pack_exists: true.
       failure_taxonomy_exists: true.
       prompt_correction_hint_exists: true.
