@@ -1,0 +1,25 @@
+id: controlled_generation_evidence_contract
+version: v0_1
+phase: v0_5_8_controlled_generation_evidence_contract
+type: object
+required:
+  - evidence_contract_id
+  - version
+  - phase
+  - prompt_package_preview_ref
+  - review_gate_packet_ref
+  - readiness_packet_ref
+  - would_generate_receipt_ref
+  - expected_review_report_ref
+  - evidence_assertions
+  - boundaries
+  - side_effects
+properties:
+  evidence_assertions:
+    required:
+      - prompt_package_preview_ref_present
+      - review_gate_packet_ref_present
+      - readiness_packet_ref_present
+      - would_generate_receipt_ref_present
+      - expected_review_report_ref_present
+      - all_required_refs_present

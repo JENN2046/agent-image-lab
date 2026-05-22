@@ -1,0 +1,53 @@
+{
+  "controlled_generation_evidence_contract": {
+    "evidence_contract_id": "controlled_generation_evidence_contract_v0_5_8_fixture",
+    "version": "v0_1",
+    "phase": "v0_5_8_controlled_generation_evidence_contract",
+    "prompt_package_preview_ref": "reports/visual_asset_eval_dry_run/v0_5_1_prompt_package_preview.json",
+    "review_gate_packet_ref": "reports/visual_asset_eval_dry_run/v0_5_6_human_review_gate_packet.json",
+    "readiness_packet_ref": "reports/visual_asset_eval_dry_run/v0_5_0_controlled_generation_readiness_packet.json",
+    "would_generate_receipt_ref": "reports/visual_asset_eval_dry_run/v0_5_7_noop_controlled_generation_runner_dry_run.json",
+    "expected_review_report_ref": "schemas/visual_asset_review_report.schema.yaml",
+    "evidence_assertions": {
+      "prompt_package_preview_ref_present": true,
+      "review_gate_packet_ref_present": true,
+      "readiness_packet_ref_present": true,
+      "would_generate_receipt_ref_present": true,
+      "expected_review_report_ref_present": true,
+      "all_required_refs_present": true
+    },
+    "boundaries": {
+      "metadata_only": true,
+      "dry_run_only": true,
+      "evidence_contract_only": true,
+      "provider_call_performed": false,
+      "image_generation_performed": false,
+      "VCP_memory_write_performed": false,
+      "DailyNote_write_performed": false,
+      "runtime_call_performed": false,
+      "secret_value_read_performed": false,
+      "production_candidate_created": false,
+      "accepted_sample_auto_promotion": false,
+      "memory_seed_promoted": false,
+      "real_executor_implemented_now": false,
+      "Push_L2_exercised": false,
+      "package_dependency_change_performed": false,
+      "commit_performed": false,
+      "push_performed": false
+    },
+    "side_effects": {
+      "provider_call_performed": false,
+      "image_generation_performed": false,
+      "VCP_memory_write_performed": false,
+      "DailyNote_write_performed": false,
+      "runtime_call_performed": false,
+      "secret_value_read_performed": false,
+      "production_candidate_created": false,
+      "accepted_sample_auto_promotion": false,
+      "memory_seed_promoted": false,
+      "package_dependency_change_performed": false,
+      "commit_performed": false,
+      "push_performed": false
+    }
+  }
+}

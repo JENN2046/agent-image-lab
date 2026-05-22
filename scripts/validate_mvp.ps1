@@ -101,6 +101,7 @@ $requiredFiles = @(
   'scripts/validate_controlled_generation_readiness_semantics_hardening.js',
   'scripts/validate_human_review_gate_packet.js',
   'scripts/validate_noop_controlled_generation_runner_dry_run.js',
+  'scripts/validate_controlled_generation_evidence_contract.js',
   'scripts/validate_visual_sample_memory_policy.js',
   'scripts/validate_15_day_architecture_checkpoint.js',
   'scripts/validate_local_checkpoint_manifest.js',
@@ -12908,6 +12909,31 @@ process.exit(child.status || 0);
     }
     if ($noopControlledGenerationRunner.Push_L2_exercised -ne $false -or $noopControlledGenerationRunner.real_executor_implemented_now -ne $false -or $noopControlledGenerationRunner.provider_call_performed -ne $false -or $noopControlledGenerationRunner.image_generation_performed -ne $false -or $noopControlledGenerationRunner.VCP_memory_write_performed -ne $false -or $noopControlledGenerationRunner.DailyNote_write_performed -ne $false -or $noopControlledGenerationRunner.runtime_call_performed -ne $false -or $noopControlledGenerationRunner.secret_value_read_performed -ne $false -or $noopControlledGenerationRunner.production_candidate_created -ne $false -or $noopControlledGenerationRunner.accepted_sample_auto_promotion -ne $false -or $noopControlledGenerationRunner.memory_seed_promoted -ne $false -or $noopControlledGenerationRunner.package_dependency_change_performed -ne $false -or $noopControlledGenerationRunner.commit_performed -ne $false -or $noopControlledGenerationRunner.push_performed -ne $false) {
       Add-Failure "No-op Controlled Generation Runner Dry Run must not perform Push_L2, executor, provider, image, runtime, secret, memory, DailyNote, production, accepted-sample, memory-seed, dependency, commit, or push actions"
+    }
+  }
+
+  $controlledGenerationEvidenceContractOutput = & node (Join-Path $Root 'scripts/validate_controlled_generation_evidence_contract.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Controlled Generation Evidence Contract validation exited with failure"
+  } else {
+    $controlledGenerationEvidenceContract = ($controlledGenerationEvidenceContractOutput -join "`n") | ConvertFrom-Json
+    if ($controlledGenerationEvidenceContract.passed -ne $true -or $controlledGenerationEvidenceContract.phase -ne 'v0_5_8_controlled_generation_evidence_contract') {
+      Add-Failure "Controlled Generation Evidence Contract validation must pass"
+    }
+    if ($controlledGenerationEvidenceContract.evidence_doc_present -ne $true -or $controlledGenerationEvidenceContract.evidence_schema_present -ne $true -or $controlledGenerationEvidenceContract.evidence_report_present -ne $true -or $controlledGenerationEvidenceContract.evidence_fixture_present -ne $true -or $controlledGenerationEvidenceContract.evidence_fail_fixture_present -ne $true) {
+      Add-Failure "Controlled Generation Evidence Contract must define doc, schema, report, pass fixture, and fail fixture"
+    }
+    if ($controlledGenerationEvidenceContract.prompt_package_preview_ref_present -ne $true -or $controlledGenerationEvidenceContract.review_gate_packet_ref_present -ne $true -or $controlledGenerationEvidenceContract.readiness_packet_ref_present -ne $true -or $controlledGenerationEvidenceContract.would_generate_receipt_ref_present -ne $true -or $controlledGenerationEvidenceContract.expected_review_report_ref_present -ne $true -or $controlledGenerationEvidenceContract.all_required_refs_present -ne $true) {
+      Add-Failure "Controlled Generation Evidence Contract must include every required evidence ref"
+    }
+    if ($controlledGenerationEvidenceContract.negative_case_count -lt 19 -or $controlledGenerationEvidenceContract.caught_negative_case_count -ne $controlledGenerationEvidenceContract.negative_case_count -or $controlledGenerationEvidenceContract.all_negative_cases_caught -ne $true -or $controlledGenerationEvidenceContract.prompt_package_preview_ref_caught -ne $true -or $controlledGenerationEvidenceContract.review_gate_packet_ref_caught -ne $true -or $controlledGenerationEvidenceContract.readiness_packet_ref_caught -ne $true -or $controlledGenerationEvidenceContract.would_generate_receipt_ref_caught -ne $true -or $controlledGenerationEvidenceContract.expected_review_report_ref_caught -ne $true -or $controlledGenerationEvidenceContract.provider_call_caught -ne $true -or $controlledGenerationEvidenceContract.image_generation_caught -ne $true -or $controlledGenerationEvidenceContract.memory_write_caught -ne $true -or $controlledGenerationEvidenceContract.runtime_call_caught -ne $true -or $controlledGenerationEvidenceContract.raw_local_path_caught -ne $true) {
+      Add-Failure "Controlled Generation Evidence Contract must catch every required negative case"
+    }
+    if ($controlledGenerationEvidenceContract.metadata_only -ne $true -or $controlledGenerationEvidenceContract.dry_run_only -ne $true -or $controlledGenerationEvidenceContract.evidence_contract_only -ne $true) {
+      Add-Failure "Controlled Generation Evidence Contract must remain metadata-only, dry-run-only, and evidence-contract-only"
+    }
+    if ($controlledGenerationEvidenceContract.Push_L2_exercised -ne $false -or $controlledGenerationEvidenceContract.real_executor_implemented_now -ne $false -or $controlledGenerationEvidenceContract.provider_call_performed -ne $false -or $controlledGenerationEvidenceContract.image_generation_performed -ne $false -or $controlledGenerationEvidenceContract.VCP_memory_write_performed -ne $false -or $controlledGenerationEvidenceContract.DailyNote_write_performed -ne $false -or $controlledGenerationEvidenceContract.runtime_call_performed -ne $false -or $controlledGenerationEvidenceContract.secret_value_read_performed -ne $false -or $controlledGenerationEvidenceContract.production_candidate_created -ne $false -or $controlledGenerationEvidenceContract.accepted_sample_auto_promotion -ne $false -or $controlledGenerationEvidenceContract.memory_seed_promoted -ne $false -or $controlledGenerationEvidenceContract.package_dependency_change_performed -ne $false -or $controlledGenerationEvidenceContract.commit_performed -ne $false -or $controlledGenerationEvidenceContract.push_performed -ne $false) {
+      Add-Failure "Controlled Generation Evidence Contract must not perform Push_L2, executor, provider, image, runtime, secret, memory, DailyNote, production, accepted-sample, memory-seed, dependency, commit, or push actions"
     }
   }
 

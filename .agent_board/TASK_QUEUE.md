@@ -1,5 +1,50 @@
 ---
 
+- [x] ID: v0_5_8_controlled_generation_evidence_contract
+      Title: Define Controlled Generation Evidence Contract
+      Reason: The protocol chain needs a fail-closed evidence contract that explicitly links prompt preview, review gate packet, readiness packet, no-op would-generate receipt, and expected review report before any future real generation.
+      Lane: Green.
+      Status: completed_validated_pending_local_commit.
+      Source local commit: b89124bcdd5007796572a8a018a95af86b62514a.
+      Source remote commit: 51f4674d707ed17d3d6fcda55dddea10f8b0533c.
+      Source phase: v0_5_7_noop_controlled_generation_runner_dry_run.
+      Previous phase commit: b89124bcdd5007796572a8a018a95af86b62514a.
+      Previous phase push performed: false.
+      Current gate phase: v0_5_8_controlled_generation_evidence_contract.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Scope: doc/schema/report/fixture/validator/status compact batch only.
+      Changed: docs/V0_5_8_CONTROLLED_GENERATION_EVIDENCE_CONTRACT.md; schemas/controlled_generation_evidence_contract.schema.yaml; reports/visual_asset_eval_dry_run/v0_5_8_controlled_generation_evidence_contract.json; tests/schema_examples/controlled_generation_evidence_contract.example.json; tests/schema_examples/controlled_generation_evidence_contract_fail.example.json; scripts/validate_controlled_generation_evidence_contract.js; scripts/validate_mvp.ps1; scripts/lib/governance_tooling_maintenance_slice.js; docs/00_project_roadmap.md; .agent_board resume surfaces.
+      prompt_package_preview_ref_present: true.
+      review_gate_packet_ref_present: true.
+      readiness_packet_ref_present: true.
+      would_generate_receipt_ref_present: true.
+      expected_review_report_ref_present: true.
+      all_required_refs_present: true.
+      metadata_only: true.
+      dry_run_only: true.
+      evidence_contract_only: true.
+      Push_L2_exercised: false.
+      real_executor_implemented_now: false.
+      provider_call_performed: false.
+      image_generation_performed: false.
+      VCP_memory_write_performed: false.
+      DailyNote_write_performed: false.
+      runtime_call_performed: false.
+      secret_value_read_performed: false.
+      production_candidate_created: false.
+      accepted_sample_auto_promotion: false.
+      memory_seed_promoted: false.
+      package_dependency_change_performed: false.
+      push_allowed: false.
+      commit_performed: pending.
+      push_performed: false.
+      Stop condition: provider call, image generation, memory write, DailyNote write, runtime/VCPToolBox/VCPChat/CDP/bridge/MCP action, real executor implementation, Push_L2 test, accepted_sample promotion, production_candidate creation, memory_seed promotion, dependency change, secret read, git add ., push, tag, release, deploy, or validation failure requiring judgment.
+      Recommended next: post-commit review and Push_L3 manual guarded push classification, then v0.5.9 Visual Memory ReadOnly Query Contract.
+
+---
+
 - [x] ID: v0_5_7_noop_controlled_generation_runner_dry_run
       Title: Define No-op Controlled Generation Runner Dry Run
       Reason: The controlled-generation route needs a no-op runner that only emits would_generate, would_review, and would_stop before any real generation can ever be requested.

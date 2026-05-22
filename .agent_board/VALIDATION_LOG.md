@@ -1,5 +1,45 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260523-v0.5.8-CONTROLLED-GENERATION-EVIDENCE-CONTRACT
+
+Task: v0.5.8 Controlled Generation Evidence Contract
+Status: completed_validated
+Commands run:
+  - git diff --check: passed_with_line_ending_warnings_only
+  - node --check scripts/validate_controlled_generation_evidence_contract.js: passed
+  - node scripts/validate_controlled_generation_evidence_contract.js: passed
+  - node scripts/validate_noop_controlled_generation_runner_dry_run.js: passed
+  - node scripts/validate_smart_v3_push_safety_lane.js: passed
+  - node scripts/validate_agent_board_state.js: passed
+  - powershell -NoProfile -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1: passed
+  - npm run validate:mvp: passed
+Boundary:
+  - source_local_commit: b89124bcdd5007796572a8a018a95af86b62514a
+  - source_remote_commit: 51f4674d707ed17d3d6fcda55dddea10f8b0533c
+  - prompt_package_preview_ref_present: true
+  - review_gate_packet_ref_present: true
+  - readiness_packet_ref_present: true
+  - would_generate_receipt_ref_present: true
+  - expected_review_report_ref_present: true
+  - all_required_refs_present: true
+  - metadata_only: true
+  - dry_run_only: true
+  - evidence_contract_only: true
+  - provider_call_performed: false
+  - image_generation_performed: false
+  - VCP_memory_write_performed: false
+  - DailyNote_write_performed: false
+  - runtime_call_performed: false
+  - secret_value_read_performed: false
+  - production_candidate_created: false
+  - accepted_sample_auto_promotion: false
+  - memory_seed_promoted: false
+  - Push_L2_exercised: false
+  - commit_performed: pending
+  - push_performed: false
+Negative cases:
+  - controlled_generation_evidence_contract: 19 caught / 19
+
 ## VALIDATION-20260523-v0.5.7-NOOP-CONTROLLED-GENERATION-RUNNER-DRY-RUN
 
 Task: v0.5.7 No-op Controlled Generation Runner Dry Run
