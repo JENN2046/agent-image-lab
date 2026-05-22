@@ -178,6 +178,23 @@ Bounded L4 registry entries must use `receipt_path` as the primary receipt path,
 must record `amber_subclass`, and must preserve side-effect flags. The legacy
 `path` field may remain only as a compatibility alias for existing validators.
 
+Bounded L4 executor preflight requires a `bounded_l4_executor_preflight_packet`
+before any future real executor action. The packet must keep `can_execute_now:
+false` until a separate implementation gate proves task locking, one-action
+execution, budget stop, receipt path, rollback, repair-once, memory gate, and
+production candidate gate enforcement. No action may execute without a preflight
+packet or receipt path, no action may execute if the lane is Red, and no action
+may execute if budget would exceed the active envelope.
+
+Task lock requirements are mandatory for a future executor:
+
+```text
+task_lock_required: true
+one_active_task_only: true
+execute_one_action_only_per_loop: true
+stale_lock_is_red_or_blocked: true
+```
+
 ## Continuation Rule
 
 Codex may continue through multiple Amber steps without asking the user when all

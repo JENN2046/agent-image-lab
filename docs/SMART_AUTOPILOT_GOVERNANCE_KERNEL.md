@@ -245,6 +245,20 @@ validation, missing stop conditions, missing receipt/registry requirement, true
 side-effect flags, or secret/raw-private-data access must fail closed before any
 real action begins.
 
+Bounded L4 executor preflight now requires a `bounded_l4_executor_preflight_packet`
+before any future real executor action. The packet must include exact target
+systems, exact allowed and forbidden paths or objects, an allowed operation,
+budget snapshot, receipt registry ref, receipt path, rollback or cleanup plan,
+validation, stop conditions, initial side-effect flags, and `can_execute_now:
+false` until a later executor implementation gate proves enforcement.
+
+Future executor loops must acquire one task lock and enforce
+`execute_one_action_only_per_loop: true`. They must stop before execution on Red
+lane, missing packet, missing receipt path, missing rollback plan, budget
+exceeded, cost unknown, side-effect flag drift, repair limit exceeded, memory
+gate required, or production candidate gate required. This kernel still does not
+implement a real executor.
+
 Cost unknown, missing cost tracking, uncapped cost, or a missing call budget is
 Red for real external Amber actions. Local-only receipt trials and replays must
 record cost as `0` or `not_applicable`.
@@ -306,8 +320,10 @@ tests/schema_examples/autopilot_autonomy_envelope.example.json
 tests/schema_examples/autopilot_receipt_registry.example.json
 tests/schema_examples/autopilot_execution_receipt.example.json
 tests/schema_examples/bounded_l4_autopilot_requirements.example.json
+tests/schema_examples/bounded_l4_executor_preflight_packet.example.json
 scripts/validate_autopilot_governance_kernel.js
 scripts/validate_bounded_l4_autopilot_requirements.js
+scripts/validate_bounded_l4_executor_preflight_contract.js
 ```
 
 The validator must prove the Green / Amber / Red definitions, default envelope

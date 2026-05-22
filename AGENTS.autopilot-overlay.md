@@ -136,6 +136,18 @@ Amber_D_dependency_runtime
 Provider/image, memory, dependency, and runtime work must not be hidden inside a
 single generic Amber bucket when a real executor is introduced.
 
+Before any future real executor action, Bounded L4 also requires a
+`bounded_l4_executor_preflight_packet` with exact target systems, exact allowed
+paths or objects, forbidden paths or objects, one allowed operation, budget
+snapshot, receipt registry ref, receipt path, rollback plan, validation, stop
+conditions, initial side-effect flags, and `can_execute_now: false`. The future
+executor must acquire one task lock, enforce
+`execute_one_action_only_per_loop: true`, and stop on Red lane, missing
+preflight packet, missing receipt path, missing rollback plan, budget exceeded,
+cost unknown, side-effect flag drift, repair limit exceeded, memory gate
+required, or production candidate gate required. This overlay does not implement
+a real executor.
+
 After a meaningful Amber receipt action completes, Codex must automatically run
 a separate Green Lane status-surface sync when README, roadmap, `.agent_board`
 resume surfaces, ledger, validators, or authoritative refs changed or gained new

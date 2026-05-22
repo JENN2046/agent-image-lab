@@ -1,5 +1,45 @@
 ---
 
+## Current Handoff Update - v0.3.7 Bounded L4 Executor Preflight Contract Gate
+
+```text
+phase: v0_3_7_bounded_l4_executor_preflight_contract_gate
+phase_id: v0_3_7_bounded_l4_executor_preflight_contract_gate
+status: completed_validated
+mode: Green Lane local docs/schema/validator planning gate
+summary: Defines the future executor preflight contract without implementing a real executor or executing provider/image/memory/runtime work.
+source_remote_commit: 313def823dde746b75f151b8b3d3e28c6dc9e246
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+preflight_contract_doc_ref: docs/V0_3_7_BOUNDED_L4_EXECUTOR_PREFLIGHT_CONTRACT_GATE.md
+preflight_packet_schema_ref: schemas/bounded_l4_executor_preflight_packet.schema.yaml
+preflight_packet_fixture_ref: tests/schema_examples/bounded_l4_executor_preflight_packet.example.json
+validator_ref: scripts/validate_bounded_l4_executor_preflight_contract.js
+real_executor_implemented_now: false
+can_execute_now: false
+task_lock_required: true
+one_active_task_only: true
+execute_one_action_only_per_loop: true
+max_repair_attempts_per_task: 1
+future_push_allowed: false
+next_phase_started: false
+provider_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+runtime_call_performed: false
+secret_value_read_performed: false
+commit_performed: false
+push_performed: false
+not_performed: no provider call, no image generation, no DailyNote write, no VCP memory write, no VCPToolBox/VCPChat runtime call, no CDP/bridge/MCP call, no production_candidate, no accepted_sample promotion, no real executor, no secret read, no dependency change, no commit, no push.
+validation_status: completed_validated
+latest_validation: git diff --check; node --check scripts/validate_bounded_l4_executor_preflight_contract.js; node scripts/validate_bounded_l4_executor_preflight_contract.js; node scripts/validate_bounded_l4_autopilot_requirements.js; npm run validate:mvp
+recommended_next: external review for local commit readiness; do not push without explicit authorization.
+```
+
+---
+
 ## Current Handoff Update - v0.3.6 Post-Push State Sync
 
 ```text

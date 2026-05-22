@@ -1,0 +1,111 @@
+# bounded_l4_executor_preflight_packet.schema.yaml
+# Planning contract only. This schema does not implement or authorize a real executor.
+
+bounded_l4_executor_preflight_packet:
+  version: v1
+  contract_type: bounded_l4_executor_preflight_packet
+  real_executor_implemented_now: false
+  can_execute_now_required_value: false
+
+required_fields:
+  - packet_id
+  - task_id
+  - source_goal_id
+  - source_route_plan_id
+  - selected_next_safe_task_id
+  - lane
+  - amber_subclass
+  - exact_target_systems
+  - exact_allowed_paths_or_objects
+  - forbidden_paths_or_objects
+  - allowed_operation
+  - budget_snapshot
+  - receipt_registry_ref
+  - receipt_path
+  - rollback_or_cleanup_plan
+  - validation_required
+  - stop_conditions
+  - side_effect_flags_initial
+  - can_execute_now
+
+lane_allowed_values:
+  - Green
+  - Amber
+
+red_lane:
+  executable: false
+  stop_reason: red_lane_detected
+
+amber_subclass_allowed_values:
+  - Green_local
+  - Amber_A_exact_read
+  - Amber_B_provider_image
+  - Amber_C_memory
+  - Amber_D_dependency_runtime
+
+task_lock_contract:
+  task_lock_required: true
+  required_fields:
+    - lock_scope
+    - lock_owner
+    - lock_expiry_or_manual_release_policy
+    - stale_lock_is_red_or_blocked
+    - one_active_task_only
+  stale_lock_is_red_or_blocked: true
+  one_active_task_only: true
+
+one_action_execution_contract:
+  execute_one_action_only_per_loop: true
+  real_executor_implemented_now: false
+  no_action_without_preflight_packet: true
+  no_action_without_receipt_path: true
+  no_action_if_budget_would_exceed_envelope: true
+  no_action_if_lane_is_Red: true
+
+repair_once_state_model:
+  max_repair_attempts_per_task: 1
+  required_fields:
+    - repair_attempt_count
+    - repair_reason
+    - repair_validation_result
+    - second_failure_is_red
+    - non_obvious_repair_is_red
+  second_failure_is_red: true
+  non_obvious_repair_is_red: true
+
+stop_reason_taxonomy:
+  - red_lane_detected
+  - missing_preflight_packet
+  - missing_receipt_path
+  - missing_rollback_plan
+  - budget_exceeded
+  - cost_unknown
+  - side_effect_flag_drift
+  - validation_failed_non_obvious
+  - repair_limit_exceeded
+  - secret_required
+  - production_candidate_gate_required
+  - memory_gate_required
+
+budget_rules:
+  cost_unknown_is_red: true
+  budget_would_exceed_envelope_blocks_execution: true
+  max_cost_amount_required: true
+
+gate_rules:
+  memory_write_requires_memory_gate_id: true
+  production_candidate_requires_production_gate_id: true
+  side_effect_flag_drift_blocks_execution: true
+
+negative_cases_required:
+  - missing_preflight_packet_fails
+  - red_lane_cannot_execute
+  - missing_amber_subclass_fails
+  - missing_receipt_path_fails
+  - missing_rollback_plan_fails
+  - budget_exceeded_fails
+  - cost_unknown_fails
+  - repair_attempt_count_greater_than_one_fails
+  - memory_write_without_memory_gate_fails
+  - production_candidate_without_gate_fails
+  - side_effect_flag_drift_fails

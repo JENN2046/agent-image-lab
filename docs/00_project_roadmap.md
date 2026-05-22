@@ -5,10 +5,10 @@
 ## 当前产品主线恢复点
 
 ```yaml
-current_phase: v0_3_6a_post_push_state_sync_slice_registration_patch
-phase_status: POST_PUSH_STATE_SYNC_SLICE_REGISTERED_VALIDATED
-source_phase: v0_3_5_visual_asset_promotion_gate_design
-current_goal: register_exact_v0_3_6_post_push_state_sync_slice_without_new_execution
+current_phase: v0_3_7_bounded_l4_executor_preflight_contract_gate
+phase_status: LOCAL_DOCS_SCHEMA_VALIDATOR_PLANNING_GATE_IN_PROGRESS
+source_phase: v0_3_6a_post_push_state_sync_slice_registration_patch
+current_goal: define_bounded_l4_executor_preflight_contract_without_real_executor
 long_term_goal: v0_3_controlled_real_provider_production_loop
 semantic_tightening_active: true
 current_boundary_semantics_cleanup_active: true
@@ -27,12 +27,12 @@ v0_3_4a_visual_asset_policy_gap_patch_active: true
 v0_3_5_visual_asset_promotion_gate_design_active: true
 v0_3_6_bounded_l4_autopilot_requirements_and_amber_subclass_gate_active: true
 v0_3_6a_post_push_state_sync_slice_registration_patch_active: true
+v0_3_7_bounded_l4_executor_preflight_contract_gate_active: true
 post_push_state:
-  current_remote_head: a9a3c38f89a04fff4d51993a3d7f474603f364d1
-  pushed_commit: a9a3c38f89a04fff4d51993a3d7f474603f364d1
+  current_remote_head: 313def823dde746b75f151b8b3d3e28c6dc9e246
+  pushed_commit: 313def823dde746b75f151b8b3d3e28c6dc9e246
   pushed_commits:
-    - a9d0835e460874546bcfcc2ce0a9408eb6df2bd3
-    - a9a3c38f89a04fff4d51993a3d7f474603f364d1
+    - 313def823dde746b75f151b8b3d3e28c6dc9e246
   pushed_ref: origin/master
   push_status: completed_remote_synced_after_guarded_push
   ahead_behind_after_push: "0 0"
@@ -51,6 +51,17 @@ post_push_state:
   slice_registration_status: v0_3_6_post_push_state_sync_slice_registered
   slice_registration_validator: scripts/lib/governance_tooling_maintenance_slice.js
   validate_mvp_status_after_slice_registration: passed
+bounded_l4_executor_preflight_contract:
+  preflight_contract_doc_ref: docs/V0_3_7_BOUNDED_L4_EXECUTOR_PREFLIGHT_CONTRACT_GATE.md
+  preflight_packet_schema_ref: schemas/bounded_l4_executor_preflight_packet.schema.yaml
+  preflight_packet_fixture_ref: tests/schema_examples/bounded_l4_executor_preflight_packet.example.json
+  preflight_contract_validator_ref: scripts/validate_bounded_l4_executor_preflight_contract.js
+  real_executor_implemented_now: false
+  can_execute_now: false
+  task_lock_required: true
+  execute_one_action_only_per_loop: true
+  max_repair_attempts_per_task: 1
+  future_push_allowed: false
 visual_asset_governance:
   asset_authorization_registry_ref: assets/visual_asset_authorization_registry.example.json
   generated_image_binary_commit_policy_ref: docs/V0_3_4_VISUAL_ASSET_GOVERNANCE_AND_RECEIPT_STATE_RECONCILIATION.md

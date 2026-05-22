@@ -1,5 +1,37 @@
 ---
 
+- [x] ID: v0_3_7_bounded_l4_executor_preflight_contract_gate
+      Title: Define Bounded L4 executor preflight contract
+      Reason: v0.3.6 defined Bounded L4 requirements but not the exact preflight packet that a future real executor must validate before any action.
+      Lane: Green.
+      Status: completed_validated.
+      Source remote commit: 313def823dde746b75f151b8b3d3e28c6dc9e246.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Scope: docs/schema/validator planning gate only.
+      Required: Executor Preflight Packet, task lock contract, one-action execution contract, repair-once state model, stop reason taxonomy, and fail-closed negative cases.
+      Real executor implemented now: false.
+      can_execute_now: false.
+      task_lock_required: true.
+      one_active_task_only: true.
+      execute_one_action_only_per_loop: true.
+      max_repair_attempts_per_task: 1.
+      push_allowed: false.
+      future_push_allowed: false.
+      next_phase_started: false.
+      provider_call_performed: false.
+      image_generation_performed: false.
+      DailyNote_write_performed: false.
+      VCP_memory_write_performed: false.
+      runtime_call_performed: false.
+      secret_value_read_performed: false.
+      Stop condition: real executor implementation, provider/image/memory/runtime execution, production_candidate creation, accepted_sample promotion, secret read, dependency change, git add ., commit, push, tag, release, deploy, or validation failure requiring non-obvious judgment.
+      Validation: git diff --check; node --check scripts/validate_bounded_l4_executor_preflight_contract.js; node scripts/validate_bounded_l4_executor_preflight_contract.js; node scripts/validate_bounded_l4_autopilot_requirements.js; npm run validate:mvp.
+      Recommended next: external review for local commit readiness; do not push without explicit authorization.
+
+---
+
 - [x] ID: v0_3_6_post_push_state_sync
       Title: Sync v0.3.6 post-push state surfaces
       Reason: After guarded push, v0.3.5 and v0.3.6 are both on origin/master; status surfaces must stop advertising local commit/push readiness as the current state.

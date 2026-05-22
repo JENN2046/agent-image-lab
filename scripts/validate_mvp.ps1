@@ -80,6 +80,7 @@ $requiredFiles = @(
   'scripts/validate_autopilot_receipt_registry_negative_cases.js',
   'scripts/validate_autopilot_amber_action_packet_preflight.js',
   'scripts/validate_bounded_l4_autopilot_requirements.js',
+  'scripts/validate_bounded_l4_executor_preflight_contract.js',
   'scripts/validate_local_checkpoint_manifest.js',
   'scripts/validate_local_commit_scope.js',
   'scripts/validate_post_push_state.js',
@@ -283,6 +284,7 @@ $requiredFiles = @(
   'docs/V0_3_3_FIRST_LIVE_GENERATION_PILOT_GATE.md',
   'docs/V0_3_4_VISUAL_ASSET_GOVERNANCE_AND_RECEIPT_STATE_RECONCILIATION.md',
   'docs/V0_3_6_BOUNDED_L4_AUTOPILOT_REQUIREMENTS_AND_AMBER_SUBCLASS_GATE.md',
+  'docs/V0_3_7_BOUNDED_L4_EXECUTOR_PREFLIGHT_CONTRACT_GATE.md',
   'docs/V0_3_CONTROLLED_REAL_PROVIDER_PRODUCTION_LOOP.md',
   'docs/AUTOPILOT_EVOLUTION_ENGINE.md',
   'docs/AUTOPILOT_COMPLETE_READINESS_GATE.md',
@@ -290,6 +292,7 @@ $requiredFiles = @(
   'schemas/autopilot_autonomy_envelope.schema.yaml',
   'schemas/autopilot_execution_receipt.schema.yaml',
   'schemas/autopilot_receipt_registry.schema.yaml',
+  'schemas/bounded_l4_executor_preflight_packet.schema.yaml',
   'schemas/autopilot_amber_action_packet.schema.yaml',
   'schemas/autopilot_goal.schema.yaml',
   'schemas/autopilot_route_plan.schema.yaml',
@@ -319,6 +322,7 @@ $requiredFiles = @(
   'tests/schema_examples/autopilot_false_readiness_negative_cases.example.json',
   'tests/schema_examples/autopilot_receipt_registry_negative_cases.example.json',
   'tests/schema_examples/bounded_l4_autopilot_requirements.example.json',
+  'tests/schema_examples/bounded_l4_executor_preflight_packet.example.json',
   'scripts/validate_codex_session_image_import.js',
   'scripts/validate_review_result_protocol.js',
   'scripts/validate_review_decision_package.js',
@@ -12292,6 +12296,28 @@ process.exit(child.status || 0);
     }
     if ($boundedL4AutopilotRequirements.provider_contact_performed -ne $false -or $boundedL4AutopilotRequirements.image_generation_performed -ne $false -or $boundedL4AutopilotRequirements.DailyNote_write_performed -ne $false -or $boundedL4AutopilotRequirements.VCP_memory_write_performed -ne $false -or $boundedL4AutopilotRequirements.runtime_call_performed -ne $false -or $boundedL4AutopilotRequirements.secret_value_read_performed -ne $false -or $boundedL4AutopilotRequirements.push_tag_release_deploy_performed -ne $false) {
       Add-Failure "Bounded L4 gate must not perform provider, image, memory, runtime, secret, push, tag, release, or deploy actions"
+    }
+  }
+
+  $boundedL4ExecutorPreflightContractOutput = & node (Join-Path $Root 'scripts/validate_bounded_l4_executor_preflight_contract.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Bounded L4 executor preflight contract validation exited with failure"
+  } else {
+    $boundedL4ExecutorPreflightContract = ($boundedL4ExecutorPreflightContractOutput -join "`n") | ConvertFrom-Json
+    if ($boundedL4ExecutorPreflightContract.passed -ne $true -or $boundedL4ExecutorPreflightContract.phase -ne 'v0_3_7_bounded_l4_executor_preflight_contract_gate') {
+      Add-Failure "Bounded L4 executor preflight contract validation must pass"
+    }
+    if ($boundedL4ExecutorPreflightContract.real_executor_implemented_now -ne $false -or $boundedL4ExecutorPreflightContract.can_execute_now_false -ne $true) {
+      Add-Failure "Bounded L4 executor preflight contract must not implement or authorize execution"
+    }
+    if ($boundedL4ExecutorPreflightContract.task_lock_contract_defined -ne $true -or $boundedL4ExecutorPreflightContract.one_action_contract_defined -ne $true -or $boundedL4ExecutorPreflightContract.repair_once_state_model_defined -ne $true) {
+      Add-Failure "Bounded L4 executor preflight contract must define task lock, one-action, and repair-once models"
+    }
+    if ($boundedL4ExecutorPreflightContract.stop_reason_taxonomy_defined -ne $true -or $boundedL4ExecutorPreflightContract.negative_case_count -lt 11 -or $boundedL4ExecutorPreflightContract.caught_negative_case_count -ne $boundedL4ExecutorPreflightContract.negative_case_count -or $boundedL4ExecutorPreflightContract.all_negative_cases_caught -ne $true) {
+      Add-Failure "Bounded L4 executor preflight contract must define stop reasons and catch every negative case"
+    }
+    if ($boundedL4ExecutorPreflightContract.provider_call_performed -ne $false -or $boundedL4ExecutorPreflightContract.image_generation_performed -ne $false -or $boundedL4ExecutorPreflightContract.DailyNote_write_performed -ne $false -or $boundedL4ExecutorPreflightContract.VCP_memory_write_performed -ne $false -or $boundedL4ExecutorPreflightContract.runtime_call_performed -ne $false -or $boundedL4ExecutorPreflightContract.secret_value_read_performed -ne $false -or $boundedL4ExecutorPreflightContract.commit_performed -ne $false -or $boundedL4ExecutorPreflightContract.push_performed -ne $false) {
+      Add-Failure "Bounded L4 executor preflight contract must not perform provider, image, memory, runtime, secret, commit, or push actions"
     }
   }
 
