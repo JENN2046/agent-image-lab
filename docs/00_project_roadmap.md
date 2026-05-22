@@ -5,10 +5,10 @@
 ## 当前产品主线恢复点
 
 ```yaml
-current_phase: v0_3_7a_push_safety_lane_gate
-phase_status: LOCAL_DOCS_SCHEMA_VALIDATOR_PLANNING_GATE_IN_PROGRESS
-source_phase: v0_3_7_post_push_state_sync
-current_goal: define_smart_v3_push_safety_lane_without_push_execution
+current_phase: v0_3_7a_post_push_state_sync
+phase_status: COMPLETED_REMOTE_SYNCED_AFTER_GUARDED_PUSH
+source_phase: v0_3_7a_push_safety_lane_gate
+current_goal: sync_v0_3_7a_post_push_status_surfaces
 long_term_goal: v0_3_controlled_real_provider_production_loop
 semantic_tightening_active: true
 current_boundary_semantics_cleanup_active: true
@@ -30,11 +30,12 @@ v0_3_6a_post_push_state_sync_slice_registration_patch_active: true
 v0_3_7_bounded_l4_executor_preflight_contract_gate_active: true
 v0_3_7_post_push_state_sync_active: true
 v0_3_7a_push_safety_lane_gate_active: true
+v0_3_7a_post_push_state_sync_active: true
 post_push_state:
-  current_remote_head: b5cb845ac280e463c3825ca0bc20e5abc772c421
-  pushed_commit: b5cb845ac280e463c3825ca0bc20e5abc772c421
+  current_remote_head: e25e80bddf55a7b1349690043cbd597e6152c8ce
+  pushed_commit: e25e80bddf55a7b1349690043cbd597e6152c8ce
   pushed_commits:
-    - b5cb845ac280e463c3825ca0bc20e5abc772c421
+    - e25e80bddf55a7b1349690043cbd597e6152c8ce
   pushed_ref: origin/master
   push_status: completed_remote_synced_after_guarded_push
   ahead_behind_after_push: "0 0"
@@ -78,6 +79,12 @@ push_safety_lane:
   force_push_always_manual_or_forbidden: true
   tag_release_deploy_always_manual_or_forbidden: true
   secret_destructive_always_manual_or_forbidden: true
+  push_safety_lane_remote_active: true
+  future_push_must_use_push_safety_lane: true
+  Push_L0_forbidden_preserved: true
+  Push_L1_green_auto_available_for_future: true
+  Push_L2_amber_auto_guarded_available_for_future: true
+  Push_L3_red_manual_preserved: true
   push_performed_by_this_gate: false
   future_push_allowed: false
 visual_asset_governance:
