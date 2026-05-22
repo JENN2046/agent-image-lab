@@ -11,6 +11,48 @@ const outputDirectory = "runs/real_generation/v0_3_3_codex_sample_first_trial/";
 const receiptPath = "reports/provider_receipts/v0_3_3_codex_sample_first_trial_receipt.json";
 const registryPath = "reports/provider_receipts/provider_receipt_registry.json";
 const attemptResultPath = "runs/real_generation/v0_3_3_codex_sample_first_trial/generation_attempt_result.json";
+const visualAssetAuthorizationRegistryPath = "assets/visual_asset_authorization_registry.example.json";
+const v034PolicyDocPath = "docs/V0_3_4_VISUAL_ASSET_GOVERNANCE_AND_RECEIPT_STATE_RECONCILIATION.md";
+const visualAssetPolicyVersion = "visual_asset_policy_v0_3_4a";
+const visualAssetClassEnum = [
+  "runs_artifact",
+  "user_authorized_test_image",
+  "review_candidate",
+  "eval_seed_candidate",
+  "accepted_sample",
+  "production_candidate"
+];
+
+const attemptRecords = [
+  {
+    id: "first_trial",
+    status: "failed_no_image_generated",
+    receipt_path: receiptPath,
+    attempt_result_path: attemptResultPath,
+    output_image_path: null
+  },
+  {
+    id: "retry_001",
+    status: "failed_no_image_generated",
+    receipt_path: "reports/provider_receipts/v0_3_3_retry_001_receipt.json",
+    attempt_result_path: "runs/real_generation/v0_3_3_retry_001_codex_sample/generation_attempt_result.json",
+    output_image_path: null
+  },
+  {
+    id: "smoke_001_neutral",
+    status: "succeeded_image_generated",
+    receipt_path: "reports/provider_receipts/v0_3_3_smoke_001_neutral_receipt.json",
+    attempt_result_path: "runs/real_generation/v0_3_3_smoke_001_neutral/generation_attempt_result.json",
+    output_image_path: "runs/real_generation/v0_3_3_smoke_001_neutral/neutral_smoke_test_red_apple_v1.png"
+  },
+  {
+    id: "safe_portrait_001",
+    status: "succeeded_image_generated",
+    receipt_path: "reports/provider_receipts/v0_3_3_safe_portrait_001_receipt.json",
+    attempt_result_path: "runs/real_generation/v0_3_3_safe_portrait_001/generation_attempt_result.json",
+    output_image_path: "runs/real_generation/v0_3_3_safe_portrait_001/safe_adult_editorial_portrait_v1.png"
+  }
+];
 
 const requiredBeforeImageGeneration = [
   "exact_owner_authorization_phrase_for_v0_3_3_execution",
@@ -178,6 +220,24 @@ function buildCanonicalGate() {
       image_candidates_generated: 0,
       failure_class: "provider_tool_user_error"
     },
+    receipt_reconciliation: {
+      failed_attempt_count: 2,
+      succeeded_diagnostic_count: 2,
+      total_attempt_result_count: 4,
+      diagnostic_image_candidates_generated: 2,
+      user_authorized_png_upload_count: 2,
+      visual_asset_authorization_registry_ref: visualAssetAuthorizationRegistryPath,
+      generated_image_binary_commit_policy_ref: v034PolicyDocPath,
+      visual_asset_policy_version: visualAssetPolicyVersion,
+      asset_class_enum: visualAssetClassEnum,
+      runs_artifact_boundary: "diagnostic provider-run evidence, not durable review asset by default",
+      runs_artifact_count: 1,
+      user_authorized_test_image_count: 1,
+      memory_seed_true_count: 0,
+      invalid_memory_seed_count: 0,
+      durable_review_asset_requires_separate_gate: true,
+      production_candidate_write_allowed_by_v0_3_4: false
+    },
     current_execution_budgets: {
       provider_calls: 0,
       plugin_calls: 0,
@@ -277,6 +337,21 @@ function validateGate(gate) {
   assert(gate.gate_readiness.provider_calls_used === 1, "provider call must be consumed");
   assert(gate.gate_readiness.image_candidates_generated === 0, "no image candidate should be generated");
   assert(gate.gate_readiness.failure_class === "provider_tool_user_error", "failure class mismatch");
+  assert(gate.receipt_reconciliation.failed_attempt_count === 2, "failed attempt count mismatch");
+  assert(gate.receipt_reconciliation.succeeded_diagnostic_count === 2, "succeeded diagnostic count mismatch");
+  assert(gate.receipt_reconciliation.total_attempt_result_count === 4, "total attempt result count mismatch");
+  assert(gate.receipt_reconciliation.diagnostic_image_candidates_generated === 2, "diagnostic image candidate count mismatch");
+  assert(gate.receipt_reconciliation.user_authorized_png_upload_count === 2, "authorized PNG count mismatch");
+  assert(gate.receipt_reconciliation.visual_asset_authorization_registry_ref === visualAssetAuthorizationRegistryPath, "asset authorization registry ref mismatch");
+  assert(gate.receipt_reconciliation.generated_image_binary_commit_policy_ref === v034PolicyDocPath, "binary policy ref mismatch");
+  assert(gate.receipt_reconciliation.visual_asset_policy_version === visualAssetPolicyVersion, "visual asset policy version mismatch");
+  assertDeepEqual(gate.receipt_reconciliation.asset_class_enum, visualAssetClassEnum, "asset class enum");
+  assert(gate.receipt_reconciliation.runs_artifact_count === 1, "runs artifact count mismatch");
+  assert(gate.receipt_reconciliation.user_authorized_test_image_count === 1, "user authorized test image count mismatch");
+  assert(gate.receipt_reconciliation.memory_seed_true_count === 0, "memory seed count must stay zero");
+  assert(gate.receipt_reconciliation.invalid_memory_seed_count === 0, "invalid memory seed count must stay zero");
+  assert(gate.receipt_reconciliation.durable_review_asset_requires_separate_gate === true, "durable review asset boundary mismatch");
+  assert(gate.receipt_reconciliation.production_candidate_write_allowed_by_v0_3_4 === false, "production candidate must be blocked by v0.3.4");
   assert(gate.current_execution_budgets.provider_calls === 0, "current provider budget must be zero");
   assert(gate.current_execution_budgets.plugin_calls === 0, "current plugin budget must be zero");
   assert(gate.current_execution_budgets.api_calls === 0, "current API budget must be zero");
@@ -290,6 +365,8 @@ function validateGate(gate) {
   assertDeepEqual(gate.stop_conditions, stopConditions, "stop conditions");
   validateSideEffectFlags(gate.side_effect_flags);
   validateReceiptAndRegistry();
+  validateAttemptRecords();
+  validateVisualAssetAuthorizationRegistry(gate);
   assert(gate.recommended_next === "inspect_failed_provider_tool_attempt_or_authorize_new_trial", "recommended next mismatch");
 }
 
@@ -313,6 +390,63 @@ function validateReceiptAndRegistry() {
   assert(registry.entries[0].status === "failed_no_image_generated", "registry status mismatch");
 }
 
+function validateAttemptRecords() {
+  const failed = [];
+  const succeeded = [];
+  for (const record of attemptRecords) {
+    assert(fs.existsSync(path.join(root, record.receipt_path)), `receipt missing: ${record.receipt_path}`);
+    assert(fs.existsSync(path.join(root, record.attempt_result_path)), `attempt result missing: ${record.attempt_result_path}`);
+    const receipt = readJson(record.receipt_path);
+    const attempt = readJson(record.attempt_result_path);
+    assert(receipt.status === record.status, `receipt status mismatch: ${record.id}`);
+    assert(attempt.attempt_status === record.status, `attempt status mismatch: ${record.id}`);
+    assert(receipt.attempt_result_path === record.attempt_result_path, `receipt attempt path mismatch: ${record.id}`);
+    assert(attempt.output_image_path === record.output_image_path, `attempt output path mismatch: ${record.id}`);
+    if (record.output_image_path) {
+      assert(receipt.output_image_path === record.output_image_path, `receipt output path mismatch: ${record.id}`);
+      assert(fs.existsSync(path.join(root, record.output_image_path)), `output image missing: ${record.output_image_path}`);
+      assert(receipt.source_image_path_redacted === true, `receipt source path must be redacted: ${record.id}`);
+      succeeded.push(record);
+    } else {
+      assert(receipt.output_image_path === null, `failed receipt must not bind output: ${record.id}`);
+      failed.push(record);
+    }
+  }
+  assert(failed.length === 2, "failed attempt count must be two");
+  assert(succeeded.length === 2, "succeeded diagnostic count must be two");
+}
+
+function validateVisualAssetAuthorizationRegistry(gate) {
+  assert(fs.existsSync(path.join(root, visualAssetAuthorizationRegistryPath)), "visual asset authorization registry must exist");
+  assert(fs.existsSync(path.join(root, v034PolicyDocPath)), "v0.3.4 policy doc must exist");
+  const registry = readJson(visualAssetAuthorizationRegistryPath);
+  assert(registry.phase === "v0_3_4_visual_asset_governance_and_receipt_state_reconciliation", "asset registry phase mismatch");
+  assert(registry.visual_asset_policy_version === visualAssetPolicyVersion, "asset registry policy version mismatch");
+  assert(registry.pushed_commit === "bf5e54e", "asset registry must record pushed commit bf5e54e");
+  assert(registry.binary_commit_policy_id === "generated_image_binary_commit_policy_v1", "binary commit policy id mismatch");
+  assertDeepEqual(registry.asset_boundary.asset_class_enum, visualAssetClassEnum, "asset registry class enum");
+  assert(registry.asset_boundary.memory_seed_requires_memory_gate === true, "asset registry must require memory gate for memory_seed");
+  assert(registry.asset_boundary.VCP_memory_write_allowed_now === false, "asset registry must keep VCP memory writes unauthorized now");
+  assert(Array.isArray(registry.entries) && registry.entries.length === gate.receipt_reconciliation.user_authorized_png_upload_count, "authorized PNG registry count mismatch");
+  const classCounts = registry.entries.reduce((counts, entry) => {
+    counts[entry.asset_class] = (counts[entry.asset_class] || 0) + 1;
+    return counts;
+  }, {});
+  for (const entry of registry.entries) {
+    assert(entry.upload_authorized_by_user === true, `asset upload must be user authorized: ${entry.asset_id}`);
+    assert(entry.owner_authorized_upload === undefined || entry.owner_authorized_upload === entry.upload_authorized_by_user, `asset upload alias drift: ${entry.asset_id}`);
+    assert(visualAssetClassEnum.includes(entry.asset_class), `asset class must be valid: ${entry.asset_id}`);
+    assert(entry.asset_role === "runs_artifact", `asset role mismatch: ${entry.asset_id}`);
+    assert(entry.durable_review_asset === false, `asset must not self-claim durable review status: ${entry.asset_id}`);
+    assert(entry.accepted_sample === false, `asset must not self-claim accepted sample status: ${entry.asset_id}`);
+    assert(entry.production_candidate === false, `asset must not self-claim production candidate status: ${entry.asset_id}`);
+    assert(entry.memory_seed === false, `asset must not self-claim memory seed status: ${entry.asset_id}`);
+    assert(entry.source_image_path_redacted === true, `asset source path redaction missing: ${entry.asset_id}`);
+  }
+  assert(classCounts.runs_artifact === gate.receipt_reconciliation.runs_artifact_count, "runs artifact registry count mismatch");
+  assert(classCounts.user_authorized_test_image === gate.receipt_reconciliation.user_authorized_test_image_count, "user authorized test image registry count mismatch");
+}
+
 function expectFailure(caseId, mutate) {
   const gate = clone(buildCanonicalGate());
   mutate(gate);
@@ -333,13 +467,14 @@ function validateDocsAndStatus() {
   const gateDoc = read("docs/V0_3_3_FIRST_LIVE_GENERATION_PILOT_GATE.md");
   const packetDoc = read("docs/V0_3_2_LIVE_CANDIDATE_ACTION_PACKET.md");
   const longTermDoc = read("docs/V0_3_CONTROLLED_REAL_PROVIDER_PRODUCTION_LOOP.md");
+  const v034Doc = read(v034PolicyDocPath);
   const roadmap = read("docs/00_project_roadmap.md");
   const runState = read(".agent_board/RUN_STATE.md");
   const taskQueue = read(".agent_board/TASK_QUEUE.md");
   const checkpoint = read(".agent_board/CHECKPOINT.md");
   const handoff = read(".agent_board/HANDOFF.md");
   const ledger = read(".agent_board/AUTOPILOT_LEDGER.md");
-  const combined = [gateDoc, packetDoc, longTermDoc, roadmap, runState, taskQueue, checkpoint, handoff, ledger].join("\n");
+  const combined = [gateDoc, packetDoc, longTermDoc, v034Doc, roadmap, runState, taskQueue, checkpoint, handoff, ledger].join("\n");
 
   for (const token of [
     phase,
@@ -357,6 +492,10 @@ function validateDocsAndStatus() {
     "provider_contact_performed: true",
     "receipt_written: true",
     "registry_written: true",
+    "failed_attempt_count: 2",
+    "succeeded_diagnostic_count: 2",
+    "asset_authorization_registry_ref: assets/visual_asset_authorization_registry.example.json",
+    "generated_image_binary_commit_policy_v1",
     "recommended_next: inspect_failed_provider_tool_attempt_or_authorize_new_trial"
   ]) {
     assert(combined.includes(token), `missing required status token: ${token}`);
@@ -463,6 +602,20 @@ function main() {
     provider_calls_used: actual.gate_readiness.provider_calls_used,
     image_candidates_generated: actual.gate_readiness.image_candidates_generated,
     failure_class: actual.gate_readiness.failure_class,
+    failed_attempt_count: actual.receipt_reconciliation.failed_attempt_count,
+    succeeded_diagnostic_count: actual.receipt_reconciliation.succeeded_diagnostic_count,
+    total_attempt_result_count: actual.receipt_reconciliation.total_attempt_result_count,
+    diagnostic_image_candidates_generated: actual.receipt_reconciliation.diagnostic_image_candidates_generated,
+    user_authorized_png_upload_count: actual.receipt_reconciliation.user_authorized_png_upload_count,
+    visual_asset_policy_version: actual.receipt_reconciliation.visual_asset_policy_version,
+    runs_artifact_count: actual.receipt_reconciliation.runs_artifact_count,
+    user_authorized_test_image_count: actual.receipt_reconciliation.user_authorized_test_image_count,
+    memory_seed_true_count: actual.receipt_reconciliation.memory_seed_true_count,
+    invalid_memory_seed_count: actual.receipt_reconciliation.invalid_memory_seed_count,
+    generated_image_binary_commit_policy_ref: actual.receipt_reconciliation.generated_image_binary_commit_policy_ref,
+    visual_asset_authorization_registry_ref: actual.receipt_reconciliation.visual_asset_authorization_registry_ref,
+    durable_review_asset_requires_separate_gate: actual.receipt_reconciliation.durable_review_asset_requires_separate_gate,
+    production_candidate_write_allowed_by_v0_3_4: actual.receipt_reconciliation.production_candidate_write_allowed_by_v0_3_4,
     output_path_collision: actual.gate_readiness.output_path_collision,
     receipt_path_collision: actual.gate_readiness.receipt_path_collision,
     negative_case_count: actual.negative_case_count,

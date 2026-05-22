@@ -119,11 +119,13 @@ function replaceTaskQueueItemBlock(text, taskId, replacer) {
 
 function validateSurface(pathName, text) {
   const latest = latestSection(text);
+  const pushBoundaryPresent = latest.includes("push_status: not_performed") ||
+    latest.includes("push_allowed: false") ||
+    latest.includes("pushed_to_origin_master_after_user_authorization");
   assert(latest.includes(activeCurrentPhase), `${pathName} latest section must cite active current phase`);
   assert(latest.includes(activeSourcePhase), `${pathName} latest section must cite active source phase`);
   assert(latest.includes(activeNextDecision), `${pathName} latest section must cite active next Red decision`);
-  assert(latest.includes("push_status: not_performed") || latest.includes("push_allowed: false"), `${pathName} latest section must preserve no-push state`);
-  assert(latest.includes("push_status: not_performed") || latest.includes("push_allowed: false"), `${pathName} latest section must preserve no-push state`);
+  assert(pushBoundaryPresent, `${pathName} latest section must preserve push boundary state`);
   assert(
     latest.includes("image_generation_performed: false") ||
       latest.includes("actual_image_generation_performed: false") ||
@@ -141,7 +143,7 @@ function validateSurface(pathName, text) {
     current_phase_present: latest.includes(activeCurrentPhase),
     active_source_phase_present: latest.includes(activeSourcePhase),
     next_boundary_present: latest.includes(activeNextDecision),
-    no_push_present: latest.includes("push_status: not_performed") || latest.includes("push_allowed: false")
+    push_boundary_present: pushBoundaryPresent
   };
 }
 
@@ -250,7 +252,10 @@ function buildReport() {
       );
     }),
     expectFailure("handoff_missing_no_push_state_fails", (surfaces) => {
-      surfaces[".agent_board/HANDOFF.md"] = surfaces[".agent_board/HANDOFF.md"].split("push_status: not_performed").join("push_status: ambiguous");
+      surfaces[".agent_board/HANDOFF.md"] = surfaces[".agent_board/HANDOFF.md"]
+        .split("push_status: not_performed").join("push_status: ambiguous")
+        .split("push_allowed: false").join("push_allowed: ambiguous")
+        .split("pushed_to_origin_master_after_user_authorization").join("push_status_ambiguous");
     }),
     expectFailure("roadmap_current_phase_drift_fails", (surfaces) => {
       surfaces["docs/00_project_roadmap.md"] = surfaces["docs/00_project_roadmap.md"]

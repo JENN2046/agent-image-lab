@@ -71,6 +71,7 @@ $requiredFiles = @(
   'scripts/validate_autopilot_amber_packet_to_receipt_traceability.js',
   'scripts/validate_autopilot_agent_board_resume_compaction_guard.js',
   'scripts/validate_provider_receipt_artifacts.js',
+  'scripts/validate_visual_asset_authorization_policy.js',
   'scripts/validate_v0_3_1_real_provider_cost_boundary_plan.js',
   'scripts/validate_v0_3_2_live_candidate_action_packet.js',
   'scripts/validate_v0_3_3_first_live_generation_pilot_gate.js',
@@ -279,6 +280,7 @@ $requiredFiles = @(
   'docs/V0_3_1_REAL_PROVIDER_COST_BOUNDARY_PLAN.md',
   'docs/V0_3_2_LIVE_CANDIDATE_ACTION_PACKET.md',
   'docs/V0_3_3_FIRST_LIVE_GENERATION_PILOT_GATE.md',
+  'docs/V0_3_4_VISUAL_ASSET_GOVERNANCE_AND_RECEIPT_STATE_RECONCILIATION.md',
   'docs/V0_3_CONTROLLED_REAL_PROVIDER_PRODUCTION_LOOP.md',
   'docs/AUTOPILOT_EVOLUTION_ENGINE.md',
   'docs/AUTOPILOT_COMPLETE_READINESS_GATE.md',
@@ -308,6 +310,7 @@ $requiredFiles = @(
   'tests/schema_examples/v0_3_1_real_provider_cost_boundary_plan.example.json',
   'tests/schema_examples/v0_3_2_live_candidate_action_packet.example.json',
   'tests/schema_examples/v0_3_3_first_live_generation_pilot_gate.example.json',
+  'assets/visual_asset_authorization_registry.example.json',
   'tests/schema_examples/autopilot_evolution_backlog.example.json',
   'tests/schema_examples/complete_autopilot_readiness_gate.example.json',
   'tests/schema_examples/autopilot_false_readiness_negative_cases.example.json',
@@ -7768,6 +7771,7 @@ if (-not $node) {
     $allowedCurrentA4ChangePrefixes = @(
       '.agent_board/',
       'accepted_samples/',
+      'assets/',
       'asset_archive/',
       'adapters/',
       'configs/local_paths/',
@@ -12173,6 +12177,43 @@ process.exit(child.status || 0);
     }
     if ($v033FirstLiveGenerationPilot.can_execute_now -ne $false -or $v033FirstLiveGenerationPilot.provider_calls_used -ne 1 -or $v033FirstLiveGenerationPilot.image_candidates_generated -ne 0) {
       Add-Failure "v0.3.3 first live generation pilot must record the failed one-call/no-image attempt and block further execution"
+    }
+    if ($v033FirstLiveGenerationPilot.failed_attempt_count -ne 2 -or $v033FirstLiveGenerationPilot.succeeded_diagnostic_count -ne 2 -or $v033FirstLiveGenerationPilot.user_authorized_png_upload_count -ne 2) {
+      Add-Failure "v0.3.3 first live generation pilot must reconcile two failed attempts and two succeeded diagnostic PNG assets"
+    }
+    if ($v033FirstLiveGenerationPilot.visual_asset_policy_version -ne 'visual_asset_policy_v0_3_4a' -or $v033FirstLiveGenerationPilot.runs_artifact_count -ne 1 -or $v033FirstLiveGenerationPilot.user_authorized_test_image_count -ne 1) {
+      Add-Failure "v0.3.3 first live generation pilot must model the v0.3.4a visual asset policy classes"
+    }
+    if ($v033FirstLiveGenerationPilot.memory_seed_true_count -ne 0 -or $v033FirstLiveGenerationPilot.invalid_memory_seed_count -ne 0) {
+      Add-Failure "v0.3.3 first live generation pilot must keep diagnostic PNGs out of memory seed state"
+    }
+  }
+
+  $visualAssetAuthorizationOutput = & node (Join-Path $Root 'scripts/validate_visual_asset_authorization_policy.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "visual asset authorization policy validation exited with failure"
+  } else {
+    $visualAssetAuthorization = ($visualAssetAuthorizationOutput -join "`n") | ConvertFrom-Json
+    if ($visualAssetAuthorization.passed -ne $true -or $visualAssetAuthorization.status -ne 'visual_asset_authorization_policy_verified') {
+      Add-Failure "visual asset authorization policy validation must pass"
+    }
+    if ($visualAssetAuthorization.pushed_commit -ne 'bf5e54e' -or $visualAssetAuthorization.authorized_png_count -ne 2 -or $visualAssetAuthorization.all_assets_git_tracked -ne $true) {
+      Add-Failure "visual asset authorization must record bf5e54e and verify two git-tracked authorized PNGs"
+    }
+    if ($visualAssetAuthorization.visual_asset_policy_version -ne 'visual_asset_policy_v0_3_4a' -or $visualAssetAuthorization.user_authorized_test_image_count -ne 1 -or $visualAssetAuthorization.runs_artifact_count -ne 1) {
+      Add-Failure "visual asset authorization must verify the v0.3.4a asset class split"
+    }
+    if ($visualAssetAuthorization.memory_seed_true_count -ne 0 -or $visualAssetAuthorization.invalid_memory_seed_count -ne 0 -or $visualAssetAuthorization.accepted_sample_count -ne 0 -or $visualAssetAuthorization.production_candidate_count -ne 0) {
+      Add-Failure "visual asset authorization must keep test assets out of memory seed, accepted sample, and production candidate state"
+    }
+    if ($visualAssetAuthorization.negative_case_count -lt 11 -or $visualAssetAuthorization.caught_negative_case_count -ne $visualAssetAuthorization.negative_case_count -or $visualAssetAuthorization.all_negative_cases_caught -ne $true) {
+      Add-Failure "visual asset authorization must catch all required v0.3.4a negative cases"
+    }
+    if ($visualAssetAuthorization.runs_artifact_boundary_verified -ne $true -or $visualAssetAuthorization.durable_review_asset_boundary_verified -ne $true -or $visualAssetAuthorization.production_candidate_write_performed_by_v0_3_4 -ne $false) {
+      Add-Failure "visual asset authorization must split runs artifacts from durable review assets and block production candidates"
+    }
+    if ($visualAssetAuthorization.provider_contact_performed_by_v0_3_4 -ne $false -or $visualAssetAuthorization.image_generation_performed_by_v0_3_4 -ne $false -or $visualAssetAuthorization.DailyNote_write_performed_by_v0_3_4 -ne $false -or $visualAssetAuthorization.VCP_memory_write_performed_by_v0_3_4 -ne $false) {
+      Add-Failure "v0.3.4 visual asset authorization must not perform provider, image generation, DailyNote, or VCP memory actions"
     }
   }
 

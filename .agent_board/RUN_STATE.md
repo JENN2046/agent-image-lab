@@ -1,5 +1,94 @@
 ---
 
+## Current Run State - v0.3.4a Visual Asset Policy Gap Patch
+
+```text
+phase: v0_3_4a_visual_asset_policy_gap_patch
+phase_id: v0_3_4a_visual_asset_policy_gap_patch
+status: completed_validated
+mode: Green Lane local docs and validator gap patch
+source_remote_commit: bf5e54e
+source_phase: v0_3_4_visual_asset_governance_and_receipt_state_reconciliation
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+current_autonomy_model: Smart Standing Authorization v3
+startup_default_model: Smart Standing Authorization v3
+a4_8_status: retained_as_green_lane_substrate
+a5_status: not_used_for_this_gap_patch
+objective: fix exact visual asset policy review gaps without new provider/image generation or remote action
+visual_asset_policy_version: visual_asset_policy_v0_3_4a
+asset_class_enum_complete: true
+runs_artifact_count: 1
+user_authorized_test_image_count: 1
+memory_seed_true_count: 0
+invalid_memory_seed_count: 0
+accepted_sample_count: 0
+production_candidate_count: 0
+negative_case_count: 12
+all_negative_cases_caught: true
+can_execute_now: false
+push_allowed: false
+provider_contact_performed_by_v0_3_4a: false
+plugin_call_performed_by_v0_3_4a: false
+api_call_performed_by_v0_3_4a: false
+image_generation_performed_by_v0_3_4a: false
+image_generation_performed: false
+DailyNote_write_performed_by_v0_3_4a: false
+VCP_memory_write_performed_by_v0_3_4a: false
+runtime_probe_performed_by_v0_3_4a: false
+secret_value_read_performed_by_v0_3_4a: false
+secret_value_read_performed: false
+commit_performed: false
+push_performed: false
+recommended_next: exact diff review for local commit authorization only
+```
+
+---
+
+## Current Run State - v0.3.4 Visual Asset Governance And Receipt State Reconciliation
+
+```text
+phase: v0_3_4_visual_asset_governance_and_receipt_state_reconciliation
+phase_id: v0_3_4_visual_asset_governance_and_receipt_state_reconciliation
+status: completed_validated
+mode: Green Lane local docs and validator patch
+source_phase: v0_3_3_first_live_generation_pilot
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+current_autonomy_model: Smart Standing Authorization v3
+startup_default_model: Smart Standing Authorization v3
+a4_8_status: retained_as_green_lane_substrate
+a5_status: classified_by_lane_and_envelope
+objective: reconcile pushed receipt and visual asset state after bf5e54e
+pushed_commit: bf5e54e
+pushed_ref: origin/master
+push_status: pushed_to_origin_master_after_user_authorization
+push_allowed: false
+asset_authorization_registry_ref: assets/visual_asset_authorization_registry.example.json
+generated_image_binary_commit_policy_ref: docs/V0_3_4_VISUAL_ASSET_GOVERNANCE_AND_RECEIPT_STATE_RECONCILIATION.md
+failed_attempt_count: 2
+succeeded_diagnostic_count: 2
+authorized_png_count: 2
+runs_artifact_boundary: provider-run evidence only
+durable_review_asset_requires_separate_gate: true
+production_candidate_write_allowed_by_v0_3_4: false
+provider_contact_performed_by_v0_3_4: false
+plugin_call_performed_by_v0_3_4: false
+api_call_performed_by_v0_3_4: false
+image_generation_performed_by_v0_3_4: false
+image_generation_performed: false
+DailyNote_write_performed_by_v0_3_4: false
+VCP_memory_write_performed_by_v0_3_4: false
+runtime_probe_performed_by_v0_3_4: false
+secret_value_read_performed: false
+push_tag_release_deploy_performed_by_v0_3_4: false
+recommended_next: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+```
+
+---
+
 ## Current Run State - Provider Receipt Artifact Repair
 
 ```text

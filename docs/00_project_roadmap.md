@@ -5,10 +5,10 @@
 ## 当前产品主线恢复点
 
 ```yaml
-current_phase: v0_3_3_first_live_generation_pilot
-phase_status: AMBER_EXECUTION_ATTEMPTED_FAILED_NO_RETRY
-source_phase: v0_3_2_live_candidate_action_packet
-current_goal: enter_first_live_generation_pilot_gate_without_execution
+current_phase: v0_3_4a_visual_asset_policy_gap_patch
+phase_status: LOCAL_DOCS_AND_VALIDATOR_GAP_PATCH_COMPLETED
+source_phase: v0_3_3_first_live_generation_pilot
+current_goal: close_visual_asset_policy_review_gaps_without_new_provider_or_image_generation
 long_term_goal: v0_3_controlled_real_provider_production_loop
 semantic_tightening_active: true
 current_boundary_semantics_cleanup_active: true
@@ -22,6 +22,43 @@ v0_3_controlled_real_provider_production_loop_active: true
 v0_3_1_real_provider_cost_boundary_plan_active: true
 v0_3_2_live_candidate_action_packet_active: true
 v0_3_3_first_live_generation_pilot_active: true
+v0_3_4_visual_asset_governance_and_receipt_state_reconciliation_active: true
+v0_3_4a_visual_asset_policy_gap_patch_active: true
+post_push_state:
+  pushed_commit: bf5e54e
+  pushed_ref: origin/master
+  push_status: pushed_to_origin_master_after_user_authorization
+  push_allowed: false
+visual_asset_governance:
+  asset_authorization_registry_ref: assets/visual_asset_authorization_registry.example.json
+  generated_image_binary_commit_policy_ref: docs/V0_3_4_VISUAL_ASSET_GOVERNANCE_AND_RECEIPT_STATE_RECONCILIATION.md
+  visual_asset_authorization_policy_validator_ref: scripts/validate_visual_asset_authorization_policy.js
+  visual_asset_policy_version: visual_asset_policy_v0_3_4a
+  asset_class_enum:
+    - runs_artifact
+    - user_authorized_test_image
+    - review_candidate
+    - eval_seed_candidate
+    - accepted_sample
+    - production_candidate
+  failed_attempt_count: 2
+  succeeded_diagnostic_count: 2
+  authorized_png_count: 2
+  runs_artifact_count: 1
+  user_authorized_test_image_count: 1
+  memory_seed_true_count: 0
+  invalid_memory_seed_count: 0
+  runs_artifact_boundary: provider-run evidence only
+  durable_review_asset_requires_separate_gate: true
+  production_candidate_write_allowed_by_v0_3_4: false
+  upload_authorized_by_user_required: true
+  memory_seed_requires_gate: true
+  memory_seed_false_required_for_test_assets: true
+  image_generation_performed: false
+resume_guard_anchor:
+  current_phase: v0_3_3_first_live_generation_pilot
+  source_phase: v0_3_2_live_candidate_action_packet
+  next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
 current_autonomy_model: Smart Standing Authorization v3
 startup_default_model: Smart Standing Authorization v3
 a4_8_status: retained_as_green_lane_substrate
@@ -91,6 +128,9 @@ v0_3_2_live_candidate_action_packet_fixture_ref: tests/schema_examples/v0_3_2_li
 v0_3_3_first_live_generation_pilot_gate_ref: docs/V0_3_3_FIRST_LIVE_GENERATION_PILOT_GATE.md
 v0_3_3_first_live_generation_pilot_gate_validator_ref: scripts/validate_v0_3_3_first_live_generation_pilot_gate.js
 v0_3_3_first_live_generation_pilot_gate_fixture_ref: tests/schema_examples/v0_3_3_first_live_generation_pilot_gate.example.json
+v0_3_4_visual_asset_governance_and_receipt_state_reconciliation_ref: docs/V0_3_4_VISUAL_ASSET_GOVERNANCE_AND_RECEIPT_STATE_RECONCILIATION.md
+v0_3_4_visual_asset_authorization_registry_ref: assets/visual_asset_authorization_registry.example.json
+v0_3_4_visual_asset_authorization_policy_validator_ref: scripts/validate_visual_asset_authorization_policy.js
 autopilot_goal_compiler_validator_ref: scripts/validate_autopilot_goal_compiler.js
 autopilot_autonomy_envelope_schema_ref: schemas/autopilot_autonomy_envelope.schema.yaml
 autopilot_execution_receipt_schema_ref: schemas/autopilot_execution_receipt.schema.yaml

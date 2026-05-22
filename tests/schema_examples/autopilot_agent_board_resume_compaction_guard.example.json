@@ -11,42 +11,42 @@
         "current_phase_present": true,
         "active_source_phase_present": true,
         "next_boundary_present": true,
-        "no_push_present": true
+        "push_boundary_present": true
       },
       {
         "path": ".agent_board/TASK_QUEUE.md",
         "current_phase_present": true,
         "active_source_phase_present": true,
         "next_boundary_present": true,
-        "no_push_present": true
+        "push_boundary_present": true
       },
       {
         "path": ".agent_board/CHECKPOINT.md",
         "current_phase_present": true,
         "active_source_phase_present": true,
         "next_boundary_present": true,
-        "no_push_present": true
+        "push_boundary_present": true
       },
       {
         "path": ".agent_board/HANDOFF.md",
         "current_phase_present": true,
         "active_source_phase_present": true,
         "next_boundary_present": true,
-        "no_push_present": true
+        "push_boundary_present": true
       },
       {
         "path": ".agent_board/AUTOPILOT_LEDGER.md",
         "current_phase_present": true,
         "active_source_phase_present": true,
         "next_boundary_present": true,
-        "no_push_present": true
+        "push_boundary_present": true
       },
       {
         "path": "docs/00_project_roadmap.md",
         "current_phase_present": true,
         "active_source_phase_present": true,
         "next_boundary_present": true,
-        "no_push_present": true
+        "push_boundary_present": true
       }
     ],
     "all_resume_surfaces_current": true,
@@ -90,7 +90,7 @@
         "case_id": "handoff_missing_no_push_state_fails",
         "result": "caught",
         "expected_failure": true,
-        "failure_message": ".agent_board/HANDOFF.md latest section must preserve no-push state"
+        "failure_message": ".agent_board/HANDOFF.md latest section must preserve push boundary state"
       },
       {
         "case_id": "roadmap_current_phase_drift_fails",

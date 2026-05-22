@@ -1,5 +1,95 @@
 ---
 
+## Checkpoint - v0.3.4a Visual Asset Policy Gap Patch
+
+```text
+phase: v0_3_4a_visual_asset_policy_gap_patch
+phase_id: v0_3_4a_visual_asset_policy_gap_patch
+status: completed_validated
+source_remote_commit: bf5e54e
+source_phase: v0_3_4_visual_asset_governance_and_receipt_state_reconciliation
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+completed:
+- added explicit visual_asset_policy_v0_3_4a asset_class enum
+- marked safe_adult_editorial_portrait_v1.png as asset_class user_authorized_test_image
+- kept neutral_smoke_test_red_apple_v1.png as asset_class runs_artifact
+- made upload_authorized_by_user the canonical upload authorization field
+- required memory_seed: false for test/runs diagnostic image assets
+- added validator negative cases for missing registry entry, bad class, missing upload authorization, missing receipt/SHA, accepted_sample drift, production_candidate drift, memory_seed gate drift, and raw local/.codex paths
+latest_validation:
+- git diff --check: passed
+- node scripts/validate_visual_asset_authorization_policy.js: passed
+- node scripts/validate_v0_3_3_first_live_generation_pilot_gate.js: passed
+- node scripts/validate_provider_receipt_artifacts.js: passed
+- node scripts/validate_autopilot_agent_board_resume_compaction_guard.js: passed
+- node scripts/validate_controlled_visual_production_loop_checkpoint_readiness.js: passed
+- node scripts/validate_controlled_visual_production_loop_exact_file_commit_readiness_review.js: passed
+- npm run validate:mvp: passed
+not_performed:
+- no commit
+- no push
+- no provider/plugin/API call
+- no image generation
+- no DailyNote/VCP memory write
+- no VCPToolBox/VCPChat runtime call
+- no production_candidate write
+- no secret read
+image_generation_performed: false
+secret_value_read_performed: false
+README_updated: false
+PROJECT_MASTER_PLAN_updated: false
+stale_risk: false
+reason: gap patch is fully covered by v0.3.4 policy doc, roadmap, validators, fixture, and .agent_board resume surfaces; README and master plan do not need new user-facing route changes.
+push_allowed: false
+recommended_next: exact diff review for local commit authorization only.
+```
+
+---
+
+## Checkpoint - v0.3.4 Visual Asset Governance And Receipt State Reconciliation
+
+```text
+phase: v0_3_4_visual_asset_governance_and_receipt_state_reconciliation
+phase_id: v0_3_4_visual_asset_governance_and_receipt_state_reconciliation
+status: completed_validated
+source_phase: v0_3_3_first_live_generation_pilot
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+completed:
+- recorded bf5e54e pushed to origin/master after user authorization
+- added visual asset authorization registry for the two owner-authorized v0.3.3 diagnostic PNG assets
+- split runs artifact boundary from durable review asset boundary
+- defined generated_image_binary_commit_policy_v1
+- updated v0.3.3 validator to reconcile two failed attempts and two succeeded diagnostics
+latest_validation:
+- node --check scripts/validate_visual_asset_authorization_policy.js: passed
+- node scripts/validate_visual_asset_authorization_policy.js: passed
+- node scripts/validate_v0_3_3_first_live_generation_pilot_gate.js --write-fixture: passed
+- node scripts/validate_autopilot_agent_board_resume_compaction_guard.js --write-fixture: passed
+- node scripts/validate_autopilot_agent_board_resume_compaction_guard.js: passed
+- node scripts/validate_controlled_visual_production_loop_checkpoint_readiness.js: passed
+- node scripts/validate_controlled_visual_production_loop_exact_file_commit_readiness_review.js: passed
+- node scripts/validate_agent_board_state.js: passed
+- npm run validate:mvp: passed
+not_performed:
+- no new provider/plugin/API/image generation
+- no DailyNote/VCP memory write
+- no VCPToolBox/VCPChat runtime call
+- no production_candidate write
+- no secret read
+image_generation_performed_by_v0_3_4: false
+image_generation_performed: false
+secret_value_read_performed: false
+push_status: pushed_to_origin_master_after_user_authorization
+push_allowed: false
+recommended_next: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+```
+
+---
+
 ## Checkpoint - Provider Receipt Artifact Repair
 
 ```text

@@ -83,6 +83,7 @@ const allowedUntrackedFiles = [
   "AGENTS.autopilot-overlay.md",
   "AUTOPILOT_REFACTOR_REPORT.md",
   "README_AGENT_IMAGE_LAB_AUTOPILOT.md",
+  "assets/visual_asset_authorization_registry.example.json",
   "codex/AGENT_IMAGE_LAB_AUTOPILOT_PROMPT.md",
   "docs/117_v4_0_runtime_contract_smoke_hardening.md",
   "docs/118_v4_1_runtime_guard_unit_validation.md",
@@ -156,6 +157,7 @@ const allowedUntrackedFiles = [
   "docs/223_runtime_review_batch_8b_vnext_rc_acceptance.md",
   "docs/224_runtime_review_batch_8c_final_acceptance_summary.md",
   "docs/225_runtime_review_batch_8d_sustained_autopilot_task_plan.md",
+  "docs/V0_3_4_VISUAL_ASSET_GOVERNANCE_AND_RECEIPT_STATE_RECONCILIATION.md",
   "scripts/validate_runtime_delivery_surface.js",
   "scripts/validate_runtime_guard_unit.js",
   "scripts/validate_runtime_prototype_suite.js",
@@ -192,7 +194,8 @@ const allowedUntrackedFiles = [
   "runs/real_generation/v0_3_3_retry_001_codex_sample/generation_attempt_result.json",
   "runs/real_generation/v0_3_3_safe_portrait_001/generation_attempt_result.json",
   "runs/real_generation/v0_3_3_smoke_001_neutral/generation_attempt_result.json",
-  "scripts/validate_provider_receipt_artifacts.js"
+  "scripts/validate_provider_receipt_artifacts.js",
+  "scripts/validate_visual_asset_authorization_policy.js"
 ];
 
 const allowedBranches = [

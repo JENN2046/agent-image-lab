@@ -135,6 +135,24 @@ const EXPECTED_PROVIDER_RECEIPT_ARTIFACT_REPAIR_SLICE = [
   "scripts/validate_provider_receipt_artifacts.js"
 ].sort();
 
+const EXPECTED_V0_3_4_VISUAL_ASSET_GOVERNANCE_RECONCILIATION_SLICE = [
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  "assets/visual_asset_authorization_registry.example.json",
+  "docs/00_project_roadmap.md",
+  "docs/V0_3_4_VISUAL_ASSET_GOVERNANCE_AND_RECEIPT_STATE_RECONCILIATION.md",
+  "scripts/lib/governance_tooling_maintenance_slice.js",
+  "scripts/validate_autopilot_agent_board_resume_compaction_guard.js",
+  "scripts/validate_local_commit_scope.js",
+  "scripts/validate_mvp.ps1",
+  "scripts/validate_v0_3_3_first_live_generation_pilot_gate.js",
+  "scripts/validate_visual_asset_authorization_policy.js",
+  "tests/schema_examples/autopilot_agent_board_resume_compaction_guard.example.json",
+  "tests/schema_examples/v0_3_3_first_live_generation_pilot_gate.example.json"
+].sort();
+
 const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "governance_tooling_maintenance_slice_v1",
@@ -155,6 +173,10 @@ const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "provider_receipt_artifact_repair_slice",
     files: EXPECTED_PROVIDER_RECEIPT_ARTIFACT_REPAIR_SLICE
+  },
+  {
+    id: "v0_3_4_visual_asset_governance_reconciliation_slice",
+    files: EXPECTED_V0_3_4_VISUAL_ASSET_GOVERNANCE_RECONCILIATION_SLICE
   }
 ];
 
@@ -331,6 +353,11 @@ function governanceToolingMaintenanceSliceSelfCheck() {
         === "provider_receipt_artifact_repair_slice"
     },
     {
+      check: "exact_slice_matches_v0_3_4_visual_asset_governance_reconciliation",
+      passed: findMatchingGovernanceToolingSlice(EXPECTED_V0_3_4_VISUAL_ASSET_GOVERNANCE_RECONCILIATION_SLICE)?.id
+        === "v0_3_4_visual_asset_governance_reconciliation_slice"
+    },
+    {
       check: "exact_slice_rejects_missing_file",
       passed: findMatchingGovernanceToolingSlice(EXPECTED_GOVERNANCE_TOOLING_MAINTENANCE_SLICE.slice(1)) === null
     },
@@ -361,6 +388,7 @@ module.exports = {
   EXPECTED_V0_3_2_LIVE_CANDIDATE_ACTION_PACKET_SLICE,
   EXPECTED_V0_3_3_FIRST_LIVE_GENERATION_PILOT_GATE_SLICE,
   EXPECTED_PROVIDER_RECEIPT_ARTIFACT_REPAIR_SLICE,
+  EXPECTED_V0_3_4_VISUAL_ASSET_GOVERNANCE_RECONCILIATION_SLICE,
   GOVERNANCE_TOOLING_ALLOWED_SLICES,
   buildGovernanceToolingMaintenanceSliceReport,
   fileAllowedInGovernanceToolingSlice,

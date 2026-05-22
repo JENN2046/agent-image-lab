@@ -1,5 +1,69 @@
 ---
 
+## Current Handoff Update - v0.3.4a Visual Asset Policy Gap Patch
+
+```text
+phase: v0_3_4a_visual_asset_policy_gap_patch
+phase_id: v0_3_4a_visual_asset_policy_gap_patch
+status: completed_validated
+mode: Green Lane local docs and validator gap patch
+source_remote_commit: bf5e54e
+source_phase: v0_3_4_visual_asset_governance_and_receipt_state_reconciliation
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+summary: Close the exact diff review gaps by adding fixed asset_class taxonomy, upload_authorized_by_user, memory_seed:false, and fail-closed validator negative cases without new provider/image/runtime/memory work.
+validator_ref: scripts/validate_visual_asset_authorization_policy.js
+registry_ref: assets/visual_asset_authorization_registry.example.json
+policy_doc_ref: docs/V0_3_4_VISUAL_ASSET_GOVERNANCE_AND_RECEIPT_STATE_RECONCILIATION.md
+visual_asset_policy_version: visual_asset_policy_v0_3_4a
+asset_class_enum_complete: true
+safe_portrait_marked_user_authorized_test_image: true
+neutral_smoke_asset_class: runs_artifact
+upload_authorized_by_user_required: true
+memory_seed_false_required: true
+memory_seed_requires_gate: true
+negative_cases_added: true
+push_allowed: false
+not_performed: no commit, no push, no provider/plugin/API call, no image generation, no DailyNote/VCP memory write, no VCPToolBox/VCPChat runtime call, no production_candidate write, no secret read.
+image_generation_performed: false
+secret_value_read_performed: false
+recommended_next: exact diff review for local commit authorization only.
+```
+
+---
+
+## Current Handoff Update - v0.3.4 Visual Asset Governance And Receipt State Reconciliation
+
+```text
+phase: v0_3_4_visual_asset_governance_and_receipt_state_reconciliation
+phase_id: v0_3_4_visual_asset_governance_and_receipt_state_reconciliation
+status: completed_validated
+mode: Green Lane local docs and validator patch
+source_phase: v0_3_3_first_live_generation_pilot
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+summary: Reconcile post-push state for bf5e54e, add visual asset authorization registry, split runs artifact from durable review asset, and define generated image binary commit policy.
+pushed_commit: bf5e54e
+pushed_ref: origin/master
+push_status: pushed_to_origin_master_after_user_authorization
+push_allowed: false
+asset_authorization_registry_ref: assets/visual_asset_authorization_registry.example.json
+validator_ref: scripts/validate_visual_asset_authorization_policy.js
+v0_3_3_validator_ref: scripts/validate_v0_3_3_first_live_generation_pilot_gate.js
+validation_status: completed_validated
+not_performed: no new provider/plugin/API/image generation, no DailyNote/VCP memory write, no VCPToolBox/VCPChat runtime call, no production_candidate write, no secret read.
+image_generation_performed_by_v0_3_4: false
+image_generation_performed: false
+secret_value_read_performed: false
+recommended_next: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+```
+
+Resume prompt: read `AGENTS.md`, `AGENTS.autopilot-overlay.md`, and `.agent_board/*`; keep overlay separate from root AGENTS.md; continue only local validation/repair unless explicitly authorized otherwise.
+
+---
+
 ## Current Handoff Update - Provider Receipt Artifact Repair
 
 ```text

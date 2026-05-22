@@ -1,5 +1,50 @@
 ---
 
+- [x] ID: v0_3_4a_visual_asset_policy_gap_patch
+      Title: Close visual asset policy review gaps
+      Reason: Exact diff review found commit_ready=false because the registry and validator lacked fixed asset_class taxonomy, upload_authorized_by_user, memory_seed:false, and memory gate negative cases.
+      Lane: Green.
+      Source remote commit: bf5e54e.
+      Source phase: v0_3_4_visual_asset_governance_and_receipt_state_reconciliation.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Status: completed_validated.
+      Done: added asset_class enum; marked safe_adult_editorial_portrait_v1.png as user_authorized_test_image; kept neutral_smoke_test_red_apple_v1.png as runs_artifact; made upload_authorized_by_user canonical; required memory_seed:false; added validator negative cases and output counters.
+      Validation: required v0.3.4a validator suite passed.
+      Push allowed: false.
+      push_allowed: false.
+      Commit performed: false.
+      Push performed: false.
+      Image generation performed: false.
+      image_generation_performed: false.
+      Secret value read performed: false.
+      secret_value_read_performed: false.
+      Stop condition: commit, push, provider/plugin/API call, image generation, DailyNote/VCP memory write, runtime call, production_candidate write, secret read, dependency change, or validation failure requiring judgment.
+      Recommended next: exact diff review for local commit authorization only.
+
+---
+
+- [x] ID: v0_3_4_visual_asset_governance_and_receipt_state_reconciliation
+      Title: Reconcile visual asset governance and pushed receipt state
+      Reason: After bf5e54e was pushed, the status surfaces needed post-push reconciliation, asset authorization records for the uploaded PNGs, and a binary commit boundary.
+      Lane: Green.
+      Source phase: v0_3_3_first_live_generation_pilot.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      source_phase: v0_3_2_live_candidate_action_packet.
+      Next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Status: completed_validated.
+      Done: added v0.3.4 policy doc; added assets/visual_asset_authorization_registry.example.json; added scripts/validate_visual_asset_authorization_policy.js; updated v0.3.3 validator to reconcile failed attempts plus succeeded diagnostics.
+      Push status: pushed_to_origin_master_after_user_authorization.
+      push_allowed: false.
+      image_generation_performed_by_v0_3_4: false.
+      image_generation_performed: false.
+      secret_value_read_performed: false.
+      production_candidate_write_performed_by_v0_3_4: false.
+      Stop condition: new provider/plugin/API/image generation, DailyNote/VCP memory write, VCPToolBox/VCPChat runtime call, production_candidate write, secret read, push/tag/release/deploy, or validation failure requiring non-obvious judgment.
+
+---
+
 - [x] ID: provider_receipt_artifact_repair
       Title: Repair provider receipt artifact portability
       Reason: Code review found missing attempt_result_path files, raw local source paths, and missing MVP validator wiring for the v0.3.3 provider gate.

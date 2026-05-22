@@ -65,6 +65,31 @@
       "image_candidates_generated": 0,
       "failure_class": "provider_tool_user_error"
     },
+    "receipt_reconciliation": {
+      "failed_attempt_count": 2,
+      "succeeded_diagnostic_count": 2,
+      "total_attempt_result_count": 4,
+      "diagnostic_image_candidates_generated": 2,
+      "user_authorized_png_upload_count": 2,
+      "visual_asset_authorization_registry_ref": "assets/visual_asset_authorization_registry.example.json",
+      "generated_image_binary_commit_policy_ref": "docs/V0_3_4_VISUAL_ASSET_GOVERNANCE_AND_RECEIPT_STATE_RECONCILIATION.md",
+      "visual_asset_policy_version": "visual_asset_policy_v0_3_4a",
+      "asset_class_enum": [
+        "runs_artifact",
+        "user_authorized_test_image",
+        "review_candidate",
+        "eval_seed_candidate",
+        "accepted_sample",
+        "production_candidate"
+      ],
+      "runs_artifact_boundary": "diagnostic provider-run evidence, not durable review asset by default",
+      "runs_artifact_count": 1,
+      "user_authorized_test_image_count": 1,
+      "memory_seed_true_count": 0,
+      "invalid_memory_seed_count": 0,
+      "durable_review_asset_requires_separate_gate": true,
+      "production_candidate_write_allowed_by_v0_3_4": false
+    },
     "current_execution_budgets": {
       "provider_calls": 0,
       "plugin_calls": 0,
