@@ -1,0 +1,48 @@
+id: prompt_package_preview
+version: v0_1
+phase: v0_5_1_prompt_package_preview
+type: object
+required:
+  - prompt_preview_id
+  - version
+  - phase
+  - source_prompt_correction_hint_ref
+  - source_readiness_packet_ref
+  - selected_taxonomy_category
+  - positive_constraints
+  - negative_constraints
+  - avoid_fragments
+  - expected_visual_change
+  - risk_notes
+  - boundaries
+  - side_effects
+properties:
+  positive_constraints:
+    type: array
+    minItems: 1
+  negative_constraints:
+    type: array
+    minItems: 1
+  avoid_fragments:
+    type: array
+    minItems: 1
+  expected_visual_change:
+    required:
+      - summary
+      - composition_adjustment
+      - lighting_adjustment
+      - material_adjustment
+      - output_claimed
+  risk_notes:
+    type: array
+    minItems: 1
+  boundaries:
+    required:
+      - metadata_only
+      - dry_run_only
+      - prompt_preview_only
+      - actual_generation_calls
+      - provider_call_performed
+      - image_generation_performed
+      - VCP_memory_write_performed
+      - DailyNote_write_performed

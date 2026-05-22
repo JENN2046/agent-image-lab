@@ -2,6 +2,51 @@
 
 本文是 Agent Image Lab 的总路线图，用来把 v0.2 基线、v0.3 授权门槛、MVP-B dry-run 和未来真实闭环串成一条可执行路径。
 
+## v0.5.1 - Prompt Package Preview
+
+Status: completed_validated_pending_local_commit.
+
+Purpose:
+- Convert review-to-prompt correction hints into a reusable next-round prompt preview.
+- Prove the preview contains `positive_constraints`, `negative_constraints`, `avoid_fragments`, `expected_visual_change`, and `risk_notes`.
+- Keep the preview metadata-only and do not generate or dispatch any image.
+
+Artifacts:
+- `docs/V0_5_1_PROMPT_PACKAGE_PREVIEW.md`
+- `schemas/prompt_package_preview.schema.yaml`
+- `reports/visual_asset_eval_dry_run/v0_5_1_prompt_package_preview.json`
+- `tests/schema_examples/prompt_package_preview.example.json`
+- `tests/schema_examples/prompt_package_preview_fail.example.json`
+- `scripts/validate_prompt_package_preview.js`
+
+Boundary state:
+- `source_local_commit: 9ddb57e`
+- `source_phase: v0_5_0_controlled_generation_readiness_packet`
+- `current_gate_phase: v0_5_1_prompt_package_preview`
+- `active current phase: v0_3_3_first_live_generation_pilot`
+- `resume_guard_source_phase: v0_3_2_live_candidate_action_packet`
+- `next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial`
+- `positive_constraints_present: true`
+- `negative_constraints_present: true`
+- `avoid_fragments_present: true`
+- `expected_visual_change_present: true`
+- `risk_notes_present: true`
+- `actual_generation_calls: 0`
+- `provider_call_performed: false`
+- `image_generation_performed: false`
+- `runtime_call_performed: false`
+- `secret_value_read_performed: false`
+- `VCP_memory_write_performed: false`
+- `DailyNote_write_performed: false`
+- `production_candidate_created: false`
+- `accepted_sample_auto_promotion: false`
+- `memory_seed_promoted: false`
+- `Push_L2_exercised: false`
+- `real_executor_implemented_now: false`
+- `push_allowed: false`
+
+Recommended next: local commit, post-commit review, and Push_L3 manual guarded push classification.
+
 ## v0.5.0 - Controlled Generation Readiness Packet
 
 Status: completed_validated_pending_local_commit.

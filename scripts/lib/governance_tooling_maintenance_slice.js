@@ -495,6 +495,23 @@ const EXPECTED_V0_5_0_CONTROLLED_GENERATION_READINESS_PACKET_SLICE = [
   "tests/schema_examples/controlled_generation_readiness_packet_fail.example.json"
 ].sort();
 
+const EXPECTED_V0_5_1_PROMPT_PACKAGE_PREVIEW_SLICE = [
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  ".agent_board/VALIDATION_LOG.md",
+  "docs/00_project_roadmap.md",
+  "docs/V0_5_1_PROMPT_PACKAGE_PREVIEW.md",
+  "reports/visual_asset_eval_dry_run/v0_5_1_prompt_package_preview.json",
+  "schemas/prompt_package_preview.schema.yaml",
+  "scripts/lib/governance_tooling_maintenance_slice.js",
+  "scripts/validate_mvp.ps1",
+  "scripts/validate_prompt_package_preview.js",
+  "tests/schema_examples/prompt_package_preview.example.json",
+  "tests/schema_examples/prompt_package_preview_fail.example.json"
+].sort();
+
 const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "governance_tooling_maintenance_slice_v1",
@@ -607,6 +624,10 @@ const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "v0_5_0_controlled_generation_readiness_packet_slice",
     files: EXPECTED_V0_5_0_CONTROLLED_GENERATION_READINESS_PACKET_SLICE
+  },
+  {
+    id: "v0_5_1_prompt_package_preview_slice",
+    files: EXPECTED_V0_5_1_PROMPT_PACKAGE_PREVIEW_SLICE
   }
 ];
 
@@ -906,6 +927,11 @@ function governanceToolingMaintenanceSliceSelfCheck() {
         === "v0_5_0_controlled_generation_readiness_packet_slice"
     },
     {
+      check: "exact_slice_matches_v0_5_1_prompt_package_preview",
+      passed: findMatchingGovernanceToolingSlice(EXPECTED_V0_5_1_PROMPT_PACKAGE_PREVIEW_SLICE)?.id
+        === "v0_5_1_prompt_package_preview_slice"
+    },
+    {
       check: "exact_slice_rejects_missing_file",
       passed: findMatchingGovernanceToolingSlice(EXPECTED_GOVERNANCE_TOOLING_MAINTENANCE_SLICE.slice(1)) === null
     },
@@ -959,6 +985,7 @@ module.exports = {
   EXPECTED_V0_4_8_VISUAL_REVIEW_SEMANTICS_HARDENING_SLICE,
   EXPECTED_V0_4_9_VISUAL_EVIDENCE_CONSISTENCY_HARDENING_SLICE,
   EXPECTED_V0_5_0_CONTROLLED_GENERATION_READINESS_PACKET_SLICE,
+  EXPECTED_V0_5_1_PROMPT_PACKAGE_PREVIEW_SLICE,
   GOVERNANCE_TOOLING_ALLOWED_SLICES,
   buildGovernanceToolingMaintenanceSliceReport,
   fileAllowedInGovernanceToolingSlice,

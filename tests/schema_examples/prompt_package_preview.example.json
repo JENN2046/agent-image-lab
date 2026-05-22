@@ -1,0 +1,71 @@
+{
+  "prompt_package_preview": {
+    "prompt_preview_id": "prompt_package_preview_v0_5_1_safe_portrait_fixture",
+    "version": "v0_1",
+    "phase": "v0_5_1_prompt_package_preview",
+    "source_prompt_correction_hint_ref": "tests/schema_examples/visual_prompt_correction_hint.example.json",
+    "source_readiness_packet_ref": "reports/visual_asset_eval_dry_run/v0_5_0_controlled_generation_readiness_packet.json",
+    "selected_taxonomy_category": "product_fidelity_failure",
+    "positive_constraints": [
+      "Lock key product or subject attributes and forbid substitutions.",
+      "Frame the product so identity-critical details remain visible and undistorted.",
+      "Preserve product-specific materials and avoid invented substitutions."
+    ],
+    "negative_constraints": [
+      "Do not dispatch this preview to a provider in v0.5.1.",
+      "Do not describe this preview as a generated image.",
+      "Do not attach image binaries, raw local paths, production candidates, or memory writes."
+    ],
+    "avoid_fragments": [
+      "generic object wording",
+      "approximate product identity"
+    ],
+    "expected_visual_change": {
+      "summary": "The next prompt should make product identity clearer while preserving the existing evidence-bound asset context.",
+      "composition_adjustment": "Frame the product so identity-critical details remain visible and undistorted.",
+      "lighting_adjustment": "Light key product details clearly without washing out shape or markings.",
+      "material_adjustment": "Preserve product-specific materials and avoid invented substitutions.",
+      "output_claimed": false
+    },
+    "risk_notes": [
+      "Identity locks may still be too generic if the future prompt omits concrete product attributes.",
+      "A future run must stop if evidence binding, review gate, memory boundary, or production boundary drifts.",
+      "This preview does not authorize provider dispatch, image generation, or retry."
+    ],
+    "boundaries": {
+      "metadata_only": true,
+      "dry_run_only": true,
+      "prompt_preview_only": true,
+      "actual_generation_calls": 0,
+      "image_binary_read_performed": false,
+      "provider_call_performed": false,
+      "image_generation_performed": false,
+      "VCP_memory_write_performed": false,
+      "DailyNote_write_performed": false,
+      "runtime_call_performed": false,
+      "secret_value_read_performed": false,
+      "production_candidate_created": false,
+      "accepted_sample_auto_promotion": false,
+      "memory_seed_promoted": false,
+      "real_executor_implemented_now": false,
+      "Push_L2_exercised": false,
+      "package_dependency_change_performed": false,
+      "commit_performed": false,
+      "push_performed": false
+    },
+    "side_effects": {
+      "provider_call_performed": false,
+      "image_generation_performed": false,
+      "VCP_memory_write_performed": false,
+      "DailyNote_write_performed": false,
+      "runtime_call_performed": false,
+      "secret_value_read_performed": false,
+      "production_candidate_created": false,
+      "accepted_sample_auto_promotion": false,
+      "memory_seed_promoted": false,
+      "package_dependency_change_performed": false,
+      "commit_performed": false,
+      "push_performed": false
+    }
+  }
+}

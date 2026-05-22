@@ -94,6 +94,7 @@ $requiredFiles = @(
   'scripts/validate_visual_review_semantics_hardening.js',
   'scripts/validate_visual_evidence_consistency_hardening.js',
   'scripts/validate_controlled_generation_readiness_packet.js',
+  'scripts/validate_prompt_package_preview.js',
   'scripts/validate_visual_sample_memory_policy.js',
   'scripts/validate_15_day_architecture_checkpoint.js',
   'scripts/validate_local_checkpoint_manifest.js',
@@ -12702,6 +12703,37 @@ process.exit(child.status || 0);
     }
     if ($controlledGenerationReadinessPacket.Push_L2_exercised -ne $false -or $controlledGenerationReadinessPacket.real_executor_implemented_now -ne $false -or $controlledGenerationReadinessPacket.provider_call_performed -ne $false -or $controlledGenerationReadinessPacket.image_generation_performed -ne $false -or $controlledGenerationReadinessPacket.runtime_call_performed -ne $false -or $controlledGenerationReadinessPacket.secret_value_read_performed -ne $false -or $controlledGenerationReadinessPacket.VCP_memory_write_performed -ne $false -or $controlledGenerationReadinessPacket.DailyNote_write_performed -ne $false -or $controlledGenerationReadinessPacket.production_candidate_created -ne $false -or $controlledGenerationReadinessPacket.accepted_sample_auto_promotion -ne $false -or $controlledGenerationReadinessPacket.memory_seed_promoted -ne $false -or $controlledGenerationReadinessPacket.package_dependency_change_performed -ne $false -or $controlledGenerationReadinessPacket.commit_performed -ne $false -or $controlledGenerationReadinessPacket.push_performed -ne $false) {
       Add-Failure "Controlled Generation Readiness Packet must not perform Push_L2, executor, provider, image, runtime, secret, memory, DailyNote, production, accepted-sample, memory-seed, dependency, commit, or push actions"
+    }
+  }
+
+  $promptPackagePreviewOutput = & node (Join-Path $Root 'scripts/validate_prompt_package_preview.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Prompt Package Preview validation exited with failure"
+  } else {
+    $promptPackagePreview = ($promptPackagePreviewOutput -join "`n") | ConvertFrom-Json
+    if ($promptPackagePreview.passed -ne $true -or $promptPackagePreview.phase -ne 'v0_5_1_prompt_package_preview') {
+      Add-Failure "Prompt Package Preview validation must pass"
+    }
+    if ($promptPackagePreview.prompt_preview_doc_present -ne $true -or $promptPackagePreview.prompt_preview_schema_present -ne $true -or $promptPackagePreview.prompt_preview_report_present -ne $true -or $promptPackagePreview.prompt_preview_fixture_present -ne $true -or $promptPackagePreview.prompt_preview_fail_fixture_present -ne $true) {
+      Add-Failure "Prompt Package Preview must define doc, schema, report, pass fixture, and fail fixture"
+    }
+    if ($promptPackagePreview.source_prompt_correction_hint_verified -ne $true -or $promptPackagePreview.source_readiness_packet_verified -ne $true) {
+      Add-Failure "Prompt Package Preview must bind to correction hints and readiness packet"
+    }
+    if ($promptPackagePreview.positive_constraints_present -ne $true -or $promptPackagePreview.negative_constraints_present -ne $true -or $promptPackagePreview.avoid_fragments_present -ne $true -or $promptPackagePreview.expected_visual_change_present -ne $true -or $promptPackagePreview.risk_notes_present -ne $true) {
+      Add-Failure "Prompt Package Preview must contain every required preview field"
+    }
+    if ($promptPackagePreview.correction_hint_constraints_reused -ne $true -or $promptPackagePreview.readiness_taxonomy_bound -ne $true -or $promptPackagePreview.output_claimed -ne $false -or $promptPackagePreview.actual_generation_calls -ne 0) {
+      Add-Failure "Prompt Package Preview must reuse correction hints, bind readiness taxonomy, and not claim output or generation calls"
+    }
+    if ($promptPackagePreview.negative_case_count -lt 18 -or $promptPackagePreview.caught_negative_case_count -ne $promptPackagePreview.negative_case_count -or $promptPackagePreview.all_negative_cases_caught -ne $true -or $promptPackagePreview.positive_constraints_caught -ne $true -or $promptPackagePreview.negative_constraints_caught -ne $true -or $promptPackagePreview.avoid_fragments_caught -ne $true -or $promptPackagePreview.expected_visual_change_caught -ne $true -or $promptPackagePreview.risk_notes_caught -ne $true -or $promptPackagePreview.taxonomy_drift_caught -ne $true -or $promptPackagePreview.actual_generation_call_caught -ne $true -or $promptPackagePreview.provider_call_caught -ne $true -or $promptPackagePreview.image_generation_caught -ne $true -or $promptPackagePreview.memory_write_caught -ne $true -or $promptPackagePreview.raw_local_path_caught -ne $true) {
+      Add-Failure "Prompt Package Preview must catch every required negative case"
+    }
+    if ($promptPackagePreview.metadata_only -ne $true -or $promptPackagePreview.dry_run_only -ne $true -or $promptPackagePreview.prompt_preview_only -ne $true -or $promptPackagePreview.image_binary_read_performed -ne $false) {
+      Add-Failure "Prompt Package Preview must remain metadata-only, dry-run-only, prompt-preview-only, and avoid image reads"
+    }
+    if ($promptPackagePreview.Push_L2_exercised -ne $false -or $promptPackagePreview.real_executor_implemented_now -ne $false -or $promptPackagePreview.provider_call_performed -ne $false -or $promptPackagePreview.image_generation_performed -ne $false -or $promptPackagePreview.runtime_call_performed -ne $false -or $promptPackagePreview.secret_value_read_performed -ne $false -or $promptPackagePreview.VCP_memory_write_performed -ne $false -or $promptPackagePreview.DailyNote_write_performed -ne $false -or $promptPackagePreview.production_candidate_created -ne $false -or $promptPackagePreview.accepted_sample_auto_promotion -ne $false -or $promptPackagePreview.memory_seed_promoted -ne $false -or $promptPackagePreview.package_dependency_change_performed -ne $false -or $promptPackagePreview.commit_performed -ne $false -or $promptPackagePreview.push_performed -ne $false) {
+      Add-Failure "Prompt Package Preview must not perform Push_L2, executor, provider, image, runtime, secret, memory, DailyNote, production, accepted-sample, memory-seed, dependency, commit, or push actions"
     }
   }
 
