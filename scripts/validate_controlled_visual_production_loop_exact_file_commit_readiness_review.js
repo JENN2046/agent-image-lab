@@ -141,7 +141,12 @@ add("no_staged_files_now", stagedFiles.length === 0);
 
 for (const forbidden of fixture.forbidden_path_families) {
   const packageJsonAllowed = forbidden === "package.json" && isGovernanceToolingMaintenanceSlice;
-  add(`forbidden_path_${forbidden}_untouched`, packageJsonAllowed || !changedFiles.some((file) => file === forbidden || file.startsWith(forbidden)));
+  const providerReceiptAttemptResultsAllowed = forbidden === "runs/"
+    && governanceToolingMaintenanceSliceReport.matched_slice_id === "provider_receipt_artifact_repair_slice"
+    && changedFiles
+      .filter((file) => file.startsWith("runs/"))
+      .every((file) => file.startsWith("runs/real_generation/") && file.endsWith("/generation_attempt_result.json"));
+  add(`forbidden_path_${forbidden}_untouched`, packageJsonAllowed || providerReceiptAttemptResultsAllowed || !changedFiles.some((file) => file === forbidden || file.startsWith(forbidden)));
 }
 
 for (const [key, expected] of Object.entries(fixture.guard)) {

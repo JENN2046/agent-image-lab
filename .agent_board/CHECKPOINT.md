@@ -1,5 +1,40 @@
 ---
 
+## Checkpoint - Provider Receipt Artifact Repair
+
+```text
+phase: provider_receipt_artifact_repair
+phase_id: provider_receipt_artifact_repair
+active_current_phase: v0_3_3_first_live_generation_pilot
+source_phase: v0_3_2_live_candidate_action_packet
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+status: completed_validated
+completed:
+- added project-local generation_attempt_result.json records for provider receipt attempt_result_path references
+- redacted raw local Codex generated image source paths from successful provider receipts
+- added scripts/validate_provider_receipt_artifacts.js
+- wired provider receipt artifact validation plus v0.3.1/v0.3.2/v0.3.3 validators into scripts/validate_mvp.ps1
+- adjusted .gitignore so generation_attempt_result.json records under runs/real_generation can be tracked
+latest_validation:
+- node --check scripts/validate_provider_receipt_artifacts.js: passed
+- node scripts/validate_provider_receipt_artifacts.js: passed
+- node scripts/validate_v0_3_3_first_live_generation_pilot_gate.js: passed
+- node scripts/validate_autopilot_agent_board_resume_compaction_guard.js: passed
+- node scripts/validate_controlled_visual_production_loop_checkpoint_readiness.js: passed
+- node scripts/validate_controlled_visual_production_loop_exact_file_commit_readiness_review.js: passed
+- npm run validate:mvp: passed
+not_performed:
+- no provider/plugin/API/image generation
+- no DailyNote/VCP memory write
+- no runtime probe
+- no secret read
+- no push/tag/release/deploy
+image_generation_performed: false
+secret_value_read_performed: false
+push_status: not_performed
+recommended_next: human review exact diff; no commit or push performed
+```
+
 ---
 
 ## Checkpoint - v0.3.3 First Live Generation Pilot Gate

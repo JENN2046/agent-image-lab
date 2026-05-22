@@ -21,7 +21,8 @@
   "attempt_result_path": "runs/real_generation/v0_3_3_smoke_001_neutral/generation_attempt_result.json",
   "output_image_path": "runs/real_generation/v0_3_3_smoke_001_neutral/neutral_smoke_test_red_apple_v1.png",
   "output_image_sha256": "c5ce931f31d815c1a59dfa250a5c610538234747810baa2eaa11e44b41dcd2d8",
-  "source_image_path": "C:/Users/51529/.codex/generated_images/019e4a93-9c8a-73c1-aaf9-7a8fcc7e0be2/ig_0ab09f3070735e01016a0f44b5f7c48191b0b210a7113e565c.png",
+  "source_image_path": "<REDACTED_LOCAL_CODEX_GENERATED_IMAGE_PATH>",
+  "source_image_path_redacted": true,
   "review_console_bridge_ref": "review_console/live_receipt_bridge/v0_3_3_smoke_001_neutral",
   "calls_used": {
     "provider_calls": 1,

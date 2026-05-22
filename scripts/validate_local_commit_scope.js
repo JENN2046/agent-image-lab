@@ -187,7 +187,12 @@ const allowedUntrackedFiles = [
   "stability_tests/README.md",
   "stability_tests/three_shot_stability_plan_registry.yaml",
   "stability_tests/plans/french_summer_rattan_bag_v2_3shot_plan.yaml",
-  "tests/schema_examples/v7_34_3_shot_stability_test_plan.example.yaml"
+  "tests/schema_examples/v7_34_3_shot_stability_test_plan.example.yaml",
+  "runs/real_generation/v0_3_3_codex_sample_first_trial/generation_attempt_result.json",
+  "runs/real_generation/v0_3_3_retry_001_codex_sample/generation_attempt_result.json",
+  "runs/real_generation/v0_3_3_safe_portrait_001/generation_attempt_result.json",
+  "runs/real_generation/v0_3_3_smoke_001_neutral/generation_attempt_result.json",
+  "scripts/validate_provider_receipt_artifacts.js"
 ];
 
 const allowedBranches = [
@@ -214,7 +219,6 @@ function hasUnsafePath(values) {
       value.startsWith("/") ||
       /^[A-Za-z]:/.test(value) ||
       value.includes("..") ||
-      value.startsWith("runs/") ||
       value.includes(".env")
     );
   });
@@ -228,6 +232,13 @@ function hasImageFile(values) {
 
 function hasRunsPath(values) {
   return values.some((value) => value.startsWith("runs/"));
+}
+
+function hasUnsafeRunsPath(values) {
+  return values.some((value) => {
+    if (!value.startsWith("runs/")) return false;
+    return !/^runs\/real_generation\/[^/]+\/generation_attempt_result\.json$/.test(value);
+  });
 }
 
 function main() {
@@ -460,19 +471,20 @@ function main() {
     "Image files must not appear in the untracked allowlist."
   );
   assert(
-    !hasRunsPath(allowedModifiedFiles),
-    "runs/ paths must not appear in the modified allowlist."
+    !hasUnsafeRunsPath(allowedModifiedFiles),
+    "Unsafe runs/ paths must not appear in the modified allowlist."
   );
   assert(
-    !hasRunsPath(allowedUntrackedFiles),
-    "runs/ paths must not appear in the untracked allowlist."
+    !hasUnsafeRunsPath(allowedUntrackedFiles),
+    "Unsafe runs/ paths must not appear in the untracked allowlist."
   );
 
   const result = {
     passed: true,
     push_safety_gate: {
       image_files_in_allowlist: hasImageFile(allowedModifiedFiles) || hasImageFile(allowedUntrackedFiles),
-      runs_path_in_allowlist: hasRunsPath(allowedModifiedFiles) || hasRunsPath(allowedUntrackedFiles)
+      runs_path_in_allowlist: hasRunsPath(allowedModifiedFiles) || hasRunsPath(allowedUntrackedFiles),
+      unsafe_runs_path_in_allowlist: hasUnsafeRunsPath(allowedModifiedFiles) || hasUnsafeRunsPath(allowedUntrackedFiles)
     },
     local_commit_scope: {
       allowed_branches: allowedBranches,

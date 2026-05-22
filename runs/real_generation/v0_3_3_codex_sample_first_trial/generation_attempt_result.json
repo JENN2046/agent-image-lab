@@ -1,0 +1,23 @@
+{
+  "attempt_id": "attempt-v0-3-3-codex-sample-first-trial",
+  "task_id": "v0_3_3_first_live_generation_pilot",
+  "visual_task_id": "v0_3_3_first_codex_sample_generation",
+  "attempt_status": "failed_no_image_generated",
+  "provider_target": "codex_builtin_image_generation",
+  "plugin_id_or_provider_route": "image_gen.imagegen",
+  "prompt_package_ref": "prompts/image_generation/fashion_night_balcony_vertical_portrait_v1.yaml",
+  "provider_calls_used": 1,
+  "plugin_calls_used": 1,
+  "api_calls_used": 0,
+  "image_candidates_requested": 1,
+  "image_candidates_generated": 0,
+  "retries_used": 0,
+  "output_image_path": null,
+  "output_image_sha256": null,
+  "failure_class": "provider_tool_user_error",
+  "stop_reason": "provider_tool_user_error_no_retry_budget",
+  "receipt_path": "reports/provider_receipts/v0_3_3_codex_sample_first_trial_receipt.json",
+  "raw_provider_payload_capture_performed": false,
+  "raw_provider_response_capture_performed": false,
+  "secret_value_read_performed": false
+}

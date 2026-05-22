@@ -70,6 +70,10 @@ $requiredFiles = @(
   'scripts/validate_autopilot_readiness_receipt_registry_cross_claims.js',
   'scripts/validate_autopilot_amber_packet_to_receipt_traceability.js',
   'scripts/validate_autopilot_agent_board_resume_compaction_guard.js',
+  'scripts/validate_provider_receipt_artifacts.js',
+  'scripts/validate_v0_3_1_real_provider_cost_boundary_plan.js',
+  'scripts/validate_v0_3_2_live_candidate_action_packet.js',
+  'scripts/validate_v0_3_3_first_live_generation_pilot_gate.js',
   'scripts/validate_complete_autopilot_readiness_gate.js',
   'scripts/validate_autopilot_false_readiness_negative_cases.js',
   'scripts/validate_autopilot_receipt_registry_negative_cases.js',
@@ -272,6 +276,10 @@ $requiredFiles = @(
   'docs/AUTOPILOT_READINESS_RECEIPT_REGISTRY_CROSS_CLAIMS.md',
   'docs/AUTOPILOT_AMBER_PACKET_TO_RECEIPT_TRACEABILITY.md',
   'docs/AUTOPILOT_AGENT_BOARD_RESUME_COMPACTION_GUARD.md',
+  'docs/V0_3_1_REAL_PROVIDER_COST_BOUNDARY_PLAN.md',
+  'docs/V0_3_2_LIVE_CANDIDATE_ACTION_PACKET.md',
+  'docs/V0_3_3_FIRST_LIVE_GENERATION_PILOT_GATE.md',
+  'docs/V0_3_CONTROLLED_REAL_PROVIDER_PRODUCTION_LOOP.md',
   'docs/AUTOPILOT_EVOLUTION_ENGINE.md',
   'docs/AUTOPILOT_COMPLETE_READINESS_GATE.md',
   'docs/AUTOPILOT_FALSE_READINESS_NEGATIVE_CASES.md',
@@ -297,6 +305,9 @@ $requiredFiles = @(
   'tests/schema_examples/autopilot_readiness_receipt_registry_cross_claims.example.json',
   'tests/schema_examples/autopilot_amber_packet_to_receipt_traceability.example.json',
   'tests/schema_examples/autopilot_agent_board_resume_compaction_guard.example.json',
+  'tests/schema_examples/v0_3_1_real_provider_cost_boundary_plan.example.json',
+  'tests/schema_examples/v0_3_2_live_candidate_action_packet.example.json',
+  'tests/schema_examples/v0_3_3_first_live_generation_pilot_gate.example.json',
   'tests/schema_examples/autopilot_evolution_backlog.example.json',
   'tests/schema_examples/complete_autopilot_readiness_gate.example.json',
   'tests/schema_examples/autopilot_false_readiness_negative_cases.example.json',
@@ -6186,18 +6197,20 @@ if (-not $node) {
       ($pushSafetyImageExts -contains [System.IO.Path]::GetExtension($_).ToLower()) -and
       -not ($verifiedArchiveImageFiles -contains $_)
     })
-    $stagedRuns = @($allCandidateFiles | Where-Object { $_.StartsWith('runs/') })
+    $stagedUnsafeRuns = @($allCandidateFiles | Where-Object {
+      $_.StartsWith('runs/') -and ($_ -notmatch '^runs/real_generation/[^/]+/generation_attempt_result\.json$')
+    })
     if ($stagedImages.Count -gt 0) {
       Add-Failure "Push Safety Gate: image files must not be staged: $($stagedImages -join ', ')"
     }
-    if ($stagedRuns.Count -gt 0) {
-      Add-Failure "Push Safety Gate: runs/ paths must not be staged: $($stagedRuns -join ', ')"
+    if ($stagedUnsafeRuns.Count -gt 0) {
+      Add-Failure "Push Safety Gate: unsafe runs/ paths must not be staged: $($stagedUnsafeRuns -join ', ')"
     }
     if ($localCommitScope.push_safety_gate.image_files_in_allowlist -eq $true) {
       Add-Failure "Push Safety Gate: image files must not appear in commit scope allowlists"
     }
-    if ($localCommitScope.push_safety_gate.runs_path_in_allowlist -eq $true) {
-      Add-Failure "Push Safety Gate: runs/ paths must not appear in commit scope allowlists"
+    if ($localCommitScope.push_safety_gate.unsafe_runs_path_in_allowlist -eq $true) {
+      Add-Failure "Push Safety Gate: unsafe runs/ paths must not appear in commit scope allowlists"
     }
   }
 
@@ -7813,6 +7826,9 @@ if (-not $node) {
       param([string]$Path)
 
       if ($allowedCurrentA4ChangeFiles -contains $Path) {
+        return $true
+      }
+      if ($Path -match '^runs/real_generation/[^/]+/generation_attempt_result\.json$') {
         return $true
       }
       foreach ($prefix in $allowedCurrentA4ChangePrefixes) {
@@ -12099,6 +12115,64 @@ process.exit(child.status || 0);
     }
     if ($autopilotAgentBoardResumeCompactionGuard.real_manifest_read_performed -ne $false -or $autopilotAgentBoardResumeCompactionGuard.real_vcpchat_read_performed -ne $false -or $autopilotAgentBoardResumeCompactionGuard.real_vcptoolbox_read_performed -ne $false -or $autopilotAgentBoardResumeCompactionGuard.dependency_change_performed -ne $false -or $autopilotAgentBoardResumeCompactionGuard.runtime_probe_performed -ne $false -or $autopilotAgentBoardResumeCompactionGuard.secret_value_read_performed -ne $false -or $autopilotAgentBoardResumeCompactionGuard.push_tag_release_deploy_performed -ne $false) {
       Add-Failure "Autopilot agent board resume compaction guard validation must not perform source read, dependency, runtime, secret, push, tag, release, or deploy actions"
+    }
+  }
+
+  $providerReceiptArtifactsOutput = & node (Join-Path $Root 'scripts/validate_provider_receipt_artifacts.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Provider receipt artifact validation exited with failure"
+  } else {
+    $providerReceiptArtifacts = ($providerReceiptArtifactsOutput -join "`n") | ConvertFrom-Json
+    if ($providerReceiptArtifacts.passed -ne $true -or $providerReceiptArtifacts.status -ne 'provider_receipt_artifacts_verified') {
+      Add-Failure "Provider receipt artifact validation must pass"
+    }
+    if ($providerReceiptArtifacts.unique_attempt_result_count -lt 4 -or $providerReceiptArtifacts.missing_attempt_result_count -ne 0 -or $providerReceiptArtifacts.raw_private_path_count -ne 0 -or $providerReceiptArtifacts.output_hash_mismatch_count -ne 0) {
+      Add-Failure "Provider receipt artifacts must have attempt results, no raw private paths, and matching output hashes"
+    }
+    if ($providerReceiptArtifacts.provider_contact_performed -ne $false -or $providerReceiptArtifacts.plugin_call_performed -ne $false -or $providerReceiptArtifacts.api_call_performed -ne $false -or $providerReceiptArtifacts.image_generation_performed -ne $false -or $providerReceiptArtifacts.DailyNote_write_performed -ne $false -or $providerReceiptArtifacts.VCP_memory_write_performed -ne $false) {
+      Add-Failure "Provider receipt artifact validation must not perform provider, plugin, API, image, DailyNote, or VCP memory actions"
+    }
+    if ($providerReceiptArtifacts.runtime_probe_performed -ne $false -or $providerReceiptArtifacts.secret_value_read_performed -ne $false -or $providerReceiptArtifacts.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "Provider receipt artifact validation must not perform runtime, secret, push, tag, release, or deploy actions"
+    }
+  }
+
+  $v031ProviderCostBoundaryOutput = & node (Join-Path $Root 'scripts/validate_v0_3_1_real_provider_cost_boundary_plan.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "v0.3.1 real provider cost boundary validation exited with failure"
+  } else {
+    $v031ProviderCostBoundary = ($v031ProviderCostBoundaryOutput -join "`n") | ConvertFrom-Json
+    if ($v031ProviderCostBoundary.passed -ne $true -or $v031ProviderCostBoundary.phase -ne 'v0_3_1_real_provider_cost_boundary_plan') {
+      Add-Failure "v0.3.1 real provider cost boundary validation must pass"
+    }
+    if ($v031ProviderCostBoundary.live_provider_call_allowed_now -ne $false -or $v031ProviderCostBoundary.image_generation_allowed_now -ne $false -or $v031ProviderCostBoundary.cost_unknown_is_red -ne $true) {
+      Add-Failure "v0.3.1 provider boundary must block live calls and keep unknown cost Red"
+    }
+  }
+
+  $v032LiveCandidatePacketOutput = & node (Join-Path $Root 'scripts/validate_v0_3_2_live_candidate_action_packet.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "v0.3.2 live candidate action packet validation exited with failure"
+  } else {
+    $v032LiveCandidatePacket = ($v032LiveCandidatePacketOutput -join "`n") | ConvertFrom-Json
+    if ($v032LiveCandidatePacket.passed -ne $true -or $v032LiveCandidatePacket.phase -ne 'v0_3_2_live_candidate_action_packet') {
+      Add-Failure "v0.3.2 live candidate action packet validation must pass"
+    }
+    if ($v032LiveCandidatePacket.execution_authorized_by_this_packet -ne $false -or $v032LiveCandidatePacket.execution_still_requires_v0_3_3_gate -ne $true) {
+      Add-Failure "v0.3.2 live candidate packet must remain non-executing and require the v0.3.3 gate"
+    }
+  }
+
+  $v033FirstLiveGenerationPilotOutput = & node (Join-Path $Root 'scripts/validate_v0_3_3_first_live_generation_pilot_gate.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "v0.3.3 first live generation pilot gate validation exited with failure"
+  } else {
+    $v033FirstLiveGenerationPilot = ($v033FirstLiveGenerationPilotOutput -join "`n") | ConvertFrom-Json
+    if ($v033FirstLiveGenerationPilot.passed -ne $true -or $v033FirstLiveGenerationPilot.phase -ne 'v0_3_3_first_live_generation_pilot') {
+      Add-Failure "v0.3.3 first live generation pilot gate validation must pass"
+    }
+    if ($v033FirstLiveGenerationPilot.can_execute_now -ne $false -or $v033FirstLiveGenerationPilot.provider_calls_used -ne 1 -or $v033FirstLiveGenerationPilot.image_candidates_generated -ne 0) {
+      Add-Failure "v0.3.3 first live generation pilot must record the failed one-call/no-image attempt and block further execution"
     }
   }
 

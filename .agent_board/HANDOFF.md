@@ -1,5 +1,31 @@
 ---
 
+## Current Handoff Update - Provider Receipt Artifact Repair
+
+```text
+phase: provider_receipt_artifact_repair
+phase_id: provider_receipt_artifact_repair
+active_current_phase: v0_3_3_first_live_generation_pilot
+source_phase: v0_3_2_live_candidate_action_packet
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+status: completed_validated
+mode: Green Lane local evidence/validator repair
+summary: Repair review findings by making provider receipt attempt-result refs portable, removing raw local source paths, and wiring the new provider receipt artifact gate into MVP validation.
+current_autonomy_model: Smart Standing Authorization v3
+startup_default_model: Smart Standing Authorization v3
+a4_8_status: retained_as_green_lane_substrate
+a5_status: classified_by_lane_and_envelope
+changed_scope: .gitignore; reports/provider_receipts; runs/real_generation generation_attempt_result.json; scripts/validate_provider_receipt_artifacts.js; scripts/validate_mvp.ps1; .agent_board resume surfaces; scripts/lib/governance_tooling_maintenance_slice.js
+validation_status: completed_validated
+not_performed: no push, no tag/release/deploy, no provider/plugin/API/image generation, no DailyNote/VCP memory write, no runtime probe, no secret read.
+image_generation_performed: false
+secret_value_read_performed: false
+push_status: not_performed
+recommended_next: human review exact diff; no commit or push performed.
+```
+
+Resume prompt: read `AGENTS.md`, `AGENTS.autopilot-overlay.md`, and `.agent_board/*`; keep overlay separate from root AGENTS.md; continue only local validation/repair unless explicitly authorized otherwise.
+
 ---
 
 ## Current Handoff Update - v0.3.3 First Live Generation Pilot Gate

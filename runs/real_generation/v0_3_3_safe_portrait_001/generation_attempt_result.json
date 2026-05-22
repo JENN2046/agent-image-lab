@@ -1,0 +1,23 @@
+{
+  "attempt_id": "attempt-v0-3-3-safe-portrait-001",
+  "task_id": "v0_3_3_safe_portrait_001",
+  "visual_task_id": "v0_3_3_safe_portrait_001",
+  "attempt_status": "succeeded_image_generated",
+  "provider_target": "codex_builtin_image_generation",
+  "plugin_id_or_provider_route": "image_gen.imagegen",
+  "prompt_package_ref": "prompts/image_generation/safe_adult_editorial_portrait_v1.yaml",
+  "provider_calls_used": 1,
+  "plugin_calls_used": 1,
+  "api_calls_used": 0,
+  "image_candidates_requested": 1,
+  "image_candidates_generated": 1,
+  "retries_used": 0,
+  "output_image_path": "runs/real_generation/v0_3_3_safe_portrait_001/safe_adult_editorial_portrait_v1.png",
+  "output_image_sha256": "e041f1c69624595aa92592b5209b8e887fec9d2d49155f9bae82409a76d65591",
+  "failure_class": null,
+  "stop_reason": "diagnostic_safe_portrait_test_complete",
+  "receipt_path": "reports/provider_receipts/v0_3_3_safe_portrait_001_receipt.json",
+  "raw_provider_payload_capture_performed": false,
+  "raw_provider_response_capture_performed": false,
+  "secret_value_read_performed": false
+}

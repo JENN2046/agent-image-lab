@@ -1,5 +1,22 @@
 ---
 
+- [x] ID: provider_receipt_artifact_repair
+      Title: Repair provider receipt artifact portability
+      Reason: Code review found missing attempt_result_path files, raw local source paths, and missing MVP validator wiring for the v0.3.3 provider gate.
+      Lane: Green.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      source_phase: v0_3_2_live_candidate_action_packet.
+      Next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Status: completed_validated.
+      Done: added attempt result records; redacted raw local paths; added provider receipt artifact validator; wired MVP validation; added .gitignore exception for generation_attempt_result.json.
+      Remaining: human review exact diff if a local commit is requested later.
+      image_generation_performed: false.
+      secret_value_read_performed: false.
+      push_status: not_performed.
+      Stop condition: validation failure requiring non-obvious judgment, secret read, provider/plugin/API/image generation, DailyNote/VCP memory write, runtime probe, push/tag/release/deploy, or destructive action.
+
+---
+
 - [x] ID: v0_3_3_first_live_generation_pilot
       Title: Enter first Codex sample image generation pilot gate
       Reason: The v0.3.2 candidate packet is filled, so the next safe local step is a Red-to-Amber execution gate that proves what remains blocked before the first real image call.

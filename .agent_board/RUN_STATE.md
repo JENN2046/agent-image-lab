@@ -1,5 +1,37 @@
 ---
 
+## Current Run State - Provider Receipt Artifact Repair
+
+```text
+phase: provider_receipt_artifact_repair
+phase_id: provider_receipt_artifact_repair
+active_current_phase: v0_3_3_first_live_generation_pilot
+source_phase: v0_3_2_live_candidate_action_packet
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+status: completed_validated
+mode: Green Lane local evidence/validator repair
+current_autonomy_model: Smart Standing Authorization v3
+startup_default_model: Smart Standing Authorization v3
+a4_8_status: retained_as_green_lane_substrate
+a5_status: classified_by_lane_and_envelope
+objective: repair provider receipt portability after review findings
+Worktree: local repair validated, unstaged
+Validator Governance Chain v1: active
+Push/tag/release: not performed
+push_status: not_performed
+changed_scope: provider receipt redaction, generation attempt result records, provider receipt artifact validator, MVP validator wiring, gitignore exception, local resume surfaces
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+runtime_probe_performed: false
+secret_value_read_performed: false
+push_tag_release_deploy_performed: false
+recommended_next: human review exact diff; no commit or push performed
+```
+
 ---
 
 ## v0_3_3_first_live_generation_pilot

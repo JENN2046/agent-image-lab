@@ -115,6 +115,26 @@ const EXPECTED_V0_3_3_FIRST_LIVE_GENERATION_PILOT_GATE_SLICE = [
   "tests/schema_examples/v0_3_3_first_live_generation_pilot_gate.example.json"
 ].sort();
 
+const EXPECTED_PROVIDER_RECEIPT_ARTIFACT_REPAIR_SLICE = [
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  ".gitignore",
+  "reports/provider_receipts/v0_3_3_safe_portrait_001_receipt.json",
+  "reports/provider_receipts/v0_3_3_smoke_001_neutral_receipt.json",
+  "runs/real_generation/v0_3_3_codex_sample_first_trial/generation_attempt_result.json",
+  "runs/real_generation/v0_3_3_retry_001_codex_sample/generation_attempt_result.json",
+  "runs/real_generation/v0_3_3_safe_portrait_001/generation_attempt_result.json",
+  "runs/real_generation/v0_3_3_smoke_001_neutral/generation_attempt_result.json",
+  "scripts/lib/governance_tooling_maintenance_slice.js",
+  "scripts/validate_controlled_visual_production_loop_checkpoint_readiness.js",
+  "scripts/validate_controlled_visual_production_loop_exact_file_commit_readiness_review.js",
+  "scripts/validate_local_commit_scope.js",
+  "scripts/validate_mvp.ps1",
+  "scripts/validate_provider_receipt_artifacts.js"
+].sort();
+
 const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "governance_tooling_maintenance_slice_v1",
@@ -131,6 +151,10 @@ const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "v0_3_3_first_live_generation_pilot_gate_slice",
     files: EXPECTED_V0_3_3_FIRST_LIVE_GENERATION_PILOT_GATE_SLICE
+  },
+  {
+    id: "provider_receipt_artifact_repair_slice",
+    files: EXPECTED_PROVIDER_RECEIPT_ARTIFACT_REPAIR_SLICE
   }
 ];
 
@@ -302,6 +326,11 @@ function governanceToolingMaintenanceSliceSelfCheck() {
         === "v0_3_3_first_live_generation_pilot_gate_slice"
     },
     {
+      check: "exact_slice_matches_provider_receipt_artifact_repair",
+      passed: findMatchingGovernanceToolingSlice(EXPECTED_PROVIDER_RECEIPT_ARTIFACT_REPAIR_SLICE)?.id
+        === "provider_receipt_artifact_repair_slice"
+    },
+    {
       check: "exact_slice_rejects_missing_file",
       passed: findMatchingGovernanceToolingSlice(EXPECTED_GOVERNANCE_TOOLING_MAINTENANCE_SLICE.slice(1)) === null
     },
@@ -331,6 +360,7 @@ module.exports = {
   EXPECTED_V0_3_1_REAL_PROVIDER_COST_BOUNDARY_PLAN_SLICE,
   EXPECTED_V0_3_2_LIVE_CANDIDATE_ACTION_PACKET_SLICE,
   EXPECTED_V0_3_3_FIRST_LIVE_GENERATION_PILOT_GATE_SLICE,
+  EXPECTED_PROVIDER_RECEIPT_ARTIFACT_REPAIR_SLICE,
   GOVERNANCE_TOOLING_ALLOWED_SLICES,
   buildGovernanceToolingMaintenanceSliceReport,
   fileAllowedInGovernanceToolingSlice,

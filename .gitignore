@@ -1,4 +1,9 @@
-/runs/
+/runs/*
+!/runs/real_generation/
+/runs/real_generation/*
+!/runs/real_generation/*/
+/runs/real_generation/*/*
+!/runs/real_generation/*/generation_attempt_result.json
 /node_modules/
 /release_packages/
 /.agent_private/
