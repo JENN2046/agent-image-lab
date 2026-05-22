@@ -16612,3 +16612,18 @@ commit_performed: pending
 push_performed: false
 recommended_next: post_commit_review_and_push_lane_classification
 ```
+---
+
+## Handoff - v0.4.8 Visual Review Semantics Hardening
+
+status: completed_validated_pending_local_commit
+source_remote_commit: 21981cf53f3cb611490d9aeac07833051c888efb
+current_gate_phase: v0_4_8_visual_review_semantics_hardening
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+changed: docs/V0_4_8_VISUAL_REVIEW_SEMANTICS_HARDENING.md; schemas/visual_review_semantics_hardening.schema.yaml; tests/schema_examples/visual_review_semantics_hardening.example.json; tests/schema_examples/visual_review_semantics_hardening_fail.example.json; scripts/validate_visual_review_semantics_hardening.js; scripts/validate_mvp.ps1; scripts/lib/governance_tooling_maintenance_slice.js; docs/00_project_roadmap.md; .agent_board resume surfaces.
+semantic_rules: pass_blocks_blocking_failure; reject_requires_failure_taxonomy; patch_requires_correction_hint; low_score_requires_finding; memory_suitability_stays_false.
+side_effects: provider_call_performed=false; image_generation_performed=false; VCP_memory_write_performed=false; DailyNote_write_performed=false; runtime_call_performed=false; production_candidate_created=false; accepted_sample_auto_promotion=false; memory_seed_promoted=false; Push_L2_exercised=false; real_executor_implemented_now=false.
+validation: git diff --check passed; node --check scripts/validate_visual_review_semantics_hardening.js passed; node scripts/validate_visual_review_semantics_hardening.js passed; node scripts/validate_smart_v3_push_safety_lane.js passed; node scripts/validate_agent_board_state.js passed; powershell validate_mvp.ps1 passed; npm run validate:mvp passed.
+next: local commit, post-commit review, and Push_L3 manual guarded push classification.

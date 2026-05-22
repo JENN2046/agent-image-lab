@@ -1,0 +1,69 @@
+{
+  "visual_review_semantics_hardening": {
+    "semantic_hardening_id": "visual_review_semantics_hardening_v0_4_8_invalid",
+    "version": "v0_1",
+    "phase": "v0_4_8_visual_review_semantics_hardening",
+    "source_review_pack_ref": "reports/visual_asset_eval_dry_run/v0_4_1_safe_portrait_review_pack.json",
+    "source_failure_taxonomy_ref": "tests/schema_examples/visual_failure_taxonomy.example.json",
+    "source_prompt_correction_hint_ref": "tests/schema_examples/visual_prompt_correction_hint.example.json",
+    "low_score_threshold": 5,
+    "review_decision": {
+      "result": "patch",
+      "blocking_failures": [],
+      "failure_taxonomy": [
+        "commercial_fitness_failure"
+      ],
+      "correction_hint_ref": null,
+      "correction_hint_categories": [],
+      "memory_suitability": false
+    },
+    "low_score_findings": [
+      {
+        "dimension": "commercial_fitness",
+        "score": 5,
+        "finding": "",
+        "mapped_failure_category": "commercial_fitness_failure"
+      }
+    ],
+    "semantic_constraints": {
+      "pass_blocks_blocking_failure": true,
+      "reject_requires_failure_taxonomy": true,
+      "patch_requires_correction_hint": true,
+      "low_score_requires_finding": true,
+      "memory_suitability_stays_false": true
+    },
+    "boundaries": {
+      "metadata_only": true,
+      "dry_run_only": true,
+      "image_binary_read_performed": false,
+      "provider_call_performed": false,
+      "image_generation_performed": false,
+      "VCP_memory_write_performed": false,
+      "DailyNote_write_performed": false,
+      "runtime_call_performed": false,
+      "secret_value_read_performed": false,
+      "production_candidate_created": false,
+      "accepted_sample_auto_promotion": false,
+      "memory_seed_promoted": false,
+      "real_executor_implemented_now": false,
+      "Push_L2_exercised": false,
+      "package_dependency_change_performed": false,
+      "commit_performed": false,
+      "push_performed": false
+    },
+    "side_effects": {
+      "provider_call_performed": false,
+      "image_generation_performed": false,
+      "VCP_memory_write_performed": false,
+      "DailyNote_write_performed": false,
+      "runtime_call_performed": false,
+      "secret_value_read_performed": false,
+      "production_candidate_created": false,
+      "accepted_sample_auto_promotion": false,
+      "memory_seed_promoted": false,
+      "package_dependency_change_performed": false,
+      "commit_performed": false,
+      "push_performed": false
+    }
+  }
+}

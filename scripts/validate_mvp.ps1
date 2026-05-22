@@ -91,6 +91,7 @@ $requiredFiles = @(
   'scripts/validate_visual_eval_consistency_check.js',
   'scripts/validate_noop_visual_workflow_runner_plan.js',
   'scripts/validate_seven_day_visual_workflow_checkpoint.js',
+  'scripts/validate_visual_review_semantics_hardening.js',
   'scripts/validate_visual_sample_memory_policy.js',
   'scripts/validate_15_day_architecture_checkpoint.js',
   'scripts/validate_local_checkpoint_manifest.js',
@@ -12609,6 +12610,34 @@ process.exit(child.status || 0);
     }
     if ($sevenDayVisualWorkflowCheckpoint.Push_L2_exercised -ne $false -or $sevenDayVisualWorkflowCheckpoint.provider_call_performed -ne $false -or $sevenDayVisualWorkflowCheckpoint.image_generation_performed -ne $false -or $sevenDayVisualWorkflowCheckpoint.VCP_memory_write_performed -ne $false -or $sevenDayVisualWorkflowCheckpoint.DailyNote_write_performed -ne $false -or $sevenDayVisualWorkflowCheckpoint.runtime_call_performed -ne $false -or $sevenDayVisualWorkflowCheckpoint.secret_value_read_performed -ne $false -or $sevenDayVisualWorkflowCheckpoint.production_candidate_created -ne $false -or $sevenDayVisualWorkflowCheckpoint.accepted_sample_auto_promotion -ne $false -or $sevenDayVisualWorkflowCheckpoint.memory_seed_promoted -ne $false -or $sevenDayVisualWorkflowCheckpoint.package_dependency_change_performed -ne $false -or $sevenDayVisualWorkflowCheckpoint.commit_performed -ne $false -or $sevenDayVisualWorkflowCheckpoint.push_performed -ne $false) {
       Add-Failure "Seven/Fifteen-Day Visual Workflow Checkpoint must not perform Push_L2, provider, image, memory, DailyNote, runtime, secret, production, accepted-sample, memory-seed, dependency, commit, or push actions"
+    }
+  }
+
+  $visualReviewSemanticsHardeningOutput = & node (Join-Path $Root 'scripts/validate_visual_review_semantics_hardening.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Visual Review Semantics Hardening validation exited with failure"
+  } else {
+    $visualReviewSemanticsHardening = ($visualReviewSemanticsHardeningOutput -join "`n") | ConvertFrom-Json
+    if ($visualReviewSemanticsHardening.passed -ne $true -or $visualReviewSemanticsHardening.phase -ne 'v0_4_8_visual_review_semantics_hardening') {
+      Add-Failure "Visual Review Semantics Hardening validation must pass"
+    }
+    if ($visualReviewSemanticsHardening.semantic_hardening_doc_present -ne $true -or $visualReviewSemanticsHardening.semantic_hardening_schema_present -ne $true -or $visualReviewSemanticsHardening.semantic_hardening_fixture_present -ne $true -or $visualReviewSemanticsHardening.semantic_hardening_fail_fixture_present -ne $true) {
+      Add-Failure "Visual Review Semantics Hardening must define doc, schema, pass fixture, and fail fixture"
+    }
+    if ($visualReviewSemanticsHardening.source_review_pack_verified -ne $true -or $visualReviewSemanticsHardening.source_failure_taxonomy_verified -ne $true -or $visualReviewSemanticsHardening.source_prompt_correction_hint_verified -ne $true) {
+      Add-Failure "Visual Review Semantics Hardening must bind to review pack, failure taxonomy, and correction hints"
+    }
+    if ($visualReviewSemanticsHardening.pass_blocks_blocking_failure -ne $true -or $visualReviewSemanticsHardening.reject_requires_failure_taxonomy -ne $true -or $visualReviewSemanticsHardening.patch_requires_correction_hint -ne $true -or $visualReviewSemanticsHardening.low_score_requires_finding -ne $true -or $visualReviewSemanticsHardening.memory_suitability_stays_false -ne $true) {
+      Add-Failure "Visual Review Semantics Hardening must prove every semantic rule"
+    }
+    if ($visualReviewSemanticsHardening.negative_case_count -lt 13 -or $visualReviewSemanticsHardening.caught_negative_case_count -ne $visualReviewSemanticsHardening.negative_case_count -or $visualReviewSemanticsHardening.all_negative_cases_caught -ne $true -or $visualReviewSemanticsHardening.pass_blocking_failure_caught -ne $true -or $visualReviewSemanticsHardening.reject_without_taxonomy_caught -ne $true -or $visualReviewSemanticsHardening.patch_without_correction_hint_caught -ne $true -or $visualReviewSemanticsHardening.low_score_without_finding_caught -ne $true -or $visualReviewSemanticsHardening.memory_suitability_drift_caught -ne $true) {
+      Add-Failure "Visual Review Semantics Hardening must catch every required negative case"
+    }
+    if ($visualReviewSemanticsHardening.metadata_only -ne $true -or $visualReviewSemanticsHardening.dry_run_only -ne $true -or $visualReviewSemanticsHardening.image_binary_read_performed -ne $false) {
+      Add-Failure "Visual Review Semantics Hardening must remain metadata-only, dry-run-only, and avoid image binary reads"
+    }
+    if ($visualReviewSemanticsHardening.Push_L2_exercised -ne $false -or $visualReviewSemanticsHardening.real_executor_implemented_now -ne $false -or $visualReviewSemanticsHardening.provider_call_performed -ne $false -or $visualReviewSemanticsHardening.image_generation_performed -ne $false -or $visualReviewSemanticsHardening.runtime_call_performed -ne $false -or $visualReviewSemanticsHardening.secret_value_read_performed -ne $false -or $visualReviewSemanticsHardening.VCP_memory_write_performed -ne $false -or $visualReviewSemanticsHardening.DailyNote_write_performed -ne $false -or $visualReviewSemanticsHardening.production_candidate_created -ne $false -or $visualReviewSemanticsHardening.accepted_sample_auto_promotion -ne $false -or $visualReviewSemanticsHardening.memory_seed_promoted -ne $false -or $visualReviewSemanticsHardening.package_dependency_change_performed -ne $false -or $visualReviewSemanticsHardening.commit_performed -ne $false -or $visualReviewSemanticsHardening.push_performed -ne $false) {
+      Add-Failure "Visual Review Semantics Hardening must not perform Push_L2, executor, provider, image, runtime, secret, memory, DailyNote, production, accepted-sample, memory-seed, dependency, commit, or push actions"
     }
   }
 

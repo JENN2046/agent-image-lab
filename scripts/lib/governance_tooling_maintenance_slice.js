@@ -445,6 +445,22 @@ const EXPECTED_V0_4_7_REVIEW_FINDINGS_FIX_SLICE = [
   "scripts/validate_seven_day_visual_workflow_checkpoint.js"
 ].sort();
 
+const EXPECTED_V0_4_8_VISUAL_REVIEW_SEMANTICS_HARDENING_SLICE = [
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  ".agent_board/VALIDATION_LOG.md",
+  "docs/00_project_roadmap.md",
+  "docs/V0_4_8_VISUAL_REVIEW_SEMANTICS_HARDENING.md",
+  "schemas/visual_review_semantics_hardening.schema.yaml",
+  "scripts/lib/governance_tooling_maintenance_slice.js",
+  "scripts/validate_mvp.ps1",
+  "scripts/validate_visual_review_semantics_hardening.js",
+  "tests/schema_examples/visual_review_semantics_hardening.example.json",
+  "tests/schema_examples/visual_review_semantics_hardening_fail.example.json"
+].sort();
+
 const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "governance_tooling_maintenance_slice_v1",
@@ -545,6 +561,10 @@ const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "v0_4_7_review_findings_fix_slice",
     files: EXPECTED_V0_4_7_REVIEW_FINDINGS_FIX_SLICE
+  },
+  {
+    id: "v0_4_8_visual_review_semantics_hardening_slice",
+    files: EXPECTED_V0_4_8_VISUAL_REVIEW_SEMANTICS_HARDENING_SLICE
   }
 ];
 
@@ -829,6 +849,11 @@ function governanceToolingMaintenanceSliceSelfCheck() {
         === "v0_4_7_review_findings_fix_slice"
     },
     {
+      check: "exact_slice_matches_v0_4_8_visual_review_semantics_hardening",
+      passed: findMatchingGovernanceToolingSlice(EXPECTED_V0_4_8_VISUAL_REVIEW_SEMANTICS_HARDENING_SLICE)?.id
+        === "v0_4_8_visual_review_semantics_hardening_slice"
+    },
+    {
       check: "exact_slice_rejects_missing_file",
       passed: findMatchingGovernanceToolingSlice(EXPECTED_GOVERNANCE_TOOLING_MAINTENANCE_SLICE.slice(1)) === null
     },
@@ -879,6 +904,7 @@ module.exports = {
   EXPECTED_V0_4_6_NOOP_VISUAL_WORKFLOW_RUNNER_PLAN_SLICE,
   EXPECTED_V0_4_7_SEVEN_DAY_VISUAL_WORKFLOW_CHECKPOINT_SLICE,
   EXPECTED_V0_4_7_REVIEW_FINDINGS_FIX_SLICE,
+  EXPECTED_V0_4_8_VISUAL_REVIEW_SEMANTICS_HARDENING_SLICE,
   GOVERNANCE_TOOLING_ALLOWED_SLICES,
   buildGovernanceToolingMaintenanceSliceReport,
   fileAllowedInGovernanceToolingSlice,
