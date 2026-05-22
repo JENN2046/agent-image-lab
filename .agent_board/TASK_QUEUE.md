@@ -1,5 +1,25 @@
 ---
 
+- [x] ID: v0_3_5_visual_asset_promotion_gate_design
+      Title: Define visual asset promotion gates
+      Reason: After v0.3.4a fixed test asset classification, the next local safety boundary is preventing test assets from silently becoming review/eval/accepted/production classes.
+      Lane: Green.
+      Source remote commit: df4d7c6.
+      Source phase: v0_3_4a_visual_asset_policy_gap_patch.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Status: completed_validated.
+      Done: added visual_asset_promotion_policy_v0_3_5; required review_gate_id, eval_gate_id plus human_label, accepted_gate_id plus human_accepted:true, independent A5 production gate, memory gate plus memory_write_allowed_now:true, promoted_from_asset_class, and promotion_gate_id.
+      Promotion by field flip allowed: false.
+      push_allowed: false.
+      image_generation_performed: false.
+      secret_value_read_performed: false.
+      Stop condition: provider/plugin/API call, image generation, VCPToolBox/VCPChat runtime call, CDP/bridge/MCP call, DailyNote/VCP memory write, production_candidate creation, accepted_sample promotion, eval_seed promotion, secret read, dependency change, git add ., push/tag/release/deploy, or validation failure requiring judgment.
+      Recommended next: guarded local commit for v0.3.5 if review accepts the diff.
+
+---
+
 - [x] ID: v0_3_4a_visual_asset_policy_gap_patch
       Title: Close visual asset policy review gaps
       Reason: Exact diff review found commit_ready=false because the registry and validator lacked fixed asset_class taxonomy, upload_authorized_by_user, memory_seed:false, and memory gate negative cases.

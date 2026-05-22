@@ -1,5 +1,48 @@
 ---
 
+## Current Run State - v0.3.5 Visual Asset Promotion Gate Design
+
+```text
+phase: v0_3_5_visual_asset_promotion_gate_design
+phase_id: v0_3_5_visual_asset_promotion_gate_design
+status: completed_validated
+mode: Green Lane local docs and validator patch
+source_remote_commit: df4d7c6
+source_phase: v0_3_4a_visual_asset_policy_gap_patch
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+current_autonomy_model: Smart Standing Authorization v3
+startup_default_model: Smart Standing Authorization v3
+a4_8_status: retained_as_green_lane_substrate
+a5_status: not_used_for_this_local_gate_design
+objective: define asset promotion gates without runtime, generation, memory, accepted sample, eval seed, or production candidate action
+promotion_policy_version: visual_asset_promotion_policy_v0_3_5
+promotion_by_field_flip_allowed: false
+review_candidate_count: 0
+eval_seed_candidate_count: 0
+accepted_sample_count: 0
+production_candidate_count: 0
+memory_seed_true_count: 0
+promotion_negative_case_count: 21
+all_negative_cases_caught: true
+push_allowed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+runtime_probe_performed: false
+secret_value_read_performed: false
+production_candidate_created: false
+accepted_sample_promoted: false
+eval_seed_promoted: false
+recommended_next: guarded local commit for v0.3.5 if review accepts the diff
+```
+
+---
+
 ## Current Run State - v0.3.4a Visual Asset Policy Gap Patch
 
 ```text

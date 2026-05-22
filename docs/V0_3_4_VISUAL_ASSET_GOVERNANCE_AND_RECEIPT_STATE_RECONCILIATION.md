@@ -56,6 +56,7 @@ The owner-authorized generated PNG upload record is maintained in:
 ```yaml
 asset_authorization_registry_ref: assets/visual_asset_authorization_registry.example.json
 visual_asset_policy_version: visual_asset_policy_v0_3_4a
+promotion_policy_version: visual_asset_promotion_policy_v0_3_5
 authorized_png_count: 2
 authorized_png_paths:
   - runs/real_generation/v0_3_3_smoke_001_neutral/neutral_smoke_test_red_apple_v1.png
@@ -89,6 +90,46 @@ authorized_asset_classes:
     accepted_sample: false
     production_candidate: false
     memory_seed: false
+```
+
+## Asset Promotion Gates
+
+Test and runs assets cannot become review, eval, accepted, production, or memory
+assets by flipping one field. Every promotion must record both the source class
+and the gate that authorized the transition.
+
+```yaml
+visual_asset_promotion_policy:
+  policy_id: visual_asset_promotion_policy_v0_3_5
+  promotion_by_field_flip_allowed: false
+  every_promotion_requires:
+    - promoted_from_asset_class
+    - promotion_gate_id
+  review_candidate:
+    requires:
+      - review_gate_id
+  eval_seed_candidate:
+    requires:
+      - eval_gate_id
+      - human_label
+  accepted_sample:
+    requires:
+      - accepted_gate_id
+      - human_accepted: true
+  production_candidate:
+    requires:
+      - independent_A5_production_gate_id
+      - production_candidate_write_allowed_by_active_gate: true
+  memory_seed:
+    requires:
+      - memory_gate_id
+      - memory_write_allowed_now: true
+  current_counts:
+    review_candidate: 0
+    eval_seed_candidate: 0
+    accepted_sample: 0
+    production_candidate: 0
+    memory_seed: 0
 ```
 
 ## Runs Artifact Boundary
@@ -156,11 +197,15 @@ generated_image_binary_commit_policy:
       - missing_attempt_result
       - missing_sha256
       - raw_private_source_path_present
+      - review_candidate_without_review_gate_id
+      - eval_seed_candidate_without_eval_gate_or_human_label
       - test_asset_promoted_to_accepted_sample_without_gate
       - production_candidate_claim_without_gate
       - durable_review_asset_claim_without_gate
       - memory_seed_true_without_memory_gate
       - memory_seed_true_without_explicit_VCP_memory_write_authorization
+      - promotion_missing_promoted_from_asset_class
+      - promotion_missing_promotion_gate_id
 ```
 
 ## Current Non-Actions

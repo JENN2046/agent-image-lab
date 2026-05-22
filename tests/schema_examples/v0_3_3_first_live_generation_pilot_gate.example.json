@@ -74,6 +74,7 @@
       "visual_asset_authorization_registry_ref": "assets/visual_asset_authorization_registry.example.json",
       "generated_image_binary_commit_policy_ref": "docs/V0_3_4_VISUAL_ASSET_GOVERNANCE_AND_RECEIPT_STATE_RECONCILIATION.md",
       "visual_asset_policy_version": "visual_asset_policy_v0_3_4a",
+      "promotion_policy_version": "visual_asset_promotion_policy_v0_3_5",
       "asset_class_enum": [
         "runs_artifact",
         "user_authorized_test_image",
@@ -87,6 +88,11 @@
       "user_authorized_test_image_count": 1,
       "memory_seed_true_count": 0,
       "invalid_memory_seed_count": 0,
+      "review_candidate_count": 0,
+      "eval_seed_candidate_count": 0,
+      "accepted_sample_count": 0,
+      "production_candidate_count": 0,
+      "promotion_by_field_flip_allowed": false,
       "durable_review_asset_requires_separate_gate": true,
       "production_candidate_write_allowed_by_v0_3_4": false
     },

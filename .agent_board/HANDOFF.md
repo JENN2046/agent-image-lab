@@ -1,5 +1,35 @@
 ---
 
+## Current Handoff Update - v0.3.5 Visual Asset Promotion Gate Design
+
+```text
+phase: v0_3_5_visual_asset_promotion_gate_design
+phase_id: v0_3_5_visual_asset_promotion_gate_design
+status: completed_validated
+mode: Green Lane local docs and validator patch
+source_remote_commit: df4d7c6
+source_phase: v0_3_4a_visual_asset_policy_gap_patch
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+summary: Added promotion gate design and fail-closed validation so test assets cannot become review, eval, accepted, production, or memory assets by field flip.
+promotion_policy_version: visual_asset_promotion_policy_v0_3_5
+review_candidate_requires_review_gate_id: true
+eval_seed_candidate_requires_eval_gate_id_and_human_label: true
+accepted_sample_requires_accepted_gate_id_and_human_accepted_true: true
+production_candidate_requires_independent_A5_production_gate: true
+memory_seed_requires_memory_gate_and_memory_write_allowed_now: true
+promotion_requires_promoted_from_asset_class_and_promotion_gate_id: true
+promotion_by_field_flip_allowed: false
+push_allowed: false
+not_performed: no provider/plugin/API call, no image generation, no VCPToolBox/VCPChat runtime call, no CDP/bridge/MCP call, no DailyNote/VCP memory write, no production_candidate creation, no accepted_sample promotion, no eval_seed promotion, no secret read.
+image_generation_performed: false
+secret_value_read_performed: false
+recommended_next: guarded local commit for v0.3.5 if review accepts the diff.
+```
+
+---
+
 ## Current Handoff Update - v0.3.4a Visual Asset Policy Gap Patch
 
 ```text

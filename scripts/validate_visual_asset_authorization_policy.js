@@ -8,6 +8,7 @@ const phase = "v0_3_4_visual_asset_governance_and_receipt_state_reconciliation";
 const docPath = "docs/V0_3_4_VISUAL_ASSET_GOVERNANCE_AND_RECEIPT_STATE_RECONCILIATION.md";
 const registryPath = "assets/visual_asset_authorization_registry.example.json";
 const visualAssetPolicyVersion = "visual_asset_policy_v0_3_4a";
+const promotionPolicyVersion = "visual_asset_promotion_policy_v0_3_5";
 const allowedAssetClasses = [
   "runs_artifact",
   "user_authorized_test_image",
@@ -21,6 +22,7 @@ const expectedAuthorizedPngPaths = [
   "runs/real_generation/v0_3_3_safe_portrait_001/safe_adult_editorial_portrait_v1.png"
 ];
 const testAssetClasses = new Set(["runs_artifact", "user_authorized_test_image"]);
+const promotionClasses = new Set(["review_candidate", "eval_seed_candidate", "accepted_sample", "production_candidate"]);
 
 function assert(condition, message) {
   if (!condition) throw new Error(message);
@@ -89,6 +91,45 @@ function validateMemorySeed(entry, registry) {
   }
 }
 
+function assertNonEmptyString(value, message) {
+  assert(typeof value === "string" && value.length > 0, message);
+}
+
+function validatePromotion(entry, registry) {
+  if (!promotionClasses.has(entry.asset_class)) {
+    assert(entry.promoted_from_asset_class === null, `Unpromoted asset must not record promoted_from_asset_class: ${entry.asset_id}`);
+    assert(entry.promotion_gate_id === null, `Unpromoted asset must not record promotion_gate_id: ${entry.asset_id}`);
+    return;
+  }
+
+  assert(registry.asset_boundary.promotion_by_field_flip_allowed === false, "promotion by field flip must stay blocked");
+  assertNonEmptyString(entry.promoted_from_asset_class, `Promotion requires promoted_from_asset_class: ${entry.asset_id}`);
+  assert(testAssetClasses.has(entry.promoted_from_asset_class), `Promotion source class must be a test/runs class: ${entry.asset_id}`);
+  assertNonEmptyString(entry.promotion_gate_id, `Promotion requires promotion_gate_id: ${entry.asset_id}`);
+
+  if (entry.asset_class === "review_candidate") {
+    assertNonEmptyString(entry.review_gate_id, `review_candidate requires review_gate_id: ${entry.asset_id}`);
+    assert(entry.review_gate_id === entry.promotion_gate_id, `review_candidate gate must match promotion_gate_id: ${entry.asset_id}`);
+  }
+  if (entry.asset_class === "eval_seed_candidate") {
+    assertNonEmptyString(entry.eval_gate_id, `eval_seed_candidate requires eval_gate_id: ${entry.asset_id}`);
+    assertNonEmptyString(entry.human_label, `eval_seed_candidate requires human_label: ${entry.asset_id}`);
+    assert(entry.eval_gate_id === entry.promotion_gate_id, `eval_seed_candidate gate must match promotion_gate_id: ${entry.asset_id}`);
+  }
+  if (entry.asset_class === "accepted_sample") {
+    assertNonEmptyString(entry.accepted_gate_id, `accepted_sample requires accepted_gate_id: ${entry.asset_id}`);
+    assert(entry.human_accepted === true, `accepted_sample requires human_accepted true: ${entry.asset_id}`);
+    assert(entry.accepted_sample === true, `accepted_sample class requires accepted_sample true: ${entry.asset_id}`);
+    assert(entry.accepted_gate_id === entry.promotion_gate_id, `accepted_sample gate must match promotion_gate_id: ${entry.asset_id}`);
+  }
+  if (entry.asset_class === "production_candidate") {
+    assertNonEmptyString(entry.independent_A5_production_gate_id, `production_candidate requires independent_A5_production_gate_id: ${entry.asset_id}`);
+    assert(entry.production_candidate === true, `production_candidate class requires production_candidate true: ${entry.asset_id}`);
+    assert(entry.independent_A5_production_gate_id === entry.promotion_gate_id, `production_candidate gate must match promotion_gate_id: ${entry.asset_id}`);
+    assert(registry.asset_boundary.production_candidate_write_allowed_by_this_phase === true, `production_candidate requires an active independent A5 production gate: ${entry.asset_id}`);
+  }
+}
+
 function validateEntry(entry, registry) {
   assert(entry.asset_path.startsWith("runs/real_generation/"), `Asset must stay in runs/real_generation: ${entry.asset_path}`);
   assert(entry.asset_path.endsWith(".png"), `Asset must be PNG: ${entry.asset_path}`);
@@ -114,6 +155,7 @@ function validateEntry(entry, registry) {
     assert(entry.production_candidate === false, `Test/runs asset must not self-claim production candidate: ${entry.asset_id}`);
     assert(entry.memory_seed === false, `Test/runs asset must explicitly set memory_seed false: ${entry.asset_id}`);
   }
+  validatePromotion(entry, registry);
   validateMemorySeed(entry, registry);
   assert(entry.DailyNote_write_performed === false, `DailyNote write flag must remain false: ${entry.asset_id}`);
   assert(entry.VCP_memory_write_performed === false, `VCP memory write flag must remain false: ${entry.asset_id}`);
@@ -134,6 +176,7 @@ function validateRegistry(registry) {
 
   assert(registry.phase === phase, "registry phase mismatch");
   assert(registry.visual_asset_policy_version === visualAssetPolicyVersion, "visual asset policy version mismatch");
+  assert(registry.promotion_policy_version === promotionPolicyVersion, "promotion policy version mismatch");
   assert(registry.pushed_commit === "bf5e54e", "registry must record pushed commit bf5e54e");
   assert(registry.push_status === "pushed_to_origin_master_after_user_authorization", "push status mismatch");
   assert(registry.binary_commit_policy_id === "generated_image_binary_commit_policy_v1", "binary policy id mismatch");
@@ -142,6 +185,13 @@ function validateRegistry(registry) {
   assert(registry.asset_boundary.production_candidate_write_allowed_by_this_phase === false, "production candidate must be blocked");
   assert(registry.asset_boundary.memory_seed_requires_memory_gate === true, "memory seed must require memory gate");
   assert(registry.asset_boundary.VCP_memory_write_allowed_now === false, "VCP memory write authorization must remain false");
+  assert(registry.asset_boundary.promotion_by_field_flip_allowed === false, "promotion by field flip must remain false");
+  assertDeepEqual(registry.asset_boundary.promotion_classes, Array.from(promotionClasses), "promotion class enum");
+  assert(registry.asset_boundary.current_promotion_counts.review_candidate === 0, "review candidate count must remain zero");
+  assert(registry.asset_boundary.current_promotion_counts.eval_seed_candidate === 0, "eval seed candidate count must remain zero");
+  assert(registry.asset_boundary.current_promotion_counts.accepted_sample === 0, "accepted sample count must remain zero");
+  assert(registry.asset_boundary.current_promotion_counts.production_candidate === 0, "production candidate count must remain zero");
+  assert(registry.asset_boundary.current_promotion_counts.memory_seed === 0, "memory seed count must remain zero");
   assert(Array.isArray(registry.entries) && registry.entries.length === 2, "exactly two PNG assets must be authorized");
 
   const registeredPaths = new Set(registry.entries.map((entry) => entry.asset_path));
@@ -156,6 +206,10 @@ function validateRegistry(registry) {
   for (const [key, value] of Object.entries(registry.non_actions)) {
     assert(value === false, `${key} must remain false`);
   }
+}
+
+function countByAssetClass(registry, assetClass) {
+  return registry.entries.filter((entry) => entry.asset_class === assetClass).length;
 }
 
 function assertDeepEqual(actual, expected, label) {
@@ -212,9 +266,17 @@ function validateNegativeCases(registry) {
       candidate.entries[0].production_candidate = true;
     }),
     expectFailure(registry, "memory_seed_true_without_memory_gate_id_fails", (candidate) => {
+      candidate.entries[0].asset_class = "review_candidate";
+      candidate.entries[0].promoted_from_asset_class = "runs_artifact";
+      candidate.entries[0].promotion_gate_id = "review_gate_future";
+      candidate.entries[0].review_gate_id = "review_gate_future";
       candidate.entries[0].memory_seed = true;
     }),
     expectFailure(registry, "memory_seed_true_without_vcp_memory_authorization_fails", (candidate) => {
+      candidate.entries[0].asset_class = "review_candidate";
+      candidate.entries[0].promoted_from_asset_class = "runs_artifact";
+      candidate.entries[0].promotion_gate_id = "review_gate_future";
+      candidate.entries[0].review_gate_id = "review_gate_future";
       candidate.entries[0].memory_seed = true;
       candidate.entries[0].memory_gate_id = "memory_gate_future_only";
     }),
@@ -223,6 +285,58 @@ function validateNegativeCases(registry) {
     }),
     expectFailure(registry, "codex_generated_image_path_in_registry_fails", (candidate) => {
       candidate.entries[0].source_image_path = "/home/user/.codex/generated_images/raw.png";
+    }),
+    expectFailure(registry, "review_candidate_field_flip_without_gate_fails", (candidate) => {
+      candidate.entries[0].asset_class = "review_candidate";
+    }),
+    expectFailure(registry, "review_candidate_without_promotion_gate_id_fails", (candidate) => {
+      candidate.entries[0].asset_class = "review_candidate";
+      candidate.entries[0].promoted_from_asset_class = "runs_artifact";
+      candidate.entries[0].review_gate_id = "review_gate_future";
+    }),
+    expectFailure(registry, "review_candidate_without_review_gate_id_fails", (candidate) => {
+      candidate.entries[0].asset_class = "review_candidate";
+      candidate.entries[0].promoted_from_asset_class = "runs_artifact";
+      candidate.entries[0].promotion_gate_id = "review_gate_future";
+    }),
+    expectFailure(registry, "eval_seed_candidate_without_eval_gate_fails", (candidate) => {
+      candidate.entries[0].asset_class = "eval_seed_candidate";
+      candidate.entries[0].promoted_from_asset_class = "runs_artifact";
+      candidate.entries[0].promotion_gate_id = "eval_gate_future";
+      candidate.entries[0].human_label = "neutral apple diagnostic";
+    }),
+    expectFailure(registry, "eval_seed_candidate_without_human_label_fails", (candidate) => {
+      candidate.entries[0].asset_class = "eval_seed_candidate";
+      candidate.entries[0].promoted_from_asset_class = "runs_artifact";
+      candidate.entries[0].promotion_gate_id = "eval_gate_future";
+      candidate.entries[0].eval_gate_id = "eval_gate_future";
+    }),
+    expectFailure(registry, "accepted_sample_without_accepted_gate_fails", (candidate) => {
+      candidate.entries[0].asset_class = "accepted_sample";
+      candidate.entries[0].promoted_from_asset_class = "runs_artifact";
+      candidate.entries[0].promotion_gate_id = "accepted_gate_future";
+      candidate.entries[0].human_accepted = true;
+      candidate.entries[0].accepted_sample = true;
+    }),
+    expectFailure(registry, "accepted_sample_without_human_accepted_fails", (candidate) => {
+      candidate.entries[0].asset_class = "accepted_sample";
+      candidate.entries[0].promoted_from_asset_class = "runs_artifact";
+      candidate.entries[0].promotion_gate_id = "accepted_gate_future";
+      candidate.entries[0].accepted_gate_id = "accepted_gate_future";
+      candidate.entries[0].accepted_sample = true;
+    }),
+    expectFailure(registry, "production_candidate_without_independent_a5_gate_fails", (candidate) => {
+      candidate.entries[0].asset_class = "production_candidate";
+      candidate.entries[0].promoted_from_asset_class = "runs_artifact";
+      candidate.entries[0].promotion_gate_id = "production_gate_future";
+      candidate.entries[0].production_candidate = true;
+    }),
+    expectFailure(registry, "production_candidate_with_gate_but_inactive_phase_fails", (candidate) => {
+      candidate.entries[0].asset_class = "production_candidate";
+      candidate.entries[0].promoted_from_asset_class = "runs_artifact";
+      candidate.entries[0].promotion_gate_id = "production_gate_future";
+      candidate.entries[0].independent_A5_production_gate_id = "production_gate_future";
+      candidate.entries[0].production_candidate = true;
     })
   ];
 
@@ -243,12 +357,16 @@ function main() {
     phase,
     "bf5e54e",
     visualAssetPolicyVersion,
+    promotionPolicyVersion,
     "pushed_to_origin_master_after_user_authorization",
     "generated_image_binary_commit_policy_v1",
     "asset_class_enum",
     "user_authorized_test_image",
     "upload_authorized_by_user",
     "memory_seed: false",
+    "visual_asset_promotion_policy_v0_3_5",
+    "review_candidate_without_review_gate_id",
+    "eval_seed_candidate_without_eval_gate_or_human_label",
     "runs_artifact_boundary",
     "durable_review_asset_boundary",
     "asset_authorization_registry_ref: assets/visual_asset_authorization_registry.example.json",
@@ -263,6 +381,7 @@ function main() {
     phase,
     status: "visual_asset_authorization_policy_verified",
     visual_asset_policy_version: registry.visual_asset_policy_version,
+    promotion_policy_version: registry.promotion_policy_version,
     pushed_commit: registry.pushed_commit,
     push_status: registry.push_status,
     authorized_png_count: registry.entries.length,
@@ -272,6 +391,10 @@ function main() {
     invalid_memory_seed_count: countInvalidMemorySeeds(registry),
     production_candidate_count: registry.entries.filter((entry) => entry.production_candidate === true).length,
     accepted_sample_count: registry.entries.filter((entry) => entry.accepted_sample === true).length,
+    review_candidate_count: countByAssetClass(registry, "review_candidate"),
+    eval_seed_candidate_count: countByAssetClass(registry, "eval_seed_candidate"),
+    promotion_gate_required: true,
+    promotion_by_field_flip_allowed: false,
     negative_case_count: negativeCaseSummary.negative_case_count,
     caught_negative_case_count: negativeCaseSummary.caught_negative_case_count,
     all_negative_cases_caught: negativeCaseSummary.all_negative_cases_caught,

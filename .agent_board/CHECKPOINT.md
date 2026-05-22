@@ -1,5 +1,46 @@
 ---
 
+## Checkpoint - v0.3.5 Visual Asset Promotion Gate Design
+
+```text
+phase: v0_3_5_visual_asset_promotion_gate_design
+phase_id: v0_3_5_visual_asset_promotion_gate_design
+status: completed_validated
+source_remote_commit: df4d7c6
+source_phase: v0_3_4a_visual_asset_policy_gap_patch
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+completed:
+- defined visual_asset_promotion_policy_v0_3_5
+- required review_candidate review_gate_id
+- required eval_seed_candidate eval_gate_id and human_label
+- required accepted_sample accepted_gate_id and human_accepted:true
+- required production_candidate independent A5 production gate
+- required every promotion to record promoted_from_asset_class and promotion_gate_id
+- added validator negative cases proving test assets cannot promote by field flip alone
+latest_validation:
+- git diff --check: passed
+- node scripts/validate_visual_asset_authorization_policy.js: passed
+- npm run validate:mvp: passed
+not_performed:
+- no provider/plugin/API call
+- no image generation
+- no VCPToolBox/VCPChat runtime call
+- no CDP/bridge/MCP call
+- no DailyNote/VCP memory write
+- no production_candidate creation
+- no accepted_sample promotion
+- no eval_seed promotion
+- no secret read
+image_generation_performed: false
+secret_value_read_performed: false
+push_allowed: false
+recommended_next: guarded local commit for v0.3.5 if review accepts the diff.
+```
+
+---
+
 ## Checkpoint - v0.3.4a Visual Asset Policy Gap Patch
 
 ```text

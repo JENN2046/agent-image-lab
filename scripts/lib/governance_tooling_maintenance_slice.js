@@ -153,6 +153,21 @@ const EXPECTED_V0_3_4_VISUAL_ASSET_GOVERNANCE_RECONCILIATION_SLICE = [
   "tests/schema_examples/v0_3_3_first_live_generation_pilot_gate.example.json"
 ].sort();
 
+const EXPECTED_V0_3_5_VISUAL_ASSET_PROMOTION_GATE_DESIGN_SLICE = [
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  "assets/visual_asset_authorization_registry.example.json",
+  "docs/00_project_roadmap.md",
+  "docs/V0_3_4_VISUAL_ASSET_GOVERNANCE_AND_RECEIPT_STATE_RECONCILIATION.md",
+  "scripts/lib/governance_tooling_maintenance_slice.js",
+  "scripts/validate_mvp.ps1",
+  "scripts/validate_v0_3_3_first_live_generation_pilot_gate.js",
+  "scripts/validate_visual_asset_authorization_policy.js",
+  "tests/schema_examples/v0_3_3_first_live_generation_pilot_gate.example.json"
+].sort();
+
 const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "governance_tooling_maintenance_slice_v1",
@@ -177,6 +192,10 @@ const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "v0_3_4_visual_asset_governance_reconciliation_slice",
     files: EXPECTED_V0_3_4_VISUAL_ASSET_GOVERNANCE_RECONCILIATION_SLICE
+  },
+  {
+    id: "v0_3_5_visual_asset_promotion_gate_design_slice",
+    files: EXPECTED_V0_3_5_VISUAL_ASSET_PROMOTION_GATE_DESIGN_SLICE
   }
 ];
 
@@ -389,6 +408,7 @@ module.exports = {
   EXPECTED_V0_3_3_FIRST_LIVE_GENERATION_PILOT_GATE_SLICE,
   EXPECTED_PROVIDER_RECEIPT_ARTIFACT_REPAIR_SLICE,
   EXPECTED_V0_3_4_VISUAL_ASSET_GOVERNANCE_RECONCILIATION_SLICE,
+  EXPECTED_V0_3_5_VISUAL_ASSET_PROMOTION_GATE_DESIGN_SLICE,
   GOVERNANCE_TOOLING_ALLOWED_SLICES,
   buildGovernanceToolingMaintenanceSliceReport,
   fileAllowedInGovernanceToolingSlice,

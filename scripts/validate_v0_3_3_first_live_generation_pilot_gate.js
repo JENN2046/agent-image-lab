@@ -14,6 +14,7 @@ const attemptResultPath = "runs/real_generation/v0_3_3_codex_sample_first_trial/
 const visualAssetAuthorizationRegistryPath = "assets/visual_asset_authorization_registry.example.json";
 const v034PolicyDocPath = "docs/V0_3_4_VISUAL_ASSET_GOVERNANCE_AND_RECEIPT_STATE_RECONCILIATION.md";
 const visualAssetPolicyVersion = "visual_asset_policy_v0_3_4a";
+const promotionPolicyVersion = "visual_asset_promotion_policy_v0_3_5";
 const visualAssetClassEnum = [
   "runs_artifact",
   "user_authorized_test_image",
@@ -229,12 +230,18 @@ function buildCanonicalGate() {
       visual_asset_authorization_registry_ref: visualAssetAuthorizationRegistryPath,
       generated_image_binary_commit_policy_ref: v034PolicyDocPath,
       visual_asset_policy_version: visualAssetPolicyVersion,
+      promotion_policy_version: promotionPolicyVersion,
       asset_class_enum: visualAssetClassEnum,
       runs_artifact_boundary: "diagnostic provider-run evidence, not durable review asset by default",
       runs_artifact_count: 1,
       user_authorized_test_image_count: 1,
       memory_seed_true_count: 0,
       invalid_memory_seed_count: 0,
+      review_candidate_count: 0,
+      eval_seed_candidate_count: 0,
+      accepted_sample_count: 0,
+      production_candidate_count: 0,
+      promotion_by_field_flip_allowed: false,
       durable_review_asset_requires_separate_gate: true,
       production_candidate_write_allowed_by_v0_3_4: false
     },
@@ -345,11 +352,17 @@ function validateGate(gate) {
   assert(gate.receipt_reconciliation.visual_asset_authorization_registry_ref === visualAssetAuthorizationRegistryPath, "asset authorization registry ref mismatch");
   assert(gate.receipt_reconciliation.generated_image_binary_commit_policy_ref === v034PolicyDocPath, "binary policy ref mismatch");
   assert(gate.receipt_reconciliation.visual_asset_policy_version === visualAssetPolicyVersion, "visual asset policy version mismatch");
+  assert(gate.receipt_reconciliation.promotion_policy_version === promotionPolicyVersion, "promotion policy version mismatch");
   assertDeepEqual(gate.receipt_reconciliation.asset_class_enum, visualAssetClassEnum, "asset class enum");
   assert(gate.receipt_reconciliation.runs_artifact_count === 1, "runs artifact count mismatch");
   assert(gate.receipt_reconciliation.user_authorized_test_image_count === 1, "user authorized test image count mismatch");
   assert(gate.receipt_reconciliation.memory_seed_true_count === 0, "memory seed count must stay zero");
   assert(gate.receipt_reconciliation.invalid_memory_seed_count === 0, "invalid memory seed count must stay zero");
+  assert(gate.receipt_reconciliation.review_candidate_count === 0, "review candidate count must stay zero");
+  assert(gate.receipt_reconciliation.eval_seed_candidate_count === 0, "eval seed candidate count must stay zero");
+  assert(gate.receipt_reconciliation.accepted_sample_count === 0, "accepted sample count must stay zero");
+  assert(gate.receipt_reconciliation.production_candidate_count === 0, "production candidate count must stay zero");
+  assert(gate.receipt_reconciliation.promotion_by_field_flip_allowed === false, "promotion by field flip must stay blocked");
   assert(gate.receipt_reconciliation.durable_review_asset_requires_separate_gate === true, "durable review asset boundary mismatch");
   assert(gate.receipt_reconciliation.production_candidate_write_allowed_by_v0_3_4 === false, "production candidate must be blocked by v0.3.4");
   assert(gate.current_execution_budgets.provider_calls === 0, "current provider budget must be zero");
@@ -422,11 +435,13 @@ function validateVisualAssetAuthorizationRegistry(gate) {
   const registry = readJson(visualAssetAuthorizationRegistryPath);
   assert(registry.phase === "v0_3_4_visual_asset_governance_and_receipt_state_reconciliation", "asset registry phase mismatch");
   assert(registry.visual_asset_policy_version === visualAssetPolicyVersion, "asset registry policy version mismatch");
+  assert(registry.promotion_policy_version === promotionPolicyVersion, "asset registry promotion policy version mismatch");
   assert(registry.pushed_commit === "bf5e54e", "asset registry must record pushed commit bf5e54e");
   assert(registry.binary_commit_policy_id === "generated_image_binary_commit_policy_v1", "binary commit policy id mismatch");
   assertDeepEqual(registry.asset_boundary.asset_class_enum, visualAssetClassEnum, "asset registry class enum");
   assert(registry.asset_boundary.memory_seed_requires_memory_gate === true, "asset registry must require memory gate for memory_seed");
   assert(registry.asset_boundary.VCP_memory_write_allowed_now === false, "asset registry must keep VCP memory writes unauthorized now");
+  assert(registry.asset_boundary.promotion_by_field_flip_allowed === false, "asset registry must block promotion by field flip");
   assert(Array.isArray(registry.entries) && registry.entries.length === gate.receipt_reconciliation.user_authorized_png_upload_count, "authorized PNG registry count mismatch");
   const classCounts = registry.entries.reduce((counts, entry) => {
     counts[entry.asset_class] = (counts[entry.asset_class] || 0) + 1;
@@ -441,10 +456,16 @@ function validateVisualAssetAuthorizationRegistry(gate) {
     assert(entry.accepted_sample === false, `asset must not self-claim accepted sample status: ${entry.asset_id}`);
     assert(entry.production_candidate === false, `asset must not self-claim production candidate status: ${entry.asset_id}`);
     assert(entry.memory_seed === false, `asset must not self-claim memory seed status: ${entry.asset_id}`);
+    assert(entry.promoted_from_asset_class === null, `asset must not self-claim promoted source class: ${entry.asset_id}`);
+    assert(entry.promotion_gate_id === null, `asset must not self-claim promotion gate: ${entry.asset_id}`);
     assert(entry.source_image_path_redacted === true, `asset source path redaction missing: ${entry.asset_id}`);
   }
   assert(classCounts.runs_artifact === gate.receipt_reconciliation.runs_artifact_count, "runs artifact registry count mismatch");
   assert(classCounts.user_authorized_test_image === gate.receipt_reconciliation.user_authorized_test_image_count, "user authorized test image registry count mismatch");
+  assert(!classCounts.review_candidate, "review candidate registry count must stay zero");
+  assert(!classCounts.eval_seed_candidate, "eval seed candidate registry count must stay zero");
+  assert(!classCounts.accepted_sample, "accepted sample registry count must stay zero");
+  assert(!classCounts.production_candidate, "production candidate registry count must stay zero");
 }
 
 function expectFailure(caseId, mutate) {
@@ -608,10 +629,16 @@ function main() {
     diagnostic_image_candidates_generated: actual.receipt_reconciliation.diagnostic_image_candidates_generated,
     user_authorized_png_upload_count: actual.receipt_reconciliation.user_authorized_png_upload_count,
     visual_asset_policy_version: actual.receipt_reconciliation.visual_asset_policy_version,
+    promotion_policy_version: actual.receipt_reconciliation.promotion_policy_version,
     runs_artifact_count: actual.receipt_reconciliation.runs_artifact_count,
     user_authorized_test_image_count: actual.receipt_reconciliation.user_authorized_test_image_count,
     memory_seed_true_count: actual.receipt_reconciliation.memory_seed_true_count,
     invalid_memory_seed_count: actual.receipt_reconciliation.invalid_memory_seed_count,
+    review_candidate_count: actual.receipt_reconciliation.review_candidate_count,
+    eval_seed_candidate_count: actual.receipt_reconciliation.eval_seed_candidate_count,
+    accepted_sample_count: actual.receipt_reconciliation.accepted_sample_count,
+    production_candidate_count: actual.receipt_reconciliation.production_candidate_count,
+    promotion_by_field_flip_allowed: actual.receipt_reconciliation.promotion_by_field_flip_allowed,
     generated_image_binary_commit_policy_ref: actual.receipt_reconciliation.generated_image_binary_commit_policy_ref,
     visual_asset_authorization_registry_ref: actual.receipt_reconciliation.visual_asset_authorization_registry_ref,
     durable_review_asset_requires_separate_gate: actual.receipt_reconciliation.durable_review_asset_requires_separate_gate,

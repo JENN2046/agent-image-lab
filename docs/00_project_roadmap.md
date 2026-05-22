@@ -5,10 +5,10 @@
 ## 当前产品主线恢复点
 
 ```yaml
-current_phase: v0_3_4a_visual_asset_policy_gap_patch
-phase_status: LOCAL_DOCS_AND_VALIDATOR_GAP_PATCH_COMPLETED
-source_phase: v0_3_3_first_live_generation_pilot
-current_goal: close_visual_asset_policy_review_gaps_without_new_provider_or_image_generation
+current_phase: v0_3_5_visual_asset_promotion_gate_design
+phase_status: LOCAL_DOCS_AND_VALIDATOR_PATCH_COMPLETED
+source_phase: v0_3_4a_visual_asset_policy_gap_patch
+current_goal: define_visual_asset_promotion_gates_without_runtime_or_generation
 long_term_goal: v0_3_controlled_real_provider_production_loop
 semantic_tightening_active: true
 current_boundary_semantics_cleanup_active: true
@@ -24,8 +24,9 @@ v0_3_2_live_candidate_action_packet_active: true
 v0_3_3_first_live_generation_pilot_active: true
 v0_3_4_visual_asset_governance_and_receipt_state_reconciliation_active: true
 v0_3_4a_visual_asset_policy_gap_patch_active: true
+v0_3_5_visual_asset_promotion_gate_design_active: true
 post_push_state:
-  pushed_commit: bf5e54e
+  pushed_commit: df4d7c6
   pushed_ref: origin/master
   push_status: pushed_to_origin_master_after_user_authorization
   push_allowed: false
@@ -34,6 +35,7 @@ visual_asset_governance:
   generated_image_binary_commit_policy_ref: docs/V0_3_4_VISUAL_ASSET_GOVERNANCE_AND_RECEIPT_STATE_RECONCILIATION.md
   visual_asset_authorization_policy_validator_ref: scripts/validate_visual_asset_authorization_policy.js
   visual_asset_policy_version: visual_asset_policy_v0_3_4a
+  promotion_policy_version: visual_asset_promotion_policy_v0_3_5
   asset_class_enum:
     - runs_artifact
     - user_authorized_test_image
@@ -54,6 +56,16 @@ visual_asset_governance:
   upload_authorized_by_user_required: true
   memory_seed_requires_gate: true
   memory_seed_false_required_for_test_assets: true
+  promotion_by_field_flip_allowed: false
+  review_candidate_requires_review_gate_id: true
+  eval_seed_candidate_requires_eval_gate_id_and_human_label: true
+  accepted_sample_requires_accepted_gate_id_and_human_accepted_true: true
+  production_candidate_requires_independent_A5_production_gate: true
+  promotion_requires_promoted_from_asset_class_and_promotion_gate_id: true
+  review_candidate_count: 0
+  eval_seed_candidate_count: 0
+  accepted_sample_count: 0
+  production_candidate_count: 0
   image_generation_performed: false
 resume_guard_anchor:
   current_phase: v0_3_3_first_live_generation_pilot

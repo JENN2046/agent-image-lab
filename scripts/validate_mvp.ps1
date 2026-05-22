@@ -12184,8 +12184,14 @@ process.exit(child.status || 0);
     if ($v033FirstLiveGenerationPilot.visual_asset_policy_version -ne 'visual_asset_policy_v0_3_4a' -or $v033FirstLiveGenerationPilot.runs_artifact_count -ne 1 -or $v033FirstLiveGenerationPilot.user_authorized_test_image_count -ne 1) {
       Add-Failure "v0.3.3 first live generation pilot must model the v0.3.4a visual asset policy classes"
     }
+    if ($v033FirstLiveGenerationPilot.promotion_policy_version -ne 'visual_asset_promotion_policy_v0_3_5' -or $v033FirstLiveGenerationPilot.promotion_by_field_flip_allowed -ne $false) {
+      Add-Failure "v0.3.3 first live generation pilot must model the v0.3.5 promotion gate policy"
+    }
     if ($v033FirstLiveGenerationPilot.memory_seed_true_count -ne 0 -or $v033FirstLiveGenerationPilot.invalid_memory_seed_count -ne 0) {
       Add-Failure "v0.3.3 first live generation pilot must keep diagnostic PNGs out of memory seed state"
+    }
+    if ($v033FirstLiveGenerationPilot.review_candidate_count -ne 0 -or $v033FirstLiveGenerationPilot.eval_seed_candidate_count -ne 0 -or $v033FirstLiveGenerationPilot.accepted_sample_count -ne 0 -or $v033FirstLiveGenerationPilot.production_candidate_count -ne 0) {
+      Add-Failure "v0.3.3 first live generation pilot must not promote diagnostic PNGs into review, eval, accepted, or production classes"
     }
   }
 
@@ -12203,11 +12209,17 @@ process.exit(child.status || 0);
     if ($visualAssetAuthorization.visual_asset_policy_version -ne 'visual_asset_policy_v0_3_4a' -or $visualAssetAuthorization.user_authorized_test_image_count -ne 1 -or $visualAssetAuthorization.runs_artifact_count -ne 1) {
       Add-Failure "visual asset authorization must verify the v0.3.4a asset class split"
     }
+    if ($visualAssetAuthorization.promotion_policy_version -ne 'visual_asset_promotion_policy_v0_3_5' -or $visualAssetAuthorization.promotion_gate_required -ne $true -or $visualAssetAuthorization.promotion_by_field_flip_allowed -ne $false) {
+      Add-Failure "visual asset authorization must verify the v0.3.5 promotion gate policy"
+    }
     if ($visualAssetAuthorization.memory_seed_true_count -ne 0 -or $visualAssetAuthorization.invalid_memory_seed_count -ne 0 -or $visualAssetAuthorization.accepted_sample_count -ne 0 -or $visualAssetAuthorization.production_candidate_count -ne 0) {
       Add-Failure "visual asset authorization must keep test assets out of memory seed, accepted sample, and production candidate state"
     }
-    if ($visualAssetAuthorization.negative_case_count -lt 11 -or $visualAssetAuthorization.caught_negative_case_count -ne $visualAssetAuthorization.negative_case_count -or $visualAssetAuthorization.all_negative_cases_caught -ne $true) {
-      Add-Failure "visual asset authorization must catch all required v0.3.4a negative cases"
+    if ($visualAssetAuthorization.review_candidate_count -ne 0 -or $visualAssetAuthorization.eval_seed_candidate_count -ne 0) {
+      Add-Failure "visual asset authorization must not promote test assets to review or eval seed candidates"
+    }
+    if ($visualAssetAuthorization.negative_case_count -lt 20 -or $visualAssetAuthorization.caught_negative_case_count -ne $visualAssetAuthorization.negative_case_count -or $visualAssetAuthorization.all_negative_cases_caught -ne $true) {
+      Add-Failure "visual asset authorization must catch all required v0.3.5 promotion negative cases"
     }
     if ($visualAssetAuthorization.runs_artifact_boundary_verified -ne $true -or $visualAssetAuthorization.durable_review_asset_boundary_verified -ne $true -or $visualAssetAuthorization.production_candidate_write_performed_by_v0_3_4 -ne $false) {
       Add-Failure "visual asset authorization must split runs artifacts from durable review assets and block production candidates"
