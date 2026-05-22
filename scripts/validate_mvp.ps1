@@ -79,6 +79,7 @@ $requiredFiles = @(
   'scripts/validate_autopilot_false_readiness_negative_cases.js',
   'scripts/validate_autopilot_receipt_registry_negative_cases.js',
   'scripts/validate_autopilot_amber_action_packet_preflight.js',
+  'scripts/validate_bounded_l4_autopilot_requirements.js',
   'scripts/validate_local_checkpoint_manifest.js',
   'scripts/validate_local_commit_scope.js',
   'scripts/validate_post_push_state.js',
@@ -281,12 +282,14 @@ $requiredFiles = @(
   'docs/V0_3_2_LIVE_CANDIDATE_ACTION_PACKET.md',
   'docs/V0_3_3_FIRST_LIVE_GENERATION_PILOT_GATE.md',
   'docs/V0_3_4_VISUAL_ASSET_GOVERNANCE_AND_RECEIPT_STATE_RECONCILIATION.md',
+  'docs/V0_3_6_BOUNDED_L4_AUTOPILOT_REQUIREMENTS_AND_AMBER_SUBCLASS_GATE.md',
   'docs/V0_3_CONTROLLED_REAL_PROVIDER_PRODUCTION_LOOP.md',
   'docs/AUTOPILOT_EVOLUTION_ENGINE.md',
   'docs/AUTOPILOT_COMPLETE_READINESS_GATE.md',
   'docs/AUTOPILOT_FALSE_READINESS_NEGATIVE_CASES.md',
   'schemas/autopilot_autonomy_envelope.schema.yaml',
   'schemas/autopilot_execution_receipt.schema.yaml',
+  'schemas/autopilot_receipt_registry.schema.yaml',
   'schemas/autopilot_amber_action_packet.schema.yaml',
   'schemas/autopilot_goal.schema.yaml',
   'schemas/autopilot_route_plan.schema.yaml',
@@ -315,6 +318,7 @@ $requiredFiles = @(
   'tests/schema_examples/complete_autopilot_readiness_gate.example.json',
   'tests/schema_examples/autopilot_false_readiness_negative_cases.example.json',
   'tests/schema_examples/autopilot_receipt_registry_negative_cases.example.json',
+  'tests/schema_examples/bounded_l4_autopilot_requirements.example.json',
   'scripts/validate_codex_session_image_import.js',
   'scripts/validate_review_result_protocol.js',
   'scripts/validate_review_decision_package.js',
@@ -12257,6 +12261,37 @@ process.exit(child.status || 0);
     }
     if ($completeAutopilotReadinessGate.real_manifest_read_performed -ne $false -or $completeAutopilotReadinessGate.real_vcpchat_read_performed -ne $false -or $completeAutopilotReadinessGate.real_vcptoolbox_read_performed -ne $false -or $completeAutopilotReadinessGate.dependency_change_performed -ne $false -or $completeAutopilotReadinessGate.runtime_probe_performed -ne $false -or $completeAutopilotReadinessGate.secret_value_read_performed -ne $false -or $completeAutopilotReadinessGate.push_tag_release_deploy_performed -ne $false) {
       Add-Failure "Complete Autopilot Readiness Gate must not perform source read, dependency, runtime, secret, push, tag, release, or deploy actions"
+    }
+  }
+
+  $boundedL4AutopilotRequirementsOutput = & node (Join-Path $Root 'scripts/validate_bounded_l4_autopilot_requirements.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Bounded L4 Autopilot requirements validation exited with failure"
+  } else {
+    $boundedL4AutopilotRequirements = ($boundedL4AutopilotRequirementsOutput -join "`n") | ConvertFrom-Json
+    if ($boundedL4AutopilotRequirements.passed -ne $true -or $boundedL4AutopilotRequirements.phase -ne 'v0_3_6_bounded_l4_autopilot_requirements_and_amber_subclass_gate') {
+      Add-Failure "Bounded L4 Autopilot requirements validation must pass"
+    }
+    if ($boundedL4AutopilotRequirements.bounded_l4_ready -ne $false -or $boundedL4AutopilotRequirements.requirements_gate_ready -ne $true -or $boundedL4AutopilotRequirements.real_executor_implemented_now -ne $false) {
+      Add-Failure "Bounded L4 gate must remain requirements-only and must not overclaim executor readiness"
+    }
+    if ($boundedL4AutopilotRequirements.amber_subclasses_defined -ne $true -or $boundedL4AutopilotRequirements.amber_subclasses.Count -ne 4) {
+      Add-Failure "Bounded L4 gate must define four Amber subclasses"
+    }
+    if ($boundedL4AutopilotRequirements.receipt_registry_schema_present -ne $true -or $boundedL4AutopilotRequirements.receipt_registry_entry_count -lt 4) {
+      Add-Failure "Bounded L4 gate must add receipt registry schema and validate registry entries"
+    }
+    if ($boundedL4AutopilotRequirements.repair_once_future_requirement_defined -ne $true -or $boundedL4AutopilotRequirements.repair_once_enforced_now_by_real_executor -ne $false -or $boundedL4AutopilotRequirements.budget_stop_requirements_defined -ne $true) {
+      Add-Failure "Bounded L4 gate must define repair_once and budget stop requirements without claiming executor enforcement"
+    }
+    if ($boundedL4AutopilotRequirements.executor_negative_cases_required -ne $true -or $boundedL4AutopilotRequirements.negative_case_count -lt 8 -or $boundedL4AutopilotRequirements.caught_negative_case_count -ne $boundedL4AutopilotRequirements.negative_case_count -or $boundedL4AutopilotRequirements.all_negative_cases_caught -ne $true) {
+      Add-Failure "Bounded L4 gate must catch every required negative case"
+    }
+    if ($boundedL4AutopilotRequirements.memory_gate_requirement_preserved -ne $true -or $boundedL4AutopilotRequirements.production_candidate_red_boundary_preserved -ne $true -or $boundedL4AutopilotRequirements.accepted_sample_red_boundary_preserved -ne $true) {
+      Add-Failure "Bounded L4 gate must preserve memory, production candidate, and accepted sample boundaries"
+    }
+    if ($boundedL4AutopilotRequirements.provider_contact_performed -ne $false -or $boundedL4AutopilotRequirements.image_generation_performed -ne $false -or $boundedL4AutopilotRequirements.DailyNote_write_performed -ne $false -or $boundedL4AutopilotRequirements.VCP_memory_write_performed -ne $false -or $boundedL4AutopilotRequirements.runtime_call_performed -ne $false -or $boundedL4AutopilotRequirements.secret_value_read_performed -ne $false -or $boundedL4AutopilotRequirements.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "Bounded L4 gate must not perform provider, image, memory, runtime, secret, push, tag, release, or deploy actions"
     }
   }
 

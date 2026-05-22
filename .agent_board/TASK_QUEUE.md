@@ -1,5 +1,30 @@
 ---
 
+- [x] ID: v0_3_6_bounded_l4_autopilot_requirements_and_amber_subclass_gate
+      Title: Define Bounded L4 requirements and Amber subclasses
+      Reason: The assessment found Green autopilot and Amber dry-run are ready, but Bounded L4 is blocked by no real executor loop, no Amber subclasses, missing receipt registry schema, and no executor-enforced repair_once.
+      Lane: Green.
+      Source remote commit: df4d7c6.
+      Source local commit: a9d0835.
+      Source phase: v0_3_5_visual_asset_promotion_gate_design.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Status: completed_validated.
+      Scope: docs/schema/validator planning gate only.
+      Required: define ODD, Amber_A_exact_read, Amber_B_provider_image, Amber_C_memory, Amber_D_dependency_runtime, receipt registry schema, future executor requirements, repair_once policy, budget stop requirements, and executor negative cases.
+      Real executor implemented now: false.
+      push_allowed: false.
+      commit_performed: false.
+      push_performed: false.
+      image_generation_performed: false.
+      secret_value_read_performed: false.
+      Stop condition: real executor implementation, provider/image/memory/runtime execution, production_candidate creation, accepted_sample promotion, secret read, dependency change, git add ., commit, push, or validation failure requiring judgment.
+      Validation: git diff --check; node --check scripts/validate_bounded_l4_autopilot_requirements.js; node scripts/validate_bounded_l4_autopilot_requirements.js; npm run validate:mvp.
+      Recommended next: external review for local commit readiness; do not push without explicit authorization.
+
+---
+
 - [x] ID: v0_3_5_visual_asset_promotion_gate_design
       Title: Define visual asset promotion gates
       Reason: After v0.3.4a fixed test asset classification, the next local safety boundary is preventing test assets from silently becoming review/eval/accepted/production classes.

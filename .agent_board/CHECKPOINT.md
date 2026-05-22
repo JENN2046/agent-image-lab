@@ -1,5 +1,49 @@
 ---
 
+## Checkpoint - v0.3.6 Bounded L4 Autopilot Requirements And Amber Subclass Gate
+
+```text
+phase: v0_3_6_bounded_l4_autopilot_requirements_and_amber_subclass_gate
+phase_id: v0_3_6_bounded_l4_autopilot_requirements_and_amber_subclass_gate
+status: completed_validated
+source_remote_commit: df4d7c6
+source_local_commit: a9d0835
+source_phase: v0_3_5_visual_asset_promotion_gate_design
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+completed_so_far:
+- added Bounded L4 requirements doc
+- added receipt registry schema
+- added Bounded L4 requirements fixture
+- added Bounded L4 validator
+- updated Smart v3 policy/kernel/overlay planning surfaces
+- updated roadmap and agent-board planning surfaces
+latest_validation:
+- git diff --check: passed
+- node --check scripts/validate_bounded_l4_autopilot_requirements.js: passed
+- node scripts/validate_bounded_l4_autopilot_requirements.js: passed
+- npm run validate:mvp: passed
+not_performed:
+- no real executor implementation
+- no provider call
+- no image generation
+- no DailyNote write
+- no VCP memory write
+- no runtime call
+- no secret read
+- no production_candidate creation
+- no accepted_sample promotion
+- no commit
+- no push
+image_generation_performed: false
+secret_value_read_performed: false
+push_allowed: false
+recommended_next: external review for local commit readiness; do not push without explicit authorization.
+```
+
+---
+
 ## Checkpoint - v0.3.5 Visual Asset Promotion Gate Design
 
 ```text

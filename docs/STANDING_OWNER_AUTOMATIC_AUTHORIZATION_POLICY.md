@@ -93,6 +93,16 @@ production metadata write
 bounded runtime/integration probe
 ```
 
+Bounded L4 planning refines Amber into typed subclasses before any future real
+executor may run:
+
+```text
+Amber_A_exact_read: exact manifest / VCPChat / VCPToolBox reads; requires max_external_read_files and receipt
+Amber_B_provider_image: provider/image actions; requires prompt_package_ref, output_path, receipt_path, asset_class, and cost cap
+Amber_C_memory: DailyNote/VCP memory writes; requires memory_gate_id and redacted learning summary; raw assets forbidden
+Amber_D_dependency_runtime: dependency/runtime probe actions; requires exact package or probe packet, rollback, and runtime minute budget
+```
+
 Amber VCPChat / VCPToolBox / manifest reads must be exact reads. Write or modify
 actions require exact scope, rollback, validation, and receipt. Wide VCPChat /
 VCPToolBox writes are Red.
@@ -163,6 +173,10 @@ and cost budget. Future real Amber execution must have an envelope, receipt, and
 registry path before execution. Cost unknown, uncapped cost, or missing call
 budget is Red. Rollback must be structured; any irreversible action must be
 explicit and trigger stricter stop or review conditions.
+
+Bounded L4 registry entries must use `receipt_path` as the primary receipt path,
+must record `amber_subclass`, and must preserve side-effect flags. The legacy
+`path` field may remain only as a compatibility alias for existing validators.
 
 ## Continuation Rule
 

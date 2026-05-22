@@ -1,5 +1,35 @@
 ---
 
+## Current Handoff Update - v0.3.6 Bounded L4 Autopilot Requirements And Amber Subclass Gate
+
+```text
+phase: v0_3_6_bounded_l4_autopilot_requirements_and_amber_subclass_gate
+phase_id: v0_3_6_bounded_l4_autopilot_requirements_and_amber_subclass_gate
+status: completed_validated
+mode: Green Lane local docs/schema/validator planning gate
+source_remote_commit: df4d7c6
+source_local_commit: a9d0835
+source_phase: v0_3_5_visual_asset_promotion_gate_design
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+summary: Defines Bounded L4 operational design domain, Amber_A/B/C/D subclasses, receipt registry schema, future real executor loop requirements, repair_once requirements, budget stop requirements, and executor negative-case requirements.
+real_executor_implemented_now: false
+receipt_registry_schema_ref: schemas/autopilot_receipt_registry.schema.yaml
+requirements_doc_ref: docs/V0_3_6_BOUNDED_L4_AUTOPILOT_REQUIREMENTS_AND_AMBER_SUBCLASS_GATE.md
+validator_ref: scripts/validate_bounded_l4_autopilot_requirements.js
+fixture_ref: tests/schema_examples/bounded_l4_autopilot_requirements.example.json
+push_allowed: false
+not_performed: no provider call, no image generation, no DailyNote write, no VCP memory write, no VCPToolBox/VCPChat runtime call, no CDP/bridge/MCP call, no production_candidate, no accepted_sample promotion, no secret read, no dependency change, no commit, no push.
+image_generation_performed: false
+secret_value_read_performed: false
+validation_status: completed_validated
+latest_validation: git diff --check; node --check scripts/validate_bounded_l4_autopilot_requirements.js; node scripts/validate_bounded_l4_autopilot_requirements.js; npm run validate:mvp
+recommended_next: external review for local commit readiness; do not push without explicit authorization.
+```
+
+---
+
 ## Current Handoff Update - v0.3.5 Visual Asset Promotion Gate Design
 
 ```text

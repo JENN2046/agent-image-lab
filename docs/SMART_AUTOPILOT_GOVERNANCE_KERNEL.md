@@ -138,6 +138,16 @@ Amber Lane: inside the active autonomy envelope, budgeted, exact target, validat
 Red Lane: requires the user before execution
 ```
 
+Bounded L4 planning requires Amber to be classified into typed subclasses before
+any future real executor may run:
+
+```text
+Amber_A_exact_read: exact source read only, max_external_read_files required, receipt required
+Amber_B_provider_image: provider/image only, prompt package, output path, receipt path, asset class, and cost cap required
+Amber_C_memory: DailyNote/VCP memory only, memory gate and redacted learning summary required, raw assets forbidden
+Amber_D_dependency_runtime: exact dependency action or bounded runtime probe only, rollback and runtime minute budget required
+```
+
 Red Lane includes:
 
 ```text
@@ -224,6 +234,11 @@ iterate the registry rather than relying only on hardcoded receipt paths. Future
 real Amber execution must have an envelope, receipt schema compatibility, and a
 registry path before it proceeds.
 
+Bounded L4 registry entries must use `receipt_path` as the primary field, may
+keep `path` only as a legacy alias, and must include `amber_subclass`,
+`cost_unknown_is_red`, rollback availability, validation result, and
+side-effect flags.
+
 Future real Amber execution must also have a preflighted action packet before
 receipt generation. A packet with unknown cost, missing rollback, missing
 validation, missing stop conditions, missing receipt/registry requirement, true
@@ -275,6 +290,10 @@ each meaningful Amber action records a receipt
 validation failure receives at most one obvious, safe, local repair or retry
 ```
 
+Bounded L4 still has no real executor in this gate. A future executor must
+enforce `max_repair_attempts_per_task: 1`, record the repair attempt in the
+receipt or task state, and treat a second failure or non-obvious fix as Red.
+
 ## Local Validation Surface
 
 The kernel is validated by:
@@ -282,10 +301,13 @@ The kernel is validated by:
 ```text
 schemas/autopilot_autonomy_envelope.schema.yaml
 schemas/autopilot_execution_receipt.schema.yaml
+schemas/autopilot_receipt_registry.schema.yaml
 tests/schema_examples/autopilot_autonomy_envelope.example.json
 tests/schema_examples/autopilot_receipt_registry.example.json
 tests/schema_examples/autopilot_execution_receipt.example.json
+tests/schema_examples/bounded_l4_autopilot_requirements.example.json
 scripts/validate_autopilot_governance_kernel.js
+scripts/validate_bounded_l4_autopilot_requirements.js
 ```
 
 The validator must prove the Green / Amber / Red definitions, default envelope

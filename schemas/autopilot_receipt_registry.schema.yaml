@@ -1,0 +1,89 @@
+# autopilot_receipt_registry.schema.yaml
+# Machine-checkable contract for Smart v3 / Bounded L4 receipt registries.
+
+autopilot_receipt_registry:
+  version: v1
+  contract_type: autopilot_receipt_registry
+  policy_model: Smart Standing Authorization v3 — Budgeted Autonomy Envelope
+  bounded_l4_extension: true
+  registry_status_allowed:
+    - active_local_validation_fixture
+    - future_real_executor_required
+
+identity:
+  required:
+    - registry_id
+    - receipts
+
+receipt_entry_required_fields:
+  - receipt_id
+  - receipt_path
+  - envelope_id
+  - task_id
+  - lane
+  - amber_subclass
+  - max_write_files
+  - max_cost_amount
+  - cost_unknown_is_red
+  - rollback_or_cleanup_available
+  - validation_result
+  - side_effect_flags
+
+compatibility_aliases:
+  path:
+    alias_for: receipt_path
+    allowed_for_legacy_validators: true
+    primary_field: receipt_path
+
+lane_allowed_values:
+  - Green
+  - Amber
+
+amber_subclass_allowed_values:
+  - Green_local
+  - Amber_A_exact_read
+  - Amber_B_provider_image
+  - Amber_C_memory
+  - Amber_D_dependency_runtime
+
+entry_rules:
+  green_entries_use_green_local_subclass: true
+  amber_entries_require_non_green_subclass: true
+  receipt_path_must_exist: true
+  receipt_path_must_match_receipt_id: true
+  receipt_path_must_match_task_id: true
+  receipt_path_must_match_envelope_id: true
+  receipt_path_must_match_lane: true
+  cost_unknown_is_red: true
+  rollback_or_cleanup_available_required: true
+  validation_result_allowed_values:
+    - passed
+    - pending
+    - failed
+    - blocked
+    - not_run
+    - passed_with_warnings
+
+side_effect_flags_required:
+  provider_contact_performed: boolean
+  plugin_call_performed: boolean
+  api_call_performed: boolean
+  image_generation_performed: boolean
+  DailyNote_write_performed: boolean
+  VCP_memory_write_performed: boolean
+  real_manifest_read_performed: boolean
+  real_vcpchat_read_performed: boolean
+  real_vcptoolbox_read_performed: boolean
+  dependency_change_performed: boolean
+  runtime_probe_performed: boolean
+  secret_value_read_performed: boolean
+  push_tag_release_deploy_performed: boolean
+
+bounded_l4_executor_requirements:
+  real_executor_implemented_now: false
+  receipt_registry_required_before_amber_action: true
+  missing_registry_entry_is_red: true
+  missing_amber_subclass_is_red: true
+  cost_unknown_or_uncapped_is_red: true
+  missing_rollback_is_red: true
+  side_effect_flag_drift_blocks_continuation: true

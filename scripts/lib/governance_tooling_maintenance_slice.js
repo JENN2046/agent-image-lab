@@ -168,6 +168,25 @@ const EXPECTED_V0_3_5_VISUAL_ASSET_PROMOTION_GATE_DESIGN_SLICE = [
   "tests/schema_examples/v0_3_3_first_live_generation_pilot_gate.example.json"
 ].sort();
 
+const EXPECTED_V0_3_6_BOUNDED_L4_AUTOPILOT_REQUIREMENTS_SLICE = [
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  ".agent_board/VALIDATION_LOG.md",
+  "AGENTS.autopilot-overlay.md",
+  "docs/00_project_roadmap.md",
+  "docs/SMART_AUTOPILOT_GOVERNANCE_KERNEL.md",
+  "docs/STANDING_OWNER_AUTOMATIC_AUTHORIZATION_POLICY.md",
+  "docs/V0_3_6_BOUNDED_L4_AUTOPILOT_REQUIREMENTS_AND_AMBER_SUBCLASS_GATE.md",
+  "schemas/autopilot_receipt_registry.schema.yaml",
+  "scripts/lib/governance_tooling_maintenance_slice.js",
+  "scripts/validate_bounded_l4_autopilot_requirements.js",
+  "scripts/validate_mvp.ps1",
+  "tests/schema_examples/autopilot_receipt_registry.example.json",
+  "tests/schema_examples/bounded_l4_autopilot_requirements.example.json"
+].sort();
+
 const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "governance_tooling_maintenance_slice_v1",
@@ -196,6 +215,10 @@ const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "v0_3_5_visual_asset_promotion_gate_design_slice",
     files: EXPECTED_V0_3_5_VISUAL_ASSET_PROMOTION_GATE_DESIGN_SLICE
+  },
+  {
+    id: "v0_3_6_bounded_l4_autopilot_requirements_slice",
+    files: EXPECTED_V0_3_6_BOUNDED_L4_AUTOPILOT_REQUIREMENTS_SLICE
   }
 ];
 
@@ -409,6 +432,7 @@ module.exports = {
   EXPECTED_PROVIDER_RECEIPT_ARTIFACT_REPAIR_SLICE,
   EXPECTED_V0_3_4_VISUAL_ASSET_GOVERNANCE_RECONCILIATION_SLICE,
   EXPECTED_V0_3_5_VISUAL_ASSET_PROMOTION_GATE_DESIGN_SLICE,
+  EXPECTED_V0_3_6_BOUNDED_L4_AUTOPILOT_REQUIREMENTS_SLICE,
   GOVERNANCE_TOOLING_ALLOWED_SLICES,
   buildGovernanceToolingMaintenanceSliceReport,
   fileAllowedInGovernanceToolingSlice,

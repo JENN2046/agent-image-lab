@@ -1,5 +1,21 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260522-v0.3.6-BOUNDED-L4-REQUIREMENTS-GATE
+
+Task: v0.3.6 Bounded L4 Autopilot Requirements And Amber Subclass Gate
+Commands run:
+  - git diff --check
+  - node --check scripts/validate_bounded_l4_autopilot_requirements.js
+  - node scripts/validate_bounded_l4_autopilot_requirements.js
+  - npm run validate:mvp
+Result: ALL REQUIRED CHECKS PASSED
+Findings:
+  - Local docs/schema/validator planning gate only.
+  - Real executor implementation remains false.
+  - Provider/image/memory/runtime execution remains forbidden and not performed.
+  - Commit and push remain not performed.
+
+
 ## VALIDATION-20260518-v14.229-THIRD-SAMPLE-POST-REGISTRATION-VALIDATOR-ALIGNMENT
 
 Task: v14.229 Third Sample Post-Registration Validator Alignment

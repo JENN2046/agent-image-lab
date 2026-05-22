@@ -123,6 +123,19 @@ destructive_action_allowed: false
 
 Green Lane executes directly and records after the fact. Amber Lane plans, executes, validates, records receipts, and continues inside budget without step-by-step approval. Red Lane stops and asks.
 
+For Bounded L4 planning, Amber must be typed before any future real executor
+runs:
+
+```text
+Amber_A_exact_read
+Amber_B_provider_image
+Amber_C_memory
+Amber_D_dependency_runtime
+```
+
+Provider/image, memory, dependency, and runtime work must not be hidden inside a
+single generic Amber bucket when a real executor is introduced.
+
 After a meaningful Amber receipt action completes, Codex must automatically run
 a separate Green Lane status-surface sync when README, roadmap, `.agent_board`
 resume surfaces, ledger, validators, or authoritative refs changed or gained new
