@@ -83,6 +83,8 @@ $requiredFiles = @(
   'scripts/validate_bounded_l4_executor_preflight_contract.js',
   'scripts/validate_smart_v3_push_safety_lane.js',
   'scripts/validate_visual_asset_eval_v0_1.js',
+  'scripts/validate_visual_sample_memory_policy.js',
+  'scripts/validate_15_day_architecture_checkpoint.js',
   'scripts/validate_local_checkpoint_manifest.js',
   'scripts/validate_local_commit_scope.js',
   'scripts/validate_post_push_state.js',
@@ -7820,6 +7822,7 @@ if (-not $node) {
       'package.json',
       'package-lock.json',
       'PROJECT_MASTER_PLAN.md',
+      'next_30_day_route_options.md',
       'production/plans/french_summer_rattan_bag_v3_production_candidate_001_plan.yaml',
       'production/plans/accepted_product_still_life_tennis_wallet_001_production_candidate_001_plan.yaml',
       'production/reviews/accepted_product_still_life_tennis_wallet_001_production_candidate_001_review.md',
@@ -12382,6 +12385,62 @@ process.exit(child.status || 0);
     }
     if ($visualAssetEval.image_binary_read_performed -ne $false -or $visualAssetEval.provider_call_performed -ne $false -or $visualAssetEval.image_generation_performed -ne $false -or $visualAssetEval.DailyNote_write_performed -ne $false -or $visualAssetEval.VCP_memory_write_performed -ne $false -or $visualAssetEval.runtime_call_performed -ne $false -or $visualAssetEval.secret_value_read_performed -ne $false -or $visualAssetEval.accepted_sample_created -ne $false -or $visualAssetEval.memory_seed_created -ne $false -or $visualAssetEval.production_candidate_created -ne $false -or $visualAssetEval.commit_performed -ne $false -or $visualAssetEval.push_performed -ne $false) {
       Add-Failure "Visual Asset Eval v0.1 must not perform image, provider, generation, memory, runtime, secret, promotion, commit, or push actions"
+    }
+  }
+
+  $visualSampleMemoryOutput = & node (Join-Path $Root 'scripts/validate_visual_sample_memory_policy.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Visual sample memory policy validation exited with failure"
+  } else {
+    $visualSampleMemory = ($visualSampleMemoryOutput -join "`n") | ConvertFrom-Json
+    if ($visualSampleMemory.passed -ne $true -or $visualSampleMemory.phase -ne 'v0_3_7e_visual_sample_memory_policy_gate') {
+      Add-Failure "Visual sample memory policy validation must pass"
+    }
+    if ($visualSampleMemory.visual_sample_memory_policy_defined -ne $true -or $visualSampleMemory.accepted_sample_record_schema_present -ne $true -or $visualSampleMemory.rejected_sample_record_schema_present -ne $true) {
+      Add-Failure "Visual sample memory policy must define accepted and rejected sample schemas"
+    }
+    if ($visualSampleMemory.accepted_sample_record_fixture_present -ne $true -or $visualSampleMemory.rejected_sample_record_fixture_present -ne $true) {
+      Add-Failure "Visual sample memory policy must provide accepted and rejected sample fixtures"
+    }
+    if ($visualSampleMemory.accepted_sample_requires_gate_and_human_acceptance -ne $true -or $visualSampleMemory.accepted_sample_requires_review_report_ref -ne $true -or $visualSampleMemory.accepted_sample_requires_visual_traits -ne $true -or $visualSampleMemory.accepted_sample_requires_reuse_conditions -ne $true) {
+      Add-Failure "Accepted sample record must require gate, human acceptance, review report ref, visual traits, and reuse conditions"
+    }
+    if ($visualSampleMemory.rejected_sample_requires_rejection_reason -ne $true -or $visualSampleMemory.rejected_sample_requires_failure_taxonomy -ne $true -or $visualSampleMemory.rejected_sample_requires_correction_hint -ne $true -or $visualSampleMemory.rejected_sample_requires_do_not_reuse_conditions -ne $true) {
+      Add-Failure "Rejected sample record must require rejection reason, failure taxonomy, correction hint, and do-not-reuse conditions"
+    }
+    if ($visualSampleMemory.schema_only -ne $true -or $visualSampleMemory.memory_write_blocked -ne $true -or $visualSampleMemory.daily_note_write_blocked -ne $true -or $visualSampleMemory.accepted_sample_auto_promotion_blocked -ne $true -or $visualSampleMemory.production_candidate_blocked -ne $true) {
+      Add-Failure "Visual sample memory policy must remain schema-only and preserve memory, DailyNote, auto-promotion, and production-candidate boundaries"
+    }
+    if ($visualSampleMemory.negative_case_count -lt 14 -or $visualSampleMemory.caught_negative_case_count -ne $visualSampleMemory.negative_case_count -or $visualSampleMemory.all_negative_cases_caught -ne $true) {
+      Add-Failure "Visual sample memory policy must catch every required negative case"
+    }
+    if ($visualSampleMemory.provider_call_performed -ne $false -or $visualSampleMemory.image_generation_performed -ne $false -or $visualSampleMemory.DailyNote_write_performed -ne $false -or $visualSampleMemory.VCP_memory_write_performed -ne $false -or $visualSampleMemory.runtime_call_performed -ne $false -or $visualSampleMemory.secret_value_read_performed -ne $false -or $visualSampleMemory.accepted_sample_created -ne $false -or $visualSampleMemory.rejected_sample_created -ne $false -or $visualSampleMemory.production_candidate_created -ne $false -or $visualSampleMemory.commit_performed -ne $false -or $visualSampleMemory.push_performed -ne $false) {
+      Add-Failure "Visual sample memory policy must not perform provider, image, memory, runtime, secret, sample creation, production, commit, or push actions"
+    }
+  }
+
+  $fifteenDayCheckpointOutput = & node (Join-Path $Root 'scripts/validate_15_day_architecture_checkpoint.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "15-day architecture checkpoint validation exited with failure"
+  } else {
+    $fifteenDayCheckpoint = ($fifteenDayCheckpointOutput -join "`n") | ConvertFrom-Json
+    if ($fifteenDayCheckpoint.passed -ne $true -or $fifteenDayCheckpoint.phase -ne 'v0_3_15_fifteen_day_architecture_checkpoint') {
+      Add-Failure "15-day architecture checkpoint validation must pass"
+    }
+    if ($fifteenDayCheckpoint.Push_L1_green_auto -ne 'proven_and_regression_guarded' -or $fifteenDayCheckpoint.Push_L2_amber_auto_guarded -ne 'still_defined_not_proven' -or $fifteenDayCheckpoint.Push_L3_red_manual -ne 'preserved') {
+      Add-Failure "15-day checkpoint must preserve Push_L1/Push_L2/Push_L3 target states"
+    }
+    if ($fifteenDayCheckpoint.visual_asset_eval_v0_1_defined -ne $true -or $fifteenDayCheckpoint.review_report_schema_defined -ne $true -or $fifteenDayCheckpoint.accepted_rejected_sample_schema_defined -ne $true -or $fifteenDayCheckpoint.memory_write_still_blocked -ne $true) {
+      Add-Failure "15-day checkpoint must prove the visual workflow target state"
+    }
+    if ($fifteenDayCheckpoint.executor_preflight_contract_defined -ne $true -or $fifteenDayCheckpoint.real_executor_implemented_now -ne $false -or $fifteenDayCheckpoint.no_op_executor_simulator_next_only_if_reviewed -ne $true) {
+      Add-Failure "15-day checkpoint must preserve bounded L4 executor boundaries"
+    }
+    if ($fifteenDayCheckpoint.route_options_present -ne $true) {
+      Add-Failure "15-day checkpoint must provide next 30-day route options"
+    }
+    if ($fifteenDayCheckpoint.Push_L2_auto_push_test_performed -ne $false -or $fifteenDayCheckpoint.provider_call_performed -ne $false -or $fifteenDayCheckpoint.image_generation_performed -ne $false -or $fifteenDayCheckpoint.VCP_memory_write_performed -ne $false -or $fifteenDayCheckpoint.DailyNote_write_performed -ne $false -or $fifteenDayCheckpoint.production_candidate_created -ne $false -or $fifteenDayCheckpoint.accepted_sample_auto_promotion -ne $false -or $fifteenDayCheckpoint.package_dependency_change_performed -ne $false -or $fifteenDayCheckpoint.Push_L1_widened_to_broad_docs -ne $false -or $fifteenDayCheckpoint.commit_performed -ne $false -or $fifteenDayCheckpoint.push_performed -ne $false) {
+      Add-Failure "15-day checkpoint must not perform or claim forbidden side effects"
     }
   }
 

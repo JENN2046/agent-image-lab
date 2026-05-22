@@ -5,10 +5,10 @@
 ## 当前产品主线恢复点
 
 ```yaml
-current_phase: v0_3_7d_visual_asset_eval_v0_1_gate
+current_phase: v0_3_15_fifteen_day_architecture_checkpoint
 phase_status: COMPLETED_VALIDATED
-source_phase: v0_3_7c_push_l1_regression_usage_boundary_gate
-current_goal: define_visual_asset_eval_v0_1_review_report_contract
+source_phase: v0_3_7e_visual_sample_memory_policy_gate
+current_goal: close_fifteen_day_architecture_checkpoint
 long_term_goal: v0_3_controlled_real_provider_production_loop
 semantic_tightening_active: true
 current_boundary_semantics_cleanup_active: true
@@ -34,6 +34,8 @@ v0_3_7a_post_push_state_sync_active: true
 v0_3_7b_push_safety_lane_cycle_closeout_active: true
 v0_3_7c_push_l1_regression_usage_boundary_gate_active: true
 v0_3_7d_visual_asset_eval_v0_1_gate_active: true
+v0_3_7e_visual_sample_memory_policy_gate_active: true
+v0_3_15_fifteen_day_architecture_checkpoint_active: true
 post_push_state:
   current_remote_head: f26e9478c94c7a3dcfc4ba93b6a3efac806ebece
   pushed_commit: f26e9478c94c7a3dcfc4ba93b6a3efac806ebece
@@ -130,6 +132,53 @@ push_safety_lane:
   Push_L2_still_defined_not_proven: true
   push_performed_by_this_gate: false
   future_push_allowed: false
+visual_sample_memory_policy:
+  policy_doc_ref: docs/VISUAL_SAMPLE_MEMORY_POLICY.md
+  accepted_sample_record_schema_ref: schemas/accepted_sample_record.schema.yaml
+  rejected_sample_record_schema_ref: schemas/rejected_sample_record.schema.yaml
+  accepted_sample_record_fixture_ref: tests/schema_examples/accepted_sample_record.example.json
+  rejected_sample_record_fixture_ref: tests/schema_examples/rejected_sample_record.example.json
+  validator_ref: scripts/validate_visual_sample_memory_policy.js
+  accepted_sample_schema_only: true
+  accepted_sample_requires_accepted_gate_id: true
+  accepted_sample_requires_human_accepted_true: true
+  accepted_sample_requires_review_report_ref: true
+  accepted_sample_requires_visual_traits: true
+  accepted_sample_requires_reuse_conditions: true
+  rejected_sample_schema_only: true
+  rejected_sample_requires_rejection_reason: true
+  rejected_sample_requires_failure_taxonomy: true
+  rejected_sample_requires_correction_hint: true
+  rejected_sample_requires_do_not_reuse_conditions: true
+  VCP_memory_write_performed: false
+  DailyNote_write_performed: false
+  accepted_sample_auto_promotion: false
+  production_candidate: false
+  production_candidate_created: false
+  v0_3_7e_exact_slice_registered: true
+fifteen_day_architecture_checkpoint:
+  checkpoint_ref: docs/V0_3_15_FIFTEEN_DAY_ARCHITECTURE_CHECKPOINT.md
+  next_30_day_route_options_ref: next_30_day_route_options.md
+  validator_ref: scripts/validate_15_day_architecture_checkpoint.js
+  Push_L1_green_auto: proven_and_regression_guarded
+  Push_L2_amber_auto_guarded: still_defined_not_proven
+  Push_L3_red_manual: preserved
+  visual_asset_eval_v0_1: defined
+  review_report_schema: defined
+  accepted_rejected_sample_schema: defined
+  memory_write: still_blocked
+  executor_preflight_contract: defined
+  real_executor_implemented_now: false
+  no_op_executor_simulator_next_only_if_reviewed: true
+  Push_L2_auto_push_test_performed: false
+  provider_call_performed: false
+  image_generation_performed: false
+  VCP_memory_write_performed: false
+  DailyNote_write_performed: false
+  production_candidate_created: false
+  accepted_sample_auto_promotion: false
+  package_dependency_change_performed: false
+  Push_L1_widened_to_broad_docs: false
 visual_asset_governance:
   asset_authorization_registry_ref: assets/visual_asset_authorization_registry.example.json
   generated_image_binary_commit_policy_ref: docs/V0_3_4_VISUAL_ASSET_GOVERNANCE_AND_RECEIPT_STATE_RECONCILIATION.md

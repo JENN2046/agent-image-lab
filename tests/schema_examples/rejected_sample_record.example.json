@@ -1,0 +1,52 @@
+{
+  "rejected_sample_record": {
+    "record_id": "rejected_sample_record_v0_1_schema_only_example_001",
+    "record_version": "v0_1",
+    "phase": "v0_3_7e_visual_sample_memory_policy_gate",
+    "schema_only": true,
+    "record_type": "rejected_sample",
+    "asset_ref": {
+      "asset_id": "metadata_only_asset_rejected_example_001",
+      "asset_path_redacted": true,
+      "image_binary_included": false,
+      "raw_local_path_included": false
+    },
+    "review_report_ref": "tests/schema_examples/visual_asset_review_report.example.json",
+    "rejection_reason": "Product fidelity and material realism are below the minimum reusable threshold.",
+    "failure_taxonomy": {
+      "primary_failure_dimension": "product_fidelity",
+      "reason_codes": [
+        "product_geometry_unstable",
+        "material_texture_synthetic",
+        "commercial_fitness_low"
+      ]
+    },
+    "correction_hint": "Stabilize product geometry first, then improve material texture and highlight control.",
+    "do_not_reuse_conditions": [
+      "Do not reuse as a positive product reference.",
+      "Do not promote to accepted_sample by changing a field.",
+      "Do not write to VCP memory without a separate memory gate."
+    ],
+    "memory_route": {
+      "memory_seed": false,
+      "memory_gate_id": null,
+      "memory_write_allowed_now": false,
+      "redacted_learning_summary_required_for_future_memory": true
+    },
+    "promotion_boundaries": {
+      "accepted_sample_auto_promotion": false,
+      "accepted_sample_created": false,
+      "production_candidate": false,
+      "production_candidate_created": false
+    },
+    "side_effect_flags": {
+      "provider_call_performed": false,
+      "image_generation_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "runtime_call_performed": false,
+      "secret_value_read_performed": false,
+      "push_performed": false
+    }
+  }
+}

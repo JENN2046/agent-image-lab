@@ -1,5 +1,70 @@
 ---
 
+- [x] ID: v0_3_15_fifteen_day_architecture_checkpoint
+      Title: Close 15-day architecture checkpoint
+      Reason: The active 15-day goal requires a final audit proving Push_L1 stability, Push_L2 non-exercise, Visual Asset Eval validator presence, accepted/rejected schema clarity, real executor non-implementation, and memory write closure.
+      Lane: Green.
+      Status: completed_validated.
+      Source phase: v0_3_7e_visual_sample_memory_policy_gate.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Created: docs/V0_3_15_FIFTEEN_DAY_ARCHITECTURE_CHECKPOINT.md; next_30_day_route_options.md; scripts/validate_15_day_architecture_checkpoint.js.
+      Updated: scripts/validate_mvp.ps1; scripts/lib/governance_tooling_maintenance_slice.js.
+      Push_L1_green_auto: proven_and_regression_guarded.
+      Push_L2_amber_auto_guarded: still_defined_not_proven.
+      Push_L3_red_manual: preserved.
+      visual_asset_eval_v0_1: defined.
+      accepted_rejected_sample_schema: defined.
+      memory_write: still_blocked.
+      real_executor_implemented_now: false.
+      Push_L2_auto_push_test_performed: false.
+      provider_call_performed: false.
+      image_generation_performed: false.
+      VCP_memory_write_performed: false.
+      DailyNote_write_performed: false.
+      production_candidate_created: false.
+      accepted_sample_auto_promotion: false.
+      package_dependency_change_performed: false.
+      Push_L1_widened_to_broad_docs: false.
+      push_allowed: false.
+      secret_value_read_performed: false.
+      Validation: git diff --check passed with line-ending warnings only; node --check scripts/validate_15_day_architecture_checkpoint.js passed; node scripts/validate_15_day_architecture_checkpoint.js passed; node scripts/validate_visual_sample_memory_policy.js passed; node scripts/validate_autopilot_agent_board_resume_compaction_guard.js passed; node scripts/validate_agent_board_state.js passed; npm run validate:mvp passed.
+      Stop condition: Push_L2 test, real executor implementation, provider/image/memory/runtime execution, accepted_sample auto promotion, production_candidate creation, dependency change, secret read, git add ., push/tag/release/deploy, or validation failure requiring judgment.
+      Recommended next: external review for combined local checkpoint commit readiness; do not push.
+
+---
+
+- [x] ID: v0_3_7e_visual_sample_memory_policy_gate
+      Title: Define Visual Sample Memory Policy v0.1
+      Reason: The 15-day plan requires accepted/rejected sample memory structure after Visual Asset Eval v0.1, while keeping VCP memory writes and accepted_sample auto promotion blocked.
+      Lane: Green.
+      Status: completed_validated.
+      Source local commit: 664ae20bbdaa14887ba4b03b7c704eec2b8ff0af.
+      Source phase: v0_3_7d_visual_asset_eval_v0_1_gate.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Created: docs/VISUAL_SAMPLE_MEMORY_POLICY.md; schemas/accepted_sample_record.schema.yaml; schemas/rejected_sample_record.schema.yaml; tests/schema_examples/accepted_sample_record.example.json; tests/schema_examples/rejected_sample_record.example.json; scripts/validate_visual_sample_memory_policy.js.
+      Updated: scripts/validate_mvp.ps1; scripts/lib/governance_tooling_maintenance_slice.js.
+      Accepted sample required fields: accepted_gate_id; human_accepted:true; review_report_ref; visual_traits; reuse_conditions.
+      Rejected sample required fields: rejection_reason; failure_taxonomy; correction_hint; do_not_reuse_conditions.
+      Schema only: true.
+      accepted_sample_auto_promotion: false.
+      VCP_memory_write_performed: false.
+      DailyNote_write_performed: false.
+      push_allowed: false.
+      image_generation_performed: false.
+      secret_value_read_performed: false.
+      production_candidate_created: false.
+      Push_L2_exercised: false.
+      real_executor_implemented_now: false.
+      Validation: git diff --check passed with line-ending warnings only; node --check scripts/validate_visual_sample_memory_policy.js passed; node scripts/validate_visual_sample_memory_policy.js passed; node scripts/validate_autopilot_agent_board_resume_compaction_guard.js passed; node scripts/validate_agent_board_state.js passed; npm run validate:mvp passed.
+      Stop condition: Push_L2 test, real executor implementation, provider/image/memory/runtime execution, accepted_sample auto promotion, production_candidate creation, dependency change, secret read, git add ., push/tag/release/deploy, or validation failure requiring judgment.
+      Recommended next: guarded local commit review.
+
+---
+
 - [x] ID: v0_3_7d_visual_asset_eval_v0_1_gate
       Title: Define Visual Asset Eval v0.1 report contract
       Reason: The 15-day plan must return to the image workflow and give the system a minimal way to explain pass/reject reasons, failed dimensions, commercial fitness, accepted_sample eligibility, and memory_seed eligibility.

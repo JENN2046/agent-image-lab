@@ -1,0 +1,48 @@
+# rejected_sample_record.schema.yaml
+# Schema-only contract for future rejected visual sample learning records.
+
+rejected_sample_record:
+  record_version: v0_1
+  phase: v0_3_7e_visual_sample_memory_policy_gate
+  schema_only: true
+  record_type: rejected_sample
+  review_report_ref: project_relative_json_or_markdown_ref
+  rejection_reason: string
+  failure_taxonomy:
+    primary_failure_dimension: composition | lighting | material_realism | product_fidelity | commercial_fitness | AI_artifact_risk | memory_suitability
+    reason_codes:
+      - reason_code_string
+  correction_hint: string
+  do_not_reuse_conditions:
+    - condition_string
+  memory_route:
+    memory_seed: false
+    memory_gate_id: null
+    memory_write_allowed_now: false
+    redacted_learning_summary_required_for_future_memory: true
+
+promotion_boundaries:
+  accepted_sample_auto_promotion: false
+  accepted_sample_created: false
+  production_candidate: false
+  production_candidate_created: false
+
+side_effect_flags:
+  image_binary_included: false
+  raw_local_path_included: false
+  provider_call_performed: false
+  image_generation_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  runtime_call_performed: false
+  secret_value_read_performed: false
+  push_performed: false
+
+non_authorization:
+  rejected_samples_write_allowed_by_schema: false
+  image_binary_copy_allowed_by_schema: false
+  VCP_memory_write_allowed_by_schema: false
+  DailyNote_write_allowed_by_schema: false
+  production_candidate_write_allowed_by_schema: false
+  provider_api_plugin_mcp_allowed_by_schema: false
+  real_executor_allowed_by_schema: false

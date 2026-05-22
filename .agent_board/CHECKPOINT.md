@@ -1,5 +1,99 @@
 ---
 
+## Checkpoint - Fifteen-Day Architecture Checkpoint
+
+```text
+phase: v0_3_15_fifteen_day_architecture_checkpoint
+phase_id: v0_3_15_fifteen_day_architecture_checkpoint
+status: completed_validated
+mode: Green Lane docs/validator checkpoint
+source_phase: v0_3_7e_visual_sample_memory_policy_gate
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+created:
+- docs/V0_3_15_FIFTEEN_DAY_ARCHITECTURE_CHECKPOINT.md
+- next_30_day_route_options.md
+- scripts/validate_15_day_architecture_checkpoint.js
+updated:
+- scripts/validate_mvp.ps1
+- scripts/lib/governance_tooling_maintenance_slice.js
+Push_L1_green_auto: proven_and_regression_guarded
+Push_L2_amber_auto_guarded: still_defined_not_proven
+Push_L3_red_manual: preserved
+visual_asset_eval_v0_1: defined
+accepted_rejected_sample_schema: defined
+memory_write: still_blocked
+real_executor_implemented_now: false
+Push_L2_auto_push_test_performed: false
+provider_call_performed: false
+image_generation_performed: false
+VCP_memory_write_performed: false
+DailyNote_write_performed: false
+production_candidate_created: false
+accepted_sample_auto_promotion: false
+package_dependency_change_performed: false
+Push_L1_widened_to_broad_docs: false
+push_allowed: false
+secret_value_read_performed: false
+latest_validation:
+- git diff --check: passed_with_line_ending_warnings_only
+- node --check scripts/validate_15_day_architecture_checkpoint.js: passed
+- node scripts/validate_15_day_architecture_checkpoint.js: passed
+- node scripts/validate_visual_sample_memory_policy.js: passed
+- node scripts/validate_autopilot_agent_board_resume_compaction_guard.js: passed
+- node scripts/validate_agent_board_state.js: passed
+- npm run validate:mvp: passed
+recommended_next: external review for combined local checkpoint commit readiness; do not push.
+```
+
+---
+
+## Checkpoint - Visual Sample Memory Policy v0.1 Gate
+
+```text
+phase: v0_3_7e_visual_sample_memory_policy_gate
+phase_id: v0_3_7e_visual_sample_memory_policy_gate
+status: completed_validated
+mode: Green Lane docs/schema/validator
+source_local_commit: 664ae20bbdaa14887ba4b03b7c704eec2b8ff0af
+source_phase: v0_3_7d_visual_asset_eval_v0_1_gate
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+created:
+- docs/VISUAL_SAMPLE_MEMORY_POLICY.md
+- schemas/accepted_sample_record.schema.yaml
+- schemas/rejected_sample_record.schema.yaml
+- tests/schema_examples/accepted_sample_record.example.json
+- tests/schema_examples/rejected_sample_record.example.json
+- scripts/validate_visual_sample_memory_policy.js
+updated:
+- scripts/validate_mvp.ps1
+- scripts/lib/governance_tooling_maintenance_slice.js
+accepted_sample_record_schema_defined: true
+rejected_sample_record_schema_defined: true
+accepted_sample_auto_promotion: false
+VCP_memory_write_performed: false
+DailyNote_write_performed: false
+production_candidate_created: false
+Push_L2_exercised: false
+real_executor_implemented_now: false
+push_allowed: false
+image_generation_performed: false
+secret_value_read_performed: false
+latest_validation:
+- git diff --check: passed_with_line_ending_warnings_only
+- node --check scripts/validate_visual_sample_memory_policy.js: passed
+- node scripts/validate_visual_sample_memory_policy.js: passed
+- node scripts/validate_autopilot_agent_board_resume_compaction_guard.js: passed
+- node scripts/validate_agent_board_state.js: passed
+- npm run validate:mvp: passed
+recommended_next: guarded local commit review.
+```
+
+---
+
 ## Checkpoint - Visual Asset Eval v0.1 Gate
 
 ```text

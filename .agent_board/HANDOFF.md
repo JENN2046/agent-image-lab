@@ -1,5 +1,96 @@
 ---
 
+## Current Handoff Update - Fifteen-Day Architecture Checkpoint
+
+```text
+phase: v0_3_15_fifteen_day_architecture_checkpoint
+phase_id: v0_3_15_fifteen_day_architecture_checkpoint
+status: completed_validated
+mode: Green Lane docs/validator checkpoint
+summary: Closes the 15-day architecture arc: Push_L1 is proven and regression-guarded, Push_L2 remains unproven, Visual Asset Eval v0.1 and sample memory schemas are defined, memory writes remain blocked, and the real executor remains unimplemented.
+source_phase: v0_3_7e_visual_sample_memory_policy_gate
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+created: docs/V0_3_15_FIFTEEN_DAY_ARCHITECTURE_CHECKPOINT.md; next_30_day_route_options.md; scripts/validate_15_day_architecture_checkpoint.js.
+updated: scripts/validate_mvp.ps1; scripts/lib/governance_tooling_maintenance_slice.js.
+Push_L1_green_auto: proven_and_regression_guarded
+Push_L2_amber_auto_guarded: still_defined_not_proven
+Push_L3_red_manual: preserved
+visual_asset_eval_v0_1: defined
+review_report_schema: defined
+accepted_rejected_sample_schema: defined
+memory_write: still_blocked
+executor_preflight_contract: defined
+real_executor_implemented_now: false
+no_op_executor_simulator_next_only_if_reviewed: true
+Push_L2_auto_push_test_performed: false
+provider_call_performed: false
+image_generation_performed: false
+VCP_memory_write_performed: false
+DailyNote_write_performed: false
+production_candidate_created: false
+accepted_sample_auto_promotion: false
+package_dependency_change_performed: false
+Push_L1_widened_to_broad_docs: false
+push_allowed: false
+secret_value_read_performed: false
+commit_performed_by_this_gate: false
+push_performed_by_this_gate: false
+validation_status: completed_validated
+latest_validation: git diff --check passed with line-ending warnings only; node --check scripts/validate_15_day_architecture_checkpoint.js passed; node scripts/validate_15_day_architecture_checkpoint.js passed; node scripts/validate_visual_sample_memory_policy.js passed; node scripts/validate_autopilot_agent_board_resume_compaction_guard.js passed; node scripts/validate_agent_board_state.js passed; npm run validate:mvp passed.
+recommended_next: external review for combined local checkpoint commit readiness; do not push.
+```
+
+---
+
+## Current Handoff Update - Visual Sample Memory Policy v0.1 Gate
+
+```text
+phase: v0_3_7e_visual_sample_memory_policy_gate
+phase_id: v0_3_7e_visual_sample_memory_policy_gate
+status: completed_validated
+mode: Green Lane docs/schema/validator
+summary: Defines schema-only accepted/rejected sample memory records after Visual Asset Eval v0.1 without writing VCP memory, DailyNote, production_candidate, or accepted_sample registry entries.
+source_local_commit: 664ae20bbdaa14887ba4b03b7c704eec2b8ff0af
+source_phase: v0_3_7d_visual_asset_eval_v0_1_gate
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+created: docs/VISUAL_SAMPLE_MEMORY_POLICY.md; schemas/accepted_sample_record.schema.yaml; schemas/rejected_sample_record.schema.yaml; tests/schema_examples/accepted_sample_record.example.json; tests/schema_examples/rejected_sample_record.example.json; scripts/validate_visual_sample_memory_policy.js.
+updated: scripts/validate_mvp.ps1; scripts/lib/governance_tooling_maintenance_slice.js.
+accepted_sample_record_schema_defined: true
+rejected_sample_record_schema_defined: true
+accepted_sample_requires_accepted_gate_id: true
+accepted_sample_requires_human_accepted_true: true
+accepted_sample_requires_review_report_ref: true
+accepted_sample_requires_visual_traits: true
+accepted_sample_requires_reuse_conditions: true
+rejected_sample_requires_rejection_reason: true
+rejected_sample_requires_failure_taxonomy: true
+rejected_sample_requires_correction_hint: true
+rejected_sample_requires_do_not_reuse_conditions: true
+schema_only: true
+accepted_sample_auto_promotion: false
+VCP_memory_write_performed: false
+DailyNote_write_performed: false
+production_candidate_created: false
+Push_L2_exercised: false
+real_executor_implemented_now: false
+push_allowed: false
+provider_call_performed: false
+image_generation_performed: false
+runtime_call_performed: false
+secret_value_read_performed: false
+commit_performed_by_this_gate: false
+push_performed_by_this_gate: false
+validation_status: completed_validated
+latest_validation: git diff --check passed with line-ending warnings only; node --check scripts/validate_visual_sample_memory_policy.js passed; node scripts/validate_visual_sample_memory_policy.js passed; node scripts/validate_autopilot_agent_board_resume_compaction_guard.js passed; node scripts/validate_agent_board_state.js passed; npm run validate:mvp passed.
+recommended_next: guarded local commit review; do not test Push_L2.
+```
+
+---
+
 ## Current Handoff Update - Visual Asset Eval v0.1 Gate
 
 ```text

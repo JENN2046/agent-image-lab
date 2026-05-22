@@ -1,5 +1,56 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260522-v0.3.15-FIFTEEN-DAY-ARCHITECTURE-CHECKPOINT
+
+Task: v0.3.15 Fifteen-Day Architecture Checkpoint
+Commands planned:
+  - git diff --check
+  - node --check scripts/validate_15_day_architecture_checkpoint.js
+  - node scripts/validate_15_day_architecture_checkpoint.js
+  - node scripts/validate_visual_sample_memory_policy.js
+  - node scripts/validate_agent_board_state.js
+  - npm run validate:mvp
+Result: ALL REQUIRED CHECKS PASSED
+Findings:
+  - 15-day architecture checkpoint document created.
+  - next 30-day route options document created.
+  - Checkpoint validator created and wired into MVP.
+  - Push_L1 is recorded as proven and regression-guarded.
+  - Push_L2 remains defined but not proven.
+  - Visual Asset Eval v0.1 and accepted/rejected sample schema are recorded as defined.
+  - Real executor remains unimplemented and memory write remains blocked.
+  - No provider/image/memory/runtime action, Push_L2 test, production_candidate creation, accepted_sample auto promotion, dependency change, commit, or push is performed by this gate.
+  - git diff --check passed with line-ending warnings only.
+  - node --check scripts/validate_15_day_architecture_checkpoint.js passed.
+  - node scripts/validate_15_day_architecture_checkpoint.js passed.
+  - node scripts/validate_visual_sample_memory_policy.js passed.
+  - node scripts/validate_autopilot_agent_board_resume_compaction_guard.js passed.
+  - node scripts/validate_agent_board_state.js passed.
+  - npm run validate:mvp passed.
+
+## VALIDATION-20260522-v0.3.7e-VISUAL-SAMPLE-MEMORY-POLICY
+
+Task: v0.3.7e Visual Sample Memory Policy Gate
+Commands planned:
+  - git diff --check
+  - node --check scripts/validate_visual_sample_memory_policy.js
+  - node scripts/validate_visual_sample_memory_policy.js
+  - node scripts/validate_agent_board_state.js
+  - npm run validate:mvp
+Result: ALL REQUIRED CHECKS PASSED
+Findings:
+  - Visual sample memory policy document created.
+  - accepted_sample_record and rejected_sample_record schemas created as schema-only contracts.
+  - Metadata-only accepted/rejected sample fixtures created.
+  - v0.3.7e exact slice registered.
+  - VCP memory write, DailyNote write, accepted_sample auto promotion, production_candidate creation, provider/image/runtime action, Push_L2 test, real executor implementation, commit, and push remain not performed by this gate.
+  - git diff --check passed with line-ending warnings only.
+  - node --check scripts/validate_visual_sample_memory_policy.js passed.
+  - node scripts/validate_visual_sample_memory_policy.js passed.
+  - node scripts/validate_autopilot_agent_board_resume_compaction_guard.js passed.
+  - node scripts/validate_agent_board_state.js passed.
+  - npm run validate:mvp passed.
+
 ## VALIDATION-20260522-v0.3.7c-PUSH-L1-REGRESSION-USAGE-BOUNDARY
 
 Task: v0.3.7c Push L1 Regression Usage Boundary Gate
