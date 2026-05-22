@@ -16627,3 +16627,18 @@ semantic_rules: pass_blocks_blocking_failure; reject_requires_failure_taxonomy; 
 side_effects: provider_call_performed=false; image_generation_performed=false; VCP_memory_write_performed=false; DailyNote_write_performed=false; runtime_call_performed=false; production_candidate_created=false; accepted_sample_auto_promotion=false; memory_seed_promoted=false; Push_L2_exercised=false; real_executor_implemented_now=false.
 validation: git diff --check passed; node --check scripts/validate_visual_review_semantics_hardening.js passed; node scripts/validate_visual_review_semantics_hardening.js passed; node scripts/validate_smart_v3_push_safety_lane.js passed; node scripts/validate_agent_board_state.js passed; powershell validate_mvp.ps1 passed; npm run validate:mvp passed.
 next: local commit, post-commit review, and Push_L3 manual guarded push classification.
+---
+
+## Handoff - v0.4.9 Visual Evidence Consistency Hardening
+
+status: completed_validated_pending_local_commit
+source_local_commit: 6dd983f
+current_gate_phase: v0_4_9_visual_evidence_consistency_hardening
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+changed: docs/V0_4_9_VISUAL_EVIDENCE_CONSISTENCY_HARDENING.md; schemas/visual_evidence_consistency_hardening.schema.yaml; reports/visual_asset_eval_dry_run/v0_4_9_evidence_consistency_hardening.json; tests/schema_examples/visual_evidence_consistency_hardening.example.json; tests/schema_examples/visual_evidence_consistency_hardening_fail.example.json; scripts/validate_visual_evidence_consistency_hardening.js; scripts/validate_mvp.ps1; scripts/lib/governance_tooling_maintenance_slice.js; docs/00_project_roadmap.md; .agent_board resume surfaces.
+evidence_rules: asset_id_consistent; receipt_path_consistent; attempt_result_path_consistent; output_image_sha256_consistent; no_raw_local_path; no_image_binary_read.
+side_effects: provider_call_performed=false; image_generation_performed=false; VCP_memory_write_performed=false; DailyNote_write_performed=false; runtime_call_performed=false; production_candidate_created=false; accepted_sample_auto_promotion=false; memory_seed_promoted=false; Push_L2_exercised=false; real_executor_implemented_now=false.
+validation: git diff --check passed_with_line_ending_warnings_only; node --check scripts/validate_visual_evidence_consistency_hardening.js passed; node --check scripts/lib/governance_tooling_maintenance_slice.js passed; node scripts/validate_visual_evidence_consistency_hardening.js passed with 11/11 negative cases caught; node scripts/validate_smart_v3_push_safety_lane.js passed; node scripts/validate_agent_board_state.js passed; powershell validate_mvp.ps1 timed out at 124s then passed with extended timeout; npm run validate:mvp passed.
+next: local commit, post-commit review, and Push_L3 manual guarded push classification.

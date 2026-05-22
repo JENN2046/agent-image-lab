@@ -92,6 +92,7 @@ $requiredFiles = @(
   'scripts/validate_noop_visual_workflow_runner_plan.js',
   'scripts/validate_seven_day_visual_workflow_checkpoint.js',
   'scripts/validate_visual_review_semantics_hardening.js',
+  'scripts/validate_visual_evidence_consistency_hardening.js',
   'scripts/validate_visual_sample_memory_policy.js',
   'scripts/validate_15_day_architecture_checkpoint.js',
   'scripts/validate_local_checkpoint_manifest.js',
@@ -12638,6 +12639,34 @@ process.exit(child.status || 0);
     }
     if ($visualReviewSemanticsHardening.Push_L2_exercised -ne $false -or $visualReviewSemanticsHardening.real_executor_implemented_now -ne $false -or $visualReviewSemanticsHardening.provider_call_performed -ne $false -or $visualReviewSemanticsHardening.image_generation_performed -ne $false -or $visualReviewSemanticsHardening.runtime_call_performed -ne $false -or $visualReviewSemanticsHardening.secret_value_read_performed -ne $false -or $visualReviewSemanticsHardening.VCP_memory_write_performed -ne $false -or $visualReviewSemanticsHardening.DailyNote_write_performed -ne $false -or $visualReviewSemanticsHardening.production_candidate_created -ne $false -or $visualReviewSemanticsHardening.accepted_sample_auto_promotion -ne $false -or $visualReviewSemanticsHardening.memory_seed_promoted -ne $false -or $visualReviewSemanticsHardening.package_dependency_change_performed -ne $false -or $visualReviewSemanticsHardening.commit_performed -ne $false -or $visualReviewSemanticsHardening.push_performed -ne $false) {
       Add-Failure "Visual Review Semantics Hardening must not perform Push_L2, executor, provider, image, runtime, secret, memory, DailyNote, production, accepted-sample, memory-seed, dependency, commit, or push actions"
+    }
+  }
+
+  $visualEvidenceConsistencyHardeningOutput = & node (Join-Path $Root 'scripts/validate_visual_evidence_consistency_hardening.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Visual Evidence Consistency Hardening validation exited with failure"
+  } else {
+    $visualEvidenceConsistencyHardening = ($visualEvidenceConsistencyHardeningOutput -join "`n") | ConvertFrom-Json
+    if ($visualEvidenceConsistencyHardening.passed -ne $true -or $visualEvidenceConsistencyHardening.phase -ne 'v0_4_9_visual_evidence_consistency_hardening') {
+      Add-Failure "Visual Evidence Consistency Hardening validation must pass"
+    }
+    if ($visualEvidenceConsistencyHardening.evidence_consistency_doc_present -ne $true -or $visualEvidenceConsistencyHardening.evidence_consistency_schema_present -ne $true -or $visualEvidenceConsistencyHardening.evidence_consistency_report_present -ne $true -or $visualEvidenceConsistencyHardening.evidence_consistency_fixture_present -ne $true -or $visualEvidenceConsistencyHardening.evidence_consistency_fail_fixture_present -ne $true) {
+      Add-Failure "Visual Evidence Consistency Hardening must define doc, schema, report, pass fixture, and fail fixture"
+    }
+    if ($visualEvidenceConsistencyHardening.source_review_pack_verified -ne $true -or $visualEvidenceConsistencyHardening.source_dry_run_report_verified -ne $true -or $visualEvidenceConsistencyHardening.source_authorization_registry_verified -ne $true -or $visualEvidenceConsistencyHardening.source_receipt_verified -ne $true -or $visualEvidenceConsistencyHardening.source_attempt_result_verified -ne $true) {
+      Add-Failure "Visual Evidence Consistency Hardening must bind to review pack, dry-run report, registry, receipt, and attempt result"
+    }
+    if ($visualEvidenceConsistencyHardening.asset_id_consistent -ne $true -or $visualEvidenceConsistencyHardening.receipt_path_consistent -ne $true -or $visualEvidenceConsistencyHardening.attempt_result_path_consistent -ne $true -or $visualEvidenceConsistencyHardening.output_image_sha256_consistent -ne $true -or $visualEvidenceConsistencyHardening.no_raw_local_path -ne $true -or $visualEvidenceConsistencyHardening.no_image_binary_read -ne $true) {
+      Add-Failure "Visual Evidence Consistency Hardening must prove every evidence consistency rule"
+    }
+    if ($visualEvidenceConsistencyHardening.negative_case_count -lt 11 -or $visualEvidenceConsistencyHardening.caught_negative_case_count -ne $visualEvidenceConsistencyHardening.negative_case_count -or $visualEvidenceConsistencyHardening.all_negative_cases_caught -ne $true -or $visualEvidenceConsistencyHardening.asset_id_mismatch_caught -ne $true -or $visualEvidenceConsistencyHardening.receipt_path_mismatch_caught -ne $true -or $visualEvidenceConsistencyHardening.attempt_result_path_mismatch_caught -ne $true -or $visualEvidenceConsistencyHardening.output_image_sha256_mismatch_caught -ne $true -or $visualEvidenceConsistencyHardening.raw_local_path_caught -ne $true -or $visualEvidenceConsistencyHardening.image_binary_read_caught -ne $true) {
+      Add-Failure "Visual Evidence Consistency Hardening must catch every required negative case"
+    }
+    if ($visualEvidenceConsistencyHardening.metadata_only -ne $true -or $visualEvidenceConsistencyHardening.dry_run_only -ne $true -or $visualEvidenceConsistencyHardening.image_binary_read_performed -ne $false) {
+      Add-Failure "Visual Evidence Consistency Hardening must remain metadata-only, dry-run-only, and avoid image binary reads"
+    }
+    if ($visualEvidenceConsistencyHardening.Push_L2_exercised -ne $false -or $visualEvidenceConsistencyHardening.real_executor_implemented_now -ne $false -or $visualEvidenceConsistencyHardening.provider_call_performed -ne $false -or $visualEvidenceConsistencyHardening.image_generation_performed -ne $false -or $visualEvidenceConsistencyHardening.runtime_call_performed -ne $false -or $visualEvidenceConsistencyHardening.secret_value_read_performed -ne $false -or $visualEvidenceConsistencyHardening.VCP_memory_write_performed -ne $false -or $visualEvidenceConsistencyHardening.DailyNote_write_performed -ne $false -or $visualEvidenceConsistencyHardening.production_candidate_created -ne $false -or $visualEvidenceConsistencyHardening.accepted_sample_auto_promotion -ne $false -or $visualEvidenceConsistencyHardening.memory_seed_promoted -ne $false -or $visualEvidenceConsistencyHardening.package_dependency_change_performed -ne $false -or $visualEvidenceConsistencyHardening.commit_performed -ne $false -or $visualEvidenceConsistencyHardening.push_performed -ne $false) {
+      Add-Failure "Visual Evidence Consistency Hardening must not perform Push_L2, executor, provider, image, runtime, secret, memory, DailyNote, production, accepted-sample, memory-seed, dependency, commit, or push actions"
     }
   }
 

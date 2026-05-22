@@ -13643,3 +13643,44 @@ recommended_next: asset_hash_dimensions_verification_A5_requires_separate_author
       push_performed: false.
       Stop condition: provider call, image generation, memory write, DailyNote write, runtime/VCPToolBox/VCPChat/CDP/bridge/MCP action, real executor implementation, Push_L2 test, accepted_sample promotion, production_candidate creation, memory_seed promotion, dependency change, secret read, git add ., push, tag, release, deploy, or validation failure requiring judgment.
       Recommended next: local commit, post-commit review, and Push_L3 manual guarded push classification.
+---
+
+- [x] ID: v0_4_9_visual_evidence_consistency_hardening
+      Title: Harden Visual Evidence Consistency
+      Reason: The next route must prove review evidence records agree across review pack, receipt, attempt result, registry, and dry-run report.
+      Lane: Green.
+      Status: completed_validated_pending_local_commit.
+      Source local commit: 6dd983f.
+      Source phase: v0_4_8_visual_review_semantics_hardening.
+      Current gate phase: v0_4_9_visual_evidence_consistency_hardening.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Scope: doc/schema/report/fixture/validator/status compact batch only.
+      Changed: docs/V0_4_9_VISUAL_EVIDENCE_CONSISTENCY_HARDENING.md; schemas/visual_evidence_consistency_hardening.schema.yaml; reports/visual_asset_eval_dry_run/v0_4_9_evidence_consistency_hardening.json; tests/schema_examples/visual_evidence_consistency_hardening.example.json; tests/schema_examples/visual_evidence_consistency_hardening_fail.example.json; scripts/validate_visual_evidence_consistency_hardening.js; scripts/validate_mvp.ps1; scripts/lib/governance_tooling_maintenance_slice.js; docs/00_project_roadmap.md; .agent_board resume surfaces.
+      asset_id_consistent: true.
+      receipt_path_consistent: true.
+      attempt_result_path_consistent: true.
+      output_image_sha256_consistent: true.
+      no_raw_local_path: true.
+      no_image_binary_read: true.
+      metadata_only: true.
+      dry_run_only: true.
+      image_binary_read_performed: false.
+      Push_L2_exercised: false.
+      real_executor_implemented_now: false.
+      provider_call_performed: false.
+      image_generation_performed: false.
+      runtime_call_performed: false.
+      secret_value_read_performed: false.
+      VCP_memory_write_performed: false.
+      DailyNote_write_performed: false.
+      production_candidate_created: false.
+      accepted_sample_auto_promotion: false.
+      memory_seed_promoted: false.
+      package_dependency_change_performed: false.
+      push_allowed: false.
+      commit_performed: pending.
+      push_performed: false.
+      Stop condition: provider call, image generation, memory write, DailyNote write, runtime/VCPToolBox/VCPChat/CDP/bridge/MCP action, real executor implementation, Push_L2 test, accepted_sample promotion, production_candidate creation, memory_seed promotion, dependency change, secret read, git add ., push, tag, release, deploy, or validation failure requiring judgment.
+      Recommended next: local commit, post-commit review, and Push_L3 manual guarded push classification.

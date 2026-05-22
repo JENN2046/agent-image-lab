@@ -2,6 +2,54 @@
 
 本文是 Agent Image Lab 的总路线图，用来把 v0.2 基线、v0.3 授权门槛、MVP-B dry-run 和未来真实闭环串成一条可执行路径。
 
+## v0.4.9 - Visual Evidence Consistency Hardening
+
+Status: completed_validated_pending_local_commit.
+
+Purpose:
+- Harden evidence consistency across review pack, dry-run report, registry, receipt metadata, and attempt result.
+- Prove `asset_id`, `receipt_path`, `attempt_result_path`, and `output_image_sha256` remain consistent.
+- Prove no raw local path is exposed and no image binary is read.
+
+Artifacts:
+- `docs/V0_4_9_VISUAL_EVIDENCE_CONSISTENCY_HARDENING.md`
+- `schemas/visual_evidence_consistency_hardening.schema.yaml`
+- `reports/visual_asset_eval_dry_run/v0_4_9_evidence_consistency_hardening.json`
+- `tests/schema_examples/visual_evidence_consistency_hardening.example.json`
+- `tests/schema_examples/visual_evidence_consistency_hardening_fail.example.json`
+- `scripts/validate_visual_evidence_consistency_hardening.js`
+
+Boundary state:
+- `source_local_commit: 6dd983f`
+- `source_phase: v0_4_8_visual_review_semantics_hardening`
+- `current_gate_phase: v0_4_9_visual_evidence_consistency_hardening`
+- `active current phase: v0_3_3_first_live_generation_pilot`
+- `resume_guard_source_phase: v0_3_2_live_candidate_action_packet`
+- `next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial`
+- `asset_id_consistent: true`
+- `receipt_path_consistent: true`
+- `attempt_result_path_consistent: true`
+- `output_image_sha256_consistent: true`
+- `no_raw_local_path: true`
+- `no_image_binary_read: true`
+- `metadata_only: true`
+- `dry_run_only: true`
+- `image_binary_read_performed: false`
+- `provider_call_performed: false`
+- `image_generation_performed: false`
+- `runtime_call_performed: false`
+- `secret_value_read_performed: false`
+- `VCP_memory_write_performed: false`
+- `DailyNote_write_performed: false`
+- `production_candidate_created: false`
+- `accepted_sample_auto_promotion: false`
+- `memory_seed_promoted: false`
+- `Push_L2_exercised: false`
+- `real_executor_implemented_now: false`
+- `push_allowed: false`
+
+Recommended next: local commit, post-commit review, and Push_L3 manual guarded push classification.
+
 ## v0.4.8 - Visual Review Semantics Hardening
 
 Status: completed_validated_pending_local_commit.

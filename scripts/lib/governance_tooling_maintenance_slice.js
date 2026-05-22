@@ -461,6 +461,23 @@ const EXPECTED_V0_4_8_VISUAL_REVIEW_SEMANTICS_HARDENING_SLICE = [
   "tests/schema_examples/visual_review_semantics_hardening_fail.example.json"
 ].sort();
 
+const EXPECTED_V0_4_9_VISUAL_EVIDENCE_CONSISTENCY_HARDENING_SLICE = [
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  ".agent_board/VALIDATION_LOG.md",
+  "docs/00_project_roadmap.md",
+  "docs/V0_4_9_VISUAL_EVIDENCE_CONSISTENCY_HARDENING.md",
+  "reports/visual_asset_eval_dry_run/v0_4_9_evidence_consistency_hardening.json",
+  "schemas/visual_evidence_consistency_hardening.schema.yaml",
+  "scripts/lib/governance_tooling_maintenance_slice.js",
+  "scripts/validate_mvp.ps1",
+  "scripts/validate_visual_evidence_consistency_hardening.js",
+  "tests/schema_examples/visual_evidence_consistency_hardening.example.json",
+  "tests/schema_examples/visual_evidence_consistency_hardening_fail.example.json"
+].sort();
+
 const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "governance_tooling_maintenance_slice_v1",
@@ -565,6 +582,10 @@ const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "v0_4_8_visual_review_semantics_hardening_slice",
     files: EXPECTED_V0_4_8_VISUAL_REVIEW_SEMANTICS_HARDENING_SLICE
+  },
+  {
+    id: "v0_4_9_visual_evidence_consistency_hardening_slice",
+    files: EXPECTED_V0_4_9_VISUAL_EVIDENCE_CONSISTENCY_HARDENING_SLICE
   }
 ];
 
@@ -854,6 +875,11 @@ function governanceToolingMaintenanceSliceSelfCheck() {
         === "v0_4_8_visual_review_semantics_hardening_slice"
     },
     {
+      check: "exact_slice_matches_v0_4_9_visual_evidence_consistency_hardening",
+      passed: findMatchingGovernanceToolingSlice(EXPECTED_V0_4_9_VISUAL_EVIDENCE_CONSISTENCY_HARDENING_SLICE)?.id
+        === "v0_4_9_visual_evidence_consistency_hardening_slice"
+    },
+    {
       check: "exact_slice_rejects_missing_file",
       passed: findMatchingGovernanceToolingSlice(EXPECTED_GOVERNANCE_TOOLING_MAINTENANCE_SLICE.slice(1)) === null
     },
@@ -905,6 +931,7 @@ module.exports = {
   EXPECTED_V0_4_7_SEVEN_DAY_VISUAL_WORKFLOW_CHECKPOINT_SLICE,
   EXPECTED_V0_4_7_REVIEW_FINDINGS_FIX_SLICE,
   EXPECTED_V0_4_8_VISUAL_REVIEW_SEMANTICS_HARDENING_SLICE,
+  EXPECTED_V0_4_9_VISUAL_EVIDENCE_CONSISTENCY_HARDENING_SLICE,
   GOVERNANCE_TOOLING_ALLOWED_SLICES,
   buildGovernanceToolingMaintenanceSliceReport,
   fileAllowedInGovernanceToolingSlice,
