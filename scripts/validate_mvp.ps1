@@ -98,6 +98,7 @@ $requiredFiles = @(
   'scripts/validate_visual_review_replay_set.js',
   'scripts/validate_visual_memory_readonly_plan.js',
   'scripts/validate_next_15_day_visual_workflow_checkpoint.js',
+  'scripts/validate_controlled_generation_readiness_semantics_hardening.js',
   'scripts/validate_visual_sample_memory_policy.js',
   'scripts/validate_15_day_architecture_checkpoint.js',
   'scripts/validate_local_checkpoint_manifest.js',
@@ -12821,6 +12822,34 @@ process.exit(child.status || 0);
     }
     if ($next15DayCheckpoint.Push_L2_exercised -ne $false -or $next15DayCheckpoint.real_executor_implemented_now -ne $false -or $next15DayCheckpoint.provider_call_performed -ne $false -or $next15DayCheckpoint.image_generation_performed -ne $false -or $next15DayCheckpoint.runtime_call_performed -ne $false -or $next15DayCheckpoint.secret_value_read_performed -ne $false -or $next15DayCheckpoint.VCP_memory_write_performed -ne $false -or $next15DayCheckpoint.DailyNote_write_performed -ne $false -or $next15DayCheckpoint.production_candidate_created -ne $false -or $next15DayCheckpoint.accepted_sample_auto_promotion -ne $false -or $next15DayCheckpoint.memory_seed_promoted -ne $false -or $next15DayCheckpoint.package_dependency_change_performed -ne $false -or $next15DayCheckpoint.commit_performed -ne $false -or $next15DayCheckpoint.push_performed -ne $false) {
       Add-Failure "Next 15-Day Visual Workflow Checkpoint must not perform Push_L2, executor, provider, image, runtime, secret, memory, DailyNote, production, accepted-sample, memory-seed, dependency, commit, or push actions"
+    }
+  }
+
+  $controlledGenerationReadinessSemanticsHardeningOutput = & node (Join-Path $Root 'scripts/validate_controlled_generation_readiness_semantics_hardening.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Controlled Generation Readiness Semantics Hardening validation exited with failure"
+  } else {
+    $controlledGenerationReadinessSemanticsHardening = ($controlledGenerationReadinessSemanticsHardeningOutput -join "`n") | ConvertFrom-Json
+    if ($controlledGenerationReadinessSemanticsHardening.passed -ne $true -or $controlledGenerationReadinessSemanticsHardening.phase -ne 'v0_5_5_controlled_generation_readiness_semantics_hardening') {
+      Add-Failure "Controlled Generation Readiness Semantics Hardening validation must pass"
+    }
+    if ($controlledGenerationReadinessSemanticsHardening.semantics_doc_present -ne $true -or $controlledGenerationReadinessSemanticsHardening.semantics_schema_present -ne $true -or $controlledGenerationReadinessSemanticsHardening.semantics_report_present -ne $true -or $controlledGenerationReadinessSemanticsHardening.semantics_fixture_present -ne $true -or $controlledGenerationReadinessSemanticsHardening.semantics_fail_fixture_present -ne $true) {
+      Add-Failure "Controlled Generation Readiness Semantics Hardening must define doc, schema, report, pass fixture, and fail fixture"
+    }
+    if ($controlledGenerationReadinessSemanticsHardening.source_readiness_packet_verified -ne $true) {
+      Add-Failure "Controlled Generation Readiness Semantics Hardening must bind to the v0.5.0 readiness packet"
+    }
+    if ($controlledGenerationReadinessSemanticsHardening.readiness_true_enforced -ne $true -or $controlledGenerationReadinessSemanticsHardening.no_execute_now_true -ne $true -or $controlledGenerationReadinessSemanticsHardening.max_generation_calls_required -ne $true -or $controlledGenerationReadinessSemanticsHardening.review_gate_required -ne $true -or $controlledGenerationReadinessSemanticsHardening.failure_stop_condition_required -ne $true -or $controlledGenerationReadinessSemanticsHardening.field_complete_but_executable_hollow_blocked -ne $true) {
+      Add-Failure "Controlled Generation Readiness Semantics Hardening must enforce readiness semantics and no-execute-now"
+    }
+    if ($controlledGenerationReadinessSemanticsHardening.negative_case_count -lt 17 -or $controlledGenerationReadinessSemanticsHardening.caught_negative_case_count -ne $controlledGenerationReadinessSemanticsHardening.negative_case_count -or $controlledGenerationReadinessSemanticsHardening.all_negative_cases_caught -ne $true -or $controlledGenerationReadinessSemanticsHardening.no_execute_now_guard_caught -ne $true -or $controlledGenerationReadinessSemanticsHardening.max_generation_calls_guard_caught -ne $true -or $controlledGenerationReadinessSemanticsHardening.review_gate_guard_caught -ne $true -or $controlledGenerationReadinessSemanticsHardening.failure_stop_condition_guard_caught -ne $true -or $controlledGenerationReadinessSemanticsHardening.provider_call_caught -ne $true -or $controlledGenerationReadinessSemanticsHardening.image_generation_caught -ne $true -or $controlledGenerationReadinessSemanticsHardening.memory_write_caught -ne $true -or $controlledGenerationReadinessSemanticsHardening.production_candidate_caught -ne $true -or $controlledGenerationReadinessSemanticsHardening.raw_local_path_caught -ne $true) {
+      Add-Failure "Controlled Generation Readiness Semantics Hardening must catch every required negative case"
+    }
+    if ($controlledGenerationReadinessSemanticsHardening.metadata_only -ne $true -or $controlledGenerationReadinessSemanticsHardening.dry_run_only -ne $true -or $controlledGenerationReadinessSemanticsHardening.semantics_only -ne $true) {
+      Add-Failure "Controlled Generation Readiness Semantics Hardening must remain metadata-only, dry-run-only, and semantics-only"
+    }
+    if ($controlledGenerationReadinessSemanticsHardening.Push_L2_exercised -ne $false -or $controlledGenerationReadinessSemanticsHardening.real_executor_implemented_now -ne $false -or $controlledGenerationReadinessSemanticsHardening.provider_call_performed -ne $false -or $controlledGenerationReadinessSemanticsHardening.image_generation_performed -ne $false -or $controlledGenerationReadinessSemanticsHardening.VCP_memory_write_performed -ne $false -or $controlledGenerationReadinessSemanticsHardening.DailyNote_write_performed -ne $false -or $controlledGenerationReadinessSemanticsHardening.runtime_call_performed -ne $false -or $controlledGenerationReadinessSemanticsHardening.secret_value_read_performed -ne $false -or $controlledGenerationReadinessSemanticsHardening.production_candidate_created -ne $false -or $controlledGenerationReadinessSemanticsHardening.accepted_sample_auto_promotion -ne $false -or $controlledGenerationReadinessSemanticsHardening.memory_seed_promoted -ne $false -or $controlledGenerationReadinessSemanticsHardening.package_dependency_change_performed -ne $false -or $controlledGenerationReadinessSemanticsHardening.commit_performed -ne $false -or $controlledGenerationReadinessSemanticsHardening.push_performed -ne $false) {
+      Add-Failure "Controlled Generation Readiness Semantics Hardening must not perform Push_L2, executor, provider, image, runtime, secret, memory, DailyNote, production, accepted-sample, memory-seed, dependency, commit, or push actions"
     }
   }
 

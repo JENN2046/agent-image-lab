@@ -1,0 +1,28 @@
+id: controlled_generation_readiness_semantics_hardening
+version: v0_1
+phase: v0_5_5_controlled_generation_readiness_semantics_hardening
+type: object
+required:
+  - readiness_semantics_id
+  - version
+  - phase
+  - source_readiness_packet_ref
+  - readiness_state
+  - semantic_assertions
+  - boundaries
+  - side_effects
+properties:
+  readiness_state:
+    required:
+      - readiness
+      - no_execute_now
+      - max_generation_calls_present
+      - review_gate_present
+      - failure_stop_condition_present
+  semantic_assertions:
+    required:
+      - readiness_true_requires_failure_stop_condition
+      - readiness_true_requires_review_gate
+      - readiness_true_requires_max_generation_calls
+      - no_execute_now_must_be_true
+      - field_complete_but_executable_hollow_blocked

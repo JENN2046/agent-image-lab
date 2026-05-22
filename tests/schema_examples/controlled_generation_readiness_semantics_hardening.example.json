@@ -1,0 +1,55 @@
+{
+  "controlled_generation_readiness_semantics_hardening": {
+    "readiness_semantics_id": "controlled_generation_readiness_semantics_v0_5_5_fixture",
+    "version": "v0_1",
+    "phase": "v0_5_5_controlled_generation_readiness_semantics_hardening",
+    "source_readiness_packet_ref": "reports/visual_asset_eval_dry_run/v0_5_0_controlled_generation_readiness_packet.json",
+    "readiness_state": {
+      "readiness": true,
+      "no_execute_now": true,
+      "max_generation_calls_present": true,
+      "review_gate_present": true,
+      "failure_stop_condition_present": true
+    },
+    "semantic_assertions": {
+      "readiness_true_requires_failure_stop_condition": true,
+      "readiness_true_requires_review_gate": true,
+      "readiness_true_requires_max_generation_calls": true,
+      "no_execute_now_must_be_true": true,
+      "field_complete_but_executable_hollow_blocked": true
+    },
+    "boundaries": {
+      "metadata_only": true,
+      "dry_run_only": true,
+      "semantics_only": true,
+      "provider_call_performed": false,
+      "image_generation_performed": false,
+      "VCP_memory_write_performed": false,
+      "DailyNote_write_performed": false,
+      "runtime_call_performed": false,
+      "secret_value_read_performed": false,
+      "production_candidate_created": false,
+      "accepted_sample_auto_promotion": false,
+      "memory_seed_promoted": false,
+      "real_executor_implemented_now": false,
+      "Push_L2_exercised": false,
+      "package_dependency_change_performed": false,
+      "commit_performed": false,
+      "push_performed": false
+    },
+    "side_effects": {
+      "provider_call_performed": false,
+      "image_generation_performed": false,
+      "VCP_memory_write_performed": false,
+      "DailyNote_write_performed": false,
+      "runtime_call_performed": false,
+      "secret_value_read_performed": false,
+      "production_candidate_created": false,
+      "accepted_sample_auto_promotion": false,
+      "memory_seed_promoted": false,
+      "package_dependency_change_performed": false,
+      "commit_performed": false,
+      "push_performed": false
+    }
+  }
+}

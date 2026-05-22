@@ -1,5 +1,50 @@
 ---
 
+- [x] ID: v0_5_5_controlled_generation_readiness_semantics_hardening
+      Title: Harden Controlled Generation Readiness Semantics
+      Reason: The next 15-day route needs readiness semantics that fail closed so readiness=true cannot remain field-complete while execution guards are hollow.
+      Lane: Green.
+      Status: completed_validated_pending_local_commit.
+      Source local commit: 51f4674d707ed17d3d6fcda55dddea10f8b0533c.
+      Source remote commit: 51f4674d707ed17d3d6fcda55dddea10f8b0533c.
+      Source phase: v0_5_4_next_15_day_visual_workflow_checkpoint.
+      Previous phase commit: 51f4674d707ed17d3d6fcda55dddea10f8b0533c.
+      Previous phase push performed: false.
+      Current gate phase: v0_5_5_controlled_generation_readiness_semantics_hardening.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Scope: doc/schema/report/fixture/validator/status compact batch only.
+      Changed: docs/V0_5_5_CONTROLLED_GENERATION_READINESS_SEMANTICS_HARDENING.md; schemas/controlled_generation_readiness_semantics_hardening.schema.yaml; reports/visual_asset_eval_dry_run/v0_5_5_controlled_generation_readiness_semantics_hardening.json; tests/schema_examples/controlled_generation_readiness_semantics_hardening.example.json; tests/schema_examples/controlled_generation_readiness_semantics_hardening_fail.example.json; scripts/validate_controlled_generation_readiness_semantics_hardening.js; scripts/validate_mvp.ps1; scripts/lib/governance_tooling_maintenance_slice.js; docs/00_project_roadmap.md; .agent_board resume surfaces.
+      readiness_true_enforced: true.
+      no_execute_now_true: true.
+      max_generation_calls_required: true.
+      review_gate_required: true.
+      failure_stop_condition_required: true.
+      field_complete_but_executable_hollow_blocked: true.
+      metadata_only: true.
+      dry_run_only: true.
+      semantics_only: true.
+      Push_L2_exercised: false.
+      real_executor_implemented_now: false.
+      provider_call_performed: false.
+      image_generation_performed: false.
+      VCP_memory_write_performed: false.
+      DailyNote_write_performed: false.
+      runtime_call_performed: false.
+      secret_value_read_performed: false.
+      production_candidate_created: false.
+      accepted_sample_auto_promotion: false.
+      memory_seed_promoted: false.
+      package_dependency_change_performed: false.
+      push_allowed: false.
+      commit_performed: pending.
+      push_performed: false.
+      Stop condition: provider call, image generation, memory write, DailyNote write, runtime/VCPToolBox/VCPChat/CDP/bridge/MCP action, real executor implementation, Push_L2 test, accepted_sample promotion, production_candidate creation, memory_seed promotion, dependency change, secret read, git add ., push, tag, release, deploy, or validation failure requiring judgment.
+      Recommended next: post-commit review and Push_L3 manual guarded push classification, then v0.5.6 Human Review Gate Packet.
+
+---
+
 - [x] ID: v0_5_4_next_15_day_visual_workflow_checkpoint
       Title: Close Next 15-Day Visual Workflow Checkpoint
       Reason: The next visual workflow round needs a validator-backed checkpoint proving semantic hardening, evidence consistency, prompt correction reuse, controlled-generation readiness, review replay, and read-only memory planning all exist while generation, memory writes, and real executor remain false.

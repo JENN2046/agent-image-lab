@@ -563,6 +563,23 @@ const EXPECTED_V0_5_4_NEXT_15_DAY_VISUAL_WORKFLOW_CHECKPOINT_SLICE = [
   "tests/schema_examples/next_15_day_visual_workflow_checkpoint_fail.example.json"
 ].sort();
 
+const EXPECTED_V0_5_5_CONTROLLED_GENERATION_READINESS_SEMANTICS_HARDENING_SLICE = [
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  ".agent_board/VALIDATION_LOG.md",
+  "docs/00_project_roadmap.md",
+  "docs/V0_5_5_CONTROLLED_GENERATION_READINESS_SEMANTICS_HARDENING.md",
+  "reports/visual_asset_eval_dry_run/v0_5_5_controlled_generation_readiness_semantics_hardening.json",
+  "schemas/controlled_generation_readiness_semantics_hardening.schema.yaml",
+  "scripts/lib/governance_tooling_maintenance_slice.js",
+  "scripts/validate_controlled_generation_readiness_semantics_hardening.js",
+  "scripts/validate_mvp.ps1",
+  "tests/schema_examples/controlled_generation_readiness_semantics_hardening.example.json",
+  "tests/schema_examples/controlled_generation_readiness_semantics_hardening_fail.example.json"
+].sort();
+
 const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "governance_tooling_maintenance_slice_v1",
@@ -691,6 +708,10 @@ const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "v0_5_4_next_15_day_visual_workflow_checkpoint_slice",
     files: EXPECTED_V0_5_4_NEXT_15_DAY_VISUAL_WORKFLOW_CHECKPOINT_SLICE
+  },
+  {
+    id: "v0_5_5_controlled_generation_readiness_semantics_hardening_slice",
+    files: EXPECTED_V0_5_5_CONTROLLED_GENERATION_READINESS_SEMANTICS_HARDENING_SLICE
   }
 ];
 
@@ -1067,6 +1088,7 @@ module.exports = {
   EXPECTED_V0_5_2_VISUAL_REVIEW_REPLAY_SET_SLICE,
   EXPECTED_V0_5_3_VISUAL_MEMORY_READONLY_PLAN_SLICE,
   EXPECTED_V0_5_4_NEXT_15_DAY_VISUAL_WORKFLOW_CHECKPOINT_SLICE,
+  EXPECTED_V0_5_5_CONTROLLED_GENERATION_READINESS_SEMANTICS_HARDENING_SLICE,
   GOVERNANCE_TOOLING_ALLOWED_SLICES,
   buildGovernanceToolingMaintenanceSliceReport,
   fileAllowedInGovernanceToolingSlice,
