@@ -5,10 +5,10 @@
 ## 当前产品主线恢复点
 
 ```yaml
-current_phase: v0_3_6_bounded_l4_autopilot_requirements_and_amber_subclass_gate
-phase_status: LOCAL_DOCS_SCHEMA_VALIDATOR_PLANNING_GATE_IN_PROGRESS
+current_phase: v0_3_6a_post_push_state_sync_slice_registration_patch
+phase_status: POST_PUSH_STATE_SYNC_SLICE_REGISTERED_VALIDATED
 source_phase: v0_3_5_visual_asset_promotion_gate_design
-current_goal: define_bounded_l4_requirements_and_amber_subclasses_without_real_executor
+current_goal: register_exact_v0_3_6_post_push_state_sync_slice_without_new_execution
 long_term_goal: v0_3_controlled_real_provider_production_loop
 semantic_tightening_active: true
 current_boundary_semantics_cleanup_active: true
@@ -26,11 +26,31 @@ v0_3_4_visual_asset_governance_and_receipt_state_reconciliation_active: true
 v0_3_4a_visual_asset_policy_gap_patch_active: true
 v0_3_5_visual_asset_promotion_gate_design_active: true
 v0_3_6_bounded_l4_autopilot_requirements_and_amber_subclass_gate_active: true
+v0_3_6a_post_push_state_sync_slice_registration_patch_active: true
 post_push_state:
-  pushed_commit: df4d7c6
+  current_remote_head: a9a3c38f89a04fff4d51993a3d7f474603f364d1
+  pushed_commit: a9a3c38f89a04fff4d51993a3d7f474603f364d1
+  pushed_commits:
+    - a9d0835e460874546bcfcc2ce0a9408eb6df2bd3
+    - a9a3c38f89a04fff4d51993a3d7f474603f364d1
   pushed_ref: origin/master
-  push_status: pushed_to_origin_master_after_user_authorization
+  push_status: completed_remote_synced_after_guarded_push
+  ahead_behind_after_push: "0 0"
+  force_push_used: false
+  tag_release_deploy_performed: false
+  next_phase_started: false
+  future_push_allowed: false
   push_allowed: false
+  real_executor_implemented_now: false
+  provider_call_performed: false
+  image_generation_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  runtime_call_performed: false
+  secret_value_read_performed: false
+  slice_registration_status: v0_3_6_post_push_state_sync_slice_registered
+  slice_registration_validator: scripts/lib/governance_tooling_maintenance_slice.js
+  validate_mvp_status_after_slice_registration: passed
 visual_asset_governance:
   asset_authorization_registry_ref: assets/visual_asset_authorization_registry.example.json
   generated_image_binary_commit_policy_ref: docs/V0_3_4_VISUAL_ASSET_GOVERNANCE_AND_RECEIPT_STATE_RECONCILIATION.md

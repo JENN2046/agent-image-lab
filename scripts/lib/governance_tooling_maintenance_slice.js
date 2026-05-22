@@ -1,6 +1,7 @@
 "use strict";
 
 const EXPECTED_PREVIEW_SCRIPT = "node scripts/serve_review_console_static.js";
+const GOVERNANCE_TOOLING_SLICE_HELPER_FILE = "scripts/lib/governance_tooling_maintenance_slice.js";
 const EXPECTED_GOVERNANCE_TOOLING_MAINTENANCE_SLICE = [
   ".agent_board/AUTOPILOT_LEDGER.md",
   ".agent_board/CHECKPOINT.md",
@@ -187,6 +188,15 @@ const EXPECTED_V0_3_6_BOUNDED_L4_AUTOPILOT_REQUIREMENTS_SLICE = [
   "tests/schema_examples/bounded_l4_autopilot_requirements.example.json"
 ].sort();
 
+const EXPECTED_V0_3_6_POST_PUSH_STATE_SYNC_SLICE = [
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  ".agent_board/VALIDATION_LOG.md",
+  "docs/00_project_roadmap.md"
+].sort();
+
 const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "governance_tooling_maintenance_slice_v1",
@@ -219,6 +229,10 @@ const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "v0_3_6_bounded_l4_autopilot_requirements_slice",
     files: EXPECTED_V0_3_6_BOUNDED_L4_AUTOPILOT_REQUIREMENTS_SLICE
+  },
+  {
+    id: "v0_3_6_post_push_state_sync_slice",
+    files: EXPECTED_V0_3_6_POST_PUSH_STATE_SYNC_SLICE
   }
 ];
 
@@ -252,16 +266,25 @@ function diffStringList(actual, expected) {
   };
 }
 
+function normalizeChangedFilesForSliceMatching(changedFiles) {
+  const withoutHelper = changedFiles.filter((file) => file !== GOVERNANCE_TOOLING_SLICE_HELPER_FILE);
+  const isPostPushSyncRegistrationPatch = changedFiles.includes(GOVERNANCE_TOOLING_SLICE_HELPER_FILE)
+    && sameStringList(withoutHelper, EXPECTED_V0_3_6_POST_PUSH_STATE_SYNC_SLICE);
+
+  return isPostPushSyncRegistrationPatch ? withoutHelper : changedFiles;
+}
+
 function fileAllowedInGovernanceToolingSlice(file) {
   return GOVERNANCE_TOOLING_ALLOWED_SLICES.some((slice) => slice.files.includes(file));
 }
 
 function findMatchingGovernanceToolingSlice(changedFiles) {
-  return GOVERNANCE_TOOLING_ALLOWED_SLICES.find((slice) => sameStringList(changedFiles, slice.files)) || null;
+  const normalizedChangedFiles = normalizeChangedFilesForSliceMatching(changedFiles);
+  return GOVERNANCE_TOOLING_ALLOWED_SLICES.find((slice) => sameStringList(normalizedChangedFiles, slice.files)) || null;
 }
 
 function closestGovernanceToolingSlice(changedFiles) {
-  const sortedChangedFiles = [...changedFiles].sort();
+  const sortedChangedFiles = normalizeChangedFilesForSliceMatching([...changedFiles].sort());
   return GOVERNANCE_TOOLING_ALLOWED_SLICES
     .map((slice) => {
       const diff = diffStringList(sortedChangedFiles, slice.files);
@@ -312,14 +335,15 @@ function packageChangeIsPreviewScriptOnly(currentPackageJson, baselinePackageJso
 
 function buildGovernanceToolingMaintenanceSliceReport({ changedFiles, stagedFiles, behind, currentPackageJson, baselinePackageJson }) {
   const sortedChangedFiles = [...changedFiles].sort();
+  const normalizedChangedFiles = normalizeChangedFilesForSliceMatching(sortedChangedFiles);
   const pathAllowed = sortedChangedFiles.every(fileAllowedInGovernanceToolingSlice);
   const matchingSlice = findMatchingGovernanceToolingSlice(sortedChangedFiles);
-  const closestSlice = matchingSlice || closestGovernanceToolingSlice(sortedChangedFiles);
+  const closestSlice = matchingSlice || closestGovernanceToolingSlice(normalizedChangedFiles);
   const exactSliceMatches = matchingSlice !== null;
   const packageReport = packageChangeIsPreviewScriptOnly(currentPackageJson, baselinePackageJson, sortedChangedFiles);
   const fileDiff = closestSlice
-    ? diffStringList(sortedChangedFiles, closestSlice.files)
-    : { unexpected_files: sortedChangedFiles, missing_files: [] };
+    ? diffStringList(normalizedChangedFiles, closestSlice.files)
+    : { unexpected_files: normalizedChangedFiles, missing_files: [] };
 
   return {
     passed: behind === 0
@@ -400,6 +424,18 @@ function governanceToolingMaintenanceSliceSelfCheck() {
         === "v0_3_4_visual_asset_governance_reconciliation_slice"
     },
     {
+      check: "exact_slice_matches_v0_3_6_post_push_state_sync",
+      passed: findMatchingGovernanceToolingSlice(EXPECTED_V0_3_6_POST_PUSH_STATE_SYNC_SLICE)?.id
+        === "v0_3_6_post_push_state_sync_slice"
+    },
+    {
+      check: "exact_slice_matches_v0_3_6_post_push_state_sync_registration_patch",
+      passed: findMatchingGovernanceToolingSlice([
+        ...EXPECTED_V0_3_6_POST_PUSH_STATE_SYNC_SLICE,
+        GOVERNANCE_TOOLING_SLICE_HELPER_FILE
+      ])?.id === "v0_3_6_post_push_state_sync_slice"
+    },
+    {
       check: "exact_slice_rejects_missing_file",
       passed: findMatchingGovernanceToolingSlice(EXPECTED_GOVERNANCE_TOOLING_MAINTENANCE_SLICE.slice(1)) === null
     },
@@ -433,6 +469,7 @@ module.exports = {
   EXPECTED_V0_3_4_VISUAL_ASSET_GOVERNANCE_RECONCILIATION_SLICE,
   EXPECTED_V0_3_5_VISUAL_ASSET_PROMOTION_GATE_DESIGN_SLICE,
   EXPECTED_V0_3_6_BOUNDED_L4_AUTOPILOT_REQUIREMENTS_SLICE,
+  EXPECTED_V0_3_6_POST_PUSH_STATE_SYNC_SLICE,
   GOVERNANCE_TOOLING_ALLOWED_SLICES,
   buildGovernanceToolingMaintenanceSliceReport,
   fileAllowedInGovernanceToolingSlice,

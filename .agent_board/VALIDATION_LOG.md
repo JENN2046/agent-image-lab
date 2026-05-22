@@ -1,5 +1,40 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260522-v0.3.6a-POST-PUSH-STATE-SYNC-SLICE-REGISTRATION
+
+Task: v0.3.6a Post-Push State Sync Slice Registration Patch
+Commands run:
+  - git diff --check
+  - node --check scripts/lib/governance_tooling_maintenance_slice.js
+  - node scripts/validate_agent_board_state.js
+  - node scripts/validate_bounded_l4_autopilot_requirements.js
+  - npm run validate:mvp
+Result: ALL REQUIRED CHECKS PASSED
+Findings:
+  - Registered v0_3_6_post_push_state_sync_slice as an exact six-file status-surface slice.
+  - No wildcard .agent_board or docs path was added.
+  - No assets, runs, images, package files, provider/image/memory/runtime action, secret read, commit, or push was performed.
+
+## VALIDATION-20260522-v0.3.6-POST-PUSH-STATE-SYNC
+
+Task: v0.3.6 Post-Push State Sync
+Commands planned:
+  - git diff --check
+  - node scripts/validate_agent_board_state.js
+  - node scripts/validate_bounded_l4_autopilot_requirements.js
+  - npm run validate:mvp
+Result: SUPERSEDED BY v0.3.6a SLICE REGISTRATION; MVP NOW PASSES
+Findings:
+  - Status surfaces record guarded push completion to origin/master at a9a3c38.
+  - Future push remains blocked by default with future_push_allowed=false.
+  - No provider/image/memory/runtime action, real executor implementation, secret read, tag, release, deploy, commit, or push is performed by this sync.
+  - git diff --check passed with line-ending warnings only.
+  - node scripts/validate_agent_board_state.js passed.
+  - node scripts/validate_bounded_l4_autopilot_requirements.js passed.
+  - npm run validate:mvp initially failed because controlled visual production loop validators did not yet recognize the exact six-file v0.3.6 post-push status-sync slice.
+  - v0.3.6a registered the exact slice in scripts/lib/governance_tooling_maintenance_slice.js; npm run validate:mvp now passes.
+
+
 ## VALIDATION-20260522-v0.3.6-BOUNDED-L4-REQUIREMENTS-GATE
 
 Task: v0.3.6 Bounded L4 Autopilot Requirements And Amber Subclass Gate

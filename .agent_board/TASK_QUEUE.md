@@ -1,5 +1,35 @@
 ---
 
+- [x] ID: v0_3_6_post_push_state_sync
+      Title: Sync v0.3.6 post-push state surfaces
+      Reason: After guarded push, v0.3.5 and v0.3.6 are both on origin/master; status surfaces must stop advertising local commit/push readiness as the current state.
+      Lane: Green.
+      Status: completed_validated_after_slice_registration.
+      current_remote_head: a9a3c38f89a04fff4d51993a3d7f474603f364d1.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      pushed_commits: a9d0835e460874546bcfcc2ce0a9408eb6df2bd3; a9a3c38f89a04fff4d51993a3d7f474603f364d1.
+      push_status: completed_remote_synced_after_guarded_push.
+      ahead_behind_after_push: "0 0".
+      force_push_used: false.
+      tag_release_deploy_performed: false.
+      next_phase_started: false.
+      future_push_allowed: false.
+      push_allowed: false.
+      real_executor_implemented_now: false.
+      provider_call_performed: false.
+      image_generation_performed: false.
+      DailyNote_write_performed: false.
+      VCP_memory_write_performed: false.
+      runtime_call_performed: false.
+      secret_value_read_performed: false.
+      Validation: git diff --check passed; node --check scripts/lib/governance_tooling_maintenance_slice.js passed; node scripts/validate_agent_board_state.js passed; node scripts/validate_bounded_l4_autopilot_requirements.js passed; npm run validate:mvp passed after v0.3.6a slice registration.
+      Stop condition: provider/image/memory/runtime execution, real executor implementation, dependency change, secret read, git add ., push/tag/release/deploy, or validation failure requiring judgment.
+      Recommended next: external review for post-push status sync commit readiness; do not push without explicit authorization.
+
+---
+
 - [x] ID: v0_3_6_bounded_l4_autopilot_requirements_and_amber_subclass_gate
       Title: Define Bounded L4 requirements and Amber subclasses
       Reason: The assessment found Green autopilot and Amber dry-run are ready, but Bounded L4 is blocked by no real executor loop, no Amber subclasses, missing receipt registry schema, and no executor-enforced repair_once.
