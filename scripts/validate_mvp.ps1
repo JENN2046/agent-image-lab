@@ -83,6 +83,7 @@ $requiredFiles = @(
   'scripts/validate_bounded_l4_executor_preflight_contract.js',
   'scripts/validate_smart_v3_push_safety_lane.js',
   'scripts/validate_visual_asset_eval_v0_1.js',
+  'scripts/validate_visual_asset_eval_dry_run.js',
   'scripts/validate_visual_sample_memory_policy.js',
   'scripts/validate_15_day_architecture_checkpoint.js',
   'scripts/validate_local_checkpoint_manifest.js',
@@ -12383,8 +12384,30 @@ process.exit(child.status || 0);
     if ($visualAssetEval.negative_case_count -lt 13 -or $visualAssetEval.caught_negative_case_count -ne $visualAssetEval.negative_case_count -or $visualAssetEval.all_negative_cases_caught -ne $true) {
       Add-Failure "Visual Asset Eval v0.1 must catch every required negative case"
     }
-    if ($visualAssetEval.image_binary_read_performed -ne $false -or $visualAssetEval.provider_call_performed -ne $false -or $visualAssetEval.image_generation_performed -ne $false -or $visualAssetEval.DailyNote_write_performed -ne $false -or $visualAssetEval.VCP_memory_write_performed -ne $false -or $visualAssetEval.runtime_call_performed -ne $false -or $visualAssetEval.secret_value_read_performed -ne $false -or $visualAssetEval.accepted_sample_created -ne $false -or $visualAssetEval.memory_seed_created -ne $false -or $visualAssetEval.production_candidate_created -ne $false -or $visualAssetEval.commit_performed -ne $false -or $visualAssetEval.push_performed -ne $false) {
+  if ($visualAssetEval.image_binary_read_performed -ne $false -or $visualAssetEval.provider_call_performed -ne $false -or $visualAssetEval.image_generation_performed -ne $false -or $visualAssetEval.DailyNote_write_performed -ne $false -or $visualAssetEval.VCP_memory_write_performed -ne $false -or $visualAssetEval.runtime_call_performed -ne $false -or $visualAssetEval.secret_value_read_performed -ne $false -or $visualAssetEval.accepted_sample_created -ne $false -or $visualAssetEval.memory_seed_created -ne $false -or $visualAssetEval.production_candidate_created -ne $false -or $visualAssetEval.commit_performed -ne $false -or $visualAssetEval.push_performed -ne $false) {
       Add-Failure "Visual Asset Eval v0.1 must not perform image, provider, generation, memory, runtime, secret, promotion, commit, or push actions"
+    }
+  }
+
+  $visualAssetEvalDryRunOutput = & node (Join-Path $Root 'scripts/validate_visual_asset_eval_dry_run.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Visual Asset Eval dry-run validation exited with failure"
+  } else {
+    $visualAssetEvalDryRun = ($visualAssetEvalDryRunOutput -join "`n") | ConvertFrom-Json
+    if ($visualAssetEvalDryRun.passed -ne $true -or $visualAssetEvalDryRun.phase -ne 'v0_4_0_visual_asset_eval_dry_run') {
+      Add-Failure "Visual Asset Eval dry-run validation must pass"
+    }
+    if ($visualAssetEvalDryRun.existing_assets_only -ne $true -or $visualAssetEvalDryRun.valid_dry_run_fixture_passes -ne $true -or $visualAssetEvalDryRun.invalid_dry_run_fixture_fails -ne $true) {
+      Add-Failure "Visual Asset Eval dry run must use existing asset metadata and prove pass/fail fixtures"
+    }
+    if ($visualAssetEvalDryRun.negative_case_count -lt 13 -or $visualAssetEvalDryRun.caught_negative_case_count -ne $visualAssetEvalDryRun.negative_case_count -or $visualAssetEvalDryRun.all_negative_cases_caught -ne $true) {
+      Add-Failure "Visual Asset Eval dry run must catch every required negative case"
+    }
+    if ($visualAssetEvalDryRun.memory_suitability_false_by_default -ne $true -or $visualAssetEvalDryRun.Push_L2_exercised -ne $false -or $visualAssetEvalDryRun.real_executor_implemented_now -ne $false -or $visualAssetEvalDryRun.no_v0_4_1_started -ne $true) {
+      Add-Failure "Visual Asset Eval dry run must preserve dry-run memory, Push_L2, executor, and v0.4.1 boundaries"
+    }
+    if ($visualAssetEvalDryRun.provider_call_performed -ne $false -or $visualAssetEvalDryRun.image_generation_performed -ne $false -or $visualAssetEvalDryRun.VCP_memory_write_performed -ne $false -or $visualAssetEvalDryRun.DailyNote_write_performed -ne $false -or $visualAssetEvalDryRun.runtime_call_performed -ne $false -or $visualAssetEvalDryRun.secret_value_read_performed -ne $false -or $visualAssetEvalDryRun.production_candidate_created -ne $false -or $visualAssetEvalDryRun.accepted_sample_auto_promotion -ne $false -or $visualAssetEvalDryRun.package_dependency_change_performed -ne $false -or $visualAssetEvalDryRun.commit_performed -ne $false -or $visualAssetEvalDryRun.push_performed -ne $false) {
+      Add-Failure "Visual Asset Eval dry run must not perform provider, image, memory, runtime, secret, production, accepted-sample, dependency, commit, or push actions"
     }
   }
 

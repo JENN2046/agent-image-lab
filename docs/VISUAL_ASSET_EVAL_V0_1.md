@@ -134,3 +134,25 @@ push_performed: false
 - production_candidate remains blocked
 - image/provider/memory/runtime/secret side-effect flags remain false
 - raw local paths and image binary paths are absent
+
+## v0.4.0 Dry-Run Extension
+
+`v0_4_0_visual_asset_eval_dry_run` applies this evaluation model to existing
+authorized test asset metadata only. The dry run may reference existing
+authorization registry entries, provider receipts, generation attempt result
+JSON, and this v0.1 schema. It must not read image binaries, call providers,
+generate images, write memory, promote accepted samples, create production
+candidates, test Push_L2, or implement a real executor.
+
+Dry-run decisions use:
+
+```yaml
+decision:
+  result: pass | patch | reject
+  accepted_sample_eligible: false
+  production_candidate_eligible: false
+  memory_seed_eligible: false
+```
+
+`memory_suitability` is always false by default for v0.4.0 dry-run records
+because memory write remains blocked in dry-run.
