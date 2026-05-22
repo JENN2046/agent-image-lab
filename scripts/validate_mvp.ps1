@@ -99,6 +99,7 @@ $requiredFiles = @(
   'scripts/validate_visual_memory_readonly_plan.js',
   'scripts/validate_next_15_day_visual_workflow_checkpoint.js',
   'scripts/validate_controlled_generation_readiness_semantics_hardening.js',
+  'scripts/validate_human_review_gate_packet.js',
   'scripts/validate_visual_sample_memory_policy.js',
   'scripts/validate_15_day_architecture_checkpoint.js',
   'scripts/validate_local_checkpoint_manifest.js',
@@ -12850,6 +12851,34 @@ process.exit(child.status || 0);
     }
     if ($controlledGenerationReadinessSemanticsHardening.Push_L2_exercised -ne $false -or $controlledGenerationReadinessSemanticsHardening.real_executor_implemented_now -ne $false -or $controlledGenerationReadinessSemanticsHardening.provider_call_performed -ne $false -or $controlledGenerationReadinessSemanticsHardening.image_generation_performed -ne $false -or $controlledGenerationReadinessSemanticsHardening.VCP_memory_write_performed -ne $false -or $controlledGenerationReadinessSemanticsHardening.DailyNote_write_performed -ne $false -or $controlledGenerationReadinessSemanticsHardening.runtime_call_performed -ne $false -or $controlledGenerationReadinessSemanticsHardening.secret_value_read_performed -ne $false -or $controlledGenerationReadinessSemanticsHardening.production_candidate_created -ne $false -or $controlledGenerationReadinessSemanticsHardening.accepted_sample_auto_promotion -ne $false -or $controlledGenerationReadinessSemanticsHardening.memory_seed_promoted -ne $false -or $controlledGenerationReadinessSemanticsHardening.package_dependency_change_performed -ne $false -or $controlledGenerationReadinessSemanticsHardening.commit_performed -ne $false -or $controlledGenerationReadinessSemanticsHardening.push_performed -ne $false) {
       Add-Failure "Controlled Generation Readiness Semantics Hardening must not perform Push_L2, executor, provider, image, runtime, secret, memory, DailyNote, production, accepted-sample, memory-seed, dependency, commit, or push actions"
+    }
+  }
+
+  $humanReviewGatePacketOutput = & node (Join-Path $Root 'scripts/validate_human_review_gate_packet.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Human Review Gate Packet validation exited with failure"
+  } else {
+    $humanReviewGatePacket = ($humanReviewGatePacketOutput -join "`n") | ConvertFrom-Json
+    if ($humanReviewGatePacket.passed -ne $true -or $humanReviewGatePacket.phase -ne 'v0_5_6_human_review_gate_packet') {
+      Add-Failure "Human Review Gate Packet validation must pass"
+    }
+    if ($humanReviewGatePacket.review_gate_doc_present -ne $true -or $humanReviewGatePacket.review_gate_schema_present -ne $true -or $humanReviewGatePacket.review_gate_report_present -ne $true -or $humanReviewGatePacket.review_gate_fixture_present -ne $true -or $humanReviewGatePacket.review_gate_fail_fixture_present -ne $true) {
+      Add-Failure "Human Review Gate Packet must define doc, schema, report, pass fixture, and fail fixture"
+    }
+    if ($humanReviewGatePacket.source_readiness_semantics_verified -ne $true -or $humanReviewGatePacket.source_prompt_package_preview_verified -ne $true) {
+      Add-Failure "Human Review Gate Packet must bind to readiness semantics and prompt preview"
+    }
+    if ($humanReviewGatePacket.reviewer_required -ne $true -or $humanReviewGatePacket.approval_scope -ne $true -or $humanReviewGatePacket.max_generation_calls -ne $true -or $humanReviewGatePacket.approved_output_policy -ne $true -or $humanReviewGatePacket.stop_conditions -ne $true -or $humanReviewGatePacket.no_memory_by_default -ne $true -or $humanReviewGatePacket.actual_generation_calls_zero -ne $true) {
+      Add-Failure "Human Review Gate Packet must define every required review gate field and keep actual generation calls at zero"
+    }
+    if ($humanReviewGatePacket.negative_case_count -lt 19 -or $humanReviewGatePacket.caught_negative_case_count -ne $humanReviewGatePacket.negative_case_count -or $humanReviewGatePacket.all_negative_cases_caught -ne $true -or $humanReviewGatePacket.reviewer_required_guard_caught -ne $true -or $humanReviewGatePacket.approval_scope_guard_caught -ne $true -or $humanReviewGatePacket.max_generation_calls_guard_caught -ne $true -or $humanReviewGatePacket.output_policy_guard_caught -ne $true -or $humanReviewGatePacket.stop_conditions_guard_caught -ne $true -or $humanReviewGatePacket.no_memory_default_guard_caught -ne $true -or $humanReviewGatePacket.provider_call_caught -ne $true -or $humanReviewGatePacket.image_generation_caught -ne $true -or $humanReviewGatePacket.memory_write_caught -ne $true -or $humanReviewGatePacket.production_candidate_caught -ne $true -or $humanReviewGatePacket.raw_local_path_caught -ne $true) {
+      Add-Failure "Human Review Gate Packet must catch every required negative case"
+    }
+    if ($humanReviewGatePacket.metadata_only -ne $true -or $humanReviewGatePacket.dry_run_only -ne $true -or $humanReviewGatePacket.review_gate_packet_only -ne $true) {
+      Add-Failure "Human Review Gate Packet must remain metadata-only, dry-run-only, and review-gate-packet-only"
+    }
+    if ($humanReviewGatePacket.Push_L2_exercised -ne $false -or $humanReviewGatePacket.real_executor_implemented_now -ne $false -or $humanReviewGatePacket.provider_call_performed -ne $false -or $humanReviewGatePacket.image_generation_performed -ne $false -or $humanReviewGatePacket.VCP_memory_write_performed -ne $false -or $humanReviewGatePacket.DailyNote_write_performed -ne $false -or $humanReviewGatePacket.runtime_call_performed -ne $false -or $humanReviewGatePacket.secret_value_read_performed -ne $false -or $humanReviewGatePacket.production_candidate_created -ne $false -or $humanReviewGatePacket.accepted_sample_auto_promotion -ne $false -or $humanReviewGatePacket.memory_seed_promoted -ne $false -or $humanReviewGatePacket.package_dependency_change_performed -ne $false -or $humanReviewGatePacket.commit_performed -ne $false -or $humanReviewGatePacket.push_performed -ne $false) {
+      Add-Failure "Human Review Gate Packet must not perform Push_L2, executor, provider, image, runtime, secret, memory, DailyNote, production, accepted-sample, memory-seed, dependency, commit, or push actions"
     }
   }
 

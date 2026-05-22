@@ -1,0 +1,47 @@
+id: human_review_gate_packet
+version: v0_1
+phase: v0_5_6_human_review_gate_packet
+type: object
+required:
+  - review_gate_packet_id
+  - version
+  - phase
+  - source_readiness_semantics_ref
+  - source_prompt_package_preview_ref
+  - reviewer_required
+  - approval_scope
+  - max_generation_calls
+  - approved_output_policy
+  - stop_conditions
+  - no_memory_by_default
+  - boundaries
+  - side_effects
+properties:
+  reviewer_required:
+    required:
+      - enabled
+      - human_reviewer_role
+      - auto_approval_allowed
+  approval_scope:
+    required:
+      - prompt_package_preview_ref
+      - allowed_asset_scope
+      - allowed_action
+      - production_candidate_promotion_allowed
+  max_generation_calls:
+    required:
+      - configured_limit
+      - actual_generation_calls
+      - approved_limit_required_before_execution
+  approved_output_policy:
+    required:
+      - preview_receipt_only
+      - output_dir_preapproved
+      - accepted_sample_promotion_allowed
+      - production_candidate_allowed
+  stop_conditions:
+    required:
+      - stop_without_reviewer
+      - stop_on_scope_drift
+      - stop_on_output_policy_drift
+      - stop_on_memory_request
