@@ -329,6 +329,20 @@ const EXPECTED_V0_4_0A_VISUAL_ASSET_EVAL_DRY_RUN_ASSET_CLASS_BINDING_SLICE = [
   "scripts/validate_visual_asset_eval_dry_run.js"
 ].sort();
 
+const EXPECTED_V0_4_1_VISUAL_ASSET_REVIEW_PACK_SLICE = [
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  ".agent_board/VALIDATION_LOG.md",
+  "docs/00_project_roadmap.md",
+  "docs/V0_4_1_VISUAL_ASSET_REVIEW_PACK.md",
+  "reports/visual_asset_eval_dry_run/v0_4_1_safe_portrait_review_pack.json",
+  "scripts/lib/governance_tooling_maintenance_slice.js",
+  "scripts/validate_mvp.ps1",
+  "scripts/validate_visual_asset_review_pack.js"
+].sort();
+
 const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "governance_tooling_maintenance_slice_v1",
@@ -397,6 +411,10 @@ const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "v0_4_0a_visual_asset_eval_dry_run_asset_class_binding_slice",
     files: EXPECTED_V0_4_0A_VISUAL_ASSET_EVAL_DRY_RUN_ASSET_CLASS_BINDING_SLICE
+  },
+  {
+    id: "v0_4_1_visual_asset_review_pack_slice",
+    files: EXPECTED_V0_4_1_VISUAL_ASSET_REVIEW_PACK_SLICE
   }
 ];
 
@@ -641,6 +659,11 @@ function governanceToolingMaintenanceSliceSelfCheck() {
       )?.id === "v0_4_0a_visual_asset_eval_dry_run_asset_class_binding_slice"
     },
     {
+      check: "exact_slice_matches_v0_4_1_visual_asset_review_pack",
+      passed: findMatchingGovernanceToolingSlice(EXPECTED_V0_4_1_VISUAL_ASSET_REVIEW_PACK_SLICE)?.id
+        === "v0_4_1_visual_asset_review_pack_slice"
+    },
+    {
       check: "exact_slice_rejects_missing_file",
       passed: findMatchingGovernanceToolingSlice(EXPECTED_GOVERNANCE_TOOLING_MAINTENANCE_SLICE.slice(1)) === null
     },
@@ -683,6 +706,7 @@ module.exports = {
   EXPECTED_V0_3_15_FIFTEEN_DAY_ARCHITECTURE_CHECKPOINT_SLICE,
   EXPECTED_V0_4_0_VISUAL_ASSET_EVAL_DRY_RUN_SLICE,
   EXPECTED_V0_4_0A_VISUAL_ASSET_EVAL_DRY_RUN_ASSET_CLASS_BINDING_SLICE,
+  EXPECTED_V0_4_1_VISUAL_ASSET_REVIEW_PACK_SLICE,
   GOVERNANCE_TOOLING_ALLOWED_SLICES,
   buildGovernanceToolingMaintenanceSliceReport,
   fileAllowedInGovernanceToolingSlice,

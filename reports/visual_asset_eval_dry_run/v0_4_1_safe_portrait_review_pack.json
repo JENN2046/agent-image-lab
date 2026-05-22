@@ -1,0 +1,96 @@
+{
+  "visual_asset_review_pack": {
+    "review_pack_id": "visual_asset_review_pack_v0_4_1_safe_portrait_001",
+    "phase": "v0_4_1_visual_asset_review_pack",
+    "source_remote_commit": "2f86f9b516b8113d099addf1bbb519b9a46a68fd",
+    "source_dry_run_ref": "tests/schema_examples/visual_asset_eval_dry_run.example.json",
+    "source_eval_schema_ref": "schemas/visual_asset_review_report.schema.yaml",
+    "asset_ref": {
+      "registry_ref": "assets/visual_asset_authorization_registry.example.json",
+      "asset_id": "visual-asset-v0-3-3-safe-portrait-001-png",
+      "task_id": "v0_3_3_safe_portrait_001",
+      "receipt_path": "reports/provider_receipts/v0_3_3_safe_portrait_001_receipt.json",
+      "attempt_result_path": "runs/real_generation/v0_3_3_safe_portrait_001/generation_attempt_result.json",
+      "asset_class": "user_authorized_test_image",
+      "asset_path_redacted": true,
+      "image_binary_read_performed": false,
+      "image_binary_included": false,
+      "raw_local_path_included": false
+    },
+    "review_mode": "dry_run_review_pack",
+    "existing_asset_metadata_only": true,
+    "structured_review_report": {
+      "composition": {
+        "score": 7,
+        "finding": "Editorial framing is readable enough for a metadata-only review pack."
+      },
+      "lighting": {
+        "score": 7,
+        "finding": "Lighting is directionally coherent in the prior dry-run record, but not production-certified."
+      },
+      "material_realism": {
+        "score": 6,
+        "finding": "Material realism remains conservative because v0.4.1 does not inspect image pixels."
+      },
+      "product_fidelity": {
+        "score": 6,
+        "finding": "The asset is a safe portrait diagnostic, so product-fidelity confidence is limited."
+      },
+      "commercial_fitness": {
+        "score": 5,
+        "finding": "Commercial suitability remains undecided and cannot create production readiness."
+      },
+      "ai_artifact_risk": {
+        "score": 4,
+        "finding": "Artifact risk stays review-only because the pack reads metadata rather than image binary data."
+      },
+      "memory_suitability": {
+        "value": false,
+        "reason": "memory write remains blocked in dry-run review pack"
+      }
+    },
+    "review_summary": {
+      "overall_result": "patch",
+      "why_keep_for_review": "The record is useful as a safe metadata-only diagnostic review example.",
+      "why_not_accept": "No human acceptance gate, pixel review, memory gate, or production gate has occurred.",
+      "next_dry_run_action": "define_failure_taxonomy"
+    },
+    "review_pack_decision": {
+      "result": "patch",
+      "accepted_sample_eligible": false,
+      "production_candidate_eligible": false,
+      "memory_seed_eligible": false,
+      "requires_human_review": true
+    },
+    "review_pack_boundaries": {
+      "existing_assets_only": true,
+      "read_review_metadata_only": true,
+      "image_binary_read_performed": false,
+      "Push_L2_exercised": false,
+      "real_executor_implemented_now": false,
+      "provider_call_performed": false,
+      "image_generation_performed": false,
+      "VCP_memory_write_performed": false,
+      "DailyNote_write_performed": false,
+      "production_candidate_created": false,
+      "accepted_sample_auto_promotion": false,
+      "memory_seed_promoted": false,
+      "package_dependency_change_performed": false
+    },
+    "side_effects": {
+      "provider_call_performed": false,
+      "image_generation_performed": false,
+      "VCP_memory_write_performed": false,
+      "DailyNote_write_performed": false,
+      "runtime_call_performed": false,
+      "secret_value_read_performed": false,
+      "production_candidate_created": false,
+      "accepted_sample_promoted": false,
+      "accepted_sample_auto_promotion": false,
+      "memory_seed_promoted": false,
+      "package_dependency_change_performed": false,
+      "commit_performed": false,
+      "push_performed": false
+    }
+  }
+}

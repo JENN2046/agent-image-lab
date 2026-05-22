@@ -1,5 +1,44 @@
 ---
 
+- [x] ID: v0_4_1_visual_asset_review_pack
+      Title: Generate Visual Asset Review Pack
+      Reason: The visual judgment loop needs a structured review report over existing authorized asset metadata before failure taxonomy, prompt correction, sample registry, or no-op runner planning can be trusted.
+      Lane: Green.
+      Status: completed_validated_pending_local_commit.
+      Source remote commit: 2f86f9b516b8113d099addf1bbb519b9a46a68fd.
+      Source phase: v0_4_0a_visual_asset_eval_dry_run_asset_class_binding.
+      Previous phase commit: 2f86f9b516b8113d099addf1bbb519b9a46a68fd.
+      Previous phase push performed: true.
+      Current gate phase: v0_4_1_visual_asset_review_pack.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Scope: docs/report/validator/status compact batch only.
+      Changed: docs/V0_4_1_VISUAL_ASSET_REVIEW_PACK.md; reports/visual_asset_eval_dry_run/v0_4_1_safe_portrait_review_pack.json; scripts/validate_visual_asset_review_pack.js; scripts/validate_mvp.ps1; scripts/lib/governance_tooling_maintenance_slice.js; docs/00_project_roadmap.md; .agent_board resume surfaces.
+      existing_asset_metadata_only: true.
+      structured_review_report_present: true.
+      dry_run_binding_verified: true.
+      image_binary_read_performed: false.
+      Push_L2_exercised: false.
+      real_executor_implemented_now: false.
+      provider_call_performed: false.
+      image_generation_performed: false.
+      VCP_memory_write_performed: false.
+      DailyNote_write_performed: false.
+      runtime_call_performed: false.
+      secret_value_read_performed: false.
+      production_candidate_created: false.
+      accepted_sample_auto_promotion: false.
+      memory_seed_promoted: false.
+      package_dependency_change_performed: false.
+      push_allowed: false.
+      commit_performed: pending.
+      push_performed: false.
+      Stop condition: provider call, image generation, memory write, DailyNote write, runtime/VCPToolBox/VCPChat/CDP/bridge/MCP action, real executor implementation, Push_L2 test, accepted_sample promotion, production_candidate creation, memory_seed promotion, dependency change, secret read, git add ., push, tag, release, deploy, or validation failure requiring judgment.
+      Recommended next: post-commit review and Push_L3 manual guarded push classification, then v0.4.2 Visual Failure Taxonomy.
+
+---
+
 - [x] ID: v0_4_0a_visual_asset_eval_dry_run_asset_class_binding
       Title: Bind Visual Asset Eval dry-run asset class to registry
       Reason: The v0.4.0 dry-run validator accepted any allowed asset_class enum value even when the referenced registry entry carried a different asset_class.

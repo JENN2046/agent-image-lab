@@ -2,9 +2,49 @@
 
 本文是 Agent Image Lab 的总路线图，用来把 v0.2 基线、v0.3 授权门槛、MVP-B dry-run 和未来真实闭环串成一条可执行路径。
 
+## v0.4.1 - Visual Asset Review Pack
+
+Status: local docs/report/validator gate completed and pending local commit.
+
+Purpose:
+- Generate a metadata-only dry-run review pack from existing authorized test asset metadata.
+- Prove the system can output a structured review report without reading image binaries.
+- Keep review output non-promotional: no accepted_sample, production_candidate, memory seed, or memory write.
+
+Artifacts:
+- `docs/V0_4_1_VISUAL_ASSET_REVIEW_PACK.md`
+- `reports/visual_asset_eval_dry_run/v0_4_1_safe_portrait_review_pack.json`
+- `scripts/validate_visual_asset_review_pack.js`
+
+Boundary state:
+- `source_remote_commit: 2f86f9b516b8113d099addf1bbb519b9a46a68fd`
+- `source_phase: v0_4_0a_visual_asset_eval_dry_run_asset_class_binding`
+- `current_gate_phase: v0_4_1_visual_asset_review_pack`
+- `active current phase: v0_3_3_first_live_generation_pilot`
+- `resume_guard_source_phase: v0_3_2_live_candidate_action_packet`
+- `next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial`
+- `existing_asset_metadata_only: true`
+- `structured_review_report_present: true`
+- `image_binary_read_performed: false`
+- `Push_L2_exercised: false`
+- `real_executor_implemented_now: false`
+- `provider_call_performed: false`
+- `image_generation_performed: false`
+- `VCP_memory_write_performed: false`
+- `DailyNote_write_performed: false`
+- `runtime_call_performed: false`
+- `secret_value_read_performed: false`
+- `production_candidate_created: false`
+- `accepted_sample_auto_promotion: false`
+- `memory_seed_promoted: false`
+- `package_dependency_change_performed: false`
+- `push_allowed: false`
+
+Recommended next: post-commit review and Push_L3 manual guarded push classification, then v0.4.2 Visual Failure Taxonomy.
+
 ## v0.4.0a - Visual Asset Eval Dry Run Asset Class Binding
 
-Status: local validator tightening completed and pending commit.
+Status: committed and pushed to `origin/master`.
 
 Purpose:
 - Bind dry-run `asset_class` to the referenced authorization registry entry.
@@ -17,6 +57,8 @@ Artifacts:
 
 Boundary state:
 - `source_remote_commit: e82bfbcb67fc8c6782ff222d151d2262cfa9f64c`
+- `local_commit: 2f86f9b516b8113d099addf1bbb519b9a46a68fd`
+- `push_performed_after_user_authorization: true`
 - `source_phase: v0_4_0_visual_asset_eval_dry_run`
 - `current_gate_phase: v0_4_0a_visual_asset_eval_dry_run_asset_class_binding`
 - `active current phase: v0_3_3_first_live_generation_pilot`

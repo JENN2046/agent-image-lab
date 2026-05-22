@@ -84,6 +84,7 @@ $requiredFiles = @(
   'scripts/validate_smart_v3_push_safety_lane.js',
   'scripts/validate_visual_asset_eval_v0_1.js',
   'scripts/validate_visual_asset_eval_dry_run.js',
+  'scripts/validate_visual_asset_review_pack.js',
   'scripts/validate_visual_sample_memory_policy.js',
   'scripts/validate_15_day_architecture_checkpoint.js',
   'scripts/validate_local_checkpoint_manifest.js',
@@ -12408,6 +12409,31 @@ process.exit(child.status || 0);
     }
     if ($visualAssetEvalDryRun.provider_call_performed -ne $false -or $visualAssetEvalDryRun.image_generation_performed -ne $false -or $visualAssetEvalDryRun.VCP_memory_write_performed -ne $false -or $visualAssetEvalDryRun.DailyNote_write_performed -ne $false -or $visualAssetEvalDryRun.runtime_call_performed -ne $false -or $visualAssetEvalDryRun.secret_value_read_performed -ne $false -or $visualAssetEvalDryRun.production_candidate_created -ne $false -or $visualAssetEvalDryRun.accepted_sample_auto_promotion -ne $false -or $visualAssetEvalDryRun.package_dependency_change_performed -ne $false -or $visualAssetEvalDryRun.commit_performed -ne $false -or $visualAssetEvalDryRun.push_performed -ne $false) {
       Add-Failure "Visual Asset Eval dry run must not perform provider, image, memory, runtime, secret, production, accepted-sample, dependency, commit, or push actions"
+    }
+  }
+
+  $visualAssetReviewPackOutput = & node (Join-Path $Root 'scripts/validate_visual_asset_review_pack.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Visual Asset Review Pack validation exited with failure"
+  } else {
+    $visualAssetReviewPack = ($visualAssetReviewPackOutput -join "`n") | ConvertFrom-Json
+    if ($visualAssetReviewPack.passed -ne $true -or $visualAssetReviewPack.phase -ne 'v0_4_1_visual_asset_review_pack') {
+      Add-Failure "Visual Asset Review Pack validation must pass"
+    }
+    if ($visualAssetReviewPack.review_pack_doc_present -ne $true -or $visualAssetReviewPack.review_pack_json_present -ne $true -or $visualAssetReviewPack.structured_review_report_present -ne $true) {
+      Add-Failure "Visual Asset Review Pack must define its doc, report JSON, and structured review report"
+    }
+    if ($visualAssetReviewPack.existing_asset_metadata_only -ne $true -or $visualAssetReviewPack.dry_run_binding_verified -ne $true -or $visualAssetReviewPack.image_binary_read_performed -ne $false) {
+      Add-Failure "Visual Asset Review Pack must stay bound to existing metadata and avoid image binary reads"
+    }
+    if ($visualAssetReviewPack.negative_case_count -lt 16 -or $visualAssetReviewPack.caught_negative_case_count -ne $visualAssetReviewPack.negative_case_count -or $visualAssetReviewPack.all_negative_cases_caught -ne $true -or $visualAssetReviewPack.registry_asset_class_mismatch_caught -ne $true -or $visualAssetReviewPack.image_binary_read_negative_case_caught -ne $true) {
+      Add-Failure "Visual Asset Review Pack must catch every required negative case"
+    }
+    if ($visualAssetReviewPack.memory_suitability_false_by_default -ne $true -or $visualAssetReviewPack.accepted_sample_eligible -ne $false -or $visualAssetReviewPack.production_candidate_eligible -ne $false -or $visualAssetReviewPack.memory_seed_eligible -ne $false) {
+      Add-Failure "Visual Asset Review Pack must preserve memory, accepted_sample, production_candidate, and memory_seed boundaries"
+    }
+    if ($visualAssetReviewPack.Push_L2_exercised -ne $false -or $visualAssetReviewPack.real_executor_implemented_now -ne $false -or $visualAssetReviewPack.provider_call_performed -ne $false -or $visualAssetReviewPack.image_generation_performed -ne $false -or $visualAssetReviewPack.VCP_memory_write_performed -ne $false -or $visualAssetReviewPack.DailyNote_write_performed -ne $false -or $visualAssetReviewPack.runtime_call_performed -ne $false -or $visualAssetReviewPack.secret_value_read_performed -ne $false -or $visualAssetReviewPack.production_candidate_created -ne $false -or $visualAssetReviewPack.accepted_sample_auto_promotion -ne $false -or $visualAssetReviewPack.package_dependency_change_performed -ne $false -or $visualAssetReviewPack.commit_performed -ne $false -or $visualAssetReviewPack.push_performed -ne $false) {
+      Add-Failure "Visual Asset Review Pack must not perform Push_L2, executor, provider, image, memory, runtime, secret, production, accepted-sample, dependency, commit, or push actions"
     }
   }
 
