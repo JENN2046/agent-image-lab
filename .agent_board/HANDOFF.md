@@ -1,5 +1,52 @@
 ---
 
+## Current Handoff Update - v0.5.9 Visual Memory ReadOnly Query Contract
+
+```text
+phase: v0_5_9_visual_memory_readonly_query_contract
+phase_id: v0_5_9_visual_memory_readonly_query_contract
+status: completed_validated_pending_local_commit
+mode: Green Lane doc/schema/report/fixture/validator/status compact batch
+summary: Narrows the readonly visual-memory plan into explicit accepted-sample, rejected-pattern, and style-DNA query contracts with no-write flags.
+source_local_commit: 2d3eb60a7ae8f98cd073b49b63b46735cddffebb
+source_remote_commit: 51f4674d707ed17d3d6fcda55dddea10f8b0533c
+source_phase: v0_5_8_controlled_generation_evidence_contract
+previous_phase_commit: 2d3eb60a7ae8f98cd073b49b63b46735cddffebb
+previous_phase_push_performed: false
+current_gate_phase: v0_5_9_visual_memory_readonly_query_contract
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+changed: docs/V0_5_9_VISUAL_MEMORY_READONLY_QUERY_CONTRACT.md; schemas/visual_memory_readonly_query_contract.schema.yaml; reports/visual_asset_eval_dry_run/v0_5_9_visual_memory_readonly_query_contract.json; tests/schema_examples/visual_memory_readonly_query_contract.example.json; tests/schema_examples/visual_memory_readonly_query_contract_fail.example.json; scripts/validate_visual_memory_readonly_query_contract.js; scripts/validate_mvp.ps1; scripts/lib/governance_tooling_maintenance_slice.js; docs/00_project_roadmap.md; .agent_board resume surfaces.
+accepted_sample_readonly_query: true
+rejected_pattern_readonly_query: true
+style_dna_readonly_query: true
+no_write_flags: true
+metadata_only: true
+readonly_query_contract_only: true
+query_contract_dry_run_only: true
+no_live_memory_access: true
+Push_L2_exercised: false
+real_executor_implemented_now: false
+provider_call_performed: false
+image_generation_performed: false
+real_memory_read_performed: false
+VCP_memory_write_performed: false
+DailyNote_write_performed: false
+runtime_call_performed: false
+secret_value_read_performed: false
+production_candidate_created: false
+accepted_sample_auto_promotion: false
+memory_seed_promoted: false
+package_dependency_change_performed: false
+push_allowed: false
+commit_performed: pending
+push_performed: false
+recommended_next: local_commit_then_post_commit_review_and_push_lane_classification_then_v0_6_0_first_controlled_generation_authorization_packet
+```
+
+---
+
 ## Current Handoff Update - v0.5.8 Controlled Generation Evidence Contract
 
 ```text

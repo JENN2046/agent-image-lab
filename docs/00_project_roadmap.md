@@ -2,6 +2,54 @@
 
 本文是 Agent Image Lab 的总路线图，用来把 v0.2 基线、v0.3 授权门槛、MVP-B dry-run 和未来真实闭环串成一条可执行路径。
 
+## v0.5.9 - Visual Memory ReadOnly Query Contract
+
+Status: completed_validated_pending_local_commit.
+
+Purpose:
+- Narrow the earlier readonly memory plan into a fail-closed query contract.
+- Require `accepted_sample_readonly_query`,
+  `rejected_pattern_readonly_query`, `style_dna_readonly_query`, and
+  `no_write_flags`.
+- Keep the contract metadata-only and prevent live memory access or any write
+  path.
+
+Artifacts:
+- `docs/V0_5_9_VISUAL_MEMORY_READONLY_QUERY_CONTRACT.md`
+- `schemas/visual_memory_readonly_query_contract.schema.yaml`
+- `reports/visual_asset_eval_dry_run/v0_5_9_visual_memory_readonly_query_contract.json`
+- `tests/schema_examples/visual_memory_readonly_query_contract.example.json`
+- `tests/schema_examples/visual_memory_readonly_query_contract_fail.example.json`
+- `scripts/validate_visual_memory_readonly_query_contract.js`
+
+Boundary state:
+- `source_local_commit: 2d3eb60`
+- `source_remote_commit: 51f4674`
+- `source_phase: v0_5_8_controlled_generation_evidence_contract`
+- `current_gate_phase: v0_5_9_visual_memory_readonly_query_contract`
+- `active current phase: v0_3_3_first_live_generation_pilot`
+- `resume_guard_source_phase: v0_3_2_live_candidate_action_packet`
+- `next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial`
+- `accepted_sample_readonly_query: true`
+- `rejected_pattern_readonly_query: true`
+- `style_dna_readonly_query: true`
+- `no_write_flags: true`
+- `provider_call_performed: false`
+- `image_generation_performed: false`
+- `real_memory_read_performed: false`
+- `runtime_call_performed: false`
+- `secret_value_read_performed: false`
+- `VCP_memory_write_performed: false`
+- `DailyNote_write_performed: false`
+- `production_candidate_created: false`
+- `accepted_sample_auto_promotion: false`
+- `memory_seed_promoted: false`
+- `Push_L2_exercised: false`
+- `real_executor_implemented_now: false`
+- `push_allowed: false`
+
+Recommended next: local commit, post-commit review, Push_L3 manual guarded push classification, then v0.6.0 First Controlled Generation Authorization Packet.
+
 ## v0.5.8 - Controlled Generation Evidence Contract
 
 Status: completed_validated_pending_local_commit.

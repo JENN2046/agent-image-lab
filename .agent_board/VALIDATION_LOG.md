@@ -1,5 +1,45 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260523-v0.5.9-VISUAL-MEMORY-READONLY-QUERY-CONTRACT
+
+Task: v0.5.9 Visual Memory ReadOnly Query Contract
+Status: completed_validated
+Commands run:
+  - git diff --check: passed_with_line_ending_warnings_only
+  - node --check scripts/validate_visual_memory_readonly_query_contract.js: passed
+  - node scripts/validate_visual_memory_readonly_query_contract.js: passed
+  - node scripts/validate_visual_memory_readonly_plan.js: passed
+  - node scripts/validate_smart_v3_push_safety_lane.js: passed
+  - node scripts/validate_agent_board_state.js: passed
+  - powershell -NoProfile -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1: passed
+  - npm run validate:mvp: passed
+Boundary:
+  - source_local_commit: 2d3eb60a7ae8f98cd073b49b63b46735cddffebb
+  - source_remote_commit: 51f4674d707ed17d3d6fcda55dddea10f8b0533c
+  - accepted_sample_readonly_query: true
+  - rejected_pattern_readonly_query: true
+  - style_dna_readonly_query: true
+  - no_write_flags: true
+  - metadata_only: true
+  - readonly_query_contract_only: true
+  - query_contract_dry_run_only: true
+  - no_live_memory_access: true
+  - provider_call_performed: false
+  - image_generation_performed: false
+  - real_memory_read_performed: false
+  - VCP_memory_write_performed: false
+  - DailyNote_write_performed: false
+  - runtime_call_performed: false
+  - secret_value_read_performed: false
+  - production_candidate_created: false
+  - accepted_sample_auto_promotion: false
+  - memory_seed_promoted: false
+  - Push_L2_exercised: false
+  - commit_performed: pending
+  - push_performed: false
+Negative cases:
+  - visual_memory_readonly_query_contract: 20 caught / 20
+
 ## VALIDATION-20260523-v0.5.8-CONTROLLED-GENERATION-EVIDENCE-CONTRACT
 
 Task: v0.5.8 Controlled Generation Evidence Contract

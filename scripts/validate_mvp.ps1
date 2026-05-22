@@ -102,6 +102,7 @@ $requiredFiles = @(
   'scripts/validate_human_review_gate_packet.js',
   'scripts/validate_noop_controlled_generation_runner_dry_run.js',
   'scripts/validate_controlled_generation_evidence_contract.js',
+  'scripts/validate_visual_memory_readonly_query_contract.js',
   'scripts/validate_visual_sample_memory_policy.js',
   'scripts/validate_15_day_architecture_checkpoint.js',
   'scripts/validate_local_checkpoint_manifest.js',
@@ -12934,6 +12935,34 @@ process.exit(child.status || 0);
     }
     if ($controlledGenerationEvidenceContract.Push_L2_exercised -ne $false -or $controlledGenerationEvidenceContract.real_executor_implemented_now -ne $false -or $controlledGenerationEvidenceContract.provider_call_performed -ne $false -or $controlledGenerationEvidenceContract.image_generation_performed -ne $false -or $controlledGenerationEvidenceContract.VCP_memory_write_performed -ne $false -or $controlledGenerationEvidenceContract.DailyNote_write_performed -ne $false -or $controlledGenerationEvidenceContract.runtime_call_performed -ne $false -or $controlledGenerationEvidenceContract.secret_value_read_performed -ne $false -or $controlledGenerationEvidenceContract.production_candidate_created -ne $false -or $controlledGenerationEvidenceContract.accepted_sample_auto_promotion -ne $false -or $controlledGenerationEvidenceContract.memory_seed_promoted -ne $false -or $controlledGenerationEvidenceContract.package_dependency_change_performed -ne $false -or $controlledGenerationEvidenceContract.commit_performed -ne $false -or $controlledGenerationEvidenceContract.push_performed -ne $false) {
       Add-Failure "Controlled Generation Evidence Contract must not perform Push_L2, executor, provider, image, runtime, secret, memory, DailyNote, production, accepted-sample, memory-seed, dependency, commit, or push actions"
+    }
+  }
+
+  $visualMemoryReadOnlyQueryContractOutput = & node (Join-Path $Root 'scripts/validate_visual_memory_readonly_query_contract.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Visual Memory ReadOnly Query Contract validation exited with failure"
+  } else {
+    $visualMemoryReadOnlyQueryContract = ($visualMemoryReadOnlyQueryContractOutput -join "`n") | ConvertFrom-Json
+    if ($visualMemoryReadOnlyQueryContract.passed -ne $true -or $visualMemoryReadOnlyQueryContract.phase -ne 'v0_5_9_visual_memory_readonly_query_contract') {
+      Add-Failure "Visual Memory ReadOnly Query Contract validation must pass"
+    }
+    if ($visualMemoryReadOnlyQueryContract.readonly_query_doc_present -ne $true -or $visualMemoryReadOnlyQueryContract.readonly_query_schema_present -ne $true -or $visualMemoryReadOnlyQueryContract.readonly_query_report_present -ne $true -or $visualMemoryReadOnlyQueryContract.readonly_query_fixture_present -ne $true -or $visualMemoryReadOnlyQueryContract.readonly_query_fail_fixture_present -ne $true) {
+      Add-Failure "Visual Memory ReadOnly Query Contract must define doc, schema, report, pass fixture, and fail fixture"
+    }
+    if ($visualMemoryReadOnlyQueryContract.source_visual_memory_readonly_plan_verified -ne $true -or $visualMemoryReadOnlyQueryContract.source_visual_sample_memory_policy_verified -ne $true) {
+      Add-Failure "Visual Memory ReadOnly Query Contract must bind to the readonly plan and visual sample memory policy"
+    }
+    if ($visualMemoryReadOnlyQueryContract.accepted_sample_readonly_query -ne $true -or $visualMemoryReadOnlyQueryContract.rejected_pattern_readonly_query -ne $true -or $visualMemoryReadOnlyQueryContract.style_dna_readonly_query -ne $true -or $visualMemoryReadOnlyQueryContract.no_write_flags -ne $true) {
+      Add-Failure "Visual Memory ReadOnly Query Contract must define every required readonly query and no_write_flags"
+    }
+    if ($visualMemoryReadOnlyQueryContract.negative_case_count -lt 20 -or $visualMemoryReadOnlyQueryContract.caught_negative_case_count -ne $visualMemoryReadOnlyQueryContract.negative_case_count -or $visualMemoryReadOnlyQueryContract.all_negative_cases_caught -ne $true -or $visualMemoryReadOnlyQueryContract.accepted_sample_query_readonly_caught -ne $true -or $visualMemoryReadOnlyQueryContract.rejected_pattern_query_readonly_caught -ne $true -or $visualMemoryReadOnlyQueryContract.style_dna_query_readonly_caught -ne $true -or $visualMemoryReadOnlyQueryContract.no_write_flags_caught -ne $true -or $visualMemoryReadOnlyQueryContract.daily_note_write_caught -ne $true -or $visualMemoryReadOnlyQueryContract.real_memory_read_caught -ne $true -or $visualMemoryReadOnlyQueryContract.provider_call_caught -ne $true -or $visualMemoryReadOnlyQueryContract.image_generation_caught -ne $true -or $visualMemoryReadOnlyQueryContract.runtime_call_caught -ne $true -or $visualMemoryReadOnlyQueryContract.raw_local_path_caught -ne $true) {
+      Add-Failure "Visual Memory ReadOnly Query Contract must catch every required negative case"
+    }
+    if ($visualMemoryReadOnlyQueryContract.metadata_only -ne $true -or $visualMemoryReadOnlyQueryContract.readonly_query_contract_only -ne $true -or $visualMemoryReadOnlyQueryContract.query_contract_dry_run_only -ne $true -or $visualMemoryReadOnlyQueryContract.no_live_memory_access -ne $true) {
+      Add-Failure "Visual Memory ReadOnly Query Contract must remain metadata-only, dry-run-only, readonly-query-only, and without live memory access"
+    }
+    if ($visualMemoryReadOnlyQueryContract.Push_L2_exercised -ne $false -or $visualMemoryReadOnlyQueryContract.real_executor_implemented_now -ne $false -or $visualMemoryReadOnlyQueryContract.provider_call_performed -ne $false -or $visualMemoryReadOnlyQueryContract.image_generation_performed -ne $false -or $visualMemoryReadOnlyQueryContract.VCP_memory_write_performed -ne $false -or $visualMemoryReadOnlyQueryContract.DailyNote_write_performed -ne $false -or $visualMemoryReadOnlyQueryContract.runtime_call_performed -ne $false -or $visualMemoryReadOnlyQueryContract.secret_value_read_performed -ne $false -or $visualMemoryReadOnlyQueryContract.production_candidate_created -ne $false -or $visualMemoryReadOnlyQueryContract.accepted_sample_auto_promotion -ne $false -or $visualMemoryReadOnlyQueryContract.memory_seed_promoted -ne $false -or $visualMemoryReadOnlyQueryContract.package_dependency_change_performed -ne $false -or $visualMemoryReadOnlyQueryContract.commit_performed -ne $false -or $visualMemoryReadOnlyQueryContract.push_performed -ne $false) {
+      Add-Failure "Visual Memory ReadOnly Query Contract must not perform Push_L2, executor, provider, image, memory, DailyNote, runtime, secret, production, accepted-sample, memory-seed, dependency, commit, or push actions"
     }
   }
 

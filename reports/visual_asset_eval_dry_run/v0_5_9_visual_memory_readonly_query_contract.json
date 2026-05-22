@@ -1,0 +1,103 @@
+{
+  "visual_memory_readonly_query_contract": {
+    "visual_memory_readonly_query_contract_id": "visual_memory_readonly_query_contract_v0_5_9_safe_portrait_001",
+    "version": "v0_1",
+    "phase": "v0_5_9_visual_memory_readonly_query_contract",
+    "source_visual_memory_readonly_plan_ref": "reports/visual_asset_eval_dry_run/v0_5_3_visual_memory_readonly_plan.json",
+    "source_visual_sample_memory_policy_ref": "docs/VISUAL_SAMPLE_MEMORY_POLICY.md",
+    "source_accepted_sample_schema_ref": "schemas/accepted_sample_record.schema.yaml",
+    "source_rejected_sample_schema_ref": "schemas/rejected_sample_record.schema.yaml",
+    "accepted_sample_readonly_query": {
+      "enabled": true,
+      "read_only": true,
+      "query_shape_only": true,
+      "returns_metadata_only": true,
+      "execution_allowed_now": false,
+      "query_scope": "accepted_sample_registry_readonly_future_gate",
+      "lookup_keys": [
+        "asset_id",
+        "review_report_ref",
+        "visual_traits"
+      ],
+      "real_memory_read_performed": false,
+      "accepted_sample_created": false,
+      "accepted_sample_auto_promotion": false
+    },
+    "rejected_pattern_readonly_query": {
+      "enabled": true,
+      "read_only": true,
+      "query_shape_only": true,
+      "returns_metadata_only": true,
+      "execution_allowed_now": false,
+      "query_scope": "rejected_pattern_learning_readonly_future_gate",
+      "lookup_keys": [
+        "failure_taxonomy",
+        "correction_hint",
+        "do_not_reuse_conditions"
+      ],
+      "real_memory_read_performed": false,
+      "rejected_sample_created": false,
+      "failure_lesson_written": false
+    },
+    "style_dna_readonly_query": {
+      "enabled": true,
+      "read_only": true,
+      "query_shape_only": true,
+      "returns_metadata_only": true,
+      "execution_allowed_now": false,
+      "query_scope": "style_dna_reference_readonly_future_gate",
+      "lookup_keys": [
+        "composition",
+        "lighting",
+        "material_realism",
+        "commercial_fitness"
+      ],
+      "real_memory_read_performed": false,
+      "memory_seed_promoted": false
+    },
+    "no_write_flags": {
+      "enabled": true,
+      "VCP_memory_write_allowed": false,
+      "DailyNote_write_allowed": false,
+      "accepted_sample_promotion_allowed": false,
+      "memory_seed_promotion_allowed": false,
+      "production_candidate_write_allowed": false
+    },
+    "boundaries": {
+      "metadata_only": true,
+      "readonly_query_contract_only": true,
+      "query_contract_dry_run_only": true,
+      "no_live_memory_access": true,
+      "real_memory_read_performed": false,
+      "provider_call_performed": false,
+      "image_generation_performed": false,
+      "VCP_memory_write_performed": false,
+      "DailyNote_write_performed": false,
+      "runtime_call_performed": false,
+      "secret_value_read_performed": false,
+      "production_candidate_created": false,
+      "accepted_sample_auto_promotion": false,
+      "memory_seed_promoted": false,
+      "real_executor_implemented_now": false,
+      "Push_L2_exercised": false,
+      "package_dependency_change_performed": false,
+      "commit_performed": false,
+      "push_performed": false
+    },
+    "side_effects": {
+      "real_memory_read_performed": false,
+      "provider_call_performed": false,
+      "image_generation_performed": false,
+      "VCP_memory_write_performed": false,
+      "DailyNote_write_performed": false,
+      "runtime_call_performed": false,
+      "secret_value_read_performed": false,
+      "production_candidate_created": false,
+      "accepted_sample_auto_promotion": false,
+      "memory_seed_promoted": false,
+      "package_dependency_change_performed": false,
+      "commit_performed": false,
+      "push_performed": false
+    }
+  }
+}
