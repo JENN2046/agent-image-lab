@@ -1,5 +1,68 @@
 ---
 
+- [x] ID: v0_3_7a_push_safety_lane_gate
+      Title: Define Smart v3 Push Safety Lane
+      Reason: Current rules still treat push as one Red class; the project needs a separate remote-ref risk lane so future exact-slice push can be classified without weakening task Green/Amber/Red.
+      Lane: Green.
+      Status: completed_validated.
+      Source remote commit: b5cb845ac280e463c3825ca0bc20e5abc772c421.
+      Source phase: v0_3_7_post_push_state_sync.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Scope: docs/schema/validator planning gate only.
+      Required: Push_L0_forbidden, Push_L1_green_auto, Push_L2_amber_auto_guarded, Push_L3_red_manual, push preflight validator, post-push verification, and post-push reconciliation.
+      push_not_always_red_after_policy: true.
+      push_safety_lane_independent_from_task_lane: true.
+      force_push_always_manual_or_forbidden: true.
+      tag_release_deploy_always_manual_or_forbidden: true.
+      secret_destructive_always_manual_or_forbidden: true.
+      real_executor_implemented_now: false.
+      future_push_allowed: false.
+      next_phase_started: false.
+      provider_call_performed: false.
+      image_generation_performed: false.
+      DailyNote_write_performed: false.
+      VCP_memory_write_performed: false.
+      runtime_call_performed: false.
+      secret_value_read_performed: false.
+      Stop condition: push execution, real executor implementation, provider/image/memory/runtime execution, production_candidate creation, accepted_sample promotion, secret read, dependency change, git add ., commit, tag, release, deploy, or validation failure requiring non-obvious judgment.
+      Validation: git diff --check passed with line-ending warnings only; node --check scripts/validate_smart_v3_push_safety_lane.js passed; node scripts/validate_smart_v3_push_safety_lane.js passed; node scripts/validate_bounded_l4_executor_preflight_contract.js passed; npm run validate:mvp passed.
+      Recommended next: external review for local commit readiness; do not push without explicit authorization.
+
+---
+
+- [x] ID: v0_3_7_post_push_state_sync
+      Title: Sync v0.3.7 post-push state surfaces
+      Reason: After guarded push, v0.3.7 is on origin/master; status surfaces must record the synced remote head and stop advertising local commit/push readiness as the current state.
+      Lane: Green.
+      Status: completed_remote_synced_after_guarded_push.
+      source_remote_commit_before_sync: b5cb845ac280e463c3825ca0bc20e5abc772c421.
+      current_remote_head: b5cb845ac280e463c3825ca0bc20e5abc772c421.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      pushed_commits: b5cb845ac280e463c3825ca0bc20e5abc772c421.
+      push_status: completed_remote_synced_after_guarded_push.
+      ahead_behind_after_push: "0 0".
+      force_push_used: false.
+      tag_release_deploy_performed: false.
+      next_phase_started: false.
+      future_push_allowed: false.
+      push_allowed: false.
+      real_executor_implemented_now: false.
+      provider_call_performed: false.
+      image_generation_performed: false.
+      DailyNote_write_performed: false.
+      VCP_memory_write_performed: false.
+      runtime_call_performed: false.
+      secret_value_read_performed: false.
+      Validation: git diff --check passed with line-ending warnings only; node scripts/validate_agent_board_state.js passed; node scripts/validate_bounded_l4_executor_preflight_contract.js passed; npm run validate:mvp passed.
+      Stop condition: provider/image/memory/runtime execution, real executor implementation, dependency change, secret read, git add ., push/tag/release/deploy, or validation failure requiring judgment.
+      Recommended next: external review for post-push status sync commit readiness; do not push without explicit authorization.
+
+---
+
 - [x] ID: v0_3_7_bounded_l4_executor_preflight_contract_gate
       Title: Define Bounded L4 executor preflight contract
       Reason: v0.3.6 defined Bounded L4 requirements but not the exact preflight packet that a future real executor must validate before any action.

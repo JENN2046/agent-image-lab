@@ -259,6 +259,43 @@ exceeded, cost unknown, side-effect flag drift, repair limit exceeded, memory
 gate required, or production candidate gate required. This kernel still does not
 implement a real executor.
 
+## Push Safety Lane
+
+Push Safety Lane is independent from normal task lane classification. Green /
+Amber / Red classifies task action risk. Push_L0 / Push_L1 / Push_L2 / Push_L3
+classifies remote ref update risk. A task can be Green while the push is still
+Push_L3_red_manual.
+
+```yaml
+push_not_always_red_after_policy: true
+push_safety_lane_independent_from_task_lane: true
+Push_L0_forbidden:
+  auto_push_allowed: false
+Push_L1_green_auto:
+  auto_push_allowed: true
+  scope: narrow docs/status/exact-slice only
+Push_L2_amber_auto_guarded:
+  auto_push_allowed: true
+  scope: bounded governance artifacts only
+Push_L3_red_manual:
+  user_authorization_required: true
+```
+
+Push_L1 must prove clean worktree, exactly one commit ahead, fast-forward only,
+origin/master upstream, exact slice recognition, no assets/runs/images/package
+files/runtime code, no staged or untracked files, `git diff --check`, `npm run
+validate:mvp`, post-push verification, and post-push state sync. Push_L2 must
+prove bounded commit count, exact changed files, phase validator pass, preflight
+packet, rollback or revert plan, remote head verification, and post-push state
+sync. Push_L2 must not cover generated image binaries, runs artifacts, accepted
+sample promotion, production candidate creation, memory write, package or
+dependency change, or real executor runtime code.
+
+Force push, history rewrite, tag, release, deploy, destructive action, secret
+file change, non-fast-forward push, branch mismatch, unreviewed or broad diff,
+uncapped cost, and unbounded loop remain Push_L0_forbidden. The local validator
+surface is `scripts/validate_smart_v3_push_safety_lane.js`.
+
 Cost unknown, missing cost tracking, uncapped cost, or a missing call budget is
 Red for real external Amber actions. Local-only receipt trials and replays must
 record cost as `0` or `not_applicable`.
@@ -321,9 +358,11 @@ tests/schema_examples/autopilot_receipt_registry.example.json
 tests/schema_examples/autopilot_execution_receipt.example.json
 tests/schema_examples/bounded_l4_autopilot_requirements.example.json
 tests/schema_examples/bounded_l4_executor_preflight_packet.example.json
+tests/schema_examples/smart_v3_push_safety_lane.example.json
 scripts/validate_autopilot_governance_kernel.js
 scripts/validate_bounded_l4_autopilot_requirements.js
 scripts/validate_bounded_l4_executor_preflight_contract.js
+scripts/validate_smart_v3_push_safety_lane.js
 ```
 
 The validator must prove the Green / Amber / Red definitions, default envelope

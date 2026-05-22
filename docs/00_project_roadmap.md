@@ -5,10 +5,10 @@
 ## 当前产品主线恢复点
 
 ```yaml
-current_phase: v0_3_7_bounded_l4_executor_preflight_contract_gate
+current_phase: v0_3_7a_push_safety_lane_gate
 phase_status: LOCAL_DOCS_SCHEMA_VALIDATOR_PLANNING_GATE_IN_PROGRESS
-source_phase: v0_3_6a_post_push_state_sync_slice_registration_patch
-current_goal: define_bounded_l4_executor_preflight_contract_without_real_executor
+source_phase: v0_3_7_post_push_state_sync
+current_goal: define_smart_v3_push_safety_lane_without_push_execution
 long_term_goal: v0_3_controlled_real_provider_production_loop
 semantic_tightening_active: true
 current_boundary_semantics_cleanup_active: true
@@ -28,11 +28,13 @@ v0_3_5_visual_asset_promotion_gate_design_active: true
 v0_3_6_bounded_l4_autopilot_requirements_and_amber_subclass_gate_active: true
 v0_3_6a_post_push_state_sync_slice_registration_patch_active: true
 v0_3_7_bounded_l4_executor_preflight_contract_gate_active: true
+v0_3_7_post_push_state_sync_active: true
+v0_3_7a_push_safety_lane_gate_active: true
 post_push_state:
-  current_remote_head: 313def823dde746b75f151b8b3d3e28c6dc9e246
-  pushed_commit: 313def823dde746b75f151b8b3d3e28c6dc9e246
+  current_remote_head: b5cb845ac280e463c3825ca0bc20e5abc772c421
+  pushed_commit: b5cb845ac280e463c3825ca0bc20e5abc772c421
   pushed_commits:
-    - 313def823dde746b75f151b8b3d3e28c6dc9e246
+    - b5cb845ac280e463c3825ca0bc20e5abc772c421
   pushed_ref: origin/master
   push_status: completed_remote_synced_after_guarded_push
   ahead_behind_after_push: "0 0"
@@ -61,6 +63,22 @@ bounded_l4_executor_preflight_contract:
   task_lock_required: true
   execute_one_action_only_per_loop: true
   max_repair_attempts_per_task: 1
+  future_push_allowed: false
+push_safety_lane:
+  policy_doc_ref: docs/V0_3_7A_PUSH_SAFETY_LANE_GATE.md
+  schema_ref: schemas/smart_v3_push_safety_lane.schema.yaml
+  fixture_ref: tests/schema_examples/smart_v3_push_safety_lane.example.json
+  validator_ref: scripts/validate_smart_v3_push_safety_lane.js
+  push_not_always_red_after_policy: true
+  push_safety_lane_independent_from_task_lane: true
+  Push_L0_forbidden_defined: true
+  Push_L1_green_auto_defined: true
+  Push_L2_amber_auto_guarded_defined: true
+  Push_L3_red_manual_defined: true
+  force_push_always_manual_or_forbidden: true
+  tag_release_deploy_always_manual_or_forbidden: true
+  secret_destructive_always_manual_or_forbidden: true
+  push_performed_by_this_gate: false
   future_push_allowed: false
 visual_asset_governance:
   asset_authorization_registry_ref: assets/visual_asset_authorization_registry.example.json

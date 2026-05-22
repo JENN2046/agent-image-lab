@@ -81,6 +81,7 @@ $requiredFiles = @(
   'scripts/validate_autopilot_amber_action_packet_preflight.js',
   'scripts/validate_bounded_l4_autopilot_requirements.js',
   'scripts/validate_bounded_l4_executor_preflight_contract.js',
+  'scripts/validate_smart_v3_push_safety_lane.js',
   'scripts/validate_local_checkpoint_manifest.js',
   'scripts/validate_local_commit_scope.js',
   'scripts/validate_post_push_state.js',
@@ -285,6 +286,7 @@ $requiredFiles = @(
   'docs/V0_3_4_VISUAL_ASSET_GOVERNANCE_AND_RECEIPT_STATE_RECONCILIATION.md',
   'docs/V0_3_6_BOUNDED_L4_AUTOPILOT_REQUIREMENTS_AND_AMBER_SUBCLASS_GATE.md',
   'docs/V0_3_7_BOUNDED_L4_EXECUTOR_PREFLIGHT_CONTRACT_GATE.md',
+  'docs/V0_3_7A_PUSH_SAFETY_LANE_GATE.md',
   'docs/V0_3_CONTROLLED_REAL_PROVIDER_PRODUCTION_LOOP.md',
   'docs/AUTOPILOT_EVOLUTION_ENGINE.md',
   'docs/AUTOPILOT_COMPLETE_READINESS_GATE.md',
@@ -293,6 +295,7 @@ $requiredFiles = @(
   'schemas/autopilot_execution_receipt.schema.yaml',
   'schemas/autopilot_receipt_registry.schema.yaml',
   'schemas/bounded_l4_executor_preflight_packet.schema.yaml',
+  'schemas/smart_v3_push_safety_lane.schema.yaml',
   'schemas/autopilot_amber_action_packet.schema.yaml',
   'schemas/autopilot_goal.schema.yaml',
   'schemas/autopilot_route_plan.schema.yaml',
@@ -323,6 +326,7 @@ $requiredFiles = @(
   'tests/schema_examples/autopilot_receipt_registry_negative_cases.example.json',
   'tests/schema_examples/bounded_l4_autopilot_requirements.example.json',
   'tests/schema_examples/bounded_l4_executor_preflight_packet.example.json',
+  'tests/schema_examples/smart_v3_push_safety_lane.example.json',
   'scripts/validate_codex_session_image_import.js',
   'scripts/validate_review_result_protocol.js',
   'scripts/validate_review_decision_package.js',
@@ -12318,6 +12322,37 @@ process.exit(child.status || 0);
     }
     if ($boundedL4ExecutorPreflightContract.provider_call_performed -ne $false -or $boundedL4ExecutorPreflightContract.image_generation_performed -ne $false -or $boundedL4ExecutorPreflightContract.DailyNote_write_performed -ne $false -or $boundedL4ExecutorPreflightContract.VCP_memory_write_performed -ne $false -or $boundedL4ExecutorPreflightContract.runtime_call_performed -ne $false -or $boundedL4ExecutorPreflightContract.secret_value_read_performed -ne $false -or $boundedL4ExecutorPreflightContract.commit_performed -ne $false -or $boundedL4ExecutorPreflightContract.push_performed -ne $false) {
       Add-Failure "Bounded L4 executor preflight contract must not perform provider, image, memory, runtime, secret, commit, or push actions"
+    }
+  }
+
+  $smartV3PushSafetyLaneOutput = & node (Join-Path $Root 'scripts/validate_smart_v3_push_safety_lane.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Smart v3 push safety lane validation exited with failure"
+  } else {
+    $smartV3PushSafetyLane = ($smartV3PushSafetyLaneOutput -join "`n") | ConvertFrom-Json
+    if ($smartV3PushSafetyLane.passed -ne $true -or $smartV3PushSafetyLane.phase -ne 'v0_3_7a_push_safety_lane_gate') {
+      Add-Failure "Smart v3 push safety lane validation must pass"
+    }
+    if ($smartV3PushSafetyLane.push_not_always_red_after_policy -ne $true -or $smartV3PushSafetyLane.push_safety_lane_independent_from_task_lane -ne $true) {
+      Add-Failure "Smart v3 push safety lane must separate push risk from task lane risk"
+    }
+    if ($smartV3PushSafetyLane.Push_L0_forbidden_defined -ne $true -or $smartV3PushSafetyLane.Push_L1_green_auto_defined -ne $true -or $smartV3PushSafetyLane.Push_L2_amber_auto_guarded_defined -ne $true -or $smartV3PushSafetyLane.Push_L3_red_manual_defined -ne $true) {
+      Add-Failure "Smart v3 push safety lane must define all four push safety levels"
+    }
+    if ($smartV3PushSafetyLane.force_push_always_manual_or_forbidden -ne $true -or $smartV3PushSafetyLane.tag_release_deploy_always_manual_or_forbidden -ne $true -or $smartV3PushSafetyLane.secret_destructive_always_manual_or_forbidden -ne $true) {
+      Add-Failure "Smart v3 push safety lane must keep force push, tag/release/deploy, secret, and destructive actions non-auto-pushable"
+    }
+    if ($smartV3PushSafetyLane.Push_L1_no_assets_runs_images_package_files -ne $true -or $smartV3PushSafetyLane.Push_L2_no_memory_production_generated_binary_by_default -ne $true) {
+      Add-Failure "Smart v3 push safety lane must block L1 unsafe files and L2 side-effect artifacts"
+    }
+    if ($smartV3PushSafetyLane.negative_case_count -lt 17 -or $smartV3PushSafetyLane.caught_negative_case_count -ne $smartV3PushSafetyLane.negative_case_count -or $smartV3PushSafetyLane.all_negative_cases_caught -ne $true) {
+      Add-Failure "Smart v3 push safety lane must catch every required negative case"
+    }
+    if ($smartV3PushSafetyLane.force_push_auto_allowed -ne $false -or $smartV3PushSafetyLane.tag_release_deploy_auto_allowed -ne $false -or $smartV3PushSafetyLane.secret_destructive_auto_allowed -ne $false) {
+      Add-Failure "Smart v3 push safety lane must never auto-allow force push, tag/release/deploy, secret, or destructive actions"
+    }
+    if ($smartV3PushSafetyLane.provider_call_performed -ne $false -or $smartV3PushSafetyLane.image_generation_performed -ne $false -or $smartV3PushSafetyLane.DailyNote_write_performed -ne $false -or $smartV3PushSafetyLane.VCP_memory_write_performed -ne $false -or $smartV3PushSafetyLane.runtime_call_performed -ne $false -or $smartV3PushSafetyLane.secret_value_read_performed -ne $false -or $smartV3PushSafetyLane.commit_performed -ne $false -or $smartV3PushSafetyLane.push_performed -ne $false) {
+      Add-Failure "Smart v3 push safety lane must not perform provider, image, memory, runtime, secret, commit, or push actions"
     }
   }
 

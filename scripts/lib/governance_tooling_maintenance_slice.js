@@ -215,6 +215,25 @@ const EXPECTED_V0_3_7_BOUNDED_L4_EXECUTOR_PREFLIGHT_CONTRACT_SLICE = [
   "tests/schema_examples/bounded_l4_executor_preflight_packet.example.json"
 ].sort();
 
+const EXPECTED_V0_3_7A_PUSH_SAFETY_LANE_SLICE = [
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  ".agent_board/VALIDATION_LOG.md",
+  "AGENTS.autopilot-overlay.md",
+  "AGENTS.md",
+  "docs/00_project_roadmap.md",
+  "docs/SMART_AUTOPILOT_GOVERNANCE_KERNEL.md",
+  "docs/STANDING_OWNER_AUTOMATIC_AUTHORIZATION_POLICY.md",
+  "docs/V0_3_7A_PUSH_SAFETY_LANE_GATE.md",
+  "schemas/smart_v3_push_safety_lane.schema.yaml",
+  "scripts/lib/governance_tooling_maintenance_slice.js",
+  "scripts/validate_mvp.ps1",
+  "scripts/validate_smart_v3_push_safety_lane.js",
+  "tests/schema_examples/smart_v3_push_safety_lane.example.json"
+].sort();
+
 const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "governance_tooling_maintenance_slice_v1",
@@ -255,6 +274,10 @@ const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "v0_3_7_bounded_l4_executor_preflight_contract_slice",
     files: EXPECTED_V0_3_7_BOUNDED_L4_EXECUTOR_PREFLIGHT_CONTRACT_SLICE
+  },
+  {
+    id: "v0_3_7a_push_safety_lane_slice",
+    files: EXPECTED_V0_3_7A_PUSH_SAFETY_LANE_SLICE
   }
 ];
 
@@ -463,6 +486,11 @@ function governanceToolingMaintenanceSliceSelfCheck() {
         === "v0_3_7_bounded_l4_executor_preflight_contract_slice"
     },
     {
+      check: "exact_slice_matches_v0_3_7a_push_safety_lane",
+      passed: findMatchingGovernanceToolingSlice(EXPECTED_V0_3_7A_PUSH_SAFETY_LANE_SLICE)?.id
+        === "v0_3_7a_push_safety_lane_slice"
+    },
+    {
       check: "exact_slice_rejects_missing_file",
       passed: findMatchingGovernanceToolingSlice(EXPECTED_GOVERNANCE_TOOLING_MAINTENANCE_SLICE.slice(1)) === null
     },
@@ -498,6 +526,7 @@ module.exports = {
   EXPECTED_V0_3_6_BOUNDED_L4_AUTOPILOT_REQUIREMENTS_SLICE,
   EXPECTED_V0_3_6_POST_PUSH_STATE_SYNC_SLICE,
   EXPECTED_V0_3_7_BOUNDED_L4_EXECUTOR_PREFLIGHT_CONTRACT_SLICE,
+  EXPECTED_V0_3_7A_PUSH_SAFETY_LANE_SLICE,
   GOVERNANCE_TOOLING_ALLOWED_SLICES,
   buildGovernanceToolingMaintenanceSliceReport,
   fileAllowedInGovernanceToolingSlice,

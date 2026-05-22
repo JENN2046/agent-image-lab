@@ -195,6 +195,44 @@ execute_one_action_only_per_loop: true
 stale_lock_is_red_or_blocked: true
 ```
 
+## Push Safety Lane
+
+Push Safety Lane is separate from the Smart v3 task lane. Green / Amber / Red
+classifies the task action. Push_L0 / Push_L1 / Push_L2 / Push_L3 classifies the
+remote ref update. A local Green task does not automatically make its push
+Green.
+
+```yaml
+push_not_always_red_after_policy: true
+Push_L0_forbidden:
+  auto_push_allowed: false
+Push_L1_green_auto:
+  auto_push_allowed: true
+  scope: narrow docs/status/exact-slice only
+Push_L2_amber_auto_guarded:
+  auto_push_allowed: true
+  scope: bounded governance artifacts only
+Push_L3_red_manual:
+  user_authorization_required: true
+```
+
+Push_L1 requires worktree clean, exactly one commit ahead, fast-forward only,
+origin/master upstream, exact slice recognized, no assets, no runs, no image
+files, no package files, no runtime code, no staged or untracked files, `git
+diff --check`, `npm run validate:mvp`, post-push verification, and post-push
+state sync.
+
+Push_L2 requires bounded commit count, exact changed files, phase validator
+pass, push preflight packet, rollback or revert plan, remote-head verification,
+and post-push state sync. It must not cover generated binaries, memory write,
+production candidate, accepted sample promotion, package or dependency changes,
+runs artifacts, or real executor runtime code.
+
+Push_L3 remains manual for image binaries, runs artifacts, package or dependency
+changes, runtime code, real executor changes, memory writes, production
+candidates, accepted sample promotion, provider side effects without receipt,
+unreviewed diffs, broad diffs, and uncertain branch or upstream state.
+
 ## Continuation Rule
 
 Codex may continue through multiple Amber steps without asking the user when all

@@ -156,6 +156,22 @@ Amber action's `max_write_files` budget. It must not cross Red Lane gates.
 
 Red Lane includes push, tag, release, deploy, destructive actions, force push/history rewrite, secret value read/edit, raw private data or raw chat history exposure, external repository broad modification, broad VCPChat/VCPToolBox writes, uncapped cost, unbounded loops, overwriting existing artifacts without explicit overwrite allowance, dependency changes without exact package/action lists, and validation failure requiring non-obvious judgment.
 
+Push Safety Lane is a separate remote-ref risk classifier introduced by
+v0.3.7a. Green / Amber / Red classifies task action risk; Push_L0 / Push_L1 /
+Push_L2 / Push_L3 classifies push risk. Push is no longer modeled as always Red
+after the policy, but force push, history rewrite, tag, release, deploy,
+destructive action, secret-sensitive action, non-fast-forward push, branch
+mismatch, unreviewed or broad diff, uncapped cost, and unbounded loop remain
+Push_L0_forbidden. Push_L1_green_auto is limited to one fast-forward
+docs/status/exact-slice commit with clean worktree, no staged or untracked
+files, no assets/runs/images/package/runtime code, `git diff --check` and `npm
+run validate:mvp` passing, plus post-push verification and state sync.
+Push_L2_amber_auto_guarded is limited to bounded governance artifacts with a
+preflight packet, exact changed files, phase validator pass, rollback or revert
+plan, remote-head verification, and no generated binaries, memory write,
+production candidate, package/dependency change, runs artifact, or real executor
+runtime code. Push_L3_red_manual still requires user authorization.
+
 ---
 
 ## 1. Project-Specific Hard Stop Gates

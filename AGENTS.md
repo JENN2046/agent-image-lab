@@ -1701,6 +1701,52 @@ boundary:
 can push <hash>: yes/no
 ```
 
-### Scope
+### Push Safety Lane
 
-Push Safety Gate is a read-only governance layer. It does not authorize push. Push still requires explicit user authorization under Section 8.
+As of v0.3.7a, push is classified by a separate Push Safety Lane in addition to
+the normal task Green / Amber / Red lane. Green / Amber / Red classifies task
+action risk. Push_L0 / Push_L1 / Push_L2 / Push_L3 classifies remote ref update
+risk. A task can be Green while its push remains Push_L3_red_manual.
+
+Push Safety Lane is defined in:
+
+```text
+docs/V0_3_7A_PUSH_SAFETY_LANE_GATE.md
+schemas/smart_v3_push_safety_lane.schema.yaml
+tests/schema_examples/smart_v3_push_safety_lane.example.json
+scripts/validate_smart_v3_push_safety_lane.js
+```
+
+Push_L0_forbidden has `auto_push_allowed: false` and covers force push, history
+rewrite, tag, release, deploy, destructive Git or filesystem action, secret
+value read or secret file change, broad external repository modification,
+non-fast-forward push, branch mismatch, unreviewed or broad diff, uncapped cost,
+and unbounded loop.
+
+Push_L1_green_auto has `auto_push_allowed: true` only for a narrow
+docs/status/exact-slice push when all required checks pass: worktree clean,
+exactly one commit ahead, fast-forward only, upstream exactly origin/master,
+recognized exact slice, no assets, no runs, no image files, no package files, no
+runtime code, no untracked files, no staged files before push, `git diff
+--check` passed, `npm run validate:mvp` passed, post-push verification required,
+and post-push state sync required.
+
+Push_L2_amber_auto_guarded has `auto_push_allowed: true` only for bounded
+governance artifacts with at most two commits, exact changed files, phase
+validator pass, push preflight packet, rollback or revert plan, remote head
+verification, and post-push state sync. It must not cover generated image
+binaries, runs artifacts, accepted sample promotion, production candidate
+creation, memory write, package or dependency change, or real executor runtime
+code.
+
+Push_L3_red_manual keeps `user_authorization_required: true` for image binary
+commits, runs artifact commits, package or dependency changes, runtime code,
+real executor changes, memory writes, production candidates, accepted sample
+promotion, provider side effects without receipt, unreviewed diffs, broad diffs,
+and branch or upstream uncertainty.
+
+Force push, tag, release, deploy, destructive action, and secret-sensitive
+actions remain non-auto-pushable. Every allowed push lane must run preflight,
+verify the remote head after push, and complete a Green Lane post-push state
+sync. This section defines future classification; it does not itself perform a
+push.
