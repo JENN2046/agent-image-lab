@@ -95,6 +95,7 @@ $requiredFiles = @(
   'scripts/validate_visual_evidence_consistency_hardening.js',
   'scripts/validate_controlled_generation_readiness_packet.js',
   'scripts/validate_prompt_package_preview.js',
+  'scripts/validate_visual_review_replay_set.js',
   'scripts/validate_visual_sample_memory_policy.js',
   'scripts/validate_15_day_architecture_checkpoint.js',
   'scripts/validate_local_checkpoint_manifest.js',
@@ -12734,6 +12735,34 @@ process.exit(child.status || 0);
     }
     if ($promptPackagePreview.Push_L2_exercised -ne $false -or $promptPackagePreview.real_executor_implemented_now -ne $false -or $promptPackagePreview.provider_call_performed -ne $false -or $promptPackagePreview.image_generation_performed -ne $false -or $promptPackagePreview.runtime_call_performed -ne $false -or $promptPackagePreview.secret_value_read_performed -ne $false -or $promptPackagePreview.VCP_memory_write_performed -ne $false -or $promptPackagePreview.DailyNote_write_performed -ne $false -or $promptPackagePreview.production_candidate_created -ne $false -or $promptPackagePreview.accepted_sample_auto_promotion -ne $false -or $promptPackagePreview.memory_seed_promoted -ne $false -or $promptPackagePreview.package_dependency_change_performed -ne $false -or $promptPackagePreview.commit_performed -ne $false -or $promptPackagePreview.push_performed -ne $false) {
       Add-Failure "Prompt Package Preview must not perform Push_L2, executor, provider, image, runtime, secret, memory, DailyNote, production, accepted-sample, memory-seed, dependency, commit, or push actions"
+    }
+  }
+
+  $visualReviewReplaySetOutput = & node (Join-Path $Root 'scripts/validate_visual_review_replay_set.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Visual Review Replay Set validation exited with failure"
+  } else {
+    $visualReviewReplaySet = ($visualReviewReplaySetOutput -join "`n") | ConvertFrom-Json
+    if ($visualReviewReplaySet.passed -ne $true -or $visualReviewReplaySet.phase -ne 'v0_5_2_visual_review_replay_set') {
+      Add-Failure "Visual Review Replay Set validation must pass"
+    }
+    if ($visualReviewReplaySet.replay_doc_present -ne $true -or $visualReviewReplaySet.replay_schema_present -ne $true -or $visualReviewReplaySet.replay_report_present -ne $true -or $visualReviewReplaySet.replay_fixture_present -ne $true -or $visualReviewReplaySet.replay_fail_fixture_present -ne $true) {
+      Add-Failure "Visual Review Replay Set must define doc, schema, report, pass fixture, and fail fixture"
+    }
+    if ($visualReviewReplaySet.source_review_pack_verified -ne $true -or $visualReviewReplaySet.source_semantic_hardening_verified -ne $true -or $visualReviewReplaySet.source_prompt_preview_verified -ne $true) {
+      Add-Failure "Visual Review Replay Set must bind to review pack, semantic hardening, and prompt preview"
+    }
+    if ($visualReviewReplaySet.same_input_produces_same_decision_contract -ne $true -or $visualReviewReplaySet.failure_taxonomy_stable -ne $true -or $visualReviewReplaySet.correction_hint_stable -ne $true -or $visualReviewReplaySet.memory_flags_stay_false -ne $true -or $visualReviewReplaySet.replay_run_count -lt 3) {
+      Add-Failure "Visual Review Replay Set must prove replay consistency over at least three runs"
+    }
+    if ($visualReviewReplaySet.negative_case_count -lt 18 -or $visualReviewReplaySet.caught_negative_case_count -ne $visualReviewReplaySet.negative_case_count -or $visualReviewReplaySet.all_negative_cases_caught -ne $true -or $visualReviewReplaySet.input_drift_caught -ne $true -or $visualReviewReplaySet.decision_contract_drift_caught -ne $true -or $visualReviewReplaySet.failure_taxonomy_drift_caught -ne $true -or $visualReviewReplaySet.correction_hint_drift_caught -ne $true -or $visualReviewReplaySet.memory_flag_drift_caught -ne $true -or $visualReviewReplaySet.image_binary_read_caught -ne $true -or $visualReviewReplaySet.provider_call_caught -ne $true -or $visualReviewReplaySet.image_generation_caught -ne $true -or $visualReviewReplaySet.memory_write_caught -ne $true -or $visualReviewReplaySet.raw_local_path_caught -ne $true) {
+      Add-Failure "Visual Review Replay Set must catch every required negative case"
+    }
+    if ($visualReviewReplaySet.metadata_only -ne $true -or $visualReviewReplaySet.dry_run_only -ne $true -or $visualReviewReplaySet.replay_only -ne $true -or $visualReviewReplaySet.image_binary_read_performed -ne $false) {
+      Add-Failure "Visual Review Replay Set must remain metadata-only, dry-run-only, replay-only, and avoid image reads"
+    }
+    if ($visualReviewReplaySet.Push_L2_exercised -ne $false -or $visualReviewReplaySet.real_executor_implemented_now -ne $false -or $visualReviewReplaySet.provider_call_performed -ne $false -or $visualReviewReplaySet.image_generation_performed -ne $false -or $visualReviewReplaySet.runtime_call_performed -ne $false -or $visualReviewReplaySet.secret_value_read_performed -ne $false -or $visualReviewReplaySet.VCP_memory_write_performed -ne $false -or $visualReviewReplaySet.DailyNote_write_performed -ne $false -or $visualReviewReplaySet.production_candidate_created -ne $false -or $visualReviewReplaySet.accepted_sample_auto_promotion -ne $false -or $visualReviewReplaySet.memory_seed_promoted -ne $false -or $visualReviewReplaySet.package_dependency_change_performed -ne $false -or $visualReviewReplaySet.commit_performed -ne $false -or $visualReviewReplaySet.push_performed -ne $false) {
+      Add-Failure "Visual Review Replay Set must not perform Push_L2, executor, provider, image, runtime, secret, memory, DailyNote, production, accepted-sample, memory-seed, dependency, commit, or push actions"
     }
   }
 

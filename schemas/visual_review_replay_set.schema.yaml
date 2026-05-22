@@ -1,0 +1,32 @@
+id: visual_review_replay_set
+version: v0_1
+phase: v0_5_2_visual_review_replay_set
+type: object
+required:
+  - replay_set_id
+  - version
+  - phase
+  - source_review_pack_ref
+  - source_semantic_hardening_ref
+  - source_prompt_preview_ref
+  - replay_runs
+  - replay_consistency
+  - boundaries
+  - side_effects
+properties:
+  replay_runs:
+    type: array
+    minItems: 3
+  replay_consistency:
+    required:
+      - same_input_produces_same_decision_contract
+      - failure_taxonomy_stable
+      - correction_hint_stable
+      - memory_flags_stay_false
+  decision_contract:
+    required:
+      - result
+      - accepted_sample_eligible
+      - production_candidate_eligible
+      - memory_seed_eligible
+      - memory_suitability

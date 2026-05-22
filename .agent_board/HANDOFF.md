@@ -16672,3 +16672,18 @@ prompt_preview_fields: positive_constraints; negative_constraints; avoid_fragmen
 side_effects: provider_call_performed=false; image_generation_performed=false; VCP_memory_write_performed=false; DailyNote_write_performed=false; runtime_call_performed=false; production_candidate_created=false; accepted_sample_auto_promotion=false; memory_seed_promoted=false; Push_L2_exercised=false; real_executor_implemented_now=false; actual_generation_calls=0.
 validation: git diff --check passed_with_line_ending_warnings_only; node --check scripts/validate_prompt_package_preview.js passed; node --check scripts/lib/governance_tooling_maintenance_slice.js passed; node scripts/validate_prompt_package_preview.js passed with 18/18 negative cases caught; node scripts/validate_smart_v3_push_safety_lane.js passed; node scripts/validate_agent_board_state.js passed; powershell validate_mvp.ps1 passed; npm run validate:mvp passed.
 next: local commit, post-commit review, and Push_L3 manual guarded push classification.
+---
+
+## Handoff - v0.5.2 Visual Review Replay Set
+
+status: completed_validated_pending_local_commit
+source_local_commit: 897d62b
+current_gate_phase: v0_5_2_visual_review_replay_set
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+changed: docs/V0_5_2_VISUAL_REVIEW_REPLAY_SET.md; schemas/visual_review_replay_set.schema.yaml; reports/visual_asset_eval_dry_run/v0_5_2_review_replay_set.json; tests/schema_examples/visual_review_replay_set.example.json; tests/schema_examples/visual_review_replay_set_fail.example.json; scripts/validate_visual_review_replay_set.js; scripts/validate_mvp.ps1; scripts/lib/governance_tooling_maintenance_slice.js; docs/00_project_roadmap.md; .agent_board resume surfaces.
+replay_checks: same_input_produces_same_decision_contract; failure_taxonomy_stable; correction_hint_stable; memory_flags_stay_false.
+side_effects: provider_call_performed=false; image_generation_performed=false; VCP_memory_write_performed=false; DailyNote_write_performed=false; runtime_call_performed=false; production_candidate_created=false; accepted_sample_auto_promotion=false; memory_seed_promoted=false; Push_L2_exercised=false; real_executor_implemented_now=false.
+validation: git diff --check passed_with_line_ending_warnings_only; node --check scripts/validate_visual_review_replay_set.js passed; node --check scripts/lib/governance_tooling_maintenance_slice.js passed; node scripts/validate_visual_review_replay_set.js passed with 18/18 negative cases caught; node scripts/validate_smart_v3_push_safety_lane.js passed; node scripts/validate_agent_board_state.js passed; powershell validate_mvp.ps1 passed; npm run validate:mvp passed.
+next: local commit, post-commit review, and Push_L3 manual guarded push classification.

@@ -19217,3 +19217,45 @@ commit_performed: pending
 push_performed: false
 recommended_next: local_commit_post_commit_review_and_Push_L3_manual_guarded_classification
 ```
+---
+
+## Current Run State - v0.5.2 Visual Review Replay Set
+
+```text
+phase: v0_5_2_visual_review_replay_set
+phase_id: v0_5_2_visual_review_replay_set
+status: completed_validated_pending_local_commit
+mode: Green Lane doc/schema/report/fixture/validator/status compact batch
+source_local_commit: 897d62b
+source_phase: v0_5_1_prompt_package_preview
+current_gate_phase: v0_5_2_visual_review_replay_set
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+objective: establish repeatable visual review replay fixtures for the same asset
+same_input_produces_same_decision_contract: true
+failure_taxonomy_stable: true
+correction_hint_stable: true
+memory_flags_stay_false: true
+replay_run_count: 3
+metadata_only: true
+dry_run_only: true
+replay_only: true
+image_binary_read_performed: false
+Push_L2_exercised: false
+real_executor_implemented_now: false
+provider_call_performed: false
+image_generation_performed: false
+runtime_call_performed: false
+secret_value_read_performed: false
+VCP_memory_write_performed: false
+DailyNote_write_performed: false
+production_candidate_created: false
+accepted_sample_auto_promotion: false
+memory_seed_promoted: false
+package_dependency_change_performed: false
+push_allowed: false
+commit_performed: pending
+push_performed: false
+recommended_next: local_commit_post_commit_review_and_Push_L3_manual_guarded_classification
+```

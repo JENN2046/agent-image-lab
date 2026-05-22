@@ -1,0 +1,88 @@
+{
+  "visual_review_replay_set": {
+    "replay_set_id": "visual_review_replay_set_v0_5_2_negative_fixture",
+    "version": "v0_1",
+    "phase": "v0_5_2_visual_review_replay_set",
+    "source_review_pack_ref": "reports/visual_asset_eval_dry_run/v0_4_1_safe_portrait_review_pack.json",
+    "source_semantic_hardening_ref": "tests/schema_examples/visual_review_semantics_hardening.example.json",
+    "source_prompt_preview_ref": "reports/visual_asset_eval_dry_run/v0_5_1_prompt_package_preview.json",
+    "input_contract": {
+      "asset_id": "visual-asset-v0-3-3-safe-portrait-001-png",
+      "review_pack_id": "visual_asset_review_pack_v0_4_1_safe_portrait_001",
+      "review_mode": "dry_run_review_pack",
+      "image_binary_read_performed": false
+    },
+    "decision_contract": {
+      "result": "accept",
+      "accepted_sample_eligible": true,
+      "production_candidate_eligible": true,
+      "memory_seed_eligible": true,
+      "memory_suitability": true,
+      "requires_human_review": false
+    },
+    "stable_failure_taxonomy": [
+      "commercial_fitness_failure"
+    ],
+    "stable_correction_hint": {
+      "correction_hint_ref": "tests/schema_examples/visual_prompt_correction_hint.example.json",
+      "correction_hint_categories": [
+        "commercial_fitness_failure"
+      ],
+      "prompt_preview_ref": "reports/visual_asset_eval_dry_run/v0_5_1_prompt_package_preview.json"
+    },
+    "replay_runs": [
+      {
+        "replay_id": "negative_replay_001",
+        "input_asset_id": "visual-asset-v0-3-3-safe-portrait-001-png",
+        "decision_contract_hash": "accept_true_true_true_true_human_review_false",
+        "failure_taxonomy": [
+          "commercial_fitness_failure"
+        ],
+        "correction_hint_ref": "tests/schema_examples/visual_prompt_correction_hint.example.json",
+        "memory_suitability": true,
+        "VCP_memory_write_allowed": true,
+        "DailyNote_write_allowed": true
+      }
+    ],
+    "replay_consistency": {
+      "same_input_produces_same_decision_contract": false,
+      "failure_taxonomy_stable": false,
+      "correction_hint_stable": false,
+      "memory_flags_stay_false": false
+    },
+    "boundaries": {
+      "metadata_only": true,
+      "dry_run_only": true,
+      "replay_only": true,
+      "image_binary_read_performed": false,
+      "provider_call_performed": true,
+      "image_generation_performed": true,
+      "VCP_memory_write_performed": true,
+      "DailyNote_write_performed": true,
+      "runtime_call_performed": false,
+      "secret_value_read_performed": false,
+      "production_candidate_created": true,
+      "accepted_sample_auto_promotion": true,
+      "memory_seed_promoted": true,
+      "real_executor_implemented_now": false,
+      "Push_L2_exercised": true,
+      "package_dependency_change_performed": false,
+      "commit_performed": false,
+      "push_performed": false
+    },
+    "side_effects": {
+      "provider_call_performed": true,
+      "image_generation_performed": true,
+      "VCP_memory_write_performed": true,
+      "DailyNote_write_performed": true,
+      "runtime_call_performed": false,
+      "secret_value_read_performed": false,
+      "production_candidate_created": true,
+      "accepted_sample_auto_promotion": true,
+      "memory_seed_promoted": true,
+      "package_dependency_change_performed": false,
+      "commit_performed": false,
+      "push_performed": false
+    }
+  }
+}
