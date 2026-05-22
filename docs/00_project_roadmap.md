@@ -2,6 +2,52 @@
 
 本文是 Agent Image Lab 的总路线图，用来把 v0.2 基线、v0.3 授权门槛、MVP-B dry-run 和未来真实闭环串成一条可执行路径。
 
+## v0.5.0 - Controlled Generation Readiness Packet
+
+Status: completed_validated_pending_local_commit.
+
+Purpose:
+- Define a controlled generation readiness packet without executing generation.
+- Preserve a future `max_generation_calls` cap while proving current `actual_generation_calls` is `0`.
+- Require `prompt_package_preview`, `output_policy`, `review_gate`, `failure_stop_condition`, and `no_memory_by_default`.
+
+Artifacts:
+- `docs/V0_5_0_CONTROLLED_GENERATION_READINESS_PACKET.md`
+- `schemas/controlled_generation_readiness_packet.schema.yaml`
+- `reports/visual_asset_eval_dry_run/v0_5_0_controlled_generation_readiness_packet.json`
+- `tests/schema_examples/controlled_generation_readiness_packet.example.json`
+- `tests/schema_examples/controlled_generation_readiness_packet_fail.example.json`
+- `scripts/validate_controlled_generation_readiness_packet.js`
+
+Boundary state:
+- `source_local_commit: c3e4272`
+- `source_phase: v0_4_9_visual_evidence_consistency_hardening`
+- `current_gate_phase: v0_5_0_controlled_generation_readiness_packet`
+- `active current phase: v0_3_3_first_live_generation_pilot`
+- `resume_guard_source_phase: v0_3_2_live_candidate_action_packet`
+- `next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial`
+- `prompt_package_preview_present: true`
+- `max_generation_calls_present: true`
+- `output_policy_present: true`
+- `review_gate_present: true`
+- `failure_stop_condition_present: true`
+- `no_memory_by_default_present: true`
+- `actual_generation_calls: 0`
+- `provider_call_performed: false`
+- `image_generation_performed: false`
+- `runtime_call_performed: false`
+- `secret_value_read_performed: false`
+- `VCP_memory_write_performed: false`
+- `DailyNote_write_performed: false`
+- `production_candidate_created: false`
+- `accepted_sample_auto_promotion: false`
+- `memory_seed_promoted: false`
+- `Push_L2_exercised: false`
+- `real_executor_implemented_now: false`
+- `push_allowed: false`
+
+Recommended next: local commit, post-commit review, and Push_L3 manual guarded push classification.
+
 ## v0.4.9 - Visual Evidence Consistency Hardening
 
 Status: completed_validated_pending_local_commit.

@@ -93,6 +93,7 @@ $requiredFiles = @(
   'scripts/validate_seven_day_visual_workflow_checkpoint.js',
   'scripts/validate_visual_review_semantics_hardening.js',
   'scripts/validate_visual_evidence_consistency_hardening.js',
+  'scripts/validate_controlled_generation_readiness_packet.js',
   'scripts/validate_visual_sample_memory_policy.js',
   'scripts/validate_15_day_architecture_checkpoint.js',
   'scripts/validate_local_checkpoint_manifest.js',
@@ -12667,6 +12668,40 @@ process.exit(child.status || 0);
     }
     if ($visualEvidenceConsistencyHardening.Push_L2_exercised -ne $false -or $visualEvidenceConsistencyHardening.real_executor_implemented_now -ne $false -or $visualEvidenceConsistencyHardening.provider_call_performed -ne $false -or $visualEvidenceConsistencyHardening.image_generation_performed -ne $false -or $visualEvidenceConsistencyHardening.runtime_call_performed -ne $false -or $visualEvidenceConsistencyHardening.secret_value_read_performed -ne $false -or $visualEvidenceConsistencyHardening.VCP_memory_write_performed -ne $false -or $visualEvidenceConsistencyHardening.DailyNote_write_performed -ne $false -or $visualEvidenceConsistencyHardening.production_candidate_created -ne $false -or $visualEvidenceConsistencyHardening.accepted_sample_auto_promotion -ne $false -or $visualEvidenceConsistencyHardening.memory_seed_promoted -ne $false -or $visualEvidenceConsistencyHardening.package_dependency_change_performed -ne $false -or $visualEvidenceConsistencyHardening.commit_performed -ne $false -or $visualEvidenceConsistencyHardening.push_performed -ne $false) {
       Add-Failure "Visual Evidence Consistency Hardening must not perform Push_L2, executor, provider, image, runtime, secret, memory, DailyNote, production, accepted-sample, memory-seed, dependency, commit, or push actions"
+    }
+  }
+
+  $controlledGenerationReadinessPacketOutput = & node (Join-Path $Root 'scripts/validate_controlled_generation_readiness_packet.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Controlled Generation Readiness Packet validation exited with failure"
+  } else {
+    $controlledGenerationReadinessPacket = ($controlledGenerationReadinessPacketOutput -join "`n") | ConvertFrom-Json
+    if ($controlledGenerationReadinessPacket.passed -ne $true -or $controlledGenerationReadinessPacket.phase -ne 'v0_5_0_controlled_generation_readiness_packet') {
+      Add-Failure "Controlled Generation Readiness Packet validation must pass"
+    }
+    if ($controlledGenerationReadinessPacket.readiness_doc_present -ne $true -or $controlledGenerationReadinessPacket.readiness_schema_present -ne $true -or $controlledGenerationReadinessPacket.readiness_report_present -ne $true -or $controlledGenerationReadinessPacket.readiness_fixture_present -ne $true -or $controlledGenerationReadinessPacket.readiness_fail_fixture_present -ne $true) {
+      Add-Failure "Controlled Generation Readiness Packet must define doc, schema, report, pass fixture, and fail fixture"
+    }
+    if ($controlledGenerationReadinessPacket.source_evidence_consistency_verified -ne $true -or $controlledGenerationReadinessPacket.source_prompt_correction_hint_verified -ne $true) {
+      Add-Failure "Controlled Generation Readiness Packet must bind to evidence consistency and prompt correction hints"
+    }
+    if ($controlledGenerationReadinessPacket.prompt_package_preview_present -ne $true -or $controlledGenerationReadinessPacket.max_generation_calls_present -ne $true -or $controlledGenerationReadinessPacket.output_policy_present -ne $true -or $controlledGenerationReadinessPacket.review_gate_present -ne $true -or $controlledGenerationReadinessPacket.failure_stop_condition_present -ne $true -or $controlledGenerationReadinessPacket.no_memory_by_default_present -ne $true) {
+      Add-Failure "Controlled Generation Readiness Packet must contain every required readiness field"
+    }
+    if ($controlledGenerationReadinessPacket.max_generation_calls_bounded -ne $true -or $controlledGenerationReadinessPacket.actual_generation_calls_zero -ne $true -or $controlledGenerationReadinessPacket.provider_call_budget_consumed_zero -ne $true -or $controlledGenerationReadinessPacket.future_execution_authorized_by_this_packet -ne $false -or $controlledGenerationReadinessPacket.prompt_preview_dispatch_allowed -ne $false) {
+      Add-Failure "Controlled Generation Readiness Packet must bound future calls while keeping actual dispatch at zero"
+    }
+    if ($controlledGenerationReadinessPacket.preview_only_output_policy -ne $true -or $controlledGenerationReadinessPacket.review_gate_required -ne $true -or $controlledGenerationReadinessPacket.failure_stop_condition_required -ne $true -or $controlledGenerationReadinessPacket.no_memory_by_default -ne $true) {
+      Add-Failure "Controlled Generation Readiness Packet must preserve output, review, stop, and memory-default guards"
+    }
+    if ($controlledGenerationReadinessPacket.negative_case_count -lt 18 -or $controlledGenerationReadinessPacket.caught_negative_case_count -ne $controlledGenerationReadinessPacket.negative_case_count -or $controlledGenerationReadinessPacket.all_negative_cases_caught -ne $true -or $controlledGenerationReadinessPacket.missing_prompt_package_preview_caught -ne $true -or $controlledGenerationReadinessPacket.max_generation_calls_guard_caught -ne $true -or $controlledGenerationReadinessPacket.actual_generation_call_caught -ne $true -or $controlledGenerationReadinessPacket.output_policy_drift_caught -ne $true -or $controlledGenerationReadinessPacket.review_gate_drift_caught -ne $true -or $controlledGenerationReadinessPacket.failure_stop_condition_drift_caught -ne $true -or $controlledGenerationReadinessPacket.no_memory_by_default_drift_caught -ne $true -or $controlledGenerationReadinessPacket.provider_call_caught -ne $true -or $controlledGenerationReadinessPacket.image_generation_caught -ne $true -or $controlledGenerationReadinessPacket.memory_write_caught -ne $true -or $controlledGenerationReadinessPacket.raw_local_path_caught -ne $true) {
+      Add-Failure "Controlled Generation Readiness Packet must catch every required negative case"
+    }
+    if ($controlledGenerationReadinessPacket.planning_only -ne $true -or $controlledGenerationReadinessPacket.metadata_only -ne $true -or $controlledGenerationReadinessPacket.dry_run_only -ne $true -or $controlledGenerationReadinessPacket.image_binary_read_performed -ne $false -or $controlledGenerationReadinessPacket.actual_generation_calls -ne 0) {
+      Add-Failure "Controlled Generation Readiness Packet must remain planning-only, metadata-only, dry-run-only, and avoid image reads or calls"
+    }
+    if ($controlledGenerationReadinessPacket.Push_L2_exercised -ne $false -or $controlledGenerationReadinessPacket.real_executor_implemented_now -ne $false -or $controlledGenerationReadinessPacket.provider_call_performed -ne $false -or $controlledGenerationReadinessPacket.image_generation_performed -ne $false -or $controlledGenerationReadinessPacket.runtime_call_performed -ne $false -or $controlledGenerationReadinessPacket.secret_value_read_performed -ne $false -or $controlledGenerationReadinessPacket.VCP_memory_write_performed -ne $false -or $controlledGenerationReadinessPacket.DailyNote_write_performed -ne $false -or $controlledGenerationReadinessPacket.production_candidate_created -ne $false -or $controlledGenerationReadinessPacket.accepted_sample_auto_promotion -ne $false -or $controlledGenerationReadinessPacket.memory_seed_promoted -ne $false -or $controlledGenerationReadinessPacket.package_dependency_change_performed -ne $false -or $controlledGenerationReadinessPacket.commit_performed -ne $false -or $controlledGenerationReadinessPacket.push_performed -ne $false) {
+      Add-Failure "Controlled Generation Readiness Packet must not perform Push_L2, executor, provider, image, runtime, secret, memory, DailyNote, production, accepted-sample, memory-seed, dependency, commit, or push actions"
     }
   }
 

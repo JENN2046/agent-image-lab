@@ -1,0 +1,57 @@
+id: controlled_generation_readiness_packet
+version: v0_1
+phase: v0_5_0_controlled_generation_readiness_packet
+type: object
+required:
+  - readiness_packet_id
+  - version
+  - phase
+  - source_evidence_consistency_ref
+  - source_prompt_correction_hint_ref
+  - prompt_package_preview
+  - max_generation_calls
+  - output_policy
+  - review_gate
+  - failure_stop_condition
+  - no_memory_by_default
+  - boundaries
+  - side_effects
+properties:
+  prompt_package_preview:
+    required:
+      - preview_id
+      - selected_taxonomy_category
+      - positive_constraints
+      - negative_constraints
+      - avoid_fragments
+      - generation_dispatch_allowed
+  max_generation_calls:
+    required:
+      - configured_limit
+      - actual_generation_calls
+      - provider_call_budget_consumed
+      - future_execution_authorized_by_this_packet
+  output_policy:
+    required:
+      - preview_only
+      - actual_output_written
+      - image_binary_output_allowed
+      - production_candidate_allowed
+  review_gate:
+    required:
+      - review_required_before_acceptance
+      - evidence_consistency_required
+      - semantic_hardening_required
+      - human_acceptance_required
+  failure_stop_condition:
+    required:
+      - stop_on_provider_error
+      - stop_on_evidence_mismatch
+      - stop_on_memory_or_production_request
+      - stop_on_review_gate_failure
+  no_memory_by_default:
+    required:
+      - enabled
+      - VCP_memory_write_allowed
+      - DailyNote_write_allowed
+      - memory_seed_promotion_allowed
