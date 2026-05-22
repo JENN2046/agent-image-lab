@@ -97,6 +97,7 @@ $requiredFiles = @(
   'scripts/validate_prompt_package_preview.js',
   'scripts/validate_visual_review_replay_set.js',
   'scripts/validate_visual_memory_readonly_plan.js',
+  'scripts/validate_next_15_day_visual_workflow_checkpoint.js',
   'scripts/validate_visual_sample_memory_policy.js',
   'scripts/validate_15_day_architecture_checkpoint.js',
   'scripts/validate_local_checkpoint_manifest.js',
@@ -12792,6 +12793,34 @@ process.exit(child.status || 0);
     }
     if ($visualMemoryReadOnlyPlan.Push_L2_exercised -ne $false -or $visualMemoryReadOnlyPlan.real_executor_implemented_now -ne $false -or $visualMemoryReadOnlyPlan.provider_call_performed -ne $false -or $visualMemoryReadOnlyPlan.image_generation_performed -ne $false -or $visualMemoryReadOnlyPlan.runtime_call_performed -ne $false -or $visualMemoryReadOnlyPlan.secret_value_read_performed -ne $false -or $visualMemoryReadOnlyPlan.VCP_memory_write_performed -ne $false -or $visualMemoryReadOnlyPlan.DailyNote_write_performed -ne $false -or $visualMemoryReadOnlyPlan.production_candidate_created -ne $false -or $visualMemoryReadOnlyPlan.accepted_sample_auto_promotion -ne $false -or $visualMemoryReadOnlyPlan.memory_seed_promoted -ne $false -or $visualMemoryReadOnlyPlan.package_dependency_change_performed -ne $false -or $visualMemoryReadOnlyPlan.commit_performed -ne $false -or $visualMemoryReadOnlyPlan.push_performed -ne $false) {
       Add-Failure "Visual Memory ReadOnly Plan must not perform Push_L2, executor, provider, image, runtime, secret, memory, DailyNote, production, accepted-sample, memory-seed, dependency, commit, or push actions"
+    }
+  }
+
+  $next15DayCheckpointOutput = & node (Join-Path $Root 'scripts/validate_next_15_day_visual_workflow_checkpoint.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Next 15-Day Visual Workflow Checkpoint validation exited with failure"
+  } else {
+    $next15DayCheckpoint = ($next15DayCheckpointOutput -join "`n") | ConvertFrom-Json
+    if ($next15DayCheckpoint.passed -ne $true -or $next15DayCheckpoint.phase -ne 'v0_5_4_next_15_day_visual_workflow_checkpoint') {
+      Add-Failure "Next 15-Day Visual Workflow Checkpoint validation must pass"
+    }
+    if ($next15DayCheckpoint.checkpoint_doc_present -ne $true -or $next15DayCheckpoint.checkpoint_schema_present -ne $true -or $next15DayCheckpoint.checkpoint_report_present -ne $true -or $next15DayCheckpoint.checkpoint_fixture_present -ne $true -or $next15DayCheckpoint.checkpoint_fail_fixture_present -ne $true) {
+      Add-Failure "Next 15-Day Visual Workflow Checkpoint must define doc, schema, report, pass fixture, and fail fixture"
+    }
+    if ($next15DayCheckpoint.semantic_hardening_exists -ne $true -or $next15DayCheckpoint.evidence_consistency_exists -ne $true -or $next15DayCheckpoint.controlled_generation_readiness_packet_exists -ne $true -or $next15DayCheckpoint.prompt_package_preview_exists -ne $true -or $next15DayCheckpoint.review_replay_set_exists -ne $true -or $next15DayCheckpoint.visual_memory_readonly_remains_planning_only -ne $true) {
+      Add-Failure "Next 15-Day Visual Workflow Checkpoint must prove all v0.4.8 through v0.5.3 artifacts exist and remain bounded"
+    }
+    if ($next15DayCheckpoint.review_semantics_non_empty -ne $true -or $next15DayCheckpoint.evidence_chain_consistent -ne $true -or $next15DayCheckpoint.prompt_correction_reusable -ne $true -or $next15DayCheckpoint.controlled_generation_readiness_only -ne $true -or $next15DayCheckpoint.visual_memory_readonly_planning_only -ne $true) {
+      Add-Failure "Next 15-Day Visual Workflow Checkpoint must prove the reusable semantic review loop capabilities"
+    }
+    if ($next15DayCheckpoint.negative_case_count -lt 16 -or $next15DayCheckpoint.caught_negative_case_count -ne $next15DayCheckpoint.negative_case_count -or $next15DayCheckpoint.all_negative_cases_caught -ne $true -or $next15DayCheckpoint.semantic_hardening_missing_caught -ne $true -or $next15DayCheckpoint.evidence_consistency_missing_caught -ne $true -or $next15DayCheckpoint.readiness_packet_missing_caught -ne $true -or $next15DayCheckpoint.prompt_preview_missing_caught -ne $true -or $next15DayCheckpoint.replay_set_missing_caught -ne $true -or $next15DayCheckpoint.memory_readonly_planning_drift_caught -ne $true -or $next15DayCheckpoint.image_generation_caught -ne $true -or $next15DayCheckpoint.memory_write_caught -ne $true -or $next15DayCheckpoint.real_executor_caught -ne $true -or $next15DayCheckpoint.provider_call_caught -ne $true -or $next15DayCheckpoint.raw_local_path_caught -ne $true) {
+      Add-Failure "Next 15-Day Visual Workflow Checkpoint must catch every required negative case"
+    }
+    if ($next15DayCheckpoint.metadata_only -ne $true -or $next15DayCheckpoint.dry_run_only -ne $true -or $next15DayCheckpoint.checkpoint_only -ne $true -or $next15DayCheckpoint.image_generation -ne $false -or $next15DayCheckpoint.memory_write -ne $false -or $next15DayCheckpoint.real_executor -ne $false) {
+      Add-Failure "Next 15-Day Visual Workflow Checkpoint must remain metadata-only, dry-run-only, checkpoint-only, and keep image_generation/memory_write/real_executor false"
+    }
+    if ($next15DayCheckpoint.Push_L2_exercised -ne $false -or $next15DayCheckpoint.real_executor_implemented_now -ne $false -or $next15DayCheckpoint.provider_call_performed -ne $false -or $next15DayCheckpoint.image_generation_performed -ne $false -or $next15DayCheckpoint.runtime_call_performed -ne $false -or $next15DayCheckpoint.secret_value_read_performed -ne $false -or $next15DayCheckpoint.VCP_memory_write_performed -ne $false -or $next15DayCheckpoint.DailyNote_write_performed -ne $false -or $next15DayCheckpoint.production_candidate_created -ne $false -or $next15DayCheckpoint.accepted_sample_auto_promotion -ne $false -or $next15DayCheckpoint.memory_seed_promoted -ne $false -or $next15DayCheckpoint.package_dependency_change_performed -ne $false -or $next15DayCheckpoint.commit_performed -ne $false -or $next15DayCheckpoint.push_performed -ne $false) {
+      Add-Failure "Next 15-Day Visual Workflow Checkpoint must not perform Push_L2, executor, provider, image, runtime, secret, memory, DailyNote, production, accepted-sample, memory-seed, dependency, commit, or push actions"
     }
   }
 

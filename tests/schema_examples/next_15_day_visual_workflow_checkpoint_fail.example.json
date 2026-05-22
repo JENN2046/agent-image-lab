@@ -1,0 +1,70 @@
+{
+  "next_15_day_visual_workflow_checkpoint": {
+    "checkpoint_id": "next_15_day_visual_workflow_checkpoint_v0_5_4_negative_fixture",
+    "version": "v0_1",
+    "phase": "v0_5_4_next_15_day_visual_workflow_checkpoint",
+    "source_semantic_hardening_ref": "tests/schema_examples/visual_review_semantics_hardening.example.json",
+    "source_evidence_consistency_ref": "reports/visual_asset_eval_dry_run/v0_4_9_evidence_consistency_hardening.json",
+    "source_controlled_generation_readiness_ref": "reports/visual_asset_eval_dry_run/v0_5_0_controlled_generation_readiness_packet.json",
+    "source_prompt_package_preview_ref": "reports/visual_asset_eval_dry_run/v0_5_1_prompt_package_preview.json",
+    "source_review_replay_set_ref": "reports/visual_asset_eval_dry_run/v0_5_2_review_replay_set.json",
+    "source_visual_memory_readonly_plan_ref": "reports/visual_asset_eval_dry_run/v0_5_3_visual_memory_readonly_plan.json",
+    "checkpoint_assertions": {
+      "semantic_hardening_exists": true,
+      "evidence_consistency_exists": false,
+      "controlled_generation_readiness_packet_exists": true,
+      "prompt_package_preview_exists": true,
+      "review_replay_set_exists": true,
+      "visual_memory_readonly_remains_planning_only": false,
+      "image_generation": true,
+      "memory_write": true,
+      "real_executor": true
+    },
+    "workflow_capabilities": {
+      "review_semantics_non_empty": true,
+      "evidence_chain_consistent": false,
+      "prompt_correction_reusable": true,
+      "controlled_generation_readiness_only": false,
+      "visual_memory_readonly_planning_only": false
+    },
+    "next_route_options": [
+      "execute_real_generation_now"
+    ],
+    "boundaries": {
+      "metadata_only": false,
+      "dry_run_only": false,
+      "checkpoint_only": false,
+      "image_generation": true,
+      "memory_write": true,
+      "real_executor": true,
+      "provider_call_performed": true,
+      "image_generation_performed": true,
+      "VCP_memory_write_performed": true,
+      "DailyNote_write_performed": true,
+      "runtime_call_performed": true,
+      "secret_value_read_performed": false,
+      "production_candidate_created": true,
+      "accepted_sample_auto_promotion": true,
+      "memory_seed_promoted": true,
+      "real_executor_implemented_now": true,
+      "Push_L2_exercised": true,
+      "package_dependency_change_performed": false,
+      "commit_performed": false,
+      "push_performed": false
+    },
+    "side_effects": {
+      "provider_call_performed": true,
+      "image_generation_performed": true,
+      "VCP_memory_write_performed": true,
+      "DailyNote_write_performed": true,
+      "runtime_call_performed": true,
+      "secret_value_read_performed": false,
+      "production_candidate_created": true,
+      "accepted_sample_auto_promotion": true,
+      "memory_seed_promoted": true,
+      "package_dependency_change_performed": false,
+      "commit_performed": false,
+      "push_performed": false
+    }
+  }
+}

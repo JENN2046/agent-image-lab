@@ -1,0 +1,37 @@
+id: next_15_day_visual_workflow_checkpoint
+version: v0_1
+phase: v0_5_4_next_15_day_visual_workflow_checkpoint
+type: object
+required:
+  - checkpoint_id
+  - version
+  - phase
+  - source_semantic_hardening_ref
+  - source_evidence_consistency_ref
+  - source_controlled_generation_readiness_ref
+  - source_prompt_package_preview_ref
+  - source_review_replay_set_ref
+  - source_visual_memory_readonly_plan_ref
+  - checkpoint_assertions
+  - workflow_capabilities
+  - boundaries
+  - side_effects
+properties:
+  checkpoint_assertions:
+    required:
+      - semantic_hardening_exists
+      - evidence_consistency_exists
+      - controlled_generation_readiness_packet_exists
+      - prompt_package_preview_exists
+      - review_replay_set_exists
+      - visual_memory_readonly_remains_planning_only
+      - image_generation
+      - memory_write
+      - real_executor
+  workflow_capabilities:
+    required:
+      - review_semantics_non_empty
+      - evidence_chain_consistent
+      - prompt_correction_reusable
+      - controlled_generation_readiness_only
+      - visual_memory_readonly_planning_only

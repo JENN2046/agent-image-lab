@@ -1,5 +1,77 @@
 ---
 
+## Checkpoint - v0.5.4 Next 15-Day Visual Workflow Checkpoint
+
+```text
+phase: v0_5_4_next_15_day_visual_workflow_checkpoint
+phase_id: v0_5_4_next_15_day_visual_workflow_checkpoint
+status: completed_validated_pending_local_commit
+mode: Green Lane doc/schema/report/fixture/validator/status compact batch
+source_local_commit: 9b99ad73a15a070c36d7d309ed797e09782221cb
+source_remote_commit: 21981cf53f3cb611490d9aeac07833051c888efb
+source_phase: v0_5_3_visual_memory_readonly_plan
+previous_phase_commit: 9b99ad73a15a070c36d7d309ed797e09782221cb
+previous_phase_push_performed: false
+current_gate_phase: v0_5_4_next_15_day_visual_workflow_checkpoint
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+completed:
+- created Next 15-Day Visual Workflow Checkpoint doc
+- created next_15_day_visual_workflow_checkpoint schema
+- created checkpoint report
+- created pass/fail checkpoint fixtures
+- created validator with missing artifact, planning drift, generation, memory, executor, provider, Push_L2, production, accepted-sample, path, and secret negative cases
+- wired the validator into MVP and exact-slice governance helper
+changed:
+- docs/V0_5_4_NEXT_15_DAY_CHECKPOINT.md
+- schemas/next_15_day_visual_workflow_checkpoint.schema.yaml
+- reports/visual_asset_eval_dry_run/v0_5_4_next_15_day_checkpoint.json
+- tests/schema_examples/next_15_day_visual_workflow_checkpoint.example.json
+- tests/schema_examples/next_15_day_visual_workflow_checkpoint_fail.example.json
+- scripts/validate_next_15_day_visual_workflow_checkpoint.js
+- scripts/validate_mvp.ps1
+- scripts/lib/governance_tooling_maintenance_slice.js
+- docs/00_project_roadmap.md
+- .agent_board resume surfaces
+latest_validation:
+- git diff --check: passed_with_line_ending_warnings_only
+- node --check scripts/validate_next_15_day_visual_workflow_checkpoint.js: passed
+- node scripts/validate_next_15_day_visual_workflow_checkpoint.js: passed
+- node scripts/validate_visual_memory_readonly_plan.js: passed
+- node scripts/validate_smart_v3_push_safety_lane.js: passed
+- node scripts/validate_agent_board_state.js: passed
+- powershell -NoProfile -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1: passed
+- npm run validate:mvp: passed
+semantic_hardening_exists: true
+evidence_consistency_exists: true
+controlled_generation_readiness_packet_exists: true
+prompt_package_preview_exists: true
+review_replay_set_exists: true
+visual_memory_readonly_remains_planning_only: true
+image_generation: false
+memory_write: false
+real_executor: false
+Push_L2_exercised: false
+real_executor_implemented_now: false
+provider_call_performed: false
+image_generation_performed: false
+VCP_memory_write_performed: false
+DailyNote_write_performed: false
+runtime_call_performed: false
+secret_value_read_performed: false
+production_candidate_created: false
+accepted_sample_auto_promotion: false
+memory_seed_promoted: false
+package_dependency_change_performed: false
+push_allowed: false
+commit_performed: pending
+push_performed: false
+recommended_next: post_commit_review_and_Push_L3_manual_guarded_push_classification
+```
+
+---
+
 ## Checkpoint - v0.4.4 Sample Registry Dry Run
 
 ```text

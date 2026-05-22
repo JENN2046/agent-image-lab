@@ -1,5 +1,50 @@
 ---
 
+- [x] ID: v0_5_4_next_15_day_visual_workflow_checkpoint
+      Title: Close Next 15-Day Visual Workflow Checkpoint
+      Reason: The next visual workflow round needs a validator-backed checkpoint proving semantic hardening, evidence consistency, prompt correction reuse, controlled-generation readiness, review replay, and read-only memory planning all exist while generation, memory writes, and real executor remain false.
+      Lane: Green.
+      Status: completed_validated_pending_local_commit.
+      Source local commit: 9b99ad73a15a070c36d7d309ed797e09782221cb.
+      Source remote commit: 21981cf53f3cb611490d9aeac07833051c888efb.
+      Source phase: v0_5_3_visual_memory_readonly_plan.
+      Previous phase commit: 9b99ad73a15a070c36d7d309ed797e09782221cb.
+      Previous phase push performed: false.
+      Current gate phase: v0_5_4_next_15_day_visual_workflow_checkpoint.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Scope: doc/schema/report/fixture/validator/status compact batch only.
+      Changed: docs/V0_5_4_NEXT_15_DAY_CHECKPOINT.md; schemas/next_15_day_visual_workflow_checkpoint.schema.yaml; reports/visual_asset_eval_dry_run/v0_5_4_next_15_day_checkpoint.json; tests/schema_examples/next_15_day_visual_workflow_checkpoint.example.json; tests/schema_examples/next_15_day_visual_workflow_checkpoint_fail.example.json; scripts/validate_next_15_day_visual_workflow_checkpoint.js; scripts/validate_mvp.ps1; scripts/lib/governance_tooling_maintenance_slice.js; docs/00_project_roadmap.md; .agent_board resume surfaces.
+      semantic_hardening_exists: true.
+      evidence_consistency_exists: true.
+      controlled_generation_readiness_packet_exists: true.
+      prompt_package_preview_exists: true.
+      review_replay_set_exists: true.
+      visual_memory_readonly_remains_planning_only: true.
+      image_generation: false.
+      memory_write: false.
+      real_executor: false.
+      Push_L2_exercised: false.
+      real_executor_implemented_now: false.
+      provider_call_performed: false.
+      image_generation_performed: false.
+      VCP_memory_write_performed: false.
+      DailyNote_write_performed: false.
+      runtime_call_performed: false.
+      secret_value_read_performed: false.
+      production_candidate_created: false.
+      accepted_sample_auto_promotion: false.
+      memory_seed_promoted: false.
+      package_dependency_change_performed: false.
+      push_allowed: false.
+      commit_performed: pending.
+      push_performed: false.
+      Stop condition: provider call, image generation, memory write, DailyNote write, runtime/VCPToolBox/VCPChat/CDP/bridge/MCP action, real executor implementation, Push_L2 test, accepted_sample promotion, production_candidate creation, memory_seed promotion, dependency change, secret read, git add ., push, tag, release, deploy, or validation failure requiring judgment.
+      Recommended next: post-commit review and Push_L3 manual guarded push classification.
+
+---
+
 - [x] ID: v0_4_4_sample_registry_dry_run
       Title: Define Sample Registry Dry Run
       Reason: The visual judgment loop needs accepted/rejected registry routing before consistency checks and a no-op runner can verify what would happen next.
