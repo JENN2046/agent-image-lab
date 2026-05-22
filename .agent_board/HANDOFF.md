@@ -1,5 +1,50 @@
 ---
 
+## Current Handoff Update - v0.4.4 Sample Registry Dry Run
+
+```text
+phase: v0_4_4_sample_registry_dry_run
+phase_id: v0_4_4_sample_registry_dry_run
+status: completed_validated_pending_local_commit
+mode: Green Lane doc/schema/report/fixture/validator/status compact batch
+summary: Establishes accepted/rejected sample registry dry-run sections without creating accepted samples, rejected samples, memory writes, DailyNote writes, production candidates, provider calls, or generated images.
+source_local_commit: 6e69e5927882ba72ab99216a235bfab0b729d9cb
+source_remote_commit: 2f86f9b516b8113d099addf1bbb519b9a46a68fd
+source_phase: v0_4_3_review_to_prompt_correction_hint
+previous_phase_commit: 6e69e5927882ba72ab99216a235bfab0b729d9cb
+previous_phase_push_performed: false
+current_gate_phase: v0_4_4_sample_registry_dry_run
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+changed: docs/V0_4_4_SAMPLE_REGISTRY_DRY_RUN.md; schemas/visual_sample_registry_dry_run.schema.yaml; reports/visual_asset_eval_dry_run/v0_4_4_sample_registry_dry_run.json; tests/schema_examples/visual_sample_registry_dry_run.example.json; tests/schema_examples/visual_sample_registry_dry_run_fail.example.json; scripts/validate_visual_sample_registry_dry_run.js; scripts/validate_mvp.ps1; scripts/lib/governance_tooling_maintenance_slice.js; docs/00_project_roadmap.md; .agent_board resume surfaces.
+accepted_registry_dry_run_present: true
+rejected_registry_dry_run_present: true
+accepted_sample_promotion: false
+actual_accepted_sample_created: false
+actual_rejected_sample_created: false
+VCP_memory_write_performed: false
+DailyNote_write_performed: false
+production_candidate_created: false
+metadata_only: true
+dry_run_only: true
+image_binary_read_performed: false
+Push_L2_exercised: false
+real_executor_implemented_now: false
+provider_call_performed: false
+image_generation_performed: false
+runtime_call_performed: false
+secret_value_read_performed: false
+memory_seed_promoted: false
+package_dependency_change_performed: false
+push_allowed: false
+commit_performed: pending
+push_performed: false
+recommended_next: post_commit_review_and_push_lane_classification_then_v0_4_5_consistency_check
+```
+
+---
+
 ## Current Handoff Update - v0.4.3 Review to Prompt Correction Hint
 
 ```text

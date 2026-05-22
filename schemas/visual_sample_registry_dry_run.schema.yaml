@@ -1,0 +1,81 @@
+schema_id: visual_sample_registry_dry_run
+version: v0_1
+status: local_contract_schema_only
+phase: v0_4_4_sample_registry_dry_run
+purpose: >
+  Defines a metadata-only accepted/rejected visual sample registry dry run. The
+  registry records potential accepted/rejected routing without creating
+  accepted samples, rejected sample records, VCP memory, DailyNote entries,
+  production candidates, generated images, or runtime executor actions.
+
+required_top_level_fields:
+  - registry_id
+  - version
+  - phase
+  - registry_mode
+  - source_review_pack_ref
+  - source_failure_taxonomy_ref
+  - source_prompt_correction_hint_ref
+  - source_authorization_registry_ref
+  - accepted_registry_dry_run
+  - rejected_registry_dry_run
+  - registry_boundaries
+  - side_effects
+
+accepted_registry_dry_run:
+  registry_type: accepted_sample_dry_run
+  entries:
+    - dry_run_entry_id: string
+      source_asset_id: string
+      accepted_sample_eligible: false
+      human_accepted: false
+      accepted_gate_id: null
+      would_create_accepted_sample: false
+      actual_accepted_sample_created: false
+      accepted_sample_promotion: false
+      reason: non_empty_string
+
+rejected_registry_dry_run:
+  registry_type: rejected_sample_dry_run
+  entries:
+    - dry_run_entry_id: string
+      source_asset_id: string
+      rejection_reason: non_empty_string
+      failure_categories:
+        - visual_failure_taxonomy_category
+      correction_hint_ref: tests/schema_examples/visual_prompt_correction_hint.example.json
+      would_register_rejected_sample: true
+      actual_rejected_sample_created: false
+      reason: non_empty_string
+
+registry_boundaries:
+  metadata_only: true
+  dry_run_only: true
+  accepted_sample_promotion: false
+  accepted_sample_auto_promotion: false
+  actual_accepted_sample_created: false
+  actual_rejected_sample_created: false
+  VCP_memory_write_performed: false
+  DailyNote_write_performed: false
+  production_candidate_created: false
+  image_binary_read_performed: false
+  image_generation_performed: false
+  provider_call_performed: false
+  runtime_call_performed: false
+  secret_value_read_performed: false
+  memory_seed_promoted: false
+  real_executor_implemented_now: false
+  Push_L2_exercised: false
+  package_dependency_change_performed: false
+  commit_performed: false
+  push_performed: false
+
+non_authorization:
+  accepted_sample_promotion_allowed_by_schema: false
+  rejected_sample_write_allowed_by_schema: false
+  VCP_memory_write_allowed_by_schema: false
+  DailyNote_write_allowed_by_schema: false
+  production_candidate_allowed_by_schema: false
+  image_generation_allowed_by_schema: false
+  provider_or_plugin_call_allowed_by_schema: false
+  real_executor_allowed_by_schema: false

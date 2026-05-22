@@ -375,6 +375,23 @@ const EXPECTED_V0_4_3_REVIEW_TO_PROMPT_CORRECTION_HINT_SLICE = [
   "tests/schema_examples/visual_prompt_correction_hint_fail.example.json"
 ].sort();
 
+const EXPECTED_V0_4_4_SAMPLE_REGISTRY_DRY_RUN_SLICE = [
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  ".agent_board/VALIDATION_LOG.md",
+  "docs/00_project_roadmap.md",
+  "docs/V0_4_4_SAMPLE_REGISTRY_DRY_RUN.md",
+  "reports/visual_asset_eval_dry_run/v0_4_4_sample_registry_dry_run.json",
+  "schemas/visual_sample_registry_dry_run.schema.yaml",
+  "scripts/lib/governance_tooling_maintenance_slice.js",
+  "scripts/validate_mvp.ps1",
+  "scripts/validate_visual_sample_registry_dry_run.js",
+  "tests/schema_examples/visual_sample_registry_dry_run.example.json",
+  "tests/schema_examples/visual_sample_registry_dry_run_fail.example.json"
+].sort();
+
 const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "governance_tooling_maintenance_slice_v1",
@@ -455,6 +472,10 @@ const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "v0_4_3_review_to_prompt_correction_hint_slice",
     files: EXPECTED_V0_4_3_REVIEW_TO_PROMPT_CORRECTION_HINT_SLICE
+  },
+  {
+    id: "v0_4_4_sample_registry_dry_run_slice",
+    files: EXPECTED_V0_4_4_SAMPLE_REGISTRY_DRY_RUN_SLICE
   }
 ];
 
@@ -714,6 +735,11 @@ function governanceToolingMaintenanceSliceSelfCheck() {
         === "v0_4_3_review_to_prompt_correction_hint_slice"
     },
     {
+      check: "exact_slice_matches_v0_4_4_sample_registry_dry_run",
+      passed: findMatchingGovernanceToolingSlice(EXPECTED_V0_4_4_SAMPLE_REGISTRY_DRY_RUN_SLICE)?.id
+        === "v0_4_4_sample_registry_dry_run_slice"
+    },
+    {
       check: "exact_slice_rejects_missing_file",
       passed: findMatchingGovernanceToolingSlice(EXPECTED_GOVERNANCE_TOOLING_MAINTENANCE_SLICE.slice(1)) === null
     },
@@ -759,6 +785,7 @@ module.exports = {
   EXPECTED_V0_4_1_VISUAL_ASSET_REVIEW_PACK_SLICE,
   EXPECTED_V0_4_2_VISUAL_FAILURE_TAXONOMY_SLICE,
   EXPECTED_V0_4_3_REVIEW_TO_PROMPT_CORRECTION_HINT_SLICE,
+  EXPECTED_V0_4_4_SAMPLE_REGISTRY_DRY_RUN_SLICE,
   GOVERNANCE_TOOLING_ALLOWED_SLICES,
   buildGovernanceToolingMaintenanceSliceReport,
   fileAllowedInGovernanceToolingSlice,

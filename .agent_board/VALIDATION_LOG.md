@@ -1,5 +1,37 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260522-v0.4.4-SAMPLE-REGISTRY-DRY-RUN
+
+Task: v0.4.4 Sample Registry Dry Run
+Status: completed_validated
+Commands run:
+  - git diff --check: passed_with_line_ending_warnings_only
+  - node --check scripts/validate_visual_sample_registry_dry_run.js: passed
+  - node scripts/validate_visual_sample_registry_dry_run.js: passed
+  - node scripts/validate_visual_prompt_correction_hints.js: passed
+  - node scripts/validate_smart_v3_push_safety_lane.js: passed
+  - node scripts/validate_agent_board_state.js: passed
+  - npm run validate:mvp: passed
+Boundary:
+  - source_local_commit: 6e69e5927882ba72ab99216a235bfab0b729d9cb
+  - source_remote_commit: 2f86f9b516b8113d099addf1bbb519b9a46a68fd
+  - accepted_registry_dry_run_present: true
+  - rejected_registry_dry_run_present: true
+  - accepted_sample_promotion: false
+  - actual_accepted_sample_created: false
+  - actual_rejected_sample_created: false
+  - VCP_memory_write_performed: false
+  - DailyNote_write_performed: false
+  - production_candidate_created: false
+  - metadata_only: true
+  - dry_run_only: true
+  - image_binary_read_performed: false
+  - provider_call_performed: false
+  - image_generation_performed: false
+  - runtime_call_performed: false
+  - memory_seed_promoted: false
+  - push_performed: false
+
 ## VALIDATION-20260522-v0.4.3-REVIEW-TO-PROMPT-CORRECTION-HINT
 
 Task: v0.4.3 Review to Prompt Correction Hint

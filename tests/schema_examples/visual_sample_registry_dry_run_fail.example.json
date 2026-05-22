@@ -1,0 +1,81 @@
+{
+  "visual_sample_registry_dry_run": {
+    "registry_id": "visual_sample_registry_dry_run_v0_4_4_fail",
+    "version": "v0_1",
+    "phase": "v0_4_4_sample_registry_dry_run",
+    "registry_mode": "dry_run_no_promotion",
+    "source_review_pack_ref": "reports/visual_asset_eval_dry_run/v0_4_1_safe_portrait_review_pack.json",
+    "source_failure_taxonomy_ref": "tests/schema_examples/visual_failure_taxonomy.example.json",
+    "source_prompt_correction_hint_ref": "tests/schema_examples/visual_prompt_correction_hint.example.json",
+    "source_authorization_registry_ref": "assets/visual_asset_authorization_registry.example.json",
+    "accepted_registry_dry_run": {
+      "registry_type": "accepted_sample_dry_run",
+      "entries": [
+        {
+          "dry_run_entry_id": "bad_accepted_entry",
+          "source_asset_id": "visual-asset-v0-3-3-safe-portrait-001-png",
+          "accepted_sample_eligible": true,
+          "human_accepted": true,
+          "accepted_gate_id": "accepted_gate_v0_4_4_forbidden",
+          "would_create_accepted_sample": true,
+          "actual_accepted_sample_created": true,
+          "accepted_sample_promotion": true,
+          "reason": "Invalid fixture flips promotion fields."
+        }
+      ]
+    },
+    "rejected_registry_dry_run": {
+      "registry_type": "rejected_sample_dry_run",
+      "entries": [
+        {
+          "dry_run_entry_id": "bad_rejected_entry",
+          "source_asset_id": "visual-asset-v0-3-3-safe-portrait-001-png",
+          "rejection_reason": "",
+          "failure_categories": [
+            "unknown_failure"
+          ],
+          "correction_hint_ref": "tests/schema_examples/visual_prompt_correction_hint.example.json",
+          "would_register_rejected_sample": true,
+          "actual_rejected_sample_created": true,
+          "reason": ""
+        }
+      ]
+    },
+    "registry_boundaries": {
+      "metadata_only": true,
+      "dry_run_only": true,
+      "accepted_sample_promotion": true,
+      "accepted_sample_auto_promotion": true,
+      "actual_accepted_sample_created": true,
+      "actual_rejected_sample_created": true,
+      "VCP_memory_write_performed": true,
+      "DailyNote_write_performed": true,
+      "production_candidate_created": true,
+      "image_binary_read_performed": false,
+      "image_generation_performed": false,
+      "provider_call_performed": false,
+      "runtime_call_performed": false,
+      "secret_value_read_performed": false,
+      "memory_seed_promoted": false,
+      "real_executor_implemented_now": false,
+      "Push_L2_exercised": false,
+      "package_dependency_change_performed": false,
+      "commit_performed": false,
+      "push_performed": false
+    },
+    "side_effects": {
+      "provider_call_performed": false,
+      "image_generation_performed": false,
+      "VCP_memory_write_performed": true,
+      "DailyNote_write_performed": true,
+      "runtime_call_performed": false,
+      "secret_value_read_performed": false,
+      "production_candidate_created": true,
+      "accepted_sample_auto_promotion": true,
+      "memory_seed_promoted": false,
+      "package_dependency_change_performed": false,
+      "commit_performed": false,
+      "push_performed": false
+    }
+  }
+}

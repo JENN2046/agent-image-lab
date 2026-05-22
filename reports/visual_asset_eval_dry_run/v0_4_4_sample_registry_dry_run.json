@@ -1,0 +1,84 @@
+{
+  "visual_sample_registry_dry_run": {
+    "registry_id": "visual_sample_registry_dry_run_v0_4_4_safe_portrait_001",
+    "version": "v0_1",
+    "phase": "v0_4_4_sample_registry_dry_run",
+    "registry_mode": "dry_run_no_promotion",
+    "source_review_pack_ref": "reports/visual_asset_eval_dry_run/v0_4_1_safe_portrait_review_pack.json",
+    "source_failure_taxonomy_ref": "tests/schema_examples/visual_failure_taxonomy.example.json",
+    "source_prompt_correction_hint_ref": "tests/schema_examples/visual_prompt_correction_hint.example.json",
+    "source_authorization_registry_ref": "assets/visual_asset_authorization_registry.example.json",
+    "accepted_registry_dry_run": {
+      "registry_type": "accepted_sample_dry_run",
+      "entries": [
+        {
+          "dry_run_entry_id": "accepted_dry_run_safe_portrait_001_not_promoted",
+          "source_asset_id": "visual-asset-v0-3-3-safe-portrait-001-png",
+          "source_review_pack_ref": "reports/visual_asset_eval_dry_run/v0_4_1_safe_portrait_review_pack.json",
+          "accepted_sample_eligible": false,
+          "human_accepted": false,
+          "accepted_gate_id": null,
+          "would_create_accepted_sample": false,
+          "actual_accepted_sample_created": false,
+          "accepted_sample_promotion": false,
+          "reason": "Dry-run review has no human acceptance gate and cannot promote by field flip."
+        }
+      ]
+    },
+    "rejected_registry_dry_run": {
+      "registry_type": "rejected_sample_dry_run",
+      "entries": [
+        {
+          "dry_run_entry_id": "rejected_dry_run_safe_portrait_001_patch_required",
+          "source_asset_id": "visual-asset-v0-3-3-safe-portrait-001-png",
+          "source_review_pack_ref": "reports/visual_asset_eval_dry_run/v0_4_1_safe_portrait_review_pack.json",
+          "rejection_reason": "Dry-run review result is patch, so this registry only records a would-register rejected-sample route.",
+          "failure_categories": [
+            "commercial_fitness_failure",
+            "ai_artifact_failure"
+          ],
+          "correction_hint_ref": "tests/schema_examples/visual_prompt_correction_hint.example.json",
+          "would_register_rejected_sample": true,
+          "actual_rejected_sample_created": false,
+          "reason": "Rejected registry write remains hypothetical until a future no-op runner or real gate is separately authorized."
+        }
+      ]
+    },
+    "registry_boundaries": {
+      "metadata_only": true,
+      "dry_run_only": true,
+      "accepted_sample_promotion": false,
+      "accepted_sample_auto_promotion": false,
+      "actual_accepted_sample_created": false,
+      "actual_rejected_sample_created": false,
+      "VCP_memory_write_performed": false,
+      "DailyNote_write_performed": false,
+      "production_candidate_created": false,
+      "image_binary_read_performed": false,
+      "image_generation_performed": false,
+      "provider_call_performed": false,
+      "runtime_call_performed": false,
+      "secret_value_read_performed": false,
+      "memory_seed_promoted": false,
+      "real_executor_implemented_now": false,
+      "Push_L2_exercised": false,
+      "package_dependency_change_performed": false,
+      "commit_performed": false,
+      "push_performed": false
+    },
+    "side_effects": {
+      "provider_call_performed": false,
+      "image_generation_performed": false,
+      "VCP_memory_write_performed": false,
+      "DailyNote_write_performed": false,
+      "runtime_call_performed": false,
+      "secret_value_read_performed": false,
+      "production_candidate_created": false,
+      "accepted_sample_auto_promotion": false,
+      "memory_seed_promoted": false,
+      "package_dependency_change_performed": false,
+      "commit_performed": false,
+      "push_performed": false
+    }
+  }
+}

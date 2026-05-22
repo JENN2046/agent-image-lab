@@ -87,6 +87,7 @@ $requiredFiles = @(
   'scripts/validate_visual_asset_review_pack.js',
   'scripts/validate_visual_failure_taxonomy.js',
   'scripts/validate_visual_prompt_correction_hints.js',
+  'scripts/validate_visual_sample_registry_dry_run.js',
   'scripts/validate_visual_sample_memory_policy.js',
   'scripts/validate_15_day_architecture_checkpoint.js',
   'scripts/validate_local_checkpoint_manifest.js',
@@ -12489,6 +12490,37 @@ process.exit(child.status || 0);
     }
     if ($visualPromptCorrectionHints.Push_L2_exercised -ne $false -or $visualPromptCorrectionHints.real_executor_implemented_now -ne $false -or $visualPromptCorrectionHints.provider_call_performed -ne $false -or $visualPromptCorrectionHints.image_generation_performed -ne $false -or $visualPromptCorrectionHints.VCP_memory_write_performed -ne $false -or $visualPromptCorrectionHints.DailyNote_write_performed -ne $false -or $visualPromptCorrectionHints.runtime_call_performed -ne $false -or $visualPromptCorrectionHints.secret_value_read_performed -ne $false -or $visualPromptCorrectionHints.production_candidate_created -ne $false -or $visualPromptCorrectionHints.accepted_sample_auto_promotion -ne $false -or $visualPromptCorrectionHints.memory_seed_promoted -ne $false -or $visualPromptCorrectionHints.package_dependency_change_performed -ne $false -or $visualPromptCorrectionHints.commit_performed -ne $false -or $visualPromptCorrectionHints.push_performed -ne $false) {
       Add-Failure "Visual Prompt Correction Hints must not perform Push_L2, executor, provider, image, memory, runtime, secret, production, accepted-sample, memory-seed, dependency, commit, or push actions"
+    }
+  }
+
+  $visualSampleRegistryDryRunOutput = & node (Join-Path $Root 'scripts/validate_visual_sample_registry_dry_run.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Visual Sample Registry Dry Run validation exited with failure"
+  } else {
+    $visualSampleRegistryDryRun = ($visualSampleRegistryDryRunOutput -join "`n") | ConvertFrom-Json
+    if ($visualSampleRegistryDryRun.passed -ne $true -or $visualSampleRegistryDryRun.phase -ne 'v0_4_4_sample_registry_dry_run') {
+      Add-Failure "Visual Sample Registry Dry Run validation must pass"
+    }
+    if ($visualSampleRegistryDryRun.sample_registry_doc_present -ne $true -or $visualSampleRegistryDryRun.sample_registry_schema_present -ne $true -or $visualSampleRegistryDryRun.sample_registry_report_present -ne $true -or $visualSampleRegistryDryRun.sample_registry_fixture_present -ne $true -or $visualSampleRegistryDryRun.sample_registry_fail_fixture_present -ne $true) {
+      Add-Failure "Visual Sample Registry Dry Run must define doc, schema, report, pass fixture, and fail fixture"
+    }
+    if ($visualSampleRegistryDryRun.accepted_registry_dry_run_present -ne $true -or $visualSampleRegistryDryRun.rejected_registry_dry_run_present -ne $true) {
+      Add-Failure "Visual Sample Registry Dry Run must define accepted and rejected dry-run registries"
+    }
+    if ($visualSampleRegistryDryRun.source_review_pack_verified -ne $true -or $visualSampleRegistryDryRun.source_failure_taxonomy_verified -ne $true -or $visualSampleRegistryDryRun.source_prompt_correction_hint_verified -ne $true) {
+      Add-Failure "Visual Sample Registry Dry Run must bind to review pack, taxonomy, and prompt correction hints"
+    }
+    if ($visualSampleRegistryDryRun.accepted_sample_promotion -ne $false -or $visualSampleRegistryDryRun.accepted_sample_auto_promotion -ne $false -or $visualSampleRegistryDryRun.actual_accepted_sample_created -ne $false -or $visualSampleRegistryDryRun.actual_rejected_sample_created -ne $false -or $visualSampleRegistryDryRun.VCP_memory_write_performed -ne $false -or $visualSampleRegistryDryRun.DailyNote_write_performed -ne $false -or $visualSampleRegistryDryRun.production_candidate_created -ne $false) {
+      Add-Failure "Visual Sample Registry Dry Run must preserve accepted-sample, memory, DailyNote, rejected-sample, and production boundaries"
+    }
+    if ($visualSampleRegistryDryRun.negative_case_count -lt 21 -or $visualSampleRegistryDryRun.caught_negative_case_count -ne $visualSampleRegistryDryRun.negative_case_count -or $visualSampleRegistryDryRun.all_negative_cases_caught -ne $true -or $visualSampleRegistryDryRun.accepted_promotion_caught -ne $true -or $visualSampleRegistryDryRun.memory_write_caught -ne $true -or $visualSampleRegistryDryRun.production_candidate_caught -ne $true) {
+      Add-Failure "Visual Sample Registry Dry Run must catch every required negative case"
+    }
+    if ($visualSampleRegistryDryRun.metadata_only -ne $true -or $visualSampleRegistryDryRun.dry_run_only -ne $true -or $visualSampleRegistryDryRun.image_binary_read_performed -ne $false) {
+      Add-Failure "Visual Sample Registry Dry Run must remain metadata-only, dry-run-only, and avoid image binary reads"
+    }
+    if ($visualSampleRegistryDryRun.Push_L2_exercised -ne $false -or $visualSampleRegistryDryRun.real_executor_implemented_now -ne $false -or $visualSampleRegistryDryRun.provider_call_performed -ne $false -or $visualSampleRegistryDryRun.image_generation_performed -ne $false -or $visualSampleRegistryDryRun.runtime_call_performed -ne $false -or $visualSampleRegistryDryRun.secret_value_read_performed -ne $false -or $visualSampleRegistryDryRun.memory_seed_promoted -ne $false -or $visualSampleRegistryDryRun.package_dependency_change_performed -ne $false -or $visualSampleRegistryDryRun.commit_performed -ne $false -or $visualSampleRegistryDryRun.push_performed -ne $false) {
+      Add-Failure "Visual Sample Registry Dry Run must not perform Push_L2, executor, provider, image, runtime, secret, memory-seed, dependency, commit, or push actions"
     }
   }
 
