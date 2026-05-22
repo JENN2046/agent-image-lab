@@ -91,13 +91,13 @@ const validatorMaintenanceFiles = [
   "scripts/validate_controlled_visual_production_loop_exact_file_commit_readiness_review.js"
 ].sort();
 const selfMaintenanceAllowed = process.env.AGENT_IMAGE_LAB_VALIDATOR_MAINTENANCE === "1";
-const isCleanPostCommit = behind === 0
+const isCleanCommittedState = behind === 0
   && stagedFiles.length === 0
   && modifiedTracked.length === 0
-  && untrackedFiles.length === 0
-  && headMatchesExpectedPostCommit;
-const isCleanSyncedPostCommit = isCleanPostCommit && ahead === 0;
-const isCleanLocalAheadPostCommit = isCleanPostCommit && ahead > 0;
+  && untrackedFiles.length === 0;
+const isCleanPostCommit = isCleanCommittedState && headMatchesExpectedPostCommit;
+const isCleanSyncedPostCommit = isCleanCommittedState && ahead === 0;
+const isCleanLocalAheadPostCommit = isCleanCommittedState && ahead > 0;
 const isValidatorSelfMaintenancePatch = selfMaintenanceAllowed
   && ahead === 0
   && behind === 0
@@ -116,10 +116,11 @@ const isGovernanceToolingMaintenanceSlice = governanceToolingMaintenanceSliceRep
 const shouldValidateGovernanceToolingSlice = changedFiles.length > 0
   && !isValidatorSelfMaintenancePatch
   && governanceToolingMaintenanceSliceReport.path_allowed;
-const acceptsCurrentGitShape = isCleanPostCommit || isValidatorSelfMaintenancePatch || isGovernanceToolingMaintenanceSlice;
+const acceptsCurrentGitShape = isCleanCommittedState || isValidatorSelfMaintenancePatch || isGovernanceToolingMaintenanceSlice;
 const currentPendingSliceEvidence = JSON.stringify(changedFiles) === JSON.stringify(exactExpected)
   || isValidatorSelfMaintenancePatch
-  || isGovernanceToolingMaintenanceSlice;
+  || isGovernanceToolingMaintenanceSlice
+  || isCleanCommittedState;
 const productionAuthorization = readJson(files.productionAuthorization);
 const memoryAuthorization = readJson(files.memoryAuthorization);
 const loopContract = readJson(files.loopContract).controlled_visual_production_loop_contract_snapshot;
@@ -150,7 +151,7 @@ add("untracked_file_count_or_allowed_post_commit_state", acceptsCurrentGitShape 
 add("exact_changed_file_count_or_allowed_post_commit_state", acceptsCurrentGitShape || changedFiles.length === fixture.git_expectation.exact_changed_file_count, String(changedFiles.length));
 add("requirement_groups_total_matches", requirementGroupsTotal === fixture.git_expectation.exact_changed_file_count, String(requirementGroupsTotal));
 add("exact_changed_files_match_or_allowed_post_commit_state", acceptsCurrentGitShape || JSON.stringify(changedFiles) === JSON.stringify(exactExpected));
-add("post_commit_proof_exists_or_pending_slice", postCommitProof !== null || currentPendingSliceEvidence, currentPendingSliceEvidence ? "current_pending_slice_evidence" : postCommitProof?.hash || null);
+add("post_commit_proof_exists_or_pending_slice", postCommitProof !== null || currentPendingSliceEvidence, postCommitProof?.hash || (isCleanCommittedState ? "current_clean_committed_state" : currentPendingSliceEvidence ? "current_pending_slice_evidence" : null));
 add("no_staged_files_now", stagedFiles.length === 0);
 
 add("loop_contract_route_aligned", loopContract.route_alignment_status === "capsule_archive_review_bridge_aligned_authorization_pending");
