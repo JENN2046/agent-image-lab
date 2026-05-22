@@ -1,0 +1,74 @@
+{
+  "visual_noop_workflow_runner_plan": {
+    "runner_plan_id": "visual_noop_runner_plan_v0_4_6_safe_portrait_001",
+    "version": "v0_1",
+    "phase": "v0_4_6_noop_visual_workflow_runner_plan",
+    "runner_mode": "no_op_plan_only",
+    "source_review_pack_ref": "reports/visual_asset_eval_dry_run/v0_4_1_safe_portrait_review_pack.json",
+    "source_prompt_correction_hint_ref": "tests/schema_examples/visual_prompt_correction_hint.example.json",
+    "source_sample_registry_dry_run_ref": "reports/visual_asset_eval_dry_run/v0_4_4_sample_registry_dry_run.json",
+    "source_eval_consistency_check_ref": "tests/schema_examples/visual_eval_consistency_check.example.json",
+    "allowed_noop_steps": [
+      "read_review_pack",
+      "select_next_dry_run_action",
+      "emit_would_apply_correction_hint",
+      "emit_would_register_rejected_sample"
+    ],
+    "selected_next_dry_run_action": "would_apply_correction_hint_then_register_rejected_sample",
+    "would_apply_correction_hint": {
+      "emit": true,
+      "correction_hint_ref": "tests/schema_examples/visual_prompt_correction_hint.example.json",
+      "source_failure_categories": [
+        "commercial_fitness_failure",
+        "ai_artifact_failure"
+      ],
+      "actual_prompt_change_applied": false,
+      "generation_action_allowed": false,
+      "future_execution_allowed_by_this_plan": false,
+      "reason": "No-op runner may surface correction guidance, but it cannot mutate prompts or generate images."
+    },
+    "would_register_rejected_sample": {
+      "emit": true,
+      "source_sample_registry_dry_run_ref": "reports/visual_asset_eval_dry_run/v0_4_4_sample_registry_dry_run.json",
+      "registry_write_performed": false,
+      "actual_rejected_sample_created": false,
+      "accepted_sample_promotion": false,
+      "production_candidate_created": false,
+      "reason": "The plan may describe a rejected-sample route, but it cannot create the record."
+    },
+    "boundaries": {
+      "metadata_only": true,
+      "dry_run_only": true,
+      "noop_only": true,
+      "image_binary_read_performed": false,
+      "provider_call_performed": false,
+      "image_generation_performed": false,
+      "VCP_memory_write_performed": false,
+      "DailyNote_write_performed": false,
+      "runtime_call_performed": false,
+      "secret_value_read_performed": false,
+      "production_candidate_created": false,
+      "accepted_sample_auto_promotion": false,
+      "memory_seed_promoted": false,
+      "real_executor_implemented_now": false,
+      "Push_L2_exercised": false,
+      "package_dependency_change_performed": false,
+      "commit_performed": false,
+      "push_performed": false
+    },
+    "side_effects": {
+      "provider_call_performed": false,
+      "image_generation_performed": false,
+      "VCP_memory_write_performed": false,
+      "DailyNote_write_performed": false,
+      "runtime_call_performed": false,
+      "secret_value_read_performed": false,
+      "production_candidate_created": false,
+      "accepted_sample_auto_promotion": false,
+      "memory_seed_promoted": false,
+      "package_dependency_change_performed": false,
+      "commit_performed": false,
+      "push_performed": false
+    }
+  }
+}

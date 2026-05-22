@@ -1,0 +1,71 @@
+{
+  "visual_noop_workflow_runner_plan": {
+    "runner_plan_id": "visual_noop_runner_plan_v0_4_6_fail",
+    "version": "v0_1",
+    "phase": "v0_4_6_noop_visual_workflow_runner_plan",
+    "runner_mode": "real_executor",
+    "source_review_pack_ref": "reports/visual_asset_eval_dry_run/v0_4_1_safe_portrait_review_pack.json",
+    "source_prompt_correction_hint_ref": "tests/schema_examples/visual_prompt_correction_hint.example.json",
+    "source_sample_registry_dry_run_ref": "reports/visual_asset_eval_dry_run/v0_4_4_sample_registry_dry_run.json",
+    "source_eval_consistency_check_ref": "tests/schema_examples/visual_eval_consistency_check.example.json",
+    "allowed_noop_steps": [
+      "read_review_pack",
+      "call_provider"
+    ],
+    "selected_next_dry_run_action": "generate_new_image",
+    "would_apply_correction_hint": {
+      "emit": true,
+      "correction_hint_ref": "tests/schema_examples/visual_prompt_correction_hint.example.json",
+      "source_failure_categories": [
+        "unknown_failure"
+      ],
+      "actual_prompt_change_applied": true,
+      "generation_action_allowed": true,
+      "future_execution_allowed_by_this_plan": true,
+      "reason": "Invalid fixture crosses the no-op boundary."
+    },
+    "would_register_rejected_sample": {
+      "emit": true,
+      "source_sample_registry_dry_run_ref": "reports/visual_asset_eval_dry_run/v0_4_4_sample_registry_dry_run.json",
+      "registry_write_performed": true,
+      "actual_rejected_sample_created": true,
+      "accepted_sample_promotion": true,
+      "production_candidate_created": true,
+      "reason": "Invalid fixture creates records."
+    },
+    "boundaries": {
+      "metadata_only": true,
+      "dry_run_only": false,
+      "noop_only": false,
+      "image_binary_read_performed": true,
+      "provider_call_performed": true,
+      "image_generation_performed": true,
+      "VCP_memory_write_performed": true,
+      "DailyNote_write_performed": true,
+      "runtime_call_performed": true,
+      "secret_value_read_performed": true,
+      "production_candidate_created": true,
+      "accepted_sample_auto_promotion": true,
+      "memory_seed_promoted": true,
+      "real_executor_implemented_now": true,
+      "Push_L2_exercised": true,
+      "package_dependency_change_performed": true,
+      "commit_performed": true,
+      "push_performed": true
+    },
+    "side_effects": {
+      "provider_call_performed": true,
+      "image_generation_performed": true,
+      "VCP_memory_write_performed": true,
+      "DailyNote_write_performed": true,
+      "runtime_call_performed": true,
+      "secret_value_read_performed": true,
+      "production_candidate_created": true,
+      "accepted_sample_auto_promotion": true,
+      "memory_seed_promoted": true,
+      "package_dependency_change_performed": true,
+      "commit_performed": true,
+      "push_performed": true
+    }
+  }
+}

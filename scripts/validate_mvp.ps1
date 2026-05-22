@@ -89,6 +89,7 @@ $requiredFiles = @(
   'scripts/validate_visual_prompt_correction_hints.js',
   'scripts/validate_visual_sample_registry_dry_run.js',
   'scripts/validate_visual_eval_consistency_check.js',
+  'scripts/validate_noop_visual_workflow_runner_plan.js',
   'scripts/validate_visual_sample_memory_policy.js',
   'scripts/validate_15_day_architecture_checkpoint.js',
   'scripts/validate_local_checkpoint_manifest.js',
@@ -12550,6 +12551,37 @@ process.exit(child.status || 0);
     }
     if ($visualEvalConsistency.Push_L2_exercised -ne $false -or $visualEvalConsistency.real_executor_implemented_now -ne $false -or $visualEvalConsistency.provider_call_performed -ne $false -or $visualEvalConsistency.image_generation_performed -ne $false -or $visualEvalConsistency.runtime_call_performed -ne $false -or $visualEvalConsistency.secret_value_read_performed -ne $false -or $visualEvalConsistency.VCP_memory_write_performed -ne $false -or $visualEvalConsistency.DailyNote_write_performed -ne $false -or $visualEvalConsistency.production_candidate_created -ne $false -or $visualEvalConsistency.accepted_sample_auto_promotion -ne $false -or $visualEvalConsistency.memory_seed_promoted -ne $false -or $visualEvalConsistency.package_dependency_change_performed -ne $false -or $visualEvalConsistency.commit_performed -ne $false -or $visualEvalConsistency.push_performed -ne $false) {
       Add-Failure "Visual Eval Consistency Check must not perform Push_L2, executor, provider, image, runtime, secret, memory, DailyNote, production, accepted-sample, memory-seed, dependency, commit, or push actions"
+    }
+  }
+
+  $noopVisualWorkflowRunnerPlanOutput = & node (Join-Path $Root 'scripts/validate_noop_visual_workflow_runner_plan.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "No-op Visual Workflow Runner Plan validation exited with failure"
+  } else {
+    $noopVisualWorkflowRunnerPlan = ($noopVisualWorkflowRunnerPlanOutput -join "`n") | ConvertFrom-Json
+    if ($noopVisualWorkflowRunnerPlan.passed -ne $true -or $noopVisualWorkflowRunnerPlan.phase -ne 'v0_4_6_noop_visual_workflow_runner_plan') {
+      Add-Failure "No-op Visual Workflow Runner Plan validation must pass"
+    }
+    if ($noopVisualWorkflowRunnerPlan.noop_runner_doc_present -ne $true -or $noopVisualWorkflowRunnerPlan.noop_runner_schema_present -ne $true -or $noopVisualWorkflowRunnerPlan.noop_runner_fixture_present -ne $true -or $noopVisualWorkflowRunnerPlan.noop_runner_fail_fixture_present -ne $true) {
+      Add-Failure "No-op Visual Workflow Runner Plan must define doc, schema, pass fixture, and fail fixture"
+    }
+    if ($noopVisualWorkflowRunnerPlan.source_review_pack_verified -ne $true -or $noopVisualWorkflowRunnerPlan.source_prompt_correction_hint_verified -ne $true -or $noopVisualWorkflowRunnerPlan.source_sample_registry_dry_run_verified -ne $true -or $noopVisualWorkflowRunnerPlan.source_eval_consistency_check_verified -ne $true) {
+      Add-Failure "No-op Visual Workflow Runner Plan must bind to review pack, correction hints, sample registry dry-run, and consistency check"
+    }
+    if ($noopVisualWorkflowRunnerPlan.read_review_pack_allowed -ne $true -or $noopVisualWorkflowRunnerPlan.select_next_dry_run_action_allowed -ne $true -or $noopVisualWorkflowRunnerPlan.would_apply_correction_hint_emitted -ne $true -or $noopVisualWorkflowRunnerPlan.would_register_rejected_sample_emitted -ne $true) {
+      Add-Failure "No-op Visual Workflow Runner Plan must read review pack, select next dry-run action, and emit would_* actions"
+    }
+    if ($noopVisualWorkflowRunnerPlan.actual_prompt_change_applied -ne $false -or $noopVisualWorkflowRunnerPlan.registry_write_performed -ne $false -or $noopVisualWorkflowRunnerPlan.actual_rejected_sample_created -ne $false) {
+      Add-Failure "No-op Visual Workflow Runner Plan must not apply prompts, write registry, or create rejected samples"
+    }
+    if ($noopVisualWorkflowRunnerPlan.negative_case_count -lt 24 -or $noopVisualWorkflowRunnerPlan.caught_negative_case_count -ne $noopVisualWorkflowRunnerPlan.negative_case_count -or $noopVisualWorkflowRunnerPlan.all_negative_cases_caught -ne $true -or $noopVisualWorkflowRunnerPlan.real_executor_caught -ne $true -or $noopVisualWorkflowRunnerPlan.generation_action_caught -ne $true -or $noopVisualWorkflowRunnerPlan.registry_write_caught -ne $true -or $noopVisualWorkflowRunnerPlan.runtime_caught -ne $true) {
+      Add-Failure "No-op Visual Workflow Runner Plan must catch every required negative case"
+    }
+    if ($noopVisualWorkflowRunnerPlan.metadata_only -ne $true -or $noopVisualWorkflowRunnerPlan.dry_run_only -ne $true -or $noopVisualWorkflowRunnerPlan.noop_only -ne $true -or $noopVisualWorkflowRunnerPlan.image_binary_read_performed -ne $false) {
+      Add-Failure "No-op Visual Workflow Runner Plan must remain metadata-only, dry-run-only, no-op-only, and avoid image binary reads"
+    }
+    if ($noopVisualWorkflowRunnerPlan.Push_L2_exercised -ne $false -or $noopVisualWorkflowRunnerPlan.real_executor_implemented_now -ne $false -or $noopVisualWorkflowRunnerPlan.provider_call_performed -ne $false -or $noopVisualWorkflowRunnerPlan.image_generation_performed -ne $false -or $noopVisualWorkflowRunnerPlan.runtime_call_performed -ne $false -or $noopVisualWorkflowRunnerPlan.secret_value_read_performed -ne $false -or $noopVisualWorkflowRunnerPlan.VCP_memory_write_performed -ne $false -or $noopVisualWorkflowRunnerPlan.DailyNote_write_performed -ne $false -or $noopVisualWorkflowRunnerPlan.production_candidate_created -ne $false -or $noopVisualWorkflowRunnerPlan.accepted_sample_auto_promotion -ne $false -or $noopVisualWorkflowRunnerPlan.memory_seed_promoted -ne $false -or $noopVisualWorkflowRunnerPlan.package_dependency_change_performed -ne $false -or $noopVisualWorkflowRunnerPlan.commit_performed -ne $false -or $noopVisualWorkflowRunnerPlan.push_performed -ne $false) {
+      Add-Failure "No-op Visual Workflow Runner Plan must not perform Push_L2, executor, provider, image, runtime, secret, memory, DailyNote, production, accepted-sample, memory-seed, dependency, commit, or push actions"
     }
   }
 

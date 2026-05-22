@@ -408,6 +408,22 @@ const EXPECTED_V0_4_5_VISUAL_EVAL_CONSISTENCY_CHECK_SLICE = [
   "tests/schema_examples/visual_eval_consistency_check_fail.example.json"
 ].sort();
 
+const EXPECTED_V0_4_6_NOOP_VISUAL_WORKFLOW_RUNNER_PLAN_SLICE = [
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  ".agent_board/VALIDATION_LOG.md",
+  "docs/00_project_roadmap.md",
+  "docs/V0_4_6_NOOP_VISUAL_WORKFLOW_RUNNER_PLAN.md",
+  "schemas/visual_noop_workflow_runner_plan.schema.yaml",
+  "scripts/lib/governance_tooling_maintenance_slice.js",
+  "scripts/validate_mvp.ps1",
+  "scripts/validate_noop_visual_workflow_runner_plan.js",
+  "tests/schema_examples/visual_noop_workflow_runner_plan.example.json",
+  "tests/schema_examples/visual_noop_workflow_runner_plan_fail.example.json"
+].sort();
+
 const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "governance_tooling_maintenance_slice_v1",
@@ -496,6 +512,10 @@ const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "v0_4_5_visual_eval_consistency_check_slice",
     files: EXPECTED_V0_4_5_VISUAL_EVAL_CONSISTENCY_CHECK_SLICE
+  },
+  {
+    id: "v0_4_6_noop_visual_workflow_runner_plan_slice",
+    files: EXPECTED_V0_4_6_NOOP_VISUAL_WORKFLOW_RUNNER_PLAN_SLICE
   }
 ];
 
@@ -765,6 +785,11 @@ function governanceToolingMaintenanceSliceSelfCheck() {
         === "v0_4_5_visual_eval_consistency_check_slice"
     },
     {
+      check: "exact_slice_matches_v0_4_6_noop_visual_workflow_runner_plan",
+      passed: findMatchingGovernanceToolingSlice(EXPECTED_V0_4_6_NOOP_VISUAL_WORKFLOW_RUNNER_PLAN_SLICE)?.id
+        === "v0_4_6_noop_visual_workflow_runner_plan_slice"
+    },
+    {
       check: "exact_slice_rejects_missing_file",
       passed: findMatchingGovernanceToolingSlice(EXPECTED_GOVERNANCE_TOOLING_MAINTENANCE_SLICE.slice(1)) === null
     },
@@ -812,6 +837,7 @@ module.exports = {
   EXPECTED_V0_4_3_REVIEW_TO_PROMPT_CORRECTION_HINT_SLICE,
   EXPECTED_V0_4_4_SAMPLE_REGISTRY_DRY_RUN_SLICE,
   EXPECTED_V0_4_5_VISUAL_EVAL_CONSISTENCY_CHECK_SLICE,
+  EXPECTED_V0_4_6_NOOP_VISUAL_WORKFLOW_RUNNER_PLAN_SLICE,
   GOVERNANCE_TOOLING_ALLOWED_SLICES,
   buildGovernanceToolingMaintenanceSliceReport,
   fileAllowedInGovernanceToolingSlice,

@@ -2,9 +2,60 @@
 
 本文是 Agent Image Lab 的总路线图，用来把 v0.2 基线、v0.3 授权门槛、MVP-B dry-run 和未来真实闭环串成一条可执行路径。
 
-## v0.4.5 - Visual Eval Consistency Check
+## v0.4.6 - No-op Visual Workflow Runner Plan
 
 Status: local doc/schema/fixture/validator gate completed and pending local commit.
+
+Purpose:
+- Define a no-op runner plan that may read the review pack, select the next dry-run action, and emit `would_apply_correction_hint` plus `would_register_rejected_sample`.
+- Prove the plan does not mutate prompts, write registry records, create rejected samples, generate images, call providers, write memory, or run a real executor.
+- Preserve the metadata-only, dry-run-only, no-op-only boundary.
+
+Artifacts:
+- `docs/V0_4_6_NOOP_VISUAL_WORKFLOW_RUNNER_PLAN.md`
+- `schemas/visual_noop_workflow_runner_plan.schema.yaml`
+- `tests/schema_examples/visual_noop_workflow_runner_plan.example.json`
+- `tests/schema_examples/visual_noop_workflow_runner_plan_fail.example.json`
+- `scripts/validate_noop_visual_workflow_runner_plan.js`
+
+Boundary state:
+- `source_local_commit: b9d5b06`
+- `source_remote_commit: 2f86f9b516b8113d099addf1bbb519b9a46a68fd`
+- `source_phase: v0_4_5_visual_eval_consistency_check`
+- `current_gate_phase: v0_4_6_noop_visual_workflow_runner_plan`
+- `active current phase: v0_3_3_first_live_generation_pilot`
+- `resume_guard_source_phase: v0_3_2_live_candidate_action_packet`
+- `next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial`
+- `read_review_pack_allowed: true`
+- `select_next_dry_run_action_allowed: true`
+- `would_apply_correction_hint_emitted: true`
+- `would_register_rejected_sample_emitted: true`
+- `actual_prompt_change_applied: false`
+- `registry_write_performed: false`
+- `actual_rejected_sample_created: false`
+- `metadata_only: true`
+- `dry_run_only: true`
+- `noop_only: true`
+- `image_binary_read_performed: false`
+- `Push_L2_exercised: false`
+- `real_executor_implemented_now: false`
+- `provider_call_performed: false`
+- `image_generation_performed: false`
+- `runtime_call_performed: false`
+- `secret_value_read_performed: false`
+- `VCP_memory_write_performed: false`
+- `DailyNote_write_performed: false`
+- `production_candidate_created: false`
+- `accepted_sample_auto_promotion: false`
+- `memory_seed_promoted: false`
+- `package_dependency_change_performed: false`
+- `push_allowed: false`
+
+Recommended next: post-commit review and Push_L3 manual guarded push classification, then v0.4.7 Seven/Fifteen-Day Visual Workflow Checkpoint.
+
+## v0.4.5 - Visual Eval Consistency Check
+
+Status: local commit completed; push pending manual authorization.
 
 Purpose:
 - Verify that review pack, failure taxonomy, prompt correction hints, and sample registry dry-run all describe the same asset contract.
@@ -20,6 +71,8 @@ Artifacts:
 
 Boundary state:
 - `source_local_commit: f444edf`
+- `local_commit: b9d5b06`
+- `push_performed: false`
 - `source_remote_commit: 2f86f9b516b8113d099addf1bbb519b9a46a68fd`
 - `source_phase: v0_4_4_sample_registry_dry_run`
 - `current_gate_phase: v0_4_5_visual_eval_consistency_check`
