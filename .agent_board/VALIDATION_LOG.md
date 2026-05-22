@@ -1,5 +1,46 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260523-v0.6.0-FIRST-CONTROLLED-GENERATION-AUTHORIZATION-PACKET
+
+Task: v0.6.0 First Controlled Generation Authorization Packet
+Status: completed_validated
+Commands run:
+  - git diff --check: passed_with_line_ending_warnings_only
+  - node --check scripts/validate_first_controlled_generation_authorization_packet.js: passed
+  - node scripts/validate_first_controlled_generation_authorization_packet.js: passed
+  - node scripts/validate_visual_memory_readonly_query_contract.js: passed
+  - node scripts/validate_smart_v3_push_safety_lane.js: passed
+  - node scripts/validate_agent_board_state.js: passed
+  - powershell -NoProfile -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1: passed
+  - npm run validate:mvp: passed
+Boundary:
+  - source_local_commit: 6921c4b9ff88741f526a6f347d310b96a0e49efe
+  - source_remote_commit: 51f4674d707ed17d3d6fcda55dddea10f8b0533c
+  - explicit_A5_required: true
+  - exact_call_count: true
+  - allowed_output_dir_policy: true
+  - review_required_after_generation: true
+  - no_memory_write_default: true
+  - metadata_only: true
+  - authorization_packet_only: true
+  - preflight_only: true
+  - execution_authorized_by_this_packet: false
+  - provider_call_performed: false
+  - image_generation_performed: false
+  - output_write_performed: false
+  - VCP_memory_write_performed: false
+  - DailyNote_write_performed: false
+  - runtime_call_performed: false
+  - secret_value_read_performed: false
+  - production_candidate_created: false
+  - accepted_sample_auto_promotion: false
+  - memory_seed_promoted: false
+  - Push_L2_exercised: false
+  - commit_performed: pending
+  - push_performed: false
+Negative cases:
+  - first_controlled_generation_authorization_packet: 20 caught / 20
+
 ## VALIDATION-20260523-v0.5.9-VISUAL-MEMORY-READONLY-QUERY-CONTRACT
 
 Task: v0.5.9 Visual Memory ReadOnly Query Contract

@@ -1,0 +1,76 @@
+{
+  "first_controlled_generation_authorization_packet": {
+    "authorization_packet_id": "first_controlled_generation_authorization_packet_v0_6_0_negative_fixture",
+    "version": "v0_1",
+    "phase": "v0_6_0_first_controlled_generation_authorization_packet",
+    "source_readiness_packet_ref": "reports/visual_asset_eval_dry_run/v0_5_0_controlled_generation_readiness_packet.json",
+    "source_human_review_gate_packet_ref": "reports/visual_asset_eval_dry_run/v0_5_6_human_review_gate_packet.json",
+    "source_evidence_contract_ref": "reports/visual_asset_eval_dry_run/v0_5_8_controlled_generation_evidence_contract.json",
+    "source_visual_memory_readonly_query_contract_ref": "reports/visual_asset_eval_dry_run/v0_5_9_visual_memory_readonly_query_contract.json",
+    "explicit_A5_required": {
+      "enabled": false,
+      "separate_human_authorization_required": false,
+      "execution_authorized_now": true
+    },
+    "exact_call_count": {
+      "configured_limit": 2,
+      "actual_generation_calls": 1,
+      "provider_call_budget_consumed": 1
+    },
+    "allowed_output_dir_policy": {
+      "output_dir_preapproved": true,
+      "output_directory_selection_required_before_execution": false,
+      "project_relative_output_dir_required": false,
+      "raw_local_path_allowed": true,
+      "output_write_performed": true
+    },
+    "review_required_after_generation": {
+      "enabled": false,
+      "human_review_required_after_generation": false,
+      "accepted_sample_promotion_allowed": true,
+      "production_candidate_allowed": true
+    },
+    "no_memory_write_default": {
+      "enabled": false,
+      "VCP_memory_write_allowed": true,
+      "DailyNote_write_allowed": true,
+      "memory_seed_promotion_allowed": true
+    },
+    "boundaries": {
+      "metadata_only": false,
+      "authorization_packet_only": false,
+      "preflight_only": false,
+      "execution_authorized_by_this_packet": true,
+      "provider_call_performed": true,
+      "image_generation_performed": true,
+      "output_write_performed": true,
+      "VCP_memory_write_performed": true,
+      "DailyNote_write_performed": true,
+      "runtime_call_performed": true,
+      "secret_value_read_performed": false,
+      "production_candidate_created": true,
+      "accepted_sample_auto_promotion": true,
+      "memory_seed_promoted": true,
+      "real_executor_implemented_now": true,
+      "Push_L2_exercised": true,
+      "package_dependency_change_performed": false,
+      "commit_performed": false,
+      "push_performed": false
+    },
+    "side_effects": {
+      "provider_call_performed": true,
+      "image_generation_performed": true,
+      "output_write_performed": true,
+      "VCP_memory_write_performed": true,
+      "DailyNote_write_performed": true,
+      "runtime_call_performed": true,
+      "secret_value_read_performed": false,
+      "production_candidate_created": true,
+      "accepted_sample_auto_promotion": true,
+      "memory_seed_promoted": true,
+      "package_dependency_change_performed": false,
+      "commit_performed": false,
+      "push_performed": false
+    }
+  }
+}

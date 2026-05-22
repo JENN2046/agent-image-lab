@@ -1,5 +1,51 @@
 ---
 
+- [x] ID: v0_6_0_first_controlled_generation_authorization_packet
+      Title: Define First Controlled Generation Authorization Packet
+      Reason: The route now needs an inactive but exact authorization packet that encodes A5 requirement, call-count limit, output-dir policy, review requirement, and no-memory defaults before any real generation request can exist.
+      Lane: Green.
+      Status: completed_validated_pending_local_commit.
+      Source local commit: 6921c4b9ff88741f526a6f347d310b96a0e49efe.
+      Source remote commit: 51f4674d707ed17d3d6fcda55dddea10f8b0533c.
+      Source phase: v0_5_9_visual_memory_readonly_query_contract.
+      Previous phase commit: 6921c4b9ff88741f526a6f347d310b96a0e49efe.
+      Previous phase push performed: false.
+      Current gate phase: v0_6_0_first_controlled_generation_authorization_packet.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Scope: doc/schema/report/fixture/validator/status compact batch only.
+      Changed: docs/V0_6_0_FIRST_CONTROLLED_GENERATION_AUTHORIZATION_PACKET.md; schemas/first_controlled_generation_authorization_packet.schema.yaml; reports/visual_asset_eval_dry_run/v0_6_0_first_controlled_generation_authorization_packet.json; tests/schema_examples/first_controlled_generation_authorization_packet.example.json; tests/schema_examples/first_controlled_generation_authorization_packet_fail.example.json; scripts/validate_first_controlled_generation_authorization_packet.js; scripts/validate_mvp.ps1; scripts/lib/governance_tooling_maintenance_slice.js; docs/00_project_roadmap.md; .agent_board resume surfaces.
+      explicit_A5_required: true.
+      exact_call_count: true.
+      allowed_output_dir_policy: true.
+      review_required_after_generation: true.
+      no_memory_write_default: true.
+      metadata_only: true.
+      authorization_packet_only: true.
+      preflight_only: true.
+      execution_authorized_by_this_packet: false.
+      Push_L2_exercised: false.
+      real_executor_implemented_now: false.
+      provider_call_performed: false.
+      image_generation_performed: false.
+      output_write_performed: false.
+      VCP_memory_write_performed: false.
+      DailyNote_write_performed: false.
+      runtime_call_performed: false.
+      secret_value_read_performed: false.
+      production_candidate_created: false.
+      accepted_sample_auto_promotion: false.
+      memory_seed_promoted: false.
+      package_dependency_change_performed: false.
+      push_allowed: false.
+      commit_performed: pending.
+      push_performed: false.
+      Stop condition: provider call, image generation, output write, memory write, DailyNote write, runtime/VCPToolBox/VCPChat/CDP/bridge/MCP action, real executor implementation, Push_L2 test, accepted_sample promotion, production_candidate creation, memory_seed promotion, dependency change, secret read, git add ., push, tag, release, deploy, or validation failure requiring judgment.
+      Recommended next: local commit, post-commit review, Push_L3 manual guarded push classification, then v0.6.1 Fifteen-Day Controlled Generation Readiness Checkpoint.
+
+---
+
 - [x] ID: v0_5_9_visual_memory_readonly_query_contract
       Title: Define Visual Memory ReadOnly Query Contract
       Reason: The visual-memory route needs explicit readonly query shapes and no-write flags before any future guarded memory recall can even be discussed.

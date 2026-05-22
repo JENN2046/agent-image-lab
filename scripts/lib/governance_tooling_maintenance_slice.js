@@ -648,6 +648,23 @@ const EXPECTED_V0_5_9_VISUAL_MEMORY_READONLY_QUERY_CONTRACT_SLICE = [
   "tests/schema_examples/visual_memory_readonly_query_contract_fail.example.json"
 ].sort();
 
+const EXPECTED_V0_6_0_FIRST_CONTROLLED_GENERATION_AUTHORIZATION_PACKET_SLICE = [
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  ".agent_board/VALIDATION_LOG.md",
+  "docs/00_project_roadmap.md",
+  "docs/V0_6_0_FIRST_CONTROLLED_GENERATION_AUTHORIZATION_PACKET.md",
+  "reports/visual_asset_eval_dry_run/v0_6_0_first_controlled_generation_authorization_packet.json",
+  "schemas/first_controlled_generation_authorization_packet.schema.yaml",
+  "scripts/lib/governance_tooling_maintenance_slice.js",
+  "scripts/validate_first_controlled_generation_authorization_packet.js",
+  "scripts/validate_mvp.ps1",
+  "tests/schema_examples/first_controlled_generation_authorization_packet.example.json",
+  "tests/schema_examples/first_controlled_generation_authorization_packet_fail.example.json"
+].sort();
+
 const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "governance_tooling_maintenance_slice_v1",
@@ -796,6 +813,10 @@ const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "v0_5_9_visual_memory_readonly_query_contract_slice",
     files: EXPECTED_V0_5_9_VISUAL_MEMORY_READONLY_QUERY_CONTRACT_SLICE
+  },
+  {
+    id: "v0_6_0_first_controlled_generation_authorization_packet_slice",
+    files: EXPECTED_V0_6_0_FIRST_CONTROLLED_GENERATION_AUTHORIZATION_PACKET_SLICE
   }
 ];
 
@@ -1177,6 +1198,7 @@ module.exports = {
   EXPECTED_V0_5_7_NOOP_CONTROLLED_GENERATION_RUNNER_DRY_RUN_SLICE,
   EXPECTED_V0_5_8_CONTROLLED_GENERATION_EVIDENCE_CONTRACT_SLICE,
   EXPECTED_V0_5_9_VISUAL_MEMORY_READONLY_QUERY_CONTRACT_SLICE,
+  EXPECTED_V0_6_0_FIRST_CONTROLLED_GENERATION_AUTHORIZATION_PACKET_SLICE,
   GOVERNANCE_TOOLING_ALLOWED_SLICES,
   buildGovernanceToolingMaintenanceSliceReport,
   fileAllowedInGovernanceToolingSlice,

@@ -2,6 +2,57 @@
 
 本文是 Agent Image Lab 的总路线图，用来把 v0.2 基线、v0.3 授权门槛、MVP-B dry-run 和未来真实闭环串成一条可执行路径。
 
+## v0.6.0 - First Controlled Generation Authorization Packet
+
+Status: completed_validated_pending_local_commit.
+
+Purpose:
+- Define the smallest inactive authorization packet required before any future
+  first real controlled generation.
+- Require `explicit_A5_required`, `exact_call_count`,
+  `allowed_output_dir_policy`, `review_required_after_generation`, and
+  `no_memory_write_default`.
+- Keep execution unauthorized now while preserving no-memory and no-output-write
+  defaults.
+
+Artifacts:
+- `docs/V0_6_0_FIRST_CONTROLLED_GENERATION_AUTHORIZATION_PACKET.md`
+- `schemas/first_controlled_generation_authorization_packet.schema.yaml`
+- `reports/visual_asset_eval_dry_run/v0_6_0_first_controlled_generation_authorization_packet.json`
+- `tests/schema_examples/first_controlled_generation_authorization_packet.example.json`
+- `tests/schema_examples/first_controlled_generation_authorization_packet_fail.example.json`
+- `scripts/validate_first_controlled_generation_authorization_packet.js`
+
+Boundary state:
+- `source_local_commit: 6921c4b`
+- `source_remote_commit: 51f4674`
+- `source_phase: v0_5_9_visual_memory_readonly_query_contract`
+- `current_gate_phase: v0_6_0_first_controlled_generation_authorization_packet`
+- `active current phase: v0_3_3_first_live_generation_pilot`
+- `resume_guard_source_phase: v0_3_2_live_candidate_action_packet`
+- `next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial`
+- `explicit_A5_required: true`
+- `exact_call_count: true`
+- `allowed_output_dir_policy: true`
+- `review_required_after_generation: true`
+- `no_memory_write_default: true`
+- `execution_authorized_by_this_packet: false`
+- `provider_call_performed: false`
+- `image_generation_performed: false`
+- `output_write_performed: false`
+- `runtime_call_performed: false`
+- `secret_value_read_performed: false`
+- `VCP_memory_write_performed: false`
+- `DailyNote_write_performed: false`
+- `production_candidate_created: false`
+- `accepted_sample_auto_promotion: false`
+- `memory_seed_promoted: false`
+- `Push_L2_exercised: false`
+- `real_executor_implemented_now: false`
+- `push_allowed: false`
+
+Recommended next: local commit, post-commit review, Push_L3 manual guarded push classification, then v0.6.1 Fifteen-Day Controlled Generation Readiness Checkpoint.
+
 ## v0.5.9 - Visual Memory ReadOnly Query Contract
 
 Status: completed_validated_pending_local_commit.

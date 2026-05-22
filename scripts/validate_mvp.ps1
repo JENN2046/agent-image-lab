@@ -103,6 +103,7 @@ $requiredFiles = @(
   'scripts/validate_noop_controlled_generation_runner_dry_run.js',
   'scripts/validate_controlled_generation_evidence_contract.js',
   'scripts/validate_visual_memory_readonly_query_contract.js',
+  'scripts/validate_first_controlled_generation_authorization_packet.js',
   'scripts/validate_visual_sample_memory_policy.js',
   'scripts/validate_15_day_architecture_checkpoint.js',
   'scripts/validate_local_checkpoint_manifest.js',
@@ -12963,6 +12964,34 @@ process.exit(child.status || 0);
     }
     if ($visualMemoryReadOnlyQueryContract.Push_L2_exercised -ne $false -or $visualMemoryReadOnlyQueryContract.real_executor_implemented_now -ne $false -or $visualMemoryReadOnlyQueryContract.provider_call_performed -ne $false -or $visualMemoryReadOnlyQueryContract.image_generation_performed -ne $false -or $visualMemoryReadOnlyQueryContract.VCP_memory_write_performed -ne $false -or $visualMemoryReadOnlyQueryContract.DailyNote_write_performed -ne $false -or $visualMemoryReadOnlyQueryContract.runtime_call_performed -ne $false -or $visualMemoryReadOnlyQueryContract.secret_value_read_performed -ne $false -or $visualMemoryReadOnlyQueryContract.production_candidate_created -ne $false -or $visualMemoryReadOnlyQueryContract.accepted_sample_auto_promotion -ne $false -or $visualMemoryReadOnlyQueryContract.memory_seed_promoted -ne $false -or $visualMemoryReadOnlyQueryContract.package_dependency_change_performed -ne $false -or $visualMemoryReadOnlyQueryContract.commit_performed -ne $false -or $visualMemoryReadOnlyQueryContract.push_performed -ne $false) {
       Add-Failure "Visual Memory ReadOnly Query Contract must not perform Push_L2, executor, provider, image, memory, DailyNote, runtime, secret, production, accepted-sample, memory-seed, dependency, commit, or push actions"
+    }
+  }
+
+  $firstControlledGenerationAuthorizationPacketOutput = & node (Join-Path $Root 'scripts/validate_first_controlled_generation_authorization_packet.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "First Controlled Generation Authorization Packet validation exited with failure"
+  } else {
+    $firstControlledGenerationAuthorizationPacket = ($firstControlledGenerationAuthorizationPacketOutput -join "`n") | ConvertFrom-Json
+    if ($firstControlledGenerationAuthorizationPacket.passed -ne $true -or $firstControlledGenerationAuthorizationPacket.phase -ne 'v0_6_0_first_controlled_generation_authorization_packet') {
+      Add-Failure "First Controlled Generation Authorization Packet validation must pass"
+    }
+    if ($firstControlledGenerationAuthorizationPacket.authorization_doc_present -ne $true -or $firstControlledGenerationAuthorizationPacket.authorization_schema_present -ne $true -or $firstControlledGenerationAuthorizationPacket.authorization_report_present -ne $true -or $firstControlledGenerationAuthorizationPacket.authorization_fixture_present -ne $true -or $firstControlledGenerationAuthorizationPacket.authorization_fail_fixture_present -ne $true) {
+      Add-Failure "First Controlled Generation Authorization Packet must define doc, schema, report, pass fixture, and fail fixture"
+    }
+    if ($firstControlledGenerationAuthorizationPacket.source_readiness_packet_verified -ne $true -or $firstControlledGenerationAuthorizationPacket.source_human_review_gate_packet_verified -ne $true -or $firstControlledGenerationAuthorizationPacket.source_evidence_contract_verified -ne $true -or $firstControlledGenerationAuthorizationPacket.source_visual_memory_readonly_query_contract_verified -ne $true) {
+      Add-Failure "First Controlled Generation Authorization Packet must bind to readiness, review gate, evidence, and readonly query contract sources"
+    }
+    if ($firstControlledGenerationAuthorizationPacket.explicit_A5_required -ne $true -or $firstControlledGenerationAuthorizationPacket.exact_call_count -ne $true -or $firstControlledGenerationAuthorizationPacket.allowed_output_dir_policy -ne $true -or $firstControlledGenerationAuthorizationPacket.review_required_after_generation -ne $true -or $firstControlledGenerationAuthorizationPacket.no_memory_write_default -ne $true) {
+      Add-Failure "First Controlled Generation Authorization Packet must define every required authorization field"
+    }
+    if ($firstControlledGenerationAuthorizationPacket.negative_case_count -lt 20 -or $firstControlledGenerationAuthorizationPacket.caught_negative_case_count -ne $firstControlledGenerationAuthorizationPacket.negative_case_count -or $firstControlledGenerationAuthorizationPacket.all_negative_cases_caught -ne $true -or $firstControlledGenerationAuthorizationPacket.explicit_A5_required_caught -ne $true -or $firstControlledGenerationAuthorizationPacket.exact_call_count_caught -ne $true -or $firstControlledGenerationAuthorizationPacket.allowed_output_dir_policy_caught -ne $true -or $firstControlledGenerationAuthorizationPacket.review_required_after_generation_caught -ne $true -or $firstControlledGenerationAuthorizationPacket.no_memory_write_default_caught -ne $true -or $firstControlledGenerationAuthorizationPacket.provider_call_caught -ne $true -or $firstControlledGenerationAuthorizationPacket.image_generation_caught -ne $true -or $firstControlledGenerationAuthorizationPacket.output_write_caught -ne $true -or $firstControlledGenerationAuthorizationPacket.memory_write_caught -ne $true -or $firstControlledGenerationAuthorizationPacket.raw_local_path_caught -ne $true) {
+      Add-Failure "First Controlled Generation Authorization Packet must catch every required negative case"
+    }
+    if ($firstControlledGenerationAuthorizationPacket.metadata_only -ne $true -or $firstControlledGenerationAuthorizationPacket.authorization_packet_only -ne $true -or $firstControlledGenerationAuthorizationPacket.preflight_only -ne $true -or $firstControlledGenerationAuthorizationPacket.execution_authorized_by_this_packet -ne $false) {
+      Add-Failure "First Controlled Generation Authorization Packet must remain metadata-only, authorization-packet-only, preflight-only, and inactive"
+    }
+    if ($firstControlledGenerationAuthorizationPacket.Push_L2_exercised -ne $false -or $firstControlledGenerationAuthorizationPacket.real_executor_implemented_now -ne $false -or $firstControlledGenerationAuthorizationPacket.provider_call_performed -ne $false -or $firstControlledGenerationAuthorizationPacket.image_generation_performed -ne $false -or $firstControlledGenerationAuthorizationPacket.output_write_performed -ne $false -or $firstControlledGenerationAuthorizationPacket.VCP_memory_write_performed -ne $false -or $firstControlledGenerationAuthorizationPacket.DailyNote_write_performed -ne $false -or $firstControlledGenerationAuthorizationPacket.runtime_call_performed -ne $false -or $firstControlledGenerationAuthorizationPacket.secret_value_read_performed -ne $false -or $firstControlledGenerationAuthorizationPacket.production_candidate_created -ne $false -or $firstControlledGenerationAuthorizationPacket.accepted_sample_auto_promotion -ne $false -or $firstControlledGenerationAuthorizationPacket.memory_seed_promoted -ne $false -or $firstControlledGenerationAuthorizationPacket.package_dependency_change_performed -ne $false -or $firstControlledGenerationAuthorizationPacket.commit_performed -ne $false -or $firstControlledGenerationAuthorizationPacket.push_performed -ne $false) {
+      Add-Failure "First Controlled Generation Authorization Packet must not perform Push_L2, executor, provider, image, output, memory, DailyNote, runtime, secret, production, accepted-sample, memory-seed, dependency, commit, or push actions"
     }
   }
 
