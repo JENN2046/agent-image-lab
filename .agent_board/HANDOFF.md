@@ -1,5 +1,43 @@
 ---
 
+## Current Handoff Update - v0.4.0a Visual Asset Eval Dry Run Asset Class Binding
+
+```text
+phase: v0_4_0a_visual_asset_eval_dry_run_asset_class_binding
+phase_id: v0_4_0a_visual_asset_eval_dry_run_asset_class_binding
+status: completed_validated_pending_local_commit
+mode: Green Lane validator/docs/status tightening
+summary: Tightens the v0.4.0 Visual Asset Eval dry-run validator so dry-run asset_class must match the referenced authorization registry entry, with a caught mismatch negative case.
+source_remote_commit: e82bfbcb67fc8c6782ff222d151d2262cfa9f64c
+current_gate_phase: v0_4_0a_visual_asset_eval_dry_run_asset_class_binding
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+changed: scripts/validate_visual_asset_eval_dry_run.js; docs/V0_4_0_VISUAL_ASSET_EVAL_DRY_RUN.md; docs/00_project_roadmap.md; scripts/lib/governance_tooling_maintenance_slice.js; .agent_board resume surfaces.
+asset_class_bound_to_registry_entry: true
+mismatch_negative_case_caught: true
+negative_case_count: 14
+allowed_asset_class_enum_changed: false
+Push_L2_exercised: false
+real_executor_implemented_now: false
+provider_call_performed: false
+image_generation_performed: false
+VCP_memory_write_performed: false
+DailyNote_write_performed: false
+runtime_call_performed: false
+secret_value_read_performed: false
+production_candidate_created: false
+accepted_sample_auto_promotion: false
+package_dependency_change_performed: false
+no_v0_4_1_started: true
+push_allowed: false
+commit_performed: pending
+push_performed: false
+recommended_next: post_commit_review_and_push_lane_classification
+```
+
+---
+
 ## Current Handoff Update - v0.4.0 Visual Asset Eval Dry Run
 
 ```text

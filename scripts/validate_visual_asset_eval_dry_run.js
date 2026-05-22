@@ -102,6 +102,7 @@ function validateExistingAssetRefs(record) {
 
   const entry = registry.entries.find((item) => item.asset_id === assetRef.asset_id);
   assert(entry, "asset_ref.asset_id must exist in authorization registry");
+  assert(record.asset_class === entry.asset_class, "asset_class must match registry entry");
   assert(entry.owner_authorized_upload === true, "asset must be owner-authorized");
   assert(entry.raw_private_source_path_present === false, "registry entry must not include raw private path");
   assert(entry.accepted_sample === false, "registry entry must not already be accepted_sample");
@@ -208,6 +209,9 @@ function validateNegativeCases(validRecord, invalidRecord) {
     expectFailure(validRecord, "asset_class_outside_allowed_values_fails", (candidate) => {
       candidate.asset_class = "accepted_sample";
     }),
+    expectFailure(validRecord, "registry_asset_class_mismatch_fails", (candidate) => {
+      candidate.asset_class = candidate.asset_class === "runs_artifact" ? "user_authorized_test_image" : "runs_artifact";
+    }),
     expectFailure(validRecord, "decision_result_outside_allowed_values_fails", (candidate) => {
       candidate.decision.result = "approve";
     }),
@@ -226,7 +230,10 @@ function validateNegativeCases(validRecord, invalidRecord) {
     invalid_fixture_failure_caught: fixtureFailureCaught,
     negative_case_count: cases.length,
     caught_negative_case_count: cases.filter((item) => item.result === "caught").length,
-    all_negative_cases_caught: cases.every((item) => item.result === "caught")
+    all_negative_cases_caught: cases.every((item) => item.result === "caught"),
+    registry_asset_class_mismatch_caught: cases.some((item) => {
+      return item.case_id === "registry_asset_class_mismatch_fails" && item.result === "caught";
+    })
   };
 }
 
@@ -274,6 +281,7 @@ function main() {
     negative_case_count: negativeCaseSummary.negative_case_count,
     caught_negative_case_count: negativeCaseSummary.caught_negative_case_count,
     all_negative_cases_caught: negativeCaseSummary.all_negative_cases_caught,
+    registry_asset_class_mismatch_caught: negativeCaseSummary.registry_asset_class_mismatch_caught,
     memory_suitability_false_by_default: validRecord.review_report.memory_suitability.value === false,
     Push_L2_exercised: false,
     real_executor_implemented_now: false,

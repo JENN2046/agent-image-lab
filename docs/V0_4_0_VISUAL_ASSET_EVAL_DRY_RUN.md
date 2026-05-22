@@ -79,6 +79,7 @@ visual_asset_eval_dry_run:
 ## Required Guardrails
 
 - The referenced asset must already exist in the authorization registry.
+- `asset_class` must match the referenced authorization registry entry.
 - The referenced receipt path and attempt result path must match that registry
   entry.
 - The receipt and attempt result files must be JSON metadata records.
@@ -104,6 +105,7 @@ The validator must fail closed for:
 - `VCP_memory_write_performed: true`
 - `image_generation_performed: true`
 - `provider_call_performed: true`
+- registry entry `asset_class` mismatch
 - asset class outside the allowed enum
 - decision result outside `pass`, `patch`, or `reject`
 - missing `commercial_fitness`

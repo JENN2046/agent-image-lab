@@ -1,5 +1,34 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260522-v0.4.0a-VISUAL-ASSET-EVAL-DRY-RUN-ASSET-CLASS-BINDING
+
+Task: v0.4.0a Visual Asset Eval Dry Run Asset Class Binding
+Status: completed_validated
+Commands run:
+  - git diff --check: passed_with_line_ending_warnings_only
+  - node --check scripts/validate_visual_asset_eval_dry_run.js: passed
+  - node scripts/validate_visual_asset_eval_dry_run.js: passed
+  - node scripts/validate_visual_asset_eval_v0_1.js: passed
+  - node scripts/validate_visual_sample_memory_policy.js: passed
+  - node scripts/validate_smart_v3_push_safety_lane.js: passed
+  - node scripts/validate_agent_board_state.js: passed
+  - node scripts/validate_autopilot_agent_board_resume_compaction_guard.js: passed_after_status_surface_sync
+  - powershell -NoProfile -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1: passed
+  - npm run validate:mvp: passed
+Boundary:
+  - source_remote_commit: e82bfbcb67fc8c6782ff222d151d2262cfa9f64c
+  - asset_class_bound_to_registry_entry: true
+  - mismatch_negative_case_caught: true
+  - allowed_asset_class_enum_changed: false
+  - provider_call_performed: false
+  - image_generation_performed: false
+  - DailyNote_write_performed: false
+  - VCP_memory_write_performed: false
+  - production_candidate_created: false
+  - accepted_sample_auto_promotion: false
+  - no_v0_4_1_started: true
+  - push_performed: false
+
 ## VALIDATION-20260522-v0.4.0-VISUAL-ASSET-EVAL-DRY-RUN
 
 Task: v0.4.0 Visual Asset Eval Dry Run

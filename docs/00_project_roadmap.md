@@ -2,6 +2,45 @@
 
 本文是 Agent Image Lab 的总路线图，用来把 v0.2 基线、v0.3 授权门槛、MVP-B dry-run 和未来真实闭环串成一条可执行路径。
 
+## v0.4.0a - Visual Asset Eval Dry Run Asset Class Binding
+
+Status: local validator tightening completed and pending commit.
+
+Purpose:
+- Bind dry-run `asset_class` to the referenced authorization registry entry.
+- Prove a registry/dry-run `asset_class` mismatch fails closed.
+- Preserve the v0.4.0 metadata-only dry-run boundary.
+
+Artifacts:
+- `scripts/validate_visual_asset_eval_dry_run.js`
+- `docs/V0_4_0_VISUAL_ASSET_EVAL_DRY_RUN.md`
+
+Boundary state:
+- `source_remote_commit: e82bfbcb67fc8c6782ff222d151d2262cfa9f64c`
+- `source_phase: v0_4_0_visual_asset_eval_dry_run`
+- `current_gate_phase: v0_4_0a_visual_asset_eval_dry_run_asset_class_binding`
+- `active current phase: v0_3_3_first_live_generation_pilot`
+- `resume_guard_source_phase: v0_3_2_live_candidate_action_packet`
+- `next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial`
+- `asset_class_bound_to_registry_entry: true`
+- `mismatch_negative_case_caught: true`
+- `allowed_asset_class_enum_changed: false`
+- `Push_L2_exercised: false`
+- `real_executor_implemented_now: false`
+- `provider_call_performed: false`
+- `image_generation_performed: false`
+- `VCP_memory_write_performed: false`
+- `DailyNote_write_performed: false`
+- `runtime_call_performed: false`
+- `secret_value_read_performed: false`
+- `production_candidate_created: false`
+- `accepted_sample_auto_promotion: false`
+- `package_dependency_change_performed: false`
+- `no_v0_4_1_started: true`
+- `push_allowed: false`
+
+Recommended next: post-commit review and push lane classification; do not push unless the lane classification explicitly allows it.
+
 ## v0.4.0 - Visual Asset Eval Dry Run
 
 Status: local docs/schema/validator + fixture dry-run gate completed locally.
