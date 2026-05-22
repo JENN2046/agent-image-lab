@@ -90,6 +90,7 @@ $requiredFiles = @(
   'scripts/validate_visual_sample_registry_dry_run.js',
   'scripts/validate_visual_eval_consistency_check.js',
   'scripts/validate_noop_visual_workflow_runner_plan.js',
+  'scripts/validate_seven_day_visual_workflow_checkpoint.js',
   'scripts/validate_visual_sample_memory_policy.js',
   'scripts/validate_15_day_architecture_checkpoint.js',
   'scripts/validate_local_checkpoint_manifest.js',
@@ -12582,6 +12583,31 @@ process.exit(child.status || 0);
     }
     if ($noopVisualWorkflowRunnerPlan.Push_L2_exercised -ne $false -or $noopVisualWorkflowRunnerPlan.real_executor_implemented_now -ne $false -or $noopVisualWorkflowRunnerPlan.provider_call_performed -ne $false -or $noopVisualWorkflowRunnerPlan.image_generation_performed -ne $false -or $noopVisualWorkflowRunnerPlan.runtime_call_performed -ne $false -or $noopVisualWorkflowRunnerPlan.secret_value_read_performed -ne $false -or $noopVisualWorkflowRunnerPlan.VCP_memory_write_performed -ne $false -or $noopVisualWorkflowRunnerPlan.DailyNote_write_performed -ne $false -or $noopVisualWorkflowRunnerPlan.production_candidate_created -ne $false -or $noopVisualWorkflowRunnerPlan.accepted_sample_auto_promotion -ne $false -or $noopVisualWorkflowRunnerPlan.memory_seed_promoted -ne $false -or $noopVisualWorkflowRunnerPlan.package_dependency_change_performed -ne $false -or $noopVisualWorkflowRunnerPlan.commit_performed -ne $false -or $noopVisualWorkflowRunnerPlan.push_performed -ne $false) {
       Add-Failure "No-op Visual Workflow Runner Plan must not perform Push_L2, executor, provider, image, runtime, secret, memory, DailyNote, production, accepted-sample, memory-seed, dependency, commit, or push actions"
+    }
+  }
+
+  $sevenDayVisualWorkflowCheckpointOutput = & node (Join-Path $Root 'scripts/validate_seven_day_visual_workflow_checkpoint.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Seven/Fifteen-Day Visual Workflow Checkpoint validation exited with failure"
+  } else {
+    $sevenDayVisualWorkflowCheckpoint = ($sevenDayVisualWorkflowCheckpointOutput -join "`n") | ConvertFrom-Json
+    if ($sevenDayVisualWorkflowCheckpoint.passed -ne $true -or $sevenDayVisualWorkflowCheckpoint.phase -ne 'v0_4_7_seven_day_visual_workflow_checkpoint') {
+      Add-Failure "Seven/Fifteen-Day Visual Workflow Checkpoint validation must pass"
+    }
+    if ($sevenDayVisualWorkflowCheckpoint.checkpoint_doc_present -ne $true -or $sevenDayVisualWorkflowCheckpoint.next_14_day_route_options_present -ne $true) {
+      Add-Failure "Seven/Fifteen-Day Visual Workflow Checkpoint must define checkpoint doc and next 14-day route options"
+    }
+    if ($sevenDayVisualWorkflowCheckpoint.review_pack_exists -ne $true -or $sevenDayVisualWorkflowCheckpoint.failure_taxonomy_exists -ne $true -or $sevenDayVisualWorkflowCheckpoint.prompt_correction_hint_exists -ne $true -or $sevenDayVisualWorkflowCheckpoint.sample_registry_dry_run_exists -ne $true -or $sevenDayVisualWorkflowCheckpoint.consistency_check_exists -ne $true -or $sevenDayVisualWorkflowCheckpoint.noop_runner_plan_exists -ne $true) {
+      Add-Failure "Seven/Fifteen-Day Visual Workflow Checkpoint must confirm all visual loop artifacts exist"
+    }
+    if ($sevenDayVisualWorkflowCheckpoint.visual_judgment_loop_closed -ne $true) {
+      Add-Failure "Seven/Fifteen-Day Visual Workflow Checkpoint must close the visual judgment loop"
+    }
+    if ($sevenDayVisualWorkflowCheckpoint.image_generation -ne $false -or $sevenDayVisualWorkflowCheckpoint.memory_write -ne $false -or $sevenDayVisualWorkflowCheckpoint.real_executor -ne $false) {
+      Add-Failure "Seven/Fifteen-Day Visual Workflow Checkpoint must keep image generation, memory write, and real executor false"
+    }
+    if ($sevenDayVisualWorkflowCheckpoint.Push_L2_exercised -ne $false -or $sevenDayVisualWorkflowCheckpoint.provider_call_performed -ne $false -or $sevenDayVisualWorkflowCheckpoint.image_generation_performed -ne $false -or $sevenDayVisualWorkflowCheckpoint.VCP_memory_write_performed -ne $false -or $sevenDayVisualWorkflowCheckpoint.DailyNote_write_performed -ne $false -or $sevenDayVisualWorkflowCheckpoint.runtime_call_performed -ne $false -or $sevenDayVisualWorkflowCheckpoint.secret_value_read_performed -ne $false -or $sevenDayVisualWorkflowCheckpoint.production_candidate_created -ne $false -or $sevenDayVisualWorkflowCheckpoint.accepted_sample_auto_promotion -ne $false -or $sevenDayVisualWorkflowCheckpoint.memory_seed_promoted -ne $false -or $sevenDayVisualWorkflowCheckpoint.package_dependency_change_performed -ne $false -or $sevenDayVisualWorkflowCheckpoint.commit_performed -ne $false -or $sevenDayVisualWorkflowCheckpoint.push_performed -ne $false) {
+      Add-Failure "Seven/Fifteen-Day Visual Workflow Checkpoint must not perform Push_L2, provider, image, memory, DailyNote, runtime, secret, production, accepted-sample, memory-seed, dependency, commit, or push actions"
     }
   }
 

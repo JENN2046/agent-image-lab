@@ -2,9 +2,55 @@
 
 本文是 Agent Image Lab 的总路线图，用来把 v0.2 基线、v0.3 授权门槛、MVP-B dry-run 和未来真实闭环串成一条可执行路径。
 
+## v0.4.7 - Seven/Fifteen-Day Visual Workflow Checkpoint
+
+Status: local doc/validator checkpoint completed and pending local commit.
+
+Purpose:
+- Close the reusable visual judgment loop from review pack through no-op runner plan.
+- Confirm review pack, failure taxonomy, prompt correction hint, sample registry dry-run, consistency check, and no-op runner plan all exist.
+- Preserve `image_generation: false`, `memory_write: false`, and `real_executor: false`.
+
+Artifacts:
+- `docs/V0_4_7_SEVEN_DAY_VISUAL_WORKFLOW_CHECKPOINT.md`
+- `docs/next_14_day_route_options.md`
+- `scripts/validate_seven_day_visual_workflow_checkpoint.js`
+
+Boundary state:
+- `source_local_commit: 953b25e`
+- `source_remote_commit: 2f86f9b516b8113d099addf1bbb519b9a46a68fd`
+- `source_phase: v0_4_6_noop_visual_workflow_runner_plan`
+- `current_gate_phase: v0_4_7_seven_day_visual_workflow_checkpoint`
+- `active current phase: v0_3_3_first_live_generation_pilot`
+- `resume_guard_source_phase: v0_3_2_live_candidate_action_packet`
+- `next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial`
+- `review_pack_exists: true`
+- `failure_taxonomy_exists: true`
+- `prompt_correction_hint_exists: true`
+- `sample_registry_dry_run_exists: true`
+- `consistency_check_exists: true`
+- `noop_runner_plan_exists: true`
+- `visual_judgment_loop_closed: true`
+- `image_generation: false`
+- `memory_write: false`
+- `real_executor: false`
+- `provider_call_performed: false`
+- `image_generation_performed: false`
+- `runtime_call_performed: false`
+- `secret_value_read_performed: false`
+- `VCP_memory_write_performed: false`
+- `DailyNote_write_performed: false`
+- `production_candidate_created: false`
+- `accepted_sample_auto_promotion: false`
+- `memory_seed_promoted: false`
+- `package_dependency_change_performed: false`
+- `push_allowed: false`
+
+Recommended next: post-commit review and Push_L3 manual guarded push classification.
+
 ## v0.4.6 - No-op Visual Workflow Runner Plan
 
-Status: local doc/schema/fixture/validator gate completed and pending local commit.
+Status: local commit completed; push pending manual authorization.
 
 Purpose:
 - Define a no-op runner plan that may read the review pack, select the next dry-run action, and emit `would_apply_correction_hint` plus `would_register_rejected_sample`.
@@ -20,6 +66,8 @@ Artifacts:
 
 Boundary state:
 - `source_local_commit: b9d5b06`
+- `local_commit: 953b25e`
+- `push_performed: false`
 - `source_remote_commit: 2f86f9b516b8113d099addf1bbb519b9a46a68fd`
 - `source_phase: v0_4_5_visual_eval_consistency_check`
 - `current_gate_phase: v0_4_6_noop_visual_workflow_runner_plan`
