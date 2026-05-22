@@ -8,6 +8,7 @@ const root = path.resolve(__dirname, "..");
 const phase = "v0_4_7_seven_day_visual_workflow_checkpoint";
 const docPath = "docs/V0_4_7_SEVEN_DAY_VISUAL_WORKFLOW_CHECKPOINT.md";
 const routeOptionsPath = "next_14_day_route_options.md";
+const docsRouteOptionsPath = "docs/next_14_day_route_options.md";
 const reviewPackPath = "reports/visual_asset_eval_dry_run/v0_4_1_safe_portrait_review_pack.json";
 const taxonomyPath = "tests/schema_examples/visual_failure_taxonomy.example.json";
 const correctionHintPath = "tests/schema_examples/visual_prompt_correction_hint.example.json";
@@ -16,6 +17,22 @@ const consistencyPath = "tests/schema_examples/visual_eval_consistency_check.exa
 const noopRunnerPath = "tests/schema_examples/visual_noop_workflow_runner_plan.example.json";
 const mvpPath = "scripts/validate_mvp.ps1";
 const slicePath = "scripts/lib/governance_tooling_maintenance_slice.js";
+const hardFalseFlags = [
+  "provider_call_performed",
+  "image_generation_performed",
+  "VCP_memory_write_performed",
+  "DailyNote_write_performed",
+  "runtime_call_performed",
+  "secret_value_read_performed",
+  "production_candidate_created",
+  "accepted_sample_auto_promotion",
+  "memory_seed_promoted",
+  "real_executor_implemented_now",
+  "Push_L2_exercised",
+  "package_dependency_change_performed",
+  "commit_performed",
+  "push_performed"
+];
 
 function assert(condition, message) {
   if (!condition) throw new Error(message);
@@ -36,6 +53,10 @@ function readJson(relativePath) {
   return JSON.parse(read(relativePath));
 }
 
+function clone(value) {
+  return JSON.parse(JSON.stringify(value));
+}
+
 function assertNoSecretOrRawPath(value, context) {
   if (typeof value === "string") {
     assert(!/^[A-Za-z]:[\\/]/.test(value), `Raw local drive path found in ${context}`);
@@ -51,6 +72,57 @@ function assertNoSecretOrRawPath(value, context) {
   if (value && typeof value === "object") {
     Object.entries(value).forEach(([key, item]) => assertNoSecretOrRawPath(item, `${context}.${key}`));
   }
+}
+
+function assertFalseFlags(container, context) {
+  assert(container && typeof container === "object", `${context} missing`);
+  for (const flag of hardFalseFlags) {
+    if (Object.prototype.hasOwnProperty.call(container, flag)) {
+      assert(container[flag] === false, `${context}.${flag} must remain false`);
+    }
+  }
+}
+
+function assertFalseFlagCoverage(sourceName, containers) {
+  containers.forEach(([context, container]) => assert(container && typeof container === "object", `${context} missing`));
+  for (const flag of hardFalseFlags) {
+    const coveredBy = containers.filter(([, container]) => Object.prototype.hasOwnProperty.call(container, flag));
+    assert(coveredBy.length > 0, `${sourceName}.${flag} must be explicitly recorded`);
+    coveredBy.forEach(([context, container]) => assert(container[flag] === false, `${context}.${flag} must remain false`));
+  }
+}
+
+function assertSourceBoundaryFlags(records) {
+  const sourceContainers = [
+    ["reviewPack", [
+      ["reviewPack.review_pack_boundaries", records.reviewPack.review_pack_boundaries],
+      ["reviewPack.side_effects", records.reviewPack.side_effects]
+    ]],
+    ["taxonomy", [
+      ["taxonomy.taxonomy_boundaries", records.taxonomy.taxonomy_boundaries],
+      ["taxonomy.side_effects", records.taxonomy.side_effects]
+    ]],
+    ["correctionHints", [
+      ["correctionHints.boundaries", records.correctionHints.boundaries],
+      ["correctionHints.side_effects", records.correctionHints.side_effects]
+    ]],
+    ["sampleRegistry", [
+      ["sampleRegistry.registry_boundaries", records.sampleRegistry.registry_boundaries],
+      ["sampleRegistry.side_effects", records.sampleRegistry.side_effects]
+    ]],
+    ["consistency", [
+      ["consistency.boundaries", records.consistency.boundaries],
+      ["consistency.side_effects", records.consistency.side_effects]
+    ]],
+    ["noopRunner", [
+      ["noopRunner.boundaries", records.noopRunner.boundaries],
+      ["noopRunner.side_effects", records.noopRunner.side_effects]
+    ]]
+  ];
+  sourceContainers.forEach(([sourceName, containers]) => {
+    containers.forEach(([context, container]) => assertFalseFlags(container, context));
+    assertFalseFlagCoverage(sourceName, containers);
+  });
 }
 
 function validateSourceArtifacts() {
@@ -71,26 +143,43 @@ function validateSourceArtifacts() {
   assert(noopRunner.phase === "v0_4_6_noop_visual_workflow_runner_plan", "no-op runner phase mismatch");
 
   assert(reviewPack.review_pack_boundaries.image_binary_read_performed === false, "review pack must not read image binary");
-  assert(reviewPack.review_pack_boundaries.image_generation_performed === false, "review pack must not generate image");
-  assert(reviewPack.review_pack_boundaries.VCP_memory_write_performed === false, "review pack must not write memory");
-  assert(reviewPack.review_pack_boundaries.real_executor_implemented_now === false, "review pack must not implement executor");
-  assert(taxonomy.taxonomy_boundaries.image_generation_performed === false, "taxonomy must not generate image");
-  assert(correctionHints.boundaries.image_generation_performed === false, "prompt hints must not generate image");
-  assert(sampleRegistry.registry_boundaries.image_generation_performed === false, "sample registry must not generate image");
   assert(consistency.boundaries.image_binary_read_performed === false, "consistency must not read image binary");
-  assert(noopRunner.boundaries.image_generation_performed === false, "no-op runner must not generate image");
-  assert(noopRunner.boundaries.VCP_memory_write_performed === false, "no-op runner must not write memory");
-  assert(noopRunner.boundaries.real_executor_implemented_now === false, "no-op runner must not implement executor");
+  assertSourceBoundaryFlags(records);
 
   return records;
+}
+
+function validateNegativeCases(validRecords) {
+  const cases = [];
+  const candidate = clone(validRecords);
+  delete candidate.reviewPack.side_effects.VCP_memory_write_performed;
+  delete candidate.reviewPack.review_pack_boundaries.VCP_memory_write_performed;
+  try {
+    assertSourceBoundaryFlags(candidate);
+  } catch (error) {
+    cases.push({
+      case_id: "missing_vcp_memory_write_flag_fails",
+      result: "caught",
+      failure_message: error.message
+    });
+  }
+  assert(cases.some((item) => item.case_id === "missing_vcp_memory_write_flag_fails"), "missing VCP memory flag negative case was not caught");
+  return {
+    negative_case_count: 1,
+    caught_negative_case_count: cases.length,
+    all_negative_cases_caught: cases.length === 1,
+    missing_hard_false_flag_caught: cases.some((item) => item.case_id === "missing_vcp_memory_write_flag_fails")
+  };
 }
 
 function validateTextSurfaces() {
   const doc = read(docPath);
   const routeOptions = read(routeOptionsPath);
+  const docsRouteOptions = read(docsRouteOptionsPath);
   const mvp = read(mvpPath);
   const slice = read(slicePath);
   const combined = `${doc}\n${routeOptions}`;
+  assert(routeOptions === docsRouteOptions, "route options copies must stay byte-for-byte identical");
   for (const token of [
     phase,
     "review_pack exists: true",
@@ -107,11 +196,13 @@ function validateTextSurfaces() {
   assert(routeOptions.includes("Option A") && routeOptions.includes("Option B") && routeOptions.includes("Option C"), "route options must define three options");
   assert(mvp.includes("scripts/validate_seven_day_visual_workflow_checkpoint.js"), "MVP validator wiring missing");
   assert(slice.includes("v0_4_7_seven_day_visual_workflow_checkpoint_slice"), "exact slice wiring missing");
+  assert(slice.includes(docsRouteOptionsPath), "docs route options path missing from exact slice wiring");
 }
 
 function main() {
   validateTextSurfaces();
-  validateSourceArtifacts();
+  const records = validateSourceArtifacts();
+  const negativeCases = validateNegativeCases(records);
 
   const output = {
     passed: true,
@@ -119,6 +210,13 @@ function main() {
     phase,
     checkpoint_doc_present: fs.existsSync(repoPath(docPath)),
     next_14_day_route_options_present: fs.existsSync(repoPath(routeOptionsPath)),
+    docs_next_14_day_route_options_present: fs.existsSync(repoPath(docsRouteOptionsPath)),
+    route_options_copies_match: read(routeOptionsPath) === read(docsRouteOptionsPath),
+    hard_false_flag_coverage_required: true,
+    missing_hard_false_flag_caught: negativeCases.missing_hard_false_flag_caught,
+    negative_case_count: negativeCases.negative_case_count,
+    caught_negative_case_count: negativeCases.caught_negative_case_count,
+    all_negative_cases_caught: negativeCases.all_negative_cases_caught,
     review_pack_exists: fs.existsSync(repoPath(reviewPackPath)),
     failure_taxonomy_exists: fs.existsSync(repoPath(taxonomyPath)),
     prompt_correction_hint_exists: fs.existsSync(repoPath(correctionHintPath)),

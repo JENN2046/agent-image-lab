@@ -432,10 +432,16 @@ const EXPECTED_V0_4_7_SEVEN_DAY_VISUAL_WORKFLOW_CHECKPOINT_SLICE = [
   ".agent_board/VALIDATION_LOG.md",
   "docs/00_project_roadmap.md",
   "docs/V0_4_7_SEVEN_DAY_VISUAL_WORKFLOW_CHECKPOINT.md",
+  "docs/next_14_day_route_options.md",
   "next_14_day_route_options.md",
   "scripts/lib/governance_tooling_maintenance_slice.js",
   "scripts/validate_local_commit_scope.js",
   "scripts/validate_mvp.ps1",
+  "scripts/validate_seven_day_visual_workflow_checkpoint.js"
+].sort();
+
+const EXPECTED_V0_4_7_REVIEW_FINDINGS_FIX_SLICE = [
+  "scripts/lib/governance_tooling_maintenance_slice.js",
   "scripts/validate_seven_day_visual_workflow_checkpoint.js"
 ].sort();
 
@@ -535,6 +541,10 @@ const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "v0_4_7_seven_day_visual_workflow_checkpoint_slice",
     files: EXPECTED_V0_4_7_SEVEN_DAY_VISUAL_WORKFLOW_CHECKPOINT_SLICE
+  },
+  {
+    id: "v0_4_7_review_findings_fix_slice",
+    files: EXPECTED_V0_4_7_REVIEW_FINDINGS_FIX_SLICE
   }
 ];
 
@@ -814,6 +824,11 @@ function governanceToolingMaintenanceSliceSelfCheck() {
         === "v0_4_7_seven_day_visual_workflow_checkpoint_slice"
     },
     {
+      check: "exact_slice_matches_v0_4_7_review_findings_fix",
+      passed: findMatchingGovernanceToolingSlice(EXPECTED_V0_4_7_REVIEW_FINDINGS_FIX_SLICE)?.id
+        === "v0_4_7_review_findings_fix_slice"
+    },
+    {
       check: "exact_slice_rejects_missing_file",
       passed: findMatchingGovernanceToolingSlice(EXPECTED_GOVERNANCE_TOOLING_MAINTENANCE_SLICE.slice(1)) === null
     },
@@ -863,6 +878,7 @@ module.exports = {
   EXPECTED_V0_4_5_VISUAL_EVAL_CONSISTENCY_CHECK_SLICE,
   EXPECTED_V0_4_6_NOOP_VISUAL_WORKFLOW_RUNNER_PLAN_SLICE,
   EXPECTED_V0_4_7_SEVEN_DAY_VISUAL_WORKFLOW_CHECKPOINT_SLICE,
+  EXPECTED_V0_4_7_REVIEW_FINDINGS_FIX_SLICE,
   GOVERNANCE_TOOLING_ALLOWED_SLICES,
   buildGovernanceToolingMaintenanceSliceReport,
   fileAllowedInGovernanceToolingSlice,
