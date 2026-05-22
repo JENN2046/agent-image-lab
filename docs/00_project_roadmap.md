@@ -5,10 +5,10 @@
 ## 当前产品主线恢复点
 
 ```yaml
-current_phase: v0_3_7a_post_push_state_sync
-phase_status: COMPLETED_REMOTE_SYNCED_AFTER_GUARDED_PUSH
-source_phase: v0_3_7a_push_safety_lane_gate
-current_goal: sync_v0_3_7a_post_push_status_surfaces
+current_phase: v0_3_7b_push_safety_lane_cycle_closeout
+phase_status: COMPLETED_VALIDATED
+source_phase: v0_3_7a_Push_L1_auto_push_gate
+current_goal: close_out_first_Push_L1_auto_push_cycle_without_scope_expansion
 long_term_goal: v0_3_controlled_real_provider_production_loop
 semantic_tightening_active: true
 current_boundary_semantics_cleanup_active: true
@@ -31,14 +31,16 @@ v0_3_7_bounded_l4_executor_preflight_contract_gate_active: true
 v0_3_7_post_push_state_sync_active: true
 v0_3_7a_push_safety_lane_gate_active: true
 v0_3_7a_post_push_state_sync_active: true
+v0_3_7b_push_safety_lane_cycle_closeout_active: true
 post_push_state:
-  current_remote_head: e25e80bddf55a7b1349690043cbd597e6152c8ce
-  pushed_commit: e25e80bddf55a7b1349690043cbd597e6152c8ce
+  current_remote_head: f26e9478c94c7a3dcfc4ba93b6a3efac806ebece
+  pushed_commit: f26e9478c94c7a3dcfc4ba93b6a3efac806ebece
   pushed_commits:
-    - e25e80bddf55a7b1349690043cbd597e6152c8ce
+    - f26e9478c94c7a3dcfc4ba93b6a3efac806ebece
   pushed_ref: origin/master
-  push_status: completed_remote_synced_after_guarded_push
+  push_status: completed_remote_synced_after_Push_L1_auto_push
   ahead_behind_after_push: "0 0"
+  human_authorization_required: false
   force_push_used: false
   tag_release_deploy_performed: false
   next_phase_started: false
@@ -85,6 +87,33 @@ push_safety_lane:
   Push_L1_green_auto_available_for_future: true
   Push_L2_amber_auto_guarded_available_for_future: true
   Push_L3_red_manual_preserved: true
+  first_Push_L1_auto_push_proven: true
+  proven_commit: f26e9478c94c7a3dcfc4ba93b6a3efac806ebece
+  proven_scope:
+    - exactly_one_commit_ahead
+    - six_status_surface_files_only
+    - worktree_clean
+    - fast_forward_only
+    - no_assets
+    - no_runs
+    - no_images
+    - no_package_files
+    - no_runtime_code
+    - no_provider_image_memory_runtime_secret_side_effects
+    - validation_passed
+    - remote_head_verified
+  not_proven:
+    - Push_L2_amber_auto_guarded
+    - real_executor
+    - provider/image/memory/runtime_commits
+    - generated_binaries
+    - runs_artifacts
+    - package/dependency_changes
+    - production_candidate
+    - accepted_sample_promotion
+  boundaries_preserved: true
+  Push_L2_not_exercised: true
+  real_executor_implemented_now: false
   push_performed_by_this_gate: false
   future_push_allowed: false
 visual_asset_governance:
