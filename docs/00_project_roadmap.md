@@ -2,6 +2,165 @@
 
 本文是 Agent Image Lab 的总路线图，用来把 v0.2 基线、v0.3 授权门槛、MVP-B dry-run 和未来真实闭环串成一条可执行路径。
 
+## v0.6.9 - Exact New-Trial Request Text Regenerated
+
+Status: completed_validated_local_request_text_regeneration_slice.
+
+Purpose:
+- Regenerate one non-placeholder exact request text directly from the `v0.6.8`
+  resolved prompt/path/bridge bundle.
+- Keep the route local-only, unsubmitted, and non-executable while making the
+  next human authorization decision fully copyable.
+- Preserve the one-shot budget, zero retry, mandatory review, and
+  no-memory-write defaults inside the regenerated text itself.
+
+Artifacts:
+- `docs/V0_6_9_EXACT_NEW_TRIAL_REQUEST_TEXT_REGENERATED.md`
+- `schemas/exact_new_trial_request_text_regenerated.schema.yaml`
+- `reports/visual_asset_eval_dry_run/v0_6_9_exact_new_trial_request_text_regenerated.json`
+- `tests/schema_examples/exact_new_trial_request_text_regenerated.example.json`
+- `tests/schema_examples/exact_new_trial_request_text_regenerated_fail.example.json`
+- `scripts/validate_exact_new_trial_request_text_regenerated.js`
+
+Boundary state:
+- `source_local_commit: 4686a37`
+- `source_remote_commit: 16a8aa3`
+- `source_phase: v0_6_8_exact_new_trial_intake_field_resolution`
+- `current_gate_phase: v0_6_9_exact_new_trial_request_text_regenerated`
+- `active current phase: v0_3_3_first_live_generation_pilot`
+- `resume_guard_source_phase: v0_3_2_live_candidate_action_packet`
+- `next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial`
+- `authorization_package_id: AUTH-PENDING-V0-3-3-EXACT-NEW-TRIAL-20260523-001`
+- `authorization_status: draft_not_submitted`
+- `approval_status: not_requested`
+- `submit_ready: false`
+- `exact_request_text_regenerated: true`
+- `placeholders_remaining: false`
+- `selected_prompt_package_ref: prompts/image_generation/safe_adult_editorial_portrait_v1.yaml`
+- `selected_output_directory: runs/real_generation/v0_3_3_exact_new_trial_001/`
+- `selected_receipt_path: reports/provider_receipts/v0_3_3_exact_new_trial_001_receipt.json`
+- `selected_registry_path: reports/provider_receipts/v0_3_3_exact_new_trial_001_registry.json`
+- `selected_review_console_bridge_ref: review_console/live_receipt_bridge/v0_3_3_exact_new_trial_001`
+- `human_approval_phrase_received: false`
+- `human_send_step_still_required: true`
+- `request_not_submitted: true`
+- `can_submit_now: false`
+- `can_execute_now: false`
+- `provider_call_performed: false`
+- `image_generation_performed: false`
+- `memory_write_performed: false`
+- `real_executor_performed: false`
+- `secret_value_read_performed: false`
+- `push_allowed: false`
+- `push_declined_by_user: true`
+- `local_only_continuation_selected: true`
+
+Recommended next: stop at the regenerated exact request text, or later ask for
+an explicit human decision on whether to issue that phrase. Do not submit or
+execute anything by default.
+
+## v0.6.8 - Exact New-Trial Intake Field Resolution
+
+Status: completed_validated_local_field_resolution_slice.
+
+Purpose:
+- Continue the local-only post-`v0.6.7` route by resolving the five exact new-trial
+  fields into one concrete candidate set.
+- Convert generic placeholders into one exact prompt/path/bridge bundle without
+  reopening submission or execution.
+- Keep the route non-submitted and non-executable while making the next request-text
+  regeneration step deterministic.
+
+Artifacts:
+- `docs/V0_6_8_EXACT_NEW_TRIAL_INTAKE_FIELD_RESOLUTION.md`
+- `schemas/exact_new_trial_intake_field_resolution.schema.yaml`
+- `reports/visual_asset_eval_dry_run/v0_6_8_exact_new_trial_intake_field_resolution.json`
+- `tests/schema_examples/exact_new_trial_intake_field_resolution.example.json`
+- `tests/schema_examples/exact_new_trial_intake_field_resolution_fail.example.json`
+- `scripts/validate_exact_new_trial_intake_field_resolution.js`
+
+Boundary state:
+- `source_local_commit: 4686a37`
+- `source_remote_commit: 16a8aa3`
+- `source_phase: v0_6_7_exact_new_trial_authorization_intake_preflight`
+- `current_gate_phase: v0_6_8_exact_new_trial_intake_field_resolution`
+- `active current phase: v0_3_3_first_live_generation_pilot`
+- `resume_guard_source_phase: v0_3_2_live_candidate_action_packet`
+- `next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial`
+- `authorization_package_id: AUTH-PENDING-V0-3-3-EXACT-NEW-TRIAL-20260523-001`
+- `authorization_status: draft_not_submitted`
+- `approval_status: not_requested`
+- `submit_ready: false`
+- `all_five_exact_fields_resolved_locally: true`
+- `selected_prompt_package_ref: prompts/image_generation/safe_adult_editorial_portrait_v1.yaml`
+- `selected_output_directory: runs/real_generation/v0_3_3_exact_new_trial_001/`
+- `selected_receipt_path: reports/provider_receipts/v0_3_3_exact_new_trial_001_receipt.json`
+- `selected_registry_path: reports/provider_receipts/v0_3_3_exact_new_trial_001_registry.json`
+- `selected_review_console_bridge_ref: review_console/live_receipt_bridge/v0_3_3_exact_new_trial_001`
+- `request_text_regenerated_after_resolution: false`
+- `ready_to_regenerate_request_text: true`
+- `can_submit_now: false`
+- `can_execute_now: false`
+- `provider_call_performed: false`
+- `image_generation_performed: false`
+- `memory_write_performed: false`
+- `real_executor_performed: false`
+- `secret_value_read_performed: false`
+- `push_allowed: false`
+- `push_declined_by_user: true`
+- `local_only_continuation_selected: true`
+
+Recommended next: regenerate the exact request text from the resolved values, keep
+the request unsubmitted, and do not execute anything by default.
+
+## v0.6.7 - Exact New-Trial Authorization Intake Preflight
+
+Status: completed_validated_local_intake_preflight_slice.
+
+Purpose:
+- Start the next local-only phase after the v0.6.6 request draft by grouping
+  every unresolved exact A5 field into one fail-closed intake checklist.
+- Keep the route non-submitted, non-executable, and placeholder-based while
+  making later exact-field resolution easier to review.
+- Confirm the one-shot call budget, zero retry, mandatory review, and
+  no-memory-write defaults are still intact before any future request text
+  regeneration.
+
+Artifacts:
+- `docs/V0_6_7_EXACT_NEW_TRIAL_AUTHORIZATION_INTAKE_PREFLIGHT.md`
+- `schemas/exact_new_trial_authorization_intake_preflight.schema.yaml`
+- `reports/visual_asset_eval_dry_run/v0_6_7_exact_new_trial_authorization_intake_preflight.json`
+- `tests/schema_examples/exact_new_trial_authorization_intake_preflight.example.json`
+- `tests/schema_examples/exact_new_trial_authorization_intake_preflight_fail.example.json`
+- `scripts/validate_exact_new_trial_authorization_intake_preflight.js`
+
+Boundary state:
+- `source_local_commit: 4686a37`
+- `source_remote_commit: 16a8aa3`
+- `source_phase: v0_6_6_exact_new_trial_a5_request_draft`
+- `current_gate_phase: v0_6_7_exact_new_trial_authorization_intake_preflight`
+- `active current phase: v0_3_3_first_live_generation_pilot`
+- `resume_guard_source_phase: v0_3_2_live_candidate_action_packet`
+- `next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial`
+- `authorization_package_id: AUTH-PENDING-V0-3-3-EXACT-NEW-TRIAL-20260523-001`
+- `authorization_status: draft_not_submitted`
+- `approval_status: not_requested`
+- `submit_ready: false`
+- `ready_for_exact_new_trial_authorization: true`
+- `all_placeholders_still_unresolved_at_this_phase: true`
+- `exact_human_A5_phrase_still_required: true`
+- `can_execute_now: false`
+- `provider_call_performed: false`
+- `image_generation_performed: false`
+- `memory_write_performed: false`
+- `real_executor_performed: false`
+- `secret_value_read_performed: false`
+- `push_allowed: false`
+- `push_declined_by_user: true`
+- `local_only_continuation_selected: true`
+
+Recommended next: resolve the exact intake checklist locally, regenerate the request text only after every placeholder is replaced, and do not submit or execute anything by default.
+
 ## v0.6.6 - Exact New-Trial A5 Request Draft
 
 Status: completed_validated_local_status_sync_slice.
@@ -48,8 +207,12 @@ Boundary state:
 - `push_allowed: false`
 - `completed_remote_synced_after_guarded_push: false`
 - `current_status_sync_commit_pending_push: true`
+- `push_declined_by_user: true`
+- `local_only_continuation_selected: true`
+- `next_safe_local_phase: v0_6_7_exact_new_trial_authorization_intake_preflight`
+- `next_safe_local_phase_scope: docs/status/preflight only`
 
-Recommended next: either push the current local status-sync commit or leave it local, then wait for an explicit new A5 authorization or stop at `ready_for_exact_new_trial_authorization`; do not execute anything from this draft by default.
+Recommended next: open `v0_6_7_exact_new_trial_authorization_intake_preflight` as a local-only preparation slice, keep the A5 request unsubmitted, and do not execute anything from this draft by default.
 
 ## v0.6.5 - Ready For Exact New-Trial Authorization Checkpoint
 

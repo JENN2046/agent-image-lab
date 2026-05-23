@@ -1,0 +1,95 @@
+id: exact_new_trial_request_text_regenerated
+version: v0_1
+phase: v0_6_9_exact_new_trial_request_text_regenerated
+type: object
+required:
+  - authorization_package_id
+  - version
+  - phase
+  - source_field_resolution_ref
+  - source_exact_new_trial_a5_request_draft_ref
+  - source_first_controlled_generation_authorization_packet_ref
+  - regeneration_status
+  - regenerated_request_text
+  - regeneration_assertions
+  - fixed_constraints_confirmation
+  - next_route_options
+  - boundaries
+  - side_effects
+properties:
+  regeneration_status:
+    required:
+      - authorization_status
+      - approval_status
+      - active
+      - execute_now
+      - submit_ready
+      - exact_request_text_regenerated
+      - request_text_regeneration_only
+  regenerated_request_text:
+    required:
+      - approval_phrase_draft
+      - contains_placeholder_tokens
+      - prompt_package_ref
+      - output_directory
+      - receipt_path
+      - registry_path
+      - review_console_bridge_ref
+  regeneration_assertions:
+    required:
+      - copyable_exact_request_text_present
+      - placeholders_remaining
+      - request_text_matches_v0_6_8_resolved_values
+      - exact_request_text_regenerated
+      - human_approval_phrase_received
+      - human_send_step_still_required
+      - request_not_submitted
+      - can_submit_now
+      - can_execute_now
+  fixed_constraints_confirmation:
+    required:
+      - provider_target
+      - plugin_id_or_provider_route
+      - model
+      - command
+      - exact_call_count
+      - max_image_candidates
+      - retry_limit
+      - review_required_after_generation
+      - no_memory_write_default
+      - overwrite_existing_files_allowed
+  boundaries:
+    required:
+      - metadata_only
+      - request_text_regeneration_only
+      - request_not_submitted
+      - can_submit_now
+      - can_execute_now
+      - provider_call_performed
+      - image_generation_performed
+      - VCP_memory_write_performed
+      - DailyNote_write_performed
+      - runtime_call_performed
+      - secret_value_read_performed
+      - production_candidate_created
+      - accepted_sample_auto_promotion
+      - memory_seed_promoted
+      - real_executor_implemented_now
+      - Push_L2_exercised
+      - package_dependency_change_performed
+      - commit_performed
+      - push_performed
+  side_effects:
+    required:
+      - provider_call_performed
+      - image_generation_performed
+      - VCP_memory_write_performed
+      - DailyNote_write_performed
+      - runtime_call_performed
+      - secret_value_read_performed
+      - production_candidate_created
+      - accepted_sample_auto_promotion
+      - memory_seed_promoted
+      - package_dependency_change_performed
+      - commit_performed
+      - push_performed

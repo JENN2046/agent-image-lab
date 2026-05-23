@@ -109,6 +109,9 @@ $requiredFiles = @(
   'scripts/validate_exact_new_trial_authorization_refresh.js',
   'scripts/validate_ready_for_exact_new_trial_authorization_checkpoint.js',
   'scripts/validate_exact_new_trial_a5_request_draft.js',
+  'scripts/validate_exact_new_trial_authorization_intake_preflight.js',
+  'scripts/validate_exact_new_trial_intake_field_resolution.js',
+  'scripts/validate_exact_new_trial_request_text_regenerated.js',
   'scripts/validate_visual_sample_memory_policy.js',
   'scripts/validate_15_day_architecture_checkpoint.js',
   'scripts/validate_local_checkpoint_manifest.js',
@@ -13149,6 +13152,105 @@ process.exit(child.status || 0);
     }
     if ($exactNewTrialA5RequestDraft.Push_L2_exercised -ne $false -or $exactNewTrialA5RequestDraft.real_executor_implemented_now -ne $false -or $exactNewTrialA5RequestDraft.provider_call_performed -ne $false -or $exactNewTrialA5RequestDraft.image_generation_performed -ne $false -or $exactNewTrialA5RequestDraft.VCP_memory_write_performed -ne $false -or $exactNewTrialA5RequestDraft.DailyNote_write_performed -ne $false -or $exactNewTrialA5RequestDraft.runtime_call_performed -ne $false -or $exactNewTrialA5RequestDraft.secret_value_read_performed -ne $false -or $exactNewTrialA5RequestDraft.production_candidate_created -ne $false -or $exactNewTrialA5RequestDraft.accepted_sample_auto_promotion -ne $false -or $exactNewTrialA5RequestDraft.memory_seed_promoted -ne $false -or $exactNewTrialA5RequestDraft.package_dependency_change_performed -ne $false -or $exactNewTrialA5RequestDraft.commit_performed -ne $false -or $exactNewTrialA5RequestDraft.push_performed -ne $false) {
       Add-Failure "Exact New-Trial A5 Request Draft must not perform Push_L2, executor, provider, image, memory, DailyNote, runtime, secret, production, accepted-sample, memory-seed, dependency, commit, or push actions"
+    }
+  }
+
+  $exactNewTrialAuthorizationIntakePreflightOutput = & node (Join-Path $Root 'scripts/validate_exact_new_trial_authorization_intake_preflight.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Exact New-Trial Authorization Intake Preflight validation exited with failure"
+  } else {
+    $exactNewTrialAuthorizationIntakePreflight = ($exactNewTrialAuthorizationIntakePreflightOutput -join "`n") | ConvertFrom-Json
+    if ($exactNewTrialAuthorizationIntakePreflight.passed -ne $true -or $exactNewTrialAuthorizationIntakePreflight.phase -ne 'v0_6_7_exact_new_trial_authorization_intake_preflight') {
+      Add-Failure "Exact New-Trial Authorization Intake Preflight validation must pass"
+    }
+    if ($exactNewTrialAuthorizationIntakePreflight.intake_doc_present -ne $true -or $exactNewTrialAuthorizationIntakePreflight.intake_schema_present -ne $true -or $exactNewTrialAuthorizationIntakePreflight.intake_report_present -ne $true -or $exactNewTrialAuthorizationIntakePreflight.intake_fixture_present -ne $true -or $exactNewTrialAuthorizationIntakePreflight.intake_fail_fixture_present -ne $true) {
+      Add-Failure "Exact New-Trial Authorization Intake Preflight must define doc, schema, report, pass fixture, and fail fixture"
+    }
+    if ($exactNewTrialAuthorizationIntakePreflight.authorization_package_id -ne 'AUTH-PENDING-V0-3-3-EXACT-NEW-TRIAL-20260523-001' -or $exactNewTrialAuthorizationIntakePreflight.authorization_status -ne 'draft_not_submitted' -or $exactNewTrialAuthorizationIntakePreflight.approval_status -ne 'not_requested' -or $exactNewTrialAuthorizationIntakePreflight.submit_ready -ne $false -or $exactNewTrialAuthorizationIntakePreflight.preflight_only -ne $true) {
+      Add-Failure "Exact New-Trial Authorization Intake Preflight must remain a non-submitted preflight-only intake packet"
+    }
+    if ($exactNewTrialAuthorizationIntakePreflight.ready_for_exact_new_trial_authorization -ne $true -or $exactNewTrialAuthorizationIntakePreflight.all_placeholders_still_unresolved_at_this_phase -ne $true -or $exactNewTrialAuthorizationIntakePreflight.exact_human_A5_phrase_still_required -ne $true) {
+      Add-Failure "Exact New-Trial Authorization Intake Preflight must keep the route authorization-ready while preserving unresolved intake placeholders"
+    }
+    if ($exactNewTrialAuthorizationIntakePreflight.exact_call_count -ne 1 -or $exactNewTrialAuthorizationIntakePreflight.max_image_candidates -ne 1 -or $exactNewTrialAuthorizationIntakePreflight.retry_limit -ne 0 -or $exactNewTrialAuthorizationIntakePreflight.review_required_after_generation -ne $true -or $exactNewTrialAuthorizationIntakePreflight.no_memory_write_default -ne $true -or $exactNewTrialAuthorizationIntakePreflight.overwrite_existing_files_allowed -ne $false) {
+      Add-Failure "Exact New-Trial Authorization Intake Preflight must preserve one-shot limits, zero retry, mandatory review, no-memory default, and no-overwrite policy"
+    }
+    if ($exactNewTrialAuthorizationIntakePreflight.negative_case_count -lt 22 -or $exactNewTrialAuthorizationIntakePreflight.caught_negative_case_count -ne $exactNewTrialAuthorizationIntakePreflight.negative_case_count -or $exactNewTrialAuthorizationIntakePreflight.all_negative_cases_caught -ne $true) {
+      Add-Failure "Exact New-Trial Authorization Intake Preflight must catch every required negative case"
+    }
+    if ($exactNewTrialAuthorizationIntakePreflight.metadata_only -ne $true -or $exactNewTrialAuthorizationIntakePreflight.intake_only -ne $true -or $exactNewTrialAuthorizationIntakePreflight.can_submit_now -ne $false -or $exactNewTrialAuthorizationIntakePreflight.can_execute_now -ne $false) {
+      Add-Failure "Exact New-Trial Authorization Intake Preflight must remain metadata-only, intake-only, non-submittable, and non-executable"
+    }
+    if ($exactNewTrialAuthorizationIntakePreflight.Push_L2_exercised -ne $false -or $exactNewTrialAuthorizationIntakePreflight.real_executor_implemented_now -ne $false -or $exactNewTrialAuthorizationIntakePreflight.provider_call_performed -ne $false -or $exactNewTrialAuthorizationIntakePreflight.image_generation_performed -ne $false -or $exactNewTrialAuthorizationIntakePreflight.VCP_memory_write_performed -ne $false -or $exactNewTrialAuthorizationIntakePreflight.DailyNote_write_performed -ne $false -or $exactNewTrialAuthorizationIntakePreflight.runtime_call_performed -ne $false -or $exactNewTrialAuthorizationIntakePreflight.secret_value_read_performed -ne $false -or $exactNewTrialAuthorizationIntakePreflight.production_candidate_created -ne $false -or $exactNewTrialAuthorizationIntakePreflight.accepted_sample_auto_promotion -ne $false -or $exactNewTrialAuthorizationIntakePreflight.memory_seed_promoted -ne $false -or $exactNewTrialAuthorizationIntakePreflight.package_dependency_change_performed -ne $false -or $exactNewTrialAuthorizationIntakePreflight.commit_performed -ne $false -or $exactNewTrialAuthorizationIntakePreflight.push_performed -ne $false) {
+      Add-Failure "Exact New-Trial Authorization Intake Preflight must not perform Push_L2, executor, provider, image, memory, DailyNote, runtime, secret, production, accepted-sample, memory-seed, dependency, commit, or push actions"
+    }
+  }
+
+  $exactNewTrialIntakeFieldResolutionOutput = & node (Join-Path $Root 'scripts/validate_exact_new_trial_intake_field_resolution.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Exact New-Trial Intake Field Resolution validation exited with failure"
+  } else {
+    $exactNewTrialIntakeFieldResolution = ($exactNewTrialIntakeFieldResolutionOutput -join "`n") | ConvertFrom-Json
+    if ($exactNewTrialIntakeFieldResolution.passed -ne $true -or $exactNewTrialIntakeFieldResolution.phase -ne 'v0_6_8_exact_new_trial_intake_field_resolution') {
+      Add-Failure "Exact New-Trial Intake Field Resolution validation must pass"
+    }
+    if ($exactNewTrialIntakeFieldResolution.field_resolution_doc_present -ne $true -or $exactNewTrialIntakeFieldResolution.field_resolution_schema_present -ne $true -or $exactNewTrialIntakeFieldResolution.field_resolution_report_present -ne $true -or $exactNewTrialIntakeFieldResolution.field_resolution_fixture_present -ne $true -or $exactNewTrialIntakeFieldResolution.field_resolution_fail_fixture_present -ne $true) {
+      Add-Failure "Exact New-Trial Intake Field Resolution must define doc, schema, report, pass fixture, and fail fixture"
+    }
+    if ($exactNewTrialIntakeFieldResolution.authorization_package_id -ne 'AUTH-PENDING-V0-3-3-EXACT-NEW-TRIAL-20260523-001' -or $exactNewTrialIntakeFieldResolution.authorization_status -ne 'draft_not_submitted' -or $exactNewTrialIntakeFieldResolution.approval_status -ne 'not_requested' -or $exactNewTrialIntakeFieldResolution.submit_ready -ne $false -or $exactNewTrialIntakeFieldResolution.request_text_regenerated_after_resolution -ne $false) {
+      Add-Failure "Exact New-Trial Intake Field Resolution must remain a non-submitted, non-regenerated local resolution packet"
+    }
+    if ($exactNewTrialIntakeFieldResolution.all_five_exact_fields_resolved_locally -ne $true -or $exactNewTrialIntakeFieldResolution.ready_to_regenerate_request_text -ne $true -or $exactNewTrialIntakeFieldResolution.exact_human_A5_phrase_still_required -ne $true -or $exactNewTrialIntakeFieldResolution.review_console_bridge_root_corrected -ne $true) {
+      Add-Failure "Exact New-Trial Intake Field Resolution must resolve all five fields locally while keeping later regeneration and human A5 explicit"
+    }
+    if ($exactNewTrialIntakeFieldResolution.selected_prompt_package_ref -ne 'prompts/image_generation/safe_adult_editorial_portrait_v1.yaml' -or $exactNewTrialIntakeFieldResolution.selected_output_directory -ne 'runs/real_generation/v0_3_3_exact_new_trial_001/' -or $exactNewTrialIntakeFieldResolution.selected_receipt_path -ne 'reports/provider_receipts/v0_3_3_exact_new_trial_001_receipt.json' -or $exactNewTrialIntakeFieldResolution.selected_registry_path -ne 'reports/provider_receipts/v0_3_3_exact_new_trial_001_registry.json' -or $exactNewTrialIntakeFieldResolution.selected_review_console_bridge_ref -ne 'review_console/live_receipt_bridge/v0_3_3_exact_new_trial_001') {
+      Add-Failure "Exact New-Trial Intake Field Resolution must select the exact resolved candidate values"
+    }
+    if ($exactNewTrialIntakeFieldResolution.exact_call_count -ne 1 -or $exactNewTrialIntakeFieldResolution.max_image_candidates -ne 1 -or $exactNewTrialIntakeFieldResolution.retry_limit -ne 0 -or $exactNewTrialIntakeFieldResolution.review_required_after_generation -ne $true -or $exactNewTrialIntakeFieldResolution.no_memory_write_default -ne $true -or $exactNewTrialIntakeFieldResolution.overwrite_existing_files_allowed -ne $false) {
+      Add-Failure "Exact New-Trial Intake Field Resolution must preserve one-shot limits, zero retry, mandatory review, no-memory default, and no-overwrite policy"
+    }
+    if ($exactNewTrialIntakeFieldResolution.negative_case_count -lt 24 -or $exactNewTrialIntakeFieldResolution.caught_negative_case_count -ne $exactNewTrialIntakeFieldResolution.negative_case_count -or $exactNewTrialIntakeFieldResolution.all_negative_cases_caught -ne $true) {
+      Add-Failure "Exact New-Trial Intake Field Resolution must catch every required negative case"
+    }
+    if ($exactNewTrialIntakeFieldResolution.metadata_only -ne $true -or $exactNewTrialIntakeFieldResolution.resolution_only -ne $true -or $exactNewTrialIntakeFieldResolution.can_submit_now -ne $false -or $exactNewTrialIntakeFieldResolution.can_execute_now -ne $false) {
+      Add-Failure "Exact New-Trial Intake Field Resolution must remain metadata-only, resolution-only, non-submittable, and non-executable"
+    }
+    if ($exactNewTrialIntakeFieldResolution.Push_L2_exercised -ne $false -or $exactNewTrialIntakeFieldResolution.real_executor_implemented_now -ne $false -or $exactNewTrialIntakeFieldResolution.provider_call_performed -ne $false -or $exactNewTrialIntakeFieldResolution.image_generation_performed -ne $false -or $exactNewTrialIntakeFieldResolution.VCP_memory_write_performed -ne $false -or $exactNewTrialIntakeFieldResolution.DailyNote_write_performed -ne $false -or $exactNewTrialIntakeFieldResolution.runtime_call_performed -ne $false -or $exactNewTrialIntakeFieldResolution.secret_value_read_performed -ne $false -or $exactNewTrialIntakeFieldResolution.production_candidate_created -ne $false -or $exactNewTrialIntakeFieldResolution.accepted_sample_auto_promotion -ne $false -or $exactNewTrialIntakeFieldResolution.memory_seed_promoted -ne $false -or $exactNewTrialIntakeFieldResolution.package_dependency_change_performed -ne $false -or $exactNewTrialIntakeFieldResolution.commit_performed -ne $false -or $exactNewTrialIntakeFieldResolution.push_performed -ne $false) {
+      Add-Failure "Exact New-Trial Intake Field Resolution must not perform Push_L2, executor, provider, image, memory, DailyNote, runtime, secret, production, accepted-sample, memory-seed, dependency, commit, or push actions"
+    }
+  }
+
+  $exactNewTrialRequestTextRegeneratedOutput = & node (Join-Path $Root 'scripts/validate_exact_new_trial_request_text_regenerated.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Exact New-Trial Request Text Regenerated validation exited with failure"
+  } else {
+    $exactNewTrialRequestTextRegenerated = ($exactNewTrialRequestTextRegeneratedOutput -join "`n") | ConvertFrom-Json
+    if ($exactNewTrialRequestTextRegenerated.passed -ne $true -or $exactNewTrialRequestTextRegenerated.phase -ne 'v0_6_9_exact_new_trial_request_text_regenerated') {
+      Add-Failure "Exact New-Trial Request Text Regenerated validation must pass"
+    }
+    if ($exactNewTrialRequestTextRegenerated.regenerated_request_doc_present -ne $true -or $exactNewTrialRequestTextRegenerated.regenerated_request_schema_present -ne $true -or $exactNewTrialRequestTextRegenerated.regenerated_request_report_present -ne $true -or $exactNewTrialRequestTextRegenerated.regenerated_request_fixture_present -ne $true -or $exactNewTrialRequestTextRegenerated.regenerated_request_fail_fixture_present -ne $true) {
+      Add-Failure "Exact New-Trial Request Text Regenerated must define doc, schema, report, pass fixture, and fail fixture"
+    }
+    if ($exactNewTrialRequestTextRegenerated.authorization_package_id -ne 'AUTH-PENDING-V0-3-3-EXACT-NEW-TRIAL-20260523-001' -or $exactNewTrialRequestTextRegenerated.authorization_status -ne 'draft_not_submitted' -or $exactNewTrialRequestTextRegenerated.approval_status -ne 'not_requested' -or $exactNewTrialRequestTextRegenerated.submit_ready -ne $false -or $exactNewTrialRequestTextRegenerated.exact_request_text_regenerated -ne $true) {
+      Add-Failure "Exact New-Trial Request Text Regenerated must remain a non-submitted regenerated request-text packet"
+    }
+    if ($exactNewTrialRequestTextRegenerated.copyable_exact_request_text_present -ne $true -or $exactNewTrialRequestTextRegenerated.placeholders_remaining -ne $false -or $exactNewTrialRequestTextRegenerated.human_approval_phrase_received -ne $false -or $exactNewTrialRequestTextRegenerated.human_send_step_still_required -ne $true -or $exactNewTrialRequestTextRegenerated.request_not_submitted -ne $true) {
+      Add-Failure "Exact New-Trial Request Text Regenerated must keep the request exact, copyable, unresolved by a human, and still unsubmitted"
+    }
+    if ($exactNewTrialRequestTextRegenerated.selected_prompt_package_ref -ne 'prompts/image_generation/safe_adult_editorial_portrait_v1.yaml' -or $exactNewTrialRequestTextRegenerated.selected_output_directory -ne 'runs/real_generation/v0_3_3_exact_new_trial_001/' -or $exactNewTrialRequestTextRegenerated.selected_receipt_path -ne 'reports/provider_receipts/v0_3_3_exact_new_trial_001_receipt.json' -or $exactNewTrialRequestTextRegenerated.selected_registry_path -ne 'reports/provider_receipts/v0_3_3_exact_new_trial_001_registry.json' -or $exactNewTrialRequestTextRegenerated.selected_review_console_bridge_ref -ne 'review_console/live_receipt_bridge/v0_3_3_exact_new_trial_001') {
+      Add-Failure "Exact New-Trial Request Text Regenerated must bind to the resolved exact prompt, output, receipt, registry, and review bridge values"
+    }
+    if ($exactNewTrialRequestTextRegenerated.exact_call_count -ne 1 -or $exactNewTrialRequestTextRegenerated.max_image_candidates -ne 1 -or $exactNewTrialRequestTextRegenerated.retry_limit -ne 0 -or $exactNewTrialRequestTextRegenerated.review_required_after_generation -ne $true -or $exactNewTrialRequestTextRegenerated.no_memory_write_default -ne $true -or $exactNewTrialRequestTextRegenerated.overwrite_existing_files_allowed -ne $false) {
+      Add-Failure "Exact New-Trial Request Text Regenerated must preserve one-shot limits, zero retry, mandatory review, no-memory default, and no-overwrite policy"
+    }
+    if ($exactNewTrialRequestTextRegenerated.negative_case_count -lt 24 -or $exactNewTrialRequestTextRegenerated.caught_negative_case_count -ne $exactNewTrialRequestTextRegenerated.negative_case_count -or $exactNewTrialRequestTextRegenerated.all_negative_cases_caught -ne $true) {
+      Add-Failure "Exact New-Trial Request Text Regenerated must catch every required negative case"
+    }
+    if ($exactNewTrialRequestTextRegenerated.metadata_only -ne $true -or $exactNewTrialRequestTextRegenerated.request_text_regeneration_only -ne $true -or $exactNewTrialRequestTextRegenerated.can_submit_now -ne $false -or $exactNewTrialRequestTextRegenerated.can_execute_now -ne $false) {
+      Add-Failure "Exact New-Trial Request Text Regenerated must remain metadata-only, regeneration-only, non-submittable, and non-executable"
+    }
+    if ($exactNewTrialRequestTextRegenerated.Push_L2_exercised -ne $false -or $exactNewTrialRequestTextRegenerated.real_executor_implemented_now -ne $false -or $exactNewTrialRequestTextRegenerated.provider_call_performed -ne $false -or $exactNewTrialRequestTextRegenerated.image_generation_performed -ne $false -or $exactNewTrialRequestTextRegenerated.VCP_memory_write_performed -ne $false -or $exactNewTrialRequestTextRegenerated.DailyNote_write_performed -ne $false -or $exactNewTrialRequestTextRegenerated.runtime_call_performed -ne $false -or $exactNewTrialRequestTextRegenerated.secret_value_read_performed -ne $false -or $exactNewTrialRequestTextRegenerated.production_candidate_created -ne $false -or $exactNewTrialRequestTextRegenerated.accepted_sample_auto_promotion -ne $false -or $exactNewTrialRequestTextRegenerated.memory_seed_promoted -ne $false -or $exactNewTrialRequestTextRegenerated.package_dependency_change_performed -ne $false -or $exactNewTrialRequestTextRegenerated.commit_performed -ne $false -or $exactNewTrialRequestTextRegenerated.push_performed -ne $false) {
+      Add-Failure "Exact New-Trial Request Text Regenerated must not perform Push_L2, executor, provider, image, memory, DailyNote, runtime, secret, production, accepted-sample, memory-seed, dependency, commit, or push actions"
     }
   }
 

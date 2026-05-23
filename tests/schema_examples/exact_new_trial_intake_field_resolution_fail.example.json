@@ -1,0 +1,131 @@
+{
+  "exact_new_trial_intake_field_resolution": {
+    "authorization_package_id": "C:\\private\\AUTH-PENDING-V0-3-3-EXACT-NEW-TRIAL-20260523-001",
+    "version": "v0_1",
+    "phase": "v0_6_8_exact_new_trial_intake_field_resolution",
+    "source_intake_preflight_ref": "reports/visual_asset_eval_dry_run/v0_6_7_exact_new_trial_authorization_intake_preflight.json",
+    "source_exact_new_trial_a5_request_draft_ref": "reports/visual_asset_eval_dry_run/v0_6_6_exact_new_trial_a5_request_draft.json",
+    "source_ready_for_exact_new_trial_authorization_checkpoint_ref": "reports/visual_asset_eval_dry_run/v0_6_5_ready_for_exact_new_trial_authorization_checkpoint.json",
+    "source_safe_portrait_receipt_ref": "reports/provider_receipts/v0_3_3_safe_portrait_001_receipt.json",
+    "source_safe_portrait_registry_ref": "reports/provider_receipts/v0_3_3_safe_portrait_001_registry.json",
+    "resolution_status": {
+      "authorization_status": "active",
+      "approval_status": "approved",
+      "active": true,
+      "execute_now": true,
+      "submit_ready": true,
+      "request_text_regenerated_after_resolution": true,
+      "resolution_only": false
+    },
+    "resolved_exact_fields": {
+      "prompt_package_ref_or_override": {
+        "required": true,
+        "resolved": true,
+        "resolution_mode": "prompt_package_ref",
+        "selected_value": "prompts/image_generation/fashion_night_balcony_vertical_portrait_v1.yaml",
+        "evidence_receipt_ref": "reports/provider_receipts/v0_3_3_safe_portrait_001_receipt.json",
+        "evidence_registry_ref": "reports/provider_receipts/v0_3_3_safe_portrait_001_registry.json",
+        "why_selected": "reused_failed_prompt",
+        "blocked_values": [
+          "prompts/image_generation/fashion_night_balcony_vertical_portrait_v1.yaml"
+        ]
+      },
+      "output_directory": {
+        "required": true,
+        "resolved": true,
+        "selected_value": "runs/real_generation/v0_3_3_safe_portrait_001/",
+        "shared_trial_key": "v0_3_3_safe_portrait_001",
+        "must_not_reuse_values": []
+      },
+      "receipt_path": {
+        "required": true,
+        "resolved": true,
+        "selected_value": "reports/provider_receipts/v0_3_3_safe_portrait_001_receipt.json",
+        "shared_trial_key": "v0_3_3_safe_portrait_001",
+        "must_not_reuse_values": []
+      },
+      "registry_path": {
+        "required": true,
+        "resolved": true,
+        "selected_value": "reports/provider_receipts/provider_receipt_registry.json",
+        "shared_trial_key": "provider_receipt_registry",
+        "must_not_reuse_values": []
+      },
+      "review_console_bridge_ref": {
+        "required": true,
+        "resolved": true,
+        "selected_value": "docs/live_bridge.md",
+        "shared_trial_key": "docs_live_bridge",
+        "corrected_allowed_ref_root": "docs/",
+        "bridge_materialized_now": true,
+        "must_not_reuse_values": []
+      }
+    },
+    "cross_field_consistency": {
+      "shared_trial_key": "broken_key",
+      "output_receipt_registry_bridge_share_same_key": false,
+      "every_selected_value_is_new_not_reused_from_failed_attempts": false,
+      "review_console_bridge_root_corrected_from_preflight_placeholder_note": false,
+      "safe_portrait_prompt_selected_as_closest_successful_person_portrait_route": false
+    },
+    "fixed_constraints_confirmation": {
+      "provider_target": "codex_builtin_image_generation",
+      "plugin_id_or_provider_route": "image_gen.imagegen",
+      "model": "managed_by_codex_image_tool",
+      "command": "generate",
+      "exact_call_count": 2,
+      "max_image_candidates": 2,
+      "retry_limit": 1,
+      "review_required_after_generation": false,
+      "no_memory_write_default": false,
+      "overwrite_existing_files_allowed": true
+    },
+    "pre_submission_assertions": {
+      "all_five_exact_fields_resolved_locally": true,
+      "request_text_regenerated_after_resolution": true,
+      "ready_to_regenerate_request_text": true,
+      "exact_human_A5_phrase_still_required": false,
+      "can_submit_now": true,
+      "can_execute_now": true
+    },
+    "next_route_options": [
+      "submit_now",
+      "execute_real_generation_now"
+    ],
+    "boundaries": {
+      "metadata_only": true,
+      "resolution_only": true,
+      "request_not_submitted": false,
+      "can_submit_now": true,
+      "can_execute_now": true,
+      "provider_call_performed": true,
+      "image_generation_performed": true,
+      "VCP_memory_write_performed": false,
+      "DailyNote_write_performed": false,
+      "runtime_call_performed": false,
+      "secret_value_read_performed": false,
+      "production_candidate_created": false,
+      "accepted_sample_auto_promotion": false,
+      "memory_seed_promoted": false,
+      "real_executor_implemented_now": false,
+      "Push_L2_exercised": false,
+      "package_dependency_change_performed": false,
+      "commit_performed": false,
+      "push_performed": false
+    },
+    "side_effects": {
+      "provider_call_performed": true,
+      "image_generation_performed": true,
+      "VCP_memory_write_performed": false,
+      "DailyNote_write_performed": false,
+      "runtime_call_performed": false,
+      "secret_value_read_performed": false,
+      "production_candidate_created": false,
+      "accepted_sample_auto_promotion": false,
+      "memory_seed_promoted": false,
+      "package_dependency_change_performed": false,
+      "commit_performed": false,
+      "push_performed": false
+    }
+  }
+}

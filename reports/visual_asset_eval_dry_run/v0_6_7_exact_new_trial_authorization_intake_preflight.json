@@ -1,0 +1,111 @@
+{
+  "exact_new_trial_authorization_intake_preflight": {
+    "authorization_package_id": "AUTH-PENDING-V0-3-3-EXACT-NEW-TRIAL-20260523-001",
+    "version": "v0_1",
+    "phase": "v0_6_7_exact_new_trial_authorization_intake_preflight",
+    "source_exact_new_trial_a5_request_draft_ref": "reports/visual_asset_eval_dry_run/v0_6_6_exact_new_trial_a5_request_draft.json",
+    "source_ready_for_exact_new_trial_authorization_checkpoint_ref": "reports/visual_asset_eval_dry_run/v0_6_5_ready_for_exact_new_trial_authorization_checkpoint.json",
+    "source_first_controlled_generation_authorization_packet_ref": "reports/visual_asset_eval_dry_run/v0_6_0_first_controlled_generation_authorization_packet.json",
+    "intake_status": {
+      "authorization_status": "draft_not_submitted",
+      "approval_status": "not_requested",
+      "active": false,
+      "execute_now": false,
+      "submit_ready": false,
+      "preflight_only": true
+    },
+    "required_exact_fields_checklist": {
+      "prompt_package_ref_or_override": {
+        "required": true,
+        "resolved": false,
+        "placeholder_token": "<new_prompt_package_ref_under_prompts_image_generation_or_exact_override_statement>",
+        "allowed_ref_root": "prompts/image_generation/"
+      },
+      "output_directory": {
+        "required": true,
+        "resolved": false,
+        "placeholder_token": "<new_output_directory_under_runs_real_generation>",
+        "allowed_ref_root": "runs/real_generation/"
+      },
+      "receipt_path": {
+        "required": true,
+        "resolved": false,
+        "placeholder_token": "<new_receipt_path_under_reports_provider_receipts>",
+        "allowed_ref_root": "reports/provider_receipts/"
+      },
+      "registry_path": {
+        "required": true,
+        "resolved": false,
+        "placeholder_token": "<new_registry_path_or_existing_registry_refresh_plan_ref>",
+        "allowed_ref_root": "reports/provider_receipts/"
+      },
+      "review_console_bridge_ref": {
+        "required": true,
+        "resolved": false,
+        "placeholder_token": "<new_review_console_bridge_ref>",
+        "allowed_ref_root": "docs/ or reports/provider_receipts/"
+      }
+    },
+    "fixed_constraints_confirmation": {
+      "provider_target": "codex_builtin_image_generation",
+      "plugin_id_or_provider_route": "image_gen.imagegen",
+      "model": "managed_by_codex_image_tool",
+      "command": "generate",
+      "exact_call_count": 1,
+      "max_image_candidates": 1,
+      "retry_limit": 0,
+      "review_required_after_generation": true,
+      "no_memory_write_default": true,
+      "overwrite_existing_files_allowed": false
+    },
+    "preflight_assertions": {
+      "placeholders_grouped_into_one_checklist": true,
+      "all_placeholders_still_unresolved_at_this_phase": true,
+      "exact_human_A5_phrase_still_required": true,
+      "regenerate_request_text_after_resolution": true,
+      "can_submit_now": false,
+      "can_execute_now": false
+    },
+    "next_route_options": [
+      "resolve_exact_intake_fields_locally_without_submission",
+      "regenerate_exact_request_text_only_after_all_placeholders_replaced",
+      "request_exact_human_A5_approval_later"
+    ],
+    "boundaries": {
+      "metadata_only": true,
+      "intake_only": true,
+      "preflight_only": true,
+      "request_not_submitted": true,
+      "can_submit_now": false,
+      "can_execute_now": false,
+      "provider_call_performed": false,
+      "image_generation_performed": false,
+      "VCP_memory_write_performed": false,
+      "DailyNote_write_performed": false,
+      "runtime_call_performed": false,
+      "secret_value_read_performed": false,
+      "production_candidate_created": false,
+      "accepted_sample_auto_promotion": false,
+      "memory_seed_promoted": false,
+      "real_executor_implemented_now": false,
+      "Push_L2_exercised": false,
+      "package_dependency_change_performed": false,
+      "commit_performed": false,
+      "push_performed": false
+    },
+    "side_effects": {
+      "provider_call_performed": false,
+      "image_generation_performed": false,
+      "VCP_memory_write_performed": false,
+      "DailyNote_write_performed": false,
+      "runtime_call_performed": false,
+      "secret_value_read_performed": false,
+      "production_candidate_created": false,
+      "accepted_sample_auto_promotion": false,
+      "memory_seed_promoted": false,
+      "package_dependency_change_performed": false,
+      "commit_performed": false,
+      "push_performed": false
+    }
+  }
+}

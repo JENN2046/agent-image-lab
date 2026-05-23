@@ -796,6 +796,75 @@ const EXPECTED_V0_6_6_EXACT_NEW_TRIAL_A5_REQUEST_DRAFT_SLICE = [
   "tests/schema_examples/ready_for_exact_new_trial_authorization_checkpoint_fail.example.json"
 ].sort();
 
+const EXPECTED_V0_6_7_EXACT_NEW_TRIAL_AUTHORIZATION_INTAKE_PREFLIGHT_SLICE = [
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  ".agent_board/VALIDATION_LOG.md",
+  "docs/00_project_roadmap.md",
+  "docs/V0_6_7_EXACT_NEW_TRIAL_AUTHORIZATION_INTAKE_PREFLIGHT.md",
+  "reports/visual_asset_eval_dry_run/v0_6_7_exact_new_trial_authorization_intake_preflight.json",
+  "schemas/exact_new_trial_authorization_intake_preflight.schema.yaml",
+  "scripts/lib/governance_tooling_maintenance_slice.js",
+  "scripts/validate_exact_new_trial_authorization_intake_preflight.js",
+  "scripts/validate_mvp.ps1",
+  "tests/schema_examples/exact_new_trial_authorization_intake_preflight.example.json",
+  "tests/schema_examples/exact_new_trial_authorization_intake_preflight_fail.example.json"
+].sort();
+
+const EXPECTED_V0_6_8_EXACT_NEW_TRIAL_INTAKE_FIELD_RESOLUTION_SLICE = [
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  ".agent_board/VALIDATION_LOG.md",
+  "docs/00_project_roadmap.md",
+  "docs/V0_6_7_EXACT_NEW_TRIAL_AUTHORIZATION_INTAKE_PREFLIGHT.md",
+  "docs/V0_6_8_EXACT_NEW_TRIAL_INTAKE_FIELD_RESOLUTION.md",
+  "reports/visual_asset_eval_dry_run/v0_6_7_exact_new_trial_authorization_intake_preflight.json",
+  "reports/visual_asset_eval_dry_run/v0_6_8_exact_new_trial_intake_field_resolution.json",
+  "schemas/exact_new_trial_authorization_intake_preflight.schema.yaml",
+  "schemas/exact_new_trial_intake_field_resolution.schema.yaml",
+  "scripts/lib/governance_tooling_maintenance_slice.js",
+  "scripts/validate_exact_new_trial_authorization_intake_preflight.js",
+  "scripts/validate_exact_new_trial_intake_field_resolution.js",
+  "scripts/validate_mvp.ps1",
+  "tests/schema_examples/exact_new_trial_authorization_intake_preflight.example.json",
+  "tests/schema_examples/exact_new_trial_authorization_intake_preflight_fail.example.json",
+  "tests/schema_examples/exact_new_trial_intake_field_resolution.example.json",
+  "tests/schema_examples/exact_new_trial_intake_field_resolution_fail.example.json"
+].sort();
+
+const EXPECTED_V0_6_9_EXACT_NEW_TRIAL_REQUEST_TEXT_REGENERATED_SLICE = [
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  ".agent_board/VALIDATION_LOG.md",
+  "docs/00_project_roadmap.md",
+  "docs/V0_6_7_EXACT_NEW_TRIAL_AUTHORIZATION_INTAKE_PREFLIGHT.md",
+  "docs/V0_6_8_EXACT_NEW_TRIAL_INTAKE_FIELD_RESOLUTION.md",
+  "docs/V0_6_9_EXACT_NEW_TRIAL_REQUEST_TEXT_REGENERATED.md",
+  "reports/visual_asset_eval_dry_run/v0_6_7_exact_new_trial_authorization_intake_preflight.json",
+  "reports/visual_asset_eval_dry_run/v0_6_8_exact_new_trial_intake_field_resolution.json",
+  "reports/visual_asset_eval_dry_run/v0_6_9_exact_new_trial_request_text_regenerated.json",
+  "schemas/exact_new_trial_authorization_intake_preflight.schema.yaml",
+  "schemas/exact_new_trial_intake_field_resolution.schema.yaml",
+  "schemas/exact_new_trial_request_text_regenerated.schema.yaml",
+  "scripts/lib/governance_tooling_maintenance_slice.js",
+  "scripts/validate_exact_new_trial_authorization_intake_preflight.js",
+  "scripts/validate_exact_new_trial_intake_field_resolution.js",
+  "scripts/validate_exact_new_trial_request_text_regenerated.js",
+  "scripts/validate_mvp.ps1",
+  "tests/schema_examples/exact_new_trial_authorization_intake_preflight.example.json",
+  "tests/schema_examples/exact_new_trial_authorization_intake_preflight_fail.example.json",
+  "tests/schema_examples/exact_new_trial_intake_field_resolution.example.json",
+  "tests/schema_examples/exact_new_trial_intake_field_resolution_fail.example.json",
+  "tests/schema_examples/exact_new_trial_request_text_regenerated.example.json",
+  "tests/schema_examples/exact_new_trial_request_text_regenerated_fail.example.json"
+].sort();
+
 const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "governance_tooling_maintenance_slice_v1",
@@ -972,6 +1041,18 @@ const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "v0_6_6_exact_new_trial_a5_request_draft_slice",
     files: EXPECTED_V0_6_6_EXACT_NEW_TRIAL_A5_REQUEST_DRAFT_SLICE
+  },
+  {
+    id: "v0_6_7_exact_new_trial_authorization_intake_preflight_slice",
+    files: EXPECTED_V0_6_7_EXACT_NEW_TRIAL_AUTHORIZATION_INTAKE_PREFLIGHT_SLICE
+  },
+  {
+    id: "v0_6_8_exact_new_trial_intake_field_resolution_slice",
+    files: EXPECTED_V0_6_8_EXACT_NEW_TRIAL_INTAKE_FIELD_RESOLUTION_SLICE
+  },
+  {
+    id: "v0_6_9_exact_new_trial_request_text_regenerated_slice",
+    files: EXPECTED_V0_6_9_EXACT_NEW_TRIAL_REQUEST_TEXT_REGENERATED_SLICE
   }
 ];
 
@@ -1359,6 +1440,8 @@ module.exports = {
   EXPECTED_V0_6_3_FAILED_PROVIDER_ATTEMPT_INSPECTION_SLICE,
   EXPECTED_V0_6_4_EXACT_NEW_TRIAL_AUTHORIZATION_REFRESH_SLICE,
   EXPECTED_V0_6_5_READY_FOR_EXACT_NEW_TRIAL_AUTHORIZATION_CHECKPOINT_SLICE,
+  EXPECTED_V0_6_8_EXACT_NEW_TRIAL_INTAKE_FIELD_RESOLUTION_SLICE,
+  EXPECTED_V0_6_9_EXACT_NEW_TRIAL_REQUEST_TEXT_REGENERATED_SLICE,
   GOVERNANCE_TOOLING_ALLOWED_SLICES,
   buildGovernanceToolingMaintenanceSliceReport,
   fileAllowedInGovernanceToolingSlice,

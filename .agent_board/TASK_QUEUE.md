@@ -1,5 +1,134 @@
 ---
 
+- [x] ID: v0_6_9_exact_new_trial_request_text_regenerated
+      Title: Regenerate Exact New-Trial Request Text
+      Reason: After v0.6.8 resolved the five exact fields locally, the next local-safe step is to recompile those values into one copyable non-placeholder request text without reopening submission or execution.
+      Lane: Green.
+      Status: completed_validated_local_request_text_regeneration_slice.
+      Source local commit: 4686a37a6eb77d6a06ee61f90610e07e3b5ddf40.
+      Source remote commit: 16a8aa38d4aaefbb1cd3e3938e520c64e62d22c1.
+      Source phase: v0_6_8_exact_new_trial_intake_field_resolution.
+      Previous phase commit: 4686a37a6eb77d6a06ee61f90610e07e3b5ddf40.
+      Previous phase push performed: false.
+      Current gate phase: v0_6_9_exact_new_trial_request_text_regenerated.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Scope: doc/schema/report/fixture/validator/status compact batch only.
+      Changed: docs/V0_6_9_EXACT_NEW_TRIAL_REQUEST_TEXT_REGENERATED.md; schemas/exact_new_trial_request_text_regenerated.schema.yaml; reports/visual_asset_eval_dry_run/v0_6_9_exact_new_trial_request_text_regenerated.json; tests/schema_examples/exact_new_trial_request_text_regenerated.example.json; tests/schema_examples/exact_new_trial_request_text_regenerated_fail.example.json; scripts/validate_exact_new_trial_request_text_regenerated.js; scripts/validate_mvp.ps1; scripts/lib/governance_tooling_maintenance_slice.js; docs/00_project_roadmap.md; .agent_board resume surfaces.
+      authorization_package_id: AUTH-PENDING-V0-3-3-EXACT-NEW-TRIAL-20260523-001.
+      authorization_status: draft_not_submitted.
+      approval_status: not_requested.
+      submit_ready: false.
+      exact_request_text_regenerated: true.
+      placeholders_remaining: false.
+      selected_prompt_package_ref: prompts/image_generation/safe_adult_editorial_portrait_v1.yaml.
+      selected_output_directory: runs/real_generation/v0_3_3_exact_new_trial_001/.
+      selected_receipt_path: reports/provider_receipts/v0_3_3_exact_new_trial_001_receipt.json.
+      selected_registry_path: reports/provider_receipts/v0_3_3_exact_new_trial_001_registry.json.
+      selected_review_console_bridge_ref: review_console/live_receipt_bridge/v0_3_3_exact_new_trial_001.
+      human_approval_phrase_received: false.
+      human_send_step_still_required: true.
+      request_not_submitted: true.
+      can_submit_now: false.
+      can_execute_now: false.
+      provider_call_performed: false.
+      image_generation_performed: false.
+      VCP_memory_write_performed: false.
+      DailyNote_write_performed: false.
+      runtime_call_performed: false.
+      secret_value_read_performed: false.
+      push_allowed: false.
+      push_status: not_performed.
+      push_declined_by_user: true.
+      local_only_continuation_selected: true.
+      Stop condition: provider call, image generation, submission, output write, memory write, DailyNote write, runtime/VCPToolBox/VCPChat/MCP action, commit, push, tag, release, deploy, or validation failure requiring judgment.
+      Ready condition: the request text is exact and copyable, but still unsubmitted and non-executable until a separate human decision exists.
+      Recommended next: stop_at_regenerated_exact_request_text_or_wait_for_explicit_human_decision.
+
+---
+
+- [x] ID: v0_6_8_exact_new_trial_intake_field_resolution
+      Title: Resolve Exact New-Trial Intake Fields
+      Reason: After v0.6.7 grouped the unresolved placeholders into one checklist, the next local-safe step is to choose one exact prompt candidate and one exact new trial key for output, receipt, registry, and review bridge without reopening submission or execution.
+      Lane: Green.
+      Status: completed_validated_local_field_resolution_slice.
+      Source local commit: 4686a37a6eb77d6a06ee61f90610e07e3b5ddf40.
+      Source remote commit: 16a8aa38d4aaefbb1cd3e3938e520c64e62d22c1.
+      Source phase: v0_6_7_exact_new_trial_authorization_intake_preflight.
+      Previous phase commit: 4686a37a6eb77d6a06ee61f90610e07e3b5ddf40.
+      Previous phase push performed: false.
+      Current gate phase: v0_6_8_exact_new_trial_intake_field_resolution.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Scope: doc/schema/report/fixture/validator/status compact batch only.
+      Changed: docs/V0_6_8_EXACT_NEW_TRIAL_INTAKE_FIELD_RESOLUTION.md; schemas/exact_new_trial_intake_field_resolution.schema.yaml; reports/visual_asset_eval_dry_run/v0_6_8_exact_new_trial_intake_field_resolution.json; tests/schema_examples/exact_new_trial_intake_field_resolution.example.json; tests/schema_examples/exact_new_trial_intake_field_resolution_fail.example.json; scripts/validate_exact_new_trial_intake_field_resolution.js; scripts/validate_mvp.ps1; scripts/lib/governance_tooling_maintenance_slice.js; docs/00_project_roadmap.md; .agent_board resume surfaces.
+      authorization_package_id: AUTH-PENDING-V0-3-3-EXACT-NEW-TRIAL-20260523-001.
+      authorization_status: draft_not_submitted.
+      approval_status: not_requested.
+      submit_ready: false.
+      all_five_exact_fields_resolved_locally: true.
+      selected_prompt_package_ref: prompts/image_generation/safe_adult_editorial_portrait_v1.yaml.
+      selected_output_directory: runs/real_generation/v0_3_3_exact_new_trial_001/.
+      selected_receipt_path: reports/provider_receipts/v0_3_3_exact_new_trial_001_receipt.json.
+      selected_registry_path: reports/provider_receipts/v0_3_3_exact_new_trial_001_registry.json.
+      selected_review_console_bridge_ref: review_console/live_receipt_bridge/v0_3_3_exact_new_trial_001.
+      request_text_regenerated_after_resolution: false.
+      can_submit_now: false.
+      can_execute_now: false.
+      provider_call_performed: false.
+      image_generation_performed: false.
+      VCP_memory_write_performed: false.
+      DailyNote_write_performed: false.
+      runtime_call_performed: false.
+      secret_value_read_performed: false.
+      push_allowed: false.
+      push_status: not_performed.
+      push_declined_by_user: true.
+      local_only_continuation_selected: true.
+      Stop condition: provider call, image generation, output write, memory write, DailyNote write, runtime/VCPToolBox/VCPChat/MCP action, commit, push, tag, release, deploy, or validation failure requiring judgment.
+      Ready condition: all five exact fields are resolved into one new-trial candidate bundle while submission and execution remain blocked.
+      Recommended next: regenerate_exact_request_text_without_submission_or_execution.
+
+---
+
+- [x] ID: v0_6_7_exact_new_trial_authorization_intake_preflight
+      Title: Prepare Exact New-Trial Authorization Intake Preflight
+      Reason: Push has been explicitly declined, but the next local-safe step is still to prepare the intake surface that would let a future exact A5 request be reviewed without reopening execution.
+      Lane: Green.
+      Status: completed_validated_local_intake_preflight_slice.
+      Source local commit: 4686a37a6eb77d6a06ee61f90610e07e3b5ddf40.
+      Source remote commit: 16a8aa38d4aaefbb1cd3e3938e520c64e62d22c1.
+      Source phase: v0_6_6_exact_new_trial_a5_request_draft.
+      Previous phase commit: 4686a37a6eb77d6a06ee61f90610e07e3b5ddf40.
+      Previous phase push performed: false.
+      Current gate phase: v0_6_7_exact_new_trial_authorization_intake_preflight.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Scope: doc/schema/report/fixture/validator/status compact batch only.
+      Changed: docs/V0_6_7_EXACT_NEW_TRIAL_AUTHORIZATION_INTAKE_PREFLIGHT.md; schemas/exact_new_trial_authorization_intake_preflight.schema.yaml; reports/visual_asset_eval_dry_run/v0_6_7_exact_new_trial_authorization_intake_preflight.json; tests/schema_examples/exact_new_trial_authorization_intake_preflight.example.json; tests/schema_examples/exact_new_trial_authorization_intake_preflight_fail.example.json; scripts/validate_exact_new_trial_authorization_intake_preflight.js; scripts/validate_mvp.ps1; scripts/lib/governance_tooling_maintenance_slice.js; docs/00_project_roadmap.md; .agent_board resume surfaces.
+      authorization_package_id: AUTH-PENDING-V0-3-3-EXACT-NEW-TRIAL-20260523-001.
+      authorization_status: draft_not_submitted.
+      approval_status: not_requested.
+      submit_ready: false.
+      preflight_only: true.
+      ready_for_exact_new_trial_authorization: true.
+      all_placeholders_still_unresolved_at_this_phase: true.
+      exact_human_A5_phrase_still_required: true.
+      can_submit_now: false.
+      can_execute_now: false.
+      no_memory_write_default: true.
+      push_status: not_performed.
+      image_generation_performed: false.
+      secret_value_read_performed: false.
+      Stop condition: provider call, image generation, output write, memory write, DailyNote write, runtime/VCPToolBox/VCPChat/MCP action, commit, push, tag, release, deploy, or validation failure requiring judgment.
+      Ready condition: unresolved A5 placeholders are grouped into one exact intake checklist with no submission or execution side effects.
+      Recommended next: resolve_exact_intake_fields_without_submission_or_execution.
+
+---
+
 - [x] ID: v0_6_6_exact_new_trial_a5_request_draft
       Title: Draft Exact New-Trial A5 Request Text
       Reason: Batch B no-new-A5 branch still needs one concrete future exact approval phrase, but it must remain placeholder-based and non-executable until a human separately grants A5.
@@ -37,7 +166,10 @@
       completed_remote_synced_after_guarded_push: false.
       current_status_sync_commit_pending_push: true.
       Stop condition: provider call, image generation, output write, memory write, DailyNote write, runtime/VCPToolBox/VCPChat/MCP action, commit, push, tag, release, deploy, or validation failure requiring judgment.
-      Recommended next: optionally_push_current_local_status_sync_commit_then_wait_for_explicit_new_A5_or_stop_at_ready_state.
+      push_declined_by_user: true.
+      local_only_continuation_selected: true.
+      Next safe local phase: v0_6_7_exact_new_trial_authorization_intake_preflight.
+      Recommended next: open_v0_6_7_exact_new_trial_authorization_intake_preflight_without_push.
 
 ---
 

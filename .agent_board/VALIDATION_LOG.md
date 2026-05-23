@@ -1,5 +1,142 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260523-v0.6.9-EXACT-NEW-TRIAL-REQUEST-TEXT-REGENERATED
+
+Task: v0.6.9 exact new-trial request text regenerated
+Status: completed_validated
+Commands run:
+  - git diff --check: passed
+  - node --check scripts/validate_exact_new_trial_request_text_regenerated.js: passed
+  - node --check scripts/lib/governance_tooling_maintenance_slice.js: passed
+  - node scripts/validate_exact_new_trial_request_text_regenerated.js: passed
+  - node scripts/validate_smart_v3_push_safety_lane.js: passed
+  - node scripts/validate_agent_board_state.js: passed
+  - node scripts/validate_autopilot_agent_board_resume_compaction_guard.js: passed
+  - node scripts/validate_controlled_visual_production_loop_exact_file_commit_readiness_review.js: passed
+  - node scripts/validate_controlled_visual_production_loop_checkpoint_readiness.js: passed
+  - node scripts/validate_controlled_visual_production_loop_commit_and_authorization_readiness_audit.js: passed
+  - npm run validate:mvp: first run timed out at 124025 ms; rerun with longer timeout passed
+Boundary:
+  - source_local_commit: 4686a37a6eb77d6a06ee61f90610e07e3b5ddf40
+  - source_remote_commit: 16a8aa38d4aaefbb1cd3e3938e520c64e62d22c1
+  - current_gate_phase: v0_6_9_exact_new_trial_request_text_regenerated
+  - authorization_status: draft_not_submitted
+  - approval_status: not_requested
+  - submit_ready: false
+  - exact_request_text_regenerated: true
+  - placeholders_remaining: false
+  - human_approval_phrase_received: false
+  - human_send_step_still_required: true
+  - request_not_submitted: true
+  - selected_prompt_package_ref: prompts/image_generation/safe_adult_editorial_portrait_v1.yaml
+  - selected_output_directory: runs/real_generation/v0_3_3_exact_new_trial_001/
+  - selected_receipt_path: reports/provider_receipts/v0_3_3_exact_new_trial_001_receipt.json
+  - selected_registry_path: reports/provider_receipts/v0_3_3_exact_new_trial_001_registry.json
+  - selected_review_console_bridge_ref: review_console/live_receipt_bridge/v0_3_3_exact_new_trial_001
+  - provider_call_performed: false
+  - image_generation_performed: false
+  - VCP_memory_write_performed: false
+  - DailyNote_write_performed: false
+  - runtime_call_performed: false
+  - secret_value_read_performed: false
+  - push_performed_for_current_commit: false
+
+## VALIDATION-20260523-v0.6.8-EXACT-NEW-TRIAL-INTAKE-FIELD-RESOLUTION
+
+Task: v0.6.8 exact new-trial intake field resolution
+Status: completed_validated
+Commands run:
+  - git diff --check: passed
+  - node --check scripts/validate_exact_new_trial_intake_field_resolution.js: passed
+  - node --check scripts/lib/governance_tooling_maintenance_slice.js: passed
+  - node scripts/validate_exact_new_trial_intake_field_resolution.js: passed
+  - node scripts/validate_agent_board_state.js: passed
+  - node scripts/validate_autopilot_agent_board_resume_compaction_guard.js: passed
+  - node scripts/validate_controlled_visual_production_loop_exact_file_commit_readiness_review.js: passed
+  - node scripts/validate_controlled_visual_production_loop_checkpoint_readiness.js: passed
+  - node scripts/validate_controlled_visual_production_loop_commit_and_authorization_readiness_audit.js: passed
+  - npm run validate:mvp: passed
+Boundary:
+  - source_local_commit: 4686a37a6eb77d6a06ee61f90610e07e3b5ddf40
+  - source_remote_commit: 16a8aa38d4aaefbb1cd3e3938e520c64e62d22c1
+  - current_gate_phase: v0_6_8_exact_new_trial_intake_field_resolution
+  - authorization_status: draft_not_submitted
+  - approval_status: not_requested
+  - submit_ready: false
+  - all_five_exact_fields_resolved_locally: true
+  - request_text_regenerated_after_resolution: false
+  - selected_prompt_package_ref: prompts/image_generation/safe_adult_editorial_portrait_v1.yaml
+  - selected_output_directory: runs/real_generation/v0_3_3_exact_new_trial_001/
+  - selected_receipt_path: reports/provider_receipts/v0_3_3_exact_new_trial_001_receipt.json
+  - selected_registry_path: reports/provider_receipts/v0_3_3_exact_new_trial_001_registry.json
+  - selected_review_console_bridge_ref: review_console/live_receipt_bridge/v0_3_3_exact_new_trial_001
+  - provider_call_performed: false
+  - image_generation_performed: false
+  - VCP_memory_write_performed: false
+  - DailyNote_write_performed: false
+  - runtime_call_performed: false
+  - secret_value_read_performed: false
+  - push_performed_for_current_commit: false
+
+## VALIDATION-20260523-v0.6.7-EXACT-NEW-TRIAL-AUTHORIZATION-INTAKE-PREFLIGHT
+
+Task: v0.6.7 exact new-trial authorization intake preflight
+Status: completed_validated
+Commands run:
+  - git diff --check: passed
+  - node --check scripts/validate_exact_new_trial_authorization_intake_preflight.js: passed
+  - node scripts/validate_exact_new_trial_authorization_intake_preflight.js: passed
+  - node scripts/validate_agent_board_state.js: passed
+  - node scripts/validate_autopilot_agent_board_resume_compaction_guard.js: passed
+  - node scripts/validate_controlled_visual_production_loop_exact_file_commit_readiness_review.js: passed
+  - node scripts/validate_controlled_visual_production_loop_checkpoint_readiness.js: passed
+  - node scripts/validate_controlled_visual_production_loop_commit_and_authorization_readiness_audit.js: passed
+  - npm run validate:mvp: passed
+Boundary:
+  - source_local_commit: 4686a37a6eb77d6a06ee61f90610e07e3b5ddf40
+  - source_remote_commit: 16a8aa38d4aaefbb1cd3e3938e520c64e62d22c1
+  - current_gate_phase: v0_6_7_exact_new_trial_authorization_intake_preflight
+  - authorization_status: draft_not_submitted
+  - approval_status: not_requested
+  - submit_ready: false
+  - all_placeholders_still_unresolved_at_this_phase: true
+  - exact_human_A5_phrase_still_required: true
+  - provider_call_performed: false
+  - image_generation_performed: false
+  - VCP_memory_write_performed: false
+  - DailyNote_write_performed: false
+  - runtime_call_performed: false
+  - secret_value_read_performed: false
+  - push_performed_for_current_commit: false
+
+## VALIDATION-20260523-v0.6.6-NO-PUSH-NEXT-STAGE-PREP
+
+Task: v0.6.6 no-push decision sync and next local stage preparation
+Status: completed_validated
+Commands run:
+  - git diff --check: passed
+  - git rev-list --left-right --count origin/master...HEAD: passed (`0 2`)
+  - node scripts/validate_agent_board_state.js: passed
+  - node scripts/validate_controlled_visual_production_loop_exact_file_commit_readiness_review.js: passed
+  - node scripts/validate_controlled_visual_production_loop_checkpoint_readiness.js: passed
+  - node scripts/validate_controlled_visual_production_loop_commit_and_authorization_readiness_audit.js: passed
+  - npm run validate:mvp: passed
+Boundary:
+  - source_local_commit: 4686a37c7312848de89ffce0928d5ce51d116277
+  - source_remote_commit: 16a8aa38d4aaefbb1cd3e3938e520c64e62d22c1
+  - current_gate_phase: v0_6_6_exact_new_trial_a5_request_draft
+  - push_declined_by_user: true
+  - local_only_continuation_selected: true
+  - next_safe_local_phase: v0_6_7_exact_new_trial_authorization_intake_preflight
+  - provider_call_performed: false
+  - image_generation_performed: false
+  - VCP_memory_write_performed: false
+  - DailyNote_write_performed: false
+  - runtime_call_performed: false
+  - secret_value_read_performed: false
+  - push_performed_for_current_commit: false
+  - exact_6_file_status_sync_slice_only: true
+
 ## VALIDATION-20260523-v0.6.6-LOCAL-STATUS-SYNC-TRUTHFULNESS-FIX
 
 Task: v0.6.6 local status-surface truthfulness correction for ahead-of-origin HEAD

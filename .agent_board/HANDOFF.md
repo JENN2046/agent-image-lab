@@ -1,5 +1,148 @@
 ---
 
+## Current Handoff Update - v0.6.9 Exact New-Trial Request Text Regenerated
+
+```text
+phase: v0_6_9_exact_new_trial_request_text_regenerated
+phase_id: v0_6_9_exact_new_trial_request_text_regenerated
+status: completed_validated_local_request_text_regeneration_slice
+mode: Green Lane doc/schema/report/fixture/validator/status compact batch
+summary: Recompiles the v0.6.8 resolved prompt, output, receipt, registry, and review bridge values into one copyable non-placeholder request text while keeping submission and execution blocked.
+source_local_commit: 4686a37a6eb77d6a06ee61f90610e07e3b5ddf40
+source_remote_commit: 16a8aa38d4aaefbb1cd3e3938e520c64e62d22c1
+source_phase: v0_6_8_exact_new_trial_intake_field_resolution
+previous_phase_commit: 4686a37a6eb77d6a06ee61f90610e07e3b5ddf40
+previous_phase_push_performed: false
+current_gate_phase: v0_6_9_exact_new_trial_request_text_regenerated
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+changed: docs/V0_6_9_EXACT_NEW_TRIAL_REQUEST_TEXT_REGENERATED.md; schemas/exact_new_trial_request_text_regenerated.schema.yaml; reports/visual_asset_eval_dry_run/v0_6_9_exact_new_trial_request_text_regenerated.json; tests/schema_examples/exact_new_trial_request_text_regenerated.example.json; tests/schema_examples/exact_new_trial_request_text_regenerated_fail.example.json; scripts/validate_exact_new_trial_request_text_regenerated.js; scripts/validate_mvp.ps1; scripts/lib/governance_tooling_maintenance_slice.js; docs/00_project_roadmap.md; .agent_board resume surfaces.
+authorization_package_id: AUTH-PENDING-V0-3-3-EXACT-NEW-TRIAL-20260523-001
+authorization_status: draft_not_submitted
+approval_status: not_requested
+submit_ready: false
+exact_request_text_regenerated: true
+placeholders_remaining: false
+selected_prompt_package_ref: prompts/image_generation/safe_adult_editorial_portrait_v1.yaml
+selected_output_directory: runs/real_generation/v0_3_3_exact_new_trial_001/
+selected_receipt_path: reports/provider_receipts/v0_3_3_exact_new_trial_001_receipt.json
+selected_registry_path: reports/provider_receipts/v0_3_3_exact_new_trial_001_registry.json
+selected_review_console_bridge_ref: review_console/live_receipt_bridge/v0_3_3_exact_new_trial_001
+human_approval_phrase_received: false
+human_send_step_still_required: true
+request_not_submitted: true
+can_submit_now: false
+can_execute_now: false
+no_memory_write_default: true
+provider_call_performed: false
+image_generation_performed: false
+VCP_memory_write_performed: false
+DailyNote_write_performed: false
+runtime_call_performed: false
+secret_value_read_performed: false
+push_allowed: false
+push_status: not_performed
+push_declined_by_user: true
+local_only_continuation_selected: true
+recommended_next: stop_at_regenerated_exact_request_text_or_wait_for_explicit_human_decision
+```
+
+---
+
+## Current Handoff Update - v0.6.8 Exact New-Trial Intake Field Resolution
+
+```text
+phase: v0_6_8_exact_new_trial_intake_field_resolution
+phase_id: v0_6_8_exact_new_trial_intake_field_resolution
+status: completed_validated_local_field_resolution_slice
+mode: Green Lane doc/schema/report/fixture/validator/status compact batch
+summary: Resolves the five exact new-trial intake fields into one deterministic local candidate bundle, corrects the review bridge root back to review_console/live_receipt_bridge, and keeps the route non-submitted and non-executable.
+source_local_commit: 4686a37a6eb77d6a06ee61f90610e07e3b5ddf40
+source_remote_commit: 16a8aa38d4aaefbb1cd3e3938e520c64e62d22c1
+source_phase: v0_6_7_exact_new_trial_authorization_intake_preflight
+previous_phase_commit: 4686a37a6eb77d6a06ee61f90610e07e3b5ddf40
+previous_phase_push_performed: false
+current_gate_phase: v0_6_8_exact_new_trial_intake_field_resolution
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+changed: docs/V0_6_8_EXACT_NEW_TRIAL_INTAKE_FIELD_RESOLUTION.md; schemas/exact_new_trial_intake_field_resolution.schema.yaml; reports/visual_asset_eval_dry_run/v0_6_8_exact_new_trial_intake_field_resolution.json; tests/schema_examples/exact_new_trial_intake_field_resolution.example.json; tests/schema_examples/exact_new_trial_intake_field_resolution_fail.example.json; scripts/validate_exact_new_trial_intake_field_resolution.js; scripts/validate_mvp.ps1; scripts/lib/governance_tooling_maintenance_slice.js; docs/00_project_roadmap.md; .agent_board resume surfaces.
+authorization_package_id: AUTH-PENDING-V0-3-3-EXACT-NEW-TRIAL-20260523-001
+authorization_status: draft_not_submitted
+approval_status: not_requested
+submit_ready: false
+all_five_exact_fields_resolved_locally: true
+selected_prompt_package_ref: prompts/image_generation/safe_adult_editorial_portrait_v1.yaml
+selected_output_directory: runs/real_generation/v0_3_3_exact_new_trial_001/
+selected_receipt_path: reports/provider_receipts/v0_3_3_exact_new_trial_001_receipt.json
+selected_registry_path: reports/provider_receipts/v0_3_3_exact_new_trial_001_registry.json
+selected_review_console_bridge_ref: review_console/live_receipt_bridge/v0_3_3_exact_new_trial_001
+request_text_regenerated_after_resolution: false
+ready_to_regenerate_request_text: true
+exact_human_A5_phrase_still_required: true
+can_submit_now: false
+can_execute_now: false
+no_memory_write_default: true
+provider_call_performed: false
+image_generation_performed: false
+VCP_memory_write_performed: false
+DailyNote_write_performed: false
+runtime_call_performed: false
+secret_value_read_performed: false
+push_allowed: false
+push_status: not_performed
+push_declined_by_user: true
+local_only_continuation_selected: true
+recommended_next: regenerate_exact_request_text_without_submission_or_execution
+```
+
+---
+
+## Current Handoff Update - v0.6.7 Exact New-Trial Authorization Intake Preflight
+
+```text
+phase: v0_6_7_exact_new_trial_authorization_intake_preflight
+phase_id: v0_6_7_exact_new_trial_authorization_intake_preflight
+status: completed_validated_local_intake_preflight_slice
+mode: Green Lane doc/schema/report/fixture/validator/status compact batch
+summary: Starts the next local-only phase after the v0.6.6 draft by grouping every unresolved exact A5 field into one fail-closed intake checklist while keeping submission and execution blocked.
+source_local_commit: 4686a37a6eb77d6a06ee61f90610e07e3b5ddf40
+source_remote_commit: 16a8aa38d4aaefbb1cd3e3938e520c64e62d22c1
+source_phase: v0_6_6_exact_new_trial_a5_request_draft
+previous_phase_commit: 4686a37a6eb77d6a06ee61f90610e07e3b5ddf40
+previous_phase_push_performed: false
+current_gate_phase: v0_6_7_exact_new_trial_authorization_intake_preflight
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+changed: docs/V0_6_7_EXACT_NEW_TRIAL_AUTHORIZATION_INTAKE_PREFLIGHT.md; schemas/exact_new_trial_authorization_intake_preflight.schema.yaml; reports/visual_asset_eval_dry_run/v0_6_7_exact_new_trial_authorization_intake_preflight.json; tests/schema_examples/exact_new_trial_authorization_intake_preflight.example.json; tests/schema_examples/exact_new_trial_authorization_intake_preflight_fail.example.json; scripts/validate_exact_new_trial_authorization_intake_preflight.js; scripts/validate_mvp.ps1; scripts/lib/governance_tooling_maintenance_slice.js; docs/00_project_roadmap.md; .agent_board resume surfaces.
+authorization_package_id: AUTH-PENDING-V0-3-3-EXACT-NEW-TRIAL-20260523-001
+authorization_status: draft_not_submitted
+approval_status: not_requested
+submit_ready: false
+preflight_only: true
+ready_for_exact_new_trial_authorization: true
+all_placeholders_still_unresolved_at_this_phase: true
+exact_human_A5_phrase_still_required: true
+can_submit_now: false
+can_execute_now: false
+no_memory_write_default: true
+provider_call_performed: false
+image_generation_performed: false
+VCP_memory_write_performed: false
+DailyNote_write_performed: false
+runtime_call_performed: false
+secret_value_read_performed: false
+push_allowed: false
+push_status: not_performed
+push_declined_by_user: true
+local_only_continuation_selected: true
+recommended_next: resolve_exact_intake_fields_without_submission_or_execution
+```
+
+---
+
 ## Current Handoff Update - v0.6.6 Exact New-Trial A5 Request Draft
 
 ```text
@@ -7,7 +150,7 @@ phase: v0_6_6_exact_new_trial_a5_request_draft
 phase_id: v0_6_6_exact_new_trial_a5_request_draft
 status: completed_validated_local_status_sync_slice
 mode: Green Lane doc/schema/report/fixture/validator/status compact batch
-summary: Closes the Batch B no-new-A5 branch with one placeholder-based, non-submitted exact approval phrase draft, then records that the underlying phase is remote-synced at 16a8aa3 while the current 6-file status-sync correction commit remains local-only.
+summary: Closes the Batch B no-new-A5 branch with one placeholder-based, non-submitted exact approval phrase draft, records that the underlying phase is remote-synced at 16a8aa3 while the current 6-file status-sync correction commit remains local-only, and marks the next move as a no-push local preflight slice.
 source_local_commit: 716ef8cca12e54fb1d04b82201f6c14dc1ddc80c
 source_remote_commit: 16a8aa38d4aaefbb1cd3e3938e520c64e62d22c1
 source_phase: v0_6_5_ready_for_exact_new_trial_authorization_checkpoint
@@ -38,7 +181,11 @@ push_allowed: false
 push_status: not_performed
 completed_remote_synced_after_guarded_push: false
 current_status_sync_commit_pending_push: true
-recommended_next: optionally_push_current_local_status_sync_commit_then_wait_for_explicit_new_A5_or_stop_at_ready_state
+push_declined_by_user: true
+local_only_continuation_selected: true
+next_safe_local_phase: v0_6_7_exact_new_trial_authorization_intake_preflight
+next_safe_local_phase_scope: docs_status_preflight_only
+recommended_next: open_v0_6_7_exact_new_trial_authorization_intake_preflight_without_push
 ```
 
 ---
