@@ -1,0 +1,77 @@
+{
+  "exact_new_trial_authorization_refresh": {
+    "refresh_id": "exact_new_trial_authorization_refresh_v0_6_4_fixture",
+    "version": "v0_1",
+    "phase": "v0_6_4_exact_new_trial_authorization_refresh",
+    "source_candidate_packet_ref": "docs/V0_3_2_LIVE_CANDIDATE_ACTION_PACKET.md",
+    "source_pilot_gate_ref": "docs/V0_3_3_FIRST_LIVE_GENERATION_PILOT_GATE.md",
+    "failed_attempt_inspection_ref": "reports/visual_asset_eval_dry_run/v0_6_3_failed_provider_attempt_inspection.json",
+    "first_attempt_receipt_ref": "reports/provider_receipts/v0_3_3_codex_sample_first_trial_receipt.json",
+    "retry_001_receipt_ref": "reports/provider_receipts/v0_3_3_retry_001_receipt.json",
+    "smoke_001_receipt_ref": "reports/provider_receipts/v0_3_3_smoke_001_neutral_receipt.json",
+    "safe_portrait_001_receipt_ref": "reports/provider_receipts/v0_3_3_safe_portrait_001_receipt.json",
+    "route_diagnostics": {
+      "first_attempt_failed_no_image": true,
+      "retry_001_failed_no_image": true,
+      "smoke_001_succeeded_image_generated": true,
+      "safe_portrait_001_succeeded_image_generated": true,
+      "failure_not_treated_as_general_route_outage": true
+    },
+    "refreshed_candidate_fields": {
+      "reuse_original_prompt_by_default": false,
+      "reuse_retry_001_prompt_by_default": false,
+      "explicit_new_prompt_package_or_override_required": true,
+      "max_provider_calls_still_1": true,
+      "max_image_candidates_still_1": true,
+      "retry_limit_still_0": true,
+      "no_memory_write_default_still_true": true,
+      "new_output_directory_required": true,
+      "new_receipt_path_required": true,
+      "new_registry_path_required": true,
+      "new_review_console_bridge_ref_required": true,
+      "overwrite_existing_files_allowed": false
+    },
+    "refreshed_gate_preflight": {
+      "new_prompt_decision_required": true,
+      "output_collision_check_required": true,
+      "receipt_collision_check_required": true,
+      "registry_write_plan_refresh_required": true,
+      "review_bridge_uniqueness_required": true,
+      "exact_authorization_phrase_refresh_required": true,
+      "can_execute_now": false
+    },
+    "boundaries": {
+      "metadata_only": true,
+      "refresh_packet_only": true,
+      "no_new_trial_executed": true,
+      "provider_call_performed": false,
+      "image_generation_performed": false,
+      "VCP_memory_write_performed": false,
+      "DailyNote_write_performed": false,
+      "runtime_call_performed": false,
+      "secret_value_read_performed": false,
+      "production_candidate_created": false,
+      "accepted_sample_auto_promotion": false,
+      "memory_seed_promoted": false,
+      "real_executor_implemented_now": false,
+      "Push_L2_exercised": false,
+      "package_dependency_change_performed": false,
+      "commit_performed": false,
+      "push_performed": false
+    },
+    "side_effects": {
+      "provider_call_performed": false,
+      "image_generation_performed": false,
+      "VCP_memory_write_performed": false,
+      "DailyNote_write_performed": false,
+      "runtime_call_performed": false,
+      "secret_value_read_performed": false,
+      "production_candidate_created": false,
+      "accepted_sample_auto_promotion": false,
+      "memory_seed_promoted": false,
+      "package_dependency_change_performed": false,
+      "commit_performed": false,
+      "push_performed": false
+    }
+  }
+}

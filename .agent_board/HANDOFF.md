@@ -1,5 +1,203 @@
 ---
 
+## Current Handoff Update - v0.6.6 Exact New-Trial A5 Request Draft
+
+```text
+phase: v0_6_6_exact_new_trial_a5_request_draft
+phase_id: v0_6_6_exact_new_trial_a5_request_draft
+status: completed_validated_local_slice
+mode: Green Lane doc/schema/report/fixture/validator/status compact batch
+summary: Closes the Batch B no-new-A5 branch with one placeholder-based, non-submitted exact approval phrase draft while keeping the route authorization-ready but not executable.
+source_local_commit: 1f02ff0750f9a3e22876130875437b86a899b524
+source_remote_commit: 1f02ff0750f9a3e22876130875437b86a899b524
+source_phase: v0_6_5_ready_for_exact_new_trial_authorization_checkpoint
+previous_phase_commit: 1f02ff0750f9a3e22876130875437b86a899b524
+previous_phase_push_performed: false
+current_gate_phase: v0_6_6_exact_new_trial_a5_request_draft
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+changed: docs/V0_6_2_FIRST_MONTH_LIVE_PILOT_RECOVERY_PLAN.md; docs/V0_6_3_FAILED_PROVIDER_ATTEMPT_INSPECTION.md; docs/V0_6_4_EXACT_NEW_TRIAL_AUTHORIZATION_REFRESH.md; docs/V0_6_5_READY_FOR_EXACT_NEW_TRIAL_AUTHORIZATION_CHECKPOINT.md; docs/V0_6_6_EXACT_NEW_TRIAL_A5_REQUEST_DRAFT.md; schemas/failed_provider_attempt_inspection.schema.yaml; schemas/exact_new_trial_authorization_refresh.schema.yaml; schemas/ready_for_exact_new_trial_authorization_checkpoint.schema.yaml; schemas/exact_new_trial_a5_request_draft.schema.yaml; reports/visual_asset_eval_dry_run/v0_6_3_failed_provider_attempt_inspection.json; reports/visual_asset_eval_dry_run/v0_6_4_exact_new_trial_authorization_refresh.json; reports/visual_asset_eval_dry_run/v0_6_5_ready_for_exact_new_trial_authorization_checkpoint.json; reports/visual_asset_eval_dry_run/v0_6_6_exact_new_trial_a5_request_draft.json; tests/schema_examples/failed_provider_attempt_inspection.example.json; tests/schema_examples/failed_provider_attempt_inspection_fail.example.json; tests/schema_examples/exact_new_trial_authorization_refresh.example.json; tests/schema_examples/exact_new_trial_authorization_refresh_fail.example.json; tests/schema_examples/ready_for_exact_new_trial_authorization_checkpoint.example.json; tests/schema_examples/ready_for_exact_new_trial_authorization_checkpoint_fail.example.json; tests/schema_examples/exact_new_trial_a5_request_draft.example.json; tests/schema_examples/exact_new_trial_a5_request_draft_fail.example.json; scripts/validate_failed_provider_attempt_inspection.js; scripts/validate_exact_new_trial_authorization_refresh.js; scripts/validate_ready_for_exact_new_trial_authorization_checkpoint.js; scripts/validate_exact_new_trial_a5_request_draft.js; scripts/validate_mvp.ps1; scripts/lib/governance_tooling_maintenance_slice.js; docs/00_project_roadmap.md; .agent_board resume surfaces.
+authorization_package_id: AUTH-PENDING-V0-3-3-EXACT-NEW-TRIAL-20260523-001
+authorization_status: draft_not_submitted
+approval_status: not_requested
+exact_approval_phrase_received: false
+recommended_exact_approval_phrase_present: true
+draft_uses_placeholders_only: true
+draft_not_executable_until_placeholders_replaced: true
+ready_for_exact_new_trial_authorization: true
+can_execute_now: false
+no_memory_write_default: true
+provider_call_performed: false
+image_generation_performed: false
+VCP_memory_write_performed: false
+DailyNote_write_performed: false
+runtime_call_performed: false
+secret_value_read_performed: false
+push_allowed: false
+recommended_next: wait_for_explicit_new_A5_or_stop_at_ready_state
+```
+
+---
+
+## Current Handoff Update - v0.6.5 Ready For Exact New-Trial Authorization Checkpoint
+
+```text
+phase: v0_6_5_ready_for_exact_new_trial_authorization_checkpoint
+phase_id: v0_6_5_ready_for_exact_new_trial_authorization_checkpoint
+status: completed_validated_local_slice
+mode: Green Lane doc/schema/report/fixture/validator/status compact batch
+summary: Closes Batch A into a single authorization-ready checkpoint that keeps execution blocked until a future exact new A5 approval phrase is explicitly granted.
+source_local_commit: 1f02ff0750f9a3e22876130875437b86a899b524
+source_remote_commit: 1f02ff0750f9a3e22876130875437b86a899b524
+source_phase: v0_6_4_exact_new_trial_authorization_refresh
+previous_phase_commit: 1f02ff0750f9a3e22876130875437b86a899b524
+previous_phase_push_performed: false
+current_gate_phase: v0_6_5_ready_for_exact_new_trial_authorization_checkpoint
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+changed: docs/V0_6_2_FIRST_MONTH_LIVE_PILOT_RECOVERY_PLAN.md; docs/V0_6_3_FAILED_PROVIDER_ATTEMPT_INSPECTION.md; docs/V0_6_4_EXACT_NEW_TRIAL_AUTHORIZATION_REFRESH.md; docs/V0_6_5_READY_FOR_EXACT_NEW_TRIAL_AUTHORIZATION_CHECKPOINT.md; schemas/failed_provider_attempt_inspection.schema.yaml; schemas/exact_new_trial_authorization_refresh.schema.yaml; schemas/ready_for_exact_new_trial_authorization_checkpoint.schema.yaml; reports/visual_asset_eval_dry_run/v0_6_3_failed_provider_attempt_inspection.json; reports/visual_asset_eval_dry_run/v0_6_4_exact_new_trial_authorization_refresh.json; reports/visual_asset_eval_dry_run/v0_6_5_ready_for_exact_new_trial_authorization_checkpoint.json; tests/schema_examples/failed_provider_attempt_inspection.example.json; tests/schema_examples/failed_provider_attempt_inspection_fail.example.json; tests/schema_examples/exact_new_trial_authorization_refresh.example.json; tests/schema_examples/exact_new_trial_authorization_refresh_fail.example.json; tests/schema_examples/ready_for_exact_new_trial_authorization_checkpoint.example.json; tests/schema_examples/ready_for_exact_new_trial_authorization_checkpoint_fail.example.json; scripts/validate_failed_provider_attempt_inspection.js; scripts/validate_exact_new_trial_authorization_refresh.js; scripts/validate_ready_for_exact_new_trial_authorization_checkpoint.js; scripts/validate_mvp.ps1; scripts/lib/governance_tooling_maintenance_slice.js; docs/00_project_roadmap.md; .agent_board resume surfaces.
+ready_for_exact_new_trial_authorization: true
+future_exact_approval_phrase_required: true
+can_execute_now: false
+reuse_original_prompt_by_default: false
+reuse_retry_001_prompt_by_default: false
+explicit_new_prompt_package_or_override_required: true
+new_output_directory_required: true
+new_receipt_path_required: true
+new_registry_path_required: true
+new_review_console_bridge_ref_required: true
+authorization_ready_only: true
+provider_call_performed: false
+image_generation_performed: false
+VCP_memory_write_performed: false
+DailyNote_write_performed: false
+runtime_call_performed: false
+secret_value_read_performed: false
+push_allowed: false
+recommended_next: batch_b_authorization_branch_or_ready_checkpoint
+```
+
+---
+
+## Current Handoff Update - v0.6.4 Exact New-Trial Authorization Refresh
+
+```text
+phase: v0_6_4_exact_new_trial_authorization_refresh
+phase_id: v0_6_4_exact_new_trial_authorization_refresh
+status: completed_validated_local_slice
+mode: Green Lane doc/schema/report/fixture/validator/status compact batch
+summary: Converts the failed-attempt inspection into an exact refresh packet that blocks silent prompt reuse, requires new output and receipt surfaces, and keeps the next trial unauthorized until a future exact request is filled.
+source_local_commit: 1f02ff0750f9a3e22876130875437b86a899b524
+source_remote_commit: 1f02ff0750f9a3e22876130875437b86a899b524
+source_phase: v0_6_3_failed_provider_attempt_inspection
+previous_phase_commit: 1f02ff0750f9a3e22876130875437b86a899b524
+previous_phase_push_performed: false
+current_gate_phase: v0_6_4_exact_new_trial_authorization_refresh
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+changed: docs/V0_6_2_FIRST_MONTH_LIVE_PILOT_RECOVERY_PLAN.md; docs/V0_6_3_FAILED_PROVIDER_ATTEMPT_INSPECTION.md; docs/V0_6_4_EXACT_NEW_TRIAL_AUTHORIZATION_REFRESH.md; schemas/failed_provider_attempt_inspection.schema.yaml; schemas/exact_new_trial_authorization_refresh.schema.yaml; reports/visual_asset_eval_dry_run/v0_6_3_failed_provider_attempt_inspection.json; reports/visual_asset_eval_dry_run/v0_6_4_exact_new_trial_authorization_refresh.json; tests/schema_examples/failed_provider_attempt_inspection.example.json; tests/schema_examples/failed_provider_attempt_inspection_fail.example.json; tests/schema_examples/exact_new_trial_authorization_refresh.example.json; tests/schema_examples/exact_new_trial_authorization_refresh_fail.example.json; scripts/validate_failed_provider_attempt_inspection.js; scripts/validate_exact_new_trial_authorization_refresh.js; scripts/validate_mvp.ps1; scripts/lib/governance_tooling_maintenance_slice.js; docs/00_project_roadmap.md; .agent_board resume surfaces.
+first_attempt_failed_no_image: true
+retry_001_failed_no_image: true
+smoke_001_succeeded_image_generated: true
+safe_portrait_001_succeeded_image_generated: true
+reuse_original_prompt_by_default: false
+reuse_retry_001_prompt_by_default: false
+explicit_new_prompt_package_or_override_required: true
+new_output_directory_required: true
+new_receipt_path_required: true
+new_registry_path_required: true
+new_review_console_bridge_ref_required: true
+refresh_packet_only: true
+provider_call_performed: false
+image_generation_performed: false
+VCP_memory_write_performed: false
+DailyNote_write_performed: false
+runtime_call_performed: false
+secret_value_read_performed: false
+push_allowed: false
+recommended_next: prepare_ready_for_exact_new_trial_authorization_checkpoint
+```
+
+---
+
+## Current Handoff Update - v0.6.3 Failed Provider Attempt Inspection
+
+```text
+phase: v0_6_3_failed_provider_attempt_inspection
+phase_id: v0_6_3_failed_provider_attempt_inspection
+status: completed_validated_local_slice
+mode: Green Lane doc/schema/report/fixture/validator/status compact batch
+summary: Consolidates the first failed live-provider attempt into one inspection packet that proves no image artifact was produced, retry remains blocked, and the route is ready to refresh the next-trial authorization surfaces.
+source_local_commit: 1f02ff0750f9a3e22876130875437b86a899b524
+source_remote_commit: 1f02ff0750f9a3e22876130875437b86a899b524
+source_phase: v0_6_2_first_month_live_pilot_recovery_plan
+previous_phase_commit: 1f02ff0750f9a3e22876130875437b86a899b524
+previous_phase_push_performed: false
+current_gate_phase: v0_6_3_failed_provider_attempt_inspection
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+changed: docs/V0_6_2_FIRST_MONTH_LIVE_PILOT_RECOVERY_PLAN.md; docs/V0_6_3_FAILED_PROVIDER_ATTEMPT_INSPECTION.md; schemas/failed_provider_attempt_inspection.schema.yaml; reports/visual_asset_eval_dry_run/v0_6_3_failed_provider_attempt_inspection.json; tests/schema_examples/failed_provider_attempt_inspection.example.json; tests/schema_examples/failed_provider_attempt_inspection_fail.example.json; scripts/validate_failed_provider_attempt_inspection.js; scripts/validate_mvp.ps1; scripts/lib/governance_tooling_maintenance_slice.js; docs/00_project_roadmap.md; .agent_board resume surfaces.
+source_attempt_status: failed_no_image_generated
+failure_class: provider_tool_user_error
+image_artifact_produced: false
+retry_blocked_by_zero_retry_limit: true
+review_bridge_ref_recorded: true
+review_bridge_materialized_now: false
+inspection_only: true
+provider_call_performed: false
+image_generation_performed: false
+VCP_memory_write_performed: false
+DailyNote_write_performed: false
+runtime_call_performed: false
+secret_value_read_performed: false
+push_allowed: false
+recommended_next: refresh_v0_3_2_and_v0_3_3_for_exact_new_trial_authorization
+```
+
+---
+
+## Current Handoff Update - v0.6.2 First-Month Live Pilot Recovery Plan
+
+```text
+phase: v0_6_2_first_month_live_pilot_recovery_plan
+phase_id: v0_6_2_first_month_live_pilot_recovery_plan
+status: planned_local_not_started
+mode: Green Lane planning doc plus status sync
+summary: Converts the first-live-pilot failed attempt into a one-month recovery route that first inspects the failed attempt, then either returns the system to exact new-trial authorization readiness or executes one new minimal trial only after explicit new A5 authorization.
+source_local_commit: 1f02ff0750f9a3e22876130875437b86a899b524
+source_remote_commit: 1f02ff0750f9a3e22876130875437b86a899b524
+source_phase: v0_6_1_fifteen_day_controlled_generation_readiness_checkpoint
+previous_phase_commit: 1f02ff0750f9a3e22876130875437b86a899b524
+previous_phase_push_performed: true
+current_gate_phase: v0_6_2_first_month_live_pilot_recovery_plan
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+changed: docs/V0_6_2_FIRST_MONTH_LIVE_PILOT_RECOVERY_PLAN.md; docs/00_project_roadmap.md; .agent_board resume surfaces.
+first_attempt_status: attempted_failed_no_retry
+first_attempt_failure_class: provider_tool_user_error
+batch_a_defined: true
+batch_b_defined: true
+month_objective: move_v0_3_3_from_failed_no_retry_to_re_authorizable_new_trial_state
+execution_authorized_by_this_plan: false
+provider_call_performed_by_this_plan: false
+image_generation_performed: false
+image_generation_performed_by_this_plan: false
+VCP_memory_write_performed_by_this_plan: false
+DailyNote_write_performed_by_this_plan: false
+runtime_call_performed_by_this_plan: false
+secret_value_read_performed: false
+secret_value_read_performed_by_this_plan: false
+push_allowed: false
+recommended_next: batch_a_failed_attempt_inspection_and_reauthorization_refresh
+```
+
+---
+
 ## Current Handoff Update - v0.6.1 Fifteen-Day Controlled Generation Readiness Checkpoint
 
 ```text

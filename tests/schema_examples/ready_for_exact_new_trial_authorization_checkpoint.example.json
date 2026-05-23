@@ -1,0 +1,71 @@
+{
+  "ready_for_exact_new_trial_authorization_checkpoint": {
+    "checkpoint_id": "ready_for_exact_new_trial_authorization_checkpoint_v0_6_5_fixture",
+    "version": "v0_1",
+    "phase": "v0_6_5_ready_for_exact_new_trial_authorization_checkpoint",
+    "source_failed_provider_attempt_inspection_ref": "reports/visual_asset_eval_dry_run/v0_6_3_failed_provider_attempt_inspection.json",
+    "source_exact_new_trial_authorization_refresh_ref": "reports/visual_asset_eval_dry_run/v0_6_4_exact_new_trial_authorization_refresh.json",
+    "checkpoint_assertions": {
+      "failed_provider_attempt_inspection_exists": true,
+      "exact_new_trial_authorization_refresh_exists": true,
+      "ready_for_exact_new_trial_authorization": true,
+      "future_exact_approval_phrase_required": true,
+      "can_execute_now": false
+    },
+    "authorization_readiness": {
+      "first_attempt_failed_no_image": true,
+      "retry_001_failed_no_image": true,
+      "smoke_001_succeeded_image_generated": true,
+      "safe_portrait_001_succeeded_image_generated": true,
+      "reuse_original_prompt_by_default": false,
+      "reuse_retry_001_prompt_by_default": false,
+      "explicit_new_prompt_package_or_override_required": true,
+      "new_output_directory_required": true,
+      "new_receipt_path_required": true,
+      "new_registry_path_required": true,
+      "new_review_console_bridge_ref_required": true,
+      "max_provider_calls_still_1": true,
+      "max_image_candidates_still_1": true,
+      "retry_limit_still_0": true,
+      "no_memory_write_default_still_true": true
+    },
+    "next_route_options": [
+      "stay_ready_for_exact_new_trial_authorization_without_execution",
+      "request_one_exact_new_A5_authorization_then_run_one_new_minimal_trial_with_post_review"
+    ],
+    "boundaries": {
+      "metadata_only": true,
+      "checkpoint_only": true,
+      "authorization_ready_only": true,
+      "can_execute_now": false,
+      "provider_call_performed": false,
+      "image_generation_performed": false,
+      "VCP_memory_write_performed": false,
+      "DailyNote_write_performed": false,
+      "runtime_call_performed": false,
+      "secret_value_read_performed": false,
+      "production_candidate_created": false,
+      "accepted_sample_auto_promotion": false,
+      "memory_seed_promoted": false,
+      "real_executor_implemented_now": false,
+      "Push_L2_exercised": false,
+      "package_dependency_change_performed": false,
+      "commit_performed": false,
+      "push_performed": false
+    },
+    "side_effects": {
+      "provider_call_performed": false,
+      "image_generation_performed": false,
+      "VCP_memory_write_performed": false,
+      "DailyNote_write_performed": false,
+      "runtime_call_performed": false,
+      "secret_value_read_performed": false,
+      "production_candidate_created": false,
+      "accepted_sample_auto_promotion": false,
+      "memory_seed_promoted": false,
+      "package_dependency_change_performed": false,
+      "commit_performed": false,
+      "push_performed": false
+    }
+  }
+}

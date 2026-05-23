@@ -1,0 +1,102 @@
+id: failed_provider_attempt_inspection
+version: v0_1
+phase: v0_6_3_failed_provider_attempt_inspection
+type: object
+required:
+  - inspection_id
+  - version
+  - phase
+  - source_gate_ref
+  - receipt_ref
+  - receipt_registry_ref
+  - attempt_result_ref
+  - review_console_bridge_ref
+  - source_attempt_facts
+  - inspection_assertions
+  - boundaries
+  - side_effects
+properties:
+  inspection_id:
+    type: string
+  version:
+    type: string
+  phase:
+    type: string
+  source_gate_ref:
+    type: string
+  receipt_ref:
+    type: string
+  receipt_registry_ref:
+    type: string
+  attempt_result_ref:
+    type: string
+  review_console_bridge_ref:
+    type: string
+  source_attempt_facts:
+    type: object
+    required:
+      - source_attempt_status
+      - provider_calls_used
+      - plugin_calls_used
+      - api_calls_used
+      - image_candidates_requested
+      - image_candidates_generated
+      - retries_used
+      - retry_limit
+      - failure_class
+      - stop_reason
+      - output_image_path
+      - review_bridge_materialized_now
+  inspection_assertions:
+    type: object
+    required:
+      - receipt_present
+      - registry_present
+      - attempt_result_present
+      - registry_entry_present
+      - receipt_registry_status_match
+      - receipt_registry_receipt_match
+      - receipt_attempt_result_status_match
+      - receipt_attempt_result_receipt_match
+      - no_image_artifact_produced
+      - retry_blocked_by_zero_retry_limit
+      - failure_class_locked
+      - review_bridge_ref_recorded
+      - review_bridge_materialized_now_false
+      - boundary_flags_preserved
+      - all_required_failed_attempt_evidence_present
+  boundaries:
+    type: object
+    required:
+      - metadata_only
+      - inspection_only
+      - no_new_trial_executed
+      - provider_call_performed
+      - image_generation_performed
+      - VCP_memory_write_performed
+      - DailyNote_write_performed
+      - runtime_call_performed
+      - secret_value_read_performed
+      - production_candidate_created
+      - accepted_sample_auto_promotion
+      - memory_seed_promoted
+      - real_executor_implemented_now
+      - Push_L2_exercised
+      - package_dependency_change_performed
+      - commit_performed
+      - push_performed
+  side_effects:
+    type: object
+    required:
+      - provider_call_performed
+      - image_generation_performed
+      - VCP_memory_write_performed
+      - DailyNote_write_performed
+      - runtime_call_performed
+      - secret_value_read_performed
+      - production_candidate_created
+      - accepted_sample_auto_promotion
+      - memory_seed_promoted
+      - package_dependency_change_performed
+      - commit_performed
+      - push_performed

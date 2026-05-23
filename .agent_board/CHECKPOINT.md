@@ -1,5 +1,354 @@
 ---
 
+## Checkpoint - v0.6.6 Exact New-Trial A5 Request Draft
+
+```text
+phase: v0_6_6_exact_new_trial_a5_request_draft
+phase_id: v0_6_6_exact_new_trial_a5_request_draft
+status: completed_validated_local_slice
+mode: Green Lane doc/schema/report/fixture/validator/status compact batch
+source_local_commit: 1f02ff0750f9a3e22876130875437b86a899b524
+source_remote_commit: 1f02ff0750f9a3e22876130875437b86a899b524
+source_phase: v0_6_5_ready_for_exact_new_trial_authorization_checkpoint
+previous_phase_commit: 1f02ff0750f9a3e22876130875437b86a899b524
+previous_phase_push_performed: false
+current_gate_phase: v0_6_6_exact_new_trial_a5_request_draft
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+completed:
+- created exact new-trial A5 request draft doc
+- created exact new-trial A5 request draft schema
+- created request draft report
+- created pass/fail request draft fixtures
+- created validator and wired it into MVP
+- extended the governance tooling slice for the current v0.6.2 to v0.6.6 local planning, inspection, refresh, checkpoint, and request-draft files
+changed:
+- docs/V0_6_2_FIRST_MONTH_LIVE_PILOT_RECOVERY_PLAN.md
+- docs/V0_6_3_FAILED_PROVIDER_ATTEMPT_INSPECTION.md
+- docs/V0_6_4_EXACT_NEW_TRIAL_AUTHORIZATION_REFRESH.md
+- docs/V0_6_5_READY_FOR_EXACT_NEW_TRIAL_AUTHORIZATION_CHECKPOINT.md
+- docs/V0_6_6_EXACT_NEW_TRIAL_A5_REQUEST_DRAFT.md
+- schemas/failed_provider_attempt_inspection.schema.yaml
+- schemas/exact_new_trial_authorization_refresh.schema.yaml
+- schemas/ready_for_exact_new_trial_authorization_checkpoint.schema.yaml
+- schemas/exact_new_trial_a5_request_draft.schema.yaml
+- reports/visual_asset_eval_dry_run/v0_6_3_failed_provider_attempt_inspection.json
+- reports/visual_asset_eval_dry_run/v0_6_4_exact_new_trial_authorization_refresh.json
+- reports/visual_asset_eval_dry_run/v0_6_5_ready_for_exact_new_trial_authorization_checkpoint.json
+- reports/visual_asset_eval_dry_run/v0_6_6_exact_new_trial_a5_request_draft.json
+- tests/schema_examples/failed_provider_attempt_inspection.example.json
+- tests/schema_examples/failed_provider_attempt_inspection_fail.example.json
+- tests/schema_examples/exact_new_trial_authorization_refresh.example.json
+- tests/schema_examples/exact_new_trial_authorization_refresh_fail.example.json
+- tests/schema_examples/ready_for_exact_new_trial_authorization_checkpoint.example.json
+- tests/schema_examples/ready_for_exact_new_trial_authorization_checkpoint_fail.example.json
+- tests/schema_examples/exact_new_trial_a5_request_draft.example.json
+- tests/schema_examples/exact_new_trial_a5_request_draft_fail.example.json
+- scripts/validate_failed_provider_attempt_inspection.js
+- scripts/validate_exact_new_trial_authorization_refresh.js
+- scripts/validate_ready_for_exact_new_trial_authorization_checkpoint.js
+- scripts/validate_exact_new_trial_a5_request_draft.js
+- scripts/validate_mvp.ps1
+- scripts/lib/governance_tooling_maintenance_slice.js
+- docs/00_project_roadmap.md
+- .agent_board/HANDOFF.md
+- .agent_board/RUN_STATE.md
+- .agent_board/TASK_QUEUE.md
+- .agent_board/CHECKPOINT.md
+latest_validation:
+- pending
+authorization_package_id: AUTH-PENDING-V0-3-3-EXACT-NEW-TRIAL-20260523-001
+authorization_status: draft_not_submitted
+approval_status: not_requested
+exact_approval_phrase_received: false
+recommended_exact_approval_phrase_present: true
+draft_uses_placeholders_only: true
+draft_not_executable_until_placeholders_replaced: true
+ready_for_exact_new_trial_authorization: true
+can_execute_now: false
+no_memory_write_default: true
+provider_call_performed: false
+image_generation_performed: false
+VCP_memory_write_performed: false
+DailyNote_write_performed: false
+runtime_call_performed: false
+secret_value_read_performed: false
+push_allowed: false
+recommended_next: wait_for_explicit_new_A5_or_stop_at_ready_state
+```
+
+---
+
+## Checkpoint - v0.6.5 Ready For Exact New-Trial Authorization Checkpoint
+
+```text
+phase: v0_6_5_ready_for_exact_new_trial_authorization_checkpoint
+phase_id: v0_6_5_ready_for_exact_new_trial_authorization_checkpoint
+status: completed_validated_local_slice
+mode: Green Lane doc/schema/report/fixture/validator/status compact batch
+source_local_commit: 1f02ff0750f9a3e22876130875437b86a899b524
+source_remote_commit: 1f02ff0750f9a3e22876130875437b86a899b524
+source_phase: v0_6_4_exact_new_trial_authorization_refresh
+previous_phase_commit: 1f02ff0750f9a3e22876130875437b86a899b524
+previous_phase_push_performed: false
+current_gate_phase: v0_6_5_ready_for_exact_new_trial_authorization_checkpoint
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+completed:
+- created ready-for-exact-new-trial authorization checkpoint doc
+- created ready-for-exact-new-trial authorization checkpoint schema
+- created checkpoint report
+- created pass/fail checkpoint fixtures
+- created validator and wired it into MVP
+- registered the exact governance slice for the current v0.6.2 to v0.6.5 local planning, inspection, refresh, and checkpoint files
+changed:
+- docs/V0_6_2_FIRST_MONTH_LIVE_PILOT_RECOVERY_PLAN.md
+- docs/V0_6_3_FAILED_PROVIDER_ATTEMPT_INSPECTION.md
+- docs/V0_6_4_EXACT_NEW_TRIAL_AUTHORIZATION_REFRESH.md
+- docs/V0_6_5_READY_FOR_EXACT_NEW_TRIAL_AUTHORIZATION_CHECKPOINT.md
+- schemas/failed_provider_attempt_inspection.schema.yaml
+- schemas/exact_new_trial_authorization_refresh.schema.yaml
+- schemas/ready_for_exact_new_trial_authorization_checkpoint.schema.yaml
+- reports/visual_asset_eval_dry_run/v0_6_3_failed_provider_attempt_inspection.json
+- reports/visual_asset_eval_dry_run/v0_6_4_exact_new_trial_authorization_refresh.json
+- reports/visual_asset_eval_dry_run/v0_6_5_ready_for_exact_new_trial_authorization_checkpoint.json
+- tests/schema_examples/failed_provider_attempt_inspection.example.json
+- tests/schema_examples/failed_provider_attempt_inspection_fail.example.json
+- tests/schema_examples/exact_new_trial_authorization_refresh.example.json
+- tests/schema_examples/exact_new_trial_authorization_refresh_fail.example.json
+- tests/schema_examples/ready_for_exact_new_trial_authorization_checkpoint.example.json
+- tests/schema_examples/ready_for_exact_new_trial_authorization_checkpoint_fail.example.json
+- scripts/validate_failed_provider_attempt_inspection.js
+- scripts/validate_exact_new_trial_authorization_refresh.js
+- scripts/validate_ready_for_exact_new_trial_authorization_checkpoint.js
+- scripts/validate_mvp.ps1
+- scripts/lib/governance_tooling_maintenance_slice.js
+- docs/00_project_roadmap.md
+- .agent_board/HANDOFF.md
+- .agent_board/RUN_STATE.md
+- .agent_board/TASK_QUEUE.md
+- .agent_board/CHECKPOINT.md
+latest_validation:
+- pending
+ready_for_exact_new_trial_authorization: true
+future_exact_approval_phrase_required: true
+can_execute_now: false
+reuse_original_prompt_by_default: false
+reuse_retry_001_prompt_by_default: false
+explicit_new_prompt_package_or_override_required: true
+new_output_directory_required: true
+new_receipt_path_required: true
+new_registry_path_required: true
+new_review_console_bridge_ref_required: true
+authorization_ready_only: true
+provider_call_performed: false
+image_generation_performed: false
+VCP_memory_write_performed: false
+DailyNote_write_performed: false
+runtime_call_performed: false
+secret_value_read_performed: false
+push_allowed: false
+recommended_next: batch_b_authorization_branch_or_ready_checkpoint
+```
+
+---
+
+## Checkpoint - v0.6.4 Exact New-Trial Authorization Refresh
+
+```text
+phase: v0_6_4_exact_new_trial_authorization_refresh
+phase_id: v0_6_4_exact_new_trial_authorization_refresh
+status: completed_validated_local_slice
+mode: Green Lane doc/schema/report/fixture/validator/status compact batch
+source_local_commit: 1f02ff0750f9a3e22876130875437b86a899b524
+source_remote_commit: 1f02ff0750f9a3e22876130875437b86a899b524
+source_phase: v0_6_3_failed_provider_attempt_inspection
+previous_phase_commit: 1f02ff0750f9a3e22876130875437b86a899b524
+previous_phase_push_performed: false
+current_gate_phase: v0_6_4_exact_new_trial_authorization_refresh
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+completed:
+- created exact new-trial authorization refresh doc
+- created exact new-trial authorization refresh schema
+- created refresh report
+- created pass/fail refresh fixtures
+- created validator and wired it into MVP
+- registered the exact governance slice for the current v0.6.2 to v0.6.4 local planning and refresh files
+changed:
+- docs/V0_6_2_FIRST_MONTH_LIVE_PILOT_RECOVERY_PLAN.md
+- docs/V0_6_3_FAILED_PROVIDER_ATTEMPT_INSPECTION.md
+- docs/V0_6_4_EXACT_NEW_TRIAL_AUTHORIZATION_REFRESH.md
+- schemas/failed_provider_attempt_inspection.schema.yaml
+- schemas/exact_new_trial_authorization_refresh.schema.yaml
+- reports/visual_asset_eval_dry_run/v0_6_3_failed_provider_attempt_inspection.json
+- reports/visual_asset_eval_dry_run/v0_6_4_exact_new_trial_authorization_refresh.json
+- tests/schema_examples/failed_provider_attempt_inspection.example.json
+- tests/schema_examples/failed_provider_attempt_inspection_fail.example.json
+- tests/schema_examples/exact_new_trial_authorization_refresh.example.json
+- tests/schema_examples/exact_new_trial_authorization_refresh_fail.example.json
+- scripts/validate_failed_provider_attempt_inspection.js
+- scripts/validate_exact_new_trial_authorization_refresh.js
+- scripts/validate_mvp.ps1
+- scripts/lib/governance_tooling_maintenance_slice.js
+- docs/00_project_roadmap.md
+- .agent_board/HANDOFF.md
+- .agent_board/RUN_STATE.md
+- .agent_board/TASK_QUEUE.md
+- .agent_board/CHECKPOINT.md
+latest_validation:
+- git diff --check: passed_with_line_ending_warnings_only
+- node --check scripts/validate_exact_new_trial_authorization_refresh.js: passed
+- node --check scripts/lib/governance_tooling_maintenance_slice.js: passed
+- node scripts/validate_exact_new_trial_authorization_refresh.js: passed
+- node scripts/validate_agent_board_state.js: passed
+- npm run validate:mvp: passed
+first_attempt_failed_no_image: true
+retry_001_failed_no_image: true
+smoke_001_succeeded_image_generated: true
+safe_portrait_001_succeeded_image_generated: true
+reuse_original_prompt_by_default: false
+reuse_retry_001_prompt_by_default: false
+explicit_new_prompt_package_or_override_required: true
+new_output_directory_required: true
+new_receipt_path_required: true
+new_registry_path_required: true
+new_review_console_bridge_ref_required: true
+refresh_packet_only: true
+provider_call_performed: false
+image_generation_performed: false
+VCP_memory_write_performed: false
+DailyNote_write_performed: false
+runtime_call_performed: false
+secret_value_read_performed: false
+push_allowed: false
+recommended_next: prepare_ready_for_exact_new_trial_authorization_checkpoint
+```
+
+---
+
+## Checkpoint - v0.6.3 Failed Provider Attempt Inspection
+
+```text
+phase: v0_6_3_failed_provider_attempt_inspection
+phase_id: v0_6_3_failed_provider_attempt_inspection
+status: completed_validated_local_slice
+mode: Green Lane doc/schema/report/fixture/validator/status compact batch
+source_local_commit: 1f02ff0750f9a3e22876130875437b86a899b524
+source_remote_commit: 1f02ff0750f9a3e22876130875437b86a899b524
+source_phase: v0_6_2_first_month_live_pilot_recovery_plan
+previous_phase_commit: 1f02ff0750f9a3e22876130875437b86a899b524
+previous_phase_push_performed: false
+current_gate_phase: v0_6_3_failed_provider_attempt_inspection
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+completed:
+- created failed provider attempt inspection doc
+- created failed provider attempt inspection schema
+- created inspection report
+- created pass/fail inspection fixtures
+- created validator and wired it into MVP
+- registered the exact governance slice for the current v0.6.2 + v0.6.3 local planning and inspection files
+changed:
+- docs/V0_6_2_FIRST_MONTH_LIVE_PILOT_RECOVERY_PLAN.md
+- docs/V0_6_3_FAILED_PROVIDER_ATTEMPT_INSPECTION.md
+- schemas/failed_provider_attempt_inspection.schema.yaml
+- reports/visual_asset_eval_dry_run/v0_6_3_failed_provider_attempt_inspection.json
+- tests/schema_examples/failed_provider_attempt_inspection.example.json
+- tests/schema_examples/failed_provider_attempt_inspection_fail.example.json
+- scripts/validate_failed_provider_attempt_inspection.js
+- scripts/validate_mvp.ps1
+- scripts/lib/governance_tooling_maintenance_slice.js
+- docs/00_project_roadmap.md
+- .agent_board/HANDOFF.md
+- .agent_board/RUN_STATE.md
+- .agent_board/TASK_QUEUE.md
+- .agent_board/CHECKPOINT.md
+latest_validation:
+- git diff --check: passed_with_line_ending_warnings_only
+- node --check scripts/validate_failed_provider_attempt_inspection.js: passed
+- node --check scripts/lib/governance_tooling_maintenance_slice.js: passed
+- node scripts/validate_failed_provider_attempt_inspection.js: passed
+- node scripts/validate_agent_board_state.js: passed
+- npm run validate:mvp: passed
+source_attempt_status: failed_no_image_generated
+failure_class: provider_tool_user_error
+image_artifact_produced: false
+retry_blocked_by_zero_retry_limit: true
+review_bridge_ref_recorded: true
+review_bridge_materialized_now: false
+inspection_only: true
+provider_call_performed: false
+image_generation_performed: false
+VCP_memory_write_performed: false
+DailyNote_write_performed: false
+runtime_call_performed: false
+secret_value_read_performed: false
+push_allowed: false
+recommended_next: refresh_v0_3_2_and_v0_3_3_for_exact_new_trial_authorization
+```
+
+---
+
+## Checkpoint - v0.6.2 First-Month Live Pilot Recovery Plan
+
+```text
+phase: v0_6_2_first_month_live_pilot_recovery_plan
+phase_id: v0_6_2_first_month_live_pilot_recovery_plan
+status: planned_local_not_started
+mode: Green Lane planning doc plus status sync
+source_local_commit: 1f02ff0750f9a3e22876130875437b86a899b524
+source_remote_commit: 1f02ff0750f9a3e22876130875437b86a899b524
+source_phase: v0_6_1_fifteen_day_controlled_generation_readiness_checkpoint
+previous_phase_commit: 1f02ff0750f9a3e22876130875437b86a899b524
+previous_phase_push_performed: true
+current_gate_phase: v0_6_2_first_month_live_pilot_recovery_plan
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+completed:
+- created first-month live pilot recovery plan document
+- added a new roadmap entry for the month plan
+- synced .agent_board resume surfaces to the current pushed baseline and new recommended next task
+changed:
+- docs/V0_6_2_FIRST_MONTH_LIVE_PILOT_RECOVERY_PLAN.md
+- docs/00_project_roadmap.md
+- .agent_board/HANDOFF.md
+- .agent_board/RUN_STATE.md
+- .agent_board/TASK_QUEUE.md
+- .agent_board/CHECKPOINT.md
+latest_validation:
+- git diff --check: passed_with_line_ending_warnings_only
+- node --check scripts/lib/governance_tooling_maintenance_slice.js: passed
+- node scripts/validate_autopilot_agent_board_resume_compaction_guard.js: passed
+- node scripts/validate_controlled_visual_production_loop_exact_file_commit_readiness_review.js: passed
+- node scripts/validate_controlled_visual_production_loop_checkpoint_readiness.js: passed
+- node scripts/validate_controlled_visual_production_loop_commit_and_authorization_readiness_audit.js: passed
+- node scripts/validate_agent_board_state.js: passed
+- npm run validate:mvp: passed
+first_attempt_status: attempted_failed_no_retry
+first_attempt_failure_class: provider_tool_user_error
+batch_a_defined: true
+batch_b_defined: true
+execution_authorized_by_this_plan: false
+provider_call_performed_by_this_plan: false
+image_generation_performed: false
+image_generation_performed_by_this_plan: false
+VCP_memory_write_performed_by_this_plan: false
+DailyNote_write_performed_by_this_plan: false
+runtime_call_performed_by_this_plan: false
+secret_value_read_performed: false
+secret_value_read_performed_by_this_plan: false
+push_allowed: false
+recommended_next: batch_a_failed_attempt_inspection_and_reauthorization_refresh
+```
+
+---
+
 ## Checkpoint - v0.6.1 Fifteen-Day Controlled Generation Readiness Checkpoint
 
 ```text

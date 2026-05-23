@@ -2,6 +2,225 @@
 
 本文是 Agent Image Lab 的总路线图，用来把 v0.2 基线、v0.3 授权门槛、MVP-B dry-run 和未来真实闭环串成一条可执行路径。
 
+## v0.6.6 - Exact New-Trial A5 Request Draft
+
+Status: local_inactive_request_draft_completed.
+
+Purpose:
+- Close the Batch B no-new-A5 branch with one concrete future exact approval
+  phrase draft.
+- Keep every unresolved next-trial field explicit instead of silently reusing
+  the old failed prompt and paths.
+- Keep the route non-executing, non-submitted, and placeholder-based until a
+  future exact human A5 approval is separately granted.
+
+Artifacts:
+- `docs/V0_6_6_EXACT_NEW_TRIAL_A5_REQUEST_DRAFT.md`
+- `schemas/exact_new_trial_a5_request_draft.schema.yaml`
+- `reports/visual_asset_eval_dry_run/v0_6_6_exact_new_trial_a5_request_draft.json`
+- `tests/schema_examples/exact_new_trial_a5_request_draft.example.json`
+- `tests/schema_examples/exact_new_trial_a5_request_draft_fail.example.json`
+- `scripts/validate_exact_new_trial_a5_request_draft.js`
+
+Boundary state:
+- `source_local_commit: 1f02ff0`
+- `source_remote_commit: 1f02ff0`
+- `source_phase: v0_6_5_ready_for_exact_new_trial_authorization_checkpoint`
+- `current_gate_phase: v0_6_6_exact_new_trial_a5_request_draft`
+- `active current phase: v0_3_3_first_live_generation_pilot`
+- `resume_guard_source_phase: v0_3_2_live_candidate_action_packet`
+- `next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial`
+- `authorization_package_id: AUTH-PENDING-V0-3-3-EXACT-NEW-TRIAL-20260523-001`
+- `authorization_status: draft_not_submitted`
+- `approval_status: not_requested`
+- `exact_approval_phrase_received: false`
+- `recommended_exact_approval_phrase_present: true`
+- `draft_uses_placeholders_only: true`
+- `draft_not_executable_until_placeholders_replaced: true`
+- `ready_for_exact_new_trial_authorization: true`
+- `can_execute_now: false`
+- `no_memory_write_default: true`
+- `provider_call_performed: false`
+- `image_generation_performed: false`
+- `memory_write_performed: false`
+- `real_executor_performed: false`
+- `secret_value_read_performed: false`
+- `push_allowed: false`
+
+Recommended next: wait for an explicit new A5 authorization or stop at `ready_for_exact_new_trial_authorization`; do not execute anything from this draft by default.
+
+## v0.6.5 - Ready For Exact New-Trial Authorization Checkpoint
+
+Status: local_authorization_ready_checkpoint_completed.
+
+Purpose:
+- Close Batch A into a single validator-backed ready-for-authorization
+  checkpoint.
+- Confirm the failed-attempt inspection and refresh packet both exist and agree.
+- Keep the route non-executing until a future exact new A5 authorization is
+  explicitly granted.
+
+Artifacts:
+- `docs/V0_6_5_READY_FOR_EXACT_NEW_TRIAL_AUTHORIZATION_CHECKPOINT.md`
+- `schemas/ready_for_exact_new_trial_authorization_checkpoint.schema.yaml`
+- `reports/visual_asset_eval_dry_run/v0_6_5_ready_for_exact_new_trial_authorization_checkpoint.json`
+- `tests/schema_examples/ready_for_exact_new_trial_authorization_checkpoint.example.json`
+- `tests/schema_examples/ready_for_exact_new_trial_authorization_checkpoint_fail.example.json`
+- `scripts/validate_ready_for_exact_new_trial_authorization_checkpoint.js`
+
+Boundary state:
+- `source_local_commit: 1f02ff0`
+- `source_remote_commit: 1f02ff0`
+- `source_phase: v0_6_4_exact_new_trial_authorization_refresh`
+- `current_gate_phase: v0_6_5_ready_for_exact_new_trial_authorization_checkpoint`
+- `active current phase: v0_3_3_first_live_generation_pilot`
+- `resume_guard_source_phase: v0_3_2_live_candidate_action_packet`
+- `next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial`
+- `ready_for_exact_new_trial_authorization: true`
+- `future_exact_approval_phrase_required: true`
+- `can_execute_now: false`
+- `reuse_original_prompt_by_default: false`
+- `reuse_retry_001_prompt_by_default: false`
+- `explicit_new_prompt_package_or_override_required: true`
+- `new_output_directory_required: true`
+- `new_receipt_path_required: true`
+- `new_registry_path_required: true`
+- `new_review_console_bridge_ref_required: true`
+- `provider_call_performed: false`
+- `image_generation_performed: false`
+- `memory_write_performed: false`
+- `real_executor_performed: false`
+- `secret_value_read_performed: false`
+- `push_allowed: false`
+
+Recommended next: if no new exact A5 authorization is granted, stay at `ready_for_exact_new_trial_authorization`; if a new exact A5 authorization is granted later, enter one new minimal trial plus post-trial review.
+
+## v0.6.4 - Exact New-Trial Authorization Refresh
+
+Status: local_refresh_packet_completed.
+
+Purpose:
+- Refresh the future new-trial authorization surface after the failed first
+  attempt and failed retry 001.
+- Keep the candidate packet and pilot gate fail-closed without overwriting
+  historical `v0_3_2` and `v0_3_3` records.
+- Make the next request exact about prompt, output, receipt, registry, and
+  review-bridge uniqueness.
+
+Artifacts:
+- `docs/V0_6_4_EXACT_NEW_TRIAL_AUTHORIZATION_REFRESH.md`
+- `schemas/exact_new_trial_authorization_refresh.schema.yaml`
+- `reports/visual_asset_eval_dry_run/v0_6_4_exact_new_trial_authorization_refresh.json`
+- `tests/schema_examples/exact_new_trial_authorization_refresh.example.json`
+- `tests/schema_examples/exact_new_trial_authorization_refresh_fail.example.json`
+- `scripts/validate_exact_new_trial_authorization_refresh.js`
+
+Boundary state:
+- `source_local_commit: 1f02ff0`
+- `source_remote_commit: 1f02ff0`
+- `source_phase: v0_6_3_failed_provider_attempt_inspection`
+- `current_gate_phase: v0_6_4_exact_new_trial_authorization_refresh`
+- `active current phase: v0_3_3_first_live_generation_pilot`
+- `resume_guard_source_phase: v0_3_2_live_candidate_action_packet`
+- `next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial`
+- `first_attempt_failed_no_image: true`
+- `retry_001_failed_no_image: true`
+- `smoke_001_succeeded_image_generated: true`
+- `safe_portrait_001_succeeded_image_generated: true`
+- `reuse_original_prompt_by_default: false`
+- `reuse_retry_001_prompt_by_default: false`
+- `explicit_new_prompt_package_or_override_required: true`
+- `new_output_directory_required: true`
+- `new_receipt_path_required: true`
+- `new_registry_path_required: true`
+- `new_review_console_bridge_ref_required: true`
+- `provider_call_performed: false`
+- `image_generation_performed: false`
+- `memory_write_performed: false`
+- `real_executor_performed: false`
+- `secret_value_read_performed: false`
+- `push_allowed: false`
+
+Recommended next: prepare the exact refreshed `v0_3_2` candidate values and `v0_3_3` preflight wording for a future `ready_for_exact_new_trial_authorization` checkpoint.
+
+## v0.6.3 - Failed Provider Attempt Inspection
+
+Status: local_failed_attempt_inspection_completed.
+
+Purpose:
+- Consolidate the first failed live-pilot attempt into one explicit inspection
+  record.
+- Bind receipt, registry entry, and generation-attempt result into one
+  fail-closed evidence packet.
+- Prove the route is still in Batch A inspection mode and has not executed a
+  new trial.
+
+Artifacts:
+- `docs/V0_6_3_FAILED_PROVIDER_ATTEMPT_INSPECTION.md`
+- `schemas/failed_provider_attempt_inspection.schema.yaml`
+- `reports/visual_asset_eval_dry_run/v0_6_3_failed_provider_attempt_inspection.json`
+- `tests/schema_examples/failed_provider_attempt_inspection.example.json`
+- `tests/schema_examples/failed_provider_attempt_inspection_fail.example.json`
+- `scripts/validate_failed_provider_attempt_inspection.js`
+
+Boundary state:
+- `source_local_commit: 1f02ff0`
+- `source_remote_commit: 1f02ff0`
+- `source_phase: v0_6_2_first_month_live_pilot_recovery_plan`
+- `current_gate_phase: v0_6_3_failed_provider_attempt_inspection`
+- `active current phase: v0_3_3_first_live_generation_pilot`
+- `resume_guard_source_phase: v0_3_2_live_candidate_action_packet`
+- `next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial`
+- `source_attempt_status: failed_no_image_generated`
+- `failure_class: provider_tool_user_error`
+- `image_artifact_produced: false`
+- `retry_blocked_by_zero_retry_limit: true`
+- `review_bridge_ref_recorded: true`
+- `review_bridge_materialized_now: false`
+- `provider_call_performed: false`
+- `image_generation_performed: false`
+- `memory_write_performed: false`
+- `real_executor_performed: false`
+- `secret_value_read_performed: false`
+- `push_allowed: false`
+
+Recommended next: refresh the `v0_3_2` live candidate action packet and `v0_3_3` pilot preflight for a future exact new-trial authorization request.
+
+## v0.6.2 - First-Month Live Pilot Recovery Plan
+
+Status: planned_local_not_started.
+
+Purpose:
+- Convert the current first-live-pilot failed state into a one-month recovery
+  and reauthorization route.
+- Split the month into Batch A `failed_attempt_inspection_and_reauthorization_refresh`
+  and Batch B `authorization_branch_for_new_minimal_trial_or_ready_checkpoint`.
+- Keep the whole plan non-executing until any later exact A5 decision is made.
+
+Artifacts:
+- `docs/V0_6_2_FIRST_MONTH_LIVE_PILOT_RECOVERY_PLAN.md`
+
+Boundary state:
+- `source_local_commit: 1f02ff0`
+- `source_remote_commit: 1f02ff0`
+- `source_phase: v0_6_1_fifteen_day_controlled_generation_readiness_checkpoint`
+- `current_gate_phase: v0_6_2_first_month_live_pilot_recovery_plan`
+- `active current phase: v0_3_3_first_live_generation_pilot`
+- `resume_guard_source_phase: v0_3_2_live_candidate_action_packet`
+- `next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial`
+- `first_attempt_status: attempted_failed_no_retry`
+- `first_attempt_failure_class: provider_tool_user_error`
+- `new_real_trial_executed_by_this_plan: false`
+- `provider_call_performed_by_this_plan: false`
+- `image_generation_performed: false`
+- `image_generation_performed_by_this_plan: false`
+- `memory_write_performed_by_this_plan: false`
+- `real_executor_performed_by_this_plan: false`
+- `secret_value_read_performed: false`
+- `push_allowed: false`
+
+Recommended next: start Batch A and create the failed-attempt inspection slice plus refreshed reauthorization requirements without executing a new trial.
+
 ## v0.6.1 - Fifteen-Day Controlled Generation Readiness Checkpoint
 
 Status: completed_validated_pending_local_commit.

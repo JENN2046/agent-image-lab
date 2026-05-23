@@ -1,0 +1,89 @@
+id: exact_new_trial_authorization_refresh
+version: v0_1
+phase: v0_6_4_exact_new_trial_authorization_refresh
+type: object
+required:
+  - refresh_id
+  - version
+  - phase
+  - source_candidate_packet_ref
+  - source_pilot_gate_ref
+  - failed_attempt_inspection_ref
+  - first_attempt_receipt_ref
+  - retry_001_receipt_ref
+  - smoke_001_receipt_ref
+  - safe_portrait_001_receipt_ref
+  - route_diagnostics
+  - refreshed_candidate_fields
+  - refreshed_gate_preflight
+  - boundaries
+  - side_effects
+properties:
+  route_diagnostics:
+    type: object
+    required:
+      - first_attempt_failed_no_image
+      - retry_001_failed_no_image
+      - smoke_001_succeeded_image_generated
+      - safe_portrait_001_succeeded_image_generated
+      - failure_not_treated_as_general_route_outage
+  refreshed_candidate_fields:
+    type: object
+    required:
+      - reuse_original_prompt_by_default
+      - reuse_retry_001_prompt_by_default
+      - explicit_new_prompt_package_or_override_required
+      - max_provider_calls_still_1
+      - max_image_candidates_still_1
+      - retry_limit_still_0
+      - no_memory_write_default_still_true
+      - new_output_directory_required
+      - new_receipt_path_required
+      - new_registry_path_required
+      - new_review_console_bridge_ref_required
+      - overwrite_existing_files_allowed
+  refreshed_gate_preflight:
+    type: object
+    required:
+      - new_prompt_decision_required
+      - output_collision_check_required
+      - receipt_collision_check_required
+      - registry_write_plan_refresh_required
+      - review_bridge_uniqueness_required
+      - exact_authorization_phrase_refresh_required
+      - can_execute_now
+  boundaries:
+    type: object
+    required:
+      - metadata_only
+      - refresh_packet_only
+      - no_new_trial_executed
+      - provider_call_performed
+      - image_generation_performed
+      - VCP_memory_write_performed
+      - DailyNote_write_performed
+      - runtime_call_performed
+      - secret_value_read_performed
+      - production_candidate_created
+      - accepted_sample_auto_promotion
+      - memory_seed_promoted
+      - real_executor_implemented_now
+      - Push_L2_exercised
+      - package_dependency_change_performed
+      - commit_performed
+      - push_performed
+  side_effects:
+    type: object
+    required:
+      - provider_call_performed
+      - image_generation_performed
+      - VCP_memory_write_performed
+      - DailyNote_write_performed
+      - runtime_call_performed
+      - secret_value_read_performed
+      - production_candidate_created
+      - accepted_sample_auto_promotion
+      - memory_seed_promoted
+      - package_dependency_change_performed
+      - commit_performed
+      - push_performed

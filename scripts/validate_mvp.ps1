@@ -105,6 +105,10 @@ $requiredFiles = @(
   'scripts/validate_visual_memory_readonly_query_contract.js',
   'scripts/validate_first_controlled_generation_authorization_packet.js',
   'scripts/validate_fifteen_day_controlled_generation_readiness_checkpoint.js',
+  'scripts/validate_failed_provider_attempt_inspection.js',
+  'scripts/validate_exact_new_trial_authorization_refresh.js',
+  'scripts/validate_ready_for_exact_new_trial_authorization_checkpoint.js',
+  'scripts/validate_exact_new_trial_a5_request_draft.js',
   'scripts/validate_visual_sample_memory_policy.js',
   'scripts/validate_15_day_architecture_checkpoint.js',
   'scripts/validate_local_checkpoint_manifest.js',
@@ -13021,6 +13025,130 @@ process.exit(child.status || 0);
     }
     if ($fifteenDayControlledGenerationReadinessCheckpoint.Push_L2_exercised -ne $false -or $fifteenDayControlledGenerationReadinessCheckpoint.real_executor_implemented_now -ne $false -or $fifteenDayControlledGenerationReadinessCheckpoint.provider_call_performed -ne $false -or $fifteenDayControlledGenerationReadinessCheckpoint.image_generation_performed -ne $false -or $fifteenDayControlledGenerationReadinessCheckpoint.VCP_memory_write_performed -ne $false -or $fifteenDayControlledGenerationReadinessCheckpoint.DailyNote_write_performed -ne $false -or $fifteenDayControlledGenerationReadinessCheckpoint.runtime_call_performed -ne $false -or $fifteenDayControlledGenerationReadinessCheckpoint.secret_value_read_performed -ne $false -or $fifteenDayControlledGenerationReadinessCheckpoint.production_candidate_created -ne $false -or $fifteenDayControlledGenerationReadinessCheckpoint.accepted_sample_auto_promotion -ne $false -or $fifteenDayControlledGenerationReadinessCheckpoint.memory_seed_promoted -ne $false -or $fifteenDayControlledGenerationReadinessCheckpoint.package_dependency_change_performed -ne $false -or $fifteenDayControlledGenerationReadinessCheckpoint.commit_performed -ne $false -or $fifteenDayControlledGenerationReadinessCheckpoint.push_performed -ne $false) {
       Add-Failure "Fifteen-Day Controlled Generation Readiness Checkpoint must not perform Push_L2, executor, provider, image, memory, DailyNote, runtime, secret, production, accepted-sample, memory-seed, dependency, commit, or push actions"
+    }
+  }
+
+  $failedProviderAttemptInspectionOutput = & node (Join-Path $Root 'scripts/validate_failed_provider_attempt_inspection.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Failed Provider Attempt Inspection validation exited with failure"
+  } else {
+    $failedProviderAttemptInspection = ($failedProviderAttemptInspectionOutput -join "`n") | ConvertFrom-Json
+    if ($failedProviderAttemptInspection.passed -ne $true -or $failedProviderAttemptInspection.phase -ne 'v0_6_3_failed_provider_attempt_inspection') {
+      Add-Failure "Failed Provider Attempt Inspection validation must pass"
+    }
+    if ($failedProviderAttemptInspection.inspection_doc_present -ne $true -or $failedProviderAttemptInspection.inspection_schema_present -ne $true -or $failedProviderAttemptInspection.inspection_report_present -ne $true -or $failedProviderAttemptInspection.inspection_fixture_present -ne $true -or $failedProviderAttemptInspection.inspection_fail_fixture_present -ne $true) {
+      Add-Failure "Failed Provider Attempt Inspection must define doc, schema, report, pass fixture, and fail fixture"
+    }
+    if ($failedProviderAttemptInspection.receipt_present -ne $true -or $failedProviderAttemptInspection.registry_present -ne $true -or $failedProviderAttemptInspection.attempt_result_present -ne $true -or $failedProviderAttemptInspection.registry_entry_present -ne $true) {
+      Add-Failure "Failed Provider Attempt Inspection must bind receipt, registry, attempt result, and registry entry"
+    }
+    if ($failedProviderAttemptInspection.receipt_registry_status_match -ne $true -or $failedProviderAttemptInspection.receipt_registry_receipt_match -ne $true -or $failedProviderAttemptInspection.receipt_attempt_result_status_match -ne $true -or $failedProviderAttemptInspection.receipt_attempt_result_receipt_match -ne $true) {
+      Add-Failure "Failed Provider Attempt Inspection must keep receipt, registry, and attempt result aligned"
+    }
+    if ($failedProviderAttemptInspection.no_image_artifact_produced -ne $true -or $failedProviderAttemptInspection.retry_blocked_by_zero_retry_limit -ne $true -or $failedProviderAttemptInspection.failure_class_locked -ne $true -or $failedProviderAttemptInspection.review_bridge_ref_recorded -ne $true -or $failedProviderAttemptInspection.review_bridge_materialized_now_false -ne $true) {
+      Add-Failure "Failed Provider Attempt Inspection must lock the no-artifact, retry-block, failure-class, and review-bridge facts"
+    }
+    if ($failedProviderAttemptInspection.negative_case_count -lt 13 -or $failedProviderAttemptInspection.caught_negative_case_count -ne $failedProviderAttemptInspection.negative_case_count -or $failedProviderAttemptInspection.all_negative_cases_caught -ne $true) {
+      Add-Failure "Failed Provider Attempt Inspection must catch every required negative case"
+    }
+    if ($failedProviderAttemptInspection.metadata_only -ne $true -or $failedProviderAttemptInspection.inspection_only -ne $true -or $failedProviderAttemptInspection.no_new_trial_executed -ne $true) {
+      Add-Failure "Failed Provider Attempt Inspection must remain metadata-only, inspection-only, and not execute a new trial"
+    }
+    if ($failedProviderAttemptInspection.Push_L2_exercised -ne $false -or $failedProviderAttemptInspection.real_executor_implemented_now -ne $false -or $failedProviderAttemptInspection.provider_call_performed -ne $false -or $failedProviderAttemptInspection.image_generation_performed -ne $false -or $failedProviderAttemptInspection.VCP_memory_write_performed -ne $false -or $failedProviderAttemptInspection.DailyNote_write_performed -ne $false -or $failedProviderAttemptInspection.runtime_call_performed -ne $false -or $failedProviderAttemptInspection.secret_value_read_performed -ne $false -or $failedProviderAttemptInspection.production_candidate_created -ne $false -or $failedProviderAttemptInspection.accepted_sample_auto_promotion -ne $false -or $failedProviderAttemptInspection.memory_seed_promoted -ne $false -or $failedProviderAttemptInspection.package_dependency_change_performed -ne $false -or $failedProviderAttemptInspection.commit_performed -ne $false -or $failedProviderAttemptInspection.push_performed -ne $false) {
+      Add-Failure "Failed Provider Attempt Inspection must not perform Push_L2, executor, provider, image, memory, DailyNote, runtime, secret, production, accepted-sample, memory-seed, dependency, commit, or push actions"
+    }
+  }
+
+  $exactNewTrialAuthorizationRefreshOutput = & node (Join-Path $Root 'scripts/validate_exact_new_trial_authorization_refresh.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Exact New-Trial Authorization Refresh validation exited with failure"
+  } else {
+    $exactNewTrialAuthorizationRefresh = ($exactNewTrialAuthorizationRefreshOutput -join "`n") | ConvertFrom-Json
+    if ($exactNewTrialAuthorizationRefresh.passed -ne $true -or $exactNewTrialAuthorizationRefresh.phase -ne 'v0_6_4_exact_new_trial_authorization_refresh') {
+      Add-Failure "Exact New-Trial Authorization Refresh validation must pass"
+    }
+    if ($exactNewTrialAuthorizationRefresh.refresh_doc_present -ne $true -or $exactNewTrialAuthorizationRefresh.refresh_schema_present -ne $true -or $exactNewTrialAuthorizationRefresh.refresh_report_present -ne $true -or $exactNewTrialAuthorizationRefresh.refresh_fixture_present -ne $true -or $exactNewTrialAuthorizationRefresh.refresh_fail_fixture_present -ne $true) {
+      Add-Failure "Exact New-Trial Authorization Refresh must define doc, schema, report, pass fixture, and fail fixture"
+    }
+    if ($exactNewTrialAuthorizationRefresh.first_attempt_failed_no_image -ne $true -or $exactNewTrialAuthorizationRefresh.retry_001_failed_no_image -ne $true -or $exactNewTrialAuthorizationRefresh.smoke_001_succeeded_image_generated -ne $true -or $exactNewTrialAuthorizationRefresh.safe_portrait_001_succeeded_image_generated -ne $true -or $exactNewTrialAuthorizationRefresh.failure_not_treated_as_general_route_outage -ne $true) {
+      Add-Failure "Exact New-Trial Authorization Refresh must bind both failed attempts and both successful route checks"
+    }
+    if ($exactNewTrialAuthorizationRefresh.reuse_original_prompt_by_default -ne $false -or $exactNewTrialAuthorizationRefresh.reuse_retry_001_prompt_by_default -ne $false -or $exactNewTrialAuthorizationRefresh.explicit_new_prompt_package_or_override_required -ne $true -or $exactNewTrialAuthorizationRefresh.max_provider_calls_still_1 -ne $true -or $exactNewTrialAuthorizationRefresh.max_image_candidates_still_1 -ne $true -or $exactNewTrialAuthorizationRefresh.retry_limit_still_0 -ne $true -or $exactNewTrialAuthorizationRefresh.no_memory_write_default_still_true -ne $true -or $exactNewTrialAuthorizationRefresh.new_output_directory_required -ne $true -or $exactNewTrialAuthorizationRefresh.new_receipt_path_required -ne $true -or $exactNewTrialAuthorizationRefresh.new_registry_path_required -ne $true -or $exactNewTrialAuthorizationRefresh.new_review_console_bridge_ref_required -ne $true) {
+      Add-Failure "Exact New-Trial Authorization Refresh must keep the refreshed candidate fields fail-closed"
+    }
+    if ($exactNewTrialAuthorizationRefresh.new_prompt_decision_required -ne $true -or $exactNewTrialAuthorizationRefresh.output_collision_check_required -ne $true -or $exactNewTrialAuthorizationRefresh.receipt_collision_check_required -ne $true -or $exactNewTrialAuthorizationRefresh.registry_write_plan_refresh_required -ne $true -or $exactNewTrialAuthorizationRefresh.review_bridge_uniqueness_required -ne $true -or $exactNewTrialAuthorizationRefresh.exact_authorization_phrase_refresh_required -ne $true) {
+      Add-Failure "Exact New-Trial Authorization Refresh must keep every gate-preflight refresh requirement explicit"
+    }
+    if ($exactNewTrialAuthorizationRefresh.negative_case_count -lt 18 -or $exactNewTrialAuthorizationRefresh.caught_negative_case_count -ne $exactNewTrialAuthorizationRefresh.negative_case_count -or $exactNewTrialAuthorizationRefresh.all_negative_cases_caught -ne $true) {
+      Add-Failure "Exact New-Trial Authorization Refresh must catch every required negative case"
+    }
+    if ($exactNewTrialAuthorizationRefresh.metadata_only -ne $true -or $exactNewTrialAuthorizationRefresh.refresh_packet_only -ne $true -or $exactNewTrialAuthorizationRefresh.no_new_trial_executed -ne $true) {
+      Add-Failure "Exact New-Trial Authorization Refresh must remain metadata-only, refresh-packet-only, and non-executing"
+    }
+    if ($exactNewTrialAuthorizationRefresh.Push_L2_exercised -ne $false -or $exactNewTrialAuthorizationRefresh.real_executor_implemented_now -ne $false -or $exactNewTrialAuthorizationRefresh.provider_call_performed -ne $false -or $exactNewTrialAuthorizationRefresh.image_generation_performed -ne $false -or $exactNewTrialAuthorizationRefresh.VCP_memory_write_performed -ne $false -or $exactNewTrialAuthorizationRefresh.DailyNote_write_performed -ne $false -or $exactNewTrialAuthorizationRefresh.runtime_call_performed -ne $false -or $exactNewTrialAuthorizationRefresh.secret_value_read_performed -ne $false -or $exactNewTrialAuthorizationRefresh.production_candidate_created -ne $false -or $exactNewTrialAuthorizationRefresh.accepted_sample_auto_promotion -ne $false -or $exactNewTrialAuthorizationRefresh.memory_seed_promoted -ne $false -or $exactNewTrialAuthorizationRefresh.package_dependency_change_performed -ne $false -or $exactNewTrialAuthorizationRefresh.commit_performed -ne $false -or $exactNewTrialAuthorizationRefresh.push_performed -ne $false) {
+      Add-Failure "Exact New-Trial Authorization Refresh must not perform Push_L2, executor, provider, image, memory, DailyNote, runtime, secret, production, accepted-sample, memory-seed, dependency, commit, or push actions"
+    }
+  }
+
+  $readyForExactNewTrialAuthorizationCheckpointOutput = & node (Join-Path $Root 'scripts/validate_ready_for_exact_new_trial_authorization_checkpoint.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Ready For Exact New-Trial Authorization Checkpoint validation exited with failure"
+  } else {
+    $readyForExactNewTrialAuthorizationCheckpoint = ($readyForExactNewTrialAuthorizationCheckpointOutput -join "`n") | ConvertFrom-Json
+    if ($readyForExactNewTrialAuthorizationCheckpoint.passed -ne $true -or $readyForExactNewTrialAuthorizationCheckpoint.phase -ne 'v0_6_5_ready_for_exact_new_trial_authorization_checkpoint') {
+      Add-Failure "Ready For Exact New-Trial Authorization Checkpoint validation must pass"
+    }
+    if ($readyForExactNewTrialAuthorizationCheckpoint.checkpoint_doc_present -ne $true -or $readyForExactNewTrialAuthorizationCheckpoint.checkpoint_schema_present -ne $true -or $readyForExactNewTrialAuthorizationCheckpoint.checkpoint_report_present -ne $true -or $readyForExactNewTrialAuthorizationCheckpoint.checkpoint_fixture_present -ne $true -or $readyForExactNewTrialAuthorizationCheckpoint.checkpoint_fail_fixture_present -ne $true) {
+      Add-Failure "Ready For Exact New-Trial Authorization Checkpoint must define doc, schema, report, pass fixture, and fail fixture"
+    }
+    if ($readyForExactNewTrialAuthorizationCheckpoint.failed_provider_attempt_inspection_exists -ne $true -or $readyForExactNewTrialAuthorizationCheckpoint.exact_new_trial_authorization_refresh_exists -ne $true -or $readyForExactNewTrialAuthorizationCheckpoint.ready_for_exact_new_trial_authorization -ne $true -or $readyForExactNewTrialAuthorizationCheckpoint.future_exact_approval_phrase_required -ne $true -or $readyForExactNewTrialAuthorizationCheckpoint.can_execute_now -ne $false) {
+      Add-Failure "Ready For Exact New-Trial Authorization Checkpoint must prove readiness while keeping execution blocked"
+    }
+    if ($readyForExactNewTrialAuthorizationCheckpoint.first_attempt_failed_no_image -ne $true -or $readyForExactNewTrialAuthorizationCheckpoint.retry_001_failed_no_image -ne $true -or $readyForExactNewTrialAuthorizationCheckpoint.smoke_001_succeeded_image_generated -ne $true -or $readyForExactNewTrialAuthorizationCheckpoint.safe_portrait_001_succeeded_image_generated -ne $true) {
+      Add-Failure "Ready For Exact New-Trial Authorization Checkpoint must carry forward the route diagnostics"
+    }
+    if ($readyForExactNewTrialAuthorizationCheckpoint.reuse_original_prompt_by_default -ne $false -or $readyForExactNewTrialAuthorizationCheckpoint.reuse_retry_001_prompt_by_default -ne $false -or $readyForExactNewTrialAuthorizationCheckpoint.explicit_new_prompt_package_or_override_required -ne $true -or $readyForExactNewTrialAuthorizationCheckpoint.new_output_directory_required -ne $true -or $readyForExactNewTrialAuthorizationCheckpoint.new_receipt_path_required -ne $true -or $readyForExactNewTrialAuthorizationCheckpoint.new_registry_path_required -ne $true -or $readyForExactNewTrialAuthorizationCheckpoint.new_review_console_bridge_ref_required -ne $true -or $readyForExactNewTrialAuthorizationCheckpoint.retry_limit_still_0 -ne $true -or $readyForExactNewTrialAuthorizationCheckpoint.no_memory_write_default_still_true -ne $true) {
+      Add-Failure "Ready For Exact New-Trial Authorization Checkpoint must preserve every fail-closed next-trial field"
+    }
+    if ($readyForExactNewTrialAuthorizationCheckpoint.negative_case_count -lt 18 -or $readyForExactNewTrialAuthorizationCheckpoint.caught_negative_case_count -ne $readyForExactNewTrialAuthorizationCheckpoint.negative_case_count -or $readyForExactNewTrialAuthorizationCheckpoint.all_negative_cases_caught -ne $true) {
+      Add-Failure "Ready For Exact New-Trial Authorization Checkpoint must catch every required negative case"
+    }
+    if ($readyForExactNewTrialAuthorizationCheckpoint.metadata_only -ne $true -or $readyForExactNewTrialAuthorizationCheckpoint.checkpoint_only -ne $true -or $readyForExactNewTrialAuthorizationCheckpoint.authorization_ready_only -ne $true) {
+      Add-Failure "Ready For Exact New-Trial Authorization Checkpoint must remain metadata-only, checkpoint-only, and authorization-ready-only"
+    }
+    if ($readyForExactNewTrialAuthorizationCheckpoint.Push_L2_exercised -ne $false -or $readyForExactNewTrialAuthorizationCheckpoint.real_executor_implemented_now -ne $false -or $readyForExactNewTrialAuthorizationCheckpoint.provider_call_performed -ne $false -or $readyForExactNewTrialAuthorizationCheckpoint.image_generation_performed -ne $false -or $readyForExactNewTrialAuthorizationCheckpoint.VCP_memory_write_performed -ne $false -or $readyForExactNewTrialAuthorizationCheckpoint.DailyNote_write_performed -ne $false -or $readyForExactNewTrialAuthorizationCheckpoint.runtime_call_performed -ne $false -or $readyForExactNewTrialAuthorizationCheckpoint.secret_value_read_performed -ne $false -or $readyForExactNewTrialAuthorizationCheckpoint.production_candidate_created -ne $false -or $readyForExactNewTrialAuthorizationCheckpoint.accepted_sample_auto_promotion -ne $false -or $readyForExactNewTrialAuthorizationCheckpoint.memory_seed_promoted -ne $false -or $readyForExactNewTrialAuthorizationCheckpoint.package_dependency_change_performed -ne $false -or $readyForExactNewTrialAuthorizationCheckpoint.commit_performed -ne $false -or $readyForExactNewTrialAuthorizationCheckpoint.push_performed -ne $false) {
+      Add-Failure "Ready For Exact New-Trial Authorization Checkpoint must not perform Push_L2, executor, provider, image, memory, DailyNote, runtime, secret, production, accepted-sample, memory-seed, dependency, commit, or push actions"
+    }
+  }
+
+  $exactNewTrialA5RequestDraftOutput = & node (Join-Path $Root 'scripts/validate_exact_new_trial_a5_request_draft.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Exact New-Trial A5 Request Draft validation exited with failure"
+  } else {
+    $exactNewTrialA5RequestDraft = ($exactNewTrialA5RequestDraftOutput -join "`n") | ConvertFrom-Json
+    if ($exactNewTrialA5RequestDraft.passed -ne $true -or $exactNewTrialA5RequestDraft.phase -ne 'v0_6_6_exact_new_trial_a5_request_draft') {
+      Add-Failure "Exact New-Trial A5 Request Draft validation must pass"
+    }
+    if ($exactNewTrialA5RequestDraft.request_doc_present -ne $true -or $exactNewTrialA5RequestDraft.request_schema_present -ne $true -or $exactNewTrialA5RequestDraft.request_report_present -ne $true -or $exactNewTrialA5RequestDraft.request_fixture_present -ne $true -or $exactNewTrialA5RequestDraft.request_fail_fixture_present -ne $true) {
+      Add-Failure "Exact New-Trial A5 Request Draft must define doc, schema, report, pass fixture, and fail fixture"
+    }
+    if ($exactNewTrialA5RequestDraft.authorization_package_id -ne 'AUTH-PENDING-V0-3-3-EXACT-NEW-TRIAL-20260523-001' -or $exactNewTrialA5RequestDraft.authorization_status -ne 'draft_not_submitted' -or $exactNewTrialA5RequestDraft.approval_status -ne 'not_requested' -or $exactNewTrialA5RequestDraft.active -ne $false -or $exactNewTrialA5RequestDraft.execute_now -ne $false -or $exactNewTrialA5RequestDraft.exact_approval_phrase_received -ne $false) {
+      Add-Failure "Exact New-Trial A5 Request Draft must remain a non-submitted inactive draft"
+    }
+    if ($exactNewTrialA5RequestDraft.ready_for_exact_new_trial_authorization -ne $true -or $exactNewTrialA5RequestDraft.recommended_exact_approval_phrase_present -ne $true -or $exactNewTrialA5RequestDraft.draft_uses_placeholders_only -ne $true -or $exactNewTrialA5RequestDraft.draft_not_executable_until_placeholders_replaced -ne $true) {
+      Add-Failure "Exact New-Trial A5 Request Draft must keep the route authorization-ready while leaving placeholders unresolved"
+    }
+    if ($exactNewTrialA5RequestDraft.max_provider_calls -ne 1 -or $exactNewTrialA5RequestDraft.max_image_candidates -ne 1 -or $exactNewTrialA5RequestDraft.retry_limit -ne 0 -or $exactNewTrialA5RequestDraft.no_memory_write_default -ne $true -or $exactNewTrialA5RequestDraft.overwrite_existing_files_allowed -ne $false) {
+      Add-Failure "Exact New-Trial A5 Request Draft must preserve one-shot limits, zero retry, no-memory default, and no-overwrite policy"
+    }
+    if ($exactNewTrialA5RequestDraft.negative_case_count -lt 18 -or $exactNewTrialA5RequestDraft.caught_negative_case_count -ne $exactNewTrialA5RequestDraft.negative_case_count -or $exactNewTrialA5RequestDraft.all_negative_cases_caught -ne $true) {
+      Add-Failure "Exact New-Trial A5 Request Draft must catch every required negative case"
+    }
+    if ($exactNewTrialA5RequestDraft.metadata_only -ne $true -or $exactNewTrialA5RequestDraft.draft_only -ne $true -or $exactNewTrialA5RequestDraft.request_not_submitted -ne $true -or $exactNewTrialA5RequestDraft.can_execute_now -ne $false) {
+      Add-Failure "Exact New-Trial A5 Request Draft must remain metadata-only, draft-only, request-not-submitted, and non-executable"
+    }
+    if ($exactNewTrialA5RequestDraft.Push_L2_exercised -ne $false -or $exactNewTrialA5RequestDraft.real_executor_implemented_now -ne $false -or $exactNewTrialA5RequestDraft.provider_call_performed -ne $false -or $exactNewTrialA5RequestDraft.image_generation_performed -ne $false -or $exactNewTrialA5RequestDraft.VCP_memory_write_performed -ne $false -or $exactNewTrialA5RequestDraft.DailyNote_write_performed -ne $false -or $exactNewTrialA5RequestDraft.runtime_call_performed -ne $false -or $exactNewTrialA5RequestDraft.secret_value_read_performed -ne $false -or $exactNewTrialA5RequestDraft.production_candidate_created -ne $false -or $exactNewTrialA5RequestDraft.accepted_sample_auto_promotion -ne $false -or $exactNewTrialA5RequestDraft.memory_seed_promoted -ne $false -or $exactNewTrialA5RequestDraft.package_dependency_change_performed -ne $false -or $exactNewTrialA5RequestDraft.commit_performed -ne $false -or $exactNewTrialA5RequestDraft.push_performed -ne $false) {
+      Add-Failure "Exact New-Trial A5 Request Draft must not perform Push_L2, executor, provider, image, memory, DailyNote, runtime, secret, production, accepted-sample, memory-seed, dependency, commit, or push actions"
     }
   }
 

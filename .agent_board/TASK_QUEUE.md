@@ -1,5 +1,253 @@
 ---
 
+- [x] ID: v0_6_6_exact_new_trial_a5_request_draft
+      Title: Draft Exact New-Trial A5 Request Text
+      Reason: Batch B no-new-A5 branch still needs one concrete future exact approval phrase, but it must remain placeholder-based and non-executable until a human separately grants A5.
+      Lane: Green.
+      Status: completed_validated_local_slice.
+      Source local commit: 1f02ff0750f9a3e22876130875437b86a899b524.
+      Source remote commit: 1f02ff0750f9a3e22876130875437b86a899b524.
+      Source phase: v0_6_5_ready_for_exact_new_trial_authorization_checkpoint.
+      Previous phase commit: 1f02ff0750f9a3e22876130875437b86a899b524.
+      Previous phase push performed: false.
+      Current gate phase: v0_6_6_exact_new_trial_a5_request_draft.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Scope: doc/schema/report/fixture/validator/status compact batch only.
+      Changed: docs/V0_6_2_FIRST_MONTH_LIVE_PILOT_RECOVERY_PLAN.md; docs/V0_6_3_FAILED_PROVIDER_ATTEMPT_INSPECTION.md; docs/V0_6_4_EXACT_NEW_TRIAL_AUTHORIZATION_REFRESH.md; docs/V0_6_5_READY_FOR_EXACT_NEW_TRIAL_AUTHORIZATION_CHECKPOINT.md; docs/V0_6_6_EXACT_NEW_TRIAL_A5_REQUEST_DRAFT.md; schemas/failed_provider_attempt_inspection.schema.yaml; schemas/exact_new_trial_authorization_refresh.schema.yaml; schemas/ready_for_exact_new_trial_authorization_checkpoint.schema.yaml; schemas/exact_new_trial_a5_request_draft.schema.yaml; reports/visual_asset_eval_dry_run/v0_6_3_failed_provider_attempt_inspection.json; reports/visual_asset_eval_dry_run/v0_6_4_exact_new_trial_authorization_refresh.json; reports/visual_asset_eval_dry_run/v0_6_5_ready_for_exact_new_trial_authorization_checkpoint.json; reports/visual_asset_eval_dry_run/v0_6_6_exact_new_trial_a5_request_draft.json; tests/schema_examples/failed_provider_attempt_inspection.example.json; tests/schema_examples/failed_provider_attempt_inspection_fail.example.json; tests/schema_examples/exact_new_trial_authorization_refresh.example.json; tests/schema_examples/exact_new_trial_authorization_refresh_fail.example.json; tests/schema_examples/ready_for_exact_new_trial_authorization_checkpoint.example.json; tests/schema_examples/ready_for_exact_new_trial_authorization_checkpoint_fail.example.json; tests/schema_examples/exact_new_trial_a5_request_draft.example.json; tests/schema_examples/exact_new_trial_a5_request_draft_fail.example.json; scripts/validate_failed_provider_attempt_inspection.js; scripts/validate_exact_new_trial_authorization_refresh.js; scripts/validate_ready_for_exact_new_trial_authorization_checkpoint.js; scripts/validate_exact_new_trial_a5_request_draft.js; scripts/validate_mvp.ps1; scripts/lib/governance_tooling_maintenance_slice.js; docs/00_project_roadmap.md; .agent_board resume surfaces.
+      authorization_package_id: AUTH-PENDING-V0-3-3-EXACT-NEW-TRIAL-20260523-001.
+      authorization_status: draft_not_submitted.
+      approval_status: not_requested.
+      exact_approval_phrase_received: false.
+      recommended_exact_approval_phrase_present: true.
+      draft_uses_placeholders_only: true.
+      draft_not_executable_until_placeholders_replaced: true.
+      ready_for_exact_new_trial_authorization: true.
+      can_execute_now: false.
+      no_memory_write_default: true.
+      provider_call_performed: false.
+      image_generation_performed: false.
+      VCP_memory_write_performed: false.
+      DailyNote_write_performed: false.
+      runtime_call_performed: false.
+      secret_value_read_performed: false.
+      push_allowed: false.
+      Stop condition: provider call, image generation, output write, memory write, DailyNote write, runtime/VCPToolBox/VCPChat/MCP action, commit, push, tag, release, deploy, or validation failure requiring judgment.
+      Recommended next: wait_for_explicit_new_A5_or_stop_at_ready_state.
+
+---
+
+- [x] ID: v0_6_5_ready_for_exact_new_trial_authorization_checkpoint
+      Title: Close Ready-For-Exact-New-Trial Authorization Checkpoint
+      Reason: Batch A needs a single validator-backed checkpoint that says the route is reviewable and authorization-ready, but still not executable.
+      Lane: Green.
+      Status: completed_validated_local_slice.
+      Source local commit: 1f02ff0750f9a3e22876130875437b86a899b524.
+      Source remote commit: 1f02ff0750f9a3e22876130875437b86a899b524.
+      Source phase: v0_6_4_exact_new_trial_authorization_refresh.
+      Previous phase commit: 1f02ff0750f9a3e22876130875437b86a899b524.
+      Previous phase push performed: false.
+      Current gate phase: v0_6_5_ready_for_exact_new_trial_authorization_checkpoint.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Scope: doc/schema/report/fixture/validator/status compact batch only.
+      Changed: docs/V0_6_2_FIRST_MONTH_LIVE_PILOT_RECOVERY_PLAN.md; docs/V0_6_3_FAILED_PROVIDER_ATTEMPT_INSPECTION.md; docs/V0_6_4_EXACT_NEW_TRIAL_AUTHORIZATION_REFRESH.md; docs/V0_6_5_READY_FOR_EXACT_NEW_TRIAL_AUTHORIZATION_CHECKPOINT.md; schemas/failed_provider_attempt_inspection.schema.yaml; schemas/exact_new_trial_authorization_refresh.schema.yaml; schemas/ready_for_exact_new_trial_authorization_checkpoint.schema.yaml; reports/visual_asset_eval_dry_run/v0_6_3_failed_provider_attempt_inspection.json; reports/visual_asset_eval_dry_run/v0_6_4_exact_new_trial_authorization_refresh.json; reports/visual_asset_eval_dry_run/v0_6_5_ready_for_exact_new_trial_authorization_checkpoint.json; tests/schema_examples/failed_provider_attempt_inspection.example.json; tests/schema_examples/failed_provider_attempt_inspection_fail.example.json; tests/schema_examples/exact_new_trial_authorization_refresh.example.json; tests/schema_examples/exact_new_trial_authorization_refresh_fail.example.json; tests/schema_examples/ready_for_exact_new_trial_authorization_checkpoint.example.json; tests/schema_examples/ready_for_exact_new_trial_authorization_checkpoint_fail.example.json; scripts/validate_failed_provider_attempt_inspection.js; scripts/validate_exact_new_trial_authorization_refresh.js; scripts/validate_ready_for_exact_new_trial_authorization_checkpoint.js; scripts/validate_mvp.ps1; scripts/lib/governance_tooling_maintenance_slice.js; docs/00_project_roadmap.md; .agent_board resume surfaces.
+      ready_for_exact_new_trial_authorization: true.
+      future_exact_approval_phrase_required: true.
+      can_execute_now: false.
+      reuse_original_prompt_by_default: false.
+      reuse_retry_001_prompt_by_default: false.
+      explicit_new_prompt_package_or_override_required: true.
+      new_output_directory_required: true.
+      new_receipt_path_required: true.
+      new_registry_path_required: true.
+      new_review_console_bridge_ref_required: true.
+      authorization_ready_only: true.
+      provider_call_performed: false.
+      image_generation_performed: false.
+      VCP_memory_write_performed: false.
+      DailyNote_write_performed: false.
+      runtime_call_performed: false.
+      secret_value_read_performed: false.
+      push_allowed: false.
+      Stop condition: provider call, image generation, output write, memory write, DailyNote write, runtime/VCPToolBox/VCPChat/MCP action, commit, push, tag, release, deploy, or validation failure requiring judgment.
+      Recommended next: batch_b_authorization_branch_or_ready_checkpoint.
+
+---
+
+- [x] ID: v0_6_4_exact_new_trial_authorization_refresh
+      Title: Refresh Exact New-Trial Authorization Surface
+      Reason: Batch A next needs an explicit refresh packet that turns the failed first attempt, failed retry 001, and successful route diagnostics into exact non-executing next-trial requirements.
+      Lane: Green.
+      Status: completed_validated_local_slice.
+      Source local commit: 1f02ff0750f9a3e22876130875437b86a899b524.
+      Source remote commit: 1f02ff0750f9a3e22876130875437b86a899b524.
+      Source phase: v0_6_3_failed_provider_attempt_inspection.
+      Previous phase commit: 1f02ff0750f9a3e22876130875437b86a899b524.
+      Previous phase push performed: false.
+      Current gate phase: v0_6_4_exact_new_trial_authorization_refresh.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Scope: doc/schema/report/fixture/validator/status compact batch only.
+      Changed: docs/V0_6_2_FIRST_MONTH_LIVE_PILOT_RECOVERY_PLAN.md; docs/V0_6_3_FAILED_PROVIDER_ATTEMPT_INSPECTION.md; docs/V0_6_4_EXACT_NEW_TRIAL_AUTHORIZATION_REFRESH.md; schemas/failed_provider_attempt_inspection.schema.yaml; schemas/exact_new_trial_authorization_refresh.schema.yaml; reports/visual_asset_eval_dry_run/v0_6_3_failed_provider_attempt_inspection.json; reports/visual_asset_eval_dry_run/v0_6_4_exact_new_trial_authorization_refresh.json; tests/schema_examples/failed_provider_attempt_inspection.example.json; tests/schema_examples/failed_provider_attempt_inspection_fail.example.json; tests/schema_examples/exact_new_trial_authorization_refresh.example.json; tests/schema_examples/exact_new_trial_authorization_refresh_fail.example.json; scripts/validate_failed_provider_attempt_inspection.js; scripts/validate_exact_new_trial_authorization_refresh.js; scripts/validate_mvp.ps1; scripts/lib/governance_tooling_maintenance_slice.js; docs/00_project_roadmap.md; .agent_board resume surfaces.
+      first_attempt_failed_no_image: true.
+      retry_001_failed_no_image: true.
+      smoke_001_succeeded_image_generated: true.
+      safe_portrait_001_succeeded_image_generated: true.
+      reuse_original_prompt_by_default: false.
+      reuse_retry_001_prompt_by_default: false.
+      explicit_new_prompt_package_or_override_required: true.
+      new_output_directory_required: true.
+      new_receipt_path_required: true.
+      new_registry_path_required: true.
+      new_review_console_bridge_ref_required: true.
+      refresh_packet_only: true.
+      provider_call_performed: false.
+      image_generation_performed: false.
+      VCP_memory_write_performed: false.
+      DailyNote_write_performed: false.
+      runtime_call_performed: false.
+      secret_value_read_performed: false.
+      push_allowed: false.
+      Stop condition: provider call, image generation, output write, memory write, DailyNote write, runtime/VCPToolBox/VCPChat/MCP action, commit, push, tag, release, deploy, or validation failure requiring judgment.
+      Recommended next: prepare_ready_for_exact_new_trial_authorization_checkpoint.
+
+---
+
+- [x] ID: prepare_ready_for_exact_new_trial_authorization_checkpoint
+      Title: Prepare Ready-For-Exact-New-Trial Authorization Checkpoint
+      Reason: After the refresh packet is locked, Batch A should collapse the refreshed candidate fields and refreshed gate preflight into a single ready-for-authorization checkpoint without executing a new trial.
+      Lane: Green.
+      Status: completed_validated_local_slice.
+      Source phase: v0_6_4_exact_new_trial_authorization_refresh.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Scope: authorization readiness checkpoint that names the future exact prompt decision, unique output/receipt/registry/bridge refs, one-shot budget, zero retry, and no-memory default.
+      Exit criteria: ready_for_exact_new_trial_authorization=true; can_execute_now=false; future exact approval phrase still required; provider/image/memory/runtime/push remain false.
+      Stop condition: provider call, image generation, memory write, runtime action, secret read, dependency change, commit, push, tag, release, deploy, or validation failure requiring judgment.
+      Recommended next: batch_b_authorization_branch_or_ready_checkpoint.
+
+---
+
+- [x] ID: v0_6_3_failed_provider_attempt_inspection
+      Title: Consolidate Failed Provider Attempt Inspection
+      Reason: Batch A first needs a fail-closed inspection record that proves the first live attempt produced no image artifact, exhausted its one call, and cannot auto-retry.
+      Lane: Green.
+      Status: completed_validated_local_slice.
+      Source local commit: 1f02ff0750f9a3e22876130875437b86a899b524.
+      Source remote commit: 1f02ff0750f9a3e22876130875437b86a899b524.
+      Source phase: v0_6_2_first_month_live_pilot_recovery_plan.
+      Previous phase commit: 1f02ff0750f9a3e22876130875437b86a899b524.
+      Previous phase push performed: false.
+      Current gate phase: v0_6_3_failed_provider_attempt_inspection.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Scope: doc/schema/report/fixture/validator/status compact batch only.
+      Changed: docs/V0_6_2_FIRST_MONTH_LIVE_PILOT_RECOVERY_PLAN.md; docs/V0_6_3_FAILED_PROVIDER_ATTEMPT_INSPECTION.md; schemas/failed_provider_attempt_inspection.schema.yaml; reports/visual_asset_eval_dry_run/v0_6_3_failed_provider_attempt_inspection.json; tests/schema_examples/failed_provider_attempt_inspection.example.json; tests/schema_examples/failed_provider_attempt_inspection_fail.example.json; scripts/validate_failed_provider_attempt_inspection.js; scripts/validate_mvp.ps1; scripts/lib/governance_tooling_maintenance_slice.js; docs/00_project_roadmap.md; .agent_board resume surfaces.
+      source_attempt_status: failed_no_image_generated.
+      failure_class: provider_tool_user_error.
+      image_artifact_produced: false.
+      retry_blocked_by_zero_retry_limit: true.
+      review_bridge_ref_recorded: true.
+      review_bridge_materialized_now: false.
+      inspection_only: true.
+      provider_call_performed: false.
+      image_generation_performed: false.
+      VCP_memory_write_performed: false.
+      DailyNote_write_performed: false.
+      runtime_call_performed: false.
+      secret_value_read_performed: false.
+      push_allowed: false.
+      Stop condition: provider call, image generation, output write, memory write, DailyNote write, runtime/VCPToolBox/VCPChat/MCP action, commit, push, tag, release, deploy, or validation failure requiring judgment.
+      Recommended next: refresh_v0_3_2_and_v0_3_3_for_exact_new_trial_authorization.
+
+---
+
+- [x] ID: refresh_v0_3_2_and_v0_3_3_for_exact_new_trial_authorization
+      Title: Refresh v0.3.2 And v0.3.3 For Exact New-Trial Authorization
+      Reason: After the failed-attempt inspection is locked, Batch A should refresh the candidate packet and pilot preflight so a future second request is exact, non-ambiguous, and still one-shot.
+      Lane: Green.
+      Status: completed_validated_local_slice.
+      Source phase: v0_6_3_failed_provider_attempt_inspection.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Scope: refreshed v0_3_2 candidate fields, refreshed v0_3_3 preflight checks, and synced roadmap/.agent_board status surfaces.
+      Exit criteria: exact new-trial fields explicit; output/receipt path collision policy explicit; retry_limit still zero unless separately changed; no_memory_write default still preserved.
+      Stop condition: provider call, image generation, memory write, runtime action, secret read, dependency change, commit, push, tag, release, deploy, or validation failure requiring judgment.
+      Recommended next: batch_b_authorization_branch_or_ready_checkpoint.
+
+---
+
+- [x] ID: v0_6_2_first_month_live_pilot_recovery_plan
+      Title: Define First-Month Live Pilot Recovery Plan
+      Reason: The next month should not continue abstract readiness work; it needs an exact route that handles the existing failed first live trial and returns the system to a re-authorizable state.
+      Lane: Green.
+      Status: planned_local_not_started.
+      Source local commit: 1f02ff0750f9a3e22876130875437b86a899b524.
+      Source remote commit: 1f02ff0750f9a3e22876130875437b86a899b524.
+      Source phase: v0_6_1_fifteen_day_controlled_generation_readiness_checkpoint.
+      Previous phase commit: 1f02ff0750f9a3e22876130875437b86a899b524.
+      Previous phase push performed: true.
+      Current gate phase: v0_6_2_first_month_live_pilot_recovery_plan.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Scope: planning doc, roadmap sync, and .agent_board status sync only.
+      Changed: docs/V0_6_2_FIRST_MONTH_LIVE_PILOT_RECOVERY_PLAN.md; docs/00_project_roadmap.md; .agent_board resume surfaces.
+      first_attempt_status: attempted_failed_no_retry.
+      first_attempt_failure_class: provider_tool_user_error.
+      batch_a_defined: true.
+      batch_b_defined: true.
+      execution_authorized_by_this_plan: false.
+      provider_call_performed_by_this_plan: false.
+      image_generation_performed: false.
+      image_generation_performed_by_this_plan: false.
+      VCP_memory_write_performed_by_this_plan: false.
+      DailyNote_write_performed_by_this_plan: false.
+      runtime_call_performed_by_this_plan: false.
+      secret_value_read_performed: false.
+      secret_value_read_performed_by_this_plan: false.
+      push_allowed: false.
+      Stop condition: provider call, image generation, output write, memory write, DailyNote write, runtime/VCPToolBox/VCPChat/MCP action, commit, push, tag, release, deploy, or validation failure requiring judgment.
+      Recommended next: batch_a_failed_attempt_inspection_and_reauthorization_refresh.
+
+---
+
+- [x] ID: batch_a_failed_attempt_inspection_and_reauthorization_refresh
+      Title: Inspect Failed Attempt And Refresh Reauthorization Requirements
+      Reason: The first half of the month must classify the failed trial, lock the no-artifact and no-auto-retry facts, and refresh the exact fields needed for a future new trial request.
+      Lane: Green.
+      Status: completed_validated_local_slice.
+      Source phase: v0_6_2_first_month_live_pilot_recovery_plan.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Scope: failed-attempt inspection surfaces, refreshed v0_3_2 requirements, refreshed v0_3_3 preflight, roadmap and .agent_board sync.
+      Exit criteria: failed_attempt_cause_classified=true; no_artifact_fact_locked=true; no_auto_retry_fact_locked=true; next_trial_refresh_fields_explicit=true; new_trial_still_not_executed=true.
+      Stop condition: provider call, image generation, memory write, runtime action, secret read, dependency change, commit, push, tag, release, deploy, or validation failure requiring judgment.
+      Recommended next: batch_b_authorization_branch_or_ready_checkpoint.
+
+---
+
+- [x] ID: batch_b_authorization_branch_or_ready_checkpoint
+      Title: Close Month Through Authorization Branch Or Ready Checkpoint
+      Reason: The second half of the month should either stop at ready_for_exact_new_trial_authorization or, only after explicit new A5 authorization, perform one new minimal trial and close a post-trial checkpoint.
+      Lane: Green_then_Amber_if_exact_new_A5_is_present.
+      Status: completed_validated_local_no_A5_branch.
+      Source phase: v0_6_2_first_month_live_pilot_recovery_plan.
+      Dependency: batch_a_failed_attempt_inspection_and_reauthorization_refresh.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Scope: authorization readiness checkpoint or one exact new minimal trial plus post-trial checkpoint.
+      Exit criteria: ready_for_exact_new_trial_authorization OR one_new_trial_executed_and_reviewed; memory_write_still_blocked_by_default=true; accepted_sample_auto_promotion_still_false=true.
+      Stop condition: any new live action without exact new A5 authorization, memory write default flip, broad provider usage, secret read, push, tag, release, deploy, or validation failure requiring judgment.
+      No-new-A5 branch result: ready_for_exact_new_trial_authorization=true; recommended_exact_approval_phrase_present=true; no_memory_write_default=true; can_execute_now=false.
+      Recommended next: wait_for_explicit_new_A5_or_stop_at_ready_state.
+
+---
+
 - [x] ID: v0_6_1_fifteen_day_controlled_generation_readiness_checkpoint
       Title: Close Fifteen-Day Controlled Generation Readiness Checkpoint
       Reason: The route needs a single validator-backed checkpoint that proves the six pre-generation protocol artifacts exist while generation, memory write, and real executor remain blocked.

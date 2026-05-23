@@ -682,6 +682,120 @@ const EXPECTED_V0_6_1_FIFTEEN_DAY_CONTROLLED_GENERATION_READINESS_CHECKPOINT_SLI
   "tests/schema_examples/fifteen_day_controlled_generation_readiness_checkpoint_fail.example.json"
 ].sort();
 
+const EXPECTED_V0_6_2_FIRST_MONTH_LIVE_PILOT_RECOVERY_PLAN_SLICE = [
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  "docs/00_project_roadmap.md",
+  "docs/V0_6_2_FIRST_MONTH_LIVE_PILOT_RECOVERY_PLAN.md",
+  "scripts/lib/governance_tooling_maintenance_slice.js"
+].sort();
+
+const EXPECTED_V0_6_3_FAILED_PROVIDER_ATTEMPT_INSPECTION_SLICE = [
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  "docs/00_project_roadmap.md",
+  "docs/V0_6_2_FIRST_MONTH_LIVE_PILOT_RECOVERY_PLAN.md",
+  "docs/V0_6_3_FAILED_PROVIDER_ATTEMPT_INSPECTION.md",
+  "reports/visual_asset_eval_dry_run/v0_6_3_failed_provider_attempt_inspection.json",
+  "schemas/failed_provider_attempt_inspection.schema.yaml",
+  "scripts/lib/governance_tooling_maintenance_slice.js",
+  "scripts/validate_failed_provider_attempt_inspection.js",
+  "scripts/validate_mvp.ps1",
+  "tests/schema_examples/failed_provider_attempt_inspection.example.json",
+  "tests/schema_examples/failed_provider_attempt_inspection_fail.example.json"
+].sort();
+
+const EXPECTED_V0_6_4_EXACT_NEW_TRIAL_AUTHORIZATION_REFRESH_SLICE = [
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  "docs/00_project_roadmap.md",
+  "docs/V0_6_2_FIRST_MONTH_LIVE_PILOT_RECOVERY_PLAN.md",
+  "docs/V0_6_3_FAILED_PROVIDER_ATTEMPT_INSPECTION.md",
+  "docs/V0_6_4_EXACT_NEW_TRIAL_AUTHORIZATION_REFRESH.md",
+  "reports/visual_asset_eval_dry_run/v0_6_3_failed_provider_attempt_inspection.json",
+  "reports/visual_asset_eval_dry_run/v0_6_4_exact_new_trial_authorization_refresh.json",
+  "schemas/exact_new_trial_authorization_refresh.schema.yaml",
+  "schemas/failed_provider_attempt_inspection.schema.yaml",
+  "scripts/lib/governance_tooling_maintenance_slice.js",
+  "scripts/validate_exact_new_trial_authorization_refresh.js",
+  "scripts/validate_failed_provider_attempt_inspection.js",
+  "scripts/validate_mvp.ps1",
+  "tests/schema_examples/exact_new_trial_authorization_refresh.example.json",
+  "tests/schema_examples/exact_new_trial_authorization_refresh_fail.example.json",
+  "tests/schema_examples/failed_provider_attempt_inspection.example.json",
+  "tests/schema_examples/failed_provider_attempt_inspection_fail.example.json"
+].sort();
+
+const EXPECTED_V0_6_5_READY_FOR_EXACT_NEW_TRIAL_AUTHORIZATION_CHECKPOINT_SLICE = [
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  "docs/00_project_roadmap.md",
+  "docs/V0_6_2_FIRST_MONTH_LIVE_PILOT_RECOVERY_PLAN.md",
+  "docs/V0_6_3_FAILED_PROVIDER_ATTEMPT_INSPECTION.md",
+  "docs/V0_6_4_EXACT_NEW_TRIAL_AUTHORIZATION_REFRESH.md",
+  "docs/V0_6_5_READY_FOR_EXACT_NEW_TRIAL_AUTHORIZATION_CHECKPOINT.md",
+  "reports/visual_asset_eval_dry_run/v0_6_3_failed_provider_attempt_inspection.json",
+  "reports/visual_asset_eval_dry_run/v0_6_4_exact_new_trial_authorization_refresh.json",
+  "reports/visual_asset_eval_dry_run/v0_6_5_ready_for_exact_new_trial_authorization_checkpoint.json",
+  "schemas/exact_new_trial_authorization_refresh.schema.yaml",
+  "schemas/failed_provider_attempt_inspection.schema.yaml",
+  "schemas/ready_for_exact_new_trial_authorization_checkpoint.schema.yaml",
+  "scripts/lib/governance_tooling_maintenance_slice.js",
+  "scripts/validate_exact_new_trial_authorization_refresh.js",
+  "scripts/validate_failed_provider_attempt_inspection.js",
+  "scripts/validate_mvp.ps1",
+  "scripts/validate_ready_for_exact_new_trial_authorization_checkpoint.js",
+  "tests/schema_examples/exact_new_trial_authorization_refresh.example.json",
+  "tests/schema_examples/exact_new_trial_authorization_refresh_fail.example.json",
+  "tests/schema_examples/failed_provider_attempt_inspection.example.json",
+  "tests/schema_examples/failed_provider_attempt_inspection_fail.example.json",
+  "tests/schema_examples/ready_for_exact_new_trial_authorization_checkpoint.example.json",
+  "tests/schema_examples/ready_for_exact_new_trial_authorization_checkpoint_fail.example.json"
+].sort();
+
+const EXPECTED_V0_6_6_EXACT_NEW_TRIAL_A5_REQUEST_DRAFT_SLICE = [
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  "docs/00_project_roadmap.md",
+  "docs/V0_6_2_FIRST_MONTH_LIVE_PILOT_RECOVERY_PLAN.md",
+  "docs/V0_6_3_FAILED_PROVIDER_ATTEMPT_INSPECTION.md",
+  "docs/V0_6_4_EXACT_NEW_TRIAL_AUTHORIZATION_REFRESH.md",
+  "docs/V0_6_5_READY_FOR_EXACT_NEW_TRIAL_AUTHORIZATION_CHECKPOINT.md",
+  "docs/V0_6_6_EXACT_NEW_TRIAL_A5_REQUEST_DRAFT.md",
+  "reports/visual_asset_eval_dry_run/v0_6_3_failed_provider_attempt_inspection.json",
+  "reports/visual_asset_eval_dry_run/v0_6_4_exact_new_trial_authorization_refresh.json",
+  "reports/visual_asset_eval_dry_run/v0_6_5_ready_for_exact_new_trial_authorization_checkpoint.json",
+  "reports/visual_asset_eval_dry_run/v0_6_6_exact_new_trial_a5_request_draft.json",
+  "schemas/exact_new_trial_a5_request_draft.schema.yaml",
+  "schemas/exact_new_trial_authorization_refresh.schema.yaml",
+  "schemas/failed_provider_attempt_inspection.schema.yaml",
+  "schemas/ready_for_exact_new_trial_authorization_checkpoint.schema.yaml",
+  "scripts/lib/governance_tooling_maintenance_slice.js",
+  "scripts/validate_exact_new_trial_a5_request_draft.js",
+  "scripts/validate_exact_new_trial_authorization_refresh.js",
+  "scripts/validate_failed_provider_attempt_inspection.js",
+  "scripts/validate_mvp.ps1",
+  "scripts/validate_ready_for_exact_new_trial_authorization_checkpoint.js",
+  "tests/schema_examples/exact_new_trial_a5_request_draft.example.json",
+  "tests/schema_examples/exact_new_trial_a5_request_draft_fail.example.json",
+  "tests/schema_examples/exact_new_trial_authorization_refresh.example.json",
+  "tests/schema_examples/exact_new_trial_authorization_refresh_fail.example.json",
+  "tests/schema_examples/failed_provider_attempt_inspection.example.json",
+  "tests/schema_examples/failed_provider_attempt_inspection_fail.example.json",
+  "tests/schema_examples/ready_for_exact_new_trial_authorization_checkpoint.example.json",
+  "tests/schema_examples/ready_for_exact_new_trial_authorization_checkpoint_fail.example.json"
+].sort();
+
 const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "governance_tooling_maintenance_slice_v1",
@@ -838,6 +952,26 @@ const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "v0_6_1_fifteen_day_controlled_generation_readiness_checkpoint_slice",
     files: EXPECTED_V0_6_1_FIFTEEN_DAY_CONTROLLED_GENERATION_READINESS_CHECKPOINT_SLICE
+  },
+  {
+    id: "v0_6_2_first_month_live_pilot_recovery_plan_slice",
+    files: EXPECTED_V0_6_2_FIRST_MONTH_LIVE_PILOT_RECOVERY_PLAN_SLICE
+  },
+  {
+    id: "v0_6_3_failed_provider_attempt_inspection_slice",
+    files: EXPECTED_V0_6_3_FAILED_PROVIDER_ATTEMPT_INSPECTION_SLICE
+  },
+  {
+    id: "v0_6_4_exact_new_trial_authorization_refresh_slice",
+    files: EXPECTED_V0_6_4_EXACT_NEW_TRIAL_AUTHORIZATION_REFRESH_SLICE
+  },
+  {
+    id: "v0_6_5_ready_for_exact_new_trial_authorization_checkpoint_slice",
+    files: EXPECTED_V0_6_5_READY_FOR_EXACT_NEW_TRIAL_AUTHORIZATION_CHECKPOINT_SLICE
+  },
+  {
+    id: "v0_6_6_exact_new_trial_a5_request_draft_slice",
+    files: EXPECTED_V0_6_6_EXACT_NEW_TRIAL_A5_REQUEST_DRAFT_SLICE
   }
 ];
 
@@ -1221,6 +1355,10 @@ module.exports = {
   EXPECTED_V0_5_9_VISUAL_MEMORY_READONLY_QUERY_CONTRACT_SLICE,
   EXPECTED_V0_6_0_FIRST_CONTROLLED_GENERATION_AUTHORIZATION_PACKET_SLICE,
   EXPECTED_V0_6_1_FIFTEEN_DAY_CONTROLLED_GENERATION_READINESS_CHECKPOINT_SLICE,
+  EXPECTED_V0_6_2_FIRST_MONTH_LIVE_PILOT_RECOVERY_PLAN_SLICE,
+  EXPECTED_V0_6_3_FAILED_PROVIDER_ATTEMPT_INSPECTION_SLICE,
+  EXPECTED_V0_6_4_EXACT_NEW_TRIAL_AUTHORIZATION_REFRESH_SLICE,
+  EXPECTED_V0_6_5_READY_FOR_EXACT_NEW_TRIAL_AUTHORIZATION_CHECKPOINT_SLICE,
   GOVERNANCE_TOOLING_ALLOWED_SLICES,
   buildGovernanceToolingMaintenanceSliceReport,
   fileAllowedInGovernanceToolingSlice,
