@@ -1,0 +1,42 @@
+{
+  "phase": "v0_6_23_single_generation_with_payload_capture_and_artifact_trace",
+  "payload_capture_id": "v0_3_3_exact_new_trial_002_request_payload_sanitized",
+  "attempt_id": "v0_3_3_exact_new_trial_002",
+  "created_date": "2026-05-23",
+  "mode": "real_generation_request_payload_capture_before_provider_call",
+  "provider_route": "image_gen.imagegen",
+  "prompt_package_ref": "prompts/image_generation/safe_adult_editorial_portrait_v1.yaml",
+  "prompt_source_field": "prompt",
+  "payload_capture_mode": "pre_provider_call_sanitized_request_payload",
+  "payload": {
+    "prompt": "Realistic vertical 9:16 editorial portrait of one adult woman in her late twenties standing on a modern city terrace at dusk. She wears an elegant red blazer over a simple white top, tailored dark trousers, and minimal jewelry. Calm confident expression, relaxed natural pose, hands visible, respectful fashion magazine styling. Soft city lights blurred in the background, balanced natural skin tones, clean professional lighting, crisp focus, tasteful contemporary portrait photography. No text, no logo, no watermark."
+  },
+  "prompt_text_sha256": "8469661cb4fe64e8280f6a64801e8583b3180f4a405b25cba433f7e3eb6172fd",
+  "prompt_text_length": 519,
+  "prompt_package_sha256": "c089fa6d28a28eaf08487a585af62fa7ab367c5c1a8ca46d0e492088486a4c91",
+  "negative_prompt_text_sha256": "179b4c380b1451d59215ea6cc7293d626936dc42bf6030e7366e654c112a05c2",
+  "final_payload_prompt_equals_prompt_field": true,
+  "negative_prompt_included": false,
+  "yaml_metadata_included": false,
+  "authorization_text_included": false,
+  "path_text_included_in_prompt": false,
+  "diagnostic_axes_before_call": {
+    "prompt_extraction": "passed_positive_prompt_only",
+    "payload_wrapping": "passed_no_yaml_negative_or_authorization_text",
+    "path_authorization": "002_paths_precreated_no_overwrite",
+    "provider_tool_result": "pending_single_call"
+  },
+  "boundary_before_call": {
+    "max_provider_calls": 1,
+    "max_image_candidates": 1,
+    "retry_limit": 0,
+    "overwrite_existing_files_allowed": false,
+    "raw_provider_payload_capture_performed": true,
+    "raw_provider_response_capture_allowed": false,
+    "secret_value_read_allowed": false,
+    "VCP_memory_write_allowed": false,
+    "DailyNote_write_allowed": false,
+    "accepted_sample_auto_promotion_allowed": false,
+    "push_allowed": false
+  }
+}

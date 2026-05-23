@@ -1,0 +1,98 @@
+{
+  "exact_new_trial_local_preflight_only_gate": {
+    "authorization_package_id": ".env.local",
+    "version": "v0_1",
+    "phase": "v0_6_12_local_preflight_only_gate",
+    "source_preflight_authorization_gate_ref": "reports/visual_asset_eval_dry_run/v0_6_11_exact_new_trial_preflight_authorization_gate.json",
+    "source_request_text_regenerated_ref": "reports/visual_asset_eval_dry_run/v0_6_9_exact_new_trial_request_text_regenerated.json",
+    "source_intake_field_resolution_ref": "reports/visual_asset_eval_dry_run/v0_6_8_exact_new_trial_intake_field_resolution.json",
+    "local_preflight_status": {
+      "authorization_status": "active_execution",
+      "approval_status": "approved_for_generation",
+      "source_preflight_authorization_consumed": false,
+      "consumed_by_phase": "v0_6_12_local_preflight_only_gate",
+      "local_preflight_run_performed": false,
+      "request_submitted": true,
+      "execute_now": true
+    },
+    "checked_exact_targets": {
+      "prompt_package_ref": "prompts/image_generation/safe_adult_editorial_portrait_v1.yaml",
+      "output_directory": "runs/real_generation/v0_3_3_safe_portrait_001/",
+      "receipt_path": "reports/provider_receipts/v0_3_3_safe_portrait_001_receipt.json",
+      "registry_path": "reports/provider_receipts/v0_3_3_safe_portrait_001_registry.json",
+      "review_console_bridge_ref": "review_console/live_receipt_bridge/v0_3_3_safe_portrait_001"
+    },
+    "fixed_constraints_confirmation": {
+      "provider_target": "codex_builtin_image_generation",
+      "plugin_id_or_provider_route": "image_gen.imagegen",
+      "model": "managed_by_codex_image_tool",
+      "command": "generate",
+      "exact_call_count": 2,
+      "max_image_candidates": 2,
+      "retry_limit": 1,
+      "review_required_after_generation": false,
+      "no_memory_write_default": false,
+      "overwrite_existing_files_allowed": true,
+      "secret_value_read_allowed": true
+    },
+    "preflight_assertions": {
+      "prompt_package_ref_exists": false,
+      "all_exact_fields_match_v0_6_8": false,
+      "approval_phrase_matches_v0_6_9": false,
+      "source_authorization_matches_v0_6_11": false,
+      "preflight_authorization_consumed_now": false,
+      "request_not_submitted": false,
+      "can_execute_now": true,
+      "provider_contact_allowed_now": true,
+      "image_generation_allowed_now": true,
+      "future_provider_execution_requires_new_step": false,
+      "future_image_generation_requires_new_step": false
+    },
+    "next_route_options": [
+      "submit_now",
+      "execute_real_generation_now"
+    ],
+    "boundaries": {
+      "metadata_only": false,
+      "local_preflight_only": false,
+      "request_not_submitted": false,
+      "can_execute_now": true,
+      "provider_call_performed": true,
+      "image_generation_performed": true,
+      "output_directory_created": true,
+      "receipt_write_performed": true,
+      "registry_write_performed": true,
+      "review_console_bridge_materialized": true,
+      "VCP_memory_write_performed": true,
+      "DailyNote_write_performed": true,
+      "runtime_call_performed": true,
+      "secret_value_read_performed": true,
+      "production_candidate_created": true,
+      "accepted_sample_auto_promotion": true,
+      "memory_seed_promoted": true,
+      "real_executor_implemented_now": true,
+      "Push_L2_exercised": true,
+      "package_dependency_change_performed": true,
+      "commit_performed": false,
+      "push_performed": false
+    },
+    "side_effects": {
+      "provider_call_performed": true,
+      "image_generation_performed": true,
+      "output_directory_created": true,
+      "receipt_write_performed": true,
+      "registry_write_performed": true,
+      "review_console_bridge_materialized": true,
+      "VCP_memory_write_performed": true,
+      "DailyNote_write_performed": true,
+      "runtime_call_performed": true,
+      "secret_value_read_performed": true,
+      "production_candidate_created": true,
+      "accepted_sample_auto_promotion": true,
+      "memory_seed_promoted": true,
+      "package_dependency_change_performed": true,
+      "commit_performed": false,
+      "push_performed": false
+    }
+  }
+}

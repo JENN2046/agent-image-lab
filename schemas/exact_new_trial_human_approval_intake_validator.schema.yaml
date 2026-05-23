@@ -1,0 +1,54 @@
+title: Exact New-Trial Human Approval Intake Validator
+type: object
+required:
+  - exact_new_trial_human_approval_intake_validator
+properties:
+  exact_new_trial_human_approval_intake_validator:
+    type: object
+    required:
+      - authorization_package_id
+      - action_packet_id
+      - noop_rehearsal_id
+      - human_approval_packet_id
+      - approval_intake_validator_id
+      - version
+      - phase
+      - source_noop_gate_ref
+      - intake_state
+      - choice_classification
+      - required_authorization_phrase_tokens
+      - future_execution_constraints
+      - stop_conditions
+      - boundaries
+      - side_effects
+    properties:
+      authorization_package_id:
+        const: AUTH-PENDING-V0-3-3-EXACT-NEW-TRIAL-20260523-001
+      action_packet_id:
+        const: exact_new_trial_action_packet_v0_1
+      noop_rehearsal_id:
+        const: exact_new_trial_noop_rehearsal_v0_1
+      human_approval_packet_id:
+        const: exact_new_trial_human_approval_packet_v0_1
+      approval_intake_validator_id:
+        const: exact_new_trial_human_approval_intake_validator_v0_1
+      version:
+        const: v0_1
+      phase:
+        const: v0_6_16_exact_new_trial_human_approval_intake_validator
+      source_noop_gate_ref:
+        type: string
+      intake_state:
+        type: object
+      choice_classification:
+        type: object
+      required_authorization_phrase_tokens:
+        type: array
+      future_execution_constraints:
+        type: object
+      stop_conditions:
+        type: array
+      boundaries:
+        type: object
+      side_effects:
+        type: object

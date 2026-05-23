@@ -143,7 +143,14 @@ add("no_staged_files_now", stagedFiles.length === 0);
 for (const forbidden of fixture.forbidden_path_families) {
   const packageJsonAllowed = forbidden === "package.json" && isGovernanceToolingMaintenanceSlice;
   const providerReceiptAttemptResultsAllowed = forbidden === "runs/"
-    && governanceToolingMaintenanceSliceReport.matched_slice_id === "provider_receipt_artifact_repair_slice"
+    && (
+      governanceToolingMaintenanceSliceReport.matched_slice_id === "provider_receipt_artifact_repair_slice" ||
+      governanceToolingMaintenanceSliceReport.matched_slice_id === "v0_6_12_to_v0_6_18_exact_new_trial_execution_preflight_slice" ||
+      governanceToolingMaintenanceSliceReport.matched_slice_id === "v0_6_12_to_v0_6_20_failed_no_image_post_run_review_slice" ||
+      governanceToolingMaintenanceSliceReport.matched_slice_id === "v0_6_12_to_v0_6_21_raw_provider_payload_capture_policy_slice" ||
+      governanceToolingMaintenanceSliceReport.matched_slice_id === "v0_6_12_to_v0_6_22_provider_payload_extraction_preflight_slice" ||
+      governanceToolingMaintenanceSliceReport.matched_slice_id === "v0_6_12_to_v0_6_23_single_generation_with_payload_trace_slice"
+    )
     && changedFiles
       .filter((file) => file.startsWith("runs/"))
       .every((file) => file.startsWith("runs/real_generation/") && file.endsWith("/generation_attempt_result.json"));

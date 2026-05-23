@@ -114,6 +114,15 @@ $requiredFiles = @(
   'scripts/validate_exact_new_trial_request_text_regenerated.js',
   'scripts/validate_exact_new_trial_human_decision_preview_gate.js',
   'scripts/validate_exact_new_trial_preflight_authorization_gate.js',
+  'scripts/validate_exact_new_trial_local_preflight_only_gate.js',
+  'scripts/validate_exact_new_trial_failed_provider_attempt_review.js',
+  'scripts/validate_exact_new_trial_action_packet_v0_1.js',
+  'scripts/validate_exact_new_trial_noop_rehearsal_human_approval_gate.js',
+  'scripts/validate_exact_new_trial_human_approval_intake_validator.js',
+  'scripts/validate_exact_new_trial_30_day_checkpoint.js',
+  'scripts/validate_exact_new_trial_single_generation_execution_preflight.js',
+  'scripts/create_provider_payload_capture_preflight.js',
+  'scripts/validate_provider_payload_capture_preflight.js',
   'scripts/validate_visual_sample_memory_policy.js',
   'scripts/validate_15_day_architecture_checkpoint.js',
   'scripts/validate_local_checkpoint_manifest.js',
@@ -7832,6 +7841,7 @@ if (-not $node) {
       'plugins/',
       'prompts/',
       'review_console/embed_contract/',
+      'review_console/live_receipt_bridge/',
       'review_console/runtime_prototype/',
       'review_console/static_prototype/',
       'reports/',
@@ -7846,6 +7856,7 @@ if (-not $node) {
       '.gitignore',
       'AGENTS.md',
       'AGENTS.autopilot-overlay.md',
+      '30_DAY_EXACT_NEW_TRIAL_CHECKPOINT.md',
       'CLAUDE.md',
       'README.md',
       'README_AGENT_IMAGE_LAB_AUTOPILOT.md',
@@ -13321,6 +13332,329 @@ process.exit(child.status || 0);
     }
     if ($exactNewTrialPreflightAuthorizationGate.Push_L2_exercised -ne $false -or $exactNewTrialPreflightAuthorizationGate.real_executor_implemented_now -ne $false -or $exactNewTrialPreflightAuthorizationGate.provider_call_performed -ne $false -or $exactNewTrialPreflightAuthorizationGate.image_generation_performed -ne $false -or $exactNewTrialPreflightAuthorizationGate.VCP_memory_write_performed -ne $false -or $exactNewTrialPreflightAuthorizationGate.DailyNote_write_performed -ne $false -or $exactNewTrialPreflightAuthorizationGate.runtime_call_performed -ne $false -or $exactNewTrialPreflightAuthorizationGate.secret_value_read_performed -ne $false -or $exactNewTrialPreflightAuthorizationGate.production_candidate_created -ne $false -or $exactNewTrialPreflightAuthorizationGate.accepted_sample_auto_promotion -ne $false -or $exactNewTrialPreflightAuthorizationGate.memory_seed_promoted -ne $false -or $exactNewTrialPreflightAuthorizationGate.package_dependency_change_performed -ne $false -or $exactNewTrialPreflightAuthorizationGate.commit_performed -ne $false -or $exactNewTrialPreflightAuthorizationGate.push_performed -ne $false) {
       Add-Failure "Exact New-Trial Preflight Authorization Gate must not perform Push_L2, executor, provider, image, memory, DailyNote, runtime, secret, production, accepted-sample, memory-seed, dependency, commit, or push actions"
+    }
+  }
+
+  $exactNewTrialLocalPreflightOnlyGateOutput = & node (Join-Path $Root 'scripts/validate_exact_new_trial_local_preflight_only_gate.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Exact New-Trial Local Preflight-Only Gate validation exited with failure"
+  } else {
+    $exactNewTrialLocalPreflightOnlyGate = ($exactNewTrialLocalPreflightOnlyGateOutput -join "`n") | ConvertFrom-Json
+    if ($exactNewTrialLocalPreflightOnlyGate.passed -ne $true -or $exactNewTrialLocalPreflightOnlyGate.phase -ne 'v0_6_12_local_preflight_only_gate') {
+      Add-Failure "Exact New-Trial Local Preflight-Only Gate validation must pass"
+    }
+    if ($exactNewTrialLocalPreflightOnlyGate.local_preflight_doc_present -ne $true -or $exactNewTrialLocalPreflightOnlyGate.local_preflight_schema_present -ne $true -or $exactNewTrialLocalPreflightOnlyGate.local_preflight_report_present -ne $true -or $exactNewTrialLocalPreflightOnlyGate.local_preflight_fixture_present -ne $true -or $exactNewTrialLocalPreflightOnlyGate.local_preflight_fail_fixture_present -ne $true) {
+      Add-Failure "Exact New-Trial Local Preflight-Only Gate must define doc, schema, report, pass fixture, and fail fixture"
+    }
+    if ($exactNewTrialLocalPreflightOnlyGate.authorization_package_id -ne 'AUTH-PENDING-V0-3-3-EXACT-NEW-TRIAL-20260523-001' -or $exactNewTrialLocalPreflightOnlyGate.authorization_status -ne 'approved_for_metadata_only_preflight_consumed_by_local_preflight' -or $exactNewTrialLocalPreflightOnlyGate.approval_status -ne 'approved_for_preflight_only') {
+      Add-Failure "Exact New-Trial Local Preflight-Only Gate must consume the exact metadata-only preflight authorization"
+    }
+    if ($exactNewTrialLocalPreflightOnlyGate.source_preflight_authorization_consumed -ne $true -or $exactNewTrialLocalPreflightOnlyGate.consumed_by_phase -ne 'v0_6_12_local_preflight_only_gate' -or $exactNewTrialLocalPreflightOnlyGate.local_preflight_run_performed -ne $true) {
+      Add-Failure "Exact New-Trial Local Preflight-Only Gate must mark the source authorization consumed by this local preflight"
+    }
+    if ($exactNewTrialLocalPreflightOnlyGate.prompt_package_ref_exists -ne $true -or $exactNewTrialLocalPreflightOnlyGate.all_exact_fields_match_v0_6_8 -ne $true -or $exactNewTrialLocalPreflightOnlyGate.approval_phrase_matches_v0_6_9 -ne $true -or $exactNewTrialLocalPreflightOnlyGate.source_authorization_matches_v0_6_11 -ne $true) {
+      Add-Failure "Exact New-Trial Local Preflight-Only Gate must prove prompt/path/request/authorization consistency"
+    }
+    if ($exactNewTrialLocalPreflightOnlyGate.request_not_submitted -ne $true -or $exactNewTrialLocalPreflightOnlyGate.can_execute_now -ne $false -or $exactNewTrialLocalPreflightOnlyGate.provider_contact_allowed_now -ne $false -or $exactNewTrialLocalPreflightOnlyGate.image_generation_allowed_now -ne $false) {
+      Add-Failure "Exact New-Trial Local Preflight-Only Gate must remain unsubmitted, non-executable, and provider/image-blocked"
+    }
+    if ($exactNewTrialLocalPreflightOnlyGate.exact_call_count -ne 1 -or $exactNewTrialLocalPreflightOnlyGate.max_image_candidates -ne 1 -or $exactNewTrialLocalPreflightOnlyGate.retry_limit -ne 0 -or $exactNewTrialLocalPreflightOnlyGate.overwrite_existing_files_allowed -ne $false -or $exactNewTrialLocalPreflightOnlyGate.secret_value_read_allowed -ne $false) {
+      Add-Failure "Exact New-Trial Local Preflight-Only Gate must preserve one call, one candidate, zero retry, no-overwrite, and no-secret-read constraints"
+    }
+    if ($exactNewTrialLocalPreflightOnlyGate.negative_case_count -lt 25 -or $exactNewTrialLocalPreflightOnlyGate.caught_negative_case_count -ne $exactNewTrialLocalPreflightOnlyGate.negative_case_count -or $exactNewTrialLocalPreflightOnlyGate.all_negative_cases_caught -ne $true) {
+      Add-Failure "Exact New-Trial Local Preflight-Only Gate must catch every required negative case"
+    }
+    if ($exactNewTrialLocalPreflightOnlyGate.metadata_only -ne $true -or $exactNewTrialLocalPreflightOnlyGate.local_preflight_only -ne $true) {
+      Add-Failure "Exact New-Trial Local Preflight-Only Gate must remain metadata-only and local-preflight-only"
+    }
+    if ($exactNewTrialLocalPreflightOnlyGate.Push_L2_exercised -ne $false -or $exactNewTrialLocalPreflightOnlyGate.real_executor_implemented_now -ne $false -or $exactNewTrialLocalPreflightOnlyGate.provider_call_performed -ne $false -or $exactNewTrialLocalPreflightOnlyGate.image_generation_performed -ne $false -or $exactNewTrialLocalPreflightOnlyGate.output_directory_created -ne $false -or $exactNewTrialLocalPreflightOnlyGate.receipt_write_performed -ne $false -or $exactNewTrialLocalPreflightOnlyGate.registry_write_performed -ne $false -or $exactNewTrialLocalPreflightOnlyGate.review_console_bridge_materialized -ne $false -or $exactNewTrialLocalPreflightOnlyGate.VCP_memory_write_performed -ne $false -or $exactNewTrialLocalPreflightOnlyGate.DailyNote_write_performed -ne $false -or $exactNewTrialLocalPreflightOnlyGate.runtime_call_performed -ne $false -or $exactNewTrialLocalPreflightOnlyGate.secret_value_read_performed -ne $false -or $exactNewTrialLocalPreflightOnlyGate.production_candidate_created -ne $false -or $exactNewTrialLocalPreflightOnlyGate.accepted_sample_auto_promotion -ne $false -or $exactNewTrialLocalPreflightOnlyGate.memory_seed_promoted -ne $false -or $exactNewTrialLocalPreflightOnlyGate.package_dependency_change_performed -ne $false -or $exactNewTrialLocalPreflightOnlyGate.commit_performed -ne $false -or $exactNewTrialLocalPreflightOnlyGate.push_performed -ne $false) {
+      Add-Failure "Exact New-Trial Local Preflight-Only Gate must not perform Push_L2, executor, provider, image, output, receipt, registry, bridge, memory, DailyNote, runtime, secret, production, accepted-sample, memory-seed, dependency, commit, or push actions"
+    }
+  }
+
+  $exactNewTrialFailedProviderAttemptReviewOutput = & node (Join-Path $Root 'scripts/validate_exact_new_trial_failed_provider_attempt_review.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Exact New-Trial Failed Provider Attempt Review validation exited with failure"
+  } else {
+    $exactNewTrialFailedProviderAttemptReview = ($exactNewTrialFailedProviderAttemptReviewOutput -join "`n") | ConvertFrom-Json
+    if ($exactNewTrialFailedProviderAttemptReview.passed -ne $true -or $exactNewTrialFailedProviderAttemptReview.phase -ne 'v0_6_13_failed_provider_attempt_review') {
+      Add-Failure "Exact New-Trial Failed Provider Attempt Review validation must pass"
+    }
+    if ($exactNewTrialFailedProviderAttemptReview.review_doc_present -ne $true -or $exactNewTrialFailedProviderAttemptReview.review_schema_present -ne $true -or $exactNewTrialFailedProviderAttemptReview.review_report_present -ne $true -or $exactNewTrialFailedProviderAttemptReview.review_fixture_present -ne $true -or $exactNewTrialFailedProviderAttemptReview.review_fail_fixture_present -ne $true) {
+      Add-Failure "Exact New-Trial Failed Provider Attempt Review must define doc, schema, report, pass fixture, and fail fixture"
+    }
+    if ($exactNewTrialFailedProviderAttemptReview.source_local_preflight_verified -ne $true -or $exactNewTrialFailedProviderAttemptReview.source_failed_attempt_inspection_verified -ne $true) {
+      Add-Failure "Exact New-Trial Failed Provider Attempt Review must verify v0.6.12 local preflight and v0.6.3 failed attempt inspection sources"
+    }
+    if ($exactNewTrialFailedProviderAttemptReview.failed_attempt_count -ne 2 -or $exactNewTrialFailedProviderAttemptReview.first_attempt_failed_no_image -ne $true -or $exactNewTrialFailedProviderAttemptReview.retry_001_failed_no_image -ne $true -or $exactNewTrialFailedProviderAttemptReview.failure_type -ne 'provider_tool_user_error_no_image' -or $exactNewTrialFailedProviderAttemptReview.retry_blocked_by_zero_retry_limit -ne $true) {
+      Add-Failure "Exact New-Trial Failed Provider Attempt Review must classify both failed no-image attempts and the zero-retry block"
+    }
+    if ($exactNewTrialFailedProviderAttemptReview.neutral_smoke_test_succeeded -ne $true -or $exactNewTrialFailedProviderAttemptReview.safe_adult_editorial_portrait_succeeded -ne $true -or $exactNewTrialFailedProviderAttemptReview.route_not_globally_unavailable -ne $true) {
+      Add-Failure "Exact New-Trial Failed Provider Attempt Review must preserve the successful diagnostic context and avoid claiming a global route outage"
+    }
+    if ($exactNewTrialFailedProviderAttemptReview.cannot_reuse_failed_prompt_path_by_default -ne $true -or $exactNewTrialFailedProviderAttemptReview.cannot_reuse_failed_output_receipt_registry_bridge_paths -ne $true -or $exactNewTrialFailedProviderAttemptReview.failed_attempts_are_not_review_assets -ne $true -or $exactNewTrialFailedProviderAttemptReview.failed_attempts_are_not_accepted_samples -ne $true -or $exactNewTrialFailedProviderAttemptReview.failed_attempts_must_not_seed_memory -ne $true) {
+      Add-Failure "Exact New-Trial Failed Provider Attempt Review must lock failed paths out of reuse, review assets, accepted samples, and memory seeding"
+    }
+    if ($exactNewTrialFailedProviderAttemptReview.next_prompt_package_ref -ne 'prompts/image_generation/safe_adult_editorial_portrait_v1.yaml' -or $exactNewTrialFailedProviderAttemptReview.next_output_directory -ne 'runs/real_generation/v0_3_3_exact_new_trial_001/' -or $exactNewTrialFailedProviderAttemptReview.next_receipt_path -ne 'reports/provider_receipts/v0_3_3_exact_new_trial_001_receipt.json' -or $exactNewTrialFailedProviderAttemptReview.next_registry_path -ne 'reports/provider_receipts/v0_3_3_exact_new_trial_001_registry.json' -or $exactNewTrialFailedProviderAttemptReview.next_review_console_bridge_ref -ne 'review_console/live_receipt_bridge/v0_3_3_exact_new_trial_001') {
+      Add-Failure "Exact New-Trial Failed Provider Attempt Review must carry forward the v0.6.12 exact next-trial target paths"
+    }
+    if ($exactNewTrialFailedProviderAttemptReview.exact_call_count -ne 1 -or $exactNewTrialFailedProviderAttemptReview.max_image_candidates -ne 1 -or $exactNewTrialFailedProviderAttemptReview.retry_limit -ne 0 -or $exactNewTrialFailedProviderAttemptReview.overwrite_existing_files_allowed -ne $false -or $exactNewTrialFailedProviderAttemptReview.secret_value_read_allowed -ne $false -or $exactNewTrialFailedProviderAttemptReview.future_provider_execution_requires_new_explicit_step -ne $true) {
+      Add-Failure "Exact New-Trial Failed Provider Attempt Review must preserve one-shot, no-overwrite, no-secret, and explicit-future-execution conditions"
+    }
+    if ($exactNewTrialFailedProviderAttemptReview.negative_case_count -lt 25 -or $exactNewTrialFailedProviderAttemptReview.caught_negative_case_count -ne $exactNewTrialFailedProviderAttemptReview.negative_case_count -or $exactNewTrialFailedProviderAttemptReview.all_negative_cases_caught -ne $true) {
+      Add-Failure "Exact New-Trial Failed Provider Attempt Review must catch every required negative case"
+    }
+    if ($exactNewTrialFailedProviderAttemptReview.metadata_only -ne $true -or $exactNewTrialFailedProviderAttemptReview.review_only -ne $true -or $exactNewTrialFailedProviderAttemptReview.no_new_trial_executed -ne $true) {
+      Add-Failure "Exact New-Trial Failed Provider Attempt Review must remain metadata-only, review-only, and non-executing"
+    }
+    if ($exactNewTrialFailedProviderAttemptReview.Push_L2_exercised -ne $false -or $exactNewTrialFailedProviderAttemptReview.real_executor_implemented_now -ne $false -or $exactNewTrialFailedProviderAttemptReview.provider_call_performed -ne $false -or $exactNewTrialFailedProviderAttemptReview.image_generation_performed -ne $false -or $exactNewTrialFailedProviderAttemptReview.output_directory_created -ne $false -or $exactNewTrialFailedProviderAttemptReview.receipt_write_performed -ne $false -or $exactNewTrialFailedProviderAttemptReview.registry_write_performed -ne $false -or $exactNewTrialFailedProviderAttemptReview.review_console_bridge_materialized -ne $false -or $exactNewTrialFailedProviderAttemptReview.VCP_memory_write_performed -ne $false -or $exactNewTrialFailedProviderAttemptReview.DailyNote_write_performed -ne $false -or $exactNewTrialFailedProviderAttemptReview.runtime_call_performed -ne $false -or $exactNewTrialFailedProviderAttemptReview.secret_value_read_performed -ne $false -or $exactNewTrialFailedProviderAttemptReview.production_candidate_created -ne $false -or $exactNewTrialFailedProviderAttemptReview.accepted_sample_auto_promotion -ne $false -or $exactNewTrialFailedProviderAttemptReview.memory_seed_promoted -ne $false -or $exactNewTrialFailedProviderAttemptReview.package_dependency_change_performed -ne $false -or $exactNewTrialFailedProviderAttemptReview.commit_performed -ne $false -or $exactNewTrialFailedProviderAttemptReview.push_performed -ne $false) {
+      Add-Failure "Exact New-Trial Failed Provider Attempt Review must not perform Push_L2, executor, provider, image, output, receipt, registry, bridge, memory, DailyNote, runtime, secret, production, accepted-sample, memory-seed, dependency, commit, or push actions"
+    }
+  }
+
+  $exactNewTrialActionPacketOutput = & node (Join-Path $Root 'scripts/validate_exact_new_trial_action_packet_v0_1.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Exact New-Trial Action Packet v0.1 validation exited with failure"
+  } else {
+    $exactNewTrialActionPacket = ($exactNewTrialActionPacketOutput -join "`n") | ConvertFrom-Json
+    if ($exactNewTrialActionPacket.passed -ne $true -or $exactNewTrialActionPacket.phase -ne 'v0_6_14_exact_new_trial_action_packet_v0_1') {
+      Add-Failure "Exact New-Trial Action Packet v0.1 validation must pass"
+    }
+    if ($exactNewTrialActionPacket.action_packet_doc_present -ne $true -or $exactNewTrialActionPacket.action_packet_schema_present -ne $true -or $exactNewTrialActionPacket.action_packet_report_present -ne $true -or $exactNewTrialActionPacket.action_packet_fixture_present -ne $true -or $exactNewTrialActionPacket.action_packet_fail_fixture_present -ne $true) {
+      Add-Failure "Exact New-Trial Action Packet v0.1 must define doc, schema, report, pass fixture, and fail fixture"
+    }
+    if ($exactNewTrialActionPacket.authorization_package_id -ne 'AUTH-PENDING-V0-3-3-EXACT-NEW-TRIAL-20260523-001' -or $exactNewTrialActionPacket.action_packet_id -ne 'exact_new_trial_action_packet_v0_1' -or $exactNewTrialActionPacket.packet_status -ne 'frozen_not_executable') {
+      Add-Failure "Exact New-Trial Action Packet v0.1 must freeze the exact packet id in non-executable state"
+    }
+    if ($exactNewTrialActionPacket.source_local_preflight_verified -ne $true -or $exactNewTrialActionPacket.source_failed_provider_attempt_review_verified -ne $true -or $exactNewTrialActionPacket.failed_attempt_paths_not_reused -ne $true) {
+      Add-Failure "Exact New-Trial Action Packet v0.1 must verify v0.6.12/v0.6.13 sources and avoid failed path reuse"
+    }
+    if ($exactNewTrialActionPacket.prompt_package_ref -ne 'prompts/image_generation/safe_adult_editorial_portrait_v1.yaml' -or $exactNewTrialActionPacket.output_directory -ne 'runs/real_generation/v0_3_3_exact_new_trial_001/' -or $exactNewTrialActionPacket.receipt_path -ne 'reports/provider_receipts/v0_3_3_exact_new_trial_001_receipt.json' -or $exactNewTrialActionPacket.registry_path -ne 'reports/provider_receipts/v0_3_3_exact_new_trial_001_registry.json' -or $exactNewTrialActionPacket.review_console_bridge_ref -ne 'review_console/live_receipt_bridge/v0_3_3_exact_new_trial_001') {
+      Add-Failure "Exact New-Trial Action Packet v0.1 must freeze the exact prompt/output/receipt/registry/bridge targets"
+    }
+    if ($exactNewTrialActionPacket.provider_target -ne 'codex_builtin_image_generation' -or $exactNewTrialActionPacket.plugin_id_or_provider_route -ne 'image_gen.imagegen' -or $exactNewTrialActionPacket.model -ne 'managed_by_codex_image_tool' -or $exactNewTrialActionPacket.command -ne 'generate') {
+      Add-Failure "Exact New-Trial Action Packet v0.1 must freeze the exact provider command route"
+    }
+    if ($exactNewTrialActionPacket.exact_call_count -ne 1 -or $exactNewTrialActionPacket.max_image_candidates -ne 1 -or $exactNewTrialActionPacket.retry_limit -ne 0 -or $exactNewTrialActionPacket.overwrite_existing_files_allowed -ne $false -or $exactNewTrialActionPacket.secret_value_read_allowed -ne $false -or $exactNewTrialActionPacket.raw_provider_payload_capture_allowed -ne $false -or $exactNewTrialActionPacket.raw_provider_response_capture_allowed -ne $false) {
+      Add-Failure "Exact New-Trial Action Packet v0.1 must preserve one call, one candidate, zero retry, no-overwrite, no-secret, and no raw provider capture"
+    }
+    if ($exactNewTrialActionPacket.request_submitted -ne $false -or $exactNewTrialActionPacket.execute_now -ne $false -or $exactNewTrialActionPacket.can_execute_now -ne $false -or $exactNewTrialActionPacket.human_approval_gate_required -ne $true -or $exactNewTrialActionPacket.no_op_runner_required_before_execution -ne $true -or $exactNewTrialActionPacket.future_provider_execution_requires_new_explicit_step -ne $true) {
+      Add-Failure "Exact New-Trial Action Packet v0.1 must stay unsubmitted, non-executable, approval-gated, and no-op-runner-gated"
+    }
+    if ($exactNewTrialActionPacket.stop_condition_count -lt 18) {
+      Add-Failure "Exact New-Trial Action Packet v0.1 must include the full stop-condition set"
+    }
+    if ($exactNewTrialActionPacket.negative_case_count -lt 25 -or $exactNewTrialActionPacket.caught_negative_case_count -ne $exactNewTrialActionPacket.negative_case_count -or $exactNewTrialActionPacket.all_negative_cases_caught -ne $true) {
+      Add-Failure "Exact New-Trial Action Packet v0.1 must catch every required negative case"
+    }
+    if ($exactNewTrialActionPacket.metadata_only -ne $true -or $exactNewTrialActionPacket.action_packet_only -ne $true -or $exactNewTrialActionPacket.no_new_trial_executed -ne $true) {
+      Add-Failure "Exact New-Trial Action Packet v0.1 must remain metadata-only, packet-only, and non-executing"
+    }
+    if ($exactNewTrialActionPacket.Push_L2_exercised -ne $false -or $exactNewTrialActionPacket.real_executor_implemented_now -ne $false -or $exactNewTrialActionPacket.provider_call_performed -ne $false -or $exactNewTrialActionPacket.image_generation_performed -ne $false -or $exactNewTrialActionPacket.output_directory_created -ne $false -or $exactNewTrialActionPacket.receipt_write_performed -ne $false -or $exactNewTrialActionPacket.registry_write_performed -ne $false -or $exactNewTrialActionPacket.review_console_bridge_materialized -ne $false -or $exactNewTrialActionPacket.VCP_memory_write_performed -ne $false -or $exactNewTrialActionPacket.DailyNote_write_performed -ne $false -or $exactNewTrialActionPacket.runtime_call_performed -ne $false -or $exactNewTrialActionPacket.secret_value_read_performed -ne $false -or $exactNewTrialActionPacket.production_candidate_created -ne $false -or $exactNewTrialActionPacket.accepted_sample_auto_promotion -ne $false -or $exactNewTrialActionPacket.memory_seed_promoted -ne $false -or $exactNewTrialActionPacket.package_dependency_change_performed -ne $false -or $exactNewTrialActionPacket.commit_performed -ne $false -or $exactNewTrialActionPacket.push_performed -ne $false) {
+      Add-Failure "Exact New-Trial Action Packet v0.1 must not perform Push_L2, executor, provider, image, output, receipt, registry, bridge, memory, DailyNote, runtime, secret, production, accepted-sample, memory-seed, dependency, commit, or push actions"
+    }
+  }
+
+  $exactNewTrialNoopGateOutput = & node (Join-Path $Root 'scripts/validate_exact_new_trial_noop_rehearsal_human_approval_gate.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Exact New-Trial No-op Rehearsal Human Approval Gate validation exited with failure"
+  } else {
+    $exactNewTrialNoopGate = ($exactNewTrialNoopGateOutput -join "`n") | ConvertFrom-Json
+    if ($exactNewTrialNoopGate.passed -ne $true -or $exactNewTrialNoopGate.phase -ne 'v0_6_15_exact_new_trial_noop_rehearsal_human_approval_gate') {
+      Add-Failure "Exact New-Trial No-op Rehearsal Human Approval Gate validation must pass"
+    }
+    if ($exactNewTrialNoopGate.noop_gate_doc_present -ne $true -or $exactNewTrialNoopGate.noop_gate_schema_present -ne $true -or $exactNewTrialNoopGate.noop_gate_report_present -ne $true -or $exactNewTrialNoopGate.noop_gate_fixture_present -ne $true -or $exactNewTrialNoopGate.noop_gate_fail_fixture_present -ne $true) {
+      Add-Failure "Exact New-Trial No-op Rehearsal Human Approval Gate must define doc, schema, report, pass fixture, and fail fixture"
+    }
+    if ($exactNewTrialNoopGate.authorization_package_id -ne 'AUTH-PENDING-V0-3-3-EXACT-NEW-TRIAL-20260523-001' -or $exactNewTrialNoopGate.action_packet_id -ne 'exact_new_trial_action_packet_v0_1' -or $exactNewTrialNoopGate.noop_rehearsal_id -ne 'exact_new_trial_noop_rehearsal_v0_1' -or $exactNewTrialNoopGate.human_approval_packet_id -ne 'exact_new_trial_human_approval_packet_v0_1') {
+      Add-Failure "Exact New-Trial No-op Rehearsal Human Approval Gate must bind the exact authorization, action packet, no-op rehearsal, and approval packet ids"
+    }
+    if ($exactNewTrialNoopGate.source_action_packet_verified -ne $true -or $exactNewTrialNoopGate.target_paths_clear -ne $true) {
+      Add-Failure "Exact New-Trial No-op Rehearsal Human Approval Gate must verify v0.6.14 and clear future target paths"
+    }
+    if ($exactNewTrialNoopGate.prompt_package_ref -ne 'prompts/image_generation/safe_adult_editorial_portrait_v1.yaml' -or $exactNewTrialNoopGate.output_directory -ne 'runs/real_generation/v0_3_3_exact_new_trial_001/' -or $exactNewTrialNoopGate.receipt_path -ne 'reports/provider_receipts/v0_3_3_exact_new_trial_001_receipt.json' -or $exactNewTrialNoopGate.registry_path -ne 'reports/provider_receipts/v0_3_3_exact_new_trial_001_registry.json' -or $exactNewTrialNoopGate.review_console_bridge_ref -ne 'review_console/live_receipt_bridge/v0_3_3_exact_new_trial_001') {
+      Add-Failure "Exact New-Trial No-op Rehearsal Human Approval Gate must preserve the exact prompt/output/receipt/registry/bridge targets"
+    }
+    if ($exactNewTrialNoopGate.runner_mode -ne 'no_op_rehearsal_only' -or $exactNewTrialNoopGate.noop_execution_completed -ne $true -or $exactNewTrialNoopGate.would_generate_emit -ne $true -or $exactNewTrialNoopGate.would_review_emit -ne $true -or $exactNewTrialNoopGate.would_stop_emit -ne $true -or $exactNewTrialNoopGate.stop_reason -ne 'human_approval_pending_real_generation_not_authorized') {
+      Add-Failure "Exact New-Trial No-op Rehearsal Human Approval Gate must complete would_generate/would_review/would_stop and stop for pending human approval"
+    }
+    if ($exactNewTrialNoopGate.would_read_count -ne 3 -or $exactNewTrialNoopGate.would_call_count -ne 1 -or $exactNewTrialNoopGate.would_write_count -ne 4) {
+      Add-Failure "Exact New-Trial No-op Rehearsal Human Approval Gate must expose exactly three reads, one future call, and four future writes"
+    }
+    if (-not ($exactNewTrialNoopGate.allowed_human_options -contains 'keep_idle') -or -not ($exactNewTrialNoopGate.allowed_human_options -contains 'continue_dry_run') -or -not ($exactNewTrialNoopGate.allowed_human_options -contains 'authorize_one_real_generation') -or $exactNewTrialNoopGate.selected_option -ne 'keep_idle_until_explicit_human_decision') {
+      Add-Failure "Exact New-Trial No-op Rehearsal Human Approval Gate must offer keep_idle, continue_dry_run, and authorize_one_real_generation while selecting safe idle by default"
+    }
+    if ($exactNewTrialNoopGate.human_approval_status -ne 'pending' -or $exactNewTrialNoopGate.authorization_phrase_captured -ne $false -or $exactNewTrialNoopGate.real_generation_authorized_now -ne $false -or $exactNewTrialNoopGate.can_execute_now -ne $false -or $exactNewTrialNoopGate.future_provider_execution_requires_new_explicit_step -ne $true) {
+      Add-Failure "Exact New-Trial No-op Rehearsal Human Approval Gate must leave approval pending and execution blocked"
+    }
+    if ($exactNewTrialNoopGate.exact_call_count -ne 1 -or $exactNewTrialNoopGate.max_image_candidates -ne 1 -or $exactNewTrialNoopGate.retry_limit -ne 0 -or $exactNewTrialNoopGate.overwrite_existing_files_allowed -ne $false -or $exactNewTrialNoopGate.secret_value_read_allowed -ne $false -or $exactNewTrialNoopGate.raw_provider_payload_capture_allowed -ne $false -or $exactNewTrialNoopGate.raw_provider_response_capture_allowed -ne $false -or $exactNewTrialNoopGate.review_required_after_generation -ne $true -or $exactNewTrialNoopGate.no_memory_write_default -ne $true) {
+      Add-Failure "Exact New-Trial No-op Rehearsal Human Approval Gate must preserve one-call, one-candidate, zero-retry, no-overwrite, no-secret, no-raw-capture, review-required, no-memory constraints"
+    }
+    if ($exactNewTrialNoopGate.stop_condition_count -lt 22) {
+      Add-Failure "Exact New-Trial No-op Rehearsal Human Approval Gate must include the full stop-condition set"
+    }
+    if ($exactNewTrialNoopGate.negative_case_count -lt 30 -or $exactNewTrialNoopGate.caught_negative_case_count -ne $exactNewTrialNoopGate.negative_case_count -or $exactNewTrialNoopGate.all_negative_cases_caught -ne $true) {
+      Add-Failure "Exact New-Trial No-op Rehearsal Human Approval Gate must catch every required negative case"
+    }
+    if ($exactNewTrialNoopGate.metadata_only -ne $true -or $exactNewTrialNoopGate.no_op_rehearsal_only -ne $true -or $exactNewTrialNoopGate.human_approval_packet_only -ne $true -or $exactNewTrialNoopGate.no_new_trial_executed -ne $true) {
+      Add-Failure "Exact New-Trial No-op Rehearsal Human Approval Gate must remain metadata-only, no-op-only, approval-packet-only, and non-executing"
+    }
+    if ($exactNewTrialNoopGate.Push_L2_exercised -ne $false -or $exactNewTrialNoopGate.real_executor_implemented_now -ne $false -or $exactNewTrialNoopGate.provider_call_performed -ne $false -or $exactNewTrialNoopGate.image_generation_performed -ne $false -or $exactNewTrialNoopGate.output_directory_created -ne $false -or $exactNewTrialNoopGate.receipt_write_performed -ne $false -or $exactNewTrialNoopGate.registry_write_performed -ne $false -or $exactNewTrialNoopGate.review_console_bridge_materialized -ne $false -or $exactNewTrialNoopGate.VCP_memory_write_performed -ne $false -or $exactNewTrialNoopGate.DailyNote_write_performed -ne $false -or $exactNewTrialNoopGate.runtime_call_performed -ne $false -or $exactNewTrialNoopGate.secret_value_read_performed -ne $false -or $exactNewTrialNoopGate.production_candidate_created -ne $false -or $exactNewTrialNoopGate.accepted_sample_auto_promotion -ne $false -or $exactNewTrialNoopGate.memory_seed_promoted -ne $false -or $exactNewTrialNoopGate.package_dependency_change_performed -ne $false -or $exactNewTrialNoopGate.commit_performed -ne $false -or $exactNewTrialNoopGate.push_performed -ne $false) {
+      Add-Failure "Exact New-Trial No-op Rehearsal Human Approval Gate must not perform Push_L2, executor, provider, image, output, receipt, registry, bridge, memory, DailyNote, runtime, secret, production, accepted-sample, memory-seed, dependency, commit, or push actions"
+    }
+  }
+
+  $exactNewTrialHumanApprovalIntakeOutput = & node (Join-Path $Root 'scripts/validate_exact_new_trial_human_approval_intake_validator.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Exact New-Trial Human Approval Intake Validator validation exited with failure"
+  } else {
+    $exactNewTrialHumanApprovalIntake = ($exactNewTrialHumanApprovalIntakeOutput -join "`n") | ConvertFrom-Json
+    if ($exactNewTrialHumanApprovalIntake.passed -ne $true -or $exactNewTrialHumanApprovalIntake.phase -ne 'v0_6_16_exact_new_trial_human_approval_intake_validator') {
+      Add-Failure "Exact New-Trial Human Approval Intake Validator validation must pass"
+    }
+    if ($exactNewTrialHumanApprovalIntake.intake_doc_present -ne $true -or $exactNewTrialHumanApprovalIntake.intake_schema_present -ne $true -or $exactNewTrialHumanApprovalIntake.intake_report_present -ne $true -or $exactNewTrialHumanApprovalIntake.intake_fixture_present -ne $true -or $exactNewTrialHumanApprovalIntake.intake_fail_fixture_present -ne $true) {
+      Add-Failure "Exact New-Trial Human Approval Intake Validator must define doc, schema, report, pass fixture, and fail fixture"
+    }
+    if ($exactNewTrialHumanApprovalIntake.authorization_package_id -ne 'AUTH-PENDING-V0-3-3-EXACT-NEW-TRIAL-20260523-001' -or $exactNewTrialHumanApprovalIntake.action_packet_id -ne 'exact_new_trial_action_packet_v0_1' -or $exactNewTrialHumanApprovalIntake.noop_rehearsal_id -ne 'exact_new_trial_noop_rehearsal_v0_1' -or $exactNewTrialHumanApprovalIntake.human_approval_packet_id -ne 'exact_new_trial_human_approval_packet_v0_1' -or $exactNewTrialHumanApprovalIntake.approval_intake_validator_id -ne 'exact_new_trial_human_approval_intake_validator_v0_1') {
+      Add-Failure "Exact New-Trial Human Approval Intake Validator must bind the exact authorization, action packet, no-op rehearsal, approval packet, and intake validator ids"
+    }
+    if ($exactNewTrialHumanApprovalIntake.source_noop_gate_verified -ne $true -or $exactNewTrialHumanApprovalIntake.intake_mode -ne 'approval_intake_validator_only' -or $exactNewTrialHumanApprovalIntake.current_user_choice -ne 'not_captured') {
+      Add-Failure "Exact New-Trial Human Approval Intake Validator must verify v0.6.15 and remain intake-validator-only with no captured user choice"
+    }
+    if ($exactNewTrialHumanApprovalIntake.human_response_captured_now -ne $false -or $exactNewTrialHumanApprovalIntake.authorization_phrase_captured -ne $false -or $exactNewTrialHumanApprovalIntake.human_approval_status -ne 'pending' -or $exactNewTrialHumanApprovalIntake.decision_result -ne 'stay_idle' -or $exactNewTrialHumanApprovalIntake.can_execute_now -ne $false -or $exactNewTrialHumanApprovalIntake.real_generation_authorized_now -ne $false -or $exactNewTrialHumanApprovalIntake.future_provider_execution_requires_new_explicit_step -ne $true) {
+      Add-Failure "Exact New-Trial Human Approval Intake Validator must keep approval pending, stay idle, and block execution"
+    }
+    if (-not ($exactNewTrialHumanApprovalIntake.allowed_human_options -contains 'keep_idle') -or -not ($exactNewTrialHumanApprovalIntake.allowed_human_options -contains 'continue_dry_run') -or -not ($exactNewTrialHumanApprovalIntake.allowed_human_options -contains 'authorize_one_real_generation')) {
+      Add-Failure "Exact New-Trial Human Approval Intake Validator must preserve keep_idle, continue_dry_run, and authorize_one_real_generation options"
+    }
+    if ($exactNewTrialHumanApprovalIntake.keep_idle_classification -ne 'green_idle' -or $exactNewTrialHumanApprovalIntake.continue_dry_run_classification -ne 'green_dry_run_only' -or $exactNewTrialHumanApprovalIntake.authorize_one_real_generation_classification -ne 'requires_future_explicit_authorization_and_separate_execution_preflight') {
+      Add-Failure "Exact New-Trial Human Approval Intake Validator must classify the three human options correctly"
+    }
+    if ($exactNewTrialHumanApprovalIntake.required_authorization_phrase_token_count -lt 18) {
+      Add-Failure "Exact New-Trial Human Approval Intake Validator must require the full exact future authorization phrase token set"
+    }
+    if ($exactNewTrialHumanApprovalIntake.prompt_package_ref -ne 'prompts/image_generation/safe_adult_editorial_portrait_v1.yaml' -or $exactNewTrialHumanApprovalIntake.output_directory -ne 'runs/real_generation/v0_3_3_exact_new_trial_001/' -or $exactNewTrialHumanApprovalIntake.receipt_path -ne 'reports/provider_receipts/v0_3_3_exact_new_trial_001_receipt.json' -or $exactNewTrialHumanApprovalIntake.registry_path -ne 'reports/provider_receipts/v0_3_3_exact_new_trial_001_registry.json' -or $exactNewTrialHumanApprovalIntake.review_console_bridge_ref -ne 'review_console/live_receipt_bridge/v0_3_3_exact_new_trial_001' -or $exactNewTrialHumanApprovalIntake.provider_route -ne 'image_gen.imagegen') {
+      Add-Failure "Exact New-Trial Human Approval Intake Validator must preserve exact future target and provider route constraints"
+    }
+    if ($exactNewTrialHumanApprovalIntake.exact_call_count -ne 1 -or $exactNewTrialHumanApprovalIntake.max_image_candidates -ne 1 -or $exactNewTrialHumanApprovalIntake.retry_limit -ne 0 -or $exactNewTrialHumanApprovalIntake.overwrite_existing_files_allowed -ne $false -or $exactNewTrialHumanApprovalIntake.secret_value_read_allowed -ne $false -or $exactNewTrialHumanApprovalIntake.raw_provider_payload_capture_allowed -ne $false -or $exactNewTrialHumanApprovalIntake.raw_provider_response_capture_allowed -ne $false -or $exactNewTrialHumanApprovalIntake.review_required_after_generation -ne $true -or $exactNewTrialHumanApprovalIntake.no_memory_write_default -ne $true) {
+      Add-Failure "Exact New-Trial Human Approval Intake Validator must preserve one-call, one-candidate, zero-retry, no-overwrite, no-secret, no-raw-capture, review-required, no-memory constraints"
+    }
+    if ($exactNewTrialHumanApprovalIntake.stop_condition_count -lt 20) {
+      Add-Failure "Exact New-Trial Human Approval Intake Validator must include the full stop-condition set"
+    }
+    if ($exactNewTrialHumanApprovalIntake.negative_case_count -lt 30 -or $exactNewTrialHumanApprovalIntake.caught_negative_case_count -ne $exactNewTrialHumanApprovalIntake.negative_case_count -or $exactNewTrialHumanApprovalIntake.all_negative_cases_caught -ne $true) {
+      Add-Failure "Exact New-Trial Human Approval Intake Validator must catch every required negative case"
+    }
+    if ($exactNewTrialHumanApprovalIntake.metadata_only -ne $true -or $exactNewTrialHumanApprovalIntake.approval_intake_validator_only -ne $true -or $exactNewTrialHumanApprovalIntake.no_new_human_approval_captured -ne $true -or $exactNewTrialHumanApprovalIntake.no_new_trial_executed -ne $true) {
+      Add-Failure "Exact New-Trial Human Approval Intake Validator must remain metadata-only, intake-validator-only, no-new-approval, and non-executing"
+    }
+    if ($exactNewTrialHumanApprovalIntake.Push_L2_exercised -ne $false -or $exactNewTrialHumanApprovalIntake.real_executor_implemented_now -ne $false -or $exactNewTrialHumanApprovalIntake.provider_call_performed -ne $false -or $exactNewTrialHumanApprovalIntake.image_generation_performed -ne $false -or $exactNewTrialHumanApprovalIntake.output_directory_created -ne $false -or $exactNewTrialHumanApprovalIntake.receipt_write_performed -ne $false -or $exactNewTrialHumanApprovalIntake.registry_write_performed -ne $false -or $exactNewTrialHumanApprovalIntake.review_console_bridge_materialized -ne $false -or $exactNewTrialHumanApprovalIntake.VCP_memory_write_performed -ne $false -or $exactNewTrialHumanApprovalIntake.DailyNote_write_performed -ne $false -or $exactNewTrialHumanApprovalIntake.runtime_call_performed -ne $false -or $exactNewTrialHumanApprovalIntake.secret_value_read_performed -ne $false -or $exactNewTrialHumanApprovalIntake.production_candidate_created -ne $false -or $exactNewTrialHumanApprovalIntake.accepted_sample_auto_promotion -ne $false -or $exactNewTrialHumanApprovalIntake.memory_seed_promoted -ne $false -or $exactNewTrialHumanApprovalIntake.package_dependency_change_performed -ne $false -or $exactNewTrialHumanApprovalIntake.commit_performed -ne $false -or $exactNewTrialHumanApprovalIntake.push_performed -ne $false) {
+      Add-Failure "Exact New-Trial Human Approval Intake Validator must not perform Push_L2, executor, provider, image, output, receipt, registry, bridge, memory, DailyNote, runtime, secret, production, accepted-sample, memory-seed, dependency, commit, or push actions"
+    }
+  }
+
+  $exactNewTrial30DayCheckpointOutput = & node (Join-Path $Root 'scripts/validate_exact_new_trial_30_day_checkpoint.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Exact New-Trial 30-Day Checkpoint validation exited with failure"
+  } else {
+    $exactNewTrial30DayCheckpoint = ($exactNewTrial30DayCheckpointOutput -join "`n") | ConvertFrom-Json
+    if ($exactNewTrial30DayCheckpoint.passed -ne $true -or $exactNewTrial30DayCheckpoint.phase -ne 'v0_6_17_30_day_exact_new_trial_checkpoint') {
+      Add-Failure "Exact New-Trial 30-Day Checkpoint validation must pass"
+    }
+    if ($exactNewTrial30DayCheckpoint.checkpoint_doc_present -ne $true -or $exactNewTrial30DayCheckpoint.checkpoint_schema_present -ne $true -or $exactNewTrial30DayCheckpoint.checkpoint_report_present -ne $true -or $exactNewTrial30DayCheckpoint.checkpoint_fixture_present -ne $true -or $exactNewTrial30DayCheckpoint.checkpoint_fail_fixture_present -ne $true) {
+      Add-Failure "Exact New-Trial 30-Day Checkpoint must define root checkpoint doc, schema, report, pass fixture, and fail fixture"
+    }
+    if ($exactNewTrial30DayCheckpoint.source_local_preflight_verified -ne $true -or $exactNewTrial30DayCheckpoint.source_failed_attempt_review_verified -ne $true -or $exactNewTrial30DayCheckpoint.source_action_packet_verified -ne $true -or $exactNewTrial30DayCheckpoint.source_noop_gate_verified -ne $true -or $exactNewTrial30DayCheckpoint.source_human_approval_intake_verified -ne $true) {
+      Add-Failure "Exact New-Trial 30-Day Checkpoint must verify the v0.6.12 through v0.6.16 preparation chain"
+    }
+    if ($exactNewTrial30DayCheckpoint.readiness_state -ne 'ready_for_human_choice_not_ready_for_execution' -or $exactNewTrial30DayCheckpoint.auditable_preparation_loop_complete -ne $true -or $exactNewTrial30DayCheckpoint.should_enter_real_generation_now -ne $false -or $exactNewTrial30DayCheckpoint.recommendation -ne 'do_not_enter_real_generation_yet') {
+      Add-Failure "Exact New-Trial 30-Day Checkpoint must conclude ready for human choice, not ready for execution"
+    }
+    if ($exactNewTrial30DayCheckpoint.human_choice_captured -ne $false -or $exactNewTrial30DayCheckpoint.real_generation_authorized_now -ne $false -or $exactNewTrial30DayCheckpoint.can_execute_now -ne $false -or $exactNewTrial30DayCheckpoint.real_generation_requires_new_explicit_step -ne $true) {
+      Add-Failure "Exact New-Trial 30-Day Checkpoint must keep real generation blocked until a new explicit step"
+    }
+    if ($exactNewTrial30DayCheckpoint.prompt_package_ref -ne 'prompts/image_generation/safe_adult_editorial_portrait_v1.yaml' -or $exactNewTrial30DayCheckpoint.output_directory -ne 'runs/real_generation/v0_3_3_exact_new_trial_001/' -or $exactNewTrial30DayCheckpoint.receipt_path -ne 'reports/provider_receipts/v0_3_3_exact_new_trial_001_receipt.json' -or $exactNewTrial30DayCheckpoint.registry_path -ne 'reports/provider_receipts/v0_3_3_exact_new_trial_001_registry.json' -or $exactNewTrial30DayCheckpoint.review_console_bridge_ref -ne 'review_console/live_receipt_bridge/v0_3_3_exact_new_trial_001' -or $exactNewTrial30DayCheckpoint.provider_route -ne 'image_gen.imagegen') {
+      Add-Failure "Exact New-Trial 30-Day Checkpoint must preserve the frozen exact trial package"
+    }
+    if ($exactNewTrial30DayCheckpoint.exact_call_count -ne 1 -or $exactNewTrial30DayCheckpoint.max_image_candidates -ne 1 -or $exactNewTrial30DayCheckpoint.retry_limit -ne 0 -or $exactNewTrial30DayCheckpoint.overwrite_existing_files_allowed -ne $false -or $exactNewTrial30DayCheckpoint.secret_value_read_allowed -ne $false) {
+      Add-Failure "Exact New-Trial 30-Day Checkpoint must preserve one-call, one-candidate, zero-retry, no-overwrite, and no-secret constraints"
+    }
+    if ($exactNewTrial30DayCheckpoint.risk_count -lt 5 -or $exactNewTrial30DayCheckpoint.required_risks_present -ne $true) {
+      Add-Failure "Exact New-Trial 30-Day Checkpoint must carry the required risk list"
+    }
+    if ($exactNewTrial30DayCheckpoint.negative_case_count -lt 30 -or $exactNewTrial30DayCheckpoint.caught_negative_case_count -ne $exactNewTrial30DayCheckpoint.negative_case_count -or $exactNewTrial30DayCheckpoint.all_negative_cases_caught -ne $true) {
+      Add-Failure "Exact New-Trial 30-Day Checkpoint must catch every required negative case"
+    }
+    if ($exactNewTrial30DayCheckpoint.metadata_only -ne $true -or $exactNewTrial30DayCheckpoint.checkpoint_only -ne $true -or $exactNewTrial30DayCheckpoint.no_new_human_approval_captured -ne $true -or $exactNewTrial30DayCheckpoint.no_new_trial_executed -ne $true) {
+      Add-Failure "Exact New-Trial 30-Day Checkpoint must remain metadata-only, checkpoint-only, no-new-approval, and non-executing"
+    }
+    if ($exactNewTrial30DayCheckpoint.Push_L2_exercised -ne $false -or $exactNewTrial30DayCheckpoint.real_executor_implemented_now -ne $false -or $exactNewTrial30DayCheckpoint.provider_call_performed -ne $false -or $exactNewTrial30DayCheckpoint.image_generation_performed -ne $false -or $exactNewTrial30DayCheckpoint.output_directory_created -ne $false -or $exactNewTrial30DayCheckpoint.receipt_write_performed -ne $false -or $exactNewTrial30DayCheckpoint.registry_write_performed -ne $false -or $exactNewTrial30DayCheckpoint.review_console_bridge_materialized -ne $false -or $exactNewTrial30DayCheckpoint.VCP_memory_write_performed -ne $false -or $exactNewTrial30DayCheckpoint.DailyNote_write_performed -ne $false -or $exactNewTrial30DayCheckpoint.runtime_call_performed -ne $false -or $exactNewTrial30DayCheckpoint.secret_value_read_performed -ne $false -or $exactNewTrial30DayCheckpoint.production_candidate_created -ne $false -or $exactNewTrial30DayCheckpoint.accepted_sample_auto_promotion -ne $false -or $exactNewTrial30DayCheckpoint.memory_seed_promoted -ne $false -or $exactNewTrial30DayCheckpoint.package_dependency_change_performed -ne $false -or $exactNewTrial30DayCheckpoint.commit_performed -ne $false -or $exactNewTrial30DayCheckpoint.push_performed -ne $false) {
+      Add-Failure "Exact New-Trial 30-Day Checkpoint must not perform Push_L2, executor, provider, image, output, receipt, registry, bridge, memory, DailyNote, runtime, secret, production, accepted-sample, memory-seed, dependency, commit, or push actions"
+    }
+  }
+
+  $exactNewTrialSingleGenerationPreflightOutput = & node (Join-Path $Root 'scripts/validate_exact_new_trial_single_generation_execution_preflight.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Exact New-Trial Single Generation Execution Preflight validation exited with failure"
+  } else {
+    $exactNewTrialSingleGenerationPreflight = ($exactNewTrialSingleGenerationPreflightOutput -join "`n") | ConvertFrom-Json
+    if ($exactNewTrialSingleGenerationPreflight.passed -ne $true -or $exactNewTrialSingleGenerationPreflight.phase -ne 'v0_6_18_single_generation_execution_preflight') {
+      Add-Failure "Exact New-Trial Single Generation Execution Preflight validation must pass"
+    }
+    if ($exactNewTrialSingleGenerationPreflight.preflight_doc_present -ne $true -or $exactNewTrialSingleGenerationPreflight.preflight_schema_present -ne $true -or $exactNewTrialSingleGenerationPreflight.preflight_report_present -ne $true -or $exactNewTrialSingleGenerationPreflight.preflight_fixture_present -ne $true -or $exactNewTrialSingleGenerationPreflight.preflight_fail_fixture_present -ne $true) {
+      Add-Failure "Exact New-Trial Single Generation Execution Preflight must define doc, schema, report, pass fixture, and fail fixture"
+    }
+    if ($exactNewTrialSingleGenerationPreflight.source_checkpoint_verified -ne $true -or $exactNewTrialSingleGenerationPreflight.source_action_packet_verified -ne $true -or $exactNewTrialSingleGenerationPreflight.source_human_approval_intake_verified -ne $true) {
+      Add-Failure "Exact New-Trial Single Generation Execution Preflight must verify checkpoint, action packet, and human approval intake sources"
+    }
+    if ($exactNewTrialSingleGenerationPreflight.readiness_state -ne 'preflight_ready_waiting_for_exact_execution_authorization' -or $exactNewTrialSingleGenerationPreflight.execution_preflight_ready -ne $true -or $exactNewTrialSingleGenerationPreflight.exact_real_generation_authorization_captured -ne $false -or $exactNewTrialSingleGenerationPreflight.authorization_phrase_captured -ne $false) {
+      Add-Failure "Exact New-Trial Single Generation Execution Preflight must be ready only as a preflight while keeping exact authorization uncaptured"
+    }
+    if ($exactNewTrialSingleGenerationPreflight.provider_call_allowed_now -ne $false -or $exactNewTrialSingleGenerationPreflight.image_generation_allowed_now -ne $false -or $exactNewTrialSingleGenerationPreflight.can_execute_now -ne $false -or $exactNewTrialSingleGenerationPreflight.real_generation_requires_separate_explicit_authorization -ne $true) {
+      Add-Failure "Exact New-Trial Single Generation Execution Preflight must block provider/image execution until a separate explicit authorization"
+    }
+    if ($exactNewTrialSingleGenerationPreflight.prompt_package_ref -ne 'prompts/image_generation/safe_adult_editorial_portrait_v1.yaml' -or $exactNewTrialSingleGenerationPreflight.output_directory -ne 'runs/real_generation/v0_3_3_exact_new_trial_001/' -or $exactNewTrialSingleGenerationPreflight.receipt_path -ne 'reports/provider_receipts/v0_3_3_exact_new_trial_001_receipt.json' -or $exactNewTrialSingleGenerationPreflight.registry_path -ne 'reports/provider_receipts/v0_3_3_exact_new_trial_001_registry.json' -or $exactNewTrialSingleGenerationPreflight.review_console_bridge_ref -ne 'review_console/live_receipt_bridge/v0_3_3_exact_new_trial_001' -or $exactNewTrialSingleGenerationPreflight.provider_route -ne 'image_gen.imagegen') {
+      Add-Failure "Exact New-Trial Single Generation Execution Preflight must preserve the frozen exact execution package"
+    }
+    if ($exactNewTrialSingleGenerationPreflight.exact_call_count -ne 1 -or $exactNewTrialSingleGenerationPreflight.max_image_candidates -ne 1 -or $exactNewTrialSingleGenerationPreflight.retry_limit -ne 0 -or $exactNewTrialSingleGenerationPreflight.overwrite_existing_files_allowed -ne $false -or $exactNewTrialSingleGenerationPreflight.secret_value_read_allowed -ne $false) {
+      Add-Failure "Exact New-Trial Single Generation Execution Preflight must preserve one-call, one-candidate, zero-retry, no-overwrite, and no-secret constraints"
+    }
+    if ($exactNewTrialSingleGenerationPreflight.paths_checked -ne $true -or $exactNewTrialSingleGenerationPreflight.prompt_package_exists -ne $true -or $exactNewTrialSingleGenerationPreflight.output_directory_exists -ne $false -or $exactNewTrialSingleGenerationPreflight.receipt_path_exists -ne $false -or $exactNewTrialSingleGenerationPreflight.registry_path_exists -ne $false -or $exactNewTrialSingleGenerationPreflight.review_console_bridge_exists -ne $false -or $exactNewTrialSingleGenerationPreflight.target_paths_clear_now -ne $true) {
+      Add-Failure "Exact New-Trial Single Generation Execution Preflight must prove prompt exists and target paths are currently clear"
+    }
+    if ($exactNewTrialSingleGenerationPreflight.required_authorization_token_count -lt 19 -or $exactNewTrialSingleGenerationPreflight.stop_condition_count -lt 16) {
+      Add-Failure "Exact New-Trial Single Generation Execution Preflight must carry the full authorization token and stop-condition sets"
+    }
+    if ($exactNewTrialSingleGenerationPreflight.negative_case_count -lt 35 -or $exactNewTrialSingleGenerationPreflight.caught_negative_case_count -ne $exactNewTrialSingleGenerationPreflight.negative_case_count -or $exactNewTrialSingleGenerationPreflight.all_negative_cases_caught -ne $true) {
+      Add-Failure "Exact New-Trial Single Generation Execution Preflight must catch every required negative case"
+    }
+    if ($exactNewTrialSingleGenerationPreflight.metadata_only -ne $true -or $exactNewTrialSingleGenerationPreflight.execution_preflight_only -ne $true -or $exactNewTrialSingleGenerationPreflight.no_provider_contact -ne $true -or $exactNewTrialSingleGenerationPreflight.no_image_generation -ne $true) {
+      Add-Failure "Exact New-Trial Single Generation Execution Preflight must remain metadata-only, preflight-only, no-provider-contact, and no-image-generation"
+    }
+    if ($exactNewTrialSingleGenerationPreflight.Push_L2_exercised -ne $false -or $exactNewTrialSingleGenerationPreflight.real_executor_implemented_now -ne $false -or $exactNewTrialSingleGenerationPreflight.provider_call_performed -ne $false -or $exactNewTrialSingleGenerationPreflight.image_generation_performed -ne $false -or $exactNewTrialSingleGenerationPreflight.output_directory_created -ne $false -or $exactNewTrialSingleGenerationPreflight.receipt_write_performed -ne $false -or $exactNewTrialSingleGenerationPreflight.registry_write_performed -ne $false -or $exactNewTrialSingleGenerationPreflight.review_console_bridge_materialized -ne $false -or $exactNewTrialSingleGenerationPreflight.VCP_memory_write_performed -ne $false -or $exactNewTrialSingleGenerationPreflight.DailyNote_write_performed -ne $false -or $exactNewTrialSingleGenerationPreflight.runtime_call_performed -ne $false -or $exactNewTrialSingleGenerationPreflight.secret_value_read_performed -ne $false -or $exactNewTrialSingleGenerationPreflight.production_candidate_created -ne $false -or $exactNewTrialSingleGenerationPreflight.accepted_sample_auto_promotion -ne $false -or $exactNewTrialSingleGenerationPreflight.memory_seed_promoted -ne $false -or $exactNewTrialSingleGenerationPreflight.package_dependency_change_performed -ne $false -or $exactNewTrialSingleGenerationPreflight.commit_performed -ne $false -or $exactNewTrialSingleGenerationPreflight.push_performed -ne $false) {
+      Add-Failure "Exact New-Trial Single Generation Execution Preflight must not perform Push_L2, executor, provider, image, output, receipt, registry, bridge, memory, DailyNote, runtime, secret, production, accepted-sample, memory-seed, dependency, commit, or push actions"
+    }
+  }
+
+  $providerPayloadCapturePreflightOutput = & node (Join-Path $Root 'scripts/validate_provider_payload_capture_preflight.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Provider Payload Capture Preflight validation exited with failure"
+  } else {
+    $providerPayloadCapturePreflight = ($providerPayloadCapturePreflightOutput -join "`n") | ConvertFrom-Json
+    if ($providerPayloadCapturePreflight.passed -ne $true -or $providerPayloadCapturePreflight.phase -ne 'v0_6_22_provider_payload_extraction_preflight') {
+      Add-Failure "Provider Payload Capture Preflight validation must pass"
+    }
+    if ($providerPayloadCapturePreflight.capture_ref -ne 'reports/provider_payload_captures/v0_3_3_exact_new_trial_001_request_payload.sanitized.json' -or $providerPayloadCapturePreflight.report_ref -ne 'reports/visual_asset_eval_dry_run/v0_6_22_provider_payload_extraction_preflight.json') {
+      Add-Failure "Provider Payload Capture Preflight must preserve the exact capture and report refs"
+    }
+    if ($providerPayloadCapturePreflight.raw_provider_payload_capture_performed -ne $true -or $providerPayloadCapturePreflight.raw_provider_response_capture_performed -ne $false -or $providerPayloadCapturePreflight.secret_value_read_performed -ne $false) {
+      Add-Failure "Provider Payload Capture Preflight must capture request payload only while blocking raw response and secrets"
+    }
+    if ($providerPayloadCapturePreflight.provider_call_performed -ne $false -or $providerPayloadCapturePreflight.image_generation_performed -ne $false) {
+      Add-Failure "Provider Payload Capture Preflight must not call provider or generate an image"
+    }
+    if ($providerPayloadCapturePreflight.remaining_failure_layers.Count -lt 3) {
+      Add-Failure "Provider Payload Capture Preflight must preserve remaining failure-layer localization"
     }
   }
 

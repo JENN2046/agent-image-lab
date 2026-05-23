@@ -1,0 +1,45 @@
+title: Exact New-Trial Single Generation Execution Preflight
+type: object
+required:
+  - exact_new_trial_single_generation_execution_preflight
+properties:
+  exact_new_trial_single_generation_execution_preflight:
+    type: object
+    required:
+      - preflight_id
+      - version
+      - phase
+      - source_refs
+      - authorization_state
+      - frozen_execution_package
+      - path_collision_preflight
+      - required_authorization_tokens
+      - stop_conditions
+      - next_route
+      - boundaries
+      - side_effects
+    properties:
+      preflight_id:
+        const: single_generation_execution_preflight_v0_1
+      version:
+        const: v0_1
+      phase:
+        const: v0_6_18_single_generation_execution_preflight
+      source_refs:
+        type: object
+      authorization_state:
+        type: object
+      frozen_execution_package:
+        type: object
+      path_collision_preflight:
+        type: object
+      required_authorization_tokens:
+        type: array
+      stop_conditions:
+        type: array
+      next_route:
+        type: object
+      boundaries:
+        type: object
+      side_effects:
+        type: object

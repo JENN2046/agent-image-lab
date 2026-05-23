@@ -1,0 +1,56 @@
+{
+  "phase": "v0_6_22_provider_payload_extraction_preflight",
+  "status": "completed_validated_local_payload_preflight",
+  "created_date": "2026-05-23",
+  "source_phase": "v0_6_21_raw_provider_payload_capture_standing_diagnostic_policy",
+  "active_current_phase": "v0_3_3_first_live_generation_pilot",
+  "resume_guard_source_phase": "v0_3_2_live_candidate_action_packet",
+  "resume_compaction_compatibility_anchor": "inspect_failed_provider_tool_attempt_or_authorize_new_trial",
+  "intent": "local implementation",
+  "lane": "Green",
+  "purpose": "Create a no-provider-call request payload extraction preflight so generation failures can be localized instead of guessed.",
+  "payload_capture_ref": "reports/provider_payload_captures/v0_3_3_exact_new_trial_001_request_payload.sanitized.json",
+  "prompt_package_ref": "prompts/image_generation/safe_adult_editorial_portrait_v1.yaml",
+  "provider_route": "image_gen.imagegen",
+  "failure_localization_axes": [
+    "prompt_extraction",
+    "payload_wrapping",
+    "path_authorization",
+    "provider_tool_result"
+  ],
+  "current_localization": {
+    "codex_image_generation_observed_ok": true,
+    "positive_prompt_direct_generation_observed_ok": true,
+    "previous_same_prompt_package_project_generation_observed_ok": true,
+    "prompt_extraction_contamination_ruled_out_by_this_preflight": true,
+    "remaining_likely_failure_layers": [
+      "provider_tool_transient_user_error",
+      "runtime_call_context_or_artifact_return_handling",
+      "authorization_path_state_drift_at_call_time"
+    ]
+  },
+  "boundaries": {
+    "provider_call_performed": false,
+    "image_generation_performed": false,
+    "raw_provider_payload_capture_performed": true,
+    "raw_provider_response_capture_performed": false,
+    "secret_value_read_performed": false,
+    "VCP_memory_write_performed": false,
+    "DailyNote_write_performed": false,
+    "accepted_sample_auto_promotion": false,
+    "production_candidate_created": false,
+    "commit_performed": false,
+    "push_performed": false
+  },
+  "validation": {
+    "required": [
+      "node --check scripts/create_provider_payload_capture_preflight.js",
+      "node --check scripts/validate_provider_payload_capture_preflight.js",
+      "node scripts/create_provider_payload_capture_preflight.js",
+      "node scripts/validate_provider_payload_capture_preflight.js",
+      "npm run validate:mvp"
+    ],
+    "status": "completed_validated_after_commands_run"
+  },
+  "recommended_next": "run_next_authorized_single_generation_with_payload_capture_and_artifact_return_trace"
+}

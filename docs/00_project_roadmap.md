@@ -2,6 +2,674 @@
 
 本文是 Agent Image Lab 的总路线图，用来把 v0.2 基线、v0.3 授权门槛、MVP-B dry-run 和未来真实闭环串成一条可执行路径。
 
+## v0.6.23 - Single Generation With Payload Capture And Artifact Trace
+
+Status: succeeded_image_generated_review_required.
+
+Purpose:
+- Execute one real `image_gen.imagegen` call using the sanitized payload from
+  the provider payload capture route.
+- Record provider request payload capture and artifact-return trace for the
+  exact-new-trial route.
+- Preserve review-required status before any accepted-sample promotion, memory
+  write, DailyNote write, or production-candidate action.
+
+Artifacts:
+- `reports/provider_payload_captures/v0_3_3_exact_new_trial_002_request_payload.sanitized.json`
+- `runs/real_generation/v0_3_3_exact_new_trial_002/generation_attempt_result.json`
+- `reports/provider_receipts/v0_3_3_exact_new_trial_002_receipt.json`
+- `reports/provider_receipts/v0_3_3_exact_new_trial_002_registry.json`
+- `review_console/live_receipt_bridge/v0_3_3_exact_new_trial_002/bridge_entry.json`
+- `reports/visual_asset_eval_dry_run/v0_6_23_single_generation_with_payload_capture_and_artifact_trace.json`
+
+Boundary state:
+- `active current phase: v0_3_3_first_live_generation_pilot`
+- `resume_guard_source_phase: v0_3_2_live_candidate_action_packet`
+- `resume_compaction_compatibility_anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial`
+- `attempt_id: v0_3_3_exact_new_trial_002`
+- `provider_calls_used: 1`
+- `image_candidates_generated: 1`
+- `additional_image_generation_performed: false`
+- `retry_limit: 0`
+- `retries_used: 0`
+- `raw_provider_payload_capture_performed: true`
+- `raw_provider_response_capture_performed: false`
+- `secret_value_read_performed: false`
+- `VCP_memory_write_performed: false`
+- `DailyNote_write_performed: false`
+- `accepted_sample_auto_promotion: false`
+- `production_candidate_created: false`
+- `push_allowed: false`
+- `push_status: not_performed`
+
+Recommended next:
+- Human review generated asset before any promotion or memory write.
+
+## v0.6.22 - Provider Payload Extraction Preflight
+
+Status: completed_validated_local_payload_preflight.
+
+Purpose:
+- Add a local diagnostic capability that materializes the exact sanitized
+  request payload before any future `image_gen.imagegen` call.
+- Localize generation failure causes across prompt extraction, payload wrapping,
+  path/authorization state, and provider tool result instead of guessing from a
+  provider `UserError`.
+- Prove the final payload uses only the positive `prompt` field from
+  `prompts/image_generation/safe_adult_editorial_portrait_v1.yaml`.
+
+Artifacts:
+- `docs/V0_6_22_PROVIDER_PAYLOAD_EXTRACTION_PREFLIGHT.md`
+- `reports/provider_payload_captures/v0_3_3_exact_new_trial_001_request_payload.sanitized.json`
+- `reports/visual_asset_eval_dry_run/v0_6_22_provider_payload_extraction_preflight.json`
+- `scripts/create_provider_payload_capture_preflight.js`
+- `scripts/validate_provider_payload_capture_preflight.js`
+
+Boundary state:
+- `source_phase: v0_6_21_raw_provider_payload_capture_standing_diagnostic_policy`
+- `current_gate_phase: v0_6_22_provider_payload_extraction_preflight`
+- `active current phase: v0_3_3_first_live_generation_pilot`
+- `resume_guard_source_phase: v0_3_2_live_candidate_action_packet`
+- `resume_compaction_compatibility_anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial`
+- `payload_capture_ref: reports/provider_payload_captures/v0_3_3_exact_new_trial_001_request_payload.sanitized.json`
+- `prompt_source_field: prompt`
+- `negative_prompt_included: false`
+- `yaml_metadata_included: false`
+- `authorization_text_included: false`
+- `path_text_included_in_prompt: false`
+- `provider_call_performed: false`
+- `image_generation_performed: false`
+- `raw_provider_payload_capture_performed: true`
+- `raw_provider_response_capture_performed: false`
+- `secret_value_read_performed: false`
+- `push_allowed: false`
+- `push_status: not_performed`
+
+Recommended next:
+- Run the next separately authorized single generation with request payload
+  capture and artifact-return trace enabled, while continuing to block raw
+  provider response capture and secret reads.
+
+## v0.6.21 - Raw Provider Payload Capture Standing Diagnostic Policy
+
+Status: completed_validated_local_policy_update.
+
+Purpose:
+- Record Jenn's instruction to keep provider request payload capture enabled
+  until the exact-new-trial generation route is stable.
+- Require future diagnostic generation attempts to capture the final outbound
+  request payload before provider call.
+- Keep response capture, secrets, memory, accepted-sample promotion, production
+  promotion, and push blocked.
+
+Artifacts:
+- `docs/V0_6_21_RAW_PROVIDER_PAYLOAD_CAPTURE_STANDING_DIAGNOSTIC_POLICY.md`
+- `reports/visual_asset_eval_dry_run/v0_6_21_raw_provider_payload_capture_standing_diagnostic_policy.json`
+
+Boundary state:
+- `source_phase: v0_6_20_failed_no_image_generated_post_run_review`
+- `current_gate_phase: v0_6_21_raw_provider_payload_capture_standing_diagnostic_policy`
+- `active current phase: v0_3_3_first_live_generation_pilot`
+- `resume_guard_source_phase: v0_3_2_live_candidate_action_packet`
+- `resume_compaction_compatibility_anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial`
+- `next_red_decision: provider_payload_extraction_preflight_before_any_future_generation_call`
+- `authorization_state: active_until_generation_route_stable_or_revoked`
+- `raw_provider_payload_capture_allowed: true`
+- `sanitized_request_payload_capture_required: true`
+- `raw_provider_response_capture_allowed: false`
+- `secret_value_read_allowed: false`
+- `secret_value_read_performed: false`
+- `provider_call_performed: false`
+- `image_generation_performed: false`
+- `retry_performed: false`
+- `VCP_memory_write_performed: false`
+- `DailyNote_write_performed: false`
+- `accepted_sample_auto_promotion: false`
+- `production_candidate_created: false`
+- `push_allowed: false`
+- `push_performed: false`
+
+Recommended next: create a no-provider-call payload extraction preflight for
+`prompts/image_generation/safe_adult_editorial_portrait_v1.yaml`, then inspect
+the captured request payload before any future real generation call.
+
+## v0.6.20 - Failed No-Image Generated Post-Run Review
+
+Status: completed_validated_local_post_run_review.
+
+Purpose:
+- Review the v0.6.19 `failed_no_image_generated` records without retrying or
+  calling the provider.
+- Mark v0.6.18 as historical preflight state and v0.6.19 as the current
+  execution truth for this attempt.
+- Record that the consumed authorization cannot be reused.
+
+Artifacts:
+- `docs/V0_6_20_FAILED_NO_IMAGE_GENERATED_POST_RUN_REVIEW.md`
+- `reports/visual_asset_eval_dry_run/v0_6_20_failed_no_image_generated_post_run_review.json`
+
+Boundary state:
+- `source_phase: v0_6_19_exact_new_trial_single_generation_attempt`
+- `current_gate_phase: v0_6_20_failed_no_image_generated_post_run_review`
+- `active current phase: v0_3_3_first_live_generation_pilot`
+- `resume_guard_source_phase: v0_3_2_live_candidate_action_packet`
+- `resume_compaction_compatibility_anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial`
+- `next_red_decision: new_exact_authorization_required_before_any_future_real_generation_attempt`
+- `attempt_status_reviewed: failed_no_image_generated`
+- `records_internally_consistent: true`
+- `provider_calls_used: 1`
+- `image_candidates_generated: 0`
+- `retry_limit: 0`
+- `retries_used: 0`
+- `preflight_record_is_historical: true`
+- `provider_call_performed: false`
+- `image_generation_performed: false`
+- `retry_performed: false`
+- `secret_value_read_performed: false`
+- `VCP_memory_write_performed: false`
+- `DailyNote_write_performed: false`
+- `accepted_sample_auto_promotion: false`
+- `production_candidate_created: false`
+- `push_allowed: false`
+- `push_performed: false`
+
+Recommended next: stop real generation work here unless Jenn explicitly asks for
+a new exact authorization package with fresh non-overwriting paths.
+
+## v0.6.19 - Exact New-Trial Single Generation Attempt
+
+Status: completed_recorded_failed_no_image_generated.
+
+Purpose:
+- Execute the one authorized exact new-trial provider/image call.
+- Stop after one call because `retry_limit: 0`.
+- Record the failed no-image result, receipt, registry, and review bridge entry.
+
+Boundary state:
+- `source_phase: v0_6_18_single_generation_execution_preflight`
+- `current_gate_phase: v0_6_19_exact_new_trial_single_generation_attempt`
+- `active current phase: v0_3_3_first_live_generation_pilot`
+- `resume_guard_source_phase: v0_3_2_live_candidate_action_packet`
+- `resume_compaction_compatibility_anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial`
+- `next_red_decision: review_failed_no_image_attempt_before_any_new_authorization`
+- `authorization_captured: authorize_one_real_generation`
+- `provider_call_performed: true`
+- `provider_calls_used: 1`
+- `image_generation_performed: false`
+- `image_candidates_generated: 0`
+- `retry_limit: 0`
+- `retries_used: 0`
+- `failure_class: provider_tool_user_error_no_image`
+- `attempt_result_path: runs/real_generation/v0_3_3_exact_new_trial_001/generation_attempt_result.json`
+- `receipt_path: reports/provider_receipts/v0_3_3_exact_new_trial_001_receipt.json`
+- `registry_path: reports/provider_receipts/v0_3_3_exact_new_trial_001_registry.json`
+- `review_console_bridge_ref: review_console/live_receipt_bridge/v0_3_3_exact_new_trial_001`
+- `VCP_memory_write_performed: false`
+- `DailyNote_write_performed: false`
+- `secret_value_read_performed: false`
+- `accepted_sample_auto_promotion: false`
+- `production_candidate_created: false`
+- `push_allowed: false`
+
+Recommended next: review the failed no-image attempt and decide whether to stop
+or create a new exact authorization package. Do not retry under the consumed
+authorization.
+
+## v0.6.18 - Single Generation Execution Preflight
+
+Status: completed_validated_local_execution_preflight.
+
+Purpose:
+- Prepare the final local execution preflight for one future real generation
+  attempt without calling the provider or generating an image.
+- Prove prompt package existence and target path non-collision for the frozen
+  output, receipt, registry, and review bridge targets.
+- Preserve the exact one-call, one-candidate, zero-retry, no-overwrite,
+  no-secret, no-raw-provider-capture, review-required, no-memory, and no-push
+  constraints.
+- Keep the route ready for exact human execution authorization but not
+  executable now.
+
+Artifacts:
+- `docs/V0_6_18_SINGLE_GENERATION_EXECUTION_PREFLIGHT.md`
+- `schemas/exact_new_trial_single_generation_execution_preflight.schema.yaml`
+- `reports/visual_asset_eval_dry_run/v0_6_18_single_generation_execution_preflight.json`
+- `tests/schema_examples/exact_new_trial_single_generation_execution_preflight.example.json`
+- `tests/schema_examples/exact_new_trial_single_generation_execution_preflight_fail.example.json`
+- `scripts/validate_exact_new_trial_single_generation_execution_preflight.js`
+
+Boundary state:
+- `source_phase: v0_6_17_30_day_exact_new_trial_checkpoint`
+- `current_gate_phase: v0_6_18_single_generation_execution_preflight`
+- `active current phase: v0_3_3_first_live_generation_pilot`
+- `resume_guard_source_phase: v0_3_2_live_candidate_action_packet`
+- `previous_red_decision_satisfied: prepare_single_generation_execution_preflight_without_provider_call`
+- `resume_compaction_compatibility_anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial`
+- `next_red_decision: wait_for_exact_authorize_one_real_generation`
+- `readiness_state: preflight_ready_waiting_for_exact_execution_authorization`
+- `execution_preflight_ready: true`
+- `exact_real_generation_authorization_captured: false`
+- `authorization_phrase_captured: false`
+- `provider_call_allowed_now: false`
+- `image_generation_allowed_now: false`
+- `can_execute_now: false`
+- `prompt_package_exists: true`
+- `target_paths_clear_now: true`
+- `recheck_required_immediately_before_execution: true`
+- `authorization_package_id: AUTH-PENDING-V0-3-3-EXACT-NEW-TRIAL-20260523-001`
+- `prompt_package_ref: prompts/image_generation/safe_adult_editorial_portrait_v1.yaml`
+- `output_directory: runs/real_generation/v0_3_3_exact_new_trial_001/`
+- `receipt_path: reports/provider_receipts/v0_3_3_exact_new_trial_001_receipt.json`
+- `registry_path: reports/provider_receipts/v0_3_3_exact_new_trial_001_registry.json`
+- `review_console_bridge_ref: review_console/live_receipt_bridge/v0_3_3_exact_new_trial_001`
+- `provider_route: image_gen.imagegen`
+- `exact_call_count: 1`
+- `max_image_candidates: 1`
+- `retry_limit: 0`
+- `overwrite_existing_files_allowed: false`
+- `secret_value_read_allowed: false`
+- `provider_call_performed: false`
+- `image_generation_performed: false`
+- `output_directory_created: false`
+- `receipt_write_performed: false`
+- `registry_write_performed: false`
+- `review_console_bridge_materialized: false`
+- `memory_write_performed: false`
+- `runtime_call_performed: false`
+- `secret_value_read_performed: false`
+- `push_allowed: false`
+
+Recommended next: wait for Jenn's exact
+`authorize_one_real_generation` execution authorization. If captured, rerun this
+preflight immediately before any provider call and stop on any drift.
+
+## v0.6.17 - 30-Day Exact New-Trial Checkpoint
+
+Status: completed_validated_local_30_day_checkpoint.
+
+Purpose:
+- Close the 30-day exact new-trial preparation loop without entering real
+  generation.
+- Prove that v0.6.12 through v0.6.16 form an auditable preparation chain:
+  local preflight, failed-provider review, frozen action packet, no-op
+  rehearsal and human approval gate, and approval-intake validator.
+- Record the Day 30 recommendation, readiness state, risks, and next route.
+- Keep the current route ready for a human choice but not ready for execution.
+
+Artifacts:
+- `30_DAY_EXACT_NEW_TRIAL_CHECKPOINT.md`
+- `schemas/exact_new_trial_30_day_checkpoint.schema.yaml`
+- `reports/visual_asset_eval_dry_run/v0_6_17_30_day_exact_new_trial_checkpoint.json`
+- `tests/schema_examples/exact_new_trial_30_day_checkpoint.example.json`
+- `tests/schema_examples/exact_new_trial_30_day_checkpoint_fail.example.json`
+- `scripts/validate_exact_new_trial_30_day_checkpoint.js`
+
+Boundary state:
+- `source_phase: v0_6_16_exact_new_trial_human_approval_intake_validator`
+- `current_gate_phase: v0_6_17_30_day_exact_new_trial_checkpoint`
+- `active current phase: v0_3_3_first_live_generation_pilot`
+- `resume_guard_source_phase: v0_3_2_live_candidate_action_packet`
+- `previous_red_decision_satisfied: wait_for_human_choice_or_prepare_30_day_checkpoint_without_real_generation`
+- `resume_compaction_compatibility_anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial`
+- `next_red_decision: wait_for_explicit_authorize_one_real_generation_or_keep_idle`
+- `readiness_state: ready_for_human_choice_not_ready_for_execution`
+- `auditable_preparation_loop_complete: true`
+- `recommendation: do_not_enter_real_generation_yet`
+- `should_enter_real_generation_now: false`
+- `human_choice_captured: false`
+- `real_generation_authorized_now: false`
+- `can_execute_now: false`
+- `authorization_package_id: AUTH-PENDING-V0-3-3-EXACT-NEW-TRIAL-20260523-001`
+- `prompt_package_ref: prompts/image_generation/safe_adult_editorial_portrait_v1.yaml`
+- `output_directory: runs/real_generation/v0_3_3_exact_new_trial_001/`
+- `receipt_path: reports/provider_receipts/v0_3_3_exact_new_trial_001_receipt.json`
+- `registry_path: reports/provider_receipts/v0_3_3_exact_new_trial_001_registry.json`
+- `review_console_bridge_ref: review_console/live_receipt_bridge/v0_3_3_exact_new_trial_001`
+- `provider_route: image_gen.imagegen`
+- `exact_call_count: 1`
+- `max_image_candidates: 1`
+- `retry_limit: 0`
+- `overwrite_existing_files_allowed: false`
+- `secret_value_read_allowed: false`
+- `provider_call_performed: false`
+- `image_generation_performed: false`
+- `output_directory_created: false`
+- `receipt_write_performed: false`
+- `registry_write_performed: false`
+- `review_console_bridge_materialized: false`
+- `memory_write_performed: false`
+- `runtime_call_performed: false`
+- `secret_value_read_performed: false`
+- `push_allowed: false`
+
+Recommended next: keep the checkpoint as terminal local state unless Jenn
+explicitly chooses `continue_dry_run` or gives a separate exact
+`authorize_one_real_generation` instruction. Even with that instruction, create
+a separate execution preflight before any provider call.
+
+## v0.6.16 - Exact New-Trial Human Approval Intake Validator
+
+Status: completed_validated_local_human_approval_intake_validator_slice.
+
+Purpose:
+- Turn the v0.6.15 human approval gate into a local intake validator.
+- Classify `keep_idle`, `continue_dry_run`, and
+  `authorize_one_real_generation` without capturing a new approval.
+- Require the future one-real-generation authorization phrase to preserve the
+  exact prompt/output/receipt/registry/bridge, one call, one candidate, zero
+  retry, no overwrite, no secret read, no raw provider capture, no memory, no
+  DailyNote, no accepted-sample promotion, no production-candidate promotion,
+  and no push/tag/release/deploy.
+- Keep current state idle and non-executable.
+
+Artifacts:
+- `docs/V0_6_16_EXACT_NEW_TRIAL_HUMAN_APPROVAL_INTAKE_VALIDATOR.md`
+- `schemas/exact_new_trial_human_approval_intake_validator.schema.yaml`
+- `reports/visual_asset_eval_dry_run/v0_6_16_exact_new_trial_human_approval_intake_validator.json`
+- `tests/schema_examples/exact_new_trial_human_approval_intake_validator.example.json`
+- `tests/schema_examples/exact_new_trial_human_approval_intake_validator_fail.example.json`
+- `scripts/validate_exact_new_trial_human_approval_intake_validator.js`
+
+Boundary state:
+- `source_phase: v0_6_15_exact_new_trial_noop_rehearsal_human_approval_gate`
+- `current_gate_phase: v0_6_16_exact_new_trial_human_approval_intake_validator`
+- `active current phase: v0_3_3_first_live_generation_pilot`
+- `resume_guard_source_phase: v0_3_2_live_candidate_action_packet`
+- `previous_red_decision_satisfied: await_human_choice_keep_idle_continue_dry_run_or_authorize_one_real_generation`
+- `resume_compaction_compatibility_anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial`
+- `next_red_decision: wait_for_human_choice_or_prepare_30_day_checkpoint_without_real_generation`
+- `authorization_package_id: AUTH-PENDING-V0-3-3-EXACT-NEW-TRIAL-20260523-001`
+- `approval_intake_validator_id: exact_new_trial_human_approval_intake_validator_v0_1`
+- `intake_mode: approval_intake_validator_only`
+- `current_user_choice: not_captured`
+- `human_response_captured_now: false`
+- `authorization_phrase_captured: false`
+- `human_approval_status: pending`
+- `decision_result: stay_idle`
+- `can_execute_now: false`
+- `real_generation_authorized_now: false`
+- `allowed_human_options: keep_idle; continue_dry_run; authorize_one_real_generation`
+- `required_authorization_phrase_token_count: 18`
+- `prompt_package_ref: prompts/image_generation/safe_adult_editorial_portrait_v1.yaml`
+- `output_directory: runs/real_generation/v0_3_3_exact_new_trial_001/`
+- `receipt_path: reports/provider_receipts/v0_3_3_exact_new_trial_001_receipt.json`
+- `registry_path: reports/provider_receipts/v0_3_3_exact_new_trial_001_registry.json`
+- `review_console_bridge_ref: review_console/live_receipt_bridge/v0_3_3_exact_new_trial_001`
+- `provider_route: image_gen.imagegen`
+- `exact_call_count: 1`
+- `max_image_candidates: 1`
+- `retry_limit: 0`
+- `overwrite_existing_files_allowed: false`
+- `secret_value_read_allowed: false`
+- `provider_call_performed: false`
+- `image_generation_performed: false`
+- `output_directory_created: false`
+- `receipt_write_performed: false`
+- `registry_write_performed: false`
+- `review_console_bridge_materialized: false`
+- `memory_write_performed: false`
+- `runtime_call_performed: false`
+- `secret_value_read_performed: false`
+- `push_allowed: false`
+
+Recommended next: either wait for Jenn's explicit choice, continue dry-run
+review-loop preparation, or prepare the 30-day checkpoint with current readiness
+still blocked for real generation.
+
+## v0.6.15 - Exact New-Trial No-op Rehearsal And Human Approval Gate
+
+Status: completed_validated_local_noop_rehearsal_human_approval_gate_slice.
+
+Purpose:
+- Rehearse `exact_new_trial_action_packet_v0_1` as a no-op execution path.
+- Expose what the future run would read, would call, would write, and where it
+  must stop if human approval is still pending.
+- Establish the human gate options: `keep_idle`, `continue_dry_run`, or
+  `authorize_one_real_generation`.
+- Keep the packet non-executable and preserve the one-call, one-candidate,
+  zero-retry, no-overwrite, no-secret, no-memory, no-DailyNote, no-push boundary.
+
+Artifacts:
+- `docs/V0_6_15_EXACT_NEW_TRIAL_NOOP_REHEARSAL_HUMAN_APPROVAL_GATE.md`
+- `schemas/exact_new_trial_noop_rehearsal_human_approval_gate.schema.yaml`
+- `reports/visual_asset_eval_dry_run/v0_6_15_exact_new_trial_noop_rehearsal_human_approval_gate.json`
+- `tests/schema_examples/exact_new_trial_noop_rehearsal_human_approval_gate.example.json`
+- `tests/schema_examples/exact_new_trial_noop_rehearsal_human_approval_gate_fail.example.json`
+- `scripts/validate_exact_new_trial_noop_rehearsal_human_approval_gate.js`
+
+Boundary state:
+- `source_phase: v0_6_14_exact_new_trial_action_packet_v0_1`
+- `current_gate_phase: v0_6_15_exact_new_trial_noop_rehearsal_human_approval_gate`
+- `active current phase: v0_3_3_first_live_generation_pilot`
+- `resume_guard_source_phase: v0_3_2_live_candidate_action_packet`
+- `previous_red_decision_satisfied: build_noop_runner_and_human_approval_gate`
+- `resume_compaction_compatibility_anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial`
+- `next_red_decision: await_human_choice_keep_idle_continue_dry_run_or_authorize_one_real_generation`
+- `authorization_package_id: AUTH-PENDING-V0-3-3-EXACT-NEW-TRIAL-20260523-001`
+- `action_packet_id: exact_new_trial_action_packet_v0_1`
+- `noop_rehearsal_id: exact_new_trial_noop_rehearsal_v0_1`
+- `human_approval_packet_id: exact_new_trial_human_approval_packet_v0_1`
+- `runner_mode: no_op_rehearsal_only`
+- `would_read_count: 3`
+- `would_call_count: 1`
+- `would_write_count: 4`
+- `stop_reason: human_approval_pending_real_generation_not_authorized`
+- `allowed_human_options: keep_idle; continue_dry_run; authorize_one_real_generation`
+- `selected_option: keep_idle_until_explicit_human_decision`
+- `human_approval_status: pending`
+- `real_generation_authorized_now: false`
+- `can_execute_now: false`
+- `prompt_package_ref: prompts/image_generation/safe_adult_editorial_portrait_v1.yaml`
+- `output_directory: runs/real_generation/v0_3_3_exact_new_trial_001/`
+- `receipt_path: reports/provider_receipts/v0_3_3_exact_new_trial_001_receipt.json`
+- `registry_path: reports/provider_receipts/v0_3_3_exact_new_trial_001_registry.json`
+- `review_console_bridge_ref: review_console/live_receipt_bridge/v0_3_3_exact_new_trial_001`
+- `provider_call_performed: false`
+- `image_generation_performed: false`
+- `output_directory_created: false`
+- `receipt_write_performed: false`
+- `registry_write_performed: false`
+- `review_console_bridge_materialized: false`
+- `memory_write_performed: false`
+- `runtime_call_performed: false`
+- `secret_value_read_performed: false`
+- `push_allowed: false`
+
+Recommended next: keep the gate idle unless Jenn explicitly chooses
+`continue_dry_run` or issues a separate one-real-generation authorization. The
+next local-safe step is to build an approval-intake validator or dry-run review
+loop; a real generation remains blocked.
+
+## v0.6.14 - Exact New-Trial Action Packet v0.1
+
+Status: completed_validated_local_action_packet_freeze_slice.
+
+Purpose:
+- Freeze `exact_new_trial_action_packet_v0_1` from the v0.6.12 local preflight
+  gate and v0.6.13 failed-provider-attempt review.
+- Fix the exact prompt package, output directory, receipt path, registry path,
+  review bridge, provider command, one-shot limits, no-overwrite policy,
+  no-secret policy, zero retry, and stop conditions.
+- Keep the packet non-executable until a later no-op runner and human approval
+  gate exist.
+
+Artifacts:
+- `docs/V0_6_14_EXACT_NEW_TRIAL_ACTION_PACKET_V0_1.md`
+- `schemas/exact_new_trial_action_packet_v0_1.schema.yaml`
+- `reports/visual_asset_eval_dry_run/v0_6_14_exact_new_trial_action_packet_v0_1.json`
+- `tests/schema_examples/exact_new_trial_action_packet_v0_1.example.json`
+- `tests/schema_examples/exact_new_trial_action_packet_v0_1_fail.example.json`
+- `scripts/validate_exact_new_trial_action_packet_v0_1.js`
+
+Boundary state:
+- `source_phase: v0_6_13_failed_provider_attempt_review`
+- `current_gate_phase: v0_6_14_exact_new_trial_action_packet_v0_1`
+- `active current phase: v0_3_3_first_live_generation_pilot`
+- `resume_guard_source_phase: v0_3_2_live_candidate_action_packet`
+- `previous_red_decision_satisfied: inspect_failed_provider_tool_attempt_or_authorize_new_trial`
+- `action_packet_id: exact_new_trial_action_packet_v0_1`
+- `packet_status: frozen_not_executable`
+- `prompt_package_ref: prompts/image_generation/safe_adult_editorial_portrait_v1.yaml`
+- `output_directory: runs/real_generation/v0_3_3_exact_new_trial_001/`
+- `receipt_path: reports/provider_receipts/v0_3_3_exact_new_trial_001_receipt.json`
+- `registry_path: reports/provider_receipts/v0_3_3_exact_new_trial_001_registry.json`
+- `review_console_bridge_ref: review_console/live_receipt_bridge/v0_3_3_exact_new_trial_001`
+- `provider_target: codex_builtin_image_generation`
+- `plugin_id_or_provider_route: image_gen.imagegen`
+- `model: managed_by_codex_image_tool`
+- `command: generate`
+- `exact_call_count: 1`
+- `max_image_candidates: 1`
+- `retry_limit: 0`
+- `overwrite_existing_files_allowed: false`
+- `secret_value_read_allowed: false`
+- `raw_provider_payload_capture_allowed: false`
+- `raw_provider_response_capture_allowed: false`
+- `request_submitted: false`
+- `execute_now: false`
+- `can_execute_now: false`
+- `human_approval_gate_required: true`
+- `no_op_runner_required_before_execution: true`
+- `future_provider_execution_requires_new_explicit_step: true`
+- `provider_call_performed: false`
+- `image_generation_performed: false`
+- `output_directory_created: false`
+- `receipt_write_performed: false`
+- `registry_write_performed: false`
+- `review_console_bridge_materialized: false`
+- `memory_write_performed: false`
+- `runtime_call_performed: false`
+- `secret_value_read_performed: false`
+- `push_allowed: false`
+
+Recommended next: build the no-op execution rehearsal packet and human approval
+gate. The next step still must not submit or execute a provider/image call.
+
+## v0.6.13 - Failed Provider Attempt Review
+
+Status: completed_validated_local_failed_provider_attempt_review_slice.
+
+Purpose:
+- Review the failed provider attempts after the v0.6.12 local preflight-only gate.
+- Classify the failure type, non-reusable paths, and exact next-trial required
+  conditions without calling the provider or generating an image.
+- Preserve the conclusion that the previous failures are prompt/content-path
+  specific rather than proof of a global provider route outage.
+
+Artifacts:
+- `docs/V0_6_13_FAILED_PROVIDER_ATTEMPT_REVIEW.md`
+- `schemas/exact_new_trial_failed_provider_attempt_review.schema.yaml`
+- `reports/visual_asset_eval_dry_run/v0_6_13_failed_provider_attempt_review.json`
+- `tests/schema_examples/exact_new_trial_failed_provider_attempt_review.example.json`
+- `tests/schema_examples/exact_new_trial_failed_provider_attempt_review_fail.example.json`
+- `scripts/validate_exact_new_trial_failed_provider_attempt_review.js`
+
+Boundary state:
+- `source_phase: v0_6_12_local_preflight_only_gate`
+- `current_gate_phase: v0_6_13_failed_provider_attempt_review`
+- `active current phase: v0_3_3_first_live_generation_pilot`
+- `resume_guard_source_phase: v0_3_2_live_candidate_action_packet`
+- `next_red_decision: freeze_exact_new_trial_action_packet_v0_1`
+- `previous_red_decision_satisfied: inspect_failed_provider_tool_attempt_or_authorize_new_trial`
+- `authorization_package_id: AUTH-PENDING-V0-3-3-EXACT-NEW-TRIAL-20260523-001`
+- `failed_attempt_count: 2`
+- `first_attempt_failed_no_image: true`
+- `retry_001_failed_no_image: true`
+- `failure_type: provider_tool_user_error_no_image`
+- `retry_blocked_by_zero_retry_limit: true`
+- `neutral_smoke_test_succeeded: true`
+- `safe_adult_editorial_portrait_succeeded: true`
+- `route_not_globally_unavailable: true`
+- `cannot_reuse_failed_prompt_path_by_default: true`
+- `cannot_reuse_failed_output_receipt_registry_bridge_paths: true`
+- `failed_attempts_are_not_review_assets: true`
+- `failed_attempts_are_not_accepted_samples: true`
+- `failed_attempts_must_not_seed_memory: true`
+- `next_prompt_package_ref: prompts/image_generation/safe_adult_editorial_portrait_v1.yaml`
+- `next_output_directory: runs/real_generation/v0_3_3_exact_new_trial_001/`
+- `next_receipt_path: reports/provider_receipts/v0_3_3_exact_new_trial_001_receipt.json`
+- `next_registry_path: reports/provider_receipts/v0_3_3_exact_new_trial_001_registry.json`
+- `next_review_console_bridge_ref: review_console/live_receipt_bridge/v0_3_3_exact_new_trial_001`
+- `exact_call_count: 1`
+- `max_image_candidates: 1`
+- `retry_limit: 0`
+- `overwrite_existing_files_allowed: false`
+- `secret_value_read_allowed: false`
+- `future_provider_execution_requires_new_explicit_step: true`
+- `provider_call_performed: false`
+- `image_generation_performed: false`
+- `output_directory_created: false`
+- `receipt_write_performed: false`
+- `registry_write_performed: false`
+- `review_console_bridge_materialized: false`
+- `memory_write_performed: false`
+- `runtime_call_performed: false`
+- `secret_value_read_performed: false`
+- `push_allowed: false`
+
+Recommended next: freeze `exact_new_trial_action_packet_v0_1` with the reviewed
+prompt/output/receipt/registry/bridge conditions. Do not submit or execute a
+provider/image call in the action-packet freeze step.
+
+## v0.6.12 - Local Preflight-Only Gate
+
+Status: completed_validated_local_preflight_only_slice.
+
+Purpose:
+- Consume the v0.6.11 metadata-only preflight authorization locally.
+- Verify the exact prompt/output/receipt/registry/review-bridge package without
+  contacting a provider or generating an image.
+- Keep output writes, memory writes, runtime, secret reads, commit, push, tag,
+  release, and deploy blocked.
+
+Artifacts:
+- `docs/V0_6_12_LOCAL_PREFLIGHT_ONLY_GATE.md`
+- `schemas/exact_new_trial_local_preflight_only_gate.schema.yaml`
+- `reports/visual_asset_eval_dry_run/v0_6_12_local_preflight_only_gate.json`
+- `tests/schema_examples/exact_new_trial_local_preflight_only_gate.example.json`
+- `tests/schema_examples/exact_new_trial_local_preflight_only_gate_fail.example.json`
+- `scripts/validate_exact_new_trial_local_preflight_only_gate.js`
+
+Boundary state:
+- `source_phase: v0_6_11_exact_new_trial_preflight_authorization_gate`
+- `current_gate_phase: v0_6_12_local_preflight_only_gate`
+- `active current phase: v0_3_3_first_live_generation_pilot`
+- `resume_guard_source_phase: v0_3_2_live_candidate_action_packet`
+- `next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial`
+- `authorization_package_id: AUTH-PENDING-V0-3-3-EXACT-NEW-TRIAL-20260523-001`
+- `authorization_status: approved_for_metadata_only_preflight_consumed_by_local_preflight`
+- `approval_status: approved_for_preflight_only`
+- `preflight_authorization_consumed: true`
+- `local_preflight_run_performed: true`
+- `selected_prompt_package_ref: prompts/image_generation/safe_adult_editorial_portrait_v1.yaml`
+- `selected_output_directory: runs/real_generation/v0_3_3_exact_new_trial_001/`
+- `selected_receipt_path: reports/provider_receipts/v0_3_3_exact_new_trial_001_receipt.json`
+- `selected_registry_path: reports/provider_receipts/v0_3_3_exact_new_trial_001_registry.json`
+- `selected_review_console_bridge_ref: review_console/live_receipt_bridge/v0_3_3_exact_new_trial_001`
+- `exact_call_count: 1`
+- `max_image_candidates: 1`
+- `retry_limit: 0`
+- `overwrite_existing_files_allowed: false`
+- `secret_value_read_allowed: false`
+- `request_not_submitted: true`
+- `can_execute_now: false`
+- `provider_contact_allowed_now: false`
+- `image_generation_allowed_now: false`
+- `provider_call_performed: false`
+- `image_generation_performed: false`
+- `output_directory_created: false`
+- `receipt_write_performed: false`
+- `registry_write_performed: false`
+- `review_console_bridge_materialized: false`
+- `memory_write_performed: false`
+- `runtime_call_performed: false`
+- `secret_value_read_performed: false`
+- `push_allowed: false`
+
+Recommended next: review the failed provider attempt, then freeze the exact
+new-trial action packet schema/fixture/validator. Any provider contact or image
+generation still requires a new explicit execution step.
+
 ## v0.6.11 - Exact New-Trial Preflight Authorization Gate
 
 Status: completed_validated_local_preflight_authorization_slice.

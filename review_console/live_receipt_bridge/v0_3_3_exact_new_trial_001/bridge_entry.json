@@ -1,0 +1,17 @@
+{
+  "bridge_id": "review_bridge_v0_3_3_exact_new_trial_001",
+  "task_id": "v0_3_3_exact_new_trial_001",
+  "receipt_path": "reports/provider_receipts/v0_3_3_exact_new_trial_001_receipt.json",
+  "attempt_result_path": "runs/real_generation/v0_3_3_exact_new_trial_001/generation_attempt_result.json",
+  "review_state": "blocked_no_image_generated",
+  "human_review_required": true,
+  "image_candidate_available": false,
+  "accepted_sample_eligible": false,
+  "memory_write_eligible": false,
+  "next_required_human_decision": "review_failed_no_image_attempt_before_any_new_authorization",
+  "provider_call_performed": true,
+  "image_generation_performed": false,
+  "retry_performed": false,
+  "VCP_memory_write_performed": false,
+  "DailyNote_write_performed": false
+}

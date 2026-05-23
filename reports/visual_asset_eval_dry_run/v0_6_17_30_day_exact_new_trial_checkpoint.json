@@ -1,0 +1,127 @@
+{
+  "exact_new_trial_30_day_checkpoint": {
+    "checkpoint_id": "30_day_exact_new_trial_checkpoint_v0_1",
+    "version": "v0_1",
+    "phase": "v0_6_17_30_day_exact_new_trial_checkpoint",
+    "source_refs": {
+      "local_preflight_ref": "reports/visual_asset_eval_dry_run/v0_6_12_local_preflight_only_gate.json",
+      "failed_attempt_review_ref": "reports/visual_asset_eval_dry_run/v0_6_13_failed_provider_attempt_review.json",
+      "action_packet_ref": "reports/visual_asset_eval_dry_run/v0_6_14_exact_new_trial_action_packet_v0_1.json",
+      "noop_rehearsal_gate_ref": "reports/visual_asset_eval_dry_run/v0_6_15_exact_new_trial_noop_rehearsal_human_approval_gate.json",
+      "human_approval_intake_ref": "reports/visual_asset_eval_dry_run/v0_6_16_exact_new_trial_human_approval_intake_validator.json"
+    },
+    "readiness_state": {
+      "readiness_state": "ready_for_human_choice_not_ready_for_execution",
+      "auditable_preparation_loop_complete": true,
+      "preflight_consumed": true,
+      "failed_attempt_review_complete": true,
+      "action_packet_frozen": true,
+      "noop_rehearsal_complete": true,
+      "human_approval_gate_defined": true,
+      "human_approval_intake_validator_complete": true,
+      "human_choice_captured": false,
+      "real_generation_authorized_now": false,
+      "can_execute_now": false
+    },
+    "executive_decision": {
+      "should_enter_real_generation_now": false,
+      "recommendation": "do_not_enter_real_generation_yet",
+      "reason": "Human approval intake is still not_captured; exact one-real-generation authorization and separate execution preflight are still required.",
+      "future_real_generation_allowed_only_after_exact_authorization": true
+    },
+    "frozen_trial_package": {
+      "authorization_package_id": "AUTH-PENDING-V0-3-3-EXACT-NEW-TRIAL-20260523-001",
+      "action_packet_id": "exact_new_trial_action_packet_v0_1",
+      "prompt_package_ref": "prompts/image_generation/safe_adult_editorial_portrait_v1.yaml",
+      "output_directory": "runs/real_generation/v0_3_3_exact_new_trial_001/",
+      "receipt_path": "reports/provider_receipts/v0_3_3_exact_new_trial_001_receipt.json",
+      "registry_path": "reports/provider_receipts/v0_3_3_exact_new_trial_001_registry.json",
+      "review_console_bridge_ref": "review_console/live_receipt_bridge/v0_3_3_exact_new_trial_001",
+      "provider_route": "image_gen.imagegen",
+      "exact_call_count": 1,
+      "max_image_candidates": 1,
+      "retry_limit": 0,
+      "overwrite_existing_files_allowed": false,
+      "secret_value_read_allowed": false,
+      "raw_provider_payload_capture_allowed": false,
+      "raw_provider_response_capture_allowed": false,
+      "review_required_after_generation": true,
+      "no_memory_write_default": true
+    },
+    "risk_list": [
+      {
+        "risk_id": "human_approval_missing",
+        "status": "active",
+        "mitigation": "Capture exact Jenn authorization before any real generation."
+      },
+      {
+        "risk_id": "provider_tool_user_error_history",
+        "status": "active",
+        "mitigation": "Do not reuse failed prompt/output/receipt/registry/bridge paths as success evidence."
+      },
+      {
+        "risk_id": "path_collision_risk",
+        "status": "active",
+        "mitigation": "Re-check output, receipt, registry, and bridge paths immediately before execution."
+      },
+      {
+        "risk_id": "review_gap_risk",
+        "status": "active",
+        "mitigation": "Require human review after any future generated candidate."
+      },
+      {
+        "risk_id": "memory_promotion_risk",
+        "status": "active",
+        "mitigation": "Keep accepted-sample promotion and memory writes blocked by default."
+      }
+    ],
+    "next_stage_route": {
+      "if_keep_idle": "keep_checkpoint_as_terminal_local_state",
+      "if_continue_dry_run": "continue_local_dry_run_review_loop_or_execution_preflight_hardening",
+      "if_authorize_one_real_generation": "create_separate_execution_preflight_before_provider_call",
+      "real_generation_requires_new_explicit_step": true
+    },
+    "boundaries": {
+      "metadata_only": true,
+      "checkpoint_only": true,
+      "no_new_human_approval_captured": true,
+      "no_new_trial_executed": true,
+      "provider_call_performed": false,
+      "image_generation_performed": false,
+      "output_directory_created": false,
+      "receipt_write_performed": false,
+      "registry_write_performed": false,
+      "review_console_bridge_materialized": false,
+      "VCP_memory_write_performed": false,
+      "DailyNote_write_performed": false,
+      "runtime_call_performed": false,
+      "secret_value_read_performed": false,
+      "production_candidate_created": false,
+      "accepted_sample_auto_promotion": false,
+      "memory_seed_promoted": false,
+      "real_executor_implemented_now": false,
+      "Push_L2_exercised": false,
+      "package_dependency_change_performed": false,
+      "commit_performed": false,
+      "push_performed": false
+    },
+    "side_effects": {
+      "provider_call_performed": false,
+      "image_generation_performed": false,
+      "output_directory_created": false,
+      "receipt_write_performed": false,
+      "registry_write_performed": false,
+      "review_console_bridge_materialized": false,
+      "VCP_memory_write_performed": false,
+      "DailyNote_write_performed": false,
+      "runtime_call_performed": false,
+      "secret_value_read_performed": false,
+      "production_candidate_created": false,
+      "accepted_sample_auto_promotion": false,
+      "memory_seed_promoted": false,
+      "package_dependency_change_performed": false,
+      "commit_performed": false,
+      "push_performed": false
+    }
+  }
+}

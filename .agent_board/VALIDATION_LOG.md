@@ -1,5 +1,399 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260523-v0.6.23-SINGLE-GENERATION-WITH-PAYLOAD-CAPTURE
+
+Task: v0.6.23 single generation with payload capture and artifact-return trace
+Status: succeeded_image_generated_review_required
+Commands run:
+  - JSON parse for payload capture, attempt result, receipt, registry, bridge, and v0.6.23 report: passed
+  - Get-FileHash for output image: passed
+  - git diff --check: passed
+  - node scripts/validate_provider_receipt_artifacts.js: passed
+  - npm run validate:mvp: passed
+Boundary:
+  - provider_calls_used: 1
+  - image_candidates_generated: 1
+  - retry_limit: 0
+  - retries_used: 0
+  - raw_provider_payload_capture_performed: true
+  - raw_provider_response_capture_performed: false
+  - secret_value_read_performed: false
+  - VCP_memory_write_performed: false
+  - DailyNote_write_performed: false
+  - accepted_sample_auto_promotion: false
+  - production_candidate_created: false
+  - commit_performed: false
+  - push_performed: false
+Output:
+  - runs/real_generation/v0_3_3_exact_new_trial_002/safe_adult_editorial_portrait_v1.png
+Recommended next: perform human review of the generated asset before any promotion or memory write.
+
+## VALIDATION-20260523-v0.6.22-PROVIDER-PAYLOAD-EXTRACTION-PREFLIGHT
+
+Task: v0.6.22 provider payload extraction preflight
+Status: completed_validated_local_payload_preflight
+Commands run:
+  - node --check scripts/create_provider_payload_capture_preflight.js: passed
+  - node --check scripts/validate_provider_payload_capture_preflight.js: passed
+  - node scripts/create_provider_payload_capture_preflight.js: passed
+  - node scripts/validate_provider_payload_capture_preflight.js: passed
+  - node --check scripts/lib/governance_tooling_maintenance_slice.js: passed
+  - node scripts/validate_autopilot_agent_board_resume_compaction_guard.js: passed
+  - node scripts/validate_controlled_visual_production_loop_checkpoint_readiness.js: passed
+  - node scripts/validate_controlled_visual_production_loop_exact_file_commit_readiness_review.js: passed
+  - node scripts/validate_controlled_visual_production_loop_commit_and_authorization_readiness_audit.js: passed
+  - npm run validate:mvp: passed
+Boundary:
+  - local_payload_preflight_only: true
+  - payload_capture_ref: reports/provider_payload_captures/v0_3_3_exact_new_trial_001_request_payload.sanitized.json
+  - provider_route: image_gen.imagegen
+  - prompt_source_field: prompt
+  - negative_prompt_included: false
+  - yaml_metadata_included: false
+  - authorization_text_included: false
+  - path_text_included_in_prompt: false
+  - raw_provider_payload_capture_performed: true
+  - raw_provider_response_capture_performed: false
+  - provider_call_performed: false
+  - image_generation_performed: false
+  - secret_value_read_performed: false
+  - VCP_memory_write_performed: false
+  - DailyNote_write_performed: false
+  - accepted_sample_auto_promotion: false
+  - production_candidate_created: false
+  - commit_performed: false
+  - push_performed: false
+Recommended next: run the next separately authorized single generation with payload capture and artifact-return trace enabled.
+
+## VALIDATION-20260523-v0.6.21-RAW-PROVIDER-PAYLOAD-CAPTURE-STANDING-DIAGNOSTIC-POLICY
+
+Task: v0.6.21 raw provider payload capture standing diagnostic policy
+Status: completed_validated_local_policy_update
+Commands run:
+  - JSON parse for v0.6.21 policy report: passed
+  - node --check scripts/lib/governance_tooling_maintenance_slice.js: passed
+  - node scripts/validate_autopilot_agent_board_resume_compaction_guard.js: passed
+  - node scripts/validate_controlled_visual_production_loop_checkpoint_readiness.js: passed
+  - node scripts/validate_controlled_visual_production_loop_exact_file_commit_readiness_review.js: passed
+  - node scripts/validate_controlled_visual_production_loop_commit_and_authorization_readiness_audit.js: passed
+  - npm run validate:mvp: passed
+Boundary:
+  - policy_update_only: true
+  - raw_provider_payload_capture_allowed: true
+  - sanitized_request_payload_capture_required: true
+  - raw_provider_response_capture_allowed: false
+  - secret_value_read_allowed: false
+  - provider_call_performed: false
+  - image_generation_performed: false
+  - retry_performed: false
+  - VCP_memory_write_performed: false
+  - DailyNote_write_performed: false
+  - accepted_sample_auto_promotion: false
+  - production_candidate_created: false
+  - commit_performed: false
+  - push_performed: false
+Recommended next: create a no-provider-call payload extraction preflight before any future generation attempt.
+
+## VALIDATION-20260523-v0.6.20-FAILED-NO-IMAGE-GENERATED-POST-RUN-REVIEW
+
+Task: v0.6.20 failed no-image generated post-run review
+Status: completed_validated_local_post_run_review
+Commands run:
+  - JSON parse for v0.6.20 post-run review report: passed
+  - node --check scripts/lib/governance_tooling_maintenance_slice.js: passed
+  - node --check scripts/validate_controlled_visual_production_loop_checkpoint_readiness.js: passed
+  - node --check scripts/validate_controlled_visual_production_loop_exact_file_commit_readiness_review.js: passed
+  - node scripts/validate_autopilot_agent_board_resume_compaction_guard.js: passed
+  - node scripts/validate_controlled_visual_production_loop_checkpoint_readiness.js: passed
+  - node scripts/validate_controlled_visual_production_loop_exact_file_commit_readiness_review.js: passed
+  - node scripts/validate_controlled_visual_production_loop_commit_and_authorization_readiness_audit.js: passed
+  - npm run validate:mvp: passed
+Boundary:
+  - review_only: true
+  - provider_call_performed: false
+  - image_generation_performed: false
+  - retry_performed: false
+  - output_image_created: false
+  - raw_provider_payload_capture_performed: false
+  - raw_provider_response_capture_performed: false
+  - secret_value_read_performed: false
+  - VCP_memory_write_performed: false
+  - DailyNote_write_performed: false
+  - accepted_sample_auto_promotion: false
+  - production_candidate_created: false
+  - commit_performed: false
+  - push_performed: false
+Recommended next: stop real generation unless a new exact authorization package with fresh paths is requested.
+
+## VALIDATION-20260523-v0.6.19-EXACT-NEW-TRIAL-SINGLE-GENERATION-ATTEMPT
+
+Task: v0.6.19 exact new-trial single generation attempt
+Status: completed_recorded_failed_no_image_generated
+Commands run:
+  - node scripts/validate_exact_new_trial_single_generation_execution_preflight.js: passed before call
+  - JSON parse for attempt result, receipt, registry, and bridge entry: passed
+  - node scripts/validate_controlled_visual_production_loop_checkpoint_readiness.js: passed after guard update
+  - node scripts/validate_controlled_visual_production_loop_exact_file_commit_readiness_review.js: passed after guard update
+  - node scripts/validate_controlled_visual_production_loop_commit_and_authorization_readiness_audit.js: passed
+Boundary:
+  - provider_call_performed: true
+  - provider_calls_used: 1
+  - image_generation_performed: false
+  - image_candidates_generated: 0
+  - retry_limit: 0
+  - retries_used: 0
+  - receipt_write_performed: true
+  - registry_write_performed: true
+  - review_console_bridge_materialized: true
+  - VCP_memory_write_performed: false
+  - DailyNote_write_performed: false
+  - accepted_sample_auto_promotion: false
+  - production_candidate_created: false
+  - commit_performed: false
+  - push_performed: false
+Recommended next: review failed no-image attempt before any new authorization or retry.
+
+## VALIDATION-20260523-v0.6.18-SINGLE-GENERATION-EXECUTION-PREFLIGHT
+
+Task: v0.6.18 single generation execution preflight
+Status: completed_validated
+Commands run:
+  - node --check scripts/validate_exact_new_trial_single_generation_execution_preflight.js: passed
+  - node --check scripts/lib/governance_tooling_maintenance_slice.js: passed
+  - node scripts/validate_exact_new_trial_single_generation_execution_preflight.js: passed
+  - node scripts/validate_autopilot_agent_board_resume_compaction_guard.js: passed
+  - npm run validate:mvp: passed
+Boundary:
+  - current_gate_phase: v0_6_18_single_generation_execution_preflight
+  - readiness_state: preflight_ready_waiting_for_exact_execution_authorization
+  - execution_preflight_ready: true
+  - exact_real_generation_authorization_captured: false
+  - authorization_phrase_captured: false
+  - provider_call_allowed_now: false
+  - image_generation_allowed_now: false
+  - can_execute_now: false
+  - prompt_package_exists: true
+  - target_paths_clear_now: true
+  - provider_call_performed: false
+  - image_generation_performed: false
+  - output_directory_created: false
+  - receipt_write_performed: false
+  - registry_write_performed: false
+  - review_console_bridge_materialized: false
+  - VCP_memory_write_performed: false
+  - DailyNote_write_performed: false
+  - runtime_call_performed: false
+  - secret_value_read_performed: false
+  - commit_performed: false
+  - push_performed: false
+Recommended next: wait for exact authorize_one_real_generation, then rerun this preflight immediately before provider call.
+
+## VALIDATION-20260523-v0.6.17-30-DAY-EXACT-NEW-TRIAL-CHECKPOINT
+
+Task: v0.6.17 30-day exact new-trial checkpoint
+Status: completed_validated
+Commands run:
+  - node --check scripts/validate_exact_new_trial_30_day_checkpoint.js: passed
+  - node --check scripts/lib/governance_tooling_maintenance_slice.js: passed
+  - node scripts/validate_exact_new_trial_30_day_checkpoint.js: passed
+  - node scripts/validate_autopilot_agent_board_resume_compaction_guard.js: passed
+  - npm run validate:mvp: passed
+Boundary:
+  - current_gate_phase: v0_6_17_30_day_exact_new_trial_checkpoint
+  - readiness_state: ready_for_human_choice_not_ready_for_execution
+  - recommendation: do_not_enter_real_generation_yet
+  - should_enter_real_generation_now: false
+  - human_choice_captured: false
+  - real_generation_authorized_now: false
+  - can_execute_now: false
+  - provider_call_performed: false
+  - image_generation_performed: false
+  - output_directory_created: false
+  - receipt_write_performed: false
+  - registry_write_performed: false
+  - review_console_bridge_materialized: false
+  - VCP_memory_write_performed: false
+  - DailyNote_write_performed: false
+  - runtime_call_performed: false
+  - secret_value_read_performed: false
+  - commit_performed: false
+  - push_performed: false
+Recommended next: keep idle unless Jenn explicitly chooses continue_dry_run or separately authorizes one real generation; create a separate execution preflight before any provider call.
+
+## VALIDATION-20260523-v0.6.16-EXACT-NEW-TRIAL-HUMAN-APPROVAL-INTAKE-VALIDATOR
+
+Task: v0.6.16 exact new-trial human approval intake validator
+Status: completed_validated
+Commands run:
+  - node --check scripts/validate_exact_new_trial_human_approval_intake_validator.js: passed
+  - node --check scripts/lib/governance_tooling_maintenance_slice.js: passed
+  - node scripts/validate_exact_new_trial_human_approval_intake_validator.js: passed
+  - npm run validate:mvp: passed
+Boundary:
+  - current_gate_phase: v0_6_16_exact_new_trial_human_approval_intake_validator
+  - approval_intake_validator_id: exact_new_trial_human_approval_intake_validator_v0_1
+  - intake_mode: approval_intake_validator_only
+  - current_user_choice: not_captured
+  - human_response_captured_now: false
+  - authorization_phrase_captured: false
+  - human_approval_status: pending
+  - decision_result: stay_idle
+  - can_execute_now: false
+  - real_generation_authorized_now: false
+  - allowed_human_options: keep_idle; continue_dry_run; authorize_one_real_generation
+  - required_authorization_phrase_token_count: 18
+  - negative_case_count: 36
+  - caught_negative_case_count: 36
+  - all_negative_cases_caught: true
+  - provider_call_performed: false
+  - image_generation_performed: false
+  - output_directory_created: false
+  - receipt_write_performed: false
+  - registry_write_performed: false
+  - review_console_bridge_materialized: false
+  - VCP_memory_write_performed: false
+  - DailyNote_write_performed: false
+  - runtime_call_performed: false
+  - secret_value_read_performed: false
+  - push_performed_for_current_commit: false
+
+## VALIDATION-20260523-v0.6.15-EXACT-NEW-TRIAL-NOOP-REHEARSAL-HUMAN-APPROVAL-GATE
+
+Task: v0.6.15 exact new-trial no-op rehearsal and human approval gate
+Status: completed_validated
+Commands run:
+  - node --check scripts/validate_exact_new_trial_noop_rehearsal_human_approval_gate.js: passed
+  - node --check scripts/lib/governance_tooling_maintenance_slice.js: passed
+  - node scripts/validate_exact_new_trial_noop_rehearsal_human_approval_gate.js: passed
+  - npm run validate:mvp: first run failed on missing resume-compaction compatibility anchor in roadmap latest section; narrow compatibility anchor added; rerun passed
+Boundary:
+  - current_gate_phase: v0_6_15_exact_new_trial_noop_rehearsal_human_approval_gate
+  - action_packet_id: exact_new_trial_action_packet_v0_1
+  - noop_rehearsal_id: exact_new_trial_noop_rehearsal_v0_1
+  - human_approval_packet_id: exact_new_trial_human_approval_packet_v0_1
+  - runner_mode: no_op_rehearsal_only
+  - noop_execution_completed: true
+  - would_read_count: 3
+  - would_call_count: 1
+  - would_write_count: 4
+  - stop_reason: human_approval_pending_real_generation_not_authorized
+  - allowed_human_options: keep_idle; continue_dry_run; authorize_one_real_generation
+  - selected_option: keep_idle_until_explicit_human_decision
+  - human_approval_status: pending
+  - real_generation_authorized_now: false
+  - can_execute_now: false
+  - negative_case_count: 37
+  - caught_negative_case_count: 37
+  - all_negative_cases_caught: true
+  - provider_call_performed: false
+  - image_generation_performed: false
+  - output_directory_created: false
+  - receipt_write_performed: false
+  - registry_write_performed: false
+  - review_console_bridge_materialized: false
+  - VCP_memory_write_performed: false
+  - DailyNote_write_performed: false
+  - runtime_call_performed: false
+  - secret_value_read_performed: false
+  - push_performed_for_current_commit: false
+
+## VALIDATION-20260523-v0.6.14-EXACT-NEW-TRIAL-ACTION-PACKET-V0-1
+
+Task: v0.6.14 exact new-trial action packet v0.1
+Status: completed_validated
+Commands run:
+  - git diff --check: passed
+  - node --check scripts/validate_exact_new_trial_action_packet_v0_1.js: passed
+  - node --check scripts/lib/governance_tooling_maintenance_slice.js: passed
+  - node scripts/validate_exact_new_trial_action_packet_v0_1.js: passed
+  - node scripts/validate_exact_new_trial_failed_provider_attempt_review.js: passed
+  - npm run validate:mvp: passed
+Boundary:
+  - current_gate_phase: v0_6_14_exact_new_trial_action_packet_v0_1
+  - action_packet_id: exact_new_trial_action_packet_v0_1
+  - packet_status: frozen_not_executable
+  - request_submitted: false
+  - execute_now: false
+  - can_execute_now: false
+  - human_approval_gate_required: true
+  - no_op_runner_required_before_execution: true
+  - future_provider_execution_requires_new_explicit_step: true
+  - provider_call_performed: false
+  - image_generation_performed: false
+  - output_directory_created: false
+  - receipt_write_performed: false
+  - registry_write_performed: false
+  - review_console_bridge_materialized: false
+  - VCP_memory_write_performed: false
+  - DailyNote_write_performed: false
+  - runtime_call_performed: false
+  - secret_value_read_performed: false
+  - push_performed_for_current_commit: false
+
+## VALIDATION-20260523-v0.6.13-FAILED-PROVIDER-ATTEMPT-REVIEW
+
+Task: v0.6.13 failed provider attempt review
+Status: completed_validated
+Commands run:
+  - git diff --check: passed
+  - node --check scripts/validate_exact_new_trial_failed_provider_attempt_review.js: passed
+  - node --check scripts/lib/governance_tooling_maintenance_slice.js: passed
+  - node scripts/validate_exact_new_trial_failed_provider_attempt_review.js: passed
+  - node scripts/validate_exact_new_trial_local_preflight_only_gate.js: passed
+  - npm run validate:mvp: first run failed on missing active Red-decision anchor in new status surface; narrow compatibility anchor added; rerun passed
+Boundary:
+  - current_gate_phase: v0_6_13_failed_provider_attempt_review
+  - failed_attempt_count: 2
+  - first_attempt_failed_no_image: true
+  - retry_001_failed_no_image: true
+  - failure_type: provider_tool_user_error_no_image
+  - route_not_globally_unavailable: true
+  - next_red_decision: freeze_exact_new_trial_action_packet_v0_1
+  - previous_red_decision_satisfied: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+  - provider_call_performed: false
+  - image_generation_performed: false
+  - output_directory_created: false
+  - receipt_write_performed: false
+  - registry_write_performed: false
+  - review_console_bridge_materialized: false
+  - VCP_memory_write_performed: false
+  - DailyNote_write_performed: false
+  - runtime_call_performed: false
+  - secret_value_read_performed: false
+  - push_performed_for_current_commit: false
+
+## VALIDATION-20260523-v0.6.12-LOCAL-PREFLIGHT-ONLY-GATE
+
+Task: v0.6.12 local preflight-only gate
+Status: completed_validated
+Commands run:
+  - git diff --check: passed
+  - node --check scripts/validate_exact_new_trial_local_preflight_only_gate.js: passed
+  - node --check scripts/lib/governance_tooling_maintenance_slice.js: passed
+  - node scripts/validate_exact_new_trial_local_preflight_only_gate.js: passed
+  - npm run validate:mvp: first run failed on missing resume_guard_source_phase in new status surface; narrow fix applied; rerun passed
+Boundary:
+  - current_gate_phase: v0_6_12_local_preflight_only_gate
+  - authorization_status: approved_for_metadata_only_preflight_consumed_by_local_preflight
+  - approval_status: approved_for_preflight_only
+  - preflight_authorization_consumed: true
+  - local_preflight_run_performed: true
+  - request_not_submitted: true
+  - can_execute_now: false
+  - provider_contact_allowed_now: false
+  - image_generation_allowed_now: false
+  - provider_call_performed: false
+  - image_generation_performed: false
+  - output_directory_created: false
+  - receipt_write_performed: false
+  - registry_write_performed: false
+  - review_console_bridge_materialized: false
+  - VCP_memory_write_performed: false
+  - DailyNote_write_performed: false
+  - runtime_call_performed: false
+  - secret_value_read_performed: false
+  - push_performed_for_current_commit: false
+
 ## VALIDATION-20260523-v0.6.11-EXACT-NEW-TRIAL-PREFLIGHT-AUTHORIZATION-GATE
 
 Task: v0.6.11 exact new-trial preflight authorization gate

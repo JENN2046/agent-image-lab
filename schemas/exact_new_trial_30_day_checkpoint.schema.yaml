@@ -1,0 +1,42 @@
+title: Exact New-Trial 30 Day Checkpoint
+type: object
+required:
+  - exact_new_trial_30_day_checkpoint
+properties:
+  exact_new_trial_30_day_checkpoint:
+    type: object
+    required:
+      - checkpoint_id
+      - version
+      - phase
+      - source_refs
+      - readiness_state
+      - executive_decision
+      - frozen_trial_package
+      - risk_list
+      - next_stage_route
+      - boundaries
+      - side_effects
+    properties:
+      checkpoint_id:
+        const: 30_day_exact_new_trial_checkpoint_v0_1
+      version:
+        const: v0_1
+      phase:
+        const: v0_6_17_30_day_exact_new_trial_checkpoint
+      source_refs:
+        type: object
+      readiness_state:
+        type: object
+      executive_decision:
+        type: object
+      frozen_trial_package:
+        type: object
+      risk_list:
+        type: array
+      next_stage_route:
+        type: object
+      boundaries:
+        type: object
+      side_effects:
+        type: object

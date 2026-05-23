@@ -1,0 +1,103 @@
+id: exact_new_trial_local_preflight_only_gate
+version: v0_1
+phase: v0_6_12_local_preflight_only_gate
+type: object
+required:
+  - authorization_package_id
+  - version
+  - phase
+  - source_preflight_authorization_gate_ref
+  - source_request_text_regenerated_ref
+  - source_intake_field_resolution_ref
+  - local_preflight_status
+  - checked_exact_targets
+  - fixed_constraints_confirmation
+  - preflight_assertions
+  - next_route_options
+  - boundaries
+  - side_effects
+properties:
+  local_preflight_status:
+    required:
+      - authorization_status
+      - approval_status
+      - source_preflight_authorization_consumed
+      - consumed_by_phase
+      - local_preflight_run_performed
+      - request_submitted
+      - execute_now
+  checked_exact_targets:
+    required:
+      - prompt_package_ref
+      - output_directory
+      - receipt_path
+      - registry_path
+      - review_console_bridge_ref
+  fixed_constraints_confirmation:
+    required:
+      - provider_target
+      - plugin_id_or_provider_route
+      - model
+      - command
+      - exact_call_count
+      - max_image_candidates
+      - retry_limit
+      - review_required_after_generation
+      - no_memory_write_default
+      - overwrite_existing_files_allowed
+      - secret_value_read_allowed
+  preflight_assertions:
+    required:
+      - prompt_package_ref_exists
+      - all_exact_fields_match_v0_6_8
+      - approval_phrase_matches_v0_6_9
+      - source_authorization_matches_v0_6_11
+      - preflight_authorization_consumed_now
+      - request_not_submitted
+      - can_execute_now
+      - provider_contact_allowed_now
+      - image_generation_allowed_now
+      - future_provider_execution_requires_new_step
+      - future_image_generation_requires_new_step
+  boundaries:
+    required:
+      - metadata_only
+      - local_preflight_only
+      - request_not_submitted
+      - can_execute_now
+      - provider_call_performed
+      - image_generation_performed
+      - output_directory_created
+      - receipt_write_performed
+      - registry_write_performed
+      - review_console_bridge_materialized
+      - VCP_memory_write_performed
+      - DailyNote_write_performed
+      - runtime_call_performed
+      - secret_value_read_performed
+      - production_candidate_created
+      - accepted_sample_auto_promotion
+      - memory_seed_promoted
+      - real_executor_implemented_now
+      - Push_L2_exercised
+      - package_dependency_change_performed
+      - commit_performed
+      - push_performed
+  side_effects:
+    required:
+      - provider_call_performed
+      - image_generation_performed
+      - output_directory_created
+      - receipt_write_performed
+      - registry_write_performed
+      - review_console_bridge_materialized
+      - VCP_memory_write_performed
+      - DailyNote_write_performed
+      - runtime_call_performed
+      - secret_value_read_performed
+      - production_candidate_created
+      - accepted_sample_auto_promotion
+      - memory_seed_promoted
+      - package_dependency_change_performed
+      - commit_performed
+      - push_performed

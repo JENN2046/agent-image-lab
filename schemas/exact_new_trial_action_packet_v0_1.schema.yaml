@@ -1,0 +1,48 @@
+title: Exact New-Trial Action Packet v0.1
+type: object
+required:
+  - exact_new_trial_action_packet_v0_1
+properties:
+  exact_new_trial_action_packet_v0_1:
+    type: object
+    required:
+      - authorization_package_id
+      - action_packet_id
+      - version
+      - phase
+      - source_local_preflight_ref
+      - source_failed_provider_attempt_review_ref
+      - packet_status
+      - frozen_targets
+      - frozen_provider_command
+      - execution_guards
+      - stop_conditions
+      - boundaries
+      - side_effects
+    properties:
+      authorization_package_id:
+        const: AUTH-PENDING-V0-3-3-EXACT-NEW-TRIAL-20260523-001
+      action_packet_id:
+        const: exact_new_trial_action_packet_v0_1
+      version:
+        const: v0_1
+      phase:
+        const: v0_6_14_exact_new_trial_action_packet_v0_1
+      source_local_preflight_ref:
+        type: string
+      source_failed_provider_attempt_review_ref:
+        type: string
+      packet_status:
+        const: frozen_not_executable
+      frozen_targets:
+        type: object
+      frozen_provider_command:
+        type: object
+      execution_guards:
+        type: object
+      stop_conditions:
+        type: array
+      boundaries:
+        type: object
+      side_effects:
+        type: object

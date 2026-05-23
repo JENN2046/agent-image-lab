@@ -1,0 +1,87 @@
+{
+  "receipt_id": "receipt-v0-3-3-exact-new-trial-001",
+  "task_id": "v0_3_3_exact_new_trial_001",
+  "visual_task_id": "v0_3_3_exact_new_trial_001",
+  "lane": "Amber",
+  "envelope_id": "smart_standing_authorization_v3_budgeted_autonomy_envelope",
+  "status": "failed_no_image_generated",
+  "attempted_at_local": "2026-05-23",
+  "owner_authorization_phrase_ref": "authorize_one_real_generation exact package pasted by user in chat",
+  "action_performed": "called_codex_builtin_image_generation_once_with_safe_adult_editorial_portrait_prompt",
+  "target_systems": [
+    "codex_builtin_image_generation"
+  ],
+  "provider_target": "codex_builtin_image_generation",
+  "plugin_id_or_provider_route": "image_gen.imagegen",
+  "model": "managed_by_codex_image_tool",
+  "command": "generate",
+  "prompt_package_ref": "prompts/image_generation/safe_adult_editorial_portrait_v1.yaml",
+  "output_directory": "runs/real_generation/v0_3_3_exact_new_trial_001/",
+  "attempt_result_path": "runs/real_generation/v0_3_3_exact_new_trial_001/generation_attempt_result.json",
+  "output_image_path": null,
+  "output_image_sha256": null,
+  "receipt_path": "reports/provider_receipts/v0_3_3_exact_new_trial_001_receipt.json",
+  "registry_path": "reports/provider_receipts/v0_3_3_exact_new_trial_001_registry.json",
+  "review_console_bridge_ref": "review_console/live_receipt_bridge/v0_3_3_exact_new_trial_001",
+  "calls_used": {
+    "provider_calls": 1,
+    "plugin_calls": 1,
+    "api_calls": 0,
+    "image_candidates_requested": 1,
+    "image_candidates_generated": 0,
+    "retries_used": 0
+  },
+  "budgets": {
+    "max_provider_calls": 1,
+    "max_image_candidates": 1,
+    "retry_limit": 0
+  },
+  "cost": {
+    "tracked": true,
+    "known_exact_amount": false,
+    "amount_charged": null,
+    "currency": "usage_unit_or_lowest_available_quota",
+    "cost_cap_exceeded": false
+  },
+  "files_read": [
+    "prompts/image_generation/safe_adult_editorial_portrait_v1.yaml"
+  ],
+  "files_written": [
+    "runs/real_generation/v0_3_3_exact_new_trial_001/generation_attempt_result.json",
+    "reports/provider_receipts/v0_3_3_exact_new_trial_001_receipt.json",
+    "reports/provider_receipts/v0_3_3_exact_new_trial_001_registry.json",
+    "review_console/live_receipt_bridge/v0_3_3_exact_new_trial_001/bridge_entry.json"
+  ],
+  "failure": {
+    "failure_class": "provider_tool_user_error_no_image",
+    "failure_message_sanitized": "image_gen.imagegen returned UserError and did not provide an image artifact.",
+    "retry_allowed": false,
+    "retry_performed": false
+  },
+  "diagnostic_interpretation": "The exact new-trial provider attempt failed without returning an image. Because retry_limit is 0, no retry was performed and the run stops for human review of the failed attempt.",
+  "validation_run": [
+    "single_generation_execution_preflight_passed_before_call",
+    "target_paths_absent_before_call",
+    "provider_call_budget_consumed_once",
+    "no_retry_performed",
+    "no_image_artifact_created"
+  ],
+  "validation_result": "failed_no_image_generated_recorded",
+  "rollback_or_cleanup_available": true,
+  "rollback_or_cleanup_plan": "Remove the exact new-trial output directory, receipt, registry, and review bridge records if this failed attempt record is rejected before commit.",
+  "next_auto_step_allowed": false,
+  "stop_reason": "single_authorized_generation_attempt_failed_no_retry_allowed",
+  "secret_value_read_performed": false,
+  "raw_private_data_print_performed": false,
+  "raw_provider_payload_capture_performed": false,
+  "raw_provider_response_capture_performed": false,
+  "DailyNote_write_performed": false,
+  "VCP_memory_write_performed": false,
+  "runtime_probe_performed": false,
+  "real_manifest_read_performed": false,
+  "real_vcpchat_read_performed": false,
+  "real_vcptoolbox_read_performed": false,
+  "accepted_sample_auto_promotion": false,
+  "production_candidate_created": false,
+  "push_tag_release_deploy_performed": false
+}

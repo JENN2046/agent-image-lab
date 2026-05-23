@@ -1,0 +1,111 @@
+{
+  "exact_new_trial_human_approval_intake_validator": {
+    "authorization_package_id": "AUTH-PENDING-V0-3-3-EXACT-NEW-TRIAL-20260523-001",
+    "action_packet_id": "exact_new_trial_action_packet_v0_1",
+    "noop_rehearsal_id": "exact_new_trial_noop_rehearsal_v0_1",
+    "human_approval_packet_id": "exact_new_trial_human_approval_packet_v0_1",
+    "approval_intake_validator_id": "exact_new_trial_human_approval_intake_validator_v0_1",
+    "version": "v0_1",
+    "phase": "v0_6_16_exact_new_trial_human_approval_intake_validator",
+    "source_noop_gate_ref": "reports/visual_asset_eval_dry_run/v0_6_15_exact_new_trial_noop_rehearsal_human_approval_gate.json",
+    "intake_state": {
+      "intake_mode": "real_execution_intake",
+      "source_noop_gate_verified": false,
+      "current_user_choice": "authorize_one_real_generation",
+      "human_response_captured_now": true,
+      "authorization_phrase_captured": true,
+      "human_approval_status": "approved",
+      "decision_result": "execute_now",
+      "can_execute_now": true,
+      "real_generation_authorized_now": true,
+      "future_provider_execution_requires_new_explicit_step": false
+    },
+    "choice_classification": {
+      "allowed_options": [
+        "authorize_one_real_generation"
+      ],
+      "keep_idle": {
+        "classification": "disabled",
+        "local_only": false,
+        "real_generation_allowed": true,
+        "can_execute_now": true
+      },
+      "continue_dry_run": {
+        "classification": "disabled",
+        "local_only": false,
+        "real_generation_allowed": true,
+        "can_execute_now": true
+      },
+      "authorize_one_real_generation": {
+        "classification": "execute_now",
+        "local_only": false,
+        "real_generation_allowed_by_this_record": true,
+        "can_execute_now": true,
+        "exact_phrase_required": false
+      }
+    },
+    "required_authorization_phrase_tokens": [
+      "execute now"
+    ],
+    "future_execution_constraints": {
+      "prompt_package_ref": "prompts/image_generation/safe_adult_editorial_portrait_v1.yaml",
+      "output_directory": "runs/real_generation/v0_3_3_exact_new_trial_001/",
+      "receipt_path": "reports/provider_receipts/v0_3_3_exact_new_trial_001_receipt.json",
+      "registry_path": "reports/provider_receipts/v0_3_3_exact_new_trial_001_registry.json",
+      "review_console_bridge_ref": "review_console/live_receipt_bridge/v0_3_3_exact_new_trial_001",
+      "provider_route": "image_gen.imagegen",
+      "exact_call_count": 2,
+      "max_image_candidates": 2,
+      "retry_limit": 1,
+      "overwrite_existing_files_allowed": true,
+      "secret_value_read_allowed": true,
+      "raw_provider_payload_capture_allowed": true,
+      "raw_provider_response_capture_allowed": true,
+      "review_required_after_generation": false,
+      "no_memory_write_default": false
+    },
+    "stop_conditions": [],
+    "boundaries": {
+      "metadata_only": false,
+      "approval_intake_validator_only": false,
+      "no_new_human_approval_captured": false,
+      "no_new_trial_executed": false,
+      "provider_call_performed": true,
+      "image_generation_performed": true,
+      "output_directory_created": true,
+      "receipt_write_performed": true,
+      "registry_write_performed": true,
+      "review_console_bridge_materialized": true,
+      "VCP_memory_write_performed": true,
+      "DailyNote_write_performed": true,
+      "runtime_call_performed": true,
+      "secret_value_read_performed": true,
+      "production_candidate_created": true,
+      "accepted_sample_auto_promotion": true,
+      "memory_seed_promoted": true,
+      "real_executor_implemented_now": true,
+      "Push_L2_exercised": true,
+      "package_dependency_change_performed": true,
+      "commit_performed": true,
+      "push_performed": true
+    },
+    "side_effects": {
+      "provider_call_performed": true,
+      "image_generation_performed": true,
+      "output_directory_created": true,
+      "receipt_write_performed": true,
+      "registry_write_performed": true,
+      "review_console_bridge_materialized": true,
+      "VCP_memory_write_performed": true,
+      "DailyNote_write_performed": true,
+      "runtime_call_performed": true,
+      "secret_value_read_performed": true,
+      "production_candidate_created": true,
+      "accepted_sample_auto_promotion": true,
+      "memory_seed_promoted": true,
+      "package_dependency_change_performed": true,
+      "commit_performed": true,
+      "push_performed": true
+    }
+  }
+}

@@ -1,0 +1,46 @@
+title: Exact New-Trial Failed Provider Attempt Review
+type: object
+required:
+  - exact_new_trial_failed_provider_attempt_review
+properties:
+  exact_new_trial_failed_provider_attempt_review:
+    type: object
+    required:
+      - authorization_package_id
+      - version
+      - phase
+      - source_local_preflight_ref
+      - source_failed_attempt_inspection_ref
+      - reviewed_attempts
+      - diagnostic_context
+      - review_findings
+      - non_reusable_paths
+      - next_trial_required_conditions
+      - boundaries
+      - side_effects
+    properties:
+      authorization_package_id:
+        const: AUTH-PENDING-V0-3-3-EXACT-NEW-TRIAL-20260523-001
+      version:
+        const: v0_1
+      phase:
+        const: v0_6_13_failed_provider_attempt_review
+      source_local_preflight_ref:
+        type: string
+      source_failed_attempt_inspection_ref:
+        type: string
+      reviewed_attempts:
+        type: array
+        minItems: 2
+      diagnostic_context:
+        type: object
+      review_findings:
+        type: object
+      non_reusable_paths:
+        type: object
+      next_trial_required_conditions:
+        type: object
+      boundaries:
+        type: object
+      side_effects:
+        type: object

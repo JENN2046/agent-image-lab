@@ -910,6 +910,194 @@ const EXPECTED_V0_6_11_POST_PULL_CLEANUP_SLICE = [
   "scripts/validate_mvp.ps1"
 ].sort();
 
+const EXPECTED_V0_6_12_LOCAL_PREFLIGHT_ONLY_GATE_SLICE = [
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  ".agent_board/VALIDATION_LOG.md",
+  "docs/00_project_roadmap.md",
+  "docs/V0_6_12_LOCAL_PREFLIGHT_ONLY_GATE.md",
+  "reports/visual_asset_eval_dry_run/v0_6_12_local_preflight_only_gate.json",
+  "schemas/exact_new_trial_local_preflight_only_gate.schema.yaml",
+  "scripts/lib/governance_tooling_maintenance_slice.js",
+  "scripts/validate_exact_new_trial_local_preflight_only_gate.js",
+  "scripts/validate_mvp.ps1",
+  "tests/schema_examples/exact_new_trial_local_preflight_only_gate.example.json",
+  "tests/schema_examples/exact_new_trial_local_preflight_only_gate_fail.example.json"
+].sort();
+
+const EXPECTED_V0_6_13_FAILED_PROVIDER_ATTEMPT_REVIEW_SLICE = [
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  ".agent_board/VALIDATION_LOG.md",
+  "docs/00_project_roadmap.md",
+  "docs/V0_6_13_FAILED_PROVIDER_ATTEMPT_REVIEW.md",
+  "reports/visual_asset_eval_dry_run/v0_6_13_failed_provider_attempt_review.json",
+  "schemas/exact_new_trial_failed_provider_attempt_review.schema.yaml",
+  "scripts/lib/governance_tooling_maintenance_slice.js",
+  "scripts/validate_exact_new_trial_failed_provider_attempt_review.js",
+  "scripts/validate_mvp.ps1",
+  "tests/schema_examples/exact_new_trial_failed_provider_attempt_review.example.json",
+  "tests/schema_examples/exact_new_trial_failed_provider_attempt_review_fail.example.json"
+].sort();
+
+const EXPECTED_V0_6_12_AND_V0_6_13_WEEK1_PREFLIGHT_AND_FAILED_REVIEW_SLICE = Array.from(new Set([
+  ...EXPECTED_V0_6_12_LOCAL_PREFLIGHT_ONLY_GATE_SLICE,
+  ...EXPECTED_V0_6_13_FAILED_PROVIDER_ATTEMPT_REVIEW_SLICE
+])).sort();
+
+const EXPECTED_V0_6_14_EXACT_NEW_TRIAL_ACTION_PACKET_V0_1_SLICE = [
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  ".agent_board/VALIDATION_LOG.md",
+  "docs/00_project_roadmap.md",
+  "docs/V0_6_14_EXACT_NEW_TRIAL_ACTION_PACKET_V0_1.md",
+  "reports/visual_asset_eval_dry_run/v0_6_14_exact_new_trial_action_packet_v0_1.json",
+  "schemas/exact_new_trial_action_packet_v0_1.schema.yaml",
+  "scripts/lib/governance_tooling_maintenance_slice.js",
+  "scripts/validate_exact_new_trial_action_packet_v0_1.js",
+  "scripts/validate_mvp.ps1",
+  "tests/schema_examples/exact_new_trial_action_packet_v0_1.example.json",
+  "tests/schema_examples/exact_new_trial_action_packet_v0_1_fail.example.json"
+].sort();
+
+const EXPECTED_V0_6_15_EXACT_NEW_TRIAL_NOOP_REHEARSAL_HUMAN_APPROVAL_GATE_SLICE = [
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  ".agent_board/VALIDATION_LOG.md",
+  "docs/00_project_roadmap.md",
+  "docs/V0_6_15_EXACT_NEW_TRIAL_NOOP_REHEARSAL_HUMAN_APPROVAL_GATE.md",
+  "reports/visual_asset_eval_dry_run/v0_6_15_exact_new_trial_noop_rehearsal_human_approval_gate.json",
+  "schemas/exact_new_trial_noop_rehearsal_human_approval_gate.schema.yaml",
+  "scripts/lib/governance_tooling_maintenance_slice.js",
+  "scripts/validate_exact_new_trial_noop_rehearsal_human_approval_gate.js",
+  "scripts/validate_mvp.ps1",
+  "tests/schema_examples/exact_new_trial_noop_rehearsal_human_approval_gate.example.json",
+  "tests/schema_examples/exact_new_trial_noop_rehearsal_human_approval_gate_fail.example.json"
+].sort();
+
+const EXPECTED_V0_6_16_EXACT_NEW_TRIAL_HUMAN_APPROVAL_INTAKE_VALIDATOR_SLICE = [
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  ".agent_board/VALIDATION_LOG.md",
+  "docs/00_project_roadmap.md",
+  "docs/V0_6_16_EXACT_NEW_TRIAL_HUMAN_APPROVAL_INTAKE_VALIDATOR.md",
+  "reports/visual_asset_eval_dry_run/v0_6_16_exact_new_trial_human_approval_intake_validator.json",
+  "schemas/exact_new_trial_human_approval_intake_validator.schema.yaml",
+  "scripts/lib/governance_tooling_maintenance_slice.js",
+  "scripts/validate_exact_new_trial_human_approval_intake_validator.js",
+  "scripts/validate_mvp.ps1",
+  "tests/schema_examples/exact_new_trial_human_approval_intake_validator.example.json",
+  "tests/schema_examples/exact_new_trial_human_approval_intake_validator_fail.example.json"
+].sort();
+
+const EXPECTED_V0_6_17_30_DAY_EXACT_NEW_TRIAL_CHECKPOINT_SLICE = [
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  ".agent_board/VALIDATION_LOG.md",
+  "30_DAY_EXACT_NEW_TRIAL_CHECKPOINT.md",
+  "docs/00_project_roadmap.md",
+  "reports/visual_asset_eval_dry_run/v0_6_17_30_day_exact_new_trial_checkpoint.json",
+  "schemas/exact_new_trial_30_day_checkpoint.schema.yaml",
+  "scripts/lib/governance_tooling_maintenance_slice.js",
+  "scripts/validate_exact_new_trial_30_day_checkpoint.js",
+  "scripts/validate_local_commit_scope.js",
+  "scripts/validate_mvp.ps1",
+  "tests/schema_examples/exact_new_trial_30_day_checkpoint.example.json",
+  "tests/schema_examples/exact_new_trial_30_day_checkpoint_fail.example.json"
+].sort();
+
+const EXPECTED_V0_6_18_SINGLE_GENERATION_EXECUTION_PREFLIGHT_SLICE = [
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  ".agent_board/VALIDATION_LOG.md",
+  "docs/00_project_roadmap.md",
+  "docs/V0_6_18_SINGLE_GENERATION_EXECUTION_PREFLIGHT.md",
+  "reports/provider_receipts/v0_3_3_exact_new_trial_001_receipt.json",
+  "reports/provider_receipts/v0_3_3_exact_new_trial_001_registry.json",
+  "reports/visual_asset_eval_dry_run/v0_6_18_single_generation_execution_preflight.json",
+  "review_console/live_receipt_bridge/v0_3_3_exact_new_trial_001/bridge_entry.json",
+  "runs/real_generation/v0_3_3_exact_new_trial_001/generation_attempt_result.json",
+  "schemas/exact_new_trial_single_generation_execution_preflight.schema.yaml",
+  "scripts/lib/governance_tooling_maintenance_slice.js",
+  "scripts/validate_controlled_visual_production_loop_checkpoint_readiness.js",
+  "scripts/validate_controlled_visual_production_loop_exact_file_commit_readiness_review.js",
+  "scripts/validate_exact_new_trial_single_generation_execution_preflight.js",
+  "scripts/validate_mvp.ps1",
+  "tests/schema_examples/exact_new_trial_single_generation_execution_preflight.example.json",
+  "tests/schema_examples/exact_new_trial_single_generation_execution_preflight_fail.example.json"
+].sort();
+
+const EXPECTED_V0_6_12_TO_V0_6_14_EXACT_NEW_TRIAL_PREP_SLICE = Array.from(new Set([
+  ...EXPECTED_V0_6_12_LOCAL_PREFLIGHT_ONLY_GATE_SLICE,
+  ...EXPECTED_V0_6_13_FAILED_PROVIDER_ATTEMPT_REVIEW_SLICE,
+  ...EXPECTED_V0_6_14_EXACT_NEW_TRIAL_ACTION_PACKET_V0_1_SLICE
+])).sort();
+
+const EXPECTED_V0_6_12_TO_V0_6_15_EXACT_NEW_TRIAL_PREPARATION_LOOP_SLICE = Array.from(new Set([
+  ...EXPECTED_V0_6_12_TO_V0_6_14_EXACT_NEW_TRIAL_PREP_SLICE,
+  ...EXPECTED_V0_6_15_EXACT_NEW_TRIAL_NOOP_REHEARSAL_HUMAN_APPROVAL_GATE_SLICE
+])).sort();
+
+const EXPECTED_V0_6_12_TO_V0_6_16_EXACT_NEW_TRIAL_AUDITABLE_PREPARATION_LOOP_SLICE = Array.from(new Set([
+  ...EXPECTED_V0_6_12_TO_V0_6_15_EXACT_NEW_TRIAL_PREPARATION_LOOP_SLICE,
+  ...EXPECTED_V0_6_16_EXACT_NEW_TRIAL_HUMAN_APPROVAL_INTAKE_VALIDATOR_SLICE
+])).sort();
+
+const EXPECTED_V0_6_12_TO_V0_6_17_EXACT_NEW_TRIAL_30_DAY_CLOSED_LOOP_SLICE = Array.from(new Set([
+  ...EXPECTED_V0_6_12_TO_V0_6_16_EXACT_NEW_TRIAL_AUDITABLE_PREPARATION_LOOP_SLICE,
+  ...EXPECTED_V0_6_17_30_DAY_EXACT_NEW_TRIAL_CHECKPOINT_SLICE
+])).sort();
+
+const EXPECTED_V0_6_12_TO_V0_6_18_EXACT_NEW_TRIAL_EXECUTION_PREFLIGHT_SLICE = Array.from(new Set([
+  ...EXPECTED_V0_6_12_TO_V0_6_17_EXACT_NEW_TRIAL_30_DAY_CLOSED_LOOP_SLICE,
+  ...EXPECTED_V0_6_18_SINGLE_GENERATION_EXECUTION_PREFLIGHT_SLICE
+])).sort();
+
+const EXPECTED_V0_6_12_TO_V0_6_20_FAILED_NO_IMAGE_POST_RUN_REVIEW_SLICE = Array.from(new Set([
+  ...EXPECTED_V0_6_12_TO_V0_6_18_EXACT_NEW_TRIAL_EXECUTION_PREFLIGHT_SLICE,
+  "docs/V0_6_20_FAILED_NO_IMAGE_GENERATED_POST_RUN_REVIEW.md",
+  "reports/visual_asset_eval_dry_run/v0_6_20_failed_no_image_generated_post_run_review.json"
+])).sort();
+
+const EXPECTED_V0_6_12_TO_V0_6_21_RAW_PROVIDER_PAYLOAD_CAPTURE_POLICY_SLICE = Array.from(new Set([
+  ...EXPECTED_V0_6_12_TO_V0_6_20_FAILED_NO_IMAGE_POST_RUN_REVIEW_SLICE,
+  "docs/V0_6_21_RAW_PROVIDER_PAYLOAD_CAPTURE_STANDING_DIAGNOSTIC_POLICY.md",
+  "reports/visual_asset_eval_dry_run/v0_6_21_raw_provider_payload_capture_standing_diagnostic_policy.json"
+])).sort();
+
+const EXPECTED_V0_6_12_TO_V0_6_22_PROVIDER_PAYLOAD_EXTRACTION_PREFLIGHT_SLICE = Array.from(new Set([
+  ...EXPECTED_V0_6_12_TO_V0_6_21_RAW_PROVIDER_PAYLOAD_CAPTURE_POLICY_SLICE,
+  "docs/V0_6_22_PROVIDER_PAYLOAD_EXTRACTION_PREFLIGHT.md",
+  "reports/provider_payload_captures/v0_3_3_exact_new_trial_001_request_payload.sanitized.json",
+  "reports/visual_asset_eval_dry_run/v0_6_22_provider_payload_extraction_preflight.json",
+  "scripts/create_provider_payload_capture_preflight.js",
+  "scripts/validate_provider_payload_capture_preflight.js"
+])).sort();
+
+const EXPECTED_V0_6_12_TO_V0_6_23_SINGLE_GENERATION_WITH_PAYLOAD_TRACE_SLICE = Array.from(new Set([
+  ...EXPECTED_V0_6_12_TO_V0_6_22_PROVIDER_PAYLOAD_EXTRACTION_PREFLIGHT_SLICE,
+  "reports/provider_payload_captures/v0_3_3_exact_new_trial_002_request_payload.sanitized.json",
+  "reports/provider_receipts/v0_3_3_exact_new_trial_002_receipt.json",
+  "reports/provider_receipts/v0_3_3_exact_new_trial_002_registry.json",
+  "reports/visual_asset_eval_dry_run/v0_6_23_single_generation_with_payload_capture_and_artifact_trace.json",
+  "review_console/live_receipt_bridge/v0_3_3_exact_new_trial_002/bridge_entry.json",
+  "runs/real_generation/v0_3_3_exact_new_trial_002/generation_attempt_result.json"
+])).sort();
+
 const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "governance_tooling_maintenance_slice_v1",
@@ -1110,6 +1298,74 @@ const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "v0_6_11_post_pull_cleanup_slice",
     files: EXPECTED_V0_6_11_POST_PULL_CLEANUP_SLICE
+  },
+  {
+    id: "v0_6_12_local_preflight_only_gate_slice",
+    files: EXPECTED_V0_6_12_LOCAL_PREFLIGHT_ONLY_GATE_SLICE
+  },
+  {
+    id: "v0_6_13_failed_provider_attempt_review_slice",
+    files: EXPECTED_V0_6_13_FAILED_PROVIDER_ATTEMPT_REVIEW_SLICE
+  },
+  {
+    id: "v0_6_12_and_v0_6_13_week1_preflight_and_failed_review_slice",
+    files: EXPECTED_V0_6_12_AND_V0_6_13_WEEK1_PREFLIGHT_AND_FAILED_REVIEW_SLICE
+  },
+  {
+    id: "v0_6_14_exact_new_trial_action_packet_v0_1_slice",
+    files: EXPECTED_V0_6_14_EXACT_NEW_TRIAL_ACTION_PACKET_V0_1_SLICE
+  },
+  {
+    id: "v0_6_15_exact_new_trial_noop_rehearsal_human_approval_gate_slice",
+    files: EXPECTED_V0_6_15_EXACT_NEW_TRIAL_NOOP_REHEARSAL_HUMAN_APPROVAL_GATE_SLICE
+  },
+  {
+    id: "v0_6_16_exact_new_trial_human_approval_intake_validator_slice",
+    files: EXPECTED_V0_6_16_EXACT_NEW_TRIAL_HUMAN_APPROVAL_INTAKE_VALIDATOR_SLICE
+  },
+  {
+    id: "v0_6_17_30_day_exact_new_trial_checkpoint_slice",
+    files: EXPECTED_V0_6_17_30_DAY_EXACT_NEW_TRIAL_CHECKPOINT_SLICE
+  },
+  {
+    id: "v0_6_18_single_generation_execution_preflight_slice",
+    files: EXPECTED_V0_6_18_SINGLE_GENERATION_EXECUTION_PREFLIGHT_SLICE
+  },
+  {
+    id: "v0_6_12_to_v0_6_14_exact_new_trial_prep_slice",
+    files: EXPECTED_V0_6_12_TO_V0_6_14_EXACT_NEW_TRIAL_PREP_SLICE
+  },
+  {
+    id: "v0_6_12_to_v0_6_15_exact_new_trial_preparation_loop_slice",
+    files: EXPECTED_V0_6_12_TO_V0_6_15_EXACT_NEW_TRIAL_PREPARATION_LOOP_SLICE
+  },
+  {
+    id: "v0_6_12_to_v0_6_16_exact_new_trial_auditable_preparation_loop_slice",
+    files: EXPECTED_V0_6_12_TO_V0_6_16_EXACT_NEW_TRIAL_AUDITABLE_PREPARATION_LOOP_SLICE
+  },
+  {
+    id: "v0_6_12_to_v0_6_17_exact_new_trial_30_day_closed_loop_slice",
+    files: EXPECTED_V0_6_12_TO_V0_6_17_EXACT_NEW_TRIAL_30_DAY_CLOSED_LOOP_SLICE
+  },
+  {
+    id: "v0_6_12_to_v0_6_18_exact_new_trial_execution_preflight_slice",
+    files: EXPECTED_V0_6_12_TO_V0_6_18_EXACT_NEW_TRIAL_EXECUTION_PREFLIGHT_SLICE
+  },
+  {
+    id: "v0_6_12_to_v0_6_20_failed_no_image_post_run_review_slice",
+    files: EXPECTED_V0_6_12_TO_V0_6_20_FAILED_NO_IMAGE_POST_RUN_REVIEW_SLICE
+  },
+  {
+    id: "v0_6_12_to_v0_6_21_raw_provider_payload_capture_policy_slice",
+    files: EXPECTED_V0_6_12_TO_V0_6_21_RAW_PROVIDER_PAYLOAD_CAPTURE_POLICY_SLICE
+  },
+  {
+    id: "v0_6_12_to_v0_6_22_provider_payload_extraction_preflight_slice",
+    files: EXPECTED_V0_6_12_TO_V0_6_22_PROVIDER_PAYLOAD_EXTRACTION_PREFLIGHT_SLICE
+  },
+  {
+    id: "v0_6_12_to_v0_6_23_single_generation_with_payload_trace_slice",
+    files: EXPECTED_V0_6_12_TO_V0_6_23_SINGLE_GENERATION_WITH_PAYLOAD_TRACE_SLICE
   }
 ];
 
@@ -1434,6 +1690,91 @@ function governanceToolingMaintenanceSliceSelfCheck() {
         === "v0_6_11_post_pull_cleanup_slice"
     },
     {
+      check: "exact_slice_matches_v0_6_12_local_preflight_only_gate",
+      passed: findMatchingGovernanceToolingSlice(EXPECTED_V0_6_12_LOCAL_PREFLIGHT_ONLY_GATE_SLICE)?.id
+        === "v0_6_12_local_preflight_only_gate_slice"
+    },
+    {
+      check: "exact_slice_matches_v0_6_13_failed_provider_attempt_review",
+      passed: findMatchingGovernanceToolingSlice(EXPECTED_V0_6_13_FAILED_PROVIDER_ATTEMPT_REVIEW_SLICE)?.id
+        === "v0_6_13_failed_provider_attempt_review_slice"
+    },
+    {
+      check: "exact_slice_matches_v0_6_12_and_v0_6_13_week1_preflight_and_failed_review",
+      passed: findMatchingGovernanceToolingSlice(EXPECTED_V0_6_12_AND_V0_6_13_WEEK1_PREFLIGHT_AND_FAILED_REVIEW_SLICE)?.id
+        === "v0_6_12_and_v0_6_13_week1_preflight_and_failed_review_slice"
+    },
+    {
+      check: "exact_slice_matches_v0_6_14_exact_new_trial_action_packet_v0_1",
+      passed: findMatchingGovernanceToolingSlice(EXPECTED_V0_6_14_EXACT_NEW_TRIAL_ACTION_PACKET_V0_1_SLICE)?.id
+        === "v0_6_14_exact_new_trial_action_packet_v0_1_slice"
+    },
+    {
+      check: "exact_slice_matches_v0_6_15_exact_new_trial_noop_rehearsal_human_approval_gate",
+      passed: findMatchingGovernanceToolingSlice(EXPECTED_V0_6_15_EXACT_NEW_TRIAL_NOOP_REHEARSAL_HUMAN_APPROVAL_GATE_SLICE)?.id
+        === "v0_6_15_exact_new_trial_noop_rehearsal_human_approval_gate_slice"
+    },
+    {
+      check: "exact_slice_matches_v0_6_16_exact_new_trial_human_approval_intake_validator",
+      passed: findMatchingGovernanceToolingSlice(EXPECTED_V0_6_16_EXACT_NEW_TRIAL_HUMAN_APPROVAL_INTAKE_VALIDATOR_SLICE)?.id
+        === "v0_6_16_exact_new_trial_human_approval_intake_validator_slice"
+    },
+    {
+      check: "exact_slice_matches_v0_6_17_30_day_exact_new_trial_checkpoint",
+      passed: findMatchingGovernanceToolingSlice(EXPECTED_V0_6_17_30_DAY_EXACT_NEW_TRIAL_CHECKPOINT_SLICE)?.id
+        === "v0_6_17_30_day_exact_new_trial_checkpoint_slice"
+    },
+    {
+      check: "exact_slice_matches_v0_6_18_single_generation_execution_preflight",
+      passed: findMatchingGovernanceToolingSlice(EXPECTED_V0_6_18_SINGLE_GENERATION_EXECUTION_PREFLIGHT_SLICE)?.id
+        === "v0_6_18_single_generation_execution_preflight_slice"
+    },
+    {
+      check: "exact_slice_matches_v0_6_12_to_v0_6_14_exact_new_trial_prep",
+      passed: findMatchingGovernanceToolingSlice(EXPECTED_V0_6_12_TO_V0_6_14_EXACT_NEW_TRIAL_PREP_SLICE)?.id
+        === "v0_6_12_to_v0_6_14_exact_new_trial_prep_slice"
+    },
+    {
+      check: "exact_slice_matches_v0_6_12_to_v0_6_15_exact_new_trial_preparation_loop",
+      passed: findMatchingGovernanceToolingSlice(EXPECTED_V0_6_12_TO_V0_6_15_EXACT_NEW_TRIAL_PREPARATION_LOOP_SLICE)?.id
+        === "v0_6_12_to_v0_6_15_exact_new_trial_preparation_loop_slice"
+    },
+    {
+      check: "exact_slice_matches_v0_6_12_to_v0_6_16_exact_new_trial_auditable_preparation_loop",
+      passed: findMatchingGovernanceToolingSlice(EXPECTED_V0_6_12_TO_V0_6_16_EXACT_NEW_TRIAL_AUDITABLE_PREPARATION_LOOP_SLICE)?.id
+        === "v0_6_12_to_v0_6_16_exact_new_trial_auditable_preparation_loop_slice"
+    },
+    {
+      check: "exact_slice_matches_v0_6_12_to_v0_6_17_exact_new_trial_30_day_closed_loop",
+      passed: findMatchingGovernanceToolingSlice(EXPECTED_V0_6_12_TO_V0_6_17_EXACT_NEW_TRIAL_30_DAY_CLOSED_LOOP_SLICE)?.id
+        === "v0_6_12_to_v0_6_17_exact_new_trial_30_day_closed_loop_slice"
+    },
+    {
+      check: "exact_slice_matches_v0_6_12_to_v0_6_18_exact_new_trial_execution_preflight",
+      passed: findMatchingGovernanceToolingSlice(EXPECTED_V0_6_12_TO_V0_6_18_EXACT_NEW_TRIAL_EXECUTION_PREFLIGHT_SLICE)?.id
+        === "v0_6_12_to_v0_6_18_exact_new_trial_execution_preflight_slice"
+    },
+    {
+      check: "exact_slice_matches_v0_6_12_to_v0_6_20_failed_no_image_post_run_review",
+      passed: findMatchingGovernanceToolingSlice(EXPECTED_V0_6_12_TO_V0_6_20_FAILED_NO_IMAGE_POST_RUN_REVIEW_SLICE)?.id
+        === "v0_6_12_to_v0_6_20_failed_no_image_post_run_review_slice"
+    },
+    {
+      check: "exact_slice_matches_v0_6_12_to_v0_6_21_raw_provider_payload_capture_policy",
+      passed: findMatchingGovernanceToolingSlice(EXPECTED_V0_6_12_TO_V0_6_21_RAW_PROVIDER_PAYLOAD_CAPTURE_POLICY_SLICE)?.id
+        === "v0_6_12_to_v0_6_21_raw_provider_payload_capture_policy_slice"
+    },
+    {
+      check: "exact_slice_matches_v0_6_12_to_v0_6_22_provider_payload_extraction_preflight",
+      passed: findMatchingGovernanceToolingSlice(EXPECTED_V0_6_12_TO_V0_6_22_PROVIDER_PAYLOAD_EXTRACTION_PREFLIGHT_SLICE)?.id
+        === "v0_6_12_to_v0_6_22_provider_payload_extraction_preflight_slice"
+    },
+    {
+      check: "exact_slice_matches_v0_6_12_to_v0_6_23_single_generation_with_payload_trace",
+      passed: findMatchingGovernanceToolingSlice(EXPECTED_V0_6_12_TO_V0_6_23_SINGLE_GENERATION_WITH_PAYLOAD_TRACE_SLICE)?.id
+        === "v0_6_12_to_v0_6_23_single_generation_with_payload_trace_slice"
+    },
+    {
       check: "exact_slice_rejects_missing_file",
       passed: findMatchingGovernanceToolingSlice(EXPECTED_GOVERNANCE_TOOLING_MAINTENANCE_SLICE.slice(1)) === null
     },
@@ -1509,6 +1850,23 @@ module.exports = {
   EXPECTED_V0_6_10_EXACT_NEW_TRIAL_HUMAN_DECISION_PREVIEW_GATE_SLICE,
   EXPECTED_V0_6_11_EXACT_NEW_TRIAL_PREFLIGHT_AUTHORIZATION_GATE_SLICE,
   EXPECTED_V0_6_11_POST_PULL_CLEANUP_SLICE,
+  EXPECTED_V0_6_12_LOCAL_PREFLIGHT_ONLY_GATE_SLICE,
+  EXPECTED_V0_6_13_FAILED_PROVIDER_ATTEMPT_REVIEW_SLICE,
+  EXPECTED_V0_6_12_AND_V0_6_13_WEEK1_PREFLIGHT_AND_FAILED_REVIEW_SLICE,
+  EXPECTED_V0_6_14_EXACT_NEW_TRIAL_ACTION_PACKET_V0_1_SLICE,
+  EXPECTED_V0_6_12_TO_V0_6_14_EXACT_NEW_TRIAL_PREP_SLICE,
+  EXPECTED_V0_6_15_EXACT_NEW_TRIAL_NOOP_REHEARSAL_HUMAN_APPROVAL_GATE_SLICE,
+  EXPECTED_V0_6_12_TO_V0_6_15_EXACT_NEW_TRIAL_PREPARATION_LOOP_SLICE,
+  EXPECTED_V0_6_16_EXACT_NEW_TRIAL_HUMAN_APPROVAL_INTAKE_VALIDATOR_SLICE,
+  EXPECTED_V0_6_12_TO_V0_6_16_EXACT_NEW_TRIAL_AUDITABLE_PREPARATION_LOOP_SLICE,
+  EXPECTED_V0_6_17_30_DAY_EXACT_NEW_TRIAL_CHECKPOINT_SLICE,
+  EXPECTED_V0_6_12_TO_V0_6_17_EXACT_NEW_TRIAL_30_DAY_CLOSED_LOOP_SLICE,
+  EXPECTED_V0_6_18_SINGLE_GENERATION_EXECUTION_PREFLIGHT_SLICE,
+  EXPECTED_V0_6_12_TO_V0_6_18_EXACT_NEW_TRIAL_EXECUTION_PREFLIGHT_SLICE,
+  EXPECTED_V0_6_12_TO_V0_6_20_FAILED_NO_IMAGE_POST_RUN_REVIEW_SLICE,
+  EXPECTED_V0_6_12_TO_V0_6_21_RAW_PROVIDER_PAYLOAD_CAPTURE_POLICY_SLICE,
+  EXPECTED_V0_6_12_TO_V0_6_22_PROVIDER_PAYLOAD_EXTRACTION_PREFLIGHT_SLICE,
+  EXPECTED_V0_6_12_TO_V0_6_23_SINGLE_GENERATION_WITH_PAYLOAD_TRACE_SLICE,
   GOVERNANCE_TOOLING_ALLOWED_SLICES,
   buildGovernanceToolingMaintenanceSliceReport,
   fileAllowedInGovernanceToolingSlice,

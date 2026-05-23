@@ -1,5 +1,649 @@
 ---
 
+## Checkpoint - v0.6.23 Single Generation With Payload Capture
+
+```text
+phase: v0_6_23_single_generation_with_payload_capture_and_artifact_trace
+status: succeeded_image_generated_review_required
+mode: Amber one-call provider/image attempt with request payload capture and artifact-return trace
+attempt_id: v0_3_3_exact_new_trial_002
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+resume_compaction_compatibility_anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+completed:
+- captured sanitized provider request payload before call
+- called image_gen.imagegen exactly once
+- copied returned image artifact into project run directory
+- updated attempt result, receipt, registry, and review bridge
+provider_calls_used: 1
+image_candidates_generated: 1
+additional_image_generation_performed: false
+retry_limit: 0
+retries_used: 0
+raw_provider_payload_capture_performed: true
+raw_provider_response_capture_performed: false
+secret_value_read_performed: false
+VCP_memory_write_performed: false
+DailyNote_write_performed: false
+accepted_sample_auto_promotion: false
+production_candidate_created: false
+commit_performed: false
+push_status: not_performed
+next: human_review_generated_asset_before_any_promotion_or_memory_write
+```
+
+## Checkpoint - v0.6.22 Provider Payload Extraction Preflight
+
+```text
+phase: v0_6_22_provider_payload_extraction_preflight
+status: completed_validated_local_payload_preflight
+mode: Green Lane local diagnostic capability
+source_phase: v0_6_21_raw_provider_payload_capture_standing_diagnostic_policy
+current_gate_phase: v0_6_22_provider_payload_extraction_preflight
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+resume_compaction_compatibility_anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+next_red_decision: new_exact_authorization_required_before_any_future_real_generation_attempt
+completed:
+- created payload extraction preflight script
+- created payload capture validator
+- materialized sanitized final request payload capture
+- recorded failure localization axes
+- synced roadmap and .agent_board resume surfaces
+payload_capture_ref: reports/provider_payload_captures/v0_3_3_exact_new_trial_001_request_payload.sanitized.json
+prompt_extraction_contamination_ruled_out: true
+provider_call_performed: false
+image_generation_performed: false
+raw_provider_payload_capture_performed: true
+raw_provider_response_capture_performed: false
+secret_value_read_performed: false
+VCP_memory_write_performed: false
+DailyNote_write_performed: false
+accepted_sample_auto_promotion: false
+production_candidate_created: false
+commit_performed: false
+push_allowed: false
+push_performed: false
+next: run_next_authorized_single_generation_with_payload_capture_and_artifact_return_trace
+```
+
+## Checkpoint - v0.6.21 Raw Provider Payload Capture Standing Diagnostic Policy
+
+```text
+phase: v0_6_21_raw_provider_payload_capture_standing_diagnostic_policy
+status: completed_validated_local_policy_update
+mode: Amber-adjacent local diagnostic policy update
+source_phase: v0_6_20_failed_no_image_generated_post_run_review
+current_gate_phase: v0_6_21_raw_provider_payload_capture_standing_diagnostic_policy
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+resume_compaction_compatibility_anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+next_red_decision: provider_payload_extraction_preflight_before_any_future_generation_call
+completed:
+- recorded standing request payload capture policy
+- kept raw provider response capture forbidden
+- kept secret, memory, DailyNote, promotion, commit, and push boundaries blocked
+- synced roadmap and .agent_board resume surfaces
+authorization_state: active_until_generation_route_stable_or_revoked
+raw_provider_payload_capture_allowed: true
+sanitized_request_payload_capture_required: true
+raw_provider_response_capture_allowed: false
+secret_value_read_allowed: false
+secret_value_read_performed: false
+provider_call_performed: false
+image_generation_performed: false
+retry_performed: false
+VCP_memory_write_performed: false
+DailyNote_write_performed: false
+accepted_sample_auto_promotion: false
+production_candidate_created: false
+commit_performed: false
+push_allowed: false
+push_performed: false
+next: create_no_provider_call_payload_extraction_preflight_for_safe_adult_editorial_portrait_v1
+```
+
+## Checkpoint - v0.6.20 Failed No-Image Generated Post-Run Review
+
+```text
+phase: v0_6_20_failed_no_image_generated_post_run_review
+status: completed_validated_local_post_run_review
+mode: Green Lane local post-run review/status sync
+source_phase: v0_6_19_exact_new_trial_single_generation_attempt
+current_gate_phase: v0_6_20_failed_no_image_generated_post_run_review
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+resume_compaction_compatibility_anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+next_red_decision: new_exact_authorization_required_before_any_future_real_generation_attempt
+completed:
+- reviewed v0.6.19 failed no-image attempt result, receipt, registry, and bridge
+- recorded v0.6.18 as historical preflight state
+- recorded that the consumed v0.6.19 authorization cannot be reused
+- synced roadmap and .agent_board resume surfaces
+attempt_status_reviewed: failed_no_image_generated
+records_internally_consistent: true
+preflight_record_consumed: true
+preflight_record_is_historical: true
+provider_call_performed: false
+image_generation_performed: false
+retry_performed: false
+VCP_memory_write_performed: false
+DailyNote_write_performed: false
+secret_value_read_performed: false
+accepted_sample_auto_promotion: false
+production_candidate_created: false
+commit_performed: false
+push_allowed: false
+push_performed: false
+next: stop_real_generation_or_prepare_new_exact_authorization_package_with_fresh_paths
+```
+
+## Checkpoint - v0.6.19 Exact New-Trial Single Generation Attempt
+
+```text
+phase: v0_6_19_exact_new_trial_single_generation_attempt
+status: completed_recorded_failed_no_image_generated
+mode: Amber one-call provider/image attempt under exact user authorization
+source_phase: v0_6_18_single_generation_execution_preflight
+current_gate_phase: v0_6_19_exact_new_trial_single_generation_attempt
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+resume_compaction_compatibility_anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+next_red_decision: review_failed_no_image_attempt_before_any_new_authorization
+completed:
+- reran single generation execution preflight
+- consumed exactly one provider/image call
+- recorded failed no-image attempt result
+- recorded provider receipt and registry
+- materialized review bridge entry for failed no-image state
+provider_call_performed: true
+provider_calls_used: 1
+image_generation_performed: false
+image_candidates_generated: 0
+retry_limit: 0
+retries_used: 0
+failure_class: provider_tool_user_error_no_image
+VCP_memory_write_performed: false
+DailyNote_write_performed: false
+secret_value_read_performed: false
+accepted_sample_auto_promotion: false
+production_candidate_created: false
+commit_performed: false
+push_allowed: false
+push_performed: false
+next: review_failed_no_image_attempt_and_decide_whether_to_stop_or_create_new_authorization
+```
+
+## Checkpoint - v0.6.18 Single Generation Execution Preflight
+
+```text
+phase: v0_6_18_single_generation_execution_preflight
+phase_id: v0_6_18_single_generation_execution_preflight
+status: completed_validated_local_execution_preflight
+mode: Green Lane doc/schema/report/fixture/validator/status compact batch
+source_phase: v0_6_17_30_day_exact_new_trial_checkpoint
+current_gate_phase: v0_6_18_single_generation_execution_preflight
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+previous_red_decision_satisfied: prepare_single_generation_execution_preflight_without_provider_call
+resume_compaction_compatibility_anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+next_red_decision: wait_for_exact_authorize_one_real_generation
+completed:
+- created single generation execution preflight doc
+- created execution preflight schema
+- created execution preflight report and fixtures
+- created execution preflight validator
+- wired validator into MVP validation and governance slices
+- synced roadmap and .agent_board resume surfaces
+readiness_state: preflight_ready_waiting_for_exact_execution_authorization
+execution_preflight_ready: true
+exact_real_generation_authorization_captured: false
+authorization_phrase_captured: false
+provider_call_allowed_now: false
+image_generation_allowed_now: false
+can_execute_now: false
+prompt_package_exists: true
+target_paths_clear_now: true
+provider_call_performed: false
+image_generation_performed: false
+VCP_memory_write_performed: false
+DailyNote_write_performed: false
+runtime_call_performed: false
+secret_value_read_performed: false
+commit_performed: false
+push_allowed: false
+push_performed: false
+next: wait_for_exact_authorize_one_real_generation_then_rerun_preflight_before_provider_call
+```
+
+## Checkpoint - v0.6.17 30-Day Exact New-Trial Checkpoint
+
+```text
+phase: v0_6_17_30_day_exact_new_trial_checkpoint
+phase_id: v0_6_17_30_day_exact_new_trial_checkpoint
+status: completed_validated_local_30_day_checkpoint
+mode: Green Lane doc/schema/report/fixture/validator/status compact batch
+source_phase: v0_6_16_exact_new_trial_human_approval_intake_validator
+current_gate_phase: v0_6_17_30_day_exact_new_trial_checkpoint
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+previous_red_decision_satisfied: wait_for_human_choice_or_prepare_30_day_checkpoint_without_real_generation
+resume_compaction_compatibility_anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+next_red_decision: wait_for_explicit_authorize_one_real_generation_or_keep_idle
+completed:
+- created root 30-day exact new-trial checkpoint
+- created 30-day checkpoint schema
+- created 30-day checkpoint report and fixtures
+- created 30-day checkpoint validator
+- wired validator into MVP validation and governance slices
+- updated local commit scope allowlist for the root checkpoint artifact
+- synced roadmap and .agent_board resume surfaces
+readiness_state: ready_for_human_choice_not_ready_for_execution
+auditable_preparation_loop_complete: true
+recommendation: do_not_enter_real_generation_yet
+should_enter_real_generation_now: false
+human_choice_captured: false
+real_generation_authorized_now: false
+can_execute_now: false
+provider_call_performed: false
+image_generation_performed: false
+VCP_memory_write_performed: false
+DailyNote_write_performed: false
+runtime_call_performed: false
+secret_value_read_performed: false
+commit_performed: false
+push_allowed: false
+push_performed: false
+next: keep_idle_or_prepare_separate_execution_preflight_only_after_exact_authorize_one_real_generation
+```
+
+## Checkpoint - v0.6.16 Exact New-Trial Human Approval Intake Validator
+
+```text
+phase: v0_6_16_exact_new_trial_human_approval_intake_validator
+phase_id: v0_6_16_exact_new_trial_human_approval_intake_validator
+status: completed_validated_local_human_approval_intake_validator_slice
+mode: Green Lane doc/schema/report/fixture/validator/status compact batch
+source_phase: v0_6_15_exact_new_trial_noop_rehearsal_human_approval_gate
+current_gate_phase: v0_6_16_exact_new_trial_human_approval_intake_validator
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+previous_red_decision_satisfied: await_human_choice_keep_idle_continue_dry_run_or_authorize_one_real_generation
+resume_compaction_compatibility_anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+next_red_decision: wait_for_human_choice_or_prepare_30_day_checkpoint_without_real_generation
+completed:
+- created human approval intake validator doc
+- created human approval intake validator schema
+- created human approval intake validator report
+- created pass/fail fixtures
+- created validator and wired it into MVP
+- registered v0.6.16 and v0.6.12-to-v0.6.16 exact-slices
+- synced roadmap and .agent_board resume surfaces
+changed:
+- docs/V0_6_16_EXACT_NEW_TRIAL_HUMAN_APPROVAL_INTAKE_VALIDATOR.md
+- schemas/exact_new_trial_human_approval_intake_validator.schema.yaml
+- reports/visual_asset_eval_dry_run/v0_6_16_exact_new_trial_human_approval_intake_validator.json
+- tests/schema_examples/exact_new_trial_human_approval_intake_validator.example.json
+- tests/schema_examples/exact_new_trial_human_approval_intake_validator_fail.example.json
+- scripts/validate_exact_new_trial_human_approval_intake_validator.js
+- scripts/validate_mvp.ps1
+- scripts/lib/governance_tooling_maintenance_slice.js
+- docs/00_project_roadmap.md
+- .agent_board/HANDOFF.md
+- .agent_board/RUN_STATE.md
+- .agent_board/TASK_QUEUE.md
+- .agent_board/CHECKPOINT.md
+- .agent_board/VALIDATION_LOG.md
+latest_validation:
+- node --check scripts/validate_exact_new_trial_human_approval_intake_validator.js: passed
+- node --check scripts/lib/governance_tooling_maintenance_slice.js: passed
+- node scripts/validate_exact_new_trial_human_approval_intake_validator.js: passed
+- npm run validate:mvp: passed
+authorization_package_id: AUTH-PENDING-V0-3-3-EXACT-NEW-TRIAL-20260523-001
+approval_intake_validator_id: exact_new_trial_human_approval_intake_validator_v0_1
+intake_mode: approval_intake_validator_only
+current_user_choice: not_captured
+human_response_captured_now: false
+authorization_phrase_captured: false
+human_approval_status: pending
+decision_result: stay_idle
+can_execute_now: false
+real_generation_authorized_now: false
+allowed_human_options: keep_idle; continue_dry_run; authorize_one_real_generation
+required_authorization_phrase_token_count: 18
+provider_call_performed: false
+image_generation_performed: false
+output_directory_created: false
+receipt_write_performed: false
+registry_write_performed: false
+review_console_bridge_materialized: false
+VCP_memory_write_performed: false
+DailyNote_write_performed: false
+runtime_call_performed: false
+secret_value_read_performed: false
+push_allowed: false
+push_status: not_performed
+recommended_next: wait_for_human_choice_or_prepare_30_day_checkpoint_without_real_generation
+```
+
+---
+
+## Checkpoint - v0.6.15 Exact New-Trial No-op Rehearsal And Human Approval Gate
+
+```text
+phase: v0_6_15_exact_new_trial_noop_rehearsal_human_approval_gate
+phase_id: v0_6_15_exact_new_trial_noop_rehearsal_human_approval_gate
+status: completed_validated_local_noop_rehearsal_human_approval_gate_slice
+mode: Green Lane doc/schema/report/fixture/validator/status compact batch
+source_phase: v0_6_14_exact_new_trial_action_packet_v0_1
+current_gate_phase: v0_6_15_exact_new_trial_noop_rehearsal_human_approval_gate
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+previous_red_decision_satisfied: build_noop_runner_and_human_approval_gate
+resume_compaction_compatibility_anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+next_red_decision: await_human_choice_keep_idle_continue_dry_run_or_authorize_one_real_generation
+completed:
+- created no-op rehearsal and human approval gate doc
+- created no-op rehearsal and human approval gate schema
+- created no-op rehearsal and human approval gate report
+- created pass/fail fixtures
+- created validator and wired it into MVP
+- registered v0.6.15 and v0.6.12-to-v0.6.15 exact-slices
+- synced roadmap and .agent_board resume surfaces
+changed:
+- docs/V0_6_15_EXACT_NEW_TRIAL_NOOP_REHEARSAL_HUMAN_APPROVAL_GATE.md
+- schemas/exact_new_trial_noop_rehearsal_human_approval_gate.schema.yaml
+- reports/visual_asset_eval_dry_run/v0_6_15_exact_new_trial_noop_rehearsal_human_approval_gate.json
+- tests/schema_examples/exact_new_trial_noop_rehearsal_human_approval_gate.example.json
+- tests/schema_examples/exact_new_trial_noop_rehearsal_human_approval_gate_fail.example.json
+- scripts/validate_exact_new_trial_noop_rehearsal_human_approval_gate.js
+- scripts/validate_mvp.ps1
+- scripts/lib/governance_tooling_maintenance_slice.js
+- docs/00_project_roadmap.md
+- .agent_board/HANDOFF.md
+- .agent_board/RUN_STATE.md
+- .agent_board/TASK_QUEUE.md
+- .agent_board/CHECKPOINT.md
+- .agent_board/VALIDATION_LOG.md
+latest_validation:
+- node --check scripts/validate_exact_new_trial_noop_rehearsal_human_approval_gate.js: passed
+- node --check scripts/lib/governance_tooling_maintenance_slice.js: passed
+- node scripts/validate_exact_new_trial_noop_rehearsal_human_approval_gate.js: passed
+- npm run validate:mvp: passed
+authorization_package_id: AUTH-PENDING-V0-3-3-EXACT-NEW-TRIAL-20260523-001
+action_packet_id: exact_new_trial_action_packet_v0_1
+noop_rehearsal_id: exact_new_trial_noop_rehearsal_v0_1
+human_approval_packet_id: exact_new_trial_human_approval_packet_v0_1
+runner_mode: no_op_rehearsal_only
+noop_execution_completed: true
+would_read_count: 3
+would_call_count: 1
+would_write_count: 4
+stop_reason: human_approval_pending_real_generation_not_authorized
+allowed_human_options: keep_idle; continue_dry_run; authorize_one_real_generation
+selected_option: keep_idle_until_explicit_human_decision
+human_approval_status: pending
+real_generation_authorized_now: false
+can_execute_now: false
+target_paths_clear: true
+provider_call_performed: false
+image_generation_performed: false
+output_directory_created: false
+receipt_write_performed: false
+registry_write_performed: false
+review_console_bridge_materialized: false
+VCP_memory_write_performed: false
+DailyNote_write_performed: false
+runtime_call_performed: false
+secret_value_read_performed: false
+push_allowed: false
+push_status: not_performed
+recommended_next: await_human_choice_or_build_approval_intake_validator_without_real_generation
+```
+
+---
+
+## Checkpoint - v0.6.14 Exact New-Trial Action Packet v0.1
+
+```text
+phase: v0_6_14_exact_new_trial_action_packet_v0_1
+phase_id: v0_6_14_exact_new_trial_action_packet_v0_1
+status: completed_validated_local_action_packet_freeze_slice
+mode: Green Lane doc/schema/report/fixture/validator/status compact batch
+source_phase: v0_6_13_failed_provider_attempt_review
+current_gate_phase: v0_6_14_exact_new_trial_action_packet_v0_1
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+previous_red_decision_satisfied: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+next_red_decision: build_noop_runner_and_human_approval_gate
+completed:
+- created exact new-trial action packet v0.1 doc
+- created exact new-trial action packet v0.1 schema
+- created exact new-trial action packet v0.1 report
+- created pass/fail exact new-trial action packet fixtures
+- created validator and wired it into MVP
+- registered v0.6.14 and v0.6.12-to-v0.6.14 combined exact-slices
+- synced roadmap and .agent_board resume surfaces to the frozen action-packet state
+changed:
+- docs/V0_6_14_EXACT_NEW_TRIAL_ACTION_PACKET_V0_1.md
+- schemas/exact_new_trial_action_packet_v0_1.schema.yaml
+- reports/visual_asset_eval_dry_run/v0_6_14_exact_new_trial_action_packet_v0_1.json
+- tests/schema_examples/exact_new_trial_action_packet_v0_1.example.json
+- tests/schema_examples/exact_new_trial_action_packet_v0_1_fail.example.json
+- scripts/validate_exact_new_trial_action_packet_v0_1.js
+- scripts/validate_mvp.ps1
+- scripts/lib/governance_tooling_maintenance_slice.js
+- docs/00_project_roadmap.md
+- .agent_board/HANDOFF.md
+- .agent_board/RUN_STATE.md
+- .agent_board/TASK_QUEUE.md
+- .agent_board/CHECKPOINT.md
+- .agent_board/VALIDATION_LOG.md
+latest_validation:
+- git diff --check: passed
+- node --check scripts/validate_exact_new_trial_action_packet_v0_1.js: passed
+- node --check scripts/lib/governance_tooling_maintenance_slice.js: passed
+- node scripts/validate_exact_new_trial_action_packet_v0_1.js: passed
+- node scripts/validate_exact_new_trial_failed_provider_attempt_review.js: passed
+- npm run validate:mvp: passed
+authorization_package_id: AUTH-PENDING-V0-3-3-EXACT-NEW-TRIAL-20260523-001
+action_packet_id: exact_new_trial_action_packet_v0_1
+packet_status: frozen_not_executable
+prompt_package_ref: prompts/image_generation/safe_adult_editorial_portrait_v1.yaml
+output_directory: runs/real_generation/v0_3_3_exact_new_trial_001/
+receipt_path: reports/provider_receipts/v0_3_3_exact_new_trial_001_receipt.json
+registry_path: reports/provider_receipts/v0_3_3_exact_new_trial_001_registry.json
+review_console_bridge_ref: review_console/live_receipt_bridge/v0_3_3_exact_new_trial_001
+exact_call_count: 1
+max_image_candidates: 1
+retry_limit: 0
+overwrite_existing_files_allowed: false
+secret_value_read_allowed: false
+request_submitted: false
+execute_now: false
+can_execute_now: false
+human_approval_gate_required: true
+no_op_runner_required_before_execution: true
+future_provider_execution_requires_new_explicit_step: true
+provider_call_performed: false
+image_generation_performed: false
+output_directory_created: false
+receipt_write_performed: false
+registry_write_performed: false
+review_console_bridge_materialized: false
+VCP_memory_write_performed: false
+DailyNote_write_performed: false
+runtime_call_performed: false
+secret_value_read_performed: false
+push_allowed: false
+push_status: not_performed
+recommended_next: build_noop_runner_and_human_approval_gate
+```
+
+---
+
+## Checkpoint - v0.6.13 Failed Provider Attempt Review
+
+```text
+phase: v0_6_13_failed_provider_attempt_review
+phase_id: v0_6_13_failed_provider_attempt_review
+status: completed_validated_local_failed_provider_attempt_review_slice
+mode: Green Lane doc/schema/report/fixture/validator/status compact batch
+source_phase: v0_6_12_local_preflight_only_gate
+current_gate_phase: v0_6_13_failed_provider_attempt_review
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+next_red_decision: freeze_exact_new_trial_action_packet_v0_1
+previous_red_decision_satisfied: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+completed:
+- created failed provider attempt review doc
+- created failed provider attempt review schema
+- created failed provider attempt review report
+- created pass/fail failed provider attempt review fixtures
+- created validator and wired it into MVP
+- registered v0.6.13 and v0.6.12+v0.6.13 combined exact-slices
+- synced roadmap and .agent_board resume surfaces to the failed-review state
+changed:
+- docs/V0_6_13_FAILED_PROVIDER_ATTEMPT_REVIEW.md
+- schemas/exact_new_trial_failed_provider_attempt_review.schema.yaml
+- reports/visual_asset_eval_dry_run/v0_6_13_failed_provider_attempt_review.json
+- tests/schema_examples/exact_new_trial_failed_provider_attempt_review.example.json
+- tests/schema_examples/exact_new_trial_failed_provider_attempt_review_fail.example.json
+- scripts/validate_exact_new_trial_failed_provider_attempt_review.js
+- scripts/validate_mvp.ps1
+- scripts/lib/governance_tooling_maintenance_slice.js
+- docs/00_project_roadmap.md
+- .agent_board/HANDOFF.md
+- .agent_board/RUN_STATE.md
+- .agent_board/TASK_QUEUE.md
+- .agent_board/CHECKPOINT.md
+- .agent_board/VALIDATION_LOG.md
+latest_validation:
+- git diff --check: passed
+- node --check scripts/validate_exact_new_trial_failed_provider_attempt_review.js: passed
+- node --check scripts/lib/governance_tooling_maintenance_slice.js: passed
+- node scripts/validate_exact_new_trial_failed_provider_attempt_review.js: passed
+- node scripts/validate_exact_new_trial_local_preflight_only_gate.js: passed
+- npm run validate:mvp: first run failed on missing active Red-decision anchor in new status surface; narrow compatibility anchor added; rerun passed
+authorization_package_id: AUTH-PENDING-V0-3-3-EXACT-NEW-TRIAL-20260523-001
+failed_attempt_count: 2
+first_attempt_failed_no_image: true
+retry_001_failed_no_image: true
+failure_type: provider_tool_user_error_no_image
+retry_blocked_by_zero_retry_limit: true
+neutral_smoke_test_succeeded: true
+safe_adult_editorial_portrait_succeeded: true
+route_not_globally_unavailable: true
+cannot_reuse_failed_prompt_path_by_default: true
+cannot_reuse_failed_output_receipt_registry_bridge_paths: true
+failed_attempts_are_not_review_assets: true
+failed_attempts_are_not_accepted_samples: true
+failed_attempts_must_not_seed_memory: true
+next_prompt_package_ref: prompts/image_generation/safe_adult_editorial_portrait_v1.yaml
+next_output_directory: runs/real_generation/v0_3_3_exact_new_trial_001/
+next_receipt_path: reports/provider_receipts/v0_3_3_exact_new_trial_001_receipt.json
+next_registry_path: reports/provider_receipts/v0_3_3_exact_new_trial_001_registry.json
+next_review_console_bridge_ref: review_console/live_receipt_bridge/v0_3_3_exact_new_trial_001
+exact_call_count: 1
+max_image_candidates: 1
+retry_limit: 0
+overwrite_existing_files_allowed: false
+secret_value_read_allowed: false
+future_provider_execution_requires_new_explicit_step: true
+provider_call_performed: false
+image_generation_performed: false
+output_directory_created: false
+receipt_write_performed: false
+registry_write_performed: false
+review_console_bridge_materialized: false
+VCP_memory_write_performed: false
+DailyNote_write_performed: false
+runtime_call_performed: false
+secret_value_read_performed: false
+push_allowed: false
+push_status: not_performed
+recommended_next: freeze_exact_new_trial_action_packet_v0_1
+```
+
+---
+
+## Checkpoint - v0.6.12 Local Preflight-Only Gate
+
+```text
+phase: v0_6_12_local_preflight_only_gate
+phase_id: v0_6_12_local_preflight_only_gate
+status: completed_validated_local_preflight_only_slice
+mode: Green Lane doc/schema/report/fixture/validator/status compact batch
+source_phase: v0_6_11_exact_new_trial_preflight_authorization_gate
+current_gate_phase: v0_6_12_local_preflight_only_gate
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+completed:
+- created local preflight-only gate doc
+- created local preflight-only gate schema
+- created local preflight-only gate report
+- created pass/fail local preflight-only fixtures
+- created validator and wired it into MVP
+- registered the v0.6.12 exact-slice for the current local preflight-only worktree
+- synced roadmap and .agent_board resume surfaces to the consumed-preflight-only state
+changed:
+- docs/V0_6_12_LOCAL_PREFLIGHT_ONLY_GATE.md
+- schemas/exact_new_trial_local_preflight_only_gate.schema.yaml
+- reports/visual_asset_eval_dry_run/v0_6_12_local_preflight_only_gate.json
+- tests/schema_examples/exact_new_trial_local_preflight_only_gate.example.json
+- tests/schema_examples/exact_new_trial_local_preflight_only_gate_fail.example.json
+- scripts/validate_exact_new_trial_local_preflight_only_gate.js
+- scripts/validate_mvp.ps1
+- scripts/lib/governance_tooling_maintenance_slice.js
+- docs/00_project_roadmap.md
+- .agent_board/HANDOFF.md
+- .agent_board/RUN_STATE.md
+- .agent_board/TASK_QUEUE.md
+- .agent_board/CHECKPOINT.md
+- .agent_board/VALIDATION_LOG.md
+latest_validation:
+- git diff --check: passed
+- node --check scripts/validate_exact_new_trial_local_preflight_only_gate.js: passed
+- node --check scripts/lib/governance_tooling_maintenance_slice.js: passed
+- node scripts/validate_exact_new_trial_local_preflight_only_gate.js: passed
+- npm run validate:mvp: first run failed on missing resume_guard_source_phase in new status surface; narrow fix applied; rerun passed
+authorization_package_id: AUTH-PENDING-V0-3-3-EXACT-NEW-TRIAL-20260523-001
+authorization_status: approved_for_metadata_only_preflight_consumed_by_local_preflight
+approval_status: approved_for_preflight_only
+preflight_authorization_consumed: true
+local_preflight_run_performed: true
+selected_prompt_package_ref: prompts/image_generation/safe_adult_editorial_portrait_v1.yaml
+selected_output_directory: runs/real_generation/v0_3_3_exact_new_trial_001/
+selected_receipt_path: reports/provider_receipts/v0_3_3_exact_new_trial_001_receipt.json
+selected_registry_path: reports/provider_receipts/v0_3_3_exact_new_trial_001_registry.json
+selected_review_console_bridge_ref: review_console/live_receipt_bridge/v0_3_3_exact_new_trial_001
+exact_call_count: 1
+max_image_candidates: 1
+retry_limit: 0
+overwrite_existing_files_allowed: false
+secret_value_read_allowed: false
+request_not_submitted: true
+can_execute_now: false
+provider_contact_allowed_now: false
+image_generation_allowed_now: false
+provider_call_performed: false
+image_generation_performed: false
+output_directory_created: false
+receipt_write_performed: false
+registry_write_performed: false
+review_console_bridge_materialized: false
+VCP_memory_write_performed: false
+DailyNote_write_performed: false
+runtime_call_performed: false
+secret_value_read_performed: false
+push_allowed: false
+push_status: not_performed
+recommended_next: failed_provider_attempt_review_then_exact_new_trial_action_packet_freeze
+```
+
+---
+
 ## Checkpoint - v0.6.11 Exact New-Trial Preflight Authorization Gate
 
 ```text
