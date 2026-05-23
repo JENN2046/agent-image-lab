@@ -5,13 +5,13 @@
 ```text
 phase: v0_6_6_exact_new_trial_a5_request_draft
 phase_id: v0_6_6_exact_new_trial_a5_request_draft
-status: completed_validated_local_slice
+status: completed_remote_synced_after_guarded_push
 mode: Green Lane doc/schema/report/fixture/validator/status compact batch
-source_local_commit: 1f02ff0750f9a3e22876130875437b86a899b524
-source_remote_commit: 1f02ff0750f9a3e22876130875437b86a899b524
+source_local_commit: 16a8aa38d4aaefbb1cd3e3938e520c64e62d22c1
+source_remote_commit: 16a8aa38d4aaefbb1cd3e3938e520c64e62d22c1
 source_phase: v0_6_5_ready_for_exact_new_trial_authorization_checkpoint
-previous_phase_commit: 1f02ff0750f9a3e22876130875437b86a899b524
-previous_phase_push_performed: false
+previous_phase_commit: 16a8aa38d4aaefbb1cd3e3938e520c64e62d22c1
+previous_phase_push_performed: true
 current_gate_phase: v0_6_6_exact_new_trial_a5_request_draft
 active_current_phase: v0_3_3_first_live_generation_pilot
 resume_guard_source_phase: v0_3_2_live_candidate_action_packet
@@ -57,7 +57,9 @@ changed:
 - .agent_board/TASK_QUEUE.md
 - .agent_board/CHECKPOINT.md
 latest_validation:
-- pending
+- git push origin master: passed
+- git rev-list --left-right --count origin/master...HEAD: 0 0
+- git status --short: clean
 authorization_package_id: AUTH-PENDING-V0-3-3-EXACT-NEW-TRIAL-20260523-001
 authorization_status: draft_not_submitted
 approval_status: not_requested
@@ -75,6 +77,8 @@ DailyNote_write_performed: false
 runtime_call_performed: false
 secret_value_read_performed: false
 push_allowed: false
+push_status: completed_remote_synced_after_guarded_push
+completed_remote_synced_after_guarded_push: true
 recommended_next: wait_for_explicit_new_A5_or_stop_at_ready_state
 ```
 

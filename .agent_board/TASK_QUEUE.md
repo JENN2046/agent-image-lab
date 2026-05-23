@@ -4,12 +4,12 @@
       Title: Draft Exact New-Trial A5 Request Text
       Reason: Batch B no-new-A5 branch still needs one concrete future exact approval phrase, but it must remain placeholder-based and non-executable until a human separately grants A5.
       Lane: Green.
-      Status: completed_validated_local_slice.
-      Source local commit: 1f02ff0750f9a3e22876130875437b86a899b524.
-      Source remote commit: 1f02ff0750f9a3e22876130875437b86a899b524.
+      Status: completed_remote_synced_after_guarded_push.
+      Source local commit: 16a8aa38d4aaefbb1cd3e3938e520c64e62d22c1.
+      Source remote commit: 16a8aa38d4aaefbb1cd3e3938e520c64e62d22c1.
       Source phase: v0_6_5_ready_for_exact_new_trial_authorization_checkpoint.
-      Previous phase commit: 1f02ff0750f9a3e22876130875437b86a899b524.
-      Previous phase push performed: false.
+      Previous phase commit: 16a8aa38d4aaefbb1cd3e3938e520c64e62d22c1.
+      Previous phase push performed: true.
       Current gate phase: v0_6_6_exact_new_trial_a5_request_draft.
       Active current phase: v0_3_3_first_live_generation_pilot.
       Resume guard source phase: v0_3_2_live_candidate_action_packet.
@@ -33,6 +33,8 @@
       runtime_call_performed: false.
       secret_value_read_performed: false.
       push_allowed: false.
+      Push status: completed_remote_synced_after_guarded_push.
+      completed_remote_synced_after_guarded_push: true.
       Stop condition: provider call, image generation, output write, memory write, DailyNote write, runtime/VCPToolBox/VCPChat/MCP action, commit, push, tag, release, deploy, or validation failure requiring judgment.
       Recommended next: wait_for_explicit_new_A5_or_stop_at_ready_state.
 
