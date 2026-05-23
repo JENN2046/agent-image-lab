@@ -113,6 +113,7 @@ $requiredFiles = @(
   'scripts/validate_exact_new_trial_intake_field_resolution.js',
   'scripts/validate_exact_new_trial_request_text_regenerated.js',
   'scripts/validate_exact_new_trial_human_decision_preview_gate.js',
+  'scripts/validate_exact_new_trial_preflight_authorization_gate.js',
   'scripts/validate_visual_sample_memory_policy.js',
   'scripts/validate_15_day_architecture_checkpoint.js',
   'scripts/validate_local_checkpoint_manifest.js',

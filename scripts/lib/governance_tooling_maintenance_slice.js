@@ -905,6 +905,11 @@ const EXPECTED_V0_6_11_EXACT_NEW_TRIAL_PREFLIGHT_AUTHORIZATION_GATE_SLICE = [
   "tests/schema_examples/exact_new_trial_preflight_authorization_gate_fail.example.json"
 ].sort();
 
+const EXPECTED_V0_6_11_POST_PULL_CLEANUP_SLICE = [
+  "scripts/lib/governance_tooling_maintenance_slice.js",
+  "scripts/validate_mvp.ps1"
+].sort();
+
 const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "governance_tooling_maintenance_slice_v1",
@@ -1101,6 +1106,10 @@ const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "v0_6_11_exact_new_trial_preflight_authorization_gate_slice",
     files: EXPECTED_V0_6_11_EXACT_NEW_TRIAL_PREFLIGHT_AUTHORIZATION_GATE_SLICE
+  },
+  {
+    id: "v0_6_11_post_pull_cleanup_slice",
+    files: EXPECTED_V0_6_11_POST_PULL_CLEANUP_SLICE
   }
 ];
 
@@ -1420,6 +1429,11 @@ function governanceToolingMaintenanceSliceSelfCheck() {
         === "v0_5_4_next_15_day_visual_workflow_checkpoint_slice"
     },
     {
+      check: "exact_slice_matches_v0_6_11_post_pull_cleanup",
+      passed: findMatchingGovernanceToolingSlice(EXPECTED_V0_6_11_POST_PULL_CLEANUP_SLICE)?.id
+        === "v0_6_11_post_pull_cleanup_slice"
+    },
+    {
       check: "exact_slice_rejects_missing_file",
       passed: findMatchingGovernanceToolingSlice(EXPECTED_GOVERNANCE_TOOLING_MAINTENANCE_SLICE.slice(1)) === null
     },
@@ -1488,10 +1502,13 @@ module.exports = {
   EXPECTED_V0_6_3_FAILED_PROVIDER_ATTEMPT_INSPECTION_SLICE,
   EXPECTED_V0_6_4_EXACT_NEW_TRIAL_AUTHORIZATION_REFRESH_SLICE,
   EXPECTED_V0_6_5_READY_FOR_EXACT_NEW_TRIAL_AUTHORIZATION_CHECKPOINT_SLICE,
+  EXPECTED_V0_6_6_EXACT_NEW_TRIAL_A5_REQUEST_DRAFT_SLICE,
+  EXPECTED_V0_6_7_EXACT_NEW_TRIAL_AUTHORIZATION_INTAKE_PREFLIGHT_SLICE,
   EXPECTED_V0_6_8_EXACT_NEW_TRIAL_INTAKE_FIELD_RESOLUTION_SLICE,
   EXPECTED_V0_6_9_EXACT_NEW_TRIAL_REQUEST_TEXT_REGENERATED_SLICE,
   EXPECTED_V0_6_10_EXACT_NEW_TRIAL_HUMAN_DECISION_PREVIEW_GATE_SLICE,
   EXPECTED_V0_6_11_EXACT_NEW_TRIAL_PREFLIGHT_AUTHORIZATION_GATE_SLICE,
+  EXPECTED_V0_6_11_POST_PULL_CLEANUP_SLICE,
   GOVERNANCE_TOOLING_ALLOWED_SLICES,
   buildGovernanceToolingMaintenanceSliceReport,
   fileAllowedInGovernanceToolingSlice,
