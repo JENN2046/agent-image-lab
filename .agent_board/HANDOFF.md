@@ -5,10 +5,10 @@
 ```text
 phase: v0_6_6_exact_new_trial_a5_request_draft
 phase_id: v0_6_6_exact_new_trial_a5_request_draft
-status: completed_remote_synced_after_guarded_push
+status: completed_validated_local_status_sync_slice
 mode: Green Lane doc/schema/report/fixture/validator/status compact batch
-summary: Closes the Batch B no-new-A5 branch with one placeholder-based, non-submitted exact approval phrase draft, then confirms the result is now remote-synced on master.
-source_local_commit: 16a8aa38d4aaefbb1cd3e3938e520c64e62d22c1
+summary: Closes the Batch B no-new-A5 branch with one placeholder-based, non-submitted exact approval phrase draft, then records that the underlying phase is remote-synced at 16a8aa3 while the current 6-file status-sync correction commit remains local-only.
+source_local_commit: 716ef8cca12e54fb1d04b82201f6c14dc1ddc80c
 source_remote_commit: 16a8aa38d4aaefbb1cd3e3938e520c64e62d22c1
 source_phase: v0_6_5_ready_for_exact_new_trial_authorization_checkpoint
 previous_phase_commit: 16a8aa38d4aaefbb1cd3e3938e520c64e62d22c1
@@ -35,9 +35,10 @@ DailyNote_write_performed: false
 runtime_call_performed: false
 secret_value_read_performed: false
 push_allowed: false
-push_status: completed_remote_synced_after_guarded_push
-completed_remote_synced_after_guarded_push: true
-recommended_next: wait_for_explicit_new_A5_or_stop_at_ready_state
+push_status: not_performed
+completed_remote_synced_after_guarded_push: false
+current_status_sync_commit_pending_push: true
+recommended_next: optionally_push_current_local_status_sync_commit_then_wait_for_explicit_new_A5_or_stop_at_ready_state
 ```
 
 ---

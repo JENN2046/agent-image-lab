@@ -4,7 +4,7 @@
 
 ## v0.6.6 - Exact New-Trial A5 Request Draft
 
-Status: completed_remote_synced_after_guarded_push.
+Status: completed_validated_local_status_sync_slice.
 
 Purpose:
 - Close the Batch B no-new-A5 branch with one concrete future exact approval
@@ -23,7 +23,7 @@ Artifacts:
 - `scripts/validate_exact_new_trial_a5_request_draft.js`
 
 Boundary state:
-- `source_local_commit: 16a8aa3`
+- `source_local_commit: 716ef8c`
 - `source_remote_commit: 16a8aa3`
 - `source_phase: v0_6_5_ready_for_exact_new_trial_authorization_checkpoint`
 - `current_gate_phase: v0_6_6_exact_new_trial_a5_request_draft`
@@ -46,9 +46,10 @@ Boundary state:
 - `real_executor_performed: false`
 - `secret_value_read_performed: false`
 - `push_allowed: false`
-- `completed_remote_synced_after_guarded_push: true`
+- `completed_remote_synced_after_guarded_push: false`
+- `current_status_sync_commit_pending_push: true`
 
-Recommended next: wait for an explicit new A5 authorization or stop at `ready_for_exact_new_trial_authorization`; do not execute anything from this draft by default.
+Recommended next: either push the current local status-sync commit or leave it local, then wait for an explicit new A5 authorization or stop at `ready_for_exact_new_trial_authorization`; do not execute anything from this draft by default.
 
 ## v0.6.5 - Ready For Exact New-Trial Authorization Checkpoint
 

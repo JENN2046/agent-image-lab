@@ -5,9 +5,9 @@
 ```text
 phase: v0_6_6_exact_new_trial_a5_request_draft
 phase_id: v0_6_6_exact_new_trial_a5_request_draft
-status: completed_remote_synced_after_guarded_push
+status: completed_validated_local_status_sync_slice
 mode: Green Lane doc/schema/report/fixture/validator/status compact batch
-source_local_commit: 16a8aa38d4aaefbb1cd3e3938e520c64e62d22c1
+source_local_commit: 716ef8cca12e54fb1d04b82201f6c14dc1ddc80c
 source_remote_commit: 16a8aa38d4aaefbb1cd3e3938e520c64e62d22c1
 source_phase: v0_6_5_ready_for_exact_new_trial_authorization_checkpoint
 previous_phase_commit: 16a8aa38d4aaefbb1cd3e3938e520c64e62d22c1
@@ -57,9 +57,13 @@ changed:
 - .agent_board/TASK_QUEUE.md
 - .agent_board/CHECKPOINT.md
 latest_validation:
-- git push origin master: passed
-- git rev-list --left-right --count origin/master...HEAD: 0 0
-- git status --short: clean
+- git diff --check: passed
+- git rev-list --left-right --count origin/master...HEAD: 0 1
+- node scripts/validate_agent_board_state.js: passed
+- node scripts/validate_controlled_visual_production_loop_exact_file_commit_readiness_review.js: passed
+- node scripts/validate_controlled_visual_production_loop_checkpoint_readiness.js: passed
+- node scripts/validate_controlled_visual_production_loop_commit_and_authorization_readiness_audit.js: passed
+- npm run validate:mvp: passed_on_retry_after_one_timeout
 authorization_package_id: AUTH-PENDING-V0-3-3-EXACT-NEW-TRIAL-20260523-001
 authorization_status: draft_not_submitted
 approval_status: not_requested
@@ -77,9 +81,10 @@ DailyNote_write_performed: false
 runtime_call_performed: false
 secret_value_read_performed: false
 push_allowed: false
-push_status: completed_remote_synced_after_guarded_push
-completed_remote_synced_after_guarded_push: true
-recommended_next: wait_for_explicit_new_A5_or_stop_at_ready_state
+push_status: not_performed
+completed_remote_synced_after_guarded_push: false
+current_status_sync_commit_pending_push: true
+recommended_next: optionally_push_current_local_status_sync_commit_then_wait_for_explicit_new_A5_or_stop_at_ready_state
 ```
 
 ---

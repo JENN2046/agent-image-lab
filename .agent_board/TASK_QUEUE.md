@@ -4,8 +4,8 @@
       Title: Draft Exact New-Trial A5 Request Text
       Reason: Batch B no-new-A5 branch still needs one concrete future exact approval phrase, but it must remain placeholder-based and non-executable until a human separately grants A5.
       Lane: Green.
-      Status: completed_remote_synced_after_guarded_push.
-      Source local commit: 16a8aa38d4aaefbb1cd3e3938e520c64e62d22c1.
+      Status: completed_validated_local_status_sync_slice.
+      Source local commit: 716ef8cca12e54fb1d04b82201f6c14dc1ddc80c.
       Source remote commit: 16a8aa38d4aaefbb1cd3e3938e520c64e62d22c1.
       Source phase: v0_6_5_ready_for_exact_new_trial_authorization_checkpoint.
       Previous phase commit: 16a8aa38d4aaefbb1cd3e3938e520c64e62d22c1.
@@ -33,10 +33,11 @@
       runtime_call_performed: false.
       secret_value_read_performed: false.
       push_allowed: false.
-      Push status: completed_remote_synced_after_guarded_push.
-      completed_remote_synced_after_guarded_push: true.
+      Push status: not_performed.
+      completed_remote_synced_after_guarded_push: false.
+      current_status_sync_commit_pending_push: true.
       Stop condition: provider call, image generation, output write, memory write, DailyNote write, runtime/VCPToolBox/VCPChat/MCP action, commit, push, tag, release, deploy, or validation failure requiring judgment.
-      Recommended next: wait_for_explicit_new_A5_or_stop_at_ready_state.
+      Recommended next: optionally_push_current_local_status_sync_commit_then_wait_for_explicit_new_A5_or_stop_at_ready_state.
 
 ---
 
