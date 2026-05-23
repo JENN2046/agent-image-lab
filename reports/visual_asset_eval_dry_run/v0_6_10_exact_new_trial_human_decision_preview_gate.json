@@ -1,0 +1,99 @@
+{
+  "exact_new_trial_human_decision_preview_gate": {
+    "authorization_package_id": "AUTH-PENDING-V0-3-3-EXACT-NEW-TRIAL-20260523-001",
+    "version": "v0_1",
+    "phase": "v0_6_10_exact_new_trial_human_decision_preview_gate",
+    "source_exact_request_text_regenerated_ref": "reports/visual_asset_eval_dry_run/v0_6_9_exact_new_trial_request_text_regenerated.json",
+    "source_ready_for_exact_new_trial_authorization_checkpoint_ref": "reports/visual_asset_eval_dry_run/v0_6_5_ready_for_exact_new_trial_authorization_checkpoint.json",
+    "source_month_plan_ref": "docs/V0_6_2_FIRST_MONTH_LIVE_PILOT_RECOVERY_PLAN.md",
+    "decision_preview_status": {
+      "authorization_status": "draft_not_submitted",
+      "approval_status": "not_requested",
+      "preview_only": true,
+      "human_decision_recorded": false,
+      "selected_option": "not_selected",
+      "submit_requested": false,
+      "execute_requested": false
+    },
+    "decision_preview_options": {
+      "keep_draft_unissued": {
+        "option_available": true,
+        "preserves_not_requested": true,
+        "preserves_not_submitted": true,
+        "preserves_non_executable": true
+      },
+      "future_issue_phrase_in_separate_human_turn_only": {
+        "option_available": true,
+        "requires_explicit_human_phrase_turn": true,
+        "does_not_submit_by_itself": true,
+        "does_not_execute_by_itself": true
+      },
+      "decline_current_wording_and_return_to_local_revision": {
+        "option_available": true,
+        "returns_to_local_revision_route": true,
+        "does_not_submit": true,
+        "does_not_execute": true
+      }
+    },
+    "decision_preview_assertions": {
+      "copyable_exact_request_text_available": true,
+      "human_decision_still_required": true,
+      "no_option_auto_selected": true,
+      "request_not_submitted": true,
+      "can_submit_now": false,
+      "can_execute_now": false,
+      "any_real_approval_phrase_received": false,
+      "future_submit_step_still_separate": true,
+      "future_execute_step_still_separate": true
+    },
+    "human_decision_boundary": {
+      "issuing_the_exact_phrase_is_not_performed_in_this_phase": true,
+      "submission_is_not_performed_in_this_phase": true,
+      "provider_execution_is_not_performed_in_this_phase": true,
+      "human_turn_required_before_any_status_change": true,
+      "human_turn_required_before_any_submit_request": true,
+      "human_turn_required_before_any_execute_request": true
+    },
+    "next_route_options": [
+      "wait_for_explicit_human_decision_on_whether_to_issue_phrase",
+      "keep_draft_unissued_and_local_only",
+      "revise_request_text_if_human_declines_current_wording"
+    ],
+    "boundaries": {
+      "metadata_only": true,
+      "preview_only": true,
+      "human_decision_recorded": false,
+      "request_not_submitted": true,
+      "can_submit_now": false,
+      "can_execute_now": false,
+      "provider_call_performed": false,
+      "image_generation_performed": false,
+      "VCP_memory_write_performed": false,
+      "DailyNote_write_performed": false,
+      "runtime_call_performed": false,
+      "secret_value_read_performed": false,
+      "production_candidate_created": false,
+      "accepted_sample_auto_promotion": false,
+      "memory_seed_promoted": false,
+      "real_executor_implemented_now": false,
+      "Push_L2_exercised": false,
+      "package_dependency_change_performed": false,
+      "commit_performed": false,
+      "push_performed": false
+    },
+    "side_effects": {
+      "provider_call_performed": false,
+      "image_generation_performed": false,
+      "VCP_memory_write_performed": false,
+      "DailyNote_write_performed": false,
+      "runtime_call_performed": false,
+      "secret_value_read_performed": false,
+      "production_candidate_created": false,
+      "accepted_sample_auto_promotion": false,
+      "memory_seed_promoted": false,
+      "package_dependency_change_performed": false,
+      "commit_performed": false,
+      "push_performed": false
+    }
+  }
+}

@@ -1,5 +1,83 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260523-v0.6.11-EXACT-NEW-TRIAL-PREFLIGHT-AUTHORIZATION-GATE
+
+Task: v0.6.11 exact new-trial preflight authorization gate
+Status: completed_validated
+Commands run:
+  - git diff --check: passed
+  - node --check scripts/validate_exact_new_trial_preflight_authorization_gate.js: passed
+  - node --check scripts/lib/governance_tooling_maintenance_slice.js: passed
+  - node scripts/validate_exact_new_trial_preflight_authorization_gate.js: passed
+  - node scripts/validate_smart_v3_push_safety_lane.js: passed
+  - node scripts/validate_agent_board_state.js: passed
+  - node scripts/validate_autopilot_agent_board_resume_compaction_guard.js: passed
+  - node scripts/validate_controlled_visual_production_loop_exact_file_commit_readiness_review.js: passed
+  - node scripts/validate_controlled_visual_production_loop_checkpoint_readiness.js: passed
+  - node scripts/validate_controlled_visual_production_loop_commit_and_authorization_readiness_audit.js: passed
+  - npm run validate:mvp: passed
+Boundary:
+  - source_local_commit: 2f2db473b7d0c28c74674f7191417f6f19541954
+  - source_remote_commit: 16a8aa38d4aaefbb1cd3e3938e520c64e62d22c1
+  - current_gate_phase: v0_6_11_exact_new_trial_preflight_authorization_gate
+  - authorization_status: approved_for_metadata_only_preflight
+  - approval_status: approved_for_preflight_only
+  - approved_by: Jenn
+  - approved_at_local: 2026-05-23
+  - exact_approval_phrase_received: true
+  - preflight_authorization_received: true
+  - preflight_authorization_consumed: false
+  - preflight_only: true
+  - local_preflight_allowed_now: true
+  - provider_contact_allowed_now: false
+  - image_generation_allowed_now: false
+  - human_decision_recorded: true
+  - selected_option: issue_exact_phrase_for_preflight_only
+  - request_not_submitted: true
+  - can_submit_now: false
+  - can_execute_now: false
+  - provider_call_performed: false
+  - image_generation_performed: false
+  - VCP_memory_write_performed: false
+  - DailyNote_write_performed: false
+  - runtime_call_performed: false
+  - secret_value_read_performed: false
+  - push_performed_for_current_commit: false
+
+## VALIDATION-20260523-v0.6.10-EXACT-NEW-TRIAL-HUMAN-DECISION-PREVIEW-GATE
+
+Task: v0.6.10 exact new-trial human decision preview gate
+Status: completed_validated
+Commands run:
+  - git diff --check: passed
+  - node --check scripts/validate_exact_new_trial_human_decision_preview_gate.js: passed
+  - node --check scripts/lib/governance_tooling_maintenance_slice.js: passed
+  - node scripts/validate_exact_new_trial_human_decision_preview_gate.js: passed
+  - node scripts/validate_smart_v3_push_safety_lane.js: passed
+  - node scripts/validate_agent_board_state.js: passed
+  - node scripts/validate_autopilot_agent_board_resume_compaction_guard.js: passed
+  - node scripts/validate_controlled_visual_production_loop_exact_file_commit_readiness_review.js: passed
+  - node scripts/validate_controlled_visual_production_loop_checkpoint_readiness.js: passed
+  - node scripts/validate_controlled_visual_production_loop_commit_and_authorization_readiness_audit.js: passed
+  - npm run validate:mvp: passed
+Boundary:
+  - source_local_commit: 2f2db473b7d0c28c74674f7191417f6f19541954
+  - source_remote_commit: 16a8aa38d4aaefbb1cd3e3938e520c64e62d22c1
+  - current_gate_phase: v0_6_10_exact_new_trial_human_decision_preview_gate
+  - authorization_status: draft_not_submitted
+  - approval_status: not_requested
+  - human_decision_recorded: false
+  - selected_option: not_selected
+  - submit_requested: false
+  - execute_requested: false
+  - provider_call_performed: false
+  - image_generation_performed: false
+  - VCP_memory_write_performed: false
+  - DailyNote_write_performed: false
+  - runtime_call_performed: false
+  - secret_value_read_performed: false
+  - push_performed_for_current_commit: false
+
 ## VALIDATION-20260523-v0.6.9-EXACT-NEW-TRIAL-REQUEST-TEXT-REGENERATED
 
 Task: v0.6.9 exact new-trial request text regenerated

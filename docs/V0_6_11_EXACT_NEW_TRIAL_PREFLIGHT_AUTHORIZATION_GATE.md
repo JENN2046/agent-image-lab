@@ -1,0 +1,120 @@
+# v0.6.11 Exact New-Trial Preflight Authorization Gate
+
+base_contract: AGENTS.md
+phase: v0_6_11_exact_new_trial_preflight_authorization_gate
+status: local_real_authorization_record_validator
+
+## Purpose
+
+This phase records one real human authorization decision for the exact
+new-trial route.
+
+The authorization is limited to preflight only.
+It does not execute provider contact.
+It does not generate images.
+It does not write output artifacts.
+It does not write DailyNote.
+It does not write VCP memory.
+It does not enable a real executor.
+
+## Authorization Header
+
+```yaml
+exact_new_trial_preflight_authorization_gate:
+  authorization_package_id: AUTH-PENDING-V0-3-3-EXACT-NEW-TRIAL-20260523-001
+  phase: v0_6_11_exact_new_trial_preflight_authorization_gate
+  authorization_status: approved_for_metadata_only_preflight
+  approval_status: approved_for_preflight_only
+  approved_by: Jenn
+  approved_at_local: 2026-05-23
+  approval_source: explicit_user_chat_instruction_real_authorization
+  exact_approval_phrase_received: true
+  preflight_authorization_received: true
+  preflight_authorization_consumed: false
+  active: true
+  execute_now: false
+```
+
+## Source Bindings
+
+- `reports/visual_asset_eval_dry_run/v0_6_9_exact_new_trial_request_text_regenerated.json`
+- `reports/visual_asset_eval_dry_run/v0_6_10_exact_new_trial_human_decision_preview_gate.json`
+- `reports/visual_asset_eval_dry_run/v0_6_5_ready_for_exact_new_trial_authorization_checkpoint.json`
+
+## Issued Exact Approval Phrase
+
+This phase records that the exact phrase has now been issued by the owner.
+That recorded authorization is still limited to preflight only.
+
+```text
+批准进入 AUTH-PENDING-V0-3-3-EXACT-NEW-TRIAL-20260523-001 A5 preflight：使用 Codex 内置 image generation，命令 generate，provider_route=image_gen.imagegen，model=managed_by_codex_image_tool，prompt_package_ref=prompts/image_generation/safe_adult_editorial_portrait_v1.yaml，output_directory=runs/real_generation/v0_3_3_exact_new_trial_001/，receipt_path=reports/provider_receipts/v0_3_3_exact_new_trial_001_receipt.json，registry_path=reports/provider_receipts/v0_3_3_exact_new_trial_001_registry.json，review_console_bridge_ref=review_console/live_receipt_bridge/v0_3_3_exact_new_trial_001，max_provider_calls=1，max_image_candidates=1，retry_limit=0；仅运行 preflight，不调用 provider，不生成图片，不读取任何 env 密钥值，不写 DailyNote，不写 VCP memory，不 push/tag/release/deploy；审批人 Jenn。
+```
+
+## Authorization Scope
+
+- `preflight_only: true`
+- `local_preflight_allowed_now: true`
+- `provider_contact_allowed_now: false`
+- `plugin_call_allowed_now: false`
+- `api_call_allowed_now: false`
+- `image_generation_allowed_now: false`
+- `output_directory_creation_allowed_now: false`
+- `receipt_write_allowed_now: false`
+- `registry_write_allowed_now: false`
+- `DailyNote_write_allowed_now: false`
+- `VCP_memory_write_allowed_now: false`
+- `runtime_execution_allowed_now: false`
+- `real_manifest_read_allowed_now: false`
+- `real_VCPChat_read_allowed_now: false`
+- `real_VCPToolBox_read_allowed_now: false`
+
+## Authorization Assertions
+
+- `real_human_authorization_recorded: true`
+- `human_decision_recorded: true`
+- `selected_option: issue_exact_phrase_for_preflight_only`
+- `request_not_submitted: true`
+- `preflight_allowed_now: true`
+- `can_execute_now: false`
+- `generation_execution_authorized_by_this_record: false`
+- `future_provider_execution_requires_new_step: true`
+- `future_image_generation_requires_new_step: true`
+
+## Explicit Non-Execution
+
+- `provider_call_performed: false`
+- `image_generation_performed: false`
+- `VCP_memory_write_performed: false`
+- `DailyNote_write_performed: false`
+- `runtime_call_performed: false`
+- `secret_value_read_performed: false`
+- `production_candidate_created: false`
+- `accepted_sample_auto_promotion: false`
+- `memory_seed_promoted: false`
+- `Push_L2_exercised: false`
+- `package_dependency_change_performed: false`
+- `commit_performed: false`
+- `push_performed: false`
+
+## Current Result
+
+The route now has:
+
+```text
+ready_for_exact_new_trial_authorization
++ exact_new_trial_request_text_regenerated
++ exact_new_trial_human_decision_preview_gate
++ exact_new_trial_preflight_authorization_gate
+```
+
+That means the owner has now really authorized the exact phrase for preflight
+only, but the route still has not submitted anything and still cannot execute
+provider contact or image generation. In repository status terms, this is an
+`approved_for_metadata_only_preflight / approved_for_preflight_only` record,
+not an execution authorization.
+
+## Recommended Next
+
+If the owner wants to continue, the next safe step is one local preflight-only
+gate that uses this authorization record but still does not contact the
+provider or generate an image by default.

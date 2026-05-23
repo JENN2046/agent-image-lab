@@ -1,0 +1,98 @@
+{
+  "exact_new_trial_human_decision_preview_gate": {
+    "authorization_package_id": "C:\\private\\AUTH-PENDING-V0-3-3-EXACT-NEW-TRIAL-20260523-001",
+    "version": "v0_1",
+    "phase": "v0_6_10_exact_new_trial_human_decision_preview_gate",
+    "source_exact_request_text_regenerated_ref": "reports/visual_asset_eval_dry_run/v0_6_9_exact_new_trial_request_text_regenerated.json",
+    "source_ready_for_exact_new_trial_authorization_checkpoint_ref": "reports/visual_asset_eval_dry_run/v0_6_5_ready_for_exact_new_trial_authorization_checkpoint.json",
+    "source_month_plan_ref": "docs/V0_6_2_FIRST_MONTH_LIVE_PILOT_RECOVERY_PLAN.md",
+    "decision_preview_status": {
+      "authorization_status": "approved",
+      "approval_status": "approved",
+      "preview_only": false,
+      "human_decision_recorded": true,
+      "selected_option": "future_issue_phrase_in_separate_human_turn_only",
+      "submit_requested": true,
+      "execute_requested": true
+    },
+    "decision_preview_options": {
+      "keep_draft_unissued": {
+        "option_available": true,
+        "preserves_not_requested": true,
+        "preserves_not_submitted": true,
+        "preserves_non_executable": true
+      },
+      "future_issue_phrase_in_separate_human_turn_only": {
+        "option_available": true,
+        "requires_explicit_human_phrase_turn": false,
+        "does_not_submit_by_itself": false,
+        "does_not_execute_by_itself": false
+      },
+      "decline_current_wording_and_return_to_local_revision": {
+        "option_available": true,
+        "returns_to_local_revision_route": true,
+        "does_not_submit": true,
+        "does_not_execute": true
+      }
+    },
+    "decision_preview_assertions": {
+      "copyable_exact_request_text_available": true,
+      "human_decision_still_required": false,
+      "no_option_auto_selected": false,
+      "request_not_submitted": false,
+      "can_submit_now": true,
+      "can_execute_now": true,
+      "any_real_approval_phrase_received": true,
+      "future_submit_step_still_separate": false,
+      "future_execute_step_still_separate": false
+    },
+    "human_decision_boundary": {
+      "issuing_the_exact_phrase_is_not_performed_in_this_phase": false,
+      "submission_is_not_performed_in_this_phase": false,
+      "provider_execution_is_not_performed_in_this_phase": false,
+      "human_turn_required_before_any_status_change": false,
+      "human_turn_required_before_any_submit_request": false,
+      "human_turn_required_before_any_execute_request": false
+    },
+    "next_route_options": [
+      "submit_now",
+      "execute_real_generation_now"
+    ],
+    "boundaries": {
+      "metadata_only": true,
+      "preview_only": false,
+      "human_decision_recorded": true,
+      "request_not_submitted": false,
+      "can_submit_now": true,
+      "can_execute_now": true,
+      "provider_call_performed": true,
+      "image_generation_performed": true,
+      "VCP_memory_write_performed": false,
+      "DailyNote_write_performed": false,
+      "runtime_call_performed": false,
+      "secret_value_read_performed": false,
+      "production_candidate_created": false,
+      "accepted_sample_auto_promotion": false,
+      "memory_seed_promoted": false,
+      "real_executor_implemented_now": false,
+      "Push_L2_exercised": false,
+      "package_dependency_change_performed": false,
+      "commit_performed": false,
+      "push_performed": false
+    },
+    "side_effects": {
+      "provider_call_performed": true,
+      "image_generation_performed": true,
+      "VCP_memory_write_performed": false,
+      "DailyNote_write_performed": false,
+      "runtime_call_performed": false,
+      "secret_value_read_performed": false,
+      "production_candidate_created": false,
+      "accepted_sample_auto_promotion": false,
+      "memory_seed_promoted": false,
+      "package_dependency_change_performed": false,
+      "commit_performed": false,
+      "push_performed": false
+    }
+  }
+}

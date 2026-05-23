@@ -112,6 +112,7 @@ $requiredFiles = @(
   'scripts/validate_exact_new_trial_authorization_intake_preflight.js',
   'scripts/validate_exact_new_trial_intake_field_resolution.js',
   'scripts/validate_exact_new_trial_request_text_regenerated.js',
+  'scripts/validate_exact_new_trial_human_decision_preview_gate.js',
   'scripts/validate_visual_sample_memory_policy.js',
   'scripts/validate_15_day_architecture_checkpoint.js',
   'scripts/validate_local_checkpoint_manifest.js',
@@ -13251,6 +13252,74 @@ process.exit(child.status || 0);
     }
     if ($exactNewTrialRequestTextRegenerated.Push_L2_exercised -ne $false -or $exactNewTrialRequestTextRegenerated.real_executor_implemented_now -ne $false -or $exactNewTrialRequestTextRegenerated.provider_call_performed -ne $false -or $exactNewTrialRequestTextRegenerated.image_generation_performed -ne $false -or $exactNewTrialRequestTextRegenerated.VCP_memory_write_performed -ne $false -or $exactNewTrialRequestTextRegenerated.DailyNote_write_performed -ne $false -or $exactNewTrialRequestTextRegenerated.runtime_call_performed -ne $false -or $exactNewTrialRequestTextRegenerated.secret_value_read_performed -ne $false -or $exactNewTrialRequestTextRegenerated.production_candidate_created -ne $false -or $exactNewTrialRequestTextRegenerated.accepted_sample_auto_promotion -ne $false -or $exactNewTrialRequestTextRegenerated.memory_seed_promoted -ne $false -or $exactNewTrialRequestTextRegenerated.package_dependency_change_performed -ne $false -or $exactNewTrialRequestTextRegenerated.commit_performed -ne $false -or $exactNewTrialRequestTextRegenerated.push_performed -ne $false) {
       Add-Failure "Exact New-Trial Request Text Regenerated must not perform Push_L2, executor, provider, image, memory, DailyNote, runtime, secret, production, accepted-sample, memory-seed, dependency, commit, or push actions"
+    }
+  }
+
+  $exactNewTrialHumanDecisionPreviewGateOutput = & node (Join-Path $Root 'scripts/validate_exact_new_trial_human_decision_preview_gate.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Exact New-Trial Human Decision Preview Gate validation exited with failure"
+  } else {
+    $exactNewTrialHumanDecisionPreviewGate = ($exactNewTrialHumanDecisionPreviewGateOutput -join "`n") | ConvertFrom-Json
+    if ($exactNewTrialHumanDecisionPreviewGate.passed -ne $true -or $exactNewTrialHumanDecisionPreviewGate.phase -ne 'v0_6_10_exact_new_trial_human_decision_preview_gate') {
+      Add-Failure "Exact New-Trial Human Decision Preview Gate validation must pass"
+    }
+    if ($exactNewTrialHumanDecisionPreviewGate.human_decision_preview_doc_present -ne $true -or $exactNewTrialHumanDecisionPreviewGate.human_decision_preview_schema_present -ne $true -or $exactNewTrialHumanDecisionPreviewGate.human_decision_preview_report_present -ne $true -or $exactNewTrialHumanDecisionPreviewGate.human_decision_preview_fixture_present -ne $true -or $exactNewTrialHumanDecisionPreviewGate.human_decision_preview_fail_fixture_present -ne $true) {
+      Add-Failure "Exact New-Trial Human Decision Preview Gate must define doc, schema, report, pass fixture, and fail fixture"
+    }
+    if ($exactNewTrialHumanDecisionPreviewGate.authorization_package_id -ne 'AUTH-PENDING-V0-3-3-EXACT-NEW-TRIAL-20260523-001' -or $exactNewTrialHumanDecisionPreviewGate.authorization_status -ne 'draft_not_submitted' -or $exactNewTrialHumanDecisionPreviewGate.approval_status -ne 'not_requested' -or $exactNewTrialHumanDecisionPreviewGate.preview_only -ne $true -or $exactNewTrialHumanDecisionPreviewGate.human_decision_recorded -ne $false) {
+      Add-Failure "Exact New-Trial Human Decision Preview Gate must remain a not-requested preview-only packet with no recorded decision"
+    }
+    if ($exactNewTrialHumanDecisionPreviewGate.selected_option -ne 'not_selected' -or $exactNewTrialHumanDecisionPreviewGate.submit_requested -ne $false -or $exactNewTrialHumanDecisionPreviewGate.execute_requested -ne $false -or $exactNewTrialHumanDecisionPreviewGate.copyable_exact_request_text_available -ne $true) {
+      Add-Failure "Exact New-Trial Human Decision Preview Gate must keep option selection empty, keep submit/execute requests false, and preserve the copyable exact request text"
+    }
+    if ($exactNewTrialHumanDecisionPreviewGate.human_decision_still_required -ne $true -or $exactNewTrialHumanDecisionPreviewGate.no_option_auto_selected -ne $true -or $exactNewTrialHumanDecisionPreviewGate.request_not_submitted -ne $true -or $exactNewTrialHumanDecisionPreviewGate.any_real_approval_phrase_received -ne $false) {
+      Add-Failure "Exact New-Trial Human Decision Preview Gate must keep the route unsubmitted and still waiting for a human decision"
+    }
+    if ($exactNewTrialHumanDecisionPreviewGate.future_submit_step_still_separate -ne $true -or $exactNewTrialHumanDecisionPreviewGate.future_execute_step_still_separate -ne $true -or $exactNewTrialHumanDecisionPreviewGate.can_submit_now -ne $false -or $exactNewTrialHumanDecisionPreviewGate.can_execute_now -ne $false) {
+      Add-Failure "Exact New-Trial Human Decision Preview Gate must keep submit and execute as separate future steps and remain non-submittable/non-executable now"
+    }
+    if ($exactNewTrialHumanDecisionPreviewGate.negative_case_count -lt 25 -or $exactNewTrialHumanDecisionPreviewGate.caught_negative_case_count -ne $exactNewTrialHumanDecisionPreviewGate.negative_case_count -or $exactNewTrialHumanDecisionPreviewGate.all_negative_cases_caught -ne $true) {
+      Add-Failure "Exact New-Trial Human Decision Preview Gate must catch every required negative case"
+    }
+    if ($exactNewTrialHumanDecisionPreviewGate.metadata_only -ne $true -or $exactNewTrialHumanDecisionPreviewGate.Push_L2_exercised -ne $false -or $exactNewTrialHumanDecisionPreviewGate.real_executor_implemented_now -ne $false) {
+      Add-Failure "Exact New-Trial Human Decision Preview Gate must remain metadata-only with no Push_L2 or executor activation"
+    }
+    if ($exactNewTrialHumanDecisionPreviewGate.provider_call_performed -ne $false -or $exactNewTrialHumanDecisionPreviewGate.image_generation_performed -ne $false -or $exactNewTrialHumanDecisionPreviewGate.VCP_memory_write_performed -ne $false -or $exactNewTrialHumanDecisionPreviewGate.DailyNote_write_performed -ne $false -or $exactNewTrialHumanDecisionPreviewGate.runtime_call_performed -ne $false -or $exactNewTrialHumanDecisionPreviewGate.secret_value_read_performed -ne $false -or $exactNewTrialHumanDecisionPreviewGate.production_candidate_created -ne $false -or $exactNewTrialHumanDecisionPreviewGate.accepted_sample_auto_promotion -ne $false -or $exactNewTrialHumanDecisionPreviewGate.memory_seed_promoted -ne $false -or $exactNewTrialHumanDecisionPreviewGate.package_dependency_change_performed -ne $false -or $exactNewTrialHumanDecisionPreviewGate.commit_performed -ne $false -or $exactNewTrialHumanDecisionPreviewGate.push_performed -ne $false) {
+      Add-Failure "Exact New-Trial Human Decision Preview Gate must not perform provider, image, memory, DailyNote, runtime, secret, production, accepted-sample, memory-seed, dependency, commit, or push actions"
+    }
+  }
+
+  $exactNewTrialPreflightAuthorizationGateOutput = & node (Join-Path $Root 'scripts/validate_exact_new_trial_preflight_authorization_gate.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Exact New-Trial Preflight Authorization Gate validation exited with failure"
+  } else {
+    $exactNewTrialPreflightAuthorizationGate = ($exactNewTrialPreflightAuthorizationGateOutput -join "`n") | ConvertFrom-Json
+    if ($exactNewTrialPreflightAuthorizationGate.passed -ne $true -or $exactNewTrialPreflightAuthorizationGate.phase -ne 'v0_6_11_exact_new_trial_preflight_authorization_gate') {
+      Add-Failure "Exact New-Trial Preflight Authorization Gate validation must pass"
+    }
+    if ($exactNewTrialPreflightAuthorizationGate.preflight_authorization_doc_present -ne $true -or $exactNewTrialPreflightAuthorizationGate.preflight_authorization_schema_present -ne $true -or $exactNewTrialPreflightAuthorizationGate.preflight_authorization_report_present -ne $true -or $exactNewTrialPreflightAuthorizationGate.preflight_authorization_fixture_present -ne $true -or $exactNewTrialPreflightAuthorizationGate.preflight_authorization_fail_fixture_present -ne $true) {
+      Add-Failure "Exact New-Trial Preflight Authorization Gate must define doc, schema, report, pass fixture, and fail fixture"
+    }
+    if ($exactNewTrialPreflightAuthorizationGate.authorization_package_id -ne 'AUTH-PENDING-V0-3-3-EXACT-NEW-TRIAL-20260523-001' -or $exactNewTrialPreflightAuthorizationGate.authorization_status -ne 'approved_for_metadata_only_preflight' -or $exactNewTrialPreflightAuthorizationGate.approval_status -ne 'approved_for_preflight_only' -or $exactNewTrialPreflightAuthorizationGate.approved_by -ne 'Jenn' -or $exactNewTrialPreflightAuthorizationGate.approved_at_local -ne '2026-05-23') {
+      Add-Failure "Exact New-Trial Preflight Authorization Gate must record the real human preflight-only authorization identity and state"
+    }
+    if ($exactNewTrialPreflightAuthorizationGate.exact_approval_phrase_received -ne $true -or $exactNewTrialPreflightAuthorizationGate.preflight_authorization_received -ne $true -or $exactNewTrialPreflightAuthorizationGate.preflight_authorization_consumed -ne $false -or $exactNewTrialPreflightAuthorizationGate.active -ne $true -or $exactNewTrialPreflightAuthorizationGate.execute_now -ne $false) {
+      Add-Failure "Exact New-Trial Preflight Authorization Gate must record the exact approval phrase, keep the authorization active, unconsumed, and non-executing"
+    }
+    if ($exactNewTrialPreflightAuthorizationGate.preflight_only -ne $true -or $exactNewTrialPreflightAuthorizationGate.local_preflight_allowed_now -ne $true -or $exactNewTrialPreflightAuthorizationGate.provider_contact_allowed_now -ne $false -or $exactNewTrialPreflightAuthorizationGate.image_generation_allowed_now -ne $false) {
+      Add-Failure "Exact New-Trial Preflight Authorization Gate must allow only local preflight and must still block provider contact and image generation"
+    }
+    if ($exactNewTrialPreflightAuthorizationGate.request_not_submitted -ne $true -or $exactNewTrialPreflightAuthorizationGate.preflight_allowed_now -ne $true -or $exactNewTrialPreflightAuthorizationGate.can_execute_now -ne $false -or $exactNewTrialPreflightAuthorizationGate.generation_execution_authorized_by_this_record -ne $false) {
+      Add-Failure "Exact New-Trial Preflight Authorization Gate must remain unsubmitted, preflight-only, and non-executable"
+    }
+    if ($exactNewTrialPreflightAuthorizationGate.future_provider_execution_requires_new_step -ne $true -or $exactNewTrialPreflightAuthorizationGate.future_image_generation_requires_new_step -ne $true -or $exactNewTrialPreflightAuthorizationGate.metadata_only -ne $true) {
+      Add-Failure "Exact New-Trial Preflight Authorization Gate must preserve the metadata-only boundary and require a new step before any provider/image execution"
+    }
+    if ($exactNewTrialPreflightAuthorizationGate.negative_case_count -lt 25 -or $exactNewTrialPreflightAuthorizationGate.caught_negative_case_count -ne $exactNewTrialPreflightAuthorizationGate.negative_case_count -or $exactNewTrialPreflightAuthorizationGate.all_negative_cases_caught -ne $true) {
+      Add-Failure "Exact New-Trial Preflight Authorization Gate must catch every required negative case"
+    }
+    if ($exactNewTrialPreflightAuthorizationGate.Push_L2_exercised -ne $false -or $exactNewTrialPreflightAuthorizationGate.real_executor_implemented_now -ne $false -or $exactNewTrialPreflightAuthorizationGate.provider_call_performed -ne $false -or $exactNewTrialPreflightAuthorizationGate.image_generation_performed -ne $false -or $exactNewTrialPreflightAuthorizationGate.VCP_memory_write_performed -ne $false -or $exactNewTrialPreflightAuthorizationGate.DailyNote_write_performed -ne $false -or $exactNewTrialPreflightAuthorizationGate.runtime_call_performed -ne $false -or $exactNewTrialPreflightAuthorizationGate.secret_value_read_performed -ne $false -or $exactNewTrialPreflightAuthorizationGate.production_candidate_created -ne $false -or $exactNewTrialPreflightAuthorizationGate.accepted_sample_auto_promotion -ne $false -or $exactNewTrialPreflightAuthorizationGate.memory_seed_promoted -ne $false -or $exactNewTrialPreflightAuthorizationGate.package_dependency_change_performed -ne $false -or $exactNewTrialPreflightAuthorizationGate.commit_performed -ne $false -or $exactNewTrialPreflightAuthorizationGate.push_performed -ne $false) {
+      Add-Failure "Exact New-Trial Preflight Authorization Gate must not perform Push_L2, executor, provider, image, memory, DailyNote, runtime, secret, production, accepted-sample, memory-seed, dependency, commit, or push actions"
     }
   }
 

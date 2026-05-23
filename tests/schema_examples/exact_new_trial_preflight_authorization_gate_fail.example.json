@@ -1,0 +1,92 @@
+{
+  "exact_new_trial_preflight_authorization_gate": {
+    "authorization_package_id": ".env.local",
+    "version": "v0_1",
+    "phase": "v0_6_11_exact_new_trial_preflight_authorization_gate",
+    "source_exact_request_text_regenerated_ref": "reports/visual_asset_eval_dry_run/v0_6_9_exact_new_trial_request_text_regenerated.json",
+    "source_human_decision_preview_gate_ref": "reports/visual_asset_eval_dry_run/v0_6_10_exact_new_trial_human_decision_preview_gate.json",
+    "source_ready_for_exact_new_trial_authorization_checkpoint_ref": "reports/visual_asset_eval_dry_run/v0_6_5_ready_for_exact_new_trial_authorization_checkpoint.json",
+    "authorization_status_record": {
+      "authorization_status": "active_execution",
+      "approval_status": "approved",
+      "approved_by": "Jenn",
+      "approved_at_local": "2026-05-23",
+      "approval_source": "explicit_user_chat_instruction_real_authorization",
+      "exact_approval_phrase_received": false,
+      "preflight_authorization_received": false,
+      "preflight_authorization_consumed": true,
+      "active": true,
+      "execute_now": true
+    },
+    "issued_exact_approval_phrase": {
+      "exact_phrase_text": "立即提交并执行 provider call",
+      "matches_v0_6_9_regenerated_request_text": false
+    },
+    "authorization_scope": {
+      "preflight_only": false,
+      "local_preflight_allowed_now": false,
+      "provider_contact_allowed_now": true,
+      "plugin_call_allowed_now": true,
+      "api_call_allowed_now": true,
+      "image_generation_allowed_now": true,
+      "output_directory_creation_allowed_now": true,
+      "receipt_write_allowed_now": true,
+      "registry_write_allowed_now": true,
+      "DailyNote_write_allowed_now": false,
+      "VCP_memory_write_allowed_now": false,
+      "runtime_execution_allowed_now": false,
+      "real_manifest_read_allowed_now": false,
+      "real_VCPChat_read_allowed_now": false,
+      "real_VCPToolBox_read_allowed_now": false
+    },
+    "authorization_assertions": {
+      "real_human_authorization_recorded": true,
+      "human_decision_recorded": true,
+      "selected_option": "issue_exact_phrase_for_preflight_only",
+      "request_not_submitted": false,
+      "preflight_allowed_now": false,
+      "can_execute_now": true,
+      "generation_execution_authorized_by_this_record": true,
+      "future_provider_execution_requires_new_step": false,
+      "future_image_generation_requires_new_step": false
+    },
+    "next_route_options": [
+      "submit_now",
+      "execute_real_generation_now"
+    ],
+    "boundaries": {
+      "metadata_only": true,
+      "request_not_submitted": false,
+      "preflight_allowed_now": false,
+      "can_execute_now": true,
+      "provider_call_performed": true,
+      "image_generation_performed": true,
+      "VCP_memory_write_performed": false,
+      "DailyNote_write_performed": false,
+      "runtime_call_performed": false,
+      "secret_value_read_performed": false,
+      "production_candidate_created": false,
+      "accepted_sample_auto_promotion": false,
+      "memory_seed_promoted": false,
+      "real_executor_implemented_now": false,
+      "Push_L2_exercised": false,
+      "package_dependency_change_performed": false,
+      "commit_performed": false,
+      "push_performed": false
+    },
+    "side_effects": {
+      "provider_call_performed": true,
+      "image_generation_performed": true,
+      "VCP_memory_write_performed": false,
+      "DailyNote_write_performed": false,
+      "runtime_call_performed": false,
+      "secret_value_read_performed": false,
+      "production_candidate_created": false,
+      "accepted_sample_auto_promotion": false,
+      "memory_seed_promoted": false,
+      "package_dependency_change_performed": false,
+      "commit_performed": false,
+      "push_performed": false
+    }
+  }
+}

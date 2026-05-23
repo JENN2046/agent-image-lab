@@ -1,0 +1,88 @@
+id: exact_new_trial_human_decision_preview_gate
+version: v0_1
+phase: v0_6_10_exact_new_trial_human_decision_preview_gate
+type: object
+required:
+  - authorization_package_id
+  - version
+  - phase
+  - source_exact_request_text_regenerated_ref
+  - source_ready_for_exact_new_trial_authorization_checkpoint_ref
+  - source_month_plan_ref
+  - decision_preview_status
+  - decision_preview_options
+  - decision_preview_assertions
+  - human_decision_boundary
+  - next_route_options
+  - boundaries
+  - side_effects
+properties:
+  decision_preview_status:
+    required:
+      - authorization_status
+      - approval_status
+      - preview_only
+      - human_decision_recorded
+      - selected_option
+      - submit_requested
+      - execute_requested
+  decision_preview_options:
+    required:
+      - keep_draft_unissued
+      - future_issue_phrase_in_separate_human_turn_only
+      - decline_current_wording_and_return_to_local_revision
+  decision_preview_assertions:
+    required:
+      - copyable_exact_request_text_available
+      - human_decision_still_required
+      - no_option_auto_selected
+      - request_not_submitted
+      - can_submit_now
+      - can_execute_now
+      - any_real_approval_phrase_received
+      - future_submit_step_still_separate
+      - future_execute_step_still_separate
+  human_decision_boundary:
+    required:
+      - issuing_the_exact_phrase_is_not_performed_in_this_phase
+      - submission_is_not_performed_in_this_phase
+      - provider_execution_is_not_performed_in_this_phase
+      - human_turn_required_before_any_status_change
+      - human_turn_required_before_any_submit_request
+      - human_turn_required_before_any_execute_request
+  boundaries:
+    required:
+      - metadata_only
+      - preview_only
+      - human_decision_recorded
+      - request_not_submitted
+      - can_submit_now
+      - can_execute_now
+      - provider_call_performed
+      - image_generation_performed
+      - VCP_memory_write_performed
+      - DailyNote_write_performed
+      - runtime_call_performed
+      - secret_value_read_performed
+      - production_candidate_created
+      - accepted_sample_auto_promotion
+      - memory_seed_promoted
+      - real_executor_implemented_now
+      - Push_L2_exercised
+      - package_dependency_change_performed
+      - commit_performed
+      - push_performed
+  side_effects:
+    required:
+      - provider_call_performed
+      - image_generation_performed
+      - VCP_memory_write_performed
+      - DailyNote_write_performed
+      - runtime_call_performed
+      - secret_value_read_performed
+      - production_candidate_created
+      - accepted_sample_auto_promotion
+      - memory_seed_promoted
+      - package_dependency_change_performed
+      - commit_performed
+      - push_performed

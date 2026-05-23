@@ -2,6 +2,121 @@
 
 本文是 Agent Image Lab 的总路线图，用来把 v0.2 基线、v0.3 授权门槛、MVP-B dry-run 和未来真实闭环串成一条可执行路径。
 
+## v0.6.11 - Exact New-Trial Preflight Authorization Gate
+
+Status: completed_validated_local_preflight_authorization_slice.
+
+Purpose:
+- Record one real human authorization decision for the exact new-trial route.
+- Keep that authorization limited to local metadata/preflight only.
+- Preserve the hard boundary that provider contact, image generation, output
+  writes, memory writes, runtime, and remote actions remain blocked.
+
+Artifacts:
+- `docs/V0_6_11_EXACT_NEW_TRIAL_PREFLIGHT_AUTHORIZATION_GATE.md`
+- `schemas/exact_new_trial_preflight_authorization_gate.schema.yaml`
+- `reports/visual_asset_eval_dry_run/v0_6_11_exact_new_trial_preflight_authorization_gate.json`
+- `tests/schema_examples/exact_new_trial_preflight_authorization_gate.example.json`
+- `tests/schema_examples/exact_new_trial_preflight_authorization_gate_fail.example.json`
+- `scripts/validate_exact_new_trial_preflight_authorization_gate.js`
+- `docs/V0_6_10_EXACT_NEW_TRIAL_HUMAN_DECISION_PREVIEW_GATE.md`
+- `schemas/exact_new_trial_human_decision_preview_gate.schema.yaml`
+- `reports/visual_asset_eval_dry_run/v0_6_10_exact_new_trial_human_decision_preview_gate.json`
+- `tests/schema_examples/exact_new_trial_human_decision_preview_gate.example.json`
+- `tests/schema_examples/exact_new_trial_human_decision_preview_gate_fail.example.json`
+- `scripts/validate_exact_new_trial_human_decision_preview_gate.js`
+
+Boundary state:
+- `source_local_commit: 2f2db47`
+- `source_remote_commit: 16a8aa3`
+- `source_phase: v0_6_10_exact_new_trial_human_decision_preview_gate`
+- `current_gate_phase: v0_6_11_exact_new_trial_preflight_authorization_gate`
+- `active current phase: v0_3_3_first_live_generation_pilot`
+- `resume_guard_source_phase: v0_3_2_live_candidate_action_packet`
+- `next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial`
+- `authorization_package_id: AUTH-PENDING-V0-3-3-EXACT-NEW-TRIAL-20260523-001`
+- `authorization_status: approved_for_metadata_only_preflight`
+- `approval_status: approved_for_preflight_only`
+- `approved_by: Jenn`
+- `approved_at_local: 2026-05-23`
+- `exact_approval_phrase_received: true`
+- `preflight_authorization_received: true`
+- `preflight_authorization_consumed: false`
+- `human_decision_recorded: true`
+- `selected_option: issue_exact_phrase_for_preflight_only`
+- `request_not_submitted: true`
+- `preflight_only: true`
+- `local_preflight_allowed_now: true`
+- `provider_contact_allowed_now: false`
+- `image_generation_allowed_now: false`
+- `can_submit_now: false`
+- `can_execute_now: false`
+- `provider_call_performed: false`
+- `image_generation_performed: false`
+- `memory_write_performed: false`
+- `real_executor_performed: false`
+- `secret_value_read_performed: false`
+- `push_allowed: false`
+- `push_declined_by_user: true`
+- `local_only_continuation_selected: true`
+
+Recommended next: use this authorization only to run one local preflight-only
+gate. Do not contact the provider, generate an image, or write output artifacts
+by default.
+
+## v0.6.10 - Exact New-Trial Human Decision Preview Gate
+
+Status: completed_validated_local_human_decision_preview_slice.
+
+Purpose:
+- Turn the post-`v0.6.9` route into one explicit local-only preview gate for the
+  next human decision.
+- Keep the regenerated request text copyable while still refusing to record a
+  human decision, submit a request, or enable execution.
+- Make the future branch points explicit without changing the current
+  `draft_not_submitted / not_requested / not_selected` state.
+
+Artifacts:
+- `docs/V0_6_10_EXACT_NEW_TRIAL_HUMAN_DECISION_PREVIEW_GATE.md`
+- `schemas/exact_new_trial_human_decision_preview_gate.schema.yaml`
+- `reports/visual_asset_eval_dry_run/v0_6_10_exact_new_trial_human_decision_preview_gate.json`
+- `tests/schema_examples/exact_new_trial_human_decision_preview_gate.example.json`
+- `tests/schema_examples/exact_new_trial_human_decision_preview_gate_fail.example.json`
+- `scripts/validate_exact_new_trial_human_decision_preview_gate.js`
+
+Boundary state:
+- `source_local_commit: 2f2db47`
+- `source_remote_commit: 16a8aa3`
+- `source_phase: v0_6_9_exact_new_trial_request_text_regenerated`
+- `current_gate_phase: v0_6_10_exact_new_trial_human_decision_preview_gate`
+- `active current phase: v0_3_3_first_live_generation_pilot`
+- `resume_guard_source_phase: v0_3_2_live_candidate_action_packet`
+- `next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial`
+- `authorization_package_id: AUTH-PENDING-V0-3-3-EXACT-NEW-TRIAL-20260523-001`
+- `authorization_status: draft_not_submitted`
+- `approval_status: not_requested`
+- `human_decision_recorded: false`
+- `selected_option: not_selected`
+- `submit_requested: false`
+- `execute_requested: false`
+- `copyable_exact_request_text_available: true`
+- `human_decision_still_required: true`
+- `request_not_submitted: true`
+- `can_submit_now: false`
+- `can_execute_now: false`
+- `provider_call_performed: false`
+- `image_generation_performed: false`
+- `memory_write_performed: false`
+- `real_executor_performed: false`
+- `secret_value_read_performed: false`
+- `push_allowed: false`
+- `push_declined_by_user: true`
+- `local_only_continuation_selected: true`
+
+Recommended next: wait for an explicit human decision on whether to keep the
+draft unissued or later issue the exact phrase in a separate turn. Do not
+submit or execute anything by default.
+
 ## v0.6.9 - Exact New-Trial Request Text Regenerated
 
 Status: completed_validated_local_request_text_regeneration_slice.

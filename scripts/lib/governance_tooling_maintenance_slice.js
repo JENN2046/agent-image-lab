@@ -865,6 +865,46 @@ const EXPECTED_V0_6_9_EXACT_NEW_TRIAL_REQUEST_TEXT_REGENERATED_SLICE = [
   "tests/schema_examples/exact_new_trial_request_text_regenerated_fail.example.json"
 ].sort();
 
+const EXPECTED_V0_6_10_EXACT_NEW_TRIAL_HUMAN_DECISION_PREVIEW_GATE_SLICE = [
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  ".agent_board/VALIDATION_LOG.md",
+  "docs/00_project_roadmap.md",
+  "docs/V0_6_10_EXACT_NEW_TRIAL_HUMAN_DECISION_PREVIEW_GATE.md",
+  "reports/visual_asset_eval_dry_run/v0_6_10_exact_new_trial_human_decision_preview_gate.json",
+  "schemas/exact_new_trial_human_decision_preview_gate.schema.yaml",
+  "scripts/lib/governance_tooling_maintenance_slice.js",
+  "scripts/validate_exact_new_trial_human_decision_preview_gate.js",
+  "scripts/validate_mvp.ps1",
+  "tests/schema_examples/exact_new_trial_human_decision_preview_gate.example.json",
+  "tests/schema_examples/exact_new_trial_human_decision_preview_gate_fail.example.json"
+].sort();
+
+const EXPECTED_V0_6_11_EXACT_NEW_TRIAL_PREFLIGHT_AUTHORIZATION_GATE_SLICE = [
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  ".agent_board/VALIDATION_LOG.md",
+  "docs/00_project_roadmap.md",
+  "docs/V0_6_10_EXACT_NEW_TRIAL_HUMAN_DECISION_PREVIEW_GATE.md",
+  "docs/V0_6_11_EXACT_NEW_TRIAL_PREFLIGHT_AUTHORIZATION_GATE.md",
+  "reports/visual_asset_eval_dry_run/v0_6_10_exact_new_trial_human_decision_preview_gate.json",
+  "reports/visual_asset_eval_dry_run/v0_6_11_exact_new_trial_preflight_authorization_gate.json",
+  "schemas/exact_new_trial_human_decision_preview_gate.schema.yaml",
+  "schemas/exact_new_trial_preflight_authorization_gate.schema.yaml",
+  "scripts/lib/governance_tooling_maintenance_slice.js",
+  "scripts/validate_exact_new_trial_human_decision_preview_gate.js",
+  "scripts/validate_exact_new_trial_preflight_authorization_gate.js",
+  "scripts/validate_mvp.ps1",
+  "tests/schema_examples/exact_new_trial_human_decision_preview_gate.example.json",
+  "tests/schema_examples/exact_new_trial_human_decision_preview_gate_fail.example.json",
+  "tests/schema_examples/exact_new_trial_preflight_authorization_gate.example.json",
+  "tests/schema_examples/exact_new_trial_preflight_authorization_gate_fail.example.json"
+].sort();
+
 const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "governance_tooling_maintenance_slice_v1",
@@ -1053,6 +1093,14 @@ const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "v0_6_9_exact_new_trial_request_text_regenerated_slice",
     files: EXPECTED_V0_6_9_EXACT_NEW_TRIAL_REQUEST_TEXT_REGENERATED_SLICE
+  },
+  {
+    id: "v0_6_10_exact_new_trial_human_decision_preview_gate_slice",
+    files: EXPECTED_V0_6_10_EXACT_NEW_TRIAL_HUMAN_DECISION_PREVIEW_GATE_SLICE
+  },
+  {
+    id: "v0_6_11_exact_new_trial_preflight_authorization_gate_slice",
+    files: EXPECTED_V0_6_11_EXACT_NEW_TRIAL_PREFLIGHT_AUTHORIZATION_GATE_SLICE
   }
 ];
 
@@ -1442,6 +1490,8 @@ module.exports = {
   EXPECTED_V0_6_5_READY_FOR_EXACT_NEW_TRIAL_AUTHORIZATION_CHECKPOINT_SLICE,
   EXPECTED_V0_6_8_EXACT_NEW_TRIAL_INTAKE_FIELD_RESOLUTION_SLICE,
   EXPECTED_V0_6_9_EXACT_NEW_TRIAL_REQUEST_TEXT_REGENERATED_SLICE,
+  EXPECTED_V0_6_10_EXACT_NEW_TRIAL_HUMAN_DECISION_PREVIEW_GATE_SLICE,
+  EXPECTED_V0_6_11_EXACT_NEW_TRIAL_PREFLIGHT_AUTHORIZATION_GATE_SLICE,
   GOVERNANCE_TOOLING_ALLOWED_SLICES,
   buildGovernanceToolingMaintenanceSliceReport,
   fileAllowedInGovernanceToolingSlice,

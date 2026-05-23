@@ -1,5 +1,99 @@
 ---
 
+- [x] ID: v0_6_11_exact_new_trial_preflight_authorization_gate
+      Title: Record Exact New-Trial Preflight Authorization
+      Reason: After v0.6.10 exposed the human decision branch, the next exact local step is to record the real human authorization conservatively as metadata/preflight-only without reopening provider execution.
+      Lane: Green.
+      Status: completed_validated_local_preflight_authorization_slice.
+      Source local commit: 2f2db473b7d0c28c74674f7191417f6f19541954.
+      Source remote commit: 16a8aa38d4aaefbb1cd3e3938e520c64e62d22c1.
+      Source phase: v0_6_10_exact_new_trial_human_decision_preview_gate.
+      Previous phase commit: 2f2db473b7d0c28c74674f7191417f6f19541954.
+      Previous phase push performed: false.
+      Current gate phase: v0_6_11_exact_new_trial_preflight_authorization_gate.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Scope: doc/schema/report/fixture/validator/status compact batch only.
+      Changed: docs/V0_6_10_EXACT_NEW_TRIAL_HUMAN_DECISION_PREVIEW_GATE.md; docs/V0_6_11_EXACT_NEW_TRIAL_PREFLIGHT_AUTHORIZATION_GATE.md; schemas/exact_new_trial_human_decision_preview_gate.schema.yaml; schemas/exact_new_trial_preflight_authorization_gate.schema.yaml; reports/visual_asset_eval_dry_run/v0_6_10_exact_new_trial_human_decision_preview_gate.json; reports/visual_asset_eval_dry_run/v0_6_11_exact_new_trial_preflight_authorization_gate.json; tests/schema_examples/exact_new_trial_human_decision_preview_gate.example.json; tests/schema_examples/exact_new_trial_human_decision_preview_gate_fail.example.json; tests/schema_examples/exact_new_trial_preflight_authorization_gate.example.json; tests/schema_examples/exact_new_trial_preflight_authorization_gate_fail.example.json; scripts/validate_exact_new_trial_human_decision_preview_gate.js; scripts/validate_exact_new_trial_preflight_authorization_gate.js; scripts/validate_mvp.ps1; scripts/lib/governance_tooling_maintenance_slice.js; docs/00_project_roadmap.md; .agent_board resume surfaces.
+      authorization_package_id: AUTH-PENDING-V0-3-3-EXACT-NEW-TRIAL-20260523-001.
+      authorization_status: approved_for_metadata_only_preflight.
+      approval_status: approved_for_preflight_only.
+      approved_by: Jenn.
+      approved_at_local: 2026-05-23.
+      exact_approval_phrase_received: true.
+      preflight_authorization_received: true.
+      preflight_authorization_consumed: false.
+      preflight_only: true.
+      local_preflight_allowed_now: true.
+      provider_contact_allowed_now: false.
+      image_generation_allowed_now: false.
+      human_decision_recorded: true.
+      selected_option: issue_exact_phrase_for_preflight_only.
+      request_not_submitted: true.
+      can_submit_now: false.
+      can_execute_now: false.
+      provider_call_performed: false.
+      image_generation_performed: false.
+      VCP_memory_write_performed: false.
+      DailyNote_write_performed: false.
+      runtime_call_performed: false.
+      secret_value_read_performed: false.
+      push_allowed: false.
+      push_status: not_performed.
+      push_declined_by_user: true.
+      local_only_continuation_selected: true.
+      Stop condition: provider call, image generation, output write, memory write, DailyNote write, runtime/VCPToolBox/VCPChat/MCP action, commit, push, tag, release, deploy, or validation failure requiring judgment.
+      Ready condition: a real human authorization is recorded, but it remains metadata/preflight-only and keeps execution blocked.
+      Recommended next: run_local_preflight_only_without_provider_execution_or_keep_authorization_idle.
+
+---
+
+- [x] ID: v0_6_10_exact_new_trial_human_decision_preview_gate
+      Title: Preview Exact New-Trial Human Decision Gate
+      Reason: After v0.6.9 regenerated a copyable exact request text, the next local-safe step is to preview the future human decision options without recording a decision or reopening submission/execution.
+      Lane: Green.
+      Status: completed_validated_local_human_decision_preview_slice.
+      Source local commit: 2f2db473b7d0c28c74674f7191417f6f19541954.
+      Source remote commit: 16a8aa38d4aaefbb1cd3e3938e520c64e62d22c1.
+      Source phase: v0_6_9_exact_new_trial_request_text_regenerated.
+      Previous phase commit: 2f2db473b7d0c28c74674f7191417f6f19541954.
+      Previous phase push performed: false.
+      Current gate phase: v0_6_10_exact_new_trial_human_decision_preview_gate.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Scope: doc/schema/report/fixture/validator/status compact batch only.
+      Changed: docs/V0_6_10_EXACT_NEW_TRIAL_HUMAN_DECISION_PREVIEW_GATE.md; schemas/exact_new_trial_human_decision_preview_gate.schema.yaml; reports/visual_asset_eval_dry_run/v0_6_10_exact_new_trial_human_decision_preview_gate.json; tests/schema_examples/exact_new_trial_human_decision_preview_gate.example.json; tests/schema_examples/exact_new_trial_human_decision_preview_gate_fail.example.json; scripts/validate_exact_new_trial_human_decision_preview_gate.js; scripts/validate_mvp.ps1; scripts/lib/governance_tooling_maintenance_slice.js; docs/00_project_roadmap.md; .agent_board resume surfaces.
+      authorization_package_id: AUTH-PENDING-V0-3-3-EXACT-NEW-TRIAL-20260523-001.
+      authorization_status: draft_not_submitted.
+      approval_status: not_requested.
+      preview_only: true.
+      human_decision_recorded: false.
+      selected_option: not_selected.
+      submit_requested: false.
+      execute_requested: false.
+      copyable_exact_request_text_available: true.
+      human_decision_still_required: true.
+      request_not_submitted: true.
+      can_submit_now: false.
+      can_execute_now: false.
+      provider_call_performed: false.
+      image_generation_performed: false.
+      VCP_memory_write_performed: false.
+      DailyNote_write_performed: false.
+      runtime_call_performed: false.
+      secret_value_read_performed: false.
+      push_allowed: false.
+      push_status: not_performed.
+      push_declined_by_user: true.
+      local_only_continuation_selected: true.
+      Stop condition: human decision recording, phrase issuance, request submission, provider call, image generation, output write, memory write, DailyNote write, runtime/VCPToolBox/VCPChat/MCP action, commit, push, tag, release, deploy, or validation failure requiring judgment.
+      Ready condition: the route exposes the next human choice explicitly while keeping decision state empty, request state unsubmitted, and execution blocked.
+      Recommended next: wait_for_explicit_human_decision_or_keep_draft_unissued.
+
+---
+
 - [x] ID: v0_6_9_exact_new_trial_request_text_regenerated
       Title: Regenerate Exact New-Trial Request Text
       Reason: After v0.6.8 resolved the five exact fields locally, the next local-safe step is to recompile those values into one copyable non-placeholder request text without reopening submission or execution.

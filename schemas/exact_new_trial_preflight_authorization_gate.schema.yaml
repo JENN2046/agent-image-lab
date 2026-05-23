@@ -1,0 +1,97 @@
+id: exact_new_trial_preflight_authorization_gate
+version: v0_1
+phase: v0_6_11_exact_new_trial_preflight_authorization_gate
+type: object
+required:
+  - authorization_package_id
+  - version
+  - phase
+  - source_exact_request_text_regenerated_ref
+  - source_human_decision_preview_gate_ref
+  - source_ready_for_exact_new_trial_authorization_checkpoint_ref
+  - authorization_status_record
+  - issued_exact_approval_phrase
+  - authorization_scope
+  - authorization_assertions
+  - next_route_options
+  - boundaries
+  - side_effects
+properties:
+  authorization_status_record:
+    required:
+      - authorization_status
+      - approval_status
+      - approved_by
+      - approved_at_local
+      - approval_source
+      - exact_approval_phrase_received
+      - preflight_authorization_received
+      - preflight_authorization_consumed
+      - active
+      - execute_now
+  issued_exact_approval_phrase:
+    required:
+      - exact_phrase_text
+      - matches_v0_6_9_regenerated_request_text
+  authorization_scope:
+    required:
+      - preflight_only
+      - local_preflight_allowed_now
+      - provider_contact_allowed_now
+      - plugin_call_allowed_now
+      - api_call_allowed_now
+      - image_generation_allowed_now
+      - output_directory_creation_allowed_now
+      - receipt_write_allowed_now
+      - registry_write_allowed_now
+      - DailyNote_write_allowed_now
+      - VCP_memory_write_allowed_now
+      - runtime_execution_allowed_now
+      - real_manifest_read_allowed_now
+      - real_VCPChat_read_allowed_now
+      - real_VCPToolBox_read_allowed_now
+  authorization_assertions:
+    required:
+      - real_human_authorization_recorded
+      - human_decision_recorded
+      - selected_option
+      - request_not_submitted
+      - preflight_allowed_now
+      - can_execute_now
+      - generation_execution_authorized_by_this_record
+      - future_provider_execution_requires_new_step
+      - future_image_generation_requires_new_step
+  boundaries:
+    required:
+      - metadata_only
+      - request_not_submitted
+      - preflight_allowed_now
+      - can_execute_now
+      - provider_call_performed
+      - image_generation_performed
+      - VCP_memory_write_performed
+      - DailyNote_write_performed
+      - runtime_call_performed
+      - secret_value_read_performed
+      - production_candidate_created
+      - accepted_sample_auto_promotion
+      - memory_seed_promoted
+      - real_executor_implemented_now
+      - Push_L2_exercised
+      - package_dependency_change_performed
+      - commit_performed
+      - push_performed
+  side_effects:
+    required:
+      - provider_call_performed
+      - image_generation_performed
+      - VCP_memory_write_performed
+      - DailyNote_write_performed
+      - runtime_call_performed
+      - secret_value_read_performed
+      - production_candidate_created
+      - accepted_sample_auto_promotion
+      - memory_seed_promoted
+      - package_dependency_change_performed
+      - commit_performed
+      - push_performed
