@@ -1,5 +1,39 @@
 ---
 
+- [x] ID: v0_6_24_exact_new_trial_3shot_stability_preflight
+      Title: Establish Exact New-Trial 3-Shot Stability Preflight
+      Reason: User requested a 3-shot stability protocol before any additional continuous generation.
+      Lane: Green.
+      Status: completed_validated_local_3shot_stability_preflight.
+      Source phase: v0_6_23_single_generation_with_payload_capture_and_artifact_trace.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Resume compaction compatibility anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Scope: local stability protocol, schema, report, fixtures, validator, roadmap, and status sync only.
+      Plan ref: stability_tests/plans/safe_adult_editorial_portrait_v1_3shot_stability_preflight.yaml.
+      Report ref: reports/visual_asset_eval_dry_run/v0_6_24_exact_new_trial_3shot_stability_preflight.json.
+      Validator ref: scripts/validate_exact_new_trial_3shot_stability_preflight.js.
+      provider_route: image_gen.imagegen.
+      prompt_package_ref: prompts/image_generation/safe_adult_editorial_portrait_v1.yaml.
+      source_success_attempt_id: v0_3_3_exact_new_trial_002.
+      planned_shots: v0_3_3_exact_new_trial_003_shot_1; v0_3_3_exact_new_trial_003_shot_2; v0_3_3_exact_new_trial_003_shot_3.
+      scoring: 3/3 succeeded_image_generated stable candidate; 2/3 conditional trace analysis; 0-1/3 unstable repair route.
+      provider_call_performed: false.
+      image_generation_performed: false.
+      retry_allowed: false.
+      source_002_overwrite_allowed: false.
+      raw_provider_payload_capture_required_per_shot: true.
+      raw_provider_response_capture_allowed: false.
+      secret_value_read_performed: false.
+      VCP_memory_write_performed: false.
+      DailyNote_write_performed: false.
+      accepted_sample_auto_promotion: false.
+      production_candidate_created: false.
+      push_allowed: false.
+      push_status: not_performed.
+      Recommended next: if future 3-shot is authorized, run shot 1 only after immediate path-collision preflight and independent payload/receipt/registry setup.
+
 - [x] ID: v0_6_23_single_generation_with_payload_capture_and_artifact_trace
       Title: Run One Real Generation With Payload Capture And Artifact Trace
       Lane: Amber.

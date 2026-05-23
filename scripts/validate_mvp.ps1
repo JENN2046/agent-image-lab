@@ -123,6 +123,7 @@ $requiredFiles = @(
   'scripts/validate_exact_new_trial_single_generation_execution_preflight.js',
   'scripts/create_provider_payload_capture_preflight.js',
   'scripts/validate_provider_payload_capture_preflight.js',
+  'scripts/validate_exact_new_trial_3shot_stability_preflight.js',
   'scripts/validate_visual_sample_memory_policy.js',
   'scripts/validate_15_day_architecture_checkpoint.js',
   'scripts/validate_local_checkpoint_manifest.js',
@@ -13655,6 +13656,31 @@ process.exit(child.status || 0);
     }
     if ($providerPayloadCapturePreflight.remaining_failure_layers.Count -lt 3) {
       Add-Failure "Provider Payload Capture Preflight must preserve remaining failure-layer localization"
+    }
+  }
+
+  $exactNewTrial3ShotPreflightOutput = & node (Join-Path $Root 'scripts/validate_exact_new_trial_3shot_stability_preflight.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Exact New-Trial 3-shot Stability Preflight validation exited with failure"
+  } else {
+    $exactNewTrial3ShotPreflight = ($exactNewTrial3ShotPreflightOutput -join "`n") | ConvertFrom-Json
+    if ($exactNewTrial3ShotPreflight.passed -ne $true -or $exactNewTrial3ShotPreflight.phase -ne 'v0_6_24_exact_new_trial_3shot_stability_preflight') {
+      Add-Failure "Exact New-Trial 3-shot Stability Preflight validation must pass"
+    }
+    if ($exactNewTrial3ShotPreflight.prompt_package_ref -ne 'prompts/image_generation/safe_adult_editorial_portrait_v1.yaml' -or $exactNewTrial3ShotPreflight.provider_route -ne 'image_gen.imagegen' -or $exactNewTrial3ShotPreflight.source_success_attempt_id -ne 'v0_3_3_exact_new_trial_002') {
+      Add-Failure "Exact New-Trial 3-shot Stability Preflight must bind the safe portrait prompt, image_gen.imagegen, and source 002"
+    }
+    if ($exactNewTrial3ShotPreflight.shot_count -ne 3 -or $exactNewTrial3ShotPreflight.all_shot_paths_unique -ne $true -or $exactNewTrial3ShotPreflight.future_paths_absent_now -ne $true) {
+      Add-Failure "Exact New-Trial 3-shot Stability Preflight must define 3 future shots with unique absent paths"
+    }
+    if ($exactNewTrial3ShotPreflight.source_002_overwrite_allowed -ne $false -or $exactNewTrial3ShotPreflight.retry_allowed -ne $false -or $exactNewTrial3ShotPreflight.raw_provider_response_capture_allowed -ne $false -or $exactNewTrial3ShotPreflight.secret_value_read_allowed -ne $false) {
+      Add-Failure "Exact New-Trial 3-shot Stability Preflight must block 002 overwrite, retry, raw response capture, and secret reads"
+    }
+    if ($exactNewTrial3ShotPreflight.provider_call_performed -ne $false -or $exactNewTrial3ShotPreflight.image_generation_performed -ne $false -or $exactNewTrial3ShotPreflight.VCP_memory_write_allowed -ne $false -or $exactNewTrial3ShotPreflight.DailyNote_write_allowed -ne $false -or $exactNewTrial3ShotPreflight.accepted_sample_auto_promotion_allowed -ne $false -or $exactNewTrial3ShotPreflight.production_candidate_allowed -ne $false -or $exactNewTrial3ShotPreflight.push_allowed -ne $false) {
+      Add-Failure "Exact New-Trial 3-shot Stability Preflight must not perform provider/image actions and must block memory, DailyNote, promotion, production candidate, and push"
+    }
+    if ($exactNewTrial3ShotPreflight.negative_case_count -lt 20 -or $exactNewTrial3ShotPreflight.caught_negative_case_count -ne $exactNewTrial3ShotPreflight.negative_case_count -or $exactNewTrial3ShotPreflight.all_negative_cases_caught -ne $true) {
+      Add-Failure "Exact New-Trial 3-shot Stability Preflight must catch every required negative case"
     }
   }
 

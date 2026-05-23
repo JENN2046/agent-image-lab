@@ -1,0 +1,47 @@
+schema_id: exact_new_trial_3shot_stability_preflight
+version: v0_1
+root_key: exact_new_trial_3shot_stability_preflight
+required:
+  - phase
+  - plan_ref
+  - prompt_package_ref
+  - provider_route
+  - source_success_attempt_id
+  - shot_count
+  - shots
+  - stability_scoring
+  - boundary
+invariants:
+  phase: v0_6_24_exact_new_trial_3shot_stability_preflight
+  prompt_package_ref: prompts/image_generation/safe_adult_editorial_portrait_v1.yaml
+  provider_route: image_gen.imagegen
+  source_success_attempt_id: v0_3_3_exact_new_trial_002
+  shot_count: 3
+  can_execute_now: false
+  retry_allowed: false
+  source_002_overwrite_allowed: false
+  raw_provider_response_capture_allowed: false
+  secret_value_read_allowed: false
+  VCP_memory_write_allowed: false
+  DailyNote_write_allowed: false
+  accepted_sample_auto_promotion_allowed: false
+  production_candidate_allowed: false
+  push_allowed: false
+per_shot_required_unique_paths:
+  - output_directory
+  - output_image_path
+  - payload_capture_ref
+  - attempt_result_path
+  - receipt_path
+  - registry_path
+  - review_console_bridge_ref
+per_shot_required_flags:
+  max_provider_calls: 1
+  max_image_candidates: 1
+  retry_allowed: false
+  overwrite_existing_files_allowed: false
+  raw_provider_payload_capture_required: true
+  raw_provider_response_capture_allowed: false
+  requires_independent_receipt: true
+  requires_independent_registry: true
+  requires_independent_payload_capture: true

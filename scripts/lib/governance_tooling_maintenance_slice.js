@@ -1098,6 +1098,28 @@ const EXPECTED_V0_6_12_TO_V0_6_23_SINGLE_GENERATION_WITH_PAYLOAD_TRACE_SLICE = A
   "runs/real_generation/v0_3_3_exact_new_trial_002/generation_attempt_result.json"
 ])).sort();
 
+const EXPECTED_V0_6_24_EXACT_NEW_TRIAL_3SHOT_STABILITY_PREFLIGHT_SLICE = [
+  ".agent_board/AUTOPILOT_LEDGER.md",
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  ".agent_board/VALIDATION_LOG.md",
+  "docs/V0_6_24_EXACT_NEW_TRIAL_3SHOT_STABILITY_PREFLIGHT.md",
+  "docs/00_project_roadmap.md",
+  "reports/visual_asset_eval_dry_run/v0_6_24_exact_new_trial_3shot_stability_preflight.json",
+  "schemas/exact_new_trial_3shot_stability_preflight.schema.yaml",
+  "scripts/lib/governance_tooling_maintenance_slice.js",
+  "scripts/validate_exact_new_trial_3shot_stability_preflight.js",
+  "scripts/validate_mvp.ps1",
+  "stability_tests/README.md",
+  "stability_tests/plans/safe_adult_editorial_portrait_v1_3shot_stability_preflight.yaml",
+  "stability_tests/three_shot_stability_plan_registry.yaml",
+  "tests/schema_examples/autopilot_agent_board_resume_compaction_guard.example.json",
+  "tests/schema_examples/exact_new_trial_3shot_stability_preflight.example.json",
+  "tests/schema_examples/exact_new_trial_3shot_stability_preflight_fail.json"
+].sort();
+
 const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "governance_tooling_maintenance_slice_v1",
@@ -1366,6 +1388,10 @@ const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "v0_6_12_to_v0_6_23_single_generation_with_payload_trace_slice",
     files: EXPECTED_V0_6_12_TO_V0_6_23_SINGLE_GENERATION_WITH_PAYLOAD_TRACE_SLICE
+  },
+  {
+    id: "v0_6_24_exact_new_trial_3shot_stability_preflight_slice",
+    files: EXPECTED_V0_6_24_EXACT_NEW_TRIAL_3SHOT_STABILITY_PREFLIGHT_SLICE
   }
 ];
 

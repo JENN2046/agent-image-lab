@@ -1,5 +1,47 @@
 ---
 
+## Checkpoint - v0.6.24 Exact New-Trial 3-Shot Stability Preflight
+
+```text
+phase: v0_6_24_exact_new_trial_3shot_stability_preflight
+status: completed_validated_local_3shot_stability_preflight
+mode: Green Lane local protocol/schema/report/validator/status sync
+source_phase: v0_6_23_single_generation_with_payload_capture_and_artifact_trace
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+resume_compaction_compatibility_anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+completed:
+- created v0.6.24 3-shot stability preflight document
+- created safe adult editorial portrait 3-shot stability plan
+- created schema, report, pass/fail fixtures, and validator
+- updated stability_tests registry/readme and roadmap
+- synced .agent_board resume surfaces
+plan_ref: stability_tests/plans/safe_adult_editorial_portrait_v1_3shot_stability_preflight.yaml
+report_ref: reports/visual_asset_eval_dry_run/v0_6_24_exact_new_trial_3shot_stability_preflight.json
+validator_ref: scripts/validate_exact_new_trial_3shot_stability_preflight.js
+provider_route: image_gen.imagegen
+prompt_package_ref: prompts/image_generation/safe_adult_editorial_portrait_v1.yaml
+source_success_attempt_id: v0_3_3_exact_new_trial_002
+shot_count: 3
+planned_shots: v0_3_3_exact_new_trial_003_shot_1; v0_3_3_exact_new_trial_003_shot_2; v0_3_3_exact_new_trial_003_shot_3
+provider_call_performed: false
+image_generation_performed: false
+retry_allowed: false
+source_002_overwrite_allowed: false
+raw_provider_payload_capture_required_per_shot: true
+raw_provider_response_capture_allowed: false
+secret_value_read_performed: false
+VCP_memory_write_performed: false
+DailyNote_write_performed: false
+accepted_sample_auto_promotion: false
+production_candidate_created: false
+commit_performed: false
+push_allowed: false
+push_performed: false
+next: if future 3-shot is authorized, run shot 1 only after immediate path-collision preflight
+```
+
 ## Checkpoint - v0.6.23 Single Generation With Payload Capture
 
 ```text

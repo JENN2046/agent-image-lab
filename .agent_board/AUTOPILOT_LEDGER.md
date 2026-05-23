@@ -6,6 +6,38 @@ remain the source of truth.
 
 ---
 
+## v0.6.24 Exact New-Trial 3-Shot Stability Preflight
+
+```yaml
+phase: v0_6_24_exact_new_trial_3shot_stability_preflight
+long_term_goal: v0_3_controlled_real_provider_production_loop
+source_phase: v0_6_23_single_generation_with_payload_capture_and_artifact_trace
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+lane: Green
+action_performed: local 3-shot stability protocol, schema, report, fixture, validator, roadmap, and agent_board status sync
+provider_route: image_gen.imagegen
+prompt_package_ref: prompts/image_generation/safe_adult_editorial_portrait_v1.yaml
+source_success_attempt_id: v0_3_3_exact_new_trial_002
+planned_shot_count: 3
+provider_call_performed: false
+image_generation_performed: false
+retry_allowed: false
+source_002_overwrite_allowed: false
+raw_provider_payload_capture_required_per_shot: true
+raw_provider_response_capture_allowed: false
+secret_value_read_performed: false
+VCP_memory_write_performed: false
+DailyNote_write_performed: false
+accepted_sample_auto_promotion: false
+production_candidate_created: false
+push_status: not_performed
+validation_result: targeted_validator_and_mvp_passed
+next_auto_step_allowed: false_for_live_generation
+recommended_next: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+```
+
 ---
 
 ## v0.3.3 First Live Generation Pilot Gate

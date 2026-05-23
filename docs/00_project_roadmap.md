@@ -2,6 +2,55 @@
 
 本文是 Agent Image Lab 的总路线图，用来把 v0.2 基线、v0.3 授权门槛、MVP-B dry-run 和未来真实闭环串成一条可执行路径。
 
+## v0.6.24 - Exact New-Trial 3-Shot Stability Preflight
+
+Status: completed_validated_local_3shot_stability_preflight.
+
+Purpose:
+- Establish a 3-shot stability protocol before any additional continuous
+  `image_gen.imagegen` generation.
+- Bind the future shots to `safe_adult_editorial_portrait_v1.yaml` and the
+  source success `v0_3_3_exact_new_trial_002`.
+- Score generation-path stability by `succeeded_image_generated` counts while
+  keeping image-quality acceptance behind human review.
+
+Artifacts:
+- `docs/V0_6_24_EXACT_NEW_TRIAL_3SHOT_STABILITY_PREFLIGHT.md`
+- `stability_tests/plans/safe_adult_editorial_portrait_v1_3shot_stability_preflight.yaml`
+- `schemas/exact_new_trial_3shot_stability_preflight.schema.yaml`
+- `reports/visual_asset_eval_dry_run/v0_6_24_exact_new_trial_3shot_stability_preflight.json`
+- `tests/schema_examples/exact_new_trial_3shot_stability_preflight.example.json`
+- `tests/schema_examples/exact_new_trial_3shot_stability_preflight_fail.json`
+- `scripts/validate_exact_new_trial_3shot_stability_preflight.js`
+
+Boundary state:
+- `active_current_phase: v0_3_3_first_live_generation_pilot`
+- `resume_guard_source_phase: v0_3_2_live_candidate_action_packet`
+- `resume_compaction_compatibility_anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial`
+- `next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial`
+- `provider_route: image_gen.imagegen`
+- `prompt_package_ref: prompts/image_generation/safe_adult_editorial_portrait_v1.yaml`
+- `source_success_attempt_id: v0_3_3_exact_new_trial_002`
+- `planned_shots: v0_3_3_exact_new_trial_003_shot_1; v0_3_3_exact_new_trial_003_shot_2; v0_3_3_exact_new_trial_003_shot_3`
+- `provider_call_performed: false`
+- `image_generation_performed: false`
+- `retry_allowed: false`
+- `source_002_overwrite_allowed: false`
+- `raw_provider_response_capture_allowed: false`
+- `secret_value_read_allowed: false`
+- `secret_value_read_performed: false`
+- `VCP_memory_write_allowed: false`
+- `DailyNote_write_allowed: false`
+- `accepted_sample_auto_promotion_allowed: false`
+- `production_candidate_allowed: false`
+- `push_allowed: false`
+
+Recommended next:
+- If the owner authorizes the future 3-shot sequence, execute shot 1 only after
+  an immediate path-collision preflight; do not auto-run shots 2 or 3 unless the
+  shot protocol explicitly advances after its independent receipt/registry and
+  payload capture are complete.
+
 ## v0.6.23 - Single Generation With Payload Capture And Artifact Trace
 
 Status: succeeded_image_generated_review_required.

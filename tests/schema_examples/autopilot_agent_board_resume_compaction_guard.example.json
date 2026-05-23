@@ -96,7 +96,7 @@
         "case_id": "roadmap_current_phase_drift_fails",
         "result": "caught",
         "expected_failure": true,
-        "failure_message": "roadmap current_phase mismatch"
+        "failure_message": "docs/00_project_roadmap.md latest section must cite active current phase"
       }
     ],
     "negative_case_count": 7,

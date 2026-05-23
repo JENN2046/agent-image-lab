@@ -1,0 +1,127 @@
+three_shot_stability_preflight:
+  plan_id: safe_adult_editorial_portrait_v1_3shot_imagegen_stability_preflight
+  phase: v0_6_24_exact_new_trial_3shot_stability_preflight
+  status: preflight_ready_no_generation
+  created_date: "2026-05-23"
+  execution_authorized_by_this_record: false
+  can_execute_now: false
+
+  target:
+    prompt_package_ref: prompts/image_generation/safe_adult_editorial_portrait_v1.yaml
+    source_success_attempt_id: v0_3_3_exact_new_trial_002
+    source_payload_capture_ref: reports/provider_payload_captures/v0_3_3_exact_new_trial_002_request_payload.sanitized.json
+    source_receipt_ref: reports/provider_receipts/v0_3_3_exact_new_trial_002_receipt.json
+    source_registry_ref: reports/provider_receipts/v0_3_3_exact_new_trial_002_registry.json
+    source_attempt_result_ref: runs/real_generation/v0_3_3_exact_new_trial_002/generation_attempt_result.json
+    source_review_bridge_ref: review_console/live_receipt_bridge/v0_3_3_exact_new_trial_002/bridge_entry.json
+    source_output_image_ref: runs/real_generation/v0_3_3_exact_new_trial_002/safe_adult_editorial_portrait_v1.png
+    overwrite_source_002_allowed: false
+
+  provider:
+    provider_route: image_gen.imagegen
+    provider_tool: image_gen.imagegen
+    prompt_source_field: prompt
+    negative_prompt_included_in_payload: false
+    yaml_metadata_included_in_payload: false
+    authorization_text_included_in_payload: false
+    path_text_included_in_prompt: false
+
+  shots:
+    - shot_id: v0_3_3_exact_new_trial_003_shot_1
+      status: planned_not_executed
+      output_directory: runs/real_generation/v0_3_3_exact_new_trial_003_shot_1/
+      output_image_path: runs/real_generation/v0_3_3_exact_new_trial_003_shot_1/safe_adult_editorial_portrait_v1.png
+      payload_capture_ref: reports/provider_payload_captures/v0_3_3_exact_new_trial_003_shot_1_request_payload.sanitized.json
+      attempt_result_path: runs/real_generation/v0_3_3_exact_new_trial_003_shot_1/generation_attempt_result.json
+      receipt_path: reports/provider_receipts/v0_3_3_exact_new_trial_003_shot_1_receipt.json
+      registry_path: reports/provider_receipts/v0_3_3_exact_new_trial_003_shot_1_registry.json
+      review_console_bridge_ref: review_console/live_receipt_bridge/v0_3_3_exact_new_trial_003_shot_1/bridge_entry.json
+      max_provider_calls: 1
+      max_image_candidates: 1
+      retry_allowed: false
+      overwrite_existing_files_allowed: false
+      raw_provider_payload_capture_required: true
+      raw_provider_response_capture_allowed: false
+      requires_independent_receipt: true
+      requires_independent_registry: true
+      requires_independent_payload_capture: true
+
+    - shot_id: v0_3_3_exact_new_trial_003_shot_2
+      status: planned_not_executed
+      output_directory: runs/real_generation/v0_3_3_exact_new_trial_003_shot_2/
+      output_image_path: runs/real_generation/v0_3_3_exact_new_trial_003_shot_2/safe_adult_editorial_portrait_v1.png
+      payload_capture_ref: reports/provider_payload_captures/v0_3_3_exact_new_trial_003_shot_2_request_payload.sanitized.json
+      attempt_result_path: runs/real_generation/v0_3_3_exact_new_trial_003_shot_2/generation_attempt_result.json
+      receipt_path: reports/provider_receipts/v0_3_3_exact_new_trial_003_shot_2_receipt.json
+      registry_path: reports/provider_receipts/v0_3_3_exact_new_trial_003_shot_2_registry.json
+      review_console_bridge_ref: review_console/live_receipt_bridge/v0_3_3_exact_new_trial_003_shot_2/bridge_entry.json
+      max_provider_calls: 1
+      max_image_candidates: 1
+      retry_allowed: false
+      overwrite_existing_files_allowed: false
+      raw_provider_payload_capture_required: true
+      raw_provider_response_capture_allowed: false
+      requires_independent_receipt: true
+      requires_independent_registry: true
+      requires_independent_payload_capture: true
+
+    - shot_id: v0_3_3_exact_new_trial_003_shot_3
+      status: planned_not_executed
+      output_directory: runs/real_generation/v0_3_3_exact_new_trial_003_shot_3/
+      output_image_path: runs/real_generation/v0_3_3_exact_new_trial_003_shot_3/safe_adult_editorial_portrait_v1.png
+      payload_capture_ref: reports/provider_payload_captures/v0_3_3_exact_new_trial_003_shot_3_request_payload.sanitized.json
+      attempt_result_path: runs/real_generation/v0_3_3_exact_new_trial_003_shot_3/generation_attempt_result.json
+      receipt_path: reports/provider_receipts/v0_3_3_exact_new_trial_003_shot_3_receipt.json
+      registry_path: reports/provider_receipts/v0_3_3_exact_new_trial_003_shot_3_registry.json
+      review_console_bridge_ref: review_console/live_receipt_bridge/v0_3_3_exact_new_trial_003_shot_3/bridge_entry.json
+      max_provider_calls: 1
+      max_image_candidates: 1
+      retry_allowed: false
+      overwrite_existing_files_allowed: false
+      raw_provider_payload_capture_required: true
+      raw_provider_response_capture_allowed: false
+      requires_independent_receipt: true
+      requires_independent_registry: true
+      requires_independent_payload_capture: true
+
+  stability_scoring:
+    succeeded_image_generated_3_of_3:
+      rating: stable_generation_route_candidate
+      next_allowed_phase: human_quality_review_required_before_promotion_or_memory
+    succeeded_image_generated_2_of_3:
+      rating: conditional_stable_requires_failed_shot_trace_analysis
+      next_allowed_phase: analyze_failed_provider_tool_artifact_trace
+    succeeded_image_generated_0_or_1_of_3:
+      rating: unstable_stop_generation
+      next_allowed_phase: failure_taxonomy_prompt_or_wrapper_repair
+
+  safety:
+    provider_call_performed: false
+    image_generation_performed: false
+    batch_generation_authorized: false
+    retry_allowed: false
+    overwrite_existing_files_allowed: false
+    source_002_overwrite_allowed: false
+    raw_provider_payload_capture_required_per_shot: true
+    raw_provider_response_capture_allowed: false
+    secret_value_read_allowed: false
+    VCP_memory_write_allowed: false
+    DailyNote_write_allowed: false
+    accepted_sample_auto_promotion_allowed: false
+    production_candidate_allowed: false
+    push_allowed: false
+
+  stop_conditions:
+    - any_future_shot_path_exists
+    - non_unique_payload_capture_path
+    - non_unique_receipt_path
+    - non_unique_registry_path
+    - non_unique_attempt_result_path
+    - non_unique_review_bridge_path
+    - source_002_overwrite_requested
+    - retry_requested
+    - raw_provider_response_capture_requested
+    - secret_read_requested
+    - memory_or_DailyNote_write_requested
+    - accepted_sample_or_production_promotion_requested
+    - push_tag_release_deploy_requested

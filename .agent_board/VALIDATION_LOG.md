@@ -1,5 +1,40 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260523-v0.6.24-EXACT-NEW-TRIAL-3SHOT-STABILITY-PREFLIGHT
+
+Task: v0.6.24 exact-new-trial 3-shot stability preflight
+Status: completed_validated_local_3shot_stability_preflight
+Commands run:
+  - node --check scripts/validate_exact_new_trial_3shot_stability_preflight.js: passed
+  - node scripts/validate_exact_new_trial_3shot_stability_preflight.js: passed
+  - node --check scripts/lib/governance_tooling_maintenance_slice.js: passed
+  - node scripts/validate_autopilot_agent_board_resume_compaction_guard.js --write-fixture: passed
+  - node scripts/validate_autopilot_agent_board_resume_compaction_guard.js: passed
+  - node scripts/validate_controlled_visual_production_loop_checkpoint_readiness.js: passed
+  - node scripts/validate_controlled_visual_production_loop_exact_file_commit_readiness_review.js: passed
+  - node scripts/validate_controlled_visual_production_loop_commit_and_authorization_readiness_audit.js: passed
+  - git diff --check: passed
+  - npm run validate:mvp: passed
+Boundary:
+  - provider_route: image_gen.imagegen
+  - prompt_package_ref: prompts/image_generation/safe_adult_editorial_portrait_v1.yaml
+  - source_success_attempt_id: v0_3_3_exact_new_trial_002
+  - shot_count: 3
+  - provider_call_performed: false
+  - image_generation_performed: false
+  - retry_allowed: false
+  - source_002_overwrite_allowed: false
+  - raw_provider_payload_capture_required_per_shot: true
+  - raw_provider_response_capture_allowed: false
+  - secret_value_read_performed: false
+  - VCP_memory_write_performed: false
+  - DailyNote_write_performed: false
+  - accepted_sample_auto_promotion: false
+  - production_candidate_created: false
+  - commit_performed: false
+  - push_performed: false
+Recommended next: if future 3-shot is authorized, run shot 1 only after immediate path-collision preflight and independent payload/receipt/registry setup.
+
 ## VALIDATION-20260523-v0.6.23-SINGLE-GENERATION-WITH-PAYLOAD-CAPTURE
 
 Task: v0.6.23 single generation with payload capture and artifact-return trace

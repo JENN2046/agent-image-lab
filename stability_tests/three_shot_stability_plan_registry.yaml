@@ -7,8 +7,39 @@ three_shot_stability_plan_registry:
   image_created: true
   memory_write_allowed: false
   daily_note_write_allowed: false
+  last_updated_by_phase: v0_6_24
 
   plans:
+    - plan_id: safe_adult_editorial_portrait_v1_3shot_imagegen_stability_preflight
+      status: preflight_ready_no_generation
+      final_stability_status: pending_not_executed
+      target_prompt_package_ref: prompts/image_generation/safe_adult_editorial_portrait_v1.yaml
+      source_success_attempt_id: v0_3_3_exact_new_trial_002
+      provider_type: codex_tool
+      provider_route: image_gen.imagegen
+      shot_count: 3
+      execution_mode: sequential_independent_single_imagegen_shots
+      one_provider_call_per_shot: true
+      one_image_per_shot: true
+      retry_allowed: false
+      batch_generation_authorized: false
+      overwrite_source_002_allowed: false
+      raw_provider_payload_capture_required_per_shot: true
+      raw_provider_response_capture_allowed: false
+      secret_value_read_allowed: false
+      memory_write_allowed: false
+      daily_note_write_allowed: false
+      accepted_sample_auto_promotion_allowed: false
+      production_candidate_allowed: false
+      push_allowed: false
+      shots_planned: 3
+      shots_completed: 0
+      succeeded_image_generated_count: 0
+      plan_ref: stability_tests/plans/safe_adult_editorial_portrait_v1_3shot_stability_preflight.yaml
+      validation_ref: scripts/validate_exact_new_trial_3shot_stability_preflight.js
+      report_ref: reports/visual_asset_eval_dry_run/v0_6_24_exact_new_trial_3shot_stability_preflight.json
+      next_phase: future_shot_1_requires_separate_execution_authorization_and_immediate_path_collision_preflight
+
     - plan_id: french_summer_rattan_bag_v2_3shot
       status: completed
       final_stability_status: stable_candidate_needs_manual_review
