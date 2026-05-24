@@ -1,5 +1,26 @@
 ---
 
+- [x] ID: execute_exact_new_trial_003_chinese_memory_entry_amber_c_memory_write_target_resolution_probe
+      Lane: Green status sync for attempted Amber_C memory write target resolution.
+      Status: blocked_red_lane_exact_memory_writer_target_unresolved_no_write.
+      Result: Real-class authorization is present, but no exact non-secret callable DailyNote/VCP memory writer target could be resolved from the current repository/tool surface while preserving v10.28 canonical root/location/hash validation.
+      Report ref: reports/visual_asset_eval_dry_run/v0_6_62_exact_new_trial_003_amber_c_memory_write_target_resolution_blocked.json.
+      Receipt ref: reports/memory_write_receipts/v0_3_3_exact_new_trial_003_shot_2_amber_c_memory_write_target_resolution_blocked.json.
+      Validator ref: scripts/validate_exact_new_trial_003_amber_c_memory_write_target_resolution_blocked.js.
+      DailyNote_write_performed: false.
+      VCP_memory_write_performed: false.
+      plugin_call_performed: false.
+      api_call_performed: false.
+      secret_value_read_performed: false.
+      Recommended next: provide_or_install_exact_non_secret_dailynote_vcp_memory_writer_target_then_retry_amber_c_memory_write.
+
+- [blocked] ID: execute_exact_new_trial_003_chinese_memory_entry_amber_c_memory_write_with_receipt_if_exact_writer_target_is_resolved
+      Lane: Amber_C_memory inside Smart Standing Authorization v3 envelope.
+      Status: blocked_red_lane_exact_memory_writer_target_unresolved_no_write.
+      Blocker: exact_memory_writer_target_unresolved_without_secret_or_broad_vcp_write.
+      Authorization blocker: false.
+      Required unblock condition: provide or install one exact non-secret DailyNote/VCP memory writer target with selected writer tool or command, canonical DailyNote root preflight, exact output target, post-write canonical hash validation, max_write_entries 2, max_plugin_calls 1, max_api_calls 0, secret_value_read_allowed false, and raw_private_data_print_allowed false.
+
 - [x] ID: prepare_exact_new_trial_003_chinese_memory_entry_readiness_preflight_no_write
       Lane: Green local no-write memory readiness preflight only.
       Status: completed_validated_local_chinese_memory_entry_readiness_preflight_no_write.

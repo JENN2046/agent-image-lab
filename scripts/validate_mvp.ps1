@@ -14524,6 +14524,34 @@ process.exit(child.status || 0);
     }
   }
 
+  $exactNewTrialAmberCMemoryWriteTargetResolutionBlockedOutput = & node (Join-Path $Root 'scripts/validate_exact_new_trial_003_amber_c_memory_write_target_resolution_blocked.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Exact New-Trial 003 Amber_C memory write target resolution blocked validation exited with failure"
+  } else {
+    $exactNewTrialAmberCMemoryWriteTargetResolutionBlocked = ($exactNewTrialAmberCMemoryWriteTargetResolutionBlockedOutput -join "`n") | ConvertFrom-Json
+    if ($exactNewTrialAmberCMemoryWriteTargetResolutionBlocked.passed -ne $true -or $exactNewTrialAmberCMemoryWriteTargetResolutionBlocked.phase -ne 'v0_6_62_exact_new_trial_003_amber_c_memory_write_target_resolution_blocked') {
+      Add-Failure "Exact New-Trial 003 Amber_C memory write target resolution blocked validation must pass"
+    }
+    if ($exactNewTrialAmberCMemoryWriteTargetResolutionBlocked.target_sample_id -ne 'accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001' -or $exactNewTrialAmberCMemoryWriteTargetResolutionBlocked.target_candidate_id -ne 'v0_3_3_exact_new_trial_003_shot_2') {
+      Add-Failure "Exact New-Trial 003 Amber_C memory write target resolution blocked validation must bind the accepted sample and selected candidate"
+    }
+    if ($exactNewTrialAmberCMemoryWriteTargetResolutionBlocked.authorization_missing_is_blocker -ne $false -or $exactNewTrialAmberCMemoryWriteTargetResolutionBlocked.writer_target_resolution_missing_is_blocker -ne $true -or $exactNewTrialAmberCMemoryWriteTargetResolutionBlocked.red_lane_stop_condition_reached -ne $true) {
+      Add-Failure "Exact New-Trial 003 Amber_C memory write target resolution blocked validation must distinguish authorization from writer-target resolution and record the Red stop"
+    }
+    if ($exactNewTrialAmberCMemoryWriteTargetResolutionBlocked.exact_writer_target_resolved -ne $false -or $exactNewTrialAmberCMemoryWriteTargetResolutionBlocked.repo_callable_writer_script_found -ne $false -or $exactNewTrialAmberCMemoryWriteTargetResolutionBlocked.available_connector_writer_found -ne $false) {
+      Add-Failure "Exact New-Trial 003 Amber_C memory write target resolution blocked validation must not overclaim an available writer"
+    }
+    if ($exactNewTrialAmberCMemoryWriteTargetResolutionBlocked.DailyNote_write_performed -ne $false -or $exactNewTrialAmberCMemoryWriteTargetResolutionBlocked.VCP_memory_write_performed -ne $false -or $exactNewTrialAmberCMemoryWriteTargetResolutionBlocked.plugin_call_performed -ne $false -or $exactNewTrialAmberCMemoryWriteTargetResolutionBlocked.api_call_performed -ne $false -or $exactNewTrialAmberCMemoryWriteTargetResolutionBlocked.secret_value_read_performed -ne $false) {
+      Add-Failure "Exact New-Trial 003 Amber_C memory write target resolution blocked validation must remain no-write, no-plugin/API, and no-secret"
+    }
+    if ($exactNewTrialAmberCMemoryWriteTargetResolutionBlocked.negative_case_count -lt 10 -or $exactNewTrialAmberCMemoryWriteTargetResolutionBlocked.caught_negative_case_count -ne $exactNewTrialAmberCMemoryWriteTargetResolutionBlocked.negative_case_count -or $exactNewTrialAmberCMemoryWriteTargetResolutionBlocked.all_negative_cases_caught -ne $true) {
+      Add-Failure "Exact New-Trial 003 Amber_C memory write target resolution blocked validation must catch every required negative case"
+    }
+    if ($exactNewTrialAmberCMemoryWriteTargetResolutionBlocked.recommended_next_auto_execution_allowed -ne $false) {
+      Add-Failure "Exact New-Trial 003 Amber_C memory write target resolution blocked validation must stop automatic memory execution until an exact writer target exists"
+    }
+  }
+
   $visualSampleMemoryOutput = & node (Join-Path $Root 'scripts/validate_visual_sample_memory_policy.js')
   if ($LASTEXITCODE -ne 0) {
     Add-Failure "Visual sample memory policy validation exited with failure"

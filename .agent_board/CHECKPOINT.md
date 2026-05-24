@@ -1,5 +1,37 @@
 ---
 
+## Checkpoint - v0.6.62 Exact New-Trial 003 Amber_C Memory Write Target Resolution Blocked
+
+```text
+phase: v0_6_62_exact_new_trial_003_amber_c_memory_write_target_resolution_blocked
+status: blocked_red_lane_exact_memory_writer_target_unresolved_no_write
+result: BLOCKED
+report_ref: reports/visual_asset_eval_dry_run/v0_6_62_exact_new_trial_003_amber_c_memory_write_target_resolution_blocked.json
+receipt_ref: reports/memory_write_receipts/v0_3_3_exact_new_trial_003_shot_2_amber_c_memory_write_target_resolution_blocked.json
+validator_ref: scripts/validate_exact_new_trial_003_amber_c_memory_write_target_resolution_blocked.js
+source_phase: v0_6_61_exact_new_trial_003_chinese_memory_entry_readiness_preflight_no_write
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+legacy_resume_guard_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+target_candidate_id: v0_3_3_exact_new_trial_003_shot_2
+target_sample_id: accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001
+artifact_sha256: 8bd7b81a916f0f6333392562d84e32368a3f28dd6a6456fc2f9e49d835a62c3b
+authorization_missing_is_blocker: false
+writer_target_resolution_missing_is_blocker: true
+red_lane_stop_condition_reached: true
+exact_writer_target_resolved: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+secret_value_read_performed: false
+push_status: not_performed_by_this_no_write_blocker_record_pending_stage_commit_push_for_v0_6_62
+next: provide_or_install_exact_non_secret_dailynote_vcp_memory_writer_target_then_retry_amber_c_memory_write
+```
+
+---
+
 ## Checkpoint - v0.6.61 Exact New-Trial 003 Chinese Memory Entry Readiness Preflight No Write
 
 ```text

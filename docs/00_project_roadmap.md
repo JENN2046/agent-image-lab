@@ -2,6 +2,72 @@
 
 本文是 Agent Image Lab 的总路线图，用来把 v0.2 基线、v0.3 授权门槛、MVP-B dry-run 和未来真实闭环串成一条可执行路径。
 
+## v0.6.62 - Exact New-Trial 003 Amber_C Memory Write Target Resolution Blocked
+
+Status: blocked_red_lane_exact_memory_writer_target_unresolved_no_write.
+
+```yaml
+current_phase: v0_6_62_exact_new_trial_003_amber_c_memory_write_target_resolution_blocked
+active_current_phase: v0_3_3_first_live_generation_pilot
+source_phase: v0_6_61_exact_new_trial_003_chinese_memory_entry_readiness_preflight_no_write
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+legacy_resume_guard_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+lane_attempted: Amber_C_memory
+lane_executed: Green_status_sync_only
+authorization_missing_is_blocker: false
+writer_target_resolution_missing_is_blocker: true
+red_lane_stop_condition_reached: true
+exact_writer_target_resolved: false
+repo_callable_writer_script_found: false
+available_connector_writer_found: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+secret_value_read_performed: false
+raw_private_data_printed: false
+recommended_next_auto_execution_allowed: false
+push_status: not_performed_by_this_no_write_blocker_record_pending_stage_commit_push_for_v0_6_62
+```
+
+Goal:
+
+- Execute only the target-resolution part of the current Amber_C memory write
+  task.
+- Record the Red-lane stop condition when no exact non-secret DailyNote/VCP
+  memory writer target can be resolved from the current repository and tool
+  surface.
+
+Artifacts:
+
+- `docs/V0_6_62_EXACT_NEW_TRIAL_003_AMBER_C_MEMORY_WRITE_TARGET_RESOLUTION_BLOCKED.md`
+- `reports/visual_asset_eval_dry_run/v0_6_62_exact_new_trial_003_amber_c_memory_write_target_resolution_blocked.json`
+- `reports/memory_write_receipts/v0_3_3_exact_new_trial_003_shot_2_amber_c_memory_write_target_resolution_blocked.json`
+- `tests/schema_examples/exact_new_trial_003_amber_c_memory_write_target_resolution_blocked.example.json`
+- `tests/schema_examples/exact_new_trial_003_amber_c_memory_write_target_resolution_blocked_fail.example.json`
+- `scripts/validate_exact_new_trial_003_amber_c_memory_write_target_resolution_blocked.js`
+
+Validation:
+
+- `node --check scripts/validate_exact_new_trial_003_amber_c_memory_write_target_resolution_blocked.js`
+- `node scripts/validate_exact_new_trial_003_amber_c_memory_write_target_resolution_blocked.js`
+
+Key decisions:
+
+- Real-class authorization is not missing.
+- The exact Chinese memory payload and two logical target ids remain ready from
+  v0.6.61.
+- Actual DailyNote/VCP memory execution is blocked because no exact callable
+  writer target can be resolved without crossing secret/raw-path/broad-write
+  boundaries or bypassing the v10.28 canonical validation requirement.
+
+Recommended next:
+
+- Provide or install one exact non-secret DailyNote/VCP memory writer target
+  with canonical root preflight and post-write hash validation, then retry the
+  same Amber_C packet.
+
 ## v0.6.61 - Exact New-Trial 003 Chinese Memory Entry Readiness Preflight No Write
 
 Status: completed_validated_local_chinese_memory_entry_readiness_preflight_no_write.
@@ -32,7 +98,7 @@ plugin_call_performed: false
 api_call_performed: false
 image_generation_performed: false
 secret_value_read_performed: false
-push_status: not_performed_by_this_no_write_preflight
+push_status: pushed_to_origin_master_commit_8f0597e
 ```
 
 Goal:
