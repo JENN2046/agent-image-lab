@@ -1,5 +1,38 @@
 ---
 
+- [x] ID: v0_6_68_codex_session_image_import_record_mock_validation
+      Lane: Green local mock validation only.
+      Status: completed_validated_local_mock_validation_only.
+      Source phase: v0_6_67_codex_session_image_import_record_contract.
+      Scope: Validate the v0.6.67 Codex session image import record contract against local mock fixtures without image import, image binary read, output write, provider contact, plugin call, API call, MCP/VCP runtime, DailyNote/VCP memory, accepted_samples, production_candidate, secrets, or push.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Legacy resume guard next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Valid mock import record passed: true.
+      Blocked case count: 15.
+      Mock doc ref: docs/vcp_integration/CODEX_SESSION_IMAGE_IMPORT_RECORD_MOCK_VALIDATION.md.
+      Mock fixture refs: tests/schema_examples/codex_session_image_import_record_mock.example.yaml; tests/schema_examples/codex_session_image_import_record_mock_blocked_cases.example.yaml.
+      Validator ref: scripts/validate_codex_session_image_import_record_mock_validation.js.
+      Staging rule: exact-file staging only; git add . forbidden.
+      image_generation_performed: false.
+      image_binary_read_performed: false.
+      output_write_performed: false.
+      provider_contact_performed: false.
+      plugin_call_performed: false.
+      api_call_performed: false.
+      mcp_runtime_performed: false.
+      VCPToolBox_runtime_performed: false.
+      VCPChat_runtime_performed: false.
+      DailyNote_write_performed: false.
+      VCP_memory_write_performed: false.
+      accepted_samples_write_performed: false.
+      production_candidate_write_performed: false.
+      secret_value_read_performed: false.
+      push_status: not_performed.
+      Recommended next after validation: v0_6_68a_exact_file_commit_readiness_gate.
+
+---
+
 - [x] ID: v0_6_67_codex_session_image_import_record_contract
       Lane: Green local contract-only.
       Status: completed_validated_local_contract_only.
