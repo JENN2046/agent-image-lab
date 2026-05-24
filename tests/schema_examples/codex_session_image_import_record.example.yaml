@@ -1,0 +1,66 @@
+# Valid Codex session image import record fixture.
+
+codex_session_image_import_record_v1:
+  version: v1
+  phase: v0_6_67_codex_session_image_import_record_contract
+  source_phase: v0_6_66a_exact_file_commit_readiness_gate
+  contract_only: true
+  execution_allowed_by_this_contract: false
+
+  record_identity:
+    import_record_id: codex_session_image_import_record_001
+    provider_id: codex_session_image
+    import_mode: manual_session_import
+    imported_asset_status: draft_only
+
+  required_refs:
+    prompt_package_ref: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v3.yaml
+    generation_contract_ref: docs/vcp_integration/VCP_AGENT_IMAGE_GENERATION_TOOL_CONTRACT_V1.md
+    route_selection_ref: docs/vcp_integration/VCP_AGENT_GENERATION_ROUTE_SELECTION_GATE.md
+    preflight_ref: docs/vcp_integration/CODEX_SESSION_IMAGE_IMPORT_PREFLIGHT.md
+
+  future_import_target:
+    output_directory_ref: runs/real_generation/v0_6_67_codex_session_image_import_record_candidate_001/
+    future_image_file_ref: runs/real_generation/v0_6_67_codex_session_image_import_record_candidate_001/future_image_file_placeholder.png
+    future_image_file_ref_placeholder_only: true
+    image_binary_read_allowed_now: false
+    future_image_file_existence_check_allowed_now: false
+
+  review_linkage:
+    review_case_ref: review_console/cases/codex_session_image_import_record_001.review_case.yaml
+    review_case_ref_placeholder_only: true
+    human_review_required: true
+
+  write_boundaries:
+    accepted_samples_write_allowed: false
+    production_candidate_write_allowed: false
+    DailyNote_write_allowed: false
+    VCP_memory_write_allowed: false
+
+  forbidden_field_flags:
+    private_absolute_path_present: false
+    secret_value_present: false
+    env_value_present: false
+    image_binary_present: false
+    raw_prompt_payload_present: false
+    raw_provider_response_present: false
+
+  side_effects:
+    provider_contact_performed: false
+    plugin_call_performed: false
+    api_call_performed: false
+    mcp_runtime_performed: false
+    VCPToolBox_runtime_performed: false
+    VCPChat_runtime_performed: false
+    image_generation_performed: false
+    image_binary_read_performed: false
+    output_write_performed: false
+    DailyNote_write_performed: false
+    VCP_memory_write_performed: false
+    accepted_samples_write_performed: false
+    production_candidate_write_performed: false
+    env_read_performed: false
+    secret_read_performed: false
+    push_tag_release_deploy_performed: false
+
+  next_recommended: v0_6_68_codex_session_image_import_record_mock_validation

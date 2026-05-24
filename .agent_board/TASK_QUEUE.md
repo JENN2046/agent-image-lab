@@ -1,5 +1,20 @@
 ---
 
+- [x] ID: v0_6_67_codex_session_image_import_record_contract
+      Lane: Green local contract-only.
+      Status: completed_validated_local_contract_only.
+      Source phase: v0_6_66a_exact_file_commit_readiness_gate.
+      Scope: Define draft-only Codex session image import record checks for provider_id=codex_session_image and import_mode=manual_session_import without provider contact, plugin call, API call, MCP/VCP runtime, image generation, image binary read, output write, DailyNote/VCP memory, accepted_samples, production_candidate, secrets, or push.
+      Import record id: codex_session_image_import_record_001.
+      Provider id: codex_session_image.
+      Import mode: manual_session_import.
+      Imported asset status: draft_only.
+      Doc ref: docs/vcp_integration/CODEX_SESSION_IMAGE_IMPORT_RECORD_CONTRACT.md.
+      Schema ref: schemas/codex_session_image_import_record.schema.yaml.
+      Fixture refs: tests/schema_examples/codex_session_image_import_record.example.yaml; tests/schema_examples/codex_session_image_import_record_fail.example.yaml.
+      Validator ref: scripts/validate_codex_session_image_import_record_contract.js.
+      Recommended next after validation: v0_6_68_codex_session_image_import_record_mock_validation.
+
 - [x] ID: v0_6_66_codex_session_image_import_preflight_only
       Lane: Green local preflight-only.
       Status: completed_validated_local_preflight_only.

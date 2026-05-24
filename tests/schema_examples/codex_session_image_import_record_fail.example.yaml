@@ -1,0 +1,69 @@
+# Codex session image import record blocked cases.
+# Each case must fail local import-record validation without side effects.
+
+codex_session_image_import_record_blocked_cases_v1:
+  phase: v0_6_67_codex_session_image_import_record_contract
+  source_phase: v0_6_66a_exact_file_commit_readiness_gate
+  contract_only: true
+  expected_case_count: 15
+
+  cases:
+    - case_id: provider_id_not_codex_session_image
+      provider_id: other_provider
+      expected_block: true
+
+    - case_id: import_mode_not_manual_session_import
+      import_mode: automated_provider_import
+      expected_block: true
+
+    - case_id: prompt_package_ref_missing
+      mutation: remove prompt_package_ref
+      expected_block: true
+
+    - case_id: prompt_package_ref_outside_prompts_image_generation
+      prompt_package_ref: prompts/other/example.yaml
+      expected_block: true
+
+    - case_id: preflight_ref_missing
+      mutation: remove preflight_ref
+      expected_block: true
+
+    - case_id: output_directory_ref_outside_runs_real_generation
+      output_directory_ref: temp/generated/
+      expected_block: true
+
+    - case_id: imported_asset_status_not_draft_only
+      imported_asset_status: imported_ready
+      expected_block: true
+
+    - case_id: accepted_samples_write_allowed_true
+      accepted_samples_write_allowed: true
+      expected_block: true
+
+    - case_id: production_candidate_write_allowed_true
+      production_candidate_write_allowed: true
+      expected_block: true
+
+    - case_id: DailyNote_write_allowed_true
+      DailyNote_write_allowed: true
+      expected_block: true
+
+    - case_id: VCP_memory_write_allowed_true
+      VCP_memory_write_allowed: true
+      expected_block: true
+
+    - case_id: image_binary_read_performed_true
+      image_binary_read_performed: true
+      expected_block: true
+
+    - case_id: output_write_performed_true
+      output_write_performed: true
+      expected_block: true
+
+    - case_id: private_absolute_path_present_true
+      private_absolute_path_present: true
+      expected_block: true
+
+    - case_id: secret_value_present_true
+      secret_value_present: true
+      expected_block: true

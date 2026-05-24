@@ -1,5 +1,44 @@
 ---
 
+## Checkpoint - v0.6.67 Codex Session Image Import Record Contract
+
+```text
+phase: v0_6_67_codex_session_image_import_record_contract
+source_phase: v0_6_66a_exact_file_commit_readiness_gate
+status: completed_validated_local_contract_only
+result: COMPLETED_VALIDATED
+contract_only: true
+import_record_id: codex_session_image_import_record_001
+provider_id: codex_session_image
+import_mode: manual_session_import
+imported_asset_status: draft_only
+human_review_required: true
+record_doc_ref: docs/vcp_integration/CODEX_SESSION_IMAGE_IMPORT_RECORD_CONTRACT.md
+record_schema_ref: schemas/codex_session_image_import_record.schema.yaml
+record_fixture_ref: tests/schema_examples/codex_session_image_import_record.example.yaml
+record_fail_fixture_ref: tests/schema_examples/codex_session_image_import_record_fail.example.yaml
+validator_ref: scripts/validate_codex_session_image_import_record_contract.js
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+legacy_resume_guard_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+image_generation_performed: false
+image_binary_read_performed: false
+output_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+VCPToolBox_runtime_performed: false
+VCPChat_runtime_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+secret_value_read_performed: false
+push_status: not_performed
+next: v0_6_68_codex_session_image_import_record_mock_validation
+```
+
 ## Checkpoint - v0.6.66 Codex Session Image Import Preflight Only
 
 ```text

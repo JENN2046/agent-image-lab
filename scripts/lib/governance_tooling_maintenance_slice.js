@@ -1994,6 +1994,19 @@ const EXPECTED_V0_6_66_CODEX_SESSION_IMAGE_IMPORT_PREFLIGHT_ONLY_SLICE = [
   "tests/schema_examples/codex_session_image_import_preflight_fail.example.yaml"
 ].sort();
 
+const EXPECTED_V0_6_67_CODEX_SESSION_IMAGE_IMPORT_RECORD_CONTRACT_SLICE = [
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  "docs/vcp_integration/CODEX_SESSION_IMAGE_IMPORT_RECORD_CONTRACT.md",
+  "schemas/codex_session_image_import_record.schema.yaml",
+  "scripts/lib/governance_tooling_maintenance_slice.js",
+  "scripts/validate_codex_session_image_import_record_contract.js",
+  "tests/schema_examples/codex_session_image_import_record.example.yaml",
+  "tests/schema_examples/codex_session_image_import_record_fail.example.yaml"
+].sort();
+
 const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "governance_tooling_maintenance_slice_v1",
@@ -2434,6 +2447,10 @@ const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "v0_6_66_codex_session_image_import_preflight_only_slice",
     files: EXPECTED_V0_6_66_CODEX_SESSION_IMAGE_IMPORT_PREFLIGHT_ONLY_SLICE
+  },
+  {
+    id: "v0_6_67_codex_session_image_import_record_contract_slice",
+    files: EXPECTED_V0_6_67_CODEX_SESSION_IMAGE_IMPORT_RECORD_CONTRACT_SLICE
   }
 ];
 
@@ -2929,6 +2946,12 @@ function governanceToolingMaintenanceSliceSelfCheck() {
       )?.id === "v0_6_66_codex_session_image_import_preflight_only_slice"
     },
     {
+      check: "exact_slice_matches_v0_6_67_codex_session_image_import_record_contract",
+      passed: findMatchingGovernanceToolingSlice(
+        EXPECTED_V0_6_67_CODEX_SESSION_IMAGE_IMPORT_RECORD_CONTRACT_SLICE
+      )?.id === "v0_6_67_codex_session_image_import_record_contract_slice"
+    },
+    {
       check: "exact_slice_rejects_missing_file",
       passed: findMatchingGovernanceToolingSlice(EXPECTED_GOVERNANCE_TOOLING_MAINTENANCE_SLICE.slice(1)) === null
     },
@@ -3041,6 +3064,7 @@ module.exports = {
   EXPECTED_V0_6_64_VCP_AGENT_IMAGE_GENERATION_CONTRACT_MOCK_VALIDATION_SLICE,
   EXPECTED_V0_6_65_VCP_AGENT_GENERATION_ROUTE_SELECTION_GATE_SLICE,
   EXPECTED_V0_6_66_CODEX_SESSION_IMAGE_IMPORT_PREFLIGHT_ONLY_SLICE,
+  EXPECTED_V0_6_67_CODEX_SESSION_IMAGE_IMPORT_RECORD_CONTRACT_SLICE,
   GOVERNANCE_TOOLING_ALLOWED_SLICES,
   buildGovernanceToolingMaintenanceSliceReport,
   fileAllowedInGovernanceToolingSlice,
