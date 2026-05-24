@@ -2030,6 +2030,24 @@ const EXPECTED_V0_6_69_CODEX_SESSION_IMAGE_IMPORT_ROUTE_GAP_REVIEW_SLICE = [
   "tests/schema_examples/codex_session_image_import_route_gap_review.example.yaml"
 ].sort();
 
+const EXPECTED_V0_6_70_TO_V0_6_72_REAL_VCP_AGENT_GENERATION_PREFLIGHT_BLOCKED_SLICE = [
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  "docs/vcp_integration/REAL_VCP_AGENT_GENERATION_ACTION_PACKET.md",
+  "docs/vcp_integration/REAL_VCP_AGENT_GENERATION_PREFLIGHT_NO_CALL.md",
+  "docs/vcp_integration/REAL_VCP_AGENT_GENERATION_ROUTE_ACTIVATION_GATE.md",
+  "reports/provider_receipts/v0_6_72_real_vcp_agent_generation_preflight_blocked_receipt.json",
+  "scripts/lib/governance_tooling_maintenance_slice.js",
+  "scripts/validate_real_vcp_agent_generation_action_packet.js",
+  "scripts/validate_real_vcp_agent_generation_preflight_no_call.js",
+  "scripts/validate_real_vcp_agent_generation_route_activation_gate.js",
+  "tests/schema_examples/real_vcp_agent_generation_action_packet.example.yaml",
+  "tests/schema_examples/real_vcp_agent_generation_preflight_no_call.example.yaml",
+  "tests/schema_examples/real_vcp_agent_generation_route_activation_gate.example.yaml"
+].sort();
+
 const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "governance_tooling_maintenance_slice_v1",
@@ -2482,6 +2500,10 @@ const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "v0_6_69_codex_session_image_import_route_gap_review_slice",
     files: EXPECTED_V0_6_69_CODEX_SESSION_IMAGE_IMPORT_ROUTE_GAP_REVIEW_SLICE
+  },
+  {
+    id: "v0_6_70_to_v0_6_72_real_vcp_agent_generation_preflight_blocked_slice",
+    files: EXPECTED_V0_6_70_TO_V0_6_72_REAL_VCP_AGENT_GENERATION_PREFLIGHT_BLOCKED_SLICE
   }
 ];
 
@@ -2995,6 +3017,12 @@ function governanceToolingMaintenanceSliceSelfCheck() {
       )?.id === "v0_6_69_codex_session_image_import_route_gap_review_slice"
     },
     {
+      check: "exact_slice_matches_v0_6_70_to_v0_6_72_real_vcp_agent_generation_preflight_blocked",
+      passed: findMatchingGovernanceToolingSlice(
+        EXPECTED_V0_6_70_TO_V0_6_72_REAL_VCP_AGENT_GENERATION_PREFLIGHT_BLOCKED_SLICE
+      )?.id === "v0_6_70_to_v0_6_72_real_vcp_agent_generation_preflight_blocked_slice"
+    },
+    {
       check: "exact_slice_rejects_missing_file",
       passed: findMatchingGovernanceToolingSlice(EXPECTED_GOVERNANCE_TOOLING_MAINTENANCE_SLICE.slice(1)) === null
     },
@@ -3110,6 +3138,7 @@ module.exports = {
   EXPECTED_V0_6_67_CODEX_SESSION_IMAGE_IMPORT_RECORD_CONTRACT_SLICE,
   EXPECTED_V0_6_68_CODEX_SESSION_IMAGE_IMPORT_RECORD_MOCK_VALIDATION_SLICE,
   EXPECTED_V0_6_69_CODEX_SESSION_IMAGE_IMPORT_ROUTE_GAP_REVIEW_SLICE,
+  EXPECTED_V0_6_70_TO_V0_6_72_REAL_VCP_AGENT_GENERATION_PREFLIGHT_BLOCKED_SLICE,
   GOVERNANCE_TOOLING_ALLOWED_SLICES,
   buildGovernanceToolingMaintenanceSliceReport,
   fileAllowedInGovernanceToolingSlice,

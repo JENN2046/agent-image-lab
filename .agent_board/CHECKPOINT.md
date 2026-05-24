@@ -1,5 +1,50 @@
 ---
 
+## Checkpoint - v0.6.72 Real VCP Agent Generation Preflight No-Call
+
+```text
+phase: v0_6_72_real_vcp_agent_generation_preflight_no_call
+source_phase: v0_6_71_real_vcp_agent_generation_action_packet
+status: blocked_validated_no_call
+result: BLOCKED
+goal_target: to_real_VCP_agent_generation
+selected_route: NativeDoubaoImage_one_shot_project_plugin
+selected_plugin_id: NativeDoubaoImage
+command: generate
+mode: text_to_image
+model: doubao-seedream-5-0-260128
+prompt_package_ref: prompts/image_generation/neutral_smoke_test_red_apple_v1.yaml
+output_directory_ref: runs/real_generation/v0_6_73_real_vcp_agent_generation_one_shot/
+route_activation_doc_ref: docs/vcp_integration/REAL_VCP_AGENT_GENERATION_ROUTE_ACTIVATION_GATE.md
+action_packet_doc_ref: docs/vcp_integration/REAL_VCP_AGENT_GENERATION_ACTION_PACKET.md
+preflight_doc_ref: docs/vcp_integration/REAL_VCP_AGENT_GENERATION_PREFLIGHT_NO_CALL.md
+blocked_receipt_ref: reports/provider_receipts/v0_6_72_real_vcp_agent_generation_preflight_blocked_receipt.json
+validator_ref: scripts/validate_real_vcp_agent_generation_preflight_no_call.js
+legacy_active_current_phase: v0_3_3_first_live_generation_pilot
+legacy_active_source_phase: v0_3_2_live_candidate_action_packet
+legacy_active_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+red_lane_stop_condition_reached: true
+blocker_id: red_lane_secret_value_read_required_by_current_native_doubao_runner
+blocker_summary: current scripts/run_native_doubao_image_generation.js real execution path requires .env.local secret value loading while this goal forbids .env and secret value reads
+v0_6_73_execution_allowed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+image_binary_read_performed: false
+output_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+env_file_content_read_performed: false
+secret_value_read_performed: false
+push_status: not_performed
+next: BLOCKED_non_secret_native_doubao_runtime_binding_required_before_v0_6_73
+```
+
+---
+
 ## Checkpoint - v0.6.69 Codex Session Image Import Route Closeout Or Real Generation Gap Review
 
 ```text

@@ -1,5 +1,74 @@
 ---
 
+- [blocked] ID: v0_6_73_real_vcp_agent_generation_execution_one_shot
+      Lane: Amber_B provider-image one-shot execution.
+      Status: blocked_by_v0_6_72_no_call_preflight_red_lane_secret_value_read_required_by_current_runner.
+      Source phase: v0_6_72_real_vcp_agent_generation_preflight_no_call.
+      Required route: NativeDoubaoImage_one_shot_project_plugin.
+      Selected plugin: NativeDoubaoImage.
+      Command: generate.
+      Model: doubao-seedream-5-0-260128.
+      Prompt package ref: prompts/image_generation/neutral_smoke_test_red_apple_v1.yaml.
+      Output directory ref: runs/real_generation/v0_6_73_real_vcp_agent_generation_one_shot/.
+      Blocked receipt ref: reports/provider_receipts/v0_6_72_real_vcp_agent_generation_preflight_blocked_receipt.json.
+      Blocker: current scripts/run_native_doubao_image_generation.js real execution path requires .env.local secret value loading while this goal forbids .env and secret value reads.
+      Legacy active current phase: v0_3_3_first_live_generation_pilot.
+      Legacy active source phase: v0_3_2_live_candidate_action_packet.
+      Legacy active next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      provider_contact_performed: false.
+      plugin_call_performed: false.
+      api_call_performed: false.
+      image_generation_performed: false.
+      image_binary_read_performed: false.
+      output_write_performed: false.
+      DailyNote_write_performed: false.
+      VCP_memory_write_performed: false.
+      accepted_samples_write_performed: false.
+      production_candidate_write_performed: false.
+      env_file_content_read_performed: false.
+      secret_value_read_performed: false.
+      push_status: not_performed.
+      Required unblock condition: provide a non-secret callable NativeDoubaoImage runtime binding or exact secret-handling authorization that preserves no raw secret printing/recording/commit before retrying v0.6.72.
+
+- [blocked] ID: v0_6_72_real_vcp_agent_generation_preflight_no_call
+      Lane: Amber_B provider-image no-call preflight.
+      Status: blocked_validated_no_call.
+      Source phase: v0_6_71_real_vcp_agent_generation_action_packet.
+      Result: Validated route, action packet, prompt package, output directory, budget, receipt path, review handoff path, no-overwrite constraints, and stop conditions; stopped before execution due Red Lane secret value read requirement in the current runner.
+      Doc ref: docs/vcp_integration/REAL_VCP_AGENT_GENERATION_PREFLIGHT_NO_CALL.md.
+      Fixture ref: tests/schema_examples/real_vcp_agent_generation_preflight_no_call.example.yaml.
+      Validator ref: scripts/validate_real_vcp_agent_generation_preflight_no_call.js.
+      Blocked receipt ref: reports/provider_receipts/v0_6_72_real_vcp_agent_generation_preflight_blocked_receipt.json.
+      Recommended next: BLOCKED_non_secret_native_doubao_runtime_binding_required_before_v0_6_73.
+
+- [x] ID: v0_6_71_real_vcp_agent_generation_action_packet
+      Lane: Amber_B provider-image action packet only.
+      Status: completed_validated_local_packet_only.
+      Source phase: v0_6_70_real_vcp_agent_generation_route_activation_gate.
+      Result: Created exact one-shot Amber_B action packet for NativeDoubaoImage with max_plugin_calls=1, max_provider_calls=1, max_api_calls=1, max_images_created=1, retry_limit=0, no overwrite, no raw payload retention, no memory/sample/promotion writes, and required receipt/review handoff.
+      Doc ref: docs/vcp_integration/REAL_VCP_AGENT_GENERATION_ACTION_PACKET.md.
+      Fixture ref: tests/schema_examples/real_vcp_agent_generation_action_packet.example.yaml.
+      Validator ref: scripts/validate_real_vcp_agent_generation_action_packet.js.
+      Recommended next after validation: v0_6_72_real_vcp_agent_generation_preflight_no_call.
+
+- [x] ID: v0_6_70_real_vcp_agent_generation_route_activation_gate
+      Lane: Green local route activation only.
+      Status: completed_validated_local_route_activation_only.
+      Source phase: v0_6_69a_exact_file_commit_readiness_gate.
+      Result: Selected NativeDoubaoImage_one_shot_project_plugin as the real VCP Agent generation route after codex_session_image_import closed as manual fallback.
+      Selected plugin: NativeDoubaoImage.
+      Command: generate.
+      Mode: text_to_image.
+      Model: doubao-seedream-5-0-260128.
+      Prompt package ref: prompts/image_generation/neutral_smoke_test_red_apple_v1.yaml.
+      Output directory ref: runs/real_generation/v0_6_73_real_vcp_agent_generation_one_shot/.
+      Doc ref: docs/vcp_integration/REAL_VCP_AGENT_GENERATION_ROUTE_ACTIVATION_GATE.md.
+      Fixture ref: tests/schema_examples/real_vcp_agent_generation_route_activation_gate.example.yaml.
+      Validator ref: scripts/validate_real_vcp_agent_generation_route_activation_gate.js.
+      Recommended next after validation: v0_6_71_real_vcp_agent_generation_action_packet.
+
+---
+
 - [x] ID: v0_6_69_codex_session_image_import_route_closeout_or_real_generation_gap_review
       Lane: Green local route review only.
       Status: completed_validated_local_route_review_only.
