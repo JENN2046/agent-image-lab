@@ -1,5 +1,1364 @@
 ---
 
+## Current Handoff Update - v0.6.58 Exact New-Trial 003 Durable Archive Write Authorization Package After Metadata Preflight
+
+```text
+phase: v0_6_58_exact_new_trial_003_durable_archive_write_authorization_package_after_metadata_preflight
+status: completed_validated_local_durable_archive_write_authorization_package_after_metadata_preflight
+mode: Green local durable archive write authorization package only
+summary: Prepared the exact durable archive write authorization package for the accepted shot_2 sample after v0.6.57 metadata preflight; no asset_archive write, image binary read/copy, production candidate, DailyNote, VCP memory, provider/API/plugin, staging, commit, push, tag, release, or deploy was performed during the package step.
+source_phase: v0_6_57_exact_new_trial_003_durable_archive_metadata_preflight_after_accepted_sample_registration
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+report_ref: reports/visual_asset_eval_dry_run/v0_6_58_exact_new_trial_003_durable_archive_write_authorization_package_after_metadata_preflight.json
+validator_ref: scripts/validate_exact_new_trial_003_durable_archive_write_authorization_package_after_metadata_preflight.js
+target_candidate_id: v0_3_3_exact_new_trial_003_shot_2
+target_sample_id: accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001
+category: fashion_lookbook_portrait
+artifact_sha256: 8bd7b81a916f0f6333392562d84e32368a3f28dd6a6456fc2f9e49d835a62c3b
+accepted_sample_registration_completed: true
+archive_metadata_preflight_compiled: true
+archive_write_authorization_package_prepared: true
+archive_write_authorized_next: true
+execution_allowed_now: false
+future_write_path_count: 3
+max_write_files: 3
+archive_write_performed: false
+image_binary_read_performed: false
+image_file_copy_performed: false
+image_generation_performed: false
+secret_value_read_performed: false
+push_allowed: false
+push_status: not_performed
+push_requested_after_validation: true
+recommended_next: run_exact_new_trial_003_durable_archive_write_execution_preflight_no_write
+```
+
+---
+
+## Current Handoff Update - v0.6.57 Exact New-Trial 003 Durable Archive Metadata Preflight After Accepted Sample Registration
+
+```text
+phase: v0_6_57_exact_new_trial_003_durable_archive_metadata_preflight_after_accepted_sample_registration
+status: completed_validated_local_durable_archive_metadata_preflight_after_accepted_sample_registration
+mode: Green local durable archive metadata preflight only
+summary: Compiled the future durable archive manifest/original/preview path metadata for the accepted shot_2 sample after accepted-sample registration; no asset_archive write, image binary read/copy, production candidate, DailyNote, VCP memory, provider/API/plugin, staging, commit, push, tag, release, or deploy was performed.
+source_phase: v0_6_56_exact_new_trial_003_accepted_samples_metadata_registration
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+report_ref: reports/visual_asset_eval_dry_run/v0_6_57_exact_new_trial_003_durable_archive_metadata_preflight_after_accepted_sample_registration.json
+validator_ref: scripts/validate_exact_new_trial_003_durable_archive_metadata_preflight_after_accepted_sample_registration.js
+target_candidate_id: v0_3_3_exact_new_trial_003_shot_2
+target_sample_id: accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001
+category: fashion_lookbook_portrait
+artifact_sha256: 8bd7b81a916f0f6333392562d84e32368a3f28dd6a6456fc2f9e49d835a62c3b
+accepted_sample_registration_completed: true
+archive_metadata_preflight_compiled: true
+archive_write_authorized: false
+archive_write_performed: false
+image_binary_read_performed: false
+image_file_copy_performed: false
+image_generation_performed: false
+secret_value_read_performed: false
+push_allowed: false
+push_status: not_performed
+recommended_next: prepare_exact_new_trial_003_durable_archive_write_authorization_package_after_metadata_preflight
+```
+
+---
+
+## Current Handoff Update - v0.6.56 Exact New-Trial 003 Accepted Samples Metadata Registration
+
+```text
+phase: v0_6_56_exact_new_trial_003_accepted_samples_metadata_registration
+status: completed_validated_accepted_samples_metadata_registration_only
+mode: Amber_E exact production metadata write with Green local status sync
+summary: Registered the selected shot_2 sample in accepted_samples metadata only, after v0.6.55 captured Jenn approval evidence; no archive, production candidate, DailyNote, VCP memory, provider/API/plugin, image generation, staging, commit, push, tag, release, or deploy was performed.
+source_phase: v0_6_55_exact_new_trial_003_user_submitted_formal_human_approval_evidence_capture
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+resume_compaction_compatibility_anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+report_ref: reports/visual_asset_eval_dry_run/v0_6_56_exact_new_trial_003_accepted_samples_metadata_registration.json
+validator_ref: scripts/validate_exact_new_trial_003_accepted_samples_metadata_registration.js
+registry_ref: accepted_samples/accepted_sample_registry.yaml
+category_index_ref: accepted_samples/categories/fashion_lookbook_portrait.yaml
+approval_evidence_ref: reports/human_approval_evidence/v0_3_3_exact_new_trial_003_shot_2_user_submitted_formal_human_approval_evidence.json
+target_candidate_id: v0_3_3_exact_new_trial_003_shot_2
+target_sample_id: accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001
+category: fashion_lookbook_portrait
+approved_by: Jenn
+artifact_sha256: 8bd7b81a916f0f6333392562d84e32368a3f28dd6a6456fc2f9e49d835a62c3b
+accepted_samples_metadata_registered: true
+category_index_updated: true
+duplicate_sample_id_count: 1
+write_scope: accepted_samples_metadata_registration_only
+image_file_copy_performed: false
+runs_source_image_modified: false
+archive_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_call_performed: false
+image_generation_performed: false
+actual_image_generation_performed: false
+secret_value_read_performed: false
+push_allowed: false
+push_status: not_performed
+recommended_next: prepare_exact_new_trial_003_durable_archive_metadata_preflight_after_accepted_sample_registration
+```
+
+---
+
+## Current Handoff Update - v0.6.55 Exact New-Trial 003 User-Submitted Formal Human Approval Evidence Capture
+
+```text
+phase: v0_6_55_exact_new_trial_003_user_submitted_formal_human_approval_evidence_capture
+status: completed_validated_user_submitted_formal_human_approval_evidence_captured_pending_accepted_sample_registration
+mode: Amber_E production metadata evidence capture with Green local status sync
+summary: Captured the real Jenn user-submitted formal approval evidence for selected shot_2, bound it to the exact candidate id, sample id, artifact hash, and downstream boundary, and unlocked only the next accepted-sample metadata registration step.
+source_phase: v0_6_54_exact_new_trial_003_formal_human_approval_evidence_ingestion_packet
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+resume_compaction_compatibility_anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+report_ref: reports/visual_asset_eval_dry_run/v0_6_55_exact_new_trial_003_user_submitted_formal_human_approval_evidence_capture.json
+validator_ref: scripts/validate_exact_new_trial_003_user_submitted_formal_human_approval_evidence_capture.js
+evidence_ref: reports/human_approval_evidence/v0_3_3_exact_new_trial_003_shot_2_user_submitted_formal_human_approval_evidence.json
+target_candidate_id: v0_3_3_exact_new_trial_003_shot_2
+target_sample_id: accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001
+category: fashion_lookbook_portrait
+required_reviewer: Jenn
+submitted_by: Jenn
+artifact_sha256: 8bd7b81a916f0f6333392562d84e32368a3f28dd6a6456fc2f9e49d835a62c3b
+approval_submission_present_now: true
+v0_6_55_user_submission_source_confirmed: true
+v0_6_55_formal_approval_captured: true
+v0_6_55_accepted_sample_registration_ready: true
+registration_unlock_allowed_now: true
+next_write_action_allowed_now: true
+next_write_scope: accepted_samples_metadata_registration_only
+accepted_samples_write_performed: false
+archive_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_call_performed: false
+image_generation_performed: false
+actual_image_generation_performed: false
+secret_value_read_performed: false
+push_allowed: false
+push_status: not_performed
+recommended_next: execute_exact_new_trial_003_accepted_samples_metadata_registration_only
+```
+
+---
+
+## Current Handoff Update - v0.6.54 Exact New-Trial 003 Formal Human Approval Evidence Ingestion Packet
+
+```text
+phase: v0_6_54_exact_new_trial_003_formal_human_approval_evidence_ingestion_packet
+status: completed_validated_local_ingestion_packet_blocked_on_user_submitted_jenn_approval
+mode: Green local formal human approval evidence ingestion packet
+summary: Created the exact local ingestion contract for a future Jenn user-submitted approval statement; the workflow is now blocked on actual human approval evidence, not on missing real-class authorization or missing local packet structure.
+source_phase: v0_6_53_exact_new_trial_003_formal_human_approval_capture_surface_static_panel
+source_evidence_packet_phase: v0_6_52_exact_new_trial_003_formal_human_approval_evidence_capture_packet
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+resume_compaction_compatibility_anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+report_ref: reports/visual_asset_eval_dry_run/v0_6_54_exact_new_trial_003_formal_human_approval_evidence_ingestion_packet.json
+validator_ref: scripts/validate_exact_new_trial_003_formal_human_approval_evidence_ingestion_packet.js
+packet_ref: reports/human_approval_evidence/v0_3_3_exact_new_trial_003_shot_2_formal_human_approval_evidence_ingestion_packet.json
+target_candidate_id: v0_3_3_exact_new_trial_003_shot_2
+target_sample_id: accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001
+category: fashion_lookbook_portrait
+required_reviewer: Jenn
+approval_submission_present_now: false
+approval_statement_source_is_user_submission: false
+formal_human_approval_captured_now: false
+accepted_samples_registration_ready_now: false
+next_write_action_allowed_now: false
+current_blocker: user_submitted_jenn_approval_missing
+accepted_samples_write_performed: false
+archive_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_call_performed: false
+image_generation_performed: false
+actual_image_generation_performed: false
+secret_value_read_performed: false
+push_allowed: false
+push_status: not_performed
+recommended_next: await_user_submitted_jenn_formal_approval_before_any_accepted_sample_registration
+```
+
+---
+
+## Current Handoff Update - v0.6.53 Exact New-Trial 003 Formal Human Approval Capture Surface Static Panel
+
+```text
+phase: v0_6_53_exact_new_trial_003_formal_human_approval_capture_surface_static_panel
+status: completed_validated_local_static_capture_surface_pending_jenn_submission
+mode: Green local Review Console static formal human approval capture surface
+summary: Added a static Review Console panel that exposes the exact future Jenn approval fields for selected shot_2 while preserving that no formal approval is captured and no accepted-sample/archive/production/memory write is unlocked.
+source_phase: v0_6_52_exact_new_trial_003_formal_human_approval_evidence_capture_packet
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+resume_compaction_compatibility_anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+report_ref: reports/visual_asset_eval_dry_run/v0_6_53_exact_new_trial_003_formal_human_approval_capture_surface_static_panel.json
+validator_ref: scripts/validate_exact_new_trial_003_formal_human_approval_capture_surface_static_panel.js
+source_packet_ref: reports/human_approval_evidence/v0_3_3_exact_new_trial_003_shot_2_formal_human_approval_evidence_capture_packet.json
+target_candidate_id: v0_3_3_exact_new_trial_003_shot_2
+target_sample_id: accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001
+category: fashion_lookbook_portrait
+required_reviewer: Jenn
+draft_output_key: exact_new_trial_003_formal_human_approval_capture_surface_state
+capture_surface_status: static_capture_ready_pending_jenn_submission
+approval_evidence_present_now: false
+approval_statement_source_is_user_submission: false
+formal_human_approval_captured_now: false
+accepted_samples_registration_ready_now: false
+next_write_action_allowed_now: false
+current_blocker: formal_human_approval_evidence_missing
+accepted_samples_write_performed: false
+archive_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_call_performed: false
+image_generation_performed: false
+actual_image_generation_performed: false
+secret_value_read_performed: false
+push_allowed: false
+push_status: not_performed
+recommended_next: prepare_exact_new_trial_003_formal_human_approval_evidence_ingestion_packet_pending_user_submission
+```
+
+---
+
+## Current Handoff Update - v0.6.52 Exact New-Trial 003 Formal Human Approval Evidence Capture Packet
+
+```text
+phase: v0_6_52_exact_new_trial_003_formal_human_approval_evidence_capture_packet
+status: completed_validated_local_formal_human_approval_evidence_capture_packet_pending_jenn_submission
+mode: Green local formal human approval evidence capture packet
+summary: Created the exact local evidence packet for future Jenn approval of selected shot_2, preserving that current approval evidence is not present, v0.6.33 remains fixture-only, and no accepted-sample/archive/production/memory write is unlocked.
+source_phase: v0_6_51_exact_new_trial_003_workflow_prerequisite_reconciliation_packet
+human_approval_intake_source_phase: v0_6_33_exact_new_trial_003_selected_candidate_human_approval_intake_package
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+resume_compaction_compatibility_anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+report_ref: reports/visual_asset_eval_dry_run/v0_6_52_exact_new_trial_003_formal_human_approval_evidence_capture_packet.json
+validator_ref: scripts/validate_exact_new_trial_003_formal_human_approval_evidence_capture_packet.js
+packet_ref: reports/human_approval_evidence/v0_3_3_exact_new_trial_003_shot_2_formal_human_approval_evidence_capture_packet.json
+target_candidate_id: v0_3_3_exact_new_trial_003_shot_2
+target_sample_id: accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001
+category: fashion_lookbook_portrait
+required_reviewer: Jenn
+approval_evidence_present_now: false
+approval_statement_source_is_user_submission: false
+formal_human_approval_captured_now: false
+accepted_samples_registration_ready_now: false
+next_write_action_allowed_now: false
+current_blocker: formal_human_approval_evidence_missing
+accepted_samples_write_performed: false
+archive_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_call_performed: false
+image_generation_performed: false
+actual_image_generation_performed: false
+secret_value_read_performed: false
+push_allowed: false
+push_status: not_performed
+recommended_next: prepare_review_console_formal_human_approval_capture_surface_static_only_before_any_accepted_sample_registration
+```
+
+---
+
+## Current Handoff Update - v0.6.51 Exact New-Trial 003 Workflow Prerequisite Reconciliation Packet
+
+```text
+phase: v0_6_51_exact_new_trial_003_workflow_prerequisite_reconciliation_packet
+status: completed_validated_local_workflow_prerequisite_reconciliation_packet_memory_write_still_no_go
+mode: Green local workflow prerequisite reconciliation packet with DailyNote / VCP memory route preserved
+summary: Reconciled the selected shot_2 memory-write route so Smart Standing Authorization v3's default real-class allowance is no longer confused with workflow readiness; exact-scoped Amber_C memory work remains default-allowed, while the current no-go is formal human approval, accepted-sample registration, durable archive readiness, and production candidate readiness.
+source_phase: v0_6_50_exact_new_trial_003_daily_note_vcp_memory_write_go_no_go_checkpoint
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+resume_compaction_compatibility_anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+report_ref: reports/visual_asset_eval_dry_run/v0_6_51_exact_new_trial_003_workflow_prerequisite_reconciliation_packet.json
+validator_ref: scripts/validate_exact_new_trial_003_workflow_prerequisite_reconciliation_packet.js
+packet_ref: reports/memory_write_receipts/v0_3_3_exact_new_trial_003_shot_2_workflow_prerequisite_reconciliation_packet.json
+real_class_authorization_default_allowed: true
+amber_memory_write_default_allowed: true
+step_by_step_auth_request_required: false
+authorization_missing_is_current_blocker: false
+workflow_prerequisites_missing_is_blocker: true
+target_sample_id: accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001
+target_candidate_id: v0_3_3_exact_new_trial_003_shot_2
+category: fashion_lookbook_portrait
+reviewer: Jenn
+formal_human_approval_captured: false
+accepted_sample_registration_completed: false
+durable_archive_ready: false
+production_candidate_ready: false
+go_allowed_now: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+accepted_samples_write_performed: false
+archive_write_performed: false
+production_candidate_write_performed: false
+provider_call_performed: false
+image_generation_performed: false
+secret_value_read_performed: false
+push_allowed: false
+push_status: not_performed
+recommended_next: prepare_exact_new_trial_003_formal_human_approval_evidence_capture_packet_before_any_accepted_sample_registration_or_memory_write
+```
+
+---
+
+## Current Handoff Update - v0.6.50 Exact New-Trial 003 DailyNote / VCP Memory Write Go/No-Go Checkpoint
+
+```text
+phase: v0_6_50_exact_new_trial_003_daily_note_vcp_memory_write_go_no_go_checkpoint
+status: completed_validated_local_daily_note_vcp_memory_write_go_no_go_checkpoint_blocked_by_unmet_workflow_prerequisites
+mode: Green local exact-new-trial DailyNote / VCP memory write go/no-go checkpoint with registry contract preserved
+summary: Compiled the selected shot_2 memory-write route into one current truth checkpoint: Smart Standing Authorization v3 means exact-scoped DailyNote / VCP memory work is default-allowed inside Amber_C, so missing step-by-step real-class authorization is not the blocker; the route still remains no_go because formal human approval, accepted-sample registration, durable archive readiness, and production candidate readiness are not complete.
+source_phase: v0_6_49_exact_new_trial_003_daily_note_vcp_memory_write_registry_contract
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+resume_compaction_compatibility_anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+report_ref: reports/visual_asset_eval_dry_run/v0_6_50_exact_new_trial_003_daily_note_vcp_memory_write_go_no_go_checkpoint.json
+validator_ref: scripts/validate_exact_new_trial_003_daily_note_vcp_memory_write_go_no_go_checkpoint.js
+checkpoint_ref: reports/memory_write_receipts/v0_3_3_exact_new_trial_003_shot_2_daily_note_vcp_memory_write_go_no_go_checkpoint.json
+checkpoint_status: no_go_unmet_workflow_prerequisites
+amber_memory_write_default_allowed: true
+step_by_step_auth_request_required: false
+authorization_missing_is_current_blocker: false
+target_sample_id: accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001
+target_candidate_id: v0_3_3_exact_new_trial_003_shot_2
+category: fashion_lookbook_portrait
+reviewer: Jenn
+formal_human_approval_captured: false
+accepted_sample_registration_completed: false
+durable_archive_ready: false
+production_candidate_ready: false
+payload_refresh_present: true
+sensitive_data_scan_present: true
+receipt_contract_present: true
+registry_contract_present: true
+go_allowed_now: false
+execution_ready: false
+execution_allowed_now: false
+accepted_samples_write_performed: false
+archive_write_performed: false
+production_candidate_write_performed: false
+VCP_memory_write_performed: false
+DailyNote_write_performed: false
+provider_call_performed: false
+image_generation_performed: false
+secret_value_read_performed: false
+push_allowed: false
+push_status: not_performed
+recommended_next: prepare_exact_new_trial_003_workflow_prerequisite_reconciliation_packet_before_any_memory_write
+```
+
+## Current Handoff Update - v0.6.49 Exact New-Trial 003 DailyNote / VCP Memory Write Registry Contract
+
+```text
+phase: v0_6_49_exact_new_trial_003_daily_note_vcp_memory_write_registry_contract
+status: completed_validated_local_daily_note_vcp_memory_write_registry_contract_pending_external_human_approval_accepted_sample_archive_production_and_memory_authorization
+mode: Green local exact-new-trial DailyNote / VCP memory write registry contract with receipt contract preserved
+summary: Froze the selected shot_2 future local memory-write registry contract so the route now has exact receipt-contract, registry-contract, registry-entry, receipt path, registry path, review bridge, append-only, required-key, and partial-failure lookup rules, while preserving the blocked execution boundary: no human approval, no accepted-sample registration, no completed archive, no production readiness, and no exact memory-write grant still means no external DailyNote or VCP memory write may run.
+source_phase: v0_6_48_exact_new_trial_003_daily_note_vcp_memory_write_receipt_contract
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+resume_compaction_compatibility_anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+report_ref: reports/visual_asset_eval_dry_run/v0_6_49_exact_new_trial_003_daily_note_vcp_memory_write_registry_contract.json
+validator_ref: scripts/validate_exact_new_trial_003_daily_note_vcp_memory_write_registry_contract.js
+registry_contract_ref: reports/memory_write_receipts/v0_3_3_exact_new_trial_003_shot_2_daily_note_vcp_memory_write_registry_contract.json
+receipt_contract_ref: reports/memory_write_receipts/v0_3_3_exact_new_trial_003_shot_2_daily_note_vcp_memory_write_receipt_contract.json
+registry_contract_status: prepared_blocked_not_executed
+authorization_id: AUTH-PENDING-EXACT-NEW-TRIAL-003-SHOT-2-MEMORY-WRITE-20260524-001
+receipt_contract_id: RCPT-CONTRACT-PENDING-EXACT-NEW-TRIAL-003-SHOT-2-MEMORY-WRITE-20260524-001
+registry_contract_id: REGISTRY-CONTRACT-PENDING-EXACT-NEW-TRIAL-003-SHOT-2-MEMORY-WRITE-20260524-001
+registry_entry_id: REGISTRY-ENTRY-PENDING-EXACT-NEW-TRIAL-003-SHOT-2-MEMORY-WRITE-20260524-001
+blocker: missing_human_approval_accepted_sample_registration_archive_completion_production_candidate_authorization_and_exact_daily_note_vcp_memory_write_grant
+target_sample_id: accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001
+target_candidate_id: v0_3_3_exact_new_trial_003_shot_2
+category: fashion_lookbook_portrait
+reviewer: Jenn
+future_local_receipt_path: reports/memory_write_receipts/v0_3_3_exact_new_trial_003_shot_2_daily_note_vcp_memory_write_receipt.json
+future_local_registry_path: reports/memory_write_receipts/v0_3_3_exact_new_trial_003_shot_2_daily_note_vcp_memory_write_registry.json
+future_review_bridge_ref: review_console/live_receipt_bridge/v0_3_3_exact_new_trial_003_shot_2_memory_write
+registry_update_mode: append_only_after_receipt
+registry_required_key_count: 10
+receipt_created_now: false
+registry_created_now: false
+registry_entry_created_now: false
+bridge_created_now: false
+accepted_sample_registration_completed: false
+durable_archive_ready: false
+production_candidate_ready: false
+daily_note_write_authorized: false
+vcp_memory_write_authorized: false
+write_command_permission: false
+execution_ready: false
+execution_allowed_now: false
+accepted_samples_write_performed: false
+archive_write_performed: false
+production_candidate_write_performed: false
+VCP_memory_write_performed: false
+DailyNote_write_performed: false
+provider_call_performed: false
+image_generation_performed: false
+secret_value_read_performed: false
+push_allowed: false
+push_status: not_performed
+recommended_next: prepare_exact_new_trial_003_daily_note_vcp_memory_write_go_no_go_checkpoint_with_registry_contract_preserved
+```
+
+## Current Handoff Update - v0.6.48 Exact New-Trial 003 DailyNote / VCP Memory Write Receipt Contract
+
+```text
+phase: v0_6_48_exact_new_trial_003_daily_note_vcp_memory_write_receipt_contract
+status: completed_validated_local_daily_note_vcp_memory_write_receipt_contract_pending_external_human_approval_accepted_sample_archive_production_and_memory_authorization
+mode: Green local exact-new-trial DailyNote / VCP memory write receipt contract with payload refresh package preserved
+summary: Froze the selected shot_2 future local memory-write receipt contract so the route now has exact receipt, registry, and review-bridge identities plus exact success/failure evidence rules, while preserving the blocked execution boundary: no human approval, no accepted-sample registration, no completed archive, no production readiness, and no exact memory-write grant still means no external DailyNote or VCP memory write may run.
+source_phase: v0_6_47_exact_new_trial_003_daily_note_vcp_memory_write_payload_refresh_package
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+resume_compaction_compatibility_anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+report_ref: reports/visual_asset_eval_dry_run/v0_6_48_exact_new_trial_003_daily_note_vcp_memory_write_receipt_contract.json
+validator_ref: scripts/validate_exact_new_trial_003_daily_note_vcp_memory_write_receipt_contract.js
+receipt_contract_ref: reports/memory_write_receipts/v0_3_3_exact_new_trial_003_shot_2_daily_note_vcp_memory_write_receipt_contract.json
+receipt_contract_status: prepared_blocked_not_executed
+authorization_id: AUTH-PENDING-EXACT-NEW-TRIAL-003-SHOT-2-MEMORY-WRITE-20260524-001
+receipt_contract_id: RCPT-CONTRACT-PENDING-EXACT-NEW-TRIAL-003-SHOT-2-MEMORY-WRITE-20260524-001
+blocker: missing_human_approval_accepted_sample_registration_archive_completion_production_candidate_authorization_and_exact_daily_note_vcp_memory_write_grant
+target_sample_id: accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001
+target_candidate_id: v0_3_3_exact_new_trial_003_shot_2
+category: fashion_lookbook_portrait
+reviewer: Jenn
+future_local_receipt_path: reports/memory_write_receipts/v0_3_3_exact_new_trial_003_shot_2_daily_note_vcp_memory_write_receipt.json
+future_local_registry_path: reports/memory_write_receipts/v0_3_3_exact_new_trial_003_shot_2_daily_note_vcp_memory_write_registry.json
+future_review_bridge_ref: review_console/live_receipt_bridge/v0_3_3_exact_new_trial_003_shot_2_memory_write
+daily_note_target_id: exact_new_trial_003_shot_2_daily_note_review_learning_entry
+vcp_memory_target_id: exact_new_trial_003_shot_2_vcp_memory_review_learning_summary
+exact_operations_count: 2
+daily_note_write_must_precede_vcp_memory_write: true
+receipt_created_now: false
+registry_created_now: false
+bridge_created_now: false
+accepted_sample_registration_completed: false
+durable_archive_ready: false
+production_candidate_ready: false
+daily_note_write_authorized: false
+vcp_memory_write_authorized: false
+write_command_permission: false
+execution_ready: false
+execution_allowed_now: false
+accepted_samples_write_performed: false
+archive_write_performed: false
+production_candidate_write_performed: false
+VCP_memory_write_performed: false
+DailyNote_write_performed: false
+provider_call_performed: false
+image_generation_performed: false
+secret_value_read_performed: false
+push_allowed: false
+push_status: not_performed
+recommended_next: prepare_exact_new_trial_003_daily_note_vcp_memory_write_registry_contract_with_receipt_contract_preserved
+```
+
+## Current Handoff Update - v0.6.47 Exact New-Trial 003 DailyNote / VCP Memory Write Payload Refresh Package
+
+```text
+phase: v0_6_47_exact_new_trial_003_daily_note_vcp_memory_write_payload_refresh_package
+status: completed_validated_local_daily_note_vcp_memory_write_payload_refresh_package_pending_external_human_approval_accepted_sample_archive_production_and_memory_authorization
+mode: Green local exact-new-trial DailyNote / VCP memory write payload refresh package with execution preflight preserved
+summary: Refreshed the selected shot_2 future Chinese DailyNote and VCP memory payload text from the frozen memory draft, while preserving the exact blocked execution boundary: no human approval, no accepted-sample registration, no completed archive, no production readiness, and no exact memory-write grant still means no external DailyNote or VCP memory write may run.
+source_phase: v0_6_46_exact_new_trial_003_daily_note_vcp_memory_write_execution_preflight
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+resume_compaction_compatibility_anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+report_ref: reports/visual_asset_eval_dry_run/v0_6_47_exact_new_trial_003_daily_note_vcp_memory_write_payload_refresh_package.json
+validator_ref: scripts/validate_exact_new_trial_003_daily_note_vcp_memory_write_payload_refresh_package.js
+payload_package_ref: reports/memory_write_payloads/v0_3_3_exact_new_trial_003_shot_2_daily_note_vcp_memory_write_payload_refresh_package.json
+payload_refresh_status: refreshed_blocked_not_executable
+authorization_id: AUTH-PENDING-EXACT-NEW-TRIAL-003-SHOT-2-MEMORY-WRITE-20260524-001
+blocker: missing_human_approval_accepted_sample_registration_archive_completion_production_candidate_authorization_and_exact_daily_note_vcp_memory_write_grant
+target_sample_id: accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001
+target_candidate_id: v0_3_3_exact_new_trial_003_shot_2
+category: fashion_lookbook_portrait
+reviewer: Jenn
+daily_note_target_id: exact_new_trial_003_shot_2_daily_note_review_learning_entry
+vcp_memory_target_id: exact_new_trial_003_shot_2_vcp_memory_review_learning_summary
+daily_note_title_cn_present: true
+daily_note_body_cn_present: true
+vcp_memory_summary_cn_present: true
+vcp_memory_lessons_count: 3
+payload_source_chain_verified: true
+scan_state_preserved: true
+accepted_sample_registration_completed: false
+durable_archive_ready: false
+production_candidate_ready: false
+daily_note_write_authorized: false
+vcp_memory_write_authorized: false
+write_command_permission: false
+execution_ready: false
+execution_allowed_now: false
+accepted_samples_write_performed: false
+archive_write_performed: false
+production_candidate_write_performed: false
+VCP_memory_write_performed: false
+DailyNote_write_performed: false
+provider_call_performed: false
+image_generation_performed: false
+secret_value_read_performed: false
+push_allowed: false
+push_status: not_performed
+recommended_next: prepare_exact_new_trial_003_daily_note_vcp_memory_write_receipt_contract_with_payload_refresh_package_preserved
+```
+
+## Current Handoff Update - v0.6.46 Exact New-Trial 003 DailyNote / VCP Memory Write Execution Preflight
+
+```text
+phase: v0_6_46_exact_new_trial_003_daily_note_vcp_memory_write_execution_preflight
+status: completed_validated_local_daily_note_vcp_memory_write_execution_preflight_pending_external_human_approval_accepted_sample_archive_production_and_memory_authorization
+mode: Green local exact-new-trial DailyNote / VCP memory write execution preflight with authorization package and exact targets preserved
+summary: Converted the selected shot_2 memory path from frozen authorization wording into one exact blocked execution preflight, while keeping the true dependency chain explicit: no human approval, no accepted-sample registration, no completed archive, no production readiness, and no exact memory-write grant still means no external DailyNote or VCP memory write may run.
+source_phase: v0_6_45_exact_new_trial_003_daily_note_vcp_memory_write_authorization_package_draft
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+resume_compaction_compatibility_anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+report_ref: reports/visual_asset_eval_dry_run/v0_6_46_exact_new_trial_003_daily_note_vcp_memory_write_execution_preflight.json
+validator_ref: scripts/validate_exact_new_trial_003_daily_note_vcp_memory_write_execution_preflight.js
+preflight_status: blocked
+authorization_package_status: prepared_blocked_not_granted
+authorization_id: AUTH-PENDING-EXACT-NEW-TRIAL-003-SHOT-2-MEMORY-WRITE-20260524-001
+blocker: missing_human_approval_accepted_sample_registration_archive_completion_production_candidate_authorization_and_exact_daily_note_vcp_memory_write_grant
+target_sample_id: accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001
+target_candidate_id: v0_3_3_exact_new_trial_003_shot_2
+category: fashion_lookbook_portrait
+reviewer: Jenn
+exact_allowed_memory_targets_defined: true
+exact_allowed_memory_targets_count: 2
+memory_delta_draft_present: true
+sensitive_data_scan_present: true
+human_approval_status: pending
+accepted_sample_registration_completed: false
+durable_archive_ready: false
+production_candidate_ready: false
+daily_note_write_authorized: false
+vcp_memory_write_authorized: false
+write_command_permission: false
+execution_ready: false
+execution_allowed_now: false
+accepted_samples_write_performed: false
+archive_write_performed: false
+production_candidate_write_performed: false
+VCP_memory_write_performed: false
+DailyNote_write_performed: false
+provider_call_performed: false
+image_generation_performed: false
+secret_value_read_performed: false
+push_allowed: false
+push_status: not_performed
+recommended_next: prepare_exact_new_trial_003_daily_note_vcp_memory_write_payload_refresh_package_with_execution_preflight_preserved
+```
+
+## Current Handoff Update - v0.6.45 Exact New-Trial 003 DailyNote / VCP Memory Write Authorization Package Draft
+
+## Current Handoff Update - v0.6.44 Exact New-Trial 003 Exact Allowed Memory Targets Package
+
+```text
+phase: v0_6_44_exact_new_trial_003_exact_allowed_memory_targets_package
+status: completed_validated_local_exact_allowed_memory_targets_package_pending_external_human_approval_accepted_sample_archive_production_and_memory_authorization
+mode: Green local exact-new-trial exact allowed memory targets package with memory-authorization dependency preserved
+summary: Converted the selected shot_2 memory path into one exact two-target package for future DailyNote and VCP memory writes, while keeping the true dependency chain explicit: no human approval, no accepted-sample registration, no completed archive, no production readiness, and no exact memory write authorization still means no external memory write may run.
+source_phase: v0_6_43_exact_new_trial_003_daily_note_vcp_memory_authorization_compiler_output_refresh_preflight
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+resume_compaction_compatibility_anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+report_ref: reports/visual_asset_eval_dry_run/v0_6_44_exact_new_trial_003_exact_allowed_memory_targets_package.json
+validator_ref: scripts/validate_exact_new_trial_003_exact_allowed_memory_targets_package.js
+targets_package_ref: reports/memory_target_packages/v0_3_3_exact_new_trial_003_shot_2_exact_allowed_memory_targets.json
+package_type: exact_allowed_memory_targets
+package_status: draft_only_blocked_by_accepted_sample_archive_production_and_memory_authorization_dependencies
+target_sample_id: accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001
+target_candidate_id: v0_3_3_exact_new_trial_003_shot_2
+category: fashion_lookbook_portrait
+exact_allowed_memory_targets_defined: true
+exact_allowed_memory_targets_count: 2
+accepted_sample_registration_completed: false
+durable_archive_ready: false
+production_candidate_ready: false
+daily_note_write_authorized: false
+vcp_memory_write_authorized: false
+write_command_permission: false
+execution_allowed_now: false
+accepted_samples_write_performed: false
+archive_write_performed: false
+production_candidate_write_performed: false
+VCP_memory_write_performed: false
+DailyNote_write_performed: false
+provider_call_performed: false
+image_generation_performed: false
+secret_value_read_performed: false
+push_allowed: false
+push_status: not_performed
+recommended_next: prepare_exact_new_trial_003_daily_note_vcp_memory_write_authorization_package_draft_with_exact_targets_preserved
+```
+
+## Current Handoff Update - v0.6.43 Exact New-Trial 003 DailyNote / VCP Memory Authorization Compiler-Output Refresh Preflight
+
+```text
+phase: v0_6_43_exact_new_trial_003_daily_note_vcp_memory_authorization_compiler_output_refresh_preflight
+status: completed_validated_local_daily_note_vcp_memory_authorization_refresh_preflight_pending_external_human_approval_accepted_sample_archive_production_and_memory_authorization
+mode: Green local exact-new-trial DailyNote / VCP memory authorization compiler-output refresh preflight with memory-delta and scan state preserved
+summary: Refreshed the selected shot_2 memory-authorization gate so it now tells the truth about the current local state: the Chinese memory draft and passed sensitive-data scan are both present, but no DailyNote or VCP memory write may run until the remaining approval, accepted-sample, archive, production, exact-memory-target, and exact-authorization blockers are cleared.
+source_phase: v0_6_42_exact_new_trial_003_sensitive_data_scan_preflight
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+resume_compaction_compatibility_anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+report_ref: reports/visual_asset_eval_dry_run/v0_6_43_exact_new_trial_003_daily_note_vcp_memory_authorization_compiler_output_refresh_preflight.json
+validator_ref: scripts/validate_exact_new_trial_003_daily_note_vcp_memory_authorization_compiler_output_refresh_preflight.js
+package_type: daily_note_vcp_memory
+package_status: draft_blocked_missing_accepted_sample_registration_archive_completion_production_candidate_authorization_exact_memory_targets_and_daily_note_vcp_memory_authorization
+blocker: missing_accepted_sample_registration_archive_completion_production_candidate_authorization_exact_memory_targets_and_daily_note_vcp_memory_authorization
+target_sample_id: accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001
+target_candidate_id: v0_3_3_exact_new_trial_003_shot_2
+category: fashion_lookbook_portrait
+memory_delta_draft_present: true
+sensitive_data_scan_present: true
+accepted_sample_registration_completed: false
+durable_archive_ready: false
+production_candidate_ready: false
+daily_note_write_authorized: false
+vcp_memory_write_authorized: false
+write_command_permission: false
+execution_allowed_now: false
+accepted_samples_write_performed: false
+archive_write_performed: false
+production_candidate_write_performed: false
+VCP_memory_write_performed: false
+DailyNote_write_performed: false
+provider_call_performed: false
+image_generation_performed: false
+secret_value_read_performed: false
+push_allowed: false
+push_status: not_performed
+recommended_next: prepare_exact_new_trial_003_exact_allowed_memory_targets_package_with_memory_authorization_dependency_preserved
+```
+
+## Current Handoff Update - v0.6.42 Exact New-Trial 003 Sensitive-Data Scan Preflight
+
+```text
+phase: v0_6_42_exact_new_trial_003_sensitive_data_scan_preflight
+status: completed_validated_local_sensitive_data_scan_preflight_pending_external_human_approval_accepted_sample_archive_production_and_memory_authorization
+mode: Green local exact-new-trial sensitive-data scan preflight with memory-delta dependency preserved
+summary: Converted the selected shot_2 memory safety requirement into one exact local scan preflight, while keeping the true dependency chain explicit: the draft and scan now exist, but no DailyNote or VCP memory write may run until the remaining approval, accepted-sample, archive, production, and authorization blockers are cleared.
+source_phase: v0_6_41_exact_new_trial_003_memory_delta_draft_package
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+resume_compaction_compatibility_anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+report_ref: reports/visual_asset_eval_dry_run/v0_6_42_exact_new_trial_003_sensitive_data_scan_preflight.json
+validator_ref: scripts/validate_exact_new_trial_003_sensitive_data_scan_preflight.js
+scan_ref: reports/memory_delta_drafts/v0_3_3_exact_new_trial_003_shot_2_sensitive_data_scan.json
+target_sample_id: accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001
+target_candidate_id: v0_3_3_exact_new_trial_003_shot_2
+category: fashion_lookbook_portrait
+memory_delta_draft_present: true
+sensitive_data_scan_present: true
+scan_status: passed_local_no_sensitive_content_detected
+contains_secret: false
+contains_private_path: false
+contains_customer_private_data: false
+contains_image_binary: false
+raw_sensitive_content_saved: false
+execution_allowed_now: false
+accepted_samples_write_performed: false
+archive_write_performed: false
+production_candidate_write_performed: false
+VCP_memory_write_performed: false
+DailyNote_write_performed: false
+provider_call_performed: false
+image_generation_performed: false
+secret_value_read_performed: false
+push_allowed: false
+push_status: not_performed
+recommended_next: refresh_exact_new_trial_003_daily_note_vcp_memory_authorization_compiler_output_preflight_with_memory_delta_and_scan_state_preserved
+```
+
+## Current Handoff Update - v0.6.41 Exact New-Trial 003 Memory Delta Draft Package
+
+```text
+phase: v0_6_41_exact_new_trial_003_memory_delta_draft_package
+status: completed_validated_local_memory_delta_draft_package_pending_external_human_approval_accepted_sample_archive_production_and_memory_authorization
+mode: Green local exact-new-trial memory-delta draft package with DailyNote / VCP memory dependency preserved
+summary: Converted the selected shot_2 route into one exact Chinese draft-only memory package, while keeping the true dependency chain explicit: no accepted-sample registration, no completed archive, no production readiness, and no memory authorization means no DailyNote or VCP memory write may run.
+source_phase: v0_6_40_exact_new_trial_003_daily_note_vcp_memory_authorization_compiler_output_preflight
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+resume_compaction_compatibility_anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+report_ref: reports/visual_asset_eval_dry_run/v0_6_41_exact_new_trial_003_memory_delta_draft_package.json
+validator_ref: scripts/validate_exact_new_trial_003_memory_delta_draft_package.js
+draft_package_ref: reports/memory_delta_drafts/v0_3_3_exact_new_trial_003_shot_2_memory_delta_draft.yaml
+package_type: memory_delta_draft_package
+package_status: draft_only_blocked_by_accepted_sample_archive_production_and_memory_authorization_dependencies
+target_sample_id: accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001
+target_candidate_id: v0_3_3_exact_new_trial_003_shot_2
+category: fashion_lookbook_portrait
+memory_suitability_status: deferred
+accepted_sample_registration_completed: false
+durable_archive_ready: false
+production_candidate_ready: false
+daily_note_write_authorized: false
+vcp_memory_write_authorized: false
+write_mode: draft
+approval_status: pending
+should_write_to_vcp: false
+execution_allowed_now: false
+accepted_samples_write_performed: false
+archive_write_performed: false
+production_candidate_write_performed: false
+VCP_memory_write_performed: false
+DailyNote_write_performed: false
+provider_call_performed: false
+image_generation_performed: false
+secret_value_read_performed: false
+push_allowed: false
+push_status: not_performed
+recommended_next: prepare_exact_new_trial_003_sensitive_data_scan_preflight_with_memory_delta_dependency_preserved
+```
+
+## Current Handoff Update - v0.6.40 Exact New-Trial 003 DailyNote / VCP Memory Authorization Compiler Output Preflight
+
+```text
+phase: v0_6_40_exact_new_trial_003_daily_note_vcp_memory_authorization_compiler_output_preflight
+status: completed_validated_local_daily_note_vcp_memory_authorization_compiler_output_preflight_pending_external_human_approval_accepted_sample_archive_production_and_memory_authorization
+mode: Green local DailyNote / VCP memory authorization compiler-output preflight with production dependency preserved
+summary: Converted the selected shot_2 DailyNote / VCP memory path into one exact blocked compiler-output preflight, while keeping the true dependency chain explicit: no accepted-sample registration, no completed archive, no production-candidate readiness, and no exact memory-delta draft means no memory write may run.
+source_phase: v0_6_39_exact_new_trial_003_production_candidate_authorization_compiler_output_preflight
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+resume_compaction_compatibility_anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+report_ref: reports/visual_asset_eval_dry_run/v0_6_40_exact_new_trial_003_daily_note_vcp_memory_authorization_compiler_output_preflight.json
+validator_ref: scripts/validate_exact_new_trial_003_daily_note_vcp_memory_authorization_compiler_output_preflight.js
+package_type: daily_note_vcp_memory
+package_status: draft_blocked_missing_accepted_sample_registration_archive_completion_production_candidate_authorization_memory_delta_and_daily_note_vcp_memory_authorization
+blocker: missing_accepted_sample_registration_archive_completion_production_candidate_authorization_memory_delta_and_daily_note_vcp_memory_authorization
+target_sample_id: accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001
+target_candidate_id: v0_3_3_exact_new_trial_003_shot_2
+category: fashion_lookbook_portrait
+accepted_sample_registration_completed: false
+durable_archive_ready: false
+production_candidate_ready: false
+daily_note_write_authorized: false
+vcp_memory_write_authorized: false
+memory_delta_draft_present: false
+sensitive_data_scan_present: false
+write_command_permission: false
+execution_allowed_now: false
+accepted_samples_write_performed: false
+archive_write_performed: false
+image_file_copy_performed: false
+production_candidate_write_performed: false
+VCP_memory_write_performed: false
+DailyNote_write_performed: false
+provider_call_performed: false
+image_generation_performed: false
+secret_value_read_performed: false
+push_allowed: false
+push_status: not_performed
+recommended_next: prepare_exact_new_trial_003_memory_delta_draft_package_with_daily_note_vcp_memory_dependency_preserved
+```
+
+## Current Handoff Update - v0.6.39 Exact New-Trial 003 Production Candidate Authorization Compiler Output Preflight
+
+```text
+phase: v0_6_39_exact_new_trial_003_production_candidate_authorization_compiler_output_preflight
+status: completed_validated_local_production_candidate_authorization_compiler_output_preflight_pending_external_human_approval_archive_authorization_and_production_authorization
+mode: Green local production-candidate authorization compiler-output preflight with archive dependency preserved
+summary: Converted the selected shot_2 production-candidate path into one exact blocked compiler-output preflight, while keeping the true dependency chain explicit: no accepted-sample registration, no completed archive, and no production-candidate authorization means no production write may run.
+source_phase: v0_6_38_exact_new_trial_003_durable_archive_authorization_compiler_output_preflight
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+resume_compaction_compatibility_anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+report_ref: reports/visual_asset_eval_dry_run/v0_6_39_exact_new_trial_003_production_candidate_authorization_compiler_output_preflight.json
+validator_ref: scripts/validate_exact_new_trial_003_production_candidate_authorization_compiler_output_preflight.js
+package_type: production_candidate
+package_status: draft_blocked_missing_accepted_sample_registration_archive_completion_and_production_candidate_authorization
+blocker: missing_accepted_sample_registration_archive_completion_and_production_candidate_authorization
+target_sample_id: accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001
+target_candidate_id: v0_3_3_exact_new_trial_003_shot_2
+category: fashion_lookbook_portrait
+accepted_sample_registration_completed: false
+durable_archive_ready: false
+production_candidate_authorized: false
+production_candidate_write_performed: false
+eligibility_preflight_present: false
+write_command_permission: false
+execution_allowed_now: false
+accepted_samples_write_performed: false
+archive_write_performed: false
+image_file_copy_performed: false
+VCP_memory_write_performed: false
+DailyNote_write_performed: false
+provider_call_performed: false
+image_generation_performed: false
+secret_value_read_performed: false
+push_allowed: false
+push_status: not_performed
+recommended_next: prepare_exact_new_trial_003_daily_note_vcp_memory_authorization_compiler_output_preflight_with_production_dependency_preserved
+```
+
+## Current Handoff Update - v0.6.38 Exact New-Trial 003 Durable Archive Authorization Compiler Output Preflight
+
+```text
+phase: v0_6_38_exact_new_trial_003_durable_archive_authorization_compiler_output_preflight
+status: completed_validated_local_durable_archive_authorization_compiler_output_preflight_pending_external_human_approval_and_archive_authorization
+mode: Green local durable archive authorization compiler-output preflight with accepted-sample dependency preserved
+summary: Converted the selected shot_2 archive path into one exact blocked compiler-output preflight, while keeping the true dependency chain explicit: no accepted-sample registration and no archive authorization means no archive copy may run.
+source_phase: v0_6_37_exact_new_trial_003_accepted_samples_registration_execution_preflight
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+resume_compaction_compatibility_anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+report_ref: reports/visual_asset_eval_dry_run/v0_6_38_exact_new_trial_003_durable_archive_authorization_compiler_output_preflight.json
+validator_ref: scripts/validate_exact_new_trial_003_durable_archive_authorization_compiler_output_preflight.js
+package_type: durable_archive
+package_status: draft_blocked_missing_accepted_sample_registration_and_archive_copy_authorization
+blocker: missing_accepted_sample_registration_and_archive_copy_authorization
+target_sample_id: accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001
+target_candidate_id: v0_3_3_exact_new_trial_003_shot_2
+category: fashion_lookbook_portrait
+artifact_ref: runs/real_generation/v0_3_3_exact_new_trial_003_shot_2/safe_adult_editorial_portrait_v1.png
+verified_sha256: 8bd7b81a916f0f6333392562d84e32368a3f28dd6a6456fc2f9e49d835a62c3b
+accepted_sample_registration_completed: false
+archive_copy_authorized: false
+archive_copy_performed: false
+target_archive_path_provided: false
+write_command_permission: false
+execution_allowed_now: false
+accepted_samples_write_performed: false
+category_index_write_performed: false
+image_file_copy_performed: false
+archive_write_performed: false
+production_candidate_write_performed: false
+VCP_memory_write_performed: false
+DailyNote_write_performed: false
+provider_call_performed: false
+image_generation_performed: false
+secret_value_read_performed: false
+push_allowed: false
+push_status: not_performed
+recommended_next: prepare_exact_new_trial_003_production_candidate_authorization_compiler_output_preflight_with_archive_dependency_preserved
+```
+
+## Current Handoff Update - v0.6.37 Exact New-Trial 003 accepted_samples Registration Execution Preflight
+
+```text
+phase: v0_6_37_exact_new_trial_003_accepted_samples_registration_execution_preflight
+status: completed_validated_local_registration_execution_preflight_pending_external_human_approval
+mode: Green local accepted_samples execution preflight with human approval blocker preserved
+summary: Converted the frozen shot_2 registration package into one exact go/no-go execution preflight, while keeping the blocker explicit: Jenn approval and an authorization grant still do not exist, so no accepted_samples metadata write may run.
+source_phase: v0_6_36_exact_new_trial_003_accepted_samples_registration_authorization_package_draft
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+resume_compaction_compatibility_anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+report_ref: reports/visual_asset_eval_dry_run/v0_6_37_exact_new_trial_003_accepted_samples_registration_execution_preflight.json
+validator_ref: scripts/validate_exact_new_trial_003_accepted_samples_registration_execution_preflight.js
+target_sample_id: accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001
+target_candidate_id: v0_3_3_exact_new_trial_003_shot_2
+category: fashion_lookbook_portrait
+artifact_ref: runs/real_generation/v0_3_3_exact_new_trial_003_shot_2/safe_adult_editorial_portrait_v1.png
+verified_sha256: 8bd7b81a916f0f6333392562d84e32368a3f28dd6a6456fc2f9e49d835a62c3b
+preflight_status: blocked
+blocker: missing_human_approval_and_authorization_grant
+human_approval_status: pending
+approved_by: null
+authorization_package_status: prepared_blocked_not_granted
+authorization_granted_by_this_record: false
+execution_allowed_now: false
+accepted_samples_write_performed: false
+category_index_write_performed: false
+image_file_copy_performed: false
+archive_write_performed: false
+production_candidate_write_performed: false
+VCP_memory_write_performed: false
+DailyNote_write_performed: false
+provider_call_performed: false
+image_generation_performed: false
+secret_value_read_performed: false
+push_allowed: false
+push_status: not_performed
+recommended_next: prepare_exact_new_trial_003_durable_archive_authorization_compiler_output_preflight_with_accepted_sample_dependency_preserved
+```
+
+## Current Handoff Update - v0.6.36 Exact New-Trial 003 accepted_samples Registration Authorization Package Draft
+
+```text
+phase: v0_6_36_exact_new_trial_003_accepted_samples_registration_authorization_package_draft
+status: completed_validated_local_registration_authorization_package_draft_pending_external_human_approval
+mode: Green local accepted_samples authorization packet freeze with human approval blocker preserved
+summary: Converted the frozen shot_2 registration payload into an exact Amber-ready authorization package draft, while keeping the real blocker explicit: Jenn approval has not been captured, so execution remains blocked.
+source_phase: v0_6_35_exact_new_trial_003_post_approval_registration_preflight_draft
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+resume_compaction_compatibility_anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+report_ref: reports/visual_asset_eval_dry_run/v0_6_36_exact_new_trial_003_accepted_samples_registration_authorization_package_draft.json
+validator_ref: scripts/validate_exact_new_trial_003_accepted_samples_registration_authorization_package_draft.js
+target_sample_id: accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001
+target_candidate_id: v0_3_3_exact_new_trial_003_shot_2
+category: fashion_lookbook_portrait
+artifact_ref: runs/real_generation/v0_3_3_exact_new_trial_003_shot_2/safe_adult_editorial_portrait_v1.png
+verified_sha256: 8bd7b81a916f0f6333392562d84e32368a3f28dd6a6456fc2f9e49d835a62c3b
+human_approval_status: pending
+approved_by: null
+authorization_package_status: prepared_blocked_not_granted
+authorization_granted_by_this_record: false
+execution_ready: false
+blocker: human_approval_missing
+accepted_samples_write_performed: false
+category_index_write_performed: false
+image_file_copy_performed: false
+archive_write_performed: false
+production_candidate_write_performed: false
+VCP_memory_write_performed: false
+DailyNote_write_performed: false
+provider_call_performed: false
+image_generation_performed: false
+secret_value_read_performed: false
+push_allowed: false
+push_status: not_performed
+recommended_next: prepare_exact_new_trial_003_accepted_samples_registration_execution_preflight_with_authorization_package_and_human_approval_blocker_preserved
+```
+
+## Current Handoff Update - v0.6.35 Exact New-Trial 003 Post-Approval Registration Preflight Draft
+
+```text
+phase: v0_6_35_exact_new_trial_003_post_approval_registration_preflight_draft
+status: completed_validated_local_registration_preflight_draft_pending_external_human_approval
+mode: Green local accepted-sample registration-preflight payload freeze with approval blocker preserved
+summary: Prebuilt the exact future accepted-sample registration payload for shot_2 while keeping the current blocker explicit: no Jenn-submitted approval means the draft is still non-executable.
+source_phase: v0_6_34_exact_new_trial_003_selected_candidate_post_approval_gate_alignment
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+resume_compaction_compatibility_anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+report_ref: reports/visual_asset_eval_dry_run/v0_6_35_exact_new_trial_003_post_approval_registration_preflight_draft.json
+validator_ref: scripts/validate_exact_new_trial_003_post_approval_registration_preflight_draft.js
+selected_candidate_attempt_id: v0_3_3_exact_new_trial_003_shot_2
+proposed_sample_id: accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001
+category: fashion_lookbook_portrait
+artifact_ref: runs/real_generation/v0_3_3_exact_new_trial_003_shot_2/safe_adult_editorial_portrait_v1.png
+verified_sha256: 8bd7b81a916f0f6333392562d84e32368a3f28dd6a6456fc2f9e49d835a62c3b
+human_approval_present: false
+approval_statement_user_submitted: false
+accepted_samples_registration_eligible: false
+registration_blocker: human_approval_missing
+accepted_samples_write_performed: false
+category_index_write_performed: false
+image_file_copy_performed: false
+archive_write_performed: false
+production_candidate_write_performed: false
+VCP_memory_write_performed: false
+DailyNote_write_performed: false
+provider_call_performed: false
+image_generation_performed: false
+secret_value_read_performed: false
+push_allowed: false
+push_status: not_performed
+recommended_next: wait_for_jenn_human_approval_then_upgrade_v0_6_35_draft_to_executable_exact_new_trial_003_post_approval_registration_preflight
+```
+
+## Current Handoff Update - v0.6.34 Exact New-Trial 003 Selected Candidate Post-Approval Gate Alignment
+
+```text
+phase: v0_6_34_exact_new_trial_003_selected_candidate_post_approval_gate_alignment
+status: completed_validated_local_post_approval_gate_alignment_pending_external_human_approval
+mode: Green local accepted-sample post-approval gate freeze and exact future write-scope sync
+summary: Narrowed the future accepted-sample registration gate to one exact selected candidate, one exact sample id, one exact category file, and one required future Jenn-submitted approval capture.
+source_phase: v0_6_33_exact_new_trial_003_selected_candidate_human_approval_intake_package
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+resume_compaction_compatibility_anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+report_ref: reports/visual_asset_eval_dry_run/v0_6_34_exact_new_trial_003_selected_candidate_post_approval_gate_alignment.json
+validator_ref: scripts/validate_exact_new_trial_003_selected_candidate_post_approval_gate_alignment.js
+selected_candidate_attempt_id: v0_3_3_exact_new_trial_003_shot_2
+proposed_sample_id: accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001
+category: fashion_lookbook_portrait
+artifact_ref: runs/real_generation/v0_3_3_exact_new_trial_003_shot_2/safe_adult_editorial_portrait_v1.png
+verified_sha256: 8bd7b81a916f0f6333392562d84e32368a3f28dd6a6456fc2f9e49d835a62c3b
+approval_statement_matches_v0_6_33: true
+approval_statement_source_is_user_submission: false
+human_approval_captured_now: false
+accepted_samples_registration_ready_now: false
+accepted_samples_write_performed: false
+category_index_write_performed: false
+image_file_copy_performed: false
+archive_write_performed: false
+production_candidate_write_performed: false
+VCP_memory_write_performed: false
+DailyNote_write_performed: false
+provider_call_performed: false
+image_generation_performed: false
+secret_value_read_performed: false
+push_allowed: false
+push_status: not_performed
+recommended_next: wait_for_jenn_human_approval_then_run_exact_new_trial_003_post_approval_registration_preflight
+```
+
+## Current Handoff Update - v0.6.33 Exact New-Trial 003 Selected Candidate Human Approval Intake Package
+
+```text
+phase: v0_6_33_exact_new_trial_003_selected_candidate_human_approval_intake_package
+status: completed_validated_local_human_approval_intake_package_pending_external_user_submission
+mode: Green local future-approval wording freeze and exact post-approval write-scope sync
+summary: Converted the selected shot_2 candidate into an exact future approval statement and allowed-file scope, while keeping human approval, accepted-sample registration, archive, and memory paths blocked.
+source_phase: v0_6_32_exact_new_trial_003_human_review
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+resume_compaction_compatibility_anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+report_ref: reports/visual_asset_eval_dry_run/v0_6_33_exact_new_trial_003_selected_candidate_human_approval_intake_package.json
+validator_ref: scripts/validate_exact_new_trial_003_selected_candidate_human_approval_intake_package.js
+selected_candidate_attempt_id: v0_3_3_exact_new_trial_003_shot_2
+proposed_sample_id: accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001
+category: fashion_lookbook_portrait
+artifact_ref: runs/real_generation/v0_3_3_exact_new_trial_003_shot_2/safe_adult_editorial_portrait_v1.png
+verified_sha256: 8bd7b81a916f0f6333392562d84e32368a3f28dd6a6456fc2f9e49d835a62c3b
+approval_statement_source_is_user_submission: false
+human_approval_captured_now: false
+accepted_samples_registration_ready_now: false
+accepted_samples_write_performed: false
+category_index_write_performed: false
+archive_write_performed: false
+production_candidate_write_performed: false
+VCP_memory_write_performed: false
+DailyNote_write_performed: false
+provider_call_performed: false
+image_generation_performed: false
+secret_value_read_performed: false
+push_allowed: false
+push_status: not_performed
+recommended_next: prepare_exact_new_trial_003_selected_candidate_post_approval_gate_alignment_before_any_accepted_samples_write
+```
+
+## Current Handoff Update - v0.6.32 Exact New-Trial 003 Human Review
+
+```text
+phase: v0_6_32_exact_new_trial_003_human_review
+status: completed_validated_local_candidate_selection_pending_formal_human_approval
+mode: Green local visual comparison and selected-candidate truth sync
+summary: Compared shot_1, shot_2, and shot_3 after the full 3-shot route completed; selected shot_2 as the current preferred candidate while keeping formal approval, archive, and memory paths blocked.
+source_phase: v0_6_31_exact_new_trial_003_shot_3_execution_closeout
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+resume_compaction_compatibility_anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+report_ref: reports/visual_asset_eval_dry_run/v0_6_32_exact_new_trial_003_human_review.json
+validator_ref: scripts/validate_exact_new_trial_003_human_review.js
+prompt_package_ref: prompts/image_generation/safe_adult_editorial_portrait_v1.yaml
+provider_route: image_gen.imagegen
+three_shot_execution_status: 3_of_3_completed
+selected_candidate_attempt_id: v0_3_3_exact_new_trial_003_shot_2
+selected_candidate_output_image_path: runs/real_generation/v0_3_3_exact_new_trial_003_shot_2/safe_adult_editorial_portrait_v1.png
+selected_candidate_output_image_sha256: 8bd7b81a916f0f6333392562d84e32368a3f28dd6a6456fc2f9e49d835a62c3b
+review_completed_now: true
+formal_human_approval_status: pending
+human_approval_captured_now: false
+provider_call_performed: false
+image_generation_performed: false
+secret_value_read_performed: false
+accepted_sample_auto_promotion: false
+archive_write_performed: false
+production_candidate_created: false
+VCP_memory_write_performed: false
+DailyNote_write_performed: false
+push_allowed: false
+push_status: not_performed
+recommended_next: prepare_exact_new_trial_003_selected_candidate_human_approval_intake_before_any_promotion_or_memory_write
+```
+
+## Current Handoff Update - v0.6.31 Exact New-Trial 003 Shot 3 Execution Closeout
+
+```text
+phase: v0_6_31_exact_new_trial_003_shot_3_execution_closeout
+status: completed_validated_shot_3_execution_closeout
+mode: Amber receipt closeout with Green status sync
+summary: Executed shot_3 using the literal pre-call payload capture, restored a third reviewable local PNG, and completed the planned 3-shot route without any promotion or memory write.
+source_phase: v0_6_30_exact_new_trial_003_shot_3_pre_call_payload_capture_preflight
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+resume_compaction_compatibility_anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+report_ref: reports/visual_asset_eval_dry_run/v0_6_31_exact_new_trial_003_shot_3_execution_closeout.json
+validator_ref: scripts/validate_exact_new_trial_003_shot_3_execution_closeout.js
+attempt_id: v0_3_3_exact_new_trial_003_shot_3
+provider_route: image_gen.imagegen
+prompt_package_ref: prompts/image_generation/safe_adult_editorial_portrait_v1.yaml
+payload_capture_ref: reports/provider_payload_captures/v0_3_3_exact_new_trial_003_shot_3_request_payload.sanitized.json
+attempt_result_path: runs/real_generation/v0_3_3_exact_new_trial_003_shot_3/generation_attempt_result.json
+receipt_path: reports/provider_receipts/v0_3_3_exact_new_trial_003_shot_3_receipt.json
+registry_path: reports/provider_receipts/v0_3_3_exact_new_trial_003_shot_3_registry.json
+review_console_bridge_ref: review_console/live_receipt_bridge/v0_3_3_exact_new_trial_003_shot_3
+output_image_path: runs/real_generation/v0_3_3_exact_new_trial_003_shot_3/safe_adult_editorial_portrait_v1.png
+output_image_sha256: c3f69ce85eb2fa1d7e92fe0bc0c493a13fb830ea9fd10d2e5d73056e33e143a7
+local_persistence_success: true
+reviewable_sample: true
+accepted_candidate: true
+commercial_delivery_ready: false
+memory_suitability: deferred
+pre_provider_call_payload_capture_required: true
+pre_provider_call_payload_capture_satisfied: true
+post_provider_call_payload_reconstruction_performed: false
+provider_call_performed: true
+shot_3_image_generation_executed: true
+three_shot_execution_status: 3_of_3_completed
+raw_provider_response_capture_performed: false
+secret_value_read_performed: false
+VCP_memory_write_performed: false
+DailyNote_write_performed: false
+accepted_sample_auto_promotion: false
+production_candidate_created: false
+push_allowed: false
+push_status: not_performed
+recommended_next: human_review_generated_asset_before_any_promotion_or_memory_write
+```
+
+## Current Handoff Update - v0.6.29 Exact New-Trial 003 Shot 2 Execution Closeout
+
+```text
+phase: v0_6_29_exact_new_trial_003_shot_2_execution_closeout
+status: completed_validated_shot_2_execution_closeout
+mode: Amber receipt closeout with Green status sync
+summary: Executed shot_2 using the literal pre-call payload capture, restored a second reviewable local PNG, and recorded it as an accepted candidate with minor watch items.
+source_phase: v0_6_28_exact_new_trial_003_shot_2_pre_call_payload_capture_preflight
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+resume_compaction_compatibility_anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+report_ref: reports/visual_asset_eval_dry_run/v0_6_29_exact_new_trial_003_shot_2_execution_closeout.json
+validator_ref: scripts/validate_exact_new_trial_003_shot_2_execution_closeout.js
+attempt_id: v0_3_3_exact_new_trial_003_shot_2
+provider_route: image_gen.imagegen
+prompt_package_ref: prompts/image_generation/safe_adult_editorial_portrait_v1.yaml
+payload_capture_ref: reports/provider_payload_captures/v0_3_3_exact_new_trial_003_shot_2_request_payload.sanitized.json
+attempt_result_path: runs/real_generation/v0_3_3_exact_new_trial_003_shot_2/generation_attempt_result.json
+receipt_path: reports/provider_receipts/v0_3_3_exact_new_trial_003_shot_2_receipt.json
+registry_path: reports/provider_receipts/v0_3_3_exact_new_trial_003_shot_2_registry.json
+review_console_bridge_ref: review_console/live_receipt_bridge/v0_3_3_exact_new_trial_003_shot_2
+output_image_path: runs/real_generation/v0_3_3_exact_new_trial_003_shot_2/safe_adult_editorial_portrait_v1.png
+output_image_sha256: 8bd7b81a916f0f6333392562d84e32368a3f28dd6a6456fc2f9e49d835a62c3b
+local_persistence_success: true
+reviewable_sample: true
+accepted_candidate: true
+commercial_delivery_ready: false
+memory_suitability: deferred
+pre_provider_call_payload_capture_required: true
+pre_provider_call_payload_capture_satisfied: true
+post_provider_call_payload_reconstruction_performed: false
+provider_call_performed: true
+shot_2_image_generation_executed: true
+secret_value_read_performed: false
+VCP_memory_write_performed: false
+DailyNote_write_performed: false
+accepted_sample_auto_promotion: false
+production_candidate_created: false
+push_allowed: false
+push_status: not_performed
+recommended_next: prepare_shot_3_with_exact_pre_call_payload_capture_and_immediate_path_collision_recheck_before_any_auto_promotion_or_memory_write
+```
+
+## Current Handoff Update - v0.6.28 Exact New-Trial 003 Shot 2 Pre-Call Payload Capture Preflight
+
+```text
+phase: v0_6_28_exact_new_trial_003_shot_2_pre_call_payload_capture_preflight
+status: completed_validated_pre_call_payload_capture_preflight
+mode: Green local pre-call payload capture and path-collision readiness sync
+summary: Restored literal pre-call payload capture discipline for shot_2 while keeping the remaining execution targets absent and collision-free.
+source_phase: v0_6_27_exact_new_trial_003_shot_1_execution_closeout
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+resume_compaction_compatibility_anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+report_ref: reports/visual_asset_eval_dry_run/v0_6_28_exact_new_trial_003_shot_2_pre_call_payload_capture_preflight.json
+validator_ref: scripts/validate_exact_new_trial_003_shot_2_pre_call_payload_capture_preflight.js
+attempt_id: v0_3_3_exact_new_trial_003_shot_2
+provider_route: image_gen.imagegen
+prompt_package_ref: prompts/image_generation/safe_adult_editorial_portrait_v1.yaml
+payload_capture_ref: reports/provider_payload_captures/v0_3_3_exact_new_trial_003_shot_2_request_payload.sanitized.json
+planned_output_directory: runs/real_generation/v0_3_3_exact_new_trial_003_shot_2/
+planned_output_image_path: runs/real_generation/v0_3_3_exact_new_trial_003_shot_2/safe_adult_editorial_portrait_v1.png
+planned_attempt_result_path: runs/real_generation/v0_3_3_exact_new_trial_003_shot_2/generation_attempt_result.json
+planned_receipt_path: reports/provider_receipts/v0_3_3_exact_new_trial_003_shot_2_receipt.json
+planned_registry_path: reports/provider_receipts/v0_3_3_exact_new_trial_003_shot_2_registry.json
+planned_review_console_bridge_ref: review_console/live_receipt_bridge/v0_3_3_exact_new_trial_003_shot_2
+pre_provider_call_payload_capture_required: true
+pre_provider_call_payload_capture_satisfied: true
+path_collision_clear_now: true
+provider_call_performed: false
+image_generation_performed: false
+secret_value_read_performed: false
+VCP_memory_write_performed: false
+DailyNote_write_performed: false
+accepted_sample_auto_promotion: false
+production_candidate_created: false
+push_allowed: false
+push_status: not_performed
+recommended_next: execute_v0_3_3_exact_new_trial_003_shot_2_with_pre_captured_payload_and_post_write_local_persistence_verification_before_any_auto_promotion_or_memory_write
+```
+
+## Current Handoff Update - v0.6.27 Exact New-Trial 003 Shot 1 Execution Closeout
+
+```text
+phase: v0_6_27_exact_new_trial_003_shot_1_execution_closeout
+status: completed_validated_shot_1_execution_closeout
+mode: Amber receipt closeout with Green status sync
+summary: Executed the fresh non-overwriting shot_1 route, restored a truly reviewable local PNG, and recorded the payload-capture timing deviation truthfully instead of pretending pre-call capture was satisfied.
+source_phase: v0_6_26_exact_new_trial_local_persistence_repair_preflight
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+resume_compaction_compatibility_anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+report_ref: reports/visual_asset_eval_dry_run/v0_6_27_exact_new_trial_003_shot_1_execution_closeout.json
+validator_ref: scripts/validate_exact_new_trial_003_shot_1_execution_closeout.js
+attempt_id: v0_3_3_exact_new_trial_003_shot_1
+provider_route: image_gen.imagegen
+prompt_package_ref: prompts/image_generation/safe_adult_editorial_portrait_v1.yaml
+payload_capture_ref: reports/provider_payload_captures/v0_3_3_exact_new_trial_003_shot_1_request_payload.sanitized.json
+attempt_result_path: runs/real_generation/v0_3_3_exact_new_trial_003_shot_1/generation_attempt_result.json
+receipt_path: reports/provider_receipts/v0_3_3_exact_new_trial_003_shot_1_receipt.json
+registry_path: reports/provider_receipts/v0_3_3_exact_new_trial_003_shot_1_registry.json
+review_console_bridge_ref: review_console/live_receipt_bridge/v0_3_3_exact_new_trial_003_shot_1
+output_image_path: runs/real_generation/v0_3_3_exact_new_trial_003_shot_1/safe_adult_editorial_portrait_v1.png
+output_image_sha256: 07a4ddc934c6e7ed88deefa9a1de6c8d06eb4407f4858f6688411dfa2bf60840
+local_persistence_success: true
+reviewable_sample: true
+accepted_candidate: true
+commercial_delivery_ready: false
+memory_suitability: deferred
+pre_provider_call_payload_capture_required: true
+pre_provider_call_payload_capture_satisfied: false
+post_provider_call_payload_reconstruction_performed: true
+provider_call_performed: true
+shot_1_image_generation_executed: true
+secret_value_read_performed: false
+VCP_memory_write_performed: false
+DailyNote_write_performed: false
+accepted_sample_auto_promotion: false
+production_candidate_created: false
+push_allowed: false
+push_status: not_performed
+recommended_next: prepare_shot_2_with_exact_pre_call_payload_capture_and_immediate_path_collision_recheck_before_any_auto_promotion_or_memory_write
+```
+
+## Current Handoff Update - v0.6.26 Exact New-Trial Local Persistence Repair Preflight
+
+```text
+phase: v0_6_26_exact_new_trial_local_persistence_repair_preflight
+status: completed_validated_local_persistence_repair_preflight
+mode: Green Lane local route-selection preflight/status sync
+summary: Chose the safest repair route for the missing v0.6.23 PNG. Repo-tracked substitution is non-exact, private-path recovery stays out of scope, and the selected route is a fresh non-overwriting future shot.
+source_phase: v0_6_25_exact_new_trial_artifact_persistence_truth_review
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+resume_compaction_compatibility_anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+report_ref: reports/visual_asset_eval_dry_run/v0_6_26_exact_new_trial_local_persistence_repair_preflight.json
+validator_ref: scripts/validate_exact_new_trial_local_persistence_repair_preflight.js
+target_attempt_id: v0_3_3_exact_new_trial_002
+provider_route: image_gen.imagegen
+prompt_package_ref: prompts/image_generation/safe_adult_editorial_portrait_v1.yaml
+repo_tracked_same_prompt_alternative_exists: true
+repo_tracked_same_prompt_alternative_substitutable_for_002: false
+private_out_of_repo_recovery_allowed_now: false
+selected_repair_route: fresh_non_overwriting_future_shot
+selected_shot_id: v0_3_3_exact_new_trial_003_shot_1
+selected_shot_path_collision_clear_now: true
+selected_shot_local_persistence_verification_required: true
+selected_shot_review_required_after_success: true
+current_human_review_of_002_allowed: false
+provider_call_performed: false
+image_generation_performed: false
+private_out_of_repo_recovery_performed: false
+secret_value_read_performed: false
+VCP_memory_write_performed: false
+DailyNote_write_performed: false
+accepted_sample_auto_promotion: false
+production_candidate_created: false
+push_allowed: false
+push_status: not_performed
+recommended_next: use_v0_3_3_exact_new_trial_003_shot_1_with_immediate_path_collision_recheck_and_post_write_local_persistence_verification
+```
+
+## Current Handoff Update - v0.6.25 Exact New-Trial Artifact Persistence Truth Review
+
+```text
+phase: v0_6_25_exact_new_trial_artifact_persistence_truth_review
+status: completed_validated_local_artifact_truth_review
+mode: Green Lane local filesystem truth audit/status sync
+summary: Audited the v0.6.23 success records against current repository reality and proved the claimed project PNG is missing, so human review cannot honestly proceed from the current worktree.
+source_phase: v0_6_24_exact_new_trial_3shot_stability_preflight
+execution_truth_source_phase: v0_6_23_single_generation_with_payload_capture_and_artifact_trace
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+resume_compaction_compatibility_anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+report_ref: reports/visual_asset_eval_dry_run/v0_6_25_exact_new_trial_artifact_persistence_truth_review.json
+validator_ref: scripts/validate_exact_new_trial_artifact_persistence_truth_review.js
+attempt_id: v0_3_3_exact_new_trial_002
+provider_route: image_gen.imagegen
+prompt_package_ref: prompts/image_generation/safe_adult_editorial_portrait_v1.yaml
+claimed_output_image_path: runs/real_generation/v0_3_3_exact_new_trial_002/safe_adult_editorial_portrait_v1.png
+project_output_directory_exists: true
+project_output_image_present_now: false
+local_persistence_verified_now: false
+reviewable_sample_now: false
+human_review_allowed_now: false
+accepted_sample_eligible: false
+memory_write_eligible: false
+production_candidate_eligible: false
+provider_call_performed: false
+image_generation_performed: false
+external_private_path_recovery_performed: false
+secret_value_read_performed: false
+VCP_memory_write_performed: false
+DailyNote_write_performed: false
+accepted_sample_auto_promotion: false
+production_candidate_created: false
+push_allowed: false
+push_status: not_performed
+recommended_next: create_local_persistence_repair_preflight_before_any_human_review_or_new_shot_execution
+```
+
 ## Current Handoff Update - v0.6.24 Exact New-Trial 3-Shot Stability Preflight
 
 ```text

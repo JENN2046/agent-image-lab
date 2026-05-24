@@ -1,0 +1,121 @@
+{
+  "exact_new_trial_003_human_review": {
+    "phase": "v0_6_32_exact_new_trial_003_human_review",
+    "status": "fixture_valid_local_human_review_selection",
+    "created_date": "2026-05-24",
+    "source_phase": "v0_6_31_exact_new_trial_003_shot_3_execution_closeout",
+    "prompt_package_ref": "prompts/image_generation/safe_adult_editorial_portrait_v1.yaml",
+    "provider_route": "image_gen.imagegen",
+    "three_shot_execution_status": "3_of_3_completed",
+    "candidate_comparison": {
+      "review_mode": "local_visual_comparison_before_formal_human_approval",
+      "review_completed_now": true,
+      "preferred_candidate_selected_now": true,
+      "compared_attempt_ids": [
+        "v0_3_3_exact_new_trial_003_shot_1",
+        "v0_3_3_exact_new_trial_003_shot_2",
+        "v0_3_3_exact_new_trial_003_shot_3"
+      ],
+      "selected_candidate_attempt_id": "v0_3_3_exact_new_trial_003_shot_2",
+      "selected_candidate_output_image_path": "runs/real_generation/v0_3_3_exact_new_trial_003_shot_2/safe_adult_editorial_portrait_v1.png",
+      "selected_candidate_output_image_sha256": "8bd7b81a916f0f6333392562d84e32368a3f28dd6a6456fc2f9e49d835a62c3b",
+      "selection_rationale": [
+        "shot_2 has the strongest professional/editorial balance across face, posture, and wardrobe conservatism.",
+        "shot_2 preserves literal pre-provider-call payload capture truth, unlike shot_1.",
+        "shot_3 remains a strong backup, but its crop and styling read slightly more casual than shot_2 for the current target."
+      ]
+    },
+    "candidate_matrix": [
+      {
+        "attempt_id": "v0_3_3_exact_new_trial_003_shot_1",
+        "closeout_phase": "v0_6_27_exact_new_trial_003_shot_1_execution_closeout",
+        "closeout_report_ref": "reports/visual_asset_eval_dry_run/v0_6_27_exact_new_trial_003_shot_1_execution_closeout.json",
+        "output_image_path": "runs/real_generation/v0_3_3_exact_new_trial_003_shot_1/safe_adult_editorial_portrait_v1.png",
+        "output_image_sha256": "07a4ddc934c6e7ed88deefa9a1de6c8d06eb4407f4858f6688411dfa2bf60840",
+        "output_image_dimensions": {
+          "width": 941,
+          "height": 1672
+        },
+        "pre_provider_call_payload_capture_satisfied": false,
+        "post_provider_call_payload_reconstruction_performed": true,
+        "reviewable_sample": true,
+        "accepted_candidate": true,
+        "commercial_delivery_ready": false,
+        "preference_rank": 3,
+        "review_notes": [
+          "Strong full-body framing and solid prompt match.",
+          "No literal pre-call payload capture truth was preserved for this sample."
+        ]
+      },
+      {
+        "attempt_id": "v0_3_3_exact_new_trial_003_shot_2",
+        "closeout_phase": "v0_6_29_exact_new_trial_003_shot_2_execution_closeout",
+        "closeout_report_ref": "reports/visual_asset_eval_dry_run/v0_6_29_exact_new_trial_003_shot_2_execution_closeout.json",
+        "output_image_path": "runs/real_generation/v0_3_3_exact_new_trial_003_shot_2/safe_adult_editorial_portrait_v1.png",
+        "output_image_sha256": "8bd7b81a916f0f6333392562d84e32368a3f28dd6a6456fc2f9e49d835a62c3b",
+        "output_image_dimensions": {
+          "width": 941,
+          "height": 1672
+        },
+        "pre_provider_call_payload_capture_satisfied": true,
+        "post_provider_call_payload_reconstruction_performed": false,
+        "reviewable_sample": true,
+        "accepted_candidate": true,
+        "commercial_delivery_ready": false,
+        "preference_rank": 1,
+        "review_notes": [
+          "Best overall professional/editorial balance across pose, framing, and wardrobe.",
+          "Literal pre-call payload capture truth is preserved."
+        ]
+      },
+      {
+        "attempt_id": "v0_3_3_exact_new_trial_003_shot_3",
+        "closeout_phase": "v0_6_31_exact_new_trial_003_shot_3_execution_closeout",
+        "closeout_report_ref": "reports/visual_asset_eval_dry_run/v0_6_31_exact_new_trial_003_shot_3_execution_closeout.json",
+        "output_image_path": "runs/real_generation/v0_3_3_exact_new_trial_003_shot_3/safe_adult_editorial_portrait_v1.png",
+        "output_image_sha256": "c3f69ce85eb2fa1d7e92fe0bc0c493a13fb830ea9fd10d2e5d73056e33e143a7",
+        "output_image_dimensions": {
+          "width": 941,
+          "height": 1672
+        },
+        "pre_provider_call_payload_capture_satisfied": true,
+        "post_provider_call_payload_reconstruction_performed": false,
+        "reviewable_sample": true,
+        "accepted_candidate": true,
+        "commercial_delivery_ready": false,
+        "preference_rank": 2,
+        "review_notes": [
+          "Warm expression and strong skyline atmosphere.",
+          "Current crop and styling read slightly more casual than shot_2 for the target use."
+        ]
+      }
+    ],
+    "decision_boundary": {
+      "selected_candidate_ready_for_formal_human_approval_intake": true,
+      "formal_human_approval_status": "pending",
+      "human_approval_captured_now": false,
+      "accepted_sample_auto_promotion": false,
+      "archive_write_performed": false,
+      "production_candidate_created": false,
+      "commercial_delivery_ready": false,
+      "memory_suitability": "deferred",
+      "VCP_memory_write_performed": false,
+      "DailyNote_write_performed": false
+    },
+    "boundary": {
+      "provider_call_performed": false,
+      "image_generation_performed": false,
+      "raw_provider_payload_capture_performed": false,
+      "raw_provider_response_capture_performed": false,
+      "secret_value_read_performed": false,
+      "accepted_sample_auto_promotion": false,
+      "archive_write_performed": false,
+      "production_candidate_created": false,
+      "VCP_memory_write_performed": false,
+      "DailyNote_write_performed": false,
+      "commit_performed": false,
+      "push_performed": false
+    },
+    "recommended_next": "prepare_exact_new_trial_003_selected_candidate_human_approval_intake_before_any_promotion_or_memory_write"
+  }
+}

@@ -258,7 +258,7 @@ for (const token of [
 addResult("category_index_sample_list_entry_present", categoryIndex.includes(`  - ${sampleId}`));
 addResult("category_index_sample_metadata_entry_present", categoryIndex.includes(`  ${sampleId}:`));
 requireToken("category_index", categoryIndex, `category: ${expected.category}`);
-requireToken("category_index", categoryIndex, "sample_count: 1");
+requireToken("category_index", categoryIndex, "sample_count: 2");
 
 for (const token of [
   `final_asset_ref: ${expected.imagePath}`,

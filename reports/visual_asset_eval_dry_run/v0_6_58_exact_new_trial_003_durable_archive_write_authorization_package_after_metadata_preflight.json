@@ -1,0 +1,99 @@
+{
+  "exact_new_trial_003_durable_archive_write_authorization_package_after_metadata_preflight": {
+    "version": "v1",
+    "phase": "v0_6_58_exact_new_trial_003_durable_archive_write_authorization_package_after_metadata_preflight",
+    "status": "completed_validated_local_durable_archive_write_authorization_package_after_metadata_preflight",
+    "execution_mode": "durable_archive_write_authorization_package_only",
+    "source_refs": {
+      "metadata_preflight": "reports/visual_asset_eval_dry_run/v0_6_57_exact_new_trial_003_durable_archive_metadata_preflight_after_accepted_sample_registration.json",
+      "approval_evidence": "reports/human_approval_evidence/v0_3_3_exact_new_trial_003_shot_2_user_submitted_formal_human_approval_evidence.json",
+      "accepted_sample_registry": "accepted_samples/accepted_sample_registry.yaml",
+      "category_index": "accepted_samples/categories/fashion_lookbook_portrait.yaml"
+    },
+    "package_type": "durable_archive_write_authorization",
+    "package_status": "authorization_package_ready_execution_not_performed",
+    "authorization_model": "smart_standing_authorization_v3_default_real_class_allowed",
+    "target": {
+      "sample_id": "accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001",
+      "candidate_id": "v0_3_3_exact_new_trial_003_shot_2",
+      "category": "fashion_lookbook_portrait",
+      "source_artifact_ref": "runs/real_generation/v0_3_3_exact_new_trial_003_shot_2/safe_adult_editorial_portrait_v1.png",
+      "source_artifact_hash_ref": "8bd7b81a916f0f6333392562d84e32368a3f28dd6a6456fc2f9e49d835a62c3b",
+      "source_dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "verified_mime": "image/png",
+      "accepted_sample_registration_completed": true,
+      "archive_metadata_preflight_compiled": true,
+      "exact_allowed_write_paths": [
+        "asset_archive/accepted_samples/accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001/manifest.json",
+        "asset_archive/accepted_samples/accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001/original.png",
+        "asset_archive/accepted_samples/accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001/preview.webp"
+      ],
+      "overwrite_existing_files_allowed": false
+    },
+    "archive_write_authorization_package_prepared": true,
+    "archive_write_authorized_next": true,
+    "execution_allowed_now": false,
+    "budget": {
+      "max_write_files": 3,
+      "max_image_binary_reads": 1,
+      "max_runtime_probe_minutes": 10,
+      "overwrite_existing_files_allowed": false,
+      "secret_value_read_allowed": false
+    },
+    "validation_required_for_future_execution": [
+      "target archive paths must be absent before write",
+      "source image sha256 must equal 8bd7b81a916f0f6333392562d84e32368a3f28dd6a6456fc2f9e49d835a62c3b",
+      "manifest must bind sample id, candidate id, approval evidence, source hash, source dimensions, and generated archive file refs",
+      "archive validator must pass after write",
+      "git diff --check must pass",
+      "npm run validate:mvp must pass"
+    ],
+    "rollback_or_cleanup_plan": [
+      "remove only the exact new asset_archive/accepted_samples/accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001/ directory if future execution fails before validation",
+      "do not remove or modify accepted_samples registry entries",
+      "do not modify runs/real_generation source artifacts"
+    ],
+    "stop_conditions": [
+      "any target archive path already exists",
+      "source hash mismatch",
+      "preview generation requires new dependency or broad runtime change",
+      "more than three archive files would be written",
+      "secret/private path exposure",
+      "production candidate, DailyNote, or VCP memory scope expansion"
+    ],
+    "guard": {
+      "authorization_package_only": true,
+      "archive_write_performed": false,
+      "durable_archive_manifest_write_performed": false,
+      "durable_archive_copy_performed": false,
+      "image_binary_read_performed": false,
+      "image_file_copy_performed": false,
+      "preview_generation_performed": false,
+      "runs_source_image_modified": false,
+      "accepted_samples_write_performed": false,
+      "category_index_write_performed": false,
+      "failure_samples_write_performed": false,
+      "production_candidate_write_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "mcp_runtime_performed": false,
+      "real_manifest_read_performed": false,
+      "real_vcpchat_read_performed": false,
+      "real_vcptoolbox_read_performed": false,
+      "staging_performed": false,
+      "commit_performed": false,
+      "push_tag_release_deploy_performed": false,
+      "secret_value_read_performed": false,
+      "artifact_recoverability_is_not_vcp_runtime_integration": true,
+      "vcp_runtime_integration_proven": false
+    },
+    "recommended_next": "run_exact_new_trial_003_durable_archive_write_execution_preflight_no_write",
+    "recommended_next_auto_execution_allowed": "true_local_execution_preflight_only_no_archive_write"
+  }
+}

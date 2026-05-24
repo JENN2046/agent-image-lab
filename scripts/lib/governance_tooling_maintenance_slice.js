@@ -1120,6 +1120,726 @@ const EXPECTED_V0_6_24_EXACT_NEW_TRIAL_3SHOT_STABILITY_PREFLIGHT_SLICE = [
   "tests/schema_examples/exact_new_trial_3shot_stability_preflight_fail.json"
 ].sort();
 
+const EXPECTED_V0_6_25_EXACT_NEW_TRIAL_ARTIFACT_PERSISTENCE_TRUTH_REVIEW_SLICE = [
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  ".agent_board/VALIDATION_LOG.md",
+  "docs/00_project_roadmap.md",
+  "docs/V0_6_25_EXACT_NEW_TRIAL_ARTIFACT_PERSISTENCE_TRUTH_REVIEW.md",
+  "reports/visual_asset_eval_dry_run/v0_6_25_exact_new_trial_artifact_persistence_truth_review.json",
+  "schemas/exact_new_trial_artifact_persistence_truth_review.schema.yaml",
+  "scripts/lib/governance_tooling_maintenance_slice.js",
+  "scripts/validate_exact_new_trial_artifact_persistence_truth_review.js",
+  "scripts/validate_mvp.ps1",
+  "scripts/validate_provider_receipt_artifacts.js",
+  "tests/schema_examples/exact_new_trial_artifact_persistence_truth_review.example.json",
+  "tests/schema_examples/exact_new_trial_artifact_persistence_truth_review_fail.example.json"
+].sort();
+
+const EXPECTED_V0_6_26_EXACT_NEW_TRIAL_LOCAL_PERSISTENCE_REPAIR_PREFLIGHT_SLICE = [
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  ".agent_board/VALIDATION_LOG.md",
+  "docs/00_project_roadmap.md",
+  "docs/V0_6_25_EXACT_NEW_TRIAL_ARTIFACT_PERSISTENCE_TRUTH_REVIEW.md",
+  "docs/V0_6_26_EXACT_NEW_TRIAL_LOCAL_PERSISTENCE_REPAIR_PREFLIGHT.md",
+  "reports/visual_asset_eval_dry_run/v0_6_25_exact_new_trial_artifact_persistence_truth_review.json",
+  "reports/visual_asset_eval_dry_run/v0_6_26_exact_new_trial_local_persistence_repair_preflight.json",
+  "schemas/exact_new_trial_artifact_persistence_truth_review.schema.yaml",
+  "schemas/exact_new_trial_local_persistence_repair_preflight.schema.yaml",
+  "scripts/lib/governance_tooling_maintenance_slice.js",
+  "scripts/validate_exact_new_trial_artifact_persistence_truth_review.js",
+  "scripts/validate_exact_new_trial_local_persistence_repair_preflight.js",
+  "scripts/validate_mvp.ps1",
+  "scripts/validate_provider_receipt_artifacts.js",
+  "tests/schema_examples/exact_new_trial_artifact_persistence_truth_review.example.json",
+  "tests/schema_examples/exact_new_trial_artifact_persistence_truth_review_fail.example.json",
+  "tests/schema_examples/exact_new_trial_local_persistence_repair_preflight.example.json",
+  "tests/schema_examples/exact_new_trial_local_persistence_repair_preflight_fail.example.json"
+].sort();
+
+const EXPECTED_V0_6_27_EXACT_NEW_TRIAL_003_SHOT_1_EXECUTION_CLOSEOUT_SLICE = [
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  ".agent_board/VALIDATION_LOG.md",
+  "docs/00_project_roadmap.md",
+  "docs/V0_6_25_EXACT_NEW_TRIAL_ARTIFACT_PERSISTENCE_TRUTH_REVIEW.md",
+  "docs/V0_6_26_EXACT_NEW_TRIAL_LOCAL_PERSISTENCE_REPAIR_PREFLIGHT.md",
+  "docs/V0_6_27_EXACT_NEW_TRIAL_003_SHOT_1_EXECUTION_CLOSEOUT.md",
+  "reports/provider_payload_captures/v0_3_3_exact_new_trial_003_shot_1_request_payload.sanitized.json",
+  "reports/provider_receipts/v0_3_3_exact_new_trial_003_shot_1_receipt.json",
+  "reports/provider_receipts/v0_3_3_exact_new_trial_003_shot_1_registry.json",
+  "reports/visual_asset_eval_dry_run/v0_6_25_exact_new_trial_artifact_persistence_truth_review.json",
+  "reports/visual_asset_eval_dry_run/v0_6_26_exact_new_trial_local_persistence_repair_preflight.json",
+  "reports/visual_asset_eval_dry_run/v0_6_27_exact_new_trial_003_shot_1_execution_closeout.json",
+  "review_console/live_receipt_bridge/v0_3_3_exact_new_trial_003_shot_1/bridge_entry.json",
+  "runs/real_generation/v0_3_3_exact_new_trial_003_shot_1/generation_attempt_result.json",
+  "schemas/exact_new_trial_artifact_persistence_truth_review.schema.yaml",
+  "schemas/exact_new_trial_local_persistence_repair_preflight.schema.yaml",
+  "scripts/lib/governance_tooling_maintenance_slice.js",
+  "scripts/validate_autopilot_agent_board_resume_compaction_guard.js",
+  "scripts/validate_controlled_visual_production_loop_checkpoint_readiness.js",
+  "scripts/validate_controlled_visual_production_loop_exact_file_commit_readiness_review.js",
+  "scripts/validate_exact_new_trial_003_shot_1_execution_closeout.js",
+  "scripts/validate_exact_new_trial_3shot_stability_preflight.js",
+  "scripts/validate_exact_new_trial_artifact_persistence_truth_review.js",
+  "scripts/validate_exact_new_trial_local_persistence_repair_preflight.js",
+  "scripts/validate_mvp.ps1",
+  "scripts/validate_provider_receipt_artifacts.js",
+  "tests/schema_examples/exact_new_trial_003_shot_1_execution_closeout.example.json",
+  "tests/schema_examples/exact_new_trial_003_shot_1_execution_closeout_fail.example.json",
+  "tests/schema_examples/exact_new_trial_artifact_persistence_truth_review.example.json",
+  "tests/schema_examples/exact_new_trial_artifact_persistence_truth_review_fail.example.json",
+  "tests/schema_examples/exact_new_trial_local_persistence_repair_preflight.example.json",
+  "tests/schema_examples/exact_new_trial_local_persistence_repair_preflight_fail.example.json"
+].sort();
+
+const EXPECTED_V0_6_28_EXACT_NEW_TRIAL_003_SHOT_2_PRE_CALL_PAYLOAD_CAPTURE_PREFLIGHT_SLICE = [
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  ".agent_board/VALIDATION_LOG.md",
+  "docs/00_project_roadmap.md",
+  "docs/V0_6_25_EXACT_NEW_TRIAL_ARTIFACT_PERSISTENCE_TRUTH_REVIEW.md",
+  "docs/V0_6_26_EXACT_NEW_TRIAL_LOCAL_PERSISTENCE_REPAIR_PREFLIGHT.md",
+  "docs/V0_6_27_EXACT_NEW_TRIAL_003_SHOT_1_EXECUTION_CLOSEOUT.md",
+  "docs/V0_6_28_EXACT_NEW_TRIAL_003_SHOT_2_PRE_CALL_PAYLOAD_CAPTURE_PREFLIGHT.md",
+  "reports/provider_payload_captures/v0_3_3_exact_new_trial_003_shot_1_request_payload.sanitized.json",
+  "reports/provider_payload_captures/v0_3_3_exact_new_trial_003_shot_2_request_payload.sanitized.json",
+  "reports/provider_receipts/v0_3_3_exact_new_trial_003_shot_1_receipt.json",
+  "reports/provider_receipts/v0_3_3_exact_new_trial_003_shot_1_registry.json",
+  "reports/visual_asset_eval_dry_run/v0_6_25_exact_new_trial_artifact_persistence_truth_review.json",
+  "reports/visual_asset_eval_dry_run/v0_6_26_exact_new_trial_local_persistence_repair_preflight.json",
+  "reports/visual_asset_eval_dry_run/v0_6_27_exact_new_trial_003_shot_1_execution_closeout.json",
+  "reports/visual_asset_eval_dry_run/v0_6_28_exact_new_trial_003_shot_2_pre_call_payload_capture_preflight.json",
+  "review_console/live_receipt_bridge/v0_3_3_exact_new_trial_003_shot_1/bridge_entry.json",
+  "runs/real_generation/v0_3_3_exact_new_trial_003_shot_1/generation_attempt_result.json",
+  "schemas/exact_new_trial_003_shot_2_pre_call_payload_capture_preflight.schema.yaml",
+  "schemas/exact_new_trial_artifact_persistence_truth_review.schema.yaml",
+  "schemas/exact_new_trial_local_persistence_repair_preflight.schema.yaml",
+  "scripts/lib/governance_tooling_maintenance_slice.js",
+  "scripts/validate_autopilot_agent_board_resume_compaction_guard.js",
+  "scripts/validate_controlled_visual_production_loop_checkpoint_readiness.js",
+  "scripts/validate_controlled_visual_production_loop_exact_file_commit_readiness_review.js",
+  "scripts/validate_exact_new_trial_003_shot_1_execution_closeout.js",
+  "scripts/validate_exact_new_trial_003_shot_2_pre_call_payload_capture_preflight.js",
+  "scripts/validate_exact_new_trial_3shot_stability_preflight.js",
+  "scripts/validate_exact_new_trial_artifact_persistence_truth_review.js",
+  "scripts/validate_exact_new_trial_local_persistence_repair_preflight.js",
+  "scripts/validate_mvp.ps1",
+  "scripts/validate_provider_receipt_artifacts.js",
+  "tests/schema_examples/exact_new_trial_003_shot_1_execution_closeout.example.json",
+  "tests/schema_examples/exact_new_trial_003_shot_1_execution_closeout_fail.example.json",
+  "tests/schema_examples/exact_new_trial_003_shot_2_pre_call_payload_capture_preflight.example.json",
+  "tests/schema_examples/exact_new_trial_003_shot_2_pre_call_payload_capture_preflight_fail.example.json",
+  "tests/schema_examples/exact_new_trial_artifact_persistence_truth_review.example.json",
+  "tests/schema_examples/exact_new_trial_artifact_persistence_truth_review_fail.example.json",
+  "tests/schema_examples/exact_new_trial_local_persistence_repair_preflight.example.json",
+  "tests/schema_examples/exact_new_trial_local_persistence_repair_preflight_fail.example.json"
+].sort();
+
+const EXPECTED_V0_6_29_EXACT_NEW_TRIAL_003_SHOT_2_EXECUTION_CLOSEOUT_SLICE = [
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  ".agent_board/VALIDATION_LOG.md",
+  "docs/00_project_roadmap.md",
+  "docs/V0_6_25_EXACT_NEW_TRIAL_ARTIFACT_PERSISTENCE_TRUTH_REVIEW.md",
+  "docs/V0_6_26_EXACT_NEW_TRIAL_LOCAL_PERSISTENCE_REPAIR_PREFLIGHT.md",
+  "docs/V0_6_27_EXACT_NEW_TRIAL_003_SHOT_1_EXECUTION_CLOSEOUT.md",
+  "docs/V0_6_28_EXACT_NEW_TRIAL_003_SHOT_2_PRE_CALL_PAYLOAD_CAPTURE_PREFLIGHT.md",
+  "docs/V0_6_29_EXACT_NEW_TRIAL_003_SHOT_2_EXECUTION_CLOSEOUT.md",
+  "reports/provider_payload_captures/v0_3_3_exact_new_trial_003_shot_1_request_payload.sanitized.json",
+  "reports/provider_payload_captures/v0_3_3_exact_new_trial_003_shot_2_request_payload.sanitized.json",
+  "reports/provider_receipts/v0_3_3_exact_new_trial_003_shot_1_receipt.json",
+  "reports/provider_receipts/v0_3_3_exact_new_trial_003_shot_1_registry.json",
+  "reports/provider_receipts/v0_3_3_exact_new_trial_003_shot_2_receipt.json",
+  "reports/provider_receipts/v0_3_3_exact_new_trial_003_shot_2_registry.json",
+  "reports/visual_asset_eval_dry_run/v0_6_25_exact_new_trial_artifact_persistence_truth_review.json",
+  "reports/visual_asset_eval_dry_run/v0_6_26_exact_new_trial_local_persistence_repair_preflight.json",
+  "reports/visual_asset_eval_dry_run/v0_6_27_exact_new_trial_003_shot_1_execution_closeout.json",
+  "reports/visual_asset_eval_dry_run/v0_6_28_exact_new_trial_003_shot_2_pre_call_payload_capture_preflight.json",
+  "reports/visual_asset_eval_dry_run/v0_6_29_exact_new_trial_003_shot_2_execution_closeout.json",
+  "review_console/live_receipt_bridge/v0_3_3_exact_new_trial_003_shot_1/bridge_entry.json",
+  "review_console/live_receipt_bridge/v0_3_3_exact_new_trial_003_shot_2/bridge_entry.json",
+  "runs/real_generation/v0_3_3_exact_new_trial_003_shot_1/generation_attempt_result.json",
+  "runs/real_generation/v0_3_3_exact_new_trial_003_shot_2/generation_attempt_result.json",
+  "schemas/exact_new_trial_003_shot_2_pre_call_payload_capture_preflight.schema.yaml",
+  "schemas/exact_new_trial_artifact_persistence_truth_review.schema.yaml",
+  "schemas/exact_new_trial_local_persistence_repair_preflight.schema.yaml",
+  "scripts/lib/governance_tooling_maintenance_slice.js",
+  "scripts/validate_autopilot_agent_board_resume_compaction_guard.js",
+  "scripts/validate_controlled_visual_production_loop_checkpoint_readiness.js",
+  "scripts/validate_controlled_visual_production_loop_exact_file_commit_readiness_review.js",
+  "scripts/validate_exact_new_trial_003_shot_1_execution_closeout.js",
+  "scripts/validate_exact_new_trial_003_shot_2_execution_closeout.js",
+  "scripts/validate_exact_new_trial_003_shot_2_pre_call_payload_capture_preflight.js",
+  "scripts/validate_exact_new_trial_3shot_stability_preflight.js",
+  "scripts/validate_exact_new_trial_artifact_persistence_truth_review.js",
+  "scripts/validate_exact_new_trial_local_persistence_repair_preflight.js",
+  "scripts/validate_mvp.ps1",
+  "scripts/validate_provider_receipt_artifacts.js",
+  "tests/schema_examples/exact_new_trial_003_shot_1_execution_closeout.example.json",
+  "tests/schema_examples/exact_new_trial_003_shot_1_execution_closeout_fail.example.json",
+  "tests/schema_examples/exact_new_trial_003_shot_2_execution_closeout.example.json",
+  "tests/schema_examples/exact_new_trial_003_shot_2_execution_closeout_fail.example.json",
+  "tests/schema_examples/exact_new_trial_003_shot_2_pre_call_payload_capture_preflight.example.json",
+  "tests/schema_examples/exact_new_trial_003_shot_2_pre_call_payload_capture_preflight_fail.example.json",
+  "tests/schema_examples/exact_new_trial_artifact_persistence_truth_review.example.json",
+  "tests/schema_examples/exact_new_trial_artifact_persistence_truth_review_fail.example.json",
+  "tests/schema_examples/exact_new_trial_local_persistence_repair_preflight.example.json",
+  "tests/schema_examples/exact_new_trial_local_persistence_repair_preflight_fail.example.json"
+].sort();
+
+const EXPECTED_V0_6_30_EXACT_NEW_TRIAL_003_SHOT_3_PRE_CALL_PAYLOAD_CAPTURE_PREFLIGHT_SLICE = [
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  ".agent_board/VALIDATION_LOG.md",
+  "docs/00_project_roadmap.md",
+  "docs/V0_6_25_EXACT_NEW_TRIAL_ARTIFACT_PERSISTENCE_TRUTH_REVIEW.md",
+  "docs/V0_6_26_EXACT_NEW_TRIAL_LOCAL_PERSISTENCE_REPAIR_PREFLIGHT.md",
+  "docs/V0_6_27_EXACT_NEW_TRIAL_003_SHOT_1_EXECUTION_CLOSEOUT.md",
+  "docs/V0_6_28_EXACT_NEW_TRIAL_003_SHOT_2_PRE_CALL_PAYLOAD_CAPTURE_PREFLIGHT.md",
+  "docs/V0_6_29_EXACT_NEW_TRIAL_003_SHOT_2_EXECUTION_CLOSEOUT.md",
+  "docs/V0_6_30_EXACT_NEW_TRIAL_003_SHOT_3_PRE_CALL_PAYLOAD_CAPTURE_PREFLIGHT.md",
+  "reports/provider_payload_captures/v0_3_3_exact_new_trial_003_shot_1_request_payload.sanitized.json",
+  "reports/provider_payload_captures/v0_3_3_exact_new_trial_003_shot_2_request_payload.sanitized.json",
+  "reports/provider_payload_captures/v0_3_3_exact_new_trial_003_shot_3_request_payload.sanitized.json",
+  "reports/provider_receipts/v0_3_3_exact_new_trial_003_shot_1_receipt.json",
+  "reports/provider_receipts/v0_3_3_exact_new_trial_003_shot_1_registry.json",
+  "reports/provider_receipts/v0_3_3_exact_new_trial_003_shot_2_receipt.json",
+  "reports/provider_receipts/v0_3_3_exact_new_trial_003_shot_2_registry.json",
+  "reports/visual_asset_eval_dry_run/v0_6_25_exact_new_trial_artifact_persistence_truth_review.json",
+  "reports/visual_asset_eval_dry_run/v0_6_26_exact_new_trial_local_persistence_repair_preflight.json",
+  "reports/visual_asset_eval_dry_run/v0_6_27_exact_new_trial_003_shot_1_execution_closeout.json",
+  "reports/visual_asset_eval_dry_run/v0_6_28_exact_new_trial_003_shot_2_pre_call_payload_capture_preflight.json",
+  "reports/visual_asset_eval_dry_run/v0_6_29_exact_new_trial_003_shot_2_execution_closeout.json",
+  "reports/visual_asset_eval_dry_run/v0_6_30_exact_new_trial_003_shot_3_pre_call_payload_capture_preflight.json",
+  "review_console/live_receipt_bridge/v0_3_3_exact_new_trial_003_shot_1/bridge_entry.json",
+  "review_console/live_receipt_bridge/v0_3_3_exact_new_trial_003_shot_2/bridge_entry.json",
+  "runs/real_generation/v0_3_3_exact_new_trial_003_shot_1/generation_attempt_result.json",
+  "runs/real_generation/v0_3_3_exact_new_trial_003_shot_2/generation_attempt_result.json",
+  "schemas/exact_new_trial_003_shot_2_pre_call_payload_capture_preflight.schema.yaml",
+  "schemas/exact_new_trial_003_shot_3_pre_call_payload_capture_preflight.schema.yaml",
+  "schemas/exact_new_trial_artifact_persistence_truth_review.schema.yaml",
+  "schemas/exact_new_trial_local_persistence_repair_preflight.schema.yaml",
+  "scripts/lib/governance_tooling_maintenance_slice.js",
+  "scripts/validate_autopilot_agent_board_resume_compaction_guard.js",
+  "scripts/validate_controlled_visual_production_loop_checkpoint_readiness.js",
+  "scripts/validate_controlled_visual_production_loop_exact_file_commit_readiness_review.js",
+  "scripts/validate_exact_new_trial_003_shot_1_execution_closeout.js",
+  "scripts/validate_exact_new_trial_003_shot_2_execution_closeout.js",
+  "scripts/validate_exact_new_trial_003_shot_2_pre_call_payload_capture_preflight.js",
+  "scripts/validate_exact_new_trial_003_shot_3_pre_call_payload_capture_preflight.js",
+  "scripts/validate_exact_new_trial_3shot_stability_preflight.js",
+  "scripts/validate_exact_new_trial_artifact_persistence_truth_review.js",
+  "scripts/validate_exact_new_trial_local_persistence_repair_preflight.js",
+  "scripts/validate_mvp.ps1",
+  "scripts/validate_provider_receipt_artifacts.js",
+  "tests/schema_examples/exact_new_trial_003_shot_1_execution_closeout.example.json",
+  "tests/schema_examples/exact_new_trial_003_shot_1_execution_closeout_fail.example.json",
+  "tests/schema_examples/exact_new_trial_003_shot_2_execution_closeout.example.json",
+  "tests/schema_examples/exact_new_trial_003_shot_2_execution_closeout_fail.example.json",
+  "tests/schema_examples/exact_new_trial_003_shot_2_pre_call_payload_capture_preflight.example.json",
+  "tests/schema_examples/exact_new_trial_003_shot_2_pre_call_payload_capture_preflight_fail.example.json",
+  "tests/schema_examples/exact_new_trial_003_shot_3_pre_call_payload_capture_preflight.example.json",
+  "tests/schema_examples/exact_new_trial_003_shot_3_pre_call_payload_capture_preflight_fail.example.json",
+  "tests/schema_examples/exact_new_trial_artifact_persistence_truth_review.example.json",
+  "tests/schema_examples/exact_new_trial_artifact_persistence_truth_review_fail.example.json",
+  "tests/schema_examples/exact_new_trial_local_persistence_repair_preflight.example.json",
+  "tests/schema_examples/exact_new_trial_local_persistence_repair_preflight_fail.example.json"
+].sort();
+
+const EXPECTED_V0_6_31_EXACT_NEW_TRIAL_003_SHOT_3_EXECUTION_CLOSEOUT_SLICE = [
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  ".agent_board/VALIDATION_LOG.md",
+  "docs/00_project_roadmap.md",
+  "docs/V0_6_25_EXACT_NEW_TRIAL_ARTIFACT_PERSISTENCE_TRUTH_REVIEW.md",
+  "docs/V0_6_26_EXACT_NEW_TRIAL_LOCAL_PERSISTENCE_REPAIR_PREFLIGHT.md",
+  "docs/V0_6_27_EXACT_NEW_TRIAL_003_SHOT_1_EXECUTION_CLOSEOUT.md",
+  "docs/V0_6_28_EXACT_NEW_TRIAL_003_SHOT_2_PRE_CALL_PAYLOAD_CAPTURE_PREFLIGHT.md",
+  "docs/V0_6_29_EXACT_NEW_TRIAL_003_SHOT_2_EXECUTION_CLOSEOUT.md",
+  "docs/V0_6_30_EXACT_NEW_TRIAL_003_SHOT_3_PRE_CALL_PAYLOAD_CAPTURE_PREFLIGHT.md",
+  "docs/V0_6_31_EXACT_NEW_TRIAL_003_SHOT_3_EXECUTION_CLOSEOUT.md",
+  "reports/provider_payload_captures/v0_3_3_exact_new_trial_003_shot_1_request_payload.sanitized.json",
+  "reports/provider_payload_captures/v0_3_3_exact_new_trial_003_shot_2_request_payload.sanitized.json",
+  "reports/provider_payload_captures/v0_3_3_exact_new_trial_003_shot_3_request_payload.sanitized.json",
+  "reports/provider_receipts/v0_3_3_exact_new_trial_003_shot_1_receipt.json",
+  "reports/provider_receipts/v0_3_3_exact_new_trial_003_shot_1_registry.json",
+  "reports/provider_receipts/v0_3_3_exact_new_trial_003_shot_2_receipt.json",
+  "reports/provider_receipts/v0_3_3_exact_new_trial_003_shot_2_registry.json",
+  "reports/provider_receipts/v0_3_3_exact_new_trial_003_shot_3_receipt.json",
+  "reports/provider_receipts/v0_3_3_exact_new_trial_003_shot_3_registry.json",
+  "reports/visual_asset_eval_dry_run/v0_6_25_exact_new_trial_artifact_persistence_truth_review.json",
+  "reports/visual_asset_eval_dry_run/v0_6_26_exact_new_trial_local_persistence_repair_preflight.json",
+  "reports/visual_asset_eval_dry_run/v0_6_27_exact_new_trial_003_shot_1_execution_closeout.json",
+  "reports/visual_asset_eval_dry_run/v0_6_28_exact_new_trial_003_shot_2_pre_call_payload_capture_preflight.json",
+  "reports/visual_asset_eval_dry_run/v0_6_29_exact_new_trial_003_shot_2_execution_closeout.json",
+  "reports/visual_asset_eval_dry_run/v0_6_30_exact_new_trial_003_shot_3_pre_call_payload_capture_preflight.json",
+  "reports/visual_asset_eval_dry_run/v0_6_31_exact_new_trial_003_shot_3_execution_closeout.json",
+  "review_console/live_receipt_bridge/v0_3_3_exact_new_trial_003_shot_1/bridge_entry.json",
+  "review_console/live_receipt_bridge/v0_3_3_exact_new_trial_003_shot_2/bridge_entry.json",
+  "review_console/live_receipt_bridge/v0_3_3_exact_new_trial_003_shot_3/bridge_entry.json",
+  "runs/real_generation/v0_3_3_exact_new_trial_003_shot_1/generation_attempt_result.json",
+  "runs/real_generation/v0_3_3_exact_new_trial_003_shot_2/generation_attempt_result.json",
+  "runs/real_generation/v0_3_3_exact_new_trial_003_shot_3/generation_attempt_result.json",
+  "schemas/exact_new_trial_003_shot_2_pre_call_payload_capture_preflight.schema.yaml",
+  "schemas/exact_new_trial_003_shot_3_pre_call_payload_capture_preflight.schema.yaml",
+  "schemas/exact_new_trial_artifact_persistence_truth_review.schema.yaml",
+  "schemas/exact_new_trial_local_persistence_repair_preflight.schema.yaml",
+  "scripts/lib/governance_tooling_maintenance_slice.js",
+  "scripts/validate_autopilot_agent_board_resume_compaction_guard.js",
+  "scripts/validate_controlled_visual_production_loop_checkpoint_readiness.js",
+  "scripts/validate_controlled_visual_production_loop_exact_file_commit_readiness_review.js",
+  "scripts/validate_exact_new_trial_003_shot_1_execution_closeout.js",
+  "scripts/validate_exact_new_trial_003_shot_2_execution_closeout.js",
+  "scripts/validate_exact_new_trial_003_shot_2_pre_call_payload_capture_preflight.js",
+  "scripts/validate_exact_new_trial_003_shot_3_execution_closeout.js",
+  "scripts/validate_exact_new_trial_003_shot_3_pre_call_payload_capture_preflight.js",
+  "scripts/validate_exact_new_trial_3shot_stability_preflight.js",
+  "scripts/validate_exact_new_trial_artifact_persistence_truth_review.js",
+  "scripts/validate_exact_new_trial_local_persistence_repair_preflight.js",
+  "scripts/validate_mvp.ps1",
+  "scripts/validate_provider_receipt_artifacts.js",
+  "tests/schema_examples/exact_new_trial_003_shot_1_execution_closeout.example.json",
+  "tests/schema_examples/exact_new_trial_003_shot_1_execution_closeout_fail.example.json",
+  "tests/schema_examples/exact_new_trial_003_shot_2_execution_closeout.example.json",
+  "tests/schema_examples/exact_new_trial_003_shot_2_execution_closeout_fail.example.json",
+  "tests/schema_examples/exact_new_trial_003_shot_2_pre_call_payload_capture_preflight.example.json",
+  "tests/schema_examples/exact_new_trial_003_shot_2_pre_call_payload_capture_preflight_fail.example.json",
+  "tests/schema_examples/exact_new_trial_003_shot_3_execution_closeout.example.json",
+  "tests/schema_examples/exact_new_trial_003_shot_3_execution_closeout_fail.example.json",
+  "tests/schema_examples/exact_new_trial_003_shot_3_pre_call_payload_capture_preflight.example.json",
+  "tests/schema_examples/exact_new_trial_003_shot_3_pre_call_payload_capture_preflight_fail.example.json",
+  "tests/schema_examples/exact_new_trial_artifact_persistence_truth_review.example.json",
+  "tests/schema_examples/exact_new_trial_artifact_persistence_truth_review_fail.example.json",
+  "tests/schema_examples/exact_new_trial_local_persistence_repair_preflight.example.json",
+  "tests/schema_examples/exact_new_trial_local_persistence_repair_preflight_fail.example.json"
+].sort();
+
+const EXPECTED_V0_6_32_EXACT_NEW_TRIAL_003_HUMAN_REVIEW_SLICE = [
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  ".agent_board/VALIDATION_LOG.md",
+  "docs/00_project_roadmap.md",
+  "docs/V0_6_25_EXACT_NEW_TRIAL_ARTIFACT_PERSISTENCE_TRUTH_REVIEW.md",
+  "docs/V0_6_26_EXACT_NEW_TRIAL_LOCAL_PERSISTENCE_REPAIR_PREFLIGHT.md",
+  "docs/V0_6_27_EXACT_NEW_TRIAL_003_SHOT_1_EXECUTION_CLOSEOUT.md",
+  "docs/V0_6_28_EXACT_NEW_TRIAL_003_SHOT_2_PRE_CALL_PAYLOAD_CAPTURE_PREFLIGHT.md",
+  "docs/V0_6_29_EXACT_NEW_TRIAL_003_SHOT_2_EXECUTION_CLOSEOUT.md",
+  "docs/V0_6_30_EXACT_NEW_TRIAL_003_SHOT_3_PRE_CALL_PAYLOAD_CAPTURE_PREFLIGHT.md",
+  "docs/V0_6_31_EXACT_NEW_TRIAL_003_SHOT_3_EXECUTION_CLOSEOUT.md",
+  "docs/V0_6_32_EXACT_NEW_TRIAL_003_HUMAN_REVIEW.md",
+  "reports/provider_payload_captures/v0_3_3_exact_new_trial_003_shot_1_request_payload.sanitized.json",
+  "reports/provider_payload_captures/v0_3_3_exact_new_trial_003_shot_2_request_payload.sanitized.json",
+  "reports/provider_payload_captures/v0_3_3_exact_new_trial_003_shot_3_request_payload.sanitized.json",
+  "reports/provider_receipts/v0_3_3_exact_new_trial_003_shot_1_receipt.json",
+  "reports/provider_receipts/v0_3_3_exact_new_trial_003_shot_1_registry.json",
+  "reports/provider_receipts/v0_3_3_exact_new_trial_003_shot_2_receipt.json",
+  "reports/provider_receipts/v0_3_3_exact_new_trial_003_shot_2_registry.json",
+  "reports/provider_receipts/v0_3_3_exact_new_trial_003_shot_3_receipt.json",
+  "reports/provider_receipts/v0_3_3_exact_new_trial_003_shot_3_registry.json",
+  "reports/visual_asset_eval_dry_run/v0_6_25_exact_new_trial_artifact_persistence_truth_review.json",
+  "reports/visual_asset_eval_dry_run/v0_6_26_exact_new_trial_local_persistence_repair_preflight.json",
+  "reports/visual_asset_eval_dry_run/v0_6_27_exact_new_trial_003_shot_1_execution_closeout.json",
+  "reports/visual_asset_eval_dry_run/v0_6_28_exact_new_trial_003_shot_2_pre_call_payload_capture_preflight.json",
+  "reports/visual_asset_eval_dry_run/v0_6_29_exact_new_trial_003_shot_2_execution_closeout.json",
+  "reports/visual_asset_eval_dry_run/v0_6_30_exact_new_trial_003_shot_3_pre_call_payload_capture_preflight.json",
+  "reports/visual_asset_eval_dry_run/v0_6_31_exact_new_trial_003_shot_3_execution_closeout.json",
+  "reports/visual_asset_eval_dry_run/v0_6_32_exact_new_trial_003_human_review.json",
+  "review_console/live_receipt_bridge/v0_3_3_exact_new_trial_003_shot_1/bridge_entry.json",
+  "review_console/live_receipt_bridge/v0_3_3_exact_new_trial_003_shot_2/bridge_entry.json",
+  "review_console/live_receipt_bridge/v0_3_3_exact_new_trial_003_shot_3/bridge_entry.json",
+  "runs/real_generation/v0_3_3_exact_new_trial_003_shot_1/generation_attempt_result.json",
+  "runs/real_generation/v0_3_3_exact_new_trial_003_shot_2/generation_attempt_result.json",
+  "runs/real_generation/v0_3_3_exact_new_trial_003_shot_3/generation_attempt_result.json",
+  "schemas/exact_new_trial_003_shot_2_pre_call_payload_capture_preflight.schema.yaml",
+  "schemas/exact_new_trial_003_shot_3_pre_call_payload_capture_preflight.schema.yaml",
+  "schemas/exact_new_trial_artifact_persistence_truth_review.schema.yaml",
+  "schemas/exact_new_trial_local_persistence_repair_preflight.schema.yaml",
+  "scripts/lib/governance_tooling_maintenance_slice.js",
+  "scripts/validate_autopilot_agent_board_resume_compaction_guard.js",
+  "scripts/validate_controlled_visual_production_loop_checkpoint_readiness.js",
+  "scripts/validate_controlled_visual_production_loop_exact_file_commit_readiness_review.js",
+  "scripts/validate_exact_new_trial_003_human_review.js",
+  "scripts/validate_exact_new_trial_003_shot_1_execution_closeout.js",
+  "scripts/validate_exact_new_trial_003_shot_2_execution_closeout.js",
+  "scripts/validate_exact_new_trial_003_shot_2_pre_call_payload_capture_preflight.js",
+  "scripts/validate_exact_new_trial_003_shot_3_execution_closeout.js",
+  "scripts/validate_exact_new_trial_003_shot_3_pre_call_payload_capture_preflight.js",
+  "scripts/validate_exact_new_trial_3shot_stability_preflight.js",
+  "scripts/validate_exact_new_trial_artifact_persistence_truth_review.js",
+  "scripts/validate_exact_new_trial_local_persistence_repair_preflight.js",
+  "scripts/validate_mvp.ps1",
+  "scripts/validate_provider_receipt_artifacts.js",
+  "tests/schema_examples/exact_new_trial_003_human_review.example.json",
+  "tests/schema_examples/exact_new_trial_003_human_review_fail.example.json",
+  "tests/schema_examples/exact_new_trial_003_shot_1_execution_closeout.example.json",
+  "tests/schema_examples/exact_new_trial_003_shot_1_execution_closeout_fail.example.json",
+  "tests/schema_examples/exact_new_trial_003_shot_2_execution_closeout.example.json",
+  "tests/schema_examples/exact_new_trial_003_shot_2_execution_closeout_fail.example.json",
+  "tests/schema_examples/exact_new_trial_003_shot_2_pre_call_payload_capture_preflight.example.json",
+  "tests/schema_examples/exact_new_trial_003_shot_2_pre_call_payload_capture_preflight_fail.example.json",
+  "tests/schema_examples/exact_new_trial_003_shot_3_execution_closeout.example.json",
+  "tests/schema_examples/exact_new_trial_003_shot_3_execution_closeout_fail.example.json",
+  "tests/schema_examples/exact_new_trial_003_shot_3_pre_call_payload_capture_preflight.example.json",
+  "tests/schema_examples/exact_new_trial_003_shot_3_pre_call_payload_capture_preflight_fail.example.json",
+  "tests/schema_examples/exact_new_trial_artifact_persistence_truth_review.example.json",
+  "tests/schema_examples/exact_new_trial_artifact_persistence_truth_review_fail.example.json",
+  "tests/schema_examples/exact_new_trial_local_persistence_repair_preflight.example.json",
+  "tests/schema_examples/exact_new_trial_local_persistence_repair_preflight_fail.example.json"
+].sort();
+
+const EXPECTED_V0_6_33_EXACT_NEW_TRIAL_003_SELECTED_CANDIDATE_HUMAN_APPROVAL_INTAKE_PACKAGE_SLICE = [
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  ".agent_board/VALIDATION_LOG.md",
+  "docs/00_project_roadmap.md",
+  "docs/V0_6_25_EXACT_NEW_TRIAL_ARTIFACT_PERSISTENCE_TRUTH_REVIEW.md",
+  "docs/V0_6_26_EXACT_NEW_TRIAL_LOCAL_PERSISTENCE_REPAIR_PREFLIGHT.md",
+  "docs/V0_6_27_EXACT_NEW_TRIAL_003_SHOT_1_EXECUTION_CLOSEOUT.md",
+  "docs/V0_6_28_EXACT_NEW_TRIAL_003_SHOT_2_PRE_CALL_PAYLOAD_CAPTURE_PREFLIGHT.md",
+  "docs/V0_6_29_EXACT_NEW_TRIAL_003_SHOT_2_EXECUTION_CLOSEOUT.md",
+  "docs/V0_6_30_EXACT_NEW_TRIAL_003_SHOT_3_PRE_CALL_PAYLOAD_CAPTURE_PREFLIGHT.md",
+  "docs/V0_6_31_EXACT_NEW_TRIAL_003_SHOT_3_EXECUTION_CLOSEOUT.md",
+  "docs/V0_6_32_EXACT_NEW_TRIAL_003_HUMAN_REVIEW.md",
+  "docs/V0_6_33_EXACT_NEW_TRIAL_003_SELECTED_CANDIDATE_HUMAN_APPROVAL_INTAKE_PACKAGE.md",
+  "reports/provider_payload_captures/v0_3_3_exact_new_trial_003_shot_1_request_payload.sanitized.json",
+  "reports/provider_payload_captures/v0_3_3_exact_new_trial_003_shot_2_request_payload.sanitized.json",
+  "reports/provider_payload_captures/v0_3_3_exact_new_trial_003_shot_3_request_payload.sanitized.json",
+  "reports/provider_receipts/v0_3_3_exact_new_trial_003_shot_1_receipt.json",
+  "reports/provider_receipts/v0_3_3_exact_new_trial_003_shot_1_registry.json",
+  "reports/provider_receipts/v0_3_3_exact_new_trial_003_shot_2_receipt.json",
+  "reports/provider_receipts/v0_3_3_exact_new_trial_003_shot_2_registry.json",
+  "reports/provider_receipts/v0_3_3_exact_new_trial_003_shot_3_receipt.json",
+  "reports/provider_receipts/v0_3_3_exact_new_trial_003_shot_3_registry.json",
+  "reports/visual_asset_eval_dry_run/v0_6_25_exact_new_trial_artifact_persistence_truth_review.json",
+  "reports/visual_asset_eval_dry_run/v0_6_26_exact_new_trial_local_persistence_repair_preflight.json",
+  "reports/visual_asset_eval_dry_run/v0_6_27_exact_new_trial_003_shot_1_execution_closeout.json",
+  "reports/visual_asset_eval_dry_run/v0_6_28_exact_new_trial_003_shot_2_pre_call_payload_capture_preflight.json",
+  "reports/visual_asset_eval_dry_run/v0_6_29_exact_new_trial_003_shot_2_execution_closeout.json",
+  "reports/visual_asset_eval_dry_run/v0_6_30_exact_new_trial_003_shot_3_pre_call_payload_capture_preflight.json",
+  "reports/visual_asset_eval_dry_run/v0_6_31_exact_new_trial_003_shot_3_execution_closeout.json",
+  "reports/visual_asset_eval_dry_run/v0_6_32_exact_new_trial_003_human_review.json",
+  "reports/visual_asset_eval_dry_run/v0_6_33_exact_new_trial_003_selected_candidate_human_approval_intake_package.json",
+  "review_console/live_receipt_bridge/v0_3_3_exact_new_trial_003_shot_1/bridge_entry.json",
+  "review_console/live_receipt_bridge/v0_3_3_exact_new_trial_003_shot_2/bridge_entry.json",
+  "review_console/live_receipt_bridge/v0_3_3_exact_new_trial_003_shot_3/bridge_entry.json",
+  "runs/real_generation/v0_3_3_exact_new_trial_003_shot_1/generation_attempt_result.json",
+  "runs/real_generation/v0_3_3_exact_new_trial_003_shot_2/generation_attempt_result.json",
+  "runs/real_generation/v0_3_3_exact_new_trial_003_shot_3/generation_attempt_result.json",
+  "schemas/exact_new_trial_003_shot_2_pre_call_payload_capture_preflight.schema.yaml",
+  "schemas/exact_new_trial_003_shot_3_pre_call_payload_capture_preflight.schema.yaml",
+  "schemas/exact_new_trial_artifact_persistence_truth_review.schema.yaml",
+  "schemas/exact_new_trial_local_persistence_repair_preflight.schema.yaml",
+  "scripts/lib/governance_tooling_maintenance_slice.js",
+  "scripts/validate_autopilot_agent_board_resume_compaction_guard.js",
+  "scripts/validate_controlled_visual_production_loop_checkpoint_readiness.js",
+  "scripts/validate_controlled_visual_production_loop_exact_file_commit_readiness_review.js",
+  "scripts/validate_exact_new_trial_003_human_review.js",
+  "scripts/validate_exact_new_trial_003_selected_candidate_human_approval_intake_package.js",
+  "scripts/validate_exact_new_trial_003_shot_1_execution_closeout.js",
+  "scripts/validate_exact_new_trial_003_shot_2_execution_closeout.js",
+  "scripts/validate_exact_new_trial_003_shot_2_pre_call_payload_capture_preflight.js",
+  "scripts/validate_exact_new_trial_003_shot_3_execution_closeout.js",
+  "scripts/validate_exact_new_trial_003_shot_3_pre_call_payload_capture_preflight.js",
+  "scripts/validate_exact_new_trial_3shot_stability_preflight.js",
+  "scripts/validate_exact_new_trial_artifact_persistence_truth_review.js",
+  "scripts/validate_exact_new_trial_local_persistence_repair_preflight.js",
+  "scripts/validate_mvp.ps1",
+  "scripts/validate_provider_receipt_artifacts.js",
+  "tests/schema_examples/exact_new_trial_003_human_review.example.json",
+  "tests/schema_examples/exact_new_trial_003_human_review_fail.example.json",
+  "tests/schema_examples/exact_new_trial_003_selected_candidate_human_approval_intake_package.example.json",
+  "tests/schema_examples/exact_new_trial_003_selected_candidate_human_approval_intake_package_fail.example.json",
+  "tests/schema_examples/exact_new_trial_003_shot_1_execution_closeout.example.json",
+  "tests/schema_examples/exact_new_trial_003_shot_1_execution_closeout_fail.example.json",
+  "tests/schema_examples/exact_new_trial_003_shot_2_execution_closeout.example.json",
+  "tests/schema_examples/exact_new_trial_003_shot_2_execution_closeout_fail.example.json",
+  "tests/schema_examples/exact_new_trial_003_shot_2_pre_call_payload_capture_preflight.example.json",
+  "tests/schema_examples/exact_new_trial_003_shot_2_pre_call_payload_capture_preflight_fail.example.json",
+  "tests/schema_examples/exact_new_trial_003_shot_3_execution_closeout.example.json",
+  "tests/schema_examples/exact_new_trial_003_shot_3_execution_closeout_fail.example.json",
+  "tests/schema_examples/exact_new_trial_003_shot_3_pre_call_payload_capture_preflight.example.json",
+  "tests/schema_examples/exact_new_trial_003_shot_3_pre_call_payload_capture_preflight_fail.example.json",
+  "tests/schema_examples/exact_new_trial_artifact_persistence_truth_review.example.json",
+  "tests/schema_examples/exact_new_trial_artifact_persistence_truth_review_fail.example.json",
+  "tests/schema_examples/exact_new_trial_local_persistence_repair_preflight.example.json",
+  "tests/schema_examples/exact_new_trial_local_persistence_repair_preflight_fail.example.json"
+].sort();
+
+const EXPECTED_V0_6_34_EXACT_NEW_TRIAL_003_SELECTED_CANDIDATE_POST_APPROVAL_GATE_ALIGNMENT_SLICE = [
+  ...EXPECTED_V0_6_33_EXACT_NEW_TRIAL_003_SELECTED_CANDIDATE_HUMAN_APPROVAL_INTAKE_PACKAGE_SLICE,
+  "docs/V0_6_34_EXACT_NEW_TRIAL_003_SELECTED_CANDIDATE_POST_APPROVAL_GATE_ALIGNMENT.md",
+  "reports/visual_asset_eval_dry_run/v0_6_34_exact_new_trial_003_selected_candidate_post_approval_gate_alignment.json",
+  "scripts/validate_exact_new_trial_003_selected_candidate_post_approval_gate_alignment.js",
+  "tests/schema_examples/exact_new_trial_003_selected_candidate_post_approval_gate_alignment.example.json",
+  "tests/schema_examples/exact_new_trial_003_selected_candidate_post_approval_gate_alignment_fail.example.json"
+].sort();
+
+const EXPECTED_V0_6_35_EXACT_NEW_TRIAL_003_POST_APPROVAL_REGISTRATION_PREFLIGHT_DRAFT_SLICE = [
+  ...EXPECTED_V0_6_34_EXACT_NEW_TRIAL_003_SELECTED_CANDIDATE_POST_APPROVAL_GATE_ALIGNMENT_SLICE,
+  "docs/V0_6_35_EXACT_NEW_TRIAL_003_POST_APPROVAL_REGISTRATION_PREFLIGHT_DRAFT.md",
+  "reports/visual_asset_eval_dry_run/v0_6_35_exact_new_trial_003_post_approval_registration_preflight_draft.json",
+  "scripts/validate_exact_new_trial_003_post_approval_registration_preflight_draft.js",
+  "tests/schema_examples/exact_new_trial_003_post_approval_registration_preflight_draft.example.json",
+  "tests/schema_examples/exact_new_trial_003_post_approval_registration_preflight_draft_fail.example.json"
+].sort();
+
+const EXPECTED_V0_6_36_EXACT_NEW_TRIAL_003_ACCEPTED_SAMPLES_REGISTRATION_AUTHORIZATION_PACKAGE_DRAFT_SLICE = [
+  ...EXPECTED_V0_6_35_EXACT_NEW_TRIAL_003_POST_APPROVAL_REGISTRATION_PREFLIGHT_DRAFT_SLICE,
+  "docs/V0_6_36_EXACT_NEW_TRIAL_003_ACCEPTED_SAMPLES_REGISTRATION_AUTHORIZATION_PACKAGE_DRAFT.md",
+  "reports/visual_asset_eval_dry_run/v0_6_36_exact_new_trial_003_accepted_samples_registration_authorization_package_draft.json",
+  "scripts/validate_exact_new_trial_003_accepted_samples_registration_authorization_package_draft.js",
+  "tests/schema_examples/exact_new_trial_003_accepted_samples_registration_authorization_package_draft.example.json",
+  "tests/schema_examples/exact_new_trial_003_accepted_samples_registration_authorization_package_draft_fail.example.json"
+].sort();
+
+const EXPECTED_V0_6_37_EXACT_NEW_TRIAL_003_ACCEPTED_SAMPLES_REGISTRATION_EXECUTION_PREFLIGHT_SLICE = [
+  ...EXPECTED_V0_6_36_EXACT_NEW_TRIAL_003_ACCEPTED_SAMPLES_REGISTRATION_AUTHORIZATION_PACKAGE_DRAFT_SLICE,
+  "docs/V0_6_37_EXACT_NEW_TRIAL_003_ACCEPTED_SAMPLES_REGISTRATION_EXECUTION_PREFLIGHT.md",
+  "reports/visual_asset_eval_dry_run/v0_6_37_exact_new_trial_003_accepted_samples_registration_execution_preflight.json",
+  "scripts/validate_exact_new_trial_003_accepted_samples_registration_execution_preflight.js",
+  "tests/schema_examples/exact_new_trial_003_accepted_samples_registration_execution_preflight.example.json",
+  "tests/schema_examples/exact_new_trial_003_accepted_samples_registration_execution_preflight_fail.example.json"
+].sort();
+
+const EXPECTED_V0_6_38_EXACT_NEW_TRIAL_003_DURABLE_ARCHIVE_AUTHORIZATION_COMPILER_OUTPUT_PREFLIGHT_SLICE = [
+  ...EXPECTED_V0_6_37_EXACT_NEW_TRIAL_003_ACCEPTED_SAMPLES_REGISTRATION_EXECUTION_PREFLIGHT_SLICE,
+  "docs/V0_6_38_EXACT_NEW_TRIAL_003_DURABLE_ARCHIVE_AUTHORIZATION_COMPILER_OUTPUT_PREFLIGHT.md",
+  "reports/visual_asset_eval_dry_run/v0_6_38_exact_new_trial_003_durable_archive_authorization_compiler_output_preflight.json",
+  "scripts/validate_exact_new_trial_003_durable_archive_authorization_compiler_output_preflight.js",
+  "tests/schema_examples/exact_new_trial_003_durable_archive_authorization_compiler_output_preflight.example.json",
+  "tests/schema_examples/exact_new_trial_003_durable_archive_authorization_compiler_output_preflight_fail.example.json"
+].sort();
+
+const EXPECTED_V0_6_39_EXACT_NEW_TRIAL_003_PRODUCTION_CANDIDATE_AUTHORIZATION_COMPILER_OUTPUT_PREFLIGHT_SLICE = [
+  ...EXPECTED_V0_6_38_EXACT_NEW_TRIAL_003_DURABLE_ARCHIVE_AUTHORIZATION_COMPILER_OUTPUT_PREFLIGHT_SLICE,
+  "docs/V0_6_39_EXACT_NEW_TRIAL_003_PRODUCTION_CANDIDATE_AUTHORIZATION_COMPILER_OUTPUT_PREFLIGHT.md",
+  "reports/visual_asset_eval_dry_run/v0_6_39_exact_new_trial_003_production_candidate_authorization_compiler_output_preflight.json",
+  "scripts/validate_exact_new_trial_003_production_candidate_authorization_compiler_output_preflight.js",
+  "tests/schema_examples/exact_new_trial_003_production_candidate_authorization_compiler_output_preflight.example.json",
+  "tests/schema_examples/exact_new_trial_003_production_candidate_authorization_compiler_output_preflight_fail.example.json"
+].sort();
+
+const EXPECTED_V0_6_40_EXACT_NEW_TRIAL_003_DAILY_NOTE_VCP_MEMORY_AUTHORIZATION_COMPILER_OUTPUT_PREFLIGHT_SLICE = [
+  ...EXPECTED_V0_6_39_EXACT_NEW_TRIAL_003_PRODUCTION_CANDIDATE_AUTHORIZATION_COMPILER_OUTPUT_PREFLIGHT_SLICE,
+  "docs/V0_6_40_EXACT_NEW_TRIAL_003_DAILY_NOTE_VCP_MEMORY_AUTHORIZATION_COMPILER_OUTPUT_PREFLIGHT.md",
+  "reports/visual_asset_eval_dry_run/v0_6_40_exact_new_trial_003_daily_note_vcp_memory_authorization_compiler_output_preflight.json",
+  "scripts/validate_exact_new_trial_003_daily_note_vcp_memory_authorization_compiler_output_preflight.js",
+  "tests/schema_examples/exact_new_trial_003_daily_note_vcp_memory_authorization_compiler_output_preflight.example.json",
+  "tests/schema_examples/exact_new_trial_003_daily_note_vcp_memory_authorization_compiler_output_preflight_fail.example.json"
+].sort();
+
+const EXPECTED_V0_6_41_EXACT_NEW_TRIAL_003_MEMORY_DELTA_DRAFT_PACKAGE_SLICE = [
+  ...EXPECTED_V0_6_40_EXACT_NEW_TRIAL_003_DAILY_NOTE_VCP_MEMORY_AUTHORIZATION_COMPILER_OUTPUT_PREFLIGHT_SLICE,
+  "docs/V0_6_41_EXACT_NEW_TRIAL_003_MEMORY_DELTA_DRAFT_PACKAGE.md",
+  "reports/memory_delta_drafts/v0_3_3_exact_new_trial_003_shot_2_memory_delta_draft.yaml",
+  "reports/visual_asset_eval_dry_run/v0_6_41_exact_new_trial_003_memory_delta_draft_package.json",
+  "scripts/validate_exact_new_trial_003_memory_delta_draft_package.js",
+  "tests/schema_examples/exact_new_trial_003_memory_delta_draft_package.example.yaml",
+  "tests/schema_examples/exact_new_trial_003_memory_delta_draft_package_fail.example.yaml"
+].sort();
+
+const EXPECTED_V0_6_42_EXACT_NEW_TRIAL_003_SENSITIVE_DATA_SCAN_PREFLIGHT_SLICE = [
+  ...EXPECTED_V0_6_41_EXACT_NEW_TRIAL_003_MEMORY_DELTA_DRAFT_PACKAGE_SLICE,
+  "docs/V0_6_42_EXACT_NEW_TRIAL_003_SENSITIVE_DATA_SCAN_PREFLIGHT.md",
+  "reports/memory_delta_drafts/v0_3_3_exact_new_trial_003_shot_2_sensitive_data_scan.json",
+  "reports/visual_asset_eval_dry_run/v0_6_42_exact_new_trial_003_sensitive_data_scan_preflight.json",
+  "scripts/validate_exact_new_trial_003_sensitive_data_scan_preflight.js",
+  "tests/schema_examples/exact_new_trial_003_sensitive_data_scan_preflight.example.json",
+  "tests/schema_examples/exact_new_trial_003_sensitive_data_scan_preflight_fail.example.json"
+].sort();
+
+const EXPECTED_V0_6_43_EXACT_NEW_TRIAL_003_DAILY_NOTE_VCP_MEMORY_AUTHORIZATION_COMPILER_OUTPUT_REFRESH_PREFLIGHT_SLICE = [
+  ...EXPECTED_V0_6_42_EXACT_NEW_TRIAL_003_SENSITIVE_DATA_SCAN_PREFLIGHT_SLICE,
+  "docs/V0_6_43_EXACT_NEW_TRIAL_003_DAILY_NOTE_VCP_MEMORY_AUTHORIZATION_COMPILER_OUTPUT_REFRESH_PREFLIGHT.md",
+  "reports/visual_asset_eval_dry_run/v0_6_43_exact_new_trial_003_daily_note_vcp_memory_authorization_compiler_output_refresh_preflight.json",
+  "scripts/validate_exact_new_trial_003_daily_note_vcp_memory_authorization_compiler_output_refresh_preflight.js",
+  "tests/schema_examples/exact_new_trial_003_daily_note_vcp_memory_authorization_compiler_output_refresh_preflight.example.json",
+  "tests/schema_examples/exact_new_trial_003_daily_note_vcp_memory_authorization_compiler_output_refresh_preflight_fail.example.json"
+].sort();
+
+const EXPECTED_V0_6_44_EXACT_NEW_TRIAL_003_EXACT_ALLOWED_MEMORY_TARGETS_PACKAGE_SLICE = [
+  ...EXPECTED_V0_6_43_EXACT_NEW_TRIAL_003_DAILY_NOTE_VCP_MEMORY_AUTHORIZATION_COMPILER_OUTPUT_REFRESH_PREFLIGHT_SLICE,
+  "docs/V0_6_44_EXACT_NEW_TRIAL_003_EXACT_ALLOWED_MEMORY_TARGETS_PACKAGE.md",
+  "reports/memory_target_packages/v0_3_3_exact_new_trial_003_shot_2_exact_allowed_memory_targets.json",
+  "reports/visual_asset_eval_dry_run/v0_6_44_exact_new_trial_003_exact_allowed_memory_targets_package.json",
+  "scripts/validate_exact_new_trial_003_exact_allowed_memory_targets_package.js",
+  "tests/schema_examples/exact_new_trial_003_exact_allowed_memory_targets_package.example.json",
+  "tests/schema_examples/exact_new_trial_003_exact_allowed_memory_targets_package_fail.example.json"
+].sort();
+
+const EXPECTED_V0_6_45_EXACT_NEW_TRIAL_003_DAILY_NOTE_VCP_MEMORY_WRITE_AUTHORIZATION_PACKAGE_DRAFT_SLICE = [
+  ...EXPECTED_V0_6_44_EXACT_NEW_TRIAL_003_EXACT_ALLOWED_MEMORY_TARGETS_PACKAGE_SLICE,
+  "docs/V0_6_45_EXACT_NEW_TRIAL_003_DAILY_NOTE_VCP_MEMORY_WRITE_AUTHORIZATION_PACKAGE_DRAFT.md",
+  "reports/memory_write_authorization/v0_3_3_exact_new_trial_003_shot_2_daily_note_vcp_memory_write_authorization_package_draft.json",
+  "reports/visual_asset_eval_dry_run/v0_6_45_exact_new_trial_003_daily_note_vcp_memory_write_authorization_package_draft.json",
+  "scripts/validate_exact_new_trial_003_daily_note_vcp_memory_write_authorization_package_draft.js",
+  "tests/schema_examples/exact_new_trial_003_daily_note_vcp_memory_write_authorization_package_draft.example.json",
+  "tests/schema_examples/exact_new_trial_003_daily_note_vcp_memory_write_authorization_package_draft_fail.example.json"
+].sort();
+
+const EXPECTED_V0_6_46_EXACT_NEW_TRIAL_003_DAILY_NOTE_VCP_MEMORY_WRITE_EXECUTION_PREFLIGHT_SLICE = [
+  ...EXPECTED_V0_6_45_EXACT_NEW_TRIAL_003_DAILY_NOTE_VCP_MEMORY_WRITE_AUTHORIZATION_PACKAGE_DRAFT_SLICE,
+  "docs/V0_6_46_EXACT_NEW_TRIAL_003_DAILY_NOTE_VCP_MEMORY_WRITE_EXECUTION_PREFLIGHT.md",
+  "reports/visual_asset_eval_dry_run/v0_6_46_exact_new_trial_003_daily_note_vcp_memory_write_execution_preflight.json",
+  "scripts/validate_exact_new_trial_003_daily_note_vcp_memory_write_execution_preflight.js",
+  "tests/schema_examples/exact_new_trial_003_daily_note_vcp_memory_write_execution_preflight.example.json",
+  "tests/schema_examples/exact_new_trial_003_daily_note_vcp_memory_write_execution_preflight_fail.example.json"
+].sort();
+
+const EXPECTED_V0_6_47_EXACT_NEW_TRIAL_003_DAILY_NOTE_VCP_MEMORY_WRITE_PAYLOAD_REFRESH_PACKAGE_SLICE = [
+  ...EXPECTED_V0_6_46_EXACT_NEW_TRIAL_003_DAILY_NOTE_VCP_MEMORY_WRITE_EXECUTION_PREFLIGHT_SLICE,
+  "docs/V0_6_47_EXACT_NEW_TRIAL_003_DAILY_NOTE_VCP_MEMORY_WRITE_PAYLOAD_REFRESH_PACKAGE.md",
+  "reports/memory_write_payloads/v0_3_3_exact_new_trial_003_shot_2_daily_note_vcp_memory_write_payload_refresh_package.json",
+  "reports/visual_asset_eval_dry_run/v0_6_47_exact_new_trial_003_daily_note_vcp_memory_write_payload_refresh_package.json",
+  "scripts/validate_exact_new_trial_003_daily_note_vcp_memory_write_payload_refresh_package.js",
+  "tests/schema_examples/exact_new_trial_003_daily_note_vcp_memory_write_payload_refresh_package.example.json",
+  "tests/schema_examples/exact_new_trial_003_daily_note_vcp_memory_write_payload_refresh_package_fail.example.json"
+].sort();
+
+const EXPECTED_V0_6_48_EXACT_NEW_TRIAL_003_DAILY_NOTE_VCP_MEMORY_WRITE_RECEIPT_CONTRACT_SLICE = [
+  ...EXPECTED_V0_6_47_EXACT_NEW_TRIAL_003_DAILY_NOTE_VCP_MEMORY_WRITE_PAYLOAD_REFRESH_PACKAGE_SLICE,
+  "docs/V0_6_48_EXACT_NEW_TRIAL_003_DAILY_NOTE_VCP_MEMORY_WRITE_RECEIPT_CONTRACT.md",
+  "reports/memory_write_receipts/v0_3_3_exact_new_trial_003_shot_2_daily_note_vcp_memory_write_receipt_contract.json",
+  "reports/visual_asset_eval_dry_run/v0_6_48_exact_new_trial_003_daily_note_vcp_memory_write_receipt_contract.json",
+  "scripts/validate_exact_new_trial_003_daily_note_vcp_memory_write_receipt_contract.js",
+  "tests/schema_examples/exact_new_trial_003_daily_note_vcp_memory_write_receipt_contract.example.json",
+  "tests/schema_examples/exact_new_trial_003_daily_note_vcp_memory_write_receipt_contract_fail.example.json"
+].sort();
+
+const EXPECTED_V0_6_49_EXACT_NEW_TRIAL_003_DAILY_NOTE_VCP_MEMORY_WRITE_REGISTRY_CONTRACT_SLICE = [
+  ...EXPECTED_V0_6_48_EXACT_NEW_TRIAL_003_DAILY_NOTE_VCP_MEMORY_WRITE_RECEIPT_CONTRACT_SLICE,
+  "docs/V0_6_49_EXACT_NEW_TRIAL_003_DAILY_NOTE_VCP_MEMORY_WRITE_REGISTRY_CONTRACT.md",
+  "reports/memory_write_receipts/v0_3_3_exact_new_trial_003_shot_2_daily_note_vcp_memory_write_registry_contract.json",
+  "reports/visual_asset_eval_dry_run/v0_6_49_exact_new_trial_003_daily_note_vcp_memory_write_registry_contract.json",
+  "scripts/validate_exact_new_trial_003_daily_note_vcp_memory_write_registry_contract.js",
+  "tests/schema_examples/exact_new_trial_003_daily_note_vcp_memory_write_registry_contract.example.json",
+  "tests/schema_examples/exact_new_trial_003_daily_note_vcp_memory_write_registry_contract_fail.example.json"
+].sort();
+
+const EXPECTED_V0_6_50_EXACT_NEW_TRIAL_003_DAILY_NOTE_VCP_MEMORY_WRITE_GO_NO_GO_CHECKPOINT_SLICE = [
+  ...EXPECTED_V0_6_49_EXACT_NEW_TRIAL_003_DAILY_NOTE_VCP_MEMORY_WRITE_REGISTRY_CONTRACT_SLICE,
+  "docs/V0_6_50_EXACT_NEW_TRIAL_003_DAILY_NOTE_VCP_MEMORY_WRITE_GO_NO_GO_CHECKPOINT.md",
+  "reports/memory_write_receipts/v0_3_3_exact_new_trial_003_shot_2_daily_note_vcp_memory_write_go_no_go_checkpoint.json",
+  "reports/visual_asset_eval_dry_run/v0_6_50_exact_new_trial_003_daily_note_vcp_memory_write_go_no_go_checkpoint.json",
+  "scripts/validate_exact_new_trial_003_daily_note_vcp_memory_write_go_no_go_checkpoint.js",
+  "tests/schema_examples/exact_new_trial_003_daily_note_vcp_memory_write_go_no_go_checkpoint.example.json",
+  "tests/schema_examples/exact_new_trial_003_daily_note_vcp_memory_write_go_no_go_checkpoint_fail.example.json"
+].sort();
+
+const EXPECTED_V0_6_51_EXACT_NEW_TRIAL_003_WORKFLOW_PREREQUISITE_RECONCILIATION_PACKET_SLICE = [
+  ...EXPECTED_V0_6_50_EXACT_NEW_TRIAL_003_DAILY_NOTE_VCP_MEMORY_WRITE_GO_NO_GO_CHECKPOINT_SLICE,
+  "docs/V0_6_51_EXACT_NEW_TRIAL_003_WORKFLOW_PREREQUISITE_RECONCILIATION_PACKET.md",
+  "reports/memory_write_receipts/v0_3_3_exact_new_trial_003_shot_2_workflow_prerequisite_reconciliation_packet.json",
+  "reports/visual_asset_eval_dry_run/v0_6_51_exact_new_trial_003_workflow_prerequisite_reconciliation_packet.json",
+  "scripts/validate_exact_new_trial_003_workflow_prerequisite_reconciliation_packet.js",
+  "tests/schema_examples/exact_new_trial_003_workflow_prerequisite_reconciliation_packet.example.json",
+  "tests/schema_examples/exact_new_trial_003_workflow_prerequisite_reconciliation_packet_fail.example.json"
+].sort();
+
+const EXPECTED_V0_6_52_EXACT_NEW_TRIAL_003_FORMAL_HUMAN_APPROVAL_EVIDENCE_CAPTURE_PACKET_SLICE = [
+  ...EXPECTED_V0_6_51_EXACT_NEW_TRIAL_003_WORKFLOW_PREREQUISITE_RECONCILIATION_PACKET_SLICE,
+  "docs/V0_6_52_EXACT_NEW_TRIAL_003_FORMAL_HUMAN_APPROVAL_EVIDENCE_CAPTURE_PACKET.md",
+  "reports/human_approval_evidence/v0_3_3_exact_new_trial_003_shot_2_formal_human_approval_evidence_capture_packet.json",
+  "reports/visual_asset_eval_dry_run/v0_6_52_exact_new_trial_003_formal_human_approval_evidence_capture_packet.json",
+  "scripts/validate_exact_new_trial_003_formal_human_approval_evidence_capture_packet.js",
+  "tests/schema_examples/exact_new_trial_003_formal_human_approval_evidence_capture_packet.example.json",
+  "tests/schema_examples/exact_new_trial_003_formal_human_approval_evidence_capture_packet_fail.example.json"
+].sort();
+
+const EXPECTED_V0_6_53_EXACT_NEW_TRIAL_003_FORMAL_HUMAN_APPROVAL_CAPTURE_SURFACE_STATIC_PANEL_SLICE = [
+  ...EXPECTED_V0_6_52_EXACT_NEW_TRIAL_003_FORMAL_HUMAN_APPROVAL_EVIDENCE_CAPTURE_PACKET_SLICE,
+  "docs/V0_6_53_EXACT_NEW_TRIAL_003_FORMAL_HUMAN_APPROVAL_CAPTURE_SURFACE_STATIC_PANEL.md",
+  "reports/visual_asset_eval_dry_run/v0_6_53_exact_new_trial_003_formal_human_approval_capture_surface_static_panel.json",
+  "review_console/static_prototype/app.js",
+  "review_console/static_prototype/index.html",
+  "review_console/static_prototype/mock_data.js",
+  "review_console/static_prototype/styles.css",
+  "scripts/validate_exact_new_trial_003_formal_human_approval_capture_surface_static_panel.js",
+  "tests/schema_examples/exact_new_trial_003_formal_human_approval_capture_surface_static_panel.example.json",
+  "tests/schema_examples/exact_new_trial_003_formal_human_approval_capture_surface_static_panel_fail.example.json"
+].sort();
+
+const EXPECTED_V0_6_54_EXACT_NEW_TRIAL_003_FORMAL_HUMAN_APPROVAL_EVIDENCE_INGESTION_PACKET_SLICE = [
+  ...EXPECTED_V0_6_53_EXACT_NEW_TRIAL_003_FORMAL_HUMAN_APPROVAL_CAPTURE_SURFACE_STATIC_PANEL_SLICE,
+  "docs/V0_6_54_EXACT_NEW_TRIAL_003_FORMAL_HUMAN_APPROVAL_EVIDENCE_INGESTION_PACKET.md",
+  "reports/human_approval_evidence/v0_3_3_exact_new_trial_003_shot_2_formal_human_approval_evidence_ingestion_packet.json",
+  "reports/visual_asset_eval_dry_run/v0_6_54_exact_new_trial_003_formal_human_approval_evidence_ingestion_packet.json",
+  "scripts/validate_exact_new_trial_003_formal_human_approval_evidence_ingestion_packet.js",
+  "tests/schema_examples/exact_new_trial_003_formal_human_approval_evidence_ingestion_packet.example.json",
+  "tests/schema_examples/exact_new_trial_003_formal_human_approval_evidence_ingestion_packet_fail.example.json"
+].sort();
+
+const EXPECTED_V0_6_55_EXACT_NEW_TRIAL_003_USER_SUBMITTED_FORMAL_HUMAN_APPROVAL_EVIDENCE_CAPTURE_SLICE = [
+  ...EXPECTED_V0_6_54_EXACT_NEW_TRIAL_003_FORMAL_HUMAN_APPROVAL_EVIDENCE_INGESTION_PACKET_SLICE,
+  "docs/V0_6_55_EXACT_NEW_TRIAL_003_USER_SUBMITTED_FORMAL_HUMAN_APPROVAL_EVIDENCE_CAPTURE.md",
+  "reports/human_approval_evidence/v0_3_3_exact_new_trial_003_shot_2_user_submitted_formal_human_approval_evidence.json",
+  "reports/visual_asset_eval_dry_run/v0_6_55_exact_new_trial_003_user_submitted_formal_human_approval_evidence_capture.json",
+  "scripts/validate_exact_new_trial_003_user_submitted_formal_human_approval_evidence_capture.js",
+  "tests/schema_examples/exact_new_trial_003_user_submitted_formal_human_approval_evidence_capture.example.json",
+  "tests/schema_examples/exact_new_trial_003_user_submitted_formal_human_approval_evidence_capture_fail.example.json"
+].sort();
+
+const EXPECTED_V0_6_56_EXACT_NEW_TRIAL_003_ACCEPTED_SAMPLES_METADATA_REGISTRATION_SLICE = [
+  ...EXPECTED_V0_6_55_EXACT_NEW_TRIAL_003_USER_SUBMITTED_FORMAL_HUMAN_APPROVAL_EVIDENCE_CAPTURE_SLICE,
+  "accepted_samples/accepted_sample_registry.yaml",
+  "accepted_samples/categories/fashion_lookbook_portrait.yaml",
+  "docs/V0_6_56_EXACT_NEW_TRIAL_003_ACCEPTED_SAMPLES_METADATA_REGISTRATION.md",
+  "docs/v14_142_multi_accepted_sample_matrix.md",
+  "docs/v14_160_two_month_product_capability_closeout.md",
+  "docs/v14_212_six_month_goal_prompt_to_artifact_completion_audit.md",
+  "reports/visual_asset_eval_dry_run/v0_6_56_exact_new_trial_003_accepted_samples_metadata_registration.json",
+  "schemas/two_month_product_capability_closeout.schema.yaml",
+  "scripts/validate_exact_new_trial_003_accepted_samples_metadata_registration.js",
+  "scripts/validate_v14_131_real_artifact_validation_and_accepted_sample_recoverability.js",
+  "scripts/validate_v14_142_multi_accepted_sample_matrix.js",
+  "scripts/validate_v14_143_import_review_registry_schema_hardening.js",
+  "scripts/validate_v14_160_two_month_product_capability_closeout.js",
+  "scripts/validate_v14_212_six_month_goal_prompt_to_artifact_completion_audit.js",
+  "scripts/validate_v7_32_accepted_sample_registry_update.js",
+  "tests/schema_examples/exact_new_trial_003_accepted_samples_metadata_registration.example.json",
+  "tests/schema_examples/exact_new_trial_003_accepted_samples_metadata_registration_fail.example.json",
+  "tests/schema_examples/v14_160_two_month_product_capability_closeout.example.yaml",
+  "tests/schema_examples/v14_212_six_month_goal_prompt_to_artifact_completion_audit.example.json"
+].sort();
+
+const EXPECTED_V0_6_57_EXACT_NEW_TRIAL_003_DURABLE_ARCHIVE_METADATA_PREFLIGHT_AFTER_ACCEPTED_SAMPLE_REGISTRATION_SLICE = [
+  ...EXPECTED_V0_6_56_EXACT_NEW_TRIAL_003_ACCEPTED_SAMPLES_METADATA_REGISTRATION_SLICE,
+  "docs/V0_6_57_EXACT_NEW_TRIAL_003_DURABLE_ARCHIVE_METADATA_PREFLIGHT_AFTER_ACCEPTED_SAMPLE_REGISTRATION.md",
+  "reports/visual_asset_eval_dry_run/v0_6_57_exact_new_trial_003_durable_archive_metadata_preflight_after_accepted_sample_registration.json",
+  "scripts/validate_exact_new_trial_003_durable_archive_metadata_preflight_after_accepted_sample_registration.js",
+  "tests/schema_examples/exact_new_trial_003_durable_archive_metadata_preflight_after_accepted_sample_registration.example.json",
+  "tests/schema_examples/exact_new_trial_003_durable_archive_metadata_preflight_after_accepted_sample_registration_fail.example.json"
+].sort();
+
+const EXPECTED_V0_6_58_EXACT_NEW_TRIAL_003_DURABLE_ARCHIVE_WRITE_AUTHORIZATION_PACKAGE_AFTER_METADATA_PREFLIGHT_SLICE = [
+  ...EXPECTED_V0_6_57_EXACT_NEW_TRIAL_003_DURABLE_ARCHIVE_METADATA_PREFLIGHT_AFTER_ACCEPTED_SAMPLE_REGISTRATION_SLICE,
+  "docs/V0_6_58_EXACT_NEW_TRIAL_003_DURABLE_ARCHIVE_WRITE_AUTHORIZATION_PACKAGE_AFTER_METADATA_PREFLIGHT.md",
+  "reports/visual_asset_eval_dry_run/v0_6_58_exact_new_trial_003_durable_archive_write_authorization_package_after_metadata_preflight.json",
+  "scripts/validate_exact_new_trial_003_durable_archive_write_authorization_package_after_metadata_preflight.js",
+  "tests/schema_examples/exact_new_trial_003_durable_archive_write_authorization_package_after_metadata_preflight.example.json",
+  "tests/schema_examples/exact_new_trial_003_durable_archive_write_authorization_package_after_metadata_preflight_fail.example.json"
+].sort();
+
 const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "governance_tooling_maintenance_slice_v1",
@@ -1392,6 +2112,142 @@ const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "v0_6_24_exact_new_trial_3shot_stability_preflight_slice",
     files: EXPECTED_V0_6_24_EXACT_NEW_TRIAL_3SHOT_STABILITY_PREFLIGHT_SLICE
+  },
+  {
+    id: "v0_6_25_exact_new_trial_artifact_persistence_truth_review_slice",
+    files: EXPECTED_V0_6_25_EXACT_NEW_TRIAL_ARTIFACT_PERSISTENCE_TRUTH_REVIEW_SLICE
+  },
+  {
+    id: "v0_6_26_exact_new_trial_local_persistence_repair_preflight_slice",
+    files: EXPECTED_V0_6_26_EXACT_NEW_TRIAL_LOCAL_PERSISTENCE_REPAIR_PREFLIGHT_SLICE
+  },
+  {
+    id: "v0_6_27_exact_new_trial_003_shot_1_execution_closeout_slice",
+    files: EXPECTED_V0_6_27_EXACT_NEW_TRIAL_003_SHOT_1_EXECUTION_CLOSEOUT_SLICE
+  },
+  {
+    id: "v0_6_28_exact_new_trial_003_shot_2_pre_call_payload_capture_preflight_slice",
+    files: EXPECTED_V0_6_28_EXACT_NEW_TRIAL_003_SHOT_2_PRE_CALL_PAYLOAD_CAPTURE_PREFLIGHT_SLICE
+  },
+  {
+    id: "v0_6_29_exact_new_trial_003_shot_2_execution_closeout_slice",
+    files: EXPECTED_V0_6_29_EXACT_NEW_TRIAL_003_SHOT_2_EXECUTION_CLOSEOUT_SLICE
+  },
+  {
+    id: "v0_6_30_exact_new_trial_003_shot_3_pre_call_payload_capture_preflight_slice",
+    files: EXPECTED_V0_6_30_EXACT_NEW_TRIAL_003_SHOT_3_PRE_CALL_PAYLOAD_CAPTURE_PREFLIGHT_SLICE
+  },
+  {
+    id: "v0_6_31_exact_new_trial_003_shot_3_execution_closeout_slice",
+    files: EXPECTED_V0_6_31_EXACT_NEW_TRIAL_003_SHOT_3_EXECUTION_CLOSEOUT_SLICE
+  },
+  {
+    id: "v0_6_32_exact_new_trial_003_human_review_slice",
+    files: EXPECTED_V0_6_32_EXACT_NEW_TRIAL_003_HUMAN_REVIEW_SLICE
+  },
+  {
+    id: "v0_6_33_exact_new_trial_003_selected_candidate_human_approval_intake_package_slice",
+    files: EXPECTED_V0_6_33_EXACT_NEW_TRIAL_003_SELECTED_CANDIDATE_HUMAN_APPROVAL_INTAKE_PACKAGE_SLICE
+  },
+  {
+    id: "v0_6_34_exact_new_trial_003_selected_candidate_post_approval_gate_alignment_slice",
+    files: EXPECTED_V0_6_34_EXACT_NEW_TRIAL_003_SELECTED_CANDIDATE_POST_APPROVAL_GATE_ALIGNMENT_SLICE
+  },
+  {
+    id: "v0_6_35_exact_new_trial_003_post_approval_registration_preflight_draft_slice",
+    files: EXPECTED_V0_6_35_EXACT_NEW_TRIAL_003_POST_APPROVAL_REGISTRATION_PREFLIGHT_DRAFT_SLICE
+  },
+  {
+    id: "v0_6_36_exact_new_trial_003_accepted_samples_registration_authorization_package_draft_slice",
+    files: EXPECTED_V0_6_36_EXACT_NEW_TRIAL_003_ACCEPTED_SAMPLES_REGISTRATION_AUTHORIZATION_PACKAGE_DRAFT_SLICE
+  },
+  {
+    id: "v0_6_37_exact_new_trial_003_accepted_samples_registration_execution_preflight_slice",
+    files: EXPECTED_V0_6_37_EXACT_NEW_TRIAL_003_ACCEPTED_SAMPLES_REGISTRATION_EXECUTION_PREFLIGHT_SLICE
+  },
+  {
+    id: "v0_6_38_exact_new_trial_003_durable_archive_authorization_compiler_output_preflight_slice",
+    files: EXPECTED_V0_6_38_EXACT_NEW_TRIAL_003_DURABLE_ARCHIVE_AUTHORIZATION_COMPILER_OUTPUT_PREFLIGHT_SLICE
+  },
+  {
+    id: "v0_6_39_exact_new_trial_003_production_candidate_authorization_compiler_output_preflight_slice",
+    files: EXPECTED_V0_6_39_EXACT_NEW_TRIAL_003_PRODUCTION_CANDIDATE_AUTHORIZATION_COMPILER_OUTPUT_PREFLIGHT_SLICE
+  },
+  {
+    id: "v0_6_40_exact_new_trial_003_daily_note_vcp_memory_authorization_compiler_output_preflight_slice",
+    files: EXPECTED_V0_6_40_EXACT_NEW_TRIAL_003_DAILY_NOTE_VCP_MEMORY_AUTHORIZATION_COMPILER_OUTPUT_PREFLIGHT_SLICE
+  },
+  {
+    id: "v0_6_41_exact_new_trial_003_memory_delta_draft_package_slice",
+    files: EXPECTED_V0_6_41_EXACT_NEW_TRIAL_003_MEMORY_DELTA_DRAFT_PACKAGE_SLICE
+  },
+  {
+    id: "v0_6_42_exact_new_trial_003_sensitive_data_scan_preflight_slice",
+    files: EXPECTED_V0_6_42_EXACT_NEW_TRIAL_003_SENSITIVE_DATA_SCAN_PREFLIGHT_SLICE
+  },
+  {
+    id: "v0_6_43_exact_new_trial_003_daily_note_vcp_memory_authorization_compiler_output_refresh_preflight_slice",
+    files: EXPECTED_V0_6_43_EXACT_NEW_TRIAL_003_DAILY_NOTE_VCP_MEMORY_AUTHORIZATION_COMPILER_OUTPUT_REFRESH_PREFLIGHT_SLICE
+  },
+  {
+    id: "v0_6_44_exact_new_trial_003_exact_allowed_memory_targets_package_slice",
+    files: EXPECTED_V0_6_44_EXACT_NEW_TRIAL_003_EXACT_ALLOWED_MEMORY_TARGETS_PACKAGE_SLICE
+  },
+  {
+    id: "v0_6_45_exact_new_trial_003_daily_note_vcp_memory_write_authorization_package_draft_slice",
+    files: EXPECTED_V0_6_45_EXACT_NEW_TRIAL_003_DAILY_NOTE_VCP_MEMORY_WRITE_AUTHORIZATION_PACKAGE_DRAFT_SLICE
+  },
+  {
+    id: "v0_6_46_exact_new_trial_003_daily_note_vcp_memory_write_execution_preflight_slice",
+    files: EXPECTED_V0_6_46_EXACT_NEW_TRIAL_003_DAILY_NOTE_VCP_MEMORY_WRITE_EXECUTION_PREFLIGHT_SLICE
+  },
+  {
+    id: "v0_6_47_exact_new_trial_003_daily_note_vcp_memory_write_payload_refresh_package_slice",
+    files: EXPECTED_V0_6_47_EXACT_NEW_TRIAL_003_DAILY_NOTE_VCP_MEMORY_WRITE_PAYLOAD_REFRESH_PACKAGE_SLICE
+  },
+  {
+    id: "v0_6_48_exact_new_trial_003_daily_note_vcp_memory_write_receipt_contract_slice",
+    files: EXPECTED_V0_6_48_EXACT_NEW_TRIAL_003_DAILY_NOTE_VCP_MEMORY_WRITE_RECEIPT_CONTRACT_SLICE
+  },
+  {
+    id: "v0_6_49_exact_new_trial_003_daily_note_vcp_memory_write_registry_contract_slice",
+    files: EXPECTED_V0_6_49_EXACT_NEW_TRIAL_003_DAILY_NOTE_VCP_MEMORY_WRITE_REGISTRY_CONTRACT_SLICE
+  },
+  {
+    id: "v0_6_50_exact_new_trial_003_daily_note_vcp_memory_write_go_no_go_checkpoint_slice",
+    files: EXPECTED_V0_6_50_EXACT_NEW_TRIAL_003_DAILY_NOTE_VCP_MEMORY_WRITE_GO_NO_GO_CHECKPOINT_SLICE
+  },
+  {
+    id: "v0_6_51_exact_new_trial_003_workflow_prerequisite_reconciliation_packet_slice",
+    files: EXPECTED_V0_6_51_EXACT_NEW_TRIAL_003_WORKFLOW_PREREQUISITE_RECONCILIATION_PACKET_SLICE
+  },
+  {
+    id: "v0_6_52_exact_new_trial_003_formal_human_approval_evidence_capture_packet_slice",
+    files: EXPECTED_V0_6_52_EXACT_NEW_TRIAL_003_FORMAL_HUMAN_APPROVAL_EVIDENCE_CAPTURE_PACKET_SLICE
+  },
+  {
+    id: "v0_6_53_exact_new_trial_003_formal_human_approval_capture_surface_static_panel_slice",
+    files: EXPECTED_V0_6_53_EXACT_NEW_TRIAL_003_FORMAL_HUMAN_APPROVAL_CAPTURE_SURFACE_STATIC_PANEL_SLICE
+  },
+  {
+    id: "v0_6_54_exact_new_trial_003_formal_human_approval_evidence_ingestion_packet_slice",
+    files: EXPECTED_V0_6_54_EXACT_NEW_TRIAL_003_FORMAL_HUMAN_APPROVAL_EVIDENCE_INGESTION_PACKET_SLICE
+  },
+  {
+    id: "v0_6_55_exact_new_trial_003_user_submitted_formal_human_approval_evidence_capture_slice",
+    files: EXPECTED_V0_6_55_EXACT_NEW_TRIAL_003_USER_SUBMITTED_FORMAL_HUMAN_APPROVAL_EVIDENCE_CAPTURE_SLICE
+  },
+  {
+    id: "v0_6_56_exact_new_trial_003_accepted_samples_metadata_registration_slice",
+    files: EXPECTED_V0_6_56_EXACT_NEW_TRIAL_003_ACCEPTED_SAMPLES_METADATA_REGISTRATION_SLICE
+  },
+  {
+    id: "v0_6_57_exact_new_trial_003_durable_archive_metadata_preflight_after_accepted_sample_registration_slice",
+    files: EXPECTED_V0_6_57_EXACT_NEW_TRIAL_003_DURABLE_ARCHIVE_METADATA_PREFLIGHT_AFTER_ACCEPTED_SAMPLE_REGISTRATION_SLICE
+  },
+  {
+    id: "v0_6_58_exact_new_trial_003_durable_archive_write_authorization_package_after_metadata_preflight_slice",
+    files: EXPECTED_V0_6_58_EXACT_NEW_TRIAL_003_DURABLE_ARCHIVE_WRITE_AUTHORIZATION_PACKAGE_AFTER_METADATA_PREFLIGHT_SLICE
   }
 ];
 
@@ -1801,6 +2657,46 @@ function governanceToolingMaintenanceSliceSelfCheck() {
         === "v0_6_12_to_v0_6_23_single_generation_with_payload_trace_slice"
     },
     {
+      check: "exact_slice_matches_v0_6_51_exact_new_trial_003_workflow_prerequisite_reconciliation_packet",
+      passed: findMatchingGovernanceToolingSlice(EXPECTED_V0_6_51_EXACT_NEW_TRIAL_003_WORKFLOW_PREREQUISITE_RECONCILIATION_PACKET_SLICE)?.id
+        === "v0_6_51_exact_new_trial_003_workflow_prerequisite_reconciliation_packet_slice"
+    },
+    {
+      check: "exact_slice_matches_v0_6_52_exact_new_trial_003_formal_human_approval_evidence_capture_packet",
+      passed: findMatchingGovernanceToolingSlice(EXPECTED_V0_6_52_EXACT_NEW_TRIAL_003_FORMAL_HUMAN_APPROVAL_EVIDENCE_CAPTURE_PACKET_SLICE)?.id
+        === "v0_6_52_exact_new_trial_003_formal_human_approval_evidence_capture_packet_slice"
+    },
+    {
+      check: "exact_slice_matches_v0_6_53_exact_new_trial_003_formal_human_approval_capture_surface_static_panel",
+      passed: findMatchingGovernanceToolingSlice(EXPECTED_V0_6_53_EXACT_NEW_TRIAL_003_FORMAL_HUMAN_APPROVAL_CAPTURE_SURFACE_STATIC_PANEL_SLICE)?.id
+        === "v0_6_53_exact_new_trial_003_formal_human_approval_capture_surface_static_panel_slice"
+    },
+    {
+      check: "exact_slice_matches_v0_6_54_exact_new_trial_003_formal_human_approval_evidence_ingestion_packet",
+      passed: findMatchingGovernanceToolingSlice(EXPECTED_V0_6_54_EXACT_NEW_TRIAL_003_FORMAL_HUMAN_APPROVAL_EVIDENCE_INGESTION_PACKET_SLICE)?.id
+        === "v0_6_54_exact_new_trial_003_formal_human_approval_evidence_ingestion_packet_slice"
+    },
+    {
+      check: "exact_slice_matches_v0_6_55_exact_new_trial_003_user_submitted_formal_human_approval_evidence_capture",
+      passed: findMatchingGovernanceToolingSlice(EXPECTED_V0_6_55_EXACT_NEW_TRIAL_003_USER_SUBMITTED_FORMAL_HUMAN_APPROVAL_EVIDENCE_CAPTURE_SLICE)?.id
+        === "v0_6_55_exact_new_trial_003_user_submitted_formal_human_approval_evidence_capture_slice"
+    },
+    {
+      check: "exact_slice_matches_v0_6_56_exact_new_trial_003_accepted_samples_metadata_registration",
+      passed: findMatchingGovernanceToolingSlice(EXPECTED_V0_6_56_EXACT_NEW_TRIAL_003_ACCEPTED_SAMPLES_METADATA_REGISTRATION_SLICE)?.id
+        === "v0_6_56_exact_new_trial_003_accepted_samples_metadata_registration_slice"
+    },
+    {
+      check: "exact_slice_matches_v0_6_57_exact_new_trial_003_durable_archive_metadata_preflight_after_accepted_sample_registration",
+      passed: findMatchingGovernanceToolingSlice(EXPECTED_V0_6_57_EXACT_NEW_TRIAL_003_DURABLE_ARCHIVE_METADATA_PREFLIGHT_AFTER_ACCEPTED_SAMPLE_REGISTRATION_SLICE)?.id
+        === "v0_6_57_exact_new_trial_003_durable_archive_metadata_preflight_after_accepted_sample_registration_slice"
+    },
+    {
+      check: "exact_slice_matches_v0_6_58_exact_new_trial_003_durable_archive_write_authorization_package_after_metadata_preflight",
+      passed: findMatchingGovernanceToolingSlice(EXPECTED_V0_6_58_EXACT_NEW_TRIAL_003_DURABLE_ARCHIVE_WRITE_AUTHORIZATION_PACKAGE_AFTER_METADATA_PREFLIGHT_SLICE)?.id
+        === "v0_6_58_exact_new_trial_003_durable_archive_write_authorization_package_after_metadata_preflight_slice"
+    },
+    {
       check: "exact_slice_rejects_missing_file",
       passed: findMatchingGovernanceToolingSlice(EXPECTED_GOVERNANCE_TOOLING_MAINTENANCE_SLICE.slice(1)) === null
     },
@@ -1893,6 +2789,18 @@ module.exports = {
   EXPECTED_V0_6_12_TO_V0_6_21_RAW_PROVIDER_PAYLOAD_CAPTURE_POLICY_SLICE,
   EXPECTED_V0_6_12_TO_V0_6_22_PROVIDER_PAYLOAD_EXTRACTION_PREFLIGHT_SLICE,
   EXPECTED_V0_6_12_TO_V0_6_23_SINGLE_GENERATION_WITH_PAYLOAD_TRACE_SLICE,
+  EXPECTED_V0_6_33_EXACT_NEW_TRIAL_003_SELECTED_CANDIDATE_HUMAN_APPROVAL_INTAKE_PACKAGE_SLICE,
+  EXPECTED_V0_6_34_EXACT_NEW_TRIAL_003_SELECTED_CANDIDATE_POST_APPROVAL_GATE_ALIGNMENT_SLICE,
+  EXPECTED_V0_6_35_EXACT_NEW_TRIAL_003_POST_APPROVAL_REGISTRATION_PREFLIGHT_DRAFT_SLICE,
+  EXPECTED_V0_6_50_EXACT_NEW_TRIAL_003_DAILY_NOTE_VCP_MEMORY_WRITE_GO_NO_GO_CHECKPOINT_SLICE,
+  EXPECTED_V0_6_51_EXACT_NEW_TRIAL_003_WORKFLOW_PREREQUISITE_RECONCILIATION_PACKET_SLICE,
+  EXPECTED_V0_6_52_EXACT_NEW_TRIAL_003_FORMAL_HUMAN_APPROVAL_EVIDENCE_CAPTURE_PACKET_SLICE,
+  EXPECTED_V0_6_53_EXACT_NEW_TRIAL_003_FORMAL_HUMAN_APPROVAL_CAPTURE_SURFACE_STATIC_PANEL_SLICE,
+  EXPECTED_V0_6_54_EXACT_NEW_TRIAL_003_FORMAL_HUMAN_APPROVAL_EVIDENCE_INGESTION_PACKET_SLICE,
+  EXPECTED_V0_6_55_EXACT_NEW_TRIAL_003_USER_SUBMITTED_FORMAL_HUMAN_APPROVAL_EVIDENCE_CAPTURE_SLICE,
+  EXPECTED_V0_6_56_EXACT_NEW_TRIAL_003_ACCEPTED_SAMPLES_METADATA_REGISTRATION_SLICE,
+  EXPECTED_V0_6_57_EXACT_NEW_TRIAL_003_DURABLE_ARCHIVE_METADATA_PREFLIGHT_AFTER_ACCEPTED_SAMPLE_REGISTRATION_SLICE,
+  EXPECTED_V0_6_58_EXACT_NEW_TRIAL_003_DURABLE_ARCHIVE_WRITE_AUTHORIZATION_PACKAGE_AFTER_METADATA_PREFLIGHT_SLICE,
   GOVERNANCE_TOOLING_ALLOWED_SLICES,
   buildGovernanceToolingMaintenanceSliceReport,
   fileAllowedInGovernanceToolingSlice,

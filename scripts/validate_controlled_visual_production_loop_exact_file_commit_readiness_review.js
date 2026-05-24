@@ -149,12 +149,56 @@ for (const forbidden of fixture.forbidden_path_families) {
       governanceToolingMaintenanceSliceReport.matched_slice_id === "v0_6_12_to_v0_6_20_failed_no_image_post_run_review_slice" ||
       governanceToolingMaintenanceSliceReport.matched_slice_id === "v0_6_12_to_v0_6_21_raw_provider_payload_capture_policy_slice" ||
       governanceToolingMaintenanceSliceReport.matched_slice_id === "v0_6_12_to_v0_6_22_provider_payload_extraction_preflight_slice" ||
-      governanceToolingMaintenanceSliceReport.matched_slice_id === "v0_6_12_to_v0_6_23_single_generation_with_payload_trace_slice"
+      governanceToolingMaintenanceSliceReport.matched_slice_id === "v0_6_12_to_v0_6_23_single_generation_with_payload_trace_slice" ||
+      governanceToolingMaintenanceSliceReport.matched_slice_id === "v0_6_27_exact_new_trial_003_shot_1_execution_closeout_slice" ||
+      governanceToolingMaintenanceSliceReport.matched_slice_id === "v0_6_28_exact_new_trial_003_shot_2_pre_call_payload_capture_preflight_slice" ||
+      governanceToolingMaintenanceSliceReport.matched_slice_id === "v0_6_29_exact_new_trial_003_shot_2_execution_closeout_slice" ||
+      governanceToolingMaintenanceSliceReport.matched_slice_id === "v0_6_30_exact_new_trial_003_shot_3_pre_call_payload_capture_preflight_slice" ||
+      governanceToolingMaintenanceSliceReport.matched_slice_id === "v0_6_31_exact_new_trial_003_shot_3_execution_closeout_slice" ||
+      governanceToolingMaintenanceSliceReport.matched_slice_id === "v0_6_32_exact_new_trial_003_human_review_slice" ||
+      governanceToolingMaintenanceSliceReport.matched_slice_id === "v0_6_33_exact_new_trial_003_selected_candidate_human_approval_intake_package_slice" ||
+      governanceToolingMaintenanceSliceReport.matched_slice_id === "v0_6_34_exact_new_trial_003_selected_candidate_post_approval_gate_alignment_slice" ||
+      governanceToolingMaintenanceSliceReport.matched_slice_id === "v0_6_35_exact_new_trial_003_post_approval_registration_preflight_draft_slice" ||
+      governanceToolingMaintenanceSliceReport.matched_slice_id === "v0_6_36_exact_new_trial_003_accepted_samples_registration_authorization_package_draft_slice" ||
+      governanceToolingMaintenanceSliceReport.matched_slice_id === "v0_6_37_exact_new_trial_003_accepted_samples_registration_execution_preflight_slice" ||
+      governanceToolingMaintenanceSliceReport.matched_slice_id === "v0_6_38_exact_new_trial_003_durable_archive_authorization_compiler_output_preflight_slice" ||
+      governanceToolingMaintenanceSliceReport.matched_slice_id === "v0_6_39_exact_new_trial_003_production_candidate_authorization_compiler_output_preflight_slice" ||
+      governanceToolingMaintenanceSliceReport.matched_slice_id === "v0_6_40_exact_new_trial_003_daily_note_vcp_memory_authorization_compiler_output_preflight_slice" ||
+      governanceToolingMaintenanceSliceReport.matched_slice_id === "v0_6_41_exact_new_trial_003_memory_delta_draft_package_slice" ||
+      governanceToolingMaintenanceSliceReport.matched_slice_id === "v0_6_42_exact_new_trial_003_sensitive_data_scan_preflight_slice" ||
+      governanceToolingMaintenanceSliceReport.matched_slice_id === "v0_6_43_exact_new_trial_003_daily_note_vcp_memory_authorization_compiler_output_refresh_preflight_slice" ||
+      governanceToolingMaintenanceSliceReport.matched_slice_id === "v0_6_44_exact_new_trial_003_exact_allowed_memory_targets_package_slice" ||
+      governanceToolingMaintenanceSliceReport.matched_slice_id === "v0_6_45_exact_new_trial_003_daily_note_vcp_memory_write_authorization_package_draft_slice" ||
+      governanceToolingMaintenanceSliceReport.matched_slice_id === "v0_6_46_exact_new_trial_003_daily_note_vcp_memory_write_execution_preflight_slice" ||
+      governanceToolingMaintenanceSliceReport.matched_slice_id === "v0_6_47_exact_new_trial_003_daily_note_vcp_memory_write_payload_refresh_package_slice" ||
+      governanceToolingMaintenanceSliceReport.matched_slice_id === "v0_6_48_exact_new_trial_003_daily_note_vcp_memory_write_receipt_contract_slice" ||
+      governanceToolingMaintenanceSliceReport.matched_slice_id === "v0_6_49_exact_new_trial_003_daily_note_vcp_memory_write_registry_contract_slice" ||
+      governanceToolingMaintenanceSliceReport.matched_slice_id === "v0_6_50_exact_new_trial_003_daily_note_vcp_memory_write_go_no_go_checkpoint_slice" ||
+      governanceToolingMaintenanceSliceReport.matched_slice_id === "v0_6_51_exact_new_trial_003_workflow_prerequisite_reconciliation_packet_slice" ||
+      governanceToolingMaintenanceSliceReport.matched_slice_id === "v0_6_52_exact_new_trial_003_formal_human_approval_evidence_capture_packet_slice" ||
+      governanceToolingMaintenanceSliceReport.matched_slice_id === "v0_6_53_exact_new_trial_003_formal_human_approval_capture_surface_static_panel_slice" ||
+      governanceToolingMaintenanceSliceReport.matched_slice_id === "v0_6_54_exact_new_trial_003_formal_human_approval_evidence_ingestion_packet_slice" ||
+      governanceToolingMaintenanceSliceReport.matched_slice_id === "v0_6_55_exact_new_trial_003_user_submitted_formal_human_approval_evidence_capture_slice" ||
+      governanceToolingMaintenanceSliceReport.matched_slice_id === "v0_6_56_exact_new_trial_003_accepted_samples_metadata_registration_slice" ||
+      governanceToolingMaintenanceSliceReport.matched_slice_id === "v0_6_57_exact_new_trial_003_durable_archive_metadata_preflight_after_accepted_sample_registration_slice" ||
+      governanceToolingMaintenanceSliceReport.matched_slice_id === "v0_6_58_exact_new_trial_003_durable_archive_write_authorization_package_after_metadata_preflight_slice"
     )
     && changedFiles
       .filter((file) => file.startsWith("runs/"))
       .every((file) => file.startsWith("runs/real_generation/") && file.endsWith("/generation_attempt_result.json"));
-  add(`forbidden_path_${forbidden}_untouched`, packageJsonAllowed || providerReceiptAttemptResultsAllowed || !changedFiles.some((file) => file === forbidden || file.startsWith(forbidden)));
+  const acceptedSamplesMetadataRegistrationAllowed = forbidden === "accepted_samples/"
+    && (
+      governanceToolingMaintenanceSliceReport.matched_slice_id === "v0_6_56_exact_new_trial_003_accepted_samples_metadata_registration_slice" ||
+      governanceToolingMaintenanceSliceReport.matched_slice_id === "v0_6_57_exact_new_trial_003_durable_archive_metadata_preflight_after_accepted_sample_registration_slice" ||
+      governanceToolingMaintenanceSliceReport.matched_slice_id === "v0_6_58_exact_new_trial_003_durable_archive_write_authorization_package_after_metadata_preflight_slice"
+    )
+    && changedFiles
+      .filter((file) => file.startsWith("accepted_samples/"))
+      .every((file) => (
+        file === "accepted_samples/accepted_sample_registry.yaml" ||
+        file === "accepted_samples/categories/fashion_lookbook_portrait.yaml"
+      ));
+  add(`forbidden_path_${forbidden}_untouched`, packageJsonAllowed || providerReceiptAttemptResultsAllowed || acceptedSamplesMetadataRegistrationAllowed || !changedFiles.some((file) => file === forbidden || file.startsWith(forbidden)));
 }
 
 for (const [key, expected] of Object.entries(fixture.guard)) {

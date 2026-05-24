@@ -50,7 +50,7 @@ function evaluateCloseout(input) {
     input.registrySampleCount >= 3 &&
     input.registryCategoryCount >= 3 &&
     input.localArtifactSampleCount >= 4 &&
-    input.fullRecoverableSampleCount === 3 &&
+    input.fullRecoverableSampleCount === 4 &&
     input.hardAcceptanceThreeFullSamplesMet === true &&
     input.remainingFullRecoverableSampleGap === 0;
   const goalNotOverclaimed = input.twoMonthGoalFullyComplete === false && input.updateGoalCalled === false;
@@ -110,10 +110,10 @@ for (const token of [
   "two_month_product_capability_closeout:",
   "execution_mode: local_closeout_only",
   "local_lifecycle_chain_completed_validated: true",
-  "registry_sample_count: 8",
+  "registry_sample_count: 9",
   "registry_category_count: 3",
-  "local_artifact_sample_count: 6",
-  "full_recoverable_sample_count: 3",
+  "local_artifact_sample_count: 9",
+  "full_recoverable_sample_count: 4",
   "hard_acceptance_three_full_samples_met: true",
   "remaining_full_recoverable_sample_gap: 0",
   "two_month_goal_fully_complete: false",
@@ -155,14 +155,14 @@ const observed = {
 };
 
 const matrixMigratedPending = v14_142?.migration_status === "legacy_runs_missing_git_preview_capsule_pending";
-addResult("observed_registry_sample_count_is_8_or_preview_capsule_pending", observed.registrySampleCount === 8 || matrixMigratedPending, `${observed.registrySampleCount}`);
+addResult("observed_registry_sample_count_is_9_or_preview_capsule_pending", observed.registrySampleCount === 9 || matrixMigratedPending, `${observed.registrySampleCount}`);
 addResult("observed_registry_category_count_is_3", observed.registryCategoryCount === 3, `${observed.registryCategoryCount}`);
 addResult(
   "observed_local_artifact_sample_count_is_at_least_6_or_preview_capsule_pending",
   observed.localArtifactSampleCount >= 6 || matrixMigratedPending,
   `${observed.localArtifactSampleCount}`,
 );
-addResult("observed_full_recoverable_sample_count_is_3_or_preview_capsule_pending", observed.fullRecoverableSampleCount === 3 || matrixMigratedPending, `${observed.fullRecoverableSampleCount}`);
+addResult("observed_full_recoverable_sample_count_is_4_or_preview_capsule_pending", observed.fullRecoverableSampleCount === 4 || matrixMigratedPending, `${observed.fullRecoverableSampleCount}`);
 addResult("observed_three_sample_hard_acceptance_met_or_preview_capsule_pending", observed.hardAcceptanceThreeFullSamplesMet === true || matrixMigratedPending);
 addResult("observed_remaining_full_sample_gap_is_0_or_preview_capsule_pending", observed.remainingFullRecoverableSampleGap === 0 || matrixMigratedPending, `${observed.remainingFullRecoverableSampleGap}`);
 
@@ -202,7 +202,7 @@ addResult("two_month_product_capability_closeout_evaluation_passes_or_preview_ca
 const localRecoverabilityOverclaimed = evaluateCloseout({ ...baseInput, twoMonthGoalFullyComplete: true });
 const skippedA5Complete = evaluateCloseout({ ...baseInput, skippedA5MarkedComplete: true });
 const runtimeClaim = evaluateCloseout({ ...baseInput, artifactRecoverabilityIsNotVcpRuntimeIntegration: false, vcpRuntimeIntegrationProven: true });
-const dashboardTokenProgress = evaluateCloseout({ ...baseInput, fullRecoverableSampleCount: 4, hardAcceptanceThreeFullSamplesMet: true, remainingFullRecoverableSampleGap: 0 });
+const dashboardTokenProgress = evaluateCloseout({ ...baseInput, fullRecoverableSampleCount: 3, hardAcceptanceThreeFullSamplesMet: true, remainingFullRecoverableSampleGap: 0 });
 const externalAction = evaluateCloseout({ ...baseInput, pluginCallPerformed: true });
 
 addResult("negative_case_local_recoverability_must_not_complete_two_month_goal", localRecoverabilityOverclaimed.passed === false && localRecoverabilityOverclaimed.goalNotOverclaimed === false);
@@ -215,7 +215,7 @@ for (const token of [
   "phase: v14_160_two_month_product_capability_closeout",
   "two_month_product_capability_closeout_created: true",
   "local_lifecycle_chain_completed_validated: true",
-  "full_recoverable_sample_count: 3",
+  "full_recoverable_sample_count: 4",
   "hard_acceptance_three_full_samples_met: true",
   "remaining_full_recoverable_sample_gap: 0",
   "two_month_goal_fully_complete: false",

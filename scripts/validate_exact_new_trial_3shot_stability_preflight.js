@@ -15,6 +15,11 @@ const schemaPath = "schemas/exact_new_trial_3shot_stability_preflight.schema.yam
 const reportPath = "reports/visual_asset_eval_dry_run/v0_6_24_exact_new_trial_3shot_stability_preflight.json";
 const passFixturePath = "tests/schema_examples/exact_new_trial_3shot_stability_preflight.example.json";
 const failFixturePath = "tests/schema_examples/exact_new_trial_3shot_stability_preflight_fail.json";
+const shot1CloseoutReportPath = "reports/visual_asset_eval_dry_run/v0_6_27_exact_new_trial_003_shot_1_execution_closeout.json";
+const shot2PreCallCapturePreflightReportPath = "reports/visual_asset_eval_dry_run/v0_6_28_exact_new_trial_003_shot_2_pre_call_payload_capture_preflight.json";
+const shot2CloseoutReportPath = "reports/visual_asset_eval_dry_run/v0_6_29_exact_new_trial_003_shot_2_execution_closeout.json";
+const shot3PreCallCapturePreflightReportPath = "reports/visual_asset_eval_dry_run/v0_6_30_exact_new_trial_003_shot_3_pre_call_payload_capture_preflight.json";
+const shot3CloseoutReportPath = "reports/visual_asset_eval_dry_run/v0_6_31_exact_new_trial_003_shot_3_execution_closeout.json";
 
 const expectedPrompt = "prompts/image_generation/safe_adult_editorial_portrait_v1.yaml";
 const expectedProviderRoute = "image_gen.imagegen";
@@ -95,6 +100,85 @@ function assertNotSource002(value, context) {
   assert(!value.includes("v0_3_3_exact_new_trial_002"), `${context} must not reuse or overwrite 002`);
 }
 
+function executedShotIds() {
+  const executed = new Set();
+
+  if (exists(shot1CloseoutReportPath)) {
+    const reportRoot = readJson(shot1CloseoutReportPath);
+    const report = reportRoot.exact_new_trial_003_shot_1_execution_closeout;
+    if (
+      report &&
+      report.phase === "v0_6_27_exact_new_trial_003_shot_1_execution_closeout" &&
+      report.attempt_id === "v0_3_3_exact_new_trial_003_shot_1" &&
+      report.protocol_compliance?.local_persistence_verification_satisfied === true
+    ) {
+      executed.add(report.attempt_id);
+    }
+  }
+
+  if (exists(shot2CloseoutReportPath)) {
+    const reportRoot = readJson(shot2CloseoutReportPath);
+    const report = reportRoot.exact_new_trial_003_shot_2_execution_closeout;
+    if (
+      report &&
+      report.phase === "v0_6_29_exact_new_trial_003_shot_2_execution_closeout" &&
+      report.attempt_id === "v0_3_3_exact_new_trial_003_shot_2" &&
+      report.protocol_compliance?.local_persistence_verification_satisfied === true
+    ) {
+      executed.add(report.attempt_id);
+    }
+  }
+
+  if (exists(shot3CloseoutReportPath)) {
+    const reportRoot = readJson(shot3CloseoutReportPath);
+    const report = reportRoot.exact_new_trial_003_shot_3_execution_closeout;
+    if (
+      report &&
+      report.phase === "v0_6_31_exact_new_trial_003_shot_3_execution_closeout" &&
+      report.attempt_id === "v0_3_3_exact_new_trial_003_shot_3" &&
+      report.protocol_compliance?.local_persistence_verification_satisfied === true
+    ) {
+      executed.add(report.attempt_id);
+    }
+  }
+
+  return executed;
+}
+
+function preCapturedShotIds() {
+  const captured = new Set();
+
+  if (exists(shot2PreCallCapturePreflightReportPath)) {
+    const reportRoot = readJson(shot2PreCallCapturePreflightReportPath);
+    const report = reportRoot.exact_new_trial_003_shot_2_pre_call_payload_capture_preflight;
+    if (
+      report &&
+      report.phase === "v0_6_28_exact_new_trial_003_shot_2_pre_call_payload_capture_preflight" &&
+      report.attempt_id === "v0_3_3_exact_new_trial_003_shot_2" &&
+      report.payload_capture_truth?.pre_provider_call_payload_capture_satisfied === true &&
+      report.path_collision_recheck?.path_collision_clear_now === true
+    ) {
+      captured.add(report.attempt_id);
+    }
+  }
+
+  if (exists(shot3PreCallCapturePreflightReportPath)) {
+    const reportRoot = readJson(shot3PreCallCapturePreflightReportPath);
+    const report = reportRoot.exact_new_trial_003_shot_3_pre_call_payload_capture_preflight;
+    if (
+      report &&
+      report.phase === "v0_6_30_exact_new_trial_003_shot_3_pre_call_payload_capture_preflight" &&
+      report.attempt_id === "v0_3_3_exact_new_trial_003_shot_3" &&
+      report.payload_capture_truth?.pre_provider_call_payload_capture_satisfied === true &&
+      report.path_collision_recheck?.path_collision_clear_now === true
+    ) {
+      captured.add(report.attempt_id);
+    }
+  }
+
+  return captured;
+}
+
 function validateShots(shots, context, options = {}) {
   assert(Array.isArray(shots), `${context}.shots must be an array`);
   assert(shots.length === 3, `${context}.shots must contain exactly 3 shots`);
@@ -131,12 +215,30 @@ function validateShots(shots, context, options = {}) {
     assertNotSource002(shot.review_console_bridge_ref, `${context}.${shot.shot_id}.review_console_bridge_ref`);
 
     if (options.checkFuturePathsAbsent) {
-      assert(!exists(shot.output_directory), `${context}.${shot.shot_id}.output_directory already exists`);
-      assert(!exists(shot.payload_capture_ref), `${context}.${shot.shot_id}.payload_capture_ref already exists`);
-      assert(!exists(shot.attempt_result_path), `${context}.${shot.shot_id}.attempt_result_path already exists`);
-      assert(!exists(shot.receipt_path), `${context}.${shot.shot_id}.receipt_path already exists`);
-      assert(!exists(shot.registry_path), `${context}.${shot.shot_id}.registry_path already exists`);
-      assert(!exists(shot.review_console_bridge_ref), `${context}.${shot.shot_id}.review_console_bridge_ref already exists`);
+      const alreadyExecuted = options.executedShotIds?.has(shot.shot_id) === true;
+      const alreadyPreCaptured = options.preCapturedShotIds?.has(shot.shot_id) === true;
+      if (alreadyExecuted) {
+        assert(exists(shot.output_directory), `${context}.${shot.shot_id}.output_directory must already exist`);
+        assert(exists(shot.payload_capture_ref), `${context}.${shot.shot_id}.payload_capture_ref must already exist`);
+        assert(exists(shot.attempt_result_path), `${context}.${shot.shot_id}.attempt_result_path must already exist`);
+        assert(exists(shot.receipt_path), `${context}.${shot.shot_id}.receipt_path must already exist`);
+        assert(exists(shot.registry_path), `${context}.${shot.shot_id}.registry_path must already exist`);
+        assert(exists(shot.review_console_bridge_ref), `${context}.${shot.shot_id}.review_console_bridge_ref must already exist`);
+      } else if (!alreadyPreCaptured) {
+        assert(!exists(shot.output_directory), `${context}.${shot.shot_id}.output_directory already exists`);
+        assert(!exists(shot.payload_capture_ref), `${context}.${shot.shot_id}.payload_capture_ref already exists`);
+        assert(!exists(shot.attempt_result_path), `${context}.${shot.shot_id}.attempt_result_path already exists`);
+        assert(!exists(shot.receipt_path), `${context}.${shot.shot_id}.receipt_path already exists`);
+        assert(!exists(shot.registry_path), `${context}.${shot.shot_id}.registry_path already exists`);
+        assert(!exists(shot.review_console_bridge_ref), `${context}.${shot.shot_id}.review_console_bridge_ref already exists`);
+      } else if (alreadyPreCaptured) {
+        assert(!exists(shot.output_directory), `${context}.${shot.shot_id}.output_directory already exists`);
+        assert(exists(shot.payload_capture_ref), `${context}.${shot.shot_id}.payload_capture_ref must already exist`);
+        assert(!exists(shot.attempt_result_path), `${context}.${shot.shot_id}.attempt_result_path already exists`);
+        assert(!exists(shot.receipt_path), `${context}.${shot.shot_id}.receipt_path already exists`);
+        assert(!exists(shot.registry_path), `${context}.${shot.shot_id}.registry_path already exists`);
+        assert(!exists(shot.review_console_bridge_ref), `${context}.${shot.shot_id}.review_console_bridge_ref already exists`);
+      }
     }
   }
 }
@@ -187,7 +289,7 @@ function validatePlan(plan) {
   assert(record.safety.accepted_sample_auto_promotion_allowed === false, "plan promotion must be false");
   assert(record.safety.production_candidate_allowed === false, "plan production candidate must be false");
   assert(record.safety.push_allowed === false, "plan push must be false");
-  validateShots(record.shots, "plan", { checkFuturePathsAbsent: true });
+  validateShots(record.shots, "plan", { checkFuturePathsAbsent: true, executedShotIds: executedShotIds(), preCapturedShotIds: preCapturedShotIds() });
   assert(record.stability_scoring.succeeded_image_generated_3_of_3.rating === "stable_generation_route_candidate", "3/3 scoring mismatch");
   assert(record.stability_scoring.succeeded_image_generated_2_of_3.rating === "conditional_stable_requires_failed_shot_trace_analysis", "2/3 scoring mismatch");
   assert(record.stability_scoring.succeeded_image_generated_0_or_1_of_3.rating === "unstable_stop_generation", "0-1/3 scoring mismatch");
@@ -277,7 +379,9 @@ function main() {
   assert(schema.includes("exact_new_trial_3shot_stability_preflight"), "schema missing root id");
 
   validatePlan(plan);
-  validateRecord(reportRecord, "report", { checkFuturePathsAbsent: true });
+  const executedIds = executedShotIds();
+  const preCapturedIds = preCapturedShotIds();
+  validateRecord(reportRecord, "report", { checkFuturePathsAbsent: true, executedShotIds: executedIds, preCapturedShotIds: preCapturedIds });
   validateRecord(passRecord, "pass_fixture");
   const negativeSummary = validateNegativeCases(passRecord, failRecord);
 
@@ -304,7 +408,9 @@ function main() {
     accepted_sample_auto_promotion_allowed: reportRecord.boundary.accepted_sample_auto_promotion_allowed,
     production_candidate_allowed: reportRecord.boundary.production_candidate_allowed,
     push_allowed: reportRecord.boundary.push_allowed,
-    future_paths_absent_now: true,
+    future_paths_absent_or_historically_accounted_for_now: true,
+    executed_shot_ids: Array.from(executedIds),
+    pre_captured_shot_ids: Array.from(preCapturedIds),
     ...negativeSummary
   };
 

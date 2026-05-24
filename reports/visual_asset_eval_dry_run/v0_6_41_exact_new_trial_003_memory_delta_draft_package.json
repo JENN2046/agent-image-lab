@@ -1,0 +1,77 @@
+{
+  "exact_new_trial_003_memory_delta_draft_package": {
+    "version": "v1",
+    "phase": "v0_6_41_exact_new_trial_003_memory_delta_draft_package",
+    "status": "completed_validated_local_memory_delta_draft_package_pending_external_human_approval_accepted_sample_archive_production_and_memory_authorization",
+    "execution_mode": "exact_new_trial_memory_delta_draft_package_only",
+    "source_refs": {
+      "human_review": "reports/visual_asset_eval_dry_run/v0_6_32_exact_new_trial_003_human_review.json",
+      "shot_2_closeout": "reports/visual_asset_eval_dry_run/v0_6_29_exact_new_trial_003_shot_2_execution_closeout.json",
+      "prompt_package": "prompts/image_generation/safe_adult_editorial_portrait_v1.yaml",
+      "production_candidate_preflight": "reports/visual_asset_eval_dry_run/v0_6_39_exact_new_trial_003_production_candidate_authorization_compiler_output_preflight.json",
+      "memory_authorization_preflight": "reports/visual_asset_eval_dry_run/v0_6_40_exact_new_trial_003_daily_note_vcp_memory_authorization_compiler_output_preflight.json"
+    },
+    "package_type": "memory_delta_draft_package",
+    "package_status": "draft_only_blocked_by_accepted_sample_archive_production_and_memory_authorization_dependencies",
+    "target": {
+      "sample_id": "accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001",
+      "candidate_id": "v0_3_3_exact_new_trial_003_shot_2",
+      "category": "fashion_lookbook_portrait",
+      "draft_package_ref": "reports/memory_delta_drafts/v0_3_3_exact_new_trial_003_shot_2_memory_delta_draft.yaml",
+      "accepted_sample_registration_completed": false,
+      "durable_archive_ready": false,
+      "production_candidate_ready": false,
+      "daily_note_write_authorized": false,
+      "vcp_memory_write_authorized": false,
+      "memory_suitability_status": "deferred"
+    },
+    "draft_content": {
+      "daily_note_draft_language": "zh-CN",
+      "vcp_memory_draft_language": "zh-CN",
+      "write_mode": "draft",
+      "approval_required": true,
+      "approval_status": "pending",
+      "should_write_to_vcp": false,
+      "execution_allowed_now": false
+    },
+    "verified_content": {
+      "daily_note_draft_cn_present": true,
+      "vcp_memory_draft_cn_present": true,
+      "selection_rationale_reflected": true,
+      "watch_items_reflected": true,
+      "memory_delta_source_chain_verified": true
+    },
+    "guard": {
+      "authorization_granted_by_this_package": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "direct_memory_write_performed": false,
+      "accepted_samples_write_performed": false,
+      "failure_samples_write_performed": false,
+      "archive_write_performed": false,
+      "production_candidate_write_performed": false,
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "mcp_runtime_performed": false,
+      "image_generation_performed": false,
+      "image_binary_included": false,
+      "real_manifest_read_performed": false,
+      "real_vcpchat_read_performed": false,
+      "real_vcptoolbox_read_performed": false,
+      "push_tag_release_deploy_performed": false,
+      "artifact_recoverability_is_not_vcp_runtime_integration": true,
+      "vcp_runtime_integration_proven": false
+    },
+    "negative_cases_expected": {
+      "non_chinese_daily_note_body_fails": true,
+      "should_write_to_vcp_without_authorization_fails": true,
+      "approval_granted_without_A5_fails": true,
+      "raw_sensitive_content_fails": true,
+      "image_binary_reference_fails": true,
+      "execution_allowed_now_true_fails": true
+    },
+    "recommended_next": "prepare_exact_new_trial_003_sensitive_data_scan_preflight_with_memory_delta_dependency_preserved",
+    "recommended_next_auto_execution_allowed": "true_local_sensitive_data_scan_preflight_only_no_memory_write"
+  }
+}

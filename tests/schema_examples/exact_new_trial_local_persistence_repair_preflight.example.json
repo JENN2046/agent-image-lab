@@ -1,0 +1,65 @@
+{
+  "exact_new_trial_local_persistence_repair_preflight": {
+    "phase": "v0_6_26_exact_new_trial_local_persistence_repair_preflight",
+    "status": "fixture_valid_route_selection_only",
+    "created_date": "2026-05-23",
+    "doc_ref": "docs/V0_6_26_EXACT_NEW_TRIAL_LOCAL_PERSISTENCE_REPAIR_PREFLIGHT.md",
+    "source_truth_review_ref": "reports/visual_asset_eval_dry_run/v0_6_25_exact_new_trial_artifact_persistence_truth_review.json",
+    "target_attempt_id": "v0_3_3_exact_new_trial_002",
+    "prompt_package_ref": "prompts/image_generation/safe_adult_editorial_portrait_v1.yaml",
+    "provider_route": "image_gen.imagegen",
+    "repair_route_review": [
+      {
+        "route_id": "exact_repo_replacement",
+        "status": "rejected_non_exact_substitution",
+        "repo_tracked_same_prompt_alternative_exists": true,
+        "alternative_attempt_id": "attempt-v0-3-3-safe-portrait-001",
+        "alternative_output_image_path": "runs/real_generation/v0_3_3_safe_portrait_001/safe_adult_editorial_portrait_v1.png",
+        "alternative_output_image_sha256": "e041f1c69624595aa92592b5209b8e887fec9d2d49155f9bae82409a76d65591",
+        "claimed_002_output_image_sha256": "3c08be9be98d36d94cc5d13de82b8c21c3f63533915fe59e814d99fdef3b4d96",
+        "substitutable_for_exact_002": false
+      },
+      {
+        "route_id": "private_out_of_repo_recovery",
+        "status": "blocked_private_path_boundary",
+        "private_out_of_repo_recovery_allowed_now": false,
+        "reason": "not_probed_or_recovered_in_local_safe_preflight"
+      },
+      {
+        "route_id": "fresh_non_overwriting_future_shot",
+        "status": "selected_preferred_route",
+        "selected_shot_id": "v0_3_3_exact_new_trial_003_shot_1",
+        "output_directory": "runs/real_generation/v0_3_3_exact_new_trial_003_shot_1/",
+        "output_image_path": "runs/real_generation/v0_3_3_exact_new_trial_003_shot_1/safe_adult_editorial_portrait_v1.png",
+        "payload_capture_ref": "reports/provider_payload_captures/v0_3_3_exact_new_trial_003_shot_1_request_payload.sanitized.json",
+        "attempt_result_path": "runs/real_generation/v0_3_3_exact_new_trial_003_shot_1/generation_attempt_result.json",
+        "receipt_path": "reports/provider_receipts/v0_3_3_exact_new_trial_003_shot_1_receipt.json",
+        "registry_path": "reports/provider_receipts/v0_3_3_exact_new_trial_003_shot_1_registry.json",
+        "review_console_bridge_ref": "review_console/live_receipt_bridge/v0_3_3_exact_new_trial_003_shot_1/bridge_entry.json",
+        "path_collision_clear_now": true,
+        "local_persistence_verification_required": true,
+        "review_required_after_success": true,
+        "overwrite_existing_files_allowed": false
+      }
+    ],
+    "selected_repair_route": {
+      "route_id": "fresh_non_overwriting_future_shot",
+      "selected_shot_id": "v0_3_3_exact_new_trial_003_shot_1",
+      "path_collision_clear_now": true,
+      "local_persistence_verification_required": true,
+      "review_required_after_success": true,
+      "current_human_review_of_002_allowed": false,
+      "treat_002_as_historical_prompt_route_evidence_only": true
+    },
+    "boundary": {
+      "provider_call_performed": false,
+      "image_generation_performed": false,
+      "private_out_of_repo_recovery_performed": false,
+      "secret_value_read_performed": false,
+      "VCP_memory_write_performed": false,
+      "DailyNote_write_performed": false,
+      "push_performed": false
+    },
+    "recommended_next": "use_v0_3_3_exact_new_trial_003_shot_1_with_immediate_path_collision_recheck_and_post_write_local_persistence_verification"
+  }
+}

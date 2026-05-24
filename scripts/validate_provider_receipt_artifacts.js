@@ -4,6 +4,7 @@ const path = require("node:path");
 
 const root = path.resolve(__dirname, "..");
 const receiptsRoot = path.join(root, "reports", "provider_receipts");
+const artifactTruthReviewPath = "reports/visual_asset_eval_dry_run/v0_6_25_exact_new_trial_artifact_persistence_truth_review.json";
 
 function assert(condition, message) {
   if (!condition) throw new Error(message);
@@ -71,7 +72,33 @@ function collectReceiptArtifacts() {
   return { records, rawPrivatePathHits };
 }
 
-function validateRecord({ source_file: sourceFile, record }) {
+function loadAuditedMissingArtifactState() {
+  const absolute = repoPath(artifactTruthReviewPath);
+  if (!fs.existsSync(absolute)) return new Map();
+
+  const report = readJson(absolute).exact_new_trial_artifact_persistence_truth_review;
+  if (!report || report.phase !== "v0_6_25_exact_new_trial_artifact_persistence_truth_review") return new Map();
+  if (report.truth_findings?.current_project_output_missing !== true) return new Map();
+  if (report.truth_findings?.local_persistence_verified_now !== false) return new Map();
+  if (report.truth_findings?.reviewable_sample_now !== false) return new Map();
+  if (report.truth_findings?.human_review_allowed_now !== false) return new Map();
+
+  return new Map([
+    [
+      report.artifact_claim.claimed_output_image_path,
+      {
+        attempt_id: report.attempt_id,
+        report_ref: artifactTruthReviewPath,
+        current_project_output_missing: true,
+        local_persistence_verified_now: false,
+        reviewable_sample_now: false,
+        human_review_allowed_now: false
+      }
+    ]
+  ]);
+}
+
+function validateRecord({ source_file: sourceFile, record }, auditedMissingArtifacts) {
   const attemptPath = repoPath(record.attempt_result_path);
   assert(fs.existsSync(attemptPath), `Missing attempt result for ${sourceFile}: ${record.attempt_result_path}`);
   const attempt = readJson(attemptPath);
@@ -97,25 +124,40 @@ function validateRecord({ source_file: sourceFile, record }) {
 
   if (record.output_image_path) {
     const imagePath = repoPath(record.output_image_path);
-    assert(fs.existsSync(imagePath), `Missing output image for ${sourceFile}: ${record.output_image_path}`);
-    if (record.output_image_sha256) {
-      assert(sha256File(imagePath) === record.output_image_sha256, `Output image hash mismatch for ${record.output_image_path}`);
+    if (fs.existsSync(imagePath)) {
+      if (record.output_image_sha256) {
+        assert(sha256File(imagePath) === record.output_image_sha256, `Output image hash mismatch for ${record.output_image_path}`);
+      }
+      if (attempt.output_image_sha256) {
+        assert(sha256File(imagePath) === attempt.output_image_sha256, `Attempt output image hash mismatch for ${record.output_image_path}`);
+      }
+      return { audited_missing_output_image: false };
     }
-    if (attempt.output_image_sha256) {
-      assert(sha256File(imagePath) === attempt.output_image_sha256, `Attempt output image hash mismatch for ${record.output_image_path}`);
-    }
+
+    const auditedMissing = auditedMissingArtifacts.get(record.output_image_path);
+    assert(auditedMissing, `Missing output image for ${sourceFile}: ${record.output_image_path}`);
+    assert(attempt.attempt_id === auditedMissing.attempt_id, `Audited missing output image attempt_id mismatch for ${record.output_image_path}`);
+    return { audited_missing_output_image: true };
   } else {
     assert(attempt.output_image_path === null, `Failed attempt must not bind output image: ${record.attempt_result_path}`);
+    return { audited_missing_output_image: false };
   }
 }
 
 function main() {
   const { records, rawPrivatePathHits } = collectReceiptArtifacts();
+  const auditedMissingArtifacts = loadAuditedMissingArtifactState();
   assert(records.length > 0, "Provider receipt artifact records must exist");
   assert(rawPrivatePathHits.length === 0, `Raw private local paths found: ${JSON.stringify(rawPrivatePathHits)}`);
 
+  let auditedMissingOutputImageCount = 0;
+  const auditedMissingOutputImagePaths = new Set();
   for (const item of records) {
-    validateRecord(item);
+    const result = validateRecord(item, auditedMissingArtifacts);
+    if (result.audited_missing_output_image) {
+      auditedMissingOutputImageCount += 1;
+      auditedMissingOutputImagePaths.add(item.record.output_image_path);
+    }
   }
 
   const uniqueAttemptPaths = new Set(records.map((item) => item.record.attempt_result_path));
@@ -131,6 +173,8 @@ function main() {
     succeeded_record_count: succeededRecords.length,
     failed_record_count: failedRecords.length,
     missing_attempt_result_count: 0,
+    audited_missing_output_image_count: auditedMissingOutputImageCount,
+    audited_missing_output_image_path_count: auditedMissingOutputImagePaths.size,
     raw_private_path_count: 0,
     output_hash_mismatch_count: 0,
     provider_contact_performed: false,

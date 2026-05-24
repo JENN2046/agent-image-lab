@@ -1,0 +1,86 @@
+{
+  "exact_new_trial_003_selected_candidate_post_approval_gate_alignment": {
+    "version": "v1",
+    "phase": "v0_6_34_exact_new_trial_003_selected_candidate_post_approval_gate_alignment",
+    "status": "completed_validated_local_post_approval_gate_alignment_pending_external_human_approval",
+    "execution_mode": "post_approval_gate_alignment_only",
+    "source_refs": {
+      "selected_candidate_closeout": "reports/visual_asset_eval_dry_run/v0_6_29_exact_new_trial_003_shot_2_execution_closeout.json",
+      "human_review": "reports/visual_asset_eval_dry_run/v0_6_32_exact_new_trial_003_human_review.json",
+      "approval_intake_package": "reports/visual_asset_eval_dry_run/v0_6_33_exact_new_trial_003_selected_candidate_human_approval_intake_package.json",
+      "approval_intake_validator": "scripts/validate_exact_new_trial_003_selected_candidate_human_approval_intake_package.js"
+    },
+    "target": {
+      "candidate_attempt_id": "v0_3_3_exact_new_trial_003_shot_2",
+      "proposed_sample_id": "accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001",
+      "category": "fashion_lookbook_portrait",
+      "artifact_ref": "runs/real_generation/v0_3_3_exact_new_trial_003_shot_2/safe_adult_editorial_portrait_v1.png",
+      "verified_sha256": "8bd7b81a916f0f6333392562d84e32368a3f28dd6a6456fc2f9e49d835a62c3b",
+      "verified_dimensions": "941x1672",
+      "verified_mime": "image/png"
+    },
+    "gate": {
+      "gate_status": "blocked",
+      "blocker": "human_approval_missing",
+      "approval_statement_matches_v0_6_33": true,
+      "approval_statement_source_is_user_submission": false,
+      "human_approval_captured_now": false,
+      "registration_unlocks_only_after_external_user_approval": true,
+      "accepted_samples_registration_ready_now": false,
+      "future_registration_requires_v0_6_33_user_submission": true
+    },
+    "future_allowed_files_after_approval": [
+      "accepted_samples/accepted_sample_registry.yaml",
+      "accepted_samples/categories/fashion_lookbook_portrait.yaml"
+    ],
+    "future_required_before_write": [
+      "v0.6.32 selected candidate still remains shot_2",
+      "v0.6.29 selected candidate closeout evidence still matches artifact hash and dimensions",
+      "v0.6.33 exact approval statement is used",
+      "future approval capture must come from Jenn rather than fixture-only local text",
+      "future approval capture reports approval_statement_source_is_user_submission=true",
+      "future approval capture reports human_approval_captured_now=true",
+      "allowed write set remains exactly accepted_samples/accepted_sample_registry.yaml and accepted_samples/categories/fashion_lookbook_portrait.yaml",
+      "no image copy, no runs source image modification, no production_candidate, no failure_samples, no DailyNote, no VCP memory"
+    ],
+    "guard": {
+      "post_approval_gate_alignment_only": true,
+      "accepted_samples_write_performed": false,
+      "category_index_write_performed": false,
+      "image_file_copy_performed": false,
+      "runs_source_image_modified": false,
+      "failure_samples_write_performed": false,
+      "production_candidate_write_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "mcp_runtime_performed": false,
+      "image_generation_performed": false,
+      "env_or_secret_read_performed": false,
+      "real_manifest_read_performed": false,
+      "real_vcpchat_read_performed": false,
+      "real_vcptoolbox_read_performed": false,
+      "staging_performed": false,
+      "commit_performed": false,
+      "push_tag_release_deploy_performed": false,
+      "artifact_recoverability_is_not_vcp_runtime_integration": true,
+      "vcp_runtime_integration_proven": false
+    },
+    "negative_cases_required": {
+      "missing_user_submission_requirement_fails": true,
+      "approval_statement_alignment_overclaim_fails": true,
+      "user_submission_overclaim_fails": true,
+      "human_approval_overclaim_fails": true,
+      "registration_ready_overclaim_fails": true,
+      "broad_allowed_files_fails": true,
+      "accepted_samples_write_flag_fails": true,
+      "image_copy_flag_fails": true,
+      "external_action_flag_fails": true,
+      "runtime_claim_fails": true
+    },
+    "recommended_next": "wait_for_jenn_human_approval_then_run_exact_new_trial_003_post_approval_registration_preflight",
+    "recommended_next_auto_execution_allowed": "false_waits_for_external_human_approval_before_any_accepted_samples_write"
+  }
+}

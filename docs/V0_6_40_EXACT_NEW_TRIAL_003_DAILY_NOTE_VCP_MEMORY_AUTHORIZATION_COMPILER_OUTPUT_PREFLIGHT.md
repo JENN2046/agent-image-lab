@@ -1,0 +1,125 @@
+# v0.6.40 Exact New-Trial 003 DailyNote / VCP Memory Authorization Compiler Output Preflight
+
+```yaml
+phase: v0_6_40_exact_new_trial_003_daily_note_vcp_memory_authorization_compiler_output_preflight
+base_contract: AGENTS.md
+mode: A4.8
+intent: local_implementation
+risk_level: R2
+execution_mode: daily_note_vcp_memory_authorization_compiler_output_preflight_only
+```
+
+## Purpose
+
+Produce the exact-new-trial 003 DailyNote / VCP memory compiler-output
+preflight for the selected `shot_2` candidate.
+
+This phase prepares the blocked DailyNote / VCP memory package shape only. It
+does not write `DailyNote`, write `VCP memory`, build a real `memory_delta`
+draft, read image binaries, or treat local artifact recoverability as VCP
+runtime integration.
+
+## Decision
+
+```yaml
+package_type: daily_note_vcp_memory
+package_status: draft_blocked_missing_accepted_sample_registration_archive_completion_production_candidate_authorization_memory_delta_and_daily_note_vcp_memory_authorization
+blocker: missing_accepted_sample_registration_archive_completion_production_candidate_authorization_memory_delta_and_daily_note_vcp_memory_authorization
+target_sample_id: accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001
+target_candidate_id: v0_3_3_exact_new_trial_003_shot_2
+category: fashion_lookbook_portrait
+accepted_sample_registration_completed: false
+durable_archive_ready: false
+production_candidate_ready: false
+daily_note_write_authorized: false
+vcp_memory_write_authorized: false
+memory_delta_draft_present: false
+sensitive_data_scan_present: false
+write_command_permission: false
+execution_allowed_now: false
+```
+
+## Blocked Target Scope
+
+```yaml
+accepted_sample_registry_ref: accepted_samples/accepted_sample_registry.yaml
+accepted_sample_category_ref: accepted_samples/categories/fashion_lookbook_portrait.yaml
+production_candidate_preflight_ref: reports/visual_asset_eval_dry_run/v0_6_39_exact_new_trial_003_production_candidate_authorization_compiler_output_preflight.json
+memory_delta_draft_ref: null
+daily_note_body_language: zh_required_before_execution
+sensitive_data_scan_ref: null
+blocker_decision: blocked_missing_accepted_sample_registration_archive_completion_production_candidate_authorization_memory_delta_and_daily_note_vcp_memory_authorization
+exact_allowed_memory_targets: []
+forbidden_memory_targets:
+  - DailyNote
+  - VCP memory
+  - .env
+  - .env.local
+  - real VCPChat
+  - real VCPToolBox
+  - production/
+  - asset_archive/
+```
+
+## Required Before Execution
+
+```yaml
+required_before_execution:
+  - Jenn human approval must already be captured through the exact_new_trial_003 shot_2 approval chain
+  - exact accepted_samples registration for the selected shot_2 candidate must be completed first
+  - durable archive execution for the selected shot_2 accepted sample must be completed first
+  - exact production-candidate authorization and readiness for the selected shot_2 accepted sample must be completed first
+  - exact Chinese memory_delta draft for the selected shot_2 route
+  - exact sensitive-data scan for the future DailyNote and VCP memory payload
+  - exact allowed DailyNote and VCP memory targets
+  - Jenn exact A5 DailyNote and VCP memory write authorization
+  - rollback plan
+  - reviewer
+  - stop conditions
+validation_required_before_execution:
+  - git diff --check
+  - node scripts/validate_exact_new_trial_003_daily_note_vcp_memory_authorization_compiler_output_preflight.js
+  - node scripts/validate_exact_new_trial_003_production_candidate_authorization_compiler_output_preflight.js
+  - node scripts/validate_controlled_visual_production_loop_checkpoint_readiness.js
+  - node scripts/validate_controlled_visual_production_loop_exact_file_commit_readiness_review.js
+  - powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1
+```
+
+## Guard
+
+```yaml
+preflight_only: true
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+memory_delta_written_to_runtime: false
+secret_or_private_path_included: false
+image_binary_included: false
+production_candidate_write_performed: false
+durable_archive_copy_performed: false
+image_file_copy_performed: false
+runs_source_image_modified: false
+accepted_samples_write_performed: false
+failure_samples_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+staging_performed: false
+commit_performed: false
+push_tag_release_deploy_performed: false
+artifact_recoverability_is_not_vcp_runtime_integration: true
+vcp_runtime_integration_proven: false
+```
+
+## Closeout
+
+The DailyNote / VCP memory package can now be compiled for exact-new-trial 003
+as a blocked local draft. It cannot execute until the selected candidate has
+really entered `accepted_samples`, durable archive execution has completed,
+production-candidate readiness exists, an exact Chinese `memory_delta` draft
+and sensitive-data scan exist, and Jenn grants exact DailyNote / VCP memory
+authorization with named targets, reviewer, rollback, validation, and stop
+conditions.

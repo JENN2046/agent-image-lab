@@ -1,0 +1,56 @@
+{
+  "exact_new_trial_003_shot_2_pre_call_payload_capture_preflight": {
+    "phase": "v0_6_28_exact_new_trial_003_shot_2_pre_call_payload_capture_preflight",
+    "status": "fixture_valid_pre_call_payload_capture_preflight",
+    "created_date": "2026-05-23",
+    "source_phase": "v0_6_27_exact_new_trial_003_shot_1_execution_closeout",
+    "attempt_id": "v0_3_3_exact_new_trial_003_shot_2",
+    "provider_route": "image_gen.imagegen",
+    "prompt_package_ref": "prompts/image_generation/safe_adult_editorial_portrait_v1.yaml",
+    "payload_capture_ref": "reports/provider_payload_captures/v0_3_3_exact_new_trial_003_shot_2_request_payload.sanitized.json",
+    "planned_output_directory": "runs/real_generation/v0_3_3_exact_new_trial_003_shot_2/",
+    "planned_output_image_path": "runs/real_generation/v0_3_3_exact_new_trial_003_shot_2/safe_adult_editorial_portrait_v1.png",
+    "planned_attempt_result_path": "runs/real_generation/v0_3_3_exact_new_trial_003_shot_2/generation_attempt_result.json",
+    "planned_receipt_path": "reports/provider_receipts/v0_3_3_exact_new_trial_003_shot_2_receipt.json",
+    "planned_registry_path": "reports/provider_receipts/v0_3_3_exact_new_trial_003_shot_2_registry.json",
+    "planned_review_console_bridge_ref": "review_console/live_receipt_bridge/v0_3_3_exact_new_trial_003_shot_2/bridge_entry.json",
+    "path_collision_recheck": {
+      "output_directory_exists_now": false,
+      "output_image_exists_now": false,
+      "attempt_result_exists_now": false,
+      "receipt_exists_now": false,
+      "registry_exists_now": false,
+      "review_console_bridge_exists_now": false,
+      "path_collision_clear_now": true
+    },
+    "payload_capture_truth": {
+      "pre_provider_call_payload_capture_required": true,
+      "pre_provider_call_payload_capture_satisfied": true,
+      "payload_capture_mode": "pre_provider_call_sanitized_request_payload",
+      "prompt_text_sha256": "8469661cb4fe64e8280f6a64801e8583b3180f4a405b25cba433f7e3eb6172fd",
+      "prompt_text_length": 519,
+      "prompt_package_sha256": "3083e74a6d2d95732f73020133e52a3d6371b786e2565e429926c5aadf860790",
+      "negative_prompt_text_sha256": "179b4c380b1451d59215ea6cc7293d626936dc42bf6030e7366e654c112a05c2",
+      "final_payload_prompt_equals_prompt_field": true,
+      "negative_prompt_included": false,
+      "yaml_metadata_included": false,
+      "authorization_text_included": false,
+      "path_text_included_in_prompt": false
+    },
+    "boundary": {
+      "provider_call_performed": false,
+      "image_generation_performed": false,
+      "retry_performed": false,
+      "raw_provider_payload_capture_performed": true,
+      "raw_provider_response_capture_performed": false,
+      "secret_value_read_performed": false,
+      "VCP_memory_write_performed": false,
+      "DailyNote_write_performed": false,
+      "accepted_sample_auto_promotion": false,
+      "production_candidate_created": false,
+      "commit_performed": false,
+      "push_performed": false
+    },
+    "recommended_next": "execute_v0_3_3_exact_new_trial_003_shot_2_with_pre_captured_payload_and_post_write_local_persistence_verification_before_any_auto_promotion_or_memory_write"
+  }
+}

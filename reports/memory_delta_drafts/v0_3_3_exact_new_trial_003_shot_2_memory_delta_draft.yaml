@@ -1,0 +1,76 @@
+memory_delta_draft_package:
+  version: v1
+  package_type: memory_delta_draft_package
+  phase: v0_6_41_exact_new_trial_003_memory_delta_draft_package
+  execution_mode: exact_new_trial_memory_delta_draft_package_only
+  authorization_granted_by_this_package: false
+
+  source_case:
+    sample_id: accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001
+    candidate_id: v0_3_3_exact_new_trial_003_shot_2
+    category: fashion_lookbook_portrait
+    memory_suitability_status: deferred
+    prompt_package_ref: prompts/image_generation/safe_adult_editorial_portrait_v1.yaml
+    human_review_ref: reports/visual_asset_eval_dry_run/v0_6_32_exact_new_trial_003_human_review.json
+    shot_closeout_ref: reports/visual_asset_eval_dry_run/v0_6_29_exact_new_trial_003_shot_2_execution_closeout.json
+    production_candidate_preflight_ref: reports/visual_asset_eval_dry_run/v0_6_39_exact_new_trial_003_production_candidate_authorization_compiler_output_preflight.json
+    memory_authorization_preflight_ref: reports/visual_asset_eval_dry_run/v0_6_40_exact_new_trial_003_daily_note_vcp_memory_authorization_compiler_output_preflight.json
+    output_image_sha256: 8bd7b81a916f0f6333392562d84e32368a3f28dd6a6456fc2f9e49d835a62c3b
+    accepted_sample_registration_completed: false
+    durable_archive_ready: false
+    production_candidate_ready: false
+    daily_note_write_authorized: false
+    vcp_memory_write_authorized: false
+
+  daily_note_draft:
+    language: zh-CN
+    title_cn: "Exact New-Trial 003 安全成人编辑风人像经验草案"
+    body_cn: "这次 exact-new-trial 003 的有效经验是把专业编辑感、保守着装、自然姿态和证据可追溯性一起看，而不是只看单一美观度。shot_2 成为当前首选，是因为它在红色西装、白色上衣、深色长裤、黄昏露台背景和专业表情之间取得了最稳的平衡，同时保留了 literal pre-provider-call payload capture。当前内容只是 DailyNote 草案；在 formal human approval、accepted_samples 注册、archive 完成和 production-candidate readiness 之前，不得写入。"
+    write_mode: draft
+    approval_required: true
+    approval_status: pending
+    write_allowed_now: false
+    DailyNote_write_performed: false
+
+  vcp_memory_draft:
+    language: zh-CN
+    memory_type: accepted_candidate_review_learning_draft
+    summary_cn: "安全成人编辑风人像的稳定候选，需要同时满足 prompt 匹配、姿态克制、服装保守度、vertical editorial framing 和 payload traceability。"
+    lessons_cn:
+      - "首选样本不只看脸和背景，还要同时核对 wardrobe conservatism、hands visible 边界和无文字无水印约束。"
+      - "pre-provider-call payload capture 会显著提高后续 review、archive 和 memory 证据链的可信度。"
+      - "即使 accepted_candidate=true，只要 formal human approval 未完成、hand pose 仍有 watch item、commercial_delivery_ready=false，就只能停留在 memory draft。"
+    write_mode: draft
+    approval_required: true
+    approval_status: pending
+    should_write_to_vcp: false
+    VCP_memory_write_performed: false
+
+  memory_safety:
+    contains_secret: false
+    contains_private_path: false
+    contains_customer_private_data: false
+    contains_image_binary: false
+    raw_sensitive_content_saved: false
+
+  boundary:
+    execution_allowed_now: false
+    DailyNote_write_performed: false
+    VCP_memory_write_performed: false
+    direct_memory_write_performed: false
+    accepted_samples_write_performed: false
+    failure_samples_write_performed: false
+    archive_write_performed: false
+    production_candidate_write_performed: false
+    provider_contact_performed: false
+    plugin_call_performed: false
+    api_call_performed: false
+    mcp_runtime_performed: false
+    image_generation_performed: false
+    image_binary_included: false
+    real_manifest_read_performed: false
+    real_vcpchat_read_performed: false
+    real_vcptoolbox_read_performed: false
+    push_tag_release_deploy_performed: false
+    artifact_recoverability_is_not_vcp_runtime_integration: true
+    vcp_runtime_integration_proven: false

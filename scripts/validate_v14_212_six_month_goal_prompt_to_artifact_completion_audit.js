@@ -88,7 +88,7 @@ function evaluate(input, evidence) {
     statuses.get("authorized_real_vcp_pilot") === "not_started_blocked_by_a5" &&
     statuses.get("v1_visual_production_control_layer_closeout") === "not_met";
   const countsOk =
-    counts.recoverable_accepted_sample_count === 3 &&
+    counts.recoverable_accepted_sample_count === 4 &&
     counts.blocked_third_candidate_count === 0 &&
     counts.remaining_full_recoverable_sample_gap === 0 &&
     counts.success_criteria_count === expectedCriteria.length &&
@@ -97,7 +97,7 @@ function evaluate(input, evidence) {
     counts.not_met_count === 2 &&
     counts.blocked_by_a5_count === 1;
   const evidenceOk =
-    evidence.registryRecoverableCount === 3 &&
+    evidence.registryRecoverableCount === 4 &&
     evidence.dashboardRecoverableCount === 3 &&
     evidence.dashboardHardAcceptanceMet === true &&
     evidence.dashboardGap === 0 &&
@@ -190,7 +190,7 @@ const currentSurfaces = [
 
 const baseEval = evaluate(fixture, evidence);
 addResult("prompt_to_artifact_audit_evaluation_passes", baseEval.passed, JSON.stringify(baseEval));
-addResult("registry_recoverable_count_is_three", evidence.registryRecoverableCount === 3);
+addResult("registry_recoverable_count_is_four", evidence.registryRecoverableCount === 4);
 addResult("dashboard_three_sample_goal_met_local_only", evidence.dashboardHardAcceptanceMet === true && evidence.dashboardGap === 0);
 addResult("lamp_candidate_human_approval_registered", evidence.lampRegistryApproved === true && evidence.lampAcceptedSampleRegistered === true);
 addResult("exact_file_draft_blocked", evidence.exactFileDraftBlocked === true);
@@ -230,7 +230,7 @@ addResult("negative_case_external_action_flag_fails", externalActionEval.passed 
 for (const token of [
   "phase: v14_212_six_month_goal_prompt_to_artifact_completion_audit",
   "goal_complete: false",
-  "full_recoverable_accepted_sample_count: 3",
+  "full_recoverable_accepted_sample_count: 4",
   "remaining_full_recoverable_sample_gap: 0",
   "human_approval_status: approved",
   "current_status: not_started_blocked_by_a5",

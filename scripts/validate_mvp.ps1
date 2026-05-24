@@ -124,6 +124,18 @@ $requiredFiles = @(
   'scripts/create_provider_payload_capture_preflight.js',
   'scripts/validate_provider_payload_capture_preflight.js',
   'scripts/validate_exact_new_trial_3shot_stability_preflight.js',
+  'scripts/validate_exact_new_trial_003_shot_3_pre_call_payload_capture_preflight.js',
+  'scripts/validate_exact_new_trial_003_shot_3_execution_closeout.js',
+  'scripts/validate_exact_new_trial_003_human_review.js',
+  'scripts/validate_exact_new_trial_003_selected_candidate_human_approval_intake_package.js',
+  'scripts/validate_exact_new_trial_003_selected_candidate_post_approval_gate_alignment.js',
+  'scripts/validate_exact_new_trial_003_post_approval_registration_preflight_draft.js',
+  'scripts/validate_exact_new_trial_003_accepted_samples_registration_authorization_package_draft.js',
+  'scripts/validate_exact_new_trial_003_accepted_samples_registration_execution_preflight.js',
+  'scripts/validate_exact_new_trial_003_daily_note_vcp_memory_write_authorization_package_draft.js',
+  'scripts/validate_exact_new_trial_003_daily_note_vcp_memory_write_execution_preflight.js',
+  'scripts/validate_exact_new_trial_artifact_persistence_truth_review.js',
+  'scripts/validate_exact_new_trial_local_persistence_repair_preflight.js',
   'scripts/validate_visual_sample_memory_policy.js',
   'scripts/validate_15_day_architecture_checkpoint.js',
   'scripts/validate_local_checkpoint_manifest.js',
@@ -9225,8 +9237,8 @@ process.exit(child.status || 0);
       Add-Failure "v14.142 must create a multi-sample, multi-category matrix"
     }
     $multiAcceptedSampleMatrixMigratedPending = $multiAcceptedSampleMatrix.migration_status -eq 'legacy_runs_missing_git_preview_capsule_pending'
-    if (-not $multiAcceptedSampleMatrixMigratedPending -and ($multiAcceptedSampleMatrix.complete_recoverable_sample_count -ne 3 -or $multiAcceptedSampleMatrix.full_recoverability_count_is_currently_three -ne $true)) {
-      Add-Failure "v14.142 must preserve the current three fully recoverable samples truth"
+    if (-not $multiAcceptedSampleMatrixMigratedPending -and ($multiAcceptedSampleMatrix.complete_recoverable_sample_count -ne 4 -or $multiAcceptedSampleMatrix.full_recoverability_count_is_currently_four -ne $true)) {
+      Add-Failure "v14.142 must preserve the current four fully recoverable samples truth"
     }
     if (-not $multiAcceptedSampleMatrixMigratedPending -and ($multiAcceptedSampleMatrix.legacy_partial_artifact_sample_count -lt 3 -or $multiAcceptedSampleMatrix.local_artifact_sample_count -lt 4)) {
       Add-Failure "v14.142 must detect legacy local artifact rows without promoting them"
@@ -9735,7 +9747,7 @@ process.exit(child.status || 0);
       Add-Failure "v14.160 must close out the local lifecycle chain"
     }
     $twoMonthCloseoutMigratedPending = $twoMonthCloseout.migration_status -eq 'legacy_runs_missing_git_preview_capsule_pending'
-    if (-not $twoMonthCloseoutMigratedPending -and ($twoMonthCloseout.registry_sample_count -ne 8 -or $twoMonthCloseout.registry_category_count -ne 3 -or $twoMonthCloseout.local_artifact_sample_count -lt 6 -or $twoMonthCloseout.full_recoverable_sample_count -ne 3)) {
+    if (-not $twoMonthCloseoutMigratedPending -and ($twoMonthCloseout.registry_sample_count -ne 9 -or $twoMonthCloseout.registry_category_count -ne 3 -or $twoMonthCloseout.local_artifact_sample_count -lt 9 -or $twoMonthCloseout.full_recoverable_sample_count -ne 4)) {
       Add-Failure "v14.160 must reflect observed accepted sample matrix counts"
     }
     if (-not $twoMonthCloseoutMigratedPending -and ($twoMonthCloseout.hard_acceptance_three_full_samples_met -ne $true -or $twoMonthCloseout.remaining_full_recoverable_sample_gap -ne 0 -or $twoMonthCloseout.two_month_goal_fully_complete -ne $false -or $twoMonthCloseout.goal_status -ne 'active_not_complete')) {
@@ -11343,8 +11355,8 @@ process.exit(child.status || 0);
     if ($sixMonthGoalPromptToArtifactCompletionAudit.goal_complete -ne $false -or $sixMonthGoalPromptToArtifactCompletionAudit.prompt_to_artifact_audit_only -ne $true) {
       Add-Failure "v14.212 six-month goal audit must remain incomplete and audit-only"
     }
-    if ($sixMonthGoalPromptToArtifactCompletionAudit.recoverable_accepted_sample_count -ne 3 -or $sixMonthGoalPromptToArtifactCompletionAudit.blocked_third_candidate_count -ne 0 -or $sixMonthGoalPromptToArtifactCompletionAudit.remaining_full_recoverable_sample_gap -ne 0) {
-      Add-Failure "v14.212 six-month goal audit must preserve the current three-sample local recoverability baseline"
+    if ($sixMonthGoalPromptToArtifactCompletionAudit.recoverable_accepted_sample_count -ne 4 -or $sixMonthGoalPromptToArtifactCompletionAudit.blocked_third_candidate_count -ne 0 -or $sixMonthGoalPromptToArtifactCompletionAudit.remaining_full_recoverable_sample_gap -ne 0) {
+      Add-Failure "v14.212 six-month goal audit must preserve the current four-sample local recoverability baseline"
     }
     if ($sixMonthGoalPromptToArtifactCompletionAudit.success_criteria_count -ne 8 -or $sixMonthGoalPromptToArtifactCompletionAudit.met_count -ne 3 -or $sixMonthGoalPromptToArtifactCompletionAudit.partial_count -ne 3 -or $sixMonthGoalPromptToArtifactCompletionAudit.not_met_count -ne 2 -or $sixMonthGoalPromptToArtifactCompletionAudit.blocked_by_a5_count -ne 1) {
       Add-Failure "v14.212 six-month goal audit must preserve the prompt-to-artifact checklist counts"
@@ -12195,6 +12207,9 @@ process.exit(child.status || 0);
     }
     if ($providerReceiptArtifacts.unique_attempt_result_count -lt 4 -or $providerReceiptArtifacts.missing_attempt_result_count -ne 0 -or $providerReceiptArtifacts.raw_private_path_count -ne 0 -or $providerReceiptArtifacts.output_hash_mismatch_count -ne 0) {
       Add-Failure "Provider receipt artifacts must have attempt results, no raw private paths, and matching output hashes"
+    }
+    if ($providerReceiptArtifacts.audited_missing_output_image_path_count -ne 1) {
+      Add-Failure "Provider receipt artifacts must record exactly one unique audited missing output image path under the current v0.6.25 truth state"
     }
     if ($providerReceiptArtifacts.provider_contact_performed -ne $false -or $providerReceiptArtifacts.plugin_call_performed -ne $false -or $providerReceiptArtifacts.api_call_performed -ne $false -or $providerReceiptArtifacts.image_generation_performed -ne $false -or $providerReceiptArtifacts.DailyNote_write_performed -ne $false -or $providerReceiptArtifacts.VCP_memory_write_performed -ne $false) {
       Add-Failure "Provider receipt artifact validation must not perform provider, plugin, API, image, DailyNote, or VCP memory actions"
@@ -13670,8 +13685,8 @@ process.exit(child.status || 0);
     if ($exactNewTrial3ShotPreflight.prompt_package_ref -ne 'prompts/image_generation/safe_adult_editorial_portrait_v1.yaml' -or $exactNewTrial3ShotPreflight.provider_route -ne 'image_gen.imagegen' -or $exactNewTrial3ShotPreflight.source_success_attempt_id -ne 'v0_3_3_exact_new_trial_002') {
       Add-Failure "Exact New-Trial 3-shot Stability Preflight must bind the safe portrait prompt, image_gen.imagegen, and source 002"
     }
-    if ($exactNewTrial3ShotPreflight.shot_count -ne 3 -or $exactNewTrial3ShotPreflight.all_shot_paths_unique -ne $true -or $exactNewTrial3ShotPreflight.future_paths_absent_now -ne $true) {
-      Add-Failure "Exact New-Trial 3-shot Stability Preflight must define 3 future shots with unique absent paths"
+    if ($exactNewTrial3ShotPreflight.shot_count -ne 3 -or $exactNewTrial3ShotPreflight.all_shot_paths_unique -ne $true -or $exactNewTrial3ShotPreflight.future_paths_absent_or_historically_accounted_for_now -ne $true) {
+      Add-Failure "Exact New-Trial 3-shot Stability Preflight must define 3 future shots with unique paths and truthful historical accounting"
     }
     if ($exactNewTrial3ShotPreflight.source_002_overwrite_allowed -ne $false -or $exactNewTrial3ShotPreflight.retry_allowed -ne $false -or $exactNewTrial3ShotPreflight.raw_provider_response_capture_allowed -ne $false -or $exactNewTrial3ShotPreflight.secret_value_read_allowed -ne $false) {
       Add-Failure "Exact New-Trial 3-shot Stability Preflight must block 002 overwrite, retry, raw response capture, and secret reads"
@@ -13681,6 +13696,742 @@ process.exit(child.status || 0);
     }
     if ($exactNewTrial3ShotPreflight.negative_case_count -lt 20 -or $exactNewTrial3ShotPreflight.caught_negative_case_count -ne $exactNewTrial3ShotPreflight.negative_case_count -or $exactNewTrial3ShotPreflight.all_negative_cases_caught -ne $true) {
       Add-Failure "Exact New-Trial 3-shot Stability Preflight must catch every required negative case"
+    }
+  }
+
+  $exactNewTrialArtifactTruthOutput = & node (Join-Path $Root 'scripts/validate_exact_new_trial_artifact_persistence_truth_review.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Exact New-Trial artifact persistence truth review validation exited with failure"
+  } else {
+    $exactNewTrialArtifactTruth = ($exactNewTrialArtifactTruthOutput -join "`n") | ConvertFrom-Json
+    if ($exactNewTrialArtifactTruth.passed -ne $true -or $exactNewTrialArtifactTruth.phase -ne 'v0_6_25_exact_new_trial_artifact_persistence_truth_review') {
+      Add-Failure "Exact New-Trial artifact persistence truth review validation must pass"
+    }
+    if ($exactNewTrialArtifactTruth.attempt_id -ne 'v0_3_3_exact_new_trial_002' -or $exactNewTrialArtifactTruth.claimed_output_image_path -ne 'runs/real_generation/v0_3_3_exact_new_trial_002/safe_adult_editorial_portrait_v1.png') {
+      Add-Failure "Exact New-Trial artifact persistence truth review must bind the exact attempt id and claimed output image path"
+    }
+    if ($exactNewTrialArtifactTruth.output_directory_exists -ne $true -or $exactNewTrialArtifactTruth.output_image_present_now -ne $false -or $exactNewTrialArtifactTruth.current_project_output_missing -ne $true) {
+      Add-Failure "Exact New-Trial artifact persistence truth review must prove the run directory exists while the PNG is currently missing"
+    }
+    if ($exactNewTrialArtifactTruth.local_persistence_verified_now -ne $false -or $exactNewTrialArtifactTruth.reviewable_sample_now -ne $false -or $exactNewTrialArtifactTruth.human_review_allowed_now -ne $false) {
+      Add-Failure "Exact New-Trial artifact persistence truth review must block local persistence, reviewable sample, and human review claims"
+    }
+    if ($exactNewTrialArtifactTruth.accepted_sample_eligible -ne $false -or $exactNewTrialArtifactTruth.memory_write_eligible -ne $false -or $exactNewTrialArtifactTruth.production_candidate_eligible -ne $false) {
+      Add-Failure "Exact New-Trial artifact persistence truth review must block accepted-sample, memory, and production eligibility"
+    }
+    if ($exactNewTrialArtifactTruth.negative_case_count -lt 20 -or $exactNewTrialArtifactTruth.caught_negative_case_count -ne $exactNewTrialArtifactTruth.negative_case_count -or $exactNewTrialArtifactTruth.all_negative_cases_caught -ne $true) {
+      Add-Failure "Exact New-Trial artifact persistence truth review must catch every required negative case"
+    }
+  }
+
+  $exactNewTrialPersistenceRepairOutput = & node (Join-Path $Root 'scripts/validate_exact_new_trial_local_persistence_repair_preflight.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Exact New-Trial local persistence repair preflight validation exited with failure"
+  } else {
+    $exactNewTrialPersistenceRepair = ($exactNewTrialPersistenceRepairOutput -join "`n") | ConvertFrom-Json
+    if ($exactNewTrialPersistenceRepair.passed -ne $true -or $exactNewTrialPersistenceRepair.phase -ne 'v0_6_26_exact_new_trial_local_persistence_repair_preflight') {
+      Add-Failure "Exact New-Trial local persistence repair preflight validation must pass"
+    }
+    if ($exactNewTrialPersistenceRepair.target_attempt_id -ne 'v0_3_3_exact_new_trial_002' -or $exactNewTrialPersistenceRepair.selected_repair_route -ne 'fresh_non_overwriting_future_shot' -or $exactNewTrialPersistenceRepair.selected_shot_id -ne 'v0_3_3_exact_new_trial_003_shot_1') {
+      Add-Failure "Exact New-Trial local persistence repair preflight must bind 002 and select v0_3_3_exact_new_trial_003_shot_1 as the fresh-shot route"
+    }
+    if ($exactNewTrialPersistenceRepair.repo_tracked_same_prompt_alternative_exists -ne $true -or $exactNewTrialPersistenceRepair.repo_tracked_same_prompt_alternative_substitutable_for_002 -ne $false) {
+      Add-Failure "Exact New-Trial local persistence repair preflight must distinguish repo-tracked same-prompt evidence from exact 002 recovery"
+    }
+    if ($exactNewTrialPersistenceRepair.private_out_of_repo_recovery_allowed_now -ne $false -or $exactNewTrialPersistenceRepair.selected_shot_path_collision_clear_now -ne $true -or $exactNewTrialPersistenceRepair.selected_shot_local_persistence_verification_required -ne $true) {
+      Add-Failure "Exact New-Trial local persistence repair preflight must keep private-path recovery blocked and require clean verified fresh-shot paths"
+    }
+    if ($exactNewTrialPersistenceRepair.current_human_review_of_002_allowed -ne $false) {
+      Add-Failure "Exact New-Trial local persistence repair preflight must keep current human review of 002 blocked"
+    }
+    if ($exactNewTrialPersistenceRepair.negative_case_count -lt 20 -or $exactNewTrialPersistenceRepair.caught_negative_case_count -ne $exactNewTrialPersistenceRepair.negative_case_count -or $exactNewTrialPersistenceRepair.all_negative_cases_caught -ne $true) {
+      Add-Failure "Exact New-Trial local persistence repair preflight must catch every required negative case"
+    }
+  }
+
+  $exactNewTrialShot1CloseoutOutput = & node (Join-Path $Root 'scripts/validate_exact_new_trial_003_shot_1_execution_closeout.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Exact New-Trial 003 shot 1 execution closeout validation exited with failure"
+  } else {
+    $exactNewTrialShot1Closeout = ($exactNewTrialShot1CloseoutOutput -join "`n") | ConvertFrom-Json
+    if ($exactNewTrialShot1Closeout.passed -ne $true -or $exactNewTrialShot1Closeout.phase -ne 'v0_6_27_exact_new_trial_003_shot_1_execution_closeout') {
+      Add-Failure "Exact New-Trial 003 shot 1 execution closeout validation must pass"
+    }
+    if ($exactNewTrialShot1Closeout.attempt_id -ne 'v0_3_3_exact_new_trial_003_shot_1' -or $exactNewTrialShot1Closeout.output_image_sha256 -ne '07a4ddc934c6e7ed88deefa9a1de6c8d06eb4407f4858f6688411dfa2bf60840') {
+      Add-Failure "Exact New-Trial 003 shot 1 execution closeout must bind the exact shot id and image hash"
+    }
+    if ($exactNewTrialShot1Closeout.local_persistence_verification_satisfied -ne $true -or $exactNewTrialShot1Closeout.reviewable_sample -ne $true -or $exactNewTrialShot1Closeout.accepted_candidate -ne $true) {
+      Add-Failure "Exact New-Trial 003 shot 1 execution closeout must prove local persistence, reviewability, and candidate acceptance"
+    }
+    if ($exactNewTrialShot1Closeout.pre_provider_call_payload_capture_satisfied -ne $false -or $exactNewTrialShot1Closeout.post_provider_call_payload_reconstruction_performed -ne $true) {
+      Add-Failure "Exact New-Trial 003 shot 1 execution closeout must record the payload-capture timing deviation truthfully"
+    }
+    if ($exactNewTrialShot1Closeout.commercial_delivery_ready -ne $false -or $exactNewTrialShot1Closeout.memory_suitability -ne 'deferred') {
+      Add-Failure "Exact New-Trial 003 shot 1 execution closeout must keep commercial delivery and memory suitability blocked"
+    }
+    if ($exactNewTrialShot1Closeout.negative_case_count -lt 20 -or $exactNewTrialShot1Closeout.caught_negative_case_count -ne $exactNewTrialShot1Closeout.negative_case_count -or $exactNewTrialShot1Closeout.all_negative_cases_caught -ne $true) {
+      Add-Failure "Exact New-Trial 003 shot 1 execution closeout must catch every required negative case"
+    }
+  }
+
+  $exactNewTrialShot2PreCallOutput = & node (Join-Path $Root 'scripts/validate_exact_new_trial_003_shot_2_pre_call_payload_capture_preflight.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Exact New-Trial 003 shot 2 pre-call payload capture preflight validation exited with failure"
+  } else {
+    $exactNewTrialShot2PreCall = ($exactNewTrialShot2PreCallOutput -join "`n") | ConvertFrom-Json
+    if ($exactNewTrialShot2PreCall.passed -ne $true -or $exactNewTrialShot2PreCall.phase -ne 'v0_6_28_exact_new_trial_003_shot_2_pre_call_payload_capture_preflight') {
+      Add-Failure "Exact New-Trial 003 shot 2 pre-call payload capture preflight validation must pass"
+    }
+    if ($exactNewTrialShot2PreCall.attempt_id -ne 'v0_3_3_exact_new_trial_003_shot_2' -or $exactNewTrialShot2PreCall.payload_capture_ref -ne 'reports/provider_payload_captures/v0_3_3_exact_new_trial_003_shot_2_request_payload.sanitized.json') {
+      Add-Failure "Exact New-Trial 003 shot 2 pre-call payload capture preflight must bind the exact shot id and payload path"
+    }
+    if ($exactNewTrialShot2PreCall.pre_provider_call_payload_capture_satisfied -ne $true -or $exactNewTrialShot2PreCall.path_collision_clear_now -ne $true) {
+      Add-Failure "Exact New-Trial 003 shot 2 pre-call payload capture preflight must prove literal pre-call capture and clear future execution paths"
+    }
+    if ($exactNewTrialShot2PreCall.provider_call_performed -ne $false -or $exactNewTrialShot2PreCall.image_generation_performed -ne $false) {
+      Add-Failure "Exact New-Trial 003 shot 2 pre-call payload capture preflight must not perform provider or image actions"
+    }
+    if ($exactNewTrialShot2PreCall.negative_case_count -lt 20 -or $exactNewTrialShot2PreCall.caught_negative_case_count -ne $exactNewTrialShot2PreCall.negative_case_count -or $exactNewTrialShot2PreCall.all_negative_cases_caught -ne $true) {
+      Add-Failure "Exact New-Trial 003 shot 2 pre-call payload capture preflight must catch every required negative case"
+    }
+  }
+
+  $exactNewTrialShot2CloseoutOutput = & node (Join-Path $Root 'scripts/validate_exact_new_trial_003_shot_2_execution_closeout.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Exact New-Trial 003 shot 2 execution closeout validation exited with failure"
+  } else {
+    $exactNewTrialShot2Closeout = ($exactNewTrialShot2CloseoutOutput -join "`n") | ConvertFrom-Json
+    if ($exactNewTrialShot2Closeout.passed -ne $true -or $exactNewTrialShot2Closeout.phase -ne 'v0_6_29_exact_new_trial_003_shot_2_execution_closeout') {
+      Add-Failure "Exact New-Trial 003 shot 2 execution closeout validation must pass"
+    }
+    if ($exactNewTrialShot2Closeout.attempt_id -ne 'v0_3_3_exact_new_trial_003_shot_2' -or $exactNewTrialShot2Closeout.output_image_sha256 -ne '8bd7b81a916f0f6333392562d84e32368a3f28dd6a6456fc2f9e49d835a62c3b') {
+      Add-Failure "Exact New-Trial 003 shot 2 execution closeout must bind the exact shot id and image hash"
+    }
+    if ($exactNewTrialShot2Closeout.local_persistence_verification_satisfied -ne $true -or $exactNewTrialShot2Closeout.reviewable_sample -ne $true -or $exactNewTrialShot2Closeout.accepted_candidate -ne $true) {
+      Add-Failure "Exact New-Trial 003 shot 2 execution closeout must prove local persistence, reviewability, and candidate acceptance"
+    }
+    if ($exactNewTrialShot2Closeout.pre_provider_call_payload_capture_satisfied -ne $true -or $exactNewTrialShot2Closeout.post_provider_call_payload_reconstruction_performed -ne $false) {
+      Add-Failure "Exact New-Trial 003 shot 2 execution closeout must preserve the literal pre-call payload capture truth"
+    }
+    if ($exactNewTrialShot2Closeout.commercial_delivery_ready -ne $false -or $exactNewTrialShot2Closeout.memory_suitability -ne 'deferred') {
+      Add-Failure "Exact New-Trial 003 shot 2 execution closeout must keep commercial delivery and memory suitability blocked"
+    }
+    if ($exactNewTrialShot2Closeout.negative_case_count -lt 20 -or $exactNewTrialShot2Closeout.caught_negative_case_count -ne $exactNewTrialShot2Closeout.negative_case_count -or $exactNewTrialShot2Closeout.all_negative_cases_caught -ne $true) {
+      Add-Failure "Exact New-Trial 003 shot 2 execution closeout must catch every required negative case"
+    }
+  }
+
+  $exactNewTrialShot3PreCallOutput = & node (Join-Path $Root 'scripts/validate_exact_new_trial_003_shot_3_pre_call_payload_capture_preflight.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Exact New-Trial 003 shot 3 pre-call payload capture preflight validation exited with failure"
+  } else {
+    $exactNewTrialShot3PreCall = ($exactNewTrialShot3PreCallOutput -join "`n") | ConvertFrom-Json
+    if ($exactNewTrialShot3PreCall.passed -ne $true -or $exactNewTrialShot3PreCall.phase -ne 'v0_6_30_exact_new_trial_003_shot_3_pre_call_payload_capture_preflight') {
+      Add-Failure "Exact New-Trial 003 shot 3 pre-call payload capture preflight validation must pass"
+    }
+    if ($exactNewTrialShot3PreCall.attempt_id -ne 'v0_3_3_exact_new_trial_003_shot_3' -or $exactNewTrialShot3PreCall.payload_capture_ref -ne 'reports/provider_payload_captures/v0_3_3_exact_new_trial_003_shot_3_request_payload.sanitized.json') {
+      Add-Failure "Exact New-Trial 003 shot 3 pre-call payload capture preflight must bind the exact shot id and payload path"
+    }
+    if ($exactNewTrialShot3PreCall.pre_provider_call_payload_capture_satisfied -ne $true -or $exactNewTrialShot3PreCall.path_collision_clear_now -ne $true) {
+      Add-Failure "Exact New-Trial 003 shot 3 pre-call payload capture preflight must prove literal pre-call capture and clear future execution paths"
+    }
+    if ($exactNewTrialShot3PreCall.provider_call_performed -ne $false -or $exactNewTrialShot3PreCall.image_generation_performed -ne $false) {
+      Add-Failure "Exact New-Trial 003 shot 3 pre-call payload capture preflight must not perform provider or image actions"
+    }
+    if ($exactNewTrialShot3PreCall.negative_case_count -lt 20 -or $exactNewTrialShot3PreCall.caught_negative_case_count -ne $exactNewTrialShot3PreCall.negative_case_count -or $exactNewTrialShot3PreCall.all_negative_cases_caught -ne $true) {
+      Add-Failure "Exact New-Trial 003 shot 3 pre-call payload capture preflight must catch every required negative case"
+    }
+  }
+
+  $exactNewTrialShot3CloseoutOutput = & node (Join-Path $Root 'scripts/validate_exact_new_trial_003_shot_3_execution_closeout.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Exact New-Trial 003 shot 3 execution closeout validation exited with failure"
+  } else {
+    $exactNewTrialShot3Closeout = ($exactNewTrialShot3CloseoutOutput -join "`n") | ConvertFrom-Json
+    if ($exactNewTrialShot3Closeout.passed -ne $true -or $exactNewTrialShot3Closeout.phase -ne 'v0_6_31_exact_new_trial_003_shot_3_execution_closeout') {
+      Add-Failure "Exact New-Trial 003 shot 3 execution closeout validation must pass"
+    }
+    if ($exactNewTrialShot3Closeout.attempt_id -ne 'v0_3_3_exact_new_trial_003_shot_3' -or $exactNewTrialShot3Closeout.output_image_sha256 -ne 'c3f69ce85eb2fa1d7e92fe0bc0c493a13fb830ea9fd10d2e5d73056e33e143a7') {
+      Add-Failure "Exact New-Trial 003 shot 3 execution closeout must bind the exact shot id and image hash"
+    }
+    if ($exactNewTrialShot3Closeout.local_persistence_verification_satisfied -ne $true -or $exactNewTrialShot3Closeout.reviewable_sample -ne $true -or $exactNewTrialShot3Closeout.accepted_candidate -ne $true) {
+      Add-Failure "Exact New-Trial 003 shot 3 execution closeout must prove local persistence, reviewability, and candidate acceptance"
+    }
+    if ($exactNewTrialShot3Closeout.pre_provider_call_payload_capture_satisfied -ne $true -or $exactNewTrialShot3Closeout.post_provider_call_payload_reconstruction_performed -ne $false) {
+      Add-Failure "Exact New-Trial 003 shot 3 execution closeout must preserve the literal pre-call payload capture truth"
+    }
+    if ($exactNewTrialShot3Closeout.commercial_delivery_ready -ne $false -or $exactNewTrialShot3Closeout.memory_suitability -ne 'deferred') {
+      Add-Failure "Exact New-Trial 003 shot 3 execution closeout must keep commercial delivery and memory suitability blocked"
+    }
+    if ($exactNewTrialShot3Closeout.negative_case_count -lt 20 -or $exactNewTrialShot3Closeout.caught_negative_case_count -ne $exactNewTrialShot3Closeout.negative_case_count -or $exactNewTrialShot3Closeout.all_negative_cases_caught -ne $true) {
+      Add-Failure "Exact New-Trial 003 shot 3 execution closeout must catch every required negative case"
+    }
+  }
+
+  $exactNewTrialHumanReviewOutput = & node (Join-Path $Root 'scripts/validate_exact_new_trial_003_human_review.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Exact New-Trial 003 human review validation exited with failure"
+  } else {
+    $exactNewTrialHumanReview = ($exactNewTrialHumanReviewOutput -join "`n") | ConvertFrom-Json
+    if ($exactNewTrialHumanReview.passed -ne $true -or $exactNewTrialHumanReview.phase -ne 'v0_6_32_exact_new_trial_003_human_review') {
+      Add-Failure "Exact New-Trial 003 human review validation must pass"
+    }
+    if ($exactNewTrialHumanReview.selected_candidate_attempt_id -ne 'v0_3_3_exact_new_trial_003_shot_2' -or $exactNewTrialHumanReview.selected_candidate_output_image_sha256 -ne '8bd7b81a916f0f6333392562d84e32368a3f28dd6a6456fc2f9e49d835a62c3b') {
+      Add-Failure "Exact New-Trial 003 human review must select the exact shot_2 candidate and hash"
+    }
+    if ($exactNewTrialHumanReview.compared_candidate_count -ne 3) {
+      Add-Failure "Exact New-Trial 003 human review must compare exactly 3 candidates"
+    }
+    if ($exactNewTrialHumanReview.formal_human_approval_status -ne 'pending' -or $exactNewTrialHumanReview.human_approval_captured_now -ne $false) {
+      Add-Failure "Exact New-Trial 003 human review must keep formal human approval pending"
+    }
+    if ($exactNewTrialHumanReview.accepted_sample_auto_promotion -ne $false -or $exactNewTrialHumanReview.production_candidate_created -ne $false -or $exactNewTrialHumanReview.commercial_delivery_ready -ne $false -or $exactNewTrialHumanReview.memory_suitability -ne 'deferred') {
+      Add-Failure "Exact New-Trial 003 human review must keep promotion, delivery, and memory paths blocked"
+    }
+    if ($exactNewTrialHumanReview.negative_case_count -lt 16 -or $exactNewTrialHumanReview.caught_negative_case_count -ne $exactNewTrialHumanReview.negative_case_count -or $exactNewTrialHumanReview.all_negative_cases_caught -ne $true) {
+      Add-Failure "Exact New-Trial 003 human review must catch every required negative case"
+    }
+  }
+
+  $exactNewTrialSelectedCandidateHumanApprovalIntakePackageOutput = & node (Join-Path $Root 'scripts/validate_exact_new_trial_003_selected_candidate_human_approval_intake_package.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Exact New-Trial 003 selected candidate human approval intake package validation exited with failure"
+  } else {
+    $exactNewTrialSelectedCandidateHumanApprovalIntakePackage = ($exactNewTrialSelectedCandidateHumanApprovalIntakePackageOutput -join "`n") | ConvertFrom-Json
+    if ($exactNewTrialSelectedCandidateHumanApprovalIntakePackage.passed -ne $true -or $exactNewTrialSelectedCandidateHumanApprovalIntakePackage.phase -ne 'v0_6_33_exact_new_trial_003_selected_candidate_human_approval_intake_package') {
+      Add-Failure "Exact New-Trial 003 selected candidate human approval intake package validation must pass"
+    }
+    if ($exactNewTrialSelectedCandidateHumanApprovalIntakePackage.selected_candidate_attempt_id -ne 'v0_3_3_exact_new_trial_003_shot_2' -or $exactNewTrialSelectedCandidateHumanApprovalIntakePackage.proposed_sample_id -ne 'accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001' -or $exactNewTrialSelectedCandidateHumanApprovalIntakePackage.category -ne 'fashion_lookbook_portrait') {
+      Add-Failure "Exact New-Trial 003 selected candidate human approval intake package must bind the exact selected candidate, sample id, and category"
+    }
+    if ($exactNewTrialSelectedCandidateHumanApprovalIntakePackage.formal_human_approval_status -ne 'pending' -or $exactNewTrialSelectedCandidateHumanApprovalIntakePackage.human_approval_captured_now -ne $false -or $exactNewTrialSelectedCandidateHumanApprovalIntakePackage.accepted_samples_registration_ready_now -ne $false) {
+      Add-Failure "Exact New-Trial 003 selected candidate human approval intake package must keep human approval and registration blocked"
+    }
+    if ($exactNewTrialSelectedCandidateHumanApprovalIntakePackage.negative_case_count -lt 10 -or $exactNewTrialSelectedCandidateHumanApprovalIntakePackage.caught_negative_case_count -ne $exactNewTrialSelectedCandidateHumanApprovalIntakePackage.negative_case_count -or $exactNewTrialSelectedCandidateHumanApprovalIntakePackage.all_negative_cases_caught -ne $true) {
+      Add-Failure "Exact New-Trial 003 selected candidate human approval intake package must catch every required negative case"
+    }
+  }
+
+  $exactNewTrialSelectedCandidatePostApprovalGateAlignmentOutput = & node (Join-Path $Root 'scripts/validate_exact_new_trial_003_selected_candidate_post_approval_gate_alignment.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Exact New-Trial 003 selected candidate post-approval gate alignment validation exited with failure"
+  } else {
+    $exactNewTrialSelectedCandidatePostApprovalGateAlignment = ($exactNewTrialSelectedCandidatePostApprovalGateAlignmentOutput -join "`n") | ConvertFrom-Json
+    if ($exactNewTrialSelectedCandidatePostApprovalGateAlignment.passed -ne $true -or $exactNewTrialSelectedCandidatePostApprovalGateAlignment.phase -ne 'v0_6_34_exact_new_trial_003_selected_candidate_post_approval_gate_alignment') {
+      Add-Failure "Exact New-Trial 003 selected candidate post-approval gate alignment validation must pass"
+    }
+    if ($exactNewTrialSelectedCandidatePostApprovalGateAlignment.selected_candidate_attempt_id -ne 'v0_3_3_exact_new_trial_003_shot_2' -or $exactNewTrialSelectedCandidatePostApprovalGateAlignment.proposed_sample_id -ne 'accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001' -or $exactNewTrialSelectedCandidatePostApprovalGateAlignment.category -ne 'fashion_lookbook_portrait') {
+      Add-Failure "Exact New-Trial 003 selected candidate post-approval gate alignment must bind the exact selected candidate, sample id, and category"
+    }
+    if ($exactNewTrialSelectedCandidatePostApprovalGateAlignment.gate_status -ne 'blocked' -or $exactNewTrialSelectedCandidatePostApprovalGateAlignment.human_approval_captured_now -ne $false -or $exactNewTrialSelectedCandidatePostApprovalGateAlignment.accepted_samples_registration_ready_now -ne $false) {
+      Add-Failure "Exact New-Trial 003 selected candidate post-approval gate alignment must keep human approval and registration blocked"
+    }
+    if ($exactNewTrialSelectedCandidatePostApprovalGateAlignment.negative_case_count -lt 10 -or $exactNewTrialSelectedCandidatePostApprovalGateAlignment.caught_negative_case_count -ne $exactNewTrialSelectedCandidatePostApprovalGateAlignment.negative_case_count -or $exactNewTrialSelectedCandidatePostApprovalGateAlignment.all_negative_cases_caught -ne $true) {
+      Add-Failure "Exact New-Trial 003 selected candidate post-approval gate alignment must catch every required negative case"
+    }
+  }
+
+  $exactNewTrialPostApprovalRegistrationPreflightDraftOutput = & node (Join-Path $Root 'scripts/validate_exact_new_trial_003_post_approval_registration_preflight_draft.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Exact New-Trial 003 post-approval registration preflight draft validation exited with failure"
+  } else {
+    $exactNewTrialPostApprovalRegistrationPreflightDraft = ($exactNewTrialPostApprovalRegistrationPreflightDraftOutput -join "`n") | ConvertFrom-Json
+    if ($exactNewTrialPostApprovalRegistrationPreflightDraft.passed -ne $true -or $exactNewTrialPostApprovalRegistrationPreflightDraft.phase -ne 'v0_6_35_exact_new_trial_003_post_approval_registration_preflight_draft') {
+      Add-Failure "Exact New-Trial 003 post-approval registration preflight draft validation must pass"
+    }
+    if ($exactNewTrialPostApprovalRegistrationPreflightDraft.selected_candidate_attempt_id -ne 'v0_3_3_exact_new_trial_003_shot_2' -or $exactNewTrialPostApprovalRegistrationPreflightDraft.proposed_sample_id -ne 'accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001' -or $exactNewTrialPostApprovalRegistrationPreflightDraft.category -ne 'fashion_lookbook_portrait') {
+      Add-Failure "Exact New-Trial 003 post-approval registration preflight draft must bind the exact selected candidate, sample id, and category"
+    }
+    if ($exactNewTrialPostApprovalRegistrationPreflightDraft.registration_blocker -ne 'human_approval_missing' -or $exactNewTrialPostApprovalRegistrationPreflightDraft.human_approval_present -ne $false -or $exactNewTrialPostApprovalRegistrationPreflightDraft.accepted_samples_registration_eligible -ne $false) {
+      Add-Failure "Exact New-Trial 003 post-approval registration preflight draft must keep registration blocked until real human approval exists"
+    }
+    if ($exactNewTrialPostApprovalRegistrationPreflightDraft.negative_case_count -lt 10 -or $exactNewTrialPostApprovalRegistrationPreflightDraft.caught_negative_case_count -ne $exactNewTrialPostApprovalRegistrationPreflightDraft.negative_case_count -or $exactNewTrialPostApprovalRegistrationPreflightDraft.all_negative_cases_caught -ne $true) {
+      Add-Failure "Exact New-Trial 003 post-approval registration preflight draft must catch every required negative case"
+    }
+  }
+
+  $exactNewTrialAcceptedSamplesRegistrationAuthorizationPackageDraftOutput = & node (Join-Path $Root 'scripts/validate_exact_new_trial_003_accepted_samples_registration_authorization_package_draft.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Exact New-Trial 003 accepted_samples registration authorization package draft validation exited with failure"
+  } else {
+    $exactNewTrialAcceptedSamplesRegistrationAuthorizationPackageDraft = ($exactNewTrialAcceptedSamplesRegistrationAuthorizationPackageDraftOutput -join "`n") | ConvertFrom-Json
+    if ($exactNewTrialAcceptedSamplesRegistrationAuthorizationPackageDraft.passed -ne $true -or $exactNewTrialAcceptedSamplesRegistrationAuthorizationPackageDraft.phase -ne 'v0_6_36_exact_new_trial_003_accepted_samples_registration_authorization_package_draft') {
+      Add-Failure "Exact New-Trial 003 accepted_samples registration authorization package draft validation must pass"
+    }
+    if ($exactNewTrialAcceptedSamplesRegistrationAuthorizationPackageDraft.target_sample_id -ne 'accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001' -or $exactNewTrialAcceptedSamplesRegistrationAuthorizationPackageDraft.target_candidate_id -ne 'v0_3_3_exact_new_trial_003_shot_2') {
+      Add-Failure "Exact New-Trial 003 accepted_samples registration authorization package draft must bind the exact selected candidate and sample id"
+    }
+    if ($exactNewTrialAcceptedSamplesRegistrationAuthorizationPackageDraft.blocker -ne 'human_approval_missing' -or $exactNewTrialAcceptedSamplesRegistrationAuthorizationPackageDraft.authorization_package_status -ne 'prepared_blocked_not_granted' -or $exactNewTrialAcceptedSamplesRegistrationAuthorizationPackageDraft.execution_ready -ne $false) {
+      Add-Failure "Exact New-Trial 003 accepted_samples registration authorization package draft must keep authorization blocked until real human approval exists"
+    }
+    if ($exactNewTrialAcceptedSamplesRegistrationAuthorizationPackageDraft.negative_case_count -lt 6 -or $exactNewTrialAcceptedSamplesRegistrationAuthorizationPackageDraft.caught_negative_case_count -ne $exactNewTrialAcceptedSamplesRegistrationAuthorizationPackageDraft.negative_case_count -or $exactNewTrialAcceptedSamplesRegistrationAuthorizationPackageDraft.all_negative_cases_caught -ne $true) {
+      Add-Failure "Exact New-Trial 003 accepted_samples registration authorization package draft must catch every required negative case"
+    }
+  }
+
+  $exactNewTrialAcceptedSamplesRegistrationExecutionPreflightOutput = & node (Join-Path $Root 'scripts/validate_exact_new_trial_003_accepted_samples_registration_execution_preflight.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Exact New-Trial 003 accepted_samples registration execution preflight validation exited with failure"
+  } else {
+    $exactNewTrialAcceptedSamplesRegistrationExecutionPreflight = ($exactNewTrialAcceptedSamplesRegistrationExecutionPreflightOutput -join "`n") | ConvertFrom-Json
+    if ($exactNewTrialAcceptedSamplesRegistrationExecutionPreflight.passed -ne $true -or $exactNewTrialAcceptedSamplesRegistrationExecutionPreflight.phase -ne 'v0_6_37_exact_new_trial_003_accepted_samples_registration_execution_preflight') {
+      Add-Failure "Exact New-Trial 003 accepted_samples registration execution preflight validation must pass"
+    }
+    if ($exactNewTrialAcceptedSamplesRegistrationExecutionPreflight.target_sample_id -ne 'accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001' -or $exactNewTrialAcceptedSamplesRegistrationExecutionPreflight.target_candidate_id -ne 'v0_3_3_exact_new_trial_003_shot_2' -or $exactNewTrialAcceptedSamplesRegistrationExecutionPreflight.category -ne 'fashion_lookbook_portrait') {
+      Add-Failure "Exact New-Trial 003 accepted_samples registration execution preflight must bind the exact selected candidate, sample id, and category"
+    }
+    if ($exactNewTrialAcceptedSamplesRegistrationExecutionPreflight.preflight_status -ne 'blocked' -or $exactNewTrialAcceptedSamplesRegistrationExecutionPreflight.blocker -ne 'missing_human_approval_and_authorization_grant' -or $exactNewTrialAcceptedSamplesRegistrationExecutionPreflight.execution_allowed_now -ne $false) {
+      Add-Failure "Exact New-Trial 003 accepted_samples registration execution preflight must stay blocked until real approval and authorization grant exist"
+    }
+    if ($exactNewTrialAcceptedSamplesRegistrationExecutionPreflight.negative_case_count -lt 6 -or $exactNewTrialAcceptedSamplesRegistrationExecutionPreflight.caught_negative_case_count -ne $exactNewTrialAcceptedSamplesRegistrationExecutionPreflight.negative_case_count -or $exactNewTrialAcceptedSamplesRegistrationExecutionPreflight.all_negative_cases_caught -ne $true) {
+      Add-Failure "Exact New-Trial 003 accepted_samples registration execution preflight must catch every required negative case"
+    }
+  }
+
+  $exactNewTrialDurableArchiveAuthorizationCompilerOutputPreflightOutput = & node (Join-Path $Root 'scripts/validate_exact_new_trial_003_durable_archive_authorization_compiler_output_preflight.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Exact New-Trial 003 durable archive authorization compiler-output preflight validation exited with failure"
+  } else {
+    $exactNewTrialDurableArchiveAuthorizationCompilerOutputPreflight = ($exactNewTrialDurableArchiveAuthorizationCompilerOutputPreflightOutput -join "`n") | ConvertFrom-Json
+    if ($exactNewTrialDurableArchiveAuthorizationCompilerOutputPreflight.passed -ne $true -or $exactNewTrialDurableArchiveAuthorizationCompilerOutputPreflight.phase -ne 'v0_6_38_exact_new_trial_003_durable_archive_authorization_compiler_output_preflight') {
+      Add-Failure "Exact New-Trial 003 durable archive authorization compiler-output preflight validation must pass"
+    }
+    if ($exactNewTrialDurableArchiveAuthorizationCompilerOutputPreflight.package_type -ne 'durable_archive' -or $exactNewTrialDurableArchiveAuthorizationCompilerOutputPreflight.target_sample_id -ne 'accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001' -or $exactNewTrialDurableArchiveAuthorizationCompilerOutputPreflight.target_candidate_id -ne 'v0_3_3_exact_new_trial_003_shot_2' -or $exactNewTrialDurableArchiveAuthorizationCompilerOutputPreflight.category -ne 'fashion_lookbook_portrait') {
+      Add-Failure "Exact New-Trial 003 durable archive authorization compiler-output preflight must bind the exact package type, selected candidate, sample id, and category"
+    }
+    if ($exactNewTrialDurableArchiveAuthorizationCompilerOutputPreflight.package_status -ne 'draft_blocked_missing_accepted_sample_registration_and_archive_copy_authorization' -or $exactNewTrialDurableArchiveAuthorizationCompilerOutputPreflight.blocker -ne 'missing_accepted_sample_registration_and_archive_copy_authorization' -or $exactNewTrialDurableArchiveAuthorizationCompilerOutputPreflight.accepted_sample_registration_completed -ne $false -or $exactNewTrialDurableArchiveAuthorizationCompilerOutputPreflight.archive_copy_authorized -ne $false -or $exactNewTrialDurableArchiveAuthorizationCompilerOutputPreflight.archive_copy_performed -ne $false -or $exactNewTrialDurableArchiveAuthorizationCompilerOutputPreflight.target_archive_path_provided -ne $false -or $exactNewTrialDurableArchiveAuthorizationCompilerOutputPreflight.write_command_permission -ne $false -or $exactNewTrialDurableArchiveAuthorizationCompilerOutputPreflight.execution_allowed_now -ne $false) {
+      Add-Failure "Exact New-Trial 003 durable archive authorization compiler-output preflight must stay blocked until accepted-sample registration and archive authorization both exist"
+    }
+    if ($exactNewTrialDurableArchiveAuthorizationCompilerOutputPreflight.negative_case_count -lt 6 -or $exactNewTrialDurableArchiveAuthorizationCompilerOutputPreflight.caught_negative_case_count -ne $exactNewTrialDurableArchiveAuthorizationCompilerOutputPreflight.negative_case_count -or $exactNewTrialDurableArchiveAuthorizationCompilerOutputPreflight.all_negative_cases_caught -ne $true) {
+      Add-Failure "Exact New-Trial 003 durable archive authorization compiler-output preflight must catch every required negative case"
+    }
+  }
+
+  $exactNewTrialProductionCandidateAuthorizationCompilerOutputPreflightOutput = & node (Join-Path $Root 'scripts/validate_exact_new_trial_003_production_candidate_authorization_compiler_output_preflight.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Exact New-Trial 003 production candidate authorization compiler-output preflight validation exited with failure"
+  } else {
+    $exactNewTrialProductionCandidateAuthorizationCompilerOutputPreflight = ($exactNewTrialProductionCandidateAuthorizationCompilerOutputPreflightOutput -join "`n") | ConvertFrom-Json
+    if ($exactNewTrialProductionCandidateAuthorizationCompilerOutputPreflight.passed -ne $true -or $exactNewTrialProductionCandidateAuthorizationCompilerOutputPreflight.phase -ne 'v0_6_39_exact_new_trial_003_production_candidate_authorization_compiler_output_preflight') {
+      Add-Failure "Exact New-Trial 003 production candidate authorization compiler-output preflight validation must pass"
+    }
+    if ($exactNewTrialProductionCandidateAuthorizationCompilerOutputPreflight.package_type -ne 'production_candidate' -or $exactNewTrialProductionCandidateAuthorizationCompilerOutputPreflight.target_sample_id -ne 'accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001' -or $exactNewTrialProductionCandidateAuthorizationCompilerOutputPreflight.target_candidate_id -ne 'v0_3_3_exact_new_trial_003_shot_2' -or $exactNewTrialProductionCandidateAuthorizationCompilerOutputPreflight.category -ne 'fashion_lookbook_portrait') {
+      Add-Failure "Exact New-Trial 003 production candidate authorization compiler-output preflight must bind the exact package type, selected candidate, sample id, and category"
+    }
+    if ($exactNewTrialProductionCandidateAuthorizationCompilerOutputPreflight.package_status -ne 'draft_blocked_missing_accepted_sample_registration_archive_completion_and_production_candidate_authorization' -or $exactNewTrialProductionCandidateAuthorizationCompilerOutputPreflight.blocker -ne 'missing_accepted_sample_registration_archive_completion_and_production_candidate_authorization' -or $exactNewTrialProductionCandidateAuthorizationCompilerOutputPreflight.accepted_sample_registration_completed -ne $false -or $exactNewTrialProductionCandidateAuthorizationCompilerOutputPreflight.durable_archive_ready -ne $false -or $exactNewTrialProductionCandidateAuthorizationCompilerOutputPreflight.production_candidate_authorized -ne $false -or $exactNewTrialProductionCandidateAuthorizationCompilerOutputPreflight.production_candidate_write_performed -ne $false -or $exactNewTrialProductionCandidateAuthorizationCompilerOutputPreflight.eligibility_preflight_present -ne $false -or $exactNewTrialProductionCandidateAuthorizationCompilerOutputPreflight.write_command_permission -ne $false -or $exactNewTrialProductionCandidateAuthorizationCompilerOutputPreflight.execution_allowed_now -ne $false) {
+      Add-Failure "Exact New-Trial 003 production candidate authorization compiler-output preflight must stay blocked until accepted-sample registration, archive completion, and production authorization all exist"
+    }
+    if ($exactNewTrialProductionCandidateAuthorizationCompilerOutputPreflight.negative_case_count -lt 6 -or $exactNewTrialProductionCandidateAuthorizationCompilerOutputPreflight.caught_negative_case_count -ne $exactNewTrialProductionCandidateAuthorizationCompilerOutputPreflight.negative_case_count -or $exactNewTrialProductionCandidateAuthorizationCompilerOutputPreflight.all_negative_cases_caught -ne $true) {
+      Add-Failure "Exact New-Trial 003 production candidate authorization compiler-output preflight must catch every required negative case"
+    }
+  }
+
+  $exactNewTrialDailyNoteVcpMemoryAuthorizationCompilerOutputPreflightOutput = & node (Join-Path $Root 'scripts/validate_exact_new_trial_003_daily_note_vcp_memory_authorization_compiler_output_preflight.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Exact New-Trial 003 DailyNote VCP memory authorization compiler-output preflight validation exited with failure"
+  } else {
+    $exactNewTrialDailyNoteVcpMemoryAuthorizationCompilerOutputPreflight = ($exactNewTrialDailyNoteVcpMemoryAuthorizationCompilerOutputPreflightOutput -join "`n") | ConvertFrom-Json
+    if ($exactNewTrialDailyNoteVcpMemoryAuthorizationCompilerOutputPreflight.passed -ne $true -or $exactNewTrialDailyNoteVcpMemoryAuthorizationCompilerOutputPreflight.phase -ne 'v0_6_40_exact_new_trial_003_daily_note_vcp_memory_authorization_compiler_output_preflight') {
+      Add-Failure "Exact New-Trial 003 DailyNote VCP memory authorization compiler-output preflight validation must pass"
+    }
+    if ($exactNewTrialDailyNoteVcpMemoryAuthorizationCompilerOutputPreflight.package_type -ne 'daily_note_vcp_memory' -or $exactNewTrialDailyNoteVcpMemoryAuthorizationCompilerOutputPreflight.target_sample_id -ne 'accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001' -or $exactNewTrialDailyNoteVcpMemoryAuthorizationCompilerOutputPreflight.target_candidate_id -ne 'v0_3_3_exact_new_trial_003_shot_2' -or $exactNewTrialDailyNoteVcpMemoryAuthorizationCompilerOutputPreflight.category -ne 'fashion_lookbook_portrait') {
+      Add-Failure "Exact New-Trial 003 DailyNote VCP memory authorization compiler-output preflight must bind the exact package type, selected candidate, sample id, and category"
+    }
+    if ($exactNewTrialDailyNoteVcpMemoryAuthorizationCompilerOutputPreflight.package_status -ne 'draft_blocked_missing_accepted_sample_registration_archive_completion_production_candidate_authorization_memory_delta_and_daily_note_vcp_memory_authorization' -or $exactNewTrialDailyNoteVcpMemoryAuthorizationCompilerOutputPreflight.blocker -ne 'missing_accepted_sample_registration_archive_completion_production_candidate_authorization_memory_delta_and_daily_note_vcp_memory_authorization' -or $exactNewTrialDailyNoteVcpMemoryAuthorizationCompilerOutputPreflight.accepted_sample_registration_completed -ne $false -or $exactNewTrialDailyNoteVcpMemoryAuthorizationCompilerOutputPreflight.durable_archive_ready -ne $false -or $exactNewTrialDailyNoteVcpMemoryAuthorizationCompilerOutputPreflight.production_candidate_ready -ne $false -or $exactNewTrialDailyNoteVcpMemoryAuthorizationCompilerOutputPreflight.daily_note_write_authorized -ne $false -or $exactNewTrialDailyNoteVcpMemoryAuthorizationCompilerOutputPreflight.vcp_memory_write_authorized -ne $false -or $exactNewTrialDailyNoteVcpMemoryAuthorizationCompilerOutputPreflight.memory_delta_draft_present -ne $false -or $exactNewTrialDailyNoteVcpMemoryAuthorizationCompilerOutputPreflight.sensitive_data_scan_present -ne $false -or $exactNewTrialDailyNoteVcpMemoryAuthorizationCompilerOutputPreflight.write_command_permission -ne $false -or $exactNewTrialDailyNoteVcpMemoryAuthorizationCompilerOutputPreflight.execution_allowed_now -ne $false) {
+      Add-Failure "Exact New-Trial 003 DailyNote VCP memory authorization compiler-output preflight must stay blocked until accepted-sample registration, archive completion, production readiness, memory-delta, and memory authorization all exist"
+    }
+    if ($exactNewTrialDailyNoteVcpMemoryAuthorizationCompilerOutputPreflight.negative_case_count -lt 8 -or $exactNewTrialDailyNoteVcpMemoryAuthorizationCompilerOutputPreflight.caught_negative_case_count -ne $exactNewTrialDailyNoteVcpMemoryAuthorizationCompilerOutputPreflight.negative_case_count -or $exactNewTrialDailyNoteVcpMemoryAuthorizationCompilerOutputPreflight.all_negative_cases_caught -ne $true) {
+      Add-Failure "Exact New-Trial 003 DailyNote VCP memory authorization compiler-output preflight must catch every required negative case"
+    }
+  }
+
+  $exactNewTrialMemoryDeltaDraftPackageOutput = & node (Join-Path $Root 'scripts/validate_exact_new_trial_003_memory_delta_draft_package.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Exact New-Trial 003 memory delta draft package validation exited with failure"
+  } else {
+    $exactNewTrialMemoryDeltaDraftPackage = ($exactNewTrialMemoryDeltaDraftPackageOutput -join "`n") | ConvertFrom-Json
+    if ($exactNewTrialMemoryDeltaDraftPackage.passed -ne $true -or $exactNewTrialMemoryDeltaDraftPackage.phase -ne 'v0_6_41_exact_new_trial_003_memory_delta_draft_package') {
+      Add-Failure "Exact New-Trial 003 memory delta draft package validation must pass"
+    }
+    if ($exactNewTrialMemoryDeltaDraftPackage.package_type -ne 'memory_delta_draft_package' -or $exactNewTrialMemoryDeltaDraftPackage.target_sample_id -ne 'accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001' -or $exactNewTrialMemoryDeltaDraftPackage.target_candidate_id -ne 'v0_3_3_exact_new_trial_003_shot_2' -or $exactNewTrialMemoryDeltaDraftPackage.category -ne 'fashion_lookbook_portrait') {
+      Add-Failure "Exact New-Trial 003 memory delta draft package must bind the exact package type, selected candidate, sample id, and category"
+    }
+    if ($exactNewTrialMemoryDeltaDraftPackage.memory_delta_draft_package_created -ne $true -or $exactNewTrialMemoryDeltaDraftPackage.memory_suitability_status -ne 'deferred' -or $exactNewTrialMemoryDeltaDraftPackage.approval_required -ne $true -or $exactNewTrialMemoryDeltaDraftPackage.approval_status -ne 'pending' -or $exactNewTrialMemoryDeltaDraftPackage.should_write_to_vcp -ne $false -or $exactNewTrialMemoryDeltaDraftPackage.execution_allowed_now -ne $false) {
+      Add-Failure "Exact New-Trial 003 memory delta draft package must stay draft-only and non-executable"
+    }
+    if ($exactNewTrialMemoryDeltaDraftPackage.daily_note_draft_cn_present -ne $true -or $exactNewTrialMemoryDeltaDraftPackage.vcp_memory_draft_cn_present -ne $true) {
+      Add-Failure "Exact New-Trial 003 memory delta draft package must carry Chinese DailyNote and VCP memory draft content"
+    }
+    if ($exactNewTrialMemoryDeltaDraftPackage.negative_case_count -lt 6 -or $exactNewTrialMemoryDeltaDraftPackage.caught_negative_case_count -ne $exactNewTrialMemoryDeltaDraftPackage.negative_case_count -or $exactNewTrialMemoryDeltaDraftPackage.all_negative_cases_caught -ne $true) {
+      Add-Failure "Exact New-Trial 003 memory delta draft package must catch every required negative case"
+    }
+  }
+
+  $exactNewTrialSensitiveDataScanPreflightOutput = & node (Join-Path $Root 'scripts/validate_exact_new_trial_003_sensitive_data_scan_preflight.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Exact New-Trial 003 sensitive-data scan preflight validation exited with failure"
+  } else {
+    $exactNewTrialSensitiveDataScanPreflight = ($exactNewTrialSensitiveDataScanPreflightOutput -join "`n") | ConvertFrom-Json
+    if ($exactNewTrialSensitiveDataScanPreflight.passed -ne $true -or $exactNewTrialSensitiveDataScanPreflight.phase -ne 'v0_6_42_exact_new_trial_003_sensitive_data_scan_preflight') {
+      Add-Failure "Exact New-Trial 003 sensitive-data scan preflight validation must pass"
+    }
+    if ($exactNewTrialSensitiveDataScanPreflight.target_sample_id -ne 'accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001' -or $exactNewTrialSensitiveDataScanPreflight.target_candidate_id -ne 'v0_3_3_exact_new_trial_003_shot_2' -or $exactNewTrialSensitiveDataScanPreflight.category -ne 'fashion_lookbook_portrait') {
+      Add-Failure "Exact New-Trial 003 sensitive-data scan preflight must bind the exact selected candidate, sample id, and category"
+    }
+    if ($exactNewTrialSensitiveDataScanPreflight.memory_delta_draft_present -ne $true -or $exactNewTrialSensitiveDataScanPreflight.sensitive_data_scan_present -ne $true -or $exactNewTrialSensitiveDataScanPreflight.scan_status -ne 'passed_local_no_sensitive_content_detected' -or $exactNewTrialSensitiveDataScanPreflight.contains_secret -ne $false -or $exactNewTrialSensitiveDataScanPreflight.contains_private_path -ne $false -or $exactNewTrialSensitiveDataScanPreflight.raw_sensitive_content_saved -ne $false -or $exactNewTrialSensitiveDataScanPreflight.execution_allowed_now -ne $false) {
+      Add-Failure "Exact New-Trial 003 sensitive-data scan preflight must prove a passed local scan while keeping execution blocked"
+    }
+    if ($exactNewTrialSensitiveDataScanPreflight.negative_case_count -lt 6 -or $exactNewTrialSensitiveDataScanPreflight.caught_negative_case_count -ne $exactNewTrialSensitiveDataScanPreflight.negative_case_count -or $exactNewTrialSensitiveDataScanPreflight.all_negative_cases_caught -ne $true) {
+      Add-Failure "Exact New-Trial 003 sensitive-data scan preflight must catch every required negative case"
+    }
+  }
+
+  $exactNewTrialDailyNoteVcpMemoryAuthorizationRefreshPreflightOutput = & node (Join-Path $Root 'scripts/validate_exact_new_trial_003_daily_note_vcp_memory_authorization_compiler_output_refresh_preflight.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Exact New-Trial 003 DailyNote VCP memory authorization refresh preflight validation exited with failure"
+  } else {
+    $exactNewTrialDailyNoteVcpMemoryAuthorizationRefreshPreflight = ($exactNewTrialDailyNoteVcpMemoryAuthorizationRefreshPreflightOutput -join "`n") | ConvertFrom-Json
+    if ($exactNewTrialDailyNoteVcpMemoryAuthorizationRefreshPreflight.passed -ne $true -or $exactNewTrialDailyNoteVcpMemoryAuthorizationRefreshPreflight.phase -ne 'v0_6_43_exact_new_trial_003_daily_note_vcp_memory_authorization_compiler_output_refresh_preflight') {
+      Add-Failure "Exact New-Trial 003 DailyNote VCP memory authorization refresh preflight validation must pass"
+    }
+    if ($exactNewTrialDailyNoteVcpMemoryAuthorizationRefreshPreflight.package_type -ne 'daily_note_vcp_memory' -or $exactNewTrialDailyNoteVcpMemoryAuthorizationRefreshPreflight.target_sample_id -ne 'accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001' -or $exactNewTrialDailyNoteVcpMemoryAuthorizationRefreshPreflight.target_candidate_id -ne 'v0_3_3_exact_new_trial_003_shot_2' -or $exactNewTrialDailyNoteVcpMemoryAuthorizationRefreshPreflight.category -ne 'fashion_lookbook_portrait') {
+      Add-Failure "Exact New-Trial 003 DailyNote VCP memory authorization refresh preflight must bind the exact package type, selected candidate, sample id, and category"
+    }
+    if ($exactNewTrialDailyNoteVcpMemoryAuthorizationRefreshPreflight.package_status -ne 'draft_blocked_missing_accepted_sample_registration_archive_completion_production_candidate_authorization_exact_memory_targets_and_daily_note_vcp_memory_authorization' -or $exactNewTrialDailyNoteVcpMemoryAuthorizationRefreshPreflight.blocker -ne 'missing_accepted_sample_registration_archive_completion_production_candidate_authorization_exact_memory_targets_and_daily_note_vcp_memory_authorization' -or $exactNewTrialDailyNoteVcpMemoryAuthorizationRefreshPreflight.accepted_sample_registration_completed -ne $false -or $exactNewTrialDailyNoteVcpMemoryAuthorizationRefreshPreflight.durable_archive_ready -ne $false -or $exactNewTrialDailyNoteVcpMemoryAuthorizationRefreshPreflight.production_candidate_ready -ne $false -or $exactNewTrialDailyNoteVcpMemoryAuthorizationRefreshPreflight.daily_note_write_authorized -ne $false -or $exactNewTrialDailyNoteVcpMemoryAuthorizationRefreshPreflight.vcp_memory_write_authorized -ne $false -or $exactNewTrialDailyNoteVcpMemoryAuthorizationRefreshPreflight.memory_delta_draft_present -ne $true -or $exactNewTrialDailyNoteVcpMemoryAuthorizationRefreshPreflight.sensitive_data_scan_present -ne $true -or $exactNewTrialDailyNoteVcpMemoryAuthorizationRefreshPreflight.write_command_permission -ne $false -or $exactNewTrialDailyNoteVcpMemoryAuthorizationRefreshPreflight.execution_allowed_now -ne $false) {
+      Add-Failure "Exact New-Trial 003 DailyNote VCP memory authorization refresh preflight must acknowledge the local draft and scan while keeping execution blocked"
+    }
+    if ($exactNewTrialDailyNoteVcpMemoryAuthorizationRefreshPreflight.negative_case_count -lt 9 -or $exactNewTrialDailyNoteVcpMemoryAuthorizationRefreshPreflight.caught_negative_case_count -ne $exactNewTrialDailyNoteVcpMemoryAuthorizationRefreshPreflight.negative_case_count -or $exactNewTrialDailyNoteVcpMemoryAuthorizationRefreshPreflight.all_negative_cases_caught -ne $true) {
+      Add-Failure "Exact New-Trial 003 DailyNote VCP memory authorization refresh preflight must catch every required negative case"
+    }
+  }
+
+  $exactNewTrialExactAllowedMemoryTargetsPackageOutput = & node (Join-Path $Root 'scripts/validate_exact_new_trial_003_exact_allowed_memory_targets_package.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Exact New-Trial 003 exact allowed memory targets package validation exited with failure"
+  } else {
+    $exactNewTrialExactAllowedMemoryTargetsPackage = ($exactNewTrialExactAllowedMemoryTargetsPackageOutput -join "`n") | ConvertFrom-Json
+    if ($exactNewTrialExactAllowedMemoryTargetsPackage.passed -ne $true -or $exactNewTrialExactAllowedMemoryTargetsPackage.phase -ne 'v0_6_44_exact_new_trial_003_exact_allowed_memory_targets_package') {
+      Add-Failure "Exact New-Trial 003 exact allowed memory targets package validation must pass"
+    }
+    if ($exactNewTrialExactAllowedMemoryTargetsPackage.package_type -ne 'exact_allowed_memory_targets' -or $exactNewTrialExactAllowedMemoryTargetsPackage.target_sample_id -ne 'accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001' -or $exactNewTrialExactAllowedMemoryTargetsPackage.target_candidate_id -ne 'v0_3_3_exact_new_trial_003_shot_2' -or $exactNewTrialExactAllowedMemoryTargetsPackage.category -ne 'fashion_lookbook_portrait') {
+      Add-Failure "Exact New-Trial 003 exact allowed memory targets package must bind the exact package type, selected candidate, sample id, and category"
+    }
+    if ($exactNewTrialExactAllowedMemoryTargetsPackage.exact_allowed_memory_targets_defined -ne $true -or $exactNewTrialExactAllowedMemoryTargetsPackage.exact_allowed_memory_targets_count -ne 2 -or $exactNewTrialExactAllowedMemoryTargetsPackage.daily_note_write_authorized -ne $false -or $exactNewTrialExactAllowedMemoryTargetsPackage.vcp_memory_write_authorized -ne $false -or $exactNewTrialExactAllowedMemoryTargetsPackage.execution_allowed_now -ne $false) {
+      Add-Failure "Exact New-Trial 003 exact allowed memory targets package must define two exact blocked targets and keep execution disabled"
+    }
+    if ($exactNewTrialExactAllowedMemoryTargetsPackage.negative_case_count -lt 6 -or $exactNewTrialExactAllowedMemoryTargetsPackage.caught_negative_case_count -ne $exactNewTrialExactAllowedMemoryTargetsPackage.negative_case_count -or $exactNewTrialExactAllowedMemoryTargetsPackage.all_negative_cases_caught -ne $true) {
+      Add-Failure "Exact New-Trial 003 exact allowed memory targets package must catch every required negative case"
+    }
+  }
+
+  $exactNewTrialDailyNoteVcpMemoryWriteAuthorizationPackageDraftOutput = & node (Join-Path $Root 'scripts/validate_exact_new_trial_003_daily_note_vcp_memory_write_authorization_package_draft.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Exact New-Trial 003 DailyNote VCP memory write authorization package draft validation exited with failure"
+  } else {
+    $exactNewTrialDailyNoteVcpMemoryWriteAuthorizationPackageDraft = ($exactNewTrialDailyNoteVcpMemoryWriteAuthorizationPackageDraftOutput -join "`n") | ConvertFrom-Json
+    if ($exactNewTrialDailyNoteVcpMemoryWriteAuthorizationPackageDraft.passed -ne $true -or $exactNewTrialDailyNoteVcpMemoryWriteAuthorizationPackageDraft.phase -ne 'v0_6_45_exact_new_trial_003_daily_note_vcp_memory_write_authorization_package_draft') {
+      Add-Failure "Exact New-Trial 003 DailyNote VCP memory write authorization package draft validation must pass"
+    }
+    if ($exactNewTrialDailyNoteVcpMemoryWriteAuthorizationPackageDraft.authorization_package_status -ne 'prepared_blocked_not_granted' -or $exactNewTrialDailyNoteVcpMemoryWriteAuthorizationPackageDraft.authorization_id -ne 'AUTH-PENDING-EXACT-NEW-TRIAL-003-SHOT-2-MEMORY-WRITE-20260524-001' -or $exactNewTrialDailyNoteVcpMemoryWriteAuthorizationPackageDraft.target_sample_id -ne 'accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001' -or $exactNewTrialDailyNoteVcpMemoryWriteAuthorizationPackageDraft.target_candidate_id -ne 'v0_3_3_exact_new_trial_003_shot_2' -or $exactNewTrialDailyNoteVcpMemoryWriteAuthorizationPackageDraft.category -ne 'fashion_lookbook_portrait' -or $exactNewTrialDailyNoteVcpMemoryWriteAuthorizationPackageDraft.reviewer -ne 'Jenn') {
+      Add-Failure "Exact New-Trial 003 DailyNote VCP memory write authorization package draft must bind the exact authorization id, selected candidate, sample id, category, and reviewer"
+    }
+    if ($exactNewTrialDailyNoteVcpMemoryWriteAuthorizationPackageDraft.exact_allowed_memory_targets_count -ne 2 -or $exactNewTrialDailyNoteVcpMemoryWriteAuthorizationPackageDraft.authorization_granted_by_this_record -ne $false -or $exactNewTrialDailyNoteVcpMemoryWriteAuthorizationPackageDraft.execution_ready -ne $false -or $exactNewTrialDailyNoteVcpMemoryWriteAuthorizationPackageDraft.execution_allowed_now -ne $false) {
+      Add-Failure "Exact New-Trial 003 DailyNote VCP memory write authorization package draft must keep the two frozen targets while leaving authorization and execution inactive"
+    }
+    if ($exactNewTrialDailyNoteVcpMemoryWriteAuthorizationPackageDraft.negative_case_count -lt 6 -or $exactNewTrialDailyNoteVcpMemoryWriteAuthorizationPackageDraft.caught_negative_case_count -ne $exactNewTrialDailyNoteVcpMemoryWriteAuthorizationPackageDraft.negative_case_count -or $exactNewTrialDailyNoteVcpMemoryWriteAuthorizationPackageDraft.all_negative_cases_caught -ne $true) {
+      Add-Failure "Exact New-Trial 003 DailyNote VCP memory write authorization package draft must catch every required negative case"
+    }
+  }
+
+  $exactNewTrialDailyNoteVcpMemoryWriteExecutionPreflightOutput = & node (Join-Path $Root 'scripts/validate_exact_new_trial_003_daily_note_vcp_memory_write_execution_preflight.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Exact New-Trial 003 DailyNote VCP memory write execution preflight validation exited with failure"
+  } else {
+    $exactNewTrialDailyNoteVcpMemoryWriteExecutionPreflight = ($exactNewTrialDailyNoteVcpMemoryWriteExecutionPreflightOutput -join "`n") | ConvertFrom-Json
+    if ($exactNewTrialDailyNoteVcpMemoryWriteExecutionPreflight.passed -ne $true -or $exactNewTrialDailyNoteVcpMemoryWriteExecutionPreflight.phase -ne 'v0_6_46_exact_new_trial_003_daily_note_vcp_memory_write_execution_preflight') {
+      Add-Failure "Exact New-Trial 003 DailyNote VCP memory write execution preflight validation must pass"
+    }
+    if ($exactNewTrialDailyNoteVcpMemoryWriteExecutionPreflight.preflight_status -ne 'blocked' -or $exactNewTrialDailyNoteVcpMemoryWriteExecutionPreflight.authorization_package_status -ne 'prepared_blocked_not_granted' -or $exactNewTrialDailyNoteVcpMemoryWriteExecutionPreflight.authorization_id -ne 'AUTH-PENDING-EXACT-NEW-TRIAL-003-SHOT-2-MEMORY-WRITE-20260524-001' -or $exactNewTrialDailyNoteVcpMemoryWriteExecutionPreflight.target_sample_id -ne 'accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001' -or $exactNewTrialDailyNoteVcpMemoryWriteExecutionPreflight.target_candidate_id -ne 'v0_3_3_exact_new_trial_003_shot_2' -or $exactNewTrialDailyNoteVcpMemoryWriteExecutionPreflight.category -ne 'fashion_lookbook_portrait') {
+      Add-Failure "Exact New-Trial 003 DailyNote VCP memory write execution preflight must bind the exact blocked preflight state, authorization id, selected candidate, sample id, and category"
+    }
+    if ($exactNewTrialDailyNoteVcpMemoryWriteExecutionPreflight.exact_allowed_memory_targets_count -ne 2 -or $exactNewTrialDailyNoteVcpMemoryWriteExecutionPreflight.execution_ready -ne $false -or $exactNewTrialDailyNoteVcpMemoryWriteExecutionPreflight.execution_allowed_now -ne $false) {
+      Add-Failure "Exact New-Trial 003 DailyNote VCP memory write execution preflight must keep the two frozen targets while leaving execution inactive"
+    }
+    if ($exactNewTrialDailyNoteVcpMemoryWriteExecutionPreflight.negative_case_count -lt 7 -or $exactNewTrialDailyNoteVcpMemoryWriteExecutionPreflight.caught_negative_case_count -ne $exactNewTrialDailyNoteVcpMemoryWriteExecutionPreflight.negative_case_count -or $exactNewTrialDailyNoteVcpMemoryWriteExecutionPreflight.all_negative_cases_caught -ne $true) {
+      Add-Failure "Exact New-Trial 003 DailyNote VCP memory write execution preflight must catch every required negative case"
+    }
+  }
+
+  $exactNewTrialDailyNoteVcpMemoryWritePayloadRefreshPackageOutput = & node (Join-Path $Root 'scripts/validate_exact_new_trial_003_daily_note_vcp_memory_write_payload_refresh_package.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Exact New-Trial 003 DailyNote VCP memory write payload refresh package validation exited with failure"
+  } else {
+    $exactNewTrialDailyNoteVcpMemoryWritePayloadRefreshPackage = ($exactNewTrialDailyNoteVcpMemoryWritePayloadRefreshPackageOutput -join "`n") | ConvertFrom-Json
+    if ($exactNewTrialDailyNoteVcpMemoryWritePayloadRefreshPackage.passed -ne $true -or $exactNewTrialDailyNoteVcpMemoryWritePayloadRefreshPackage.phase -ne 'v0_6_47_exact_new_trial_003_daily_note_vcp_memory_write_payload_refresh_package') {
+      Add-Failure "Exact New-Trial 003 DailyNote VCP memory write payload refresh package validation must pass"
+    }
+    if ($exactNewTrialDailyNoteVcpMemoryWritePayloadRefreshPackage.payload_refresh_status -ne 'refreshed_blocked_not_executable' -or $exactNewTrialDailyNoteVcpMemoryWritePayloadRefreshPackage.target_sample_id -ne 'accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001' -or $exactNewTrialDailyNoteVcpMemoryWritePayloadRefreshPackage.target_candidate_id -ne 'v0_3_3_exact_new_trial_003_shot_2' -or $exactNewTrialDailyNoteVcpMemoryWritePayloadRefreshPackage.category -ne 'fashion_lookbook_portrait') {
+      Add-Failure "Exact New-Trial 003 DailyNote VCP memory write payload refresh package must bind the exact blocked payload state, selected candidate, sample id, and category"
+    }
+    if ($exactNewTrialDailyNoteVcpMemoryWritePayloadRefreshPackage.daily_note_target_id -ne 'exact_new_trial_003_shot_2_daily_note_review_learning_entry' -or $exactNewTrialDailyNoteVcpMemoryWritePayloadRefreshPackage.vcp_memory_target_id -ne 'exact_new_trial_003_shot_2_vcp_memory_review_learning_summary' -or $exactNewTrialDailyNoteVcpMemoryWritePayloadRefreshPackage.vcp_memory_lessons_count -ne 3 -or $exactNewTrialDailyNoteVcpMemoryWritePayloadRefreshPackage.execution_allowed_now -ne $false) {
+      Add-Failure "Exact New-Trial 003 DailyNote VCP memory write payload refresh package must keep the exact target ids, three Chinese lessons, and inactive execution state"
+    }
+    if ($exactNewTrialDailyNoteVcpMemoryWritePayloadRefreshPackage.negative_case_count -lt 7 -or $exactNewTrialDailyNoteVcpMemoryWritePayloadRefreshPackage.caught_negative_case_count -ne $exactNewTrialDailyNoteVcpMemoryWritePayloadRefreshPackage.negative_case_count -or $exactNewTrialDailyNoteVcpMemoryWritePayloadRefreshPackage.all_negative_cases_caught -ne $true) {
+      Add-Failure "Exact New-Trial 003 DailyNote VCP memory write payload refresh package must catch every required negative case"
+    }
+  }
+
+  $exactNewTrialDailyNoteVcpMemoryWriteReceiptContractOutput = & node (Join-Path $Root 'scripts/validate_exact_new_trial_003_daily_note_vcp_memory_write_receipt_contract.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Exact New-Trial 003 DailyNote VCP memory write receipt contract validation exited with failure"
+  } else {
+    $exactNewTrialDailyNoteVcpMemoryWriteReceiptContract = ($exactNewTrialDailyNoteVcpMemoryWriteReceiptContractOutput -join "`n") | ConvertFrom-Json
+    if ($exactNewTrialDailyNoteVcpMemoryWriteReceiptContract.passed -ne $true -or $exactNewTrialDailyNoteVcpMemoryWriteReceiptContract.phase -ne 'v0_6_48_exact_new_trial_003_daily_note_vcp_memory_write_receipt_contract') {
+      Add-Failure "Exact New-Trial 003 DailyNote VCP memory write receipt contract validation must pass"
+    }
+    if ($exactNewTrialDailyNoteVcpMemoryWriteReceiptContract.receipt_contract_status -ne 'prepared_blocked_not_executed' -or $exactNewTrialDailyNoteVcpMemoryWriteReceiptContract.receipt_contract_id -ne 'RCPT-CONTRACT-PENDING-EXACT-NEW-TRIAL-003-SHOT-2-MEMORY-WRITE-20260524-001' -or $exactNewTrialDailyNoteVcpMemoryWriteReceiptContract.target_sample_id -ne 'accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001' -or $exactNewTrialDailyNoteVcpMemoryWriteReceiptContract.target_candidate_id -ne 'v0_3_3_exact_new_trial_003_shot_2' -or $exactNewTrialDailyNoteVcpMemoryWriteReceiptContract.category -ne 'fashion_lookbook_portrait') {
+      Add-Failure "Exact New-Trial 003 DailyNote VCP memory write receipt contract must bind the exact blocked receipt state, receipt contract id, selected candidate, sample id, and category"
+    }
+    if ($exactNewTrialDailyNoteVcpMemoryWriteReceiptContract.future_local_receipt_path -ne 'reports/memory_write_receipts/v0_3_3_exact_new_trial_003_shot_2_daily_note_vcp_memory_write_receipt.json' -or $exactNewTrialDailyNoteVcpMemoryWriteReceiptContract.future_local_registry_path -ne 'reports/memory_write_receipts/v0_3_3_exact_new_trial_003_shot_2_daily_note_vcp_memory_write_registry.json' -or $exactNewTrialDailyNoteVcpMemoryWriteReceiptContract.exact_operations_count -ne 2 -or $exactNewTrialDailyNoteVcpMemoryWriteReceiptContract.execution_allowed_now -ne $false) {
+      Add-Failure "Exact New-Trial 003 DailyNote VCP memory write receipt contract must keep the exact receipt paths, two-step operation order, and inactive execution state"
+    }
+    if ($exactNewTrialDailyNoteVcpMemoryWriteReceiptContract.negative_case_count -lt 7 -or $exactNewTrialDailyNoteVcpMemoryWriteReceiptContract.caught_negative_case_count -ne $exactNewTrialDailyNoteVcpMemoryWriteReceiptContract.negative_case_count -or $exactNewTrialDailyNoteVcpMemoryWriteReceiptContract.all_negative_cases_caught -ne $true) {
+      Add-Failure "Exact New-Trial 003 DailyNote VCP memory write receipt contract must catch every required negative case"
+    }
+  }
+
+  $exactNewTrialDailyNoteVcpMemoryWriteRegistryContractOutput = & node (Join-Path $Root 'scripts/validate_exact_new_trial_003_daily_note_vcp_memory_write_registry_contract.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Exact New-Trial 003 DailyNote VCP memory write registry contract validation exited with failure"
+  } else {
+    $exactNewTrialDailyNoteVcpMemoryWriteRegistryContract = ($exactNewTrialDailyNoteVcpMemoryWriteRegistryContractOutput -join "`n") | ConvertFrom-Json
+    if ($exactNewTrialDailyNoteVcpMemoryWriteRegistryContract.passed -ne $true -or $exactNewTrialDailyNoteVcpMemoryWriteRegistryContract.phase -ne 'v0_6_49_exact_new_trial_003_daily_note_vcp_memory_write_registry_contract') {
+      Add-Failure "Exact New-Trial 003 DailyNote VCP memory write registry contract validation must pass"
+    }
+    if ($exactNewTrialDailyNoteVcpMemoryWriteRegistryContract.registry_contract_status -ne 'prepared_blocked_not_executed' -or $exactNewTrialDailyNoteVcpMemoryWriteRegistryContract.receipt_contract_id -ne 'RCPT-CONTRACT-PENDING-EXACT-NEW-TRIAL-003-SHOT-2-MEMORY-WRITE-20260524-001' -or $exactNewTrialDailyNoteVcpMemoryWriteRegistryContract.registry_contract_id -ne 'REGISTRY-CONTRACT-PENDING-EXACT-NEW-TRIAL-003-SHOT-2-MEMORY-WRITE-20260524-001' -or $exactNewTrialDailyNoteVcpMemoryWriteRegistryContract.registry_entry_id -ne 'REGISTRY-ENTRY-PENDING-EXACT-NEW-TRIAL-003-SHOT-2-MEMORY-WRITE-20260524-001') {
+      Add-Failure "Exact New-Trial 003 DailyNote VCP memory write registry contract must bind the exact blocked registry state, receipt contract id, registry contract id, and registry entry id"
+    }
+    if ($exactNewTrialDailyNoteVcpMemoryWriteRegistryContract.target_sample_id -ne 'accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001' -or $exactNewTrialDailyNoteVcpMemoryWriteRegistryContract.target_candidate_id -ne 'v0_3_3_exact_new_trial_003_shot_2' -or $exactNewTrialDailyNoteVcpMemoryWriteRegistryContract.category -ne 'fashion_lookbook_portrait') {
+      Add-Failure "Exact New-Trial 003 DailyNote VCP memory write registry contract must bind the selected sample, candidate, and category"
+    }
+    if ($exactNewTrialDailyNoteVcpMemoryWriteRegistryContract.future_local_receipt_path -ne 'reports/memory_write_receipts/v0_3_3_exact_new_trial_003_shot_2_daily_note_vcp_memory_write_receipt.json' -or $exactNewTrialDailyNoteVcpMemoryWriteRegistryContract.future_local_registry_path -ne 'reports/memory_write_receipts/v0_3_3_exact_new_trial_003_shot_2_daily_note_vcp_memory_write_registry.json' -or $exactNewTrialDailyNoteVcpMemoryWriteRegistryContract.registry_required_key_count -ne 10 -or $exactNewTrialDailyNoteVcpMemoryWriteRegistryContract.execution_allowed_now -ne $false) {
+      Add-Failure "Exact New-Trial 003 DailyNote VCP memory write registry contract must keep the exact receipt and registry paths, required registry keys, and inactive execution state"
+    }
+    if ($exactNewTrialDailyNoteVcpMemoryWriteRegistryContract.negative_case_count -lt 7 -or $exactNewTrialDailyNoteVcpMemoryWriteRegistryContract.caught_negative_case_count -ne $exactNewTrialDailyNoteVcpMemoryWriteRegistryContract.negative_case_count -or $exactNewTrialDailyNoteVcpMemoryWriteRegistryContract.all_negative_cases_caught -ne $true) {
+      Add-Failure "Exact New-Trial 003 DailyNote VCP memory write registry contract must catch every required negative case"
+    }
+  }
+
+  $exactNewTrialDailyNoteVcpMemoryWriteGoNoGoCheckpointOutput = & node (Join-Path $Root 'scripts/validate_exact_new_trial_003_daily_note_vcp_memory_write_go_no_go_checkpoint.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Exact New-Trial 003 DailyNote VCP memory write go/no-go checkpoint validation exited with failure"
+  } else {
+    $exactNewTrialDailyNoteVcpMemoryWriteGoNoGoCheckpoint = ($exactNewTrialDailyNoteVcpMemoryWriteGoNoGoCheckpointOutput -join "`n") | ConvertFrom-Json
+    if ($exactNewTrialDailyNoteVcpMemoryWriteGoNoGoCheckpoint.passed -ne $true -or $exactNewTrialDailyNoteVcpMemoryWriteGoNoGoCheckpoint.phase -ne 'v0_6_50_exact_new_trial_003_daily_note_vcp_memory_write_go_no_go_checkpoint') {
+      Add-Failure "Exact New-Trial 003 DailyNote VCP memory write go/no-go checkpoint validation must pass"
+    }
+    if ($exactNewTrialDailyNoteVcpMemoryWriteGoNoGoCheckpoint.checkpoint_status -ne 'no_go_unmet_workflow_prerequisites' -or $exactNewTrialDailyNoteVcpMemoryWriteGoNoGoCheckpoint.amber_memory_write_default_allowed -ne $true -or $exactNewTrialDailyNoteVcpMemoryWriteGoNoGoCheckpoint.step_by_step_auth_request_required -ne $false -or $exactNewTrialDailyNoteVcpMemoryWriteGoNoGoCheckpoint.authorization_missing_is_current_blocker -ne $false) {
+      Add-Failure "Exact New-Trial 003 DailyNote VCP memory write go/no-go checkpoint must preserve Smart Standing Authorization v3 Amber memory allowance without treating missing authorization as the current blocker"
+    }
+    if ($exactNewTrialDailyNoteVcpMemoryWriteGoNoGoCheckpoint.go_allowed_now -ne $false -or $exactNewTrialDailyNoteVcpMemoryWriteGoNoGoCheckpoint.formal_human_approval_captured -ne $false -or $exactNewTrialDailyNoteVcpMemoryWriteGoNoGoCheckpoint.accepted_sample_registration_completed -ne $false -or $exactNewTrialDailyNoteVcpMemoryWriteGoNoGoCheckpoint.durable_archive_ready -ne $false -or $exactNewTrialDailyNoteVcpMemoryWriteGoNoGoCheckpoint.production_candidate_ready -ne $false) {
+      Add-Failure "Exact New-Trial 003 DailyNote VCP memory write go/no-go checkpoint must remain no-go until human approval, accepted sample registration, archive, and production readiness are complete"
+    }
+    if ($exactNewTrialDailyNoteVcpMemoryWriteGoNoGoCheckpoint.no_go_reason_count -ne 4 -or $exactNewTrialDailyNoteVcpMemoryWriteGoNoGoCheckpoint.target_sample_id -ne 'accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001' -or $exactNewTrialDailyNoteVcpMemoryWriteGoNoGoCheckpoint.target_candidate_id -ne 'v0_3_3_exact_new_trial_003_shot_2') {
+      Add-Failure "Exact New-Trial 003 DailyNote VCP memory write go/no-go checkpoint must bind the four no-go reasons and selected shot_2 target"
+    }
+    if ($exactNewTrialDailyNoteVcpMemoryWriteGoNoGoCheckpoint.negative_case_count -lt 8 -or $exactNewTrialDailyNoteVcpMemoryWriteGoNoGoCheckpoint.caught_negative_case_count -ne $exactNewTrialDailyNoteVcpMemoryWriteGoNoGoCheckpoint.negative_case_count -or $exactNewTrialDailyNoteVcpMemoryWriteGoNoGoCheckpoint.all_negative_cases_caught -ne $true) {
+      Add-Failure "Exact New-Trial 003 DailyNote VCP memory write go/no-go checkpoint must catch every required negative case"
+    }
+  }
+
+  $exactNewTrialWorkflowPrerequisiteReconciliationOutput = & node (Join-Path $Root 'scripts/validate_exact_new_trial_003_workflow_prerequisite_reconciliation_packet.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Exact New-Trial 003 workflow prerequisite reconciliation packet validation exited with failure"
+  } else {
+    $exactNewTrialWorkflowPrerequisiteReconciliation = ($exactNewTrialWorkflowPrerequisiteReconciliationOutput -join "`n") | ConvertFrom-Json
+    if ($exactNewTrialWorkflowPrerequisiteReconciliation.passed -ne $true -or $exactNewTrialWorkflowPrerequisiteReconciliation.phase -ne 'v0_6_51_exact_new_trial_003_workflow_prerequisite_reconciliation_packet') {
+      Add-Failure "Exact New-Trial 003 workflow prerequisite reconciliation packet validation must pass"
+    }
+    if ($exactNewTrialWorkflowPrerequisiteReconciliation.real_class_authorization_default_allowed -ne $true -or $exactNewTrialWorkflowPrerequisiteReconciliation.authorization_missing_is_current_blocker -ne $false -or $exactNewTrialWorkflowPrerequisiteReconciliation.workflow_prerequisites_missing_is_blocker -ne $true) {
+      Add-Failure "Exact New-Trial 003 workflow prerequisite reconciliation must preserve default real-class authorization while keeping workflow prerequisites as the active blocker"
+    }
+    if ($exactNewTrialWorkflowPrerequisiteReconciliation.go_allowed_now -ne $false -or $exactNewTrialWorkflowPrerequisiteReconciliation.formal_human_approval_captured -ne $false -or $exactNewTrialWorkflowPrerequisiteReconciliation.accepted_sample_registration_completed -ne $false -or $exactNewTrialWorkflowPrerequisiteReconciliation.durable_archive_ready -ne $false -or $exactNewTrialWorkflowPrerequisiteReconciliation.production_candidate_ready -ne $false) {
+      Add-Failure "Exact New-Trial 003 workflow prerequisite reconciliation must remain no-go until human approval, accepted sample registration, archive, and production readiness are complete"
+    }
+    if ($exactNewTrialWorkflowPrerequisiteReconciliation.excluded_false_no_go_reason_count -ne 2 -or $exactNewTrialWorkflowPrerequisiteReconciliation.no_go_reason_count -ne 4 -or $exactNewTrialWorkflowPrerequisiteReconciliation.target_sample_id -ne 'accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001' -or $exactNewTrialWorkflowPrerequisiteReconciliation.target_candidate_id -ne 'v0_3_3_exact_new_trial_003_shot_2') {
+      Add-Failure "Exact New-Trial 003 workflow prerequisite reconciliation must bind the two excluded false blockers, four true blockers, and selected shot_2 target"
+    }
+    if ($exactNewTrialWorkflowPrerequisiteReconciliation.negative_case_count -lt 8 -or $exactNewTrialWorkflowPrerequisiteReconciliation.caught_negative_case_count -ne $exactNewTrialWorkflowPrerequisiteReconciliation.negative_case_count -or $exactNewTrialWorkflowPrerequisiteReconciliation.all_negative_cases_caught -ne $true) {
+      Add-Failure "Exact New-Trial 003 workflow prerequisite reconciliation packet must catch every required negative case"
+    }
+  }
+
+  $exactNewTrialFormalHumanApprovalEvidenceCaptureOutput = & node (Join-Path $Root 'scripts/validate_exact_new_trial_003_formal_human_approval_evidence_capture_packet.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Exact New-Trial 003 formal human approval evidence capture packet validation exited with failure"
+  } else {
+    $exactNewTrialFormalHumanApprovalEvidenceCapture = ($exactNewTrialFormalHumanApprovalEvidenceCaptureOutput -join "`n") | ConvertFrom-Json
+    if ($exactNewTrialFormalHumanApprovalEvidenceCapture.passed -ne $true -or $exactNewTrialFormalHumanApprovalEvidenceCapture.phase -ne 'v0_6_52_exact_new_trial_003_formal_human_approval_evidence_capture_packet') {
+      Add-Failure "Exact New-Trial 003 formal human approval evidence capture packet validation must pass"
+    }
+    if ($exactNewTrialFormalHumanApprovalEvidenceCapture.required_reviewer -ne 'Jenn' -or $exactNewTrialFormalHumanApprovalEvidenceCapture.target_candidate_id -ne 'v0_3_3_exact_new_trial_003_shot_2' -or $exactNewTrialFormalHumanApprovalEvidenceCapture.target_sample_id -ne 'accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001') {
+      Add-Failure "Exact New-Trial 003 formal human approval evidence capture must bind Jenn, selected shot_2, and the proposed accepted sample id"
+    }
+    if ($exactNewTrialFormalHumanApprovalEvidenceCapture.approval_evidence_present_now -ne $false -or $exactNewTrialFormalHumanApprovalEvidenceCapture.approval_statement_source_is_user_submission -ne $false -or $exactNewTrialFormalHumanApprovalEvidenceCapture.formal_human_approval_captured_now -ne $false) {
+      Add-Failure "Exact New-Trial 003 formal human approval evidence capture must not claim approval evidence or user-submitted approval"
+    }
+    if ($exactNewTrialFormalHumanApprovalEvidenceCapture.accepted_samples_registration_ready_now -ne $false -or $exactNewTrialFormalHumanApprovalEvidenceCapture.next_write_action_allowed_now -ne $false -or $exactNewTrialFormalHumanApprovalEvidenceCapture.current_blocker -ne 'formal_human_approval_evidence_missing') {
+      Add-Failure "Exact New-Trial 003 formal human approval evidence capture must keep registration and downstream writes blocked by missing evidence"
+    }
+    if ($exactNewTrialFormalHumanApprovalEvidenceCapture.negative_case_count -lt 8 -or $exactNewTrialFormalHumanApprovalEvidenceCapture.caught_negative_case_count -ne $exactNewTrialFormalHumanApprovalEvidenceCapture.negative_case_count -or $exactNewTrialFormalHumanApprovalEvidenceCapture.all_negative_cases_caught -ne $true) {
+      Add-Failure "Exact New-Trial 003 formal human approval evidence capture packet must catch every required negative case"
+    }
+  }
+
+  $exactNewTrialFormalHumanApprovalCaptureSurfaceOutput = & node (Join-Path $Root 'scripts/validate_exact_new_trial_003_formal_human_approval_capture_surface_static_panel.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Exact New-Trial 003 formal human approval capture surface static panel validation exited with failure"
+  } else {
+    $exactNewTrialFormalHumanApprovalCaptureSurface = ($exactNewTrialFormalHumanApprovalCaptureSurfaceOutput -join "`n") | ConvertFrom-Json
+    if ($exactNewTrialFormalHumanApprovalCaptureSurface.passed -ne $true -or $exactNewTrialFormalHumanApprovalCaptureSurface.phase -ne 'v0_6_53_exact_new_trial_003_formal_human_approval_capture_surface_static_panel') {
+      Add-Failure "Exact New-Trial 003 formal human approval capture surface static panel validation must pass"
+    }
+    if ($exactNewTrialFormalHumanApprovalCaptureSurface.required_reviewer -ne 'Jenn' -or $exactNewTrialFormalHumanApprovalCaptureSurface.target_candidate_id -ne 'v0_3_3_exact_new_trial_003_shot_2' -or $exactNewTrialFormalHumanApprovalCaptureSurface.target_sample_id -ne 'accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001') {
+      Add-Failure "Exact New-Trial 003 formal human approval capture surface must bind Jenn, selected shot_2, and the proposed accepted sample id"
+    }
+    if ($exactNewTrialFormalHumanApprovalCaptureSurface.draft_output_key -ne 'exact_new_trial_003_formal_human_approval_capture_surface_state' -or $exactNewTrialFormalHumanApprovalCaptureSurface.static_dom_binding_present -ne $true -or $exactNewTrialFormalHumanApprovalCaptureSurface.draft_output_key_present -ne $true) {
+      Add-Failure "Exact New-Trial 003 formal human approval capture surface must expose static DOM bindings and draft output key"
+    }
+    if ($exactNewTrialFormalHumanApprovalCaptureSurface.approval_evidence_present_now -ne $false -or $exactNewTrialFormalHumanApprovalCaptureSurface.approval_statement_source_is_user_submission -ne $false -or $exactNewTrialFormalHumanApprovalCaptureSurface.formal_human_approval_captured_now -ne $false) {
+      Add-Failure "Exact New-Trial 003 formal human approval capture surface must not claim approval evidence or user-submitted approval"
+    }
+    if ($exactNewTrialFormalHumanApprovalCaptureSurface.accepted_samples_registration_ready_now -ne $false -or $exactNewTrialFormalHumanApprovalCaptureSurface.next_write_action_allowed_now -ne $false -or $exactNewTrialFormalHumanApprovalCaptureSurface.current_blocker -ne 'formal_human_approval_evidence_missing') {
+      Add-Failure "Exact New-Trial 003 formal human approval capture surface must keep registration and downstream writes blocked by missing evidence"
+    }
+    if ($exactNewTrialFormalHumanApprovalCaptureSurface.negative_case_count -lt 8 -or $exactNewTrialFormalHumanApprovalCaptureSurface.caught_negative_case_count -ne $exactNewTrialFormalHumanApprovalCaptureSurface.negative_case_count -or $exactNewTrialFormalHumanApprovalCaptureSurface.all_negative_cases_caught -ne $true) {
+      Add-Failure "Exact New-Trial 003 formal human approval capture surface static panel must catch every required negative case"
+    }
+  }
+
+  $exactNewTrialFormalHumanApprovalEvidenceIngestionOutput = & node (Join-Path $Root 'scripts/validate_exact_new_trial_003_formal_human_approval_evidence_ingestion_packet.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Exact New-Trial 003 formal human approval evidence ingestion packet validation exited with failure"
+  } else {
+    $exactNewTrialFormalHumanApprovalEvidenceIngestion = ($exactNewTrialFormalHumanApprovalEvidenceIngestionOutput -join "`n") | ConvertFrom-Json
+    if ($exactNewTrialFormalHumanApprovalEvidenceIngestion.passed -ne $true -or $exactNewTrialFormalHumanApprovalEvidenceIngestion.phase -ne 'v0_6_54_exact_new_trial_003_formal_human_approval_evidence_ingestion_packet') {
+      Add-Failure "Exact New-Trial 003 formal human approval evidence ingestion packet validation must pass"
+    }
+    if ($exactNewTrialFormalHumanApprovalEvidenceIngestion.required_reviewer -ne 'Jenn' -or $exactNewTrialFormalHumanApprovalEvidenceIngestion.target_candidate_id -ne 'v0_3_3_exact_new_trial_003_shot_2' -or $exactNewTrialFormalHumanApprovalEvidenceIngestion.target_sample_id -ne 'accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001') {
+      Add-Failure "Exact New-Trial 003 formal human approval evidence ingestion must bind Jenn, selected shot_2, and the proposed accepted sample id"
+    }
+    if ($exactNewTrialFormalHumanApprovalEvidenceIngestion.approval_submission_present_now -ne $false -or $exactNewTrialFormalHumanApprovalEvidenceIngestion.approval_statement_source_is_user_submission -ne $false -or $exactNewTrialFormalHumanApprovalEvidenceIngestion.formal_human_approval_captured_now -ne $false) {
+      Add-Failure "Exact New-Trial 003 formal human approval evidence ingestion must not claim a user-submitted approval exists"
+    }
+    if ($exactNewTrialFormalHumanApprovalEvidenceIngestion.accepted_samples_registration_ready_now -ne $false -or $exactNewTrialFormalHumanApprovalEvidenceIngestion.next_write_action_allowed_now -ne $false -or $exactNewTrialFormalHumanApprovalEvidenceIngestion.current_blocker -ne 'user_submitted_jenn_approval_missing') {
+      Add-Failure "Exact New-Trial 003 formal human approval evidence ingestion must keep downstream writes blocked by missing user-submitted Jenn approval"
+    }
+    if ($exactNewTrialFormalHumanApprovalEvidenceIngestion.negative_case_count -lt 8 -or $exactNewTrialFormalHumanApprovalEvidenceIngestion.caught_negative_case_count -ne $exactNewTrialFormalHumanApprovalEvidenceIngestion.negative_case_count -or $exactNewTrialFormalHumanApprovalEvidenceIngestion.all_negative_cases_caught -ne $true) {
+      Add-Failure "Exact New-Trial 003 formal human approval evidence ingestion packet must catch every required negative case"
+    }
+  }
+
+  $exactNewTrialUserSubmittedFormalHumanApprovalEvidenceOutput = & node (Join-Path $Root 'scripts/validate_exact_new_trial_003_user_submitted_formal_human_approval_evidence_capture.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Exact New-Trial 003 user-submitted formal human approval evidence capture validation exited with failure"
+  } else {
+    $exactNewTrialUserSubmittedFormalHumanApprovalEvidence = ($exactNewTrialUserSubmittedFormalHumanApprovalEvidenceOutput -join "`n") | ConvertFrom-Json
+    if ($exactNewTrialUserSubmittedFormalHumanApprovalEvidence.passed -ne $true -or $exactNewTrialUserSubmittedFormalHumanApprovalEvidence.phase -ne 'v0_6_55_exact_new_trial_003_user_submitted_formal_human_approval_evidence_capture') {
+      Add-Failure "Exact New-Trial 003 user-submitted formal human approval evidence capture validation must pass"
+    }
+    if ($exactNewTrialUserSubmittedFormalHumanApprovalEvidence.required_reviewer -ne 'Jenn' -or $exactNewTrialUserSubmittedFormalHumanApprovalEvidence.submitted_by -ne 'Jenn' -or $exactNewTrialUserSubmittedFormalHumanApprovalEvidence.target_candidate_id -ne 'v0_3_3_exact_new_trial_003_shot_2' -or $exactNewTrialUserSubmittedFormalHumanApprovalEvidence.target_sample_id -ne 'accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001') {
+      Add-Failure "Exact New-Trial 003 user-submitted approval evidence must bind Jenn, selected shot_2, and the proposed accepted sample id"
+    }
+    if ($exactNewTrialUserSubmittedFormalHumanApprovalEvidence.artifact_sha256 -ne '8bd7b81a916f0f6333392562d84e32368a3f28dd6a6456fc2f9e49d835a62c3b') {
+      Add-Failure "Exact New-Trial 003 user-submitted approval evidence must bind the approved artifact hash"
+    }
+    if ($exactNewTrialUserSubmittedFormalHumanApprovalEvidence.approval_submission_present_now -ne $true -or $exactNewTrialUserSubmittedFormalHumanApprovalEvidence.approval_statement_source_is_user_submission -ne $true -or $exactNewTrialUserSubmittedFormalHumanApprovalEvidence.formal_human_approval_captured_now -ne $true) {
+      Add-Failure "Exact New-Trial 003 user-submitted approval evidence must capture the current Jenn user-submitted approval"
+    }
+    if ($exactNewTrialUserSubmittedFormalHumanApprovalEvidence.accepted_samples_registration_ready_now -ne $true -or $exactNewTrialUserSubmittedFormalHumanApprovalEvidence.next_write_action_allowed_now -ne $true -or $exactNewTrialUserSubmittedFormalHumanApprovalEvidence.next_write_scope -ne 'accepted_samples_metadata_registration_only') {
+      Add-Failure "Exact New-Trial 003 user-submitted approval evidence may unlock only accepted-sample metadata registration"
+    }
+    if ($exactNewTrialUserSubmittedFormalHumanApprovalEvidence.accepted_samples_write_performed -ne $false -or $exactNewTrialUserSubmittedFormalHumanApprovalEvidence.archive_write_performed -ne $false -or $exactNewTrialUserSubmittedFormalHumanApprovalEvidence.production_candidate_write_performed -ne $false -or $exactNewTrialUserSubmittedFormalHumanApprovalEvidence.DailyNote_write_performed -ne $false -or $exactNewTrialUserSubmittedFormalHumanApprovalEvidence.VCP_memory_write_performed -ne $false) {
+      Add-Failure "Exact New-Trial 003 user-submitted approval evidence capture must not perform accepted-sample, archive, production, DailyNote, or VCP memory writes"
+    }
+    if ($exactNewTrialUserSubmittedFormalHumanApprovalEvidence.negative_case_count -lt 10 -or $exactNewTrialUserSubmittedFormalHumanApprovalEvidence.caught_negative_case_count -ne $exactNewTrialUserSubmittedFormalHumanApprovalEvidence.negative_case_count -or $exactNewTrialUserSubmittedFormalHumanApprovalEvidence.all_negative_cases_caught -ne $true) {
+      Add-Failure "Exact New-Trial 003 user-submitted formal human approval evidence capture must catch every required negative case"
+    }
+  }
+
+  $exactNewTrialAcceptedSamplesMetadataRegistrationOutput = & node (Join-Path $Root 'scripts/validate_exact_new_trial_003_accepted_samples_metadata_registration.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Exact New-Trial 003 accepted samples metadata registration validation exited with failure"
+  } else {
+    $exactNewTrialAcceptedSamplesMetadataRegistration = ($exactNewTrialAcceptedSamplesMetadataRegistrationOutput -join "`n") | ConvertFrom-Json
+    if ($exactNewTrialAcceptedSamplesMetadataRegistration.passed -ne $true -or $exactNewTrialAcceptedSamplesMetadataRegistration.phase -ne 'v0_6_56_exact_new_trial_003_accepted_samples_metadata_registration') {
+      Add-Failure "Exact New-Trial 003 accepted samples metadata registration validation must pass"
+    }
+    if ($exactNewTrialAcceptedSamplesMetadataRegistration.approved_by -ne 'Jenn' -or $exactNewTrialAcceptedSamplesMetadataRegistration.target_candidate_id -ne 'v0_3_3_exact_new_trial_003_shot_2' -or $exactNewTrialAcceptedSamplesMetadataRegistration.target_sample_id -ne 'accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001') {
+      Add-Failure "Exact New-Trial 003 accepted samples metadata registration must bind Jenn, selected shot_2, and the accepted sample id"
+    }
+    if ($exactNewTrialAcceptedSamplesMetadataRegistration.artifact_sha256 -ne '8bd7b81a916f0f6333392562d84e32368a3f28dd6a6456fc2f9e49d835a62c3b') {
+      Add-Failure "Exact New-Trial 003 accepted samples metadata registration must bind the approved artifact hash"
+    }
+    if ($exactNewTrialAcceptedSamplesMetadataRegistration.accepted_samples_metadata_registered -ne $true -or $exactNewTrialAcceptedSamplesMetadataRegistration.category_index_updated -ne $true -or $exactNewTrialAcceptedSamplesMetadataRegistration.duplicate_sample_id_count -ne 1 -or $exactNewTrialAcceptedSamplesMetadataRegistration.write_scope -ne 'accepted_samples_metadata_registration_only') {
+      Add-Failure "Exact New-Trial 003 accepted samples metadata registration must be exact and non-duplicated"
+    }
+    if ($exactNewTrialAcceptedSamplesMetadataRegistration.archive_write_performed -ne $false -or $exactNewTrialAcceptedSamplesMetadataRegistration.production_candidate_write_performed -ne $false -or $exactNewTrialAcceptedSamplesMetadataRegistration.DailyNote_write_performed -ne $false -or $exactNewTrialAcceptedSamplesMetadataRegistration.VCP_memory_write_performed -ne $false) {
+      Add-Failure "Exact New-Trial 003 accepted samples metadata registration must not perform archive, production, DailyNote, or VCP memory writes"
+    }
+    if ($exactNewTrialAcceptedSamplesMetadataRegistration.negative_case_count -lt 7 -or $exactNewTrialAcceptedSamplesMetadataRegistration.caught_negative_case_count -ne $exactNewTrialAcceptedSamplesMetadataRegistration.negative_case_count -or $exactNewTrialAcceptedSamplesMetadataRegistration.all_negative_cases_caught -ne $true) {
+      Add-Failure "Exact New-Trial 003 accepted samples metadata registration must catch every required negative case"
+    }
+  }
+
+  $exactNewTrialDurableArchiveMetadataPreflightOutput = & node (Join-Path $Root 'scripts/validate_exact_new_trial_003_durable_archive_metadata_preflight_after_accepted_sample_registration.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Exact New-Trial 003 durable archive metadata preflight after accepted-sample registration validation exited with failure"
+  } else {
+    $exactNewTrialDurableArchiveMetadataPreflight = ($exactNewTrialDurableArchiveMetadataPreflightOutput -join "`n") | ConvertFrom-Json
+    if ($exactNewTrialDurableArchiveMetadataPreflight.passed -ne $true -or $exactNewTrialDurableArchiveMetadataPreflight.phase -ne 'v0_6_57_exact_new_trial_003_durable_archive_metadata_preflight_after_accepted_sample_registration') {
+      Add-Failure "Exact New-Trial 003 durable archive metadata preflight after accepted-sample registration validation must pass"
+    }
+    if ($exactNewTrialDurableArchiveMetadataPreflight.package_type -ne 'durable_archive_metadata_preflight' -or $exactNewTrialDurableArchiveMetadataPreflight.target_sample_id -ne 'accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001' -or $exactNewTrialDurableArchiveMetadataPreflight.target_candidate_id -ne 'v0_3_3_exact_new_trial_003_shot_2' -or $exactNewTrialDurableArchiveMetadataPreflight.category -ne 'fashion_lookbook_portrait') {
+      Add-Failure "Exact New-Trial 003 durable archive metadata preflight must bind the exact package type, selected candidate, sample id, and category"
+    }
+    if ($exactNewTrialDurableArchiveMetadataPreflight.accepted_sample_registration_completed -ne $true -or $exactNewTrialDurableArchiveMetadataPreflight.archive_metadata_preflight_compiled -ne $true -or $exactNewTrialDurableArchiveMetadataPreflight.archive_write_authorized -ne $false -or $exactNewTrialDurableArchiveMetadataPreflight.archive_write_performed -ne $false -or $exactNewTrialDurableArchiveMetadataPreflight.image_binary_read_performed -ne $false -or $exactNewTrialDurableArchiveMetadataPreflight.image_file_copy_performed -ne $false -or $exactNewTrialDurableArchiveMetadataPreflight.execution_allowed_now -ne $false) {
+      Add-Failure "Exact New-Trial 003 durable archive metadata preflight must compile metadata only without reading/copying/writing archive files"
+    }
+    if ($exactNewTrialDurableArchiveMetadataPreflight.future_write_path_count -ne 3 -or $exactNewTrialDurableArchiveMetadataPreflight.recommended_next -ne 'prepare_exact_new_trial_003_durable_archive_write_authorization_package_after_metadata_preflight') {
+      Add-Failure "Exact New-Trial 003 durable archive metadata preflight must expose exactly three future archive write paths and the next authorization-package step"
+    }
+    if ($exactNewTrialDurableArchiveMetadataPreflight.negative_case_count -lt 8 -or $exactNewTrialDurableArchiveMetadataPreflight.caught_negative_case_count -ne $exactNewTrialDurableArchiveMetadataPreflight.negative_case_count -or $exactNewTrialDurableArchiveMetadataPreflight.all_negative_cases_caught -ne $true) {
+      Add-Failure "Exact New-Trial 003 durable archive metadata preflight must catch every required negative case"
+    }
+  }
+
+  $exactNewTrialDurableArchiveWriteAuthorizationOutput = & node (Join-Path $Root 'scripts/validate_exact_new_trial_003_durable_archive_write_authorization_package_after_metadata_preflight.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Exact New-Trial 003 durable archive write authorization package after metadata preflight validation exited with failure"
+  } else {
+    $exactNewTrialDurableArchiveWriteAuthorization = ($exactNewTrialDurableArchiveWriteAuthorizationOutput -join "`n") | ConvertFrom-Json
+    if ($exactNewTrialDurableArchiveWriteAuthorization.passed -ne $true -or $exactNewTrialDurableArchiveWriteAuthorization.phase -ne 'v0_6_58_exact_new_trial_003_durable_archive_write_authorization_package_after_metadata_preflight') {
+      Add-Failure "Exact New-Trial 003 durable archive write authorization package after metadata preflight validation must pass"
+    }
+    if ($exactNewTrialDurableArchiveWriteAuthorization.package_type -ne 'durable_archive_write_authorization' -or $exactNewTrialDurableArchiveWriteAuthorization.target_sample_id -ne 'accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001' -or $exactNewTrialDurableArchiveWriteAuthorization.target_candidate_id -ne 'v0_3_3_exact_new_trial_003_shot_2' -or $exactNewTrialDurableArchiveWriteAuthorization.category -ne 'fashion_lookbook_portrait') {
+      Add-Failure "Exact New-Trial 003 durable archive write authorization package must bind the exact package type, selected candidate, sample id, and category"
+    }
+    if ($exactNewTrialDurableArchiveWriteAuthorization.accepted_sample_registration_completed -ne $true -or $exactNewTrialDurableArchiveWriteAuthorization.archive_metadata_preflight_compiled -ne $true -or $exactNewTrialDurableArchiveWriteAuthorization.archive_write_authorization_package_prepared -ne $true -or $exactNewTrialDurableArchiveWriteAuthorization.archive_write_authorized_next -ne $true -or $exactNewTrialDurableArchiveWriteAuthorization.execution_allowed_now -ne $false) {
+      Add-Failure "Exact New-Trial 003 durable archive write authorization package must authorize only the next gate while keeping execution disabled now"
+    }
+    if ($exactNewTrialDurableArchiveWriteAuthorization.archive_write_performed -ne $false -or $exactNewTrialDurableArchiveWriteAuthorization.image_binary_read_performed -ne $false -or $exactNewTrialDurableArchiveWriteAuthorization.image_file_copy_performed -ne $false) {
+      Add-Failure "Exact New-Trial 003 durable archive write authorization package must not write archive files or read/copy image binaries"
+    }
+    if ($exactNewTrialDurableArchiveWriteAuthorization.max_write_files -ne 3 -or $exactNewTrialDurableArchiveWriteAuthorization.future_write_path_count -ne 3 -or $exactNewTrialDurableArchiveWriteAuthorization.recommended_next -ne 'run_exact_new_trial_003_durable_archive_write_execution_preflight_no_write') {
+      Add-Failure "Exact New-Trial 003 durable archive write authorization package must expose exactly three future archive write paths and the no-write execution preflight next step"
+    }
+    if ($exactNewTrialDurableArchiveWriteAuthorization.negative_case_count -lt 10 -or $exactNewTrialDurableArchiveWriteAuthorization.caught_negative_case_count -ne $exactNewTrialDurableArchiveWriteAuthorization.negative_case_count -or $exactNewTrialDurableArchiveWriteAuthorization.all_negative_cases_caught -ne $true) {
+      Add-Failure "Exact New-Trial 003 durable archive write authorization package must catch every required negative case"
     }
   }
 

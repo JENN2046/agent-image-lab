@@ -1,0 +1,74 @@
+{
+  "exact_new_trial_003_durable_archive_metadata_preflight_after_accepted_sample_registration": {
+    "version": "v1",
+    "phase": "v0_6_57_exact_new_trial_003_durable_archive_metadata_preflight_after_accepted_sample_registration",
+    "status": "invalid_archive_write_overclaim",
+    "execution_mode": "durable_archive_metadata_preflight_only",
+    "source_refs": {
+      "approval_evidence": "reports/human_approval_evidence/v0_3_3_exact_new_trial_003_shot_2_user_submitted_formal_human_approval_evidence.json",
+      "accepted_samples_metadata_registration_report": "reports/visual_asset_eval_dry_run/v0_6_56_exact_new_trial_003_accepted_samples_metadata_registration.json",
+      "accepted_sample_registry": "accepted_samples/accepted_sample_registry.yaml",
+      "category_index": "accepted_samples/categories/fashion_lookbook_portrait.yaml"
+    },
+    "package_type": "durable_archive_metadata_preflight",
+    "package_status": "metadata_preflight_ready_archive_write_not_authorized",
+    "target": {
+      "sample_id": "accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001",
+      "candidate_id": "v0_3_3_exact_new_trial_003_shot_2",
+      "category": "fashion_lookbook_portrait",
+      "source_artifact_ref": "runs/real_generation/v0_3_3_exact_new_trial_003_shot_2/safe_adult_editorial_portrait_v1.png",
+      "source_artifact_hash_ref": "8bd7b81a916f0f6333392562d84e32368a3f28dd6a6456fc2f9e49d835a62c3b",
+      "source_dimensions": {
+        "width": 941,
+        "height": 1672
+      },
+      "verified_mime": "image/png",
+      "accepted_sample_registration_completed": true,
+      "target_archive_manifest_path": "asset_archive/accepted_samples/accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001/manifest.json",
+      "target_archive_original_path": "asset_archive/accepted_samples/accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001/original.png",
+      "target_archive_preview_path": "asset_archive/accepted_samples/accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001/preview.webp",
+      "exact_future_write_paths": [
+        "asset_archive/accepted_samples/accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001/manifest.json",
+        "asset_archive/accepted_samples/accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001/original.png",
+        "asset_archive/accepted_samples/accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001/preview.webp"
+      ],
+      "overwrite_existing_files_allowed": true
+    },
+    "archive_metadata_preflight_compiled": true,
+    "archive_write_authorized": true,
+    "archive_write_performed": true,
+    "image_binary_read_performed": true,
+    "image_file_copy_performed": true,
+    "execution_allowed_now": true,
+    "required_before_archive_write": [],
+    "guard": {
+      "preflight_only": false,
+      "durable_archive_manifest_write_performed": true,
+      "durable_archive_copy_performed": true,
+      "image_binary_read_performed": true,
+      "image_file_copy_performed": true,
+      "runs_source_image_modified": false,
+      "accepted_samples_write_performed": false,
+      "category_index_write_performed": false,
+      "failure_samples_write_performed": false,
+      "production_candidate_write_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "mcp_runtime_performed": false,
+      "real_manifest_read_performed": false,
+      "real_vcpchat_read_performed": false,
+      "real_vcptoolbox_read_performed": false,
+      "staging_performed": false,
+      "commit_performed": false,
+      "push_tag_release_deploy_performed": false,
+      "secret_value_read_performed": false,
+      "artifact_recoverability_is_not_vcp_runtime_integration": true,
+      "vcp_runtime_integration_proven": false
+    },
+    "recommended_next": "prepare_exact_new_trial_003_durable_archive_write_authorization_package_after_metadata_preflight",
+    "recommended_next_auto_execution_allowed": "true_local_authorization_package_only_no_archive_write"
+  }
+}

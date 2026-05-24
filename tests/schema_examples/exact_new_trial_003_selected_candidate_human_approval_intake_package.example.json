@@ -1,0 +1,86 @@
+{
+  "exact_new_trial_003_selected_candidate_human_approval_intake_package": {
+    "version": "v1",
+    "phase": "v0_6_33_exact_new_trial_003_selected_candidate_human_approval_intake_package",
+    "status": "fixture_valid_local_human_approval_intake_package",
+    "execution_mode": "human_approval_intake_package_only",
+    "source_refs": {
+      "human_review": "reports/visual_asset_eval_dry_run/v0_6_32_exact_new_trial_003_human_review.json",
+      "selected_candidate_closeout": "reports/visual_asset_eval_dry_run/v0_6_29_exact_new_trial_003_shot_2_execution_closeout.json",
+      "accepted_sample_registry": "accepted_samples/accepted_sample_registry.yaml",
+      "category_index": "accepted_samples/categories/fashion_lookbook_portrait.yaml"
+    },
+    "target": {
+      "candidate_attempt_id": "v0_3_3_exact_new_trial_003_shot_2",
+      "proposed_sample_id": "accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001",
+      "category": "fashion_lookbook_portrait",
+      "artifact_ref": "runs/real_generation/v0_3_3_exact_new_trial_003_shot_2/safe_adult_editorial_portrait_v1.png",
+      "verified_sha256": "8bd7b81a916f0f6333392562d84e32368a3f28dd6a6456fc2f9e49d835a62c3b",
+      "verified_dimensions": "941x1672",
+      "verified_mime": "image/png",
+      "reviewer_required": "Jenn",
+      "current_formal_human_approval_status": "pending",
+      "current_registration_eligible": false,
+      "current_registration_blocker": "human_approval_missing"
+    },
+    "approval_intake": {
+      "candidate_approval_statement_under_test": "我 Jenn 明确通过 exact_new_trial_003 的候选 v0_3_3_exact_new_trial_003_shot_2 作为 1 个 accepted sample 的 human approval；批准的 sample_id 为 accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001；category 为 fashion_lookbook_portrait；对应 artifact 为 runs/real_generation/v0_3_3_exact_new_trial_003_shot_2/safe_adult_editorial_portrait_v1.png，sha256=8bd7b81a916f0f6333392562d84e32368a3f28dd6a6456fc2f9e49d835a62c3b，dimensions=941x1672，mime=image/png；允许 Agent Image Lab 后续在 A4.8 / Smart Standing Authorization v3 本地边界内仅登记 accepted_samples 元数据和 fashion_lookbook_portrait 分类索引，不复制图片、不修改 runs 源图、不晋级 production_candidate、不写 failure_samples、不写 DailyNote、不写 VCP memory、不调用 provider/API/plugin/MCP、不读取 .env/.env.local、不读取 real manifest/VCPChat/VCPToolBox、不 push/tag/release/deploy；审批人 Jenn。",
+      "approval_statement_source": "fixture_only_not_user_submitted",
+      "approval_statement_source_is_user_submission": false,
+      "approval_statement_matches_required_form": true,
+      "human_approval_captured_now": false,
+      "registration_unlocks_only_after_external_user_approval": true,
+      "accepted_samples_registration_ready_now": false,
+      "current_registration_blocker": "human_approval_missing"
+    },
+    "future_allowed_files_after_approval": [
+      "accepted_samples/accepted_sample_registry.yaml",
+      "accepted_samples/categories/fashion_lookbook_portrait.yaml"
+    ],
+    "future_required_before_write": [
+      "v0.6.32 selected candidate still remains shot_2",
+      "v0.6.29 selected candidate closeout evidence still matches artifact hash and dimensions",
+      "approval statement must be submitted by Jenn rather than fixture-only local text",
+      "allowed write set remains exactly accepted_samples/accepted_sample_registry.yaml and accepted_samples/categories/fashion_lookbook_portrait.yaml",
+      "no image copy, no runs source image modification, no production_candidate, no failure_samples, no DailyNote, no VCP memory"
+    ],
+    "guard": {
+      "human_approval_intake_package_only": true,
+      "accepted_samples_write_performed": false,
+      "category_index_write_performed": false,
+      "archive_write_performed": false,
+      "production_candidate_write_performed": false,
+      "failure_samples_write_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "mcp_runtime_performed": false,
+      "image_generation_performed": false,
+      "env_or_secret_read_performed": false,
+      "real_manifest_read_performed": false,
+      "real_vcpchat_read_performed": false,
+      "real_vcptoolbox_read_performed": false,
+      "staging_performed": false,
+      "commit_performed": false,
+      "push_tag_release_deploy_performed": false,
+      "artifact_recoverability_is_not_vcp_runtime_integration": true,
+      "vcp_runtime_integration_proven": false
+    },
+    "negative_cases_required": {
+      "missing_reviewer_fails": true,
+      "missing_candidate_id_fails": true,
+      "missing_category_fails": true,
+      "missing_artifact_hash_fails": true,
+      "broad_write_scope_fails": true,
+      "approval_captured_now_fails": true,
+      "registration_ready_now_fails": true,
+      "accepted_samples_write_flag_fails": true,
+      "external_action_flag_fails": true,
+      "runtime_claim_fails": true
+    },
+    "recommended_next": "prepare_exact_new_trial_003_selected_candidate_post_approval_gate_alignment_before_any_accepted_samples_write",
+    "recommended_next_auto_execution_allowed": "true_green_local_validation_only_no_accepted_samples_write_until_external_human_approval_is_captured"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "scan_id": "v0_3_3_exact_new_trial_003_shot_2_sensitive_data_scan_001",
+  "scan_scope": "local_memory_delta_draft_only",
+  "target_sample_id": "accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001",
+  "target_candidate_id": "v0_3_3_exact_new_trial_003_shot_2",
+  "draft_package_ref": "reports/memory_delta_drafts/v0_3_3_exact_new_trial_003_shot_2_memory_delta_draft.yaml",
+  "scan_targets": [
+    "daily_note_draft.title_cn",
+    "daily_note_draft.body_cn",
+    "vcp_memory_draft.summary_cn",
+    "vcp_memory_draft.lessons_cn",
+    "memory_safety.contains_secret",
+    "memory_safety.contains_private_path",
+    "memory_safety.contains_customer_private_data",
+    "memory_safety.contains_image_binary",
+    "memory_safety.raw_sensitive_content_saved"
+  ],
+  "scan_method": "local_pattern_and_structure_review_of_memory_delta_draft_only",
+  "contains_secret": false,
+  "contains_private_path": false,
+  "contains_customer_private_data": false,
+  "contains_image_binary": false,
+  "raw_sensitive_content_saved": false,
+  "scan_passed": true,
+  "execution_allowed_now": false,
+  "DailyNote_write_performed": false,
+  "VCP_memory_write_performed": false
+}

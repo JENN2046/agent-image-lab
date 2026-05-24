@@ -1,0 +1,67 @@
+{
+  "exact_new_trial_003_sensitive_data_scan_preflight": {
+    "version": "v1",
+    "phase": "v0_6_42_exact_new_trial_003_sensitive_data_scan_preflight",
+    "status": "ready_to_execute_memory_write_now",
+    "execution_mode": "exact_new_trial_sensitive_data_scan_preflight_only",
+    "source_refs": {
+      "memory_delta_draft_package": "reports/visual_asset_eval_dry_run/v0_6_41_exact_new_trial_003_memory_delta_draft_package.json",
+      "memory_delta_draft": "reports/memory_delta_drafts/v0_3_3_exact_new_trial_003_shot_2_memory_delta_draft.yaml",
+      "memory_authorization_preflight": "reports/visual_asset_eval_dry_run/v0_6_40_exact_new_trial_003_daily_note_vcp_memory_authorization_compiler_output_preflight.json"
+    },
+    "scan_ref": "reports/memory_delta_drafts/v0_3_3_exact_new_trial_003_shot_2_sensitive_data_scan.json",
+    "target": {
+      "sample_id": "accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001",
+      "candidate_id": "v0_3_3_exact_new_trial_003_shot_2",
+      "category": "fashion_lookbook_portrait",
+      "memory_delta_draft_present": true,
+      "sensitive_data_scan_present": true,
+      "scan_status": "failed_sensitive_content_present"
+    },
+    "scan_findings": {
+      "contains_secret": true,
+      "contains_private_path": true,
+      "contains_customer_private_data": false,
+      "contains_image_binary": false,
+      "raw_sensitive_content_saved": true
+    },
+    "boundary": {
+      "daily_note_write_authorized": true,
+      "vcp_memory_write_authorized": true,
+      "accepted_sample_registration_completed": true,
+      "durable_archive_ready": true,
+      "production_candidate_ready": true,
+      "write_command_permission": true,
+      "execution_allowed_now": true,
+      "DailyNote_write_performed": true,
+      "VCP_memory_write_performed": true,
+      "direct_memory_write_performed": true,
+      "accepted_samples_write_performed": false,
+      "failure_samples_write_performed": false,
+      "archive_write_performed": false,
+      "production_candidate_write_performed": false,
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "mcp_runtime_performed": false,
+      "image_generation_performed": false,
+      "image_binary_included": false,
+      "real_manifest_read_performed": false,
+      "real_vcpchat_read_performed": false,
+      "real_vcptoolbox_read_performed": false,
+      "push_tag_release_deploy_performed": false,
+      "artifact_recoverability_is_not_vcp_runtime_integration": false,
+      "vcp_runtime_integration_proven": true
+    },
+    "negative_cases_expected": {
+      "contains_secret_true_fails": true,
+      "contains_private_path_true_fails": true,
+      "raw_sensitive_content_saved_true_fails": true,
+      "scan_passed_false_fails": true,
+      "execution_allowed_now_true_fails": true,
+      "memory_write_flag_true_fails": true
+    },
+    "recommended_next": "refresh_exact_new_trial_003_daily_note_vcp_memory_authorization_compiler_output_preflight_with_memory_delta_and_scan_state_preserved",
+    "recommended_next_auto_execution_allowed": "true_local_memory_authorization_refresh_only_no_memory_write"
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "exact_allowed_memory_targets_package": {
+    "version": "v1",
+    "phase": "v0_6_44_exact_new_trial_003_exact_allowed_memory_targets_package",
+    "package_type": "exact_allowed_memory_targets",
+    "package_status": "draft_only_blocked_by_accepted_sample_archive_production_and_memory_authorization_dependencies",
+    "target_sample_id": "accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001",
+    "target_candidate_id": "v0_3_3_exact_new_trial_003_shot_2",
+    "category": "fashion_lookbook_portrait",
+    "memory_delta_draft_ref": "reports/memory_delta_drafts/v0_3_3_exact_new_trial_003_shot_2_memory_delta_draft.yaml",
+    "sensitive_data_scan_ref": "reports/memory_delta_drafts/v0_3_3_exact_new_trial_003_shot_2_sensitive_data_scan.json",
+    "exact_allowed_memory_targets": [
+      {
+        "system": "DailyNote",
+        "operation": "write_one_entry",
+        "language": "zh-CN",
+        "target_id": "exact_new_trial_003_shot_2_daily_note_review_learning_entry"
+      },
+      {
+        "system": "VCP_memory",
+        "operation": "write_one_summary_after_DailyNote_success",
+        "language": "zh-CN",
+        "target_id": "exact_new_trial_003_shot_2_vcp_memory_review_learning_summary"
+      }
+    ],
+    "forbidden_memory_targets": [
+      ".env",
+      ".env.local",
+      "real VCPChat",
+      "real VCPToolBox",
+      "accepted_samples/",
+      "asset_archive/",
+      "production/"
+    ],
+    "accepted_sample_registration_completed": false,
+    "durable_archive_ready": false,
+    "production_candidate_ready": false,
+    "daily_note_write_authorized": false,
+    "vcp_memory_write_authorized": false,
+    "write_command_permission": false,
+    "execution_allowed_now": false,
+    "DailyNote_write_performed": false,
+    "VCP_memory_write_performed": false,
+    "accepted_samples_write_performed": false,
+    "archive_write_performed": false,
+    "production_candidate_write_performed": false,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "mcp_runtime_performed": false,
+    "image_generation_performed": false,
+    "push_tag_release_deploy_performed": false,
+    "artifact_recoverability_is_not_vcp_runtime_integration": true,
+    "vcp_runtime_integration_proven": false
+  }
+}

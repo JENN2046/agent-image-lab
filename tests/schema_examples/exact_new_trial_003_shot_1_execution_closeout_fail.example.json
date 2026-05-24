@@ -1,0 +1,59 @@
+{
+  "exact_new_trial_003_shot_1_execution_closeout": {
+    "phase": "v0_6_27_exact_new_trial_003_shot_1_execution_closeout",
+    "status": "fixture_invalid_protocol_and_review_claim",
+    "created_date": "2026-05-23",
+    "source_phase": "v0_6_26_exact_new_trial_local_persistence_repair_preflight",
+    "attempt_id": "v0_3_3_exact_new_trial_003_shot_1",
+    "provider_route": "image_gen.imagegen",
+    "prompt_package_ref": "prompts/image_generation/safe_adult_editorial_portrait_v1.yaml",
+    "payload_capture_ref": "reports/provider_payload_captures/v0_3_3_exact_new_trial_003_shot_1_request_payload.sanitized.json",
+    "attempt_result_path": "runs/real_generation/v0_3_3_exact_new_trial_003_shot_1/generation_attempt_result.json",
+    "receipt_path": "reports/provider_receipts/v0_3_3_exact_new_trial_003_shot_1_receipt.json",
+    "registry_path": "reports/provider_receipts/v0_3_3_exact_new_trial_003_shot_1_registry.json",
+    "review_console_bridge_ref": "review_console/live_receipt_bridge/v0_3_3_exact_new_trial_003_shot_1",
+    "output_image_path": "runs/real_generation/v0_3_3_exact_new_trial_003_shot_1/safe_adult_editorial_portrait_v1.png",
+    "output_image_sha256": "07a4ddc934c6e7ed88deefa9a1de6c8d06eb4407f4858f6688411dfa2bf60840",
+    "output_image_dimensions": {
+      "width": 941,
+      "height": 1672
+    },
+    "provider_calls_used": 1,
+    "image_candidates_generated": 1,
+    "retry_limit": 1,
+    "retries_used": 1,
+    "protocol_compliance": {
+      "selected_shot_id": "v0_3_3_exact_new_trial_003_shot_1",
+      "fresh_non_overwriting_route_used": false,
+      "path_collision_recheck_passed_now": false,
+      "independent_receipt_registry_bridge_created": false,
+      "pre_provider_call_payload_capture_required": true,
+      "pre_provider_call_payload_capture_satisfied": true,
+      "post_provider_call_payload_reconstruction_performed": false,
+      "local_persistence_verification_satisfied": false,
+      "review_required_after_generation": false
+    },
+    "review": {
+      "reviewable_sample": false,
+      "asset_status": "commercial_delivery_ready",
+      "accepted_candidate": true,
+      "commercial_delivery_ready": true,
+      "memory_suitability": "ready_now"
+    },
+    "boundary": {
+      "provider_call_performed": true,
+      "image_generation_performed": true,
+      "retry_performed": true,
+      "raw_provider_payload_capture_performed": true,
+      "raw_provider_response_capture_performed": true,
+      "secret_value_read_performed": false,
+      "VCP_memory_write_performed": true,
+      "DailyNote_write_performed": true,
+      "accepted_sample_auto_promotion": true,
+      "production_candidate_created": true,
+      "commit_performed": false,
+      "push_performed": false
+    },
+    "recommended_next": "promote_directly_to_memory_and_production"
+  }
+}

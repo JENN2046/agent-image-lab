@@ -1,0 +1,66 @@
+{
+  "exact_new_trial_003_workflow_prerequisite_reconciliation_packet": {
+    "version": "v1",
+    "phase": "v0_6_51_exact_new_trial_003_workflow_prerequisite_reconciliation_packet",
+    "status": "completed_validated_local_workflow_prerequisite_reconciliation_packet_memory_write_still_no_go",
+    "execution_mode": "workflow_prerequisite_reconciliation_only",
+    "packet_ref": "reports/memory_write_receipts/v0_3_3_exact_new_trial_003_shot_2_workflow_prerequisite_reconciliation_packet.json",
+    "target": {
+      "sample_id": "accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001",
+      "candidate_id": "v0_3_3_exact_new_trial_003_shot_2",
+      "category": "fashion_lookbook_portrait",
+      "reviewer": "Jenn"
+    },
+    "authorization_reconciliation": {
+      "active_autonomy_model": "Smart Standing Authorization v3",
+      "amber_lane_type": "Amber_C_memory",
+      "real_class_authorization_default_allowed": true,
+      "amber_memory_write_default_allowed": true,
+      "step_by_step_auth_request_required": false,
+      "authorization_missing_is_current_blocker": true,
+      "exact_scope_defined": true
+    },
+    "workflow_prerequisite_matrix": {
+      "go_allowed_now": true,
+      "workflow_prerequisites_missing_is_blocker": false,
+      "formal_human_approval_captured": true,
+      "accepted_sample_registration_completed": false,
+      "durable_archive_ready": false,
+      "production_candidate_ready": false,
+      "current_no_go_reasons": [
+        "authorization_missing"
+      ],
+      "excluded_false_no_go_reasons": []
+    },
+    "guard": {
+      "reconciliation_only": true,
+      "authorization_request_performed": false,
+      "DailyNote_write_performed": true,
+      "VCP_memory_write_performed": true,
+      "accepted_samples_write_performed": false,
+      "archive_write_performed": false,
+      "production_candidate_write_performed": false,
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "mcp_runtime_performed": false,
+      "image_generation_performed": false,
+      "secret_value_read_performed": false,
+      "staging_performed": false,
+      "commit_performed": false,
+      "push_tag_release_deploy_performed": false
+    },
+    "negative_cases_expected": {
+      "authorization_missing_blocker_overclaim_fails": true,
+      "workflow_prerequisites_missing_false_fails": true,
+      "go_allowed_now_overclaim_fails": true,
+      "human_approval_overclaim_fails": true,
+      "accepted_sample_overclaim_fails": true,
+      "archive_ready_overclaim_fails": true,
+      "production_ready_overclaim_fails": true,
+      "memory_write_flag_fails": true
+    },
+    "recommended_next": "memory_write_now",
+    "recommended_next_auto_execution_allowed": "false_invalid_fixture"
+  }
+}

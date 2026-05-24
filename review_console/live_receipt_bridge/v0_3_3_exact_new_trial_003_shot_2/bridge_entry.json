@@ -1,0 +1,16 @@
+{
+  "phase": "v0_6_29_exact_new_trial_003_shot_2_execution_closeout",
+  "bridge_status": "ready_for_review_and_post_run_assessment",
+  "attempt_id": "v0_3_3_exact_new_trial_003_shot_2",
+  "receipt_path": "reports/provider_receipts/v0_3_3_exact_new_trial_003_shot_2_receipt.json",
+  "registry_path": "reports/provider_receipts/v0_3_3_exact_new_trial_003_shot_2_registry.json",
+  "attempt_result_path": "runs/real_generation/v0_3_3_exact_new_trial_003_shot_2/generation_attempt_result.json",
+  "payload_capture_ref": "reports/provider_payload_captures/v0_3_3_exact_new_trial_003_shot_2_request_payload.sanitized.json",
+  "output_image_path": "runs/real_generation/v0_3_3_exact_new_trial_003_shot_2/safe_adult_editorial_portrait_v1.png",
+  "image_candidates_generated": 1,
+  "local_persistence_success": true,
+  "review_required": true,
+  "accepted_sample_auto_promotion": false,
+  "memory_write_performed": false,
+  "push_performed": false
+}

@@ -42,6 +42,7 @@ const state = {
   third_sample_authorization_package: mock.third_sample_accepted_samples_authorization_package_seed,
   third_sample_post_approval_gate: mock.third_sample_post_approval_gate_seed,
   human_approval_blocker_queue: mock.human_approval_blocker_queue_seed,
+  exact_new_trial_003_formal_human_approval_capture_surface: mock.exact_new_trial_003_formal_human_approval_capture_surface_seed,
   runtime_gap_dashboard: mock.review_console_runtime_gap_dashboard_contract_seed,
   lifecycleFilter: "all",
   lifecycleSearch: "",
@@ -2111,6 +2112,79 @@ function humanApprovalBlockerQueueState() {
   };
 }
 
+function exactNewTrial003FormalHumanApprovalCaptureSurfaceState() {
+  const seed = state.exact_new_trial_003_formal_human_approval_capture_surface || {};
+  const target = seed.target || {};
+  const current = seed.current_evidence_state || {};
+  const guard = seed.guard || {};
+  const captureFields = (seed.capture_fields || []).map((field) => ({
+    field_id: field.field_id || "missing_field_id",
+    label: field.label || field.field_id || "missing_label",
+    required: field.required === true,
+    current_value_present: field.current_value_present === true,
+    accepted_source: field.accepted_source || "missing_accepted_source"
+  }));
+  return {
+    draft_output_key: "exact_new_trial_003_formal_human_approval_capture_surface_state",
+    phase: seed.phase || "missing",
+    source_packet_ref: seed.source_packet_ref || null,
+    source_report_ref: seed.source_report_ref || null,
+    source_review_ref: seed.source_review_ref || null,
+    capture_surface_status: seed.capture_surface_status || "missing",
+    target_candidate_id: target.candidate_id || null,
+    target_sample_id: target.sample_id || null,
+    target_category: target.category || null,
+    artifact_ref: target.artifact_ref || null,
+    sha256: target.sha256 || null,
+    dimensions: target.dimensions || null,
+    mime: target.mime || null,
+    reviewer_required: target.reviewer_required || "Jenn",
+    capture_fields: captureFields,
+    required_capture_field_count: captureFields.filter((field) => field.required).length,
+    present_capture_field_count: captureFields.filter((field) => field.current_value_present).length,
+    required_statement_tokens: seed.required_statement_tokens || [],
+    boundary_acknowledgement_items: seed.boundary_acknowledgement_items || [],
+    approval_evidence_present_now: current.approval_evidence_present_now === true,
+    approval_statement_text_present_now: current.approval_statement_text_present_now === true,
+    approval_statement_source_is_user_submission: current.approval_statement_source_is_user_submission === true,
+    formal_human_approval_status: current.formal_human_approval_status || "pending",
+    formal_human_approval_captured_now: current.formal_human_approval_captured_now === true,
+    accepted_samples_registration_ready_now: current.accepted_samples_registration_ready_now === true,
+    registration_unlock_allowed_now: current.registration_unlock_allowed_now === true,
+    next_write_action_allowed_now: current.next_write_action_allowed_now === true,
+    current_blocker: current.current_blocker || "formal_human_approval_evidence_missing",
+    next_allowed_local_action: seed.next_allowed_local_action || "wait_for_jenn_user_submission_then_validate",
+    static_panel_only: guard.static_panel_only === true,
+    read_only_capture_surface: guard.read_only_capture_surface === true,
+    approval_capture_performed: guard.approval_capture_performed === true,
+    approval_evidence_fabricated: guard.approval_evidence_fabricated === true,
+    accepted_samples_write_performed: guard.accepted_samples_write_performed === true,
+    archive_write_performed: guard.archive_write_performed === true,
+    category_index_write_performed: guard.category_index_write_performed === true,
+    image_file_copy_performed: guard.image_file_copy_performed === true,
+    runs_source_image_modified: guard.runs_source_image_modified === true,
+    failure_samples_write_performed: guard.failure_samples_write_performed === true,
+    production_candidate_write_performed: guard.production_candidate_write_performed === true,
+    DailyNote_write_performed: guard.DailyNote_write_performed === true,
+    VCP_memory_write_performed: guard.VCP_memory_write_performed === true,
+    provider_contact_performed: guard.provider_contact_performed === true,
+    plugin_call_performed: guard.plugin_call_performed === true,
+    api_call_performed: guard.api_call_performed === true,
+    mcp_runtime_performed: guard.mcp_runtime_performed === true,
+    image_generation_performed: guard.image_generation_performed === true,
+    secret_value_read_performed: guard.secret_value_read_performed === true,
+    env_or_secret_read_performed: guard.env_or_secret_read_performed === true,
+    real_manifest_read_performed: guard.real_manifest_read_performed === true,
+    real_vcpchat_read_performed: guard.real_vcpchat_read_performed === true,
+    real_vcptoolbox_read_performed: guard.real_vcptoolbox_read_performed === true,
+    staging_performed: guard.staging_performed === true,
+    commit_performed: guard.commit_performed === true,
+    push_tag_release_deploy_performed: guard.push_tag_release_deploy_performed === true,
+    artifact_recoverability_is_not_vcp_runtime_integration: guard.artifact_recoverability_is_not_vcp_runtime_integration === true,
+    vcp_runtime_integration_proven: guard.vcp_runtime_integration_proven === true
+  };
+}
+
 function renderThirdSampleAcceptanceReadiness() {
   const readiness = thirdSampleAcceptanceReadinessState();
   qs("#thirdSampleReadinessSummary").innerHTML = `
@@ -2226,6 +2300,59 @@ function renderHumanApprovalBlockerQueue() {
     <span>DailyNote/VCP memory: ${escapeHtml(queue.DailyNote_write_performed || queue.VCP_memory_write_performed)}</span>
     <span>provider/API/plugin/MCP: ${escapeHtml(queue.provider_contact_performed || queue.api_call_performed || queue.plugin_call_performed || queue.mcp_runtime_performed)}</span>
     <span>VCP runtime proven: ${escapeHtml(queue.vcp_runtime_integration_proven)}</span>
+  `;
+}
+
+function renderExactNewTrial003FormalHumanApprovalCaptureSurface() {
+  const surface = exactNewTrial003FormalHumanApprovalCaptureSurfaceState();
+  qs("#exactNewTrial003ApprovalCaptureSummary").innerHTML = `
+    <span>status <strong>${escapeHtml(surface.capture_surface_status)}</strong></span>
+    <span>reviewer <strong>${escapeHtml(surface.reviewer_required)}</strong></span>
+    <span>approval captured <strong>${escapeHtml(surface.formal_human_approval_captured_now)}</strong></span>
+    <span>write allowed <strong>${escapeHtml(surface.next_write_action_allowed_now)}</strong></span>
+  `;
+  qs("#exactNewTrial003ApprovalCaptureBody").innerHTML = `
+    <article class="exact-new-trial-approval-capture-card blocked">
+      <div class="protocol-card-head">
+        <strong>${escapeHtml(surface.target_sample_id || "no target sample")}</strong>
+        <span>${escapeHtml(surface.next_allowed_local_action)}</span>
+      </div>
+      <dl>
+        <div><dt>Candidate</dt><dd>${escapeHtml(surface.target_candidate_id || "none")}</dd></div>
+        <div><dt>Category</dt><dd>${escapeHtml(surface.target_category || "none")}</dd></div>
+        <div><dt>Artifact</dt><dd>${escapeHtml(surface.artifact_ref || "none")}</dd></div>
+        <div><dt>SHA-256</dt><dd>${escapeHtml(surface.sha256 || "none")}</dd></div>
+        <div><dt>Dimensions</dt><dd>${escapeHtml(surface.dimensions || "none")}</dd></div>
+        <div><dt>Current blocker</dt><dd>${escapeHtml(surface.current_blocker)}</dd></div>
+        <div><dt>Required fields</dt><dd>${escapeHtml(surface.required_capture_field_count)}</dd></div>
+        <div><dt>Present fields</dt><dd>${escapeHtml(surface.present_capture_field_count)}</dd></div>
+      </dl>
+      <div class="exact-new-trial-approval-capture-fields">
+        ${surface.capture_fields.map((field) => `
+          <span>
+            <strong>${escapeHtml(field.label)}</strong>
+            required ${escapeHtml(field.required)} | present ${escapeHtml(field.current_value_present)} | source ${escapeHtml(field.accepted_source)}
+          </span>
+        `).join("")}
+      </div>
+      <div class="exact-new-trial-approval-capture-fields">
+        ${surface.boundary_acknowledgement_items.map((item) => `<span>${escapeHtml(item)}</span>`).join("")}
+      </div>
+    </article>
+  `;
+  qs("#exactNewTrial003ApprovalCaptureGuard").innerHTML = `
+    <span>static panel only: ${escapeHtml(surface.static_panel_only)}</span>
+    <span>read-only capture: ${escapeHtml(surface.read_only_capture_surface)}</span>
+    <span>approval capture: ${escapeHtml(surface.approval_capture_performed)}</span>
+    <span>fabricated evidence: ${escapeHtml(surface.approval_evidence_fabricated)}</span>
+    <span>accepted_samples write: ${escapeHtml(surface.accepted_samples_write_performed)}</span>
+    <span>archive write: ${escapeHtml(surface.archive_write_performed)}</span>
+    <span>production candidate: ${escapeHtml(surface.production_candidate_write_performed)}</span>
+    <span>DailyNote/VCP memory: ${escapeHtml(surface.DailyNote_write_performed || surface.VCP_memory_write_performed)}</span>
+    <span>provider/API/plugin/MCP: ${escapeHtml(surface.provider_contact_performed || surface.api_call_performed || surface.plugin_call_performed || surface.mcp_runtime_performed)}</span>
+    <span>image generation: ${escapeHtml(surface.image_generation_performed)}</span>
+    <span>secret read: ${escapeHtml(surface.secret_value_read_performed || surface.env_or_secret_read_performed)}</span>
+    <span>stage/commit/push: ${escapeHtml(surface.staging_performed || surface.commit_performed || surface.push_tag_release_deploy_performed)}</span>
   `;
 }
 
@@ -3448,6 +3575,7 @@ function renderDraft() {
     third_sample_acceptance_readiness_state: thirdSampleAcceptanceReadinessState(),
     third_sample_post_approval_gate_state: thirdSamplePostApprovalGateState(),
     human_approval_blocker_queue_state: humanApprovalBlockerQueueState(),
+    exact_new_trial_003_formal_human_approval_capture_surface_state: exactNewTrial003FormalHumanApprovalCaptureSurfaceState(),
     third_sample_accepted_samples_authorization_package_state: thirdSampleAcceptedSamplesAuthorizationPackageState(),
     review_console_runtime_gap_dashboard_state: reviewConsoleRuntimeGapDashboardState(),
     codex_session_import_record_reader: state.import_record_reader,
@@ -3500,6 +3628,7 @@ function renderAll() {
   renderThirdSampleAcceptanceReadiness();
   renderThirdSamplePostApprovalGate();
   renderHumanApprovalBlockerQueue();
+  renderExactNewTrial003FormalHumanApprovalCaptureSurface();
   renderThirdSampleAcceptedSamplesAuthorizationPackage();
   renderReviewConsoleRuntimeGapDashboard();
   loadImportRecordSeed();

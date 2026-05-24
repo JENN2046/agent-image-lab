@@ -1,0 +1,97 @@
+{
+  "daily_note_vcp_memory_write_payload_refresh_package": {
+    "report_version": 1,
+    "package_type": "daily_note_vcp_memory_write_payload_refresh_package",
+    "phase": "v0_6_47_exact_new_trial_003_daily_note_vcp_memory_write_payload_refresh_package",
+    "payload_status": "refreshed_blocked_not_executable",
+    "target_sample_id": "accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001",
+    "target_candidate_id": "v0_3_3_exact_new_trial_003_shot_2",
+    "category": "fashion_lookbook_portrait",
+    "reviewer": "Jenn",
+    "authorization_id": "AUTH-PENDING-EXACT-NEW-TRIAL-003-SHOT-2-MEMORY-WRITE-20260524-001",
+    "source_refs": {
+      "memory_delta_draft": "reports/memory_delta_drafts/v0_3_3_exact_new_trial_003_shot_2_memory_delta_draft.yaml",
+      "sensitive_data_scan": "reports/memory_delta_drafts/v0_3_3_exact_new_trial_003_shot_2_sensitive_data_scan.json",
+      "exact_allowed_targets_package": "reports/memory_target_packages/v0_3_3_exact_new_trial_003_shot_2_exact_allowed_memory_targets.json",
+      "memory_write_authorization_package_draft": "reports/visual_asset_eval_dry_run/v0_6_45_exact_new_trial_003_daily_note_vcp_memory_write_authorization_package_draft.json",
+      "memory_write_execution_preflight": "reports/visual_asset_eval_dry_run/v0_6_46_exact_new_trial_003_daily_note_vcp_memory_write_execution_preflight.json"
+    },
+    "exact_allowed_targets": [
+      {
+        "system": "DailyNote",
+        "operation": "write_one_entry",
+        "language": "zh-CN",
+        "target_id": "exact_new_trial_003_shot_2_daily_note_review_learning_entry"
+      },
+      {
+        "system": "VCP_memory",
+        "operation": "write_one_summary_after_DailyNote_success",
+        "language": "zh-CN",
+        "target_id": "exact_new_trial_003_shot_2_vcp_memory_review_learning_summary"
+      }
+    ],
+    "daily_note_payload": {
+      "target_id": "exact_new_trial_003_shot_2_daily_note_review_learning_entry",
+      "language": "zh-CN",
+      "title_cn": "Exact New-Trial 003 安全成人编辑风人像经验草案",
+      "body_cn": "这次 exact-new-trial 003 的有效经验是把专业编辑感、保守着装、自然姿态和证据可追溯性一起看，而不是只看单一美观度。shot_2 成为当前首选，是因为它在红色西装、白色上衣、深色长裤、黄昏露台背景和专业表情之间取得了最稳的平衡，同时保留了 literal pre-provider-call payload capture。当前内容只是 DailyNote 草案；在 formal human approval、accepted_samples 注册、archive 完成和 production-candidate readiness 之前，不得写入。",
+      "write_mode": "draft_refresh",
+      "approval_required": true,
+      "approval_status": "pending",
+      "write_allowed_now": false,
+      "DailyNote_write_performed": false
+    },
+    "vcp_memory_payload": {
+      "target_id": "exact_new_trial_003_shot_2_vcp_memory_review_learning_summary",
+      "language": "zh-CN",
+      "memory_type": "accepted_candidate_review_learning_draft",
+      "summary_cn": "安全成人编辑风人像的稳定候选，需要同时满足 prompt 匹配、姿态克制、服装保守度、vertical editorial framing 和 payload traceability。",
+      "lessons_cn": [
+        "首选样本不只看脸和背景，还要同时核对 wardrobe conservatism、hands visible 边界和无文字无水印约束。",
+        "pre-provider-call payload capture 会显著提高后续 review、archive 和 memory 证据链的可信度。",
+        "即使 accepted_candidate=true，只要 formal human approval 未完成、hand pose 仍有 watch item、commercial_delivery_ready=false，就只能停留在 memory draft。"
+      ],
+      "depends_on_daily_note_success": true,
+      "write_mode": "draft_refresh",
+      "approval_required": true,
+      "approval_status": "pending",
+      "should_write_to_vcp": false,
+      "write_allowed_now": false,
+      "VCP_memory_write_performed": false
+    },
+    "payload_safety": {
+      "contains_secret": false,
+      "contains_private_path": false,
+      "contains_customer_private_data": false,
+      "contains_image_binary": false,
+      "raw_sensitive_content_saved": false
+    },
+    "required_blockers": [
+      "human_approval_missing",
+      "accepted_sample_registration_missing",
+      "durable_archive_completion_missing",
+      "production_candidate_authorization_missing",
+      "explicit_daily_note_write_authorization_missing",
+      "explicit_vcp_memory_write_authorization_missing",
+      "write_command_permission_missing"
+    ],
+    "execution_state": {
+      "authorization_granted_by_this_package": false,
+      "execution_ready": false,
+      "execution_allowed_now": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "accepted_samples_write_performed": false,
+      "archive_write_performed": false,
+      "production_candidate_write_performed": false,
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "mcp_runtime_performed": false,
+      "image_generation_performed": false,
+      "push_tag_release_deploy_performed": false,
+      "artifact_recoverability_is_not_vcp_runtime_integration": true,
+      "vcp_runtime_integration_proven": false
+    }
+  }
+}

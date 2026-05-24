@@ -1,0 +1,84 @@
+{
+  "exact_new_trial_003_accepted_samples_registration_authorization_package_draft": {
+    "version": "v1",
+    "phase": "v0_6_36_exact_new_trial_003_accepted_samples_registration_authorization_package_draft",
+    "status": "completed_validated_local_registration_authorization_package_draft_pending_external_human_approval",
+    "execution_mode": "authorization_package_draft_only",
+    "source_refs": {
+      "selected_candidate_closeout": "reports/visual_asset_eval_dry_run/v0_6_29_exact_new_trial_003_shot_2_execution_closeout.json",
+      "human_review": "reports/visual_asset_eval_dry_run/v0_6_32_exact_new_trial_003_human_review.json",
+      "approval_intake_package": "reports/visual_asset_eval_dry_run/v0_6_33_exact_new_trial_003_selected_candidate_human_approval_intake_package.json",
+      "post_approval_gate_alignment": "reports/visual_asset_eval_dry_run/v0_6_34_exact_new_trial_003_selected_candidate_post_approval_gate_alignment.json",
+      "registration_preflight_draft": "reports/visual_asset_eval_dry_run/v0_6_35_exact_new_trial_003_post_approval_registration_preflight_draft.json",
+      "accepted_sample_registry": "accepted_samples/accepted_sample_registry.yaml",
+      "category_index": "accepted_samples/categories/fashion_lookbook_portrait.yaml"
+    },
+    "authorization_package_status": "granted",
+    "authorization_granted_by_this_record": true,
+    "execution_ready": true,
+    "blocker": null,
+    "target": {
+      "sample_id": "accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001",
+      "candidate_id": "v0_3_3_exact_new_trial_003_shot_2",
+      "review_record_ref": "reports/visual_asset_eval_dry_run/v0_6_32_exact_new_trial_003_human_review.json",
+      "gate_alignment_ref": "reports/visual_asset_eval_dry_run/v0_6_34_exact_new_trial_003_selected_candidate_post_approval_gate_alignment.json",
+      "preflight_draft_ref": "reports/visual_asset_eval_dry_run/v0_6_35_exact_new_trial_003_post_approval_registration_preflight_draft.json",
+      "artifact_ref": "runs/real_generation/v0_3_3_exact_new_trial_003_shot_2/safe_adult_editorial_portrait_v1.png",
+      "verified_sha256": "8bd7b81a916f0f6333392562d84e32368a3f28dd6a6456fc2f9e49d835a62c3b",
+      "verified_dimensions": "941x1672",
+      "verified_mime": "image/png",
+      "human_approval_status": "approved",
+      "approved_by": "Jenn",
+      "registration_ready": true
+    },
+    "exact_approval_statement_draft": "",
+    "draft_scope": {
+      "would_modify_files": [
+        "accepted_samples/accepted_sample_registry.yaml",
+        "accepted_samples/categories/fashion_lookbook_portrait.yaml",
+        "accepted_samples/"
+      ],
+      "forbidden_paths": [
+        "runs/real_generation/",
+        "production_candidate/",
+        "failure_samples/"
+      ],
+      "validation_required": [
+        "git diff --check"
+      ]
+    },
+    "guard": {
+      "draft_only": true,
+      "accepted_samples_write_performed": true,
+      "category_index_write_performed": false,
+      "image_file_copy_performed": false,
+      "runs_source_image_modified": false,
+      "failure_samples_write_performed": false,
+      "production_candidate_write_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "mcp_runtime_performed": false,
+      "real_manifest_read_performed": false,
+      "real_vcpchat_read_performed": false,
+      "real_vcptoolbox_read_performed": false,
+      "staging_performed": false,
+      "commit_performed": false,
+      "push_tag_release_deploy_performed": false,
+      "artifact_recoverability_is_not_vcp_runtime_integration": false,
+      "vcp_runtime_integration_proven": true
+    },
+    "negative_cases_expected": {
+      "granted_package_fails": true,
+      "execution_ready_without_approval_fails": true,
+      "missing_exact_statement_fails": true,
+      "broad_write_scope_fails": true,
+      "accepted_samples_write_flag_fails": true,
+      "runtime_claim_fails": true
+    },
+    "recommended_next": "prepare_exact_new_trial_003_accepted_samples_registration_execution_preflight_with_authorization_package_and_human_approval_blocker_preserved",
+    "recommended_next_auto_execution_allowed": "true_local_preflight_only_no_accepted_samples_write"
+  }
+}

@@ -1,0 +1,74 @@
+memory_delta_draft_package:
+  version: v1
+  package_type: memory_delta_draft_package
+  phase: v0_6_41_exact_new_trial_003_memory_delta_draft_package
+  execution_mode: exact_new_trial_memory_delta_draft_package_only
+  authorization_granted_by_this_package: true
+
+  source_case:
+    sample_id: accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001
+    candidate_id: v0_3_3_exact_new_trial_003_shot_2
+    category: fashion_lookbook_portrait
+    memory_suitability_status: ready_now
+    prompt_package_ref: prompts/image_generation/safe_adult_editorial_portrait_v1.yaml
+    human_review_ref: reports/visual_asset_eval_dry_run/v0_6_32_exact_new_trial_003_human_review.json
+    shot_closeout_ref: reports/visual_asset_eval_dry_run/v0_6_29_exact_new_trial_003_shot_2_execution_closeout.json
+    production_candidate_preflight_ref: reports/visual_asset_eval_dry_run/v0_6_39_exact_new_trial_003_production_candidate_authorization_compiler_output_preflight.json
+    memory_authorization_preflight_ref: reports/visual_asset_eval_dry_run/v0_6_40_exact_new_trial_003_daily_note_vcp_memory_authorization_compiler_output_preflight.json
+    output_image_sha256: 8bd7b81a916f0f6333392562d84e32368a3f28dd6a6456fc2f9e49d835a62c3b
+    accepted_sample_registration_completed: true
+    durable_archive_ready: true
+    production_candidate_ready: true
+    daily_note_write_authorized: true
+    vcp_memory_write_authorized: true
+
+  daily_note_draft:
+    language: en
+    title_cn: "Exact New-Trial 003 draft"
+    body_cn: "English body should fail."
+    write_mode: final
+    approval_required: true
+    approval_status: approved
+    write_allowed_now: true
+    DailyNote_write_performed: true
+
+  vcp_memory_draft:
+    language: en
+    memory_type: accepted_candidate_review_learning_draft
+    summary_cn: "English summary should fail."
+    lessons_cn:
+      - "English lesson."
+    write_mode: final
+    approval_required: true
+    approval_status: approved
+    should_write_to_vcp: true
+    VCP_memory_write_performed: true
+
+  memory_safety:
+    contains_secret: true
+    contains_private_path: true
+    contains_customer_private_data: false
+    contains_image_binary: true
+    raw_sensitive_content_saved: true
+
+  boundary:
+    execution_allowed_now: true
+    DailyNote_write_performed: true
+    VCP_memory_write_performed: true
+    direct_memory_write_performed: true
+    accepted_samples_write_performed: false
+    failure_samples_write_performed: false
+    archive_write_performed: false
+    production_candidate_write_performed: true
+    provider_contact_performed: false
+    plugin_call_performed: false
+    api_call_performed: false
+    mcp_runtime_performed: false
+    image_generation_performed: false
+    image_binary_included: true
+    real_manifest_read_performed: false
+    real_vcpchat_read_performed: false
+    real_vcptoolbox_read_performed: false
+    push_tag_release_deploy_performed: false
+    artifact_recoverability_is_not_vcp_runtime_integration: false
+    vcp_runtime_integration_proven: true

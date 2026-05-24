@@ -1,0 +1,96 @@
+{
+  "exact_new_trial_003_durable_archive_authorization_compiler_output_preflight": {
+    "version": "v1",
+    "phase": "v0_6_38_exact_new_trial_003_durable_archive_authorization_compiler_output_preflight",
+    "status": "completed_validated_local_durable_archive_authorization_compiler_output_preflight_pending_external_human_approval_and_archive_authorization",
+    "execution_mode": "durable_archive_authorization_compiler_output_preflight_only",
+    "source_refs": {
+      "human_review": "reports/visual_asset_eval_dry_run/v0_6_32_exact_new_trial_003_human_review.json",
+      "accepted_samples_execution_preflight": "reports/visual_asset_eval_dry_run/v0_6_37_exact_new_trial_003_accepted_samples_registration_execution_preflight.json",
+      "accepted_sample_registry": "accepted_samples/accepted_sample_registry.yaml",
+      "category_index": "accepted_samples/categories/fashion_lookbook_portrait.yaml"
+    },
+    "package_type": "durable_archive",
+    "package_status": "draft_blocked_missing_accepted_sample_registration_and_archive_copy_authorization",
+    "blocker": "missing_accepted_sample_registration_and_archive_copy_authorization",
+    "target": {
+      "sample_id": "accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001",
+      "candidate_id": "v0_3_3_exact_new_trial_003_shot_2",
+      "category": "fashion_lookbook_portrait",
+      "source_artifact_ref": "runs/real_generation/v0_3_3_exact_new_trial_003_shot_2/safe_adult_editorial_portrait_v1.png",
+      "source_artifact_hash_ref": "8bd7b81a916f0f6333392562d84e32368a3f28dd6a6456fc2f9e49d835a62c3b",
+      "accepted_sample_registry_ref": "accepted_samples/accepted_sample_registry.yaml",
+      "accepted_sample_category_ref": "accepted_samples/categories/fashion_lookbook_portrait.yaml",
+      "accepted_sample_registration_completed": false,
+      "blocker_decision": "blocked_missing_accepted_sample_registration_and_archive_copy_authorization",
+      "target_archive_path": null,
+      "hash_verification_required": true,
+      "exact_allowed_write_paths": [],
+      "forbidden_write_paths": [
+        "runs/real_generation/",
+        "accepted_samples/",
+        "failure_samples/",
+        "production_candidate/",
+        "DailyNote",
+        "VCP memory"
+      ]
+    },
+    "archive_copy_authorized": false,
+    "archive_copy_performed": false,
+    "target_archive_path_provided": false,
+    "write_command_permission": false,
+    "execution_allowed_now": false,
+    "required_before_execution": [
+      "Jenn human approval must already be captured through the exact_new_trial_003 shot_2 approval chain",
+      "exact accepted_samples registration for the selected shot_2 candidate must be completed first",
+      "Jenn exact A5 durable archive copy authorization",
+      "exact target archive path",
+      "hash verification requirement",
+      "rollback plan",
+      "reviewer",
+      "stop conditions"
+    ],
+    "validation_required_before_execution": [
+      "git diff --check",
+      "node scripts/validate_exact_new_trial_003_durable_archive_authorization_compiler_output_preflight.js",
+      "node scripts/validate_exact_new_trial_003_accepted_samples_registration_execution_preflight.js",
+      "node scripts/validate_controlled_visual_production_loop_checkpoint_readiness.js",
+      "node scripts/validate_controlled_visual_production_loop_exact_file_commit_readiness_review.js",
+      "powershell -ExecutionPolicy Bypass -File scripts/validate_mvp.ps1"
+    ],
+    "guard": {
+      "preflight_only": true,
+      "durable_archive_copy_performed": false,
+      "image_file_copy_performed": false,
+      "runs_source_image_modified": false,
+      "accepted_samples_write_performed": false,
+      "category_index_write_performed": false,
+      "failure_samples_write_performed": false,
+      "production_candidate_write_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "mcp_runtime_performed": false,
+      "real_manifest_read_performed": false,
+      "real_vcpchat_read_performed": false,
+      "real_vcptoolbox_read_performed": false,
+      "staging_performed": false,
+      "commit_performed": false,
+      "push_tag_release_deploy_performed": false,
+      "artifact_recoverability_is_not_vcp_runtime_integration": true,
+      "vcp_runtime_integration_proven": false
+    },
+    "negative_cases_expected": {
+      "accepted_sample_registration_overclaim_fails": true,
+      "archive_copy_authorization_overclaim_fails": true,
+      "target_archive_path_filled_fails": true,
+      "broad_allowed_write_path_fails": true,
+      "durable_archive_copy_flag_fails": true,
+      "runtime_claim_fails": true
+    },
+    "recommended_next": "prepare_exact_new_trial_003_production_candidate_authorization_compiler_output_preflight_with_archive_dependency_preserved",
+    "recommended_next_auto_execution_allowed": "true_local_production_candidate_preflight_only_no_archive_copy"
+  }
+}

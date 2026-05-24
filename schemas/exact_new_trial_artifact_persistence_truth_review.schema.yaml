@@ -1,0 +1,46 @@
+schema_id: exact_new_trial_artifact_persistence_truth_review
+version: v0_1
+root_key: exact_new_trial_artifact_persistence_truth_review
+required:
+  - phase
+  - doc_ref
+  - attempt_id
+  - prompt_package_ref
+  - provider_route
+  - evidence_refs
+  - artifact_claim
+  - filesystem_truth
+  - truth_findings
+  - boundary
+invariants:
+  phase: v0_6_25_exact_new_trial_artifact_persistence_truth_review
+  attempt_id: v0_3_3_exact_new_trial_002
+  prompt_package_ref: prompts/image_generation/safe_adult_editorial_portrait_v1.yaml
+  provider_route: image_gen.imagegen
+  records_claim_artifact_copied_to_project: true
+  current_project_output_missing: true
+  local_persistence_verified_now: false
+  reviewable_sample_now: false
+  human_review_allowed_now: false
+  accepted_sample_eligible: false
+  memory_write_eligible: false
+  production_candidate_eligible: false
+  provider_call_performed: false
+  image_generation_performed: false
+  external_private_path_recovery_performed: false
+  secret_value_read_performed: false
+  VCP_memory_write_performed: false
+  DailyNote_write_performed: false
+  push_performed: false
+required_evidence_refs:
+  - attempt_result_path
+  - receipt_path
+  - registry_path
+  - bridge_entry_path
+  - v0_6_23_report_ref
+required_filesystem_truth_fields:
+  - project_output_directory
+  - project_output_directory_exists
+  - project_output_directory_entries
+  - project_output_image_present_now
+  - project_output_image_sha256_verified_now

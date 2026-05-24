@@ -146,7 +146,7 @@ for (const index of categoryIndexes) {
 
 check("product_category_count_2", () => fileContains("accepted_samples/categories/product_still_life.yaml", "sample_count: 2"));
 check("fashion_lifestyle_category_count_5", () => fileContains("accepted_samples/categories/fashion_lifestyle_still_life.yaml", "sample_count: 5"));
-check("fashion_lookbook_category_count_1", () => fileContains("accepted_samples/categories/fashion_lookbook_portrait.yaml", "sample_count: 1"));
+check("fashion_lookbook_category_count_2", () => fileContains("accepted_samples/categories/fashion_lookbook_portrait.yaml", "sample_count: 2"));
 check("tracked_accepted_samples_are_metadata_only", () =>
   listTrackedAcceptedSamplesFiles().every((file) => !imageExtensions.test(file))
 );

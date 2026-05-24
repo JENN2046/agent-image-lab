@@ -27,6 +27,7 @@ const completeSampleIds = [
   "accepted_womens_resort_relaxed_knit_codex_v2_001",
   "accepted_fashion_lifestyle_woven_crossbody_bag_codex_v14_161_001",
   "accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001",
+  "accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001",
 ];
 const legacyArtifactSampleIds = [
   "accepted_french_summer_rattan_bucket_bag_002_shot_1",
@@ -51,6 +52,8 @@ const approvalRecordBySampleId = {
     "docs/v14_161_codex_session_generated_candidate_readiness.md",
   accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001:
     "docs/v14_166_lamp_v3_generated_candidate_readiness.md",
+  accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001:
+    "reports/human_approval_evidence/v0_3_3_exact_new_trial_003_shot_2_user_submitted_formal_human_approval_evidence.json",
 };
 
 function exitWithPreviewCapsuleMigrationPending() {
@@ -268,9 +271,9 @@ addResult(
 addResult("legacy_artifact_rows_detected", legacyArtifactRows.length >= 3, `${legacyArtifactRows.length}`);
 addResult("legacy_rows_not_promoted_to_full_recoverability", legacyArtifactRows.every((row) => !validateRecoverabilityRow(row).passed));
 addResult("local_artifact_rows_detected", localArtifactRows.length >= 4, `${localArtifactRows.length}`);
-addResult("full_recoverability_count_is_currently_three", fullRows.length === 3, `${fullRows.length}`);
+addResult("full_recoverability_count_is_currently_four", fullRows.length === 4, `${fullRows.length}`);
 addResult(
-  "full_recoverability_samples_are_v14_105_v14_161_bag_and_v14_166_lamp",
+  "full_recoverability_samples_are_v14_105_v14_161_bag_v14_166_lamp_and_exact_new_trial_003",
   completeSampleIds.every((sampleId) => fullRows.some((row) => row.sample_id === sampleId)),
 );
 
@@ -287,9 +290,9 @@ for (const token of [
 for (const token of [
   "phase: v14_142_multi_accepted_sample_matrix",
   "multi_sample_matrix_created: true",
-  "complete_recoverable_sample_count: 3",
+  "complete_recoverable_sample_count: 4",
   "legacy_partial_artifact_sample_count: 3",
-  "full_recoverability_count_is_currently_three: true",
+  "full_recoverability_count_is_currently_four: true",
   "accepted_samples_write_performed: false",
   "image_binary_copy_performed: false",
   "vcp_runtime_integration_proven: false",
@@ -303,7 +306,7 @@ for (const token of [
   "docs/v14_142_multi_accepted_sample_matrix.md",
   "v14_142_multi_accepted_sample_matrix",
   "multi_sample_matrix_created: true",
-  "complete_recoverable_sample_count: 3",
+  "complete_recoverable_sample_count: 4",
   "legacy_partial_artifact_sample_count: 3",
 ]) {
   requireToken("current_surfaces", currentSurfaces, token);
@@ -374,7 +377,7 @@ const summary = {
   complete_recoverable_sample_ids: fullRows.map((row) => row.sample_id),
   legacy_partial_artifact_sample_count: legacyArtifactRows.length,
   local_artifact_sample_count: localArtifactRows.length,
-  full_recoverability_count_is_currently_three: fullRows.length === 3,
+  full_recoverability_count_is_currently_four: fullRows.length === 4,
   positive_matrix_passes: positiveValidations.length === completeSampleIds.length && positiveValidations.every((validation) => validation.passed),
   negative_case_artifact_missing_fails: !negativeCases.artifact_missing.passed,
   negative_case_hash_mismatch_fails: !negativeCases.hash_mismatch.passed,

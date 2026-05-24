@@ -1,0 +1,60 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "exact_new_trial_003_shot_2_pre_call_payload_capture_preflight"
+title: "Exact New-Trial 003 Shot 2 Pre-Call Payload Capture Preflight"
+type: object
+required:
+  - exact_new_trial_003_shot_2_pre_call_payload_capture_preflight
+properties:
+  exact_new_trial_003_shot_2_pre_call_payload_capture_preflight:
+    type: object
+    required:
+      - phase
+      - status
+      - attempt_id
+      - provider_route
+      - prompt_package_ref
+      - payload_capture_ref
+      - planned_output_directory
+      - planned_output_image_path
+      - planned_attempt_result_path
+      - planned_receipt_path
+      - planned_registry_path
+      - planned_review_console_bridge_ref
+      - path_collision_recheck
+      - payload_capture_truth
+      - boundary
+      - recommended_next
+    properties:
+      phase:
+        const: "v0_6_28_exact_new_trial_003_shot_2_pre_call_payload_capture_preflight"
+      status:
+        type: string
+      attempt_id:
+        const: "v0_3_3_exact_new_trial_003_shot_2"
+      provider_route:
+        const: "image_gen.imagegen"
+      prompt_package_ref:
+        const: "prompts/image_generation/safe_adult_editorial_portrait_v1.yaml"
+      payload_capture_ref:
+        type: string
+      planned_output_directory:
+        type: string
+      planned_output_image_path:
+        type: string
+      planned_attempt_result_path:
+        type: string
+      planned_receipt_path:
+        type: string
+      planned_registry_path:
+        type: string
+      planned_review_console_bridge_ref:
+        type: string
+      path_collision_recheck:
+        type: object
+      payload_capture_truth:
+        type: object
+      boundary:
+        type: object
+      recommended_next:
+        type: string
+additionalProperties: false

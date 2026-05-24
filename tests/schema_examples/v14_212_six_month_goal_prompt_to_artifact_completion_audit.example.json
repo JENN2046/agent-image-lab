@@ -14,7 +14,7 @@
       "review_console_reader": "review_console/static_prototype/artifact_lifecycle_state_reader.js"
     },
     "observed_counts": {
-      "recoverable_accepted_sample_count": 3,
+      "recoverable_accepted_sample_count": 4,
       "blocked_third_candidate_count": 0,
       "remaining_full_recoverable_sample_gap": 0,
       "success_criteria_count": 8,

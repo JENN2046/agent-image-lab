@@ -1,0 +1,62 @@
+{
+  "exact_new_trial_003_formal_human_approval_evidence_capture_packet": {
+    "version": "v1",
+    "phase": "v0_6_52_exact_new_trial_003_formal_human_approval_evidence_capture_packet",
+    "status": "completed_validated_local_formal_human_approval_evidence_capture_packet_pending_jenn_submission",
+    "execution_mode": "formal_human_approval_evidence_capture_packet_only",
+    "packet_ref": "reports/human_approval_evidence/v0_3_3_exact_new_trial_003_shot_2_formal_human_approval_evidence_capture_packet.json",
+    "target": {
+      "candidate_id": "v0_3_3_exact_new_trial_003_shot_2",
+      "sample_id": "accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001",
+      "category": "fashion_lookbook_portrait",
+      "artifact_ref": "runs/real_generation/v0_3_3_exact_new_trial_003_shot_2/safe_adult_editorial_portrait_v1.png",
+      "sha256": "8bd7b81a916f0f6333392562d84e32368a3f28dd6a6456fc2f9e49d835a62c3b",
+      "dimensions": "941x1672",
+      "mime": "image/png",
+      "reviewer_required": "Jenn"
+    },
+    "current_evidence_state": {
+      "evidence_packet_only": true,
+      "approval_evidence_present_now": true,
+      "approval_statement_text_present_now": true,
+      "approval_statement_source": "fabricated_local_fixture",
+      "approval_statement_source_is_user_submission": true,
+      "formal_human_approval_status": "approved",
+      "formal_human_approval_captured_now": true,
+      "accepted_samples_registration_ready_now": true,
+      "registration_unlock_allowed_now": true,
+      "next_write_action_allowed_now": true,
+      "current_blocker": "none"
+    },
+    "guard": {
+      "formal_human_approval_evidence_capture_packet_only": true,
+      "approval_evidence_fabricated": true,
+      "accepted_samples_write_performed": true,
+      "archive_write_performed": false,
+      "production_candidate_write_performed": false,
+      "DailyNote_write_performed": true,
+      "VCP_memory_write_performed": true,
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "mcp_runtime_performed": false,
+      "image_generation_performed": false,
+      "secret_value_read_performed": false,
+      "staging_performed": false,
+      "commit_performed": false,
+      "push_tag_release_deploy_performed": false
+    },
+    "negative_cases_expected": {
+      "approval_evidence_present_overclaim_fails": true,
+      "approval_statement_source_user_submission_overclaim_fails": true,
+      "formal_human_approval_captured_overclaim_fails": true,
+      "registration_ready_overclaim_fails": true,
+      "next_write_action_allowed_overclaim_fails": true,
+      "fabricated_evidence_flag_fails": true,
+      "accepted_samples_write_flag_fails": true,
+      "memory_write_flag_fails": true
+    },
+    "recommended_next": "write_memory_now",
+    "recommended_next_auto_execution_allowed": "false_invalid_fixture"
+  }
+}

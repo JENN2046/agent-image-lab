@@ -1,0 +1,75 @@
+{
+  "exact_new_trial_003_exact_allowed_memory_targets_package": {
+    "version": "v1",
+    "phase": "v0_6_44_exact_new_trial_003_exact_allowed_memory_targets_package",
+    "status": "ready_to_execute_memory_targets_now",
+    "execution_mode": "exact_allowed_memory_targets_package_only",
+    "source_refs": {
+      "memory_authorization_refresh_preflight": "reports/visual_asset_eval_dry_run/v0_6_43_exact_new_trial_003_daily_note_vcp_memory_authorization_compiler_output_refresh_preflight.json",
+      "memory_delta_draft_package": "reports/visual_asset_eval_dry_run/v0_6_41_exact_new_trial_003_memory_delta_draft_package.json",
+      "sensitive_data_scan_preflight": "reports/visual_asset_eval_dry_run/v0_6_42_exact_new_trial_003_sensitive_data_scan_preflight.json",
+      "targets_package": "reports/memory_target_packages/v0_3_3_exact_new_trial_003_shot_2_exact_allowed_memory_targets.json"
+    },
+    "package_type": "exact_allowed_memory_targets",
+    "package_status": "ready",
+    "target": {
+      "sample_id": "accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001",
+      "candidate_id": "v0_3_3_exact_new_trial_003_shot_2",
+      "category": "fashion_lookbook_portrait",
+      "memory_delta_draft_ref": null,
+      "sensitive_data_scan_ref": null,
+      "exact_allowed_memory_targets_defined": true,
+      "exact_allowed_memory_targets_count": 1,
+      "accepted_sample_registration_completed": true,
+      "durable_archive_ready": true,
+      "production_candidate_ready": true
+    },
+    "exact_allowed_memory_targets": [
+      {
+        "system": "DailyNote",
+        "operation": "write_now",
+        "language": "en",
+        "target_id": "direct_daily_note_target"
+      }
+    ],
+    "forbidden_memory_targets": [
+      ".env"
+    ],
+    "daily_note_write_authorized": true,
+    "vcp_memory_write_authorized": true,
+    "write_command_permission": true,
+    "execution_allowed_now": true,
+    "required_before_execution": [
+      "Jenn exact A5 DailyNote and VCP memory write authorization"
+    ],
+    "validation_required_before_execution": [
+      "git diff --check"
+    ],
+    "guard": {
+      "package_only": true,
+      "DailyNote_write_performed": true,
+      "VCP_memory_write_performed": true,
+      "accepted_samples_write_performed": false,
+      "archive_write_performed": false,
+      "production_candidate_write_performed": false,
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "mcp_runtime_performed": false,
+      "image_generation_performed": false,
+      "push_tag_release_deploy_performed": false,
+      "artifact_recoverability_is_not_vcp_runtime_integration": false,
+      "vcp_runtime_integration_proven": true
+    },
+    "negative_cases_expected": {
+      "memory_target_count_drift_fails": true,
+      "daily_note_target_drift_fails": true,
+      "vcp_memory_target_drift_fails": true,
+      "memory_authorization_overclaim_fails": true,
+      "accepted_sample_overclaim_fails": true,
+      "external_write_flag_fails": true
+    },
+    "recommended_next": "prepare_exact_new_trial_003_daily_note_vcp_memory_write_authorization_package_draft_with_exact_targets_preserved",
+    "recommended_next_auto_execution_allowed": "true_local_memory_authorization_draft_only_no_memory_write"
+  }
+}

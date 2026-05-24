@@ -354,3 +354,59 @@ accepted_sample_registry:
         approval_record_ref: user_authorization:AUTH-PENDING-LAMP-V14-166-ACCEPTED-SAMPLES-REGISTRATION-20260518-001
       write_to_memory_allowed: false
       daily_note_write_allowed: false
+
+    - sample_id: accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001
+      source_phase: v0_6_56
+      source_plan: v0_3_3_exact_new_trial_003
+      asset_status: accepted_candidate
+      provider_type: project_plugin
+      plugin_id: NativeDoubaoImage
+      model: doubao-seedream-5-0-260128
+      prompt_package_ref: prompts/image_generation/safe_adult_editorial_portrait_v1.yaml
+      review_doc_ref: docs/V0_6_32_EXACT_NEW_TRIAL_003_HUMAN_REVIEW.md
+      formal_sample_package_ref: docs/V0_6_56_EXACT_NEW_TRIAL_003_ACCEPTED_SAMPLES_METADATA_REGISTRATION.md
+      approval_evidence_ref: reports/human_approval_evidence/v0_3_3_exact_new_trial_003_shot_2_user_submitted_formal_human_approval_evidence.json
+      image_path: runs/real_generation/v0_3_3_exact_new_trial_003_shot_2/safe_adult_editorial_portrait_v1.png
+      image_sha256: 8bd7b81a916f0f6333392562d84e32368a3f28dd6a6456fc2f9e49d835a62c3b
+      image_dimensions: 941x1672
+      recoverability_status: workspace_local_verified_by_prior_receipt
+      artifact_locator_scope: project_relative_runs
+      verification_mode: prior_receipt_hash
+      verified_sha256: 8bd7b81a916f0f6333392562d84e32368a3f28dd6a6456fc2f9e49d835a62c3b
+      verified_dimensions: 941x1672
+      verified_mime: image/png
+      verification_record_ref: reports/provider_receipts/v0_3_3_exact_new_trial_003_shot_2_receipt.json
+      import_record_ref: reports/provider_receipts/v0_3_3_exact_new_trial_003_shot_2_registry.json
+      portable_after_clone: false
+      artifact_recoverability_is_not_vcp_runtime_integration: true
+      image_files_committed_to_git: false
+      category: fashion_lookbook_portrait
+      style_tags:
+        - safe_adult_editorial_portrait
+        - fashion_lookbook_portrait
+        - red_suit
+        - dusk_balcony
+        - exact_new_trial_003
+        - accepted_candidate
+      acceptance_summary:
+        adult_model_only: pass
+        professional_editorial_portrait: pass
+        clothing_first_visual: pass
+        conservative_styling: pass
+        pose_and_expression: pass
+        background_secondary: pass
+        no_text_logo_watermark: pass
+        human_approval_present: pass
+        commercial_usability: pass_with_review_context
+        memory_suitability: false
+      known_minor_issues:
+        - memory_write_deferred_until_separate_memory_authorization
+        - archive_and_production_candidate_require_separate_follow_up_gates
+      commercial_use_level: accepted_candidate
+      human_approval:
+        approved: true
+        approved_by: Jenn
+        approval_statement_ref: reports/human_approval_evidence/v0_3_3_exact_new_trial_003_shot_2_user_submitted_formal_human_approval_evidence.json
+        approval_record_ref: user_authorization:v0_6_55_exact_new_trial_003_user_submitted_formal_human_approval_evidence_capture
+      write_to_memory_allowed: false
+      daily_note_write_allowed: false

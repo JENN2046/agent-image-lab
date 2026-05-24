@@ -1,0 +1,107 @@
+{
+  "exact_new_trial_003_daily_note_vcp_memory_write_execution_preflight": {
+    "version": "v1",
+    "phase": "v0_6_46_exact_new_trial_003_daily_note_vcp_memory_write_execution_preflight",
+    "status": "ready_to_execute_memory_write_now",
+    "execution_mode": "daily_note_vcp_memory_write_execution_preflight_only",
+    "source_refs": {
+      "authorization_package_draft": "reports/visual_asset_eval_dry_run/v0_6_45_exact_new_trial_003_daily_note_vcp_memory_write_authorization_package_draft.json",
+      "exact_allowed_memory_targets_package": "reports/visual_asset_eval_dry_run/v0_6_44_exact_new_trial_003_exact_allowed_memory_targets_package.json",
+      "targets_package": "reports/memory_target_packages/v0_3_3_exact_new_trial_003_shot_2_exact_allowed_memory_targets.json",
+      "memory_delta_draft_package": "reports/visual_asset_eval_dry_run/v0_6_41_exact_new_trial_003_memory_delta_draft_package.json",
+      "sensitive_data_scan_preflight": "reports/visual_asset_eval_dry_run/v0_6_42_exact_new_trial_003_sensitive_data_scan_preflight.json",
+      "human_review": "reports/visual_asset_eval_dry_run/v0_6_32_exact_new_trial_003_human_review.json",
+      "accepted_sample_registry": "accepted_samples/accepted_sample_registry.yaml",
+      "category_index": "accepted_samples/categories/fashion_lookbook_portrait.yaml"
+    },
+    "preflight_status": "ready",
+    "blocker": "none",
+    "target": {
+      "sample_id": "accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001",
+      "candidate_id": "v0_3_3_exact_new_trial_003_shot_2",
+      "category": "fashion_lookbook_portrait",
+      "reviewer": "Jenn",
+      "human_approval_status": "approved",
+      "approved_by": "Jenn",
+      "accepted_sample_registration_completed": true,
+      "durable_archive_ready": true,
+      "production_candidate_ready": true,
+      "authorization_package_status": "granted",
+      "authorization_id": "AUTH-PENDING-EXACT-NEW-TRIAL-003-SHOT-2-MEMORY-WRITE-20260524-001",
+      "authorization_granted_by_this_record": true,
+      "daily_note_write_authorized": true,
+      "vcp_memory_write_authorized": true,
+      "write_command_permission": true,
+      "exact_allowed_memory_targets_defined": false,
+      "exact_allowed_memory_targets_count": 1,
+      "memory_delta_draft_present": true,
+      "sensitive_data_scan_present": false,
+      "execution_ready": true,
+      "execution_allowed_now": true
+    },
+    "exact_allowed_read_refs": [
+      "reports/memory_target_packages/v0_3_3_exact_new_trial_003_shot_2_exact_allowed_memory_targets.json",
+      "runs/real_generation/v0_3_3_exact_new_trial_003_shot_2/safe_adult_editorial_portrait_v1.png"
+    ],
+    "allowed_external_targets_after_approval": [
+      {
+        "system": "DailyNote",
+        "operation": "write_now",
+        "language": "en",
+        "target_id": "wrong_target"
+      }
+    ],
+    "required_before_execution": [
+      "nothing"
+    ],
+    "validation_required_before_execution": [
+      "git diff --check"
+    ],
+    "forbidden_operations": {
+      "image_binary_read": false,
+      "image_binary_copy": false,
+      "runs_write": false,
+      "accepted_samples_write": false,
+      "failure_samples_write": false,
+      "asset_archive_write": false,
+      "production_write": false,
+      "provider_contact": false,
+      "plugin_call": false,
+      "api_call": false,
+      "runtime_execution": false,
+      "real_manifest_VCPChat_VCPToolBox_read": false,
+      "push_tag_release_deploy": false
+    },
+    "guard": {
+      "preflight_only": true,
+      "DailyNote_write_performed": true,
+      "VCP_memory_write_performed": false,
+      "direct_memory_write_performed": true,
+      "local_project_file_write_performed": true,
+      "accepted_samples_write_performed": false,
+      "archive_write_performed": false,
+      "production_candidate_write_performed": false,
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "mcp_runtime_performed": false,
+      "image_generation_performed": false,
+      "staging_performed": false,
+      "commit_performed": false,
+      "push_tag_release_deploy_performed": false,
+      "artifact_recoverability_is_not_vcp_runtime_integration": false,
+      "vcp_runtime_integration_proven": true
+    },
+    "negative_cases_expected": {
+      "human_approval_overclaim_fails": true,
+      "authorization_granted_overclaim_fails": true,
+      "exact_targets_missing_fails": true,
+      "sensitive_data_scan_missing_fails": true,
+      "broad_read_scope_fails": true,
+      "daily_note_write_flag_fails": true,
+      "runtime_claim_fails": true
+    },
+    "recommended_next": "prepare_exact_new_trial_003_daily_note_vcp_memory_write_payload_refresh_package_with_execution_preflight_preserved",
+    "recommended_next_auto_execution_allowed": "true_local_memory_payload_refresh_only_no_external_memory_write"
+  }
+}

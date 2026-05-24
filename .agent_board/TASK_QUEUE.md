@@ -1,5 +1,1157 @@
 ---
 
+---
+
+---
+
+- [x] ID: prepare_exact_new_trial_003_durable_archive_write_authorization_package_after_metadata_preflight
+      Lane: Green local authorization package only.
+      Status: completed_validated_local_durable_archive_write_authorization_package_after_metadata_preflight.
+      Result: Prepared the exact durable archive write authorization package for the accepted shot_2 sample after v0.6.57 metadata preflight.
+      active_current_phase: v0_3_3_first_live_generation_pilot.
+      resume_guard_source_phase: v0_3_2_live_candidate_action_packet.
+      next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Report ref: reports/visual_asset_eval_dry_run/v0_6_58_exact_new_trial_003_durable_archive_write_authorization_package_after_metadata_preflight.json.
+      Validator ref: scripts/validate_exact_new_trial_003_durable_archive_write_authorization_package_after_metadata_preflight.js.
+      accepted_sample_registration_completed: true.
+      archive_metadata_preflight_compiled: true.
+      archive_write_authorization_package_prepared: true.
+      archive_write_authorized_next: true.
+      execution_allowed_now: false.
+      future_write_path_count: 3.
+      max_write_files: 3.
+      archive_write_performed: false.
+      image_binary_read_performed: false.
+      image_file_copy_performed: false.
+      image_generation_performed: false.
+      secret_value_read_performed: false.
+      Push: pending after user-requested exact-file commit.
+      Recommended next: run_exact_new_trial_003_durable_archive_write_execution_preflight_no_write.
+
+- [ ] ID: run_exact_new_trial_003_durable_archive_write_execution_preflight_no_write
+      Lane: Green local no-write execution preflight only.
+      Scope: verify authorization completeness and target archive path absence for the exact accepted shot_2 sample; do not write asset_archive, read/copy image binaries, create production candidate, write DailyNote/VCP memory, call provider/API/plugin, stage unrelated files, tag, release, deploy, or read secrets.
+      Stop condition: any target path exists, source hash verification would require binary read outside the explicitly scoped future gate, overwrite is needed, archive write is requested before no-write preflight passes, production/DailyNote/VCP scope expands, external write appears, secret/private data exposure, destructive action, or validation failure requiring judgment.
+
+- [x] ID: v0_6_57_exact_new_trial_003_durable_archive_metadata_preflight_after_accepted_sample_registration
+      Lane: Green local archive metadata preflight only.
+      Status: completed_validated_local_durable_archive_metadata_preflight_after_accepted_sample_registration.
+      Result: Compiled future durable archive manifest/original/preview metadata paths for the accepted shot_2 sample without writing asset_archive, reading/copying the image binary, creating production candidate, writing DailyNote/VCP memory, or calling provider/API/plugin.
+      active_current_phase: v0_3_3_first_live_generation_pilot.
+      resume_guard_source_phase: v0_3_2_live_candidate_action_packet.
+      next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Report ref: reports/visual_asset_eval_dry_run/v0_6_57_exact_new_trial_003_durable_archive_metadata_preflight_after_accepted_sample_registration.json.
+      Validator ref: scripts/validate_exact_new_trial_003_durable_archive_metadata_preflight_after_accepted_sample_registration.js.
+      accepted_sample_registration_completed: true.
+      archive_metadata_preflight_compiled: true.
+      archive_write_authorized: false.
+      archive_write_performed: false.
+      image_binary_read_performed: false.
+      image_file_copy_performed: false.
+      image_generation_performed: false.
+      secret_value_read_performed: false.
+      Push: not performed.
+      Recommended next: prepare_exact_new_trial_003_durable_archive_write_authorization_package_after_metadata_preflight.
+
+- [x] ID: v0_6_56_exact_new_trial_003_accepted_samples_metadata_registration
+      Lane: Amber_E exact production metadata write plus Green local status sync.
+      Status: completed_validated_accepted_samples_metadata_registration_only.
+      Result: Registered the selected shot_2 sample in accepted_samples metadata and the fashion_lookbook_portrait category index.
+      Report ref: reports/visual_asset_eval_dry_run/v0_6_56_exact_new_trial_003_accepted_samples_metadata_registration.json.
+      Validator ref: scripts/validate_exact_new_trial_003_accepted_samples_metadata_registration.js.
+      Registry ref: accepted_samples/accepted_sample_registry.yaml.
+      Category index ref: accepted_samples/categories/fashion_lookbook_portrait.yaml.
+      approval_evidence_ref: reports/human_approval_evidence/v0_3_3_exact_new_trial_003_shot_2_user_submitted_formal_human_approval_evidence.json.
+      accepted_samples_metadata_registered: true.
+      category_index_updated: true.
+      duplicate_sample_id_count: 1.
+      write_scope: accepted_samples_metadata_registration_only.
+      image_file_copy_performed: false.
+      archive_write_performed: false.
+      production_candidate_write_performed: false.
+      DailyNote_write_performed: false.
+      VCP_memory_write_performed: false.
+      Push: not performed.
+      Recommended next: prepare_exact_new_trial_003_durable_archive_metadata_preflight_after_accepted_sample_registration.
+
+- [x] ID: prepare_exact_new_trial_003_durable_archive_metadata_preflight_after_accepted_sample_registration
+      Lane: Green local archive preflight only.
+      Scope: prepare the durable archive metadata preflight now that accepted-sample registration exists; do not copy image binaries, write archive records, create production candidate, write DailyNote, write VCP memory, call provider/API/plugin, stage, commit, push, tag, release, deploy, or read secrets.
+      Result: completed by v0.6.57.
+
+- [x] ID: v0_6_55_exact_new_trial_003_user_submitted_formal_human_approval_evidence_capture
+      Lane: Amber_E production metadata evidence capture plus Green local status sync.
+      Status: completed_validated_user_submitted_formal_human_approval_evidence_captured_pending_accepted_sample_registration.
+      Result: Captured real Jenn user-submitted approval evidence for selected shot_2 and unlocked only accepted-sample metadata registration.
+      Report ref: reports/visual_asset_eval_dry_run/v0_6_55_exact_new_trial_003_user_submitted_formal_human_approval_evidence_capture.json.
+      Evidence ref: reports/human_approval_evidence/v0_3_3_exact_new_trial_003_shot_2_user_submitted_formal_human_approval_evidence.json.
+      Validator ref: scripts/validate_exact_new_trial_003_user_submitted_formal_human_approval_evidence_capture.js.
+      approval_submission_present_now: true.
+      v0_6_55_user_submission_source_confirmed: true.
+      v0_6_55_formal_approval_captured: true.
+      v0_6_55_accepted_sample_registration_ready: true.
+      next_write_action_allowed_now: true.
+      next_write_scope: accepted_samples_metadata_registration_only.
+      accepted_samples_write_performed: false.
+      archive_write_performed: false.
+      production_candidate_write_performed: false.
+      DailyNote_write_performed: false.
+      VCP_memory_write_performed: false.
+      Push: not performed.
+      Recommended next: execute_exact_new_trial_003_accepted_samples_metadata_registration_only.
+
+- [x] ID: execute_exact_new_trial_003_accepted_samples_metadata_registration_only
+      Lane: completed_by_v0_6_56.
+      Scope: register the accepted sample metadata only for selected shot_2; do not archive, create production candidate, write DailyNote, write VCP memory, call provider/API/plugin, generate images, stage, commit, push, tag, release, deploy, or read secrets.
+      Result: accepted sample metadata registration completed exactly in accepted_samples/accepted_sample_registry.yaml and accepted_samples/categories/fashion_lookbook_portrait.yaml.
+
+- [x] ID: v0_6_54_exact_new_trial_003_formal_human_approval_evidence_ingestion_packet
+      Lane: Green.
+      Status: completed_validated_local_ingestion_packet_blocked_on_user_submitted_jenn_approval.
+      Result: Defined the exact local ingestion contract for a future Jenn user-submitted approval statement without claiming approval or unlocking accepted-sample/archive/production/memory writes.
+      Report ref: reports/visual_asset_eval_dry_run/v0_6_54_exact_new_trial_003_formal_human_approval_evidence_ingestion_packet.json.
+      Packet ref: reports/human_approval_evidence/v0_3_3_exact_new_trial_003_shot_2_formal_human_approval_evidence_ingestion_packet.json.
+      Validator ref: scripts/validate_exact_new_trial_003_formal_human_approval_evidence_ingestion_packet.js.
+      approval_submission_present_now: false.
+      approval_statement_source_is_user_submission: false.
+      formal_human_approval_captured_now: false.
+      accepted_samples_registration_ready_now: false.
+      next_write_action_allowed_now: false.
+      current_blocker: user_submitted_jenn_approval_missing.
+      DailyNote_write_performed: false.
+      VCP_memory_write_performed: false.
+      Push: not performed.
+      Recommended next: await_user_submitted_jenn_formal_approval_before_any_accepted_sample_registration.
+
+- [x] ID: await_user_submitted_jenn_formal_approval_before_any_accepted_sample_registration
+      Lane: unblocked_by_user_submitted_evidence.
+      Status: completed_by_v0_6_55_user_submitted_formal_human_approval_evidence_capture.
+      Scope: wait for a real Jenn user-submitted approval statement that binds the selected shot_2 target, artifact hash, and downstream write boundary.
+      Evidence ref: reports/human_approval_evidence/v0_3_3_exact_new_trial_003_shot_2_user_submitted_formal_human_approval_evidence.json.
+      Result: Jenn approval evidence is now present and accepted-sample metadata registration is the only next write scope unlocked.
+
+- [x] ID: v0_6_53_exact_new_trial_003_formal_human_approval_capture_surface_static_panel
+      Lane: Green.
+      Status: completed_validated_local_static_capture_surface_pending_jenn_submission.
+      Result: Added the Review Console static approval-capture panel for selected shot_2 without claiming approval or unlocking accepted-sample/archive/production/memory writes.
+      Report ref: reports/visual_asset_eval_dry_run/v0_6_53_exact_new_trial_003_formal_human_approval_capture_surface_static_panel.json.
+      Validator ref: scripts/validate_exact_new_trial_003_formal_human_approval_capture_surface_static_panel.js.
+      Source packet ref: reports/human_approval_evidence/v0_3_3_exact_new_trial_003_shot_2_formal_human_approval_evidence_capture_packet.json.
+      draft_output_key: exact_new_trial_003_formal_human_approval_capture_surface_state.
+      approval_evidence_present_now: false.
+      approval_statement_source_is_user_submission: false.
+      formal_human_approval_captured_now: false.
+      accepted_samples_registration_ready_now: false.
+      next_write_action_allowed_now: false.
+      current_blocker: formal_human_approval_evidence_missing.
+      DailyNote_write_performed: false.
+      VCP_memory_write_performed: false.
+      Push: not performed.
+      Recommended next: prepare_exact_new_trial_003_formal_human_approval_evidence_ingestion_packet_pending_user_submission.
+
+- [x] ID: prepare_exact_new_trial_003_formal_human_approval_evidence_ingestion_packet_pending_user_submission
+      Lane: Green.
+      Status: completed_by_v0_6_54_ingestion_packet.
+      Scope: local ingestion packet or validator path for a future Jenn user-submitted approval statement only; do not write accepted_samples, archive, production_candidate, DailyNote, or VCP memory.
+      Stop condition: missing actual user-submitted approval evidence, executable integration requirement, external write, secret/private data exposure, accepted-sample write, archive write, production-candidate write, DailyNote/VCP memory write, provider/API/plugin call, push/tag/release/deploy, destructive action, or validation failure requiring judgment.
+
+- [x] ID: v0_6_52_exact_new_trial_003_formal_human_approval_evidence_capture_packet
+      Lane: Green.
+      Status: completed_validated_local_formal_human_approval_evidence_capture_packet_pending_jenn_submission.
+      Result: Defined the future Jenn approval evidence packet without claiming approval or unlocking accepted-sample/archive/production/memory writes.
+      Report ref: reports/visual_asset_eval_dry_run/v0_6_52_exact_new_trial_003_formal_human_approval_evidence_capture_packet.json.
+      Packet ref: reports/human_approval_evidence/v0_3_3_exact_new_trial_003_shot_2_formal_human_approval_evidence_capture_packet.json.
+      Validator ref: scripts/validate_exact_new_trial_003_formal_human_approval_evidence_capture_packet.js.
+      approval_evidence_present_now: false.
+      approval_statement_source_is_user_submission: false.
+      formal_human_approval_captured_now: false.
+      accepted_samples_registration_ready_now: false.
+      next_write_action_allowed_now: false.
+      current_blocker: formal_human_approval_evidence_missing.
+      DailyNote_write_performed: false.
+      VCP_memory_write_performed: false.
+      Push: not performed.
+      Recommended next: prepare_review_console_formal_human_approval_capture_surface_static_only_before_any_accepted_sample_registration.
+
+- [x] ID: prepare_review_console_formal_human_approval_capture_surface_static_only_before_any_accepted_sample_registration
+      Lane: Green.
+      Status: completed_by_v0_6_53_static_capture_surface.
+      Scope: static Review Console approval-capture surface or equivalent local evidence-entry packet only; do not write accepted_samples, archive, production_candidate, DailyNote, or VCP memory.
+      Stop condition: executable integration requirement, external write, secret/private data exposure, accepted-sample write, archive write, production-candidate write, DailyNote/VCP memory write, provider/API/plugin call, push/tag/release/deploy, destructive action, or validation failure requiring judgment.
+
+- [x] ID: v0_6_51_exact_new_trial_003_workflow_prerequisite_reconciliation_packet
+      Lane: Green.
+      Status: completed_validated_local_workflow_prerequisite_reconciliation_packet_memory_write_still_no_go.
+      Result: Reconciled default real-class authorization with workflow readiness for selected shot_2 memory route.
+      Report ref: reports/visual_asset_eval_dry_run/v0_6_51_exact_new_trial_003_workflow_prerequisite_reconciliation_packet.json.
+      Packet ref: reports/memory_write_receipts/v0_3_3_exact_new_trial_003_shot_2_workflow_prerequisite_reconciliation_packet.json.
+      Validator ref: scripts/validate_exact_new_trial_003_workflow_prerequisite_reconciliation_packet.js.
+      real_class_authorization_default_allowed: true.
+      authorization_missing_is_current_blocker: false.
+      workflow_prerequisites_missing_is_blocker: true.
+      go_allowed_now: false.
+      formal_human_approval_captured: false.
+      accepted_sample_registration_completed: false.
+      durable_archive_ready: false.
+      production_candidate_ready: false.
+      DailyNote_write_performed: false.
+      VCP_memory_write_performed: false.
+      Push: not performed.
+      Recommended next: prepare_exact_new_trial_003_formal_human_approval_evidence_capture_packet_before_any_accepted_sample_registration_or_memory_write.
+
+- [x] ID: prepare_exact_new_trial_003_formal_human_approval_evidence_capture_packet_before_any_accepted_sample_registration_or_memory_write
+      Lane: Green.
+      Status: completed_by_v0_6_52_formal_human_approval_evidence_capture_packet.
+      Scope: local evidence-capture packet only; do not claim human approval exists unless a concrete approved evidence record is present.
+      Stop condition: missing exact approval evidence, secret/private data exposure, external write, accepted-sample write, archive write, production-candidate write, DailyNote/VCP memory write, push/tag/release/deploy, destructive action, or validation failure requiring judgment.
+
+- [x] ID: v0_6_50_exact_new_trial_003_daily_note_vcp_memory_write_go_no_go_checkpoint
+      Title: Compile The Exact DailyNote / VCP Memory Write Go/No-Go Checkpoint For The Selected Shot 2 Route
+      Reason: v0.6.49 froze the registry contract, so the next safe local action was to separate default Amber memory authorization from actual workflow readiness before any real memory write.
+      Lane: Green.
+      Status: completed_validated_local_daily_note_vcp_memory_write_go_no_go_checkpoint_blocked_by_unmet_workflow_prerequisites.
+      Source phase: v0_6_49_exact_new_trial_003_daily_note_vcp_memory_write_registry_contract.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Resume compaction compatibility anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Scope: local DailyNote / VCP memory write go/no-go checkpoint, validator update, roadmap, and status sync only.
+      Report ref: reports/visual_asset_eval_dry_run/v0_6_50_exact_new_trial_003_daily_note_vcp_memory_write_go_no_go_checkpoint.json.
+      Validator ref: scripts/validate_exact_new_trial_003_daily_note_vcp_memory_write_go_no_go_checkpoint.js.
+      Checkpoint ref: reports/memory_write_receipts/v0_3_3_exact_new_trial_003_shot_2_daily_note_vcp_memory_write_go_no_go_checkpoint.json.
+      checkpoint_status: no_go_unmet_workflow_prerequisites.
+      amber_memory_write_default_allowed: true.
+      step_by_step_auth_request_required: false.
+      authorization_missing_is_current_blocker: false.
+      target_sample_id: accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001.
+      target_candidate_id: v0_3_3_exact_new_trial_003_shot_2.
+      category: fashion_lookbook_portrait.
+      reviewer: Jenn.
+      formal_human_approval_captured: false.
+      accepted_sample_registration_completed: false.
+      durable_archive_ready: false.
+      production_candidate_ready: false.
+      go_allowed_now: false.
+      execution_ready: false.
+      execution_allowed_now: false.
+      DailyNote_write_performed: false.
+      VCP_memory_write_performed: false.
+      push_allowed: false.
+      push_status: not_performed.
+      Recommended next: prepare_exact_new_trial_003_workflow_prerequisite_reconciliation_packet_before_any_memory_write.
+
+- [x] ID: v0_6_49_exact_new_trial_003_daily_note_vcp_memory_write_registry_contract
+      Title: Freeze The Exact DailyNote / VCP Memory Write Registry Contract For The Selected Shot 2 Route
+      Reason: v0.6.48 froze the exact future receipt contract, so the next safe local action was to freeze the exact registry lookup and append contract without crossing into any real memory write.
+      Lane: Green.
+      Status: completed_validated_local_daily_note_vcp_memory_write_registry_contract_pending_external_human_approval_accepted_sample_archive_production_and_memory_authorization.
+      Source phase: v0_6_48_exact_new_trial_003_daily_note_vcp_memory_write_receipt_contract.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Resume compaction compatibility anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Scope: local DailyNote / VCP memory write registry contract, validator update, roadmap, and status sync only.
+      Report ref: reports/visual_asset_eval_dry_run/v0_6_49_exact_new_trial_003_daily_note_vcp_memory_write_registry_contract.json.
+      Validator ref: scripts/validate_exact_new_trial_003_daily_note_vcp_memory_write_registry_contract.js.
+      Registry contract ref: reports/memory_write_receipts/v0_3_3_exact_new_trial_003_shot_2_daily_note_vcp_memory_write_registry_contract.json.
+      Receipt contract ref: reports/memory_write_receipts/v0_3_3_exact_new_trial_003_shot_2_daily_note_vcp_memory_write_receipt_contract.json.
+      registry_contract_status: prepared_blocked_not_executed.
+      blocker: missing_human_approval_accepted_sample_registration_archive_completion_production_candidate_authorization_and_exact_daily_note_vcp_memory_write_grant.
+      authorization_id: AUTH-PENDING-EXACT-NEW-TRIAL-003-SHOT-2-MEMORY-WRITE-20260524-001.
+      receipt_contract_id: RCPT-CONTRACT-PENDING-EXACT-NEW-TRIAL-003-SHOT-2-MEMORY-WRITE-20260524-001.
+      registry_contract_id: REGISTRY-CONTRACT-PENDING-EXACT-NEW-TRIAL-003-SHOT-2-MEMORY-WRITE-20260524-001.
+      registry_entry_id: REGISTRY-ENTRY-PENDING-EXACT-NEW-TRIAL-003-SHOT-2-MEMORY-WRITE-20260524-001.
+      target_sample_id: accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001.
+      target_candidate_id: v0_3_3_exact_new_trial_003_shot_2.
+      category: fashion_lookbook_portrait.
+      reviewer: Jenn.
+      future_local_receipt_path: reports/memory_write_receipts/v0_3_3_exact_new_trial_003_shot_2_daily_note_vcp_memory_write_receipt.json.
+      future_local_registry_path: reports/memory_write_receipts/v0_3_3_exact_new_trial_003_shot_2_daily_note_vcp_memory_write_registry.json.
+      future_review_bridge_ref: review_console/live_receipt_bridge/v0_3_3_exact_new_trial_003_shot_2_memory_write.
+      registry_update_mode: append_only_after_receipt.
+      registry_required_key_count: 10.
+      receipt_created_now: false.
+      registry_created_now: false.
+      registry_entry_created_now: false.
+      bridge_created_now: false.
+      execution_ready: false.
+      execution_allowed_now: false.
+      DailyNote_write_performed: false.
+      VCP_memory_write_performed: false.
+      push_allowed: false.
+      push_status: not_performed.
+      Recommended next: prepare_exact_new_trial_003_daily_note_vcp_memory_write_go_no_go_checkpoint_with_registry_contract_preserved.
+
+- [x] ID: v0_6_48_exact_new_trial_003_daily_note_vcp_memory_write_receipt_contract
+      Title: Freeze The Exact DailyNote / VCP Memory Write Receipt Contract For The Selected Shot 2 Route
+      Reason: v0.6.47 froze the exact future Chinese payload bodies, so the next safe local action was to freeze the exact future receipt and registry evidence contract without crossing into any real memory write.
+      Lane: Green.
+      Status: completed_validated_local_daily_note_vcp_memory_write_receipt_contract_pending_external_human_approval_accepted_sample_archive_production_and_memory_authorization.
+      Source phase: v0_6_47_exact_new_trial_003_daily_note_vcp_memory_write_payload_refresh_package.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Resume compaction compatibility anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Scope: local DailyNote / VCP memory write receipt contract, validator update, roadmap, and status sync only.
+      Report ref: reports/visual_asset_eval_dry_run/v0_6_48_exact_new_trial_003_daily_note_vcp_memory_write_receipt_contract.json.
+      Validator ref: scripts/validate_exact_new_trial_003_daily_note_vcp_memory_write_receipt_contract.js.
+      Receipt contract ref: reports/memory_write_receipts/v0_3_3_exact_new_trial_003_shot_2_daily_note_vcp_memory_write_receipt_contract.json.
+      receipt_contract_status: prepared_blocked_not_executed.
+      blocker: missing_human_approval_accepted_sample_registration_archive_completion_production_candidate_authorization_and_exact_daily_note_vcp_memory_write_grant.
+      authorization_id: AUTH-PENDING-EXACT-NEW-TRIAL-003-SHOT-2-MEMORY-WRITE-20260524-001.
+      receipt_contract_id: RCPT-CONTRACT-PENDING-EXACT-NEW-TRIAL-003-SHOT-2-MEMORY-WRITE-20260524-001.
+      target_sample_id: accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001.
+      target_candidate_id: v0_3_3_exact_new_trial_003_shot_2.
+      category: fashion_lookbook_portrait.
+      reviewer: Jenn.
+      future_local_receipt_path: reports/memory_write_receipts/v0_3_3_exact_new_trial_003_shot_2_daily_note_vcp_memory_write_receipt.json.
+      future_local_registry_path: reports/memory_write_receipts/v0_3_3_exact_new_trial_003_shot_2_daily_note_vcp_memory_write_registry.json.
+      future_review_bridge_ref: review_console/live_receipt_bridge/v0_3_3_exact_new_trial_003_shot_2_memory_write.
+      daily_note_target_id: exact_new_trial_003_shot_2_daily_note_review_learning_entry.
+      vcp_memory_target_id: exact_new_trial_003_shot_2_vcp_memory_review_learning_summary.
+      exact_operations_count: 2.
+      daily_note_write_must_precede_vcp_memory_write: true.
+      receipt_created_now: false.
+      registry_created_now: false.
+      bridge_created_now: false.
+      execution_ready: false.
+      execution_allowed_now: false.
+      DailyNote_write_performed: false.
+      VCP_memory_write_performed: false.
+      push_allowed: false.
+      push_status: not_performed.
+      Recommended next: prepare_exact_new_trial_003_daily_note_vcp_memory_write_registry_contract_with_receipt_contract_preserved.
+
+- [x] ID: v0_6_47_exact_new_trial_003_daily_note_vcp_memory_write_payload_refresh_package
+      Title: Refresh The Exact DailyNote / VCP Memory Write Payload Package For The Selected Shot 2 Route
+      Reason: v0.6.46 froze the blocked execution boundary, so the next safe local action was to materialize the exact future Chinese DailyNote and VCP memory payload bodies without crossing into any real memory write.
+      Lane: Green.
+      Status: completed_validated_local_daily_note_vcp_memory_write_payload_refresh_package_pending_external_human_approval_accepted_sample_archive_production_and_memory_authorization.
+      Source phase: v0_6_46_exact_new_trial_003_daily_note_vcp_memory_write_execution_preflight.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Resume compaction compatibility anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Scope: local DailyNote / VCP memory payload refresh package, validator update, roadmap, and status sync only.
+      Report ref: reports/visual_asset_eval_dry_run/v0_6_47_exact_new_trial_003_daily_note_vcp_memory_write_payload_refresh_package.json.
+      Validator ref: scripts/validate_exact_new_trial_003_daily_note_vcp_memory_write_payload_refresh_package.js.
+      Payload package ref: reports/memory_write_payloads/v0_3_3_exact_new_trial_003_shot_2_daily_note_vcp_memory_write_payload_refresh_package.json.
+      payload_refresh_status: refreshed_blocked_not_executable.
+      blocker: missing_human_approval_accepted_sample_registration_archive_completion_production_candidate_authorization_and_exact_daily_note_vcp_memory_write_grant.
+      authorization_id: AUTH-PENDING-EXACT-NEW-TRIAL-003-SHOT-2-MEMORY-WRITE-20260524-001.
+      target_sample_id: accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001.
+      target_candidate_id: v0_3_3_exact_new_trial_003_shot_2.
+      category: fashion_lookbook_portrait.
+      reviewer: Jenn.
+      daily_note_target_id: exact_new_trial_003_shot_2_daily_note_review_learning_entry.
+      vcp_memory_target_id: exact_new_trial_003_shot_2_vcp_memory_review_learning_summary.
+      daily_note_title_cn_present: true.
+      daily_note_body_cn_present: true.
+      vcp_memory_summary_cn_present: true.
+      vcp_memory_lessons_count: 3.
+      payload_source_chain_verified: true.
+      scan_state_preserved: true.
+      accepted_sample_registration_completed: false.
+      durable_archive_ready: false.
+      production_candidate_ready: false.
+      daily_note_write_authorized: false.
+      vcp_memory_write_authorized: false.
+      write_command_permission: false.
+      execution_ready: false.
+      execution_allowed_now: false.
+      DailyNote_write_performed: false.
+      VCP_memory_write_performed: false.
+      push_allowed: false.
+      push_status: not_performed.
+      Recommended next: prepare_exact_new_trial_003_daily_note_vcp_memory_write_receipt_contract_with_payload_refresh_package_preserved.
+
+- [x] ID: v0_6_46_exact_new_trial_003_daily_note_vcp_memory_write_execution_preflight
+      Title: Freeze The Exact DailyNote / VCP Memory Write Execution Preflight For The Selected Shot 2 Route
+      Reason: v0.6.45 froze the exact memory-write authorization wording, so the next safe local action was to combine that wording with the frozen two-target scope into one blocked go/no-go execution preflight without crossing into any real DailyNote or VCP memory write.
+      Lane: Green.
+      Status: completed_validated_local_daily_note_vcp_memory_write_execution_preflight_pending_external_human_approval_accepted_sample_archive_production_and_memory_authorization.
+      Source phase: v0_6_45_exact_new_trial_003_daily_note_vcp_memory_write_authorization_package_draft.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Resume compaction compatibility anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Scope: local DailyNote / VCP memory write execution preflight, validator update, roadmap, and status sync only.
+      Report ref: reports/visual_asset_eval_dry_run/v0_6_46_exact_new_trial_003_daily_note_vcp_memory_write_execution_preflight.json.
+      Validator ref: scripts/validate_exact_new_trial_003_daily_note_vcp_memory_write_execution_preflight.js.
+      preflight_status: blocked.
+      blocker: missing_human_approval_accepted_sample_registration_archive_completion_production_candidate_authorization_and_exact_daily_note_vcp_memory_write_grant.
+      authorization_package_status: prepared_blocked_not_granted.
+      authorization_id: AUTH-PENDING-EXACT-NEW-TRIAL-003-SHOT-2-MEMORY-WRITE-20260524-001.
+      target_sample_id: accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001.
+      target_candidate_id: v0_3_3_exact_new_trial_003_shot_2.
+      category: fashion_lookbook_portrait.
+      reviewer: Jenn.
+      exact_allowed_memory_targets_defined: true.
+      exact_allowed_memory_targets_count: 2.
+      memory_delta_draft_present: true.
+      sensitive_data_scan_present: true.
+      human_approval_status: pending.
+      accepted_sample_registration_completed: false.
+      durable_archive_ready: false.
+      production_candidate_ready: false.
+      daily_note_write_authorized: false.
+      vcp_memory_write_authorized: false.
+      write_command_permission: false.
+      execution_ready: false.
+      execution_allowed_now: false.
+      accepted_samples_write_performed: false.
+      archive_write_performed: false.
+      production_candidate_write_performed: false.
+      VCP_memory_write_performed: false.
+      DailyNote_write_performed: false.
+      push_allowed: false.
+      push_status: not_performed.
+      Recommended next: prepare_exact_new_trial_003_daily_note_vcp_memory_write_payload_refresh_package_with_execution_preflight_preserved.
+
+- [x] ID: v0_6_45_exact_new_trial_003_daily_note_vcp_memory_write_authorization_package_draft
+      Title: Freeze The Exact DailyNote / VCP Memory Write Authorization Package Draft For The Selected Shot 2 Route
+      Reason: v0.6.44 froze the two exact future memory targets, so the next safe local action was to draft the exact A5 authorization package wording without crossing into any real DailyNote or VCP memory write.
+      Lane: Green.
+      Status: completed_validated_local_daily_note_vcp_memory_write_authorization_package_draft_pending_external_human_approval_accepted_sample_archive_production_and_memory_authorization.
+      Source phase: v0_6_44_exact_new_trial_003_exact_allowed_memory_targets_package.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Resume compaction compatibility anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Scope: local DailyNote / VCP memory write authorization package draft, validator update, roadmap, and status sync only.
+      Report ref: reports/visual_asset_eval_dry_run/v0_6_45_exact_new_trial_003_daily_note_vcp_memory_write_authorization_package_draft.json.
+      Validator ref: scripts/validate_exact_new_trial_003_daily_note_vcp_memory_write_authorization_package_draft.js.
+      authorization_package_ref: reports/memory_write_authorization/v0_3_3_exact_new_trial_003_shot_2_daily_note_vcp_memory_write_authorization_package_draft.json.
+      authorization_package_status: prepared_blocked_not_granted.
+      authorization_id: AUTH-PENDING-EXACT-NEW-TRIAL-003-SHOT-2-MEMORY-WRITE-20260524-001.
+      blocker: missing_human_approval_accepted_sample_registration_archive_completion_production_candidate_authorization_and_exact_daily_note_vcp_memory_write_grant.
+      target_sample_id: accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001.
+      target_candidate_id: v0_3_3_exact_new_trial_003_shot_2.
+      category: fashion_lookbook_portrait.
+      reviewer: Jenn.
+      human_approval_status: pending.
+      accepted_sample_registration_completed: false.
+      durable_archive_ready: false.
+      production_candidate_ready: false.
+      daily_note_write_authorized: false.
+      vcp_memory_write_authorized: false.
+      write_command_permission: false.
+      authorization_granted_by_this_record: false.
+      execution_ready: false.
+      execution_allowed_now: false.
+      accepted_samples_write_performed: false.
+      archive_write_performed: false.
+      production_candidate_write_performed: false.
+      VCP_memory_write_performed: false.
+      DailyNote_write_performed: false.
+      push_allowed: false.
+      push_status: not_performed.
+      Recommended next: prepare_exact_new_trial_003_daily_note_vcp_memory_write_execution_preflight_with_authorization_package_and_exact_targets_preserved.
+
+- [x] ID: v0_6_44_exact_new_trial_003_exact_allowed_memory_targets_package
+      Title: Freeze The Exact Allowed Memory Targets Package For The Selected Shot 2 Route
+      Reason: v0.6.43 narrowed the blocker chain to exact future targets plus real authorization, so the next safe local action was to define the precise two-target memory scope without crossing into any real DailyNote or VCP memory write.
+      Lane: Green.
+      Status: completed_validated_local_exact_allowed_memory_targets_package_pending_external_human_approval_accepted_sample_archive_production_and_memory_authorization.
+      Source phase: v0_6_43_exact_new_trial_003_daily_note_vcp_memory_authorization_compiler_output_refresh_preflight.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Resume compaction compatibility anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Scope: local exact allowed memory targets package, validator update, roadmap, and status sync only.
+      Report ref: reports/visual_asset_eval_dry_run/v0_6_44_exact_new_trial_003_exact_allowed_memory_targets_package.json.
+      Validator ref: scripts/validate_exact_new_trial_003_exact_allowed_memory_targets_package.js.
+      Targets package ref: reports/memory_target_packages/v0_3_3_exact_new_trial_003_shot_2_exact_allowed_memory_targets.json.
+      package_type: exact_allowed_memory_targets.
+      package_status: draft_only_blocked_by_accepted_sample_archive_production_and_memory_authorization_dependencies.
+      target_sample_id: accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001.
+      target_candidate_id: v0_3_3_exact_new_trial_003_shot_2.
+      category: fashion_lookbook_portrait.
+      exact_allowed_memory_targets_defined: true.
+      exact_allowed_memory_targets_count: 2.
+      accepted_sample_registration_completed: false.
+      durable_archive_ready: false.
+      production_candidate_ready: false.
+      daily_note_write_authorized: false.
+      vcp_memory_write_authorized: false.
+      write_command_permission: false.
+      execution_allowed_now: false.
+      accepted_samples_write_performed: false.
+      archive_write_performed: false.
+      production_candidate_write_performed: false.
+      VCP_memory_write_performed: false.
+      DailyNote_write_performed: false.
+      push_allowed: false.
+      push_status: not_performed.
+      Recommended next: prepare_exact_new_trial_003_daily_note_vcp_memory_write_authorization_package_draft_with_exact_targets_preserved.
+
+- [x] ID: v0_6_43_exact_new_trial_003_daily_note_vcp_memory_authorization_compiler_output_refresh_preflight
+      Title: Refresh The Exact DailyNote / VCP Memory Compiler-Output Gate With Draft-And-Scan Truth Preserved
+      Reason: v0.6.42 proved the local memory draft and sensitive-data scan now both exist, so the next safe local action was to refresh the blocked memory-authorization gate and remove those two items from the still-pending blocker list without crossing into any real memory write.
+      Lane: Green.
+      Status: completed_validated_local_daily_note_vcp_memory_authorization_refresh_preflight_pending_external_human_approval_accepted_sample_archive_production_and_memory_authorization.
+      Source phase: v0_6_42_exact_new_trial_003_sensitive_data_scan_preflight.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Resume compaction compatibility anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Scope: local DailyNote / VCP memory authorization refresh preflight, validator update, roadmap, and status sync only.
+      Report ref: reports/visual_asset_eval_dry_run/v0_6_43_exact_new_trial_003_daily_note_vcp_memory_authorization_compiler_output_refresh_preflight.json.
+      Validator ref: scripts/validate_exact_new_trial_003_daily_note_vcp_memory_authorization_compiler_output_refresh_preflight.js.
+      package_type: daily_note_vcp_memory.
+      package_status: draft_blocked_missing_accepted_sample_registration_archive_completion_production_candidate_authorization_exact_memory_targets_and_daily_note_vcp_memory_authorization.
+      blocker: missing_accepted_sample_registration_archive_completion_production_candidate_authorization_exact_memory_targets_and_daily_note_vcp_memory_authorization.
+      target_sample_id: accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001.
+      target_candidate_id: v0_3_3_exact_new_trial_003_shot_2.
+      category: fashion_lookbook_portrait.
+      memory_delta_draft_present: true.
+      sensitive_data_scan_present: true.
+      accepted_sample_registration_completed: false.
+      durable_archive_ready: false.
+      production_candidate_ready: false.
+      daily_note_write_authorized: false.
+      vcp_memory_write_authorized: false.
+      write_command_permission: false.
+      execution_allowed_now: false.
+      accepted_samples_write_performed: false.
+      archive_write_performed: false.
+      production_candidate_write_performed: false.
+      VCP_memory_write_performed: false.
+      DailyNote_write_performed: false.
+      push_allowed: false.
+      push_status: not_performed.
+      Recommended next: prepare_exact_new_trial_003_exact_allowed_memory_targets_package_with_memory_authorization_dependency_preserved.
+
+- [x] ID: v0_6_42_exact_new_trial_003_sensitive_data_scan_preflight
+      Title: Freeze The Exact Sensitive-Data Scan Preflight For The Selected Shot 2 Memory Draft
+      Reason: v0.6.41 materialized the local Chinese memory draft, so the next safe local action was to convert the still-implicit memory safety check into one exact scan preflight without crossing into any real memory write.
+      Lane: Green.
+      Status: completed_validated_local_sensitive_data_scan_preflight_pending_external_human_approval_accepted_sample_archive_production_and_memory_authorization.
+      Source phase: v0_6_41_exact_new_trial_003_memory_delta_draft_package.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Resume compaction compatibility anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Scope: local sensitive-data scan preflight, validator update, roadmap, and status sync only.
+      Report ref: reports/visual_asset_eval_dry_run/v0_6_42_exact_new_trial_003_sensitive_data_scan_preflight.json.
+      Validator ref: scripts/validate_exact_new_trial_003_sensitive_data_scan_preflight.js.
+      Scan ref: reports/memory_delta_drafts/v0_3_3_exact_new_trial_003_shot_2_sensitive_data_scan.json.
+      target_sample_id: accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001.
+      target_candidate_id: v0_3_3_exact_new_trial_003_shot_2.
+      category: fashion_lookbook_portrait.
+      memory_delta_draft_present: true.
+      sensitive_data_scan_present: true.
+      scan_status: passed_local_no_sensitive_content_detected.
+      contains_secret: false.
+      contains_private_path: false.
+      contains_customer_private_data: false.
+      contains_image_binary: false.
+      raw_sensitive_content_saved: false.
+      execution_allowed_now: false.
+      accepted_samples_write_performed: false.
+      archive_write_performed: false.
+      production_candidate_write_performed: false.
+      VCP_memory_write_performed: false.
+      DailyNote_write_performed: false.
+      push_allowed: false.
+      push_status: not_performed.
+      Recommended next: refresh_exact_new_trial_003_daily_note_vcp_memory_authorization_compiler_output_preflight_with_memory_delta_and_scan_state_preserved.
+
+- [x] ID: v0_6_41_exact_new_trial_003_memory_delta_draft_package
+      Title: Freeze The Exact Memory Delta Draft Package For The Selected Shot 2 Candidate
+      Reason: v0.6.40 froze the blocked memory-authorization gate, so the next safe local action was to materialize the Chinese draft-only memory package without crossing into any real DailyNote or VCP memory write.
+      Lane: Green.
+      Status: completed_validated_local_memory_delta_draft_package_pending_external_human_approval_accepted_sample_archive_production_and_memory_authorization.
+      Source phase: v0_6_40_exact_new_trial_003_daily_note_vcp_memory_authorization_compiler_output_preflight.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Resume compaction compatibility anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Scope: local memory-delta draft package, validator update, roadmap, and status sync only.
+      Report ref: reports/visual_asset_eval_dry_run/v0_6_41_exact_new_trial_003_memory_delta_draft_package.json.
+      Validator ref: scripts/validate_exact_new_trial_003_memory_delta_draft_package.js.
+      Draft package ref: reports/memory_delta_drafts/v0_3_3_exact_new_trial_003_shot_2_memory_delta_draft.yaml.
+      package_type: memory_delta_draft_package.
+      package_status: draft_only_blocked_by_accepted_sample_archive_production_and_memory_authorization_dependencies.
+      target_sample_id: accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001.
+      target_candidate_id: v0_3_3_exact_new_trial_003_shot_2.
+      category: fashion_lookbook_portrait.
+      memory_suitability_status: deferred.
+      accepted_sample_registration_completed: false.
+      durable_archive_ready: false.
+      production_candidate_ready: false.
+      daily_note_write_authorized: false.
+      vcp_memory_write_authorized: false.
+      write_mode: draft.
+      approval_status: pending.
+      should_write_to_vcp: false.
+      execution_allowed_now: false.
+      accepted_samples_write_performed: false.
+      archive_write_performed: false.
+      production_candidate_write_performed: false.
+      VCP_memory_write_performed: false.
+      DailyNote_write_performed: false.
+      push_allowed: false.
+      push_status: not_performed.
+      Recommended next: prepare_exact_new_trial_003_sensitive_data_scan_preflight_with_memory_delta_dependency_preserved.
+
+- [x] ID: v0_6_40_exact_new_trial_003_daily_note_vcp_memory_authorization_compiler_output_preflight
+      Title: Freeze The Exact DailyNote / VCP Memory Compiler-Output Gate For The Selected Shot 2 Candidate
+      Reason: v0.6.39 froze the production-side blocker, so the next safe local action was to compile the DailyNote / VCP memory blocker into one exact preflight without skipping the accepted-sample, archive, production, and memory-draft dependencies.
+      Lane: Green.
+      Status: completed_validated_local_daily_note_vcp_memory_authorization_compiler_output_preflight_pending_external_human_approval_accepted_sample_archive_production_and_memory_authorization.
+      Source phase: v0_6_39_exact_new_trial_003_production_candidate_authorization_compiler_output_preflight.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Resume compaction compatibility anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Scope: local DailyNote / VCP memory compiler-output preflight, validator update, roadmap, and status sync only.
+      Report ref: reports/visual_asset_eval_dry_run/v0_6_40_exact_new_trial_003_daily_note_vcp_memory_authorization_compiler_output_preflight.json.
+      Validator ref: scripts/validate_exact_new_trial_003_daily_note_vcp_memory_authorization_compiler_output_preflight.js.
+      package_type: daily_note_vcp_memory.
+      package_status: draft_blocked_missing_accepted_sample_registration_archive_completion_production_candidate_authorization_memory_delta_and_daily_note_vcp_memory_authorization.
+      blocker: missing_accepted_sample_registration_archive_completion_production_candidate_authorization_memory_delta_and_daily_note_vcp_memory_authorization.
+      target_sample_id: accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001.
+      target_candidate_id: v0_3_3_exact_new_trial_003_shot_2.
+      category: fashion_lookbook_portrait.
+      accepted_sample_registration_completed: false.
+      durable_archive_ready: false.
+      production_candidate_ready: false.
+      daily_note_write_authorized: false.
+      vcp_memory_write_authorized: false.
+      memory_delta_draft_present: false.
+      sensitive_data_scan_present: false.
+      write_command_permission: false.
+      execution_allowed_now: false.
+      accepted_samples_write_performed: false.
+      archive_write_performed: false.
+      image_file_copy_performed: false.
+      production_candidate_write_performed: false.
+      VCP_memory_write_performed: false.
+      DailyNote_write_performed: false.
+      push_allowed: false.
+      push_status: not_performed.
+      Recommended next: prepare_exact_new_trial_003_memory_delta_draft_package_with_daily_note_vcp_memory_dependency_preserved.
+
+- [x] ID: v0_6_39_exact_new_trial_003_production_candidate_authorization_compiler_output_preflight
+      Title: Freeze The Exact Production Candidate Compiler-Output Gate For The Selected Shot 2 Candidate
+      Reason: v0.6.38 froze the archive-side blocker, so the next safe local action was to compile the production-candidate blocker into one exact preflight without skipping the accepted-sample and archive dependencies.
+      Lane: Green.
+      Status: completed_validated_local_production_candidate_authorization_compiler_output_preflight_pending_external_human_approval_archive_authorization_and_production_authorization.
+      Source phase: v0_6_38_exact_new_trial_003_durable_archive_authorization_compiler_output_preflight.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Resume compaction compatibility anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Scope: local production-candidate compiler-output preflight, validator update, roadmap, and status sync only.
+      Report ref: reports/visual_asset_eval_dry_run/v0_6_39_exact_new_trial_003_production_candidate_authorization_compiler_output_preflight.json.
+      Validator ref: scripts/validate_exact_new_trial_003_production_candidate_authorization_compiler_output_preflight.js.
+      package_type: production_candidate.
+      package_status: draft_blocked_missing_accepted_sample_registration_archive_completion_and_production_candidate_authorization.
+      blocker: missing_accepted_sample_registration_archive_completion_and_production_candidate_authorization.
+      target_sample_id: accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001.
+      target_candidate_id: v0_3_3_exact_new_trial_003_shot_2.
+      category: fashion_lookbook_portrait.
+      accepted_sample_registration_completed: false.
+      durable_archive_ready: false.
+      production_candidate_authorized: false.
+      production_candidate_write_performed: false.
+      eligibility_preflight_present: false.
+      write_command_permission: false.
+      execution_allowed_now: false.
+      accepted_samples_write_performed: false.
+      archive_write_performed: false.
+      image_file_copy_performed: false.
+      VCP_memory_write_performed: false.
+      DailyNote_write_performed: false.
+      push_allowed: false.
+      push_status: not_performed.
+      Recommended next: prepare_exact_new_trial_003_daily_note_vcp_memory_authorization_compiler_output_preflight_with_production_dependency_preserved.
+
+- [x] ID: v0_6_38_exact_new_trial_003_durable_archive_authorization_compiler_output_preflight
+      Title: Freeze The Exact Durable Archive Compiler-Output Gate For The Selected Shot 2 Candidate
+      Reason: v0.6.37 froze the accepted_samples execution blocker, so the next safe local action was to compile the archive-side blocker into one exact preflight without skipping the registration dependency.
+      Lane: Green.
+      Status: completed_validated_local_durable_archive_authorization_compiler_output_preflight_pending_external_human_approval_and_archive_authorization.
+      Source phase: v0_6_37_exact_new_trial_003_accepted_samples_registration_execution_preflight.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Resume compaction compatibility anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Scope: local durable archive compiler-output preflight, validator update, roadmap, and status sync only.
+      Report ref: reports/visual_asset_eval_dry_run/v0_6_38_exact_new_trial_003_durable_archive_authorization_compiler_output_preflight.json.
+      Validator ref: scripts/validate_exact_new_trial_003_durable_archive_authorization_compiler_output_preflight.js.
+      package_type: durable_archive.
+      package_status: draft_blocked_missing_accepted_sample_registration_and_archive_copy_authorization.
+      blocker: missing_accepted_sample_registration_and_archive_copy_authorization.
+      target_sample_id: accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001.
+      target_candidate_id: v0_3_3_exact_new_trial_003_shot_2.
+      category: fashion_lookbook_portrait.
+      accepted_sample_registration_completed: false.
+      archive_copy_authorized: false.
+      archive_copy_performed: false.
+      target_archive_path_provided: false.
+      write_command_permission: false.
+      execution_allowed_now: false.
+      accepted_samples_write_performed: false.
+      category_index_write_performed: false.
+      image_file_copy_performed: false.
+      archive_write_performed: false.
+      production_candidate_write_performed: false.
+      VCP_memory_write_performed: false.
+      DailyNote_write_performed: false.
+      push_allowed: false.
+      push_status: not_performed.
+      Recommended next: prepare_exact_new_trial_003_production_candidate_authorization_compiler_output_preflight_with_archive_dependency_preserved.
+
+- [x] ID: v0_6_37_exact_new_trial_003_accepted_samples_registration_execution_preflight
+      Title: Freeze The Exact accepted_samples Registration Execution Gate For The Selected Shot 2 Candidate
+      Reason: v0.6.36 froze the exact authorization wording, so the next safe local action was to combine payload, blocker, and future write scope into one concrete go/no-go execution preflight.
+      Lane: Green.
+      Status: completed_validated_local_registration_execution_preflight_pending_external_human_approval.
+      Source phase: v0_6_36_exact_new_trial_003_accepted_samples_registration_authorization_package_draft.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Resume compaction compatibility anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Scope: local accepted_samples execution preflight, validator update, roadmap, and status sync only.
+      Report ref: reports/visual_asset_eval_dry_run/v0_6_37_exact_new_trial_003_accepted_samples_registration_execution_preflight.json.
+      Validator ref: scripts/validate_exact_new_trial_003_accepted_samples_registration_execution_preflight.js.
+      target_sample_id: accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001.
+      target_candidate_id: v0_3_3_exact_new_trial_003_shot_2.
+      category: fashion_lookbook_portrait.
+      preflight_status: blocked.
+      blocker: missing_human_approval_and_authorization_grant.
+      authorization_package_status: prepared_blocked_not_granted.
+      authorization_granted_by_this_record: false.
+      execution_allowed_now: false.
+      accepted_samples_write_performed: false.
+      category_index_write_performed: false.
+      image_file_copy_performed: false.
+      archive_write_performed: false.
+      production_candidate_write_performed: false.
+      VCP_memory_write_performed: false.
+      DailyNote_write_performed: false.
+      push_allowed: false.
+      push_status: not_performed.
+      Recommended next: prepare_exact_new_trial_003_durable_archive_authorization_compiler_output_preflight_with_accepted_sample_dependency_preserved.
+
+- [x] ID: v0_6_36_exact_new_trial_003_accepted_samples_registration_authorization_package_draft
+      Title: Freeze The Exact accepted_samples Registration Authorization Package For The Selected Shot 2 Candidate
+      Reason: v0.6.35 froze the future metadata payload shape, so the next safe local action was to freeze the exact Amber execution wording and allowed write scope before any registration preflight or metadata write.
+      Lane: Green.
+      Status: completed_validated_local_registration_authorization_package_draft_pending_external_human_approval.
+      Source phase: v0_6_35_exact_new_trial_003_post_approval_registration_preflight_draft.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Resume compaction compatibility anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Scope: local accepted_samples authorization wording freeze, validator update, roadmap, and status sync only.
+      Report ref: reports/visual_asset_eval_dry_run/v0_6_36_exact_new_trial_003_accepted_samples_registration_authorization_package_draft.json.
+      Validator ref: scripts/validate_exact_new_trial_003_accepted_samples_registration_authorization_package_draft.js.
+      target_sample_id: accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001.
+      target_candidate_id: v0_3_3_exact_new_trial_003_shot_2.
+      category: fashion_lookbook_portrait.
+      authorization_package_status: prepared_blocked_not_granted.
+      authorization_granted_by_this_record: false.
+      execution_ready: false.
+      blocker: human_approval_missing.
+      accepted_samples_write_performed: false.
+      category_index_write_performed: false.
+      image_file_copy_performed: false.
+      archive_write_performed: false.
+      production_candidate_write_performed: false.
+      VCP_memory_write_performed: false.
+      DailyNote_write_performed: false.
+      push_allowed: false.
+      push_status: not_performed.
+      Recommended next: prepare_exact_new_trial_003_accepted_samples_registration_execution_preflight_with_authorization_package_and_human_approval_blocker_preserved.
+
+- [x] ID: v0_6_35_exact_new_trial_003_post_approval_registration_preflight_draft
+      Title: Freeze The Exact Future accepted_samples Registration Payload For The Selected Shot 2 Candidate
+      Reason: v0.6.34 locked the post-approval gate, so the next safe local action was to prebuild the exact registration-preflight payload while keeping the missing-approval blocker intact.
+      Lane: Green.
+      Status: completed_validated_local_registration_preflight_draft_pending_external_human_approval.
+      Source phase: v0_6_34_exact_new_trial_003_selected_candidate_post_approval_gate_alignment.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Resume compaction compatibility anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Scope: local registration-preflight draft, validator update, roadmap, and status sync only.
+      Report ref: reports/visual_asset_eval_dry_run/v0_6_35_exact_new_trial_003_post_approval_registration_preflight_draft.json.
+      Validator ref: scripts/validate_exact_new_trial_003_post_approval_registration_preflight_draft.js.
+      selected_candidate_attempt_id: v0_3_3_exact_new_trial_003_shot_2.
+      proposed_sample_id: accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001.
+      category: fashion_lookbook_portrait.
+      artifact_ref: runs/real_generation/v0_3_3_exact_new_trial_003_shot_2/safe_adult_editorial_portrait_v1.png.
+      human_approval_present: false.
+      approval_statement_user_submitted: false.
+      accepted_samples_registration_eligible: false.
+      registration_blocker: human_approval_missing.
+      accepted_samples_write_performed: false.
+      category_index_write_performed: false.
+      image_file_copy_performed: false.
+      archive_write_performed: false.
+      production_candidate_write_performed: false.
+      VCP_memory_write_performed: false.
+      DailyNote_write_performed: false.
+      push_allowed: false.
+      push_status: not_performed.
+      Recommended next: wait_for_jenn_human_approval_then_upgrade_v0_6_35_draft_to_executable_exact_new_trial_003_post_approval_registration_preflight.
+
+- [x] ID: v0_6_34_exact_new_trial_003_selected_candidate_post_approval_gate_alignment
+      Title: Freeze The Exact Post-Approval accepted_samples Gate For The Selected Shot 2 Candidate
+      Reason: v0.6.33 froze the future approval wording, so the next safe local action was to narrow the exact accepted-sample write gate before any registration is allowed.
+      Lane: Green.
+      Status: completed_validated_local_post_approval_gate_alignment_pending_external_human_approval.
+      Source phase: v0_6_33_exact_new_trial_003_selected_candidate_human_approval_intake_package.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Resume compaction compatibility anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Scope: local future registration gate restriction, validator update, roadmap, and status sync only.
+      Report ref: reports/visual_asset_eval_dry_run/v0_6_34_exact_new_trial_003_selected_candidate_post_approval_gate_alignment.json.
+      Validator ref: scripts/validate_exact_new_trial_003_selected_candidate_post_approval_gate_alignment.js.
+      selected_candidate_attempt_id: v0_3_3_exact_new_trial_003_shot_2.
+      proposed_sample_id: accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001.
+      category: fashion_lookbook_portrait.
+      artifact_ref: runs/real_generation/v0_3_3_exact_new_trial_003_shot_2/safe_adult_editorial_portrait_v1.png.
+      approval_statement_matches_v0_6_33: true.
+      approval_statement_source_is_user_submission: false.
+      human_approval_captured_now: false.
+      accepted_samples_registration_ready_now: false.
+      accepted_samples_write_performed: false.
+      category_index_write_performed: false.
+      image_file_copy_performed: false.
+      archive_write_performed: false.
+      production_candidate_write_performed: false.
+      VCP_memory_write_performed: false.
+      DailyNote_write_performed: false.
+      push_allowed: false.
+      push_status: not_performed.
+      Recommended next: wait_for_jenn_human_approval_then_run_exact_new_trial_003_post_approval_registration_preflight.
+
+- [x] ID: v0_6_33_exact_new_trial_003_selected_candidate_human_approval_intake_package
+      Title: Freeze Exact Future Human Approval Wording For The Selected Shot 2 Candidate
+      Reason: v0.6.32 selected shot_2 as the strongest current candidate, so the next safe action was to lock the exact future approval wording and post-approval write scope before any accepted-sample path.
+      Lane: Green.
+      Status: completed_validated_local_human_approval_intake_package_pending_external_user_submission.
+      Source phase: v0_6_32_exact_new_trial_003_human_review.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Resume compaction compatibility anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Scope: local approval wording freeze, exact future write-set restriction, validator update, roadmap, and status sync only.
+      Report ref: reports/visual_asset_eval_dry_run/v0_6_33_exact_new_trial_003_selected_candidate_human_approval_intake_package.json.
+      Validator ref: scripts/validate_exact_new_trial_003_selected_candidate_human_approval_intake_package.js.
+      selected_candidate_attempt_id: v0_3_3_exact_new_trial_003_shot_2.
+      proposed_sample_id: accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001.
+      category: fashion_lookbook_portrait.
+      artifact_ref: runs/real_generation/v0_3_3_exact_new_trial_003_shot_2/safe_adult_editorial_portrait_v1.png.
+      approval_statement_source_is_user_submission: false.
+      human_approval_captured_now: false.
+      accepted_samples_registration_ready_now: false.
+      accepted_samples_write_performed: false.
+      category_index_write_performed: false.
+      archive_write_performed: false.
+      production_candidate_write_performed: false.
+      VCP_memory_write_performed: false.
+      DailyNote_write_performed: false.
+      push_allowed: false.
+      push_status: not_performed.
+      Recommended next: prepare_exact_new_trial_003_selected_candidate_post_approval_gate_alignment_before_any_accepted_samples_write.
+
+- [x] ID: v0_6_32_exact_new_trial_003_human_review
+      Title: Compare The Three Completed Exact New-Trial 003 Candidates And Select A Preferred Review Candidate
+      Reason: v0.6.31 completed the planned 3-shot route, so the next safe action was to compare the three reviewable candidates before any approval, archive, or memory path.
+      Lane: Green.
+      Status: completed_validated_local_candidate_selection_pending_formal_human_approval.
+      Source phase: v0_6_31_exact_new_trial_003_shot_3_execution_closeout.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Resume compaction compatibility anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Scope: local candidate comparison, truthful preferred-candidate selection, validator update, roadmap, and status sync only.
+      Report ref: reports/visual_asset_eval_dry_run/v0_6_32_exact_new_trial_003_human_review.json.
+      Validator ref: scripts/validate_exact_new_trial_003_human_review.js.
+      prompt_package_ref: prompts/image_generation/safe_adult_editorial_portrait_v1.yaml.
+      provider_route: image_gen.imagegen.
+      three_shot_execution_status: 3_of_3_completed.
+      compared_attempt_ids: v0_3_3_exact_new_trial_003_shot_1, v0_3_3_exact_new_trial_003_shot_2, v0_3_3_exact_new_trial_003_shot_3.
+      selected_candidate_attempt_id: v0_3_3_exact_new_trial_003_shot_2.
+      formal_human_approval_status: pending.
+      human_approval_captured_now: false.
+      provider_call_performed: false.
+      image_generation_performed: false.
+      secret_value_read_performed: false.
+      accepted_sample_auto_promotion: false.
+      archive_write_performed: false.
+      production_candidate_created: false.
+      VCP_memory_write_performed: false.
+      DailyNote_write_performed: false.
+      push_allowed: false.
+      push_status: not_performed.
+      Recommended next: prepare_exact_new_trial_003_selected_candidate_human_approval_intake_before_any_promotion_or_memory_write.
+
+- [x] ID: v0_6_31_exact_new_trial_003_shot_3_execution_closeout
+      Title: Execute Fresh Exact New-Trial Shot 3 And Complete The Planned 3-Shot Route
+      Reason: v0.6.30 restored exact pre-call payload capture for shot_3, so the next safe action was to execute that final shot and verify local persistence before any promotion path.
+      Lane: Amber execution with Green status sync.
+      Status: completed_validated_shot_3_execution_closeout.
+      Source phase: v0_6_30_exact_new_trial_003_shot_3_pre_call_payload_capture_preflight.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Resume compaction compatibility anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Scope: one fresh shot_3 provider call, local artifact copy, truthful receipt/report closeout, validator update, roadmap, and status sync.
+      Report ref: reports/visual_asset_eval_dry_run/v0_6_31_exact_new_trial_003_shot_3_execution_closeout.json.
+      Validator ref: scripts/validate_exact_new_trial_003_shot_3_execution_closeout.js.
+      attempt_id: v0_3_3_exact_new_trial_003_shot_3.
+      provider_route: image_gen.imagegen.
+      prompt_package_ref: prompts/image_generation/safe_adult_editorial_portrait_v1.yaml.
+      payload_capture_ref: reports/provider_payload_captures/v0_3_3_exact_new_trial_003_shot_3_request_payload.sanitized.json.
+      attempt_result_path: runs/real_generation/v0_3_3_exact_new_trial_003_shot_3/generation_attempt_result.json.
+      receipt_path: reports/provider_receipts/v0_3_3_exact_new_trial_003_shot_3_receipt.json.
+      registry_path: reports/provider_receipts/v0_3_3_exact_new_trial_003_shot_3_registry.json.
+      review_console_bridge_ref: review_console/live_receipt_bridge/v0_3_3_exact_new_trial_003_shot_3.
+      output_image_path: runs/real_generation/v0_3_3_exact_new_trial_003_shot_3/safe_adult_editorial_portrait_v1.png.
+      local_persistence_success: true.
+      reviewable_sample: true.
+      accepted_candidate: true.
+      commercial_delivery_ready: false.
+      memory_suitability: deferred.
+      pre_provider_call_payload_capture_required: true.
+      pre_provider_call_payload_capture_satisfied: true.
+      post_provider_call_payload_reconstruction_performed: false.
+      provider_call_performed: true.
+      shot_3_image_generation_executed: true.
+      three_shot_execution_status: 3_of_3_completed.
+      secret_value_read_performed: false.
+      VCP_memory_write_performed: false.
+      DailyNote_write_performed: false.
+      accepted_sample_auto_promotion: false.
+      production_candidate_created: false.
+      push_allowed: false.
+      push_status: not_performed.
+      Recommended next: human_review_generated_asset_before_any_promotion_or_memory_write.
+
+- [x] ID: v0_6_30_exact_new_trial_003_shot_3_pre_call_payload_capture_preflight
+      Title: Capture Shot 3 Payload Before Call And Recheck Collision-Free Targets
+      Reason: v0.6.29 completed shot_2 execution, so the next safe action is to restore literal pre-call payload capture and clean target paths for the final planned shot.
+      Lane: Green.
+      Status: completed_validated_pre_call_payload_capture_preflight.
+      Source phase: v0_6_29_exact_new_trial_003_shot_2_execution_closeout.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Resume compaction compatibility anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Scope: local payload capture, path-collision recheck, validator update, roadmap, and status sync only.
+      Report ref: reports/visual_asset_eval_dry_run/v0_6_30_exact_new_trial_003_shot_3_pre_call_payload_capture_preflight.json.
+      Validator ref: scripts/validate_exact_new_trial_003_shot_3_pre_call_payload_capture_preflight.js.
+      attempt_id: v0_3_3_exact_new_trial_003_shot_3.
+      provider_route: image_gen.imagegen.
+      prompt_package_ref: prompts/image_generation/safe_adult_editorial_portrait_v1.yaml.
+      payload_capture_ref: reports/provider_payload_captures/v0_3_3_exact_new_trial_003_shot_3_request_payload.sanitized.json.
+      pre_provider_call_payload_capture_required: true.
+      pre_provider_call_payload_capture_satisfied: true.
+      path_collision_clear_now: true.
+      provider_call_performed: false.
+      image_generation_performed: false.
+      secret_value_read_performed: false.
+      VCP_memory_write_performed: false.
+      DailyNote_write_performed: false.
+      accepted_sample_auto_promotion: false.
+      production_candidate_created: false.
+      push_allowed: false.
+      push_status: not_performed.
+      Recommended next: execute_v0_3_3_exact_new_trial_003_shot_3_with_pre_captured_payload_and_post_write_local_persistence_verification_before_any_auto_promotion_or_memory_write.
+
+- [x] ID: v0_6_29_exact_new_trial_003_shot_2_execution_closeout
+      Title: Execute Fresh Exact New-Trial Shot 2 And Preserve Literal Pre-Call Payload Truth
+      Reason: v0.6.28 restored exact pre-call payload capture for shot_2, so the next safe action was to execute that shot and verify local persistence before any promotion path.
+      Lane: Amber execution with Green status sync.
+      Status: completed_validated_shot_2_execution_closeout.
+      Source phase: v0_6_28_exact_new_trial_003_shot_2_pre_call_payload_capture_preflight.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Resume compaction compatibility anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Scope: one fresh shot_2 provider call, local artifact copy, truthful receipt/report closeout, validator update, roadmap, and status sync.
+      Report ref: reports/visual_asset_eval_dry_run/v0_6_29_exact_new_trial_003_shot_2_execution_closeout.json.
+      Validator ref: scripts/validate_exact_new_trial_003_shot_2_execution_closeout.js.
+      attempt_id: v0_3_3_exact_new_trial_003_shot_2.
+      provider_route: image_gen.imagegen.
+      prompt_package_ref: prompts/image_generation/safe_adult_editorial_portrait_v1.yaml.
+      payload_capture_ref: reports/provider_payload_captures/v0_3_3_exact_new_trial_003_shot_2_request_payload.sanitized.json.
+      attempt_result_path: runs/real_generation/v0_3_3_exact_new_trial_003_shot_2/generation_attempt_result.json.
+      receipt_path: reports/provider_receipts/v0_3_3_exact_new_trial_003_shot_2_receipt.json.
+      registry_path: reports/provider_receipts/v0_3_3_exact_new_trial_003_shot_2_registry.json.
+      review_console_bridge_ref: review_console/live_receipt_bridge/v0_3_3_exact_new_trial_003_shot_2.
+      output_image_path: runs/real_generation/v0_3_3_exact_new_trial_003_shot_2/safe_adult_editorial_portrait_v1.png.
+      local_persistence_success: true.
+      reviewable_sample: true.
+      accepted_candidate: true.
+      commercial_delivery_ready: false.
+      memory_suitability: deferred.
+      pre_provider_call_payload_capture_required: true.
+      pre_provider_call_payload_capture_satisfied: true.
+      post_provider_call_payload_reconstruction_performed: false.
+      provider_call_performed: true.
+      shot_2_image_generation_executed: true.
+      VCP_memory_write_performed: false.
+      DailyNote_write_performed: false.
+      accepted_sample_auto_promotion: false.
+      production_candidate_created: false.
+      push_allowed: false.
+      push_status: not_performed.
+      Recommended next: prepare_shot_3_with_exact_pre_call_payload_capture_and_immediate_path_collision_recheck_before_any_auto_promotion_or_memory_write.
+
+- [x] ID: v0_6_28_exact_new_trial_003_shot_2_pre_call_payload_capture_preflight
+      Title: Capture Shot 2 Payload Before Call And Recheck Collision-Free Targets
+      Reason: v0.6.27 restored a reviewable shot_1 but left shot_2 blocked until literal pre-call payload capture discipline was restored.
+      Lane: Green.
+      Status: completed_validated_pre_call_payload_capture_preflight.
+      Source phase: v0_6_27_exact_new_trial_003_shot_1_execution_closeout.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Resume compaction compatibility anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Scope: local payload capture, path-collision recheck, validator update, roadmap, and status sync only.
+      Report ref: reports/visual_asset_eval_dry_run/v0_6_28_exact_new_trial_003_shot_2_pre_call_payload_capture_preflight.json.
+      Validator ref: scripts/validate_exact_new_trial_003_shot_2_pre_call_payload_capture_preflight.js.
+      attempt_id: v0_3_3_exact_new_trial_003_shot_2.
+      provider_route: image_gen.imagegen.
+      prompt_package_ref: prompts/image_generation/safe_adult_editorial_portrait_v1.yaml.
+      payload_capture_ref: reports/provider_payload_captures/v0_3_3_exact_new_trial_003_shot_2_request_payload.sanitized.json.
+      pre_provider_call_payload_capture_required: true.
+      pre_provider_call_payload_capture_satisfied: true.
+      path_collision_clear_now: true.
+      provider_call_performed: false.
+      image_generation_performed: false.
+      secret_value_read_performed: false.
+      VCP_memory_write_performed: false.
+      DailyNote_write_performed: false.
+      accepted_sample_auto_promotion: false.
+      production_candidate_created: false.
+      push_allowed: false.
+      push_status: not_performed.
+      Recommended next: execute_v0_3_3_exact_new_trial_003_shot_2_with_pre_captured_payload_and_post_write_local_persistence_verification_before_any_auto_promotion_or_memory_write.
+
+- [x] ID: v0_6_27_exact_new_trial_003_shot_1_execution_closeout
+      Title: Execute Fresh Exact New-Trial Shot 1 And Close Out Reviewable Asset Truth
+      Reason: v0.6.26 selected `v0_3_3_exact_new_trial_003_shot_1` as the only safe exact repair route for restoring a reviewable local sample.
+      Lane: Amber execution with Green status sync.
+      Status: completed_validated_shot_1_execution_closeout.
+      Source phase: v0_6_26_exact_new_trial_local_persistence_repair_preflight.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Resume compaction compatibility anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Scope: one fresh shot_1 provider call, local artifact copy, truthful receipt/report closeout, roadmap, validator, and status sync.
+      Report ref: reports/visual_asset_eval_dry_run/v0_6_27_exact_new_trial_003_shot_1_execution_closeout.json.
+      Validator ref: scripts/validate_exact_new_trial_003_shot_1_execution_closeout.js.
+      attempt_id: v0_3_3_exact_new_trial_003_shot_1.
+      provider_route: image_gen.imagegen.
+      prompt_package_ref: prompts/image_generation/safe_adult_editorial_portrait_v1.yaml.
+      payload_capture_ref: reports/provider_payload_captures/v0_3_3_exact_new_trial_003_shot_1_request_payload.sanitized.json.
+      attempt_result_path: runs/real_generation/v0_3_3_exact_new_trial_003_shot_1/generation_attempt_result.json.
+      receipt_path: reports/provider_receipts/v0_3_3_exact_new_trial_003_shot_1_receipt.json.
+      registry_path: reports/provider_receipts/v0_3_3_exact_new_trial_003_shot_1_registry.json.
+      review_console_bridge_ref: review_console/live_receipt_bridge/v0_3_3_exact_new_trial_003_shot_1.
+      output_image_path: runs/real_generation/v0_3_3_exact_new_trial_003_shot_1/safe_adult_editorial_portrait_v1.png.
+      local_persistence_success: true.
+      reviewable_sample: true.
+      accepted_candidate: true.
+      commercial_delivery_ready: false.
+      memory_suitability: deferred.
+      pre_provider_call_payload_capture_required: true.
+      pre_provider_call_payload_capture_satisfied: false.
+      post_provider_call_payload_reconstruction_performed: true.
+      provider_call_performed: true.
+      shot_1_image_generation_executed: true.
+      VCP_memory_write_performed: false.
+      DailyNote_write_performed: false.
+      accepted_sample_auto_promotion: false.
+      production_candidate_created: false.
+      push_allowed: false.
+      push_status: not_performed.
+      Recommended next: prepare_shot_2_with_exact_pre_call_payload_capture_and_immediate_path_collision_recheck_before_any_auto_promotion_or_memory_write.
+
+- [x] ID: v0_6_26_exact_new_trial_local_persistence_repair_preflight
+      Title: Choose Exact New-Trial Local Persistence Repair Route
+      Reason: v0.6.25 proved the v0.6.23 PNG is missing, so the project needs an exact route decision before any review or new execution claim.
+      Lane: Green.
+      Status: completed_validated_local_persistence_repair_preflight.
+      Source phase: v0_6_25_exact_new_trial_artifact_persistence_truth_review.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Resume compaction compatibility anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Scope: local route-selection preflight, report, validator, roadmap, and status sync only.
+      Report ref: reports/visual_asset_eval_dry_run/v0_6_26_exact_new_trial_local_persistence_repair_preflight.json.
+      Validator ref: scripts/validate_exact_new_trial_local_persistence_repair_preflight.js.
+      target_attempt_id: v0_3_3_exact_new_trial_002.
+      provider_route: image_gen.imagegen.
+      prompt_package_ref: prompts/image_generation/safe_adult_editorial_portrait_v1.yaml.
+      repo_tracked_same_prompt_alternative_exists: true.
+      repo_tracked_same_prompt_alternative_substitutable_for_002: false.
+      private_out_of_repo_recovery_allowed_now: false.
+      selected_repair_route: fresh_non_overwriting_future_shot.
+      selected_shot_id: v0_3_3_exact_new_trial_003_shot_1.
+      selected_shot_path_collision_clear_now: true.
+      selected_shot_local_persistence_verification_required: true.
+      selected_shot_review_required_after_success: true.
+      current_human_review_of_002_allowed: false.
+      provider_call_performed: false.
+      image_generation_performed: false.
+      private_out_of_repo_recovery_performed: false.
+      secret_value_read_performed: false.
+      VCP_memory_write_performed: false.
+      DailyNote_write_performed: false.
+      accepted_sample_auto_promotion: false.
+      production_candidate_created: false.
+      push_allowed: false.
+      push_status: not_performed.
+      Recommended next: use_v0_3_3_exact_new_trial_003_shot_1_with_immediate_path_collision_recheck_and_post_write_local_persistence_verification.
+
+- [x] ID: v0_6_25_exact_new_trial_artifact_persistence_truth_review
+      Title: Audit Exact New-Trial Artifact Persistence Truth
+      Reason: Current v0.6.23 / v0.6.24 records claim a copied review asset, but current repository reality shows the PNG is missing.
+      Lane: Green.
+      Status: completed_validated_local_artifact_truth_review.
+      Source phase: v0_6_24_exact_new_trial_3shot_stability_preflight.
+      Execution truth source phase: v0_6_23_single_generation_with_payload_capture_and_artifact_trace.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Resume compaction compatibility anchor: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Scope: local filesystem truth audit, report, validator, roadmap, and status sync only.
+      Report ref: reports/visual_asset_eval_dry_run/v0_6_25_exact_new_trial_artifact_persistence_truth_review.json.
+      Validator ref: scripts/validate_exact_new_trial_artifact_persistence_truth_review.js.
+      attempt_id: v0_3_3_exact_new_trial_002.
+      provider_route: image_gen.imagegen.
+      prompt_package_ref: prompts/image_generation/safe_adult_editorial_portrait_v1.yaml.
+      claimed_output_image_path: runs/real_generation/v0_3_3_exact_new_trial_002/safe_adult_editorial_portrait_v1.png.
+      project_output_directory_exists: true.
+      project_output_image_present_now: false.
+      local_persistence_verified_now: false.
+      reviewable_sample_now: false.
+      human_review_allowed_now: false.
+      accepted_sample_eligible: false.
+      memory_write_eligible: false.
+      production_candidate_eligible: false.
+      provider_call_performed: false.
+      image_generation_performed: false.
+      external_private_path_recovery_performed: false.
+      secret_value_read_performed: false.
+      VCP_memory_write_performed: false.
+      DailyNote_write_performed: false.
+      accepted_sample_auto_promotion: false.
+      production_candidate_created: false.
+      push_allowed: false.
+      push_status: not_performed.
+      Recommended next: create_local_persistence_repair_preflight_before_any_human_review_or_new_shot_execution.
+
 - [x] ID: v0_6_24_exact_new_trial_3shot_stability_preflight
       Title: Establish Exact New-Trial 3-Shot Stability Preflight
       Reason: User requested a 3-shot stability protocol before any additional continuous generation.

@@ -1,0 +1,93 @@
+{
+  "exact_new_trial_003_daily_note_vcp_memory_write_authorization_package_draft": {
+    "version": "v1",
+    "phase": "v0_6_45_exact_new_trial_003_daily_note_vcp_memory_write_authorization_package_draft",
+    "status": "ready_to_execute_memory_write_now",
+    "execution_mode": "memory_write_authorization_package_draft_only",
+    "source_refs": {
+      "memory_authorization_refresh_preflight": "reports/visual_asset_eval_dry_run/v0_6_43_exact_new_trial_003_daily_note_vcp_memory_authorization_compiler_output_refresh_preflight.json",
+      "exact_allowed_memory_targets_package": "reports/visual_asset_eval_dry_run/v0_6_44_exact_new_trial_003_exact_allowed_memory_targets_package.json",
+      "memory_delta_draft_package": "reports/visual_asset_eval_dry_run/v0_6_41_exact_new_trial_003_memory_delta_draft_package.json",
+      "sensitive_data_scan_preflight": "reports/visual_asset_eval_dry_run/v0_6_42_exact_new_trial_003_sensitive_data_scan_preflight.json",
+      "shot_2_closeout": "reports/visual_asset_eval_dry_run/v0_6_29_exact_new_trial_003_shot_2_execution_closeout.json",
+      "human_review": "reports/visual_asset_eval_dry_run/v0_6_32_exact_new_trial_003_human_review.json"
+    },
+    "authorization_package_ref": "reports/memory_write_authorization/v0_3_3_exact_new_trial_003_shot_2_daily_note_vcp_memory_write_authorization_package_draft.json",
+    "authorization_package_status": "granted",
+    "authorization_granted_by_this_record": true,
+    "execution_ready": true,
+    "execution_allowed_now": true,
+    "blocker": "none",
+    "target": {
+      "sample_id": "accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001",
+      "candidate_id": "v0_3_3_exact_new_trial_003_shot_2",
+      "category": "fashion_lookbook_portrait",
+      "reviewer": "Jenn",
+      "human_approval_status": "approved",
+      "approved_by": "Jenn",
+      "memory_delta_draft_ref": null,
+      "sensitive_data_scan_ref": null,
+      "exact_allowed_memory_targets_package_ref": "reports/memory_target_packages/v0_3_3_exact_new_trial_003_shot_2_exact_allowed_memory_targets.json",
+      "accepted_sample_registration_completed": true,
+      "durable_archive_ready": true,
+      "production_candidate_ready": true,
+      "daily_note_write_authorized": true,
+      "vcp_memory_write_authorized": true,
+      "write_command_permission": true
+    },
+    "exact_approval_statement_draft": "broad invalid statement",
+    "draft_scope": {
+      "would_read_refs": [
+        "reports/memory_target_packages/v0_3_3_exact_new_trial_003_shot_2_exact_allowed_memory_targets.json"
+      ],
+      "exact_allowed_memory_targets": [
+        {
+          "system": "DailyNote",
+          "operation": "write_now",
+          "language": "en",
+          "target_id": "wrong_target"
+        }
+      ],
+      "forbidden_paths_or_operations": [
+        ".env"
+      ],
+      "validation_required": [
+        "git diff --check"
+      ],
+      "stop_conditions": [
+        "none"
+      ]
+    },
+    "guard": {
+      "draft_only": true,
+      "authorization_package_only": true,
+      "DailyNote_write_performed": true,
+      "VCP_memory_write_performed": true,
+      "direct_memory_write_performed": true,
+      "local_project_file_write_performed": true,
+      "accepted_samples_write_performed": true,
+      "archive_write_performed": true,
+      "production_candidate_write_performed": true,
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "mcp_runtime_performed": false,
+      "image_generation_performed": false,
+      "staging_performed": false,
+      "commit_performed": false,
+      "push_tag_release_deploy_performed": false,
+      "artifact_recoverability_is_not_vcp_runtime_integration": false,
+      "vcp_runtime_integration_proven": true
+    },
+    "negative_cases_expected": {
+      "granted_package_fails": true,
+      "execution_ready_without_grant_fails": true,
+      "daily_note_target_drift_fails": true,
+      "missing_memory_delta_ref_fails": true,
+      "broad_write_scope_fails": true,
+      "runtime_claim_fails": true
+    },
+    "recommended_next": "prepare_exact_new_trial_003_daily_note_vcp_memory_write_execution_preflight_with_authorization_package_and_exact_targets_preserved",
+    "recommended_next_auto_execution_allowed": "true_local_memory_write_execution_preflight_only_no_external_memory_write"
+  }
+}

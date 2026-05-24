@@ -19,6 +19,11 @@ const activeSourcePhase = "v0_3_2_live_candidate_action_packet";
 const completedTraceabilityPhase = "amber_packet_to_receipt_traceability_v1";
 const nextBoundary = "future_real_provider_cost_boundary_v1";
 const activeNextDecision = "inspect_failed_provider_tool_attempt_or_authorize_new_trial";
+const allowedExecutedLatestPhases = [
+  "v0_6_27_exact_new_trial_003_shot_1_execution_closeout",
+  "v0_6_29_exact_new_trial_003_shot_2_execution_closeout",
+  "v0_6_31_exact_new_trial_003_shot_3_execution_closeout"
+];
 
 const sideEffectFlags = {
   provider_contact_performed: false,
@@ -122,18 +127,45 @@ function validateSurface(pathName, text) {
   const pushBoundaryPresent = latest.includes("push_status: not_performed") ||
     latest.includes("push_allowed: false") ||
     latest.includes("pushed_to_origin_master_after_user_authorization");
+  const noGeneratedImageRecorded = latest.includes("image_generation_performed: false") ||
+    latest.includes("actual_image_generation_performed: false") ||
+    latest.includes("Actual image generation performed: false");
+  const allowedExecutedLatestSection = (
+    allowedExecutedLatestPhases.some((phase) => latest.includes(`phase: ${phase}`)) ||
+    latest.includes("## v0.6.27 - Exact New-Trial 003 Shot 1 Execution Closeout") ||
+    latest.includes("## v0.6.29 - Exact New-Trial 003 Shot 2 Execution Closeout") ||
+    latest.includes("## v0.6.31 - Exact New-Trial 003 Shot 3 Execution Closeout")
+  ) &&
+    (
+      latest.includes("shot_1_image_generation_executed: true") ||
+      latest.includes("shot_2_image_generation_executed: true") ||
+      latest.includes("shot_3_image_generation_executed: true")
+    ) &&
+    (
+      latest.includes("reviewable_sample: true") ||
+      latest.includes("`reviewable_sample: true`")
+    ) &&
+    (
+      latest.includes("accepted_candidate: true") ||
+      latest.includes("`accepted_candidate: true`")
+    ) &&
+    (
+      latest.includes("pre_provider_call_payload_capture_satisfied: false") ||
+      latest.includes("`pre_provider_call_payload_capture_satisfied: false`") ||
+      latest.includes("pre_provider_call_payload_capture_satisfied: true") ||
+      latest.includes("`pre_provider_call_payload_capture_satisfied: true`")
+    );
   assert(latest.includes(activeCurrentPhase), `${pathName} latest section must cite active current phase`);
   assert(latest.includes(activeSourcePhase), `${pathName} latest section must cite active source phase`);
   assert(latest.includes(activeNextDecision), `${pathName} latest section must cite active next Red decision`);
   assert(pushBoundaryPresent, `${pathName} latest section must preserve push boundary state`);
   assert(
-    latest.includes("image_generation_performed: false") ||
-      latest.includes("actual_image_generation_performed: false") ||
-      latest.includes("Actual image generation performed: false"),
-    `${pathName} latest section must record no generated image`
+    noGeneratedImageRecorded || allowedExecutedLatestSection,
+    `${pathName} latest section must record no generated image or the allowed exact new-trial execution closeout`
   );
   assert(
     latest.includes("secret_value_read_performed: false") ||
+      latest.includes("`secret_value_read_performed: false`") ||
       latest.includes("Secret value read performed: false") ||
       latest.includes("no secret read"),
     `${pathName} latest section must preserve no-secret state`

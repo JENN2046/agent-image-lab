@@ -1126,6 +1126,115 @@ window.REVIEW_CONSOLE_MOCK = {
       vcp_runtime_integration_proven: false
     }
   },
+  exact_new_trial_003_formal_human_approval_capture_surface_seed: {
+    version: "v1",
+    phase: "v0_6_53_exact_new_trial_003_formal_human_approval_capture_surface_static_panel",
+    source_packet_ref: "reports/human_approval_evidence/v0_3_3_exact_new_trial_003_shot_2_formal_human_approval_evidence_capture_packet.json",
+    source_report_ref: "reports/visual_asset_eval_dry_run/v0_6_52_exact_new_trial_003_formal_human_approval_evidence_capture_packet.json",
+    source_review_ref: "reports/visual_asset_eval_dry_run/v0_6_32_exact_new_trial_003_human_review.json",
+    draft_output_key: "exact_new_trial_003_formal_human_approval_capture_surface_state",
+    capture_surface_status: "static_capture_ready_pending_jenn_submission",
+    target: {
+      candidate_id: "v0_3_3_exact_new_trial_003_shot_2",
+      sample_id: "accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001",
+      category: "fashion_lookbook_portrait",
+      artifact_ref: "runs/real_generation/v0_3_3_exact_new_trial_003_shot_2/safe_adult_editorial_portrait_v1.png",
+      sha256: "8bd7b81a916f0f6333392562d84e32368a3f28dd6a6456fc2f9e49d835a62c3b",
+      dimensions: "941x1672",
+      mime: "image/png",
+      reviewer_required: "Jenn"
+    },
+    capture_fields: [
+      {
+        field_id: "approval_statement_text",
+        label: "Jenn approval statement",
+        required: true,
+        current_value_present: false,
+        accepted_source: "future_user_submitted_jenn_approval_only"
+      },
+      {
+        field_id: "submitted_by",
+        label: "Submitted by",
+        required: true,
+        current_value_present: false,
+        accepted_source: "Jenn"
+      },
+      {
+        field_id: "submitted_at",
+        label: "Submitted at",
+        required: true,
+        current_value_present: false,
+        accepted_source: "future_timestamp_from_submission_context"
+      },
+      {
+        field_id: "boundary_acknowledgement",
+        label: "Boundary acknowledgement",
+        required: true,
+        current_value_present: false,
+        accepted_source: "future_user_submission_acknowledgement"
+      }
+    ],
+    required_statement_tokens: [
+      "Jenn",
+      "v0_3_3_exact_new_trial_003_shot_2",
+      "accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001",
+      "8bd7b81a916f0f6333392562d84e32368a3f28dd6a6456fc2f9e49d835a62c3b",
+      "941x1672",
+      "fashion_lookbook_portrait"
+    ],
+    boundary_acknowledgement_items: [
+      "approval capture does not write accepted_samples metadata",
+      "approval capture does not copy or mutate image files",
+      "approval capture does not write durable archive records",
+      "approval capture does not promote a production candidate",
+      "approval capture does not write DailyNote or VCP memory",
+      "approval capture does not call provider, plugin, API, or MCP runtime",
+      "approval capture does not read secrets",
+      "approval capture does not stage, commit, push, tag, release, or deploy"
+    ],
+    current_evidence_state: {
+      approval_evidence_present_now: false,
+      approval_statement_text_present_now: false,
+      approval_statement_source_is_user_submission: false,
+      formal_human_approval_status: "pending",
+      formal_human_approval_captured_now: false,
+      accepted_samples_registration_ready_now: false,
+      registration_unlock_allowed_now: false,
+      next_write_action_allowed_now: false,
+      current_blocker: "formal_human_approval_evidence_missing"
+    },
+    next_allowed_local_action: "wait_for_jenn_user_submission_then_run_formal_approval_evidence_validator",
+    guard: {
+      static_panel_only: true,
+      read_only_capture_surface: true,
+      approval_capture_performed: false,
+      approval_evidence_fabricated: false,
+      accepted_samples_write_performed: false,
+      archive_write_performed: false,
+      category_index_write_performed: false,
+      image_file_copy_performed: false,
+      runs_source_image_modified: false,
+      failure_samples_write_performed: false,
+      production_candidate_write_performed: false,
+      DailyNote_write_performed: false,
+      VCP_memory_write_performed: false,
+      provider_contact_performed: false,
+      plugin_call_performed: false,
+      api_call_performed: false,
+      mcp_runtime_performed: false,
+      image_generation_performed: false,
+      secret_value_read_performed: false,
+      env_or_secret_read_performed: false,
+      real_manifest_read_performed: false,
+      real_vcpchat_read_performed: false,
+      real_vcptoolbox_read_performed: false,
+      staging_performed: false,
+      commit_performed: false,
+      push_tag_release_deploy_performed: false,
+      artifact_recoverability_is_not_vcp_runtime_integration: true,
+      vcp_runtime_integration_proven: false
+    }
+  },
   review_console_runtime_gap_dashboard_contract_seed: {
     version: "v1",
     phase: "v14_205_review_console_runtime_gap_static_ui_panel",

@@ -671,7 +671,8 @@ input[type="range"] {
 }
 
 .third-sample-authorization-package-body,
-.third-sample-post-approval-gate-body {
+.third-sample-post-approval-gate-body,
+.exact-new-trial-approval-capture-body {
   display: grid;
   gap: 10px;
 }
@@ -893,7 +894,8 @@ input[type="range"] {
 
 .third-sample-authorization-package-card,
 .third-sample-post-approval-gate-card,
-.human-approval-blocker-queue-card {
+.human-approval-blocker-queue-card,
+.exact-new-trial-approval-capture-card {
   display: grid;
   gap: 10px;
   min-width: 0;
@@ -906,7 +908,8 @@ input[type="range"] {
 
 .third-sample-authorization-package-card.blocked,
 .third-sample-post-approval-gate-card.blocked,
-.human-approval-blocker-queue-card.blocked {
+.human-approval-blocker-queue-card.blocked,
+.exact-new-trial-approval-capture-card.blocked {
   border-left-color: var(--amber);
 }
 
@@ -975,7 +978,8 @@ input[type="range"] {
 .third-sample-readiness-card dl,
 .third-sample-authorization-package-card dl,
 .third-sample-post-approval-gate-card dl,
-.human-approval-blocker-queue-card dl {
+.human-approval-blocker-queue-card dl,
+.exact-new-trial-approval-capture-card dl {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 8px;
@@ -1000,7 +1004,8 @@ input[type="range"] {
 .third-sample-readiness-card dl div,
 .third-sample-authorization-package-card dl div,
 .third-sample-post-approval-gate-card dl div,
-.human-approval-blocker-queue-card dl div {
+.human-approval-blocker-queue-card dl div,
+.exact-new-trial-approval-capture-card dl div {
   min-width: 0;
   padding: 8px;
   border: 1px solid var(--line);
@@ -1027,6 +1032,7 @@ input[type="range"] {
 .third-sample-authorization-package-card dt,
 .third-sample-post-approval-gate-card dt,
 .human-approval-blocker-queue-card dt,
+.exact-new-trial-approval-capture-card dt,
 .runtime-gap-card dt {
   color: var(--muted);
   font-size: 12px;
@@ -1051,8 +1057,23 @@ input[type="range"] {
 .third-sample-authorization-package-card dd,
 .third-sample-post-approval-gate-card dd,
 .human-approval-blocker-queue-card dd,
+.exact-new-trial-approval-capture-card dd,
 .runtime-gap-card dd {
   margin: 3px 0 0;
+  overflow-wrap: anywhere;
+}
+
+.exact-new-trial-approval-capture-fields {
+  display: grid;
+  gap: 6px;
+}
+
+.exact-new-trial-approval-capture-fields span {
+  min-width: 0;
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #10191d;
   overflow-wrap: anywhere;
 }
 
@@ -1322,6 +1343,7 @@ input[type="range"] {
     .third-sample-readiness-card dl,
     .third-sample-authorization-package-card dl,
     .third-sample-post-approval-gate-card dl,
+    .exact-new-trial-approval-capture-card dl,
     .runtime-gap-card dl {
     grid-template-columns: 1fr;
   }
