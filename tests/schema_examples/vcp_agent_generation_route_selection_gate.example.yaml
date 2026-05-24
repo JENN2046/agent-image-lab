@@ -1,0 +1,102 @@
+# VCP Agent generation route selection gate fixture.
+
+vcp_agent_generation_route_selection_gate_v1:
+  phase: v0_6_65_vcp_agent_generation_route_selection_gate
+  source_phase: v0_6_64_vcp_agent_image_generation_contract_mock_validation
+  execution_mode: green_local_route_selection_only
+  execution_allowed_by_this_gate: false
+
+  caller_contract:
+    vcp_agent_role: caller_or_orchestrator
+    agent_image_lab_core_independent: true
+    vcp_native_adapter_preserved: true
+    vcp_agent_owns_visual_core_truth: false
+
+  route_decision:
+    selected_route: codex_session_image_import
+    selection_status: selected_first_landing_route
+    route_selected_for_execution_now: false
+    next_recommended_phase: v0_6_66_codex_session_image_import_preflight_only
+
+  route_risk_matrix:
+    - route: codex_session_image_import
+      decision: selected_first_landing_route
+      relative_risk: low
+      execution_now: false
+      reason: existing_manual_import_contract_and_no_provider_plugin_api_contact
+
+    - route: NativeDoubaoImage_one_shot_project_plugin
+      normalized_contract_route: native_doubao_project_plugin
+      decision: reserved_for_later_exact_A5_preflight
+      relative_risk: high
+      execution_now: false
+      reason: provider_plugin_secret_output_boundaries_require_later_exact_preflight
+
+    - route: future_vcp_provider_adapter
+      decision: reserved_for_future_design_route
+      relative_risk: medium_high
+      execution_now: false
+      reason: adapter_runtime_and_payload_boundaries_need_future_design
+
+  selected_route_preflight:
+    prompt_package_ref_required_under: prompts/image_generation/
+    generation_plan_ref_required: true
+    selected_route_must_equal: codex_session_image_import
+    output_directory_ref_required_under: runs/real_generation/
+    max_plugin_calls: 1
+    max_images_created: 1
+    retry_limit: 0
+    review_console_required: true
+    human_review_required: true
+    memory_write_allowed: false
+    accepted_samples_write_allowed: false
+    production_candidate_write_allowed: false
+    raw_prompt_payload_allowed: false
+    secret_value_allowed: false
+    provider_raw_response_allowed: false
+    private_absolute_path_allowed: false
+    image_binary_read_allowed_in_preflight: false
+    output_write_allowed_in_preflight: false
+    later_manual_import_record_required: true
+
+  blocked_conditions:
+    - provider_contact_required
+    - plugin_call_required
+    - api_call_required
+    - mcp_runtime_required
+    - VCPToolBox_runtime_required
+    - VCPChat_runtime_required
+    - image_generation_required
+    - image_binary_read_required
+    - output_write_required
+    - DailyNote_write_requested
+    - VCP_memory_write_requested
+    - accepted_samples_write_requested
+    - production_candidate_write_requested
+    - env_or_secret_read_required
+    - raw_prompt_payload_requested
+    - raw_provider_response_requested
+    - private_absolute_path_requested
+    - selected_route_not_in_contract_options
+    - selected_route_requires_exact_A5_preflight_now
+    - route_selection_expands_into_v0_6_67_execution
+    - push_tag_release_deploy_requested
+    - git_add_dot_required
+
+  side_effects:
+    provider_contact_performed: false
+    plugin_call_performed: false
+    api_call_performed: false
+    mcp_runtime_performed: false
+    VCPToolBox_runtime_performed: false
+    VCPChat_runtime_performed: false
+    image_generation_performed: false
+    image_binary_read_performed: false
+    output_write_performed: false
+    DailyNote_write_performed: false
+    VCP_memory_write_performed: false
+    accepted_samples_write_performed: false
+    production_candidate_write_performed: false
+    env_read_performed: false
+    secret_read_performed: false
+    push_tag_release_deploy_performed: false

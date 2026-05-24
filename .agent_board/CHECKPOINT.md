@@ -1,19 +1,86 @@
 ---
 
+## Checkpoint - v0.6.65a Exact File Commit Readiness Gate
+
+```text
+phase: v0_6_65a_exact_file_commit_readiness_gate
+source_phase: v0_6_65_vcp_agent_generation_route_selection_gate
+status: completed_validated_commit_ready
+result: COMPLETED_VALIDATED
+exact_expected_file_count: 8
+expected_files: .agent_board/CHECKPOINT.md; .agent_board/HANDOFF.md; .agent_board/RUN_STATE.md; .agent_board/TASK_QUEUE.md; docs/vcp_integration/VCP_AGENT_GENERATION_ROUTE_SELECTION_GATE.md; scripts/lib/governance_tooling_maintenance_slice.js; scripts/validate_vcp_agent_generation_route_selection_gate.js; tests/schema_examples/vcp_agent_generation_route_selection_gate.example.yaml
+validation_to_confirm: node --check scripts/validate_vcp_agent_generation_route_selection_gate.js; node scripts/validate_vcp_agent_generation_route_selection_gate.js; node --check scripts/validate_vcp_agent_image_generation_tool_contract.js; node scripts/validate_vcp_agent_image_generation_tool_contract.js; node --check scripts/validate_vcp_agent_image_generation_contract_mock.js; node scripts/validate_vcp_agent_image_generation_contract_mock.js; node --check scripts/lib/governance_tooling_maintenance_slice.js; node scripts/lib/governance_tooling_maintenance_slice.js; git diff --check; git diff --cached --check; npm run validate:mvp
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+legacy_resume_guard_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+commit_message: docs: select vcp agent generation route
+push_status: not_performed
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+VCPToolBox_runtime_performed: false
+VCPChat_runtime_performed: false
+image_generation_performed: false
+image_binary_read_performed: false
+output_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+secret_value_read_performed: false
+next: v0_6_66_codex_session_image_import_preflight_only_after_local_commit
+```
+
+## Checkpoint - v0.6.65 VCP Agent Generation Route Selection Gate
+
+```text
+phase: v0_6_65_vcp_agent_generation_route_selection_gate
+source_phase: v0_6_64_vcp_agent_image_generation_contract_mock_validation
+status: completed_validated_local_route_selection_gate
+result: COMPLETED_VALIDATED
+selected_route: codex_session_image_import
+NativeDoubaoImage_one_shot_project_plugin_status: reserved_for_later_exact_A5_preflight
+future_vcp_provider_adapter_status: reserved_for_future_design_route
+route_selection_doc_ref: docs/vcp_integration/VCP_AGENT_GENERATION_ROUTE_SELECTION_GATE.md
+route_selection_fixture_ref: tests/schema_examples/vcp_agent_generation_route_selection_gate.example.yaml
+validator_ref: scripts/validate_vcp_agent_generation_route_selection_gate.js
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+legacy_resume_guard_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+VCPToolBox_runtime_performed: false
+VCPChat_runtime_performed: false
+image_generation_performed: false
+image_binary_read_performed: false
+output_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+secret_value_read_performed: false
+push_status: not_performed
+next: v0_6_66_codex_session_image_import_preflight_only
+```
+
 ## Checkpoint - v0.6.64a Exact File Commit Readiness Gate
 
 ```text
 phase: v0_6_64a_exact_file_commit_readiness_gate
 source_phase: v0_6_64_vcp_agent_image_generation_contract_mock_validation
-status: commit_readiness_review_in_progress
-result: PENDING_VALIDATION
+status: completed_validated_committed_local_not_pushed
+result: COMPLETED_VALIDATED
 active_current_phase: v0_3_3_first_live_generation_pilot
 resume_guard_source_phase: v0_3_2_live_candidate_action_packet
 legacy_resume_guard_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
 exact_expected_file_count: 16
 validation_to_confirm: node --check scripts/validate_vcp_agent_image_generation_tool_contract.js; node scripts/validate_vcp_agent_image_generation_tool_contract.js; node --check scripts/validate_vcp_agent_image_generation_contract_mock.js; node scripts/validate_vcp_agent_image_generation_contract_mock.js; node --check scripts/lib/governance_tooling_maintenance_slice.js; node scripts/lib/governance_tooling_maintenance_slice.js; git diff --check; npm run validate:mvp
 commit_message: test: validate vcp agent image generation contract mock
-commit_performed: false
+local_commit_completed: yes
+commit_hash: 8953ef2428a73fae1782433d7255765c4fbdac0e
 push_status: not_performed
 provider_contact_performed: false
 plugin_call_performed: false

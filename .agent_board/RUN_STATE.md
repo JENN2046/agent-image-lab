@@ -1,11 +1,84 @@
 ---
 
+## Current Run State - v0.6.65a Exact File Commit Readiness Gate
+
+```text
+phase: v0_6_65a_exact_file_commit_readiness_gate
+source_phase: v0_6_65_vcp_agent_generation_route_selection_gate
+status: completed_validated_commit_ready
+mode: Green local commit-readiness review only
+goal: freeze the v0.6.65 route-selection result as one exact-file local commit candidate without adding v0.6.66 preflight content
+route_plan: verify exact changed files; rerun validation; stage only the expected 8 files; verify cached diff; create guarded local commit if all checks pass; do not push
+task_queue_current: v0_6_65a_exact_file_commit_readiness_gate
+next_safe_task: v0_6_66_codex_session_image_import_preflight_only_after_local_commit
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+legacy_resume_guard_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+exact_expected_file_count: 8
+staged_files_allowed: exact_expected_files_only
+git_add_dot_allowed: false
+commit_message: docs: select vcp agent generation route
+push_allowed: false
+push_status: not_performed
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+VCPToolBox_runtime_performed: false
+VCPChat_runtime_performed: false
+image_generation_performed: false
+image_binary_read_performed: false
+output_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+secret_value_read_performed: false
+```
+
+## Current Run State - v0.6.65 VCP Agent Generation Route Selection Gate
+
+```text
+phase: v0_6_65_vcp_agent_generation_route_selection_gate
+source_phase: v0_6_64_vcp_agent_image_generation_contract_mock_validation
+status: completed_validated_local_route_selection_gate
+mode: Green local route selection gate only
+goal: select the first non-executing landing route for the VCP Agent Image Generation Tool Contract v1
+route_plan: compare codex_session_image_import, NativeDoubaoImage one-shot project plugin, and future VCP provider adapter; select the lowest-risk first landing route; record preflight and blockers; validate locally
+task_queue_current: v0_6_65_vcp_agent_generation_route_selection_gate
+next_safe_task: v0_6_66_codex_session_image_import_preflight_only
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+legacy_resume_guard_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+selected_route: codex_session_image_import
+NativeDoubaoImage_one_shot_project_plugin_status: reserved_for_later_exact_A5_preflight
+future_vcp_provider_adapter_status: reserved_for_future_design_route
+route_selection_doc_ref: docs/vcp_integration/VCP_AGENT_GENERATION_ROUTE_SELECTION_GATE.md
+route_selection_fixture_ref: tests/schema_examples/vcp_agent_generation_route_selection_gate.example.yaml
+validator_ref: scripts/validate_vcp_agent_generation_route_selection_gate.js
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+VCPToolBox_runtime_performed: false
+VCPChat_runtime_performed: false
+image_generation_performed: false
+image_binary_read_performed: false
+output_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+secret_value_read_performed: false
+push_status: not_performed
+```
+
 ## Current Run State - v0.6.64a Exact File Commit Readiness Gate
 
 ```text
 phase: v0_6_64a_exact_file_commit_readiness_gate
 source_phase: v0_6_64_vcp_agent_image_generation_contract_mock_validation
-status: commit_readiness_review_in_progress
+status: completed_validated_committed_local_not_pushed
 mode: Green local commit-readiness review only
 goal: verify the v0.6.63/v0.6.64 VCP Agent image-generation contract and mock-validation files as one exact-file local commit candidate without adding v0.6.65 route selection content
 route_plan: inspect exact changed files; confirm validation; stage only the exact expected files if validation passes; create guarded local commit if allowed; do not push
@@ -18,6 +91,8 @@ exact_expected_file_count: 16
 staged_files_allowed: exact_expected_files_only
 git_add_dot_allowed: false
 commit_message: test: validate vcp agent image generation contract mock
+local_commit_completed: yes
+commit_hash: 8953ef2428a73fae1782433d7255765c4fbdac0e
 push_allowed: false
 push_status: not_performed
 provider_contact_performed: false

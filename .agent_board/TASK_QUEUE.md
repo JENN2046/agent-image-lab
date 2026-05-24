@@ -1,12 +1,39 @@
 ---
 
-- [ ] ID: v0_6_64a_exact_file_commit_readiness_gate
+- [x] ID: v0_6_65a_exact_file_commit_readiness_gate
       Lane: Green local commit-readiness review only.
-      Status: in_progress.
+      Status: completed_validated_commit_ready.
+      Source phase: v0_6_65_vcp_agent_generation_route_selection_gate.
+      Scope: Freeze v0.6.65 route selection as one exact 8-file local commit candidate without v0.6.66 preflight content.
+      Expected files: .agent_board/CHECKPOINT.md; .agent_board/HANDOFF.md; .agent_board/RUN_STATE.md; .agent_board/TASK_QUEUE.md; docs/vcp_integration/VCP_AGENT_GENERATION_ROUTE_SELECTION_GATE.md; scripts/lib/governance_tooling_maintenance_slice.js; scripts/validate_vcp_agent_generation_route_selection_gate.js; tests/schema_examples/vcp_agent_generation_route_selection_gate.example.yaml.
+      Commit message if validation passes: docs: select vcp agent generation route.
+      Staging rule: exact-file staging only; git add . forbidden.
+      Push: forbidden/not_performed.
+      Forbidden: no v0.6.66 preflight content; no provider contact; no plugin call; no API call; no MCP runtime; no VCPToolBox runtime; no VCPChat runtime; no image generation; no image binary read; no output write; no DailyNote write; no VCP memory write; no accepted_samples write; no production_candidate write; no .env read; no secret read; no push/tag/release/deploy.
+      Recommended next after local commit: v0_6_66_codex_session_image_import_preflight_only.
+
+- [x] ID: v0_6_65_vcp_agent_generation_route_selection_gate
+      Lane: Green local route selection gate only.
+      Status: completed_validated_local_route_selection_gate.
+      Source phase: v0_6_64_vcp_agent_image_generation_contract_mock_validation.
+      Scope: Select the first landing route among codex_session_image_import, NativeDoubaoImage one-shot project plugin, and future VCP provider adapter without provider contact, plugin call, API call, MCP runtime, VCPToolBox/VCPChat runtime, image generation, image binary read, output write, DailyNote/VCP memory, accepted_samples, production_candidate, secret read, or push.
+      Selected route: codex_session_image_import.
+      Reserved later: NativeDoubaoImage_one_shot_project_plugin exact A5 preflight; future_vcp_provider_adapter design route.
+      Doc ref: docs/vcp_integration/VCP_AGENT_GENERATION_ROUTE_SELECTION_GATE.md.
+      Fixture ref: tests/schema_examples/vcp_agent_generation_route_selection_gate.example.yaml.
+      Validator ref: scripts/validate_vcp_agent_generation_route_selection_gate.js.
+      Stop condition: route selection requires real provider/plugin/API/MCP/VCP runtime action, secret access, output write, or execution approval beyond local gate drafting.
+      Recommended next after validation: v0_6_66_codex_session_image_import_preflight_only.
+
+- [x] ID: v0_6_64a_exact_file_commit_readiness_gate
+      Lane: Green local commit-readiness review only.
+      Status: completed_validated_committed_local_not_pushed.
       Source phase: v0_6_64_vcp_agent_image_generation_contract_mock_validation.
       Scope: Verify the v0.6.63/v0.6.64 VCP Agent image-generation contract and mock-validation file set as one exact-file local commit candidate.
       Exact expected file count: 16.
       Commit message if allowed: test: validate vcp agent image generation contract mock.
+      Commit performed: true.
+      Commit hash: 8953ef2428a73fae1782433d7255765c4fbdac0e.
       Staging rule: exact-file staging only; git add . forbidden.
       Push: forbidden/not_performed.
       Forbidden: no v0.6.65 route selection content; no provider contact; no plugin call; no API call; no MCP runtime; no VCPToolBox runtime; no VCPChat runtime; no image generation; no image binary read; no output write; no DailyNote write; no VCP memory write; no accepted_samples write; no production_candidate write; no .env read; no secret read; no push/tag/release/deploy.
@@ -29,11 +56,6 @@
       Blocked case count: 15.
       Side effects: provider_contact_performed=false; plugin_call_performed=false; api_call_performed=false; mcp_runtime_performed=false; VCPToolBox_runtime_performed=false; VCPChat_runtime_performed=false; image_generation_performed=false; image_binary_read_performed=false; output_write_performed=false; DailyNote_write_performed=false; VCP_memory_write_performed=false; accepted_samples_write_performed=false; production_candidate_write_performed=false; secret_value_read_performed=false; push_status: not_performed; push_performed=false.
       Recommended next: v0_6_65_vcp_agent_generation_route_selection_gate.
-
-- [ ] ID: v0_6_65_vcp_agent_generation_route_selection_gate
-      Lane: Green local route selection gate only.
-      Scope: Choose and document the next non-executing route gate among codex_session_image_import, NativeDoubaoImage one-shot plugin route, and future VCP provider adapter without provider contact, plugin call, API call, MCP runtime, image generation, output write, memory write, accepted_samples write, production_candidate write, VCPToolBox/VCPChat runtime, secrets, or push.
-      Stop condition: route selection requires real provider/plugin/API/MCP/VCP runtime action, secret access, output write, or execution approval beyond local gate drafting.
 
 - [x] ID: v0_6_63_vcp_agent_image_generation_tool_contract_v1
       Lane: Green local docs/schema/fixtures/validator only.
