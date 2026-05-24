@@ -1,5 +1,42 @@
 ---
 
+- [x] ID: v0_6_69_codex_session_image_import_route_closeout_or_real_generation_gap_review
+      Lane: Green local route review only.
+      Status: completed_validated_local_route_review_only.
+      Source phase: v0_6_68a_exact_file_commit_readiness_gate.
+      Scope: Close codex_session_image_import as a safe manual import fallback and review the remaining gap to real VCP Agent generation without real generation, real image import, image binary read, output write, provider contact, plugin call, API call, MCP/VCP runtime, DailyNote/VCP memory, accepted_samples, production_candidate, secrets, or push.
+      Route status: closed_as_safe_manual_import_path.
+      Can generate image by itself: false.
+      Can import manual session image later: true.
+      Recommended real generation route: NativeDoubaoImage_one_shot_project_plugin.
+      Future VCP provider adapter: reserved_for_future_design_route.
+      Doc ref: docs/vcp_integration/CODEX_SESSION_IMAGE_IMPORT_ROUTE_CLOSEOUT_OR_REAL_GENERATION_GAP_REVIEW.md.
+      Fixture ref: tests/schema_examples/codex_session_image_import_route_gap_review.example.yaml.
+      Validator ref: scripts/validate_codex_session_image_import_route_gap_review.js.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Legacy resume guard next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Staging rule: exact-file staging only; git add . forbidden.
+      real_generation_performed: false.
+      image_generation_performed: false.
+      image_binary_read_performed: false.
+      output_write_performed: false.
+      provider_contact_performed: false.
+      plugin_call_performed: false.
+      api_call_performed: false.
+      mcp_runtime_performed: false.
+      VCPToolBox_runtime_performed: false.
+      VCPChat_runtime_performed: false.
+      DailyNote_write_performed: false.
+      VCP_memory_write_performed: false.
+      accepted_samples_write_performed: false.
+      production_candidate_write_performed: false.
+      secret_value_read_performed: false.
+      push_status: not_performed.
+      Recommended next after validation: v0_6_70_real_vcp_agent_generation_route_activation_gate.
+
+---
+
 - [x] ID: v0_6_68_codex_session_image_import_record_mock_validation
       Lane: Green local mock validation only.
       Status: completed_validated_local_mock_validation_only.

@@ -1,5 +1,45 @@
 ---
 
+## Checkpoint - v0.6.69 Codex Session Image Import Route Closeout Or Real Generation Gap Review
+
+```text
+phase: v0_6_69_codex_session_image_import_route_closeout_or_real_generation_gap_review
+source_phase: v0_6_68a_exact_file_commit_readiness_gate
+status: completed_validated_local_route_review_only
+result: COMPLETED_VALIDATED
+route_review_only: true
+route_review_doc_ref: docs/vcp_integration/CODEX_SESSION_IMAGE_IMPORT_ROUTE_CLOSEOUT_OR_REAL_GENERATION_GAP_REVIEW.md
+fixture_ref: tests/schema_examples/codex_session_image_import_route_gap_review.example.yaml
+validator_ref: scripts/validate_codex_session_image_import_route_gap_review.js
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+legacy_resume_guard_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+codex_session_image_import_route_status: closed_as_safe_manual_import_path
+can_generate_image_by_itself: false
+can_import_manual_session_image_later: true
+recommended_real_generation_route: NativeDoubaoImage_one_shot_project_plugin
+future_vcp_provider_adapter_status: reserved_for_future_design_route
+real_generation_performed: false
+image_generation_performed: false
+image_binary_read_performed: false
+output_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+VCPToolBox_runtime_performed: false
+VCPChat_runtime_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+secret_value_read_performed: false
+push_status: not_performed
+next: v0_6_70_real_vcp_agent_generation_route_activation_gate
+```
+
+---
+
 ## Checkpoint - v0.6.68 Codex Session Image Import Record Mock Validation
 
 ```text
