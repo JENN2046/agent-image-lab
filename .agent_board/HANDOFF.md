@@ -1,5 +1,119 @@
 ---
 
+## Current Handoff Update - v0.6.64a Exact File Commit Readiness Gate
+
+```text
+phase: v0_6_64a_exact_file_commit_readiness_gate
+source_phase: v0_6_64_vcp_agent_image_generation_contract_mock_validation
+status: commit_readiness_review_in_progress
+mode: Green local commit-readiness review only
+summary: Reviewing the v0.6.63/v0.6.64 contract and mock-validation changes as one exact-file local commit candidate. No v0.6.65 route selection content, provider/plugin/API/MCP/VCP runtime, image generation, output write, DailyNote, VCP memory, accepted_samples, production_candidate, secret read, push, tag, release, or deploy action is authorized in this gate.
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+legacy_resume_guard_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+exact_expected_file_count: 16
+commit_message: test: validate vcp agent image generation contract mock
+git_add_dot_allowed: false
+push_status: not_performed
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+VCPToolBox_runtime_performed: false
+VCPChat_runtime_performed: false
+image_generation_performed: false
+image_binary_read_performed: false
+output_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+secret_value_read_performed: false
+recommended_next: v0_6_65_vcp_agent_generation_route_selection_gate_after_local_commit_only
+```
+
+## Current Handoff Update - v0.6.64 VCP Agent Image Generation Contract Mock Validation
+
+```text
+phase: v0_6_64_vcp_agent_image_generation_contract_mock_validation
+source_phase: v0_6_63_vcp_agent_image_generation_tool_contract_v1
+status: completed_validated_local_mock_validation_pending_final_closeout
+mode: Green local mock validation only
+summary: Validated the v0.6.63 VCP Agent image-generation contract with a safe local request, a safe mock response, invalid request/response fixtures, and 15 blocked cases. No provider, plugin, API, MCP, VCPToolBox, VCPChat, image generation, image binary read, output write, DailyNote, VCP memory, accepted_samples, production_candidate, secret, push, tag, release, or deploy action was performed.
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+legacy_resume_guard_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+mock_doc_ref: docs/vcp_integration/VCP_AGENT_IMAGE_GENERATION_CONTRACT_MOCK_VALIDATION.md
+request_schema_ref: schemas/vcp_agent_image_generation_request.schema.yaml
+response_schema_ref: schemas/vcp_agent_image_generation_response.schema.yaml
+request_fixture_ref: tests/schema_examples/vcp_agent_image_generation_request.example.yaml
+response_fixture_ref: tests/schema_examples/vcp_agent_image_generation_response.example.yaml
+blocked_cases_ref: tests/schema_examples/vcp_agent_image_generation_mock_blocked_cases.example.yaml
+validator_ref: scripts/validate_vcp_agent_image_generation_contract_mock.js
+mock_validation_only: true
+blocked_case_count: 15
+response_status: blocked_or_mock_ok
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+VCPToolBox_runtime_performed: false
+VCPChat_runtime_performed: false
+image_generation_performed: false
+image_binary_read_performed: false
+output_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+secret_value_read_performed: false
+push_status: not_performed
+push_performed: false
+recommended_next: v0_6_65_vcp_agent_generation_route_selection_gate
+```
+
+## Current Handoff Update - v0.6.63 VCP Agent Image Generation Tool Contract v1
+
+```text
+phase: v0_6_63_vcp_agent_image_generation_tool_contract_v1
+status: completed_validated_local_contract_pending_final_closeout
+mode: Green local docs/schema/fixtures/validator only
+summary: Paused DailyNote/VCP memory writer work after the v0.6.62 exact-writer blocker and formalized how a future VCP Agent may request one controlled image-generation attempt through Agent Image Lab. The contract preserves Agent Image Lab as independent visual-production core and gatekeeper, VCP Agent as caller/orchestrator, VCP as adapter/memory/review substrate, and provider plugin as bounded executor only after later gates.
+source_phase: v0_6_62_exact_new_trial_003_amber_c_memory_write_target_resolution_blocked
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+legacy_resume_guard_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+contract_ref: docs/vcp_integration/VCP_AGENT_IMAGE_GENERATION_TOOL_CONTRACT_V1.md
+request_schema_ref: schemas/vcp_agent_image_generation_request.schema.yaml
+response_schema_ref: schemas/vcp_agent_image_generation_response.schema.yaml
+valid_fixture_ref: tests/schema_examples/vcp_agent_image_generation_request.example.yaml
+negative_fixture_ref: tests/schema_examples/vcp_agent_image_generation_request_fail.example.yaml
+validator_ref: scripts/validate_vcp_agent_image_generation_tool_contract.js
+selected_route_options: codex_session_image_import; native_doubao_project_plugin; future_vcp_provider_adapter
+max_plugin_calls: 1
+max_images_created: 1
+retry_limit: 0
+review_console_required: true
+human_review_required: true
+memory_write_allowed: false
+accepted_samples_write_allowed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+image_binary_read_performed: false
+output_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+secret_value_read_performed: false
+push_status: not_performed
+push_performed: false
+recommended_next: v0_6_64_vcp_agent_image_generation_contract_mock_validation
+```
+
 ## Current Handoff Update - v0.6.62 Exact New-Trial 003 Amber_C Memory Write Target Resolution Blocked
 
 ```text

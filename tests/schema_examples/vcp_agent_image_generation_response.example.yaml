@@ -1,0 +1,58 @@
+# Valid VCP Agent image-generation mock response fixture.
+
+vcp_agent_image_generation_response_v1:
+  version: v1
+  phase: v0_6_64_vcp_agent_image_generation_contract_mock_validation
+  source_phase: v0_6_63_vcp_agent_image_generation_tool_contract_v1
+  contract_type: vcp_agent_image_generation_response
+  execution_mode: local_mock_validation_only
+  execution_allowed_by_this_contract: false
+
+  response_receipt:
+    request_id: VCP-AGENT-IMGREQ-LOCAL-CONTRACT-001
+    response_status: blocked_or_mock_ok
+    selected_route: codex_session_image_import
+    prompt_package_ref: prompts/image_generation/safe_adult_editorial_portrait_v1.yaml
+    generation_plan_ref: reports/generation_plans/v0_6_63_contract_only_generation_plan_ref.yaml
+    output_directory_ref: runs/real_generation/v0_6_63_contract_only_request_001/
+    receipt_ref: null
+    rejection_reason: null
+
+  budget:
+    max_plugin_calls: 1
+    max_images_created: 1
+    retry_limit: 0
+
+  route_decision:
+    route_selected_for_execution_now: false
+    route_selection_gate_required: true
+    next_route_gate: v0_6_65_vcp_agent_generation_route_selection_gate
+
+  review_handoff:
+    review_console_required: true
+    human_review_required: true
+    handoff_ref_required_after_future_execution: true
+    handoff_ref: null
+    artifact_refs_or_empty_list: []
+    side_effect_flags_required: true
+    memory_write_allowed: false
+    accepted_samples_write_allowed: false
+    production_candidate_write_allowed: false
+
+  side_effects:
+    provider_contact_performed: false
+    plugin_call_performed: false
+    api_call_performed: false
+    mcp_runtime_performed: false
+    VCPToolBox_runtime_performed: false
+    VCPChat_runtime_performed: false
+    image_generation_performed: false
+    image_binary_read_performed: false
+    output_write_performed: false
+    DailyNote_write_performed: false
+    VCP_memory_write_performed: false
+    accepted_samples_write_performed: false
+    production_candidate_write_performed: false
+    env_read_performed: false
+    secret_read_performed: false
+    push_tag_release_deploy_performed: false

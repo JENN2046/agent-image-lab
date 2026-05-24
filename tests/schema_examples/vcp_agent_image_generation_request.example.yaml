@@ -1,0 +1,72 @@
+# Valid VCP Agent image-generation request contract example.
+
+vcp_agent_image_generation_request_v1:
+  version: v1
+  phase: v0_6_63_vcp_agent_image_generation_tool_contract_v1
+  contract_type: vcp_agent_image_generation_request
+  execution_mode: local_contract_only
+  execution_allowed_by_this_contract: false
+
+  caller_identity:
+    vcp_agent_id: vcp_agent_visual_orchestrator_local_contract_001
+    vcp_agent_role: caller_or_orchestrator
+    caller_owns_visual_core_truth: false
+    requested_for_project: agent_image_lab
+    request_scope: one_controlled_image_generation_attempt
+
+  architecture_boundary:
+    agent_image_lab_core_independent: true
+    vcp_native_adapter: true
+    agent_image_lab_owns_prompt_package: true
+    agent_image_lab_owns_generation_plan: true
+    agent_image_lab_owns_review_handoff: true
+    agent_image_lab_owns_receipt: true
+    agent_image_lab_owns_archive_registry_policy: true
+    vcp_agent_is_caller_or_orchestrator_only: true
+
+  allowed_request_packet:
+    request_id: VCP-AGENT-IMGREQ-LOCAL-CONTRACT-001
+    selected_route: codex_session_image_import
+    prompt_package_ref: prompts/image_generation/safe_adult_editorial_portrait_v1.yaml
+    generation_plan_ref: reports/generation_plans/v0_6_63_contract_only_generation_plan_ref.yaml
+    output_directory_ref: runs/real_generation/v0_6_63_contract_only_request_001/
+    review_console_required: true
+    human_review_required: true
+    max_plugin_calls: 1
+    max_images_created: 1
+    retry_limit: 0
+    memory_write_allowed: false
+    accepted_samples_write_allowed: false
+    production_candidate_write_allowed: false
+
+  guard_flags:
+    provider_contact_requested: false
+    plugin_call_requested: false
+    api_call_requested: false
+    mcp_runtime_requested: false
+    image_generation_requested_now: false
+    image_binary_read_requested: false
+    output_file_write_requested: false
+    DailyNote_write_requested: false
+    VCP_memory_write_requested: false
+    accepted_samples_write_requested: false
+    production_candidate_write_requested: false
+    real_vcpchat_runtime_requested: false
+    real_vcptoolbox_runtime_requested: false
+    env_read_requested: false
+    secret_read_requested: false
+
+  payload_safety:
+    raw_prompt_payload_included: false
+    secret_value_included: false
+    provider_raw_response_included: false
+    private_absolute_path_included: false
+    image_binary_included: false
+
+  expected_response_shape:
+    response_status: contract_validated_no_execution
+    review_console_required: true
+    human_review_required: true
+    memory_write_allowed: false
+    accepted_samples_write_allowed: false
+    production_candidate_write_allowed: false

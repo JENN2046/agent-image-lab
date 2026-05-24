@@ -1937,6 +1937,39 @@ const EXPECTED_V0_6_62_EXACT_NEW_TRIAL_003_AMBER_C_MEMORY_WRITE_TARGET_RESOLUTIO
   "tests/schema_examples/exact_new_trial_003_amber_c_memory_write_target_resolution_blocked_fail.example.json"
 ].sort();
 
+const EXPECTED_V0_6_63_VCP_AGENT_IMAGE_GENERATION_TOOL_CONTRACT_V1_SLICE = [
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  "docs/vcp_integration/VCP_AGENT_IMAGE_GENERATION_TOOL_CONTRACT_V1.md",
+  "schemas/vcp_agent_image_generation_request.schema.yaml",
+  "schemas/vcp_agent_image_generation_response.schema.yaml",
+  "scripts/lib/governance_tooling_maintenance_slice.js",
+  "scripts/validate_vcp_agent_image_generation_tool_contract.js",
+  "tests/schema_examples/vcp_agent_image_generation_request.example.yaml",
+  "tests/schema_examples/vcp_agent_image_generation_request_fail.example.yaml"
+].sort();
+
+const EXPECTED_V0_6_64_VCP_AGENT_IMAGE_GENERATION_CONTRACT_MOCK_VALIDATION_SLICE = [
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  "docs/vcp_integration/VCP_AGENT_IMAGE_GENERATION_CONTRACT_MOCK_VALIDATION.md",
+  "docs/vcp_integration/VCP_AGENT_IMAGE_GENERATION_TOOL_CONTRACT_V1.md",
+  "schemas/vcp_agent_image_generation_request.schema.yaml",
+  "schemas/vcp_agent_image_generation_response.schema.yaml",
+  "scripts/lib/governance_tooling_maintenance_slice.js",
+  "scripts/validate_vcp_agent_image_generation_contract_mock.js",
+  "scripts/validate_vcp_agent_image_generation_tool_contract.js",
+  "tests/schema_examples/vcp_agent_image_generation_mock_blocked_cases.example.yaml",
+  "tests/schema_examples/vcp_agent_image_generation_request.example.yaml",
+  "tests/schema_examples/vcp_agent_image_generation_request_fail.example.yaml",
+  "tests/schema_examples/vcp_agent_image_generation_response.example.yaml",
+  "tests/schema_examples/vcp_agent_image_generation_response_fail.example.yaml"
+].sort();
+
 const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "governance_tooling_maintenance_slice_v1",
@@ -2361,6 +2394,14 @@ const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "v0_6_62_exact_new_trial_003_amber_c_memory_write_target_resolution_blocked_slice",
     files: EXPECTED_V0_6_62_EXACT_NEW_TRIAL_003_AMBER_C_MEMORY_WRITE_TARGET_RESOLUTION_BLOCKED_SLICE
+  },
+  {
+    id: "v0_6_63_vcp_agent_image_generation_tool_contract_v1_slice",
+    files: EXPECTED_V0_6_63_VCP_AGENT_IMAGE_GENERATION_TOOL_CONTRACT_V1_SLICE
+  },
+  {
+    id: "v0_6_64_vcp_agent_image_generation_contract_mock_validation_slice",
+    files: EXPECTED_V0_6_64_VCP_AGENT_IMAGE_GENERATION_CONTRACT_MOCK_VALIDATION_SLICE
   }
 ];
 
@@ -2832,6 +2873,18 @@ function governanceToolingMaintenanceSliceSelfCheck() {
       )?.id === "v0_6_62_exact_new_trial_003_amber_c_memory_write_target_resolution_blocked_slice"
     },
     {
+      check: "exact_slice_matches_v0_6_63_vcp_agent_image_generation_tool_contract_v1",
+      passed: findMatchingGovernanceToolingSlice(
+        EXPECTED_V0_6_63_VCP_AGENT_IMAGE_GENERATION_TOOL_CONTRACT_V1_SLICE
+      )?.id === "v0_6_63_vcp_agent_image_generation_tool_contract_v1_slice"
+    },
+    {
+      check: "exact_slice_matches_v0_6_64_vcp_agent_image_generation_contract_mock_validation",
+      passed: findMatchingGovernanceToolingSlice(
+        EXPECTED_V0_6_64_VCP_AGENT_IMAGE_GENERATION_CONTRACT_MOCK_VALIDATION_SLICE
+      )?.id === "v0_6_64_vcp_agent_image_generation_contract_mock_validation_slice"
+    },
+    {
       check: "exact_slice_rejects_missing_file",
       passed: findMatchingGovernanceToolingSlice(EXPECTED_GOVERNANCE_TOOLING_MAINTENANCE_SLICE.slice(1)) === null
     },
@@ -2940,6 +2993,8 @@ module.exports = {
   EXPECTED_V0_6_60_EXACT_NEW_TRIAL_003_DURABLE_ARCHIVE_WRITE_EXECUTION_RECEIPT_SLICE,
   EXPECTED_V0_6_61_EXACT_NEW_TRIAL_003_CHINESE_MEMORY_ENTRY_READINESS_PREFLIGHT_NO_WRITE_SLICE,
   EXPECTED_V0_6_62_EXACT_NEW_TRIAL_003_AMBER_C_MEMORY_WRITE_TARGET_RESOLUTION_BLOCKED_SLICE,
+  EXPECTED_V0_6_63_VCP_AGENT_IMAGE_GENERATION_TOOL_CONTRACT_V1_SLICE,
+  EXPECTED_V0_6_64_VCP_AGENT_IMAGE_GENERATION_CONTRACT_MOCK_VALIDATION_SLICE,
   GOVERNANCE_TOOLING_ALLOWED_SLICES,
   buildGovernanceToolingMaintenanceSliceReport,
   fileAllowedInGovernanceToolingSlice,

@@ -1,0 +1,90 @@
+# vcp_agent_image_generation_request.schema.yaml
+# Contract-only request shape for a VCP Agent asking Agent Image Lab to prepare
+# one controlled image-generation attempt. This schema is descriptive and is
+# validated by scripts/validate_vcp_agent_image_generation_tool_contract.js.
+
+vcp_agent_image_generation_request_v1:
+  version: v1
+  phase: v0_6_63_vcp_agent_image_generation_tool_contract_v1
+  contract_type: vcp_agent_image_generation_request
+  execution_mode: local_contract_only
+  execution_allowed_by_this_contract: false
+
+  caller_identity:
+    vcp_agent_id: string
+    vcp_agent_role: caller_or_orchestrator
+    caller_owns_visual_core_truth: false
+    requested_for_project: agent_image_lab
+    request_scope: one_controlled_image_generation_attempt
+
+  architecture_boundary:
+    agent_image_lab_core_independent: true
+    vcp_native_adapter: true
+    agent_image_lab_owns_prompt_package: true
+    agent_image_lab_owns_generation_plan: true
+    agent_image_lab_owns_review_handoff: true
+    agent_image_lab_owns_receipt: true
+    agent_image_lab_owns_archive_registry_policy: true
+    vcp_agent_is_caller_or_orchestrator_only: true
+
+  allowed_request_packet:
+    request_id: string
+    selected_route:
+      enum:
+        - codex_session_image_import
+        - native_doubao_project_plugin
+        - future_vcp_provider_adapter
+    prompt_package_ref:
+      type: repository_relative_path
+      required_prefix: prompts/image_generation/
+      exact_ref_required: true
+    generation_plan_ref:
+      type: repository_relative_or_stable_plan_ref
+      exact_ref_required: true
+    output_directory_ref:
+      type: repository_relative_directory
+      required_prefix: runs/real_generation/
+      exact_ref_required: true
+    review_console_required: true
+    human_review_required: true
+    max_plugin_calls: 1
+    max_images_created: 1
+    retry_limit: 0
+    memory_write_allowed: false
+    accepted_samples_write_allowed: false
+    production_candidate_write_allowed: false
+
+  forbidden_fields:
+    - raw_prompt_payload
+    - secret_value
+    - env_value
+    - provider_raw_response
+    - provider_endpoint
+    - api_key
+    - token
+    - cookie
+    - image_binary
+    - private_absolute_path
+    - raw_stdout
+    - raw_stderr
+
+  guard_flags:
+    provider_contact_requested: false
+    plugin_call_requested: false
+    api_call_requested: false
+    mcp_runtime_requested: false
+    image_generation_requested_now: false
+    image_binary_read_requested: false
+    output_file_write_requested: false
+    DailyNote_write_requested: false
+    VCP_memory_write_requested: false
+    accepted_samples_write_requested: false
+    production_candidate_write_requested: false
+    real_vcpchat_runtime_requested: false
+    real_vcptoolbox_runtime_requested: false
+    env_read_requested: false
+    secret_read_requested: false
+
+  validation_intent:
+    valid_request_can_enter_next_phase: v0_6_64_vcp_agent_image_generation_contract_mock_validation
+    valid_request_can_execute_generation_now: false

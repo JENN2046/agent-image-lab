@@ -1,0 +1,49 @@
+# Invalid VCP Agent image-generation mock response fixture.
+# The validator must reject this fixture.
+
+vcp_agent_image_generation_response_v1:
+  version: v1
+  phase: v0_6_64_vcp_agent_image_generation_contract_mock_validation
+  source_phase: v0_6_63_vcp_agent_image_generation_tool_contract_v1
+  contract_type: vcp_agent_image_generation_response
+  execution_mode: local_mock_validation_only
+  negative_case_expected_fail: true
+
+  response_receipt:
+    request_id: VCP-AGENT-IMGREQ-BAD-RESPONSE-001
+    response_status: generated
+    selected_route: arbitrary_provider_plugin
+    prompt_package_ref: inline_raw_prompt
+    generation_plan_ref: ""
+    output_directory_ref: temp/generated/
+    receipt_ref: runs/private/raw_receipt.json
+    rejection_reason: null
+
+  budget:
+    max_plugin_calls: 2
+    max_images_created: 2
+    retry_limit: 1
+
+  review_handoff:
+    review_console_required: false
+    human_review_required: false
+    memory_write_allowed: true
+    accepted_samples_write_allowed: true
+    production_candidate_write_allowed: true
+
+  side_effects:
+    provider_contact_performed: true
+    plugin_call_performed: true
+    api_call_performed: true
+    mcp_runtime_performed: true
+    VCPToolBox_runtime_performed: true
+    VCPChat_runtime_performed: true
+    image_generation_performed: true
+    image_binary_read_performed: true
+    output_write_performed: true
+    DailyNote_write_performed: true
+    VCP_memory_write_performed: true
+    accepted_samples_write_performed: true
+    production_candidate_write_performed: true
+    env_read_performed: true
+    secret_read_performed: true

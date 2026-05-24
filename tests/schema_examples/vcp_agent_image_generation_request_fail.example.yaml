@@ -1,0 +1,52 @@
+# Invalid VCP Agent image-generation request contract example.
+# The validator must reject this fixture.
+
+vcp_agent_image_generation_request_v1:
+  version: v1
+  phase: v0_6_63_vcp_agent_image_generation_tool_contract_v1
+  contract_type: vcp_agent_image_generation_request
+  execution_mode: local_contract_only
+  negative_case_expected_fail: true
+
+  caller_identity:
+    vcp_agent_id: vcp_agent_bad_direct_executor_001
+    vcp_agent_role: provider_executor
+    caller_owns_visual_core_truth: true
+    requested_for_project: agent_image_lab
+    request_scope: unbounded_generation_batch
+
+  allowed_request_packet:
+    request_id: VCP-AGENT-IMGREQ-BAD-001
+    selected_route: native_doubao_project_plugin
+    prompt_package_ref: inline_raw_prompt
+    generation_plan_ref: ""
+    output_directory_ref: C:/Users/private/runs/output/
+    review_console_required: false
+    human_review_required: false
+    max_plugin_calls: 2
+    max_images_created: 3
+    retry_limit: 1
+    memory_write_allowed: true
+    accepted_samples_write_allowed: true
+
+  raw_prompt_payload: "forbidden inline prompt text"
+  secret_value: "forbidden secret placeholder"
+  provider_raw_response: "forbidden raw response placeholder"
+  private_absolute_path: "C:/Users/private/runs/output/"
+
+  guard_flags:
+    provider_contact_requested: true
+    plugin_call_requested: true
+    api_call_requested: true
+    mcp_runtime_requested: true
+    image_generation_requested_now: true
+    image_binary_read_requested: true
+    output_file_write_requested: true
+    DailyNote_write_requested: true
+    VCP_memory_write_requested: true
+    accepted_samples_write_requested: true
+    production_candidate_write_requested: true
+    real_vcpchat_runtime_requested: true
+    real_vcptoolbox_runtime_requested: true
+    env_read_requested: true
+    secret_read_requested: true

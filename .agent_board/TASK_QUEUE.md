@@ -1,5 +1,65 @@
 ---
 
+- [ ] ID: v0_6_64a_exact_file_commit_readiness_gate
+      Lane: Green local commit-readiness review only.
+      Status: in_progress.
+      Source phase: v0_6_64_vcp_agent_image_generation_contract_mock_validation.
+      Scope: Verify the v0.6.63/v0.6.64 VCP Agent image-generation contract and mock-validation file set as one exact-file local commit candidate.
+      Exact expected file count: 16.
+      Commit message if allowed: test: validate vcp agent image generation contract mock.
+      Staging rule: exact-file staging only; git add . forbidden.
+      Push: forbidden/not_performed.
+      Forbidden: no v0.6.65 route selection content; no provider contact; no plugin call; no API call; no MCP runtime; no VCPToolBox runtime; no VCPChat runtime; no image generation; no image binary read; no output write; no DailyNote write; no VCP memory write; no accepted_samples write; no production_candidate write; no .env read; no secret read; no push/tag/release/deploy.
+      Recommended next after local commit: v0_6_65_vcp_agent_generation_route_selection_gate.
+
+- [x] ID: v0_6_64_vcp_agent_image_generation_contract_mock_validation
+      Lane: Green local mock validation only.
+      Status: completed_validated_local_mock_validation_pending_final_closeout.
+      Result: Added mock response fixtures, response failure fixture, 15 blocked request/response cases, and a validator proving the v0.6.63 VCP Agent image-generation contract can pass safe local request/response shapes and reject unsafe shapes.
+      Source phase: v0_6_63_vcp_agent_image_generation_tool_contract_v1.
+      active_current_phase: v0_3_3_first_live_generation_pilot.
+      resume_guard_source_phase: v0_3_2_live_candidate_action_packet.
+      legacy_resume_guard_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Mock doc ref: docs/vcp_integration/VCP_AGENT_IMAGE_GENERATION_CONTRACT_MOCK_VALIDATION.md.
+      Response fixture ref: tests/schema_examples/vcp_agent_image_generation_response.example.yaml.
+      Response fail fixture ref: tests/schema_examples/vcp_agent_image_generation_response_fail.example.yaml.
+      Blocked cases ref: tests/schema_examples/vcp_agent_image_generation_mock_blocked_cases.example.yaml.
+      Validator ref: scripts/validate_vcp_agent_image_generation_contract_mock.js.
+      Pass case: valid VCP Agent caller; prompt_package_ref under prompts/image_generation/; generation_plan_ref present; allowed route; max_plugin_calls=1; max_images_created=1; retry_limit=0; memory_write_allowed=false; accepted_samples_write_allowed=false; production_candidate_write_allowed=false; response_status=blocked_or_mock_ok; no side effects.
+      Blocked case count: 15.
+      Side effects: provider_contact_performed=false; plugin_call_performed=false; api_call_performed=false; mcp_runtime_performed=false; VCPToolBox_runtime_performed=false; VCPChat_runtime_performed=false; image_generation_performed=false; image_binary_read_performed=false; output_write_performed=false; DailyNote_write_performed=false; VCP_memory_write_performed=false; accepted_samples_write_performed=false; production_candidate_write_performed=false; secret_value_read_performed=false; push_status: not_performed; push_performed=false.
+      Recommended next: v0_6_65_vcp_agent_generation_route_selection_gate.
+
+- [ ] ID: v0_6_65_vcp_agent_generation_route_selection_gate
+      Lane: Green local route selection gate only.
+      Scope: Choose and document the next non-executing route gate among codex_session_image_import, NativeDoubaoImage one-shot plugin route, and future VCP provider adapter without provider contact, plugin call, API call, MCP runtime, image generation, output write, memory write, accepted_samples write, production_candidate write, VCPToolBox/VCPChat runtime, secrets, or push.
+      Stop condition: route selection requires real provider/plugin/API/MCP/VCP runtime action, secret access, output write, or execution approval beyond local gate drafting.
+
+- [x] ID: v0_6_63_vcp_agent_image_generation_tool_contract_v1
+      Lane: Green local docs/schema/fixtures/validator only.
+      Status: completed_validated_local_contract_pending_final_closeout.
+      Result: Formalized how a VCP Agent requests one controlled image-generation attempt through Agent Image Lab while preserving Agent Image Lab as the visual production core and evidence gatekeeper.
+      Contract ref: docs/vcp_integration/VCP_AGENT_IMAGE_GENERATION_TOOL_CONTRACT_V1.md.
+      active_current_phase: v0_3_3_first_live_generation_pilot.
+      resume_guard_source_phase: v0_3_2_live_candidate_action_packet.
+      legacy_resume_guard_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Request schema ref: schemas/vcp_agent_image_generation_request.schema.yaml.
+      Response schema ref: schemas/vcp_agent_image_generation_response.schema.yaml.
+      Valid fixture ref: tests/schema_examples/vcp_agent_image_generation_request.example.yaml.
+      Negative fixture ref: tests/schema_examples/vcp_agent_image_generation_request_fail.example.yaml.
+      Validator ref: scripts/validate_vcp_agent_image_generation_tool_contract.js.
+      Route options: codex_session_image_import; native_doubao_project_plugin; future_vcp_provider_adapter.
+      Budget invariants: max_plugin_calls=1; max_images_created=1; retry_limit=0.
+      Review invariants: review_console_required=true; human_review_required=true.
+      Write gates: memory_write_allowed=false; accepted_samples_write_allowed=false.
+      Side effects: provider_contact_performed=false; plugin_call_performed=false; api_call_performed=false; image_generation_performed=false; output_write_performed=false; DailyNote_write_performed=false; VCP_memory_write_performed=false; accepted_samples_write_performed=false; production_candidate_write_performed=false; secret_value_read_performed=false; push_status: not_performed; push_performed=false.
+      Recommended next: v0_6_64_vcp_agent_image_generation_contract_mock_validation.
+
+- [ ] ID: v0_6_64_vcp_agent_image_generation_contract_mock_validation
+      Lane: Green local dry-run only.
+      Scope: Validate mock request/response handling against the v0.6.63 contract without provider contact, plugin call, API call, MCP runtime, image generation, output writes, VCPChat/VCPToolBox runtime, DailyNote/VCP memory, accepted_samples, production_candidate, secrets, or push.
+      Stop condition: mock validation requires a real provider/plugin/API/MCP/VCP runtime action; request route scope expands beyond the three defined route options; schema admits raw prompt payload, secret, raw provider response, image binary, private absolute path, memory write, accepted_samples write, or output write.
+
 - [x] ID: execute_exact_new_trial_003_chinese_memory_entry_amber_c_memory_write_target_resolution_probe
       Lane: Green status sync for attempted Amber_C memory write target resolution.
       Status: blocked_red_lane_exact_memory_writer_target_unresolved_no_write.

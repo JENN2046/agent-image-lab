@@ -1,0 +1,68 @@
+# vcp_agent_image_generation_response.schema.yaml
+# Contract-only response and receipt shape for a VCP Agent image-generation
+# request. This response does not prove provider execution or image creation.
+
+vcp_agent_image_generation_response_v1:
+  version: v1
+  phase: v0_6_63_vcp_agent_image_generation_tool_contract_v1
+  contract_type: vcp_agent_image_generation_response
+  execution_mode: local_contract_only
+  execution_allowed_by_this_contract: false
+
+  response_receipt:
+    request_id: string
+    response_status:
+      enum:
+        - blocked_or_mock_ok
+        - contract_validated_no_execution
+        - contract_rejected
+    selected_route:
+      enum:
+        - codex_session_image_import
+        - native_doubao_project_plugin
+        - future_vcp_provider_adapter
+    prompt_package_ref: same_as_request
+    generation_plan_ref: same_as_request
+    output_directory_ref: same_as_request
+    receipt_ref: repository_relative_text_ref_or_null
+    rejection_reason: string_or_null
+
+  budget:
+    max_plugin_calls: 1
+    max_images_created: 1
+    retry_limit: 0
+
+  route_decision:
+    route_selected_for_execution_now: false
+    route_selection_gate_required: true
+    next_route_gate: v0_6_65_route_selection_gate
+
+  review_handoff:
+    review_console_required: true
+    human_review_required: true
+    handoff_ref_required_after_future_execution: true
+    handoff_ref: repository_relative_text_ref_or_null
+    artifact_refs_or_empty_list:
+      - repository_relative_artifact_ref
+    side_effect_flags_required: true
+    memory_write_allowed: false
+    accepted_samples_write_allowed: false
+    production_candidate_write_allowed: false
+
+  side_effects:
+    provider_contact_performed: false
+    plugin_call_performed: false
+    api_call_performed: false
+    mcp_runtime_performed: false
+    image_generation_performed: false
+    image_binary_read_performed: false
+    output_write_performed: false
+    DailyNote_write_performed: false
+    VCP_memory_write_performed: false
+    accepted_samples_write_performed: false
+    production_candidate_write_performed: false
+    real_vcpchat_runtime_performed: false
+    real_vcptoolbox_runtime_performed: false
+    env_read_performed: false
+    secret_read_performed: false
+    push_tag_release_deploy_performed: false

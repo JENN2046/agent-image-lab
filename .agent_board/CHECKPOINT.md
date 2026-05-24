@@ -1,5 +1,141 @@
 ---
 
+## Checkpoint - v0.6.64a Exact File Commit Readiness Gate
+
+```text
+phase: v0_6_64a_exact_file_commit_readiness_gate
+source_phase: v0_6_64_vcp_agent_image_generation_contract_mock_validation
+status: commit_readiness_review_in_progress
+result: PENDING_VALIDATION
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+legacy_resume_guard_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+exact_expected_file_count: 16
+validation_to_confirm: node --check scripts/validate_vcp_agent_image_generation_tool_contract.js; node scripts/validate_vcp_agent_image_generation_tool_contract.js; node --check scripts/validate_vcp_agent_image_generation_contract_mock.js; node scripts/validate_vcp_agent_image_generation_contract_mock.js; node --check scripts/lib/governance_tooling_maintenance_slice.js; node scripts/lib/governance_tooling_maintenance_slice.js; git diff --check; npm run validate:mvp
+commit_message: test: validate vcp agent image generation contract mock
+commit_performed: false
+push_status: not_performed
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+VCPToolBox_runtime_performed: false
+VCPChat_runtime_performed: false
+image_generation_performed: false
+image_binary_read_performed: false
+output_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+secret_value_read_performed: false
+next: v0_6_65_vcp_agent_generation_route_selection_gate_after_local_commit_only
+```
+
+## Checkpoint - v0.6.64 VCP Agent Image Generation Contract Mock Validation
+
+```text
+phase: v0_6_64_vcp_agent_image_generation_contract_mock_validation
+source_phase: v0_6_63_vcp_agent_image_generation_tool_contract_v1
+status: completed_validated_local_mock_validation_pending_final_closeout
+result: COMPLETED_VALIDATED
+mock_doc_ref: docs/vcp_integration/VCP_AGENT_IMAGE_GENERATION_CONTRACT_MOCK_VALIDATION.md
+request_schema_ref: schemas/vcp_agent_image_generation_request.schema.yaml
+response_schema_ref: schemas/vcp_agent_image_generation_response.schema.yaml
+request_fixture_ref: tests/schema_examples/vcp_agent_image_generation_request.example.yaml
+response_fixture_ref: tests/schema_examples/vcp_agent_image_generation_response.example.yaml
+response_fail_fixture_ref: tests/schema_examples/vcp_agent_image_generation_response_fail.example.yaml
+blocked_cases_ref: tests/schema_examples/vcp_agent_image_generation_mock_blocked_cases.example.yaml
+validator_ref: scripts/validate_vcp_agent_image_generation_contract_mock.js
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+legacy_resume_guard_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+mock_validation_only: true
+valid_request_with_vcp_agent_passed: true
+valid_response_mock_passed: true
+blocked_case_count: 15
+missing_prompt_package_ref_blocked: true
+arbitrary_plugin_id_blocked: true
+max_plugin_calls_gt_1_blocked: true
+max_images_created_gt_1_blocked: true
+retry_limit_gt_0_blocked: true
+memory_write_allowed_true_blocked: true
+accepted_samples_write_allowed_true_blocked: true
+production_candidate_write_allowed_true_blocked: true
+raw_prompt_payload_present_blocked: true
+secret_value_present_blocked: true
+raw_provider_response_present_blocked: true
+private_absolute_path_present_blocked: true
+output_directory_outside_runs_real_generation_blocked: true
+response_claims_image_generation_performed_true_blocked: true
+response_claims_output_write_performed_true_blocked: true
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+VCPToolBox_runtime_performed: false
+VCPChat_runtime_performed: false
+image_generation_performed: false
+image_binary_read_performed: false
+output_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+secret_value_read_performed: false
+push_status: not_performed
+push_performed: false
+next: v0_6_65_vcp_agent_generation_route_selection_gate
+```
+
+## Checkpoint - v0.6.63 VCP Agent Image Generation Tool Contract v1
+
+```text
+phase: v0_6_63_vcp_agent_image_generation_tool_contract_v1
+status: completed_validated_local_contract_pending_final_closeout
+result: COMPLETED_VALIDATED
+contract_ref: docs/vcp_integration/VCP_AGENT_IMAGE_GENERATION_TOOL_CONTRACT_V1.md
+request_schema_ref: schemas/vcp_agent_image_generation_request.schema.yaml
+response_schema_ref: schemas/vcp_agent_image_generation_response.schema.yaml
+valid_fixture_ref: tests/schema_examples/vcp_agent_image_generation_request.example.yaml
+negative_fixture_ref: tests/schema_examples/vcp_agent_image_generation_request_fail.example.yaml
+validator_ref: scripts/validate_vcp_agent_image_generation_tool_contract.js
+source_phase: v0_6_62_exact_new_trial_003_amber_c_memory_write_target_resolution_blocked
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+legacy_resume_guard_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+agent_image_lab_core_independent: true
+vcp_native_adapter: true
+vcp_agent_role: caller_or_orchestrator
+vcp_agent_owns_visual_core_truth: false
+selected_route_options: codex_session_image_import; native_doubao_project_plugin; future_vcp_provider_adapter
+prompt_package_ref_required: true
+generation_plan_ref_required: true
+output_directory_ref_under_runs_real_generation_required: true
+max_plugin_calls: 1
+max_images_created: 1
+retry_limit: 0
+review_console_required: true
+human_review_required: true
+memory_write_allowed: false
+accepted_samples_write_allowed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+image_generation_performed: false
+image_binary_read_performed: false
+output_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+secret_value_read_performed: false
+push_status: not_performed
+push_performed: false
+next: v0_6_64_vcp_agent_image_generation_contract_mock_validation
+```
+
 ## Checkpoint - v0.6.62 Exact New-Trial 003 Amber_C Memory Write Target Resolution Blocked
 
 ```text
