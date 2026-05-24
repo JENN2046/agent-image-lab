@@ -1,11 +1,51 @@
 ---
 
+## Current Run State - v0.6.66 Codex Session Image Import Preflight Only
+
+```text
+phase: v0_6_66_codex_session_image_import_preflight_only
+source_phase: v0_6_65a_exact_file_commit_readiness_gate
+status: completed_validated_local_preflight_only
+mode: Green local preflight-only
+goal: define the preflight-only layer for selected route codex_session_image_import before any future import record contract
+route_plan: validate route identity, prompt package ref, contract refs, future output directory ref, future image path placeholder, review requirements, write boundaries, and blocked cases without reading images or writing outputs
+task_queue_current: v0_6_66_codex_session_image_import_preflight_only
+next_safe_task: v0_6_67_codex_session_image_import_record_contract
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+legacy_resume_guard_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+import_route_id: codex_session_image_import
+provider_id: codex_session_image
+import_mode: manual_session_import
+preflight_doc_ref: docs/vcp_integration/CODEX_SESSION_IMAGE_IMPORT_PREFLIGHT.md
+preflight_schema_ref: schemas/codex_session_image_import_preflight.schema.yaml
+preflight_fixture_ref: tests/schema_examples/codex_session_image_import_preflight.example.yaml
+preflight_fail_fixture_ref: tests/schema_examples/codex_session_image_import_preflight_fail.example.yaml
+validator_ref: scripts/validate_codex_session_image_import_preflight.js
+preflight_only: true
+image_generation_performed: false
+image_binary_read_performed: false
+output_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+VCPToolBox_runtime_performed: false
+VCPChat_runtime_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+secret_value_read_performed: false
+push_status: not_performed
+```
+
 ## Current Run State - v0.6.65a Exact File Commit Readiness Gate
 
 ```text
 phase: v0_6_65a_exact_file_commit_readiness_gate
 source_phase: v0_6_65_vcp_agent_generation_route_selection_gate
-status: completed_validated_commit_ready
+status: completed_validated_committed_local_not_pushed
 mode: Green local commit-readiness review only
 goal: freeze the v0.6.65 route-selection result as one exact-file local commit candidate without adding v0.6.66 preflight content
 route_plan: verify exact changed files; rerun validation; stage only the expected 8 files; verify cached diff; create guarded local commit if all checks pass; do not push
@@ -18,6 +58,8 @@ exact_expected_file_count: 8
 staged_files_allowed: exact_expected_files_only
 git_add_dot_allowed: false
 commit_message: docs: select vcp agent generation route
+local_commit_completed: yes
+commit_hash: 0d27673c6c14498eeea4327f22f73bb69c7a4b6b
 push_allowed: false
 push_status: not_performed
 provider_contact_performed: false

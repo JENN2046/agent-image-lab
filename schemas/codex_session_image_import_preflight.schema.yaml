@@ -1,0 +1,86 @@
+# codex_session_image_import_preflight.schema.yaml
+# Preflight-only packet for the selected codex_session_image_import route.
+# This schema is descriptive. It does not authorize image generation,
+# image-binary reads, output writes, archive writes, or memory writes.
+
+codex_session_image_import_preflight_v1:
+  version: v1
+  phase: v0_6_66_codex_session_image_import_preflight_only
+  source_phase: v0_6_65a_exact_file_commit_readiness_gate
+  preflight_only: true
+  execution_allowed_by_this_preflight: false
+
+  route_identity:
+    import_route_id: codex_session_image_import
+    provider_id: codex_session_image
+    import_mode: manual_session_import
+    selected_route_ref: docs/vcp_integration/VCP_AGENT_GENERATION_ROUTE_SELECTION_GATE.md
+
+  required_refs:
+    prompt_package_ref:
+      type: repository_relative_file
+      required: true
+      must_exist: true
+      required_prefix: prompts/image_generation/
+    generation_contract_ref:
+      type: repository_relative_file
+      exact_ref: docs/vcp_integration/VCP_AGENT_IMAGE_GENERATION_TOOL_CONTRACT_V1.md
+    route_selection_ref:
+      type: repository_relative_file
+      exact_ref: docs/vcp_integration/VCP_AGENT_GENERATION_ROUTE_SELECTION_GATE.md
+    response_contract_ref:
+      type: repository_relative_file
+      exact_ref: schemas/vcp_agent_image_generation_response.schema.yaml
+
+  future_import_target:
+    output_directory_ref:
+      type: repository_relative_directory
+      required_prefix: runs/real_generation/
+      future_directory_only: true
+    future_image_file_path:
+      type: repository_relative_future_placeholder_or_null
+      may_be_null: true
+      must_remain_project_relative_if_present: true
+      image_binary_read_allowed_now: false
+      existence_check_allowed_now: false
+
+  review_requirements:
+    review_handoff_required: true
+    human_review_required: true
+
+  write_boundaries:
+    accepted_samples_write_allowed: false
+    production_candidate_write_allowed: false
+    DailyNote_write_allowed: false
+    VCP_memory_write_allowed: false
+
+  forbidden_fields:
+    - private_absolute_path
+    - secret_value
+    - env_value
+    - image_binary
+    - raw_prompt_payload
+    - raw_provider_response
+
+  side_effects:
+    image_generation_performed: false
+    image_binary_read_performed: false
+    output_write_performed: false
+    provider_contact_performed: false
+    plugin_call_performed: false
+    api_call_performed: false
+    mcp_runtime_performed: false
+    VCPToolBox_runtime_performed: false
+    VCPChat_runtime_performed: false
+    DailyNote_write_performed: false
+    VCP_memory_write_performed: false
+    accepted_samples_write_performed: false
+    production_candidate_write_performed: false
+    env_read_performed: false
+    secret_read_performed: false
+    push_tag_release_deploy_performed: false
+
+  validation_intent:
+    valid_preflight_can_enter_next_phase: v0_6_67_codex_session_image_import_record_contract
+    valid_preflight_can_read_image_binary_now: false
+    valid_preflight_can_write_output_now: false

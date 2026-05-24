@@ -1,12 +1,28 @@
 ---
 
+- [x] ID: v0_6_66_codex_session_image_import_preflight_only
+      Lane: Green local preflight-only.
+      Status: completed_validated_local_preflight_only.
+      Source phase: v0_6_65a_exact_file_commit_readiness_gate.
+      Scope: Define Codex session image import preflight checks for selected_route=codex_session_image_import without image generation, image binary read, output write, provider/plugin/API/MCP/VCP runtime, DailyNote/VCP memory, accepted_samples, production_candidate, secrets, or push.
+      Import route: codex_session_image_import.
+      Provider id: codex_session_image.
+      Import mode: manual_session_import.
+      Doc ref: docs/vcp_integration/CODEX_SESSION_IMAGE_IMPORT_PREFLIGHT.md.
+      Schema ref: schemas/codex_session_image_import_preflight.schema.yaml.
+      Fixture refs: tests/schema_examples/codex_session_image_import_preflight.example.yaml; tests/schema_examples/codex_session_image_import_preflight_fail.example.yaml.
+      Validator ref: scripts/validate_codex_session_image_import_preflight.js.
+      Recommended next after validation: v0_6_67_codex_session_image_import_record_contract.
+
 - [x] ID: v0_6_65a_exact_file_commit_readiness_gate
       Lane: Green local commit-readiness review only.
-      Status: completed_validated_commit_ready.
+      Status: completed_validated_committed_local_not_pushed.
       Source phase: v0_6_65_vcp_agent_generation_route_selection_gate.
       Scope: Freeze v0.6.65 route selection as one exact 8-file local commit candidate without v0.6.66 preflight content.
       Expected files: .agent_board/CHECKPOINT.md; .agent_board/HANDOFF.md; .agent_board/RUN_STATE.md; .agent_board/TASK_QUEUE.md; docs/vcp_integration/VCP_AGENT_GENERATION_ROUTE_SELECTION_GATE.md; scripts/lib/governance_tooling_maintenance_slice.js; scripts/validate_vcp_agent_generation_route_selection_gate.js; tests/schema_examples/vcp_agent_generation_route_selection_gate.example.yaml.
       Commit message if validation passes: docs: select vcp agent generation route.
+      Local commit completed: yes.
+      Commit hash: 0d27673c6c14498eeea4327f22f73bb69c7a4b6b.
       Staging rule: exact-file staging only; git add . forbidden.
       Push: forbidden/not_performed.
       Forbidden: no v0.6.66 preflight content; no provider contact; no plugin call; no API call; no MCP runtime; no VCPToolBox runtime; no VCPChat runtime; no image generation; no image binary read; no output write; no DailyNote write; no VCP memory write; no accepted_samples write; no production_candidate write; no .env read; no secret read; no push/tag/release/deploy.
