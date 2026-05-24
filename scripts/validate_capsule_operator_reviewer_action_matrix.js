@@ -27,9 +27,9 @@ const guard = matrix.guard;
 
 add("phase", matrix.phase === "capsule_operator_reviewer_action_matrix_gate");
 add("matrix_status", matrix.matrix_status === "static_operator_action_matrix_ready");
-add("baseline_accepted_2", matrix.baseline.accepted === 2 && sourceReport.totals.accepted === 2);
+add("baseline_accepted_3", matrix.baseline.accepted === 3 && sourceReport.totals.accepted === 3);
 add("baseline_failure_2", matrix.baseline.failure === 2 && sourceReport.totals.failure === 2);
-add("baseline_total_4", matrix.baseline.total === 4 && sourceReport.totals.total === 4);
+add("baseline_total_5", matrix.baseline.total === 5 && sourceReport.totals.total === 5);
 add("all_source_catalog_labels_mapped", sourceLabels.every((label) => labels.includes(label)) && labels.length === sourceLabels.length);
 add("one_pass_action", actions.filter((action) => action.state === "pass").length === 1);
 add("four_fail_closed_actions", actions.filter((action) => action.state === "fail_closed").length === 4);

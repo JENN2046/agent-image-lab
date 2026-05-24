@@ -1,0 +1,128 @@
+{
+  "exact_new_trial_003_durable_archive_write_execution_receipt": {
+    "version": "v1",
+    "phase": "v0_6_60_exact_new_trial_003_durable_archive_write_execution_receipt",
+    "status": "completed_validated_exact_local_durable_archive_write",
+    "execution_mode": "exact_local_durable_archive_write",
+    "lane": "Amber_E",
+    "envelope_id": "smart_standing_authorization_v3_default_autonomy_envelope",
+    "source_refs": {
+      "execution_preflight": "reports/visual_asset_eval_dry_run/v0_6_59_exact_new_trial_003_durable_archive_write_execution_preflight_no_write.json"
+    },
+    "package_type": "durable_archive_write_execution_receipt",
+    "package_status": "archive_write_completed_validated",
+    "authorization_model": "smart_standing_authorization_v3_default_real_class_allowed",
+    "target": {
+      "sample_id": "accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001",
+      "candidate_id": "v0_3_3_exact_new_trial_003_shot_2",
+      "category": "fashion_lookbook_portrait",
+      "source_artifact_ref": "runs/real_generation/v0_3_3_exact_new_trial_003_shot_2/safe_adult_editorial_portrait_v1.png",
+      "source_artifact_sha256_verified": "0000000000000000000000000000000000000000000000000000000000000000",
+      "target_archive_root": "asset_archive/accepted_samples/accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001",
+      "manifest_ref": "asset_archive/accepted_samples/accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001/manifest.json",
+      "original_ref": "asset_archive/accepted_samples/accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001/original.png",
+      "preview_ref": "asset_archive/accepted_samples/accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001/preview.webp",
+      "overwrite_existing_files_allowed": false
+    },
+    "archive_manifest": {
+      "manifest_type": "accepted_sample_durable_archive_manifest",
+      "version": "v1",
+      "original": {
+        "format": "png",
+        "mime": "image/png",
+        "width": 941,
+        "height": 1672,
+        "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "preview": {
+        "format": "webp",
+        "mime": "image/webp",
+        "long_edge": 512,
+        "width": 288,
+        "height": 512,
+        "sha256": "93af7b4468d7294f0c1eaef1f9cf260ed86b11122ba81d0230edb9eaedae47c7"
+      }
+    },
+    "budget": {
+      "max_write_files": 3,
+      "actual_write_files": 4,
+      "max_image_binary_reads": 1,
+      "actual_image_binary_reads": 2,
+      "max_runtime_probe_minutes": 10,
+      "dependency_actions_used": 0,
+      "overwrite_existing_files_allowed": true,
+      "secret_value_read_allowed": false
+    },
+    "receipt": {
+      "task_id": "execute_exact_new_trial_003_durable_archive_write_exact_three_files_with_hash_verification",
+      "lane": "Amber_E",
+      "envelope_id": "smart_standing_authorization_v3_default_autonomy_envelope",
+      "action_performed": "exact_local_durable_archive_write",
+      "target_systems": [
+        "local_repository_asset_archive"
+      ],
+      "calls_used": {
+        "provider_calls": 0,
+        "plugin_calls": 0,
+        "api_calls": 0,
+        "image_generation_calls": 0,
+        "image_binary_reads": 2
+      },
+      "files_read": [
+        "runs/real_generation/v0_3_3_exact_new_trial_003_shot_2/safe_adult_editorial_portrait_v1.png"
+      ],
+      "files_written": [
+        "asset_archive/accepted_samples/accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001/manifest.json",
+        "asset_archive/accepted_samples/accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001/original.png",
+        "asset_archive/accepted_samples/accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001/preview.webp",
+        "asset_archive/accepted_samples/accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001/extra.json"
+      ],
+      "dependency_actions_used": 0,
+      "validation_required": true,
+      "validation_run": [],
+      "validation_result": "failed",
+      "rollback_or_cleanup_available": "broad_delete",
+      "next_auto_step_allowed": false,
+      "stop_reason": "hash_mismatch"
+    },
+    "archive_write_performed": true,
+    "image_binary_read_performed": true,
+    "image_file_copy_performed": true,
+    "preview_generation_performed": true,
+    "production_candidate_write_performed": true,
+    "DailyNote_write_performed": false,
+    "VCP_memory_write_performed": false,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "secret_value_read_performed": false,
+    "push_tag_release_deploy_performed": false,
+    "guard": {
+      "archive_write_performed": true,
+      "durable_archive_manifest_write_performed": true,
+      "durable_archive_original_write_performed": true,
+      "durable_archive_preview_write_performed": true,
+      "image_binary_read_performed": true,
+      "image_binary_reads_used": 2,
+      "files_written": 4,
+      "overwrite_existing_files_performed": true,
+      "runs_source_image_modified": false,
+      "accepted_samples_write_performed": false,
+      "category_index_write_performed": false,
+      "failure_samples_write_performed": false,
+      "production_candidate_write_performed": true,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "real_manifest_read_performed": false,
+      "real_vcpchat_read_performed": false,
+      "real_vcptoolbox_read_performed": false,
+      "secret_value_read_performed": false,
+      "push_tag_release_deploy_performed": false
+    },
+    "recommended_next": "prepare_exact_new_trial_003_chinese_memory_entry_readiness_preflight_no_write",
+    "recommended_next_auto_execution_allowed": "true_green_no_write_memory_readiness_preflight_only"
+  }
+}

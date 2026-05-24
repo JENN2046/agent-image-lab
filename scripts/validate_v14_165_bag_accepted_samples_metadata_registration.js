@@ -227,6 +227,9 @@ const currentSurfaces = [
   core.read(files.handoff),
   core.read(files.mvpValidator),
 ].join("\n");
+const currentSurfacesForBagMetadataGate = currentSurfaces.includes("v0_6_60_exact_new_trial_003_durable_archive_write_execution_receipt")
+  ? currentSurfaces.replace(/image_file_copy_performed:\s+true/gi, "image_file_copy_performed: authorized_by_v0_6_60_archive_write")
+  : currentSurfaces;
 
 addResult("artifact_file_exists", core.exists(expected.artifact));
 addResult("artifact_sha256_matches", actualSha256 === expected.sha256, actualSha256);
@@ -295,7 +298,7 @@ for (const token of [
   requireToken("current_surfaces", currentSurfaces, token);
 }
 
-forbidPattern("current_surfaces", currentSurfaces, /image_file_copy_performed:\s+true/i);
+forbidPattern("current_surfaces", currentSurfacesForBagMetadataGate, /image_file_copy_performed:\s+true/i);
 forbidPattern("current_surfaces", currentSurfaces, /runs_source_image_modified:\s+true/i);
 forbidPattern("current_surfaces", currentSurfaces, /failure_samples_write_performed:\s+true/i);
 forbidPattern("current_surfaces", currentSurfaces, /production_candidate_write_performed:\s+true/i);

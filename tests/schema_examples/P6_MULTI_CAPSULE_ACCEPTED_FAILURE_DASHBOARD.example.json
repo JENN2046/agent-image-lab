@@ -6,12 +6,13 @@
     "source_static_app_ref": "review_console/static_prototype/app.js#multiCapsuleDashboardState",
     "execution_mode": "review_console_static_multi_capsule_dashboard_only",
     "draft_output_key": "multi_capsule_dashboard_state",
-    "accepted_capsule_count": 2,
+    "accepted_capsule_count": 3,
     "failure_capsule_count": 2,
-    "total_capsule_count": 4,
+    "total_capsule_count": 5,
     "accepted_sample_ids": [
       "accepted_french_summer_rattan_bucket_bag_001",
-      "accepted_product_still_life_tennis_wallet_001"
+      "accepted_product_still_life_tennis_wallet_001",
+      "accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001"
     ],
     "failure_sample_ids": [
       "failure_french_summer_rattan_bag_v7_29_001",
@@ -21,7 +22,8 @@
       "passed"
     ],
     "accepted_registry_statuses": [
-      "registry_driven_preview_capsules_verified"
+      "registry_driven_preview_capsules_verified",
+      "durable_archive_evidence_verified"
     ],
     "failure_registry_statuses": [
       "failure_sample_capsules_verified"
@@ -55,6 +57,20 @@
           "asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/import_record.json",
           "asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/review_record.json",
           "asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/approval_record.json"
+        ],
+        "passed": true
+      },
+      {
+        "lane": "accepted",
+        "sample_id": "accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001",
+        "registry_validator_status": "durable_archive_evidence_verified",
+        "clone_portable_validation_status": "passed",
+        "manifest_ref": "asset_archive/accepted_samples/accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001/manifest.json",
+        "preview_ref": "asset_archive/accepted_samples/accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001/preview.webp",
+        "chain_refs": [
+          "reports/visual_asset_eval_dry_run/v0_6_56_exact_new_trial_003_accepted_samples_metadata_registration.json",
+          "reports/visual_asset_eval_dry_run/v0_6_60_exact_new_trial_003_durable_archive_write_execution_receipt.json",
+          "reports/human_approval_evidence/v0_3_3_exact_new_trial_003_shot_2_user_submitted_formal_human_approval_evidence.json"
         ],
         "passed": true
       },
@@ -141,8 +157,8 @@
     ],
     "future_registry_report_shape": {
       "report_version": "accepted_failure_capsule_report_v1",
-      "total": 4,
-      "passed": 4,
+      "total": 5,
+      "passed": 5,
       "failed": 0,
       "fields": [
         "lane",

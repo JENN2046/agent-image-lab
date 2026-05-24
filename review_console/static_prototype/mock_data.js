@@ -129,6 +129,26 @@ window.REVIEW_CONSOLE_MOCK = {
       clone_portable_validation_status: "passed",
       source_original_required_for_portable_validation: false,
       base64_evidence_used: false
+    },
+    {
+      evidence_version: "v1",
+      evidence_source: "asset_archive_accepted_samples_durable_archive",
+      sample_id: "accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001",
+      capsule_root: "asset_archive/accepted_samples/accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001/",
+      manifest_ref: "asset_archive/accepted_samples/accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001/manifest.json",
+      preview_ref: "asset_archive/accepted_samples/accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001/preview.webp",
+      preview_format: "webp",
+      preview_long_edge: 512,
+      preview_dimensions: "288x512",
+      preview_sha256: "93af7b4468d7294f0c1eaef1f9cf260ed86b11122ba81d0230edb9eaedae47c7",
+      import_record_ref: "reports/visual_asset_eval_dry_run/v0_6_56_exact_new_trial_003_accepted_samples_metadata_registration.json",
+      review_record_ref: "reports/visual_asset_eval_dry_run/v0_6_60_exact_new_trial_003_durable_archive_write_execution_receipt.json",
+      approval_record_ref: "reports/human_approval_evidence/v0_3_3_exact_new_trial_003_shot_2_user_submitted_formal_human_approval_evidence.json",
+      validation_status: "durable_archive_evidence_verified",
+      registry_validator_status: "durable_archive_evidence_verified",
+      clone_portable_validation_status: "passed",
+      source_original_required_for_portable_validation: false,
+      base64_evidence_used: false
     }
   ],
   full_asset_archive_baseline_state_seed: {
@@ -639,10 +659,10 @@ window.REVIEW_CONSOLE_MOCK = {
     "overall_passed": true
   },
   "totals": {
-    "accepted": 2,
+    "accepted": 3,
     "failure": 2,
-    "total": 4,
-    "passed": 4,
+    "total": 5,
+    "passed": 5,
     "failed": 0
   },
   "samples": [
@@ -658,6 +678,14 @@ window.REVIEW_CONSOLE_MOCK = {
       "lane": "accepted",
       "sample_id": "accepted_product_still_life_tennis_wallet_001",
       "manifest_validation_status": "capsule_manifest_contract_verified",
+      "relation_validation_status": "not_applicable",
+      "guard_validation_status": "passed",
+      "reviewer_action": "accept_contract_baseline"
+    },
+    {
+      "lane": "accepted",
+      "sample_id": "accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001",
+      "manifest_validation_status": "durable_archive_manifest_contract_verified",
       "relation_validation_status": "not_applicable",
       "guard_validation_status": "passed",
       "reviewer_action": "accept_contract_baseline"
@@ -735,9 +763,9 @@ window.REVIEW_CONSOLE_MOCK = {
   "source_matrix_ref": "tests/schema_examples/CAPSULE_OPERATOR_REVIEWER_ACTION_MATRIX.example.json",
   "draft_output_key": "operator_reviewer_checklist_state",
   "baseline": {
-    "accepted": 2,
+    "accepted": 3,
     "failure": 2,
-    "total": 4
+    "total": 5
   },
   "checklist_status": "static_operator_checklist_ready",
   "checklist_items": [

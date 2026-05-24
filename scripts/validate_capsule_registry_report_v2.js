@@ -30,7 +30,8 @@ const expected = {
   reportVersion: "accepted_failure_capsule_registry_report_v2",
   acceptedIds: [
     "accepted_french_summer_rattan_bucket_bag_001",
-    "accepted_product_still_life_tennis_wallet_001"
+    "accepted_product_still_life_tennis_wallet_001",
+    "accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001"
   ],
   failureIds: [
     "failure_french_summer_rattan_bag_v7_29_001",
@@ -82,6 +83,7 @@ function readAcceptedSample(row, manifestById = new Map()) {
   const sampleRoot = `asset_archive/accepted_samples/${row.sample_id}`;
   const manifest = core.parseJsonIfExists(rel(sampleRoot, "manifest.json")) || {};
   const manifestContract = manifestById.get(row.sample_id) || {};
+  const isDurableArchive = manifest.manifest_type === "accepted_sample_durable_archive_manifest";
   return {
     lane: "accepted",
     sample_id: row.sample_id,
@@ -97,11 +99,16 @@ function readAcceptedSample(row, manifestById = new Map()) {
     preview_ref: rel(sampleRoot, manifest.artifact?.preview?.path || "preview.webp"),
     preview_sha256: row.preview_sha256,
     preview_long_edge: row.preview_long_edge,
-    chain_refs: [
-      rel(sampleRoot, manifest.chain?.import_record || "import_record.json"),
-      rel(sampleRoot, manifest.chain?.review_record || "review_record.json"),
-      rel(sampleRoot, manifest.chain?.approval_record || "approval_record.json")
-    ],
+    chain_refs: isDurableArchive
+      ? [
+        rel(sampleRoot, manifest.artifact?.original?.path || "original.png"),
+        rel(sampleRoot, manifest.artifact?.preview?.path || "preview.webp")
+      ]
+      : [
+        rel(sampleRoot, manifest.chain?.import_record || "import_record.json"),
+        rel(sampleRoot, manifest.chain?.review_record || "review_record.json"),
+        rel(sampleRoot, manifest.chain?.approval_record || "approval_record.json")
+      ],
     resolved_by_accepted_sample: null,
     failure_tags: [],
     failure_classes: row.failure_classes || [],
@@ -286,7 +293,7 @@ function evaluate(report, fixture, currentSurfaces) {
   add("report_passed", report.passed === true);
   add("phase_matches", report.phase === expected.phase);
   add("report_version_matches", report.report_version === expected.reportVersion);
-  add("accepted_count_two", report.totals.accepted === 2);
+  add("accepted_count_matches", report.totals.accepted === expected.acceptedIds.length);
   add("failure_count_matches", report.totals.failure === expected.failureIds.length);
   add("total_count_matches", report.totals.total === expected.acceptedIds.length + expected.failureIds.length);
   add("all_samples_passed", report.totals.passed === report.totals.total && report.totals.failed === 0);
@@ -332,7 +339,7 @@ function evaluate(report, fixture, currentSurfaces) {
     report.guard.push_tag_release_deploy_performed === false);
   add("fixture_declares_same_phase", fixture.phase === expected.phase);
   add("fixture_declares_same_report_version", fixture.report_version === expected.reportVersion);
-  add("fixture_counts_match", fixture.totals.accepted === 2 && fixture.totals.failure === 2 && fixture.totals.total === 4);
+  add("fixture_counts_match", fixture.totals.accepted === expected.acceptedIds.length && fixture.totals.failure === expected.failureIds.length && fixture.totals.total === expected.acceptedIds.length + expected.failureIds.length);
   add("current_surfaces_reference_report", currentSurfaces.includes("p6b_capsule_registry_report_v2") &&
     currentSurfaces.includes("scripts/validate_capsule_registry_report_v2.js") &&
     currentSurfaces.includes("accepted_failure_capsule_registry_report_v2"));

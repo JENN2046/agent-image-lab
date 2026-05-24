@@ -45,11 +45,11 @@ const guard = snapshot.guard;
 
 add("draft_output_key", fixture.draft_output_key === snapshot.draft_output_key && snapshot.draft_output_key === "unified_capsule_contract_report");
 add("mock_report_matches_checked_in_fixture", sameJson(mockReport, fixtureReport));
-add("totals_total_4", mockReport.totals.total === 4);
-add("totals_accepted_2", mockReport.totals.accepted === 2);
+add("totals_total_5", mockReport.totals.total === 5);
+add("totals_accepted_3", mockReport.totals.accepted === 3);
 add("totals_failure_2", mockReport.totals.failure === 2);
-add("samples_count_4", mockReport.samples.length === 4);
-add("snapshot_row_count_4", renderSurface.row_count === 4);
+add("samples_count_5", mockReport.samples.length === 5);
+add("snapshot_row_count_5", renderSurface.row_count === 5);
 add("sample_ids_match_snapshot", sameJson(mockReport.samples.map((sample) => sample.sample_id), renderSurface.sample_ids));
 add("all_samples_have_fixture_shape_reviewer_action", mockReport.samples.every((sample) => typeof sample.reviewer_action === "string" && sample.reviewer_action === renderSurface.pass_reviewer_action));
 add("app_renders_fixture_reviewer_action", app.includes("sample.reviewer_action || sample.reviewer_action_cn"));

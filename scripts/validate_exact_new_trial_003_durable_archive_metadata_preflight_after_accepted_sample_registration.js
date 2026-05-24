@@ -17,6 +17,7 @@ const files = {
   acceptedRegistrationReport: "reports/visual_asset_eval_dry_run/v0_6_56_exact_new_trial_003_accepted_samples_metadata_registration.json",
   registry: "accepted_samples/accepted_sample_registry.yaml",
   categoryIndex: "accepted_samples/categories/fashion_lookbook_portrait.yaml",
+  postWriteReceipt: "reports/visual_asset_eval_dry_run/v0_6_60_exact_new_trial_003_durable_archive_write_execution_receipt.json",
   mvpValidator: "scripts/validate_mvp.ps1"
 };
 
@@ -39,6 +40,7 @@ const expected = {
 expected.manifestPath = `${expected.archiveRoot}/manifest.json`;
 expected.originalPath = `${expected.archiveRoot}/original.png`;
 expected.previewPath = `${expected.archiveRoot}/preview.webp`;
+expected.allowedFutureWritePaths = [expected.manifestPath, expected.originalPath, expected.previewPath];
 
 function assert(condition, message) {
   if (!condition) throw new Error(message);
@@ -82,9 +84,28 @@ function assertNoRawLocalDrivePath(value, context) {
 }
 
 function assertTargetArchivePathsDoNotExist(record) {
+  if (exactArchiveWriteCompleted(record.target?.exact_future_write_paths || [])) return;
   for (const relativePath of record.target.exact_future_write_paths || []) {
     assert(!exists(relativePath), `Future archive path already exists without overwrite authorization: ${relativePath}`);
   }
+}
+
+function exactArchiveWriteCompleted(candidatePaths) {
+  if (!exists(files.postWriteReceipt)) return false;
+  const receipt = readJson(files.postWriteReceipt).exact_new_trial_003_durable_archive_write_execution_receipt;
+  const written = receipt?.receipt?.files_written || [];
+  return (
+    receipt?.phase === "v0_6_60_exact_new_trial_003_durable_archive_write_execution_receipt" &&
+    receipt?.package_status === "archive_write_completed_validated" &&
+    receipt?.archive_write_performed === true &&
+    receipt?.budget?.actual_write_files === 3 &&
+    Array.isArray(candidatePaths) &&
+    candidatePaths.length === expected.allowedFutureWritePaths.length &&
+    expected.allowedFutureWritePaths.every((item) => candidatePaths.includes(item)) &&
+    written.length === expected.allowedFutureWritePaths.length &&
+    expected.allowedFutureWritePaths.every((item) => written.includes(item)) &&
+    expected.allowedFutureWritePaths.every((item) => exists(item))
+  );
 }
 
 function evaluate(record) {

@@ -18,10 +18,10 @@
       "overall_passed": true
     },
     "totals": {
-      "accepted": 2,
+      "accepted": 3,
       "failure": 2,
-      "total": 4,
-      "passed": 4,
+      "total": 5,
+      "passed": 5,
       "failed": 0
     },
     "samples": [
@@ -37,6 +37,14 @@
         "lane": "accepted",
         "sample_id": "accepted_product_still_life_tennis_wallet_001",
         "manifest_validation_status": "capsule_manifest_contract_verified",
+        "relation_validation_status": "not_applicable",
+        "guard_validation_status": "passed",
+        "reviewer_action": "accept_contract_baseline"
+      },
+      {
+        "lane": "accepted",
+        "sample_id": "accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001",
+        "manifest_validation_status": "durable_archive_manifest_contract_verified",
         "relation_validation_status": "not_applicable",
         "guard_validation_status": "passed",
         "reviewer_action": "accept_contract_baseline"

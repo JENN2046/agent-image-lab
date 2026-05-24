@@ -27,7 +27,8 @@ const expected = {
   phase: "p6_multi_capsule_accepted_failure_dashboard_productization",
   acceptedIds: [
     "accepted_french_summer_rattan_bucket_bag_001",
-    "accepted_product_still_life_tennis_wallet_001"
+    "accepted_product_still_life_tennis_wallet_001",
+    "accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001"
   ],
   failureIds: [
     "failure_french_summer_rattan_bag_v7_29_001",
@@ -86,15 +87,15 @@ function evaluate(snapshot) {
     snapshot.draft_output_key === "multi_capsule_dashboard_state";
 
   const countOk =
-    snapshot.accepted_capsule_count === 2 &&
+    snapshot.accepted_capsule_count === 3 &&
     snapshot.failure_capsule_count === 2 &&
-    snapshot.total_capsule_count === 4 &&
+    snapshot.total_capsule_count === 5 &&
     includesAll(snapshot.accepted_sample_ids, expected.acceptedIds) &&
     includesAll(snapshot.failure_sample_ids, expected.failureIds);
 
   const validationOk =
     includesAll(snapshot.clone_portable_statuses, ["passed"]) &&
-    includesAll(snapshot.accepted_registry_statuses, ["registry_driven_preview_capsules_verified"]) &&
+    includesAll(snapshot.accepted_registry_statuses, ["registry_driven_preview_capsules_verified", "durable_archive_evidence_verified"]) &&
     includesAll(snapshot.failure_registry_statuses, ["failure_sample_capsules_verified"]) &&
     snapshot.old_runs_source_required_for_portable_validation === false &&
     snapshot.old_runs_source_as_long_term_evidence === false &&
@@ -112,12 +113,17 @@ function evaluate(snapshot) {
         relation.failure_is_never_production === true;
     });
 
+  const acceptedPassingStatuses = new Set([
+    "registry_driven_preview_capsules_verified",
+    "durable_archive_evidence_verified"
+  ]);
+
   const perSampleOk =
-    perSample.length === 4 &&
+    perSample.length === 5 &&
     expected.acceptedIds.every((sampleId) => perSample.some((row) =>
       row.lane === "accepted" &&
       row.sample_id === sampleId &&
-      row.registry_validator_status === "registry_driven_preview_capsules_verified" &&
+      acceptedPassingStatuses.has(row.registry_validator_status) &&
       row.clone_portable_validation_status === "passed" &&
       row.passed === true
     )) &&
@@ -133,8 +139,8 @@ function evaluate(snapshot) {
 
   const reportShapeOk =
     reportShape.report_version === expected.reportVersion &&
-    reportShape.total === 4 &&
-    reportShape.passed === 4 &&
+    reportShape.total === 5 &&
+    reportShape.passed === 5 &&
     reportShape.failed === 0 &&
     includesAll(reportShape.fields, [
       "lane",

@@ -467,10 +467,10 @@ function Invoke-CapsuleProductCoreValidation {
     if ($multiCapsuleDashboard.passed -ne $true -or $multiCapsuleDashboard.phase -ne 'p6_multi_capsule_accepted_failure_dashboard_productization') {
       & $AddFailure "Multi-capsule dashboard validation must pass"
     }
-    if ($multiCapsuleDashboard.accepted_capsule_count -ne 2 -or $multiCapsuleDashboard.failure_capsule_count -ne 2 -or $multiCapsuleDashboard.total_capsule_count -ne 4) {
-      & $AddFailure "Multi-capsule dashboard must preserve accepted=2, failure=2, total=4"
+    if ($multiCapsuleDashboard.accepted_capsule_count -ne 3 -or $multiCapsuleDashboard.failure_capsule_count -ne 2 -or $multiCapsuleDashboard.total_capsule_count -ne 5) {
+      & $AddFailure "Multi-capsule dashboard must preserve accepted=3, failure=2, total=5"
     }
-    if ($multiCapsuleDashboard.linked_relation_count -lt 2 -or $multiCapsuleDashboard.report_version -ne 'accepted_failure_capsule_report_v1' -or $multiCapsuleDashboard.report_passed -ne 4 -or $multiCapsuleDashboard.report_failed -ne 0) {
+    if ($multiCapsuleDashboard.linked_relation_count -lt 2 -or $multiCapsuleDashboard.report_version -ne 'accepted_failure_capsule_report_v1' -or $multiCapsuleDashboard.report_passed -ne 5 -or $multiCapsuleDashboard.report_failed -ne 0) {
       & $AddFailure "Multi-capsule dashboard must expose linked accepted/failure relation and passing unified report shape"
     }
     if ($multiCapsuleDashboard.old_runs_source_required_for_portable_validation -ne $false -or $multiCapsuleDashboard.directory_as_registry_currently_sufficient -ne $true) {
@@ -492,8 +492,8 @@ function Invoke-CapsuleProductCoreValidation {
     if ($capsuleManifestContract.passed -ne $true -or $capsuleManifestContract.status -ne 'capsule_manifest_contract_verified' -or $capsuleManifestContract.schema_runtime_binding_status -ne 'schema_runtime_binding_verified') {
       & $AddFailure "Capsule manifest contract must pass and verify schema/runtime binding"
     }
-    if ($capsuleManifestContract.totals.accepted -ne 2 -or $capsuleManifestContract.totals.failure -ne 2 -or $capsuleManifestContract.totals.total -ne 4) {
-      & $AddFailure "Capsule manifest contract must preserve accepted=2, failure=2, total=4"
+    if ($capsuleManifestContract.totals.accepted -ne 3 -or $capsuleManifestContract.totals.failure -ne 2 -or $capsuleManifestContract.totals.total -ne 5) {
+      & $AddFailure "Capsule manifest contract must preserve accepted=3, failure=2, total=5"
     }
     if ($capsuleManifestContract.guard.preview_creation_or_copy_performed -ne $false -or $capsuleManifestContract.guard.image_generation_performed -ne $false -or $capsuleManifestContract.guard.provider_contact_performed -ne $false -or $capsuleManifestContract.guard.plugin_call_performed -ne $false -or $capsuleManifestContract.guard.api_call_performed -ne $false -or $capsuleManifestContract.guard.DailyNote_write_performed -ne $false -or $capsuleManifestContract.guard.VCP_memory_write_performed -ne $false -or $capsuleManifestContract.guard.runtime_execution_performed -ne $false -or $capsuleManifestContract.guard.real_manifest_read_performed -ne $false -or $capsuleManifestContract.guard.real_vcpchat_read_performed -ne $false -or $capsuleManifestContract.guard.real_vcptoolbox_read_performed -ne $false) {
       & $AddFailure "Capsule manifest contract validation must remain local-only with no external, memory, runtime, image, or source-read actions"
@@ -520,8 +520,8 @@ function Invoke-CapsuleProductCoreValidation {
     if ($capsuleRegistryReportV2.passed -ne $true -or $capsuleRegistryReportV2.phase -ne 'p6b_capsule_registry_report_v2' -or $capsuleRegistryReportV2.report_version -ne 'accepted_failure_capsule_registry_report_v2') {
       & $AddFailure "Capsule registry report v2 must pass with the expected phase and report version"
     }
-    if ($capsuleRegistryReportV2.totals.accepted -ne 2 -or $capsuleRegistryReportV2.totals.failure -ne 2 -or $capsuleRegistryReportV2.totals.total -ne 4 -or $capsuleRegistryReportV2.totals.passed -ne 4 -or $capsuleRegistryReportV2.totals.failed -ne 0) {
-      & $AddFailure "Capsule registry report v2 must preserve accepted=2, failure=2, total=4, passed=4, failed=0"
+    if ($capsuleRegistryReportV2.totals.accepted -ne 3 -or $capsuleRegistryReportV2.totals.failure -ne 2 -or $capsuleRegistryReportV2.totals.total -ne 5 -or $capsuleRegistryReportV2.totals.passed -ne 5 -or $capsuleRegistryReportV2.totals.failed -ne 0) {
+      & $AddFailure "Capsule registry report v2 must preserve accepted=3, failure=2, total=5, passed=5, failed=0"
     }
     if ($capsuleRegistryReportV2.resolved_by_links.Count -lt 2 -or $capsuleRegistryReportV2.failure_class_summary.missing_resolved_by_link -ne 0 -or $capsuleRegistryReportV2.failure_class_summary.production_or_memory_guard_violation -ne 0) {
       & $AddFailure "Capsule registry report v2 must preserve resolved-by links and clean failure guard summary"
@@ -563,8 +563,8 @@ function Invoke-CapsuleProductCoreValidation {
     if ($capsuleStaticProductSmokeFixture.passed -ne $true -or $capsuleStaticProductSmokeFixture.status -ne 'capsule_static_product_smoke_fixture_verified') {
       & $AddFailure "Capsule static product smoke fixture must pass"
     }
-    if ($capsuleStaticProductSmokeFixture.accepted_count -ne 2 -or $capsuleStaticProductSmokeFixture.failure_count -ne 2 -or $capsuleStaticProductSmokeFixture.total_count -ne 4) {
-      & $AddFailure "Capsule static product smoke fixture must preserve accepted=2, failure=2, total=4"
+    if ($capsuleStaticProductSmokeFixture.accepted_count -ne 3 -or $capsuleStaticProductSmokeFixture.failure_count -ne 2 -or $capsuleStaticProductSmokeFixture.total_count -ne 5) {
+      & $AddFailure "Capsule static product smoke fixture must preserve accepted=3, failure=2, total=5"
     }
     if ($capsuleStaticProductSmokeFixture.browser_runtime_validator_executed -ne $false -or $capsuleStaticProductSmokeFixture.asset_archive_ui_read_performed -ne $false -or $capsuleStaticProductSmokeFixture.preview_loaded_or_rendered -ne $false -or $capsuleStaticProductSmokeFixture.provider_contact_performed -ne $false -or $capsuleStaticProductSmokeFixture.plugin_call_performed -ne $false -or $capsuleStaticProductSmokeFixture.api_call_performed -ne $false -or $capsuleStaticProductSmokeFixture.image_generation_performed -ne $false -or $capsuleStaticProductSmokeFixture.DailyNote_write_performed -ne $false -or $capsuleStaticProductSmokeFixture.VCP_memory_write_performed -ne $false -or $capsuleStaticProductSmokeFixture.production_candidate_write_performed -ne $false) {
       & $AddFailure "Capsule static product smoke fixture must remain static-only with no browser runtime, asset UI read, preview load, external, memory, or production actions"
@@ -578,8 +578,8 @@ function Invoke-CapsuleProductCoreValidation {
     if ($capsuleStaticProductSmokeReviewConsoleSnapshot.passed -ne $true -or $capsuleStaticProductSmokeReviewConsoleSnapshot.status -ne 'capsule_static_product_smoke_review_console_snapshot_verified') {
       & $AddFailure "Capsule static product smoke Review Console snapshot must pass"
     }
-    if ($capsuleStaticProductSmokeReviewConsoleSnapshot.totals.accepted -ne 2 -or $capsuleStaticProductSmokeReviewConsoleSnapshot.totals.failure -ne 2 -or $capsuleStaticProductSmokeReviewConsoleSnapshot.totals.total -ne 4) {
-      & $AddFailure "Capsule static product smoke Review Console snapshot must preserve accepted=2, failure=2, total=4"
+    if ($capsuleStaticProductSmokeReviewConsoleSnapshot.totals.accepted -ne 3 -or $capsuleStaticProductSmokeReviewConsoleSnapshot.totals.failure -ne 2 -or $capsuleStaticProductSmokeReviewConsoleSnapshot.totals.total -ne 5) {
+      & $AddFailure "Capsule static product smoke Review Console snapshot must preserve accepted=3, failure=2, total=5"
     }
     if ($capsuleStaticProductSmokeReviewConsoleSnapshot.browser_runtime_validator_executed -ne $false -or $capsuleStaticProductSmokeReviewConsoleSnapshot.asset_archive_ui_read_performed -ne $false -or $capsuleStaticProductSmokeReviewConsoleSnapshot.preview_loaded_or_rendered -ne $false) {
       & $AddFailure "Capsule static product smoke Review Console snapshot must remain static-only with no browser runtime, asset UI read, or preview load"
@@ -597,8 +597,8 @@ function Invoke-CapsuleProductCoreValidation {
     if ($capsuleStaticOperatorChecklistUiMapping.passed -ne $true -or $capsuleStaticOperatorChecklistUiMapping.status -ne 'capsule_static_operator_checklist_ui_mapping_verified') {
       & $AddFailure "Capsule static operator checklist UI mapping must pass"
     }
-    if ($capsuleStaticOperatorChecklistUiMapping.accepted_count -ne 2 -or $capsuleStaticOperatorChecklistUiMapping.failure_count -ne 2 -or $capsuleStaticOperatorChecklistUiMapping.total_count -ne 4) {
-      & $AddFailure "Capsule static operator checklist UI mapping must preserve accepted=2, failure=2, total=4"
+    if ($capsuleStaticOperatorChecklistUiMapping.accepted_count -ne 3 -or $capsuleStaticOperatorChecklistUiMapping.failure_count -ne 2 -or $capsuleStaticOperatorChecklistUiMapping.total_count -ne 5) {
+      & $AddFailure "Capsule static operator checklist UI mapping must preserve accepted=3, failure=2, total=5"
     }
     if ($capsuleStaticOperatorChecklistUiMapping.executable_ui_buttons_created -ne $false -or $capsuleStaticOperatorChecklistUiMapping.browser_validator_executed -ne $false -or $capsuleStaticOperatorChecklistUiMapping.runtime_execution_performed -ne $false -or $capsuleStaticOperatorChecklistUiMapping.asset_archive_ui_read_performed -ne $false -or $capsuleStaticOperatorChecklistUiMapping.preview_loaded_or_rendered -ne $false -or $capsuleStaticOperatorChecklistUiMapping.provider_contact_performed -ne $false -or $capsuleStaticOperatorChecklistUiMapping.plugin_call_performed -ne $false -or $capsuleStaticOperatorChecklistUiMapping.api_call_performed -ne $false -or $capsuleStaticOperatorChecklistUiMapping.image_generation_performed -ne $false -or $capsuleStaticOperatorChecklistUiMapping.DailyNote_write_performed -ne $false -or $capsuleStaticOperatorChecklistUiMapping.VCP_memory_write_performed -ne $false -or $capsuleStaticOperatorChecklistUiMapping.production_candidate_write_performed -ne $false) {
       & $AddFailure "Capsule static operator checklist UI mapping must remain static-only with no executable UI, runtime, asset UI read, preview load, external, memory, or production actions"
@@ -612,8 +612,8 @@ function Invoke-CapsuleProductCoreValidation {
     if ($capsuleOperatorReviewerActionMatrix.passed -ne $true -or $capsuleOperatorReviewerActionMatrix.status -ne 'capsule_operator_reviewer_action_matrix_verified') {
       & $AddFailure "Capsule operator reviewer action matrix must pass"
     }
-    if ($capsuleOperatorReviewerActionMatrix.accepted_count -ne 2 -or $capsuleOperatorReviewerActionMatrix.failure_count -ne 2 -or $capsuleOperatorReviewerActionMatrix.total_count -ne 4) {
-      & $AddFailure "Capsule operator reviewer action matrix must preserve accepted=2, failure=2, total=4"
+    if ($capsuleOperatorReviewerActionMatrix.accepted_count -ne 3 -or $capsuleOperatorReviewerActionMatrix.failure_count -ne 2 -or $capsuleOperatorReviewerActionMatrix.total_count -ne 5) {
+      & $AddFailure "Capsule operator reviewer action matrix must preserve accepted=3, failure=2, total=5"
     }
     if ($capsuleOperatorReviewerActionMatrix.runtime_execution_performed -ne $false -or $capsuleOperatorReviewerActionMatrix.asset_archive_ui_read_performed -ne $false -or $capsuleOperatorReviewerActionMatrix.preview_loaded_or_rendered -ne $false -or $capsuleOperatorReviewerActionMatrix.provider_contact_performed -ne $false -or $capsuleOperatorReviewerActionMatrix.plugin_call_performed -ne $false -or $capsuleOperatorReviewerActionMatrix.api_call_performed -ne $false -or $capsuleOperatorReviewerActionMatrix.image_generation_performed -ne $false -or $capsuleOperatorReviewerActionMatrix.DailyNote_write_performed -ne $false -or $capsuleOperatorReviewerActionMatrix.VCP_memory_write_performed -ne $false -or $capsuleOperatorReviewerActionMatrix.production_candidate_write_performed -ne $false) {
       & $AddFailure "Capsule operator reviewer action matrix must remain static-only with no runtime, asset UI read, preview load, external, memory, or production actions"
@@ -627,8 +627,8 @@ function Invoke-CapsuleProductCoreValidation {
     if ($reviewConsoleRegistryReportV2.passed -ne $true -or $reviewConsoleRegistryReportV2.phase -ne 'p6c_review_console_registry_report_v2_state' -or $reviewConsoleRegistryReportV2.draft_output_key -ne 'registry_report_v2_state') {
       & $AddFailure "Review Console registry report v2 state must pass with expected phase and draft output key"
     }
-    if ($reviewConsoleRegistryReportV2.accepted_count -ne 2 -or $reviewConsoleRegistryReportV2.failure_count -ne 2 -or $reviewConsoleRegistryReportV2.total_count -ne 4 -or $reviewConsoleRegistryReportV2.passed_count -ne 4 -or $reviewConsoleRegistryReportV2.failed_count_total -ne 0) {
-      & $AddFailure "Review Console registry report v2 state must preserve accepted=2, failure=2, total=4, passed=4, failed=0"
+    if ($reviewConsoleRegistryReportV2.accepted_count -ne 3 -or $reviewConsoleRegistryReportV2.failure_count -ne 2 -or $reviewConsoleRegistryReportV2.total_count -ne 5 -or $reviewConsoleRegistryReportV2.passed_count -ne 5 -or $reviewConsoleRegistryReportV2.failed_count_total -ne 0) {
+      & $AddFailure "Review Console registry report v2 state must preserve accepted=3, failure=2, total=5, passed=5, failed=0"
     }
     if ($reviewConsoleRegistryReportV2.relation_count -lt 2 -or $reviewConsoleRegistryReportV2.old_runs_source_required_for_portable_validation -ne $false) {
       & $AddFailure "Review Console registry report v2 state must expose relation and avoid old runs dependency"

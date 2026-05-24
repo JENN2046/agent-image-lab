@@ -4,9 +4,9 @@
   "source_fixture_ref": "tests/schema_examples/CAPSULE_STATIC_PRODUCT_SMOKE_UNIFIED_CONTRACT.example.json",
   "source_contract_key": "unified_capsule_contract_report.reviewer_action_catalog",
   "baseline": {
-    "accepted": 2,
+    "accepted": 3,
     "failure": 2,
-    "total": 4
+    "total": 5
   },
   "matrix_status": "static_operator_action_matrix_ready",
   "operator_actions": [

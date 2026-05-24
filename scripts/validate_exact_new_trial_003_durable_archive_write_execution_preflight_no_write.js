@@ -5,13 +5,14 @@ const fs = require("node:fs");
 const path = require("node:path");
 
 const root = path.resolve(__dirname, "..");
-const key = "exact_new_trial_003_durable_archive_write_authorization_package_after_metadata_preflight";
+const key = "exact_new_trial_003_durable_archive_write_execution_preflight_no_write";
 
 const files = {
-  phaseRecord: "docs/V0_6_58_EXACT_NEW_TRIAL_003_DURABLE_ARCHIVE_WRITE_AUTHORIZATION_PACKAGE_AFTER_METADATA_PREFLIGHT.md",
-  report: "reports/visual_asset_eval_dry_run/v0_6_58_exact_new_trial_003_durable_archive_write_authorization_package_after_metadata_preflight.json",
-  passFixture: "tests/schema_examples/exact_new_trial_003_durable_archive_write_authorization_package_after_metadata_preflight.example.json",
-  failFixture: "tests/schema_examples/exact_new_trial_003_durable_archive_write_authorization_package_after_metadata_preflight_fail.example.json",
+  phaseRecord: "docs/V0_6_59_EXACT_NEW_TRIAL_003_DURABLE_ARCHIVE_WRITE_EXECUTION_PREFLIGHT_NO_WRITE.md",
+  report: "reports/visual_asset_eval_dry_run/v0_6_59_exact_new_trial_003_durable_archive_write_execution_preflight_no_write.json",
+  passFixture: "tests/schema_examples/exact_new_trial_003_durable_archive_write_execution_preflight_no_write.example.json",
+  failFixture: "tests/schema_examples/exact_new_trial_003_durable_archive_write_execution_preflight_no_write_fail.example.json",
+  authorizationPackage: "reports/visual_asset_eval_dry_run/v0_6_58_exact_new_trial_003_durable_archive_write_authorization_package_after_metadata_preflight.json",
   metadataPreflight: "reports/visual_asset_eval_dry_run/v0_6_57_exact_new_trial_003_durable_archive_metadata_preflight_after_accepted_sample_registration.json",
   approvalEvidence: "reports/human_approval_evidence/v0_3_3_exact_new_trial_003_shot_2_user_submitted_formal_human_approval_evidence.json",
   registry: "accepted_samples/accepted_sample_registry.yaml",
@@ -21,9 +22,9 @@ const files = {
 };
 
 const expected = {
-  phase: "v0_6_58_exact_new_trial_003_durable_archive_write_authorization_package_after_metadata_preflight",
-  packageType: "durable_archive_write_authorization",
-  packageStatus: "authorization_package_ready_execution_not_performed",
+  phase: "v0_6_59_exact_new_trial_003_durable_archive_write_execution_preflight_no_write",
+  packageType: "durable_archive_write_execution_preflight_no_write",
+  packageStatus: "execution_preflight_passed_archive_write_ready_not_performed",
   authorizationModel: "smart_standing_authorization_v3_default_real_class_allowed",
   sampleId: "accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001",
   candidateId: "v0_3_3_exact_new_trial_003_shot_2",
@@ -34,7 +35,7 @@ const expected = {
   height: 1672,
   mime: "image/png",
   archiveRoot: "asset_archive/accepted_samples/accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001",
-  recommendedNext: "run_exact_new_trial_003_durable_archive_write_execution_preflight_no_write"
+  recommendedNext: "execute_exact_new_trial_003_durable_archive_write_exact_three_files_with_hash_verification"
 };
 
 expected.allowedWritePaths = [
@@ -84,10 +85,11 @@ function assertNoRawLocalDrivePath(value, context) {
   }
 }
 
-function assertFutureTargetsAbsent(record) {
+function assertArchiveTargetsActuallyAbsent(record, context) {
   if (exactArchiveWriteCompleted(record.target?.exact_allowed_write_paths || [])) return;
+  assert(!exists(record.target.target_archive_root), `${context}: archive root already exists`);
   for (const relativePath of record.target.exact_allowed_write_paths || []) {
-    assert(!exists(relativePath), `Archive target already exists without overwrite authorization: ${relativePath}`);
+    assert(!exists(relativePath), `${context}: archive target already exists: ${relativePath}`);
   }
 }
 
@@ -114,49 +116,60 @@ function evaluate(record) {
   const target = record.target || {};
   const budget = record.budget || {};
   const guard = record.guard || {};
-  const validationRequired = record.validation_required_for_future_execution || [];
+  const required = record.required_before_future_archive_write || [];
   const rollback = record.rollback_or_cleanup_plan || [];
   const stopConditions = record.stop_conditions || [];
   const allowedPaths = target.exact_allowed_write_paths || [];
 
-  const metadata = readJson(files.metadataPreflight).exact_new_trial_003_durable_archive_metadata_preflight_after_accepted_sample_registration;
+  const authorization = readJson(files.authorizationPackage)
+    .exact_new_trial_003_durable_archive_write_authorization_package_after_metadata_preflight;
+  const metadata = readJson(files.metadataPreflight)
+    .exact_new_trial_003_durable_archive_metadata_preflight_after_accepted_sample_registration;
   const approval = readJson(files.approvalEvidence).user_submitted_formal_human_approval_evidence;
   const registryText = read(files.registry);
   const categoryText = read(files.categoryIndex);
 
   const sourceRefsOk =
+    sourceRefs.archive_write_authorization_package === files.authorizationPackage &&
     sourceRefs.metadata_preflight === files.metadataPreflight &&
     sourceRefs.approval_evidence === files.approvalEvidence &&
     sourceRefs.accepted_sample_registry === files.registry &&
     sourceRefs.category_index === files.categoryIndex;
 
   const upstreamOk =
+    authorization.archive_write_authorization_package_prepared === true &&
+    authorization.archive_write_authorized_next === true &&
+    authorization.execution_allowed_now === false &&
+    authorization.guard?.archive_write_performed === false &&
+    authorization.guard?.image_binary_read_performed === false &&
+    authorization.guard?.image_file_copy_performed === false &&
+    authorization.target?.sample_id === expected.sampleId &&
+    authorization.target?.candidate_id === expected.candidateId &&
+    authorization.target?.source_artifact_hash_ref === expected.sha256 &&
+    Array.isArray(authorization.target?.exact_allowed_write_paths) &&
+    authorization.target.exact_allowed_write_paths.length === expected.allowedWritePaths.length &&
+    expected.allowedWritePaths.every((item) => authorization.target.exact_allowed_write_paths.includes(item)) &&
     metadata.archive_metadata_preflight_compiled === true &&
     metadata.archive_write_performed === false &&
     metadata.image_binary_read_performed === false &&
     metadata.image_file_copy_performed === false &&
-    metadata.target?.accepted_sample_registration_completed === true &&
-    metadata.target?.sample_id === expected.sampleId &&
-    metadata.target?.candidate_id === expected.candidateId &&
-    metadata.target?.source_artifact_hash_ref === expected.sha256 &&
-    Array.isArray(metadata.target?.exact_future_write_paths) &&
-    metadata.target.exact_future_write_paths.length === expected.allowedWritePaths.length &&
-    expected.allowedWritePaths.every((item) => metadata.target.exact_future_write_paths.includes(item)) &&
     approval.current_capture_state?.formal_human_approval_captured_now === true &&
     approval.target?.sample_id === expected.sampleId &&
     approval.target?.candidate_id === expected.candidateId &&
     registryText.includes(`sample_id: ${expected.sampleId}`) &&
+    registryText.includes(`image_sha256: ${expected.sha256}`) &&
     categoryText.includes(`  - ${expected.sampleId}`);
 
   const packageOk =
     record.phase === expected.phase &&
-    record.execution_mode === "durable_archive_write_authorization_package_only" &&
+    record.execution_mode === "durable_archive_write_execution_preflight_no_write" &&
     record.package_type === expected.packageType &&
     record.package_status === expected.packageStatus &&
     record.authorization_model === expected.authorizationModel &&
-    record.archive_write_authorization_package_prepared === true &&
-    record.archive_write_authorized_next === true &&
-    record.execution_allowed_now === false;
+    record.archive_write_execution_preflight_passed === true &&
+    record.source_hash_verification_deferred_to_write_gate === true &&
+    record.execution_allowed_now === false &&
+    record.archive_write_allowed_next_gate === true;
 
   const targetOk =
     target.sample_id === expected.sampleId &&
@@ -169,41 +182,50 @@ function evaluate(record) {
     target.verified_mime === expected.mime &&
     target.accepted_sample_registration_completed === true &&
     target.archive_metadata_preflight_compiled === true &&
+    target.archive_write_authorization_package_prepared === true &&
+    target.archive_write_authorized_next === true &&
+    target.target_archive_root === expected.archiveRoot &&
+    target.target_archive_root_exists === false &&
+    target.target_archive_paths_absent === true &&
     target.overwrite_existing_files_allowed === false &&
     Array.isArray(allowedPaths) &&
     allowedPaths.length === expected.allowedWritePaths.length &&
     expected.allowedWritePaths.every((item) => allowedPaths.includes(item));
 
   const budgetOk =
-    budget.max_write_files === 3 &&
-    budget.max_image_binary_reads === 1 &&
-    budget.max_runtime_probe_minutes === 10 &&
+    budget.current_write_files === 0 &&
+    budget.current_image_binary_reads === 0 &&
+    budget.next_gate_max_write_files === 3 &&
+    budget.next_gate_max_image_binary_reads === 1 &&
+    budget.next_gate_max_runtime_probe_minutes === 10 &&
     budget.overwrite_existing_files_allowed === false &&
     budget.secret_value_read_allowed === false;
 
-  const validationOk =
-    validationRequired.includes("target archive paths must be absent before write") &&
-    validationRequired.includes(`source image sha256 must equal ${expected.sha256}`) &&
-    validationRequired.includes("manifest must bind sample id, candidate id, approval evidence, source hash, source dimensions, and generated archive file refs") &&
-    validationRequired.includes("archive validator must pass after write") &&
-    validationRequired.includes("git diff --check must pass") &&
-    validationRequired.includes("npm run validate:mvp must pass");
+  const requiredOk =
+    required.includes("read the source image binary exactly once for sha256 verification") &&
+    required.includes(`source image sha256 must equal ${expected.sha256}`) &&
+    required.includes("write only the exact manifest/original/preview archive paths") &&
+    required.includes("do not overwrite existing archive files") &&
+    required.includes("validate the archive manifest after write") &&
+    required.includes("retain rollback cleanup limited to the exact target archive directory");
 
   const rollbackOk =
-    rollback.includes(`remove only the exact new ${expected.archiveRoot}/ directory if future execution fails before validation`) &&
+    rollback.includes(`future write rollback may remove only ${expected.archiveRoot}/`) &&
     rollback.includes("do not remove or modify accepted_samples registry entries") &&
     rollback.includes("do not modify runs/real_generation source artifacts");
 
   const stopOk =
-    stopConditions.includes("any target archive path already exists") &&
-    stopConditions.includes("source hash mismatch") &&
-    stopConditions.includes("preview generation requires new dependency or broad runtime change") &&
+    stopConditions.includes("any target archive path exists") &&
+    stopConditions.includes("target archive root exists before execution") &&
+    stopConditions.includes("source hash verification fails during the future write gate") &&
+    stopConditions.includes("preview generation requires a new dependency or broad runtime change") &&
     stopConditions.includes("more than three archive files would be written") &&
     stopConditions.includes("secret/private path exposure") &&
     stopConditions.includes("production candidate, DailyNote, or VCP memory scope expansion");
 
   const noWrites =
-    guard.authorization_package_only === true &&
+    guard.preflight_only === true &&
+    guard.authorization_package_verified === true &&
     guard.archive_write_performed === false &&
     guard.durable_archive_manifest_write_performed === false &&
     guard.durable_archive_copy_performed === false &&
@@ -231,23 +253,18 @@ function evaluate(record) {
     guard.push_tag_release_deploy_performed === false &&
     guard.secret_value_read_performed === false;
 
-  const noRuntimeClaim =
-    guard.artifact_recoverability_is_not_vcp_runtime_integration === true &&
-    guard.vcp_runtime_integration_proven === false;
-
   return {
-    passed: sourceRefsOk && upstreamOk && packageOk && targetOk && budgetOk && validationOk && rollbackOk && stopOk && noWrites && noExternal && noRuntimeClaim,
+    passed: sourceRefsOk && upstreamOk && packageOk && targetOk && budgetOk && requiredOk && rollbackOk && stopOk && noWrites && noExternal,
     sourceRefsOk,
     upstreamOk,
     packageOk,
     targetOk,
     budgetOk,
-    validationOk,
+    requiredOk,
     rollbackOk,
     stopOk,
     noWrites,
-    noExternal,
-    noRuntimeClaim
+    noExternal
   };
 }
 
@@ -255,7 +272,7 @@ function validateRecord(record, context) {
   assert(record && typeof record === "object", `${context} missing`);
   assertNoRawLocalDrivePath(record, context);
   assert(record.recommended_next === expected.recommendedNext, `${context}.recommended_next mismatch`);
-  assertFutureTargetsAbsent(record);
+  assertArchiveTargetsActuallyAbsent(record, context);
   const result = evaluate(record);
   assert(result.passed, `${context} evaluation failed: ${JSON.stringify(result)}`);
 }
@@ -281,21 +298,27 @@ function validateNegativeCases(validRecord, invalidRecord) {
   assert(invalidFixtureCaught, "invalid fixture must fail");
 
   const cases = [
-    expectFailure(validRecord, "missing_accepted_sample_registration_fails", (candidate) => {
-      candidate.target.accepted_sample_registration_completed = false;
+    expectFailure(validRecord, "authorization_package_not_verified_fails", (candidate) => {
+      candidate.guard.authorization_package_verified = false;
     }),
-    expectFailure(validRecord, "missing_metadata_preflight_fails", (candidate) => {
-      candidate.target.archive_metadata_preflight_compiled = false;
+    expectFailure(validRecord, "archive_preflight_not_passed_fails", (candidate) => {
+      candidate.archive_write_execution_preflight_passed = false;
     }),
     expectFailure(validRecord, "execution_now_overclaim_fails", (candidate) => {
       candidate.execution_allowed_now = true;
     }),
+    expectFailure(validRecord, "target_archive_root_exists_fails", (candidate) => {
+      candidate.target.target_archive_root_exists = true;
+      candidate.target.target_archive_paths_absent = false;
+    }),
     expectFailure(validRecord, "archive_write_performed_fails", (candidate) => {
       candidate.guard.archive_write_performed = true;
+      candidate.guard.durable_archive_manifest_write_performed = true;
     }),
     expectFailure(validRecord, "image_binary_read_or_copy_fails", (candidate) => {
       candidate.guard.image_binary_read_performed = true;
       candidate.guard.image_file_copy_performed = true;
+      candidate.budget.current_image_binary_reads = 1;
     }),
     expectFailure(validRecord, "broad_allowed_write_path_fails", (candidate) => {
       candidate.target.exact_allowed_write_paths.push("asset_archive/accepted_samples/");
@@ -305,7 +328,10 @@ function validateNegativeCases(validRecord, invalidRecord) {
       candidate.budget.overwrite_existing_files_allowed = true;
     }),
     expectFailure(validRecord, "budget_expansion_fails", (candidate) => {
-      candidate.budget.max_write_files = 4;
+      candidate.budget.next_gate_max_write_files = 4;
+    }),
+    expectFailure(validRecord, "missing_future_write_requirement_fails", (candidate) => {
+      candidate.required_before_future_archive_write = [];
     }),
     expectFailure(validRecord, "rollback_missing_fails", (candidate) => {
       candidate.rollback_or_cleanup_plan = [];
@@ -313,9 +339,8 @@ function validateNegativeCases(validRecord, invalidRecord) {
     expectFailure(validRecord, "wrong_hash_fails", (candidate) => {
       candidate.target.source_artifact_hash_ref = "bad";
     }),
-    expectFailure(validRecord, "runtime_claim_fails", (candidate) => {
-      candidate.guard.artifact_recoverability_is_not_vcp_runtime_integration = false;
-      candidate.guard.vcp_runtime_integration_proven = true;
+    expectFailure(validRecord, "hash_not_deferred_fails", (candidate) => {
+      candidate.source_hash_verification_deferred_to_write_gate = false;
     })
   ];
 
@@ -340,11 +365,12 @@ function main() {
 
   for (const token of [
     `phase: ${expected.phase}`,
-    "package_type: durable_archive_write_authorization",
-    "package_status: authorization_package_ready_execution_not_performed",
-    "authorization_model: smart_standing_authorization_v3_default_real_class_allowed",
-    "archive_write_authorization_package_prepared: true",
-    "archive_write_authorized_next: true",
+    "package_type: durable_archive_write_execution_preflight_no_write",
+    "package_status: execution_preflight_passed_archive_write_ready_not_performed",
+    "archive_write_execution_preflight_passed: true",
+    "target_archive_root_exists: false",
+    "target_archive_paths_absent: true",
+    "source_hash_verification_deferred_to_write_gate: true",
     "execution_allowed_now: false",
     "archive_write_performed: false",
     "image_binary_read_performed: false",
@@ -354,8 +380,8 @@ function main() {
   }
 
   assert(
-    mvpText.includes("scripts/validate_exact_new_trial_003_durable_archive_write_authorization_package_after_metadata_preflight.js"),
-    "validate_mvp missing v0.6.58 validator"
+    mvpText.includes("scripts/validate_exact_new_trial_003_durable_archive_write_execution_preflight_no_write.js"),
+    "validate_mvp missing v0.6.59 validator"
   );
 
   validateRecord(report, "report");
@@ -367,20 +393,27 @@ function main() {
     passed: true,
     package_type: report.package_type,
     package_status: report.package_status,
-    authorization_model: report.authorization_model,
     target_sample_id: report.target.sample_id,
     target_candidate_id: report.target.candidate_id,
     category: report.target.category,
     accepted_sample_registration_completed: report.target.accepted_sample_registration_completed,
     archive_metadata_preflight_compiled: report.target.archive_metadata_preflight_compiled,
-    archive_write_authorization_package_prepared: report.archive_write_authorization_package_prepared,
-    archive_write_authorized_next: report.archive_write_authorized_next,
+    archive_write_authorization_package_prepared: report.target.archive_write_authorization_package_prepared,
+    archive_write_authorized_next: report.target.archive_write_authorized_next,
+    archive_write_execution_preflight_passed: report.archive_write_execution_preflight_passed,
+    target_archive_root_exists: report.target.target_archive_root_exists,
+    target_archive_paths_absent: report.target.target_archive_paths_absent,
+    source_hash_verification_deferred_to_write_gate: report.source_hash_verification_deferred_to_write_gate,
     execution_allowed_now: report.execution_allowed_now,
+    archive_write_allowed_next_gate: report.archive_write_allowed_next_gate,
     archive_write_performed: report.guard.archive_write_performed,
     image_binary_read_performed: report.guard.image_binary_read_performed,
     image_file_copy_performed: report.guard.image_file_copy_performed,
     future_write_path_count: report.target.exact_allowed_write_paths.length,
-    max_write_files: report.budget.max_write_files,
+    current_write_files: report.budget.current_write_files,
+    current_image_binary_reads: report.budget.current_image_binary_reads,
+    next_gate_max_write_files: report.budget.next_gate_max_write_files,
+    next_gate_max_image_binary_reads: report.budget.next_gate_max_image_binary_reads,
     negative_case_count: negativeCases.negative_case_count,
     caught_negative_case_count: negativeCases.caught_negative_case_count,
     all_negative_cases_caught: negativeCases.all_negative_cases_caught,

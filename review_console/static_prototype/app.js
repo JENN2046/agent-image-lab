@@ -412,6 +412,10 @@ function multiCapsuleDashboardState() {
       failure_is_never_production: failure.production_candidate_allowed === false && failure.final_route === "failure_learning_only_never_production"
     };
   });
+  const acceptedPassingStatuses = new Set([
+    "registry_driven_preview_capsules_verified",
+    "durable_archive_evidence_verified"
+  ]);
   const acceptedReportRows = acceptedCapsules.map((capsule) => ({
     lane: "accepted",
     sample_id: capsule.sample_id,
@@ -421,7 +425,7 @@ function multiCapsuleDashboardState() {
     preview_ref: capsule.preview_ref,
     manifest_ref: capsule.manifest_ref,
     chain_refs: [capsule.import_record_ref, capsule.review_record_ref, capsule.approval_record_ref],
-    passed: capsule.clone_portable_validation_status === "passed" && capsule.registry_validator_status === "registry_driven_preview_capsules_verified"
+    passed: capsule.clone_portable_validation_status === "passed" && acceptedPassingStatuses.has(capsule.registry_validator_status)
   }));
   const failureReportRows = failureCapsules.map((capsule) => ({
     lane: "failure",

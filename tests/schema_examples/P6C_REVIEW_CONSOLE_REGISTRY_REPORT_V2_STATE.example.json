@@ -9,15 +9,16 @@
     "report_version": "accepted_failure_capsule_registry_report_v2",
     "status": "accepted_failure_capsule_registry_report_v2_verified",
     "totals": {
-      "accepted": 2,
+      "accepted": 3,
       "failure": 2,
-      "total": 4,
-      "passed": 4,
+      "total": 5,
+      "passed": 5,
       "failed": 0
     },
     "accepted_sample_ids": [
       "accepted_french_summer_rattan_bucket_bag_001",
-      "accepted_product_still_life_tennis_wallet_001"
+      "accepted_product_still_life_tennis_wallet_001",
+      "accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001"
     ],
     "failure_sample_ids": [
       "failure_french_summer_rattan_bag_v7_29_001",

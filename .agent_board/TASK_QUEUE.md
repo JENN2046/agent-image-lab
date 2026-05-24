@@ -4,6 +4,50 @@
 
 ---
 
+- [x] ID: run_exact_new_trial_003_durable_archive_write_execution_preflight_no_write
+      Lane: Green local no-write execution preflight only.
+      Status: completed_validated_local_durable_archive_write_execution_preflight_no_write.
+      Result: Verified v0.6.58 authorization completeness and confirmed the exact target archive root plus three future archive paths are absent without writing asset_archive or reading/copying image binaries.
+      active_current_phase: v0_3_3_first_live_generation_pilot.
+      resume_guard_source_phase: v0_3_2_live_candidate_action_packet.
+      next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Report ref: reports/visual_asset_eval_dry_run/v0_6_59_exact_new_trial_003_durable_archive_write_execution_preflight_no_write.json.
+      Validator ref: scripts/validate_exact_new_trial_003_durable_archive_write_execution_preflight_no_write.js.
+      archive_write_execution_preflight_passed: true.
+      target_archive_root_exists: false.
+      target_archive_paths_absent: true.
+      source_hash_verification_deferred_to_write_gate: true.
+      current_write_files: 0.
+      current_image_binary_reads: 0.
+      archive_write_performed: false.
+      image_binary_read_performed: false.
+      image_file_copy_performed: false.
+      secret_value_read_performed: false.
+      Push: not performed.
+      Recommended next: execute_exact_new_trial_003_durable_archive_write_exact_three_files_with_hash_verification.
+
+- [x] ID: execute_exact_new_trial_003_durable_archive_write_exact_three_files_with_hash_verification
+      Lane: Amber_E exact local asset archive write with bounded source-image hash read and receipt.
+      Status: completed_validated_exact_local_durable_archive_write.
+      Result: Read the source image binary once, verified sha256 8bd7b81a916f0f6333392562d84e32368a3f28dd6a6456fc2f9e49d835a62c3b, wrote exactly manifest.json/original.png/preview.webp under the exact accepted sample archive directory, and recorded the Amber receipt.
+      Budget: max_image_binary_reads 1; max_write_files 3; max_runtime_probe_minutes 10; overwrite_existing_files_allowed false; secret_value_read_allowed false.
+      Report ref: reports/visual_asset_eval_dry_run/v0_6_60_exact_new_trial_003_durable_archive_write_execution_receipt.json.
+      Validator ref: scripts/validate_exact_new_trial_003_durable_archive_write_execution_receipt.js.
+      Archive root: asset_archive/accepted_samples/accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001.
+      Archive files: manifest.json, original.png, preview.webp.
+      production_candidate_write_performed: false.
+      DailyNote_write_performed: false.
+      VCP_memory_write_performed: false.
+      image_generation_performed: false.
+      secret_value_read_performed: false.
+      Push: pending validation, commit, and push requested by user for this step.
+      Recommended next: prepare_exact_new_trial_003_chinese_memory_entry_readiness_preflight_no_write.
+
+- [ ] ID: prepare_exact_new_trial_003_chinese_memory_entry_readiness_preflight_no_write
+      Lane: Green local no-write memory readiness preflight only.
+      Scope: derive a future Chinese memory-entry readiness packet from the accepted sample metadata, review evidence, approval evidence, and durable archive manifest; do not write DailyNote, do not write VCP memory, do not create production candidate, do not call provider/API/plugin, do not generate images, and do not read secrets.
+      Stop condition: missing archive validation, missing human approval chain, request to write real DailyNote/VCP memory before exact memory write package, production scope expansion, external write, secret/private data exposure, or validation failure requiring judgment.
+
 - [x] ID: prepare_exact_new_trial_003_durable_archive_write_authorization_package_after_metadata_preflight
       Lane: Green local authorization package only.
       Status: completed_validated_local_durable_archive_write_authorization_package_after_metadata_preflight.
@@ -25,13 +69,8 @@
       image_file_copy_performed: false.
       image_generation_performed: false.
       secret_value_read_performed: false.
-      Push: pending after user-requested exact-file commit.
+      Push: pushed to origin/master in commit bbf03a6.
       Recommended next: run_exact_new_trial_003_durable_archive_write_execution_preflight_no_write.
-
-- [ ] ID: run_exact_new_trial_003_durable_archive_write_execution_preflight_no_write
-      Lane: Green local no-write execution preflight only.
-      Scope: verify authorization completeness and target archive path absence for the exact accepted shot_2 sample; do not write asset_archive, read/copy image binaries, create production candidate, write DailyNote/VCP memory, call provider/API/plugin, stage unrelated files, tag, release, deploy, or read secrets.
-      Stop condition: any target path exists, source hash verification would require binary read outside the explicitly scoped future gate, overwrite is needed, archive write is requested before no-write preflight passes, production/DailyNote/VCP scope expands, external write appears, secret/private data exposure, destructive action, or validation failure requiring judgment.
 
 - [x] ID: v0_6_57_exact_new_trial_003_durable_archive_metadata_preflight_after_accepted_sample_registration
       Lane: Green local archive metadata preflight only.

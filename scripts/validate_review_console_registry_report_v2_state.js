@@ -76,10 +76,10 @@ function evaluate(snapshot) {
     snapshot.status === "accepted_failure_capsule_registry_report_v2_verified";
 
   const countsOk =
-    totals.accepted === 2 &&
+    totals.accepted === 3 &&
     totals.failure === 2 &&
-    totals.total === 4 &&
-    totals.passed === 4 &&
+    totals.total === 5 &&
+    totals.passed === 5 &&
     totals.failed === 0;
 
   const relationOk =

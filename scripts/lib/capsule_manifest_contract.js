@@ -143,6 +143,55 @@ function validateCapsuleManifest(core, lane, sampleId, options = {}) {
   const previewLongEdge = previewDimensions?.width && previewDimensions?.height ? Math.max(previewDimensions.width, previewDimensions.height) : null;
   const text = JSON.stringify(manifest);
 
+  if (lane === "accepted" && manifest.manifest_type === "accepted_sample_durable_archive_manifest") {
+    const originalPath = manifest.artifact?.original?.path || "original.png";
+    const originalRef = `${root}/${originalPath}`;
+    const originalExists = core.exists(originalRef);
+    const originalSha256 = originalExists ? core.sha256File(originalRef) : null;
+
+    check(manifest.version === "v1", "manifest_version_v1");
+    check(manifest.sample_id === sampleId, "sample_id_matches");
+    check(previewPath === "preview.webp", "preview_path_matches");
+    check(manifest.artifact?.preview?.format === "webp", "preview_format_webp");
+    check(manifest.artifact?.preview?.long_edge === requiredLongEdge, "preview_manifest_long_edge_matches");
+    check(manifest.artifact?.preview?.git_tracked === true, "preview_git_tracked_true");
+    check(originalPath === "original.png", "original_path_matches");
+    check(manifest.artifact?.original?.format === "png", "original_format_png");
+    check(manifest.artifact?.original?.git_tracked === true, "original_git_tracked_true");
+    check(originalExists, "original_file_exists");
+    check(originalSha256 === manifest.artifact?.original?.sha256, "original_sha256_matches_manifest");
+    check(!text.includes("base64"), "base64_absent_from_manifest");
+    check(previewExists, "preview_file_exists");
+    check(previewDimensions?.signatureValid === true, "preview_webp_signature_valid");
+    check(previewLongEdge === requiredLongEdge, "preview_file_long_edge_matches");
+    check(Boolean(manifest.artifact?.preview?.sha256), "preview_manifest_sha256_present");
+    check(previewSha256 === manifest.artifact?.preview?.sha256, "preview_sha256_matches_manifest");
+    check(manifest.guard?.production_candidate_write_performed === false, "manifest_guard_production_candidate_write_performed_false");
+    check(manifest.guard?.DailyNote_write_performed === false, "manifest_guard_DailyNote_write_performed_false");
+    check(manifest.guard?.VCP_memory_write_performed === false, "manifest_guard_VCP_memory_write_performed_false");
+    check(manifest.guard?.provider_contact_performed === false, "manifest_guard_provider_contact_performed_false");
+    check(manifest.guard?.plugin_call_performed === false, "manifest_guard_plugin_call_performed_false");
+    check(manifest.guard?.api_call_performed === false, "manifest_guard_api_call_performed_false");
+    check(manifest.guard?.secret_value_read_performed === false, "manifest_guard_secret_value_read_performed_false");
+    check(manifest.guard?.push_tag_release_deploy_performed === false, "manifest_guard_push_tag_release_deploy_performed_false");
+
+    return {
+      lane,
+      sample_id: sampleId,
+      passed: failures.length === 0,
+      manifest_validation_status: failures.length === 0 ? "durable_archive_manifest_contract_verified" : "durable_archive_manifest_contract_failed",
+      manifest_ref: manifestRef,
+      preview_ref: previewRef,
+      preview_sha256: previewSha256,
+      preview_width: previewDimensions?.width || null,
+      preview_height: previewDimensions?.height || null,
+      preview_long_edge: previewLongEdge,
+      chain_refs: [originalRef, previewRef],
+      failures,
+      failure_classes: classifyManifestFailures(failures)
+    };
+  }
+
   check(manifest.manifest_type === spec.manifestType, "manifest_type_matches");
   check(manifest.version === "v1", "manifest_version_v1");
   check(manifest.sample_id === sampleId, "sample_id_matches");

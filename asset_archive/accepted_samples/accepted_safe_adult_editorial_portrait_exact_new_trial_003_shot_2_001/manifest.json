@@ -1,0 +1,77 @@
+{
+  "manifest_type": "accepted_sample_durable_archive_manifest",
+  "version": "v1",
+  "sample_id": "accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001",
+  "candidate_id": "v0_3_3_exact_new_trial_003_shot_2",
+  "category": "fashion_lookbook_portrait",
+  "created_at": "2026-05-24T06:55:33.896Z",
+  "source": {
+    "artifact_ref": "runs/real_generation/v0_3_3_exact_new_trial_003_shot_2/safe_adult_editorial_portrait_v1.png",
+    "sha256": "8bd7b81a916f0f6333392562d84e32368a3f28dd6a6456fc2f9e49d835a62c3b",
+    "format": "png",
+    "mime": "image/png",
+    "width": 941,
+    "height": 1672,
+    "binary_reads_used": 1
+  },
+  "artifact": {
+    "original": {
+      "path": "original.png",
+      "format": "png",
+      "mime": "image/png",
+      "sha256": "8bd7b81a916f0f6333392562d84e32368a3f28dd6a6456fc2f9e49d835a62c3b",
+      "width": 941,
+      "height": 1672,
+      "git_tracked": true
+    },
+    "preview": {
+      "path": "preview.webp",
+      "format": "webp",
+      "mime": "image/webp",
+      "long_edge": 512,
+      "width": 288,
+      "height": 512,
+      "sha256": "93af7b4468d7294f0c1eaef1f9cf260ed86b11122ba81d0230edb9eaedae47c7",
+      "git_tracked": true
+    }
+  },
+  "approval": {
+    "approved_by": "Jenn",
+    "approval_evidence_ref": "reports/human_approval_evidence/v0_3_3_exact_new_trial_003_shot_2_user_submitted_formal_human_approval_evidence.json",
+    "approved_sample_registration_next_allowed": true,
+    "archive_or_production_or_daily_note_or_vcp_memory_authorized_by_approval_evidence": false
+  },
+  "chain": {
+    "accepted_sample_registry": "accepted_samples/accepted_sample_registry.yaml",
+    "category_index": "accepted_samples/categories/fashion_lookbook_portrait.yaml",
+    "metadata_registration_report": "reports/visual_asset_eval_dry_run/v0_6_56_exact_new_trial_003_accepted_samples_metadata_registration.json",
+    "metadata_preflight_report": "reports/visual_asset_eval_dry_run/v0_6_57_exact_new_trial_003_durable_archive_metadata_preflight_after_accepted_sample_registration.json",
+    "write_authorization_report": "reports/visual_asset_eval_dry_run/v0_6_58_exact_new_trial_003_durable_archive_write_authorization_package_after_metadata_preflight.json",
+    "execution_preflight_report": "reports/visual_asset_eval_dry_run/v0_6_59_exact_new_trial_003_durable_archive_write_execution_preflight_no_write.json"
+  },
+  "guard": {
+    "archive_write_performed": true,
+    "durable_archive_manifest_write_performed": true,
+    "durable_archive_original_write_performed": true,
+    "durable_archive_preview_write_performed": true,
+    "image_binary_read_performed": true,
+    "image_binary_reads_used": 1,
+    "files_written": 3,
+    "overwrite_existing_files_performed": false,
+    "runs_source_image_modified": false,
+    "accepted_samples_write_performed": false,
+    "category_index_write_performed": false,
+    "failure_samples_write_performed": false,
+    "production_candidate_write_performed": false,
+    "DailyNote_write_performed": false,
+    "VCP_memory_write_performed": false,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "real_manifest_read_performed": false,
+    "real_vcpchat_read_performed": false,
+    "real_vcptoolbox_read_performed": false,
+    "secret_value_read_performed": false,
+    "push_tag_release_deploy_performed": false
+  }
+}

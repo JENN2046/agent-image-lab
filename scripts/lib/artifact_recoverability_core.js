@@ -240,6 +240,48 @@ function createRecoverabilityCore(root) {
       ? Math.max(previewDimensions.width, previewDimensions.height)
       : null;
 
+    if (manifest.manifest_type === "accepted_sample_durable_archive_manifest") {
+      const originalPath = manifest.artifact?.original?.path || "original.png";
+      const originalRelativePath = `${paths.root}/${originalPath}`;
+      const originalExists = exists(originalRelativePath);
+      const originalSha256 = originalExists ? sha256File(originalRelativePath) : null;
+
+      check(manifest.sample_id === sampleId, "sample_id_matches");
+      check(originalPath === "original.png", "original_path_matches");
+      check(manifest.artifact?.original?.format === "png", "original_format_png");
+      check(manifest.artifact?.original?.git_tracked === true, "original_git_tracked_true");
+      check(originalExists, "original_file_exists");
+      check(originalSha256 === manifest.artifact?.original?.sha256, "original_sha256_matches_manifest");
+      check(previewPath === "preview.webp", "preview_path_matches");
+      check(manifest.artifact?.preview?.format === "webp", "preview_format_webp");
+      check(manifest.artifact?.preview?.long_edge === requiredLongEdge, "preview_manifest_long_edge_matches");
+      check(manifest.artifact?.preview?.git_tracked === true, "preview_git_tracked_true");
+      check(!JSON.stringify(manifest).includes("base64"), "base64_absent_from_manifest");
+      check(previewExists, "preview_file_exists");
+      check(previewDimensions?.signatureValid === true, "preview_webp_signature_valid");
+      check(previewLongEdge === requiredLongEdge, "preview_file_long_edge_matches");
+      check(Boolean(manifest.artifact?.preview?.sha256), "preview_manifest_sha256_present");
+      check(previewSha256 === manifest.artifact?.preview?.sha256, "preview_sha256_matches_manifest");
+      check(manifest.guard?.production_candidate_write_performed === false, "production_candidate_write_guard_false");
+      check(manifest.guard?.DailyNote_write_performed === false, "DailyNote_write_guard_false");
+      check(manifest.guard?.VCP_memory_write_performed === false, "VCP_memory_write_guard_false");
+
+      return {
+        passed: failures.length === 0,
+        status: failures.length === 0 ? "durable_archive_evidence_verified" : "durable_archive_incomplete",
+        sampleId,
+        paths,
+        manifest,
+        previewExists,
+        previewSha256,
+        previewDimensions,
+        previewLongEdge,
+        originalExists,
+        originalSha256,
+        failures,
+      };
+    }
+
     check(manifest.sample_id === sampleId, "sample_id_matches");
     check(previewPath === "preview.webp", "preview_path_matches");
     check(manifest.artifact?.preview?.format === "webp", "preview_format_webp");

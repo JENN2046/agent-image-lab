@@ -1,5 +1,81 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260524-v0.6.60-EXACT-NEW-TRIAL-003-DURABLE-ARCHIVE-WRITE-EXECUTION-RECEIPT
+
+Task: v0.6.60 exact new-trial 003 durable archive write execution receipt
+Status: completed_validated_exact_local_durable_archive_write
+Receipt:
+  - lane: Amber_E
+  - envelope_id: smart_standing_authorization_v3_default_autonomy_envelope
+  - source_phase: v0.6.59 durable archive write execution preflight no-write
+  - target_candidate_id: v0_3_3_exact_new_trial_003_shot_2
+  - target_sample_id: accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001
+  - artifact_sha256: 8bd7b81a916f0f6333392562d84e32368a3f28dd6a6456fc2f9e49d835a62c3b
+  - write_scope: exact_local_durable_archive_write
+  - files_written: 3
+  - image_binary_reads_used: 1
+Commands run:
+  - node scripts/validate_exact_new_trial_003_durable_archive_write_execution_receipt.js: passed
+  - node scripts/lib/governance_tooling_maintenance_slice.js: passed
+  - node scripts/validate_controlled_visual_production_loop_checkpoint_readiness.js: passed
+  - node scripts/validate_controlled_visual_production_loop_exact_file_commit_readiness_review.js: passed
+  - node scripts/validate_autopilot_agent_board_resume_compaction_guard.js: passed
+  - git diff --check: passed with CRLF normalization warnings only
+  - npm run validate:mvp: passed with CRLF normalization warnings only
+  - node scripts/validate_capsule_manifest_contract.js: passed
+  - node scripts/validate_capsule_registry_report_v2.js: passed
+  - node scripts/validate_capsule_static_product_smoke_fixture.js: passed
+  - node scripts/validate_capsule_static_product_smoke_review_console_snapshot.js: passed
+  - node scripts/validate_multi_capsule_dashboard.js: passed
+  - node scripts/validate_review_console_registry_report_v2_state.js: passed
+  - node scripts/validate_capsule_operator_reviewer_action_matrix.js: passed
+  - node scripts/validate_capsule_static_operator_checklist_ui_mapping.js: passed
+Observed result:
+  - archive_write_performed: true
+  - source_artifact_sha256_verified: true
+  - original_sha256: 8bd7b81a916f0f6333392562d84e32368a3f28dd6a6456fc2f9e49d835a62c3b
+  - preview_sha256: 93af7b4468d7294f0c1eaef1f9cf260ed86b11122ba81d0230edb9eaedae47c7
+  - preview_long_edge: 512
+  - current_capsule_baseline_after_write: accepted=3, failure=2, total=5, passed=5, failed=0
+  - durable archive manifest is represented in capsule manifest contract, registry report v2, static product smoke fixture, Review Console snapshot, multi-capsule dashboard, registry report v2 state, operator reviewer matrix, and operator checklist mapping
+Closeout validation:
+  - production-candidate write, DailyNote write, VCP memory write, provider/API/plugin call, image generation, secret read, tag, release, and deploy were not performed by the archive write step
+Next:
+  - prepare_exact_new_trial_003_chinese_memory_entry_readiness_preflight_no_write
+
+## VALIDATION-20260524-v0.6.59-EXACT-NEW-TRIAL-003-DURABLE-ARCHIVE-WRITE-EXECUTION-PREFLIGHT-NO-WRITE
+
+Task: v0.6.59 exact new-trial 003 durable archive write execution preflight no-write
+Status: completed_validated_local_durable_archive_write_execution_preflight_no_write
+Receipt:
+  - lane: Green
+  - source_phase: v0.6.58 durable archive write authorization package after metadata preflight
+  - target_candidate_id: v0_3_3_exact_new_trial_003_shot_2
+  - target_sample_id: accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001
+  - artifact_sha256: 8bd7b81a916f0f6333392562d84e32368a3f28dd6a6456fc2f9e49d835a62c3b
+  - write_scope: durable_archive_write_execution_preflight_no_write
+Commands run:
+  - node --check scripts/validate_exact_new_trial_003_durable_archive_write_execution_preflight_no_write.js: passed
+  - node scripts/validate_exact_new_trial_003_durable_archive_write_execution_preflight_no_write.js: passed
+  - node --check scripts/lib/governance_tooling_maintenance_slice.js: passed
+  - node scripts/lib/governance_tooling_maintenance_slice.js: passed
+  - node scripts/validate_controlled_visual_production_loop_checkpoint_readiness.js: passed
+  - node scripts/validate_controlled_visual_production_loop_exact_file_commit_readiness_review.js: passed
+  - node scripts/validate_autopilot_agent_board_resume_compaction_guard.js: passed
+  - git diff --check: passed with CRLF normalization warnings only
+  - npm run validate:mvp: passed
+Observed result:
+  - archive_write_execution_preflight_passed: true
+  - target_archive_root_exists: false
+  - target_archive_paths_absent: true
+  - source_hash_verification_deferred_to_write_gate: true
+  - current_write_files: 0
+  - current_image_binary_reads: 0
+Closeout validation:
+  - archive write, image binary read/copy, preview generation, production-candidate write, DailyNote write, VCP memory write, provider/API/plugin call, image generation, staging, commit, push, tag, release, and deploy were not performed by the no-write preflight
+Next:
+  - execute_exact_new_trial_003_durable_archive_write_exact_three_files_with_hash_verification
+
 ## VALIDATION-20260524-v0.6.58-EXACT-NEW-TRIAL-003-DURABLE-ARCHIVE-WRITE-AUTHORIZATION-PACKAGE-AFTER-METADATA-PREFLIGHT
 
 Task: v0.6.58 exact new-trial 003 durable archive write authorization package after metadata preflight

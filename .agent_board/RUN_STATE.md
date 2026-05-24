@@ -1,5 +1,99 @@
 ---
 
+## Current Run State - v0.6.60 Exact New-Trial 003 Durable Archive Write Execution Receipt
+
+```text
+goal: transform AI image generation into a controlled production loop that is reviewable, iterable, archivable, approvable, and able to accumulate reusable experience
+route_plan: close the chain one safe gate at a time across visual request -> visual strategy -> prompt package -> provider/image execution -> review/scoring -> human approval -> asset archive -> Chinese memory entry -> future recall
+task_queue_current: v0_6_60_exact_new_trial_003_durable_archive_write_execution_receipt
+blocked_red_items: tag/release/deploy; destructive Git/filesystem action; force push/history rewrite; secret value read/edit; raw private data exposure; broad external repo or broad VCP writes; uncapped cost; unbounded loop; overwrite existing artifacts without explicit overwrite allowance; production candidate/DailyNote/VCP memory write before exact readiness gates
+next_safe_task: prepare_exact_new_trial_003_chinese_memory_entry_readiness_preflight_no_write
+phase: v0_6_60_exact_new_trial_003_durable_archive_write_execution_receipt
+status: completed_validated_exact_local_durable_archive_write
+mode: Amber_E exact local durable archive write plus Green local status sync
+source_phase: v0_6_59_exact_new_trial_003_durable_archive_write_execution_preflight_no_write
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+report_ref: reports/visual_asset_eval_dry_run/v0_6_60_exact_new_trial_003_durable_archive_write_execution_receipt.json
+validator_ref: scripts/validate_exact_new_trial_003_durable_archive_write_execution_receipt.js
+target_candidate_id: v0_3_3_exact_new_trial_003_shot_2
+target_sample_id: accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001
+category: fashion_lookbook_portrait
+artifact_sha256: 8bd7b81a916f0f6333392562d84e32368a3f28dd6a6456fc2f9e49d835a62c3b
+archive_root: asset_archive/accepted_samples/accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001
+archive_manifest_ref: asset_archive/accepted_samples/accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001/manifest.json
+archive_original_ref: asset_archive/accepted_samples/accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001/original.png
+archive_preview_ref: asset_archive/accepted_samples/accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001/preview.webp
+source_artifact_sha256_verified: true
+archive_write_performed: true
+image_binary_read_performed: true
+image_binary_reads_used: 1
+image_file_copy_performed: true
+preview_generation_performed: true
+files_written: 3
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_call_performed: false
+image_generation_performed: false
+secret_value_read_performed: false
+push_allowed: true_after_user_requested_commit_and_push_for_this_step
+push_status: not_performed_pending_validation_commit_and_push
+```
+
+---
+
+## Current Run State - v0.6.59 Exact New-Trial 003 Durable Archive Write Execution Preflight No Write
+
+```text
+goal: transform AI image generation into a controlled production loop that is reviewable, iterable, archivable, approvable, and able to accumulate reusable experience
+route_plan: close the chain one safe gate at a time across visual request -> visual strategy -> prompt package -> provider/image execution -> review/scoring -> human approval -> asset archive -> Chinese memory entry -> future recall
+task_queue_current: v0_6_59_exact_new_trial_003_durable_archive_write_execution_preflight_no_write
+blocked_red_items: push/tag/release/deploy unless explicitly requested; destructive Git/filesystem action; force push/history rewrite; secret value read/edit; raw private data exposure; broad external repo or broad VCP writes; uncapped cost; unbounded loop; overwrite existing artifacts without explicit overwrite allowance; dependency/runtime expansion for preview generation without exact package/action list
+next_safe_task: execute_exact_new_trial_003_durable_archive_write_exact_three_files_with_hash_verification
+phase: v0_6_59_exact_new_trial_003_durable_archive_write_execution_preflight_no_write
+status: completed_validated_local_durable_archive_write_execution_preflight_no_write
+mode: Green local durable archive write execution preflight no-write only
+source_phase: v0_6_58_exact_new_trial_003_durable_archive_write_authorization_package_after_metadata_preflight
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+report_ref: reports/visual_asset_eval_dry_run/v0_6_59_exact_new_trial_003_durable_archive_write_execution_preflight_no_write.json
+validator_ref: scripts/validate_exact_new_trial_003_durable_archive_write_execution_preflight_no_write.js
+target_candidate_id: v0_3_3_exact_new_trial_003_shot_2
+target_sample_id: accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001
+category: fashion_lookbook_portrait
+artifact_sha256: 8bd7b81a916f0f6333392562d84e32368a3f28dd6a6456fc2f9e49d835a62c3b
+accepted_sample_registration_completed: true
+archive_metadata_preflight_compiled: true
+archive_write_authorization_package_prepared: true
+archive_write_authorized_next: true
+archive_write_execution_preflight_passed: true
+target_archive_root_exists: false
+target_archive_paths_absent: true
+source_hash_verification_deferred_to_write_gate: true
+execution_allowed_now: false
+archive_write_allowed_next_gate: true
+current_write_files: 0
+current_image_binary_reads: 0
+next_gate_max_write_files: 3
+next_gate_max_image_binary_reads: 1
+archive_write_performed: false
+image_binary_read_performed: false
+image_file_copy_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_call_performed: false
+image_generation_performed: false
+secret_value_read_performed: false
+push_allowed: false
+push_status: not_performed
+```
+
+---
+
 ## Current Run State - v0.6.58 Exact New-Trial 003 Durable Archive Write Authorization Package After Metadata Preflight
 
 ```text

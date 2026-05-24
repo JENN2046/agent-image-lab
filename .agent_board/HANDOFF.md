@@ -1,5 +1,78 @@
 ---
 
+## Current Handoff Update - v0.6.60 Exact New-Trial 003 Durable Archive Write Execution Receipt
+
+```text
+phase: v0_6_60_exact_new_trial_003_durable_archive_write_execution_receipt
+status: completed_validated_exact_local_durable_archive_write
+mode: Amber_E exact local durable archive write plus Green local status sync
+summary: Executed the exact durable archive write for the accepted shot_2 sample with one source-image binary read, sha256 verification, and exactly three archive files; no production candidate, DailyNote, VCP memory, provider/API/plugin, secret read, tag, release, or deploy was performed.
+source_phase: v0_6_59_exact_new_trial_003_durable_archive_write_execution_preflight_no_write
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+report_ref: reports/visual_asset_eval_dry_run/v0_6_60_exact_new_trial_003_durable_archive_write_execution_receipt.json
+validator_ref: scripts/validate_exact_new_trial_003_durable_archive_write_execution_receipt.js
+target_candidate_id: v0_3_3_exact_new_trial_003_shot_2
+target_sample_id: accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001
+category: fashion_lookbook_portrait
+artifact_sha256: 8bd7b81a916f0f6333392562d84e32368a3f28dd6a6456fc2f9e49d835a62c3b
+archive_root: asset_archive/accepted_samples/accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001
+archive_manifest_ref: asset_archive/accepted_samples/accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001/manifest.json
+archive_original_ref: asset_archive/accepted_samples/accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001/original.png
+archive_preview_ref: asset_archive/accepted_samples/accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001/preview.webp
+source_artifact_sha256_verified: true
+archive_write_performed: true
+image_binary_read_performed: true
+image_binary_reads_used: 1
+files_written: 3
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+image_generation_performed: false
+secret_value_read_performed: false
+push_allowed: true_after_user_requested_commit_and_push_for_this_step
+push_status: not_performed_pending_validation_commit_and_push
+recommended_next: prepare_exact_new_trial_003_chinese_memory_entry_readiness_preflight_no_write
+```
+
+---
+
+## Current Handoff Update - v0.6.59 Exact New-Trial 003 Durable Archive Write Execution Preflight No Write
+
+```text
+phase: v0_6_59_exact_new_trial_003_durable_archive_write_execution_preflight_no_write
+status: completed_validated_local_durable_archive_write_execution_preflight_no_write
+mode: Green local durable archive write execution preflight no-write only
+summary: Verified v0.6.58 archive write authorization completeness and confirmed the exact future archive root plus three target paths are absent; no asset_archive write, image binary read/copy, preview generation, production candidate, DailyNote, VCP memory, provider/API/plugin, staging, commit, push, tag, release, or deploy was performed.
+source_phase: v0_6_58_exact_new_trial_003_durable_archive_write_authorization_package_after_metadata_preflight
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+report_ref: reports/visual_asset_eval_dry_run/v0_6_59_exact_new_trial_003_durable_archive_write_execution_preflight_no_write.json
+validator_ref: scripts/validate_exact_new_trial_003_durable_archive_write_execution_preflight_no_write.js
+target_candidate_id: v0_3_3_exact_new_trial_003_shot_2
+target_sample_id: accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001
+category: fashion_lookbook_portrait
+artifact_sha256: 8bd7b81a916f0f6333392562d84e32368a3f28dd6a6456fc2f9e49d835a62c3b
+archive_write_execution_preflight_passed: true
+target_archive_root_exists: false
+target_archive_paths_absent: true
+source_hash_verification_deferred_to_write_gate: true
+current_write_files: 0
+current_image_binary_reads: 0
+archive_write_performed: false
+image_binary_read_performed: false
+image_file_copy_performed: false
+image_generation_performed: false
+secret_value_read_performed: false
+push_allowed: false
+push_status: not_performed
+recommended_next: execute_exact_new_trial_003_durable_archive_write_exact_three_files_with_hash_verification
+```
+
+---
+
 ## Current Handoff Update - v0.6.58 Exact New-Trial 003 Durable Archive Write Authorization Package After Metadata Preflight
 
 ```text

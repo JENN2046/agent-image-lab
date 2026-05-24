@@ -843,6 +843,7 @@ $mediaFiles = Get-ChildItem -LiteralPath $Root -Recurse -File -Force |
   Where-Object {
     $relativePath = $_.FullName.Substring($Root.Length + 1).Replace('\', '/')
     $isGitPortablePreviewCapsule = $relativePath -match '^asset_archive/(accepted_samples|failure_samples)/[^/]+/preview\.webp$'
+    $isExactNewTrial003DurableArchiveOriginal = $relativePath -eq 'asset_archive/accepted_samples/accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001/original.png' -and (Test-Path -LiteralPath (Join-Path $Root 'reports/visual_asset_eval_dry_run/v0_6_60_exact_new_trial_003_durable_archive_write_execution_receipt.json'))
     $isVerifiedDurableOriginalAsset = $verifiedDurableOriginalAssetFiles -contains $relativePath
     $isLocalOnlyValidationCopy = $relativePath -match '^\.agent_private/'
     $_.FullName -notlike '*\.git\*' -and
@@ -850,6 +851,7 @@ $mediaFiles = Get-ChildItem -LiteralPath $Root -Recurse -File -Force |
     $_.FullName -notlike '*\release_packages\*' -and
     -not $isLocalOnlyValidationCopy -and
     -not $isGitPortablePreviewCapsule -and
+    -not $isExactNewTrial003DurableArchiveOriginal -and
     -not $isVerifiedDurableOriginalAsset -and
     $mediaExtensions -contains $_.Extension.ToLowerInvariant()
   }
@@ -14432,6 +14434,62 @@ process.exit(child.status || 0);
     }
     if ($exactNewTrialDurableArchiveWriteAuthorization.negative_case_count -lt 10 -or $exactNewTrialDurableArchiveWriteAuthorization.caught_negative_case_count -ne $exactNewTrialDurableArchiveWriteAuthorization.negative_case_count -or $exactNewTrialDurableArchiveWriteAuthorization.all_negative_cases_caught -ne $true) {
       Add-Failure "Exact New-Trial 003 durable archive write authorization package must catch every required negative case"
+    }
+  }
+
+  $exactNewTrialDurableArchiveWriteExecutionPreflightOutput = & node (Join-Path $Root 'scripts/validate_exact_new_trial_003_durable_archive_write_execution_preflight_no_write.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Exact New-Trial 003 durable archive write execution preflight no-write validation exited with failure"
+  } else {
+    $exactNewTrialDurableArchiveWriteExecutionPreflight = ($exactNewTrialDurableArchiveWriteExecutionPreflightOutput -join "`n") | ConvertFrom-Json
+    if ($exactNewTrialDurableArchiveWriteExecutionPreflight.passed -ne $true -or $exactNewTrialDurableArchiveWriteExecutionPreflight.phase -ne 'v0_6_59_exact_new_trial_003_durable_archive_write_execution_preflight_no_write') {
+      Add-Failure "Exact New-Trial 003 durable archive write execution preflight no-write validation must pass"
+    }
+    if ($exactNewTrialDurableArchiveWriteExecutionPreflight.package_type -ne 'durable_archive_write_execution_preflight_no_write' -or $exactNewTrialDurableArchiveWriteExecutionPreflight.target_sample_id -ne 'accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001' -or $exactNewTrialDurableArchiveWriteExecutionPreflight.target_candidate_id -ne 'v0_3_3_exact_new_trial_003_shot_2' -or $exactNewTrialDurableArchiveWriteExecutionPreflight.category -ne 'fashion_lookbook_portrait') {
+      Add-Failure "Exact New-Trial 003 durable archive write execution preflight must bind the exact package type, selected candidate, sample id, and category"
+    }
+    if ($exactNewTrialDurableArchiveWriteExecutionPreflight.accepted_sample_registration_completed -ne $true -or $exactNewTrialDurableArchiveWriteExecutionPreflight.archive_metadata_preflight_compiled -ne $true -or $exactNewTrialDurableArchiveWriteExecutionPreflight.archive_write_authorization_package_prepared -ne $true -or $exactNewTrialDurableArchiveWriteExecutionPreflight.archive_write_authorized_next -ne $true -or $exactNewTrialDurableArchiveWriteExecutionPreflight.archive_write_execution_preflight_passed -ne $true) {
+      Add-Failure "Exact New-Trial 003 durable archive write execution preflight must verify the upstream authorization package and pass the no-write preflight"
+    }
+    if ($exactNewTrialDurableArchiveWriteExecutionPreflight.target_archive_root_exists -ne $false -or $exactNewTrialDurableArchiveWriteExecutionPreflight.target_archive_paths_absent -ne $true -or $exactNewTrialDurableArchiveWriteExecutionPreflight.source_hash_verification_deferred_to_write_gate -ne $true -or $exactNewTrialDurableArchiveWriteExecutionPreflight.execution_allowed_now -ne $false -or $exactNewTrialDurableArchiveWriteExecutionPreflight.archive_write_allowed_next_gate -ne $true) {
+      Add-Failure "Exact New-Trial 003 durable archive write execution preflight must prove target absence and defer source hash reading to the future write gate"
+    }
+    if ($exactNewTrialDurableArchiveWriteExecutionPreflight.archive_write_performed -ne $false -or $exactNewTrialDurableArchiveWriteExecutionPreflight.image_binary_read_performed -ne $false -or $exactNewTrialDurableArchiveWriteExecutionPreflight.image_file_copy_performed -ne $false -or $exactNewTrialDurableArchiveWriteExecutionPreflight.current_write_files -ne 0 -or $exactNewTrialDurableArchiveWriteExecutionPreflight.current_image_binary_reads -ne 0) {
+      Add-Failure "Exact New-Trial 003 durable archive write execution preflight must not write archive files or read/copy image binaries"
+    }
+    if ($exactNewTrialDurableArchiveWriteExecutionPreflight.future_write_path_count -ne 3 -or $exactNewTrialDurableArchiveWriteExecutionPreflight.next_gate_max_write_files -ne 3 -or $exactNewTrialDurableArchiveWriteExecutionPreflight.next_gate_max_image_binary_reads -ne 1 -or $exactNewTrialDurableArchiveWriteExecutionPreflight.recommended_next -ne 'execute_exact_new_trial_003_durable_archive_write_exact_three_files_with_hash_verification') {
+      Add-Failure "Exact New-Trial 003 durable archive write execution preflight must expose the exact next archive write gate envelope"
+    }
+    if ($exactNewTrialDurableArchiveWriteExecutionPreflight.negative_case_count -lt 12 -or $exactNewTrialDurableArchiveWriteExecutionPreflight.caught_negative_case_count -ne $exactNewTrialDurableArchiveWriteExecutionPreflight.negative_case_count -or $exactNewTrialDurableArchiveWriteExecutionPreflight.all_negative_cases_caught -ne $true) {
+      Add-Failure "Exact New-Trial 003 durable archive write execution preflight must catch every required negative case"
+    }
+  }
+
+  $exactNewTrialDurableArchiveWriteExecutionReceiptOutput = & node (Join-Path $Root 'scripts/validate_exact_new_trial_003_durable_archive_write_execution_receipt.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Exact New-Trial 003 durable archive write execution receipt validation exited with failure"
+  } else {
+    $exactNewTrialDurableArchiveWriteExecutionReceipt = ($exactNewTrialDurableArchiveWriteExecutionReceiptOutput -join "`n") | ConvertFrom-Json
+    if ($exactNewTrialDurableArchiveWriteExecutionReceipt.passed -ne $true -or $exactNewTrialDurableArchiveWriteExecutionReceipt.phase -ne 'v0_6_60_exact_new_trial_003_durable_archive_write_execution_receipt') {
+      Add-Failure "Exact New-Trial 003 durable archive write execution receipt validation must pass"
+    }
+    if ($exactNewTrialDurableArchiveWriteExecutionReceipt.package_type -ne 'durable_archive_write_execution_receipt' -or $exactNewTrialDurableArchiveWriteExecutionReceipt.target_sample_id -ne 'accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001' -or $exactNewTrialDurableArchiveWriteExecutionReceipt.target_candidate_id -ne 'v0_3_3_exact_new_trial_003_shot_2' -or $exactNewTrialDurableArchiveWriteExecutionReceipt.category -ne 'fashion_lookbook_portrait') {
+      Add-Failure "Exact New-Trial 003 durable archive write execution receipt must bind the exact package type, selected candidate, sample id, and category"
+    }
+    if ($exactNewTrialDurableArchiveWriteExecutionReceipt.archive_write_performed -ne $true -or $exactNewTrialDurableArchiveWriteExecutionReceipt.image_binary_read_performed -ne $true -or $exactNewTrialDurableArchiveWriteExecutionReceipt.image_file_copy_performed -ne $true -or $exactNewTrialDurableArchiveWriteExecutionReceipt.preview_generation_performed -ne $true) {
+      Add-Failure "Exact New-Trial 003 durable archive write execution receipt must record the authorized archive write, one image read, image copy, and preview generation"
+    }
+    if ($exactNewTrialDurableArchiveWriteExecutionReceipt.actual_write_files -ne 3 -or $exactNewTrialDurableArchiveWriteExecutionReceipt.actual_image_binary_reads -ne 1 -or $exactNewTrialDurableArchiveWriteExecutionReceipt.source_artifact_sha256_verified -ne '8bd7b81a916f0f6333392562d84e32368a3f28dd6a6456fc2f9e49d835a62c3b') {
+      Add-Failure "Exact New-Trial 003 durable archive write execution receipt must preserve the three-file write budget and one source-image hash read"
+    }
+    if ($exactNewTrialDurableArchiveWriteExecutionReceipt.original_sha256 -ne '8bd7b81a916f0f6333392562d84e32368a3f28dd6a6456fc2f9e49d835a62c3b' -or $exactNewTrialDurableArchiveWriteExecutionReceipt.preview_sha256 -ne '93af7b4468d7294f0c1eaef1f9cf260ed86b11122ba81d0230edb9eaedae47c7' -or $exactNewTrialDurableArchiveWriteExecutionReceipt.preview_long_edge -ne 512) {
+      Add-Failure "Exact New-Trial 003 durable archive write execution receipt must verify original and preview artifact hashes and dimensions"
+    }
+    if ($exactNewTrialDurableArchiveWriteExecutionReceipt.production_candidate_write_performed -ne $false -or $exactNewTrialDurableArchiveWriteExecutionReceipt.DailyNote_write_performed -ne $false -or $exactNewTrialDurableArchiveWriteExecutionReceipt.VCP_memory_write_performed -ne $false -or $exactNewTrialDurableArchiveWriteExecutionReceipt.provider_contact_performed -ne $false -or $exactNewTrialDurableArchiveWriteExecutionReceipt.plugin_call_performed -ne $false -or $exactNewTrialDurableArchiveWriteExecutionReceipt.api_call_performed -ne $false -or $exactNewTrialDurableArchiveWriteExecutionReceipt.secret_value_read_performed -ne $false -or $exactNewTrialDurableArchiveWriteExecutionReceipt.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "Exact New-Trial 003 durable archive write execution receipt must preserve production, memory, provider/API/plugin, secret, and release boundaries"
+    }
+    if ($exactNewTrialDurableArchiveWriteExecutionReceipt.negative_case_count -lt 13 -or $exactNewTrialDurableArchiveWriteExecutionReceipt.caught_negative_case_count -ne $exactNewTrialDurableArchiveWriteExecutionReceipt.negative_case_count -or $exactNewTrialDurableArchiveWriteExecutionReceipt.all_negative_cases_caught -ne $true) {
+      Add-Failure "Exact New-Trial 003 durable archive write execution receipt must catch every required negative case"
     }
   }
 

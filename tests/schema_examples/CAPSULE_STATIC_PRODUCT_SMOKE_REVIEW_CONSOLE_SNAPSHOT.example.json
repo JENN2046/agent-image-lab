@@ -11,15 +11,16 @@
       "manifest:passed",
       "relation:passed",
       "guard:passed",
-      "total:4"
+      "total:5"
     ],
-    "row_count": 4,
-    "accepted": 2,
+    "row_count": 5,
+    "accepted": 3,
     "failure": 2,
-    "total": 4,
+    "total": 5,
     "sample_ids": [
       "accepted_french_summer_rattan_bucket_bag_001",
       "accepted_product_still_life_tennis_wallet_001",
+      "accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001",
       "failure_french_summer_rattan_bag_v7_29_001",
       "failure_tennis_wallet_v7_21_001"
     ],

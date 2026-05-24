@@ -1840,6 +1840,68 @@ const EXPECTED_V0_6_58_EXACT_NEW_TRIAL_003_DURABLE_ARCHIVE_WRITE_AUTHORIZATION_P
   "tests/schema_examples/exact_new_trial_003_durable_archive_write_authorization_package_after_metadata_preflight_fail.example.json"
 ].sort();
 
+const EXPECTED_V0_6_59_EXACT_NEW_TRIAL_003_DURABLE_ARCHIVE_WRITE_EXECUTION_PREFLIGHT_NO_WRITE_SLICE = [
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  ".agent_board/VALIDATION_LOG.md",
+  "docs/00_project_roadmap.md",
+  "docs/V0_6_59_EXACT_NEW_TRIAL_003_DURABLE_ARCHIVE_WRITE_EXECUTION_PREFLIGHT_NO_WRITE.md",
+  "reports/visual_asset_eval_dry_run/v0_6_59_exact_new_trial_003_durable_archive_write_execution_preflight_no_write.json",
+  "scripts/lib/governance_tooling_maintenance_slice.js",
+  "scripts/validate_exact_new_trial_003_durable_archive_write_execution_preflight_no_write.js",
+  "scripts/validate_mvp.ps1",
+  "tests/schema_examples/exact_new_trial_003_durable_archive_write_execution_preflight_no_write.example.json",
+  "tests/schema_examples/exact_new_trial_003_durable_archive_write_execution_preflight_no_write_fail.example.json"
+].sort();
+
+const EXPECTED_V0_6_60_EXACT_NEW_TRIAL_003_DURABLE_ARCHIVE_WRITE_EXECUTION_RECEIPT_SLICE = [
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  ".agent_board/VALIDATION_LOG.md",
+  "asset_archive/accepted_samples/accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001/manifest.json",
+  "asset_archive/accepted_samples/accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001/original.png",
+  "asset_archive/accepted_samples/accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001/preview.webp",
+  "docs/00_project_roadmap.md",
+  "docs/V0_6_59_EXACT_NEW_TRIAL_003_DURABLE_ARCHIVE_WRITE_EXECUTION_PREFLIGHT_NO_WRITE.md",
+  "docs/V0_6_60_EXACT_NEW_TRIAL_003_DURABLE_ARCHIVE_WRITE_EXECUTION_RECEIPT.md",
+  "reports/visual_asset_eval_dry_run/v0_6_59_exact_new_trial_003_durable_archive_write_execution_preflight_no_write.json",
+  "reports/visual_asset_eval_dry_run/v0_6_60_exact_new_trial_003_durable_archive_write_execution_receipt.json",
+  "review_console/static_prototype/app.js",
+  "review_console/static_prototype/mock_data.js",
+  "scripts/lib/artifact_recoverability_core.js",
+  "scripts/lib/capsule_manifest_contract.js",
+  "scripts/lib/governance_tooling_maintenance_slice.js",
+  "scripts/validate_capsule_manifest_contract.js",
+  "scripts/validate_capsule_operator_reviewer_action_matrix.js",
+  "scripts/validate_capsule_registry_report_v2.js",
+  "scripts/validate_capsule_static_operator_checklist_ui_mapping.js",
+  "scripts/validate_capsule_static_product_smoke_fixture.js",
+  "scripts/validate_capsule_static_product_smoke_review_console_snapshot.js",
+  "scripts/validate_exact_new_trial_003_durable_archive_metadata_preflight_after_accepted_sample_registration.js",
+  "scripts/validate_exact_new_trial_003_durable_archive_write_authorization_package_after_metadata_preflight.js",
+  "scripts/validate_exact_new_trial_003_durable_archive_write_execution_preflight_no_write.js",
+  "scripts/validate_exact_new_trial_003_durable_archive_write_execution_receipt.js",
+  "scripts/validate_multi_capsule_dashboard.js",
+  "scripts/validate_mvp.ps1",
+  "scripts/validate_mvp_capsule_product_core.ps1",
+  "scripts/validate_review_console_registry_report_v2_state.js",
+  "scripts/validate_v14_165_bag_accepted_samples_metadata_registration.js",
+  "tests/schema_examples/CAPSULE_OPERATOR_REVIEWER_ACTION_MATRIX.example.json",
+  "tests/schema_examples/CAPSULE_STATIC_PRODUCT_SMOKE_REVIEW_CONSOLE_SNAPSHOT.example.json",
+  "tests/schema_examples/CAPSULE_STATIC_PRODUCT_SMOKE_UNIFIED_CONTRACT.example.json",
+  "tests/schema_examples/P6B_CAPSULE_REGISTRY_REPORT_V2.example.json",
+  "tests/schema_examples/P6C_REVIEW_CONSOLE_REGISTRY_REPORT_V2_STATE.example.json",
+  "tests/schema_examples/P6_MULTI_CAPSULE_ACCEPTED_FAILURE_DASHBOARD.example.json",
+  "tests/schema_examples/exact_new_trial_003_durable_archive_write_execution_preflight_no_write.example.json",
+  "tests/schema_examples/exact_new_trial_003_durable_archive_write_execution_preflight_no_write_fail.example.json",
+  "tests/schema_examples/exact_new_trial_003_durable_archive_write_execution_receipt.example.json",
+  "tests/schema_examples/exact_new_trial_003_durable_archive_write_execution_receipt_fail.example.json"
+].sort();
+
 const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "governance_tooling_maintenance_slice_v1",
@@ -2248,6 +2310,14 @@ const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "v0_6_58_exact_new_trial_003_durable_archive_write_authorization_package_after_metadata_preflight_slice",
     files: EXPECTED_V0_6_58_EXACT_NEW_TRIAL_003_DURABLE_ARCHIVE_WRITE_AUTHORIZATION_PACKAGE_AFTER_METADATA_PREFLIGHT_SLICE
+  },
+  {
+    id: "v0_6_59_exact_new_trial_003_durable_archive_write_execution_preflight_no_write_slice",
+    files: EXPECTED_V0_6_59_EXACT_NEW_TRIAL_003_DURABLE_ARCHIVE_WRITE_EXECUTION_PREFLIGHT_NO_WRITE_SLICE
+  },
+  {
+    id: "v0_6_60_exact_new_trial_003_durable_archive_write_execution_receipt_slice",
+    files: EXPECTED_V0_6_60_EXACT_NEW_TRIAL_003_DURABLE_ARCHIVE_WRITE_EXECUTION_RECEIPT_SLICE
   }
 ];
 
@@ -2697,6 +2767,16 @@ function governanceToolingMaintenanceSliceSelfCheck() {
         === "v0_6_58_exact_new_trial_003_durable_archive_write_authorization_package_after_metadata_preflight_slice"
     },
     {
+      check: "exact_slice_matches_v0_6_59_exact_new_trial_003_durable_archive_write_execution_preflight_no_write",
+      passed: findMatchingGovernanceToolingSlice(EXPECTED_V0_6_59_EXACT_NEW_TRIAL_003_DURABLE_ARCHIVE_WRITE_EXECUTION_PREFLIGHT_NO_WRITE_SLICE)?.id
+        === "v0_6_59_exact_new_trial_003_durable_archive_write_execution_preflight_no_write_slice"
+    },
+    {
+      check: "exact_slice_matches_v0_6_60_exact_new_trial_003_durable_archive_write_execution_receipt",
+      passed: findMatchingGovernanceToolingSlice(EXPECTED_V0_6_60_EXACT_NEW_TRIAL_003_DURABLE_ARCHIVE_WRITE_EXECUTION_RECEIPT_SLICE)?.id
+        === "v0_6_60_exact_new_trial_003_durable_archive_write_execution_receipt_slice"
+    },
+    {
       check: "exact_slice_rejects_missing_file",
       passed: findMatchingGovernanceToolingSlice(EXPECTED_GOVERNANCE_TOOLING_MAINTENANCE_SLICE.slice(1)) === null
     },
@@ -2801,6 +2881,8 @@ module.exports = {
   EXPECTED_V0_6_56_EXACT_NEW_TRIAL_003_ACCEPTED_SAMPLES_METADATA_REGISTRATION_SLICE,
   EXPECTED_V0_6_57_EXACT_NEW_TRIAL_003_DURABLE_ARCHIVE_METADATA_PREFLIGHT_AFTER_ACCEPTED_SAMPLE_REGISTRATION_SLICE,
   EXPECTED_V0_6_58_EXACT_NEW_TRIAL_003_DURABLE_ARCHIVE_WRITE_AUTHORIZATION_PACKAGE_AFTER_METADATA_PREFLIGHT_SLICE,
+  EXPECTED_V0_6_59_EXACT_NEW_TRIAL_003_DURABLE_ARCHIVE_WRITE_EXECUTION_PREFLIGHT_NO_WRITE_SLICE,
+  EXPECTED_V0_6_60_EXACT_NEW_TRIAL_003_DURABLE_ARCHIVE_WRITE_EXECUTION_RECEIPT_SLICE,
   GOVERNANCE_TOOLING_ALLOWED_SLICES,
   buildGovernanceToolingMaintenanceSliceReport,
   fileAllowedInGovernanceToolingSlice,
