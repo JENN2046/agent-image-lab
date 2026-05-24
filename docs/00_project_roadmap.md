@@ -2,6 +2,75 @@
 
 本文是 Agent Image Lab 的总路线图，用来把 v0.2 基线、v0.3 授权门槛、MVP-B dry-run 和未来真实闭环串成一条可执行路径。
 
+## v0.6.61 - Exact New-Trial 003 Chinese Memory Entry Readiness Preflight No Write
+
+Status: completed_validated_local_chinese_memory_entry_readiness_preflight_no_write.
+
+```yaml
+current_phase: v0_6_61_exact_new_trial_003_chinese_memory_entry_readiness_preflight_no_write
+active_current_phase: v0_3_3_first_live_generation_pilot
+source_phase: v0_6_60_exact_new_trial_003_durable_archive_write_execution_receipt
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+next_red_decision: resolve_exact_memory_writer_target_without_secret_or_broad_vcp_write
+legacy_resume_guard_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+lane: Green
+formal_human_approval_captured: true
+accepted_sample_registration_completed: true
+durable_archive_ready: true
+memory_route_type: accepted_sample_review_learning
+production_candidate_required_for_this_memory_route: false
+production_candidate_ready: false
+go_allowed_next_amber_memory_packet: true
+execution_allowed_now_by_this_preflight: false
+exact_allowed_target_count: 2
+daily_note_payload_chinese: true
+vcp_memory_payload_chinese: true
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_call_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+secret_value_read_performed: false
+push_status: not_performed_by_this_no_write_preflight
+```
+
+Goal:
+
+- Reconcile the approved, registered, and durably archived shot_2 sample into a
+  Chinese memory-entry readiness packet.
+- Keep the phase no-write while proving the next step can be an exact
+  Amber_C memory write packet inside Smart Standing Authorization v3.
+
+Artifacts:
+
+- `docs/V0_6_61_EXACT_NEW_TRIAL_003_CHINESE_MEMORY_ENTRY_READINESS_PREFLIGHT_NO_WRITE.md`
+- `reports/visual_asset_eval_dry_run/v0_6_61_exact_new_trial_003_chinese_memory_entry_readiness_preflight_no_write.json`
+- `reports/memory_write_receipts/v0_3_3_exact_new_trial_003_shot_2_chinese_memory_entry_readiness_preflight_no_write.json`
+- `tests/schema_examples/exact_new_trial_003_chinese_memory_entry_readiness_preflight_no_write.example.json`
+- `tests/schema_examples/exact_new_trial_003_chinese_memory_entry_readiness_preflight_no_write_fail.example.json`
+- `scripts/validate_exact_new_trial_003_chinese_memory_entry_readiness_preflight_no_write.js`
+
+Validation:
+
+- `node --check scripts/validate_exact_new_trial_003_chinese_memory_entry_readiness_preflight_no_write.js`
+- `node scripts/validate_exact_new_trial_003_chinese_memory_entry_readiness_preflight_no_write.js`
+
+Key decisions:
+
+- This memory route is `accepted_sample_review_learning`, not a production
+  candidate publication conclusion.
+- Production candidate readiness is not required for this specific memory
+  route.
+- Step-by-step real-class authorization is not a blocker under Smart Standing
+  Authorization v3; the next action still needs an exact Amber packet, budget,
+  receipt, validation, and stop conditions.
+
+Recommended next:
+
+- Execute the exact Amber_C Chinese DailyNote plus VCP memory write only if the
+  exact writer target resolves without secret access or broad VCP writes.
+
 ## v0.6.60 - Exact New-Trial 003 Durable Archive Write Execution Receipt
 
 Status: completed_validated_exact_local_durable_archive_write.
@@ -26,7 +95,7 @@ VCP_memory_write_performed: false
 image_generation_performed: false
 secret_value_read_performed: false
 push_allowed: true_after_user_requested_commit_and_push_for_this_step
-push_status: not_performed_pending_validation_commit_and_push
+push_status: pushed_to_origin_master_commit_f163a9d
 ```
 
 Goal:

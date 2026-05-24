@@ -1902,6 +1902,23 @@ const EXPECTED_V0_6_60_EXACT_NEW_TRIAL_003_DURABLE_ARCHIVE_WRITE_EXECUTION_RECEI
   "tests/schema_examples/exact_new_trial_003_durable_archive_write_execution_receipt_fail.example.json"
 ].sort();
 
+const EXPECTED_V0_6_61_EXACT_NEW_TRIAL_003_CHINESE_MEMORY_ENTRY_READINESS_PREFLIGHT_NO_WRITE_SLICE = [
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  ".agent_board/VALIDATION_LOG.md",
+  "docs/00_project_roadmap.md",
+  "docs/V0_6_61_EXACT_NEW_TRIAL_003_CHINESE_MEMORY_ENTRY_READINESS_PREFLIGHT_NO_WRITE.md",
+  "reports/memory_write_receipts/v0_3_3_exact_new_trial_003_shot_2_chinese_memory_entry_readiness_preflight_no_write.json",
+  "reports/visual_asset_eval_dry_run/v0_6_61_exact_new_trial_003_chinese_memory_entry_readiness_preflight_no_write.json",
+  "scripts/lib/governance_tooling_maintenance_slice.js",
+  "scripts/validate_exact_new_trial_003_chinese_memory_entry_readiness_preflight_no_write.js",
+  "scripts/validate_mvp.ps1",
+  "tests/schema_examples/exact_new_trial_003_chinese_memory_entry_readiness_preflight_no_write.example.json",
+  "tests/schema_examples/exact_new_trial_003_chinese_memory_entry_readiness_preflight_no_write_fail.example.json"
+].sort();
+
 const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "governance_tooling_maintenance_slice_v1",
@@ -2318,6 +2335,10 @@ const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "v0_6_60_exact_new_trial_003_durable_archive_write_execution_receipt_slice",
     files: EXPECTED_V0_6_60_EXACT_NEW_TRIAL_003_DURABLE_ARCHIVE_WRITE_EXECUTION_RECEIPT_SLICE
+  },
+  {
+    id: "v0_6_61_exact_new_trial_003_chinese_memory_entry_readiness_preflight_no_write_slice",
+    files: EXPECTED_V0_6_61_EXACT_NEW_TRIAL_003_CHINESE_MEMORY_ENTRY_READINESS_PREFLIGHT_NO_WRITE_SLICE
   }
 ];
 
@@ -2777,6 +2798,12 @@ function governanceToolingMaintenanceSliceSelfCheck() {
         === "v0_6_60_exact_new_trial_003_durable_archive_write_execution_receipt_slice"
     },
     {
+      check: "exact_slice_matches_v0_6_61_exact_new_trial_003_chinese_memory_entry_readiness_preflight_no_write",
+      passed: findMatchingGovernanceToolingSlice(
+        EXPECTED_V0_6_61_EXACT_NEW_TRIAL_003_CHINESE_MEMORY_ENTRY_READINESS_PREFLIGHT_NO_WRITE_SLICE
+      )?.id === "v0_6_61_exact_new_trial_003_chinese_memory_entry_readiness_preflight_no_write_slice"
+    },
+    {
       check: "exact_slice_rejects_missing_file",
       passed: findMatchingGovernanceToolingSlice(EXPECTED_GOVERNANCE_TOOLING_MAINTENANCE_SLICE.slice(1)) === null
     },
@@ -2883,6 +2910,7 @@ module.exports = {
   EXPECTED_V0_6_58_EXACT_NEW_TRIAL_003_DURABLE_ARCHIVE_WRITE_AUTHORIZATION_PACKAGE_AFTER_METADATA_PREFLIGHT_SLICE,
   EXPECTED_V0_6_59_EXACT_NEW_TRIAL_003_DURABLE_ARCHIVE_WRITE_EXECUTION_PREFLIGHT_NO_WRITE_SLICE,
   EXPECTED_V0_6_60_EXACT_NEW_TRIAL_003_DURABLE_ARCHIVE_WRITE_EXECUTION_RECEIPT_SLICE,
+  EXPECTED_V0_6_61_EXACT_NEW_TRIAL_003_CHINESE_MEMORY_ENTRY_READINESS_PREFLIGHT_NO_WRITE_SLICE,
   GOVERNANCE_TOOLING_ALLOWED_SLICES,
   buildGovernanceToolingMaintenanceSliceReport,
   fileAllowedInGovernanceToolingSlice,

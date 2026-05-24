@@ -14493,6 +14493,37 @@ process.exit(child.status || 0);
     }
   }
 
+  $exactNewTrialChineseMemoryEntryReadinessOutput = & node (Join-Path $Root 'scripts/validate_exact_new_trial_003_chinese_memory_entry_readiness_preflight_no_write.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Exact New-Trial 003 Chinese memory entry readiness preflight validation exited with failure"
+  } else {
+    $exactNewTrialChineseMemoryEntryReadiness = ($exactNewTrialChineseMemoryEntryReadinessOutput -join "`n") | ConvertFrom-Json
+    if ($exactNewTrialChineseMemoryEntryReadiness.passed -ne $true -or $exactNewTrialChineseMemoryEntryReadiness.phase -ne 'v0_6_61_exact_new_trial_003_chinese_memory_entry_readiness_preflight_no_write') {
+      Add-Failure "Exact New-Trial 003 Chinese memory entry readiness preflight validation must pass"
+    }
+    if ($exactNewTrialChineseMemoryEntryReadiness.target_sample_id -ne 'accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001' -or $exactNewTrialChineseMemoryEntryReadiness.target_candidate_id -ne 'v0_3_3_exact_new_trial_003_shot_2' -or $exactNewTrialChineseMemoryEntryReadiness.memory_route_type -ne 'accepted_sample_review_learning') {
+      Add-Failure "Exact New-Trial 003 Chinese memory entry readiness preflight must bind the accepted sample, selected candidate, and memory route"
+    }
+    if ($exactNewTrialChineseMemoryEntryReadiness.formal_human_approval_captured -ne $true -or $exactNewTrialChineseMemoryEntryReadiness.accepted_sample_registration_completed -ne $true -or $exactNewTrialChineseMemoryEntryReadiness.durable_archive_ready -ne $true) {
+      Add-Failure "Exact New-Trial 003 Chinese memory entry readiness preflight must verify approval, accepted registration, and durable archive readiness"
+    }
+    if ($exactNewTrialChineseMemoryEntryReadiness.production_candidate_required_for_this_memory_route -ne $false -or $exactNewTrialChineseMemoryEntryReadiness.production_candidate_ready -ne $false -or $exactNewTrialChineseMemoryEntryReadiness.go_allowed_next_amber_memory_packet -ne $true -or $exactNewTrialChineseMemoryEntryReadiness.execution_allowed_now_by_this_preflight -ne $false) {
+      Add-Failure "Exact New-Trial 003 Chinese memory entry readiness preflight must separate accepted-sample learning memory readiness from production candidate publication"
+    }
+    if ($exactNewTrialChineseMemoryEntryReadiness.daily_note_payload_chinese -ne $true -or $exactNewTrialChineseMemoryEntryReadiness.vcp_memory_payload_chinese -ne $true -or $exactNewTrialChineseMemoryEntryReadiness.exact_allowed_target_count -ne 2 -or $exactNewTrialChineseMemoryEntryReadiness.max_write_entries -ne 2) {
+      Add-Failure "Exact New-Trial 003 Chinese memory entry readiness preflight must expose two exact Chinese memory targets"
+    }
+    if ($exactNewTrialChineseMemoryEntryReadiness.DailyNote_write_performed -ne $false -or $exactNewTrialChineseMemoryEntryReadiness.VCP_memory_write_performed -ne $false -or $exactNewTrialChineseMemoryEntryReadiness.plugin_call_performed -ne $false -or $exactNewTrialChineseMemoryEntryReadiness.api_call_performed -ne $false -or $exactNewTrialChineseMemoryEntryReadiness.secret_value_read_performed -ne $false -or $exactNewTrialChineseMemoryEntryReadiness.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "Exact New-Trial 003 Chinese memory entry readiness preflight must remain no-write, no-plugin/API, no-secret, and no-release"
+    }
+    if ($exactNewTrialChineseMemoryEntryReadiness.negative_case_count -lt 9 -or $exactNewTrialChineseMemoryEntryReadiness.caught_negative_case_count -ne $exactNewTrialChineseMemoryEntryReadiness.negative_case_count -or $exactNewTrialChineseMemoryEntryReadiness.all_negative_cases_caught -ne $true) {
+      Add-Failure "Exact New-Trial 003 Chinese memory entry readiness preflight must catch every required negative case"
+    }
+    if ($exactNewTrialChineseMemoryEntryReadiness.recommended_next -ne 'execute_exact_new_trial_003_chinese_memory_entry_amber_c_memory_write_with_receipt_if_exact_writer_target_is_resolved') {
+      Add-Failure "Exact New-Trial 003 Chinese memory entry readiness preflight must route to the exact next Amber memory write packet"
+    }
+  }
+
   $visualSampleMemoryOutput = & node (Join-Path $Root 'scripts/validate_visual_sample_memory_policy.js')
   if ($LASTEXITCODE -ne 0) {
     Add-Failure "Visual sample memory policy validation exited with failure"
