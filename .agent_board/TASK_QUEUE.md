@@ -1,5 +1,31 @@
 ---
 
+- [x] ID: v0_6_73o_exact_real_execution_authorization_phrase_draft
+      Lane: Green local authorization phrase draft only.
+      Status: COMPLETED_VALIDATED_phrase_draft_inactive.
+      Source phase: v0_6_73n_real_execution_go_no_go_review.
+      Source status: COMPLETED_VALIDATED_NO_GO.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Legacy active next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Goal: Draft the exact future real execution human authorization sentence without activating it.
+      Authorization phrase contract id: AUTH-PHRASE-DRAFT-V0-6-73O.
+      Authorization phrase active: false.
+      Exact phrase required: true.
+      Current go/no-go decision: NO_GO.
+      provider_contact_performed: false.
+      plugin_call_performed: false.
+      api_call_performed: false.
+      image_generation_performed: false.
+      image_binary_read_performed: false.
+      output_write_performed: false.
+      env_file_content_read_performed: false.
+      secret_value_read_performed: false.
+      push_status: not_performed.
+      Next: v0_6_73p_local_aggregate_readiness_review.
+
+---
+
 - [x] ID: v0_6_73n_real_execution_go_no_go_review
       Lane: Green local go/no-go review only.
       Status: COMPLETED_VALIDATED_NO_GO.

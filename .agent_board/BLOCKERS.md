@@ -2,6 +2,18 @@
 
 ## Active Blockers
 
+## BLOCKER-20260525-07 - v0.6.73 exact authorization phrase remains inactive
+
+Status: active_phrase_draft_inactive
+Detected during: v0_6_73o_exact_real_execution_authorization_phrase_draft
+Task: exact real execution authorization phrase draft
+Reason: The future authorization phrase template is drafted, but authorization_phrase_active is false and current_go_no_go_decision is NO_GO. The phrase cannot authorize execution until remote sync, exact active bound delegate authorization, MVP validation, GO decision, and a later exact user phrase are all present.
+Hard stop gate: exact_phrase_inactive_until_remote_sync_delegate_activation_and_GO_review
+Files involved: docs/vcp_integration/V0_6_73O_EXACT_REAL_EXECUTION_AUTHORIZATION_PHRASE_DRAFT.md; scripts/validate_v0_6_73o_exact_real_execution_authorization_phrase_draft.js; tests/schema_examples/v0_6_73o_exact_real_execution_authorization_phrase_draft.example.yaml
+Validation state: local phrase draft validator required; no provider/API/image/output/secret action performed.
+Required next safe action: v0_6_73p_local_aggregate_readiness_review.
+Rollback or cleanup path: remove v0.6.73o phrase draft files plus board status sync; no generated image, output directory, receipt, review handoff, memory, sample, production candidate, or remote execution state was created.
+
 ## BLOCKER-20260525-06 - v0.6.73 go/no-go review is NO-GO
 
 Status: active_no_go

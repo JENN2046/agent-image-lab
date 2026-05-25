@@ -1,5 +1,48 @@
 ---
 
+## Checkpoint - v0.6.73o Exact Real Execution Authorization Phrase Draft
+
+```text
+phase: v0_6_73o_exact_real_execution_authorization_phrase_draft
+status: COMPLETED_VALIDATED_phrase_draft_inactive
+source_phase: v0_6_73n_real_execution_go_no_go_review
+source_status: COMPLETED_VALIDATED_NO_GO
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+legacy_active_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+changed_files_current_task:
+  - docs/vcp_integration/V0_6_73O_EXACT_REAL_EXECUTION_AUTHORIZATION_PHRASE_DRAFT.md
+  - tests/schema_examples/v0_6_73o_exact_real_execution_authorization_phrase_draft.example.yaml
+  - scripts/validate_v0_6_73o_exact_real_execution_authorization_phrase_draft.js
+  - scripts/lib/governance_tooling_maintenance_slice.js
+  - .agent_board/BLOCKERS.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+summary: Drafted the exact future human authorization sentence template for v0.6.73 real one-shot execution, while keeping the phrase inactive because the current go/no-go decision remains NO_GO.
+authorization_phrase_contract_id: AUTH-PHRASE-DRAFT-V0-6-73O
+authorization_phrase_active: false
+current_go_no_go_decision: NO_GO
+v0_6_73_execution_allowed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+image_binary_read_performed: false
+output_write_performed: false
+env_file_content_read_performed: false
+secret_value_read_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+push_status: not_performed
+next_safe_task: v0_6_73p_local_aggregate_readiness_review
+```
+
+---
+
 ## Checkpoint - v0.6.73n Real Execution Go/No-Go Review
 
 ```text
