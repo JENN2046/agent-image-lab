@@ -1,5 +1,52 @@
 ---
 
+## Checkpoint - v0.6.73u Active Delegate Authorization Activation Preflight
+
+```text
+phase: v0_6_73u_active_delegate_authorization_activation_preflight
+status: COMPLETED_VALIDATED_fail_closed_activation_preflight_only
+source_phase: v0_6_73t_next_phase_selection_gate
+source_status: COMPLETED_VALIDATED_selection_opened
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+legacy_active_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+changed_files_current_task:
+  - docs/vcp_integration/V0_6_73U_ACTIVE_DELEGATE_AUTHORIZATION_ACTIVATION_PREFLIGHT.md
+  - tests/schema_examples/v0_6_73u_active_delegate_authorization_activation_preflight.example.yaml
+  - tests/schema_examples/v0_6_73u_active_delegate_authorization_activation_preflight_fail.example.yaml
+  - scripts/validate_v0_6_73u_active_delegate_authorization_activation_preflight.js
+  - scripts/lib/governance_tooling_maintenance_slice.js
+  - .agent_board/BLOCKERS.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+summary: Defined the future active delegate authorization activation preflight and proved the current state remains fail-closed because no active authorization packet or active final phrase exists.
+activation_preflight_id: ACT-PREFLIGHT-V0-6-73U
+activation_status: preflight_only_not_active
+preflight_decision: FAIL_CLOSED_ACTIVATION_NOT_ACTIVE
+preflight_passed_for_real_execution: false
+runner_must_stop_before_provider_contact: true
+push_performed: false
+push_status: not_performed_user_deferred_push_local_ahead_3_before_u
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+image_binary_read_performed: false
+output_write_performed: false
+env_file_content_read_performed: false
+secret_value_read_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+v0_6_73_execution_allowed: false
+next_safe_task: v0_6_73u3_runtime_delegate_binding_test_harness_no_provider
+```
+
+---
+
 ## Checkpoint - v0.6.73t Next Phase Selection Gate
 
 ```text

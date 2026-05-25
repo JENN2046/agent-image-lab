@@ -2,6 +2,18 @@
 
 ## Active Blockers
 
+## BLOCKER-20260525-13 - Active delegate authorization activation remains preflight-only
+
+Status: active_fail_closed_activation_preflight_only
+Detected during: v0_6_73u_active_delegate_authorization_activation_preflight
+Task: active delegate authorization activation preflight
+Reason: The gate defines the exact active authorization shape, but the current activation_status is preflight_only_not_active, exact_active_delegate_authorization_present is false, authorization_phrase_active is false, and preflight_passed_for_real_execution is false.
+Hard stop gate: active_authorization_packet_and_final_phrase_required_before_provider_contact
+Files involved: docs/vcp_integration/V0_6_73U_ACTIVE_DELEGATE_AUTHORIZATION_ACTIVATION_PREFLIGHT.md; scripts/validate_v0_6_73u_active_delegate_authorization_activation_preflight.js; tests/schema_examples/v0_6_73u_active_delegate_authorization_activation_preflight.example.yaml; tests/schema_examples/v0_6_73u_active_delegate_authorization_activation_preflight_fail.example.yaml
+Validation state: activation preflight validator required; no push/provider/API/image/output/secret action performed.
+Required next safe action: v0_6_73u3_runtime_delegate_binding_test_harness_no_provider.
+Rollback or cleanup path: activation preflight files plus board status sync can be reverted locally; no generated image, output directory, receipt, review handoff, memory, sample, production candidate, remote write, or real execution state was created.
+
 ## BLOCKER-20260525-12 - Next phase selection keeps push and execution deferred
 
 Status: active_selection_opened_push_and_execution_deferred

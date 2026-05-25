@@ -1,0 +1,16 @@
+phase: v0_6_73u_active_delegate_authorization_activation_preflight
+activation_preflight_id: ACT-PREFLIGHT-V0-6-73U
+target_execution_phase: v0_6_73_real_vcp_agent_generation_execution_one_shot
+activation_status: active
+delegate_binding_active: true
+exact_active_delegate_authorization_present: true
+authorization_phrase_active: true
+can_execute_now: true
+preflight_decision: GO
+provider_contact_performed: true
+plugin_call_performed: true
+api_call_performed: true
+image_generation_performed: true
+output_write_performed: true
+secret_value_read_performed: true
+v0_6_73_execution_allowed: true

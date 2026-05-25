@@ -1,5 +1,34 @@
 ---
 
+- [x] ID: v0_6_73u_active_delegate_authorization_activation_preflight
+      Lane: Green local activation preflight contract only.
+      Status: COMPLETED_VALIDATED_fail_closed_activation_preflight_only.
+      Source phase: v0_6_73t_next_phase_selection_gate.
+      Source status: COMPLETED_VALIDATED_selection_opened.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Legacy active next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Goal: Define the future active delegate authorization activation preflight without activation or real execution.
+      Activation preflight id: ACT-PREFLIGHT-V0-6-73U.
+      Activation status: preflight_only_not_active.
+      Preflight decision: FAIL_CLOSED_ACTIVATION_NOT_ACTIVE.
+      Preflight passed for real execution: false.
+      Runner must stop before provider contact: true.
+      push_performed: false.
+      push_status: not_performed_user_deferred_push_local_ahead_3_before_u.
+      provider_contact_performed: false.
+      plugin_call_performed: false.
+      api_call_performed: false.
+      image_generation_performed: false.
+      image_binary_read_performed: false.
+      output_write_performed: false.
+      env_file_content_read_performed: false.
+      secret_value_read_performed: false.
+      v0_6_73_execution_allowed: false.
+      Next: v0_6_73u3_runtime_delegate_binding_test_harness_no_provider.
+
+---
+
 - [x] ID: v0_6_73t_next_phase_selection_gate
       Lane: Green local selection gate only.
       Status: COMPLETED_VALIDATED_selection_opened.
