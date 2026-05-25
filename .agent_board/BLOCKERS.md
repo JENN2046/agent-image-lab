@@ -2,6 +2,21 @@
 
 ## Active Blockers
 
+## BLOCKER-20260525-26 - Remote synced phrase activation still needs final pre-provider review
+
+Status: phrase_activation_remote_synced_final_pre_provider_review_required
+Detected during: v0_6_73ag_push_phrase_activation_chain_and_post_push_verify
+Task: push phrase activation chain and post-push verify
+Active current phase: v0_3_3_first_live_generation_pilot
+Resume guard source phase: v0_3_2_live_candidate_action_packet
+Legacy active next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+Reason: The phrase activation chain is now pushed to origin/master at c10b18ad44e3e1a3d45f7c5a4433d39732d65ac6 with ahead/behind 0/0, but a remote-synced final pre-provider GO/NO-GO review is still required before provider contact.
+Hard stop gate: remote_synced_final_pre_provider_go_no_go_required_before_provider_contact
+Files involved: .agent_board/BLOCKERS.md; .agent_board/CHECKPOINT.md; .agent_board/HANDOFF.md; .agent_board/RUN_STATE.md; .agent_board/TASK_QUEUE.md
+Validation state: npm run validate:mvp passed after push; no provider/API/image/output/secret/memory action performed.
+Required next safe action: v0_6_73ah_remote_synced_final_pre_provider_go_no_go_review.
+Rollback or cleanup path: board status sync can be reverted locally; pushed commits remain normal Git history and no generated image, output directory, receipt, review handoff, memory, sample, production candidate, or real execution state was created.
+
 ## BLOCKER-20260525-25 - Final pre-provider review is NO-GO until phrase activation chain is pushed
 
 Status: final_pre_provider_no_go_phrase_activation_chain_unpushed
