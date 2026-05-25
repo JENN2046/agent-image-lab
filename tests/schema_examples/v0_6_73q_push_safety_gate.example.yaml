@@ -1,0 +1,52 @@
+phase: v0_6_73q_push_safety_gate
+push_safety_gate_id: PSG-V0-6-73Q
+target_remote: origin
+target_branch: master
+candidate_head_before_q_commit: d0acce6de7556f2aa6a878fb5751780cfe477d94
+remote_baseline_commit: 551ba04
+ahead_count_before_q_commit: 6
+behind_count_before_q_commit: 0
+working_tree_clean_before_q_commit: true
+staged_files_before_q_commit: 0
+push_performed: false
+push_allowed_now: false
+explicit_push_authorization_required: git push origin master
+push_recommendation: wait_for_explicit_git_push_origin_master
+post_push_required_phase_if_authorized: v0_6_73r_remote_post_push_state_sync
+real_execution_after_push_allowed: false
+v0_6_73_execution_allowed: false
+pending_file_count_before_q: 22
+push_safety_classification:
+  fast_forward_expected: true
+  docs_schema_fixture_validator_status_only: true
+  package_json_changed: false
+  dependency_lock_changed: false
+  env_file_changed: false
+  secret_file_changed: false
+  generated_image_added: false
+  runs_real_generation_added: false
+  accepted_samples_changed: false
+  production_candidate_changed: false
+  provider_receipt_added: false
+  review_handoff_added: false
+  memory_file_changed: false
+  output_artifact_added: false
+  destructive_action_performed: false
+  push_performed: false
+  push_boundary_status: waiting_for_explicit_user_authorization
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+image_binary_read_performed: false
+output_write_performed: false
+receipt_write_performed: false
+review_handoff_write_performed: false
+env_file_content_read_performed: false
+secret_value_read_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+v0_6_73_execution_allowed: false
+next_safe_task: wait_for_explicit_git_push_origin_master

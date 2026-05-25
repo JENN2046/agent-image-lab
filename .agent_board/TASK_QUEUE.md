@@ -1,5 +1,32 @@
 ---
 
+- [x] ID: v0_6_73q_push_safety_gate
+      Lane: Green local push safety report only.
+      Status: COMPLETED_VALIDATED_waiting_for_explicit_push.
+      Source phase: v0_6_73p_local_aggregate_readiness_review.
+      Source status: COMPLETED_VALIDATED_ready_for_push_safety_gate_only.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Legacy active next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Goal: Prepare push safety report without pushing.
+      Push safety gate id: PSG-V0-6-73Q.
+      Push allowed now: false.
+      Explicit push authorization required: git push origin master.
+      Push recommendation: wait_for_explicit_git_push_origin_master.
+      push_performed: false.
+      provider_contact_performed: false.
+      plugin_call_performed: false.
+      api_call_performed: false.
+      image_generation_performed: false.
+      image_binary_read_performed: false.
+      output_write_performed: false.
+      env_file_content_read_performed: false.
+      secret_value_read_performed: false.
+      push_status: not_performed_waiting_for_explicit_git_push_origin_master.
+      Next: wait_for_explicit_git_push_origin_master.
+
+---
+
 - [x] ID: v0_6_73p_local_aggregate_readiness_review
       Lane: Green local aggregate readiness review only.
       Status: COMPLETED_VALIDATED_ready_for_push_safety_gate_only.

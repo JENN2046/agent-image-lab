@@ -2,6 +2,18 @@
 
 ## Active Blockers
 
+## BLOCKER-20260525-09 - v0.6.73 push boundary waiting for explicit authorization
+
+Status: active_waiting_for_explicit_push
+Detected during: v0_6_73q_push_safety_gate
+Task: push safety gate
+Reason: Push safety report is prepared, but push_allowed_now is false and push_performed is false. The next action crosses the remote write boundary and requires the exact user phrase git push origin master.
+Hard stop gate: explicit_git_push_origin_master_required
+Files involved: docs/vcp_integration/V0_6_73Q_PUSH_SAFETY_GATE.md; scripts/validate_v0_6_73q_push_safety_gate.js; tests/schema_examples/v0_6_73q_push_safety_gate.example.yaml
+Validation state: local push safety validator required; no push/provider/API/image/output/secret action performed.
+Required next safe action: wait_for_explicit_git_push_origin_master.
+Rollback or cleanup path: remove v0.6.73q push safety files plus board status sync; no generated image, output directory, receipt, review handoff, memory, sample, production candidate, remote write, or real execution state was created.
+
 ## BLOCKER-20260525-08 - v0.6.73 aggregate readiness stops at push safety gate
 
 Status: active_ready_for_push_safety_gate_only

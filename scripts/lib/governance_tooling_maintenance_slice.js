@@ -2255,6 +2255,17 @@ const EXPECTED_V0_6_73P_LOCAL_AGGREGATE_READINESS_REVIEW_SLICE = [
   "tests/schema_examples/v0_6_73p_local_aggregate_readiness_review.example.yaml"
 ].sort();
 
+const EXPECTED_V0_6_73Q_PUSH_SAFETY_GATE_SLICE = [
+  ".agent_board/BLOCKERS.md",
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  "docs/vcp_integration/V0_6_73Q_PUSH_SAFETY_GATE.md",
+  "scripts/validate_v0_6_73q_push_safety_gate.js",
+  "tests/schema_examples/v0_6_73q_push_safety_gate.example.yaml"
+].sort();
+
 const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "governance_tooling_maintenance_slice_v1",
@@ -2775,6 +2786,10 @@ const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "v0_6_73p_local_aggregate_readiness_review_slice",
     files: EXPECTED_V0_6_73P_LOCAL_AGGREGATE_READINESS_REVIEW_SLICE
+  },
+  {
+    id: "v0_6_73q_push_safety_gate_slice",
+    files: EXPECTED_V0_6_73Q_PUSH_SAFETY_GATE_SLICE
   }
 ];
 
@@ -2830,8 +2845,10 @@ function normalizeChangedFilesForSliceMatching(changedFiles) {
     && sameStringList(withoutHelper, EXPECTED_V0_6_73O_EXACT_REAL_EXECUTION_AUTHORIZATION_PHRASE_DRAFT_SLICE);
   const isV0_6_73pRegistrationPatch = changedFiles.includes(GOVERNANCE_TOOLING_SLICE_HELPER_FILE)
     && sameStringList(withoutHelper, EXPECTED_V0_6_73P_LOCAL_AGGREGATE_READINESS_REVIEW_SLICE);
+  const isV0_6_73qRegistrationPatch = changedFiles.includes(GOVERNANCE_TOOLING_SLICE_HELPER_FILE)
+    && sameStringList(withoutHelper, EXPECTED_V0_6_73Q_PUSH_SAFETY_GATE_SLICE);
 
-  return (isPostPushSyncRegistrationPatch || isExecutionBlockedStatusSyncRegistrationPatch || isV0_6_73gRegistrationPatch || isV0_6_73hRegistrationPatch || isV0_6_73iRegistrationPatch || isV0_6_73lRegistrationPatch || isV0_6_73mRegistrationPatch || isV0_6_73nRegistrationPatch || isV0_6_73oRegistrationPatch || isV0_6_73pRegistrationPatch) ? withoutHelper : changedFiles;
+  return (isPostPushSyncRegistrationPatch || isExecutionBlockedStatusSyncRegistrationPatch || isV0_6_73gRegistrationPatch || isV0_6_73hRegistrationPatch || isV0_6_73iRegistrationPatch || isV0_6_73lRegistrationPatch || isV0_6_73mRegistrationPatch || isV0_6_73nRegistrationPatch || isV0_6_73oRegistrationPatch || isV0_6_73pRegistrationPatch || isV0_6_73qRegistrationPatch) ? withoutHelper : changedFiles;
 }
 
 function fileAllowedInGovernanceToolingSlice(file) {
@@ -3471,6 +3488,19 @@ function governanceToolingMaintenanceSliceSelfCheck() {
       ])?.id === "v0_6_73p_local_aggregate_readiness_review_slice"
     },
     {
+      check: "exact_slice_matches_v0_6_73q_push_safety_gate",
+      passed: findMatchingGovernanceToolingSlice(
+        EXPECTED_V0_6_73Q_PUSH_SAFETY_GATE_SLICE
+      )?.id === "v0_6_73q_push_safety_gate_slice"
+    },
+    {
+      check: "exact_slice_matches_v0_6_73q_push_safety_gate_registration_patch",
+      passed: findMatchingGovernanceToolingSlice([
+        ...EXPECTED_V0_6_73Q_PUSH_SAFETY_GATE_SLICE,
+        GOVERNANCE_TOOLING_SLICE_HELPER_FILE
+      ])?.id === "v0_6_73q_push_safety_gate_slice"
+    },
+    {
       check: "exact_slice_rejects_missing_file",
       passed: findMatchingGovernanceToolingSlice(EXPECTED_GOVERNANCE_TOOLING_MAINTENANCE_SLICE.slice(1)) === null
     },
@@ -3603,6 +3633,7 @@ module.exports = {
   EXPECTED_V0_6_73N_REAL_EXECUTION_GO_NO_GO_REVIEW_SLICE,
   EXPECTED_V0_6_73O_EXACT_REAL_EXECUTION_AUTHORIZATION_PHRASE_DRAFT_SLICE,
   EXPECTED_V0_6_73P_LOCAL_AGGREGATE_READINESS_REVIEW_SLICE,
+  EXPECTED_V0_6_73Q_PUSH_SAFETY_GATE_SLICE,
   GOVERNANCE_TOOLING_ALLOWED_SLICES,
   buildGovernanceToolingMaintenanceSliceReport,
   fileAllowedInGovernanceToolingSlice,
