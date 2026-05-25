@@ -2,6 +2,18 @@
 
 ## Active Blockers
 
+## BLOCKER-20260525-19 - Real execution remains NO-GO after boundary review
+
+Status: active_final_no_go
+Detected during: v0_6_73z_real_execution_authorization_boundary_review
+Task: real execution authorization boundary review
+Reason: The pushed readiness head is synchronized and policies are ready, but the active delegate authorization is not actual, exact_active_delegate_authorization_present is false, authorization_phrase_active is false, and the stop line remains effective.
+Hard stop gate: exact_active_delegate_authorization_and_exact_real_execution_phase_authorization_required
+Files involved: docs/vcp_integration/V0_6_73Z_REAL_EXECUTION_AUTHORIZATION_BOUNDARY_REVIEW.md; scripts/validate_v0_6_73z_real_execution_authorization_boundary_review.js; tests/schema_examples/v0_6_73z_real_execution_authorization_boundary_review.example.yaml
+Validation state: z boundary validator and MVP validation required; no provider/API/image/output/secret/memory action performed.
+Required next safe action: stop_and_wait_for_exact_real_execution_authorization.
+Rollback or cleanup path: z boundary review files plus board status sync can be reverted locally; no generated image, output directory, receipt, review handoff, memory, sample, production candidate, or real execution state was created.
+
 ## BLOCKER-20260525-18 - Real execution remains authorization-bound after push sync
 
 Status: active_real_execution_authorization_required
