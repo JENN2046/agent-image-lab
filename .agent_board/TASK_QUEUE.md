@@ -1,5 +1,114 @@
 ---
 
+- [x] ID: v0_6_73i_exact_bridge_delegate_authorization_or_stop_before_real_execution_retry
+      Lane: Green local bridge authorization lock only.
+      Status: COMPLETED_VALIDATED_delegate_call_lock_only.
+      Source phase: v0_6_73h_secretless_provider_runtime_bridge.
+      Source status: COMPLETED_VALIDATED_unbound_bridge_surface_only.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Legacy active next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Goal: Require a controlled bridge marker and exact active delegate authorization before the NativeDoubao runner can call a bound secretless_provider_runtime delegate.
+      Bridge id: native_doubao_secretless_provider_runtime_bridge:v0_6_73h.
+      Arbitrary runtime function allowed: false.
+      Bound delegate without exact authorization allowed: false.
+      Unbound bridge allowed to fail closed: true.
+      provider_contact_performed: false.
+      plugin_call_performed: false.
+      api_call_performed: false.
+      image_generation_performed: false.
+      image_binary_read_performed: false.
+      output_write_performed: false.
+      env_file_content_read_performed: false.
+      secret_value_read_performed: false.
+      push_status: not_performed.
+      Next: stop_before_real_execution_retry_until_exact_human_authorization.
+
+---
+
+---
+
+- [x] ID: v0_6_73h_secretless_provider_runtime_bridge
+      Lane: Amber_B local bridge surface only.
+      Status: COMPLETED_VALIDATED_unbound_bridge_surface_only.
+      Source phase: v0_6_73g_secretless_runtime_binding_implementation_surface.
+      Source status: COMPLETED_VALIDATED_fail_closed_surface_only.
+      Goal: Add a callable unbound NativeDoubao secretless provider runtime bridge that validates a sanitized request and fails closed before provider contact, plugin call, API call, image generation, output write, env file content read, or secret value read.
+      Bridge id: native_doubao_secretless_provider_runtime_bridge:v0_6_73h.
+      Runtime delegate bound: false.
+      Unbound bridge status: BLOCKED_PROVIDER_RUNTIME_DELEGATE_NOT_BOUND.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Legacy active next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Bridge module: scripts/native_doubao_secretless_provider_runtime_bridge.js.
+      Runner integration: scripts/run_native_doubao_image_generation.js.
+      Validator: scripts/validate_v0_6_73h_secretless_provider_runtime_bridge.js.
+      provider_contact_performed: false.
+      plugin_call_performed: false.
+      api_call_performed: false.
+      image_generation_performed: false.
+      actual_image_generation_performed: false.
+      image_binary_read_performed: false.
+      output_write_performed: false.
+      env_file_content_read_performed: false.
+      secret_value_read_performed: false.
+      push_status: not_performed.
+      Validation: node --check scripts/native_doubao_secretless_provider_runtime_bridge.js passed; node --check scripts/run_native_doubao_image_generation.js passed; node --check scripts/validate_v0_6_73h_secretless_provider_runtime_bridge.js passed; node scripts/validate_v0_6_73h_secretless_provider_runtime_bridge.js passed_38_checks; node scripts/validate_v0_6_73g_secretless_runtime_binding_implementation_surface.js passed_28_checks; node scripts/validate_real_vcp_agent_generation_preflight_no_call.js passed_86_checks; node --check scripts/lib/governance_tooling_maintenance_slice.js passed; node scripts/lib/governance_tooling_maintenance_slice.js passed.
+      Next: draft_exact_bridge_delegate_authorization_or_stop_before_real_execution_retry.
+
+---
+
+- [x] ID: v0_6_73g_secretless_runtime_binding_implementation_surface
+      Lane: Amber_B local implementation surface only.
+      Status: COMPLETED_VALIDATED_fail_closed_surface_only.
+      Source phase: v0_6_73_real_vcp_agent_generation_execution_one_shot.
+      Source status: BLOCKED_secretless_runtime_binding_not_callable.
+      Goal: Add a local fail-closed NativeDoubao secretless runtime binding surface without provider contact, plugin call, API call, image generation, output write, env file content read, or secret value read.
+      Provider binding ref: native_doubao:capability:owner-runtime:v0_6_73.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Legacy active next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Runner: scripts/run_native_doubao_image_generation.js.
+      Validator: scripts/validate_v0_6_73g_secretless_runtime_binding_implementation_surface.js.
+      provider_contact_performed: false.
+      plugin_call_performed: false.
+      api_call_performed: false.
+      image_generation_performed: false.
+      image_binary_read_performed: false.
+      output_write_performed: false.
+      env_file_content_read_performed: false.
+      secret_value_read_performed: false.
+      push_status: not_performed.
+      Validation: node --check scripts/run_native_doubao_image_generation.js passed; node --check scripts/validate_v0_6_73g_secretless_runtime_binding_implementation_surface.js passed; node scripts/validate_v0_6_73g_secretless_runtime_binding_implementation_surface.js passed_28_checks; node scripts/validate_real_vcp_agent_generation_preflight_no_call.js passed_86_checks; node --check scripts/lib/governance_tooling_maintenance_slice.js passed; node scripts/lib/governance_tooling_maintenance_slice.js passed.
+      Next: provide_exact_secretless_provider_runtime_bridge_before_real_execution_retry.
+
+---
+
+- [blocked] ID: v0_6_73_real_vcp_agent_generation_execution_one_shot
+      Lane: Amber_B provider-image one-shot execution attempt.
+      Status: BLOCKED_secretless_runtime_binding_not_callable.
+      Trigger: user named v0_6_73_real_vcp_agent_generation_execution_one_shot.
+      Result: stopped before provider contact, plugin call, API call, image generation, output write, receipt write, review handoff write, env file content read, or secret value read.
+      Route: NativeDoubaoImage_one_shot_project_plugin.
+      Selected plugin: NativeDoubaoImage.
+      Model: doubao-seedream-5-0-260128.
+      Prompt package ref: prompts/image_generation/neutral_smoke_test_red_apple_v1.yaml.
+      Output directory ref: runs/real_generation/v0_6_73_real_vcp_agent_generation_one_shot/.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Legacy active next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      provider_contact_performed: false.
+      plugin_call_performed: false.
+      api_call_performed: false.
+      image_generation_performed: false.
+      secret_value_read_performed: false.
+      push_status: not_performed.
+      Blocker: current scripts/run_native_doubao_image_generation.js real execution path requires .env.local loading, while v0.6.73f requires env_file_content_read_allowed=false and secret_value_allowed=false.
+      Validation: node --check scripts/validate_v0_6_73f_exact_a5_execution_authorization_draft.js passed; node scripts/validate_v0_6_73f_exact_a5_execution_authorization_draft.js passed_95_checks; node --check scripts/run_native_doubao_image_generation.js passed.
+      Recommended next: implement_or_provide_exact_non_secret_callable_native_doubao_runtime_binding_then_revalidate_before_retry.
+
+---
+
 - [x] ID: v0_6_73f_exact_a5_execution_authorization_draft
       Lane: Green local exact A5 authorization draft only.
       Status: completed_validated.

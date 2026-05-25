@@ -7,6 +7,7 @@ const path = require("node:path");
 
 const root = path.resolve(__dirname, "..");
 const adapter = require("../adapters/image_generation/native_doubao_adapter.js");
+const secretlessBridge = require("./native_doubao_secretless_provider_runtime_bridge.js");
 
 // ── Config ──
 const ENV_LOCAL_PATH = path.join(root, ".env.local");
@@ -17,6 +18,37 @@ const ALLOWED_ENV_KEYS = [
   "DOUBAO_IMAGE_TIMEOUT_SECONDS",
   "DOUBAO_IMAGE_DRY_RUN_DEFAULT",
 ];
+const SECRETLESS_PROVIDER_BINDING_REF = "native_doubao:capability:owner-runtime:v0_6_73";
+const SECRETLESS_PROVIDER_BINDING_DISPLAY_REF = "native_doubao:capability:owner-runtime:<redacted>";
+
+function parseBooleanOption(value) {
+  if (value === true || value === false) return value;
+  if (value === "true") return true;
+  if (value === "false") return false;
+  return undefined;
+}
+
+function isSecretlessBindingRequest(options) {
+  return options.secretless_runtime_required === true ||
+    options.provider_binding_ref === SECRETLESS_PROVIDER_BINDING_REF;
+}
+
+function validateSecretlessBindingOptions(options) {
+  const issues = [];
+  if (options.provider_binding_ref !== SECRETLESS_PROVIDER_BINDING_REF) {
+    issues.push("provider_binding_ref must be non-secret NativeDoubao capability handle");
+  }
+  if (options.provider_binding_ref_redacted !== true) {
+    issues.push("provider_binding_ref_redacted must be true");
+  }
+  if (options.provider_binding_ref_is_secret !== false) {
+    issues.push("provider_binding_ref_is_secret must be false");
+  }
+  if (options.secretless_runtime_required !== true) {
+    issues.push("secretless_runtime_required must be true");
+  }
+  return issues;
+}
 
 function readEnvFieldNames(filePath) {
   const fields = new Set();
@@ -59,15 +91,26 @@ function loadEnvLocal() {
   return { loaded: true, fields: Object.keys(env).length };
 }
 
+function readLegacyPreflightEnvFieldNames() {
+  const envFields = readEnvFieldNames(ENV_LOCAL_PATH);
+  return envFields;
+}
+
 function preflightCheck(options) {
   const issues = [];
+  const secretlessBinding = isSecretlessBindingRequest(options);
 
-  // Check .env.local field names only (no value retention or output)
-  const envFields = readEnvFieldNames(ENV_LOCAL_PATH);
+  // Legacy env preflight checks field names only (no value retention or output).
+  // Secretless binding mode must not read .env.local content at all.
+  const envFields = secretlessBinding ? new Set() : readLegacyPreflightEnvFieldNames();
   const requiredFields = ALLOWED_ENV_KEYS;
-  for (const field of requiredFields) {
-    if (!envFields.has(field)) {
-      issues.push("missing_env_field: " + field);
+  if (secretlessBinding) {
+    issues.push.apply(issues, validateSecretlessBindingOptions(options));
+  } else {
+    for (const field of requiredFields) {
+      if (!envFields.has(field)) {
+        issues.push("missing_env_field: " + field);
+      }
     }
   }
 
@@ -83,8 +126,14 @@ function preflightCheck(options) {
     issues: issues,
     env_fields_present: requiredFields.filter(function (f) { return envFields.has(f); }).length,
     env_fields_total: requiredFields.length,
-    env_file_exists: fs.existsSync(ENV_LOCAL_PATH),
+    env_file_exists: secretlessBinding ? null : fs.existsSync(ENV_LOCAL_PATH),
     env_file_ignored: true, // confirmed via .gitignore
+    secretless_binding_mode: secretlessBinding,
+    provider_binding_ref: secretlessBinding ? SECRETLESS_PROVIDER_BINDING_DISPLAY_REF : null,
+    provider_binding_ref_redacted: secretlessBinding ? true : null,
+    provider_binding_ref_is_secret: secretlessBinding ? false : null,
+    env_file_content_read_performed: false,
+    secret_value_read_performed: false,
   };
 }
 
@@ -93,6 +142,7 @@ async function run(options) {
   if (options.dryRun === undefined) options.dryRun = true;
 
   const preflight = preflightCheck(options);
+  const secretlessBinding = preflight.secretless_binding_mode === true;
   if (!preflight.preflight_passed) {
     return {
       status: "BLOCKED_PREFLIGHT_FAILED",
@@ -101,11 +151,97 @@ async function run(options) {
       preflight: preflight,
       api_call_performed: false,
       image_created: false,
+      env_file_content_read_performed: false,
+      secret_value_read_performed: false,
     };
   }
 
   // Load .env.local into process.env for real execution path
   if (options.dryRun === false && options.execution_authorized === true) {
+    if (secretlessBinding) {
+      if (typeof options.secretless_provider_runtime === "function") {
+        const delegateAuthorization = secretlessBridge.validateSecretlessProviderRuntimeDelegateBinding(
+          options.secretless_provider_runtime,
+          options
+        );
+        if (delegateAuthorization.authorized_to_call_bridge !== true) {
+          return {
+            status: "BLOCKED_SECRETLESS_PROVIDER_RUNTIME_DELEGATE_AUTHORIZATION_REQUIRED",
+            runner: "run_native_doubao_image_generation",
+            plugin_id: "NativeDoubaoImage",
+            preflight: preflight,
+            provider_binding_ref: SECRETLESS_PROVIDER_BINDING_DISPLAY_REF,
+            provider_binding_ref_redacted: true,
+            provider_binding_ref_is_secret: false,
+            required_runtime_owner: "VCPToolBox_or_owner_authorized_provider_runtime",
+            required_runtime_contract: "controlled_secretless_provider_runtime_bridge",
+            delegate_authorization: delegateAuthorization,
+            api_call_performed: false,
+            plugin_call_performed: false,
+            provider_contact_performed: false,
+            image_created: false,
+            image_generation_performed: false,
+            image_binary_read_performed: false,
+            output_write_performed: false,
+            env_file_content_read_performed: false,
+            secret_value_read_performed: false,
+            accepted_samples_write_performed: false,
+            production_candidate_write_performed: false,
+            DailyNote_write_performed: false,
+            VCP_memory_write_performed: false,
+            v0_6_73_execution_allowed: false
+          };
+        }
+        const runtimeRequest = secretlessBridge.buildSecretlessProviderRuntimeRequest(options, preflight);
+        const runtimeResult = await options.secretless_provider_runtime(runtimeRequest);
+        const sanitizedRuntimeResult = secretlessBridge.sanitizeSecretlessProviderRuntimeResult(runtimeResult);
+        return {
+          status: sanitizedRuntimeResult.status,
+          runner: "run_native_doubao_image_generation",
+          plugin_id: "NativeDoubaoImage",
+          preflight: preflight,
+          provider_binding_ref: SECRETLESS_PROVIDER_BINDING_DISPLAY_REF,
+          provider_binding_ref_redacted: true,
+          provider_binding_ref_is_secret: false,
+          required_runtime_owner: "VCPToolBox_or_owner_authorized_provider_runtime",
+          required_runtime_contract: "secretless_provider_runtime_function",
+          runtime_bridge_result: sanitizedRuntimeResult,
+          api_call_performed: sanitizedRuntimeResult.api_call_performed === true,
+          plugin_call_performed: sanitizedRuntimeResult.plugin_call_performed === true,
+          provider_contact_performed: sanitizedRuntimeResult.provider_contact_performed === true,
+          image_created: sanitizedRuntimeResult.image_generation_performed === true,
+          image_generation_performed: sanitizedRuntimeResult.image_generation_performed === true,
+          image_binary_read_performed: false,
+          output_write_performed: sanitizedRuntimeResult.output_write_performed === true,
+          env_file_content_read_performed: false,
+          secret_value_read_performed: false,
+          raw_provider_payload_retained: false,
+          human_review_required_now: sanitizedRuntimeResult.human_review_required_now === true,
+        };
+      }
+      return {
+        status: "BLOCKED_SECRETLESS_RUNTIME_NOT_CALLABLE",
+        runner: "run_native_doubao_image_generation",
+        plugin_id: "NativeDoubaoImage",
+        preflight: preflight,
+        provider_binding_ref: SECRETLESS_PROVIDER_BINDING_DISPLAY_REF,
+        provider_binding_ref_redacted: true,
+        provider_binding_ref_is_secret: false,
+        required_runtime_owner: "VCPToolBox_or_owner_authorized_provider_runtime",
+        required_runtime_contract: "secretless_provider_runtime_function",
+        api_call_performed: false,
+        plugin_call_performed: false,
+        provider_contact_performed: false,
+        image_created: false,
+        image_generation_performed: false,
+        image_binary_read_performed: false,
+        output_write_performed: false,
+        env_file_content_read_performed: false,
+        secret_value_read_performed: false,
+        raw_provider_payload_retained: false,
+        human_review_required_now: false,
+      };
+    }
     const envLoad = loadEnvLocal();
     if (!envLoad.loaded) {
       return {
@@ -115,6 +251,8 @@ async function run(options) {
         env_error: envLoad.error,
         api_call_performed: false,
         image_created: false,
+        env_file_content_read_performed: false,
+        secret_value_read_performed: false,
       };
     }
   }
@@ -167,8 +305,15 @@ async function run(options) {
     preflight: preflight,
     adapter_result: publicAdapterResult,
     api_call_performed: result.api_call_performed === true,
+    plugin_call_performed: result.api_call_performed === true,
+    provider_contact_performed: result.api_call_performed === true,
     image_created: result.image_created === true,
+    image_generation_performed: result.image_created === true,
+    image_binary_read_performed: false,
+    output_write_performed: result.local_files_written_count > 0,
     human_review_required_now: result.human_review_required_now === true,
+    env_file_content_read_performed: !secretlessBinding && options.dryRun === false && options.execution_authorized === true,
+    secret_value_read_performed: !secretlessBinding && options.dryRun === false && options.execution_authorized === true,
     api_key_value_printed: false,
   };
 }
@@ -192,9 +337,23 @@ if (require.main === module) {
     dryRun: args["--dry-run"] !== "false",
     execution_authorized: args["--execution-authorized"] === "true",
     a5_activation_ref: args["--a5-activation-ref"] || null,
+    provider_binding_ref: args["--provider-binding-ref"] || null,
+    provider_binding_ref_redacted: parseBooleanOption(args["--provider-binding-ref-redacted"]),
+    provider_binding_ref_is_secret: parseBooleanOption(args["--provider-binding-ref-is-secret"]),
+    secretless_runtime_required: args["--secretless-runtime-required"] === "true",
   }).then(function(output) {
     process.stdout.write(JSON.stringify(output, null, 2) + "\n");
   });
 }
 
-module.exports = { run: run, preflightCheck: preflightCheck, loadDotEnv: loadDotEnv, readEnvFieldNames: readEnvFieldNames };
+module.exports = {
+  run: run,
+  preflightCheck: preflightCheck,
+  loadDotEnv: loadDotEnv,
+  readEnvFieldNames: readEnvFieldNames,
+  readLegacyPreflightEnvFieldNames: readLegacyPreflightEnvFieldNames,
+  isSecretlessBindingRequest: isSecretlessBindingRequest,
+  validateSecretlessBindingOptions: validateSecretlessBindingOptions,
+  SECRETLESS_PROVIDER_BINDING_REF: SECRETLESS_PROVIDER_BINDING_REF,
+  SECRETLESS_PROVIDER_BINDING_DISPLAY_REF: SECRETLESS_PROVIDER_BINDING_DISPLAY_REF
+};

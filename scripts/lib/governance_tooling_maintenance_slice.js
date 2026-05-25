@@ -2144,6 +2144,61 @@ const EXPECTED_V0_6_73F_EXACT_A5_EXECUTION_AUTHORIZATION_DRAFT_SLICE = [
   "tests/schema_examples/v0_6_73f_exact_a5_execution_authorization_draft.example.yaml"
 ].sort();
 
+const EXPECTED_V0_6_73_EXECUTION_BLOCKED_STATUS_SYNC_SLICE = [
+  ".agent_board/BLOCKERS.md",
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md"
+].sort();
+
+const EXPECTED_V0_6_73G_SECRETLESS_RUNTIME_BINDING_IMPLEMENTATION_SURFACE_SLICE = [
+  ".agent_board/BLOCKERS.md",
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  "docs/vcp_integration/V0_6_73G_SECRETLESS_RUNTIME_BINDING_IMPLEMENTATION_SURFACE.md",
+  "scripts/run_native_doubao_image_generation.js",
+  "scripts/validate_v0_6_73g_secretless_runtime_binding_implementation_surface.js",
+  "tests/schema_examples/v0_6_73g_secretless_runtime_binding_implementation_surface.example.yaml"
+].sort();
+
+const EXPECTED_V0_6_73H_SECRETLESS_PROVIDER_RUNTIME_BRIDGE_SLICE = [
+  ".agent_board/BLOCKERS.md",
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  "docs/vcp_integration/V0_6_73G_SECRETLESS_RUNTIME_BINDING_IMPLEMENTATION_SURFACE.md",
+  "docs/vcp_integration/V0_6_73H_SECRETLESS_PROVIDER_RUNTIME_BRIDGE.md",
+  "scripts/native_doubao_secretless_provider_runtime_bridge.js",
+  "scripts/run_native_doubao_image_generation.js",
+  "scripts/validate_v0_6_73g_secretless_runtime_binding_implementation_surface.js",
+  "scripts/validate_v0_6_73h_secretless_provider_runtime_bridge.js",
+  "tests/schema_examples/v0_6_73g_secretless_runtime_binding_implementation_surface.example.yaml",
+  "tests/schema_examples/v0_6_73h_secretless_provider_runtime_bridge.example.yaml"
+].sort();
+
+const EXPECTED_V0_6_73I_EXACT_BRIDGE_DELEGATE_AUTHORIZATION_OR_STOP_BEFORE_REAL_EXECUTION_RETRY_SLICE = [
+  ".agent_board/BLOCKERS.md",
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  "docs/vcp_integration/V0_6_73G_SECRETLESS_RUNTIME_BINDING_IMPLEMENTATION_SURFACE.md",
+  "docs/vcp_integration/V0_6_73H_SECRETLESS_PROVIDER_RUNTIME_BRIDGE.md",
+  "docs/vcp_integration/V0_6_73I_EXACT_BRIDGE_DELEGATE_AUTHORIZATION_OR_STOP_BEFORE_REAL_EXECUTION_RETRY.md",
+  "scripts/native_doubao_secretless_provider_runtime_bridge.js",
+  "scripts/run_native_doubao_image_generation.js",
+  "scripts/validate_v0_6_73g_secretless_runtime_binding_implementation_surface.js",
+  "scripts/validate_v0_6_73h_secretless_provider_runtime_bridge.js",
+  "scripts/validate_v0_6_73i_exact_bridge_delegate_authorization_or_stop_before_real_execution_retry.js",
+  "tests/schema_examples/v0_6_73g_secretless_runtime_binding_implementation_surface.example.yaml",
+  "tests/schema_examples/v0_6_73h_secretless_provider_runtime_bridge.example.yaml",
+  "tests/schema_examples/v0_6_73i_exact_bridge_delegate_authorization_or_stop_before_real_execution_retry.example.yaml"
+].sort();
+
 const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "governance_tooling_maintenance_slice_v1",
@@ -2628,6 +2683,22 @@ const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "v0_6_73f_exact_a5_execution_authorization_draft_slice",
     files: EXPECTED_V0_6_73F_EXACT_A5_EXECUTION_AUTHORIZATION_DRAFT_SLICE
+  },
+  {
+    id: "v0_6_73_execution_blocked_status_sync_slice",
+    files: EXPECTED_V0_6_73_EXECUTION_BLOCKED_STATUS_SYNC_SLICE
+  },
+  {
+    id: "v0_6_73g_secretless_runtime_binding_implementation_surface_slice",
+    files: EXPECTED_V0_6_73G_SECRETLESS_RUNTIME_BINDING_IMPLEMENTATION_SURFACE_SLICE
+  },
+  {
+    id: "v0_6_73h_secretless_provider_runtime_bridge_slice",
+    files: EXPECTED_V0_6_73H_SECRETLESS_PROVIDER_RUNTIME_BRIDGE_SLICE
+  },
+  {
+    id: "v0_6_73i_exact_bridge_delegate_authorization_or_stop_before_real_execution_retry_slice",
+    files: EXPECTED_V0_6_73I_EXACT_BRIDGE_DELEGATE_AUTHORIZATION_OR_STOP_BEFORE_REAL_EXECUTION_RETRY_SLICE
   }
 ];
 
@@ -2665,8 +2736,16 @@ function normalizeChangedFilesForSliceMatching(changedFiles) {
   const withoutHelper = changedFiles.filter((file) => file !== GOVERNANCE_TOOLING_SLICE_HELPER_FILE);
   const isPostPushSyncRegistrationPatch = changedFiles.includes(GOVERNANCE_TOOLING_SLICE_HELPER_FILE)
     && sameStringList(withoutHelper, EXPECTED_V0_3_6_POST_PUSH_STATE_SYNC_SLICE);
+  const isExecutionBlockedStatusSyncRegistrationPatch = changedFiles.includes(GOVERNANCE_TOOLING_SLICE_HELPER_FILE)
+    && sameStringList(withoutHelper, EXPECTED_V0_6_73_EXECUTION_BLOCKED_STATUS_SYNC_SLICE);
+  const isV0_6_73gRegistrationPatch = changedFiles.includes(GOVERNANCE_TOOLING_SLICE_HELPER_FILE)
+    && sameStringList(withoutHelper, EXPECTED_V0_6_73G_SECRETLESS_RUNTIME_BINDING_IMPLEMENTATION_SURFACE_SLICE);
+  const isV0_6_73hRegistrationPatch = changedFiles.includes(GOVERNANCE_TOOLING_SLICE_HELPER_FILE)
+    && sameStringList(withoutHelper, EXPECTED_V0_6_73H_SECRETLESS_PROVIDER_RUNTIME_BRIDGE_SLICE);
+  const isV0_6_73iRegistrationPatch = changedFiles.includes(GOVERNANCE_TOOLING_SLICE_HELPER_FILE)
+    && sameStringList(withoutHelper, EXPECTED_V0_6_73I_EXACT_BRIDGE_DELEGATE_AUTHORIZATION_OR_STOP_BEFORE_REAL_EXECUTION_RETRY_SLICE);
 
-  return isPostPushSyncRegistrationPatch ? withoutHelper : changedFiles;
+  return (isPostPushSyncRegistrationPatch || isExecutionBlockedStatusSyncRegistrationPatch || isV0_6_73gRegistrationPatch || isV0_6_73hRegistrationPatch || isV0_6_73iRegistrationPatch) ? withoutHelper : changedFiles;
 }
 
 function fileAllowedInGovernanceToolingSlice(file) {
@@ -3189,6 +3268,58 @@ function governanceToolingMaintenanceSliceSelfCheck() {
       )?.id === "v0_6_73f_exact_a5_execution_authorization_draft_slice"
     },
     {
+      check: "exact_slice_matches_v0_6_73_execution_blocked_status_sync",
+      passed: findMatchingGovernanceToolingSlice(
+        EXPECTED_V0_6_73_EXECUTION_BLOCKED_STATUS_SYNC_SLICE
+      )?.id === "v0_6_73_execution_blocked_status_sync_slice"
+    },
+    {
+      check: "exact_slice_matches_v0_6_73_execution_blocked_status_sync_registration_patch",
+      passed: findMatchingGovernanceToolingSlice([
+        ...EXPECTED_V0_6_73_EXECUTION_BLOCKED_STATUS_SYNC_SLICE,
+        GOVERNANCE_TOOLING_SLICE_HELPER_FILE
+      ])?.id === "v0_6_73_execution_blocked_status_sync_slice"
+    },
+    {
+      check: "exact_slice_matches_v0_6_73g_secretless_runtime_binding_implementation_surface",
+      passed: findMatchingGovernanceToolingSlice(
+        EXPECTED_V0_6_73G_SECRETLESS_RUNTIME_BINDING_IMPLEMENTATION_SURFACE_SLICE
+      )?.id === "v0_6_73g_secretless_runtime_binding_implementation_surface_slice"
+    },
+    {
+      check: "exact_slice_matches_v0_6_73g_secretless_runtime_binding_implementation_surface_registration_patch",
+      passed: findMatchingGovernanceToolingSlice([
+        ...EXPECTED_V0_6_73G_SECRETLESS_RUNTIME_BINDING_IMPLEMENTATION_SURFACE_SLICE,
+        GOVERNANCE_TOOLING_SLICE_HELPER_FILE
+      ])?.id === "v0_6_73g_secretless_runtime_binding_implementation_surface_slice"
+    },
+    {
+      check: "exact_slice_matches_v0_6_73h_secretless_provider_runtime_bridge",
+      passed: findMatchingGovernanceToolingSlice(
+        EXPECTED_V0_6_73H_SECRETLESS_PROVIDER_RUNTIME_BRIDGE_SLICE
+      )?.id === "v0_6_73h_secretless_provider_runtime_bridge_slice"
+    },
+    {
+      check: "exact_slice_matches_v0_6_73h_secretless_provider_runtime_bridge_registration_patch",
+      passed: findMatchingGovernanceToolingSlice([
+        ...EXPECTED_V0_6_73H_SECRETLESS_PROVIDER_RUNTIME_BRIDGE_SLICE,
+        GOVERNANCE_TOOLING_SLICE_HELPER_FILE
+      ])?.id === "v0_6_73h_secretless_provider_runtime_bridge_slice"
+    },
+    {
+      check: "exact_slice_matches_v0_6_73i_exact_bridge_delegate_authorization_or_stop_before_real_execution_retry",
+      passed: findMatchingGovernanceToolingSlice(
+        EXPECTED_V0_6_73I_EXACT_BRIDGE_DELEGATE_AUTHORIZATION_OR_STOP_BEFORE_REAL_EXECUTION_RETRY_SLICE
+      )?.id === "v0_6_73i_exact_bridge_delegate_authorization_or_stop_before_real_execution_retry_slice"
+    },
+    {
+      check: "exact_slice_matches_v0_6_73i_exact_bridge_delegate_authorization_or_stop_before_real_execution_retry_registration_patch",
+      passed: findMatchingGovernanceToolingSlice([
+        ...EXPECTED_V0_6_73I_EXACT_BRIDGE_DELEGATE_AUTHORIZATION_OR_STOP_BEFORE_REAL_EXECUTION_RETRY_SLICE,
+        GOVERNANCE_TOOLING_SLICE_HELPER_FILE
+      ])?.id === "v0_6_73i_exact_bridge_delegate_authorization_or_stop_before_real_execution_retry_slice"
+    },
+    {
       check: "exact_slice_rejects_missing_file",
       passed: findMatchingGovernanceToolingSlice(EXPECTED_GOVERNANCE_TOOLING_MAINTENANCE_SLICE.slice(1)) === null
     },
@@ -3312,6 +3443,10 @@ module.exports = {
   EXPECTED_V0_6_73D_REAL_GENERATION_REVIEW_HANDOFF_CONTRACT_SLICE,
   EXPECTED_V0_6_73E_ONE_SHOT_EXECUTION_READINESS_PACKET_SLICE,
   EXPECTED_V0_6_73F_EXACT_A5_EXECUTION_AUTHORIZATION_DRAFT_SLICE,
+  EXPECTED_V0_6_73_EXECUTION_BLOCKED_STATUS_SYNC_SLICE,
+  EXPECTED_V0_6_73G_SECRETLESS_RUNTIME_BINDING_IMPLEMENTATION_SURFACE_SLICE,
+  EXPECTED_V0_6_73H_SECRETLESS_PROVIDER_RUNTIME_BRIDGE_SLICE,
+  EXPECTED_V0_6_73I_EXACT_BRIDGE_DELEGATE_AUTHORIZATION_OR_STOP_BEFORE_REAL_EXECUTION_RETRY_SLICE,
   GOVERNANCE_TOOLING_ALLOWED_SLICES,
   buildGovernanceToolingMaintenanceSliceReport,
   fileAllowedInGovernanceToolingSlice,

@@ -1,5 +1,172 @@
 ---
 
+## Checkpoint - v0.6.73i Exact Bridge Delegate Authorization Or Stop Before Real Execution Retry
+
+```text
+phase: v0_6_73i_exact_bridge_delegate_authorization_or_stop_before_real_execution_retry
+status: COMPLETED_VALIDATED_delegate_call_lock_only
+source_phase: v0_6_73h_secretless_provider_runtime_bridge
+source_status: COMPLETED_VALIDATED_unbound_bridge_surface_only
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+legacy_active_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+changed_files_current_task:
+  - docs/vcp_integration/V0_6_73I_EXACT_BRIDGE_DELEGATE_AUTHORIZATION_OR_STOP_BEFORE_REAL_EXECUTION_RETRY.md
+  - tests/schema_examples/v0_6_73i_exact_bridge_delegate_authorization_or_stop_before_real_execution_retry.example.yaml
+  - scripts/validate_v0_6_73i_exact_bridge_delegate_authorization_or_stop_before_real_execution_retry.js
+  - scripts/native_doubao_secretless_provider_runtime_bridge.js
+  - scripts/run_native_doubao_image_generation.js
+  - scripts/lib/governance_tooling_maintenance_slice.js
+  - .agent_board/BLOCKERS.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+summary: Added a local exact bridge delegate authorization lock so arbitrary secretless_provider_runtime functions are blocked before invocation. The controlled unbound bridge still fails closed for validation only.
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+image_binary_read_performed: false
+output_write_performed: false
+env_file_content_read_performed: false
+secret_value_read_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+v0_6_73_execution_allowed: false
+push_status: not_performed
+next_safe_task: stop_before_real_execution_retry_until_exact_human_authorization
+```
+
+---
+
+## Checkpoint - v0.6.73h Secretless Provider Runtime Bridge
+
+```text
+phase: v0_6_73h_secretless_provider_runtime_bridge
+status: COMPLETED_VALIDATED_unbound_bridge_surface_only
+source_phase: v0_6_73g_secretless_runtime_binding_implementation_surface
+source_status: COMPLETED_VALIDATED_fail_closed_surface_only
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+legacy_active_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+changed_files_current_task:
+  - docs/vcp_integration/V0_6_73H_SECRETLESS_PROVIDER_RUNTIME_BRIDGE.md
+  - scripts/native_doubao_secretless_provider_runtime_bridge.js
+  - scripts/run_native_doubao_image_generation.js
+  - scripts/validate_v0_6_73h_secretless_provider_runtime_bridge.js
+  - tests/schema_examples/v0_6_73h_secretless_provider_runtime_bridge.example.yaml
+  - scripts/lib/governance_tooling_maintenance_slice.js
+  - .agent_board/BLOCKERS.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+summary: Added a callable unbound NativeDoubao secretless provider runtime bridge that validates a sanitized request and fails closed with BLOCKED_PROVIDER_RUNTIME_DELEGATE_NOT_BOUND before provider contact or output write.
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+actual_image_generation_performed: false
+image_binary_read_performed: false
+output_write_performed: false
+env_file_content_read_performed: false
+secret_value_read_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+v0_6_73_execution_allowed: false
+push_status: not_performed
+validation: node --check scripts/native_doubao_secretless_provider_runtime_bridge.js passed; node --check scripts/run_native_doubao_image_generation.js passed; node --check scripts/validate_v0_6_73h_secretless_provider_runtime_bridge.js passed; node scripts/validate_v0_6_73h_secretless_provider_runtime_bridge.js passed_38_checks; node scripts/validate_v0_6_73g_secretless_runtime_binding_implementation_surface.js passed_28_checks; node scripts/validate_real_vcp_agent_generation_preflight_no_call.js passed_86_checks; node --check scripts/lib/governance_tooling_maintenance_slice.js passed; node scripts/lib/governance_tooling_maintenance_slice.js passed
+next_safe_task: draft_exact_bridge_delegate_authorization_or_stop_before_real_execution_retry
+```
+
+---
+
+## Checkpoint - v0.6.73g Secretless Runtime Binding Implementation Surface
+
+```text
+phase: v0_6_73g_secretless_runtime_binding_implementation_surface
+status: COMPLETED_VALIDATED_fail_closed_surface_only
+source_phase: v0_6_73_real_vcp_agent_generation_execution_one_shot
+source_status: BLOCKED_secretless_runtime_binding_not_callable
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+legacy_active_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+changed_files_current_task:
+  - docs/vcp_integration/V0_6_73G_SECRETLESS_RUNTIME_BINDING_IMPLEMENTATION_SURFACE.md
+  - scripts/run_native_doubao_image_generation.js
+  - scripts/validate_v0_6_73g_secretless_runtime_binding_implementation_surface.js
+  - tests/schema_examples/v0_6_73g_secretless_runtime_binding_implementation_surface.example.yaml
+  - scripts/lib/governance_tooling_maintenance_slice.js
+  - .agent_board/BLOCKERS.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+summary: Added a local fail-closed NativeDoubao secretless binding surface that validates a non-secret capability handle without reading .env.local and stops before provider contact unless a future exact bridge is implemented and authorized.
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+image_binary_read_performed: false
+output_write_performed: false
+env_file_content_read_performed: false
+secret_value_read_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+v0_6_73_execution_allowed: false
+push_status: not_performed
+validation: node --check scripts/run_native_doubao_image_generation.js passed; node --check scripts/validate_v0_6_73g_secretless_runtime_binding_implementation_surface.js passed; node scripts/validate_v0_6_73g_secretless_runtime_binding_implementation_surface.js passed_28_checks; node scripts/validate_real_vcp_agent_generation_preflight_no_call.js passed_86_checks; node --check scripts/lib/governance_tooling_maintenance_slice.js passed; node scripts/lib/governance_tooling_maintenance_slice.js passed
+next_safe_task: provide_exact_secretless_provider_runtime_bridge_before_real_execution_retry
+```
+
+---
+
+## Checkpoint - v0.6.73 Real VCP Agent Generation Execution One-Shot Attempt
+
+```text
+phase: v0_6_73_real_vcp_agent_generation_execution_one_shot
+status: BLOCKED_secretless_runtime_binding_not_callable
+result: BLOCKED
+mode: Amber_B provider-image one-shot execution attempt stopped before provider contact
+trigger: user_named_v0_6_73_real_vcp_agent_generation_execution_one_shot
+changed: .agent_board/CHECKPOINT.md; .agent_board/HANDOFF.md; .agent_board/RUN_STATE.md; .agent_board/TASK_QUEUE.md; .agent_board/BLOCKERS.md
+head: 64a379b0af583e73cdfa9e5c0685ecba0dfb71f7
+origin_master: 64a379b0af583e73cdfa9e5c0685ecba0dfb71f7
+ahead_behind: 0/0
+evidence_checked: AGENTS.md; AGENTS.autopilot-overlay.md; .agent_board resume surfaces; docs/vcp_integration/V0_6_73F_EXACT_A5_EXECUTION_AUTHORIZATION_DRAFT.md; docs/vcp_integration/V0_6_73E_ONE_SHOT_EXECUTION_READINESS_PACKET.md; docs/vcp_integration/V0_6_73B_NATIVE_DOUBAO_SECRETLESS_BINDING_IMPLEMENTATION_SURFACE.md; scripts/run_native_doubao_image_generation.js
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+legacy_active_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+blocked_reason: current runner real execution path requires .env.local loading but v0.6.73f requires a secretless callable binding with env_file_content_read_allowed=false and secret_value_allowed=false.
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+image_binary_read_performed: false
+output_write_performed: false
+receipt_write_performed: false
+review_handoff_write_performed: false
+env_file_content_read_performed: false
+env_local_file_content_read_performed: false
+secret_value_read_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+push_status: not_performed
+validation_result: node --check scripts/validate_v0_6_73f_exact_a5_execution_authorization_draft.js passed; node scripts/validate_v0_6_73f_exact_a5_execution_authorization_draft.js passed_95_checks; node --check scripts/run_native_doubao_image_generation.js passed
+next: implement_or_provide_exact_non_secret_callable_native_doubao_runtime_binding_then_revalidate_before_retry
+```
+
+---
+
 ## Checkpoint - v0.6.73f Exact A5 Execution Authorization Draft
 
 ```text

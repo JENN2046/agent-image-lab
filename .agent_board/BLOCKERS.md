@@ -2,6 +2,33 @@
 
 ## Active Blockers
 
+## BLOCKER-20260525-02 - v0.6.73 real execution retry still requires exact bound delegate authorization
+
+Status: active_stop_before_real_execution_retry
+Detected during: v0_6_73i_exact_bridge_delegate_authorization_or_stop_before_real_execution_retry
+Task: NativeDoubao secretless runtime bridge retry safety
+Reason: v0.6.73i blocks arbitrary secretless_provider_runtime functions before invocation and allows only the controlled unbound bridge to fail closed. A real bound provider runtime delegate still requires separate exact human activation and budget/receipt/output controls before any provider contact.
+Hard stop gate: exact_bound_delegate_authorization_required_before_real_provider_contact
+Files involved: scripts/native_doubao_secretless_provider_runtime_bridge.js; scripts/run_native_doubao_image_generation.js; docs/vcp_integration/V0_6_73I_EXACT_BRIDGE_DELEGATE_AUTHORIZATION_OR_STOP_BEFORE_REAL_EXECUTION_RETRY.md
+Validation state: target validator added for arbitrary runtime pre-call blocking and unbound bridge fail-closed continuity; no provider/API/image/output/secret action performed.
+Required human decision: provide separate explicit real execution authorization with an exact bound delegate packet before any v0.6.73 real-generation retry.
+Safe next action: stop_before_real_execution_retry_until_exact_human_authorization.
+Rollback or cleanup path: remove the local i gate files and runner/bridge guard patch; no generated image, output directory, receipt, review handoff, memory, sample, production candidate, or remote state was created.
+
+## BLOCKER-20260525-01 - v0.6.73 secretless runtime binding not callable
+
+Status: active_narrowed_by_v0_6_73h_unbound_bridge_surface
+Detected during: v0_6_73_real_vcp_agent_generation_execution_one_shot
+Task: one-shot NativeDoubao real generation attempt
+Reason: User supplied the v0.6.73 execution phase name, but the initial real runner still required `.env.local` loading on the execution path. v0.6.73g added a local fail-closed secretless binding surface. v0.6.73h adds a callable unbound provider runtime bridge, but no exact owner-authorized provider delegate is bound to it yet.
+Hard stop gate: provider_runtime_delegate_not_bound_before_real_provider_contact
+Files involved: scripts/native_doubao_secretless_provider_runtime_bridge.js; scripts/run_native_doubao_image_generation.js; docs/vcp_integration/V0_6_73H_SECRETLESS_PROVIDER_RUNTIME_BRIDGE.md; docs/vcp_integration/V0_6_73G_SECRETLESS_RUNTIME_BINDING_IMPLEMENTATION_SURFACE.md; docs/vcp_integration/V0_6_73F_EXACT_A5_EXECUTION_AUTHORIZATION_DRAFT.md; docs/vcp_integration/V0_6_73E_ONE_SHOT_EXECUTION_READINESS_PACKET.md; docs/vcp_integration/V0_6_73B_NATIVE_DOUBAO_SECRETLESS_BINDING_IMPLEMENTATION_SURFACE.md
+Validation state: v0.6.73h local validator passed; v0.6.73g local validator still passed; legacy v0.6.72 preflight validator still passed; governance slice self-check passed; no provider/API/image/output/secret action performed.
+Why the agent stopped: the local bridge is callable and sanitized, but it is intentionally unbound and returns BLOCKED_PROVIDER_RUNTIME_DELEGATE_NOT_BOUND.
+Required human decision: draft and authorize an exact provider runtime delegate binding before any real provider call retry.
+Safe next action: draft_exact_bridge_delegate_authorization_or_stop_before_real_execution_retry.
+Rollback or cleanup path: board-only status record can be reverted; no generated image, output directory, receipt, review handoff, memory, sample, production candidate, or remote state was created.
+
 ```text
 CURRENT POLICY OVERRIDE. DECISION-AIL-AUTO-009 is active as Smart Standing Authorization v3 — Budgeted Autonomy Envelope: Green Lane work runs directly with after-action recording; Amber Lane work for A5/provider/plugin/API/image, DailyNote/VCP memory, real manifest/VCPChat/VCPToolBox exact reads, production metadata writes, bounded runtime/integration probes, and small dependency changes runs autonomously inside budget with receipts; Red Lane conditions still stop and require the user.
 CURRENT EXACT MEMORY BLOCKER. exact_memory_writer_target_unresolved_without_secret_or_broad_vcp_write is active for v0.6.62: v0.6.61 proved the Chinese memory payload is ready and authorization is not missing, but no exact non-secret callable DailyNote/VCP memory writer target is available from the current repository/tool surface. Do not perform the DailyNote/VCP memory write until an exact writer tool/command, canonical root preflight, exact target, and post-write canonical hash validation are provided.

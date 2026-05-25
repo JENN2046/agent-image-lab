@@ -1,5 +1,186 @@
 ---
 
+## Current Run State - v0.6.73i Exact Bridge Delegate Authorization Or Stop Before Real Execution Retry
+
+```text
+phase: v0_6_73i_exact_bridge_delegate_authorization_or_stop_before_real_execution_retry
+status: COMPLETED_VALIDATED_delegate_call_lock_only
+mode: Green local bridge authorization lock only; no provider/plugin/API/image/output/secret/memory execution
+source_phase: v0_6_73h_secretless_provider_runtime_bridge
+source_status: COMPLETED_VALIDATED_unbound_bridge_surface_only
+workspace: A:\agent-image-lab\agent-image-lab-v0.2
+branch: master
+head: 64a379b0af583e73cdfa9e5c0685ecba0dfb71f7
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+legacy_active_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+bridge_id: native_doubao_secretless_provider_runtime_bridge:v0_6_73h
+delegate_authorization_ref: docs/vcp_integration/V0_6_73I_EXACT_BRIDGE_DELEGATE_AUTHORIZATION_OR_STOP_BEFORE_REAL_EXECUTION_RETRY.md
+delegate_authorization_status_required: authorized_by_exact_bridge_delegate_authorization
+controlled_bridge_marker_required: true
+arbitrary_runtime_function_allowed: false
+bound_delegate_without_exact_authorization_allowed: false
+unbound_bridge_allowed_to_fail_closed: true
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+image_binary_read_performed: false
+output_write_performed: false
+env_file_content_read_performed: false
+secret_value_read_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+v0_6_73_execution_allowed: false
+push_status: not_performed
+next_safe_task: stop_before_real_execution_retry_until_exact_human_authorization
+```
+
+---
+
+## Current Run State - v0.6.73h Secretless Provider Runtime Bridge
+
+```text
+phase: v0_6_73h_secretless_provider_runtime_bridge
+status: COMPLETED_VALIDATED_unbound_bridge_surface_only
+mode: Amber_B local bridge surface only; no provider/plugin/API/image/output/secret/memory execution
+source_phase: v0_6_73g_secretless_runtime_binding_implementation_surface
+source_status: COMPLETED_VALIDATED_fail_closed_surface_only
+workspace: A:\agent-image-lab\agent-image-lab-v0.2
+branch: master
+head: 64a379b0af583e73cdfa9e5c0685ecba0dfb71f7
+origin_master: 64a379b0af583e73cdfa9e5c0685ecba0dfb71f7
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+legacy_active_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+bridge_id: native_doubao_secretless_provider_runtime_bridge:v0_6_73h
+provider_binding_ref: native_doubao:capability:owner-runtime:v0_6_73
+provider_binding_ref_redacted: true
+provider_binding_ref_is_secret: false
+runtime_delegate_bound: false
+unbound_bridge_status: BLOCKED_PROVIDER_RUNTIME_DELEGATE_NOT_BOUND
+implemented_bridge_module: scripts/native_doubao_secretless_provider_runtime_bridge.js
+implemented_runner_integration: scripts/run_native_doubao_image_generation.js
+implemented_validator: scripts/validate_v0_6_73h_secretless_provider_runtime_bridge.js
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+actual_image_generation_performed: false
+image_binary_read_performed: false
+output_write_performed: false
+receipt_write_performed: false
+review_handoff_write_performed: false
+env_file_content_read_performed: false
+env_local_file_content_read_performed: false
+secret_value_read_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+v0_6_73_execution_allowed: false
+push_status: not_performed
+validation: node --check scripts/native_doubao_secretless_provider_runtime_bridge.js passed; node --check scripts/run_native_doubao_image_generation.js passed; node --check scripts/validate_v0_6_73h_secretless_provider_runtime_bridge.js passed; node scripts/validate_v0_6_73h_secretless_provider_runtime_bridge.js passed_38_checks; node scripts/validate_v0_6_73g_secretless_runtime_binding_implementation_surface.js passed_28_checks; node scripts/validate_real_vcp_agent_generation_preflight_no_call.js passed_86_checks; node --check scripts/lib/governance_tooling_maintenance_slice.js passed; node scripts/lib/governance_tooling_maintenance_slice.js passed
+next_safe_task: draft_exact_bridge_delegate_authorization_or_stop_before_real_execution_retry
+```
+
+---
+
+## Current Run State - v0.6.73g Secretless Runtime Binding Implementation Surface
+
+```text
+phase: v0_6_73g_secretless_runtime_binding_implementation_surface
+status: COMPLETED_VALIDATED_fail_closed_surface_only
+mode: Amber_B local implementation surface only; no provider/plugin/API/image/output/secret/memory execution
+source_phase: v0_6_73_real_vcp_agent_generation_execution_one_shot
+source_status: BLOCKED_secretless_runtime_binding_not_callable
+workspace: A:\agent-image-lab\agent-image-lab-v0.2
+branch: master
+head: 64a379b0af583e73cdfa9e5c0685ecba0dfb71f7
+origin_master: 64a379b0af583e73cdfa9e5c0685ecba0dfb71f7
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+legacy_active_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+provider_binding_ref: native_doubao:capability:owner-runtime:v0_6_73
+provider_binding_ref_redacted: true
+provider_binding_ref_is_secret: false
+implemented_runner_surface: scripts/run_native_doubao_image_generation.js
+implemented_validator: scripts/validate_v0_6_73g_secretless_runtime_binding_implementation_surface.js
+secretless_preflight_without_env_read: true
+blocked_status_without_runtime: BLOCKED_SECRETLESS_RUNTIME_NOT_CALLABLE
+blocked_status_with_unwired_runtime: BLOCKED_SECRETLESS_RUNTIME_BRIDGE_NOT_IMPLEMENTED
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+image_binary_read_performed: false
+output_write_performed: false
+receipt_write_performed: false
+review_handoff_write_performed: false
+env_file_content_read_performed: false
+env_local_file_content_read_performed: false
+secret_value_read_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+v0_6_73_execution_allowed: false
+push_status: not_performed
+validation: node --check scripts/run_native_doubao_image_generation.js passed; node --check scripts/validate_v0_6_73g_secretless_runtime_binding_implementation_surface.js passed; node scripts/validate_v0_6_73g_secretless_runtime_binding_implementation_surface.js passed_28_checks; node scripts/validate_real_vcp_agent_generation_preflight_no_call.js passed_86_checks; node --check scripts/lib/governance_tooling_maintenance_slice.js passed; node scripts/lib/governance_tooling_maintenance_slice.js passed
+next_safe_task: provide_exact_secretless_provider_runtime_bridge_before_real_execution_retry
+```
+
+---
+
+## Current Run State - v0.6.73 Real VCP Agent Generation Execution One-Shot Attempt
+
+```text
+phase: v0_6_73_real_vcp_agent_generation_execution_one_shot
+status: BLOCKED_secretless_runtime_binding_not_callable
+mode: Amber_B provider-image one-shot execution attempt stopped before provider contact
+trigger: user_named_v0_6_73_real_vcp_agent_generation_execution_one_shot
+workspace: A:\agent-image-lab\agent-image-lab-v0.2
+branch: master
+head: 64a379b0af583e73cdfa9e5c0685ecba0dfb71f7
+origin_master: 64a379b0af583e73cdfa9e5c0685ecba0dfb71f7
+ahead_behind: 0/0
+selected_route: NativeDoubaoImage_one_shot_project_plugin
+selected_plugin_id: NativeDoubaoImage
+model: doubao-seedream-5-0-260128
+prompt_package_ref: prompts/image_generation/neutral_smoke_test_red_apple_v1.yaml
+output_directory_ref: runs/real_generation/v0_6_73_real_vcp_agent_generation_one_shot/
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+legacy_active_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+authorization_name_received: true
+authorization_doc_status: draft_not_active
+authorization_doc_can_execute_now: false
+required_secretless_binding_present_as_contract: true
+required_secretless_binding_callable_runtime_present: false
+blocked_reason: current scripts/run_native_doubao_image_generation.js real execution path requires .env.local loading; v0.6.73f requires env_file_content_read_allowed=false and secret_value_allowed=false.
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+image_binary_read_performed: false
+output_write_performed: false
+receipt_write_performed: false
+review_handoff_write_performed: false
+env_file_content_read_performed: false
+env_local_file_content_read_performed: false
+secret_value_read_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+push_status: not_performed
+next_safe_task: implement_or_provide_exact_non_secret_callable_native_doubao_runtime_binding_then_revalidate_before_retry
+```
+
+---
+
 ## Current Run State - v0.6.73f Exact A5 Execution Authorization Draft
 
 ```text
