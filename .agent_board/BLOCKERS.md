@@ -2,6 +2,21 @@
 
 ## Active Blockers
 
+## BLOCKER-20260525-22 - Remote synced but exact execution phrase still inactive
+
+Status: active_delegate_remote_synced_execution_phrase_inactive
+Detected during: v0_6_73ac_push_active_delegate_activation_and_post_activation_review
+Task: push active delegate activation and post-activation review
+Active current phase: v0_3_3_first_live_generation_pilot
+Resume guard source phase: v0_3_2_live_candidate_action_packet
+Legacy active next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+Reason: The active delegate activation record and post-activation review are now pushed to origin/master at 7ef3b015a3b56ba6da161e9f2e2c8cc0aa4da0bd with ahead/behind 0/0, but authorization_phrase_active_for_execution remains false and can_execute_now remains false.
+Hard stop gate: exact_execution_phrase_activation_required_before_provider_contact
+Files involved: .agent_board/BLOCKERS.md; .agent_board/CHECKPOINT.md; .agent_board/HANDOFF.md; .agent_board/RUN_STATE.md; .agent_board/TASK_QUEUE.md
+Validation state: npm run validate:mvp passed after push; no provider/API/image/output/secret/memory action performed.
+Required next safe action: v0_6_73ad_remote_synced_final_execution_phrase_activation_review.
+Rollback or cleanup path: board status sync can be reverted locally; pushed commits remain normal Git history and no generated image, output directory, receipt, review handoff, memory, sample, production candidate, or real execution state was created.
+
 ## BLOCKER-20260525-21 - Post-activation real execution remains NO-GO
 
 Status: active_delegate_actual_but_execution_no_go
