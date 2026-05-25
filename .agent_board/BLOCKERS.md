@@ -2,6 +2,18 @@
 
 ## Active Blockers
 
+## BLOCKER-20260525-14 - No-provider harness passes but active delegate remains absent
+
+Status: active_no_provider_harness_passed_active_delegate_absent
+Detected during: v0_6_73u3_runtime_delegate_binding_test_harness_no_provider
+Task: runtime delegate binding test harness no provider
+Reason: The harness proves missing runtime, arbitrary runtime, unbound controlled bridge, and bad provider binding cases all fail closed without provider contact. It does not create an active delegate authorization packet or authorize real execution.
+Hard stop gate: exact_active_delegate_authorization_packet_required_before_real_provider_contact
+Files involved: docs/vcp_integration/V0_6_73U3_RUNTIME_DELEGATE_BINDING_TEST_HARNESS_NO_PROVIDER.md; scripts/native_doubao_delegate_binding_test_harness_no_provider.js; scripts/validate_v0_6_73u3_runtime_delegate_binding_test_harness_no_provider.js; tests/schema_examples/v0_6_73u3_runtime_delegate_binding_test_harness_no_provider.example.yaml
+Validation state: no-provider harness validator required; no push/provider/API/image/output/secret action performed.
+Required next safe action: v0_6_73v_exact_active_delegate_authorization_packet_draft.
+Rollback or cleanup path: harness files plus board status sync can be reverted locally; no generated image, output directory, receipt, review handoff, memory, sample, production candidate, remote write, or real execution state was created.
+
 ## BLOCKER-20260525-13 - Active delegate authorization activation remains preflight-only
 
 Status: active_fail_closed_activation_preflight_only

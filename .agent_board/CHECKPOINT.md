@@ -1,5 +1,52 @@
 ---
 
+## Checkpoint - v0.6.73u3 Runtime Delegate Binding Test Harness No Provider
+
+```text
+phase: v0_6_73u3_runtime_delegate_binding_test_harness_no_provider
+status: COMPLETED_VALIDATED_no_provider_harness_passed
+source_phase: v0_6_73u_active_delegate_authorization_activation_preflight
+source_status: COMPLETED_VALIDATED_fail_closed_activation_preflight_only
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+legacy_active_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+changed_files_current_task:
+  - docs/vcp_integration/V0_6_73U3_RUNTIME_DELEGATE_BINDING_TEST_HARNESS_NO_PROVIDER.md
+  - tests/schema_examples/v0_6_73u3_runtime_delegate_binding_test_harness_no_provider.example.yaml
+  - scripts/native_doubao_delegate_binding_test_harness_no_provider.js
+  - scripts/validate_v0_6_73u3_runtime_delegate_binding_test_harness_no_provider.js
+  - scripts/lib/governance_tooling_maintenance_slice.js
+  - .agent_board/BLOCKERS.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+summary: Added and validated the no-provider delegate binding harness. Missing runtime, arbitrary runtime, unbound controlled bridge, and bad provider binding cases all fail closed without provider contact or output.
+harness_id: HARNESS-V0-6-73U3-NO-PROVIDER
+accepted_delegate_shape: controlled_bridge_marker_with_exact_authorization_only
+arbitrary_runtime_allowed: false
+unbound_controlled_bridge_allowed_to_fail_closed: true
+case_count: 5
+push_performed: false
+push_status: not_performed_user_deferred_push_local_ahead_4_before_u3
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+image_binary_read_performed: false
+output_write_performed: false
+env_file_content_read_performed: false
+secret_value_read_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+v0_6_73_execution_allowed: false
+next_safe_task: v0_6_73v_exact_active_delegate_authorization_packet_draft
+```
+
+---
+
 ## Checkpoint - v0.6.73u Active Delegate Authorization Activation Preflight
 
 ```text

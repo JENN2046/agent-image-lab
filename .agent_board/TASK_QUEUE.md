@@ -1,5 +1,34 @@
 ---
 
+- [x] ID: v0_6_73u3_runtime_delegate_binding_test_harness_no_provider
+      Lane: Green local no-provider harness only.
+      Status: COMPLETED_VALIDATED_no_provider_harness_passed.
+      Source phase: v0_6_73u_active_delegate_authorization_activation_preflight.
+      Source status: COMPLETED_VALIDATED_fail_closed_activation_preflight_only.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Legacy active next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Goal: Validate the NativeDoubao secretless delegate binding harness without provider contact.
+      Harness id: HARNESS-V0-6-73U3-NO-PROVIDER.
+      Accepted delegate shape: controlled_bridge_marker_with_exact_authorization_only.
+      Arbitrary runtime allowed: false.
+      Unbound controlled bridge allowed to fail closed: true.
+      Case count: 5.
+      push_performed: false.
+      push_status: not_performed_user_deferred_push_local_ahead_4_before_u3.
+      provider_contact_performed: false.
+      plugin_call_performed: false.
+      api_call_performed: false.
+      image_generation_performed: false.
+      image_binary_read_performed: false.
+      output_write_performed: false.
+      env_file_content_read_performed: false.
+      secret_value_read_performed: false.
+      v0_6_73_execution_allowed: false.
+      Next: v0_6_73v_exact_active_delegate_authorization_packet_draft.
+
+---
+
 - [x] ID: v0_6_73u_active_delegate_authorization_activation_preflight
       Lane: Green local activation preflight contract only.
       Status: COMPLETED_VALIDATED_fail_closed_activation_preflight_only.

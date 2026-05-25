@@ -1,5 +1,47 @@
 ---
 
+## Current Run State - v0.6.73u3 Runtime Delegate Binding Test Harness No Provider
+
+```text
+phase: v0_6_73u3_runtime_delegate_binding_test_harness_no_provider
+status: COMPLETED_VALIDATED_no_provider_harness_passed
+mode: Green local no-provider harness only; no push and no provider/plugin/API/image/output/secret/memory execution
+source_phase: v0_6_73u_active_delegate_authorization_activation_preflight
+source_status: COMPLETED_VALIDATED_fail_closed_activation_preflight_only
+workspace: A:\agent-image-lab\agent-image-lab-v0.2
+branch: master
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+legacy_active_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+harness_id: HARNESS-V0-6-73U3-NO-PROVIDER
+harness_script_ref: scripts/native_doubao_delegate_binding_test_harness_no_provider.js
+accepted_delegate_shape: controlled_bridge_marker_with_exact_authorization_only
+arbitrary_runtime_allowed: false
+unbound_controlled_bridge_allowed_to_fail_closed: true
+case_count: 5
+exact_active_delegate_authorization_present: false
+push_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+image_binary_read_performed: false
+output_write_performed: false
+receipt_write_performed: false
+review_handoff_write_performed: false
+env_file_content_read_performed: false
+secret_value_read_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+v0_6_73_execution_allowed: false
+push_status: not_performed_user_deferred_push_local_ahead_4_before_u3
+next_safe_task: v0_6_73v_exact_active_delegate_authorization_packet_draft
+```
+
+---
+
 ## Current Run State - v0.6.73u Active Delegate Authorization Activation Preflight
 
 ```text
