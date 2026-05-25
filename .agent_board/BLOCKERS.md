@@ -2,6 +2,18 @@
 
 ## Active Blockers
 
+## BLOCKER-20260525-06 - v0.6.73 go/no-go review is NO-GO
+
+Status: active_no_go
+Detected during: v0_6_73n_real_execution_go_no_go_review
+Task: real execution go/no-go review
+Reason: The local go/no-go review confirms MVP, delegate fail-closed lock, output directory policy, receipt policy, review handoff policy, and secretless proof are documented as passed, but remote_synced_current is false and exact_active_delegate_authorization_present is false. Real execution remains blocked.
+Hard stop gate: remote_sync_and_exact_active_bound_delegate_authorization_required_before_real_provider_contact
+Files involved: docs/vcp_integration/V0_6_73N_REAL_EXECUTION_GO_NO_GO_REVIEW.md; scripts/validate_v0_6_73n_real_execution_go_no_go_review.js; tests/schema_examples/v0_6_73n_real_execution_go_no_go_review.example.yaml
+Validation state: local go/no-go validator required; no provider/API/image/output/secret action performed.
+Required next safe action: v0_6_73o_exact_real_execution_authorization_phrase_draft.
+Rollback or cleanup path: remove v0.6.73n go/no-go review files plus board status sync; no generated image, output directory, receipt, review handoff, memory, sample, production candidate, or remote execution state was created.
+
 ## BLOCKER-20260525-05 - v0.6.73 bound delegate preflight remains fail-closed without active authorization
 
 Status: active_fail_closed_until_exact_active_authorization
