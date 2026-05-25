@@ -2,6 +2,19 @@
 
 ## Active Blockers
 
+## BLOCKER-20260525-03 - v0.6.73 post-push synced but real execution still blocked
+
+Status: active_stop_before_real_execution
+Detected during: v0_6_73k_remote_post_push_state_sync
+Task: post-push state sync after user-authorized push of 551ba04
+Reason: Commit 551ba04 is synchronized to origin/master with ahead/behind 0/0, but this state sync does not authorize v0.6.73 real generation. A real bound NativeDoubao provider runtime delegate and exact human activation are still required before any provider contact.
+Hard stop gate: real_execution_requires_bound_delegate_authorization_and_exact_human_activation
+Files involved: .agent_board/CHECKPOINT.md; .agent_board/HANDOFF.md; .agent_board/RUN_STATE.md; .agent_board/TASK_QUEUE.md
+Validation state: post-push npm run validate:mvp passed; resume surfaces updated locally; no provider/API/image/output/secret action performed.
+Required human decision: separate exact real execution authorization naming v0_6_73_real_vcp_agent_generation_execution_one_shot after bound delegate authorization packet and go/no-go review.
+Safe next action: v0_6_73l_bound_delegate_authorization_packet_draft.
+Rollback or cleanup path: board-only status sync can be reverted; no generated image, output directory, receipt, review handoff, memory, sample, production candidate, or remote execution state was created.
+
 ## BLOCKER-20260525-02 - v0.6.73 real execution retry still requires exact bound delegate authorization
 
 Status: active_stop_before_real_execution_retry
