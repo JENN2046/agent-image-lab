@@ -2,6 +2,21 @@
 
 ## Active Blockers
 
+## BLOCKER-20260525-25 - Final pre-provider review is NO-GO until phrase activation chain is pushed
+
+Status: final_pre_provider_no_go_phrase_activation_chain_unpushed
+Detected during: v0_6_73af_final_pre_provider_execution_go_no_go
+Task: final pre-provider execution GO/NO-GO
+Active current phase: v0_3_3_first_live_generation_pilot
+Resume guard source phase: v0_3_2_live_candidate_action_packet
+Legacy active next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+Reason: The active phrase exists, but local HEAD 3cc70309e849f0990bcb9caf9e7ab5268d9fac3c is ahead of origin/master 7ef3b015a3b56ba6da161e9f2e2c8cc0aa4da0bd by 3 commits, so the phrase activation record is not remote-synced.
+Hard stop gate: phrase_activation_chain_remote_sync_required_before_provider_contact
+Files involved: docs/vcp_integration/V0_6_73AF_FINAL_PRE_PROVIDER_EXECUTION_GO_NO_GO.md; scripts/validate_v0_6_73af_final_pre_provider_execution_go_no_go.js; tests/schema_examples/v0_6_73af_final_pre_provider_execution_go_no_go.example.yaml; tests/schema_examples/v0_6_73af_final_pre_provider_execution_go_no_go_fail.example.yaml
+Validation state: final pre-provider GO/NO-GO validator and MVP validation required; no provider/API/image/output/secret/memory action performed.
+Required next safe action: v0_6_73ag_push_phrase_activation_chain_and_post_push_verify.
+Rollback or cleanup path: af review files plus board status sync can be reverted locally; no generated image, output directory, receipt, review handoff, memory, sample, production candidate, remote write, or real execution state was created.
+
 ## BLOCKER-20260525-24 - Phrase active but final pre-provider check still required
 
 Status: phrase_active_pre_provider_stop

@@ -2417,6 +2417,18 @@ const EXPECTED_V0_6_73AE_EXACT_EXECUTION_PHRASE_ACTIVE_FOR_EXECUTION_RECORD_SLIC
   "tests/schema_examples/v0_6_73ae_exact_execution_phrase_active_for_execution_record_fail.example.yaml"
 ].sort();
 
+const EXPECTED_V0_6_73AF_FINAL_PRE_PROVIDER_EXECUTION_GO_NO_GO_SLICE = [
+  ".agent_board/BLOCKERS.md",
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  "docs/vcp_integration/V0_6_73AF_FINAL_PRE_PROVIDER_EXECUTION_GO_NO_GO.md",
+  "scripts/validate_v0_6_73af_final_pre_provider_execution_go_no_go.js",
+  "tests/schema_examples/v0_6_73af_final_pre_provider_execution_go_no_go.example.yaml",
+  "tests/schema_examples/v0_6_73af_final_pre_provider_execution_go_no_go_fail.example.yaml"
+].sort();
+
 const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "governance_tooling_maintenance_slice_v1",
@@ -2993,6 +3005,10 @@ const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "v0_6_73ae_exact_execution_phrase_active_for_execution_record_slice",
     files: EXPECTED_V0_6_73AE_EXACT_EXECUTION_PHRASE_ACTIVE_FOR_EXECUTION_RECORD_SLICE
+  },
+  {
+    id: "v0_6_73af_final_pre_provider_execution_go_no_go_slice",
+    files: EXPECTED_V0_6_73AF_FINAL_PRE_PROVIDER_EXECUTION_GO_NO_GO_SLICE
   }
 ];
 
@@ -3076,8 +3092,10 @@ function normalizeChangedFilesForSliceMatching(changedFiles) {
     && sameStringList(withoutHelper, EXPECTED_V0_6_73AD_REMOTE_SYNCED_FINAL_EXECUTION_PHRASE_ACTIVATION_REVIEW_SLICE);
   const isV0_6_73aeRegistrationPatch = changedFiles.includes(GOVERNANCE_TOOLING_SLICE_HELPER_FILE)
     && sameStringList(withoutHelper, EXPECTED_V0_6_73AE_EXACT_EXECUTION_PHRASE_ACTIVE_FOR_EXECUTION_RECORD_SLICE);
+  const isV0_6_73afRegistrationPatch = changedFiles.includes(GOVERNANCE_TOOLING_SLICE_HELPER_FILE)
+    && sameStringList(withoutHelper, EXPECTED_V0_6_73AF_FINAL_PRE_PROVIDER_EXECUTION_GO_NO_GO_SLICE);
 
-  return (isPostPushSyncRegistrationPatch || isExecutionBlockedStatusSyncRegistrationPatch || isV0_6_73gRegistrationPatch || isV0_6_73hRegistrationPatch || isV0_6_73iRegistrationPatch || isV0_6_73lRegistrationPatch || isV0_6_73mRegistrationPatch || isV0_6_73nRegistrationPatch || isV0_6_73oRegistrationPatch || isV0_6_73pRegistrationPatch || isV0_6_73qRegistrationPatch || isV0_6_73rRegistrationPatch || isV0_6_73sRegistrationPatch || isV0_6_73tRegistrationPatch || isV0_6_73uRegistrationPatch || isV0_6_73u3RegistrationPatch || isV0_6_73vRegistrationPatch || isV0_6_73wRegistrationPatch || isV0_6_73xRegistrationPatch || isV0_6_73zRegistrationPatch || isV0_6_73aaRegistrationPatch || isV0_6_73abRegistrationPatch || isV0_6_73adRegistrationPatch || isV0_6_73aeRegistrationPatch) ? withoutHelper : changedFiles;
+  return (isPostPushSyncRegistrationPatch || isExecutionBlockedStatusSyncRegistrationPatch || isV0_6_73gRegistrationPatch || isV0_6_73hRegistrationPatch || isV0_6_73iRegistrationPatch || isV0_6_73lRegistrationPatch || isV0_6_73mRegistrationPatch || isV0_6_73nRegistrationPatch || isV0_6_73oRegistrationPatch || isV0_6_73pRegistrationPatch || isV0_6_73qRegistrationPatch || isV0_6_73rRegistrationPatch || isV0_6_73sRegistrationPatch || isV0_6_73tRegistrationPatch || isV0_6_73uRegistrationPatch || isV0_6_73u3RegistrationPatch || isV0_6_73vRegistrationPatch || isV0_6_73wRegistrationPatch || isV0_6_73xRegistrationPatch || isV0_6_73zRegistrationPatch || isV0_6_73aaRegistrationPatch || isV0_6_73abRegistrationPatch || isV0_6_73adRegistrationPatch || isV0_6_73aeRegistrationPatch || isV0_6_73afRegistrationPatch) ? withoutHelper : changedFiles;
 }
 
 function fileAllowedInGovernanceToolingSlice(file) {
@@ -3899,6 +3917,19 @@ function governanceToolingMaintenanceSliceSelfCheck() {
       ])?.id === "v0_6_73ae_exact_execution_phrase_active_for_execution_record_slice"
     },
     {
+      check: "exact_slice_matches_v0_6_73af_final_pre_provider_execution_go_no_go",
+      passed: findMatchingGovernanceToolingSlice(
+        EXPECTED_V0_6_73AF_FINAL_PRE_PROVIDER_EXECUTION_GO_NO_GO_SLICE
+      )?.id === "v0_6_73af_final_pre_provider_execution_go_no_go_slice"
+    },
+    {
+      check: "exact_slice_matches_v0_6_73af_final_pre_provider_execution_go_no_go_registration_patch",
+      passed: findMatchingGovernanceToolingSlice([
+        ...EXPECTED_V0_6_73AF_FINAL_PRE_PROVIDER_EXECUTION_GO_NO_GO_SLICE,
+        GOVERNANCE_TOOLING_SLICE_HELPER_FILE
+      ])?.id === "v0_6_73af_final_pre_provider_execution_go_no_go_slice"
+    },
+    {
       check: "exact_slice_rejects_missing_file",
       passed: findMatchingGovernanceToolingSlice(EXPECTED_GOVERNANCE_TOOLING_MAINTENANCE_SLICE.slice(1)) === null
     },
@@ -4045,6 +4076,7 @@ module.exports = {
   EXPECTED_V0_6_73AB_POST_ACTIVATION_REAL_EXECUTION_GO_NO_GO_REVIEW_SLICE,
   EXPECTED_V0_6_73AD_REMOTE_SYNCED_FINAL_EXECUTION_PHRASE_ACTIVATION_REVIEW_SLICE,
   EXPECTED_V0_6_73AE_EXACT_EXECUTION_PHRASE_ACTIVE_FOR_EXECUTION_RECORD_SLICE,
+  EXPECTED_V0_6_73AF_FINAL_PRE_PROVIDER_EXECUTION_GO_NO_GO_SLICE,
   GOVERNANCE_TOOLING_ALLOWED_SLICES,
   buildGovernanceToolingMaintenanceSliceReport,
   fileAllowedInGovernanceToolingSlice,
