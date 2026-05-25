@@ -1,5 +1,48 @@
 ---
 
+## Current Run State - v0.6.73t Next Phase Selection Gate
+
+```text
+phase: v0_6_73t_next_phase_selection_gate
+status: COMPLETED_VALIDATED_selection_opened
+mode: Green local selection gate only; no push and no provider/plugin/API/image/output/secret/memory execution
+source_phase: v0_6_73s_final_real_execution_boundary_review
+source_status: COMPLETED_VALIDATED_final_NO_GO
+workspace: A:\agent-image-lab\agent-image-lab-v0.2
+branch: master
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+legacy_active_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+local_head_before_selection_gate: 747857301938f2ae5ac32704e754e48728151b7c
+origin_master_head: ad1f657ad61b1290ffa24c86ef238e792523fdc7
+local_ahead_count: 2
+remote_push_deferred_by_user: true
+final_real_execution_decision: NO_GO
+exact_active_delegate_authorization_present: false
+authorization_phrase_active: false
+recommended_next_phase: v0_6_73u_active_delegate_authorization_activation_preflight
+push_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+image_binary_read_performed: false
+output_write_performed: false
+receipt_write_performed: false
+review_handoff_write_performed: false
+env_file_content_read_performed: false
+secret_value_read_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+v0_6_73_execution_allowed: false
+push_status: not_performed_user_deferred_push_local_ahead_2
+next_safe_task: v0_6_73u_active_delegate_authorization_activation_preflight
+```
+
+---
+
 ## Current Run State - v0.6.73s Final Real Execution Boundary Review
 
 ```text

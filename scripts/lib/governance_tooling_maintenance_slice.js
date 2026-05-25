@@ -2288,6 +2288,17 @@ const EXPECTED_V0_6_73S_FINAL_REAL_EXECUTION_BOUNDARY_REVIEW_SLICE = [
   "tests/schema_examples/v0_6_73s_final_real_execution_boundary_review.example.yaml"
 ].sort();
 
+const EXPECTED_V0_6_73T_NEXT_PHASE_SELECTION_GATE_SLICE = [
+  ".agent_board/BLOCKERS.md",
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  "docs/vcp_integration/V0_6_73T_NEXT_PHASE_SELECTION_GATE.md",
+  "scripts/validate_v0_6_73t_next_phase_selection_gate.js",
+  "tests/schema_examples/v0_6_73t_next_phase_selection_gate.example.yaml"
+].sort();
+
 const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "governance_tooling_maintenance_slice_v1",
@@ -2820,6 +2831,10 @@ const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "v0_6_73s_final_real_execution_boundary_review_slice",
     files: EXPECTED_V0_6_73S_FINAL_REAL_EXECUTION_BOUNDARY_REVIEW_SLICE
+  },
+  {
+    id: "v0_6_73t_next_phase_selection_gate_slice",
+    files: EXPECTED_V0_6_73T_NEXT_PHASE_SELECTION_GATE_SLICE
   }
 ];
 
@@ -2881,8 +2896,10 @@ function normalizeChangedFilesForSliceMatching(changedFiles) {
     && sameStringList(withoutHelper, EXPECTED_V0_6_73R_REMOTE_POST_PUSH_STATE_SYNC_SLICE);
   const isV0_6_73sRegistrationPatch = changedFiles.includes(GOVERNANCE_TOOLING_SLICE_HELPER_FILE)
     && sameStringList(withoutHelper, EXPECTED_V0_6_73S_FINAL_REAL_EXECUTION_BOUNDARY_REVIEW_SLICE);
+  const isV0_6_73tRegistrationPatch = changedFiles.includes(GOVERNANCE_TOOLING_SLICE_HELPER_FILE)
+    && sameStringList(withoutHelper, EXPECTED_V0_6_73T_NEXT_PHASE_SELECTION_GATE_SLICE);
 
-  return (isPostPushSyncRegistrationPatch || isExecutionBlockedStatusSyncRegistrationPatch || isV0_6_73gRegistrationPatch || isV0_6_73hRegistrationPatch || isV0_6_73iRegistrationPatch || isV0_6_73lRegistrationPatch || isV0_6_73mRegistrationPatch || isV0_6_73nRegistrationPatch || isV0_6_73oRegistrationPatch || isV0_6_73pRegistrationPatch || isV0_6_73qRegistrationPatch || isV0_6_73rRegistrationPatch || isV0_6_73sRegistrationPatch) ? withoutHelper : changedFiles;
+  return (isPostPushSyncRegistrationPatch || isExecutionBlockedStatusSyncRegistrationPatch || isV0_6_73gRegistrationPatch || isV0_6_73hRegistrationPatch || isV0_6_73iRegistrationPatch || isV0_6_73lRegistrationPatch || isV0_6_73mRegistrationPatch || isV0_6_73nRegistrationPatch || isV0_6_73oRegistrationPatch || isV0_6_73pRegistrationPatch || isV0_6_73qRegistrationPatch || isV0_6_73rRegistrationPatch || isV0_6_73sRegistrationPatch || isV0_6_73tRegistrationPatch) ? withoutHelper : changedFiles;
 }
 
 function fileAllowedInGovernanceToolingSlice(file) {
@@ -3561,6 +3578,19 @@ function governanceToolingMaintenanceSliceSelfCheck() {
       ])?.id === "v0_6_73s_final_real_execution_boundary_review_slice"
     },
     {
+      check: "exact_slice_matches_v0_6_73t_next_phase_selection_gate",
+      passed: findMatchingGovernanceToolingSlice(
+        EXPECTED_V0_6_73T_NEXT_PHASE_SELECTION_GATE_SLICE
+      )?.id === "v0_6_73t_next_phase_selection_gate_slice"
+    },
+    {
+      check: "exact_slice_matches_v0_6_73t_next_phase_selection_gate_registration_patch",
+      passed: findMatchingGovernanceToolingSlice([
+        ...EXPECTED_V0_6_73T_NEXT_PHASE_SELECTION_GATE_SLICE,
+        GOVERNANCE_TOOLING_SLICE_HELPER_FILE
+      ])?.id === "v0_6_73t_next_phase_selection_gate_slice"
+    },
+    {
       check: "exact_slice_rejects_missing_file",
       passed: findMatchingGovernanceToolingSlice(EXPECTED_GOVERNANCE_TOOLING_MAINTENANCE_SLICE.slice(1)) === null
     },
@@ -3696,6 +3726,7 @@ module.exports = {
   EXPECTED_V0_6_73Q_PUSH_SAFETY_GATE_SLICE,
   EXPECTED_V0_6_73R_REMOTE_POST_PUSH_STATE_SYNC_SLICE,
   EXPECTED_V0_6_73S_FINAL_REAL_EXECUTION_BOUNDARY_REVIEW_SLICE,
+  EXPECTED_V0_6_73T_NEXT_PHASE_SELECTION_GATE_SLICE,
   GOVERNANCE_TOOLING_ALLOWED_SLICES,
   buildGovernanceToolingMaintenanceSliceReport,
   fileAllowedInGovernanceToolingSlice,

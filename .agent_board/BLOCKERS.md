@@ -2,6 +2,18 @@
 
 ## Active Blockers
 
+## BLOCKER-20260525-12 - Next phase selection keeps push and execution deferred
+
+Status: active_selection_opened_push_and_execution_deferred
+Detected during: v0_6_73t_next_phase_selection_gate
+Task: next phase selection gate
+Reason: User explicitly deferred pushing the two local post-push commits. The selection gate recommends v0_6_73u_active_delegate_authorization_activation_preflight as the next local Green step, but push and real execution remain blocked.
+Hard stop gate: no_push_without_exact_git_push_origin_master_and_no_real_execution_without_active_delegate_authorization
+Files involved: docs/vcp_integration/V0_6_73T_NEXT_PHASE_SELECTION_GATE.md; scripts/validate_v0_6_73t_next_phase_selection_gate.js; tests/schema_examples/v0_6_73t_next_phase_selection_gate.example.yaml
+Validation state: next-phase selection validator required; no push/provider/API/image/output/secret action performed.
+Required next safe action: v0_6_73u_active_delegate_authorization_activation_preflight.
+Rollback or cleanup path: selection gate files plus board status sync can be reverted locally; no generated image, output directory, receipt, review handoff, memory, sample, production candidate, remote write, or real execution state was created.
+
 ## BLOCKER-20260525-11 - v0.6.73 final boundary review remains NO-GO
 
 Status: active_final_no_go

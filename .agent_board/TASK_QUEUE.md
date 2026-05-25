@@ -1,5 +1,33 @@
 ---
 
+- [x] ID: v0_6_73t_next_phase_selection_gate
+      Lane: Green local selection gate only.
+      Status: COMPLETED_VALIDATED_selection_opened.
+      Source phase: v0_6_73s_final_real_execution_boundary_review.
+      Source status: COMPLETED_VALIDATED_final_NO_GO.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Legacy active next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Goal: Open the next-phase selection without pushing or executing real generation.
+      Options: v0_6_73u_active_delegate_authorization_activation_preflight; v0_6_73u2_push_local_status_sync_commits; v0_6_73u3_runtime_delegate_binding_test_harness_no_provider; v0_6_73u4_stop_and_wait_for_human_real_execution_decision.
+      Recommended next: v0_6_73u_active_delegate_authorization_activation_preflight.
+      Local ahead count: 2.
+      Remote push deferred by user: true.
+      push_performed: false.
+      push_status: not_performed_user_deferred_push_local_ahead_2.
+      provider_contact_performed: false.
+      plugin_call_performed: false.
+      api_call_performed: false.
+      image_generation_performed: false.
+      image_binary_read_performed: false.
+      output_write_performed: false.
+      env_file_content_read_performed: false.
+      secret_value_read_performed: false.
+      v0_6_73_execution_allowed: false.
+      Next: v0_6_73u_active_delegate_authorization_activation_preflight.
+
+---
+
 - [x] ID: v0_6_73s_final_real_execution_boundary_review
       Lane: Green local final boundary review only.
       Status: COMPLETED_VALIDATED_final_NO_GO.
