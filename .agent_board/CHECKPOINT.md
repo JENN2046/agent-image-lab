@@ -1,5 +1,45 @@
 ---
 
+## Checkpoint - v0.6.73l Bound Delegate Authorization Packet Draft
+
+```text
+phase: v0_6_73l_bound_delegate_authorization_packet_draft
+status: COMPLETED_VALIDATED_draft_not_active
+source_phase: v0_6_73k_remote_post_push_state_sync
+source_status: COMPLETED_VALIDATED_remote_synced
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+legacy_active_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+changed_files_current_task:
+  - docs/vcp_integration/V0_6_73L_BOUND_DELEGATE_AUTHORIZATION_PACKET_DRAFT.md
+  - tests/schema_examples/v0_6_73l_bound_delegate_authorization_packet_draft.example.yaml
+  - scripts/validate_v0_6_73l_bound_delegate_authorization_packet_draft.js
+  - scripts/lib/governance_tooling_maintenance_slice.js
+  - .agent_board/BLOCKERS.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+summary: Drafted the exact future NativeDoubao bound delegate authorization packet with delegate id, owner process, one-shot budget, receipt/output/review handoff refs, rollback/stop conditions, and secretless proof. Authorization remains draft_not_active and execution remains blocked.
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+image_binary_read_performed: false
+output_write_performed: false
+env_file_content_read_performed: false
+secret_value_read_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+v0_6_73_execution_allowed: false
+push_status: not_performed
+next_safe_task: v0_6_73m_bound_delegate_preflight_validator
+```
+
+---
+
 ## Checkpoint - v0.6.73k Remote Post-Push State Sync
 
 ```text

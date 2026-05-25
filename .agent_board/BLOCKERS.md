@@ -2,6 +2,18 @@
 
 ## Active Blockers
 
+## BLOCKER-20260525-04 - v0.6.73 bound delegate authorization remains draft only
+
+Status: active_draft_not_active
+Detected during: v0_6_73l_bound_delegate_authorization_packet_draft
+Task: bound NativeDoubao delegate authorization packet draft
+Reason: The future bound delegate authorization packet is documented, but authorization_status is draft_not_active, delegate_binding_active is false, and can_execute_now is false. Real generation remains blocked until a validator proves the packet and a later exact human activation names the real execution phase.
+Hard stop gate: exact_bound_delegate_preflight_and_human_activation_required_before_real_provider_contact
+Files involved: docs/vcp_integration/V0_6_73L_BOUND_DELEGATE_AUTHORIZATION_PACKET_DRAFT.md; scripts/validate_v0_6_73l_bound_delegate_authorization_packet_draft.js; tests/schema_examples/v0_6_73l_bound_delegate_authorization_packet_draft.example.yaml
+Validation state: local packet validator required; no provider/API/image/output/secret action performed.
+Required next safe action: v0_6_73m_bound_delegate_preflight_validator.
+Rollback or cleanup path: remove draft packet and validator files plus board status sync; no generated image, output directory, receipt, review handoff, memory, sample, production candidate, or remote execution state was created.
+
 ## BLOCKER-20260525-03 - v0.6.73 post-push synced but real execution still blocked
 
 Status: active_stop_before_real_execution

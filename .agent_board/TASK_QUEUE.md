@@ -1,5 +1,33 @@
 ---
 
+- [x] ID: v0_6_73l_bound_delegate_authorization_packet_draft
+      Lane: Green local authorization packet draft only.
+      Status: COMPLETED_VALIDATED_draft_not_active.
+      Source phase: v0_6_73k_remote_post_push_state_sync.
+      Source status: COMPLETED_VALIDATED_remote_synced.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Legacy active next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Goal: Draft the future exact bound delegate authorization packet without activating it or executing generation.
+      Authorization packet id: AUTH-DRAFT-V0-6-73L-BOUND-DELEGATE.
+      Authorization status: draft_not_active.
+      Delegate binding active: false.
+      Can execute now: false.
+      Max provider/plugin/API/image budget: 1/1/1/1.
+      Retry limit: 0.
+      provider_contact_performed: false.
+      plugin_call_performed: false.
+      api_call_performed: false.
+      image_generation_performed: false.
+      image_binary_read_performed: false.
+      output_write_performed: false.
+      env_file_content_read_performed: false.
+      secret_value_read_performed: false.
+      push_status: not_performed.
+      Next: v0_6_73m_bound_delegate_preflight_validator.
+
+---
+
 - [x] ID: v0_6_73k_remote_post_push_state_sync
       Lane: Green local status sync only.
       Status: COMPLETED_VALIDATED_remote_synced.
