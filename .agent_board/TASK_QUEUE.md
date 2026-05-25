@@ -1,5 +1,24 @@
 ---
 
+- [x] ID: v0_6_73e_one_shot_execution_readiness_packet
+      Lane: Green local readiness packet only.
+      Status: completed_validated.
+      Source phase: v0_6_73d_real_generation_review_handoff_contract.
+      Source commit: fd424c5599486bf492e3dc9a94b8e5ffa99bb72b.
+      Goal: Assemble the one-shot readiness packet without authorizing execution.
+      Legacy active current phase: v0_3_3_first_live_generation_pilot.
+      Legacy active source phase: v0_3_2_live_candidate_action_packet.
+      Legacy active next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Allowed files: docs/vcp_integration/V0_6_73E_ONE_SHOT_EXECUTION_READINESS_PACKET.md; tests/schema_examples/v0_6_73e_one_shot_execution_readiness_packet.example.yaml; scripts/validate_v0_6_73e_one_shot_execution_readiness_packet.js; .agent_board resume surfaces.
+      Validation: node --check scripts/validate_v0_6_73e_one_shot_execution_readiness_packet.js; node scripts/validate_v0_6_73e_one_shot_execution_readiness_packet.js; npm run validate:mvp; git diff --check.
+      image_generation_performed: false.
+      secret_value_read_performed: false.
+      push_status: not_performed.
+      Result: completed_validated.
+      Next: v0_6_73f_exact_a5_execution_authorization_draft.
+
+---
+
 - [x] ID: v0_6_73d_real_generation_review_handoff_contract
       Lane: Green local review handoff contract only.
       Status: completed_validated.
