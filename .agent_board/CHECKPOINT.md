@@ -1,5 +1,49 @@
 ---
 
+## Checkpoint - v0.6.73m Bound Delegate Preflight Validator
+
+```text
+phase: v0_6_73m_bound_delegate_preflight_validator
+status: COMPLETED_VALIDATED_fail_closed_contract
+source_phase: v0_6_73l_bound_delegate_authorization_packet_draft
+source_status: COMPLETED_VALIDATED_draft_not_active
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+legacy_active_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+changed_files_current_task:
+  - docs/vcp_integration/V0_6_73M_BOUND_DELEGATE_PREFLIGHT_VALIDATOR.md
+  - tests/schema_examples/v0_6_73m_bound_delegate_preflight_validator.example.yaml
+  - tests/schema_examples/v0_6_73m_bound_delegate_preflight_validator_fail.example.yaml
+  - scripts/validate_v0_6_73m_bound_delegate_preflight_validator.js
+  - scripts/lib/governance_tooling_maintenance_slice.js
+  - .agent_board/BLOCKERS.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+summary: Added the local fail-closed preflight validator proving that without exact active bound delegate authorization the runner must stop before provider contact. The v0.6.73l packet remains draft_not_active and real execution remains blocked.
+preflight_contract_id: PFC-V0-6-73M-BOUND-DELEGATE
+preflight_decision: FAIL_CLOSED_BOUND_DELEGATE_AUTHORIZATION_MISSING
+exact_active_delegate_authorization_present: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+image_binary_read_performed: false
+output_write_performed: false
+env_file_content_read_performed: false
+secret_value_read_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+v0_6_73_execution_allowed: false
+push_status: not_performed
+next_safe_task: v0_6_73n_real_execution_go_no_go_review
+```
+
+---
+
 ## Checkpoint - v0.6.73l Bound Delegate Authorization Packet Draft
 
 ```text

@@ -1,5 +1,33 @@
 ---
 
+- [x] ID: v0_6_73m_bound_delegate_preflight_validator
+      Lane: Green local preflight validator only.
+      Status: COMPLETED_VALIDATED_fail_closed_contract.
+      Source phase: v0_6_73l_bound_delegate_authorization_packet_draft.
+      Source status: COMPLETED_VALIDATED_draft_not_active.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Legacy active next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Goal: Prove the runner remains fail-closed when exact active bound delegate authorization is absent.
+      Preflight contract id: PFC-V0-6-73M-BOUND-DELEGATE.
+      Exact active delegate authorization present: false.
+      Current authorization status: draft_not_active.
+      Current delegate binding active: false.
+      Preflight decision: FAIL_CLOSED_BOUND_DELEGATE_AUTHORIZATION_MISSING.
+      Runner must stop before provider contact: true.
+      provider_contact_performed: false.
+      plugin_call_performed: false.
+      api_call_performed: false.
+      image_generation_performed: false.
+      image_binary_read_performed: false.
+      output_write_performed: false.
+      env_file_content_read_performed: false.
+      secret_value_read_performed: false.
+      push_status: not_performed.
+      Next: v0_6_73n_real_execution_go_no_go_review.
+
+---
+
 - [x] ID: v0_6_73l_bound_delegate_authorization_packet_draft
       Lane: Green local authorization packet draft only.
       Status: COMPLETED_VALIDATED_draft_not_active.

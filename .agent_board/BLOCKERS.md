@@ -2,6 +2,18 @@
 
 ## Active Blockers
 
+## BLOCKER-20260525-05 - v0.6.73 bound delegate preflight remains fail-closed without active authorization
+
+Status: active_fail_closed_until_exact_active_authorization
+Detected during: v0_6_73m_bound_delegate_preflight_validator
+Task: bound delegate preflight validator
+Reason: The local preflight contract proves that exact_active_delegate_authorization_present is false, current_authorization_status is draft_not_active, current_delegate_binding_active is false, and can_execute_now is false. The runner must stop before provider contact until a later exact human activation makes the bound delegate authorization active.
+Hard stop gate: exact_active_bound_delegate_authorization_required_before_real_provider_contact
+Files involved: docs/vcp_integration/V0_6_73M_BOUND_DELEGATE_PREFLIGHT_VALIDATOR.md; scripts/validate_v0_6_73m_bound_delegate_preflight_validator.js; tests/schema_examples/v0_6_73m_bound_delegate_preflight_validator.example.yaml; tests/schema_examples/v0_6_73m_bound_delegate_preflight_validator_fail.example.yaml
+Validation state: local preflight validator required; no provider/API/image/output/secret action performed.
+Required next safe action: v0_6_73n_real_execution_go_no_go_review.
+Rollback or cleanup path: remove v0.6.73m preflight validator files plus board status sync; no generated image, output directory, receipt, review handoff, memory, sample, production candidate, or remote execution state was created.
+
 ## BLOCKER-20260525-04 - v0.6.73 bound delegate authorization remains draft only
 
 Status: active_draft_not_active

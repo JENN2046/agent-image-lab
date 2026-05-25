@@ -1,0 +1,17 @@
+phase: v0_6_73m_bound_delegate_preflight_validator
+preflight_contract_id: PFC-V0-6-73M-BOUND-DELEGATE
+source_authorization_packet_ref: docs/vcp_integration/V0_6_73L_BOUND_DELEGATE_AUTHORIZATION_PACKET_DRAFT.md
+source_authorization_packet_id: AUTH-DRAFT-V0-6-73L-BOUND-DELEGATE
+target_execution_phase: v0_6_73_real_vcp_agent_generation_execution_one_shot
+runner_policy: unsafe_allows_provider_contact_without_exact_active_delegate_authorization
+exact_active_delegate_authorization_present: false
+current_authorization_status: draft_not_active
+current_delegate_binding_active: false
+can_execute_now: true
+preflight_decision: ALLOW_PROVIDER_CONTACT
+provider_contact_allowed: true
+plugin_call_allowed: true
+api_call_allowed: true
+image_generation_allowed: true
+runner_must_stop_before_provider_contact: false
+expected_rejection: unsafe_allows_provider_contact_without_exact_active_delegate_authorization
