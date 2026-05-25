@@ -1,5 +1,24 @@
 ---
 
+- [x] ID: v0_6_73d_real_generation_review_handoff_contract
+      Lane: Green local review handoff contract only.
+      Status: completed_validated.
+      Source phase: v0_6_73c_secretless_provider_receipt_contract.
+      Source commit: 60f4e769a8de1906425d0e970998962eb6e51a3d.
+      Goal: Define the future Review Console handoff format without handoff write or image binary read.
+      Legacy active current phase: v0_3_3_first_live_generation_pilot.
+      Legacy active source phase: v0_3_2_live_candidate_action_packet.
+      Legacy active next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Allowed files: docs/vcp_integration/V0_6_73D_REAL_GENERATION_REVIEW_HANDOFF_CONTRACT.md; tests/schema_examples/v0_6_73d_real_generation_review_handoff_contract.example.yaml; scripts/validate_v0_6_73d_real_generation_review_handoff_contract.js; .agent_board resume surfaces.
+      Validation: node --check scripts/validate_v0_6_73d_real_generation_review_handoff_contract.js; node scripts/validate_v0_6_73d_real_generation_review_handoff_contract.js; npm run validate:mvp; git diff --check.
+      image_generation_performed: false.
+      secret_value_read_performed: false.
+      push_status: not_performed.
+      Result: completed_validated.
+      Next: v0_6_73e_one_shot_execution_readiness_packet.
+
+---
+
 - [x] ID: v0_6_73c_secretless_provider_receipt_contract
       Lane: Green local receipt contract only.
       Status: completed_validated.

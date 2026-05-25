@@ -1,5 +1,41 @@
 ---
 
+## Current Handoff Update - v0.6.73d Real Generation Review Handoff Contract
+
+```text
+phase: v0_6_73d_real_generation_review_handoff_contract
+status: completed_validated
+mode: Green local review handoff contract only
+source_phase: v0_6_73c_secretless_provider_receipt_contract
+source_commit: 60f4e769a8de1906425d0e970998962eb6e51a3d
+summary: Defines future Review Console handoff format using only sanitized receipt/result metadata, with no handoff write or image binary read.
+future_review_handoff_ref: review_console/live_receipt_bridge/v0_6_73_real_vcp_agent_generation_one_shot/bridge_entry.json
+review_handoff_write_allowed_now: false
+image_binary_read_allowed_now: false
+human_review_required: true
+legacy_active_current_phase: v0_3_3_first_live_generation_pilot
+legacy_active_source_phase: v0_3_2_live_candidate_action_packet
+legacy_active_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+image_binary_read_performed: false
+output_write_performed: false
+env_file_content_read_performed: false
+secret_value_read_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+v0_6_73_execution_allowed: false
+push_status: not_performed
+next_phase_started: true
+validation: node --check scripts/validate_v0_6_73d_real_generation_review_handoff_contract.js passed; node scripts/validate_v0_6_73d_real_generation_review_handoff_contract.js passed_75_checks; npm run validate:mvp passed; git diff --check passed_with_crlf_normalization_warnings_only
+```
+
+---
+
 ## Current Handoff Update - v0.6.73c Secretless Provider Receipt Contract
 
 ```text
