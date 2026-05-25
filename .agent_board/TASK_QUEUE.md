@@ -1,5 +1,32 @@
 ---
 
+- [x] ID: v0_6_73x_final_local_readiness_stop_line_review
+      Lane: Green local stop-line review only.
+      Status: COMPLETED_VALIDATED_STOP_LINE_REACHED.
+      Source phase: v0_6_73w_active_delegate_authorization_validator.
+      Source status: COMPLETED_VALIDATED_fail_closed_validator_only.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Legacy active next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Goal: Close the continuous local chain and stop before push or real execution authorization.
+      Stop line id: STOP-LINE-V0-6-73X.
+      Stop line reached: true.
+      Next Green autopilot phase allowed: false.
+      push_performed: false.
+      push_status: not_performed_user_deferred_push_stop_line_reached.
+      provider_contact_performed: false.
+      plugin_call_performed: false.
+      api_call_performed: false.
+      image_generation_performed: false.
+      image_binary_read_performed: false.
+      output_write_performed: false.
+      env_file_content_read_performed: false.
+      secret_value_read_performed: false.
+      v0_6_73_execution_allowed: false.
+      Next: stop_and_wait_for_human_boundary_decision.
+
+---
+
 - [x] ID: v0_6_73w_active_delegate_authorization_validator
       Lane: Green local validator only.
       Status: COMPLETED_VALIDATED_fail_closed_validator_only.

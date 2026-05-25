@@ -2,6 +2,18 @@
 
 ## Active Blockers
 
+## BLOCKER-20260525-17 - Local readiness stop line reached
+
+Status: active_stop_line_reached
+Detected during: v0_6_73x_final_local_readiness_stop_line_review
+Task: final local readiness stop-line review
+Reason: The local Green readiness chain is validated through the active delegate validator. Further meaningful progress now requires either remote push authorization or exact active delegate / real execution authorization.
+Hard stop gate: next_action_is_red_boundary_push_or_real_execution_authorization
+Files involved: docs/vcp_integration/V0_6_73X_FINAL_LOCAL_READINESS_STOP_LINE_REVIEW.md; scripts/validate_v0_6_73x_final_local_readiness_stop_line_review.js; tests/schema_examples/v0_6_73x_final_local_readiness_stop_line_review.example.yaml
+Validation state: stop-line validator required; no push/provider/API/image/output/secret action performed.
+Required next safe action: stop_and_wait_for_human_boundary_decision.
+Rollback or cleanup path: stop-line files plus board status sync can be reverted locally; no generated image, output directory, receipt, review handoff, memory, sample, production candidate, remote write, or real execution state was created.
+
 ## BLOCKER-20260525-16 - Active delegate validator is local only
 
 Status: active_fail_closed_validator_only
