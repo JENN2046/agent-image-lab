@@ -1,5 +1,33 @@
 ---
 
+## Checkpoint - v0.6.73a Baseline Sync And Route State Check
+
+```text
+status: completed_validated
+mode: Green local baseline / route state check only
+source_commit: 8e011d3af8e6fcb8b22c1818019650df995ca024
+changed_files_planned: docs/vcp_integration/V0_6_73A_BASELINE_SYNC_AND_ROUTE_STATE_CHECK.md; tests/schema_examples/v0_6_73a_baseline_sync_and_route_state_check.example.yaml; scripts/validate_v0_6_73a_baseline_sync_and_route_state_check.js; .agent_board/CHECKPOINT.md; .agent_board/HANDOFF.md; .agent_board/RUN_STATE.md; .agent_board/TASK_QUEUE.md
+validation_planned: node --check validator; node validator; npm run validate:mvp; git diff --check
+validation_result: node --check scripts/validate_v0_6_73a_baseline_sync_and_route_state_check.js passed; node scripts/validate_v0_6_73a_baseline_sync_and_route_state_check.js passed_66_checks; node --check scripts/lib/governance_tooling_maintenance_slice.js passed; node scripts/lib/governance_tooling_maintenance_slice.js passed; npm run validate:mvp passed; git diff --check passed_with_crlf_normalization_warnings_only
+legacy_active_current_phase: v0_3_3_first_live_generation_pilot
+legacy_active_source_phase: v0_3_2_live_candidate_action_packet
+legacy_active_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+image_binary_read_performed: false
+output_write_performed: false
+env_file_content_read_performed: false
+secret_value_read_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+v0_6_73_execution_allowed: false
+push_status: not_performed
+```
+
 ## Checkpoint - MVP Legacy Debt Validator Repair
 
 ```text

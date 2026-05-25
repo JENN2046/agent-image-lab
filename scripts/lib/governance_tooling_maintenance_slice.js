@@ -2083,6 +2083,67 @@ const EXPECTED_MVP_LEGACY_DEBT_VALIDATOR_REPAIR_SLICE = [
   "tests/schema_examples/codex_session_image_import_record_fail.example.yaml"
 ].sort();
 
+const EXPECTED_V0_6_73A_BASELINE_SYNC_AND_ROUTE_STATE_CHECK_SLICE = [
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  "docs/vcp_integration/V0_6_73A_BASELINE_SYNC_AND_ROUTE_STATE_CHECK.md",
+  "scripts/lib/governance_tooling_maintenance_slice.js",
+  "scripts/validate_v0_6_73a_baseline_sync_and_route_state_check.js",
+  "tests/schema_examples/v0_6_73a_baseline_sync_and_route_state_check.example.yaml"
+].sort();
+
+const EXPECTED_V0_6_73B_NATIVE_DOUBAO_SECRETLESS_BINDING_IMPLEMENTATION_SURFACE_SLICE = [
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  "docs/vcp_integration/V0_6_73B_NATIVE_DOUBAO_SECRETLESS_BINDING_IMPLEMENTATION_SURFACE.md",
+  "scripts/validate_v0_6_73b_native_doubao_secretless_binding_implementation_surface.js",
+  "tests/schema_examples/v0_6_73b_native_doubao_secretless_binding_implementation_surface.example.yaml"
+].sort();
+
+const EXPECTED_V0_6_73C_SECRETLESS_PROVIDER_RECEIPT_CONTRACT_SLICE = [
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  "docs/vcp_integration/V0_6_73C_SECRETLESS_PROVIDER_RECEIPT_CONTRACT.md",
+  "scripts/validate_v0_6_73c_secretless_provider_receipt_contract.js",
+  "tests/schema_examples/v0_6_73c_secretless_provider_receipt_contract.example.yaml"
+].sort();
+
+const EXPECTED_V0_6_73D_REAL_GENERATION_REVIEW_HANDOFF_CONTRACT_SLICE = [
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  "docs/vcp_integration/V0_6_73D_REAL_GENERATION_REVIEW_HANDOFF_CONTRACT.md",
+  "scripts/validate_v0_6_73d_real_generation_review_handoff_contract.js",
+  "tests/schema_examples/v0_6_73d_real_generation_review_handoff_contract.example.yaml"
+].sort();
+
+const EXPECTED_V0_6_73E_ONE_SHOT_EXECUTION_READINESS_PACKET_SLICE = [
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  "docs/vcp_integration/V0_6_73E_ONE_SHOT_EXECUTION_READINESS_PACKET.md",
+  "scripts/validate_v0_6_73e_one_shot_execution_readiness_packet.js",
+  "tests/schema_examples/v0_6_73e_one_shot_execution_readiness_packet.example.yaml"
+].sort();
+
+const EXPECTED_V0_6_73F_EXACT_A5_EXECUTION_AUTHORIZATION_DRAFT_SLICE = [
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  "docs/vcp_integration/V0_6_73F_EXACT_A5_EXECUTION_AUTHORIZATION_DRAFT.md",
+  "scripts/validate_v0_6_73f_exact_a5_execution_authorization_draft.js",
+  "tests/schema_examples/v0_6_73f_exact_a5_execution_authorization_draft.example.yaml"
+].sort();
+
 const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "governance_tooling_maintenance_slice_v1",
@@ -2543,6 +2604,30 @@ const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "mvp_legacy_debt_validator_repair_slice",
     files: EXPECTED_MVP_LEGACY_DEBT_VALIDATOR_REPAIR_SLICE
+  },
+  {
+    id: "v0_6_73a_baseline_sync_and_route_state_check_slice",
+    files: EXPECTED_V0_6_73A_BASELINE_SYNC_AND_ROUTE_STATE_CHECK_SLICE
+  },
+  {
+    id: "v0_6_73b_native_doubao_secretless_binding_implementation_surface_slice",
+    files: EXPECTED_V0_6_73B_NATIVE_DOUBAO_SECRETLESS_BINDING_IMPLEMENTATION_SURFACE_SLICE
+  },
+  {
+    id: "v0_6_73c_secretless_provider_receipt_contract_slice",
+    files: EXPECTED_V0_6_73C_SECRETLESS_PROVIDER_RECEIPT_CONTRACT_SLICE
+  },
+  {
+    id: "v0_6_73d_real_generation_review_handoff_contract_slice",
+    files: EXPECTED_V0_6_73D_REAL_GENERATION_REVIEW_HANDOFF_CONTRACT_SLICE
+  },
+  {
+    id: "v0_6_73e_one_shot_execution_readiness_packet_slice",
+    files: EXPECTED_V0_6_73E_ONE_SHOT_EXECUTION_READINESS_PACKET_SLICE
+  },
+  {
+    id: "v0_6_73f_exact_a5_execution_authorization_draft_slice",
+    files: EXPECTED_V0_6_73F_EXACT_A5_EXECUTION_AUTHORIZATION_DRAFT_SLICE
   }
 ];
 
@@ -3068,6 +3153,42 @@ function governanceToolingMaintenanceSliceSelfCheck() {
       )?.id === "mvp_legacy_debt_validator_repair_slice"
     },
     {
+      check: "exact_slice_matches_v0_6_73a_baseline_sync_and_route_state_check",
+      passed: findMatchingGovernanceToolingSlice(
+        EXPECTED_V0_6_73A_BASELINE_SYNC_AND_ROUTE_STATE_CHECK_SLICE
+      )?.id === "v0_6_73a_baseline_sync_and_route_state_check_slice"
+    },
+    {
+      check: "exact_slice_matches_v0_6_73b_native_doubao_secretless_binding_implementation_surface",
+      passed: findMatchingGovernanceToolingSlice(
+        EXPECTED_V0_6_73B_NATIVE_DOUBAO_SECRETLESS_BINDING_IMPLEMENTATION_SURFACE_SLICE
+      )?.id === "v0_6_73b_native_doubao_secretless_binding_implementation_surface_slice"
+    },
+    {
+      check: "exact_slice_matches_v0_6_73c_secretless_provider_receipt_contract",
+      passed: findMatchingGovernanceToolingSlice(
+        EXPECTED_V0_6_73C_SECRETLESS_PROVIDER_RECEIPT_CONTRACT_SLICE
+      )?.id === "v0_6_73c_secretless_provider_receipt_contract_slice"
+    },
+    {
+      check: "exact_slice_matches_v0_6_73d_real_generation_review_handoff_contract",
+      passed: findMatchingGovernanceToolingSlice(
+        EXPECTED_V0_6_73D_REAL_GENERATION_REVIEW_HANDOFF_CONTRACT_SLICE
+      )?.id === "v0_6_73d_real_generation_review_handoff_contract_slice"
+    },
+    {
+      check: "exact_slice_matches_v0_6_73e_one_shot_execution_readiness_packet",
+      passed: findMatchingGovernanceToolingSlice(
+        EXPECTED_V0_6_73E_ONE_SHOT_EXECUTION_READINESS_PACKET_SLICE
+      )?.id === "v0_6_73e_one_shot_execution_readiness_packet_slice"
+    },
+    {
+      check: "exact_slice_matches_v0_6_73f_exact_a5_execution_authorization_draft",
+      passed: findMatchingGovernanceToolingSlice(
+        EXPECTED_V0_6_73F_EXACT_A5_EXECUTION_AUTHORIZATION_DRAFT_SLICE
+      )?.id === "v0_6_73f_exact_a5_execution_authorization_draft_slice"
+    },
+    {
       check: "exact_slice_rejects_missing_file",
       passed: findMatchingGovernanceToolingSlice(EXPECTED_GOVERNANCE_TOOLING_MAINTENANCE_SLICE.slice(1)) === null
     },
@@ -3185,6 +3306,12 @@ module.exports = {
   EXPECTED_V0_6_69_CODEX_SESSION_IMAGE_IMPORT_ROUTE_GAP_REVIEW_SLICE,
   EXPECTED_V0_6_70_TO_V0_6_72_REAL_VCP_AGENT_GENERATION_PREFLIGHT_BLOCKED_SLICE,
   EXPECTED_MVP_LEGACY_DEBT_VALIDATOR_REPAIR_SLICE,
+  EXPECTED_V0_6_73A_BASELINE_SYNC_AND_ROUTE_STATE_CHECK_SLICE,
+  EXPECTED_V0_6_73B_NATIVE_DOUBAO_SECRETLESS_BINDING_IMPLEMENTATION_SURFACE_SLICE,
+  EXPECTED_V0_6_73C_SECRETLESS_PROVIDER_RECEIPT_CONTRACT_SLICE,
+  EXPECTED_V0_6_73D_REAL_GENERATION_REVIEW_HANDOFF_CONTRACT_SLICE,
+  EXPECTED_V0_6_73E_ONE_SHOT_EXECUTION_READINESS_PACKET_SLICE,
+  EXPECTED_V0_6_73F_EXACT_A5_EXECUTION_AUTHORIZATION_DRAFT_SLICE,
   GOVERNANCE_TOOLING_ALLOWED_SLICES,
   buildGovernanceToolingMaintenanceSliceReport,
   fileAllowedInGovernanceToolingSlice,

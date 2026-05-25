@@ -1,5 +1,22 @@
 ---
 
+- [x] ID: v0_6_73a_baseline_sync_and_route_state_check
+      Lane: Green local baseline / route state check only.
+      Status: completed_validated.
+      Source commit: 8e011d3af8e6fcb8b22c1818019650df995ca024.
+      Goal: Freeze the validated baseline and route state before any NativeDoubao secretless readiness surface.
+      Legacy active current phase: v0_3_3_first_live_generation_pilot.
+      Legacy active source phase: v0_3_2_live_candidate_action_packet.
+      Legacy active next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Allowed files: docs/vcp_integration/V0_6_73A_BASELINE_SYNC_AND_ROUTE_STATE_CHECK.md; tests/schema_examples/v0_6_73a_baseline_sync_and_route_state_check.example.yaml; scripts/validate_v0_6_73a_baseline_sync_and_route_state_check.js; .agent_board resume surfaces.
+      Validation: node --check scripts/validate_v0_6_73a_baseline_sync_and_route_state_check.js; node scripts/validate_v0_6_73a_baseline_sync_and_route_state_check.js; npm run validate:mvp; git diff --check.
+      Boundary: no provider/plugin/API/MCP/VCP runtime, no image generation/read, no output write, no env/secret read, no accepted_samples/production_candidate/DailyNote/VCP memory write, no v0.6.73 execution, no push.
+      image_generation_performed: false.
+      secret_value_read_performed: false.
+      push_status: not_performed.
+      Result: completed_validated.
+      Next: v0_6_73b_native_doubao_secretless_binding_implementation_surface.
+
 - [x] ID: mvp_legacy_debt_validator_repair
       Lane: Green local validator/status repair with explicit commit and push authorization.
       Status: completed_validated_pending_user_authorized_commit_and_push.
