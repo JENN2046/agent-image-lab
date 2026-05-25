@@ -41,7 +41,9 @@ const falseKeys = [
   "VCPToolBox_runtime_performed",
   "VCPChat_runtime_performed",
   "image_generation_performed",
+  "image_import_executed",
   "image_binary_read_performed",
+  "image_hash_computed",
   "output_write_performed",
   "DailyNote_write_performed",
   "VCP_memory_write_performed",
@@ -56,26 +58,34 @@ const forbiddenTrueRegexes = falseKeys.map((key) => new RegExp(`^\\s*${key}:\\s+
 
 const requiredTokens = [
   "phase: v0_6_67_codex_session_image_import_record_contract",
+  "phase_name: v0_6_67_codex_session_image_import_record_contract_gate",
   "source_phase: v0_6_66a_exact_file_commit_readiness_gate",
+  "remote_baseline_commit: 76f9e77d4c55bb3433d97070cd898cd8cf4ea21f",
   "contract_only: true",
   "import_record_id",
+  "import_route_id: codex_session_image_import",
   "provider_id: codex_session_image",
   "import_mode: manual_session_import",
   "prompt_package_ref",
   "generation_contract_ref: docs/vcp_integration/VCP_AGENT_IMAGE_GENERATION_TOOL_CONTRACT_V1.md",
   "route_selection_ref: docs/vcp_integration/VCP_AGENT_GENERATION_ROUTE_SELECTION_GATE.md",
   "preflight_ref: docs/vcp_integration/CODEX_SESSION_IMAGE_IMPORT_PREFLIGHT.md",
+  "source_preflight_ref: docs/vcp_integration/CODEX_SESSION_IMAGE_IMPORT_PREFLIGHT.md",
   "future_image_file_ref",
   "output_directory_ref",
   "runs/real_generation/",
+  "project_relative_image_path_placeholder_only: true",
   "review_case_ref",
+  "review_console_required: true",
   "human_review_required: true",
   "imported_asset_status: draft_only",
   "accepted_samples_write_allowed: false",
   "production_candidate_write_allowed: false",
   "DailyNote_write_allowed: false",
   "VCP_memory_write_allowed: false",
+  "image_import_executed: false",
   "image_binary_read_performed: false",
+  "image_hash_computed: false",
   "output_write_performed: false",
   "provider_contact_performed: false",
   "plugin_call_performed: false",
@@ -88,11 +98,16 @@ const requiredTokens = [
 
 const expectedFailCases = [
   "provider_id_not_codex_session_image",
+  "import_route_id_not_codex_session_image_import",
   "import_mode_not_manual_session_import",
   "prompt_package_ref_missing",
   "prompt_package_ref_outside_prompts_image_generation",
   "preflight_ref_missing",
+  "source_preflight_ref_missing",
   "output_directory_ref_outside_runs_real_generation",
+  "project_relative_image_path_placeholder_only_false",
+  "image_hash_computed_true",
+  "review_console_required_false",
   "imported_asset_status_not_draft_only",
   "accepted_samples_write_allowed_true",
   "production_candidate_write_allowed_true",
@@ -153,6 +168,7 @@ function evaluateRecord(text) {
   const reviewCaseRef = lineValue(text, "review_case_ref");
   const checks = {
     importRecordIdPresent: /^codex_session_image_import_record_[A-Za-z0-9_]+$/.test(lineValue(text, "import_record_id") || ""),
+    importRoute: lineValue(text, "import_route_id") === "codex_session_image_import",
     providerId: lineValue(text, "provider_id") === "codex_session_image",
     importMode: lineValue(text, "import_mode") === "manual_session_import",
     importedAssetStatus: lineValue(text, "imported_asset_status") === "draft_only",
@@ -162,8 +178,10 @@ function evaluateRecord(text) {
     generationContractRef: lineValue(text, "generation_contract_ref") === files.toolContractDoc && exists(files.toolContractDoc),
     routeSelectionRef: lineValue(text, "route_selection_ref") === files.routeSelectionDoc && exists(files.routeSelectionDoc),
     preflightRef: lineValue(text, "preflight_ref") === files.preflightDoc && exists(files.preflightDoc),
+    sourcePreflightRef: lineValue(text, "source_preflight_ref") === files.preflightDoc && exists(files.preflightDoc),
     outputDirectoryUnderRuns: /^runs\/real_generation\/[^/].+\/$/.test(outputDirectoryRef || ""),
     futureImageFileRefPlaceholder: lineValue(text, "future_image_file_ref_placeholder_only") === "true",
+    projectRelativeImagePathPlaceholderOnly: lineValue(text, "project_relative_image_path_placeholder_only") === "true",
     futureImageFileRefRelative: (
       isProjectRelative(futureImageFileRef) &&
       Boolean(outputDirectoryRef) &&
@@ -171,6 +189,7 @@ function evaluateRecord(text) {
     ),
     reviewCaseRefPresent: Boolean(reviewCaseRef),
     reviewCaseRefRelative: isProjectRelative(reviewCaseRef),
+    reviewConsoleRequired: lineValue(text, "review_console_required") === "true",
     humanReviewRequired: lineValue(text, "human_review_required") === "true",
     allFalseFlags: falseKeys.every((key) => boolIsFalseOrAbsent(text, key)),
     noForbiddenFieldClaims: ["private_absolute_path", "secret_value", "env_value", "image_binary"].every((key) => lineValue(text, key) === null),
@@ -186,9 +205,13 @@ function replaceLine(text, key, replacementLine) {
 function mutateRecord(baseText, caseId) {
   const replacements = {
     provider_id_not_codex_session_image: ["provider_id", "    provider_id: other_provider"],
+    import_route_id_not_codex_session_image_import: ["import_route_id", "    import_route_id: other_route"],
     import_mode_not_manual_session_import: ["import_mode", "    import_mode: automated_provider_import"],
     prompt_package_ref_outside_prompts_image_generation: ["prompt_package_ref", "    prompt_package_ref: prompts/other/example.yaml"],
     output_directory_ref_outside_runs_real_generation: ["output_directory_ref", "    output_directory_ref: temp/generated/"],
+    project_relative_image_path_placeholder_only_false: ["project_relative_image_path_placeholder_only", "    project_relative_image_path_placeholder_only: false"],
+    image_hash_computed_true: ["image_hash_computed", "    image_hash_computed: true"],
+    review_console_required_false: ["review_console_required", "    review_console_required: false"],
     imported_asset_status_not_draft_only: ["imported_asset_status", "    imported_asset_status: imported_ready"],
     accepted_samples_write_allowed_true: ["accepted_samples_write_allowed", "    accepted_samples_write_allowed: true"],
     production_candidate_write_allowed_true: ["production_candidate_write_allowed", "    production_candidate_write_allowed: true"],
@@ -200,10 +223,13 @@ function mutateRecord(baseText, caseId) {
     secret_value_present_true: ["secret_value_present", "    secret_value_present: true"],
   };
   if (caseId === "prompt_package_ref_missing") {
-    return baseText.replace(/^\s*prompt_package_ref:.*\n/m, "");
+    return baseText.replace(/^\s*prompt_package_ref:.*(?:\r?\n)/m, "");
   }
   if (caseId === "preflight_ref_missing") {
-    return baseText.replace(/^\s*preflight_ref:.*\n/m, "");
+    return baseText.replace(/^\s*preflight_ref:.*(?:\r?\n)/m, "");
+  }
+  if (caseId === "source_preflight_ref_missing") {
+    return baseText.replace(/^\s*source_preflight_ref:.*(?:\r?\n)/m, "");
   }
   const replacement = replacements[caseId];
   return replacement ? replaceLine(baseText, replacement[0], replacement[1]) : baseText;
@@ -242,7 +268,11 @@ const validEvaluation = evaluateRecord(recordFixture);
 addResult("valid_record_fixture_passes", validEvaluation.passed, JSON.stringify(validEvaluation.checks));
 
 const caseIds = [...failFixture.matchAll(/case_id:\s*([A-Za-z0-9_]+)/g)].map((match) => match[1]);
-addResult("blocked_case_count_is_15", caseIds.length === 15, String(caseIds.length));
+addResult(
+  `blocked_case_count_is_${expectedFailCases.length}`,
+  caseIds.length === expectedFailCases.length,
+  String(caseIds.length)
+);
 addResult("blocked_cases_match_expected_list", JSON.stringify(caseIds) === JSON.stringify(expectedFailCases), JSON.stringify(caseIds));
 
 for (const caseId of caseIds) {
@@ -266,8 +296,10 @@ const summary = {
   imported_asset_status: "draft_only",
   blocked_case_count: caseIds.length,
   valid_record_fixture_passes: validEvaluation.passed,
+  image_import_executed: false,
   image_generation_performed: false,
   image_binary_read_performed: false,
+  image_hash_computed: false,
   output_write_performed: false,
   provider_contact_performed: false,
   plugin_call_performed: false,
@@ -280,6 +312,7 @@ const summary = {
   accepted_samples_write_performed: false,
   production_candidate_write_performed: false,
   push_performed: false,
+  next_phase_started: false,
   next_recommended: ["v0_6_68_codex_session_image_import_record_mock_validation"],
   errors,
   results,

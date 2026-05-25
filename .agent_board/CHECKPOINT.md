@@ -1,5 +1,186 @@
 ---
 
+## Checkpoint - MVP Legacy Debt Validator Repair
+
+```text
+phase: mvp_legacy_debt_validator_repair
+status: completed_validated_pending_user_authorized_commit_and_push
+result: COMPLETED_VALIDATED
+mode: Green local validator/status repair with explicit commit and push authorization
+changed: scripts/lib/exact_new_trial_legacy_artifacts.js; scripts/lib/governance_tooling_maintenance_slice.js; scripts/validate_mvp.ps1; scripts/validate_provider_receipt_artifacts.js; scripts/validate_v14_142_multi_accepted_sample_matrix.js; scripts/validate_exact_new_trial_* validators; Codex-session image import contract/preflight files; .agent_board resume surfaces
+legacy_active_current_phase: v0_3_3_first_live_generation_pilot
+legacy_active_source_phase: v0_3_2_live_candidate_action_packet
+legacy_active_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+legacy_runs_image_restore_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+output_write_performed: false
+env_file_content_read_performed: false
+secret_value_read_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+push_status: not_performed_user_authorized_pending
+next_phase_started: false
+validation: npm run validate:mvp passed; git diff --check passed_with_crlf_normalization_warnings_only
+```
+
+---
+
+## Checkpoint - v0.6.72b NativeDoubao Secretless Runtime Binding Design Gate
+
+```text
+phase: v0_6_72b_native_doubao_secretless_runtime_binding_design_gate
+source_phase: v0_6_72_real_vcp_agent_generation_preflight_no_call
+source_commit: ee23ce11912f5142c9e628cb27a52a9ec0d798ea
+status: blocked_by_mvp_validate_existing_preview_capsule_migration_pending
+result: BLOCKED
+mode: Green local design / docs / validator only
+changed: docs/vcp_integration/NATIVE_DOUBAO_SECRETLESS_RUNTIME_BINDING_DESIGN_GATE.md; tests/schema_examples/native_doubao_secretless_runtime_binding_design.example.yaml; scripts/validate_native_doubao_secretless_runtime_binding_design.js; .agent_board/CHECKPOINT.md; .agent_board/HANDOFF.md; .agent_board/RUN_STATE.md; .agent_board/TASK_QUEUE.md
+legacy_active_current_phase: v0_3_3_first_live_generation_pilot
+legacy_active_source_phase: v0_3_2_live_candidate_action_packet
+legacy_active_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+design_result: non_secret_provider_binding_ref_contract_defined
+provider_binding_as_non_secret_capability_handle: true
+agent_image_lab_receives_only_redacted_provider_binding_reference: true
+secret_owner_process: VCPToolBox_or_owner_authorized_provider_runtime
+provider_contact_count_owner: provider_runtime_receipt_bridge
+raw_provider_payload_retention_policy: forbidden
+output_directory_ref: runs/real_generation/v0_6_73_real_vcp_agent_generation_one_shot/
+receipt_proves_zero_secret_exposure: true
+human_review_receives_only_sanitized_result_metadata: true
+blocked_case_count: 14
+v0_6_73_execution_allowed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+image_binary_read_performed: false
+output_write_performed: false
+env_file_content_read_performed: false
+secret_value_read_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+push_status: not_performed
+next_phase_started: false
+validation: node --check scripts/validate_native_doubao_secretless_runtime_binding_design.js passed; node scripts/validate_native_doubao_secretless_runtime_binding_design.js passed_91_checks_14_blocked_cases; node --check scripts/validate_real_vcp_agent_generation_preflight_no_call.js passed; node scripts/validate_real_vcp_agent_generation_preflight_no_call.js passed_86_checks; git diff --check passed_with_crlf_normalization_warnings_only; npm run validate:mvp failed_existing_preview_capsule_migration_pending
+blocker: npm run validate:mvp failed outside the v0.6.72b exact file allowlist because existing accepted sample preview capsule migration state is pending.
+```
+
+---
+
+## Checkpoint - v0.6.67 Codex Session Image Import Record Contract Gate
+
+```text
+phase: v0_6_67_codex_session_image_import_record_contract
+phase_name: v0_6_67_codex_session_image_import_record_contract_gate
+source_commit: 76f9e77d4c55bb3433d97070cd898cd8cf4ea21f
+status: blocked_by_mvp_validate_existing_preview_capsule_migration_pending
+result: BLOCKED
+mode: Green local docs/schema/fixtures/validator only
+changed: docs/vcp_integration/CODEX_SESSION_IMAGE_IMPORT_RECORD_CONTRACT.md; schemas/codex_session_image_import_record.schema.yaml; tests/schema_examples/codex_session_image_import_record.example.yaml; tests/schema_examples/codex_session_image_import_record_fail.example.yaml; scripts/validate_codex_session_image_import_record_contract.js; .agent_board/CHECKPOINT.md; .agent_board/HANDOFF.md; .agent_board/RUN_STATE.md; .agent_board/TASK_QUEUE.md
+remote_baseline_commit: 76f9e77d4c55bb3433d97070cd898cd8cf4ea21f
+validator_result: targeted_contract_validators_passed_mvp_validate_failed_existing_preview_capsule_migration_pending
+blocked_case_count: 20
+image_import_executed: false
+image_binary_read_performed: false
+image_hash_computed: false
+output_write_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+VCPToolBox_runtime_performed: false
+VCPChat_runtime_performed: false
+secret_value_read_performed: false
+push_status: not_performed
+next_phase_started: false
+validation: node --check scripts/validate_codex_session_image_import_record_contract.js passed; node scripts/validate_codex_session_image_import_record_contract.js passed; node --check scripts/validate_codex_session_image_import_preflight.js passed; node scripts/validate_codex_session_image_import_preflight.js passed; node --check scripts/lib/governance_tooling_maintenance_slice.js passed; node scripts/lib/governance_tooling_maintenance_slice.js passed; git diff --check passed_with_crlf_normalization_warnings_only; npm run validate:mvp failed_existing_preview_capsule_migration_pending
+blocker: npm run validate:mvp failed outside the v0.6.67 exact file allowlist because existing accepted sample preview capsule migration state is pending.
+```
+
+---
+
+## Checkpoint - v0.6.66 Codex Session Image Import Preflight Contract Hardening
+
+```text
+phase: v0_6_66_codex_session_image_import_preflight_only
+source_phase: v0_6_65a_exact_file_commit_readiness_gate
+source_commit: 0d27673c6c14498eeea4327f22f73bb69c7a4b6b
+status: completed_validated
+result: COMPLETED_VALIDATED
+mode: Green local preflight only
+changed: docs/vcp_integration/CODEX_SESSION_IMAGE_IMPORT_PREFLIGHT.md; schemas/codex_session_image_import_preflight.schema.yaml; tests/schema_examples/codex_session_image_import_preflight.example.yaml; tests/schema_examples/codex_session_image_import_preflight_fail.example.yaml; scripts/validate_codex_session_image_import_preflight.js; .agent_board/CHECKPOINT.md; .agent_board/HANDOFF.md; .agent_board/RUN_STATE.md; .agent_board/TASK_QUEUE.md; .agent_board/VALIDATION_LOG.md
+validator_result: passed
+blocked_case_count: 26
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+VCPToolBox_runtime_performed: false
+VCPChat_runtime_performed: false
+image_generation_performed: false
+image_binary_read_performed: false
+output_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+secret_value_read_performed: false
+push_status: not_performed
+next_phase_started: false
+validation: node --check scripts/validate_codex_session_image_import_preflight.js passed; node scripts/validate_codex_session_image_import_preflight.js passed; node --check scripts/lib/governance_tooling_maintenance_slice.js passed; node scripts/lib/governance_tooling_maintenance_slice.js passed; git diff --check passed_with_crlf_normalization_warnings_only
+```
+
+---
+
+## Checkpoint - 2026-05-25 Post-Pull Local Status Surface Sync
+
+```text
+phase: post_pull_local_status_surface_sync_20260525
+status: completed_validated
+result: COMPLETED_VALIDATED
+mode: Green Lane local status-surface sync only
+workspace: A:\agent-image-lab\agent-image-lab-v0.2
+branch: master
+head_after_pull: ee23ce1
+head_subject_after_pull: docs: block real vcp generation on secretless preflight
+ahead_behind_after_pull: 0/0
+worktree_after_pull: clean
+active_current_phase: v0_6_72_real_vcp_agent_generation_preflight_no_call
+resume_guard_source_phase: v0_6_71_real_vcp_agent_generation_action_packet
+legacy_active_current_phase: v0_3_3_first_live_generation_pilot
+legacy_active_source_phase: v0_3_2_live_candidate_action_packet
+legacy_active_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+blocked_next_task: v0_6_73_real_vcp_agent_generation_execution_one_shot
+blocker_id: red_lane_secret_value_read_required_by_current_native_doubao_runner
+boundary: local status sync only; no provider/plugin/API/image/memory/secret/push action
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+image_binary_read_performed: false
+output_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+secret_value_read_performed: false
+push_status: not_performed
+changed: .agent_board/HANDOFF.md; .agent_board/RUN_STATE.md; .agent_board/TASK_QUEUE.md; .agent_board/CHECKPOINT.md; .agent_board/VALIDATION_LOG.md
+validation: git diff --check passed_with_crlf_normalization_warnings_only; node scripts/validate_agent_board_state.js passed; node scripts/validate_autopilot_agent_board_resume_compaction_guard.js passed
+next: provide_non_secret_native_doubao_runtime_binding_or_exact_secret_handling_authorization_then_retry_v0_6_72
+```
+
+---
+
 ## Checkpoint - v0.6.72 Real VCP Agent Generation Preflight No-Call
 
 ```text

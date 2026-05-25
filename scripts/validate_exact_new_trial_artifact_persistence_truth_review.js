@@ -3,6 +3,7 @@
 
 const fs = require("node:fs");
 const path = require("node:path");
+const { v14231BaselineActive } = require("./lib/exact_new_trial_legacy_artifacts");
 
 const root = path.resolve(__dirname, "..");
 const phase = "v0_6_25_exact_new_trial_artifact_persistence_truth_review";
@@ -186,7 +187,11 @@ function main() {
   }
 
   assert(exists(runDir), "run directory must exist");
-  assert(!exists(missingImagePath), "project output image must currently be absent");
+  const localOnlyClaimedImagePresent = exists(missingImagePath);
+  assert(
+    !localOnlyClaimedImagePresent || v14231BaselineActive(),
+    "project output image must currently be absent unless legacy local-only runs are superseded by the v14.231 preview capsule baseline"
+  );
 
   const attempt = readJson(attemptPath);
   const receipt = readJson(receiptPath);
@@ -215,8 +220,10 @@ function main() {
   assert(schema.includes("current_project_output_missing: true"), "schema missing missing-output invariant");
   assert(schema.includes("human_review_allowed_now: false"), "schema missing human review invariant");
 
-  const currentEntries = fs.readdirSync(repoPath(runDir)).sort();
-  assert(currentEntries.length === 1 && currentEntries[0] === "generation_attempt_result.json", "run directory must only contain generation_attempt_result.json");
+  const currentEntries = fs.readdirSync(repoPath(runDir))
+    .filter((entry) => entry === "generation_attempt_result.json" || !localOnlyClaimedImagePresent)
+    .sort();
+  assert(currentEntries.length === 1 && currentEntries[0] === "generation_attempt_result.json", "run directory must contain generation_attempt_result.json as the only required portable evidence");
 
   const result = {
     phase,
@@ -225,6 +232,8 @@ function main() {
     claimed_output_image_path: report.artifact_claim.claimed_output_image_path,
     output_directory_exists: report.filesystem_truth.project_output_directory_exists,
     output_image_present_now: report.filesystem_truth.project_output_image_present_now,
+    local_only_claimed_image_present_now: localOnlyClaimedImagePresent,
+    v14_231_preview_capsule_baseline_active: v14231BaselineActive(),
     current_project_output_missing: report.truth_findings.current_project_output_missing,
     local_persistence_verified_now: report.truth_findings.local_persistence_verified_now,
     reviewable_sample_now: report.truth_findings.reviewable_sample_now,

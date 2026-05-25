@@ -5,11 +5,15 @@ codex_session_image_import_record_blocked_cases_v1:
   phase: v0_6_67_codex_session_image_import_record_contract
   source_phase: v0_6_66a_exact_file_commit_readiness_gate
   contract_only: true
-  expected_case_count: 15
+  expected_case_count: 20
 
   cases:
     - case_id: provider_id_not_codex_session_image
       provider_id: other_provider
+      expected_block: true
+
+    - case_id: import_route_id_not_codex_session_image_import
+      import_route_id: other_route
       expected_block: true
 
     - case_id: import_mode_not_manual_session_import
@@ -28,8 +32,24 @@ codex_session_image_import_record_blocked_cases_v1:
       mutation: remove preflight_ref
       expected_block: true
 
+    - case_id: source_preflight_ref_missing
+      mutation: remove source_preflight_ref
+      expected_block: true
+
     - case_id: output_directory_ref_outside_runs_real_generation
       output_directory_ref: temp/generated/
+      expected_block: true
+
+    - case_id: project_relative_image_path_placeholder_only_false
+      project_relative_image_path_placeholder_only: false
+      expected_block: true
+
+    - case_id: image_hash_computed_true
+      image_hash_computed: true
+      expected_block: true
+
+    - case_id: review_console_required_false
+      review_console_required: false
       expected_block: true
 
     - case_id: imported_asset_status_not_draft_only

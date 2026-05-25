@@ -2,7 +2,9 @@
 
 ```yaml
 phase: v0_6_67_codex_session_image_import_record_contract
+phase_name: v0_6_67_codex_session_image_import_record_contract_gate
 source_phase: v0_6_66a_exact_file_commit_readiness_gate
+remote_baseline_commit: 76f9e77d4c55bb3433d97070cd898cd8cf4ea21f
 base_contract: AGENTS.md
 mode: Green local contract only
 intent: local_implementation
@@ -29,19 +31,26 @@ The record is a draft-only local contract for a future Codex-session image impor
 ```yaml
 codex_session_image_import_record_v1:
   phase: v0_6_67_codex_session_image_import_record_contract
+  phase_name: v0_6_67_codex_session_image_import_record_contract_gate
   source_phase: v0_6_66a_exact_file_commit_readiness_gate
+  remote_baseline_commit: 76f9e77d4c55bb3433d97070cd898cd8cf4ea21f
   contract_only: true
   import_record_id: codex_session_image_import_record_001
+  import_route_id: codex_session_image_import
   provider_id: codex_session_image
   import_mode: manual_session_import
   prompt_package_ref: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v3.yaml
   generation_contract_ref: docs/vcp_integration/VCP_AGENT_IMAGE_GENERATION_TOOL_CONTRACT_V1.md
   route_selection_ref: docs/vcp_integration/VCP_AGENT_GENERATION_ROUTE_SELECTION_GATE.md
   preflight_ref: docs/vcp_integration/CODEX_SESSION_IMAGE_IMPORT_PREFLIGHT.md
+  source_preflight_ref: docs/vcp_integration/CODEX_SESSION_IMAGE_IMPORT_PREFLIGHT.md
   output_directory_ref: runs/real_generation/v0_6_67_codex_session_image_import_record_candidate_001/
   future_image_file_ref: runs/real_generation/v0_6_67_codex_session_image_import_record_candidate_001/future_image_file_placeholder.png
   future_image_file_ref_placeholder_only: true
+  project_relative_image_path_placeholder_only: true
+  image_hash_computed: false
   review_case_ref: review_console/cases/codex_session_image_import_record_001.review_case.yaml
+  review_console_required: true
   human_review_required: true
   imported_asset_status: draft_only
 ```
@@ -66,11 +75,16 @@ The validator must reject:
 ```yaml
 blocked_cases:
   - provider_id_not_codex_session_image
+  - import_route_id_not_codex_session_image_import
   - import_mode_not_manual_session_import
   - prompt_package_ref_missing
   - prompt_package_ref_outside_prompts_image_generation
   - preflight_ref_missing
+  - source_preflight_ref_missing
   - output_directory_ref_outside_runs_real_generation
+  - project_relative_image_path_placeholder_only_false
+  - image_hash_computed_true
+  - review_console_required_false
   - imported_asset_status_not_draft_only
   - accepted_samples_write_allowed_true
   - production_candidate_write_allowed_true
@@ -123,10 +137,13 @@ npm run validate:mvp
 ```yaml
 phase: v0_6_67_codex_session_image_import_record_contract
 source_phase: v0_6_66a_exact_file_commit_readiness_gate
+remote_baseline_commit: 76f9e77d4c55bb3433d97070cd898cd8cf4ea21f
 result: COMPLETED_VALIDATED
 contract_only: true
+image_import_executed: false
 image_generation_performed: false
 image_binary_read_performed: false
+image_hash_computed: false
 output_write_performed: false
 provider_contact_performed: false
 plugin_call_performed: false
@@ -139,6 +156,7 @@ VCP_memory_write_performed: false
 accepted_samples_write_performed: false
 production_candidate_write_performed: false
 push_performed: false
+next_phase_started: false
 next_recommended:
   - v0_6_68_codex_session_image_import_record_mock_validation
 ```

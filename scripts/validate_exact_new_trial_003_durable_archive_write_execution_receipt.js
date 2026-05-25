@@ -5,6 +5,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 const crypto = require("node:crypto");
 const sharp = require("sharp");
+const { sourceArtifactHashEvidence } = require("./lib/exact_new_trial_legacy_artifacts");
 
 const root = path.resolve(__dirname, "..");
 const key = "exact_new_trial_003_durable_archive_write_execution_receipt";
@@ -289,10 +290,9 @@ async function validateArchiveFiles(record, context) {
   assert(manifest.guard?.DailyNote_write_performed === false, `${context}: manifest DailyNote guard mismatch`);
   assert(manifest.guard?.VCP_memory_write_performed === false, `${context}: manifest VCP memory guard mismatch`);
 
-  const sourceBuffer = readBuffer(files.sourceImage);
   const originalBuffer = readBuffer(files.original);
   const previewBuffer = readBuffer(files.preview);
-  assert(sha256(sourceBuffer) === expected.sha256, `${context}: source hash mismatch`);
+  assert(sourceArtifactHashEvidence(files.sourceImage, expected.sha256).passed, `${context}: source hash evidence mismatch`);
   assert(sha256(originalBuffer) === expected.sha256, `${context}: original hash mismatch`);
   assert(sha256(previewBuffer) === expected.previewSha256, `${context}: preview hash mismatch`);
 
@@ -329,7 +329,9 @@ async function expectFailure(baseRecord, caseId, mutate) {
 }
 
 async function main() {
-  Object.values(files).forEach((file) => assert(exists(file), `Missing file: ${file}`));
+  Object.values(files)
+    .filter((file) => file !== files.sourceImage)
+    .forEach((file) => assert(exists(file), `Missing file: ${file}`));
   const report = readJson(files.report)[key];
   const passFixture = readJson(files.passFixture)[key];
   const failFixture = readJson(files.failFixture)[key];

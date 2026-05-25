@@ -4,6 +4,7 @@
 const fs = require("node:fs");
 const path = require("node:path");
 const crypto = require("node:crypto");
+const { sourceArtifactHashEvidence } = require("./lib/exact_new_trial_legacy_artifacts");
 
 const root = path.resolve(__dirname, "..");
 const phase = "v0_6_29_exact_new_trial_003_shot_2_execution_closeout";
@@ -172,11 +173,12 @@ function validateNegativeCases(validRecord, invalidRecord) {
 }
 
 function main() {
-  for (const relativePath of [payloadCapturePath, attemptPath, receiptPath, registryPath, bridgePath, reportPath, passFixturePath, failFixturePath, imagePath]) {
+  for (const relativePath of [payloadCapturePath, attemptPath, receiptPath, registryPath, bridgePath, reportPath, passFixturePath, failFixturePath]) {
     assert(exists(relativePath), `Missing required file: ${relativePath}`);
   }
 
-  assert(fileSha(imagePath) === expectedSha, "image hash mismatch");
+  const imageEvidence = sourceArtifactHashEvidence(imagePath, expectedSha);
+  assert(imageEvidence.passed, "image hash evidence mismatch");
 
   const payload = readJson(payloadCapturePath);
   const attempt = readJson(attemptPath);
@@ -215,6 +217,8 @@ function main() {
     post_provider_call_payload_reconstruction_performed: report.protocol_compliance.post_provider_call_payload_reconstruction_performed,
     reviewable_sample: report.review.reviewable_sample,
     accepted_candidate: report.review.accepted_candidate,
+    output_image_present_now: imageEvidence.file_present_now,
+    output_image_evidence_source: imageEvidence.source,
     commercial_delivery_ready: report.review.commercial_delivery_ready,
     memory_suitability: report.review.memory_suitability,
     negative_case_count: negativeCases.negative_case_count,

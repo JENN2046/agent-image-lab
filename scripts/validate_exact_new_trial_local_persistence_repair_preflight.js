@@ -4,6 +4,7 @@
 const crypto = require("node:crypto");
 const fs = require("node:fs");
 const path = require("node:path");
+const { v14231BaselineActive } = require("./lib/exact_new_trial_legacy_artifacts");
 
 const root = path.resolve(__dirname, "..");
 const phase = "v0_6_26_exact_new_trial_local_persistence_repair_preflight";
@@ -198,7 +199,11 @@ function main() {
     assert(exists(relativePath), `Missing required file: ${relativePath}`);
   }
 
-  assert(!exists(claimedMissingImagePath), "claimed 002 image must remain absent for this preflight");
+  const localOnlyClaimed002ImagePresent = exists(claimedMissingImagePath);
+  assert(
+    !localOnlyClaimed002ImagePresent || v14231BaselineActive(),
+    "claimed 002 image must remain absent unless legacy local-only runs are superseded by the v14.231 preview capsule baseline"
+  );
   assert(sha256File(altImagePath) === expectedAltSha, "alternative image hash mismatch");
 
   const truthReview = readJson(truthReviewPath).exact_new_trial_artifact_persistence_truth_review;
@@ -243,6 +248,8 @@ function main() {
     selected_shot_path_collision_clear_now: report.selected_repair_route.path_collision_clear_now,
     selected_shot_local_persistence_verification_required: report.selected_repair_route.local_persistence_verification_required,
     current_human_review_of_002_allowed: report.selected_repair_route.current_human_review_of_002_allowed,
+    local_only_claimed_002_image_present_now: localOnlyClaimed002ImagePresent,
+    v14_231_preview_capsule_baseline_active: v14231BaselineActive(),
     negative_case_count: negativeCases.negative_case_count,
     caught_negative_case_count: negativeCases.caught_negative_case_count,
     all_negative_cases_caught: negativeCases.all_negative_cases_caught

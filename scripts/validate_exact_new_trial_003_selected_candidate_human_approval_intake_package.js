@@ -4,6 +4,7 @@
 const crypto = require("node:crypto");
 const fs = require("node:fs");
 const path = require("node:path");
+const { sourceArtifactHashEvidence } = require("./lib/exact_new_trial_legacy_artifacts");
 
 const root = path.resolve(__dirname, "..");
 
@@ -152,7 +153,7 @@ function evaluate(input) {
   assert(closeout.output_image_path === expected.artifactRef, "source closeout artifact path mismatch");
   assert(closeout.review.reviewable_sample === true && closeout.review.accepted_candidate === true, "source closeout review state mismatch");
   assert(closeout.output_image_dimensions.width === 941 && closeout.output_image_dimensions.height === 1672, "source closeout dimensions mismatch");
-  assert(fileSha(expected.artifactRef) === expected.sha256, "source artifact hash mismatch");
+  assert(sourceArtifactHashEvidence(expected.artifactRef, expected.sha256).passed, "source artifact hash evidence mismatch");
   assert(categoryText.includes("category: fashion_lookbook_portrait"), "category index category mismatch");
   assert(!registryText.includes(expected.sampleId) || targetSampleRegisteredNow, "sample id exists without v0.6.56 registration evidence");
   assert(!categoryText.includes(expected.sampleId) || targetSampleRegisteredNow, "sample id exists in category index without v0.6.56 registration evidence");

@@ -4,6 +4,7 @@
 const crypto = require("node:crypto");
 const fs = require("node:fs");
 const path = require("node:path");
+const { sourceArtifactHashEvidence } = require("./lib/exact_new_trial_legacy_artifacts");
 
 const root = path.resolve(__dirname, "..");
 
@@ -106,7 +107,7 @@ function evaluate(input) {
   assert(humanReview.candidate_comparison.selected_candidate_output_image_sha256 === expected.sha256, "source human review sha mismatch");
   assert(approvalIntake.target.proposed_sample_id === expected.sampleId, "source approval intake sample id mismatch");
   assert(gateAlignment.target.proposed_sample_id === expected.sampleId, "source post-approval gate sample id mismatch");
-  assert(fileSha(expected.artifactRef) === expected.sha256, "source artifact hash mismatch");
+  assert(sourceArtifactHashEvidence(expected.artifactRef, expected.sha256).passed, "source artifact hash evidence mismatch");
   assert(categoryText.includes("category: fashion_lookbook_portrait"), "category index target missing");
 
   const sourceRefsOk =

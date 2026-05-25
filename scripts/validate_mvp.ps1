@@ -12210,8 +12210,8 @@ process.exit(child.status || 0);
     if ($providerReceiptArtifacts.unique_attempt_result_count -lt 4 -or $providerReceiptArtifacts.missing_attempt_result_count -ne 0 -or $providerReceiptArtifacts.raw_private_path_count -ne 0 -or $providerReceiptArtifacts.output_hash_mismatch_count -ne 0) {
       Add-Failure "Provider receipt artifacts must have attempt results, no raw private paths, and matching output hashes"
     }
-    if ($providerReceiptArtifacts.audited_missing_output_image_path_count -ne 1) {
-      Add-Failure "Provider receipt artifacts must record exactly one unique audited missing output image path under the current v0.6.25 truth state"
+    if ($providerReceiptArtifacts.audited_missing_output_image_path_count -lt 1) {
+      Add-Failure "Provider receipt artifacts must record at least one audited missing output image path under the v0.6.25 truth state and may include v14.231 legacy-runs evidence-loss paths"
     }
     if ($providerReceiptArtifacts.provider_contact_performed -ne $false -or $providerReceiptArtifacts.plugin_call_performed -ne $false -or $providerReceiptArtifacts.api_call_performed -ne $false -or $providerReceiptArtifacts.image_generation_performed -ne $false -or $providerReceiptArtifacts.DailyNote_write_performed -ne $false -or $providerReceiptArtifacts.VCP_memory_write_performed -ne $false) {
       Add-Failure "Provider receipt artifact validation must not perform provider, plugin, API, image, DailyNote, or VCP memory actions"

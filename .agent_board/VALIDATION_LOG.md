@@ -1,5 +1,77 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260525-MVP-LEGACY-DEBT-VALIDATOR-REPAIR
+
+Task: MVP legacy debt validator repair
+Status: completed_validated_pending_user_authorized_commit_and_push
+Receipt:
+  - lane: Green
+  - phase: mvp_legacy_debt_validator_repair
+  - legacy_runs_image_restore_performed: false
+  - provider_contact_performed: false
+  - plugin_call_performed: false
+  - api_call_performed: false
+  - image_generation_performed: false
+  - output_write_performed: false
+  - secret_value_read_performed: false
+Commands run:
+  - npm run validate:mvp: passed
+  - git diff --check: passed with CRLF normalization warnings only
+Observed result:
+  - MVP validation now accepts v14.231 legacy-runs evidence-loss semantics and durable archive / preview evidence instead of requiring old ignored runs image binaries to be restored.
+Next:
+  - exact-file stage, commit, and push after explicit user authorization
+
+## VALIDATION-20260525-v0.6.66-CODEX-SESSION-IMAGE-IMPORT-PREFLIGHT-CONTRACT-HARDENING
+
+Task: v0.6.66 Codex session image import preflight contract hardening
+Status: completed_validated
+Receipt:
+  - lane: Green
+  - source_phase: v0_6_65a_exact_file_commit_readiness_gate
+  - source_commit: 0d27673c6c14498eeea4327f22f73bb69c7a4b6b
+  - phase: v0_6_66_codex_session_image_import_preflight_only
+  - blocked_case_count: 26
+  - prompt_package_ref_missing_rejected: true
+Commands run:
+  - node --check scripts/validate_codex_session_image_import_preflight.js: passed
+  - node scripts/validate_codex_session_image_import_preflight.js: passed, 126 checks, 26 blocked cases rejected
+  - node --check scripts/lib/governance_tooling_maintenance_slice.js: passed
+  - node scripts/lib/governance_tooling_maintenance_slice.js: passed
+  - git diff --check: passed with CRLF normalization warnings only
+Observed result:
+  - preflight packet now requires caller VCP_Agent, selected_route codex_session_image_import, prompt_package_ref under prompts/image_generation/, output_directory_ref under runs/real_generation/, max_plugin_calls 0, max_images_imported 0, review_console_required true, human_review_required true, and explicit no-read/no-write/no-secret/no-raw-payload flags
+Closeout validation:
+  - provider contact, plugin call, API call, MCP runtime, VCPToolBox runtime, VCPChat runtime, image generation, image binary read, output write, DailyNote write, VCP memory write, accepted_samples write, production_candidate write, secret value read, push, tag, release, and deploy were not performed
+Next:
+  - no_next_phase_started
+
+## VALIDATION-20260525-POST-PULL-LOCAL-STATUS-SURFACE-SYNC
+
+Task: post_pull_local_status_surface_sync_20260525
+Status: completed_validated
+Receipt:
+  - lane: Green
+  - source_action: git pull --ff-only origin master
+  - branch: master
+  - head_after_pull: ee23ce1
+  - head_subject_after_pull: docs: block real vcp generation on secretless preflight
+  - ahead_behind_after_pull: 0/0
+  - worktree_after_pull_before_status_sync: clean
+  - active_current_phase: v0_6_72_real_vcp_agent_generation_preflight_no_call
+  - blocker_id: red_lane_secret_value_read_required_by_current_native_doubao_runner
+Commands run:
+  - git diff --check: passed with CRLF normalization warnings only
+  - node scripts/validate_agent_board_state.js: passed
+  - node scripts/validate_autopilot_agent_board_resume_compaction_guard.js: passed
+Observed result:
+  - local status surfaces updated after fast-forward pull
+  - v0.6.72 remains blocked before v0.6.73 because current NativeDoubaoImage runner requires .env.local secret value loading and this goal forbids secret value reads
+Closeout validation:
+  - provider contact, plugin/API call, image generation, image binary read, output write, DailyNote/VCP memory write, secret value read, push, tag, release, deploy, and destructive action were not performed
+Next:
+  - provide_non_secret_native_doubao_runtime_binding_or_exact_secret_handling_authorization_then_retry_v0_6_72
+
 ## VALIDATION-20260524-v0.6.62-EXACT-NEW-TRIAL-003-AMBER-C-MEMORY-WRITE-TARGET-RESOLUTION-BLOCKED
 
 Task: v0.6.62 exact new-trial 003 Amber_C memory write target resolution blocked

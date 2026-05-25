@@ -7,7 +7,9 @@
 codex_session_image_import_record_v1:
   version: v1
   phase: v0_6_67_codex_session_image_import_record_contract
+  phase_name: v0_6_67_codex_session_image_import_record_contract_gate
   source_phase: v0_6_66a_exact_file_commit_readiness_gate
+  remote_baseline_commit: 76f9e77d4c55bb3433d97070cd898cd8cf4ea21f
   contract_only: true
   execution_allowed_by_this_contract: false
 
@@ -15,6 +17,7 @@ codex_session_image_import_record_v1:
     import_record_id:
       type: stable_identifier
       required_prefix: codex_session_image_import_record_
+    import_route_id: codex_session_image_import
     provider_id: codex_session_image
     import_mode: manual_session_import
     imported_asset_status: draft_only
@@ -34,6 +37,9 @@ codex_session_image_import_record_v1:
     preflight_ref:
       type: repository_relative_file
       exact_ref: docs/vcp_integration/CODEX_SESSION_IMAGE_IMPORT_PREFLIGHT.md
+    source_preflight_ref:
+      type: repository_relative_file
+      exact_ref: docs/vcp_integration/CODEX_SESSION_IMAGE_IMPORT_PREFLIGHT.md
 
   future_import_target:
     output_directory_ref:
@@ -45,6 +51,7 @@ codex_session_image_import_record_v1:
       must_remain_project_relative: true
       must_be_under_output_directory_ref: true
       placeholder_only: true
+      project_relative_image_path_placeholder_only: true
       image_binary_read_allowed_now: false
       existence_check_allowed_now: false
 
@@ -53,6 +60,7 @@ codex_session_image_import_record_v1:
       type: repository_relative_future_placeholder
       required: true
       placeholder_only: true
+    review_console_required: true
     human_review_required: true
 
   write_boundaries:
@@ -78,6 +86,8 @@ codex_session_image_import_record_v1:
     VCPChat_runtime_performed: false
     image_generation_performed: false
     image_binary_read_performed: false
+    image_import_executed: false
+    image_hash_computed: false
     output_write_performed: false
     DailyNote_write_performed: false
     VCP_memory_write_performed: false
@@ -90,5 +100,6 @@ codex_session_image_import_record_v1:
   validation_intent:
     valid_record_can_enter_next_phase: v0_6_68_codex_session_image_import_record_mock_validation
     valid_record_can_read_image_binary_now: false
+    valid_record_can_hash_image_now: false
     valid_record_can_write_output_now: false
     valid_record_can_write_memory_now: false

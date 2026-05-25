@@ -69,7 +69,13 @@ function exitWithPreviewCapsuleMigrationPending() {
   const capsuleResults = completeSampleIds.map((sampleId) => core.validatePreviewCapsule(sampleId));
   const pendingCount = capsuleResults.filter((result) => result.status === "preview_capsule_missing").length;
   const verifiedCount = capsuleResults.filter((result) => result.passed).length;
-  const passed = pendingCount === completeSampleIds.length && verifiedCount === 0;
+  const incompleteCount = capsuleResults.filter(
+    (result) => result.status !== "preview_capsule_missing" && !result.passed
+  ).length;
+  const passed =
+    pendingCount >= 1 &&
+    pendingCount + verifiedCount === completeSampleIds.length &&
+    incompleteCount === 0;
 
   const summary = {
     validator: "validate_v14_142_multi_accepted_sample_matrix",
@@ -84,6 +90,9 @@ function exitWithPreviewCapsuleMigrationPending() {
     complete_recoverable_sample_count: verifiedCount,
     complete_recoverable_sample_ids: capsuleResults.filter((result) => result.passed).map((result) => result.sampleId),
     preview_capsule_pending_count: pendingCount,
+    preview_capsule_verified_count: verifiedCount,
+    preview_capsule_incomplete_count: incompleteCount,
+    partial_preview_capsule_migration_accepted: true,
     legacy_partial_artifact_sample_count: 0,
     local_artifact_sample_count: 0,
     full_recoverability_count_is_currently_three: false,
@@ -128,8 +137,8 @@ function exitWithPreviewCapsuleMigrationPending() {
     file_write_performed: false,
     errors: [],
     results: capsuleResults.map((result) => ({
-      check: `${result.sampleId}_preview_capsule_pending_without_legacy_runs_crash`,
-      passed: result.status === "preview_capsule_missing",
+      check: `${result.sampleId}_preview_capsule_missing_or_verified_without_legacy_runs_crash`,
+      passed: result.status === "preview_capsule_missing" || result.passed,
       detail: result.paths.manifest,
     })),
   };

@@ -5,9 +5,17 @@ codex_session_image_import_preflight_blocked_cases_v1:
   phase: v0_6_66_codex_session_image_import_preflight_only
   source_phase: v0_6_65a_exact_file_commit_readiness_gate
   preflight_only: true
-  expected_case_count: 13
+  expected_case_count: 26
 
   cases:
+    - case_id: caller_not_vcp_agent
+      caller: other_agent
+      expected_block: true
+
+    - case_id: selected_route_not_codex_session_image_import
+      selected_route: other_route
+      expected_block: true
+
     - case_id: provider_id_not_codex_session_image
       provider_id: other_provider
       expected_block: true
@@ -24,16 +32,44 @@ codex_session_image_import_preflight_blocked_cases_v1:
       prompt_package_ref: prompts/other/example.yaml
       expected_block: true
 
+    - case_id: generation_plan_ref_present_false
+      generation_plan_ref_present: false
+      expected_block: true
+
     - case_id: output_directory_ref_outside_runs_real_generation
       output_directory_ref: temp/generated/
+      expected_block: true
+
+    - case_id: review_console_required_false
+      review_console_required: false
+      expected_block: true
+
+    - case_id: max_plugin_calls_nonzero
+      max_plugin_calls: 1
+      expected_block: true
+
+    - case_id: max_images_imported_nonzero
+      max_images_imported: 1
+      expected_block: true
+
+    - case_id: image_binary_read_allowed_true
+      image_binary_read_allowed: true
       expected_block: true
 
     - case_id: image_binary_read_performed_true
       image_binary_read_performed: true
       expected_block: true
 
+    - case_id: output_write_allowed_true
+      output_write_allowed: true
+      expected_block: true
+
     - case_id: output_write_performed_true
       output_write_performed: true
+      expected_block: true
+
+    - case_id: memory_write_allowed_true
+      memory_write_allowed: true
       expected_block: true
 
     - case_id: accepted_samples_write_allowed_true
@@ -52,10 +88,26 @@ codex_session_image_import_preflight_blocked_cases_v1:
       VCP_memory_write_allowed: true
       expected_block: true
 
+    - case_id: raw_prompt_payload_allowed_true
+      raw_prompt_payload_allowed: true
+      expected_block: true
+
+    - case_id: private_absolute_path_allowed_true
+      private_absolute_path_allowed: true
+      expected_block: true
+
     - case_id: private_absolute_path_present_true
       private_absolute_path_present: true
       expected_block: true
 
+    - case_id: secret_value_allowed_true
+      secret_value_allowed: true
+      expected_block: true
+
     - case_id: secret_value_present_true
       secret_value_present: true
+      expected_block: true
+
+    - case_id: provider_raw_response_allowed_true
+      provider_raw_response_allowed: true
       expected_block: true

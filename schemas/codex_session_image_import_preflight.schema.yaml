@@ -9,6 +9,11 @@ codex_session_image_import_preflight_v1:
   source_phase: v0_6_65a_exact_file_commit_readiness_gate
   preflight_only: true
   execution_allowed_by_this_preflight: false
+  caller: VCP_Agent
+  selected_route: codex_session_image_import
+  budgets:
+    max_plugin_calls: 0
+    max_images_imported: 0
 
   route_identity:
     import_route_id: codex_session_image_import
@@ -22,6 +27,8 @@ codex_session_image_import_preflight_v1:
       required: true
       must_exist: true
       required_prefix: prompts/image_generation/
+    prompt_package_ref_under: prompts/image_generation/
+    generation_plan_ref_present: true
     generation_contract_ref:
       type: repository_relative_file
       exact_ref: docs/vcp_integration/VCP_AGENT_IMAGE_GENERATION_TOOL_CONTRACT_V1.md
@@ -37,22 +44,31 @@ codex_session_image_import_preflight_v1:
       type: repository_relative_directory
       required_prefix: runs/real_generation/
       future_directory_only: true
+    output_directory_ref_under: runs/real_generation/
     future_image_file_path:
       type: repository_relative_future_placeholder_or_null
       may_be_null: true
       must_remain_project_relative_if_present: true
       image_binary_read_allowed_now: false
+      image_binary_read_allowed: false
       existence_check_allowed_now: false
 
   review_requirements:
     review_handoff_required: true
+    review_console_required: true
     human_review_required: true
 
   write_boundaries:
+    output_write_allowed: false
+    memory_write_allowed: false
     accepted_samples_write_allowed: false
     production_candidate_write_allowed: false
     DailyNote_write_allowed: false
     VCP_memory_write_allowed: false
+    raw_prompt_payload_allowed: false
+    secret_value_allowed: false
+    private_absolute_path_allowed: false
+    provider_raw_response_allowed: false
 
   forbidden_fields:
     - private_absolute_path

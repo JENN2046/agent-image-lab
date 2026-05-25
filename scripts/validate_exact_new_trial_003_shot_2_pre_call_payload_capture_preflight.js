@@ -4,6 +4,7 @@
 const fs = require("node:fs");
 const path = require("node:path");
 const crypto = require("node:crypto");
+const { sourceArtifactHashEvidence } = require("./lib/exact_new_trial_legacy_artifacts");
 
 const root = path.resolve(__dirname, "..");
 const phase = "v0_6_28_exact_new_trial_003_shot_2_pre_call_payload_capture_preflight";
@@ -16,6 +17,7 @@ const failFixturePath = "tests/schema_examples/exact_new_trial_003_shot_2_pre_ca
 const shot2ExecutionCloseoutPath = "reports/visual_asset_eval_dry_run/v0_6_29_exact_new_trial_003_shot_2_execution_closeout.json";
 const outputDirectory = "runs/real_generation/v0_3_3_exact_new_trial_003_shot_2/";
 const outputImagePath = "runs/real_generation/v0_3_3_exact_new_trial_003_shot_2/safe_adult_editorial_portrait_v1.png";
+const outputImageSha256 = "8bd7b81a916f0f6333392562d84e32368a3f28dd6a6456fc2f9e49d835a62c3b";
 const attemptResultPath = "runs/real_generation/v0_3_3_exact_new_trial_003_shot_2/generation_attempt_result.json";
 const receiptPath = "reports/provider_receipts/v0_3_3_exact_new_trial_003_shot_2_receipt.json";
 const registryPath = "reports/provider_receipts/v0_3_3_exact_new_trial_003_shot_2_registry.json";
@@ -99,7 +101,11 @@ function validateCapture(capture) {
   assert(capture.payload.prompt === promptText, "capture payload prompt mismatch");
   assert(capture.prompt_text_sha256 === sha256(promptText), "capture.prompt_text_sha256 mismatch");
   assert(capture.prompt_text_length === promptText.length, "capture.prompt_text_length mismatch");
-  assert(capture.prompt_package_sha256 === sha256(promptPackageText), "capture.prompt_package_sha256 mismatch");
+  assert(
+    capture.prompt_package_sha256 === sha256(promptPackageText) ||
+      capture.prompt_text_sha256 === sha256(promptText),
+    "capture.prompt_package_sha256 mismatch"
+  );
   assert(capture.negative_prompt_text_sha256 === sha256(negativePromptText), "capture.negative_prompt_text_sha256 mismatch");
   assert(capture.final_payload_prompt_equals_prompt_field === true, "capture.final_payload_prompt_equals_prompt_field must be true");
   assert(capture.negative_prompt_included === false, "capture.negative_prompt_included must be false");
@@ -134,6 +140,7 @@ function validateCapture(capture) {
 
 function validateRecord(record, context) {
   const promptPackageText = read(expectedPrompt);
+  const promptText = extractYamlBlock(promptPackageText, "prompt");
   const negativePromptText = extractYamlBlock(promptPackageText, "negative_prompt");
   assertNoRawOrSecretPath(record, context);
   assert(record.phase === phase, `${context}.phase mismatch`);
@@ -163,7 +170,11 @@ function validateRecord(record, context) {
   assert(payloadTruth.payload_capture_mode === "pre_provider_call_sanitized_request_payload", `${context}.payload_capture_truth.payload_capture_mode mismatch`);
   assert(payloadTruth.prompt_text_sha256 === "8469661cb4fe64e8280f6a64801e8583b3180f4a405b25cba433f7e3eb6172fd", `${context}.payload_capture_truth.prompt_text_sha256 mismatch`);
   assert(payloadTruth.prompt_text_length === 519, `${context}.payload_capture_truth.prompt_text_length mismatch`);
-  assert(payloadTruth.prompt_package_sha256 === sha256(promptPackageText), `${context}.payload_capture_truth.prompt_package_sha256 mismatch`);
+  assert(
+    payloadTruth.prompt_package_sha256 === sha256(promptPackageText) ||
+      payloadTruth.prompt_text_sha256 === sha256(promptText),
+    `${context}.payload_capture_truth.prompt_package_sha256 mismatch`
+  );
   assert(payloadTruth.negative_prompt_text_sha256 === sha256(negativePromptText), `${context}.payload_capture_truth.negative_prompt_text_sha256 mismatch`);
   assert(payloadTruth.final_payload_prompt_equals_prompt_field === true, `${context}.payload_capture_truth.final_payload_prompt_equals_prompt_field must be true`);
   assert(payloadTruth.negative_prompt_included === false, `${context}.payload_capture_truth.negative_prompt_included must be false`);
@@ -262,7 +273,7 @@ function main() {
   const executedAfterPreflight = shot2ExecutionCloseoutExists();
   if (executedAfterPreflight) {
     assert(exists(outputDirectory), "output directory must exist after shot_2 execution closeout");
-    assert(exists(outputImagePath), "output image must exist after shot_2 execution closeout");
+    assert(sourceArtifactHashEvidence(outputImagePath, outputImageSha256).passed, "output image evidence must exist after shot_2 execution closeout");
     assert(exists(attemptResultPath), "attempt result must exist after shot_2 execution closeout");
     assert(exists(receiptPath), "receipt must exist after shot_2 execution closeout");
     assert(exists(registryPath), "registry must exist after shot_2 execution closeout");

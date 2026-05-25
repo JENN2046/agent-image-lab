@@ -6,6 +6,11 @@ codex_session_image_import_preflight_v1:
   source_phase: v0_6_65a_exact_file_commit_readiness_gate
   preflight_only: true
   execution_allowed_by_this_preflight: false
+  caller: VCP_Agent
+  selected_route: codex_session_image_import
+  budgets:
+    max_plugin_calls: 0
+    max_images_imported: 0
 
   route_identity:
     import_route_id: codex_session_image_import
@@ -15,26 +20,37 @@ codex_session_image_import_preflight_v1:
 
   required_refs:
     prompt_package_ref: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v3.yaml
+    prompt_package_ref_under: prompts/image_generation/
+    generation_plan_ref_present: true
     generation_contract_ref: docs/vcp_integration/VCP_AGENT_IMAGE_GENERATION_TOOL_CONTRACT_V1.md
     route_selection_ref: docs/vcp_integration/VCP_AGENT_GENERATION_ROUTE_SELECTION_GATE.md
     response_contract_ref: schemas/vcp_agent_image_generation_response.schema.yaml
 
   future_import_target:
     output_directory_ref: runs/real_generation/v0_6_66_codex_session_image_import_preflight_candidate_001/
+    output_directory_ref_under: runs/real_generation/
     future_image_file_path: runs/real_generation/v0_6_66_codex_session_image_import_preflight_candidate_001/future_image_file_placeholder.png
     future_image_file_path_placeholder_only: true
+    image_binary_read_allowed: false
     image_binary_read_allowed_now: false
     future_image_file_existence_check_allowed_now: false
 
   review_requirements:
     review_handoff_required: true
+    review_console_required: true
     human_review_required: true
 
   write_boundaries:
+    output_write_allowed: false
+    memory_write_allowed: false
     accepted_samples_write_allowed: false
     production_candidate_write_allowed: false
     DailyNote_write_allowed: false
     VCP_memory_write_allowed: false
+    raw_prompt_payload_allowed: false
+    secret_value_allowed: false
+    private_absolute_path_allowed: false
+    provider_raw_response_allowed: false
 
   forbidden_field_flags:
     private_absolute_path_present: false

@@ -1,5 +1,155 @@
 ---
 
+- [x] ID: mvp_legacy_debt_validator_repair
+      Lane: Green local validator/status repair with explicit commit and push authorization.
+      Status: completed_validated_pending_user_authorized_commit_and_push.
+      Result: Repaired MVP legacy validation debt without restoring old runs image binaries.
+      Validation: npm run validate:mvp passed; git diff --check passed_with_crlf_normalization_warnings_only.
+      provider_contact_performed: false.
+      plugin_call_performed: false.
+      api_call_performed: false.
+      image_generation_performed: false.
+      output_write_performed: false.
+      env_file_content_read_performed: false.
+      secret_value_read_performed: false.
+      accepted_samples_write_performed: false.
+      production_candidate_write_performed: false.
+      DailyNote_write_performed: false.
+      VCP_memory_write_performed: false.
+      push_status: not_performed_user_authorized_pending.
+      next_phase_started: false.
+
+- [blocked] ID: v0_6_72b_native_doubao_secretless_runtime_binding_design_gate
+      Lane: Green local design / docs / validator only.
+      Status: blocked_by_mvp_validate_existing_preview_capsule_migration_pending.
+      Source phase: v0_6_72_real_vcp_agent_generation_preflight_no_call.
+      Source commit: ee23ce11912f5142c9e628cb27a52a9ec0d798ea.
+      Result: Designed a non-secret callable NativeDoubao runtime binding contract while keeping v0.6.73 execution blocked.
+      legacy_active_current_phase: v0_3_3_first_live_generation_pilot.
+      legacy_active_source_phase: v0_3_2_live_candidate_action_packet.
+      legacy_active_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      provider_binding_as_non_secret_capability_handle: true.
+      agent_image_lab_receives_only_redacted_provider_binding_reference: true.
+      secret_owner_process: VCPToolBox_or_owner_authorized_provider_runtime.
+      provider_contact_count_owner: provider_runtime_receipt_bridge.
+      raw_provider_payload_retention_policy: forbidden.
+      output_directory_ref: runs/real_generation/v0_6_73_real_vcp_agent_generation_one_shot/.
+      receipt_proves_zero_secret_exposure: true.
+      human_review_receives_only_sanitized_result_metadata: true.
+      Blocked case count: 14.
+      v0_6_73_execution_allowed: false.
+      provider_contact_performed: false.
+      plugin_call_performed: false.
+      api_call_performed: false.
+      image_generation_performed: false.
+      image_binary_read_performed: false.
+      output_write_performed: false.
+      env_file_content_read_performed: false.
+      secret_value_read_performed: false.
+      accepted_samples_write_performed: false.
+      production_candidate_write_performed: false.
+      DailyNote_write_performed: false.
+      VCP_memory_write_performed: false.
+      push_status: not_performed.
+      next_phase_started: false.
+      Validation: node --check scripts/validate_native_doubao_secretless_runtime_binding_design.js passed; node scripts/validate_native_doubao_secretless_runtime_binding_design.js passed_91_checks_14_blocked_cases; node --check scripts/validate_real_vcp_agent_generation_preflight_no_call.js passed; node scripts/validate_real_vcp_agent_generation_preflight_no_call.js passed_86_checks; git diff --check passed_with_crlf_normalization_warnings_only; npm run validate:mvp failed_existing_preview_capsule_migration_pending.
+      Blocker: npm run validate:mvp failed outside the v0.6.72b exact file allowlist because existing accepted sample preview capsule migration state is pending.
+
+- [blocked] ID: v0_6_67_codex_session_image_import_record_contract_gate
+      Lane: Green local docs/schema/fixtures/validator only.
+      Status: blocked_by_mvp_validate_existing_preview_capsule_migration_pending.
+      Source commit: 76f9e77d4c55bb3433d97070cd898cd8cf4ea21f.
+      Result: Hardened the future manual Codex-session image import record contract.
+      source_preflight_ref_required: true.
+      import_route_id: codex_session_image_import.
+      provider_id: codex_session_image.
+      import_mode: manual_session_import.
+      project_relative_image_path_placeholder_only: true.
+      review_console_required: true.
+      human_review_required: true.
+      Blocked case count: 20.
+      image_import_executed: false.
+      image_binary_read_performed: false.
+      image_hash_computed: false.
+      output_write_performed: false.
+      accepted_samples_write_performed: false.
+      production_candidate_write_performed: false.
+      DailyNote_write_performed: false.
+      VCP_memory_write_performed: false.
+      provider_contact_performed: false.
+      plugin_call_performed: false.
+      api_call_performed: false.
+      mcp_runtime_performed: false.
+      VCPToolBox_runtime_performed: false.
+      VCPChat_runtime_performed: false.
+      secret_value_read_performed: false.
+      push_status: not_performed.
+      next_phase_started: false.
+      Validation: node --check scripts/validate_codex_session_image_import_record_contract.js passed; node scripts/validate_codex_session_image_import_record_contract.js passed; node --check scripts/validate_codex_session_image_import_preflight.js passed; node scripts/validate_codex_session_image_import_preflight.js passed; node --check scripts/lib/governance_tooling_maintenance_slice.js passed; node scripts/lib/governance_tooling_maintenance_slice.js passed; git diff --check passed_with_crlf_normalization_warnings_only; npm run validate:mvp failed_existing_preview_capsule_migration_pending.
+      Blocker: npm run validate:mvp failed outside the v0.6.67 exact file allowlist because existing accepted sample preview capsule migration state is pending.
+
+- [x] ID: v0_6_66_codex_session_image_import_preflight_only
+      Lane: Green local preflight only.
+      Status: completed_validated.
+      Source phase: v0_6_65a_exact_file_commit_readiness_gate.
+      Source commit: 0d27673c6c14498eeea4327f22f73bb69c7a4b6b.
+      Result: Hardened the existing Codex-session image import preflight packet and validator against the supplied contract.
+      Required caller: VCP_Agent.
+      Required selected_route: codex_session_image_import.
+      Required prompt package root: prompts/image_generation/.
+      Required output directory root: runs/real_generation/.
+      Required max_plugin_calls: 0.
+      Required max_images_imported: 0.
+      Blocked case count: 26.
+      prompt_package_ref_missing_rejected: true.
+      provider_contact_performed: false.
+      plugin_call_performed: false.
+      api_call_performed: false.
+      mcp_runtime_performed: false.
+      VCPToolBox_runtime_performed: false.
+      VCPChat_runtime_performed: false.
+      image_generation_performed: false.
+      image_binary_read_performed: false.
+      output_write_performed: false.
+      DailyNote_write_performed: false.
+      VCP_memory_write_performed: false.
+      accepted_samples_write_performed: false.
+      production_candidate_write_performed: false.
+      secret_value_read_performed: false.
+      push_status: not_performed.
+      next_phase_started: false.
+      Validation: node --check scripts/validate_codex_session_image_import_preflight.js passed; node scripts/validate_codex_session_image_import_preflight.js passed; node --check scripts/lib/governance_tooling_maintenance_slice.js passed; node scripts/lib/governance_tooling_maintenance_slice.js passed; git diff --check passed_with_crlf_normalization_warnings_only.
+
+- [x] ID: post_pull_local_status_surface_sync_20260525
+      Lane: Green local status-surface sync only.
+      Status: completed_validated.
+      Source action: git pull --ff-only origin master.
+      Result: Local master fast-forwarded to origin/master at ee23ce1 and status surfaces were refreshed to reflect the current blocked v0.6.72 resume state.
+      Workspace: A:\agent-image-lab\agent-image-lab-v0.2.
+      Branch: master.
+      HEAD: ee23ce1.
+      HEAD subject: docs: block real vcp generation on secretless preflight.
+      Ahead/behind after pull: 0/0.
+      Worktree after pull: clean.
+      Active current phase: v0_6_72_real_vcp_agent_generation_preflight_no_call.
+      Legacy active current phase: v0_3_3_first_live_generation_pilot.
+      Legacy active source phase: v0_3_2_live_candidate_action_packet.
+      Legacy active next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Blocked next task: v0_6_73_real_vcp_agent_generation_execution_one_shot.
+      Blocker: current NativeDoubaoImage runner requires .env.local secret value loading while this goal forbids .env and secret value reads.
+      provider_contact_performed: false.
+      plugin_call_performed: false.
+      api_call_performed: false.
+      image_generation_performed: false.
+      image_binary_read_performed: false.
+      output_write_performed: false.
+      DailyNote_write_performed: false.
+      VCP_memory_write_performed: false.
+      secret_value_read_performed: false.
+      push_status: not_performed.
+      Validation: git diff --check passed_with_crlf_normalization_warnings_only; node scripts/validate_agent_board_state.js passed; node scripts/validate_autopilot_agent_board_resume_compaction_guard.js passed.
+      Recommended next: provide a non-secret callable NativeDoubaoImage runtime binding or exact secret-handling authorization before retrying v0.6.72.
+
 - [blocked] ID: v0_6_73_real_vcp_agent_generation_execution_one_shot
       Lane: Amber_B provider-image one-shot execution.
       Status: blocked_by_v0_6_72_no_call_preflight_red_lane_secret_value_read_required_by_current_runner.

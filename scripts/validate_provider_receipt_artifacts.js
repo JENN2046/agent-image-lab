@@ -1,6 +1,9 @@
 const crypto = require("node:crypto");
 const fs = require("node:fs");
 const path = require("node:path");
+const {
+  auditedMissingExactNewTrial003Artifacts
+} = require("./lib/exact_new_trial_legacy_artifacts");
 
 const root = path.resolve(__dirname, "..");
 const receiptsRoot = path.join(root, "reports", "provider_receipts");
@@ -73,29 +76,26 @@ function collectReceiptArtifacts() {
 }
 
 function loadAuditedMissingArtifactState() {
+  const auditedMissing = auditedMissingExactNewTrial003Artifacts();
   const absolute = repoPath(artifactTruthReviewPath);
-  if (!fs.existsSync(absolute)) return new Map();
+  if (!fs.existsSync(absolute)) return auditedMissing;
 
   const report = readJson(absolute).exact_new_trial_artifact_persistence_truth_review;
-  if (!report || report.phase !== "v0_6_25_exact_new_trial_artifact_persistence_truth_review") return new Map();
-  if (report.truth_findings?.current_project_output_missing !== true) return new Map();
-  if (report.truth_findings?.local_persistence_verified_now !== false) return new Map();
-  if (report.truth_findings?.reviewable_sample_now !== false) return new Map();
-  if (report.truth_findings?.human_review_allowed_now !== false) return new Map();
+  if (!report || report.phase !== "v0_6_25_exact_new_trial_artifact_persistence_truth_review") return auditedMissing;
+  if (report.truth_findings?.current_project_output_missing !== true) return auditedMissing;
+  if (report.truth_findings?.local_persistence_verified_now !== false) return auditedMissing;
+  if (report.truth_findings?.reviewable_sample_now !== false) return auditedMissing;
+  if (report.truth_findings?.human_review_allowed_now !== false) return auditedMissing;
 
-  return new Map([
-    [
-      report.artifact_claim.claimed_output_image_path,
-      {
-        attempt_id: report.attempt_id,
-        report_ref: artifactTruthReviewPath,
-        current_project_output_missing: true,
-        local_persistence_verified_now: false,
-        reviewable_sample_now: false,
-        human_review_allowed_now: false
-      }
-    ]
-  ]);
+  auditedMissing.set(report.artifact_claim.claimed_output_image_path, {
+    attempt_id: report.attempt_id,
+    report_ref: artifactTruthReviewPath,
+    current_project_output_missing: true,
+    local_persistence_verified_now: false,
+    reviewable_sample_now: false,
+    human_review_allowed_now: false
+  });
+  return auditedMissing;
 }
 
 function validateRecord({ source_file: sourceFile, record }, auditedMissingArtifacts) {

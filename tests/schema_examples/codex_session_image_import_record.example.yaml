@@ -3,12 +3,15 @@
 codex_session_image_import_record_v1:
   version: v1
   phase: v0_6_67_codex_session_image_import_record_contract
+  phase_name: v0_6_67_codex_session_image_import_record_contract_gate
   source_phase: v0_6_66a_exact_file_commit_readiness_gate
+  remote_baseline_commit: 76f9e77d4c55bb3433d97070cd898cd8cf4ea21f
   contract_only: true
   execution_allowed_by_this_contract: false
 
   record_identity:
     import_record_id: codex_session_image_import_record_001
+    import_route_id: codex_session_image_import
     provider_id: codex_session_image
     import_mode: manual_session_import
     imported_asset_status: draft_only
@@ -18,17 +21,20 @@ codex_session_image_import_record_v1:
     generation_contract_ref: docs/vcp_integration/VCP_AGENT_IMAGE_GENERATION_TOOL_CONTRACT_V1.md
     route_selection_ref: docs/vcp_integration/VCP_AGENT_GENERATION_ROUTE_SELECTION_GATE.md
     preflight_ref: docs/vcp_integration/CODEX_SESSION_IMAGE_IMPORT_PREFLIGHT.md
+    source_preflight_ref: docs/vcp_integration/CODEX_SESSION_IMAGE_IMPORT_PREFLIGHT.md
 
   future_import_target:
     output_directory_ref: runs/real_generation/v0_6_67_codex_session_image_import_record_candidate_001/
     future_image_file_ref: runs/real_generation/v0_6_67_codex_session_image_import_record_candidate_001/future_image_file_placeholder.png
     future_image_file_ref_placeholder_only: true
+    project_relative_image_path_placeholder_only: true
     image_binary_read_allowed_now: false
     future_image_file_existence_check_allowed_now: false
 
   review_linkage:
     review_case_ref: review_console/cases/codex_session_image_import_record_001.review_case.yaml
     review_case_ref_placeholder_only: true
+    review_console_required: true
     human_review_required: true
 
   write_boundaries:
@@ -53,7 +59,9 @@ codex_session_image_import_record_v1:
     VCPToolBox_runtime_performed: false
     VCPChat_runtime_performed: false
     image_generation_performed: false
+    image_import_executed: false
     image_binary_read_performed: false
+    image_hash_computed: false
     output_write_performed: false
     DailyNote_write_performed: false
     VCP_memory_write_performed: false

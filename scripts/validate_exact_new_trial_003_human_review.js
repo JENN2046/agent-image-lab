@@ -4,6 +4,7 @@
 const crypto = require("node:crypto");
 const fs = require("node:fs");
 const path = require("node:path");
+const { sourceArtifactHashEvidence } = require("./lib/exact_new_trial_legacy_artifacts");
 
 const root = path.resolve(__dirname, "..");
 const phase = "v0_6_32_exact_new_trial_003_human_review";
@@ -135,8 +136,8 @@ function validateCandidate(candidate, expected, context) {
   assert(closeout.review.reviewable_sample === true, `${context}.closeout reviewable_sample mismatch`);
   assert(closeout.review.accepted_candidate === true, `${context}.closeout accepted_candidate mismatch`);
 
-  assert(exists(expected.output_image_path), `${context}.output image missing`);
-  assert(fileSha(expected.output_image_path) === expected.output_image_sha256, `${context}.output image hash mismatch`);
+  const imageEvidence = sourceArtifactHashEvidence(expected.output_image_path, expected.output_image_sha256);
+  assert(imageEvidence.passed, `${context}.output image hash evidence mismatch`);
 }
 
 function validateRecord(record, context) {
@@ -248,7 +249,7 @@ function validateNegativeCases(validRecord, invalidRecord) {
 }
 
 function main() {
-  for (const relativePath of [reportPath, passFixturePath, failFixturePath, ...candidateExpectations.map((candidate) => candidate.closeout_report_ref), ...candidateExpectations.map((candidate) => candidate.output_image_path)]) {
+  for (const relativePath of [reportPath, passFixturePath, failFixturePath, ...candidateExpectations.map((candidate) => candidate.closeout_report_ref)]) {
     assert(exists(relativePath), `Missing required file: ${relativePath}`);
   }
 

@@ -1,5 +1,204 @@
 ---
 
+## Current Handoff Update - MVP Legacy Debt Validator Repair
+
+```text
+phase: mvp_legacy_debt_validator_repair
+status: completed_validated_pending_user_authorized_commit_and_push
+mode: Green local validator/status repair with explicit commit and push authorization
+summary: MVP legacy validation debt was repaired by recognizing v14.231 legacy runs evidence-loss semantics, allowing durable archive / preview evidence to stand in for missing old runs image binaries, refreshing provider receipt audited-missing accounting, and registering the current exact repair slice in governance tooling.
+active_current_phase: mvp_legacy_debt_validator_repair
+resume_guard_source_phase: v0_6_72b_native_doubao_secretless_runtime_binding_design_gate
+legacy_active_current_phase: v0_3_3_first_live_generation_pilot
+legacy_active_source_phase: v0_3_2_live_candidate_action_packet
+legacy_active_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+validation: npm run validate:mvp passed; git diff --check passed_with_crlf_normalization_warnings_only
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+output_write_performed: false
+env_file_content_read_performed: false
+secret_value_read_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+push_status: not_performed_user_authorized_pending
+next_phase_started: false
+```
+
+---
+
+## Current Handoff Update - v0.6.72b NativeDoubao Secretless Runtime Binding Design Gate
+
+```text
+phase: v0_6_72b_native_doubao_secretless_runtime_binding_design_gate
+source_phase: v0_6_72_real_vcp_agent_generation_preflight_no_call
+source_commit: ee23ce11912f5142c9e628cb27a52a9ec0d798ea
+status: blocked_by_mvp_validate_existing_preview_capsule_migration_pending
+mode: Green local design / docs / validator only
+summary: Defines a non-secret callable NativeDoubao runtime binding design where Agent Image Lab receives only a redacted provider binding reference, the owner-authorized provider runtime owns the actual secret, provider contact is counted through a receipt bridge, raw provider payload retention is forbidden, output is constrained to runs/real_generation/v0_6_73_real_vcp_agent_generation_one_shot/, and human review receives only sanitized result metadata. v0.6.73 remains blocked.
+changed: docs/vcp_integration/NATIVE_DOUBAO_SECRETLESS_RUNTIME_BINDING_DESIGN_GATE.md; tests/schema_examples/native_doubao_secretless_runtime_binding_design.example.yaml; scripts/validate_native_doubao_secretless_runtime_binding_design.js; .agent_board/CHECKPOINT.md; .agent_board/HANDOFF.md; .agent_board/RUN_STATE.md; .agent_board/TASK_QUEUE.md
+active_current_phase: v0_6_72b_native_doubao_secretless_runtime_binding_design_gate
+resume_guard_source_phase: v0_6_72_real_vcp_agent_generation_preflight_no_call
+legacy_active_current_phase: v0_3_3_first_live_generation_pilot
+legacy_active_source_phase: v0_3_2_live_candidate_action_packet
+legacy_active_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+provider_binding_as_non_secret_capability_handle: true
+agent_image_lab_receives_only_redacted_provider_binding_reference: true
+secret_owner_process: VCPToolBox_or_owner_authorized_provider_runtime
+provider_contact_count_owner: provider_runtime_receipt_bridge
+raw_provider_payload_retention_policy: forbidden
+output_directory_ref: runs/real_generation/v0_6_73_real_vcp_agent_generation_one_shot/
+receipt_proves_zero_secret_exposure: true
+human_review_receives_only_sanitized_result_metadata: true
+blocked_case_count: 14
+v0_6_73_execution_allowed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+image_binary_read_performed: false
+output_write_performed: false
+env_file_content_read_performed: false
+secret_value_read_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+push_status: not_performed
+next_phase_started: false
+validation: node --check scripts/validate_native_doubao_secretless_runtime_binding_design.js passed; node scripts/validate_native_doubao_secretless_runtime_binding_design.js passed_91_checks_14_blocked_cases; node --check scripts/validate_real_vcp_agent_generation_preflight_no_call.js passed; node scripts/validate_real_vcp_agent_generation_preflight_no_call.js passed_86_checks; git diff --check passed_with_crlf_normalization_warnings_only; npm run validate:mvp failed_existing_preview_capsule_migration_pending
+blocker: npm run validate:mvp failed outside the v0.6.72b exact file allowlist because existing accepted sample preview capsule migration state is pending.
+```
+
+---
+
+## Current Handoff Update - v0.6.67 Codex Session Image Import Record Contract Gate
+
+```text
+phase: v0_6_67_codex_session_image_import_record_contract
+phase_name: v0_6_67_codex_session_image_import_record_contract_gate
+source_commit: 76f9e77d4c55bb3433d97070cd898cd8cf4ea21f
+status: blocked_by_mvp_validate_existing_preview_capsule_migration_pending
+mode: Green local docs/schema/fixtures/validator only
+summary: Defines and hardens the future manually imported Codex-session image record contract without performing any import, image binary read, image hash, metadata extraction, output write, accepted_samples write, production_candidate write, DailyNote write, VCP memory write, provider/plugin/API/runtime action, secret/env read, or push.
+changed: docs/vcp_integration/CODEX_SESSION_IMAGE_IMPORT_RECORD_CONTRACT.md; schemas/codex_session_image_import_record.schema.yaml; tests/schema_examples/codex_session_image_import_record.example.yaml; tests/schema_examples/codex_session_image_import_record_fail.example.yaml; scripts/validate_codex_session_image_import_record_contract.js; .agent_board/CHECKPOINT.md; .agent_board/HANDOFF.md; .agent_board/RUN_STATE.md; .agent_board/TASK_QUEUE.md
+active_current_phase: v0_6_67_codex_session_image_import_record_contract_gate
+resume_guard_source_phase: v0_6_66_codex_session_image_import_preflight_only
+legacy_active_current_phase: v0_3_3_first_live_generation_pilot
+legacy_active_source_phase: v0_3_2_live_candidate_action_packet
+legacy_active_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+source_preflight_ref_required: true
+import_route_id: codex_session_image_import
+provider_id: codex_session_image
+import_mode: manual_session_import
+project_relative_image_path_placeholder_only: true
+review_console_required: true
+human_review_required: true
+blocked_case_count: 20
+image_import_executed: false
+image_binary_read_performed: false
+image_hash_computed: false
+output_write_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+VCPToolBox_runtime_performed: false
+VCPChat_runtime_performed: false
+secret_value_read_performed: false
+push_status: not_performed
+next_phase_started: false
+validation: node --check scripts/validate_codex_session_image_import_record_contract.js passed; node scripts/validate_codex_session_image_import_record_contract.js passed; node --check scripts/validate_codex_session_image_import_preflight.js passed; node scripts/validate_codex_session_image_import_preflight.js passed; node --check scripts/lib/governance_tooling_maintenance_slice.js passed; node scripts/lib/governance_tooling_maintenance_slice.js passed; git diff --check passed_with_crlf_normalization_warnings_only; npm run validate:mvp failed_existing_preview_capsule_migration_pending
+blocker: npm run validate:mvp failed outside the v0.6.67 exact file allowlist because existing accepted sample preview capsule migration state is pending.
+```
+
+---
+
+## Current Handoff Update - v0.6.66 Codex Session Image Import Preflight Contract Hardening
+
+```text
+phase: v0_6_66_codex_session_image_import_preflight_only
+source_phase: v0_6_65a_exact_file_commit_readiness_gate
+source_commit: 0d27673c6c14498eeea4327f22f73bb69c7a4b6b
+status: completed_validated
+mode: Green local preflight only
+summary: Tightens the existing Codex-session image import preflight packet to require caller VCP_Agent, selected_route codex_session_image_import, zero plugin calls, zero images imported, review-console and human-review gates, runs/real_generation output routing, and explicit no-read/no-write/no-secret/no-raw-payload flags. The validator now rejects 26 fail-closed cases, including missing prompt_package_ref.
+changed: docs/vcp_integration/CODEX_SESSION_IMAGE_IMPORT_PREFLIGHT.md; schemas/codex_session_image_import_preflight.schema.yaml; tests/schema_examples/codex_session_image_import_preflight.example.yaml; tests/schema_examples/codex_session_image_import_preflight_fail.example.yaml; scripts/validate_codex_session_image_import_preflight.js; .agent_board/CHECKPOINT.md; .agent_board/HANDOFF.md; .agent_board/RUN_STATE.md; .agent_board/TASK_QUEUE.md; .agent_board/VALIDATION_LOG.md
+governance_tooling_maintenance_slice_changed: false
+active_current_phase: v0_6_66_codex_session_image_import_preflight_only
+resume_guard_source_phase: v0_6_65a_exact_file_commit_readiness_gate
+legacy_active_current_phase: v0_3_3_first_live_generation_pilot
+legacy_active_source_phase: v0_3_2_live_candidate_action_packet
+legacy_active_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+mcp_runtime_performed: false
+VCPToolBox_runtime_performed: false
+VCPChat_runtime_performed: false
+image_generation_performed: false
+image_binary_read_performed: false
+output_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+secret_value_read_performed: false
+push_status: not_performed
+next_phase_started: false
+validation: node --check scripts/validate_codex_session_image_import_preflight.js passed; node scripts/validate_codex_session_image_import_preflight.js passed; node --check scripts/lib/governance_tooling_maintenance_slice.js passed; node scripts/lib/governance_tooling_maintenance_slice.js passed; git diff --check passed_with_crlf_normalization_warnings_only
+recommended_next: no_next_phase_started
+```
+
+---
+
+## Current Handoff Update - 2026-05-25 Post-Pull Local Status Surface Sync
+
+```text
+phase: post_pull_local_status_surface_sync_20260525
+status: completed_validated
+mode: Green Lane local status-surface sync only
+summary: Records that local master was fast-forwarded to origin/master after the remote update and preserves the current v0.6.72 Red Lane blocker without attempting execution.
+workspace: A:\agent-image-lab\agent-image-lab-v0.2
+branch: master
+head_after_pull: ee23ce1
+head_subject_after_pull: docs: block real vcp generation on secretless preflight
+ahead_behind_after_pull: 0/0
+worktree_after_pull: clean
+active_current_phase: v0_6_72_real_vcp_agent_generation_preflight_no_call
+resume_guard_source_phase: v0_6_71_real_vcp_agent_generation_action_packet
+legacy_active_current_phase: v0_3_3_first_live_generation_pilot
+legacy_active_source_phase: v0_3_2_live_candidate_action_packet
+legacy_active_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+current_blocker: red_lane_secret_value_read_required_by_current_native_doubao_runner
+blocked_next_task: v0_6_73_real_vcp_agent_generation_execution_one_shot
+next_safe_task: BLOCKED_non_secret_native_doubao_runtime_binding_required_before_v0_6_73
+remote_sync_performed: true
+remote_action_performed_by_this_sync: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+image_binary_read_performed: false
+output_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+secret_value_read_performed: false
+push_status: not_performed
+push_performed: false
+validation: git diff --check passed_with_crlf_normalization_warnings_only; node scripts/validate_agent_board_state.js passed; node scripts/validate_autopilot_agent_board_resume_compaction_guard.js passed
+recommended_next: provide_non_secret_native_doubao_runtime_binding_or_exact_secret_handling_authorization_then_retry_v0_6_72
+```
+
+---
+
 ## Current Handoff Update - v0.6.72 Real VCP Agent Generation Preflight No-Call
 
 ```text

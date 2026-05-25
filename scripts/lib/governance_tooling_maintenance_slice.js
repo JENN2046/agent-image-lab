@@ -2048,6 +2048,41 @@ const EXPECTED_V0_6_70_TO_V0_6_72_REAL_VCP_AGENT_GENERATION_PREFLIGHT_BLOCKED_SL
   "tests/schema_examples/real_vcp_agent_generation_route_activation_gate.example.yaml"
 ].sort();
 
+const EXPECTED_MVP_LEGACY_DEBT_VALIDATOR_REPAIR_SLICE = [
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  ".agent_board/VALIDATION_LOG.md",
+  "docs/vcp_integration/CODEX_SESSION_IMAGE_IMPORT_PREFLIGHT.md",
+  "docs/vcp_integration/CODEX_SESSION_IMAGE_IMPORT_RECORD_CONTRACT.md",
+  "schemas/codex_session_image_import_preflight.schema.yaml",
+  "schemas/codex_session_image_import_record.schema.yaml",
+  "scripts/lib/exact_new_trial_legacy_artifacts.js",
+  "scripts/lib/governance_tooling_maintenance_slice.js",
+  "scripts/validate_codex_session_image_import_preflight.js",
+  "scripts/validate_codex_session_image_import_record_contract.js",
+  "scripts/validate_exact_new_trial_003_durable_archive_write_execution_receipt.js",
+  "scripts/validate_exact_new_trial_003_human_review.js",
+  "scripts/validate_exact_new_trial_003_post_approval_registration_preflight_draft.js",
+  "scripts/validate_exact_new_trial_003_selected_candidate_human_approval_intake_package.js",
+  "scripts/validate_exact_new_trial_003_selected_candidate_post_approval_gate_alignment.js",
+  "scripts/validate_exact_new_trial_003_shot_1_execution_closeout.js",
+  "scripts/validate_exact_new_trial_003_shot_2_execution_closeout.js",
+  "scripts/validate_exact_new_trial_003_shot_2_pre_call_payload_capture_preflight.js",
+  "scripts/validate_exact_new_trial_003_shot_3_execution_closeout.js",
+  "scripts/validate_exact_new_trial_003_shot_3_pre_call_payload_capture_preflight.js",
+  "scripts/validate_exact_new_trial_artifact_persistence_truth_review.js",
+  "scripts/validate_exact_new_trial_local_persistence_repair_preflight.js",
+  "scripts/validate_mvp.ps1",
+  "scripts/validate_provider_receipt_artifacts.js",
+  "scripts/validate_v14_142_multi_accepted_sample_matrix.js",
+  "tests/schema_examples/codex_session_image_import_preflight.example.yaml",
+  "tests/schema_examples/codex_session_image_import_preflight_fail.example.yaml",
+  "tests/schema_examples/codex_session_image_import_record.example.yaml",
+  "tests/schema_examples/codex_session_image_import_record_fail.example.yaml"
+].sort();
+
 const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "governance_tooling_maintenance_slice_v1",
@@ -2504,6 +2539,10 @@ const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "v0_6_70_to_v0_6_72_real_vcp_agent_generation_preflight_blocked_slice",
     files: EXPECTED_V0_6_70_TO_V0_6_72_REAL_VCP_AGENT_GENERATION_PREFLIGHT_BLOCKED_SLICE
+  },
+  {
+    id: "mvp_legacy_debt_validator_repair_slice",
+    files: EXPECTED_MVP_LEGACY_DEBT_VALIDATOR_REPAIR_SLICE
   }
 ];
 
@@ -3023,6 +3062,12 @@ function governanceToolingMaintenanceSliceSelfCheck() {
       )?.id === "v0_6_70_to_v0_6_72_real_vcp_agent_generation_preflight_blocked_slice"
     },
     {
+      check: "exact_slice_matches_mvp_legacy_debt_validator_repair",
+      passed: findMatchingGovernanceToolingSlice(
+        EXPECTED_MVP_LEGACY_DEBT_VALIDATOR_REPAIR_SLICE
+      )?.id === "mvp_legacy_debt_validator_repair_slice"
+    },
+    {
       check: "exact_slice_rejects_missing_file",
       passed: findMatchingGovernanceToolingSlice(EXPECTED_GOVERNANCE_TOOLING_MAINTENANCE_SLICE.slice(1)) === null
     },
@@ -3139,6 +3184,7 @@ module.exports = {
   EXPECTED_V0_6_68_CODEX_SESSION_IMAGE_IMPORT_RECORD_MOCK_VALIDATION_SLICE,
   EXPECTED_V0_6_69_CODEX_SESSION_IMAGE_IMPORT_ROUTE_GAP_REVIEW_SLICE,
   EXPECTED_V0_6_70_TO_V0_6_72_REAL_VCP_AGENT_GENERATION_PREFLIGHT_BLOCKED_SLICE,
+  EXPECTED_MVP_LEGACY_DEBT_VALIDATOR_REPAIR_SLICE,
   GOVERNANCE_TOOLING_ALLOWED_SLICES,
   buildGovernanceToolingMaintenanceSliceReport,
   fileAllowedInGovernanceToolingSlice,
