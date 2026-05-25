@@ -1,5 +1,33 @@
 ---
 
+- [x] ID: v0_6_73w_active_delegate_authorization_validator
+      Lane: Green local validator only.
+      Status: COMPLETED_VALIDATED_fail_closed_validator_only.
+      Source phase: v0_6_73v_exact_active_delegate_authorization_packet_draft.
+      Source status: COMPLETED_VALIDATED_draft_not_active.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Legacy active next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Goal: Validate future active delegate authorization shape while proving the current packet remains fail-closed.
+      Validator id: VALIDATOR-V0-6-73W-ACTIVE-DELEGATE-AUTHORIZATION.
+      Current validator decision: FAIL_CLOSED_DRAFT_NOT_ACTIVE.
+      Candidate active shape validates: true.
+      Candidate active shape activates execution now: false.
+      push_performed: false.
+      push_status: not_performed_user_deferred_push_local_ahead_6_before_w.
+      provider_contact_performed: false.
+      plugin_call_performed: false.
+      api_call_performed: false.
+      image_generation_performed: false.
+      image_binary_read_performed: false.
+      output_write_performed: false.
+      env_file_content_read_performed: false.
+      secret_value_read_performed: false.
+      v0_6_73_execution_allowed: false.
+      Next: v0_6_73x_final_local_readiness_stop_line_review.
+
+---
+
 - [x] ID: v0_6_73v_exact_active_delegate_authorization_packet_draft
       Lane: Green local authorization packet draft only.
       Status: COMPLETED_VALIDATED_draft_not_active.

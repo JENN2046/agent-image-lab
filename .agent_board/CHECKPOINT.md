@@ -1,5 +1,51 @@
 ---
 
+## Checkpoint - v0.6.73w Active Delegate Authorization Validator
+
+```text
+phase: v0_6_73w_active_delegate_authorization_validator
+status: COMPLETED_VALIDATED_fail_closed_validator_only
+source_phase: v0_6_73v_exact_active_delegate_authorization_packet_draft
+source_status: COMPLETED_VALIDATED_draft_not_active
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+legacy_active_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+changed_files_current_task:
+  - docs/vcp_integration/V0_6_73W_ACTIVE_DELEGATE_AUTHORIZATION_VALIDATOR.md
+  - tests/schema_examples/v0_6_73w_active_delegate_authorization_candidate.example.yaml
+  - tests/schema_examples/v0_6_73w_active_delegate_authorization_fail.example.yaml
+  - scripts/validate_v0_6_73w_active_delegate_authorization_validator.js
+  - scripts/lib/governance_tooling_maintenance_slice.js
+  - .agent_board/BLOCKERS.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+summary: Added the active delegate authorization validator. The current packet remains draft_not_active and fail-closed; the candidate active shape is a fixture only and does not authorize execution.
+validator_id: VALIDATOR-V0-6-73W-ACTIVE-DELEGATE-AUTHORIZATION
+current_validator_decision: FAIL_CLOSED_DRAFT_NOT_ACTIVE
+candidate_active_shape_validates: true
+candidate_active_shape_activates_execution_now: false
+push_performed: false
+push_status: not_performed_user_deferred_push_local_ahead_6_before_w
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+image_binary_read_performed: false
+output_write_performed: false
+env_file_content_read_performed: false
+secret_value_read_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+v0_6_73_execution_allowed: false
+next_safe_task: v0_6_73x_final_local_readiness_stop_line_review
+```
+
+---
+
 ## Checkpoint - v0.6.73v Exact Active Delegate Authorization Packet Draft
 
 ```text

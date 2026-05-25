@@ -2,6 +2,18 @@
 
 ## Active Blockers
 
+## BLOCKER-20260525-16 - Active delegate validator is local only
+
+Status: active_fail_closed_validator_only
+Detected during: v0_6_73w_active_delegate_authorization_validator
+Task: active delegate authorization validator
+Reason: The validator proves the candidate active packet shape, but the current packet remains draft_not_active and the candidate fixture is not an authorization. Real execution remains blocked until an exact human authorization activates the packet and a final GO review passes.
+Hard stop gate: validator_fixture_is_not_active_authorization
+Files involved: docs/vcp_integration/V0_6_73W_ACTIVE_DELEGATE_AUTHORIZATION_VALIDATOR.md; scripts/validate_v0_6_73w_active_delegate_authorization_validator.js; tests/schema_examples/v0_6_73w_active_delegate_authorization_candidate.example.yaml; tests/schema_examples/v0_6_73w_active_delegate_authorization_fail.example.yaml
+Validation state: active delegate validator required; no push/provider/API/image/output/secret action performed.
+Required next safe action: v0_6_73x_final_local_readiness_stop_line_review.
+Rollback or cleanup path: validator files plus board status sync can be reverted locally; no generated image, output directory, receipt, review handoff, memory, sample, production candidate, remote write, or real execution state was created.
+
 ## BLOCKER-20260525-15 - Exact active delegate authorization packet remains draft only
 
 Status: active_draft_not_active
