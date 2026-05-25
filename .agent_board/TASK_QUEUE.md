@@ -1,5 +1,24 @@
 ---
 
+- [x] ID: v0_6_73c_secretless_provider_receipt_contract
+      Lane: Green local receipt contract only.
+      Status: completed_validated.
+      Source phase: v0_6_73b_native_doubao_secretless_binding_implementation_surface.
+      Source commit: 9b723553f928ebdfa66f80ea97a70ee40cf5b607.
+      Goal: Define the future provider receipt format without writing a real receipt or executing generation.
+      Legacy active current phase: v0_3_3_first_live_generation_pilot.
+      Legacy active source phase: v0_3_2_live_candidate_action_packet.
+      Legacy active next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Allowed files: docs/vcp_integration/V0_6_73C_SECRETLESS_PROVIDER_RECEIPT_CONTRACT.md; tests/schema_examples/v0_6_73c_secretless_provider_receipt_contract.example.yaml; scripts/validate_v0_6_73c_secretless_provider_receipt_contract.js; .agent_board resume surfaces.
+      Validation: node --check scripts/validate_v0_6_73c_secretless_provider_receipt_contract.js; node scripts/validate_v0_6_73c_secretless_provider_receipt_contract.js; npm run validate:mvp; git diff --check.
+      image_generation_performed: false.
+      secret_value_read_performed: false.
+      push_status: not_performed.
+      Result: completed_validated.
+      Next: v0_6_73d_real_generation_review_handoff_contract.
+
+---
+
 - [x] ID: v0_6_73b_native_doubao_secretless_binding_implementation_surface
       Lane: Green local contract / implementation surface only.
       Status: completed_validated.

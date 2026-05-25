@@ -1,5 +1,39 @@
 ---
 
+## Current Run State - v0.6.73c Secretless Provider Receipt Contract
+
+```text
+active_current_phase: v0_6_73c_secretless_provider_receipt_contract
+status: completed_validated
+mode: Green local receipt contract only
+source_phase: v0_6_73b_native_doubao_secretless_binding_implementation_surface
+source_commit: 9b723553f928ebdfa66f80ea97a70ee40cf5b607
+branch: master
+future_receipt_ref: reports/provider_receipts/v0_6_73_real_vcp_agent_generation_one_shot_receipt.json
+receipt_write_allowed_now: false
+next_safe_phase: v0_6_73d_real_generation_review_handoff_contract
+legacy_active_current_phase: v0_3_3_first_live_generation_pilot
+legacy_active_source_phase: v0_3_2_live_candidate_action_packet
+legacy_active_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+image_binary_read_performed: false
+output_write_performed: false
+env_file_content_read_performed: false
+secret_value_read_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+v0_6_73_execution_allowed: false
+push_status: not_performed
+validation: npm_run_validate_mvp_passed
+```
+
+---
+
 ## Current Run State - v0.6.73b NativeDoubao Secretless Binding Implementation Surface
 
 ```text
