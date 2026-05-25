@@ -2,6 +2,18 @@
 
 ## Active Blockers
 
+## BLOCKER-20260525-18 - Real execution remains authorization-bound after push sync
+
+Status: active_real_execution_authorization_required
+Detected during: v0_6_73y_remote_post_push_stop_line_sync
+Task: remote post-push stop-line sync
+Reason: The local readiness chain was pushed and origin/master is synchronized at 213a4e52a97d0b5b19dae52dfda7c142df37ebc6 with ahead/behind 0/0, but real NativeDoubao execution still requires exact active delegate authorization and the exact real execution phase authorization.
+Hard stop gate: real_execution_requires_exact_authorization_after_remote_sync
+Files involved: .agent_board/CHECKPOINT.md; .agent_board/HANDOFF.md; .agent_board/RUN_STATE.md; .agent_board/TASK_QUEUE.md
+Validation state: resume compaction guard and MVP validation required; no provider/API/image/output/secret/memory action performed.
+Required next safe action: v0_6_73z_real_execution_authorization_boundary_review.
+Rollback or cleanup path: board status sync can be reverted locally; no generated image, output directory, receipt, review handoff, memory, sample, production candidate, or real execution state was created.
+
 ## BLOCKER-20260525-17 - Local readiness stop line reached
 
 Status: active_stop_line_reached
