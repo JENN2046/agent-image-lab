@@ -2,6 +2,18 @@
 
 ## Active Blockers
 
+## BLOCKER-20260525-10 - v0.6.73 pushed but real execution still disabled
+
+Status: active_remote_synced_execution_disabled
+Detected during: v0_6_73r_remote_post_push_state_sync
+Task: remote post-push state sync
+Reason: The user-authorized push succeeded and origin/master matches ad1f657ad61b1290ffa24c86ef238e792523fdc7 with ahead/behind 0/0, but remote sync does not activate the real execution phase. Exact active bound delegate authorization and final boundary review are still required before any provider contact.
+Hard stop gate: remote_sync_is_not_real_execution_authorization
+Files involved: docs/vcp_integration/V0_6_73R_REMOTE_POST_PUSH_STATE_SYNC.md; scripts/validate_v0_6_73r_remote_post_push_state_sync.js; tests/schema_examples/v0_6_73r_remote_post_push_state_sync.example.yaml
+Validation state: post-push remote sync verified; no provider/API/image/output/secret action performed.
+Required next safe action: v0_6_73s_final_real_execution_boundary_review.
+Rollback or cleanup path: status sync can be reverted locally; remote push already happened and should not be rewritten without explicit destructive/history authorization.
+
 ## BLOCKER-20260525-09 - v0.6.73 push boundary waiting for explicit authorization
 
 Status: active_waiting_for_explicit_push
