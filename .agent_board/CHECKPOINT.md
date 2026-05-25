@@ -1,5 +1,57 @@
 ---
 
+## Checkpoint - v0.6.73ae Exact Execution Phrase Active-For-Execution Record
+
+```text
+phase: v0_6_73ae_exact_execution_phrase_active_for_execution_record
+status: COMPLETED_VALIDATED_PHRASE_ACTIVE_PRE_PROVIDER_STOP
+source_phase: v0_6_73ad_remote_synced_final_execution_phrase_activation_review
+source_status: COMPLETED_VALIDATED_PHRASE_ACTIVATION_ALLOWED_NEXT_NOT_ACTIVE
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+legacy_active_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+changed_files_current_task:
+  - docs/vcp_integration/V0_6_73AE_EXACT_EXECUTION_PHRASE_ACTIVE_FOR_EXECUTION_RECORD.md
+  - tests/schema_examples/v0_6_73ae_exact_execution_phrase_active_for_execution_record.example.yaml
+  - tests/schema_examples/v0_6_73ae_exact_execution_phrase_active_for_execution_record_fail.example.yaml
+  - scripts/validate_v0_6_73ae_exact_execution_phrase_active_for_execution_record.js
+  - scripts/lib/governance_tooling_maintenance_slice.js
+  - .agent_board/BLOCKERS.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+summary: Recorded the exact v0.6.73o execution phrase as active_for_execution. This still does not allow execution: final pre-provider GO/NO-GO and pre-provider preflight rerun remain required, and can_execute_now remains false.
+remote_synced_execution_contract_head: 7ef3b015a3b56ba6da161e9f2e2c8cc0aa4da0bd
+current_ahead_behind_at_creation: 0/2
+active_delegate_authorization_actual: true
+exact_active_delegate_authorization_present: true
+authorization_phrase_provided: true
+authorization_phrase_active_for_execution: true
+phrase_activation_result: PHRASE_ACTIVE_FOR_EXECUTION
+final_pre_provider_go_no_go_required: true
+can_execute_now: false
+real_execution_go_no_go_decision: NO_GO_PENDING_FINAL_PRE_PROVIDER_CHECK
+push_allowed: false
+push_status: not_performed_local_phrase_active_record
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+image_binary_read_performed: false
+output_write_performed: false
+env_file_content_read_performed: false
+secret_value_read_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+v0_6_73_execution_allowed: false
+next_safe_task: v0_6_73af_final_pre_provider_execution_go_no_go
+```
+
+---
+
 ## Checkpoint - v0.6.73ad Remote-Synced Final Execution Phrase Activation Review
 
 ```text

@@ -2,6 +2,21 @@
 
 ## Active Blockers
 
+## BLOCKER-20260525-24 - Phrase active but final pre-provider check still required
+
+Status: phrase_active_pre_provider_stop
+Detected during: v0_6_73ae_exact_execution_phrase_active_for_execution_record
+Task: exact execution phrase active-for-execution record
+Active current phase: v0_3_3_first_live_generation_pilot
+Resume guard source phase: v0_3_2_live_candidate_action_packet
+Legacy active next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+Reason: The exact execution phrase is now recorded as active_for_execution, but final_pre_provider_go_no_go_required is true, pre_provider_contact_preflight_rerun_required is true, can_execute_now is false, and v0_6_73_execution_allowed remains false.
+Hard stop gate: final_pre_provider_go_no_go_required_before_provider_contact
+Files involved: docs/vcp_integration/V0_6_73AE_EXACT_EXECUTION_PHRASE_ACTIVE_FOR_EXECUTION_RECORD.md; scripts/validate_v0_6_73ae_exact_execution_phrase_active_for_execution_record.js; tests/schema_examples/v0_6_73ae_exact_execution_phrase_active_for_execution_record.example.yaml; tests/schema_examples/v0_6_73ae_exact_execution_phrase_active_for_execution_record_fail.example.yaml
+Validation state: phrase activation record validator and MVP validation required; no provider/API/image/output/secret/memory action performed.
+Required next safe action: v0_6_73af_final_pre_provider_execution_go_no_go.
+Rollback or cleanup path: ae record files plus board status sync can be reverted locally; no generated image, output directory, receipt, review handoff, memory, sample, production candidate, remote write, or real execution state was created.
+
 ## BLOCKER-20260525-23 - Phrase activation allowed next but execution still closed
 
 Status: phrase_activation_allowed_next_execution_closed
