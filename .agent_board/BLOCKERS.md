@@ -2,6 +2,18 @@
 
 ## Active Blockers
 
+## BLOCKER-20260525-08 - v0.6.73 aggregate readiness stops at push safety gate
+
+Status: active_ready_for_push_safety_gate_only
+Detected during: v0_6_73p_local_aggregate_readiness_review
+Task: local aggregate readiness review
+Reason: The local readiness chain is coherent through the inactive exact authorization phrase draft, but local_ahead_count is 5, remote_synced_current is false, exact active delegate authorization remains absent, and real_execution_decision is NO_GO. The next safe action is push safety review only.
+Hard stop gate: push_boundary_and_real_execution_boundary
+Files involved: docs/vcp_integration/V0_6_73P_LOCAL_AGGREGATE_READINESS_REVIEW.md; scripts/validate_v0_6_73p_local_aggregate_readiness_review.js; tests/schema_examples/v0_6_73p_local_aggregate_readiness_review.example.yaml
+Validation state: local aggregate validator required; no provider/API/image/output/secret action performed.
+Required next safe action: v0_6_73q_push_safety_gate.
+Rollback or cleanup path: remove v0.6.73p aggregate review files plus board status sync; no generated image, output directory, receipt, review handoff, memory, sample, production candidate, or remote execution state was created.
+
 ## BLOCKER-20260525-07 - v0.6.73 exact authorization phrase remains inactive
 
 Status: active_phrase_draft_inactive

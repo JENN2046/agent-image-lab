@@ -1,5 +1,51 @@
 ---
 
+## Checkpoint - v0.6.73p Local Aggregate Readiness Review
+
+```text
+phase: v0_6_73p_local_aggregate_readiness_review
+status: COMPLETED_VALIDATED_ready_for_push_safety_gate_only
+source_phase: v0_6_73o_exact_real_execution_authorization_phrase_draft
+source_status: COMPLETED_VALIDATED_phrase_draft_inactive
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+legacy_active_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+changed_files_current_task:
+  - docs/vcp_integration/V0_6_73P_LOCAL_AGGREGATE_READINESS_REVIEW.md
+  - tests/schema_examples/v0_6_73p_local_aggregate_readiness_review.example.yaml
+  - scripts/validate_v0_6_73p_local_aggregate_readiness_review.js
+  - scripts/lib/governance_tooling_maintenance_slice.js
+  - .agent_board/BLOCKERS.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+summary: Aggregated the local v0.6.73 readiness chain through the inactive authorization phrase draft. The chain is ready only for a push safety gate; real execution remains NO_GO.
+aggregate_review_id: AGG-V0-6-73P-LOCAL-READINESS
+aggregate_decision: READY_FOR_PUSH_SAFETY_GATE_ONLY
+real_execution_decision: NO_GO
+local_ahead_count: 5
+remote_synced_current: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+image_binary_read_performed: false
+output_write_performed: false
+env_file_content_read_performed: false
+secret_value_read_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+push_performed: false
+v0_6_73_execution_allowed: false
+push_status: not_performed
+next_safe_task: v0_6_73q_push_safety_gate
+```
+
+---
+
 ## Checkpoint - v0.6.73o Exact Real Execution Authorization Phrase Draft
 
 ```text
