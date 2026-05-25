@@ -1,5 +1,43 @@
 ---
 
+## Current Handoff Update - v0.6.73b NativeDoubao Secretless Binding Implementation Surface
+
+```text
+phase: v0_6_73b_native_doubao_secretless_binding_implementation_surface
+status: completed_validated
+mode: Green local contract / implementation surface only
+source_phase: v0_6_73a_baseline_sync_and_route_state_check
+source_commit: 5039271e792a4cb69517109aa4598183ada780fc
+summary: Defines the static non-secret callable binding surface for future NativeDoubao execution without creating runtime code or allowing execution.
+selected_route: NativeDoubaoImage_one_shot_project_plugin
+selected_plugin_id: NativeDoubaoImage
+provider_binding_ref_redacted: true
+provider_binding_ref_is_secret: false
+operation_execute_allowed_now: false
+real_executor_code_created: false
+legacy_active_current_phase: v0_3_3_first_live_generation_pilot
+legacy_active_source_phase: v0_3_2_live_candidate_action_packet
+legacy_active_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+image_binary_read_performed: false
+output_write_performed: false
+env_file_content_read_performed: false
+secret_value_read_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+v0_6_73_execution_allowed: false
+push_status: not_performed
+next_phase_started: true
+validation: node --check scripts/validate_v0_6_73b_native_doubao_secretless_binding_implementation_surface.js passed; node scripts/validate_v0_6_73b_native_doubao_secretless_binding_implementation_surface.js passed_82_checks; npm run validate:mvp passed; git diff --check passed_with_crlf_normalization_warnings_only
+```
+
+---
+
 ## Current Handoff Update - v0.6.73a Baseline Sync And Route State Check
 
 ```text

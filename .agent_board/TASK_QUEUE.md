@@ -1,5 +1,24 @@
 ---
 
+- [x] ID: v0_6_73b_native_doubao_secretless_binding_implementation_surface
+      Lane: Green local contract / implementation surface only.
+      Status: completed_validated.
+      Source phase: v0_6_73a_baseline_sync_and_route_state_check.
+      Source commit: 5039271e792a4cb69517109aa4598183ada780fc.
+      Goal: Define a static non-secret NativeDoubao callable binding surface without runtime code or execution.
+      Legacy active current phase: v0_3_3_first_live_generation_pilot.
+      Legacy active source phase: v0_3_2_live_candidate_action_packet.
+      Legacy active next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Allowed files: docs/vcp_integration/V0_6_73B_NATIVE_DOUBAO_SECRETLESS_BINDING_IMPLEMENTATION_SURFACE.md; tests/schema_examples/v0_6_73b_native_doubao_secretless_binding_implementation_surface.example.yaml; scripts/validate_v0_6_73b_native_doubao_secretless_binding_implementation_surface.js; .agent_board resume surfaces.
+      Validation: node --check scripts/validate_v0_6_73b_native_doubao_secretless_binding_implementation_surface.js; node scripts/validate_v0_6_73b_native_doubao_secretless_binding_implementation_surface.js; npm run validate:mvp; git diff --check.
+      image_generation_performed: false.
+      secret_value_read_performed: false.
+      push_status: not_performed.
+      Result: completed_validated.
+      Next: v0_6_73c_secretless_provider_receipt_contract.
+
+---
+
 - [x] ID: v0_6_73a_baseline_sync_and_route_state_check
       Lane: Green local baseline / route state check only.
       Status: completed_validated.
