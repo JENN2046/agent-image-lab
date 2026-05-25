@@ -1,5 +1,24 @@
 ---
 
+- [x] ID: v0_6_73f_exact_a5_execution_authorization_draft
+      Lane: Green local exact A5 authorization draft only.
+      Status: completed_validated.
+      Source phase: v0_6_73e_one_shot_execution_readiness_packet.
+      Source commit: d255c13e739ca55061bda3485a4a02f87c3a6e07.
+      Goal: Draft exact future A5 execution authorization without activating it.
+      Legacy active current phase: v0_3_3_first_live_generation_pilot.
+      Legacy active source phase: v0_3_2_live_candidate_action_packet.
+      Legacy active next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Allowed files: docs/vcp_integration/V0_6_73F_EXACT_A5_EXECUTION_AUTHORIZATION_DRAFT.md; tests/schema_examples/v0_6_73f_exact_a5_execution_authorization_draft.example.yaml; scripts/validate_v0_6_73f_exact_a5_execution_authorization_draft.js; .agent_board resume surfaces.
+      Validation: node --check scripts/validate_v0_6_73f_exact_a5_execution_authorization_draft.js; node scripts/validate_v0_6_73f_exact_a5_execution_authorization_draft.js; npm run validate:mvp; git diff --check.
+      image_generation_performed: false.
+      secret_value_read_performed: false.
+      push_status: not_performed.
+      Result: completed_validated.
+      Next: stop_before_v0_6_73_execution.
+
+---
+
 - [x] ID: v0_6_73e_one_shot_execution_readiness_packet
       Lane: Green local readiness packet only.
       Status: completed_validated.

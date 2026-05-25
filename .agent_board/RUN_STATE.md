@@ -1,5 +1,40 @@
 ---
 
+## Current Run State - v0.6.73f Exact A5 Execution Authorization Draft
+
+```text
+active_current_phase: v0_6_73f_exact_a5_execution_authorization_draft
+status: completed_validated
+mode: Green local exact A5 authorization draft only
+source_phase: v0_6_73e_one_shot_execution_readiness_packet
+source_commit: d255c13e739ca55061bda3485a4a02f87c3a6e07
+branch: master
+authorization_status: draft_not_active
+authorization_active: false
+can_execute_now: false
+next_safe_phase: stop_before_v0_6_73_execution
+legacy_active_current_phase: v0_3_3_first_live_generation_pilot
+legacy_active_source_phase: v0_3_2_live_candidate_action_packet
+legacy_active_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+image_binary_read_performed: false
+output_write_performed: false
+env_file_content_read_performed: false
+secret_value_read_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+v0_6_73_execution_allowed: false
+push_status: not_performed
+validation: npm_run_validate_mvp_passed
+```
+
+---
+
 ## Current Run State - v0.6.73e One-Shot Execution Readiness Packet
 
 ```text
