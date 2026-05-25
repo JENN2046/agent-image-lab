@@ -2,6 +2,21 @@
 
 ## Active Blockers
 
+## BLOCKER-20260525-23 - Phrase activation allowed next but execution still closed
+
+Status: phrase_activation_allowed_next_execution_closed
+Detected during: v0_6_73ad_remote_synced_final_execution_phrase_activation_review
+Task: remote-synced final execution phrase activation review
+Active current phase: v0_3_3_first_live_generation_pilot
+Resume guard source phase: v0_3_2_live_candidate_action_packet
+Legacy active next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+Reason: The remote execution-contract head is synchronized at 7ef3b015a3b56ba6da161e9f2e2c8cc0aa4da0bd and the exact phrase may be promoted by the next exact activation record, but this review does not itself set authorization_phrase_active_for_execution to true and can_execute_now remains false.
+Hard stop gate: exact_phrase_activation_record_and_final_pre_provider_check_required_before_provider_contact
+Files involved: docs/vcp_integration/V0_6_73AD_REMOTE_SYNCED_FINAL_EXECUTION_PHRASE_ACTIVATION_REVIEW.md; scripts/validate_v0_6_73ad_remote_synced_final_execution_phrase_activation_review.js; tests/schema_examples/v0_6_73ad_remote_synced_final_execution_phrase_activation_review.example.yaml; tests/schema_examples/v0_6_73ad_remote_synced_final_execution_phrase_activation_review_fail.example.yaml
+Validation state: final phrase activation review validator and MVP validation required; no provider/API/image/output/secret/memory action performed.
+Required next safe action: v0_6_73ae_exact_execution_phrase_active_for_execution_record.
+Rollback or cleanup path: ad review files plus board status sync can be reverted locally; no generated image, output directory, receipt, review handoff, memory, sample, production candidate, remote write, or real execution state was created.
+
 ## BLOCKER-20260525-22 - Remote synced but exact execution phrase still inactive
 
 Status: active_delegate_remote_synced_execution_phrase_inactive
