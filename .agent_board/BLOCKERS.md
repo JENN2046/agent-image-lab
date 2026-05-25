@@ -2,6 +2,18 @@
 
 ## Active Blockers
 
+## BLOCKER-20260525-21 - Post-activation real execution remains NO-GO
+
+Status: active_delegate_actual_but_execution_no_go
+Detected during: v0_6_73ab_post_activation_real_execution_go_no_go_review
+Task: post-activation real execution GO/NO-GO review
+Reason: The active NativeDoubao bound delegate authorization is actual, but the activation commit is local-only, origin/master is still at 0c2ab81c494c3637f45cfcc6eb4b887d32f52d2a, ahead/behind is 0/1, and authorization_phrase_active_for_execution remains false.
+Hard stop gate: remote_sync_and_exact_execution_phrase_activation_required_before_provider_contact
+Files involved: docs/vcp_integration/V0_6_73AB_POST_ACTIVATION_REAL_EXECUTION_GO_NO_GO_REVIEW.md; scripts/validate_v0_6_73ab_post_activation_real_execution_go_no_go_review.js; tests/schema_examples/v0_6_73ab_post_activation_real_execution_go_no_go_review.example.yaml; tests/schema_examples/v0_6_73ab_post_activation_real_execution_go_no_go_review_fail.example.yaml
+Validation state: post-activation GO/NO-GO validator and MVP validation required; no provider/API/image/output/secret/memory action performed.
+Required next safe action: push_activation_record_then_repeat_final_go_no_go_or_activate_exact_execution_phrase_after_remote_sync.
+Rollback or cleanup path: ab review files plus board status sync can be reverted locally; no generated image, output directory, receipt, review handoff, memory, sample, production candidate, remote write, or real execution state was created.
+
 ## BLOCKER-20260525-20 - Active delegate actual but real execution still pending final GO
 
 Status: active_delegate_authorization_actual_real_execution_pending
