@@ -2,6 +2,18 @@
 
 ## Active Blockers
 
+## BLOCKER-20260525-15 - Exact active delegate authorization packet remains draft only
+
+Status: active_draft_not_active
+Detected during: v0_6_73v_exact_active_delegate_authorization_packet_draft
+Task: exact active delegate authorization packet draft
+Reason: The exact active delegate authorization packet shape is drafted, but authorization_status is draft_not_active, delegate_binding_active is false, exact_active_delegate_authorization_present is false, and can_execute_now is false.
+Hard stop gate: draft_packet_is_not_active_delegate_authorization
+Files involved: docs/vcp_integration/V0_6_73V_EXACT_ACTIVE_DELEGATE_AUTHORIZATION_PACKET_DRAFT.md; scripts/validate_v0_6_73v_exact_active_delegate_authorization_packet_draft.js; tests/schema_examples/v0_6_73v_exact_active_delegate_authorization_packet_draft.example.yaml; tests/schema_examples/v0_6_73v_exact_active_delegate_authorization_packet_draft_fail.example.yaml
+Validation state: active delegate packet draft validator required; no push/provider/API/image/output/secret action performed.
+Required next safe action: v0_6_73w_active_delegate_authorization_validator.
+Rollback or cleanup path: packet draft files plus board status sync can be reverted locally; no generated image, output directory, receipt, review handoff, memory, sample, production candidate, remote write, or real execution state was created.
+
 ## BLOCKER-20260525-14 - No-provider harness passes but active delegate remains absent
 
 Status: active_no_provider_harness_passed_active_delegate_absent

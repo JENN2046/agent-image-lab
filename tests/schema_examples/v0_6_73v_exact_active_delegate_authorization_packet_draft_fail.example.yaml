@@ -1,0 +1,14 @@
+phase: v0_6_73v_exact_active_delegate_authorization_packet_draft
+authorization_packet_id: AUTH-ACTIVE-V0-6-73U-BOUND-DELEGATE
+authorization_status: active
+delegate_binding_active: true
+exact_active_delegate_authorization_present: true
+authorization_phrase_active: true
+can_execute_now: true
+draft_decision: GO
+provider_contact_performed: true
+api_call_performed: true
+image_generation_performed: true
+output_write_performed: true
+secret_value_read_performed: true
+v0_6_73_execution_allowed: true

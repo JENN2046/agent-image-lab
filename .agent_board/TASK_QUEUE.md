@@ -1,5 +1,33 @@
 ---
 
+- [x] ID: v0_6_73v_exact_active_delegate_authorization_packet_draft
+      Lane: Green local authorization packet draft only.
+      Status: COMPLETED_VALIDATED_draft_not_active.
+      Source phase: v0_6_73u3_runtime_delegate_binding_test_harness_no_provider.
+      Source status: COMPLETED_VALIDATED_no_provider_harness_passed.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Legacy active next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Goal: Draft the exact active delegate authorization packet without activating it.
+      Authorization packet id: AUTH-ACTIVE-V0-6-73U-BOUND-DELEGATE.
+      Authorization status: draft_not_active.
+      Draft decision: FAIL_CLOSED_DRAFT_NOT_ACTIVE.
+      Preflight passed for real execution: false.
+      push_performed: false.
+      push_status: not_performed_user_deferred_push_local_ahead_5_before_v.
+      provider_contact_performed: false.
+      plugin_call_performed: false.
+      api_call_performed: false.
+      image_generation_performed: false.
+      image_binary_read_performed: false.
+      output_write_performed: false.
+      env_file_content_read_performed: false.
+      secret_value_read_performed: false.
+      v0_6_73_execution_allowed: false.
+      Next: v0_6_73w_active_delegate_authorization_validator.
+
+---
+
 - [x] ID: v0_6_73u3_runtime_delegate_binding_test_harness_no_provider
       Lane: Green local no-provider harness only.
       Status: COMPLETED_VALIDATED_no_provider_harness_passed.

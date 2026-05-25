@@ -1,5 +1,50 @@
 ---
 
+## Current Run State - v0.6.73v Exact Active Delegate Authorization Packet Draft
+
+```text
+phase: v0_6_73v_exact_active_delegate_authorization_packet_draft
+status: COMPLETED_VALIDATED_draft_not_active
+mode: Green local authorization packet draft only; no push and no provider/plugin/API/image/output/secret/memory execution
+source_phase: v0_6_73u3_runtime_delegate_binding_test_harness_no_provider
+source_status: COMPLETED_VALIDATED_no_provider_harness_passed
+workspace: A:\agent-image-lab\agent-image-lab-v0.2
+branch: master
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+legacy_active_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+authorization_packet_id: AUTH-ACTIVE-V0-6-73U-BOUND-DELEGATE
+authorization_status: draft_not_active
+activation_preflight_id: ACT-PREFLIGHT-V0-6-73U
+delegate_binding_active: false
+exact_active_delegate_authorization_present: false
+authorization_phrase_active: false
+can_execute_now: false
+draft_decision: FAIL_CLOSED_DRAFT_NOT_ACTIVE
+preflight_passed_for_real_execution: false
+runner_must_stop_before_provider_contact: true
+push_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+image_binary_read_performed: false
+output_write_performed: false
+receipt_write_performed: false
+review_handoff_write_performed: false
+env_file_content_read_performed: false
+secret_value_read_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+v0_6_73_execution_allowed: false
+push_status: not_performed_user_deferred_push_local_ahead_5_before_v
+next_safe_task: v0_6_73w_active_delegate_authorization_validator
+```
+
+---
+
 ## Current Run State - v0.6.73u3 Runtime Delegate Binding Test Harness No Provider
 
 ```text
