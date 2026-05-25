@@ -2,6 +2,18 @@
 
 ## Active Blockers
 
+## BLOCKER-20260525-11 - v0.6.73 final boundary review remains NO-GO
+
+Status: active_final_no_go
+Detected during: v0_6_73s_final_real_execution_boundary_review
+Task: final real execution boundary review
+Reason: The user-authorized push synced origin/master at ad1f657ad61b1290ffa24c86ef238e792523fdc7 and local status sync commit f6f20e9a2959603bc0b220a2376803b5f6a26c29 recorded that state, but exact active bound delegate authorization is still absent and the exact final authorization phrase remains inactive.
+Hard stop gate: exact_active_delegate_authorization_and_active_final_human_phrase_required_before_real_execution
+Files involved: docs/vcp_integration/V0_6_73S_FINAL_REAL_EXECUTION_BOUNDARY_REVIEW.md; scripts/validate_v0_6_73s_final_real_execution_boundary_review.js; tests/schema_examples/v0_6_73s_final_real_execution_boundary_review.example.yaml
+Validation state: final boundary validator required; no provider/API/image/output/secret action performed.
+Required next safe action: stop_before_real_execution_until_exact_active_delegate_and_exact_human_authorization.
+Rollback or cleanup path: final boundary review files plus board status sync can be reverted locally; no generated image, output directory, receipt, review handoff, memory, sample, production candidate, or real execution state was created.
+
 ## BLOCKER-20260525-10 - v0.6.73 pushed but real execution still disabled
 
 Status: active_remote_synced_execution_disabled
