@@ -2,6 +2,18 @@
 
 ## Active Blockers
 
+## BLOCKER-20260525-20 - Active delegate actual but real execution still pending final GO
+
+Status: active_delegate_authorization_actual_real_execution_pending
+Detected during: v0_6_73aa_active_delegate_authorization_activation_record
+Task: active delegate authorization activation record
+Reason: The active NativeDoubao bound delegate authorization is now recorded as actual, but authorization_phrase_active_for_execution is false, can_execute_now is false, and a fresh post-activation real execution GO/NO-GO review is required before provider contact.
+Hard stop gate: final_go_review_and_pre_provider_contact_preflight_required_before_real_execution
+Files involved: docs/vcp_integration/V0_6_73AA_ACTIVE_DELEGATE_AUTHORIZATION_ACTIVATION_RECORD.md; scripts/validate_v0_6_73aa_active_delegate_authorization_activation_record.js; tests/schema_examples/v0_6_73aa_active_delegate_authorization_activation_record.example.yaml; tests/schema_examples/v0_6_73aa_active_delegate_authorization_activation_record_fail.example.yaml
+Validation state: active delegate activation validator and MVP validation required; no provider/API/image/output/secret/memory action performed.
+Required next safe action: v0_6_73ab_post_activation_real_execution_go_no_go_review.
+Rollback or cleanup path: activation record files plus board status sync can be reverted locally; no generated image, output directory, receipt, review handoff, memory, sample, production candidate, or real execution state was created.
+
 ## BLOCKER-20260525-19 - Real execution remains NO-GO after boundary review
 
 Status: active_final_no_go

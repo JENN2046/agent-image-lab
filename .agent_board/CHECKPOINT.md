@@ -1,5 +1,53 @@
 ---
 
+## Checkpoint - v0.6.73aa Active Delegate Authorization Activation Record
+
+```text
+phase: v0_6_73aa_active_delegate_authorization_activation_record
+status: COMPLETED_VALIDATED_ACTIVE_DELEGATE_AUTHORIZATION_ACTUAL
+source_phase: v0_6_73z_real_execution_authorization_boundary_review
+source_status: COMPLETED_VALIDATED_FINAL_NO_GO
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+legacy_active_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+changed_files_current_task:
+  - docs/vcp_integration/V0_6_73AA_ACTIVE_DELEGATE_AUTHORIZATION_ACTIVATION_RECORD.md
+  - tests/schema_examples/v0_6_73aa_active_delegate_authorization_activation_record.example.yaml
+  - tests/schema_examples/v0_6_73aa_active_delegate_authorization_activation_record_fail.example.yaml
+  - scripts/validate_v0_6_73aa_active_delegate_authorization_activation_record.js
+  - scripts/lib/governance_tooling_maintenance_slice.js
+  - .agent_board/BLOCKERS.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+summary: Recorded the active NativeDoubao bound delegate authorization as actual and provided the exact v0.6.73o phrase. This is still not real execution: final GO review and pre-provider-contact rerun are required, and can_execute_now remains false.
+active_delegate_authorization_actual: true
+exact_active_delegate_authorization_present: true
+authorization_phrase_provided: true
+authorization_phrase_active_for_execution: false
+can_execute_now: false
+real_execution_go_no_go_decision: NO_GO_PENDING_FINAL_REVIEW
+push_allowed: false
+push_status: not_performed_local_activation_record
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+image_binary_read_performed: false
+output_write_performed: false
+env_file_content_read_performed: false
+secret_value_read_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+v0_6_73_execution_allowed: false
+next_safe_task: v0_6_73ab_post_activation_real_execution_go_no_go_review
+```
+
+---
+
 ## Checkpoint - v0.6.73z Real Execution Authorization Boundary Review
 
 ```text

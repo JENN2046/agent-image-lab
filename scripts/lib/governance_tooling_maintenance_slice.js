@@ -2369,6 +2369,18 @@ const EXPECTED_V0_6_73Z_REAL_EXECUTION_AUTHORIZATION_BOUNDARY_REVIEW_SLICE = [
   "tests/schema_examples/v0_6_73z_real_execution_authorization_boundary_review.example.yaml"
 ].sort();
 
+const EXPECTED_V0_6_73AA_ACTIVE_DELEGATE_AUTHORIZATION_ACTIVATION_RECORD_SLICE = [
+  ".agent_board/BLOCKERS.md",
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  "docs/vcp_integration/V0_6_73AA_ACTIVE_DELEGATE_AUTHORIZATION_ACTIVATION_RECORD.md",
+  "scripts/validate_v0_6_73aa_active_delegate_authorization_activation_record.js",
+  "tests/schema_examples/v0_6_73aa_active_delegate_authorization_activation_record.example.yaml",
+  "tests/schema_examples/v0_6_73aa_active_delegate_authorization_activation_record_fail.example.yaml"
+].sort();
+
 const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "governance_tooling_maintenance_slice_v1",
@@ -2929,6 +2941,10 @@ const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "v0_6_73z_real_execution_authorization_boundary_review_slice",
     files: EXPECTED_V0_6_73Z_REAL_EXECUTION_AUTHORIZATION_BOUNDARY_REVIEW_SLICE
+  },
+  {
+    id: "v0_6_73aa_active_delegate_authorization_activation_record_slice",
+    files: EXPECTED_V0_6_73AA_ACTIVE_DELEGATE_AUTHORIZATION_ACTIVATION_RECORD_SLICE
   }
 ];
 
@@ -3004,8 +3020,10 @@ function normalizeChangedFilesForSliceMatching(changedFiles) {
     && sameStringList(withoutHelper, EXPECTED_V0_6_73X_FINAL_LOCAL_READINESS_STOP_LINE_REVIEW_SLICE);
   const isV0_6_73zRegistrationPatch = changedFiles.includes(GOVERNANCE_TOOLING_SLICE_HELPER_FILE)
     && sameStringList(withoutHelper, EXPECTED_V0_6_73Z_REAL_EXECUTION_AUTHORIZATION_BOUNDARY_REVIEW_SLICE);
+  const isV0_6_73aaRegistrationPatch = changedFiles.includes(GOVERNANCE_TOOLING_SLICE_HELPER_FILE)
+    && sameStringList(withoutHelper, EXPECTED_V0_6_73AA_ACTIVE_DELEGATE_AUTHORIZATION_ACTIVATION_RECORD_SLICE);
 
-  return (isPostPushSyncRegistrationPatch || isExecutionBlockedStatusSyncRegistrationPatch || isV0_6_73gRegistrationPatch || isV0_6_73hRegistrationPatch || isV0_6_73iRegistrationPatch || isV0_6_73lRegistrationPatch || isV0_6_73mRegistrationPatch || isV0_6_73nRegistrationPatch || isV0_6_73oRegistrationPatch || isV0_6_73pRegistrationPatch || isV0_6_73qRegistrationPatch || isV0_6_73rRegistrationPatch || isV0_6_73sRegistrationPatch || isV0_6_73tRegistrationPatch || isV0_6_73uRegistrationPatch || isV0_6_73u3RegistrationPatch || isV0_6_73vRegistrationPatch || isV0_6_73wRegistrationPatch || isV0_6_73xRegistrationPatch || isV0_6_73zRegistrationPatch) ? withoutHelper : changedFiles;
+  return (isPostPushSyncRegistrationPatch || isExecutionBlockedStatusSyncRegistrationPatch || isV0_6_73gRegistrationPatch || isV0_6_73hRegistrationPatch || isV0_6_73iRegistrationPatch || isV0_6_73lRegistrationPatch || isV0_6_73mRegistrationPatch || isV0_6_73nRegistrationPatch || isV0_6_73oRegistrationPatch || isV0_6_73pRegistrationPatch || isV0_6_73qRegistrationPatch || isV0_6_73rRegistrationPatch || isV0_6_73sRegistrationPatch || isV0_6_73tRegistrationPatch || isV0_6_73uRegistrationPatch || isV0_6_73u3RegistrationPatch || isV0_6_73vRegistrationPatch || isV0_6_73wRegistrationPatch || isV0_6_73xRegistrationPatch || isV0_6_73zRegistrationPatch || isV0_6_73aaRegistrationPatch) ? withoutHelper : changedFiles;
 }
 
 function fileAllowedInGovernanceToolingSlice(file) {
@@ -3775,6 +3793,19 @@ function governanceToolingMaintenanceSliceSelfCheck() {
       ])?.id === "v0_6_73z_real_execution_authorization_boundary_review_slice"
     },
     {
+      check: "exact_slice_matches_v0_6_73aa_active_delegate_authorization_activation_record",
+      passed: findMatchingGovernanceToolingSlice(
+        EXPECTED_V0_6_73AA_ACTIVE_DELEGATE_AUTHORIZATION_ACTIVATION_RECORD_SLICE
+      )?.id === "v0_6_73aa_active_delegate_authorization_activation_record_slice"
+    },
+    {
+      check: "exact_slice_matches_v0_6_73aa_active_delegate_authorization_activation_record_registration_patch",
+      passed: findMatchingGovernanceToolingSlice([
+        ...EXPECTED_V0_6_73AA_ACTIVE_DELEGATE_AUTHORIZATION_ACTIVATION_RECORD_SLICE,
+        GOVERNANCE_TOOLING_SLICE_HELPER_FILE
+      ])?.id === "v0_6_73aa_active_delegate_authorization_activation_record_slice"
+    },
+    {
       check: "exact_slice_rejects_missing_file",
       passed: findMatchingGovernanceToolingSlice(EXPECTED_GOVERNANCE_TOOLING_MAINTENANCE_SLICE.slice(1)) === null
     },
@@ -3917,6 +3948,7 @@ module.exports = {
   EXPECTED_V0_6_73W_ACTIVE_DELEGATE_AUTHORIZATION_VALIDATOR_SLICE,
   EXPECTED_V0_6_73X_FINAL_LOCAL_READINESS_STOP_LINE_REVIEW_SLICE,
   EXPECTED_V0_6_73Z_REAL_EXECUTION_AUTHORIZATION_BOUNDARY_REVIEW_SLICE,
+  EXPECTED_V0_6_73AA_ACTIVE_DELEGATE_AUTHORIZATION_ACTIVATION_RECORD_SLICE,
   GOVERNANCE_TOOLING_ALLOWED_SLICES,
   buildGovernanceToolingMaintenanceSliceReport,
   fileAllowedInGovernanceToolingSlice,

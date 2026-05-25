@@ -1,5 +1,43 @@
 ---
 
+- [x] ID: v0_6_73aa_active_delegate_authorization_activation_record
+      Lane: Green local authorization activation record only.
+      Status: COMPLETED_VALIDATED_ACTIVE_DELEGATE_AUTHORIZATION_ACTUAL.
+      Source phase: v0_6_73z_real_execution_authorization_boundary_review.
+      Source status: COMPLETED_VALIDATED_FINAL_NO_GO.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Legacy active next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Goal: Provide the exact v0.6.73o phrase and record active delegate authorization as actual without executing real generation.
+      Authorization status: active_exact_human_authorized.
+      Active delegate authorization actual: true.
+      Exact active delegate authorization present: true.
+      Delegate binding active: true.
+      Authorization phrase provided: true.
+      Authorization phrase active for execution: false.
+      Final GO review required after activation: true.
+      Pre-provider-contact preflight rerun required: true.
+      Can execute now: false.
+      Real execution go/no-go decision: NO_GO_PENDING_FINAL_REVIEW.
+      push_allowed: false.
+      push_status: not_performed_local_activation_record.
+      provider_contact_performed: false.
+      plugin_call_performed: false.
+      api_call_performed: false.
+      image_generation_performed: false.
+      image_binary_read_performed: false.
+      output_write_performed: false.
+      env_file_content_read_performed: false.
+      secret_value_read_performed: false.
+      accepted_samples_write_performed: false.
+      production_candidate_write_performed: false.
+      DailyNote_write_performed: false.
+      VCP_memory_write_performed: false.
+      v0_6_73_execution_allowed: false.
+      Next: v0_6_73ab_post_activation_real_execution_go_no_go_review.
+
+---
+
 - [x] ID: v0_6_73z_real_execution_authorization_boundary_review
       Lane: Green local boundary review only.
       Status: COMPLETED_VALIDATED_FINAL_NO_GO.

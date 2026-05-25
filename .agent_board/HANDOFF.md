@@ -1,5 +1,49 @@
 ---
 
+## Current Handoff Update - v0.6.73aa Active Delegate Authorization Activation Record
+
+```text
+phase: v0_6_73aa_active_delegate_authorization_activation_record
+status: COMPLETED_VALIDATED_ACTIVE_DELEGATE_AUTHORIZATION_ACTUAL
+mode: Green local authorization activation record only; no provider/plugin/API/image/output/secret/memory execution
+source_phase: v0_6_73z_real_execution_authorization_boundary_review
+source_status: COMPLETED_VALIDATED_FINAL_NO_GO
+workspace: A:\agent-image-lab\agent-image-lab-v0.2
+branch: master
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+legacy_active_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+authorization_status: active_exact_human_authorized
+active_delegate_authorization_actual: true
+exact_active_delegate_authorization_present: true
+delegate_binding_active: true
+authorization_phrase_provided: true
+authorization_phrase_active_for_execution: false
+final_go_no_go_review_required_after_activation: true
+pre_provider_contact_preflight_rerun_required: true
+can_execute_now: false
+real_execution_go_no_go_decision: NO_GO_PENDING_FINAL_REVIEW
+required_next_phase: v0_6_73ab_post_activation_real_execution_go_no_go_review
+push_allowed: false
+push_status: not_performed_local_activation_record
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+image_binary_read_performed: false
+output_write_performed: false
+env_file_content_read_performed: false
+secret_value_read_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+v0_6_73_execution_allowed: false
+next_safe_task: v0_6_73ab_post_activation_real_execution_go_no_go_review
+```
+
+---
+
 ## Current Handoff Update - v0.6.73z Real Execution Authorization Boundary Review
 
 ```text
