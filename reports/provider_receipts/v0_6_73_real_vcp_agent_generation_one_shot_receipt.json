@@ -2,7 +2,7 @@
   "receipt_schema": "exact_a5_provider_execution_activation_receipt.v0",
   "authorization_id": "AUTH-DRAFT-NATIVE-DOUBAO-ONE-SHOT-20260526-001",
   "activation_phrase_matched": true,
-  "execution_status": "BLOCKED_SECRETLESS_RUNTIME_NOT_CALLABLE",
+  "execution_status": "BLOCKED_PROVIDER_RUNTIME_DELEGATE_FAILED",
   "execution_completed": false,
   "execution_blocked_fail_closed": true,
   "selected_provider_id": "NativeDoubaoImage",
@@ -22,14 +22,14 @@
     "retry_count": 0
   },
   "counts": {
-    "provider_calls_used": 0,
-    "plugin_calls_used": 0,
-    "api_calls_used": 0,
+    "provider_calls_used": 1,
+    "plugin_calls_used": 1,
+    "api_calls_used": 1,
     "images_created": 0,
     "output_files_written": 0
   },
   "runner_result": {
-    "status": "BLOCKED_SECRETLESS_RUNTIME_NOT_CALLABLE",
+    "status": "BLOCKED_PROVIDER_RUNTIME_DELEGATE_FAILED",
     "runner": "run_native_doubao_image_generation",
     "plugin_id": "NativeDoubaoImage",
     "runner_case_id": null,
@@ -37,9 +37,9 @@
     "provider_binding_ref_is_secret": false,
     "required_runtime_owner": "VCPToolBox_or_owner_authorized_provider_runtime",
     "required_runtime_contract": "secretless_provider_runtime_function",
-    "blocker": "secretless_provider_runtime_not_callable",
+    "blocker": "step[0]: exception: {\"plugin_error\":\"DoubaoGen Plugin Error: The model or endpoint doubao-seedream-3-0-t2i-250415 does not exist or you do not have access to it. Request id: 021779803598494ba98f7c244917cb799ea2ccded904c5c30cd52\",\"timestamp\":\"2026-05-26T21:53:18.392+08:00\"}",
     "api_call_performed": false,
-    "plugin_call_performed": false,
+    "plugin_call_performed": true,
     "provider_contact_performed": false,
     "image_generation_performed": false,
     "image_created": false,
@@ -53,9 +53,9 @@
     "human_review_required_now": false
   },
   "side_effect_flags": {
-    "provider_contact_performed": false,
-    "plugin_call_performed": false,
-    "api_call_performed": false,
+    "provider_contact_performed": true,
+    "plugin_call_performed": true,
+    "api_call_performed": true,
     "image_generation_performed": false,
     "env_file_content_read_performed": false,
     "secret_value_read_performed": false,

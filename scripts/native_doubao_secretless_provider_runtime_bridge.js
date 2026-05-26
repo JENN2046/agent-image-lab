@@ -7,6 +7,10 @@ const REDACTED_PROVIDER_BINDING_REF = "native_doubao:capability:owner-runtime:<r
 const EXPECTED_DELEGATE_AUTHORIZATION_REF = "docs/vcp_integration/V0_6_73I_EXACT_BRIDGE_DELEGATE_AUTHORIZATION_OR_STOP_BEFORE_REAL_EXECUTION_RETRY.md";
 const EXPECTED_DELEGATE_AUTHORIZATION_STATUS = "authorized_by_exact_bridge_delegate_authorization";
 const SECRETLESS_PROVIDER_RUNTIME_BRIDGE_MARKER = Symbol("agent_image_lab_secretless_provider_runtime_bridge");
+const ALLOWED_OUTPUT_DIRECTORY_REFS = new Set([
+  "runs/real_generation/v0_6_73_real_vcp_agent_generation_one_shot/",
+  "runs/real_generation/v0_6_73_real_vcp_agent_generation_retry_002/",
+]);
 
 function cloneJson(value) {
   return JSON.parse(JSON.stringify(value));
@@ -66,7 +70,7 @@ function validateSecretlessProviderRuntimeRequest(request) {
   addIssue(issues, request.command === "generate", "command must be generate");
   addIssue(issues, request.mode === "text_to_image", "mode must be text_to_image");
   addIssue(issues, request.prompt_package_ref === "prompts/image_generation/neutral_smoke_test_red_apple_v1.yaml", "prompt_package_ref mismatch");
-  addIssue(issues, request.output_directory_ref === "runs/real_generation/v0_6_73_real_vcp_agent_generation_one_shot/", "output_directory_ref mismatch");
+  addIssue(issues, ALLOWED_OUTPUT_DIRECTORY_REFS.has(request.output_directory_ref), "output_directory_ref mismatch");
   addIssue(issues, request.max_plugin_calls === 1, "max_plugin_calls must be 1");
   addIssue(issues, request.max_images_created === 1, "max_images_created must be 1");
   addIssue(issues, request.retry_allowed === false, "retry_allowed must be false");

@@ -1,7 +1,7 @@
 {
   "review_handoff_schema": "exact_a5_provider_execution_review_handoff.v0",
   "authorization_id": "AUTH-DRAFT-NATIVE-DOUBAO-ONE-SHOT-20260526-001",
-  "execution_status": "BLOCKED_SECRETLESS_RUNTIME_NOT_CALLABLE",
+  "execution_status": "BLOCKED_PROVIDER_RUNTIME_DELEGATE_FAILED",
   "review_status": "blocked_no_image_to_review",
   "provider_receipt_ref": "reports/provider_receipts/v0_6_73_real_vcp_agent_generation_one_shot_receipt.json",
   "output_directory_ref": "runs/real_generation/v0_6_73_real_vcp_agent_generation_one_shot/",
@@ -11,9 +11,9 @@
   "commercial_delivery_ready": false,
   "memory_suitability": "deferred",
   "side_effect_flags": {
-    "provider_contact_performed": false,
-    "plugin_call_performed": false,
-    "api_call_performed": false,
+    "provider_contact_performed": true,
+    "plugin_call_performed": true,
+    "api_call_performed": true,
     "image_generation_performed": false,
     "env_file_content_read_performed": false,
     "secret_value_read_performed": false,
