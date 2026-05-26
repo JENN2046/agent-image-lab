@@ -1,5 +1,32 @@
 ---
 
+- [x] ID: v0_6_74_pro_review_reality_triage
+      Lane: Green local review triage and status sync only.
+      Status: COMPLETED_VALIDATED_WITH_CLEAN_COMMIT_RERUN_REQUIRED.
+      Goal: Convert the external Pro review into repository-verified triage without treating it as repository truth by itself.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Legacy active next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Local merge commit: dc26eba.
+      Remote head included: 319ee3e.
+      Triage doc: docs/PRO_REVIEW_REALITY_TRIAGE.md.
+      Current verified updates: validate:mvp is not empty and passed after sync; provider output hardening, Review Console static/mock boundary, and autopilot fixture-selector limits remain real risks.
+      provider_contact_performed: false.
+      plugin_call_performed: false.
+      api_call_performed: false.
+      image_generation_performed: false.
+      image_binary_read_performed: false.
+      output_write_performed: false.
+      env_file_content_read_performed: false.
+      secret_value_read_performed: false.
+      DailyNote_write_performed: false.
+      VCP_memory_write_performed: false.
+      push_status: not_performed.
+      Validation run: git diff --check passed with CRLF normalization warnings only; node scripts/validate_autopilot_agent_board_resume_compaction_guard.js passed; npm run validate:mvp failed before commit because readiness validators require clean committed state.
+      Next: prioritize_provider_output_safety_hardening.
+
+---
+
 - [x] ID: v0_6_73ah_current_head_final_pre_provider_go_no_go
       Lane: Green local current-head final pre-provider GO/NO-GO only.
       Status: COMPLETED_VALIDATED_CURRENT_HEAD_FINAL_PRE_PROVIDER_GO.

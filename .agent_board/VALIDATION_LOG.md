@@ -1,5 +1,34 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260526-v0.6.74-PRO-REVIEW-REALITY-TRIAGE
+
+Task: v0.6.74 Pro review reality triage
+Status: pre_commit_partial_pass_pending_clean_commit_mvp_rerun
+Receipt:
+  - lane: Green
+  - phase: v0_6_74_pro_review_reality_triage
+  - source: external Pro review supplied by user in chat
+  - local_merge_commit_before_triage: dc26eba
+  - remote_head_included: 319ee3e
+  - provider_contact_performed: false
+  - plugin_call_performed: false
+  - api_call_performed: false
+  - image_generation_performed: false
+  - output_write_performed: false
+  - secret_value_read_performed: false
+  - DailyNote_write_performed: false
+  - VCP_memory_write_performed: false
+  - push_tag_release_deploy_performed: false
+Commands run:
+  - git diff --check: passed with CRLF normalization warnings only
+  - node scripts/validate_autopilot_agent_board_resume_compaction_guard.js: passed
+  - npm run validate:mvp: failed before commit because readiness validators require a clean committed state
+Observed result:
+  - validate:mvp is not empty in the current repository and passed immediately after the merge sync.
+  - Pro review claims about provider output hardening gaps, Review Console static/mock boundary, and autopilot fixture-selector limits remain valid risks.
+Next:
+  - create exact-file local triage commit, then rerun npm run validate:mvp from a clean committed state
+
 ## VALIDATION-20260525-MVP-LEGACY-DEBT-VALIDATOR-REPAIR
 
 Task: MVP legacy debt validator repair
