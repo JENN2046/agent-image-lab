@@ -16,6 +16,7 @@
     "validate:review-console-static": "node scripts/validate_capsule_static_product_smoke_review_console_snapshot.js && node scripts/validate_review_console_static_mock_boundary.js",
     "preview:review-console": "node scripts/serve_review_console_static.js",
     "validate:public-disclosure": "node scripts/validate_public_repo_disclosure_audit.js",
+    "validate:runtime-kernel-gap": "node scripts/validate_runtime_kernel_backend_gap_map.js",
     "validate:runs-stewardship": "node scripts/validate_runs_backup_manifest_schema.js && node scripts/validate_runs_restore_report_dry_run_schema.js"
   },
   "dependencies": {

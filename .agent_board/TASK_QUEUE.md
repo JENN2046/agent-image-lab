@@ -17963,6 +17963,32 @@ recommended_next: asset_hash_dimensions_verification_A5_requires_separate_author
       Validation: node --check scripts/validate_public_repo_disclosure_audit.js passed; node scripts/validate_public_repo_disclosure_audit.js passed; npm run validate:public-disclosure passed; rg disclosure scan no matches.
       Recommended next: exact-file local commit, post-commit validate:mvp rerun, then assess runtime kernel/backend planning boundary.
 ---
+- [x] ID: v0_6_86_runtime_kernel_backend_gap_map
+      Title: Runtime Kernel Backend Gap Map
+      Reason: The larger runtime/backend work must start from a verified gap map instead of broad implementation.
+      Lane: Green.
+      Status: completed_targeted_validated_pending_local_commit.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Scope: local doc/schema/fixture/validator/status update only.
+      Changed: docs/V0_6_86_RUNTIME_KERNEL_BACKEND_GAP_MAP.md; schemas/runtime_kernel_backend_gap_map.schema.yaml; tests/schema_examples/runtime_kernel_backend_gap_map.example.json; tests/schema_examples/runtime_kernel_backend_gap_map_fail.example.json; scripts/validate_runtime_kernel_backend_gap_map.js; package.json; scripts/validate_mvp.ps1; .agent_board resume surfaces.
+      runtime_gap_count: 7.
+      backend_gap_count: 5.
+      implementation_started: false.
+      recommended_next_phase: runtime_contract_spec_before_backend_or_kernel_code.
+      provider_contact_performed: false.
+      plugin_call_performed: false.
+      api_call_performed: false.
+      image_generation_performed: false.
+      secret_value_read_performed: false.
+      DailyNote_write_performed: false.
+      VCP_memory_write_performed: false.
+      dependency_change_performed: false.
+      push_allowed: false.
+      push_performed: false.
+      Validation: node --check scripts/validate_runtime_kernel_backend_gap_map.js passed; node scripts/validate_runtime_kernel_backend_gap_map.js passed; npm run validate:runtime-kernel-gap passed; npm run validate:mvp failed pre-commit dirty exact-file readiness only.
+      Recommended next: exact-file local commit, post-commit validate:mvp rerun, then decide whether to start runtime contract spec as a new scoped phase.
+---
 
 - [x] ID: v0_6_73ai_real_vcp_agent_generation_execution_one_shot_attempt
       Title: Enter Real VCP Agent Generation Execution One-Shot

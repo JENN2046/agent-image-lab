@@ -1,0 +1,58 @@
+# runtime_kernel_backend_gap_map.schema.yaml
+# Planning contract only. This schema does not implement or authorize runtime/backend execution.
+
+runtime_kernel_backend_gap_map:
+  type: object
+  required:
+    - version
+    - phase
+    - status
+    - execution_mode
+    - current_capabilities
+    - missing_runtime_kernel_components
+    - missing_backend_components
+    - implementation_boundary
+    - validation_required
+    - guard
+    - recommended_next_phase
+  fields:
+    version: string
+    phase: v0_6_86_runtime_kernel_backend_gap_map
+    status: completed_gap_map_only
+    execution_mode: local_preflight_gap_map_only
+    current_capabilities:
+      type: array
+      items: string
+    missing_runtime_kernel_components:
+      type: array
+      items: string
+    missing_backend_components:
+      type: array
+      items: string
+    implementation_boundary:
+      type: object
+      required:
+        - runtime_kernel_code_created
+        - backend_endpoint_created
+        - ipc_preload_renderer_integration_created
+        - database_or_persistent_service_created
+        - provider_execution_performed
+    validation_required:
+      type: array
+      items: string
+    guard:
+      type: object
+      required:
+        - gap_map_only
+        - real_runtime_kernel_implemented_now
+        - real_backend_implemented_now
+        - provider_contact_performed
+        - plugin_call_performed
+        - api_call_performed
+        - image_generation_performed
+        - secret_value_read_performed
+        - DailyNote_write_performed
+        - VCP_memory_write_performed
+        - dependency_change_performed
+        - push_tag_release_deploy_performed
+    recommended_next_phase: string

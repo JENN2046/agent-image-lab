@@ -163,6 +163,7 @@ $requiredFiles = @(
   'scripts/validate_review_console_blocker_arbiter_boundary_scan.js',
   'scripts/validate_review_console_static_mock_boundary.js',
   'scripts/validate_public_repo_disclosure_audit.js',
+  'scripts/validate_runtime_kernel_backend_gap_map.js',
   'scripts/validate_v5_local_sync_readiness.js',
   'scripts/validate_v5_post_commit_reconciliation.js',
   'scripts/validate_v5_index_consistency.js',
@@ -6235,6 +6236,28 @@ if (-not $node) {
     }
     if ($publicRepoDisclosureAudit.side_effects.secret_value_read_performed -ne $false -or $publicRepoDisclosureAudit.side_effects.provider_contact_performed -ne $false -or $publicRepoDisclosureAudit.side_effects.plugin_call_performed -ne $false -or $publicRepoDisclosureAudit.side_effects.api_call_performed -ne $false -or $publicRepoDisclosureAudit.side_effects.file_write_performed -ne $false -or $publicRepoDisclosureAudit.side_effects.push_tag_release_deploy_performed -ne $false) {
       Add-Failure "Public repo disclosure audit must remain local read-only with no secret, provider, API, write, or remote side effects"
+    }
+  }
+
+  $runtimeKernelBackendGapMapOutput = & node (Join-Path $Root 'scripts/validate_runtime_kernel_backend_gap_map.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Runtime kernel/backend gap map validation exited with failure"
+  } else {
+    $runtimeKernelBackendGapMap = ($runtimeKernelBackendGapMapOutput -join "`n") | ConvertFrom-Json
+    if ($runtimeKernelBackendGapMap.passed -ne $true) {
+      Add-Failure "Runtime kernel/backend gap map validation must report passed true"
+    }
+    if ($runtimeKernelBackendGapMap.runtime_gap_count -ne 7 -or $runtimeKernelBackendGapMap.backend_gap_count -ne 5) {
+      Add-Failure "Runtime kernel/backend gap map must preserve the required runtime and backend gap counts"
+    }
+    if ($runtimeKernelBackendGapMap.implementation_started -ne $false) {
+      Add-Failure "Runtime kernel/backend gap map must not start runtime/backend implementation"
+    }
+    if ($runtimeKernelBackendGapMap.recommended_next_phase -ne 'runtime_contract_spec_before_backend_or_kernel_code') {
+      Add-Failure "Runtime kernel/backend gap map must recommend contract spec before code"
+    }
+    if ($runtimeKernelBackendGapMap.side_effects.provider_contact_performed -ne $false -or $runtimeKernelBackendGapMap.side_effects.plugin_call_performed -ne $false -or $runtimeKernelBackendGapMap.side_effects.api_call_performed -ne $false -or $runtimeKernelBackendGapMap.side_effects.image_generation_performed -ne $false -or $runtimeKernelBackendGapMap.side_effects.secret_value_read_performed -ne $false -or $runtimeKernelBackendGapMap.side_effects.DailyNote_write_performed -ne $false -or $runtimeKernelBackendGapMap.side_effects.VCP_memory_write_performed -ne $false -or $runtimeKernelBackendGapMap.side_effects.dependency_change_performed -ne $false -or $runtimeKernelBackendGapMap.side_effects.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "Runtime kernel/backend gap map validation must keep every side-effect flag false"
     }
   }
 

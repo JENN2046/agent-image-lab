@@ -1,0 +1,85 @@
+{
+  "runtime_kernel_backend_gap_map": {
+    "version": "v1",
+    "phase": "v0_6_86_runtime_kernel_backend_gap_map",
+    "status": "completed_gap_map_only",
+    "execution_mode": "local_preflight_gap_map_only",
+    "current_capabilities": [
+      {
+        "capability_id": "preview_capsule_tooling",
+        "status": "local_artifact_tooling",
+        "evidence_ref": "scripts/create_preview_capsule.js",
+        "runtime_maturity_claim_allowed": false
+      },
+      {
+        "capability_id": "native_doubao_one_shot_runner",
+        "status": "guarded_one_shot_provider_path",
+        "evidence_ref": "scripts/run_native_doubao_image_generation.js",
+        "runtime_maturity_claim_allowed": false
+      },
+      {
+        "capability_id": "review_console_static_prototype",
+        "status": "static_mock_in_memory_only",
+        "evidence_ref": "review_console/static_prototype/README.md",
+        "runtime_maturity_claim_allowed": false
+      },
+      {
+        "capability_id": "local_validation_gates",
+        "status": "local_validator_suite",
+        "evidence_ref": "scripts/validate_mvp.ps1",
+        "runtime_maturity_claim_allowed": false
+      }
+    ],
+    "missing_runtime_kernel_components": [
+      "task_intake",
+      "policy_gate",
+      "executor_interface",
+      "artifact_persistence",
+      "review_gate",
+      "state_transition",
+      "audit_record"
+    ],
+    "missing_backend_components": [
+      "read_only_case_api",
+      "artifact_metadata_api",
+      "review_decision_persistence_api",
+      "auth_session_boundary",
+      "audit_log_store"
+    ],
+    "implementation_boundary": {
+      "runtime_kernel_code_created": false,
+      "backend_endpoint_created": false,
+      "ipc_preload_renderer_integration_created": false,
+      "database_or_persistent_service_created": false,
+      "provider_execution_performed": false,
+      "runtime_contract_spec_required_before_code": true,
+      "backend_contract_spec_required_before_code": true
+    },
+    "validation_required": [
+      "node --check scripts/validate_runtime_kernel_backend_gap_map.js",
+      "node scripts/validate_runtime_kernel_backend_gap_map.js",
+      "npm run validate:runtime-kernel-gap",
+      "npm run validate:mvp"
+    ],
+    "guard": {
+      "gap_map_only": true,
+      "real_runtime_kernel_implemented_now": false,
+      "real_backend_implemented_now": false,
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "image_generation_performed": false,
+      "output_write_performed": false,
+      "secret_value_read_performed": false,
+      "env_file_content_read_performed": false,
+      "accepted_samples_write_performed": false,
+      "failure_samples_write_performed": false,
+      "production_candidate_write_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "dependency_change_performed": false,
+      "push_tag_release_deploy_performed": false
+    },
+    "recommended_next_phase": "runtime_contract_spec_before_backend_or_kernel_code"
+  }
+}

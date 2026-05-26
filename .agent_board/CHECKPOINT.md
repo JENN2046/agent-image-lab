@@ -34041,6 +34041,47 @@ Next: exact-file local commit, post-commit validate:mvp rerun, then assess runti
 
 ---
 
+## Checkpoint - v0.6.86 Runtime Kernel Backend Gap Map
+
+Status: completed_targeted_validated_pending_local_commit
+Active current phase: v0_3_3_first_live_generation_pilot
+Resume guard source phase: v0_3_2_live_candidate_action_packet
+
+Changed:
+- docs/V0_6_86_RUNTIME_KERNEL_BACKEND_GAP_MAP.md
+- schemas/runtime_kernel_backend_gap_map.schema.yaml
+- tests/schema_examples/runtime_kernel_backend_gap_map.example.json
+- tests/schema_examples/runtime_kernel_backend_gap_map_fail.example.json
+- scripts/validate_runtime_kernel_backend_gap_map.js
+- package.json
+- scripts/validate_mvp.ps1
+- .agent_board resume surfaces
+
+Boundary:
+- Green local preflight gap map only.
+- runtime_gap_count: 7
+- backend_gap_count: 5
+- implementation_started: false
+- provider_contact_performed: false
+- plugin_call_performed: false
+- api_call_performed: false
+- image_generation_performed: false
+- secret_value_read_performed: false
+- DailyNote_write_performed: false
+- VCP_memory_write_performed: false
+- dependency_change_performed: false
+- push_performed: false
+
+Validation:
+- node --check scripts/validate_runtime_kernel_backend_gap_map.js: passed
+- node scripts/validate_runtime_kernel_backend_gap_map.js: passed
+- npm run validate:runtime-kernel-gap: passed
+- npm run validate:mvp: failed_pre_commit_dirty_exact_file_readiness_only
+
+Next: exact-file local commit, post-commit validate:mvp rerun, then decide whether to start runtime contract spec as a new scoped phase.
+
+---
+
 ## Checkpoint - v0.6.73ai Real VCP Agent Generation Execution One-Shot Attempt
 
 Status: BLOCKED_VALIDATED_SECRETLESS_RUNTIME_NOT_CALLABLE
