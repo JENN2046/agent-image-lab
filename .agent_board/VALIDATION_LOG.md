@@ -1,5 +1,36 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260526-v0.6.88-VALIDATION-GATE-TAXONOMY
+
+Task: v0.6.88 Validation gate taxonomy
+Status: partial_validated_pending_clean_state
+Receipt:
+  - lane: Green
+  - phase: v0_6_88_validation_gate_taxonomy
+  - provider_contact_performed: false
+  - plugin_call_performed: false
+  - api_call_performed: false
+  - image_generation_performed: false
+  - image_binary_read_performed: false
+  - output_write_performed: false
+  - env_file_content_read_performed: false
+  - secret_value_read_performed: false
+  - DailyNote_write_performed: false
+  - VCP_memory_write_performed: false
+  - push_tag_release_deploy_performed: false
+Commands run:
+  - node --check scripts/validate_smoke.js: passed
+  - node --check scripts/validate_mvp_core.js: passed
+  - node --check scripts/validate_governance_regression.js: passed
+  - npm run validate:smoke: passed
+  - npm run validate:mvp: passed
+  - npm run validate:capsule-regression: failed before local commit because readiness validators require a clean committed state
+  - npm run validate:governance: failed before local commit because readiness validators require a clean committed state
+Observed result:
+  - Validation script names now map to smoke, MVP core, capsule regression, governance, and aggregate layers.
+Next:
+  - exact-file local commit, then rerun capsule/governance/all on clean state
+
 ## VALIDATION-20260526-v0.6.83-NATIVE-DOUBAO-RUNNER-CASE-REGISTRY
 
 Task: v0.6.83 NativeDoubao runner case registry

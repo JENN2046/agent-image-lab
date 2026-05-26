@@ -1,5 +1,43 @@
 ---
 
+## Checkpoint - v0.6.88 Validation Gate Taxonomy
+
+```text
+phase: v0_6_88_validation_gate_taxonomy
+status: in_progress_pending_clean_state_validation
+result: PARTIAL_VALIDATED
+mode: Green local validation taxonomy refactor only
+summary: Added Node smoke and MVP core gates, copied legacy MVP semantics to governance, copied capsule product-core gate to capsule regression, added aggregate validation command, and documented the gate taxonomy.
+changed_files_current_task:
+  - package.json
+  - scripts/validate_smoke.js
+  - scripts/validate_mvp_core.js
+  - scripts/validate_governance.ps1
+  - scripts/validate_capsule_product_core_regression.ps1
+  - scripts/validate_governance_regression.js
+  - docs/VALIDATION_GATE_TAXONOMY.md
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+image_binary_read_performed: false
+output_write_performed: false
+env_file_content_read_performed: false
+secret_value_read_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+push_status: not_performed
+validation_run:
+  - node --check scripts/validate_smoke.js: passed
+  - node --check scripts/validate_mvp_core.js: passed
+  - node --check scripts/validate_governance_regression.js: passed
+  - npm run validate:smoke: passed
+  - npm run validate:mvp: passed
+  - npm run validate:capsule-regression: failed before local commit because readiness validators require a clean committed state
+  - npm run validate:governance: failed before local commit because readiness validators require a clean committed state
+next: exact-file local commit, then rerun capsule/governance/all on clean state
+```
+
 ## Checkpoint - v0.6.87 Review Findings Contract Fix
 
 ```text
