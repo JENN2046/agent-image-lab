@@ -1,5 +1,57 @@
 ---
 
+## Checkpoint - v0.6.95 Codex Memory Candidate Adapter Mapping No Write
+
+```text
+phase: v0_6_95_codex_memory_candidate_adapter_mapping_no_write
+status: completed_validated_codex_memory_candidate_adapter_mapping_no_write
+result: COMPLETED_VALIDATED
+mode: A0/A4 Green local no-write adapter mapping design
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+legacy_active_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+source_phase: v0_6_94_memory_writer_candidate_surface_reconciliation_no_write
+summary: Mapped vcp_codex_memory.record_memory as a candidate future Codex-memory summary side only. The checkpoint records missing adapter layers needed before any DailyNote/VCP memory route can execute: DailyNote canonical entry adapter, VCP exact target adapter, two-phase ordering, post-write DailyNote target/hash proof, immutable VCP memory receipt, and exact cleanup plan.
+changed_files_current_task:
+  - docs/V0_6_95_CODEX_MEMORY_CANDIDATE_ADAPTER_MAPPING_NO_WRITE.md
+  - reports/visual_asset_eval_dry_run/v0_6_95_codex_memory_candidate_adapter_mapping_no_write.json
+  - reports/memory_write_receipts/v0_3_3_exact_new_trial_003_shot_2_codex_memory_candidate_adapter_mapping_no_write.json
+  - tests/schema_examples/codex_memory_candidate_adapter_mapping_no_write.example.json
+  - tests/schema_examples/codex_memory_candidate_adapter_mapping_no_write_fail.example.json
+  - scripts/validate_codex_memory_candidate_adapter_mapping_no_write.js
+record_memory_called: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+image_binary_read_performed: false
+env_file_content_read_performed: false
+secret_value_read_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+Codex_memory_write_performed: false
+production_candidate_created: false
+push_status: not_performed
+validation_run:
+  - node --check scripts/validate_codex_memory_candidate_adapter_mapping_no_write.js: passed
+  - node scripts/validate_codex_memory_candidate_adapter_mapping_no_write.js: passed with 10/10 negative cases caught
+  - git diff --check: passed
+go_no_go:
+  adapter_mapping_created: true
+  adapter_packet_schema_created: false
+  adapter_can_execute_now: false
+  record_memory_selected_as_writer_now: false
+  memory_write_can_execute_now: false
+  next_auto_step_allowed: false
+pause_boundaries:
+  - DailyNote/VCP/Codex memory write remains paused until exact adapter packet schema and writer target packet validate
+  - A5/provider/image generation remains paused
+  - production candidate write remains paused
+  - push/tag/release/deploy/PR creation remains paused until explicit owner authorization
+  - secret/.env reads or edits remain paused
+next: draft_no_write_memory_adapter_packet_schema_or_pause
+```
+
 ## Checkpoint - v0.6.94 Memory Writer Candidate Surface Reconciliation No Write
 
 ```text

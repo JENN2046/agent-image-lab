@@ -1,5 +1,44 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260526-v0.6.95-CODEX-MEMORY-CANDIDATE-ADAPTER-MAPPING-NO-WRITE
+
+Task: v0.6.95 Codex memory candidate adapter mapping no write
+Status: completed_validated
+Receipt:
+  - lane: A0/A4 Green local no-write adapter mapping design
+  - phase: v0_6_95_codex_memory_candidate_adapter_mapping_no_write
+  - source_phase: v0_6_94_memory_writer_candidate_surface_reconciliation_no_write
+  - record_memory_called: false
+  - provider_contact_performed: false
+  - plugin_call_performed: false
+  - api_call_performed: false
+  - image_generation_performed: false
+  - image_binary_read_performed: false
+  - env_file_content_read_performed: false
+  - secret_value_read_performed: false
+  - DailyNote_write_performed: false
+  - VCP_memory_write_performed: false
+  - Codex_memory_write_performed: false
+  - production_candidate_created: false
+  - push_status: not_performed
+Validation:
+  - node --check scripts/validate_codex_memory_candidate_adapter_mapping_no_write.js: passed
+  - node scripts/validate_codex_memory_candidate_adapter_mapping_no_write.js: passed
+  - git diff --check: passed
+Validator result:
+  - negative_case_count: 10
+  - caught_negative_case_count: 10
+  - all_negative_cases_caught: true
+Go/No-Go:
+  - adapter_mapping_created: true
+  - adapter_packet_schema_created: false
+  - adapter_can_execute_now: false
+  - record_memory_selected_as_writer_now: false
+  - memory_write_can_execute_now: false
+  - next_auto_step_allowed: false
+Recommended next:
+  - draft_no_write_memory_adapter_packet_schema_or_pause
+
 ## VALIDATION-20260526-v0.6.94-MEMORY-WRITER-CANDIDATE-SURFACE-RECONCILIATION-NO-WRITE
 
 Task: v0.6.94 Memory writer candidate surface reconciliation no write

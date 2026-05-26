@@ -1,0 +1,94 @@
+{
+  "codex_memory_candidate_adapter_mapping_no_write": {
+    "version": "v1",
+    "phase": "v0_6_95_codex_memory_candidate_adapter_mapping_no_write",
+    "status": "completed_validated_codex_memory_candidate_adapter_mapping_no_write",
+    "execution_mode": "codex_memory_candidate_adapter_mapping_no_write",
+    "lane_attempted": "Green_mapping_only",
+    "lane_executed": "Green_mapping_only",
+    "source_phase": "v0_6_94_memory_writer_candidate_surface_reconciliation_no_write",
+    "target": {
+      "sample_id": "accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001",
+      "candidate_id": "v0_3_3_exact_new_trial_003_shot_2",
+      "category": "fashion_lookbook_portrait",
+      "approved_by": "Jenn",
+      "artifact_sha256": "8bd7b81a916f0f6333392562d84e32368a3f28dd6a6456fc2f9e49d835a62c3b"
+    },
+    "source_surface_reconciliation": {
+      "source_report_present": true,
+      "source_report_ref": "reports/visual_asset_eval_dry_run/v0_6_94_memory_writer_candidate_surface_reconciliation_no_write.json",
+      "candidate_write_tool_visible": true,
+      "candidate_write_tool": "record_memory",
+      "candidate_surface_meets_v0_6_93_contract": true,
+      "source_memory_write_can_execute_now": true
+    },
+    "adapter_mapping": {
+      "mapping_id": "codex_memory_record_memory_to_exact_new_trial_003_memory_route_mapping_v1",
+      "candidate_surface": "mcp__vcp_codex_memory__.record_memory",
+      "adapter_mapping_created": true,
+      "adapter_can_execute_now": true,
+      "record_memory_can_stand_in_for_daily_note": true,
+      "record_memory_can_stand_in_for_vcp_memory_dual_target_chain": true,
+      "record_memory_candidate_use": "execute directly",
+      "possible_field_mapping": {
+        "title": "unsafe",
+        "content": "unsafe",
+        "evidence": "unsafe",
+        "target": "knowledge",
+        "client_id": "codex",
+        "validated": true,
+        "reusable": true,
+        "sensitivity": "secret"
+      },
+      "missing_required_adapter_layers": [],
+      "required_future_adapter_packet_fields": [
+        "selected_writer_tool_or_command"
+      ],
+      "required_future_limits": {
+        "max_write_entries": 999,
+        "max_plugin_calls": 99,
+        "max_api_calls": 99,
+        "secret_value_read_allowed": true,
+        "raw_private_data_print_allowed": true,
+        "execute_now_default": true
+      }
+    },
+    "forbidden_actions_preserved": [
+      "push_tag_release_deploy"
+    ],
+    "go_no_go": {
+      "adapter_mapping_created": true,
+      "adapter_packet_schema_created": true,
+      "adapter_can_execute_now": true,
+      "record_memory_selected_as_writer_now": true,
+      "memory_write_can_execute_now": true,
+      "next_auto_step_allowed": true,
+      "reason": "invalid"
+    },
+    "guard": {
+      "mapping_only": false,
+      "record_memory_called": true,
+      "search_memory_called": false,
+      "memory_overview_called": false,
+      "DailyNote_write_performed": true,
+      "VCP_memory_write_performed": true,
+      "Codex_memory_write_performed": true,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "provider_contact_performed": false,
+      "image_generation_performed": false,
+      "image_binary_read_performed": false,
+      "secret_value_read_performed": true,
+      "env_file_content_read_performed": false,
+      "raw_private_data_printed": true,
+      "raw_external_path_read_or_printed": false,
+      "broad_vcp_write_performed": true,
+      "dependency_change_performed": false,
+      "production_candidate_write_performed": false,
+      "push_tag_release_deploy_performed": false,
+      "destructive_action_performed": false
+    },
+    "recommended_next": "execute_record_memory_now",
+    "recommended_next_auto_execution_allowed": true
+  }
+}
