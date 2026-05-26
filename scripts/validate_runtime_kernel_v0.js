@@ -77,6 +77,8 @@ function validateGreenAudit(result, label) {
     assert(result.audit_record.kernel_components.includes(component), `${label} missing component ${component}`);
   });
   assertCleanSideEffects(result.audit_record.side_effect_flags, label);
+  assert(result.audit_record.side_effect_flags.forbidden_disk_write_performed === false, `${label} forbidden disk write must be false`);
+  assert(result.audit_record.side_effect_flags.disk_write_performed === undefined, `${label} legacy disk_write_performed must not appear in audit side_effect_flags`);
 }
 
 function validateRedAudit(result) {
@@ -95,6 +97,8 @@ function validateRedAudit(result) {
   assert(result.audit_record.blocked_red === true, "red audit must mark blocked red");
   assert(result.audit_record.executor_ran === false, "red audit must record executor did not run");
   assertCleanSideEffects(result.audit_record.side_effect_flags, "red");
+  assert(result.audit_record.side_effect_flags.forbidden_disk_write_performed === false, "red forbidden disk write must be false");
+  assert(result.audit_record.side_effect_flags.disk_write_performed === undefined, "red legacy disk_write_performed must not appear in audit side_effect_flags");
 }
 
 function main() {
@@ -133,7 +137,7 @@ function main() {
     red_executor_ran: redResult.audit_record.executor_ran,
     provider_contact_performed: false,
     image_generation_performed: false,
-    disk_write_performed: false,
+    forbidden_disk_write_performed: false,
     production_write_performed: false,
   }, null, 2));
 }

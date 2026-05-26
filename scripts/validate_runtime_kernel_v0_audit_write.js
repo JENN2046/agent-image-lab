@@ -85,6 +85,16 @@ function assertAuditPayload(payload, expected) {
   assert(JSON.stringify(payload.transition.path) === JSON.stringify(expected.pathStates), `${expected.label} transition path mismatch`);
   assertCleanFlags(payload.side_effect_flags, `${expected.label} payload`);
   assertCleanFlags(payload.audit_record.side_effect_flags, `${expected.label} audit`);
+  assert(payload.side_effect_flags.forbidden_disk_write_performed === false, `${expected.label} forbidden disk write must be false`);
+  assert(payload.audit_record.side_effect_flags.forbidden_disk_write_performed === false, `${expected.label} audit forbidden disk write must be false`);
+  assert(payload.side_effect_flags.disk_write_performed === undefined, `${expected.label} legacy disk_write_performed must not appear in side_effect_flags`);
+  assert(payload.audit_record.side_effect_flags.disk_write_performed === undefined, `${expected.label} legacy disk_write_performed must not appear in audit side_effect_flags`);
+  assert(payload.allowed_local_side_effects.audit_write_performed === true, `${expected.label} allowed audit write must be true`);
+  assert(payload.allowed_local_side_effects.disk_write_kind === "local_ignored_audit_record", `${expected.label} allowed disk write kind mismatch`);
+  assert(payload.allowed_local_side_effects.audit_output_path === expected.path, `${expected.label} allowed audit output path mismatch`);
+  assert(payload.audit_write_performed === true, `${expected.label} audit_write_performed must be true`);
+  assert(payload.disk_write_kind === "local_ignored_audit_record", `${expected.label} disk_write_kind mismatch`);
+  assert(payload.forbidden_disk_write_performed === false, `${expected.label} forbidden_disk_write_performed must be false`);
   assert(payload.provider_contact_performed === false, `${expected.label} provider contact must be false`);
   assert(payload.plugin_call_performed === false, `${expected.label} plugin call must be false`);
   assert(payload.api_call_performed === false, `${expected.label} api call must be false`);
@@ -98,6 +108,9 @@ function assertCliAuditWrite(result, expected) {
   assert(result.audit_write.path === expected.path, `${expected.label} audit write path mismatch`);
   assert(result.audit_write.final_state === expected.finalState, `${expected.label} audit write final state mismatch`);
   assert(result.audit_write.git_ignored_required === true, `${expected.label} audit write must require git ignore`);
+  assert(result.audit_write.audit_write_performed === true, `${expected.label} audit_write_performed must be true`);
+  assert(result.audit_write.disk_write_kind === "local_ignored_audit_record", `${expected.label} disk_write_kind mismatch`);
+  assert(result.audit_write.forbidden_disk_write_performed === false, `${expected.label} forbidden_disk_write_performed must be false`);
   assert(result.audit_write.provider_contact_performed === false, `${expected.label} audit write provider contact must be false`);
   assert(result.audit_write.image_generation_performed === false, `${expected.label} audit write image generation must be false`);
   assert(result.audit_write.production_write_performed === false, `${expected.label} audit write production write must be false`);
@@ -189,12 +202,18 @@ function main() {
       final_state: greenPayload.final_state,
       executor_ran: greenPayload.audit_record.executor_ran,
       side_effect_flags_clean: true,
+      audit_write_performed: true,
+      disk_write_kind: "local_ignored_audit_record",
+      forbidden_disk_write_performed: false,
     },
     red_audit: {
       output_path: redAuditPath,
       final_state: redPayload.final_state,
       executor_ran: redPayload.audit_record.executor_ran,
       side_effect_flags_clean: true,
+      audit_write_performed: true,
+      disk_write_kind: "local_ignored_audit_record",
+      forbidden_disk_write_performed: false,
     },
     forbidden_audit_path_rejected: true,
     traversal_audit_path_rejected: true,
