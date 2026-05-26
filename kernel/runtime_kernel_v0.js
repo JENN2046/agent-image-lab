@@ -6,6 +6,7 @@ const path = require("node:path");
 
 const repoRoot = path.resolve(__dirname, "..");
 const defaultInputPath = "tests/fixtures/runtime_kernel_v0_green_task.fixture.json";
+const auditOutputRoot = ".agent_private/runtime_kernel_v0/audits";
 
 const sideEffectFlags = Object.freeze({
   provider_contact_performed: false,
@@ -234,26 +235,108 @@ function runRuntimeKernelV0(rawTask) {
   };
 }
 
+function normalizeRepoRelativePath(value, label) {
+  assertString(value, label);
+  if (path.isAbsolute(value)) {
+    throw new Error(`${label} must be a repository-relative path`);
+  }
+  const normalized = value.replace(/\\/g, "/");
+  if (normalized.split("/").includes("..")) {
+    throw new Error(`${label} must not contain traversal segments`);
+  }
+  const resolved = path.resolve(repoRoot, normalized);
+  const relative = path.relative(repoRoot, resolved).replace(/\\/g, "/");
+  if (relative.startsWith("../") || relative === ".." || path.isAbsolute(relative)) {
+    throw new Error(`${label} escapes repository root`);
+  }
+  return {
+    normalized: relative,
+    resolved,
+  };
+}
+
 function resolveInputPath(argv) {
   const inputIndex = argv.indexOf("--input");
   const inputPath = inputIndex >= 0 ? argv[inputIndex + 1] : defaultInputPath;
-  assertString(inputPath, "--input");
-  const normalized = inputPath.replace(/\\/g, "/");
+  const { normalized, resolved } = normalizeRepoRelativePath(inputPath, "--input");
   if (!normalized.startsWith("tests/fixtures/")) {
     throw new Error("--input must be a repository-relative path under tests/fixtures/");
-  }
-  const resolved = path.resolve(repoRoot, normalized);
-  const relative = path.relative(repoRoot, resolved);
-  if (relative.startsWith("..") || path.isAbsolute(relative)) {
-    throw new Error("--input escapes repository root");
   }
   return resolved;
 }
 
+function resolveAuditOutputPath(argv) {
+  const outputIndex = argv.indexOf("--audit-output");
+  if (outputIndex < 0) {
+    return null;
+  }
+  const outputPath = argv[outputIndex + 1];
+  const { normalized, resolved } = normalizeRepoRelativePath(outputPath, "--audit-output");
+  const allowedPrefix = `${auditOutputRoot}/`;
+  if (!normalized.startsWith(allowedPrefix)) {
+    throw new Error(`--audit-output must be under ${auditOutputRoot}/`);
+  }
+  if (!normalized.endsWith(".json")) {
+    throw new Error("--audit-output must end with .json");
+  }
+  return {
+    normalized,
+    resolved,
+  };
+}
+
+function buildAuditWritePayload(result, outputPath) {
+  return {
+    audit_write_schema: "runtime_kernel_v0.audit_write.v0",
+    audit_output_path: outputPath,
+    kernel_id: result.kernel_id,
+    version: result.version,
+    task_id: result.task_id,
+    final_state: result.final_state,
+    transition: clone(result.transition),
+    policy: clone(result.policy),
+    audit_record: clone(result.audit_record),
+    side_effect_flags: { ...sideEffectFlags },
+    provider_contact_performed: false,
+    plugin_call_performed: false,
+    api_call_performed: false,
+    image_generation_performed: false,
+    production_write_performed: false,
+    secret_value_read_performed: false,
+  };
+}
+
+function writeAuditRecord(result, auditOutput) {
+  assertObject(result, "result");
+  assertObject(auditOutput, "auditOutput");
+  assertString(auditOutput.normalized, "auditOutput.normalized");
+  assertString(auditOutput.resolved, "auditOutput.resolved");
+
+  const payload = buildAuditWritePayload(result, auditOutput.normalized);
+  fs.mkdirSync(path.dirname(auditOutput.resolved), { recursive: true });
+  fs.writeFileSync(auditOutput.resolved, `${JSON.stringify(payload, null, 2)}\n`, { flag: "wx" });
+  return {
+    performed: true,
+    path: auditOutput.normalized,
+    kernel_id: result.kernel_id,
+    task_id: result.task_id,
+    final_state: result.final_state,
+    git_ignored_required: true,
+    provider_contact_performed: false,
+    image_generation_performed: false,
+    production_write_performed: false,
+  };
+}
+
 function main() {
-  const inputPath = resolveInputPath(process.argv.slice(2));
+  const argv = process.argv.slice(2);
+  const inputPath = resolveInputPath(argv);
+  const auditOutput = resolveAuditOutputPath(argv);
   const task = JSON.parse(fs.readFileSync(inputPath, "utf8"));
   const result = runRuntimeKernelV0(task);
+  if (auditOutput) {
+    result.audit_write = writeAuditRecord(result, auditOutput);
+  }
   console.log(JSON.stringify(result, null, 2));
 }
 
@@ -282,4 +365,8 @@ module.exports = {
   stateTransition,
   buildAuditRecord,
   runRuntimeKernelV0,
+  normalizeRepoRelativePath,
+  resolveAuditOutputPath,
+  buildAuditWritePayload,
+  writeAuditRecord,
 };
