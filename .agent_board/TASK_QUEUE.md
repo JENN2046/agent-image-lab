@@ -1,5 +1,34 @@
 ---
 
+- [x] ID: v0_6_98_tracked_local_path_config_hygiene_preflight_no_read
+      Lane: A0/A4 Green local no-read path hygiene preflight.
+      Status: COMPLETED_VALIDATED_TRACKED_LOCAL_PATH_CONFIG_HYGIENE_PREFLIGHT_NO_READ.
+      Goal: Record a no-read hygiene preflight for the tracked local path config risk without reading or changing the local config.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Legacy active next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Source phase: v0_6_97_concrete_memory_adapter_packet_no_write.
+      Changed files: docs/V0_6_98_TRACKED_LOCAL_PATH_CONFIG_HYGIENE_PREFLIGHT_NO_READ.md; reports/visual_asset_eval_dry_run/v0_6_98_tracked_local_path_config_hygiene_preflight_no_read.json; reports/memory_write_receipts/v0_6_98_tracked_local_path_config_hygiene_preflight_no_read.json; tests/schema_examples/tracked_local_path_config_hygiene_preflight_no_read.example.json; tests/schema_examples/tracked_local_path_config_hygiene_preflight_no_read_fail.example.json; scripts/validate_tracked_local_path_config_hygiene_preflight_no_read.js.
+      Finding: configs/local_paths/doubaogen_plugin_dir.local.yaml is tracked by Git even though .gitignore contains configs/local_paths/*.local.yaml; contents were not read.
+      Go/No-Go: tracked_local_path_config_detected=true; ignore_rule_present=true; local_config_content_read=false; remediation_performed=false; git_rm_cached_performed=false; next_auto_step_allowed=false.
+      Validation run: node --check validator passed; dedicated validator passed with 8/8 negative cases caught; git diff --check passed.
+      record_memory_called: false.
+      provider_contact_performed: false.
+      plugin_call_performed: false.
+      api_call_performed: false.
+      image_generation_performed: false.
+      image_binary_read_performed: false.
+      local_config_content_read: false.
+      env_file_content_read_performed: false.
+      secret_value_read_performed: false.
+      DailyNote_write_performed: false.
+      VCP_memory_write_performed: false.
+      Codex_memory_write_performed: false.
+      production_candidate_created: false.
+      push_status: not_performed.
+      Pause boundaries: de-track/removal of the tracked local config requires explicit owner authorization; DailyNote/VCP/Codex memory write; A5/provider/image generation; production candidate write; push/tag/release/deploy/PR creation; secret/.env reads or edits.
+      Next: pause_for_explicit_tracked_local_path_config_detrack_authorization_or_choose_no_write_task.
+
 - [x] ID: v0_6_97_concrete_memory_adapter_packet_no_write
       Lane: A0/A4 Green local no-write packet fill.
       Status: COMPLETED_VALIDATED_CONCRETE_MEMORY_ADAPTER_PACKET_NO_WRITE.

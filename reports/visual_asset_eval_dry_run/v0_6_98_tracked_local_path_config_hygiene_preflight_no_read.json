@@ -1,0 +1,76 @@
+{
+  "tracked_local_path_config_hygiene_preflight_no_read": {
+    "version": "v1",
+    "phase": "v0_6_98_tracked_local_path_config_hygiene_preflight_no_read",
+    "status": "completed_validated_tracked_local_path_config_hygiene_preflight_no_read",
+    "execution_mode": "tracked_local_path_config_hygiene_preflight_no_read",
+    "lane_attempted": "Green_no_read_path_hygiene_preflight",
+    "lane_executed": "Green_no_read_path_hygiene_preflight",
+    "source_phase": "v0_6_97_concrete_memory_adapter_packet_no_write",
+    "scope": {
+      "tracked_path_ref": "configs/local_paths/doubaogen_plugin_dir.local.yaml",
+      "tracked_probe_command": "git ls-files configs/local_paths/*.local.yaml",
+      "ignore_probe_command": "git check-ignore --no-index -v configs/local_paths/doubaogen_plugin_dir.local.yaml",
+      "content_read_allowed": false,
+      "remediation_allowed_now": false
+    },
+    "observed_state": {
+      "tracked_local_path_config_detected": true,
+      "tracked_local_path_config_refs": [
+        "configs/local_paths/doubaogen_plugin_dir.local.yaml"
+      ],
+      "ignore_rule_present": true,
+      "ignore_rule_ref": ".gitignore:configs/local_paths/*.local.yaml",
+      "tracked_despite_ignore": true
+    },
+    "risk_assessment": {
+      "risk_type": "local_path_disclosure_and_config_hygiene",
+      "content_sensitive_unknown": true,
+      "content_inspected": false,
+      "safe_to_publish_without_remediation": false,
+      "reason": "A repo-local path config is tracked even though the ignore rule exists. Contents were not inspected, so disclosure sensitivity cannot be downgraded."
+    },
+    "remediation_plan": {
+      "recommended_action": "exact_owner_authorized_git_rm_cached_after_no_secret_backup_review",
+      "example_future_command_not_executed": "git rm --cached -- configs/local_paths/doubaogen_plugin_dir.local.yaml",
+      "requires_explicit_owner_approval": true,
+      "must_not_delete_working_copy": true,
+      "must_not_read_secret_values": true,
+      "must_validate_after": [
+        "git ls-files configs/local_paths/*.local.yaml",
+        "git check-ignore --no-index -v configs/local_paths/doubaogen_plugin_dir.local.yaml",
+        "npm run validate:public-disclosure",
+        "npm run validate:smoke"
+      ]
+    },
+    "guard": {
+      "local_config_content_read": false,
+      "secret_value_read_performed": false,
+      "env_file_content_read_performed": false,
+      "raw_private_data_printed": false,
+      "file_untracked_or_removed": false,
+      "git_rm_cached_performed": false,
+      "destructive_action_performed": false,
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "image_generation_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "Codex_memory_write_performed": false,
+      "production_candidate_write_performed": false,
+      "push_tag_release_deploy_performed": false
+    },
+    "go_no_go": {
+      "preflight_created": true,
+      "tracked_local_path_config_detected": true,
+      "ignore_rule_present": true,
+      "content_read_performed": false,
+      "remediation_performed": false,
+      "detrack_authorized_now": false,
+      "next_auto_step_allowed": false
+    },
+    "recommended_next": "pause_for_explicit_tracked_local_path_config_detrack_authorization_or_choose_no_write_task",
+    "recommended_next_auto_execution_allowed": false
+  }
+}

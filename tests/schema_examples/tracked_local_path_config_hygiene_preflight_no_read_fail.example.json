@@ -1,0 +1,69 @@
+{
+  "tracked_local_path_config_hygiene_preflight_no_read": {
+    "version": "v1",
+    "phase": "v0_6_98_tracked_local_path_config_hygiene_preflight_no_read",
+    "status": "completed_validated_tracked_local_path_config_hygiene_preflight_no_read",
+    "execution_mode": "tracked_local_path_config_hygiene_preflight_no_read",
+    "lane_attempted": "Green_no_read_path_hygiene_preflight",
+    "lane_executed": "Green_no_read_path_hygiene_preflight",
+    "source_phase": "v0_6_97_concrete_memory_adapter_packet_no_write",
+    "scope": {
+      "tracked_path_ref": "configs/local_paths/doubaogen_plugin_dir.local.yaml",
+      "tracked_probe_command": "git ls-files configs/local_paths/*.local.yaml",
+      "ignore_probe_command": "git check-ignore --no-index -v configs/local_paths/doubaogen_plugin_dir.local.yaml",
+      "content_read_allowed": true,
+      "remediation_allowed_now": true
+    },
+    "observed_state": {
+      "tracked_local_path_config_detected": false,
+      "tracked_local_path_config_refs": [],
+      "ignore_rule_present": false,
+      "ignore_rule_ref": "",
+      "tracked_despite_ignore": false
+    },
+    "risk_assessment": {
+      "risk_type": "local_path_disclosure_and_config_hygiene",
+      "content_sensitive_unknown": false,
+      "content_inspected": true,
+      "safe_to_publish_without_remediation": true,
+      "reason": "unsafe fail fixture"
+    },
+    "remediation_plan": {
+      "recommended_action": "auto_delete_file",
+      "example_future_command_not_executed": "git rm --cached -- configs/local_paths/doubaogen_plugin_dir.local.yaml",
+      "requires_explicit_owner_approval": false,
+      "must_not_delete_working_copy": false,
+      "must_not_read_secret_values": false,
+      "must_validate_after": []
+    },
+    "guard": {
+      "local_config_content_read": true,
+      "secret_value_read_performed": true,
+      "env_file_content_read_performed": true,
+      "raw_private_data_printed": true,
+      "file_untracked_or_removed": true,
+      "git_rm_cached_performed": true,
+      "destructive_action_performed": true,
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "image_generation_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "Codex_memory_write_performed": false,
+      "production_candidate_write_performed": false,
+      "push_tag_release_deploy_performed": false
+    },
+    "go_no_go": {
+      "preflight_created": true,
+      "tracked_local_path_config_detected": false,
+      "ignore_rule_present": false,
+      "content_read_performed": true,
+      "remediation_performed": true,
+      "detrack_authorized_now": true,
+      "next_auto_step_allowed": true
+    },
+    "recommended_next": "auto_delete_file",
+    "recommended_next_auto_execution_allowed": true
+  }
+}
