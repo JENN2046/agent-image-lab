@@ -54,6 +54,13 @@ check("sports_visor_v2_prompt_package_loads_negative_prompt_non_empty", () => {
   return typeof pkg.negative_prompt === "string" && pkg.negative_prompt.trim().length > 0;
 });
 
+check("sports_visor_v2_prompt_package_keeps_prompt_and_negative_separate", () => {
+  const pkg = plugin.loadPromptPackage(sportsVisorPromptV2);
+  return pkg.prompt.includes("Realistic premium urban sports lifestyle product photo") &&
+    !pkg.prompt.includes("studio-only product shot") &&
+    pkg.negative_prompt.includes("studio-only product shot");
+});
+
 check("output_dir_accepts_allowed_root", () => plugin.resolveSafeOutputDirectory("runs/real_generation/v7_245/").valid === true);
 check("output_dir_rejects_parent_traversal", () => invalidOutput("runs/real_generation/../../../x"));
 check("output_dir_rejects_absolute_windows_path", () => invalidOutput("C:\\temp\\runs"));

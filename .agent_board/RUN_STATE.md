@@ -1,5 +1,49 @@
 ---
 
+## Current Run State - v0.6.80 NativeDoubao YAML Prompt Parser
+
+```text
+phase: v0_6_80_native_doubao_yaml_prompt_parser
+status: COMPLETED_TARGETED_VALIDATED_PENDING_MVP_CLEAN_RERUN
+mode: Green local prompt parser hardening only; no provider/plugin/API/image/output/secret/memory execution
+workspace: A:\agent-image-lab\agent-image-lab-v0.2
+branch: master
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+legacy_active_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+goal_objective: replace NativeDoubao prompt package line scanner with the repository yaml dependency
+changed_files_current_task:
+  - plugins/image_generation/native_doubao_image/native_doubao_image.js
+  - scripts/validate_native_doubao_sandbox.js
+  - scripts/validate_v7_20_native_doubao_real_runner_implementation.js
+prompt_parser_hardening_added:
+  - require("yaml")
+  - YAML.parse for prompt package parsing
+  - prompt/negative_prompt normalized from parsed scalar values
+  - YAML parse failure returns prompt package error
+  - sandbox test verifies prompt and negative_prompt stay separated on existing fixture
+validation_run:
+  - node --check plugin and validators: passed
+  - node scripts/validate_native_doubao_sandbox.js: passed with 65 checks
+  - node scripts/validate_v7_20_native_doubao_real_runner_implementation.js: passed with 35 checks
+  - npm run validate:mvp: failed before local commit because readiness validators require a clean committed state
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+image_binary_read_performed: false
+output_write_performed: false
+real_dns_lookup_performed: false
+env_file_content_read_performed: false
+secret_value_read_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+push_status: not_performed
+next_safe_task: commit_exact_allowlist_then_rerun_validate_mvp
+```
+
+---
+
 ## Current Run State - v0.6.79 NativeDoubao Base URL DNS Safety Hook
 
 ```text

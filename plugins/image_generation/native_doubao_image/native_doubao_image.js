@@ -5,6 +5,7 @@
 var fs = require("node:fs");
 var dns = require("node:dns");
 var path = require("node:path");
+var YAML = require("yaml");
 
 var REPO_ROOT = path.resolve(__dirname, "..", "..", "..");
 var PROMPT_ROOT = path.resolve(REPO_ROOT, "prompts", "image_generation");
@@ -408,6 +409,10 @@ function validateBaseUrl(rawBaseUrl) {
   }
 }
 
+function normalizePromptPackageText(value) {
+  return typeof value === "string" ? value.replace(/\s+/g, " ").trim() : "";
+}
+
 function loadPromptPackage(promptPackageRef) {
   // 读取 prompts/image_generation/ 下的 YAML
   var safeRef = resolveSafePromptPackageRef(promptPackageRef);
@@ -420,42 +425,25 @@ function loadPromptPackage(promptPackageRef) {
   }
 
   var content = fs.readFileSync(safeRef.fullPath, "utf8");
-  var lines = content.split("\n");
+  var parsed;
+  try {
+    parsed = YAML.parse(content) || {};
+  } catch (err) {
+    return { prompt: "", negative_prompt: "", error: "prompt package YAML parse failed" };
+  }
 
-  var promptLines = [];
-  var negativeLines = [];
-  var inPrompt = false;
-  var inNeg = false;
-  var safety = {};
-  var execution = {};
+  var execution = parsed.execution && typeof parsed.execution === "object" ? parsed.execution : {};
+  if (!execution.model && typeof parsed.model === "string") execution.model = parsed.model;
+  if (!execution.size && typeof parsed.size === "string") execution.size = parsed.size;
 
-  for (var i = 0; i < lines.length; i++) {
-    var line = lines[i];
-    if (line.trim() === "prompt: |" || line.trim() === "prompt: >") {
-      inPrompt = true; inNeg = false; continue;
-    }
-    if (line.trim() === "negative_prompt: |" || line.trim() === "negative_prompt: >") {
-      inNeg = true; inPrompt = false; continue;
-    }
-    if (line.match(/^\w+:/) || line.trim().startsWith("---")) {
-      if (inPrompt && !inNeg && line.trim().length > 0) { inPrompt = false; }
-      if (inNeg && !inPrompt && line.trim().length > 0) { inNeg = false; }
-      if (line.includes(":")) {
-        var key = line.split(":")[0].trim();
-        var val = line.split(":")[1]?.trim() || "";
-        if (key === "person_or_face_allowed") safety.person_or_face_allowed = val === "false" ? false : true;
-        if (key === "model") execution.model = val;
-        if (key === "size") execution.size = val;
-      }
-      continue;
-    }
-    if (inPrompt) promptLines.push(line.replace(/^(\s{2}|\s{4}|\t)/, ""));
-    if (inNeg) negativeLines.push(line.replace(/^(\s{2}|\s{4}|\t)/, ""));
+  var safety = parsed.safety && typeof parsed.safety === "object" ? parsed.safety : {};
+  if (typeof parsed.person_or_face_allowed === "boolean") {
+    safety.person_or_face_allowed = parsed.person_or_face_allowed;
   }
 
   return {
-    prompt: promptLines.join(" ").trim(),
-    negative_prompt: negativeLines.join(" ").trim(),
+    prompt: normalizePromptPackageText(parsed.prompt),
+    negative_prompt: normalizePromptPackageText(parsed.negative_prompt),
     safety: safety,
     execution: execution,
   };

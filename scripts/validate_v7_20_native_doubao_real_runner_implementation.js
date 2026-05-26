@@ -26,6 +26,7 @@ check("plugin_references_api_key", () => plugin.includes("DOUBAO_IMAGE_API_KEY")
 check("plugin_enforces_model", () => plugin.includes("doubao-seedream-5-0-260128"));
 check("plugin_has_model_mismatch_block", () => plugin.includes("BLOCKED_MODEL_MISMATCH"));
 check("plugin_prompt_ref_sandbox", () => plugin.includes("function resolveSafePromptPackageRef") && plugin.includes("promptPackageRef escapes prompts/image_generation/"));
+check("plugin_uses_yaml_prompt_parser", () => plugin.includes('require("yaml")') && plugin.includes("YAML.parse") && plugin.includes("prompt package YAML parse failed"));
 check("plugin_output_dir_sandbox", () => plugin.includes("function resolveSafeOutputDirectory") && plugin.includes("outputDirectory escapes runs/real_generation/"));
 check("plugin_redacts_public_result", () => plugin.includes("raw_image_payload_returned: false") && plugin.includes("provider_url_returned: false"));
 check("plugin_has_request_timeout", () => plugin.includes("AbortController") && plugin.includes("DOUBAO_IMAGE_TIMEOUT_SECONDS"));
