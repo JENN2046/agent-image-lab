@@ -1,5 +1,51 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260526-v0.6.101-PUBLIC-DISCLOSURE-SCOPE-GAP-TRACKED-LOCAL-CONFIG-NO-READ
+
+Task: v0.6.101 Public disclosure scope gap tracked local config no read
+Status: completed_validated
+Receipt:
+  - lane: A0/A4 Green local scope-gap record
+  - phase: v0_6_101_public_disclosure_scope_gap_tracked_local_config_no_read
+  - source_phase: v0_6_100_push_pr_readiness_refresh_without_push
+  - push_status: not_performed
+  - pr_created: false
+  - tag_release_deploy_performed: false
+  - local_config_content_read: false
+  - git_rm_cached_performed: false
+  - record_memory_called: false
+  - provider_contact_performed: false
+  - plugin_call_performed: false
+  - api_call_performed: false
+  - image_generation_performed: false
+  - image_binary_read_performed: false
+  - env_file_content_read_performed: false
+  - secret_value_read_performed: false
+  - DailyNote_write_performed: false
+  - VCP_memory_write_performed: false
+  - Codex_memory_write_performed: false
+  - production_candidate_created: false
+Validation:
+  - node --check scripts/validate_public_disclosure_scope_gap_tracked_local_config_no_read.js: passed
+  - node scripts/validate_public_disclosure_scope_gap_tracked_local_config_no_read.js: passed
+Validator result:
+  - public_disclosure_scope_gap_detected: true
+  - public_disclosure_scope_roots_include_configs_local_paths: false
+  - tracked_local_path_config_detected: true
+  - negative_case_count: 9
+  - caught_negative_case_count: 9
+  - all_negative_cases_caught: true
+Go/No-Go:
+  - scope_gap_recorded: true
+  - public_disclosure_validator_clears_tracked_local_config: false
+  - tracked_local_path_config_blocks_sync: true
+  - push_ready_now: false
+  - pr_ready_now: false
+  - remote_write_authorized_now: false
+  - next_auto_step_allowed: false
+Next:
+  - await_explicit_detrack_execution_authorization_or_choose_no_write_task
+
 ## VALIDATION-20260526-v0.6.100-PUSH-PR-READINESS-REFRESH-WITHOUT-PUSH
 
 Task: v0.6.100 Push PR readiness refresh without push

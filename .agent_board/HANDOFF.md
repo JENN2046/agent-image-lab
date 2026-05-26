@@ -1,5 +1,58 @@
 ---
 
+## Current Handoff Update - v0.6.101 Public Disclosure Scope Gap Tracked Local Config No Read
+
+```text
+phase: v0_6_101_public_disclosure_scope_gap_tracked_local_config_no_read
+status: COMPLETED_VALIDATED_PUBLIC_DISCLOSURE_SCOPE_GAP_TRACKED_LOCAL_CONFIG_NO_READ
+mode: A0/A4 Green local scope-gap record; no local config content read, no git rm cached, no push, no PR, no tag, no release, no deploy
+branch: master
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+legacy_active_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+source_phase: v0_6_100_push_pr_readiness_refresh_without_push
+summary: v0.6.101 records that validate:public-disclosure does not cover configs/local_paths tracked local config risk. Passing public disclosure audit remains useful but cannot clear the push/PR blocker.
+changed_files_current_task:
+  - docs/V0_6_101_PUBLIC_DISCLOSURE_SCOPE_GAP_TRACKED_LOCAL_CONFIG_NO_READ.md
+  - reports/visual_asset_eval_dry_run/v0_6_101_public_disclosure_scope_gap_tracked_local_config_no_read.json
+  - reports/memory_write_receipts/v0_6_101_public_disclosure_scope_gap_tracked_local_config_no_read.json
+  - tests/schema_examples/public_disclosure_scope_gap_tracked_local_config_no_read.example.json
+  - tests/schema_examples/public_disclosure_scope_gap_tracked_local_config_no_read_fail.example.json
+  - scripts/validate_public_disclosure_scope_gap_tracked_local_config_no_read.js
+validation_status: completed_validated
+validation_run:
+  - node --check scripts/validate_public_disclosure_scope_gap_tracked_local_config_no_read.js: passed
+  - node scripts/validate_public_disclosure_scope_gap_tracked_local_config_no_read.js: passed with 9/9 negative cases caught
+go_no_go:
+  scope_gap_recorded: true
+  public_disclosure_validator_clears_tracked_local_config: false
+  tracked_local_path_config_blocks_sync: true
+  push_ready_now: false
+  pr_ready_now: false
+  remote_write_authorized_now: false
+  next_auto_step_allowed: false
+push_status: not_performed
+pr_created: false
+tag_release_deploy_performed: false
+record_memory_called: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+image_binary_read_performed: false
+local_config_content_read: false
+git_rm_cached_performed: false
+env_file_content_read_performed: false
+secret_value_read_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+Codex_memory_write_performed: false
+production_candidate_created: false
+next_safe_task: await_explicit_detrack_execution_authorization_or_choose_no_write_task
+```
+
+---
+
 ## Current Handoff Update - v0.6.100 Push PR Readiness Refresh Without Push
 
 ```text

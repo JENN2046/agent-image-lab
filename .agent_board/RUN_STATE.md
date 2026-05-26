@@ -1,5 +1,65 @@
 ---
 
+## Current Run State - v0.6.101 Public Disclosure Scope Gap Tracked Local Config No Read
+
+```text
+phase: v0_6_101_public_disclosure_scope_gap_tracked_local_config_no_read
+status: COMPLETED_VALIDATED_PUBLIC_DISCLOSURE_SCOPE_GAP_TRACKED_LOCAL_CONFIG_NO_READ
+mode: A0/A4 Green local scope-gap record; no local config content read, no git rm cached, no push, no PR, no tag, no release, no deploy
+branch: master
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+legacy_active_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+source_phase: v0_6_100_push_pr_readiness_refresh_without_push
+goal_objective: record that validate:public-disclosure does not cover tracked local config risk
+observed_before_checkpoint_commit:
+  local_ahead: 42
+  local_behind: 0
+finding:
+  - validate:public-disclosure passed for its declared public disclosure scopes
+  - its scope roots do not include configs/local_paths
+  - validate:public-disclosure passing does not clear the tracked local config blocker
+  - dedicated v0.6.98-v0.6.100 validators remain the evidence for this blocker
+go_no_go:
+  scope_gap_recorded: true
+  public_disclosure_validator_clears_tracked_local_config: false
+  tracked_local_path_config_blocks_sync: true
+  push_ready_now: false
+  pr_ready_now: false
+  remote_write_authorized_now: false
+  next_auto_step_allowed: false
+validation_run:
+  - node --check scripts/validate_public_disclosure_scope_gap_tracked_local_config_no_read.js: passed
+  - node scripts/validate_public_disclosure_scope_gap_tracked_local_config_no_read.js: passed with 9/9 negative cases caught
+push_status: not_performed
+pr_created: false
+tag_release_deploy_performed: false
+record_memory_called: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+image_binary_read_performed: false
+local_config_content_read: false
+git_rm_cached_performed: false
+env_file_content_read_performed: false
+secret_value_read_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+Codex_memory_write_performed: false
+production_candidate_created: false
+pause_boundaries:
+  - tracked local path config de-track execution requires explicit owner authorization
+  - push/tag/release/deploy/PR creation remains paused until explicit owner authorization
+  - DailyNote/VCP/Codex memory write remains paused until an exact writer and separate execution preflight validate
+  - A5/provider/image generation remains paused
+  - production candidate write remains paused
+  - secret/.env reads or edits remain paused
+next_safe_task: await_explicit_detrack_execution_authorization_or_choose_no_write_task
+```
+
+---
+
 ## Current Run State - v0.6.100 Push PR Readiness Refresh Without Push
 
 ```text
