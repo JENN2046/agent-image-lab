@@ -292,7 +292,7 @@ function classifyIpAddressForNetworkSafety(address) {
   return { allowed: false, reason: "resolved_ip_not_parseable" };
 }
 
-function validateResolvedDownloadAddresses(addresses) {
+function validateNetworkSafeResolvedAddresses(addresses) {
   if (!Array.isArray(addresses) || addresses.length === 0) {
     return { valid: false, reason: "resolved_ip_list_empty" };
   }
@@ -309,13 +309,13 @@ function validateResolvedDownloadAddresses(addresses) {
   return { valid: true, checked_count: addresses.length };
 }
 
-function validateResolvedDownloadHost(hostname, addresses) {
+function validateNetworkSafeResolvedHost(hostname, addresses) {
   var host = String(hostname || "").toLowerCase();
   if (!host) {
-    return { valid: false, reason: "download_host_missing" };
+    return { valid: false, reason: "network_host_missing" };
   }
   if (host === "localhost") {
-    return { valid: false, reason: "download_blocked_localhost" };
+    return { valid: false, reason: "network_blocked_localhost" };
   }
 
   var literalHostSafety = classifyIpAddressForNetworkSafety(host);
@@ -326,12 +326,12 @@ function validateResolvedDownloadHost(hostname, addresses) {
     return { valid: true, checked_count: 1, literal_ip: true };
   }
 
-  return validateResolvedDownloadAddresses(addresses);
+  return validateNetworkSafeResolvedAddresses(addresses);
 }
 
-async function resolveDownloadHostForSafety(hostname, resolver) {
+async function resolveNetworkHostForSafety(hostname, resolver) {
   var host = String(hostname || "").toLowerCase();
-  var literalCheck = validateResolvedDownloadHost(host, [host]);
+  var literalCheck = validateNetworkSafeResolvedHost(host, [host]);
   if (parseIpv4Address(host) || normalizeIpv6Address(host).indexOf(":") !== -1) {
     return literalCheck;
   }
@@ -349,14 +349,40 @@ async function resolveDownloadHostForSafety(hostname, resolver) {
     var addresses = records.map(function (record) {
       return typeof record === "string" ? record : record && record.address;
     }).filter(Boolean);
-    return validateResolvedDownloadHost(host, addresses);
+    return validateNetworkSafeResolvedHost(host, addresses);
   } catch (err) {
-    return { valid: false, reason: "download_dns_lookup_failed" };
+    return { valid: false, reason: "network_dns_lookup_failed" };
   }
 }
 
+function validateResolvedDownloadAddresses(addresses) {
+  return validateNetworkSafeResolvedAddresses(addresses);
+}
+
+function validateResolvedDownloadHost(hostname, addresses) {
+  var result = validateNetworkSafeResolvedHost(hostname, addresses);
+  if (result.reason === "network_host_missing") return Object.assign({}, result, { reason: "download_host_missing" });
+  if (result.reason === "network_blocked_localhost") return Object.assign({}, result, { reason: "download_blocked_localhost" });
+  return result;
+}
+
+async function resolveDownloadHostForSafety(hostname, resolver) {
+  var result = await resolveNetworkHostForSafety(hostname, resolver);
+  if (result.reason === "network_dns_lookup_failed") return Object.assign({}, result, { reason: "download_dns_lookup_failed" });
+  if (result.reason === "network_host_missing") return Object.assign({}, result, { reason: "download_host_missing" });
+  if (result.reason === "network_blocked_localhost") return Object.assign({}, result, { reason: "download_blocked_localhost" });
+  return result;
+}
+
 async function resolveBaseUrlHostForSafety(hostname, resolver) {
-  return resolveDownloadHostForSafety(hostname, resolver);
+  return resolveNetworkHostForSafety(hostname, resolver);
+}
+
+function reasonForDownloadUrlSafety(result) {
+  if (result.reason === "network_host_missing") return "download_host_missing";
+  if (result.reason === "network_blocked_localhost") return "download_blocked_localhost";
+  if (result.reason === "network_dns_lookup_failed") return "download_dns_lookup_failed";
+  return result.reason;
 }
 
 function validateDownloadUrl(rawUrl) {
@@ -979,7 +1005,7 @@ async function writeImageOutput(result, outputDirectory, options) {
         var resolveHost = options.resolveDownloadHostForSafety || resolveDownloadHostForSafety;
         var hostSafety = await resolveHost(urlCheck.url.hostname);
         if (!hostSafety.valid) {
-          failed.push({ index: i, reason: hostSafety.reason, source: "url_download" });
+          failed.push({ index: i, reason: reasonForDownloadUrlSafety(hostSafety), source: "url_download" });
           continue;
         }
         var downloadTimeout = createTimeoutController();
@@ -1084,6 +1110,9 @@ module.exports = {
   readImageResponseBodyWithLimit: readImageResponseBodyWithLimit,
   validateDownloadUrl: validateDownloadUrl,
   classifyIpAddressForNetworkSafety: classifyIpAddressForNetworkSafety,
+  validateNetworkSafeResolvedAddresses: validateNetworkSafeResolvedAddresses,
+  validateNetworkSafeResolvedHost: validateNetworkSafeResolvedHost,
+  resolveNetworkHostForSafety: resolveNetworkHostForSafety,
   validateResolvedDownloadAddresses: validateResolvedDownloadAddresses,
   validateResolvedDownloadHost: validateResolvedDownloadHost,
   resolveDownloadHostForSafety: resolveDownloadHostForSafety,

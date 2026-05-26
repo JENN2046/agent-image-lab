@@ -1,5 +1,46 @@
 ---
 
+## Current Handoff Update - v0.6.82 NativeDoubao Network Safety Helper Consolidation
+
+```text
+phase: v0_6_82_native_doubao_network_safety_helper_consolidation
+status: COMPLETED_TARGETED_VALIDATED_PENDING_MVP_CLEAN_RERUN
+mode: Green local provider network safety helper consolidation only; no provider/plugin/API/image/output/secret/memory execution
+workspace: A:\agent-image-lab\agent-image-lab-v0.2
+branch: master
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+legacy_active_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+summary: Consolidated NativeDoubao DNS/IP safety helpers under generic network-safe names while preserving existing download-specific wrapper exports and reason mapping. Base URL checks now use the generic network resolver directly; URL download output still maps generic network failures to download-specific failure reasons at the writeImageOutput boundary. No provider contact, plugin/API call, image generation, image binary read, output write, .env/secret read, memory write, push, tag, release, or deploy was performed.
+changed_files_current_task:
+  - plugins/image_generation/native_doubao_image/native_doubao_image.js
+  - scripts/validate_native_doubao_sandbox.js
+  - scripts/validate_v7_20_native_doubao_real_runner_implementation.js
+validation_status: completed_targeted_validated_pending_mvp_clean_rerun
+validation_run:
+  - node --check plugins/image_generation/native_doubao_image/native_doubao_image.js: passed
+  - node --check scripts/validate_native_doubao_sandbox.js: passed
+  - node scripts/validate_native_doubao_sandbox.js: passed with 72 checks
+  - node scripts/validate_v7_20_native_doubao_real_runner_implementation.js: passed with 38 checks
+  - npm run validate:mvp: failed before local commit because readiness validators require a clean committed state
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+image_binary_read_performed: false
+output_write_performed: false
+real_network_fetch_performed: false
+real_dns_lookup_performed: false
+env_file_content_read_performed: false
+secret_value_read_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+push_status: not_performed
+next_safe_task: commit_exact_allowlist_then_rerun_validate_mvp
+```
+
+---
+
 ## Current Handoff Update - v0.6.81 NativeDoubao Streamed Download And Decode Safety
 
 ```text

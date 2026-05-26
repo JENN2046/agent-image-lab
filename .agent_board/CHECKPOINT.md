@@ -1,5 +1,43 @@
 ---
 
+## Checkpoint - v0.6.82 NativeDoubao Network Safety Helper Consolidation
+
+```text
+phase: v0_6_82_native_doubao_network_safety_helper_consolidation
+status: completed_targeted_validated_pending_mvp_clean_rerun
+result: COMPLETED_TARGETED_VALIDATED
+mode: Green local provider network safety helper consolidation only
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+legacy_active_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+summary: NativeDoubao DNS/IP helpers now have generic network-safe names with preserved download compatibility wrappers. This reduces base URL/download URL helper naming drift without broad refactor.
+changed_files_current_task:
+  - plugins/image_generation/native_doubao_image/native_doubao_image.js
+  - scripts/validate_native_doubao_sandbox.js
+  - scripts/validate_v7_20_native_doubao_real_runner_implementation.js
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+image_binary_read_performed: false
+output_write_performed: false
+real_network_fetch_performed: false
+real_dns_lookup_performed: false
+env_file_content_read_performed: false
+secret_value_read_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+push_status: not_performed
+validation_run:
+  - node --check plugin and validators: passed
+  - node scripts/validate_native_doubao_sandbox.js: passed with 72 checks
+  - node scripts/validate_v7_20_native_doubao_real_runner_implementation.js: passed with 38 checks
+  - npm run validate:mvp: failed before local commit because readiness validators require a clean committed state
+next: commit_exact_allowlist_then_rerun_validate_mvp
+```
+
+---
+
 ## Checkpoint - v0.6.81 NativeDoubao Streamed Download And Decode Safety
 
 ```text

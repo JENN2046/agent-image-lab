@@ -136,9 +136,21 @@ check("resolved_download_addresses_accepts_public_set", () => {
   return result.valid === true && result.checked_count === 2;
 });
 
+check("network_safe_resolved_addresses_accepts_public_set", () => {
+  const result = plugin.validateNetworkSafeResolvedAddresses(["8.8.8.8", "2606:4700:4700::1111"]);
+  return result.valid === true && result.checked_count === 2;
+});
+
 check("resolved_download_host_accepts_public_dns_result", () => {
   const result = plugin.validateResolvedDownloadHost("example.com", ["93.184.216.34"]);
   return result.valid === true && result.checked_count === 1;
+});
+
+check("network_safe_resolved_host_rejects_private_dns_result", () => {
+  const result = plugin.validateNetworkSafeResolvedHost("example.com", ["93.184.216.34", "10.0.0.5"]);
+  return result.valid === false &&
+    result.reason === "resolved_ip_blocked" &&
+    result.blocked[0].reason === "resolved_ip_private";
 });
 
 check("resolved_download_host_rejects_private_dns_result", () => {
@@ -174,7 +186,7 @@ check("base_url_host_resolver_rejects_private_mock_dns", () => {
 check("base_url_host_resolver_fails_closed_on_dns_error", () => {
   return plugin.resolveBaseUrlHostForSafety("api.example.com", async () => {
     throw new Error("mock base dns failure");
-  }).then((result) => result.valid === false && result.reason === "download_dns_lookup_failed");
+  }).then((result) => result.valid === false && result.reason === "network_dns_lookup_failed");
 });
 
 check("image_buffer_accepts_png_magic", () => {
@@ -441,6 +453,9 @@ check("plugin_exports_output_safety_helpers", () => {
     typeof plugin.readImageResponseBodyWithLimit === "function" &&
     typeof plugin.validateDownloadUrl === "function" &&
     typeof plugin.classifyIpAddressForNetworkSafety === "function" &&
+    typeof plugin.validateNetworkSafeResolvedAddresses === "function" &&
+    typeof plugin.validateNetworkSafeResolvedHost === "function" &&
+    typeof plugin.resolveNetworkHostForSafety === "function" &&
     typeof plugin.validateResolvedDownloadAddresses === "function" &&
     typeof plugin.validateResolvedDownloadHost === "function" &&
     typeof plugin.resolveDownloadHostForSafety === "function" &&
