@@ -1,5 +1,34 @@
 ---
 
+- [x] ID: v0_6_99_tracked_local_path_config_detrack_authorization_packet_no_exec
+      Lane: A0/A4 Green local authorization packet only.
+      Status: COMPLETED_VALIDATED_TRACKED_LOCAL_PATH_CONFIG_DETRACK_AUTHORIZATION_PACKET_NO_EXEC.
+      Goal: Create an exact no-exec authorization packet for future index-only de-track of one tracked local path config.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Legacy active next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Source phase: v0_6_98_tracked_local_path_config_hygiene_preflight_no_read.
+      Changed files: docs/V0_6_99_TRACKED_LOCAL_PATH_CONFIG_DETRACK_AUTHORIZATION_PACKET_NO_EXEC.md; reports/visual_asset_eval_dry_run/v0_6_99_tracked_local_path_config_detrack_authorization_packet_no_exec.json; reports/memory_write_receipts/v0_6_99_tracked_local_path_config_detrack_authorization_packet_no_exec.json; tests/schema_examples/tracked_local_path_config_detrack_authorization_packet_no_exec.example.json; tests/schema_examples/tracked_local_path_config_detrack_authorization_packet_no_exec_fail.example.json; scripts/validate_tracked_local_path_config_detrack_authorization_packet_no_exec.js.
+      Finding: exact future command is git rm --cached -- configs/local_paths/doubaogen_plugin_dir.local.yaml, but execution remains false and requires explicit owner authorization.
+      Go/No-Go: authorization_packet_created=true; exact_future_command_defined=true; working_copy_delete_allowed=false; content_read_allowed=false; secret_value_read_allowed=false; execution_performed=false; remediation_performed=false; next_auto_step_allowed=false.
+      Validation run: node --check validator passed; dedicated validator passed with 9/9 negative cases caught; git diff --check passed.
+      record_memory_called: false.
+      provider_contact_performed: false.
+      plugin_call_performed: false.
+      api_call_performed: false.
+      image_generation_performed: false.
+      image_binary_read_performed: false.
+      local_config_content_read: false.
+      env_file_content_read_performed: false.
+      secret_value_read_performed: false.
+      DailyNote_write_performed: false.
+      VCP_memory_write_performed: false.
+      Codex_memory_write_performed: false.
+      production_candidate_created: false.
+      push_status: not_performed.
+      Pause boundaries: de-track execution requires explicit owner authorization; DailyNote/VCP/Codex memory write; A5/provider/image generation; production candidate write; push/tag/release/deploy/PR creation; secret/.env reads or edits.
+      Next: await_explicit_detrack_execution_authorization_or_choose_no_write_task.
+
 - [x] ID: v0_6_98_tracked_local_path_config_hygiene_preflight_no_read
       Lane: A0/A4 Green local no-read path hygiene preflight.
       Status: COMPLETED_VALIDATED_TRACKED_LOCAL_PATH_CONFIG_HYGIENE_PREFLIGHT_NO_READ.
