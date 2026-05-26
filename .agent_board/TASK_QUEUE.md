@@ -1,5 +1,36 @@
 ---
 
+- [x] ID: v0_6_103_tracked_local_path_config_detrack_execution_postcondition
+      Lane: Green local authorized index de-track.
+      Status: COMPLETED_VALIDATED_TRACKED_LOCAL_PATH_CONFIG_DETRACK_EXECUTION_POSTCONDITION.
+      Goal: Execute owner-authorized index-only de-track and prove postconditions without reading or deleting the working-copy config.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Legacy active next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Source phase: v0_6_102_public_disclosure_gate_scope_gap_wiring_no_read.
+      Authorized command: git rm --cached -- configs/local_paths/doubaogen_plugin_dir.local.yaml.
+      Finding: working copy file exists; Git no longer tracks the target; .gitignore covers it; public-disclosure gate now runs the postcondition validator.
+      Go/No-Go: detrack_execution_recorded=true; tracked_local_path_config_blocks_sync=false; push_ready_now=false; pr_ready_now=false; remote_write_authorized_now=false; next_auto_step_allowed=green_readiness_refresh_only.
+      Validation run: node --check validator passed; dedicated validator passed with 9/9 negative cases caught; npm run validate:public-disclosure passed.
+      git_rm_cached_performed: true.
+      working_copy_file_exists_after: true.
+      git_tracking_removed_after: true.
+      gitignore_rule_effective_after: true.
+      local_config_content_read: false.
+      working_copy_delete_performed: false.
+      env_file_content_read_performed: false.
+      secret_value_read_performed: false.
+      push_status: not_performed.
+      pr_created: false.
+      tag_release_deploy_performed: false.
+      provider_contact_performed: false.
+      image_generation_performed: false.
+      DailyNote_write_performed: false.
+      VCP_memory_write_performed: false.
+      Codex_memory_write_performed: false.
+      production_candidate_created: false.
+      Next: refresh_push_pr_readiness_after_detrack_without_push.
+
 - [x] ID: v0_6_102_public_disclosure_gate_scope_gap_wiring_no_read
       Lane: A0/A4 Green local validation wiring.
       Status: COMPLETED_VALIDATED_PUBLIC_DISCLOSURE_GATE_SCOPE_GAP_WIRING_NO_READ.

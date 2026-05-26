@@ -1,5 +1,59 @@
 ---
 
+## Checkpoint - v0.6.103 Tracked Local Path Config De-track Execution Postcondition
+
+```text
+phase: v0_6_103_tracked_local_path_config_detrack_execution_postcondition
+status: completed_validated_tracked_local_path_config_detrack_execution_postcondition
+result: COMPLETED_VALIDATED
+mode: authorized local Git index de-track execution
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+legacy_active_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+source_phase: v0_6_102_public_disclosure_gate_scope_gap_wiring_no_read
+summary: Executed the owner-authorized index-only de-track for the tracked local path config, kept the working-copy file, and wired public-disclosure to the postcondition validator.
+changed_files_current_task:
+  - configs/local_paths/doubaogen_plugin_dir.local.yaml
+  - package.json
+  - docs/V0_6_103_TRACKED_LOCAL_PATH_CONFIG_DETRACK_EXECUTION_POSTCONDITION.md
+  - reports/visual_asset_eval_dry_run/v0_6_103_tracked_local_path_config_detrack_execution_postcondition.json
+  - reports/memory_write_receipts/v0_6_103_tracked_local_path_config_detrack_execution_postcondition.json
+  - tests/schema_examples/tracked_local_path_config_detrack_execution_postcondition.example.json
+  - tests/schema_examples/tracked_local_path_config_detrack_execution_postcondition_fail.example.json
+  - scripts/validate_tracked_local_path_config_detrack_execution_postcondition.js
+git_rm_cached_performed: true
+working_copy_file_exists_after: true
+git_tracking_removed_after: true
+gitignore_rule_effective_after: true
+local_config_content_read: false
+working_copy_delete_performed: false
+env_file_content_read_performed: false
+secret_value_read_performed: false
+push_status: not_performed
+pr_created: false
+tag_release_deploy_performed: false
+provider_contact_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+Codex_memory_write_performed: false
+production_candidate_created: false
+validation_run:
+  - node --check scripts/validate_tracked_local_path_config_detrack_execution_postcondition.js: passed
+  - node scripts/validate_tracked_local_path_config_detrack_execution_postcondition.js: passed with 9/9 negative cases caught
+  - npm run validate:public-disclosure: passed
+go_no_go:
+  detrack_execution_recorded: true
+  tracked_local_path_config_blocks_sync: false
+  remote_write_authorized_now: false
+  push_ready_now: false
+  pr_ready_now: false
+  next_auto_step_allowed: green_readiness_refresh_only
+next: refresh_push_pr_readiness_after_detrack_without_push
+```
+
+---
+
 ## Checkpoint - v0.6.102 Public Disclosure Gate Scope Gap Wiring No Read
 
 ```text
