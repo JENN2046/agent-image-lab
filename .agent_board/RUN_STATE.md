@@ -24768,6 +24768,41 @@ recommended_next: exact-file local commit, post-commit validate:mvp rerun, then 
 
 ---
 
+## Current Run State - v0.6.85 Public Repo Disclosure Audit
+
+```text
+phase: v0_6_85_public_repo_disclosure_audit
+phase_id: v0_6_85_public_repo_disclosure_audit
+status: completed_targeted_validated_pending_local_commit
+mode: Green Lane local disclosure audit and redaction
+workspace: A:\agent-image-lab\agent-image-lab-v0.2
+branch: master
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+objective: scan public repo surfaces for local paths, URLs, secret strings, and raw prompt fields
+scanned_file_count: 13
+generation_attempt_result_count: 9
+production_ref_count: 3
+disclosure_finding_count_after_redaction: 0
+redacted_local_codex_generated_images_path: true
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+output_write_performed: false
+env_file_content_read_performed: false
+secret_value_read_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+push_allowed: false
+push_performed: false
+pre_commit_validate_mvp_status: pending_until_clean_commit
+commit_performed: pending
+recommended_next: exact-file local commit, post-commit validate:mvp rerun, then assess runtime kernel/backend planning boundary
+```
+
+---
+
 ## Current Run State - v0.6.73ai Real VCP Agent Generation Execution One-Shot Attempt
 
 ```text

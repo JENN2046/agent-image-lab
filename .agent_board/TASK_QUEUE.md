@@ -17943,10 +17943,25 @@ recommended_next: asset_hash_dimensions_verification_A5_requires_separate_author
       Title: Public Repo Disclosure Audit
       Reason: Scan static mock, real-generation attempt result summaries, and production reports for URL, prompt, internal path, or business-context overexposure before any remote action.
       Lane: Green.
-      Status: todo.
+      Status: completed_targeted_validated_pending_local_commit.
       Scope: local read-only scan plus a local validator/report if needed.
       Forbidden: secret value reads, provider/API/plugin calls, file deletion, push, tag, release, deploy.
-      Recommended next: run a local disclosure scan over review_console/static_prototype/mock_data.js, runs/real_generation/*/generation_attempt_result.json, and reports/production refs.
+      Changed: scripts/validate_public_repo_disclosure_audit.js; package.json; scripts/validate_mvp.ps1; runs/real_generation/v0_3_3_exact_new_trial_002/generation_attempt_result.json; .agent_board resume surfaces.
+      scanned_file_count: 13.
+      generation_attempt_result_count: 9.
+      production_ref_count: 3.
+      disclosure_finding_count_after_redaction: 0.
+      redacted_local_codex_generated_images_path: true.
+      provider_contact_performed: false.
+      plugin_call_performed: false.
+      api_call_performed: false.
+      image_generation_performed: false.
+      secret_value_read_performed: false.
+      DailyNote_write_performed: false.
+      VCP_memory_write_performed: false.
+      push_performed: false.
+      Validation: node --check scripts/validate_public_repo_disclosure_audit.js passed; node scripts/validate_public_repo_disclosure_audit.js passed; npm run validate:public-disclosure passed; rg disclosure scan no matches.
+      Recommended next: exact-file local commit, post-commit validate:mvp rerun, then assess runtime kernel/backend planning boundary.
 ---
 
 - [x] ID: v0_6_73ai_real_vcp_agent_generation_execution_one_shot_attempt

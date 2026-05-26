@@ -22186,3 +22186,46 @@ VCP_memory_write_performed: false
 push_performed: false
 next_safe_task: exact-file local commit, post-commit validate:mvp rerun, then public repo disclosure audit
 ```
+
+---
+
+## Current Handoff Update - v0.6.85 Public Repo Disclosure Audit
+
+```text
+phase: v0_6_85_public_repo_disclosure_audit
+status: COMPLETED_TARGETED_VALIDATED_PENDING_LOCAL_COMMIT
+mode: Green local disclosure audit and redaction
+workspace: A:\agent-image-lab\agent-image-lab-v0.2
+branch: master
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+objective: scan public repo surfaces and prevent local path, URL, secret string, or raw prompt exposure
+changed_files:
+- scripts/validate_public_repo_disclosure_audit.js
+- package.json
+- scripts/validate_mvp.ps1
+- runs/real_generation/v0_3_3_exact_new_trial_002/generation_attempt_result.json
+- .agent_board/CHECKPOINT.md
+- .agent_board/HANDOFF.md
+- .agent_board/RUN_STATE.md
+- .agent_board/TASK_QUEUE.md
+- .agent_board/VALIDATION_LOG.md
+validation_passed:
+- node --check scripts/validate_public_repo_disclosure_audit.js
+- node scripts/validate_public_repo_disclosure_audit.js
+- npm run validate:public-disclosure
+- rg disclosure pattern scan returned no matches
+scanned_file_count: 13
+generation_attempt_result_count: 9
+production_ref_count: 3
+disclosure_finding_count_after_redaction: 0
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+secret_value_read_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+push_performed: false
+next_safe_task: exact-file local commit, post-commit validate:mvp rerun, then assess runtime kernel/backend planning boundary
+```

@@ -9,12 +9,13 @@
   "payload_capture_ref": "reports/provider_payload_captures/v0_3_3_exact_new_trial_002_request_payload.sanitized.json",
   "artifact_return_trace": {
     "trace_status": "artifact_located_and_copied_to_project",
-    "pre_call_generated_images_latest_known_directory": "C:/Users/617/.codex/generated_images/019e5356-a89c-7e42-8c75-376c56c0d344",
-    "expected_artifact_source": "Codex image_gen.imagegen tool return or newest C:/Users/617/.codex/generated_images child after call",
+    "pre_call_generated_images_latest_known_directory": "<LOCAL_CODEX_GENERATED_IMAGES_DIR_REDACTED>",
+    "expected_artifact_source": "Codex image_gen.imagegen tool return or newest local generated_images child after call",
     "project_output_directory": "runs/real_generation/v0_3_3_exact_new_trial_002/",
     "project_output_image_path": "runs/real_generation/v0_3_3_exact_new_trial_002/safe_adult_editorial_portrait_v1.png",
     "artifact_returned_by_tool": true,
-    "artifact_source_path_sanitized": "C:/Users/617/.codex/generated_images/019e5356-a89c-7e42-8c75-376c56c0d344/ig_03a1978d0bc5f1ee016a11792633008191897285d5e78e28ad.png",
+    "artifact_source_path_sanitized": "<LOCAL_CODEX_GENERATED_IMAGE_PATH_REDACTED>",
+    "local_source_path_redacted": true,
     "artifact_copied_to_project": true,
     "project_output_sha256": "3c08be9be98d36d94cc5d13de82b8c21c3f63533915fe59e814d99fdef3b4d96"
   },

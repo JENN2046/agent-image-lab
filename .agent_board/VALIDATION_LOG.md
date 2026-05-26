@@ -24372,6 +24372,32 @@ side_effects:
 - failure_samples_write_performed: false
 - production_candidate_write_performed: false
 - push_performed: false
+
+---
+
+phase: v0_6_85_public_repo_disclosure_audit
+status: completed_targeted_validated_pending_local_commit
+validation:
+- node --check scripts/validate_public_repo_disclosure_audit.js: passed
+- node scripts/validate_public_repo_disclosure_audit.js: passed
+- npm run validate:public-disclosure: passed
+- rg disclosure pattern scan over review_console/static_prototype/mock_data.js, runs/real_generation, reports/production_candidate_authorization, reports/visual_asset_eval_dry_run: no matches
+audit_scope:
+- scanned_file_count: 13
+- generation_attempt_result_count: 9
+- production_ref_count: 3
+- disclosure_finding_count_after_redaction: 0
+redactions:
+- runs/real_generation/v0_3_3_exact_new_trial_002/generation_attempt_result.json: local Codex generated_images directory and source image path replaced with redacted placeholders
+side_effects:
+- provider_contact_performed: false
+- plugin_call_performed: false
+- api_call_performed: false
+- image_generation_performed: false
+- secret_value_read_performed: false
+- DailyNote_write_performed: false
+- VCP_memory_write_performed: false
+- push_performed: false
 ---
 
 phase: v0_4_9_visual_evidence_consistency_hardening

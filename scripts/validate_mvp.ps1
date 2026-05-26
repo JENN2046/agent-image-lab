@@ -162,6 +162,7 @@ $requiredFiles = @(
   'scripts/validate_review_report_contract.js',
   'scripts/validate_review_console_blocker_arbiter_boundary_scan.js',
   'scripts/validate_review_console_static_mock_boundary.js',
+  'scripts/validate_public_repo_disclosure_audit.js',
   'scripts/validate_v5_local_sync_readiness.js',
   'scripts/validate_v5_post_commit_reconciliation.js',
   'scripts/validate_v5_index_consistency.js',
@@ -6209,6 +6210,31 @@ if (-not $node) {
     }
     if ($reviewConsoleStaticMockBoundary.side_effects.fetch_performed -ne $false -or $reviewConsoleStaticMockBoundary.side_effects.file_write_performed -ne $false -or $reviewConsoleStaticMockBoundary.side_effects.provider_contact_performed -ne $false -or $reviewConsoleStaticMockBoundary.side_effects.plugin_call_performed -ne $false -or $reviewConsoleStaticMockBoundary.side_effects.api_call_performed -ne $false -or $reviewConsoleStaticMockBoundary.side_effects.DailyNote_write_performed -ne $false -or $reviewConsoleStaticMockBoundary.side_effects.VCP_memory_write_performed -ne $false -or $reviewConsoleStaticMockBoundary.side_effects.production_candidate_write_performed -ne $false) {
       Add-Failure "Review Console static/mock boundary validation must keep every side-effect flag false"
+    }
+  }
+
+  $publicRepoDisclosureAuditOutput = & node (Join-Path $Root 'scripts/validate_public_repo_disclosure_audit.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Public repo disclosure audit validation exited with failure"
+  } else {
+    $publicRepoDisclosureAudit = ($publicRepoDisclosureAuditOutput -join "`n") | ConvertFrom-Json
+    if ($publicRepoDisclosureAudit.passed -ne $true) {
+      Add-Failure "Public repo disclosure audit validation must report passed true"
+    }
+    if ($publicRepoDisclosureAudit.scanned_file_count -lt 1) {
+      Add-Failure "Public repo disclosure audit must scan at least one public-scope file"
+    }
+    if ($publicRepoDisclosureAudit.generation_attempt_result_count -lt 1) {
+      Add-Failure "Public repo disclosure audit must scan generation attempt result files"
+    }
+    if ($publicRepoDisclosureAudit.production_ref_count -lt 1) {
+      Add-Failure "Public repo disclosure audit must scan production refs"
+    }
+    if ($publicRepoDisclosureAudit.disclosure_finding_count -ne 0) {
+      Add-Failure "Public repo disclosure audit must not find local paths, URLs, secret strings, or raw prompt fields"
+    }
+    if ($publicRepoDisclosureAudit.side_effects.secret_value_read_performed -ne $false -or $publicRepoDisclosureAudit.side_effects.provider_contact_performed -ne $false -or $publicRepoDisclosureAudit.side_effects.plugin_call_performed -ne $false -or $publicRepoDisclosureAudit.side_effects.api_call_performed -ne $false -or $publicRepoDisclosureAudit.side_effects.file_write_performed -ne $false -or $publicRepoDisclosureAudit.side_effects.push_tag_release_deploy_performed -ne $false) {
+      Add-Failure "Public repo disclosure audit must remain local read-only with no secret, provider, API, write, or remote side effects"
     }
   }
 
