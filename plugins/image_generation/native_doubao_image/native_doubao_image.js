@@ -404,6 +404,48 @@ function validateWatermarkParameter(requestBody) {
   return { valid: true, error: null };
 }
 
+function validateProviderResponseData(responseData, maxImagesCreated) {
+  if (!responseData || typeof responseData !== "object" || Array.isArray(responseData)) {
+    return { valid: false, reason: "provider_response_not_object" };
+  }
+  if (!Array.isArray(responseData.data)) {
+    return { valid: false, reason: "provider_response_data_not_array" };
+  }
+  if (responseData.data.length <= 0) {
+    return { valid: false, reason: "provider_response_data_empty" };
+  }
+  var maxImages = Number.isFinite(Number(maxImagesCreated)) ? Number(maxImagesCreated) : 1;
+  if (responseData.data.length > maxImages) {
+    return {
+      valid: false,
+      reason: "provider_response_too_many_images",
+      image_count: responseData.data.length,
+      max_images: maxImages,
+    };
+  }
+  for (var i = 0; i < responseData.data.length; i++) {
+    var item = responseData.data[i];
+    if (!item || typeof item !== "object" || Array.isArray(item)) {
+      return { valid: false, reason: "provider_response_image_item_not_object", index: i };
+    }
+    if (item.b64_json !== undefined && typeof item.b64_json !== "string") {
+      return { valid: false, reason: "provider_response_b64_json_not_string", index: i };
+    }
+    if (item.url !== undefined && typeof item.url !== "string") {
+      return { valid: false, reason: "provider_response_url_not_string", index: i };
+    }
+    var hasB64 = typeof item.b64_json === "string" && item.b64_json.length > 0;
+    var hasUrl = typeof item.url === "string" && item.url.length > 0;
+    if (!hasB64 && !hasUrl) {
+      return { valid: false, reason: "provider_response_image_item_missing_payload", index: i };
+    }
+  }
+  return {
+    valid: true,
+    image_count: responseData.data.length,
+  };
+}
+
 async function realGenerate(options) {
   var gate = validateRealExecutionGate(options);
   if (!gate.gate_passed) {
@@ -512,6 +554,24 @@ async function realGenerate(options) {
         image_created: false,
         http_status: response.status,
         error: "API returned error",
+        model_requested: options.modelOverride || "doubao-seedream-5-0-260128",
+        model_reported: null,
+        retry_performed: false,
+      };
+    }
+
+    var responseSchema = validateProviderResponseData(responseData, options.maxImagesCreated || 1);
+    if (!responseSchema.valid) {
+      return {
+        status: "FAILED",
+        plugin_id: "NativeDoubaoImage",
+        command: "generate",
+        api_call_performed: true,
+        image_created: false,
+        http_status: response.status,
+        error_category: "provider_invalid_response_schema",
+        error: responseSchema.reason,
+        provider_reported_image_count: responseSchema.image_count || 0,
         model_requested: options.modelOverride || "doubao-seedream-5-0-260128",
         model_reported: null,
         retry_performed: false,
@@ -749,6 +809,7 @@ module.exports = {
   validateRealExecutionGate: validateRealExecutionGate,
   buildDoubaoRequest: buildDoubaoRequest,
   validateWatermarkParameter: validateWatermarkParameter,
+  validateProviderResponseData: validateProviderResponseData,
   realGenerate: realGenerate,
   writeImageOutput: writeImageOutput,
   dryRunGenerate: dryRunGenerate,

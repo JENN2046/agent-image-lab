@@ -1,5 +1,43 @@
 ---
 
+## Current Handoff Update - v0.6.76 NativeDoubao Provider Response Schema Guard
+
+```text
+phase: v0_6_76_native_doubao_provider_response_schema_guard
+status: COMPLETED_TARGETED_VALIDATED_PENDING_CLEAN_COMMIT_MVP_RERUN
+mode: Green local provider response schema hardening only; no provider/plugin/API/image/output/secret/memory execution
+workspace: A:\agent-image-lab\agent-image-lab-v0.2
+branch: master
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+legacy_active_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+summary: Added fail-closed schema validation for NativeDoubao provider JSON responses before model mismatch checks and output persistence. Malformed response objects, missing/non-array/empty data, too many image items, non-object items, missing payloads, and non-string b64_json/url payloads now fail as provider_invalid_response_schema. No real provider contact, plugin/API call, image generation, image binary read, output write, .env/secret read, memory write, push, tag, release, or deploy was performed.
+changed_files_current_task:
+  - plugins/image_generation/native_doubao_image/native_doubao_image.js
+  - scripts/validate_native_doubao_sandbox.js
+  - scripts/validate_v7_20_native_doubao_real_runner_implementation.js
+validation_status: targeted_passed_mvp_pending_clean_commit_rerun
+validation_run:
+  - node --check plugins/image_generation/native_doubao_image/native_doubao_image.js: passed
+  - node --check scripts/validate_native_doubao_sandbox.js: passed
+  - node scripts/validate_native_doubao_sandbox.js: passed
+  - node scripts/validate_v7_20_native_doubao_real_runner_implementation.js: passed
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+image_binary_read_performed: false
+output_write_performed: false
+env_file_content_read_performed: false
+secret_value_read_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+push_status: not_performed
+next_safe_task: create_exact_file_local_commit_then_rerun_mvp
+```
+
+---
+
 ## Current Handoff Update - v0.6.75 NativeDoubao Provider Output Safety Hardening
 
 ```text

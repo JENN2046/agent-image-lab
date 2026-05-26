@@ -84,6 +84,45 @@ check("image_buffer_rejects_content_type_mismatch", () => {
 
 check("content_type_allows_jpeg_alias", () => plugin.contentTypeAllowsImageFormat("image/jpg", "jpeg") === true);
 
+check("provider_response_schema_accepts_single_b64_item", () => {
+  const result = plugin.validateProviderResponseData({ data: [{ b64_json: "QUJDRA==" }] }, 1);
+  return result.valid === true && result.image_count === 1;
+});
+
+check("provider_response_schema_accepts_single_url_item", () => {
+  const result = plugin.validateProviderResponseData({ data: [{ url: "https://example.com/image.png" }] }, 1);
+  return result.valid === true && result.image_count === 1;
+});
+
+check("provider_response_schema_rejects_missing_data", () => {
+  const result = plugin.validateProviderResponseData({ model: "doubao-seedream-5-0-260128" }, 1);
+  return result.valid === false && result.reason === "provider_response_data_not_array";
+});
+
+check("provider_response_schema_rejects_empty_data", () => {
+  const result = plugin.validateProviderResponseData({ data: [] }, 1);
+  return result.valid === false && result.reason === "provider_response_data_empty";
+});
+
+check("provider_response_schema_rejects_too_many_images", () => {
+  const result = plugin.validateProviderResponseData({ data: [{ url: "https://example.com/1.png" }, { url: "https://example.com/2.png" }] }, 1);
+  return result.valid === false && result.reason === "provider_response_too_many_images";
+});
+
+check("provider_response_schema_rejects_item_without_payload", () => {
+  const result = plugin.validateProviderResponseData({ data: [{ revised_prompt: "ok" }] }, 1);
+  return result.valid === false && result.reason === "provider_response_image_item_missing_payload";
+});
+
+check("provider_response_schema_rejects_non_string_payloads", () => {
+  const b64 = plugin.validateProviderResponseData({ data: [{ b64_json: 123 }] }, 1);
+  const url = plugin.validateProviderResponseData({ data: [{ url: { href: "https://example.com/image.png" } }] }, 1);
+  return b64.valid === false &&
+    b64.reason === "provider_response_b64_json_not_string" &&
+    url.valid === false &&
+    url.reason === "provider_response_url_not_string";
+});
+
 check("call_budget_exact_one_accepts", () => plugin.validateA5Limits({ maxPluginCalls: 1, maxImagesCreated: 1, retryAllowed: false }).valid === true);
 check("call_budget_rejects_zero", () => plugin.validateA5Limits({ maxPluginCalls: 0, maxImagesCreated: 1, retryAllowed: false }).valid === false);
 check("image_budget_rejects_zero", () => plugin.validateA5Limits({ maxPluginCalls: 1, maxImagesCreated: 0, retryAllowed: false }).valid === false);
@@ -194,7 +233,8 @@ check("verify_local_output_file_rejects_missing_file", () => {
 check("plugin_exports_output_safety_helpers", () => {
   return typeof plugin.validateImageBuffer === "function" &&
     typeof plugin.validateDownloadUrl === "function" &&
-    typeof plugin.contentTypeAllowsImageFormat === "function";
+    typeof plugin.contentTypeAllowsImageFormat === "function" &&
+    typeof plugin.validateProviderResponseData === "function";
 });
 
 const summary = {

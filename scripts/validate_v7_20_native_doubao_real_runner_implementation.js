@@ -30,6 +30,7 @@ check("plugin_output_dir_sandbox", () => plugin.includes("function resolveSafeOu
 check("plugin_redacts_public_result", () => plugin.includes("raw_image_payload_returned: false") && plugin.includes("provider_url_returned: false"));
 check("plugin_has_request_timeout", () => plugin.includes("AbortController") && plugin.includes("DOUBAO_IMAGE_TIMEOUT_SECONDS"));
 check("plugin_checks_provider_json_content_type", () => plugin.includes("provider_invalid_content_type") && plugin.includes("application/json"));
+check("plugin_validates_provider_response_schema", () => plugin.includes("function validateProviderResponseData") && plugin.includes("provider_invalid_response_schema"));
 check("plugin_validates_image_magic_before_write", () => plugin.includes("function validateImageBuffer") && plugin.includes("image_magic_number_unsupported"));
 check("plugin_caps_image_bytes", () => plugin.includes("MAX_IMAGE_OUTPUT_BYTES") && plugin.includes("image_payload_too_large"));
 check("plugin_download_blocks_redirect_and_bad_content_type", () => plugin.includes('redirect: "error"') && plugin.includes("download_content_type_missing_or_invalid"));

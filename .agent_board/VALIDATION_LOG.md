@@ -1,5 +1,32 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260526-v0.6.76-NATIVE-DOUBAO-PROVIDER-RESPONSE-SCHEMA-GUARD
+
+Task: v0.6.76 NativeDoubao provider response schema guard
+Status: targeted_validated_pending_clean_commit_mvp_rerun
+Receipt:
+  - lane: Green
+  - phase: v0_6_76_native_doubao_provider_response_schema_guard
+  - provider_contact_performed: false
+  - plugin_call_performed: false
+  - api_call_performed: false
+  - image_generation_performed: false
+  - image_binary_read_performed: false
+  - output_write_performed: false
+  - secret_value_read_performed: false
+  - DailyNote_write_performed: false
+  - VCP_memory_write_performed: false
+  - push_tag_release_deploy_performed: false
+Commands run:
+  - node --check plugins/image_generation/native_doubao_image/native_doubao_image.js: passed
+  - node --check scripts/validate_native_doubao_sandbox.js: passed
+  - node scripts/validate_native_doubao_sandbox.js: passed
+  - node scripts/validate_v7_20_native_doubao_real_runner_implementation.js: passed
+Observed result:
+  - NativeDoubao provider response schema validation now rejects malformed JSON response shapes before output persistence.
+Next:
+  - create exact-file local commit, then rerun npm run validate:mvp from a clean committed state
+
 ## VALIDATION-20260526-v0.6.75-NATIVE-DOUBAO-PROVIDER-OUTPUT-SAFETY-HARDENING
 
 Task: v0.6.75 NativeDoubao provider output safety hardening
