@@ -161,6 +161,7 @@ $requiredFiles = @(
   'scripts/validate_review_admission_control_matrix.js',
   'scripts/validate_review_report_contract.js',
   'scripts/validate_review_console_blocker_arbiter_boundary_scan.js',
+  'scripts/validate_review_console_static_mock_boundary.js',
   'scripts/validate_v5_local_sync_readiness.js',
   'scripts/validate_v5_post_commit_reconciliation.js',
   'scripts/validate_v5_index_consistency.js',
@@ -6183,6 +6184,31 @@ if (-not $node) {
     }
     if ($reviewConsoleBlockerArbiterBoundaryScan.review_console_blocker_arbiter_boundary_scan.file_write_performed -ne $false) {
       Add-Failure "Review Console blocker arbiter boundary scan validation must not write files"
+    }
+  }
+
+  $reviewConsoleStaticMockBoundaryOutput = & node (Join-Path $Root 'scripts/validate_review_console_static_mock_boundary.js')
+  if ($LASTEXITCODE -ne 0) {
+    Add-Failure "Review Console static/mock boundary validation exited with failure"
+  } else {
+    $reviewConsoleStaticMockBoundary = ($reviewConsoleStaticMockBoundaryOutput -join "`n") | ConvertFrom-Json
+    if ($reviewConsoleStaticMockBoundary.passed -ne $true) {
+      Add-Failure "Review Console static/mock boundary validation must report passed true"
+    }
+    if ($reviewConsoleStaticMockBoundary.static_mock_only -ne $true) {
+      Add-Failure "Review Console static/mock boundary must stay static mock only"
+    }
+    if ($reviewConsoleStaticMockBoundary.browser_runtime_executed -ne $false) {
+      Add-Failure "Review Console static/mock boundary validation must not execute browser runtime"
+    }
+    if ($reviewConsoleStaticMockBoundary.network_or_persistence_api_count -ne 0) {
+      Add-Failure "Review Console static/mock boundary validation must find no network or persistence APIs"
+    }
+    if ($reviewConsoleStaticMockBoundary.mock_forbidden_true_flag_count -ne 0) {
+      Add-Failure "Review Console static/mock boundary validation must find no true forbidden side-effect flags"
+    }
+    if ($reviewConsoleStaticMockBoundary.side_effects.fetch_performed -ne $false -or $reviewConsoleStaticMockBoundary.side_effects.file_write_performed -ne $false -or $reviewConsoleStaticMockBoundary.side_effects.provider_contact_performed -ne $false -or $reviewConsoleStaticMockBoundary.side_effects.plugin_call_performed -ne $false -or $reviewConsoleStaticMockBoundary.side_effects.api_call_performed -ne $false -or $reviewConsoleStaticMockBoundary.side_effects.DailyNote_write_performed -ne $false -or $reviewConsoleStaticMockBoundary.side_effects.VCP_memory_write_performed -ne $false -or $reviewConsoleStaticMockBoundary.side_effects.production_candidate_write_performed -ne $false) {
+      Add-Failure "Review Console static/mock boundary validation must keep every side-effect flag false"
     }
   }
 

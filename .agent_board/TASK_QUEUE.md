@@ -17907,6 +17907,47 @@ recommended_next: asset_hash_dimensions_verification_A5_requires_separate_author
       Stop condition: provider call, image generation, memory write, DailyNote write, runtime/VCPToolBox/VCPChat/CDP/bridge/MCP action, real executor implementation, Push_L2 test, accepted_sample promotion, production_candidate creation, memory_seed promotion, dependency change, secret read, git add ., push, tag, release, deploy, or validation failure requiring judgment.
       Recommended next: local commit, post-commit review, and Push_L3 manual guarded push classification.
 ---
+- [x] ID: v0_6_84_review_console_static_mock_boundary_validator
+      Title: Harden Review Console Static Mock Boundary Validation
+      Reason: The Review Console static prototype needs an explicit validator proving buttons and mock data do not drift into real archive, approval, memory, runtime, provider, API, or persistence claims.
+      Lane: Green.
+      Status: completed_targeted_validated_pending_local_commit.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Scope: local validator, npm script, MVP gate, and .agent_board resume surfaces.
+      Changed: scripts/validate_review_console_static_mock_boundary.js; package.json; scripts/validate_mvp.ps1; .agent_board resume surfaces.
+      static_mock_only: true.
+      browser_runtime_executed: false.
+      network_or_persistence_api_count: 0.
+      mock_forbidden_true_flag_count: 0.
+      provider_contact_performed: false.
+      plugin_call_performed: false.
+      api_call_performed: false.
+      image_generation_performed: false.
+      output_write_performed: false.
+      env_file_content_read_performed: false.
+      secret_value_read_performed: false.
+      accepted_samples_write_performed: false.
+      failure_samples_write_performed: false.
+      production_candidate_write_performed: false.
+      DailyNote_write_performed: false.
+      VCP_memory_write_performed: false.
+      push_allowed: false.
+      push_performed: false.
+      Validation: node --check scripts/validate_review_console_static_mock_boundary.js passed; node scripts/validate_review_console_static_mock_boundary.js passed; npm run validate:review-console-static passed; npm run validate:mvp failed pre-commit dirty exact-file readiness only.
+      Stop condition: provider call, image generation, memory write, DailyNote write, runtime/VCPToolBox/VCPChat/CDP/bridge/MCP action, real executor implementation, secret read, git add ., push, tag, release, deploy, or non-dirty validation failure requiring judgment.
+      Recommended next: exact-file local commit, post-commit validate:mvp rerun, then public repo disclosure audit.
+---
+- [ ] ID: v0_6_85_public_repo_disclosure_audit
+      Title: Public Repo Disclosure Audit
+      Reason: Scan static mock, real-generation attempt result summaries, and production reports for URL, prompt, internal path, or business-context overexposure before any remote action.
+      Lane: Green.
+      Status: todo.
+      Scope: local read-only scan plus a local validator/report if needed.
+      Forbidden: secret value reads, provider/API/plugin calls, file deletion, push, tag, release, deploy.
+      Recommended next: run a local disclosure scan over review_console/static_prototype/mock_data.js, runs/real_generation/*/generation_attempt_result.json, and reports/production refs.
+---
 
 - [x] ID: v0_6_73ai_real_vcp_agent_generation_execution_one_shot_attempt
       Title: Enter Real VCP Agent Generation Execution One-Shot
