@@ -1,5 +1,28 @@
 ---
 
+- [x] ID: v0_6_89_remote_sync_and_next_red_decision_preflight
+      Lane: A0/A4 Green read-only preflight plus local status recording.
+      Status: COMPLETED_VALIDATED_REMOTE_SYNC_AND_NEXT_RED_DECISION_PREFLIGHT.
+      Goal: Inspect current repo state, remote-sync risk, local ahead range, and next checkpoint boundary without crossing Red Lane.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Legacy active next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Evidence: git status clean; git fetch --dry-run origin passed with no output indicating new remote updates; git rev-list --left-right --count HEAD...origin/master returned 30 0; local ahead scope is 30 commits and 29 changed files against origin/master.
+      Validation run: npm run validate:smoke passed; npm run validate:mvp passed.
+      provider_contact_performed: false.
+      plugin_call_performed: false.
+      api_call_performed: false.
+      image_generation_performed: false.
+      image_binary_read_performed: false.
+      output_write_performed: false.
+      env_file_content_read_performed: false.
+      secret_value_read_performed: false.
+      DailyNote_write_performed: false.
+      VCP_memory_write_performed: false.
+      push_status: not_performed.
+      Pause boundaries: A5/provider/image generation; push/tag/release/deploy; secret/.env reads or edits; production writes.
+      Next: prepare local push_or_pr_readiness_audit_without_push, or inspect_failed_provider_tool_attempt only as read-only evidence review.
+
 - [x] ID: v0_6_88_validation_gate_taxonomy
       Lane: Green local validation taxonomy refactor only.
       Status: COMPLETED_VALIDATED_VALIDATION_GATE_TAXONOMY.

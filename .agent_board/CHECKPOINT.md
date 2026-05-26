@@ -1,5 +1,42 @@
 ---
 
+## Checkpoint - v0.6.89 Remote Sync And Next Red Decision Preflight
+
+```text
+phase: v0_6_89_remote_sync_and_next_red_decision_preflight
+status: completed_validated_remote_sync_and_next_red_decision_preflight
+result: COMPLETED_VALIDATED
+mode: A0/A4 Green read-only preflight plus local status recording
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+legacy_active_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+summary: Completed the planned remote-sync and next-decision preflight without crossing Red Lane. Worktree was clean, dry-run fetch showed no remote update output, local refs show ahead 30 / behind 0, and the local ahead scope is 30 commits touching 29 files.
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+image_binary_read_performed: false
+output_write_performed: false
+env_file_content_read_performed: false
+secret_value_read_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+push_status: not_performed
+validation_run:
+  - git status --short --branch: clean, master...origin/master [ahead 30]
+  - git fetch --dry-run origin: passed
+  - git rev-list --left-right --count HEAD...origin/master: 30 0
+  - git diff --stat origin/master...HEAD: inspected, 29 files
+  - npm run validate:smoke: passed
+  - npm run validate:mvp: passed
+pause_boundaries:
+  - A5/provider/image generation remains paused
+  - push/tag/release/deploy remains paused
+  - secret/.env reads or edits remain paused
+  - production writes remain paused
+next: prepare local push_or_pr_readiness_audit_without_push, or inspect_failed_provider_tool_attempt only as read-only evidence review
+```
+
 ## Checkpoint - v0.6.88 Validation Gate Taxonomy
 
 ```text
