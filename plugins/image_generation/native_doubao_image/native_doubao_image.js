@@ -3,6 +3,7 @@
 // API key 只从 process.env.DOUBAO_IMAGE_API_KEY 读取，不硬编码。
 
 var fs = require("node:fs");
+var dns = require("node:dns");
 var path = require("node:path");
 
 var REPO_ROOT = path.resolve(__dirname, "..", "..", "..");
@@ -245,6 +246,52 @@ function validateResolvedDownloadAddresses(addresses) {
     return { valid: false, reason: "resolved_ip_blocked", blocked: blocked };
   }
   return { valid: true, checked_count: addresses.length };
+}
+
+function validateResolvedDownloadHost(hostname, addresses) {
+  var host = String(hostname || "").toLowerCase();
+  if (!host) {
+    return { valid: false, reason: "download_host_missing" };
+  }
+  if (host === "localhost") {
+    return { valid: false, reason: "download_blocked_localhost" };
+  }
+
+  var literalHostSafety = classifyIpAddressForNetworkSafety(host);
+  if (parseIpv4Address(host) || normalizeIpv6Address(host).indexOf(":") !== -1) {
+    if (!literalHostSafety.allowed) {
+      return { valid: false, reason: literalHostSafety.reason };
+    }
+    return { valid: true, checked_count: 1, literal_ip: true };
+  }
+
+  return validateResolvedDownloadAddresses(addresses);
+}
+
+async function resolveDownloadHostForSafety(hostname, resolver) {
+  var host = String(hostname || "").toLowerCase();
+  var literalCheck = validateResolvedDownloadHost(host, [host]);
+  if (parseIpv4Address(host) || normalizeIpv6Address(host).indexOf(":") !== -1) {
+    return literalCheck;
+  }
+  if (!host || host === "localhost") {
+    return literalCheck;
+  }
+
+  var lookup = resolver || function (name) {
+    return dns.promises.lookup(name, { all: true, verbatim: true });
+  };
+
+  try {
+    var records = await lookup(host);
+    if (!Array.isArray(records)) records = [records];
+    var addresses = records.map(function (record) {
+      return typeof record === "string" ? record : record && record.address;
+    }).filter(Boolean);
+    return validateResolvedDownloadHost(host, addresses);
+  } catch (err) {
+    return { valid: false, reason: "download_dns_lookup_failed" };
+  }
 }
 
 function validateDownloadUrl(rawUrl) {
@@ -801,6 +848,11 @@ async function writeImageOutput(result, outputDirectory) {
           failed.push({ index: i, reason: urlCheck.reason, source: "url_download" });
           continue;
         }
+        var hostSafety = await resolveDownloadHostForSafety(urlCheck.url.hostname);
+        if (!hostSafety.valid) {
+          failed.push({ index: i, reason: hostSafety.reason, source: "url_download" });
+          continue;
+        }
         var downloadTimeout = createTimeoutController();
         try {
           var imageResponse = await fetch(urlCheck.url.toString(), {
@@ -897,6 +949,8 @@ module.exports = {
   validateDownloadUrl: validateDownloadUrl,
   classifyIpAddressForNetworkSafety: classifyIpAddressForNetworkSafety,
   validateResolvedDownloadAddresses: validateResolvedDownloadAddresses,
+  validateResolvedDownloadHost: validateResolvedDownloadHost,
+  resolveDownloadHostForSafety: resolveDownloadHostForSafety,
   contentTypeAllowsImageFormat: contentTypeAllowsImageFormat,
   validateBaseUrl: validateBaseUrl,
   validateA5Limits: validateA5Limits,

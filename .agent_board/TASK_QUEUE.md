@@ -1,5 +1,30 @@
 ---
 
+- [x] ID: v0_6_78_native_doubao_download_dns_safety_hook
+      Lane: Green local DNS safety hook implementation only.
+      Status: COMPLETED_TARGETED_VALIDATED_PENDING_MVP_CLEAN_RERUN.
+      Goal: Apply resolved-IP safety validation to NativeDoubao provider URL downloads before fetch.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Legacy active next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Changed files: plugins/image_generation/native_doubao_image/native_doubao_image.js; scripts/validate_native_doubao_sandbox.js; scripts/validate_v7_20_native_doubao_real_runner_implementation.js.
+      Validation run: node --check plugin and validators passed; node scripts/validate_native_doubao_sandbox.js passed with 61 checks; node scripts/validate_v7_20_native_doubao_real_runner_implementation.js passed with 33 checks; npm run validate:mvp failed before local commit because readiness validators require a clean committed state.
+      provider_contact_performed: false.
+      plugin_call_performed: false.
+      api_call_performed: false.
+      image_generation_performed: false.
+      image_binary_read_performed: false.
+      output_write_performed: false.
+      real_dns_lookup_performed: false.
+      env_file_content_read_performed: false.
+      secret_value_read_performed: false.
+      DailyNote_write_performed: false.
+      VCP_memory_write_performed: false.
+      push_status: not_performed.
+      Next: commit_exact_allowlist_then_rerun_validate_mvp.
+
+---
+
 - [x] ID: v0_6_77_native_doubao_resolved_ip_ssrf_guard_foundation
       Lane: Green local resolved-IP SSRF guard foundation only.
       Status: COMPLETED_VALIDATED_NATIVE_DOUBAO_RESOLVED_IP_GUARD_FOUNDATION.

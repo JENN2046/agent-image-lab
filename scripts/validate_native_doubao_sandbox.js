@@ -4,12 +4,23 @@ const plugin = require("../plugins/image_generation/native_doubao_image/native_d
 
 let passed = true;
 const results = [];
+const pending = [];
 
 function check(id, fn) {
   try {
-    const ok = Boolean(fn());
-    results.push({ check: id, passed: ok });
-    if (!ok) passed = false;
+    const value = fn();
+    if (value && typeof value.then === "function") {
+      pending.push(value.then((ok) => {
+        results.push({ check: id, passed: Boolean(ok) });
+        if (!ok) passed = false;
+      }).catch((err) => {
+        results.push({ check: id, passed: false, error: err.message });
+        passed = false;
+      }));
+      return;
+    }
+    results.push({ check: id, passed: Boolean(value) });
+    if (!value) passed = false;
   } catch (err) {
     results.push({ check: id, passed: false, error: err.message });
     passed = false;
@@ -114,6 +125,29 @@ check("resolved_download_addresses_rejects_mixed_public_private", () => {
 check("resolved_download_addresses_accepts_public_set", () => {
   const result = plugin.validateResolvedDownloadAddresses(["8.8.8.8", "2606:4700:4700::1111"]);
   return result.valid === true && result.checked_count === 2;
+});
+
+check("resolved_download_host_accepts_public_dns_result", () => {
+  const result = plugin.validateResolvedDownloadHost("example.com", ["93.184.216.34"]);
+  return result.valid === true && result.checked_count === 1;
+});
+
+check("resolved_download_host_rejects_private_dns_result", () => {
+  const result = plugin.validateResolvedDownloadHost("example.com", ["93.184.216.34", "10.0.0.5"]);
+  return result.valid === false &&
+    result.reason === "resolved_ip_blocked" &&
+    result.blocked[0].reason === "resolved_ip_private";
+});
+
+check("resolved_download_host_rejects_literal_metadata_ip", () => {
+  const result = plugin.validateResolvedDownloadHost("169.254.169.254", ["169.254.169.254"]);
+  return result.valid === false && result.reason === "resolved_ip_link_local";
+});
+
+check("download_host_resolver_fails_closed_on_dns_error", () => {
+  return plugin.resolveDownloadHostForSafety("example.com", async () => {
+    throw new Error("mock dns failure");
+  }).then((result) => result.valid === false && result.reason === "download_dns_lookup_failed");
 });
 
 check("image_buffer_accepts_png_magic", () => {
@@ -293,22 +327,28 @@ check("plugin_exports_output_safety_helpers", () => {
     typeof plugin.validateDownloadUrl === "function" &&
     typeof plugin.classifyIpAddressForNetworkSafety === "function" &&
     typeof plugin.validateResolvedDownloadAddresses === "function" &&
+    typeof plugin.validateResolvedDownloadHost === "function" &&
+    typeof plugin.resolveDownloadHostForSafety === "function" &&
     typeof plugin.contentTypeAllowsImageFormat === "function" &&
     typeof plugin.validateProviderResponseData === "function";
 });
 
-const summary = {
-  passed,
-  validator: "validate_native_doubao_sandbox",
-  check_count: results.length,
-  failed_count: results.filter((r) => !r.passed).length,
-  provider_contact_performed: false,
-  plugin_call_performed: false,
-  image_generation_performed: false,
-  file_write_performed: false,
-  env_local_read: false,
-  results,
-};
+function finish() {
+  const summary = {
+    passed,
+    validator: "validate_native_doubao_sandbox",
+    check_count: results.length,
+    failed_count: results.filter((r) => !r.passed).length,
+    provider_contact_performed: false,
+    plugin_call_performed: false,
+    image_generation_performed: false,
+    file_write_performed: false,
+    env_local_read: false,
+    results,
+  };
 
-process.stdout.write(JSON.stringify(summary, null, 2) + "\n");
-if (!passed) process.exitCode = 1;
+  process.stdout.write(JSON.stringify(summary, null, 2) + "\n");
+  if (!passed) process.exitCode = 1;
+}
+
+Promise.all(pending).then(finish);
