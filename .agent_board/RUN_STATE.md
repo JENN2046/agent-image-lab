@@ -1,5 +1,52 @@
 ---
 
+## Current Run State - v0.6.87 Review Findings Contract Fix
+
+```text
+phase: v0_6_87_review_findings_contract_fix
+status: COMPLETED_TARGETED_VALIDATED_PENDING_CLEAN_MVP
+mode: Green local review finding fixes only; no provider/plugin/API/image/output/secret/memory execution
+workspace: A:\agent-image-lab\agent-image-lab-v0.2
+branch: master
+goal_objective: fix review findings for Review Console static draft-only claims and runtime gap schema/validator drift
+changed_files_current_task:
+  - review_console/static_prototype/app.js
+  - review_console/static_prototype/FIELD_MAPPING.md
+  - scripts/validate_review_console_static_mock_boundary.js
+  - schemas/runtime_kernel_backend_gap_map.schema.yaml
+  - scripts/validate_runtime_kernel_backend_gap_map.js
+review_console_contract_fix:
+  - memory_approval.status=approved now remains write_mode=draft in the static prototype
+  - memory_delta.final_decision.should_write_to_vcp is fixed false in the static prototype
+  - image_case.human_approval.approved is fixed false with approved_in_static_draft separated
+  - archive_decision, human_approval, and memory_delta now declare draft-only/no-persistence guard fields
+runtime_gap_contract_fix:
+  - current_capabilities schema now declares object items matching fixture and validator
+  - guard schema now declares all forbidden false guard fields used by fixture and validator
+  - validator now checks schema capability fields and full guard field coverage
+validation_run:
+  - node --check review_console/static_prototype/app.js: passed
+  - node --check scripts/validate_review_console_static_mock_boundary.js: passed
+  - node --check scripts/validate_runtime_kernel_backend_gap_map.js: passed
+  - npm run validate:review-console-static: passed
+  - npm run validate:runtime-kernel-gap: passed
+  - npm run validate:mvp: failed before local commit because repository readiness validators require a clean committed state
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+image_binary_read_performed: false
+output_write_performed: false
+env_file_content_read_performed: false
+secret_value_read_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+push_status: not_performed
+next_safe_task: run_clean_mvp_after_guarded_local_commit
+```
+
+---
+
 ## Current Run State - v0.6.83 NativeDoubao Runner Case Registry
 
 ```text

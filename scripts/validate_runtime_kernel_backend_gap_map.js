@@ -51,6 +51,13 @@ const forbiddenTrueGuardFields = [
   "push_tag_release_deploy_performed",
 ];
 
+const requiredCapabilitySchemaFields = [
+  "capability_id",
+  "status",
+  "evidence_ref",
+  "runtime_maturity_claim_allowed",
+];
+
 function read(rel) {
   return fs.readFileSync(path.join(root, rel), "utf8");
 }
@@ -156,6 +163,8 @@ add("fail_fixture_evaluates_fail", failEval.passed === false, failEval);
 add("doc_names_all_runtime_gaps", requiredRuntimeComponents.every((component) => doc.includes(component)));
 add("doc_names_all_backend_gaps", requiredBackendComponents.every((component) => doc.includes(component)));
 add("schema_declares_planning_contract_only", schema.includes("Planning contract only") && schema.includes("real_runtime_kernel_implemented_now"));
+add("schema_current_capabilities_declares_object_shape", requiredCapabilitySchemaFields.every((field) => schema.includes(field)) && schema.includes("runtime_maturity_claim_allowed: false"));
+add("schema_guard_declares_all_forbidden_fields", forbiddenTrueGuardFields.every((field) => schema.includes(field)));
 add("package_script_registered", packageJson.scripts && packageJson.scripts["validate:runtime-kernel-gap"] === "node scripts/validate_runtime_kernel_backend_gap_map.js");
 add("mvp_required_file_registered", mvp.includes("scripts/validate_runtime_kernel_backend_gap_map.js"));
 add("mvp_validation_invokes_gap_map", mvp.includes("$runtimeKernelBackendGapMapOutput") && mvp.includes("validate_runtime_kernel_backend_gap_map.js"));

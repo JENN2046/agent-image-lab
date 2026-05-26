@@ -113,6 +113,25 @@ add("import_reader_declares_browser_memory_only", app.includes("browser memory o
 
 add("archive_buttons_are_dataset_controls", index.includes('data-archive="accepted"') && index.includes('data-archive="candidate"') && app.includes('setArchiveStatus(button.dataset.archive)'));
 add("memory_buttons_are_dataset_controls", index.includes('data-memory="approved"') && index.includes('data-memory="pending"') && app.includes('setMemoryStatus(button.dataset.memory)'));
+add("memory_write_mode_never_claims_confirmed_in_static_app", app.includes('if (memoryApproval.status === "approved") return "draft";') && !app.includes('return "confirmed";'));
+add("memory_delta_never_requests_vcp_write_in_static_app", app.includes("should_write_to_vcp: false") && app.includes("write_request_draft_status") && !app.includes('should_write_to_vcp: memoryApproval.status === "approved"'));
+add("memory_delta_declares_no_write_performed", [
+  "static_draft_only: true",
+  "memory_write_performed: false",
+  "DailyNote_write_performed: false",
+  "VCP_memory_write_performed: false",
+].every((token) => app.includes(token)));
+add("image_case_human_approval_is_draft_only", [
+  "approved: false",
+  "approved_in_static_draft: approvedAsset",
+  "approval_persistence_performed: false",
+  "accepted_samples_write_performed: false",
+].every((token) => app.includes(token)) && !app.includes("approved: approvedAsset"));
+add("archive_decision_declares_no_persistence", [
+  "archive_persistence_performed: false",
+  "accepted_samples_write_performed: false",
+  "production_candidate_write_performed: false",
+].every((token) => app.includes(token)));
 
 const runtimeApiHits = [
   ...findRuntimeApiHits(index, rel.index),

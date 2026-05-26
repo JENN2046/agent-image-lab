@@ -1,5 +1,28 @@
 ---
 
+- [x] ID: v0_6_87_review_findings_contract_fix
+      Lane: Green local review finding fixes only.
+      Status: COMPLETED_TARGETED_VALIDATED_PENDING_CLEAN_MVP.
+      Goal: Fix review findings for Review Console static draft-only claims and runtime gap schema/validator drift.
+      Changed files: review_console/static_prototype/app.js; review_console/static_prototype/FIELD_MAPPING.md; scripts/validate_review_console_static_mock_boundary.js; schemas/runtime_kernel_backend_gap_map.schema.yaml; scripts/validate_runtime_kernel_backend_gap_map.js.
+      Review Console fix: approved memory remains draft; should_write_to_vcp is fixed false; static approval and archive decisions expose draft-only/no-persistence guard fields.
+      Runtime gap fix: current_capabilities schema matches object fixture shape; guard schema covers every forbidden false guard field; validator checks schema/fixture coverage.
+      Validation run: node --check changed JS files passed; npm run validate:review-console-static passed; npm run validate:runtime-kernel-gap passed; npm run validate:mvp failed before local commit because repository readiness validators require a clean committed state.
+      provider_contact_performed: false.
+      plugin_call_performed: false.
+      api_call_performed: false.
+      image_generation_performed: false.
+      image_binary_read_performed: false.
+      output_write_performed: false.
+      env_file_content_read_performed: false.
+      secret_value_read_performed: false.
+      DailyNote_write_performed: false.
+      VCP_memory_write_performed: false.
+      push_status: not_performed.
+      Next: run_clean_mvp_after_guarded_local_commit.
+
+---
+
 - [x] ID: v0_6_83_native_doubao_runner_case_registry
       Lane: Green local runner registry ref reduction only.
       Status: COMPLETED_VALIDATED_NATIVE_DOUBAO_RUNNER_CASE_REGISTRY.

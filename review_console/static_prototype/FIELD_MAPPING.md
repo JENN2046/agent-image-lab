@@ -53,14 +53,14 @@
 | `task_id` / `case_id` / `project` | `state` | 与 review_session 保持一致 |
 | `agent_name` / `agent_role` | 固定静态原型署名 | 明确不是正式 VCP Agent |
 | `target_notebook` | `memory_preview.target_notebook` | 目标记忆本 |
-| `write_mode` | `memory_approval.status` 推导 | approved 为 confirmed，rejected 为 forbidden，其余为 draft |
-| `approval_status` / `approved_by` / `approved_at` | 记忆审批按钮状态 | approved 时才有审批人和审批时间 |
+| `write_mode` | `memory_approval.status` 推导 | 静态原型中 approved 仍保持 draft，rejected 为 forbidden，其余为 draft；真实写入 gate 不在本页面执行 |
+| `approval_status` / `approved_by` / `approved_at` | 记忆审批按钮状态 | 只表示浏览器草案状态，不表示 DailyNote 或 VCP memory 已写入 |
 | `chinese_diary_title` / `chinese_diary_content` | 页面输入 | 正文必须中文 |
 | `preserved_original` | 空值和占位路径 | 不保留敏感原文 |
 | `tags` | `memory_preview.tags` | 不包含敏感原文 |
 | `memory_safety` | `memory_preview.safety` | 全部为安全 mock 标记 |
 | `promotion` | 固定 false | 不自动升级 Git 规则 |
-| `final_decision.should_write_to_vcp` | `memory_approval.status === approved` | 未 approved 时为 false |
+| `final_decision.should_write_to_vcp` | 固定 `false` | 静态原型永不请求真实 VCP 写入；approved 只记录为 `write_request_draft_status` |
 
 ## Phase 9 审批记录映射
 
@@ -83,9 +83,9 @@
 
 Phase 9 审批记录必须满足：
 
-- `archive_decision.asset_status` 只能是 `candidate`、`rejected` 或 `draft`，未人工批准时不得是 `accepted`。
-- `archive_decision.human_approval.approved=false` 时，AI 建议不能替代人工批准。
-- `memory_approval.status` 未等于 `approved` 时，`memory_delta.write_mode=draft` 且 `final_decision.should_write_to_vcp=false`。
+- `archive_decision.asset_status` 是浏览器草案状态；`archive_persistence_performed=false`、`accepted_samples_write_performed=false`、`production_candidate_write_performed=false` 必须固定存在。
+- `image_case.human_approval.approved=false` 必须固定存在；`approved_in_static_draft` 只能表达浏览器草案选择，AI 建议不能替代人工批准。
+- `memory_delta.write_mode` 在静态原型中不得为 `confirmed`，且 `final_decision.should_write_to_vcp=false`、`memory_write_performed=false` 必须固定存在。
 - `audit_log` 必须保留 no-execution 证据：未读取真实源、未调用插件、未调用 API、未调用 DailyNote、未写文件、未创建图片。
 - 任何审批记录都不得复制真实 manifest 原文、密钥、token、cookie、密码、私密路径、客户隐私或客户未公开信息。
 - Review Console 的审批动作只能生成草案或授权请求，不能直接执行真实插件或写入长期记忆。

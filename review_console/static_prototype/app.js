@@ -3332,7 +3332,7 @@ function approvalPayload() {
 }
 
 function memoryWriteMode(memoryApproval) {
-  if (memoryApproval.status === "approved") return "confirmed";
+  if (memoryApproval.status === "approved") return "draft";
   if (memoryApproval.status === "rejected") return "forbidden";
   return "draft";
 }
@@ -3368,8 +3368,12 @@ function buildReviewSession(memoryApproval, humanTotal) {
     approval: state.approval,
     archive_decision: {
       asset_status: state.assetStatus,
+      static_draft_only: true,
       human_approval_required: true,
       ai_archive_recommendation_is_final: false,
+      archive_persistence_performed: false,
+      accepted_samples_write_performed: false,
+      production_candidate_write_performed: false,
       note_cn: "AI 的 archive_recommendation 只是建议，不能替代人工批准。"
     },
     memory_preview: {
@@ -3409,10 +3413,14 @@ function buildImageCase(humanTotal) {
     final_score: humanTotal,
     asset_status: state.assetStatus,
     human_approval: {
-      approved: approvedAsset,
-      approved_by: approvedAsset ? "human_reviewer" : null,
-      approved_at: approvedAsset ? nowIso() : null,
-      approval_notes_cn: approvedAsset ? "人工批准后才允许 accepted。" : "未人工批准，不能标记 accepted。"
+      approved: false,
+      approved_in_static_draft: approvedAsset,
+      static_draft_only: true,
+      approval_persistence_performed: false,
+      accepted_samples_write_performed: false,
+      approved_by: null,
+      approved_at: null,
+      approval_notes_cn: approvedAsset ? "浏览器草案已选择 accepted；真实批准仍需外部审批和持久化。" : "未人工批准，不能标记 accepted。"
     },
     strengths_cn: mock.image_case_seed.strengths_cn,
     weaknesses_cn: mock.image_case_seed.weaknesses_cn,
@@ -3440,6 +3448,10 @@ function buildMemoryDelta(memoryApproval) {
     approval_status: memoryApproval.status,
     approved_by: memoryApproval.approved_by,
     approved_at: memoryApproval.approved_at,
+    static_draft_only: true,
+    memory_write_performed: false,
+    DailyNote_write_performed: false,
+    VCP_memory_write_performed: false,
     source: {
       source_type: "review_session_static_prototype",
       source_ids: [state.session_id, state.case_id]
@@ -3465,7 +3477,10 @@ function buildMemoryDelta(memoryApproval) {
       promotion_reason_cn: null
     },
     final_decision: {
-      should_write_to_vcp: memoryApproval.status === "approved",
+      should_write_to_vcp: false,
+      static_draft_only: true,
+      memory_write_performed: false,
+      write_request_draft_status: memoryApproval.status === "approved" ? "approved_in_static_draft_pending_external_runtime_gate" : "not_ready_for_external_runtime_gate",
       should_show_in_review_console: true,
       rejection_reason_cn: memoryApproval.rejection_reason_cn
     }

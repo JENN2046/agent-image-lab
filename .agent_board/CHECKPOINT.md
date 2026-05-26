@@ -1,5 +1,40 @@
 ---
 
+## Checkpoint - v0.6.87 Review Findings Contract Fix
+
+```text
+phase: v0_6_87_review_findings_contract_fix
+status: completed_targeted_validated_pending_clean_mvp
+result: TARGETED_VALIDATED
+mode: Green local review finding fixes only
+summary: Fixed the reviewed contract gaps by keeping Review Console static approvals as draft-only/no-persistence outputs and aligning runtime gap schema fields with the fixture/validator contract.
+changed_files_current_task:
+  - review_console/static_prototype/app.js
+  - review_console/static_prototype/FIELD_MAPPING.md
+  - scripts/validate_review_console_static_mock_boundary.js
+  - schemas/runtime_kernel_backend_gap_map.schema.yaml
+  - scripts/validate_runtime_kernel_backend_gap_map.js
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+image_binary_read_performed: false
+output_write_performed: false
+env_file_content_read_performed: false
+secret_value_read_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+push_status: not_performed
+validation_run:
+  - node --check changed JS files: passed
+  - npm run validate:review-console-static: passed
+  - npm run validate:runtime-kernel-gap: passed
+  - npm run validate:mvp: failed before local commit because repository readiness validators require a clean committed state
+next: run_clean_mvp_after_guarded_local_commit
+```
+
+---
+
 ## Checkpoint - v0.6.83 NativeDoubao Runner Case Registry
 
 ```text

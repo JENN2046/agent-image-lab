@@ -1,5 +1,44 @@
 ---
 
+## Current Handoff Update - v0.6.87 Review Findings Contract Fix
+
+```text
+phase: v0_6_87_review_findings_contract_fix
+status: COMPLETED_TARGETED_VALIDATED_PENDING_CLEAN_MVP
+mode: Green local review finding fixes only; no provider/plugin/API/image/output/secret/memory execution
+workspace: A:\agent-image-lab\agent-image-lab-v0.2
+branch: master
+summary: Review Console static prototype outputs no longer claim confirmed memory write intent, VCP write request, persisted human approval, or archive persistence. Runtime gap schema now matches the object-shaped current_capabilities fixture and includes the full guard field set enforced by the validator. Targeted validation passed; clean-state MVP validation is pending an exact-file guarded local commit because the MVP gate's readiness validators reject dirty tracked files.
+changed_files_current_task:
+  - review_console/static_prototype/app.js
+  - review_console/static_prototype/FIELD_MAPPING.md
+  - scripts/validate_review_console_static_mock_boundary.js
+  - schemas/runtime_kernel_backend_gap_map.schema.yaml
+  - scripts/validate_runtime_kernel_backend_gap_map.js
+validation_status: targeted_validated_mvp_pending_clean_commit
+validation_run:
+  - node --check review_console/static_prototype/app.js: passed
+  - node --check scripts/validate_review_console_static_mock_boundary.js: passed
+  - node --check scripts/validate_runtime_kernel_backend_gap_map.js: passed
+  - npm run validate:review-console-static: passed
+  - npm run validate:runtime-kernel-gap: passed
+  - npm run validate:mvp: failed before local commit because repository readiness validators require a clean committed state
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+image_binary_read_performed: false
+output_write_performed: false
+env_file_content_read_performed: false
+secret_value_read_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+push_status: not_performed
+next_safe_task: run_clean_mvp_after_guarded_local_commit
+```
+
+---
+
 ## Current Handoff Update - v0.6.83 NativeDoubao Runner Case Registry
 
 ```text
