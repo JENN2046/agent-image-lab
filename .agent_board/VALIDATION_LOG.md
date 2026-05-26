@@ -3,7 +3,7 @@
 ## VALIDATION-20260526-v0.6.74-PRO-REVIEW-REALITY-TRIAGE
 
 Task: v0.6.74 Pro review reality triage
-Status: pre_commit_partial_pass_pending_clean_commit_mvp_rerun
+Status: completed_validated
 Receipt:
   - lane: Green
   - phase: v0_6_74_pro_review_reality_triage
@@ -23,11 +23,12 @@ Commands run:
   - git diff --check: passed with CRLF normalization warnings only
   - node scripts/validate_autopilot_agent_board_resume_compaction_guard.js: passed
   - npm run validate:mvp: failed before commit because readiness validators require a clean committed state
+  - npm run validate:mvp: passed after local triage commit 9805a9f
 Observed result:
   - validate:mvp is not empty in the current repository and passed immediately after the merge sync.
   - Pro review claims about provider output hardening gaps, Review Console static/mock boundary, and autopilot fixture-selector limits remain valid risks.
 Next:
-  - create exact-file local triage commit, then rerun npm run validate:mvp from a clean committed state
+  - prioritize provider output safety hardening
 
 ## VALIDATION-20260525-MVP-LEGACY-DEBT-VALIDATOR-REPAIR
 

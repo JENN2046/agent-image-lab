@@ -21,11 +21,11 @@ changed_files_current_task:
   - .agent_board/TASK_QUEUE.md
 local_merge_commit: dc26eba
 remote_head_included: 319ee3e
-validation_status: pre_commit_partial_pass_pending_clean_commit_mvp_rerun
+validation_status: completed_validated
 validation_run:
   - git diff --check: passed with CRLF normalization warnings only
   - node scripts/validate_autopilot_agent_board_resume_compaction_guard.js: passed
-  - npm run validate:mvp: failed before commit because readiness validators require clean committed state
+  - npm run validate:mvp: passed after local triage commit 9805a9f
 provider_contact_performed: false
 plugin_call_performed: false
 api_call_performed: false

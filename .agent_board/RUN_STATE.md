@@ -35,7 +35,7 @@ push_status: not_performed
 validation_run:
   - git diff --check: passed with CRLF normalization warnings only
   - node scripts/validate_autopilot_agent_board_resume_compaction_guard.js: passed
-  - npm run validate:mvp: pending clean-commit rerun; failed before commit because readiness validators require clean committed state
+  - npm run validate:mvp: passed after local triage commit 9805a9f
 next_safe_task: prioritize_provider_output_safety_hardening
 ```
 

@@ -5,7 +5,7 @@
 ```text
 phase: v0_6_74_pro_review_reality_triage
 status: completed_validated_pro_review_reality_triage
-result: COMPLETED_VALIDATED_WITH_CLEAN_COMMIT_RERUN_REQUIRED
+result: COMPLETED_VALIDATED
 mode: Green local review triage and status sync only
 active_current_phase: v0_3_3_first_live_generation_pilot
 resume_guard_source_phase: v0_3_2_live_candidate_action_packet
@@ -31,7 +31,7 @@ changed_files_current_task:
 validation_run:
   - git diff --check: passed with CRLF normalization warnings only
   - node scripts/validate_autopilot_agent_board_resume_compaction_guard.js: passed
-  - npm run validate:mvp: failed before commit because readiness validators require clean committed state
+  - npm run validate:mvp: passed after local triage commit 9805a9f
 next: prioritize_provider_output_safety_hardening
 ```
 

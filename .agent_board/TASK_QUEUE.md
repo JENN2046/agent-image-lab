@@ -2,7 +2,7 @@
 
 - [x] ID: v0_6_74_pro_review_reality_triage
       Lane: Green local review triage and status sync only.
-      Status: COMPLETED_VALIDATED_WITH_CLEAN_COMMIT_RERUN_REQUIRED.
+      Status: COMPLETED_VALIDATED.
       Goal: Convert the external Pro review into repository-verified triage without treating it as repository truth by itself.
       Active current phase: v0_3_3_first_live_generation_pilot.
       Resume guard source phase: v0_3_2_live_candidate_action_packet.
@@ -22,7 +22,7 @@
       DailyNote_write_performed: false.
       VCP_memory_write_performed: false.
       push_status: not_performed.
-      Validation run: git diff --check passed with CRLF normalization warnings only; node scripts/validate_autopilot_agent_board_resume_compaction_guard.js passed; npm run validate:mvp failed before commit because readiness validators require clean committed state.
+      Validation run: git diff --check passed with CRLF normalization warnings only; node scripts/validate_autopilot_agent_board_resume_compaction_guard.js passed; npm run validate:mvp passed after local triage commit 9805a9f.
       Next: prioritize_provider_output_safety_hardening.
 
 ---
