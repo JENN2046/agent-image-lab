@@ -2,9 +2,41 @@
 
 ## Active Blockers
 
+## BLOCKER-20260525-27 - No blocker for next exact Amber_B execution gate, execution not yet performed
+
+Status: cleared_for_next_exact_amber_b_execution_gate_execution_not_performed
+Detected during: v0_6_73ah_current_head_final_pre_provider_go_no_go
+Task: current-head final pre-provider GO/NO-GO
+Active current phase: v0_3_3_first_live_generation_pilot
+Resume guard source phase: v0_3_2_live_candidate_action_packet
+Legacy active next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+Resolved previous blocker: fresh_current_head_final_pre_provider_go_no_go_required_before_provider_contact
+Reason: The current-head final pre-provider GO/NO-GO passed at local/origin head c10b18ad44e3e1a3d45f7c5a4433d39732d65ac6 with ahead/behind 0/0, active delegate authorization actual, exact phrase active for execution, remote-sync blocker resolved, and one-shot policy controls intact. This gate did not execute provider contact; it only clears the way for the next exact Amber_B execution gate.
+Hard stop gate: none_for_next_exact_amber_b_one_shot_gate_inside_budgeted_envelope; Red Lane still applies to secret reads, uncapped cost, unbounded loops, destructive actions, push/tag/release/deploy, broad external writes, or overwrite attempts.
+Files involved: docs/vcp_integration/V0_6_73AH_CURRENT_HEAD_FINAL_PRE_PROVIDER_GO_NO_GO.md; scripts/validate_v0_6_73ah_current_head_final_pre_provider_go_no_go.js; tests/schema_examples/v0_6_73ah_current_head_final_pre_provider_go_no_go.example.yaml; tests/schema_examples/v0_6_73ah_current_head_final_pre_provider_go_no_go_fail.example.yaml
+Validation state: current-head final pre-provider validator, governance slice self-check, MVP validation, and git diff checks required; no provider/API/image/output/secret/memory action performed.
+Required next safe action: v0_6_73_real_vcp_agent_generation_execution_one_shot.
+Rollback or cleanup path: ah review files plus board status sync can be reverted locally; no generated image, output directory, receipt, review handoff, memory, sample, production candidate, remote write, or real execution state was created.
+
+## BLOCKER-20260525-26 - Current-head final pre-provider GO/NO-GO still required
+
+Status: resolved_by_v0_6_73ah_current_head_final_pre_provider_go
+Detected during: v0_6_73ag_remote_synced_phrase_activation_post_pull_verify
+Task: remote-synced phrase activation post-pull verification
+Active current phase: v0_3_3_first_live_generation_pilot
+Resume guard source phase: v0_3_2_live_candidate_action_packet
+Legacy active next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+Resolved previous blocker: phrase_activation_record_not_remote_synced
+Reason: Local HEAD and origin/master are now synchronized at c10b18ad44e3e1a3d45f7c5a4433d39732d65ac6 with ahead/behind 0/0, so the previous remote-sync blocker is resolved. Execution still remains closed because the previous final pre-provider GO/NO-GO was made against stale local/remote heads and a fresh current-head final pre-provider GO/NO-GO review is required before provider contact.
+Hard stop gate: fresh_current_head_final_pre_provider_go_no_go_required_before_provider_contact
+Files involved: docs/vcp_integration/V0_6_73AG_REMOTE_SYNCED_PHRASE_ACTIVATION_POST_PULL_VERIFY.md; scripts/validate_v0_6_73ag_remote_synced_phrase_activation_post_pull_verify.js; tests/schema_examples/v0_6_73ag_remote_synced_phrase_activation_post_pull_verify.example.yaml; tests/schema_examples/v0_6_73ag_remote_synced_phrase_activation_post_pull_verify_fail.example.yaml
+Validation state: post-pull verifier, governance slice self-check, MVP validation, and git diff checks required; no provider/API/image/output/secret/memory action performed.
+Required next safe action: v0_6_73ah_current_head_final_pre_provider_go_no_go.
+Rollback or cleanup path: ag review files plus board status sync can be reverted locally; no generated image, output directory, receipt, review handoff, memory, sample, production candidate, remote write, or real execution state was created.
+
 ## BLOCKER-20260525-25 - Final pre-provider review is NO-GO until phrase activation chain is pushed
 
-Status: final_pre_provider_no_go_phrase_activation_chain_unpushed
+Status: resolved_by_v0_6_73ag_post_pull_sync_verify
 Detected during: v0_6_73af_final_pre_provider_execution_go_no_go
 Task: final pre-provider execution GO/NO-GO
 Active current phase: v0_3_3_first_live_generation_pilot
@@ -413,3 +445,16 @@ Required human decision:
 Safe next action:
 Rollback or cleanup path:
 ```
+## BLOCKER-20260525-02 - v0.6.73 one-shot secretless provider runtime not callable
+
+Status: active_after_one_shot_runner_entry
+Detected during: v0_6_73ai_real_vcp_agent_generation_execution_one_shot_attempt
+Task: v0_6_73_real_vcp_agent_generation_execution_one_shot
+Reason: The exact NativeDoubao one-shot runner entry passed local secretless preflight, but no callable `secretless_provider_runtime` delegate was available in the current tool surface. The runner returned `BLOCKED_SECRETLESS_RUNTIME_NOT_CALLABLE` before provider contact.
+Hard stop gate: provider_runtime_delegate_not_callable_before_real_provider_contact
+Files involved: scripts/run_native_doubao_image_generation.js; scripts/native_doubao_secretless_provider_runtime_bridge.js; docs/vcp_integration/V0_6_73AI_REAL_VCP_AGENT_GENERATION_EXECUTION_ONE_SHOT_ATTEMPT.md; reports/provider_receipts/v0_6_73_real_vcp_agent_generation_one_shot_receipt.json
+Validation state: v0.6.73ai target validator and readiness validators passed; provider/plugin/API/image/output/review handoff/secret/memory actions were not performed.
+Why the agent stopped: continuing would require a real callable bound provider runtime delegate. Substituting another image provider or an arbitrary JavaScript function would violate the exact selected route and delegate authorization lock.
+Required human decision: provide a callable bound secretless NativeDoubao runtime delegate matching `native_doubao_secretless_provider_runtime_bridge:v0_6_73h`, or keep generation stopped.
+Safe next action: validate and keep the sanitized blocked receipt, then decide whether to provide a callable bound delegate or stop this generation route.
+Rollback or cleanup path: remove the v0.6.73ai local doc/fixture/validator/blocked receipt and board sync; no generated image, output directory, review handoff, memory, sample, production candidate, or remote state was created.

@@ -18,7 +18,11 @@ const BASE_OPTIONS = {
   provider_binding_ref: runner.SECRETLESS_PROVIDER_BINDING_REF,
   provider_binding_ref_redacted: true,
   provider_binding_ref_is_secret: false,
-  secretless_runtime_required: true
+  secretless_runtime_required: true,
+  secretless_delegate_authorization_ref: bridge.EXPECTED_DELEGATE_AUTHORIZATION_REF,
+  secretless_delegate_authorization_status: bridge.EXPECTED_DELEGATE_AUTHORIZATION_STATUS,
+  secretless_delegate_authorization_active: true,
+  secretless_delegate_authorization_can_execute_now: true
 };
 
 function externalFlags(result) {
@@ -65,6 +69,26 @@ async function runHarness() {
   };
 
   const unboundControlledBridge = bridge.createUnboundSecretlessProviderRuntimeBridge();
+  let mockBoundDelegateCalled = false;
+  let mockBoundDelegateRequestValid = false;
+  const mockBoundDelegate = async function mockBoundDelegate(request) {
+    mockBoundDelegateCalled = true;
+    mockBoundDelegateRequestValid = bridge.validateSecretlessProviderRuntimeRequest(request).length === 0;
+    return {
+      bridge_id: bridge.BRIDGE_ID,
+      status: "BLOCKED_MOCK_PROVIDER_RUNTIME_FAIL_CLOSED",
+      blocker: "mock_provider_runtime_fail_closed_no_provider_call",
+      provider_contact_performed: false,
+      plugin_call_performed: false,
+      api_call_performed: false,
+      image_generation_performed: false,
+      output_write_performed: false,
+      human_review_required_now: false
+    };
+  };
+  const boundMockBridge = bridge.createBoundSecretlessProviderRuntimeBridge(mockBoundDelegate, {
+    delegateOwner: "mock_no_provider_runtime"
+  });
 
   const cases = [];
   cases.push(await runCase(
@@ -91,6 +115,19 @@ async function runHarness() {
     "BLOCKED_PROVIDER_RUNTIME_DELEGATE_NOT_BOUND"
   ));
   cases.push(await runCase(
+    "controlled_bound_mock_bridge_called_and_fails_closed",
+    { ...BASE_OPTIONS, secretless_provider_runtime: boundMockBridge },
+    "BLOCKED_MOCK_PROVIDER_RUNTIME_FAIL_CLOSED"
+  ));
+  cases.push({
+    id: "controlled_bound_mock_delegate_invoked_once_with_valid_request",
+    expected_status: "INVOKED_ONCE_VALID_REQUEST",
+    actual_status: mockBoundDelegateCalled && mockBoundDelegateRequestValid ? "INVOKED_ONCE_VALID_REQUEST" : "NOT_VALIDLY_INVOKED",
+    passed: mockBoundDelegateCalled === true && mockBoundDelegateRequestValid === true,
+    external_side_effects_absent: true,
+    flags: externalFlags({})
+  });
+  cases.push(await runCase(
     "bad_provider_binding_ref_blocks_preflight",
     { ...BASE_OPTIONS, provider_binding_ref: "native_doubao:capability:wrong" },
     "BLOCKED_PREFLIGHT_FAILED"
@@ -106,6 +143,8 @@ async function runHarness() {
     accepted_delegate_shape: "controlled_bridge_marker_with_exact_authorization_only",
     arbitrary_runtime_allowed: false,
     unbound_controlled_bridge_allowed_to_fail_closed: true,
+    bound_controlled_mock_bridge_allowed_to_fail_closed: true,
+    bound_mock_delegate_called: mockBoundDelegateCalled,
     provider_contact_performed: false,
     plugin_call_performed: false,
     api_call_performed: false,
