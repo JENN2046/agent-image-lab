@@ -4,8 +4,8 @@
 
 ```text
 phase: v0_6_79_native_doubao_base_url_dns_safety_hook
-status: completed_targeted_validated_pending_mvp_clean_rerun
-result: COMPLETED_TARGETED_VALIDATED
+status: completed_validated_native_doubao_base_url_dns_safety_hook
+result: COMPLETED_VALIDATED
 mode: Green local base URL DNS safety hook implementation only
 active_current_phase: v0_3_3_first_live_generation_pilot
 resume_guard_source_phase: v0_3_2_live_candidate_action_packet
@@ -31,8 +31,9 @@ validation_run:
   - node --check plugin and validators: passed
   - node scripts/validate_native_doubao_sandbox.js: passed with 64 checks
   - node scripts/validate_v7_20_native_doubao_real_runner_implementation.js: passed with 34 checks
-  - npm run validate:mvp: failed before local commit because readiness validators require a clean committed state
-next: commit_exact_allowlist_then_rerun_validate_mvp
+  - npm run validate:mvp: failed before local code commit because readiness validators require a clean committed state
+  - npm run validate:mvp: passed after local code commit cf9b2a8
+next: continue_provider_output_safety_gap_queue
 ```
 
 ---

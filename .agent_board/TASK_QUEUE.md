@@ -2,13 +2,13 @@
 
 - [x] ID: v0_6_79_native_doubao_base_url_dns_safety_hook
       Lane: Green local base URL DNS safety hook implementation only.
-      Status: COMPLETED_TARGETED_VALIDATED_PENDING_MVP_CLEAN_RERUN.
+      Status: COMPLETED_VALIDATED_NATIVE_DOUBAO_BASE_URL_DNS_SAFETY_HOOK.
       Goal: Apply resolved-IP safety validation to NativeDoubao provider base URL before provider fetch.
       Active current phase: v0_3_3_first_live_generation_pilot.
       Resume guard source phase: v0_3_2_live_candidate_action_packet.
       Legacy active next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
       Changed files: plugins/image_generation/native_doubao_image/native_doubao_image.js; scripts/validate_native_doubao_sandbox.js; scripts/validate_v7_20_native_doubao_real_runner_implementation.js.
-      Validation run: node --check plugin and validators passed; node scripts/validate_native_doubao_sandbox.js passed with 64 checks; node scripts/validate_v7_20_native_doubao_real_runner_implementation.js passed with 34 checks; npm run validate:mvp failed before local commit because readiness validators require a clean committed state.
+      Validation run: node --check plugin and validators passed; node scripts/validate_native_doubao_sandbox.js passed with 64 checks; node scripts/validate_v7_20_native_doubao_real_runner_implementation.js passed with 34 checks; npm run validate:mvp failed before local code commit because readiness validators require a clean committed state; npm run validate:mvp passed after local code commit cf9b2a8.
       provider_contact_performed: false.
       plugin_call_performed: false.
       api_call_performed: false.
@@ -21,7 +21,7 @@
       DailyNote_write_performed: false.
       VCP_memory_write_performed: false.
       push_status: not_performed.
-      Next: commit_exact_allowlist_then_rerun_validate_mvp.
+      Next: continue_provider_output_safety_gap_queue.
 
 ---
 

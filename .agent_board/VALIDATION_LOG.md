@@ -3,7 +3,7 @@
 ## VALIDATION-20260526-v0.6.79-NATIVE-DOUBAO-BASE-URL-DNS-SAFETY-HOOK
 
 Task: v0.6.79 NativeDoubao base URL DNS safety hook
-Status: completed_targeted_validated_pending_mvp_clean_rerun
+Status: completed_validated
 Receipt:
   - lane: Green
   - phase: v0_6_79_native_doubao_base_url_dns_safety_hook
@@ -23,11 +23,12 @@ Commands run:
   - node --check scripts/validate_native_doubao_sandbox.js: passed
   - node scripts/validate_native_doubao_sandbox.js: passed with 64 checks
   - node scripts/validate_v7_20_native_doubao_real_runner_implementation.js: passed with 34 checks
-  - npm run validate:mvp: failed before local commit because readiness validators require a clean committed state
+  - npm run validate:mvp: failed before local code commit because readiness validators require a clean committed state
+  - npm run validate:mvp: passed after local code commit cf9b2a8
 Observed result:
   - NativeDoubao provider base URL handling now validates resolved DNS addresses before fetch(apiUrl) and blocks unsafe or failed resolution.
 Next:
-  - commit exact allowlist, then rerun npm run validate:mvp
+  - continue provider output safety gap queue
 
 ## VALIDATION-20260526-v0.6.78-NATIVE-DOUBAO-DOWNLOAD-DNS-SAFETY-HOOK
 
