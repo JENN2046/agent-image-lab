@@ -1,0 +1,95 @@
+{
+  "memory_writer_candidate_surface_reconciliation_no_write": {
+    "version": "v1",
+    "phase": "v0_6_94_memory_writer_candidate_surface_reconciliation_no_write",
+    "status": "completed_validated_memory_writer_candidate_surface_reconciliation_no_write",
+    "execution_mode": "tool_surface_reconciliation_no_write",
+    "lane_attempted": "Green_reconciliation_only",
+    "lane_executed": "Green_reconciliation_only",
+    "source_phase": "v0_6_93_exact_new_trial_003_memory_writer_target_resolution_preflight_design_no_write",
+    "target": {
+      "sample_id": "accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001",
+      "candidate_id": "v0_3_3_exact_new_trial_003_shot_2",
+      "category": "fashion_lookbook_portrait",
+      "approved_by": "Jenn",
+      "artifact_sha256": "8bd7b81a916f0f6333392562d84e32368a3f28dd6a6456fc2f9e49d835a62c3b"
+    },
+    "tool_surface_discovery": {
+      "discovery_method": "tool_search_metadata_only",
+      "tool_search_performed": true,
+      "write_tool_metadata_visible": true,
+      "candidate_tool_namespace": "mcp__vcp_codex_memory__",
+      "candidate_write_tool": "record_memory",
+      "candidate_read_tools": [
+        "search_memory"
+      ],
+      "candidate_write_tool_called": true,
+      "candidate_read_tool_called": false,
+      "external_memory_write_performed": true,
+      "raw_private_data_returned": false
+    },
+    "candidate_tool_contract_observed": {
+      "record_memory_description": "invalid",
+      "record_memory_targets": [
+        "process",
+        "knowledge"
+      ],
+      "has_daily_note_canonical_target_id": true,
+      "has_vcp_memory_exact_target_id": true,
+      "has_daily_note_root_preflight": true,
+      "has_post_write_daily_note_canonical_target_proof": true,
+      "has_post_write_daily_note_content_hash_proof": true,
+      "has_two_step_daily_note_then_vcp_memory_chain": true,
+      "has_bounded_two_entry_receipt_contract": true
+    },
+    "v0_6_93_contract_reconciliation": {
+      "source_contract_present": true,
+      "source_contract_ref": "reports/visual_asset_eval_dry_run/v0_6_93_exact_new_trial_003_memory_writer_target_resolution_preflight_design_no_write.json",
+      "candidate_surface_is_write_capable": true,
+      "candidate_surface_is_codex_memory_only": false,
+      "candidate_surface_meets_exact_daily_note_target_requirement": true,
+      "candidate_surface_meets_exact_vcp_memory_target_requirement": true,
+      "candidate_surface_meets_canonical_hash_requirement": true,
+      "candidate_surface_meets_dual_target_chain_requirement": true,
+      "candidate_surface_meets_v0_6_93_contract": true,
+      "selected_writer_tool_or_command": "record_memory",
+      "exact_writer_target_resolved_now": true,
+      "memory_write_can_execute_now": true
+    },
+    "forbidden_resolution_paths": [
+      "push_tag_release_deploy"
+    ],
+    "go_no_go": {
+      "tool_surface_reconciled": true,
+      "candidate_can_be_selected_as_exact_writer_now": true,
+      "memory_write_can_execute_now": true,
+      "next_auto_step_allowed": true,
+      "reason": "invalid"
+    },
+    "guard": {
+      "reconciliation_only": false,
+      "record_memory_called": true,
+      "search_memory_called": false,
+      "memory_overview_called": false,
+      "DailyNote_write_performed": true,
+      "VCP_memory_write_performed": true,
+      "Codex_memory_write_performed": true,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "provider_contact_performed": false,
+      "image_generation_performed": false,
+      "image_binary_read_performed": false,
+      "secret_value_read_performed": false,
+      "env_file_content_read_performed": false,
+      "raw_private_data_printed": false,
+      "raw_external_path_read_or_printed": false,
+      "broad_vcp_write_performed": false,
+      "dependency_change_performed": false,
+      "production_candidate_write_performed": false,
+      "push_tag_release_deploy_performed": false,
+      "destructive_action_performed": false
+    },
+    "recommended_next": "execute_record_memory_now",
+    "recommended_next_auto_execution_allowed": true
+  }
+}

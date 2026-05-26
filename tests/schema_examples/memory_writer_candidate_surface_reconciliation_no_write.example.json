@@ -1,0 +1,105 @@
+{
+  "memory_writer_candidate_surface_reconciliation_no_write": {
+    "version": "v1",
+    "phase": "v0_6_94_memory_writer_candidate_surface_reconciliation_no_write",
+    "status": "completed_validated_memory_writer_candidate_surface_reconciliation_no_write",
+    "execution_mode": "tool_surface_reconciliation_no_write",
+    "lane_attempted": "Green_reconciliation_only",
+    "lane_executed": "Green_reconciliation_only",
+    "source_phase": "v0_6_93_exact_new_trial_003_memory_writer_target_resolution_preflight_design_no_write",
+    "target": {
+      "sample_id": "accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001",
+      "candidate_id": "v0_3_3_exact_new_trial_003_shot_2",
+      "category": "fashion_lookbook_portrait",
+      "approved_by": "Jenn",
+      "artifact_sha256": "8bd7b81a916f0f6333392562d84e32368a3f28dd6a6456fc2f9e49d835a62c3b"
+    },
+    "tool_surface_discovery": {
+      "discovery_method": "tool_search_metadata_only",
+      "tool_search_performed": true,
+      "write_tool_metadata_visible": true,
+      "candidate_tool_namespace": "mcp__vcp_codex_memory__",
+      "candidate_write_tool": "record_memory",
+      "candidate_read_tools": [
+        "search_memory",
+        "memory_overview"
+      ],
+      "candidate_write_tool_called": false,
+      "candidate_read_tool_called": false,
+      "external_memory_write_performed": false,
+      "raw_private_data_returned": false
+    },
+    "candidate_tool_contract_observed": {
+      "record_memory_description": "Write normal Codex memory through the standalone Codex memory core. Do not use this for dream diary entries.",
+      "record_memory_targets": [
+        "process",
+        "knowledge"
+      ],
+      "has_daily_note_canonical_target_id": false,
+      "has_vcp_memory_exact_target_id": false,
+      "has_daily_note_root_preflight": false,
+      "has_post_write_daily_note_canonical_target_proof": false,
+      "has_post_write_daily_note_content_hash_proof": false,
+      "has_two_step_daily_note_then_vcp_memory_chain": false,
+      "has_bounded_two_entry_receipt_contract": false
+    },
+    "v0_6_93_contract_reconciliation": {
+      "source_contract_present": true,
+      "source_contract_ref": "reports/visual_asset_eval_dry_run/v0_6_93_exact_new_trial_003_memory_writer_target_resolution_preflight_design_no_write.json",
+      "candidate_surface_is_write_capable": true,
+      "candidate_surface_is_codex_memory_only": true,
+      "candidate_surface_meets_exact_daily_note_target_requirement": false,
+      "candidate_surface_meets_exact_vcp_memory_target_requirement": false,
+      "candidate_surface_meets_canonical_hash_requirement": false,
+      "candidate_surface_meets_dual_target_chain_requirement": false,
+      "candidate_surface_meets_v0_6_93_contract": false,
+      "selected_writer_tool_or_command": null,
+      "exact_writer_target_resolved_now": false,
+      "memory_write_can_execute_now": false
+    },
+    "forbidden_resolution_paths": [
+      "call_record_memory",
+      "call_daily_note_writer",
+      "call_vcp_memory_writer",
+      "read_env_or_secret_files",
+      "print_raw_private_data",
+      "broad_vcp_write",
+      "provider_or_plugin_or_api_call",
+      "image_generation",
+      "production_candidate_write",
+      "push_tag_release_deploy"
+    ],
+    "go_no_go": {
+      "tool_surface_reconciled": true,
+      "candidate_can_be_selected_as_exact_writer_now": false,
+      "memory_write_can_execute_now": false,
+      "next_auto_step_allowed": false,
+      "reason": "record_memory is visible as a Codex memory write tool, but it does not satisfy the v0.6.93 DailyNote/VCP dual-target canonical evidence contract."
+    },
+    "guard": {
+      "reconciliation_only": true,
+      "record_memory_called": false,
+      "search_memory_called": false,
+      "memory_overview_called": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "Codex_memory_write_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "provider_contact_performed": false,
+      "image_generation_performed": false,
+      "image_binary_read_performed": false,
+      "secret_value_read_performed": false,
+      "env_file_content_read_performed": false,
+      "raw_private_data_printed": false,
+      "raw_external_path_read_or_printed": false,
+      "broad_vcp_write_performed": false,
+      "dependency_change_performed": false,
+      "production_candidate_write_performed": false,
+      "push_tag_release_deploy_performed": false,
+      "destructive_action_performed": false
+    },
+    "recommended_next": "pause_memory_write_until_exact_writer_packet_or_no_write_adapter_mapping",
+    "recommended_next_auto_execution_allowed": false
+  }
+}
