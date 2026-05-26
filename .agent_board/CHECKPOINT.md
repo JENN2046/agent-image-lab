@@ -1,5 +1,41 @@
 ---
 
+## Checkpoint - v0.6.77 NativeDoubao Resolved IP SSRF Guard Foundation
+
+```text
+phase: v0_6_77_native_doubao_resolved_ip_ssrf_guard_foundation
+status: completed_targeted_validated_pending_clean_commit_mvp_rerun
+result: TARGETED_VALIDATED
+mode: Green local resolved-IP SSRF guard foundation only
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+legacy_active_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+summary: Added local IPv4/IPv6 resolved-address classification and validation helpers for future DNS-aware provider URL download SSRF checks. No DNS lookup or external execution occurred.
+changed_files_current_task:
+  - plugins/image_generation/native_doubao_image/native_doubao_image.js
+  - scripts/validate_native_doubao_sandbox.js
+  - scripts/validate_v7_20_native_doubao_real_runner_implementation.js
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+image_binary_read_performed: false
+output_write_performed: false
+dns_lookup_performed: false
+env_file_content_read_performed: false
+secret_value_read_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+push_status: not_performed
+validation_run:
+  - node --check plugin and validators: passed
+  - node scripts/validate_native_doubao_sandbox.js: passed
+  - node scripts/validate_v7_20_native_doubao_real_runner_implementation.js: passed
+next: create_exact_file_local_commit_then_rerun_mvp
+```
+
+---
+
 ## Checkpoint - v0.6.76 NativeDoubao Provider Response Schema Guard
 
 ```text

@@ -155,6 +155,98 @@ function isLikelyBase64(value) {
   return /^[A-Za-z0-9+/]+={0,2}$/.test(value);
 }
 
+function parseIpv4Address(value) {
+  var parts = String(value || "").split(".");
+  if (parts.length !== 4) return null;
+  var nums = [];
+  for (var i = 0; i < parts.length; i++) {
+    if (!/^\d{1,3}$/.test(parts[i])) return null;
+    var n = Number(parts[i]);
+    if (!Number.isInteger(n) || n < 0 || n > 255) return null;
+    nums.push(n);
+  }
+  return nums;
+}
+
+function normalizeIpv6Address(value) {
+  var input = String(value || "").toLowerCase();
+  if (input[0] === "[" && input[input.length - 1] === "]") {
+    input = input.slice(1, -1);
+  }
+  var zoneIndex = input.indexOf("%");
+  if (zoneIndex !== -1) input = input.slice(0, zoneIndex);
+  return input;
+}
+
+function classifyIpAddressForNetworkSafety(address) {
+  var raw = String(address || "").trim();
+  if (!raw) return { allowed: false, reason: "resolved_ip_missing" };
+
+  var ipv4 = parseIpv4Address(raw);
+  if (ipv4) {
+    var a = ipv4[0];
+    var b = ipv4[1];
+    if (a === 0) return { allowed: false, reason: "resolved_ip_unspecified_or_this_network" };
+    if (a === 10) return { allowed: false, reason: "resolved_ip_private" };
+    if (a === 127) return { allowed: false, reason: "resolved_ip_loopback" };
+    if (a === 169 && b === 254) return { allowed: false, reason: "resolved_ip_link_local" };
+    if (a === 172 && b >= 16 && b <= 31) return { allowed: false, reason: "resolved_ip_private" };
+    if (a === 192 && b === 168) return { allowed: false, reason: "resolved_ip_private" };
+    if (a === 100 && b >= 64 && b <= 127) return { allowed: false, reason: "resolved_ip_carrier_grade_nat" };
+    if (a === 192 && b === 0) return { allowed: false, reason: "resolved_ip_ietf_protocol_assignment" };
+    if (a === 192 && b === 0 && ipv4[2] === 2) return { allowed: false, reason: "resolved_ip_documentation" };
+    if (a === 198 && (b === 18 || b === 19)) return { allowed: false, reason: "resolved_ip_benchmarking" };
+    if (a === 198 && b === 51 && ipv4[2] === 100) return { allowed: false, reason: "resolved_ip_documentation" };
+    if (a === 203 && b === 0 && ipv4[2] === 113) return { allowed: false, reason: "resolved_ip_documentation" };
+    if (a >= 224) return { allowed: false, reason: "resolved_ip_multicast_or_reserved" };
+    return { allowed: true, family: "ipv4" };
+  }
+
+  var ipv6 = normalizeIpv6Address(raw);
+  if (ipv6 === "::" || ipv6 === "0:0:0:0:0:0:0:0") {
+    return { allowed: false, reason: "resolved_ip_unspecified" };
+  }
+  if (ipv6 === "::1" || ipv6 === "0:0:0:0:0:0:0:1") {
+    return { allowed: false, reason: "resolved_ip_loopback" };
+  }
+  if (ipv6.indexOf("::ffff:") === 0) {
+    return classifyIpAddressForNetworkSafety(ipv6.slice("::ffff:".length));
+  }
+  if (ipv6.indexOf("fc") === 0 || ipv6.indexOf("fd") === 0) {
+    return { allowed: false, reason: "resolved_ip_unique_local" };
+  }
+  if (/^fe[89ab]/.test(ipv6)) {
+    return { allowed: false, reason: "resolved_ip_link_local" };
+  }
+  if (ipv6.indexOf("ff") === 0) {
+    return { allowed: false, reason: "resolved_ip_multicast" };
+  }
+  if (ipv6.indexOf("2001:db8") === 0) {
+    return { allowed: false, reason: "resolved_ip_documentation" };
+  }
+  if (ipv6.indexOf(":") !== -1) {
+    return { allowed: true, family: "ipv6" };
+  }
+  return { allowed: false, reason: "resolved_ip_not_parseable" };
+}
+
+function validateResolvedDownloadAddresses(addresses) {
+  if (!Array.isArray(addresses) || addresses.length === 0) {
+    return { valid: false, reason: "resolved_ip_list_empty" };
+  }
+  var blocked = [];
+  for (var i = 0; i < addresses.length; i++) {
+    var classification = classifyIpAddressForNetworkSafety(addresses[i]);
+    if (!classification.allowed) {
+      blocked.push({ address: addresses[i], reason: classification.reason });
+    }
+  }
+  if (blocked.length > 0) {
+    return { valid: false, reason: "resolved_ip_blocked", blocked: blocked };
+  }
+  return { valid: true, checked_count: addresses.length };
+}
+
 function validateDownloadUrl(rawUrl) {
   try {
     var parsed = new URL(rawUrl);
@@ -162,17 +254,17 @@ function validateDownloadUrl(rawUrl) {
     if (parsed.protocol !== "https:") {
       return { valid: false, reason: "download_blocked_non_https_url" };
     }
-    if (host === "localhost" || host === "127.0.0.1" || host === "::1") {
+    if (host === "localhost") {
       return { valid: false, reason: "download_blocked_localhost" };
     }
-    if (
-      /^10\./.test(host) ||
-      /^192\.168\./.test(host) ||
-      /^172\.(1[6-9]|2\d|3[0-1])\./.test(host) ||
-      /^169\.254\./.test(host) ||
-      /^0\./.test(host)
-    ) {
-      return { valid: false, reason: "download_blocked_private_or_link_local_host" };
+    var literalHostSafety = classifyIpAddressForNetworkSafety(host);
+    if (literalHostSafety.family && !literalHostSafety.allowed) {
+      return { valid: false, reason: literalHostSafety.reason };
+    }
+    if (parseIpv4Address(host) || normalizeIpv6Address(host).indexOf(":") !== -1) {
+      if (!literalHostSafety.allowed) {
+        return { valid: false, reason: literalHostSafety.reason };
+      }
     }
     return { valid: true, url: parsed };
   } catch (err) {
@@ -803,6 +895,8 @@ module.exports = {
   verifyLocalOutputFile: verifyLocalOutputFile,
   validateImageBuffer: validateImageBuffer,
   validateDownloadUrl: validateDownloadUrl,
+  classifyIpAddressForNetworkSafety: classifyIpAddressForNetworkSafety,
+  validateResolvedDownloadAddresses: validateResolvedDownloadAddresses,
   contentTypeAllowsImageFormat: contentTypeAllowsImageFormat,
   validateBaseUrl: validateBaseUrl,
   validateA5Limits: validateA5Limits,

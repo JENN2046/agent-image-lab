@@ -58,6 +58,64 @@ check("download_url_rejects_localhost", () => plugin.validateDownloadUrl("https:
 check("download_url_rejects_private_ip", () => plugin.validateDownloadUrl("https://192.168.1.5/image.png").valid === false);
 check("download_url_accepts_https_public_host", () => plugin.validateDownloadUrl("https://example.com/image.png").valid === true);
 
+check("resolved_ip_safety_allows_public_ipv4", () => {
+  const result = plugin.classifyIpAddressForNetworkSafety("8.8.8.8");
+  return result.allowed === true && result.family === "ipv4";
+});
+
+check("resolved_ip_safety_rejects_loopback_ipv4", () => {
+  const result = plugin.classifyIpAddressForNetworkSafety("127.0.0.1");
+  return result.allowed === false && result.reason === "resolved_ip_loopback";
+});
+
+check("resolved_ip_safety_rejects_metadata_ipv4", () => {
+  const result = plugin.classifyIpAddressForNetworkSafety("169.254.169.254");
+  return result.allowed === false && result.reason === "resolved_ip_link_local";
+});
+
+check("resolved_ip_safety_rejects_cgnat_ipv4", () => {
+  const result = plugin.classifyIpAddressForNetworkSafety("100.64.0.1");
+  return result.allowed === false && result.reason === "resolved_ip_carrier_grade_nat";
+});
+
+check("resolved_ip_safety_rejects_documentation_ipv4", () => {
+  const result = plugin.classifyIpAddressForNetworkSafety("203.0.113.10");
+  return result.allowed === false && result.reason === "resolved_ip_documentation";
+});
+
+check("resolved_ip_safety_allows_public_ipv6", () => {
+  const result = plugin.classifyIpAddressForNetworkSafety("2606:4700:4700::1111");
+  return result.allowed === true && result.family === "ipv6";
+});
+
+check("resolved_ip_safety_rejects_ipv6_loopback", () => {
+  const result = plugin.classifyIpAddressForNetworkSafety("::1");
+  return result.allowed === false && result.reason === "resolved_ip_loopback";
+});
+
+check("resolved_ip_safety_rejects_ipv6_unique_local", () => {
+  const result = plugin.classifyIpAddressForNetworkSafety("fd00::1");
+  return result.allowed === false && result.reason === "resolved_ip_unique_local";
+});
+
+check("resolved_ip_safety_rejects_ipv4_mapped_loopback", () => {
+  const result = plugin.classifyIpAddressForNetworkSafety("::ffff:127.0.0.1");
+  return result.allowed === false && result.reason === "resolved_ip_loopback";
+});
+
+check("resolved_download_addresses_rejects_mixed_public_private", () => {
+  const result = plugin.validateResolvedDownloadAddresses(["8.8.8.8", "10.0.0.1"]);
+  return result.valid === false &&
+    result.reason === "resolved_ip_blocked" &&
+    result.blocked.length === 1 &&
+    result.blocked[0].reason === "resolved_ip_private";
+});
+
+check("resolved_download_addresses_accepts_public_set", () => {
+  const result = plugin.validateResolvedDownloadAddresses(["8.8.8.8", "2606:4700:4700::1111"]);
+  return result.valid === true && result.checked_count === 2;
+});
+
 check("image_buffer_accepts_png_magic", () => {
   const png = Buffer.from("89504e470d0a1a0a0000000d49484452", "hex");
   const result = plugin.validateImageBuffer(png, "image/png");
@@ -233,6 +291,8 @@ check("verify_local_output_file_rejects_missing_file", () => {
 check("plugin_exports_output_safety_helpers", () => {
   return typeof plugin.validateImageBuffer === "function" &&
     typeof plugin.validateDownloadUrl === "function" &&
+    typeof plugin.classifyIpAddressForNetworkSafety === "function" &&
+    typeof plugin.validateResolvedDownloadAddresses === "function" &&
     typeof plugin.contentTypeAllowsImageFormat === "function" &&
     typeof plugin.validateProviderResponseData === "function";
 });

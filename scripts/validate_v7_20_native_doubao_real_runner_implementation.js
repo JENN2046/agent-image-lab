@@ -34,6 +34,7 @@ check("plugin_validates_provider_response_schema", () => plugin.includes("functi
 check("plugin_validates_image_magic_before_write", () => plugin.includes("function validateImageBuffer") && plugin.includes("image_magic_number_unsupported"));
 check("plugin_caps_image_bytes", () => plugin.includes("MAX_IMAGE_OUTPUT_BYTES") && plugin.includes("image_payload_too_large"));
 check("plugin_download_blocks_redirect_and_bad_content_type", () => plugin.includes('redirect: "error"') && plugin.includes("download_content_type_missing_or_invalid"));
+check("plugin_has_resolved_ip_ssrf_guard_helpers", () => plugin.includes("function classifyIpAddressForNetworkSafety") && plugin.includes("function validateResolvedDownloadAddresses"));
 check("plugin_uses_type_matched_extension", () => plugin.includes("function extensionForImageFormat") && plugin.includes("format: b64Check.format"));
 check("plugin_exact_call_budget", () => plugin.includes("maxPluginCalls must be exactly 1") && plugin.includes("maxImagesCreated must be exactly 1"));
 check("dryRunGenerate_still_exists", () => plugin.includes("function dryRunGenerate"));

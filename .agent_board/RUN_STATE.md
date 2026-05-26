@@ -1,5 +1,49 @@
 ---
 
+## Current Run State - v0.6.77 NativeDoubao Resolved IP SSRF Guard Foundation
+
+```text
+phase: v0_6_77_native_doubao_resolved_ip_ssrf_guard_foundation
+status: COMPLETED_TARGETED_VALIDATED_PENDING_CLEAN_COMMIT_MVP_RERUN
+mode: Green local resolved-IP SSRF guard foundation only; no DNS lookup, provider/plugin/API/image/output/secret/memory execution
+workspace: A:\agent-image-lab\agent-image-lab-v0.2
+branch: master
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+legacy_active_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+goal_objective: add local resolved IP safety classification helpers for future provider URL download DNS checks
+changed_files_current_task:
+  - plugins/image_generation/native_doubao_image/native_doubao_image.js
+  - scripts/validate_native_doubao_sandbox.js
+  - scripts/validate_v7_20_native_doubao_real_runner_implementation.js
+resolved_ip_guard_added:
+  - classifyIpAddressForNetworkSafety
+  - validateResolvedDownloadAddresses
+  - IPv4 private/loopback/link-local/CGNAT/documentation/reserved blocking
+  - IPv6 loopback/unique-local/link-local/multicast/documentation blocking
+  - IPv4-mapped IPv6 blocking
+  - literal IP URL guard reuses resolved-IP classifier
+validation_run:
+  - node --check plugin and validators: passed
+  - node scripts/validate_native_doubao_sandbox.js: passed
+  - node scripts/validate_v7_20_native_doubao_real_runner_implementation.js: passed
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+image_binary_read_performed: false
+output_write_performed: false
+dns_lookup_performed: false
+env_file_content_read_performed: false
+secret_value_read_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+push_status: not_performed
+next_safe_task: create_exact_file_local_commit_then_rerun_mvp
+```
+
+---
+
 ## Current Run State - v0.6.76 NativeDoubao Provider Response Schema Guard
 
 ```text
