@@ -3,7 +3,7 @@
 ## VALIDATION-20260526-v0.6.75-NATIVE-DOUBAO-PROVIDER-OUTPUT-SAFETY-HARDENING
 
 Task: v0.6.75 NativeDoubao provider output safety hardening
-Status: targeted_validated_pending_clean_commit_mvp_rerun
+Status: completed_validated
 Receipt:
   - lane: Green
   - phase: v0_6_75_native_doubao_provider_output_safety_hardening
@@ -24,10 +24,11 @@ Commands run:
   - node scripts/validate_native_doubao_sandbox.js: passed
   - node scripts/validate_v7_20_native_doubao_real_runner_implementation.js: passed
   - npm run validate:mvp: failed before commit because readiness validators require a clean committed state
+  - npm run validate:mvp: passed after local code commit 0f34f20
 Observed result:
   - NativeDoubao output persistence now validates timeout, JSON content-type, download URL, redirects, image size, image magic number, content-type consistency, output extension, and temp-file persistence locally.
 Next:
-  - create exact-file local commit, then rerun npm run validate:mvp from a clean committed state
+  - no next task selected
 
 ## VALIDATION-20260526-v0.6.74-PRO-REVIEW-REALITY-TRIAGE
 
