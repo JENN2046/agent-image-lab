@@ -1,5 +1,48 @@
 ---
 
+## Checkpoint - State Surface Next Task Alignment v1
+
+```text
+phase: state_surface_next_task_alignment_v1
+status: completed_validated_status_alignment
+result: COMPLETED_VALIDATED
+mode: A0/A4 Green local status-surface alignment
+summary: Split the current remote boundary from the current Green local product-capability next task so stale historical next-task fields no longer drive resume decisions.
+changed_files_current_task:
+  - README.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/VALIDATION_LOG.md
+historical_not_current_next:
+  - create_runtime_contract_schema_no_exec
+  - readiness_receipt_registry_cross_claims_v1
+current_remote_boundary: owner_push_safety_gate_after_review
+current_remote_boundary_type: Red push-safety-gate boundary
+current_local_capability_next: review_bridge_readonly_stub
+current_local_capability_next_lane: Green
+runnable_capability_gate: active
+push_status: not_performed
+provider_contact_performed: false
+image_generation_performed: false
+production_write_performed: false
+secret_value_read_performed: false
+validation_run:
+  - README/.agent_board text consistency checks: passed
+  - git diff --check: passed
+  - npm run validate:mvp: passed
+  - npm run validate:runtime-kernel: passed
+go_no_go:
+  status_alignment_created: true
+  remote_write_authorized_now: false
+  push_ready_now: false
+  next_green_local_task_clear: true
+next: review_bridge_readonly_stub unless owner explicitly requests remote push-safety handling
+```
+
+---
+
 ## Checkpoint - v0.6.109 Runtime Kernel Entry Boundary No Exec
 
 ```text

@@ -1,5 +1,24 @@
 ---
 
+- [x] ID: state_surface_next_task_alignment_v1
+      Lane: A0/A4 Green local status-surface alignment.
+      Status: COMPLETED_VALIDATED_STATUS_ALIGNMENT.
+      Goal: Align current boundary and next-task status surfaces after runtime roadmap introduced the Runnable Capability Gate.
+      Finding: create_runtime_contract_schema_no_exec is historical v0.6.109 evidence; readiness_receipt_registry_cross_claims_v1 is completed; neither is the current next task.
+      Current remote boundary: owner_push_safety_gate_after_review.
+      Current remote boundary type: Red push-safety-gate boundary.
+      Current Green local capability next: review_bridge_readonly_stub.
+      Runtime-track gate: Runnable Capability Gate.
+      Validation run: README/.agent_board text consistency checks; git diff --check; npm run validate:mvp; npm run validate:runtime-kernel.
+      push_status: not_performed.
+      provider_contact_performed: false.
+      image_generation_performed: false.
+      production_write_performed: false.
+      secret_value_read_performed: false.
+      Next: review_bridge_readonly_stub unless owner explicitly requests remote push-safety handling.
+
+---
+
 - [x] ID: v0_6_109_runtime_kernel_entry_boundary_no_exec
       Lane: A0/A4 Green local planning boundary.
       Status: COMPLETED_VALIDATED_RUNTIME_KERNEL_ENTRY_BOUNDARY_NO_EXEC.

@@ -1,5 +1,39 @@
 ---
 
+## Current Handoff Update - State Surface Next Task Alignment v1
+
+```text
+phase: state_surface_next_task_alignment_v1
+status: COMPLETED_VALIDATED_STATUS_ALIGNMENT
+mode: A0/A4 Green local status-surface alignment; no runtime implementation, no provider, no production write, no push
+branch: master
+summary: Current next-task status is now split into remote boundary and local product-capability route. owner_push_safety_gate_after_review remains the Red remote boundary. review_bridge_readonly_stub is the current Green local next task if continuing without push.
+changed_files_current_task:
+  - README.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/VALIDATION_LOG.md
+historical_not_current_next:
+  - create_runtime_contract_schema_no_exec
+  - readiness_receipt_registry_cross_claims_v1
+current_remote_boundary: owner_push_safety_gate_after_review
+current_remote_boundary_type: Red push-safety-gate boundary
+current_local_capability_next: review_bridge_readonly_stub
+current_local_capability_next_lane: Green
+runnable_capability_gate: active
+push_status: not_performed
+provider_contact_performed: false
+image_generation_performed: false
+production_write_performed: false
+secret_value_read_performed: false
+validation_status: completed_validated
+next_safe_task: review_bridge_readonly_stub
+```
+
+---
+
 ## Current Handoff Update - v0.6.109 Runtime Kernel Entry Boundary No Exec
 
 ```text

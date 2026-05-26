@@ -5,8 +5,8 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 ## 当前权限策略
 
 ```yaml
-current_phase: amber_action_packet_preflight_v1
-current_goal: improve_autopilot_real_amber_pre_execution_safety
+current_phase: state_surface_next_task_alignment_v1
+current_goal: align_current_boundary_and_next_local_capability_task
 semantic_tightening_active: true
 current_boundary_semantics_cleanup_active: true
 false_readiness_negative_cases_active: true
@@ -36,8 +36,17 @@ amber_action_packet_preflight_validator_active: true
 local_full_autopilot_ready: true
 current_next_boundary: owner_push_safety_gate_after_review
 current_next_boundary_type: Red push-safety-gate boundary
+current_remote_boundary: owner_push_safety_gate_after_review
+current_remote_boundary_type: Red push-safety-gate boundary
+current_local_capability_next: review_bridge_readonly_stub
+current_local_capability_next_lane: Green
+current_local_capability_source: docs/RUNTIME_TO_PRODUCTION_LANDING_ROADMAP.md
+current_runtime_track_gate: Runnable Capability Gate
 fixture_next_safe_task_evidence: historical_test_fixture_only
 no_executable_local_task_required_before_push_safety_gate_unless_validator_fails: true
+historical_completed_next_tasks:
+  - create_runtime_contract_schema_no_exec
+  - readiness_receipt_registry_cross_claims_v1
 selected_reliability_task: add_false_readiness_negative_case_validator
 selected_reliability_task_lane: Green
 selected_receipt_registry_task: add_receipt_registry_negative_case_validator
@@ -49,7 +58,9 @@ red_lane_requires_user: true
 push_tag_release_deploy_allowed_automatically: false
 secret_value_access_allowed_automatically: false
 destructive_action_allowed_automatically: false
-recommended_next: readiness_receipt_registry_cross_claims_v1
+recommended_next_if_remote_sync_is_requested: owner_push_safety_gate_after_review
+recommended_next_if_continuing_local_product_work: review_bridge_readonly_stub
+recommended_next: review_bridge_readonly_stub
 ```
 
 Smart Standing Authorization v3 means Codex can continue Green work directly and Amber work inside the budgeted envelope without step-by-step approval. It must stop at Red Lane conditions such as push/tag/release/deploy, destructive actions, secret value access, raw private data exposure, uncapped cost, unbounded loops, broad external repository modification, or dependency changes without an exact package/action list.
@@ -93,7 +104,7 @@ stop-condition, receipt, registry, continuation, and side-effect boundaries
 before any real provider/plugin/API/image/memory/source-read/runtime/dependency
 action can be attempted.
 
-Local closeout status: the complete Green/local chain is ready for owner review and later push safety gate. Push remains unperformed and Red Lane until explicitly authorized.
+Local closeout status: the complete Green/local autopilot readiness chain is ready for owner review and later push safety gate. Push remains unperformed and Red Lane until explicitly authorized. If the owner chooses not to cross the push boundary yet, the current Green local product-capability route is `review_bridge_readonly_stub` under the Runnable Capability Gate.
 
 Semantic tightening status: readiness now distinguishes historical fixture
 `next_safe_task` evidence from the current final boundary. The fixture task
@@ -114,9 +125,14 @@ include it, and the next recommended local hardening task is
 `amber_action_packet_preflight_v1`.
 
 Amber action packet preflight status: `amber_action_packet_preflight_v1` is now
-completed as a local Green validator. Evolution Engine completed capabilities
-include it, and the next recommended local hardening task is
-`readiness_receipt_registry_cross_claims_v1`.
+completed as a local Green validator. `readiness_receipt_registry_cross_claims_v1`
+is also completed and must not be reported as the current next task.
+
+Current next-task split: remote sync remains `owner_push_safety_gate_after_review`
+and requires explicit owner authorization. Continuing locally should follow
+`docs/RUNTIME_TO_PRODUCTION_LANDING_ROADMAP.md` and implement
+`review_bridge_readonly_stub`, because runtime-track work must make the system
+more runnable rather than add another pure governance checkpoint.
 
 Amber receipt closeout now has an automatic Green Lane status-sync rule: after meaningful Amber receipt work, Codex must align README, roadmap, `.agent_board` resume surfaces, ledger, validators, and authoritative refs when they changed or gained new refs. This Green sync is local closeout work and does not consume the preceding Amber action's write budget.
 
