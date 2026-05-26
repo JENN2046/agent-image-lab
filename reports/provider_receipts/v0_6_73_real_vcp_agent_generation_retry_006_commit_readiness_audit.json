@@ -1,0 +1,106 @@
+{
+  "schema": "commit_readiness_audit.v0",
+  "authorization_id": "COMMIT-READINESS-AUDIT-SEEDREAM5-RETRY-006",
+  "pipeline_id": "v0_6_73_real_vcp_agent_generation_retry_006",
+  "created_at": "2026-05-26T24:08:00+08:00",
+  "status": "AUDIT_COMPLETED_WITH_MIXED_DIFF_RISK",
+  "mode": "local_readiness_audit_only_no_staging",
+  "branch": "master",
+  "sample_id": "neutral_red_apple_seedream5_retry_006",
+  "scope": {
+    "target": "retry_006 accepted sample metadata-only closeout",
+    "git_add_stage_commit_push_performed": false,
+    "provider_plugin_api_image_call_performed": false,
+    "source_image_read_or_copied": false,
+    "secret_value_read": false,
+    "production_candidate_write_performed": false,
+    "DailyNote_write_performed": false,
+    "VCP_memory_write_performed": false
+  },
+  "readiness_decision": {
+    "narrow_retry_006_closeout_commit_ready": false,
+    "reason": "package.json and scripts/validate_mvp_core.js contain mixed prerequisite retry packet / retry_002-006 validator wiring beyond the retry_006 accepted sample closeout slice. Staging only the retry_006 accepted-sample files while also staging those shared files would create a commit that depends on excluded untracked retry validator artifacts. Staging the full dependency set requires a broader exact authorization.",
+    "safe_next_action": "Use a broader exact-file staging authorization that includes the prerequisite retry packet / retry_002-006 validator artifacts, or first create a separate readiness audit for the full retry sequence."
+  },
+  "include_exact_files_for_retry_006_accepted_sample_closeout": [
+    "README.md",
+    ".agent_board/RUN_STATE.md",
+    ".agent_board/TASK_QUEUE.md",
+    ".agent_board/HANDOFF.md",
+    ".agent_board/CHECKPOINT.md",
+    "accepted_samples/accepted_sample_registry.yaml",
+    "accepted_samples/categories/product_still_life.yaml",
+    "accepted_samples/neutral_red_apple_seedream5_retry_006/manifest.json",
+    "accepted_samples/neutral_red_apple_seedream5_retry_006/metadata.json",
+    "accepted_samples/neutral_red_apple_seedream5_retry_006/source_evidence.json",
+    "reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_006_receipt.json",
+    "reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_006_review.json",
+    "reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_006_promotion_draft.json",
+    "reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_006_promotion_apply_receipt.json",
+    "reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_006_category_index_sync_receipt.json",
+    "reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_006_metadata_only_validator_receipt.json",
+    "reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_006_commit_readiness_audit.json",
+    "review_console/live_receipt_bridge/v0_6_73_real_vcp_agent_generation_retry_006/bridge_entry.json",
+    "review_console/live_receipt_bridge/v0_6_73_real_vcp_agent_generation_retry_006/review_note.json",
+    "scripts/validate_metadata_only_accepted_sample_retry_006.js"
+  ],
+  "shared_files_with_mixed_diff_risk": [
+    {
+      "path": "package.json",
+      "risk": "Contains the retry_006 metadata-only validator npm script, but also contains earlier retry packet / retry activation scripts. A narrow retry_006-only stage would either omit needed npm wiring or include references to excluded prerequisite scripts."
+    },
+    {
+      "path": "scripts/validate_mvp_core.js",
+      "risk": "Contains the retry_006 metadata-only validator check, but also contains earlier retry packet / retry_002-006 activation receipt checks. A narrow retry_006-only stage would mix dependency surfaces."
+    }
+  ],
+  "exclude_exact_files_from_narrow_retry_006_accepted_sample_commit": [
+    "reports/provider_receipts/v0_6_73_real_vcp_agent_generation_one_shot_receipt.json",
+    "review_console/live_receipt_bridge/v0_6_73_real_vcp_agent_generation_one_shot/bridge_entry.json",
+    "scripts/native_doubao_secretless_provider_runtime_bridge.js",
+    "adapters/runtime/exact_a5_provider_retry_packet_draft.js",
+    "docs/EXACT_A5_PROVIDER_RETRY_PACKET_DRAFT.md",
+    "reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_002_receipt.json",
+    "reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_003_receipt.json",
+    "reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_004_receipt.json",
+    "reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_005_receipt.json",
+    "review_console/live_receipt_bridge/v0_6_73_real_vcp_agent_generation_retry_002/",
+    "review_console/live_receipt_bridge/v0_6_73_real_vcp_agent_generation_retry_003/",
+    "review_console/live_receipt_bridge/v0_6_73_real_vcp_agent_generation_retry_004/",
+    "review_console/live_receipt_bridge/v0_6_73_real_vcp_agent_generation_retry_005/",
+    "scripts/validate_exact_a5_provider_retry_packet_draft.js",
+    "scripts/validate_exact_a5_provider_retry_activation_receipt.js",
+    "scripts/validate_exact_a5_provider_retry_003_activation_receipt.js",
+    "scripts/validate_exact_a5_provider_retry_004_activation_receipt.js",
+    "scripts/validate_exact_a5_provider_retry_005_activation_receipt.js",
+    "scripts/validate_exact_a5_provider_retry_006_activation_receipt.js"
+  ],
+  "remaining_dirty_risk": {
+    "worktree_has_unrelated_or_prerequisite_dirty_files": true,
+    "untracked_retry_002_to_005_artifacts_present": true,
+    "modified_one_shot_artifacts_present": true,
+    "modified_shared_validation_files_present": true,
+    "vcptoolbox_external_repo_changes_not_in_this_audit": true,
+    "crlf_warnings_present": true,
+    "private_audit_store_not_staged": true,
+    "runs_image_not_staged": true
+  },
+  "validation_summary": {
+    "latest_known_validations": [
+      "node --check scripts/validate_mvp_core.js: passed",
+      "npm run validate:metadata-only-accepted-sample-retry-006: passed",
+      "npm run validate-preview-capsule-registry: passed",
+      "npm run validate-preview-capsule -- --sample-id=accepted_product_still_life_tennis_wallet_001: passed",
+      "npm run validate:mvp: passed with 19 checks",
+      "git diff --check: passed with CRLF warnings only"
+    ],
+    "audit_did_not_rerun_provider_or_image": true,
+    "audit_did_not_read_source_image_content": true,
+    "audit_did_not_stage_or_commit": true
+  },
+  "recommended_next_staging_authorization_draft": {
+    "recommended": false,
+    "reason": "A narrow retry_006 accepted-sample stage is not recommended until shared package.json and scripts/validate_mvp_core.js mixed prerequisite changes are either included by a broader exact authorization or split by a separate local cleanup plan.",
+    "draft_if_owner_accepts_broader_combined_scope": "我授权执行 STAGE-EXACT-FILES-SEEDREAM5-RETRY-006-CLOSEOUT-WITH-PREREQS：仅本地 exact-file staging，不 commit、不 push，允许 stage 本 audit 中 include_exact_files_for_retry_006_accepted_sample_closeout 的所有文件，并额外 stage package.json、scripts/validate_mvp_core.js、adapters/runtime/exact_a5_provider_retry_packet_draft.js、docs/EXACT_A5_PROVIDER_RETRY_PACKET_DRAFT.md、scripts/validate_exact_a5_provider_retry_packet_draft.js、scripts/validate_exact_a5_provider_retry_activation_receipt.js、scripts/validate_exact_a5_provider_retry_003_activation_receipt.js、scripts/validate_exact_a5_provider_retry_004_activation_receipt.js、scripts/validate_exact_a5_provider_retry_005_activation_receipt.js、scripts/validate_exact_a5_provider_retry_006_activation_receipt.js、reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_002_receipt.json、reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_003_receipt.json、reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_004_receipt.json、reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_005_receipt.json、review_console/live_receipt_bridge/v0_6_73_real_vcp_agent_generation_retry_002/bridge_entry.json、review_console/live_receipt_bridge/v0_6_73_real_vcp_agent_generation_retry_003/bridge_entry.json、review_console/live_receipt_bridge/v0_6_73_real_vcp_agent_generation_retry_004/bridge_entry.json、review_console/live_receipt_bridge/v0_6_73_real_vcp_agent_generation_retry_005/bridge_entry.json；禁止 git add .，禁止 stage runs/real_generation、.agent_private、VCPToolBox、production_candidate、DailyNote/VCP memory、secret、cache、out-of-scope one_shot modified files；stage 后必须运行 git diff --cached --name-only 并证明 staged_exact_files_only。"
+  }
+}

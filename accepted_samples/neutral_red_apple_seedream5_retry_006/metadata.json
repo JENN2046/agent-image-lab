@@ -1,0 +1,55 @@
+{
+  "record_type": "metadata_only_accepted_sample_capsule_metadata",
+  "version": "v1",
+  "sample_id": "neutral_red_apple_seedream5_retry_006",
+  "created_at": "2026-05-26T23:45:00+08:00",
+  "status": "accepted_review_baseline",
+  "source_phase": "v0_6_73_real_vcp_agent_generation_retry_006",
+  "provider": {
+    "provider_type": "project_plugin",
+    "plugin_id": "DoubaoGen",
+    "model": "doubao-seedream-5-0-260128",
+    "resolution_request": "1920x2048",
+    "non_target_model_observed": false
+  },
+  "artifact": {
+    "source_image_ref": "runs/real_generation/v0_6_73_real_vcp_agent_generation_retry_006/image/doubaogen/67b7aa65-4d90-4af5-8447-7194c7f017d1.png",
+    "source_image_sha256": "b75492195a390ab5ba9bd18d909db67dbf389ac03ee4d8a6b35c7249c532d446",
+    "source_image_dimensions": "1920x2048",
+    "source_image_mime": "image/jpeg",
+    "source_image_extension": ".png",
+    "source_image_copied_or_moved": false,
+    "image_files_committed_to_git": false
+  },
+  "review": {
+    "decision": "accept_for_review_baseline",
+    "accepted_sample": true,
+    "production_candidate": false,
+    "commercial_delivery_ready": false,
+    "overall_score": 0.9,
+    "summary": "Clean single red apple on a white tabletop against a soft gray background. Accepted as a neutral smoke-test review baseline."
+  },
+  "acceptance_summary": {
+    "prompt_subject_match": "pass",
+    "single_red_apple": "pass",
+    "neutral_object_only": "pass",
+    "plain_background": "pass",
+    "white_tabletop": "pass",
+    "no_text_logo_watermark": "pass",
+    "technical_quality": "pass",
+    "memory_suitability": false
+  },
+  "known_minor_issues": [
+    "large_top_negative_space",
+    "production_candidate_promotion_requires_separate_authorization",
+    "memory_write_deferred_until_separate_memory_authorization"
+  ],
+  "refs": {
+    "prompt_package_ref": "prompts/image_generation/neutral_smoke_test_red_apple_v1.yaml",
+    "provider_receipt_ref": "reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_006_receipt.json",
+    "review_note_ref": "review_console/live_receipt_bridge/v0_6_73_real_vcp_agent_generation_retry_006/review_note.json",
+    "review_report_ref": "reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_006_review.json",
+    "promotion_draft_ref": "reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_006_promotion_draft.json",
+    "promotion_apply_receipt_ref": "reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_006_promotion_apply_receipt.json"
+  }
+}

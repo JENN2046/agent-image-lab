@@ -1,0 +1,27 @@
+{
+  "review_handoff_schema": "exact_a5_provider_retry_review_handoff.v0",
+  "authorization_id": "AUTH-DRAFT-NATIVE-DOUBAO-SEEDREAM5-RETRY-20260526-002",
+  "execution_status": "BLOCKED_PLUGIN_NOT_FOUND_BEFORE_PROVIDER_CONTACT",
+  "review_status": "blocked_no_image_to_review",
+  "provider_receipt_ref": "reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_002_receipt.json",
+  "output_directory_ref": "runs/real_generation/v0_6_73_real_vcp_agent_generation_retry_002/",
+  "output_files": [],
+  "image_created": false,
+  "accepted_candidate": false,
+  "commercial_delivery_ready": false,
+  "memory_suitability": "deferred",
+  "side_effect_flags": {
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "env_file_content_read_performed": false,
+    "secret_value_read_performed": false,
+    "output_write_performed": false,
+    "production_write_performed": false,
+    "accepted_samples_write_performed": false,
+    "DailyNote_write_performed": false,
+    "VCP_memory_write_performed": false,
+    "push_tag_release_deploy_performed": false
+  }
+}

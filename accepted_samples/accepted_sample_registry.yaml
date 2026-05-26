@@ -410,3 +410,59 @@ accepted_sample_registry:
         approval_record_ref: user_authorization:v0_6_55_exact_new_trial_003_user_submitted_formal_human_approval_evidence_capture
       write_to_memory_allowed: false
       daily_note_write_allowed: false
+
+    - sample_id: neutral_red_apple_seedream5_retry_006
+      source_phase: v0_6_73_real_vcp_agent_generation_retry_006
+      source_plan: neutral_smoke_test_red_apple_v1
+      asset_status: accepted_review_baseline
+      provider_type: project_plugin
+      plugin_id: DoubaoGen
+      model: doubao-seedream-5-0-260128
+      prompt_package_ref: prompts/image_generation/neutral_smoke_test_red_apple_v1.yaml
+      review_doc_ref: reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_006_review.json
+      formal_sample_package_ref: reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_006_promotion_draft.json
+      promotion_apply_receipt_ref: reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_006_promotion_apply_receipt.json
+      image_path: runs/real_generation/v0_6_73_real_vcp_agent_generation_retry_006/image/doubaogen/67b7aa65-4d90-4af5-8447-7194c7f017d1.png
+      image_sha256: b75492195a390ab5ba9bd18d909db67dbf389ac03ee4d8a6b35c7249c532d446
+      image_dimensions: 1920x2048
+      recoverability_status: workspace_local_verified
+      artifact_locator_scope: project_relative_runs
+      verification_mode: local_file_hash
+      verified_sha256: b75492195a390ab5ba9bd18d909db67dbf389ac03ee4d8a6b35c7249c532d446
+      verified_dimensions: 1920x2048
+      verified_mime: image/jpeg
+      verification_record_ref: reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_006_receipt.json
+      import_record_ref: accepted_samples/neutral_red_apple_seedream5_retry_006/metadata.json
+      capsule_manifest_ref: accepted_samples/neutral_red_apple_seedream5_retry_006/manifest.json
+      portable_after_clone: false
+      artifact_recoverability_is_not_vcp_runtime_integration: true
+      image_files_committed_to_git: false
+      category: product_still_life
+      style_tags:
+        - neutral_smoke_test
+        - red_apple
+        - product_still_life
+        - seedream5
+        - accepted_review_baseline
+      acceptance_summary:
+        prompt_subject_match: pass
+        single_red_apple: pass
+        neutral_object_only: pass
+        plain_background: pass
+        white_tabletop: pass
+        no_text_logo_watermark: pass
+        technical_quality: pass
+        commercial_usability: baseline_only
+        memory_suitability: false
+      known_minor_issues:
+        - large_top_negative_space
+        - production_candidate_promotion_requires_separate_authorization
+        - memory_write_deferred_until_separate_memory_authorization
+      commercial_use_level: review_baseline_only
+      human_approval:
+        approved: true
+        approved_by: Jenn
+        approval_statement_ref: user_authorization:APPLY-ACCEPTED-SAMPLE-SEEDREAM5-RETRY-006
+        approval_record_ref: review_console/live_receipt_bridge/v0_6_73_real_vcp_agent_generation_retry_006/review_note.json
+      write_to_memory_allowed: false
+      daily_note_write_allowed: false

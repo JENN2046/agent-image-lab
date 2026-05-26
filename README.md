@@ -5,8 +5,8 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 ## 当前权限策略
 
 ```yaml
-current_phase: exact_a5_provider_execution_activation_result
-current_goal: record_exact_a5_activation_attempt_and_fail_closed_provider_runtime_blocker
+current_phase: v0_6_73_seedream5_retry_006_metadata_only_accepted_sample_closeout
+current_goal: local_evidence_closure_complete_before_any_memory_production_or_remote_action
 semantic_tightening_active: true
 current_boundary_semantics_cleanup_active: true
 false_readiness_negative_cases_active: true
@@ -38,10 +38,10 @@ current_next_boundary: owner_push_safety_gate_after_review
 current_next_boundary_type: Red push-safety-gate boundary
 current_remote_boundary: owner_push_safety_gate_after_review
 current_remote_boundary_type: Red push-safety-gate boundary
-current_local_capability_completed: exact_a5_provider_execution_activation_result
-current_local_capability_completed_lane: Amber_B_attempt_blocked_fail_closed
-current_local_capability_next: bind_owner_authorized_secretless_provider_runtime_delegate
-current_local_capability_next_lane: Amber_B_unblocker_required
+current_local_capability_completed: retry_006_metadata_only_accepted_sample_registry_category_and_validator_closeout
+current_local_capability_completed_lane: Amber_local_metadata_only_no_provider_no_memory_no_production
+current_local_capability_next: choose_commit_or_memory_or_production_gate_with_exact_authorization
+current_local_capability_next_lane: Red_or_Amber_depends_on_requested_action
 current_local_capability_source: docs/RUNTIME_TO_PRODUCTION_LANDING_ROADMAP.md
 current_runtime_track_gate: Runnable Capability Gate
 fixture_next_safe_task_evidence: historical_test_fixture_only
@@ -61,8 +61,8 @@ push_tag_release_deploy_allowed_automatically: false
 secret_value_access_allowed_automatically: false
 destructive_action_allowed_automatically: false
 recommended_next_if_remote_sync_is_requested: owner_push_safety_gate_after_review
-recommended_next_if_continuing_local_product_work: bind_owner_authorized_secretless_provider_runtime_delegate
-recommended_next: bind_owner_authorized_secretless_provider_runtime_delegate
+recommended_next_if_continuing_local_product_work: exact_file_commit_readiness_audit_or_separate_memory_production_gate
+recommended_next: exact_file_commit_readiness_audit_before_any_staging_or_remote_action
 ```
 
 Smart Standing Authorization v3 means Codex can continue Green work directly and Amber work inside the budgeted envelope without step-by-step approval. It must stop at Red Lane conditions such as push/tag/release/deploy, destructive actions, secret value access, raw private data exposure, uncapped cost, unbounded loops, broad external repository modification, or dependency changes without an exact package/action list.
@@ -106,7 +106,9 @@ stop-condition, receipt, registry, continuation, and side-effect boundaries
 before any real provider/plugin/API/image/memory/source-read/runtime/dependency
 action can be attempted.
 
-Local closeout status: the complete Green/local autopilot readiness chain is ready for owner review and later push safety gate. Push remains unperformed and Red Lane until explicitly authorized. `AUTH-DRAFT-NATIVE-DOUBAO-ONE-SHOT-20260526-001` was activated by the exact owner phrase and attempted once. The attempt stopped fail-closed before provider contact because no callable owner-authorized `secretless_provider_runtime` delegate is available in this runtime.
+Local closeout status: the complete Green/local autopilot readiness chain is ready for owner review and later push safety gate. Push remains unperformed and Red Lane until explicitly authorized. `AUTH-DRAFT-NATIVE-DOUBAO-ONE-SHOT-20260526-001` real provider execution authorization was received and one exact attempt was performed after VCPToolBox was fast-forwarded to `origin/main`. The attempt reached the VCPToolBox NativeDoubao secretless delegate and consumed one plugin/provider/API call, then stopped fail-closed with no image because the provider reported that model or endpoint `doubao-seedream-3-0-t2i-250415` does not exist or is not accessible. No retry was performed, and no env file content, secret value, raw provider payload, DailyNote, VCP memory, accepted_samples, production_candidate, push, tag, release, or deploy action was performed.
+
+Retry 006 accepted sample closeout: `AUTH-DRAFT-NATIVE-DOUBAO-SEEDREAM5-RETRY-20260526-006` completed one exact Seedream 5 provider attempt through the local VCPToolBox admin route and produced one image under `runs/real_generation/v0_6_73_real_vcp_agent_generation_retry_006/`. The local review accepted it as a neutral red apple smoke-test baseline, then separate exact authorizations applied a metadata-only accepted sample entry `neutral_red_apple_seedream5_retry_006`, synchronized `accepted_samples/categories/product_still_life.yaml`, and added `npm run validate:metadata-only-accepted-sample-retry-006`. The validator is now wired into `npm run validate:mvp`. No original image was copied or moved, no production candidate was written, no DailyNote or VCP memory write occurred, and no push/tag/release/deploy action occurred.
 
 Semantic tightening status: readiness now distinguishes historical fixture
 `next_safe_task` evidence from the current final boundary. The fixture task
@@ -131,10 +133,34 @@ completed as a local Green validator. `readiness_receipt_registry_cross_claims_v
 is also completed and must not be reported as the current next task.
 
 Current next-task split: remote sync remains `owner_push_safety_gate_after_review`
-and requires explicit owner authorization. The current product execution path is
-blocked at `BLOCKED_SECRETLESS_RUNTIME_NOT_CALLABLE`; the next product unblocker
-is binding an owner-authorized secretless provider runtime delegate for the
-NativeDoubao route, without reading or printing secret values.
+and requires explicit owner authorization. The current product execution path has
+used the exact one-shot provider attempt and must not retry under the same
+authorization. The next product unblocker is
+`request_new_exact_retry_authorization_for_seedream_5_one_shot`: the VCPToolBox
+AI image execution adapter now passes `step.model` through to DoubaoGen tool
+args, with a local unit test proving `doubao-seedream-5-0-260128` passthrough.
+The previous one-shot authorization was already consumed, so any provider retry
+requires a new exact retry authorization. The inactive retry packet draft is now
+ready at `docs/EXACT_A5_PROVIDER_RETRY_PACKET_DRAFT.md` and
+`adapters/runtime/exact_a5_provider_retry_packet_draft.js`, with validator
+`npm run validate:exact-a5-provider-retry-packet`. It requires
+`AUTH-DRAFT-NATIVE-DOUBAO-SEEDREAM5-RETRY-20260526-002` and explicitly enforces
+`model=doubao-seedream-5-0-260128`, fresh `retry_002` output/receipt/review/audit
+refs, one provider/plugin/API call, one image maximum, no further retry, no
+secret value or env file content reads, no DailyNote/VCP memory, no promotion,
+and no push/tag/release/deploy. That exact retry authorization was later
+received and used once. The retry failed closed before provider contact because
+VCPToolBox `PluginManager` reported `Plugin "DoubaoGen" not found for tool
+call.` No image was created, no output file was written, no env file content or
+secret value was read, and no further retry is authorized. The next product
+unblocker was repairing VCPToolBox DoubaoGen plugin registration/availability
+before drafting any new exact authorization. VCPToolBox now has a route-level
+fallback that calls `pluginManager.loadPlugins()` once when a real AI image
+execution plan references an unregistered plugin, then fails closed if the
+plugin remains missing. Local tests prove the fallback loads missing DoubaoGen
+before execution and does not enter the executor if loading still fails. No
+provider retry was performed after this fix; the previous retry authorization is
+still consumed, so the next real attempt requires a new exact authorization.
 
 Amber receipt closeout now has an automatic Green Lane status-sync rule: after meaningful Amber receipt work, Codex must align README, roadmap, `.agent_board` resume surfaces, ledger, validators, and authoritative refs when they changed or gained new refs. This Green sync is local closeout work and does not consume the preceding Amber action's write budget.
 
@@ -5874,6 +5900,70 @@ git diff --check
 - `review_console/embed_contract/v10_28_dailynote_canonical_location_guard.md`
 
 仅说“继续”不构成新的真实执行授权。即使存在 A5 授权包，如果外部目标工作树不干净、tag/分支冲突、输出目录冲突或会泄露 raw 敏感值，也必须停止。
+
+## v0.6.73 Seedream 5 retry 003 closeout
+
+`AUTH-DRAFT-NATIVE-DOUBAO-SEEDREAM5-RETRY-20260526-003` 已在本地 VCPToolBox owner runtime 通道执行一次真实 route/provider 路径尝试。VCPToolBox admin route 已修复为可加载 `DoubaoGen` fallback、转发目标 `model=doubao-seedream-5-0-260128`，并把本次 `DoubaoGen PROJECT_BASE_PATH` 限定到 `runs/real_generation/v0_6_73_real_vcp_agent_generation_retry_003/`。
+
+结果：HTTP route 已通，pipeline safety 为 `allow`，provider/plugin/API 预算各使用 1 次，生成图片 0 张。provider 返回的阻断仍指向旧默认模型 `doubao-seedream-3-0-t2i-250415` 的模型/权限不可用，说明剩余问题在 NativeDoubao delegate 或 DoubaoGen 插件内部模型选择/默认值覆盖链路，不得在没有新的精确授权时再次重试。
+
+证据：
+
+- `reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_003_receipt.json`
+- `review_console/live_receipt_bridge/v0_6_73_real_vcp_agent_generation_retry_003/bridge_entry.json`
+- `.agent_private/runtime_audit_store/v0_6_73_real_vcp_agent_generation_retry_003/activation_attempt_003.audit.json`
+- `scripts/validate_exact_a5_provider_retry_003_activation_receipt.js`
+
+## v0.6.73 Seedream 5 model fallback local fix
+
+After retry 003, VCPToolBox was patched locally so an explicit `DoubaoGen` `model` argument is treated as a hard constraint. `Plugin/DoubaoGen/DoubaoGen.js` now disables automatic model fallback when `args.model` is present, which prevents an exact Seedream 5 retry from silently downgrading to cached/default `doubao-seedream-3-0-t2i-250415` after a provider 400.
+
+No provider/API/image retry was performed during this local fix. `vcp-main` was restarted locally to load the patched code. A future retry still requires a new exact authorization.
+
+## v0.6.73 Seedream 5 retry 004 closeout
+
+`AUTH-DRAFT-NATIVE-DOUBAO-SEEDREAM5-RETRY-20260526-004` 已执行一次真实本地 VCPToolBox admin route/provider 路径调用。VCPToolBox route 已扩展为仅允许该授权把 `DoubaoGen PROJECT_BASE_PATH` 指向 `runs/real_generation/v0_6_73_real_vcp_agent_generation_retry_004/`。
+
+结果：HTTP route 已通，pipeline safety 为 `allow`，provider/plugin/API 预算各使用 1 次，生成图片 0 张。已修复的 explicit model no-fallback 行为生效：本次未观察到旧模型 `doubao-seedream-3-0-t2i-250415`。当前 blocker 是目标模型返回的尺寸约束：`720x1280` 低于 provider 要求的最小像素数。004 已消耗，禁止再次重试。
+
+证据：
+
+- `reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_004_receipt.json`
+- `review_console/live_receipt_bridge/v0_6_73_real_vcp_agent_generation_retry_004/bridge_entry.json`
+- `.agent_private/runtime_audit_store/v0_6_73_real_vcp_agent_generation_retry_004/activation_attempt_004.audit.json`
+- `scripts/validate_exact_a5_provider_retry_004_activation_receipt.js`
+
+## v0.6.73 Seedream 5 retry 005 closeout
+
+`AUTH-DRAFT-NATIVE-DOUBAO-SEEDREAM5-RETRY-20260526-005` 已执行一次真实本地 VCPToolBox admin route/provider 路径调用，使用 `model=doubao-seedream-5-0-260128` 和 `resolution=1920x2048`。provider 返回成功，且未观察到非目标模型 fallback。
+
+结果：生成了 1 张图，但 DoubaoGen 将文件写入 VCPToolBox 默认 `image/doubaogen/`，而不是授权的 `runs/real_generation/v0_6_73_real_vcp_agent_generation_retry_005/`。因此本次按 `BLOCKED_OUTPUT_SCOPE_VIOLATION` 收口，该图片不得进入 review、accepted_samples、production_candidate、DailyNote 或 VCP memory。005 已消耗，禁止再次重试。
+
+证据：
+
+- `reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_005_receipt.json`
+- `review_console/live_receipt_bridge/v0_6_73_real_vcp_agent_generation_retry_005/bridge_entry.json`
+- `.agent_private/runtime_audit_store/v0_6_73_real_vcp_agent_generation_retry_005/activation_attempt_005.audit.json`
+- `scripts/validate_exact_a5_provider_retry_005_activation_receipt.js`
+
+## v0.6.73 DoubaoGen output root local fix
+
+After retry 005 exposed an output-scope violation, VCPToolBox was patched locally so `doubaoProjectBasePathOverride` survives `normalizeExecutionContext()` and reaches `Plugin.executePlugin`. This lets `DoubaoGen` receive the authorized `PROJECT_BASE_PATH` override instead of falling back to the VCPToolBox project root.
+
+No provider/API/image retry was performed during this local fix. `vcp-main` was restarted locally to load the patched execution context behavior. A future retry still requires a new exact authorization.
+
+## v0.6.73 Seedream 5 retry 006 closeout
+
+`AUTH-DRAFT-NATIVE-DOUBAO-SEEDREAM5-RETRY-20260526-006` 已执行一次真实本地 VCPToolBox admin route/provider 路径调用，使用 `model=doubao-seedream-5-0-260128` 和 `resolution=1920x2048`。
+
+结果：生成 1 张图，文件位于授权目录 `runs/real_generation/v0_6_73_real_vcp_agent_generation_retry_006/` 下；未观察到非目标模型 fallback，未发生输出越界，未超过 1 张图预算。该结果仅进入人工 review handoff，不自动写 accepted_samples、production_candidate、DailyNote 或 VCP memory。
+
+证据：
+
+- `reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_006_receipt.json`
+- `review_console/live_receipt_bridge/v0_6_73_real_vcp_agent_generation_retry_006/bridge_entry.json`
+- `.agent_private/runtime_audit_store/v0_6_73_real_vcp_agent_generation_retry_006/activation_attempt_006.audit.json`
+- `scripts/validate_exact_a5_provider_retry_006_activation_receipt.js`
 
 ## 不做什么
 

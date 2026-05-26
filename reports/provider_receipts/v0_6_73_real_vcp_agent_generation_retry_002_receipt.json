@@ -1,0 +1,70 @@
+{
+  "receipt_schema": "exact_a5_provider_retry_activation_receipt.v0",
+  "authorization_id": "AUTH-DRAFT-NATIVE-DOUBAO-SEEDREAM5-RETRY-20260526-002",
+  "activation_phrase_matched": true,
+  "previous_authorization_id": "AUTH-DRAFT-NATIVE-DOUBAO-ONE-SHOT-20260526-001",
+  "previous_authorization_consumed": true,
+  "execution_status": "BLOCKED_PLUGIN_NOT_FOUND_BEFORE_PROVIDER_CONTACT",
+  "execution_completed": false,
+  "execution_blocked_fail_closed": true,
+  "selected_provider_id": "NativeDoubaoImage",
+  "provider_case_id": "neutral_smoke_test_red_apple_secretless_bridge",
+  "model": "doubao-seedream-5-0-260128",
+  "prompt_package_ref": "prompts/image_generation/neutral_smoke_test_red_apple_v1.yaml",
+  "output_directory_ref": "runs/real_generation/v0_6_73_real_vcp_agent_generation_retry_002/",
+  "provider_binding_ref": "native_doubao:capability:owner-runtime:<redacted>",
+  "provider_binding_ref_redacted": true,
+  "provider_binding_ref_is_secret": false,
+  "budget": {
+    "max_provider_calls": 1,
+    "max_plugin_calls": 1,
+    "max_api_calls": 1,
+    "max_images_created": 1,
+    "retry_allowed": false,
+    "max_retry_count": 0,
+    "max_runtime_probe_minutes": 10,
+    "max_cost_amount": "owner_runtime_account_metered",
+    "cost_unknown_is_red": true
+  },
+  "counts": {
+    "provider_calls_used": 0,
+    "plugin_calls_used": 0,
+    "api_calls_used": 0,
+    "images_created": 0,
+    "output_files_written": 0
+  },
+  "blocker": "step[0]: exception: [PluginManager] Plugin \"DoubaoGen\" not found for tool call.",
+  "sanitized_route_result": {
+    "ok": false,
+    "mode": "real_execution",
+    "status": "partial",
+    "errors": [
+      "step[0]: exception: [PluginManager] Plugin \"DoubaoGen\" not found for tool call."
+    ],
+    "image_count": 0,
+    "output_files": []
+  },
+  "side_effect_flags": {
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "env_file_content_read_performed": false,
+    "secret_value_read_performed": false,
+    "output_write_performed": false,
+    "production_write_performed": false,
+    "accepted_samples_write_performed": false,
+    "DailyNote_write_performed": false,
+    "VCP_memory_write_performed": false,
+    "push_tag_release_deploy_performed": false
+  },
+  "receipt_ref": "reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_002_receipt.json",
+  "review_handoff_ref": "review_console/live_receipt_bridge/v0_6_73_real_vcp_agent_generation_retry_002/bridge_entry.json",
+  "durable_audit_ref": ".agent_private/runtime_audit_store/v0_6_73_real_vcp_agent_generation_retry_002/activation_attempt_002.audit.json",
+  "retry_performed": true,
+  "retry_count": 1,
+  "further_retry_allowed": false,
+  "raw_provider_payload_retained": false,
+  "secret_value_recorded": false,
+  "human_review_required_before_promotion": true
+}

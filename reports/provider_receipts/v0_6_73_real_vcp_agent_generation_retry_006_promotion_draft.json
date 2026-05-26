@@ -1,0 +1,63 @@
+{
+  "schema": "accepted_sample_promotion_draft.v0",
+  "draft_id": "PROMOTION-DRAFT-SEEDREAM5-RETRY-006",
+  "source_generation_authorization_id": "AUTH-DRAFT-NATIVE-DOUBAO-SEEDREAM5-RETRY-20260526-006",
+  "source_review_authorization_id": "REVIEW-LOCAL-SEEDREAM5-RETRY-006",
+  "pipeline_id": "v0_6_73_real_vcp_agent_generation_retry_006",
+  "created_at": "2026-05-26T23:32:00+08:00",
+  "status": "draft_not_applied",
+  "draft_only": true,
+  "promotion_allowed_by_this_file": false,
+  "requires_separate_exact_authorization_to_apply": true,
+  "candidate": {
+    "candidate_type": "accepted_sample_candidate",
+    "proposed_sample_id": "neutral_red_apple_seedream5_retry_006",
+    "image_ref": "runs/real_generation/v0_6_73_real_vcp_agent_generation_retry_006/image/doubaogen/67b7aa65-4d90-4af5-8447-7194c7f017d1.png",
+    "image_sha256": "b75492195a390ab5ba9bd18d909db67dbf389ac03ee4d8a6b35c7249c532d446",
+    "prompt_package_ref": "prompts/image_generation/neutral_smoke_test_red_apple_v1.yaml",
+    "model": "doubao-seedream-5-0-260128",
+    "resolution_request": "1920x2048",
+    "provider": "NativeDoubao via VCPToolBox DoubaoGen",
+    "purpose": "neutral red apple smoke-test baseline"
+  },
+  "evidence_refs": {
+    "provider_receipt_ref": "reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_006_receipt.json",
+    "review_note_ref": "review_console/live_receipt_bridge/v0_6_73_real_vcp_agent_generation_retry_006/review_note.json",
+    "review_report_ref": "reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_006_review.json",
+    "review_handoff_ref": "review_console/live_receipt_bridge/v0_6_73_real_vcp_agent_generation_retry_006/bridge_entry.json",
+    "durable_audit_ref": ".agent_private/runtime_audit_store/v0_6_73_real_vcp_agent_generation_retry_006/activation_attempt_006.audit.json"
+  },
+  "eligibility_summary": {
+    "generation_completed": true,
+    "image_count": 1,
+    "output_scope_violation": false,
+    "non_target_model_observed": false,
+    "review_decision": "accept_for_review_baseline",
+    "review_gate_passed": true,
+    "accepted_for_local_review_baseline_only": true,
+    "ready_for_human_promotion_decision": true
+  },
+  "proposed_apply_targets_if_separately_authorized": {
+    "accepted_samples_write": "accepted_samples registry/capsule entry for neutral_red_apple_seedream5_retry_006",
+    "production_candidate_write": false,
+    "DailyNote_write": false,
+    "VCP_memory_write": false
+  },
+  "side_effects_performed_by_this_draft": {
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "accepted_samples_write_performed": false,
+    "production_candidate_write_performed": false,
+    "DailyNote_write_performed": false,
+    "VCP_memory_write_performed": false,
+    "push_tag_release_deploy_performed": false,
+    "secret_value_read_performed": false
+  },
+  "stop_conditions": [
+    "Do not apply this draft without separate exact authorization.",
+    "Do not write accepted_samples, production_candidate, DailyNote, or VCP memory from this draft alone.",
+    "Do not rerun provider generation from this draft."
+  ]
+}

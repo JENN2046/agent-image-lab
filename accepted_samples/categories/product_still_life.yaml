@@ -1,8 +1,9 @@
 category: product_still_life
-sample_count: 2
+sample_count: 3
 samples:
   - accepted_product_still_life_tennis_wallet_001
   - accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001
+  - neutral_red_apple_seedream5_retry_006
 recoverability_metadata:
   accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001:
     recoverability_status: workspace_local_verified
@@ -13,5 +14,18 @@ recoverability_metadata:
     verified_mime: image/png
     verification_record_ref: docs/v14_166_lamp_v3_generated_candidate_readiness.md
     import_record_ref: tests/schema_examples/v14_166_lamp_v3_generated_candidate_import_record.json
+    portable_after_clone: false
+    artifact_recoverability_is_not_vcp_runtime_integration: true
+  neutral_red_apple_seedream5_retry_006:
+    recoverability_status: workspace_local_verified
+    artifact_locator_scope: project_relative_runs
+    verification_mode: local_file_hash
+    verified_sha256: b75492195a390ab5ba9bd18d909db67dbf389ac03ee4d8a6b35c7249c532d446
+    verified_dimensions: 1920x2048
+    verified_mime: image/jpeg
+    verification_record_ref: reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_006_receipt.json
+    import_record_ref: accepted_samples/neutral_red_apple_seedream5_retry_006/metadata.json
+    capsule_manifest_ref: accepted_samples/neutral_red_apple_seedream5_retry_006/manifest.json
+    source_evidence_ref: accepted_samples/neutral_red_apple_seedream5_retry_006/source_evidence.json
     portable_after_clone: false
     artifact_recoverability_is_not_vcp_runtime_integration: true

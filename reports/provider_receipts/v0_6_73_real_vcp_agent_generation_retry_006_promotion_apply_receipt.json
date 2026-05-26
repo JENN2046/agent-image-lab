@@ -1,0 +1,99 @@
+{
+  "schema": "accepted_sample_promotion_apply_receipt.v0",
+  "authorization_id": "APPLY-ACCEPTED-SAMPLE-SEEDREAM5-RETRY-006",
+  "pipeline_id": "v0_6_73_real_vcp_agent_generation_retry_006",
+  "lane": "Amber",
+  "intent": "local_accepted_sample_promotion_apply",
+  "created_at": "2026-05-26T23:45:00+08:00",
+  "status": "APPLIED_METADATA_ONLY",
+  "sample_id": "neutral_red_apple_seedream5_retry_006",
+  "source_image": {
+    "path": "runs/real_generation/v0_6_73_real_vcp_agent_generation_retry_006/image/doubaogen/67b7aa65-4d90-4af5-8447-7194c7f017d1.png",
+    "sha256": "b75492195a390ab5ba9bd18d909db67dbf389ac03ee4d8a6b35c7249c532d446",
+    "width": 1920,
+    "height": 2048,
+    "mime": "image/jpeg",
+    "bytes": 131139,
+    "copied_or_moved": false
+  },
+  "inputs_read": [
+    "reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_006_promotion_draft.json",
+    "reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_006_receipt.json",
+    "review_console/live_receipt_bridge/v0_6_73_real_vcp_agent_generation_retry_006/review_note.json",
+    "reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_006_review.json",
+    "runs/real_generation/v0_6_73_real_vcp_agent_generation_retry_006/image/doubaogen/67b7aa65-4d90-4af5-8447-7194c7f017d1.png"
+  ],
+  "files_written": [
+    "accepted_samples/accepted_sample_registry.yaml",
+    "accepted_samples/neutral_red_apple_seedream5_retry_006/manifest.json",
+    "accepted_samples/neutral_red_apple_seedream5_retry_006/metadata.json",
+    "accepted_samples/neutral_red_apple_seedream5_retry_006/source_evidence.json",
+    "reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_006_promotion_apply_receipt.json"
+  ],
+  "validation_plan": [
+    "local JSON parse for new capsule and apply receipt",
+    "local consistency check for registry entry, source image hash, dimensions, refs, and forbidden side effects",
+    "npm run validate:mvp",
+    "npm run validate-preview-capsule-registry",
+    "npm run validate-preview-capsule -- --sample-id=accepted_product_still_life_tennis_wallet_001"
+  ],
+  "validation_run": [
+    {
+      "command": "node -e <json parse check>",
+      "status": "passed"
+    },
+    {
+      "command": "node - <metadata-only capsule consistency check>",
+      "status": "passed",
+      "checked": [
+        "registry sample entry present",
+        "source image ref preserved",
+        "source sha256 matches b75492195a390ab5ba9bd18d909db67dbf389ac03ee4d8a6b35c7249c532d446",
+        "source dimensions match 1920x2048",
+        "source bytes match 131139",
+        "source image not copied or moved",
+        "forbidden side-effect flags false"
+      ]
+    },
+    {
+      "command": "npm run validate:mvp",
+      "status": "passed"
+    },
+    {
+      "command": "npm run validate-preview-capsule-registry",
+      "status": "passed",
+      "note": "Existing portable preview capsule archive remains valid; this apply is metadata-only under accepted_samples and does not create a new asset_archive preview capsule."
+    },
+    {
+      "command": "npm run validate-preview-capsule -- --sample-id=accepted_product_still_life_tennis_wallet_001",
+      "status": "passed",
+      "note": "Existing capsule validator path remains healthy."
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed_with_crlf_warnings_only"
+    }
+  ],
+  "validation_result": "passed",
+  "scope_notes": {
+    "metadata_only_capsule": true,
+    "asset_archive_preview_capsule_created": false,
+    "accepted_samples_category_index_updated": false,
+    "accepted_samples_category_index_update_reason": "not included in exact write authorization"
+  },
+  "side_effects": {
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "image_copy_or_move_performed": false,
+    "accepted_samples_write_performed": true,
+    "production_candidate_write_performed": false,
+    "DailyNote_write_performed": false,
+    "VCP_memory_write_performed": false,
+    "push_tag_release_deploy_performed": false,
+    "secret_value_read_performed": false,
+    "secret_value_printed": false
+  },
+  "notes": "Applied as a metadata-only accepted sample capsule. No original image copy or move was performed; the capsule preserves the project-relative source image reference and sha256."
+}

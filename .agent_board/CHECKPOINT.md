@@ -1,5 +1,310 @@
 ---
 
+## Checkpoint - v0.6.73 Seedream5 Retry 006 Metadata-only Accepted Sample Closeout
+
+```text
+phase: v0_6_73_seedream5_retry_006_metadata_only_accepted_sample_closeout
+status: completed_validated_local_evidence_closed
+result: COMPLETED_VALIDATED
+summary: Closed retry_006 local evidence by wiring the metadata-only accepted sample validator into npm run validate:mvp and syncing README/.agent_board status surfaces.
+sample_id: neutral_red_apple_seedream5_retry_006
+category: product_still_life
+changed_files_current_task:
+  - scripts/validate_mvp_core.js
+  - README.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/CHECKPOINT.md
+validation_run:
+  - npm run validate:metadata-only-accepted-sample-retry-006
+  - npm run validate-preview-capsule-registry
+  - npm run validate-preview-capsule -- --sample-id=accepted_product_still_life_tennis_wallet_001
+  - npm run validate:mvp
+  - git diff --check
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+image_copy_or_move_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+production_candidate_write_performed: false
+push_tag_release_deploy_performed: false
+secret_value_read_performed: false
+next: exact-file commit readiness audit or separately authorized memory/production gate
+```
+
+---
+
+## Checkpoint - VCPToolBox DoubaoGen Plugin Load Fallback Fixed Pending New Authorization
+
+```text
+phase: vcptoolbox_doubaogen_plugin_load_fallback_fixed_pending_new_authorization
+status: completed_validated_no_provider_retry
+result: COMPLETED_VALIDATED
+mode: Amber local external repository patch
+summary: VCPToolBox AI image route now loads missing required plugins once before real execution and fails closed if still missing. This addresses the DoubaoGen not found blocker without performing a provider retry.
+changed_files_current_task:
+  - A:\VCP\apps\VCPToolBox\routes\admin\aiImageAgents.js
+  - A:\VCP\apps\VCPToolBox\tests\aiImageAgentsRoute.test.js
+  - README.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/CHECKPOINT.md
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+output_write_performed: false
+env_file_content_read_performed: false
+secret_value_read_performed: false
+commit_performed: false
+push_performed: false
+retry_performed: false
+next: await_new_exact_authorization_after_doubaogen_plugin_load_fix
+```
+
+---
+
+## Checkpoint - Exact A5 Seedream5 Retry Attempt Blocked Plugin Not Found
+
+```text
+phase: exact_a5_provider_retry_attempt_blocked_plugin_not_found
+status: blocked_fail_closed_before_provider_contact_no_image
+result: BLOCKED
+mode: Amber_B exact retry attempt
+summary: The exact Seedream 5 retry authorization was consumed once. Execution failed closed before provider contact because VCPToolBox PluginManager could not find DoubaoGen. No image/output/provider/API/secret/memory/promotion/push action occurred.
+changed_files_current_task:
+  - reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_002_receipt.json
+  - review_console/live_receipt_bridge/v0_6_73_real_vcp_agent_generation_retry_002/bridge_entry.json
+  - .agent_private/runtime_audit_store/v0_6_73_real_vcp_agent_generation_retry_002/activation_attempt_002.audit.json
+  - .agent_private/runtime_audit_store/v0_6_73_real_vcp_agent_generation_retry_002/vcptoolbox_route_audit.jsonl
+  - scripts/native_doubao_secretless_provider_runtime_bridge.js
+  - scripts/validate_exact_a5_provider_retry_activation_receipt.js
+  - package.json
+  - scripts/validate_mvp_core.js
+  - README.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/CHECKPOINT.md
+authorization_id: AUTH-DRAFT-NATIVE-DOUBAO-SEEDREAM5-RETRY-20260526-002
+required_model: doubao-seedream-5-0-260128
+blocker: VCPToolBox PluginManager reported Plugin "DoubaoGen" not found for tool call.
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+output_write_performed: false
+env_file_content_read_performed: false
+secret_value_read_performed: false
+commit_performed: false
+push_performed: false
+retry_performed: true
+further_retry_allowed: false
+next: repair_vcptoolbox_doubaogen_plugin_registration_before_any_new_exact_authorization
+```
+
+---
+
+## Checkpoint - Exact A5 Provider Retry Packet Draft Ready
+
+```text
+phase: exact_a5_provider_retry_packet_draft_ready
+status: completed_validated_inactive_draft
+result: COMPLETED_VALIDATED
+mode: Amber_B provider retry packet draft
+summary: Prepared a new inactive exact retry packet for one future NativeDoubao Seedream 5 provider attempt. No provider/API/image retry was performed.
+changed_files_current_task:
+  - adapters/runtime/exact_a5_provider_retry_packet_draft.js
+  - scripts/validate_exact_a5_provider_retry_packet_draft.js
+  - docs/EXACT_A5_PROVIDER_RETRY_PACKET_DRAFT.md
+  - package.json
+  - README.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/CHECKPOINT.md
+authorization_id: AUTH-DRAFT-NATIVE-DOUBAO-SEEDREAM5-RETRY-20260526-002
+previous_authorization_consumed: AUTH-DRAFT-NATIVE-DOUBAO-ONE-SHOT-20260526-001
+required_model: doubao-seedream-5-0-260128
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+output_write_performed: false
+env_file_content_read_performed: false
+secret_value_read_performed: false
+commit_performed: false
+push_performed: false
+retry_performed: false
+next: await_new_exact_retry_authorization_for_seedream_5_one_shot
+```
+
+---
+
+## Checkpoint - VCPToolBox DoubaoGen Model Passthrough Fixed Pending New Retry Authorization
+
+```text
+phase: vcptoolbox_doubaogen_model_passthrough_fixed_pending_new_retry_authorization
+status: completed_validated_no_provider_retry
+result: COMPLETED_VALIDATED
+mode: Amber local external repository patch
+summary: VCPToolBox AI image execution adapter now forwards step.model into DoubaoGen toolArgs.model. The fix is validated locally and no provider/API/image retry was performed.
+changed_files_current_task:
+  - A:\VCP\apps\VCPToolBox\modules\aiImageExecutionAdapter.js
+  - A:\VCP\apps\VCPToolBox\tests\aiImageExecutionAdapter.test.js
+  - README.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/CHECKPOINT.md
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+output_write_performed: false
+env_file_content_read_performed: false
+secret_value_read_performed: false
+commit_performed: false
+push_performed: false
+validation_run:
+  - node --check modules\aiImageExecutionAdapter.js: passed
+  - node --test tests\aiImageExecutionAdapter.test.js: passed_3_tests
+  - node scripts/validate_v0_6_73am_vcptoolbox_real_runtime_binding_no_provider_verify_and_agent_lab_sync.js: passed
+  - node scripts/validate_v0_6_73an_vcptoolbox_runtime_dry_run_no_provider_verify.js: passed
+next: request_new_exact_retry_authorization_for_seedream_5_one_shot
+```
+
+---
+
+## Checkpoint - Exact Real Provider Execution Attempt Blocked Provider Model Endpoint
+
+```text
+phase: exact_real_provider_execution_attempted_blocked_provider_model_endpoint
+status: blocked_fail_closed_after_one_provider_attempt_no_image
+result: BLOCKED
+mode: Amber_B exact one-shot real provider execution attempt
+summary: VCPToolBox was fast-forwarded, the NativeDoubao secretless delegate path was verified, and the exact A5 one-shot provider attempt was performed once. It reached provider/API contact and then failed closed because the provider reported that model or endpoint doubao-seedream-3-0-t2i-250415 does not exist or is not accessible.
+changed_files_current_task:
+  - README.md
+  - reports/provider_receipts/v0_6_73_real_vcp_agent_generation_one_shot_receipt.json
+  - review_console/live_receipt_bridge/v0_6_73_real_vcp_agent_generation_one_shot/bridge_entry.json
+  - .agent_private/runtime_audit_store/v0_6_73_real_vcp_agent_generation_one_shot/activation_attempt_001.audit.json
+  - scripts/validate_mvp_core.js
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/CHECKPOINT.md
+provider_contact_performed: true
+plugin_call_performed: true
+api_call_performed: true
+image_generation_performed: false
+image_binary_read_performed: false
+output_write_performed: false
+env_file_content_read_performed: false
+secret_value_read_performed: false
+raw_provider_payload_retained: false
+remote_write_performed: false
+external_repository_modification_performed: false
+commit_performed: false
+push_performed: false
+retry_performed: false
+counts:
+  provider_calls_used: 1
+  plugin_calls_used: 1
+  api_calls_used: 1
+  images_created: 0
+  output_files_written: 0
+next: fix_doubaogen_model_arg_or_provider_model_access_before_new_authorized_retry
+```
+
+---
+
+## Checkpoint - Exact Real Provider Execution Authorized But Runtime Delegate Missing
+
+```text
+phase: exact_real_provider_execution_authorized_but_blocked_no_secretless_runtime_delegate
+status: blocked_no_provider_contact
+result: BLOCKED
+mode: Amber_B exact real provider execution authorization received; stopped before provider/plugin/API/image contact
+summary: Exact real provider execution authorization was received, but no provider call was made because the current VCPToolBox checkout lacks the required callable secretless owner-runtime delegate.
+changed_files_current_task:
+  - README.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/CHECKPOINT.md
+vcptoolbox_files_checked_read_only:
+  - A:\VCP\apps\VCPToolBox\modules\nativeDoubaoSecretlessRuntimeDelegate.js
+  - A:\VCP\apps\VCPToolBox\routes\admin\aiImageAgents.js
+  - A:\VCP\apps\VCPToolBox\server.js
+validation_run:
+  - Test-Path A:\VCP\apps\VCPToolBox\modules\nativeDoubaoSecretlessRuntimeDelegate.js: false
+  - rg/Select-String VCPToolBox secretless delegate lookup: no implementation found
+  - node scripts/validate_v0_6_73am_vcptoolbox_real_runtime_binding_no_provider_verify_and_agent_lab_sync.js: failed ENOENT
+  - node scripts/validate_v0_6_73an_vcptoolbox_runtime_dry_run_no_provider_verify.js: failed MODULE_NOT_FOUND
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+image_binary_read_performed: false
+output_write_performed: false
+env_file_content_read_performed: false
+secret_value_read_performed: false
+remote_write_performed: false
+external_repository_modification_performed: false
+commit_performed: false
+push_performed: false
+real_provider_execution_authorization_received: true
+real_provider_execution_performed: false
+next: provide_or_restore_callable_owner_runtime_delegate_or_exact_runtime_endpoint
+```
+
+---
+
+## Checkpoint - VCPToolBox Runtime Binding No-Provider Verify
+
+```text
+phase: vcptoolbox_runtime_binding_no_provider_verified
+status: completed_validated_no_provider_binding_verify
+result: COMPLETED_VALIDATED
+mode: Amber_A exact VCPToolBox read plus Amber_D bounded no-provider runtime probe
+summary: Verified the next-step owner-authorized NativeDoubao secretless runtime delegate binding path without provider contact. The real VCPToolBox binding files were read-only checked, the local bound delegate shape harness passed, and the VCPToolBox no-provider runtime dry-run passed through a mock processToolCall boundary.
+changed_files_current_task:
+  - README.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/CHECKPOINT.md
+vcptoolbox_files_checked_read_only:
+  - A:\VCP\apps\VCPToolBox\modules\nativeDoubaoSecretlessRuntimeDelegate.js
+  - A:\VCP\apps\VCPToolBox\routes\admin\aiImageAgents.js
+  - A:\VCP\apps\VCPToolBox\server.js
+validation_run:
+  - node scripts/native_doubao_vcptoolbox_bound_delegate_shape_no_provider.js: passed
+  - node scripts/validate_v0_6_73aj_vcptoolbox_bound_delegate_shape_no_provider_verify.js: passed
+  - node scripts/validate_v0_6_73am_vcptoolbox_real_runtime_binding_no_provider_verify_and_agent_lab_sync.js: passed
+  - node scripts/validate_v0_6_73an_vcptoolbox_runtime_dry_run_no_provider_verify.js: passed
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+image_binary_read_performed: false
+output_write_performed: false
+env_file_content_read_performed: false
+secret_value_read_performed: false
+remote_write_performed: false
+commit_performed: false
+push_performed: false
+real_provider_execution_allowed_now: false
+next: request_exact_provider_execution_authorization_or_stop
+```
+
+---
+
 ## Checkpoint - Exact A5 Provider Execution Activation Result
 
 ```text
@@ -35510,6 +35815,324 @@ Validation:
 - npm run validate:mvp: passed
 
 Next: local commit, post-commit review, and Push_L3 manual guarded push classification.
+
+---
+
+## Checkpoint - v0.6.73 Seedream5 Retry 003 Runtime Closeout
+
+Status: blocked_provider_or_plugin_runtime_failed_pending_validation
+Authorization: AUTH-DRAFT-NATIVE-DOUBAO-SEEDREAM5-RETRY-20260526-003
+Workspace: A:\agent-image-lab\agent-image-lab-v0.2
+Connected workspace: A:\VCP\apps\VCPToolBox
+
+Changed:
+- reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_003_receipt.json
+- review_console/live_receipt_bridge/v0_6_73_real_vcp_agent_generation_retry_003/bridge_entry.json
+- .agent_private/runtime_audit_store/v0_6_73_real_vcp_agent_generation_retry_003/activation_attempt_003.audit.json
+- scripts/validate_exact_a5_provider_retry_003_activation_receipt.js
+- package.json
+- scripts/validate_mvp_core.js
+- README.md
+- .agent_board resume surfaces
+- A:\VCP\apps\VCPToolBox\routes\admin\aiImageAgents.js
+- A:\VCP\apps\VCPToolBox\Plugin.js
+- A:\VCP\apps\VCPToolBox\modules\aiImageExecutionAdapter.js
+- A:\VCP\apps\VCPToolBox\tests\aiImageAgentsRoute.test.js
+- A:\VCP\apps\VCPToolBox\tests\aiImageExecutionAdapter.test.js
+
+Boundary:
+- admin_route_http_status: 200
+- pipeline_safety_action: allow
+- provider_contact_attempted: true
+- plugin_call_attempted: true
+- api_call_attempted: true
+- images_created: 0
+- exact_output_directory_only: true
+- output_directory_ref: runs/real_generation/v0_6_73_real_vcp_agent_generation_retry_003/
+- DailyNote_write_performed: false
+- VCP_memory_write_performed: false
+- accepted_samples_write_performed: false
+- production_candidate_write_performed: false
+- push_tag_release_deploy_performed: false
+- secret_values_printed: false
+
+Blocker:
+- VCPToolBox route/adapter sent `doubao-seedream-5-0-260128`, but provider error still referenced `doubao-seedream-3-0-t2i-250415`.
+- Remaining fix is local model propagation/default override inside NativeDoubao delegate or DoubaoGen plugin.
+- No further provider retry is allowed under 003.
+
+Validation:
+- node --check scripts/validate_exact_a5_provider_retry_003_activation_receipt.js: passed
+- npm run validate:exact-a5-retry-003-activation-receipt: passed
+- npm run validate:smoke: passed
+- npm run validate:mvp: passed
+- node scripts/validate_agent_board_state.js: passed
+- git diff --check: passed_with_line_ending_warnings_only
+- VCPToolBox node --check routes\admin\aiImageAgents.js: passed
+- VCPToolBox node --check Plugin.js: passed
+- VCPToolBox node --test tests\aiImageAgentsRoute.test.js: passed
+- VCPToolBox node --test tests\aiImageExecutionAdapter.test.js: passed
+- VCPToolBox git diff --check: passed_with_line_ending_warnings_only
+
+Next: fix delegate/plugin model propagation locally, validate without provider calls, then request a new exact authorization before any further real attempt.
+
+---
+
+## Checkpoint - VCPToolBox DoubaoGen Explicit Model Fallback Disabled
+
+Status: completed_validated_no_provider_retry
+Workspace: A:\agent-image-lab\agent-image-lab-v0.2
+Connected workspace: A:\VCP\apps\VCPToolBox
+
+Changed:
+- A:\VCP\apps\VCPToolBox\Plugin\DoubaoGen\DoubaoGen.js
+- A:\VCP\apps\VCPToolBox\tests\nativeDoubaoSecretlessRuntimeDelegate.test.js
+- A:\VCP\apps\VCPToolBox\tests\doubaoGenModelFallbackPolicy.test.js
+- README.md
+- .agent_board resume surfaces
+
+Result:
+- Explicit `args.model` now disables DoubaoGen automatic model fallback.
+- Future exact Seedream 5 retry should either call provider with `doubao-seedream-5-0-260128` or fail on that exact model, not downgrade to `doubao-seedream-3-0-t2i-250415`.
+- `vcp-main` was restarted locally after the code patch.
+
+Boundary:
+- provider_contact_performed: false
+- plugin_call_performed: false
+- api_call_performed: false
+- image_generation_performed: false
+- DailyNote_write_performed: false
+- VCP_memory_write_performed: false
+- accepted_samples_write_performed: false
+- production_candidate_write_performed: false
+- push_tag_release_deploy_performed: false
+- secret_value_read_performed: false
+
+Validation:
+- VCPToolBox node --check Plugin\DoubaoGen\DoubaoGen.js: passed
+- VCPToolBox node --check modules\nativeDoubaoSecretlessRuntimeDelegate.js: passed
+- VCPToolBox node --test tests\nativeDoubaoSecretlessRuntimeDelegate.test.js: passed
+- VCPToolBox node --test tests\doubaoGenModelFallbackPolicy.test.js: passed
+- VCPToolBox node --test tests\aiImageExecutionAdapter.test.js: passed
+- VCPToolBox node --test tests\aiImageAgentsRoute.test.js: passed
+- VCPToolBox git diff --check: passed_with_line_ending_warnings_only
+
+Next: new exact retry authorization required before any provider/plugin/API/image attempt.
+
+---
+
+## Checkpoint - v0.6.73 Seedream5 Retry 006 Closeout
+
+Status: completed_provider_image_created_pending_human_review_validation
+Authorization: AUTH-DRAFT-NATIVE-DOUBAO-SEEDREAM5-RETRY-20260526-006
+Workspace: A:\agent-image-lab\agent-image-lab-v0.2
+Connected workspace: A:\VCP\apps\VCPToolBox
+
+Changed:
+- reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_006_receipt.json
+- review_console/live_receipt_bridge/v0_6_73_real_vcp_agent_generation_retry_006/bridge_entry.json
+- .agent_private/runtime_audit_store/v0_6_73_real_vcp_agent_generation_retry_006/activation_attempt_006.audit.json
+- scripts/validate_exact_a5_provider_retry_006_activation_receipt.js
+- package.json
+- scripts/validate_mvp_core.js
+- README.md
+- .agent_board resume surfaces
+- A:\VCP\apps\VCPToolBox\routes\admin\aiImageAgents.js
+- A:\VCP\apps\VCPToolBox\tests\aiImageAgentsRoute.test.js
+
+Boundary:
+- admin_route_http_status: 200
+- pipeline_safety_action: allow
+- provider_contact_attempted: true
+- plugin_call_attempted: true
+- api_call_attempted: true
+- images_created: 1
+- model_sent: doubao-seedream-5-0-260128
+- resolution_sent: 1920x2048
+- non_target_model_observed: false
+- exact_output_directory_only: true
+- image_budget_respected: true
+- review_eligible: true
+- accepted_candidate_allowed: false
+- DailyNote_write_performed: false
+- VCP_memory_write_performed: false
+- accepted_samples_write_performed: false
+- production_candidate_write_performed: false
+- push_tag_release_deploy_performed: false
+- secret_values_printed: false
+
+Validation:
+- node --check scripts\validate_exact_a5_provider_retry_006_activation_receipt.js: passed
+- npm run validate:exact-a5-retry-006-activation-receipt: passed
+- npm run validate:mvp: passed
+- node scripts\validate_agent_board_state.js: passed
+- git diff --check: passed_with_line_ending_warnings_only
+- VCPToolBox node --check routes\admin\aiImageAgents.js: passed
+- VCPToolBox node --test tests\aiImageAgentsRoute.test.js: passed
+- VCPToolBox node --test tests\doubaoProjectBasePathOverride.test.js: passed
+- VCPToolBox node --test tests\toolExecutionContext.test.js: passed
+- VCPToolBox git diff --check: passed_with_line_ending_warnings_only
+
+Next: human review only; no promotion or memory write without separate authorization.
+
+---
+
+## Checkpoint - v0.6.73 Seedream5 Retry 004 Closeout
+
+Status: blocked_provider_or_plugin_runtime_failed_validated
+Authorization: AUTH-DRAFT-NATIVE-DOUBAO-SEEDREAM5-RETRY-20260526-004
+Workspace: A:\agent-image-lab\agent-image-lab-v0.2
+Connected workspace: A:\VCP\apps\VCPToolBox
+
+Changed:
+- reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_004_receipt.json
+- review_console/live_receipt_bridge/v0_6_73_real_vcp_agent_generation_retry_004/bridge_entry.json
+- .agent_private/runtime_audit_store/v0_6_73_real_vcp_agent_generation_retry_004/activation_attempt_004.audit.json
+- scripts/validate_exact_a5_provider_retry_004_activation_receipt.js
+- package.json
+- scripts/validate_mvp_core.js
+- README.md
+- .agent_board resume surfaces
+- A:\VCP\apps\VCPToolBox\routes\admin\aiImageAgents.js
+- A:\VCP\apps\VCPToolBox\tests\aiImageAgentsRoute.test.js
+
+Boundary:
+- admin_route_http_status: 200
+- pipeline_safety_action: allow
+- provider_contact_attempted: true
+- plugin_call_attempted: true
+- api_call_attempted: true
+- images_created: 0
+- model_sent: doubao-seedream-5-0-260128
+- non_target_model_observed: false
+- DailyNote_write_performed: false
+- VCP_memory_write_performed: false
+- accepted_samples_write_performed: false
+- production_candidate_write_performed: false
+- push_tag_release_deploy_performed: false
+- secret_values_printed: false
+
+Blocker:
+- provider size constraint: 720x1280 is below minimum 3686400 pixels.
+- 004 is consumed; no further retry is allowed under this authorization.
+
+Validation:
+- node --check scripts\validate_exact_a5_provider_retry_004_activation_receipt.js: passed
+- npm run validate:exact-a5-retry-004-activation-receipt: passed
+- npm run validate:mvp: passed
+- node scripts\validate_agent_board_state.js: passed
+- git diff --check: passed_with_line_ending_warnings_only
+- VCPToolBox node --check routes\admin\aiImageAgents.js: passed
+- VCPToolBox node --test tests\aiImageAgentsRoute.test.js: passed
+- VCPToolBox node --test tests\doubaoGenModelFallbackPolicy.test.js: passed
+- VCPToolBox node --test tests\nativeDoubaoSecretlessRuntimeDelegate.test.js: passed
+- VCPToolBox git diff --check: passed_with_line_ending_warnings_only
+
+Next: future retry, if authorized, should use a compliant resolution such as 1920x2048 or another size above the provider minimum.
+
+---
+
+## Checkpoint - v0.6.73 Seedream5 Retry 005 Closeout
+
+Status: blocked_output_scope_violation_pending_validation
+Authorization: AUTH-DRAFT-NATIVE-DOUBAO-SEEDREAM5-RETRY-20260526-005
+Workspace: A:\agent-image-lab\agent-image-lab-v0.2
+Connected workspace: A:\VCP\apps\VCPToolBox
+
+Changed:
+- reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_005_receipt.json
+- review_console/live_receipt_bridge/v0_6_73_real_vcp_agent_generation_retry_005/bridge_entry.json
+- .agent_private/runtime_audit_store/v0_6_73_real_vcp_agent_generation_retry_005/activation_attempt_005.audit.json
+- scripts/validate_exact_a5_provider_retry_005_activation_receipt.js
+- package.json
+- scripts/validate_mvp_core.js
+- README.md
+- .agent_board resume surfaces
+- A:\VCP\apps\VCPToolBox\routes\admin\aiImageAgents.js
+- A:\VCP\apps\VCPToolBox\tests\aiImageAgentsRoute.test.js
+
+Boundary:
+- admin_route_http_status: 200
+- pipeline_safety_action: allow
+- provider_contact_attempted: true
+- plugin_call_attempted: true
+- api_call_attempted: true
+- images_created_total: 1
+- images_created_inside_authorized_output: 0
+- images_created_outside_authorized_output: 1
+- model_sent: doubao-seedream-5-0-260128
+- resolution_sent: 1920x2048
+- non_target_model_observed: false
+- output_scope_violation: true
+- review_eligible: false
+- DailyNote_write_performed: false
+- VCP_memory_write_performed: false
+- accepted_samples_write_performed: false
+- production_candidate_write_performed: false
+- push_tag_release_deploy_performed: false
+- secret_values_printed: false
+
+Blocker:
+- Provider generated one image, but DoubaoGen saved it under VCPToolBox image/doubaogen instead of the authorized retry_005 output directory.
+- The out-of-scope image must not be reviewed, promoted, copied, or delivered under this authorization.
+- 005 is consumed; no further retry is allowed under this authorization.
+
+Validation:
+- node --check scripts\validate_exact_a5_provider_retry_005_activation_receipt.js: passed
+- npm run validate:exact-a5-retry-005-activation-receipt: passed
+- npm run validate:mvp: passed
+- node scripts\validate_agent_board_state.js: passed
+- git diff --check: passed_with_line_ending_warnings_only
+- VCPToolBox node --check routes\admin\aiImageAgents.js: passed
+- VCPToolBox node --test tests\aiImageAgentsRoute.test.js: passed
+- VCPToolBox node --test tests\doubaoGenModelFallbackPolicy.test.js: passed
+- VCPToolBox node --test tests\nativeDoubaoSecretlessRuntimeDelegate.test.js: passed
+- VCPToolBox git diff --check: passed_with_line_ending_warnings_only
+
+Next: locally fix PROJECT_BASE_PATH propagation/output root before any new exact provider attempt.
+
+---
+
+## Checkpoint - VCPToolBox Doubao Output Root Override Fixed
+
+Status: completed_validated_no_provider_retry
+Workspace: A:\agent-image-lab\agent-image-lab-v0.2
+Connected workspace: A:\VCP\apps\VCPToolBox
+
+Changed:
+- A:\VCP\apps\VCPToolBox\modules\toolExecutionContext.js
+- A:\VCP\apps\VCPToolBox\tests\toolExecutionContext.test.js
+- A:\VCP\apps\VCPToolBox\tests\doubaoProjectBasePathOverride.test.js
+- README.md
+- .agent_board resume surfaces
+
+Result:
+- `doubaoProjectBasePathOverride` now survives `normalizeExecutionContext`.
+- `Plugin.executePlugin` can now see the override and set `PROJECT_BASE_PATH` before launching DoubaoGen.
+- `vcp-main` was restarted locally after the code patch.
+
+Boundary:
+- provider_contact_performed: false
+- plugin_call_performed: false
+- api_call_performed: false
+- image_generation_performed: false
+- DailyNote_write_performed: false
+- VCP_memory_write_performed: false
+- accepted_samples_write_performed: false
+- production_candidate_write_performed: false
+- push_tag_release_deploy_performed: false
+- secret_value_read_performed: false
+
+Validation:
+- VCPToolBox node --check modules\toolExecutionContext.js: passed
+- VCPToolBox node --test tests\toolExecutionContext.test.js: passed
+- VCPToolBox node --test tests\doubaoProjectBasePathOverride.test.js: passed
+- VCPToolBox node --test tests\nativeDoubaoSecretlessRuntimeDelegate.test.js: passed
+- VCPToolBox node --test tests\aiImageAgentsRoute.test.js: passed
+- VCPToolBox node --test tests\doubaoGenModelFallbackPolicy.test.js: passed
+- VCPToolBox git diff --check: passed_with_line_ending_warnings_only
+
+Next: new exact retry authorization required before any provider/plugin/API/image attempt.
 
 ---
 

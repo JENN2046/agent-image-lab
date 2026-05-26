@@ -224,25 +224,158 @@ safeCheck("exact_a5_provider_execution_packet_draft", () => {
     result.all_negative_cases_caught === true;
 });
 
-safeCheck("exact_a5_activation_receipt", () => {
-  const result = parseJson(runNode(["scripts/validate_exact_a5_provider_execution_activation_receipt.js"]));
+safeCheck("exact_a5_provider_retry_packet_draft", () => {
+  const result = parseJson(runNode(["scripts/validate_exact_a5_provider_retry_packet_draft.js"]));
   return result.passed === true &&
-    result.authorization_id === "AUTH-DRAFT-NATIVE-DOUBAO-ONE-SHOT-20260526-001" &&
-    result.execution_status === "BLOCKED_SECRETLESS_RUNTIME_NOT_CALLABLE" &&
-    result.execution_blocked_fail_closed === true &&
-    result.provider_calls_used === 0 &&
-    result.plugin_calls_used === 0 &&
-    result.api_calls_used === 0 &&
-    result.images_created === 0 &&
+    result.adapter_id === "exact_a5_provider_retry_packet_draft_v0" &&
+    result.authorization_status === "draft_not_active" &&
+    result.authorization_active === false &&
+    result.can_execute_now === false &&
+    result.required_model === "doubao-seedream-5-0-260128" &&
+    result.previous_authorization_consumed === true &&
+    result.previous_provider_calls_used === 1 &&
+    result.retry_output_directory_ref === "runs/real_generation/v0_6_73_real_vcp_agent_generation_retry_002" &&
+    result.max_provider_calls_when_activated === 1 &&
+    result.retry_allowed === false &&
     result.provider_contact_performed === false &&
     result.plugin_call_performed === false &&
     result.api_call_performed === false &&
     result.image_generation_performed === false &&
     result.env_file_content_read_performed === false &&
     result.secret_value_read_performed === false &&
+    result.output_write_performed === false &&
+    result.production_write_performed === false &&
+    result.accepted_samples_write_performed === false &&
+    result.DailyNote_write_performed === false &&
+    result.VCP_memory_write_performed === false &&
+    result.all_negative_cases_caught === true;
+});
+
+safeCheck("exact_a5_activation_receipt", () => {
+  const result = parseJson(runNode(["scripts/validate_exact_a5_provider_execution_activation_receipt.js"]));
+  const legacyBlockedBeforeContact = result.execution_status === "BLOCKED_SECRETLESS_RUNTIME_NOT_CALLABLE" &&
+    result.provider_calls_used === 0 &&
+    result.plugin_calls_used === 0 &&
+    result.api_calls_used === 0 &&
+    result.provider_contact_performed === false &&
+    result.plugin_call_performed === false &&
+    result.api_call_performed === false;
+  const oneShotProviderAttemptBlocked = result.execution_status === "BLOCKED_PROVIDER_RUNTIME_DELEGATE_FAILED" &&
+    result.provider_calls_used === 1 &&
+    result.plugin_calls_used === 1 &&
+    result.api_calls_used === 1 &&
+    result.provider_contact_performed === true &&
+    result.plugin_call_performed === true &&
+    result.api_call_performed === true;
+  return result.passed === true &&
+    result.authorization_id === "AUTH-DRAFT-NATIVE-DOUBAO-ONE-SHOT-20260526-001" &&
+    result.execution_blocked_fail_closed === true &&
+    (legacyBlockedBeforeContact || oneShotProviderAttemptBlocked) &&
+    result.images_created === 0 &&
+    result.image_generation_performed === false &&
+    result.env_file_content_read_performed === false &&
+    result.secret_value_read_performed === false &&
     result.retry_performed === false &&
     result.production_write_performed === false &&
     result.accepted_samples_write_performed === false &&
+    result.DailyNote_write_performed === false &&
+    result.VCP_memory_write_performed === false;
+});
+
+safeCheck("exact_a5_retry_activation_receipt", () => {
+  const result = parseJson(runNode(["scripts/validate_exact_a5_provider_retry_activation_receipt.js"]));
+  return result.passed === true &&
+    result.authorization_id === "AUTH-DRAFT-NATIVE-DOUBAO-SEEDREAM5-RETRY-20260526-002" &&
+    result.execution_status === "BLOCKED_PLUGIN_NOT_FOUND_BEFORE_PROVIDER_CONTACT" &&
+    result.execution_blocked_fail_closed === true &&
+    result.provider_calls_used === 0 &&
+    result.plugin_calls_used === 0 &&
+    result.api_calls_used === 0 &&
+    result.images_created === 0 &&
+    result.output_files_written === 0 &&
+    result.provider_contact_performed === false &&
+    result.plugin_call_performed === false &&
+    result.api_call_performed === false &&
+    result.image_generation_performed === false &&
+    result.env_file_content_read_performed === false &&
+    result.secret_value_read_performed === false &&
+    result.retry_performed === true &&
+    result.further_retry_allowed === false &&
+    result.production_write_performed === false &&
+    result.accepted_samples_write_performed === false &&
+    result.DailyNote_write_performed === false &&
+    result.VCP_memory_write_performed === false;
+});
+
+safeCheck("exact_a5_retry_003_activation_receipt", () => {
+  const result = parseJson(runNode(["scripts/validate_exact_a5_provider_retry_003_activation_receipt.js"]));
+  return result.passed === true &&
+    result.authorization_id === "AUTH-DRAFT-NATIVE-DOUBAO-SEEDREAM5-RETRY-20260526-003" &&
+    result.execution_status === "BLOCKED_PROVIDER_OR_PLUGIN_RUNTIME_FAILED" &&
+    result.provider_contact_attempted === true &&
+    result.provider_calls_used === 1 &&
+    result.plugin_calls_used === 1 &&
+    result.api_calls_used === 1 &&
+    result.images_created === 0 &&
+    result.model_sent === "doubao-seedream-5-0-260128" &&
+    result.output_directory_ref === "runs/real_generation/v0_6_73_real_vcp_agent_generation_retry_003/" &&
+    result.further_retry_allowed === false &&
+    result.blocked_on_provider_default_model_fallback === true;
+});
+
+safeCheck("exact_a5_retry_004_activation_receipt", () => {
+  const result = parseJson(runNode(["scripts/validate_exact_a5_provider_retry_004_activation_receipt.js"]));
+  return result.passed === true &&
+    result.authorization_id === "AUTH-DRAFT-NATIVE-DOUBAO-SEEDREAM5-RETRY-20260526-004" &&
+    result.execution_status === "BLOCKED_PROVIDER_OR_PLUGIN_RUNTIME_FAILED" &&
+    result.provider_calls_used === 1 &&
+    result.images_created === 0 &&
+    result.model_sent === "doubao-seedream-5-0-260128" &&
+    result.non_target_model_observed === false &&
+    result.blocker_type === "provider_size_constraint" &&
+    result.further_retry_allowed === false;
+});
+
+safeCheck("exact_a5_retry_005_activation_receipt", () => {
+  const result = parseJson(runNode(["scripts/validate_exact_a5_provider_retry_005_activation_receipt.js"]));
+  return result.passed === true &&
+    result.authorization_id === "AUTH-DRAFT-NATIVE-DOUBAO-SEEDREAM5-RETRY-20260526-005" &&
+    result.execution_status === "BLOCKED_OUTPUT_SCOPE_VIOLATION" &&
+    result.provider_calls_used === 1 &&
+    result.images_created_total === 1 &&
+    result.images_created_inside_authorized_output === 0 &&
+    result.output_scope_violation === true &&
+    result.review_eligible === false &&
+    result.further_retry_allowed === false;
+});
+
+safeCheck("exact_a5_retry_006_activation_receipt", () => {
+  const result = parseJson(runNode(["scripts/validate_exact_a5_provider_retry_006_activation_receipt.js"]));
+  return result.passed === true &&
+    result.authorization_id === "AUTH-DRAFT-NATIVE-DOUBAO-SEEDREAM5-RETRY-20260526-006" &&
+    result.execution_status === "COMPLETED_PROVIDER_IMAGE_CREATED" &&
+    result.provider_calls_used === 1 &&
+    result.images_created === 1 &&
+    typeof result.image_file === "string" &&
+    result.image_file.startsWith("runs/real_generation/v0_6_73_real_vcp_agent_generation_retry_006/") &&
+    result.output_scope_violation === false &&
+    result.review_eligible === true &&
+    result.further_retry_allowed === false;
+});
+
+safeCheck("metadata_only_accepted_sample_retry_006", () => {
+  const result = parseJson(runNode(["scripts/validate_metadata_only_accepted_sample_retry_006.js"]));
+  return result.passed === true &&
+    result.sample_id === "neutral_red_apple_seedream5_retry_006" &&
+    result.category === "product_still_life" &&
+    result.pipeline_id === "v0_6_73_real_vcp_agent_generation_retry_006" &&
+    result.source_image_ref_preserved === true &&
+    result.source_image_content_read_performed === false &&
+    result.provider_contact_performed === false &&
+    result.plugin_call_performed === false &&
+    result.api_call_performed === false &&
+    result.image_generation_performed === false &&
+    result.production_candidate_write_performed === false &&
     result.DailyNote_write_performed === false &&
     result.VCP_memory_write_performed === false;
 });

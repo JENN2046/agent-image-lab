@@ -1,0 +1,62 @@
+{
+  "schema": "local_image_review_note.v0",
+  "review_id": "REVIEW-LOCAL-SEEDREAM5-RETRY-006",
+  "authorization_id": "REVIEW-LOCAL-SEEDREAM5-RETRY-006",
+  "source_generation_authorization_id": "AUTH-DRAFT-NATIVE-DOUBAO-SEEDREAM5-RETRY-20260526-006",
+  "pipeline_id": "v0_6_73_real_vcp_agent_generation_retry_006",
+  "reviewed_at": "2026-05-26T23:29:00+08:00",
+  "review_mode": "local_visual_review_only",
+  "image_ref": "runs/real_generation/v0_6_73_real_vcp_agent_generation_retry_006/image/doubaogen/67b7aa65-4d90-4af5-8447-7194c7f017d1.png",
+  "image_metadata": {
+    "width": 1920,
+    "height": 2048,
+    "format_reported_by_sharp": "jpeg",
+    "file_extension": ".png"
+  },
+  "prompt_package_ref": "prompts/image_generation/neutral_smoke_test_red_apple_v1.yaml",
+  "visual_findings": {
+    "subject": "single red apple",
+    "subject_match": true,
+    "object_only": true,
+    "people_present": false,
+    "readable_text_present": false,
+    "logo_present": false,
+    "watermark_present": false,
+    "extra_objects_present": false,
+    "background": "plain soft light gray wall with white tabletop",
+    "lighting": "soft studio-like lighting",
+    "focus": "crisp enough for smoke-test review",
+    "composition_note": "The apple is low in frame with large top negative space, but still acceptable for the neutral smoke-test baseline."
+  },
+  "acceptance_gate": {
+    "prompt_subject_match": true,
+    "neutral_object_only": true,
+    "people_expected": false,
+    "people_absent": true,
+    "vertical_composition": true,
+    "no_readable_text_or_logo_unless_expected": true,
+    "no_watermark": true,
+    "passed": true
+  },
+  "scores": {
+    "prompt_adherence": 0.94,
+    "technical_quality": 0.88,
+    "composition": 0.78,
+    "safety_boundary": 1.0,
+    "overall": 0.9
+  },
+  "decision": "accept_for_review_baseline",
+  "review_status": "accepted_for_local_review_baseline_only",
+  "promotion_status": "not_promoted",
+  "accepted_samples_write_performed": false,
+  "production_candidate_write_performed": false,
+  "DailyNote_write_performed": false,
+  "VCP_memory_write_performed": false,
+  "provider_contact_performed": false,
+  "plugin_call_performed": false,
+  "api_call_performed": false,
+  "image_generation_performed": false,
+  "push_tag_release_deploy_performed": false,
+  "secret_value_read_performed": false,
+  "notes": "Acceptable as a neutral red apple smoke-test baseline. Do not treat this as production approval or memory write authorization."
+}

@@ -1,0 +1,61 @@
+{
+  "schema": "local_image_review_report.v0",
+  "review_id": "REVIEW-LOCAL-SEEDREAM5-RETRY-006",
+  "source_generation_authorization_id": "AUTH-DRAFT-NATIVE-DOUBAO-SEEDREAM5-RETRY-20260526-006",
+  "pipeline_id": "v0_6_73_real_vcp_agent_generation_retry_006",
+  "reviewed_at": "2026-05-26T23:29:00+08:00",
+  "review_scope": {
+    "local_image_read_allowed": true,
+    "provider_plugin_api_calls_allowed": false,
+    "memory_or_daily_note_write_allowed": false,
+    "promotion_allowed": false
+  },
+  "input_refs": {
+    "image_ref": "runs/real_generation/v0_6_73_real_vcp_agent_generation_retry_006/image/doubaogen/67b7aa65-4d90-4af5-8447-7194c7f017d1.png",
+    "provider_receipt_ref": "reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_006_receipt.json",
+    "review_note_ref": "review_console/live_receipt_bridge/v0_6_73_real_vcp_agent_generation_retry_006/review_note.json",
+    "prompt_package_ref": "prompts/image_generation/neutral_smoke_test_red_apple_v1.yaml"
+  },
+  "decision": {
+    "status": "accept_for_review_baseline",
+    "accepted_for_local_review_baseline_only": true,
+    "accepted_sample": false,
+    "production_candidate": false,
+    "commercial_delivery_ready": false,
+    "requires_prompt_adjustment": false
+  },
+  "gate_results": {
+    "single_red_apple": true,
+    "neutral_object_only": true,
+    "plain_background": true,
+    "white_tabletop": true,
+    "no_people": true,
+    "no_text": true,
+    "no_logo": true,
+    "no_watermark": true,
+    "no_extra_objects": true,
+    "technical_quality_acceptable": true,
+    "composition_acceptable_for_smoke_test": true,
+    "all_required_gates_passed": true
+  },
+  "scores": {
+    "prompt_adherence": 0.94,
+    "technical_quality": 0.88,
+    "composition": 0.78,
+    "safety_boundary": 1.0,
+    "overall": 0.9
+  },
+  "review_summary": "The image shows a clean single red apple on a white tabletop against a soft gray background. It satisfies the neutral smoke-test gate. The composition has large top negative space, but this is acceptable for the baseline review purpose.",
+  "side_effects": {
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "DailyNote_write_performed": false,
+    "VCP_memory_write_performed": false,
+    "accepted_samples_write_performed": false,
+    "production_candidate_write_performed": false,
+    "push_tag_release_deploy_performed": false,
+    "secret_value_read_performed": false
+  }
+}

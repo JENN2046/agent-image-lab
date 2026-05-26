@@ -1,0 +1,60 @@
+{
+  "manifest_type": "metadata_only_accepted_sample_capsule_manifest",
+  "version": "v1",
+  "sample_id": "neutral_red_apple_seedream5_retry_006",
+  "created_at": "2026-05-26T23:45:00+08:00",
+  "source": {
+    "pipeline_id": "v0_6_73_real_vcp_agent_generation_retry_006",
+    "generation_authorization_id": "AUTH-DRAFT-NATIVE-DOUBAO-SEEDREAM5-RETRY-20260526-006",
+    "review_authorization_id": "REVIEW-LOCAL-SEEDREAM5-RETRY-006",
+    "promotion_draft_id": "PROMOTION-DRAFT-SEEDREAM5-RETRY-006",
+    "promotion_apply_authorization_id": "APPLY-ACCEPTED-SAMPLE-SEEDREAM5-RETRY-006"
+  },
+  "artifact": {
+    "original": {
+      "path": "runs/real_generation/v0_6_73_real_vcp_agent_generation_retry_006/image/doubaogen/67b7aa65-4d90-4af5-8447-7194c7f017d1.png",
+      "format": "jpeg",
+      "file_extension": ".png",
+      "width": 1920,
+      "height": 2048,
+      "bytes": 131139,
+      "sha256": "b75492195a390ab5ba9bd18d909db67dbf389ac03ee4d8a6b35c7249c532d446",
+      "git_tracked": false,
+      "copied_or_moved_by_this_apply": false,
+      "required_for_local_validation": true
+    },
+    "preview": {
+      "created": false,
+      "reason": "apply authorization forbids image calls and does not authorize copying or moving the source image"
+    }
+  },
+  "chain": {
+    "metadata": "metadata.json",
+    "source_evidence": "source_evidence.json"
+  },
+  "source_refs": {
+    "registry_ref": "accepted_samples/accepted_sample_registry.yaml",
+    "provider_receipt_ref": "reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_006_receipt.json",
+    "review_note_ref": "review_console/live_receipt_bridge/v0_6_73_real_vcp_agent_generation_retry_006/review_note.json",
+    "review_report_ref": "reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_006_review.json",
+    "promotion_draft_ref": "reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_006_promotion_draft.json",
+    "prompt_package_ref": "prompts/image_generation/neutral_smoke_test_red_apple_v1.yaml"
+  },
+  "guard": {
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "image_copy_or_move_performed": false,
+    "DailyNote_write_performed": false,
+    "VCP_memory_write_performed": false,
+    "production_candidate_write_performed": false,
+    "push_tag_release_deploy_performed": false,
+    "secret_value_read_performed": false
+  },
+  "production_candidate_allowed": false,
+  "memory_write_allowed": false,
+  "DailyNote_write_allowed": false,
+  "VCP_memory_write_allowed": false,
+  "commercial_delivery_allowed": false
+}
