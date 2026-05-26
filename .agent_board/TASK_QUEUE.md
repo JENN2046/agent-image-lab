@@ -1,5 +1,38 @@
 ---
 
+- [x] ID: v0_6_108_pending_sync_broad_stack_group_review_no_push
+      Lane: A0/A4 Green local group review.
+      Status: COMPLETED_VALIDATED_PENDING_SYNC_BROAD_STACK_GROUP_REVIEW_NO_PUSH.
+      Goal: Record a path-level group review of the broad pending remote sync stack without push or patch hunks.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Legacy active next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Source phase: v0_6_107_pending_sync_safety_classifier_no_push.
+      Finding: sync_safety_classification=broad_review_required_no_auto_push; total_paths=121; provider_or_runner_paths=5; review_console_paths=3; package_manifest_paths=1.
+      Go/No-Go: group_review_created=true; remote_write_authorized_now=false; push_ready_now=false; pr_ready_now=false; next_auto_step_allowed=false.
+      Validation run: node --check validator passed; dedicated validator passed with 10/10 negative cases caught; git diff --check passed; validate:public-disclosure passed; validate:smoke passed; validate:mvp passed; resume compaction guard passed.
+      local_ahead_before_checkpoint_commit: 49.
+      local_behind_before_checkpoint_commit: 0.
+      diff_scope_total_paths_before_checkpoint_commit: 121.
+      governance_docs_reports: 53.
+      validators_and_fixtures: 60.
+      local_config_content_read: false.
+      patch_hunks_printed: false.
+      push_status: not_performed.
+      pr_created: false.
+      tag_release_deploy_performed: false.
+      fetch_merge_rebase_performed: false.
+      secret_value_read_performed: false.
+      provider_contact_performed: false.
+      image_generation_performed: false.
+      DailyNote_write_performed: false.
+      VCP_memory_write_performed: false.
+      Codex_memory_write_performed: false.
+      production_candidate_created: false.
+      Next: await_explicit_remote_sync_authorization_or_continue_local_no_write_review.
+
+---
+
 - [x] ID: v0_6_107_pending_sync_safety_classifier_no_push
       Lane: A0/A4 Green local safety classifier.
       Status: COMPLETED_VALIDATED_PENDING_SYNC_SAFETY_CLASSIFIER_NO_PUSH.
