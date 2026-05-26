@@ -1,5 +1,53 @@
 ---
 
+## Checkpoint - v0.6.91 Read-only Failed Provider Attempt Evidence Review
+
+```text
+phase: v0_6_91_read_only_failed_provider_attempt_evidence_review
+status: completed_validated_read_only_failed_provider_attempt_evidence_review
+result: COMPLETED_VALIDATED
+mode: A0/A4 Green read-only failed provider evidence review plus local status recording
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+legacy_active_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+summary: Reviewed failed provider attempt evidence and follow-on repair route without executing provider/image/memory/production work. Failed attempts remain non-reusable. Later 003 shot route has validated technical candidates, but formal human approval is still pending, so promotion, memory, production, and new provider generation remain paused.
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+image_binary_read_performed: false
+output_write_performed: false
+env_file_content_read_performed: false
+secret_value_read_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+production_candidate_created: false
+accepted_sample_auto_promotion: false
+push_status: not_performed
+validation_run:
+  - node scripts/validate_failed_provider_attempt_inspection.js: passed
+  - node scripts/validate_exact_new_trial_failed_provider_attempt_review.js: passed
+  - node scripts/validate_exact_new_trial_artifact_persistence_truth_review.js: passed
+  - node scripts/validate_exact_new_trial_3shot_stability_preflight.js: passed
+  - node scripts/validate_exact_new_trial_local_persistence_repair_preflight.js: passed
+  - node scripts/validate_exact_new_trial_003_shot_1_execution_closeout.js: passed
+  - node scripts/validate_exact_new_trial_003_shot_2_execution_closeout.js: passed
+  - node scripts/validate_exact_new_trial_003_shot_3_execution_closeout.js: passed
+  - node scripts/validate_exact_new_trial_003_human_review.js: passed
+go_no_go:
+  failed_attempt_evidence_complete: true
+  failed_attempts_reusable_for_generation_or_promotion: false
+  next_provider_generation_authorized_now: false
+  next_memory_or_production_write_authorized_now: false
+pause_boundaries:
+  - A5/provider/image generation remains paused
+  - formal human approval remains required before promotion or memory steps
+  - push/tag/release/deploy/PR creation remains paused until explicit owner authorization
+  - secret/.env reads or edits remain paused
+  - production writes remain paused
+next: local accepted-candidate/human-approval-readiness audit without promotion, or await explicit push/PR authorization
+```
+
 ## Checkpoint - v0.6.90 Push Or PR Readiness Audit Without Push
 
 ```text

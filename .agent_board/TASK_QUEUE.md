@@ -1,5 +1,30 @@
 ---
 
+- [x] ID: v0_6_91_read_only_failed_provider_attempt_evidence_review
+      Lane: A0/A4 Green read-only failed provider evidence review plus local status recording.
+      Status: COMPLETED_VALIDATED_READ_ONLY_FAILED_PROVIDER_ATTEMPT_EVIDENCE_REVIEW.
+      Goal: Inspect failed provider attempt evidence, confirm non-reuse boundaries, and identify the next safe non-A5 checkpoint.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Legacy active next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Findings: failed codex_sample_first_trial, retry_001, and exact_new_trial_001 attempts are verified failed_no_image_generated and non-reusable; exact_new_trial_002 succeeded but project artifact persistence was not reviewable/promotable; fresh 003 shot route completed 3 technical shots; human review validator selects shot_2 but formal human approval remains pending; promotion, memory, production, and provider generation remain paused.
+      Validation run: validate_failed_provider_attempt_inspection passed; validate_exact_new_trial_failed_provider_attempt_review passed; validate_exact_new_trial_artifact_persistence_truth_review passed; validate_exact_new_trial_3shot_stability_preflight passed; validate_exact_new_trial_local_persistence_repair_preflight passed; validate_exact_new_trial_003_shot_1/2/3_execution_closeout passed; validate_exact_new_trial_003_human_review passed.
+      provider_contact_performed: false.
+      plugin_call_performed: false.
+      api_call_performed: false.
+      image_generation_performed: false.
+      image_binary_read_performed: false.
+      output_write_performed: false.
+      env_file_content_read_performed: false.
+      secret_value_read_performed: false.
+      DailyNote_write_performed: false.
+      VCP_memory_write_performed: false.
+      production_candidate_created: false.
+      accepted_sample_auto_promotion: false.
+      push_status: not_performed.
+      Pause boundaries: A5/provider/image generation; formal human approval before promotion or memory; push/tag/release/deploy/PR creation; secret/.env reads or edits; production writes.
+      Next: local accepted-candidate/human-approval-readiness audit without promotion, or await explicit push/PR authorization.
+
 - [x] ID: v0_6_90_push_or_pr_readiness_audit_without_push
       Lane: A0/A4 Green local readiness audit plus local status recording.
       Status: COMPLETED_VALIDATED_PUSH_OR_PR_READINESS_AUDIT_WITHOUT_PUSH.

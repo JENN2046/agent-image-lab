@@ -1,5 +1,41 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260526-v0.6.91-READ-ONLY-FAILED-PROVIDER-ATTEMPT-EVIDENCE-REVIEW
+
+Task: v0.6.91 Read-only failed provider attempt evidence review
+Status: completed_validated
+Receipt:
+  - lane: A0/A4 Green read-only failed provider evidence review plus local status recording
+  - phase: v0_6_91_read_only_failed_provider_attempt_evidence_review
+  - provider_contact_performed: false
+  - plugin_call_performed: false
+  - api_call_performed: false
+  - image_generation_performed: false
+  - image_binary_read_performed: false
+  - output_write_performed: false
+  - env_file_content_read_performed: false
+  - secret_value_read_performed: false
+  - DailyNote_write_performed: false
+  - VCP_memory_write_performed: false
+  - production_candidate_created: false
+  - accepted_sample_auto_promotion: false
+  - push_tag_release_deploy_performed: false
+Commands run:
+  - node scripts/validate_failed_provider_attempt_inspection.js: passed
+  - node scripts/validate_exact_new_trial_failed_provider_attempt_review.js: passed
+  - node scripts/validate_exact_new_trial_artifact_persistence_truth_review.js: passed
+  - node scripts/validate_exact_new_trial_3shot_stability_preflight.js: passed
+  - node scripts/validate_exact_new_trial_local_persistence_repair_preflight.js: passed
+  - node scripts/validate_exact_new_trial_003_shot_1_execution_closeout.js: passed
+  - node scripts/validate_exact_new_trial_003_shot_2_execution_closeout.js: passed
+  - node scripts/validate_exact_new_trial_003_shot_3_execution_closeout.js: passed
+  - node scripts/validate_exact_new_trial_003_human_review.js: passed
+Observed result:
+  - Failed attempts are complete as historical evidence and non-reusable for generation, promotion, accepted sample, production, or memory.
+  - 003 shot route has validated technical candidates, but formal human approval remains pending.
+Next:
+  - local accepted-candidate/human-approval-readiness audit without promotion, or await explicit push/PR authorization
+
 ## VALIDATION-20260526-v0.6.90-PUSH-OR-PR-READINESS-AUDIT-WITHOUT-PUSH
 
 Task: v0.6.90 Push or PR readiness audit without push

@@ -1,5 +1,55 @@
 ---
 
+## Current Handoff Update - v0.6.91 Read-only Failed Provider Attempt Evidence Review
+
+```text
+phase: v0_6_91_read_only_failed_provider_attempt_evidence_review
+status: COMPLETED_VALIDATED_READ_ONLY_FAILED_PROVIDER_ATTEMPT_EVIDENCE_REVIEW
+mode: A0/A4 Green read-only failed provider evidence review plus local status recording; no provider/plugin/API/image/output/secret/memory execution
+workspace: A:\agent-image-lab\agent-image-lab-v0.2
+branch: master
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+legacy_active_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+summary: Failed provider attempt evidence has been reviewed and validated. Failed attempts are non-reusable and must not become review assets, accepted samples, or memory seeds. The later 003 three-shot route has validated technical candidates and shot_2 is the selected candidate in human-review evidence, but formal human approval is still pending. No new provider call or promotion was performed.
+validation_status: completed_validated
+validation_run:
+  - node scripts/validate_failed_provider_attempt_inspection.js: passed
+  - node scripts/validate_exact_new_trial_failed_provider_attempt_review.js: passed
+  - node scripts/validate_exact_new_trial_artifact_persistence_truth_review.js: passed
+  - node scripts/validate_exact_new_trial_3shot_stability_preflight.js: passed
+  - node scripts/validate_exact_new_trial_local_persistence_repair_preflight.js: passed
+  - node scripts/validate_exact_new_trial_003_shot_1_execution_closeout.js: passed
+  - node scripts/validate_exact_new_trial_003_shot_2_execution_closeout.js: passed
+  - node scripts/validate_exact_new_trial_003_shot_3_execution_closeout.js: passed
+  - node scripts/validate_exact_new_trial_003_human_review.js: passed
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+image_binary_read_performed: false
+output_write_performed: false
+env_file_content_read_performed: false
+secret_value_read_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+production_candidate_created: false
+accepted_sample_auto_promotion: false
+push_status: not_performed
+go_no_go:
+  failed_attempt_evidence_complete: true
+  failed_attempts_reusable_for_generation_or_promotion: false
+  next_provider_generation_authorized_now: false
+  next_memory_or_production_write_authorized_now: false
+pause_boundaries:
+  - A5/provider/image generation remains paused
+  - formal human approval remains required before promotion or memory steps
+  - push/tag/release/deploy/PR creation remains paused until explicit owner authorization
+  - secret/.env reads or edits remain paused
+  - production writes remain paused
+next_safe_task: local accepted-candidate/human-approval-readiness audit without promotion, or await explicit push/PR authorization
+```
+
 ## Current Handoff Update - v0.6.90 Push Or PR Readiness Audit Without Push
 
 ```text

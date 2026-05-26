@@ -1,5 +1,73 @@
 ---
 
+## Current Run State - v0.6.91 Read-only Failed Provider Attempt Evidence Review
+
+```text
+phase: v0_6_91_read_only_failed_provider_attempt_evidence_review
+status: COMPLETED_VALIDATED_READ_ONLY_FAILED_PROVIDER_ATTEMPT_EVIDENCE_REVIEW
+mode: A0/A4 Green read-only failed provider evidence review plus local status recording; no provider/plugin/API/image/output/secret/memory execution
+workspace: A:\agent-image-lab\agent-image-lab-v0.2
+branch: master
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+legacy_active_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+goal_objective: inspect failed provider attempt evidence, confirm non-reuse boundaries, and identify the next safe non-A5 checkpoint
+evidence_reviewed:
+  - reports/visual_asset_eval_dry_run/v0_6_3_failed_provider_attempt_inspection.json
+  - reports/visual_asset_eval_dry_run/v0_6_13_failed_provider_attempt_review.json
+  - reports/visual_asset_eval_dry_run/v0_6_20_failed_no_image_generated_post_run_review.json
+  - reports/visual_asset_eval_dry_run/v0_6_24_exact_new_trial_3shot_stability_preflight.json
+  - reports/visual_asset_eval_dry_run/v0_6_25_exact_new_trial_artifact_persistence_truth_review.json
+  - reports/visual_asset_eval_dry_run/v0_6_26_exact_new_trial_local_persistence_repair_preflight.json
+  - reports/visual_asset_eval_dry_run/v0_6_27_exact_new_trial_003_shot_1_execution_closeout.json
+  - reports/visual_asset_eval_dry_run/v0_6_29_exact_new_trial_003_shot_2_execution_closeout.json
+  - reports/visual_asset_eval_dry_run/v0_6_31_exact_new_trial_003_shot_3_execution_closeout.json
+  - reports/provider_receipts/v0_3_3_exact_new_trial_001_receipt.json
+  - reports/provider_receipts/v0_3_3_exact_new_trial_002_receipt.json
+findings:
+  - failed codex_sample_first_trial and retry_001 attempts are verified failed_no_image_generated and are not reusable as review assets, accepted samples, or memory seeds
+  - exact_new_trial_001 also failed_no_image_generated with retry_limit 0 and next_auto_step_allowed false
+  - exact_new_trial_002 recorded a successful image generation but later artifact persistence truth review found the project output image missing, so 002 was not reviewable/promotable
+  - local persistence repair preflight selected fresh_non_overwriting_future_shot and treated 002 as historical prompt-route evidence only
+  - exact_new_trial_003 shot_1, shot_2, and shot_3 closeout validators pass and show reviewable accepted candidates, with shot_2 selected by human review validator
+  - formal human approval remains pending; accepted sample auto-promotion, production candidate creation, DailyNote write, and VCP memory write remain blocked
+validation_run:
+  - node scripts/validate_failed_provider_attempt_inspection.js: passed
+  - node scripts/validate_exact_new_trial_failed_provider_attempt_review.js: passed
+  - node scripts/validate_exact_new_trial_artifact_persistence_truth_review.js: passed
+  - node scripts/validate_exact_new_trial_3shot_stability_preflight.js: passed
+  - node scripts/validate_exact_new_trial_local_persistence_repair_preflight.js: passed
+  - node scripts/validate_exact_new_trial_003_shot_1_execution_closeout.js: passed
+  - node scripts/validate_exact_new_trial_003_shot_2_execution_closeout.js: passed
+  - node scripts/validate_exact_new_trial_003_shot_3_execution_closeout.js: passed
+  - node scripts/validate_exact_new_trial_003_human_review.js: passed
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+image_binary_read_performed: false
+output_write_performed: false
+env_file_content_read_performed: false
+secret_value_read_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+production_candidate_created: false
+accepted_sample_auto_promotion: false
+push_status: not_performed
+go_no_go:
+  failed_attempt_evidence_complete: true
+  failed_attempts_reusable_for_generation_or_promotion: false
+  next_provider_generation_authorized_now: false
+  next_memory_or_production_write_authorized_now: false
+pause_boundaries:
+  - A5/provider/image generation remains paused
+  - formal human approval remains required before promotion or memory steps
+  - push/tag/release/deploy/PR creation remains paused until explicit owner authorization
+  - secret/.env reads or edits remain paused
+  - production writes remain paused
+next_safe_task: local accepted-candidate/human-approval-readiness audit without promotion, or await explicit push/PR authorization
+```
+
 ## Current Run State - v0.6.90 Push Or PR Readiness Audit Without Push
 
 ```text
