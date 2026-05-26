@@ -1,5 +1,48 @@
 ---
 
+## Current Handoff Update - v0.6.83 NativeDoubao Runner Case Registry
+
+```text
+phase: v0_6_83_native_doubao_runner_case_registry
+status: COMPLETED_TARGETED_VALIDATED_PENDING_MVP_CLEAN_RERUN
+mode: Green local runner registry ref reduction only; no provider/plugin/API/image/output/secret/memory execution
+workspace: A:\agent-image-lab\agent-image-lab-v0.2
+branch: master
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+legacy_active_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+summary: Added a non-secret NativeDoubao runner case registry and changed the runner CLI default path to resolve prompt/profile/output/model from a case id instead of embedding concrete prompt/output refs in the CLI entrypoint. Explicit CLI args still override registry values. Validation includes registry shape checks and a dry-run case invocation. No provider contact, plugin/API call, image generation, image binary read, output write, secret value read, memory write, push, tag, release, or deploy was performed.
+changed_files_current_task:
+  - configs/native_doubao_runner_cases.json
+  - scripts/run_native_doubao_image_generation.js
+  - scripts/validate_v7_20_native_doubao_real_runner_implementation.js
+validation_status: completed_targeted_validated_pending_mvp_clean_rerun
+validation_run:
+  - node --check scripts/run_native_doubao_image_generation.js: passed
+  - node --check scripts/validate_v7_20_native_doubao_real_runner_implementation.js: passed
+  - node scripts/validate_v7_20_native_doubao_real_runner_implementation.js: passed with 43 checks
+  - node scripts/run_native_doubao_image_generation.js --case-id=tennis_wallet_hero_v2_preflight --dry-run=true: passed dry-run, provider/api/image/output false
+  - node scripts/validate_native_doubao_sandbox.js: passed with 72 checks
+  - npm run validate:mvp: failed before local commit because readiness validators require clean committed state and the new registry file was untracked
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+image_binary_read_performed: false
+output_write_performed: false
+env_field_name_preflight_performed: true
+env_file_content_read_performed: false
+secret_value_read_performed: false
+real_network_fetch_performed: false
+real_dns_lookup_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+push_status: not_performed
+next_safe_task: commit_exact_allowlist_then_rerun_validate_mvp
+```
+
+---
+
 ## Current Handoff Update - v0.6.82 NativeDoubao Network Safety Helper Consolidation
 
 ```text

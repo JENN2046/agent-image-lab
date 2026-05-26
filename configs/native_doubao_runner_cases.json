@@ -1,0 +1,34 @@
+{
+  "schema_version": "native_doubao_runner_cases.v1",
+  "default_case_id": "tennis_wallet_hero_v2_preflight",
+  "cases": [
+    {
+      "case_id": "tennis_wallet_hero_v2_preflight",
+      "description": "Default local preflight case for NativeDoubao runner. This registry entry is metadata only and does not authorize provider contact.",
+      "prompt_package_ref": "prompts/image_generation/product_still_life_outdoor_tennis_wallet_hero_v2.yaml",
+      "plugin_profile_ref": "plugins/image_generation/native_doubao_image/plugin.profile.yaml",
+      "output_directory": "runs/real_generation/v7_19_native_doubao_first_run/",
+      "model": "doubao-seedream-5-0-260128",
+      "max_plugin_calls": 1,
+      "max_images_created": 1,
+      "retry_allowed": false,
+      "dry_run_default": true,
+      "provider_contact_authorized": false,
+      "secret_value_required_for_preflight": false
+    },
+    {
+      "case_id": "neutral_smoke_test_red_apple_secretless_bridge",
+      "description": "Secretless bridge compatibility case used by existing v0.6.73 request validation.",
+      "prompt_package_ref": "prompts/image_generation/neutral_smoke_test_red_apple_v1.yaml",
+      "plugin_profile_ref": "plugins/image_generation/native_doubao_image/plugin.profile.yaml",
+      "output_directory": "runs/real_generation/v0_6_73_real_vcp_agent_generation_one_shot/",
+      "model": "doubao-seedream-5-0-260128",
+      "max_plugin_calls": 1,
+      "max_images_created": 1,
+      "retry_allowed": false,
+      "dry_run_default": true,
+      "provider_contact_authorized": false,
+      "secret_value_required_for_preflight": false
+    }
+  ]
+}

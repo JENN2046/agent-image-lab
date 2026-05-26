@@ -10,8 +10,31 @@ function fileContains(p, s) { const fp = path.join(root, p); if (!fs.existsSync(
 const runner = fs.readFileSync(path.join(root, "scripts/run_native_doubao_image_generation.js"), "utf8");
 const plugin = fs.readFileSync(path.join(root, "plugins/image_generation/native_doubao_image/native_doubao_image.js"), "utf8");
 const adapter = fs.readFileSync(path.join(root, "adapters/image_generation/native_doubao_adapter.js"), "utf8");
+const runnerCases = JSON.parse(fs.readFileSync(path.join(root, "configs/native_doubao_runner_cases.json"), "utf8"));
+const runnerModule = require(path.join(root, "scripts/run_native_doubao_image_generation.js"));
 
 check("doc_277_exists", () => fileExists("docs/277_v7_20_native_doubao_real_runner_implementation.md"));
+check("runner_case_registry_exists", () => fileExists("configs/native_doubao_runner_cases.json"));
+check("runner_case_registry_has_default", () => typeof runnerCases.default_case_id === "string" && runnerCases.cases.some((item) => item.case_id === runnerCases.default_case_id));
+check("runner_case_registry_entries_are_safe_refs", () => runnerCases.cases.every((item) =>
+  /^prompts\/image_generation\/[^/].+\.ya?ml$/.test(item.prompt_package_ref || "") &&
+  /^runs\/real_generation\/[^/].+\/$/.test(item.output_directory || "") &&
+  item.provider_contact_authorized === false &&
+  item.secret_value_required_for_preflight === false
+));
+check("runner_resolves_default_case_from_registry", () => {
+  const resolved = runnerModule.resolveRunnerCaseOptions({});
+  return resolved.runner_case_id === runnerCases.default_case_id &&
+    resolved.prompt_package_ref === runnerCases.cases.find((item) => item.case_id === runnerCases.default_case_id).prompt_package_ref &&
+    resolved.output_directory === runnerCases.cases.find((item) => item.case_id === runnerCases.default_case_id).output_directory;
+});
+check("runner_cli_default_uses_case_registry_not_hardcoded_refs", () =>
+  runner.includes("loadRunnerCaseRegistry") &&
+  runner.includes("resolveRunnerCaseOptions") &&
+  runner.includes('--case-id') &&
+  !runner.includes("product_still_life_outdoor_tennis_wallet_hero_v2.yaml") &&
+  !runner.includes("v7_19_native_doubao_first_run")
+);
 check("runner_has_loadEnvLocal", () => runner.includes("function loadEnvLocal"));
 check("runner_references_dotenv", () => runner.includes(".env.local"));
 check("runner_references_api_key_env", () => runner.includes("DOUBAO_IMAGE_API_KEY"));

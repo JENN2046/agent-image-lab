@@ -11,6 +11,7 @@ const secretlessBridge = require("./native_doubao_secretless_provider_runtime_br
 
 // ── Config ──
 const ENV_LOCAL_PATH = path.join(root, ".env.local");
+const RUNNER_CASE_REGISTRY_PATH = path.join(root, "configs", "native_doubao_runner_cases.json");
 const ALLOWED_ENV_KEYS = [
   "DOUBAO_IMAGE_API_BASE_URL",
   "DOUBAO_IMAGE_API_KEY",
@@ -20,6 +21,61 @@ const ALLOWED_ENV_KEYS = [
 ];
 const SECRETLESS_PROVIDER_BINDING_REF = "native_doubao:capability:owner-runtime:v0_6_73";
 const SECRETLESS_PROVIDER_BINDING_DISPLAY_REF = "native_doubao:capability:owner-runtime:<redacted>";
+
+function loadRunnerCaseRegistry(filePath) {
+  const registryPath = filePath || RUNNER_CASE_REGISTRY_PATH;
+  try {
+    const parsed = JSON.parse(fs.readFileSync(registryPath, "utf8"));
+    return {
+      loaded: true,
+      registry_path: path.relative(root, registryPath).replace(/\\/g, "/"),
+      default_case_id: parsed.default_case_id || null,
+      cases: Array.isArray(parsed.cases) ? parsed.cases : [],
+    };
+  } catch (error) {
+    return {
+      loaded: false,
+      registry_path: path.relative(root, registryPath).replace(/\\/g, "/"),
+      error: "native_doubao_runner_case_registry_unavailable",
+    };
+  }
+}
+
+function resolveRunnerCaseOptions(options, registry) {
+  const source = Object.assign({}, options || {});
+  const caseRegistry = registry || loadRunnerCaseRegistry();
+  if (!caseRegistry.loaded) {
+    return Object.assign(source, {
+      runner_case_registry_loaded: false,
+      runner_case_registry_error: caseRegistry.error,
+    });
+  }
+
+  const requestedCaseId = source.runner_case_id || source.case_id || caseRegistry.default_case_id;
+  const selectedCase = caseRegistry.cases.find(function (item) {
+    return item && item.case_id === requestedCaseId;
+  });
+  if (!selectedCase) {
+    return Object.assign(source, {
+      runner_case_registry_loaded: true,
+      runner_case_id: requestedCaseId,
+      runner_case_registry_error: "native_doubao_runner_case_not_found",
+    });
+  }
+
+  return Object.assign({}, source, {
+    runner_case_registry_loaded: true,
+    runner_case_id: selectedCase.case_id,
+    prompt_package_ref: source.prompt_package_ref || selectedCase.prompt_package_ref,
+    plugin_profile_ref: source.plugin_profile_ref || selectedCase.plugin_profile_ref,
+    output_directory: source.output_directory || selectedCase.output_directory,
+    model: source.model || selectedCase.model,
+    max_plugin_calls: source.max_plugin_calls || selectedCase.max_plugin_calls,
+    max_images_created: source.max_images_created || selectedCase.max_images_created,
+    retry_allowed: source.retry_allowed === undefined ? selectedCase.retry_allowed === true : source.retry_allowed,
+    dryRun: source.dryRun === undefined ? selectedCase.dry_run_default !== false : source.dryRun,
+  });
+}
 
 function parseBooleanOption(value) {
   if (value === true || value === false) return value;
@@ -99,6 +155,9 @@ function readLegacyPreflightEnvFieldNames() {
 function preflightCheck(options) {
   const issues = [];
   const secretlessBinding = isSecretlessBindingRequest(options);
+  if (options.runner_case_registry_error) {
+    issues.push(options.runner_case_registry_error);
+  }
 
   // Legacy env preflight checks field names only (no value retention or output).
   // Secretless binding mode must not read .env.local content at all.
@@ -138,6 +197,7 @@ function preflightCheck(options) {
 }
 
 async function run(options) {
+  options = resolveRunnerCaseOptions(options || {});
   // Default dry-run mode
   if (options.dryRun === undefined) options.dryRun = true;
 
@@ -147,6 +207,7 @@ async function run(options) {
     return {
       status: "BLOCKED_PREFLIGHT_FAILED",
       runner: "run_native_doubao_image_generation",
+      runner_case_id: options.runner_case_id || null,
       plugin_id: "NativeDoubaoImage",
       preflight: preflight,
       api_call_performed: false,
@@ -301,6 +362,7 @@ async function run(options) {
   return {
     status: result.status,
     runner: "run_native_doubao_image_generation",
+    runner_case_id: options.runner_case_id || null,
     plugin_id: "NativeDoubaoImage",
     preflight: preflight,
     adapter_result: publicAdapterResult,
@@ -327,10 +389,11 @@ if (require.main === module) {
   }
 
   run({
-    prompt_package_ref: args["--prompt-package-ref"] || "prompts/image_generation/product_still_life_outdoor_tennis_wallet_hero_v2.yaml",
-    plugin_profile_ref: args["--plugin-profile-ref"] || "plugins/image_generation/native_doubao_image/plugin.profile.yaml",
-    output_directory: args["--output-directory"] || "runs/real_generation/v7_19_native_doubao_first_run/",
-    model: args["--model"] || "doubao-seedream-5-0-260128",
+    runner_case_id: args["--case-id"] || args["--runner-case-id"] || null,
+    prompt_package_ref: args["--prompt-package-ref"] || null,
+    plugin_profile_ref: args["--plugin-profile-ref"] || null,
+    output_directory: args["--output-directory"] || null,
+    model: args["--model"] || null,
     max_plugin_calls: parseInt(args["--max-plugin-calls"] || "1", 10),
     max_images_created: parseInt(args["--max-images-created"] || "1", 10),
     retry_allowed: args["--retry-allowed"] === "true",
@@ -352,6 +415,8 @@ module.exports = {
   loadDotEnv: loadDotEnv,
   readEnvFieldNames: readEnvFieldNames,
   readLegacyPreflightEnvFieldNames: readLegacyPreflightEnvFieldNames,
+  loadRunnerCaseRegistry: loadRunnerCaseRegistry,
+  resolveRunnerCaseOptions: resolveRunnerCaseOptions,
   isSecretlessBindingRequest: isSecretlessBindingRequest,
   validateSecretlessBindingOptions: validateSecretlessBindingOptions,
   SECRETLESS_PROVIDER_BINDING_REF: SECRETLESS_PROVIDER_BINDING_REF,

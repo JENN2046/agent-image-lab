@@ -1,5 +1,54 @@
 ---
 
+## Current Run State - v0.6.83 NativeDoubao Runner Case Registry
+
+```text
+phase: v0_6_83_native_doubao_runner_case_registry
+status: COMPLETED_TARGETED_VALIDATED_PENDING_MVP_CLEAN_RERUN
+mode: Green local runner registry ref reduction only; no provider/plugin/API/image/output/secret/memory execution
+workspace: A:\agent-image-lab\agent-image-lab-v0.2
+branch: master
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+legacy_active_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+goal_objective: move NativeDoubao runner default prompt/output/profile/model refs from CLI literals into a local non-secret case registry
+changed_files_current_task:
+  - configs/native_doubao_runner_cases.json
+  - scripts/run_native_doubao_image_generation.js
+  - scripts/validate_v7_20_native_doubao_real_runner_implementation.js
+runner_case_registry_added:
+  - configs/native_doubao_runner_cases.json
+  - loadRunnerCaseRegistry
+  - resolveRunnerCaseOptions
+  - --case-id / --runner-case-id CLI support
+  - explicit CLI prompt/output/profile/model args still override registry case values
+  - CLI default no longer embeds concrete prompt/output refs
+validation_run:
+  - node --check scripts/run_native_doubao_image_generation.js: passed
+  - node --check scripts/validate_v7_20_native_doubao_real_runner_implementation.js: passed
+  - node scripts/validate_v7_20_native_doubao_real_runner_implementation.js: passed with 43 checks
+  - node scripts/run_native_doubao_image_generation.js --case-id=tennis_wallet_hero_v2_preflight --dry-run=true: passed dry-run, provider/api/image/output false
+  - node scripts/validate_native_doubao_sandbox.js: passed with 72 checks
+  - npm run validate:mvp: failed before local commit because readiness validators require clean committed state and the new registry file was untracked
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+image_binary_read_performed: false
+output_write_performed: false
+env_field_name_preflight_performed: true
+env_file_content_read_performed: false
+secret_value_read_performed: false
+real_network_fetch_performed: false
+real_dns_lookup_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+push_status: not_performed
+next_safe_task: commit_exact_allowlist_then_rerun_validate_mvp
+```
+
+---
+
 ## Current Run State - v0.6.82 NativeDoubao Network Safety Helper Consolidation
 
 ```text

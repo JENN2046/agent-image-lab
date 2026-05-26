@@ -1,5 +1,45 @@
 ---
 
+## Checkpoint - v0.6.83 NativeDoubao Runner Case Registry
+
+```text
+phase: v0_6_83_native_doubao_runner_case_registry
+status: completed_targeted_validated_pending_mvp_clean_rerun
+result: COMPLETED_TARGETED_VALIDATED
+mode: Green local runner registry ref reduction only
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+legacy_active_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+summary: NativeDoubao runner defaults now resolve from configs/native_doubao_runner_cases.json by case id instead of hardcoded CLI prompt/output literals. Explicit CLI args still override registry values.
+changed_files_current_task:
+  - configs/native_doubao_runner_cases.json
+  - scripts/run_native_doubao_image_generation.js
+  - scripts/validate_v7_20_native_doubao_real_runner_implementation.js
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+image_binary_read_performed: false
+output_write_performed: false
+env_field_name_preflight_performed: true
+env_file_content_read_performed: false
+secret_value_read_performed: false
+real_network_fetch_performed: false
+real_dns_lookup_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+push_status: not_performed
+validation_run:
+  - node --check runner and validator: passed
+  - node scripts/validate_v7_20_native_doubao_real_runner_implementation.js: passed with 43 checks
+  - node scripts/run_native_doubao_image_generation.js --case-id=tennis_wallet_hero_v2_preflight --dry-run=true: passed dry-run
+  - node scripts/validate_native_doubao_sandbox.js: passed with 72 checks
+  - npm run validate:mvp: failed before local commit because readiness validators require clean committed state and the new registry file was untracked
+next: commit_exact_allowlist_then_rerun_validate_mvp
+```
+
+---
+
 ## Checkpoint - v0.6.82 NativeDoubao Network Safety Helper Consolidation
 
 ```text
