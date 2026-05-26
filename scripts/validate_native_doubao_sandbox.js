@@ -1,5 +1,7 @@
 "use strict";
 
+const sharp = require("sharp");
+const { ReadableStream } = require("node:stream/web");
 const plugin = require("../plugins/image_generation/native_doubao_image/native_doubao_image.js");
 
 let passed = true;
@@ -199,6 +201,92 @@ check("image_buffer_rejects_content_type_mismatch", () => {
   return result.valid === false && result.reason === "image_content_type_mismatch";
 });
 
+check("decoded_image_buffer_accepts_valid_png", () => {
+  return sharp({
+    create: {
+      width: 1,
+      height: 1,
+      channels: 3,
+      background: { r: 255, g: 0, b: 0 },
+    },
+  }).png().toBuffer().then((buffer) => plugin.validateDecodedImageBuffer(buffer, "image/png")).then((result) => {
+    return result.valid === true &&
+      result.decoded === true &&
+      result.width === 1 &&
+      result.height === 1 &&
+      result.pixels === 1;
+  });
+});
+
+check("decoded_image_buffer_rejects_magic_only_png", () => {
+  const pngHeaderOnly = Buffer.from("89504e470d0a1a0a0000000d49484452", "hex");
+  return plugin.validateDecodedImageBuffer(pngHeaderOnly, "image/png").then((result) => {
+    return result.valid === false && result.reason === "image_decode_failed";
+  });
+});
+
+check("stream_reader_rejects_content_length_over_limit", () => {
+  const response = {
+    headers: { get: (name) => name.toLowerCase() === "content-length" ? "5" : "" },
+    body: new ReadableStream({
+      start(controller) {
+        controller.enqueue(Buffer.from("abc"));
+        controller.close();
+      },
+    }),
+  };
+  return plugin.readImageResponseBodyWithLimit(response, 4).then((result) => {
+    return result.valid === false && result.reason === "download_content_length_too_large";
+  });
+});
+
+check("stream_reader_rejects_payload_over_limit", () => {
+  const response = {
+    headers: { get: () => "" },
+    body: new ReadableStream({
+      start(controller) {
+        controller.enqueue(Buffer.from("abc"));
+        controller.enqueue(Buffer.from("de"));
+        controller.close();
+      },
+    }),
+  };
+  return plugin.readImageResponseBodyWithLimit(response, 4).then((result) => {
+    return result.valid === false && result.reason === "download_payload_too_large";
+  });
+});
+
+check("write_image_output_url_fake_fetch_rejects_stream_over_limit", () => {
+  const response = {
+    ok: true,
+    headers: {
+      get: (name) => {
+        if (name.toLowerCase() === "content-type") return "image/png";
+        return "";
+      },
+    },
+    body: new ReadableStream({
+      start(controller) {
+        controller.enqueue(Buffer.from("abcde"));
+        controller.close();
+      },
+    }),
+  };
+  return plugin.writeImageOutput(
+    { images: [{ url: "https://example.com/image.png" }] },
+    "runs/real_generation/validator_url_fake_fetch_over_limit",
+    {
+      fetchImpl: async () => response,
+      resolveDownloadHostForSafety: async () => ({ valid: true, checked_count: 1 }),
+      maxDownloadBytes: 4,
+    }
+  ).then((result) => {
+    return result.success === false &&
+      result.failed.length === 1 &&
+      result.failed[0].reason === "download_payload_too_large";
+  });
+});
+
 check("content_type_allows_jpeg_alias", () => plugin.contentTypeAllowsImageFormat("image/jpg", "jpeg") === true);
 
 check("provider_response_schema_accepts_single_b64_item", () => {
@@ -349,6 +437,8 @@ check("verify_local_output_file_rejects_missing_file", () => {
 
 check("plugin_exports_output_safety_helpers", () => {
   return typeof plugin.validateImageBuffer === "function" &&
+    typeof plugin.validateDecodedImageBuffer === "function" &&
+    typeof plugin.readImageResponseBodyWithLimit === "function" &&
     typeof plugin.validateDownloadUrl === "function" &&
     typeof plugin.classifyIpAddressForNetworkSafety === "function" &&
     typeof plugin.validateResolvedDownloadAddresses === "function" &&

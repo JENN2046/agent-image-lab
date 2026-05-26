@@ -5,12 +5,15 @@
 var fs = require("node:fs");
 var dns = require("node:dns");
 var path = require("node:path");
+var sharp = require("sharp");
 var YAML = require("yaml");
 
 var REPO_ROOT = path.resolve(__dirname, "..", "..", "..");
 var PROMPT_ROOT = path.resolve(REPO_ROOT, "prompts", "image_generation");
 var OUTPUT_ROOT = path.resolve(REPO_ROOT, "runs", "real_generation");
 var MAX_IMAGE_OUTPUT_BYTES = 25 * 1024 * 1024;
+var MAX_IMAGE_OUTPUT_PIXELS = 80 * 1000 * 1000;
+var MAX_IMAGE_OUTPUT_DIMENSION = 12000;
 var DEFAULT_TIMEOUT_MS = 120000;
 var MIN_TIMEOUT_MS = 1000;
 var MAX_TIMEOUT_MS = 300000;
@@ -150,6 +153,63 @@ function validateImageBuffer(buffer, contentType) {
     format: format,
     extension: extensionForImageFormat(format),
   };
+}
+
+async function validateDecodedImageBuffer(buffer, contentType) {
+  var basic = validateImageBuffer(buffer, contentType);
+  if (!basic.valid) {
+    return basic;
+  }
+
+  try {
+    var metadata = await sharp(buffer, {
+      limitInputPixels: MAX_IMAGE_OUTPUT_PIXELS,
+    }).metadata();
+    var width = Number(metadata.width || 0);
+    var height = Number(metadata.height || 0);
+    if (!Number.isFinite(width) || !Number.isFinite(height) || width <= 0 || height <= 0) {
+      return { valid: false, reason: "image_dimensions_missing", bytes: buffer.length, format: basic.format };
+    }
+    if (width > MAX_IMAGE_OUTPUT_DIMENSION || height > MAX_IMAGE_OUTPUT_DIMENSION) {
+      return {
+        valid: false,
+        reason: "image_dimensions_too_large",
+        bytes: buffer.length,
+        width: width,
+        height: height,
+        max_dimension: MAX_IMAGE_OUTPUT_DIMENSION,
+      };
+    }
+    var pixels = width * height;
+    if (pixels > MAX_IMAGE_OUTPUT_PIXELS) {
+      return {
+        valid: false,
+        reason: "image_pixel_area_too_large",
+        bytes: buffer.length,
+        width: width,
+        height: height,
+        pixels: pixels,
+        max_pixels: MAX_IMAGE_OUTPUT_PIXELS,
+      };
+    }
+    if (metadata.format && metadata.format !== basic.format) {
+      return {
+        valid: false,
+        reason: "image_decode_format_mismatch",
+        bytes: buffer.length,
+        format: basic.format,
+        decoded_format: metadata.format,
+      };
+    }
+    return Object.assign({}, basic, {
+      width: width,
+      height: height,
+      pixels: pixels,
+      decoded: true,
+    });
+  } catch (err) {
+    return { valid: false, reason: "image_decode_failed", bytes: buffer.length, format: basic.format };
+  }
 }
 
 function isLikelyBase64(value) {
@@ -324,8 +384,69 @@ function validateDownloadUrl(rawUrl) {
   }
 }
 
-function writeVerifiedImageBuffer(buffer, outDir, baseName, contentType) {
-  var validation = validateImageBuffer(buffer, contentType);
+async function readImageResponseBodyWithLimit(response, maxBytes) {
+  var limit = Number(maxBytes || MAX_IMAGE_OUTPUT_BYTES);
+  if (!Number.isFinite(limit) || limit <= 0 || limit > MAX_IMAGE_OUTPUT_BYTES) {
+    limit = MAX_IMAGE_OUTPUT_BYTES;
+  }
+  var contentLength = response.headers && response.headers.get ? Number(response.headers.get("content-length")) : NaN;
+  if (Number.isFinite(contentLength) && contentLength > limit) {
+    return { valid: false, reason: "download_content_length_too_large", bytes: contentLength, max_bytes: limit };
+  }
+  if (!response.body) {
+    return { valid: false, reason: "download_stream_missing" };
+  }
+
+  var chunks = [];
+  var total = 0;
+
+  async function addChunk(chunk) {
+    var buffer = Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk);
+    total += buffer.length;
+    if (total > limit) {
+      return false;
+    }
+    chunks.push(buffer);
+    return true;
+  }
+
+  if (response.body.getReader) {
+    var reader = response.body.getReader();
+    try {
+      while (true) {
+        var item = await reader.read();
+        if (item.done) break;
+        var ok = await addChunk(item.value);
+        if (!ok) {
+          if (reader.cancel) {
+            try { await reader.cancel(); } catch (err) {}
+          }
+          return { valid: false, reason: "download_payload_too_large", bytes: total, max_bytes: limit };
+        }
+      }
+      return { valid: true, buffer: Buffer.concat(chunks), bytes: total };
+    } finally {
+      if (reader.releaseLock) {
+        try { reader.releaseLock(); } catch (err) {}
+      }
+    }
+  }
+
+  if (typeof response.body[Symbol.asyncIterator] === "function") {
+    for await (var chunk of response.body) {
+      var okNode = await addChunk(chunk);
+      if (!okNode) {
+        return { valid: false, reason: "download_payload_too_large", bytes: total, max_bytes: limit };
+      }
+    }
+    return { valid: true, buffer: Buffer.concat(chunks), bytes: total };
+  }
+
+  return { valid: false, reason: "download_stream_unsupported" };
+}
+
+async function writeVerifiedImageBuffer(buffer, outDir, baseName, contentType) {
+  var validation = await validateDecodedImageBuffer(buffer, contentType);
   if (!validation.valid) {
     return { verified: false, reason: validation.reason, bytes: validation.bytes || buffer.length };
   }
@@ -354,6 +475,8 @@ function writeVerifiedImageBuffer(buffer, outDir, baseName, contentType) {
     file: filename,
     bytes: finalCheck.bytes,
     format: finalCheck.format,
+    width: validation.width,
+    height: validation.height,
   };
 }
 
@@ -816,7 +939,8 @@ async function realGenerate(options) {
   }
 }
 
-async function writeImageOutput(result, outputDirectory) {
+async function writeImageOutput(result, outputDirectory, options) {
+  options = options || {};
   var safeOutput = resolveSafeOutputDirectory(outputDirectory);
   if (!safeOutput.valid) {
     return { success: false, error: safeOutput.error };
@@ -838,9 +962,9 @@ async function writeImageOutput(result, outputDirectory) {
         continue;
       }
       var buffer = Buffer.from(img.b64_json, "base64");
-      var b64Check = writeVerifiedImageBuffer(buffer, outDir, baseName, null);
+      var b64Check = await writeVerifiedImageBuffer(buffer, outDir, baseName, null);
       if (b64Check.verified) {
-        written.push({ index: i, file: b64Check.file, bytes: b64Check.bytes, format: b64Check.format, source: "b64_json" });
+        written.push({ index: i, file: b64Check.file, bytes: b64Check.bytes, format: b64Check.format, width: b64Check.width, height: b64Check.height, source: "b64_json" });
       } else {
         failed.push({ index: i, reason: b64Check.reason, source: "b64_json" });
       }
@@ -852,14 +976,16 @@ async function writeImageOutput(result, outputDirectory) {
           failed.push({ index: i, reason: urlCheck.reason, source: "url_download" });
           continue;
         }
-        var hostSafety = await resolveDownloadHostForSafety(urlCheck.url.hostname);
+        var resolveHost = options.resolveDownloadHostForSafety || resolveDownloadHostForSafety;
+        var hostSafety = await resolveHost(urlCheck.url.hostname);
         if (!hostSafety.valid) {
           failed.push({ index: i, reason: hostSafety.reason, source: "url_download" });
           continue;
         }
         var downloadTimeout = createTimeoutController();
         try {
-          var imageResponse = await fetch(urlCheck.url.toString(), {
+          var fetchImpl = options.fetchImpl || fetch;
+          var imageResponse = await fetchImpl(urlCheck.url.toString(), {
             redirect: "error",
             signal: downloadTimeout.signal,
           });
@@ -872,10 +998,14 @@ async function writeImageOutput(result, outputDirectory) {
             failed.push({ index: i, reason: "download_content_type_missing_or_invalid", source: "url_download" });
             continue;
           }
-          var imageBuffer = Buffer.from(await imageResponse.arrayBuffer());
-          var outputCheck = writeVerifiedImageBuffer(imageBuffer, outDir, baseName, downloadContentType);
+          var bodyRead = await readImageResponseBodyWithLimit(imageResponse, options.maxDownloadBytes);
+          if (!bodyRead.valid) {
+            failed.push({ index: i, reason: bodyRead.reason, source: "url_download" });
+            continue;
+          }
+          var outputCheck = await writeVerifiedImageBuffer(bodyRead.buffer, outDir, baseName, downloadContentType);
           if (outputCheck.verified) {
-            written.push({ index: i, file: outputCheck.file, bytes: outputCheck.bytes, format: outputCheck.format, source: "url_download" });
+            written.push({ index: i, file: outputCheck.file, bytes: outputCheck.bytes, format: outputCheck.format, width: outputCheck.width, height: outputCheck.height, source: "url_download" });
           } else {
             failed.push({ index: i, reason: outputCheck.reason, source: "url_download" });
           }
@@ -950,6 +1080,8 @@ module.exports = {
   resolveSafeOutputDirectory: resolveSafeOutputDirectory,
   verifyLocalOutputFile: verifyLocalOutputFile,
   validateImageBuffer: validateImageBuffer,
+  validateDecodedImageBuffer: validateDecodedImageBuffer,
+  readImageResponseBodyWithLimit: readImageResponseBodyWithLimit,
   validateDownloadUrl: validateDownloadUrl,
   classifyIpAddressForNetworkSafety: classifyIpAddressForNetworkSafety,
   validateResolvedDownloadAddresses: validateResolvedDownloadAddresses,
