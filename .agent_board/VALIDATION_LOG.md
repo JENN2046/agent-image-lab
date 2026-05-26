@@ -3,7 +3,7 @@
 ## VALIDATION-20260526-v0.6.80-NATIVE-DOUBAO-YAML-PROMPT-PARSER
 
 Task: v0.6.80 NativeDoubao YAML prompt parser
-Status: completed_targeted_validated_pending_mvp_clean_rerun
+Status: completed_validated
 Receipt:
   - lane: Green
   - phase: v0_6_80_native_doubao_yaml_prompt_parser
@@ -23,11 +23,12 @@ Commands run:
   - node --check scripts/validate_native_doubao_sandbox.js: passed
   - node scripts/validate_native_doubao_sandbox.js: passed with 65 checks
   - node scripts/validate_v7_20_native_doubao_real_runner_implementation.js: passed with 35 checks
-  - npm run validate:mvp: failed before local commit because readiness validators require a clean committed state
+  - npm run validate:mvp: failed before local code commit because readiness validators require a clean committed state
+  - npm run validate:mvp: passed after local code commit e7ec71e
 Observed result:
   - NativeDoubao prompt package parsing now uses YAML.parse and preserves prompt/negative_prompt separation on the existing fixture.
 Next:
-  - commit exact allowlist, then rerun npm run validate:mvp
+  - continue provider output safety gap queue
 
 ## VALIDATION-20260526-v0.6.79-NATIVE-DOUBAO-BASE-URL-DNS-SAFETY-HOOK
 

@@ -2,13 +2,13 @@
 
 - [x] ID: v0_6_80_native_doubao_yaml_prompt_parser
       Lane: Green local prompt parser hardening only.
-      Status: COMPLETED_TARGETED_VALIDATED_PENDING_MVP_CLEAN_RERUN.
+      Status: COMPLETED_VALIDATED_NATIVE_DOUBAO_YAML_PROMPT_PARSER.
       Goal: Replace NativeDoubao prompt package line scanner with the repository yaml dependency.
       Active current phase: v0_3_3_first_live_generation_pilot.
       Resume guard source phase: v0_3_2_live_candidate_action_packet.
       Legacy active next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
       Changed files: plugins/image_generation/native_doubao_image/native_doubao_image.js; scripts/validate_native_doubao_sandbox.js; scripts/validate_v7_20_native_doubao_real_runner_implementation.js.
-      Validation run: node --check plugin and validators passed; node scripts/validate_native_doubao_sandbox.js passed with 65 checks; node scripts/validate_v7_20_native_doubao_real_runner_implementation.js passed with 35 checks; npm run validate:mvp failed before local commit because readiness validators require a clean committed state.
+      Validation run: node --check plugin and validators passed; node scripts/validate_native_doubao_sandbox.js passed with 65 checks; node scripts/validate_v7_20_native_doubao_real_runner_implementation.js passed with 35 checks; npm run validate:mvp failed before local code commit because readiness validators require a clean committed state; npm run validate:mvp passed after local code commit e7ec71e.
       provider_contact_performed: false.
       plugin_call_performed: false.
       api_call_performed: false.
@@ -21,7 +21,7 @@
       DailyNote_write_performed: false.
       VCP_memory_write_performed: false.
       push_status: not_performed.
-      Next: commit_exact_allowlist_then_rerun_validate_mvp.
+      Next: continue_provider_output_safety_gap_queue.
 
 ---
 
