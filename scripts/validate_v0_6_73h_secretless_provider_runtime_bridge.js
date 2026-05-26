@@ -68,7 +68,8 @@ async function main() {
   addResult("bridge_id_exact", bridge.BRIDGE_ID === "native_doubao_secretless_provider_runtime_bridge:v0_6_73h", bridge.BRIDGE_ID);
   addResult("bridge_exports_expected_helpers", typeof bridge.buildSecretlessProviderRuntimeRequest === "function" &&
     typeof bridge.validateSecretlessProviderRuntimeRequest === "function" &&
-    typeof bridge.createUnboundSecretlessProviderRuntimeBridge === "function", bridgePath);
+    typeof bridge.createUnboundSecretlessProviderRuntimeBridge === "function" &&
+    typeof bridge.createBoundSecretlessProviderRuntimeBridge === "function", bridgePath);
 
   const options = {
     prompt_package_ref: "prompts/image_generation/neutral_smoke_test_red_apple_v1.yaml",
@@ -117,6 +118,48 @@ async function main() {
     runnerResult.output_write_performed === false, runnerResult);
   addResult("runner_bridge_path_has_no_env_or_secret_read", runnerResult.env_file_content_read_performed === false &&
     runnerResult.secret_value_read_performed === false, runnerResult);
+
+  let mockDelegateCalled = false;
+  const boundMockBridge = bridge.createBoundSecretlessProviderRuntimeBridge(async function mockNoProviderDelegate(mockRequest) {
+    mockDelegateCalled = true;
+    const mockIssues = bridge.validateSecretlessProviderRuntimeRequest(mockRequest);
+    return {
+      bridge_id: bridge.BRIDGE_ID,
+      status: mockIssues.length === 0 ? "BLOCKED_MOCK_PROVIDER_RUNTIME_FAIL_CLOSED" : "BLOCKED_PROVIDER_RUNTIME_REQUEST_INVALID",
+      blocker: mockIssues.length === 0 ? "mock_provider_runtime_fail_closed_no_provider_call" : "provider_runtime_request_invalid",
+      provider_contact_performed: false,
+      plugin_call_performed: false,
+      api_call_performed: false,
+      image_generation_performed: false,
+      output_write_performed: false,
+      human_review_required_now: false
+    };
+  }, {
+    delegateOwner: "mock_no_provider_runtime"
+  });
+
+  const boundRunnerResult = await runner.run({
+    ...options,
+    secretless_provider_runtime: boundMockBridge,
+    secretless_delegate_authorization_ref: bridge.EXPECTED_DELEGATE_AUTHORIZATION_REF,
+    secretless_delegate_authorization_status: bridge.EXPECTED_DELEGATE_AUTHORIZATION_STATUS,
+    secretless_delegate_authorization_active: true,
+    secretless_delegate_authorization_can_execute_now: true
+  });
+  addResult("runner_accepts_bound_controlled_bridge_before_mock_fail_closed",
+    boundRunnerResult.status === "BLOCKED_MOCK_PROVIDER_RUNTIME_FAIL_CLOSED" && mockDelegateCalled === true,
+    boundRunnerResult.status);
+  addResult("bound_mock_bridge_does_not_report_secretless_runtime_not_callable",
+    boundRunnerResult.status !== "BLOCKED_SECRETLESS_RUNTIME_NOT_CALLABLE",
+    boundRunnerResult.status);
+  addResult("bound_mock_bridge_has_no_provider_or_api_call", boundRunnerResult.provider_contact_performed === false &&
+    boundRunnerResult.plugin_call_performed === false &&
+    boundRunnerResult.api_call_performed === false, boundRunnerResult);
+  addResult("bound_mock_bridge_has_no_image_or_output", boundRunnerResult.image_generation_performed === false &&
+    boundRunnerResult.image_binary_read_performed === false &&
+    boundRunnerResult.output_write_performed === false, boundRunnerResult);
+  addResult("bound_mock_bridge_has_no_env_or_secret_read", boundRunnerResult.env_file_content_read_performed === false &&
+    boundRunnerResult.secret_value_read_performed === false, boundRunnerResult);
 
   const passed = errors.length === 0;
   const summary = {

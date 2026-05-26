@@ -83,6 +83,9 @@ function validateSecretlessProviderRuntimeRequest(request) {
 
 function sanitizeSecretlessProviderRuntimeResult(result) {
   const safeResult = result && typeof result === "object" ? cloneJson(result) : {};
+  const blocker = Object.prototype.hasOwnProperty.call(safeResult, "blocker")
+    ? safeResult.blocker
+    : "provider_runtime_delegate_not_bound";
   return {
     bridge_id: safeResult.bridge_id || BRIDGE_ID,
     status: safeResult.status || "BLOCKED_PROVIDER_RUNTIME_DELEGATE_NOT_BOUND",
@@ -102,7 +105,7 @@ function sanitizeSecretlessProviderRuntimeResult(result) {
     provider_url_returned: false,
     human_review_required_now: safeResult.human_review_required_now === true,
     sanitized_result_metadata_only: true,
-    blocker: safeResult.blocker || "provider_runtime_delegate_not_bound"
+    blocker
   };
 }
 
@@ -208,6 +211,70 @@ function createUnboundSecretlessProviderRuntimeBridge() {
   return unboundSecretlessProviderRuntimeBridge;
 }
 
+function createBoundSecretlessProviderRuntimeBridge(delegate, metadata = {}) {
+  if (typeof delegate !== "function") {
+    throw new TypeError("secretless provider runtime delegate must be a function");
+  }
+
+  const boundSecretlessProviderRuntimeBridge = async function boundSecretlessProviderRuntimeBridge(request) {
+    const issues = validateSecretlessProviderRuntimeRequest(request);
+    if (issues.length > 0) {
+      return sanitizeSecretlessProviderRuntimeResult({
+        bridge_id: BRIDGE_ID,
+        status: "BLOCKED_PROVIDER_RUNTIME_REQUEST_INVALID",
+        blocker: "provider_runtime_request_invalid",
+        request_validation_passed: false,
+        request_validation_issues: issues,
+        provider_contact_performed: false,
+        plugin_call_performed: false,
+        api_call_performed: false,
+        image_generation_performed: false,
+        output_write_performed: false,
+        human_review_required_now: false
+      });
+    }
+
+    try {
+      const delegateResult = await delegate(cloneJson(request));
+      return sanitizeSecretlessProviderRuntimeResult(delegateResult);
+    } catch (error) {
+      return sanitizeSecretlessProviderRuntimeResult({
+        bridge_id: BRIDGE_ID,
+        status: "BLOCKED_PROVIDER_RUNTIME_DELEGATE_FAILED",
+        blocker: "provider_runtime_delegate_failed",
+        provider_contact_performed: false,
+        plugin_call_performed: false,
+        api_call_performed: false,
+        image_generation_performed: false,
+        output_write_performed: false,
+        human_review_required_now: false
+      });
+    }
+  };
+
+  Object.defineProperties(boundSecretlessProviderRuntimeBridge, {
+    [SECRETLESS_PROVIDER_RUNTIME_BRIDGE_MARKER]: {
+      value: true
+    },
+    secretless_provider_runtime_bridge_id: {
+      value: BRIDGE_ID
+    },
+    secretless_provider_runtime_delegate_bound: {
+      value: true
+    },
+    secretless_provider_runtime_delegate_authorization_ref: {
+      value: metadata.delegateAuthorizationRef || EXPECTED_DELEGATE_AUTHORIZATION_REF
+    },
+    secretless_provider_runtime_delegate_authorization_status: {
+      value: metadata.delegateAuthorizationStatus || EXPECTED_DELEGATE_AUTHORIZATION_STATUS
+    },
+    secretless_provider_runtime_delegate_owner: {
+      value: metadata.delegateOwner || "VCPToolBox_or_owner_authorized_provider_runtime"
+    }
+  });
+  return boundSecretlessProviderRuntimeBridge;
+}
+
 module.exports = {
   BRIDGE_ID,
   EXPECTED_PROVIDER_BINDING_REF,
@@ -218,5 +285,6 @@ module.exports = {
   validateSecretlessProviderRuntimeRequest,
   validateSecretlessProviderRuntimeDelegateBinding,
   sanitizeSecretlessProviderRuntimeResult,
-  createUnboundSecretlessProviderRuntimeBridge
+  createUnboundSecretlessProviderRuntimeBridge,
+  createBoundSecretlessProviderRuntimeBridge
 };

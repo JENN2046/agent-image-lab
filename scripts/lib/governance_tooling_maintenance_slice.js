@@ -2429,6 +2429,82 @@ const EXPECTED_V0_6_73AF_FINAL_PRE_PROVIDER_EXECUTION_GO_NO_GO_SLICE = [
   "tests/schema_examples/v0_6_73af_final_pre_provider_execution_go_no_go_fail.example.yaml"
 ].sort();
 
+const EXPECTED_V0_6_73AG_REMOTE_SYNCED_PHRASE_ACTIVATION_POST_PULL_VERIFY_SLICE = [
+  ".agent_board/BLOCKERS.md",
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  "docs/vcp_integration/V0_6_73AG_REMOTE_SYNCED_PHRASE_ACTIVATION_POST_PULL_VERIFY.md",
+  "scripts/validate_v0_6_73ag_remote_synced_phrase_activation_post_pull_verify.js",
+  "tests/schema_examples/v0_6_73ag_remote_synced_phrase_activation_post_pull_verify.example.yaml",
+  "tests/schema_examples/v0_6_73ag_remote_synced_phrase_activation_post_pull_verify_fail.example.yaml"
+].sort();
+
+const EXPECTED_V0_6_73AH_CURRENT_HEAD_FINAL_PRE_PROVIDER_GO_NO_GO_SLICE = [
+  ".agent_board/BLOCKERS.md",
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  "docs/vcp_integration/V0_6_73AH_CURRENT_HEAD_FINAL_PRE_PROVIDER_GO_NO_GO.md",
+  "scripts/validate_v0_6_73ah_current_head_final_pre_provider_go_no_go.js",
+  "tests/schema_examples/v0_6_73ah_current_head_final_pre_provider_go_no_go.example.yaml",
+  "tests/schema_examples/v0_6_73ah_current_head_final_pre_provider_go_no_go_fail.example.yaml"
+].sort();
+
+const EXPECTED_V0_6_73AG_TO_AH_REMOTE_SYNC_AND_CURRENT_HEAD_GO_NO_GO_SLICE = [
+  ".agent_board/BLOCKERS.md",
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  "docs/vcp_integration/V0_6_73AG_REMOTE_SYNCED_PHRASE_ACTIVATION_POST_PULL_VERIFY.md",
+  "docs/vcp_integration/V0_6_73AH_CURRENT_HEAD_FINAL_PRE_PROVIDER_GO_NO_GO.md",
+  "scripts/validate_v0_6_73ag_remote_synced_phrase_activation_post_pull_verify.js",
+  "scripts/validate_v0_6_73ah_current_head_final_pre_provider_go_no_go.js",
+  "tests/schema_examples/v0_6_73ag_remote_synced_phrase_activation_post_pull_verify.example.yaml",
+  "tests/schema_examples/v0_6_73ag_remote_synced_phrase_activation_post_pull_verify_fail.example.yaml",
+  "tests/schema_examples/v0_6_73ah_current_head_final_pre_provider_go_no_go.example.yaml",
+  "tests/schema_examples/v0_6_73ah_current_head_final_pre_provider_go_no_go_fail.example.yaml"
+].sort();
+
+const EXPECTED_V0_6_73AG_TO_AI_REMOTE_SYNC_CURRENT_HEAD_AND_ONE_SHOT_BLOCKED_SLICE = [
+  ".agent_board/BLOCKERS.md",
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  "docs/vcp_integration/V0_6_73AG_REMOTE_SYNCED_PHRASE_ACTIVATION_POST_PULL_VERIFY.md",
+  "docs/vcp_integration/V0_6_73AH_CURRENT_HEAD_FINAL_PRE_PROVIDER_GO_NO_GO.md",
+  "docs/vcp_integration/V0_6_73AI_REAL_VCP_AGENT_GENERATION_EXECUTION_ONE_SHOT_ATTEMPT.md",
+  "docs/vcp_integration/V0_6_73AJ_VCPTOOLBOX_BOUND_DELEGATE_SHAPE_NO_PROVIDER_VERIFY.md",
+  "docs/vcp_integration/V0_6_73AK_VCPTOOLBOX_REAL_RUNTIME_BINDING_PATCH_PLAN.md",
+  "docs/vcp_integration/V0_6_73AM_VCPTOOLBOX_REAL_RUNTIME_BINDING_NO_PROVIDER_VERIFY_AND_AGENT_LAB_SYNC.md",
+  "docs/vcp_integration/V0_6_73AN_VCPTOOLBOX_RUNTIME_DRY_RUN_NO_PROVIDER_VERIFY.md",
+  "reports/provider_receipts/v0_6_73_real_vcp_agent_generation_one_shot_receipt.json",
+  "scripts/native_doubao_delegate_binding_test_harness_no_provider.js",
+  "scripts/native_doubao_secretless_provider_runtime_bridge.js",
+  "scripts/native_doubao_vcptoolbox_bound_delegate_shape_no_provider.js",
+  "scripts/validate_v0_6_73ag_remote_synced_phrase_activation_post_pull_verify.js",
+  "scripts/validate_v0_6_73ah_current_head_final_pre_provider_go_no_go.js",
+  "scripts/validate_v0_6_73ai_real_vcp_agent_generation_execution_one_shot_attempt.js",
+  "scripts/validate_v0_6_73aj_vcptoolbox_bound_delegate_shape_no_provider_verify.js",
+  "scripts/validate_v0_6_73ak_vcptoolbox_real_runtime_binding_patch_plan.js",
+  "scripts/validate_v0_6_73am_vcptoolbox_real_runtime_binding_no_provider_verify_and_agent_lab_sync.js",
+  "scripts/validate_v0_6_73an_vcptoolbox_runtime_dry_run_no_provider_verify.js",
+  "scripts/validate_v0_6_73h_secretless_provider_runtime_bridge.js",
+  "tests/schema_examples/v0_6_73ag_remote_synced_phrase_activation_post_pull_verify.example.yaml",
+  "tests/schema_examples/v0_6_73ag_remote_synced_phrase_activation_post_pull_verify_fail.example.yaml",
+  "tests/schema_examples/v0_6_73ah_current_head_final_pre_provider_go_no_go.example.yaml",
+  "tests/schema_examples/v0_6_73ah_current_head_final_pre_provider_go_no_go_fail.example.yaml",
+  "tests/schema_examples/v0_6_73ai_real_vcp_agent_generation_execution_one_shot_attempt.example.yaml",
+  "tests/schema_examples/v0_6_73aj_vcptoolbox_bound_delegate_shape_no_provider_verify.example.yaml",
+  "tests/schema_examples/v0_6_73ak_vcptoolbox_real_runtime_binding_patch_plan.example.yaml",
+  "tests/schema_examples/v0_6_73am_vcptoolbox_real_runtime_binding_no_provider_verify_and_agent_lab_sync.example.yaml",
+  "tests/schema_examples/v0_6_73an_vcptoolbox_runtime_dry_run_no_provider_verify.example.yaml"
+].sort();
+
 const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "governance_tooling_maintenance_slice_v1",
@@ -3009,6 +3085,22 @@ const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "v0_6_73af_final_pre_provider_execution_go_no_go_slice",
     files: EXPECTED_V0_6_73AF_FINAL_PRE_PROVIDER_EXECUTION_GO_NO_GO_SLICE
+  },
+  {
+    id: "v0_6_73ag_remote_synced_phrase_activation_post_pull_verify_slice",
+    files: EXPECTED_V0_6_73AG_REMOTE_SYNCED_PHRASE_ACTIVATION_POST_PULL_VERIFY_SLICE
+  },
+  {
+    id: "v0_6_73ah_current_head_final_pre_provider_go_no_go_slice",
+    files: EXPECTED_V0_6_73AH_CURRENT_HEAD_FINAL_PRE_PROVIDER_GO_NO_GO_SLICE
+  },
+  {
+    id: "v0_6_73ag_to_ah_remote_sync_and_current_head_go_no_go_slice",
+    files: EXPECTED_V0_6_73AG_TO_AH_REMOTE_SYNC_AND_CURRENT_HEAD_GO_NO_GO_SLICE
+  },
+  {
+    id: "v0_6_73ag_to_ai_remote_sync_current_head_and_one_shot_blocked_slice",
+    files: EXPECTED_V0_6_73AG_TO_AI_REMOTE_SYNC_CURRENT_HEAD_AND_ONE_SHOT_BLOCKED_SLICE
   }
 ];
 
@@ -3094,8 +3186,16 @@ function normalizeChangedFilesForSliceMatching(changedFiles) {
     && sameStringList(withoutHelper, EXPECTED_V0_6_73AE_EXACT_EXECUTION_PHRASE_ACTIVE_FOR_EXECUTION_RECORD_SLICE);
   const isV0_6_73afRegistrationPatch = changedFiles.includes(GOVERNANCE_TOOLING_SLICE_HELPER_FILE)
     && sameStringList(withoutHelper, EXPECTED_V0_6_73AF_FINAL_PRE_PROVIDER_EXECUTION_GO_NO_GO_SLICE);
+  const isV0_6_73agRegistrationPatch = changedFiles.includes(GOVERNANCE_TOOLING_SLICE_HELPER_FILE)
+    && sameStringList(withoutHelper, EXPECTED_V0_6_73AG_REMOTE_SYNCED_PHRASE_ACTIVATION_POST_PULL_VERIFY_SLICE);
+  const isV0_6_73ahRegistrationPatch = changedFiles.includes(GOVERNANCE_TOOLING_SLICE_HELPER_FILE)
+    && sameStringList(withoutHelper, EXPECTED_V0_6_73AH_CURRENT_HEAD_FINAL_PRE_PROVIDER_GO_NO_GO_SLICE);
+  const isV0_6_73agToAhRegistrationPatch = changedFiles.includes(GOVERNANCE_TOOLING_SLICE_HELPER_FILE)
+    && sameStringList(withoutHelper, EXPECTED_V0_6_73AG_TO_AH_REMOTE_SYNC_AND_CURRENT_HEAD_GO_NO_GO_SLICE);
+  const isV0_6_73agToAiRegistrationPatch = changedFiles.includes(GOVERNANCE_TOOLING_SLICE_HELPER_FILE)
+    && sameStringList(withoutHelper, EXPECTED_V0_6_73AG_TO_AI_REMOTE_SYNC_CURRENT_HEAD_AND_ONE_SHOT_BLOCKED_SLICE);
 
-  return (isPostPushSyncRegistrationPatch || isExecutionBlockedStatusSyncRegistrationPatch || isV0_6_73gRegistrationPatch || isV0_6_73hRegistrationPatch || isV0_6_73iRegistrationPatch || isV0_6_73lRegistrationPatch || isV0_6_73mRegistrationPatch || isV0_6_73nRegistrationPatch || isV0_6_73oRegistrationPatch || isV0_6_73pRegistrationPatch || isV0_6_73qRegistrationPatch || isV0_6_73rRegistrationPatch || isV0_6_73sRegistrationPatch || isV0_6_73tRegistrationPatch || isV0_6_73uRegistrationPatch || isV0_6_73u3RegistrationPatch || isV0_6_73vRegistrationPatch || isV0_6_73wRegistrationPatch || isV0_6_73xRegistrationPatch || isV0_6_73zRegistrationPatch || isV0_6_73aaRegistrationPatch || isV0_6_73abRegistrationPatch || isV0_6_73adRegistrationPatch || isV0_6_73aeRegistrationPatch || isV0_6_73afRegistrationPatch) ? withoutHelper : changedFiles;
+  return (isPostPushSyncRegistrationPatch || isExecutionBlockedStatusSyncRegistrationPatch || isV0_6_73gRegistrationPatch || isV0_6_73hRegistrationPatch || isV0_6_73iRegistrationPatch || isV0_6_73lRegistrationPatch || isV0_6_73mRegistrationPatch || isV0_6_73nRegistrationPatch || isV0_6_73oRegistrationPatch || isV0_6_73pRegistrationPatch || isV0_6_73qRegistrationPatch || isV0_6_73rRegistrationPatch || isV0_6_73sRegistrationPatch || isV0_6_73tRegistrationPatch || isV0_6_73uRegistrationPatch || isV0_6_73u3RegistrationPatch || isV0_6_73vRegistrationPatch || isV0_6_73wRegistrationPatch || isV0_6_73xRegistrationPatch || isV0_6_73zRegistrationPatch || isV0_6_73aaRegistrationPatch || isV0_6_73abRegistrationPatch || isV0_6_73adRegistrationPatch || isV0_6_73aeRegistrationPatch || isV0_6_73afRegistrationPatch || isV0_6_73agRegistrationPatch || isV0_6_73ahRegistrationPatch || isV0_6_73agToAhRegistrationPatch || isV0_6_73agToAiRegistrationPatch) ? withoutHelper : changedFiles;
 }
 
 function fileAllowedInGovernanceToolingSlice(file) {
@@ -3930,6 +4030,58 @@ function governanceToolingMaintenanceSliceSelfCheck() {
       ])?.id === "v0_6_73af_final_pre_provider_execution_go_no_go_slice"
     },
     {
+      check: "exact_slice_matches_v0_6_73ag_remote_synced_phrase_activation_post_pull_verify",
+      passed: findMatchingGovernanceToolingSlice(
+        EXPECTED_V0_6_73AG_REMOTE_SYNCED_PHRASE_ACTIVATION_POST_PULL_VERIFY_SLICE
+      )?.id === "v0_6_73ag_remote_synced_phrase_activation_post_pull_verify_slice"
+    },
+    {
+      check: "exact_slice_matches_v0_6_73ag_remote_synced_phrase_activation_post_pull_verify_registration_patch",
+      passed: findMatchingGovernanceToolingSlice([
+        ...EXPECTED_V0_6_73AG_REMOTE_SYNCED_PHRASE_ACTIVATION_POST_PULL_VERIFY_SLICE,
+        GOVERNANCE_TOOLING_SLICE_HELPER_FILE
+      ])?.id === "v0_6_73ag_remote_synced_phrase_activation_post_pull_verify_slice"
+    },
+    {
+      check: "exact_slice_matches_v0_6_73ah_current_head_final_pre_provider_go_no_go",
+      passed: findMatchingGovernanceToolingSlice(
+        EXPECTED_V0_6_73AH_CURRENT_HEAD_FINAL_PRE_PROVIDER_GO_NO_GO_SLICE
+      )?.id === "v0_6_73ah_current_head_final_pre_provider_go_no_go_slice"
+    },
+    {
+      check: "exact_slice_matches_v0_6_73ah_current_head_final_pre_provider_go_no_go_registration_patch",
+      passed: findMatchingGovernanceToolingSlice([
+        ...EXPECTED_V0_6_73AH_CURRENT_HEAD_FINAL_PRE_PROVIDER_GO_NO_GO_SLICE,
+        GOVERNANCE_TOOLING_SLICE_HELPER_FILE
+      ])?.id === "v0_6_73ah_current_head_final_pre_provider_go_no_go_slice"
+    },
+    {
+      check: "exact_slice_matches_v0_6_73ag_to_ah_remote_sync_and_current_head_go_no_go",
+      passed: findMatchingGovernanceToolingSlice(
+        EXPECTED_V0_6_73AG_TO_AH_REMOTE_SYNC_AND_CURRENT_HEAD_GO_NO_GO_SLICE
+      )?.id === "v0_6_73ag_to_ah_remote_sync_and_current_head_go_no_go_slice"
+    },
+    {
+      check: "exact_slice_matches_v0_6_73ag_to_ah_remote_sync_and_current_head_go_no_go_registration_patch",
+      passed: findMatchingGovernanceToolingSlice([
+        ...EXPECTED_V0_6_73AG_TO_AH_REMOTE_SYNC_AND_CURRENT_HEAD_GO_NO_GO_SLICE,
+        GOVERNANCE_TOOLING_SLICE_HELPER_FILE
+      ])?.id === "v0_6_73ag_to_ah_remote_sync_and_current_head_go_no_go_slice"
+    },
+    {
+      check: "exact_slice_matches_v0_6_73ag_to_ai_remote_sync_current_head_and_one_shot_blocked",
+      passed: findMatchingGovernanceToolingSlice(
+        EXPECTED_V0_6_73AG_TO_AI_REMOTE_SYNC_CURRENT_HEAD_AND_ONE_SHOT_BLOCKED_SLICE
+      )?.id === "v0_6_73ag_to_ai_remote_sync_current_head_and_one_shot_blocked_slice"
+    },
+    {
+      check: "exact_slice_matches_v0_6_73ag_to_ai_remote_sync_current_head_and_one_shot_blocked_registration_patch",
+      passed: findMatchingGovernanceToolingSlice([
+        ...EXPECTED_V0_6_73AG_TO_AI_REMOTE_SYNC_CURRENT_HEAD_AND_ONE_SHOT_BLOCKED_SLICE,
+        GOVERNANCE_TOOLING_SLICE_HELPER_FILE
+      ])?.id === "v0_6_73ag_to_ai_remote_sync_current_head_and_one_shot_blocked_slice"
+    },
+    {
       check: "exact_slice_rejects_missing_file",
       passed: findMatchingGovernanceToolingSlice(EXPECTED_GOVERNANCE_TOOLING_MAINTENANCE_SLICE.slice(1)) === null
     },
@@ -4077,6 +4229,10 @@ module.exports = {
   EXPECTED_V0_6_73AD_REMOTE_SYNCED_FINAL_EXECUTION_PHRASE_ACTIVATION_REVIEW_SLICE,
   EXPECTED_V0_6_73AE_EXACT_EXECUTION_PHRASE_ACTIVE_FOR_EXECUTION_RECORD_SLICE,
   EXPECTED_V0_6_73AF_FINAL_PRE_PROVIDER_EXECUTION_GO_NO_GO_SLICE,
+  EXPECTED_V0_6_73AG_REMOTE_SYNCED_PHRASE_ACTIVATION_POST_PULL_VERIFY_SLICE,
+  EXPECTED_V0_6_73AH_CURRENT_HEAD_FINAL_PRE_PROVIDER_GO_NO_GO_SLICE,
+  EXPECTED_V0_6_73AG_TO_AH_REMOTE_SYNC_AND_CURRENT_HEAD_GO_NO_GO_SLICE,
+  EXPECTED_V0_6_73AG_TO_AI_REMOTE_SYNC_CURRENT_HEAD_AND_ONE_SHOT_BLOCKED_SLICE,
   GOVERNANCE_TOOLING_ALLOWED_SLICES,
   buildGovernanceToolingMaintenanceSliceReport,
   fileAllowedInGovernanceToolingSlice,
