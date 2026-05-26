@@ -1,0 +1,48 @@
+{
+  "push_pr_readiness_after_detrack_without_push": {
+    "version": "v1",
+    "phase": "v0_6_104_push_pr_readiness_after_detrack_without_push",
+    "receipt_type": "green_push_pr_readiness_after_detrack_without_push_receipt",
+    "status": "completed_validated_push_pr_readiness_after_detrack_without_push",
+    "lane_attempted": "Green_local_readiness_refresh",
+    "lane_executed": "Green_local_readiness_refresh",
+    "source_phase": "v0_6_103_tracked_local_path_config_detrack_execution_postcondition",
+    "action_performed": "refreshed_push_pr_readiness_after_detrack_without_remote_write",
+    "remote_write_performed": false,
+    "calls_used": {
+      "provider_calls": 0,
+      "plugin_calls": 0,
+      "api_calls": 0,
+      "memory_write_entries": 0
+    },
+    "files_written": [
+      "docs/V0_6_104_PUSH_PR_READINESS_AFTER_DETRACK_WITHOUT_PUSH.md",
+      "reports/visual_asset_eval_dry_run/v0_6_104_push_pr_readiness_after_detrack_without_push.json",
+      "reports/memory_write_receipts/v0_6_104_push_pr_readiness_after_detrack_without_push.json",
+      "tests/schema_examples/push_pr_readiness_after_detrack_without_push.example.json",
+      "tests/schema_examples/push_pr_readiness_after_detrack_without_push_fail.example.json",
+      "scripts/validate_push_pr_readiness_after_detrack_without_push.js",
+      ".agent_board/RUN_STATE.md",
+      ".agent_board/TASK_QUEUE.md",
+      ".agent_board/CHECKPOINT.md",
+      ".agent_board/HANDOFF.md",
+      ".agent_board/VALIDATION_LOG.md"
+    ],
+    "guard": {
+      "push_performed": false,
+      "pr_created": false,
+      "tag_release_deploy_performed": false,
+      "local_config_content_read": false,
+      "working_copy_delete_performed": false,
+      "secret_value_read_performed": false,
+      "provider_contact_performed": false,
+      "image_generation_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "Codex_memory_write_performed": false,
+      "production_candidate_write_performed": false
+    },
+    "next_auto_step_allowed": false,
+    "recommended_next": "pause_before_push_or_request_explicit_remote_write_authorization"
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "push_pr_readiness_after_detrack_without_push": {
+    "version": "v1",
+    "phase": "v0_6_104_push_pr_readiness_after_detrack_without_push",
+    "status": "completed_validated_push_pr_readiness_after_detrack_without_push",
+    "execution_mode": "push_pr_readiness_after_detrack_without_push",
+    "lane_attempted": "Green_local_readiness_refresh",
+    "lane_executed": "Green_local_readiness_refresh",
+    "source_phase": "v0_6_103_tracked_local_path_config_detrack_execution_postcondition",
+    "git_state_observed_before_checkpoint_commit": {
+      "branch": "master",
+      "tracking_ref": "origin/master",
+      "ahead_count": 45,
+      "behind_count": 0,
+      "worktree_clean_before_checkpoint_edits": true
+    },
+    "detrack_postcondition": {
+      "postcondition_report_ref": "reports/visual_asset_eval_dry_run/v0_6_103_tracked_local_path_config_detrack_execution_postcondition.json",
+      "target_ref": "configs/local_paths/doubaogen_plugin_dir.local.yaml",
+      "working_copy_file_exists_after": true,
+      "git_tracking_removed_after": true,
+      "git_ls_files_returns_target_after": false,
+      "gitignore_rule_effective_after": true,
+      "local_config_content_read": false,
+      "tracked_local_path_config_blocker_resolved": true
+    },
+    "readiness_result": {
+      "remote_write_authorized_now": false,
+      "tracked_local_path_config_blocks_sync": false,
+      "remote_sync_preconditions_improved": true,
+      "push_ready_now": false,
+      "pr_ready_now": false,
+      "reason": "Tracked local path config blocker is resolved, but push/PR remains not authorized in this checkpoint. Explicit remote write authorization is still required."
+    },
+    "validation_observed": {
+      "node_check_validator": "passed",
+      "dedicated_validator": "passed",
+      "npm_run_validate_public_disclosure": "passed",
+      "npm_run_validate_smoke": "passed",
+      "npm_run_validate_mvp": "passed",
+      "resume_compaction_guard": "passed",
+      "git_diff_check": "passed"
+    },
+    "guard": {
+      "push_performed": false,
+      "pr_created": false,
+      "tag_release_deploy_performed": false,
+      "fetch_merge_rebase_performed": false,
+      "local_config_content_read": false,
+      "git_rm_cached_performed": false,
+      "working_copy_delete_performed": false,
+      "secret_value_read_performed": false,
+      "env_file_content_read_performed": false,
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "image_generation_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "Codex_memory_write_performed": false,
+      "production_candidate_write_performed": false
+    },
+    "go_no_go": {
+      "readiness_refresh_created": true,
+      "tracked_local_path_config_blocker_resolved": true,
+      "remote_sync_ready_now": false,
+      "remote_write_authorized_now": false,
+      "push_ready_now": false,
+      "pr_ready_now": false,
+      "next_auto_step_allowed": false
+    },
+    "recommended_next": "pause_before_push_or_request_explicit_remote_write_authorization",
+    "recommended_next_auto_execution_allowed": false
+  }
+}
