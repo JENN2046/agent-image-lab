@@ -1,0 +1,285 @@
+#!/usr/bin/env node
+"use strict";
+
+const fs = require("node:fs");
+const path = require("node:path");
+
+const repoRoot = path.resolve(__dirname, "..");
+const defaultInputPath = "tests/fixtures/runtime_kernel_v0_green_task.fixture.json";
+
+const sideEffectFlags = Object.freeze({
+  provider_contact_performed: false,
+  plugin_call_performed: false,
+  api_call_performed: false,
+  image_generation_performed: false,
+  disk_write_performed: false,
+  production_write_performed: false,
+  secret_value_read_performed: false,
+  env_file_content_read_performed: false,
+  push_tag_release_deploy_performed: false,
+});
+
+const kernelComponents = Object.freeze([
+  "task_intake",
+  "policy_gate",
+  "executor_interface",
+  "artifact_persistence",
+  "review_gate",
+  "state_transition",
+  "audit_record",
+]);
+
+function assertObject(value, label) {
+  if (!value || typeof value !== "object" || Array.isArray(value)) {
+    throw new Error(`${label} must be an object`);
+  }
+}
+
+function assertString(value, label) {
+  if (typeof value !== "string" || value.trim() === "") {
+    throw new Error(`${label} must be a non-empty string`);
+  }
+}
+
+function clone(value) {
+  return JSON.parse(JSON.stringify(value));
+}
+
+function stableHash(value) {
+  const text = JSON.stringify(value);
+  let hash = 2166136261;
+  for (let index = 0; index < text.length; index += 1) {
+    hash ^= text.charCodeAt(index);
+    hash = Math.imul(hash, 16777619);
+  }
+  return `fnv1a32:${(hash >>> 0).toString(16).padStart(8, "0")}`;
+}
+
+function intakeTask(rawTask) {
+  assertObject(rawTask, "task");
+  assertString(rawTask.task_id, "task.task_id");
+  assertString(rawTask.task_type, "task.task_type");
+  assertObject(rawTask.input, "task.input");
+  assertObject(rawTask.policy, "task.policy");
+  assertObject(rawTask.review, "task.review");
+
+  if (rawTask.task_type !== "fixture.visual_generation.no_provider.v0") {
+    throw new Error("task.task_type must be fixture.visual_generation.no_provider.v0");
+  }
+
+  return {
+    accepted: true,
+    state: "queued",
+    task: clone(rawTask),
+  };
+}
+
+function policyGate(intake) {
+  const task = intake.task;
+  const policy = task.policy;
+  const requested = Array.isArray(policy.requested_capabilities) ? policy.requested_capabilities : [];
+  const forbidden = Array.isArray(policy.forbidden_capabilities) ? policy.forbidden_capabilities : [];
+  const allowed = Array.isArray(policy.allowed_capabilities) ? policy.allowed_capabilities : [];
+
+  const blockedRequests = requested.filter((capability) => forbidden.includes(capability));
+  const providerLikeRequests = requested.filter((capability) =>
+    ["provider_contact", "plugin_call", "api_call", "image_generation", "production_write", "disk_write"].includes(capability)
+  );
+  const missingAllowed = ["local_fixture_execution", "in_memory_artifact_persistence"].filter(
+    (capability) => !allowed.includes(capability)
+  );
+
+  const passed = blockedRequests.length === 0 && providerLikeRequests.length === 0 && missingAllowed.length === 0;
+  return {
+    passed,
+    state: passed ? "gated" : "blocked_red",
+    blocked_reasons: [
+      ...blockedRequests.map((capability) => `requested_forbidden_capability:${capability}`),
+      ...providerLikeRequests.map((capability) => `provider_side_effect_capability_blocked:${capability}`),
+      ...missingAllowed.map((capability) => `missing_allowed_capability:${capability}`),
+    ],
+    allowed_capabilities: allowed,
+    forbidden_capabilities: forbidden,
+  };
+}
+
+function executeNoProviderFixture(task) {
+  const input = task.input;
+  assertString(input.prompt_ref, "task.input.prompt_ref");
+  assertString(input.fixture_asset_ref, "task.input.fixture_asset_ref");
+  assertObject(input.artifact_capsule_plan, "task.input.artifact_capsule_plan");
+
+  return {
+    state: "executed_stub",
+    executor_id: "local_no_provider_executor_stub_v0",
+    output: {
+      artifact_id: `${task.task_id}:artifact:fixture`,
+      artifact_kind: "fixture_visual_artifact_reference",
+      prompt_ref: input.prompt_ref,
+      fixture_asset_ref: input.fixture_asset_ref,
+      capsule_plan: clone(input.artifact_capsule_plan),
+      provider_output_ref: null,
+      provider_contact_performed: false,
+      image_generation_performed: false,
+    },
+  };
+}
+
+function persistArtifactInMemory(task, execution) {
+  const persistedRef = `memory://${task.task_id}/artifact/fixture`;
+  return {
+    state: "artifact_recorded",
+    persistence_id: "artifact_persistence_stub_v0",
+    persisted_ref: persistedRef,
+    persisted_hash: stableHash(execution.output),
+    disk_write_performed: false,
+    artifact_record: clone(execution.output),
+  };
+}
+
+function reviewGate(task, persisted) {
+  const review = task.review;
+  const decision = review.stub_decision;
+  if (decision !== "mark_review_pending") {
+    throw new Error("task.review.stub_decision must be mark_review_pending");
+  }
+  return {
+    state: "review_pending",
+    review_decision: "stub_review_pending",
+    completed_by_stub: true,
+    reviewer_ref: review.reviewer_ref || "local_fixture_reviewer",
+    artifact_ref: persisted.persisted_ref,
+  };
+}
+
+function stateTransition(states) {
+  const terminalState = "completed_stub";
+  return {
+    state: terminalState,
+    path: [
+      states.intake.state,
+      states.policy.state,
+      states.execution?.state,
+      states.persistence?.state,
+      states.review.state,
+      terminalState,
+    ].filter(Boolean),
+  };
+}
+
+function buildAuditRecord(task, states) {
+  const finalState = states.transition.state;
+  return {
+    audit_id: `${task.task_id}:audit:v0`,
+    task_id: task.task_id,
+    kernel_id: "runtime_kernel_v0_no_provider",
+    kernel_components: [...kernelComponents],
+    state_path: states.transition.path,
+    final_state: finalState,
+    blocked_red: finalState === "blocked_red",
+    executor_ran: Boolean(states.execution),
+    side_effect_flags: { ...sideEffectFlags },
+    next_adapter_slots: {
+      artifact_capsule: "planned_next_adapter",
+      review_console: "planned_next_adapter",
+      provider: "blocked_until_explicit_provider_phase",
+    },
+  };
+}
+
+function runRuntimeKernelV0(rawTask) {
+  const intake = intakeTask(rawTask);
+  const policy = policyGate(intake);
+
+  if (!policy.passed) {
+    const transition = {
+      state: "blocked_red",
+      path: [intake.state, policy.state],
+    };
+    return {
+      kernel_id: "runtime_kernel_v0_no_provider",
+      version: "v0",
+      task_id: intake.task.task_id,
+      final_state: "blocked_red",
+      intake,
+      policy,
+      transition,
+      audit_record: buildAuditRecord(intake.task, {
+        intake,
+        policy,
+        review: { state: "review_skipped" },
+        transition,
+      }),
+    };
+  }
+
+  const execution = executeNoProviderFixture(intake.task);
+  const persistence = persistArtifactInMemory(intake.task, execution);
+  const review = reviewGate(intake.task, persistence);
+  const transition = stateTransition({ intake, policy, execution, persistence, review });
+  const auditRecord = buildAuditRecord(intake.task, { intake, policy, execution, persistence, review, transition });
+
+  return {
+    kernel_id: "runtime_kernel_v0_no_provider",
+    version: "v0",
+    task_id: intake.task.task_id,
+    final_state: transition.state,
+    intake,
+    policy,
+    execution,
+    persistence,
+    review,
+    transition,
+    audit_record: auditRecord,
+  };
+}
+
+function resolveInputPath(argv) {
+  const inputIndex = argv.indexOf("--input");
+  const inputPath = inputIndex >= 0 ? argv[inputIndex + 1] : defaultInputPath;
+  assertString(inputPath, "--input");
+  const normalized = inputPath.replace(/\\/g, "/");
+  if (!normalized.startsWith("tests/fixtures/")) {
+    throw new Error("--input must be a repository-relative path under tests/fixtures/");
+  }
+  const resolved = path.resolve(repoRoot, normalized);
+  const relative = path.relative(repoRoot, resolved);
+  if (relative.startsWith("..") || path.isAbsolute(relative)) {
+    throw new Error("--input escapes repository root");
+  }
+  return resolved;
+}
+
+function main() {
+  const inputPath = resolveInputPath(process.argv.slice(2));
+  const task = JSON.parse(fs.readFileSync(inputPath, "utf8"));
+  const result = runRuntimeKernelV0(task);
+  console.log(JSON.stringify(result, null, 2));
+}
+
+if (require.main === module) {
+  try {
+    main();
+  } catch (error) {
+    console.error(JSON.stringify({
+      kernel_id: "runtime_kernel_v0_no_provider",
+      passed: false,
+      error: error.message,
+      side_effect_flags: { ...sideEffectFlags },
+    }, null, 2));
+    process.exitCode = 1;
+  }
+}
+
+module.exports = {
+  kernelComponents,
+  sideEffectFlags,
+  intakeTask,
+  policyGate,
+  executeNoProviderFixture,
+  persistArtifactInMemory,
+  reviewGate,
+  stateTransition,
+  buildAuditRecord,
+  runRuntimeKernelV0,
+};

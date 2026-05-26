@@ -1,0 +1,39 @@
+{
+  "task_id": "runtime-v0-red-task-001",
+  "task_type": "fixture.visual_generation.no_provider.v0",
+  "input": {
+    "prompt_ref": "fixture_prompt_ref_red_provider_request_v0",
+    "fixture_asset_ref": "fixture_asset_ref_metadata_only_red_001",
+    "artifact_capsule_plan": {
+      "capsule_kind": "preview_capsule_plan",
+      "sample_id": "fixture_runtime_v0_red_sample",
+      "expected_artifact_kind": "fixture_visual_artifact_reference",
+      "write_mode": "in_memory_only"
+    }
+  },
+  "policy": {
+    "allowed_capabilities": [
+      "local_fixture_execution",
+      "in_memory_artifact_persistence"
+    ],
+    "requested_capabilities": [
+      "local_fixture_execution",
+      "in_memory_artifact_persistence",
+      "provider_contact"
+    ],
+    "forbidden_capabilities": [
+      "provider_contact",
+      "plugin_call",
+      "api_call",
+      "image_generation",
+      "disk_write",
+      "production_write",
+      "secret_value_read",
+      "push_tag_release_deploy"
+    ]
+  },
+  "review": {
+    "stub_decision": "mark_review_pending",
+    "reviewer_ref": "local_fixture_reviewer"
+  }
+}
