@@ -34,9 +34,41 @@ function assertCleanSideEffects(flags, label) {
   assert(dirty.length === 0, `${label} side effects must all be false: ${dirty.map(([key]) => key).join(", ")}`);
 }
 
+function validateRuntimeContract(contract, label) {
+  assert(contract.contract_id === "runtime_kernel_v0_contract", `${label} contract id mismatch`);
+  assert(contract.contract_version === "v0.1", `${label} contract version mismatch`);
+  assert(contract.kernel_id === "runtime_kernel_v0_no_provider", `${label} contract kernel id mismatch`);
+  assert(contract.task_input.task_type === "fixture.visual_generation.no_provider.v0", `${label} task type contract mismatch`);
+  ["task_id", "task_type", "input", "policy", "review"].forEach((field) => {
+    assert(contract.task_input.required_root_fields.includes(field), `${label} contract missing input root field ${field}`);
+  });
+  ["prompt_ref", "fixture_asset_ref", "artifact_capsule_plan"].forEach((field) => {
+    assert(contract.task_input.required_input_fields.includes(field), `${label} contract missing input field ${field}`);
+  });
+  ["local_fixture_execution", "in_memory_artifact_persistence"].forEach((capability) => {
+    assert(contract.task_input.required_policy_allowed_capabilities.includes(capability), `${label} contract missing allowed capability ${capability}`);
+  });
+  ["provider_contact", "plugin_call", "api_call", "image_generation", "production_write", "disk_write"].forEach((capability) => {
+    assert(contract.task_input.blocked_capability_classes.includes(capability), `${label} contract missing blocked capability ${capability}`);
+  });
+  ["kernel_id", "version", "contract", "task_id", "final_state", "intake", "policy", "transition", "audit_record"].forEach((field) => {
+    assert(contract.output_envelope.required_root_fields.includes(field), `${label} contract missing output field ${field}`);
+  });
+  assert(contract.output_envelope.terminal_states.includes("completed_stub"), `${label} contract missing completed terminal state`);
+  assert(contract.output_envelope.terminal_states.includes("blocked_red"), `${label} contract missing blocked terminal state`);
+  assert(contract.adapter_slots.artifact_adapter.status === "planned_next_adapter", `${label} artifact adapter slot mismatch`);
+  assert(contract.adapter_slots.review_bridge.status === "planned_next_adapter", `${label} review bridge slot mismatch`);
+  assert(contract.adapter_slots.provider_adapter.status === "blocked_until_explicit_provider_phase", `${label} provider adapter slot mismatch`);
+  assert(contract.audit_write.allowed_output_root === ".agent_private/runtime_kernel_v0/audits", `${label} audit output root mismatch`);
+  assert(contract.audit_write.overwrite_existing_allowed === false, `${label} audit overwrite must be false`);
+  assert(contract.side_effect_policy.forbidden_flags.includes("forbidden_disk_write_performed"), `${label} side effect contract missing forbidden disk write flag`);
+  assert(contract.side_effect_policy.allowed_local_side_effects.includes("audit_write_performed"), `${label} side effect contract missing allowed audit write`);
+}
+
 function validateGreenAudit(result, label) {
   assert(result.kernel_id === "runtime_kernel_v0_no_provider", `${label} kernel id mismatch`);
   assert(result.version === "v0", `${label} version mismatch`);
+  validateRuntimeContract(result.contract, label);
   assert(result.task_id === "runtime-v0-green-task-001", `${label} task id mismatch`);
   assert(result.final_state === "completed_stub", `${label} final state must be completed_stub`);
   assert(result.intake.state === "queued", `${label} intake state mismatch`);
@@ -62,6 +94,8 @@ function validateGreenAudit(result, label) {
     "completed_stub",
   ]), `${label} transition path mismatch`);
   assert(result.audit_record.final_state === "completed_stub", `${label} audit final state mismatch`);
+  assert(result.audit_record.contract_id === "runtime_kernel_v0_contract", `${label} audit contract id mismatch`);
+  assert(result.audit_record.contract_version === "v0.1", `${label} audit contract version mismatch`);
   assert(result.audit_record.blocked_red === false, `${label} audit must not be blocked red`);
   assert(result.audit_record.executor_ran === true, `${label} audit must record executor ran`);
   assert(result.audit_record.kernel_components.length === 7, `${label} audit must include seven kernel components`);
@@ -83,6 +117,7 @@ function validateGreenAudit(result, label) {
 
 function validateRedAudit(result) {
   assert(result.kernel_id === "runtime_kernel_v0_no_provider", "red kernel id mismatch");
+  validateRuntimeContract(result.contract, "red");
   assert(result.task_id === "runtime-v0-red-task-001", "red task id mismatch");
   assert(result.final_state === "blocked_red", "red final state must be blocked_red");
   assert(result.intake.state === "queued", "red intake state mismatch");
@@ -94,6 +129,8 @@ function validateRedAudit(result) {
   assert(result.review === undefined, "red task must not run review gate");
   assert(JSON.stringify(result.transition.path) === JSON.stringify(["queued", "blocked_red"]), "red transition path mismatch");
   assert(result.audit_record.final_state === "blocked_red", "red audit final state mismatch");
+  assert(result.audit_record.contract_id === "runtime_kernel_v0_contract", "red audit contract id mismatch");
+  assert(result.audit_record.contract_version === "v0.1", "red audit contract version mismatch");
   assert(result.audit_record.blocked_red === true, "red audit must mark blocked red");
   assert(result.audit_record.executor_ran === false, "red audit must record executor did not run");
   assertCleanSideEffects(result.audit_record.side_effect_flags, "red");
@@ -128,6 +165,8 @@ function main() {
     passed: true,
     validator: "validate_runtime_kernel_v0",
     kernel_id: "runtime_kernel_v0_no_provider",
+    contract_id: greenResult.contract.contract_id,
+    contract_version: greenResult.contract.contract_version,
     green_fixture: greenFixturePath,
     red_fixture: redFixturePath,
     green_final_state: greenResult.final_state,

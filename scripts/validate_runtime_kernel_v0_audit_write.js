@@ -73,11 +73,24 @@ function assertCleanFlags(flags, label) {
   assert(dirty.length === 0, `${label} side effects must all be false: ${dirty.map(([key]) => key).join(", ")}`);
 }
 
+function assertContract(contract, label) {
+  assert(contract.contract_id === "runtime_kernel_v0_contract", `${label} contract id mismatch`);
+  assert(contract.contract_version === "v0.1", `${label} contract version mismatch`);
+  assert(contract.kernel_id === "runtime_kernel_v0_no_provider", `${label} contract kernel id mismatch`);
+  assert(contract.adapter_slots.artifact_adapter.output_ref === "persistence.persisted_ref", `${label} artifact adapter output ref mismatch`);
+  assert(contract.adapter_slots.review_bridge.input_ref === "review", `${label} review bridge input ref mismatch`);
+  assert(contract.adapter_slots.provider_adapter.calls_allowed_now === false, `${label} provider adapter calls must be false`);
+  assert(contract.audit_write.allowed_output_root === auditRoot, `${label} audit output root mismatch`);
+  assert(contract.audit_write.overwrite_existing_allowed === false, `${label} audit overwrite must be false`);
+  assert(contract.side_effect_policy.allowed_local_side_effects.includes("audit_write_performed"), `${label} allowed audit write side effect missing`);
+}
+
 function assertAuditPayload(payload, expected) {
   assert(payload.audit_write_schema === "runtime_kernel_v0.audit_write.v0", `${expected.label} schema mismatch`);
   assert(payload.audit_output_path === expected.path, `${expected.label} output path mismatch`);
   assert(payload.kernel_id === "runtime_kernel_v0_no_provider", `${expected.label} kernel id mismatch`);
   assert(payload.version === "v0", `${expected.label} version mismatch`);
+  assertContract(payload.contract, `${expected.label} payload`);
   assert(payload.task_id === expected.taskId, `${expected.label} task id mismatch`);
   assert(payload.final_state === expected.finalState, `${expected.label} final state mismatch`);
   assert(payload.audit_record.final_state === expected.finalState, `${expected.label} audit final state mismatch`);
@@ -105,6 +118,7 @@ function assertAuditPayload(payload, expected) {
 
 function assertCliAuditWrite(result, expected) {
   assert(result.audit_write.performed === true, `${expected.label} audit write must be performed`);
+  assertContract(result.contract, `${expected.label} cli`);
   assert(result.audit_write.path === expected.path, `${expected.label} audit write path mismatch`);
   assert(result.audit_write.final_state === expected.finalState, `${expected.label} audit write final state mismatch`);
   assert(result.audit_write.git_ignored_required === true, `${expected.label} audit write must require git ignore`);
@@ -194,6 +208,8 @@ function main() {
   console.log(JSON.stringify({
     passed: true,
     validator: "validate_runtime_kernel_v0_audit_write",
+    contract_id: greenPayload.contract.contract_id,
+    contract_version: greenPayload.contract.contract_version,
     audit_directory: `${auditRoot}/`,
     audit_path_ignored: true,
     audit_ignore_evidence: ignoreEvidence,

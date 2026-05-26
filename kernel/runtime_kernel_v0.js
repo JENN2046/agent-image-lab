@@ -7,6 +7,9 @@ const path = require("node:path");
 const repoRoot = path.resolve(__dirname, "..");
 const defaultInputPath = "tests/fixtures/runtime_kernel_v0_green_task.fixture.json";
 const auditOutputRoot = ".agent_private/runtime_kernel_v0/audits";
+const kernelId = "runtime_kernel_v0_no_provider";
+const contractId = "runtime_kernel_v0_contract";
+const contractVersion = "v0.1";
 
 const sideEffectFlags = Object.freeze({
   provider_contact_performed: false,
@@ -29,6 +32,80 @@ const kernelComponents = Object.freeze([
   "state_transition",
   "audit_record",
 ]);
+
+const runtimeContract = Object.freeze({
+  contract_id: contractId,
+  contract_version: contractVersion,
+  kernel_id: kernelId,
+  task_input: {
+    task_type: "fixture.visual_generation.no_provider.v0",
+    required_root_fields: ["task_id", "task_type", "input", "policy", "review"],
+    required_input_fields: ["prompt_ref", "fixture_asset_ref", "artifact_capsule_plan"],
+    required_policy_allowed_capabilities: ["local_fixture_execution", "in_memory_artifact_persistence"],
+    blocked_capability_classes: [
+      "provider_contact",
+      "plugin_call",
+      "api_call",
+      "image_generation",
+      "production_write",
+      "disk_write",
+    ],
+    required_review_stub_decision: "mark_review_pending",
+  },
+  output_envelope: {
+    required_root_fields: [
+      "kernel_id",
+      "version",
+      "contract",
+      "task_id",
+      "final_state",
+      "intake",
+      "policy",
+      "transition",
+      "audit_record",
+    ],
+    green_required_fields: ["execution", "persistence", "review"],
+    red_forbidden_fields: ["execution", "persistence", "review"],
+    terminal_states: ["completed_stub", "blocked_red"],
+  },
+  adapter_slots: {
+    artifact_adapter: {
+      status: "planned_next_adapter",
+      input_ref: "persistence.artifact_record",
+      output_ref: "persistence.persisted_ref",
+      writes_allowed_now: false,
+    },
+    review_bridge: {
+      status: "planned_next_adapter",
+      input_ref: "review",
+      output_ref: "review.review_decision",
+      writes_allowed_now: false,
+    },
+    provider_adapter: {
+      status: "blocked_until_explicit_provider_phase",
+      input_ref: "execution.output.provider_output_ref",
+      calls_allowed_now: false,
+    },
+  },
+  audit_write: {
+    optional_cli_flag: "--audit-output",
+    payload_schema: "runtime_kernel_v0.audit_write.v0",
+    allowed_output_root: auditOutputRoot,
+    git_ignored_required: true,
+    overwrite_existing_allowed: false,
+  },
+  side_effect_policy: {
+    forbidden_flags: Object.keys(sideEffectFlags),
+    allowed_local_side_effects: ["audit_write_performed"],
+    provider_contact_allowed_now: false,
+    image_generation_allowed_now: false,
+    production_write_allowed_now: false,
+  },
+});
+
+function getRuntimeContract() {
+  return clone(runtimeContract);
+}
 
 function assertObject(value, label) {
   if (!value || typeof value !== "object" || Array.isArray(value)) {
@@ -173,7 +250,9 @@ function buildAuditRecord(task, states) {
   return {
     audit_id: `${task.task_id}:audit:v0`,
     task_id: task.task_id,
-    kernel_id: "runtime_kernel_v0_no_provider",
+    kernel_id: kernelId,
+    contract_id: contractId,
+    contract_version: contractVersion,
     kernel_components: [...kernelComponents],
     state_path: states.transition.path,
     final_state: finalState,
@@ -198,8 +277,9 @@ function runRuntimeKernelV0(rawTask) {
       path: [intake.state, policy.state],
     };
     return {
-      kernel_id: "runtime_kernel_v0_no_provider",
+      kernel_id: kernelId,
       version: "v0",
+      contract: getRuntimeContract(),
       task_id: intake.task.task_id,
       final_state: "blocked_red",
       intake,
@@ -221,8 +301,9 @@ function runRuntimeKernelV0(rawTask) {
   const auditRecord = buildAuditRecord(intake.task, { intake, policy, execution, persistence, review, transition });
 
   return {
-    kernel_id: "runtime_kernel_v0_no_provider",
+    kernel_id: kernelId,
     version: "v0",
+    contract: getRuntimeContract(),
     task_id: intake.task.task_id,
     final_state: transition.state,
     intake,
@@ -291,6 +372,7 @@ function buildAuditWritePayload(result, outputPath) {
     audit_output_path: outputPath,
     kernel_id: result.kernel_id,
     version: result.version,
+    contract: clone(result.contract),
     task_id: result.task_id,
     final_state: result.final_state,
     transition: clone(result.transition),
@@ -367,8 +449,13 @@ if (require.main === module) {
 }
 
 module.exports = {
+  kernelId,
+  contractId,
+  contractVersion,
+  runtimeContract,
   kernelComponents,
   sideEffectFlags,
+  getRuntimeContract,
   intakeTask,
   policyGate,
   executeNoProviderFixture,
