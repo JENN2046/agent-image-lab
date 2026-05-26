@@ -1,0 +1,61 @@
+schema_id: memory_adapter_packet.schema.v1
+title: Memory Adapter Packet Schema
+description: Static no-write schema for a future exact DailyNote/VCP memory adapter packet.
+required_top_level_fields:
+  - version
+  - packet_id
+  - phase
+  - source_refs
+  - target
+  - candidate_surface
+  - adapter_mapping
+  - execution_limits
+  - preflight_requirements
+  - post_write_evidence_requirements
+  - receipt_plan
+  - rollback_or_cleanup_plan
+  - stop_conditions
+  - guard
+  - go_no_go
+required_values:
+  version: v1
+  execute_now_default: false
+  secret_value_read_allowed: false
+  raw_private_data_print_allowed: false
+  max_write_entries: 2
+  max_plugin_calls: 1
+  max_api_calls: 0
+required_target_fields:
+  - sample_id
+  - candidate_id
+  - artifact_sha256
+  - exact_daily_note_target_id
+  - exact_vcp_memory_target_id
+required_adapter_mapping_fields:
+  - selected_writer_tool_or_command
+  - writer_kind
+  - record_memory_target_mapping
+  - daily_note_adapter
+  - vcp_memory_adapter
+  - two_phase_ordering
+required_preflight_requirements:
+  - canonical_daily_note_root_preflight
+  - source_payload_ref
+  - sensitive_data_scan_ref
+  - exact_target_ids_present
+required_post_write_evidence:
+  - daily_note_canonical_target_proof
+  - daily_note_content_hash_proof
+  - vcp_memory_receipt_id_or_immutable_ref
+  - bounded_write_count_receipt
+forbidden_actions:
+  - call_record_memory_during_packet_validation
+  - call_daily_note_writer_during_packet_validation
+  - call_vcp_memory_writer_during_packet_validation
+  - read_env_or_secret_files
+  - print_raw_private_data
+  - broad_vcp_write
+  - provider_or_plugin_or_api_call
+  - image_generation
+  - production_candidate_write
+  - push_tag_release_deploy

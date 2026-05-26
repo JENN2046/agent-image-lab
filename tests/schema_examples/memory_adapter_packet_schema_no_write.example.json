@@ -1,0 +1,130 @@
+{
+  "memory_adapter_packet_schema_no_write": {
+    "version": "v1",
+    "phase": "v0_6_96_memory_adapter_packet_schema_no_write",
+    "status": "completed_validated_memory_adapter_packet_schema_no_write",
+    "execution_mode": "memory_adapter_packet_schema_no_write",
+    "lane_attempted": "Green_schema_only",
+    "lane_executed": "Green_schema_only",
+    "source_phase": "v0_6_95_codex_memory_candidate_adapter_mapping_no_write",
+    "schema_ref": "schemas/memory_adapter_packet.schema.yaml",
+    "target": {
+      "sample_id": "accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001",
+      "candidate_id": "v0_3_3_exact_new_trial_003_shot_2",
+      "category": "fashion_lookbook_portrait",
+      "approved_by": "Jenn",
+      "artifact_sha256": "8bd7b81a916f0f6333392562d84e32368a3f28dd6a6456fc2f9e49d835a62c3b"
+    },
+    "schema_summary": {
+      "adapter_packet_schema_created": true,
+      "schema_static_only": true,
+      "concrete_packet_instance_created": false,
+      "writer_selected": false,
+      "adapter_can_execute_now": false,
+      "execute_now_default": false,
+      "required_top_level_field_count": 14
+    },
+    "required_top_level_fields": [
+      "version",
+      "packet_id",
+      "phase",
+      "source_refs",
+      "target",
+      "candidate_surface",
+      "adapter_mapping",
+      "execution_limits",
+      "preflight_requirements",
+      "post_write_evidence_requirements",
+      "receipt_plan",
+      "rollback_or_cleanup_plan",
+      "stop_conditions",
+      "guard",
+      "go_no_go"
+    ],
+    "required_contract_fields": {
+      "target": [
+        "sample_id",
+        "candidate_id",
+        "artifact_sha256",
+        "exact_daily_note_target_id",
+        "exact_vcp_memory_target_id"
+      ],
+      "adapter_mapping": [
+        "selected_writer_tool_or_command",
+        "writer_kind",
+        "record_memory_target_mapping",
+        "daily_note_adapter",
+        "vcp_memory_adapter",
+        "two_phase_ordering"
+      ],
+      "execution_limits": {
+        "max_write_entries": 2,
+        "max_plugin_calls": 1,
+        "max_api_calls": 0,
+        "secret_value_read_allowed": false,
+        "raw_private_data_print_allowed": false,
+        "execute_now_default": false
+      }
+    },
+    "example_packet": {
+      "packet_id": "exact_new_trial_003_memory_adapter_packet_example_no_write",
+      "execute_now": false,
+      "selected_writer_tool_or_command": null,
+      "writer_kind": null,
+      "record_memory_target_mapping": {
+        "candidate_only": true,
+        "target": "knowledge",
+        "client_id": "codex"
+      },
+      "exact_daily_note_target_id": "exact_new_trial_003_shot_2_daily_note_review_learning_entry",
+      "exact_vcp_memory_target_id": "exact_new_trial_003_shot_2_vcp_memory_review_learning_summary",
+      "preflight_requirements_satisfied_now": false,
+      "post_write_evidence_available_now": false
+    },
+    "forbidden_actions_preserved": [
+      "call_record_memory_during_packet_validation",
+      "call_daily_note_writer_during_packet_validation",
+      "call_vcp_memory_writer_during_packet_validation",
+      "read_env_or_secret_files",
+      "print_raw_private_data",
+      "broad_vcp_write",
+      "provider_or_plugin_or_api_call",
+      "image_generation",
+      "production_candidate_write",
+      "push_tag_release_deploy"
+    ],
+    "go_no_go": {
+      "schema_created": true,
+      "concrete_packet_instance_created": false,
+      "adapter_can_execute_now": false,
+      "memory_write_can_execute_now": false,
+      "next_auto_step_allowed": false,
+      "reason": "This checkpoint creates only the static no-write adapter packet schema and an example shape. It does not fill a concrete executable packet."
+    },
+    "guard": {
+      "schema_only": true,
+      "record_memory_called": false,
+      "search_memory_called": false,
+      "memory_overview_called": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "Codex_memory_write_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "provider_contact_performed": false,
+      "image_generation_performed": false,
+      "image_binary_read_performed": false,
+      "secret_value_read_performed": false,
+      "env_file_content_read_performed": false,
+      "raw_private_data_printed": false,
+      "raw_external_path_read_or_printed": false,
+      "broad_vcp_write_performed": false,
+      "dependency_change_performed": false,
+      "production_candidate_write_performed": false,
+      "push_tag_release_deploy_performed": false,
+      "destructive_action_performed": false
+    },
+    "recommended_next": "fill_concrete_memory_adapter_packet_no_write_or_pause",
+    "recommended_next_auto_execution_allowed": true
+  }
+}
