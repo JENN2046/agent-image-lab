@@ -2,13 +2,13 @@
 
 - [x] ID: v0_6_76_native_doubao_provider_response_schema_guard
       Lane: Green local provider response schema hardening only.
-      Status: COMPLETED_TARGETED_VALIDATED_PENDING_CLEAN_COMMIT_MVP_RERUN.
+      Status: COMPLETED_VALIDATED_NATIVE_DOUBAO_RESPONSE_SCHEMA_GUARDED.
       Goal: Reject malformed NativeDoubao provider JSON response shapes before model checks or output persistence.
       Active current phase: v0_3_3_first_live_generation_pilot.
       Resume guard source phase: v0_3_2_live_candidate_action_packet.
       Legacy active next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
       Changed files: plugins/image_generation/native_doubao_image/native_doubao_image.js; scripts/validate_native_doubao_sandbox.js; scripts/validate_v7_20_native_doubao_real_runner_implementation.js.
-      Validation run: node --check plugin and validators passed; node scripts/validate_native_doubao_sandbox.js passed; node scripts/validate_v7_20_native_doubao_real_runner_implementation.js passed.
+      Validation run: node --check plugin and validators passed; node scripts/validate_native_doubao_sandbox.js passed; node scripts/validate_v7_20_native_doubao_real_runner_implementation.js passed; npm run validate:mvp passed after local code commit 19b1652.
       provider_contact_performed: false.
       plugin_call_performed: false.
       api_call_performed: false.
@@ -20,7 +20,7 @@
       DailyNote_write_performed: false.
       VCP_memory_write_performed: false.
       push_status: not_performed.
-      Next: create_exact_file_local_commit_then_rerun_mvp.
+      Next: no_next_task_selected.
 
 ---
 

@@ -3,7 +3,7 @@
 ## VALIDATION-20260526-v0.6.76-NATIVE-DOUBAO-PROVIDER-RESPONSE-SCHEMA-GUARD
 
 Task: v0.6.76 NativeDoubao provider response schema guard
-Status: targeted_validated_pending_clean_commit_mvp_rerun
+Status: completed_validated
 Receipt:
   - lane: Green
   - phase: v0_6_76_native_doubao_provider_response_schema_guard
@@ -22,10 +22,11 @@ Commands run:
   - node --check scripts/validate_native_doubao_sandbox.js: passed
   - node scripts/validate_native_doubao_sandbox.js: passed
   - node scripts/validate_v7_20_native_doubao_real_runner_implementation.js: passed
+  - npm run validate:mvp: passed after local code commit 19b1652
 Observed result:
   - NativeDoubao provider response schema validation now rejects malformed JSON response shapes before output persistence.
 Next:
-  - create exact-file local commit, then rerun npm run validate:mvp from a clean committed state
+  - no next task selected
 
 ## VALIDATION-20260526-v0.6.75-NATIVE-DOUBAO-PROVIDER-OUTPUT-SAFETY-HARDENING
 
