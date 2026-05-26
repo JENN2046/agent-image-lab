@@ -53,6 +53,36 @@ check("base_url_missing_blocks", () => plugin.validateBaseUrl("").valid === fals
 check("base_url_http_blocks", () => plugin.validateBaseUrl("http://example.com").valid === false);
 check("base_url_localhost_blocks", () => plugin.validateBaseUrl("https://localhost:8000").valid === false);
 check("base_url_https_allows", () => plugin.validateBaseUrl("https://example.com/api/v3").valid === true);
+check("download_url_rejects_http", () => plugin.validateDownloadUrl("http://example.com/image.png").valid === false);
+check("download_url_rejects_localhost", () => plugin.validateDownloadUrl("https://localhost/image.png").valid === false);
+check("download_url_rejects_private_ip", () => plugin.validateDownloadUrl("https://192.168.1.5/image.png").valid === false);
+check("download_url_accepts_https_public_host", () => plugin.validateDownloadUrl("https://example.com/image.png").valid === true);
+
+check("image_buffer_accepts_png_magic", () => {
+  const png = Buffer.from("89504e470d0a1a0a0000000d49484452", "hex");
+  const result = plugin.validateImageBuffer(png, "image/png");
+  return result.valid === true && result.format === "png" && result.extension === ".png";
+});
+
+check("image_buffer_accepts_jpeg_magic", () => {
+  const jpeg = Buffer.from("ffd8ffe000104a4649460001", "hex");
+  const result = plugin.validateImageBuffer(jpeg, "image/jpeg");
+  return result.valid === true && result.format === "jpeg" && result.extension === ".jpg";
+});
+
+check("image_buffer_rejects_magic_mismatch", () => {
+  const notImage = Buffer.from("not-an-image-payload");
+  const result = plugin.validateImageBuffer(notImage, "image/png");
+  return result.valid === false && result.reason === "image_magic_number_unsupported";
+});
+
+check("image_buffer_rejects_content_type_mismatch", () => {
+  const png = Buffer.from("89504e470d0a1a0a0000000d49484452", "hex");
+  const result = plugin.validateImageBuffer(png, "image/jpeg");
+  return result.valid === false && result.reason === "image_content_type_mismatch";
+});
+
+check("content_type_allows_jpeg_alias", () => plugin.contentTypeAllowsImageFormat("image/jpg", "jpeg") === true);
 
 check("call_budget_exact_one_accepts", () => plugin.validateA5Limits({ maxPluginCalls: 1, maxImagesCreated: 1, retryAllowed: false }).valid === true);
 check("call_budget_rejects_zero", () => plugin.validateA5Limits({ maxPluginCalls: 0, maxImagesCreated: 1, retryAllowed: false }).valid === false);
@@ -161,6 +191,12 @@ check("verify_local_output_file_rejects_missing_file", () => {
   return result.verified === false;
 });
 
+check("plugin_exports_output_safety_helpers", () => {
+  return typeof plugin.validateImageBuffer === "function" &&
+    typeof plugin.validateDownloadUrl === "function" &&
+    typeof plugin.contentTypeAllowsImageFormat === "function";
+});
+
 const summary = {
   passed,
   validator: "validate_native_doubao_sandbox",
@@ -169,6 +205,7 @@ const summary = {
   provider_contact_performed: false,
   plugin_call_performed: false,
   image_generation_performed: false,
+  file_write_performed: false,
   env_local_read: false,
   results,
 };

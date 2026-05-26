@@ -8,6 +8,30 @@ var path = require("node:path");
 var REPO_ROOT = path.resolve(__dirname, "..", "..", "..");
 var PROMPT_ROOT = path.resolve(REPO_ROOT, "prompts", "image_generation");
 var OUTPUT_ROOT = path.resolve(REPO_ROOT, "runs", "real_generation");
+var MAX_IMAGE_OUTPUT_BYTES = 25 * 1024 * 1024;
+var DEFAULT_TIMEOUT_MS = 120000;
+var MIN_TIMEOUT_MS = 1000;
+var MAX_TIMEOUT_MS = 300000;
+
+function timeoutMsFromSeconds(value) {
+  var parsed = Number(value);
+  if (!Number.isFinite(parsed) || parsed <= 0) return DEFAULT_TIMEOUT_MS;
+  var ms = Math.floor(parsed * 1000);
+  return Math.max(MIN_TIMEOUT_MS, Math.min(ms, MAX_TIMEOUT_MS));
+}
+
+function createTimeoutController(timeoutSeconds) {
+  var controller = new AbortController();
+  var timeoutMs = timeoutMsFromSeconds(timeoutSeconds || process.env.DOUBAO_IMAGE_TIMEOUT_SECONDS);
+  var timer = setTimeout(function () {
+    controller.abort();
+  }, timeoutMs);
+  return {
+    signal: controller.signal,
+    timeoutMs: timeoutMs,
+    clear: function () { clearTimeout(timer); },
+  };
+}
 
 function hasUnsafePathSegment(ref) {
   var value = String(ref || "");
@@ -59,6 +83,136 @@ function resolveSafeOutputDirectory(outputDirectory) {
   return { valid: true, fullPath: fullPath };
 }
 
+function imageFormatFromBuffer(buffer) {
+  if (!Buffer.isBuffer(buffer) || buffer.length < 12) return null;
+  if (buffer[0] === 0xff && buffer[1] === 0xd8 && buffer[2] === 0xff) {
+    return "jpeg";
+  }
+  if (
+    buffer[0] === 0x89 && buffer[1] === 0x50 && buffer[2] === 0x4e && buffer[3] === 0x47 &&
+    buffer[4] === 0x0d && buffer[5] === 0x0a && buffer[6] === 0x1a && buffer[7] === 0x0a
+  ) {
+    return "png";
+  }
+  if (
+    buffer.toString("ascii", 0, 4) === "RIFF" &&
+    buffer.toString("ascii", 8, 12) === "WEBP"
+  ) {
+    return "webp";
+  }
+  return null;
+}
+
+function extensionForImageFormat(format) {
+  if (format === "jpeg") return ".jpg";
+  if (format === "png") return ".png";
+  if (format === "webp") return ".webp";
+  return null;
+}
+
+function contentTypeAllowsImageFormat(contentType, format) {
+  if (!contentType) return true;
+  var normalized = String(contentType).toLowerCase().split(";")[0].trim();
+  if (format === "jpeg") return normalized === "image/jpeg" || normalized === "image/jpg";
+  if (format === "png") return normalized === "image/png";
+  if (format === "webp") return normalized === "image/webp";
+  return false;
+}
+
+function validateImageBuffer(buffer, contentType) {
+  if (!Buffer.isBuffer(buffer)) {
+    return { valid: false, reason: "image_payload_not_buffer" };
+  }
+  if (buffer.length <= 0) {
+    return { valid: false, reason: "image_payload_empty" };
+  }
+  if (buffer.length > MAX_IMAGE_OUTPUT_BYTES) {
+    return { valid: false, reason: "image_payload_too_large", bytes: buffer.length, max_bytes: MAX_IMAGE_OUTPUT_BYTES };
+  }
+  var format = imageFormatFromBuffer(buffer);
+  if (!format) {
+    return { valid: false, reason: "image_magic_number_unsupported", bytes: buffer.length };
+  }
+  if (!contentTypeAllowsImageFormat(contentType, format)) {
+    return {
+      valid: false,
+      reason: "image_content_type_mismatch",
+      bytes: buffer.length,
+      format: format,
+      content_type: contentType,
+    };
+  }
+  return {
+    valid: true,
+    bytes: buffer.length,
+    format: format,
+    extension: extensionForImageFormat(format),
+  };
+}
+
+function isLikelyBase64(value) {
+  if (typeof value !== "string" || value.length === 0 || value.length % 4 !== 0) return false;
+  return /^[A-Za-z0-9+/]+={0,2}$/.test(value);
+}
+
+function validateDownloadUrl(rawUrl) {
+  try {
+    var parsed = new URL(rawUrl);
+    var host = parsed.hostname.toLowerCase();
+    if (parsed.protocol !== "https:") {
+      return { valid: false, reason: "download_blocked_non_https_url" };
+    }
+    if (host === "localhost" || host === "127.0.0.1" || host === "::1") {
+      return { valid: false, reason: "download_blocked_localhost" };
+    }
+    if (
+      /^10\./.test(host) ||
+      /^192\.168\./.test(host) ||
+      /^172\.(1[6-9]|2\d|3[0-1])\./.test(host) ||
+      /^169\.254\./.test(host) ||
+      /^0\./.test(host)
+    ) {
+      return { valid: false, reason: "download_blocked_private_or_link_local_host" };
+    }
+    return { valid: true, url: parsed };
+  } catch (err) {
+    return { valid: false, reason: "download_url_invalid" };
+  }
+}
+
+function writeVerifiedImageBuffer(buffer, outDir, baseName, contentType) {
+  var validation = validateImageBuffer(buffer, contentType);
+  if (!validation.valid) {
+    return { verified: false, reason: validation.reason, bytes: validation.bytes || buffer.length };
+  }
+  if (!fs.existsSync(outDir)) {
+    fs.mkdirSync(outDir, { recursive: true });
+  }
+  var filename = baseName + validation.extension;
+  var filepath = path.join(outDir, filename);
+  var tempPath = filepath + ".tmp-" + process.pid;
+  if (fs.existsSync(filepath) || fs.existsSync(tempPath)) {
+    return { verified: false, reason: "output_file_already_exists" };
+  }
+  fs.writeFileSync(tempPath, buffer, { flag: "wx" });
+  var tempCheck = verifyLocalOutputFile(tempPath, outDir);
+  if (!tempCheck.verified) {
+    try { fs.unlinkSync(tempPath); } catch (err) {}
+    return tempCheck;
+  }
+  fs.renameSync(tempPath, filepath);
+  var finalCheck = verifyLocalOutputFile(filepath, outDir);
+  if (!finalCheck.verified) {
+    return finalCheck;
+  }
+  return {
+    verified: true,
+    file: filename,
+    bytes: finalCheck.bytes,
+    format: finalCheck.format,
+  };
+}
+
 function verifyLocalOutputFile(filePath, outputRoot) {
   try {
     var resolvedFile = path.resolve(filePath);
@@ -76,7 +230,14 @@ function verifyLocalOutputFile(filePath, outputRoot) {
     if (stat.size <= 0) {
       return { verified: false, reason: "empty_file" };
     }
-    return { verified: true, bytes: stat.size };
+    if (stat.size > MAX_IMAGE_OUTPUT_BYTES) {
+      return { verified: false, reason: "file_too_large", bytes: stat.size, max_bytes: MAX_IMAGE_OUTPUT_BYTES };
+    }
+    var validation = validateImageBuffer(fs.readFileSync(resolvedFile));
+    if (!validation.valid) {
+      return { verified: false, reason: validation.reason, bytes: stat.size };
+    }
+    return { verified: true, bytes: stat.size, format: validation.format };
   } catch (err) {
     return { verified: false, reason: "stat_failed" };
   }
@@ -311,6 +472,7 @@ async function realGenerate(options) {
     };
   }
 
+  var requestTimeout = createTimeoutController(options.timeoutSeconds);
   try {
     var response = await fetch(apiUrl, {
       method: "POST",
@@ -319,7 +481,25 @@ async function realGenerate(options) {
         "Authorization": "Bearer " + apiKey,
       },
       body: JSON.stringify(requestBody),
+      signal: requestTimeout.signal,
     });
+
+    var responseContentType = response.headers && response.headers.get ? response.headers.get("content-type") : "";
+    if (!String(responseContentType || "").toLowerCase().includes("application/json")) {
+      return {
+        status: "FAILED",
+        plugin_id: "NativeDoubaoImage",
+        command: "generate",
+        api_call_performed: true,
+        image_created: false,
+        http_status: response.status,
+        error_category: "provider_invalid_content_type",
+        error: "API response content-type was not application/json",
+        model_requested: options.modelOverride || "doubao-seedream-5-0-260128",
+        model_reported: null,
+        retry_performed: false,
+      };
+    }
 
     var responseData = await response.json();
 
@@ -347,13 +527,15 @@ async function realGenerate(options) {
     var generatedImages = [];
     if (responseData.data && Array.isArray(responseData.data)) {
       for (var i = 0; i < responseData.data.length; i++) {
-        var item = responseData.data[i];
+        var item = responseData.data[i] || {};
+        var b64 = typeof item.b64_json === "string" ? item.b64_json : null;
+        var url = typeof item.url === "string" ? item.url : null;
         generatedImages.push({
           index: i,
-          has_b64_json: Boolean(item.b64_json),
-          has_url: Boolean(item.url),
-          b64_json: item.b64_json || null,
-          url: item.url || null,
+          has_b64_json: Boolean(b64),
+          has_url: Boolean(url),
+          b64_json: b64,
+          url: url,
         });
       }
     }
@@ -420,12 +602,14 @@ async function realGenerate(options) {
       command: "generate",
       api_call_performed: true,
       image_created: false,
-      error_category: "network_or_provider_error",
-      error: "HTTP request failed",
+      error_category: err && err.name === "AbortError" ? "provider_timeout" : "network_or_provider_error",
+      error: err && err.name === "AbortError" ? "HTTP request timed out" : "HTTP request failed",
       model_requested: options.modelOverride || "doubao-seedream-5-0-260128",
       model_reported: null,
       retry_performed: false,
     };
+  } finally {
+    requestTimeout.clear();
   }
 }
 
@@ -439,55 +623,59 @@ async function writeImageOutput(result, outputDirectory) {
   }
 
   var outDir = safeOutput.fullPath;
-
-  if (!fs.existsSync(outDir)) {
-    fs.mkdirSync(outDir, { recursive: true });
-  }
-
   var written = [];
   var failed = [];
   for (var i = 0; i < result.images.length; i++) {
     var img = result.images[i];
-    var ext = ".jpg";
-    var filename = "native_doubao_" + Date.now() + "_" + i + ext;
-    var filepath = path.join(outDir, filename);
+    var baseName = "native_doubao_" + Date.now() + "_" + process.hrtime.bigint().toString() + "_" + i;
 
     if (img.b64_json) {
+      if (!isLikelyBase64(img.b64_json)) {
+        failed.push({ index: i, reason: "b64_json_invalid_base64", source: "b64_json" });
+        continue;
+      }
       var buffer = Buffer.from(img.b64_json, "base64");
-      fs.writeFileSync(filepath, buffer);
-      var b64Check = verifyLocalOutputFile(filepath, outDir);
+      var b64Check = writeVerifiedImageBuffer(buffer, outDir, baseName, null);
       if (b64Check.verified) {
-        written.push({ index: i, file: filename, bytes: b64Check.bytes, source: "b64_json" });
+        written.push({ index: i, file: b64Check.file, bytes: b64Check.bytes, format: b64Check.format, source: "b64_json" });
       } else {
         failed.push({ index: i, reason: b64Check.reason, source: "b64_json" });
       }
     } else if (img.url) {
       // Download from URL and save
       try {
-        var parsedUrl = new URL(img.url);
-        if (parsedUrl.protocol !== "https:") {
-          failed.push({ index: i, reason: "download_blocked_non_https_url" });
-          continue;
-        }
-        var imageResponse = await fetch(img.url);
-        if (!imageResponse.ok) {
-          failed.push({ index: i, reason: "download_http_failed" });
-          continue;
-        }
-        var imageBuffer = Buffer.from(await imageResponse.arrayBuffer());
-        if (imageBuffer.length <= 0) {
-          failed.push({ index: i, reason: "download_empty_body" });
-          continue;
-        }
-        fs.writeFileSync(filepath, imageBuffer);
-        var urlCheck = verifyLocalOutputFile(filepath, outDir);
-        if (urlCheck.verified) {
-          written.push({ index: i, file: filename, bytes: urlCheck.bytes, source: "url_download" });
-        } else {
+        var urlCheck = validateDownloadUrl(img.url);
+        if (!urlCheck.valid) {
           failed.push({ index: i, reason: urlCheck.reason, source: "url_download" });
+          continue;
+        }
+        var downloadTimeout = createTimeoutController();
+        try {
+          var imageResponse = await fetch(urlCheck.url.toString(), {
+            redirect: "error",
+            signal: downloadTimeout.signal,
+          });
+          if (!imageResponse.ok) {
+            failed.push({ index: i, reason: "download_http_failed" });
+            continue;
+          }
+          var downloadContentType = imageResponse.headers && imageResponse.headers.get ? imageResponse.headers.get("content-type") : "";
+          if (!/^image\/(jpeg|jpg|png|webp)(;|$)/i.test(String(downloadContentType || ""))) {
+            failed.push({ index: i, reason: "download_content_type_missing_or_invalid", source: "url_download" });
+            continue;
+          }
+          var imageBuffer = Buffer.from(await imageResponse.arrayBuffer());
+          var outputCheck = writeVerifiedImageBuffer(imageBuffer, outDir, baseName, downloadContentType);
+          if (outputCheck.verified) {
+            written.push({ index: i, file: outputCheck.file, bytes: outputCheck.bytes, format: outputCheck.format, source: "url_download" });
+          } else {
+            failed.push({ index: i, reason: outputCheck.reason, source: "url_download" });
+          }
+        } finally {
+          downloadTimeout.clear();
         }
       } catch (downloadErr) {
-        failed.push({ index: i, reason: "download_failed" });
+        failed.push({ index: i, reason: downloadErr && downloadErr.name === "AbortError" ? "download_timeout" : "download_failed" });
       }
     } else {
       failed.push({ index: i, reason: "no_supported_image_payload" });
@@ -553,6 +741,9 @@ module.exports = {
   resolveSafePromptPackageRef: resolveSafePromptPackageRef,
   resolveSafeOutputDirectory: resolveSafeOutputDirectory,
   verifyLocalOutputFile: verifyLocalOutputFile,
+  validateImageBuffer: validateImageBuffer,
+  validateDownloadUrl: validateDownloadUrl,
+  contentTypeAllowsImageFormat: contentTypeAllowsImageFormat,
   validateBaseUrl: validateBaseUrl,
   validateA5Limits: validateA5Limits,
   validateRealExecutionGate: validateRealExecutionGate,
