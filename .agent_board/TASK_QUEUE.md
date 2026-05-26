@@ -4,6 +4,9 @@
       Lane: Green local validation taxonomy refactor only.
       Status: IN_PROGRESS_PENDING_CLEAN_STATE_VALIDATION.
       Goal: Split overloaded validate:mvp semantics into smoke, MVP core, capsule regression, governance, and aggregate validation layers.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Legacy active next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
       Changed files: package.json; scripts/validate_smoke.js; scripts/validate_mvp_core.js; scripts/validate_governance.ps1; scripts/validate_capsule_product_core_regression.ps1; scripts/validate_governance_regression.js; docs/VALIDATION_GATE_TAXONOMY.md.
       Validation run: node --check new JS validators passed; npm run validate:smoke passed; npm run validate:mvp passed; npm run validate:capsule-regression and npm run validate:governance failed before local commit because readiness validators require clean committed state.
       provider_contact_performed: false.

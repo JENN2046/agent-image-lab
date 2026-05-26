@@ -7,6 +7,9 @@ phase: v0_6_88_validation_gate_taxonomy
 status: in_progress_pending_clean_state_validation
 result: PARTIAL_VALIDATED
 mode: Green local validation taxonomy refactor only
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+legacy_active_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
 summary: Added Node smoke and MVP core gates, copied legacy MVP semantics to governance, copied capsule product-core gate to capsule regression, added aggregate validation command, and documented the gate taxonomy.
 changed_files_current_task:
   - package.json

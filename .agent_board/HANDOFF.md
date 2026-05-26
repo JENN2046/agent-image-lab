@@ -8,6 +8,9 @@ status: IN_PROGRESS_PENDING_CLEAN_STATE_VALIDATION
 mode: Green local validation taxonomy refactor only; no provider/plugin/API/image/output/secret/memory execution
 workspace: A:\agent-image-lab\agent-image-lab-v0.2
 branch: master
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+legacy_active_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
 summary: Validation commands are now layered as smoke, MVP core, capsule regression, governance, and all. The old overloaded MVP semantics are preserved as validate:governance and validate:legacy-mvp. The old capsule product-core gate is preserved as validate:capsule-regression and validate:capsules.
 changed_files_current_task:
   - package.json
