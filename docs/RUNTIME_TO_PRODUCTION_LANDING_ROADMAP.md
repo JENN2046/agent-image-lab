@@ -16,6 +16,16 @@ production last
 
 项目过去的问题是治理、validator、receipt 和生产叙事走在 runtime 前面。后续每一步都必须增加真实可运行能力，而不是继续堆纯治理 checkpoint。
 
+## Runnable Capability Gate
+
+每个阶段开始前先问：
+
+```text
+这一步有没有让系统更能跑？
+```
+
+如果答案不是明确的“有”，就不做，或把任务改成能提升 runtime / artifact / review / audit / provider preflight 可运行能力的更小步骤。
+
 ## Current Baseline
 
 当前 baseline：

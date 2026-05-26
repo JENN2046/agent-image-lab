@@ -28,6 +28,11 @@ next_safe_task`, execute only `next_safe_task`, validate, update `.agent_board`,
 record an Amber receipt when applicable, and continue until done, blocked, or
 Red.
 
+Runtime-track work must pass the Runnable Capability Gate in
+`docs/RUNTIME_TO_PRODUCTION_LANDING_ROADMAP.md`: this step must make the system
+more runnable; otherwise do not do it or narrow it into a runtime / artifact /
+review / audit / provider-preflight capability step.
+
 ---
 
 ## 0.5 Mandatory Autopilot Rule Intake
