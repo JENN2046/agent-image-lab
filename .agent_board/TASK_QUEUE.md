@@ -2,13 +2,13 @@
 
 - [x] ID: v0_6_83_native_doubao_runner_case_registry
       Lane: Green local runner registry ref reduction only.
-      Status: COMPLETED_TARGETED_VALIDATED_PENDING_MVP_CLEAN_RERUN.
+      Status: COMPLETED_VALIDATED_NATIVE_DOUBAO_RUNNER_CASE_REGISTRY.
       Goal: Move NativeDoubao runner default prompt/output/profile/model refs from CLI literals into a local non-secret case registry.
       Active current phase: v0_3_3_first_live_generation_pilot.
       Resume guard source phase: v0_3_2_live_candidate_action_packet.
       Legacy active next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
       Changed files: configs/native_doubao_runner_cases.json; scripts/run_native_doubao_image_generation.js; scripts/validate_v7_20_native_doubao_real_runner_implementation.js.
-      Validation run: node --check runner and validator passed; node scripts/validate_v7_20_native_doubao_real_runner_implementation.js passed with 43 checks; node scripts/run_native_doubao_image_generation.js --case-id=tennis_wallet_hero_v2_preflight --dry-run=true passed dry-run; node scripts/validate_native_doubao_sandbox.js passed with 72 checks; npm run validate:mvp failed before local commit because readiness validators require clean committed state and the new registry file was untracked.
+      Validation run: node --check runner and validator passed; node scripts/validate_v7_20_native_doubao_real_runner_implementation.js passed with 43 checks; node scripts/run_native_doubao_image_generation.js --case-id=tennis_wallet_hero_v2_preflight --dry-run=true passed dry-run; node scripts/validate_native_doubao_sandbox.js passed with 72 checks; npm run validate:mvp failed before local code commit because readiness validators require clean committed state and the new registry file was untracked; npm run validate:mvp passed after local code commit 9ec4354.
       provider_contact_performed: false.
       plugin_call_performed: false.
       api_call_performed: false.
@@ -23,7 +23,7 @@
       DailyNote_write_performed: false.
       VCP_memory_write_performed: false.
       push_status: not_performed.
-      Next: commit_exact_allowlist_then_rerun_validate_mvp.
+      Next: review_console_static_mock_boundary_validator.
 
 ---
 

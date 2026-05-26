@@ -3,7 +3,7 @@
 ## VALIDATION-20260526-v0.6.83-NATIVE-DOUBAO-RUNNER-CASE-REGISTRY
 
 Task: v0.6.83 NativeDoubao runner case registry
-Status: completed_targeted_validated_pending_mvp_clean_rerun
+Status: completed_validated
 Receipt:
   - lane: Green
   - phase: v0_6_83_native_doubao_runner_case_registry
@@ -27,11 +27,12 @@ Commands run:
   - node scripts/validate_v7_20_native_doubao_real_runner_implementation.js: passed with 43 checks
   - node scripts/run_native_doubao_image_generation.js --case-id=tennis_wallet_hero_v2_preflight --dry-run=true: passed dry-run, provider/api/image/output false
   - node scripts/validate_native_doubao_sandbox.js: passed with 72 checks
-  - npm run validate:mvp: failed before local commit because readiness validators require clean committed state and the new registry file was untracked
+  - npm run validate:mvp: failed before local code commit because readiness validators require clean committed state and the new registry file was untracked
+  - npm run validate:mvp: passed after local code commit 9ec4354
 Observed result:
   - NativeDoubao runner CLI defaults now resolve through a local non-secret case registry instead of hardcoded prompt/output literals.
 Next:
-  - commit exact allowlist, then rerun npm run validate:mvp
+  - review console static/mock boundary validator
 
 ## VALIDATION-20260526-v0.6.82-NATIVE-DOUBAO-NETWORK-SAFETY-HELPER-CONSOLIDATION
 

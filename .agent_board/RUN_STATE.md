@@ -4,7 +4,7 @@
 
 ```text
 phase: v0_6_83_native_doubao_runner_case_registry
-status: COMPLETED_TARGETED_VALIDATED_PENDING_MVP_CLEAN_RERUN
+status: COMPLETED_VALIDATED_NATIVE_DOUBAO_RUNNER_CASE_REGISTRY
 mode: Green local runner registry ref reduction only; no provider/plugin/API/image/output/secret/memory execution
 workspace: A:\agent-image-lab\agent-image-lab-v0.2
 branch: master
@@ -29,7 +29,8 @@ validation_run:
   - node scripts/validate_v7_20_native_doubao_real_runner_implementation.js: passed with 43 checks
   - node scripts/run_native_doubao_image_generation.js --case-id=tennis_wallet_hero_v2_preflight --dry-run=true: passed dry-run, provider/api/image/output false
   - node scripts/validate_native_doubao_sandbox.js: passed with 72 checks
-  - npm run validate:mvp: failed before local commit because readiness validators require clean committed state and the new registry file was untracked
+  - npm run validate:mvp: failed before local code commit because readiness validators require clean committed state and the new registry file was untracked
+  - npm run validate:mvp: passed after local code commit 9ec4354
 provider_contact_performed: false
 plugin_call_performed: false
 api_call_performed: false
@@ -44,7 +45,7 @@ real_dns_lookup_performed: false
 DailyNote_write_performed: false
 VCP_memory_write_performed: false
 push_status: not_performed
-next_safe_task: commit_exact_allowlist_then_rerun_validate_mvp
+next_safe_task: review_console_static_mock_boundary_validator
 ```
 
 ---
