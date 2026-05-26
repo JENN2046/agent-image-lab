@@ -1,5 +1,48 @@
 ---
 
+## Checkpoint - v0.6.90 Push Or PR Readiness Audit Without Push
+
+```text
+phase: v0_6_90_push_or_pr_readiness_audit_without_push
+status: completed_validated_push_or_pr_readiness_audit_without_push
+result: COMPLETED_VALIDATED
+mode: A0/A4 Green local readiness audit plus local status recording
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+legacy_active_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+summary: Audited the local ahead range for push/PR readiness without performing a remote write. The worktree was clean before recording, dry-run fetch had no remote update output, local refs showed ahead 31 / behind 0, diff check passed, public disclosure audit passed, and validate:all passed.
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+image_binary_read_performed: false
+output_write_performed: false
+env_file_content_read_performed: false
+secret_value_read_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+push_status: not_performed
+validation_run:
+  - git fetch --dry-run origin: passed
+  - git rev-list --left-right --count HEAD...origin/master: 31 0
+  - git log --oneline --decorate origin/master..HEAD: inspected 31 commits
+  - git diff --stat origin/master...HEAD: inspected 29 files
+  - git diff --check origin/master...HEAD: passed
+  - npm run validate:public-disclosure: passed
+  - npm run validate:smoke: passed
+  - npm run validate:mvp: passed
+  - npm run validate:all: passed
+go_no_go:
+  local_push_or_pr_readiness: go_for_human_authorization_preflight_only
+  remote_write_authorized_now: false
+pause_boundaries:
+  - push/tag/release/deploy/PR creation remains paused until explicit owner authorization
+  - A5/provider/image generation remains paused
+  - secret/.env reads or edits remain paused
+  - production writes remain paused
+next: await explicit remote-write authorization for push/PR, or continue local read-only failed-provider-attempt evidence review
+```
+
 ## Checkpoint - v0.6.89 Remote Sync And Next Red Decision Preflight
 
 ```text
