@@ -294,6 +294,10 @@ async function resolveDownloadHostForSafety(hostname, resolver) {
   }
 }
 
+async function resolveBaseUrlHostForSafety(hostname, resolver) {
+  return resolveDownloadHostForSafety(hostname, resolver);
+}
+
 function validateDownloadUrl(rawUrl) {
   try {
     var parsed = new URL(rawUrl);
@@ -630,6 +634,18 @@ async function realGenerate(options) {
       error: baseUrlCheck.error,
     };
   }
+  var baseHostSafety = await resolveBaseUrlHostForSafety(baseUrlCheck.url.hostname);
+  if (!baseHostSafety.valid) {
+    return {
+      status: "BLOCKED_BASE_URL",
+      plugin_id: "NativeDoubaoImage",
+      command: "generate",
+      api_call_performed: false,
+      image_created: false,
+      error_category: "base_url_resolved_host_blocked",
+      error: baseHostSafety.reason,
+    };
+  }
   var apiUrl = baseUrlCheck.url.toString().replace(/\/+$/, "") + "/images/generations";
   var requestBody = buildDoubaoRequest({
     modelOverride: options.modelOverride || "doubao-seedream-5-0-260128",
@@ -951,6 +967,7 @@ module.exports = {
   validateResolvedDownloadAddresses: validateResolvedDownloadAddresses,
   validateResolvedDownloadHost: validateResolvedDownloadHost,
   resolveDownloadHostForSafety: resolveDownloadHostForSafety,
+  resolveBaseUrlHostForSafety: resolveBaseUrlHostForSafety,
   contentTypeAllowsImageFormat: contentTypeAllowsImageFormat,
   validateBaseUrl: validateBaseUrl,
   validateA5Limits: validateA5Limits,

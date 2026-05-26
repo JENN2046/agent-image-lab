@@ -37,6 +37,7 @@ check("plugin_download_blocks_redirect_and_bad_content_type", () => plugin.inclu
 check("plugin_has_resolved_ip_ssrf_guard_helpers", () => plugin.includes("function classifyIpAddressForNetworkSafety") && plugin.includes("function validateResolvedDownloadAddresses"));
 check("plugin_has_dns_resolution_safety_hook", () => plugin.includes('require("node:dns")') && plugin.includes("async function resolveDownloadHostForSafety") && plugin.includes("validateResolvedDownloadHost"));
 check("plugin_fails_closed_on_download_dns_error", () => plugin.includes("download_dns_lookup_failed"));
+check("plugin_checks_base_url_resolved_host_before_fetch", () => plugin.includes("async function resolveBaseUrlHostForSafety") && plugin.includes("base_url_resolved_host_blocked") && plugin.indexOf("base_url_resolved_host_blocked") < plugin.indexOf("fetch(apiUrl"));
 check("plugin_uses_type_matched_extension", () => plugin.includes("function extensionForImageFormat") && plugin.includes("format: b64Check.format"));
 check("plugin_exact_call_budget", () => plugin.includes("maxPluginCalls must be exactly 1") && plugin.includes("maxImagesCreated must be exactly 1"));
 check("dryRunGenerate_still_exists", () => plugin.includes("function dryRunGenerate"));

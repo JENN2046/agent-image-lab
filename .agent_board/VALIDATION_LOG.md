@@ -1,5 +1,34 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260526-v0.6.79-NATIVE-DOUBAO-BASE-URL-DNS-SAFETY-HOOK
+
+Task: v0.6.79 NativeDoubao base URL DNS safety hook
+Status: completed_targeted_validated_pending_mvp_clean_rerun
+Receipt:
+  - lane: Green
+  - phase: v0_6_79_native_doubao_base_url_dns_safety_hook
+  - provider_contact_performed: false
+  - plugin_call_performed: false
+  - api_call_performed: false
+  - image_generation_performed: false
+  - image_binary_read_performed: false
+  - output_write_performed: false
+  - real_dns_lookup_performed: false
+  - secret_value_read_performed: false
+  - DailyNote_write_performed: false
+  - VCP_memory_write_performed: false
+  - push_tag_release_deploy_performed: false
+Commands run:
+  - node --check plugins/image_generation/native_doubao_image/native_doubao_image.js: passed
+  - node --check scripts/validate_native_doubao_sandbox.js: passed
+  - node scripts/validate_native_doubao_sandbox.js: passed with 64 checks
+  - node scripts/validate_v7_20_native_doubao_real_runner_implementation.js: passed with 34 checks
+  - npm run validate:mvp: failed before local commit because readiness validators require a clean committed state
+Observed result:
+  - NativeDoubao provider base URL handling now validates resolved DNS addresses before fetch(apiUrl) and blocks unsafe or failed resolution.
+Next:
+  - commit exact allowlist, then rerun npm run validate:mvp
+
 ## VALIDATION-20260526-v0.6.78-NATIVE-DOUBAO-DOWNLOAD-DNS-SAFETY-HOOK
 
 Task: v0.6.78 NativeDoubao download DNS safety hook

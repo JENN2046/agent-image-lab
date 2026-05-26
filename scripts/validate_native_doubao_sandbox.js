@@ -150,6 +150,24 @@ check("download_host_resolver_fails_closed_on_dns_error", () => {
   }).then((result) => result.valid === false && result.reason === "download_dns_lookup_failed");
 });
 
+check("base_url_host_resolver_accepts_public_mock_dns", () => {
+  return plugin.resolveBaseUrlHostForSafety("api.example.com", async () => {
+    return [{ address: "93.184.216.34", family: 4 }];
+  }).then((result) => result.valid === true && result.checked_count === 1);
+});
+
+check("base_url_host_resolver_rejects_private_mock_dns", () => {
+  return plugin.resolveBaseUrlHostForSafety("api.example.com", async () => {
+    return [{ address: "10.0.0.5", family: 4 }];
+  }).then((result) => result.valid === false && result.reason === "resolved_ip_blocked");
+});
+
+check("base_url_host_resolver_fails_closed_on_dns_error", () => {
+  return plugin.resolveBaseUrlHostForSafety("api.example.com", async () => {
+    throw new Error("mock base dns failure");
+  }).then((result) => result.valid === false && result.reason === "download_dns_lookup_failed");
+});
+
 check("image_buffer_accepts_png_magic", () => {
   const png = Buffer.from("89504e470d0a1a0a0000000d49484452", "hex");
   const result = plugin.validateImageBuffer(png, "image/png");
@@ -329,6 +347,7 @@ check("plugin_exports_output_safety_helpers", () => {
     typeof plugin.validateResolvedDownloadAddresses === "function" &&
     typeof plugin.validateResolvedDownloadHost === "function" &&
     typeof plugin.resolveDownloadHostForSafety === "function" &&
+    typeof plugin.resolveBaseUrlHostForSafety === "function" &&
     typeof plugin.contentTypeAllowsImageFormat === "function" &&
     typeof plugin.validateProviderResponseData === "function";
 });
