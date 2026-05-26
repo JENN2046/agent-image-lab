@@ -1,5 +1,32 @@
 ---
 
+- [x] ID: v0_6_102_public_disclosure_gate_scope_gap_wiring_no_read
+      Lane: A0/A4 Green local validation wiring.
+      Status: COMPLETED_VALIDATED_PUBLIC_DISCLOSURE_GATE_SCOPE_GAP_WIRING_NO_READ.
+      Goal: Wire validate:public-disclosure to include the tracked local config scope-gap validator.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Resume guard source phase: v0_3_2_live_candidate_action_packet.
+      Legacy active next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Source phase: v0_6_101_public_disclosure_scope_gap_tracked_local_config_no_read.
+      Finding: validate:public-disclosure now runs both the core audit and the v0.6.101 scope-gap validator.
+      Go/No-Go: gate_wiring_recorded=true; public_disclosure_validator_clears_tracked_local_config=false; push_ready_now=false; pr_ready_now=false; remote_write_authorized_now=false; next_auto_step_allowed=false.
+      Validation run: node --check validator passed; dedicated validator passed with 9/9 negative cases caught; npm run validate:public-disclosure passed.
+      package_json_modified: true.
+      dependency_added: false.
+      push_status: not_performed.
+      pr_created: false.
+      tag_release_deploy_performed: false.
+      local_config_content_read: false.
+      git_rm_cached_performed: false.
+      secret_value_read_performed: false.
+      provider_contact_performed: false.
+      image_generation_performed: false.
+      DailyNote_write_performed: false.
+      VCP_memory_write_performed: false.
+      Codex_memory_write_performed: false.
+      production_candidate_created: false.
+      Next: await_explicit_detrack_execution_authorization_or_choose_no_write_task.
+
 - [x] ID: v0_6_101_public_disclosure_scope_gap_tracked_local_config_no_read
       Lane: A0/A4 Green local scope-gap record.
       Status: COMPLETED_VALIDATED_PUBLIC_DISCLOSURE_SCOPE_GAP_TRACKED_LOCAL_CONFIG_NO_READ.
