@@ -3,7 +3,7 @@
 ## VALIDATION-20260526-v0.6.77-NATIVE-DOUBAO-RESOLVED-IP-SSRF-GUARD-FOUNDATION
 
 Task: v0.6.77 NativeDoubao resolved-IP SSRF guard foundation
-Status: targeted_validated_pending_clean_commit_mvp_rerun
+Status: completed_validated
 Receipt:
   - lane: Green
   - phase: v0_6_77_native_doubao_resolved_ip_ssrf_guard_foundation
@@ -23,10 +23,11 @@ Commands run:
   - node --check scripts/validate_native_doubao_sandbox.js: passed
   - node scripts/validate_native_doubao_sandbox.js: passed
   - node scripts/validate_v7_20_native_doubao_real_runner_implementation.js: passed
+  - npm run validate:mvp: passed after local code commit 7a77f6a
 Observed result:
   - NativeDoubao now has local resolved-IP safety helpers for future DNS-aware provider URL download SSRF checks.
 Next:
-  - create exact-file local commit, then rerun npm run validate:mvp from a clean committed state
+  - no next task selected
 
 ## VALIDATION-20260526-v0.6.76-NATIVE-DOUBAO-PROVIDER-RESPONSE-SCHEMA-GUARD
 

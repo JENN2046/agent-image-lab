@@ -4,7 +4,7 @@
 
 ```text
 phase: v0_6_77_native_doubao_resolved_ip_ssrf_guard_foundation
-status: COMPLETED_TARGETED_VALIDATED_PENDING_CLEAN_COMMIT_MVP_RERUN
+status: COMPLETED_VALIDATED_NATIVE_DOUBAO_RESOLVED_IP_GUARD_FOUNDATION
 mode: Green local resolved-IP SSRF guard foundation only; no DNS lookup, provider/plugin/API/image/output/secret/memory execution
 workspace: A:\agent-image-lab\agent-image-lab-v0.2
 branch: master
@@ -16,12 +16,13 @@ changed_files_current_task:
   - plugins/image_generation/native_doubao_image/native_doubao_image.js
   - scripts/validate_native_doubao_sandbox.js
   - scripts/validate_v7_20_native_doubao_real_runner_implementation.js
-validation_status: targeted_passed_mvp_pending_clean_commit_rerun
+validation_status: completed_validated
 validation_run:
   - node --check plugins/image_generation/native_doubao_image/native_doubao_image.js: passed
   - node --check scripts/validate_native_doubao_sandbox.js: passed
   - node scripts/validate_native_doubao_sandbox.js: passed
   - node scripts/validate_v7_20_native_doubao_real_runner_implementation.js: passed
+  - npm run validate:mvp: passed after local code commit 7a77f6a
 provider_contact_performed: false
 plugin_call_performed: false
 api_call_performed: false
@@ -34,7 +35,7 @@ secret_value_read_performed: false
 DailyNote_write_performed: false
 VCP_memory_write_performed: false
 push_status: not_performed
-next_safe_task: create_exact_file_local_commit_then_rerun_mvp
+next_safe_task: no_next_task_selected
 ```
 
 ---

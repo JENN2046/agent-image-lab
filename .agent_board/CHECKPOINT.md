@@ -4,8 +4,8 @@
 
 ```text
 phase: v0_6_77_native_doubao_resolved_ip_ssrf_guard_foundation
-status: completed_targeted_validated_pending_clean_commit_mvp_rerun
-result: TARGETED_VALIDATED
+status: completed_validated_native_doubao_resolved_ip_guard_foundation
+result: COMPLETED_VALIDATED
 mode: Green local resolved-IP SSRF guard foundation only
 active_current_phase: v0_3_3_first_live_generation_pilot
 resume_guard_source_phase: v0_3_2_live_candidate_action_packet
@@ -31,7 +31,8 @@ validation_run:
   - node --check plugin and validators: passed
   - node scripts/validate_native_doubao_sandbox.js: passed
   - node scripts/validate_v7_20_native_doubao_real_runner_implementation.js: passed
-next: create_exact_file_local_commit_then_rerun_mvp
+  - npm run validate:mvp: passed after local code commit 7a77f6a
+next: no_next_task_selected
 ```
 
 ---
