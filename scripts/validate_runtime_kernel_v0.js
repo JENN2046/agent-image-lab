@@ -36,7 +36,7 @@ function assertCleanSideEffects(flags, label) {
 
 function validateRuntimeContract(contract, label) {
   assert(contract.contract_id === "runtime_kernel_v0_contract", `${label} contract id mismatch`);
-  assert(contract.contract_version === "v0.1", `${label} contract version mismatch`);
+  assert(contract.contract_version === "v0.2", `${label} contract version mismatch`);
   assert(contract.kernel_id === "runtime_kernel_v0_no_provider", `${label} contract kernel id mismatch`);
   assert(contract.task_input.task_type === "fixture.visual_generation.no_provider.v0", `${label} task type contract mismatch`);
   ["task_id", "task_type", "input", "policy", "review"].forEach((field) => {
@@ -56,7 +56,11 @@ function validateRuntimeContract(contract, label) {
   });
   assert(contract.output_envelope.terminal_states.includes("completed_stub"), `${label} contract missing completed terminal state`);
   assert(contract.output_envelope.terminal_states.includes("blocked_red"), `${label} contract missing blocked terminal state`);
-  assert(contract.adapter_slots.artifact_adapter.status === "planned_next_adapter", `${label} artifact adapter slot mismatch`);
+  assert(contract.output_envelope.green_required_fields.includes("artifact_adapter"), `${label} contract missing artifact_adapter green field`);
+  assert(contract.output_envelope.red_forbidden_fields.includes("artifact_adapter"), `${label} contract missing artifact_adapter red forbidden field`);
+  assert(contract.adapter_slots.artifact_adapter.status === "stub_available", `${label} artifact adapter slot mismatch`);
+  assert(contract.adapter_slots.artifact_adapter.adapter_id === "artifact_adapter_stub_v0", `${label} artifact adapter id mismatch`);
+  assert(contract.adapter_slots.artifact_adapter.writes_allowed_now === false, `${label} artifact adapter writes must be false`);
   assert(contract.adapter_slots.review_bridge.status === "planned_next_adapter", `${label} review bridge slot mismatch`);
   assert(contract.adapter_slots.provider_adapter.status === "blocked_until_explicit_provider_phase", `${label} provider adapter slot mismatch`);
   assert(contract.audit_write.allowed_output_root === ".agent_private/runtime_kernel_v0/audits", `${label} audit output root mismatch`);
@@ -82,6 +86,14 @@ function validateGreenAudit(result, label) {
   assert(result.persistence.persistence_id === "artifact_persistence_stub_v0", `${label} persistence id mismatch`);
   assert(result.persistence.persisted_ref === "memory://runtime-v0-green-task-001/artifact/fixture", `${label} persisted ref mismatch`);
   assert(result.persistence.disk_write_performed === false, `${label} disk write must be false`);
+  assert(result.artifact_adapter.state === "artifact_adapter_stubbed", `${label} artifact adapter state mismatch`);
+  assert(result.artifact_adapter.adapter_id === "artifact_adapter_stub_v0", `${label} artifact adapter id mismatch`);
+  assert(result.artifact_adapter.writes_allowed_now === false, `${label} artifact adapter writes must be false`);
+  assert(result.artifact_adapter.disk_write_performed === false, `${label} artifact adapter disk write must be false`);
+  assert(result.artifact_adapter.production_write_performed === false, `${label} artifact adapter production write must be false`);
+  assert(result.artifact_adapter.handoff_record.artifact_id === result.persistence.artifact_record.artifact_id, `${label} artifact handoff id mismatch`);
+  assert(result.artifact_adapter.handoff_record.persisted_ref === result.persistence.persisted_ref, `${label} artifact handoff persisted ref mismatch`);
+  assert(result.artifact_adapter.handoff_record.real_artifact_write_allowed_now === false, `${label} real artifact write must be false`);
   assert(result.review.state === "review_pending", `${label} review state mismatch`);
   assert(result.review.review_decision === "stub_review_pending", `${label} review decision mismatch`);
   assert(result.transition.state === "completed_stub", `${label} transition final state mismatch`);
@@ -90,20 +102,22 @@ function validateGreenAudit(result, label) {
     "gated",
     "executed_stub",
     "artifact_recorded",
+    "artifact_adapter_stubbed",
     "review_pending",
     "completed_stub",
   ]), `${label} transition path mismatch`);
   assert(result.audit_record.final_state === "completed_stub", `${label} audit final state mismatch`);
   assert(result.audit_record.contract_id === "runtime_kernel_v0_contract", `${label} audit contract id mismatch`);
-  assert(result.audit_record.contract_version === "v0.1", `${label} audit contract version mismatch`);
+  assert(result.audit_record.contract_version === "v0.2", `${label} audit contract version mismatch`);
   assert(result.audit_record.blocked_red === false, `${label} audit must not be blocked red`);
   assert(result.audit_record.executor_ran === true, `${label} audit must record executor ran`);
-  assert(result.audit_record.kernel_components.length === 7, `${label} audit must include seven kernel components`);
+  assert(result.audit_record.kernel_components.length === 8, `${label} audit must include eight kernel components`);
   [
     "task_intake",
     "policy_gate",
     "executor_interface",
     "artifact_persistence",
+    "artifact_adapter_stub",
     "review_gate",
     "state_transition",
     "audit_record",
@@ -126,11 +140,12 @@ function validateRedAudit(result) {
   assert(result.policy.blocked_reasons.some((reason) => reason.includes("provider_contact")), "red block reason must mention provider_contact");
   assert(result.execution === undefined, "red task must not execute executor");
   assert(result.persistence === undefined, "red task must not persist artifact");
+  assert(result.artifact_adapter === undefined, "red task must not run artifact adapter");
   assert(result.review === undefined, "red task must not run review gate");
   assert(JSON.stringify(result.transition.path) === JSON.stringify(["queued", "blocked_red"]), "red transition path mismatch");
   assert(result.audit_record.final_state === "blocked_red", "red audit final state mismatch");
   assert(result.audit_record.contract_id === "runtime_kernel_v0_contract", "red audit contract id mismatch");
-  assert(result.audit_record.contract_version === "v0.1", "red audit contract version mismatch");
+  assert(result.audit_record.contract_version === "v0.2", "red audit contract version mismatch");
   assert(result.audit_record.blocked_red === true, "red audit must mark blocked red");
   assert(result.audit_record.executor_ran === false, "red audit must record executor did not run");
   assertCleanSideEffects(result.audit_record.side_effect_flags, "red");

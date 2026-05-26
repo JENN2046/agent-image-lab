@@ -37,7 +37,7 @@ function assertArrayIncludesAll(actual, expected, label) {
 
 function assertRuntimeContract(contract, label) {
   assert(contract.contract_id === "runtime_kernel_v0_contract", `${label} contract_id mismatch`);
-  assert(contract.contract_version === "v0.1", `${label} contract_version mismatch`);
+  assert(contract.contract_version === "v0.2", `${label} contract_version mismatch`);
   assert(contract.kernel_id === "runtime_kernel_v0_no_provider", `${label} kernel_id mismatch`);
 
   assert(contract.task_input.task_type === "fixture.visual_generation.no_provider.v0", `${label} task_type mismatch`);
@@ -48,14 +48,15 @@ function assertRuntimeContract(contract, label) {
   assert(contract.task_input.required_review_stub_decision === "mark_review_pending", `${label} review decision contract mismatch`);
 
   assertArrayIncludesAll(contract.output_envelope.required_root_fields, ["kernel_id", "version", "contract", "task_id", "final_state", "intake", "policy", "transition", "audit_record"], `${label} required output root fields`);
-  assertArrayIncludesAll(contract.output_envelope.green_required_fields, ["execution", "persistence", "review"], `${label} green required fields`);
-  assertArrayIncludesAll(contract.output_envelope.red_forbidden_fields, ["execution", "persistence", "review"], `${label} red forbidden fields`);
+  assertArrayIncludesAll(contract.output_envelope.green_required_fields, ["execution", "persistence", "artifact_adapter", "review"], `${label} green required fields`);
+  assertArrayIncludesAll(contract.output_envelope.red_forbidden_fields, ["execution", "persistence", "artifact_adapter", "review"], `${label} red forbidden fields`);
   assertArrayIncludesAll(contract.output_envelope.terminal_states, ["completed_stub", "blocked_red"], `${label} terminal states`);
 
-  assert(contract.adapter_slots.artifact_adapter.status === "planned_next_adapter", `${label} artifact adapter status mismatch`);
+  assert(contract.adapter_slots.artifact_adapter.status === "stub_available", `${label} artifact adapter status mismatch`);
   assert(contract.adapter_slots.artifact_adapter.input_ref === "persistence.artifact_record", `${label} artifact adapter input ref mismatch`);
-  assert(contract.adapter_slots.artifact_adapter.output_ref === "persistence.persisted_ref", `${label} artifact adapter output ref mismatch`);
+  assert(contract.adapter_slots.artifact_adapter.output_ref === "artifact_adapter.handoff_record", `${label} artifact adapter output ref mismatch`);
   assert(contract.adapter_slots.artifact_adapter.writes_allowed_now === false, `${label} artifact adapter writes must be false`);
+  assert(contract.adapter_slots.artifact_adapter.adapter_id === "artifact_adapter_stub_v0", `${label} artifact adapter id mismatch`);
   assert(contract.adapter_slots.review_bridge.status === "planned_next_adapter", `${label} review bridge status mismatch`);
   assert(contract.adapter_slots.review_bridge.input_ref === "review", `${label} review bridge input ref mismatch`);
   assert(contract.adapter_slots.review_bridge.output_ref === "review.review_decision", `${label} review bridge output ref mismatch`);

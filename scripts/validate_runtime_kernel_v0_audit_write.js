@@ -75,9 +75,11 @@ function assertCleanFlags(flags, label) {
 
 function assertContract(contract, label) {
   assert(contract.contract_id === "runtime_kernel_v0_contract", `${label} contract id mismatch`);
-  assert(contract.contract_version === "v0.1", `${label} contract version mismatch`);
+  assert(contract.contract_version === "v0.2", `${label} contract version mismatch`);
   assert(contract.kernel_id === "runtime_kernel_v0_no_provider", `${label} contract kernel id mismatch`);
-  assert(contract.adapter_slots.artifact_adapter.output_ref === "persistence.persisted_ref", `${label} artifact adapter output ref mismatch`);
+  assert(contract.adapter_slots.artifact_adapter.status === "stub_available", `${label} artifact adapter status mismatch`);
+  assert(contract.adapter_slots.artifact_adapter.output_ref === "artifact_adapter.handoff_record", `${label} artifact adapter output ref mismatch`);
+  assert(contract.adapter_slots.artifact_adapter.adapter_id === "artifact_adapter_stub_v0", `${label} artifact adapter id mismatch`);
   assert(contract.adapter_slots.review_bridge.input_ref === "review", `${label} review bridge input ref mismatch`);
   assert(contract.adapter_slots.provider_adapter.calls_allowed_now === false, `${label} provider adapter calls must be false`);
   assert(contract.audit_write.allowed_output_root === auditRoot, `${label} audit output root mismatch`);
@@ -175,7 +177,7 @@ function main() {
     taskId: "runtime-v0-green-task-001",
     finalState: "completed_stub",
     executorRan: true,
-    pathStates: ["queued", "gated", "executed_stub", "artifact_recorded", "review_pending", "completed_stub"],
+    pathStates: ["queued", "gated", "executed_stub", "artifact_recorded", "artifact_adapter_stubbed", "review_pending", "completed_stub"],
   };
   assertCliAuditWrite(greenCli, greenExpected);
   assertAuditPayload(greenPayload, greenExpected);

@@ -3,13 +3,14 @@
 
 const fs = require("node:fs");
 const path = require("node:path");
+const { buildArtifactAdapterStub } = require("../adapters/runtime/artifact_adapter_stub");
 
 const repoRoot = path.resolve(__dirname, "..");
 const defaultInputPath = "tests/fixtures/runtime_kernel_v0_green_task.fixture.json";
 const auditOutputRoot = ".agent_private/runtime_kernel_v0/audits";
 const kernelId = "runtime_kernel_v0_no_provider";
 const contractId = "runtime_kernel_v0_contract";
-const contractVersion = "v0.1";
+const contractVersion = "v0.2";
 
 const sideEffectFlags = Object.freeze({
   provider_contact_performed: false,
@@ -28,6 +29,7 @@ const kernelComponents = Object.freeze([
   "policy_gate",
   "executor_interface",
   "artifact_persistence",
+  "artifact_adapter_stub",
   "review_gate",
   "state_transition",
   "audit_record",
@@ -64,16 +66,17 @@ const runtimeContract = Object.freeze({
       "transition",
       "audit_record",
     ],
-    green_required_fields: ["execution", "persistence", "review"],
-    red_forbidden_fields: ["execution", "persistence", "review"],
+    green_required_fields: ["execution", "persistence", "artifact_adapter", "review"],
+    red_forbidden_fields: ["execution", "persistence", "artifact_adapter", "review"],
     terminal_states: ["completed_stub", "blocked_red"],
   },
   adapter_slots: {
     artifact_adapter: {
-      status: "planned_next_adapter",
+      status: "stub_available",
       input_ref: "persistence.artifact_record",
-      output_ref: "persistence.persisted_ref",
+      output_ref: "artifact_adapter.handoff_record",
       writes_allowed_now: false,
+      adapter_id: "artifact_adapter_stub_v0",
     },
     review_bridge: {
       status: "planned_next_adapter",
@@ -239,6 +242,7 @@ function stateTransition(states) {
       states.policy.state,
       states.execution?.state,
       states.persistence?.state,
+      states.artifactAdapter?.state,
       states.review.state,
       terminalState,
     ].filter(Boolean),
@@ -260,8 +264,8 @@ function buildAuditRecord(task, states) {
     executor_ran: Boolean(states.execution),
     side_effect_flags: { ...sideEffectFlags },
     next_adapter_slots: {
-      artifact_capsule: "planned_next_adapter",
-      review_console: "planned_next_adapter",
+      artifact_adapter: states.artifactAdapter ? "stub_available" : "not_run",
+      review_bridge: "planned_next_adapter",
       provider: "blocked_until_explicit_provider_phase",
     },
   };
@@ -296,9 +300,10 @@ function runRuntimeKernelV0(rawTask) {
 
   const execution = executeNoProviderFixture(intake.task);
   const persistence = persistArtifactInMemory(intake.task, execution);
+  const artifactAdapter = buildArtifactAdapterStub(intake.task, persistence);
   const review = reviewGate(intake.task, persistence);
-  const transition = stateTransition({ intake, policy, execution, persistence, review });
-  const auditRecord = buildAuditRecord(intake.task, { intake, policy, execution, persistence, review, transition });
+  const transition = stateTransition({ intake, policy, execution, persistence, artifactAdapter, review });
+  const auditRecord = buildAuditRecord(intake.task, { intake, policy, execution, persistence, artifactAdapter, review, transition });
 
   return {
     kernel_id: kernelId,
@@ -310,6 +315,7 @@ function runRuntimeKernelV0(rawTask) {
     policy,
     execution,
     persistence,
+    artifact_adapter: artifactAdapter,
     review,
     transition,
     audit_record: auditRecord,
