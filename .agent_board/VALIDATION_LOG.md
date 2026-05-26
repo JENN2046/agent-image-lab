@@ -3,7 +3,7 @@
 ## VALIDATION-20260526-v0.6.82-NATIVE-DOUBAO-NETWORK-SAFETY-HELPER-CONSOLIDATION
 
 Task: v0.6.82 NativeDoubao network safety helper consolidation
-Status: completed_targeted_validated_pending_mvp_clean_rerun
+Status: completed_validated
 Receipt:
   - lane: Green
   - phase: v0_6_82_native_doubao_network_safety_helper_consolidation
@@ -24,11 +24,12 @@ Commands run:
   - node --check scripts/validate_native_doubao_sandbox.js: passed
   - node scripts/validate_native_doubao_sandbox.js: passed with 72 checks
   - node scripts/validate_v7_20_native_doubao_real_runner_implementation.js: passed with 38 checks
-  - npm run validate:mvp: failed before local commit because readiness validators require a clean committed state
+  - npm run validate:mvp: failed before local code commit because readiness validators require a clean committed state
+  - npm run validate:mvp: passed after local code commit 1c91840
 Observed result:
   - NativeDoubao DNS/IP safety checks now expose generic network-safe helpers with preserved download compatibility wrappers.
 Next:
-  - commit exact allowlist, then rerun npm run validate:mvp
+  - continue hardcoded ref reduction queue
 
 ## VALIDATION-20260526-v0.6.81-NATIVE-DOUBAO-STREAMED-DOWNLOAD-AND-DECODE-SAFETY
 

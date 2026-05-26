@@ -2,13 +2,13 @@
 
 - [x] ID: v0_6_82_native_doubao_network_safety_helper_consolidation
       Lane: Green local provider network safety helper consolidation only.
-      Status: COMPLETED_TARGETED_VALIDATED_PENDING_MVP_CLEAN_RERUN.
+      Status: COMPLETED_VALIDATED_NATIVE_DOUBAO_NETWORK_SAFETY_HELPER_CONSOLIDATION.
       Goal: Consolidate NativeDoubao DNS/IP safety helpers under generic network-safe names while preserving download/base URL compatibility wrappers.
       Active current phase: v0_3_3_first_live_generation_pilot.
       Resume guard source phase: v0_3_2_live_candidate_action_packet.
       Legacy active next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
       Changed files: plugins/image_generation/native_doubao_image/native_doubao_image.js; scripts/validate_native_doubao_sandbox.js; scripts/validate_v7_20_native_doubao_real_runner_implementation.js.
-      Validation run: node --check plugin and validators passed; node scripts/validate_native_doubao_sandbox.js passed with 72 checks; node scripts/validate_v7_20_native_doubao_real_runner_implementation.js passed with 38 checks; npm run validate:mvp failed before local commit because readiness validators require a clean committed state.
+      Validation run: node --check plugin and validators passed; node scripts/validate_native_doubao_sandbox.js passed with 72 checks; node scripts/validate_v7_20_native_doubao_real_runner_implementation.js passed with 38 checks; npm run validate:mvp failed before local code commit because readiness validators require a clean committed state; npm run validate:mvp passed after local code commit 1c91840.
       provider_contact_performed: false.
       plugin_call_performed: false.
       api_call_performed: false.
@@ -22,7 +22,7 @@
       DailyNote_write_performed: false.
       VCP_memory_write_performed: false.
       push_status: not_performed.
-      Next: commit_exact_allowlist_then_rerun_validate_mvp.
+      Next: continue_hardcoded_ref_reduction_queue.
 
 ---
 
