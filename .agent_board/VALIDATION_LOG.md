@@ -3,7 +3,7 @@
 ## VALIDATION-20260526-v0.6.88-VALIDATION-GATE-TAXONOMY
 
 Task: v0.6.88 Validation gate taxonomy
-Status: partial_validated_pending_clean_state
+Status: completed_validated
 Receipt:
   - lane: Green
   - phase: v0_6_88_validation_gate_taxonomy
@@ -26,10 +26,14 @@ Commands run:
   - npm run validate:mvp: passed
   - npm run validate:capsule-regression: failed before local commit because readiness validators require a clean committed state
   - npm run validate:governance: failed before local commit because readiness validators require a clean committed state
+  - node scripts/validate_autopilot_agent_board_resume_compaction_guard.js: passed after resume anchors were restored
+  - npm run validate:capsule-regression: passed after clean local commit
+  - npm run validate:governance: passed after clean local commit
+  - npm run validate:all: passed after clean local commit
 Observed result:
   - Validation script names now map to smoke, MVP core, capsule regression, governance, and aggregate layers.
 Next:
-  - exact-file local commit, then rerun capsule/governance/all on clean state
+  - no_next_task_selected
 
 ## VALIDATION-20260526-v0.6.83-NATIVE-DOUBAO-RUNNER-CASE-REGISTRY
 

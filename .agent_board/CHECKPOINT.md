@@ -4,8 +4,8 @@
 
 ```text
 phase: v0_6_88_validation_gate_taxonomy
-status: in_progress_pending_clean_state_validation
-result: PARTIAL_VALIDATED
+status: completed_validated_validation_gate_taxonomy
+result: COMPLETED_VALIDATED
 mode: Green local validation taxonomy refactor only
 active_current_phase: v0_3_3_first_live_generation_pilot
 resume_guard_source_phase: v0_3_2_live_candidate_action_packet
@@ -38,7 +38,11 @@ validation_run:
   - npm run validate:mvp: passed
   - npm run validate:capsule-regression: failed before local commit because readiness validators require a clean committed state
   - npm run validate:governance: failed before local commit because readiness validators require a clean committed state
-next: exact-file local commit, then rerun capsule/governance/all on clean state
+  - node scripts/validate_autopilot_agent_board_resume_compaction_guard.js: passed after resume anchors were restored
+  - npm run validate:capsule-regression: passed after clean local commit
+  - npm run validate:governance: passed after clean local commit
+  - npm run validate:all: passed after clean local commit
+next: no_next_task_selected
 ```
 
 ## Checkpoint - v0.6.87 Review Findings Contract Fix

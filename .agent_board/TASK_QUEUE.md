@@ -1,14 +1,14 @@
 ---
 
-- [ ] ID: v0_6_88_validation_gate_taxonomy
+- [x] ID: v0_6_88_validation_gate_taxonomy
       Lane: Green local validation taxonomy refactor only.
-      Status: IN_PROGRESS_PENDING_CLEAN_STATE_VALIDATION.
+      Status: COMPLETED_VALIDATED_VALIDATION_GATE_TAXONOMY.
       Goal: Split overloaded validate:mvp semantics into smoke, MVP core, capsule regression, governance, and aggregate validation layers.
       Active current phase: v0_3_3_first_live_generation_pilot.
       Resume guard source phase: v0_3_2_live_candidate_action_packet.
       Legacy active next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
       Changed files: package.json; scripts/validate_smoke.js; scripts/validate_mvp_core.js; scripts/validate_governance.ps1; scripts/validate_capsule_product_core_regression.ps1; scripts/validate_governance_regression.js; docs/VALIDATION_GATE_TAXONOMY.md.
-      Validation run: node --check new JS validators passed; npm run validate:smoke passed; npm run validate:mvp passed; npm run validate:capsule-regression and npm run validate:governance failed before local commit because readiness validators require clean committed state.
+      Validation run: node --check new JS validators passed; npm run validate:smoke passed; npm run validate:mvp passed; npm run validate:capsule-regression and npm run validate:governance failed before local commit because readiness validators require clean committed state; resume anchor validator passed after narrow .agent_board repair; npm run validate:capsule-regression passed after clean local commit; npm run validate:governance passed after clean local commit; npm run validate:all passed after clean local commit.
       provider_contact_performed: false.
       plugin_call_performed: false.
       api_call_performed: false.
@@ -20,7 +20,7 @@
       DailyNote_write_performed: false.
       VCP_memory_write_performed: false.
       push_status: not_performed.
-      Next: exact-file local commit, then rerun capsule/governance/all on clean state.
+      Next: no_next_task_selected.
 
 - [x] ID: v0_6_87_review_findings_contract_fix
       Lane: Green local review finding fixes only.
