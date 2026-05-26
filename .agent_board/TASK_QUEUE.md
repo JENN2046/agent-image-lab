@@ -1,5 +1,156 @@
 ---
 
+- [x] ID: exact_a5_provider_execution_activation_result
+      Lane: Amber_B exact owner-authorized one-shot attempt.
+      Status: BLOCKED_FAIL_CLOSED_BEFORE_PROVIDER_CONTACT.
+      Goal: Execute the exact A5 NativeDoubao packet once and record provider receipt, review handoff, and durable audit evidence.
+      Authorization id: AUTH-DRAFT-NATIVE-DOUBAO-ONE-SHOT-20260526-001.
+      Activation phrase matched: true.
+      Execution status: BLOCKED_SECRETLESS_RUNTIME_NOT_CALLABLE.
+      Receipt: reports/provider_receipts/v0_6_73_real_vcp_agent_generation_one_shot_receipt.json.
+      Review handoff: review_console/live_receipt_bridge/v0_6_73_real_vcp_agent_generation_one_shot/bridge_entry.json.
+      Durable audit: .agent_private/runtime_audit_store/v0_6_73_real_vcp_agent_generation_one_shot/activation_attempt_001.audit.json.
+      Validation run: npm run validate:exact-a5-activation-receipt; npm run validate:smoke; npm run validate:mvp; node scripts/validate_agent_board_state.js; git diff --check.
+      Full validation note: npm run validate:all passed through smoke, MVP, runtime-kernel, review-bridge-readonly, durable-audit-store, provider-preflight, exact-a5-provider-packet, and exact-a5-activation-receipt, then failed at validate:capsule-regression legacy commit-readiness gates because the current 27-file runtime/A5 activation slice is uncommitted and outside the old fixed slice/post-commit proof expectation.
+      provider_calls_used: 0.
+      plugin_calls_used: 0.
+      api_calls_used: 0.
+      images_created: 0.
+      retry_performed: false.
+      provider_contact_performed: false.
+      plugin_call_performed: false.
+      api_call_performed: false.
+      image_generation_performed: false.
+      env_file_content_read_performed: false.
+      secret_value_read_performed: false.
+      output_write_performed: false.
+      production_write_performed: false.
+      accepted_samples_write_performed: false.
+      DailyNote_write_performed: false.
+      VCP_memory_write_performed: false.
+      push_status: not_performed.
+      Next: bind_owner_authorized_secretless_provider_runtime_delegate.
+
+---
+
+- [x] ID: exact_a5_provider_execution_packet_draft
+      Lane: Amber_B provider/image execution packet draft; inactive.
+      Status: COMPLETED_VALIDATED_INACTIVE_EXACT_A5_PROVIDER_EXECUTION_PACKET_DRAFT.
+      Goal: Draft an exact inactive one-shot NativeDoubao A5 execution packet with budget, output, receipt, review, audit, rollback, stop conditions, and activation phrase.
+      Source phase: provider_preflight_no_provider_call.
+      Runnable Capability Gate: passed.
+      Adapter: adapters/runtime/exact_a5_provider_execution_packet_draft.js.
+      Validator: scripts/validate_exact_a5_provider_execution_packet_draft.js.
+      Doc: docs/EXACT_A5_PROVIDER_EXECUTION_PACKET_DRAFT.md.
+      Package script: validate:exact-a5-provider-packet.
+      Authorization id: AUTH-DRAFT-NATIVE-DOUBAO-ONE-SHOT-20260526-001.
+      Authorization status: draft_not_active.
+      Can execute now: false.
+      Finding: One-shot budget is exact; current side effects are false; activation requires the exact owner phrase recorded in docs/EXACT_A5_PROVIDER_EXECUTION_PACKET_DRAFT.md.
+      Validation run: node --check adapter; node --check validator; npm run validate:exact-a5-provider-packet; npm run validate:smoke; npm run validate:mvp; npm run validate:provider-preflight; npm run validate:runtime-kernel; npm run validate:review-bridge-readonly; npm run validate:durable-audit-store; node scripts/validate_agent_board_state.js.
+      Full validation note: npm run validate:all passed through smoke, MVP, runtime-kernel, review-bridge-readonly, durable-audit-store, provider-preflight, and exact-a5-provider-packet, then failed at validate:capsule-regression legacy commit-readiness checks while current task files are uncommitted.
+      provider_contact_performed: false.
+      plugin_call_performed: false.
+      api_call_performed: false.
+      image_generation_performed: false.
+      env_file_content_read_performed: false.
+      secret_value_read_performed: false.
+      output_write_performed: false.
+      provider_receipt_write_performed: false.
+      review_handoff_write_performed: false.
+      durable_audit_write_performed: false.
+      production_write_performed: false.
+      accepted_samples_write_performed: false.
+      DailyNote_write_performed: false.
+      VCP_memory_write_performed: false.
+      push_status: not_performed.
+      Next: await_owner_decision_on_AUTH-DRAFT-NATIVE-DOUBAO-ONE-SHOT-20260526-001.
+
+---
+
+- [x] ID: provider_preflight_no_provider_call
+      Lane: A4 Green local provider preflight.
+      Status: COMPLETED_VALIDATED_PROVIDER_PREFLIGHT_NO_PROVIDER_CALL.
+      Goal: Prepare a NativeDoubao provider preflight packet without contacting provider, reading secrets, generating images, or writing output.
+      Source phase: durable_audit_store.
+      Runnable Capability Gate: passed.
+      Adapter: adapters/runtime/provider_preflight_no_provider_call.js.
+      Validator: scripts/validate_provider_preflight_no_provider_call.js.
+      Doc: docs/PROVIDER_PREFLIGHT_NO_PROVIDER_CALL.md.
+      Package script: validate:provider-preflight.
+      Finding: Provider route preflight has can_execute_now=false, zero provider/plugin/API/image/write budget, redacted non-secret binding ref, and fail-closed negative cases.
+      Validation run: node --check adapter; node --check validator; npm run validate:provider-preflight; npm run validate:smoke; npm run validate:mvp; npm run validate:runtime-kernel; npm run validate:review-bridge-readonly; npm run validate:durable-audit-store; node scripts/validate_agent_board_state.js.
+      Full validation note: npm run validate:all passed through smoke, MVP, runtime-kernel, review-bridge-readonly, durable-audit-store, and provider-preflight, then failed at validate:capsule-regression legacy commit-readiness checks while current task files are uncommitted.
+      provider_contact_performed: false.
+      plugin_call_performed: false.
+      api_call_performed: false.
+      image_generation_performed: false.
+      env_file_content_read_performed: false.
+      secret_value_read_performed: false.
+      output_write_performed: false.
+      production_write_performed: false.
+      accepted_samples_write_performed: false.
+      DailyNote_write_performed: false.
+      VCP_memory_write_performed: false.
+      push_status: not_performed.
+      Next: exact_a5_provider_execution_packet_draft.
+
+---
+
+- [x] ID: durable_audit_store
+      Lane: A4 Green local runnable capability.
+      Status: COMPLETED_VALIDATED_DURABLE_AUDIT_STORE.
+      Goal: Persist runtime audit records to a local Git-ignored append-only store with run index, task index, and hash-chain evidence.
+      Source phase: review_bridge_readonly_stub.
+      Runnable Capability Gate: passed.
+      Adapter: adapters/runtime/durable_audit_store.js.
+      Validator: scripts/validate_runtime_durable_audit_store.js.
+      Doc: docs/DURABLE_AUDIT_STORE.md.
+      Package script: validate:durable-audit-store.
+      Finding: Green and Red runtime results can be stored as immutable local audit records; unsafe roots, duplicates, side-effect drift, and review bridge drift fail closed.
+      Validation run: node --check adapter; node --check validator; npm run validate:durable-audit-store; npm run validate:smoke; npm run validate:mvp; npm run validate:runtime-kernel; npm run validate:review-bridge-readonly; node scripts/validate_agent_board_state.js.
+      Full validation note: npm run validate:all passed through smoke, MVP, runtime-kernel, review-bridge-readonly, and durable-audit-store, then failed at validate:capsule-regression legacy commit-readiness checks while current task files are uncommitted.
+      provider_contact_performed: false.
+      plugin_call_performed: false.
+      api_call_performed: false.
+      image_generation_performed: false.
+      production_write_performed: false.
+      accepted_samples_write_performed: false.
+      DailyNote_write_performed: false.
+      VCP_memory_write_performed: false.
+      secret_value_read_performed: false.
+      push_status: not_performed.
+      Next: provider_preflight_no_provider_call.
+
+---
+
+- [x] ID: review_bridge_readonly_stub
+      Lane: A4 Green local runnable capability.
+      Status: COMPLETED_VALIDATED_REVIEW_BRIDGE_READONLY_STUB.
+      Goal: Expose runtime task, artifact, audit, and state data to Review Console as read-only draft case/session data.
+      Source phase: state_surface_next_task_alignment_v1.
+      Runnable Capability Gate: passed.
+      Adapter: adapters/runtime/review_bridge_readonly_stub.js.
+      Validator: scripts/validate_runtime_review_bridge_readonly_stub.js.
+      Doc: docs/REVIEW_BRIDGE_READONLY_STUB.md.
+      Package script: validate:review-bridge-readonly.
+      Finding: Green runtime result maps to image_case_draft and review_session_draft; Red runtime result is rejected.
+      Validation run: node --check adapter; node --check validator; npm run validate:smoke; npm run validate:mvp; npm run validate:review-bridge-readonly; npm run validate:runtime-kernel.
+      Full validation note: npm run validate:all failed at validate:capsule-regression legacy commit-readiness checks while current task files are uncommitted; review bridge runtime validations passed.
+      provider_contact_performed: false.
+      plugin_call_performed: false.
+      api_call_performed: false.
+      image_generation_performed: false.
+      production_write_performed: false.
+      accepted_samples_write_performed: false.
+      DailyNote_write_performed: false.
+      VCP_memory_write_performed: false.
+      secret_value_read_performed: false.
+      push_status: not_performed.
+      Next: durable_audit_store.
+
+---
+
 - [x] ID: state_surface_next_task_alignment_v1
       Lane: A0/A4 Green local status-surface alignment.
       Status: COMPLETED_VALIDATED_STATUS_ALIGNMENT.

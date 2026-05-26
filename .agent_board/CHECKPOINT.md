@@ -1,5 +1,287 @@
 ---
 
+## Checkpoint - Exact A5 Provider Execution Activation Result
+
+```text
+phase: exact_a5_provider_execution_activation_result
+status: blocked_fail_closed_before_provider_contact
+result: BLOCKED
+mode: Amber_B exact owner-authorized one-shot attempt
+summary: The exact owner activation phrase for AUTH-DRAFT-NATIVE-DOUBAO-ONE-SHOT-20260526-001 was received and the one-shot runner was invoked. The run stopped before provider contact with BLOCKED_SECRETLESS_RUNTIME_NOT_CALLABLE because no callable owner-authorized secretless_provider_runtime delegate is available in this runtime. Sanitized provider receipt, review handoff, and durable audit records were written.
+changed_files_current_task:
+  - scripts/run_exact_a5_provider_execution_packet.js
+  - scripts/validate_exact_a5_provider_execution_activation_receipt.js
+  - reports/provider_receipts/v0_6_73_real_vcp_agent_generation_one_shot_receipt.json
+  - review_console/live_receipt_bridge/v0_6_73_real_vcp_agent_generation_one_shot/bridge_entry.json
+  - docs/EXACT_A5_PROVIDER_EXECUTION_ACTIVATION_RESULT.md
+  - package.json
+  - scripts/validate_smoke.js
+  - scripts/validate_mvp_core.js
+  - README.md
+  - docs/RUNTIME_TO_PRODUCTION_LANDING_ROADMAP.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/VALIDATION_LOG.md
+ignored_local_evidence:
+  - .agent_private/runtime_audit_store/v0_6_73_real_vcp_agent_generation_one_shot/activation_attempt_001.audit.json
+validation_run:
+  - npm run validate:exact-a5-activation-receipt: passed
+  - npm run validate:smoke: passed
+  - npm run validate:mvp: passed
+  - node scripts/validate_agent_board_state.js: passed
+  - git diff --check: passed_with_line_ending_warnings_only
+  - npm run validate:all: failed at validate:capsule-regression legacy commit-readiness gates after smoke, MVP, runtime-kernel, review-bridge-readonly, durable-audit-store, provider-preflight, exact-a5-provider-packet, and exact-a5-activation-receipt passed; failure reason is the legacy fixed exact-file/post-commit proof gate does not recognize the current 27-file uncommitted runtime/A5 activation slice
+provider_calls_used: 0
+plugin_calls_used: 0
+api_calls_used: 0
+images_created: 0
+retry_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+env_file_content_read_performed: false
+secret_value_read_performed: false
+output_write_performed: false
+production_write_performed: false
+accepted_samples_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+push_status: not_performed
+next: bind_owner_authorized_secretless_provider_runtime_delegate
+```
+
+---
+
+## Checkpoint - Exact A5 Provider Execution Packet Draft
+
+```text
+phase: exact_a5_provider_execution_packet_draft
+status: completed_validated_inactive_exact_a5_provider_execution_packet_draft
+result: COMPLETED_VALIDATED
+mode: Amber_B provider/image execution packet draft; inactive
+summary: Added an exact inactive A5 NativeDoubao one-shot execution packet draft. It names authorization id AUTH-DRAFT-NATIVE-DOUBAO-ONE-SHOT-20260526-001, defines one provider/plugin/API call and one image with no retry, fixes output/receipt/review/audit refs, records rollback and stop conditions, and requires the exact owner activation phrase before execution.
+changed_files_current_task:
+  - adapters/runtime/exact_a5_provider_execution_packet_draft.js
+  - scripts/validate_exact_a5_provider_execution_packet_draft.js
+  - scripts/validate_smoke.js
+  - scripts/validate_mvp_core.js
+  - package.json
+  - docs/EXACT_A5_PROVIDER_EXECUTION_PACKET_DRAFT.md
+  - docs/RUNTIME_TO_PRODUCTION_LANDING_ROADMAP.md
+  - README.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/VALIDATION_LOG.md
+validation_run:
+  - node --check adapters/runtime/exact_a5_provider_execution_packet_draft.js: passed
+  - node --check scripts/validate_exact_a5_provider_execution_packet_draft.js: passed
+  - npm run validate:exact-a5-provider-packet: passed
+  - npm run validate:smoke: passed
+  - npm run validate:mvp: passed
+  - npm run validate:provider-preflight: passed
+  - npm run validate:runtime-kernel: passed
+  - npm run validate:review-bridge-readonly: passed
+  - npm run validate:durable-audit-store: passed
+  - node scripts/validate_agent_board_state.js: passed
+  - npm run validate:all: failed at validate:capsule-regression legacy commit-readiness checks while current task files are uncommitted; runtime/review/durable-audit/provider-preflight/exact-a5-packet validations above passed
+negative_cases:
+  - authorization_active_true_rejected: caught
+  - can_execute_now_true_rejected: caught
+  - activation_phrase_drift_rejected: caught
+  - unredacted_binding_rejected: caught
+  - provider_budget_overrun_rejected: caught
+  - retry_allowed_rejected: caught
+  - production_write_allowed_rejected: caught
+  - current_side_effect_true_rejected: caught
+  - unsafe_output_path_rejected: caught
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+env_file_content_read_performed: false
+secret_value_read_performed: false
+output_write_performed: false
+provider_receipt_write_performed: false
+review_handoff_write_performed: false
+durable_audit_write_performed: false
+production_write_performed: false
+accepted_samples_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+push_status: not_performed
+next: await_owner_decision_on_AUTH-DRAFT-NATIVE-DOUBAO-ONE-SHOT-20260526-001
+```
+
+---
+
+## Checkpoint - Provider Preflight No Provider Call
+
+```text
+phase: provider_preflight_no_provider_call
+status: completed_validated_provider_preflight_no_provider_call
+result: COMPLETED_VALIDATED
+mode: A4 Green local provider preflight
+summary: Added a no-provider-call preflight packet builder for NativeDoubao. The packet keeps can_execute_now=false, uses a redacted non-secret provider binding handle, sets provider/plugin/API/image/write budgets to zero, and validates the secretless runner preflight without env content or secret reads.
+changed_files_current_task:
+  - adapters/runtime/provider_preflight_no_provider_call.js
+  - scripts/validate_provider_preflight_no_provider_call.js
+  - scripts/validate_smoke.js
+  - scripts/validate_mvp_core.js
+  - package.json
+  - docs/PROVIDER_PREFLIGHT_NO_PROVIDER_CALL.md
+  - docs/RUNTIME_TO_PRODUCTION_LANDING_ROADMAP.md
+  - README.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/VALIDATION_LOG.md
+validation_run:
+  - node --check adapters/runtime/provider_preflight_no_provider_call.js: passed
+  - node --check scripts/validate_provider_preflight_no_provider_call.js: passed
+  - npm run validate:provider-preflight: passed
+  - npm run validate:smoke: passed
+  - npm run validate:mvp: passed
+  - npm run validate:runtime-kernel: passed
+  - npm run validate:review-bridge-readonly: passed
+  - npm run validate:durable-audit-store: passed
+  - node scripts/validate_agent_board_state.js: passed
+  - npm run validate:all: failed at validate:capsule-regression legacy commit-readiness checks while current task files are uncommitted; runtime/review/durable-audit/provider-preflight validations above passed
+negative_cases:
+  - can_execute_now_true_rejected: caught
+  - provider_call_budget_rejected: caught
+  - secret_read_allowed_rejected: caught
+  - side_effect_flag_true_rejected: caught
+  - unredacted_binding_rejected: caught
+  - unsafe_output_target_rejected: caught
+  - runner_secretless_mode_false_rejected: caught
+  - env_content_read_rejected: caught
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+env_file_content_read_performed: false
+secret_value_read_performed: false
+output_write_performed: false
+production_write_performed: false
+accepted_samples_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+push_status: not_performed
+next: exact_a5_provider_execution_packet_draft
+```
+
+---
+
+## Checkpoint - Durable Audit Store
+
+```text
+phase: durable_audit_store
+status: completed_validated_durable_audit_store
+result: COMPLETED_VALIDATED
+mode: A4 Green local runnable capability
+summary: Added a local Git-ignored durable audit store that writes immutable run audit, task index, and hash-chain records for Green and Red runtime results while keeping provider, image, production, memory, and push side effects false.
+changed_files_current_task:
+  - adapters/runtime/durable_audit_store.js
+  - scripts/validate_runtime_durable_audit_store.js
+  - scripts/validate_smoke.js
+  - scripts/validate_mvp_core.js
+  - package.json
+  - docs/DURABLE_AUDIT_STORE.md
+  - docs/RUNTIME_TO_PRODUCTION_LANDING_ROADMAP.md
+  - README.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/VALIDATION_LOG.md
+validation_run:
+  - node --check adapters/runtime/durable_audit_store.js: passed
+  - node --check scripts/validate_runtime_durable_audit_store.js: passed
+  - npm run validate:durable-audit-store: passed
+  - npm run validate:smoke: passed
+  - npm run validate:mvp: passed
+  - npm run validate:runtime-kernel: passed
+  - npm run validate:review-bridge-readonly: passed
+  - node scripts/validate_agent_board_state.js: passed
+  - npm run validate:all: failed at validate:capsule-regression legacy commit-readiness checks while current task files are uncommitted; runtime/review/durable-audit validations above passed
+negative_cases:
+  - duplicate_run_id_rejected: caught
+  - outside_store_root_rejected: caught
+  - traversal_store_root_rejected: caught
+  - dirty_side_effect_flag_rejected: caught
+  - red_review_bridge_rejected: caught
+  - review_bridge_task_drift_rejected: caught
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+production_write_performed: false
+accepted_samples_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+secret_value_read_performed: false
+push_status: not_performed
+next: provider_preflight_no_provider_call
+```
+
+---
+
+## Checkpoint - Review Bridge Readonly Stub
+
+```text
+phase: review_bridge_readonly_stub
+status: completed_validated_review_bridge_readonly_stub
+result: COMPLETED_VALIDATED
+mode: A4 Green local runnable capability
+summary: Added a read-only runtime-to-Review-Console bridge that converts completed Green runtime output into image_case_draft and review_session_draft while fail-closing Red runtime output and all write/external side effects.
+changed_files_current_task:
+  - adapters/runtime/review_bridge_readonly_stub.js
+  - scripts/validate_runtime_review_bridge_readonly_stub.js
+  - scripts/validate_smoke.js
+  - scripts/validate_mvp_core.js
+  - package.json
+  - docs/REVIEW_BRIDGE_READONLY_STUB.md
+  - docs/RUNTIME_TO_PRODUCTION_LANDING_ROADMAP.md
+  - README.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/VALIDATION_LOG.md
+validation_run:
+  - node --check adapters/runtime/review_bridge_readonly_stub.js: passed
+  - node --check scripts/validate_runtime_review_bridge_readonly_stub.js: passed
+  - npm run validate:smoke: passed
+  - npm run validate:mvp: passed
+  - npm run validate:review-bridge-readonly: passed
+  - npm run validate:runtime-kernel: passed
+  - npm run validate:all: failed at validate:capsule-regression legacy commit-readiness checks while current task files are uncommitted; review bridge runtime validations above passed
+negative_cases:
+  - red_runtime_result_rejected: caught
+  - side_effect_flag_true_rejected: caught
+  - artifact_next_adapter_drift_rejected: caught
+  - review_decision_drift_rejected: caught
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+production_write_performed: false
+accepted_samples_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+secret_value_read_performed: false
+push_status: not_performed
+next: durable_audit_store
+```
+
+---
+
 ## Checkpoint - State Surface Next Task Alignment v1
 
 ```text

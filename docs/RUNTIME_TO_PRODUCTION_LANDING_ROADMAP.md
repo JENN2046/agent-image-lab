@@ -33,9 +33,15 @@ production last
 - `runtime kernel v0 stub loop` 已完成并验证。
 - `runtime_kernel_v0_contract@v0.2` 已固定输入 / 输出 envelope / adapter slots / side-effect policy。
 - `artifact_adapter_stub_v0` 已接入 Green path。
+- `review_bridge_readonly_stub_v0` 已接入 Green read-only path。
+- `durable_audit_store_v0` 已接入 Green local audit path。
+- `provider_preflight_no_provider_call_v0` 已接入 Green provider preflight path。
+- `exact_a5_provider_execution_packet_draft_v0` 已生成 inactive exact A5 one-shot packet draft。
+- `AUTH-DRAFT-NATIVE-DOUBAO-ONE-SHOT-20260526-001` 已按精确授权短语尝试一次，结果为 `BLOCKED_SECRETLESS_RUNTIME_NOT_CALLABLE`，在 provider contact 前 fail-closed。
 - Green fixture 可以走到 `completed_stub`，路径为 `queued -> gated -> executed_stub -> artifact_recorded -> artifact_adapter_stubbed -> review_pending -> completed_stub`。
+- Green fixture runtime result can be mapped to Review Console-readable `image_case_draft` and `review_session_draft` with no write actions.
 - Red fixture 可以在 policy gate 进入 `blocked_red`，executor 不运行。
-- audit write 已进入受控本地 `.agent_private` 路线。
+- audit write and durable audit store 已进入受控本地 `.agent_private` 路线。
 - 这仍是 stub runtime，不是 production runtime。
 
 ## Landing Stages
@@ -199,9 +205,8 @@ production last
 
 推荐顺序：
 
-1. Implement `review_bridge_readonly_stub`.
-2. Promote audit write into a durable audit store.
-3. Add provider preflight only after local runtime/artifact/review/audit are stable.
+1. Bind an owner-authorized secretless provider runtime delegate for the NativeDoubao route, without reading or printing secret values.
+2. Start production workflow only after provider output can enter artifact / review / audit safely.
 
 ## Anti-Drift Rules
 

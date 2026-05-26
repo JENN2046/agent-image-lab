@@ -133,6 +133,120 @@ safeCheck("review_console_static_mock_basic_structure", () => {
     appSource.includes("window.REVIEW_CONSOLE_MOCK");
 });
 
+safeCheck("runtime_review_bridge_readonly_stub", () => {
+  const result = parseJson(runNode(["scripts/validate_runtime_review_bridge_readonly_stub.js"]));
+  return result.passed === true &&
+    result.adapter_id === "review_bridge_readonly_stub_v0" &&
+    result.display_only === true &&
+    result.writes_allowed_now === false &&
+    result.approve_reject_write_allowed_now === false &&
+    result.provider_contact_performed === false &&
+    result.image_generation_performed === false &&
+    result.production_write_performed === false &&
+    result.DailyNote_write_performed === false &&
+    result.VCP_memory_write_performed === false &&
+    result.all_negative_cases_caught === true;
+});
+
+safeCheck("runtime_durable_audit_store", () => {
+  const result = parseJson(runNode(["scripts/validate_runtime_durable_audit_store.js"]));
+  return result.passed === true &&
+    result.adapter_id === "durable_audit_store_v0" &&
+    result.store_root_git_ignored === true &&
+    result.hash_chain_verified === true &&
+    result.no_overwrite_verified === true &&
+    result.task_index_query_count === 2 &&
+    result.local_audit_write_performed === true &&
+    result.provider_contact_performed === false &&
+    result.image_generation_performed === false &&
+    result.production_write_performed === false &&
+    result.DailyNote_write_performed === false &&
+    result.VCP_memory_write_performed === false &&
+    result.all_negative_cases_caught === true;
+});
+
+safeCheck("provider_preflight_no_provider_call", () => {
+  const result = parseJson(runNode(["scripts/validate_provider_preflight_no_provider_call.js"]));
+  return result.passed === true &&
+    result.adapter_id === "provider_preflight_no_provider_call_v0" &&
+    result.can_execute_now === false &&
+    result.provider_binding_ref_redacted === true &&
+    result.provider_binding_ref_is_secret === false &&
+    result.secretless_runtime_required === true &&
+    result.provider_calls_budget === 0 &&
+    result.plugin_calls_budget === 0 &&
+    result.api_calls_budget === 0 &&
+    result.image_candidates_budget === 0 &&
+    result.max_write_count === 0 &&
+    result.runner_preflight_passed === true &&
+    result.runner_secretless_binding_mode === true &&
+    result.provider_contact_performed === false &&
+    result.plugin_call_performed === false &&
+    result.api_call_performed === false &&
+    result.image_generation_performed === false &&
+    result.env_file_content_read_performed === false &&
+    result.secret_value_read_performed === false &&
+    result.output_write_performed === false &&
+    result.production_write_performed === false &&
+    result.DailyNote_write_performed === false &&
+    result.VCP_memory_write_performed === false &&
+    result.all_negative_cases_caught === true;
+});
+
+safeCheck("exact_a5_provider_execution_packet_draft", () => {
+  const result = parseJson(runNode(["scripts/validate_exact_a5_provider_execution_packet_draft.js"]));
+  return result.passed === true &&
+    result.adapter_id === "exact_a5_provider_execution_packet_draft_v0" &&
+    result.authorization_status === "draft_not_active" &&
+    result.authorization_active === false &&
+    result.can_execute_now === false &&
+    result.requires_exact_user_activation === true &&
+    result.exact_activation_phrase_present === true &&
+    result.provider_binding_ref_redacted === true &&
+    result.provider_binding_ref_is_secret === false &&
+    result.max_provider_calls_when_activated === 1 &&
+    result.max_plugin_calls_when_activated === 1 &&
+    result.max_api_calls_when_activated === 1 &&
+    result.max_images_created_when_activated === 1 &&
+    result.retry_allowed === false &&
+    result.current_provider_calls === 0 &&
+    result.current_image_candidates === 0 &&
+    result.provider_contact_performed === false &&
+    result.plugin_call_performed === false &&
+    result.api_call_performed === false &&
+    result.image_generation_performed === false &&
+    result.env_file_content_read_performed === false &&
+    result.secret_value_read_performed === false &&
+    result.output_write_performed === false &&
+    result.production_write_performed === false &&
+    result.DailyNote_write_performed === false &&
+    result.VCP_memory_write_performed === false &&
+    result.all_negative_cases_caught === true;
+});
+
+safeCheck("exact_a5_activation_receipt", () => {
+  const result = parseJson(runNode(["scripts/validate_exact_a5_provider_execution_activation_receipt.js"]));
+  return result.passed === true &&
+    result.authorization_id === "AUTH-DRAFT-NATIVE-DOUBAO-ONE-SHOT-20260526-001" &&
+    result.execution_status === "BLOCKED_SECRETLESS_RUNTIME_NOT_CALLABLE" &&
+    result.execution_blocked_fail_closed === true &&
+    result.provider_calls_used === 0 &&
+    result.plugin_calls_used === 0 &&
+    result.api_calls_used === 0 &&
+    result.images_created === 0 &&
+    result.provider_contact_performed === false &&
+    result.plugin_call_performed === false &&
+    result.api_call_performed === false &&
+    result.image_generation_performed === false &&
+    result.env_file_content_read_performed === false &&
+    result.secret_value_read_performed === false &&
+    result.retry_performed === false &&
+    result.production_write_performed === false &&
+    result.accepted_samples_write_performed === false &&
+    result.DailyNote_write_performed === false &&
+    result.VCP_memory_write_performed === false;
+});
+
 const failed = checks.filter((check) => !check.passed);
 const output = {
   passed: failed.length === 0,

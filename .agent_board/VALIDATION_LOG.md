@@ -1,5 +1,238 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260526-EXACT-A5-PROVIDER-EXECUTION-ACTIVATION-RESULT
+
+Task: exact_a5_provider_execution_activation_result
+Status: blocked_fail_closed_before_provider_contact
+Receipt:
+  - lane: Amber_B exact owner-authorized one-shot attempt
+  - authorization_id: AUTH-DRAFT-NATIVE-DOUBAO-ONE-SHOT-20260526-001
+  - activation_phrase_matched: true
+  - execution_status: BLOCKED_SECRETLESS_RUNTIME_NOT_CALLABLE
+  - execution_blocked_fail_closed: true
+  - receipt_ref: reports/provider_receipts/v0_6_73_real_vcp_agent_generation_one_shot_receipt.json
+  - review_handoff_ref: review_console/live_receipt_bridge/v0_6_73_real_vcp_agent_generation_one_shot/bridge_entry.json
+  - durable_audit_ref: .agent_private/runtime_audit_store/v0_6_73_real_vcp_agent_generation_one_shot/activation_attempt_001.audit.json
+  - provider_calls_used: 0
+  - plugin_calls_used: 0
+  - api_calls_used: 0
+  - images_created: 0
+  - retry_performed: false
+  - provider_contact_performed: false
+  - plugin_call_performed: false
+  - api_call_performed: false
+  - image_generation_performed: false
+  - env_file_content_read_performed: false
+  - secret_value_read_performed: false
+  - output_write_performed: false
+  - production_write_performed: false
+  - accepted_samples_write_performed: false
+  - DailyNote_write_performed: false
+  - VCP_memory_write_performed: false
+Validation:
+  - npm run validate:exact-a5-activation-receipt: passed
+  - npm run validate:smoke: passed
+  - npm run validate:mvp: passed
+  - node scripts/validate_agent_board_state.js: passed
+  - git diff --check: passed_with_line_ending_warnings_only
+  - npm run validate:all: failed at validate:capsule-regression legacy commit-readiness gates after smoke, MVP, runtime-kernel, review-bridge-readonly, durable-audit-store, provider-preflight, exact-a5-provider-packet, and exact-a5-activation-receipt passed; failure reason is the legacy fixed exact-file/post-commit proof gate does not recognize the current 27-file uncommitted runtime/A5 activation slice
+Next:
+  - bind_owner_authorized_secretless_provider_runtime_delegate
+
+## VALIDATION-20260526-EXACT-A5-PROVIDER-EXECUTION-PACKET-DRAFT
+
+Task: exact_a5_provider_execution_packet_draft
+Status: completed_validated_inactive_draft
+Receipt:
+  - lane: Amber_B provider/image execution packet draft; inactive
+  - phase: exact_a5_provider_execution_packet_draft
+  - adapter: adapters/runtime/exact_a5_provider_execution_packet_draft.js
+  - validator: scripts/validate_exact_a5_provider_execution_packet_draft.js
+  - authorization_id: AUTH-DRAFT-NATIVE-DOUBAO-ONE-SHOT-20260526-001
+  - authorization_status: draft_not_active
+  - authorization_active: false
+  - can_execute_now: false
+  - exact_activation_phrase_recorded: true
+  - max_provider_calls_when_activated: 1
+  - max_plugin_calls_when_activated: 1
+  - max_api_calls_when_activated: 1
+  - max_images_created_when_activated: 1
+  - retry_allowed: false
+  - provider_contact_performed: false
+  - plugin_call_performed: false
+  - api_call_performed: false
+  - image_generation_performed: false
+  - env_file_content_read_performed: false
+  - secret_value_read_performed: false
+  - output_write_performed: false
+  - provider_receipt_write_performed: false
+  - review_handoff_write_performed: false
+  - durable_audit_write_performed: false
+  - production_write_performed: false
+  - accepted_samples_write_performed: false
+  - DailyNote_write_performed: false
+  - VCP_memory_write_performed: false
+  - push_status: not_performed
+Validation:
+  - node --check adapters/runtime/exact_a5_provider_execution_packet_draft.js: passed
+  - node --check scripts/validate_exact_a5_provider_execution_packet_draft.js: passed
+  - npm run validate:exact-a5-provider-packet: passed
+  - npm run validate:smoke: passed
+  - npm run validate:mvp: passed
+  - npm run validate:provider-preflight: passed
+  - npm run validate:runtime-kernel: passed
+  - npm run validate:review-bridge-readonly: passed
+  - npm run validate:durable-audit-store: passed
+  - node scripts/validate_agent_board_state.js: passed
+  - npm run validate:all: failed at validate:capsule-regression legacy commit-readiness checks while current task files are uncommitted; runtime/review/durable-audit/provider-preflight/exact-a5-packet validations above passed
+Validator result:
+  - adapter_id: exact_a5_provider_execution_packet_draft_v0
+  - packet_schema: exact_a5_provider_execution_packet_draft.v0
+  - negative_case_count: 9
+  - caught_negative_case_count: 9
+  - all_negative_cases_caught: true
+Next:
+  - await_owner_decision_on_AUTH-DRAFT-NATIVE-DOUBAO-ONE-SHOT-20260526-001
+
+## VALIDATION-20260526-PROVIDER-PREFLIGHT-NO-PROVIDER-CALL
+
+Task: provider_preflight_no_provider_call
+Status: completed_validated
+Receipt:
+  - lane: A4 Green local provider preflight
+  - phase: provider_preflight_no_provider_call
+  - adapter: adapters/runtime/provider_preflight_no_provider_call.js
+  - validator: scripts/validate_provider_preflight_no_provider_call.js
+  - can_execute_now: false
+  - provider_binding_ref_redacted: true
+  - provider_binding_ref_is_secret: false
+  - provider_calls_budget: 0
+  - plugin_calls_budget: 0
+  - api_calls_budget: 0
+  - image_candidates_budget: 0
+  - max_write_count: 0
+  - provider_contact_performed: false
+  - plugin_call_performed: false
+  - api_call_performed: false
+  - image_generation_performed: false
+  - env_file_content_read_performed: false
+  - secret_value_read_performed: false
+  - output_write_performed: false
+  - production_write_performed: false
+  - accepted_samples_write_performed: false
+  - DailyNote_write_performed: false
+  - VCP_memory_write_performed: false
+  - push_status: not_performed
+Validation:
+  - node --check adapters/runtime/provider_preflight_no_provider_call.js: passed
+  - node --check scripts/validate_provider_preflight_no_provider_call.js: passed
+  - npm run validate:provider-preflight: passed
+  - npm run validate:smoke: passed
+  - npm run validate:mvp: passed
+  - npm run validate:runtime-kernel: passed
+  - npm run validate:review-bridge-readonly: passed
+  - npm run validate:durable-audit-store: passed
+  - node scripts/validate_agent_board_state.js: passed
+  - npm run validate:all: failed at validate:capsule-regression legacy commit-readiness checks while current task files are uncommitted; runtime/review/durable-audit/provider-preflight validations above passed
+Validator result:
+  - adapter_id: provider_preflight_no_provider_call_v0
+  - packet_schema: provider_preflight_no_provider_call.v0
+  - runner_preflight_passed: true
+  - runner_secretless_binding_mode: true
+  - negative_case_count: 8
+  - caught_negative_case_count: 8
+  - all_negative_cases_caught: true
+Next:
+  - exact_a5_provider_execution_packet_draft
+
+## VALIDATION-20260526-DURABLE-AUDIT-STORE
+
+Task: durable_audit_store
+Status: completed_validated
+Receipt:
+  - lane: A4 Green local runnable capability
+  - phase: durable_audit_store
+  - adapter: adapters/runtime/durable_audit_store.js
+  - validator: scripts/validate_runtime_durable_audit_store.js
+  - store_root: .agent_private/runtime_audit_store/
+  - immutable_run_record_created: true
+  - task_index_record_created: true
+  - hash_chain_record_created: true
+  - local_audit_write_performed: true
+  - provider_contact_performed: false
+  - plugin_call_performed: false
+  - api_call_performed: false
+  - image_generation_performed: false
+  - production_write_performed: false
+  - accepted_samples_write_performed: false
+  - DailyNote_write_performed: false
+  - VCP_memory_write_performed: false
+  - secret_value_read_performed: false
+  - push_status: not_performed
+Validation:
+  - node --check adapters/runtime/durable_audit_store.js: passed
+  - node --check scripts/validate_runtime_durable_audit_store.js: passed
+  - npm run validate:durable-audit-store: passed
+  - npm run validate:smoke: passed
+  - npm run validate:mvp: passed
+  - npm run validate:runtime-kernel: passed
+  - npm run validate:review-bridge-readonly: passed
+  - node scripts/validate_agent_board_state.js: passed
+  - npm run validate:all: failed at validate:capsule-regression legacy commit-readiness checks while current task files are uncommitted; runtime/review/durable-audit validations above passed
+Validator result:
+  - adapter_id: durable_audit_store_v0
+  - store_schema: runtime_durable_audit_store.v0
+  - store_root_git_ignored: true
+  - hash_chain_verified: true
+  - no_overwrite_verified: true
+  - negative_case_count: 6
+  - caught_negative_case_count: 6
+  - all_negative_cases_caught: true
+Next:
+  - provider_preflight_no_provider_call
+
+## VALIDATION-20260526-REVIEW-BRIDGE-READONLY-STUB
+
+Task: review_bridge_readonly_stub
+Status: completed_validated
+Receipt:
+  - lane: A4 Green local runnable capability
+  - phase: review_bridge_readonly_stub
+  - adapter: adapters/runtime/review_bridge_readonly_stub.js
+  - validator: scripts/validate_runtime_review_bridge_readonly_stub.js
+  - review_session_draft_created: true
+  - image_case_draft_created: true
+  - red_runtime_result_rejected: true
+  - provider_contact_performed: false
+  - plugin_call_performed: false
+  - api_call_performed: false
+  - image_generation_performed: false
+  - production_write_performed: false
+  - accepted_samples_write_performed: false
+  - DailyNote_write_performed: false
+  - VCP_memory_write_performed: false
+  - secret_value_read_performed: false
+  - push_status: not_performed
+Validation:
+  - node --check adapters/runtime/review_bridge_readonly_stub.js: passed
+  - node --check scripts/validate_runtime_review_bridge_readonly_stub.js: passed
+  - npm run validate:smoke: passed
+  - npm run validate:mvp: passed
+  - npm run validate:review-bridge-readonly: passed
+  - npm run validate:runtime-kernel: passed
+  - npm run validate:all: failed at validate:capsule-regression legacy commit-readiness checks while current task files are uncommitted; review bridge runtime validations above passed
+Validator result:
+  - adapter_id: review_bridge_readonly_stub_v0
+  - adapter_state: review_bridge_readonly_stubbed
+  - display_only: true
+  - writes_allowed_now: false
+  - approve_reject_write_allowed_now: false
+  - negative_case_count: 4
+  - caught_negative_case_count: 4
+  - all_negative_cases_caught: true
+Next:
+  - durable_audit_store
+
 ## VALIDATION-20260526-STATE-SURFACE-NEXT-TASK-ALIGNMENT-V1
 
 Task: state_surface_next_task_alignment_v1

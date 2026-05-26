@@ -72,7 +72,13 @@ safeCheck("package_json_parseable", () => {
   "scripts/serve_review_console_static.js",
   "scripts/agent_image_lab_read_only_adapter.js",
   "scripts/run_native_doubao_image_generation.js",
+  "scripts/run_exact_a5_provider_execution_packet.js",
+  "scripts/validate_exact_a5_provider_execution_activation_receipt.js",
   "adapters/image_generation/native_doubao_adapter.js",
+  "adapters/runtime/review_bridge_readonly_stub.js",
+  "adapters/runtime/durable_audit_store.js",
+  "adapters/runtime/provider_preflight_no_provider_call.js",
+  "adapters/runtime/exact_a5_provider_execution_packet_draft.js",
   "plugins/image_generation/native_doubao_image/native_doubao_image.js",
   "review_console/static_prototype/index.html",
   "review_console/static_prototype/app.js",
@@ -85,8 +91,13 @@ safeCheck("package_json_parseable", () => {
   "scripts/create_preview_capsule.js",
   "scripts/agent_image_lab_read_only_adapter.js",
   "scripts/run_native_doubao_image_generation.js",
+  "scripts/run_exact_a5_provider_execution_packet.js",
   "scripts/serve_review_console_static.js",
   "adapters/image_generation/native_doubao_adapter.js",
+  "adapters/runtime/review_bridge_readonly_stub.js",
+  "adapters/runtime/durable_audit_store.js",
+  "adapters/runtime/provider_preflight_no_provider_call.js",
+  "adapters/runtime/exact_a5_provider_execution_packet_draft.js",
 ].forEach((file) => {
   safeCheck(`core_js_require:${file}`, () => requireModule(file));
 });

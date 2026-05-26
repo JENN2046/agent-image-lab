@@ -1,5 +1,241 @@
 ---
 
+## Current Handoff Update - Exact A5 Provider Execution Activation Result
+
+```text
+phase: exact_a5_provider_execution_activation_result
+status: BLOCKED_FAIL_CLOSED_BEFORE_PROVIDER_CONTACT
+mode: Amber_B exact owner-authorized one-shot attempt; stopped before provider contact
+branch: master
+summary: The exact activation phrase for AUTH-DRAFT-NATIVE-DOUBAO-ONE-SHOT-20260526-001 was received and the one-shot runner was invoked. The run returned BLOCKED_SECRETLESS_RUNTIME_NOT_CALLABLE before provider contact because no callable owner-authorized secretless_provider_runtime delegate is available. Provider receipt, review handoff, and durable audit evidence were recorded.
+receipt_ref: reports/provider_receipts/v0_6_73_real_vcp_agent_generation_one_shot_receipt.json
+review_handoff_ref: review_console/live_receipt_bridge/v0_6_73_real_vcp_agent_generation_one_shot/bridge_entry.json
+durable_audit_ref: .agent_private/runtime_audit_store/v0_6_73_real_vcp_agent_generation_one_shot/activation_attempt_001.audit.json
+validation_run:
+  - npm run validate:exact-a5-activation-receipt: passed
+  - npm run validate:smoke: passed
+  - npm run validate:mvp: passed
+  - node scripts/validate_agent_board_state.js: passed
+  - git diff --check: passed_with_line_ending_warnings_only
+  - npm run validate:all: failed at validate:capsule-regression legacy commit-readiness gates after smoke, MVP, runtime-kernel, review-bridge-readonly, durable-audit-store, provider-preflight, exact-a5-provider-packet, and exact-a5-activation-receipt passed; failure reason is the legacy fixed exact-file/post-commit proof gate does not recognize the current 27-file uncommitted runtime/A5 activation slice
+provider_calls_used: 0
+plugin_calls_used: 0
+api_calls_used: 0
+images_created: 0
+retry_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+env_file_content_read_performed: false
+secret_value_read_performed: false
+output_write_performed: false
+production_write_performed: false
+accepted_samples_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+push_status: not_performed
+next_safe_task: bind_owner_authorized_secretless_provider_runtime_delegate
+```
+
+---
+
+## Current Handoff Update - Exact A5 Provider Execution Packet Draft
+
+```text
+phase: exact_a5_provider_execution_packet_draft
+status: COMPLETED_VALIDATED_INACTIVE_EXACT_A5_PROVIDER_EXECUTION_PACKET_DRAFT
+mode: Amber_B provider/image execution packet draft; inactive; no provider contact, no plugin call, no API call, no image generation, no secret read, no output write, no push
+branch: master
+summary: Added the exact inactive A5 NativeDoubao one-shot execution packet draft. The packet fixes authorization id, activation phrase, one-shot budget, output directory, provider receipt, review handoff, durable audit store, rollback, and stop conditions. It cannot execute until the owner sends the exact activation phrase.
+authorization_id: AUTH-DRAFT-NATIVE-DOUBAO-ONE-SHOT-20260526-001
+authorization_status: draft_not_active
+authorization_active: false
+can_execute_now: false
+changed_files_current_task:
+  - adapters/runtime/exact_a5_provider_execution_packet_draft.js
+  - scripts/validate_exact_a5_provider_execution_packet_draft.js
+  - scripts/validate_smoke.js
+  - scripts/validate_mvp_core.js
+  - package.json
+  - docs/EXACT_A5_PROVIDER_EXECUTION_PACKET_DRAFT.md
+  - docs/RUNTIME_TO_PRODUCTION_LANDING_ROADMAP.md
+  - README.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/VALIDATION_LOG.md
+validation_status: completed_validated
+validation_run:
+  - npm run validate:exact-a5-provider-packet: passed with 9/9 negative cases caught
+  - npm run validate:smoke: passed
+  - npm run validate:mvp: passed
+  - npm run validate:provider-preflight: passed
+  - npm run validate:runtime-kernel: passed
+  - npm run validate:review-bridge-readonly: passed
+  - npm run validate:durable-audit-store: passed
+  - node scripts/validate_agent_board_state.js: passed
+  - npm run validate:all: failed at validate:capsule-regression legacy commit-readiness checks while current task files are uncommitted; runtime/review/durable-audit/provider-preflight/exact-a5-packet validations above passed
+push_status: not_performed
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+env_file_content_read_performed: false
+secret_value_read_performed: false
+output_write_performed: false
+provider_receipt_write_performed: false
+review_handoff_write_performed: false
+durable_audit_write_performed: false
+production_write_performed: false
+accepted_samples_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+next_safe_task: await_owner_decision_on_AUTH-DRAFT-NATIVE-DOUBAO-ONE-SHOT-20260526-001
+```
+
+---
+
+## Current Handoff Update - Provider Preflight No Provider Call
+
+```text
+phase: provider_preflight_no_provider_call
+status: COMPLETED_VALIDATED_PROVIDER_PREFLIGHT_NO_PROVIDER_CALL
+mode: A4 Green local provider preflight; no provider contact, no plugin call, no API call, no image generation, no secret read, no output write, no push
+branch: master
+summary: Added the NativeDoubao no-provider-call preflight packet builder. It reuses the secretless runner preflight, keeps can_execute_now=false, redacts the provider binding ref, sets provider/plugin/API/image/write budgets to zero, and fail-closes unsafe execution or secret/provider drift.
+changed_files_current_task:
+  - adapters/runtime/provider_preflight_no_provider_call.js
+  - scripts/validate_provider_preflight_no_provider_call.js
+  - scripts/validate_smoke.js
+  - scripts/validate_mvp_core.js
+  - package.json
+  - docs/PROVIDER_PREFLIGHT_NO_PROVIDER_CALL.md
+  - docs/RUNTIME_TO_PRODUCTION_LANDING_ROADMAP.md
+  - README.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/VALIDATION_LOG.md
+validation_status: completed_validated
+validation_run:
+  - npm run validate:provider-preflight: passed with 8/8 negative cases caught
+  - npm run validate:smoke: passed
+  - npm run validate:mvp: passed
+  - npm run validate:runtime-kernel: passed
+  - npm run validate:review-bridge-readonly: passed
+  - npm run validate:durable-audit-store: passed
+  - node scripts/validate_agent_board_state.js: passed
+  - npm run validate:all: failed at validate:capsule-regression legacy commit-readiness checks while current task files are uncommitted; runtime/review/durable-audit/provider-preflight validations above passed
+push_status: not_performed
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+env_file_content_read_performed: false
+secret_value_read_performed: false
+output_write_performed: false
+production_write_performed: false
+accepted_samples_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+next_safe_task: exact_a5_provider_execution_packet_draft
+```
+
+---
+
+## Current Handoff Update - Durable Audit Store
+
+```text
+phase: durable_audit_store
+status: COMPLETED_VALIDATED_DURABLE_AUDIT_STORE
+mode: A4 Green local runnable capability; local Git-ignored audit writes only; no provider, no image generation, no production write, no memory write, no push
+branch: master
+summary: Added the local durable audit store for runtime results. It writes immutable run audit, task index, and hash-chain records under .agent_private/runtime_audit_store/, stores Green review bridge metadata only as read-only evidence, stores Red blocked_red audit evidence without review bridge metadata, and fails closed on duplicate/unsafe/drift cases.
+changed_files_current_task:
+  - adapters/runtime/durable_audit_store.js
+  - scripts/validate_runtime_durable_audit_store.js
+  - scripts/validate_smoke.js
+  - scripts/validate_mvp_core.js
+  - package.json
+  - docs/DURABLE_AUDIT_STORE.md
+  - docs/RUNTIME_TO_PRODUCTION_LANDING_ROADMAP.md
+  - README.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/VALIDATION_LOG.md
+validation_status: completed_validated
+validation_run:
+  - npm run validate:durable-audit-store: passed with 6/6 negative cases caught
+  - npm run validate:smoke: passed
+  - npm run validate:mvp: passed
+  - npm run validate:runtime-kernel: passed
+  - npm run validate:review-bridge-readonly: passed
+  - node scripts/validate_agent_board_state.js: passed
+  - npm run validate:all: failed at validate:capsule-regression legacy commit-readiness checks while current task files are uncommitted; runtime/review/durable-audit validations above passed
+push_status: not_performed
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+production_write_performed: false
+accepted_samples_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+secret_value_read_performed: false
+next_safe_task: provider_preflight_no_provider_call
+```
+
+---
+
+## Current Handoff Update - Review Bridge Readonly Stub
+
+```text
+phase: review_bridge_readonly_stub
+status: COMPLETED_VALIDATED_REVIEW_BRIDGE_READONLY_STUB
+mode: A4 Green local runnable capability; no provider, no image generation, no production write, no memory write, no push
+branch: master
+summary: Added the local read-only Review Console bridge for completed runtime output. It maps runtime task/artifact/audit/state evidence into image_case_draft and review_session_draft, rejects Red runtime output, and keeps all write/external side-effect flags false.
+changed_files_current_task:
+  - adapters/runtime/review_bridge_readonly_stub.js
+  - scripts/validate_runtime_review_bridge_readonly_stub.js
+  - scripts/validate_smoke.js
+  - scripts/validate_mvp_core.js
+  - package.json
+  - docs/REVIEW_BRIDGE_READONLY_STUB.md
+  - docs/RUNTIME_TO_PRODUCTION_LANDING_ROADMAP.md
+  - README.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/VALIDATION_LOG.md
+validation_status: completed_validated
+validation_run:
+  - npm run validate:smoke: passed
+  - npm run validate:mvp: passed
+  - npm run validate:review-bridge-readonly: passed with 4/4 negative cases caught
+  - npm run validate:runtime-kernel: passed
+  - npm run validate:all: failed at validate:capsule-regression legacy commit-readiness checks while current task files are uncommitted; review bridge runtime validations above passed
+push_status: not_performed
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+production_write_performed: false
+accepted_samples_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+secret_value_read_performed: false
+next_safe_task: durable_audit_store
+```
+
+---
+
 ## Current Handoff Update - State Surface Next Task Alignment v1
 
 ```text
