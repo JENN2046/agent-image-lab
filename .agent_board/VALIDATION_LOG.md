@@ -25021,6 +25021,45 @@ Boundary:
   - Push_L2_exercised: false
 ---
 
+## Validation - v0.6.109 Runtime Kernel Entry Boundary No Exec
+
+```text
+phase: v0_6_109_runtime_kernel_entry_boundary_no_exec
+status: passed
+commands:
+  - node --check scripts/validate_runtime_kernel_entry_boundary_no_exec.js
+  - node scripts/validate_runtime_kernel_entry_boundary_no_exec.js
+  - git diff --check
+  - npm run validate:smoke
+  - npm run validate:mvp
+  - npm run validate:public-disclosure
+  - node scripts/validate_autopilot_agent_board_resume_compaction_guard.js
+  - node scripts/validate_pending_sync_broad_stack_group_review_no_push.js
+result:
+  dedicated_validator: passed
+  git_diff_check: passed
+  validate_smoke: passed
+  validate_mvp: passed
+  validate_public_disclosure: passed
+  resume_compaction_guard: passed
+  pending_sync_broad_stack_group_review_validator: passed
+  negative_cases_caught: 8/8
+  runtime_kernel_code_created: false
+  runtime_implementation_authorized_now: false
+  recommended_next: create_runtime_contract_schema_no_exec
+side_effects:
+  runtime_code_created: false
+  executor_created: false
+  provider_contact_performed: false
+  image_generation_performed: false
+  production_write_performed: false
+  secret_value_read_performed: false
+  push_performed: false
+  tag_release_deploy_performed: false
+```
+
+---
+
 ## Validation - v0.6.108 Pending Sync Broad Stack Group Review No Push
 
 ```text
