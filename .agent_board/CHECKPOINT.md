@@ -4,8 +4,8 @@
 
 ```text
 phase: v0_6_81_native_doubao_streamed_download_and_decode_safety
-status: completed_targeted_validated_pending_mvp_clean_rerun
-result: COMPLETED_TARGETED_VALIDATED
+status: completed_validated_native_doubao_streamed_download_and_decode_safety
+result: COMPLETED_VALIDATED
 mode: Green local provider output safety hardening only
 active_current_phase: v0_3_3_first_live_generation_pilot
 resume_guard_source_phase: v0_3_2_live_candidate_action_packet
@@ -33,8 +33,9 @@ validation_run:
   - node --check plugin and validators: passed
   - node scripts/validate_native_doubao_sandbox.js: passed with 70 checks
   - node scripts/validate_v7_20_native_doubao_real_runner_implementation.js: passed with 37 checks
-  - npm run validate:mvp: failed before local commit because readiness validators require a clean committed state
-next: commit_exact_allowlist_then_rerun_validate_mvp
+  - npm run validate:mvp: failed before local code commit because readiness validators require a clean committed state
+  - npm run validate:mvp: passed after local code commit 5150d4f
+next: continue_provider_output_safety_gap_queue
 ```
 
 ---

@@ -2,13 +2,13 @@
 
 - [x] ID: v0_6_81_native_doubao_streamed_download_and_decode_safety
       Lane: Green local provider output safety hardening only.
-      Status: COMPLETED_TARGETED_VALIDATED_PENDING_MVP_CLEAN_RERUN.
+      Status: COMPLETED_VALIDATED_NATIVE_DOUBAO_STREAMED_DOWNLOAD_AND_DECODE_SAFETY.
       Goal: Replace URL download arrayBuffer buffering with streamed byte limits and add sharp decode/dimension validation before image persistence.
       Active current phase: v0_3_3_first_live_generation_pilot.
       Resume guard source phase: v0_3_2_live_candidate_action_packet.
       Legacy active next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
       Changed files: plugins/image_generation/native_doubao_image/native_doubao_image.js; scripts/validate_native_doubao_sandbox.js; scripts/validate_v7_20_native_doubao_real_runner_implementation.js.
-      Validation run: node --check plugin and validators passed; node scripts/validate_native_doubao_sandbox.js passed with 70 checks; node scripts/validate_v7_20_native_doubao_real_runner_implementation.js passed with 37 checks; npm run validate:mvp failed before local commit because readiness validators require a clean committed state.
+      Validation run: node --check plugin and validators passed; node scripts/validate_native_doubao_sandbox.js passed with 70 checks; node scripts/validate_v7_20_native_doubao_real_runner_implementation.js passed with 37 checks; npm run validate:mvp failed before local code commit because readiness validators require a clean committed state; npm run validate:mvp passed after local code commit 5150d4f.
       provider_contact_performed: false.
       plugin_call_performed: false.
       api_call_performed: false.
@@ -23,7 +23,7 @@
       DailyNote_write_performed: false.
       VCP_memory_write_performed: false.
       push_status: not_performed.
-      Next: commit_exact_allowlist_then_rerun_validate_mvp.
+      Next: continue_provider_output_safety_gap_queue.
 
 ---
 
