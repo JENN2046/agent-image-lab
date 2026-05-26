@@ -4,9 +4,12 @@
 
 ```text
 phase: v0_6_87_review_findings_contract_fix
-status: completed_targeted_validated_pending_clean_mvp
-result: TARGETED_VALIDATED
+status: completed_validated_review_findings_contract_fix
+result: COMPLETED_VALIDATED
 mode: Green local review finding fixes only
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+legacy_active_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
 summary: Fixed the reviewed contract gaps by keeping Review Console static approvals as draft-only/no-persistence outputs and aligning runtime gap schema fields with the fixture/validator contract.
 changed_files_current_task:
   - review_console/static_prototype/app.js
@@ -30,7 +33,8 @@ validation_run:
   - npm run validate:review-console-static: passed
   - npm run validate:runtime-kernel-gap: passed
   - npm run validate:mvp: failed before local commit because repository readiness validators require a clean committed state
-next: run_clean_mvp_after_guarded_local_commit
+  - npm run validate:mvp: passed after final clean committed state validation
+next: no_next_task_selected
 ```
 
 ---

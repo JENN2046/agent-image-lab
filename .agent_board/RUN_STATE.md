@@ -4,10 +4,13 @@
 
 ```text
 phase: v0_6_87_review_findings_contract_fix
-status: COMPLETED_TARGETED_VALIDATED_PENDING_CLEAN_MVP
+status: COMPLETED_VALIDATED_REVIEW_FINDINGS_CONTRACT_FIX
 mode: Green local review finding fixes only; no provider/plugin/API/image/output/secret/memory execution
 workspace: A:\agent-image-lab\agent-image-lab-v0.2
 branch: master
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+legacy_active_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
 goal_objective: fix review findings for Review Console static draft-only claims and runtime gap schema/validator drift
 changed_files_current_task:
   - review_console/static_prototype/app.js
@@ -31,6 +34,7 @@ validation_run:
   - npm run validate:review-console-static: passed
   - npm run validate:runtime-kernel-gap: passed
   - npm run validate:mvp: failed before local commit because repository readiness validators require a clean committed state
+  - npm run validate:mvp: passed after final clean committed state validation
 provider_contact_performed: false
 plugin_call_performed: false
 api_call_performed: false
@@ -42,7 +46,7 @@ secret_value_read_performed: false
 DailyNote_write_performed: false
 VCP_memory_write_performed: false
 push_status: not_performed
-next_safe_task: run_clean_mvp_after_guarded_local_commit
+next_safe_task: no_next_task_selected
 ```
 
 ---
