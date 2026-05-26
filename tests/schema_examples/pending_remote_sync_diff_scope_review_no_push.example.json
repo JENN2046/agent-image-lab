@@ -1,0 +1,103 @@
+{
+  "pending_remote_sync_diff_scope_review_no_push": {
+    "version": "v1",
+    "phase": "v0_6_106_pending_remote_sync_diff_scope_review_no_push",
+    "status": "completed_validated_pending_remote_sync_diff_scope_review_no_push",
+    "execution_mode": "pending_remote_sync_diff_scope_review_no_push",
+    "lane_attempted": "Green_local_diff_scope_review",
+    "lane_executed": "Green_local_diff_scope_review",
+    "source_phase": "v0_6_105_remote_sync_authorization_packet_no_push",
+    "git_state_observed_before_checkpoint_commit": {
+      "branch": "master",
+      "tracking_ref": "origin/master",
+      "local_head_short": "e9be889",
+      "ahead_count": 47,
+      "behind_count": 0,
+      "worktree_clean_before_checkpoint_edits": true
+    },
+    "diff_scope_observed_before_checkpoint_commit": {
+      "comparison": "origin/master...HEAD",
+      "total_paths": 109,
+      "added_paths": 94,
+      "modified_paths": 14,
+      "deleted_paths": 1,
+      "binary_like_paths_detected": false,
+      "patch_hunks_printed": false,
+      "local_config_content_read": false,
+      "top_level_counts": {
+        "tests": 28,
+        "reports": 26,
+        "scripts": 25,
+        "docs": 16,
+        ".agent_board": 5,
+        "configs": 2,
+        "review_console": 2,
+        "schemas": 2,
+        "package.json": 1,
+        "plugins": 1,
+        "runs": 1
+      },
+      "notable_paths": {
+        "local_config_detrack_index_delete": "configs/local_paths/doubaogen_plugin_dir.local.yaml",
+        "package_json_modified": true,
+        "provider_adjacent_plugin_modified": true,
+        "review_console_static_modified": true,
+        "runs_metadata_modified": true,
+        "scripts_modified": true
+      }
+    },
+    "detrack_postcondition_carried_forward": {
+      "target_ref": "configs/local_paths/doubaogen_plugin_dir.local.yaml",
+      "working_copy_file_exists_after": true,
+      "git_tracking_removed_after": true,
+      "git_ls_files_returns_target_after": false,
+      "gitignore_rule_effective_after": true,
+      "local_config_content_read": false
+    },
+    "risk_classification": {
+      "tiny_docs_only_push_candidate": false,
+      "broad_diff_requires_explicit_review_before_push": true,
+      "remote_write_authorized_now": false,
+      "push_ready_now": false,
+      "pr_ready_now": false,
+      "reason": "Pending stack spans docs, reports, scripts, governance state, Review Console static prototype files, provider-adjacent code, runs metadata, package.json, schemas, and an expected de-track index deletion."
+    },
+    "validation_observed": {
+      "node_check_validator": "passed",
+      "dedicated_validator": "passed",
+      "npm_run_validate_public_disclosure": "passed",
+      "npm_run_validate_smoke": "passed",
+      "npm_run_validate_mvp": "passed",
+      "resume_compaction_guard": "passed",
+      "git_diff_check": "passed"
+    },
+    "guard": {
+      "push_performed": false,
+      "pr_created": false,
+      "tag_release_deploy_performed": false,
+      "fetch_merge_rebase_performed": false,
+      "patch_hunks_printed": false,
+      "local_config_content_read": false,
+      "working_copy_delete_performed": false,
+      "secret_value_read_performed": false,
+      "env_file_content_read_performed": false,
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "image_generation_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "Codex_memory_write_performed": false,
+      "production_candidate_write_performed": false
+    },
+    "go_no_go": {
+      "diff_scope_review_created": true,
+      "remote_write_authorized_now": false,
+      "push_ready_now": false,
+      "pr_ready_now": false,
+      "next_auto_step_allowed": false
+    },
+    "recommended_next": "await_explicit_remote_sync_authorization_or_continue_local_no_write_review",
+    "recommended_next_auto_execution_allowed": false
+  }
+}
