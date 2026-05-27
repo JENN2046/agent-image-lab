@@ -36703,6 +36703,51 @@ Next: run full targeted readonly review validator set, diff checks, exact-file s
 
 ---
 
+## Checkpoint - P3.7 Readonly Review Surface Snapshot
+
+Status: completed_validated_pending_local_commit
+Active goal: 30-day readonly review artifact system
+Current local head before this checkpoint: 063c133
+
+Changed:
+- kernel/visual_eval_readonly_review_surface_snapshot.js
+- scripts/validate_visual_eval_readonly_review_surface_snapshot.js
+- scripts/validate_visual_eval_readonly_review_artifact_catalog.js
+- tests/schema_examples/visual_eval_readonly_review_surface_snapshot.example.json
+- tests/schema_examples/visual_eval_readonly_review_surface_snapshot_negative_cases.example.json
+- tests/schema_examples/visual_eval_readonly_review_artifact_catalog.example.json
+- .agent_board/CHECKPOINT.md
+
+Capability added:
+- Adds a metadata-only readonly review surface snapshot above the collection query layer.
+- Surface snapshot exposes outcome lanes, taxonomy sections, and next-action queues.
+- Outcome lanes carry display-ready cards; taxonomy and next-action sections carry resolvable card refs.
+- Surface validator checks cards/refs resolve back to collection rows and fail-closed negative cases.
+- Catalog now enumerates the surface snapshot and runs its validator.
+
+Boundary:
+- metadata_only: true
+- read_only: true
+- provider_contact_performed: false
+- plugin_call_performed: false
+- api_call_performed: false
+- image_generation_performed: false
+- memory_written: false
+- DailyNote_written: false
+- VCP_memory_written: false
+- production_candidate_002_started: false
+- Batch_005_started: false
+
+Validation so far:
+- node --check kernel/visual_eval_readonly_review_surface_snapshot.js: passed
+- node --check scripts/validate_visual_eval_readonly_review_surface_snapshot.js: passed
+- node scripts/validate_visual_eval_readonly_review_surface_snapshot.js: passed
+- node scripts/validate_visual_eval_readonly_review_artifact_catalog.js: passed
+
+Next: run the full targeted readonly review validator set, diff checks, exact-file staging, and guarded local commit if clean.
+
+---
+
 ## Checkpoint - v0.6.73 Seedream5 Retry 003 Runtime Closeout
 
 Status: blocked_provider_or_plugin_runtime_failed_pending_validation

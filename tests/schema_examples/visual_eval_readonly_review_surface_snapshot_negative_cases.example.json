@@ -1,0 +1,52 @@
+{
+  "fixture_type": "metadata_only_visual_eval_readonly_review_surface_snapshot_negative_cases",
+  "source_surface_snapshot": "tests/schema_examples/visual_eval_readonly_review_surface_snapshot.example.json",
+  "negative_cases": [
+    {
+      "case_id": "missing_reject_lane",
+      "expected_failure_code": "surface_outcome_lanes_complete",
+      "mutation": {
+        "operation": "remove_lane_by_outcome",
+        "outcome": "reject"
+      }
+    },
+    {
+      "case_id": "dangling_surface_card_ref",
+      "expected_failure_code": "surface_card_ref_resolves",
+      "mutation": {
+        "operation": "set_first_taxonomy_ref_field",
+        "taxonomy_tag": "material_failed",
+        "field": "review_result_id",
+        "value": "visual_eval_review_result_missing_synthetic_999"
+      }
+    },
+    {
+      "case_id": "card_next_action_mismatch",
+      "expected_failure_code": "surface_card_next_action_matches_collection",
+      "mutation": {
+        "operation": "set_first_lane_card_field",
+        "outcome": "patch",
+        "field": "next_review_action",
+        "value": "queue_for_future_human_review"
+      }
+    },
+    {
+      "case_id": "surface_guard_provider_true",
+      "expected_failure_code": "surface_guard_provider_contact_performed_false",
+      "mutation": {
+        "operation": "set_field",
+        "field": "guard.provider_contact_performed",
+        "value": true
+      }
+    },
+    {
+      "case_id": "absolute_local_source_query",
+      "expected_failure_code": "surface_no_absolute_or_loopback",
+      "mutation": {
+        "operation": "set_field",
+        "field": "source_query",
+        "value": "<synthetic-windows-absolute-path>\\visual_eval_readonly_review_collection_query.example.json"
+      }
+    }
+  ]
+}

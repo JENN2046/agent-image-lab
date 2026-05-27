@@ -1,0 +1,197 @@
+{
+  "surface_snapshot_id": "visual_eval_readonly_review_surface_snapshot_v1_synthetic_001",
+  "surface_snapshot_type": "metadata_only_visual_eval_readonly_review_surface_snapshot",
+  "status": "readonly_surface_snapshot_ready",
+  "source_query": "tests/schema_examples/visual_eval_readonly_review_collection_query.example.json",
+  "source_collection_consumer": "tests/schema_examples/visual_eval_readonly_review_collection_consumer.example.json",
+  "snapshot_contract": {
+    "metadata_only": true,
+    "read_only": true,
+    "surface_sections": [
+      "outcome_lanes",
+      "taxonomy_sections",
+      "next_action_queues"
+    ],
+    "cards_must_resolve_to_collection_rows": true,
+    "cards_must_preserve_outcome_and_next_action": true
+  },
+  "surface": {
+    "collection_id": "visual_eval_readonly_review_collection_v1_synthetic_001",
+    "total_cards": 3,
+    "outcome_summary": {
+      "pass": 1,
+      "patch": 1,
+      "reject": 1
+    },
+    "outcome_lanes": [
+      {
+        "lane_id": "outcome_pass",
+        "outcome": "pass",
+        "count": 1,
+        "cards": [
+          {
+            "review_result_id": "visual_eval_review_result_pass_synthetic_001",
+            "candidate_id": "synthetic_product_still_life_pass_001",
+            "case_id": "visual_eval_image_case_pass_synthetic_001",
+            "outcome": "pass",
+            "summary": "Synthetic candidate meets core product readability and has only non-blocking watch items.",
+            "reason_count": 3,
+            "taxonomy_tags": [],
+            "blocking_watch_items": [],
+            "next_review_action": "queue_for_future_human_review",
+            "metadata_accumulation_action": "keep_as_metadata_candidate"
+          }
+        ]
+      },
+      {
+        "lane_id": "outcome_patch",
+        "outcome": "patch",
+        "count": 1,
+        "cards": [
+          {
+            "review_result_id": "visual_eval_review_result_patch_synthetic_001",
+            "candidate_id": "synthetic_product_still_life_patch_001",
+            "case_id": "visual_eval_image_case_patch_synthetic_001",
+            "outcome": "patch",
+            "summary": "Synthetic candidate has useful composition but requires bounded correction before pass.",
+            "reason_count": 2,
+            "taxonomy_tags": [
+              "material_failed",
+              "lighting_failed"
+            ],
+            "blocking_watch_items": [
+              "material_realism_watch",
+              "lighting_consistency_watch"
+            ],
+            "next_review_action": "write_patch_plan_only",
+            "metadata_accumulation_action": "metadata_only_reference"
+          }
+        ]
+      },
+      {
+        "lane_id": "outcome_reject",
+        "outcome": "reject",
+        "count": 1,
+        "cards": [
+          {
+            "review_result_id": "visual_eval_review_result_reject_synthetic_001",
+            "candidate_id": "synthetic_product_still_life_reject_001",
+            "case_id": "visual_eval_image_case_reject_synthetic_001",
+            "outcome": "reject",
+            "summary": "Synthetic candidate fails product identity or commercial usability and must remain never-production.",
+            "reason_count": 2,
+            "taxonomy_tags": [
+              "subject_drift",
+              "commercial_unusable"
+            ],
+            "blocking_watch_items": [
+              "severe_subject_drift",
+              "commercial_unusable"
+            ],
+            "next_review_action": "defer_until_taxonomy_update",
+            "metadata_accumulation_action": "keep_as_failure_learning_metadata"
+          }
+        ]
+      }
+    ],
+    "taxonomy_sections": [
+      {
+        "taxonomy_tag": "commercial_unusable",
+        "count": 1,
+        "card_refs": [
+          {
+            "review_result_id": "visual_eval_review_result_reject_synthetic_001",
+            "candidate_id": "synthetic_product_still_life_reject_001",
+            "outcome": "reject"
+          }
+        ]
+      },
+      {
+        "taxonomy_tag": "lighting_failed",
+        "count": 1,
+        "card_refs": [
+          {
+            "review_result_id": "visual_eval_review_result_patch_synthetic_001",
+            "candidate_id": "synthetic_product_still_life_patch_001",
+            "outcome": "patch"
+          }
+        ]
+      },
+      {
+        "taxonomy_tag": "material_failed",
+        "count": 1,
+        "card_refs": [
+          {
+            "review_result_id": "visual_eval_review_result_patch_synthetic_001",
+            "candidate_id": "synthetic_product_still_life_patch_001",
+            "outcome": "patch"
+          }
+        ]
+      },
+      {
+        "taxonomy_tag": "subject_drift",
+        "count": 1,
+        "card_refs": [
+          {
+            "review_result_id": "visual_eval_review_result_reject_synthetic_001",
+            "candidate_id": "synthetic_product_still_life_reject_001",
+            "outcome": "reject"
+          }
+        ]
+      }
+    ],
+    "next_action_queues": [
+      {
+        "next_review_action": "defer_until_taxonomy_update",
+        "count": 1,
+        "card_refs": [
+          {
+            "review_result_id": "visual_eval_review_result_reject_synthetic_001",
+            "candidate_id": "synthetic_product_still_life_reject_001",
+            "outcome": "reject"
+          }
+        ]
+      },
+      {
+        "next_review_action": "queue_for_future_human_review",
+        "count": 1,
+        "card_refs": [
+          {
+            "review_result_id": "visual_eval_review_result_pass_synthetic_001",
+            "candidate_id": "synthetic_product_still_life_pass_001",
+            "outcome": "pass"
+          }
+        ]
+      },
+      {
+        "next_review_action": "write_patch_plan_only",
+        "count": 1,
+        "card_refs": [
+          {
+            "review_result_id": "visual_eval_review_result_patch_synthetic_001",
+            "candidate_id": "synthetic_product_still_life_patch_001",
+            "outcome": "patch"
+          }
+        ]
+      }
+    ]
+  },
+  "guard": {
+    "metadata_only": true,
+    "read_only": true,
+    "display_only": true,
+    "file_write_performed": false,
+    "approval_write_performed": false,
+    "accepted_samples_write_performed": false,
+    "production_candidate_created": false,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "DailyNote_write_performed": false,
+    "VCP_memory_write_performed": false,
+    "memory_write_performed": false,
+    "Batch_005_started": false,
+    "production_candidate_002_started": false
+  }
+}
