@@ -1,0 +1,44 @@
+{
+  "fixture_type": "metadata_only_visual_eval_readonly_review_collection_query_negative_cases",
+  "source_query": "tests/schema_examples/visual_eval_readonly_review_collection_query.example.json",
+  "negative_cases": [
+    {
+      "case_id": "missing_pass_outcome_index",
+      "expected_failure_code": "query_outcome_index_complete",
+      "mutation": {
+        "operation": "remove_index_key",
+        "index": "by_outcome",
+        "key": "pass"
+      }
+    },
+    {
+      "case_id": "dangling_query_row_ref",
+      "expected_failure_code": "query_row_ref_resolves",
+      "mutation": {
+        "operation": "set_first_ref_field",
+        "index": "by_taxonomy_tag",
+        "key": "material_failed",
+        "field": "review_result_id",
+        "value": "visual_eval_review_result_missing_synthetic_999"
+      }
+    },
+    {
+      "case_id": "query_guard_memory_true",
+      "expected_failure_code": "query_guard_memory_write_performed_false",
+      "mutation": {
+        "operation": "set_field",
+        "field": "guard.memory_write_performed",
+        "value": true
+      }
+    },
+    {
+      "case_id": "absolute_local_source_consumer",
+      "expected_failure_code": "query_no_absolute_or_loopback",
+      "mutation": {
+        "operation": "set_field",
+        "field": "source_collection_consumer",
+        "value": "<synthetic-windows-absolute-path>\\visual_eval_readonly_review_collection_consumer.example.json"
+      }
+    }
+  ]
+}

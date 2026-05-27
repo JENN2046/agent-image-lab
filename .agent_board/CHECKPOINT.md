@@ -36658,6 +36658,51 @@ Next: run the full targeted readonly review validator set, diff checks, exact-fi
 
 ---
 
+## Checkpoint - P3.6 Readonly Review Collection Query View
+
+Status: completed_validated_pending_local_commit
+Active goal: 30-day readonly review artifact system
+Current local head before this checkpoint: 0b47c90
+
+Changed:
+- kernel/visual_eval_readonly_review_collection_query.js
+- scripts/validate_visual_eval_readonly_review_collection_query.js
+- scripts/validate_visual_eval_readonly_review_artifact_catalog.js
+- tests/schema_examples/visual_eval_readonly_review_collection_query.example.json
+- tests/schema_examples/visual_eval_readonly_review_collection_query_negative_cases.example.json
+- tests/schema_examples/visual_eval_readonly_review_artifact_catalog.example.json
+- .agent_board/CHECKPOINT.md
+
+Capability added:
+- Adds a metadata-only readonly query/view layer above the collection consumer.
+- Query payload indexes collection rows by outcome, taxonomy tag, next review action, and metadata accumulation action.
+- Query validator checks row refs resolve back to collection rows and fail-closed negative cases.
+- Catalog now enumerates the query payload and runs its validator as part of catalog verification.
+
+Boundary:
+- metadata_only: true
+- read_only: true
+- provider_contact_performed: false
+- plugin_call_performed: false
+- api_call_performed: false
+- image_generation_performed: false
+- memory_written: false
+- DailyNote_written: false
+- VCP_memory_written: false
+- production_candidate_002_started: false
+- Batch_005_started: false
+
+Validation so far:
+- node --check kernel/visual_eval_readonly_review_collection_query.js: passed
+- node --check scripts/validate_visual_eval_readonly_review_collection_query.js: passed
+- node scripts/validate_visual_eval_readonly_review_collection_query.js: passed
+- node --check scripts/validate_visual_eval_readonly_review_artifact_catalog.js: passed
+- node scripts/validate_visual_eval_readonly_review_artifact_catalog.js: passed
+
+Next: run full targeted readonly review validator set, diff checks, exact-file staging, and guarded local commit if clean.
+
+---
+
 ## Checkpoint - v0.6.73 Seedream5 Retry 003 Runtime Closeout
 
 Status: blocked_provider_or_plugin_runtime_failed_pending_validation

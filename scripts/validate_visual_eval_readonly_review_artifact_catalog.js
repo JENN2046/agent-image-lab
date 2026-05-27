@@ -17,6 +17,7 @@ const expectedRoles = [
   "readonly_consumer_payload",
   "readonly_review_collection",
   "readonly_collection_consumer_payload",
+  "readonly_collection_query_payload",
 ];
 const expectedValidators = [
   "scripts/validate_visual_eval_review_result_protocol.js",
@@ -24,6 +25,7 @@ const expectedValidators = [
   "scripts/validate_visual_eval_readonly_review_bundle.js",
   "scripts/validate_visual_eval_readonly_review_bundle_consumer.js",
   "scripts/validate_visual_eval_readonly_review_collection_consumer.js",
+  "scripts/validate_visual_eval_readonly_review_collection_query.js",
 ];
 const expectedDisplayFields = [
   "outcome",
@@ -133,9 +135,9 @@ function validateArtifactEntries(catalog) {
     addResult(`catalog_entry_${role}_readonly_consumable_true`, entry.readonly_consumable === true);
     if (!artifactPathOk) continue;
     const artifact = readJson(entry.path);
-    const typeField = artifact.artifact_type || artifact.fixture_type || artifact.payload_type || artifact.consumer_payload_type;
+    const typeField = artifact.artifact_type || artifact.fixture_type || artifact.payload_type || artifact.consumer_payload_type || artifact.query_payload_type;
     addResult(`catalog_entry_${role}_artifact_type_matches`, typeField === entry.artifact_type, typeField);
-    addResult(`catalog_entry_${role}_artifact_id_matches`, (artifact.artifact_id || artifact.fixture_id || artifact.payload_id || artifact.consumer_payload_id) === entry.artifact_id);
+    addResult(`catalog_entry_${role}_artifact_id_matches`, (artifact.artifact_id || artifact.fixture_id || artifact.payload_id || artifact.consumer_payload_id || artifact.query_payload_id) === entry.artifact_id);
   }
 }
 
@@ -165,6 +167,15 @@ function validateConsumerExpectations(catalog) {
   for (const field of expectedDisplayFields) {
     addResult(`collection_consumer_rows_expose_${field}`, (collectionConsumer.collection_rows || []).every((row) => Object.prototype.hasOwnProperty.call(row, field)));
   }
+
+  const queryEntry = getEntry(catalog, "readonly_collection_query_payload");
+  const query = readJson(queryEntry.path);
+  addResult("catalog_collection_query_source_matches", query.source_collection_consumer === collectionConsumerEntry.path);
+  addResult("catalog_collection_query_expected_path_matches", catalog.collection_query_expectations?.query_payload === queryEntry.path);
+  addResult("catalog_collection_query_expected_source_matches", catalog.collection_query_expectations?.source_collection_consumer === collectionConsumerEntry.path);
+  addResult("catalog_collection_query_indexed_fields_exact", sameSet(query.query_contract?.indexed_fields, catalog.collection_query_expectations?.indexed_fields || []));
+  addResult("catalog_collection_query_outcomes_exact", sameSet(Object.keys(query.indexes?.by_outcome || {}), catalog.collection_query_expectations?.outcomes || []));
+  addResult("catalog_collection_query_required_taxonomy_tags_present", (catalog.collection_query_expectations?.required_taxonomy_tags || []).every((tag) => Array.isArray(query.indexes?.by_taxonomy_tag?.[tag])));
 }
 
 function runReferencedValidators(catalog) {
