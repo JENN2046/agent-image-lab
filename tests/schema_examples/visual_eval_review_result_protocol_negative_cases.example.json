@@ -58,7 +58,7 @@
       "target_review_result_id": "visual_eval_review_result_pass_synthetic_001",
       "mutation": {
         "field": "source_ref",
-        "value": "A:\\agent-image-lab\\agent-image-lab-v0.2\\runs\\real_generation\\example.png"
+        "value": "<synthetic-windows-absolute-path>\\runs\\real_generation\\example.png"
       },
       "expected_failure_code": "absolute_local_path_forbidden",
       "expected_reason": "source_ref must be repo-relative or redacted, never an absolute local path"
