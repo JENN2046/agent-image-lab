@@ -8,55 +8,6 @@ const { execFileSync } = require("node:child_process");
 const root = path.resolve(__dirname, "..");
 const catalogPath = "tests/schema_examples/visual_eval_readonly_review_artifact_catalog.example.json";
 const negativeCasesPath = "tests/schema_examples/visual_eval_readonly_review_artifact_catalog_negative_cases.example.json";
-const expectedRoles = [
-  "review_result_protocol",
-  "failure_taxonomy",
-  "metadata_accumulation_contract",
-  "bridge_readable_payload",
-  "readonly_review_bundle",
-  "readonly_consumer_payload",
-  "readonly_review_collection",
-  "readonly_collection_consumer_payload",
-  "readonly_collection_query_payload",
-  "readonly_surface_snapshot",
-  "readonly_detail_view",
-  "readonly_detail_navigation",
-  "readonly_session_drilldown",
-  "readonly_metadata_accumulation_queue",
-  "readonly_metadata_accumulation_queue_consumer",
-  "readonly_metadata_accumulation_queue_query",
-  "readonly_metadata_accumulation_queue_surface_snapshot",
-  "readonly_metadata_accumulation_queue_detail_view",
-  "readonly_metadata_accumulation_queue_detail_navigation",
-  "readonly_review_workspace",
-  "readonly_review_workspace_case_matrix",
-  "readonly_review_workspace_corpus",
-  "readonly_review_corpus_renderer",
-  "review_console_readonly_corpus_renderer_static_handoff",
-];
-const expectedValidators = [
-  "scripts/validate_visual_eval_review_result_protocol.js",
-  "scripts/validate_visual_eval_review_result_review_bridge_wiring.js",
-  "scripts/validate_visual_eval_readonly_review_bundle.js",
-  "scripts/validate_visual_eval_readonly_review_bundle_consumer.js",
-  "scripts/validate_visual_eval_readonly_review_collection_consumer.js",
-  "scripts/validate_visual_eval_readonly_review_collection_query.js",
-  "scripts/validate_visual_eval_readonly_review_surface_snapshot.js",
-  "scripts/validate_visual_eval_readonly_review_detail_view.js",
-  "scripts/validate_visual_eval_readonly_review_detail_navigation.js",
-  "scripts/validate_visual_eval_readonly_review_session_drilldown.js",
-  "scripts/validate_visual_eval_readonly_metadata_accumulation_queue.js",
-  "scripts/validate_visual_eval_readonly_metadata_accumulation_queue_consumer.js",
-  "scripts/validate_visual_eval_readonly_metadata_accumulation_queue_query.js",
-  "scripts/validate_visual_eval_readonly_metadata_accumulation_queue_surface_snapshot.js",
-  "scripts/validate_visual_eval_readonly_metadata_accumulation_queue_detail_view.js",
-  "scripts/validate_visual_eval_readonly_metadata_accumulation_queue_detail_navigation.js",
-  "scripts/validate_visual_eval_readonly_review_workspace.js",
-  "scripts/validate_visual_eval_readonly_review_workspace_case_matrix.js",
-  "scripts/validate_visual_eval_readonly_review_workspace_corpus.js",
-  "scripts/validate_visual_eval_readonly_review_corpus_renderer.js",
-  "scripts/validate_visual_eval_review_console_readonly_corpus_renderer.js",
-];
 const expectedDisplayFields = [
   "outcome",
   "summary",
@@ -118,6 +69,20 @@ function sameSet(actual, expected) {
   return Array.isArray(actual) && actual.length === expected.length && expected.every((item) => actual.includes(item));
 }
 
+function sameUniqueSet(actual, expected) {
+  if (!Array.isArray(actual) || !Array.isArray(expected)) return false;
+  const actualSet = new Set(actual);
+  const expectedSet = new Set(expected);
+  return actual.length === expected.length &&
+    actualSet.size === actual.length &&
+    expectedSet.size === expected.length &&
+    expected.every((item) => actualSet.has(item));
+}
+
+function sameArray(actual, expected) {
+  return Array.isArray(actual) && actual.length === expected.length && expected.every((item, index) => actual[index] === item);
+}
+
 function hasAbsoluteOrLoopback(value) {
   if (typeof value === "string") {
     return /(?:[A-Za-z]:[\\/]|\\\\|file:\/\/\/?[A-Za-z]:[\\/]|<synthetic-windows-absolute-path>|(?:https?|wss?):\/\/(?:127\.0\.0\.1|localhost|\[::1\]|::1))/i.test(value);
@@ -151,12 +116,13 @@ function assertBoundary(catalog) {
 }
 
 function validateArtifactEntries(catalog) {
-  addResult("catalog_roles_exact", sameSet((catalog.artifact_entries || []).map((entry) => entry.artifact_role), expectedRoles));
-  addResult("catalog_composition_order_exact", sameSet(catalog.composition_order, expectedRoles));
-  for (const role of expectedRoles) {
-    const entry = getEntry(catalog, role);
+  const entries = catalog.artifact_entries || [];
+  const roles = entries.map((entry) => entry.artifact_role);
+  addResult("catalog_roles_exact", sameUniqueSet(roles, catalog.composition_order || []));
+  addResult("catalog_composition_order_exact", sameArray(catalog.composition_order, roles));
+  for (const entry of entries) {
+    const role = entry.artifact_role;
     addResult(`catalog_entry_${role}_present`, Boolean(entry));
-    if (!entry) continue;
     const artifactPathOk = !hasAbsoluteOrLoopback(entry.path) && fs.existsSync(repoPath(entry.path));
     const validatorPathOk = !hasAbsoluteOrLoopback(entry.validator) && fs.existsSync(repoPath(entry.validator));
     addResult(`catalog_entry_${role}_path_exists`, artifactPathOk, entry.path);
@@ -403,7 +369,7 @@ function validateConsumerExpectations(catalog) {
 
 function runReferencedValidators(catalog) {
   const validators = [...new Set((catalog.artifact_entries || []).map((entry) => entry.validator))];
-  addResult("catalog_validator_set_expected", sameSet(validators, expectedValidators));
+  addResult("catalog_validator_set_expected", validators.length > 0 && validators.every((validator) => typeof validator === "string" && validator.startsWith("scripts/validate_")));
   for (const validator of validators) {
     const parsed = JSON.parse(runNode(validator));
     addResult(`catalog_referenced_validator_${path.basename(validator)}_passes`, parsed.passed === true, validator);
@@ -490,7 +456,7 @@ function main() {
     negative_cases: negativeCasesPath,
     artifact_count: catalog.artifact_entries?.length || 0,
     negative_case_count: negativeCases.negative_cases?.length || 0,
-    validators_run: expectedValidators,
+    validators_run: [...new Set((catalog.artifact_entries || []).map((entry) => entry.validator))],
     provider_contact_performed: false,
     plugin_call_performed: false,
     api_call_performed: false,

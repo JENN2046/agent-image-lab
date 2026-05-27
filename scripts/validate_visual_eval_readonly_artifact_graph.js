@@ -6,32 +6,6 @@ const path = require("node:path");
 
 const root = path.resolve(__dirname, "..");
 const catalogPath = "tests/schema_examples/visual_eval_readonly_review_artifact_catalog.example.json";
-const expectedRoles = [
-  "review_result_protocol",
-  "failure_taxonomy",
-  "metadata_accumulation_contract",
-  "bridge_readable_payload",
-  "readonly_review_bundle",
-  "readonly_consumer_payload",
-  "readonly_review_collection",
-  "readonly_collection_consumer_payload",
-  "readonly_collection_query_payload",
-  "readonly_surface_snapshot",
-  "readonly_detail_view",
-  "readonly_detail_navigation",
-  "readonly_session_drilldown",
-  "readonly_metadata_accumulation_queue",
-  "readonly_metadata_accumulation_queue_consumer",
-  "readonly_metadata_accumulation_queue_query",
-  "readonly_metadata_accumulation_queue_surface_snapshot",
-  "readonly_metadata_accumulation_queue_detail_view",
-  "readonly_metadata_accumulation_queue_detail_navigation",
-  "readonly_review_workspace",
-  "readonly_review_workspace_case_matrix",
-  "readonly_review_workspace_corpus",
-  "readonly_review_corpus_renderer",
-  "review_console_readonly_corpus_renderer_static_handoff",
-];
 const expectedOutcomes = ["pass", "patch", "reject"];
 const expectedNextActionByOutcome = {
   pass: "queue_for_future_human_review",
@@ -60,7 +34,6 @@ const structuralArtifactRoles = new Set([
   "readonly_review_collection",
   "readonly_review_workspace_corpus",
 ]);
-const projectionContractRoles = expectedRoles.filter((role) => !canonicalSourceRoles.has(role) && !structuralArtifactRoles.has(role));
 const projectionSemanticFields = new Set([
   "outcome",
   "summary",
@@ -186,6 +159,44 @@ const expectedNegativeCases = [
       graph.catalog.composition_order = graph.catalog.composition_order.filter(
         (role) => role !== "readonly_review_corpus_renderer"
       );
+    },
+  },
+  {
+    case_id: "registered_role_without_catalog_entry",
+    expected_failure_code: "graph_catalog_roles_exact",
+    mutate(graph) {
+      graph.catalog.artifact_entries = graph.catalog.artifact_entries.filter(
+        (entry) => entry.artifact_role !== "readonly_detail_view"
+      );
+    },
+  },
+  {
+    case_id: "catalog_missing_registered_validator",
+    expected_failure_code: "graph_catalog_readonly_detail_view_validator_exists",
+    mutate(graph) {
+      graph.catalog.artifact_entries.find((entry) => entry.artifact_role === "readonly_detail_view").validator =
+        "scripts/validate_missing_readonly_detail_view.js";
+    },
+  },
+  {
+    case_id: "duplicate_composition_registry_role",
+    expected_failure_code: "graph_catalog_composition_order_exact",
+    mutate(graph) {
+      const detailIndex = graph.catalog.composition_order.indexOf("readonly_detail_view");
+      graph.catalog.composition_order[detailIndex] = "readonly_surface_snapshot";
+    },
+  },
+  {
+    case_id: "projection_contract_coverage_declared_but_unreachable",
+    expected_failure_code: "projection_contract_roles_present",
+    mutate(graph) {
+      graph.catalog.projection_contracts.ghost_projection_artifact = {
+        canonical_source_refs: {
+          source_review_result_protocol: "review_result_protocol",
+        },
+        allowed_projection_fields: ["summary"],
+        forbidden_owned_fields: [],
+      };
     },
   },
   {
@@ -397,7 +408,23 @@ function sameArray(actual, expected) {
 }
 
 function sameSet(actual, expected) {
-  return Array.isArray(actual) && actual.length === expected.length && expected.every((item) => actual.includes(item));
+  if (!Array.isArray(actual) || !Array.isArray(expected)) return false;
+  const actualSet = new Set(actual);
+  const expectedSet = new Set(expected);
+  return actual.length === expected.length &&
+    actualSet.size === actual.length &&
+    expectedSet.size === expected.length &&
+    expected.every((item) => actualSet.has(item));
+}
+
+function catalogRoles(graph) {
+  return (graph.catalog.artifact_entries || []).map((entry) => entry.artifact_role);
+}
+
+function projectionContractRolesFromCatalog(graph) {
+  return (graph.catalog.artifact_entries || [])
+    .filter((entry) => entry.semantic_class === "projection_artifact")
+    .map((entry) => entry.artifact_role);
 }
 
 function stableJson(value) {
@@ -579,6 +606,7 @@ function validateDerivedOwnership(graph, ctx) {
 
 function validateProjectionContracts(graph, ctx) {
   const contracts = graph.catalog.projection_contracts || {};
+  const projectionContractRoles = projectionContractRolesFromCatalog(graph);
   const contractRoles = Object.keys(contracts);
   const shapeMismatches = [];
   const sourceRefMismatches = [];
@@ -734,12 +762,12 @@ function collectReviewObjects(graph) {
 
 function validateCatalogClosure(graph, ctx) {
   const entries = graph.catalog.artifact_entries || [];
-  const roles = entries.map((entry) => entry.artifact_role);
+  const roles = catalogRoles(graph);
   const ids = entries.map((entry) => entry.artifact_id);
   const types = entries.map((entry) => entry.artifact_type);
   ctx.addResult("graph_catalog_artifact_count_24", entries.length === 24, entries.length);
-  ctx.addResult("graph_catalog_roles_exact", sameSet(roles, expectedRoles), roles.join(", "));
-  ctx.addResult("graph_catalog_composition_order_exact", sameArray(graph.catalog.composition_order, expectedRoles), (graph.catalog.composition_order || []).join(", "));
+  ctx.addResult("graph_catalog_roles_exact", sameSet(roles, graph.catalog.composition_order || []), roles.join(", "));
+  ctx.addResult("graph_catalog_composition_order_exact", sameArray(graph.catalog.composition_order, roles), (graph.catalog.composition_order || []).join(", "));
   ctx.addResult("graph_catalog_roles_unique", new Set(roles).size === roles.length);
   ctx.addResult("graph_catalog_artifact_ids_unique", new Set(ids).size === ids.length);
   ctx.addResult("graph_catalog_artifact_types_unique", new Set(types).size === types.length);
@@ -1015,7 +1043,7 @@ function collectFailureCodes(fn) {
 }
 
 function validateNegativeCases(baseGraph, ctx) {
-  ctx.addResult("graph_negative_cases_count_expected", expectedNegativeCases.length === 32, expectedNegativeCases.length);
+  ctx.addResult("graph_negative_cases_count_expected", expectedNegativeCases.length === 36, expectedNegativeCases.length);
   for (const negativeCase of expectedNegativeCases) {
     const graph = deepClone(baseGraph);
     negativeCase.mutate(graph);

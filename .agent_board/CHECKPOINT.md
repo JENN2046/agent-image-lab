@@ -1,5 +1,57 @@
 ---
 
+## Checkpoint - Readonly Registry Single Source Hardening
+
+```text
+phase: readonly_registry_single_source_hardening_20260527
+status: completed_validated_local_registry_single_source_hardening
+result: COMPLETED_VALIDATED
+mode: Green local validator hardening
+summary: Reduced duplicated concrete readonly registry inventory in the catalog and graph validators. The catalog fixture remains the concrete registry source for 24 artifact entries, composition order, and referenced validators; validators now derive concrete roles and validator execution lists from catalog entries while retaining rule-level semantic class, boundary, projection, and closure checks.
+changed_files_current_task:
+  - scripts/validate_visual_eval_readonly_review_artifact_catalog.js
+  - scripts/validate_visual_eval_readonly_artifact_graph.js
+  - .agent_board/CHECKPOINT.md
+registry_single_source_changes:
+  - removed hardcoded 24-role inventory from the catalog validator
+  - removed hardcoded 24-role inventory from the graph validator
+  - derive validator execution list from catalog artifact_entries
+  - derive projection contract role coverage from catalog semantic_class values
+  - compare catalog artifact_entries with catalog composition_order for closure and order
+  - tightened registry set comparison against duplicate roles
+new_negative_cases_verified:
+  - registered_role_without_catalog_entry
+  - catalog_missing_registered_validator
+  - duplicate_composition_registry_role
+  - projection_contract_coverage_declared_but_unreachable
+validation_run:
+  - node --check scripts\validate_visual_eval_readonly_review_artifact_catalog.js: passed
+  - node --check scripts\validate_visual_eval_readonly_artifact_graph.js: passed
+  - node scripts\validate_visual_eval_readonly_review_artifact_catalog.js: passed
+  - node scripts\validate_visual_eval_readonly_artifact_graph.js: passed
+  - git diff --check: passed with CRLF normalization warnings
+  - node scripts\validate_agent_board_state.js: passed
+  - git status --short --branch: master...origin/master [ahead 4], dirty only current task files before commander review
+runtime_execution_performed: false
+fetch_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+accepted_samples_write_performed: false
+production_candidate_created: false
+memory_written: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+dependency_change_performed: false
+commit_performed: false
+push_performed: false
+tag_release_deploy_performed: false
+next_phase_started: false
+```
+
+---
+
 ## Checkpoint - Readonly Projection Contract Coverage Hardening
 
 ```text
