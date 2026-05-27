@@ -99,9 +99,35 @@ Route options considered:
 ```yaml
 phase_name: p2_4_resume_surface_reconciliation
 source_commit: dd0e306
-status: completed_validated_local_commit_ready
+status: completed_remote_synced_after_guarded_push
 remote_sync_verified: true
 push_performed_for_source_commit: true
+resume_surface_reconciliation_commit: 302f918
+resume_surface_reconciliation_remote_synced: true
 next_phase_started: false
 recommended_next_phase: visual_workflow_product_route_review
+```
+
+## Post-Push Status Convention
+
+Resume surfaces now separate two records instead of rewriting one ambiguous
+state:
+
+- local closeout record: the commit that completed local docs-only work before
+  push.
+- post-push remote sync record: the commit that is confirmed on `origin/master`
+  after guarded push.
+
+After a guarded push, status surfaces should update the source phase to
+`completed_remote_synced_after_guarded_push` and record the remote commit. A
+later cleanup phase may record its own local commit readiness, but it should not
+make the already-pushed phase look pending again.
+
+```yaml
+phase_name: p2_6_resume_surface_post_push_status_convention_fix
+source_commit: 302f918
+status: completed_validated_local_commit_ready
+remote_commit_recorded: 302f918
+recommended_next_phase: visual_workflow_product_route_review
+next_phase_started: false
 ```

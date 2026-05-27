@@ -1,15 +1,51 @@
 ---
 
+## Current Handoff Update - P2.6 Resume Surface Post-Push Status Convention Fix
+
+```text
+phase: p2_6_resume_surface_post_push_status_convention_fix
+status: COMPLETED_VALIDATED_LOCAL_COMMIT_READY
+mode: docs-only control surface cleanup
+branch: master
+source_commit: 302f918
+remote_commit_recorded: 302f918
+summary: Clarifies the convention for status surfaces after a guarded push: local closeout and post-push remote sync closeout are distinct records. P2.4 is now recorded as remote-synced at 302f918 instead of local-commit-ready.
+changed_by_this_task:
+  - docs/provider_evidence_integrity_semantic_hardening_closeout.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+validation:
+  - git diff --check: passed
+  - git status --short: passed
+  - git diff --cached --check: passed
+boundaries:
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  Batch_005_started: false
+  production_candidate_002_started: false
+  next_phase_started: false
+recommended_next_phase: visual_workflow_product_route_review
+```
+
+---
+
 ## Current Handoff Update - P2.4 Resume Surface Reconciliation
 
 ```text
 phase: p2_4_resume_surface_reconciliation
-status: COMPLETED_VALIDATED_LOCAL_COMMIT_READY
+status: COMPLETED_REMOTE_SYNCED_AFTER_GUARDED_PUSH
 mode: docs-only control surface patch
 branch: master
 source_commit: dd0e306
-remote_head_verified: dd0e306
-summary: Reconciled provider evidence integrity closeout and resume surfaces after dd0e306 was pushed to origin/master. Current surfaces should now treat dd0e306 as the remote-sealed closeout point and should not describe p2_3 as pending local commit.
+remote_head_verified: 302f918
+resume_surface_reconciliation_commit: 302f918
+summary: Reconciled provider evidence integrity closeout and resume surfaces after dd0e306 was pushed to origin/master, then pushed the resume-surface reconciliation commit 302f918 to origin/master.
 changed_by_this_task:
   - docs/provider_evidence_integrity_semantic_hardening_closeout.md
   - .agent_board/CHECKPOINT.md

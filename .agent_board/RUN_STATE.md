@@ -1,14 +1,51 @@
 ---
 
+## Current Run State - P2.6 Resume Surface Post-Push Status Convention Fix
+
+```text
+phase: p2_6_resume_surface_post_push_status_convention_fix
+status: COMPLETED_VALIDATED_LOCAL_COMMIT_READY
+mode: docs-only control surface cleanup; no provider contact, no plugin call, no API call, no image generation, no memory write, no DailyNote write, no Batch 005, no production_candidate_002
+branch: master
+source_commit: 302f918
+remote_commit_recorded: 302f918
+goal: Prevent repeated post-push resume-surface drift by separating local closeout records from post-push remote sync records.
+completed:
+- Marked p2.4 as completed_remote_synced_after_guarded_push.
+- Recorded 302f918 as the remote commit for the resume-surface reconciliation.
+- Added a convention that local closeout and post-push remote sync closeout are separate records.
+- Kept next_phase_started false.
+- Kept recommended next phase as visual_workflow_product_route_review.
+validation:
+- git diff --check: passed
+- git status --short: passed
+- git diff --cached --check: passed
+push_performed: false
+remote_sync_verified: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+Batch_005_started: false
+production_candidate_002_started: false
+next_safe_task: visual_workflow_product_route_review
+next_phase_started: false
+```
+
+---
+
 ## Current Run State - P2.4 Resume Surface Reconciliation
 
 ```text
 phase: p2_4_resume_surface_reconciliation
-status: COMPLETED_VALIDATED_LOCAL_COMMIT_READY
+status: COMPLETED_REMOTE_SYNCED_AFTER_GUARDED_PUSH
 mode: docs-only control surface patch; no provider contact, no plugin call, no API call, no image generation, no memory write, no DailyNote write, no Batch 005, no production_candidate_002
 branch: master
 source_commit: dd0e306
-remote_head_verified: dd0e306
+remote_head_verified: 302f918
+resume_surface_reconciliation_commit: 302f918
 workspace_clean_before_patch: true
 goal: Correct dd0e306 post-push resume-surface drift and make the provider evidence integrity closeout reflect the remote-synced state.
 completed:
@@ -20,8 +57,8 @@ validation:
 - git diff --check: passed
 - git status --short: passed
 - git diff --cached --check: passed
-push_performed: false
-remote_sync_verified: false
+push_performed: true
+remote_sync_verified: true
 provider_contact_performed: false
 plugin_call_performed: false
 api_call_performed: false

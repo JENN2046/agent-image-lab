@@ -1,15 +1,15 @@
 ---
 
-## Checkpoint - P2.4 Resume Surface Reconciliation
+## Checkpoint - P2.6 Resume Surface Post-Push Status Convention Fix
 
 ```text
-phase: p2_4_resume_surface_reconciliation
+phase: p2_6_resume_surface_post_push_status_convention_fix
 status: completed_validated_local_commit_ready
 result: COMPLETED_VALIDATED_LOCAL_COMMIT_READY
-source_commit: dd0e306
-remote_head: dd0e306
-mode: docs-only control surface patch
-summary: Reconciled resume surfaces after the guarded push of dd0e306 so provider evidence integrity closeout records no longer claim pending local commit or unsynced push state.
+source_commit: 302f918
+remote_commit_recorded: 302f918
+mode: docs-only control surface cleanup
+summary: Added a status convention that separates local closeout records from post-push remote sync records, and updated p2.4 to remote-synced so future pushes do not create a stale pending checkpoint loop.
 changed_files_current_task:
   - docs/provider_evidence_integrity_semantic_hardening_closeout.md
   - .agent_board/CHECKPOINT.md
@@ -23,6 +23,48 @@ validation_run:
 validation_result: passed
 push_performed: false
 remote_sync_verified: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+Batch_005_started: false
+production_candidate_002_started: false
+package_json_modified: false
+dependency_change_performed: false
+tag_release_deploy_performed: false
+recommended_next_phase: visual_workflow_product_route_review
+next_phase_started: false
+```
+
+---
+
+## Checkpoint - P2.4 Resume Surface Reconciliation
+
+```text
+phase: p2_4_resume_surface_reconciliation
+status: completed_remote_synced_after_guarded_push
+result: COMPLETED_REMOTE_SYNCED_AFTER_GUARDED_PUSH
+source_commit: dd0e306
+remote_head: 302f918
+resume_surface_reconciliation_commit: 302f918
+remote_sync_verified: true
+mode: docs-only control surface patch
+summary: Reconciled resume surfaces after the guarded push of dd0e306, then guarded-pushed the reconciliation commit 302f918 to origin/master.
+changed_files_current_task:
+  - docs/provider_evidence_integrity_semantic_hardening_closeout.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+validation_run:
+  - git diff --check
+  - git status --short
+  - git diff --cached --check
+validation_result: passed
+push_performed: true
+remote_sync_verified: true
 provider_contact_performed: false
 plugin_call_performed: false
 api_call_performed: false

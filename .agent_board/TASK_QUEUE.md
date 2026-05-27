@@ -1,15 +1,37 @@
 ---
-- [x] ID: p2_4_resume_surface_reconciliation
-      Lane: Green docs-only control surface patch.
+- [x] ID: p2_6_resume_surface_post_push_status_convention_fix
+      Lane: Green docs-only control surface cleanup.
       Status: completed_validated_local_commit_ready.
-      Source commit: dd0e306.
-      Remote head verified before patch: dd0e306.
-      Goal: Correct post-push resume-surface drift after provider evidence integrity closeout.
-      Completed: updated the closeout document and .agent_board surfaces so p2_3 no longer reads as pending local commit; recorded dd0e306 as the remote sealed point; kept next_phase_started false.
+      Source commit: 302f918.
+      Goal: Prevent repeated stale checkpoint creation after guarded push by separating local closeout from post-push remote sync closeout.
+      Completed: marked p2.4 as remote-synced at 302f918; recorded a status convention for local closeout vs post-push remote sync closeout; kept recommended next as visual_workflow_product_route_review.
       Boundary: no code, validator, package, dependency, provider, plugin, API, image, memory, DailyNote, Batch 005, production_candidate_002, tag, release, deploy, or push in this phase.
       Validation: git diff --check; git status --short; git diff --cached --check.
       push_performed: false.
       remote_sync_verified: false.
+      provider_contact_performed: false.
+      plugin_call_performed: false.
+      api_call_performed: false.
+      image_generation_performed: false.
+      DailyNote_write_performed: false.
+      VCP_memory_write_performed: false.
+      Batch_005_started: false.
+      production_candidate_002_started: false.
+      next_phase_started: false.
+      Recommended next: visual_workflow_product_route_review.
+
+---
+- [x] ID: p2_4_resume_surface_reconciliation
+      Lane: Green docs-only control surface patch.
+      Status: completed_remote_synced_after_guarded_push.
+      Source commit: dd0e306.
+      Remote head verified after push: 302f918.
+      Goal: Correct post-push resume-surface drift after provider evidence integrity closeout.
+      Completed: updated the closeout document and .agent_board surfaces so p2_3 no longer reads as pending local commit; recorded dd0e306 as the remote sealed point; kept next_phase_started false.
+      Boundary: no code, validator, package, dependency, provider, plugin, API, image, memory, DailyNote, Batch 005, production_candidate_002, tag, release, deploy, or push in this phase.
+      Validation: git diff --check; git status --short; git diff --cached --check.
+      push_performed: true.
+      remote_sync_verified: true.
       provider_contact_performed: false.
       plugin_call_performed: false.
       api_call_performed: false.
