@@ -1,5 +1,69 @@
 ---
 
+## Checkpoint - Readonly Visual Review Dataset Regression Layer
+
+```text
+phase: readonly_visual_review_dataset_regression_layer_20260527
+status: completed_validated_local_static_regression_layer
+result: COMPLETED_VALIDATED
+mode: Green local static Review Console dataset regression implementation
+summary: The Readonly Visual Review MVP now has an independent dataset regression layer with 7 visual review dimensions and 21 pass / patch / reject rows. The P3.22 24-artifact catalog remains stable. Review Console displays dimension coverage, taxonomy coverage, outcome totals, dataset rows, `needs_revision -> patch` aliasing, metadata sections, next actions, and closed guard state. Draft output now includes `readonly_visual_review_dataset_regression_state`, fixed by snapshot and validator, including same-dimension taxonomy tag matching.
+changed_files_current_task:
+  - package.json
+  - review_console/static_prototype/FIELD_MAPPING.md
+  - review_console/static_prototype/README.md
+  - review_console/static_prototype/app.js
+  - review_console/static_prototype/index.html
+  - review_console/static_prototype/mock_data.js
+  - review_console/static_prototype/styles.css
+  - scripts/validate_mvp_core.js
+  - scripts/validate_readonly_visual_review_dataset_regression.js
+  - tests/schema_examples/readonly_visual_review_dataset_regression_state.example.json
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+validation_run:
+  - node --check scripts\validate_readonly_visual_review_dataset_regression.js: passed
+  - node --check review_console\static_prototype\app.js: passed
+  - node scripts\validate_readonly_visual_review_dataset_regression.js: passed
+  - node scripts\validate_readonly_visual_review_mvp.js: passed
+  - node scripts\validate_visual_eval_readonly_review_artifact_system.js: passed
+  - node scripts\validate_visual_eval_review_console_readonly_corpus_renderer.js: passed
+  - node scripts\validate_visual_eval_readonly_review_artifact_catalog.js: passed
+  - npm run validate:mvp: passed
+  - local browser smoke at http://127.0.0.1:4174/: passed; preview server stopped
+  - node scripts\validate_agent_board_state.js: passed
+  - git diff --check: passed with CRLF normalization warnings only
+negative_cases_verified:
+  - missing_dimension_reject_row
+  - dimension_missing_patch_outcome
+  - needs_revision_as_formal_outcome
+  - unknown_taxonomy_tag
+  - cross_dimension_patch_tag
+  - guard_runtime_true
+  - write_allowed_true
+  - snapshot_rendered_drift
+  - windows_absolute_path_leak
+runtime_execution_performed: false
+fetch_performed: false
+file_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+accepted_samples_write_performed: false
+production_candidate_created: false
+memory_written: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+dependency_change_performed: false
+commit_performed: false
+push_performed: false
+tag_release_deploy_performed: false
+next_phase_started: false
+```
+
 ## Checkpoint - Readonly Visual Review MVP Local Console
 
 ```text

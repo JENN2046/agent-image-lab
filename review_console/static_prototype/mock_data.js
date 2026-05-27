@@ -2732,6 +2732,89 @@ window.REVIEW_CONSOLE_MOCK = {
       real_vcptoolbox_read_performed: false
     }
   },
+  readonly_visual_review_dataset_regression_seed: {
+    state_id: "readonly_visual_review_dataset_regression_state_v1_001",
+    state_type: "metadata_only_readonly_visual_review_dataset_regression_state",
+    status: "draft_ready",
+    display_only: true,
+    source_taxonomy_ref: "tests/schema_examples/visual_eval_failure_taxonomy.example.json",
+    source_mvp_state_ref: "tests/schema_examples/readonly_visual_review_mvp_state.example.json",
+    outcome_aliases: {
+      needs_revision: "patch"
+    },
+    dimensions: [
+      {
+        dimension_id: "subject_identity",
+        label: "Subject identity",
+        pass_watch_item: "subject_identity_watch",
+        patch_tag: "subject_identity_ambiguous",
+        reject_tag: "subject_drift"
+      },
+      {
+        dimension_id: "commercial_usability",
+        label: "Commercial usability",
+        pass_watch_item: "commercial_readability_watch",
+        patch_tag: "commercial_readability_watch",
+        reject_tag: "commercial_unusable"
+      },
+      {
+        dimension_id: "material_realism",
+        label: "Material realism",
+        pass_watch_item: "material_realism_watch",
+        patch_tag: "material_failed",
+        reject_tag: "material_realism_blocking"
+      },
+      {
+        dimension_id: "lighting_consistency",
+        label: "Lighting consistency",
+        pass_watch_item: "lighting_consistency_watch",
+        patch_tag: "lighting_failed",
+        reject_tag: "lighting_blocking"
+      },
+      {
+        dimension_id: "composition",
+        label: "Composition",
+        pass_watch_item: "composition_watch",
+        patch_tag: "composition_failed",
+        reject_tag: "composition_blocking"
+      },
+      {
+        dimension_id: "edge_or_mask_artifact",
+        label: "Edge or mask artifact",
+        pass_watch_item: "edge_artifact_watch",
+        patch_tag: "edge_artifact_failed",
+        reject_tag: "mask_artifact_blocking"
+      },
+      {
+        dimension_id: "background_contamination",
+        label: "Background contamination",
+        pass_watch_item: "background_context_watch",
+        patch_tag: "background_contamination_failed",
+        reject_tag: "background_contamination_blocking"
+      }
+    ],
+    guard_summary: {
+      metadata_only: true,
+      read_only: true,
+      static_ui_only: true,
+      fetch_performed: false,
+      file_write_performed: false,
+      approval_write_performed: false,
+      accepted_samples_write_performed: false,
+      production_candidate_created: false,
+      provider_contact_performed: false,
+      plugin_call_performed: false,
+      api_call_performed: false,
+      image_generation_performed: false,
+      DailyNote_write_performed: false,
+      VCP_memory_write_performed: false,
+      memory_write_performed: false,
+      runtime_execution_performed: false,
+      real_manifest_read_performed: false,
+      real_vcpchat_read_performed: false,
+      real_vcptoolbox_read_performed: false
+    }
+  },
   image_case_seed: {
     input_assets: ["asset_archive/references/photo_studio_os_reference.placeholder"],
     prompt_package_id: "prompt-package-photo-studio-os-001",

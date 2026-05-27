@@ -46,6 +46,7 @@ const state = {
   runtime_gap_dashboard: mock.review_console_runtime_gap_dashboard_contract_seed,
   readonly_review_corpus_renderer: mock.visual_eval_readonly_review_corpus_renderer_static_handoff,
   readonly_visual_review_mvp_seed: mock.readonly_visual_review_mvp_seed,
+  readonly_visual_review_dataset_regression_seed: mock.readonly_visual_review_dataset_regression_seed,
   lifecycleFilter: "all",
   lifecycleSearch: "",
   selectedArtifactId: mock.artifact_lifecycle_state_reader_seed.records[0].sample_id,
@@ -2648,6 +2649,146 @@ function renderReadonlyVisualReviewMvp() {
   `;
 }
 
+function datasetRegressionRows(seed) {
+  return seed.dimensions.flatMap((dimension) => ([
+    {
+      review_result_id: `readonly_visual_review_dataset_${safeClassToken(dimension.dimension_id)}_pass_001`,
+      candidate_id: `dataset_${safeClassToken(dimension.dimension_id)}_pass_001`,
+      case_id: `readonly_visual_review_dataset_case_${safeClassToken(dimension.dimension_id)}_pass_001`,
+      dimension_id: dimension.dimension_id,
+      dimension_label: dimension.label,
+      outcome: "pass",
+      outcome_alias: null,
+      summary: `${dimension.label} passes metadata-only review with no blocking failure.`,
+      reasons: [`${dimension.dimension_id}_clear_for_review`, "metadata_only_positive_reference"],
+      taxonomy_tags: [],
+      blocking_watch_items: [],
+      next_review_action: "queue_for_future_human_review",
+      metadata_accumulation_action: "keep_as_metadata_candidate",
+      metadata_queue_sections: ["accepted_metadata_candidates", "archive_references", "next_review_actions"],
+      write_allowed: false
+    },
+    {
+      review_result_id: `readonly_visual_review_dataset_${safeClassToken(dimension.dimension_id)}_patch_001`,
+      candidate_id: `dataset_${safeClassToken(dimension.dimension_id)}_patch_001`,
+      case_id: `readonly_visual_review_dataset_case_${safeClassToken(dimension.dimension_id)}_patch_001`,
+      dimension_id: dimension.dimension_id,
+      dimension_label: dimension.label,
+      outcome: "patch",
+      outcome_alias: "needs_revision",
+      summary: `${dimension.label} needs bounded revision before it can pass review.`,
+      reasons: [`${dimension.dimension_id}_needs_revision`, "bounded_patch_plan_required"],
+      taxonomy_tags: [dimension.patch_tag],
+      blocking_watch_items: [`${dimension.dimension_id}_patch_watch`],
+      next_review_action: "write_patch_plan_only",
+      metadata_accumulation_action: "metadata_only_reference",
+      metadata_queue_sections: ["patch_plan_only", "archive_references", "next_review_actions"],
+      write_allowed: false
+    },
+    {
+      review_result_id: `readonly_visual_review_dataset_${safeClassToken(dimension.dimension_id)}_reject_001`,
+      candidate_id: `dataset_${safeClassToken(dimension.dimension_id)}_reject_001`,
+      case_id: `readonly_visual_review_dataset_case_${safeClassToken(dimension.dimension_id)}_reject_001`,
+      dimension_id: dimension.dimension_id,
+      dimension_label: dimension.label,
+      outcome: "reject",
+      outcome_alias: null,
+      summary: `${dimension.label} has a blocking failure and stays failure-learning only.`,
+      reasons: [`${dimension.dimension_id}_blocking_failure`, "never_production_route_required"],
+      taxonomy_tags: [dimension.reject_tag],
+      blocking_watch_items: [`${dimension.dimension_id}_blocking_watch`],
+      next_review_action: "defer_until_taxonomy_update",
+      metadata_accumulation_action: "keep_as_failure_learning_metadata",
+      metadata_queue_sections: ["failure_learning_metadata", "archive_references", "next_review_actions"],
+      write_allowed: false
+    }
+  ]));
+}
+
+function readonlyVisualReviewDatasetRegressionState() {
+  const seed = state.readonly_visual_review_dataset_regression_seed;
+  const reviewRows = datasetRegressionRows(seed);
+  const outcomeTotals = ["pass", "patch", "reject"].map((outcome) => ({
+    outcome,
+    count: reviewRows.filter((row) => row.outcome === outcome).length,
+    review_result_ids: reviewRows.filter((row) => row.outcome === outcome).map((row) => row.review_result_id)
+  }));
+  return {
+    state_id: seed.state_id,
+    state_type: seed.state_type,
+    status: seed.status,
+    display_only: seed.display_only,
+    source_taxonomy_ref: seed.source_taxonomy_ref,
+    source_mvp_state_ref: seed.source_mvp_state_ref,
+    outcome_aliases: seed.outcome_aliases,
+    dimension_count: seed.dimensions.length,
+    review_row_count: reviewRows.length,
+    dimensions: seed.dimensions.map((dimension) => ({
+      dimension_id: dimension.dimension_id,
+      label: dimension.label,
+      outcomes: ["pass", "patch", "reject"],
+      patch_tag: dimension.patch_tag,
+      reject_tag: dimension.reject_tag
+    })),
+    review_rows: reviewRows,
+    outcome_totals: outcomeTotals,
+    taxonomy_coverage: {
+      patch_tags: seed.dimensions.map((dimension) => dimension.patch_tag),
+      reject_tags: seed.dimensions.map((dimension) => dimension.reject_tag)
+    },
+    metadata_queue_sections: [...new Set(reviewRows.flatMap((row) => row.metadata_queue_sections))],
+    next_actions: [...new Set(reviewRows.map((row) => row.next_review_action))],
+    guard_summary: seed.guard_summary
+  };
+}
+
+function renderReadonlyVisualReviewDatasetRegression() {
+  const dataset = readonlyVisualReviewDatasetRegressionState();
+  qs("#readonlyVisualReviewDatasetSummary").innerHTML = `
+    <span>status <strong>${escapeHtml(dataset.status)}</strong></span>
+    <span>dimensions <strong>${escapeHtml(dataset.dimension_count)}</strong></span>
+    <span>rows <strong>${escapeHtml(dataset.review_row_count)}</strong></span>
+    <span>pass <strong>${escapeHtml(dataset.outcome_totals.find((item) => item.outcome === "pass").count)}</strong></span>
+    <span>patch <strong>${escapeHtml(dataset.outcome_totals.find((item) => item.outcome === "patch").count)}</strong></span>
+    <span>reject <strong>${escapeHtml(dataset.outcome_totals.find((item) => item.outcome === "reject").count)}</strong></span>
+  `;
+  qs("#readonlyVisualReviewDatasetCoverage").innerHTML = [
+    { kind: "dimension", label: "7-dimension coverage", values: dataset.dimensions.map((dimension) => dimension.dimension_id) },
+    { kind: "taxonomy", label: "patch tags", values: dataset.taxonomy_coverage.patch_tags },
+    { kind: "taxonomy", label: "reject tags", values: dataset.taxonomy_coverage.reject_tags },
+    { kind: "alias", label: "needs_revision", values: [`needs_revision -> ${dataset.outcome_aliases.needs_revision}`] }
+  ].map((section) => `
+    <article class="readonly-review-corpus-section">
+      <strong>${escapeHtml(section.kind)}: ${escapeHtml(section.label)}</strong>
+      <p>${inlineList(section.values)}</p>
+    </article>
+  `).join("");
+  qs("#readonlyVisualReviewDatasetRows").innerHTML = dataset.review_rows.map((row) => `
+    <article class="readonly-visual-review-dataset-row ${safeClassToken(row.outcome)}">
+      <div class="protocol-card-head">
+        <strong>${escapeHtml(row.dimension_id)}</strong>
+        <span>${escapeHtml(row.outcome)}${row.outcome_alias ? ` / ${escapeHtml(row.outcome_alias)}` : ""}</span>
+      </div>
+      <dl>
+        <div><dt>Candidate</dt><dd>${escapeHtml(row.candidate_id)}</dd></div>
+        <div><dt>Summary</dt><dd>${escapeHtml(row.summary)}</dd></div>
+        <div><dt>Taxonomy</dt><dd>${inlineList(row.taxonomy_tags)}</dd></div>
+        <div><dt>Next action</dt><dd>${escapeHtml(row.next_review_action)}</dd></div>
+        <div><dt>Write allowed</dt><dd>${escapeHtml(row.write_allowed)}</dd></div>
+      </dl>
+    </article>
+  `).join("");
+  qs("#readonlyVisualReviewDatasetGuard").innerHTML = `
+    <span>static UI only: ${escapeHtml(dataset.guard_summary.static_ui_only)}</span>
+    <span>fetch: ${escapeHtml(dataset.guard_summary.fetch_performed)}</span>
+    <span>file write: ${escapeHtml(dataset.guard_summary.file_write_performed)}</span>
+    <span>provider/plugin/API: ${escapeHtml(dataset.guard_summary.provider_contact_performed || dataset.guard_summary.plugin_call_performed || dataset.guard_summary.api_call_performed)}</span>
+    <span>image generation: ${escapeHtml(dataset.guard_summary.image_generation_performed)}</span>
+    <span>memory write: ${escapeHtml(dataset.guard_summary.memory_write_performed || dataset.guard_summary.DailyNote_write_performed || dataset.guard_summary.VCP_memory_write_performed)}</span>
+    <span>production: ${escapeHtml(dataset.guard_summary.production_candidate_created)}</span>
+  `;
+}
+
 function loadImportRecordSeed() {
   qs("#importRecordInput").value = importRecordSeedText();
   parseImportRecordText("project_local_seed");
@@ -3769,6 +3910,7 @@ function renderDraft() {
     review_console_runtime_gap_dashboard_state: reviewConsoleRuntimeGapDashboardState(),
     visual_eval_readonly_review_corpus_renderer_static_handoff: readonlyReviewCorpusRendererState(),
     readonly_visual_review_mvp_state: readonlyVisualReviewMvpState(),
+    readonly_visual_review_dataset_regression_state: readonlyVisualReviewDatasetRegressionState(),
     codex_session_import_record_reader: state.import_record_reader,
     review_session: buildReviewSession(memoryApproval, humanTotal),
     image_case: buildImageCase(humanTotal),
@@ -3824,6 +3966,7 @@ function renderAll() {
   renderReviewConsoleRuntimeGapDashboard();
   renderReadonlyReviewCorpusRenderer();
   renderReadonlyVisualReviewMvp();
+  renderReadonlyVisualReviewDatasetRegression();
   loadImportRecordSeed();
   renderDraft();
 }

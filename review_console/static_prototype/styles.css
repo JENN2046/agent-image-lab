@@ -1292,6 +1292,63 @@ input[type="range"] {
   color: var(--muted);
 }
 
+.readonly-visual-review-dataset {
+  display: grid;
+  gap: 12px;
+}
+
+.readonly-visual-review-dataset-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 10px;
+}
+
+.readonly-visual-review-dataset-row {
+  min-height: 210px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #10191d;
+}
+
+.readonly-visual-review-dataset-row.pass {
+  border-left: 3px solid var(--green);
+}
+
+.readonly-visual-review-dataset-row.patch {
+  border-left: 3px solid var(--amber);
+}
+
+.readonly-visual-review-dataset-row.reject {
+  border-left: 3px solid var(--red);
+}
+
+.readonly-visual-review-dataset-row dl {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  margin: 12px 0 0;
+}
+
+.readonly-visual-review-dataset-row dl div {
+  min-width: 0;
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #0e1518;
+}
+
+.readonly-visual-review-dataset-row dt {
+  color: var(--muted);
+  font-size: 11px;
+  text-transform: uppercase;
+}
+
+.readonly-visual-review-dataset-row dd {
+  margin: 3px 0 0;
+  overflow-wrap: anywhere;
+}
+
 .runtime-gap-card dl div {
   min-width: 0;
   padding: 8px;

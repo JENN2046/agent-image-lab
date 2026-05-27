@@ -1,0 +1,748 @@
+{
+  "state_id": "readonly_visual_review_dataset_regression_state_v1_001",
+  "state_type": "metadata_only_readonly_visual_review_dataset_regression_state",
+  "status": "draft_ready",
+  "display_only": true,
+  "source_taxonomy_ref": "tests/schema_examples/visual_eval_failure_taxonomy.example.json",
+  "source_mvp_state_ref": "tests/schema_examples/readonly_visual_review_mvp_state.example.json",
+  "outcome_aliases": {
+    "needs_revision": "patch"
+  },
+  "dimension_count": 7,
+  "review_row_count": 21,
+  "dimensions": [
+    {
+      "dimension_id": "subject_identity",
+      "label": "Subject identity",
+      "outcomes": [
+        "pass",
+        "patch",
+        "reject"
+      ],
+      "patch_tag": "subject_identity_ambiguous",
+      "reject_tag": "subject_drift"
+    },
+    {
+      "dimension_id": "commercial_usability",
+      "label": "Commercial usability",
+      "outcomes": [
+        "pass",
+        "patch",
+        "reject"
+      ],
+      "patch_tag": "commercial_readability_watch",
+      "reject_tag": "commercial_unusable"
+    },
+    {
+      "dimension_id": "material_realism",
+      "label": "Material realism",
+      "outcomes": [
+        "pass",
+        "patch",
+        "reject"
+      ],
+      "patch_tag": "material_failed",
+      "reject_tag": "material_realism_blocking"
+    },
+    {
+      "dimension_id": "lighting_consistency",
+      "label": "Lighting consistency",
+      "outcomes": [
+        "pass",
+        "patch",
+        "reject"
+      ],
+      "patch_tag": "lighting_failed",
+      "reject_tag": "lighting_blocking"
+    },
+    {
+      "dimension_id": "composition",
+      "label": "Composition",
+      "outcomes": [
+        "pass",
+        "patch",
+        "reject"
+      ],
+      "patch_tag": "composition_failed",
+      "reject_tag": "composition_blocking"
+    },
+    {
+      "dimension_id": "edge_or_mask_artifact",
+      "label": "Edge or mask artifact",
+      "outcomes": [
+        "pass",
+        "patch",
+        "reject"
+      ],
+      "patch_tag": "edge_artifact_failed",
+      "reject_tag": "mask_artifact_blocking"
+    },
+    {
+      "dimension_id": "background_contamination",
+      "label": "Background contamination",
+      "outcomes": [
+        "pass",
+        "patch",
+        "reject"
+      ],
+      "patch_tag": "background_contamination_failed",
+      "reject_tag": "background_contamination_blocking"
+    }
+  ],
+  "review_rows": [
+    {
+      "review_result_id": "readonly_visual_review_dataset_subject_identity_pass_001",
+      "candidate_id": "dataset_subject_identity_pass_001",
+      "case_id": "readonly_visual_review_dataset_case_subject_identity_pass_001",
+      "dimension_id": "subject_identity",
+      "dimension_label": "Subject identity",
+      "outcome": "pass",
+      "outcome_alias": null,
+      "summary": "Subject identity passes metadata-only review with no blocking failure.",
+      "reasons": [
+        "subject_identity_clear_for_review",
+        "metadata_only_positive_reference"
+      ],
+      "taxonomy_tags": [],
+      "blocking_watch_items": [],
+      "next_review_action": "queue_for_future_human_review",
+      "metadata_accumulation_action": "keep_as_metadata_candidate",
+      "metadata_queue_sections": [
+        "accepted_metadata_candidates",
+        "archive_references",
+        "next_review_actions"
+      ],
+      "write_allowed": false
+    },
+    {
+      "review_result_id": "readonly_visual_review_dataset_subject_identity_patch_001",
+      "candidate_id": "dataset_subject_identity_patch_001",
+      "case_id": "readonly_visual_review_dataset_case_subject_identity_patch_001",
+      "dimension_id": "subject_identity",
+      "dimension_label": "Subject identity",
+      "outcome": "patch",
+      "outcome_alias": "needs_revision",
+      "summary": "Subject identity needs bounded revision before it can pass review.",
+      "reasons": [
+        "subject_identity_needs_revision",
+        "bounded_patch_plan_required"
+      ],
+      "taxonomy_tags": [
+        "subject_identity_ambiguous"
+      ],
+      "blocking_watch_items": [
+        "subject_identity_patch_watch"
+      ],
+      "next_review_action": "write_patch_plan_only",
+      "metadata_accumulation_action": "metadata_only_reference",
+      "metadata_queue_sections": [
+        "patch_plan_only",
+        "archive_references",
+        "next_review_actions"
+      ],
+      "write_allowed": false
+    },
+    {
+      "review_result_id": "readonly_visual_review_dataset_subject_identity_reject_001",
+      "candidate_id": "dataset_subject_identity_reject_001",
+      "case_id": "readonly_visual_review_dataset_case_subject_identity_reject_001",
+      "dimension_id": "subject_identity",
+      "dimension_label": "Subject identity",
+      "outcome": "reject",
+      "outcome_alias": null,
+      "summary": "Subject identity has a blocking failure and stays failure-learning only.",
+      "reasons": [
+        "subject_identity_blocking_failure",
+        "never_production_route_required"
+      ],
+      "taxonomy_tags": [
+        "subject_drift"
+      ],
+      "blocking_watch_items": [
+        "subject_identity_blocking_watch"
+      ],
+      "next_review_action": "defer_until_taxonomy_update",
+      "metadata_accumulation_action": "keep_as_failure_learning_metadata",
+      "metadata_queue_sections": [
+        "failure_learning_metadata",
+        "archive_references",
+        "next_review_actions"
+      ],
+      "write_allowed": false
+    },
+    {
+      "review_result_id": "readonly_visual_review_dataset_commercial_usability_pass_001",
+      "candidate_id": "dataset_commercial_usability_pass_001",
+      "case_id": "readonly_visual_review_dataset_case_commercial_usability_pass_001",
+      "dimension_id": "commercial_usability",
+      "dimension_label": "Commercial usability",
+      "outcome": "pass",
+      "outcome_alias": null,
+      "summary": "Commercial usability passes metadata-only review with no blocking failure.",
+      "reasons": [
+        "commercial_usability_clear_for_review",
+        "metadata_only_positive_reference"
+      ],
+      "taxonomy_tags": [],
+      "blocking_watch_items": [],
+      "next_review_action": "queue_for_future_human_review",
+      "metadata_accumulation_action": "keep_as_metadata_candidate",
+      "metadata_queue_sections": [
+        "accepted_metadata_candidates",
+        "archive_references",
+        "next_review_actions"
+      ],
+      "write_allowed": false
+    },
+    {
+      "review_result_id": "readonly_visual_review_dataset_commercial_usability_patch_001",
+      "candidate_id": "dataset_commercial_usability_patch_001",
+      "case_id": "readonly_visual_review_dataset_case_commercial_usability_patch_001",
+      "dimension_id": "commercial_usability",
+      "dimension_label": "Commercial usability",
+      "outcome": "patch",
+      "outcome_alias": "needs_revision",
+      "summary": "Commercial usability needs bounded revision before it can pass review.",
+      "reasons": [
+        "commercial_usability_needs_revision",
+        "bounded_patch_plan_required"
+      ],
+      "taxonomy_tags": [
+        "commercial_readability_watch"
+      ],
+      "blocking_watch_items": [
+        "commercial_usability_patch_watch"
+      ],
+      "next_review_action": "write_patch_plan_only",
+      "metadata_accumulation_action": "metadata_only_reference",
+      "metadata_queue_sections": [
+        "patch_plan_only",
+        "archive_references",
+        "next_review_actions"
+      ],
+      "write_allowed": false
+    },
+    {
+      "review_result_id": "readonly_visual_review_dataset_commercial_usability_reject_001",
+      "candidate_id": "dataset_commercial_usability_reject_001",
+      "case_id": "readonly_visual_review_dataset_case_commercial_usability_reject_001",
+      "dimension_id": "commercial_usability",
+      "dimension_label": "Commercial usability",
+      "outcome": "reject",
+      "outcome_alias": null,
+      "summary": "Commercial usability has a blocking failure and stays failure-learning only.",
+      "reasons": [
+        "commercial_usability_blocking_failure",
+        "never_production_route_required"
+      ],
+      "taxonomy_tags": [
+        "commercial_unusable"
+      ],
+      "blocking_watch_items": [
+        "commercial_usability_blocking_watch"
+      ],
+      "next_review_action": "defer_until_taxonomy_update",
+      "metadata_accumulation_action": "keep_as_failure_learning_metadata",
+      "metadata_queue_sections": [
+        "failure_learning_metadata",
+        "archive_references",
+        "next_review_actions"
+      ],
+      "write_allowed": false
+    },
+    {
+      "review_result_id": "readonly_visual_review_dataset_material_realism_pass_001",
+      "candidate_id": "dataset_material_realism_pass_001",
+      "case_id": "readonly_visual_review_dataset_case_material_realism_pass_001",
+      "dimension_id": "material_realism",
+      "dimension_label": "Material realism",
+      "outcome": "pass",
+      "outcome_alias": null,
+      "summary": "Material realism passes metadata-only review with no blocking failure.",
+      "reasons": [
+        "material_realism_clear_for_review",
+        "metadata_only_positive_reference"
+      ],
+      "taxonomy_tags": [],
+      "blocking_watch_items": [],
+      "next_review_action": "queue_for_future_human_review",
+      "metadata_accumulation_action": "keep_as_metadata_candidate",
+      "metadata_queue_sections": [
+        "accepted_metadata_candidates",
+        "archive_references",
+        "next_review_actions"
+      ],
+      "write_allowed": false
+    },
+    {
+      "review_result_id": "readonly_visual_review_dataset_material_realism_patch_001",
+      "candidate_id": "dataset_material_realism_patch_001",
+      "case_id": "readonly_visual_review_dataset_case_material_realism_patch_001",
+      "dimension_id": "material_realism",
+      "dimension_label": "Material realism",
+      "outcome": "patch",
+      "outcome_alias": "needs_revision",
+      "summary": "Material realism needs bounded revision before it can pass review.",
+      "reasons": [
+        "material_realism_needs_revision",
+        "bounded_patch_plan_required"
+      ],
+      "taxonomy_tags": [
+        "material_failed"
+      ],
+      "blocking_watch_items": [
+        "material_realism_patch_watch"
+      ],
+      "next_review_action": "write_patch_plan_only",
+      "metadata_accumulation_action": "metadata_only_reference",
+      "metadata_queue_sections": [
+        "patch_plan_only",
+        "archive_references",
+        "next_review_actions"
+      ],
+      "write_allowed": false
+    },
+    {
+      "review_result_id": "readonly_visual_review_dataset_material_realism_reject_001",
+      "candidate_id": "dataset_material_realism_reject_001",
+      "case_id": "readonly_visual_review_dataset_case_material_realism_reject_001",
+      "dimension_id": "material_realism",
+      "dimension_label": "Material realism",
+      "outcome": "reject",
+      "outcome_alias": null,
+      "summary": "Material realism has a blocking failure and stays failure-learning only.",
+      "reasons": [
+        "material_realism_blocking_failure",
+        "never_production_route_required"
+      ],
+      "taxonomy_tags": [
+        "material_realism_blocking"
+      ],
+      "blocking_watch_items": [
+        "material_realism_blocking_watch"
+      ],
+      "next_review_action": "defer_until_taxonomy_update",
+      "metadata_accumulation_action": "keep_as_failure_learning_metadata",
+      "metadata_queue_sections": [
+        "failure_learning_metadata",
+        "archive_references",
+        "next_review_actions"
+      ],
+      "write_allowed": false
+    },
+    {
+      "review_result_id": "readonly_visual_review_dataset_lighting_consistency_pass_001",
+      "candidate_id": "dataset_lighting_consistency_pass_001",
+      "case_id": "readonly_visual_review_dataset_case_lighting_consistency_pass_001",
+      "dimension_id": "lighting_consistency",
+      "dimension_label": "Lighting consistency",
+      "outcome": "pass",
+      "outcome_alias": null,
+      "summary": "Lighting consistency passes metadata-only review with no blocking failure.",
+      "reasons": [
+        "lighting_consistency_clear_for_review",
+        "metadata_only_positive_reference"
+      ],
+      "taxonomy_tags": [],
+      "blocking_watch_items": [],
+      "next_review_action": "queue_for_future_human_review",
+      "metadata_accumulation_action": "keep_as_metadata_candidate",
+      "metadata_queue_sections": [
+        "accepted_metadata_candidates",
+        "archive_references",
+        "next_review_actions"
+      ],
+      "write_allowed": false
+    },
+    {
+      "review_result_id": "readonly_visual_review_dataset_lighting_consistency_patch_001",
+      "candidate_id": "dataset_lighting_consistency_patch_001",
+      "case_id": "readonly_visual_review_dataset_case_lighting_consistency_patch_001",
+      "dimension_id": "lighting_consistency",
+      "dimension_label": "Lighting consistency",
+      "outcome": "patch",
+      "outcome_alias": "needs_revision",
+      "summary": "Lighting consistency needs bounded revision before it can pass review.",
+      "reasons": [
+        "lighting_consistency_needs_revision",
+        "bounded_patch_plan_required"
+      ],
+      "taxonomy_tags": [
+        "lighting_failed"
+      ],
+      "blocking_watch_items": [
+        "lighting_consistency_patch_watch"
+      ],
+      "next_review_action": "write_patch_plan_only",
+      "metadata_accumulation_action": "metadata_only_reference",
+      "metadata_queue_sections": [
+        "patch_plan_only",
+        "archive_references",
+        "next_review_actions"
+      ],
+      "write_allowed": false
+    },
+    {
+      "review_result_id": "readonly_visual_review_dataset_lighting_consistency_reject_001",
+      "candidate_id": "dataset_lighting_consistency_reject_001",
+      "case_id": "readonly_visual_review_dataset_case_lighting_consistency_reject_001",
+      "dimension_id": "lighting_consistency",
+      "dimension_label": "Lighting consistency",
+      "outcome": "reject",
+      "outcome_alias": null,
+      "summary": "Lighting consistency has a blocking failure and stays failure-learning only.",
+      "reasons": [
+        "lighting_consistency_blocking_failure",
+        "never_production_route_required"
+      ],
+      "taxonomy_tags": [
+        "lighting_blocking"
+      ],
+      "blocking_watch_items": [
+        "lighting_consistency_blocking_watch"
+      ],
+      "next_review_action": "defer_until_taxonomy_update",
+      "metadata_accumulation_action": "keep_as_failure_learning_metadata",
+      "metadata_queue_sections": [
+        "failure_learning_metadata",
+        "archive_references",
+        "next_review_actions"
+      ],
+      "write_allowed": false
+    },
+    {
+      "review_result_id": "readonly_visual_review_dataset_composition_pass_001",
+      "candidate_id": "dataset_composition_pass_001",
+      "case_id": "readonly_visual_review_dataset_case_composition_pass_001",
+      "dimension_id": "composition",
+      "dimension_label": "Composition",
+      "outcome": "pass",
+      "outcome_alias": null,
+      "summary": "Composition passes metadata-only review with no blocking failure.",
+      "reasons": [
+        "composition_clear_for_review",
+        "metadata_only_positive_reference"
+      ],
+      "taxonomy_tags": [],
+      "blocking_watch_items": [],
+      "next_review_action": "queue_for_future_human_review",
+      "metadata_accumulation_action": "keep_as_metadata_candidate",
+      "metadata_queue_sections": [
+        "accepted_metadata_candidates",
+        "archive_references",
+        "next_review_actions"
+      ],
+      "write_allowed": false
+    },
+    {
+      "review_result_id": "readonly_visual_review_dataset_composition_patch_001",
+      "candidate_id": "dataset_composition_patch_001",
+      "case_id": "readonly_visual_review_dataset_case_composition_patch_001",
+      "dimension_id": "composition",
+      "dimension_label": "Composition",
+      "outcome": "patch",
+      "outcome_alias": "needs_revision",
+      "summary": "Composition needs bounded revision before it can pass review.",
+      "reasons": [
+        "composition_needs_revision",
+        "bounded_patch_plan_required"
+      ],
+      "taxonomy_tags": [
+        "composition_failed"
+      ],
+      "blocking_watch_items": [
+        "composition_patch_watch"
+      ],
+      "next_review_action": "write_patch_plan_only",
+      "metadata_accumulation_action": "metadata_only_reference",
+      "metadata_queue_sections": [
+        "patch_plan_only",
+        "archive_references",
+        "next_review_actions"
+      ],
+      "write_allowed": false
+    },
+    {
+      "review_result_id": "readonly_visual_review_dataset_composition_reject_001",
+      "candidate_id": "dataset_composition_reject_001",
+      "case_id": "readonly_visual_review_dataset_case_composition_reject_001",
+      "dimension_id": "composition",
+      "dimension_label": "Composition",
+      "outcome": "reject",
+      "outcome_alias": null,
+      "summary": "Composition has a blocking failure and stays failure-learning only.",
+      "reasons": [
+        "composition_blocking_failure",
+        "never_production_route_required"
+      ],
+      "taxonomy_tags": [
+        "composition_blocking"
+      ],
+      "blocking_watch_items": [
+        "composition_blocking_watch"
+      ],
+      "next_review_action": "defer_until_taxonomy_update",
+      "metadata_accumulation_action": "keep_as_failure_learning_metadata",
+      "metadata_queue_sections": [
+        "failure_learning_metadata",
+        "archive_references",
+        "next_review_actions"
+      ],
+      "write_allowed": false
+    },
+    {
+      "review_result_id": "readonly_visual_review_dataset_edge_or_mask_artifact_pass_001",
+      "candidate_id": "dataset_edge_or_mask_artifact_pass_001",
+      "case_id": "readonly_visual_review_dataset_case_edge_or_mask_artifact_pass_001",
+      "dimension_id": "edge_or_mask_artifact",
+      "dimension_label": "Edge or mask artifact",
+      "outcome": "pass",
+      "outcome_alias": null,
+      "summary": "Edge or mask artifact passes metadata-only review with no blocking failure.",
+      "reasons": [
+        "edge_or_mask_artifact_clear_for_review",
+        "metadata_only_positive_reference"
+      ],
+      "taxonomy_tags": [],
+      "blocking_watch_items": [],
+      "next_review_action": "queue_for_future_human_review",
+      "metadata_accumulation_action": "keep_as_metadata_candidate",
+      "metadata_queue_sections": [
+        "accepted_metadata_candidates",
+        "archive_references",
+        "next_review_actions"
+      ],
+      "write_allowed": false
+    },
+    {
+      "review_result_id": "readonly_visual_review_dataset_edge_or_mask_artifact_patch_001",
+      "candidate_id": "dataset_edge_or_mask_artifact_patch_001",
+      "case_id": "readonly_visual_review_dataset_case_edge_or_mask_artifact_patch_001",
+      "dimension_id": "edge_or_mask_artifact",
+      "dimension_label": "Edge or mask artifact",
+      "outcome": "patch",
+      "outcome_alias": "needs_revision",
+      "summary": "Edge or mask artifact needs bounded revision before it can pass review.",
+      "reasons": [
+        "edge_or_mask_artifact_needs_revision",
+        "bounded_patch_plan_required"
+      ],
+      "taxonomy_tags": [
+        "edge_artifact_failed"
+      ],
+      "blocking_watch_items": [
+        "edge_or_mask_artifact_patch_watch"
+      ],
+      "next_review_action": "write_patch_plan_only",
+      "metadata_accumulation_action": "metadata_only_reference",
+      "metadata_queue_sections": [
+        "patch_plan_only",
+        "archive_references",
+        "next_review_actions"
+      ],
+      "write_allowed": false
+    },
+    {
+      "review_result_id": "readonly_visual_review_dataset_edge_or_mask_artifact_reject_001",
+      "candidate_id": "dataset_edge_or_mask_artifact_reject_001",
+      "case_id": "readonly_visual_review_dataset_case_edge_or_mask_artifact_reject_001",
+      "dimension_id": "edge_or_mask_artifact",
+      "dimension_label": "Edge or mask artifact",
+      "outcome": "reject",
+      "outcome_alias": null,
+      "summary": "Edge or mask artifact has a blocking failure and stays failure-learning only.",
+      "reasons": [
+        "edge_or_mask_artifact_blocking_failure",
+        "never_production_route_required"
+      ],
+      "taxonomy_tags": [
+        "mask_artifact_blocking"
+      ],
+      "blocking_watch_items": [
+        "edge_or_mask_artifact_blocking_watch"
+      ],
+      "next_review_action": "defer_until_taxonomy_update",
+      "metadata_accumulation_action": "keep_as_failure_learning_metadata",
+      "metadata_queue_sections": [
+        "failure_learning_metadata",
+        "archive_references",
+        "next_review_actions"
+      ],
+      "write_allowed": false
+    },
+    {
+      "review_result_id": "readonly_visual_review_dataset_background_contamination_pass_001",
+      "candidate_id": "dataset_background_contamination_pass_001",
+      "case_id": "readonly_visual_review_dataset_case_background_contamination_pass_001",
+      "dimension_id": "background_contamination",
+      "dimension_label": "Background contamination",
+      "outcome": "pass",
+      "outcome_alias": null,
+      "summary": "Background contamination passes metadata-only review with no blocking failure.",
+      "reasons": [
+        "background_contamination_clear_for_review",
+        "metadata_only_positive_reference"
+      ],
+      "taxonomy_tags": [],
+      "blocking_watch_items": [],
+      "next_review_action": "queue_for_future_human_review",
+      "metadata_accumulation_action": "keep_as_metadata_candidate",
+      "metadata_queue_sections": [
+        "accepted_metadata_candidates",
+        "archive_references",
+        "next_review_actions"
+      ],
+      "write_allowed": false
+    },
+    {
+      "review_result_id": "readonly_visual_review_dataset_background_contamination_patch_001",
+      "candidate_id": "dataset_background_contamination_patch_001",
+      "case_id": "readonly_visual_review_dataset_case_background_contamination_patch_001",
+      "dimension_id": "background_contamination",
+      "dimension_label": "Background contamination",
+      "outcome": "patch",
+      "outcome_alias": "needs_revision",
+      "summary": "Background contamination needs bounded revision before it can pass review.",
+      "reasons": [
+        "background_contamination_needs_revision",
+        "bounded_patch_plan_required"
+      ],
+      "taxonomy_tags": [
+        "background_contamination_failed"
+      ],
+      "blocking_watch_items": [
+        "background_contamination_patch_watch"
+      ],
+      "next_review_action": "write_patch_plan_only",
+      "metadata_accumulation_action": "metadata_only_reference",
+      "metadata_queue_sections": [
+        "patch_plan_only",
+        "archive_references",
+        "next_review_actions"
+      ],
+      "write_allowed": false
+    },
+    {
+      "review_result_id": "readonly_visual_review_dataset_background_contamination_reject_001",
+      "candidate_id": "dataset_background_contamination_reject_001",
+      "case_id": "readonly_visual_review_dataset_case_background_contamination_reject_001",
+      "dimension_id": "background_contamination",
+      "dimension_label": "Background contamination",
+      "outcome": "reject",
+      "outcome_alias": null,
+      "summary": "Background contamination has a blocking failure and stays failure-learning only.",
+      "reasons": [
+        "background_contamination_blocking_failure",
+        "never_production_route_required"
+      ],
+      "taxonomy_tags": [
+        "background_contamination_blocking"
+      ],
+      "blocking_watch_items": [
+        "background_contamination_blocking_watch"
+      ],
+      "next_review_action": "defer_until_taxonomy_update",
+      "metadata_accumulation_action": "keep_as_failure_learning_metadata",
+      "metadata_queue_sections": [
+        "failure_learning_metadata",
+        "archive_references",
+        "next_review_actions"
+      ],
+      "write_allowed": false
+    }
+  ],
+  "outcome_totals": [
+    {
+      "outcome": "pass",
+      "count": 7,
+      "review_result_ids": [
+        "readonly_visual_review_dataset_subject_identity_pass_001",
+        "readonly_visual_review_dataset_commercial_usability_pass_001",
+        "readonly_visual_review_dataset_material_realism_pass_001",
+        "readonly_visual_review_dataset_lighting_consistency_pass_001",
+        "readonly_visual_review_dataset_composition_pass_001",
+        "readonly_visual_review_dataset_edge_or_mask_artifact_pass_001",
+        "readonly_visual_review_dataset_background_contamination_pass_001"
+      ]
+    },
+    {
+      "outcome": "patch",
+      "count": 7,
+      "review_result_ids": [
+        "readonly_visual_review_dataset_subject_identity_patch_001",
+        "readonly_visual_review_dataset_commercial_usability_patch_001",
+        "readonly_visual_review_dataset_material_realism_patch_001",
+        "readonly_visual_review_dataset_lighting_consistency_patch_001",
+        "readonly_visual_review_dataset_composition_patch_001",
+        "readonly_visual_review_dataset_edge_or_mask_artifact_patch_001",
+        "readonly_visual_review_dataset_background_contamination_patch_001"
+      ]
+    },
+    {
+      "outcome": "reject",
+      "count": 7,
+      "review_result_ids": [
+        "readonly_visual_review_dataset_subject_identity_reject_001",
+        "readonly_visual_review_dataset_commercial_usability_reject_001",
+        "readonly_visual_review_dataset_material_realism_reject_001",
+        "readonly_visual_review_dataset_lighting_consistency_reject_001",
+        "readonly_visual_review_dataset_composition_reject_001",
+        "readonly_visual_review_dataset_edge_or_mask_artifact_reject_001",
+        "readonly_visual_review_dataset_background_contamination_reject_001"
+      ]
+    }
+  ],
+  "taxonomy_coverage": {
+    "patch_tags": [
+      "subject_identity_ambiguous",
+      "commercial_readability_watch",
+      "material_failed",
+      "lighting_failed",
+      "composition_failed",
+      "edge_artifact_failed",
+      "background_contamination_failed"
+    ],
+    "reject_tags": [
+      "subject_drift",
+      "commercial_unusable",
+      "material_realism_blocking",
+      "lighting_blocking",
+      "composition_blocking",
+      "mask_artifact_blocking",
+      "background_contamination_blocking"
+    ]
+  },
+  "metadata_queue_sections": [
+    "accepted_metadata_candidates",
+    "archive_references",
+    "next_review_actions",
+    "patch_plan_only",
+    "failure_learning_metadata"
+  ],
+  "next_actions": [
+    "queue_for_future_human_review",
+    "write_patch_plan_only",
+    "defer_until_taxonomy_update"
+  ],
+  "guard_summary": {
+    "metadata_only": true,
+    "read_only": true,
+    "static_ui_only": true,
+    "fetch_performed": false,
+    "file_write_performed": false,
+    "approval_write_performed": false,
+    "accepted_samples_write_performed": false,
+    "production_candidate_created": false,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "DailyNote_write_performed": false,
+    "VCP_memory_write_performed": false,
+    "memory_write_performed": false,
+    "runtime_execution_performed": false,
+    "real_manifest_read_performed": false,
+    "real_vcpchat_read_performed": false,
+    "real_vcptoolbox_read_performed": false
+  }
+}

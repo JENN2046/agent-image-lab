@@ -1,5 +1,70 @@
 ---
 
+## Current Run State - Readonly Visual Review Dataset Regression Layer
+
+```text
+phase: readonly_visual_review_dataset_regression_layer_20260527
+status: COMPLETED_VALIDATED_LOCAL_STATIC_REGRESSION_LAYER
+mode: Green local static Review Console dataset regression implementation
+branch: master
+source_head: 04e6c13
+goal: Turn the Readonly Visual Review MVP into an independent 21-row visual review dataset and regression validation layer without changing the P3.22 24-artifact catalog count.
+completed:
+- Added `readonly_visual_review_dataset_regression_seed` with 7 fixed dimensions.
+- Generated 21 pass / patch / reject rows from the seed, with `needs_revision` mapped only as a `patch` alias.
+- Added the dataset regression section to the static Review Console under the readonly workbench.
+- Added `readonly_visual_review_dataset_regression_state` to browser draft output while keeping `readonly_visual_review_mvp_state` compatible.
+- Added snapshot fixture `tests/schema_examples/readonly_visual_review_dataset_regression_state.example.json`.
+- Added `scripts/validate_readonly_visual_review_dataset_regression.js` with 9 fail-closed negative cases, including cross-dimension taxonomy tag drift.
+- Wired the validator into package scripts and `npm run validate:mvp`.
+- Updated Review Console README and FIELD_MAPPING handoff notes.
+changed_by_this_task:
+- package.json
+- review_console/static_prototype/FIELD_MAPPING.md
+- review_console/static_prototype/README.md
+- review_console/static_prototype/app.js
+- review_console/static_prototype/index.html
+- review_console/static_prototype/mock_data.js
+- review_console/static_prototype/styles.css
+- scripts/validate_mvp_core.js
+- scripts/validate_readonly_visual_review_dataset_regression.js
+- tests/schema_examples/readonly_visual_review_dataset_regression_state.example.json
+- .agent_board/HANDOFF.md
+- .agent_board/RUN_STATE.md
+- .agent_board/TASK_QUEUE.md
+- .agent_board/CHECKPOINT.md
+validation:
+- node --check scripts\validate_readonly_visual_review_dataset_regression.js: passed
+- node --check review_console\static_prototype\app.js: passed
+- node scripts\validate_readonly_visual_review_dataset_regression.js: passed
+- node scripts\validate_readonly_visual_review_mvp.js: passed
+- node scripts\validate_visual_eval_readonly_review_artifact_system.js: passed
+- node scripts\validate_visual_eval_review_console_readonly_corpus_renderer.js: passed
+- node scripts\validate_visual_eval_readonly_review_artifact_catalog.js: passed
+- npm run validate:mvp: passed
+- local browser smoke at http://127.0.0.1:4174/: passed; preview server stopped
+- node scripts\validate_agent_board_state.js: passed
+- git diff --check: passed with CRLF normalization warnings only
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+accepted_samples_write_performed: false
+production_candidate_created: false
+runtime_execution_performed: false
+fetch_performed: false
+file_write_performed: false
+dependency_change_performed: false
+secret_value_read_performed: false
+commit_performed: false
+push_performed: false
+tag_release_deploy_performed: false
+next_safe_task: review local dataset regression diff; exact-file local commit only if explicitly requested.
+next_phase_started: false
+```
+
 ## Current Run State - Readonly Visual Review MVP Local Console
 
 ```text

@@ -1,4 +1,14 @@
 ---
+- [x] ID: readonly_visual_review_dataset_regression_layer_20260527
+      Lane: Green local static Review Console dataset regression implementation.
+      Status: completed_validated_local_static_regression_layer.
+      Goal: Expand the Readonly Visual Review MVP into an independent 21-row visual review dataset regression layer without changing the P3.22 24-artifact catalog count.
+      Completed: added 7 fixed visual review dimensions; generated pass / patch / reject rows for each dimension; mapped `needs_revision` only to `patch`; added static Review Console dataset regression section; added `readonly_visual_review_dataset_regression_state` to draft output; added snapshot fixture; added fail-closed validator with same-dimension taxonomy tag matching; wired validator into package scripts and MVP core; updated Review Console README/FIELD_MAPPING.
+      Boundary: no runtime, fetch, file write, provider contact, plugin call, API call, image generation, DailyNote/VCP memory, accepted_samples write, production_candidate creation, dependency change, commit, push, tag, release, deploy, or destructive action.
+      Validation: node --check changed JS passed; new validator passed with 9 fail-closed negative cases; readonly MVP / artifact system / console renderer / catalog validators passed; npm run validate:mvp passed; local browser smoke passed at http://127.0.0.1:4174/ and preview server was stopped; agent board validator passed; git diff --check passed with CRLF normalization warnings only.
+      Recommended next: review local dataset regression diff; exact-file local commit only if explicitly requested.
+
+---
 - [x] ID: readonly_visual_review_mvp_local_console_20260527
       Lane: Green local static Review Console MVP implementation.
       Status: completed_validated_local_static_mvp.

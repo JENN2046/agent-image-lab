@@ -756,3 +756,18 @@ erun_local_validator_outside_ui | fail-closed checklist rows | Must stay static 
 | `next_action_sections[].section_id` | `readonly_visual_review_mvp_state.next_actions` | 必须覆盖 `queue_for_future_human_review`、`write_patch_plan_only`、`defer_until_taxonomy_update` |
 | static guard seed | `readonly_visual_review_mvp_state.guard_summary` | runtime、fetch、file write、accepted_samples、production_candidate、provider/plugin/API、image generation、DailyNote、VCP memory、real manifest / VCPChat / VCPToolBox flags 必须保持 false |
 | `tests/schema_examples/readonly_visual_review_mvp_state.example.json` | snapshot validator | Snapshot 只固定浏览器草案输出结构和关键字段，不代表保存、批准、写入或生产晋级 |
+
+## Readonly Visual Review Dataset Regression Mapping
+
+本节用于验收 `readonly_visual_review_dataset_regression_state` 的静态只读数据集回归层。它只从 `mock_data.js` seed、canonical taxonomy fixture 和浏览器内存 draft output 派生 UI / snapshot / validator，不读取 `asset_archive/`，不加载图片，不 fetch，不写文件，不调用 runtime、provider / plugin / API / DailyNote / VCP memory，不写 accepted_samples，不创建 production_candidate。
+
+| Source | Review Console field | Rule |
+| --- | --- | --- |
+| `readonly_visual_review_dataset_regression_seed.dimensions` | `readonly_visual_review_dataset_regression_state.dimensions` | 必须固定 7 个维度：`subject_identity`、`commercial_usability`、`material_realism`、`lighting_consistency`、`composition`、`edge_or_mask_artifact`、`background_contamination` |
+| generated dataset rows | `readonly_visual_review_dataset_regression_state.review_rows` | 每个维度必须恰好有 pass / patch / reject 三行，总数 21；所有行 `write_allowed=false` |
+| `outcome_aliases.needs_revision` | `readonly_visual_review_dataset_regression_state.outcome_aliases` | `needs_revision` 只能映射为 `patch`，不得作为正式 `outcome` 写入 |
+| `visual_eval_failure_taxonomy.example.json.categories[].failure_tags` | `taxonomy_coverage.patch_tags` / `reject_tags` | patch tags 必须来自 canonical patchable taxonomy，reject tags 必须来自 canonical blocking taxonomy |
+| dataset row metadata sections | `metadata_queue_sections` | 必须覆盖 accepted、patch、failure、archive、next-review 五类 metadata queue section |
+| dataset row next actions | `next_actions` | 必须覆盖 `queue_for_future_human_review`、`write_patch_plan_only`、`defer_until_taxonomy_update` |
+| static guard seed | `guard_summary` | runtime、fetch、file write、accepted_samples、production_candidate、provider/plugin/API、image generation、DailyNote、VCP memory、real manifest / VCPChat / VCPToolBox flags 必须保持 false |
+| `tests/schema_examples/readonly_visual_review_dataset_regression_state.example.json` | snapshot validator | Snapshot 只固定 21 行数据集回归层的草案输出结构，不代表保存、批准、写入、accepted_samples 登记或 production 晋级 |

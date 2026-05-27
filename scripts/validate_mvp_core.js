@@ -457,6 +457,23 @@ safeCheck("readonly_visual_review_mvp", () => {
     result.VCP_memory_write_performed === false;
 });
 
+safeCheck("readonly_visual_review_dataset_regression", () => {
+  const result = parseJson(runNode(["scripts/validate_readonly_visual_review_dataset_regression.js"]));
+  return result.passed === true &&
+    result.dimension_count === 7 &&
+    result.review_row_count === 21 &&
+    result.negative_case_count === 9 &&
+    result.provider_contact_performed === false &&
+    result.plugin_call_performed === false &&
+    result.api_call_performed === false &&
+    result.image_generation_performed === false &&
+    result.file_write_performed === false &&
+    result.accepted_samples_write_performed === false &&
+    result.production_candidate_created === false &&
+    result.DailyNote_write_performed === false &&
+    result.VCP_memory_write_performed === false;
+});
+
 safeCheck("metadata_only_accepted_sample_retry_006", () => {
   const result = parseJson(runNode(["scripts/validate_metadata_only_accepted_sample_retry_006.js"]));
   return result.passed === true &&
