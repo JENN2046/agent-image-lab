@@ -28,7 +28,6 @@
         "candidate_id": "synthetic_product_still_life_pass_001",
         "case_id": "visual_eval_image_case_pass_synthetic_001",
         "outcome": "pass",
-        "summary": "Synthetic candidate meets core product readability and has only non-blocking watch items.",
         "failure_tags": [],
         "accepted_metadata_action": "keep_as_metadata_candidate",
         "rejected_metadata_action": "none",
@@ -44,7 +43,6 @@
         "candidate_id": "synthetic_product_still_life_patch_001",
         "case_id": "visual_eval_image_case_patch_synthetic_001",
         "outcome": "patch",
-        "summary": "Synthetic candidate has useful composition but requires bounded correction before pass.",
         "failure_tags": [
           "material_failed",
           "lighting_failed"
@@ -63,7 +61,6 @@
         "candidate_id": "synthetic_product_still_life_reject_001",
         "case_id": "visual_eval_image_case_reject_synthetic_001",
         "outcome": "reject",
-        "summary": "Synthetic candidate fails product identity or commercial usability and must remain never-production.",
         "failure_tags": [
           "subject_drift",
           "commercial_unusable"
@@ -82,7 +79,6 @@
         "candidate_id": "synthetic_product_still_life_pass_001",
         "case_id": "visual_eval_image_case_pass_synthetic_001",
         "outcome": "pass",
-        "summary": "Synthetic candidate meets core product readability and has only non-blocking watch items.",
         "failure_tags": [],
         "accepted_metadata_action": "keep_as_metadata_candidate",
         "rejected_metadata_action": "none",
@@ -96,7 +92,6 @@
         "candidate_id": "synthetic_product_still_life_patch_001",
         "case_id": "visual_eval_image_case_patch_synthetic_001",
         "outcome": "patch",
-        "summary": "Synthetic candidate has useful composition but requires bounded correction before pass.",
         "failure_tags": [
           "material_failed",
           "lighting_failed"
@@ -113,7 +108,6 @@
         "candidate_id": "synthetic_product_still_life_reject_001",
         "case_id": "visual_eval_image_case_reject_synthetic_001",
         "outcome": "reject",
-        "summary": "Synthetic candidate fails product identity or commercial usability and must remain never-production.",
         "failure_tags": [
           "subject_drift",
           "commercial_unusable"

@@ -62,7 +62,6 @@ function summarizeEntry(entry) {
     candidate_id: entry.candidate_id,
     case_id: entry.case_id,
     outcome: entry.outcome,
-    summary: entry.summary,
     failure_tags: entry.failure_tags || [],
     next_review_action: entry.next_review_action,
     metadata_actions: {

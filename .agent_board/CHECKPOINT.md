@@ -1,5 +1,69 @@
 ---
 
+## Checkpoint - Readonly Derived Field Minimization Hardening
+
+```text
+phase: readonly_derived_field_minimization_hardening_20260527
+status: completed_validated_local_projection_hardening
+result: COMPLETED_VALIDATED
+mode: Green local readonly derived-field minimization
+summary: Minimized metadata accumulation derived-field ownership by removing repeated summary copies from the queue and queue consumer projections, then hardened the readonly artifact graph validator so projection fields must remain consistent with canonical review result ownership. Failure tags remain as a required projection-only field because catalog, query, surface, detail, and workspace validators require that indexed visibility contract.
+changed_files_current_task:
+  - kernel/visual_eval_readonly_metadata_accumulation_queue.js
+  - kernel/visual_eval_readonly_metadata_accumulation_queue_consumer.js
+  - scripts/validate_visual_eval_readonly_artifact_graph.js
+  - tests/schema_examples/visual_eval_readonly_metadata_accumulation_queue.example.json
+  - tests/schema_examples/visual_eval_readonly_metadata_accumulation_queue_consumer.example.json
+  - .agent_board/CHECKPOINT.md
+validation_run:
+  - node --check scripts\validate_visual_eval_readonly_artifact_graph.js: passed
+  - node --check scripts\validate_visual_eval_readonly_metadata_accumulation_queue_query.js: passed
+  - node --check kernel\visual_eval_readonly_metadata_accumulation_queue.js: passed
+  - node --check kernel\visual_eval_readonly_metadata_accumulation_queue_consumer.js: passed
+  - node --check kernel\visual_eval_readonly_metadata_accumulation_queue_query.js: passed
+  - node --check kernel\visual_eval_readonly_metadata_accumulation_queue_surface_snapshot.js: passed
+  - node scripts\validate_visual_eval_readonly_metadata_accumulation_queue.js: passed
+  - node scripts\validate_visual_eval_readonly_metadata_accumulation_queue_consumer.js: passed
+  - node scripts\validate_visual_eval_readonly_metadata_accumulation_queue_query.js: passed
+  - node scripts\validate_visual_eval_readonly_metadata_accumulation_queue_surface_snapshot.js: passed
+  - node scripts\validate_visual_eval_readonly_metadata_accumulation_queue_detail_view.js: passed
+  - node scripts\validate_visual_eval_readonly_metadata_accumulation_queue_detail_navigation.js: passed
+  - node scripts\validate_visual_eval_readonly_artifact_graph.js: passed
+  - node scripts\validate_visual_eval_readonly_review_artifact_catalog.js: passed
+  - git diff --check: passed with CRLF normalization warnings
+removed_owned_fields:
+  - readonly_metadata_accumulation_queue.records[].summary
+  - readonly_metadata_accumulation_queue_consumer.display_sections[].items[].summary
+projection_only_fields_retained:
+  - failure_tags retained for by_failure_tag indexing and detail/workspace visibility
+  - next_review_action retained for readonly routing and next-action visibility
+  - metadata_actions retained for section placement and accumulation contract visibility
+negative_cases_added:
+  - derived_summary_drift
+  - derived_reason_drift
+  - derived_failure_tag_drift
+  - derived_accumulation_object_drift
+  - forbidden_owned_field_reintroduced
+runtime_execution_performed: false
+fetch_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+accepted_samples_write_performed: false
+production_candidate_created: false
+memory_written: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+dependency_change_performed: false
+commit_performed: false
+push_performed: false
+tag_release_deploy_performed: false
+next_phase_started: false
+```
+
+---
+
 ## Checkpoint - Readonly Graph Source Of Truth Hardening
 
 ```text

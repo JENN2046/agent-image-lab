@@ -57,7 +57,6 @@ function buildQueueEntry(record, imageCase, sessionRow, selectedReviewResultId) 
     candidate_id: record.candidate_id,
     case_id: record.case_id,
     outcome: record.outcome,
-    summary: sessionRow.summary,
     failure_tags: imageCase.failure_tags,
     accepted_metadata_action: record.metadata_accumulation.accepted_metadata_action,
     rejected_metadata_action: record.metadata_accumulation.rejected_metadata_action,
