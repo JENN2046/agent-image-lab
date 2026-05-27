@@ -36748,6 +36748,52 @@ Next: run the full targeted readonly review validator set, diff checks, exact-fi
 
 ---
 
+## Checkpoint - P3.8 Readonly Review Detail View
+
+Status: completed_validated_pending_local_commit
+Active goal: 30-day readonly review artifact system
+Current local head before this checkpoint: 89cf95d
+
+Changed:
+- kernel/visual_eval_readonly_review_detail_view.js
+- scripts/validate_visual_eval_readonly_review_detail_view.js
+- scripts/validate_visual_eval_readonly_review_artifact_catalog.js
+- tests/schema_examples/visual_eval_readonly_review_detail_view.example.json
+- tests/schema_examples/visual_eval_readonly_review_detail_view_negative_cases.example.json
+- tests/schema_examples/visual_eval_readonly_review_artifact_catalog.example.json
+- .agent_board/CHECKPOINT.md
+
+Capability added:
+- Adds a metadata-only readonly detail view above the surface snapshot and collection consumer.
+- Selects one review_result and resolves it through the surface card plus collection row.
+- Exposes selected card details, taxonomy section membership, next-action queue membership, reasons, blocking watch items, and metadata accumulation action.
+- Detail validator compares direct kernel output, CLI output, and checked fixture output exactly.
+- Catalog now enumerates the detail view and runs its validator as part of the canonical readonly artifact set.
+
+Boundary:
+- metadata_only: true
+- read_only: true
+- provider_contact_performed: false
+- plugin_call_performed: false
+- api_call_performed: false
+- image_generation_performed: false
+- memory_written: false
+- DailyNote_written: false
+- VCP_memory_written: false
+- production_candidate_002_started: false
+- Batch_005_started: false
+
+Validation so far:
+- node --check kernel/visual_eval_readonly_review_detail_view.js: passed
+- node --check scripts/validate_visual_eval_readonly_review_detail_view.js: passed
+- node --check scripts/validate_visual_eval_readonly_review_artifact_catalog.js: passed
+- node scripts/validate_visual_eval_readonly_review_detail_view.js: passed
+- node scripts/validate_visual_eval_readonly_review_artifact_catalog.js: passed
+
+Next: run the full targeted readonly review validator set, diff checks, exact-file staging, and guarded local commit if clean.
+
+---
+
 ## Checkpoint - v0.6.73 Seedream5 Retry 003 Runtime Closeout
 
 Status: blocked_provider_or_plugin_runtime_failed_pending_validation

@@ -19,6 +19,7 @@ const expectedRoles = [
   "readonly_collection_consumer_payload",
   "readonly_collection_query_payload",
   "readonly_surface_snapshot",
+  "readonly_detail_view",
 ];
 const expectedValidators = [
   "scripts/validate_visual_eval_review_result_protocol.js",
@@ -28,6 +29,7 @@ const expectedValidators = [
   "scripts/validate_visual_eval_readonly_review_collection_consumer.js",
   "scripts/validate_visual_eval_readonly_review_collection_query.js",
   "scripts/validate_visual_eval_readonly_review_surface_snapshot.js",
+  "scripts/validate_visual_eval_readonly_review_detail_view.js",
 ];
 const expectedDisplayFields = [
   "outcome",
@@ -137,9 +139,9 @@ function validateArtifactEntries(catalog) {
     addResult(`catalog_entry_${role}_readonly_consumable_true`, entry.readonly_consumable === true);
     if (!artifactPathOk) continue;
     const artifact = readJson(entry.path);
-    const typeField = artifact.artifact_type || artifact.fixture_type || artifact.payload_type || artifact.consumer_payload_type || artifact.query_payload_type || artifact.surface_snapshot_type;
+    const typeField = artifact.artifact_type || artifact.fixture_type || artifact.payload_type || artifact.consumer_payload_type || artifact.query_payload_type || artifact.surface_snapshot_type || artifact.detail_view_type;
     addResult(`catalog_entry_${role}_artifact_type_matches`, typeField === entry.artifact_type, typeField);
-    addResult(`catalog_entry_${role}_artifact_id_matches`, (artifact.artifact_id || artifact.fixture_id || artifact.payload_id || artifact.consumer_payload_id || artifact.query_payload_id || artifact.surface_snapshot_id) === entry.artifact_id);
+    addResult(`catalog_entry_${role}_artifact_id_matches`, (artifact.artifact_id || artifact.fixture_id || artifact.payload_id || artifact.consumer_payload_id || artifact.query_payload_id || artifact.surface_snapshot_id || artifact.detail_view_id) === entry.artifact_id);
   }
 }
 
@@ -189,6 +191,18 @@ function validateConsumerExpectations(catalog) {
   addResult("catalog_surface_snapshot_sections_exact", sameSet(surface.snapshot_contract?.surface_sections, catalog.surface_snapshot_expectations?.surface_sections || []));
   addResult("catalog_surface_snapshot_total_cards_matches", surface.surface?.total_cards === catalog.surface_snapshot_expectations?.total_cards);
   addResult("catalog_surface_snapshot_outcomes_exact", sameSet((surface.surface?.outcome_lanes || []).map((lane) => lane.outcome), catalog.surface_snapshot_expectations?.outcomes || []));
+
+  const detailEntry = getEntry(catalog, "readonly_detail_view");
+  const detail = readJson(detailEntry.path);
+  addResult("catalog_detail_view_expected_path_matches", catalog.detail_view_expectations?.detail_view === detailEntry.path);
+  addResult("catalog_detail_view_source_surface_matches", detail.source_surface_snapshot === surfaceEntry.path);
+  addResult("catalog_detail_view_source_consumer_matches", detail.source_collection_consumer === collectionConsumerEntry.path);
+  addResult("catalog_detail_view_expected_surface_matches", catalog.detail_view_expectations?.source_surface_snapshot === surfaceEntry.path);
+  addResult("catalog_detail_view_expected_consumer_matches", catalog.detail_view_expectations?.source_collection_consumer === collectionConsumerEntry.path);
+  addResult("catalog_detail_view_selected_id_matches", detail.selected_review_result_id === catalog.detail_view_expectations?.selected_review_result_id);
+  addResult("catalog_detail_view_selected_outcome_matches", detail.selected_card?.outcome === catalog.detail_view_expectations?.selected_outcome);
+  addResult("catalog_detail_view_taxonomy_membership_present", (catalog.detail_view_expectations?.required_taxonomy_membership || []).every((tag) => (detail.selected_card?.taxonomy_section_membership || []).includes(tag)));
+  addResult("catalog_detail_view_next_action_membership_present", (catalog.detail_view_expectations?.required_next_action_membership || []).every((action) => (detail.selected_card?.next_action_queue_membership || []).includes(action)));
 }
 
 function runReferencedValidators(catalog) {

@@ -103,6 +103,15 @@
       "validator": "scripts/validate_visual_eval_readonly_review_surface_snapshot.js",
       "canonical": true,
       "readonly_consumable": true
+    },
+    {
+      "artifact_id": "visual_eval_readonly_review_detail_view_v1_synthetic_001",
+      "artifact_role": "readonly_detail_view",
+      "artifact_type": "metadata_only_visual_eval_readonly_review_detail_view",
+      "path": "tests/schema_examples/visual_eval_readonly_review_detail_view.example.json",
+      "validator": "scripts/validate_visual_eval_readonly_review_detail_view.js",
+      "canonical": true,
+      "readonly_consumable": true
     }
   ],
   "composition_order": [
@@ -115,7 +124,8 @@
     "readonly_review_collection",
     "readonly_collection_consumer_payload",
     "readonly_collection_query_payload",
-    "readonly_surface_snapshot"
+    "readonly_surface_snapshot",
+    "readonly_detail_view"
   ],
   "consumer_expectations": {
     "source_bundle": "tests/schema_examples/visual_eval_readonly_review_bundle.example.json",
@@ -170,6 +180,20 @@
       "pass",
       "patch",
       "reject"
+    ]
+  },
+  "detail_view_expectations": {
+    "source_surface_snapshot": "tests/schema_examples/visual_eval_readonly_review_surface_snapshot.example.json",
+    "source_collection_consumer": "tests/schema_examples/visual_eval_readonly_review_collection_consumer.example.json",
+    "detail_view": "tests/schema_examples/visual_eval_readonly_review_detail_view.example.json",
+    "selected_review_result_id": "visual_eval_review_result_patch_synthetic_001",
+    "selected_outcome": "patch",
+    "required_taxonomy_membership": [
+      "material_failed",
+      "lighting_failed"
+    ],
+    "required_next_action_membership": [
+      "write_patch_plan_only"
     ]
   },
   "collection_consumer_expectations": {

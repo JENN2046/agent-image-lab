@@ -1,0 +1,51 @@
+{
+  "fixture_type": "metadata_only_visual_eval_readonly_review_detail_view_negative_cases",
+  "source_detail_view": "tests/schema_examples/visual_eval_readonly_review_detail_view.example.json",
+  "negative_cases": [
+    {
+      "case_id": "selected_id_missing_from_surface",
+      "expected_failure_code": "detail_selected_id_resolves",
+      "mutation": {
+        "operation": "set_field",
+        "field": "selected_review_result_id",
+        "value": "visual_eval_review_result_missing_synthetic_999"
+      }
+    },
+    {
+      "case_id": "selected_card_outcome_mismatch",
+      "expected_failure_code": "detail_card_outcome_matches_collection",
+      "mutation": {
+        "operation": "set_field",
+        "field": "selected_card.outcome",
+        "value": "pass"
+      }
+    },
+    {
+      "case_id": "selected_card_next_action_mismatch",
+      "expected_failure_code": "detail_card_next_action_matches_collection",
+      "mutation": {
+        "operation": "set_field",
+        "field": "selected_card.next_review_action",
+        "value": "queue_for_future_human_review"
+      }
+    },
+    {
+      "case_id": "detail_guard_memory_true",
+      "expected_failure_code": "detail_guard_memory_write_performed_false",
+      "mutation": {
+        "operation": "set_field",
+        "field": "guard.memory_write_performed",
+        "value": true
+      }
+    },
+    {
+      "case_id": "absolute_local_surface_source",
+      "expected_failure_code": "detail_no_absolute_or_loopback",
+      "mutation": {
+        "operation": "set_field",
+        "field": "source_surface_snapshot",
+        "value": "<synthetic-windows-absolute-path>\\visual_eval_readonly_review_surface_snapshot.example.json"
+      }
+    }
+  ]
+}
