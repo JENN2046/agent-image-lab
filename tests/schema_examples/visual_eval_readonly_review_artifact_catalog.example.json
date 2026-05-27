@@ -121,6 +121,15 @@
       "validator": "scripts/validate_visual_eval_readonly_review_detail_navigation.js",
       "canonical": true,
       "readonly_consumable": true
+    },
+    {
+      "artifact_id": "visual_eval_readonly_review_session_drilldown_v1_synthetic_001",
+      "artifact_role": "readonly_session_drilldown",
+      "artifact_type": "metadata_only_visual_eval_readonly_review_session_drilldown",
+      "path": "tests/schema_examples/visual_eval_readonly_review_session_drilldown.example.json",
+      "validator": "scripts/validate_visual_eval_readonly_review_session_drilldown.js",
+      "canonical": true,
+      "readonly_consumable": true
     }
   ],
   "composition_order": [
@@ -135,7 +144,8 @@
     "readonly_collection_query_payload",
     "readonly_surface_snapshot",
     "readonly_detail_view",
-    "readonly_detail_navigation"
+    "readonly_detail_navigation",
+    "readonly_session_drilldown"
   ],
   "consumer_expectations": {
     "source_bundle": "tests/schema_examples/visual_eval_readonly_review_bundle.example.json",
@@ -219,6 +229,16 @@
       "reject"
     ],
     "required_route_action": "load_readonly_detail_only"
+  },
+  "session_drilldown_expectations": {
+    "source_detail_navigation": "tests/schema_examples/visual_eval_readonly_review_detail_navigation.example.json",
+    "source_bridge_payload": "tests/schema_examples/visual_eval_review_result_review_bridge_payload.example.json",
+    "session_drilldown": "tests/schema_examples/visual_eval_readonly_review_session_drilldown.example.json",
+    "selected_review_result_id": "visual_eval_review_result_patch_synthetic_001",
+    "session_id": "visual_eval_review_session_synthetic_bundle_001",
+    "sibling_case_count": 3,
+    "selected_outcome": "patch",
+    "selected_next_review_action": "write_patch_plan_only"
   },
   "collection_consumer_expectations": {
     "source_collection": "tests/schema_examples/visual_eval_readonly_review_collection.example.json",

@@ -21,6 +21,7 @@ const expectedRoles = [
   "readonly_surface_snapshot",
   "readonly_detail_view",
   "readonly_detail_navigation",
+  "readonly_session_drilldown",
 ];
 const expectedValidators = [
   "scripts/validate_visual_eval_review_result_protocol.js",
@@ -32,6 +33,7 @@ const expectedValidators = [
   "scripts/validate_visual_eval_readonly_review_surface_snapshot.js",
   "scripts/validate_visual_eval_readonly_review_detail_view.js",
   "scripts/validate_visual_eval_readonly_review_detail_navigation.js",
+  "scripts/validate_visual_eval_readonly_review_session_drilldown.js",
 ];
 const expectedDisplayFields = [
   "outcome",
@@ -141,9 +143,9 @@ function validateArtifactEntries(catalog) {
     addResult(`catalog_entry_${role}_readonly_consumable_true`, entry.readonly_consumable === true);
     if (!artifactPathOk) continue;
     const artifact = readJson(entry.path);
-    const typeField = artifact.artifact_type || artifact.fixture_type || artifact.payload_type || artifact.consumer_payload_type || artifact.query_payload_type || artifact.surface_snapshot_type || artifact.detail_view_type || artifact.navigation_type;
+    const typeField = artifact.artifact_type || artifact.fixture_type || artifact.payload_type || artifact.consumer_payload_type || artifact.query_payload_type || artifact.surface_snapshot_type || artifact.detail_view_type || artifact.navigation_type || artifact.drilldown_type;
     addResult(`catalog_entry_${role}_artifact_type_matches`, typeField === entry.artifact_type, typeField);
-    addResult(`catalog_entry_${role}_artifact_id_matches`, (artifact.artifact_id || artifact.fixture_id || artifact.payload_id || artifact.consumer_payload_id || artifact.query_payload_id || artifact.surface_snapshot_id || artifact.detail_view_id || artifact.navigation_id) === entry.artifact_id);
+    addResult(`catalog_entry_${role}_artifact_id_matches`, (artifact.artifact_id || artifact.fixture_id || artifact.payload_id || artifact.consumer_payload_id || artifact.query_payload_id || artifact.surface_snapshot_id || artifact.detail_view_id || artifact.navigation_id || artifact.drilldown_id) === entry.artifact_id);
   }
 }
 
@@ -219,6 +221,19 @@ function validateConsumerExpectations(catalog) {
   addResult("catalog_detail_navigation_item_count_matches", (navigation.navigation_items || []).length === catalog.detail_navigation_expectations?.navigation_item_count);
   addResult("catalog_detail_navigation_outcomes_exact", sameSet((navigation.navigation_items || []).map((item) => item.outcome), catalog.detail_navigation_expectations?.outcomes || []));
   addResult("catalog_detail_navigation_route_actions_expected", (navigation.navigation_items || []).every((item) => item.detail_selector?.route_action === catalog.detail_navigation_expectations?.required_route_action));
+
+  const drilldownEntry = getEntry(catalog, "readonly_session_drilldown");
+  const drilldown = readJson(drilldownEntry.path);
+  addResult("catalog_session_drilldown_expected_path_matches", catalog.session_drilldown_expectations?.session_drilldown === drilldownEntry.path);
+  addResult("catalog_session_drilldown_source_navigation_matches", drilldown.source_detail_navigation === navigationEntry.path);
+  addResult("catalog_session_drilldown_source_bridge_matches", drilldown.source_bridge_payload === getEntry(catalog, "bridge_readable_payload").path);
+  addResult("catalog_session_drilldown_expected_navigation_matches", catalog.session_drilldown_expectations?.source_detail_navigation === navigationEntry.path);
+  addResult("catalog_session_drilldown_expected_bridge_matches", catalog.session_drilldown_expectations?.source_bridge_payload === getEntry(catalog, "bridge_readable_payload").path);
+  addResult("catalog_session_drilldown_selected_id_matches", drilldown.selected_review_result_id === catalog.session_drilldown_expectations?.selected_review_result_id);
+  addResult("catalog_session_drilldown_session_id_matches", drilldown.session_id === catalog.session_drilldown_expectations?.session_id);
+  addResult("catalog_session_drilldown_sibling_case_count_matches", (drilldown.sibling_case_refs || []).length === catalog.session_drilldown_expectations?.sibling_case_count);
+  addResult("catalog_session_drilldown_selected_outcome_matches", drilldown.selected_review_row?.outcome === catalog.session_drilldown_expectations?.selected_outcome);
+  addResult("catalog_session_drilldown_next_action_matches", drilldown.selected_metadata_accumulation?.metadata_accumulation?.next_review_action === catalog.session_drilldown_expectations?.selected_next_review_action);
 }
 
 function runReferencedValidators(catalog) {

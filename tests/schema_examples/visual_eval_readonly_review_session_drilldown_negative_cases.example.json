@@ -1,0 +1,56 @@
+{
+  "fixture_type": "metadata_only_visual_eval_readonly_review_session_drilldown_negative_cases",
+  "source_drilldown": "tests/schema_examples/visual_eval_readonly_review_session_drilldown.example.json",
+  "negative_cases": [
+    {
+      "case_id": "selected_result_missing_from_session",
+      "description": "Selected review_result_id must resolve to the session panel.",
+      "mutation": {
+        "operation": "set_field",
+        "field": "session_panel.review_result_ids.1",
+        "value": "visual_eval_review_result_missing_synthetic_999"
+      },
+      "expected_failure_code": "drilldown_selected_result_in_session"
+    },
+    {
+      "case_id": "image_case_outcome_mismatch",
+      "description": "Selected image case outcome must match selected review row.",
+      "mutation": {
+        "operation": "set_field",
+        "field": "selected_image_case.visible_outcome",
+        "value": "reject"
+      },
+      "expected_failure_code": "drilldown_image_case_outcome_matches"
+    },
+    {
+      "case_id": "metadata_next_action_mismatch",
+      "description": "Selected metadata accumulation next action must match selected image case.",
+      "mutation": {
+        "operation": "set_field",
+        "field": "selected_metadata_accumulation.metadata_accumulation.next_review_action",
+        "value": "queue_for_future_human_review"
+      },
+      "expected_failure_code": "drilldown_metadata_next_action_matches"
+    },
+    {
+      "case_id": "drilldown_guard_memory_true",
+      "description": "Session drilldown guard must not open memory writes.",
+      "mutation": {
+        "operation": "set_field",
+        "field": "guard.memory_write_performed",
+        "value": true
+      },
+      "expected_failure_code": "drilldown_guard_memory_write_performed_false"
+    },
+    {
+      "case_id": "absolute_local_bridge_payload",
+      "description": "Bridge payload source must remain repo-relative.",
+      "mutation": {
+        "operation": "set_field",
+        "field": "source_bridge_payload",
+        "value": "A:\\agent-image-lab\\secret\\bridge_payload.json"
+      },
+      "expected_failure_code": "drilldown_no_absolute_or_loopback"
+    }
+  ]
+}
