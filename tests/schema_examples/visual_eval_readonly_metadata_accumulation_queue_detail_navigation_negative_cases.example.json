@@ -1,0 +1,44 @@
+{
+  "fixture_type": "metadata_only_visual_eval_readonly_metadata_accumulation_queue_detail_navigation_negative_cases",
+  "source_navigation": "tests/schema_examples/visual_eval_readonly_metadata_accumulation_queue_detail_navigation.example.json",
+  "negative_cases": [
+    {
+      "case_id": "missing_selected_item",
+      "description": "Navigation must keep the selected metadata queue item.",
+      "mutation": {
+        "operation": "remove_selected_item"
+      },
+      "expected_failure_code": "metadata_queue_navigation_selected_item_present"
+    },
+    {
+      "case_id": "wrong_route_action",
+      "description": "Navigation route action must remain readonly detail loading.",
+      "mutation": {
+        "operation": "set_field",
+        "field": "navigation_items.0.detail_selector.route_action",
+        "value": "write_metadata_queue_detail"
+      },
+      "expected_failure_code": "metadata_queue_navigation_route_action_expected"
+    },
+    {
+      "case_id": "guard_provider_true",
+      "description": "Navigation must not open provider contact.",
+      "mutation": {
+        "operation": "set_field",
+        "field": "guard.provider_contact_performed",
+        "value": true
+      },
+      "expected_failure_code": "metadata_queue_navigation_guard_provider_contact_performed_false"
+    },
+    {
+      "case_id": "absolute_local_source_surface",
+      "description": "Navigation source surface must remain repo-relative.",
+      "mutation": {
+        "operation": "set_field",
+        "field": "source_surface_snapshot",
+        "value": "<synthetic-windows-absolute-path>\\metadata_queue_surface.json"
+      },
+      "expected_failure_code": "metadata_queue_navigation_no_absolute_or_loopback"
+    }
+  ]
+}

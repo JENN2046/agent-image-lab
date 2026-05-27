@@ -26,6 +26,8 @@ const expectedRoles = [
   "readonly_metadata_accumulation_queue_consumer",
   "readonly_metadata_accumulation_queue_query",
   "readonly_metadata_accumulation_queue_surface_snapshot",
+  "readonly_metadata_accumulation_queue_detail_view",
+  "readonly_metadata_accumulation_queue_detail_navigation",
 ];
 const expectedValidators = [
   "scripts/validate_visual_eval_review_result_protocol.js",
@@ -42,6 +44,8 @@ const expectedValidators = [
   "scripts/validate_visual_eval_readonly_metadata_accumulation_queue_consumer.js",
   "scripts/validate_visual_eval_readonly_metadata_accumulation_queue_query.js",
   "scripts/validate_visual_eval_readonly_metadata_accumulation_queue_surface_snapshot.js",
+  "scripts/validate_visual_eval_readonly_metadata_accumulation_queue_detail_view.js",
+  "scripts/validate_visual_eval_readonly_metadata_accumulation_queue_detail_navigation.js",
 ];
 const expectedDisplayFields = [
   "outcome",
@@ -295,6 +299,22 @@ function validateConsumerExpectations(catalog) {
   addResult("catalog_metadata_queue_surface_total_records_matches", metadataQueueSurface.surface?.total_records === catalog.metadata_accumulation_queue_surface_snapshot_expectations?.total_records);
   addResult("catalog_metadata_queue_surface_total_section_items_matches", metadataQueueSurface.surface?.total_section_items === catalog.metadata_accumulation_queue_surface_snapshot_expectations?.total_section_items);
   addResult("catalog_metadata_queue_surface_selected_id_matches", (metadataQueueSurface.surface?.selected_items || []).some((item) => item.review_result_id === catalog.metadata_accumulation_queue_surface_snapshot_expectations?.selected_review_result_id));
+
+  const metadataQueueDetailEntry = getEntry(catalog, "readonly_metadata_accumulation_queue_detail_view");
+  const metadataQueueDetail = readJson(metadataQueueDetailEntry.path);
+  const metadataQueueNavigationEntry = getEntry(catalog, "readonly_metadata_accumulation_queue_detail_navigation");
+  const metadataQueueNavigation = readJson(metadataQueueNavigationEntry.path);
+  addResult("catalog_metadata_queue_detail_expected_path_matches", catalog.metadata_accumulation_queue_detail_expectations?.detail_view === metadataQueueDetailEntry.path);
+  addResult("catalog_metadata_queue_navigation_expected_path_matches", catalog.metadata_accumulation_queue_detail_expectations?.detail_navigation === metadataQueueNavigationEntry.path);
+  addResult("catalog_metadata_queue_detail_source_surface_matches", metadataQueueDetail.source_surface_snapshot === metadataQueueSurfaceEntry.path);
+  addResult("catalog_metadata_queue_navigation_source_surface_matches", metadataQueueNavigation.source_surface_snapshot === metadataQueueSurfaceEntry.path);
+  addResult("catalog_metadata_queue_detail_selected_section_matches", metadataQueueDetail.selected_section_id === catalog.metadata_accumulation_queue_detail_expectations?.selected_section_id);
+  addResult("catalog_metadata_queue_detail_selected_id_matches", metadataQueueDetail.selected_review_result_id === catalog.metadata_accumulation_queue_detail_expectations?.selected_review_result_id);
+  addResult("catalog_metadata_queue_detail_section_membership_present", (catalog.metadata_accumulation_queue_detail_expectations?.required_section_membership || []).every((sectionId) => (metadataQueueDetail.selected_card?.section_membership || []).includes(sectionId)));
+  addResult("catalog_metadata_queue_detail_next_action_membership_present", (catalog.metadata_accumulation_queue_detail_expectations?.required_next_action_membership || []).every((action) => (metadataQueueDetail.selected_card?.next_action_membership || []).includes(action)));
+  addResult("catalog_metadata_queue_navigation_selected_key_matches", metadataQueueNavigation.selected_navigation_key === catalog.metadata_accumulation_queue_detail_expectations?.selected_navigation_key);
+  addResult("catalog_metadata_queue_navigation_item_count_matches", (metadataQueueNavigation.navigation_items || []).length === catalog.metadata_accumulation_queue_detail_expectations?.navigation_item_count);
+  addResult("catalog_metadata_queue_navigation_route_actions_expected", (metadataQueueNavigation.navigation_items || []).every((item) => item.detail_selector?.route_action === catalog.metadata_accumulation_queue_detail_expectations?.required_route_action));
 }
 
 function runReferencedValidators(catalog) {

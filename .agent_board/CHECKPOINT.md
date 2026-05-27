@@ -1,5 +1,67 @@
 ---
 
+## Checkpoint - P3.15 Readonly Metadata Accumulation Detail And Navigation
+
+```text
+phase: p3_15_readonly_metadata_accumulation_detail_and_navigation
+status: completed_validated_pending_local_commit
+result: COMPLETED_VALIDATED
+source_commit: e2bc76a
+mode: metadata-only readonly metadata accumulation detail and navigation
+summary: Added a larger readonly consumption slice on top of the metadata accumulation queue surface. The slice adds a section-aware detail view keyed by section_id + review_result_id and a navigation payload that can load every metadata queue surface card into readonly detail, preserving selected patch-plan visibility, section membership, outcome membership, next-action membership, and all write/runtime/provider/memory guards closed.
+changed_files_current_task:
+  - kernel/visual_eval_readonly_metadata_accumulation_queue_detail_view.js
+  - kernel/visual_eval_readonly_metadata_accumulation_queue_detail_navigation.js
+  - scripts/validate_visual_eval_readonly_metadata_accumulation_queue_detail_view.js
+  - scripts/validate_visual_eval_readonly_metadata_accumulation_queue_detail_navigation.js
+  - scripts/validate_visual_eval_readonly_review_artifact_catalog.js
+  - tests/schema_examples/visual_eval_readonly_metadata_accumulation_queue_detail_view.example.json
+  - tests/schema_examples/visual_eval_readonly_metadata_accumulation_queue_detail_view_negative_cases.example.json
+  - tests/schema_examples/visual_eval_readonly_metadata_accumulation_queue_detail_navigation.example.json
+  - tests/schema_examples/visual_eval_readonly_metadata_accumulation_queue_detail_navigation_negative_cases.example.json
+  - tests/schema_examples/visual_eval_readonly_review_artifact_catalog.example.json
+  - .agent_board/CHECKPOINT.md
+validation_run:
+  - node --check kernel/visual_eval_readonly_metadata_accumulation_queue_detail_view.js
+  - node --check kernel/visual_eval_readonly_metadata_accumulation_queue_detail_navigation.js
+  - node --check scripts/validate_visual_eval_readonly_metadata_accumulation_queue_detail_view.js
+  - node --check scripts/validate_visual_eval_readonly_metadata_accumulation_queue_detail_navigation.js
+  - node --check scripts/validate_visual_eval_readonly_review_artifact_catalog.js
+  - node scripts/validate_visual_eval_readonly_metadata_accumulation_queue_detail_view.js
+  - node scripts/validate_visual_eval_readonly_metadata_accumulation_queue_detail_navigation.js
+  - node scripts/validate_visual_eval_readonly_review_artifact_catalog.js
+  - git diff --check
+validation_result: passed
+detail_key: section_id + review_result_id
+navigation_item_count: 9
+negative_cases_verified:
+  - wrong_selected_section
+  - missing_patch_membership
+  - guard_memory_true
+  - absolute_local_source_surface
+  - missing_selected_item
+  - wrong_route_action
+  - guard_provider_true
+runtime_execution_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+memory_written: false
+accepted_samples_written: false
+Batch_005_started: false
+production_candidate_002_started: false
+package_json_modified: false
+dependency_change_performed: false
+push_performed: false
+red_line_request_needed_next: possible real Review Console readonly integration or runtime consumer wiring
+next_phase_started: false
+```
+
+---
+
 ## Checkpoint - P3.14 Readonly Metadata Accumulation Queue Surface Snapshot
 
 ```text

@@ -1,0 +1,320 @@
+{
+  "navigation_id": "visual_eval_readonly_metadata_accumulation_queue_detail_navigation_v1_synthetic_001",
+  "navigation_type": "metadata_only_visual_eval_readonly_metadata_accumulation_queue_detail_navigation",
+  "status": "readonly_metadata_accumulation_queue_detail_navigation_ready",
+  "source_surface_snapshot": "tests/schema_examples/visual_eval_readonly_metadata_accumulation_queue_surface_snapshot.example.json",
+  "source_detail_kernel": "kernel/visual_eval_readonly_metadata_accumulation_queue_detail_view.js",
+  "selected_navigation_key": "patch_plan_only:visual_eval_review_result_patch_synthetic_001",
+  "navigation_contract": {
+    "metadata_only": true,
+    "read_only": true,
+    "detail_key": "section_id + review_result_id",
+    "all_navigation_items_detail_loadable": true,
+    "selection_must_resolve_to_detail": true,
+    "route_action": "load_readonly_metadata_queue_detail_only",
+    "write_allowed": false
+  },
+  "navigation_items": [
+    {
+      "navigation_key": "accepted_metadata_candidates:visual_eval_review_result_pass_synthetic_001",
+      "section_id": "accepted_metadata_candidates",
+      "review_result_id": "visual_eval_review_result_pass_synthetic_001",
+      "candidate_id": "synthetic_product_still_life_pass_001",
+      "case_id": "visual_eval_image_case_pass_synthetic_001",
+      "outcome": "pass",
+      "selected": false,
+      "next_review_action": "queue_for_future_human_review",
+      "metadata_actions": {
+        "accepted_metadata_action": "keep_as_metadata_candidate",
+        "rejected_metadata_action": "none",
+        "archive_reference_action": "archive_as_positive_reference"
+      },
+      "failure_tags": [],
+      "detail_selector": {
+        "detail_kernel": "kernel/visual_eval_readonly_metadata_accumulation_queue_detail_view.js",
+        "section_id": "accepted_metadata_candidates",
+        "review_result_id": "visual_eval_review_result_pass_synthetic_001",
+        "route_action": "load_readonly_metadata_queue_detail_only",
+        "write_allowed": false
+      }
+    },
+    {
+      "navigation_key": "patch_plan_only:visual_eval_review_result_patch_synthetic_001",
+      "section_id": "patch_plan_only",
+      "review_result_id": "visual_eval_review_result_patch_synthetic_001",
+      "candidate_id": "synthetic_product_still_life_patch_001",
+      "case_id": "visual_eval_image_case_patch_synthetic_001",
+      "outcome": "patch",
+      "selected": true,
+      "next_review_action": "write_patch_plan_only",
+      "metadata_actions": {
+        "accepted_metadata_action": "none",
+        "rejected_metadata_action": "none",
+        "archive_reference_action": "metadata_only_reference"
+      },
+      "failure_tags": [
+        "material_failed",
+        "lighting_failed"
+      ],
+      "detail_selector": {
+        "detail_kernel": "kernel/visual_eval_readonly_metadata_accumulation_queue_detail_view.js",
+        "section_id": "patch_plan_only",
+        "review_result_id": "visual_eval_review_result_patch_synthetic_001",
+        "route_action": "load_readonly_metadata_queue_detail_only",
+        "write_allowed": false
+      }
+    },
+    {
+      "navigation_key": "failure_learning_metadata:visual_eval_review_result_reject_synthetic_001",
+      "section_id": "failure_learning_metadata",
+      "review_result_id": "visual_eval_review_result_reject_synthetic_001",
+      "candidate_id": "synthetic_product_still_life_reject_001",
+      "case_id": "visual_eval_image_case_reject_synthetic_001",
+      "outcome": "reject",
+      "selected": false,
+      "next_review_action": "defer_until_taxonomy_update",
+      "metadata_actions": {
+        "accepted_metadata_action": "none",
+        "rejected_metadata_action": "keep_as_failure_learning_metadata",
+        "archive_reference_action": "archive_as_negative_reference"
+      },
+      "failure_tags": [
+        "subject_drift",
+        "commercial_unusable"
+      ],
+      "detail_selector": {
+        "detail_kernel": "kernel/visual_eval_readonly_metadata_accumulation_queue_detail_view.js",
+        "section_id": "failure_learning_metadata",
+        "review_result_id": "visual_eval_review_result_reject_synthetic_001",
+        "route_action": "load_readonly_metadata_queue_detail_only",
+        "write_allowed": false
+      }
+    },
+    {
+      "navigation_key": "archive_references:visual_eval_review_result_pass_synthetic_001",
+      "section_id": "archive_references",
+      "review_result_id": "visual_eval_review_result_pass_synthetic_001",
+      "candidate_id": "synthetic_product_still_life_pass_001",
+      "case_id": "visual_eval_image_case_pass_synthetic_001",
+      "outcome": "pass",
+      "selected": false,
+      "next_review_action": "queue_for_future_human_review",
+      "metadata_actions": {
+        "accepted_metadata_action": "keep_as_metadata_candidate",
+        "rejected_metadata_action": "none",
+        "archive_reference_action": "archive_as_positive_reference"
+      },
+      "failure_tags": [],
+      "detail_selector": {
+        "detail_kernel": "kernel/visual_eval_readonly_metadata_accumulation_queue_detail_view.js",
+        "section_id": "archive_references",
+        "review_result_id": "visual_eval_review_result_pass_synthetic_001",
+        "route_action": "load_readonly_metadata_queue_detail_only",
+        "write_allowed": false
+      }
+    },
+    {
+      "navigation_key": "archive_references:visual_eval_review_result_patch_synthetic_001",
+      "section_id": "archive_references",
+      "review_result_id": "visual_eval_review_result_patch_synthetic_001",
+      "candidate_id": "synthetic_product_still_life_patch_001",
+      "case_id": "visual_eval_image_case_patch_synthetic_001",
+      "outcome": "patch",
+      "selected": false,
+      "next_review_action": "write_patch_plan_only",
+      "metadata_actions": {
+        "accepted_metadata_action": "none",
+        "rejected_metadata_action": "none",
+        "archive_reference_action": "metadata_only_reference"
+      },
+      "failure_tags": [
+        "material_failed",
+        "lighting_failed"
+      ],
+      "detail_selector": {
+        "detail_kernel": "kernel/visual_eval_readonly_metadata_accumulation_queue_detail_view.js",
+        "section_id": "archive_references",
+        "review_result_id": "visual_eval_review_result_patch_synthetic_001",
+        "route_action": "load_readonly_metadata_queue_detail_only",
+        "write_allowed": false
+      }
+    },
+    {
+      "navigation_key": "archive_references:visual_eval_review_result_reject_synthetic_001",
+      "section_id": "archive_references",
+      "review_result_id": "visual_eval_review_result_reject_synthetic_001",
+      "candidate_id": "synthetic_product_still_life_reject_001",
+      "case_id": "visual_eval_image_case_reject_synthetic_001",
+      "outcome": "reject",
+      "selected": false,
+      "next_review_action": "defer_until_taxonomy_update",
+      "metadata_actions": {
+        "accepted_metadata_action": "none",
+        "rejected_metadata_action": "keep_as_failure_learning_metadata",
+        "archive_reference_action": "archive_as_negative_reference"
+      },
+      "failure_tags": [
+        "subject_drift",
+        "commercial_unusable"
+      ],
+      "detail_selector": {
+        "detail_kernel": "kernel/visual_eval_readonly_metadata_accumulation_queue_detail_view.js",
+        "section_id": "archive_references",
+        "review_result_id": "visual_eval_review_result_reject_synthetic_001",
+        "route_action": "load_readonly_metadata_queue_detail_only",
+        "write_allowed": false
+      }
+    },
+    {
+      "navigation_key": "next_review_actions:visual_eval_review_result_pass_synthetic_001",
+      "section_id": "next_review_actions",
+      "review_result_id": "visual_eval_review_result_pass_synthetic_001",
+      "candidate_id": "synthetic_product_still_life_pass_001",
+      "case_id": "visual_eval_image_case_pass_synthetic_001",
+      "outcome": "pass",
+      "selected": false,
+      "next_review_action": "queue_for_future_human_review",
+      "metadata_actions": {
+        "accepted_metadata_action": "none",
+        "rejected_metadata_action": "none",
+        "archive_reference_action": "none"
+      },
+      "failure_tags": [],
+      "detail_selector": {
+        "detail_kernel": "kernel/visual_eval_readonly_metadata_accumulation_queue_detail_view.js",
+        "section_id": "next_review_actions",
+        "review_result_id": "visual_eval_review_result_pass_synthetic_001",
+        "route_action": "load_readonly_metadata_queue_detail_only",
+        "write_allowed": false
+      }
+    },
+    {
+      "navigation_key": "next_review_actions:visual_eval_review_result_patch_synthetic_001",
+      "section_id": "next_review_actions",
+      "review_result_id": "visual_eval_review_result_patch_synthetic_001",
+      "candidate_id": "synthetic_product_still_life_patch_001",
+      "case_id": "visual_eval_image_case_patch_synthetic_001",
+      "outcome": "patch",
+      "selected": false,
+      "next_review_action": "write_patch_plan_only",
+      "metadata_actions": {
+        "accepted_metadata_action": "none",
+        "rejected_metadata_action": "none",
+        "archive_reference_action": "none"
+      },
+      "failure_tags": [],
+      "detail_selector": {
+        "detail_kernel": "kernel/visual_eval_readonly_metadata_accumulation_queue_detail_view.js",
+        "section_id": "next_review_actions",
+        "review_result_id": "visual_eval_review_result_patch_synthetic_001",
+        "route_action": "load_readonly_metadata_queue_detail_only",
+        "write_allowed": false
+      }
+    },
+    {
+      "navigation_key": "next_review_actions:visual_eval_review_result_reject_synthetic_001",
+      "section_id": "next_review_actions",
+      "review_result_id": "visual_eval_review_result_reject_synthetic_001",
+      "candidate_id": "synthetic_product_still_life_reject_001",
+      "case_id": "visual_eval_image_case_reject_synthetic_001",
+      "outcome": "reject",
+      "selected": false,
+      "next_review_action": "defer_until_taxonomy_update",
+      "metadata_actions": {
+        "accepted_metadata_action": "none",
+        "rejected_metadata_action": "none",
+        "archive_reference_action": "none"
+      },
+      "failure_tags": [],
+      "detail_selector": {
+        "detail_kernel": "kernel/visual_eval_readonly_metadata_accumulation_queue_detail_view.js",
+        "section_id": "next_review_actions",
+        "review_result_id": "visual_eval_review_result_reject_synthetic_001",
+        "route_action": "load_readonly_metadata_queue_detail_only",
+        "write_allowed": false
+      }
+    }
+  ],
+  "selected_detail": {
+    "detail_view_id": "visual_eval_readonly_metadata_accumulation_queue_detail_view_v1_synthetic_001",
+    "detail_view_type": "metadata_only_visual_eval_readonly_metadata_accumulation_queue_detail_view",
+    "status": "readonly_metadata_accumulation_queue_detail_view_ready",
+    "source_surface_snapshot": "tests/schema_examples/visual_eval_readonly_metadata_accumulation_queue_surface_snapshot.example.json",
+    "selected_section_id": "patch_plan_only",
+    "selected_review_result_id": "visual_eval_review_result_patch_synthetic_001",
+    "selected_card": {
+      "section_id": "patch_plan_only",
+      "review_result_id": "visual_eval_review_result_patch_synthetic_001",
+      "candidate_id": "synthetic_product_still_life_patch_001",
+      "case_id": "visual_eval_image_case_patch_synthetic_001",
+      "outcome": "patch",
+      "selected": true,
+      "next_review_action": "write_patch_plan_only",
+      "metadata_actions": {
+        "accepted_metadata_action": "none",
+        "rejected_metadata_action": "none",
+        "archive_reference_action": "metadata_only_reference"
+      },
+      "failure_tags": [
+        "material_failed",
+        "lighting_failed"
+      ],
+      "section_count": 1,
+      "section_membership": [
+        "patch_plan_only",
+        "archive_references",
+        "next_review_actions"
+      ],
+      "outcome_membership": [
+        "patch"
+      ],
+      "next_action_membership": [
+        "write_patch_plan_only"
+      ]
+    },
+    "detail_contract": {
+      "metadata_only": true,
+      "read_only": true,
+      "detail_key": "section_id + review_result_id",
+      "card_must_resolve_to_surface_section_lane": true,
+      "selected_patch_plan_must_remain_visible": true,
+      "write_allowed": false
+    },
+    "guard": {
+      "metadata_only": true,
+      "read_only": true,
+      "display_only": true,
+      "file_write_performed": false,
+      "approval_write_performed": false,
+      "accepted_samples_write_performed": false,
+      "production_candidate_created": false,
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "image_generation_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "memory_write_performed": false,
+      "Batch_005_started": false,
+      "production_candidate_002_started": false
+    }
+  },
+  "guard": {
+    "metadata_only": true,
+    "read_only": true,
+    "display_only": true,
+    "file_write_performed": false,
+    "approval_write_performed": false,
+    "accepted_samples_write_performed": false,
+    "production_candidate_created": false,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "DailyNote_write_performed": false,
+    "VCP_memory_write_performed": false,
+    "memory_write_performed": false,
+    "Batch_005_started": false,
+    "production_candidate_002_started": false
+  }
+}

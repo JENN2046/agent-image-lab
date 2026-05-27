@@ -1,0 +1,46 @@
+{
+  "fixture_type": "metadata_only_visual_eval_readonly_metadata_accumulation_queue_detail_view_negative_cases",
+  "source_detail_view": "tests/schema_examples/visual_eval_readonly_metadata_accumulation_queue_detail_view.example.json",
+  "negative_cases": [
+    {
+      "case_id": "wrong_selected_section",
+      "description": "Detail key must preserve the selected metadata queue section.",
+      "mutation": {
+        "operation": "set_field",
+        "field": "selected_section_id",
+        "value": "archive_references"
+      },
+      "expected_failure_code": "metadata_queue_detail_selected_section_matches"
+    },
+    {
+      "case_id": "missing_patch_membership",
+      "description": "Selected patch detail must retain patch-plan-only section membership.",
+      "mutation": {
+        "operation": "remove_membership",
+        "field": "section_membership",
+        "value": "patch_plan_only"
+      },
+      "expected_failure_code": "metadata_queue_detail_patch_section_membership_present"
+    },
+    {
+      "case_id": "guard_memory_true",
+      "description": "Detail view must not open memory writes.",
+      "mutation": {
+        "operation": "set_field",
+        "field": "guard.memory_write_performed",
+        "value": true
+      },
+      "expected_failure_code": "metadata_queue_detail_guard_memory_write_performed_false"
+    },
+    {
+      "case_id": "absolute_local_source_surface",
+      "description": "Detail source surface must remain repo-relative.",
+      "mutation": {
+        "operation": "set_field",
+        "field": "source_surface_snapshot",
+        "value": "<synthetic-windows-absolute-path>\\metadata_queue_surface.json"
+      },
+      "expected_failure_code": "metadata_queue_detail_no_absolute_or_loopback"
+    }
+  ]
+}
