@@ -2545,6 +2545,11 @@ const EXPECTED_P2_1_PROVIDER_EVIDENCE_INTEGRITY_PHASE_2_SLICE = [
   "scripts/validate_provider_evidence_integrity_contract.js"
 ].sort();
 
+const EXPECTED_PROVIDER_EVIDENCE_INTEGRITY_SCOPE_NARROWING_FIX_SLICE = [
+  "schemas/provider_evidence_integrity_contract.schema.yaml",
+  "scripts/validate_provider_evidence_integrity_contract.js"
+].sort();
+
 const EXPECTED_P2_2_RETRY_007_PREFLIGHT_DECISION_SLICE = [
   "adapters/runtime/exact_a5_provider_retry_007_preflight_decision_packet.js",
   "docs/EXACT_A5_PROVIDER_RETRY_007_PREFLIGHT_DECISION.md",
@@ -2579,6 +2584,10 @@ const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "provider_evidence_integrity_phase_2_slice",
     files: EXPECTED_P2_1_PROVIDER_EVIDENCE_INTEGRITY_PHASE_2_SLICE
+  },
+  {
+    id: "provider_evidence_integrity_scope_narrowing_fix_slice",
+    files: EXPECTED_PROVIDER_EVIDENCE_INTEGRITY_SCOPE_NARROWING_FIX_SLICE
   },
   {
     id: "validation_gate_semantics_slice",
@@ -3226,6 +3235,8 @@ function normalizeChangedFilesForSliceMatching(changedFiles) {
     && sameStringList(withoutHelper, EXPECTED_P2_2_RETRY_007_PREFLIGHT_DECISION_SLICE);
   const isP2_1ProviderEvidenceIntegrityRegistrationPatch = changedFiles.includes(GOVERNANCE_TOOLING_SLICE_HELPER_FILE)
     && sameStringList(withoutHelper, EXPECTED_P2_1_PROVIDER_EVIDENCE_INTEGRITY_PHASE_2_SLICE);
+  const isProviderEvidenceIntegrityScopeNarrowingFixRegistrationPatch = changedFiles.includes(GOVERNANCE_TOOLING_SLICE_HELPER_FILE)
+    && sameStringList(withoutHelper, EXPECTED_PROVIDER_EVIDENCE_INTEGRITY_SCOPE_NARROWING_FIX_SLICE);
   const isP2_0ValidationGateSemanticsRegistrationPatch = changedFiles.includes(GOVERNANCE_TOOLING_SLICE_HELPER_FILE)
     && sameStringList(withoutHelper, EXPECTED_P2_0_VALIDATION_GATE_SEMANTICS_SLICE);
   const isP1_8GovernanceV14_212BaselineRegistrationPatch = changedFiles.includes(GOVERNANCE_TOOLING_SLICE_HELPER_FILE)
@@ -3289,7 +3300,7 @@ function normalizeChangedFilesForSliceMatching(changedFiles) {
   const isV0_6_73agToAiRegistrationPatch = changedFiles.includes(GOVERNANCE_TOOLING_SLICE_HELPER_FILE)
     && sameStringList(withoutHelper, EXPECTED_V0_6_73AG_TO_AI_REMOTE_SYNC_CURRENT_HEAD_AND_ONE_SHOT_BLOCKED_SLICE);
 
-  return (isP2_2Retry007PreflightDecisionRegistrationPatch || isP2_1ProviderEvidenceIntegrityRegistrationPatch || isP2_0ValidationGateSemanticsRegistrationPatch || isP1_8GovernanceV14_212BaselineRegistrationPatch || isPostPushSyncRegistrationPatch || isExecutionBlockedStatusSyncRegistrationPatch || isV0_6_73gRegistrationPatch || isV0_6_73hRegistrationPatch || isV0_6_73iRegistrationPatch || isV0_6_73lRegistrationPatch || isV0_6_73mRegistrationPatch || isV0_6_73nRegistrationPatch || isV0_6_73oRegistrationPatch || isV0_6_73pRegistrationPatch || isV0_6_73qRegistrationPatch || isV0_6_73rRegistrationPatch || isV0_6_73sRegistrationPatch || isV0_6_73tRegistrationPatch || isV0_6_73uRegistrationPatch || isV0_6_73u3RegistrationPatch || isV0_6_73vRegistrationPatch || isV0_6_73wRegistrationPatch || isV0_6_73xRegistrationPatch || isV0_6_73zRegistrationPatch || isV0_6_73aaRegistrationPatch || isV0_6_73abRegistrationPatch || isV0_6_73adRegistrationPatch || isV0_6_73aeRegistrationPatch || isV0_6_73afRegistrationPatch || isV0_6_73agRegistrationPatch || isV0_6_73ahRegistrationPatch || isV0_6_73agToAhRegistrationPatch || isV0_6_73agToAiRegistrationPatch) ? withoutHelper : changedFiles;
+  return (isP2_2Retry007PreflightDecisionRegistrationPatch || isP2_1ProviderEvidenceIntegrityRegistrationPatch || isProviderEvidenceIntegrityScopeNarrowingFixRegistrationPatch || isP2_0ValidationGateSemanticsRegistrationPatch || isP1_8GovernanceV14_212BaselineRegistrationPatch || isPostPushSyncRegistrationPatch || isExecutionBlockedStatusSyncRegistrationPatch || isV0_6_73gRegistrationPatch || isV0_6_73hRegistrationPatch || isV0_6_73iRegistrationPatch || isV0_6_73lRegistrationPatch || isV0_6_73mRegistrationPatch || isV0_6_73nRegistrationPatch || isV0_6_73oRegistrationPatch || isV0_6_73pRegistrationPatch || isV0_6_73qRegistrationPatch || isV0_6_73rRegistrationPatch || isV0_6_73sRegistrationPatch || isV0_6_73tRegistrationPatch || isV0_6_73uRegistrationPatch || isV0_6_73u3RegistrationPatch || isV0_6_73vRegistrationPatch || isV0_6_73wRegistrationPatch || isV0_6_73xRegistrationPatch || isV0_6_73zRegistrationPatch || isV0_6_73aaRegistrationPatch || isV0_6_73abRegistrationPatch || isV0_6_73adRegistrationPatch || isV0_6_73aeRegistrationPatch || isV0_6_73afRegistrationPatch || isV0_6_73agRegistrationPatch || isV0_6_73ahRegistrationPatch || isV0_6_73agToAhRegistrationPatch || isV0_6_73agToAiRegistrationPatch) ? withoutHelper : changedFiles;
 }
 
 function fileAllowedInGovernanceToolingSlice(file) {
@@ -3578,6 +3589,26 @@ function governanceToolingMaintenanceSliceSelfCheck() {
       passed: Object.keys(EXPECTED_P2_1_PROVIDER_EVIDENCE_INTEGRITY_PACKAGE_SCRIPTS).length === 2
         && EXPECTED_P2_1_PROVIDER_EVIDENCE_INTEGRITY_PACKAGE_SCRIPTS["validate:provider-evidence-integrity"] === "node scripts/validate_provider_evidence_integrity_contract.js"
         && EXPECTED_P2_1_PROVIDER_EVIDENCE_INTEGRITY_PACKAGE_SCRIPTS["validate:all"].includes("npm run validate:provider-evidence-integrity")
+    },
+    {
+      check: "exact_slice_matches_provider_evidence_integrity_scope_narrowing_fix",
+      passed: findMatchingGovernanceToolingSlice(
+        EXPECTED_PROVIDER_EVIDENCE_INTEGRITY_SCOPE_NARROWING_FIX_SLICE
+      )?.id === "provider_evidence_integrity_scope_narrowing_fix_slice"
+    },
+    {
+      check: "exact_slice_matches_provider_evidence_integrity_scope_narrowing_fix_registration_patch",
+      passed: findMatchingGovernanceToolingSlice([
+        ...EXPECTED_PROVIDER_EVIDENCE_INTEGRITY_SCOPE_NARROWING_FIX_SLICE,
+        GOVERNANCE_TOOLING_SLICE_HELPER_FILE
+      ])?.id === "provider_evidence_integrity_scope_narrowing_fix_slice"
+    },
+    {
+      check: "provider_evidence_integrity_scope_narrowing_fix_rejects_package_change",
+      passed: findMatchingGovernanceToolingSlice([
+        ...EXPECTED_PROVIDER_EVIDENCE_INTEGRITY_SCOPE_NARROWING_FIX_SLICE,
+        "package.json"
+      ]) === null
     },
     {
       check: "exact_slice_matches_validation_gate_semantics",
@@ -4581,6 +4612,7 @@ module.exports = {
   EXPECTED_P2_2_RETRY_007_PREFLIGHT_DECISION_SLICE,
   EXPECTED_P2_2_RETRY_007_PREFLIGHT_DECISION_PACKAGE_SCRIPTS,
   EXPECTED_P2_1_PROVIDER_EVIDENCE_INTEGRITY_PHASE_2_SLICE,
+  EXPECTED_PROVIDER_EVIDENCE_INTEGRITY_SCOPE_NARROWING_FIX_SLICE,
   EXPECTED_P2_1_PROVIDER_EVIDENCE_INTEGRITY_PACKAGE_SCRIPTS,
   EXPECTED_P2_0_VALIDATION_GATE_SEMANTICS_SLICE,
   EXPECTED_P1_8_GOVERNANCE_V14_212_BASELINE_RECONCILIATION_SLICE,

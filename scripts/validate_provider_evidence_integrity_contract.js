@@ -69,6 +69,12 @@ function assertSchemaContract() {
   assert(schema.public_disclosure_constraints.local_absolute_paths === "forbidden", "local path disclosure policy mismatch");
   assert(schema.public_disclosure_constraints.loopback_urls === "forbidden", "loopback disclosure policy mismatch");
   assert(schema.public_disclosure_constraints.local_admin_route_url_ref === "<redacted-local-admin-route>", "admin route redaction policy mismatch");
+  assert(schema.scope.provider_receipts.includes("reports/provider_receipts/v0_6_73_real_vcp_agent_generation_one_shot_receipt.json"), "one-shot receipt scope missing");
+  assert(schema.scope.provider_receipts.includes("reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_NNN_receipt.json"), "retry activation receipt scope missing");
+  assert(schema.scope.provider_receipts.length === 2, "provider receipt scope must stay limited to activation receipts");
+  assert(schema.scope.review_handoffs.includes("review_console/live_receipt_bridge/v0_6_73_real_vcp_agent_generation_one_shot/bridge_entry.json"), "one-shot handoff scope missing");
+  assert(schema.scope.review_handoffs.includes("review_console/live_receipt_bridge/v0_6_73_real_vcp_agent_generation_retry_NNN/bridge_entry.json"), "retry activation handoff scope missing");
+  assert(schema.scope.review_handoffs.length === 2, "review handoff scope must stay limited to activation handoffs");
   assert(schema.artifact_integrity_contract.eligible_artifacts_require.includes("sha256"), "sha256 requirement missing");
   assert(schema.artifact_integrity_contract.eligible_artifacts_require.includes("mime_type"), "mime requirement missing");
   assert(schema.artifact_integrity_contract.eligible_artifacts_require.includes("width"), "width requirement missing");

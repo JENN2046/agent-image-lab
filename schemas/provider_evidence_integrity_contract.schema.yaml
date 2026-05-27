@@ -3,9 +3,11 @@ version: v0_1
 phase: p2_1_provider_evidence_integrity_phase_2
 scope:
   provider_receipts:
-    - reports/provider_receipts/v0_6_73_real_vcp_agent_generation_*_receipt.json
+    - reports/provider_receipts/v0_6_73_real_vcp_agent_generation_one_shot_receipt.json
+    - reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_NNN_receipt.json
   review_handoffs:
-    - review_console/live_receipt_bridge/v0_6_73_real_vcp_agent_generation_*/bridge_entry.json
+    - review_console/live_receipt_bridge/v0_6_73_real_vcp_agent_generation_one_shot/bridge_entry.json
+    - review_console/live_receipt_bridge/v0_6_73_real_vcp_agent_generation_retry_NNN/bridge_entry.json
 public_disclosure_constraints:
   local_absolute_paths: forbidden
   loopback_urls: forbidden
