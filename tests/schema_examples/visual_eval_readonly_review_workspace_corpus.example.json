@@ -1,0 +1,130 @@
+{
+  "corpus_id": "visual_eval_readonly_review_workspace_corpus_v1_synthetic_001",
+  "corpus_type": "metadata_only_visual_eval_readonly_review_workspace_corpus",
+  "status": "readonly_review_workspace_corpus_ready",
+  "source_case_matrices": [
+    "tests/schema_examples/visual_eval_readonly_review_workspace_case_matrix.example.json"
+  ],
+  "corpus_contract": {
+    "metadata_only": true,
+    "read_only": true,
+    "canonical_artifact_collection": true,
+    "matrix_members_must_be_repo_relative": true,
+    "member_matrices_must_be_readonly": true,
+    "outcome_index_must_cover_pass_patch_reject": true,
+    "next_action_index_must_be_readonly": true,
+    "route_action": "render_readonly_review_workspace_corpus_only",
+    "write_allowed": false
+  },
+  "corpus_summary": {
+    "member_count": 1,
+    "total_case_rows": 3,
+    "outcome_totals": {
+      "pass": 1,
+      "patch": 1,
+      "reject": 1
+    },
+    "selected_review_result_ids": [
+      "visual_eval_review_result_patch_synthetic_001"
+    ]
+  },
+  "corpus_members": [
+    {
+      "corpus_member_id": "readonly_workspace_case_matrix_member_001",
+      "matrix_id": "visual_eval_readonly_review_workspace_case_matrix_v1_synthetic_001",
+      "matrix_path": "tests/schema_examples/visual_eval_readonly_review_workspace_case_matrix.example.json",
+      "selected_review_result_id": "visual_eval_review_result_patch_synthetic_001",
+      "case_row_count": 3,
+      "outcomes": [
+        "pass",
+        "patch",
+        "reject"
+      ],
+      "next_review_actions": [
+        "queue_for_future_human_review",
+        "write_patch_plan_only",
+        "defer_until_taxonomy_update"
+      ],
+      "metadata_sections": [
+        "accepted_metadata_candidates",
+        "archive_references",
+        "next_review_actions",
+        "patch_plan_only",
+        "failure_learning_metadata"
+      ],
+      "selected_outcome": "patch",
+      "read_only": true,
+      "write_allowed": false
+    }
+  ],
+  "indexes": {
+    "by_outcome": {
+      "pass": 1,
+      "patch": 1,
+      "reject": 1
+    },
+    "by_next_review_action": {
+      "queue_for_future_human_review": [
+        "visual_eval_review_result_pass_synthetic_001"
+      ],
+      "write_patch_plan_only": [
+        "visual_eval_review_result_patch_synthetic_001"
+      ],
+      "defer_until_taxonomy_update": [
+        "visual_eval_review_result_reject_synthetic_001"
+      ]
+    },
+    "by_metadata_section": {
+      "accepted_metadata_candidates": [
+        "visual_eval_review_result_pass_synthetic_001"
+      ],
+      "archive_references": [
+        "visual_eval_review_result_pass_synthetic_001",
+        "visual_eval_review_result_patch_synthetic_001",
+        "visual_eval_review_result_reject_synthetic_001"
+      ],
+      "next_review_actions": [
+        "visual_eval_review_result_pass_synthetic_001",
+        "visual_eval_review_result_patch_synthetic_001",
+        "visual_eval_review_result_reject_synthetic_001"
+      ],
+      "patch_plan_only": [
+        "visual_eval_review_result_patch_synthetic_001"
+      ],
+      "failure_learning_metadata": [
+        "visual_eval_review_result_reject_synthetic_001"
+      ]
+    },
+    "matrix_by_selected_review_result": {
+      "visual_eval_review_result_patch_synthetic_001": "visual_eval_readonly_review_workspace_case_matrix_v1_synthetic_001"
+    }
+  },
+  "readonly_route_guard_summary": {
+    "route_action": "render_readonly_review_workspace_corpus_only",
+    "write_allowed": false,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "memory_write_performed": false,
+    "production_candidate_002_started": false
+  },
+  "guard": {
+    "metadata_only": true,
+    "read_only": true,
+    "display_only": true,
+    "file_write_performed": false,
+    "approval_write_performed": false,
+    "accepted_samples_write_performed": false,
+    "production_candidate_created": false,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "DailyNote_write_performed": false,
+    "VCP_memory_write_performed": false,
+    "memory_write_performed": false,
+    "Batch_005_started": false,
+    "production_candidate_002_started": false
+  }
+}

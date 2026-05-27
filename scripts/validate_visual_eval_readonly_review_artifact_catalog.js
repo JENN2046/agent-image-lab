@@ -30,6 +30,7 @@ const expectedRoles = [
   "readonly_metadata_accumulation_queue_detail_navigation",
   "readonly_review_workspace",
   "readonly_review_workspace_case_matrix",
+  "readonly_review_workspace_corpus",
 ];
 const expectedValidators = [
   "scripts/validate_visual_eval_review_result_protocol.js",
@@ -50,6 +51,7 @@ const expectedValidators = [
   "scripts/validate_visual_eval_readonly_metadata_accumulation_queue_detail_navigation.js",
   "scripts/validate_visual_eval_readonly_review_workspace.js",
   "scripts/validate_visual_eval_readonly_review_workspace_case_matrix.js",
+  "scripts/validate_visual_eval_readonly_review_workspace_corpus.js",
 ];
 const expectedDisplayFields = [
   "outcome",
@@ -159,9 +161,9 @@ function validateArtifactEntries(catalog) {
     addResult(`catalog_entry_${role}_readonly_consumable_true`, entry.readonly_consumable === true);
     if (!artifactPathOk) continue;
     const artifact = readJson(entry.path);
-    const typeField = artifact.artifact_type || artifact.fixture_type || artifact.payload_type || artifact.consumer_payload_type || artifact.query_payload_type || artifact.surface_snapshot_type || artifact.detail_view_type || artifact.navigation_type || artifact.drilldown_type || artifact.queue_type || artifact.workspace_type || artifact.matrix_type;
+    const typeField = artifact.artifact_type || artifact.fixture_type || artifact.payload_type || artifact.consumer_payload_type || artifact.query_payload_type || artifact.surface_snapshot_type || artifact.detail_view_type || artifact.navigation_type || artifact.drilldown_type || artifact.queue_type || artifact.workspace_type || artifact.matrix_type || artifact.corpus_type;
     addResult(`catalog_entry_${role}_artifact_type_matches`, typeField === entry.artifact_type, typeField);
-    addResult(`catalog_entry_${role}_artifact_id_matches`, (artifact.artifact_id || artifact.fixture_id || artifact.payload_id || artifact.consumer_payload_id || artifact.query_payload_id || artifact.surface_snapshot_id || artifact.detail_view_id || artifact.navigation_id || artifact.drilldown_id || artifact.queue_id || artifact.workspace_id || artifact.matrix_id) === entry.artifact_id);
+    addResult(`catalog_entry_${role}_artifact_id_matches`, (artifact.artifact_id || artifact.fixture_id || artifact.payload_id || artifact.consumer_payload_id || artifact.query_payload_id || artifact.surface_snapshot_id || artifact.detail_view_id || artifact.navigation_id || artifact.drilldown_id || artifact.queue_id || artifact.workspace_id || artifact.matrix_id || artifact.corpus_id) === entry.artifact_id);
   }
 }
 
@@ -351,6 +353,18 @@ function validateConsumerExpectations(catalog) {
   addResult("catalog_workspace_case_matrix_route_action_expected", matrix.matrix_contract?.route_action === catalog.review_workspace_case_matrix_expectations?.required_route_action);
   addResult("catalog_workspace_case_matrix_required_sections_present", (catalog.review_workspace_case_matrix_expectations?.required_metadata_sections || []).every((sectionId) => Array.isArray(matrix.indexes?.by_metadata_section?.[sectionId])));
   addResult("catalog_workspace_case_matrix_required_next_actions_present", (catalog.review_workspace_case_matrix_expectations?.required_next_review_actions || []).every((action) => Array.isArray(matrix.indexes?.by_next_review_action?.[action])));
+
+  const corpusEntry = getEntry(catalog, "readonly_review_workspace_corpus");
+  const corpus = readJson(corpusEntry.path);
+  addResult("catalog_workspace_corpus_expected_path_matches", catalog.review_workspace_corpus_expectations?.corpus === corpusEntry.path);
+  addResult("catalog_workspace_corpus_source_matrix_matches", (corpus.source_case_matrices || []).includes(matrixEntry.path));
+  addResult("catalog_workspace_corpus_expected_matrix_matches", (catalog.review_workspace_corpus_expectations?.source_case_matrices || []).includes(matrixEntry.path));
+  addResult("catalog_workspace_corpus_member_count_matches", corpus.corpus_summary?.member_count === catalog.review_workspace_corpus_expectations?.member_count);
+  addResult("catalog_workspace_corpus_total_case_rows_matches", corpus.corpus_summary?.total_case_rows === catalog.review_workspace_corpus_expectations?.total_case_rows);
+  addResult("catalog_workspace_corpus_outcome_totals_match", (catalog.review_workspace_corpus_expectations?.outcomes || []).every((outcome) => corpus.corpus_summary?.outcome_totals?.[outcome] === catalog.review_workspace_corpus_expectations?.outcome_total_per_kind));
+  addResult("catalog_workspace_corpus_required_sections_present", (catalog.review_workspace_corpus_expectations?.required_metadata_sections || []).every((sectionId) => Array.isArray(corpus.indexes?.by_metadata_section?.[sectionId])));
+  addResult("catalog_workspace_corpus_required_next_actions_present", (catalog.review_workspace_corpus_expectations?.required_next_review_actions || []).every((action) => Array.isArray(corpus.indexes?.by_next_review_action?.[action])));
+  addResult("catalog_workspace_corpus_route_action_expected", corpus.corpus_contract?.route_action === catalog.review_workspace_corpus_expectations?.required_route_action);
 }
 
 function runReferencedValidators(catalog) {

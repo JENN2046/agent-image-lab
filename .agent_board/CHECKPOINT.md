@@ -1,12 +1,81 @@
 ---
 
+## Checkpoint - P3.18 Readonly Review Workspace Corpus
+
+```text
+phase: p3_18_readonly_review_workspace_corpus
+status: completed_validated_pending_local_commit
+result: COMPLETED_VALIDATED
+source_commit: c445f38
+mode: metadata-only readonly review workspace corpus
+summary: Added a corpus layer above the readonly review workspace case matrix. The corpus enumerates case-matrix members, indexes pass/patch/reject outcome totals, next review actions, metadata sections, and selected review result to matrix mapping. This gives the readonly review artifact system a canonical collection layer that can expand beyond one workspace while keeping all provider/runtime/memory/write routes closed.
+changed_files_current_task:
+  - kernel/visual_eval_readonly_review_workspace_corpus.js
+  - scripts/validate_visual_eval_readonly_review_workspace_corpus.js
+  - scripts/validate_visual_eval_readonly_review_artifact_catalog.js
+  - tests/schema_examples/visual_eval_readonly_review_workspace_corpus.example.json
+  - tests/schema_examples/visual_eval_readonly_review_workspace_corpus_negative_cases.example.json
+  - tests/schema_examples/visual_eval_readonly_review_artifact_catalog.example.json
+  - .agent_board/CHECKPOINT.md
+validation_run:
+  - node --check kernel/visual_eval_readonly_review_workspace_corpus.js
+  - node --check scripts/validate_visual_eval_readonly_review_workspace_corpus.js
+  - node --check scripts/validate_visual_eval_readonly_review_artifact_catalog.js
+  - node scripts/validate_visual_eval_readonly_review_workspace_corpus.js
+  - node scripts/validate_visual_eval_readonly_review_artifact_catalog.js
+validation_result: passed
+corpus_sources:
+  - tests/schema_examples/visual_eval_readonly_review_workspace_case_matrix.example.json
+corpus_member_count: 1
+total_case_rows: 3
+outcomes_verified:
+  - pass
+  - patch
+  - reject
+required_metadata_sections_verified:
+  - accepted_metadata_candidates
+  - patch_plan_only
+  - failure_learning_metadata
+  - archive_references
+  - next_review_actions
+required_next_review_actions_verified:
+  - queue_for_future_human_review
+  - write_patch_plan_only
+  - defer_until_taxonomy_update
+negative_cases_verified:
+  - missing_corpus_member
+  - wrong_total_case_rows
+  - missing_patch_outcome_index
+  - guard_provider_true
+  - absolute_local_matrix_path
+runtime_execution_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+memory_written: false
+accepted_samples_written: false
+Batch_005_started: false
+production_candidate_002_started: false
+package_json_modified: false
+dependency_change_performed: false
+push_performed: false
+red_line_request_needed_next: real Review Console readonly integration or guarded push
+next_phase_started: false
+```
+
+---
+
 ## Checkpoint - P3.17 Readonly Review Workspace Case Matrix
 
 ```text
 phase: p3_17_readonly_review_workspace_case_matrix
-status: completed_validated_pending_local_commit
+status: completed_validated_local_commit
 result: COMPLETED_VALIDATED
 source_commit: 8f4335b
+local_commit: c445f38
 mode: metadata-only readonly review workspace case matrix
 summary: Added a case-matrix consumer on top of the readonly review workspace. The matrix consumes the workspace, readonly collection consumer, and metadata queue detail navigation to expose all pass/patch/reject case rows at once, with summary, reasons, taxonomy, blocking watch items, metadata queue sections, metadata navigation keys, metadata accumulation action, and next review action. This moves the system from a selected-result workspace toward a more realistic readonly review table that can consume all three outcomes together.
 changed_files_current_task:

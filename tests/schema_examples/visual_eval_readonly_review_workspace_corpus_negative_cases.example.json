@@ -1,0 +1,74 @@
+{
+  "fixture_id": "visual_eval_readonly_review_workspace_corpus_negative_cases_001",
+  "fixture_type": "metadata_only_visual_eval_readonly_review_workspace_corpus_negative_cases",
+  "source_corpus": "tests/schema_examples/visual_eval_readonly_review_workspace_corpus.example.json",
+  "negative_case_contract": {
+    "case_shape": "workspace_corpus_mutation_specification",
+    "purpose": "readonly_workspace_corpus_fail_closed_cases",
+    "all_cases_expected_to_fail": true
+  },
+  "negative_cases": [
+    {
+      "case_id": "missing_corpus_member",
+      "mutation": {
+        "operation": "remove_first_member"
+      },
+      "expected_failure_code": "corpus_member_count_positive",
+      "expected_reason": "corpus must enumerate at least one readonly workspace case matrix"
+    },
+    {
+      "case_id": "wrong_total_case_rows",
+      "mutation": {
+        "operation": "set_field",
+        "field": "corpus_summary.total_case_rows",
+        "value": 99
+      },
+      "expected_failure_code": "corpus_total_case_rows_matches_members",
+      "expected_reason": "corpus summary must agree with member case rows"
+    },
+    {
+      "case_id": "missing_patch_outcome_index",
+      "mutation": {
+        "operation": "delete_index_key",
+        "index_name": "by_outcome",
+        "key": "patch"
+      },
+      "expected_failure_code": "corpus_outcome_index_covers_pass_patch_reject",
+      "expected_reason": "corpus outcome index must cover patch"
+    },
+    {
+      "case_id": "guard_provider_true",
+      "mutation": {
+        "operation": "set_field",
+        "field": "guard.provider_contact_performed",
+        "value": true
+      },
+      "expected_failure_code": "corpus_guard_provider_contact_performed_false",
+      "expected_reason": "corpus must keep provider contact closed"
+    },
+    {
+      "case_id": "absolute_local_matrix_path",
+      "mutation": {
+        "operation": "set_field",
+        "field": "corpus_members.0.matrix_path",
+        "value": "<synthetic-windows-absolute-path>\\visual_eval_readonly_review_workspace_case_matrix.example.json"
+      },
+      "expected_failure_code": "corpus_no_absolute_or_loopback",
+      "expected_reason": "corpus matrix paths must remain repo-relative"
+    }
+  ],
+  "boundary_confirmation": {
+    "metadata_only": true,
+    "read_only": true,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "memory_written": false,
+    "DailyNote_written": false,
+    "VCP_memory_written": false,
+    "accepted_samples_written": false,
+    "production_candidate_002_started": false,
+    "Batch_005_started": false
+  }
+}
