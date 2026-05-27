@@ -3,19 +3,22 @@
 ```yaml
 phase_name: p2_3_provider_evidence_integrity_closeout_and_route_selection
 source_commit: 392d07b
-status: completed_docs_only_closeout_pending_local_commit
-sealed_remote_commit: 392d07b
-remote_sync_verified_before_closeout: true
+status: completed_remote_synced_after_guarded_push
+sealed_remote_commit: dd0e306
+provider_evidence_hardening_commit: 392d07b
+remote_sync_verified_after_push: true
 mode: A0_read_only_then_docs_only_closeout
 ```
 
 ## Summary
 
-The provider evidence integrity hardening chain is sealed at `392d07b` on
-`master` / `origin/master`. The current validator scope remains limited to the
-v0.6.73 real-execution activation receipts and activation review handoffs; it
-does not claim wildcard coverage over provider receipts, promotion receipts,
-category sync receipts, review notes, or broader runtime artifacts.
+The provider evidence integrity semantic hardening commit `392d07b` was sealed
+into the docs-only closeout commit `dd0e306`, and `dd0e306` is now the current
+`master` / `origin/master` remote synchronization point. The current validator
+scope remains limited to the v0.6.73 real-execution activation receipts and
+activation review handoffs; it does not claim wildcard coverage over provider
+receipts, promotion receipts, category sync receipts, review notes, or broader
+runtime artifacts.
 
 ## Repair Chain
 
@@ -39,7 +42,9 @@ category sync receipts, review notes, or broader runtime artifacts.
 
 The read-only closeout review confirmed:
 
-- `HEAD` equals `origin/master` at `392d07b`.
+- `HEAD` equals `origin/master` at `dd0e306`.
+- `dd0e306` contains the closeout for provider evidence integrity hardening.
+- `392d07b` remains the semantic hardening implementation point.
 - The worktree was clean before the docs-only closeout patch.
 - `package.json` still wires `validate:provider-evidence-integrity` to
   `node scripts/validate_provider_evidence_integrity_contract.js`.
@@ -75,18 +80,28 @@ This closeout is documentation-only. It does not authorize or perform:
 
 ## Route Selection
 
-Recommended next phase: `resume_surface_reconciliation`.
+Recommended next phase after this reconciliation: `visual_workflow_product_route_review`.
 
-Reason: the provider evidence integrity chain is now sealed, but project status
-surfaces are long-lived and have accumulated historical routing records. Before
-opening a new product or production-candidate lane, the safest next step is to
-reconcile resume surfaces so the current no-provider/no-production boundary and
-recommended route are easy to recover from a fresh session.
+Reason: the provider evidence integrity chain and resume surfaces are now
+aligned to the remote closeout point. The next useful move should stay
+planning-only and review the product route before any production candidate,
+memory, image generation, or provider lane is opened.
 
 Route options considered:
 
-- `A: resume_surface_reconciliation` - recommended default.
-- `B: visual_workflow_product_route_review` - useful after resume surfaces are
-  clean.
+- `A: resume_surface_reconciliation` - completed by p2.4.
+- `B: visual_workflow_product_route_review` - recommended next route.
 - `C: production_candidate_002_readiness_planning_only` - keep blocked until
   route and evidence surfaces are simpler.
+
+## P2.4 Resume Surface Reconciliation
+
+```yaml
+phase_name: p2_4_resume_surface_reconciliation
+source_commit: dd0e306
+status: completed_validated_local_commit_ready
+remote_sync_verified: true
+push_performed_for_source_commit: true
+next_phase_started: false
+recommended_next_phase: visual_workflow_product_route_review
+```

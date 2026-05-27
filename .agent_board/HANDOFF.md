@@ -1,5 +1,40 @@
 ---
 
+## Current Handoff Update - P2.4 Resume Surface Reconciliation
+
+```text
+phase: p2_4_resume_surface_reconciliation
+status: COMPLETED_VALIDATED_LOCAL_COMMIT_READY
+mode: docs-only control surface patch
+branch: master
+source_commit: dd0e306
+remote_head_verified: dd0e306
+summary: Reconciled provider evidence integrity closeout and resume surfaces after dd0e306 was pushed to origin/master. Current surfaces should now treat dd0e306 as the remote-sealed closeout point and should not describe p2_3 as pending local commit.
+changed_by_this_task:
+  - docs/provider_evidence_integrity_semantic_hardening_closeout.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+validation:
+  - git diff --check: passed
+  - git status --short: passed
+  - git diff --cached --check: passed
+boundaries:
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  Batch_005_started: false
+  production_candidate_002_started: false
+  next_phase_started: false
+recommended_next_phase: visual_workflow_product_route_review
+```
+
+---
+
 ## Current Handoff Update - P1.1 Legacy Commit-Readiness Gate Reconciliation
 
 ```text
