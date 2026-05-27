@@ -1,0 +1,56 @@
+{
+  "fixture_type": "metadata_only_visual_eval_readonly_review_detail_navigation_negative_cases",
+  "source_navigation": "tests/schema_examples/visual_eval_readonly_review_detail_navigation.example.json",
+  "negative_cases": [
+    {
+      "case_id": "selected_id_not_in_navigation",
+      "description": "Selected review_result_id must resolve to exactly one navigation item.",
+      "mutation": {
+        "operation": "set_field",
+        "field": "selected_review_result_id",
+        "value": "visual_eval_review_result_missing_synthetic_999"
+      },
+      "expected_failure_code": "navigation_selected_id_resolves"
+    },
+    {
+      "case_id": "navigation_item_outcome_mismatch",
+      "description": "Navigation item outcome must match the loaded readonly detail outcome.",
+      "mutation": {
+        "operation": "set_field",
+        "field": "navigation_items.1.outcome",
+        "value": "reject"
+      },
+      "expected_failure_code": "navigation_item_matches_detail_outcome"
+    },
+    {
+      "case_id": "unknown_navigation_route_action",
+      "description": "Detail selectors must use the readonly detail-only route action.",
+      "mutation": {
+        "operation": "set_field",
+        "field": "navigation_items.1.detail_selector.route_action",
+        "value": "write_review_decision"
+      },
+      "expected_failure_code": "navigation_selector_route_action_readonly"
+    },
+    {
+      "case_id": "detail_guard_provider_true",
+      "description": "Selected detail guard must not open provider contact.",
+      "mutation": {
+        "operation": "set_field",
+        "field": "selected_detail.guard.provider_contact_performed",
+        "value": true
+      },
+      "expected_failure_code": "navigation_selected_detail_guard_provider_false"
+    },
+    {
+      "case_id": "absolute_local_source_surface",
+      "description": "Navigation source refs must remain repo-relative and public-safe.",
+      "mutation": {
+        "operation": "set_field",
+        "field": "source_surface_snapshot",
+        "value": "A:\\agent-image-lab\\secret\\surface.json"
+      },
+      "expected_failure_code": "navigation_no_absolute_or_loopback"
+    }
+  ]
+}

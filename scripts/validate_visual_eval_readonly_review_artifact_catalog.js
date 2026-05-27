@@ -20,6 +20,7 @@ const expectedRoles = [
   "readonly_collection_query_payload",
   "readonly_surface_snapshot",
   "readonly_detail_view",
+  "readonly_detail_navigation",
 ];
 const expectedValidators = [
   "scripts/validate_visual_eval_review_result_protocol.js",
@@ -30,6 +31,7 @@ const expectedValidators = [
   "scripts/validate_visual_eval_readonly_review_collection_query.js",
   "scripts/validate_visual_eval_readonly_review_surface_snapshot.js",
   "scripts/validate_visual_eval_readonly_review_detail_view.js",
+  "scripts/validate_visual_eval_readonly_review_detail_navigation.js",
 ];
 const expectedDisplayFields = [
   "outcome",
@@ -139,9 +141,9 @@ function validateArtifactEntries(catalog) {
     addResult(`catalog_entry_${role}_readonly_consumable_true`, entry.readonly_consumable === true);
     if (!artifactPathOk) continue;
     const artifact = readJson(entry.path);
-    const typeField = artifact.artifact_type || artifact.fixture_type || artifact.payload_type || artifact.consumer_payload_type || artifact.query_payload_type || artifact.surface_snapshot_type || artifact.detail_view_type;
+    const typeField = artifact.artifact_type || artifact.fixture_type || artifact.payload_type || artifact.consumer_payload_type || artifact.query_payload_type || artifact.surface_snapshot_type || artifact.detail_view_type || artifact.navigation_type;
     addResult(`catalog_entry_${role}_artifact_type_matches`, typeField === entry.artifact_type, typeField);
-    addResult(`catalog_entry_${role}_artifact_id_matches`, (artifact.artifact_id || artifact.fixture_id || artifact.payload_id || artifact.consumer_payload_id || artifact.query_payload_id || artifact.surface_snapshot_id || artifact.detail_view_id) === entry.artifact_id);
+    addResult(`catalog_entry_${role}_artifact_id_matches`, (artifact.artifact_id || artifact.fixture_id || artifact.payload_id || artifact.consumer_payload_id || artifact.query_payload_id || artifact.surface_snapshot_id || artifact.detail_view_id || artifact.navigation_id) === entry.artifact_id);
   }
 }
 
@@ -203,6 +205,20 @@ function validateConsumerExpectations(catalog) {
   addResult("catalog_detail_view_selected_outcome_matches", detail.selected_card?.outcome === catalog.detail_view_expectations?.selected_outcome);
   addResult("catalog_detail_view_taxonomy_membership_present", (catalog.detail_view_expectations?.required_taxonomy_membership || []).every((tag) => (detail.selected_card?.taxonomy_section_membership || []).includes(tag)));
   addResult("catalog_detail_view_next_action_membership_present", (catalog.detail_view_expectations?.required_next_action_membership || []).every((action) => (detail.selected_card?.next_action_queue_membership || []).includes(action)));
+
+  const navigationEntry = getEntry(catalog, "readonly_detail_navigation");
+  const navigation = readJson(navigationEntry.path);
+  addResult("catalog_detail_navigation_expected_path_matches", catalog.detail_navigation_expectations?.detail_navigation === navigationEntry.path);
+  addResult("catalog_detail_navigation_source_surface_matches", navigation.source_surface_snapshot === surfaceEntry.path);
+  addResult("catalog_detail_navigation_source_consumer_matches", navigation.source_collection_consumer === collectionConsumerEntry.path);
+  addResult("catalog_detail_navigation_source_detail_kernel_matches", navigation.source_detail_kernel === catalog.detail_navigation_expectations?.source_detail_kernel);
+  addResult("catalog_detail_navigation_expected_surface_matches", catalog.detail_navigation_expectations?.source_surface_snapshot === surfaceEntry.path);
+  addResult("catalog_detail_navigation_expected_consumer_matches", catalog.detail_navigation_expectations?.source_collection_consumer === collectionConsumerEntry.path);
+  addResult("catalog_detail_navigation_selected_id_matches", navigation.selected_review_result_id === catalog.detail_navigation_expectations?.selected_review_result_id);
+  addResult("catalog_detail_navigation_selected_detail_matches", navigation.selected_detail?.selected_review_result_id === navigation.selected_review_result_id);
+  addResult("catalog_detail_navigation_item_count_matches", (navigation.navigation_items || []).length === catalog.detail_navigation_expectations?.navigation_item_count);
+  addResult("catalog_detail_navigation_outcomes_exact", sameSet((navigation.navigation_items || []).map((item) => item.outcome), catalog.detail_navigation_expectations?.outcomes || []));
+  addResult("catalog_detail_navigation_route_actions_expected", (navigation.navigation_items || []).every((item) => item.detail_selector?.route_action === catalog.detail_navigation_expectations?.required_route_action));
 }
 
 function runReferencedValidators(catalog) {
