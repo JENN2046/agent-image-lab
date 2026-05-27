@@ -2530,6 +2530,10 @@ const EXPECTED_P1_1_EVIDENCE_GOVERNANCE_SANITIZATION_SLICE = [
   "scripts/validate_retry_006_artifact_integrity.js"
 ].sort();
 
+const EXPECTED_P1_8_GOVERNANCE_V14_212_BASELINE_RECONCILIATION_SLICE = [
+  "scripts/validate_governance.ps1"
+].sort();
+
 const EXPECTED_EVIDENCE_GOVERNANCE_SANITIZATION_PACKAGE_SCRIPTS = {
   "validate:all": "npm run validate:smoke && npm run validate:mvp && npm run validate:runtime-kernel && npm run validate:review-bridge-readonly && npm run validate:durable-audit-store && npm run validate:provider-preflight && npm run validate:exact-a5-provider-packet && npm run validate:exact-a5-provider-retry-packet && npm run validate:exact-a5-activation-receipt && npm run validate:exact-a5-retry-activation-receipt && npm run validate:exact-a5-retry-003-activation-receipt && npm run validate:exact-a5-retry-004-activation-receipt && npm run validate:exact-a5-retry-005-activation-receipt && npm run validate:exact-a5-retry-006-activation-receipt && npm run validate:retry-006-artifact-integrity && npm run validate:capsule-regression && npm run validate:governance",
   "validate:core": "npm run validate:smoke && npm run validate:runtime-kernel && npm run validate:review-bridge-readonly && npm run validate:durable-audit-store && npm run validate:provider-preflight",
@@ -2539,6 +2543,10 @@ const EXPECTED_EVIDENCE_GOVERNANCE_SANITIZATION_PACKAGE_SCRIPTS = {
 };
 
 const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
+  {
+    id: "governance_v14_212_baseline_reconciliation_slice",
+    files: EXPECTED_P1_8_GOVERNANCE_V14_212_BASELINE_RECONCILIATION_SLICE
+  },
   {
     id: "evidence_governance_sanitization_slice",
     files: EXPECTED_P1_1_EVIDENCE_GOVERNANCE_SANITIZATION_SLICE
@@ -3173,6 +3181,8 @@ function diffStringList(actual, expected) {
 
 function normalizeChangedFilesForSliceMatching(changedFiles) {
   const withoutHelper = changedFiles.filter((file) => file !== GOVERNANCE_TOOLING_SLICE_HELPER_FILE);
+  const isP1_8GovernanceV14_212BaselineRegistrationPatch = changedFiles.includes(GOVERNANCE_TOOLING_SLICE_HELPER_FILE)
+    && sameStringList(withoutHelper, EXPECTED_P1_8_GOVERNANCE_V14_212_BASELINE_RECONCILIATION_SLICE);
   const isPostPushSyncRegistrationPatch = changedFiles.includes(GOVERNANCE_TOOLING_SLICE_HELPER_FILE)
     && sameStringList(withoutHelper, EXPECTED_V0_3_6_POST_PUSH_STATE_SYNC_SLICE);
   const isExecutionBlockedStatusSyncRegistrationPatch = changedFiles.includes(GOVERNANCE_TOOLING_SLICE_HELPER_FILE)
@@ -3232,7 +3242,7 @@ function normalizeChangedFilesForSliceMatching(changedFiles) {
   const isV0_6_73agToAiRegistrationPatch = changedFiles.includes(GOVERNANCE_TOOLING_SLICE_HELPER_FILE)
     && sameStringList(withoutHelper, EXPECTED_V0_6_73AG_TO_AI_REMOTE_SYNC_CURRENT_HEAD_AND_ONE_SHOT_BLOCKED_SLICE);
 
-  return (isPostPushSyncRegistrationPatch || isExecutionBlockedStatusSyncRegistrationPatch || isV0_6_73gRegistrationPatch || isV0_6_73hRegistrationPatch || isV0_6_73iRegistrationPatch || isV0_6_73lRegistrationPatch || isV0_6_73mRegistrationPatch || isV0_6_73nRegistrationPatch || isV0_6_73oRegistrationPatch || isV0_6_73pRegistrationPatch || isV0_6_73qRegistrationPatch || isV0_6_73rRegistrationPatch || isV0_6_73sRegistrationPatch || isV0_6_73tRegistrationPatch || isV0_6_73uRegistrationPatch || isV0_6_73u3RegistrationPatch || isV0_6_73vRegistrationPatch || isV0_6_73wRegistrationPatch || isV0_6_73xRegistrationPatch || isV0_6_73zRegistrationPatch || isV0_6_73aaRegistrationPatch || isV0_6_73abRegistrationPatch || isV0_6_73adRegistrationPatch || isV0_6_73aeRegistrationPatch || isV0_6_73afRegistrationPatch || isV0_6_73agRegistrationPatch || isV0_6_73ahRegistrationPatch || isV0_6_73agToAhRegistrationPatch || isV0_6_73agToAiRegistrationPatch) ? withoutHelper : changedFiles;
+  return (isP1_8GovernanceV14_212BaselineRegistrationPatch || isPostPushSyncRegistrationPatch || isExecutionBlockedStatusSyncRegistrationPatch || isV0_6_73gRegistrationPatch || isV0_6_73hRegistrationPatch || isV0_6_73iRegistrationPatch || isV0_6_73lRegistrationPatch || isV0_6_73mRegistrationPatch || isV0_6_73nRegistrationPatch || isV0_6_73oRegistrationPatch || isV0_6_73pRegistrationPatch || isV0_6_73qRegistrationPatch || isV0_6_73rRegistrationPatch || isV0_6_73sRegistrationPatch || isV0_6_73tRegistrationPatch || isV0_6_73uRegistrationPatch || isV0_6_73u3RegistrationPatch || isV0_6_73vRegistrationPatch || isV0_6_73wRegistrationPatch || isV0_6_73xRegistrationPatch || isV0_6_73zRegistrationPatch || isV0_6_73aaRegistrationPatch || isV0_6_73abRegistrationPatch || isV0_6_73adRegistrationPatch || isV0_6_73aeRegistrationPatch || isV0_6_73afRegistrationPatch || isV0_6_73agRegistrationPatch || isV0_6_73ahRegistrationPatch || isV0_6_73agToAhRegistrationPatch || isV0_6_73agToAiRegistrationPatch) ? withoutHelper : changedFiles;
 }
 
 function fileAllowedInGovernanceToolingSlice(file) {
@@ -3399,6 +3409,26 @@ function governanceToolingMaintenanceSliceSelfCheck() {
     {
       check: "allowlist_rejects_env",
       passed: !fileAllowedInGovernanceToolingSlice(".env")
+    },
+    {
+      check: "exact_slice_matches_governance_v14_212_baseline_reconciliation",
+      passed: findMatchingGovernanceToolingSlice(
+        EXPECTED_P1_8_GOVERNANCE_V14_212_BASELINE_RECONCILIATION_SLICE
+      )?.id === "governance_v14_212_baseline_reconciliation_slice"
+    },
+    {
+      check: "exact_slice_matches_governance_v14_212_baseline_reconciliation_registration_patch",
+      passed: findMatchingGovernanceToolingSlice([
+        ...EXPECTED_P1_8_GOVERNANCE_V14_212_BASELINE_RECONCILIATION_SLICE,
+        GOVERNANCE_TOOLING_SLICE_HELPER_FILE
+      ])?.id === "governance_v14_212_baseline_reconciliation_slice"
+    },
+    {
+      check: "governance_v14_212_baseline_reconciliation_rejects_package_change",
+      passed: findMatchingGovernanceToolingSlice([
+        ...EXPECTED_P1_8_GOVERNANCE_V14_212_BASELINE_RECONCILIATION_SLICE,
+        "package.json"
+      ]) === null
     },
     {
       check: "exact_slice_matches_expected",
@@ -4359,6 +4389,7 @@ module.exports = {
   EXPECTED_V0_6_73AH_CURRENT_HEAD_FINAL_PRE_PROVIDER_GO_NO_GO_SLICE,
   EXPECTED_V0_6_73AG_TO_AH_REMOTE_SYNC_AND_CURRENT_HEAD_GO_NO_GO_SLICE,
   EXPECTED_V0_6_73AG_TO_AI_REMOTE_SYNC_CURRENT_HEAD_AND_ONE_SHOT_BLOCKED_SLICE,
+  EXPECTED_P1_8_GOVERNANCE_V14_212_BASELINE_RECONCILIATION_SLICE,
   EXPECTED_P1_1_EVIDENCE_GOVERNANCE_SANITIZATION_SLICE,
   EXPECTED_EVIDENCE_GOVERNANCE_SANITIZATION_PACKAGE_SCRIPTS,
   GOVERNANCE_TOOLING_ALLOWED_SLICES,
