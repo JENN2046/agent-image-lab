@@ -1,0 +1,125 @@
+{
+  "fixture_id": "visual_eval_review_result_protocol_negative_cases_001",
+  "fixture_type": "metadata_only_visual_eval_review_result_protocol_negative_cases",
+  "source_fixture": "tests/schema_examples/visual_eval_review_result_protocol.example.json",
+  "source_contract": "docs/visual_eval_review_result_protocol_contract_slice.md",
+  "protocol_version": "v1",
+  "negative_case_contract": {
+    "case_shape": "mutation_specification",
+    "purpose": "validator_ready_fail_closed_cases",
+    "validator_creation_now": false,
+    "all_cases_expected_to_fail": true
+  },
+  "negative_cases": [
+    {
+      "case_id": "missing_reject_failure_tags",
+      "target_review_result_id": "visual_eval_review_result_reject_synthetic_001",
+      "mutation": {
+        "field": "failure_tags",
+        "value": []
+      },
+      "expected_failure_code": "reject_failure_tags_required",
+      "expected_reason": "reject outcome must include at least one failure tag"
+    },
+    {
+      "case_id": "patch_missing_blocking_watch_items",
+      "target_review_result_id": "visual_eval_review_result_patch_synthetic_001",
+      "mutation": {
+        "field": "blocking_watch_items",
+        "value": []
+      },
+      "expected_failure_code": "patch_blocking_watch_items_required",
+      "expected_reason": "patch outcome must include blocking watch items"
+    },
+    {
+      "case_id": "pass_with_reject_reasons",
+      "target_review_result_id": "visual_eval_review_result_pass_synthetic_001",
+      "mutation": {
+        "field": "reject_reasons",
+        "value": [
+          "pass outcome must not carry reject reasons"
+        ]
+      },
+      "expected_failure_code": "pass_reject_reasons_must_be_empty",
+      "expected_reason": "pass outcome cannot include reject reasons"
+    },
+    {
+      "case_id": "write_guard_memory_true",
+      "target_review_result_id": "visual_eval_review_result_patch_synthetic_001",
+      "mutation": {
+        "field": "route_guards.memory_write_allowed_now",
+        "value": true
+      },
+      "expected_failure_code": "route_guard_must_be_false",
+      "expected_reason": "metadata-only review result cannot allow memory writes"
+    },
+    {
+      "case_id": "absolute_local_source_ref",
+      "target_review_result_id": "visual_eval_review_result_pass_synthetic_001",
+      "mutation": {
+        "field": "source_ref",
+        "value": "A:\\agent-image-lab\\agent-image-lab-v0.2\\runs\\real_generation\\example.png"
+      },
+      "expected_failure_code": "absolute_local_path_forbidden",
+      "expected_reason": "source_ref must be repo-relative or redacted, never an absolute local path"
+    },
+    {
+      "case_id": "unknown_taxonomy_ref",
+      "target_review_result_id": "visual_eval_review_result_reject_synthetic_001",
+      "mutation": {
+        "field": "taxonomy_refs",
+        "value": [
+          "unknown_taxonomy_ref:hallucinated_category"
+        ]
+      },
+      "expected_failure_code": "unknown_taxonomy_ref_forbidden",
+      "expected_reason": "taxonomy references must resolve to the frozen known taxonomy source or future canonical taxonomy"
+    },
+    {
+      "case_id": "reject_missing_never_production_reason",
+      "target_review_result_id": "visual_eval_review_result_reject_synthetic_001",
+      "mutation": {
+        "field": "never_production_reason",
+        "value": null
+      },
+      "expected_failure_code": "reject_never_production_reason_required",
+      "expected_reason": "reject outcome must explain why production promotion is forbidden"
+    },
+    {
+      "case_id": "unknown_route_guard_key",
+      "target_review_result_id": "visual_eval_review_result_patch_synthetic_001",
+      "mutation": {
+        "field": "route_guards.unplanned_side_effect_allowed_now",
+        "value": false
+      },
+      "expected_failure_code": "unknown_route_guard_key_forbidden",
+      "expected_reason": "route guards must use the exact frozen key set"
+    },
+    {
+      "case_id": "illegal_metadata_accumulation_action",
+      "target_review_result_id": "visual_eval_review_result_pass_synthetic_001",
+      "mutation": {
+        "field": "metadata_accumulation.accepted_metadata_action",
+        "value": "write_accepted_sample_now"
+      },
+      "expected_failure_code": "illegal_metadata_accumulation_action",
+      "expected_reason": "metadata accumulation actions must remain in the frozen allowlist"
+    }
+  ],
+  "boundary_confirmation": {
+    "metadata_only": true,
+    "schema_created": false,
+    "validator_created": false,
+    "runtime_execution_performed": false,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "memory_written": false,
+    "DailyNote_written": false,
+    "VCP_memory_written": false,
+    "accepted_samples_written": false,
+    "production_candidate_002_started": false,
+    "Batch_005_started": false
+  }
+}
