@@ -1,12 +1,81 @@
 ---
 
+## Checkpoint - P3.17 Readonly Review Workspace Case Matrix
+
+```text
+phase: p3_17_readonly_review_workspace_case_matrix
+status: completed_validated_pending_local_commit
+result: COMPLETED_VALIDATED
+source_commit: 8f4335b
+mode: metadata-only readonly review workspace case matrix
+summary: Added a case-matrix consumer on top of the readonly review workspace. The matrix consumes the workspace, readonly collection consumer, and metadata queue detail navigation to expose all pass/patch/reject case rows at once, with summary, reasons, taxonomy, blocking watch items, metadata queue sections, metadata navigation keys, metadata accumulation action, and next review action. This moves the system from a selected-result workspace toward a more realistic readonly review table that can consume all three outcomes together.
+changed_files_current_task:
+  - kernel/visual_eval_readonly_review_workspace_case_matrix.js
+  - scripts/validate_visual_eval_readonly_review_workspace_case_matrix.js
+  - scripts/validate_visual_eval_readonly_review_artifact_catalog.js
+  - tests/schema_examples/visual_eval_readonly_review_workspace_case_matrix.example.json
+  - tests/schema_examples/visual_eval_readonly_review_workspace_case_matrix_negative_cases.example.json
+  - tests/schema_examples/visual_eval_readonly_review_artifact_catalog.example.json
+  - .agent_board/CHECKPOINT.md
+validation_run:
+  - node --check kernel/visual_eval_readonly_review_workspace_case_matrix.js
+  - node --check scripts/validate_visual_eval_readonly_review_workspace_case_matrix.js
+  - node --check scripts/validate_visual_eval_readonly_review_artifact_catalog.js
+  - node scripts/validate_visual_eval_readonly_review_workspace_case_matrix.js
+  - node scripts/validate_visual_eval_readonly_review_artifact_catalog.js
+validation_result: passed
+matrix_sources:
+  - tests/schema_examples/visual_eval_readonly_review_workspace.example.json
+  - tests/schema_examples/visual_eval_readonly_review_collection_consumer.example.json
+  - tests/schema_examples/visual_eval_readonly_metadata_accumulation_queue_detail_navigation.example.json
+case_rows_verified:
+  - pass
+  - patch
+  - reject
+required_metadata_sections_verified:
+  - accepted_metadata_candidates
+  - patch_plan_only
+  - failure_learning_metadata
+  - archive_references
+  - next_review_actions
+required_next_review_actions_verified:
+  - queue_for_future_human_review
+  - write_patch_plan_only
+  - defer_until_taxonomy_update
+negative_cases_verified:
+  - missing_reject_row
+  - patch_next_action_mismatch
+  - pass_missing_metadata_sections
+  - guard_memory_true
+  - absolute_local_source_workspace
+runtime_execution_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+memory_written: false
+accepted_samples_written: false
+Batch_005_started: false
+production_candidate_002_started: false
+package_json_modified: false
+dependency_change_performed: false
+push_performed: false
+red_line_request_needed_next: real Review Console readonly integration or guarded push
+next_phase_started: false
+```
+
+---
+
 ## Checkpoint - P3.16 Readonly Review Workspace Cross-Artifact Consumer
 
 ```text
 phase: p3_16_readonly_review_workspace_cross_artifact_consumer
-status: completed_validated_pending_local_commit
+status: completed_validated_local_commit
 result: COMPLETED_VALIDATED
 source_commit: d4ac430
+local_commit: 8f4335b
 mode: metadata-only readonly review workspace consumer
 summary: Added a readonly workspace payload that composes the review session drilldown with the metadata accumulation queue detail navigation. The workspace exposes one cross-artifact consumer surface for session outcome tabs, selected review result, image case status, taxonomy/failure tags, metadata queue section membership, and next review action while proving the selected review_result_id/outcome/case_id/next_action remain consistent across both source chains.
 changed_files_current_task:

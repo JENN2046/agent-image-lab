@@ -193,6 +193,15 @@
       "validator": "scripts/validate_visual_eval_readonly_review_workspace.js",
       "canonical": true,
       "readonly_consumable": true
+    },
+    {
+      "artifact_id": "visual_eval_readonly_review_workspace_case_matrix_v1_synthetic_001",
+      "artifact_role": "readonly_review_workspace_case_matrix",
+      "artifact_type": "metadata_only_visual_eval_readonly_review_workspace_case_matrix",
+      "path": "tests/schema_examples/visual_eval_readonly_review_workspace_case_matrix.example.json",
+      "validator": "scripts/validate_visual_eval_readonly_review_workspace_case_matrix.js",
+      "canonical": true,
+      "readonly_consumable": true
     }
   ],
   "composition_order": [
@@ -215,7 +224,8 @@
     "readonly_metadata_accumulation_queue_surface_snapshot",
     "readonly_metadata_accumulation_queue_detail_view",
     "readonly_metadata_accumulation_queue_detail_navigation",
-    "readonly_review_workspace"
+    "readonly_review_workspace",
+    "readonly_review_workspace_case_matrix"
   ],
   "consumer_expectations": {
     "source_bundle": "tests/schema_examples/visual_eval_readonly_review_bundle.example.json",
@@ -434,6 +444,32 @@
     "required_failure_tags": [
       "material_failed",
       "lighting_failed"
+    ]
+  },
+  "review_workspace_case_matrix_expectations": {
+    "source_workspace": "tests/schema_examples/visual_eval_readonly_review_workspace.example.json",
+    "source_collection_consumer": "tests/schema_examples/visual_eval_readonly_review_collection_consumer.example.json",
+    "source_metadata_queue_navigation": "tests/schema_examples/visual_eval_readonly_metadata_accumulation_queue_detail_navigation.example.json",
+    "matrix": "tests/schema_examples/visual_eval_readonly_review_workspace_case_matrix.example.json",
+    "selected_review_result_id": "visual_eval_review_result_patch_synthetic_001",
+    "case_row_count": 3,
+    "outcomes": [
+      "pass",
+      "patch",
+      "reject"
+    ],
+    "required_route_action": "render_readonly_review_workspace_case_matrix_only",
+    "required_metadata_sections": [
+      "accepted_metadata_candidates",
+      "patch_plan_only",
+      "failure_learning_metadata",
+      "archive_references",
+      "next_review_actions"
+    ],
+    "required_next_review_actions": [
+      "queue_for_future_human_review",
+      "write_patch_plan_only",
+      "defer_until_taxonomy_update"
     ]
   },
   "collection_consumer_expectations": {

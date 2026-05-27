@@ -1,0 +1,75 @@
+{
+  "fixture_id": "visual_eval_readonly_review_workspace_case_matrix_negative_cases_001",
+  "fixture_type": "metadata_only_visual_eval_readonly_review_workspace_case_matrix_negative_cases",
+  "source_matrix": "tests/schema_examples/visual_eval_readonly_review_workspace_case_matrix.example.json",
+  "negative_case_contract": {
+    "case_shape": "workspace_case_matrix_mutation_specification",
+    "purpose": "readonly_workspace_case_matrix_fail_closed_cases",
+    "all_cases_expected_to_fail": true
+  },
+  "negative_cases": [
+    {
+      "case_id": "missing_reject_row",
+      "mutation": {
+        "operation": "remove_row_by_outcome",
+        "outcome": "reject"
+      },
+      "expected_failure_code": "case_matrix_row_count_three",
+      "expected_reason": "case matrix must keep pass, patch, and reject rows visible"
+    },
+    {
+      "case_id": "patch_next_action_mismatch",
+      "mutation": {
+        "operation": "set_field",
+        "field": "case_rows.1.next_review_action",
+        "value": "queue_for_future_human_review"
+      },
+      "expected_failure_code": "case_matrix_patch_next_action_expected",
+      "expected_reason": "patch rows must retain write_patch_plan_only as metadata-only next action"
+    },
+    {
+      "case_id": "pass_missing_metadata_sections",
+      "mutation": {
+        "operation": "set_field",
+        "field": "case_rows.0.metadata_queue_sections",
+        "value": []
+      },
+      "expected_failure_code": "case_matrix_all_rows_have_sections",
+      "expected_reason": "each case row must resolve to metadata queue sections"
+    },
+    {
+      "case_id": "guard_memory_true",
+      "mutation": {
+        "operation": "set_field",
+        "field": "guard.memory_write_performed",
+        "value": true
+      },
+      "expected_failure_code": "case_matrix_guard_memory_write_performed_false",
+      "expected_reason": "case matrix must keep memory write closed"
+    },
+    {
+      "case_id": "absolute_local_source_workspace",
+      "mutation": {
+        "operation": "set_field",
+        "field": "source_workspace",
+        "value": "<synthetic-windows-absolute-path>\\visual_eval_readonly_review_workspace.example.json"
+      },
+      "expected_failure_code": "case_matrix_no_absolute_or_loopback",
+      "expected_reason": "case matrix source refs must remain repo-relative"
+    }
+  ],
+  "boundary_confirmation": {
+    "metadata_only": true,
+    "read_only": true,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "memory_written": false,
+    "DailyNote_written": false,
+    "VCP_memory_written": false,
+    "accepted_samples_written": false,
+    "production_candidate_002_started": false,
+    "Batch_005_started": false
+  }
+}
