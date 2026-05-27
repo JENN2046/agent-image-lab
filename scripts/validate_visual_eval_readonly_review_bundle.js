@@ -202,10 +202,16 @@ function validateBundle(bundle, refs) {
       ctx.fail("bundle_review_result_dangling", `${record.review_result_id} is not present in protocol and bridge payload`);
       continue;
     }
-    for (const field of ["candidate_id", "session_id", "case_id", "outcome", "taxonomy_ref", "accumulation_ref"]) {
+    for (const field of ["candidate_id", "session_id", "case_id", "outcome", "accumulation_ref"]) {
       if (record[field] !== source[field] || record[field] !== bridgeRow[field]) {
         ctx.fail("bundle_review_result_field_mismatch", `${record.review_result_id}: ${field} mismatch`);
       }
+    }
+    if (
+      Object.prototype.hasOwnProperty.call(record, "taxonomy_ref") ||
+      Object.prototype.hasOwnProperty.call(record, "taxonomy_refs")
+    ) {
+      ctx.fail("bundle_review_result_taxonomy_ref_over_owned", `${record.review_result_id} must use source_refs.taxonomy`);
     }
   }
 

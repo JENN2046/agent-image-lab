@@ -95,6 +95,10 @@ function assertConsumerShape(payload) {
     !Object.prototype.hasOwnProperty.call(row, "never_production") &&
     !Object.prototype.hasOwnProperty.call(row, "never_production_reason")
   ));
+  addResult("consumer_rows_do_not_own_taxonomy_refs", rows.every((row) =>
+    !Object.prototype.hasOwnProperty.call(row, "taxonomy_ref") &&
+    !Object.prototype.hasOwnProperty.call(row, "taxonomy_refs")
+  ));
   addResult("consumer_patch_has_taxonomy_and_blockers", rows.some((row) =>
     row.outcome === "patch" &&
     row.failure_taxonomy.length === 2 &&

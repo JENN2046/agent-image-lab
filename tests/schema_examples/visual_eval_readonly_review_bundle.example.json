@@ -29,7 +29,6 @@
         "session_id": "visual_eval_review_session_synthetic_bundle_001",
         "case_id": "visual_eval_image_case_pass_synthetic_001",
         "outcome": "pass",
-        "taxonomy_ref": "tests/schema_examples/visual_eval_failure_taxonomy.example.json",
         "accumulation_ref": "tests/schema_examples/visual_eval_metadata_accumulation.example.json"
       },
       {
@@ -38,7 +37,6 @@
         "session_id": "visual_eval_review_session_synthetic_bundle_001",
         "case_id": "visual_eval_image_case_patch_synthetic_001",
         "outcome": "patch",
-        "taxonomy_ref": "tests/schema_examples/visual_eval_failure_taxonomy.example.json",
         "accumulation_ref": "tests/schema_examples/visual_eval_metadata_accumulation.example.json"
       },
       {
@@ -47,7 +45,6 @@
         "session_id": "visual_eval_review_session_synthetic_bundle_001",
         "case_id": "visual_eval_image_case_reject_synthetic_001",
         "outcome": "reject",
-        "taxonomy_ref": "tests/schema_examples/visual_eval_failure_taxonomy.example.json",
         "accumulation_ref": "tests/schema_examples/visual_eval_metadata_accumulation.example.json"
       }
     ],
