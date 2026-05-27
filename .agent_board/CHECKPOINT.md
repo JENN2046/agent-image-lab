@@ -1,12 +1,63 @@
 ---
 
+## Checkpoint - P3.22 Readonly Review Artifact System Acceptance Gate
+
+```text
+phase: p3_22_readonly_review_artifact_system_acceptance_gate
+status: completed_validated_local_commit
+result: COMPLETED_VALIDATED
+source_commit: 676dd54
+mode: metadata-only readonly review artifact system goal-level validation
+summary: Added a goal-level validator for the readonly review artifact system. The gate verifies the 24-artifact catalog, canonical artifact roles, repo-relative existing artifact paths, renderer and Review Console handoff consistency, pass/patch/reject coverage, taxonomy visibility, next-action coverage, metadata section coverage, referenced validator pass-through, and four built-in fail-closed negative cases. This gives the 30-day objective a single auditable acceptance gate without opening provider, plugin, API, image generation, memory, DailyNote, Batch 005, or production_candidate_002 paths.
+changed_files_current_task:
+  - scripts/validate_visual_eval_readonly_review_artifact_system.js
+  - .agent_board/CHECKPOINT.md
+validation_run:
+  - node --check scripts/validate_visual_eval_readonly_review_artifact_system.js
+  - node scripts/validate_visual_eval_readonly_review_artifact_system.js
+validation_result: passed
+catalog_artifact_count: 24
+goal_level_gate_verified:
+  - canonical artifact catalog roles
+  - repo-relative existing artifacts
+  - renderer pass/patch/reject display rows
+  - Review Console static handoff rows
+  - taxonomy tags for patch/reject
+  - next review actions
+  - metadata accumulation sections
+  - catalog validator pass-through
+  - console handoff validator pass-through
+negative_cases_verified:
+  - missing_console_handoff_catalog_role
+  - console_handoff_image_guard_true
+  - renderer_missing_reject_row
+  - console_handoff_wrong_renderer_ref
+runtime_execution_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+memory_written: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+Batch_005_started: false
+production_candidate_002_started: false
+dependency_change_performed: false
+push_performed: false
+red_line_request_needed_next: guarded push or final remote-synced completion audit
+next_phase_started: false
+```
+
+---
+
 ## Checkpoint - P3.21 Review Console Readonly Corpus Handoff Artifact
 
 ```text
 phase: p3_21_review_console_readonly_corpus_handoff_artifact
-status: completed_validated_pending_local_commit
+status: completed_validated_local_commit
 result: COMPLETED_VALIDATED
 source_commit: 87f4662
+local_commit: 676dd54
 mode: metadata-only readonly Review Console consumer artifact
 summary: Promoted the Review Console readonly corpus renderer handoff from a static mock-only surface into a canonical JSON artifact. The new handoff fixture is cataloged as the 24th readonly artifact, validated against the canonical renderer fixture, the static mock, and the rendered draft output, and the validator now includes fail-closed negative cases for missing patch rows, wrong renderer refs, missing metadata sections, and forbidden image-generation guard drift.
 changed_files_current_task:
