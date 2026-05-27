@@ -152,7 +152,6 @@ function loadReadonlyReviewBundleConsumer(input) {
       outcome: record.outcome,
       summary: record.summary,
       reasons: selectReasons(record),
-      positive_reasons: clone(record.positive_reasons),
       failure_taxonomy: taxonomyDisplay,
       blocking_watch_items: clone(record.blocking_watch_items),
       watch_items: clone(record.watch_items),

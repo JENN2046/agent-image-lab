@@ -38830,6 +38830,64 @@ Validation:
 Next: report to GPT commander and wait for review, commit authorization, or the next task.
 ---
 
+## Checkpoint - readonly_review_spine_projection_minimization_hardening reason slice
+
+Status: completed_validated_pending_commander_review
+Task id: readonly_review_spine_projection_minimization_hardening_20260527_reason_slice
+Slice: bundle_consumer_reason
+Branch: master
+Remote state: ahead origin/master by 7 commits before this uncommitted slice
+
+Changed:
+- .agent_board/CHECKPOINT.md
+- kernel/visual_eval_readonly_review_bundle_consumer.js
+- scripts/validate_visual_eval_readonly_artifact_graph.js
+- scripts/validate_visual_eval_readonly_review_bundle_consumer.js
+- tests/schema_examples/visual_eval_readonly_review_bundle_consumer.example.json
+
+Implemented:
+- Removed readonly_consumer_payload.display_rows[*].positive_reasons from the bundle consumer display payload.
+- Kept readonly_consumer_payload.display_rows[*].reasons as projection-only display data selected from canonical pass_reasons, patch_reasons, or reject_reasons.
+- Confirmed readonly_review_bundle does not own pass_reasons, patch_reasons, reject_reasons, or reasons fields.
+- Added consumer validator coverage that display rows do not own positive_reasons.
+- Added graph checks: bundle_reason_not_owner, consumer_reason_not_owner, bundle_consumer_reason_projection_consistent, forbidden_reason_owned_field_reintroduced.
+- Added graph negative cases: bundle_reason_drift, consumer_reason_drift, bundle_reason_reintroduced, consumer_reason_reintroduced.
+
+Boundary:
+- local_only: true
+- metadata_only: true
+- bundle_consumer_reason_slice_only: true
+- bridge_files_frozen: true
+- bridge_text_diff_introduced: false
+- collection_detail_session_metadata_subtree_touched: false
+- provider_call_performed: false
+- plugin_call_performed: false
+- api_call_performed: false
+- image_generation_performed: false
+- memory_written: false
+- DailyNote_write_performed: false
+- VCP_memory_write_performed: false
+- accepted_samples_written: false
+- production_candidate_created: false
+- Batch_005_started: false
+- commit_performed: false
+- push_performed: false
+
+Validation:
+- node --check scripts/validate_visual_eval_readonly_artifact_graph.js: passed
+- node --check scripts/validate_visual_eval_readonly_review_bundle.js: passed
+- node --check scripts/validate_visual_eval_readonly_review_bundle_consumer.js: passed
+- node --check kernel/visual_eval_readonly_review_bundle_consumer.js: passed
+- node scripts/validate_visual_eval_readonly_artifact_graph.js: passed
+- node scripts/validate_visual_eval_readonly_review_bundle.js: passed
+- node scripts/validate_visual_eval_readonly_review_bundle_consumer.js: passed
+- node scripts/validate_visual_eval_readonly_review_artifact_catalog.js: passed
+- git diff --check: passed_with_line_ending_warnings_only
+- git status --short --branch: checked
+
+Next: report to GPT commander and wait for review, commit authorization, or the next task.
+---
+
 ## Checkpoint - v0.5.0 Controlled Generation Readiness Packet
 
 Status: completed_validated_pending_local_commit

@@ -88,6 +88,9 @@ function assertConsumerShape(payload) {
     rows.some((row) => row.outcome === outcome)
   ));
   addResult("consumer_rows_have_reasons", rows.every((row) => Array.isArray(row.reasons)));
+  addResult("consumer_rows_do_not_own_positive_reasons", rows.every((row) =>
+    !Object.prototype.hasOwnProperty.call(row, "positive_reasons")
+  ));
   addResult("consumer_patch_has_taxonomy_and_blockers", rows.some((row) =>
     row.outcome === "patch" &&
     row.failure_taxonomy.length === 2 &&

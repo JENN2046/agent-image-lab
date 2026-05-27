@@ -26,11 +26,6 @@
         "commercial_readability_plausible",
         "no_major_artifact_recorded"
       ],
-      "positive_reasons": [
-        "product_identity_preserved",
-        "commercial_readability_plausible",
-        "no_major_artifact_recorded"
-      ],
       "failure_taxonomy": [],
       "blocking_watch_items": [],
       "watch_items": [
@@ -50,10 +45,6 @@
       "reasons": [
         "material realism needs correction",
         "lighting consistency needs correction"
-      ],
-      "positive_reasons": [
-        "product_identity_mostly_preserved",
-        "composition_direction_useful"
       ],
       "failure_taxonomy": [
         {
@@ -92,7 +83,6 @@
         "subject drift blocks reliable product identity",
         "commercial unusability blocks delivery readiness"
       ],
-      "positive_reasons": [],
       "failure_taxonomy": [
         {
           "tag_id": "subject_drift",
