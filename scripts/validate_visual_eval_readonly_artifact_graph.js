@@ -54,6 +54,7 @@ const forbiddenDerivedReasonsFields = new Set(["reasons", "pass_reasons", "patch
 const forbiddenDerivedFailureTagFields = new Set(["failure_taxonomy", "taxonomy_tags"]);
 const forbiddenDerivedTaxonomyRefFields = new Set(["taxonomy_ref", "taxonomy_refs"]);
 const forbiddenDerivedAccumulationFields = new Set(["metadata_accumulation"]);
+const forbiddenDerivedNeverProductionFields = new Set(["never_production"]);
 const forbiddenTrueFields = new Set([
   "file_write_performed",
   "approval_write_performed",
@@ -277,6 +278,21 @@ const expectedNegativeCases = [
     mutate(graph) {
       graph.artifacts.readonly_session_drilldown.data.selected_metadata_accumulation.metadata_accumulation.next_review_action =
         "defer_until_taxonomy_update";
+    },
+  },
+  {
+    case_id: "derived_never_production_drift",
+    expected_failure_code: "derived_never_production_not_owner",
+    mutate(graph) {
+      graph.artifacts.readonly_review_bundle.data.readonly_artifacts.image_case_drafts[2].never_production = false;
+    },
+  },
+  {
+    case_id: "bundle_image_case_next_action_reintroduced",
+    expected_failure_code: "derived_next_review_action_not_owner",
+    mutate(graph) {
+      graph.artifacts.readonly_review_bundle.data.readonly_artifacts.image_case_drafts[1].next_review_action =
+        "write_patch_plan_only";
     },
   },
   {
@@ -575,6 +591,16 @@ function validateDerivedOwnership(graph, ctx) {
   const taxonomyRefOwners = [];
   const nextActionOwners = [];
   const accumulationOwners = [];
+  const neverProductionOwners = [];
+
+  function collectOwnedKey(key, pathLabel) {
+    if (forbiddenDerivedSummaryFields.has(key)) summaryOwners.push(`${pathLabel}.${key}`);
+    if (forbiddenDerivedReasonsFields.has(key)) reasonOwners.push(`${pathLabel}.${key}`);
+    if (forbiddenDerivedFailureTagFields.has(key)) failureTagOwners.push(`${pathLabel}.${key}`);
+    if (forbiddenDerivedTaxonomyRefFields.has(key)) taxonomyRefOwners.push(`${pathLabel}.${key}`);
+    if (forbiddenDerivedAccumulationFields.has(key)) accumulationOwners.push(`${pathLabel}.${key}`);
+    if (forbiddenDerivedNeverProductionFields.has(key)) neverProductionOwners.push(`${pathLabel}.${key}`);
+  }
 
   for (const [role, artifact] of Object.entries(graph.artifacts)) {
     if (!metadataAccumulationSubtreeRoles.has(role)) continue;
@@ -582,11 +608,7 @@ function validateDerivedOwnership(graph, ctx) {
       if (!value || Array.isArray(value) || typeof value !== "object") return;
       const pathLabel = `${role}:${pathParts.join(".") || "<root>"}`;
       for (const key of Object.keys(value)) {
-        if (forbiddenDerivedSummaryFields.has(key)) summaryOwners.push(`${pathLabel}.${key}`);
-        if (forbiddenDerivedReasonsFields.has(key)) reasonOwners.push(`${pathLabel}.${key}`);
-        if (forbiddenDerivedFailureTagFields.has(key)) failureTagOwners.push(`${pathLabel}.${key}`);
-        if (forbiddenDerivedTaxonomyRefFields.has(key)) taxonomyRefOwners.push(`${pathLabel}.${key}`);
-        if (forbiddenDerivedAccumulationFields.has(key)) accumulationOwners.push(`${pathLabel}.${key}`);
+        collectOwnedKey(key, pathLabel);
       }
       if (Object.prototype.hasOwnProperty.call(value, "next_review_action") &&
         !Object.prototype.hasOwnProperty.call(value, "review_result_id") &&
@@ -596,12 +618,27 @@ function validateDerivedOwnership(graph, ctx) {
     });
   }
 
+  const bundle = graph.artifacts.readonly_review_bundle?.data || {};
+  for (const [index, imageCase] of (bundle.readonly_artifacts?.image_case_drafts || []).entries()) {
+    if (!imageCase || Array.isArray(imageCase) || typeof imageCase !== "object") continue;
+    const pathLabel = `readonly_review_bundle:readonly_artifacts.image_case_drafts.${index}`;
+    if (Object.prototype.hasOwnProperty.call(imageCase, "next_review_action")) {
+      nextActionOwners.push(`${pathLabel}.next_review_action`);
+    }
+    for (const key of Object.keys(imageCase)) {
+      if (forbiddenDerivedFailureTagFields.has(key)) failureTagOwners.push(`${pathLabel}.${key}`);
+      if (forbiddenDerivedTaxonomyRefFields.has(key)) taxonomyRefOwners.push(`${pathLabel}.${key}`);
+      if (forbiddenDerivedNeverProductionFields.has(key)) neverProductionOwners.push(`${pathLabel}.${key}`);
+    }
+  }
+
   ctx.addResult("derived_summary_not_owner", summaryOwners.length === 0, summaryOwners.join("; "));
   ctx.addResult("derived_reasons_not_owner", reasonOwners.length === 0, reasonOwners.join("; "));
   ctx.addResult("derived_failure_tags_not_owner", failureTagOwners.length === 0, failureTagOwners.join("; "));
   ctx.addResult("derived_taxonomy_ref_not_owner", taxonomyRefOwners.length === 0, taxonomyRefOwners.join("; "));
   ctx.addResult("derived_next_review_action_not_owner", nextActionOwners.length === 0, nextActionOwners.join("; "));
   ctx.addResult("derived_metadata_accumulation_not_owner", accumulationOwners.length === 0, accumulationOwners.join("; "));
+  ctx.addResult("derived_never_production_not_owner", neverProductionOwners.length === 0, neverProductionOwners.join("; "));
 }
 
 function validateProjectionContracts(graph, ctx) {
@@ -952,6 +989,7 @@ function validateReviewConsistency(graph, ctx) {
   ctx.addResult("projection_failure_tags_consistent", exactTagMismatches.length === 0, exactTagMismatches.join("; "));
   ctx.addResult("projection_taxonomy_ref_consistent", taxonomyMismatches.length === 0, taxonomyMismatches.join("; "));
   ctx.addResult("projection_next_review_action_consistent", nextActionMismatches.length === 0, nextActionMismatches.join("; "));
+  ctx.addResult("projection_never_production_consistent", neverProductionMismatches.length === 0, neverProductionMismatches.join("; "));
   ctx.addResult("projection_metadata_accumulation_consistent", accumulationMismatches.length === 0, accumulationMismatches.join("; "));
 }
 
@@ -1043,7 +1081,7 @@ function collectFailureCodes(fn) {
 }
 
 function validateNegativeCases(baseGraph, ctx) {
-  ctx.addResult("graph_negative_cases_count_expected", expectedNegativeCases.length === 36, expectedNegativeCases.length);
+  ctx.addResult("graph_negative_cases_count_expected", expectedNegativeCases.length === 38, expectedNegativeCases.length);
   for (const negativeCase of expectedNegativeCases) {
     const graph = deepClone(baseGraph);
     negativeCase.mutate(graph);

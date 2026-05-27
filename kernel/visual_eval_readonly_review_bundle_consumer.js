@@ -134,7 +134,7 @@ function loadReadonlyReviewBundleConsumer(input) {
     assert(record && bundleRecord && imageCase && accumulationRecord && bridgeRow, `${reviewResultId} must resolve across all bundle artifacts`);
     assert(record.candidate_id === bundleRecord.candidate_id && record.candidate_id === imageCase.candidate_id, `${reviewResultId} candidate_id mismatch`);
     assert(record.outcome === bundleRecord.outcome && record.outcome === imageCase.visible_outcome && record.outcome === bridgeRow.outcome, `${reviewResultId} outcome mismatch`);
-    assert(record.metadata_accumulation.next_review_action === imageCase.next_review_action, `${reviewResultId} next review action mismatch`);
+    assert(!Object.prototype.hasOwnProperty.call(imageCase, "next_review_action"), `${reviewResultId} image case must not own next_review_action`);
     assert(accumulationRecord.write_allowed_now === false, `${reviewResultId} accumulation record must be read-only`);
     assertRouteGuardsFalse(record.route_guards, reviewResultId);
 

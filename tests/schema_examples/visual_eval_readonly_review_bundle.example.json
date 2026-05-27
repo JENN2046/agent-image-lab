@@ -83,24 +83,21 @@
         "session_id": "visual_eval_review_session_synthetic_bundle_001",
         "candidate_id": "synthetic_product_still_life_pass_001",
         "review_result_id": "visual_eval_review_result_pass_synthetic_001",
-        "visible_outcome": "pass",
-        "next_review_action": "queue_for_future_human_review"
+        "visible_outcome": "pass"
       },
       {
         "case_id": "visual_eval_image_case_patch_synthetic_001",
         "session_id": "visual_eval_review_session_synthetic_bundle_001",
         "candidate_id": "synthetic_product_still_life_patch_001",
         "review_result_id": "visual_eval_review_result_patch_synthetic_001",
-        "visible_outcome": "patch",
-        "next_review_action": "write_patch_plan_only"
+        "visible_outcome": "patch"
       },
       {
         "case_id": "visual_eval_image_case_reject_synthetic_001",
         "session_id": "visual_eval_review_session_synthetic_bundle_001",
         "candidate_id": "synthetic_product_still_life_reject_001",
         "review_result_id": "visual_eval_review_result_reject_synthetic_001",
-        "visible_outcome": "reject",
-        "next_review_action": "defer_until_taxonomy_update"
+        "visible_outcome": "reject"
       }
     ],
     "bridge_readable_payload": {

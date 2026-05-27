@@ -38712,6 +38712,66 @@ Validation:
 Next: local commit, post-commit review, and Push_L3 manual guarded push classification.
 ---
 
+## Checkpoint - readonly_review_spine_projection_minimization_hardening
+
+Status: completed_validated_pending_commander_review
+Task id: readonly_review_spine_projection_minimization_hardening_20260527
+Slice: bridge_bundle_consumer
+Branch: master
+Remote state: ahead origin/master by 5 commits before this uncommitted slice
+
+Changed:
+- kernel/visual_eval_readonly_review_bundle_consumer.js
+- scripts/validate_visual_eval_readonly_artifact_graph.js
+- scripts/validate_visual_eval_readonly_review_bundle.js
+- tests/schema_examples/visual_eval_readonly_review_bundle.example.json
+- tests/schema_examples/visual_eval_readonly_review_bundle_negative_cases.example.json
+
+Implemented:
+- Removed owned next_review_action from readonly_review_bundle.readonly_artifacts.image_case_drafts[*].
+- Kept consumer display derivation anchored to canonical protocol metadata while requiring image case drafts to not own next_review_action.
+- Added bundle fail-closed detection for image_case_next_action_over_owned.
+- Added graph ownership hardening for bundle image case next_review_action and never_production overownership.
+- Added graph projection_never_production_consistent and negative cases for derived_never_production_drift and bundle_image_case_next_action_reintroduced.
+- Attempted broader bridge minimization, then reverted it because session drilldown/catalog validation would require crossing the explicit stop boundary. No session/detail/collection/metadata accumulation subtree files were edited.
+
+Boundary:
+- local_only: true
+- metadata_only: true
+- read_only_review_spine_only: true
+- bridge_bundle_consumer_slice_only: true
+- session_detail_collection_metadata_subtree_touched: false
+- provider_call_performed: false
+- plugin_call_performed: false
+- api_call_performed: false
+- image_generation_performed: false
+- memory_written: false
+- DailyNote_write_performed: false
+- VCP_memory_write_performed: false
+- accepted_samples_written: false
+- production_candidate_created: false
+- Batch_005_started: false
+- commit_performed: false
+- push_performed: false
+
+Validation:
+- node --check scripts/validate_visual_eval_readonly_artifact_graph.js: passed
+- node --check kernel/visual_eval_review_result_bridge.js: passed
+- node --check kernel/visual_eval_readonly_review_bundle_consumer.js: passed
+- node --check scripts/validate_visual_eval_review_result_review_bridge_wiring.js: passed
+- node --check scripts/validate_visual_eval_readonly_review_bundle.js: passed
+- node --check scripts/validate_visual_eval_readonly_review_bundle_consumer.js: passed
+- node scripts/validate_visual_eval_readonly_artifact_graph.js: passed
+- node scripts/validate_visual_eval_review_result_review_bridge_wiring.js: passed
+- node scripts/validate_visual_eval_readonly_review_bundle.js: passed
+- node scripts/validate_visual_eval_readonly_review_bundle_consumer.js: passed
+- node scripts/validate_visual_eval_readonly_review_artifact_catalog.js: passed
+- git diff --check: passed_with_line_ending_warnings_only
+- node scripts/validate_agent_board_state.js: passed
+
+Next: report to GPT commander, then wait for next local task or explicit commit/push authorization.
+---
+
 ## Checkpoint - v0.5.0 Controlled Generation Readiness Packet
 
 Status: completed_validated_pending_local_commit

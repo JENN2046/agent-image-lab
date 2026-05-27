@@ -27,6 +27,7 @@ const expectedNegativeCases = new Map([
   ["dangling_taxonomy_ref", "bundle_taxonomy_ref_mismatch"],
   ["session_candidate_id_mismatch", "session_candidate_ids_mismatch"],
   ["outcome_next_action_conflict", "metadata_accumulation_mismatch"],
+  ["image_case_next_action_reintroduced", "image_case_next_action_over_owned"],
   ["write_guard_true", "route_guard_must_be_false"],
   ["absolute_local_path", "absolute_local_path_forbidden"],
 ]);
@@ -235,9 +236,8 @@ function validateBundle(bundle, refs) {
     ) {
       ctx.fail("image_case_ref_mismatch", `${imageCase.case_id} does not match review result and bridge payload`);
     }
-    const source = protocolByReviewResult.get(imageCase.review_result_id);
-    if (imageCase.next_review_action !== source.metadata_accumulation.next_review_action) {
-      ctx.fail("image_case_next_action_mismatch", `${imageCase.case_id} next_review_action mismatch`);
+    if (Object.prototype.hasOwnProperty.call(imageCase, "next_review_action")) {
+      ctx.fail("image_case_next_action_over_owned", `${imageCase.case_id} must not own next_review_action`);
     }
   }
 
