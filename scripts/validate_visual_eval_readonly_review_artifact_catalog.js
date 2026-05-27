@@ -32,6 +32,7 @@ const expectedRoles = [
   "readonly_review_workspace_case_matrix",
   "readonly_review_workspace_corpus",
   "readonly_review_corpus_renderer",
+  "review_console_readonly_corpus_renderer_static_handoff",
 ];
 const expectedValidators = [
   "scripts/validate_visual_eval_review_result_protocol.js",
@@ -54,6 +55,7 @@ const expectedValidators = [
   "scripts/validate_visual_eval_readonly_review_workspace_case_matrix.js",
   "scripts/validate_visual_eval_readonly_review_workspace_corpus.js",
   "scripts/validate_visual_eval_readonly_review_corpus_renderer.js",
+  "scripts/validate_visual_eval_review_console_readonly_corpus_renderer.js",
 ];
 const expectedDisplayFields = [
   "outcome",
@@ -386,6 +388,17 @@ function validateConsumerExpectations(catalog) {
   addResult("catalog_review_corpus_renderer_required_next_actions_present", (catalog.review_corpus_renderer_expectations?.required_next_review_actions || []).every((action) => Array.isArray(renderer.indexes?.by_next_review_action?.[action])));
   addResult("catalog_review_corpus_renderer_route_action_expected", renderer.renderer_contract?.route_action === catalog.review_corpus_renderer_expectations?.required_route_action);
   addResult("catalog_review_corpus_renderer_write_allowed_false", renderer.renderer_contract?.write_allowed === false && renderer.readonly_route_guard_summary?.write_allowed === false);
+
+  const consoleHandoffEntry = getEntry(catalog, "review_console_readonly_corpus_renderer_static_handoff");
+  const consoleHandoff = readJson(consoleHandoffEntry.path);
+  addResult("catalog_console_readonly_corpus_handoff_expected_path_matches", catalog.review_console_readonly_corpus_renderer_expectations?.handoff === consoleHandoffEntry.path);
+  addResult("catalog_console_readonly_corpus_handoff_source_renderer_matches", consoleHandoff.source_renderer_ref === rendererEntry.path);
+  addResult("catalog_console_readonly_corpus_handoff_expected_renderer_matches", catalog.review_console_readonly_corpus_renderer_expectations?.source_renderer === rendererEntry.path);
+  addResult("catalog_console_readonly_corpus_handoff_rows_match", (consoleHandoff.display_rows || []).length === catalog.review_console_readonly_corpus_renderer_expectations?.total_case_rows);
+  addResult("catalog_console_readonly_corpus_handoff_outcomes_exact", sameSet((consoleHandoff.outcome_sections || []).map((section) => section.outcome), catalog.review_console_readonly_corpus_renderer_expectations?.outcomes || []));
+  addResult("catalog_console_readonly_corpus_handoff_next_actions_exact", sameSet((consoleHandoff.next_action_sections || []).map((section) => section.section_id), catalog.review_console_readonly_corpus_renderer_expectations?.required_next_review_actions || []));
+  addResult("catalog_console_readonly_corpus_handoff_metadata_sections_exact", sameSet((consoleHandoff.metadata_section_panels || []).map((section) => section.section_id), catalog.review_console_readonly_corpus_renderer_expectations?.required_metadata_sections || []));
+  addResult("catalog_console_readonly_corpus_handoff_guard_closed", consoleHandoff.guard?.provider_contact_performed === false && consoleHandoff.guard?.plugin_call_performed === false && consoleHandoff.guard?.api_call_performed === false && consoleHandoff.guard?.image_generation_performed === false && consoleHandoff.guard?.memory_write_performed === false && consoleHandoff.guard?.production_candidate_002_started === false);
 }
 
 function runReferencedValidators(catalog) {

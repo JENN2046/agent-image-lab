@@ -13,6 +13,8 @@ const staticFiles = {
   styles: "review_console/static_prototype/styles.css",
 };
 const rendererPath = "tests/schema_examples/visual_eval_readonly_review_corpus_renderer.example.json";
+const handoffFixturePath = "tests/schema_examples/visual_eval_review_console_readonly_corpus_renderer_static_handoff.example.json";
+const expectedHandoffArtifactType = "metadata_only_visual_eval_review_console_readonly_corpus_renderer_static_handoff";
 const expectedOutcomes = ["pass", "patch", "reject"];
 const expectedNextActions = [
   "queue_for_future_human_review",
@@ -25,6 +27,28 @@ const expectedMetadataSections = [
   "failure_learning_metadata",
   "archive_references",
   "next_review_actions",
+];
+const negativeCases = [
+  {
+    case_id: "missing_patch_display_row",
+    expected_failure_code: "static_handoff_rows_match_renderer",
+    mutation: { operation: "remove_row_by_outcome", outcome: "patch" },
+  },
+  {
+    case_id: "wrong_renderer_ref",
+    expected_failure_code: "static_handoff_source_renderer_matches",
+    mutation: { operation: "set_field", field: "source_renderer_ref", value: "tests/schema_examples/unknown_renderer.example.json" },
+  },
+  {
+    case_id: "missing_metadata_sections",
+    expected_failure_code: "static_handoff_metadata_sections_exact",
+    mutation: { operation: "set_field", field: "metadata_section_panels", value: [] },
+  },
+  {
+    case_id: "guard_image_true",
+    expected_failure_code: "static_handoff_guard_image_generation_false",
+    mutation: { operation: "set_field", field: "guard.image_generation_performed", value: true },
+  },
 ];
 const results = [];
 const errors = [];
@@ -100,6 +124,48 @@ function loadStaticMock() {
   const context = { window: {} };
   vm.runInNewContext(read(staticFiles.mock), context, { filename: staticFiles.mock });
   return context.window.REVIEW_CONSOLE_MOCK;
+}
+
+function stripArtifactMetadata(handoff) {
+  const copy = { ...handoff };
+  delete copy.artifact_id;
+  delete copy.artifact_type;
+  return copy;
+}
+
+function setByPath(target, fieldPath, value) {
+  const segments = fieldPath.split(".");
+  let cursor = target;
+  for (let index = 0; index < segments.length - 1; index += 1) {
+    cursor = cursor[segments[index]];
+  }
+  cursor[segments[segments.length - 1]] = value;
+}
+
+function applyMutation(handoff, negativeCase) {
+  if (negativeCase.mutation.operation === "set_field") {
+    setByPath(handoff, negativeCase.mutation.field, negativeCase.mutation.value);
+    return;
+  }
+  if (negativeCase.mutation.operation === "remove_row_by_outcome") {
+    handoff.display_rows = handoff.display_rows.filter((row) => row.outcome !== negativeCase.mutation.outcome);
+    return;
+  }
+  throw new Error(`unknown mutation operation: ${negativeCase.mutation.operation}`);
+}
+
+function collectFailureCodes(fn) {
+  const startResults = results.length;
+  const startErrors = errors.length;
+  try {
+    fn();
+  } catch (error) {
+    addResult("static_handoff_negative_exception", false, error.message);
+  }
+  const codes = errors.slice(startErrors).map((error) => error.check);
+  errors.splice(startErrors);
+  results.splice(startResults);
+  return codes;
 }
 
 function loadRenderedStaticDraft(mock) {
@@ -211,25 +277,45 @@ function validateRenderedStaticPrototype(rendered, renderer) {
   addResult("rendered_guard_exposes_closed_routes", guardHtml.includes("provider/plugin/API: false") && guardHtml.includes("image generation: false") && guardHtml.includes("memory write: false"));
 }
 
+function validateNegativeCases(handoffFixture, renderer) {
+  addResult("static_handoff_negative_cases_present", negativeCases.length === 4);
+  for (const negativeCase of negativeCases) {
+    const mutated = JSON.parse(JSON.stringify(stripArtifactMetadata(handoffFixture)));
+    applyMutation(mutated, negativeCase);
+    const failureCodes = collectFailureCodes(() => validateHandoffAgainstRenderer(mutated, renderer));
+    addResult(`negative_case_${negativeCase.case_id}_fails_closed`, failureCodes.length > 0, failureCodes.join(", "));
+    addResult(`negative_case_${negativeCase.case_id}_expected_failure_code`, failureCodes.includes(negativeCase.expected_failure_code), failureCodes.join(", "));
+  }
+}
+
 function main() {
   for (const file of Object.values(staticFiles)) {
     addResult(`${file}_exists`, fs.existsSync(repoPath(file)), file);
   }
   addResult(`${rendererPath}_exists`, fs.existsSync(repoPath(rendererPath)), rendererPath);
+  addResult(`${handoffFixturePath}_exists`, fs.existsSync(repoPath(handoffFixturePath)), handoffFixturePath);
   const renderer = readJson(rendererPath);
+  const handoffFixture = readJson(handoffFixturePath);
   const mock = loadStaticMock();
   const handoff = mock.visual_eval_readonly_review_corpus_renderer_static_handoff;
   addResult("static_mock_handoff_present", Boolean(handoff));
+  addResult("static_handoff_fixture_artifact_type_expected", handoffFixture.artifact_type === expectedHandoffArtifactType, handoffFixture.artifact_type);
+  addResult("static_handoff_fixture_no_absolute_or_loopback", !hasAbsoluteOrLoopback(handoffFixture));
+  addResult("static_handoff_fixture_matches_static_mock", JSON.stringify(stripArtifactMetadata(handoffFixture)) === JSON.stringify(handoff));
   assertStaticSourceCoverage();
+  validateHandoffAgainstRenderer(stripArtifactMetadata(handoffFixture), renderer);
   validateHandoffAgainstRenderer(handoff, renderer);
   validateRenderedStaticPrototype(loadRenderedStaticDraft(mock), renderer);
+  validateNegativeCases(handoffFixture, renderer);
 
   const passed = errors.length === 0;
   process.stdout.write(`${JSON.stringify({
     validator: "validate_visual_eval_review_console_readonly_corpus_renderer",
     passed,
     renderer: rendererPath,
+    handoff_fixture: handoffFixturePath,
     static_files: staticFiles,
+    negative_case_count: negativeCases.length,
     provider_contact_performed: false,
     plugin_call_performed: false,
     api_call_performed: false,

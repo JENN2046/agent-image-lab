@@ -1,12 +1,62 @@
 ---
 
+## Checkpoint - P3.21 Review Console Readonly Corpus Handoff Artifact
+
+```text
+phase: p3_21_review_console_readonly_corpus_handoff_artifact
+status: completed_validated_pending_local_commit
+result: COMPLETED_VALIDATED
+source_commit: 87f4662
+mode: metadata-only readonly Review Console consumer artifact
+summary: Promoted the Review Console readonly corpus renderer handoff from a static mock-only surface into a canonical JSON artifact. The new handoff fixture is cataloged as the 24th readonly artifact, validated against the canonical renderer fixture, the static mock, and the rendered draft output, and the validator now includes fail-closed negative cases for missing patch rows, wrong renderer refs, missing metadata sections, and forbidden image-generation guard drift.
+changed_files_current_task:
+  - scripts/validate_visual_eval_review_console_readonly_corpus_renderer.js
+  - scripts/validate_visual_eval_readonly_review_artifact_catalog.js
+  - tests/schema_examples/visual_eval_review_console_readonly_corpus_renderer_static_handoff.example.json
+  - tests/schema_examples/visual_eval_readonly_review_artifact_catalog.example.json
+  - .agent_board/CHECKPOINT.md
+validation_run:
+  - node --check scripts/validate_visual_eval_review_console_readonly_corpus_renderer.js
+  - node --check scripts/validate_visual_eval_readonly_review_artifact_catalog.js
+  - node scripts/validate_visual_eval_review_console_readonly_corpus_renderer.js
+  - node scripts/validate_visual_eval_readonly_review_artifact_catalog.js
+validation_result: passed
+catalog_artifact_count: 24
+canonical_handoff_artifact:
+  - tests/schema_examples/visual_eval_review_console_readonly_corpus_renderer_static_handoff.example.json
+negative_cases_verified:
+  - missing_patch_display_row
+  - wrong_renderer_ref
+  - missing_metadata_sections
+  - guard_image_true
+runtime_execution_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+memory_written: false
+accepted_samples_written: false
+Batch_005_started: false
+production_candidate_002_started: false
+package_json_modified: false
+dependency_change_performed: false
+push_performed: false
+red_line_request_needed_next: guarded push or completion audit against full 30-day objective
+next_phase_started: false
+```
+
+---
+
 ## Checkpoint - P3.20 Review Console Readonly Corpus Renderer Consumer
 
 ```text
 phase: p3_20_review_console_readonly_corpus_renderer_consumer
-status: completed_validated_pending_local_commit
+status: completed_validated_local_commit
 result: COMPLETED_VALIDATED
 source_commit: 913a67c
+local_commit: 87f4662
 mode: metadata-only readonly Review Console static consumer
 summary: Connected the readonly review corpus renderer into the Review Console static prototype as a display-only consumer surface. The static mock now carries a renderer handoff aligned to the canonical renderer fixture, the page renders pass/patch/reject rows plus outcome/next-action/metadata sections, draft output exports the same handoff, and a dedicated validator compares the static consumer to the canonical renderer artifact while proving forbidden provider/runtime/image/memory/production routes remain closed.
 changed_files_current_task:

@@ -220,6 +220,15 @@
       "validator": "scripts/validate_visual_eval_readonly_review_corpus_renderer.js",
       "canonical": true,
       "readonly_consumable": true
+    },
+    {
+      "artifact_id": "visual_eval_review_console_readonly_corpus_renderer_static_handoff_v1_synthetic_001",
+      "artifact_role": "review_console_readonly_corpus_renderer_static_handoff",
+      "artifact_type": "metadata_only_visual_eval_review_console_readonly_corpus_renderer_static_handoff",
+      "path": "tests/schema_examples/visual_eval_review_console_readonly_corpus_renderer_static_handoff.example.json",
+      "validator": "scripts/validate_visual_eval_review_console_readonly_corpus_renderer.js",
+      "canonical": true,
+      "readonly_consumable": true
     }
   ],
   "composition_order": [
@@ -245,7 +254,8 @@
     "readonly_review_workspace",
     "readonly_review_workspace_case_matrix",
     "readonly_review_workspace_corpus",
-    "readonly_review_corpus_renderer"
+    "readonly_review_corpus_renderer",
+    "review_console_readonly_corpus_renderer_static_handoff"
   ],
   "consumer_expectations": {
     "source_bundle": "tests/schema_examples/visual_eval_readonly_review_bundle.example.json",
@@ -531,6 +541,28 @@
       "reject"
     ],
     "required_route_action": "render_readonly_review_corpus_display_only",
+    "required_metadata_sections": [
+      "accepted_metadata_candidates",
+      "patch_plan_only",
+      "failure_learning_metadata",
+      "archive_references",
+      "next_review_actions"
+    ],
+    "required_next_review_actions": [
+      "queue_for_future_human_review",
+      "write_patch_plan_only",
+      "defer_until_taxonomy_update"
+    ]
+  },
+  "review_console_readonly_corpus_renderer_expectations": {
+    "source_renderer": "tests/schema_examples/visual_eval_readonly_review_corpus_renderer.example.json",
+    "handoff": "tests/schema_examples/visual_eval_review_console_readonly_corpus_renderer_static_handoff.example.json",
+    "total_case_rows": 3,
+    "outcomes": [
+      "pass",
+      "patch",
+      "reject"
+    ],
     "required_metadata_sections": [
       "accepted_metadata_candidates",
       "patch_plan_only",
