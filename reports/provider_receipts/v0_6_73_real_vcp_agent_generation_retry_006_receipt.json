@@ -35,20 +35,32 @@
   "non_target_model_observed": false,
   "prompt_package_ref": "prompts/image_generation/neutral_smoke_test_red_apple_v1.yaml",
   "output_directory_ref": "runs/real_generation/v0_6_73_real_vcp_agent_generation_retry_006/",
-  "output_directory_abs": "A:\\agent-image-lab\\agent-image-lab-v0.2\\runs\\real_generation\\v0_6_73_real_vcp_agent_generation_retry_006",
-  "doubao_project_base_path_override_ref": "A:\\agent-image-lab\\agent-image-lab-v0.2\\runs\\real_generation\\v0_6_73_real_vcp_agent_generation_retry_006",
+  "output_directory_abs": "<redacted-local-path>",
+  "doubao_project_base_path_override_ref": "<redacted-local-path>",
   "exact_output_directory_only": true,
   "output_scope_violation": false,
   "output_files": [
     {
       "path": "runs/real_generation/v0_6_73_real_vcp_agent_generation_retry_006/image/doubaogen/67b7aa65-4d90-4af5-8447-7194c7f017d1.png",
-      "bytes": 131139
+      "bytes": 131139,
+      "sha256": "b75492195a390ab5ba9bd18d909db67dbf389ac03ee4d8a6b35c7249c532d446",
+      "mime_type": "image/jpeg",
+      "magic_number": "ffd8ffe0",
+      "width": 1920,
+      "height": 2048,
+      "extension_mismatch_recorded": true
     }
   ],
   "image_files": [
     {
       "path": "runs/real_generation/v0_6_73_real_vcp_agent_generation_retry_006/image/doubaogen/67b7aa65-4d90-4af5-8447-7194c7f017d1.png",
-      "bytes": 131139
+      "bytes": 131139,
+      "sha256": "b75492195a390ab5ba9bd18d909db67dbf389ac03ee4d8a6b35c7249c532d446",
+      "mime_type": "image/jpeg",
+      "magic_number": "ffd8ffe0",
+      "width": 1920,
+      "height": 2048,
+      "extension_mismatch_recorded": true
     }
   ],
   "forbidden_writes": {

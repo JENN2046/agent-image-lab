@@ -35,6 +35,11 @@ function assertNoSecrets(value, label) {
   assert(!/AKLT[A-Za-z0-9_-]{8,}/.test(text), `${label} must not include provider key pattern`);
 }
 
+function assertNoAbsoluteLocalPath(value, label) {
+  const text = JSON.stringify(value);
+  assert(!/[A-Z]:[\\/]/.test(text), `${label} must not expose Windows absolute paths`);
+}
+
 function main() {
   assert(fs.existsSync(repoPath(receiptRef)), "retry_005 provider receipt missing");
   assert(fs.existsSync(repoPath(reviewHandoffRef)), "retry_005 review handoff missing");
@@ -54,6 +59,8 @@ function main() {
   assert(receipt.resolution_sent === "1920x2048", "resolution mismatch");
   assert(receipt.non_target_model_observed === false, "non-target model must not be observed");
   assert(receipt.output_directory_ref === outputDirectoryRef, "output directory mismatch");
+  assert(receipt.output_directory_abs === "<redacted-local-path>", "output directory abs must be redacted");
+  assert(receipt.doubao_project_base_path_override_ref === "<redacted-local-path>", "PROJECT_BASE_PATH override must be redacted");
   assert(receipt.provider_plugin_api_calls_used.admin_route_calls === 1, "admin route count mismatch");
   assert(receipt.provider_plugin_api_calls_used.provider_calls === 1, "provider count mismatch");
   assert(receipt.provider_plugin_api_calls_used.plugin_calls === 1, "plugin count mismatch");
@@ -66,6 +73,10 @@ function main() {
   assert(receipt.review_eligible === false, "review must be blocked");
   assert(receipt.accepted_candidate_allowed === false, "accepted candidate must be blocked");
   assert(Array.isArray(receipt.out_of_scope_output_files) && receipt.out_of_scope_output_files.length === 1, "out-of-scope output must be recorded once");
+  if (receipt.out_of_scope_output_files[0].authorized_output_directory !== undefined) {
+    assert(receipt.out_of_scope_output_files[0].authorized_output_directory === "<redacted-local-path>", "authorized output directory must be redacted");
+  }
+  assert(receipt.local_admin_route.summary.authorized_output_directory === "<redacted-local-path>", "admin summary authorized output directory must be redacted");
   assert(String(receipt.blocker || "").includes("outside the authorized retry_005 output directory"), "blocker must explain output scope violation");
   assert(handoff.review_status === "blocked_output_scope_violation_no_review", "handoff review status mismatch");
   assert(handoff.accepted_candidate === false, "handoff must not accept candidate");
@@ -73,6 +84,9 @@ function main() {
   assertNoSecrets(receipt, "receipt");
   assertNoSecrets(handoff, "handoff");
   assertNoSecrets(audit, "audit");
+  assertNoAbsoluteLocalPath(receipt, "receipt");
+  assertNoAbsoluteLocalPath(handoff, "handoff");
+  assertNoAbsoluteLocalPath(audit, "audit");
 
   process.stdout.write(`${JSON.stringify({
     passed: true,

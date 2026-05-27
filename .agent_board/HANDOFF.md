@@ -1,5 +1,71 @@
 ---
 
+## Current Handoff Update - P1.1 Legacy Commit-Readiness Gate Reconciliation
+
+```text
+phase: p1_1_legacy_commit_readiness_gate_reconciliation
+status: COMPLETED_TARGET_VALIDATED_FULL_VALIDATE_ALL_GOVERNANCE_FOLLOWUP
+mode: Green local validator reconciliation; no provider contact, no plugin call, no API call, no image generation, no secret read, no push
+branch: master
+Active current phase: v0_3_3_first_live_generation_pilot
+Active source phase: v0_3_2_live_candidate_action_packet
+Active next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+summary: P1.1 reviewed the three failing validate:capsule-regression child validators and confirmed they were legacy fixed-slice commit/checkpoint readiness gates. The shared slice helper now includes evidence_governance_sanitization_slice, an explicit mode for the current P1 evidence governance sanitization work only.
+key_findings:
+  - the old gates were not product-runtime failures; they were fixed-slice commit-readiness checks that did not recognize the current uncommitted P1 evidence governance slice.
+  - evidence_governance_sanitization_slice requires the exact 22-file current slice, including the helper file itself.
+  - package.json is allowed only for the exact validation script changes introduced by P1 evidence governance.
+  - helper self-checks reject missing files, dependency changes, arbitrary scripts, and unexpected script values.
+validation:
+  - three legacy child validators: passed
+  - npm run validate:capsule-regression: passed
+  - npm run validate:all: advanced past capsule-regression and failed later at validate:governance historical accepted-sample/six-month baseline checks
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+dependency_change_performed: false
+runtime_probe_performed: false
+secret_value_read_performed: false
+push_status: not_performed
+push_tag_release_deploy_performed: false
+generated_image_recorded: false
+next_safe_task: reconcile_validate_governance_historical_sample_count_baselines_if_full_validate_all_is_required
+```
+
+---
+
+## Current Handoff Update - P1 Real Execution Evidence Closure And Public Surface Sanitization
+
+```text
+phase: p1_real_execution_evidence_closure_public_surface_sanitization
+status: COMPLETED_TARGET_VALIDATED_FULL_VALIDATE_ALL_PARTIAL
+mode: Green local evidence governance; no provider contact, no plugin call, no API call, no image generation, no secret read, no push
+branch: master
+summary: The project should not proceed to retry_007 yet. The current slice closes the public evidence surface created by real provider execution: local absolute paths in retry 003-006 receipts/handoffs were redacted, runtime audit-write validation was wired into validate:runtime-kernel, validate:core now separates runtime core checks from historical provider receipt checks, and retry_006 has a dedicated artifact integrity validator.
+key_findings:
+  - retry_006 artifact path keeps its historical .png filename, but the actual file format is jpeg.
+  - retry_006 artifact SHA256 is b75492195a390ab5ba9bd18d909db67dbf389ac03ee4d8a6b35c7249c532d446.
+  - retry_006 dimensions are 1920x2048.
+  - retry_006 artifact is tracked by Git and not ignored.
+final_validation:
+  - npm run validate:mvp: passed
+  - npm run validate:core: passed
+  - npm run validate:runtime-kernel: passed and includes audit-write
+  - public receipt/handoff absolute path scan: passed
+  - git diff --check: passed with line-ending warnings only
+  - node scripts/validate_agent_board_state.js: passed
+  - npm run validate:all: failed at legacy validate:capsule-regression commit/checkpoint readiness gates after the P1 runtime/provider evidence chain passed
+next_safe_task: decide_whether_to_update_legacy_capsule_regression_commit_readiness_for_p1_slice
+```
+
+---
+
 ## Current Handoff Update - v0.6.73 Seedream5 Retry 006 Metadata-only Accepted Sample Closeout
 
 ```text
@@ -442,9 +508,9 @@ mode: Amber_B exact one-shot real provider execution attempt
 branch: master
 authorization_id: AUTH-DRAFT-NATIVE-DOUBAO-ONE-SHOT-20260526-001
 summary: The owner authorized exact real provider execution and clarified this should be execution rather than more binding work. Codex fast-forwarded A:\VCP\apps\VCPToolBox to origin/main, verified the NativeDoubao secretless delegate path, injected that delegate into the exact one-shot runner in memory, and performed one real attempt. The attempt reached the provider path and consumed one plugin/provider/API call, then stopped fail-closed with no image because the provider reported that model or endpoint doubao-seedream-3-0-t2i-250415 does not exist or is not accessible.
-provider_contact_performed: true
-plugin_call_performed: true
-api_call_performed: true
+provider_contact_attempted_recorded: yes
+plugin_call_attempted_recorded: yes
+api_call_attempted_recorded: yes
 image_generation_performed: false
 image_binary_read_performed: false
 output_write_performed: false

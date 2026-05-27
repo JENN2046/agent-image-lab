@@ -1,4 +1,42 @@
 ---
+- [x] ID: p1_1_legacy_commit_readiness_gate_reconciliation
+      Lane: Green local validator reconciliation.
+      Status: completed_target_validated_full_validate_all_governance_followup.
+      Active current phase: v0_3_3_first_live_generation_pilot.
+      Active source phase: v0_3_2_live_candidate_action_packet.
+      Active next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Goal: Reconcile the three legacy validate:capsule-regression commit/checkpoint readiness validators with the current P1 evidence governance sanitization slice without broadening the old gate.
+      Completed: added explicit evidence_governance_sanitization_slice recognition in scripts/lib/governance_tooling_maintenance_slice.js; required exact 22-file slice; allowed only exact validation-script package.json changes; added helper self-checks for missing-file, dependency-change, arbitrary-script, and unexpected-script rejection.
+      Boundary: no provider contact, plugin call, API call, image generation, DailyNote/VCP memory, secret read, dependency change, commit, push, tag, release, or deploy.
+      Validation: the three legacy child validators passed; npm run validate:capsule-regression passed; npm run validate:all advanced past capsule-regression and failed later at validate:governance historical accepted-sample/six-month baseline checks.
+      provider_contact_performed: false.
+      plugin_call_performed: false.
+      api_call_performed: false.
+      image_generation_performed: false.
+      DailyNote_write_performed: false.
+      VCP_memory_write_performed: false.
+      real_manifest_read_performed: false.
+      real_vcpchat_read_performed: false.
+      real_vcptoolbox_read_performed: false.
+      dependency_change_performed: false.
+      runtime_probe_performed: false.
+      secret_value_read_performed: false.
+      push_status: not_performed.
+      push_tag_release_deploy_performed: false.
+      generated_image_recorded: false.
+      Next: reconcile_validate_governance_historical_sample_count_baselines_if_full_validate_all_is_required.
+
+---
+- [x] ID: p1_real_execution_evidence_closure_public_surface_sanitization
+      Lane: Green local evidence governance.
+      Status: completed_target_validated_full_validate_all_partial.
+      Goal: Close and sanitize the public real-execution evidence surface before any future retry_007 work.
+      Completed: redacted local absolute paths in public retry 003-006 provider receipts and review handoffs; wired audit-write into validate:runtime-kernel; added validate:core; added retry_006 artifact integrity validation.
+      Boundary: no provider contact, plugin call, API call, image generation, secret read, commit, push, tag, release, or deploy.
+      Validation: validate:mvp, validate:core, validate:runtime-kernel, retry receipt validators, retry_006 artifact integrity, public receipt/handoff path scan, JSON parse, JS syntax, git diff --check, and agent board validator passed. validate:all failed only at legacy validate:capsule-regression commit/checkpoint readiness gates after the P1 runtime/provider evidence chain passed.
+      Next: decide_whether_to_update_legacy_capsule_regression_commit_readiness_for_p1_slice.
+
+---
 - [x] ID: v0_6_73_seedream5_retry_006_metadata_only_accepted_sample_closeout
       Title: Close retry_006 as metadata-only accepted sample evidence
       Lane: Amber local metadata-only closeout.
@@ -257,9 +295,9 @@
       VCPToolBox delegate restored: true.
       Execution attempted now: true.
       Provider result: model or endpoint doubao-seedream-3-0-t2i-250415 does not exist or is not accessible.
-      provider_contact_performed: true.
-      plugin_call_performed: true.
-      api_call_performed: true.
+      provider_contact_attempted_recorded: yes.
+      plugin_call_attempted_recorded: yes.
+      api_call_attempted_recorded: yes.
       image_generation_performed: false.
       image_binary_read_performed: false.
       output_write_performed: false.

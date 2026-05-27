@@ -1,5 +1,88 @@
 ---
 
+## Checkpoint - P1.1 Legacy Commit-Readiness Gate Reconciliation
+
+```text
+phase: p1_1_legacy_commit_readiness_gate_reconciliation
+status: completed_target_validated_full_validate_all_governance_followup
+result: COMPLETED_VALIDATED_FOR_CAPSULE_REGRESSION
+mode: Green local validator reconciliation
+Active current phase: v0_3_3_first_live_generation_pilot
+Active source phase: v0_3_2_live_candidate_action_packet
+Active next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+summary: The three legacy commit/checkpoint readiness validators under validate:capsule-regression were reviewed and reconciled as old fixed-slice gates. They now accept the current uncommitted P1 evidence governance sanitization work only through evidence_governance_sanitization_slice, which requires the exact current file set and exact validation-script package.json changes.
+changed_files_current_task:
+  - scripts/lib/governance_tooling_maintenance_slice.js
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/VALIDATION_LOG.md
+validation_run:
+  - node --check scripts/lib/governance_tooling_maintenance_slice.js
+  - node scripts/validate_controlled_visual_production_loop_exact_file_commit_readiness_review.js
+  - node scripts/validate_controlled_visual_production_loop_checkpoint_readiness.js
+  - node scripts/validate_controlled_visual_production_loop_commit_and_authorization_readiness_audit.js
+  - npm run validate:capsule-regression
+  - npm run validate:all
+validation_result: capsule-regression passed; validate:all advanced to validate:governance and failed on historical accepted-sample/six-month baseline checks.
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+dependency_change_performed: false
+runtime_probe_performed: false
+secret_value_read_performed: false
+push_status: not_performed
+push_tag_release_deploy_performed: false
+generated_image_recorded: false
+next: reconcile_validate_governance_historical_sample_count_baselines_if_full_validate_all_is_required
+```
+
+---
+
+## Checkpoint - P1 Real Execution Evidence Closure And Public Surface Sanitization
+
+```text
+phase: p1_real_execution_evidence_closure_public_surface_sanitization
+status: completed_target_validated_full_validate_all_partial
+result: PARTIAL_FULL_VALIDATE_ALL_LEGACY_CAPSULE_REGRESSION_BLOCK
+mode: Green local evidence governance
+summary: Public real-execution evidence was tightened before any retry_007 work. Retry 003-006 receipts/handoffs now use <redacted-local-path> for local filesystem references; retry sequence readiness evidence no longer exposes an external local repo root. The runtime kernel gate now includes audit-write validation, validate:core separates runtime core checks from historical receipt checks, and retry_006 artifact integrity validation covers SHA256, MIME/magic, dimensions, Git tracking/ignore state, and absolute path absence.
+validation_run_so_far:
+  - node --check changed JS validators: passed
+  - npm run validate:retry-006-artifact-integrity: passed
+  - npm run validate:exact-a5-retry-003-activation-receipt: passed
+  - npm run validate:exact-a5-retry-004-activation-receipt: passed
+  - npm run validate:exact-a5-retry-005-activation-receipt: passed
+  - npm run validate:exact-a5-retry-006-activation-receipt: passed
+  - npm run validate:runtime-kernel: passed
+  - npm run validate:core: passed
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+secret_value_read_performed: false
+push_status: not_performed
+next: run_full_validation_and_closeout
+final_validation:
+  - npm run validate:mvp: passed
+  - npm run validate:core: passed
+  - npm run validate:runtime-kernel: passed and includes audit-write
+  - public receipt/handoff absolute path scan: passed
+  - git diff --check: passed with line-ending warnings only
+  - node scripts/validate_agent_board_state.js: passed
+  - npm run validate:all: failed at legacy validate:capsule-regression commit/checkpoint readiness gates after the P1 runtime/provider evidence chain passed
+next_after_partial_full_validation: decide_whether_to_update_legacy_capsule_regression_commit_readiness_for_p1_slice
+```
+
+---
+
 ## Checkpoint - v0.6.73 Seedream5 Retry 006 Metadata-only Accepted Sample Closeout
 
 ```text
@@ -198,9 +281,9 @@ changed_files_current_task:
   - .agent_board/TASK_QUEUE.md
   - .agent_board/HANDOFF.md
   - .agent_board/CHECKPOINT.md
-provider_contact_performed: true
-plugin_call_performed: true
-api_call_performed: true
+provider_contact_attempted_recorded: yes
+plugin_call_attempted_recorded: yes
+api_call_attempted_recorded: yes
 image_generation_performed: false
 image_binary_read_performed: false
 output_write_performed: false

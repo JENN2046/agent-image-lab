@@ -69,7 +69,7 @@
     "scripts/native_doubao_secretless_provider_runtime_bridge.js",
     "runs/real_generation/v0_6_73_real_vcp_agent_generation_retry_006/image/doubaogen/67b7aa65-4d90-4af5-8447-7194c7f017d1.png",
     ".agent_private/",
-    "A:/VCP/apps/VCPToolBox/",
+    "<redacted-external-repo-path>/",
     "Plugin/DoubaoGen/.doubao_api_cache.json",
     "image/doubaogen/",
     "production_candidate/",
@@ -104,5 +104,5 @@
     "audit_did_not_read_source_image_content": true,
     "audit_did_not_stage_or_commit": true
   },
-  "next_exact_staging_authorization_draft": "我授权执行 STAGE-EXACT-FILES-SEEDREAM5-RETRY-SEQUENCE-002-006：仅本地 exact-file staging，不 commit、不 push，允许 stage reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_sequence_002_006_commit_readiness_audit.json 中 include_exact_files_for_sequence_commit 列出的精确文件；禁止 git add .，禁止 stage reports/provider_receipts/v0_6_73_real_vcp_agent_generation_one_shot_receipt.json、review_console/live_receipt_bridge/v0_6_73_real_vcp_agent_generation_one_shot/bridge_entry.json、scripts/native_doubao_secretless_provider_runtime_bridge.js、runs/real_generation、.agent_private、A:/VCP/apps/VCPToolBox、production_candidate、DailyNote/VCP memory、secret、cache、任何未列入 include_exact_files_for_sequence_commit 的文件；stage 后必须运行 git diff --cached --name-only、git diff --cached --check，并证明 staged_exact_files_only，然后停止，不得 commit/push/tag/release/deploy。"
+  "next_exact_staging_authorization_draft": "我授权执行 STAGE-EXACT-FILES-SEEDREAM5-RETRY-SEQUENCE-002-006：仅本地 exact-file staging，不 commit、不 push，允许 stage reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_sequence_002_006_commit_readiness_audit.json 中 include_exact_files_for_sequence_commit 列出的精确文件；禁止 git add .，禁止 stage reports/provider_receipts/v0_6_73_real_vcp_agent_generation_one_shot_receipt.json、review_console/live_receipt_bridge/v0_6_73_real_vcp_agent_generation_one_shot/bridge_entry.json、scripts/native_doubao_secretless_provider_runtime_bridge.js、runs/real_generation、.agent_private、<redacted-external-repo-path>、production_candidate、DailyNote/VCP memory、secret、cache、任何未列入 include_exact_files_for_sequence_commit 的文件；stage 后必须运行 git diff --cached --name-only、git diff --cached --check，并证明 staged_exact_files_only，然后停止，不得 commit/push/tag/release/deploy。"
 }

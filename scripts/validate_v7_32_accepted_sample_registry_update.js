@@ -18,10 +18,12 @@ const requiredSampleIds = [
   "accepted_womens_resort_relaxed_knit_codex_v2_001",
   "accepted_fashion_lifestyle_woven_crossbody_bag_codex_v14_161_001",
   "accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001",
+  "neutral_red_apple_seedream5_retry_006",
 ];
 const requiredCodexSample = "accepted_womens_resort_relaxed_knit_codex_v2_001";
 const requiredBagCodexSample = "accepted_fashion_lifestyle_woven_crossbody_bag_codex_v14_161_001";
 const requiredLampCodexSample = "accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001";
+const requiredRetry006ProductSample = "neutral_red_apple_seedream5_retry_006";
 const imageExtensions = /\.(png|jpe?g|webp|gif|psd|tiff?)$/i;
 
 let passed = true;
@@ -127,6 +129,13 @@ check("lamp_codex_session_sample_category", () => extractField(sampleBlocks.get(
 check("lamp_codex_session_sample_image_not_committed", () => (sampleBlocks.get(requiredLampCodexSample) || "").includes("image_files_committed_to_git: false"));
 check("lamp_codex_session_sample_no_memory_write", () => (sampleBlocks.get(requiredLampCodexSample) || "").includes("write_to_memory_allowed: false"));
 check("lamp_codex_session_sample_no_daily_note_write", () => (sampleBlocks.get(requiredLampCodexSample) || "").includes("daily_note_write_allowed: false"));
+check("retry_006_product_sample_present", () => sampleBlocks.has(requiredRetry006ProductSample));
+check("retry_006_product_sample_provider_type", () => extractField(sampleBlocks.get(requiredRetry006ProductSample) || "", "provider_type") === "project_plugin");
+check("retry_006_product_sample_plugin", () => extractField(sampleBlocks.get(requiredRetry006ProductSample) || "", "plugin_id") === "DoubaoGen");
+check("retry_006_product_sample_category", () => extractField(sampleBlocks.get(requiredRetry006ProductSample) || "", "category") === "product_still_life");
+check("retry_006_product_sample_image_not_committed", () => (sampleBlocks.get(requiredRetry006ProductSample) || "").includes("image_files_committed_to_git: false"));
+check("retry_006_product_sample_no_memory_write", () => (sampleBlocks.get(requiredRetry006ProductSample) || "").includes("write_to_memory_allowed: false"));
+check("retry_006_product_sample_no_daily_note_write", () => (sampleBlocks.get(requiredRetry006ProductSample) || "").includes("daily_note_write_allowed: false"));
 check("legacy_wallet_sample_present", () => sampleBlocks.has("accepted_product_still_life_tennis_wallet_001"));
 check("legacy_rattan_bag_samples_present", () => requiredSampleIds.slice(1, 5).every((id) => sampleBlocks.has(id)));
 check("watermark_false_history_preserved", () => registry.includes("watermark_requested: false"));
@@ -144,7 +153,7 @@ for (const index of categoryIndexes) {
   );
 }
 
-check("product_category_count_2", () => fileContains("accepted_samples/categories/product_still_life.yaml", "sample_count: 2"));
+check("product_category_count_3", () => fileContains("accepted_samples/categories/product_still_life.yaml", "sample_count: 3"));
 check("fashion_lifestyle_category_count_5", () => fileContains("accepted_samples/categories/fashion_lifestyle_still_life.yaml", "sample_count: 5"));
 check("fashion_lookbook_category_count_2", () => fileContains("accepted_samples/categories/fashion_lookbook_portrait.yaml", "sample_count: 2"));
 check("tracked_accepted_samples_are_metadata_only", () =>

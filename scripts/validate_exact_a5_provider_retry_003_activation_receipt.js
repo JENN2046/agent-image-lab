@@ -10,7 +10,7 @@ const receiptRef = "reports/provider_receipts/v0_6_73_real_vcp_agent_generation_
 const reviewHandoffRef = "review_console/live_receipt_bridge/v0_6_73_real_vcp_agent_generation_retry_003/bridge_entry.json";
 const auditRef = ".agent_private/runtime_audit_store/v0_6_73_real_vcp_agent_generation_retry_003/activation_attempt_003.audit.json";
 const outputDirectoryRef = "runs/real_generation/v0_6_73_real_vcp_agent_generation_retry_003/";
-const outputDirectoryAbs = "A:\\agent-image-lab\\agent-image-lab-v0.2\\runs\\real_generation\\v0_6_73_real_vcp_agent_generation_retry_003";
+const redactedLocalPath = "<redacted-local-path>";
 const requiredModel = "doubao-seedream-5-0-260128";
 
 function assert(condition, message) {
@@ -37,6 +37,11 @@ function assertNoSecrets(value, label) {
   assert(!text.includes("Authorization:"), `${label} must not include Authorization header`);
 }
 
+function assertNoAbsoluteLocalPath(value, label) {
+  const text = JSON.stringify(value);
+  assert(!/[A-Z]:[\\/]/.test(text), `${label} must not expose Windows absolute paths`);
+}
+
 function main() {
   assert(fs.existsSync(repoPath(receiptRef)), "retry_003 provider receipt missing");
   assert(fs.existsSync(repoPath(reviewHandoffRef)), "retry_003 review handoff missing");
@@ -58,8 +63,8 @@ function main() {
   assert(receipt.model_required === requiredModel, "required model mismatch");
   assert(receipt.model_sent === requiredModel, "sent model mismatch");
   assert(receipt.output_directory_ref === outputDirectoryRef, "output directory ref mismatch");
-  assert(receipt.output_directory_abs === outputDirectoryAbs, "output directory abs mismatch");
-  assert(receipt.doubao_project_base_path_override_ref === outputDirectoryAbs, "PROJECT_BASE_PATH override mismatch");
+  assert(receipt.output_directory_abs === redactedLocalPath, "output directory abs must be redacted");
+  assert(receipt.doubao_project_base_path_override_ref === redactedLocalPath, "PROJECT_BASE_PATH override must be redacted");
   assert(receipt.exact_output_directory_only === true, "output directory guard mismatch");
   assert(receipt.provider_plugin_api_call_budget.max_provider_calls === 1, "provider budget mismatch");
   assert(receipt.provider_plugin_api_call_budget.max_plugin_calls === 1, "plugin budget mismatch");
@@ -100,6 +105,9 @@ function main() {
   assertNoSecrets(receipt, "receipt");
   assertNoSecrets(handoff, "handoff");
   assertNoSecrets(audit, "audit");
+  assertNoAbsoluteLocalPath(receipt, "receipt");
+  assertNoAbsoluteLocalPath(handoff, "handoff");
+  assertNoAbsoluteLocalPath(audit, "audit");
 
   process.stdout.write(`${JSON.stringify({
     passed: true,

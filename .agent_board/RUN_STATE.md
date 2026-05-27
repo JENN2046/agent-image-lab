@@ -1,5 +1,62 @@
 ---
 
+## Current Run State - P1.1 Legacy Commit-Readiness Gate Reconciliation
+
+```text
+phase: p1_1_legacy_commit_readiness_gate_reconciliation
+status: COMPLETED_TARGET_VALIDATED_FULL_VALIDATE_ALL_GOVERNANCE_FOLLOWUP
+mode: Green local validator reconciliation; no provider contact, no plugin call, no API call, no image generation, no secret read, no push
+branch: master
+Active current phase: v0_3_3_first_live_generation_pilot
+Active source phase: v0_3_2_live_candidate_action_packet
+Active next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+summary: The three validate:capsule-regression legacy commit/checkpoint readiness validators now recognize the current P1 evidence governance sanitization slice only through the explicit evidence_governance_sanitization_slice mode. The mode requires an exact 22-file slice and permits only the exact validation-script package.json changes for P1 evidence governance.
+validation_final:
+  - node --check scripts/lib/governance_tooling_maintenance_slice.js: passed
+  - node scripts/validate_controlled_visual_production_loop_exact_file_commit_readiness_review.js: passed
+  - node scripts/validate_controlled_visual_production_loop_checkpoint_readiness.js: passed
+  - node scripts/validate_controlled_visual_production_loop_commit_and_authorization_readiness_audit.js: passed
+  - npm run validate:capsule-regression: passed
+  - npm run validate:all: advanced past validate:capsule-regression and failed later at validate:governance historical accepted-sample/six-month baseline checks
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+dependency_change_performed: false
+runtime_probe_performed: false
+secret_value_read_performed: false
+push_status: not_performed
+push_tag_release_deploy_performed: false
+generated_image_recorded: false
+next_safe_task: reconcile_validate_governance_historical_sample_count_baselines_if_full_validate_all_is_required
+```
+
+---
+
+## Current Run State - P1 Real Execution Evidence Closure And Public Surface Sanitization
+
+```text
+phase: p1_real_execution_evidence_closure_public_surface_sanitization
+status: COMPLETED_TARGET_VALIDATED_FULL_VALIDATE_ALL_PARTIAL
+mode: Green local evidence governance; no provider contact, no plugin call, no API call, no image generation, no secret read, no push
+branch: master
+summary: Public provider retry receipts and review handoffs for retry 003-006 no longer expose local absolute paths. Runtime kernel validation now includes the audit-write validator through validate:runtime-kernel. A separate validate:core script separates the runtime core chain from the historical provider receipt chain. Retry 006 now has artifact integrity validation for sha256, byte count, magic/MIME, actual dimensions, Git tracking/ignore state, and public absolute path absence.
+retry_006_artifact_integrity: sha256=b75492195a390ab5ba9bd18d909db67dbf389ac03ee4d8a6b35c7249c532d446; actual_format=jpeg; recorded_extension=.png; dimensions=1920x2048; git_tracked=true; git_ignored=false
+validation_final:
+  - npm run validate:mvp: passed
+  - npm run validate:core: passed
+  - npm run validate:runtime-kernel: passed and includes audit-write
+  - npm run validate:all: failed at legacy validate:capsule-regression commit/checkpoint readiness gates after the P1 runtime/provider evidence chain passed
+next_safe_task: decide_whether_to_update_legacy_capsule_regression_commit_readiness_for_p1_slice
+```
+
+---
+
 ## Current Run State - v0.6.73 Seedream5 Retry 006 Metadata-only Accepted Sample Closeout
 
 ```text
@@ -386,9 +443,9 @@ vcptoolbox_delegate_file_exists_after_sync: true
 execution_attempted_now: true
 execution_status: BLOCKED_PROVIDER_RUNTIME_DELEGATE_FAILED
 blocker: provider reported model or endpoint doubao-seedream-3-0-t2i-250415 does not exist or is not accessible
-provider_contact_performed: true
-plugin_call_performed: true
-api_call_performed: true
+provider_contact_attempted_recorded: yes
+plugin_call_attempted_recorded: yes
+api_call_attempted_recorded: yes
 image_generation_performed: false
 image_binary_read_performed: false
 output_write_performed: false

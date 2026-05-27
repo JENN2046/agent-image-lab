@@ -1,5 +1,60 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260527-P1.1-LEGACY-COMMIT-READINESS-GATE-RECONCILIATION
+
+Task: p1_1_legacy_commit_readiness_gate_reconciliation
+Status: completed_target_validated_full_validate_all_governance_followup
+Active current phase: v0_3_3_first_live_generation_pilot
+Active source phase: v0_3_2_live_candidate_action_packet
+Active next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+Validation run:
+  - node --check scripts/lib/governance_tooling_maintenance_slice.js: passed
+  - node scripts/validate_controlled_visual_production_loop_exact_file_commit_readiness_review.js: passed
+  - node scripts/validate_controlled_visual_production_loop_checkpoint_readiness.js: passed
+  - node scripts/validate_controlled_visual_production_loop_commit_and_authorization_readiness_audit.js: passed
+  - npm run validate:capsule-regression: passed
+  - npm run validate:all: advanced past validate:capsule-regression and failed later at validate:governance historical accepted-sample/six-month baseline checks
+Boundary: no provider contact, plugin call, API call, image generation, DailyNote/VCP memory, secret read, dependency change, commit, push, tag, release, or deploy.
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+real_manifest_read_performed: false
+real_vcpchat_read_performed: false
+real_vcptoolbox_read_performed: false
+dependency_change_performed: false
+runtime_probe_performed: false
+secret_value_read_performed: false
+push_status: not_performed
+push_tag_release_deploy_performed: false
+generated_image_recorded: false
+
+## VALIDATION-20260527-P1-REAL-EXECUTION-EVIDENCE-CLOSURE
+
+Task: p1_real_execution_evidence_closure_public_surface_sanitization
+Status: completed_target_validated_full_validate_all_partial
+Validation run:
+  - node --check scripts/validate_retry_006_artifact_integrity.js: passed
+  - node --check scripts/validate_exact_a5_provider_retry_003_activation_receipt.js: passed
+  - node --check scripts/validate_exact_a5_provider_retry_004_activation_receipt.js: passed
+  - node --check scripts/validate_exact_a5_provider_retry_005_activation_receipt.js: passed
+  - node --check scripts/validate_exact_a5_provider_retry_006_activation_receipt.js: passed
+  - node --check scripts/validate_mvp_core.js: passed
+  - npm run validate:retry-006-artifact-integrity: passed
+  - npm run validate:exact-a5-retry-003-activation-receipt: passed
+  - npm run validate:exact-a5-retry-004-activation-receipt: passed
+  - npm run validate:exact-a5-retry-005-activation-receipt: passed
+  - npm run validate:exact-a5-retry-006-activation-receipt: passed
+  - npm run validate:runtime-kernel: passed
+  - npm run validate:core: passed
+  - npm run validate:mvp: passed
+  - git diff --check: passed with line-ending warnings only
+  - node scripts/validate_agent_board_state.js: passed
+  - npm run validate:all: failed at legacy validate:capsule-regression commit/checkpoint readiness gates after the P1 runtime/provider evidence chain passed
+Boundary: no provider contact, plugin call, API call, image generation, secret read, commit, push, tag, release, or deploy.
+
 ## VALIDATION-20260526-EXACT-A5-PROVIDER-EXECUTION-ACTIVATION-RESULT
 
 Task: exact_a5_provider_execution_activation_result

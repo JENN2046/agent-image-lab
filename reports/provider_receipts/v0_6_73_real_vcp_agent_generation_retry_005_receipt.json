@@ -35,8 +35,8 @@
   "non_target_model_observed": false,
   "prompt_package_ref": "prompts/image_generation/neutral_smoke_test_red_apple_v1.yaml",
   "output_directory_ref": "runs/real_generation/v0_6_73_real_vcp_agent_generation_retry_005/",
-  "output_directory_abs": "A:\\agent-image-lab\\agent-image-lab-v0.2\\runs\\real_generation\\v0_6_73_real_vcp_agent_generation_retry_005",
-  "doubao_project_base_path_override_ref": "A:\\agent-image-lab\\agent-image-lab-v0.2\\runs\\real_generation\\v0_6_73_real_vcp_agent_generation_retry_005",
+  "output_directory_abs": "<redacted-local-path>",
+  "doubao_project_base_path_override_ref": "<redacted-local-path>",
   "exact_output_directory_only": false,
   "output_files": [],
   "image_files": [],
@@ -77,7 +77,7 @@
       ],
       "error": null,
       "output_scope_violation": true,
-      "authorized_output_directory": "A:\\agent-image-lab\\agent-image-lab-v0.2\\runs\\real_generation\\v0_6_73_real_vcp_agent_generation_retry_005",
+      "authorized_output_directory": "<redacted-local-path>",
       "observed_out_of_scope_output_ref": "VCPToolBox/image/doubaogen/1ec83c74-1c7c-4871-991d-f9160a105634.png"
     }
   },
@@ -93,7 +93,7 @@
   "output_scope_violation": true,
   "out_of_scope_output_files": [
     {
-      "path": "A:/VCP/apps/VCPToolBox/image/doubaogen/1ec83c74-1c7c-4871-991d-f9160a105634.png",
+      "path": "<redacted-local-path>/image/doubaogen/1ec83c74-1c7c-4871-991d-f9160a105634.png",
       "bytes": 127129
     }
   ],

@@ -35,6 +35,11 @@ function assertNoSecrets(value, label) {
   assert(!/AKLT[A-Za-z0-9_-]{8,}/.test(text), `${label} must not include provider key pattern`);
 }
 
+function assertNoAbsoluteLocalPath(value, label) {
+  const text = JSON.stringify(value);
+  assert(!/[A-Z]:[\\/]/.test(text), `${label} must not expose Windows absolute paths`);
+}
+
 function main() {
   assert(fs.existsSync(repoPath(receiptRef)), "retry_004 provider receipt missing");
   assert(fs.existsSync(repoPath(reviewHandoffRef)), "retry_004 review handoff missing");
@@ -56,6 +61,8 @@ function main() {
   assert(receipt.explicit_model_no_fallback_required === true, "explicit no-fallback guard mismatch");
   assert(receipt.non_target_model_observed === false, "non-target model must not be observed");
   assert(receipt.output_directory_ref === outputDirectoryRef, "output directory mismatch");
+  assert(receipt.output_directory_abs === "<redacted-local-path>", "output directory abs must be redacted");
+  assert(receipt.doubao_project_base_path_override_ref === "<redacted-local-path>", "PROJECT_BASE_PATH override must be redacted");
   assert(receipt.provider_plugin_api_calls_used.admin_route_calls === 1, "admin route call count mismatch");
   assert(receipt.provider_plugin_api_calls_used.provider_calls === 1, "provider call count mismatch");
   assert(receipt.provider_plugin_api_calls_used.plugin_calls === 1, "plugin call count mismatch");
@@ -77,6 +84,9 @@ function main() {
   assertNoSecrets(receipt, "receipt");
   assertNoSecrets(handoff, "handoff");
   assertNoSecrets(audit, "audit");
+  assertNoAbsoluteLocalPath(receipt, "receipt");
+  assertNoAbsoluteLocalPath(handoff, "handoff");
+  assertNoAbsoluteLocalPath(audit, "audit");
 
   process.stdout.write(`${JSON.stringify({
     passed: true,

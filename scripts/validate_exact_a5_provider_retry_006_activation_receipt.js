@@ -3,6 +3,7 @@
 
 const fs = require("node:fs");
 const path = require("node:path");
+const { execFileSync } = require("node:child_process");
 
 const root = path.resolve(__dirname, "..");
 const authorizationId = "AUTH-DRAFT-NATIVE-DOUBAO-SEEDREAM5-RETRY-20260526-006";
@@ -35,6 +36,20 @@ function assertNoSecrets(value, label) {
   assert(!/AKLT[A-Za-z0-9_-]{8,}/.test(text), `${label} must not include provider key pattern`);
 }
 
+function assertNoAbsoluteLocalPath(value, label) {
+  const text = JSON.stringify(value);
+  assert(!/[A-Z]:[\\/]/.test(text), `${label} must not expose Windows absolute paths`);
+}
+
+function runArtifactIntegrityValidator() {
+  const output = execFileSync(process.execPath, ["scripts/validate_retry_006_artifact_integrity.js"], {
+    cwd: root,
+    encoding: "utf8",
+    stdio: ["ignore", "pipe", "pipe"],
+  });
+  return JSON.parse(output);
+}
+
 function main() {
   assert(fs.existsSync(repoPath(receiptRef)), "retry_006 provider receipt missing");
   assert(fs.existsSync(repoPath(reviewHandoffRef)), "retry_006 review handoff missing");
@@ -54,6 +69,8 @@ function main() {
   assert(receipt.resolution_sent === "1920x2048", "resolution mismatch");
   assert(receipt.non_target_model_observed === false, "non-target model must not be observed");
   assert(receipt.output_directory_ref === outputDirectoryRef, "output directory mismatch");
+  assert(receipt.output_directory_abs === "<redacted-local-path>", "output directory abs must be redacted");
+  assert(receipt.doubao_project_base_path_override_ref === "<redacted-local-path>", "PROJECT_BASE_PATH override must be redacted");
   assert(receipt.provider_plugin_api_calls_used.admin_route_calls === 1, "admin route count mismatch");
   assert(receipt.provider_plugin_api_calls_used.provider_calls === 1, "provider count mismatch");
   assert(receipt.provider_plugin_api_calls_used.plugin_calls === 1, "plugin count mismatch");
@@ -67,6 +84,8 @@ function main() {
   assert(Array.isArray(receipt.image_files) && receipt.image_files.length === 1, "one image file must be recorded");
   assert(receipt.image_files[0].path.startsWith(outputDirectoryRef), "image must be under authorized output directory");
   assert(fs.existsSync(repoPath(receipt.image_files[0].path)), "recorded image file missing");
+  const integrity = runArtifactIntegrityValidator();
+  assert(integrity.passed === true, "retry_006 artifact integrity validator must pass");
   assert(receipt.forbidden_writes.daily_note === false, "DailyNote write must be false");
   assert(receipt.forbidden_writes.vcp_memory === false, "VCP memory write must be false");
   assert(receipt.forbidden_writes.accepted_samples === false, "accepted samples write must be false");
@@ -78,6 +97,9 @@ function main() {
   assertNoSecrets(receipt, "receipt");
   assertNoSecrets(handoff, "handoff");
   assertNoSecrets(audit, "audit");
+  assertNoAbsoluteLocalPath(receipt, "receipt");
+  assertNoAbsoluteLocalPath(handoff, "handoff");
+  assertNoAbsoluteLocalPath(audit, "audit");
 
   process.stdout.write(`${JSON.stringify({
     passed: true,
@@ -87,6 +109,13 @@ function main() {
     provider_calls_used: receipt.provider_plugin_api_calls_used.provider_calls,
     images_created: receipt.image_count,
     image_file: receipt.image_files[0].path,
+    artifact_sha256: integrity.sha256,
+    artifact_mime_type: integrity.mime_type,
+    artifact_width: integrity.width,
+    artifact_height: integrity.height,
+    artifact_git_tracked: integrity.git_tracked,
+    artifact_git_ignored: integrity.git_ignored,
+    public_absolute_paths_absent: integrity.public_absolute_paths_absent,
     output_scope_violation: receipt.output_scope_violation,
     review_eligible: receipt.review_eligible,
     further_retry_allowed: receipt.further_retry_allowed,

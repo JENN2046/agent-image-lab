@@ -2505,7 +2505,44 @@ const EXPECTED_V0_6_73AG_TO_AI_REMOTE_SYNC_CURRENT_HEAD_AND_ONE_SHOT_BLOCKED_SLI
   "tests/schema_examples/v0_6_73an_vcptoolbox_runtime_dry_run_no_provider_verify.example.yaml"
 ].sort();
 
+const EXPECTED_P1_1_EVIDENCE_GOVERNANCE_SANITIZATION_SLICE = [
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  ".agent_board/VALIDATION_LOG.md",
+  "package.json",
+  "reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_003_receipt.json",
+  "reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_004_receipt.json",
+  "reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_005_receipt.json",
+  "reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_006_receipt.json",
+  "reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_sequence_002_006_commit_readiness_audit.json",
+  "review_console/live_receipt_bridge/v0_6_73_real_vcp_agent_generation_retry_003/bridge_entry.json",
+  "review_console/live_receipt_bridge/v0_6_73_real_vcp_agent_generation_retry_004/bridge_entry.json",
+  "review_console/live_receipt_bridge/v0_6_73_real_vcp_agent_generation_retry_005/bridge_entry.json",
+  "review_console/live_receipt_bridge/v0_6_73_real_vcp_agent_generation_retry_006/bridge_entry.json",
+  "scripts/lib/governance_tooling_maintenance_slice.js",
+  "scripts/validate_exact_a5_provider_retry_003_activation_receipt.js",
+  "scripts/validate_exact_a5_provider_retry_004_activation_receipt.js",
+  "scripts/validate_exact_a5_provider_retry_005_activation_receipt.js",
+  "scripts/validate_exact_a5_provider_retry_006_activation_receipt.js",
+  "scripts/validate_mvp_core.js",
+  "scripts/validate_retry_006_artifact_integrity.js"
+].sort();
+
+const EXPECTED_EVIDENCE_GOVERNANCE_SANITIZATION_PACKAGE_SCRIPTS = {
+  "validate:all": "npm run validate:smoke && npm run validate:mvp && npm run validate:runtime-kernel && npm run validate:review-bridge-readonly && npm run validate:durable-audit-store && npm run validate:provider-preflight && npm run validate:exact-a5-provider-packet && npm run validate:exact-a5-provider-retry-packet && npm run validate:exact-a5-activation-receipt && npm run validate:exact-a5-retry-activation-receipt && npm run validate:exact-a5-retry-003-activation-receipt && npm run validate:exact-a5-retry-004-activation-receipt && npm run validate:exact-a5-retry-005-activation-receipt && npm run validate:exact-a5-retry-006-activation-receipt && npm run validate:retry-006-artifact-integrity && npm run validate:capsule-regression && npm run validate:governance",
+  "validate:core": "npm run validate:smoke && npm run validate:runtime-kernel && npm run validate:review-bridge-readonly && npm run validate:durable-audit-store && npm run validate:provider-preflight",
+  "validate:runtime-kernel-audit": "node scripts/validate_runtime_kernel_v0_audit_write.js",
+  "validate:runtime-kernel": "node scripts/validate_runtime_kernel_v0.js && npm run validate:runtime-kernel-audit",
+  "validate:retry-006-artifact-integrity": "node scripts/validate_retry_006_artifact_integrity.js"
+};
+
 const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
+  {
+    id: "evidence_governance_sanitization_slice",
+    files: EXPECTED_P1_1_EVIDENCE_GOVERNANCE_SANITIZATION_SLICE
+  },
   {
     id: "governance_tooling_maintenance_slice_v1",
     files: EXPECTED_GOVERNANCE_TOOLING_MAINTENANCE_SLICE
@@ -3257,6 +3294,39 @@ function packageChangeIsPreviewScriptOnly(currentPackageJson, baselinePackageJso
   };
 }
 
+function packageChangeIsEvidenceGovernanceSanitizationOnly(currentPackageJson, baselinePackageJson, changedFiles) {
+  if (!changedFiles.includes("package.json")) {
+    return { allowed: true, mode: "package_json_unchanged" };
+  }
+
+  const current = cloneJson(currentPackageJson);
+  const baseline = cloneJson(baselinePackageJson);
+  const currentScripts = current.scripts || {};
+  const baselineScripts = baseline.scripts || {};
+  const expectedScripts = EXPECTED_EVIDENCE_GOVERNANCE_SANITIZATION_PACKAGE_SCRIPTS;
+
+  for (const [name, value] of Object.entries(expectedScripts)) {
+    if (currentScripts[name] !== value) {
+      return { allowed: false, mode: `evidence_governance_script_${name}_unexpected` };
+    }
+  }
+
+  for (const name of Object.keys(expectedScripts)) {
+    if (baselineScripts[name] !== undefined) {
+      baselineScripts[name] = currentScripts[name];
+    } else {
+      delete currentScripts[name];
+    }
+  }
+
+  return {
+    allowed: sameJson(current, baseline),
+    mode: sameJson(current, baseline)
+      ? "evidence_governance_validation_scripts_only"
+      : "evidence_governance_package_has_other_changes"
+  };
+}
+
 function buildGovernanceToolingMaintenanceSliceReport({ changedFiles, stagedFiles, behind, currentPackageJson, baselinePackageJson }) {
   const sortedChangedFiles = [...changedFiles].sort();
   const normalizedChangedFiles = normalizeChangedFilesForSliceMatching(sortedChangedFiles);
@@ -3264,7 +3334,9 @@ function buildGovernanceToolingMaintenanceSliceReport({ changedFiles, stagedFile
   const matchingSlice = findMatchingGovernanceToolingSlice(sortedChangedFiles);
   const closestSlice = matchingSlice || closestGovernanceToolingSlice(normalizedChangedFiles);
   const exactSliceMatches = matchingSlice !== null;
-  const packageReport = packageChangeIsPreviewScriptOnly(currentPackageJson, baselinePackageJson, sortedChangedFiles);
+  const packageReport = matchingSlice?.id === "evidence_governance_sanitization_slice"
+    ? packageChangeIsEvidenceGovernanceSanitizationOnly(currentPackageJson, baselinePackageJson, sortedChangedFiles)
+    : packageChangeIsPreviewScriptOnly(currentPackageJson, baselinePackageJson, sortedChangedFiles);
   const fileDiff = closestSlice
     ? diffStringList(normalizedChangedFiles, closestSlice.files)
     : { unexpected_files: normalizedChangedFiles, missing_files: [] };
@@ -3307,6 +3379,17 @@ function governanceToolingMaintenanceSliceSelfCheck() {
   dependencyChangedPackage.dependencies.extra = "2.0.0";
   const arbitraryScriptPackage = cloneJson(baselinePackage);
   arbitraryScriptPackage.scripts["other:new-script"] = "node scripts/other.js";
+  const evidenceGovernancePackage = cloneJson(baselinePackage);
+  Object.assign(
+    evidenceGovernancePackage.scripts,
+    EXPECTED_EVIDENCE_GOVERNANCE_SANITIZATION_PACKAGE_SCRIPTS
+  );
+  const evidenceGovernanceDependencyChangedPackage = cloneJson(evidenceGovernancePackage);
+  evidenceGovernanceDependencyChangedPackage.dependencies.extra = "2.0.0";
+  const evidenceGovernanceArbitraryScriptPackage = cloneJson(evidenceGovernancePackage);
+  evidenceGovernanceArbitraryScriptPackage.scripts["other:new-script"] = "node scripts/other.js";
+  const evidenceGovernanceUnexpectedScriptPackage = cloneJson(evidenceGovernancePackage);
+  evidenceGovernanceUnexpectedScriptPackage.scripts["validate:core"] = "echo unexpected";
 
   const checks = [
     {
@@ -3321,6 +3404,11 @@ function governanceToolingMaintenanceSliceSelfCheck() {
       check: "exact_slice_matches_expected",
       passed: findMatchingGovernanceToolingSlice(EXPECTED_GOVERNANCE_TOOLING_MAINTENANCE_SLICE)?.id
         === "governance_tooling_maintenance_slice_v1"
+    },
+    {
+      check: "exact_slice_matches_evidence_governance_sanitization",
+      passed: findMatchingGovernanceToolingSlice(EXPECTED_P1_1_EVIDENCE_GOVERNANCE_SANITIZATION_SLICE)?.id
+        === "evidence_governance_sanitization_slice"
     },
     {
       check: "exact_slice_matches_v0_3_1_plan",
@@ -4086,6 +4174,12 @@ function governanceToolingMaintenanceSliceSelfCheck() {
       passed: findMatchingGovernanceToolingSlice(EXPECTED_GOVERNANCE_TOOLING_MAINTENANCE_SLICE.slice(1)) === null
     },
     {
+      check: "evidence_governance_slice_rejects_missing_file",
+      passed: findMatchingGovernanceToolingSlice(
+        EXPECTED_P1_1_EVIDENCE_GOVERNANCE_SANITIZATION_SLICE.slice(1)
+      ) === null
+    },
+    {
       check: "package_allows_preview_script_only",
       passed: packageChangeIsPreviewScriptOnly(previewOnlyPackage, baselinePackage, ["package.json"]).allowed
     },
@@ -4096,6 +4190,38 @@ function governanceToolingMaintenanceSliceSelfCheck() {
     {
       check: "package_rejects_arbitrary_script_change",
       passed: !packageChangeIsPreviewScriptOnly(arbitraryScriptPackage, baselinePackage, ["package.json"]).allowed
+    },
+    {
+      check: "evidence_governance_package_allows_expected_validation_scripts_only",
+      passed: packageChangeIsEvidenceGovernanceSanitizationOnly(
+        evidenceGovernancePackage,
+        baselinePackage,
+        ["package.json"]
+      ).allowed
+    },
+    {
+      check: "evidence_governance_package_rejects_dependency_change",
+      passed: !packageChangeIsEvidenceGovernanceSanitizationOnly(
+        evidenceGovernanceDependencyChangedPackage,
+        baselinePackage,
+        ["package.json"]
+      ).allowed
+    },
+    {
+      check: "evidence_governance_package_rejects_arbitrary_script_change",
+      passed: !packageChangeIsEvidenceGovernanceSanitizationOnly(
+        evidenceGovernanceArbitraryScriptPackage,
+        baselinePackage,
+        ["package.json"]
+      ).allowed
+    },
+    {
+      check: "evidence_governance_package_rejects_unexpected_script_value",
+      passed: !packageChangeIsEvidenceGovernanceSanitizationOnly(
+        evidenceGovernanceUnexpectedScriptPackage,
+        baselinePackage,
+        ["package.json"]
+      ).allowed
     }
   ];
 
@@ -4233,9 +4359,12 @@ module.exports = {
   EXPECTED_V0_6_73AH_CURRENT_HEAD_FINAL_PRE_PROVIDER_GO_NO_GO_SLICE,
   EXPECTED_V0_6_73AG_TO_AH_REMOTE_SYNC_AND_CURRENT_HEAD_GO_NO_GO_SLICE,
   EXPECTED_V0_6_73AG_TO_AI_REMOTE_SYNC_CURRENT_HEAD_AND_ONE_SHOT_BLOCKED_SLICE,
+  EXPECTED_P1_1_EVIDENCE_GOVERNANCE_SANITIZATION_SLICE,
+  EXPECTED_EVIDENCE_GOVERNANCE_SANITIZATION_PACKAGE_SCRIPTS,
   GOVERNANCE_TOOLING_ALLOWED_SLICES,
   buildGovernanceToolingMaintenanceSliceReport,
   fileAllowedInGovernanceToolingSlice,
   governanceToolingMaintenanceSliceSelfCheck,
-  packageChangeIsPreviewScriptOnly
+  packageChangeIsPreviewScriptOnly,
+  packageChangeIsEvidenceGovernanceSanitizationOnly
 };

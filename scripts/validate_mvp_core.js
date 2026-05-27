@@ -358,9 +358,39 @@ safeCheck("exact_a5_retry_006_activation_receipt", () => {
     result.images_created === 1 &&
     typeof result.image_file === "string" &&
     result.image_file.startsWith("runs/real_generation/v0_6_73_real_vcp_agent_generation_retry_006/") &&
+    result.artifact_sha256 === "b75492195a390ab5ba9bd18d909db67dbf389ac03ee4d8a6b35c7249c532d446" &&
+    result.artifact_mime_type === "image/jpeg" &&
+    result.artifact_width === 1920 &&
+    result.artifact_height === 2048 &&
+    result.artifact_git_tracked === true &&
+    result.artifact_git_ignored === false &&
+    result.public_absolute_paths_absent === true &&
     result.output_scope_violation === false &&
     result.review_eligible === true &&
     result.further_retry_allowed === false;
+});
+
+safeCheck("retry_006_artifact_integrity", () => {
+  const result = parseJson(runNode(["scripts/validate_retry_006_artifact_integrity.js"]));
+  return result.passed === true &&
+    result.image_ref === "runs/real_generation/v0_6_73_real_vcp_agent_generation_retry_006/image/doubaogen/67b7aa65-4d90-4af5-8447-7194c7f017d1.png" &&
+    result.bytes === 131139 &&
+    result.sha256 === "b75492195a390ab5ba9bd18d909db67dbf389ac03ee4d8a6b35c7249c532d446" &&
+    result.mime_type === "image/jpeg" &&
+    result.magic_number === "ffd8ffe0" &&
+    result.actual_format === "jpeg" &&
+    result.width === 1920 &&
+    result.height === 2048 &&
+    result.extension === ".png" &&
+    result.extension_mismatch_recorded === true &&
+    result.git_tracked === true &&
+    result.git_ignored === false &&
+    result.public_absolute_paths_absent === true &&
+    result.provider_contact_performed === false &&
+    result.plugin_call_performed === false &&
+    result.api_call_performed === false &&
+    result.image_generation_performed === false &&
+    result.secret_value_read_performed === false;
 });
 
 safeCheck("metadata_only_accepted_sample_retry_006", () => {

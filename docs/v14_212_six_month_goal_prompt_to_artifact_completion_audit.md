@@ -93,7 +93,7 @@ success_criteria:
       - tests/schema_examples/v14_168_three_sample_dashboard_evidence_alignment.example.json
       - accepted_samples/accepted_sample_registry.yaml
     observed:
-      full_recoverable_accepted_sample_count: 4
+      full_recoverable_accepted_sample_count: 5
       remaining_full_recoverable_sample_gap: 0
       third_accepted_sample: accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001
       blocker: null
@@ -123,6 +123,8 @@ success_criteria:
         - accepted_womens_resort_relaxed_knit_codex_v2_001
         - accepted_fashion_lifestyle_woven_crossbody_bag_codex_v14_161_001
         - accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001
+        - accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001
+        - neutral_red_apple_seedream5_retry_006
       third_registration_blocker: null
 
   - id: review_console_static_productization
