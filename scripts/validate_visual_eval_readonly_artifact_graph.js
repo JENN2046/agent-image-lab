@@ -50,18 +50,17 @@ const metadataAccumulationSubtreeRoles = new Set([
   "readonly_metadata_accumulation_queue_query",
   "readonly_metadata_accumulation_queue_surface_snapshot",
 ]);
-const projectionContractRoles = [
-  "readonly_consumer_payload",
-  "readonly_collection_consumer_payload",
-  "readonly_collection_query_payload",
-  "readonly_detail_view",
-  "readonly_detail_navigation",
-  "readonly_session_drilldown",
-  "readonly_metadata_accumulation_queue",
-  "readonly_metadata_accumulation_queue_consumer",
-  "readonly_metadata_accumulation_queue_query",
-  "readonly_metadata_accumulation_queue_surface_snapshot",
-];
+const expectedSemanticClasses = ["canonical_source", "projection_artifact", "structural_artifact"];
+const canonicalSourceRoles = new Set([
+  "review_result_protocol",
+  "failure_taxonomy",
+  "metadata_accumulation_contract",
+]);
+const structuralArtifactRoles = new Set([
+  "readonly_review_collection",
+  "readonly_review_workspace_corpus",
+]);
+const projectionContractRoles = expectedRoles.filter((role) => !canonicalSourceRoles.has(role) && !structuralArtifactRoles.has(role));
 const projectionSemanticFields = new Set([
   "outcome",
   "summary",
@@ -313,6 +312,53 @@ const expectedNegativeCases = [
     mutate(graph) {
       graph.catalog.projection_contracts.readonly_metadata_accumulation_queue.canonical_source_refs.source_bridge_payload =
         "readonly_review_bundle";
+    },
+  },
+  {
+    case_id: "artifact_missing_semantic_class",
+    expected_failure_code: "artifact_semantic_class_present",
+    mutate(graph) {
+      delete graph.catalog.artifact_entries.find((entry) => entry.artifact_role === "readonly_detail_view").semantic_class;
+    },
+  },
+  {
+    case_id: "projection_artifact_missing_contract",
+    expected_failure_code: "projection_contract_coverage_complete",
+    mutate(graph) {
+      delete graph.catalog.projection_contracts.readonly_surface_snapshot;
+    },
+  },
+  {
+    case_id: "projection_artifact_missing_source_refs",
+    expected_failure_code: "projection_artifact_requires_canonical_source_refs",
+    mutate(graph) {
+      graph.catalog.projection_contracts.readonly_detail_view.canonical_source_refs = {};
+    },
+  },
+  {
+    case_id: "canonical_artifact_with_projection_contract",
+    expected_failure_code: "canonical_artifact_must_not_define_projection_contract",
+    mutate(graph) {
+      graph.catalog.projection_contracts.review_result_protocol = {
+        canonical_source_refs: {},
+        allowed_projection_fields: [],
+        forbidden_owned_fields: [],
+      };
+    },
+  },
+  {
+    case_id: "structural_artifact_without_exempt_reason",
+    expected_failure_code: "projection_contract_exempt_reason_required",
+    mutate(graph) {
+      delete graph.catalog.artifact_entries.find((entry) => entry.artifact_role === "readonly_review_collection").projection_contract_exempt_reason;
+    },
+  },
+  {
+    case_id: "semantic_class_role_mismatch",
+    expected_failure_code: "artifact_semantic_class_matches_role_expectation",
+    mutate(graph) {
+      graph.catalog.artifact_entries.find((entry) => entry.artifact_role === "readonly_review_collection").semantic_class =
+        "projection_artifact";
     },
   },
 ];
@@ -603,6 +649,71 @@ function validateProjectionContracts(graph, ctx) {
   ctx.addResult("projection_contract_allowed_projection_fields", unexpectedProjectionMatches.length === 0, unexpectedProjectionMatches.join("; "));
 }
 
+function validateSemanticClassCoverage(graph, ctx) {
+  const entries = graph.catalog.artifact_entries || [];
+  const contracts = graph.catalog.projection_contracts || {};
+  const classMissing = [];
+  const classInvalid = [];
+  const roleMismatches = [];
+  const projectionCoverageMismatches = [];
+  const projectionSourceRefMismatches = [];
+  const canonicalContractMismatches = [];
+  const structuralExemptMismatches = [];
+  const structuralSemanticMismatches = [];
+
+  for (const entry of entries) {
+    const role = entry.artifact_role;
+    const semanticClass = entry.semantic_class;
+    if (!semanticClass) classMissing.push(role);
+    if (semanticClass && !expectedSemanticClasses.includes(semanticClass)) {
+      classInvalid.push(`${role}:${semanticClass}`);
+    }
+
+    const expectedClass = canonicalSourceRoles.has(role)
+      ? "canonical_source"
+      : structuralArtifactRoles.has(role)
+        ? "structural_artifact"
+        : "projection_artifact";
+    if (semanticClass !== expectedClass) roleMismatches.push(`${role}:${semanticClass} expected ${expectedClass}`);
+
+    if (semanticClass === "projection_artifact") {
+      const contract = contracts[role];
+      if (!contract) {
+        projectionCoverageMismatches.push(role);
+      } else if (!contract.canonical_source_refs || Object.keys(contract.canonical_source_refs).length === 0) {
+        projectionSourceRefMismatches.push(role);
+      }
+    }
+
+    if (semanticClass === "canonical_source" && contracts[role]) {
+      canonicalContractMismatches.push(role);
+    }
+
+    if (semanticClass === "structural_artifact") {
+      if (typeof entry.projection_contract_exempt_reason !== "string" || entry.projection_contract_exempt_reason.length < 12) {
+        structuralExemptMismatches.push(role);
+      }
+      const semanticFields = [];
+      walk(graph.artifacts[role]?.data, (value, pathParts) => {
+        if (!value || Array.isArray(value) || typeof value !== "object") return;
+        for (const key of Object.keys(value)) {
+          if (projectionSemanticFields.has(key)) semanticFields.push(`${role}:${pathParts.concat(key).join(".")}`);
+        }
+      });
+      if (semanticFields.length > 0) structuralSemanticMismatches.push(...semanticFields);
+    }
+  }
+
+  ctx.addResult("artifact_semantic_class_present", classMissing.length === 0, classMissing.join("; "));
+  ctx.addResult("artifact_semantic_class_valid", classInvalid.length === 0, classInvalid.join("; "));
+  ctx.addResult("artifact_semantic_class_matches_role_expectation", roleMismatches.length === 0, roleMismatches.join("; "));
+  ctx.addResult("projection_contract_coverage_complete", projectionCoverageMismatches.length === 0, projectionCoverageMismatches.join("; "));
+  ctx.addResult("projection_artifact_requires_canonical_source_refs", projectionSourceRefMismatches.length === 0, projectionSourceRefMismatches.join("; "));
+  ctx.addResult("canonical_artifact_must_not_define_projection_contract", canonicalContractMismatches.length === 0, canonicalContractMismatches.join("; "));
+  ctx.addResult("projection_contract_exempt_reason_required", structuralExemptMismatches.length === 0, structuralExemptMismatches.join("; "));
+  ctx.addResult("structural_artifact_must_not_own_semantics", structuralSemanticMismatches.length === 0, structuralSemanticMismatches.join("; "));
+}
+
 function collectReviewObjects(graph) {
   const objects = [];
   for (const [role, artifact] of Object.entries(graph.artifacts)) {
@@ -891,6 +1002,7 @@ function validateGraph(graph) {
   validateSourceRelations(graph, ctx);
   validateReviewConsistency(graph, ctx);
   validateDerivedOwnership(graph, ctx);
+  validateSemanticClassCoverage(graph, ctx);
   validateProjectionContracts(graph, ctx);
   validateSelectedPatchThread(graph, ctx);
   validateBoundaries(graph, ctx);
@@ -903,7 +1015,7 @@ function collectFailureCodes(fn) {
 }
 
 function validateNegativeCases(baseGraph, ctx) {
-  ctx.addResult("graph_negative_cases_count_expected", expectedNegativeCases.length === 26, expectedNegativeCases.length);
+  ctx.addResult("graph_negative_cases_count_expected", expectedNegativeCases.length === 32, expectedNegativeCases.length);
   for (const negativeCase of expectedNegativeCases) {
     const graph = deepClone(baseGraph);
     negativeCase.mutate(graph);

@@ -1,5 +1,77 @@
 ---
 
+## Checkpoint - Readonly Projection Contract Coverage Hardening
+
+```text
+phase: readonly_projection_contract_coverage_hardening_20260527
+status: completed_validated_local_projection_contract_coverage
+result: COMPLETED_VALIDATED
+mode: Green local catalog and graph validator coverage hardening
+summary: Extended the readonly artifact catalog from partial projection contracts to full 24-artifact semantic classification. The catalog now marks each artifact as canonical_source, projection_artifact, or structural_artifact; projection contracts cover all 19 projection artifacts; structural artifacts include explicit exempt reasons. The graph validator now fails closed on missing/invalid semantic class, role/class mismatch, projection contract coverage gaps, missing projection source refs, canonical artifacts with projection contracts, missing structural exempt reasons, and structural artifacts that own semantic fields.
+changed_files_current_task:
+  - tests/schema_examples/visual_eval_readonly_review_artifact_catalog.example.json
+  - scripts/validate_visual_eval_readonly_artifact_graph.js
+  - .agent_board/CHECKPOINT.md
+semantic_classes_added:
+  - canonical_source: 3 artifacts
+  - projection_artifact: 19 artifacts
+  - structural_artifact: 2 artifacts
+projection_contracts_completed:
+  - bridge_readable_payload
+  - readonly_review_bundle
+  - readonly_consumer_payload
+  - readonly_collection_consumer_payload
+  - readonly_collection_query_payload
+  - readonly_surface_snapshot
+  - readonly_detail_view
+  - readonly_detail_navigation
+  - readonly_session_drilldown
+  - readonly_metadata_accumulation_queue
+  - readonly_metadata_accumulation_queue_consumer
+  - readonly_metadata_accumulation_queue_query
+  - readonly_metadata_accumulation_queue_surface_snapshot
+  - readonly_metadata_accumulation_queue_detail_view
+  - readonly_metadata_accumulation_queue_detail_navigation
+  - readonly_review_workspace
+  - readonly_review_workspace_case_matrix
+  - readonly_review_corpus_renderer
+  - review_console_readonly_corpus_renderer_static_handoff
+exempt_reasons_added:
+  - readonly_review_collection
+  - readonly_review_workspace_corpus
+new_negative_cases_verified:
+  - artifact_missing_semantic_class
+  - projection_artifact_missing_contract
+  - projection_artifact_missing_source_refs
+  - canonical_artifact_with_projection_contract
+  - structural_artifact_without_exempt_reason
+  - semantic_class_role_mismatch
+validation_run:
+  - node --check scripts\validate_visual_eval_readonly_artifact_graph.js: passed
+  - node scripts\validate_visual_eval_readonly_artifact_graph.js: passed
+  - node scripts\validate_visual_eval_readonly_review_artifact_catalog.js: passed
+  - git diff --check: passed with CRLF normalization warnings
+  - git status --short --branch: master...origin/master [ahead 3], dirty only current task files before checkpoint
+runtime_execution_performed: false
+fetch_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+accepted_samples_write_performed: false
+production_candidate_created: false
+memory_written: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+dependency_change_performed: false
+commit_performed: false
+push_performed: false
+tag_release_deploy_performed: false
+next_phase_started: false
+```
+
+---
+
 ## Checkpoint - Readonly Projection Contract Registry Hardening
 
 ```text

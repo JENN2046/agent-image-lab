@@ -14,6 +14,55 @@
     "forbidden_actions_must_remain_false": true
   },
   "projection_contracts": {
+    "bridge_readable_payload": {
+      "canonical_source_refs": {
+        "source_refs.review_result_protocol": "review_result_protocol",
+        "source_refs.taxonomy": "failure_taxonomy",
+        "source_refs.metadata_accumulation": "metadata_accumulation_contract"
+      },
+      "allowed_projection_fields": [
+        "metadata_accumulation",
+        "taxonomy_ref",
+        "outcome",
+        "summary",
+        "failure_tags",
+        "taxonomy_refs",
+        "never_production",
+        "blocking_watch_items",
+        "next_review_action"
+      ],
+      "forbidden_owned_fields": [
+        "reasons",
+        "failure_taxonomy",
+        "metadata_actions",
+        "metadata_accumulation_action"
+      ]
+    },
+    "readonly_review_bundle": {
+      "canonical_source_refs": {
+        "source_refs.review_result_protocol": "review_result_protocol",
+        "source_refs.taxonomy": "failure_taxonomy",
+        "source_refs.metadata_accumulation": "metadata_accumulation_contract",
+        "source_refs.bridge_payload": "bridge_readable_payload"
+      },
+      "allowed_projection_fields": [
+        "metadata_accumulation",
+        "outcome",
+        "taxonomy_ref",
+        "next_review_action"
+      ],
+      "forbidden_owned_fields": [
+        "summary",
+        "reasons",
+        "failure_tags",
+        "failure_taxonomy",
+        "taxonomy_refs",
+        "blocking_watch_items",
+        "metadata_actions",
+        "metadata_accumulation_action",
+        "never_production"
+      ]
+    },
     "readonly_consumer_payload": {
       "canonical_source_refs": {
         "source_bundle": "readonly_review_bundle"
@@ -75,6 +124,29 @@
         "metadata_actions",
         "metadata_accumulation_action",
         "next_review_action",
+        "never_production"
+      ]
+    },
+    "readonly_surface_snapshot": {
+      "canonical_source_refs": {
+        "source_query": "readonly_collection_query_payload",
+        "source_collection_consumer": "readonly_collection_consumer_payload"
+      },
+      "allowed_projection_fields": [
+        "outcome",
+        "summary",
+        "blocking_watch_items",
+        "next_review_action",
+        "metadata_accumulation_action"
+      ],
+      "forbidden_owned_fields": [
+        "reasons",
+        "failure_tags",
+        "failure_taxonomy",
+        "taxonomy_ref",
+        "taxonomy_refs",
+        "metadata_accumulation",
+        "metadata_actions",
         "never_production"
       ]
     },
@@ -237,6 +309,144 @@
         "metadata_accumulation_action",
         "never_production"
       ]
+    },
+    "readonly_metadata_accumulation_queue_detail_view": {
+      "canonical_source_refs": {
+        "source_surface_snapshot": "readonly_metadata_accumulation_queue_surface_snapshot"
+      },
+      "allowed_projection_fields": [
+        "outcome",
+        "next_review_action",
+        "metadata_actions",
+        "failure_tags"
+      ],
+      "forbidden_owned_fields": [
+        "summary",
+        "reasons",
+        "failure_taxonomy",
+        "blocking_watch_items",
+        "taxonomy_ref",
+        "taxonomy_refs",
+        "metadata_accumulation",
+        "metadata_accumulation_action",
+        "never_production"
+      ]
+    },
+    "readonly_metadata_accumulation_queue_detail_navigation": {
+      "canonical_source_refs": {
+        "source_surface_snapshot": "readonly_metadata_accumulation_queue_surface_snapshot"
+      },
+      "allowed_projection_fields": [
+        "outcome",
+        "next_review_action",
+        "metadata_actions",
+        "failure_tags"
+      ],
+      "forbidden_owned_fields": [
+        "summary",
+        "reasons",
+        "failure_taxonomy",
+        "blocking_watch_items",
+        "taxonomy_ref",
+        "taxonomy_refs",
+        "metadata_accumulation",
+        "metadata_accumulation_action",
+        "never_production"
+      ]
+    },
+    "readonly_review_workspace": {
+      "canonical_source_refs": {
+        "source_session_drilldown": "readonly_session_drilldown",
+        "source_metadata_queue_navigation": "readonly_metadata_accumulation_queue_detail_navigation"
+      },
+      "allowed_projection_fields": [
+        "outcome",
+        "summary",
+        "next_review_action",
+        "taxonomy_ref",
+        "taxonomy_refs",
+        "failure_tags",
+        "never_production",
+        "blocking_watch_items"
+      ],
+      "forbidden_owned_fields": [
+        "reasons",
+        "failure_taxonomy",
+        "metadata_accumulation",
+        "metadata_actions",
+        "metadata_accumulation_action"
+      ]
+    },
+    "readonly_review_workspace_case_matrix": {
+      "canonical_source_refs": {
+        "source_workspace": "readonly_review_workspace",
+        "source_collection_consumer": "readonly_collection_consumer_payload",
+        "source_metadata_queue_navigation": "readonly_metadata_accumulation_queue_detail_navigation"
+      },
+      "allowed_projection_fields": [
+        "outcome",
+        "summary",
+        "reasons",
+        "failure_taxonomy",
+        "blocking_watch_items",
+        "next_review_action",
+        "metadata_accumulation_action"
+      ],
+      "forbidden_owned_fields": [
+        "failure_tags",
+        "taxonomy_ref",
+        "taxonomy_refs",
+        "metadata_accumulation",
+        "metadata_actions",
+        "never_production"
+      ]
+    },
+    "readonly_review_corpus_renderer": {
+      "canonical_source_refs": {
+        "source_corpus": "readonly_review_workspace_corpus",
+        "source_case_matrix": "readonly_review_workspace_case_matrix"
+      },
+      "allowed_projection_fields": [
+        "outcome",
+        "summary",
+        "reasons",
+        "blocking_watch_items",
+        "next_review_action",
+        "metadata_accumulation_action"
+      ],
+      "forbidden_owned_fields": [
+        "failure_tags",
+        "failure_taxonomy",
+        "taxonomy_ref",
+        "taxonomy_refs",
+        "metadata_accumulation",
+        "metadata_actions",
+        "never_production"
+      ]
+    },
+    "review_console_readonly_corpus_renderer_static_handoff": {
+      "canonical_source_refs": {
+        "source_renderer_ref": "readonly_review_corpus_renderer",
+        "source_corpus_ref": "readonly_review_workspace_corpus",
+        "source_case_matrix_ref": "readonly_review_workspace_case_matrix"
+      },
+      "allowed_projection_fields": [
+        "outcome",
+        "summary",
+        "reasons",
+        "blocking_watch_items",
+        "next_review_action",
+        "metadata_accumulation_action"
+      ],
+      "forbidden_owned_fields": [
+        "failure_tags",
+        "failure_taxonomy",
+        "taxonomy_ref",
+        "taxonomy_refs",
+        "metadata_accumulation",
+        "metadata_actions",
+        "never_production"
+      ]
     }
   },
   "artifact_entries": [
@@ -247,7 +457,8 @@
       "path": "tests/schema_examples/visual_eval_review_result_protocol.example.json",
       "validator": "scripts/validate_visual_eval_review_result_protocol.js",
       "canonical": true,
-      "readonly_consumable": true
+      "readonly_consumable": true,
+      "semantic_class": "canonical_source"
     },
     {
       "artifact_id": "visual_eval_failure_taxonomy_v1_canonical_001",
@@ -256,7 +467,8 @@
       "path": "tests/schema_examples/visual_eval_failure_taxonomy.example.json",
       "validator": "scripts/validate_visual_eval_review_result_protocol.js",
       "canonical": true,
-      "readonly_consumable": true
+      "readonly_consumable": true,
+      "semantic_class": "canonical_source"
     },
     {
       "artifact_id": "visual_eval_metadata_accumulation_v1_synthetic_001",
@@ -265,7 +477,8 @@
       "path": "tests/schema_examples/visual_eval_metadata_accumulation.example.json",
       "validator": "scripts/validate_visual_eval_review_result_protocol.js",
       "canonical": true,
-      "readonly_consumable": true
+      "readonly_consumable": true,
+      "semantic_class": "canonical_source"
     },
     {
       "artifact_id": "visual_eval_review_result_bridge_payload_v1_synthetic_001",
@@ -274,7 +487,8 @@
       "path": "tests/schema_examples/visual_eval_review_result_review_bridge_payload.example.json",
       "validator": "scripts/validate_visual_eval_review_result_review_bridge_wiring.js",
       "canonical": true,
-      "readonly_consumable": true
+      "readonly_consumable": true,
+      "semantic_class": "projection_artifact"
     },
     {
       "artifact_id": "visual_eval_readonly_review_bundle_v1_synthetic_001",
@@ -283,7 +497,8 @@
       "path": "tests/schema_examples/visual_eval_readonly_review_bundle.example.json",
       "validator": "scripts/validate_visual_eval_readonly_review_bundle.js",
       "canonical": true,
-      "readonly_consumable": true
+      "readonly_consumable": true,
+      "semantic_class": "projection_artifact"
     },
     {
       "artifact_id": "visual_eval_readonly_review_bundle_consumer_v1_synthetic_001",
@@ -292,7 +507,8 @@
       "path": "tests/schema_examples/visual_eval_readonly_review_bundle_consumer.example.json",
       "validator": "scripts/validate_visual_eval_readonly_review_bundle_consumer.js",
       "canonical": true,
-      "readonly_consumable": true
+      "readonly_consumable": true,
+      "semantic_class": "projection_artifact"
     },
     {
       "artifact_id": "visual_eval_readonly_review_collection_v1_synthetic_001",
@@ -301,7 +517,9 @@
       "path": "tests/schema_examples/visual_eval_readonly_review_collection.example.json",
       "validator": "scripts/validate_visual_eval_readonly_review_collection_consumer.js",
       "canonical": true,
-      "readonly_consumable": true
+      "readonly_consumable": true,
+      "semantic_class": "structural_artifact",
+      "projection_contract_exempt_reason": "collection envelope only; semantic review rows remain in bundle and consumer projection artifacts"
     },
     {
       "artifact_id": "visual_eval_readonly_review_collection_consumer_v1_synthetic_001",
@@ -310,7 +528,8 @@
       "path": "tests/schema_examples/visual_eval_readonly_review_collection_consumer.example.json",
       "validator": "scripts/validate_visual_eval_readonly_review_collection_consumer.js",
       "canonical": true,
-      "readonly_consumable": true
+      "readonly_consumable": true,
+      "semantic_class": "projection_artifact"
     },
     {
       "artifact_id": "visual_eval_readonly_review_collection_query_v1_synthetic_001",
@@ -319,7 +538,8 @@
       "path": "tests/schema_examples/visual_eval_readonly_review_collection_query.example.json",
       "validator": "scripts/validate_visual_eval_readonly_review_collection_query.js",
       "canonical": true,
-      "readonly_consumable": true
+      "readonly_consumable": true,
+      "semantic_class": "projection_artifact"
     },
     {
       "artifact_id": "visual_eval_readonly_review_surface_snapshot_v1_synthetic_001",
@@ -328,7 +548,8 @@
       "path": "tests/schema_examples/visual_eval_readonly_review_surface_snapshot.example.json",
       "validator": "scripts/validate_visual_eval_readonly_review_surface_snapshot.js",
       "canonical": true,
-      "readonly_consumable": true
+      "readonly_consumable": true,
+      "semantic_class": "projection_artifact"
     },
     {
       "artifact_id": "visual_eval_readonly_review_detail_view_v1_synthetic_001",
@@ -337,7 +558,8 @@
       "path": "tests/schema_examples/visual_eval_readonly_review_detail_view.example.json",
       "validator": "scripts/validate_visual_eval_readonly_review_detail_view.js",
       "canonical": true,
-      "readonly_consumable": true
+      "readonly_consumable": true,
+      "semantic_class": "projection_artifact"
     },
     {
       "artifact_id": "visual_eval_readonly_review_detail_navigation_v1_synthetic_001",
@@ -346,7 +568,8 @@
       "path": "tests/schema_examples/visual_eval_readonly_review_detail_navigation.example.json",
       "validator": "scripts/validate_visual_eval_readonly_review_detail_navigation.js",
       "canonical": true,
-      "readonly_consumable": true
+      "readonly_consumable": true,
+      "semantic_class": "projection_artifact"
     },
     {
       "artifact_id": "visual_eval_readonly_review_session_drilldown_v1_synthetic_001",
@@ -355,7 +578,8 @@
       "path": "tests/schema_examples/visual_eval_readonly_review_session_drilldown.example.json",
       "validator": "scripts/validate_visual_eval_readonly_review_session_drilldown.js",
       "canonical": true,
-      "readonly_consumable": true
+      "readonly_consumable": true,
+      "semantic_class": "projection_artifact"
     },
     {
       "artifact_id": "visual_eval_readonly_metadata_accumulation_queue_v1_synthetic_001",
@@ -364,7 +588,8 @@
       "path": "tests/schema_examples/visual_eval_readonly_metadata_accumulation_queue.example.json",
       "validator": "scripts/validate_visual_eval_readonly_metadata_accumulation_queue.js",
       "canonical": true,
-      "readonly_consumable": true
+      "readonly_consumable": true,
+      "semantic_class": "projection_artifact"
     },
     {
       "artifact_id": "visual_eval_readonly_metadata_accumulation_queue_consumer_v1_synthetic_001",
@@ -373,7 +598,8 @@
       "path": "tests/schema_examples/visual_eval_readonly_metadata_accumulation_queue_consumer.example.json",
       "validator": "scripts/validate_visual_eval_readonly_metadata_accumulation_queue_consumer.js",
       "canonical": true,
-      "readonly_consumable": true
+      "readonly_consumable": true,
+      "semantic_class": "projection_artifact"
     },
     {
       "artifact_id": "visual_eval_readonly_metadata_accumulation_queue_query_v1_synthetic_001",
@@ -382,7 +608,8 @@
       "path": "tests/schema_examples/visual_eval_readonly_metadata_accumulation_queue_query.example.json",
       "validator": "scripts/validate_visual_eval_readonly_metadata_accumulation_queue_query.js",
       "canonical": true,
-      "readonly_consumable": true
+      "readonly_consumable": true,
+      "semantic_class": "projection_artifact"
     },
     {
       "artifact_id": "visual_eval_readonly_metadata_accumulation_queue_surface_snapshot_v1_synthetic_001",
@@ -391,7 +618,8 @@
       "path": "tests/schema_examples/visual_eval_readonly_metadata_accumulation_queue_surface_snapshot.example.json",
       "validator": "scripts/validate_visual_eval_readonly_metadata_accumulation_queue_surface_snapshot.js",
       "canonical": true,
-      "readonly_consumable": true
+      "readonly_consumable": true,
+      "semantic_class": "projection_artifact"
     },
     {
       "artifact_id": "visual_eval_readonly_metadata_accumulation_queue_detail_view_v1_synthetic_001",
@@ -400,7 +628,8 @@
       "path": "tests/schema_examples/visual_eval_readonly_metadata_accumulation_queue_detail_view.example.json",
       "validator": "scripts/validate_visual_eval_readonly_metadata_accumulation_queue_detail_view.js",
       "canonical": true,
-      "readonly_consumable": true
+      "readonly_consumable": true,
+      "semantic_class": "projection_artifact"
     },
     {
       "artifact_id": "visual_eval_readonly_metadata_accumulation_queue_detail_navigation_v1_synthetic_001",
@@ -409,7 +638,8 @@
       "path": "tests/schema_examples/visual_eval_readonly_metadata_accumulation_queue_detail_navigation.example.json",
       "validator": "scripts/validate_visual_eval_readonly_metadata_accumulation_queue_detail_navigation.js",
       "canonical": true,
-      "readonly_consumable": true
+      "readonly_consumable": true,
+      "semantic_class": "projection_artifact"
     },
     {
       "artifact_id": "visual_eval_readonly_review_workspace_v1_synthetic_001",
@@ -418,7 +648,8 @@
       "path": "tests/schema_examples/visual_eval_readonly_review_workspace.example.json",
       "validator": "scripts/validate_visual_eval_readonly_review_workspace.js",
       "canonical": true,
-      "readonly_consumable": true
+      "readonly_consumable": true,
+      "semantic_class": "projection_artifact"
     },
     {
       "artifact_id": "visual_eval_readonly_review_workspace_case_matrix_v1_synthetic_001",
@@ -427,7 +658,8 @@
       "path": "tests/schema_examples/visual_eval_readonly_review_workspace_case_matrix.example.json",
       "validator": "scripts/validate_visual_eval_readonly_review_workspace_case_matrix.js",
       "canonical": true,
-      "readonly_consumable": true
+      "readonly_consumable": true,
+      "semantic_class": "projection_artifact"
     },
     {
       "artifact_id": "visual_eval_readonly_review_workspace_corpus_v1_synthetic_001",
@@ -436,7 +668,9 @@
       "path": "tests/schema_examples/visual_eval_readonly_review_workspace_corpus.example.json",
       "validator": "scripts/validate_visual_eval_readonly_review_workspace_corpus.js",
       "canonical": true,
-      "readonly_consumable": true
+      "readonly_consumable": true,
+      "semantic_class": "structural_artifact",
+      "projection_contract_exempt_reason": "corpus membership envelope only; semantic case rows remain in matrix and renderer projection artifacts"
     },
     {
       "artifact_id": "visual_eval_readonly_review_corpus_renderer_v1_synthetic_001",
@@ -445,7 +679,8 @@
       "path": "tests/schema_examples/visual_eval_readonly_review_corpus_renderer.example.json",
       "validator": "scripts/validate_visual_eval_readonly_review_corpus_renderer.js",
       "canonical": true,
-      "readonly_consumable": true
+      "readonly_consumable": true,
+      "semantic_class": "projection_artifact"
     },
     {
       "artifact_id": "visual_eval_review_console_readonly_corpus_renderer_static_handoff_v1_synthetic_001",
@@ -454,7 +689,8 @@
       "path": "tests/schema_examples/visual_eval_review_console_readonly_corpus_renderer_static_handoff.example.json",
       "validator": "scripts/validate_visual_eval_review_console_readonly_corpus_renderer.js",
       "canonical": true,
-      "readonly_consumable": true
+      "readonly_consumable": true,
+      "semantic_class": "projection_artifact"
     }
   ],
   "composition_order": [
