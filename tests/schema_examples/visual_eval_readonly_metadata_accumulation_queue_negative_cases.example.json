@@ -1,0 +1,56 @@
+{
+  "fixture_type": "metadata_only_visual_eval_readonly_metadata_accumulation_queue_negative_cases",
+  "source_queue": "tests/schema_examples/visual_eval_readonly_metadata_accumulation_queue.example.json",
+  "negative_cases": [
+    {
+      "case_id": "missing_patch_plan_queue",
+      "description": "Patch outcome must stay visible in the patch-plan-only queue.",
+      "mutation": {
+        "operation": "set_field",
+        "field": "queues.patch_plan_only",
+        "value": []
+      },
+      "expected_failure_code": "queue_patch_plan_count_matches"
+    },
+    {
+      "case_id": "illegal_next_review_action",
+      "description": "Next review actions must stay within the canonical accumulation contract.",
+      "mutation": {
+        "operation": "set_field",
+        "field": "queues.next_review_actions.1.next_review_action",
+        "value": "write_to_memory_now"
+      },
+      "expected_failure_code": "queue_next_action_allowed"
+    },
+    {
+      "case_id": "selected_queue_item_unmarked",
+      "description": "Selected review_result_id must remain marked inside the patch queue.",
+      "mutation": {
+        "operation": "set_field",
+        "field": "queues.patch_plan_only.0.selected",
+        "value": false
+      },
+      "expected_failure_code": "queue_selected_patch_item_present"
+    },
+    {
+      "case_id": "queue_guard_memory_true",
+      "description": "Metadata accumulation queue must not open memory writes.",
+      "mutation": {
+        "operation": "set_field",
+        "field": "guard.memory_write_performed",
+        "value": true
+      },
+      "expected_failure_code": "queue_guard_memory_write_performed_false"
+    },
+    {
+      "case_id": "absolute_local_contract_source",
+      "description": "Accumulation contract source must stay repo-relative.",
+      "mutation": {
+        "operation": "set_field",
+        "field": "source_accumulation_contract",
+        "value": "<synthetic-windows-absolute-path>\\metadata_accumulation.json"
+      },
+      "expected_failure_code": "queue_no_absolute_or_loopback"
+    }
+  ]
+}

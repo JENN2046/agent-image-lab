@@ -130,6 +130,15 @@
       "validator": "scripts/validate_visual_eval_readonly_review_session_drilldown.js",
       "canonical": true,
       "readonly_consumable": true
+    },
+    {
+      "artifact_id": "visual_eval_readonly_metadata_accumulation_queue_v1_synthetic_001",
+      "artifact_role": "readonly_metadata_accumulation_queue",
+      "artifact_type": "metadata_only_visual_eval_readonly_metadata_accumulation_queue",
+      "path": "tests/schema_examples/visual_eval_readonly_metadata_accumulation_queue.example.json",
+      "validator": "scripts/validate_visual_eval_readonly_metadata_accumulation_queue.js",
+      "canonical": true,
+      "readonly_consumable": true
     }
   ],
   "composition_order": [
@@ -145,7 +154,8 @@
     "readonly_surface_snapshot",
     "readonly_detail_view",
     "readonly_detail_navigation",
-    "readonly_session_drilldown"
+    "readonly_session_drilldown",
+    "readonly_metadata_accumulation_queue"
   ],
   "consumer_expectations": {
     "source_bundle": "tests/schema_examples/visual_eval_readonly_review_bundle.example.json",
@@ -238,6 +248,19 @@
     "session_id": "visual_eval_review_session_synthetic_bundle_001",
     "sibling_case_count": 3,
     "selected_outcome": "patch",
+    "selected_next_review_action": "write_patch_plan_only"
+  },
+  "metadata_accumulation_queue_expectations": {
+    "source_session_drilldown": "tests/schema_examples/visual_eval_readonly_review_session_drilldown.example.json",
+    "source_bridge_payload": "tests/schema_examples/visual_eval_review_result_review_bridge_payload.example.json",
+    "source_accumulation_contract": "tests/schema_examples/visual_eval_metadata_accumulation.example.json",
+    "queue": "tests/schema_examples/visual_eval_readonly_metadata_accumulation_queue.example.json",
+    "total_records": 3,
+    "accepted_metadata_candidates": 1,
+    "patch_plan_only": 1,
+    "failure_learning_metadata": 1,
+    "archive_references": 3,
+    "selected_review_result_id": "visual_eval_review_result_patch_synthetic_001",
     "selected_next_review_action": "write_patch_plan_only"
   },
   "collection_consumer_expectations": {

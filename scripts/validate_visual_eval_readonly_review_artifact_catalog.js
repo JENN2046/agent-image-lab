@@ -22,6 +22,7 @@ const expectedRoles = [
   "readonly_detail_view",
   "readonly_detail_navigation",
   "readonly_session_drilldown",
+  "readonly_metadata_accumulation_queue",
 ];
 const expectedValidators = [
   "scripts/validate_visual_eval_review_result_protocol.js",
@@ -34,6 +35,7 @@ const expectedValidators = [
   "scripts/validate_visual_eval_readonly_review_detail_view.js",
   "scripts/validate_visual_eval_readonly_review_detail_navigation.js",
   "scripts/validate_visual_eval_readonly_review_session_drilldown.js",
+  "scripts/validate_visual_eval_readonly_metadata_accumulation_queue.js",
 ];
 const expectedDisplayFields = [
   "outcome",
@@ -143,9 +145,9 @@ function validateArtifactEntries(catalog) {
     addResult(`catalog_entry_${role}_readonly_consumable_true`, entry.readonly_consumable === true);
     if (!artifactPathOk) continue;
     const artifact = readJson(entry.path);
-    const typeField = artifact.artifact_type || artifact.fixture_type || artifact.payload_type || artifact.consumer_payload_type || artifact.query_payload_type || artifact.surface_snapshot_type || artifact.detail_view_type || artifact.navigation_type || artifact.drilldown_type;
+    const typeField = artifact.artifact_type || artifact.fixture_type || artifact.payload_type || artifact.consumer_payload_type || artifact.query_payload_type || artifact.surface_snapshot_type || artifact.detail_view_type || artifact.navigation_type || artifact.drilldown_type || artifact.queue_type;
     addResult(`catalog_entry_${role}_artifact_type_matches`, typeField === entry.artifact_type, typeField);
-    addResult(`catalog_entry_${role}_artifact_id_matches`, (artifact.artifact_id || artifact.fixture_id || artifact.payload_id || artifact.consumer_payload_id || artifact.query_payload_id || artifact.surface_snapshot_id || artifact.detail_view_id || artifact.navigation_id || artifact.drilldown_id) === entry.artifact_id);
+    addResult(`catalog_entry_${role}_artifact_id_matches`, (artifact.artifact_id || artifact.fixture_id || artifact.payload_id || artifact.consumer_payload_id || artifact.query_payload_id || artifact.surface_snapshot_id || artifact.detail_view_id || artifact.navigation_id || artifact.drilldown_id || artifact.queue_id) === entry.artifact_id);
   }
 }
 
@@ -234,6 +236,23 @@ function validateConsumerExpectations(catalog) {
   addResult("catalog_session_drilldown_sibling_case_count_matches", (drilldown.sibling_case_refs || []).length === catalog.session_drilldown_expectations?.sibling_case_count);
   addResult("catalog_session_drilldown_selected_outcome_matches", drilldown.selected_review_row?.outcome === catalog.session_drilldown_expectations?.selected_outcome);
   addResult("catalog_session_drilldown_next_action_matches", drilldown.selected_metadata_accumulation?.metadata_accumulation?.next_review_action === catalog.session_drilldown_expectations?.selected_next_review_action);
+
+  const metadataQueueEntry = getEntry(catalog, "readonly_metadata_accumulation_queue");
+  const metadataQueue = readJson(metadataQueueEntry.path);
+  addResult("catalog_metadata_queue_expected_path_matches", catalog.metadata_accumulation_queue_expectations?.queue === metadataQueueEntry.path);
+  addResult("catalog_metadata_queue_source_drilldown_matches", metadataQueue.source_session_drilldown === drilldownEntry.path);
+  addResult("catalog_metadata_queue_source_bridge_matches", metadataQueue.source_bridge_payload === getEntry(catalog, "bridge_readable_payload").path);
+  addResult("catalog_metadata_queue_source_contract_matches", metadataQueue.source_accumulation_contract === getEntry(catalog, "metadata_accumulation_contract").path);
+  addResult("catalog_metadata_queue_expected_drilldown_matches", catalog.metadata_accumulation_queue_expectations?.source_session_drilldown === drilldownEntry.path);
+  addResult("catalog_metadata_queue_expected_bridge_matches", catalog.metadata_accumulation_queue_expectations?.source_bridge_payload === getEntry(catalog, "bridge_readable_payload").path);
+  addResult("catalog_metadata_queue_expected_contract_matches", catalog.metadata_accumulation_queue_expectations?.source_accumulation_contract === getEntry(catalog, "metadata_accumulation_contract").path);
+  addResult("catalog_metadata_queue_total_records_matches", metadataQueue.queue_summary?.total_records === catalog.metadata_accumulation_queue_expectations?.total_records);
+  addResult("catalog_metadata_queue_accepted_count_matches", metadataQueue.queue_summary?.accepted_metadata_candidates === catalog.metadata_accumulation_queue_expectations?.accepted_metadata_candidates);
+  addResult("catalog_metadata_queue_patch_count_matches", metadataQueue.queue_summary?.patch_plan_only === catalog.metadata_accumulation_queue_expectations?.patch_plan_only);
+  addResult("catalog_metadata_queue_failure_count_matches", metadataQueue.queue_summary?.failure_learning_metadata === catalog.metadata_accumulation_queue_expectations?.failure_learning_metadata);
+  addResult("catalog_metadata_queue_archive_count_matches", metadataQueue.queue_summary?.archive_references === catalog.metadata_accumulation_queue_expectations?.archive_references);
+  addResult("catalog_metadata_queue_selected_id_matches", metadataQueue.selected_review_result_id === catalog.metadata_accumulation_queue_expectations?.selected_review_result_id);
+  addResult("catalog_metadata_queue_selected_next_action_matches", (metadataQueue.queues?.patch_plan_only || []).some((entry) => entry.review_result_id === metadataQueue.selected_review_result_id && entry.next_review_action === catalog.metadata_accumulation_queue_expectations?.selected_next_review_action));
 }
 
 function runReferencedValidators(catalog) {

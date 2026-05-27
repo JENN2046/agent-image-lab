@@ -1,5 +1,61 @@
 ---
 
+## Checkpoint - P3.11 Readonly Metadata Accumulation Queue
+
+```text
+phase: p3_11_readonly_metadata_accumulation_queue
+status: completed_validated_pending_local_commit
+result: COMPLETED_VALIDATED
+source_commit: 125f5be
+mode: metadata-only readonly metadata accumulation queue
+summary: Added a readonly metadata accumulation queue that consumes the session drilldown, bridge payload, and canonical metadata accumulation contract. The queue organizes pass / patch / reject metadata records into accepted metadata candidates, patch-plan-only records, failure learning metadata, archive references, and next-review-action queues. The catalog now enumerates the queue as a canonical readonly artifact and verifies its source refs, queue counts, selected review result, and selected next action.
+changed_files_current_task:
+  - kernel/visual_eval_readonly_metadata_accumulation_queue.js
+  - scripts/validate_visual_eval_readonly_metadata_accumulation_queue.js
+  - scripts/validate_visual_eval_readonly_review_artifact_catalog.js
+  - tests/schema_examples/visual_eval_readonly_metadata_accumulation_queue.example.json
+  - tests/schema_examples/visual_eval_readonly_metadata_accumulation_queue_negative_cases.example.json
+  - tests/schema_examples/visual_eval_readonly_review_artifact_catalog.example.json
+  - .agent_board/CHECKPOINT.md
+validation_run:
+  - node --check kernel/visual_eval_readonly_metadata_accumulation_queue.js
+  - node --check scripts/validate_visual_eval_readonly_metadata_accumulation_queue.js
+  - node --check scripts/validate_visual_eval_readonly_review_artifact_catalog.js
+  - node scripts/validate_visual_eval_readonly_metadata_accumulation_queue.js
+  - node scripts/validate_visual_eval_readonly_review_artifact_catalog.js
+validation_result: passed
+queue_records_verified:
+  - accepted_metadata_candidates: 1
+  - patch_plan_only: 1
+  - failure_learning_metadata: 1
+  - archive_references: 3
+  - next_review_actions: 3
+negative_cases_verified:
+  - missing_patch_plan_queue
+  - illegal_next_review_action
+  - selected_queue_item_unmarked
+  - queue_guard_memory_true
+  - absolute_local_contract_source
+runtime_execution_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+memory_written: false
+accepted_samples_written: false
+Batch_005_started: false
+production_candidate_002_started: false
+package_json_modified: false
+dependency_change_performed: false
+push_performed: false
+recommended_next_long_phase: readonly_metadata_queue_commit_readiness_or_next_readonly_consumer_slice
+next_phase_started: false
+```
+
+---
+
 ## Checkpoint - P3.4 Readonly Review Artifact Catalog
 
 ```text
