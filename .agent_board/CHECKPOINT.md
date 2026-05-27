@@ -1,5 +1,108 @@
 ---
 
+## Checkpoint - Readonly Graph Source Of Truth Hardening
+
+```text
+phase: readonly_graph_source_of_truth_hardening_20260527
+status: completed_validated_local_graph_semantic_hardening
+result: COMPLETED_VALIDATED
+mode: Green local readonly graph source-of-truth hardening
+summary: Hardened the readonly artifact graph validator so `visual_eval_review_result_protocol.review_results` is the canonical owner for review result identity, outcome, summary, reasons, failure tags, taxonomy refs, next review action, and metadata accumulation semantics. Derived bridge, bundle, consumer, collection, query, surface, detail, queue, workspace, renderer, and handoff layers must now mirror canonical semantics or remain explicit projection-only sections.
+changed_files_current_task:
+  - scripts/validate_visual_eval_readonly_artifact_graph.js
+  - .agent_board/CHECKPOINT.md
+validation_run:
+  - node --check scripts\validate_visual_eval_readonly_artifact_graph.js: passed
+  - node scripts\validate_visual_eval_readonly_artifact_graph.js: passed
+  - node scripts\validate_visual_eval_readonly_review_artifact_catalog.js: passed
+  - node scripts\validate_visual_eval_readonly_metadata_accumulation_queue_query.js: passed
+  - git diff --check: passed
+negative_cases_verified:
+  - dangling_session_id
+  - dangling_case_id
+  - collection_queue_query_selected_result_drift
+  - queue_query_wrong_source_consumer
+  - catalog_path_correct_but_source_relation_wrong
+  - taxonomy_ref_exists_but_failure_tag_membership_mismatch
+  - metadata_accumulation_action_conflicts_with_outcome
+  - forbidden_boundary_flag_true
+  - absolute_local_path_in_artifact
+  - composition_order_missing_role
+  - derived_outcome_drift
+  - derived_next_action_drift
+  - derived_failure_tag_injection
+  - derived_taxonomy_ref_drift
+  - selected_patch_result_drift
+  - derived_accumulation_action_drift
+runtime_execution_performed: false
+fetch_performed: false
+file_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+accepted_samples_write_performed: false
+production_candidate_created: false
+memory_written: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+dependency_change_performed: false
+commit_performed: false
+push_performed: false
+tag_release_deploy_performed: false
+next_phase_started: false
+```
+
+---
+
+## Checkpoint - Readonly Artifact Graph Validator
+
+```text
+phase: readonly_visual_eval_artifact_graph_validator_20260527
+status: completed_validated_local_graph_validator
+result: COMPLETED_VALIDATED
+mode: Green local graph-level readonly artifact validation
+summary: Added a graph-level validator for the 24-artifact readonly visual review graph. The gate verifies catalog closure, artifact id/type/role uniqueness, composition order, source/ref relations, review result identity consistency across bridge/bundle/collection/query/surface/detail/queue/workspace/renderer/handoff layers, taxonomy membership, metadata/next-action semantics, selected patch thread consistency, repo-relative refs, forbidden boundary flags, and absolute/loopback/secret-like value absence.
+changed_files_current_task:
+  - scripts/validate_visual_eval_readonly_artifact_graph.js
+  - .agent_board/CHECKPOINT.md
+validation_run:
+  - node --check scripts\validate_visual_eval_readonly_artifact_graph.js: passed
+  - node scripts\validate_visual_eval_readonly_artifact_graph.js: passed
+  - node scripts\validate_visual_eval_readonly_review_artifact_catalog.js: passed
+  - git diff --check: passed
+negative_cases_verified:
+  - dangling_session_id
+  - dangling_case_id
+  - collection_queue_query_selected_result_drift
+  - queue_query_wrong_source_consumer
+  - catalog_path_correct_but_source_relation_wrong
+  - taxonomy_ref_exists_but_failure_tag_membership_mismatch
+  - metadata_accumulation_action_conflicts_with_outcome
+  - forbidden_boundary_flag_true
+  - absolute_local_path_in_artifact
+  - composition_order_missing_role
+runtime_execution_performed: false
+fetch_performed: false
+file_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+accepted_samples_write_performed: false
+production_candidate_created: false
+memory_written: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+dependency_change_performed: false
+commit_performed: false
+push_performed: false
+tag_release_deploy_performed: false
+next_phase_started: false
+```
+
+---
+
 ## Checkpoint - Readonly Visual Review Dataset Regression Layer
 
 ```text
