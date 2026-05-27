@@ -1,12 +1,79 @@
 ---
 
+## Checkpoint - P3.20 Review Console Readonly Corpus Renderer Consumer
+
+```text
+phase: p3_20_review_console_readonly_corpus_renderer_consumer
+status: completed_validated_pending_local_commit
+result: COMPLETED_VALIDATED
+source_commit: 913a67c
+mode: metadata-only readonly Review Console static consumer
+summary: Connected the readonly review corpus renderer into the Review Console static prototype as a display-only consumer surface. The static mock now carries a renderer handoff aligned to the canonical renderer fixture, the page renders pass/patch/reject rows plus outcome/next-action/metadata sections, draft output exports the same handoff, and a dedicated validator compares the static consumer to the canonical renderer artifact while proving forbidden provider/runtime/image/memory/production routes remain closed.
+changed_files_current_task:
+  - review_console/static_prototype/mock_data.js
+  - review_console/static_prototype/index.html
+  - review_console/static_prototype/app.js
+  - review_console/static_prototype/styles.css
+  - scripts/validate_visual_eval_review_console_readonly_corpus_renderer.js
+  - .agent_board/CHECKPOINT.md
+validation_run:
+  - node --check review_console/static_prototype/app.js
+  - node --check scripts/validate_visual_eval_review_console_readonly_corpus_renderer.js
+  - node scripts/validate_visual_eval_review_console_readonly_corpus_renderer.js
+  - node scripts/validate_review_console_adapter_handoff.js
+  - node scripts/validate_visual_eval_readonly_review_corpus_renderer.js
+  - node scripts/validate_visual_eval_readonly_review_artifact_catalog.js
+validation_result: passed
+static_consumer_source:
+  - tests/schema_examples/visual_eval_readonly_review_corpus_renderer.example.json
+visible_rows_verified:
+  - pass
+  - patch
+  - reject
+visible_taxonomy_verified:
+  - material_failed
+  - lighting_failed
+  - subject_drift
+  - commercial_unusable
+visible_next_actions_verified:
+  - queue_for_future_human_review
+  - write_patch_plan_only
+  - defer_until_taxonomy_update
+visible_metadata_sections_verified:
+  - accepted_metadata_candidates
+  - patch_plan_only
+  - failure_learning_metadata
+  - archive_references
+  - next_review_actions
+draft_output_handoff_verified: true
+runtime_execution_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+memory_written: false
+accepted_samples_written: false
+Batch_005_started: false
+production_candidate_002_started: false
+package_json_modified: false
+dependency_change_performed: false
+push_performed: false
+red_line_request_needed_next: guarded push or completion audit against full 30-day objective
+next_phase_started: false
+```
+
+---
+
 ## Checkpoint - P3.19 Readonly Review Corpus Renderer
 
 ```text
 phase: p3_19_readonly_review_corpus_renderer
-status: completed_validated_pending_local_commit
+status: completed_validated_local_commit
 result: COMPLETED_VALIDATED
 source_commit: 2456d1b
+local_commit: 913a67c
 mode: metadata-only readonly review corpus renderer
 summary: Added a readonly renderer/loader above the review workspace corpus. The renderer consumes the canonical corpus and case matrix, emits display rows for pass/patch/reject, outcome sections, next-action sections, and metadata section panels, and keeps all provider/runtime/image/memory/write routes closed. This moves the system from corpus enumeration toward a more realistic readonly consumer view model that downstream bridge/session/image case/metadata accumulation surfaces can consume without recomputing indexes.
 changed_files_current_task:

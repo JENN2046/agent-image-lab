@@ -44,6 +44,7 @@ const state = {
   human_approval_blocker_queue: mock.human_approval_blocker_queue_seed,
   exact_new_trial_003_formal_human_approval_capture_surface: mock.exact_new_trial_003_formal_human_approval_capture_surface_seed,
   runtime_gap_dashboard: mock.review_console_runtime_gap_dashboard_contract_seed,
+  readonly_review_corpus_renderer: mock.visual_eval_readonly_review_corpus_renderer_static_handoff,
   lifecycleFilter: "all",
   lifecycleSearch: "",
   selectedArtifactId: mock.artifact_lifecycle_state_reader_seed.records[0].sample_id,
@@ -2478,6 +2479,61 @@ function renderReviewConsoleRuntimeGapDashboard() {
   `;
 }
 
+function readonlyReviewCorpusRendererState() {
+  return state.readonly_review_corpus_renderer;
+}
+
+function renderReadonlyReviewCorpusRenderer() {
+  const renderer = readonlyReviewCorpusRendererState();
+  qs("#readonlyReviewCorpusRendererSummary").innerHTML = `
+    <span>status <strong>${escapeHtml(renderer.status)}</strong></span>
+    <span>source <strong>${escapeHtml(renderer.source_renderer_ref)}</strong></span>
+    <span>members <strong>${escapeHtml(renderer.member_count)}</strong></span>
+    <span>rows <strong>${escapeHtml(renderer.total_case_rows)}</strong></span>
+    <span>display only <strong>${escapeHtml(renderer.display_only)}</strong></span>
+  `;
+  qs("#readonlyReviewCorpusRendererRows").innerHTML = renderer.display_rows.map((row) => `
+    <article class="readonly-review-corpus-card ${safeClassToken(row.outcome)}">
+      <div class="protocol-card-head">
+        <strong>${escapeHtml(row.outcome)}</strong>
+        <span>${escapeHtml(row.review_result_id)}</span>
+      </div>
+      <dl>
+        <div><dt>Candidate</dt><dd>${escapeHtml(row.candidate_id)}</dd></div>
+        <div><dt>Case</dt><dd>${escapeHtml(row.case_id)}</dd></div>
+        <div><dt>Summary</dt><dd>${escapeHtml(row.summary)}</dd></div>
+        <div><dt>Reasons</dt><dd>${inlineList(row.reasons)}</dd></div>
+        <div><dt>Taxonomy</dt><dd>${inlineList(row.taxonomy_tags)}</dd></div>
+        <div><dt>Blocking watch</dt><dd>${inlineList(row.blocking_watch_items)}</dd></div>
+        <div><dt>Next action</dt><dd>${escapeHtml(row.next_review_action)}</dd></div>
+        <div><dt>Metadata action</dt><dd>${escapeHtml(row.metadata_accumulation_action)}</dd></div>
+        <div><dt>Metadata sections</dt><dd>${inlineList(row.metadata_queue_sections)}</dd></div>
+      </dl>
+    </article>
+  `).join("");
+  const sectionCards = [
+    ...renderer.outcome_sections.map((section) => ({ ...section, kind: "outcome" })),
+    ...renderer.next_action_sections.map((section) => ({ ...section, kind: "next_action" })),
+    ...renderer.metadata_section_panels.map((section) => ({ ...section, kind: "metadata" }))
+  ];
+  qs("#readonlyReviewCorpusRendererSections").innerHTML = sectionCards.map((section) => `
+    <article class="readonly-review-corpus-section">
+      <strong>${escapeHtml(section.kind)}: ${escapeHtml(section.outcome || section.section_id)}</strong>
+      <p>count: ${escapeHtml(section.count)}</p>
+      <p>${inlineList(section.review_result_ids)}</p>
+    </article>
+  `).join("");
+  qs("#readonlyReviewCorpusRendererGuard").innerHTML = `
+    <span>metadata only: ${escapeHtml(renderer.guard.metadata_only)}</span>
+    <span>read only: ${escapeHtml(renderer.guard.read_only)}</span>
+    <span>file write: ${escapeHtml(renderer.guard.file_write_performed)}</span>
+    <span>provider/plugin/API: ${escapeHtml(renderer.guard.provider_contact_performed || renderer.guard.plugin_call_performed || renderer.guard.api_call_performed)}</span>
+    <span>image generation: ${escapeHtml(renderer.guard.image_generation_performed)}</span>
+    <span>memory write: ${escapeHtml(renderer.guard.memory_write_performed || renderer.guard.DailyNote_write_performed || renderer.guard.VCP_memory_write_performed)}</span>
+    <span>production 002: ${escapeHtml(renderer.guard.production_candidate_002_started)}</span>
+  `;
+}
+
 function loadImportRecordSeed() {
   qs("#importRecordInput").value = importRecordSeedText();
   parseImportRecordText("project_local_seed");
@@ -3597,6 +3653,7 @@ function renderDraft() {
     exact_new_trial_003_formal_human_approval_capture_surface_state: exactNewTrial003FormalHumanApprovalCaptureSurfaceState(),
     third_sample_accepted_samples_authorization_package_state: thirdSampleAcceptedSamplesAuthorizationPackageState(),
     review_console_runtime_gap_dashboard_state: reviewConsoleRuntimeGapDashboardState(),
+    visual_eval_readonly_review_corpus_renderer_static_handoff: readonlyReviewCorpusRendererState(),
     codex_session_import_record_reader: state.import_record_reader,
     review_session: buildReviewSession(memoryApproval, humanTotal),
     image_case: buildImageCase(humanTotal),
@@ -3650,6 +3707,7 @@ function renderAll() {
   renderExactNewTrial003FormalHumanApprovalCaptureSurface();
   renderThirdSampleAcceptedSamplesAuthorizationPackage();
   renderReviewConsoleRuntimeGapDashboard();
+  renderReadonlyReviewCorpusRenderer();
   loadImportRecordSeed();
   renderDraft();
 }

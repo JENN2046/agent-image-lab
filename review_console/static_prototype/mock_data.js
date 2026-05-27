@@ -2492,6 +2492,182 @@ window.REVIEW_CONSOLE_MOCK = {
       }
     }
   },
+  visual_eval_readonly_review_corpus_renderer_static_handoff: {
+    handoff_id: "visual_eval_readonly_review_corpus_renderer_static_handoff_001",
+    source_renderer_ref: "tests/schema_examples/visual_eval_readonly_review_corpus_renderer.example.json",
+    source_corpus_ref: "tests/schema_examples/visual_eval_readonly_review_workspace_corpus.example.json",
+    source_case_matrix_ref: "tests/schema_examples/visual_eval_readonly_review_workspace_case_matrix.example.json",
+    status: "draft_ready",
+    display_only: true,
+    renderer_attached: true,
+    member_count: 1,
+    total_case_rows: 3,
+    outcome_sections: [
+      {
+        outcome: "pass",
+        count: 1,
+        review_result_ids: ["visual_eval_review_result_pass_synthetic_001"]
+      },
+      {
+        outcome: "patch",
+        count: 1,
+        review_result_ids: ["visual_eval_review_result_patch_synthetic_001"]
+      },
+      {
+        outcome: "reject",
+        count: 1,
+        review_result_ids: ["visual_eval_review_result_reject_synthetic_001"]
+      }
+    ],
+    display_rows: [
+      {
+        review_result_id: "visual_eval_review_result_pass_synthetic_001",
+        candidate_id: "synthetic_product_still_life_pass_001",
+        case_id: "visual_eval_image_case_pass_synthetic_001",
+        outcome: "pass",
+        summary: "Synthetic candidate meets core product readability and has only non-blocking watch items.",
+        reasons: [
+          "product_identity_preserved",
+          "commercial_readability_plausible",
+          "no_major_artifact_recorded"
+        ],
+        taxonomy_tags: [],
+        blocking_watch_items: [],
+        next_review_action: "queue_for_future_human_review",
+        metadata_accumulation_action: "keep_as_metadata_candidate",
+        metadata_queue_sections: [
+          "accepted_metadata_candidates",
+          "archive_references",
+          "next_review_actions"
+        ],
+        write_allowed: false
+      },
+      {
+        review_result_id: "visual_eval_review_result_patch_synthetic_001",
+        candidate_id: "synthetic_product_still_life_patch_001",
+        case_id: "visual_eval_image_case_patch_synthetic_001",
+        outcome: "patch",
+        summary: "Synthetic candidate has useful composition but requires bounded correction before pass.",
+        reasons: [
+          "material realism needs correction",
+          "lighting consistency needs correction"
+        ],
+        taxonomy_tags: [
+          "material_failed",
+          "lighting_failed"
+        ],
+        blocking_watch_items: [
+          "material_realism_watch",
+          "lighting_consistency_watch"
+        ],
+        next_review_action: "write_patch_plan_only",
+        metadata_accumulation_action: "metadata_only_reference",
+        metadata_queue_sections: [
+          "patch_plan_only",
+          "archive_references",
+          "next_review_actions"
+        ],
+        write_allowed: false
+      },
+      {
+        review_result_id: "visual_eval_review_result_reject_synthetic_001",
+        candidate_id: "synthetic_product_still_life_reject_001",
+        case_id: "visual_eval_image_case_reject_synthetic_001",
+        outcome: "reject",
+        summary: "Synthetic candidate fails product identity or commercial usability and must remain never-production.",
+        reasons: [
+          "subject drift blocks reliable product identity",
+          "commercial unusability blocks delivery readiness"
+        ],
+        taxonomy_tags: [
+          "subject_drift",
+          "commercial_unusable"
+        ],
+        blocking_watch_items: [
+          "severe_subject_drift",
+          "commercial_unusable"
+        ],
+        next_review_action: "defer_until_taxonomy_update",
+        metadata_accumulation_action: "keep_as_failure_learning_metadata",
+        metadata_queue_sections: [
+          "failure_learning_metadata",
+          "archive_references",
+          "next_review_actions"
+        ],
+        write_allowed: false
+      }
+    ],
+    next_action_sections: [
+      {
+        section_id: "queue_for_future_human_review",
+        count: 1,
+        review_result_ids: ["visual_eval_review_result_pass_synthetic_001"]
+      },
+      {
+        section_id: "write_patch_plan_only",
+        count: 1,
+        review_result_ids: ["visual_eval_review_result_patch_synthetic_001"]
+      },
+      {
+        section_id: "defer_until_taxonomy_update",
+        count: 1,
+        review_result_ids: ["visual_eval_review_result_reject_synthetic_001"]
+      }
+    ],
+    metadata_section_panels: [
+      {
+        section_id: "accepted_metadata_candidates",
+        count: 1,
+        review_result_ids: ["visual_eval_review_result_pass_synthetic_001"]
+      },
+      {
+        section_id: "archive_references",
+        count: 3,
+        review_result_ids: [
+          "visual_eval_review_result_pass_synthetic_001",
+          "visual_eval_review_result_patch_synthetic_001",
+          "visual_eval_review_result_reject_synthetic_001"
+        ]
+      },
+      {
+        section_id: "next_review_actions",
+        count: 3,
+        review_result_ids: [
+          "visual_eval_review_result_pass_synthetic_001",
+          "visual_eval_review_result_patch_synthetic_001",
+          "visual_eval_review_result_reject_synthetic_001"
+        ]
+      },
+      {
+        section_id: "patch_plan_only",
+        count: 1,
+        review_result_ids: ["visual_eval_review_result_patch_synthetic_001"]
+      },
+      {
+        section_id: "failure_learning_metadata",
+        count: 1,
+        review_result_ids: ["visual_eval_review_result_reject_synthetic_001"]
+      }
+    ],
+    guard: {
+      metadata_only: true,
+      read_only: true,
+      display_only: true,
+      file_write_performed: false,
+      approval_write_performed: false,
+      accepted_samples_write_performed: false,
+      production_candidate_created: false,
+      provider_contact_performed: false,
+      plugin_call_performed: false,
+      api_call_performed: false,
+      image_generation_performed: false,
+      DailyNote_write_performed: false,
+      VCP_memory_write_performed: false,
+      memory_write_performed: false,
+      Batch_005_started: false,
+      production_candidate_002_started: false
+    }
+  },
   image_case_seed: {
     input_assets: ["asset_archive/references/photo_studio_os_reference.placeholder"],
     prompt_package_id: "prompt-package-photo-studio-os-001",

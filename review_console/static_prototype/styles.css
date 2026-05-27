@@ -515,7 +515,9 @@ input[type="range"] {
 .multi-capsule-relations,
 .registry-report-v2-list,
 .registry-report-v2-relations,
-.registry-report-v2-negative-list {
+.registry-report-v2-negative-list,
+.readonly-review-corpus-grid,
+.readonly-review-corpus-sections {
   display: grid;
   gap: 10px;
 }
@@ -541,7 +543,9 @@ input[type="range"] {
 .adapter-negative-card,
 .multi-capsule-card,
 .registry-report-v2-card,
-.registry-report-v2-negative-card {
+.registry-report-v2-negative-card,
+.readonly-review-corpus-card,
+.readonly-review-corpus-section {
   display: grid;
   gap: 10px;
   min-width: 0;
@@ -619,6 +623,22 @@ input[type="range"] {
 
 .registry-report-v2-negative-card.critical {
   border-left-color: var(--red);
+}
+
+.readonly-review-corpus-card.pass {
+  border-left-color: var(--green);
+}
+
+.readonly-review-corpus-card.patch {
+  border-left-color: var(--amber);
+}
+
+.readonly-review-corpus-card.reject {
+  border-left-color: var(--red);
+}
+
+.readonly-review-corpus-section {
+  border-left-color: var(--cyan);
 }
 
 .artifact-lifecycle-list {
@@ -969,6 +989,7 @@ input[type="range"] {
 .multi-capsule-card dl,
 .registry-report-v2-card dl,
 .registry-report-v2-negative-card dl,
+.readonly-review-corpus-card dl,
 .artifact-review-note-card dl,
 .failure-state-card dl,
 .three-sample-gap-card dl,
@@ -995,6 +1016,7 @@ input[type="range"] {
 .multi-capsule-card dl div,
 .registry-report-v2-card dl div,
 .registry-report-v2-negative-card dl div,
+.readonly-review-corpus-card dl div,
 .artifact-review-note-card dl div,
 .failure-state-card dl div,
 .three-sample-gap-card dl div,
@@ -1022,6 +1044,7 @@ input[type="range"] {
 .multi-capsule-card dt,
 .registry-report-v2-card dt,
 .registry-report-v2-negative-card dt,
+.readonly-review-corpus-card dt,
 .artifact-review-note-card dt,
 .failure-state-card dt,
 .three-sample-gap-card dt,
@@ -1047,6 +1070,7 @@ input[type="range"] {
 .multi-capsule-card dd,
 .registry-report-v2-card dd,
 .registry-report-v2-negative-card dd,
+.readonly-review-corpus-card dd,
 .artifact-review-note-card dd,
 .failure-state-card dd,
 .three-sample-gap-card dd,
