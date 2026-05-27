@@ -1,5 +1,42 @@
 ---
 
+## Checkpoint - P2.3 Provider Evidence Integrity Closeout And Route Selection
+
+```text
+phase: p2_3_provider_evidence_integrity_closeout_and_route_selection
+status: completed_docs_only_closeout_pending_local_commit
+result: COMPLETED_VALIDATED_PENDING_COMMIT
+source_commit: 392d07b
+mode: A0 read-only review then docs-only closeout
+summary: Sealed the provider evidence integrity hardening chain at remote commit 392d07b, added a concise closeout document, and selected resume_surface_reconciliation as the recommended next route before any product or production-candidate lane.
+changed_files_current_task:
+  - docs/provider_evidence_integrity_semantic_hardening_closeout.md
+  - .agent_board/CHECKPOINT.md
+validation_run:
+  - git diff --check
+  - node --check scripts/validate_provider_evidence_integrity_contract.js
+  - npm run validate:provider-evidence-integrity
+validation_result: passed
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+VCPToolBox_runtime_performed: false
+VCPChat_runtime_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+Batch_005_started: false
+production_candidate_002_started: false
+package_json_modified: false
+dependency_change_performed: false
+tag_release_deploy_performed: false
+push_performed: false
+recommended_next_phase: resume_surface_reconciliation
+next_phase_started: false
+```
+
+---
+
 ## Checkpoint - P1.1 Legacy Commit-Readiness Gate Reconciliation
 
 ```text
