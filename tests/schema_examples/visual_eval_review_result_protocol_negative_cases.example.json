@@ -76,6 +76,18 @@
       "expected_reason": "taxonomy references must resolve to the frozen known taxonomy source or future canonical taxonomy"
     },
     {
+      "case_id": "unknown_failure_tag",
+      "target_review_result_id": "visual_eval_review_result_reject_synthetic_001",
+      "mutation": {
+        "field": "failure_tags",
+        "value": [
+          "hallucinated_failure_tag"
+        ]
+      },
+      "expected_failure_code": "unknown_failure_tag_forbidden",
+      "expected_reason": "failure tags must resolve to the canonical visual eval failure taxonomy"
+    },
+    {
       "case_id": "reject_missing_never_production_reason",
       "target_review_result_id": "visual_eval_review_result_reject_synthetic_001",
       "mutation": {

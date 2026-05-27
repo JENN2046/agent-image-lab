@@ -188,7 +188,7 @@
         "lighting_failed"
       ],
       "taxonomy_refs": [
-        "docs/v14_020_visual_eval_and_failure_taxonomy_planning_gate.md#failure-taxonomy-draft"
+        "tests/schema_examples/visual_eval_failure_taxonomy.example.json"
       ],
       "bounded_patch_scope": [
         "improve material realism metadata plan",
@@ -239,7 +239,7 @@
         "commercial_unusable"
       ],
       "taxonomy_refs": [
-        "docs/v14_020_visual_eval_and_failure_taxonomy_planning_gate.md#failure-taxonomy-draft"
+        "tests/schema_examples/visual_eval_failure_taxonomy.example.json"
       ],
       "bounded_patch_scope": [],
       "blocking_watch_items": [

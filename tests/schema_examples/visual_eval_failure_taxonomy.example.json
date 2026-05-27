@@ -1,0 +1,228 @@
+{
+  "artifact_id": "visual_eval_failure_taxonomy_v1_canonical_001",
+  "artifact_type": "canonical_visual_eval_failure_taxonomy",
+  "taxonomy_id": "visual_eval_failure_taxonomy_v1",
+  "version": "v1",
+  "canonical_status": "canonical_metadata_only",
+  "source_planning_ref": "docs/v14_020_visual_eval_and_failure_taxonomy_planning_gate.md",
+  "required_categories": [
+    "subject_identity",
+    "commercial_usability",
+    "material_realism",
+    "lighting_consistency",
+    "composition",
+    "edge_or_mask_artifact",
+    "background_contamination",
+    "style_mismatch",
+    "brand_mismatch",
+    "other_blocking_failure"
+  ],
+  "severity_levels": [
+    "blocking",
+    "patchable",
+    "advisory"
+  ],
+  "categories": [
+    {
+      "category_id": "subject_identity",
+      "definition": "The generated candidate preserves, drifts, or confuses the intended subject identity.",
+      "failure_tags": [
+        {
+          "tag_id": "subject_drift",
+          "severity": "blocking",
+          "default_outcome": "reject"
+        },
+        {
+          "tag_id": "subject_identity_ambiguous",
+          "severity": "patchable",
+          "default_outcome": "patch"
+        },
+        {
+          "tag_id": "subject_identity_watch",
+          "severity": "advisory",
+          "default_outcome": "pass"
+        }
+      ]
+    },
+    {
+      "category_id": "commercial_usability",
+      "definition": "The candidate is or is not usable for a commercial review or delivery context.",
+      "failure_tags": [
+        {
+          "tag_id": "commercial_unusable",
+          "severity": "blocking",
+          "default_outcome": "reject"
+        },
+        {
+          "tag_id": "commercial_readability_watch",
+          "severity": "patchable",
+          "default_outcome": "patch"
+        }
+      ]
+    },
+    {
+      "category_id": "material_realism",
+      "definition": "Materials, surfaces, finishes, and physical plausibility look credible or need correction.",
+      "failure_tags": [
+        {
+          "tag_id": "material_failed",
+          "severity": "patchable",
+          "default_outcome": "patch"
+        },
+        {
+          "tag_id": "material_realism_blocking",
+          "severity": "blocking",
+          "default_outcome": "reject"
+        },
+        {
+          "tag_id": "material_realism_watch",
+          "severity": "advisory",
+          "default_outcome": "pass"
+        }
+      ]
+    },
+    {
+      "category_id": "lighting_consistency",
+      "definition": "Lighting direction, shadow behavior, exposure, and contrast remain coherent enough for review.",
+      "failure_tags": [
+        {
+          "tag_id": "lighting_failed",
+          "severity": "patchable",
+          "default_outcome": "patch"
+        },
+        {
+          "tag_id": "lighting_blocking",
+          "severity": "blocking",
+          "default_outcome": "reject"
+        },
+        {
+          "tag_id": "lighting_consistency_watch",
+          "severity": "advisory",
+          "default_outcome": "pass"
+        }
+      ]
+    },
+    {
+      "category_id": "composition",
+      "definition": "Framing, focal hierarchy, crop, and visual balance support the intended review purpose.",
+      "failure_tags": [
+        {
+          "tag_id": "composition_failed",
+          "severity": "patchable",
+          "default_outcome": "patch"
+        },
+        {
+          "tag_id": "composition_blocking",
+          "severity": "blocking",
+          "default_outcome": "reject"
+        },
+        {
+          "tag_id": "composition_watch",
+          "severity": "advisory",
+          "default_outcome": "pass"
+        }
+      ]
+    },
+    {
+      "category_id": "edge_or_mask_artifact",
+      "definition": "Edges, masks, cutouts, silhouettes, and artifact residue stay clean enough for review.",
+      "failure_tags": [
+        {
+          "tag_id": "edge_artifact_failed",
+          "severity": "patchable",
+          "default_outcome": "patch"
+        },
+        {
+          "tag_id": "mask_artifact_blocking",
+          "severity": "blocking",
+          "default_outcome": "reject"
+        }
+      ]
+    },
+    {
+      "category_id": "background_contamination",
+      "definition": "The background does not introduce unwanted objects, text-like noise, or context drift.",
+      "failure_tags": [
+        {
+          "tag_id": "background_contamination_failed",
+          "severity": "patchable",
+          "default_outcome": "patch"
+        },
+        {
+          "tag_id": "background_contamination_blocking",
+          "severity": "blocking",
+          "default_outcome": "reject"
+        }
+      ]
+    },
+    {
+      "category_id": "style_mismatch",
+      "definition": "The candidate keeps the intended visual style, production tone, and polish level.",
+      "failure_tags": [
+        {
+          "tag_id": "style_mismatch_failed",
+          "severity": "patchable",
+          "default_outcome": "patch"
+        },
+        {
+          "tag_id": "style_mismatch_blocking",
+          "severity": "blocking",
+          "default_outcome": "reject"
+        }
+      ]
+    },
+    {
+      "category_id": "brand_mismatch",
+      "definition": "Brand-critical cues, visual identity, and product-family signals are preserved.",
+      "failure_tags": [
+        {
+          "tag_id": "brand_mismatch_failed",
+          "severity": "patchable",
+          "default_outcome": "patch"
+        },
+        {
+          "tag_id": "brand_mismatch_blocking",
+          "severity": "blocking",
+          "default_outcome": "reject"
+        }
+      ]
+    },
+    {
+      "category_id": "other_blocking_failure",
+      "definition": "A severe issue outside the named categories still blocks production or metadata promotion.",
+      "failure_tags": [
+        {
+          "tag_id": "other_blocking_failure",
+          "severity": "blocking",
+          "default_outcome": "reject"
+        },
+        {
+          "tag_id": "requires_taxonomy_update",
+          "severity": "advisory",
+          "default_outcome": "patch"
+        }
+      ]
+    }
+  ],
+  "route_guards": {
+    "production_candidate_allowed_now": false,
+    "accepted_samples_write_allowed_now": false,
+    "memory_write_allowed_now": false,
+    "provider_retry_allowed_now": false,
+    "image_generation_allowed_now": false
+  },
+  "boundary_confirmation": {
+    "metadata_only": true,
+    "runtime_execution_performed": false,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "memory_written": false,
+    "DailyNote_written": false,
+    "VCP_memory_written": false,
+    "accepted_samples_written": false,
+    "production_candidate_002_started": false,
+    "Batch_005_started": false
+  }
+}

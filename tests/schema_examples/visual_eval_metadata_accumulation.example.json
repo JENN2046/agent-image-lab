@@ -1,0 +1,83 @@
+{
+  "artifact_id": "visual_eval_metadata_accumulation_v1_synthetic_001",
+  "artifact_type": "metadata_only_visual_eval_metadata_accumulation_contract",
+  "version": "v1",
+  "source_review_result_protocol": "tests/schema_examples/visual_eval_review_result_protocol.example.json",
+  "source_taxonomy": "tests/schema_examples/visual_eval_failure_taxonomy.example.json",
+  "allowed_actions": {
+    "accepted_metadata_action": [
+      "none",
+      "keep_as_metadata_candidate",
+      "queue_for_future_human_review",
+      "archive_as_positive_reference"
+    ],
+    "rejected_metadata_action": [
+      "none",
+      "keep_as_failure_learning_metadata",
+      "archive_as_negative_reference",
+      "defer_until_taxonomy_update"
+    ],
+    "archive_reference_action": [
+      "none",
+      "metadata_only_reference",
+      "archive_as_positive_reference",
+      "archive_as_negative_reference"
+    ],
+    "next_review_action": [
+      "queue_for_future_human_review",
+      "write_patch_plan_only",
+      "defer_until_taxonomy_update"
+    ]
+  },
+  "accumulation_records": [
+    {
+      "record_kind": "accepted_metadata_candidate",
+      "source_outcome": "pass",
+      "allowed_action": "keep_as_metadata_candidate",
+      "write_allowed_now": false,
+      "consumer_intent": "future_review_bridge_readonly"
+    },
+    {
+      "record_kind": "rejected_failure_learning_metadata",
+      "source_outcome": "reject",
+      "allowed_action": "keep_as_failure_learning_metadata",
+      "write_allowed_now": false,
+      "consumer_intent": "future_failure_learning_readonly"
+    },
+    {
+      "record_kind": "archive_reference_action",
+      "source_outcome": "pass_or_reject",
+      "allowed_action": "metadata_only_reference",
+      "write_allowed_now": false,
+      "consumer_intent": "future_archive_reference_readonly"
+    },
+    {
+      "record_kind": "next_review_action",
+      "source_outcome": "patch",
+      "allowed_action": "write_patch_plan_only",
+      "write_allowed_now": false,
+      "consumer_intent": "future_patch_plan_readonly"
+    }
+  ],
+  "route_guards": {
+    "production_candidate_allowed_now": false,
+    "accepted_samples_write_allowed_now": false,
+    "memory_write_allowed_now": false,
+    "provider_retry_allowed_now": false,
+    "image_generation_allowed_now": false
+  },
+  "boundary_confirmation": {
+    "metadata_only": true,
+    "runtime_execution_performed": false,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "memory_written": false,
+    "DailyNote_written": false,
+    "VCP_memory_written": false,
+    "accepted_samples_written": false,
+    "production_candidate_002_started": false,
+    "Batch_005_started": false
+  }
+}

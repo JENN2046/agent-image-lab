@@ -1,5 +1,62 @@
 ---
 
+## Checkpoint - P2.15 Canonical Visual Eval Failure Taxonomy Artifact
+
+```text
+phase: p2_15_canonical_visual_eval_failure_taxonomy_artifact
+status: completed_validated_local_commit_ready
+result: COMPLETED_VALIDATED_LOCAL_COMMIT_READY
+source_commit: 2a91511
+mode: metadata-only canonical artifact and validator binding
+summary: Promoted visual eval failure taxonomy from a planning-doc anchor to a canonical metadata-only artifact, added a structured metadata accumulation contract, and extended the review result protocol validator to bind taxonomy_refs and failure_tags against the canonical artifact. The protocol fixture now references tests/schema_examples/visual_eval_failure_taxonomy.example.json instead of the old planning doc anchor.
+changed_files_current_task:
+  - tests/schema_examples/visual_eval_failure_taxonomy.example.json
+  - tests/schema_examples/visual_eval_metadata_accumulation.example.json
+  - tests/schema_examples/visual_eval_review_result_protocol.example.json
+  - tests/schema_examples/visual_eval_review_result_protocol_negative_cases.example.json
+  - scripts/validate_visual_eval_review_result_protocol.js
+  - .agent_board/CHECKPOINT.md
+validation_run:
+  - node --check scripts/validate_visual_eval_review_result_protocol.js
+  - node scripts/validate_visual_eval_review_result_protocol.js
+validation_result: passed
+canonical_taxonomy_categories:
+  - subject_identity
+  - commercial_usability
+  - material_realism
+  - lighting_consistency
+  - composition
+  - edge_or_mask_artifact
+  - background_contamination
+  - style_mismatch
+  - brand_mismatch
+  - other_blocking_failure
+registered_failure_tag_count: 24
+negative_cases_verified:
+  - unknown_failure_tag
+  - unknown_taxonomy_ref
+  - route guard true / unknown guard key
+  - illegal metadata accumulation action
+runtime_execution_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+memory_written: false
+accepted_samples_written: false
+Batch_005_started: false
+production_candidate_002_started: false
+package_json_modified: false
+dependency_change_performed: false
+push_performed: false
+recommended_next_long_phase: review_result_review_bridge_readonly_wiring
+next_phase_started: false
+```
+
+---
+
 ## Checkpoint - P2.14 Visual Eval Review Result Protocol Validator Implementation
 
 ```text

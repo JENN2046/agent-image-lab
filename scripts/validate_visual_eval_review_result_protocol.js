@@ -7,6 +7,8 @@ const path = require("node:path");
 const root = path.resolve(__dirname, "..");
 const protocolFixturePath = "tests/schema_examples/visual_eval_review_result_protocol.example.json";
 const negativeCasesPath = "tests/schema_examples/visual_eval_review_result_protocol_negative_cases.example.json";
+const taxonomyArtifactPath = "tests/schema_examples/visual_eval_failure_taxonomy.example.json";
+const metadataAccumulationPath = "tests/schema_examples/visual_eval_metadata_accumulation.example.json";
 
 const expectedFixtureType = "metadata_only_visual_eval_review_result_protocol";
 const expectedNegativeFixtureType = "metadata_only_visual_eval_review_result_protocol_negative_cases";
@@ -66,9 +68,27 @@ const allowedMetadataActions = {
     "defer_until_taxonomy_update",
   ],
 };
-const knownTaxonomyRefs = new Set([
-  "docs/v14_020_visual_eval_and_failure_taxonomy_planning_gate.md#failure-taxonomy-draft",
-]);
+const expectedTaxonomyCategories = [
+  "subject_identity",
+  "commercial_usability",
+  "material_realism",
+  "lighting_consistency",
+  "composition",
+  "edge_or_mask_artifact",
+  "background_contamination",
+  "style_mismatch",
+  "brand_mismatch",
+  "other_blocking_failure",
+];
+const expectedSeverityLevels = ["blocking", "patchable", "advisory"];
+const expectedAccumulationRecordKinds = [
+  "accepted_metadata_candidate",
+  "rejected_failure_learning_metadata",
+  "archive_reference_action",
+  "next_review_action",
+];
+let knownTaxonomyRefs = new Set([taxonomyArtifactPath]);
+let knownFailureTags = new Set();
 const expectedNegativeCases = new Map([
   ["missing_reject_failure_tags", "reject_failure_tags_required"],
   ["patch_missing_blocking_watch_items", "patch_blocking_watch_items_required"],
@@ -76,6 +96,7 @@ const expectedNegativeCases = new Map([
   ["write_guard_memory_true", "route_guard_must_be_false"],
   ["absolute_local_source_ref", "absolute_local_path_forbidden"],
   ["unknown_taxonomy_ref", "unknown_taxonomy_ref_forbidden"],
+  ["unknown_failure_tag", "unknown_failure_tag_forbidden"],
   ["reject_missing_never_production_reason", "reject_never_production_reason_required"],
   ["unknown_route_guard_key", "unknown_route_guard_key_forbidden"],
   ["illegal_metadata_accumulation_action", "illegal_metadata_accumulation_action"],
@@ -216,6 +237,20 @@ function validateTaxonomyRefs(refs, ctx, label, required) {
   }
 }
 
+function validateFailureTags(tags, ctx, label) {
+  if (!Array.isArray(tags)) {
+    ctx.fail("failure_tags_array_required", `${label}: failure_tags must be an array`);
+    return;
+  }
+  for (const tag of tags) {
+    if (!isNonEmptyString(tag)) {
+      ctx.fail("failure_tag_non_empty", `${label}: failure tag must be non-empty`);
+    } else if (!knownFailureTags.has(tag)) {
+      ctx.fail("unknown_failure_tag_forbidden", `${label}: unknown failure tag ${tag}`);
+    }
+  }
+}
+
 function validateReviewResult(record, ctx) {
   const label = record?.review_result_id || "<missing-review-result-id>";
   if (!record || typeof record !== "object" || Array.isArray(record)) {
@@ -248,6 +283,7 @@ function validateReviewResult(record, ctx) {
   validateRouteGuards(record.route_guards, ctx, label);
   validateMetadataAccumulation(record.metadata_accumulation, ctx, label);
   validateTaxonomyRefs(record.taxonomy_refs, ctx, label, record.outcome === "reject");
+  validateFailureTags(record.failure_tags, ctx, label);
 
   if (record.outcome === "pass") {
     if (!isNonEmptyArray(record.pass_reasons)) {
@@ -273,6 +309,12 @@ function validateReviewResult(record, ctx) {
     }
     if (record.never_production_reason !== null) {
       ctx.fail("patch_never_production_reason_must_be_null", `${label}: patch never_production_reason must be null`);
+    }
+    if (
+      record.metadata_accumulation?.accepted_metadata_action !== "none" ||
+      record.metadata_accumulation?.rejected_metadata_action !== "none"
+    ) {
+      ctx.fail("patch_metadata_accumulation_write_action_forbidden", `${label}: patch cannot open accepted or rejected metadata write routes`);
     }
   }
 
@@ -329,6 +371,133 @@ function validateFixture(fixture) {
 
   for (const record of fixture.review_results) {
     validateReviewResult(record, ctx);
+  }
+  return ctx;
+}
+
+function validateTaxonomyArtifact(taxonomy) {
+  const ctx = createContext();
+  const tagSet = new Set();
+
+  if (!taxonomy || typeof taxonomy !== "object" || Array.isArray(taxonomy)) {
+    ctx.fail("taxonomy_artifact_object_required", "taxonomy artifact root must be an object");
+    return { ctx, tagSet };
+  }
+  if (taxonomy.artifact_type !== "canonical_visual_eval_failure_taxonomy") {
+    ctx.fail("taxonomy_artifact_type_expected", "taxonomy artifact_type must be canonical_visual_eval_failure_taxonomy");
+  }
+  if (taxonomy.version !== "v1") {
+    ctx.fail("taxonomy_version_v1_required", "taxonomy version must be v1");
+  }
+  if (taxonomy.canonical_status !== "canonical_metadata_only") {
+    ctx.fail("taxonomy_canonical_status_required", "taxonomy must be canonical_metadata_only");
+  }
+  if (!sameSet(taxonomy.required_categories, expectedTaxonomyCategories)) {
+    ctx.fail("taxonomy_required_categories_exact", "taxonomy required_categories must match v1 category set");
+  }
+  if (!sameSet(taxonomy.severity_levels, expectedSeverityLevels)) {
+    ctx.fail("taxonomy_severity_levels_exact", "taxonomy severity levels must be blocking, patchable, advisory");
+  }
+  if (hasAbsoluteLocalPath(taxonomy)) {
+    ctx.fail("absolute_local_path_forbidden", "taxonomy artifact must not contain absolute local paths");
+  }
+  validateRouteGuards(taxonomy.route_guards, ctx, "taxonomy_artifact");
+
+  if (!Array.isArray(taxonomy.categories)) {
+    ctx.fail("taxonomy_categories_array_required", "taxonomy categories must be an array");
+    return { ctx, tagSet };
+  }
+
+  const categoryIds = taxonomy.categories.map((category) => category?.category_id);
+  if (!sameSet(categoryIds, expectedTaxonomyCategories)) {
+    ctx.fail("taxonomy_categories_exact", "taxonomy categories must match v1 category set");
+  }
+
+  for (const category of taxonomy.categories) {
+    const label = category?.category_id || "<missing-category-id>";
+    if (!expectedTaxonomyCategories.includes(category?.category_id)) {
+      ctx.fail("unknown_taxonomy_category_forbidden", `unknown taxonomy category ${label}`);
+    }
+    if (!isNonEmptyString(category?.definition)) {
+      ctx.fail("taxonomy_category_definition_required", `${label}: definition required`);
+    }
+    if (!Array.isArray(category?.failure_tags) || category.failure_tags.length === 0) {
+      ctx.fail("taxonomy_category_failure_tags_required", `${label}: failure_tags required`);
+      continue;
+    }
+    for (const tag of category.failure_tags) {
+      if (!isNonEmptyString(tag?.tag_id)) {
+        ctx.fail("taxonomy_failure_tag_id_required", `${label}: tag_id required`);
+        continue;
+      }
+      if (tagSet.has(tag.tag_id)) {
+        ctx.fail("taxonomy_duplicate_failure_tag_forbidden", `${label}: duplicate tag ${tag.tag_id}`);
+      }
+      tagSet.add(tag.tag_id);
+      if (!expectedSeverityLevels.includes(tag.severity)) {
+        ctx.fail("taxonomy_failure_tag_severity_expected", `${tag.tag_id}: invalid severity ${tag.severity}`);
+      }
+      if (!expectedOutcomes.includes(tag.default_outcome)) {
+        ctx.fail("taxonomy_failure_tag_default_outcome_expected", `${tag.tag_id}: invalid outcome ${tag.default_outcome}`);
+      }
+    }
+  }
+
+  return { ctx, tagSet };
+}
+
+function validateMetadataAccumulationArtifact(artifact) {
+  const ctx = createContext();
+
+  if (!artifact || typeof artifact !== "object" || Array.isArray(artifact)) {
+    ctx.fail("metadata_accumulation_artifact_object_required", "metadata accumulation artifact root must be an object");
+    return ctx;
+  }
+  if (artifact.artifact_type !== "metadata_only_visual_eval_metadata_accumulation_contract") {
+    ctx.fail("metadata_accumulation_artifact_type_expected", "metadata accumulation artifact_type mismatch");
+  }
+  if (artifact.version !== "v1") {
+    ctx.fail("metadata_accumulation_version_v1_required", "metadata accumulation version must be v1");
+  }
+  if (artifact.source_review_result_protocol !== protocolFixturePath) {
+    ctx.fail("metadata_accumulation_protocol_ref_expected", "metadata accumulation source protocol mismatch");
+  }
+  if (artifact.source_taxonomy !== taxonomyArtifactPath) {
+    ctx.fail("metadata_accumulation_taxonomy_ref_expected", "metadata accumulation source taxonomy mismatch");
+  }
+  if (hasAbsoluteLocalPath(artifact)) {
+    ctx.fail("absolute_local_path_forbidden", "metadata accumulation artifact must not contain absolute local paths");
+  }
+  validateRouteGuards(artifact.route_guards, ctx, "metadata_accumulation_artifact");
+
+  for (const [key, expected] of Object.entries(allowedMetadataActions)) {
+    if (!sameSet(artifact.allowed_actions?.[key], expected)) {
+      ctx.fail("metadata_accumulation_action_allowlist_exact", `${key}: allowlist mismatch`);
+    }
+  }
+
+  if (!Array.isArray(artifact.accumulation_records)) {
+    ctx.fail("metadata_accumulation_records_array_required", "accumulation_records must be an array");
+    return ctx;
+  }
+  const recordKinds = artifact.accumulation_records.map((record) => record?.record_kind);
+  if (!sameSet(recordKinds, expectedAccumulationRecordKinds)) {
+    ctx.fail("metadata_accumulation_record_kinds_exact", "accumulation record kinds must match v1 set");
+  }
+  for (const record of artifact.accumulation_records) {
+    const label = record?.record_kind || "<missing-record-kind>";
+    if (record.write_allowed_now !== false) {
+      ctx.fail("metadata_accumulation_write_must_be_false", `${label}: write_allowed_now must be false`);
+    }
+    const allowedActionKnown = Object.values(allowedMetadataActions).some((allowed) =>
+      allowed.includes(record?.allowed_action)
+    );
+    if (!allowedActionKnown) {
+      ctx.fail("illegal_metadata_accumulation_action", `${label}: unknown allowed_action ${record?.allowed_action}`);
+    }
+    if (!isNonEmptyString(record.consumer_intent)) {
+      ctx.fail("metadata_accumulation_consumer_intent_required", `${label}: consumer_intent required`);
+    }
   }
   return ctx;
 }
@@ -400,12 +569,28 @@ function runNegativeCases(protocolFixture, negativeCases) {
   }
 }
 
-for (const file of [protocolFixturePath, negativeCasesPath]) {
+for (const file of [protocolFixturePath, negativeCasesPath, taxonomyArtifactPath, metadataAccumulationPath]) {
   addResult(`${file}_exists`, fs.existsSync(repoPath(file)), file);
 }
 
 let protocolFixture = null;
 let negativeCases = null;
+let taxonomyArtifact = null;
+let metadataAccumulationArtifact = null;
+
+try {
+  taxonomyArtifact = readJson(taxonomyArtifactPath);
+  addResult("taxonomy_artifact_json_parseable", true);
+} catch (error) {
+  addResult("taxonomy_artifact_json_parseable", false, error.message);
+}
+
+try {
+  metadataAccumulationArtifact = readJson(metadataAccumulationPath);
+  addResult("metadata_accumulation_artifact_json_parseable", true);
+} catch (error) {
+  addResult("metadata_accumulation_artifact_json_parseable", false, error.message);
+}
 
 try {
   protocolFixture = readJson(protocolFixturePath);
@@ -419,6 +604,31 @@ try {
   addResult("negative_cases_json_parseable", true);
 } catch (error) {
   addResult("negative_cases_json_parseable", false, error.message);
+}
+
+if (taxonomyArtifact) {
+  const result = validateTaxonomyArtifact(taxonomyArtifact);
+  knownFailureTags = result.tagSet;
+  knownTaxonomyRefs = new Set([taxonomyArtifactPath]);
+  addResult(
+    "taxonomy_artifact_canonical_case_passes",
+    result.ctx.ok,
+    result.ctx.errors.map((error) => `${error.code}: ${error.detail}`).join("; ")
+  );
+  addResult(
+    "taxonomy_failure_tags_registered",
+    knownFailureTags.size > 0,
+    `${knownFailureTags.size} tags`
+  );
+}
+
+if (metadataAccumulationArtifact) {
+  const result = validateMetadataAccumulationArtifact(metadataAccumulationArtifact);
+  addResult(
+    "metadata_accumulation_artifact_case_passes",
+    result.ok,
+    result.errors.map((error) => `${error.code}: ${error.detail}`).join("; ")
+  );
 }
 
 if (protocolFixture) {
@@ -447,12 +657,15 @@ const summary = {
   validator: "validate_visual_eval_review_result_protocol",
   version: "v1",
   passed,
-  files_checked: [protocolFixturePath, negativeCasesPath],
+  files_checked: [protocolFixturePath, negativeCasesPath, taxonomyArtifactPath, metadataAccumulationPath],
   positive_fixture_validated: Boolean(protocolFixture),
   negative_cases_validated: Boolean(negativeCases),
+  taxonomy_artifact_validated: Boolean(taxonomyArtifact),
+  metadata_accumulation_artifact_validated: Boolean(metadataAccumulationArtifact),
   outcome_set_expected: expectedOutcomes,
   route_guard_keys_expected: expectedRouteGuardKeys,
   known_taxonomy_refs: [...knownTaxonomyRefs],
+  known_failure_tag_count: knownFailureTags.size,
   check_count: results.length,
   failed_count: errors.length,
   metadata_only_boundaries: {
