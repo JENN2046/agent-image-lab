@@ -1,0 +1,85 @@
+{
+  "fixture_id": "visual_eval_readonly_review_corpus_renderer_negative_cases_001",
+  "fixture_type": "metadata_only_visual_eval_readonly_review_corpus_renderer_negative_cases",
+  "source_renderer": "tests/schema_examples/visual_eval_readonly_review_corpus_renderer.example.json",
+  "negative_case_contract": {
+    "case_shape": "corpus_renderer_mutation_specification",
+    "purpose": "readonly_corpus_renderer_fail_closed_cases",
+    "all_cases_expected_to_fail": true
+  },
+  "negative_cases": [
+    {
+      "case_id": "missing_display_row",
+      "mutation": {
+        "operation": "remove_row_by_outcome",
+        "outcome": "reject"
+      },
+      "expected_failure_code": "renderer_row_count_matches_corpus",
+      "expected_reason": "renderer must display all corpus rows"
+    },
+    {
+      "case_id": "patch_next_action_mismatch",
+      "mutation": {
+        "operation": "set_field",
+        "field": "display_model.display_rows.1.next_review_action",
+        "value": "queue_for_future_human_review"
+      },
+      "expected_failure_code": "renderer_patch_next_action_expected",
+      "expected_reason": "patch row must preserve write_patch_plan_only"
+    },
+    {
+      "case_id": "missing_taxonomy_exposure",
+      "mutation": {
+        "operation": "set_field",
+        "field": "display_model.display_rows.1.taxonomy_tags",
+        "value": []
+      },
+      "expected_failure_code": "renderer_failure_rows_expose_taxonomy",
+      "expected_reason": "patch/reject display rows must expose taxonomy tags"
+    },
+    {
+      "case_id": "missing_metadata_panel",
+      "mutation": {
+        "operation": "set_field",
+        "field": "display_model.metadata_section_panels",
+        "value": []
+      },
+      "expected_failure_code": "renderer_metadata_section_panels_exact",
+      "expected_reason": "renderer must expose metadata section panels for readonly consumption"
+    },
+    {
+      "case_id": "guard_image_true",
+      "mutation": {
+        "operation": "set_field",
+        "field": "guard.image_generation_performed",
+        "value": true
+      },
+      "expected_failure_code": "renderer_guard_image_generation_performed_false",
+      "expected_reason": "renderer must keep image generation closed"
+    },
+    {
+      "case_id": "absolute_local_source_corpus",
+      "mutation": {
+        "operation": "set_field",
+        "field": "source_corpus",
+        "value": "<synthetic-windows-absolute-path>\\visual_eval_readonly_review_workspace_corpus.example.json"
+      },
+      "expected_failure_code": "renderer_no_absolute_or_loopback",
+      "expected_reason": "renderer source refs must remain repo-relative"
+    }
+  ],
+  "boundary_confirmation": {
+    "metadata_only": true,
+    "read_only": true,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "memory_written": false,
+    "DailyNote_written": false,
+    "VCP_memory_written": false,
+    "accepted_samples_written": false,
+    "production_candidate_002_started": false,
+    "Batch_005_started": false
+  }
+}
