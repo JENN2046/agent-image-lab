@@ -48,7 +48,9 @@
   },
   "local_admin_route": {
     "method": "POST",
-    "url_ref": "http://127.0.0.1:6005/admin_api/ai-image-agents/execute",
+    "url_ref": "<redacted-local-admin-route>",
+    "local_admin_route_used": true,
+    "local_admin_route_scope": "loopback_redacted",
     "http_status": 200,
     "route_reached": true,
     "summary": {

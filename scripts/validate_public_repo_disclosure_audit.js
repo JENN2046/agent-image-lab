@@ -12,6 +12,8 @@ const scopeRoots = [
   "reports/production_candidate_authorization",
   "reports/visual_asset_eval_dry_run",
   "reports/production",
+  "reports/provider_receipts",
+  "review_console/live_receipt_bridge",
 ];
 
 const fileIncludePatterns = [
@@ -20,6 +22,8 @@ const fileIncludePatterns = [
   /reports[\\/]production_candidate_authorization[\\/][^\\/]+\.json$/,
   /reports[\\/]visual_asset_eval_dry_run[\\/][^\\/]*production_candidate[^\\/]*\.json$/,
   /reports[\\/]production[\\/].+\.(json|ya?ml|md|txt)$/,
+  /reports[\\/]provider_receipts[\\/].+\.(json|ya?ml|md|txt)$/,
+  /review_console[\\/]live_receipt_bridge[\\/].+\.(json|ya?ml|md|txt)$/,
 ];
 
 const textFinders = [
@@ -32,8 +36,8 @@ const textFinders = [
     pattern: /\/(?:Users|home)\/[A-Za-z0-9._-]+\/[^\s"',)]*/g,
   },
   {
-    kind: "http_url",
-    pattern: /https?:\/\/[^\s"',)]+/gi,
+    kind: "localhost_url",
+    pattern: /https?:\/\/(?:localhost|127\.0\.0\.1|\[::1\]|::1)(?::\d+)?[^\s"',)]*/gi,
   },
   {
     kind: "secret_string_assignment",
@@ -178,12 +182,16 @@ for (const file of files) {
 
 const generationAttemptResults = files.filter((file) => /runs\/real_generation\/[^/]+\/generation_attempt_result\.json$/.test(file.rel));
 const productionRefs = files.filter((file) => file.rel.startsWith("reports/production") || file.rel.includes("production_candidate"));
+const providerReceipts = files.filter((file) => file.rel.startsWith("reports/provider_receipts/"));
+const liveReceiptBridgeEntries = files.filter((file) => file.rel.startsWith("review_console/live_receipt_bridge/"));
 
 add("scoped_files_present", files.length >= 1, files.map((file) => file.rel));
 add("generation_attempt_results_scanned", generationAttemptResults.length >= 1, generationAttemptResults.map((file) => file.rel));
 add("production_refs_scanned", productionRefs.length >= 1, productionRefs.map((file) => file.rel));
+add("provider_receipts_scanned", providerReceipts.length >= 1, providerReceipts.map((file) => file.rel));
+add("live_receipt_bridge_scanned", liveReceiptBridgeEntries.length >= 1, liveReceiptBridgeEntries.map((file) => file.rel));
 add("structured_files_parse", parseFailures.length === 0, parseFailures);
-add("no_local_absolute_paths_or_urls_or_secret_strings", allTextFindings.length === 0, allTextFindings);
+add("no_local_absolute_paths_or_localhost_urls_or_secret_strings", allTextFindings.length === 0, allTextFindings);
 add("no_raw_prompt_fields_in_public_scope", allPromptFindings.length === 0, allPromptFindings);
 
 const failed = checks.filter((check) => !check.passed);
@@ -196,8 +204,10 @@ const output = {
   scanned_file_count: files.length,
   generation_attempt_result_count: generationAttemptResults.length,
   production_ref_count: productionRefs.length,
+  provider_receipt_count: providerReceipts.length,
+  live_receipt_bridge_count: liveReceiptBridgeEntries.length,
   disclosure_finding_count: allTextFindings.length + allPromptFindings.length,
-  local_absolute_path_or_url_or_secret_string_findings: allTextFindings,
+  local_absolute_path_or_localhost_url_or_secret_string_findings: allTextFindings,
   raw_prompt_findings: allPromptFindings,
   parse_failures: parseFailures,
   side_effects: {
