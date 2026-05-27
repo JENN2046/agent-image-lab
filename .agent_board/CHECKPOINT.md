@@ -1,5 +1,63 @@
 ---
 
+## Checkpoint - P3.13 Readonly Metadata Accumulation Queue Query
+
+```text
+phase: p3_13_readonly_metadata_accumulation_queue_query
+status: completed_validated_pending_local_commit
+result: COMPLETED_VALIDATED
+source_commit: d6cd6c7
+mode: metadata-only readonly metadata accumulation queue query
+summary: Added a readonly query payload for the metadata accumulation queue consumer. The query indexes queue consumer items by section, outcome, next review action, metadata action, failure tag, and selected state while requiring all refs to resolve back to consumer sections and keeping all write/runtime/provider/memory guards closed. The catalog now enumerates the query as a canonical readonly artifact and runs its validator.
+changed_files_current_task:
+  - kernel/visual_eval_readonly_metadata_accumulation_queue_query.js
+  - scripts/validate_visual_eval_readonly_metadata_accumulation_queue_query.js
+  - scripts/validate_visual_eval_readonly_review_artifact_catalog.js
+  - tests/schema_examples/visual_eval_readonly_metadata_accumulation_queue_query.example.json
+  - tests/schema_examples/visual_eval_readonly_metadata_accumulation_queue_query_negative_cases.example.json
+  - tests/schema_examples/visual_eval_readonly_review_artifact_catalog.example.json
+  - .agent_board/CHECKPOINT.md
+validation_run:
+  - node --check kernel/visual_eval_readonly_metadata_accumulation_queue_query.js
+  - node --check scripts/validate_visual_eval_readonly_metadata_accumulation_queue_query.js
+  - node --check scripts/validate_visual_eval_readonly_review_artifact_catalog.js
+  - node scripts/validate_visual_eval_readonly_metadata_accumulation_queue_query.js
+  - node scripts/validate_visual_eval_readonly_review_artifact_catalog.js
+  - git diff --check
+validation_result: passed
+query_indexes_verified:
+  - by_section
+  - by_outcome
+  - by_next_review_action
+  - by_metadata_action
+  - by_failure_tag
+  - selected_items
+negative_cases_verified:
+  - missing_patch_section_index
+  - dangling_query_item_ref
+  - query_guard_memory_true
+  - absolute_local_source_consumer
+  - missing_selected_patch_ref
+runtime_execution_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+memory_written: false
+accepted_samples_written: false
+Batch_005_started: false
+production_candidate_002_started: false
+package_json_modified: false
+dependency_change_performed: false
+push_performed: false
+recommended_next_long_phase: readonly_metadata_accumulation_query_surface_or_push_safety_gate
+next_phase_started: false
+```
+
+---
+
 ## Checkpoint - P3.11 Readonly Metadata Accumulation Queue
 
 ```text

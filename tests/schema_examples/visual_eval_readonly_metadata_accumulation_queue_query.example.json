@@ -1,0 +1,476 @@
+{
+  "query_payload_id": "visual_eval_readonly_metadata_accumulation_queue_query_v1_synthetic_001",
+  "query_payload_type": "metadata_only_visual_eval_readonly_metadata_accumulation_queue_query",
+  "status": "readonly_metadata_accumulation_queue_query_payload_ready",
+  "source_queue_consumer": "tests/schema_examples/visual_eval_readonly_metadata_accumulation_queue_consumer.example.json",
+  "query_contract": {
+    "metadata_only": true,
+    "read_only": true,
+    "indexed_fields": [
+      "section_id",
+      "outcome",
+      "next_review_action",
+      "metadata_actions.*",
+      "failure_tags",
+      "selected"
+    ],
+    "item_refs_must_resolve_to_consumer_sections": true,
+    "write_allowed": false
+  },
+  "indexes": {
+    "by_section": {
+      "accepted_metadata_candidates": [
+        {
+          "section_id": "accepted_metadata_candidates",
+          "review_result_id": "visual_eval_review_result_pass_synthetic_001",
+          "candidate_id": "synthetic_product_still_life_pass_001",
+          "case_id": "visual_eval_image_case_pass_synthetic_001",
+          "outcome": "pass",
+          "selected": false
+        }
+      ],
+      "archive_references": [
+        {
+          "section_id": "archive_references",
+          "review_result_id": "visual_eval_review_result_pass_synthetic_001",
+          "candidate_id": "synthetic_product_still_life_pass_001",
+          "case_id": "visual_eval_image_case_pass_synthetic_001",
+          "outcome": "pass",
+          "selected": false
+        },
+        {
+          "section_id": "archive_references",
+          "review_result_id": "visual_eval_review_result_patch_synthetic_001",
+          "candidate_id": "synthetic_product_still_life_patch_001",
+          "case_id": "visual_eval_image_case_patch_synthetic_001",
+          "outcome": "patch",
+          "selected": true
+        },
+        {
+          "section_id": "archive_references",
+          "review_result_id": "visual_eval_review_result_reject_synthetic_001",
+          "candidate_id": "synthetic_product_still_life_reject_001",
+          "case_id": "visual_eval_image_case_reject_synthetic_001",
+          "outcome": "reject",
+          "selected": false
+        }
+      ],
+      "failure_learning_metadata": [
+        {
+          "section_id": "failure_learning_metadata",
+          "review_result_id": "visual_eval_review_result_reject_synthetic_001",
+          "candidate_id": "synthetic_product_still_life_reject_001",
+          "case_id": "visual_eval_image_case_reject_synthetic_001",
+          "outcome": "reject",
+          "selected": false
+        }
+      ],
+      "next_review_actions": [
+        {
+          "section_id": "next_review_actions",
+          "review_result_id": "visual_eval_review_result_pass_synthetic_001",
+          "candidate_id": "synthetic_product_still_life_pass_001",
+          "case_id": "visual_eval_image_case_pass_synthetic_001",
+          "outcome": "pass",
+          "selected": false
+        },
+        {
+          "section_id": "next_review_actions",
+          "review_result_id": "visual_eval_review_result_patch_synthetic_001",
+          "candidate_id": "synthetic_product_still_life_patch_001",
+          "case_id": "visual_eval_image_case_patch_synthetic_001",
+          "outcome": "patch",
+          "selected": true
+        },
+        {
+          "section_id": "next_review_actions",
+          "review_result_id": "visual_eval_review_result_reject_synthetic_001",
+          "candidate_id": "synthetic_product_still_life_reject_001",
+          "case_id": "visual_eval_image_case_reject_synthetic_001",
+          "outcome": "reject",
+          "selected": false
+        }
+      ],
+      "patch_plan_only": [
+        {
+          "section_id": "patch_plan_only",
+          "review_result_id": "visual_eval_review_result_patch_synthetic_001",
+          "candidate_id": "synthetic_product_still_life_patch_001",
+          "case_id": "visual_eval_image_case_patch_synthetic_001",
+          "outcome": "patch",
+          "selected": true
+        }
+      ]
+    },
+    "by_outcome": {
+      "pass": [
+        {
+          "section_id": "accepted_metadata_candidates",
+          "review_result_id": "visual_eval_review_result_pass_synthetic_001",
+          "candidate_id": "synthetic_product_still_life_pass_001",
+          "case_id": "visual_eval_image_case_pass_synthetic_001",
+          "outcome": "pass",
+          "selected": false
+        },
+        {
+          "section_id": "archive_references",
+          "review_result_id": "visual_eval_review_result_pass_synthetic_001",
+          "candidate_id": "synthetic_product_still_life_pass_001",
+          "case_id": "visual_eval_image_case_pass_synthetic_001",
+          "outcome": "pass",
+          "selected": false
+        },
+        {
+          "section_id": "next_review_actions",
+          "review_result_id": "visual_eval_review_result_pass_synthetic_001",
+          "candidate_id": "synthetic_product_still_life_pass_001",
+          "case_id": "visual_eval_image_case_pass_synthetic_001",
+          "outcome": "pass",
+          "selected": false
+        }
+      ],
+      "patch": [
+        {
+          "section_id": "patch_plan_only",
+          "review_result_id": "visual_eval_review_result_patch_synthetic_001",
+          "candidate_id": "synthetic_product_still_life_patch_001",
+          "case_id": "visual_eval_image_case_patch_synthetic_001",
+          "outcome": "patch",
+          "selected": true
+        },
+        {
+          "section_id": "archive_references",
+          "review_result_id": "visual_eval_review_result_patch_synthetic_001",
+          "candidate_id": "synthetic_product_still_life_patch_001",
+          "case_id": "visual_eval_image_case_patch_synthetic_001",
+          "outcome": "patch",
+          "selected": true
+        },
+        {
+          "section_id": "next_review_actions",
+          "review_result_id": "visual_eval_review_result_patch_synthetic_001",
+          "candidate_id": "synthetic_product_still_life_patch_001",
+          "case_id": "visual_eval_image_case_patch_synthetic_001",
+          "outcome": "patch",
+          "selected": true
+        }
+      ],
+      "reject": [
+        {
+          "section_id": "failure_learning_metadata",
+          "review_result_id": "visual_eval_review_result_reject_synthetic_001",
+          "candidate_id": "synthetic_product_still_life_reject_001",
+          "case_id": "visual_eval_image_case_reject_synthetic_001",
+          "outcome": "reject",
+          "selected": false
+        },
+        {
+          "section_id": "archive_references",
+          "review_result_id": "visual_eval_review_result_reject_synthetic_001",
+          "candidate_id": "synthetic_product_still_life_reject_001",
+          "case_id": "visual_eval_image_case_reject_synthetic_001",
+          "outcome": "reject",
+          "selected": false
+        },
+        {
+          "section_id": "next_review_actions",
+          "review_result_id": "visual_eval_review_result_reject_synthetic_001",
+          "candidate_id": "synthetic_product_still_life_reject_001",
+          "case_id": "visual_eval_image_case_reject_synthetic_001",
+          "outcome": "reject",
+          "selected": false
+        }
+      ]
+    },
+    "by_next_review_action": {
+      "defer_until_taxonomy_update": [
+        {
+          "section_id": "failure_learning_metadata",
+          "review_result_id": "visual_eval_review_result_reject_synthetic_001",
+          "candidate_id": "synthetic_product_still_life_reject_001",
+          "case_id": "visual_eval_image_case_reject_synthetic_001",
+          "outcome": "reject",
+          "selected": false
+        },
+        {
+          "section_id": "archive_references",
+          "review_result_id": "visual_eval_review_result_reject_synthetic_001",
+          "candidate_id": "synthetic_product_still_life_reject_001",
+          "case_id": "visual_eval_image_case_reject_synthetic_001",
+          "outcome": "reject",
+          "selected": false
+        },
+        {
+          "section_id": "next_review_actions",
+          "review_result_id": "visual_eval_review_result_reject_synthetic_001",
+          "candidate_id": "synthetic_product_still_life_reject_001",
+          "case_id": "visual_eval_image_case_reject_synthetic_001",
+          "outcome": "reject",
+          "selected": false
+        }
+      ],
+      "queue_for_future_human_review": [
+        {
+          "section_id": "accepted_metadata_candidates",
+          "review_result_id": "visual_eval_review_result_pass_synthetic_001",
+          "candidate_id": "synthetic_product_still_life_pass_001",
+          "case_id": "visual_eval_image_case_pass_synthetic_001",
+          "outcome": "pass",
+          "selected": false
+        },
+        {
+          "section_id": "archive_references",
+          "review_result_id": "visual_eval_review_result_pass_synthetic_001",
+          "candidate_id": "synthetic_product_still_life_pass_001",
+          "case_id": "visual_eval_image_case_pass_synthetic_001",
+          "outcome": "pass",
+          "selected": false
+        },
+        {
+          "section_id": "next_review_actions",
+          "review_result_id": "visual_eval_review_result_pass_synthetic_001",
+          "candidate_id": "synthetic_product_still_life_pass_001",
+          "case_id": "visual_eval_image_case_pass_synthetic_001",
+          "outcome": "pass",
+          "selected": false
+        }
+      ],
+      "write_patch_plan_only": [
+        {
+          "section_id": "patch_plan_only",
+          "review_result_id": "visual_eval_review_result_patch_synthetic_001",
+          "candidate_id": "synthetic_product_still_life_patch_001",
+          "case_id": "visual_eval_image_case_patch_synthetic_001",
+          "outcome": "patch",
+          "selected": true
+        },
+        {
+          "section_id": "archive_references",
+          "review_result_id": "visual_eval_review_result_patch_synthetic_001",
+          "candidate_id": "synthetic_product_still_life_patch_001",
+          "case_id": "visual_eval_image_case_patch_synthetic_001",
+          "outcome": "patch",
+          "selected": true
+        },
+        {
+          "section_id": "next_review_actions",
+          "review_result_id": "visual_eval_review_result_patch_synthetic_001",
+          "candidate_id": "synthetic_product_still_life_patch_001",
+          "case_id": "visual_eval_image_case_patch_synthetic_001",
+          "outcome": "patch",
+          "selected": true
+        }
+      ]
+    },
+    "by_metadata_action": {
+      "archive_as_negative_reference": [
+        {
+          "section_id": "failure_learning_metadata",
+          "review_result_id": "visual_eval_review_result_reject_synthetic_001",
+          "candidate_id": "synthetic_product_still_life_reject_001",
+          "case_id": "visual_eval_image_case_reject_synthetic_001",
+          "outcome": "reject",
+          "selected": false
+        },
+        {
+          "section_id": "archive_references",
+          "review_result_id": "visual_eval_review_result_reject_synthetic_001",
+          "candidate_id": "synthetic_product_still_life_reject_001",
+          "case_id": "visual_eval_image_case_reject_synthetic_001",
+          "outcome": "reject",
+          "selected": false
+        }
+      ],
+      "archive_as_positive_reference": [
+        {
+          "section_id": "accepted_metadata_candidates",
+          "review_result_id": "visual_eval_review_result_pass_synthetic_001",
+          "candidate_id": "synthetic_product_still_life_pass_001",
+          "case_id": "visual_eval_image_case_pass_synthetic_001",
+          "outcome": "pass",
+          "selected": false
+        },
+        {
+          "section_id": "archive_references",
+          "review_result_id": "visual_eval_review_result_pass_synthetic_001",
+          "candidate_id": "synthetic_product_still_life_pass_001",
+          "case_id": "visual_eval_image_case_pass_synthetic_001",
+          "outcome": "pass",
+          "selected": false
+        }
+      ],
+      "keep_as_failure_learning_metadata": [
+        {
+          "section_id": "failure_learning_metadata",
+          "review_result_id": "visual_eval_review_result_reject_synthetic_001",
+          "candidate_id": "synthetic_product_still_life_reject_001",
+          "case_id": "visual_eval_image_case_reject_synthetic_001",
+          "outcome": "reject",
+          "selected": false
+        },
+        {
+          "section_id": "archive_references",
+          "review_result_id": "visual_eval_review_result_reject_synthetic_001",
+          "candidate_id": "synthetic_product_still_life_reject_001",
+          "case_id": "visual_eval_image_case_reject_synthetic_001",
+          "outcome": "reject",
+          "selected": false
+        }
+      ],
+      "keep_as_metadata_candidate": [
+        {
+          "section_id": "accepted_metadata_candidates",
+          "review_result_id": "visual_eval_review_result_pass_synthetic_001",
+          "candidate_id": "synthetic_product_still_life_pass_001",
+          "case_id": "visual_eval_image_case_pass_synthetic_001",
+          "outcome": "pass",
+          "selected": false
+        },
+        {
+          "section_id": "archive_references",
+          "review_result_id": "visual_eval_review_result_pass_synthetic_001",
+          "candidate_id": "synthetic_product_still_life_pass_001",
+          "case_id": "visual_eval_image_case_pass_synthetic_001",
+          "outcome": "pass",
+          "selected": false
+        }
+      ],
+      "metadata_only_reference": [
+        {
+          "section_id": "patch_plan_only",
+          "review_result_id": "visual_eval_review_result_patch_synthetic_001",
+          "candidate_id": "synthetic_product_still_life_patch_001",
+          "case_id": "visual_eval_image_case_patch_synthetic_001",
+          "outcome": "patch",
+          "selected": true
+        },
+        {
+          "section_id": "archive_references",
+          "review_result_id": "visual_eval_review_result_patch_synthetic_001",
+          "candidate_id": "synthetic_product_still_life_patch_001",
+          "case_id": "visual_eval_image_case_patch_synthetic_001",
+          "outcome": "patch",
+          "selected": true
+        }
+      ]
+    },
+    "by_failure_tag": {
+      "commercial_unusable": [
+        {
+          "section_id": "failure_learning_metadata",
+          "review_result_id": "visual_eval_review_result_reject_synthetic_001",
+          "candidate_id": "synthetic_product_still_life_reject_001",
+          "case_id": "visual_eval_image_case_reject_synthetic_001",
+          "outcome": "reject",
+          "selected": false
+        },
+        {
+          "section_id": "archive_references",
+          "review_result_id": "visual_eval_review_result_reject_synthetic_001",
+          "candidate_id": "synthetic_product_still_life_reject_001",
+          "case_id": "visual_eval_image_case_reject_synthetic_001",
+          "outcome": "reject",
+          "selected": false
+        }
+      ],
+      "lighting_failed": [
+        {
+          "section_id": "patch_plan_only",
+          "review_result_id": "visual_eval_review_result_patch_synthetic_001",
+          "candidate_id": "synthetic_product_still_life_patch_001",
+          "case_id": "visual_eval_image_case_patch_synthetic_001",
+          "outcome": "patch",
+          "selected": true
+        },
+        {
+          "section_id": "archive_references",
+          "review_result_id": "visual_eval_review_result_patch_synthetic_001",
+          "candidate_id": "synthetic_product_still_life_patch_001",
+          "case_id": "visual_eval_image_case_patch_synthetic_001",
+          "outcome": "patch",
+          "selected": true
+        }
+      ],
+      "material_failed": [
+        {
+          "section_id": "patch_plan_only",
+          "review_result_id": "visual_eval_review_result_patch_synthetic_001",
+          "candidate_id": "synthetic_product_still_life_patch_001",
+          "case_id": "visual_eval_image_case_patch_synthetic_001",
+          "outcome": "patch",
+          "selected": true
+        },
+        {
+          "section_id": "archive_references",
+          "review_result_id": "visual_eval_review_result_patch_synthetic_001",
+          "candidate_id": "synthetic_product_still_life_patch_001",
+          "case_id": "visual_eval_image_case_patch_synthetic_001",
+          "outcome": "patch",
+          "selected": true
+        }
+      ],
+      "subject_drift": [
+        {
+          "section_id": "failure_learning_metadata",
+          "review_result_id": "visual_eval_review_result_reject_synthetic_001",
+          "candidate_id": "synthetic_product_still_life_reject_001",
+          "case_id": "visual_eval_image_case_reject_synthetic_001",
+          "outcome": "reject",
+          "selected": false
+        },
+        {
+          "section_id": "archive_references",
+          "review_result_id": "visual_eval_review_result_reject_synthetic_001",
+          "candidate_id": "synthetic_product_still_life_reject_001",
+          "case_id": "visual_eval_image_case_reject_synthetic_001",
+          "outcome": "reject",
+          "selected": false
+        }
+      ]
+    },
+    "selected_items": [
+      {
+        "section_id": "patch_plan_only",
+        "review_result_id": "visual_eval_review_result_patch_synthetic_001",
+        "candidate_id": "synthetic_product_still_life_patch_001",
+        "case_id": "visual_eval_image_case_patch_synthetic_001",
+        "outcome": "patch",
+        "selected": true
+      },
+      {
+        "section_id": "archive_references",
+        "review_result_id": "visual_eval_review_result_patch_synthetic_001",
+        "candidate_id": "synthetic_product_still_life_patch_001",
+        "case_id": "visual_eval_image_case_patch_synthetic_001",
+        "outcome": "patch",
+        "selected": true
+      },
+      {
+        "section_id": "next_review_actions",
+        "review_result_id": "visual_eval_review_result_patch_synthetic_001",
+        "candidate_id": "synthetic_product_still_life_patch_001",
+        "case_id": "visual_eval_image_case_patch_synthetic_001",
+        "outcome": "patch",
+        "selected": true
+      }
+    ]
+  },
+  "guard": {
+    "metadata_only": true,
+    "read_only": true,
+    "display_only": true,
+    "file_write_performed": false,
+    "approval_write_performed": false,
+    "accepted_samples_write_performed": false,
+    "production_candidate_created": false,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "DailyNote_write_performed": false,
+    "VCP_memory_write_performed": false,
+    "memory_write_performed": false,
+    "Batch_005_started": false,
+    "production_candidate_002_started": false
+  }
+}

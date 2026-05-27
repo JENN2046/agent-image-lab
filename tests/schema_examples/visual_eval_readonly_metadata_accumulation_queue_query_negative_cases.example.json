@@ -1,0 +1,54 @@
+{
+  "fixture_type": "metadata_only_visual_eval_readonly_metadata_accumulation_queue_query_negative_cases",
+  "source_query": "tests/schema_examples/visual_eval_readonly_metadata_accumulation_queue_query.example.json",
+  "negative_cases": [
+    {
+      "case_id": "missing_patch_section_index",
+      "description": "Query must preserve a patch-plan-only section index.",
+      "mutation": {
+        "operation": "remove_index_key",
+        "index": "by_section",
+        "key": "patch_plan_only"
+      },
+      "expected_failure_code": "metadata_queue_query_sections_complete"
+    },
+    {
+      "case_id": "dangling_query_item_ref",
+      "description": "Every query item ref must resolve back to the source consumer sections.",
+      "mutation": {
+        "operation": "set_field",
+        "field": "indexes.by_section.patch_plan_only.0.review_result_id",
+        "value": "missing_review_result"
+      },
+      "expected_failure_code": "metadata_queue_query_item_ref_resolves"
+    },
+    {
+      "case_id": "query_guard_memory_true",
+      "description": "Query payload must not open memory writes.",
+      "mutation": {
+        "operation": "set_field",
+        "field": "guard.memory_write_performed",
+        "value": true
+      },
+      "expected_failure_code": "metadata_queue_query_guard_memory_write_performed_false"
+    },
+    {
+      "case_id": "absolute_local_source_consumer",
+      "description": "Query source consumer must remain repo-relative.",
+      "mutation": {
+        "operation": "set_field",
+        "field": "source_queue_consumer",
+        "value": "<synthetic-windows-absolute-path>\\metadata_queue_consumer.json"
+      },
+      "expected_failure_code": "metadata_queue_query_no_absolute_or_loopback"
+    },
+    {
+      "case_id": "missing_selected_patch_ref",
+      "description": "Selected patch item must remain discoverable through the query payload.",
+      "mutation": {
+        "operation": "clear_selected_items"
+      },
+      "expected_failure_code": "metadata_queue_query_selected_patch_visible"
+    }
+  ]
+}

@@ -24,6 +24,7 @@ const expectedRoles = [
   "readonly_session_drilldown",
   "readonly_metadata_accumulation_queue",
   "readonly_metadata_accumulation_queue_consumer",
+  "readonly_metadata_accumulation_queue_query",
 ];
 const expectedValidators = [
   "scripts/validate_visual_eval_review_result_protocol.js",
@@ -38,6 +39,7 @@ const expectedValidators = [
   "scripts/validate_visual_eval_readonly_review_session_drilldown.js",
   "scripts/validate_visual_eval_readonly_metadata_accumulation_queue.js",
   "scripts/validate_visual_eval_readonly_metadata_accumulation_queue_consumer.js",
+  "scripts/validate_visual_eval_readonly_metadata_accumulation_queue_query.js",
 ];
 const expectedDisplayFields = [
   "outcome",
@@ -266,6 +268,17 @@ function validateConsumerExpectations(catalog) {
   addResult("catalog_metadata_queue_consumer_selected_id_matches", metadataQueueConsumer.dashboard_summary?.selected_review_result_id === catalog.metadata_accumulation_queue_consumer_expectations?.selected_review_result_id);
   addResult("catalog_metadata_queue_consumer_selected_next_action_matches", metadataQueueConsumer.dashboard_summary?.selected_next_review_action === catalog.metadata_accumulation_queue_consumer_expectations?.selected_next_review_action);
   addResult("catalog_metadata_queue_consumer_selected_patch_visible", metadataQueueConsumer.selected_patch_plan?.review_result_id === metadataQueueConsumer.dashboard_summary?.selected_review_result_id && metadataQueueConsumer.selected_patch_plan?.selected === true);
+
+  const metadataQueueQueryEntry = getEntry(catalog, "readonly_metadata_accumulation_queue_query");
+  const metadataQueueQuery = readJson(metadataQueueQueryEntry.path);
+  addResult("catalog_metadata_queue_query_expected_path_matches", catalog.metadata_accumulation_queue_query_expectations?.query === metadataQueueQueryEntry.path);
+  addResult("catalog_metadata_queue_query_source_consumer_matches", metadataQueueQuery.source_queue_consumer === metadataQueueConsumerEntry.path);
+  addResult("catalog_metadata_queue_query_expected_source_consumer_matches", catalog.metadata_accumulation_queue_query_expectations?.source_queue_consumer === metadataQueueConsumerEntry.path);
+  addResult("catalog_metadata_queue_query_indexed_fields_exact", sameSet(metadataQueueQuery.query_contract?.indexed_fields, catalog.metadata_accumulation_queue_query_expectations?.indexed_fields || []));
+  addResult("catalog_metadata_queue_query_sections_exact", sameSet(Object.keys(metadataQueueQuery.indexes?.by_section || {}), catalog.metadata_accumulation_queue_query_expectations?.queue_sections || []));
+  addResult("catalog_metadata_queue_query_outcomes_exact", sameSet(Object.keys(metadataQueueQuery.indexes?.by_outcome || {}), catalog.metadata_accumulation_queue_query_expectations?.outcomes || []));
+  addResult("catalog_metadata_queue_query_required_failure_tags_present", (catalog.metadata_accumulation_queue_query_expectations?.required_failure_tags || []).every((tag) => Array.isArray(metadataQueueQuery.indexes?.by_failure_tag?.[tag])));
+  addResult("catalog_metadata_queue_query_selected_id_matches", (metadataQueueQuery.indexes?.selected_items || []).some((ref) => ref.review_result_id === catalog.metadata_accumulation_queue_query_expectations?.selected_review_result_id));
 }
 
 function runReferencedValidators(catalog) {
