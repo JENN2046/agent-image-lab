@@ -1,0 +1,40 @@
+id: provider_evidence_integrity_contract
+version: v0_1
+phase: p2_1_provider_evidence_integrity_phase_2
+scope:
+  provider_receipts:
+    - reports/provider_receipts/v0_6_73_real_vcp_agent_generation_*_receipt.json
+  review_handoffs:
+    - review_console/live_receipt_bridge/v0_6_73_real_vcp_agent_generation_*/bridge_entry.json
+public_disclosure_constraints:
+  local_absolute_paths: forbidden
+  loopback_urls: forbidden
+  local_admin_route_url_ref: <redacted-local-admin-route>
+  local_path_ref: <redacted-local-path>
+local_admin_route_contract:
+  local_admin_route_used: boolean
+  local_admin_route_scope: loopback_redacted
+  method: string
+  http_status: integer
+  route_reached: boolean
+artifact_integrity_contract:
+  eligible_artifacts_require:
+    - repo_relative_path
+    - byte_count
+    - sha256
+    - mime_type
+    - magic_number
+    - width
+    - height
+    - git_tracked_true
+    - git_ignored_false
+  output_scope_violation_artifacts:
+    eligibility: not_reviewable
+    public_path_policy: redacted_local_path_only
+    integrity_hash_required: false
+side_effects:
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  secret_value_read_performed: false

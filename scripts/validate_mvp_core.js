@@ -393,6 +393,27 @@ safeCheck("retry_006_artifact_integrity", () => {
     result.secret_value_read_performed === false;
 });
 
+safeCheck("provider_evidence_integrity_contract", () => {
+  const result = parseJson(runNode(["scripts/validate_provider_evidence_integrity_contract.js"]));
+  return result.passed === true &&
+    result.contract_ref === "schemas/provider_evidence_integrity_contract.schema.yaml" &&
+    result.receipt_count === 6 &&
+    result.handoff_count === 6 &&
+    result.local_admin_route_count === 8 &&
+    result.eligible_artifact_record_count === 4 &&
+    result.out_of_scope_artifact_count === 2 &&
+    result.unique_checked_artifact_paths.length === 1 &&
+    result.public_disclosure_constraints_verified === true &&
+    result.local_admin_route_redaction_verified === true &&
+    result.artifact_integrity_verified === true &&
+    result.git_tracking_verified === true &&
+    result.provider_contact_performed === false &&
+    result.plugin_call_performed === false &&
+    result.api_call_performed === false &&
+    result.image_generation_performed === false &&
+    result.secret_value_read_performed === false;
+});
+
 safeCheck("metadata_only_accepted_sample_retry_006", () => {
   const result = parseJson(runNode(["scripts/validate_metadata_only_accepted_sample_retry_006.js"]));
   return result.passed === true &&
