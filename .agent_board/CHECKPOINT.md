@@ -1,5 +1,208 @@
 ---
 
+## Checkpoint - P3.4 Readonly Review Artifact Catalog
+
+```text
+phase: p3_4_readonly_review_artifact_catalog
+status: completed_validated_local_worktree_dirty
+result: COMPLETED_VALIDATED
+source_commit: fdafbb9
+mode: metadata-only readonly artifact catalog and validator
+summary: Added a canonical readonly review artifact catalog that enumerates the review result protocol, failure taxonomy, metadata accumulation contract, bridge payload, readonly review bundle, and readonly consumer payload. Added a catalog validator that proves every catalog entry exists, is parseable, matches its declared artifact id/type, remains repo-relative, is readonly-consumable, and has a passing referenced validator. The catalog also verifies consumer display fields and includes catalog-level negative cases.
+changed_files_current_task:
+  - tests/schema_examples/visual_eval_readonly_review_artifact_catalog.example.json
+  - tests/schema_examples/visual_eval_readonly_review_artifact_catalog_negative_cases.example.json
+  - scripts/validate_visual_eval_readonly_review_artifact_catalog.js
+  - .agent_board/CHECKPOINT.md
+validation_run:
+  - node --check scripts/validate_visual_eval_readonly_review_artifact_catalog.js
+  - node scripts/validate_visual_eval_readonly_review_artifact_catalog.js
+validation_result: passed
+catalog_entries_verified:
+  - review_result_protocol
+  - failure_taxonomy
+  - metadata_accumulation_contract
+  - bridge_readable_payload
+  - readonly_review_bundle
+  - readonly_consumer_payload
+negative_cases_verified:
+  - missing_consumer_artifact_entry
+  - wrong_consumer_payload_path
+  - forbidden_boundary_flag_true
+  - absolute_local_artifact_path
+runtime_execution_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+memory_written: false
+accepted_samples_written: false
+Batch_005_started: false
+production_candidate_002_started: false
+package_json_modified: false
+dependency_change_performed: false
+push_performed: false
+recommended_next_long_phase: commit_readiness_or_catalog_npm_wiring_decision
+next_phase_started: false
+```
+
+---
+
+## Checkpoint - P3.3 Readonly Review Bundle Consumer Loader
+
+```text
+phase: p3_3_readonly_review_bundle_consumer_loader
+status: completed_validated_local_worktree_dirty
+result: COMPLETED_VALIDATED
+source_commit: fdafbb9
+mode: metadata-only readonly consumer kernel and validator
+summary: Added a readonly consumer kernel that loads the multi-artifact review bundle and renders a stable review session display model. The consumer resolves review_result, taxonomy, bridge payload, image case, and metadata accumulation refs, then exposes pass / patch / reject rows with summary, reasons, failure taxonomy, blocking watch items, next review action, and metadata accumulation action. Added a checked consumer payload example and validator that compares direct output, CLI output, and the example payload exactly.
+changed_files_current_task:
+  - kernel/visual_eval_readonly_review_bundle_consumer.js
+  - tests/schema_examples/visual_eval_readonly_review_bundle_consumer.example.json
+  - scripts/validate_visual_eval_readonly_review_bundle_consumer.js
+  - .agent_board/CHECKPOINT.md
+validation_run:
+  - node --check kernel/visual_eval_readonly_review_bundle_consumer.js
+  - node --check scripts/validate_visual_eval_readonly_review_bundle_consumer.js
+  - node scripts/validate_visual_eval_readonly_review_bundle_consumer.js
+validation_result: passed
+consumer_fields_verified:
+  - outcome
+  - summary
+  - reasons
+  - failure_taxonomy
+  - blocking_watch_items
+  - next_review_action
+  - metadata_accumulation_action
+negative_cases_verified:
+  - write_guard_true_rejected
+  - unknown_taxonomy_tag_rejected
+runtime_execution_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+memory_written: false
+accepted_samples_written: false
+Batch_005_started: false
+production_candidate_002_started: false
+package_json_modified: false
+dependency_change_performed: false
+push_performed: false
+recommended_next_long_phase: readonly_review_bundle_catalog_or_commit_readiness
+next_phase_started: false
+```
+
+---
+
+## Checkpoint - P3.2 Readonly Review Bundle Fixture And Validator
+
+```text
+phase: p3_2_readonly_review_bundle_fixture_and_validator
+status: completed_validated_local_worktree_dirty
+result: COMPLETED_VALIDATED
+source_commit: fdafbb9
+mode: metadata-only readonly bundle fixture and validator
+summary: Added the first multi-artifact readonly review bundle fixture. The bundle ties review_result records, review_session_draft, image_case_drafts, bridge_readable_payload, and metadata_accumulation_draft into one cross-artifact artifact system. Added a validator that reuses the existing protocol and bridge validators, then verifies bundle refs, candidate/session/case consistency, bridge payload consistency, metadata accumulation action alignment, readonly guards, and negative bundle mutations.
+changed_files_current_task:
+  - tests/schema_examples/visual_eval_readonly_review_bundle.example.json
+  - tests/schema_examples/visual_eval_readonly_review_bundle_negative_cases.example.json
+  - scripts/validate_visual_eval_readonly_review_bundle.js
+  - .agent_board/CHECKPOINT.md
+validation_run:
+  - node --check scripts/validate_visual_eval_readonly_review_bundle.js
+  - node scripts/validate_visual_eval_readonly_review_bundle.js
+validation_result: passed
+bundle_artifacts_verified:
+  - review_results
+  - review_session_draft
+  - image_case_drafts
+  - bridge_readable_payload
+  - metadata_accumulation_draft
+negative_cases_verified:
+  - dangling_taxonomy_ref
+  - session_candidate_id_mismatch
+  - outcome_next_action_conflict
+  - write_guard_true
+  - absolute_local_path
+runtime_execution_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+memory_written: false
+accepted_samples_written: false
+Batch_005_started: false
+production_candidate_002_started: false
+package_json_modified: false
+dependency_change_performed: false
+push_performed: false
+recommended_next_long_phase: readonly_review_bundle_consumer_loader
+next_phase_started: false
+```
+
+---
+
+## Checkpoint - P3.1 Readonly Review Artifact Cross-Reference Freeze
+
+```text
+phase: p3_1_readonly_review_artifact_cross_reference_freeze
+status: completed_validated_local_worktree_dirty
+result: COMPLETED_VALIDATED
+source_commit: fdafbb9
+mode: metadata-only readonly artifact hardening
+summary: Started the new 30-day readonly review consumption line by making review_result records carry explicit session_id, case_id, taxonomy_ref, and accumulation_ref fields. The protocol validator now enforces canonical taxonomy / accumulation refs, unique review_result_id / candidate_id / case_id values, and fail-closed negative cases for unknown primary taxonomy and accumulation refs. The bridge kernel now consumes these explicit refs instead of deriving session/case links.
+changed_files_current_task:
+  - tests/schema_examples/visual_eval_review_result_protocol.example.json
+  - tests/schema_examples/visual_eval_review_result_protocol_negative_cases.example.json
+  - tests/schema_examples/visual_eval_review_result_review_bridge_payload.example.json
+  - scripts/validate_visual_eval_review_result_protocol.js
+  - scripts/validate_visual_eval_review_result_review_bridge_wiring.js
+  - kernel/visual_eval_review_result_bridge.js
+validation_run:
+  - node --check scripts/validate_visual_eval_review_result_protocol.js
+  - node --check kernel/visual_eval_review_result_bridge.js
+  - node --check scripts/validate_visual_eval_review_result_review_bridge_wiring.js
+  - node scripts/validate_visual_eval_review_result_protocol.js
+  - node scripts/validate_visual_eval_review_result_review_bridge_wiring.js
+validation_result: passed
+readonly_cross_refs_verified:
+  - review_result_id
+  - candidate_id
+  - session_id
+  - case_id
+  - taxonomy_ref
+  - accumulation_ref
+negative_cases_added:
+  - unknown_primary_taxonomy_ref
+  - unknown_accumulation_ref
+runtime_execution_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+memory_written: false
+accepted_samples_written: false
+Batch_005_started: false
+production_candidate_002_started: false
+package_json_modified: false
+dependency_change_performed: false
+push_performed: false
+recommended_next_long_phase: readonly_review_bundle_fixture
+next_phase_started: false
+```
+
+---
+
 ## Checkpoint - P2.16 Visual Eval Review Result Readonly Bridge Wiring
 
 ```text

@@ -1,0 +1,72 @@
+{
+  "fixture_id": "visual_eval_readonly_review_bundle_negative_cases_001",
+  "fixture_type": "metadata_only_visual_eval_readonly_review_bundle_negative_cases",
+  "source_bundle": "tests/schema_examples/visual_eval_readonly_review_bundle.example.json",
+  "protocol_version": "v1",
+  "negative_case_contract": {
+    "case_shape": "bundle_mutation_specification",
+    "purpose": "cross_artifact_fail_closed_cases",
+    "all_cases_expected_to_fail": true
+  },
+  "negative_cases": [
+    {
+      "case_id": "dangling_taxonomy_ref",
+      "mutation": {
+        "field": "source_refs.taxonomy",
+        "value": "tests/schema_examples/missing_visual_eval_failure_taxonomy.example.json"
+      },
+      "expected_failure_code": "bundle_taxonomy_ref_mismatch",
+      "expected_reason": "bundle taxonomy ref must resolve to the canonical taxonomy artifact"
+    },
+    {
+      "case_id": "session_candidate_id_mismatch",
+      "mutation": {
+        "field": "readonly_artifacts.review_session_draft.candidate_ids.1",
+        "value": "synthetic_product_still_life_wrong_candidate_001"
+      },
+      "expected_failure_code": "session_candidate_ids_mismatch",
+      "expected_reason": "session candidate ids must match review result candidate ids"
+    },
+    {
+      "case_id": "outcome_next_action_conflict",
+      "mutation": {
+        "field": "readonly_artifacts.metadata_accumulation_draft.records.0.next_review_action",
+        "value": "write_patch_plan_only"
+      },
+      "expected_failure_code": "metadata_accumulation_mismatch",
+      "expected_reason": "metadata accumulation next action must match the source review result"
+    },
+    {
+      "case_id": "write_guard_true",
+      "mutation": {
+        "field": "readonly_artifacts.review_session_draft.route_guards.memory_write_allowed_now",
+        "value": true
+      },
+      "expected_failure_code": "route_guard_must_be_false",
+      "expected_reason": "readonly bundle cannot open memory writes"
+    },
+    {
+      "case_id": "absolute_local_path",
+      "mutation": {
+        "field": "source_refs.bridge_payload",
+        "value": "<synthetic-windows-absolute-path>\\review_bundle\\payload.json"
+      },
+      "expected_failure_code": "absolute_local_path_forbidden",
+      "expected_reason": "bundle refs must stay repo-relative or explicitly redacted"
+    }
+  ],
+  "boundary_confirmation": {
+    "metadata_only": true,
+    "read_only": true,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "memory_written": false,
+    "DailyNote_written": false,
+    "VCP_memory_written": false,
+    "accepted_samples_written": false,
+    "production_candidate_002_started": false,
+    "Batch_005_started": false
+  }
+}

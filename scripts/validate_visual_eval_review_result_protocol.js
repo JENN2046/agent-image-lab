@@ -16,7 +16,11 @@ const expectedOutcomes = ["pass", "patch", "reject"];
 const expectedFrozenFields = [
   "review_result_id",
   "candidate_id",
+  "session_id",
+  "case_id",
   "source_ref",
+  "taxonomy_ref",
+  "accumulation_ref",
   "outcome",
   "confidence_band",
   "reviewer_role",
@@ -96,6 +100,8 @@ const expectedNegativeCases = new Map([
   ["write_guard_memory_true", "route_guard_must_be_false"],
   ["absolute_local_source_ref", "absolute_local_path_forbidden"],
   ["unknown_taxonomy_ref", "unknown_taxonomy_ref_forbidden"],
+  ["unknown_primary_taxonomy_ref", "unknown_taxonomy_ref_forbidden"],
+  ["unknown_accumulation_ref", "unknown_accumulation_ref_forbidden"],
   ["unknown_failure_tag", "unknown_failure_tag_forbidden"],
   ["reject_missing_never_production_reason", "reject_never_production_reason_required"],
   ["unknown_route_guard_key", "unknown_route_guard_key_forbidden"],
@@ -237,6 +243,22 @@ function validateTaxonomyRefs(refs, ctx, label, required) {
   }
 }
 
+function validateCanonicalArtifactRefs(record, ctx, label) {
+  if (record.taxonomy_ref !== taxonomyArtifactPath) {
+    ctx.fail("unknown_taxonomy_ref_forbidden", `${label}: taxonomy_ref must point to ${taxonomyArtifactPath}`);
+  }
+  if (record.accumulation_ref !== metadataAccumulationPath) {
+    ctx.fail("unknown_accumulation_ref_forbidden", `${label}: accumulation_ref must point to ${metadataAccumulationPath}`);
+  }
+  if (Array.isArray(record.taxonomy_refs)) {
+    for (const ref of record.taxonomy_refs) {
+      if (ref !== record.taxonomy_ref) {
+        ctx.fail("taxonomy_refs_must_match_primary_ref", `${label}: taxonomy_refs entry does not match taxonomy_ref`);
+      }
+    }
+  }
+}
+
 function validateFailureTags(tags, ctx, label) {
   if (!Array.isArray(tags)) {
     ctx.fail("failure_tags_array_required", `${label}: failure_tags must be an array`);
@@ -273,6 +295,12 @@ function validateReviewResult(record, ctx) {
   if (!isNonEmptyString(record.candidate_id)) {
     ctx.fail("candidate_id_required", `${label}: candidate_id required`);
   }
+  if (!isNonEmptyString(record.session_id)) {
+    ctx.fail("session_id_required", `${label}: session_id required`);
+  }
+  if (!isNonEmptyString(record.case_id)) {
+    ctx.fail("case_id_required", `${label}: case_id required`);
+  }
   if (!isNonEmptyString(record.source_ref)) {
     ctx.fail("source_ref_required", `${label}: source_ref required`);
   }
@@ -282,6 +310,7 @@ function validateReviewResult(record, ctx) {
 
   validateRouteGuards(record.route_guards, ctx, label);
   validateMetadataAccumulation(record.metadata_accumulation, ctx, label);
+  validateCanonicalArtifactRefs(record, ctx, label);
   validateTaxonomyRefs(record.taxonomy_refs, ctx, label, record.outcome === "reject");
   validateFailureTags(record.failure_tags, ctx, label);
 
@@ -356,6 +385,21 @@ function validateFixture(fixture) {
   if (fixture.route_guard_contract?.all_route_guard_values_must_be_false !== true) {
     ctx.fail("route_guard_values_must_be_false_contract", "route guard contract must require false values");
   }
+  if (fixture.canonical_artifact_refs?.taxonomy_ref !== taxonomyArtifactPath) {
+    ctx.fail("canonical_taxonomy_ref_expected", "canonical_artifact_refs.taxonomy_ref must point to the taxonomy artifact");
+  }
+  if (fixture.canonical_artifact_refs?.accumulation_ref !== metadataAccumulationPath) {
+    ctx.fail("canonical_accumulation_ref_expected", "canonical_artifact_refs.accumulation_ref must point to the metadata accumulation artifact");
+  }
+  if (fixture.cross_reference_contract?.review_result_id_unique !== true) {
+    ctx.fail("cross_reference_contract_expected", "review_result_id uniqueness must be required");
+  }
+  if (fixture.cross_reference_contract?.candidate_id_unique !== true) {
+    ctx.fail("cross_reference_contract_expected", "candidate_id uniqueness must be required");
+  }
+  if (fixture.cross_reference_contract?.case_id_unique !== true) {
+    ctx.fail("cross_reference_contract_expected", "case_id uniqueness must be required");
+  }
   if (hasAbsoluteLocalPath(fixture)) {
     ctx.fail("absolute_local_path_forbidden", "fixture must not contain absolute local paths");
   }
@@ -367,6 +411,12 @@ function validateFixture(fixture) {
   const outcomes = fixture.review_results.map((record) => record?.outcome);
   if (!sameSet(outcomes, expectedOutcomes)) {
     ctx.fail("outcome_set_exact_pass_patch_reject", "outcome set must be exactly pass, patch, reject");
+  }
+  for (const field of ["review_result_id", "candidate_id", "case_id"]) {
+    const values = fixture.review_results.map((record) => record?.[field]);
+    if (new Set(values).size !== values.length) {
+      ctx.fail("cross_reference_id_uniqueness_required", `${field} values must be unique`);
+    }
   }
 
   for (const record of fixture.review_results) {

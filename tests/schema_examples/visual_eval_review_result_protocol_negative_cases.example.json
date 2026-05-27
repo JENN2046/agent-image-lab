@@ -76,6 +76,26 @@
       "expected_reason": "taxonomy references must resolve to the frozen known taxonomy source or future canonical taxonomy"
     },
     {
+      "case_id": "unknown_primary_taxonomy_ref",
+      "target_review_result_id": "visual_eval_review_result_reject_synthetic_001",
+      "mutation": {
+        "field": "taxonomy_ref",
+        "value": "tests/schema_examples/unknown_visual_eval_failure_taxonomy.example.json"
+      },
+      "expected_failure_code": "unknown_taxonomy_ref_forbidden",
+      "expected_reason": "primary taxonomy_ref must point to the canonical visual eval failure taxonomy artifact"
+    },
+    {
+      "case_id": "unknown_accumulation_ref",
+      "target_review_result_id": "visual_eval_review_result_patch_synthetic_001",
+      "mutation": {
+        "field": "accumulation_ref",
+        "value": "tests/schema_examples/unknown_visual_eval_metadata_accumulation.example.json"
+      },
+      "expected_failure_code": "unknown_accumulation_ref_forbidden",
+      "expected_reason": "accumulation_ref must point to the canonical metadata accumulation artifact"
+    },
+    {
       "case_id": "unknown_failure_tag",
       "target_review_result_id": "visual_eval_review_result_reject_synthetic_001",
       "mutation": {

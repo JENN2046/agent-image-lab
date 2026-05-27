@@ -13,7 +13,11 @@
   "frozen_field_set": [
     "review_result_id",
     "candidate_id",
+    "session_id",
+    "case_id",
     "source_ref",
+    "taxonomy_ref",
+    "accumulation_ref",
     "outcome",
     "confidence_band",
     "reviewer_role",
@@ -109,11 +113,29 @@
       "defer_until_taxonomy_update"
     ]
   },
+  "canonical_artifact_refs": {
+    "taxonomy_ref": "tests/schema_examples/visual_eval_failure_taxonomy.example.json",
+    "accumulation_ref": "tests/schema_examples/visual_eval_metadata_accumulation.example.json"
+  },
+  "cross_reference_contract": {
+    "review_result_id_unique": true,
+    "candidate_id_unique": true,
+    "case_id_unique": true,
+    "session_id_required": true,
+    "case_id_required": true,
+    "taxonomy_ref_must_equal_canonical_artifact": true,
+    "accumulation_ref_must_equal_canonical_artifact": true,
+    "taxonomy_refs_must_resolve_to_taxonomy_ref": true
+  },
   "review_results": [
     {
       "review_result_id": "visual_eval_review_result_pass_synthetic_001",
       "candidate_id": "synthetic_product_still_life_pass_001",
+      "session_id": "visual_eval_review_session_synthetic_bundle_001",
+      "case_id": "visual_eval_image_case_pass_synthetic_001",
       "source_ref": "tests/schema_examples/visual_eval_seed_record.example.yaml",
+      "taxonomy_ref": "tests/schema_examples/visual_eval_failure_taxonomy.example.json",
+      "accumulation_ref": "tests/schema_examples/visual_eval_metadata_accumulation.example.json",
       "outcome": "pass",
       "confidence_band": "high",
       "reviewer_role": "synthetic_fixture_reviewer",
@@ -159,7 +181,11 @@
     {
       "review_result_id": "visual_eval_review_result_patch_synthetic_001",
       "candidate_id": "synthetic_product_still_life_patch_001",
+      "session_id": "visual_eval_review_session_synthetic_bundle_001",
+      "case_id": "visual_eval_image_case_patch_synthetic_001",
       "source_ref": "tests/schema_examples/visual_eval_seed_record.example.yaml",
+      "taxonomy_ref": "tests/schema_examples/visual_eval_failure_taxonomy.example.json",
+      "accumulation_ref": "tests/schema_examples/visual_eval_metadata_accumulation.example.json",
       "outcome": "patch",
       "confidence_band": "medium",
       "reviewer_role": "synthetic_fixture_reviewer",
@@ -216,7 +242,11 @@
     {
       "review_result_id": "visual_eval_review_result_reject_synthetic_001",
       "candidate_id": "synthetic_product_still_life_reject_001",
+      "session_id": "visual_eval_review_session_synthetic_bundle_001",
+      "case_id": "visual_eval_image_case_reject_synthetic_001",
       "source_ref": "tests/schema_examples/visual_eval_seed_record.rejected.example.yaml",
+      "taxonomy_ref": "tests/schema_examples/visual_eval_failure_taxonomy.example.json",
+      "accumulation_ref": "tests/schema_examples/visual_eval_metadata_accumulation.example.json",
       "outcome": "reject",
       "confidence_band": "high",
       "reviewer_role": "synthetic_fixture_reviewer",

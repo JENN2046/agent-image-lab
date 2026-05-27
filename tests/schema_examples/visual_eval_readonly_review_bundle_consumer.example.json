@@ -1,0 +1,141 @@
+{
+  "consumer_payload_id": "visual_eval_readonly_review_bundle_consumer_v1_synthetic_001",
+  "consumer_payload_type": "metadata_only_visual_eval_readonly_review_bundle_consumer",
+  "status": "readonly_consumer_payload_ready",
+  "source_bundle": "tests/schema_examples/visual_eval_readonly_review_bundle.example.json",
+  "session": {
+    "session_id": "visual_eval_review_session_synthetic_bundle_001",
+    "status": "draft_readonly",
+    "outcome_summary": {
+      "pass": 1,
+      "patch": 1,
+      "reject": 1
+    },
+    "display_row_count": 3
+  },
+  "display_rows": [
+    {
+      "review_result_id": "visual_eval_review_result_pass_synthetic_001",
+      "candidate_id": "synthetic_product_still_life_pass_001",
+      "session_id": "visual_eval_review_session_synthetic_bundle_001",
+      "case_id": "visual_eval_image_case_pass_synthetic_001",
+      "outcome": "pass",
+      "summary": "Synthetic candidate meets core product readability and has only non-blocking watch items.",
+      "reasons": [
+        "product_identity_preserved",
+        "commercial_readability_plausible",
+        "no_major_artifact_recorded"
+      ],
+      "positive_reasons": [
+        "product_identity_preserved",
+        "commercial_readability_plausible",
+        "no_major_artifact_recorded"
+      ],
+      "failure_taxonomy": [],
+      "blocking_watch_items": [],
+      "watch_items": [
+        "minor_shadow_consistency_watch"
+      ],
+      "next_review_action": "queue_for_future_human_review",
+      "metadata_accumulation_action": "keep_as_metadata_candidate",
+      "never_production_reason": null
+    },
+    {
+      "review_result_id": "visual_eval_review_result_patch_synthetic_001",
+      "candidate_id": "synthetic_product_still_life_patch_001",
+      "session_id": "visual_eval_review_session_synthetic_bundle_001",
+      "case_id": "visual_eval_image_case_patch_synthetic_001",
+      "outcome": "patch",
+      "summary": "Synthetic candidate has useful composition but requires bounded correction before pass.",
+      "reasons": [
+        "material realism needs correction",
+        "lighting consistency needs correction"
+      ],
+      "positive_reasons": [
+        "product_identity_mostly_preserved",
+        "composition_direction_useful"
+      ],
+      "failure_taxonomy": [
+        {
+          "tag_id": "material_failed",
+          "category_id": "material_realism",
+          "severity": "patchable",
+          "default_outcome": "patch"
+        },
+        {
+          "tag_id": "lighting_failed",
+          "category_id": "lighting_consistency",
+          "severity": "patchable",
+          "default_outcome": "patch"
+        }
+      ],
+      "blocking_watch_items": [
+        "material_realism_watch",
+        "lighting_consistency_watch"
+      ],
+      "watch_items": [
+        "material_realism_watch",
+        "lighting_consistency_watch"
+      ],
+      "next_review_action": "write_patch_plan_only",
+      "metadata_accumulation_action": "metadata_only_reference",
+      "never_production_reason": null
+    },
+    {
+      "review_result_id": "visual_eval_review_result_reject_synthetic_001",
+      "candidate_id": "synthetic_product_still_life_reject_001",
+      "session_id": "visual_eval_review_session_synthetic_bundle_001",
+      "case_id": "visual_eval_image_case_reject_synthetic_001",
+      "outcome": "reject",
+      "summary": "Synthetic candidate fails product identity or commercial usability and must remain never-production.",
+      "reasons": [
+        "subject drift blocks reliable product identity",
+        "commercial unusability blocks delivery readiness"
+      ],
+      "positive_reasons": [],
+      "failure_taxonomy": [
+        {
+          "tag_id": "subject_drift",
+          "category_id": "subject_identity",
+          "severity": "blocking",
+          "default_outcome": "reject"
+        },
+        {
+          "tag_id": "commercial_unusable",
+          "category_id": "commercial_usability",
+          "severity": "blocking",
+          "default_outcome": "reject"
+        }
+      ],
+      "blocking_watch_items": [
+        "severe_subject_drift",
+        "commercial_unusable"
+      ],
+      "watch_items": [
+        "severe_subject_drift",
+        "commercial_unusable"
+      ],
+      "next_review_action": "defer_until_taxonomy_update",
+      "metadata_accumulation_action": "keep_as_failure_learning_metadata",
+      "never_production_reason": "subject drift and commercial unusability block production promotion"
+    }
+  ],
+  "guard": {
+    "metadata_only": true,
+    "read_only": true,
+    "display_only": true,
+    "file_write_performed": false,
+    "approval_write_performed": false,
+    "accepted_samples_write_performed": false,
+    "production_candidate_created": false,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "DailyNote_write_performed": false,
+    "VCP_memory_write_performed": false,
+    "memory_write_performed": false,
+    "Batch_005_started": false,
+    "production_candidate_002_started": false
+  }
+}

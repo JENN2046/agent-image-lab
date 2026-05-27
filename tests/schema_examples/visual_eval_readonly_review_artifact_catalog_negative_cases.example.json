@@ -1,0 +1,66 @@
+{
+  "fixture_id": "visual_eval_readonly_review_artifact_catalog_negative_cases_001",
+  "fixture_type": "metadata_only_visual_eval_readonly_review_artifact_catalog_negative_cases",
+  "source_catalog": "tests/schema_examples/visual_eval_readonly_review_artifact_catalog.example.json",
+  "negative_case_contract": {
+    "case_shape": "catalog_mutation_specification",
+    "purpose": "catalog_fail_closed_cases",
+    "all_cases_expected_to_fail": true
+  },
+  "negative_cases": [
+    {
+      "case_id": "missing_consumer_artifact_entry",
+      "mutation": {
+        "operation": "remove_entry_by_role",
+        "role": "readonly_consumer_payload"
+      },
+      "expected_failure_code": "catalog_roles_exact",
+      "expected_reason": "catalog must enumerate the readonly consumer payload"
+    },
+    {
+      "case_id": "wrong_consumer_payload_path",
+      "mutation": {
+        "operation": "set_field",
+        "field": "consumer_expectations.consumer_payload",
+        "value": "tests/schema_examples/missing_visual_eval_readonly_review_bundle_consumer.example.json"
+      },
+      "expected_failure_code": "catalog_consumer_expected_path_matches",
+      "expected_reason": "consumer expectation must point to the enumerated consumer artifact"
+    },
+    {
+      "case_id": "forbidden_boundary_flag_true",
+      "mutation": {
+        "operation": "set_field",
+        "field": "boundary_confirmation.image_generation_performed",
+        "value": true
+      },
+      "expected_failure_code": "catalog_boundary_image_generation_performed_false",
+      "expected_reason": "catalog boundary must keep image generation false"
+    },
+    {
+      "case_id": "absolute_local_artifact_path",
+      "mutation": {
+        "operation": "set_entry_field_by_role",
+        "role": "readonly_review_bundle",
+        "field": "path",
+        "value": "<synthetic-windows-absolute-path>\\visual_eval_readonly_review_bundle.example.json"
+      },
+      "expected_failure_code": "catalog_no_absolute_or_loopback",
+      "expected_reason": "catalog artifact paths must remain repo-relative"
+    }
+  ],
+  "boundary_confirmation": {
+    "metadata_only": true,
+    "read_only": true,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "memory_written": false,
+    "DailyNote_written": false,
+    "VCP_memory_written": false,
+    "accepted_samples_written": false,
+    "production_candidate_002_started": false,
+    "Batch_005_started": false
+  }
+}

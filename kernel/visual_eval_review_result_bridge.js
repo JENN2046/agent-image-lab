@@ -113,6 +113,10 @@ function validateReviewResultFixture(reviewResultFixture, taxonomyArtifact, accu
   assert(expectedOutcomes.every((outcome) => outcomes.includes(outcome)) && outcomes.length === expectedOutcomes.length, "outcome set must be exactly pass, patch, reject");
 
   for (const record of reviewResultFixture.review_results) {
+    assert(typeof record.session_id === "string" && record.session_id.trim(), `${record.review_result_id}.session_id is required`);
+    assert(typeof record.case_id === "string" && record.case_id.trim(), `${record.review_result_id}.case_id is required`);
+    assert(record.taxonomy_ref === refs.taxonomyPath, `${record.review_result_id}.taxonomy_ref must point to canonical taxonomy`);
+    assert(record.accumulation_ref === refs.accumulationPath, `${record.review_result_id}.accumulation_ref must point to canonical accumulation contract`);
     assert(expectedOutcomes.includes(record.outcome), `unknown outcome: ${record.outcome}`);
     assertAllRouteGuardsFalse(record.route_guards, record.review_result_id);
     for (const taxonomyRef of record.taxonomy_refs || []) {
@@ -136,6 +140,10 @@ function buildReviewRow(record) {
   return {
     review_result_id: record.review_result_id,
     candidate_id: record.candidate_id,
+    session_id: record.session_id,
+    case_id: record.case_id,
+    taxonomy_ref: record.taxonomy_ref,
+    accumulation_ref: record.accumulation_ref,
     outcome: record.outcome,
     confidence_band: record.confidence_band,
     summary: record.summary,
@@ -147,7 +155,8 @@ function buildReviewRow(record) {
 
 function buildImageCaseDraft(record) {
   return {
-    case_id: `image_case_${sanitizeId(record.candidate_id)}`,
+    case_id: record.case_id,
+    session_id: record.session_id,
     candidate_id: record.candidate_id,
     review_result_id: record.review_result_id,
     source_ref: record.source_ref,
@@ -165,7 +174,11 @@ function buildImageCaseDraft(record) {
 
 function buildMetadataAccumulationRecord(record) {
   return {
+    review_result_id: record.review_result_id,
+    session_id: record.session_id,
+    case_id: record.case_id,
     candidate_id: record.candidate_id,
+    accumulation_ref: record.accumulation_ref,
     outcome: record.outcome,
     metadata_accumulation: clone(record.metadata_accumulation),
     write_allowed_now: false,
@@ -187,6 +200,8 @@ function buildVisualEvalReviewResultBridgePayload(input) {
   const reviewRows = reviewResultFixture.review_results.map(buildReviewRow);
   const imageCaseDrafts = reviewResultFixture.review_results.map(buildImageCaseDraft);
   const outcomeSummary = summarizeOutcomes(reviewResultFixture.review_results);
+  const sessionIds = [...new Set(reviewResultFixture.review_results.map((record) => record.session_id))];
+  assert(sessionIds.length === 1, "review_result fixture must describe exactly one readonly session");
 
   return {
     payload_id: "visual_eval_review_result_bridge_payload_v1_synthetic_001",
@@ -203,7 +218,7 @@ function buildVisualEvalReviewResultBridgePayload(input) {
       review_rows: reviewRows,
     },
     review_session_draft: {
-      session_id: `review_session_${sanitizeId(reviewResultFixture.fixture_id)}`,
+      session_id: sessionIds[0],
       status: "draft_readonly",
       outcome_summary: outcomeSummary,
       final_outcomes_visible: expectedOutcomes,

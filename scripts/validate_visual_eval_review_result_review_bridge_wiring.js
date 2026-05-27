@@ -83,6 +83,9 @@ function assertOutcomeCoverage(payload) {
   addResult("review_bridge_rows_include_pass_patch_reject", ["pass", "patch", "reject"].every((outcome) =>
     rows.some((row) => row.outcome === outcome)
   ));
+  addResult("review_bridge_rows_have_session_and_case_refs", rows.every((row) =>
+    row.session_id && row.case_id && row.taxonomy_ref === taxonomyPath && row.accumulation_ref === accumulationPath
+  ));
   addResult("review_session_draft_status_readonly", payload.review_session_draft?.status === "draft_readonly");
   addResult("review_session_final_outcomes_visible", JSON.stringify(payload.review_session_draft?.final_outcomes_visible) === JSON.stringify(["pass", "patch", "reject"]));
 
@@ -91,12 +94,16 @@ function assertOutcomeCoverage(payload) {
   addResult("image_case_drafts_show_pass_patch_reject", ["pass", "patch", "reject"].every((outcome) =>
     imageCases.some((item) => item.visible_outcome === outcome)
   ));
+  addResult("image_case_drafts_have_session_refs", imageCases.every((item) => item.session_id === payload.review_session_draft?.session_id));
   addResult("patch_image_case_requires_patch", imageCases.some((item) => item.visible_outcome === "patch" && item.patch_required === true));
   addResult("reject_image_case_never_production", imageCases.some((item) => item.visible_outcome === "reject" && item.never_production === true));
 
   const records = payload.metadata_accumulation_draft?.records || [];
   addResult("metadata_accumulation_records_count_three", records.length === 3);
   addResult("metadata_accumulation_records_all_readonly", records.every((record) => record.write_allowed_now === false && record.consumer_status === "readonly_draft"));
+  addResult("metadata_accumulation_records_have_artifact_refs", records.every((record) =>
+    record.review_result_id && record.session_id === payload.review_session_draft?.session_id && record.case_id && record.accumulation_ref === accumulationPath
+  ));
 }
 
 function assertNoAbsoluteOrLoopback(value, label) {
@@ -144,6 +151,11 @@ function main() {
     fixture.review_results[2].failure_tags = ["hallucinated_failure_tag"];
     bridgeKernel.buildVisualEvalReviewResultBridgePayload({ reviewResultFixture: fixture });
   });
+  expectFailure("unknown_accumulation_ref_rejected", () => {
+    const fixture = readJson(reviewResultPath);
+    fixture.review_results[1].accumulation_ref = "tests/schema_examples/unknown_visual_eval_metadata_accumulation.example.json";
+    bridgeKernel.buildVisualEvalReviewResultBridgePayload({ reviewResultFixture: fixture });
+  });
   expectFailure("missing_outcome_rejected", () => {
     const fixture = readJson(reviewResultPath);
     fixture.review_results = fixture.review_results.filter((record) => record.outcome !== "patch");
@@ -160,7 +172,7 @@ function main() {
     review_session_draft_created: true,
     image_case_drafts_created: true,
     metadata_accumulation_draft_created: true,
-    negative_case_count: 3,
+    negative_case_count: 4,
     provider_contact_performed: false,
     plugin_call_performed: false,
     api_call_performed: false,

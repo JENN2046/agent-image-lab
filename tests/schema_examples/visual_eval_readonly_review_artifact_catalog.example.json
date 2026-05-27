@@ -1,0 +1,112 @@
+{
+  "catalog_id": "visual_eval_readonly_review_artifact_catalog_v1_001",
+  "catalog_type": "metadata_only_visual_eval_readonly_review_artifact_catalog",
+  "version": "v1",
+  "canonical_status": "canonical_readonly_artifact_catalog",
+  "catalog_contract": {
+    "metadata_only": true,
+    "read_only": true,
+    "all_artifacts_repo_relative": true,
+    "all_artifacts_must_exist": true,
+    "all_artifacts_must_be_parseable": true,
+    "validators_must_pass": true,
+    "consumer_payload_must_match_catalog": true,
+    "forbidden_actions_must_remain_false": true
+  },
+  "artifact_entries": [
+    {
+      "artifact_id": "visual_eval_review_result_protocol_synthetic_fixture_set_001",
+      "artifact_role": "review_result_protocol",
+      "artifact_type": "metadata_only_visual_eval_review_result_protocol",
+      "path": "tests/schema_examples/visual_eval_review_result_protocol.example.json",
+      "validator": "scripts/validate_visual_eval_review_result_protocol.js",
+      "canonical": true,
+      "readonly_consumable": true
+    },
+    {
+      "artifact_id": "visual_eval_failure_taxonomy_v1_canonical_001",
+      "artifact_role": "failure_taxonomy",
+      "artifact_type": "canonical_visual_eval_failure_taxonomy",
+      "path": "tests/schema_examples/visual_eval_failure_taxonomy.example.json",
+      "validator": "scripts/validate_visual_eval_review_result_protocol.js",
+      "canonical": true,
+      "readonly_consumable": true
+    },
+    {
+      "artifact_id": "visual_eval_metadata_accumulation_v1_synthetic_001",
+      "artifact_role": "metadata_accumulation_contract",
+      "artifact_type": "metadata_only_visual_eval_metadata_accumulation_contract",
+      "path": "tests/schema_examples/visual_eval_metadata_accumulation.example.json",
+      "validator": "scripts/validate_visual_eval_review_result_protocol.js",
+      "canonical": true,
+      "readonly_consumable": true
+    },
+    {
+      "artifact_id": "visual_eval_review_result_bridge_payload_v1_synthetic_001",
+      "artifact_role": "bridge_readable_payload",
+      "artifact_type": "metadata_only_visual_eval_review_result_bridge_payload",
+      "path": "tests/schema_examples/visual_eval_review_result_review_bridge_payload.example.json",
+      "validator": "scripts/validate_visual_eval_review_result_review_bridge_wiring.js",
+      "canonical": true,
+      "readonly_consumable": true
+    },
+    {
+      "artifact_id": "visual_eval_readonly_review_bundle_v1_synthetic_001",
+      "artifact_role": "readonly_review_bundle",
+      "artifact_type": "metadata_only_visual_eval_readonly_review_bundle",
+      "path": "tests/schema_examples/visual_eval_readonly_review_bundle.example.json",
+      "validator": "scripts/validate_visual_eval_readonly_review_bundle.js",
+      "canonical": true,
+      "readonly_consumable": true
+    },
+    {
+      "artifact_id": "visual_eval_readonly_review_bundle_consumer_v1_synthetic_001",
+      "artifact_role": "readonly_consumer_payload",
+      "artifact_type": "metadata_only_visual_eval_readonly_review_bundle_consumer",
+      "path": "tests/schema_examples/visual_eval_readonly_review_bundle_consumer.example.json",
+      "validator": "scripts/validate_visual_eval_readonly_review_bundle_consumer.js",
+      "canonical": true,
+      "readonly_consumable": true
+    }
+  ],
+  "composition_order": [
+    "review_result_protocol",
+    "failure_taxonomy",
+    "metadata_accumulation_contract",
+    "bridge_readable_payload",
+    "readonly_review_bundle",
+    "readonly_consumer_payload"
+  ],
+  "consumer_expectations": {
+    "source_bundle": "tests/schema_examples/visual_eval_readonly_review_bundle.example.json",
+    "consumer_payload": "tests/schema_examples/visual_eval_readonly_review_bundle_consumer.example.json",
+    "outcomes": [
+      "pass",
+      "patch",
+      "reject"
+    ],
+    "display_fields": [
+      "outcome",
+      "summary",
+      "reasons",
+      "failure_taxonomy",
+      "blocking_watch_items",
+      "next_review_action",
+      "metadata_accumulation_action"
+    ]
+  },
+  "boundary_confirmation": {
+    "metadata_only": true,
+    "read_only": true,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "memory_written": false,
+    "DailyNote_written": false,
+    "VCP_memory_written": false,
+    "accepted_samples_written": false,
+    "production_candidate_002_started": false,
+    "Batch_005_started": false
+  }
+}

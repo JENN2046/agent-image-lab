@@ -18,6 +18,10 @@
       {
         "review_result_id": "visual_eval_review_result_pass_synthetic_001",
         "candidate_id": "synthetic_product_still_life_pass_001",
+        "session_id": "visual_eval_review_session_synthetic_bundle_001",
+        "case_id": "visual_eval_image_case_pass_synthetic_001",
+        "taxonomy_ref": "tests/schema_examples/visual_eval_failure_taxonomy.example.json",
+        "accumulation_ref": "tests/schema_examples/visual_eval_metadata_accumulation.example.json",
         "outcome": "pass",
         "confidence_band": "high",
         "summary": "Synthetic candidate meets core product readability and has only non-blocking watch items.",
@@ -34,6 +38,10 @@
       {
         "review_result_id": "visual_eval_review_result_patch_synthetic_001",
         "candidate_id": "synthetic_product_still_life_patch_001",
+        "session_id": "visual_eval_review_session_synthetic_bundle_001",
+        "case_id": "visual_eval_image_case_patch_synthetic_001",
+        "taxonomy_ref": "tests/schema_examples/visual_eval_failure_taxonomy.example.json",
+        "accumulation_ref": "tests/schema_examples/visual_eval_metadata_accumulation.example.json",
         "outcome": "patch",
         "confidence_band": "medium",
         "summary": "Synthetic candidate has useful composition but requires bounded correction before pass.",
@@ -55,6 +63,10 @@
       {
         "review_result_id": "visual_eval_review_result_reject_synthetic_001",
         "candidate_id": "synthetic_product_still_life_reject_001",
+        "session_id": "visual_eval_review_session_synthetic_bundle_001",
+        "case_id": "visual_eval_image_case_reject_synthetic_001",
+        "taxonomy_ref": "tests/schema_examples/visual_eval_failure_taxonomy.example.json",
+        "accumulation_ref": "tests/schema_examples/visual_eval_metadata_accumulation.example.json",
         "outcome": "reject",
         "confidence_band": "high",
         "summary": "Synthetic candidate fails product identity or commercial usability and must remain never-production.",
@@ -76,7 +88,7 @@
     ]
   },
   "review_session_draft": {
-    "session_id": "review_session_visual_eval_review_result_protocol_synthetic_fixture_set_001",
+    "session_id": "visual_eval_review_session_synthetic_bundle_001",
     "status": "draft_readonly",
     "outcome_summary": {
       "pass": 1,
@@ -92,6 +104,10 @@
       {
         "review_result_id": "visual_eval_review_result_pass_synthetic_001",
         "candidate_id": "synthetic_product_still_life_pass_001",
+        "session_id": "visual_eval_review_session_synthetic_bundle_001",
+        "case_id": "visual_eval_image_case_pass_synthetic_001",
+        "taxonomy_ref": "tests/schema_examples/visual_eval_failure_taxonomy.example.json",
+        "accumulation_ref": "tests/schema_examples/visual_eval_metadata_accumulation.example.json",
         "outcome": "pass",
         "confidence_band": "high",
         "summary": "Synthetic candidate meets core product readability and has only non-blocking watch items.",
@@ -108,6 +124,10 @@
       {
         "review_result_id": "visual_eval_review_result_patch_synthetic_001",
         "candidate_id": "synthetic_product_still_life_patch_001",
+        "session_id": "visual_eval_review_session_synthetic_bundle_001",
+        "case_id": "visual_eval_image_case_patch_synthetic_001",
+        "taxonomy_ref": "tests/schema_examples/visual_eval_failure_taxonomy.example.json",
+        "accumulation_ref": "tests/schema_examples/visual_eval_metadata_accumulation.example.json",
         "outcome": "patch",
         "confidence_band": "medium",
         "summary": "Synthetic candidate has useful composition but requires bounded correction before pass.",
@@ -129,6 +149,10 @@
       {
         "review_result_id": "visual_eval_review_result_reject_synthetic_001",
         "candidate_id": "synthetic_product_still_life_reject_001",
+        "session_id": "visual_eval_review_session_synthetic_bundle_001",
+        "case_id": "visual_eval_image_case_reject_synthetic_001",
+        "taxonomy_ref": "tests/schema_examples/visual_eval_failure_taxonomy.example.json",
+        "accumulation_ref": "tests/schema_examples/visual_eval_metadata_accumulation.example.json",
         "outcome": "reject",
         "confidence_band": "high",
         "summary": "Synthetic candidate fails product identity or commercial usability and must remain never-production.",
@@ -158,7 +182,8 @@
   },
   "image_case_drafts": [
     {
-      "case_id": "image_case_synthetic_product_still_life_pass_001",
+      "case_id": "visual_eval_image_case_pass_synthetic_001",
+      "session_id": "visual_eval_review_session_synthetic_bundle_001",
       "candidate_id": "synthetic_product_still_life_pass_001",
       "review_result_id": "visual_eval_review_result_pass_synthetic_001",
       "source_ref": "tests/schema_examples/visual_eval_seed_record.example.yaml",
@@ -179,7 +204,8 @@
       }
     },
     {
-      "case_id": "image_case_synthetic_product_still_life_patch_001",
+      "case_id": "visual_eval_image_case_patch_synthetic_001",
+      "session_id": "visual_eval_review_session_synthetic_bundle_001",
       "candidate_id": "synthetic_product_still_life_patch_001",
       "review_result_id": "visual_eval_review_result_patch_synthetic_001",
       "source_ref": "tests/schema_examples/visual_eval_seed_record.example.yaml",
@@ -211,7 +237,8 @@
       }
     },
     {
-      "case_id": "image_case_synthetic_product_still_life_reject_001",
+      "case_id": "visual_eval_image_case_reject_synthetic_001",
+      "session_id": "visual_eval_review_session_synthetic_bundle_001",
       "candidate_id": "synthetic_product_still_life_reject_001",
       "review_result_id": "visual_eval_review_result_reject_synthetic_001",
       "source_ref": "tests/schema_examples/visual_eval_seed_record.rejected.example.yaml",
@@ -245,7 +272,11 @@
     "status": "draft_readonly",
     "records": [
       {
+        "review_result_id": "visual_eval_review_result_pass_synthetic_001",
+        "session_id": "visual_eval_review_session_synthetic_bundle_001",
+        "case_id": "visual_eval_image_case_pass_synthetic_001",
         "candidate_id": "synthetic_product_still_life_pass_001",
+        "accumulation_ref": "tests/schema_examples/visual_eval_metadata_accumulation.example.json",
         "outcome": "pass",
         "metadata_accumulation": {
           "accepted_metadata_action": "keep_as_metadata_candidate",
@@ -257,7 +288,11 @@
         "consumer_status": "readonly_draft"
       },
       {
+        "review_result_id": "visual_eval_review_result_patch_synthetic_001",
+        "session_id": "visual_eval_review_session_synthetic_bundle_001",
+        "case_id": "visual_eval_image_case_patch_synthetic_001",
         "candidate_id": "synthetic_product_still_life_patch_001",
+        "accumulation_ref": "tests/schema_examples/visual_eval_metadata_accumulation.example.json",
         "outcome": "patch",
         "metadata_accumulation": {
           "accepted_metadata_action": "none",
@@ -269,7 +304,11 @@
         "consumer_status": "readonly_draft"
       },
       {
+        "review_result_id": "visual_eval_review_result_reject_synthetic_001",
+        "session_id": "visual_eval_review_session_synthetic_bundle_001",
+        "case_id": "visual_eval_image_case_reject_synthetic_001",
         "candidate_id": "synthetic_product_still_life_reject_001",
+        "accumulation_ref": "tests/schema_examples/visual_eval_metadata_accumulation.example.json",
         "outcome": "reject",
         "metadata_accumulation": {
           "accepted_metadata_action": "none",
