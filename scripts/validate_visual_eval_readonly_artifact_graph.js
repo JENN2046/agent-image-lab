@@ -48,13 +48,14 @@ const projectionSemanticFields = new Set([
   "metadata_accumulation_action",
   "next_review_action",
   "never_production",
+  "never_production_reason",
 ]);
 const forbiddenDerivedSummaryFields = new Set(["summary"]);
 const forbiddenDerivedReasonsFields = new Set(["reasons", "pass_reasons", "patch_reasons", "reject_reasons", "positive_reasons"]);
 const forbiddenDerivedFailureTagFields = new Set(["failure_taxonomy", "taxonomy_tags"]);
 const forbiddenDerivedTaxonomyRefFields = new Set(["taxonomy_ref", "taxonomy_refs"]);
 const forbiddenDerivedAccumulationFields = new Set(["metadata_accumulation"]);
-const forbiddenDerivedNeverProductionFields = new Set(["never_production"]);
+const forbiddenDerivedNeverProductionFields = new Set(["never_production", "never_production_reason"]);
 const forbiddenTrueFields = new Set([
   "file_write_performed",
   "approval_write_performed",
@@ -356,6 +357,36 @@ const expectedNegativeCases = [
     },
   },
   {
+    case_id: "bundle_never_production_drift",
+    expected_failure_code: "bundle_never_production_not_owner",
+    mutate(graph) {
+      graph.artifacts.readonly_review_bundle.data.readonly_artifacts.review_results[2].never_production_reason =
+        "drifted bundle-owned never-production reason";
+    },
+  },
+  {
+    case_id: "consumer_never_production_drift",
+    expected_failure_code: "bundle_consumer_never_production_projection_consistent",
+    mutate(graph) {
+      graph.artifacts.readonly_consumer_payload.data.display_rows[2].never_production_reason =
+        "drifted consumer never-production reason";
+    },
+  },
+  {
+    case_id: "bundle_never_production_reintroduced",
+    expected_failure_code: "bundle_never_production_not_owner",
+    mutate(graph) {
+      graph.artifacts.readonly_review_bundle.data.readonly_artifacts.image_case_drafts[2].never_production = true;
+    },
+  },
+  {
+    case_id: "consumer_never_production_reintroduced",
+    expected_failure_code: "consumer_never_production_not_owner",
+    mutate(graph) {
+      graph.artifacts.readonly_consumer_payload.data.display_rows[2].never_production = true;
+    },
+  },
+  {
     case_id: "bundle_image_case_next_action_reintroduced",
     expected_failure_code: "derived_next_review_action_not_owner",
     mutate(graph) {
@@ -623,6 +654,7 @@ function canonicalRows(graph) {
     accumulation_ref: row.accumulation_ref,
     metadata_accumulation: row.metadata_accumulation,
     next_review_action: row.metadata_accumulation?.next_review_action,
+    never_production_reason: row.never_production_reason,
     metadata_accumulation_action: row.metadata_accumulation?.rejected_metadata_action !== "none"
       ? row.metadata_accumulation.rejected_metadata_action
       : row.metadata_accumulation?.accepted_metadata_action !== "none"
@@ -664,6 +696,8 @@ function validateDerivedOwnership(graph, ctx) {
   const nextActionOwners = [];
   const accumulationOwners = [];
   const neverProductionOwners = [];
+  const bundleNeverProductionOwners = [];
+  const consumerNeverProductionOwners = [];
 
   function collectOwnedKey(key, pathLabel) {
     if (forbiddenDerivedSummaryFields.has(key)) summaryOwners.push(`${pathLabel}.${key}`);
@@ -703,6 +737,7 @@ function validateDerivedOwnership(graph, ctx) {
     const pathLabel = `readonly_review_bundle:${pathParts.join(".") || "<root>"}`;
     for (const key of Object.keys(value)) {
       if (forbiddenDerivedReasonsFields.has(key)) bundleReasonOwners.push(`${pathLabel}.${key}`);
+      if (forbiddenDerivedNeverProductionFields.has(key)) bundleNeverProductionOwners.push(`${pathLabel}.${key}`);
     }
   });
   for (const [index, imageCase] of (bundle.readonly_artifacts?.image_case_drafts || []).entries()) {
@@ -733,6 +768,9 @@ function validateDerivedOwnership(graph, ctx) {
       if (key === "reasons" && displayRowProjection) continue;
       consumerReasonOwners.push(`${pathLabel}.${key}`);
     }
+    for (const key of Object.keys(value)) {
+      if (forbiddenDerivedNeverProductionFields.has(key)) consumerNeverProductionOwners.push(`${pathLabel}.${key}`);
+    }
   });
 
   ctx.addResult("derived_summary_not_owner", summaryOwners.length === 0, summaryOwners.join("; "));
@@ -756,6 +794,13 @@ function validateDerivedOwnership(graph, ctx) {
   ctx.addResult("derived_next_review_action_not_owner", nextActionOwners.length === 0, nextActionOwners.join("; "));
   ctx.addResult("derived_metadata_accumulation_not_owner", accumulationOwners.length === 0, accumulationOwners.join("; "));
   ctx.addResult("derived_never_production_not_owner", neverProductionOwners.length === 0, neverProductionOwners.join("; "));
+  ctx.addResult("bundle_never_production_not_owner", bundleNeverProductionOwners.length === 0, bundleNeverProductionOwners.join("; "));
+  ctx.addResult("consumer_never_production_not_owner", consumerNeverProductionOwners.length === 0, consumerNeverProductionOwners.join("; "));
+  ctx.addResult(
+    "forbidden_never_production_owned_field_reintroduced",
+    neverProductionOwners.length === 0 && bundleNeverProductionOwners.length === 0 && consumerNeverProductionOwners.length === 0,
+    neverProductionOwners.concat(bundleNeverProductionOwners, consumerNeverProductionOwners).join("; ")
+  );
 }
 
 function validateProjectionContracts(graph, ctx) {
@@ -1012,6 +1057,7 @@ function validateReviewConsistency(graph, ctx) {
   const metadataActionMismatches = [];
   const accumulationMismatches = [];
   const neverProductionMismatches = [];
+  const consumerNeverProductionMismatches = [];
   const consumerSummaryMismatches = [];
 
   for (const object of reviewObjects) {
@@ -1093,6 +1139,17 @@ function validateReviewConsistency(graph, ctx) {
       const expected = canonical.outcome === "reject";
       if (row.never_production !== expected) {
         neverProductionMismatches.push(`${object.role}:${object.path}.never_production=${row.never_production} expected ${expected}`);
+        if (object.role === "readonly_consumer_payload") {
+          consumerNeverProductionMismatches.push(`${object.role}:${object.path}.never_production drifted`);
+        }
+      }
+    }
+    if (Object.prototype.hasOwnProperty.call(row, "never_production_reason")) {
+      if (row.never_production_reason !== canonical.never_production_reason) {
+        neverProductionMismatches.push(`${object.role}:${object.path}.never_production_reason drifted`);
+        if (object.role === "readonly_consumer_payload") {
+          consumerNeverProductionMismatches.push(`${object.role}:${object.path}.never_production_reason drifted`);
+        }
       }
     }
   }
@@ -1117,6 +1174,7 @@ function validateReviewConsistency(graph, ctx) {
   ctx.addResult("projection_taxonomy_ref_consistent", taxonomyMismatches.length === 0, taxonomyMismatches.join("; "));
   ctx.addResult("projection_next_review_action_consistent", nextActionMismatches.length === 0, nextActionMismatches.join("; "));
   ctx.addResult("projection_never_production_consistent", neverProductionMismatches.length === 0, neverProductionMismatches.join("; "));
+  ctx.addResult("bundle_consumer_never_production_projection_consistent", consumerNeverProductionMismatches.length === 0, consumerNeverProductionMismatches.join("; "));
   ctx.addResult("projection_metadata_accumulation_consistent", accumulationMismatches.length === 0, accumulationMismatches.join("; "));
 }
 
@@ -1208,7 +1266,7 @@ function collectFailureCodes(fn) {
 }
 
 function validateNegativeCases(baseGraph, ctx) {
-  ctx.addResult("graph_negative_cases_count_expected", expectedNegativeCases.length === 46, expectedNegativeCases.length);
+  ctx.addResult("graph_negative_cases_count_expected", expectedNegativeCases.length === 50, expectedNegativeCases.length);
   for (const negativeCase of expectedNegativeCases) {
     const graph = deepClone(baseGraph);
     negativeCase.mutate(graph);

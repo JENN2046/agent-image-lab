@@ -91,6 +91,10 @@ function assertConsumerShape(payload) {
   addResult("consumer_rows_do_not_own_positive_reasons", rows.every((row) =>
     !Object.prototype.hasOwnProperty.call(row, "positive_reasons")
   ));
+  addResult("consumer_rows_do_not_own_never_production_fields", rows.every((row) =>
+    !Object.prototype.hasOwnProperty.call(row, "never_production") &&
+    !Object.prototype.hasOwnProperty.call(row, "never_production_reason")
+  ));
   addResult("consumer_patch_has_taxonomy_and_blockers", rows.some((row) =>
     row.outcome === "patch" &&
     row.failure_taxonomy.length === 2 &&
@@ -100,7 +104,6 @@ function assertConsumerShape(payload) {
   addResult("consumer_reject_has_taxonomy_and_never_production", rows.some((row) =>
     row.outcome === "reject" &&
     row.failure_taxonomy.every((item) => item.severity === "blocking") &&
-    typeof row.never_production_reason === "string" &&
     row.next_review_action === "defer_until_taxonomy_update"
   ));
   addResult("consumer_pass_has_positive_metadata_action", rows.some((row) =>

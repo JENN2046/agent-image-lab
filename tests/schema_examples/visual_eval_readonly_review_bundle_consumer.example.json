@@ -32,8 +32,7 @@
         "minor_shadow_consistency_watch"
       ],
       "next_review_action": "queue_for_future_human_review",
-      "metadata_accumulation_action": "keep_as_metadata_candidate",
-      "never_production_reason": null
+      "metadata_accumulation_action": "keep_as_metadata_candidate"
     },
     {
       "review_result_id": "visual_eval_review_result_patch_synthetic_001",
@@ -69,8 +68,7 @@
         "lighting_consistency_watch"
       ],
       "next_review_action": "write_patch_plan_only",
-      "metadata_accumulation_action": "metadata_only_reference",
-      "never_production_reason": null
+      "metadata_accumulation_action": "metadata_only_reference"
     },
     {
       "review_result_id": "visual_eval_review_result_reject_synthetic_001",
@@ -106,8 +104,7 @@
         "commercial_unusable"
       ],
       "next_review_action": "defer_until_taxonomy_update",
-      "metadata_accumulation_action": "keep_as_failure_learning_metadata",
-      "never_production_reason": "subject drift and commercial unusability block production promotion"
+      "metadata_accumulation_action": "keep_as_failure_learning_metadata"
     }
   ],
   "guard": {

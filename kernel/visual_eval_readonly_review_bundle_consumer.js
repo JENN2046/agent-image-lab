@@ -157,7 +157,6 @@ function loadReadonlyReviewBundleConsumer(input) {
       watch_items: clone(record.watch_items),
       next_review_action: record.metadata_accumulation.next_review_action,
       metadata_accumulation_action: selectPrimaryAction(record.metadata_accumulation),
-      never_production_reason: record.never_production_reason,
     };
   });
 

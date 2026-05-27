@@ -38710,6 +38710,57 @@ Validation:
 - npm run validate:mvp: passed
 
 Next: local commit, post-commit review, and Push_L3 manual guarded push classification.
+
+---
+
+## Checkpoint - Readonly Review Spine Projection Minimization Hardening / bundle_consumer_never_production
+
+Status: completed_validated_pending_commander_review
+Scope: readonly_review_spine_projection_minimization_hardening
+Slice: bundle_consumer_never_production
+
+Changed:
+- kernel/visual_eval_readonly_review_bundle_consumer.js
+- scripts/validate_visual_eval_readonly_artifact_graph.js
+- scripts/validate_visual_eval_readonly_review_bundle_consumer.js
+- tests/schema_examples/visual_eval_readonly_review_bundle_consumer.example.json
+
+Implemented:
+- Removed `readonly_consumer_payload.display_rows[*].never_production_reason` from the consumer display row payload.
+- Kept reject visibility as projection-only through `outcome`, `failure_taxonomy`, and `next_review_action`; consumer does not own final production rejection semantics.
+- Added graph ownership/projection checks for bundle and consumer `never_production` / `never_production_reason` fields.
+- Added fail-closed graph negative cases for bundle drift, consumer drift, bundle reintroduction, and consumer reintroduction.
+- Preserved the P3.22 24-artifact catalog count and did not touch collection/detail/navigation/session or metadata accumulation subtrees.
+
+Boundary:
+- metadata_only: true
+- read_only: true
+- provider_contact_performed: false
+- plugin_call_performed: false
+- api_call_performed: false
+- image_generation_performed: false
+- memory_written: false
+- DailyNote_write_performed: false
+- VCP_memory_write_performed: false
+- accepted_samples_write_performed: false
+- production_candidate_002_started: false
+- Batch_005_started: false
+- bridge_files_frozen: true
+- bridge_text_diff_introduced: false
+- commit_performed: false
+- push_performed: false
+
+Validation:
+- node --check scripts\validate_visual_eval_readonly_artifact_graph.js: passed
+- node --check scripts\validate_visual_eval_readonly_review_bundle.js: passed
+- node --check scripts\validate_visual_eval_readonly_review_bundle_consumer.js: passed
+- node --check kernel\visual_eval_readonly_review_bundle_consumer.js: passed
+- node scripts\validate_visual_eval_readonly_artifact_graph.js: passed
+- node scripts\validate_visual_eval_readonly_review_bundle.js: passed
+- node scripts\validate_visual_eval_readonly_review_bundle_consumer.js: passed
+- node scripts\validate_visual_eval_readonly_review_artifact_catalog.js: passed
+
+Next: run checkpoint validation, report to GPT commander, then await explicit commit authorization.
 ---
 
 ## Checkpoint - readonly_review_spine_projection_minimization_hardening
