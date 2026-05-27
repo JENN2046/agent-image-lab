@@ -1,5 +1,41 @@
 ---
 
+## Checkpoint - P2.8 Visual Workflow Product Route Task Book
+
+```text
+phase: p2_8_visual_workflow_product_route_task_book
+status: completed_validated_local_commit_ready
+result: COMPLETED_VALIDATED_LOCAL_COMMIT_READY
+source_commit: d048170
+mode: A0 read-only then docs-only
+summary: Reviewed the visual workflow / visual eval product route after the provider evidence integrity closeout chain and added a narrow docs-only task book. The selected route returns to product-line planning through metadata-only visual eval and failure taxonomy continuation, without opening production_candidate_002, memory write, image generation, or Batch 005.
+changed_files_current_task:
+  - docs/visual_workflow_product_route_review_task_book.md
+  - .agent_board/CHECKPOINT.md
+validation_run:
+  - git diff --check
+  - git status --short
+  - git diff --cached --check
+validation_result: passed
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+runtime_execution_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+memory_written: false
+Batch_005_started: false
+production_candidate_002_started: false
+package_json_modified: false
+dependency_change_performed: false
+push_performed: false
+recommended_next_phase: p2_9_visual_eval_next_slice_selection_gate
+next_phase_started: false
+```
+
+---
+
 ## Checkpoint - P2.6 Resume Surface Post-Push Status Convention Fix
 
 ```text
