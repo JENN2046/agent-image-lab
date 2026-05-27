@@ -1,5 +1,42 @@
 ---
 
+## Checkpoint - P2.11 Metadata-Only Review Result Protocol Fixture Planning
+
+```text
+phase: p2_11_metadata_only_review_result_protocol_fixture_planning
+status: completed_validated_local_commit_ready
+result: COMPLETED_VALIDATED_LOCAL_COMMIT_READY
+source_commit: 1caa8da
+mode: A0 read-only then docs-only
+summary: Planned the synthetic metadata-only Review Result fixture set for pass, patch, and reject outcomes. The plan defines future fixture IDs, shared shape, per-outcome fields, taxonomy bindings, negative guard expectations, and a future fixture draft task without creating schemas, validators, JSON examples, runtime paths, provider/API/plugin/image calls, memory writes, accepted_samples writes, package changes, production candidates, or Batch 005.
+changed_files_current_task:
+  - docs/visual_eval_review_result_protocol_fixture_planning.md
+  - .agent_board/CHECKPOINT.md
+validation_run:
+  - git diff --check
+  - git status --short
+  - git diff --cached --check
+validation_result: passed
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+runtime_execution_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+memory_written: false
+accepted_samples_written: false
+Batch_005_started: false
+production_candidate_002_started: false
+package_json_modified: false
+dependency_change_performed: false
+push_performed: false
+recommended_next_long_phase: metadata_only_review_result_protocol_fixture_draft
+next_phase_started: false
+```
+
+---
+
 ## Checkpoint - P2.10 Metadata-Only Review Result Protocol Contract Slice
 
 ```text
