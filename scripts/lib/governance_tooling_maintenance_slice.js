@@ -2545,6 +2545,14 @@ const EXPECTED_P2_1_PROVIDER_EVIDENCE_INTEGRITY_PHASE_2_SLICE = [
   "scripts/validate_provider_evidence_integrity_contract.js"
 ].sort();
 
+const EXPECTED_P2_2_RETRY_007_PREFLIGHT_DECISION_SLICE = [
+  "adapters/runtime/exact_a5_provider_retry_007_preflight_decision_packet.js",
+  "docs/EXACT_A5_PROVIDER_RETRY_007_PREFLIGHT_DECISION.md",
+  "package.json",
+  "scripts/validate_exact_a5_provider_retry_007_preflight_decision.js",
+  "scripts/validate_mvp_core.js"
+].sort();
+
 const EXPECTED_EVIDENCE_GOVERNANCE_SANITIZATION_PACKAGE_SCRIPTS = {
   "validate:all": "npm run validate:smoke && npm run validate:mvp && npm run validate:runtime-kernel && npm run validate:review-bridge-readonly && npm run validate:durable-audit-store && npm run validate:provider-preflight && npm run validate:exact-a5-provider-packet && npm run validate:exact-a5-provider-retry-packet && npm run validate:exact-a5-activation-receipt && npm run validate:exact-a5-retry-activation-receipt && npm run validate:exact-a5-retry-003-activation-receipt && npm run validate:exact-a5-retry-004-activation-receipt && npm run validate:exact-a5-retry-005-activation-receipt && npm run validate:exact-a5-retry-006-activation-receipt && npm run validate:retry-006-artifact-integrity && npm run validate:capsule-regression && npm run validate:governance",
   "validate:core": "npm run validate:smoke && npm run validate:runtime-kernel && npm run validate:review-bridge-readonly && npm run validate:durable-audit-store && npm run validate:provider-preflight",
@@ -2558,7 +2566,16 @@ const EXPECTED_P2_1_PROVIDER_EVIDENCE_INTEGRITY_PACKAGE_SCRIPTS = {
   "validate:provider-evidence-integrity": "node scripts/validate_provider_evidence_integrity_contract.js"
 };
 
+const EXPECTED_P2_2_RETRY_007_PREFLIGHT_DECISION_PACKAGE_SCRIPTS = {
+  "validate:all": "npm run validate:smoke && npm run validate:mvp && npm run validate:runtime-kernel && npm run validate:review-bridge-readonly && npm run validate:durable-audit-store && npm run validate:provider-preflight && npm run validate:exact-a5-provider-packet && npm run validate:exact-a5-provider-retry-packet && npm run validate:retry-007-preflight-decision && npm run validate:exact-a5-activation-receipt && npm run validate:exact-a5-retry-activation-receipt && npm run validate:exact-a5-retry-003-activation-receipt && npm run validate:exact-a5-retry-004-activation-receipt && npm run validate:exact-a5-retry-005-activation-receipt && npm run validate:exact-a5-retry-006-activation-receipt && npm run validate:retry-006-artifact-integrity && npm run validate:provider-evidence-integrity && npm run validate:capsule-regression && npm run validate:governance",
+  "validate:retry-007-preflight-decision": "node scripts/validate_exact_a5_provider_retry_007_preflight_decision.js"
+};
+
 const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
+  {
+    id: "retry_007_preflight_decision_slice",
+    files: EXPECTED_P2_2_RETRY_007_PREFLIGHT_DECISION_SLICE
+  },
   {
     id: "provider_evidence_integrity_phase_2_slice",
     files: EXPECTED_P2_1_PROVIDER_EVIDENCE_INTEGRITY_PHASE_2_SLICE
@@ -3205,6 +3222,8 @@ function diffStringList(actual, expected) {
 
 function normalizeChangedFilesForSliceMatching(changedFiles) {
   const withoutHelper = changedFiles.filter((file) => file !== GOVERNANCE_TOOLING_SLICE_HELPER_FILE);
+  const isP2_2Retry007PreflightDecisionRegistrationPatch = changedFiles.includes(GOVERNANCE_TOOLING_SLICE_HELPER_FILE)
+    && sameStringList(withoutHelper, EXPECTED_P2_2_RETRY_007_PREFLIGHT_DECISION_SLICE);
   const isP2_1ProviderEvidenceIntegrityRegistrationPatch = changedFiles.includes(GOVERNANCE_TOOLING_SLICE_HELPER_FILE)
     && sameStringList(withoutHelper, EXPECTED_P2_1_PROVIDER_EVIDENCE_INTEGRITY_PHASE_2_SLICE);
   const isP2_0ValidationGateSemanticsRegistrationPatch = changedFiles.includes(GOVERNANCE_TOOLING_SLICE_HELPER_FILE)
@@ -3270,7 +3289,7 @@ function normalizeChangedFilesForSliceMatching(changedFiles) {
   const isV0_6_73agToAiRegistrationPatch = changedFiles.includes(GOVERNANCE_TOOLING_SLICE_HELPER_FILE)
     && sameStringList(withoutHelper, EXPECTED_V0_6_73AG_TO_AI_REMOTE_SYNC_CURRENT_HEAD_AND_ONE_SHOT_BLOCKED_SLICE);
 
-  return (isP2_1ProviderEvidenceIntegrityRegistrationPatch || isP2_0ValidationGateSemanticsRegistrationPatch || isP1_8GovernanceV14_212BaselineRegistrationPatch || isPostPushSyncRegistrationPatch || isExecutionBlockedStatusSyncRegistrationPatch || isV0_6_73gRegistrationPatch || isV0_6_73hRegistrationPatch || isV0_6_73iRegistrationPatch || isV0_6_73lRegistrationPatch || isV0_6_73mRegistrationPatch || isV0_6_73nRegistrationPatch || isV0_6_73oRegistrationPatch || isV0_6_73pRegistrationPatch || isV0_6_73qRegistrationPatch || isV0_6_73rRegistrationPatch || isV0_6_73sRegistrationPatch || isV0_6_73tRegistrationPatch || isV0_6_73uRegistrationPatch || isV0_6_73u3RegistrationPatch || isV0_6_73vRegistrationPatch || isV0_6_73wRegistrationPatch || isV0_6_73xRegistrationPatch || isV0_6_73zRegistrationPatch || isV0_6_73aaRegistrationPatch || isV0_6_73abRegistrationPatch || isV0_6_73adRegistrationPatch || isV0_6_73aeRegistrationPatch || isV0_6_73afRegistrationPatch || isV0_6_73agRegistrationPatch || isV0_6_73ahRegistrationPatch || isV0_6_73agToAhRegistrationPatch || isV0_6_73agToAiRegistrationPatch) ? withoutHelper : changedFiles;
+  return (isP2_2Retry007PreflightDecisionRegistrationPatch || isP2_1ProviderEvidenceIntegrityRegistrationPatch || isP2_0ValidationGateSemanticsRegistrationPatch || isP1_8GovernanceV14_212BaselineRegistrationPatch || isPostPushSyncRegistrationPatch || isExecutionBlockedStatusSyncRegistrationPatch || isV0_6_73gRegistrationPatch || isV0_6_73hRegistrationPatch || isV0_6_73iRegistrationPatch || isV0_6_73lRegistrationPatch || isV0_6_73mRegistrationPatch || isV0_6_73nRegistrationPatch || isV0_6_73oRegistrationPatch || isV0_6_73pRegistrationPatch || isV0_6_73qRegistrationPatch || isV0_6_73rRegistrationPatch || isV0_6_73sRegistrationPatch || isV0_6_73tRegistrationPatch || isV0_6_73uRegistrationPatch || isV0_6_73u3RegistrationPatch || isV0_6_73vRegistrationPatch || isV0_6_73wRegistrationPatch || isV0_6_73xRegistrationPatch || isV0_6_73zRegistrationPatch || isV0_6_73aaRegistrationPatch || isV0_6_73abRegistrationPatch || isV0_6_73adRegistrationPatch || isV0_6_73aeRegistrationPatch || isV0_6_73afRegistrationPatch || isV0_6_73agRegistrationPatch || isV0_6_73ahRegistrationPatch || isV0_6_73agToAhRegistrationPatch || isV0_6_73agToAiRegistrationPatch) ? withoutHelper : changedFiles;
 }
 
 function fileAllowedInGovernanceToolingSlice(file) {
@@ -3398,6 +3417,39 @@ function packageChangeIsProviderEvidenceIntegrityPhase2Only(currentPackageJson, 
   };
 }
 
+function packageChangeIsRetry007PreflightDecisionOnly(currentPackageJson, baselinePackageJson, changedFiles) {
+  if (!changedFiles.includes("package.json")) {
+    return { allowed: true, mode: "package_json_unchanged" };
+  }
+
+  const current = cloneJson(currentPackageJson);
+  const baseline = cloneJson(baselinePackageJson);
+  const currentScripts = current.scripts || {};
+  const baselineScripts = baseline.scripts || {};
+  const expectedScripts = EXPECTED_P2_2_RETRY_007_PREFLIGHT_DECISION_PACKAGE_SCRIPTS;
+
+  for (const [name, value] of Object.entries(expectedScripts)) {
+    if (currentScripts[name] !== value) {
+      return { allowed: false, mode: `retry_007_preflight_script_${name}_unexpected` };
+    }
+  }
+
+  for (const name of Object.keys(expectedScripts)) {
+    if (baselineScripts[name] !== undefined) {
+      baselineScripts[name] = currentScripts[name];
+    } else {
+      delete currentScripts[name];
+    }
+  }
+
+  return {
+    allowed: sameJson(current, baseline),
+    mode: sameJson(current, baseline)
+      ? "retry_007_preflight_validation_scripts_only"
+      : "retry_007_preflight_package_has_other_changes"
+  };
+}
+
 function buildGovernanceToolingMaintenanceSliceReport({ changedFiles, stagedFiles, behind, currentPackageJson, baselinePackageJson }) {
   const sortedChangedFiles = [...changedFiles].sort();
   const normalizedChangedFiles = normalizeChangedFilesForSliceMatching(sortedChangedFiles);
@@ -3405,11 +3457,13 @@ function buildGovernanceToolingMaintenanceSliceReport({ changedFiles, stagedFile
   const matchingSlice = findMatchingGovernanceToolingSlice(sortedChangedFiles);
   const closestSlice = matchingSlice || closestGovernanceToolingSlice(normalizedChangedFiles);
   const exactSliceMatches = matchingSlice !== null;
-  const packageReport = matchingSlice?.id === "provider_evidence_integrity_phase_2_slice"
-    ? packageChangeIsProviderEvidenceIntegrityPhase2Only(currentPackageJson, baselinePackageJson, sortedChangedFiles)
-    : matchingSlice?.id === "evidence_governance_sanitization_slice"
-      ? packageChangeIsEvidenceGovernanceSanitizationOnly(currentPackageJson, baselinePackageJson, sortedChangedFiles)
-      : packageChangeIsPreviewScriptOnly(currentPackageJson, baselinePackageJson, sortedChangedFiles);
+  const packageReport = matchingSlice?.id === "retry_007_preflight_decision_slice"
+    ? packageChangeIsRetry007PreflightDecisionOnly(currentPackageJson, baselinePackageJson, sortedChangedFiles)
+    : matchingSlice?.id === "provider_evidence_integrity_phase_2_slice"
+      ? packageChangeIsProviderEvidenceIntegrityPhase2Only(currentPackageJson, baselinePackageJson, sortedChangedFiles)
+      : matchingSlice?.id === "evidence_governance_sanitization_slice"
+        ? packageChangeIsEvidenceGovernanceSanitizationOnly(currentPackageJson, baselinePackageJson, sortedChangedFiles)
+        : packageChangeIsPreviewScriptOnly(currentPackageJson, baselinePackageJson, sortedChangedFiles);
   const fileDiff = closestSlice
     ? diffStringList(normalizedChangedFiles, closestSlice.files)
     : { unexpected_files: normalizedChangedFiles, missing_files: [] };
@@ -3472,6 +3526,32 @@ function governanceToolingMaintenanceSliceSelfCheck() {
     {
       check: "allowlist_rejects_env",
       passed: !fileAllowedInGovernanceToolingSlice(".env")
+    },
+    {
+      check: "exact_slice_matches_retry_007_preflight_decision",
+      passed: findMatchingGovernanceToolingSlice(
+        EXPECTED_P2_2_RETRY_007_PREFLIGHT_DECISION_SLICE
+      )?.id === "retry_007_preflight_decision_slice"
+    },
+    {
+      check: "exact_slice_matches_retry_007_preflight_decision_registration_patch",
+      passed: findMatchingGovernanceToolingSlice([
+        ...EXPECTED_P2_2_RETRY_007_PREFLIGHT_DECISION_SLICE,
+        GOVERNANCE_TOOLING_SLICE_HELPER_FILE
+      ])?.id === "retry_007_preflight_decision_slice"
+    },
+    {
+      check: "retry_007_preflight_decision_rejects_receipt_change",
+      passed: findMatchingGovernanceToolingSlice([
+        ...EXPECTED_P2_2_RETRY_007_PREFLIGHT_DECISION_SLICE,
+        "reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_007_receipt.json"
+      ]) === null
+    },
+    {
+      check: "retry_007_preflight_package_scripts_expected",
+      passed: Object.keys(EXPECTED_P2_2_RETRY_007_PREFLIGHT_DECISION_PACKAGE_SCRIPTS).length === 2
+        && EXPECTED_P2_2_RETRY_007_PREFLIGHT_DECISION_PACKAGE_SCRIPTS["validate:retry-007-preflight-decision"] === "node scripts/validate_exact_a5_provider_retry_007_preflight_decision.js"
+        && EXPECTED_P2_2_RETRY_007_PREFLIGHT_DECISION_PACKAGE_SCRIPTS["validate:all"].includes("npm run validate:retry-007-preflight-decision")
     },
     {
       check: "exact_slice_matches_provider_evidence_integrity_phase_2",
@@ -4498,6 +4578,8 @@ module.exports = {
   EXPECTED_V0_6_73AH_CURRENT_HEAD_FINAL_PRE_PROVIDER_GO_NO_GO_SLICE,
   EXPECTED_V0_6_73AG_TO_AH_REMOTE_SYNC_AND_CURRENT_HEAD_GO_NO_GO_SLICE,
   EXPECTED_V0_6_73AG_TO_AI_REMOTE_SYNC_CURRENT_HEAD_AND_ONE_SHOT_BLOCKED_SLICE,
+  EXPECTED_P2_2_RETRY_007_PREFLIGHT_DECISION_SLICE,
+  EXPECTED_P2_2_RETRY_007_PREFLIGHT_DECISION_PACKAGE_SCRIPTS,
   EXPECTED_P2_1_PROVIDER_EVIDENCE_INTEGRITY_PHASE_2_SLICE,
   EXPECTED_P2_1_PROVIDER_EVIDENCE_INTEGRITY_PACKAGE_SCRIPTS,
   EXPECTED_P2_0_VALIDATION_GATE_SEMANTICS_SLICE,

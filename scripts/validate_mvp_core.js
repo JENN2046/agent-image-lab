@@ -251,6 +251,32 @@ safeCheck("exact_a5_provider_retry_packet_draft", () => {
     result.all_negative_cases_caught === true;
 });
 
+safeCheck("retry_007_preflight_decision", () => {
+  const result = parseJson(runNode(["scripts/validate_exact_a5_provider_retry_007_preflight_decision.js"]));
+  return result.passed === true &&
+    result.candidate_authorization_id === "AUTH-DRAFT-NATIVE-DOUBAO-SEEDREAM5-RETRY-20260527-007" &&
+    result.decision_status === "hold_pending_owner_decision" &&
+    result.authorization_status === "not_issued" &&
+    result.authorization_active === false &&
+    result.can_execute_now === false &&
+    result.exact_activation_phrase_issued === false &&
+    result.required_model === "doubao-seedream-5-0-260128" &&
+    result.retry_007_output_directory_ref === "runs/real_generation/v0_6_73_real_vcp_agent_generation_retry_007" &&
+    result.provider_evidence_integrity_gate_passed === true &&
+    result.all_negative_cases_caught === true &&
+    result.provider_contact_performed === false &&
+    result.plugin_call_performed === false &&
+    result.api_call_performed === false &&
+    result.image_generation_performed === false &&
+    result.env_file_content_read_performed === false &&
+    result.secret_value_read_performed === false &&
+    result.output_write_performed === false &&
+    result.production_write_performed === false &&
+    result.accepted_samples_write_performed === false &&
+    result.DailyNote_write_performed === false &&
+    result.VCP_memory_write_performed === false;
+});
+
 safeCheck("exact_a5_activation_receipt", () => {
   const result = parseJson(runNode(["scripts/validate_exact_a5_provider_execution_activation_receipt.js"]));
   const legacyBlockedBeforeContact = result.execution_status === "BLOCKED_SECRETLESS_RUNTIME_NOT_CALLABLE" &&
