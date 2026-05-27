@@ -288,6 +288,39 @@ const expectedNegativeCases = [
     },
   },
   {
+    case_id: "bundle_summary_drift",
+    expected_failure_code: "bundle_summary_not_owner",
+    mutate(graph) {
+      graph.artifacts.readonly_review_bundle.data.readonly_artifacts.bridge_readable_payload.outcome_summary = {
+        pass: 1,
+        patch: 2,
+        reject: 0,
+      };
+    },
+  },
+  {
+    case_id: "consumer_summary_drift",
+    expected_failure_code: "bundle_consumer_summary_projection_consistent",
+    mutate(graph) {
+      graph.artifacts.readonly_consumer_payload.data.display_rows[1].summary = "drifted consumer summary projection";
+    },
+  },
+  {
+    case_id: "bundle_summary_reintroduced",
+    expected_failure_code: "bundle_summary_not_owner",
+    mutate(graph) {
+      graph.artifacts.readonly_review_bundle.data.readonly_artifacts.bridge_readable_payload.summary =
+        "reintroduced bundle-owned summary";
+    },
+  },
+  {
+    case_id: "consumer_summary_reintroduced",
+    expected_failure_code: "consumer_summary_not_owner",
+    mutate(graph) {
+      graph.artifacts.readonly_consumer_payload.data.session.summary = "reintroduced consumer-owned summary";
+    },
+  },
+  {
     case_id: "bundle_image_case_next_action_reintroduced",
     expected_failure_code: "derived_next_review_action_not_owner",
     mutate(graph) {
@@ -586,6 +619,8 @@ function pathIsProjectionOnly(pathLabel, row) {
 
 function validateDerivedOwnership(graph, ctx) {
   const summaryOwners = [];
+  const bundleSummaryOwners = [];
+  const consumerSummaryOwners = [];
   const reasonOwners = [];
   const failureTagOwners = [];
   const taxonomyRefOwners = [];
@@ -619,6 +654,13 @@ function validateDerivedOwnership(graph, ctx) {
   }
 
   const bundle = graph.artifacts.readonly_review_bundle?.data || {};
+  const bundleBridge = bundle.readonly_artifacts?.bridge_readable_payload || {};
+  if (Object.prototype.hasOwnProperty.call(bundleBridge, "summary")) {
+    bundleSummaryOwners.push("readonly_review_bundle:readonly_artifacts.bridge_readable_payload.summary");
+  }
+  if (Object.prototype.hasOwnProperty.call(bundleBridge, "outcome_summary")) {
+    bundleSummaryOwners.push("readonly_review_bundle:readonly_artifacts.bridge_readable_payload.outcome_summary");
+  }
   for (const [index, imageCase] of (bundle.readonly_artifacts?.image_case_drafts || []).entries()) {
     if (!imageCase || Array.isArray(imageCase) || typeof imageCase !== "object") continue;
     const pathLabel = `readonly_review_bundle:readonly_artifacts.image_case_drafts.${index}`;
@@ -632,7 +674,24 @@ function validateDerivedOwnership(graph, ctx) {
     }
   }
 
+  const consumer = graph.artifacts.readonly_consumer_payload?.data || {};
+  walk(consumer, (value, pathParts) => {
+    if (!value || Array.isArray(value) || typeof value !== "object") return;
+    const pathLabel = `readonly_consumer_payload:${pathParts.join(".") || "<root>"}`;
+    if (!Object.prototype.hasOwnProperty.call(value, "summary")) return;
+    const displayRowProjection = /^display_rows\.\d+$/.test(pathParts.join(".")) &&
+      Object.prototype.hasOwnProperty.call(value, "review_result_id");
+    if (!displayRowProjection) consumerSummaryOwners.push(`${pathLabel}.summary`);
+  });
+
   ctx.addResult("derived_summary_not_owner", summaryOwners.length === 0, summaryOwners.join("; "));
+  ctx.addResult("bundle_summary_not_owner", bundleSummaryOwners.length === 0, bundleSummaryOwners.join("; "));
+  ctx.addResult("consumer_summary_not_owner", consumerSummaryOwners.length === 0, consumerSummaryOwners.join("; "));
+  ctx.addResult(
+    "forbidden_summary_owned_field_reintroduced",
+    summaryOwners.length === 0 && bundleSummaryOwners.length === 0 && consumerSummaryOwners.length === 0,
+    summaryOwners.concat(bundleSummaryOwners, consumerSummaryOwners).join("; ")
+  );
   ctx.addResult("derived_reasons_not_owner", reasonOwners.length === 0, reasonOwners.join("; "));
   ctx.addResult("derived_failure_tags_not_owner", failureTagOwners.length === 0, failureTagOwners.join("; "));
   ctx.addResult("derived_taxonomy_ref_not_owner", taxonomyRefOwners.length === 0, taxonomyRefOwners.join("; "));
@@ -894,6 +953,7 @@ function validateReviewConsistency(graph, ctx) {
   const metadataActionMismatches = [];
   const accumulationMismatches = [];
   const neverProductionMismatches = [];
+  const consumerSummaryMismatches = [];
 
   for (const object of reviewObjects) {
     const row = object.value;
@@ -924,6 +984,9 @@ function validateReviewConsistency(graph, ctx) {
     }
     if (Object.prototype.hasOwnProperty.call(row, "summary") && row.summary !== canonical.summary) {
       summaryMismatches.push(`${object.role}:${object.path}.summary drifted`);
+      if (object.role === "readonly_consumer_payload") {
+        consumerSummaryMismatches.push(`${object.role}:${object.path}.summary drifted`);
+      }
     }
     if (Array.isArray(row.reasons) && !sameArray(row.reasons, canonical.reasons)) {
       reasonsMismatches.push(`${object.role}:${object.path}.reasons=${JSON.stringify(row.reasons)} expected ${JSON.stringify(canonical.reasons)}`);
@@ -985,6 +1048,7 @@ function validateReviewConsistency(graph, ctx) {
   ctx.addResult("graph_accumulation_semantics_exact", accumulationMismatches.length === 0, accumulationMismatches.join("; "));
   ctx.addResult("graph_reject_never_production_semantics", neverProductionMismatches.length === 0, neverProductionMismatches.join("; "));
   ctx.addResult("projection_summary_consistent", summaryMismatches.length === 0, summaryMismatches.join("; "));
+  ctx.addResult("bundle_consumer_summary_projection_consistent", consumerSummaryMismatches.length === 0, consumerSummaryMismatches.join("; "));
   ctx.addResult("projection_reasons_consistent", reasonsMismatches.length === 0, reasonsMismatches.join("; "));
   ctx.addResult("projection_failure_tags_consistent", exactTagMismatches.length === 0, exactTagMismatches.join("; "));
   ctx.addResult("projection_taxonomy_ref_consistent", taxonomyMismatches.length === 0, taxonomyMismatches.join("; "));
@@ -1081,7 +1145,7 @@ function collectFailureCodes(fn) {
 }
 
 function validateNegativeCases(baseGraph, ctx) {
-  ctx.addResult("graph_negative_cases_count_expected", expectedNegativeCases.length === 38, expectedNegativeCases.length);
+  ctx.addResult("graph_negative_cases_count_expected", expectedNegativeCases.length === 42, expectedNegativeCases.length);
   for (const negativeCase of expectedNegativeCases) {
     const graph = deepClone(baseGraph);
     negativeCase.mutate(graph);

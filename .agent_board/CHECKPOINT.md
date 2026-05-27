@@ -38772,6 +38772,64 @@ Validation:
 Next: report to GPT commander, then wait for next local task or explicit commit/push authorization.
 ---
 
+## Checkpoint - readonly_review_spine_projection_minimization_hardening summary slice
+
+Status: completed_validated_pending_commander_review
+Task id: readonly_review_spine_projection_minimization_hardening_20260527_summary_slice
+Slice: bundle_consumer_summary
+Branch: master
+Remote state: ahead origin/master by 6 commits before this uncommitted slice
+
+Changed:
+- .agent_board/CHECKPOINT.md
+- scripts/validate_visual_eval_readonly_artifact_graph.js
+- scripts/validate_visual_eval_readonly_review_bundle.js
+- tests/schema_examples/visual_eval_readonly_review_bundle.example.json
+- tests/schema_examples/visual_eval_readonly_review_bundle_negative_cases.example.json
+
+Implemented:
+- Removed bundle-owned readonly_artifacts.bridge_readable_payload.outcome_summary from the readonly review bundle.
+- Kept readonly_consumer_payload.display_rows[*].summary as projection-only display data because removing it would require changing catalog/downstream display contracts outside this slice.
+- Added bundle validator fail-closed protection for bundle_bridge_outcome_summary_over_owned.
+- Added graph checks: bundle_summary_not_owner, consumer_summary_not_owner, bundle_consumer_summary_projection_consistent, forbidden_summary_owned_field_reintroduced.
+- Added graph negative cases: bundle_summary_drift, consumer_summary_drift, bundle_summary_reintroduced, consumer_summary_reintroduced.
+- Added bundle negative case: bundle_summary_reintroduced.
+
+Boundary:
+- local_only: true
+- metadata_only: true
+- bundle_consumer_summary_slice_only: true
+- bridge_files_frozen: true
+- bridge_text_diff_introduced: false
+- collection_detail_session_metadata_subtree_touched: false
+- provider_call_performed: false
+- plugin_call_performed: false
+- api_call_performed: false
+- image_generation_performed: false
+- memory_written: false
+- DailyNote_write_performed: false
+- VCP_memory_write_performed: false
+- accepted_samples_written: false
+- production_candidate_created: false
+- Batch_005_started: false
+- commit_performed: false
+- push_performed: false
+
+Validation:
+- node --check scripts/validate_visual_eval_readonly_artifact_graph.js: passed
+- node --check kernel/visual_eval_readonly_review_bundle_consumer.js: passed
+- node --check scripts/validate_visual_eval_readonly_review_bundle.js: passed
+- node --check scripts/validate_visual_eval_readonly_review_bundle_consumer.js: passed
+- node scripts/validate_visual_eval_readonly_artifact_graph.js: passed
+- node scripts/validate_visual_eval_readonly_review_bundle.js: passed
+- node scripts/validate_visual_eval_readonly_review_bundle_consumer.js: passed
+- node scripts/validate_visual_eval_readonly_review_artifact_catalog.js: passed
+- git diff --check: passed_with_line_ending_warnings_only
+- git status --short --branch: checked
+
+Next: report to GPT commander and wait for review, commit authorization, or the next task.
+---
+
 ## Checkpoint - v0.5.0 Controlled Generation Readiness Packet
 
 Status: completed_validated_pending_local_commit

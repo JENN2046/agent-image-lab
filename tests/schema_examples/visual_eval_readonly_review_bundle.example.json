@@ -104,12 +104,7 @@
       "payload_ref": "tests/schema_examples/visual_eval_review_result_review_bridge_payload.example.json",
       "payload_id": "visual_eval_review_result_bridge_payload_v1_synthetic_001",
       "payload_type": "metadata_only_visual_eval_review_result_bridge_payload",
-      "review_row_count": 3,
-      "outcome_summary": {
-        "pass": 1,
-        "patch": 1,
-        "reject": 1
-      }
+      "review_row_count": 3
     },
     "metadata_accumulation_draft": {
       "source_contract": "tests/schema_examples/visual_eval_metadata_accumulation.example.json",

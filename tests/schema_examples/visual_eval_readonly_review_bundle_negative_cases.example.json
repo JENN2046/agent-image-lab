@@ -37,6 +37,19 @@
       "expected_reason": "metadata accumulation next action must match the source review result"
     },
     {
+      "case_id": "bundle_summary_reintroduced",
+      "mutation": {
+        "field": "readonly_artifacts.bridge_readable_payload.outcome_summary",
+        "value": {
+          "pass": 1,
+          "patch": 1,
+          "reject": 1
+        }
+      },
+      "expected_failure_code": "bundle_bridge_outcome_summary_over_owned",
+      "expected_reason": "readonly bundle must not own bridge outcome summary counts"
+    },
+    {
       "case_id": "image_case_next_action_reintroduced",
       "mutation": {
         "field": "readonly_artifacts.image_case_drafts.1.next_review_action",

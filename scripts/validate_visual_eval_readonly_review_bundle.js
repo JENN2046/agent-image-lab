@@ -27,6 +27,7 @@ const expectedNegativeCases = new Map([
   ["dangling_taxonomy_ref", "bundle_taxonomy_ref_mismatch"],
   ["session_candidate_id_mismatch", "session_candidate_ids_mismatch"],
   ["outcome_next_action_conflict", "metadata_accumulation_mismatch"],
+  ["bundle_summary_reintroduced", "bundle_bridge_outcome_summary_over_owned"],
   ["image_case_next_action_reintroduced", "image_case_next_action_over_owned"],
   ["write_guard_true", "route_guard_must_be_false"],
   ["absolute_local_path", "absolute_local_path_forbidden"],
@@ -247,10 +248,8 @@ function validateBundle(bundle, refs) {
   if (bridge.review_row_count !== refs.bridge.review_bridge_readable_payload?.review_rows?.length) {
     ctx.fail("bundle_bridge_row_count_mismatch", "bridge row count mismatch");
   }
-  for (const outcome of expectedOutcomes) {
-    if (bridge.outcome_summary?.[outcome] !== refs.bridge.outcome_summary?.[outcome]) {
-      ctx.fail("bundle_bridge_outcome_summary_mismatch", `${outcome} count mismatch`);
-    }
+  if (Object.prototype.hasOwnProperty.call(bridge, "outcome_summary")) {
+    ctx.fail("bundle_bridge_outcome_summary_over_owned", "bundle bridge payload must not own outcome_summary");
   }
 
   if (accumulationDraft.source_contract !== accumulationPath) {
