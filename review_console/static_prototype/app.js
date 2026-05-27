@@ -45,6 +45,7 @@ const state = {
   exact_new_trial_003_formal_human_approval_capture_surface: mock.exact_new_trial_003_formal_human_approval_capture_surface_seed,
   runtime_gap_dashboard: mock.review_console_runtime_gap_dashboard_contract_seed,
   readonly_review_corpus_renderer: mock.visual_eval_readonly_review_corpus_renderer_static_handoff,
+  readonly_visual_review_mvp_seed: mock.readonly_visual_review_mvp_seed,
   lifecycleFilter: "all",
   lifecycleSearch: "",
   selectedArtifactId: mock.artifact_lifecycle_state_reader_seed.records[0].sample_id,
@@ -2534,6 +2535,119 @@ function renderReadonlyReviewCorpusRenderer() {
   `;
 }
 
+function readonlyVisualReviewMvpState() {
+  const renderer = readonlyReviewCorpusRendererState();
+  const seed = state.readonly_visual_review_mvp_seed;
+  const reviewRows = renderer.display_rows.map((row) => ({
+    review_result_id: row.review_result_id,
+    candidate_id: row.candidate_id,
+    case_id: row.case_id,
+    outcome: row.outcome,
+    summary: row.summary,
+    reasons: row.reasons,
+    taxonomy_tags: row.taxonomy_tags,
+    blocking_watch_items: row.blocking_watch_items,
+    next_review_action: row.next_review_action,
+    metadata_accumulation_action: row.metadata_accumulation_action,
+    metadata_queue_sections: row.metadata_queue_sections,
+    write_allowed: row.write_allowed
+  }));
+  const taxonomyTags = [...new Set(reviewRows.flatMap((row) => row.taxonomy_tags || []))];
+  const metadataSections = [...new Set(reviewRows.flatMap((row) => row.metadata_queue_sections || []))];
+  const nextActions = [...new Set(reviewRows.map((row) => row.next_review_action))];
+  return {
+    state_id: seed.state_id,
+    state_type: seed.state_type,
+    status: seed.status,
+    display_only: seed.display_only,
+    source_artifact_catalog_ref: seed.source_artifact_catalog_ref,
+    source_renderer_ref: renderer.source_renderer_ref,
+    source_console_handoff_ref: seed.source_console_handoff_ref,
+    catalog_summary: seed.catalog_summary,
+    review_rows: reviewRows,
+    outcome_summary: renderer.outcome_sections,
+    taxonomy_summary: {
+      visible_tags: taxonomyTags,
+      patch_reject_tags_present: taxonomyTags.includes("material_failed") &&
+        taxonomyTags.includes("lighting_failed") &&
+        taxonomyTags.includes("subject_drift") &&
+        taxonomyTags.includes("commercial_unusable")
+    },
+    metadata_queue_sections: metadataSections,
+    next_actions: nextActions,
+    guard_summary: {
+      ...seed.guard_summary,
+      file_write_performed: renderer.guard.file_write_performed,
+      approval_write_performed: renderer.guard.approval_write_performed,
+      accepted_samples_write_performed: renderer.guard.accepted_samples_write_performed,
+      production_candidate_created: renderer.guard.production_candidate_created,
+      provider_contact_performed: renderer.guard.provider_contact_performed,
+      plugin_call_performed: renderer.guard.plugin_call_performed,
+      api_call_performed: renderer.guard.api_call_performed,
+      image_generation_performed: renderer.guard.image_generation_performed,
+      DailyNote_write_performed: renderer.guard.DailyNote_write_performed,
+      VCP_memory_write_performed: renderer.guard.VCP_memory_write_performed,
+      memory_write_performed: renderer.guard.memory_write_performed,
+      Batch_005_started: renderer.guard.Batch_005_started,
+      production_candidate_002_started: renderer.guard.production_candidate_002_started
+    }
+  };
+}
+
+function renderReadonlyVisualReviewMvp() {
+  const mvp = readonlyVisualReviewMvpState();
+  qs("#readonlyVisualReviewMvpSummary").innerHTML = `
+    <span>status <strong>${escapeHtml(mvp.status)}</strong></span>
+    <span>artifacts <strong>${escapeHtml(mvp.catalog_summary.artifact_count)}</strong></span>
+    <span>roles <strong>${escapeHtml(mvp.catalog_summary.canonical_role_count)}</strong></span>
+    <span>rows <strong>${escapeHtml(mvp.review_rows.length)}</strong></span>
+    <span>display only <strong>${escapeHtml(mvp.display_only)}</strong></span>
+  `;
+  qs("#readonlyVisualReviewMvpCatalog").innerHTML = `
+    <article class="readonly-visual-review-catalog-card">
+      <strong>${escapeHtml(mvp.source_artifact_catalog_ref)}</strong>
+      <p>renderer: ${escapeHtml(mvp.source_renderer_ref)}</p>
+      <p>handoff: ${escapeHtml(mvp.source_console_handoff_ref)}</p>
+      <p>canonical roles: ${inlineList(mvp.catalog_summary.canonical_roles)}</p>
+    </article>
+  `;
+  qs("#readonlyVisualReviewMvpRows").innerHTML = mvp.review_rows.map((row) => `
+    <article class="readonly-review-corpus-card ${safeClassToken(row.outcome)}">
+      <div class="protocol-card-head">
+        <strong>${escapeHtml(row.outcome)}</strong>
+        <span>${escapeHtml(row.next_review_action)}</span>
+      </div>
+      <dl>
+        <div><dt>Candidate</dt><dd>${escapeHtml(row.candidate_id)}</dd></div>
+        <div><dt>Summary</dt><dd>${escapeHtml(row.summary)}</dd></div>
+        <div><dt>Reasons</dt><dd>${inlineList(row.reasons)}</dd></div>
+        <div><dt>Taxonomy</dt><dd>${inlineList(row.taxonomy_tags)}</dd></div>
+        <div><dt>Metadata sections</dt><dd>${inlineList(row.metadata_queue_sections)}</dd></div>
+        <div><dt>Write allowed</dt><dd>${escapeHtml(row.write_allowed)}</dd></div>
+      </dl>
+    </article>
+  `).join("");
+  qs("#readonlyVisualReviewMvpTaxonomy").innerHTML = [
+    { kind: "taxonomy", label: "visible tags", values: mvp.taxonomy_summary.visible_tags },
+    { kind: "metadata", label: "metadata sections", values: mvp.metadata_queue_sections },
+    { kind: "next action", label: "next actions", values: mvp.next_actions }
+  ].map((section) => `
+    <article class="readonly-review-corpus-section">
+      <strong>${escapeHtml(section.kind)}: ${escapeHtml(section.label)}</strong>
+      <p>${inlineList(section.values)}</p>
+    </article>
+  `).join("");
+  qs("#readonlyVisualReviewMvpGuard").innerHTML = `
+    <span>static UI only: ${escapeHtml(mvp.guard_summary.static_ui_only)}</span>
+    <span>fetch: ${escapeHtml(mvp.guard_summary.fetch_performed)}</span>
+    <span>file write: ${escapeHtml(mvp.guard_summary.file_write_performed)}</span>
+    <span>provider/plugin/API: ${escapeHtml(mvp.guard_summary.provider_contact_performed || mvp.guard_summary.plugin_call_performed || mvp.guard_summary.api_call_performed)}</span>
+    <span>image generation: ${escapeHtml(mvp.guard_summary.image_generation_performed)}</span>
+    <span>memory write: ${escapeHtml(mvp.guard_summary.memory_write_performed || mvp.guard_summary.DailyNote_write_performed || mvp.guard_summary.VCP_memory_write_performed)}</span>
+    <span>production: ${escapeHtml(mvp.guard_summary.production_candidate_created || mvp.guard_summary.production_candidate_002_started)}</span>
+  `;
+}
+
 function loadImportRecordSeed() {
   qs("#importRecordInput").value = importRecordSeedText();
   parseImportRecordText("project_local_seed");
@@ -3654,6 +3768,7 @@ function renderDraft() {
     third_sample_accepted_samples_authorization_package_state: thirdSampleAcceptedSamplesAuthorizationPackageState(),
     review_console_runtime_gap_dashboard_state: reviewConsoleRuntimeGapDashboardState(),
     visual_eval_readonly_review_corpus_renderer_static_handoff: readonlyReviewCorpusRendererState(),
+    readonly_visual_review_mvp_state: readonlyVisualReviewMvpState(),
     codex_session_import_record_reader: state.import_record_reader,
     review_session: buildReviewSession(memoryApproval, humanTotal),
     image_case: buildImageCase(humanTotal),
@@ -3708,6 +3823,7 @@ function renderAll() {
   renderThirdSampleAcceptedSamplesAuthorizationPackage();
   renderReviewConsoleRuntimeGapDashboard();
   renderReadonlyReviewCorpusRenderer();
+  renderReadonlyVisualReviewMvp();
   loadImportRecordSeed();
   renderDraft();
 }

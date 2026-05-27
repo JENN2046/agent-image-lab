@@ -1,5 +1,110 @@
 ---
 
+## Current Handoff Update - Readonly Visual Review MVP Local Console
+
+```text
+phase: readonly_visual_review_mvp_local_console_20260527
+status: COMPLETED_VALIDATED_LOCAL_STATIC_MVP
+mode: Green local static Review Console MVP implementation
+branch: master
+source_head: 5eec3aa
+summary: Implemented the local readonly Visual Review MVP as a static Review Console workbench and draft output state. The page now shows the 24-artifact readonly catalog, pass / patch / reject review rows, taxonomy tags, metadata sections, next actions, repo-relative refs, validator status, and closed guard state. The new validator verifies the state, snapshot, UI source wiring, existing readonly validators, and four fail-closed negative cases.
+changed_by_this_task:
+  - docs/READONLY_VISUAL_REVIEW_MVP.md
+  - package.json
+  - review_console/static_prototype/FIELD_MAPPING.md
+  - review_console/static_prototype/README.md
+  - review_console/static_prototype/app.js
+  - review_console/static_prototype/index.html
+  - review_console/static_prototype/mock_data.js
+  - review_console/static_prototype/styles.css
+  - scripts/validate_mvp_core.js
+  - scripts/validate_readonly_visual_review_mvp.js
+  - tests/schema_examples/readonly_visual_review_mvp_state.example.json
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+validation:
+  - node --check scripts\validate_readonly_visual_review_mvp.js: passed
+  - node --check review_console\static_prototype\app.js: passed
+  - node scripts\validate_readonly_visual_review_mvp.js: passed
+  - node scripts\validate_visual_eval_readonly_review_artifact_system.js: passed
+  - node scripts\validate_visual_eval_review_console_readonly_corpus_renderer.js: passed
+  - node scripts\validate_visual_eval_readonly_review_artifact_catalog.js: passed
+  - npm run validate:mvp: passed
+  - local browser smoke at http://127.0.0.1:4174/: passed; preview server stopped
+boundaries:
+  runtime_execution_performed: false
+  fetch_performed: false
+  file_write_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  accepted_samples_write_performed: false
+  production_candidate_created: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  dependency_change_performed: false
+  commit_performed: false
+  push_performed: false
+next_safe_task: review local MVP diff; exact-file local commit only if explicitly requested. Push/tag/release/deploy remain separately gated.
+```
+
+## Current Handoff Update - MVP Validation Closure After Remote Sync
+
+```text
+phase: mvp_validation_closure_after_remote_fast_forward_sync_20260527
+status: COMPLETED_VALIDATED_LOCAL_EVIDENCE_REDACTION_REPAIR
+mode: Green local validation closure after remote sync; no provider contact, plugin call, API call, image generation, memory write, DailyNote write, dependency action, commit, push, tag, release, or deploy
+branch: master
+source_head: 5eec3aa
+summary: After the remote fast-forward sync, the next local validation pass found retry_003 through retry_006 durable audit records still contained local absolute path evidence. The private durable audit files were mechanically redacted to use <redacted-local-path>, then targeted retry validators and npm run validate:mvp passed.
+private_local_files_updated_not_git_tracked:
+  - .agent_private/runtime_audit_store/v0_6_73_real_vcp_agent_generation_retry_003/activation_attempt_003.audit.json
+  - .agent_private/runtime_audit_store/v0_6_73_real_vcp_agent_generation_retry_004/activation_attempt_004.audit.json
+  - .agent_private/runtime_audit_store/v0_6_73_real_vcp_agent_generation_retry_005/activation_attempt_005.audit.json
+  - .agent_private/runtime_audit_store/v0_6_73_real_vcp_agent_generation_retry_006/activation_attempt_006.audit.json
+changed_by_this_task:
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+validation:
+  - node scripts\validate_exact_a5_provider_retry_003_activation_receipt.js: passed
+  - node scripts\validate_exact_a5_provider_retry_004_activation_receipt.js: passed
+  - node scripts\validate_exact_a5_provider_retry_005_activation_receipt.js: passed
+  - node scripts\validate_exact_a5_provider_retry_006_activation_receipt.js: passed
+  - npm run validate:mvp: passed
+  - git diff --check: passed with CRLF normalization warnings only
+next_safe_task: owner review of local status-surface changes, exact-file local commit only if explicitly requested; push/tag/release/deploy remain separately gated.
+```
+
+## Current Handoff Update - Remote Fast-forward Sync Status Surface Refresh
+
+```text
+phase: remote_fast_forward_sync_status_surface_refresh_20260527
+status: COMPLETED_VALIDATED_LOCAL_STATUS_SURFACE_SYNC
+mode: Green local status-surface sync after remote fast-forward
+branch: master
+workspace: A:\agent-image-lab\agent-image-lab-v0.2
+source_head_before_sync: e24c0dc
+remote_head_after_sync: 5eec3aa
+ahead_behind_after_sync: 0 ahead / 0 behind
+summary: Local master was refreshed from origin/master after a remote update. The repository fast-forwarded by 39 commits to 5eec3aa, with no merge commit and no local commit, push, tag, release, deployment, provider contact, plugin call, API call, image generation, DailyNote write, VCP memory write, dependency action, or secret access performed by this status-surface refresh.
+changed_by_this_task:
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+validation:
+  - git status --short --branch: passed; only .agent_board status-surface files modified by this task
+  - git diff --check: passed with CRLF normalization warnings only
+  - node scripts\validate_agent_board_state.js: passed
+next_safe_task: continue from the latest origin/master state; push/tag/release/deploy remain separately gated.
+```
+
 ## Current Handoff Update - P2.6 Resume Surface Post-Push Status Convention Fix
 
 ```text

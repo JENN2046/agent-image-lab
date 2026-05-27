@@ -1,5 +1,147 @@
 ---
 
+## Current Run State - Readonly Visual Review MVP Local Console
+
+```text
+phase: readonly_visual_review_mvp_local_console_20260527
+status: COMPLETED_VALIDATED_LOCAL_STATIC_MVP
+mode: Green local static Review Console MVP implementation
+branch: master
+source_head: 5eec3aa
+goal: Land the P3.22 readonly review artifact system as a browsable, handoff-ready, validated local Review Console MVP without runtime, fetch, file write, provider/plugin/API, image generation, memory, accepted_samples, or production routes.
+completed:
+- Added a short phase record for the Readonly Visual Review MVP.
+- Added a static Review Console workbench that displays 24 readonly review artifacts, canonical roles, repo-relative refs, validator status, pass / patch / reject review rows, taxonomy tags, metadata sections, next actions, and guard state.
+- Added `readonly_visual_review_mvp_state` to browser draft output.
+- Added a snapshot fixture for the MVP draft state.
+- Added `scripts/validate_readonly_visual_review_mvp.js` with fail-closed negative cases for missing reject row, guard drift, missing catalog role, and renderer ref drift.
+- Wired the validator into package scripts and `npm run validate:mvp`.
+- Updated Review Console README and FIELD_MAPPING handoff notes.
+changed_by_this_task:
+- docs/READONLY_VISUAL_REVIEW_MVP.md
+- package.json
+- review_console/static_prototype/FIELD_MAPPING.md
+- review_console/static_prototype/README.md
+- review_console/static_prototype/app.js
+- review_console/static_prototype/index.html
+- review_console/static_prototype/mock_data.js
+- review_console/static_prototype/styles.css
+- scripts/validate_mvp_core.js
+- scripts/validate_readonly_visual_review_mvp.js
+- tests/schema_examples/readonly_visual_review_mvp_state.example.json
+- .agent_board/HANDOFF.md
+- .agent_board/RUN_STATE.md
+- .agent_board/TASK_QUEUE.md
+- .agent_board/CHECKPOINT.md
+validation:
+- node --check scripts\validate_readonly_visual_review_mvp.js: passed
+- node --check review_console\static_prototype\app.js: passed
+- node scripts\validate_readonly_visual_review_mvp.js: passed
+- node scripts\validate_visual_eval_readonly_review_artifact_system.js: passed
+- node scripts\validate_visual_eval_review_console_readonly_corpus_renderer.js: passed
+- node scripts\validate_visual_eval_readonly_review_artifact_catalog.js: passed
+- npm run validate:mvp: passed
+- local browser smoke at http://127.0.0.1:4174/: passed; preview server stopped
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+accepted_samples_write_performed: false
+production_candidate_created: false
+runtime_execution_performed: false
+fetch_performed: false
+file_write_performed: false
+dependency_change_performed: false
+secret_value_read_performed: false
+commit_performed: false
+push_performed: false
+tag_release_deploy_performed: false
+next_safe_task: review local MVP diff; exact-file local commit only if explicitly requested.
+next_phase_started: false
+```
+
+## Current Run State - MVP Validation Closure After Remote Sync
+
+```text
+phase: mvp_validation_closure_after_remote_fast_forward_sync_20260527
+status: COMPLETED_VALIDATED_LOCAL_EVIDENCE_REDACTION_REPAIR
+mode: Green local validation closure after remote sync
+branch: master
+source_head: 5eec3aa
+goal: Continue the next safe local validation step after remote fast-forward sync and close the MVP validation failure without crossing Red Lane boundaries.
+completed:
+- Ran npm run validate:mvp after status-surface sync.
+- Found retry_003 through retry_006 durable audit validation failures caused by local absolute path evidence.
+- Mechanically redacted only the four private durable audit JSON files to <redacted-local-path>.
+- Re-ran the four targeted retry activation receipt validators successfully.
+- Re-ran npm run validate:mvp successfully.
+private_local_files_updated_not_git_tracked:
+- .agent_private/runtime_audit_store/v0_6_73_real_vcp_agent_generation_retry_003/activation_attempt_003.audit.json
+- .agent_private/runtime_audit_store/v0_6_73_real_vcp_agent_generation_retry_004/activation_attempt_004.audit.json
+- .agent_private/runtime_audit_store/v0_6_73_real_vcp_agent_generation_retry_005/activation_attempt_005.audit.json
+- .agent_private/runtime_audit_store/v0_6_73_real_vcp_agent_generation_retry_006/activation_attempt_006.audit.json
+validation:
+- node scripts\validate_exact_a5_provider_retry_003_activation_receipt.js: passed
+- node scripts\validate_exact_a5_provider_retry_004_activation_receipt.js: passed
+- node scripts\validate_exact_a5_provider_retry_005_activation_receipt.js: passed
+- node scripts\validate_exact_a5_provider_retry_006_activation_receipt.js: passed
+- npm run validate:mvp: passed
+- powershell -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1: passed_with_warnings_ok_for_manual_review
+- git diff --check: passed with CRLF normalization warnings only
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+dependency_change_performed: false
+secret_value_read_performed: false
+commit_performed: false
+push_performed: false
+tag_release_deploy_performed: false
+next_safe_task: owner review of local status-surface changes, exact-file local commit only if explicitly requested.
+next_phase_started: false
+```
+
+## Current Run State - Remote Fast-forward Sync Status Surface Refresh
+
+```text
+phase: remote_fast_forward_sync_status_surface_refresh_20260527
+status: COMPLETED_VALIDATED_LOCAL_STATUS_SURFACE_SYNC
+mode: Green local status-surface sync after remote fast-forward; no provider contact, plugin call, API call, image generation, memory write, DailyNote write, dependency action, commit, push, tag, release, or deploy
+branch: master
+workspace: A:\agent-image-lab\agent-image-lab-v0.2
+source_head_before_sync: e24c0dc
+remote_head_after_sync: 5eec3aa
+fast_forward_commits_applied: 39
+ahead_behind_after_sync: 0 ahead / 0 behind
+goal: Record that the local workspace was updated to the latest origin/master after the owner reported remote updates.
+completed:
+- Fetched origin and confirmed master was behind origin/master by 39 commits.
+- Fast-forwarded local master from e24c0dc to 5eec3aa.
+- Confirmed HEAD equals origin/master after sync.
+- Updated local resume surfaces to make the refreshed baseline explicit.
+validation:
+- git status --short --branch: passed; only .agent_board status-surface files modified by this task
+- git diff --check: passed with CRLF normalization warnings only
+- node scripts\validate_agent_board_state.js: passed
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+dependency_change_performed: false
+secret_value_read_performed: false
+commit_performed: false
+push_performed: false
+tag_release_deploy_performed: false
+next_safe_task: continue from origin/master at 5eec3aa or run the next exact local validation gate if requested.
+next_phase_started: false
+```
+
 ## Current Run State - P2.6 Resume Surface Post-Push Status Convention Fix
 
 ```text

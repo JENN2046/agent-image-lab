@@ -742,3 +742,17 @@ provider、plugin、API、DailyNote 或 VCP memory。
 erun_local_validator_outside_ui | fail-closed checklist rows | Must stay static human instructions and never become executable buttons. |
 
 | `inspect_manifest_failure` / `repair_relation_link` / `block_production_guard_violation` / `rerun_local_validator_outside_ui` | fail-closed checklist rows | Must stay static human instructions and never become executable buttons. |
+
+## Readonly Visual Review MVP Mapping
+
+本节用于验收 `readonly_visual_review_mvp_state` 的静态只读工作台。它只从 checked-in artifact catalog、readonly corpus renderer handoff 和 `mock_data.js` seed 派生 UI / draft output，不读取 `asset_archive/`，不加载图片，不 fetch，不写文件，不调用 provider / plugin / API / DailyNote / VCP memory，不写 accepted_samples，不创建 production_candidate。
+
+| Source | Review Console field | Rule |
+| --- | --- | --- |
+| `visual_eval_readonly_review_artifact_catalog.example.json.artifact_entries` | `readonly_visual_review_mvp_state.catalog_summary` | 必须显示 24 个 repo-relative readonly artifacts、24 个 canonical roles 和 validator-required 状态 |
+| `visual_eval_review_console_readonly_corpus_renderer_static_handoff.example.json.display_rows` | `readonly_visual_review_mvp_state.review_rows` | pass / patch / reject 三类审查行必须全部可见，且 `write_allowed=false` |
+| `display_rows[].taxonomy_tags` | `readonly_visual_review_mvp_state.taxonomy_summary.visible_tags` | 必须保留 `material_failed`、`lighting_failed`、`subject_drift`、`commercial_unusable` |
+| `metadata_section_panels[].section_id` | `readonly_visual_review_mvp_state.metadata_queue_sections` | metadata sections 不得丢失，必须包含 accepted、patch、failure、archive、next-review 五类 |
+| `next_action_sections[].section_id` | `readonly_visual_review_mvp_state.next_actions` | 必须覆盖 `queue_for_future_human_review`、`write_patch_plan_only`、`defer_until_taxonomy_update` |
+| static guard seed | `readonly_visual_review_mvp_state.guard_summary` | runtime、fetch、file write、accepted_samples、production_candidate、provider/plugin/API、image generation、DailyNote、VCP memory、real manifest / VCPChat / VCPToolBox flags 必须保持 false |
+| `tests/schema_examples/readonly_visual_review_mvp_state.example.json` | snapshot validator | Snapshot 只固定浏览器草案输出结构和关键字段，不代表保存、批准、写入或生产晋级 |

@@ -1,4 +1,38 @@
 ---
+- [x] ID: readonly_visual_review_mvp_local_console_20260527
+      Lane: Green local static Review Console MVP implementation.
+      Status: completed_validated_local_static_mvp.
+      Goal: Turn the P3.22 readonly review artifact system into a browsable, handoff-ready, validated local Review Console MVP.
+      Completed: added phase record; added static MVP workbench; added `readonly_visual_review_mvp_state`; added snapshot fixture; added fail-closed validator; wired validator into package scripts and MVP core; updated Review Console README/FIELD_MAPPING.
+      Boundary: no runtime, fetch, file write, provider contact, plugin call, API call, image generation, DailyNote/VCP memory, accepted_samples write, production_candidate creation, dependency change, commit, push, tag, release, deploy, or destructive action.
+      Validation: node --check changed JS passed; new validator passed; readonly artifact system / console renderer / catalog validators passed; npm run validate:mvp passed; local browser smoke passed at http://127.0.0.1:4174/ and preview server was stopped.
+      Recommended next: review local MVP diff; exact-file local commit only if explicitly requested.
+
+---
+- [x] ID: mvp_validation_closure_after_remote_fast_forward_sync_20260527
+      Lane: Green local validation closure.
+      Status: completed_validated_local_evidence_redaction_repair.
+      Goal: Continue the next safe local validation step after remote fast-forward sync and close the MVP validation failure.
+      Completed: npm run validate:mvp initially failed on retry_003 through retry_006 durable audit absolute-path exposure; mechanically redacted only the four private durable audit JSON files to <redacted-local-path>; targeted retry validators passed; npm run validate:mvp passed.
+      Private local files updated, not git-tracked: .agent_private/runtime_audit_store retry_003/004/005/006 activation_attempt audit JSON files.
+      Boundary: no provider contact, plugin call, API call, image generation, DailyNote/VCP memory, dependency change, secret read, commit, push, tag, release, deploy, or destructive action.
+      Validation: four retry activation receipt validators passed; npm run validate:mvp passed; local project validator passed with warnings ok for manual review; git diff --check passed with CRLF normalization warnings only.
+      Recommended next: owner review of local status-surface changes; exact-file local commit only if explicitly requested.
+
+---
+- [x] ID: remote_fast_forward_sync_status_surface_refresh_20260527
+      Lane: Green local status-surface sync.
+      Status: completed_validated_local_status_surface_sync.
+      Goal: Record the workspace refresh after origin/master advanced remotely.
+      Source head before sync: e24c0dc.
+      Remote head after sync: 5eec3aa.
+      Fast-forward commits applied: 39.
+      Completed: fetched origin; confirmed local master was behind by 39 and ahead by 0; fast-forwarded to 5eec3aa; confirmed HEAD equals origin/master; updated .agent_board resume surfaces.
+      Boundary: no provider contact, plugin call, API call, image generation, DailyNote/VCP memory, dependency change, secret read, commit, push, tag, release, deploy, or destructive action.
+      Validation: git status --short --branch passed with only .agent_board status-surface files modified by this task; git diff --check passed with CRLF normalization warnings only; node scripts\validate_agent_board_state.js passed.
+      Recommended next: continue from origin/master at 5eec3aa or run the next exact local validation gate if requested.
+
+---
 - [x] ID: p2_6_resume_surface_post_push_status_convention_fix
       Lane: Green docs-only control surface cleanup.
       Status: completed_validated_local_commit_ready.

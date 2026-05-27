@@ -1,0 +1,186 @@
+{
+  "state_id": "readonly_visual_review_mvp_state_v1_001",
+  "state_type": "metadata_only_readonly_visual_review_mvp_state",
+  "status": "draft_ready",
+  "display_only": true,
+  "source_artifact_catalog_ref": "tests/schema_examples/visual_eval_readonly_review_artifact_catalog.example.json",
+  "source_renderer_ref": "tests/schema_examples/visual_eval_readonly_review_corpus_renderer.example.json",
+  "source_console_handoff_ref": "tests/schema_examples/visual_eval_review_console_readonly_corpus_renderer_static_handoff.example.json",
+  "catalog_summary": {
+    "artifact_count": 24,
+    "canonical_role_count": 24,
+    "all_artifacts_repo_relative": true,
+    "validators_must_pass": true,
+    "canonical_roles": [
+      "review_result_protocol",
+      "failure_taxonomy",
+      "metadata_accumulation_contract",
+      "bridge_readable_payload",
+      "readonly_review_bundle",
+      "readonly_consumer_payload",
+      "readonly_review_collection",
+      "readonly_collection_consumer_payload",
+      "readonly_collection_query_payload",
+      "readonly_surface_snapshot",
+      "readonly_detail_view",
+      "readonly_detail_navigation",
+      "readonly_session_drilldown",
+      "readonly_metadata_accumulation_queue",
+      "readonly_metadata_accumulation_queue_consumer",
+      "readonly_metadata_accumulation_queue_query",
+      "readonly_metadata_accumulation_queue_surface_snapshot",
+      "readonly_metadata_accumulation_queue_detail_view",
+      "readonly_metadata_accumulation_queue_detail_navigation",
+      "readonly_review_workspace",
+      "readonly_review_workspace_case_matrix",
+      "readonly_review_workspace_corpus",
+      "readonly_review_corpus_renderer",
+      "review_console_readonly_corpus_renderer_static_handoff"
+    ]
+  },
+  "review_rows": [
+    {
+      "review_result_id": "visual_eval_review_result_pass_synthetic_001",
+      "candidate_id": "synthetic_product_still_life_pass_001",
+      "case_id": "visual_eval_image_case_pass_synthetic_001",
+      "outcome": "pass",
+      "summary": "Synthetic candidate meets core product readability and has only non-blocking watch items.",
+      "reasons": [
+        "product_identity_preserved",
+        "commercial_readability_plausible",
+        "no_major_artifact_recorded"
+      ],
+      "taxonomy_tags": [],
+      "blocking_watch_items": [],
+      "next_review_action": "queue_for_future_human_review",
+      "metadata_accumulation_action": "keep_as_metadata_candidate",
+      "metadata_queue_sections": [
+        "accepted_metadata_candidates",
+        "archive_references",
+        "next_review_actions"
+      ],
+      "write_allowed": false
+    },
+    {
+      "review_result_id": "visual_eval_review_result_patch_synthetic_001",
+      "candidate_id": "synthetic_product_still_life_patch_001",
+      "case_id": "visual_eval_image_case_patch_synthetic_001",
+      "outcome": "patch",
+      "summary": "Synthetic candidate has useful composition but requires bounded correction before pass.",
+      "reasons": [
+        "material realism needs correction",
+        "lighting consistency needs correction"
+      ],
+      "taxonomy_tags": [
+        "material_failed",
+        "lighting_failed"
+      ],
+      "blocking_watch_items": [
+        "material_realism_watch",
+        "lighting_consistency_watch"
+      ],
+      "next_review_action": "write_patch_plan_only",
+      "metadata_accumulation_action": "metadata_only_reference",
+      "metadata_queue_sections": [
+        "patch_plan_only",
+        "archive_references",
+        "next_review_actions"
+      ],
+      "write_allowed": false
+    },
+    {
+      "review_result_id": "visual_eval_review_result_reject_synthetic_001",
+      "candidate_id": "synthetic_product_still_life_reject_001",
+      "case_id": "visual_eval_image_case_reject_synthetic_001",
+      "outcome": "reject",
+      "summary": "Synthetic candidate fails product identity or commercial usability and must remain never-production.",
+      "reasons": [
+        "subject drift blocks reliable product identity",
+        "commercial unusability blocks delivery readiness"
+      ],
+      "taxonomy_tags": [
+        "subject_drift",
+        "commercial_unusable"
+      ],
+      "blocking_watch_items": [
+        "severe_subject_drift",
+        "commercial_unusable"
+      ],
+      "next_review_action": "defer_until_taxonomy_update",
+      "metadata_accumulation_action": "keep_as_failure_learning_metadata",
+      "metadata_queue_sections": [
+        "failure_learning_metadata",
+        "archive_references",
+        "next_review_actions"
+      ],
+      "write_allowed": false
+    }
+  ],
+  "outcome_summary": [
+    {
+      "outcome": "pass",
+      "count": 1,
+      "review_result_ids": [
+        "visual_eval_review_result_pass_synthetic_001"
+      ]
+    },
+    {
+      "outcome": "patch",
+      "count": 1,
+      "review_result_ids": [
+        "visual_eval_review_result_patch_synthetic_001"
+      ]
+    },
+    {
+      "outcome": "reject",
+      "count": 1,
+      "review_result_ids": [
+        "visual_eval_review_result_reject_synthetic_001"
+      ]
+    }
+  ],
+  "taxonomy_summary": {
+    "visible_tags": [
+      "material_failed",
+      "lighting_failed",
+      "subject_drift",
+      "commercial_unusable"
+    ],
+    "patch_reject_tags_present": true
+  },
+  "metadata_queue_sections": [
+    "accepted_metadata_candidates",
+    "archive_references",
+    "next_review_actions",
+    "patch_plan_only",
+    "failure_learning_metadata"
+  ],
+  "next_actions": [
+    "queue_for_future_human_review",
+    "write_patch_plan_only",
+    "defer_until_taxonomy_update"
+  ],
+  "guard_summary": {
+    "metadata_only": true,
+    "read_only": true,
+    "static_ui_only": true,
+    "fetch_performed": false,
+    "file_write_performed": false,
+    "approval_write_performed": false,
+    "accepted_samples_write_performed": false,
+    "production_candidate_created": false,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "DailyNote_write_performed": false,
+    "VCP_memory_write_performed": false,
+    "memory_write_performed": false,
+    "Batch_005_started": false,
+    "production_candidate_002_started": false,
+    "runtime_execution_performed": false,
+    "real_manifest_read_performed": false,
+    "real_vcpchat_read_performed": false,
+    "real_vcptoolbox_read_performed": false
+  }
+}

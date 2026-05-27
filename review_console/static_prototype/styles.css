@@ -1265,6 +1265,33 @@ input[type="range"] {
   margin: 0;
 }
 
+.readonly-visual-review-mvp {
+  display: grid;
+  gap: 12px;
+}
+
+.readonly-visual-review-catalog {
+  display: grid;
+  gap: 10px;
+}
+
+.readonly-visual-review-catalog-card {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--green);
+  border-radius: 8px;
+  background: #0e1518;
+}
+
+.readonly-visual-review-catalog-card p {
+  margin: 0;
+  overflow-wrap: anywhere;
+  color: var(--muted);
+}
+
 .runtime-gap-card dl div {
   min-width: 0;
   padding: 8px;

@@ -440,6 +440,23 @@ safeCheck("provider_evidence_integrity_contract", () => {
     result.secret_value_read_performed === false;
 });
 
+safeCheck("readonly_visual_review_mvp", () => {
+  const result = parseJson(runNode(["scripts/validate_readonly_visual_review_mvp.js"]));
+  return result.passed === true &&
+    result.artifact_count === 24 &&
+    result.review_row_count === 3 &&
+    result.negative_case_count === 4 &&
+    result.provider_contact_performed === false &&
+    result.plugin_call_performed === false &&
+    result.api_call_performed === false &&
+    result.image_generation_performed === false &&
+    result.file_write_performed === false &&
+    result.accepted_samples_write_performed === false &&
+    result.production_candidate_created === false &&
+    result.DailyNote_write_performed === false &&
+    result.VCP_memory_write_performed === false;
+});
+
 safeCheck("metadata_only_accepted_sample_retry_006", () => {
   const result = parseJson(runNode(["scripts/validate_metadata_only_accepted_sample_retry_006.js"]));
   return result.passed === true &&

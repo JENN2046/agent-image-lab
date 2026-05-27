@@ -1,5 +1,135 @@
 ---
 
+## Checkpoint - Readonly Visual Review MVP Local Console
+
+```text
+phase: readonly_visual_review_mvp_local_console_20260527
+status: completed_validated_local_static_mvp
+result: COMPLETED_VALIDATED
+mode: Green local static Review Console MVP implementation
+summary: The P3.22 readonly review artifact system is now visible as a local static Review Console MVP. The workbench displays the 24-artifact catalog, canonical roles, repo-relative refs, validator status, pass / patch / reject rows, taxonomy tags, metadata queue sections, next actions, and guard state. Draft output now includes `readonly_visual_review_mvp_state`, and the new validator fixes the snapshot and fail-closed negative cases.
+changed_files_current_task:
+  - docs/READONLY_VISUAL_REVIEW_MVP.md
+  - package.json
+  - review_console/static_prototype/FIELD_MAPPING.md
+  - review_console/static_prototype/README.md
+  - review_console/static_prototype/app.js
+  - review_console/static_prototype/index.html
+  - review_console/static_prototype/mock_data.js
+  - review_console/static_prototype/styles.css
+  - scripts/validate_mvp_core.js
+  - scripts/validate_readonly_visual_review_mvp.js
+  - tests/schema_examples/readonly_visual_review_mvp_state.example.json
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+validation_run:
+  - node --check scripts\validate_readonly_visual_review_mvp.js: passed
+  - node --check review_console\static_prototype\app.js: passed
+  - node scripts\validate_readonly_visual_review_mvp.js: passed
+  - node scripts\validate_visual_eval_readonly_review_artifact_system.js: passed
+  - node scripts\validate_visual_eval_review_console_readonly_corpus_renderer.js: passed
+  - node scripts\validate_visual_eval_readonly_review_artifact_catalog.js: passed
+  - npm run validate:mvp: passed
+  - local browser smoke at http://127.0.0.1:4174/: passed; preview server stopped
+negative_cases_verified:
+  - missing_reject_row
+  - guard_image_generation_true
+  - missing_catalog_role
+  - renderer_ref_drift
+runtime_execution_performed: false
+fetch_performed: false
+file_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+accepted_samples_write_performed: false
+production_candidate_created: false
+memory_written: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+dependency_change_performed: false
+commit_performed: false
+push_performed: false
+tag_release_deploy_performed: false
+next_phase_started: false
+```
+
+## Checkpoint - MVP Validation Closure After Remote Sync
+
+```text
+phase: mvp_validation_closure_after_remote_fast_forward_sync_20260527
+status: completed_validated_local_evidence_redaction_repair
+result: COMPLETED_VALIDATED
+mode: Green local validation closure
+summary: The next safe local validation after remote fast-forward sync exposed a local durable audit redaction gap. The four private retry_003 through retry_006 activation audit JSON files were mechanically redacted to remove Windows absolute path evidence, then all targeted retry validators and npm run validate:mvp passed.
+changed_files_current_task:
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+private_local_files_updated_not_git_tracked:
+  - .agent_private/runtime_audit_store/v0_6_73_real_vcp_agent_generation_retry_003/activation_attempt_003.audit.json
+  - .agent_private/runtime_audit_store/v0_6_73_real_vcp_agent_generation_retry_004/activation_attempt_004.audit.json
+  - .agent_private/runtime_audit_store/v0_6_73_real_vcp_agent_generation_retry_005/activation_attempt_005.audit.json
+  - .agent_private/runtime_audit_store/v0_6_73_real_vcp_agent_generation_retry_006/activation_attempt_006.audit.json
+validation_run:
+  - node scripts\validate_exact_a5_provider_retry_003_activation_receipt.js: passed
+  - node scripts\validate_exact_a5_provider_retry_004_activation_receipt.js: passed
+  - node scripts\validate_exact_a5_provider_retry_005_activation_receipt.js: passed
+  - node scripts\validate_exact_a5_provider_retry_006_activation_receipt.js: passed
+  - npm run validate:mvp: passed
+  - powershell -ExecutionPolicy Bypass -File scripts\validate-agent-image-lab-local.ps1: passed_with_warnings_ok_for_manual_review
+  - git diff --check: passed with CRLF normalization warnings only
+runtime_execution_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+memory_written: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+dependency_change_performed: false
+commit_performed: false
+push_performed: false
+tag_release_deploy_performed: false
+next_phase_started: false
+```
+
+## Checkpoint - Remote Fast-forward Sync Status Surface Refresh
+
+```text
+phase: remote_fast_forward_sync_status_surface_refresh_20260527
+status: completed_validated_local_status_surface_sync
+result: COMPLETED_VALIDATED
+mode: Green local status-surface sync
+summary: The workspace was updated after remote changes were detected. Local master fast-forwarded from e24c0dc to origin/master at 5eec3aa with 39 remote commits applied, no merge commit, and no remote write performed. This checkpoint records the refreshed baseline in the local resume surfaces.
+changed_files_current_task:
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+validation_run:
+  - git status --short --branch: passed; only .agent_board status-surface files modified by this task
+  - git diff --check: passed with CRLF normalization warnings only
+  - node scripts\validate_agent_board_state.js: passed
+runtime_execution_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+memory_written: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+dependency_change_performed: false
+commit_performed: false
+push_performed: false
+tag_release_deploy_performed: false
+next_phase_started: false
+```
+
 ## Checkpoint - P3.22 Readonly Review Artifact System Acceptance Gate
 
 ```text
