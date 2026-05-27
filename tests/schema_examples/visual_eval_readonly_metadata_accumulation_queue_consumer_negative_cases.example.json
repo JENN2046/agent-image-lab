@@ -1,0 +1,55 @@
+{
+  "fixture_type": "metadata_only_visual_eval_readonly_metadata_accumulation_queue_consumer_negative_cases",
+  "source_consumer": "tests/schema_examples/visual_eval_readonly_metadata_accumulation_queue_consumer.example.json",
+  "negative_cases": [
+    {
+      "case_id": "missing_patch_section",
+      "description": "Patch-plan-only section must remain visible.",
+      "mutation": {
+        "operation": "remove_section",
+        "section_id": "patch_plan_only"
+      },
+      "expected_failure_code": "consumer_sections_exact"
+    },
+    {
+      "case_id": "selected_patch_plan_unmarked",
+      "description": "Selected patch plan must remain marked as selected.",
+      "mutation": {
+        "operation": "set_field",
+        "field": "selected_patch_plan.selected",
+        "value": false
+      },
+      "expected_failure_code": "consumer_selected_patch_plan_marked"
+    },
+    {
+      "case_id": "archive_reference_count_mismatch",
+      "description": "Archive reference section count must match dashboard summary.",
+      "mutation": {
+        "operation": "set_field",
+        "field": "dashboard_summary.archive_references",
+        "value": 2
+      },
+      "expected_failure_code": "consumer_archive_reference_count_matches"
+    },
+    {
+      "case_id": "consumer_guard_memory_true",
+      "description": "Consumer must not open memory writes.",
+      "mutation": {
+        "operation": "set_field",
+        "field": "guard.memory_write_performed",
+        "value": true
+      },
+      "expected_failure_code": "consumer_guard_memory_write_performed_false"
+    },
+    {
+      "case_id": "absolute_local_source_queue",
+      "description": "Consumer source queue must remain repo-relative.",
+      "mutation": {
+        "operation": "set_field",
+        "field": "source_queue",
+        "value": "<synthetic-windows-absolute-path>\\metadata_queue.json"
+      },
+      "expected_failure_code": "consumer_no_absolute_or_loopback"
+    }
+  ]
+}

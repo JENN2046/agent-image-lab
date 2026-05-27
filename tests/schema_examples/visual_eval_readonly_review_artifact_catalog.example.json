@@ -139,6 +139,15 @@
       "validator": "scripts/validate_visual_eval_readonly_metadata_accumulation_queue.js",
       "canonical": true,
       "readonly_consumable": true
+    },
+    {
+      "artifact_id": "visual_eval_readonly_metadata_accumulation_queue_consumer_v1_synthetic_001",
+      "artifact_role": "readonly_metadata_accumulation_queue_consumer",
+      "artifact_type": "metadata_only_visual_eval_readonly_metadata_accumulation_queue_consumer",
+      "path": "tests/schema_examples/visual_eval_readonly_metadata_accumulation_queue_consumer.example.json",
+      "validator": "scripts/validate_visual_eval_readonly_metadata_accumulation_queue_consumer.js",
+      "canonical": true,
+      "readonly_consumable": true
     }
   ],
   "composition_order": [
@@ -155,7 +164,8 @@
     "readonly_detail_view",
     "readonly_detail_navigation",
     "readonly_session_drilldown",
-    "readonly_metadata_accumulation_queue"
+    "readonly_metadata_accumulation_queue",
+    "readonly_metadata_accumulation_queue_consumer"
   ],
   "consumer_expectations": {
     "source_bundle": "tests/schema_examples/visual_eval_readonly_review_bundle.example.json",
@@ -260,6 +270,20 @@
     "patch_plan_only": 1,
     "failure_learning_metadata": 1,
     "archive_references": 3,
+    "selected_review_result_id": "visual_eval_review_result_patch_synthetic_001",
+    "selected_next_review_action": "write_patch_plan_only"
+  },
+  "metadata_accumulation_queue_consumer_expectations": {
+    "source_queue": "tests/schema_examples/visual_eval_readonly_metadata_accumulation_queue.example.json",
+    "consumer": "tests/schema_examples/visual_eval_readonly_metadata_accumulation_queue_consumer.example.json",
+    "queue_sections": [
+      "accepted_metadata_candidates",
+      "patch_plan_only",
+      "failure_learning_metadata",
+      "archive_references",
+      "next_review_actions"
+    ],
+    "total_records": 3,
     "selected_review_result_id": "visual_eval_review_result_patch_synthetic_001",
     "selected_next_review_action": "write_patch_plan_only"
   },
