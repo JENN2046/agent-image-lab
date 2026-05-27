@@ -1,0 +1,53 @@
+{
+  "fixture_type": "metadata_only_visual_eval_readonly_metadata_accumulation_queue_surface_snapshot_negative_cases",
+  "source_surface_snapshot": "tests/schema_examples/visual_eval_readonly_metadata_accumulation_queue_surface_snapshot.example.json",
+  "negative_cases": [
+    {
+      "case_id": "missing_patch_section_lane",
+      "description": "Surface snapshot must keep the patch-plan-only lane visible.",
+      "mutation": {
+        "operation": "remove_section_lane",
+        "section_id": "patch_plan_only"
+      },
+      "expected_failure_code": "metadata_queue_surface_section_lanes_complete"
+    },
+    {
+      "case_id": "dangling_surface_card_ref",
+      "description": "Every surface card must resolve back to the queue consumer.",
+      "mutation": {
+        "operation": "set_field",
+        "field": "surface.section_lanes.1.cards.0.review_result_id",
+        "value": "missing_review_result"
+      },
+      "expected_failure_code": "metadata_queue_surface_card_ref_resolves"
+    },
+    {
+      "case_id": "missing_selected_patch_item",
+      "description": "The selected patch item must remain visible in the surface.",
+      "mutation": {
+        "operation": "clear_selected_items"
+      },
+      "expected_failure_code": "metadata_queue_surface_selected_patch_visible"
+    },
+    {
+      "case_id": "surface_guard_image_true",
+      "description": "Surface snapshot must not open image generation.",
+      "mutation": {
+        "operation": "set_field",
+        "field": "guard.image_generation_performed",
+        "value": true
+      },
+      "expected_failure_code": "metadata_queue_surface_guard_image_generation_performed_false"
+    },
+    {
+      "case_id": "absolute_local_source_query",
+      "description": "Surface source query must remain repo-relative.",
+      "mutation": {
+        "operation": "set_field",
+        "field": "source_query",
+        "value": "<synthetic-windows-absolute-path>\\metadata_queue_query.json"
+      },
+      "expected_failure_code": "metadata_queue_surface_no_absolute_or_loopback"
+    }
+  ]
+}

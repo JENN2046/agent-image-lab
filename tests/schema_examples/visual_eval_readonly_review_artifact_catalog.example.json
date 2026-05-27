@@ -157,6 +157,15 @@
       "validator": "scripts/validate_visual_eval_readonly_metadata_accumulation_queue_query.js",
       "canonical": true,
       "readonly_consumable": true
+    },
+    {
+      "artifact_id": "visual_eval_readonly_metadata_accumulation_queue_surface_snapshot_v1_synthetic_001",
+      "artifact_role": "readonly_metadata_accumulation_queue_surface_snapshot",
+      "artifact_type": "metadata_only_visual_eval_readonly_metadata_accumulation_queue_surface_snapshot",
+      "path": "tests/schema_examples/visual_eval_readonly_metadata_accumulation_queue_surface_snapshot.example.json",
+      "validator": "scripts/validate_visual_eval_readonly_metadata_accumulation_queue_surface_snapshot.js",
+      "canonical": true,
+      "readonly_consumable": true
     }
   ],
   "composition_order": [
@@ -175,7 +184,8 @@
     "readonly_session_drilldown",
     "readonly_metadata_accumulation_queue",
     "readonly_metadata_accumulation_queue_consumer",
-    "readonly_metadata_accumulation_queue_query"
+    "readonly_metadata_accumulation_queue_query",
+    "readonly_metadata_accumulation_queue_surface_snapshot"
   ],
   "consumer_expectations": {
     "source_bundle": "tests/schema_examples/visual_eval_readonly_review_bundle.example.json",
@@ -326,6 +336,32 @@
       "subject_drift",
       "commercial_unusable"
     ],
+    "selected_review_result_id": "visual_eval_review_result_patch_synthetic_001"
+  },
+  "metadata_accumulation_queue_surface_snapshot_expectations": {
+    "source_query": "tests/schema_examples/visual_eval_readonly_metadata_accumulation_queue_query.example.json",
+    "source_queue_consumer": "tests/schema_examples/visual_eval_readonly_metadata_accumulation_queue_consumer.example.json",
+    "surface_snapshot": "tests/schema_examples/visual_eval_readonly_metadata_accumulation_queue_surface_snapshot.example.json",
+    "surface_sections": [
+      "section_lanes",
+      "outcome_lanes",
+      "next_action_queues",
+      "selected_items"
+    ],
+    "queue_sections": [
+      "accepted_metadata_candidates",
+      "patch_plan_only",
+      "failure_learning_metadata",
+      "archive_references",
+      "next_review_actions"
+    ],
+    "outcomes": [
+      "pass",
+      "patch",
+      "reject"
+    ],
+    "total_records": 3,
+    "total_section_items": 9,
     "selected_review_result_id": "visual_eval_review_result_patch_synthetic_001"
   },
   "collection_consumer_expectations": {

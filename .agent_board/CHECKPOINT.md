@@ -1,5 +1,75 @@
 ---
 
+## Checkpoint - P3.14 Readonly Metadata Accumulation Queue Surface Snapshot
+
+```text
+phase: p3_14_readonly_metadata_accumulation_queue_surface_snapshot
+status: completed_validated_pending_local_commit
+result: COMPLETED_VALIDATED
+source_commit: 0d0a9af
+mode: metadata-only readonly metadata accumulation queue surface snapshot
+summary: Added a readonly surface snapshot for the metadata accumulation queue query. The snapshot consumes the queue query and queue consumer to expose section lanes, outcome lanes, next-action queues, and selected patch items while requiring all cards to resolve back to queue consumer items and keeping all write/runtime/provider/memory guards closed. The catalog now enumerates the surface snapshot as a canonical readonly artifact and runs its validator.
+changed_files_current_task:
+  - kernel/visual_eval_readonly_metadata_accumulation_queue_surface_snapshot.js
+  - scripts/validate_visual_eval_readonly_metadata_accumulation_queue_surface_snapshot.js
+  - scripts/validate_visual_eval_readonly_review_artifact_catalog.js
+  - tests/schema_examples/visual_eval_readonly_metadata_accumulation_queue_surface_snapshot.example.json
+  - tests/schema_examples/visual_eval_readonly_metadata_accumulation_queue_surface_snapshot_negative_cases.example.json
+  - tests/schema_examples/visual_eval_readonly_review_artifact_catalog.example.json
+  - .agent_board/CHECKPOINT.md
+validation_run:
+  - node --check kernel/visual_eval_readonly_metadata_accumulation_queue_surface_snapshot.js
+  - node --check scripts/validate_visual_eval_readonly_metadata_accumulation_queue_surface_snapshot.js
+  - node --check scripts/validate_visual_eval_readonly_review_artifact_catalog.js
+  - node scripts/validate_visual_eval_review_result_protocol.js
+  - node scripts/validate_visual_eval_review_result_review_bridge_wiring.js
+  - node scripts/validate_visual_eval_readonly_review_bundle.js
+  - node scripts/validate_visual_eval_readonly_review_bundle_consumer.js
+  - node scripts/validate_visual_eval_readonly_review_collection_consumer.js
+  - node scripts/validate_visual_eval_readonly_review_collection_query.js
+  - node scripts/validate_visual_eval_readonly_review_surface_snapshot.js
+  - node scripts/validate_visual_eval_readonly_review_detail_view.js
+  - node scripts/validate_visual_eval_readonly_review_detail_navigation.js
+  - node scripts/validate_visual_eval_readonly_review_session_drilldown.js
+  - node scripts/validate_visual_eval_readonly_metadata_accumulation_queue.js
+  - node scripts/validate_visual_eval_readonly_metadata_accumulation_queue_consumer.js
+  - node scripts/validate_visual_eval_readonly_metadata_accumulation_queue_query.js
+  - node scripts/validate_visual_eval_readonly_metadata_accumulation_queue_surface_snapshot.js
+  - node scripts/validate_visual_eval_readonly_review_artifact_catalog.js
+  - git diff --check
+  - targeted changed-file sensitive/local route scan
+validation_result: passed
+surface_sections_verified:
+  - section_lanes
+  - outcome_lanes
+  - next_action_queues
+  - selected_items
+negative_cases_verified:
+  - missing_patch_section_lane
+  - dangling_surface_card_ref
+  - missing_selected_patch_item
+  - surface_guard_image_true
+  - absolute_local_source_query
+runtime_execution_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+memory_written: false
+accepted_samples_written: false
+Batch_005_started: false
+production_candidate_002_started: false
+package_json_modified: false
+dependency_change_performed: false
+push_performed: false
+recommended_next_long_phase: readonly_metadata_accumulation_surface_detail_or_push_safety_gate
+next_phase_started: false
+```
+
+---
+
 ## Checkpoint - P3.13 Readonly Metadata Accumulation Queue Query
 
 ```text
