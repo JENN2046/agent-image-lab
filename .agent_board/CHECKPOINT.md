@@ -1,5 +1,46 @@
 ---
 
+## Checkpoint - P2.12 Metadata-Only Review Result Protocol Fixture Draft
+
+```text
+phase: p2_12_metadata_only_review_result_protocol_fixture_draft
+status: completed_validated_local_commit_ready
+result: COMPLETED_VALIDATED_LOCAL_COMMIT_READY
+source_commit: 1637c8d
+mode: A0 read-only then docs-only
+summary: Added the first synthetic metadata-only Visual Eval Review Result Protocol fixture with pass, patch, and reject records, plus a docs-only fixture draft summary. The fixture keeps all route guards false for production, accepted_samples writes, memory writes, provider retry, and image generation.
+changed_files_current_task:
+  - tests/schema_examples/visual_eval_review_result_protocol.example.json
+  - docs/visual_eval_review_result_protocol_fixture_draft.md
+  - .agent_board/CHECKPOINT.md
+validation_run:
+  - node JSON.parse fixture smoke
+  - git diff --check
+  - git status --short
+  - git diff --cached --check
+validation_result: passed
+schema_created: false
+validator_created: false
+runtime_execution_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+memory_written: false
+accepted_samples_written: false
+Batch_005_started: false
+production_candidate_002_started: false
+package_json_modified: false
+dependency_change_performed: false
+push_performed: false
+recommended_next_long_phase: metadata_only_review_result_protocol_fixture_static_review
+next_phase_started: false
+```
+
+---
+
 ## Checkpoint - P2.11 Metadata-Only Review Result Protocol Fixture Planning
 
 ```text
