@@ -1,0 +1,153 @@
+{
+  "workspace_id": "visual_eval_readonly_review_workspace_v1_synthetic_001",
+  "workspace_type": "metadata_only_visual_eval_readonly_review_workspace",
+  "status": "readonly_review_workspace_ready",
+  "source_session_drilldown": "tests/schema_examples/visual_eval_readonly_review_session_drilldown.example.json",
+  "source_metadata_queue_navigation": "tests/schema_examples/visual_eval_readonly_metadata_accumulation_queue_detail_navigation.example.json",
+  "selected_review_result_id": "visual_eval_review_result_patch_synthetic_001",
+  "workspace_contract": {
+    "metadata_only": true,
+    "read_only": true,
+    "consumes_review_session_drilldown": true,
+    "consumes_metadata_accumulation_queue_navigation": true,
+    "selected_result_must_match_across_sources": true,
+    "outcome_taxonomy_next_action_must_match": true,
+    "route_action": "render_readonly_review_workspace_only",
+    "write_allowed": false
+  },
+  "review_session_panel": {
+    "session_id": "visual_eval_review_session_synthetic_bundle_001",
+    "selected_review_result_id": "visual_eval_review_result_patch_synthetic_001",
+    "outcome_summary": {
+      "pass": 1,
+      "patch": 1,
+      "reject": 1
+    },
+    "outcome_tabs": [
+      {
+        "outcome": "pass",
+        "review_result_id": "visual_eval_review_result_pass_synthetic_001",
+        "case_id": "visual_eval_image_case_pass_synthetic_001",
+        "candidate_id": "synthetic_product_still_life_pass_001",
+        "selected": false,
+        "metadata_queue_sections": [
+          "accepted_metadata_candidates",
+          "archive_references",
+          "next_review_actions"
+        ]
+      },
+      {
+        "outcome": "patch",
+        "review_result_id": "visual_eval_review_result_patch_synthetic_001",
+        "case_id": "visual_eval_image_case_patch_synthetic_001",
+        "candidate_id": "synthetic_product_still_life_patch_001",
+        "selected": true,
+        "metadata_queue_sections": [
+          "patch_plan_only",
+          "archive_references",
+          "next_review_actions"
+        ]
+      },
+      {
+        "outcome": "reject",
+        "review_result_id": "visual_eval_review_result_reject_synthetic_001",
+        "case_id": "visual_eval_image_case_reject_synthetic_001",
+        "candidate_id": "synthetic_product_still_life_reject_001",
+        "selected": false,
+        "metadata_queue_sections": [
+          "failure_learning_metadata",
+          "archive_references",
+          "next_review_actions"
+        ]
+      }
+    ]
+  },
+  "selected_result_panel": {
+    "review_result_id": "visual_eval_review_result_patch_synthetic_001",
+    "candidate_id": "synthetic_product_still_life_patch_001",
+    "case_id": "visual_eval_image_case_patch_synthetic_001",
+    "outcome": "patch",
+    "confidence_band": "medium",
+    "summary": "Synthetic candidate has useful composition but requires bounded correction before pass.",
+    "next_review_action": "write_patch_plan_only",
+    "metadata_accumulation_actions": {
+      "accepted_metadata_action": "none",
+      "rejected_metadata_action": "none",
+      "archive_reference_action": "metadata_only_reference"
+    }
+  },
+  "taxonomy_panel": {
+    "taxonomy_ref": "tests/schema_examples/visual_eval_failure_taxonomy.example.json",
+    "taxonomy_refs": [
+      "tests/schema_examples/visual_eval_failure_taxonomy.example.json"
+    ],
+    "failure_tags": [
+      "material_failed",
+      "lighting_failed"
+    ]
+  },
+  "image_case_panel": {
+    "case_id": "visual_eval_image_case_patch_synthetic_001",
+    "visible_outcome": "patch",
+    "review_status": "metadata_only_patch",
+    "patch_required": true,
+    "never_production": false,
+    "bounded_patch_scope": [
+      "improve material realism metadata plan",
+      "tighten lighting consistency metadata plan"
+    ],
+    "blocking_watch_items": [
+      "material_realism_watch",
+      "lighting_consistency_watch"
+    ]
+  },
+  "metadata_queue_panel": {
+    "selected_navigation_key": "patch_plan_only:visual_eval_review_result_patch_synthetic_001",
+    "selected_section_id": "patch_plan_only",
+    "section_membership": [
+      "patch_plan_only",
+      "archive_references",
+      "next_review_actions"
+    ],
+    "outcome_membership": [
+      "patch"
+    ],
+    "next_action_membership": [
+      "write_patch_plan_only"
+    ],
+    "navigation_item_count": 9,
+    "selected_result_navigation_keys": [
+      "patch_plan_only:visual_eval_review_result_patch_synthetic_001",
+      "archive_references:visual_eval_review_result_patch_synthetic_001",
+      "next_review_actions:visual_eval_review_result_patch_synthetic_001"
+    ]
+  },
+  "readonly_route_guard_summary": {
+    "route_action": "render_readonly_review_workspace_only",
+    "write_allowed": false,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "memory_write_performed": false,
+    "production_candidate_002_started": false
+  },
+  "guard": {
+    "metadata_only": true,
+    "read_only": true,
+    "display_only": true,
+    "file_write_performed": false,
+    "approval_write_performed": false,
+    "accepted_samples_write_performed": false,
+    "production_candidate_created": false,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "DailyNote_write_performed": false,
+    "VCP_memory_write_performed": false,
+    "memory_write_performed": false,
+    "Batch_005_started": false,
+    "production_candidate_002_started": false
+  }
+}

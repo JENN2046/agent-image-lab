@@ -1,12 +1,70 @@
 ---
 
+## Checkpoint - P3.16 Readonly Review Workspace Cross-Artifact Consumer
+
+```text
+phase: p3_16_readonly_review_workspace_cross_artifact_consumer
+status: completed_validated_pending_local_commit
+result: COMPLETED_VALIDATED
+source_commit: d4ac430
+mode: metadata-only readonly review workspace consumer
+summary: Added a readonly workspace payload that composes the review session drilldown with the metadata accumulation queue detail navigation. The workspace exposes one cross-artifact consumer surface for session outcome tabs, selected review result, image case status, taxonomy/failure tags, metadata queue section membership, and next review action while proving the selected review_result_id/outcome/case_id/next_action remain consistent across both source chains.
+changed_files_current_task:
+  - kernel/visual_eval_readonly_review_workspace.js
+  - scripts/validate_visual_eval_readonly_review_workspace.js
+  - scripts/validate_visual_eval_readonly_review_artifact_catalog.js
+  - tests/schema_examples/visual_eval_readonly_review_workspace.example.json
+  - tests/schema_examples/visual_eval_readonly_review_workspace_negative_cases.example.json
+  - tests/schema_examples/visual_eval_readonly_review_artifact_catalog.example.json
+  - .agent_board/CHECKPOINT.md
+validation_run:
+  - node --check kernel/visual_eval_readonly_review_workspace.js
+  - node --check scripts/validate_visual_eval_readonly_review_workspace.js
+  - node --check scripts/validate_visual_eval_readonly_review_artifact_catalog.js
+  - node scripts/validate_visual_eval_readonly_review_workspace.js
+  - node scripts/validate_visual_eval_readonly_review_artifact_catalog.js
+validation_result: passed
+workspace_sources:
+  - tests/schema_examples/visual_eval_readonly_review_session_drilldown.example.json
+  - tests/schema_examples/visual_eval_readonly_metadata_accumulation_queue_detail_navigation.example.json
+selected_review_result_id: visual_eval_review_result_patch_synthetic_001
+selected_outcome: patch
+selected_next_review_action: write_patch_plan_only
+metadata_navigation_item_count: 9
+negative_cases_verified:
+  - wrong_selected_result_id
+  - missing_metadata_queue_panel
+  - selected_outcome_mismatch
+  - guard_api_true
+  - absolute_local_source_session
+runtime_execution_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+memory_written: false
+accepted_samples_written: false
+Batch_005_started: false
+production_candidate_002_started: false
+package_json_modified: false
+dependency_change_performed: false
+push_performed: false
+red_line_request_needed_next: real Review Console readonly integration or guarded push
+next_phase_started: false
+```
+
+---
+
 ## Checkpoint - P3.15 Readonly Metadata Accumulation Detail And Navigation
 
 ```text
 phase: p3_15_readonly_metadata_accumulation_detail_and_navigation
-status: completed_validated_pending_local_commit
+status: completed_validated_local_commit
 result: COMPLETED_VALIDATED
 source_commit: e2bc76a
+local_commit: d4ac430
 mode: metadata-only readonly metadata accumulation detail and navigation
 summary: Added a larger readonly consumption slice on top of the metadata accumulation queue surface. The slice adds a section-aware detail view keyed by section_id + review_result_id and a navigation payload that can load every metadata queue surface card into readonly detail, preserving selected patch-plan visibility, section membership, outcome membership, next-action membership, and all write/runtime/provider/memory guards closed.
 changed_files_current_task:

@@ -1,0 +1,75 @@
+{
+  "fixture_id": "visual_eval_readonly_review_workspace_negative_cases_001",
+  "fixture_type": "metadata_only_visual_eval_readonly_review_workspace_negative_cases",
+  "source_workspace": "tests/schema_examples/visual_eval_readonly_review_workspace.example.json",
+  "negative_case_contract": {
+    "case_shape": "workspace_mutation_specification",
+    "purpose": "readonly_workspace_cross_artifact_fail_closed_cases",
+    "all_cases_expected_to_fail": true
+  },
+  "negative_cases": [
+    {
+      "case_id": "wrong_selected_result_id",
+      "mutation": {
+        "operation": "set_field",
+        "field": "selected_review_result_id",
+        "value": "visual_eval_review_result_pass_synthetic_001"
+      },
+      "expected_failure_code": "workspace_selected_result_matches_sources",
+      "expected_reason": "workspace selected review result must match session drilldown and metadata navigation"
+    },
+    {
+      "case_id": "missing_metadata_queue_panel",
+      "mutation": {
+        "operation": "delete_field",
+        "field": "metadata_queue_panel"
+      },
+      "expected_failure_code": "workspace_metadata_queue_panel_present",
+      "expected_reason": "workspace must expose the readonly metadata queue panel"
+    },
+    {
+      "case_id": "selected_outcome_mismatch",
+      "mutation": {
+        "operation": "set_field",
+        "field": "selected_result_panel.outcome",
+        "value": "pass"
+      },
+      "expected_failure_code": "workspace_selected_outcome_matches",
+      "expected_reason": "workspace selected outcome must match session and metadata sources"
+    },
+    {
+      "case_id": "guard_api_true",
+      "mutation": {
+        "operation": "set_field",
+        "field": "guard.api_call_performed",
+        "value": true
+      },
+      "expected_failure_code": "workspace_guard_api_call_performed_false",
+      "expected_reason": "workspace must keep API calls closed"
+    },
+    {
+      "case_id": "absolute_local_source_session",
+      "mutation": {
+        "operation": "set_field",
+        "field": "source_session_drilldown",
+        "value": "<synthetic-windows-absolute-path>\\visual_eval_readonly_review_session_drilldown.example.json"
+      },
+      "expected_failure_code": "workspace_no_absolute_or_loopback",
+      "expected_reason": "workspace source refs must remain repo-relative"
+    }
+  ],
+  "boundary_confirmation": {
+    "metadata_only": true,
+    "read_only": true,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "memory_written": false,
+    "DailyNote_written": false,
+    "VCP_memory_written": false,
+    "accepted_samples_written": false,
+    "production_candidate_002_started": false,
+    "Batch_005_started": false
+  }
+}
