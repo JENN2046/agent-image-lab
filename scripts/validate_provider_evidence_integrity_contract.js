@@ -75,10 +75,20 @@ function assertSchemaContract() {
   assert(schema.scope.review_handoffs.includes("review_console/live_receipt_bridge/v0_6_73_real_vcp_agent_generation_one_shot/bridge_entry.json"), "one-shot handoff scope missing");
   assert(schema.scope.review_handoffs.includes("review_console/live_receipt_bridge/v0_6_73_real_vcp_agent_generation_retry_NNN/bridge_entry.json"), "retry activation handoff scope missing");
   assert(schema.scope.review_handoffs.length === 2, "review handoff scope must stay limited to activation handoffs");
-  assert(schema.artifact_integrity_contract.eligible_artifacts_require.includes("sha256"), "sha256 requirement missing");
-  assert(schema.artifact_integrity_contract.eligible_artifacts_require.includes("mime_type"), "mime requirement missing");
-  assert(schema.artifact_integrity_contract.eligible_artifacts_require.includes("width"), "width requirement missing");
-  assert(schema.artifact_integrity_contract.eligible_artifacts_require.includes("git_tracked_true"), "git tracked requirement missing");
+  const requiredArtifactFields = [
+    "repo_relative_path",
+    "byte_count",
+    "sha256",
+    "mime_type",
+    "magic_number",
+    "width",
+    "height",
+    "git_tracked_true",
+    "git_ignored_false",
+  ];
+  for (const field of requiredArtifactFields) {
+    assert(schema.artifact_integrity_contract.eligible_artifacts_require.includes(field), `${field} requirement missing`);
+  }
   return schema;
 }
 
@@ -86,7 +96,7 @@ function assertNoPublicDisclosureLeak(value, label) {
   const text = JSON.stringify(value);
   assert(!/\b[A-Za-z]:[\\/][^"',\s)]*/.test(text), `${label} exposes a Windows absolute path`);
   assert(!/\/(?:Users|home)\/[A-Za-z0-9._-]+\/[^"',\s)]*/.test(text), `${label} exposes a home absolute path`);
-  assert(!/https?:\/\/(?:localhost|127\.0\.0\.1|\[::1\]|::1)(?::\d+)?[^"',\s)]*/i.test(text), `${label} exposes a loopback URL`);
+  assert(!/(?:https?|wss?):\/\/(?:localhost|127\.0\.0\.1|\[::1\]|::1)(?::\d+)?[^"',\s)]*/i.test(text), `${label} exposes a loopback URL`);
   assert(!/Basic\s+[A-Za-z0-9+/=._~-]+/i.test(text), `${label} exposes Basic auth material`);
   assert(!/Bearer\s+[A-Za-z0-9._~+/-]+/i.test(text), `${label} exposes bearer token material`);
   assert(!/sk-[A-Za-z0-9_-]{8,}/.test(text), `${label} exposes sk-* token material`);
@@ -170,15 +180,14 @@ async function assertEligibleArtifact(record, label) {
   };
 }
 
-function collectArtifactRecords(record) {
-  return [
-    ...(Array.isArray(record.output_files) ? record.output_files.map((artifact) => ({ source: "output_files", artifact })) : []),
-    ...(Array.isArray(record.image_files) ? record.image_files.map((artifact) => ({ source: "image_files", artifact })) : []),
-  ];
-}
-
 async function assertRecordArtifactSemantics(record, label) {
-  const artifacts = collectArtifactRecords(record);
+  const outputArtifacts = Array.isArray(record.output_files)
+    ? record.output_files.map((artifact) => ({ source: "output_files", artifact }))
+    : [];
+  const imageArtifacts = Array.isArray(record.image_files)
+    ? record.image_files.map((artifact) => ({ source: "image_files", artifact }))
+    : [];
+  const artifacts = [...outputArtifacts, ...imageArtifacts];
   const outputScopeViolation = record.output_scope_violation === true;
   const completedWithReviewableImage = record.execution_status === "COMPLETED_PROVIDER_IMAGE_CREATED" || record.review_status === "ready_for_human_review";
   const result = {
@@ -187,14 +196,20 @@ async function assertRecordArtifactSemantics(record, label) {
   };
 
   if (outputScopeViolation) {
-    assert(record.review_eligible === false || record.review_status === "blocked_output_scope_violation_no_review", `${label} output-scope violation must not be review eligible`);
+    assert(record.review_eligible === false, `${label} output-scope violation must not be review eligible`);
+    if (record.review_status !== undefined) {
+      assert(record.review_status === "blocked_output_scope_violation_no_review", `${label} output-scope violation review status mismatch`);
+    } else {
+      assert(record.execution_status === "BLOCKED_OUTPUT_SCOPE_VIOLATION", `${label} output-scope violation execution status mismatch`);
+    }
     assert(artifacts.length === 0, `${label} output-scope violation must not publish eligible artifact records`);
     assert(result.out_of_scope_artifact_count >= 1, `${label} output-scope violation must preserve redacted out-of-scope evidence`);
     return result;
   }
 
   if (completedWithReviewableImage) {
-    assert(artifacts.length >= 2, `${label} completed image evidence must include output_files and image_files records`);
+    assert(outputArtifacts.length >= 1, `${label} completed image evidence must include output_files records`);
+    assert(imageArtifacts.length >= 1, `${label} completed image evidence must include image_files records`);
   }
 
   for (const { source, artifact } of artifacts) {
