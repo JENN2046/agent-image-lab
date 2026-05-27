@@ -113,6 +113,29 @@ scripts/validators/<domain_or_version>/
 
 Old validators are not moved as part of this policy.
 
+## Validation Gate Semantics
+
+Current gate responsibilities:
+
+- `npm run validate:core` is the current runtime core gate. It checks smoke, runtime-kernel including audit-write, read-only review bridge, durable audit store, and provider preflight without provider contact. Use it as the normal current-runtime safety gate.
+- `npm run validate:mvp` is the product MVP core gate. It checks the current MVP product surface, metadata-only accepted-sample chain, retry_006 artifact integrity, and no-side-effect flags while excluding `.agent_board` and historical governance ledgers.
+- `npm run validate:public-disclosure` is the public evidence disclosure gate. It scans public mock data, real-generation attempt records, production refs, provider receipts, and live receipt bridge handoffs for local absolute paths, loopback URLs, secret-like strings, and raw prompt fields.
+- `npm run validate:all` is the historical archive and full-regression gate. It intentionally includes the current core gates, historical A5 provider packet and receipt validators, retry_006 artifact integrity, capsule regression, and governance validation.
+
+Daily development should not treat `validate:all` as the only definition of current runtime health. The normal current-development gate is:
+
+```text
+npm run validate:core
+npm run validate:public-disclosure
+```
+
+Run `npm run validate:mvp` when a change affects product MVP behavior, accepted-sample metadata, review handoff semantics, or artifact integrity. Run `npm run validate:all` before release-like closeout, governance changes, receipt/evidence governance changes, or when a failure may be caused by historical regression drift rather than current runtime behavior.
+
+If `validate:all` fails after `validate:core`, `validate:mvp`, and `validate:public-disclosure` pass, classify the failure before fixing it:
+
+- current runtime/product failure: fix the affected runtime, MVP, or disclosure surface.
+- historical archive/governance drift: reconcile the exact historical validator or explicit dirty slice without broadening the gate.
+
 ## Review Console Boundaries
 
 `review_console/static_prototype/` is the safe static prototype surface.
