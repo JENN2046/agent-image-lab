@@ -1,0 +1,53 @@
+{
+  "fixture_type": "metadata_only_visual_eval_readonly_review_collection_negative_cases",
+  "source_collection": "tests/schema_examples/visual_eval_readonly_review_collection.example.json",
+  "negative_cases": [
+    {
+      "case_id": "missing_collection_member",
+      "expected_failure_code": "collection_members_non_empty",
+      "mutation": {
+        "operation": "set_field",
+        "field": "collection_members",
+        "value": []
+      }
+    },
+    {
+      "case_id": "consumer_payload_mismatch",
+      "expected_failure_code": "collection_member_consumer_payload_matches_generated",
+      "mutation": {
+        "operation": "set_member_field",
+        "member_id": "readonly_review_bundle_member_synthetic_001",
+        "field": "consumer_payload_id",
+        "value": "wrong_consumer_payload_id"
+      }
+    },
+    {
+      "case_id": "aggregate_summary_mismatch",
+      "expected_failure_code": "collection_outcome_summary_matches_members",
+      "mutation": {
+        "operation": "set_field",
+        "field": "expected_collection_summary.outcome_summary.reject",
+        "value": 0
+      }
+    },
+    {
+      "case_id": "forbidden_boundary_flag_true",
+      "expected_failure_code": "collection_boundary_image_generation_performed_false",
+      "mutation": {
+        "operation": "set_field",
+        "field": "boundary_confirmation.image_generation_performed",
+        "value": true
+      }
+    },
+    {
+      "case_id": "absolute_local_member_path",
+      "expected_failure_code": "collection_no_absolute_or_loopback",
+      "mutation": {
+        "operation": "set_member_field",
+        "member_id": "readonly_review_bundle_member_synthetic_001",
+        "field": "bundle_path",
+        "value": "<synthetic-windows-absolute-path>\\visual_eval_readonly_review_bundle.example.json"
+      }
+    }
+  ]
+}

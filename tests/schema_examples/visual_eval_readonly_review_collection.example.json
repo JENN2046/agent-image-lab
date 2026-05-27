@@ -1,0 +1,55 @@
+{
+  "artifact_id": "visual_eval_readonly_review_collection_v1_synthetic_001",
+  "artifact_type": "metadata_only_visual_eval_readonly_review_collection",
+  "version": "v1",
+  "canonical_status": "readonly_collection_fixture",
+  "collection_contract": {
+    "metadata_only": true,
+    "read_only": true,
+    "members_are_repo_relative": true,
+    "members_must_exist": true,
+    "member_consumers_must_match_generated_output": true,
+    "review_result_ids_unique_across_collection": true,
+    "outcome_set": [
+      "pass",
+      "patch",
+      "reject"
+    ],
+    "aggregate_summary_must_match_members": true,
+    "forbidden_actions_must_remain_false": true
+  },
+  "collection_members": [
+    {
+      "member_id": "readonly_review_bundle_member_synthetic_001",
+      "bundle_id": "visual_eval_readonly_review_bundle_v1_synthetic_001",
+      "bundle_path": "tests/schema_examples/visual_eval_readonly_review_bundle.example.json",
+      "consumer_payload_id": "visual_eval_readonly_review_bundle_consumer_v1_synthetic_001",
+      "consumer_payload_path": "tests/schema_examples/visual_eval_readonly_review_bundle_consumer.example.json",
+      "session_id": "visual_eval_review_session_synthetic_bundle_001",
+      "readonly_consumable": true
+    }
+  ],
+  "expected_collection_summary": {
+    "member_count": 1,
+    "display_row_count": 3,
+    "outcome_summary": {
+      "pass": 1,
+      "patch": 1,
+      "reject": 1
+    }
+  },
+  "boundary_confirmation": {
+    "metadata_only": true,
+    "read_only": true,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "memory_written": false,
+    "DailyNote_written": false,
+    "VCP_memory_written": false,
+    "accepted_samples_written": false,
+    "production_candidate_002_started": false,
+    "Batch_005_started": false
+  }
+}

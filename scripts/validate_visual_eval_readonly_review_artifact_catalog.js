@@ -15,12 +15,15 @@ const expectedRoles = [
   "bridge_readable_payload",
   "readonly_review_bundle",
   "readonly_consumer_payload",
+  "readonly_review_collection",
+  "readonly_collection_consumer_payload",
 ];
 const expectedValidators = [
   "scripts/validate_visual_eval_review_result_protocol.js",
   "scripts/validate_visual_eval_review_result_review_bridge_wiring.js",
   "scripts/validate_visual_eval_readonly_review_bundle.js",
   "scripts/validate_visual_eval_readonly_review_bundle_consumer.js",
+  "scripts/validate_visual_eval_readonly_review_collection_consumer.js",
 ];
 const expectedDisplayFields = [
   "outcome",
@@ -147,6 +150,20 @@ function validateConsumerExpectations(catalog) {
   addResult("catalog_consumer_display_fields_exact", sameSet(catalog.consumer_expectations?.display_fields, expectedDisplayFields));
   for (const field of expectedDisplayFields) {
     addResult(`consumer_rows_expose_${field}`, (consumer.display_rows || []).every((row) => Object.prototype.hasOwnProperty.call(row, field)));
+  }
+
+  const collectionEntry = getEntry(catalog, "readonly_review_collection");
+  const collectionConsumerEntry = getEntry(catalog, "readonly_collection_consumer_payload");
+  const collectionConsumer = readJson(collectionConsumerEntry.path);
+  addResult("catalog_collection_consumer_source_matches", collectionConsumer.source_collection === collectionEntry.path);
+  addResult("catalog_collection_consumer_expected_path_matches", catalog.collection_consumer_expectations?.consumer_payload === collectionConsumerEntry.path);
+  addResult("catalog_collection_consumer_expected_collection_matches", catalog.collection_consumer_expectations?.source_collection === collectionEntry.path);
+  addResult("catalog_collection_consumer_member_count_matches", catalog.collection_consumer_expectations?.member_count === collectionConsumer.collection?.member_count);
+  addResult("catalog_collection_consumer_display_row_count_matches", catalog.collection_consumer_expectations?.display_row_count === collectionConsumer.collection?.display_row_count);
+  addResult("catalog_collection_consumer_outcomes_exact", sameSet(catalog.collection_consumer_expectations?.outcomes, ["pass", "patch", "reject"]));
+  addResult("catalog_collection_consumer_display_fields_exact", sameSet(catalog.collection_consumer_expectations?.display_fields, expectedDisplayFields));
+  for (const field of expectedDisplayFields) {
+    addResult(`collection_consumer_rows_expose_${field}`, (collectionConsumer.collection_rows || []).every((row) => Object.prototype.hasOwnProperty.call(row, field)));
   }
 }
 

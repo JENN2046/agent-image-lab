@@ -67,6 +67,24 @@
       "validator": "scripts/validate_visual_eval_readonly_review_bundle_consumer.js",
       "canonical": true,
       "readonly_consumable": true
+    },
+    {
+      "artifact_id": "visual_eval_readonly_review_collection_v1_synthetic_001",
+      "artifact_role": "readonly_review_collection",
+      "artifact_type": "metadata_only_visual_eval_readonly_review_collection",
+      "path": "tests/schema_examples/visual_eval_readonly_review_collection.example.json",
+      "validator": "scripts/validate_visual_eval_readonly_review_collection_consumer.js",
+      "canonical": true,
+      "readonly_consumable": true
+    },
+    {
+      "artifact_id": "visual_eval_readonly_review_collection_consumer_v1_synthetic_001",
+      "artifact_role": "readonly_collection_consumer_payload",
+      "artifact_type": "metadata_only_visual_eval_readonly_review_collection_consumer",
+      "path": "tests/schema_examples/visual_eval_readonly_review_collection_consumer.example.json",
+      "validator": "scripts/validate_visual_eval_readonly_review_collection_consumer.js",
+      "canonical": true,
+      "readonly_consumable": true
     }
   ],
   "composition_order": [
@@ -75,11 +93,33 @@
     "metadata_accumulation_contract",
     "bridge_readable_payload",
     "readonly_review_bundle",
-    "readonly_consumer_payload"
+    "readonly_consumer_payload",
+    "readonly_review_collection",
+    "readonly_collection_consumer_payload"
   ],
   "consumer_expectations": {
     "source_bundle": "tests/schema_examples/visual_eval_readonly_review_bundle.example.json",
     "consumer_payload": "tests/schema_examples/visual_eval_readonly_review_bundle_consumer.example.json",
+    "outcomes": [
+      "pass",
+      "patch",
+      "reject"
+    ],
+    "display_fields": [
+      "outcome",
+      "summary",
+      "reasons",
+      "failure_taxonomy",
+      "blocking_watch_items",
+      "next_review_action",
+      "metadata_accumulation_action"
+    ]
+  },
+  "collection_consumer_expectations": {
+    "source_collection": "tests/schema_examples/visual_eval_readonly_review_collection.example.json",
+    "consumer_payload": "tests/schema_examples/visual_eval_readonly_review_collection_consumer.example.json",
+    "member_count": 1,
+    "display_row_count": 3,
     "outcomes": [
       "pass",
       "patch",
