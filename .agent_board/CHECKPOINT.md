@@ -1,5 +1,64 @@
 ---
 
+## Checkpoint - Readonly Projection Contract Registry Hardening
+
+```text
+phase: readonly_projection_contract_registry_hardening_20260527
+status: completed_validated_local_projection_contract_registry
+result: COMPLETED_VALIDATED
+mode: Green local catalog and graph validator contract hardening
+summary: Added explicit catalog-level projection contracts for ten readonly artifact roles and extended the graph validator to enforce canonical source refs, allowed projection fields, and forbidden owned fields. The graph validator now fails closed when a role loses a required source ref, reintroduces a forbidden owned semantic field, emits an unexpected projection field, drops a contract role, or drifts the catalog contract target.
+changed_files_current_task:
+  - tests/schema_examples/visual_eval_readonly_review_artifact_catalog.example.json
+  - scripts/validate_visual_eval_readonly_artifact_graph.js
+  - .agent_board/CHECKPOINT.md
+projection_contracts_added:
+  - readonly_consumer_payload
+  - readonly_collection_consumer_payload
+  - readonly_collection_query_payload
+  - readonly_detail_view
+  - readonly_detail_navigation
+  - readonly_session_drilldown
+  - readonly_metadata_accumulation_queue
+  - readonly_metadata_accumulation_queue_consumer
+  - readonly_metadata_accumulation_queue_query
+  - readonly_metadata_accumulation_queue_surface_snapshot
+contract_fields_enforced:
+  - canonical_source_refs
+  - allowed_projection_fields
+  - forbidden_owned_fields
+new_negative_cases_verified:
+  - missing_canonical_source_ref
+  - forbidden_owned_field_present
+  - unexpected_projection_field_present
+  - projection_contract_role_drift
+  - catalog_projection_contract_mismatch
+validation_run:
+  - node --check scripts\validate_visual_eval_readonly_artifact_graph.js: passed
+  - node scripts\validate_visual_eval_readonly_artifact_graph.js: passed
+  - node scripts\validate_visual_eval_readonly_review_artifact_catalog.js: passed
+  - git diff --check: passed with CRLF normalization warnings
+  - git status --short --branch: master...origin/master [ahead 2], dirty only current task files before checkpoint
+runtime_execution_performed: false
+fetch_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+accepted_samples_write_performed: false
+production_candidate_created: false
+memory_written: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+dependency_change_performed: false
+commit_performed: false
+push_performed: false
+tag_release_deploy_performed: false
+next_phase_started: false
+```
+
+---
+
 ## Checkpoint - Readonly Derived Field Minimization Hardening
 
 ```text

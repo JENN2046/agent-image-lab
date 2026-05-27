@@ -13,6 +13,232 @@
     "consumer_payload_must_match_catalog": true,
     "forbidden_actions_must_remain_false": true
   },
+  "projection_contracts": {
+    "readonly_consumer_payload": {
+      "canonical_source_refs": {
+        "source_bundle": "readonly_review_bundle"
+      },
+      "allowed_projection_fields": [
+        "outcome",
+        "summary",
+        "reasons",
+        "failure_taxonomy",
+        "blocking_watch_items",
+        "next_review_action",
+        "metadata_accumulation_action"
+      ],
+      "forbidden_owned_fields": [
+        "failure_tags",
+        "taxonomy_ref",
+        "taxonomy_refs",
+        "metadata_accumulation",
+        "metadata_actions"
+      ]
+    },
+    "readonly_collection_consumer_payload": {
+      "canonical_source_refs": {
+        "source_collection": "readonly_review_collection"
+      },
+      "allowed_projection_fields": [
+        "outcome",
+        "summary",
+        "reasons",
+        "failure_taxonomy",
+        "blocking_watch_items",
+        "next_review_action",
+        "metadata_accumulation_action"
+      ],
+      "forbidden_owned_fields": [
+        "failure_tags",
+        "taxonomy_ref",
+        "taxonomy_refs",
+        "metadata_accumulation",
+        "metadata_actions"
+      ]
+    },
+    "readonly_collection_query_payload": {
+      "canonical_source_refs": {
+        "source_collection_consumer": "readonly_collection_consumer_payload"
+      },
+      "allowed_projection_fields": [
+        "outcome"
+      ],
+      "forbidden_owned_fields": [
+        "summary",
+        "reasons",
+        "failure_tags",
+        "failure_taxonomy",
+        "blocking_watch_items",
+        "taxonomy_ref",
+        "taxonomy_refs",
+        "metadata_accumulation",
+        "metadata_actions",
+        "metadata_accumulation_action",
+        "next_review_action",
+        "never_production"
+      ]
+    },
+    "readonly_detail_view": {
+      "canonical_source_refs": {
+        "source_surface_snapshot": "readonly_surface_snapshot",
+        "source_collection_consumer": "readonly_collection_consumer_payload"
+      },
+      "allowed_projection_fields": [
+        "outcome",
+        "summary",
+        "reasons",
+        "failure_taxonomy",
+        "blocking_watch_items",
+        "next_review_action",
+        "metadata_accumulation_action"
+      ],
+      "forbidden_owned_fields": [
+        "failure_tags",
+        "taxonomy_ref",
+        "taxonomy_refs",
+        "metadata_accumulation",
+        "metadata_actions",
+        "never_production"
+      ]
+    },
+    "readonly_detail_navigation": {
+      "canonical_source_refs": {
+        "source_surface_snapshot": "readonly_surface_snapshot",
+        "source_collection_consumer": "readonly_collection_consumer_payload"
+      },
+      "allowed_projection_fields": [
+        "outcome",
+        "summary",
+        "reasons",
+        "failure_taxonomy",
+        "blocking_watch_items",
+        "next_review_action",
+        "metadata_accumulation_action"
+      ],
+      "forbidden_owned_fields": [
+        "failure_tags",
+        "taxonomy_ref",
+        "taxonomy_refs",
+        "metadata_accumulation",
+        "metadata_actions",
+        "never_production"
+      ]
+    },
+    "readonly_session_drilldown": {
+      "canonical_source_refs": {
+        "source_detail_navigation": "readonly_detail_navigation",
+        "source_bridge_payload": "bridge_readable_payload"
+      },
+      "allowed_projection_fields": [
+        "outcome",
+        "summary",
+        "failure_tags",
+        "taxonomy_ref",
+        "taxonomy_refs",
+        "blocking_watch_items",
+        "next_review_action",
+        "metadata_accumulation",
+        "never_production"
+      ],
+      "forbidden_owned_fields": [
+        "reasons",
+        "failure_taxonomy",
+        "metadata_actions",
+        "metadata_accumulation_action"
+      ]
+    },
+    "readonly_metadata_accumulation_queue": {
+      "canonical_source_refs": {
+        "source_session_drilldown": "readonly_session_drilldown",
+        "source_bridge_payload": "bridge_readable_payload",
+        "source_accumulation_contract": "metadata_accumulation_contract"
+      },
+      "allowed_projection_fields": [
+        "outcome",
+        "failure_tags",
+        "next_review_action"
+      ],
+      "forbidden_owned_fields": [
+        "summary",
+        "reasons",
+        "failure_taxonomy",
+        "blocking_watch_items",
+        "taxonomy_ref",
+        "taxonomy_refs",
+        "metadata_accumulation",
+        "metadata_actions",
+        "metadata_accumulation_action",
+        "never_production"
+      ]
+    },
+    "readonly_metadata_accumulation_queue_consumer": {
+      "canonical_source_refs": {
+        "source_queue": "readonly_metadata_accumulation_queue"
+      },
+      "allowed_projection_fields": [
+        "outcome",
+        "failure_tags",
+        "next_review_action",
+        "metadata_actions"
+      ],
+      "forbidden_owned_fields": [
+        "summary",
+        "reasons",
+        "failure_taxonomy",
+        "blocking_watch_items",
+        "taxonomy_ref",
+        "taxonomy_refs",
+        "metadata_accumulation",
+        "metadata_accumulation_action",
+        "never_production"
+      ]
+    },
+    "readonly_metadata_accumulation_queue_query": {
+      "canonical_source_refs": {
+        "source_queue_consumer": "readonly_metadata_accumulation_queue_consumer"
+      },
+      "allowed_projection_fields": [
+        "outcome"
+      ],
+      "forbidden_owned_fields": [
+        "summary",
+        "reasons",
+        "failure_tags",
+        "failure_taxonomy",
+        "blocking_watch_items",
+        "taxonomy_ref",
+        "taxonomy_refs",
+        "metadata_accumulation",
+        "metadata_actions",
+        "metadata_accumulation_action",
+        "next_review_action",
+        "never_production"
+      ]
+    },
+    "readonly_metadata_accumulation_queue_surface_snapshot": {
+      "canonical_source_refs": {
+        "source_query": "readonly_metadata_accumulation_queue_query",
+        "source_queue_consumer": "readonly_metadata_accumulation_queue_consumer"
+      },
+      "allowed_projection_fields": [
+        "outcome",
+        "failure_tags",
+        "next_review_action",
+        "metadata_actions"
+      ],
+      "forbidden_owned_fields": [
+        "summary",
+        "reasons",
+        "failure_taxonomy",
+        "blocking_watch_items",
+        "taxonomy_ref",
+        "taxonomy_refs",
+        "metadata_accumulation",
+        "metadata_accumulation_action",
+        "never_production"
+      ]
+    }
+  },
   "artifact_entries": [
     {
       "artifact_id": "visual_eval_review_result_protocol_synthetic_fixture_set_001",

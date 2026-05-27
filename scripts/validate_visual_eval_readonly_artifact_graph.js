@@ -50,6 +50,33 @@ const metadataAccumulationSubtreeRoles = new Set([
   "readonly_metadata_accumulation_queue_query",
   "readonly_metadata_accumulation_queue_surface_snapshot",
 ]);
+const projectionContractRoles = [
+  "readonly_consumer_payload",
+  "readonly_collection_consumer_payload",
+  "readonly_collection_query_payload",
+  "readonly_detail_view",
+  "readonly_detail_navigation",
+  "readonly_session_drilldown",
+  "readonly_metadata_accumulation_queue",
+  "readonly_metadata_accumulation_queue_consumer",
+  "readonly_metadata_accumulation_queue_query",
+  "readonly_metadata_accumulation_queue_surface_snapshot",
+];
+const projectionSemanticFields = new Set([
+  "outcome",
+  "summary",
+  "reasons",
+  "failure_tags",
+  "failure_taxonomy",
+  "taxonomy_ref",
+  "taxonomy_refs",
+  "blocking_watch_items",
+  "metadata_accumulation",
+  "metadata_actions",
+  "metadata_accumulation_action",
+  "next_review_action",
+  "never_production",
+]);
 const forbiddenDerivedSummaryFields = new Set(["summary"]);
 const forbiddenDerivedReasonsFields = new Set(["reasons", "pass_reasons", "patch_reasons", "reject_reasons"]);
 const forbiddenDerivedFailureTagFields = new Set(["failure_taxonomy", "taxonomy_tags"]);
@@ -249,6 +276,43 @@ const expectedNegativeCases = [
       const queueItem = graph.artifacts.readonly_metadata_accumulation_queue.data.queues.patch_plan_only[0];
       queueItem.summary = graph.artifacts.review_result_protocol.data.review_results[1].summary;
       queueItem.failure_tags = ["material_failed", "lighting_failed"];
+    },
+  },
+  {
+    case_id: "missing_canonical_source_ref",
+    expected_failure_code: "projection_contract_required_source_refs",
+    mutate(graph) {
+      delete graph.artifacts.readonly_detail_view.data.source_surface_snapshot;
+    },
+  },
+  {
+    case_id: "forbidden_owned_field_present",
+    expected_failure_code: "projection_contract_forbidden_owned_fields_absent",
+    mutate(graph) {
+      graph.artifacts.readonly_metadata_accumulation_queue_consumer.data.sections[1].items[0].summary =
+        graph.artifacts.review_result_protocol.data.review_results[1].summary;
+    },
+  },
+  {
+    case_id: "unexpected_projection_field_present",
+    expected_failure_code: "projection_contract_allowed_projection_fields",
+    mutate(graph) {
+      graph.artifacts.readonly_consumer_payload.data.display_rows[1].never_production = false;
+    },
+  },
+  {
+    case_id: "projection_contract_role_drift",
+    expected_failure_code: "projection_contract_roles_present",
+    mutate(graph) {
+      delete graph.catalog.projection_contracts.readonly_detail_navigation;
+    },
+  },
+  {
+    case_id: "catalog_projection_contract_mismatch",
+    expected_failure_code: "projection_contract_required_source_refs",
+    mutate(graph) {
+      graph.catalog.projection_contracts.readonly_metadata_accumulation_queue.canonical_source_refs.source_bridge_payload =
+        "readonly_review_bundle";
     },
   },
 ];
@@ -465,6 +529,78 @@ function validateDerivedOwnership(graph, ctx) {
   ctx.addResult("derived_taxonomy_ref_not_owner", taxonomyRefOwners.length === 0, taxonomyRefOwners.join("; "));
   ctx.addResult("derived_next_review_action_not_owner", nextActionOwners.length === 0, nextActionOwners.join("; "));
   ctx.addResult("derived_metadata_accumulation_not_owner", accumulationOwners.length === 0, accumulationOwners.join("; "));
+}
+
+function validateProjectionContracts(graph, ctx) {
+  const contracts = graph.catalog.projection_contracts || {};
+  const contractRoles = Object.keys(contracts);
+  const shapeMismatches = [];
+  const sourceRefMismatches = [];
+  const forbiddenOwnedMatches = [];
+  const unexpectedProjectionMatches = [];
+  const unknownRefRoleMismatches = [];
+
+  ctx.addResult("projection_contract_roles_present", sameSet(contractRoles, projectionContractRoles), contractRoles.join(", "));
+
+  for (const role of projectionContractRoles) {
+    const contract = contracts[role];
+    const artifact = graph.artifacts[role]?.data;
+    if (!contract || !artifact) {
+      shapeMismatches.push(`${role}: missing contract or artifact`);
+      continue;
+    }
+
+    const sourceRefs = contract.canonical_source_refs || {};
+    const allowedProjectionFields = contract.allowed_projection_fields || [];
+    const forbiddenOwnedFields = contract.forbidden_owned_fields || [];
+    const allowedSet = new Set(allowedProjectionFields);
+    const forbiddenSet = new Set(forbiddenOwnedFields);
+
+    if (!Array.isArray(allowedProjectionFields) || !Array.isArray(forbiddenOwnedFields) ||
+      !sourceRefs || Array.isArray(sourceRefs) || typeof sourceRefs !== "object") {
+      shapeMismatches.push(`${role}: invalid contract shape`);
+      continue;
+    }
+
+    for (const field of allowedProjectionFields) {
+      if (forbiddenSet.has(field)) shapeMismatches.push(`${role}: ${field} is both allowed and forbidden`);
+      if (!projectionSemanticFields.has(field)) shapeMismatches.push(`${role}: unknown allowed projection field ${field}`);
+    }
+    for (const field of forbiddenOwnedFields) {
+      if (!projectionSemanticFields.has(field)) shapeMismatches.push(`${role}: unknown forbidden owned field ${field}`);
+    }
+
+    for (const [fieldPath, targetRole] of Object.entries(sourceRefs)) {
+      const targetEntry = graph.artifacts[targetRole]?.entry;
+      if (!targetEntry) {
+        unknownRefRoleMismatches.push(`${role}.${fieldPath}: unknown target role ${targetRole}`);
+        continue;
+      }
+      const actual = getValue(artifact, fieldPath);
+      if (actual !== targetEntry.path) {
+        sourceRefMismatches.push(`${role}.${fieldPath}=${actual} expected ${targetEntry.path}`);
+      }
+    }
+
+    walk(artifact, (value, pathParts) => {
+      if (!value || Array.isArray(value) || typeof value !== "object") return;
+      const pathLabel = `${role}:${pathParts.join(".") || "<root>"}`;
+      for (const key of Object.keys(value)) {
+        if (!projectionSemanticFields.has(key)) continue;
+        if (forbiddenSet.has(key)) {
+          forbiddenOwnedMatches.push(`${pathLabel}.${key}`);
+        } else if (!allowedSet.has(key)) {
+          unexpectedProjectionMatches.push(`${pathLabel}.${key}`);
+        }
+      }
+    });
+  }
+
+  ctx.addResult("projection_contract_shape_valid", shapeMismatches.length === 0, shapeMismatches.join("; "));
+  ctx.addResult("projection_contract_ref_roles_known", unknownRefRoleMismatches.length === 0, unknownRefRoleMismatches.join("; "));
+  ctx.addResult("projection_contract_required_source_refs", sourceRefMismatches.length === 0, sourceRefMismatches.join("; "));
+  ctx.addResult("projection_contract_forbidden_owned_fields_absent", forbiddenOwnedMatches.length === 0, forbiddenOwnedMatches.join("; "));
+  ctx.addResult("projection_contract_allowed_projection_fields", unexpectedProjectionMatches.length === 0, unexpectedProjectionMatches.join("; "));
 }
 
 function collectReviewObjects(graph) {
@@ -755,6 +891,7 @@ function validateGraph(graph) {
   validateSourceRelations(graph, ctx);
   validateReviewConsistency(graph, ctx);
   validateDerivedOwnership(graph, ctx);
+  validateProjectionContracts(graph, ctx);
   validateSelectedPatchThread(graph, ctx);
   validateBoundaries(graph, ctx);
   return ctx;
@@ -766,7 +903,7 @@ function collectFailureCodes(fn) {
 }
 
 function validateNegativeCases(baseGraph, ctx) {
-  ctx.addResult("graph_negative_cases_count_expected", expectedNegativeCases.length === 21, expectedNegativeCases.length);
+  ctx.addResult("graph_negative_cases_count_expected", expectedNegativeCases.length === 26, expectedNegativeCases.length);
   for (const negativeCase of expectedNegativeCases) {
     const graph = deepClone(baseGraph);
     negativeCase.mutate(graph);
