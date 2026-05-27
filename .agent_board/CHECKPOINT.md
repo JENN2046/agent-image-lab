@@ -1,5 +1,56 @@
 ---
 
+## Checkpoint - P2.16 Visual Eval Review Result Readonly Bridge Wiring
+
+```text
+phase: p2_16_visual_eval_review_result_readonly_bridge_wiring
+status: completed_validated_local_commit_ready
+result: COMPLETED_VALIDATED_LOCAL_COMMIT_READY
+source_commit: cdadd93
+mode: metadata-only readonly bridge kernel and wiring validator
+summary: Added a minimal metadata-only review bridge kernel that consumes the visual_eval_review_result protocol fixture, canonical taxonomy artifact, and metadata accumulation artifact. The kernel produces a readonly bridge payload with review_session_draft, image_case_drafts, and metadata_accumulation_draft. Added a checked payload example and validator proving direct builder output, CLI output, and example output match exactly.
+changed_files_current_task:
+  - kernel/visual_eval_review_result_bridge.js
+  - scripts/validate_visual_eval_review_result_review_bridge_wiring.js
+  - tests/schema_examples/visual_eval_review_result_review_bridge_payload.example.json
+  - .agent_board/CHECKPOINT.md
+validation_run:
+  - node --check kernel/visual_eval_review_result_bridge.js
+  - node --check scripts/validate_visual_eval_review_result_review_bridge_wiring.js
+  - node scripts/validate_visual_eval_review_result_review_bridge_wiring.js
+validation_result: passed
+readonly_chain_verified:
+  - review_result artifact consumed
+  - protocol validator re-run by wiring validator
+  - taxonomy binding preserved
+  - review bridge readable payload created
+  - review_session_draft displays pass / patch / reject
+  - image_case_drafts display pass / patch / reject
+  - metadata_accumulation_draft remains readonly
+negative_cases_verified:
+  - route_guard_true_rejected
+  - unknown_failure_tag_rejected
+  - missing_outcome_rejected
+runtime_execution_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+memory_written: false
+accepted_samples_written: false
+Batch_005_started: false
+production_candidate_002_started: false
+package_json_modified: false
+dependency_change_performed: false
+push_performed: false
+recommended_next_long_phase: push_safety_gate_or_review_result_core_npm_wiring_decision
+next_phase_started: false
+```
+
+---
+
 ## Checkpoint - P2.15 Canonical Visual Eval Failure Taxonomy Artifact
 
 ```text
