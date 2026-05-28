@@ -93,6 +93,9 @@ Rules for new validators:
   existing root-level validator family.
 - If a root-level validator is added, document why it stays at root or how it
   will be wrapped later.
+- If a moved implementation uses `if (require.main === module)`, export `main`
+  and make the root compatibility wrapper call `validator.main()` so the old
+  command still executes the validator instead of only loading it.
 - Keep domain logic in shared helpers when it is reused by multiple validators.
 - Keep validator outputs structured and machine-checkable.
 - Avoid relying only on markdown token checks when a schema or JSON fixture can represent the state.

@@ -310,6 +310,7 @@ if (require.main === module) {
 }
 
 module.exports = {
+  main,
   assertCompleteReadinessSemantics,
   assertEvolutionSemantics,
   assertReconciliationSemantics,

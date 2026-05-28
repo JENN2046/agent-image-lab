@@ -304,6 +304,7 @@ if (require.main === module) {
 }
 
 module.exports = {
+  main,
   buildReport,
   validateReceiptAgainstRegistryEntry,
   validateRegistry

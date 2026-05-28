@@ -330,6 +330,7 @@ if (require.main === module) {
 }
 
 module.exports = {
+  main,
   buildReport,
   validateTraceability
 };

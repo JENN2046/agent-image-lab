@@ -63,6 +63,19 @@ function wrapperDelegatesTo(wrapperContent, implementationPath) {
   return wrapperContent.includes(implementationPath) || wrapperContent.includes(slashPath);
 }
 
+function implementationUsesRequireMainGuard(content) {
+  return content.includes("if (require.main === module)");
+}
+
+function implementationExportsMain(content) {
+  return /module\.exports\s*=\s*\{[\s\S]*?\bmain\b/.test(content);
+}
+
+function wrapperInvokesExportedMain(content) {
+  return content.includes("typeof validator.main === \"function\"") &&
+    content.includes("validator.main();");
+}
+
 function rootValidatorNames() {
   return fs.readdirSync(path.join(root, "scripts"), { withFileTypes: true })
     .filter((entry) => entry.isFile() && /^validate_.*\.js$/.test(entry.name))
@@ -185,6 +198,15 @@ function main() {
     wrapperPath: `scripts/${fileName}`,
     implementationPath: `scripts/validators/capsule/${fileName}`,
   }));
+  const protectedValidatorPaths = [
+    { wrapperPath: rootWrapperPath, implementationPath },
+    { wrapperPath: readonlyOperatorWrapperPath, implementationPath: readonlyOperatorImplementationPath },
+    ...reviewConsoleValidatorPaths,
+    ...readonlyVisualReviewValidatorPaths,
+    ...autopilotGovernanceValidatorPaths,
+    ...visualEvalValidatorPaths,
+    ...capsuleValidatorPaths,
+  ];
 
   add("repository_organization_standard_exists", exists(standardPath), standardPath);
   add("project_structure_exists", exists(structurePath), structurePath);
@@ -369,6 +391,16 @@ function main() {
       capsuleImplementationPath
     );
   }
+  for (const { wrapperPath, implementationPath: protectedImplementationPath } of protectedValidatorPaths) {
+    const wrapper = exists(wrapperPath) ? read(wrapperPath) : "";
+    const protectedImplementation = exists(protectedImplementationPath) ? read(protectedImplementationPath) : "";
+    const usesRequireMainGuard = implementationUsesRequireMainGuard(protectedImplementation);
+    add(
+      `root_wrapper_executes_guarded_main_${path.basename(wrapperPath, ".js")}`,
+      !usesRequireMainGuard || (implementationExportsMain(protectedImplementation) && wrapperInvokesExportedMain(wrapper)),
+      protectedImplementationPath
+    );
+  }
   add(
     "validator_index_lists_current_splits",
     includesAll(validatorIndex, [
@@ -485,4 +517,10 @@ function main() {
   process.exit(result.passed ? 0 : 1);
 }
 
-main();
+if (require.main === module) {
+  main();
+}
+
+module.exports = {
+  main,
+};

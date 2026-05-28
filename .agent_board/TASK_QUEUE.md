@@ -1,5 +1,19 @@
 ---
 
+- [x] ID: repository_directory_optimization_closure
+      Slice: wrapper_execution_contract_and_route_map.
+      Lane: Green local repository directory optimization.
+      Status: completed_validated_pending_commit.
+      Goal: Close the current validator directory optimization wave by making root wrappers execute guarded implementations and by validating the contract.
+      Active current phase reference: v0_3_3_first_live_generation_pilot.
+      Active source phase reference: v0_3_2_live_candidate_action_packet.
+      Active next Red decision reference: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Completed: guarded implementations export `main`; affected root wrappers call `validator.main()`; governance validator checks the rule; docs record the rule.
+      Boundary: no package/dependency change, provider/plugin/API/memory/production/runtime action, tag, release, deploy, or destructive command; image_generation_performed: false; secret_value_read_performed: false; push_status: not_performed.
+      Validation: guarded root wrapper and implementation runtime checks passed; repository structure governance and agent board state validators passed.
+
+---
+
 - [x] ID: repository_directory_optimization_capsule_validator_split
       Slice: capsule_validator_move_with_root_wrappers.
       Lane: Green local repository directory optimization.

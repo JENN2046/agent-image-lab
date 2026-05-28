@@ -143,6 +143,11 @@ repository-wide governance guards, or task-required consistency with an
 existing root-level validator family. Old validators are not moved as part of
 this policy.
 
+When a moved validator implementation uses `if (require.main === module)`, the
+implementation must export `main`, and the root compatibility wrapper must call
+`validator.main()`. A wrapper that only `require`s a guarded implementation can
+exit successfully without running the validator and is not acceptable.
+
 ## Validation Gate Semantics
 
 Current gate responsibilities:

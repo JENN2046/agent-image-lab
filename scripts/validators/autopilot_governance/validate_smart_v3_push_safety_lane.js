@@ -515,6 +515,7 @@ if (require.main === module) {
 }
 
 module.exports = {
+  main,
   buildReport,
   validatePushL1Candidate,
   validatePushL2Candidate,

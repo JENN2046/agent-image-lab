@@ -1,5 +1,42 @@
 ---
 
+## Current Run State - Repository Directory Optimization Closure
+
+```text
+phase: repository_directory_optimization_closure
+slice: wrapper_execution_contract_and_route_map
+status: COMPLETED_VALIDATED_PENDING_COMMIT
+mode: Green local repository directory optimization
+branch: master
+goal: Close the current validator directory optimization wave by making root compatibility wrappers execute guarded implementations and by validating the wrapper execution contract.
+active_current_phase_reference: v0_3_3_first_live_generation_pilot
+active_source_phase_reference: v0_3_2_live_candidate_action_packet
+active_next_red_decision_reference: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+completed:
+- Added governance checks for moved implementations that use `require.main === module`.
+- Updated guarded implementations to export `main`.
+- Updated affected root compatibility wrappers to call `validator.main()`.
+- Documented the wrapper execution rule in `scripts/validators/README.md` and `docs/PROJECT_STRUCTURE.md`.
+validation:
+- guarded root wrapper runtime checks: passed
+- implementation runtime checks for guarded validators: passed
+- node scripts\validate_repository_structure_governance.js: passed
+- node scripts\validate_agent_board_state.js: passed
+boundary:
+- provider_contact_performed: false
+- plugin_call_performed: false
+- api_call_performed: false
+- image_generation_performed: false
+- DailyNote_write_performed: false
+- VCP_memory_write_performed: false
+- secret_value_read_performed: false
+- push_status: not_performed
+- no package/dependency change, production candidate, Batch 005, runtime integration, push, tag, release, deploy, or destructive action
+next_safe_task: exact-file guarded commit, then request push approval for the completed directory optimization wave
+```
+
+---
+
 ## Current Run State - Repository Directory Optimization Capsule Validator Split
 
 ```text
