@@ -1,5 +1,42 @@
 ---
 
+## Current Run State - Repository Directory Optimization Visual Eval Validator Split
+
+```text
+phase: repository_directory_optimization_visual_eval_validator_split
+slice: visual_eval_validator_move_with_root_wrappers
+status: COMPLETED_VALIDATED_PENDING_COMMIT
+mode: Green local repository directory optimization
+branch: master
+goal: Move the non-readonly visual evaluation validator implementations under scripts/validators/visual_eval while preserving root commands.
+active_current_phase_reference: v0_3_3_first_live_generation_pilot
+active_source_phase_reference: v0_3_2_live_candidate_action_packet
+active_next_red_decision_reference: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+completed:
+- Moved 6 implementation files to `scripts/validators/visual_eval/`.
+- Kept all matching root `scripts/validate_visual_eval_*.js` paths as compatibility wrappers.
+- Updated `scripts/validators/VALIDATOR_INDEX.md`, `scripts/validators/README.md`, and `docs/PROJECT_STRUCTURE.md`.
+- Extended `scripts/validators/governance/validate_repository_structure_governance.js` to check wrapper and implementation paths.
+validation:
+- root and implementation visual_eval validator syntax checks: passed
+- root and implementation visual_eval validator runtime checks: passed
+- node scripts\validate_repository_structure_governance.js: passed
+- node scripts\validate_agent_board_state.js: passed
+boundary:
+- provider_contact_performed: false
+- plugin_call_performed: false
+- api_call_performed: false
+- image_generation_performed: false
+- DailyNote_write_performed: false
+- VCP_memory_write_performed: false
+- secret_value_read_performed: false
+- push_status: not_performed
+- no package/dependency change, production candidate, Batch 005, runtime integration, push, tag, release, deploy, or destructive action
+next_safe_task: exact-file guarded commit for this slice, then continue with capsule validator family split
+```
+
+---
+
 ## Current Run State - Repository Directory Optimization Autopilot Governance Validator Split
 
 ```text

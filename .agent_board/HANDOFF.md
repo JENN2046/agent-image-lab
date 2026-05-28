@@ -1,5 +1,56 @@
 ---
 
+## Current Handoff Update - Repository Directory Optimization Visual Eval Validator Split
+
+```text
+phase: repository_directory_optimization_visual_eval_validator_split
+slice: visual_eval_validator_move_with_root_wrappers
+status: COMPLETED_VALIDATED_PENDING_COMMIT
+mode: Green local repository directory optimization
+branch: master
+summary: Completed the non-readonly visual evaluation validator family split. The 6 implementation files now live under `scripts/validators/visual_eval/`, and all root paths remain compatibility wrappers.
+active_current_phase_reference: v0_3_3_first_live_generation_pilot
+active_source_phase_reference: v0_3_2_live_candidate_action_packet
+active_next_red_decision_reference: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+changed_by_this_task:
+  - scripts/validate_visual_eval_consistency_check.js
+  - scripts/validate_visual_eval_review_console_readonly_corpus_renderer.js
+  - scripts/validate_visual_eval_review_result_protocol.js
+  - scripts/validate_visual_eval_review_result_review_bridge_wiring.js
+  - scripts/validate_visual_eval_seed_record_schema.js
+  - scripts/validate_visual_eval_seed_registry_schema.js
+  - scripts/validators/visual_eval/
+  - scripts/validators/VALIDATOR_INDEX.md
+  - scripts/validators/README.md
+  - scripts/validators/governance/validate_repository_structure_governance.js
+  - docs/PROJECT_STRUCTURE.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+validation:
+  - root and implementation visual_eval validator syntax checks: passed
+  - root and implementation visual_eval validator runtime checks: passed
+  - node scripts\validate_repository_structure_governance.js: passed
+  - node scripts\validate_agent_board_state.js: passed
+boundaries:
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  secret_value_read_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  production_candidate_002_started: false
+  Batch_005_started: false
+  commit_performed: pending exact-file guarded commit
+  push_performed: false
+  push_status: not_performed
+next_safe_task: exact-file guarded commit for this slice; then continue to capsule validator family split.
+```
+
+---
+
 ## Current Handoff Update - Repository Directory Optimization Autopilot Governance Validator Split
 
 ```text

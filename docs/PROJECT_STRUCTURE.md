@@ -127,6 +127,7 @@ Current script reality:
 - `scripts/validators/review_console/` contains Review Console validator implementations with root compatibility wrappers for `scripts/validate_review_console*.js`.
 - `scripts/validators/readonly_visual_review/` contains readonly visual review artifact-chain validator implementations with root compatibility wrappers for `scripts/validate_visual_eval_readonly_*.js`.
 - `scripts/validators/autopilot_governance/` contains autopilot, `.agent_board`, and Smart Standing Authorization governance validator implementations with root compatibility wrappers.
+- `scripts/validators/visual_eval/` contains non-readonly visual evaluation validator implementations with root compatibility wrappers for `scripts/validate_visual_eval_*.js`.
 - `scripts/run_*`, `scripts/execute_*`, and runtime/debug scripts may cross A5 boundaries and must not be run without explicit authorization.
 
 New validators must default to:

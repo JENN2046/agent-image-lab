@@ -65,6 +65,13 @@ Current autopilot governance validators:
   Smart Standing Authorization, push-safety, and historical governance commands
   keep working.
 
+Current visual evaluation validators:
+
+- `scripts/validators/visual_eval/` contains the implementation files for the
+  non-readonly `scripts/validate_visual_eval_*.js` family.
+- The matching root validators remain compatibility wrappers so protocol,
+  bridge-wiring, seed schema, and Review Console corpus commands keep working.
+
 Current root validator index:
 
 - `scripts/validators/VALIDATOR_INDEX.md` records the current root

@@ -81,6 +81,12 @@ scripts/validators/autopilot_governance/validate_autopilot_governance_kernel.js
 scripts/validators/autopilot_governance/validate_autopilot_readiness_receipt_registry_cross_claims.js
 scripts/validators/autopilot_governance/validate_autopilot_receipt_registry_negative_cases.js
 scripts/validators/autopilot_governance/validate_smart_v3_push_safety_lane.js
+scripts/validators/visual_eval/validate_visual_eval_consistency_check.js
+scripts/validators/visual_eval/validate_visual_eval_review_console_readonly_corpus_renderer.js
+scripts/validators/visual_eval/validate_visual_eval_review_result_protocol.js
+scripts/validators/visual_eval/validate_visual_eval_review_result_review_bridge_wiring.js
+scripts/validators/visual_eval/validate_visual_eval_seed_record_schema.js
+scripts/validators/visual_eval/validate_visual_eval_seed_registry_schema.js
 ```
 
 Stable root compatibility wrappers:
@@ -130,6 +136,12 @@ scripts/validate_autopilot_governance_kernel.js
 scripts/validate_autopilot_readiness_receipt_registry_cross_claims.js
 scripts/validate_autopilot_receipt_registry_negative_cases.js
 scripts/validate_smart_v3_push_safety_lane.js
+scripts/validate_visual_eval_consistency_check.js
+scripts/validate_visual_eval_review_console_readonly_corpus_renderer.js
+scripts/validate_visual_eval_review_result_protocol.js
+scripts/validate_visual_eval_review_result_review_bridge_wiring.js
+scripts/validate_visual_eval_seed_record_schema.js
+scripts/validate_visual_eval_seed_registry_schema.js
 ```
 
 ## Rules For Future Splits
@@ -146,11 +158,13 @@ scripts/validate_smart_v3_push_safety_lane.js
 
 ## Recommended Next Families
 
-1. `visual_eval`: smaller visual-evaluation protocol validators.
-2. `capsule`: capsule/product evidence validators after separating side-effect
+1. `capsule`: capsule/product evidence validators after separating side-effect
    runners from validators.
-3. `directory_governance_closure`: no broad movement; tighten the structure
+2. `directory_governance_closure`: no broad movement; tighten the structure
    index, governance checks, and next-family route map.
+3. `provider_preflight_reference_map`: read-only reference mapping only; do not
+   physically move provider/A5 preflight validators until side-effect runner
+   assumptions are separated.
 
 `legacy_versioned`, `other`, `runtime`, and `provider_preflight` need deeper
 reference maps before physical movement.

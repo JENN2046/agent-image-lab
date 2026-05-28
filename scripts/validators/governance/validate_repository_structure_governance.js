@@ -151,6 +151,18 @@ function main() {
     wrapperPath: `scripts/${fileName}`,
     implementationPath: `scripts/validators/autopilot_governance/${fileName}`,
   }));
+  const visualEvalValidatorFiles = [
+    "validate_visual_eval_consistency_check.js",
+    "validate_visual_eval_review_console_readonly_corpus_renderer.js",
+    "validate_visual_eval_review_result_protocol.js",
+    "validate_visual_eval_review_result_review_bridge_wiring.js",
+    "validate_visual_eval_seed_record_schema.js",
+    "validate_visual_eval_seed_registry_schema.js",
+  ];
+  const visualEvalValidatorPaths = visualEvalValidatorFiles.map((fileName) => ({
+    wrapperPath: `scripts/${fileName}`,
+    implementationPath: `scripts/validators/visual_eval/${fileName}`,
+  }));
 
   add("repository_organization_standard_exists", exists(standardPath), standardPath);
   add("project_structure_exists", exists(structurePath), structurePath);
@@ -182,6 +194,14 @@ function main() {
       `autopilot_governance_implementation_exists_${path.basename(autopilotGovernanceImplementationPath, ".js")}`,
       exists(autopilotGovernanceImplementationPath),
       autopilotGovernanceImplementationPath
+    );
+  }
+  for (const { wrapperPath, implementationPath: visualEvalImplementationPath } of visualEvalValidatorPaths) {
+    add(`visual_eval_wrapper_exists_${path.basename(wrapperPath, ".js")}`, exists(wrapperPath), wrapperPath);
+    add(
+      `visual_eval_implementation_exists_${path.basename(visualEvalImplementationPath, ".js")}`,
+      exists(visualEvalImplementationPath),
+      visualEvalImplementationPath
     );
   }
 
@@ -303,6 +323,14 @@ function main() {
       autopilotGovernanceImplementationPath
     );
   }
+  for (const { wrapperPath, implementationPath: visualEvalImplementationPath } of visualEvalValidatorPaths) {
+    const wrapper = exists(wrapperPath) ? read(wrapperPath) : "";
+    add(
+      `visual_eval_wrapper_delegates_${path.basename(wrapperPath, ".js")}`,
+      wrapperDelegatesTo(wrapper, visualEvalImplementationPath),
+      visualEvalImplementationPath
+    );
+  }
   add(
     "validator_index_lists_current_splits",
     includesAll(validatorIndex, [
@@ -335,6 +363,10 @@ function main() {
       ...autopilotGovernanceValidatorPaths.flatMap(({ wrapperPath, implementationPath: autopilotGovernanceImplementationPath }) => [
         wrapperPath,
         autopilotGovernanceImplementationPath,
+      ]),
+      ...visualEvalValidatorPaths.flatMap(({ wrapperPath, implementationPath: visualEvalImplementationPath }) => [
+        wrapperPath,
+        visualEvalImplementationPath,
       ]),
     ])
   );
@@ -383,6 +415,10 @@ function main() {
       ...autopilotGovernanceValidatorPaths.flatMap(({ wrapperPath, implementationPath: autopilotGovernanceImplementationPath }) => [
         wrapperPath,
         autopilotGovernanceImplementationPath,
+      ]),
+      ...visualEvalValidatorPaths.flatMap(({ wrapperPath, implementationPath: visualEvalImplementationPath }) => [
+        wrapperPath,
+        visualEvalImplementationPath,
       ]),
     ],
     provider_contact_performed: false,
