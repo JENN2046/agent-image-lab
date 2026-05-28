@@ -7,6 +7,7 @@ status: completed_validated_inactive_draft
 adapter: adapters/runtime/exact_a5_provider_retry_007_activation_packet_draft.js
 validator: scripts/validate_exact_a5_provider_retry_007_activation_packet_draft.js
 source_preflight_decision: docs/EXACT_A5_PROVIDER_RETRY_007_PREFLIGHT_DECISION.md
+execution_surface_repair_package: docs/EXACT_A5_PROVIDER_RETRY_007_VCPTOOLBOX_OUTPUT_OVERRIDE_REPAIR_PACKAGE.md
 authorization_id: AUTH-DRAFT-NATIVE-DOUBAO-SEEDREAM5-RETRY-20260527-007
 required_model: doubao-seedream-5-0-260128
 authorization_status: draft_not_active
@@ -21,6 +22,15 @@ This inactive draft is the separate exact packet required before any possible
 decision boundaries and does not create a provider receipt, output directory,
 review handoff, durable audit record, accepted sample, production candidate,
 DailyNote entry, or VCP memory entry.
+
+Current execution-surface status: blocked. VCPToolBox currently authorizes exact
+output overrides through retry_006 only. The repair package below must be
+separately authorized, applied, and validated before this draft can ever become
+executable:
+
+```text
+docs/EXACT_A5_PROVIDER_RETRY_007_VCPTOOLBOX_OUTPUT_OVERRIDE_REPAIR_PACKAGE.md
+```
 
 ## Exact Activation Phrase
 
@@ -81,6 +91,15 @@ node scripts/validate_exact_a5_provider_retry_007_activation_packet_draft.js
 git diff --check
 ```
 
+Also required before provider execution:
+
+```text
+VCPToolBox retry_007 output override repair applied and validated
+VCPToolBox node --check routes\admin\aiImageAgents.js
+VCPToolBox node --test tests\aiImageAgentsRoute.test.js
+VCPToolBox node --test tests\aiImageExecutionAdapter.test.js
+```
+
 ## Current Non-Execution Evidence
 
 ```yaml
@@ -99,6 +118,7 @@ accepted_samples_write_performed: false
 DailyNote_write_performed: false
 VCP_memory_write_performed: false
 push_tag_release_deploy_performed: false
+vcptoolbox_retry_007_output_override_repair_applied: false
 ```
 
 ## Validation

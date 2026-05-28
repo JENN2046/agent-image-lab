@@ -7,6 +7,7 @@ const { execFileSync } = require("node:child_process");
 
 const root = path.resolve(__dirname, "..");
 const adapterPath = "adapters/runtime/exact_a5_provider_retry_007_activation_packet_draft.js";
+const repairPackagePath = "docs/EXACT_A5_PROVIDER_RETRY_007_VCPTOOLBOX_OUTPUT_OVERRIDE_REPAIR_PACKAGE.md";
 
 function assert(condition, message) {
   if (!condition) throw new Error(message);
@@ -50,6 +51,14 @@ function assertPacket(packet, label) {
   assert(packet.source_preflight_decision.can_execute_now === false, `${label} preflight can_execute_now must be false`);
   assert(packet.source_preflight_decision.provider_execution_allowed_now === false, `${label} preflight provider execution must be false`);
   assert(packet.source_preflight_decision.exact_activation_phrase_issued === false, `${label} preflight phrase issued must be false`);
+  assert(packet.execution_surface_precondition.status === "blocked_pending_vcptoolbox_retry_007_output_override_repair", `${label} execution surface status mismatch`);
+  assert(packet.execution_surface_precondition.repair_package_ref === repairPackagePath, `${label} repair package ref mismatch`);
+  assert(packet.execution_surface_precondition.real_vcptoolbox_patch_allowed_now === false, `${label} VCPToolBox patch must not be allowed now`);
+  assert(packet.execution_surface_precondition.current_route_authorizes_retry_007_output_override === false, `${label} route must remain blocked before repair`);
+  assert(packet.execution_surface_precondition.required_vcptoolbox_head_reviewed === "94f2f597", `${label} reviewed VCPToolBox head mismatch`);
+  assert(packet.execution_surface_precondition.required_authorization_id === packet.authorization_id, `${label} execution surface auth id mismatch`);
+  assert(packet.execution_surface_precondition.required_output_root === "A:\\agent-image-lab\\agent-image-lab-v0.2\\runs\\real_generation\\v0_6_73_real_vcp_agent_generation_retry_007", `${label} execution surface output root mismatch`);
+  assert(packet.execution_surface_precondition.can_execute_provider_before_repair === false, `${label} provider must not execute before repair`);
   assert(packet.prior_real_execution_evidence.last_attempt_authorization_id === "AUTH-DRAFT-NATIVE-DOUBAO-SEEDREAM5-RETRY-20260526-006", `${label} retry_006 authorization anchor mismatch`);
   assert(packet.prior_real_execution_evidence.last_attempt_status === "COMPLETED_PROVIDER_IMAGE_CREATED", `${label} retry_006 status mismatch`);
   assert(packet.prior_real_execution_evidence.provider_evidence_integrity_validator === "npm run validate:provider-evidence-integrity", `${label} provider evidence gate missing`);
@@ -74,6 +83,8 @@ function assertPacket(packet, label) {
   assert(packet.write_boundaries_when_activated.DailyNote_write_allowed === false, `${label} DailyNote write must be false`);
   assert(packet.write_boundaries_when_activated.VCP_memory_write_allowed === false, `${label} VCP memory write must be false`);
   assert(packet.validation_required_before_activation.includes("node scripts/validate_exact_a5_provider_retry_007_activation_packet_draft.js"), `${label} activation draft validator missing`);
+  assert(packet.validation_required_before_activation.includes("VCPToolBox retry_007 output override repair applied and validated"), `${label} VCPToolBox repair gate missing`);
+  assert(packet.validation_required_before_activation.includes("VCPToolBox node --test tests\\aiImageAgentsRoute.test.js"), `${label} VCPToolBox route test gate missing`);
   assert(packet.validation_required_before_activation.includes("npm run validate:all"), `${label} full validation gate missing`);
   for (const [field, value] of Object.entries(packet.current_side_effect_flags)) {
     assert(value === false, `${label} current_side_effect_flags.${field} must be false`);
@@ -91,6 +102,7 @@ function expectFailure(caseId, fn) {
 
 function main() {
   assert(fs.existsSync(repoPath(adapterPath)), "retry_007 activation packet adapter missing");
+  assert(fs.existsSync(repoPath(repairPackagePath)), "retry_007 VCPToolBox output override repair package missing");
   runNode(["--check", adapterPath]);
 
   const adapter = require(repoPath(adapterPath));
@@ -100,6 +112,25 @@ function main() {
   const packet = adapter.buildExactA5ProviderRetry007ActivationPacketDraft();
   assertPacket(packet, "direct");
   assert(adapter.validateExactA5ProviderRetry007ActivationPacketDraft(packet) === true, "direct packet should validate");
+
+  const repairPackage = fs.readFileSync(repoPath(repairPackagePath), "utf8");
+  for (const token of [
+    "phase: exact_a5_provider_retry_007_vcptoolbox_output_override_repair_package",
+    "can_apply_now: false",
+    "real_vcptoolbox_patch_allowed_now: false",
+    "real_provider_execution_allowed_now: false",
+    "A:\\VCP\\apps\\VCPToolBox\\routes\\admin\\aiImageAgents.js",
+    "A:\\VCP\\apps\\VCPToolBox\\tests\\aiImageAgentsRoute.test.js",
+    "AUTH-DRAFT-NATIVE-DOUBAO-SEEDREAM5-RETRY-20260527-007",
+    "A:\\agent-image-lab\\agent-image-lab-v0.2\\runs\\real_generation\\v0_6_73_real_vcp_agent_generation_retry_007",
+    "new_runner_allowed: false",
+    "provider_contact_performed: false",
+    "secret_value_read_performed: false",
+    "node --test tests\\aiImageAgentsRoute.test.js",
+    "This phrase does not authorize `retry_007` provider execution",
+  ]) {
+    assert(repairPackage.includes(token), `repair package token missing: ${token}`);
+  }
 
   const cliPacket = JSON.parse(runNode([adapterPath]));
   assertPacket(cliPacket, "cli");
@@ -126,6 +157,16 @@ function main() {
     expectFailure("source_preflight_phrase_issued_rejected", () => {
       const dirty = clone(packet);
       dirty.source_preflight_decision.exact_activation_phrase_issued = true;
+      adapter.validateExactA5ProviderRetry007ActivationPacketDraft(dirty);
+    }),
+    expectFailure("execution_surface_repair_marked_allowed_rejected", () => {
+      const dirty = clone(packet);
+      dirty.execution_surface_precondition.real_vcptoolbox_patch_allowed_now = true;
+      adapter.validateExactA5ProviderRetry007ActivationPacketDraft(dirty);
+    }),
+    expectFailure("execution_surface_route_ready_rejected", () => {
+      const dirty = clone(packet);
+      dirty.execution_surface_precondition.current_route_authorizes_retry_007_output_override = true;
       adapter.validateExactA5ProviderRetry007ActivationPacketDraft(dirty);
     }),
     expectFailure("wrong_model_rejected", () => {
@@ -178,6 +219,9 @@ function main() {
     retry_006_evidence_anchor: packet.prior_real_execution_evidence.last_attempt_authorization_id,
     retry_007_output_directory_ref: packet.allowed_operation_when_activated.output_directory_ref,
     retry_007_provider_receipt_ref: packet.allowed_operation_when_activated.provider_receipt_ref,
+    execution_surface_precondition_status: packet.execution_surface_precondition.status,
+    repair_package_ref: packet.execution_surface_precondition.repair_package_ref,
+    current_route_authorizes_retry_007_output_override: packet.execution_surface_precondition.current_route_authorizes_retry_007_output_override,
     max_provider_calls_when_activated: packet.activation_budget.max_provider_calls,
     retry_allowed: packet.activation_budget.retry_allowed,
     provider_evidence_integrity_gate_passed: integrity.passed,

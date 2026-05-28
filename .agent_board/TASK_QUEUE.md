@@ -1,5 +1,17 @@
 ---
 
+- [x] ID: retry_007_vcptoolbox_output_override_repair_package_20260528
+      Lane: Green local repair package; no external repo write.
+      Status: completed_validated_pending_local_commit.
+      Goal: Prepare the exact VCPToolBox output override repair package for retry_007 without creating a new runner or modifying VCPToolBox.
+      Active current phase reference: v0_3_3_first_live_generation_pilot.
+      Active source phase reference: v0_3_2_live_candidate_action_packet.
+      Active next Red decision reference: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Completed: added `docs/EXACT_A5_PROVIDER_RETRY_007_VCPTOOLBOX_OUTPUT_OVERRIDE_REPAIR_PACKAGE.md`; updated the retry_007 preflight and activation draft docs; updated the inactive activation adapter and validator so retry_007 remains blocked pending VCPToolBox output override repair.
+      Validation: adapter syntax, validator syntax, retry_007 activation packet validator, retry_007 preflight decision validator, agent board state, resume compaction guard, provider evidence integrity, MVP, VCPToolBox route syntax, VCPToolBox route tests 10/10, VCPToolBox adapter tests 3/3, and git diff check passed.
+      Boundary fields: image_generation_performed: false; secret_value_read_performed: false; real_vcptoolbox_modified: false; new_runner_created: false; push_status: not_performed; tag_release_deploy_performed: false.
+      Recommended next: exact-file commit and guarded push if safe; do not modify VCPToolBox or execute provider/contact/image without the exact future authorization gates.
+
 - [x] ID: post_push_sync_after_retry_007_execution_surface_blocker_20260528
       Lane: Green local post-push state-surface sync.
       Status: completed_validated_post_push_sync.

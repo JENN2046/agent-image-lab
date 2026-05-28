@@ -9,6 +9,7 @@ const adapterId = "exact_a5_provider_retry_007_activation_packet_draft_v0";
 const packetSchema = "exact_a5_provider_retry_007_activation_packet_draft.v0";
 const authorizationId = "AUTH-DRAFT-NATIVE-DOUBAO-SEEDREAM5-RETRY-20260527-007";
 const requiredModel = "doubao-seedream-5-0-260128";
+const outputOverrideRepairPackageRef = "docs/EXACT_A5_PROVIDER_RETRY_007_VCPTOOLBOX_OUTPUT_OVERRIDE_REPAIR_PACKAGE.md";
 const exactActivationPhrase = "我授权执行 AUTH-DRAFT-NATIVE-DOUBAO-SEEDREAM5-RETRY-20260527-007：NativeDoubao Seedream 5 retry_007 单次真实生成，最多 1 次 provider/plugin/API 调用，最多 1 张图，禁止再次重试，必须传入 model=doubao-seedream-5-0-260128，禁止读取 secret 值，禁止写 DailyNote/VCP memory/accepted_samples/production_candidate，输出仅限 runs/real_generation/v0_6_73_real_vcp_agent_generation_retry_007/，执行后写 retry_007 provider receipt、review handoff、durable audit record。";
 
 const currentSideEffectFlags = Object.freeze({
@@ -98,6 +99,20 @@ function buildExactA5ProviderRetry007ActivationPacketDraft(options = {}) {
       exact_activation_phrase_issued: preflightPacket.exact_activation_phrase_issued,
       candidate_authorization_id: preflightPacket.candidate_authorization_id,
       provider_execution_allowed_now: preflightPacket.provider_execution_allowed_now,
+    },
+    execution_surface_precondition: {
+      status: "blocked_pending_vcptoolbox_retry_007_output_override_repair",
+      repair_package_ref: outputOverrideRepairPackageRef,
+      external_repo_write_allowed_now: false,
+      real_vcptoolbox_patch_allowed_now: false,
+      current_route_authorizes_retry_007_output_override: false,
+      required_vcptoolbox_repo: "A:\\VCP\\apps\\VCPToolBox",
+      required_vcptoolbox_head_reviewed: "94f2f597",
+      required_route_file: "A:\\VCP\\apps\\VCPToolBox\\routes\\admin\\aiImageAgents.js",
+      required_test_file: "A:\\VCP\\apps\\VCPToolBox\\tests\\aiImageAgentsRoute.test.js",
+      required_authorization_id: authorizationId,
+      required_output_root: "A:\\agent-image-lab\\agent-image-lab-v0.2\\runs\\real_generation\\v0_6_73_real_vcp_agent_generation_retry_007",
+      can_execute_provider_before_repair: false,
     },
     prior_real_execution_evidence: {
       ...preflightPacket.prior_real_execution_evidence,
@@ -193,6 +208,10 @@ function buildExactA5ProviderRetry007ActivationPacketDraft(options = {}) {
       "npm run validate:provider-evidence-integrity",
       "npm run validate:all",
       "node scripts/validate_exact_a5_provider_retry_007_activation_packet_draft.js",
+      "VCPToolBox retry_007 output override repair applied and validated",
+      "VCPToolBox node --check routes\\admin\\aiImageAgents.js",
+      "VCPToolBox node --test tests\\aiImageAgentsRoute.test.js",
+      "VCPToolBox node --test tests\\aiImageExecutionAdapter.test.js",
       "git diff --check",
     ],
     validation_required_after_activation: [
@@ -206,6 +225,7 @@ function buildExactA5ProviderRetry007ActivationPacketDraft(options = {}) {
       "exact activation phrase missing or changed",
       "authorization_id mismatch",
       "source preflight decision no longer matches retry_007 boundaries",
+      "VCPToolBox retry_007 output override repair has not been applied and validated",
       "required model is not doubao-seedream-5-0-260128",
       "provider binding ref is not redacted in repository output",
       "provider binding value is treated as secret or printed",
@@ -280,6 +300,20 @@ function validateExactA5ProviderRetry007ActivationPacketDraft(packet) {
       packet.prior_real_execution_evidence.provider_evidence_integrity_validator !== "npm run validate:provider-evidence-integrity") {
     throw new Error("retry_006 evidence anchor mismatch");
   }
+  assertObject(packet.execution_surface_precondition, "packet.execution_surface_precondition");
+  if (packet.execution_surface_precondition.status !== "blocked_pending_vcptoolbox_retry_007_output_override_repair" ||
+      packet.execution_surface_precondition.repair_package_ref !== outputOverrideRepairPackageRef ||
+      packet.execution_surface_precondition.external_repo_write_allowed_now !== false ||
+      packet.execution_surface_precondition.real_vcptoolbox_patch_allowed_now !== false ||
+      packet.execution_surface_precondition.current_route_authorizes_retry_007_output_override !== false ||
+      packet.execution_surface_precondition.required_vcptoolbox_head_reviewed !== "94f2f597" ||
+      packet.execution_surface_precondition.required_route_file !== "A:\\VCP\\apps\\VCPToolBox\\routes\\admin\\aiImageAgents.js" ||
+      packet.execution_surface_precondition.required_test_file !== "A:\\VCP\\apps\\VCPToolBox\\tests\\aiImageAgentsRoute.test.js" ||
+      packet.execution_surface_precondition.required_authorization_id !== authorizationId ||
+      packet.execution_surface_precondition.required_output_root !== "A:\\agent-image-lab\\agent-image-lab-v0.2\\runs\\real_generation\\v0_6_73_real_vcp_agent_generation_retry_007" ||
+      packet.execution_surface_precondition.can_execute_provider_before_repair !== false) {
+    throw new Error("retry_007 VCPToolBox output override repair precondition mismatch");
+  }
   assertObject(packet.selected_provider, "packet.selected_provider");
   if (packet.selected_provider.provider_id !== "NativeDoubaoImage" ||
       packet.selected_provider.model !== requiredModel ||
@@ -333,6 +367,10 @@ function validateExactA5ProviderRetry007ActivationPacketDraft(packet) {
     "npm run validate:provider-evidence-integrity",
     "npm run validate:all",
     "node scripts/validate_exact_a5_provider_retry_007_activation_packet_draft.js",
+    "VCPToolBox retry_007 output override repair applied and validated",
+    "VCPToolBox node --check routes\\admin\\aiImageAgents.js",
+    "VCPToolBox node --test tests\\aiImageAgentsRoute.test.js",
+    "VCPToolBox node --test tests\\aiImageExecutionAdapter.test.js",
     "git diff --check",
   ]) {
     if (!packet.validation_required_before_activation.includes(required)) {
@@ -342,6 +380,7 @@ function validateExactA5ProviderRetry007ActivationPacketDraft(packet) {
   const stopText = packet.stop_conditions.join("\n");
   for (const required of [
     "exact activation phrase",
+    "VCPToolBox retry_007 output override repair",
     requiredModel,
     "secret value read",
     "env file content read",
@@ -383,6 +422,7 @@ module.exports = {
   adapterId,
   packetSchema,
   authorizationId,
+  outputOverrideRepairPackageRef,
   exactActivationPhrase,
   requiredModel,
   currentSideEffectFlags,

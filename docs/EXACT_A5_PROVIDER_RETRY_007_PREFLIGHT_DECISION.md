@@ -90,3 +90,23 @@ This review does not create a new movement plan, reference map, activation
 packet, output directory, provider receipt, review handoff, or durable audit
 entry. The existing `retry_007` preflight packet remains the source of truth for
 candidate boundaries.
+
+## Execution Surface Reuse Review - 2026-05-28
+
+```yaml
+review_id: retry_007_execution_surface_reuse_review_20260528
+review_status: blocked_by_missing_retry_007_output_override
+vcptoolbox_head_reviewed: 94f2f597
+vcptoolbox_route_file_reviewed: A:\VCP\apps\VCPToolBox\routes\admin\aiImageAgents.js
+vcptoolbox_test_file_reviewed: A:\VCP\apps\VCPToolBox\tests\aiImageAgentsRoute.test.js
+current_route_supports_doubaogen_fallback_loading: true
+current_route_supports_explicit_model_passthrough: true
+current_route_supports_exact_output_override_through_retry_006: true
+current_route_authorizes_retry_007_output_override: false
+repair_package_ref: docs/EXACT_A5_PROVIDER_RETRY_007_VCPTOOLBOX_OUTPUT_OVERRIDE_REPAIR_PACKAGE.md
+provider_execution_allowed_now: false
+```
+
+`retry_007` must not proceed to provider execution until the VCPToolBox repair
+package is separately authorized, applied, validated, and the inactive
+activation draft is rechecked.

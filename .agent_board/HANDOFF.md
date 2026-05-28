@@ -1,5 +1,65 @@
 ---
 
+## Current Handoff Update - Retry 007 VCPToolBox Output Override Repair Package
+
+```text
+phase: retry_007_vcptoolbox_output_override_repair_package_20260528
+status: COMPLETED_VALIDATED_PENDING_LOCAL_COMMIT
+mode: Green local repair package; no external repo write
+branch: master
+active_current_phase_reference: v0_3_3_first_live_generation_pilot
+active_source_phase_reference: v0_3_2_live_candidate_action_packet
+active_next_red_decision_reference: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+summary: Added the exact retry_007 VCPToolBox output override repair package in Agent Image Lab and wired the inactive retry_007 activation packet validator to remain blocked until that VCPToolBox repair is separately authorized, applied, and validated. No VCPToolBox file was modified and no new runner was created.
+changed_by_this_task:
+  - docs/EXACT_A5_PROVIDER_RETRY_007_VCPTOOLBOX_OUTPUT_OVERRIDE_REPAIR_PACKAGE.md
+  - docs/EXACT_A5_PROVIDER_RETRY_007_PREFLIGHT_DECISION.md
+  - docs/EXACT_A5_PROVIDER_RETRY_007_ACTIVATION_PACKET_DRAFT.md
+  - adapters/runtime/exact_a5_provider_retry_007_activation_packet_draft.js
+  - scripts/validate_exact_a5_provider_retry_007_activation_packet_draft.js
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+validation:
+  - node --check adapters\runtime\exact_a5_provider_retry_007_activation_packet_draft.js: passed
+  - node --check scripts\validate_exact_a5_provider_retry_007_activation_packet_draft.js: passed
+  - node scripts\validate_exact_a5_provider_retry_007_activation_packet_draft.js: passed
+  - node scripts\validate_exact_a5_provider_retry_007_preflight_decision.js: passed
+  - node scripts\validate_agent_board_state.js: passed
+  - node scripts\validate_autopilot_agent_board_resume_compaction_guard.js: passed
+  - npm run validate:provider-evidence-integrity: passed
+  - npm run validate:mvp: passed
+  - VCPToolBox node --check routes\admin\aiImageAgents.js: passed
+  - VCPToolBox node --test tests\aiImageAgentsRoute.test.js: passed, 10/10
+  - VCPToolBox node --test tests\aiImageExecutionAdapter.test.js: passed, 3/3
+  - VCPToolBox git status --short --branch: clean/synced
+  - git diff --check: passed
+boundaries:
+  runtime_execution_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  accepted_samples_write_performed: false
+  production_candidate_write_performed: false
+  secret_value_read_performed: false
+  env_file_content_read_performed: false
+  dependency_change_performed: false
+  real_vcptoolbox_modified: false
+  real_vcptoolbox_executed: false
+  new_runner_created: false
+  push_status: not_performed
+  tag_release_deploy_performed: false
+  authorization_status: retry_007_activation_packet_draft_not_active
+  authorization_active: false
+  can_execute_now: false
+  provider_execution_allowed_now: false
+next_safe_task: exact-file commit and guarded push if safe; future VCPToolBox repair still requires the exact repair authorization phrase and future provider execution still requires the separate exact activation phrase.
+```
+
 ## Current Handoff Update - Post-Push Sync After Retry 007 Execution Surface Blocker
 
 ```text
