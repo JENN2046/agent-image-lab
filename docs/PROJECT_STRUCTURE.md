@@ -12,8 +12,26 @@ Use these files as the current operating entry points:
 4. `.agent_board/TASK_QUEUE.md`
 5. `.agent_board/HANDOFF.md`
 6. `scripts/validate_mvp.ps1`
+7. `docs/REPOSITORY_ORGANIZATION_STANDARD.md`
 
 Historical phase documents under `docs/` are audit records. They are not active authorization by themselves.
+
+## Repository Organization Standard
+
+`docs/REPOSITORY_ORGANIZATION_STANDARD.md` is the standing local structure
+standard for future agents and maintainers. It defines how to add files,
+classify documentation, place validators and fixtures, preserve Review Console
+boundaries, and prepare any future file movement.
+
+The default rule is:
+
+```text
+index, document, and validate before moving
+```
+
+Do not create new top-level directories, move validator families, relocate
+fixtures, split historical docs, or compact `.agent_board` without following
+that standard and naming the validation that proves the change.
 
 ## Top-Level Directory Map
 
@@ -105,13 +123,17 @@ Current script reality:
 - `scripts/lib/` contains shared validator helpers.
 - `scripts/run_*`, `scripts/execute_*`, and runtime/debug scripts may cross A5 boundaries and must not be run without explicit authorization.
 
-New validators should prefer:
+New validators must default to:
 
 ```text
 scripts/validators/<domain_or_version>/
 ```
 
-Old validators are not moved as part of this policy.
+Root-level `scripts/validate_*.js` files are legacy-compatible entry points.
+Add new root-level validators only for explicit compatibility, small
+repository-wide governance guards, or task-required consistency with an
+existing root-level validator family. Old validators are not moved as part of
+this policy.
 
 ## Validation Gate Semantics
 
@@ -167,6 +189,8 @@ The following remain blocked without explicit A5 authorization:
 
 Prefer small structure patches over broad moves:
 
+- Follow `docs/REPOSITORY_ORGANIZATION_STANDARD.md` before adding or moving
+  repository structure.
 - Add directory README files before moving files.
 - Mark legacy paths before deleting or relocating them.
 - Keep old phase docs as historical records.

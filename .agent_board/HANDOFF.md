@@ -5,7 +5,7 @@
 ```text
 phase: readonly_operator_console_evidence_traceability_hardening
 slice: display_only_evidence_traceability
-status: COMPLETED_VALIDATED_NO_COMMIT_NO_PUSH
+status: COMPLETED_VALIDATED_WITH_WARNINGS_NO_COMMIT_NO_PUSH
 mode: Green local static Review Console evidence hardening
 branch: master
 summary: Added a Chinese "判断证据链" section to `review_console/static_prototype/readonly_operator_console.html`. Operators can now see compact evidence cards for selected patch, blocking points, next_review_action, reject never_production, failure taxonomy, metadata accumulation route, and readonly boundary. The page remains static and display-only; no readonly artifact semantics changed.
@@ -24785,4 +24785,43 @@ VCP_memory_write_performed: false
 dependency_change_performed: false
 push_performed: false
 next_safe_task: exact-file local commit, post-commit validate:mvp rerun, then decide whether to start runtime contract spec as a new scoped phase
+```
+---
+
+## Current Handoff Update - Repository Structure Governance Baseline
+
+```text
+phase: repository_structure_governance_baseline
+slice: organization_standard_and_guard_validator
+status: COMPLETED_VALIDATED_NO_COMMIT_NO_PUSH
+mode: Green local repository structure governance
+branch: master
+summary: Established a durable repository organization standard and validator before doing physical structure optimization. This slice is documentation and validation only: no files were moved, no package scripts were added, and no runtime/provider/memory/production boundary was crossed.
+changed_by_this_task:
+  - docs/REPOSITORY_ORGANIZATION_STANDARD.md
+  - docs/PROJECT_STRUCTURE.md
+  - scripts/validators/README.md
+  - scripts/validate_repository_structure_governance.js
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+validation:
+  - node --check scripts\validate_repository_structure_governance.js: passed
+  - node scripts\validate_repository_structure_governance.js: passed
+  - node scripts\validate_agent_board_state.js: passed
+  - git diff --check: passed with CRLF normalization warnings only
+  - powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1: failed on historical/status-surface validators outside this slice; not repaired here
+boundaries:
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  production_candidate_002_started: false
+  Batch_005_started: false
+  commit_performed: false
+  push_performed: false
+next_safe_task: review diff, then decide whether to commit or first open a separate .agent_board historical validator reconciliation slice.
 ```

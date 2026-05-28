@@ -5,7 +5,7 @@
 ```text
 phase: readonly_operator_console_evidence_traceability_hardening
 slice: display_only_evidence_traceability
-status: completed_validated_no_commit_no_push
+status: completed_validated_with_warnings_no_commit_no_push
 result: PASS
 mode: Green local static Review Console evidence hardening
 summary: Upgraded the readonly operator console from a conclusion-only driving surface into a reviewable evidence surface. The page now includes a Chinese "判断证据链" section with seven compact evidence cards covering selected patch, blocking points, next_review_action, reject never_production, failure taxonomy, metadata accumulation route, and readonly boundary. The section displays source layers without exposing raw JSON or changing artifact semantics.
@@ -39442,3 +39442,42 @@ Validation:
 - npm run validate:mvp: passed
 
 Next: local commit, post-commit review, and Push_L3 manual guarded push classification.
+---
+
+## Checkpoint - Repository Structure Governance Baseline
+
+```text
+phase: repository_structure_governance_baseline
+slice: organization_standard_and_guard_validator
+status: completed_validated_no_commit_no_push
+mode: Green local repository structure governance
+summary: Established a repository organization standard before any structure optimization. This first slice makes future directory, validator, documentation, fixture, Review Console, asset/run, and .agent_board changes follow one documented rule set.
+changed_files_current_task:
+  - docs/REPOSITORY_ORGANIZATION_STANDARD.md
+  - docs/PROJECT_STRUCTURE.md
+  - scripts/validators/README.md
+  - scripts/validate_repository_structure_governance.js
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+validation_run:
+  - node --check scripts\validate_repository_structure_governance.js: passed
+  - node scripts\validate_repository_structure_governance.js: passed
+  - node scripts\validate_agent_board_state.js: passed
+  - git diff --check: passed with CRLF normalization warnings only
+  - powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1: failed on historical/status-surface validators outside this slice; not repaired here
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+memory_written: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+production_candidate_002_started: false
+Batch_005_started: false
+commit_performed: false
+push_performed: false
+tag_release_deploy_performed: false
+recommended_next_phase: review_diff_then_commit_or_open_agent_board_historical_validator_reconciliation
+```

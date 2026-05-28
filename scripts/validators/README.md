@@ -1,6 +1,8 @@
 # Validator Layout Policy
 
-This directory is the preferred home for new validators.
+This directory is the default home for new validators. The repository-wide
+organization rules live in `docs/REPOSITORY_ORGANIZATION_STANDARD.md`; this
+file is the validator-specific entry point for those rules.
 
 Current reality:
 
@@ -9,7 +11,7 @@ Current reality:
 - `scripts/lib/` remains the shared helper location.
 - No old validator is moved by this policy.
 
-Preferred future layout:
+Default layout for new validators:
 
 ```text
 scripts/validators/
@@ -21,6 +23,12 @@ scripts/validators/
 
 Rules for new validators:
 
+- Default to `scripts/validators/<domain_or_version>/`.
+- Use root-level `scripts/validate_*.js` only for explicit compatibility,
+  small repository-wide governance guards, or task-required consistency with an
+  existing root-level validator family.
+- If a root-level validator is added, document why it stays at root or how it
+  will be wrapped later.
 - Keep domain logic in shared helpers when it is reused by multiple validators.
 - Keep validator outputs structured and machine-checkable.
 - Avoid relying only on markdown token checks when a schema or JSON fixture can represent the state.

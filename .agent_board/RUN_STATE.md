@@ -5,7 +5,7 @@
 ```text
 phase: readonly_operator_console_evidence_traceability_hardening
 slice: display_only_evidence_traceability
-status: COMPLETED_VALIDATED_NO_COMMIT_NO_PUSH
+status: COMPLETED_VALIDATED_WITH_WARNINGS_NO_COMMIT_NO_PUSH
 mode: Green local static Review Console evidence hardening
 branch: master
 goal: Make the readonly operator console reviewable by showing evidence sources for selected patch, blocking points, next_review_action, reject never_production, failure taxonomy, metadata accumulation route, and readonly boundary.
@@ -27630,4 +27630,33 @@ push_allowed: false
 commit_performed: pending
 push_performed: false
 recommended_next: local_commit_post_commit_review_and_Push_L3_manual_guarded_classification
+```
+---
+
+## Current Run State - Repository Structure Governance Baseline
+
+```text
+phase: repository_structure_governance_baseline
+slice: organization_standard_and_guard_validator
+status: COMPLETED_VALIDATED_NO_COMMIT_NO_PUSH
+mode: Green local repository structure governance
+branch: master
+goal: Establish a durable repository organization standard so future agents and maintainers know where new docs, validators, fixtures, Review Console records, asset evidence, and .agent_board updates belong before any broad restructure is attempted.
+completed:
+- Add `docs/REPOSITORY_ORGANIZATION_STANDARD.md` as the active structure standard.
+- Link it from `docs/PROJECT_STRUCTURE.md`.
+- Promote `scripts/validators/README.md` from preferred layout guidance to default validator layout guidance.
+- Add a local validator that fails closed when the organization standard is missing or drifts into movement/execution authorization.
+validation:
+- node --check scripts\validate_repository_structure_governance.js: passed
+- node scripts\validate_repository_structure_governance.js: passed
+- node scripts\validate_agent_board_state.js: passed
+- git diff --check: passed with CRLF normalization warnings only
+- powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1: failed on historical/status-surface validators outside this slice; not repaired here
+boundary:
+- no file movement
+- no directory deletion
+- no package or dependency changes
+- no provider contact, plugin call, API call, image generation, DailyNote/VCP memory write, production candidate, Batch 005, runtime integration, commit, push, tag, release, deploy, or destructive action
+next_safe_task: review diff, then decide whether to commit or first open a separate .agent_board historical validator reconciliation slice
 ```

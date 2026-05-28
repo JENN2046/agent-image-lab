@@ -3,7 +3,7 @@
 - [x] ID: readonly_operator_console_evidence_traceability_hardening
       Slice: display_only_evidence_traceability.
       Lane: Green local static Review Console evidence hardening.
-      Status: completed_validated_no_commit_no_push.
+      Status: completed_validated_with_warnings_no_commit_no_push.
       Goal: Make the readonly operator console reviewable by showing evidence sources for selected patch, blocking points, next_review_action, reject never_production, failure taxonomy, metadata accumulation route, and readonly boundary.
       Completed: added the Chinese "判断证据链" section with seven evidence cards; source labels are Chinese-first; validator now fails closed on missing evidence mounts, missing evidence ids, selected source drift, reject hard-guard drift, metadata route drift, and readonly boundary softening.
       Boundary: no artifact semantics, canonical protocol, taxonomy, accumulation, bridge, bundle, provider contact, plugin call, API call, image generation, DailyNote/VCP memory, production candidate, package script, dependency change, commit, push, tag, release, deploy, or destructive action.
@@ -19546,3 +19546,17 @@ recommended_next: asset_hash_dimensions_verification_A5_requires_separate_author
       Stop condition: provider call, image generation, memory write, DailyNote write, runtime/VCPToolBox/VCPChat/CDP/bridge/MCP action, real executor implementation, Push_L2 test, accepted_sample promotion, production_candidate creation, memory_seed promotion, dependency change, secret read, git add ., push, tag, release, deploy, or validation failure requiring judgment.
       Recommended next: local commit, post-commit review, and Push_L3 manual guarded push classification.
 ---
+---
+
+- [x] ID: repository_structure_governance_baseline
+      Slice: organization_standard_and_guard_validator.
+      Lane: Green local repository structure governance.
+      Status: completed_validated_no_commit_no_push.
+      Goal: Establish a durable repository organization standard and a lightweight validator so future agents and maintainers follow one structure rule set before adding, moving, or classifying repository files.
+      Completed:
+      - Add `docs/REPOSITORY_ORGANIZATION_STANDARD.md`.
+      - Link the standard from `docs/PROJECT_STRUCTURE.md`.
+      - Tighten `scripts/validators/README.md` around the default validator layout.
+      - Add `scripts/validate_repository_structure_governance.js`.
+      Boundary: no physical file movement, deletion, package change, dependency change, provider/plugin/API/image/memory/production/runtime action, commit, push, tag, release, deploy, or destructive command.
+      Validation: repository structure governance validator passed; agent board validator passed; git diff --check passed with CRLF normalization warnings only; validate_mvp.ps1 failed on historical/status-surface validators outside this slice and was not repaired here.
