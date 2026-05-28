@@ -1,5 +1,94 @@
 ---
 
+## Current Run State - Repository Directory Optimization Readonly Operator Console Validator Split
+
+```text
+phase: repository_directory_optimization_readonly_operator_console_validator_split
+slice: readonly_operator_console_validator_move_with_root_wrapper
+status: COMPLETED_VALIDATED_NO_COMMIT_NO_PUSH
+mode: Green local repository directory optimization
+branch: master
+goal: Use the smallest validator family as a complete migration sample by moving the readonly operator console validator implementation under scripts/validators/readonly_operator_console while preserving the root command.
+completed:
+- Moved the implementation to `scripts/validators/readonly_operator_console/validate_readonly_operator_console_static_surface.js`.
+- Kept `scripts/validate_readonly_operator_console_static_surface.js` as a root compatibility wrapper.
+- Updated `scripts/validators/VALIDATOR_INDEX.md`, `scripts/validators/README.md`, and `docs/PROJECT_STRUCTURE.md`.
+- Extended `scripts/validators/governance/validate_repository_structure_governance.js` to check the readonly operator console wrapper and implementation paths.
+validation:
+- node --check scripts\validate_readonly_operator_console_static_surface.js: passed
+- node --check scripts\validators\readonly_operator_console\validate_readonly_operator_console_static_surface.js: passed
+- node scripts\validate_readonly_operator_console_static_surface.js: passed
+- node scripts\validators\readonly_operator_console\validate_readonly_operator_console_static_surface.js: passed
+- node scripts\validate_repository_structure_governance.js: passed
+boundary:
+- no package or dependency changes
+- no provider contact, plugin call, API call, image generation, DailyNote/VCP memory write, production candidate, Batch 005, runtime integration, commit, push, tag, release, deploy, or destructive action
+next_safe_task: final agent board validator, diff check, and status; then exact-file guarded commit only if requested
+```
+
+---
+
+## Current Run State - Repository Directory Optimization Validator Index Slice
+
+```text
+phase: repository_directory_optimization_validator_index_slice
+slice: root_validator_bucket_index
+status: COMPLETED_VALIDATED_NO_COMMIT_NO_PUSH
+mode: Green local repository directory optimization
+branch: master
+goal: Make the root validator surface discoverable before further physical movement by adding a bucketed validator index and machine-checking its counts.
+completed:
+- Added `scripts/validators/VALIDATOR_INDEX.md`.
+- Recorded current root `validate_*.js` total and domain buckets.
+- Updated `docs/PROJECT_STRUCTURE.md` and `scripts/validators/README.md` to point to the index.
+- Extended `scripts/validators/governance/validate_repository_structure_governance.js` to dynamically verify the root validator total and bucket counts.
+current_root_validator_total: 570
+largest_buckets:
+- legacy_versioned: 289
+- other: 181
+- readonly_visual_review: 21
+- runtime: 21
+validation:
+- node --check scripts\validators\governance\validate_repository_structure_governance.js: passed
+- node scripts\validate_repository_structure_governance.js: passed
+- node scripts\validators\governance\validate_repository_structure_governance.js: passed
+boundary:
+- no broad validator movement
+- no package or dependency changes
+- no provider contact, plugin call, API call, image generation, DailyNote/VCP memory write, production candidate, Batch 005, runtime integration, commit, push, tag, release, deploy, or destructive action
+next_safe_task: run final agent board validator, diff check, and status; then exact-file guarded commit only if requested
+```
+
+---
+
+## Current Run State - Repository Directory Optimization Validator Governance Slice
+
+```text
+phase: repository_directory_optimization_validator_governance_slice
+slice: governance_validator_directory_split_with_root_wrapper
+status: COMPLETED_VALIDATED_NO_COMMIT_NO_PUSH
+mode: Green local repository directory optimization
+branch: master
+goal: Start directory optimization with the smallest compatible physical split by moving the repository structure governance validator implementation under scripts/validators/governance while preserving the root command as a compatibility wrapper.
+completed:
+- Moved the implementation to `scripts/validators/governance/validate_repository_structure_governance.js`.
+- Kept `scripts/validate_repository_structure_governance.js` as a root compatibility wrapper.
+- Updated `docs/PROJECT_STRUCTURE.md` and `scripts/validators/README.md` to document the governance validator location.
+- Extended the validator to check both wrapper and implementation paths.
+validation:
+- node --check scripts\validate_repository_structure_governance.js: passed
+- node --check scripts\validators\governance\validate_repository_structure_governance.js: passed
+- node scripts\validate_repository_structure_governance.js: passed
+- node scripts\validators\governance\validate_repository_structure_governance.js: passed
+boundary:
+- no broad directory movement
+- no package or dependency changes
+- no provider contact, plugin call, API call, image generation, DailyNote/VCP memory write, production candidate, Batch 005, runtime integration, commit, push, tag, release, deploy, or destructive action
+next_safe_task: run agent board validator, diff check, and status; then exact-file guarded commit only if requested
+```
+
+---
+
 ## Current Run State - Readonly Operator Console Evidence Traceability Hardening
 
 ```text

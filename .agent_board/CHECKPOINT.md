@@ -1,5 +1,127 @@
 ---
 
+## Checkpoint - Repository Directory Optimization Readonly Operator Console Validator Split
+
+```text
+phase: repository_directory_optimization_readonly_operator_console_validator_split
+slice: readonly_operator_console_validator_move_with_root_wrapper
+status: completed_validated_no_commit_no_push
+result: PASS
+mode: Green local repository directory optimization
+summary: Completed the smallest physical validator family split. The readonly operator console validator implementation now lives under `scripts/validators/readonly_operator_console/`, while the root validator path remains a compatibility wrapper and the governance validator checks both paths.
+changed_files_current_task:
+  - scripts/validate_readonly_operator_console_static_surface.js
+  - scripts/validators/readonly_operator_console/validate_readonly_operator_console_static_surface.js
+  - scripts/validators/VALIDATOR_INDEX.md
+  - scripts/validators/governance/validate_repository_structure_governance.js
+  - docs/PROJECT_STRUCTURE.md
+  - scripts/validators/README.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+validation_run:
+  - node --check scripts\validate_readonly_operator_console_static_surface.js: passed
+  - node --check scripts\validators\readonly_operator_console\validate_readonly_operator_console_static_surface.js: passed
+  - node scripts\validate_readonly_operator_console_static_surface.js: passed
+  - node scripts\validators\readonly_operator_console\validate_readonly_operator_console_static_surface.js: passed
+  - node scripts\validate_repository_structure_governance.js: passed
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+memory_written: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+production_candidate_002_started: false
+Batch_005_started: false
+commit_performed: false
+push_performed: false
+tag_release_deploy_performed: false
+recommended_next_phase: commit_validator_directory_optimization_or_continue_review_console_family_split
+```
+
+---
+
+## Checkpoint - Repository Directory Optimization Validator Index Slice
+
+```text
+phase: repository_directory_optimization_validator_index_slice
+slice: root_validator_bucket_index
+status: completed_validated_no_commit_no_push
+result: PASS
+mode: Green local repository directory optimization
+summary: Added a validator discovery index before further physical movement. The index records the current root `validate_*.js` total and bucket distribution, and the governance validator now fails closed if the index drifts from the filesystem.
+changed_files_current_task:
+  - scripts/validators/VALIDATOR_INDEX.md
+  - scripts/validators/governance/validate_repository_structure_governance.js
+  - docs/PROJECT_STRUCTURE.md
+  - scripts/validators/README.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+validation_run:
+  - node --check scripts\validators\governance\validate_repository_structure_governance.js: passed
+  - node scripts\validate_repository_structure_governance.js: passed
+  - node scripts\validators\governance\validate_repository_structure_governance.js: passed
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+memory_written: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+production_candidate_002_started: false
+Batch_005_started: false
+commit_performed: false
+push_performed: false
+tag_release_deploy_performed: false
+recommended_next_phase: continue_small_validator_family_split_or_commit_if_requested
+```
+
+---
+
+## Checkpoint - Repository Directory Optimization Validator Governance Slice
+
+```text
+phase: repository_directory_optimization_validator_governance_slice
+slice: governance_validator_directory_split_with_root_wrapper
+status: completed_validated_no_commit_no_push
+result: PASS
+mode: Green local repository directory optimization
+summary: Started physical directory optimization with a minimal compatible validator split. The repository structure governance validator implementation now lives under `scripts/validators/governance/`, while the root `scripts/validate_repository_structure_governance.js` path remains callable as a compatibility wrapper.
+changed_files_current_task:
+  - scripts/validate_repository_structure_governance.js
+  - scripts/validators/governance/validate_repository_structure_governance.js
+  - docs/PROJECT_STRUCTURE.md
+  - scripts/validators/README.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+validation_run:
+  - node --check scripts\validate_repository_structure_governance.js: passed
+  - node --check scripts\validators\governance\validate_repository_structure_governance.js: passed
+  - node scripts\validate_repository_structure_governance.js: passed
+  - node scripts\validators\governance\validate_repository_structure_governance.js: passed
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+memory_written: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+production_candidate_002_started: false
+Batch_005_started: false
+commit_performed: false
+push_performed: false
+tag_release_deploy_performed: false
+recommended_next_phase: continue_validator_directory_index_or_commit_if_requested
+```
+
+---
+
 ## Checkpoint - Readonly Operator Console Evidence Traceability Hardening
 
 ```text

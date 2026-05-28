@@ -1,5 +1,38 @@
 ---
 
+- [x] ID: repository_directory_optimization_readonly_operator_console_validator_split
+      Slice: readonly_operator_console_validator_move_with_root_wrapper.
+      Lane: Green local repository directory optimization.
+      Status: completed_validated_no_commit_no_push.
+      Goal: Use the one-file readonly operator console validator family as the sample for physical validator movement with a root compatibility wrapper.
+      Completed: implementation moved to `scripts/validators/readonly_operator_console/`; root wrapper retained; index/docs updated; governance validator now checks both paths.
+      Boundary: no package/dependency change, provider/plugin/API/image/memory/production/runtime action, commit, push, tag, release, deploy, or destructive command.
+      Validation: readonly operator console validator passed from both root wrapper and implementation path; governance validator passed.
+
+---
+
+- [x] ID: repository_directory_optimization_validator_index_slice
+      Slice: root_validator_bucket_index.
+      Lane: Green local repository directory optimization.
+      Status: completed_validated_no_commit_no_push.
+      Goal: Add a discoverable root validator index before further physical validator movement.
+      Completed: added `scripts/validators/VALIDATOR_INDEX.md`; recorded root validator total 570 and bucket counts; extended the governance validator to dynamically check the index.
+      Boundary: no broad validator movement, package/dependency change, provider/plugin/API/image/memory/production/runtime action, commit, push, tag, release, deploy, or destructive command.
+      Validation: governance validator syntax and runtime passed through both root wrapper and implementation path.
+
+---
+
+- [x] ID: repository_directory_optimization_validator_governance_slice
+      Slice: governance_validator_directory_split_with_root_wrapper.
+      Lane: Green local repository directory optimization.
+      Status: completed_validated_no_commit_no_push.
+      Goal: Start directory optimization by moving one governance validator implementation under `scripts/validators/governance/` while preserving the root validator command as a compatibility wrapper.
+      Completed: implementation moved; root wrapper retained; structure docs updated; validator now checks wrapper and implementation paths.
+      Boundary: no broad directory movement, package/dependency change, provider/plugin/API/image/memory/production/runtime action, commit, push, tag, release, deploy, or destructive command.
+      Validation: root and implementation syntax checks passed; root and implementation validator runs passed.
+
+---
+
 - [x] ID: readonly_operator_console_evidence_traceability_hardening
       Slice: display_only_evidence_traceability.
       Lane: Green local static Review Console evidence hardening.

@@ -1,5 +1,124 @@
 ---
 
+## Current Handoff Update - Repository Directory Optimization Readonly Operator Console Validator Split
+
+```text
+phase: repository_directory_optimization_readonly_operator_console_validator_split
+slice: readonly_operator_console_validator_move_with_root_wrapper
+status: COMPLETED_VALIDATED_NO_COMMIT_NO_PUSH
+mode: Green local repository directory optimization
+branch: master
+summary: Completed the smallest validator family split. `scripts/validate_readonly_operator_console_static_surface.js` remains callable as the root compatibility wrapper, and the implementation moved to `scripts/validators/readonly_operator_console/validate_readonly_operator_console_static_surface.js`.
+changed_by_this_task:
+  - scripts/validate_readonly_operator_console_static_surface.js
+  - scripts/validators/readonly_operator_console/validate_readonly_operator_console_static_surface.js
+  - scripts/validators/VALIDATOR_INDEX.md
+  - scripts/validators/governance/validate_repository_structure_governance.js
+  - docs/PROJECT_STRUCTURE.md
+  - scripts/validators/README.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+validation:
+  - node --check scripts\validate_readonly_operator_console_static_surface.js: passed
+  - node --check scripts\validators\readonly_operator_console\validate_readonly_operator_console_static_surface.js: passed
+  - node scripts\validate_readonly_operator_console_static_surface.js: passed
+  - node scripts\validators\readonly_operator_console\validate_readonly_operator_console_static_surface.js: passed
+  - node scripts\validate_repository_structure_governance.js: passed
+boundaries:
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  production_candidate_002_started: false
+  Batch_005_started: false
+  commit_performed: false
+  push_performed: false
+next_safe_task: run final agent board validator, diff check, and status; commit only if explicitly requested.
+```
+
+---
+
+## Current Handoff Update - Repository Directory Optimization Validator Index Slice
+
+```text
+phase: repository_directory_optimization_validator_index_slice
+slice: root_validator_bucket_index
+status: COMPLETED_VALIDATED_NO_COMMIT_NO_PUSH
+mode: Green local repository directory optimization
+branch: master
+summary: Added `scripts/validators/VALIDATOR_INDEX.md` so the current 570 root JavaScript validators are discoverable by bucket before further movement. The governance validator now recomputes root validator total and bucket counts and fails closed if the index drifts.
+changed_by_this_task:
+  - scripts/validators/VALIDATOR_INDEX.md
+  - scripts/validators/governance/validate_repository_structure_governance.js
+  - docs/PROJECT_STRUCTURE.md
+  - scripts/validators/README.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+validation:
+  - node --check scripts\validators\governance\validate_repository_structure_governance.js: passed
+  - node scripts\validate_repository_structure_governance.js: passed
+  - node scripts\validators\governance\validate_repository_structure_governance.js: passed
+boundaries:
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  production_candidate_002_started: false
+  Batch_005_started: false
+  commit_performed: false
+  push_performed: false
+next_safe_task: run final agent board validator, diff check, and status; commit only if explicitly requested.
+```
+
+---
+
+## Current Handoff Update - Repository Directory Optimization Validator Governance Slice
+
+```text
+phase: repository_directory_optimization_validator_governance_slice
+slice: governance_validator_directory_split_with_root_wrapper
+status: COMPLETED_VALIDATED_NO_COMMIT_NO_PUSH
+mode: Green local repository directory optimization
+branch: master
+summary: Started directory optimization with the smallest compatible physical split: the repository structure governance validator implementation moved under `scripts/validators/governance/`, and the root validator path remains a wrapper so old commands keep working.
+changed_by_this_task:
+  - scripts/validate_repository_structure_governance.js
+  - scripts/validators/governance/validate_repository_structure_governance.js
+  - docs/PROJECT_STRUCTURE.md
+  - scripts/validators/README.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+validation:
+  - node --check scripts\validate_repository_structure_governance.js: passed
+  - node --check scripts\validators\governance\validate_repository_structure_governance.js: passed
+  - node scripts\validate_repository_structure_governance.js: passed
+  - node scripts\validators\governance\validate_repository_structure_governance.js: passed
+boundaries:
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  production_candidate_002_started: false
+  Batch_005_started: false
+  commit_performed: false
+  push_performed: false
+next_safe_task: run final agent board validator, diff check, and status; commit only if explicitly requested.
+```
+
+---
+
 ## Current Handoff Update - Readonly Operator Console Evidence Traceability Hardening
 
 ```text

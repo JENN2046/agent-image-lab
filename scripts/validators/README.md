@@ -4,6 +4,9 @@ This directory is the default home for new validators. The repository-wide
 organization rules live in `docs/REPOSITORY_ORGANIZATION_STANDARD.md`; this
 file is the validator-specific entry point for those rules.
 
+Use `scripts/validators/VALIDATOR_INDEX.md` to inspect the current root
+validator buckets before moving or wrapping any validator family.
+
 Current reality:
 
 - Existing historical validators remain at `scripts/validate_v*.js`.
@@ -17,9 +20,30 @@ Default layout for new validators:
 scripts/validators/
   core/
   artifact_recoverability/
+  governance/
   review_console/
   v14/
 ```
+
+Current governance validators:
+
+- `scripts/validators/governance/validate_repository_structure_governance.js`
+  is the implementation for the repository organization standard guard.
+- `scripts/validate_repository_structure_governance.js` is a root
+  compatibility wrapper so existing commands keep working.
+
+Current readonly operator console validators:
+
+- `scripts/validators/readonly_operator_console/validate_readonly_operator_console_static_surface.js`
+  is the implementation for the static readonly operator console surface guard.
+- `scripts/validate_readonly_operator_console_static_surface.js` is a root
+  compatibility wrapper so existing commands and README instructions keep
+  working.
+
+Current root validator index:
+
+- `scripts/validators/VALIDATOR_INDEX.md` records the current root
+  `validate_*.js` count and domain buckets.
 
 Rules for new validators:
 

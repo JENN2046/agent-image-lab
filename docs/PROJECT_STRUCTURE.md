@@ -121,6 +121,9 @@ Current script reality:
 - `scripts/validate_mvp.ps1` is the aggregate validation entry point.
 - `scripts/validate_v*.js` are historical/versioned validators and remain in place for now.
 - `scripts/lib/` contains shared validator helpers.
+- `scripts/validators/VALIDATOR_INDEX.md` is the current root validator discovery index.
+- `scripts/validators/governance/` contains repository structure and governance validators with root compatibility wrappers when needed.
+- `scripts/validators/readonly_operator_console/` contains readonly operator console validators with root compatibility wrappers.
 - `scripts/run_*`, `scripts/execute_*`, and runtime/debug scripts may cross A5 boundaries and must not be run without explicit authorization.
 
 New validators must default to:
