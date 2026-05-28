@@ -27780,3 +27780,32 @@ boundary:
 - no provider contact, plugin call, API call, image generation, DailyNote/VCP memory write, production candidate, Batch 005, runtime integration, commit, push, tag, release, deploy, or destructive action
 next_safe_task: inspect final diff and exact-file local commit only if requested
 ```
+---
+
+## Current Run State - Repository Directory Optimization Readonly Visual Review Validator Split
+
+```text
+phase: repository_directory_optimization_readonly_visual_review_validator_split
+slice: readonly_visual_review_validator_family_move_with_root_wrappers
+status: completed_validated_no_commit_no_push
+mode: Green local repository directory optimization
+branch: master
+goal: Move the 21-file readonly visual review validator family under `scripts/validators/readonly_visual_review/` while keeping root commands stable.
+completed:
+- Moved implementation files to `scripts/validators/readonly_visual_review/`.
+- Kept root `scripts/validate_visual_eval_readonly_*.js` files as compatibility wrappers.
+- Updated `scripts/validators/VALIDATOR_INDEX.md`, `scripts/validators/README.md`, and `docs/PROJECT_STRUCTURE.md`.
+- Extended `scripts/validators/governance/validate_repository_structure_governance.js` to check readonly visual review wrapper and implementation paths.
+validation:
+- node --check root readonly_visual_review validators: passed for 21 files
+- node --check implementation readonly_visual_review validators: passed for 21 files
+- node root readonly_visual_review validators: passed for 21 files
+- node implementation readonly_visual_review validators: passed for 21 files
+- node --check scripts\validate_repository_structure_governance.js: passed
+- node --check scripts\validators\governance\validate_repository_structure_governance.js: passed
+- node scripts\validate_repository_structure_governance.js: passed
+boundary:
+- no package/dependency change
+- no provider contact, plugin call, API call, image generation, DailyNote/VCP memory write, production candidate, Batch 005, runtime integration, commit, push, tag, release, deploy, or destructive action
+next_safe_task: run agent board validator, diff check, and status; commit only if explicitly requested
+```

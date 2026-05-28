@@ -39665,3 +39665,47 @@ push_performed: false
 tag_release_deploy_performed: false
 recommended_next_phase: commit_review_console_validator_family_split_if_requested
 ```
+---
+
+## Checkpoint - Repository Directory Optimization Readonly Visual Review Validator Split
+
+```text
+phase: repository_directory_optimization_readonly_visual_review_validator_split
+slice: readonly_visual_review_validator_family_move_with_root_wrappers
+status: completed_validated_no_commit_no_push
+result: PASS
+mode: Green local repository directory optimization
+summary: Moved the 21-file `scripts/validate_visual_eval_readonly_*.js` family implementation under `scripts/validators/readonly_visual_review/` while preserving root compatibility wrappers for artifact catalog refs, package validators, README commands, and historical phase records.
+changed_files_current_task:
+  - scripts/validate_visual_eval_readonly_*.js
+  - scripts/validators/readonly_visual_review/validate_visual_eval_readonly_*.js
+  - scripts/validators/VALIDATOR_INDEX.md
+  - scripts/validators/governance/validate_repository_structure_governance.js
+  - scripts/validators/README.md
+  - docs/PROJECT_STRUCTURE.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+validation_run:
+  - node --check root readonly_visual_review validators: passed for 21 files
+  - node --check implementation readonly_visual_review validators: passed for 21 files
+  - node root readonly_visual_review validators: passed for 21 files
+  - node implementation readonly_visual_review validators: passed for 21 files
+  - node --check scripts\validate_repository_structure_governance.js: passed
+  - node --check scripts\validators\governance\validate_repository_structure_governance.js: passed
+  - node scripts\validate_repository_structure_governance.js: passed
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+memory_written: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+production_candidate_002_started: false
+Batch_005_started: false
+commit_performed: false
+push_performed: false
+tag_release_deploy_performed: false
+recommended_next_phase: continue_governance_directory_optimization_or_commit_if_requested
+```

@@ -25005,3 +25005,46 @@ boundaries:
   push_performed: false
 next_safe_task: inspect final diff and exact-file local commit only if explicitly requested.
 ```
+---
+
+## Current Handoff Update - Repository Directory Optimization Readonly Visual Review Validator Split
+
+```text
+phase: repository_directory_optimization_readonly_visual_review_validator_split
+slice: readonly_visual_review_validator_family_move_with_root_wrappers
+status: COMPLETED_VALIDATED_NO_COMMIT_NO_PUSH
+mode: Green local repository directory optimization
+branch: master
+summary: The 21-file `scripts/validate_visual_eval_readonly_*.js` family has been migrated into `scripts/validators/readonly_visual_review/` as implementations, with root wrappers preserved so artifact catalog refs, package validators, README commands, and historical phase records keep working.
+changed_by_this_task:
+  - scripts/validate_visual_eval_readonly_*.js
+  - scripts/validators/readonly_visual_review/validate_visual_eval_readonly_*.js
+  - scripts/validators/VALIDATOR_INDEX.md
+  - scripts/validators/governance/validate_repository_structure_governance.js
+  - scripts/validators/README.md
+  - docs/PROJECT_STRUCTURE.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+validation:
+  - node --check root readonly_visual_review validators: passed for 21 files
+  - node --check implementation readonly_visual_review validators: passed for 21 files
+  - node root readonly_visual_review validators: passed for 21 files
+  - node implementation readonly_visual_review validators: passed for 21 files
+  - node --check scripts\validate_repository_structure_governance.js: passed
+  - node --check scripts\validators\governance\validate_repository_structure_governance.js: passed
+  - node scripts\validate_repository_structure_governance.js: passed
+boundaries:
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  production_candidate_002_started: false
+  Batch_005_started: false
+  commit_performed: false
+  push_performed: false
+next_safe_task: run final agent-board validator, diff check, and status; commit only if explicitly requested.
+```

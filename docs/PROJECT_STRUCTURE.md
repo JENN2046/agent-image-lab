@@ -125,6 +125,7 @@ Current script reality:
 - `scripts/validators/governance/` contains repository structure and governance validators with root compatibility wrappers when needed.
 - `scripts/validators/readonly_operator_console/` contains readonly operator console validators with root compatibility wrappers.
 - `scripts/validators/review_console/` contains Review Console validator implementations with root compatibility wrappers for `scripts/validate_review_console*.js`.
+- `scripts/validators/readonly_visual_review/` contains readonly visual review artifact-chain validator implementations with root compatibility wrappers for `scripts/validate_visual_eval_readonly_*.js`.
 - `scripts/run_*`, `scripts/execute_*`, and runtime/debug scripts may cross A5 boundaries and must not be run without explicit authorization.
 
 New validators must default to:

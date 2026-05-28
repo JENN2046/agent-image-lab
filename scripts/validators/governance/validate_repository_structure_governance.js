@@ -106,6 +106,33 @@ function main() {
     wrapperPath: `scripts/${fileName}`,
     implementationPath: `scripts/validators/review_console/${fileName}`,
   }));
+  const readonlyVisualReviewValidatorFiles = [
+    "validate_visual_eval_readonly_artifact_graph.js",
+    "validate_visual_eval_readonly_metadata_accumulation_queue.js",
+    "validate_visual_eval_readonly_metadata_accumulation_queue_consumer.js",
+    "validate_visual_eval_readonly_metadata_accumulation_queue_detail_navigation.js",
+    "validate_visual_eval_readonly_metadata_accumulation_queue_detail_view.js",
+    "validate_visual_eval_readonly_metadata_accumulation_queue_query.js",
+    "validate_visual_eval_readonly_metadata_accumulation_queue_surface_snapshot.js",
+    "validate_visual_eval_readonly_review_artifact_catalog.js",
+    "validate_visual_eval_readonly_review_artifact_system.js",
+    "validate_visual_eval_readonly_review_bundle.js",
+    "validate_visual_eval_readonly_review_bundle_consumer.js",
+    "validate_visual_eval_readonly_review_collection_consumer.js",
+    "validate_visual_eval_readonly_review_collection_query.js",
+    "validate_visual_eval_readonly_review_corpus_renderer.js",
+    "validate_visual_eval_readonly_review_detail_navigation.js",
+    "validate_visual_eval_readonly_review_detail_view.js",
+    "validate_visual_eval_readonly_review_session_drilldown.js",
+    "validate_visual_eval_readonly_review_surface_snapshot.js",
+    "validate_visual_eval_readonly_review_workspace.js",
+    "validate_visual_eval_readonly_review_workspace_case_matrix.js",
+    "validate_visual_eval_readonly_review_workspace_corpus.js",
+  ];
+  const readonlyVisualReviewValidatorPaths = readonlyVisualReviewValidatorFiles.map((fileName) => ({
+    wrapperPath: `scripts/${fileName}`,
+    implementationPath: `scripts/validators/readonly_visual_review/${fileName}`,
+  }));
 
   add("repository_organization_standard_exists", exists(standardPath), standardPath);
   add("project_structure_exists", exists(structurePath), structurePath);
@@ -121,6 +148,14 @@ function main() {
       `review_console_implementation_exists_${path.basename(reviewConsoleImplementationPath, ".js")}`,
       exists(reviewConsoleImplementationPath),
       reviewConsoleImplementationPath
+    );
+  }
+  for (const { wrapperPath, implementationPath: readonlyVisualReviewImplementationPath } of readonlyVisualReviewValidatorPaths) {
+    add(`readonly_visual_review_wrapper_exists_${path.basename(wrapperPath, ".js")}`, exists(wrapperPath), wrapperPath);
+    add(
+      `readonly_visual_review_implementation_exists_${path.basename(readonlyVisualReviewImplementationPath, ".js")}`,
+      exists(readonlyVisualReviewImplementationPath),
+      readonlyVisualReviewImplementationPath
     );
   }
 
@@ -226,6 +261,14 @@ function main() {
       reviewConsoleImplementationPath
     );
   }
+  for (const { wrapperPath, implementationPath: readonlyVisualReviewImplementationPath } of readonlyVisualReviewValidatorPaths) {
+    const wrapper = exists(wrapperPath) ? read(wrapperPath) : "";
+    add(
+      `readonly_visual_review_wrapper_delegates_${path.basename(wrapperPath, ".js")}`,
+      wrapperDelegatesTo(wrapper, readonlyVisualReviewImplementationPath),
+      readonlyVisualReviewImplementationPath
+    );
+  }
   add(
     "validator_index_lists_current_splits",
     includesAll(validatorIndex, [
@@ -251,6 +294,10 @@ function main() {
       "scripts/validate_review_console_registry_report_v2_state.js",
       "scripts/validate_review_console_static_mock_boundary.js",
       "scripts/validate_review_console_unified_capsule_contract.js",
+      ...readonlyVisualReviewValidatorPaths.flatMap(({ wrapperPath, implementationPath: readonlyVisualReviewImplementationPath }) => [
+        wrapperPath,
+        readonlyVisualReviewImplementationPath,
+      ]),
     ])
   );
   add(
@@ -290,6 +337,10 @@ function main() {
       ...reviewConsoleValidatorPaths.flatMap(({ wrapperPath, implementationPath: reviewConsoleImplementationPath }) => [
         wrapperPath,
         reviewConsoleImplementationPath,
+      ]),
+      ...readonlyVisualReviewValidatorPaths.flatMap(({ wrapperPath, implementationPath: readonlyVisualReviewImplementationPath }) => [
+        wrapperPath,
+        readonlyVisualReviewImplementationPath,
       ]),
     ],
     provider_contact_performed: false,

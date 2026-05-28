@@ -48,6 +48,14 @@ Current Review Console validators:
   wrappers so existing package scripts, PowerShell validators, README commands,
   and historical phase records keep working.
 
+Current readonly visual review validators:
+
+- `scripts/validators/readonly_visual_review/` contains the implementation
+  files for the `scripts/validate_visual_eval_readonly_*.js` family.
+- The root `scripts/validate_visual_eval_readonly_*.js` files are compatibility
+  wrappers so artifact catalog fixture refs, package validators, README
+  commands, and historical phase records keep working.
+
 Current root validator index:
 
 - `scripts/validators/VALIDATOR_INDEX.md` records the current root

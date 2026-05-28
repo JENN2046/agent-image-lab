@@ -19603,3 +19603,13 @@ recommended_next: asset_hash_dimensions_verification_A5_requires_separate_author
       Completed: implementation files moved; root wrappers retained; validator index/docs updated; governance validator checks wrapper and implementation paths; boundary scan fixture points to the moved regression-matrix implementation.
       Boundary: no package/dependency change, provider/plugin/API/image/memory/production/runtime action, commit, push, tag, release, deploy, or destructive command.
       Validation: root and implementation review_console validators passed; governance validator passed; agent-board validator passed; diff check passed with CRLF normalization warnings only.
+---
+
+- [x] ID: repository_directory_optimization_readonly_visual_review_validator_split
+      Slice: readonly_visual_review_validator_family_move_with_root_wrappers.
+      Lane: Green local repository directory optimization.
+      Status: completed_validated_no_commit_no_push.
+      Goal: Move the 21-file `scripts/validate_visual_eval_readonly_*.js` family implementation under `scripts/validators/readonly_visual_review/` while keeping root compatibility wrappers.
+      Completed: implementation files moved; root wrappers retained; validator index/docs updated; governance validator checks wrapper and implementation paths.
+      Boundary: no package/dependency change, provider/plugin/API/image/memory/production/runtime action, commit, push, tag, release, deploy, or destructive command.
+      Validation: root and implementation readonly visual review validators passed; governance validator passed.
