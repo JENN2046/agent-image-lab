@@ -87,6 +87,22 @@ scripts/validators/visual_eval/validate_visual_eval_review_result_protocol.js
 scripts/validators/visual_eval/validate_visual_eval_review_result_review_bridge_wiring.js
 scripts/validators/visual_eval/validate_visual_eval_seed_record_schema.js
 scripts/validators/visual_eval/validate_visual_eval_seed_registry_schema.js
+scripts/validators/capsule/validate_capsule_code_debt_completion_audit.js
+scripts/validators/capsule/validate_capsule_creator_common_safety.js
+scripts/validators/capsule/validate_capsule_creator_manifest_contract_regression.js
+scripts/validators/capsule/validate_capsule_manifest_contract_negative_cases.js
+scripts/validators/capsule/validate_capsule_manifest_contract.js
+scripts/validators/capsule/validate_capsule_manifest_schema_runtime_binding.js
+scripts/validators/capsule/validate_capsule_operator_reviewer_action_matrix.js
+scripts/validators/capsule/validate_capsule_registry_report_v2_negative_states.js
+scripts/validators/capsule/validate_capsule_registry_report_v2.js
+scripts/validators/capsule/validate_capsule_static_operator_checklist_ui_mapping.js
+scripts/validators/capsule/validate_capsule_static_product_smoke_fixture.js
+scripts/validators/capsule/validate_capsule_static_product_smoke_review_console_snapshot.js
+scripts/validators/capsule/validate_capsule_status_taxonomy.js
+scripts/validators/capsule/validate_preview_capsule_registry_negative_cases.js
+scripts/validators/capsule/validate_preview_capsule_registry.js
+scripts/validators/capsule/validate_preview_capsule.js
 ```
 
 Stable root compatibility wrappers:
@@ -142,6 +158,22 @@ scripts/validate_visual_eval_review_result_protocol.js
 scripts/validate_visual_eval_review_result_review_bridge_wiring.js
 scripts/validate_visual_eval_seed_record_schema.js
 scripts/validate_visual_eval_seed_registry_schema.js
+scripts/validate_capsule_code_debt_completion_audit.js
+scripts/validate_capsule_creator_common_safety.js
+scripts/validate_capsule_creator_manifest_contract_regression.js
+scripts/validate_capsule_manifest_contract_negative_cases.js
+scripts/validate_capsule_manifest_contract.js
+scripts/validate_capsule_manifest_schema_runtime_binding.js
+scripts/validate_capsule_operator_reviewer_action_matrix.js
+scripts/validate_capsule_registry_report_v2_negative_states.js
+scripts/validate_capsule_registry_report_v2.js
+scripts/validate_capsule_static_operator_checklist_ui_mapping.js
+scripts/validate_capsule_static_product_smoke_fixture.js
+scripts/validate_capsule_static_product_smoke_review_console_snapshot.js
+scripts/validate_capsule_status_taxonomy.js
+scripts/validate_preview_capsule_registry_negative_cases.js
+scripts/validate_preview_capsule_registry.js
+scripts/validate_preview_capsule.js
 ```
 
 ## Rules For Future Splits
@@ -158,13 +190,13 @@ scripts/validate_visual_eval_seed_registry_schema.js
 
 ## Recommended Next Families
 
-1. `capsule`: capsule/product evidence validators after separating side-effect
-   runners from validators.
-2. `directory_governance_closure`: no broad movement; tighten the structure
+1. `directory_governance_closure`: no broad movement; tighten the structure
    index, governance checks, and next-family route map.
-3. `provider_preflight_reference_map`: read-only reference mapping only; do not
+2. `provider_preflight_reference_map`: read-only reference mapping only; do not
    physically move provider/A5 preflight validators until side-effect runner
    assumptions are separated.
+3. `runtime_reference_map`: read-only reference mapping only; preserve A5 and
+   runtime boundaries before any physical movement.
 
 `legacy_versioned`, `other`, `runtime`, and `provider_preflight` need deeper
 reference maps before physical movement.

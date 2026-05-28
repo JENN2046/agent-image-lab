@@ -163,6 +163,28 @@ function main() {
     wrapperPath: `scripts/${fileName}`,
     implementationPath: `scripts/validators/visual_eval/${fileName}`,
   }));
+  const capsuleValidatorFiles = [
+    "validate_capsule_code_debt_completion_audit.js",
+    "validate_capsule_creator_common_safety.js",
+    "validate_capsule_creator_manifest_contract_regression.js",
+    "validate_capsule_manifest_contract_negative_cases.js",
+    "validate_capsule_manifest_contract.js",
+    "validate_capsule_manifest_schema_runtime_binding.js",
+    "validate_capsule_operator_reviewer_action_matrix.js",
+    "validate_capsule_registry_report_v2_negative_states.js",
+    "validate_capsule_registry_report_v2.js",
+    "validate_capsule_static_operator_checklist_ui_mapping.js",
+    "validate_capsule_static_product_smoke_fixture.js",
+    "validate_capsule_static_product_smoke_review_console_snapshot.js",
+    "validate_capsule_status_taxonomy.js",
+    "validate_preview_capsule_registry_negative_cases.js",
+    "validate_preview_capsule_registry.js",
+    "validate_preview_capsule.js",
+  ];
+  const capsuleValidatorPaths = capsuleValidatorFiles.map((fileName) => ({
+    wrapperPath: `scripts/${fileName}`,
+    implementationPath: `scripts/validators/capsule/${fileName}`,
+  }));
 
   add("repository_organization_standard_exists", exists(standardPath), standardPath);
   add("project_structure_exists", exists(structurePath), structurePath);
@@ -202,6 +224,14 @@ function main() {
       `visual_eval_implementation_exists_${path.basename(visualEvalImplementationPath, ".js")}`,
       exists(visualEvalImplementationPath),
       visualEvalImplementationPath
+    );
+  }
+  for (const { wrapperPath, implementationPath: capsuleImplementationPath } of capsuleValidatorPaths) {
+    add(`capsule_wrapper_exists_${path.basename(wrapperPath, ".js")}`, exists(wrapperPath), wrapperPath);
+    add(
+      `capsule_implementation_exists_${path.basename(capsuleImplementationPath, ".js")}`,
+      exists(capsuleImplementationPath),
+      capsuleImplementationPath
     );
   }
 
@@ -331,6 +361,14 @@ function main() {
       visualEvalImplementationPath
     );
   }
+  for (const { wrapperPath, implementationPath: capsuleImplementationPath } of capsuleValidatorPaths) {
+    const wrapper = exists(wrapperPath) ? read(wrapperPath) : "";
+    add(
+      `capsule_wrapper_delegates_${path.basename(wrapperPath, ".js")}`,
+      wrapperDelegatesTo(wrapper, capsuleImplementationPath),
+      capsuleImplementationPath
+    );
+  }
   add(
     "validator_index_lists_current_splits",
     includesAll(validatorIndex, [
@@ -367,6 +405,10 @@ function main() {
       ...visualEvalValidatorPaths.flatMap(({ wrapperPath, implementationPath: visualEvalImplementationPath }) => [
         wrapperPath,
         visualEvalImplementationPath,
+      ]),
+      ...capsuleValidatorPaths.flatMap(({ wrapperPath, implementationPath: capsuleImplementationPath }) => [
+        wrapperPath,
+        capsuleImplementationPath,
       ]),
     ])
   );
@@ -419,6 +461,10 @@ function main() {
       ...visualEvalValidatorPaths.flatMap(({ wrapperPath, implementationPath: visualEvalImplementationPath }) => [
         wrapperPath,
         visualEvalImplementationPath,
+      ]),
+      ...capsuleValidatorPaths.flatMap(({ wrapperPath, implementationPath: capsuleImplementationPath }) => [
+        wrapperPath,
+        capsuleImplementationPath,
       ]),
     ],
     provider_contact_performed: false,

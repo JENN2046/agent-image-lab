@@ -72,6 +72,14 @@ Current visual evaluation validators:
 - The matching root validators remain compatibility wrappers so protocol,
   bridge-wiring, seed schema, and Review Console corpus commands keep working.
 
+Current capsule validators:
+
+- `scripts/validators/capsule/` contains the implementation files for the
+  `scripts/validate_capsule*.js` and `scripts/validate_preview*.js` families.
+- The matching root validators remain compatibility wrappers so capsule
+  manifest, preview registry, status taxonomy, and static product smoke
+  commands keep working.
+
 Current root validator index:
 
 - `scripts/validators/VALIDATOR_INDEX.md` records the current root
