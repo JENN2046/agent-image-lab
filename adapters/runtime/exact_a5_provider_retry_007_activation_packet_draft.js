@@ -101,13 +101,16 @@ function buildExactA5ProviderRetry007ActivationPacketDraft(options = {}) {
       provider_execution_allowed_now: preflightPacket.provider_execution_allowed_now,
     },
     execution_surface_precondition: {
-      status: "blocked_pending_vcptoolbox_retry_007_output_override_repair",
+      status: "satisfied_vcptoolbox_retry_007_output_override_repair_applied",
       repair_package_ref: outputOverrideRepairPackageRef,
       external_repo_write_allowed_now: false,
       real_vcptoolbox_patch_allowed_now: false,
-      current_route_authorizes_retry_007_output_override: false,
+      vcptoolbox_retry_007_output_override_repair_applied: true,
+      vcptoolbox_retry_007_output_override_repair_validated: true,
+      current_route_authorizes_retry_007_output_override: true,
+      current_route_test_covers_retry_007_output_override: true,
       required_vcptoolbox_repo: "A:\\VCP\\apps\\VCPToolBox",
-      required_vcptoolbox_head_reviewed: "94f2f597",
+      required_vcptoolbox_head_reviewed: "94f2f597_plus_authorized_local_two_file_repair",
       required_route_file: "A:\\VCP\\apps\\VCPToolBox\\routes\\admin\\aiImageAgents.js",
       required_test_file: "A:\\VCP\\apps\\VCPToolBox\\tests\\aiImageAgentsRoute.test.js",
       required_authorization_id: authorizationId,
@@ -226,7 +229,7 @@ function buildExactA5ProviderRetry007ActivationPacketDraft(options = {}) {
       "exact activation phrase missing or changed",
       "authorization_id mismatch",
       "source preflight decision no longer matches retry_007 boundaries",
-      "VCPToolBox retry_007 output override repair has not been applied and validated",
+      "VCPToolBox retry_007 output override repair validation is missing or stale",
       "required model is not doubao-seedream-5-0-260128",
       "provider binding ref is not redacted in repository output",
       "provider binding value is treated as secret or printed",
@@ -302,12 +305,15 @@ function validateExactA5ProviderRetry007ActivationPacketDraft(packet) {
     throw new Error("retry_006 evidence anchor mismatch");
   }
   assertObject(packet.execution_surface_precondition, "packet.execution_surface_precondition");
-  if (packet.execution_surface_precondition.status !== "blocked_pending_vcptoolbox_retry_007_output_override_repair" ||
+  if (packet.execution_surface_precondition.status !== "satisfied_vcptoolbox_retry_007_output_override_repair_applied" ||
       packet.execution_surface_precondition.repair_package_ref !== outputOverrideRepairPackageRef ||
       packet.execution_surface_precondition.external_repo_write_allowed_now !== false ||
       packet.execution_surface_precondition.real_vcptoolbox_patch_allowed_now !== false ||
-      packet.execution_surface_precondition.current_route_authorizes_retry_007_output_override !== false ||
-      packet.execution_surface_precondition.required_vcptoolbox_head_reviewed !== "94f2f597" ||
+      packet.execution_surface_precondition.vcptoolbox_retry_007_output_override_repair_applied !== true ||
+      packet.execution_surface_precondition.vcptoolbox_retry_007_output_override_repair_validated !== true ||
+      packet.execution_surface_precondition.current_route_authorizes_retry_007_output_override !== true ||
+      packet.execution_surface_precondition.current_route_test_covers_retry_007_output_override !== true ||
+      packet.execution_surface_precondition.required_vcptoolbox_head_reviewed !== "94f2f597_plus_authorized_local_two_file_repair" ||
       packet.execution_surface_precondition.required_route_file !== "A:\\VCP\\apps\\VCPToolBox\\routes\\admin\\aiImageAgents.js" ||
       packet.execution_surface_precondition.required_test_file !== "A:\\VCP\\apps\\VCPToolBox\\tests\\aiImageAgentsRoute.test.js" ||
       packet.execution_surface_precondition.required_authorization_id !== authorizationId ||

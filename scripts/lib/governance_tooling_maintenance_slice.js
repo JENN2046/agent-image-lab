@@ -2582,6 +2582,23 @@ const EXPECTED_RETRY_007_VCPTOOLBOX_EXECUTION_SURFACE_RECHECK_SLICE = [
   "scripts/lib/governance_tooling_maintenance_slice.js"
 ].sort();
 
+const EXPECTED_RETRY_007_VCPTOOLBOX_REPAIR_APPLIED_SYNC_SLICE = [
+  ".agent_board/AUTOPILOT_LEDGER.md",
+  ".agent_board/BLOCKERS.md",
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  "adapters/runtime/exact_a5_provider_retry_007_activation_packet_draft.js",
+  "docs/EXACT_A5_PROVIDER_RETRY_007_ACTIVATION_PACKET_DRAFT.md",
+  "docs/EXACT_A5_PROVIDER_RETRY_007_PREFLIGHT_DECISION.md",
+  "docs/EXACT_A5_PROVIDER_RETRY_007_VCPTOOLBOX_OUTPUT_OVERRIDE_REPAIR_PACKAGE.md",
+  "scripts/lib/governance_tooling_maintenance_slice.js",
+  "scripts/preview_exact_a5_provider_retry_007_vcptoolbox_output_override_patch.js",
+  "scripts/validate_exact_a5_provider_retry_007_activation_packet_draft.js",
+  "scripts/validate_exact_a5_provider_retry_007_vcptoolbox_output_override_repair_package.js"
+].sort();
+
 const EXPECTED_P2_3_GOVERNANCE_RECOVERABILITY_COUNT_SYNC_SLICE = [
   ".agent_board/CHECKPOINT.md",
   ".agent_board/HANDOFF.md",
@@ -2634,6 +2651,10 @@ const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "retry_007_vcptoolbox_execution_surface_recheck_slice",
     files: EXPECTED_RETRY_007_VCPTOOLBOX_EXECUTION_SURFACE_RECHECK_SLICE
+  },
+  {
+    id: "retry_007_vcptoolbox_repair_applied_sync_slice",
+    files: EXPECTED_RETRY_007_VCPTOOLBOX_REPAIR_APPLIED_SYNC_SLICE
   },
   {
     id: "provider_evidence_integrity_phase_2_slice",
@@ -3641,6 +3662,19 @@ function governanceToolingMaintenanceSliceSelfCheck() {
       check: "retry_007_vcptoolbox_execution_surface_recheck_rejects_provider_receipt",
       passed: findMatchingGovernanceToolingSlice([
         ...EXPECTED_RETRY_007_VCPTOOLBOX_EXECUTION_SURFACE_RECHECK_SLICE,
+        "reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_007_receipt.json"
+      ]) === null
+    },
+    {
+      check: "exact_slice_matches_retry_007_vcptoolbox_repair_applied_sync",
+      passed: findMatchingGovernanceToolingSlice(
+        EXPECTED_RETRY_007_VCPTOOLBOX_REPAIR_APPLIED_SYNC_SLICE
+      )?.id === "retry_007_vcptoolbox_repair_applied_sync_slice"
+    },
+    {
+      check: "retry_007_vcptoolbox_repair_applied_sync_rejects_provider_receipt",
+      passed: findMatchingGovernanceToolingSlice([
+        ...EXPECTED_RETRY_007_VCPTOOLBOX_REPAIR_APPLIED_SYNC_SLICE,
         "reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_007_receipt.json"
       ]) === null
     },

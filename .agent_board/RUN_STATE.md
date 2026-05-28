@@ -1,5 +1,75 @@
 ---
 
+## Current Run State - Retry 007 VCPToolBox Output Override Repair Applied
+
+```text
+phase: retry_007_vcptoolbox_output_override_repair_applied_20260529
+status: COMPLETED_VALIDATED_PENDING_LOCAL_COMMIT_AND_PUSH
+mode: Amber_A authorized external repo two-file repair plus Green local status sync
+branch: master
+active_current_phase_reference: v0_3_3_first_live_generation_pilot
+active_source_phase_reference: v0_3_2_live_candidate_action_packet
+active_next_red_decision_reference: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+goal: Apply the owner-authorized retry_007 exact output override repair in VCPToolBox without creating a runner or executing provider/image work.
+completed:
+- Owner issued the exact VCPToolBox repair authorization phrase.
+- Modified only A:\VCP\apps\VCPToolBox\routes\admin\aiImageAgents.js and A:\VCP\apps\VCPToolBox\tests\aiImageAgentsRoute.test.js.
+- Added AUTH-DRAFT-NATIVE-DOUBAO-SEEDREAM5-RETRY-20260527-007 to the exact retry_007 output override and matching route test.
+- Updated Agent Image Lab retry_007 repair/preflight/activation surfaces to record repair_applied_and_validated while keeping provider execution inactive.
+changed_files_current_task:
+- .agent_board/AUTOPILOT_LEDGER.md
+- .agent_board/BLOCKERS.md
+- .agent_board/HANDOFF.md
+- .agent_board/RUN_STATE.md
+- .agent_board/TASK_QUEUE.md
+- .agent_board/CHECKPOINT.md
+- adapters/runtime/exact_a5_provider_retry_007_activation_packet_draft.js
+- docs/EXACT_A5_PROVIDER_RETRY_007_ACTIVATION_PACKET_DRAFT.md
+- docs/EXACT_A5_PROVIDER_RETRY_007_PREFLIGHT_DECISION.md
+- docs/EXACT_A5_PROVIDER_RETRY_007_VCPTOOLBOX_OUTPUT_OVERRIDE_REPAIR_PACKAGE.md
+- scripts/lib/governance_tooling_maintenance_slice.js
+- scripts/preview_exact_a5_provider_retry_007_vcptoolbox_output_override_patch.js
+- scripts/validate_exact_a5_provider_retry_007_activation_packet_draft.js
+- scripts/validate_exact_a5_provider_retry_007_vcptoolbox_output_override_repair_package.js
+external_repo_changed_files:
+- A:\VCP\apps\VCPToolBox\routes\admin\aiImageAgents.js
+- A:\VCP\apps\VCPToolBox\tests\aiImageAgentsRoute.test.js
+validation_run:
+- VCPToolBox node --check routes\admin\aiImageAgents.js: passed
+- VCPToolBox node --check tests\aiImageAgentsRoute.test.js: passed
+- VCPToolBox node --test tests\aiImageAgentsRoute.test.js: passed 11/11
+- VCPToolBox node --test tests\aiImageExecutionAdapter.test.js: passed 3/3
+- node scripts\preview_exact_a5_provider_retry_007_vcptoolbox_output_override_patch.js: passed applied-state preview
+- node scripts\validate_exact_a5_provider_retry_007_vcptoolbox_output_override_repair_package.js: passed
+- node scripts\validate_exact_a5_provider_retry_007_activation_packet_draft.js: passed inactive
+- node scripts\validate_exact_a5_provider_retry_007_preflight_decision.js: passed
+- node scripts\validate_mvp_core.js: passed
+retry_007_execution_surface_status: satisfied_vcptoolbox_retry_007_output_override_repair_applied
+runtime_execution_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+secret_value_read_performed: false
+env_file_content_read_performed: false
+dependency_change_performed: false
+real_vcptoolbox_authorized_two_file_repair_performed: true
+real_vcptoolbox_provider_runtime_executed: false
+new_runner_created: false
+push_status: not_performed_pending_exact_file_commit_and_push
+tag_release_deploy_performed: false
+authorization_status: retry_007_activation_packet_draft_not_active
+authorization_active: false
+can_execute_now: false
+provider_execution_allowed_now: false
+next_safe_task: run the full Agent Image Lab pre-activation validation set, exact-file commit/push this local status checkpoint if safe, then stop before provider/image execution unless the separate exact retry_007 activation phrase is issued.
+next_phase_started: false
+```
+
 ## Current Run State - Post-Push Sync After Retry 007 Execution Surface Recheck
 
 ```text

@@ -51,11 +51,14 @@ function assertPacket(packet, label) {
   assert(packet.source_preflight_decision.can_execute_now === false, `${label} preflight can_execute_now must be false`);
   assert(packet.source_preflight_decision.provider_execution_allowed_now === false, `${label} preflight provider execution must be false`);
   assert(packet.source_preflight_decision.exact_activation_phrase_issued === false, `${label} preflight phrase issued must be false`);
-  assert(packet.execution_surface_precondition.status === "blocked_pending_vcptoolbox_retry_007_output_override_repair", `${label} execution surface status mismatch`);
+  assert(packet.execution_surface_precondition.status === "satisfied_vcptoolbox_retry_007_output_override_repair_applied", `${label} execution surface status mismatch`);
   assert(packet.execution_surface_precondition.repair_package_ref === repairPackagePath, `${label} repair package ref mismatch`);
   assert(packet.execution_surface_precondition.real_vcptoolbox_patch_allowed_now === false, `${label} VCPToolBox patch must not be allowed now`);
-  assert(packet.execution_surface_precondition.current_route_authorizes_retry_007_output_override === false, `${label} route must remain blocked before repair`);
-  assert(packet.execution_surface_precondition.required_vcptoolbox_head_reviewed === "94f2f597", `${label} reviewed VCPToolBox head mismatch`);
+  assert(packet.execution_surface_precondition.vcptoolbox_retry_007_output_override_repair_applied === true, `${label} repair must be applied`);
+  assert(packet.execution_surface_precondition.vcptoolbox_retry_007_output_override_repair_validated === true, `${label} repair must be validated`);
+  assert(packet.execution_surface_precondition.current_route_authorizes_retry_007_output_override === true, `${label} route must authorize retry_007 after repair`);
+  assert(packet.execution_surface_precondition.current_route_test_covers_retry_007_output_override === true, `${label} route test must cover retry_007 after repair`);
+  assert(packet.execution_surface_precondition.required_vcptoolbox_head_reviewed === "94f2f597_plus_authorized_local_two_file_repair", `${label} reviewed VCPToolBox head mismatch`);
   assert(packet.execution_surface_precondition.required_authorization_id === packet.authorization_id, `${label} execution surface auth id mismatch`);
   assert(packet.execution_surface_precondition.required_output_root === "A:\\agent-image-lab\\agent-image-lab-v0.2\\runs\\real_generation\\v0_6_73_real_vcp_agent_generation_retry_007", `${label} execution surface output root mismatch`);
   assert(packet.execution_surface_precondition.can_execute_provider_before_repair === false, `${label} provider must not execute before repair`);
@@ -117,7 +120,9 @@ function main() {
   const repairPackage = fs.readFileSync(repoPath(repairPackagePath), "utf8");
   for (const token of [
     "phase: exact_a5_provider_retry_007_vcptoolbox_output_override_repair_package",
-    "can_apply_now: false",
+    "status: repair_applied_and_validated",
+    "repair_applied: true",
+    "repair_validated: true",
     "real_vcptoolbox_patch_allowed_now: false",
     "real_provider_execution_allowed_now: false",
     "A:\\VCP\\apps\\VCPToolBox\\routes\\admin\\aiImageAgents.js",
@@ -128,7 +133,7 @@ function main() {
     "provider_contact_performed: false",
     "secret_value_read_performed: false",
     "node --test tests\\aiImageAgentsRoute.test.js",
-    "This phrase does not authorize `retry_007` provider execution",
+    "This phrase did not authorize `retry_007` provider execution",
   ]) {
     assert(repairPackage.includes(token), `repair package token missing: ${token}`);
   }
@@ -165,9 +170,14 @@ function main() {
       dirty.execution_surface_precondition.real_vcptoolbox_patch_allowed_now = true;
       adapter.validateExactA5ProviderRetry007ActivationPacketDraft(dirty);
     }),
-    expectFailure("execution_surface_route_ready_rejected", () => {
+    expectFailure("execution_surface_repair_applied_false_rejected", () => {
       const dirty = clone(packet);
-      dirty.execution_surface_precondition.current_route_authorizes_retry_007_output_override = true;
+      dirty.execution_surface_precondition.vcptoolbox_retry_007_output_override_repair_applied = false;
+      adapter.validateExactA5ProviderRetry007ActivationPacketDraft(dirty);
+    }),
+    expectFailure("execution_surface_route_missing_rejected", () => {
+      const dirty = clone(packet);
+      dirty.execution_surface_precondition.current_route_authorizes_retry_007_output_override = false;
       adapter.validateExactA5ProviderRetry007ActivationPacketDraft(dirty);
     }),
     expectFailure("wrong_model_rejected", () => {
@@ -222,7 +232,10 @@ function main() {
     retry_007_provider_receipt_ref: packet.allowed_operation_when_activated.provider_receipt_ref,
     execution_surface_precondition_status: packet.execution_surface_precondition.status,
     repair_package_ref: packet.execution_surface_precondition.repair_package_ref,
+    repair_applied: packet.execution_surface_precondition.vcptoolbox_retry_007_output_override_repair_applied,
+    repair_validated: packet.execution_surface_precondition.vcptoolbox_retry_007_output_override_repair_validated,
     current_route_authorizes_retry_007_output_override: packet.execution_surface_precondition.current_route_authorizes_retry_007_output_override,
+    current_route_test_covers_retry_007_output_override: packet.execution_surface_precondition.current_route_test_covers_retry_007_output_override,
     max_provider_calls_when_activated: packet.activation_budget.max_provider_calls,
     retry_allowed: packet.activation_budget.retry_allowed,
     provider_evidence_integrity_gate_passed: integrity.passed,

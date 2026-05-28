@@ -111,14 +111,16 @@ function buildPreview() {
   const routeTestFileExists = routeTestText !== null;
   const routeCurrentlyAuthorizesRetry007 = containsRouteAuthorization(routeText);
   const testCurrentlyCoversRetry007 = containsRouteTestCoverage(routeTestText);
+  const repairAlreadyApplied = routeCurrentlyAuthorizesRetry007 && testCurrentlyCoversRetry007;
 
   return {
     passed: true,
     preview_id: previewId,
-    mode: "dry_run_patch_preview_only",
+    mode: repairAlreadyApplied ? "applied_state_patch_preview_only" : "dry_run_patch_preview_only",
     repair_package_ref: repairPackageRef,
     can_apply_now: false,
-    exact_authorization_required: true,
+    repair_already_applied: repairAlreadyApplied,
+    exact_authorization_required: !repairAlreadyApplied,
     real_vcptoolbox_patch_allowed_now: false,
     provider_execution_allowed_now: false,
     vcptoolbox_root: vcptoolboxRoot,
@@ -135,6 +137,9 @@ function buildPreview() {
       path.join(vcptoolboxRoot, "config.env"),
     ],
     current_surface: {
+      status: repairAlreadyApplied
+        ? "retry_007_output_override_applied_and_tested_surface_present"
+        : "retry_007_output_override_missing_from_current_surface",
       vcptoolbox_available: vcptoolboxAvailable,
       route_file_exists: routeFileExists,
       route_test_file_exists: routeTestFileExists,

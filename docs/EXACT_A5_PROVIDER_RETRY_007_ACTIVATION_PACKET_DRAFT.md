@@ -23,10 +23,10 @@ decision boundaries and does not create a provider receipt, output directory,
 review handoff, durable audit record, accepted sample, production candidate,
 DailyNote entry, or VCP memory entry.
 
-Current execution-surface status: blocked. VCPToolBox currently authorizes exact
-output overrides through retry_006 only. The repair package below must be
-separately authorized, applied, and validated before this draft can ever become
-executable:
+Current execution-surface status: repair applied and validated. VCPToolBox now
+authorizes the exact retry_007 output override and has route test coverage for
+it. This draft still cannot execute until the separate exact provider activation
+phrase is issued and all pre-activation gates pass:
 
 ```text
 docs/EXACT_A5_PROVIDER_RETRY_007_VCPTOOLBOX_OUTPUT_OVERRIDE_REPAIR_PACKAGE.md
@@ -119,7 +119,10 @@ accepted_samples_write_performed: false
 DailyNote_write_performed: false
 VCP_memory_write_performed: false
 push_tag_release_deploy_performed: false
-vcptoolbox_retry_007_output_override_repair_applied: false
+vcptoolbox_retry_007_output_override_repair_applied: true
+vcptoolbox_retry_007_output_override_repair_validated: true
+current_route_authorizes_retry_007_output_override: true
+current_route_test_covers_retry_007_output_override: true
 ```
 
 ## Validation

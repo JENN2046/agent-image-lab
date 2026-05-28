@@ -6,6 +6,60 @@ remain the source of truth.
 
 ---
 
+## Retry 007 VCPToolBox Output Override Repair Applied
+
+```yaml
+phase: retry_007_vcptoolbox_output_override_repair_applied_20260529
+source_phase: retry_007_vcptoolbox_execution_surface_current_state_recheck_20260529
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+lane: Amber_A_authorized_external_repo_two_file_repair
+envelope_id: Smart Standing Authorization v3
+action_performed: authorized VCPToolBox retry_007 exact output override repair
+target_systems:
+  - A:\VCP\apps\VCPToolBox
+  - Agent Image Lab local repository
+authorization_phrase_issued_by_owner: true
+allowed_vcptoolbox_files:
+  - A:\VCP\apps\VCPToolBox\routes\admin\aiImageAgents.js
+  - A:\VCP\apps\VCPToolBox\tests\aiImageAgentsRoute.test.js
+forbidden_actions_observed:
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  secret_value_read_performed: false
+  env_file_content_read_performed: false
+  new_runner_created: false
+  DoubaoGen_modified: false
+  tag_release_deploy_performed: false
+files_written_to_vcptoolbox: 2
+vcptoolbox_route_authorizes_retry_007_output_override: true
+vcptoolbox_route_test_covers_retry_007_output_override: true
+push_status: not_performed_pending_exact_file_commit_and_push
+tag_release_deploy_performed: false
+calls_used:
+  provider: 0
+  plugin: 0
+  api: 0
+  image_candidates: 0
+validation_run:
+  - VCPToolBox node --check routes\admin\aiImageAgents.js: passed
+  - VCPToolBox node --check tests\aiImageAgentsRoute.test.js: passed
+  - VCPToolBox node --test tests\aiImageAgentsRoute.test.js: passed_11_of_11
+  - VCPToolBox node --test tests\aiImageExecutionAdapter.test.js: passed_3_of_3
+  - node scripts\preview_exact_a5_provider_retry_007_vcptoolbox_output_override_patch.js: passed_applied_state
+  - node scripts\validate_exact_a5_provider_retry_007_vcptoolbox_output_override_repair_package.js: passed
+  - node scripts\validate_exact_a5_provider_retry_007_activation_packet_draft.js: passed_inactive
+validation_result: repair_applied_and_validated_without_provider
+rollback_or_cleanup_available: revert_two_authorized_vcptoolbox_files_only_if_requested
+next_auto_step_allowed: true_for_local_agent_image_lab_status_checkpoint_and_pre_activation_validation
+stop_reason: stop_before_provider_execution_until_exact_retry_007_activation_phrase
+```
+
+---
+
 ## Retry 007 VCPToolBox Execution Surface Current-State Recheck
 
 ```yaml

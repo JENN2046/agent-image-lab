@@ -1,5 +1,17 @@
 ---
 
+- [x] ID: retry_007_vcptoolbox_output_override_repair_applied_20260529
+      Lane: Amber_A authorized external repo two-file repair plus Green local status sync.
+      Status: completed_validated_pending_local_commit_and_push.
+      Goal: Apply the exact owner-authorized VCPToolBox retry_007 output override repair without creating a runner or executing provider/image work.
+      Active current phase reference: v0_3_3_first_live_generation_pilot.
+      Active source phase reference: v0_3_2_live_candidate_action_packet.
+      Active next Red decision reference: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Completed: added AUTH-DRAFT-NATIVE-DOUBAO-SEEDREAM5-RETRY-20260527-007 to the VCPToolBox exact output override and added the matching route test; updated Agent Image Lab retry_007 repair/preflight/activation surfaces to applied-and-validated while keeping activation inactive.
+      Validation: VCPToolBox route/test syntax passed; route tests passed 11/11; adapter tests passed 3/3; retry_007 preview, repair package, activation draft, preflight, and MVP core validators passed.
+      Boundary fields: provider_contact_performed: false; plugin_call_performed: false; api_call_performed: false; image_generation_performed: false; secret_value_read_performed: false; real_vcptoolbox_authorized_two_file_repair_performed: true; real_vcptoolbox_provider_runtime_executed: false; new_runner_created: false; push_status: not_performed_pending_exact_file_commit_and_push; tag_release_deploy_performed: false.
+      Recommended next: run full Agent Image Lab validation and exact-file checkpoint/push if safe; provider/image execution remains separately gated by the exact retry_007 activation phrase.
+
 - [x] ID: post_push_sync_after_retry_007_execution_surface_recheck_20260529
       Lane: Green local post-push state-surface sync.
       Status: completed_validated_post_push_sync.

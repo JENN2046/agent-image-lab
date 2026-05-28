@@ -95,18 +95,20 @@ candidate boundaries.
 
 ```yaml
 review_id: retry_007_execution_surface_reuse_review_20260528
-review_status: blocked_by_missing_retry_007_output_override
-vcptoolbox_head_reviewed: 94f2f597
+review_status: ready_after_retry_007_output_override_repair_applied
+vcptoolbox_head_reviewed: 94f2f597_plus_authorized_local_two_file_repair
 vcptoolbox_route_file_reviewed: A:\VCP\apps\VCPToolBox\routes\admin\aiImageAgents.js
 vcptoolbox_test_file_reviewed: A:\VCP\apps\VCPToolBox\tests\aiImageAgentsRoute.test.js
 current_route_supports_doubaogen_fallback_loading: true
 current_route_supports_explicit_model_passthrough: true
-current_route_supports_exact_output_override_through_retry_006: true
-current_route_authorizes_retry_007_output_override: false
+current_route_supports_exact_output_override_through_retry_007: true
+current_route_authorizes_retry_007_output_override: true
+current_route_test_covers_retry_007_output_override: true
 repair_package_ref: docs/EXACT_A5_PROVIDER_RETRY_007_VCPTOOLBOX_OUTPUT_OVERRIDE_REPAIR_PACKAGE.md
+repair_validation_status: applied_and_validated_without_provider
 provider_execution_allowed_now: false
 ```
 
-`retry_007` must not proceed to provider execution until the VCPToolBox repair
-package is separately authorized, applied, validated, and the inactive
-activation draft is rechecked.
+`retry_007` still must not proceed to provider execution until the exact
+provider activation phrase is issued and the inactive activation draft plus all
+pre-activation gates pass.
