@@ -10,7 +10,7 @@ branch: master
 active_current_phase_reference: v0_3_3_first_live_generation_pilot
 active_source_phase_reference: v0_3_2_live_candidate_action_packet
 active_next_red_decision_reference: inspect_failed_provider_tool_attempt_or_authorize_new_trial
-summary: The public-disclosure aggregate gate no longer depends on a machine-local ignored config file being present after remote sync. The validator still proves the historical de-track record, current Git index removal, and effective ignore rule, without reading or recreating the local config.
+summary: The public-disclosure aggregate gate no longer depends on a machine-local ignored config file being present after remote sync. The validator still proves the historical de-track record, current Git index removal, and effective ignore rule, without reading or recreating the local config. Stale legacy positive commit history flags were also renamed so full-suite current-surface scans do not misread old push records as current commit actions.
 changed_by_this_task:
   - scripts/validate_tracked_local_path_config_detrack_execution_postcondition.js
   - .agent_board/HANDOFF.md
@@ -1040,7 +1040,7 @@ boundaries:
   VCP_memory_write_performed: false
   production_candidate_002_started: false
   Batch_005_started: false
-  commit_performed: true
+  local_commit_completed: yes
   push_performed: true
 next_safe_task: readonly_operator_console_guided_walkthrough_report_slice. Push/tag/release/deploy remain separately gated.
 ```

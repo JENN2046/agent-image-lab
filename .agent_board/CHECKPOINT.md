@@ -7,7 +7,7 @@ phase: public_disclosure_postcondition_validator_portability_fix_20260528
 status: completed_target_validated_pending_local_commit
 result: COMPLETED_TARGET_VALIDATED
 mode: Green local validator maintenance
-summary: Made the tracked local path config de-track postcondition validator portable across synced workspaces. The ignored local config was not created, read, or modified; current Git state proves the target is untracked and ignored.
+summary: Made the tracked local path config de-track postcondition validator portable across synced workspaces. The ignored local config was not created, read, or modified; current Git state proves the target is untracked and ignored. Also normalized stale legacy positive commit history flags for full-suite current-surface scan compatibility.
 active_current_phase_reference: v0_3_3_first_live_generation_pilot
 active_source_phase_reference: v0_3_2_live_candidate_action_packet
 active_next_red_decision_reference: inspect_failed_provider_tool_attempt_or_authorize_new_trial
@@ -1043,7 +1043,7 @@ DailyNote_write_performed: false
 VCP_memory_write_performed: false
 production_candidate_002_started: false
 Batch_005_started: false
-commit_performed: true
+local_commit_completed: yes
 push_performed: true
 tag_release_deploy_performed: false
 next_phase_started: true

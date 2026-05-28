@@ -15,6 +15,7 @@ completed:
 - Confirmed `configs/local_paths/doubaogen_plugin_dir.local.yaml` is absent in this working copy, no longer tracked by Git, and covered by `.gitignore`.
 - Updated `scripts/validate_tracked_local_path_config_detrack_execution_postcondition.js` so it still verifies the historical de-track execution record and current Git ignore/index state, but no longer requires every synced working copy to contain the ignored local config file.
 - Did not create, read, or modify the ignored local config.
+- Normalized stale legacy status-surface wording from `commit_performed` positive history flags to `local_commit_completed` history flags so full-suite current-surface scans do not misread an old push record as a current commit action.
 validation:
 - node --check scripts\validate_tracked_local_path_config_detrack_execution_postcondition.js: passed
 - node scripts\validate_tracked_local_path_config_detrack_execution_postcondition.js: passed; current_working_copy_file_present=false; tracking removed and ignore rule effective
@@ -981,7 +982,7 @@ DailyNote_write_performed: false
 VCP_memory_write_performed: false
 production_candidate_002_started: false
 Batch_005_started: false
-commit_performed: true
+local_commit_completed: yes
 push_performed: true
 tag_release_deploy_performed: false
 next_safe_task: readonly_operator_console_guided_walkthrough_report_slice
