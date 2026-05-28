@@ -1,5 +1,42 @@
 ---
 
+## Checkpoint - Post-Commit Product Mainline Readiness Sync
+
+```text
+phase: post_directory_commit_product_mainline_readiness_sync_20260528
+status: completed_validated_pending_local_status_commit
+result: COMPLETED_VALIDATED
+mode: Green local status-surface sync
+summary: Recorded that the directory ownership governance map checkpoint was committed locally at `e580b7c`, then preserved the retry_007 read-only readiness finding. The current product-mainline state is: retry_005 is the last blocked retry-chain attempt, retry_006 completed provider image creation and metadata-only accepted-sample closeout, and retry_007 is hold-only with no issued authorization.
+active_current_phase_reference: v0_3_3_first_live_generation_pilot
+active_source_phase_reference: v0_3_2_live_candidate_action_packet
+active_next_red_decision_reference: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+changed_files_current_task:
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+validation:
+  - npm run validate:retry-007-preflight-decision: passed
+  - node scripts\validate_agent_board_state.js: passed
+  - node scripts\validate_autopilot_agent_board_resume_compaction_guard.js: passed after adding active phase/source/decision anchors
+  - npm run validate:mvp: passed
+  - git diff --check: passed with CRLF normalization warnings only
+runtime_execution_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+dependency_change_performed: false
+secret_value_read_performed: false
+push_performed: false
+push_status: not_performed
+tag_release_deploy_performed: false
+recommended_next_phase: retry_007_authorization_preflight_review_only_or_stop_before_provider_execution
+```
+
 ## Checkpoint - Top-Level Directory Ownership Map
 
 ```text

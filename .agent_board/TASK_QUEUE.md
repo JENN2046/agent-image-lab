@@ -1,5 +1,20 @@
 ---
 
+- [x] ID: post_directory_commit_product_mainline_readiness_sync_20260528
+      Lane: Green local status-surface sync.
+      Status: completed_validated_pending_local_status_commit.
+      Goal: Record the committed directory governance checkpoint and preserve the product-mainline retry_007 read-only readiness finding.
+      Source commit: `e580b7c docs: add directory ownership governance map`.
+      Current branch state before this sync: master ahead origin/master by 1 commit; worktree clean.
+      Active current phase reference: v0_3_3_first_live_generation_pilot.
+      Active source phase reference: v0_3_2_live_candidate_action_packet.
+      Active next Red decision reference: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Completed: confirmed directory checkpoint commit; confirmed no push/tag/release/deploy; inspected provider attempt evidence; identified retry_005 as the last blocked retry-chain attempt with `BLOCKED_OUTPUT_SCOPE_VIOLATION`; confirmed retry_006 completed with `COMPLETED_PROVIDER_IMAGE_CREATED`; confirmed retry_007 is hold/not issued/cannot execute now.
+      Evidence: `reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_005_receipt.json`; `reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_006_receipt.json`; `docs/EXACT_A5_PROVIDER_RETRY_007_PREFLIGHT_DECISION.md`; `adapters/runtime/exact_a5_provider_retry_007_preflight_decision_packet.js`.
+      Validation: `npm run validate:retry-007-preflight-decision`, `node scripts\validate_agent_board_state.js`, `node scripts\validate_autopilot_agent_board_resume_compaction_guard.js`, `npm run validate:mvp`, and `git diff --check` passed; diff check reported CRLF normalization warnings only.
+      Boundary: runtime_execution_performed: false; provider_contact_performed: false; plugin_call_performed: false; api_call_performed: false; image_generation_performed: false; DailyNote_write_performed: false; VCP_memory_write_performed: false; dependency_change_performed: false; secret_value_read_performed: false; push_status: not_performed; tag_release_deploy_performed: false; no destructive command.
+      Recommended next: review or prepare retry_007 authorization/preflight surfaces only; real provider/contact/image execution requires an active exact executable packet and must remain inside the Smart Standing envelope with no Red condition.
+
 - [x] ID: repository_directory_optimization_top_level_directory_ownership_map
       Lane: Green local repository directory optimization.
       Status: completed_validated.

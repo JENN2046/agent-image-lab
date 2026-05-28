@@ -1,5 +1,44 @@
 ---
 
+## Current Handoff Update - Post-Commit Product Mainline Readiness Sync
+
+```text
+phase: post_directory_commit_product_mainline_readiness_sync_20260528
+status: COMPLETED_VALIDATED_PENDING_LOCAL_STATUS_COMMIT
+mode: Green local status-surface sync after directory checkpoint commit and product-mainline read-only inspection
+branch: master
+source_commit: e580b7c docs: add directory ownership governance map
+active_current_phase_reference: v0_3_3_first_live_generation_pilot
+active_source_phase_reference: v0_3_2_live_candidate_action_packet
+active_next_red_decision_reference: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+summary: The directory ownership governance map checkpoint is now locally committed at `e580b7c`, with no push performed. Product-mainline inspection then returned to the failed provider/tool attempt route and found that the old blocked retry chain is no longer the active blocker: retry_005 was the last blocked attempt because of output-scope violation, retry_006 subsequently completed with one provider image created and metadata-only accepted-sample closeout, and retry_007 remains a hold-only preflight decision with no issued authorization and `can_execute_now: false`.
+changed_by_this_task:
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+validation:
+  - npm run validate:retry-007-preflight-decision: passed
+  - node scripts\validate_agent_board_state.js: passed
+  - node scripts\validate_autopilot_agent_board_resume_compaction_guard.js: passed after adding active phase/source/decision anchors
+  - npm run validate:mvp: passed
+  - git diff --check: passed with CRLF normalization warnings only
+boundaries:
+  runtime_execution_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  dependency_change_performed: false
+  secret_value_read_performed: false
+  push_performed: false
+  push_status: not_performed
+  tag_release_deploy_performed: false
+next_safe_task: review or prepare retry_007 authorization/preflight surfaces only; do not execute provider/contact/image until an exact executable packet is active and all Red conditions remain absent.
+```
+
 ## Current Handoff Update - Top-Level Directory Ownership Map
 
 ```text

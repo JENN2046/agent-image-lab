@@ -1,5 +1,54 @@
 ---
 
+## Current Run State - Post-Commit Product Mainline Readiness Sync
+
+```text
+phase: post_directory_commit_product_mainline_readiness_sync_20260528
+status: COMPLETED_VALIDATED_PENDING_LOCAL_STATUS_COMMIT
+mode: Green local status-surface sync after directory checkpoint commit and product-mainline read-only inspection
+branch: master
+source_commit: e580b7c docs: add directory ownership governance map
+current_branch_state_before_this_sync: master ahead origin/master by 1 commit; worktree clean
+active_current_phase_reference: v0_3_3_first_live_generation_pilot
+active_source_phase_reference: v0_3_2_live_candidate_action_packet
+active_next_red_decision_reference: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+goal: Record that the directory ownership governance map checkpoint was committed locally, then preserve the read-only retry_007 readiness finding as the current product-mainline handoff.
+completed:
+- Confirmed local directory governance checkpoint commit `e580b7c`.
+- Confirmed no push, tag, release, deploy, destructive action, dependency change, or secret read occurred.
+- Re-read `.agent_board` resume surfaces and provider attempt evidence.
+- Confirmed last blocked provider attempt in the retry chain was retry_005 with `BLOCKED_OUTPUT_SCOPE_VIOLATION`.
+- Confirmed retry_006 completed with `COMPLETED_PROVIDER_IMAGE_CREATED` and later metadata-only accepted-sample closeout.
+- Confirmed retry_007 is only a preflight decision packet, not an execution authorization.
+evidence:
+- git status --short --branch: `## master...origin/master [ahead 1]`
+- git log --oneline -n 1: `e580b7c docs: add directory ownership governance map`
+- reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_005_receipt.json
+- reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_006_receipt.json
+- docs/EXACT_A5_PROVIDER_RETRY_007_PREFLIGHT_DECISION.md
+- adapters/runtime/exact_a5_provider_retry_007_preflight_decision_packet.js
+validation:
+- npm run validate:retry-007-preflight-decision: passed
+- node scripts\validate_agent_board_state.js: passed
+- node scripts\validate_autopilot_agent_board_resume_compaction_guard.js: passed after adding active phase/source/decision anchors
+- npm run validate:mvp: passed
+- git diff --check: passed with CRLF normalization warnings only
+runtime_execution_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+dependency_change_performed: false
+secret_value_read_performed: false
+push_performed: false
+push_status: not_performed
+tag_release_deploy_performed: false
+next_safe_task: If continuing product work, prepare or review retry_007 authorization/preflight surfaces only; do not execute provider/contact/image until an exact executable packet is active and all Red conditions remain absent.
+next_phase_started: false
+```
+
 ## Current Run State - Top-Level Directory Ownership Map
 
 ```text
