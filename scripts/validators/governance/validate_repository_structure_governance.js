@@ -568,6 +568,7 @@ function main() {
       "scripts/validate_exact_a5_provider_retry_006_activation_receipt.js",
       "scripts/validate_exact_a5_provider_retry_007_activation_packet_draft.js",
       "scripts/validate_exact_a5_provider_retry_007_preflight_decision.js",
+      "scripts/validate_exact_a5_provider_retry_007_vcptoolbox_output_override_repair_package.js",
       "scripts/validate_exact_a5_provider_retry_activation_receipt.js",
       "scripts/validate_exact_a5_provider_retry_packet_draft.js",
       "scripts/validate_provider_evidence_integrity_contract.js",

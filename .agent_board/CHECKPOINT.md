@@ -1,5 +1,64 @@
 ---
 
+## Checkpoint - Retry 007 VCPToolBox Repair Package Validator Gate
+
+```text
+phase: retry_007_vcptoolbox_repair_package_validator_gate_20260529
+status: completed_validated_pending_local_commit
+result: COMPLETED_VALIDATED
+mode: Green local provider-preflight validator hardening; no external repo write
+summary: Added and validated the standalone retry_007 VCPToolBox output override repair package validator, wired it into activation-draft preconditions, and updated provider preflight governance discovery counts.
+active_current_phase_reference: v0_3_3_first_live_generation_pilot
+active_source_phase_reference: v0_3_2_live_candidate_action_packet
+active_next_red_decision_reference: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+changed_files_current_task:
+  - scripts/validate_exact_a5_provider_retry_007_vcptoolbox_output_override_repair_package.js
+  - docs/EXACT_A5_PROVIDER_RETRY_007_VCPTOOLBOX_OUTPUT_OVERRIDE_REPAIR_PACKAGE.md
+  - docs/EXACT_A5_PROVIDER_RETRY_007_ACTIVATION_PACKET_DRAFT.md
+  - adapters/runtime/exact_a5_provider_retry_007_activation_packet_draft.js
+  - scripts/validate_exact_a5_provider_retry_007_activation_packet_draft.js
+  - scripts/validators/PROVIDER_PREFLIGHT_REFERENCE_MAP.md
+  - scripts/validators/VALIDATOR_INDEX.md
+  - scripts/validators/governance/validate_repository_structure_governance.js
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+validation_run:
+  - node --check scripts\validate_exact_a5_provider_retry_007_vcptoolbox_output_override_repair_package.js: passed
+  - node scripts\validate_exact_a5_provider_retry_007_vcptoolbox_output_override_repair_package.js: passed
+  - node scripts\validate_exact_a5_provider_retry_007_activation_packet_draft.js: passed
+  - node scripts\validators\governance\validate_repository_structure_governance.js: passed
+  - node scripts\validate_repository_structure_governance.js: passed
+  - node scripts\validate_agent_board_state.js: passed
+  - node scripts\validate_autopilot_agent_board_resume_compaction_guard.js: passed
+  - npm run validate:provider-evidence-integrity: passed
+  - npm run validate:mvp: passed
+  - git diff --check: passed
+runtime_execution_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+secret_value_read_performed: false
+env_file_content_read_performed: false
+dependency_change_performed: false
+real_vcptoolbox_modified: false
+real_vcptoolbox_executed: false
+new_runner_created: false
+push_status: not_performed
+tag_release_deploy_performed: false
+authorization_status: retry_007_activation_packet_draft_not_active
+authorization_active: false
+can_execute_now: false
+provider_execution_allowed_now: false
+recommended_next_phase: exact_file_commit_and_guarded_push_for_retry_007_repair_validator_gate
+```
+
 ## Checkpoint - Post-Push Sync After Retry 007 VCPToolBox Repair Package
 
 ```text

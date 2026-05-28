@@ -88,6 +88,7 @@ npm run validate:mvp
 npm run validate:provider-evidence-integrity
 npm run validate:all
 node scripts/validate_exact_a5_provider_retry_007_activation_packet_draft.js
+node scripts/validate_exact_a5_provider_retry_007_vcptoolbox_output_override_repair_package.js
 git diff --check
 ```
 

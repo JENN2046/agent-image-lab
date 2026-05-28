@@ -4,6 +4,7 @@
 phase: exact_a5_provider_retry_007_vcptoolbox_output_override_repair_package
 status: repair_package_only
 base_contract: AGENTS.md
+validator: scripts/validate_exact_a5_provider_retry_007_vcptoolbox_output_override_repair_package.js
 intent: local_draft
 lane: Green
 source_blocker: retry_007_execution_surface_reuse_review_20260528
@@ -76,6 +77,12 @@ test_delta:
 node --check routes\admin\aiImageAgents.js
 node --test tests\aiImageAgentsRoute.test.js
 node --test tests\aiImageExecutionAdapter.test.js
+```
+
+Validate this repair package in Agent Image Lab:
+
+```text
+node scripts\validate_exact_a5_provider_retry_007_vcptoolbox_output_override_repair_package.js
 ```
 
 After the VCPToolBox patch is applied and validated, rerun in Agent Image Lab:

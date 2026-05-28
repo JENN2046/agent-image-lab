@@ -83,6 +83,7 @@ function assertPacket(packet, label) {
   assert(packet.write_boundaries_when_activated.DailyNote_write_allowed === false, `${label} DailyNote write must be false`);
   assert(packet.write_boundaries_when_activated.VCP_memory_write_allowed === false, `${label} VCP memory write must be false`);
   assert(packet.validation_required_before_activation.includes("node scripts/validate_exact_a5_provider_retry_007_activation_packet_draft.js"), `${label} activation draft validator missing`);
+  assert(packet.validation_required_before_activation.includes("node scripts/validate_exact_a5_provider_retry_007_vcptoolbox_output_override_repair_package.js"), `${label} repair package validator missing`);
   assert(packet.validation_required_before_activation.includes("VCPToolBox retry_007 output override repair applied and validated"), `${label} VCPToolBox repair gate missing`);
   assert(packet.validation_required_before_activation.includes("VCPToolBox node --test tests\\aiImageAgentsRoute.test.js"), `${label} VCPToolBox route test gate missing`);
   assert(packet.validation_required_before_activation.includes("npm run validate:all"), `${label} full validation gate missing`);

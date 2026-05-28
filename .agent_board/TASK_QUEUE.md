@@ -1,5 +1,17 @@
 ---
 
+- [x] ID: retry_007_vcptoolbox_repair_package_validator_gate_20260529
+      Lane: Green local provider-preflight validator hardening; no external repo write.
+      Status: completed_validated_pending_local_commit.
+      Goal: Add a standalone validator for the retry_007 VCPToolBox output override repair package before any external VCPToolBox write or provider execution.
+      Active current phase reference: v0_3_3_first_live_generation_pilot.
+      Active source phase reference: v0_3_2_live_candidate_action_packet.
+      Active next Red decision reference: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Completed: added `scripts/validate_exact_a5_provider_retry_007_vcptoolbox_output_override_repair_package.js`; linked it from the repair package and activation draft; updated activation adapter/validator, provider preflight reference map, validator index, and repository structure governance.
+      Validation: repair-package validator syntax/runtime, activation packet validator syntax/runtime, repository structure governance wrapper/implementation, agent board state, resume compaction guard, provider evidence integrity, MVP, and git diff check passed.
+      Boundary fields: image_generation_performed: false; secret_value_read_performed: false; real_vcptoolbox_modified: false; new_runner_created: false; push_status: not_performed; tag_release_deploy_performed: false.
+      Recommended next: exact-file commit and guarded push if safe; do not modify VCPToolBox or execute provider/contact/image without the exact future authorization gates.
+
 - [x] ID: post_push_sync_after_retry_007_vcptoolbox_repair_package_20260528
       Lane: Green local post-push state-surface sync.
       Status: completed_validated_post_push_sync.
