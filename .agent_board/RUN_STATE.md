@@ -1,5 +1,43 @@
 ---
 
+## Current Run State - Repository Directory Optimization Autopilot Governance Validator Split
+
+```text
+phase: repository_directory_optimization_autopilot_governance_validator_split
+slice: autopilot_governance_validator_move_with_root_wrappers
+status: COMPLETED_VALIDATED_PENDING_COMMIT
+mode: Green local repository directory optimization
+branch: master
+goal: Move the autopilot, agent board, and Smart Standing Authorization governance validator implementations under scripts/validators/autopilot_governance while preserving root commands.
+active_current_phase_reference: v0_3_3_first_live_generation_pilot
+active_source_phase_reference: v0_3_2_live_candidate_action_packet
+active_next_red_decision_reference: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+completed:
+- Moved 12 implementation files to `scripts/validators/autopilot_governance/`.
+- Kept all matching root `scripts/validate_*.js` paths as compatibility wrappers.
+- Updated `scripts/validators/VALIDATOR_INDEX.md`, `scripts/validators/README.md`, and `docs/PROJECT_STRUCTURE.md`.
+- Extended `scripts/validators/governance/validate_repository_structure_governance.js` to check wrapper and implementation paths.
+validation:
+- root and implementation autopilot governance validator syntax checks: passed
+- root and implementation autopilot governance validator runtime checks: passed
+- node scripts\validate_repository_structure_governance.js: passed
+- node scripts\validate_agent_board_state.js: passed
+boundary:
+- no package or dependency changes
+- provider_contact_performed: false
+- plugin_call_performed: false
+- api_call_performed: false
+- image_generation_performed: false
+- DailyNote_write_performed: false
+- VCP_memory_write_performed: false
+- secret_value_read_performed: false
+- push_status: not_performed
+- no production candidate, Batch 005, runtime integration, push, tag, release, deploy, or destructive action
+next_safe_task: exact-file guarded commit for this slice, then continue with visual_eval validator family split
+```
+
+---
+
 ## Current Run State - Repository Directory Optimization Readonly Operator Console Validator Split
 
 ```text

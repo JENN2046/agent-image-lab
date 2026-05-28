@@ -133,6 +133,24 @@ function main() {
     wrapperPath: `scripts/${fileName}`,
     implementationPath: `scripts/validators/readonly_visual_review/${fileName}`,
   }));
+  const autopilotGovernanceValidatorFiles = [
+    "validate_agent_board_queue_reconciliation.js",
+    "validate_agent_board_state.js",
+    "validate_autopilot_agent_board_resume_compaction_guard.js",
+    "validate_autopilot_amber_action_packet_preflight.js",
+    "validate_autopilot_amber_packet_to_receipt_traceability.js",
+    "validate_autopilot_evolution_engine.js",
+    "validate_autopilot_false_readiness_negative_cases.js",
+    "validate_autopilot_goal_compiler.js",
+    "validate_autopilot_governance_kernel.js",
+    "validate_autopilot_readiness_receipt_registry_cross_claims.js",
+    "validate_autopilot_receipt_registry_negative_cases.js",
+    "validate_smart_v3_push_safety_lane.js",
+  ];
+  const autopilotGovernanceValidatorPaths = autopilotGovernanceValidatorFiles.map((fileName) => ({
+    wrapperPath: `scripts/${fileName}`,
+    implementationPath: `scripts/validators/autopilot_governance/${fileName}`,
+  }));
 
   add("repository_organization_standard_exists", exists(standardPath), standardPath);
   add("project_structure_exists", exists(structurePath), structurePath);
@@ -156,6 +174,14 @@ function main() {
       `readonly_visual_review_implementation_exists_${path.basename(readonlyVisualReviewImplementationPath, ".js")}`,
       exists(readonlyVisualReviewImplementationPath),
       readonlyVisualReviewImplementationPath
+    );
+  }
+  for (const { wrapperPath, implementationPath: autopilotGovernanceImplementationPath } of autopilotGovernanceValidatorPaths) {
+    add(`autopilot_governance_wrapper_exists_${path.basename(wrapperPath, ".js")}`, exists(wrapperPath), wrapperPath);
+    add(
+      `autopilot_governance_implementation_exists_${path.basename(autopilotGovernanceImplementationPath, ".js")}`,
+      exists(autopilotGovernanceImplementationPath),
+      autopilotGovernanceImplementationPath
     );
   }
 
@@ -269,6 +295,14 @@ function main() {
       readonlyVisualReviewImplementationPath
     );
   }
+  for (const { wrapperPath, implementationPath: autopilotGovernanceImplementationPath } of autopilotGovernanceValidatorPaths) {
+    const wrapper = exists(wrapperPath) ? read(wrapperPath) : "";
+    add(
+      `autopilot_governance_wrapper_delegates_${path.basename(wrapperPath, ".js")}`,
+      wrapperDelegatesTo(wrapper, autopilotGovernanceImplementationPath),
+      autopilotGovernanceImplementationPath
+    );
+  }
   add(
     "validator_index_lists_current_splits",
     includesAll(validatorIndex, [
@@ -297,6 +331,10 @@ function main() {
       ...readonlyVisualReviewValidatorPaths.flatMap(({ wrapperPath, implementationPath: readonlyVisualReviewImplementationPath }) => [
         wrapperPath,
         readonlyVisualReviewImplementationPath,
+      ]),
+      ...autopilotGovernanceValidatorPaths.flatMap(({ wrapperPath, implementationPath: autopilotGovernanceImplementationPath }) => [
+        wrapperPath,
+        autopilotGovernanceImplementationPath,
       ]),
     ])
   );
@@ -341,6 +379,10 @@ function main() {
       ...readonlyVisualReviewValidatorPaths.flatMap(({ wrapperPath, implementationPath: readonlyVisualReviewImplementationPath }) => [
         wrapperPath,
         readonlyVisualReviewImplementationPath,
+      ]),
+      ...autopilotGovernanceValidatorPaths.flatMap(({ wrapperPath, implementationPath: autopilotGovernanceImplementationPath }) => [
+        wrapperPath,
+        autopilotGovernanceImplementationPath,
       ]),
     ],
     provider_contact_performed: false,

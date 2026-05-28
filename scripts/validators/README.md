@@ -56,6 +56,15 @@ Current readonly visual review validators:
   wrappers so artifact catalog fixture refs, package validators, README
   commands, and historical phase records keep working.
 
+Current autopilot governance validators:
+
+- `scripts/validators/autopilot_governance/` contains the implementation files
+  for the `scripts/validate_autopilot*.js`, `scripts/validate_agent_board*.js`,
+  and `scripts/validate_smart*.js` families.
+- The matching root validators remain compatibility wrappers so `.agent_board`,
+  Smart Standing Authorization, push-safety, and historical governance commands
+  keep working.
+
 Current root validator index:
 
 - `scripts/validators/VALIDATOR_INDEX.md` records the current root

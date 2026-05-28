@@ -1,5 +1,62 @@
 ---
 
+## Current Handoff Update - Repository Directory Optimization Autopilot Governance Validator Split
+
+```text
+phase: repository_directory_optimization_autopilot_governance_validator_split
+slice: autopilot_governance_validator_move_with_root_wrappers
+status: COMPLETED_VALIDATED_PENDING_COMMIT
+mode: Green local repository directory optimization
+branch: master
+summary: Completed the autopilot governance validator family split. The 12 implementation files now live under `scripts/validators/autopilot_governance/`, and all root paths remain compatibility wrappers.
+active_current_phase_reference: v0_3_3_first_live_generation_pilot
+active_source_phase_reference: v0_3_2_live_candidate_action_packet
+active_next_red_decision_reference: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+changed_by_this_task:
+  - scripts/validate_agent_board_queue_reconciliation.js
+  - scripts/validate_agent_board_state.js
+  - scripts/validate_autopilot_agent_board_resume_compaction_guard.js
+  - scripts/validate_autopilot_amber_action_packet_preflight.js
+  - scripts/validate_autopilot_amber_packet_to_receipt_traceability.js
+  - scripts/validate_autopilot_evolution_engine.js
+  - scripts/validate_autopilot_false_readiness_negative_cases.js
+  - scripts/validate_autopilot_goal_compiler.js
+  - scripts/validate_autopilot_governance_kernel.js
+  - scripts/validate_autopilot_readiness_receipt_registry_cross_claims.js
+  - scripts/validate_autopilot_receipt_registry_negative_cases.js
+  - scripts/validate_smart_v3_push_safety_lane.js
+  - scripts/validators/autopilot_governance/
+  - scripts/validators/VALIDATOR_INDEX.md
+  - scripts/validators/README.md
+  - scripts/validators/governance/validate_repository_structure_governance.js
+  - docs/PROJECT_STRUCTURE.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+validation:
+  - root and implementation autopilot governance validator syntax checks: passed
+  - root and implementation autopilot governance validator runtime checks: passed
+  - node scripts\validate_repository_structure_governance.js: passed
+  - node scripts\validate_agent_board_state.js: passed
+boundaries:
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  secret_value_read_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  production_candidate_002_started: false
+  Batch_005_started: false
+  commit_performed: pending exact-file guarded commit
+  push_performed: false
+  push_status: not_performed
+next_safe_task: exact-file guarded commit for this slice; then continue to visual_eval validator family split.
+```
+
+---
+
 ## Current Handoff Update - Repository Directory Optimization Readonly Operator Console Validator Split
 
 ```text

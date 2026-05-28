@@ -1,5 +1,59 @@
 ---
 
+## Checkpoint - Repository Directory Optimization Autopilot Governance Validator Split
+
+```text
+phase: repository_directory_optimization_autopilot_governance_validator_split
+slice: autopilot_governance_validator_move_with_root_wrappers
+status: completed_validated_pending_commit
+result: PASS
+mode: Green local repository directory optimization
+summary: Moved the 12 autopilot, agent board, and Smart Standing Authorization governance validator implementations under `scripts/validators/autopilot_governance/` while preserving their root validator paths as compatibility wrappers.
+active_current_phase_reference: v0_3_3_first_live_generation_pilot
+active_source_phase_reference: v0_3_2_live_candidate_action_packet
+active_next_red_decision_reference: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+changed_files_current_task:
+  - scripts/validate_agent_board_queue_reconciliation.js
+  - scripts/validate_agent_board_state.js
+  - scripts/validate_autopilot_agent_board_resume_compaction_guard.js
+  - scripts/validate_autopilot_amber_action_packet_preflight.js
+  - scripts/validate_autopilot_amber_packet_to_receipt_traceability.js
+  - scripts/validate_autopilot_evolution_engine.js
+  - scripts/validate_autopilot_false_readiness_negative_cases.js
+  - scripts/validate_autopilot_goal_compiler.js
+  - scripts/validate_autopilot_governance_kernel.js
+  - scripts/validate_autopilot_readiness_receipt_registry_cross_claims.js
+  - scripts/validate_autopilot_receipt_registry_negative_cases.js
+  - scripts/validate_smart_v3_push_safety_lane.js
+  - scripts/validators/autopilot_governance/
+  - scripts/validators/VALIDATOR_INDEX.md
+  - scripts/validators/README.md
+  - scripts/validators/governance/validate_repository_structure_governance.js
+  - docs/PROJECT_STRUCTURE.md
+validation_run:
+  - root and implementation autopilot governance validator syntax checks: passed
+  - root and implementation autopilot governance validator runtime checks: passed
+  - node scripts\validate_repository_structure_governance.js: passed
+  - node scripts\validate_agent_board_state.js: passed
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+secret_value_read_performed: false
+memory_written: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+production_candidate_002_started: false
+Batch_005_started: false
+commit_performed: pending exact-file guarded commit
+push_performed: false
+push_status: not_performed
+tag_release_deploy_performed: false
+recommended_next_phase: repository_directory_optimization_visual_eval_validator_split
+```
+
+---
+
 ## Checkpoint - Repository Directory Optimization Readonly Operator Console Validator Split
 
 ```text

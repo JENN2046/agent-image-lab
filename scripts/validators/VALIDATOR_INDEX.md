@@ -69,6 +69,18 @@ scripts/validators/readonly_visual_review/validate_visual_eval_readonly_review_s
 scripts/validators/readonly_visual_review/validate_visual_eval_readonly_review_workspace.js
 scripts/validators/readonly_visual_review/validate_visual_eval_readonly_review_workspace_case_matrix.js
 scripts/validators/readonly_visual_review/validate_visual_eval_readonly_review_workspace_corpus.js
+scripts/validators/autopilot_governance/validate_agent_board_queue_reconciliation.js
+scripts/validators/autopilot_governance/validate_agent_board_state.js
+scripts/validators/autopilot_governance/validate_autopilot_agent_board_resume_compaction_guard.js
+scripts/validators/autopilot_governance/validate_autopilot_amber_action_packet_preflight.js
+scripts/validators/autopilot_governance/validate_autopilot_amber_packet_to_receipt_traceability.js
+scripts/validators/autopilot_governance/validate_autopilot_evolution_engine.js
+scripts/validators/autopilot_governance/validate_autopilot_false_readiness_negative_cases.js
+scripts/validators/autopilot_governance/validate_autopilot_goal_compiler.js
+scripts/validators/autopilot_governance/validate_autopilot_governance_kernel.js
+scripts/validators/autopilot_governance/validate_autopilot_readiness_receipt_registry_cross_claims.js
+scripts/validators/autopilot_governance/validate_autopilot_receipt_registry_negative_cases.js
+scripts/validators/autopilot_governance/validate_smart_v3_push_safety_lane.js
 ```
 
 Stable root compatibility wrappers:
@@ -106,6 +118,18 @@ scripts/validate_visual_eval_readonly_review_surface_snapshot.js
 scripts/validate_visual_eval_readonly_review_workspace.js
 scripts/validate_visual_eval_readonly_review_workspace_case_matrix.js
 scripts/validate_visual_eval_readonly_review_workspace_corpus.js
+scripts/validate_agent_board_queue_reconciliation.js
+scripts/validate_agent_board_state.js
+scripts/validate_autopilot_agent_board_resume_compaction_guard.js
+scripts/validate_autopilot_amber_action_packet_preflight.js
+scripts/validate_autopilot_amber_packet_to_receipt_traceability.js
+scripts/validate_autopilot_evolution_engine.js
+scripts/validate_autopilot_false_readiness_negative_cases.js
+scripts/validate_autopilot_goal_compiler.js
+scripts/validate_autopilot_governance_kernel.js
+scripts/validate_autopilot_readiness_receipt_registry_cross_claims.js
+scripts/validate_autopilot_receipt_registry_negative_cases.js
+scripts/validate_smart_v3_push_safety_lane.js
 ```
 
 ## Rules For Future Splits
@@ -122,11 +146,11 @@ scripts/validate_visual_eval_readonly_review_workspace_corpus.js
 
 ## Recommended Next Families
 
-1. `autopilot_governance`: governance validators, but only after checking
-   `.agent_board` historical assumptions.
-2. `visual_eval`: smaller visual-evaluation protocol validators.
-3. `capsule`: capsule/product evidence validators after separating side-effect
+1. `visual_eval`: smaller visual-evaluation protocol validators.
+2. `capsule`: capsule/product evidence validators after separating side-effect
    runners from validators.
+3. `directory_governance_closure`: no broad movement; tighten the structure
+   index, governance checks, and next-family route map.
 
 `legacy_versioned`, `other`, `runtime`, and `provider_preflight` need deeper
 reference maps before physical movement.
