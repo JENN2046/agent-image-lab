@@ -6,6 +6,7 @@ const path = require("node:path");
 
 const root = path.resolve(__dirname, "..");
 const repairPackagePath = "docs/EXACT_A5_PROVIDER_RETRY_007_VCPTOOLBOX_OUTPUT_OVERRIDE_REPAIR_PACKAGE.md";
+const patchPreviewScriptPath = "scripts/preview_exact_a5_provider_retry_007_vcptoolbox_output_override_patch.js";
 const activationDocPath = "docs/EXACT_A5_PROVIDER_RETRY_007_ACTIVATION_PACKET_DRAFT.md";
 const preflightDocPath = "docs/EXACT_A5_PROVIDER_RETRY_007_PREFLIGHT_DECISION.md";
 const activationAdapterPath = "adapters/runtime/exact_a5_provider_retry_007_activation_packet_draft.js";
@@ -16,6 +17,7 @@ const vcptoolboxRouteTestPath = path.join(vcptoolboxRoot, "tests", "aiImageAgent
 
 const authorizationId = "AUTH-DRAFT-NATIVE-DOUBAO-SEEDREAM5-RETRY-20260527-007";
 const retry007OutputRoot = "A:\\agent-image-lab\\agent-image-lab-v0.2\\runs\\real_generation\\v0_6_73_real_vcp_agent_generation_retry_007";
+const retry007OutputRootSource = retry007OutputRoot.replace(/\\/g, "\\\\");
 const validatorName = "validate_exact_a5_provider_retry_007_vcptoolbox_output_override_repair_package";
 
 function assert(condition, message) {
@@ -52,6 +54,7 @@ function validateRepairPackage(text) {
     "can_apply_now: false",
     "real_vcptoolbox_patch_allowed_now: false",
     "real_provider_execution_allowed_now: false",
+    `patch_preview_script: ${patchPreviewScriptPath}`,
     authorizationId,
     "A:\\VCP\\apps\\VCPToolBox\\routes\\admin\\aiImageAgents.js",
     "A:\\VCP\\apps\\VCPToolBox\\tests\\aiImageAgentsRoute.test.js",
@@ -62,6 +65,7 @@ function validateRepairPackage(text) {
     "new_runner_allowed: false",
     "new_module_allowed: false",
     "dependency_change_allowed: false",
+    "node scripts\\preview_exact_a5_provider_retry_007_vcptoolbox_output_override_patch.js",
     "target_constant: AUTHORIZED_DOUBAO_PROJECT_BASE_PATH_OVERRIDES",
     `key: ${authorizationId}`,
     `value: ${retry007OutputRoot}`,
@@ -97,6 +101,56 @@ function validateRepairPackage(text) {
     "real_vcptoolbox_modified: true",
     "real_vcptoolbox_executed: true",
   ], "repair package");
+}
+
+function validatePatchPreview() {
+  const previewScriptFullPath = repoPath(patchPreviewScriptPath);
+  assert(fs.existsSync(previewScriptFullPath), "patch preview script missing");
+  const preview = require(previewScriptFullPath).buildPreview();
+
+  assert(preview.passed === true, "patch preview must pass");
+  assert(preview.preview_id === "exact_a5_provider_retry_007_vcptoolbox_output_override_patch_preview", "patch preview id mismatch");
+  assert(preview.mode === "dry_run_patch_preview_only", "patch preview mode mismatch");
+  assert(preview.repair_package_ref === repairPackagePath, "patch preview repair package ref mismatch");
+  assert(preview.can_apply_now === false, "patch preview must not be directly executable");
+  assert(preview.exact_authorization_required === true, "patch preview must require exact authorization");
+  assert(preview.real_vcptoolbox_patch_allowed_now === false, "patch preview must not allow VCPToolBox patch now");
+  assert(preview.provider_execution_allowed_now === false, "patch preview must not allow provider execution");
+  assert(Array.isArray(preview.allowed_vcptoolbox_files_if_separately_authorized), "patch preview allowed file list missing");
+  assert(preview.allowed_vcptoolbox_files_if_separately_authorized.length === 2, "patch preview must keep exactly two allowed VCPToolBox files");
+  assert(preview.allowed_vcptoolbox_files_if_separately_authorized.includes(vcptoolboxRoutePath), "patch preview route path mismatch");
+  assert(preview.allowed_vcptoolbox_files_if_separately_authorized.includes(vcptoolboxRouteTestPath), "patch preview route test path mismatch");
+  assert(preview.forbidden_vcptoolbox_files.includes(path.join(vcptoolboxRoot, "server.js")), "patch preview must forbid server.js");
+  assert(preview.forbidden_vcptoolbox_files.includes(path.join(vcptoolboxRoot, "modules", "aiImageExecutionAdapter.js")), "patch preview must forbid adapter module");
+  assert(preview.forbidden_vcptoolbox_files.includes(path.join(vcptoolboxRoot, "Plugin", "DoubaoGen")), "patch preview must forbid DoubaoGen edits");
+  assert(preview.route_delta_preview.add_exact_entry.key === authorizationId, "patch preview route key mismatch");
+  assert(preview.route_delta_preview.add_exact_entry.value === retry007OutputRoot, "patch preview route value mismatch");
+  assert(preview.route_delta_preview.add_exact_entry.source_preview.includes(authorizationId), "patch preview route source missing authorization id");
+  assert(preview.route_delta_preview.add_exact_entry.source_preview.includes(retry007OutputRootSource), "patch preview route source missing escaped output root");
+  assert(preview.route_test_delta_preview.add_test_name === "aiImageAgents execute route forwards exact retry 007 Doubao project base path override", "patch preview test name mismatch");
+  assert(preview.route_test_delta_preview.expected_task_id === authorizationId, "patch preview test task id mismatch");
+  assert(preview.route_test_delta_preview.expected_output_root === retry007OutputRoot, "patch preview test output root mismatch");
+  assert(preview.route_test_delta_preview.source_preview.includes(authorizationId), "patch preview test source missing authorization id");
+  assert(preview.route_test_delta_preview.source_preview.includes(retry007OutputRootSource), "patch preview test source missing escaped output root");
+  assert(preview.route_test_delta_preview.preserve_negative_test === true, "patch preview must preserve negative route test");
+  assert(preview.side_effects.dry_run_only === true, "patch preview must be dry-run only");
+  for (const [field, value] of Object.entries(preview.side_effects)) {
+    if (field !== "dry_run_only") {
+      assert(value === false, `patch preview side effect must be false: ${field}`);
+    }
+  }
+
+  if (preview.current_surface.vcptoolbox_available === true) {
+    assert(preview.current_surface.route_file_exists === true, "patch preview must see VCPToolBox route when repo is available");
+    assert(preview.current_surface.route_test_file_exists === true, "patch preview must see VCPToolBox route test when repo is available");
+    assert(preview.current_surface.route_has_output_override_constant === true, "patch preview route constant missing");
+    assert(preview.current_surface.route_has_retry_006_anchor === true, "patch preview route retry_006 anchor missing");
+    assert(preview.current_surface.route_test_has_retry_006_anchor === true, "patch preview route test retry_006 anchor missing");
+    assert(preview.current_surface.current_route_authorizes_retry_007_output_override === false, "patch preview detected retry_007 already authorized; update repair package status before activation");
+    assert(preview.current_surface.current_route_test_covers_retry_007_output_override === false, "patch preview detected retry_007 route test already present; update repair package status before activation");
+  }
+
+  return preview;
 }
 
 function validateLinkedSurfaces() {
@@ -166,7 +220,8 @@ function validateOptionalVcpToolBoxSurface() {
     "rejects unapproved Doubao project base path override",
   ], "VCPToolBox route test");
 
-  const routeAuthorizesRetry007 = route.includes(authorizationId) && route.includes(retry007OutputRoot);
+  const routeAuthorizesRetry007 = route.includes(authorizationId) &&
+    (route.includes(retry007OutputRoot) || route.includes(retry007OutputRootSource));
   assert(routeAuthorizesRetry007 === false, "Current VCPToolBox route unexpectedly authorizes retry_007; repair package status must be updated before activation");
 
   return {
@@ -179,6 +234,7 @@ function validateOptionalVcpToolBoxSurface() {
 function main() {
   assert(fs.existsSync(repoPath(repairPackagePath)), "repair package missing");
   validateRepairPackage(readRepo(repairPackagePath));
+  const patchPreview = validatePatchPreview();
   validateLinkedSurfaces();
   const vcptoolboxSurface = validateOptionalVcpToolBoxSurface();
 
@@ -191,6 +247,10 @@ function main() {
     can_apply_now: false,
     real_vcptoolbox_patch_allowed_now: false,
     real_provider_execution_allowed_now: false,
+    patch_preview_script: patchPreviewScriptPath,
+    patch_preview_id: patchPreview.preview_id,
+    patch_preview_mode: patchPreview.mode,
+    patch_preview_validated: true,
     ...vcptoolboxSurface,
     provider_contact_performed: false,
     plugin_call_performed: false,

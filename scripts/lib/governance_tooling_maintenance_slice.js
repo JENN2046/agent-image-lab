@@ -2558,6 +2558,20 @@ const EXPECTED_P2_2_RETRY_007_PREFLIGHT_DECISION_SLICE = [
   "scripts/validate_mvp_core.js"
 ].sort();
 
+const EXPECTED_RETRY_007_VCPTOOLBOX_PATCH_PREVIEW_GATE_SLICE = [
+  ".agent_board/BLOCKERS.md",
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  "docs/EXACT_A5_PROVIDER_RETRY_007_VCPTOOLBOX_OUTPUT_OVERRIDE_REPAIR_PACKAGE.md",
+  "scripts/lib/governance_tooling_maintenance_slice.js",
+  "scripts/preview_exact_a5_provider_retry_007_vcptoolbox_output_override_patch.js",
+  "scripts/validate_exact_a5_provider_retry_007_vcptoolbox_output_override_repair_package.js",
+  "scripts/validate_governance.ps1",
+  "scripts/validate_mvp.ps1"
+].sort();
+
 const EXPECTED_P2_3_GOVERNANCE_RECOVERABILITY_COUNT_SYNC_SLICE = [
   ".agent_board/CHECKPOINT.md",
   ".agent_board/HANDOFF.md",
@@ -2602,6 +2616,10 @@ const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
   {
     id: "retry_007_preflight_decision_slice",
     files: EXPECTED_P2_2_RETRY_007_PREFLIGHT_DECISION_SLICE
+  },
+  {
+    id: "retry_007_vcptoolbox_patch_preview_gate_slice",
+    files: EXPECTED_RETRY_007_VCPTOOLBOX_PATCH_PREVIEW_GATE_SLICE
   },
   {
     id: "provider_evidence_integrity_phase_2_slice",
@@ -3585,6 +3603,19 @@ function governanceToolingMaintenanceSliceSelfCheck() {
       passed: Object.keys(EXPECTED_P2_2_RETRY_007_PREFLIGHT_DECISION_PACKAGE_SCRIPTS).length === 2
         && EXPECTED_P2_2_RETRY_007_PREFLIGHT_DECISION_PACKAGE_SCRIPTS["validate:retry-007-preflight-decision"] === "node scripts/validate_exact_a5_provider_retry_007_preflight_decision.js"
         && EXPECTED_P2_2_RETRY_007_PREFLIGHT_DECISION_PACKAGE_SCRIPTS["validate:all"].includes("npm run validate:retry-007-preflight-decision")
+    },
+    {
+      check: "exact_slice_matches_retry_007_vcptoolbox_patch_preview_gate",
+      passed: findMatchingGovernanceToolingSlice(
+        EXPECTED_RETRY_007_VCPTOOLBOX_PATCH_PREVIEW_GATE_SLICE
+      )?.id === "retry_007_vcptoolbox_patch_preview_gate_slice"
+    },
+    {
+      check: "retry_007_vcptoolbox_patch_preview_gate_rejects_provider_receipt",
+      passed: findMatchingGovernanceToolingSlice([
+        ...EXPECTED_RETRY_007_VCPTOOLBOX_PATCH_PREVIEW_GATE_SLICE,
+        "reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_007_receipt.json"
+      ]) === null
     },
     {
       check: "exact_slice_matches_provider_evidence_integrity_phase_2",
@@ -4632,6 +4663,7 @@ module.exports = {
   EXPECTED_V0_6_73AG_TO_AH_REMOTE_SYNC_AND_CURRENT_HEAD_GO_NO_GO_SLICE,
   EXPECTED_V0_6_73AG_TO_AI_REMOTE_SYNC_CURRENT_HEAD_AND_ONE_SHOT_BLOCKED_SLICE,
   EXPECTED_P2_2_RETRY_007_PREFLIGHT_DECISION_SLICE,
+  EXPECTED_RETRY_007_VCPTOOLBOX_PATCH_PREVIEW_GATE_SLICE,
   EXPECTED_P2_2_RETRY_007_PREFLIGHT_DECISION_PACKAGE_SCRIPTS,
   EXPECTED_P2_1_PROVIDER_EVIDENCE_INTEGRITY_PHASE_2_SLICE,
   EXPECTED_PROVIDER_EVIDENCE_INTEGRITY_SCOPE_NARROWING_FIX_SLICE,

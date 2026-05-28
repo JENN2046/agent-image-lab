@@ -1,5 +1,17 @@
 ---
 
+- [x] ID: retry_007_vcptoolbox_patch_preview_gate_20260529
+      Lane: Green local provider-preflight dry-run patch preview with exact read-only VCPToolBox inspection; no external repo write.
+      Status: completed_validated_pending_local_commit_and_push.
+      Goal: Add a deterministic dry-run preview for the future two-file VCPToolBox retry_007 output override repair.
+      Active current phase reference: v0_3_3_first_live_generation_pilot.
+      Active source phase reference: v0_3_2_live_candidate_action_packet.
+      Active next Red decision reference: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Completed: added `scripts/preview_exact_a5_provider_retry_007_vcptoolbox_output_override_patch.js`; extended the existing repair package validator to verify the preview; linked the preview from the repair package; registered the exact current slice in `scripts/lib/governance_tooling_maintenance_slice.js`; fixed the governance tag short-hash check in `scripts/validate_governance.ps1` and legacy `scripts/validate_mvp.ps1`; confirmed the current VCPToolBox route/test surface still stops before retry_007.
+      Validation: preview script syntax/runtime, repair-package validator syntax/runtime, activation packet validator, repository structure governance, agent board state, resume compaction guard, core, public-disclosure, provider-evidence-integrity, MVP, capsule-regression readiness subchecks, `npm run validate:governance`, `npm run validate:all`, and `git diff --check` passed after one narrow short-hash validation fix.
+      Boundary fields: image_generation_performed: false; secret_value_read_performed: false; real_vcptoolbox_exact_read_only_inspection_performed: true; real_vcptoolbox_modified: false; new_runner_created: false; push_status: not_performed_pending_exact_file_commit_and_push; tag_release_deploy_performed: false.
+      Recommended next: exact-file commit/push if safe; do not modify VCPToolBox or execute provider/contact/image without the exact future authorization gates.
+
 - [x] ID: post_push_sync_after_retry_007_repair_validator_gate_20260529
       Lane: Green local post-push state-surface sync.
       Status: completed_validated_post_push_sync.

@@ -7910,9 +7910,9 @@ if (-not $node) {
       Add-Failure "local commit scope expected branch master, codex/v5.11-post-merge-reconciliation, codex/v5.12-release-candidate-readiness, codex/a5-complete-delivery-20260507, or codex/runtime-review-followup, got $currentBranch"
     }
 
-    $localTagCommit = ((& git rev-parse --short v4.8-local-validation-checkpoint) -join "`n").Trim()
+    $localTagCommit = ((& git rev-parse --short=7 v4.8-local-validation-checkpoint) -join "`n").Trim()
     if ($LASTEXITCODE -ne 0) {
-      Add-Failure "git rev-parse --short v4.8-local-validation-checkpoint failed during local tag readiness validation"
+      Add-Failure "git rev-parse --short=7 v4.8-local-validation-checkpoint failed during local tag readiness validation"
     } elseif ($localTagCommit -ne '6d4253f') {
       Add-Failure "local tag v4.8-local-validation-checkpoint expected commit 6d4253f, got $localTagCommit"
     }

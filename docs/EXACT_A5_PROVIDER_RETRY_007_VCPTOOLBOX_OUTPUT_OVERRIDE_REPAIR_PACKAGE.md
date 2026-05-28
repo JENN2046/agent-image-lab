@@ -5,6 +5,7 @@ phase: exact_a5_provider_retry_007_vcptoolbox_output_override_repair_package
 status: repair_package_only
 base_contract: AGENTS.md
 validator: scripts/validate_exact_a5_provider_retry_007_vcptoolbox_output_override_repair_package.js
+patch_preview_script: scripts/preview_exact_a5_provider_retry_007_vcptoolbox_output_override_patch.js
 intent: local_draft
 lane: Green
 source_blocker: retry_007_execution_surface_reuse_review_20260528
@@ -82,6 +83,7 @@ node --test tests\aiImageExecutionAdapter.test.js
 Validate this repair package in Agent Image Lab:
 
 ```text
+node scripts\preview_exact_a5_provider_retry_007_vcptoolbox_output_override_patch.js
 node scripts\validate_exact_a5_provider_retry_007_vcptoolbox_output_override_repair_package.js
 ```
 
