@@ -1,5 +1,50 @@
 ---
 
+## Current Run State - Readonly Operator Console Daily Use Hardening
+
+```text
+phase: readonly_operator_console_daily_use_hardening
+status: COMPLETED_VALIDATED_LOCAL_STATIC_ENTRYPOINT_HARDENING
+mode: Green local static Review Console entrypoint hardening
+branch: master
+goal: Make the readonly operator console discoverable and validated as a daily-use static readonly review entrypoint.
+completed:
+- Added a Chinese "只读审片操作台" link from `review_console/static_prototype/index.html` to `readonly_operator_console.html`.
+- Added README instructions for opening the page directly or through the index entrypoint.
+- Documented readonly boundaries and the dedicated validator command.
+- Extended `scripts/validate_readonly_operator_console_static_surface.js` to fail closed on missing index entrypoint, missing README path, missing validator command, missing readonly boundaries, or forbidden positive runtime/write claims.
+changed_by_this_task:
+- review_console/static_prototype/index.html
+- review_console/static_prototype/README.md
+- scripts/validate_readonly_operator_console_static_surface.js
+- .agent_board/CHECKPOINT.md
+- .agent_board/HANDOFF.md
+- .agent_board/RUN_STATE.md
+- .agent_board/TASK_QUEUE.md
+validation:
+- node --check scripts\validate_readonly_operator_console_static_surface.js: passed
+- node scripts\validate_readonly_operator_console_static_surface.js: passed
+- node --check review_console\static_prototype\readonly_operator_console.js: passed
+- node scripts\validate_visual_eval_readonly_artifact_graph.js: passed
+- node scripts\validate_visual_eval_readonly_review_artifact_catalog.js: passed
+- browser smoke at http://127.0.0.1:4186/: passed; preview server stopped
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+production_candidate_002_started: false
+Batch_005_started: false
+commit_performed: false
+push_performed: false
+tag_release_deploy_performed: false
+next_safe_task: run final diff/status checks; exact-file local commit only if explicitly requested.
+next_phase_started: false
+```
+
+---
+
 ## Current Run State - Readonly Visual Review Dataset Regression Layer
 
 ```text

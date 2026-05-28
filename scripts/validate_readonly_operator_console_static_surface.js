@@ -5,6 +5,8 @@ const vm = require("vm");
 const htmlPath = "review_console/static_prototype/readonly_operator_console.html";
 const cssPath = "review_console/static_prototype/readonly_operator_console.css";
 const jsPath = "review_console/static_prototype/readonly_operator_console.js";
+const indexPath = "review_console/static_prototype/index.html";
+const readmePath = "review_console/static_prototype/README.md";
 const mockPath = "review_console/static_prototype/mock_data.js";
 const collectionConsumerPath = "tests/schema_examples/visual_eval_readonly_review_collection_consumer.example.json";
 const collectionQueryPath = "tests/schema_examples/visual_eval_readonly_review_collection_query.example.json";
@@ -61,6 +63,52 @@ function hasNoForbiddenRuntimeCalls(source) {
   return forbidden.filter((token) => source.includes(token));
 }
 
+function sectionBetween(source, heading) {
+  const start = source.indexOf(heading);
+  if (start === -1) return "";
+  const rest = source.slice(start + heading.length);
+  const nextHeading = rest.search(/\n##\s+/);
+  return nextHeading === -1 ? rest : rest.slice(0, nextHeading);
+}
+
+function hasNoForbiddenEntrypointClaims(source) {
+  const forbidden = [
+    "provider_contact_performed: true",
+    "plugin_call_performed: true",
+    "api_call_performed: true",
+    "image_generation_performed: true",
+    "DailyNote_write_performed: true",
+    "VCP_memory_write_performed: true",
+    "production_candidate_created: true",
+    "accepted_samples_write_performed: true",
+    "允许写入 production",
+    "可以写入 production",
+    "会写入 production",
+    "允许创建 production candidate",
+    "可以创建 production candidate",
+    "会创建 production candidate",
+    "允许生成图片",
+    "可以生成图片",
+    "会生成图片",
+    "允许调用真实 provider",
+    "可以调用真实 provider",
+    "会调用真实 provider",
+    "允许调用真实 plugin",
+    "可以调用真实 plugin",
+    "会调用真实 plugin",
+    "允许调用真实 API",
+    "可以调用真实 API",
+    "会调用真实 API",
+    "允许写入 VCP memory",
+    "可以写入 VCP memory",
+    "会写入 VCP memory",
+    "允许写入 DailyNote",
+    "可以写入 DailyNote",
+    "会写入 DailyNote"
+  ];
+  return forbidden.filter((token) => source.includes(token));
+}
+
 function loadBrowserState() {
   const sandbox = {
     window: {},
@@ -81,13 +129,16 @@ function itemTags(row) {
 }
 
 function main() {
-  [htmlPath, cssPath, jsPath, mockPath, collectionConsumerPath, collectionQueryPath, detailPath, navigationPath, sessionPath, metadataSurfacePath].forEach((filePath) => {
+  [htmlPath, cssPath, jsPath, indexPath, readmePath, mockPath, collectionConsumerPath, collectionQueryPath, detailPath, navigationPath, sessionPath, metadataSurfacePath].forEach((filePath) => {
     addResult(`${filePath}_exists`, fs.existsSync(filePath), filePath);
   });
 
   const html = read(htmlPath);
   const css = read(cssPath);
   const js = read(jsPath);
+  const index = read(indexPath);
+  const readme = read(readmePath);
+  const readmeOperatorSection = sectionBetween(readme, "## 只读审片操作台");
   const state = loadBrowserState();
   const collectionConsumer = readJson(collectionConsumerPath);
   const collectionQuery = readJson(collectionQueryPath);
@@ -100,6 +151,21 @@ function main() {
   addResult("html_references_mock_data", html.includes("./mock_data.js"));
   addResult("html_references_operator_js", html.includes("./readonly_operator_console.js"));
   addResult("html_title_chinese", html.includes("<title>只读审片操作台</title>"));
+  addResult("index_links_operator_console", index.includes('href="./readonly_operator_console.html"') && index.includes("只读审片操作台"));
+  addResult("index_operator_entry_visible_chinese", index.includes("打开只读审片操作台") && index.includes(">只读审片操作台</a>"));
+  addResult("readme_documents_operator_console_path", readmeOperatorSection.includes("review_console/static_prototype/readonly_operator_console.html"));
+  addResult("readme_documents_index_entrypoint", readmeOperatorSection.includes("review_console/static_prototype/index.html") && readmeOperatorSection.includes("顶部点击"));
+  addResult("readme_documents_operator_validator", readmeOperatorSection.includes("node scripts\\validate_readonly_operator_console_static_surface.js"));
+  addResult("readme_operator_boundaries_present", [
+    "不读取 `asset_archive/`",
+    "不 fetch",
+    "不写文件",
+    "不调用 provider / plugin / API / DailyNote / VCP memory",
+    "不生成图片",
+    "不创建 production candidate"
+  ].every((boundary) => readmeOperatorSection.includes(boundary)));
+  const forbiddenEntrypointClaims = hasNoForbiddenEntrypointClaims(index + "\n" + readmeOperatorSection);
+  addResult("entrypoint_docs_no_forbidden_positive_claims", forbiddenEntrypointClaims.length === 0, forbiddenEntrypointClaims.join(", "));
   addResult("html_visible_section_titles_chinese", [
     "只读审片",
     "入口总览",

@@ -38,6 +38,24 @@
 review_console/static_prototype/index.html
 ```
 
+## 只读审片操作台
+
+日常只读审片入口：
+
+```text
+review_console/static_prototype/readonly_operator_console.html
+```
+
+也可以先打开 `review_console/static_prototype/index.html`，在顶部点击“只读审片操作台”。
+
+它用于先看入口总览，再钻取 selected patch，最后检查 reject 约束。页面只展示当前 readonly artifact chain 的静态投影，不读取 `asset_archive/`，不 fetch，不写文件，不调用 provider / plugin / API / DailyNote / VCP memory，不生成图片，不创建 production candidate。
+
+推荐本地验证：
+
+```text
+node scripts\validate_readonly_operator_console_static_surface.js
+```
+
 页面内的“草案输出”只是在浏览器中生成 `review_session` / `image_case` / `memory_delta` 的预览文本，不代表保存、入库或写入长期记忆。
 页面内的“本地导入记录读取”只解析用户粘贴、用户选择的本地 JSON 文件，或项目内置 v14.105 import record seed。解析结果只留在浏览器内存和草案输出中，不 fetch、不写文件、不调用 runtime / VCP / plugin / API / DailyNote / VCP memory。
 页面内的“真实样片证据”只展示 v14.131 真实 artifact recoverability validator 证明过的 accepted sample 证据；它不能从 `PROJECT_MASTER_PLAN.md`、文档数量或 token 数量提升产品进度，也不代表 VCP runtime integration。

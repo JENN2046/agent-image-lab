@@ -1,4 +1,14 @@
 ---
+- [x] ID: readonly_operator_console_daily_use_hardening
+      Lane: Green local static Review Console entrypoint hardening.
+      Status: completed_validated_local_static_entrypoint_hardening.
+      Goal: Make the readonly operator console discoverable and validated as a daily-use static readonly review entrypoint.
+      Completed: added a Chinese "只读审片操作台" link from the static prototype index to `readonly_operator_console.html`; documented direct and index-based opening in README; documented readonly boundaries and validator command; extended the operator console validator to fail closed on missing entrypoint/docs/boundary contract.
+      Boundary: no artifact semantics, canonical protocol, taxonomy, accumulation, bridge, bundle, provider contact, plugin call, API call, image generation, DailyNote/VCP memory, production candidate, package script, dependency change, commit, push, tag, release, deploy, or destructive action.
+      Validation: operator console syntax and validator passed; readonly artifact graph and catalog validators passed; browser smoke passed through local static preview at http://127.0.0.1:4186/ and preview server was stopped.
+      Recommended next: run final diff/status checks; exact-file local commit only if explicitly requested.
+
+---
 - [x] ID: readonly_visual_review_dataset_regression_layer_20260527
       Lane: Green local static Review Console dataset regression implementation.
       Status: completed_validated_local_static_regression_layer.

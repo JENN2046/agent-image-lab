@@ -1,5 +1,46 @@
 ---
 
+## Checkpoint - Readonly Operator Console Daily Use Hardening
+
+```text
+phase: readonly_operator_console_daily_use_hardening
+slice: operator_console_entrypoint_and_readme
+status: completed_validated_no_commit_no_push
+result: PASS
+mode: Green local static Review Console entrypoint hardening
+summary: Made the readonly operator console discoverable as a daily-use static entry. The static prototype index now links directly to `readonly_operator_console.html`, README documents how to open and validate the page, and the operator console validator now fails closed if the index or README entrypoint contract drifts.
+changed_files_current_task:
+  - review_console/static_prototype/index.html
+  - review_console/static_prototype/README.md
+  - scripts/validate_readonly_operator_console_static_surface.js
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+validation_run:
+  - node --check scripts\validate_readonly_operator_console_static_surface.js: passed
+  - node scripts\validate_readonly_operator_console_static_surface.js: passed
+  - node --check review_console\static_prototype\readonly_operator_console.js: passed
+  - node scripts\validate_visual_eval_readonly_artifact_graph.js: passed
+  - node scripts\validate_visual_eval_readonly_review_artifact_catalog.js: passed
+  - browser smoke at http://127.0.0.1:4186/: passed; preview server stopped
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+memory_written: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+production_candidate_002_started: false
+Batch_005_started: false
+commit_performed: false
+push_performed: false
+tag_release_deploy_performed: false
+next_phase_started: false
+```
+
+---
+
 ## Checkpoint - Readonly Selected Patch Display Contract Migration Entry Slice
 
 ```text
