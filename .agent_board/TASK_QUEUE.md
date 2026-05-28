@@ -1,5 +1,19 @@
 ---
 
+- [x] ID: retry_007_execution_surface_reuse_review_20260528
+      Lane: Green/Amber boundary review with exact read-only VCPToolBox inspection.
+      Status: blocked_by_missing_retry_007_output_override.
+      Goal: Start the product-mainline retry_007 plan by confirming whether the existing VCPToolBox admin route can be reused without inventing a new runner.
+      Active current phase reference: v0_3_3_first_live_generation_pilot.
+      Active source phase reference: v0_3_2_live_candidate_action_packet.
+      Active next Red decision reference: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Completed: reused the existing retry_007 preflight and inactive activation draft surfaces; confirmed Agent Image Lab master was clean/synced at `02f9410e`; inspected VCPToolBox read-only at clean/synced `94f2f597`; confirmed route/test support for DoubaoGen fallback loading, explicit Seedream 5 model passthrough, and exact output overrides through retry_006.
+      Blocker: VCPToolBox `routes/admin/aiImageAgents.js` does not include `AUTH-DRAFT-NATIVE-DOUBAO-SEEDREAM5-RETRY-20260527-007` in the authorized Doubao project base path override allowlist, so retry_007 cannot safely proceed to activation using the current route.
+      Validation: VCPToolBox route/module/DoubaoGen syntax checks passed; `node --test tests\aiImageAgentsRoute.test.js` passed 10/10; `node --test tests\aiImageExecutionAdapter.test.js` passed 3/3.
+      Boundary: pre-activation full suite not run because Wave 1 blocked; runtime/provider/plugin/API/image/DailyNote/VCP memory/accepted_samples/production/secret/dependency/tag/release/deploy actions not performed; retry_007 activation draft remains inactive and provider execution is not allowed now.
+      Boundary fields: image_generation_performed: false; secret_value_read_performed: false; push_status: not_performed; tag_release_deploy_performed: false.
+      Recommended next: prepare an exact VCPToolBox repair package to add the retry_007 output override plus route test, then rerun retry_007 pre-activation validation before any provider/image execution.
+
 - [x] ID: post_push_sync_after_governance_recoverability_count_sync_20260528
       Lane: Green local post-push state-surface sync.
       Status: completed_validated_post_push_sync.

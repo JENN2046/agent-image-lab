@@ -1,5 +1,52 @@
 ---
 
+## Checkpoint - Retry 007 Execution Surface Reuse Review
+
+```text
+phase: retry_007_execution_surface_reuse_review_20260528
+status: blocked_by_missing_retry_007_output_override
+result: BLOCKED
+mode: Green/Amber boundary review; read-only VCPToolBox execution-surface inspection
+summary: Began the product-mainline retry_007 plan and stopped at Wave 1 because the current VCPToolBox admin route cannot yet carry retry_007 exact output override. Existing route/test evidence supports DoubaoGen fallback loading, explicit model passthrough, and retry_003 through retry_006 output overrides, but not retry_007.
+active_current_phase_reference: v0_3_3_first_live_generation_pilot
+active_source_phase_reference: v0_3_2_live_candidate_action_packet
+active_next_red_decision_reference: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+changed_files_current_task:
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+external_read_only_evidence:
+  - A:\VCP\apps\VCPToolBox at `94f2f597`, clean/synced with origin/main
+  - routes/admin/aiImageAgents.js allowlist includes retry_003, retry_004, retry_005, retry_006 only
+  - tests/aiImageAgentsRoute.test.js covers retry_003 through retry_006 and rejects unapproved output override
+validation_run:
+  - VCPToolBox node --check routes\admin\aiImageAgents.js: passed
+  - VCPToolBox node --check modules\aiImageExecutionAdapter.js: passed
+  - VCPToolBox node --check Plugin\DoubaoGen\DoubaoGen.js: passed
+  - VCPToolBox node --test tests\aiImageAgentsRoute.test.js: passed, 10/10
+  - VCPToolBox node --test tests\aiImageExecutionAdapter.test.js: passed, 3/3
+runtime_execution_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+secret_value_read_performed: false
+dependency_change_performed: false
+push_performed: false
+push_status: not_performed
+tag_release_deploy_performed: false
+authorization_status: retry_007_activation_packet_draft_not_active
+authorization_active: false
+can_execute_now: false
+provider_execution_allowed_now: false
+recommended_next_phase: exact_vcptoolbox_retry_007_output_override_repair_package
+```
+
 ## Checkpoint - Post-Push Sync After Governance Recoverability Count Sync
 
 ```text

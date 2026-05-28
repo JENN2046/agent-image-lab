@@ -1,5 +1,53 @@
 ---
 
+## Current Run State - Retry 007 Execution Surface Reuse Review
+
+```text
+phase: retry_007_execution_surface_reuse_review_20260528
+status: BLOCKED_BY_MISSING_RETRY_007_OUTPUT_OVERRIDE
+mode: Green/Amber boundary review; read-only VCPToolBox execution-surface inspection
+branch: master
+active_current_phase_reference: v0_3_3_first_live_generation_pilot
+active_source_phase_reference: v0_3_2_live_candidate_action_packet
+active_next_red_decision_reference: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+goal: Implement the product-mainline plan by first confirming whether the existing VCPToolBox admin route can safely carry retry_007 without inventing a new runner.
+completed:
+- Reused existing retry_007 preflight and inactive activation draft surfaces.
+- Confirmed local Agent Image Lab master started clean and synced with origin/master at `02f9410e`.
+- Read-only inspected `A:\VCP\apps\VCPToolBox`; it exists, is clean/synced with origin/main, and is at `94f2f597`.
+- Confirmed VCPToolBox route/test support for DoubaoGen plugin fallback loading, explicit model passthrough, and exact output overrides for retry_003 through retry_006.
+- Confirmed the current VCPToolBox exact output override allowlist does not include `AUTH-DRAFT-NATIVE-DOUBAO-SEEDREAM5-RETRY-20260527-007`.
+blocker:
+- retry_007 cannot reuse the current VCPToolBox admin route for exact output override yet; `routes/admin/aiImageAgents.js` only authorizes retry_003, retry_004, retry_005, and retry_006 output roots.
+validation:
+- VCPToolBox `node --check routes\admin\aiImageAgents.js`: passed
+- VCPToolBox `node --check modules\aiImageExecutionAdapter.js`: passed
+- VCPToolBox `node --check Plugin\DoubaoGen\DoubaoGen.js`: passed
+- VCPToolBox `node --test tests\aiImageAgentsRoute.test.js`: passed, 10/10
+- VCPToolBox `node --test tests\aiImageExecutionAdapter.test.js`: passed, 3/3
+pre_activation_gate_status: not_run_because_wave_1_surface_reuse_check_blocked
+runtime_execution_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+secret_value_read_performed: false
+dependency_change_performed: false
+push_performed: false
+push_status: not_performed
+tag_release_deploy_performed: false
+authorization_status: retry_007_activation_packet_draft_not_active
+authorization_active: false
+can_execute_now: false
+provider_execution_allowed_now: false
+next_safe_task: Prepare an exact VCPToolBox repair package to add the retry_007 output override and route test, then rerun retry_007 pre-activation validation; do not execute provider/contact/image until the exact activation phrase and all gates pass.
+next_phase_started: false
+```
+
 ## Current Run State - Post-Push Sync After Governance Recoverability Count Sync
 
 ```text

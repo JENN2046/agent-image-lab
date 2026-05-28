@@ -1,5 +1,56 @@
 ---
 
+## Current Handoff Update - Retry 007 Execution Surface Reuse Review
+
+```text
+phase: retry_007_execution_surface_reuse_review_20260528
+status: BLOCKED_BY_MISSING_RETRY_007_OUTPUT_OVERRIDE
+mode: Green/Amber boundary review; read-only VCPToolBox execution-surface inspection
+branch: master
+active_current_phase_reference: v0_3_3_first_live_generation_pilot
+active_source_phase_reference: v0_3_2_live_candidate_action_packet
+active_next_red_decision_reference: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+summary: The product-mainline plan was started with a no-new-runner Wave 1 execution-surface review. VCPToolBox remains clean/synced at `94f2f597` and its current AI image admin route still supports DoubaoGen fallback loading, explicit model passthrough, and exact output overrides through retry_006. The route does not yet authorize the retry_007 output root, so retry_007 cannot proceed to pre-activation or provider execution from the current surface.
+changed_by_this_task:
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+external_read_only_evidence:
+  - A:\VCP\apps\VCPToolBox\routes\admin\aiImageAgents.js
+  - A:\VCP\apps\VCPToolBox\modules\aiImageExecutionAdapter.js
+  - A:\VCP\apps\VCPToolBox\tests\aiImageAgentsRoute.test.js
+  - A:\VCP\apps\VCPToolBox\tests\aiImageExecutionAdapter.test.js
+validation:
+  - VCPToolBox `node --check routes\admin\aiImageAgents.js`: passed
+  - VCPToolBox `node --check modules\aiImageExecutionAdapter.js`: passed
+  - VCPToolBox `node --check Plugin\DoubaoGen\DoubaoGen.js`: passed
+  - VCPToolBox `node --test tests\aiImageAgentsRoute.test.js`: passed, 10/10
+  - VCPToolBox `node --test tests\aiImageExecutionAdapter.test.js`: passed, 3/3
+blocked_reason: Missing VCPToolBox exact output override for `AUTH-DRAFT-NATIVE-DOUBAO-SEEDREAM5-RETRY-20260527-007`; current allowlist covers only retry_003 through retry_006.
+pre_activation_gate_status: not_run_because_wave_1_surface_reuse_check_blocked
+boundaries:
+  runtime_execution_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  accepted_samples_write_performed: false
+  production_candidate_write_performed: false
+  secret_value_read_performed: false
+  dependency_change_performed: false
+  push_performed: false
+  push_status: not_performed
+  tag_release_deploy_performed: false
+  authorization_status: retry_007_activation_packet_draft_not_active
+  authorization_active: false
+  can_execute_now: false
+  provider_execution_allowed_now: false
+next_safe_task: prepare an exact VCPToolBox repair package for retry_007 output override and test coverage, then rerun pre-activation gates; no provider/contact/image execution until exact activation phrase and gates pass.
+```
+
 ## Current Handoff Update - Post-Push Sync After Governance Recoverability Count Sync
 
 ```text
