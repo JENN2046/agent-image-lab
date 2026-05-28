@@ -1,5 +1,70 @@
 ---
 
+- [x] ID: repository_directory_optimization_top_level_directory_ownership_map
+      Lane: Green local repository directory optimization.
+      Status: completed_validated.
+      Goal: Add a project-specific top-level directory ownership table without moving files.
+      Active current phase reference: v0_3_3_first_live_generation_pilot.
+      Active source phase reference: v0_3_2_live_candidate_action_packet.
+      Active next Red decision reference: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Completed: added `docs/TOP_LEVEL_DIRECTORY_OWNERSHIP.md`; classified every current top-level directory by owner/domain, role, portability, top-level decision, and next safe action; linked it from `docs/PROJECT_STRUCTURE.md`; extended repository structure governance validation to require coverage and boundary language.
+      Boundary: no physical file movement, no top-level directory creation, no package/dependency change, no runtime/provider/plugin/API/image/memory/production action, no secret read, commit, push, tag, release, deploy, or destructive command; image_generation_performed: false; secret_value_read_performed: false; push_status: not_performed.
+      Validation: governance validator syntax passed; repository structure governance passed after one boundary wording repair; git diff --check passed with CRLF normalization warnings only; agent board state passed; compaction guard passed; npm run validate:mvp passed.
+      Recommended next: classify review-later top-level directories one at a time, or stop directory work and return to product work.
+
+- [x] ID: repository_directory_optimization_other_validator_classification_map
+      Lane: Green local repository directory optimization.
+      Status: completed_target_validated_full_mvp_ps_known_failed.
+      Goal: Map mixed fallback validators before any physical movement.
+      Active current phase reference: v0_3_3_first_live_generation_pilot.
+      Active source phase reference: v0_3_2_live_candidate_action_packet.
+      Active next Red decision reference: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Completed: added `scripts/validators/OTHER_VALIDATOR_CLASSIFICATION_MAP.md`; grouped 181 root validators into planning bands; updated validator index and README; extended repository structure governance validator to require the map, full root-family coverage, boundary language, and references.
+      Boundary: no physical validator movement, no package/dependency change, no runtime/provider/plugin/API/image/memory/production action, no secret read, commit, push, tag, release, deploy, or destructive command; image_generation_performed: false; secret_value_read_performed: false; push_status: not_performed.
+      Validation: governance validator syntax passed; repository structure governance passed after one boundary wording repair; git diff --check passed with CRLF normalization warnings only; agent board state passed; compaction guard passed; npm run validate:mvp passed.
+      Known validation gap: scripts\validate_mvp.ps1 not rerun for this slice; known failing from previous slice on historical/full-suite current-surface checks.
+      Recommended next: `exact_new_trial_validator_movement_plan`, `provider_preflight_movement_plan`, `legacy_versioned_reference_map`, or separately inspect historical full-suite validate_mvp.ps1 current-surface failures if full-suite closure is required.
+
+- [x] ID: repository_directory_optimization_runtime_reference_map
+      Lane: Green local repository directory optimization.
+      Status: completed_target_validated_full_mvp_ps_known_failed.
+      Goal: Map runtime-adjacent validators before any physical movement.
+      Active current phase reference: v0_3_3_first_live_generation_pilot.
+      Active source phase reference: v0_3_2_live_candidate_action_packet.
+      Active next Red decision reference: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Completed: added `scripts/validators/RUNTIME_REFERENCE_MAP.md`; grouped 21 root validators; updated validator index and README; extended repository structure governance validator to require the map, full root-family coverage, boundary language, and references.
+      Boundary: no physical validator movement, no package/dependency change, no runtime/provider/plugin/API/image/memory/production action, no secret read, commit, push, tag, release, deploy, or destructive command; runtime_execution_performed: false; image_generation_performed: false; secret_value_read_performed: false; push_status: not_performed.
+      Validation: governance validator syntax passed; repository structure governance passed; git diff --check passed with CRLF normalization warnings only; agent board state passed; compaction guard passed; npm run validate:mvp passed.
+      Known validation gap: scripts\validate_mvp.ps1 not rerun for this slice; known failing from previous slice on historical/full-suite current-surface checks.
+      Recommended next: `other_validator_classification_map`, or separately inspect historical full-suite validate_mvp.ps1 current-surface failures if full-suite closure is required.
+
+---
+
+- [x] ID: repository_directory_optimization_provider_preflight_reference_map
+      Lane: Green local repository directory optimization.
+      Status: completed_target_validated_full_mvp_ps_failed.
+      Goal: Map provider/A5 preflight validators before any physical movement.
+      Active current phase reference: v0_3_3_first_live_generation_pilot.
+      Active source phase reference: v0_3_2_live_candidate_action_packet.
+      Active next Red decision reference: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Completed: added `scripts/validators/PROVIDER_PREFLIGHT_REFERENCE_MAP.md`; grouped 14 root validators; updated validator index and README; extended repository structure governance validator to require the map, full root-family coverage, boundary language, and references.
+      Boundary: no physical validator movement, no package/dependency change, no provider/plugin/API/image/memory/production/runtime action, no secret read, commit, push, tag, release, deploy, or destructive command; image_generation_performed: false; secret_value_read_performed: false; push_status: not_performed.
+      Validation: governance validator syntax passed; repository structure governance passed; git diff --check passed with CRLF normalization warnings only; agent board state passed; compaction guard passed after narrow status-surface repair; npm run validate:mvp passed; scripts\validate_mvp.ps1 failed on historical/full-suite current-surface failures including v14.214 `commit_performed:\s+true` scan.
+      Recommended next: `runtime_reference_map`, or separately inspect historical full-suite validate_mvp.ps1 current-surface failures if full-suite closure is required.
+
+---
+
+- [x] ID: remote_fast_forward_sync_directory_optimization_closure_20260528
+      Lane: Green local status-surface sync after remote fast-forward.
+      Status: completed_validated_local_status_surface_sync.
+      Goal: Record the workspace refresh after origin/master advanced from 1581ed1 to d837dbb.
+      Completed: fetched origin; confirmed local master was behind by 12 and ahead by 0; confirmed fast-forward was possible; fast-forwarded to d837dbb; confirmed HEAD equals origin/master; recorded that the directory optimization closure wave is now part of the local remote-synced baseline.
+      Boundary: no package/dependency change, provider/plugin/API/image/memory/production/runtime action, secret read, commit, push, tag, release, deploy, or destructive command.
+      Validation: git status and ahead/behind passed before this status-surface edit; git diff --check passed with CRLF normalization warnings only; agent board validator passed; MVP validation passed.
+      Recommended next: review local .agent_board status-surface sync; exact-file local commit or push only if explicitly authorized.
+
+---
+
 - [x] ID: repository_directory_optimization_closure
       Slice: wrapper_execution_contract_and_route_map.
       Lane: Green local repository directory optimization.

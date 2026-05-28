@@ -83,6 +83,13 @@ function rootValidatorNames() {
     .sort();
 }
 
+function topLevelDirectoryNames() {
+  return fs.readdirSync(root, { withFileTypes: true })
+    .filter((entry) => entry.isDirectory() && entry.name !== ".git")
+    .map((entry) => entry.name)
+    .sort();
+}
+
 function bucketRootValidators(names) {
   const counts = Object.fromEntries(validatorBucketRules.map(([bucket]) => [bucket, 0]));
   counts.other = 0;
@@ -98,8 +105,12 @@ function bucketRootValidators(names) {
 function main() {
   const standardPath = "docs/REPOSITORY_ORGANIZATION_STANDARD.md";
   const structurePath = "docs/PROJECT_STRUCTURE.md";
+  const topLevelOwnershipPath = "docs/TOP_LEVEL_DIRECTORY_OWNERSHIP.md";
   const validatorReadmePath = "scripts/validators/README.md";
   const validatorIndexPath = "scripts/validators/VALIDATOR_INDEX.md";
+  const otherValidatorClassificationMapPath = "scripts/validators/OTHER_VALIDATOR_CLASSIFICATION_MAP.md";
+  const providerPreflightReferenceMapPath = "scripts/validators/PROVIDER_PREFLIGHT_REFERENCE_MAP.md";
+  const runtimeReferenceMapPath = "scripts/validators/RUNTIME_REFERENCE_MAP.md";
   const rootWrapperPath = "scripts/validate_repository_structure_governance.js";
   const implementationPath = "scripts/validators/governance/validate_repository_structure_governance.js";
   const readonlyOperatorWrapperPath = "scripts/validate_readonly_operator_console_static_surface.js";
@@ -210,8 +221,12 @@ function main() {
 
   add("repository_organization_standard_exists", exists(standardPath), standardPath);
   add("project_structure_exists", exists(structurePath), structurePath);
+  add("top_level_directory_ownership_exists", exists(topLevelOwnershipPath), topLevelOwnershipPath);
   add("validator_layout_readme_exists", exists(validatorReadmePath), validatorReadmePath);
   add("validator_index_exists", exists(validatorIndexPath), validatorIndexPath);
+  add("other_validator_classification_map_exists", exists(otherValidatorClassificationMapPath), otherValidatorClassificationMapPath);
+  add("provider_preflight_reference_map_exists", exists(providerPreflightReferenceMapPath), providerPreflightReferenceMapPath);
+  add("runtime_reference_map_exists", exists(runtimeReferenceMapPath), runtimeReferenceMapPath);
   add("root_compatibility_wrapper_exists", exists(rootWrapperPath), rootWrapperPath);
   add("governance_validator_implementation_exists", exists(implementationPath), implementationPath);
   add("readonly_operator_console_wrapper_exists", exists(readonlyOperatorWrapperPath), readonlyOperatorWrapperPath);
@@ -259,14 +274,21 @@ function main() {
 
   const standard = exists(standardPath) ? read(standardPath) : "";
   const structure = exists(structurePath) ? read(structurePath) : "";
+  const topLevelOwnership = exists(topLevelOwnershipPath) ? read(topLevelOwnershipPath) : "";
   const validatorReadme = exists(validatorReadmePath) ? read(validatorReadmePath) : "";
   const validatorIndex = exists(validatorIndexPath) ? read(validatorIndexPath) : "";
+  const otherValidatorClassificationMap = exists(otherValidatorClassificationMapPath) ? read(otherValidatorClassificationMapPath) : "";
+  const providerPreflightReferenceMap = exists(providerPreflightReferenceMapPath) ? read(providerPreflightReferenceMapPath) : "";
+  const runtimeReferenceMap = exists(runtimeReferenceMapPath) ? read(runtimeReferenceMapPath) : "";
   const rootWrapper = exists(rootWrapperPath) ? read(rootWrapperPath) : "";
   const readonlyOperatorWrapper = exists(readonlyOperatorWrapperPath) ? read(readonlyOperatorWrapperPath) : "";
   const rootValidators = rootValidatorNames();
+  const topLevelDirectories = topLevelDirectoryNames();
   const validatorBuckets = bucketRootValidators(rootValidators);
+  const otherValidatorNames = rootValidators.filter((name) => !validatorBucketRules.some(([, predicate]) => predicate(name)));
 
   add("project_structure_references_standard", structure.includes(standardPath), standardPath);
+  add("project_structure_references_top_level_ownership", structure.includes(topLevelOwnershipPath), topLevelOwnershipPath);
   add("validator_readme_references_standard", validatorReadme.includes(standardPath), standardPath);
   add("validator_readme_references_index", validatorReadme.includes(validatorIndexPath), validatorIndexPath);
   add("project_structure_references_validator_index", structure.includes(validatorIndexPath), validatorIndexPath);
@@ -283,6 +305,40 @@ function main() {
       "## Agent Board",
       "## Before Moving Files",
       "## Validation",
+    ])
+  );
+  add(
+    "top_level_ownership_covers_current_directories",
+    includesAll(topLevelOwnership, topLevelDirectories.map((directoryName) => `\`${directoryName}/\``)),
+    `expected ${topLevelDirectories.length} top-level directories`
+  );
+  add(
+    "top_level_ownership_columns_present",
+    includesAll(topLevelOwnership, [
+      "| Directory | Owner / domain | Current role | Portability | Top-level decision | Next safe action |",
+      "## Current Gaps",
+      "visual production line",
+    ])
+  );
+  add(
+    "top_level_ownership_non_authorization_present",
+    includesAll(topLevelOwnership, [
+      "does not authorize physical moves",
+      "deletion",
+      "runtime execution",
+      "provider contact",
+      "plugin calls",
+      "API calls",
+      "image generation",
+      "memory writes",
+      "production promotion",
+      "dependency changes",
+      "commit",
+      "push",
+      "tag",
+      "release",
+      "deploy",
+      "destructive filesystem actions",
     ])
   );
   add(
@@ -464,6 +520,137 @@ function main() {
       "Do not change `package.json` scripts unless the task explicitly targets the",
     ])
   );
+  add(
+    "other_validator_classification_map_count_matches",
+    otherValidatorClassificationMap.includes(`other_root_validator_total: ${otherValidatorNames.length}`),
+    `expected other_root_validator_total: ${otherValidatorNames.length}`
+  );
+  add(
+    "other_validator_classification_map_lists_all_root_family",
+    includesAll(otherValidatorClassificationMap, otherValidatorNames.map((name) => `scripts/${name}`)),
+    `expected ${otherValidatorNames.length} root validators`
+  );
+  add(
+    "other_validator_classification_map_boundaries_present",
+    includesAll(otherValidatorClassificationMap, [
+      "does not authorize physical moves",
+      "deletion",
+      "provider contact",
+      "plugin calls",
+      "API calls",
+      "runtime execution",
+      "image generation",
+      "memory writes",
+      "production promotion",
+      "dependency changes",
+      "commit",
+      "push",
+      "tag",
+      "release",
+      "deploy",
+      "destructive filesystem actions",
+    ])
+  );
+  add(
+    "other_validator_classification_map_referenced",
+    validatorIndex.includes(otherValidatorClassificationMapPath) &&
+      validatorReadme.includes(otherValidatorClassificationMapPath),
+    otherValidatorClassificationMapPath
+  );
+  add(
+    "provider_preflight_reference_map_lists_root_family",
+    includesAll(providerPreflightReferenceMap, [
+      "scripts/validate_exact_a5_provider_execution_activation_receipt.js",
+      "scripts/validate_exact_a5_provider_execution_packet_draft.js",
+      "scripts/validate_exact_a5_provider_retry_003_activation_receipt.js",
+      "scripts/validate_exact_a5_provider_retry_004_activation_receipt.js",
+      "scripts/validate_exact_a5_provider_retry_005_activation_receipt.js",
+      "scripts/validate_exact_a5_provider_retry_006_activation_receipt.js",
+      "scripts/validate_exact_a5_provider_retry_007_preflight_decision.js",
+      "scripts/validate_exact_a5_provider_retry_activation_receipt.js",
+      "scripts/validate_exact_a5_provider_retry_packet_draft.js",
+      "scripts/validate_provider_evidence_integrity_contract.js",
+      "scripts/validate_provider_payload_capture_preflight.js",
+      "scripts/validate_provider_preflight_no_provider_call.js",
+      "scripts/validate_provider_receipt_artifacts.js",
+      "scripts/validate_retry_006_artifact_integrity.js",
+    ])
+  );
+  add(
+    "provider_preflight_reference_map_boundaries_present",
+    includesAll(providerPreflightReferenceMap, [
+      "does not authorize provider contact",
+      "plugin calls",
+      "API calls",
+      "image generation",
+      "memory writes",
+      "production promotion",
+      "dependency changes",
+      "commit",
+      "push",
+      "tag",
+      "release",
+      "deploy",
+      "destructive filesystem actions",
+    ])
+  );
+  add(
+    "provider_preflight_reference_map_referenced",
+    validatorIndex.includes(providerPreflightReferenceMapPath) &&
+      validatorReadme.includes(providerPreflightReferenceMapPath),
+    providerPreflightReferenceMapPath
+  );
+  add(
+    "runtime_reference_map_lists_root_family",
+    includesAll(runtimeReferenceMap, [
+      "scripts/validate_durable_archive_copy_authorization_package.js",
+      "scripts/validate_durable_archive_copy_execution_report.js",
+      "scripts/validate_runtime_delivery_surface.js",
+      "scripts/validate_runtime_durable_audit_store.js",
+      "scripts/validate_runtime_guard_unit.js",
+      "scripts/validate_runtime_kernel_backend_gap_map.js",
+      "scripts/validate_runtime_kernel_entry_boundary_no_exec.js",
+      "scripts/validate_runtime_kernel_v0_artifact_adapter_stub.js",
+      "scripts/validate_runtime_kernel_v0_audit_write.js",
+      "scripts/validate_runtime_kernel_v0_contract.js",
+      "scripts/validate_runtime_kernel_v0.js",
+      "scripts/validate_runtime_prototype_smoke.js",
+      "scripts/validate_runtime_prototype_suite.js",
+      "scripts/validate_runtime_review_batch_10a_acceptance_matrix.js",
+      "scripts/validate_runtime_review_batch_10b_dry_run_replay_index.js",
+      "scripts/validate_runtime_review_batch_10c_auth_consolidation.js",
+      "scripts/validate_runtime_review_batch_9a_state_freshness.js",
+      "scripts/validate_runtime_review_batch_9b_session_compatibility.js",
+      "scripts/validate_runtime_review_batch_9c_operator_runbook.js",
+      "scripts/validate_runtime_review_bridge_readonly_stub.js",
+      "scripts/validate_runtime_review_full_chain.js",
+    ])
+  );
+  add(
+    "runtime_reference_map_boundaries_present",
+    includesAll(runtimeReferenceMap, [
+      "does not authorize runtime execution",
+      "provider contact",
+      "plugin calls",
+      "API calls",
+      "image generation",
+      "memory writes",
+      "production promotion",
+      "dependency changes",
+      "commit",
+      "push",
+      "tag",
+      "release",
+      "deploy",
+      "destructive filesystem actions",
+    ])
+  );
+  add(
+    "runtime_reference_map_referenced",
+    validatorIndex.includes(runtimeReferenceMapPath) &&
+      validatorReadme.includes(runtimeReferenceMapPath),
+    runtimeReferenceMapPath
+  );
 
   const failed = checks.filter((check) => !check.passed);
   const result = {
@@ -472,8 +659,12 @@ function main() {
     files_checked: [
       standardPath,
       structurePath,
+      topLevelOwnershipPath,
       validatorReadmePath,
       validatorIndexPath,
+      otherValidatorClassificationMapPath,
+      providerPreflightReferenceMapPath,
+      runtimeReferenceMapPath,
       rootWrapperPath,
       implementationPath,
       readonlyOperatorWrapperPath,

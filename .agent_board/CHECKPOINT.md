@@ -1,5 +1,264 @@
 ---
 
+## Checkpoint - Top-Level Directory Ownership Map
+
+```text
+phase: repository_directory_optimization_top_level_directory_ownership_map
+status: completed_validated
+result: COMPLETED_VALIDATED
+mode: Green local repository directory optimization
+summary: Added a project-specific top-level directory ownership table. No files or directories were moved; the table is a navigation and planning index only.
+active_current_phase_reference: v0_3_3_first_live_generation_pilot
+active_source_phase_reference: v0_3_2_live_candidate_action_packet
+active_next_red_decision_reference: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+changed_files_current_task:
+  - docs/TOP_LEVEL_DIRECTORY_OWNERSHIP.md
+  - docs/PROJECT_STRUCTURE.md
+  - scripts/validators/governance/validate_repository_structure_governance.js
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+pre_existing_dirty_worktree_preserved:
+  - AGENTS.md
+  - scripts/validators/README.md
+  - scripts/validators/VALIDATOR_INDEX.md
+  - scripts/validators/OTHER_VALIDATOR_CLASSIFICATION_MAP.md
+  - scripts/validators/PROVIDER_PREFLIGHT_REFERENCE_MAP.md
+  - scripts/validators/RUNTIME_REFERENCE_MAP.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+validation_run:
+  - node --check scripts\validators\governance\validate_repository_structure_governance.js: passed
+  - node scripts\validate_repository_structure_governance.js: passed after one boundary wording repair
+  - git diff --check: passed with CRLF normalization warnings only
+  - node scripts\validate_agent_board_state.js: passed
+  - node scripts\validate_autopilot_agent_board_resume_compaction_guard.js: passed
+  - npm run validate:mvp: passed
+physical_file_movement_performed: false
+top_level_directory_created: false
+runtime_execution_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+secret_value_read_performed: false
+memory_written: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+dependency_change_performed: false
+package_script_change_performed: false
+commit_performed: false
+push_performed: false
+push_status: not_performed
+tag_release_deploy_performed: false
+recommended_next_phase: classify_review_later_top_level_directories_or_return_to_product_work
+```
+
+## Checkpoint - Other Validator Classification Map
+
+```text
+phase: repository_directory_optimization_other_validator_classification_map
+status: completed_target_validated_full_mvp_ps_known_failed
+result: TARGET_VALIDATED_FULL_MVP_PS_KNOWN_FAILED
+mode: Green local repository directory optimization
+summary: Added a mixed fallback validator classification map as the next directory optimization slice. No other validators were moved; root validator compatibility remains unchanged.
+active_current_phase_reference: v0_3_3_first_live_generation_pilot
+active_source_phase_reference: v0_3_2_live_candidate_action_packet
+active_next_red_decision_reference: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+changed_files_current_task:
+  - scripts/validators/OTHER_VALIDATOR_CLASSIFICATION_MAP.md
+  - scripts/validators/VALIDATOR_INDEX.md
+  - scripts/validators/README.md
+  - scripts/validators/governance/validate_repository_structure_governance.js
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+pre_existing_dirty_worktree_preserved:
+  - AGENTS.md
+  - scripts/validators/PROVIDER_PREFLIGHT_REFERENCE_MAP.md
+  - scripts/validators/RUNTIME_REFERENCE_MAP.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+validation_run:
+  - node --check scripts\validators\governance\validate_repository_structure_governance.js: passed
+  - node scripts\validate_repository_structure_governance.js: passed after one boundary wording repair
+  - git diff --check: passed with CRLF normalization warnings only
+  - node scripts\validate_agent_board_state.js: passed
+  - node scripts\validate_autopilot_agent_board_resume_compaction_guard.js: passed
+  - npm run validate:mvp: passed
+  - powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1: not rerun for this slice; known failing from previous slice on historical/full-suite current-surface checks
+runtime_execution_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+secret_value_read_performed: false
+memory_written: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+dependency_change_performed: false
+physical_file_movement_performed: false
+package_script_change_performed: false
+commit_performed: false
+push_performed: false
+push_status: not_performed
+tag_release_deploy_performed: false
+recommended_next_phase: exact_new_trial_validator_movement_plan_or_provider_preflight_movement_plan_or_legacy_versioned_reference_map_or_full_suite_current_surface_failure_inspection
+```
+
+## Checkpoint - Runtime Validator Reference Map
+
+```text
+phase: repository_directory_optimization_runtime_reference_map
+status: completed_target_validated_full_mvp_ps_known_failed
+result: TARGET_VALIDATED_FULL_MVP_PS_KNOWN_FAILED
+mode: Green local repository directory optimization
+summary: Added a runtime-adjacent validator reference map as the next directory optimization slice. No runtime validators were moved; root validator compatibility remains unchanged.
+active_current_phase_reference: v0_3_3_first_live_generation_pilot
+active_source_phase_reference: v0_3_2_live_candidate_action_packet
+active_next_red_decision_reference: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+changed_files_current_task:
+  - scripts/validators/RUNTIME_REFERENCE_MAP.md
+  - scripts/validators/VALIDATOR_INDEX.md
+  - scripts/validators/README.md
+  - scripts/validators/governance/validate_repository_structure_governance.js
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+pre_existing_dirty_worktree_preserved:
+  - AGENTS.md
+  - scripts/validators/PROVIDER_PREFLIGHT_REFERENCE_MAP.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+validation_run:
+  - node --check scripts\validators\governance\validate_repository_structure_governance.js: passed
+  - node scripts\validate_repository_structure_governance.js: passed
+  - git diff --check: passed with CRLF normalization warnings only
+  - node scripts\validate_agent_board_state.js: passed
+  - node scripts\validate_autopilot_agent_board_resume_compaction_guard.js: passed
+  - npm run validate:mvp: passed
+  - powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1: not rerun for this slice; known failing from previous slice on historical/full-suite current-surface checks
+runtime_execution_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+secret_value_read_performed: false
+memory_written: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+dependency_change_performed: false
+physical_file_movement_performed: false
+package_script_change_performed: false
+commit_performed: false
+push_performed: false
+push_status: not_performed
+tag_release_deploy_performed: false
+recommended_next_phase: other_validator_classification_map_or_full_suite_current_surface_failure_inspection
+```
+
+---
+
+## Checkpoint - Provider Preflight Validator Reference Map
+
+```text
+phase: repository_directory_optimization_provider_preflight_reference_map
+status: completed_target_validated_full_mvp_ps_failed
+result: TARGET_VALIDATED_FULL_MVP_PS_FAILED
+mode: Green local repository directory optimization
+summary: Added a provider/A5 preflight validator reference map as the next directory optimization slice. No provider/A5-adjacent validators were moved; root validator compatibility remains unchanged.
+active_current_phase_reference: v0_3_3_first_live_generation_pilot
+active_source_phase_reference: v0_3_2_live_candidate_action_packet
+active_next_red_decision_reference: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+changed_files_current_task:
+  - scripts/validators/PROVIDER_PREFLIGHT_REFERENCE_MAP.md
+  - scripts/validators/VALIDATOR_INDEX.md
+  - scripts/validators/README.md
+  - scripts/validators/governance/validate_repository_structure_governance.js
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+pre_existing_dirty_worktree_preserved:
+  - AGENTS.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+validation_run:
+  - node --check scripts\validators\governance\validate_repository_structure_governance.js: passed
+  - node scripts\validate_repository_structure_governance.js: passed
+  - git diff --check: passed with CRLF normalization warnings only
+  - node scripts\validate_agent_board_state.js: passed
+  - node scripts\validate_autopilot_agent_board_resume_compaction_guard.js: passed after narrow status-surface repair
+  - npm run validate:mvp: passed
+  - powershell -ExecutionPolicy Bypass -File scripts\validate_mvp.ps1: failed; observed historical/full-suite current-surface failures including v14.214 `current_surfaces_forbidden_/commit_performed:\s+true/i_absent`
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+secret_value_read_performed: false
+memory_written: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+dependency_change_performed: false
+physical_file_movement_performed: false
+package_script_change_performed: false
+commit_performed: false
+push_performed: false
+push_status: not_performed
+tag_release_deploy_performed: false
+recommended_next_phase: runtime_reference_map_or_full_suite_current_surface_failure_inspection
+```
+
+---
+
+## Checkpoint - Remote Fast-forward Sync to Directory Optimization Closure
+
+```text
+phase: remote_fast_forward_sync_directory_optimization_closure_20260528
+status: completed_validated_local_status_surface_sync
+result: PASS
+mode: Green local status-surface sync after remote fast-forward
+summary: Local master was fast-forwarded from 1581ed1 to d837dbb after origin/master advanced by 12 commits. The current local branch now matches origin/master and includes the repository directory optimization closure wave.
+changed_files_current_task:
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+validation_run:
+  - git status --short --branch before this status-surface edit: synced
+  - git rev-list --left-right --count master...origin/master before this status-surface edit: 0 0
+  - git diff --check: passed with CRLF normalization warnings only
+  - node scripts\validate_agent_board_state.js: passed
+  - npm run validate:mvp: passed
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+secret_value_read_performed: false
+memory_written: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+dependency_change_performed: false
+commit_performed: false
+push_performed: false
+push_status: not_performed
+tag_release_deploy_performed: false
+recommended_next_phase: review_local_status_surface_sync
+```
+
+---
+
 ## Checkpoint - Repository Directory Optimization Closure
 
 ```text

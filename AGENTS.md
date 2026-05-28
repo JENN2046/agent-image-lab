@@ -58,6 +58,9 @@ small dependency changes with an exact package/action list
 
 Remote push / tag push / release and destructive Git or filesystem operations still require explicit authorization.
 
+After every local fast-forward sync to the upstream remote head, Codex must run a
+local Green Lane status-surface sync and record the new baseline in `.agent_board`.
+
 Stage documents should not copy this entire constitution. They should use the fixed gate template in Section 3.5 plus a narrow phase difference patch.
 
 ---

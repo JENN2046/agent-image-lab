@@ -80,6 +80,30 @@ Current capsule validators:
   manifest, preview registry, status taxonomy, and static product smoke
   commands keep working.
 
+Current provider preflight validators:
+
+- `scripts/validators/PROVIDER_PREFLIGHT_REFERENCE_MAP.md` maps the
+  provider/A5 preflight root validator family.
+- The matching root validators remain in place for now. Do not physically move
+  them until provider side-effect, private audit, aggregate validator, and
+  wrapper assumptions are mapped.
+
+Current runtime validators:
+
+- `scripts/validators/RUNTIME_REFERENCE_MAP.md` maps the runtime-adjacent root
+  validator family.
+- The matching root validators remain in place for now. Do not physically move
+  them until runtime side-effect, durable audit, review bridge, aggregate
+  validator, and wrapper assumptions are mapped.
+
+Current other validators:
+
+- `scripts/validators/OTHER_VALIDATOR_CLASSIFICATION_MAP.md` maps the current
+  mixed fallback root validator family.
+- The matching root validators remain in place for now. Do not physically move
+  them until one classification band has exact references, wrappers, aggregate
+  validator assumptions, and side-effect boundaries mapped.
+
 Current root validator index:
 
 - `scripts/validators/VALIDATOR_INDEX.md` records the current root

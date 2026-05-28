@@ -37,6 +37,9 @@ Current root validator buckets:
 Current physical splits:
 
 ```text
+scripts/validators/OTHER_VALIDATOR_CLASSIFICATION_MAP.md
+scripts/validators/PROVIDER_PREFLIGHT_REFERENCE_MAP.md
+scripts/validators/RUNTIME_REFERENCE_MAP.md
 scripts/validators/governance/validate_repository_structure_governance.js
 scripts/validators/readonly_operator_console/validate_readonly_operator_console_static_surface.js
 scripts/validators/review_console/validate_review_console_adapter_handoff.js
@@ -190,13 +193,15 @@ scripts/validate_preview_capsule.js
 
 ## Recommended Next Families
 
-1. `directory_governance_closure`: no broad movement; tighten the structure
-   index, governance checks, and next-family route map.
-2. `provider_preflight_reference_map`: read-only reference mapping only; do not
-   physically move provider/A5 preflight validators until side-effect runner
-   assumptions are separated.
-3. `runtime_reference_map`: read-only reference mapping only; preserve A5 and
-   runtime boundaries before any physical movement.
+1. `exact_new_trial_validator_movement_plan`: planning only; split the largest
+   `other` band into no-write, approval, archive, provider, and memory
+   subfamilies before any physical movement.
+2. `provider_preflight_movement_plan`: planning only; do not physically move
+   provider/A5 preflight validators until side-effect runner assumptions,
+   private audit references, and aggregate validator refs are separated.
+3. `legacy_versioned_reference_map`: read-only mapping only; do not physically
+   move historical `validate_v<digit>*` validators until wrapper and aggregate
+   references are mapped.
 
-`legacy_versioned`, `other`, `runtime`, and `provider_preflight` need deeper
-reference maps before physical movement.
+`legacy_versioned`, `other`, `runtime`, and `provider_preflight` still need
+deeper movement plans before physical movement.

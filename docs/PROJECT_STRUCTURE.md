@@ -35,6 +35,12 @@ that standard and naming the validation that proves the change.
 
 ## Top-Level Directory Map
 
+Detailed owner, portability, keep/merge/local-only, and next-action decisions
+for every current top-level directory live in
+`docs/TOP_LEVEL_DIRECTORY_OWNERSHIP.md`. Keep this section as the short
+navigation map; use the ownership table before adding, merging, or moving any
+top-level directory.
+
 ```text
 .agent_board/        current local task rail, checkpoint, handoff, blockers
 accepted_samples/    accepted sample registry and category indexes
