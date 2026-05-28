@@ -55,3 +55,38 @@ requires_new_activation_packet_before_execution: true
 
 The next action is a human decision: hold, reject, or authorize a separate exact
 retry_007 activation packet.
+
+## Current Head Readiness Review - 2026-05-28
+
+```yaml
+review_id: retry_007_current_head_readiness_review_20260528
+review_mode: local_green_readiness_review_only
+repository_head_reviewed: 955f21c
+remote_sync_state_at_review_start: master_equals_origin_master
+existing_retry_007_artifacts_found:
+  - docs/EXACT_A5_PROVIDER_RETRY_007_PREFLIGHT_DECISION.md
+  - adapters/runtime/exact_a5_provider_retry_007_preflight_decision_packet.js
+  - scripts/validate_exact_a5_provider_retry_007_preflight_decision.js
+duplicate_movement_plan_or_reference_map_found: false
+reuse_decision: patch_existing_preflight_decision_surface
+last_failed_retry_chain_attempt: retry_005
+last_failed_attempt_result: BLOCKED_OUTPUT_SCOPE_VIOLATION
+latest_completed_retry_chain_attempt: retry_006
+latest_completed_attempt_result: COMPLETED_PROVIDER_IMAGE_CREATED
+retry_007_failure_result: none_not_issued
+failure_attribution:
+  retry_005: provider_output_scope_violation
+  retry_006: completed_provider_image_created
+  retry_007: no_provider_attempt_performed
+current_review_lane: Green
+future_activation_packet_lane: Amber_only_if_separate_exact_packet_is_active_and_gates_pass
+provider_execution_allowed_now: false
+enough_for_new_trial_authorization_draft: true
+enough_for_provider_execution_now: false
+next_safe_action: hold_or_prepare_separate_exact_retry_007_activation_packet_draft_only
+```
+
+This review does not create a new movement plan, reference map, activation
+packet, output directory, provider receipt, review handoff, or durable audit
+entry. The existing `retry_007` preflight packet remains the source of truth for
+candidate boundaries.

@@ -1,5 +1,41 @@
 ---
 
+## Checkpoint - Retry 007 Current Head Readiness Review
+
+```text
+phase: retry_007_current_head_readiness_review_20260528
+status: completed_validated_pending_local_commit
+result: COMPLETED_VALIDATED
+mode: Green local retry_007 preflight readiness review
+summary: Reused the existing retry_007 preflight decision surface for current HEAD readiness. No duplicate movement plan, reference map, activation packet, output directory, provider receipt, review handoff, or durable audit entry was created.
+active_current_phase_reference: v0_3_3_first_live_generation_pilot
+active_source_phase_reference: v0_3_2_live_candidate_action_packet
+active_next_red_decision_reference: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+changed_files_current_task:
+  - docs/EXACT_A5_PROVIDER_RETRY_007_PREFLIGHT_DECISION.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+validation_run:
+  - npm run validate:retry-007-preflight-decision: passed
+  - npm run validate:provider-evidence-integrity: passed
+  - git diff --check: passed with CRLF normalization warnings only
+runtime_execution_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+dependency_change_performed: false
+secret_value_read_performed: false
+push_performed: false
+push_status: not_performed
+tag_release_deploy_performed: false
+recommended_next_phase: retry_007_activation_packet_draft_only_or_hold_before_provider_execution
+```
+
 ## Checkpoint - Post-Push State Sync After Directory Governance Push
 
 ```text
