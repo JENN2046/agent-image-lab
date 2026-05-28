@@ -47,10 +47,10 @@ function runJson(scriptPath) {
 function evaluateCloseout(input) {
   const localChainOk = input.localLifecycleChainCompletedValidated === true && input.auditedLocalStageCount === 13;
   const matrixCountsOk =
-    input.registrySampleCount >= 3 &&
+    input.registrySampleCount >= 10 &&
     input.registryCategoryCount >= 3 &&
-    input.localArtifactSampleCount >= 4 &&
-    input.fullRecoverableSampleCount === 4 &&
+    input.localArtifactSampleCount >= 10 &&
+    input.fullRecoverableSampleCount >= 5 &&
     input.hardAcceptanceThreeFullSamplesMet === true &&
     input.remainingFullRecoverableSampleGap === 0;
   const goalNotOverclaimed = input.twoMonthGoalFullyComplete === false && input.updateGoalCalled === false;
@@ -110,10 +110,10 @@ for (const token of [
   "two_month_product_capability_closeout:",
   "execution_mode: local_closeout_only",
   "local_lifecycle_chain_completed_validated: true",
-  "registry_sample_count: 9",
+  "registry_sample_count: 10",
   "registry_category_count: 3",
-  "local_artifact_sample_count: 9",
-  "full_recoverable_sample_count: 4",
+  "local_artifact_sample_count: 10",
+  "full_recoverable_sample_count: 5",
   "hard_acceptance_three_full_samples_met: true",
   "remaining_full_recoverable_sample_gap: 0",
   "two_month_goal_fully_complete: false",
@@ -155,14 +155,14 @@ const observed = {
 };
 
 const matrixMigratedPending = v14_142?.migration_status === "legacy_runs_missing_git_preview_capsule_pending";
-addResult("observed_registry_sample_count_is_9_or_preview_capsule_pending", observed.registrySampleCount === 9 || matrixMigratedPending, `${observed.registrySampleCount}`);
+addResult("observed_registry_sample_count_is_at_least_10_or_preview_capsule_pending", observed.registrySampleCount >= 10 || matrixMigratedPending, `${observed.registrySampleCount}`);
 addResult("observed_registry_category_count_is_3", observed.registryCategoryCount === 3, `${observed.registryCategoryCount}`);
 addResult(
   "observed_local_artifact_sample_count_is_at_least_6_or_preview_capsule_pending",
   observed.localArtifactSampleCount >= 6 || matrixMigratedPending,
   `${observed.localArtifactSampleCount}`,
 );
-addResult("observed_full_recoverable_sample_count_is_4_or_preview_capsule_pending", observed.fullRecoverableSampleCount === 4 || matrixMigratedPending, `${observed.fullRecoverableSampleCount}`);
+addResult("observed_full_recoverable_sample_count_is_at_least_5_or_preview_capsule_pending", observed.fullRecoverableSampleCount >= 5 || matrixMigratedPending, `${observed.fullRecoverableSampleCount}`);
 addResult("observed_three_sample_hard_acceptance_met_or_preview_capsule_pending", observed.hardAcceptanceThreeFullSamplesMet === true || matrixMigratedPending);
 addResult("observed_remaining_full_sample_gap_is_0_or_preview_capsule_pending", observed.remainingFullRecoverableSampleGap === 0 || matrixMigratedPending, `${observed.remainingFullRecoverableSampleGap}`);
 
@@ -215,7 +215,7 @@ for (const token of [
   "phase: v14_160_two_month_product_capability_closeout",
   "two_month_product_capability_closeout_created: true",
   "local_lifecycle_chain_completed_validated: true",
-  "full_recoverable_sample_count: 4",
+  "full_recoverable_sample_count: 5",
   "hard_acceptance_three_full_samples_met: true",
   "remaining_full_recoverable_sample_gap: 0",
   "two_month_goal_fully_complete: false",

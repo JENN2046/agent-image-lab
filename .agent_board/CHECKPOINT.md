@@ -1,5 +1,65 @@
 ---
 
+## Checkpoint - Governance Recoverability Count Sync
+
+```text
+phase: governance_recoverability_count_sync_20260528
+status: completed_validated_pending_local_commit
+result: COMPLETED_VALIDATED
+mode: Green local governance validator maintenance
+summary: Synchronized governance validation with current accepted-sample recoverability counts and the current agent-board validator wrapper/implementation split.
+active_current_phase_reference: v0_3_3_first_live_generation_pilot
+active_source_phase_reference: v0_3_2_live_candidate_action_packet
+active_next_red_decision_reference: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+changed_files_current_task:
+  - docs/v14_142_multi_accepted_sample_matrix.md
+  - docs/v14_160_two_month_product_capability_closeout.md
+  - schemas/two_month_product_capability_closeout.schema.yaml
+  - scripts/lib/governance_tooling_maintenance_slice.js
+  - scripts/validate_governance.ps1
+  - scripts/validate_mvp.ps1
+  - scripts/validate_v14_118_rollback_audit_validation_package_current_goal_alignment.js
+  - scripts/validate_v14_142_multi_accepted_sample_matrix.js
+  - scripts/validate_v14_143_import_review_registry_schema_hardening.js
+  - scripts/validate_v14_160_two_month_product_capability_closeout.js
+  - tests/schema_examples/v14_160_two_month_product_capability_closeout.example.yaml
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+validation_run:
+  - node scripts\validate_v14_118_rollback_audit_validation_package_current_goal_alignment.js: passed
+  - node scripts\validate_v14_142_multi_accepted_sample_matrix.js: passed
+  - node scripts\validate_v14_143_import_review_registry_schema_hardening.js: passed
+  - node scripts\validate_v14_160_two_month_product_capability_closeout.js: passed
+  - node scripts\validate_controlled_visual_production_loop_checkpoint_readiness.js: passed
+  - node scripts\validate_controlled_visual_production_loop_exact_file_commit_readiness_review.js: passed
+  - node scripts\validate_controlled_visual_production_loop_commit_and_authorization_readiness_audit.js: passed
+  - node scripts\validate_agent_board_state.js: passed
+  - node scripts\validate_autopilot_agent_board_resume_compaction_guard.js: passed
+  - npm run validate:governance: passed
+  - npm run validate:all: passed
+  - git diff --check: passed with CRLF normalization warnings only
+runtime_execution_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+dependency_change_performed: false
+secret_value_read_performed: false
+local_commit_performed: false
+push_performed: false
+push_status: not_performed
+tag_release_deploy_performed: false
+authorization_status: retry_007_activation_packet_draft_not_active
+authorization_active: false
+can_execute_now: false
+provider_execution_allowed_now: false
+recommended_next_phase: exact_file_commit_then_guarded_push_if_preflight_clean
+```
+
 ## Checkpoint - Public Disclosure Postcondition Validator Portability Fix
 
 ```text

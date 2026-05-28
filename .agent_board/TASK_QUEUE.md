@@ -1,5 +1,18 @@
 ---
 
+- [x] ID: governance_recoverability_count_sync_20260528
+      Lane: Green local governance validator maintenance.
+      Status: completed_validated_pending_local_commit.
+      Goal: Restore governance aggregate validation after accepted-sample matrix and agent-board validator wrapper drift.
+      Active current phase reference: v0_3_3_first_live_generation_pilot.
+      Active source phase reference: v0_3_2_live_candidate_action_packet.
+      Active next Red decision reference: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Completed: updated v14.118 to check the real agent-board validator implementation; updated v14.142 current recoverability truth to 10 registry rows and 5 fully recoverable samples including retry_006; updated v14.160 closeout schema/fixture/doc/validator to the same 10/5 truth; added a precise governance maintenance slice for this sync.
+      Changed files: `docs/v14_142_multi_accepted_sample_matrix.md`; `docs/v14_160_two_month_product_capability_closeout.md`; `schemas/two_month_product_capability_closeout.schema.yaml`; `scripts/lib/governance_tooling_maintenance_slice.js`; `scripts/validate_governance.ps1`; `scripts/validate_mvp.ps1`; `scripts/validate_v14_118_rollback_audit_validation_package_current_goal_alignment.js`; `scripts/validate_v14_142_multi_accepted_sample_matrix.js`; `scripts/validate_v14_143_import_review_registry_schema_hardening.js`; `scripts/validate_v14_160_two_month_product_capability_closeout.js`; `tests/schema_examples/v14_160_two_month_product_capability_closeout.example.yaml`; `.agent_board/HANDOFF.md`; `.agent_board/RUN_STATE.md`; `.agent_board/TASK_QUEUE.md`; `.agent_board/CHECKPOINT.md`.
+      Validation: v14.118, v14.142, v14.143, and v14.160 direct validators passed; controlled-loop checkpoint/exact-file/commit-readiness validators passed; agent-board state and compaction guard passed; `npm run validate:governance` passed; `npm run validate:all` passed; `git diff --check` passed with CRLF normalization warnings only.
+      Boundary: runtime_execution_performed: false; provider_contact_performed: false; plugin_call_performed: false; api_call_performed: false; image_generation_performed: false; DailyNote_write_performed: false; VCP_memory_write_performed: false; dependency_change_performed: false; secret_value_read_performed: false; local_commit_performed: false; push_status: not_performed; tag_release_deploy_performed: false; retry_007 activation packet remains draft_not_active; provider_execution_allowed_now: false.
+      Recommended next: exact-file local commit for this governance recoverability count sync, then guarded push if preflight remains clean.
+
 - [x] ID: public_disclosure_postcondition_validator_portability_fix_20260528
       Lane: Green local validator maintenance.
       Status: completed_target_validated_pending_local_commit.

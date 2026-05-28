@@ -2558,6 +2558,24 @@ const EXPECTED_P2_2_RETRY_007_PREFLIGHT_DECISION_SLICE = [
   "scripts/validate_mvp_core.js"
 ].sort();
 
+const EXPECTED_P2_3_GOVERNANCE_RECOVERABILITY_COUNT_SYNC_SLICE = [
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  "docs/v14_142_multi_accepted_sample_matrix.md",
+  "docs/v14_160_two_month_product_capability_closeout.md",
+  "schemas/two_month_product_capability_closeout.schema.yaml",
+  "scripts/lib/governance_tooling_maintenance_slice.js",
+  "scripts/validate_governance.ps1",
+  "scripts/validate_mvp.ps1",
+  "scripts/validate_v14_118_rollback_audit_validation_package_current_goal_alignment.js",
+  "scripts/validate_v14_142_multi_accepted_sample_matrix.js",
+  "scripts/validate_v14_143_import_review_registry_schema_hardening.js",
+  "scripts/validate_v14_160_two_month_product_capability_closeout.js",
+  "tests/schema_examples/v14_160_two_month_product_capability_closeout.example.yaml"
+].sort();
+
 const EXPECTED_EVIDENCE_GOVERNANCE_SANITIZATION_PACKAGE_SCRIPTS = {
   "validate:all": "npm run validate:smoke && npm run validate:mvp && npm run validate:runtime-kernel && npm run validate:review-bridge-readonly && npm run validate:durable-audit-store && npm run validate:provider-preflight && npm run validate:exact-a5-provider-packet && npm run validate:exact-a5-provider-retry-packet && npm run validate:exact-a5-activation-receipt && npm run validate:exact-a5-retry-activation-receipt && npm run validate:exact-a5-retry-003-activation-receipt && npm run validate:exact-a5-retry-004-activation-receipt && npm run validate:exact-a5-retry-005-activation-receipt && npm run validate:exact-a5-retry-006-activation-receipt && npm run validate:retry-006-artifact-integrity && npm run validate:capsule-regression && npm run validate:governance",
   "validate:core": "npm run validate:smoke && npm run validate:runtime-kernel && npm run validate:review-bridge-readonly && npm run validate:durable-audit-store && npm run validate:provider-preflight",
@@ -2577,6 +2595,10 @@ const EXPECTED_P2_2_RETRY_007_PREFLIGHT_DECISION_PACKAGE_SCRIPTS = {
 };
 
 const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
+  {
+    id: "governance_recoverability_count_sync_slice",
+    files: EXPECTED_P2_3_GOVERNANCE_RECOVERABILITY_COUNT_SYNC_SLICE
+  },
   {
     id: "retry_007_preflight_decision_slice",
     files: EXPECTED_P2_2_RETRY_007_PREFLIGHT_DECISION_SLICE

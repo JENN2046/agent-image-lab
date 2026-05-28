@@ -9,10 +9,10 @@ two_month_product_capability_closeout:
   authorization_granted_by_this_record: false
   local_lifecycle_chain_completed_validated: true
   audited_local_stage_count: 13
-  registry_sample_count: 9
+  registry_sample_count: 10
   registry_category_count: 3
-  local_artifact_sample_count: 9
-  full_recoverable_sample_count: 4
+  local_artifact_sample_count: 10
+  full_recoverable_sample_count: 5
   hard_acceptance_three_full_samples_met: true
   remaining_full_recoverable_sample_gap: 0
   a5_execution_slots_skipped_without_authorization: true
@@ -37,6 +37,8 @@ two_month_product_capability_closeout:
       - accepted_womens_resort_relaxed_knit_codex_v2_001
       - accepted_fashion_lifestyle_woven_crossbody_bag_codex_v14_161_001
       - accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001
+      - accepted_safe_adult_editorial_portrait_exact_new_trial_003_shot_2_001
+      - neutral_red_apple_seedream5_retry_006
     next_safe_action: continue_review_console_static_productization_from_three_sample_evidence_baseline
 
   non_authorization:

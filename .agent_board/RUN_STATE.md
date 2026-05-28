@@ -1,5 +1,50 @@
 ---
 
+## Current Run State - Governance Recoverability Count Sync
+
+```text
+phase: governance_recoverability_count_sync_20260528
+status: COMPLETED_VALIDATED_PENDING_LOCAL_COMMIT
+mode: Green local governance validator maintenance
+branch: master
+active_current_phase_reference: v0_3_3_first_live_generation_pilot
+active_source_phase_reference: v0_3_2_live_candidate_action_packet
+active_next_red_decision_reference: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+goal: Restore governance aggregate validation after the accepted-sample matrix gained the retry_006 fully recoverable sample and after agent-board validation moved behind its wrapper.
+completed:
+- Updated v14.118 rollback/audit validator to inspect the real agent-board validator implementation while preserving the public wrapper command.
+- Updated v14.142 multi accepted sample matrix from 4 to 5 fully recoverable samples, including `neutral_red_apple_seedream5_retry_006`.
+- Updated v14.160 two-month closeout schema, fixture, doc, and validator counts from 9/4 to 10/5.
+- Added a precise governance maintenance slice for this recoverability count sync.
+validation:
+- node scripts\validate_v14_118_rollback_audit_validation_package_current_goal_alignment.js: passed
+- node scripts\validate_v14_142_multi_accepted_sample_matrix.js: passed
+- node scripts\validate_v14_143_import_review_registry_schema_hardening.js: passed
+- node scripts\validate_v14_160_two_month_product_capability_closeout.js: passed
+- npm run validate:governance: passed
+- npm run validate:all: passed
+- git diff --check: passed with CRLF normalization warnings only
+runtime_execution_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+dependency_change_performed: false
+secret_value_read_performed: false
+local_commit_performed: false
+push_performed: false
+push_status: not_performed
+tag_release_deploy_performed: false
+authorization_status: retry_007_activation_packet_draft_not_active
+authorization_active: false
+can_execute_now: false
+provider_execution_allowed_now: false
+next_safe_task: exact-file local commit for the governance recoverability count sync, then guarded push if preflight remains clean.
+next_phase_started: false
+```
+
 ## Current Run State - Public Disclosure Postcondition Validator Portability Fix
 
 ```text

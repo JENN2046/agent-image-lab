@@ -14,6 +14,7 @@ const files = {
   mvpValidator: "scripts/validate_mvp.ps1",
   localValidator: "scripts/validate-agent-image-lab-local.ps1",
   boardValidator: "scripts/validate_agent_board_state.js",
+  boardValidatorImplementation: "scripts/validators/autopilot_governance/validate_agent_board_state.js",
   goalGate: "docs/v14_108_three_month_visual_control_layer_goal_alignment_gate.md",
   dryRunAdapterGate: "docs/v14_115_dry_run_vcp_adapter_current_goal_alignment.md",
   manifestReadGate: "docs/v14_116_manifest_read_authorization_current_goal_alignment.md",
@@ -171,7 +172,7 @@ for (const token of [
   requireToken("local_validator", localValidator, token);
 }
 
-const boardValidator = read(files.boardValidator);
+const boardValidator = read(files.boardValidatorImplementation);
 for (const token of [
   "post_push_status_sync_verified",
   "phase_freshness_verified",

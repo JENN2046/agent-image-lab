@@ -9315,8 +9315,8 @@ process.exit(child.status || 0);
       Add-Failure "v14.142 must create a multi-sample, multi-category matrix"
     }
     $multiAcceptedSampleMatrixMigratedPending = $multiAcceptedSampleMatrix.migration_status -eq 'legacy_runs_missing_git_preview_capsule_pending'
-    if (-not $multiAcceptedSampleMatrixMigratedPending -and ($multiAcceptedSampleMatrix.complete_recoverable_sample_count -ne 4 -or $multiAcceptedSampleMatrix.full_recoverability_count_is_currently_four -ne $true)) {
-      Add-Failure "v14.142 must preserve the current four fully recoverable samples truth"
+    if (-not $multiAcceptedSampleMatrixMigratedPending -and ($multiAcceptedSampleMatrix.complete_recoverable_sample_count -ne 5 -or $multiAcceptedSampleMatrix.full_recoverability_count_is_currently_five -ne $true)) {
+      Add-Failure "v14.142 must preserve the current five fully recoverable samples truth"
     }
     if (-not $multiAcceptedSampleMatrixMigratedPending -and ($multiAcceptedSampleMatrix.legacy_partial_artifact_sample_count -lt 3 -or $multiAcceptedSampleMatrix.local_artifact_sample_count -lt 4)) {
       Add-Failure "v14.142 must detect legacy local artifact rows without promoting them"
@@ -9825,7 +9825,7 @@ process.exit(child.status || 0);
       Add-Failure "v14.160 must close out the local lifecycle chain"
     }
     $twoMonthCloseoutMigratedPending = $twoMonthCloseout.migration_status -eq 'legacy_runs_missing_git_preview_capsule_pending'
-    if (-not $twoMonthCloseoutMigratedPending -and ($twoMonthCloseout.registry_sample_count -ne 9 -or $twoMonthCloseout.registry_category_count -ne 3 -or $twoMonthCloseout.local_artifact_sample_count -lt 9 -or $twoMonthCloseout.full_recoverable_sample_count -ne 4)) {
+    if (-not $twoMonthCloseoutMigratedPending -and ($twoMonthCloseout.registry_sample_count -lt 10 -or $twoMonthCloseout.registry_category_count -ne 3 -or $twoMonthCloseout.local_artifact_sample_count -lt 10 -or $twoMonthCloseout.full_recoverable_sample_count -lt 5)) {
       Add-Failure "v14.160 must reflect observed accepted sample matrix counts"
     }
     if (-not $twoMonthCloseoutMigratedPending -and ($twoMonthCloseout.hard_acceptance_three_full_samples_met -ne $true -or $twoMonthCloseout.remaining_full_recoverable_sample_gap -ne 0 -or $twoMonthCloseout.two_month_goal_fully_complete -ne $false -or $twoMonthCloseout.goal_status -ne 'active_not_complete')) {

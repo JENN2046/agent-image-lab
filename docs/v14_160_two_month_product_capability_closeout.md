@@ -15,8 +15,8 @@ status: completed_validated_three_sample_local_recoverability_baseline
 This closeout records the current two-month capability state after the
 v14.141-v14.153 local lifecycle chain and v14.159 audit package. It separates
 product capability, governance capability, and real VCP integration status. It
-does not mark the long-term goal complete because the hard acceptance target of
-three fully recoverable accepted samples is not yet met.
+does not mark the long-term goal complete because Review Console productization
+and later separately authorized production/runtime paths remain open.
 
 ## Capability Result
 
@@ -24,10 +24,10 @@ three fully recoverable accepted samples is not yet met.
 two_month_product_capability_closeout_created: true
 local_lifecycle_chain_completed_validated: true
 audited_local_stage_count: 13
-registry_sample_count: 9
+registry_sample_count: 10
 registry_category_count: 3
-local_artifact_sample_count: 9
-full_recoverable_sample_count: 4
+local_artifact_sample_count: 10
+full_recoverable_sample_count: 5
 hard_acceptance_three_full_samples_met: true
 remaining_full_recoverable_sample_gap: 0
 a5_execution_slots_skipped_without_authorization: true
@@ -42,11 +42,10 @@ product_capability_progress:
   approximate_progress_percent: 78
   evidence:
     - recoverability core extracted and reused
-    - multi accepted sample matrix covers eight samples across three categories
-    - three samples have full traceability to artifact, import record, sha256, dimensions, mime, review record, human approval, registry, and category index
+    - multi accepted sample matrix covers ten samples across three categories
+    - five samples have full traceability to artifact, import record, sha256, dimensions, mime, review record, human approval, registry, and category index
     - Review Console static handoff and manifest authorization gate are locally validated
   not_done:
-    - one more fully recoverable accepted sample
     - durable archive binary copy and archive manifest execution
     - production_candidate promotion
 governance_capability_progress:
