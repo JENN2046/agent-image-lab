@@ -39603,3 +39603,65 @@ push_performed: false
 tag_release_deploy_performed: false
 recommended_next_phase: review_diff_then_commit_or_open_agent_board_historical_validator_reconciliation
 ```
+---
+
+## Checkpoint - Repository Directory Optimization Review Console Validator Split
+
+```text
+phase: repository_directory_optimization_review_console_validator_split
+slice: review_console_validator_family_move_with_root_wrappers
+status: completed_validated_no_commit_no_push
+result: PASS
+mode: Green local repository directory optimization
+summary: Moving the 9-file `scripts/validate_review_console*.js` family under `scripts/validators/review_console/` while preserving root compatibility wrappers for existing commands, package scripts, PowerShell validators, README references, and historical phase records.
+changed_files_current_task:
+  - scripts/validate_review_console_adapter_handoff.js
+  - scripts/validate_review_console_blocker_arbiter_boundary_scan.js
+  - scripts/validate_review_console_blocker_arbiter_regression_matrix.js
+  - scripts/validate_review_console_failure_capsule_snapshot.js
+  - scripts/validate_review_console_full_asset_archive_baseline.js
+  - scripts/validate_review_console_registry_report_v2_negative_visibility.js
+  - scripts/validate_review_console_registry_report_v2_state.js
+  - scripts/validate_review_console_static_mock_boundary.js
+  - scripts/validate_review_console_unified_capsule_contract.js
+  - scripts/validators/review_console/validate_review_console_adapter_handoff.js
+  - scripts/validators/review_console/validate_review_console_blocker_arbiter_boundary_scan.js
+  - scripts/validators/review_console/validate_review_console_blocker_arbiter_regression_matrix.js
+  - scripts/validators/review_console/validate_review_console_failure_capsule_snapshot.js
+  - scripts/validators/review_console/validate_review_console_full_asset_archive_baseline.js
+  - scripts/validators/review_console/validate_review_console_registry_report_v2_negative_visibility.js
+  - scripts/validators/review_console/validate_review_console_registry_report_v2_state.js
+  - scripts/validators/review_console/validate_review_console_static_mock_boundary.js
+  - scripts/validators/review_console/validate_review_console_unified_capsule_contract.js
+  - scripts/validators/VALIDATOR_INDEX.md
+  - scripts/validators/governance/validate_repository_structure_governance.js
+  - scripts/validators/README.md
+  - tests/schema_examples/review_console_blocker_arbiter_boundary_scan.example.json
+  - docs/PROJECT_STRUCTURE.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+validation_run:
+  - node --check root review_console validators: passed for 9 files
+  - node --check implementation review_console validators: passed for 9 files
+  - node root review_console validators: passed for 9 files
+  - node implementation review_console validators: passed for 9 files
+  - node scripts\validate_repository_structure_governance.js: passed
+  - node scripts\validators\governance\validate_repository_structure_governance.js: passed
+  - node scripts\validate_agent_board_state.js: passed
+  - git diff --check: passed with CRLF normalization warnings only
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+memory_written: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+production_candidate_002_started: false
+Batch_005_started: false
+commit_performed: false
+push_performed: false
+tag_release_deploy_performed: false
+recommended_next_phase: commit_review_console_validator_family_split_if_requested
+```

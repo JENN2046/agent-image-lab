@@ -19593,3 +19593,13 @@ recommended_next: asset_hash_dimensions_verification_A5_requires_separate_author
       - Add `scripts/validate_repository_structure_governance.js`.
       Boundary: no physical file movement, deletion, package change, dependency change, provider/plugin/API/image/memory/production/runtime action, commit, push, tag, release, deploy, or destructive command.
       Validation: repository structure governance validator passed; agent board validator passed; git diff --check passed with CRLF normalization warnings only; validate_mvp.ps1 failed on historical/status-surface validators outside this slice and was not repaired here.
+---
+
+- [x] ID: repository_directory_optimization_review_console_validator_split
+      Slice: review_console_validator_family_move_with_root_wrappers.
+      Lane: Green local repository directory optimization.
+      Status: completed_validated_no_commit_no_push.
+      Goal: Move the 9-file `scripts/validate_review_console*.js` family implementation under `scripts/validators/review_console/` while keeping root compatibility wrappers.
+      Completed: implementation files moved; root wrappers retained; validator index/docs updated; governance validator checks wrapper and implementation paths; boundary scan fixture points to the moved regression-matrix implementation.
+      Boundary: no package/dependency change, provider/plugin/API/image/memory/production/runtime action, commit, push, tag, release, deploy, or destructive command.
+      Validation: root and implementation review_console validators passed; governance validator passed; agent-board validator passed; diff check passed with CRLF normalization warnings only.

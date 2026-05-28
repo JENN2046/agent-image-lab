@@ -27749,3 +27749,34 @@ boundary:
 - no provider contact, plugin call, API call, image generation, DailyNote/VCP memory write, production candidate, Batch 005, runtime integration, commit, push, tag, release, deploy, or destructive action
 next_safe_task: review diff, then decide whether to commit or first open a separate .agent_board historical validator reconciliation slice
 ```
+---
+
+## Current Run State - Repository Directory Optimization Review Console Validator Split
+
+```text
+phase: repository_directory_optimization_review_console_validator_split
+slice: review_console_validator_family_move_with_root_wrappers
+status: completed_validated_no_commit_no_push
+mode: Green local repository directory optimization
+branch: master
+goal: Use the 9-file Review Console validator family as the next migration sample by moving implementations under scripts/validators/review_console while preserving root commands.
+completed:
+- Moved implementation files to `scripts/validators/review_console/`.
+- Kept root `scripts/validate_review_console*.js` files as compatibility wrappers.
+- Updated `scripts/validators/VALIDATOR_INDEX.md`, `scripts/validators/README.md`, and `docs/PROJECT_STRUCTURE.md`.
+- Extended `scripts/validators/governance/validate_repository_structure_governance.js` to check Review Console wrapper and implementation paths.
+- Updated `tests/schema_examples/review_console_blocker_arbiter_boundary_scan.example.json` so the boundary scan checks the moved implementation path rather than the root wrapper.
+validation:
+- node --check root review_console validators: passed for 9 files
+- node --check implementation review_console validators: passed for 9 files
+- node root review_console validators: passed for 9 files
+- node implementation review_console validators: passed for 9 files
+- node scripts\validate_repository_structure_governance.js: passed
+- node scripts\validators\governance\validate_repository_structure_governance.js: passed
+- node scripts\validate_agent_board_state.js: passed
+- git diff --check: passed with CRLF normalization warnings only
+boundary:
+- no package/dependency change
+- no provider contact, plugin call, API call, image generation, DailyNote/VCP memory write, production candidate, Batch 005, runtime integration, commit, push, tag, release, deploy, or destructive action
+next_safe_task: inspect final diff and exact-file local commit only if requested
+```

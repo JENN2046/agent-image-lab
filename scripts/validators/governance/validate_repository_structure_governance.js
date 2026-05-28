@@ -91,6 +91,21 @@ function main() {
   const implementationPath = "scripts/validators/governance/validate_repository_structure_governance.js";
   const readonlyOperatorWrapperPath = "scripts/validate_readonly_operator_console_static_surface.js";
   const readonlyOperatorImplementationPath = "scripts/validators/readonly_operator_console/validate_readonly_operator_console_static_surface.js";
+  const reviewConsoleValidatorFiles = [
+    "validate_review_console_adapter_handoff.js",
+    "validate_review_console_blocker_arbiter_boundary_scan.js",
+    "validate_review_console_blocker_arbiter_regression_matrix.js",
+    "validate_review_console_failure_capsule_snapshot.js",
+    "validate_review_console_full_asset_archive_baseline.js",
+    "validate_review_console_registry_report_v2_negative_visibility.js",
+    "validate_review_console_registry_report_v2_state.js",
+    "validate_review_console_static_mock_boundary.js",
+    "validate_review_console_unified_capsule_contract.js",
+  ];
+  const reviewConsoleValidatorPaths = reviewConsoleValidatorFiles.map((fileName) => ({
+    wrapperPath: `scripts/${fileName}`,
+    implementationPath: `scripts/validators/review_console/${fileName}`,
+  }));
 
   add("repository_organization_standard_exists", exists(standardPath), standardPath);
   add("project_structure_exists", exists(structurePath), structurePath);
@@ -100,6 +115,14 @@ function main() {
   add("governance_validator_implementation_exists", exists(implementationPath), implementationPath);
   add("readonly_operator_console_wrapper_exists", exists(readonlyOperatorWrapperPath), readonlyOperatorWrapperPath);
   add("readonly_operator_console_implementation_exists", exists(readonlyOperatorImplementationPath), readonlyOperatorImplementationPath);
+  for (const { wrapperPath, implementationPath: reviewConsoleImplementationPath } of reviewConsoleValidatorPaths) {
+    add(`review_console_wrapper_exists_${path.basename(wrapperPath, ".js")}`, exists(wrapperPath), wrapperPath);
+    add(
+      `review_console_implementation_exists_${path.basename(reviewConsoleImplementationPath, ".js")}`,
+      exists(reviewConsoleImplementationPath),
+      reviewConsoleImplementationPath
+    );
+  }
 
   const standard = exists(standardPath) ? read(standardPath) : "";
   const structure = exists(structurePath) ? read(structurePath) : "";
@@ -195,6 +218,14 @@ function main() {
     "readonly_operator_console_wrapper_delegates_to_implementation",
     wrapperDelegatesTo(readonlyOperatorWrapper, readonlyOperatorImplementationPath)
   );
+  for (const { wrapperPath, implementationPath: reviewConsoleImplementationPath } of reviewConsoleValidatorPaths) {
+    const wrapper = exists(wrapperPath) ? read(wrapperPath) : "";
+    add(
+      `review_console_wrapper_delegates_${path.basename(wrapperPath, ".js")}`,
+      wrapperDelegatesTo(wrapper, reviewConsoleImplementationPath),
+      reviewConsoleImplementationPath
+    );
+  }
   add(
     "validator_index_lists_current_splits",
     includesAll(validatorIndex, [
@@ -202,6 +233,24 @@ function main() {
       rootWrapperPath,
       readonlyOperatorImplementationPath,
       readonlyOperatorWrapperPath,
+      "scripts/validators/review_console/validate_review_console_adapter_handoff.js",
+      "scripts/validators/review_console/validate_review_console_blocker_arbiter_boundary_scan.js",
+      "scripts/validators/review_console/validate_review_console_blocker_arbiter_regression_matrix.js",
+      "scripts/validators/review_console/validate_review_console_failure_capsule_snapshot.js",
+      "scripts/validators/review_console/validate_review_console_full_asset_archive_baseline.js",
+      "scripts/validators/review_console/validate_review_console_registry_report_v2_negative_visibility.js",
+      "scripts/validators/review_console/validate_review_console_registry_report_v2_state.js",
+      "scripts/validators/review_console/validate_review_console_static_mock_boundary.js",
+      "scripts/validators/review_console/validate_review_console_unified_capsule_contract.js",
+      "scripts/validate_review_console_adapter_handoff.js",
+      "scripts/validate_review_console_blocker_arbiter_boundary_scan.js",
+      "scripts/validate_review_console_blocker_arbiter_regression_matrix.js",
+      "scripts/validate_review_console_failure_capsule_snapshot.js",
+      "scripts/validate_review_console_full_asset_archive_baseline.js",
+      "scripts/validate_review_console_registry_report_v2_negative_visibility.js",
+      "scripts/validate_review_console_registry_report_v2_state.js",
+      "scripts/validate_review_console_static_mock_boundary.js",
+      "scripts/validate_review_console_unified_capsule_contract.js",
     ])
   );
   add(
@@ -238,6 +287,10 @@ function main() {
       implementationPath,
       readonlyOperatorWrapperPath,
       readonlyOperatorImplementationPath,
+      ...reviewConsoleValidatorPaths.flatMap(({ wrapperPath, implementationPath: reviewConsoleImplementationPath }) => [
+        wrapperPath,
+        reviewConsoleImplementationPath,
+      ]),
     ],
     provider_contact_performed: false,
     plugin_call_performed: false,

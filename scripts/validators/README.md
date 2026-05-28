@@ -40,6 +40,14 @@ Current readonly operator console validators:
   compatibility wrapper so existing commands and README instructions keep
   working.
 
+Current Review Console validators:
+
+- `scripts/validators/review_console/` contains the implementation files for
+  the `scripts/validate_review_console*.js` family.
+- The root `scripts/validate_review_console*.js` files are compatibility
+  wrappers so existing package scripts, PowerShell validators, README commands,
+  and historical phase records keep working.
+
 Current root validator index:
 
 - `scripts/validators/VALIDATOR_INDEX.md` records the current root

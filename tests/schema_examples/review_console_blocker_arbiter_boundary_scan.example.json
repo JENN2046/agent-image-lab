@@ -7,7 +7,7 @@
   "display_only": true,
   "scan_targets": [
     "tests/schema_examples/review_console_blocker_arbiter_regression_matrix.example.json",
-    "scripts/validate_review_console_blocker_arbiter_regression_matrix.js",
+    "scripts/validators/review_console/validate_review_console_blocker_arbiter_regression_matrix.js",
     "docs/v14_056_review_console_blocker_arbiter_regression_matrix_gate.md"
   ],
   "required_allowed_refs": [
