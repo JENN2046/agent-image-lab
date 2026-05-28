@@ -10,6 +10,16 @@
     "tests/schema_examples/visual_eval_readonly_metadata_accumulation_queue_surface_snapshot.example.json"
   ];
 
+  const SOURCE_LABELS = {
+    collection_consumer: "集合消费层（collection consumer）",
+    collection_query: "集合查询层（collection query）",
+    detail_view: "详情视图（detail view）",
+    detail_navigation: "详情导航（detail navigation）",
+    session_drilldown: "会话下钻（session drilldown）",
+    metadata_queue_surface: "元数据队列表面（metadata queue surface）",
+    readonly_boundary_state: "页面只读边界"
+  };
+
   const OUTCOME_LABELS = {
     pass: "通过",
     patch: "需修",
@@ -27,6 +37,10 @@
     metadata_lanes: "元数据队列",
     never_production: "永不进生产",
     write_allowed_now: "当前可写",
+    review_flow: "审片流程",
+    readonly_conclusion: "只读结论",
+    selected_patch: "当前选中需修项",
+    evidence_trace: "证据链",
     metadata_only: "仅元数据",
     read_only: "只读",
     static_ui_only: "静态页面",
@@ -191,6 +205,12 @@
     const byId = new Map(rows.map((row) => [row.review_result_id, row]));
     const selected = byId.get(SELECTED_REVIEW_RESULT_ID);
     const reject = rows.find((row) => row.outcome === "reject");
+    const selectedReasons = asList(selected?.reasons);
+    const selectedBlockers = asList(selected?.blocking_watch_items);
+    const selectedMetadataLanes = asList(selected?.metadata_queue_sections);
+    const rejectReasons = asList(reject?.reasons);
+    const rejectTaxonomy = asList(reject?.taxonomy_tags);
+    const rejectMetadataLanes = asList(reject?.metadata_queue_sections);
     return {
       console_id: "readonly_operator_console_static_surface_v1",
       status: "draft_ready",
@@ -213,11 +233,11 @@
       },
       selected_patch_drilldown: {
         row: selected,
-        why_patch: asList(selected?.reasons),
-        blocking_watch_items: asList(selected?.blocking_watch_items),
+        why_patch: selectedReasons,
+        blocking_watch_items: selectedBlockers,
         taxonomy_tags: asList(selected?.taxonomy_tags),
         next_review_action: selected?.next_review_action,
-        metadata_lanes: asList(selected?.metadata_queue_sections),
+        metadata_lanes: selectedMetadataLanes,
         write_allowed_now: selected?.write_allowed === true ? true : false,
         cross_layer_consistency: [
           "collection_consumer.selected_review_result_id",
@@ -231,17 +251,133 @@
       },
       reject_constraint_trace: {
         row: reject,
-        why_reject: asList(reject?.reasons),
-        failure_taxonomy: asList(reject?.taxonomy_tags),
+        why_reject: rejectReasons,
+        failure_taxonomy: rejectTaxonomy,
         blocking_watch_items: asList(reject?.blocking_watch_items),
         next_review_action: reject?.next_review_action,
-        metadata_lanes: asList(reject?.metadata_queue_sections),
+        metadata_lanes: rejectMetadataLanes,
         never_production: true,
         write_allowed_now: reject?.write_allowed === true ? true : false
       },
+      guided_review_conclusion: {
+        status: "只读结论已生成",
+        selected_review_result_id: SELECTED_REVIEW_RESULT_ID,
+        selected_patch_label: shortId(SELECTED_REVIEW_RESULT_ID),
+        conclusion: `当前应先处理选中需修项（${shortId(SELECTED_REVIEW_RESULT_ID)}）：它因为${selectedReasons.map(explainToken).join("、")}仍是需修项，阻塞点是${selectedBlockers.map(explainToken).join("、")}，下一步只能执行${explainToken(selected?.next_review_action)}。拒绝项因${rejectReasons.map(explainToken).join("、")}保持永不进生产，只能进入${rejectMetadataLanes.map(explainToken).join("、")}。本页只读，没有写文件、provider / plugin / API 调用、图像生成、memory / DailyNote 写入或 production candidate 创建。`,
+        steps: [
+          {
+            label: "第一步：看入口总览",
+            result: `队列包含通过 ${rowRefs(rows, "pass").length}、需修 ${rowRefs(rows, "patch").length}、拒绝 ${rowRefs(rows, "reject").length}；当前选中需修项是 ${shortId(SELECTED_REVIEW_RESULT_ID)}。`
+          },
+          {
+            label: "第二步：处理选中需修项",
+            result: `先处理 ${shortId(SELECTED_REVIEW_RESULT_ID)}；阻塞点是 ${selectedBlockers.map(explainToken).join("、")}。`
+          },
+          {
+            label: "第三步：确认拒绝约束",
+            result: `拒绝项不是可修复候选；失败分类为 ${rejectTaxonomy.map(explainToken).join("、")}，永不进生产必须保持为 true。`
+          },
+          {
+            label: "第四步：输出只读结论",
+            result: `下一步动作是 ${explainToken(selected?.next_review_action)}；页面只展示结论，不执行写入或生产动作。`
+          }
+        ],
+        decision_fields: {
+          selected_patch: SELECTED_REVIEW_RESULT_ID,
+          blocking_points: selectedBlockers,
+          next_review_action: selected?.next_review_action,
+          reject_never_production: true,
+          reject_failure_taxonomy: rejectTaxonomy,
+          reject_metadata_lanes: rejectMetadataLanes,
+          write_allowed_now: false
+        }
+      },
+      evidence_traceability: {
+        status: "证据链已对齐",
+        summary: "以下证据只展示 readonly artifact 的可读投影，不重新解释 canonical 语义，也不执行写入。",
+        entries: [
+          {
+            id: "selected_patch_source",
+            label: "当前选中需修项",
+            value: shortId(SELECTED_REVIEW_RESULT_ID),
+            statement: "入口层和下钻层指向同一个 selected review result。",
+            sources: [
+              SOURCE_LABELS.collection_consumer,
+              SOURCE_LABELS.collection_query,
+              SOURCE_LABELS.detail_view,
+              SOURCE_LABELS.detail_navigation,
+              SOURCE_LABELS.session_drilldown
+            ]
+          },
+          {
+            id: "blocking_points_source",
+            label: "阻塞点",
+            value: selectedBlockers.map(explainToken).join("、"),
+            statement: "阻塞点来自 selected patch 行，并在下钻详情中原样展示。",
+            sources: [
+              SOURCE_LABELS.collection_consumer,
+              SOURCE_LABELS.detail_view
+            ]
+          },
+          {
+            id: "next_review_action_source",
+            label: "下一步动作",
+            value: explainToken(selected?.next_review_action),
+            statement: "下一步动作从 collection 入口贯通到 detail、session 与 metadata surface。",
+            sources: [
+              SOURCE_LABELS.collection_consumer,
+              SOURCE_LABELS.collection_query,
+              SOURCE_LABELS.detail_view,
+              SOURCE_LABELS.session_drilldown,
+              SOURCE_LABELS.metadata_queue_surface
+            ]
+          },
+          {
+            id: "reject_never_production_source",
+            label: "拒绝项永不进生产",
+            value: "true",
+            statement: "拒绝项保持硬约束，不被页面说成稍后再看或可修复。",
+            sources: [
+              SOURCE_LABELS.collection_consumer,
+              SOURCE_LABELS.detail_view,
+              SOURCE_LABELS.metadata_queue_surface
+            ]
+          },
+          {
+            id: "failure_taxonomy_source",
+            label: "失败分类",
+            value: rejectTaxonomy.map(explainToken).join("、"),
+            statement: "失败分类来自 reject 行的 taxonomy projection，用于解释拒绝原因。",
+            sources: [
+              SOURCE_LABELS.collection_consumer,
+              SOURCE_LABELS.detail_view
+            ]
+          },
+          {
+            id: "metadata_accumulation_source",
+            label: "元数据路线",
+            value: rejectMetadataLanes.map(explainToken).join("、"),
+            statement: "reject 只进入失败学习元数据路线，selected patch 只进入补丁计划/引用路线。",
+            sources: [
+              SOURCE_LABELS.collection_consumer,
+              SOURCE_LABELS.collection_query,
+              SOURCE_LABELS.metadata_queue_surface
+            ]
+          },
+          {
+            id: "readonly_boundary_source",
+            label: "只读边界",
+            value: "不写文件 / 不调用 provider、plugin、API / 不生成图片 / 不写 memory、DailyNote / 不创建 production candidate",
+            statement: "页面只读取静态 readonly 状态，所有执行与写入边界保持关闭。",
+            sources: [
+              SOURCE_LABELS.readonly_boundary_state
+            ]
+          }
+        ]
+      },
       operator_friction: [
         "JSON artifact 链已经稳定，但人工扫读仍需要跨多层文件。",
-        "selected patch 入口显式可见；collection_rows 内部行仍不单独标 selected。",
+        "选中需修项入口显式可见；collection_rows 内部行仍不单独标 selected。",
         "metadata queue 为机器索引重复展示同一对象，人工阅读时需要折叠。",
         "轻量 card/ref 有时不带完整 taxonomy，需要回 detail row 或 section card。"
       ],
@@ -372,6 +508,51 @@
     `;
   }
 
+  function renderGuidedConclusion(state, root) {
+    const conclusion = state.guided_review_conclusion;
+    root.querySelector("#conclusionStatus").textContent = conclusion.status;
+    root.querySelector("#guidedWalkthrough").innerHTML = conclusion.steps.map((step) => `
+      <article class="step-card">
+        <strong>${escapeHtml(step.label)}</strong>
+        <p>${escapeHtml(step.result)}</p>
+      </article>
+    `).join("");
+    root.querySelector("#readonlyConclusionPanel").innerHTML = `
+      <article class="detail-card conclusion">
+        <div class="card-head">
+          <strong>最终只读判断</strong>
+          <span title="${escapeHtml(conclusion.selected_review_result_id)}">${escapeHtml(conclusion.selected_patch_label)}</span>
+        </div>
+        <p>${escapeHtml(conclusion.conclusion)}</p>
+        <dl class="detail-list">
+          ${detailList({
+            selected_patch: conclusion.decision_fields.selected_patch,
+            blocking: conclusion.decision_fields.blocking_points,
+            next_action: conclusion.decision_fields.next_review_action,
+            never_production: conclusion.decision_fields.reject_never_production,
+            metadata_lanes: conclusion.decision_fields.reject_metadata_lanes,
+            write_allowed_now: conclusion.decision_fields.write_allowed_now
+          })}
+        </dl>
+      </article>
+    `;
+  }
+
+  function renderEvidenceTrace(state, root) {
+    const trace = state.evidence_traceability;
+    root.querySelector("#evidenceStatus").textContent = trace.status;
+    root.querySelector("#evidenceTracePanel").innerHTML = trace.entries.map((entry) => `
+      <article class="evidence-card" data-evidence-id="${escapeHtml(entry.id)}">
+        <div class="card-head">
+          <strong>${escapeHtml(entry.label)}</strong>
+          <span>${escapeHtml(entry.value)}</span>
+        </div>
+        <p>${escapeHtml(entry.statement)}</p>
+        <div class="tag-row">${tagsHtml(entry.sources)}</div>
+      </article>
+    `).join("");
+  }
+
   function renderMeta(state, root) {
     root.querySelector("#frictionLog").innerHTML = state.operator_friction.map((item) => `
       <article class="note-card">
@@ -382,10 +563,11 @@
       .map((ref) => `<span>${escapeHtml(ref)}</span>`)
       .join("");
     root.querySelector("#boundaryStrip").innerHTML = [
-      "只读",
-      "禁止写入",
-      "无外部调用",
-      "无图像生成"
+      "不写文件",
+      "不调用 provider / plugin / API",
+      "不生成图片",
+      "不写 memory / DailyNote",
+      "不创建 production candidate"
     ].map((item) => `<span>${escapeHtml(item)}</span>`).join("");
   }
 
@@ -399,6 +581,8 @@
     renderOutcomeBoard(state, root);
     renderSelectedPatch(state, root);
     renderRejectGuard(state, root);
+    renderGuidedConclusion(state, root);
+    renderEvidenceTrace(state, root);
     renderMeta(state, root);
   }
 

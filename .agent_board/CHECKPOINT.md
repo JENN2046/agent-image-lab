@@ -1,14 +1,131 @@
 ---
 
+## Checkpoint - Readonly Operator Console Evidence Traceability Hardening
+
+```text
+phase: readonly_operator_console_evidence_traceability_hardening
+slice: display_only_evidence_traceability
+status: completed_validated_no_commit_no_push
+result: PASS
+mode: Green local static Review Console evidence hardening
+summary: Upgraded the readonly operator console from a conclusion-only driving surface into a reviewable evidence surface. The page now includes a Chinese "判断证据链" section with seven compact evidence cards covering selected patch, blocking points, next_review_action, reject never_production, failure taxonomy, metadata accumulation route, and readonly boundary. The section displays source layers without exposing raw JSON or changing artifact semantics.
+changed_files_current_task:
+  - review_console/static_prototype/readonly_operator_console.html
+  - review_console/static_prototype/readonly_operator_console.css
+  - review_console/static_prototype/readonly_operator_console.js
+  - scripts/validate_readonly_operator_console_static_surface.js
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+validation_run:
+  - node --check review_console\static_prototype\readonly_operator_console.js: passed
+  - node --check scripts\validate_readonly_operator_console_static_surface.js: passed
+  - node scripts\validate_readonly_operator_console_static_surface.js: passed
+  - node scripts\validate_visual_eval_readonly_artifact_graph.js: passed
+  - node scripts\validate_visual_eval_readonly_review_artifact_catalog.js: passed
+  - browser smoke at http://127.0.0.1:4186/readonly_operator_console.html: passed; preview server stopped
+evidence_surface_added:
+  - selected_patch_source
+  - blocking_points_source
+  - next_review_action_source
+  - reject_never_production_source
+  - failure_taxonomy_source
+  - metadata_accumulation_source
+  - readonly_boundary_source
+validator_guard_added:
+  - html_required_mount_evidenceTracePanel
+  - html_required_mount_evidenceStatus
+  - operator_js_evidence_traceability_present
+  - state_evidence_traceability_ids_exact
+  - state_evidence_selected_sources_complete
+  - state_evidence_reject_never_production_hard
+  - state_evidence_metadata_accumulation_route_visible
+  - state_evidence_readonly_boundary_value_complete
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+memory_written: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+production_candidate_002_started: false
+Batch_005_started: false
+commit_performed: false
+push_performed: false
+tag_release_deploy_performed: false
+recommended_next_phase: local_review_and_guarded_commit_if_requested
+```
+
+---
+
+## Checkpoint - Readonly Operator Console Guided Walkthrough Report Slice
+
+```text
+phase: readonly_operator_console_guided_walkthrough_report_slice
+slice: display_only_guided_review_conclusion
+status: completed_validated_no_commit_no_push
+result: PASS
+mode: Green local static Review Console usability hardening
+summary: Added a display-only Chinese guided walkthrough and readonly conclusion surface to the operator console. The page now guides an operator through entrance overview -> selected patch -> reject guard -> final readonly judgment without changing readonly artifact semantics or performing any write/runtime/provider action.
+changed_files_current_task:
+  - review_console/static_prototype/readonly_operator_console.html
+  - review_console/static_prototype/readonly_operator_console.css
+  - review_console/static_prototype/readonly_operator_console.js
+  - scripts/validate_readonly_operator_console_static_surface.js
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+validation_run:
+  - node --check review_console\static_prototype\readonly_operator_console.js: passed
+  - node --check scripts\validate_readonly_operator_console_static_surface.js: passed
+  - node scripts\validate_readonly_operator_console_static_surface.js: passed
+  - node scripts\validate_visual_eval_readonly_artifact_graph.js: passed
+  - node scripts\validate_visual_eval_readonly_review_artifact_catalog.js: passed
+operator_surface_added:
+  - 只读审片结论 section
+  - 四步只读审片流程
+  - 最终只读判断 card
+  - selected patch / blocking / next action decision fields
+  - reject never_production / failure taxonomy / metadata lane decision fields
+validator_guard_added:
+  - html_required_mount_guidedWalkthrough
+  - html_required_mount_readonlyConclusionPanel
+  - operator_js_guided_conclusion_present
+  - state_guided_conclusion_selected_matches
+  - state_guided_conclusion_reject_never_production
+  - state_guided_conclusion_no_soft_reject_claims
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+memory_written: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+production_candidate_002_started: false
+Batch_005_started: false
+commit_performed: false
+push_performed: false
+tag_release_deploy_performed: false
+recommended_next_phase: readonly_operator_console_browser_smoke_and_final_audit
+```
+
+---
+
 ## Checkpoint - Readonly Operator Console Daily Use Hardening
 
 ```text
 phase: readonly_operator_console_daily_use_hardening
 slice: operator_console_entrypoint_and_readme
-status: completed_validated_no_commit_no_push
-result: PASS
+status: completed_remote_synced_after_guarded_push
+result: COMPLETED_REMOTE_SYNCED_AFTER_GUARDED_PUSH
 mode: Green local static Review Console entrypoint hardening
-summary: Made the readonly operator console discoverable as a daily-use static entry. The static prototype index now links directly to `readonly_operator_console.html`, README documents how to open and validate the page, and the operator console validator now fails closed if the index or README entrypoint contract drifts.
+source_commit: 0dfbb8b9cb03cb9240f4a2f508a8627556900339
+remote_head_verified: 0dfbb8b9cb03cb9240f4a2f508a8627556900339
+remote_sync_verified: true
+ahead_behind_after_push: 0 ahead / 0 behind
+summary: Made the readonly operator console discoverable as a daily-use static entry, committed it as 0dfbb8b, and pushed it to origin/master. The static prototype index now links directly to `readonly_operator_console.html`, README documents how to open and validate the page, and the operator console validator now fails closed if the index or README entrypoint contract drifts.
 changed_files_current_task:
   - review_console/static_prototype/index.html
   - review_console/static_prototype/README.md
@@ -33,10 +150,49 @@ DailyNote_write_performed: false
 VCP_memory_write_performed: false
 production_candidate_002_started: false
 Batch_005_started: false
+commit_performed: true
+push_performed: true
+tag_release_deploy_performed: false
+next_phase_started: true
+recommended_next_phase: readonly_operator_console_guided_walkthrough_report_slice
+recommended_next_goal: Make the operator page guide a reviewer through overview -> selected patch -> reject guard -> readonly conclusion, using only existing readonly state and no artifact semantic changes.
+```
+
+---
+
+## Checkpoint - Readonly Operator Console Post-push State Sync And Next Phase Selection
+
+```text
+phase: readonly_operator_console_post_push_state_sync_and_next_phase_selection
+status: completed_validated_local_status_surface_sync
+result: PASS
+mode: Green local status-surface sync and next-phase selection
+source_commit: 0dfbb8b9cb03cb9240f4a2f508a8627556900339
+remote_head_verified: 0dfbb8b9cb03cb9240f4a2f508a8627556900339
+ahead_behind_verified_before_sync: 0 ahead / 0 behind
+summary: Synced .agent_board records after the guarded push of 0dfbb8b and selected the next minimum executable readonly operator console target.
+changed_files_current_task:
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+next_phase_selected:
+  id: readonly_operator_console_guided_walkthrough_report_slice
+  goal: Add a guided readonly walkthrough and readonly conclusion surface to the operator page so reviewers can follow overview -> selected patch -> reject guard -> conclusion without changing artifact semantics.
+  first_slice: display_only_guided_review_conclusion
+  boundaries: no artifact semantic changes, no package/dependency changes, no provider/plugin/API/image/memory/production.
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+memory_written: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+production_candidate_002_started: false
+Batch_005_started: false
 commit_performed: false
 push_performed: false
 tag_release_deploy_performed: false
-next_phase_started: false
 ```
 
 ---

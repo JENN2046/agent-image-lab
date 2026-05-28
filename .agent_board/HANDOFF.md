@@ -1,13 +1,112 @@
 ---
 
+## Current Handoff Update - Readonly Operator Console Evidence Traceability Hardening
+
+```text
+phase: readonly_operator_console_evidence_traceability_hardening
+slice: display_only_evidence_traceability
+status: COMPLETED_VALIDATED_NO_COMMIT_NO_PUSH
+mode: Green local static Review Console evidence hardening
+branch: master
+summary: Added a Chinese "判断证据链" section to `review_console/static_prototype/readonly_operator_console.html`. Operators can now see compact evidence cards for selected patch, blocking points, next_review_action, reject never_production, failure taxonomy, metadata accumulation route, and readonly boundary. The page remains static and display-only; no readonly artifact semantics changed.
+changed_by_this_task:
+  - review_console/static_prototype/readonly_operator_console.html
+  - review_console/static_prototype/readonly_operator_console.css
+  - review_console/static_prototype/readonly_operator_console.js
+  - scripts/validate_readonly_operator_console_static_surface.js
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+validation:
+  - node --check review_console\static_prototype\readonly_operator_console.js: passed
+  - node --check scripts\validate_readonly_operator_console_static_surface.js: passed
+  - node scripts\validate_readonly_operator_console_static_surface.js: passed
+  - node scripts\validate_visual_eval_readonly_artifact_graph.js: passed
+  - node scripts\validate_visual_eval_readonly_review_artifact_catalog.js: passed
+  - browser smoke at http://127.0.0.1:4186/readonly_operator_console.html: passed; preview server stopped
+validator_guard_added:
+  - evidence section mount checks
+  - exact evidence id coverage
+  - selected evidence source coverage
+  - blocking and next action evidence coverage
+  - reject never_production hard guard coverage
+  - failure taxonomy and metadata accumulation evidence coverage
+  - readonly boundary evidence coverage
+boundaries:
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  production_candidate_002_started: false
+  Batch_005_started: false
+  commit_performed: false
+  push_performed: false
+next_safe_task: local review and exact-file guarded commit only if explicitly requested; push/tag/release/deploy remain separately gated.
+```
+
+---
+
+## Current Handoff Update - Readonly Operator Console Guided Walkthrough Report Slice
+
+```text
+phase: readonly_operator_console_guided_walkthrough_report_slice
+slice: display_only_guided_review_conclusion
+status: COMPLETED_VALIDATED_NO_COMMIT_NO_PUSH
+mode: Green local static Review Console usability hardening
+branch: master
+summary: Added a Chinese display-only guided walkthrough and readonly conclusion area to `review_console/static_prototype/readonly_operator_console.html`. The operator can follow overview -> selected patch -> reject guard -> final readonly judgment in one page. The page still reads only static mock/artifact state and does not write files, call provider/plugin/API, generate images, write memory/DailyNote, or create production candidates.
+changed_by_this_task:
+  - review_console/static_prototype/readonly_operator_console.html
+  - review_console/static_prototype/readonly_operator_console.css
+  - review_console/static_prototype/readonly_operator_console.js
+  - scripts/validate_readonly_operator_console_static_surface.js
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+validation:
+  - node --check review_console\static_prototype\readonly_operator_console.js: passed
+  - node --check scripts\validate_readonly_operator_console_static_surface.js: passed
+  - node scripts\validate_readonly_operator_console_static_surface.js: passed
+  - node scripts\validate_visual_eval_readonly_artifact_graph.js: passed
+  - node scripts\validate_visual_eval_readonly_review_artifact_catalog.js: passed
+validator_guard_added:
+  - guided conclusion mount checks
+  - four-step readonly walkthrough checks
+  - selected patch consistency checks
+  - reject never_production and metadata lane checks
+  - soft reject wording guard
+boundaries:
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  production_candidate_002_started: false
+  Batch_005_started: false
+  commit_performed: false
+  push_performed: false
+next_safe_task: run browser smoke and final local audit for the readonly operator console; push/tag/release/deploy remain separately gated.
+```
+
+---
+
 ## Current Handoff Update - Readonly Operator Console Daily Use Hardening
 
 ```text
 phase: readonly_operator_console_daily_use_hardening
-status: COMPLETED_VALIDATED_LOCAL_STATIC_ENTRYPOINT_HARDENING
+status: COMPLETED_REMOTE_SYNCED_AFTER_GUARDED_PUSH
 mode: Green local static Review Console entrypoint hardening
 branch: master
-summary: Made the readonly operator console discoverable as a daily-use static entry. The main static prototype page now exposes a Chinese "只读审片操作台" link to `readonly_operator_console.html`; README documents the direct path, index entrypoint, readonly boundary, and validator command; the operator console validator now checks those entrypoint and documentation contracts.
+source_commit: 0dfbb8b9cb03cb9240f4a2f508a8627556900339
+remote_head_verified: 0dfbb8b9cb03cb9240f4a2f508a8627556900339
+remote_sync_verified: true
+ahead_behind_after_push: 0 ahead / 0 behind
+summary: Made the readonly operator console discoverable as a daily-use static entry, committed it as 0dfbb8b, and pushed it to origin/master. The main static prototype page now exposes a Chinese "只读审片操作台" link to `readonly_operator_console.html`; README documents the direct path, index entrypoint, readonly boundary, and validator command; the operator console validator now checks those entrypoint and documentation contracts.
 changed_by_this_task:
   - review_console/static_prototype/index.html
   - review_console/static_prototype/README.md
@@ -32,9 +131,45 @@ boundaries:
   VCP_memory_write_performed: false
   production_candidate_002_started: false
   Batch_005_started: false
+  commit_performed: true
+  push_performed: true
+next_safe_task: readonly_operator_console_guided_walkthrough_report_slice. Push/tag/release/deploy remain separately gated.
+```
+
+---
+
+## Current Handoff Update - Readonly Operator Console Post-push State Sync And Next Phase Selection
+
+```text
+phase: readonly_operator_console_post_push_state_sync_and_next_phase_selection
+status: COMPLETED_VALIDATED_LOCAL_STATUS_SURFACE_SYNC
+mode: Green local status-surface sync and next-phase selection
+branch: master
+source_commit: 0dfbb8b9cb03cb9240f4a2f508a8627556900339
+remote_head_verified: 0dfbb8b9cb03cb9240f4a2f508a8627556900339
+ahead_behind_verified_before_sync: 0 ahead / 0 behind
+summary: Synced .agent_board state after 0dfbb8b reached origin/master and selected the next minimum executable readonly operator console target.
+changed_by_this_task:
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+next_phase_selected:
+  id: readonly_operator_console_guided_walkthrough_report_slice
+  goal: Add a guided readonly walkthrough and readonly conclusion surface to the operator page so reviewers can follow overview -> selected patch -> reject guard -> conclusion without changing artifact semantics.
+  first_slice: display_only_guided_review_conclusion
+boundaries:
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  production_candidate_002_started: false
+  Batch_005_started: false
   commit_performed: false
   push_performed: false
-next_safe_task: run final diff/status checks; exact-file local commit only if explicitly requested. Push/tag/release/deploy remain separately gated.
+next_safe_task: implement readonly_operator_console_guided_walkthrough_report_slice only after this status sync is reviewed or separately committed.
 ```
 
 ---

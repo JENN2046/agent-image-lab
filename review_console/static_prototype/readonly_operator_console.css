@@ -290,9 +290,67 @@ h2 {
 
 .selected-grid,
 .reject-grid,
+.evidence-grid,
+.conclusion-layout,
 .meta-layout {
   display: grid;
   gap: 10px;
+}
+
+.conclusion-layout {
+  grid-template-columns: minmax(320px, 0.88fr) minmax(420px, 1.12fr);
+  align-items: start;
+}
+
+.walkthrough-steps {
+  display: grid;
+  gap: 8px;
+}
+
+.step-card {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--cyan);
+  border-radius: 8px;
+  background: #0d1316;
+}
+
+.step-card strong,
+.step-card p {
+  overflow-wrap: anywhere;
+}
+
+.step-card p {
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.evidence-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.evidence-card {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--violet);
+  border-radius: 8px;
+  background: #0d1316;
+}
+
+.evidence-card strong,
+.evidence-card p {
+  overflow-wrap: anywhere;
+}
+
+.evidence-card p {
+  color: var(--muted);
+  line-height: 1.45;
 }
 
 .detail-card.primary {
@@ -301,6 +359,10 @@ h2 {
 
 .detail-card.guard {
   border-left-color: var(--violet);
+}
+
+.detail-card.conclusion {
+  border-left-color: var(--green);
 }
 
 .detail-card.danger {
@@ -357,7 +419,9 @@ h2 {
   }
 
   .outcome-board,
-  .note-list {
+  .note-list,
+  .evidence-grid,
+  .conclusion-layout {
     grid-template-columns: 1fr;
   }
 

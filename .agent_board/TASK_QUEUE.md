@@ -1,12 +1,49 @@
 ---
+
+- [x] ID: readonly_operator_console_evidence_traceability_hardening
+      Slice: display_only_evidence_traceability.
+      Lane: Green local static Review Console evidence hardening.
+      Status: completed_validated_no_commit_no_push.
+      Goal: Make the readonly operator console reviewable by showing evidence sources for selected patch, blocking points, next_review_action, reject never_production, failure taxonomy, metadata accumulation route, and readonly boundary.
+      Completed: added the Chinese "判断证据链" section with seven evidence cards; source labels are Chinese-first; validator now fails closed on missing evidence mounts, missing evidence ids, selected source drift, reject hard-guard drift, metadata route drift, and readonly boundary softening.
+      Boundary: no artifact semantics, canonical protocol, taxonomy, accumulation, bridge, bundle, provider contact, plugin call, API call, image generation, DailyNote/VCP memory, production candidate, package script, dependency change, commit, push, tag, release, deploy, or destructive action.
+      Validation: operator JS syntax passed; static surface validator syntax and runtime passed; readonly artifact graph passed; readonly artifact catalog passed; browser smoke passed with no console errors and no horizontal overflow.
+      Recommended next: local review and exact-file guarded commit only if explicitly requested.
+
+---
+
+- [x] ID: readonly_operator_console_guided_walkthrough_report_slice
+      Slice: display_only_guided_review_conclusion.
+      Lane: Green local static Review Console usability hardening.
+      Status: completed_validated_no_commit_no_push.
+      Goal: Add a display-only guided readonly walkthrough and final readonly judgment to the operator console so reviewers can complete overview -> selected patch -> reject guard -> conclusion without artifact semantic changes.
+      Completed: added the Chinese "只读审片结论" section, four fixed walkthrough steps, final readonly judgment card, selected/blocking/next-action decision fields, reject never_production/failure-taxonomy/metadata-lane decision fields, and fail-closed validator checks for the new display contract.
+      Boundary: no artifact semantics, canonical protocol, taxonomy, accumulation, bridge, bundle, provider contact, plugin call, API call, image generation, DailyNote/VCP memory, production candidate, package script, dependency change, commit, push, tag, release, deploy, or destructive action.
+      Validation: operator JS syntax passed; static surface validator syntax and runtime passed; readonly artifact graph passed; readonly artifact catalog passed.
+      Recommended next: readonly_operator_console_browser_smoke_and_final_audit.
+
+---
 - [x] ID: readonly_operator_console_daily_use_hardening
       Lane: Green local static Review Console entrypoint hardening.
-      Status: completed_validated_local_static_entrypoint_hardening.
+      Status: completed_remote_synced_after_guarded_push.
+      Source commit: 0dfbb8b9cb03cb9240f4a2f508a8627556900339.
+      Remote head verified: 0dfbb8b9cb03cb9240f4a2f508a8627556900339.
       Goal: Make the readonly operator console discoverable and validated as a daily-use static readonly review entrypoint.
       Completed: added a Chinese "只读审片操作台" link from the static prototype index to `readonly_operator_console.html`; documented direct and index-based opening in README; documented readonly boundaries and validator command; extended the operator console validator to fail closed on missing entrypoint/docs/boundary contract.
-      Boundary: no artifact semantics, canonical protocol, taxonomy, accumulation, bridge, bundle, provider contact, plugin call, API call, image generation, DailyNote/VCP memory, production candidate, package script, dependency change, commit, push, tag, release, deploy, or destructive action.
+      Boundary: no artifact semantics, canonical protocol, taxonomy, accumulation, bridge, bundle, provider contact, plugin call, API call, image generation, DailyNote/VCP memory, production candidate, package script, dependency change, tag, release, deploy, or destructive action; commit and push were separately performed and verified for this completed slice.
       Validation: operator console syntax and validator passed; readonly artifact graph and catalog validators passed; browser smoke passed through local static preview at http://127.0.0.1:4186/ and preview server was stopped.
-      Recommended next: run final diff/status checks; exact-file local commit only if explicitly requested.
+      Commit/push: local commit and guarded push completed; ahead/behind after push was 0/0.
+      Recommended next: readonly_operator_console_guided_walkthrough_report_slice.
+
+---
+- [x] ID: readonly_operator_console_post_push_state_sync_and_next_phase_selection
+      Lane: Green local status-surface sync and next-phase selection.
+      Status: completed_validated_local_status_surface_sync.
+      Goal: Sync .agent_board after 0dfbb8b reached origin/master and select the next minimum executable readonly operator console target.
+      Baseline verified before sync: HEAD and origin/master both 0dfbb8b9cb03cb9240f4a2f508a8627556900339; ahead/behind 0/0; worktree clean.
+      Completed: corrected the previous readonly operator console entrypoint hardening record to remote-synced; recorded commit/push evidence; selected `readonly_operator_console_guided_walkthrough_report_slice`.
+      Recommended next: implement `display_only_guided_review_conclusion` as the first slice of `readonly_operator_console_guided_walkthrough_report_slice`.
+      Boundary: no artifact semantics, canonical protocol, taxonomy, accumulation, bridge, bundle, provider contact, plugin call, API call, image generation, DailyNote/VCP memory, production candidate, package script, dependency change, commit, push, tag, release, deploy, or destructive action in this sync.
 
 ---
 - [x] ID: readonly_visual_review_dataset_regression_layer_20260527
