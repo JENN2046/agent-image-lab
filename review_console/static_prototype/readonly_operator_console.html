@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>只读审片操作台</title>
+    <link rel="stylesheet" href="./readonly_operator_console.css" />
+  </head>
+  <body>
+    <main class="operator-shell" aria-label="只读审片操作台">
+      <header class="operator-topbar">
+        <div>
+          <p class="eyebrow">只读审片</p>
+          <h1>操作员审片台</h1>
+        </div>
+        <div class="topbar-pills" aria-label="当前只读状态">
+          <span id="operatorStatus">状态：待加载</span>
+          <span id="operatorSelectedId">当前：待加载</span>
+          <span class="locked">禁止写入</span>
+        </div>
+      </header>
+
+      <section class="operator-layout">
+        <section class="operator-section overview-section" aria-labelledby="overviewTitle">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">入口总览</p>
+              <h2 id="overviewTitle">入口总览</h2>
+            </div>
+            <div id="overviewCounts" class="metric-strip" aria-label="结果计数"></div>
+          </div>
+          <div id="outcomeBoard" class="outcome-board" aria-label="通过、需修、拒绝"></div>
+        </section>
+
+        <section class="operator-section selected-section" aria-labelledby="selectedTitle">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">当前补丁</p>
+              <h2 id="selectedTitle">当前主跟踪对象</h2>
+            </div>
+            <span id="selectedAction" class="action-pill"></span>
+          </div>
+          <div id="selectedPatchPanel" class="selected-grid" aria-label="当前补丁下钻"></div>
+        </section>
+
+        <section class="operator-section reject-section" aria-labelledby="rejectTitle">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">拒绝约束</p>
+              <h2 id="rejectTitle">拒绝项约束</h2>
+            </div>
+            <span id="rejectAction" class="action-pill danger"></span>
+          </div>
+          <div id="rejectGuardPanel" class="reject-grid" aria-label="拒绝项约束追踪"></div>
+        </section>
+      </section>
+
+      <section class="operator-section meta-section" aria-labelledby="metaTitle">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">操作记录</p>
+            <h2 id="metaTitle">使用摩擦与链路边界</h2>
+          </div>
+          <div id="boundaryStrip" class="metric-strip" aria-label="边界状态"></div>
+        </div>
+        <div class="meta-layout">
+          <div id="frictionLog" class="note-list" aria-label="使用摩擦"></div>
+          <div id="sourceRefs" class="source-list" aria-label="来源文件"></div>
+        </div>
+      </section>
+    </main>
+
+    <script src="./mock_data.js"></script>
+    <script src="./readonly_operator_console.js"></script>
+  </body>
+</html>
