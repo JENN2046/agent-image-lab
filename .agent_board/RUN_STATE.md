@@ -1,5 +1,50 @@
 ---
 
+## Current Run State - Retry 007 Activation Packet Draft
+
+```text
+phase: retry_007_activation_packet_draft_20260528
+status: COMPLETED_VALIDATED_PENDING_LOCAL_COMMIT
+mode: Green local inactive A5 activation packet draft
+branch: master
+active_current_phase_reference: v0_3_3_first_live_generation_pilot
+active_source_phase_reference: v0_3_2_live_candidate_action_packet
+active_next_red_decision_reference: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+goal: Create a separate exact inactive retry_007 activation packet draft while preserving the no-provider-execution boundary.
+completed:
+- Confirmed no existing retry_007 activation packet draft was present.
+- Added `adapters/runtime/exact_a5_provider_retry_007_activation_packet_draft.js`.
+- Added `scripts/validate_exact_a5_provider_retry_007_activation_packet_draft.js`.
+- Added `docs/EXACT_A5_PROVIDER_RETRY_007_ACTIVATION_PACKET_DRAFT.md`.
+- Updated provider preflight validator map, validator index counts, and repository structure governance validation for the new provider/A5 root validator.
+- Kept `package.json` unchanged; this draft is validated by direct node command.
+validation:
+- node --check adapters\runtime\exact_a5_provider_retry_007_activation_packet_draft.js: passed
+- node --check scripts\validate_exact_a5_provider_retry_007_activation_packet_draft.js: passed
+- node scripts\validate_exact_a5_provider_retry_007_activation_packet_draft.js: passed
+- node --check scripts\validators\governance\validate_repository_structure_governance.js: passed
+- node scripts\validate_repository_structure_governance.js: passed
+runtime_execution_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+dependency_change_performed: false
+secret_value_read_performed: false
+push_performed: false
+push_status: not_performed
+tag_release_deploy_performed: false
+authorization_status: draft_not_active
+authorization_active: false
+can_execute_now: false
+activation_phrase_status: draft_phrase_not_owner_issued
+provider_execution_allowed_now: false
+next_safe_task: Validate the full local slice, exact-file commit, and push only if the guarded push preflight remains clean; provider/contact/image execution still requires the exact activation phrase and all pre-activation gates.
+next_phase_started: false
+```
+
 ## Current Run State - Post-Push Sync After Retry 007 Readiness Review
 
 ```text

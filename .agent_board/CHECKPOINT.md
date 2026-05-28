@@ -1,5 +1,52 @@
 ---
 
+## Checkpoint - Retry 007 Activation Packet Draft
+
+```text
+phase: retry_007_activation_packet_draft_20260528
+status: completed_validated_pending_local_commit
+result: COMPLETED_VALIDATED
+mode: Green local inactive A5 activation packet draft
+summary: Added a separate exact inactive retry_007 activation packet draft and validator. The packet is draft-only, anchored to retry_006 evidence and the retry_007 preflight decision, and cannot execute provider/contact/image now.
+active_current_phase_reference: v0_3_3_first_live_generation_pilot
+active_source_phase_reference: v0_3_2_live_candidate_action_packet
+active_next_red_decision_reference: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+changed_files_current_task:
+  - adapters/runtime/exact_a5_provider_retry_007_activation_packet_draft.js
+  - scripts/validate_exact_a5_provider_retry_007_activation_packet_draft.js
+  - docs/EXACT_A5_PROVIDER_RETRY_007_ACTIVATION_PACKET_DRAFT.md
+  - scripts/validators/PROVIDER_PREFLIGHT_REFERENCE_MAP.md
+  - scripts/validators/VALIDATOR_INDEX.md
+  - scripts/validators/governance/validate_repository_structure_governance.js
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+validation_run:
+  - node --check adapters\runtime\exact_a5_provider_retry_007_activation_packet_draft.js: passed
+  - node --check scripts\validate_exact_a5_provider_retry_007_activation_packet_draft.js: passed
+  - node scripts\validate_exact_a5_provider_retry_007_activation_packet_draft.js: passed
+  - node --check scripts\validators\governance\validate_repository_structure_governance.js: passed
+  - node scripts\validate_repository_structure_governance.js: passed
+runtime_execution_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+dependency_change_performed: false
+secret_value_read_performed: false
+push_performed: false
+push_status: not_performed
+tag_release_deploy_performed: false
+authorization_status: draft_not_active
+authorization_active: false
+can_execute_now: false
+provider_execution_allowed_now: false
+recommended_next_phase: validate_commit_and_guarded_push_retry_007_activation_packet_draft
+```
+
 ## Checkpoint - Post-Push Sync After Retry 007 Readiness Review
 
 ```text

@@ -20,6 +20,7 @@ scripts/validate_exact_a5_provider_retry_003_activation_receipt.js
 scripts/validate_exact_a5_provider_retry_004_activation_receipt.js
 scripts/validate_exact_a5_provider_retry_005_activation_receipt.js
 scripts/validate_exact_a5_provider_retry_006_activation_receipt.js
+scripts/validate_exact_a5_provider_retry_007_activation_packet_draft.js
 scripts/validate_exact_a5_provider_retry_007_preflight_decision.js
 scripts/validate_exact_a5_provider_retry_activation_receipt.js
 scripts/validate_exact_a5_provider_retry_packet_draft.js
@@ -36,6 +37,7 @@ scripts/validate_retry_006_artifact_integrity.js
 preflight_packet_drafts:
   - validate_exact_a5_provider_execution_packet_draft.js
   - validate_exact_a5_provider_retry_packet_draft.js
+  - validate_exact_a5_provider_retry_007_activation_packet_draft.js
   - validate_exact_a5_provider_retry_007_preflight_decision.js
   - validate_provider_payload_capture_preflight.js
   - validate_provider_preflight_no_provider_call.js

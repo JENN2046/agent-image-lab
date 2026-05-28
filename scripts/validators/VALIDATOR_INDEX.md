@@ -14,7 +14,7 @@ actions, commit, push, tag, release, deploy, or destructive filesystem actions.
 Root-level JavaScript validators are still the compatibility surface:
 
 ```text
-root_validator_total: 570
+root_validator_total: 571
 ```
 
 Current root validator buckets:
@@ -26,7 +26,7 @@ Current root validator buckets:
 | `readonly_visual_review` | 21 | `validate_visual_eval_readonly_*` | Candidate for a future readonly visual review domain index. |
 | `runtime` | 21 | `validate_runtime_*`, `validate_durable_*`, `validate_review_bridge*` | Runtime-adjacent; preserve A5/runtime boundaries. |
 | `capsule` | 16 | `validate_capsule_*`, `validate_preview_*` | Capsule/product evidence validators. |
-| `provider_preflight` | 14 | `validate_exact_a5*`, `validate_provider*`, `validate_retry*` | Provider/A5 preflight and receipt validators; do not mix with side-effect runners. |
+| `provider_preflight` | 15 | `validate_exact_a5*`, `validate_provider*`, `validate_retry*` | Provider/A5 preflight and receipt validators; do not mix with side-effect runners. |
 | `autopilot_governance` | 12 | `validate_autopilot*`, `validate_agent_board*`, `validate_smart*` | Governance and resume-surface validators. |
 | `review_console` | 9 | `validate_review_console*` | Review Console validators. |
 | `visual_eval` | 6 | `validate_visual_eval_*` excluding readonly | Visual evaluation protocol validators. |
