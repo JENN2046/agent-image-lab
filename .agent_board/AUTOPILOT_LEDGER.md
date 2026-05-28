@@ -6,6 +6,56 @@ remain the source of truth.
 
 ---
 
+## Retry 007 VCPToolBox Execution Surface Current-State Recheck
+
+```yaml
+phase: retry_007_vcptoolbox_execution_surface_current_state_recheck_20260529
+source_phase: retry_007_vcptoolbox_patch_preview_gate_20260529
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+lane: Amber_A_exact_read
+envelope_id: Smart Standing Authorization v3
+action_performed: exact read-only VCPToolBox route and route-test execution surface recheck
+target_systems:
+  - Agent Image Lab local repository
+  - A:\VCP\apps\VCPToolBox
+files_read:
+  - docs/EXACT_A5_PROVIDER_RETRY_007_VCPTOOLBOX_OUTPUT_OVERRIDE_REPAIR_PACKAGE.md
+  - docs/EXACT_A5_PROVIDER_RETRY_007_ACTIVATION_PACKET_DRAFT.md
+  - docs/EXACT_A5_PROVIDER_RETRY_007_PREFLIGHT_DECISION.md
+  - scripts/preview_exact_a5_provider_retry_007_vcptoolbox_output_override_patch.js
+  - scripts/validate_exact_a5_provider_retry_007_vcptoolbox_output_override_repair_package.js
+  - A:\VCP\apps\VCPToolBox\routes\admin\aiImageAgents.js
+  - A:\VCP\apps\VCPToolBox\tests\aiImageAgentsRoute.test.js
+calls_used:
+  provider: 0
+  plugin: 0
+  api: 0
+  image_candidates: 0
+files_written_to_vcptoolbox: 0
+secret_value_read_performed: false
+raw_private_data_printed: false
+image_generation_performed: false
+push_status: not_performed
+current_route_authorizes_retry_007_output_override: false
+current_route_test_covers_retry_007_output_override: false
+repair_authorization_phrase_found_in_documentation: true
+repair_authorization_phrase_issued_by_owner_in_current_turn: false
+validation_run:
+  - node scripts\preview_exact_a5_provider_retry_007_vcptoolbox_output_override_patch.js: passed
+  - node scripts\validate_exact_a5_provider_retry_007_vcptoolbox_output_override_repair_package.js: passed
+  - node --check A:\VCP\apps\VCPToolBox\routes\admin\aiImageAgents.js: passed
+  - node --check A:\VCP\apps\VCPToolBox\tests\aiImageAgentsRoute.test.js: passed
+  - node --test A:\VCP\apps\VCPToolBox\tests\aiImageAgentsRoute.test.js: passed_10_of_10
+validation_result: passed_current_surface_still_blocked
+rollback_or_cleanup_available: no_external_write_performed
+next_auto_step_allowed: false_for_external_vcptoolbox_write_without_exact_repair_phrase
+stop_reason: exact_vcptoolbox_repair_authorization_phrase_required_before_external_repo_modification
+```
+
+---
+
 ## v0.6.24 Exact New-Trial 3-Shot Stability Preflight
 
 ```yaml

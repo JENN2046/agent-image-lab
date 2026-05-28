@@ -1,5 +1,52 @@
 ---
 
+## Current Handoff Update - Retry 007 VCPToolBox Execution Surface Current-State Recheck
+
+```text
+phase: retry_007_vcptoolbox_execution_surface_current_state_recheck_20260529
+status: BLOCKED_BY_EXACT_REPAIR_AUTHORIZATION_PHRASE_REQUIRED
+mode: Amber_A exact read-only VCPToolBox execution-surface recheck; no external repo write
+branch: master
+active_current_phase_reference: v0_3_3_first_live_generation_pilot
+active_source_phase_reference: v0_3_2_live_candidate_action_packet
+active_next_red_decision_reference: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+summary: Current VCPToolBox still does not authorize retry_007 output override. Existing repair package and patch preview remain the right path; no new runner, movement plan, or reference map is needed.
+changed_by_this_sync:
+  - .agent_board/AUTOPILOT_LEDGER.md
+  - .agent_board/BLOCKERS.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+validation:
+  - node scripts\preview_exact_a5_provider_retry_007_vcptoolbox_output_override_patch.js: passed
+  - node scripts\validate_exact_a5_provider_retry_007_vcptoolbox_output_override_repair_package.js: passed
+  - node --check A:\VCP\apps\VCPToolBox\routes\admin\aiImageAgents.js: passed
+  - node --check A:\VCP\apps\VCPToolBox\tests\aiImageAgentsRoute.test.js: passed
+  - node --test A:\VCP\apps\VCPToolBox\tests\aiImageAgentsRoute.test.js: passed 10/10
+boundaries:
+  runtime_execution_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  accepted_samples_write_performed: false
+  production_candidate_write_performed: false
+  secret_value_read_performed: false
+  real_vcptoolbox_exact_read_only_inspection_performed: true
+  real_vcptoolbox_modified: false
+  new_runner_created: false
+  push_status: not_performed
+  tag_release_deploy_performed: false
+  authorization_status: retry_007_vcptoolbox_repair_phrase_documented_but_not_owner_issued
+  authorization_active: false
+  can_execute_now: false
+  provider_execution_allowed_now: false
+next_safe_task: wait for the exact VCPToolBox repair authorization phrase before external repo modification; after that, apply only the documented two-file repair and rerun route tests before provider/image activation.
+```
+
 ## Current Handoff Update - Post-Push Sync After Retry 007 Patch Preview Gate
 
 ```text
