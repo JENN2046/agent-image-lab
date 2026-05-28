@@ -1,5 +1,50 @@
 ---
 
+## Current Run State - Public Disclosure Postcondition Validator Portability Fix
+
+```text
+phase: public_disclosure_postcondition_validator_portability_fix_20260528
+status: COMPLETED_TARGET_VALIDATED_PENDING_LOCAL_COMMIT
+mode: Green local validator maintenance
+branch: master
+active_current_phase_reference: v0_3_3_first_live_generation_pilot
+active_source_phase_reference: v0_3_2_live_candidate_action_packet
+active_next_red_decision_reference: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+goal: Make the tracked local path config de-track postcondition validator portable after remote sync without recreating or reading the ignored local config.
+completed:
+- Confirmed `configs/local_paths/doubaogen_plugin_dir.local.yaml` is absent in this working copy, no longer tracked by Git, and covered by `.gitignore`.
+- Updated `scripts/validate_tracked_local_path_config_detrack_execution_postcondition.js` so it still verifies the historical de-track execution record and current Git ignore/index state, but no longer requires every synced working copy to contain the ignored local config file.
+- Did not create, read, or modify the ignored local config.
+validation:
+- node --check scripts\validate_tracked_local_path_config_detrack_execution_postcondition.js: passed
+- node scripts\validate_tracked_local_path_config_detrack_execution_postcondition.js: passed; current_working_copy_file_present=false; tracking removed and ignore rule effective
+- npm run validate:public-disclosure: passed
+- npm run validate:core: passed
+- npm run validate:mvp: passed
+- npm run validate:provider-evidence-integrity: passed
+- node scripts\validate_exact_a5_provider_retry_007_activation_packet_draft.js: passed
+- git diff --check: passed with CRLF normalization warnings only
+- npm run validate:all: partial_failed_before_commit because historical capsule regression validators reject an arbitrary pending dirty validator file; rerun after exact-file local commit before push
+runtime_execution_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+dependency_change_performed: false
+secret_value_read_performed: false
+push_performed: false
+push_status: not_performed
+tag_release_deploy_performed: false
+authorization_status: retry_007_activation_packet_draft_not_active
+authorization_active: false
+can_execute_now: false
+provider_execution_allowed_now: false
+next_safe_task: exact-file local commit for the validator/status-surface fix, rerun validate:all in clean local-ahead state, then guarded push only if preflight remains clean; retry_007 provider execution remains stopped before exact activation.
+next_phase_started: false
+```
+
 ## Current Run State - Post-Push Sync After Retry 007 Activation Packet Draft
 
 ```text

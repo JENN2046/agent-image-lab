@@ -104,6 +104,15 @@ function validatePackageScript(script) {
   assert(script.indexOf(publicDisclosureCoreCommand) < script.indexOf(postconditionCommand), "core public audit must run before postcondition validator");
 }
 
+function validateCurrentTargetState(facts) {
+  assert(!facts.tracked.includes(targetRef), "current git index must not track target");
+  assert(facts.ignored.includes("configs/local_paths/*.local.yaml"), "current git check-ignore must cite local config ignore rule");
+  assert(
+    facts.targetExists === true || facts.ignored.includes("configs/local_paths/*.local.yaml"),
+    "current working copy file must either exist locally or remain ignored after de-track"
+  );
+}
+
 function validateCommon(record, context, facts) {
   assert(record && typeof record === "object", `${context} missing`);
   assertNoRawLocalDrivePath(record, context);
@@ -138,9 +147,7 @@ function validateCommon(record, context, facts) {
   assert(execution.working_copy_delete_performed === false, `${context} working copy delete must be false`);
   assert(execution.local_config_content_read === false, `${context} local config content read must be false`);
 
-  assert(facts.targetExists === true, "current working copy file must exist");
-  assert(!facts.tracked.includes(targetRef), "current git index must not track target");
-  assert(facts.ignored.includes("configs/local_paths/*.local.yaml"), "current git check-ignore must cite local config ignore rule");
+  validateCurrentTargetState(facts);
 
   assert(packageChange.package_json_modified === true, `${context} package json change must be recorded`);
   assert(packageChange.dependency_manifest_changed === false, `${context} dependency manifest must not change`);
@@ -266,6 +273,7 @@ function main() {
     status: report.status,
     source_phase: report.source_phase,
     working_copy_file_exists_after: report.execution_result.working_copy_file_exists_after,
+    current_working_copy_file_present: facts.targetExists,
     git_tracking_removed_after: report.execution_result.git_tracking_removed_after,
     gitignore_rule_effective_after: report.execution_result.gitignore_rule_effective_after,
     local_config_content_read: report.execution_result.local_config_content_read,

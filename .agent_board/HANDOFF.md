@@ -1,5 +1,52 @@
 ---
 
+## Current Handoff Update - Public Disclosure Postcondition Validator Portability Fix
+
+```text
+phase: public_disclosure_postcondition_validator_portability_fix_20260528
+status: COMPLETED_TARGET_VALIDATED_PENDING_LOCAL_COMMIT
+mode: Green local validator maintenance
+branch: master
+active_current_phase_reference: v0_3_3_first_live_generation_pilot
+active_source_phase_reference: v0_3_2_live_candidate_action_packet
+active_next_red_decision_reference: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+summary: The public-disclosure aggregate gate no longer depends on a machine-local ignored config file being present after remote sync. The validator still proves the historical de-track record, current Git index removal, and effective ignore rule, without reading or recreating the local config.
+changed_by_this_task:
+  - scripts/validate_tracked_local_path_config_detrack_execution_postcondition.js
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+validation:
+  - node --check scripts\validate_tracked_local_path_config_detrack_execution_postcondition.js: passed
+  - node scripts\validate_tracked_local_path_config_detrack_execution_postcondition.js: passed; current_working_copy_file_present=false
+  - npm run validate:public-disclosure: passed
+  - npm run validate:core: passed
+  - npm run validate:mvp: passed
+  - npm run validate:provider-evidence-integrity: passed
+  - node scripts\validate_exact_a5_provider_retry_007_activation_packet_draft.js: passed
+  - git diff --check: passed with CRLF normalization warnings only
+  - npm run validate:all: partial_failed_before_commit on historical capsule dirty-tree shape checks; rerun after exact-file local commit
+boundaries:
+  runtime_execution_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  dependency_change_performed: false
+  secret_value_read_performed: false
+  push_performed: false
+  push_status: not_performed
+  tag_release_deploy_performed: false
+  authorization_status: retry_007_activation_packet_draft_not_active
+  authorization_active: false
+  can_execute_now: false
+  provider_execution_allowed_now: false
+next_safe_task: exact-file local commit, rerun validate:all in clean local-ahead state, then guarded push if preflight remains clean; do not execute provider/contact/image without the exact activation phrase and gates.
+```
+
 ## Current Handoff Update - Post-Push Sync After Retry 007 Activation Packet Draft
 
 ```text

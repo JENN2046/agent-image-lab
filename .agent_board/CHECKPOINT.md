@@ -1,5 +1,52 @@
 ---
 
+## Checkpoint - Public Disclosure Postcondition Validator Portability Fix
+
+```text
+phase: public_disclosure_postcondition_validator_portability_fix_20260528
+status: completed_target_validated_pending_local_commit
+result: COMPLETED_TARGET_VALIDATED
+mode: Green local validator maintenance
+summary: Made the tracked local path config de-track postcondition validator portable across synced workspaces. The ignored local config was not created, read, or modified; current Git state proves the target is untracked and ignored.
+active_current_phase_reference: v0_3_3_first_live_generation_pilot
+active_source_phase_reference: v0_3_2_live_candidate_action_packet
+active_next_red_decision_reference: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+changed_files_current_task:
+  - scripts/validate_tracked_local_path_config_detrack_execution_postcondition.js
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+validation_run:
+  - node --check scripts\validate_tracked_local_path_config_detrack_execution_postcondition.js: passed
+  - node scripts\validate_tracked_local_path_config_detrack_execution_postcondition.js: passed
+  - npm run validate:public-disclosure: passed
+  - npm run validate:core: passed
+  - npm run validate:mvp: passed
+  - npm run validate:provider-evidence-integrity: passed
+  - node scripts\validate_exact_a5_provider_retry_007_activation_packet_draft.js: passed
+  - git diff --check: passed with CRLF normalization warnings only
+validation_note:
+  - npm run validate:all failed before commit only because historical capsule regression validators reject the arbitrary pending dirty validator file; rerun after exact-file local commit before push.
+runtime_execution_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+dependency_change_performed: false
+secret_value_read_performed: false
+push_performed: false
+push_status: not_performed
+tag_release_deploy_performed: false
+authorization_status: retry_007_activation_packet_draft_not_active
+authorization_active: false
+can_execute_now: false
+provider_execution_allowed_now: false
+recommended_next_phase: exact_file_commit_then_validate_all_and_guarded_push_without_provider_execution
+```
+
 ## Checkpoint - Post-Push Sync After Retry 007 Activation Packet Draft
 
 ```text

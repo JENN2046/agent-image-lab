@@ -1,5 +1,19 @@
 ---
 
+- [x] ID: public_disclosure_postcondition_validator_portability_fix_20260528
+      Lane: Green local validator maintenance.
+      Status: completed_target_validated_pending_local_commit.
+      Goal: Make the tracked local path config de-track postcondition validator portable after remote sync without recreating or reading the ignored local config.
+      Active current phase reference: v0_3_3_first_live_generation_pilot.
+      Active source phase reference: v0_3_2_live_candidate_action_packet.
+      Active next Red decision reference: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Completed: confirmed the target local config is absent in this working copy, untracked by Git, and ignored; updated the postcondition validator to accept either a present local working-copy file or the current ignored/untracked post-de-track state.
+      Changed files: `scripts/validate_tracked_local_path_config_detrack_execution_postcondition.js`; `.agent_board/HANDOFF.md`; `.agent_board/RUN_STATE.md`; `.agent_board/TASK_QUEUE.md`; `.agent_board/CHECKPOINT.md`.
+      Validation: `node --check scripts\validate_tracked_local_path_config_detrack_execution_postcondition.js` passed; direct validator passed with `current_working_copy_file_present=false`; `npm run validate:public-disclosure` passed; `npm run validate:core` passed; `npm run validate:mvp` passed; `npm run validate:provider-evidence-integrity` passed; retry_007 activation packet draft validator passed; `git diff --check` passed with CRLF normalization warnings only.
+      Validation note: `npm run validate:all` reached `validate:capsule-regression` and failed only because historical capsule readiness validators reject an arbitrary pending dirty validator file; rerun after exact-file local commit before push.
+      Boundary: runtime_execution_performed: false; provider_contact_performed: false; plugin_call_performed: false; api_call_performed: false; image_generation_performed: false; DailyNote_write_performed: false; VCP_memory_write_performed: false; dependency_change_performed: false; secret_value_read_performed: false; push_status: not_performed; tag_release_deploy_performed: false; retry_007 activation packet remains draft_not_active; provider_execution_allowed_now: false.
+      Recommended next: exact-file local commit for this validator/status-surface fix, rerun `npm run validate:all` in clean local-ahead state, then guarded push only if preflight remains clean; retry_007 provider execution remains stopped before exact activation.
+
 - [x] ID: post_push_sync_after_retry_007_activation_packet_draft_20260528
       Lane: Green local post-push state-surface sync.
       Status: completed_validated_post_push_sync.
