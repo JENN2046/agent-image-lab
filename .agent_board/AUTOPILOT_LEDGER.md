@@ -6,6 +6,66 @@ remain the source of truth.
 
 ---
 
+## Retry 007 NativeDoubao Seedream 5 Real Generation
+
+```yaml
+phase: retry_007_native_doubao_seedream5_real_generation_20260529
+source_phase: retry_007_vcptoolbox_output_override_repair_applied_20260529
+active_current_phase: v0_3_3_first_live_generation_pilot
+resume_guard_source_phase: v0_3_2_live_candidate_action_packet
+next_red_decision: retry_007_human_visual_review_gate
+legacy_active_next_red_decision_reference: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+lane: Amber_B_provider_plugin_api_image
+envelope_id: Smart Standing Authorization v3
+authorization_id: AUTH-DRAFT-NATIVE-DOUBAO-SEEDREAM5-RETRY-20260527-007
+action_performed: one owner-authorized NativeDoubao Seedream 5 retry_007 real generation
+target_systems:
+  - Agent Image Lab local repository
+  - A:\VCP\apps\VCPToolBox
+model_sent: doubao-seedream-5-0-260128
+output_directory_ref: runs/real_generation/v0_6_73_real_vcp_agent_generation_retry_007/
+image_ref: runs/real_generation/v0_6_73_real_vcp_agent_generation_retry_007/image/doubaogen/d3155f44-cc09-4d63-8974-791bca90e8c3.png
+artifact_sha256: 07618ba87d353770dd8913bc56ae3a7a900cb56ba08e6ae330f3165cb8c8c5f0
+artifact_dimensions: 1920x2048
+calls_used:
+  provider: 1
+  plugin: 1
+  api: 1
+  image_candidates: 1
+provider_contact_status: performed
+plugin_call_status: performed
+api_call_status: performed
+image_generation_status: performed
+forbidden_writes_observed:
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  accepted_samples_write_performed: false
+  production_candidate_write_performed: false
+  tag_release_deploy_performed: false
+secret_handling:
+  secret_values_read_by_codex: false
+  secret_value_read_performed: false
+  secret_values_printed: false
+  secret_values_written: false
+cleanup_performed:
+  - restored VCPToolBox Plugin/DoubaoGen/.doubao_api_cache.json without reading its contents after provider runtime touched it
+validation_run:
+  - retry_007 receipt validator: passed
+  - retry_007 artifact integrity validator: passed
+  - provider evidence integrity: passed
+  - public disclosure: passed
+  - npm run validate:mvp: passed
+  - VCPToolBox route and adapter tests: passed
+validation_result: completed_provider_image_created_and_review_ready
+review_status: ready_for_human_review
+rollback_or_cleanup_available: remove exact retry_007 evidence files only if owner requests rollback
+next_auto_step_allowed: true_for_local_status_sync_commit_push_and_human_visual_review_preparation
+push_status: not_performed_pending_exact_file_commit_and_push
+stop_reason: stop_before accepted_samples production_candidate DailyNote or VCP memory writes
+```
+
+---
+
 ## Retry 007 VCPToolBox Output Override Repair Applied
 
 ```yaml

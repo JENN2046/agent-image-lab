@@ -1,0 +1,124 @@
+{
+  "schema": "exact_a5_provider_retry_activation_receipt.v0",
+  "authorization_id": "AUTH-DRAFT-NATIVE-DOUBAO-SEEDREAM5-RETRY-20260527-007",
+  "pipeline_id": "v0_6_73_real_vcp_agent_generation_retry_007",
+  "lane": "Amber",
+  "intent": "real_provider_execution_retry",
+  "started_at": "2026-05-28T18:10:35.817Z",
+  "finished_at": "2026-05-28T18:10:54.006Z",
+  "execution_status": "COMPLETED_PROVIDER_IMAGE_CREATED",
+  "dry_run": false,
+  "retry_count": 1,
+  "further_retry_allowed": false,
+  "retry_authorization_consumed": true,
+  "provider_contact_attempted": true,
+  "pre_provider_gate_check": "initial route call was blocked before provider because AIGENT_PIPELINE_ALLOW_EXECUTION was not set; no provider/plugin/API/image call was used",
+  "provider_plugin_api_call_budget": {
+    "max_admin_route_calls": 1,
+    "max_provider_calls": 1,
+    "max_plugin_calls": 1,
+    "max_api_calls": 1,
+    "max_images": 1
+  },
+  "provider_plugin_api_calls_used": {
+    "admin_route_calls": 1,
+    "provider_calls": 1,
+    "plugin_calls": 1,
+    "api_calls": 1
+  },
+  "image_count": 1,
+  "image_budget_respected": true,
+  "model_required": "doubao-seedream-5-0-260128",
+  "model_sent": "doubao-seedream-5-0-260128",
+  "resolution_required": "1920x2048",
+  "resolution_sent": "1920x2048",
+  "explicit_model_no_fallback_required": true,
+  "non_target_model_observed": false,
+  "prompt_package_ref": "prompts/image_generation/neutral_smoke_test_red_apple_v1.yaml",
+  "output_directory_ref": "runs/real_generation/v0_6_73_real_vcp_agent_generation_retry_007/",
+  "output_directory_abs": "<redacted-local-path>",
+  "doubao_project_base_path_override_ref": "<redacted-local-path>",
+  "exact_output_directory_only": true,
+  "output_scope_violation": false,
+  "output_files": [
+    {
+      "path": "runs/real_generation/v0_6_73_real_vcp_agent_generation_retry_007/image/doubaogen/d3155f44-cc09-4d63-8974-791bca90e8c3.png",
+      "bytes": 132372,
+      "sha256": "07618ba87d353770dd8913bc56ae3a7a900cb56ba08e6ae330f3165cb8c8c5f0",
+      "mime_type": "image/jpeg",
+      "magic_number": "ffd8ffe0",
+      "width": 1920,
+      "height": 2048,
+      "extension_mismatch_recorded": true
+    }
+  ],
+  "image_files": [
+    {
+      "path": "runs/real_generation/v0_6_73_real_vcp_agent_generation_retry_007/image/doubaogen/d3155f44-cc09-4d63-8974-791bca90e8c3.png",
+      "bytes": 132372,
+      "sha256": "07618ba87d353770dd8913bc56ae3a7a900cb56ba08e6ae330f3165cb8c8c5f0",
+      "mime_type": "image/jpeg",
+      "magic_number": "ffd8ffe0",
+      "width": 1920,
+      "height": 2048,
+      "extension_mismatch_recorded": true
+    }
+  ],
+  "forbidden_writes": {
+    "daily_note": false,
+    "vcp_memory": false,
+    "accepted_samples": false,
+    "production_candidate": false,
+    "push_tag_release_deploy": false
+  },
+  "secret_handling": {
+    "secret_values_read_by_codex": false,
+    "env_or_secret_file_content_read_by_codex": false,
+    "provider_auth_material_handled_inside_vcptoolbox_runtime": true,
+    "secret_values_printed": false,
+    "secret_values_written": false
+  },
+  "review_eligible": true,
+  "accepted_candidate_allowed": false,
+  "local_admin_route": {
+    "method": "POST",
+    "url_ref": "<redacted-local-admin-route>",
+    "local_admin_route_used": true,
+    "local_admin_route_scope": "loopback_redacted",
+    "http_status": 200,
+    "route_reached": true,
+    "summary": {
+      "ok": true,
+      "mode": "real_execution",
+      "status": "completed",
+      "result_ok": true,
+      "result_mode": "real_execution",
+      "safety_action": "allow",
+      "safety_reasons": [
+        "plan:包含外部服务调用"
+      ],
+      "errors": [],
+      "images": [
+        {
+          "plugin": "DoubaoGen",
+          "path": "image/doubaogen/d3155f44-cc09-4d63-8974-791bca90e8c3.png",
+          "filename": "d3155f44-cc09-4d63-8974-791bca90e8c3.png",
+          "url_present": true
+        }
+      ],
+      "error": null
+    }
+  },
+  "blocker": null,
+  "receipt_refs": {
+    "provider_receipt": "reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_007_receipt.json",
+    "review_handoff": "review_console/live_receipt_bridge/v0_6_73_real_vcp_agent_generation_retry_007/bridge_entry.json",
+    "durable_audit_record": ".agent_private/runtime_audit_store/v0_6_73_real_vcp_agent_generation_retry_007/activation_attempt_007.audit.json",
+    "private_execution_summary": ".agent_private/runtime_audit_store/v0_6_73_real_vcp_agent_generation_retry_007/activation_attempt_007.execution_summary.json",
+    "route_audit_record": ".agent_private/runtime_audit_store/v0_6_73_real_vcp_agent_generation_retry_007/vcptoolbox_route_audit.jsonl"
+  },
+  "bridge_type": "review_handoff",
+  "review_status": "ready_for_human_review",
+  "accepted_candidate": false,
+  "commercial_delivery_ready": false
+}

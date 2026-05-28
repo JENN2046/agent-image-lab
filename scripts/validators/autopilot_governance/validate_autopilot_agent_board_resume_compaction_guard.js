@@ -155,12 +155,31 @@ function validateSurface(pathName, text) {
       latest.includes("pre_provider_call_payload_capture_satisfied: true") ||
       latest.includes("`pre_provider_call_payload_capture_satisfied: true`")
     );
+  const allowedRetry007ReviewReadySection =
+    latest.includes("phase: retry_007_native_doubao_seedream5_real_generation_20260529") &&
+    (
+      latest.includes("image_generation_performed: true") ||
+      latest.includes("image_generation_status: performed")
+    ) &&
+    latest.includes("review_status: ready_for_human_review") &&
+    (
+      latest.includes("accepted_samples_write_performed: false") ||
+      latest.includes("accepted sample, production candidate, DailyNote, or VCP memory write")
+    ) &&
+    (
+      latest.includes("production_candidate_write_performed: false") ||
+      latest.includes("production candidate")
+    ) &&
+    (
+      latest.includes("VCP_memory_write_performed: false") ||
+      latest.includes("VCP memory")
+    );
   assert(latest.includes(activeCurrentPhase), `${pathName} latest section must cite active current phase`);
   assert(latest.includes(activeSourcePhase), `${pathName} latest section must cite active source phase`);
   assert(latest.includes(activeNextDecision), `${pathName} latest section must cite active next Red decision`);
   assert(pushBoundaryPresent, `${pathName} latest section must preserve push boundary state`);
   assert(
-    noGeneratedImageRecorded || allowedExecutedLatestSection,
+    noGeneratedImageRecorded || allowedExecutedLatestSection || allowedRetry007ReviewReadySection,
     `${pathName} latest section must record no generated image or the allowed exact new-trial execution closeout`
   );
   assert(

@@ -396,6 +396,27 @@ safeCheck("exact_a5_retry_006_activation_receipt", () => {
     result.further_retry_allowed === false;
 });
 
+safeCheck("exact_a5_retry_007_activation_receipt", () => {
+  const result = parseJson(runNode(["scripts/validate_exact_a5_provider_retry_007_activation_receipt.js"]));
+  return result.passed === true &&
+    result.authorization_id === "AUTH-DRAFT-NATIVE-DOUBAO-SEEDREAM5-RETRY-20260527-007" &&
+    result.execution_status === "COMPLETED_PROVIDER_IMAGE_CREATED" &&
+    result.provider_calls_used === 1 &&
+    result.images_created === 1 &&
+    typeof result.image_file === "string" &&
+    result.image_file.startsWith("runs/real_generation/v0_6_73_real_vcp_agent_generation_retry_007/") &&
+    result.artifact_sha256 === "07618ba87d353770dd8913bc56ae3a7a900cb56ba08e6ae330f3165cb8c8c5f0" &&
+    result.artifact_mime_type === "image/jpeg" &&
+    result.artifact_width === 1920 &&
+    result.artifact_height === 2048 &&
+    result.artifact_git_tracked === true &&
+    result.artifact_git_ignored === false &&
+    result.public_absolute_paths_absent === true &&
+    result.output_scope_violation === false &&
+    result.review_eligible === true &&
+    result.further_retry_allowed === false;
+});
+
 safeCheck("retry_006_artifact_integrity", () => {
   const result = parseJson(runNode(["scripts/validate_retry_006_artifact_integrity.js"]));
   return result.passed === true &&
@@ -419,16 +440,39 @@ safeCheck("retry_006_artifact_integrity", () => {
     result.secret_value_read_performed === false;
 });
 
+safeCheck("retry_007_artifact_integrity", () => {
+  const result = parseJson(runNode(["scripts/validate_retry_007_artifact_integrity.js"]));
+  return result.passed === true &&
+    result.image_ref === "runs/real_generation/v0_6_73_real_vcp_agent_generation_retry_007/image/doubaogen/d3155f44-cc09-4d63-8974-791bca90e8c3.png" &&
+    result.bytes === 132372 &&
+    result.sha256 === "07618ba87d353770dd8913bc56ae3a7a900cb56ba08e6ae330f3165cb8c8c5f0" &&
+    result.mime_type === "image/jpeg" &&
+    result.magic_number === "ffd8ffe0" &&
+    result.actual_format === "jpeg" &&
+    result.width === 1920 &&
+    result.height === 2048 &&
+    result.extension === ".png" &&
+    result.extension_mismatch_recorded === true &&
+    result.git_tracked === true &&
+    result.git_ignored === false &&
+    result.public_absolute_paths_absent === true &&
+    result.provider_contact_performed === false &&
+    result.plugin_call_performed === false &&
+    result.api_call_performed === false &&
+    result.image_generation_performed === false &&
+    result.secret_value_read_performed === false;
+});
+
 safeCheck("provider_evidence_integrity_contract", () => {
   const result = parseJson(runNode(["scripts/validate_provider_evidence_integrity_contract.js"]));
   return result.passed === true &&
     result.contract_ref === "schemas/provider_evidence_integrity_contract.schema.yaml" &&
-    result.receipt_count === 6 &&
-    result.handoff_count === 6 &&
-    result.local_admin_route_count === 8 &&
-    result.eligible_artifact_record_count === 4 &&
+    result.receipt_count === 7 &&
+    result.handoff_count === 7 &&
+    result.local_admin_route_count === 10 &&
+    result.eligible_artifact_record_count === 8 &&
     result.out_of_scope_artifact_count === 2 &&
-    result.unique_checked_artifact_paths.length === 1 &&
+    result.unique_checked_artifact_paths.length === 2 &&
     result.public_disclosure_constraints_verified === true &&
     result.local_admin_route_redaction_verified === true &&
     result.artifact_integrity_verified === true &&

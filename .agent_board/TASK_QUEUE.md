@@ -1,5 +1,21 @@
 ---
 
+- [x] ID: retry_007_native_doubao_seedream5_real_generation_20260529
+      Lane: Amber_B provider/plugin/API/image execution plus Green local evidence sync.
+      Status: completed_validated_pending_local_commit_and_push.
+      Goal: Execute the owner-authorized NativeDoubao Seedream 5 retry_007 real generation exactly once and close receipt/review/audit evidence.
+      Active current phase reference: v0_3_3_first_live_generation_pilot.
+      Active source phase reference: v0_3_2_live_candidate_action_packet.
+      Active next Red decision reference: retry_007_human_visual_review_gate.
+      Legacy active next Red decision reference: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Completed: generated one image under the authorized retry_007 output directory; wrote retry_007 provider receipt, review handoff, private durable audit, artifact validator, receipt validator, and provider evidence/MVP wiring.
+      Review status: ready_for_human_review.
+      Evidence: runs/real_generation/v0_6_73_real_vcp_agent_generation_retry_007/image/doubaogen/d3155f44-cc09-4d63-8974-791bca90e8c3.png; reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_007_receipt.json; review_console/live_receipt_bridge/v0_6_73_real_vcp_agent_generation_retry_007/bridge_entry.json.
+      Validation: pre-activation validate:all passed; retry_007 receipt and artifact validators passed; provider evidence integrity passed; public disclosure passed; npm run validate:mvp passed; VCPToolBox route tests passed 11/11; adapter tests passed 3/3; git diff --check passed.
+      Validation note: post-evidence validate:all reaches provider evidence and then fails only at historical capsule-regression commit-readiness checks while exact files are staged; rerun after checkpoint commit on a clean tree.
+      Boundary fields: provider_contact_status: performed; plugin_call_status: performed; api_call_status: performed; image_generation_status: performed; DailyNote_write_performed: false; VCP_memory_write_performed: false; accepted_samples_write_performed: false; production_candidate_write_performed: false; secret_value_read_by_codex: false; secret_value_read_performed: false; new_runner_created: false; tag_release_deploy_performed: false.
+      Recommended next: exact-file local commit/push if safe; then human visual review only, without automatic accepted sample, production candidate, DailyNote, or VCP memory write.
+
 - [x] ID: post_push_sync_after_retry_007_vcptoolbox_repair_applied_20260529
       Lane: Green local post-push state-surface sync.
       Status: completed_validated_post_push_sync.

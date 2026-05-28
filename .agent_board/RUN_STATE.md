@@ -1,5 +1,80 @@
 ---
 
+## Current Run State - Retry 007 NativeDoubao Seedream 5 Real Generation
+
+```text
+phase: retry_007_native_doubao_seedream5_real_generation_20260529
+status: COMPLETED_VALIDATED_PENDING_LOCAL_COMMIT_AND_PUSH
+mode: Amber_B provider/plugin/API/image execution plus Green local evidence sync
+branch: master
+active_current_phase_reference: v0_3_3_first_live_generation_pilot
+active_source_phase_reference: v0_3_2_live_candidate_action_packet
+active_next_red_decision_reference: retry_007_human_visual_review_gate
+legacy_active_next_red_decision_reference: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+authorization_id: AUTH-DRAFT-NATIVE-DOUBAO-SEEDREAM5-RETRY-20260527-007
+goal: Execute exactly one NativeDoubao Seedream 5 retry_007 real generation using the repaired VCPToolBox admin route and close the evidence surface.
+execution_result: COMPLETED_PROVIDER_IMAGE_CREATED
+model_sent: doubao-seedream-5-0-260128
+output_directory_ref: runs/real_generation/v0_6_73_real_vcp_agent_generation_retry_007/
+image_file: runs/real_generation/v0_6_73_real_vcp_agent_generation_retry_007/image/doubaogen/d3155f44-cc09-4d63-8974-791bca90e8c3.png
+artifact_sha256: 07618ba87d353770dd8913bc56ae3a7a900cb56ba08e6ae330f3165cb8c8c5f0
+artifact_mime_type: image/jpeg
+artifact_dimensions: 1920x2048
+provider_calls_used: 1
+plugin_calls_used: 1
+api_calls_used: 1
+images_created: 1
+retry_performed_after_provider_contact: false
+pre_provider_gate_note: an initial route call stopped before provider contact because AIGENT_PIPELINE_ALLOW_EXECUTION was not set; no provider/plugin/API/image budget was consumed before the successful call.
+receipt_refs:
+- reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_007_receipt.json
+- review_console/live_receipt_bridge/v0_6_73_real_vcp_agent_generation_retry_007/bridge_entry.json
+- .agent_private/runtime_audit_store/v0_6_73_real_vcp_agent_generation_retry_007/activation_attempt_007.audit.json
+changed_files_current_task:
+- .agent_board/AUTOPILOT_LEDGER.md
+- .agent_board/CHECKPOINT.md
+- .agent_board/HANDOFF.md
+- .agent_board/RUN_STATE.md
+- .agent_board/TASK_QUEUE.md
+- package.json
+- reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_007_receipt.json
+- review_console/live_receipt_bridge/v0_6_73_real_vcp_agent_generation_retry_007/bridge_entry.json
+- runs/real_generation/v0_6_73_real_vcp_agent_generation_retry_007/image/doubaogen/d3155f44-cc09-4d63-8974-791bca90e8c3.png
+- scripts/validate_exact_a5_provider_retry_007_activation_receipt.js
+- scripts/validate_mvp_core.js
+- scripts/validate_provider_evidence_integrity_contract.js
+- scripts/validate_retry_007_artifact_integrity.js
+validation:
+- pre-activation validate:all: passed
+- retry_007 receipt validator: passed
+- retry_007 artifact integrity validator: passed
+- provider evidence integrity: passed
+- public disclosure: passed
+- npm run validate:mvp: passed
+- VCPToolBox route and adapter tests: passed
+- git diff --check: passed
+validate_all_current_note: the post-evidence validate:all run passed through provider evidence and failed only at historical capsule-regression commit-readiness checks while exact files were staged; rerun after checkpoint commit on a clean tree.
+runtime_execution_status: performed
+provider_contact_status: performed
+plugin_call_status: performed
+api_call_status: performed
+image_generation_status: performed
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+secret_value_read_by_codex: false
+secret_value_read_performed: false
+secret_value_printed: false
+secret_value_written: false
+vcptoolbox_cache_cleanup_performed_without_reading_contents: true
+new_runner_created: false
+push_status: not_performed_pending_exact_file_commit_and_push
+tag_release_deploy_performed: false
+review_status: ready_for_human_review
+next_safe_task: exact-file local commit and fast-forward push if safety checks pass; then human visual review. Do not write accepted_samples, production_candidate, DailyNote, or VCP memory without a later gate.
+```
+
 ## Current Run State - Post-Push Sync After Retry 007 VCPToolBox Repair Applied
 
 ```text

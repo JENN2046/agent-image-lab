@@ -1,5 +1,66 @@
 ---
 
+## Checkpoint - Retry 007 NativeDoubao Seedream 5 Real Generation
+
+```text
+phase: retry_007_native_doubao_seedream5_real_generation_20260529
+status: completed_validated_pending_local_commit_and_push
+result: COMPLETED_VALIDATED
+mode: Amber_B provider/plugin/API/image execution plus Green local evidence sync
+summary: Executed the owner-authorized retry_007 NativeDoubao Seedream 5 generation exactly once. The run created one review-eligible image under the authorized retry_007 output directory and recorded the provider receipt, review handoff, and private durable audit. No accepted sample, production candidate, DailyNote, or VCP memory write was performed.
+active_current_phase_reference: v0_3_3_first_live_generation_pilot
+active_source_phase_reference: v0_3_2_live_candidate_action_packet
+authorization_id: AUTH-DRAFT-NATIVE-DOUBAO-SEEDREAM5-RETRY-20260527-007
+legacy_active_next_red_decision_reference: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+model_sent: doubao-seedream-5-0-260128
+image_file: runs/real_generation/v0_6_73_real_vcp_agent_generation_retry_007/image/doubaogen/d3155f44-cc09-4d63-8974-791bca90e8c3.png
+artifact_sha256: 07618ba87d353770dd8913bc56ae3a7a900cb56ba08e6ae330f3165cb8c8c5f0
+artifact_mime_type: image/jpeg
+artifact_dimensions: 1920x2048
+changed_files_current_task:
+  - .agent_board/AUTOPILOT_LEDGER.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+  - package.json
+  - reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_007_receipt.json
+  - review_console/live_receipt_bridge/v0_6_73_real_vcp_agent_generation_retry_007/bridge_entry.json
+  - runs/real_generation/v0_6_73_real_vcp_agent_generation_retry_007/image/doubaogen/d3155f44-cc09-4d63-8974-791bca90e8c3.png
+  - scripts/validate_exact_a5_provider_retry_007_activation_receipt.js
+  - scripts/validate_mvp_core.js
+  - scripts/validate_provider_evidence_integrity_contract.js
+  - scripts/validate_retry_007_artifact_integrity.js
+validation:
+  - pre-activation validate:all: passed
+  - node scripts\validate_exact_a5_provider_retry_007_activation_receipt.js: passed
+  - node scripts\validate_retry_007_artifact_integrity.js: passed
+  - npm run validate:provider-evidence-integrity: passed
+  - npm run validate:public-disclosure: passed
+  - npm run validate:mvp: passed
+  - VCPToolBox route tests: passed 11/11
+  - VCPToolBox adapter tests: passed 3/3
+  - git diff --check: passed
+validation_note: post-evidence validate:all failed only at capsule-regression commit-readiness checks while exact files are staged; rerun after checkpoint commit on a clean tree.
+provider_contact_status: performed
+plugin_call_status: performed
+api_call_status: performed
+image_generation_status: performed
+review_status: ready_for_human_review
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+secret_value_read_by_codex: false
+secret_value_read_performed: false
+secret_value_printed: false
+secret_value_written: false
+new_runner_created: false
+push_status: not_performed_pending_exact_file_commit_and_push
+tag_release_deploy_performed: false
+recommended_next_phase: retry_007_human_visual_review_gate
+```
+
 ## Checkpoint - Post-Push Sync After Retry 007 VCPToolBox Repair Applied
 
 ```text

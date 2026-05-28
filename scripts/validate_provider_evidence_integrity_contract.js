@@ -222,8 +222,8 @@ async function main() {
   assertSchemaContract();
   const receiptRefs = discoverReceiptRefs();
   const handoffRefs = discoverHandoffRefs();
-  assert(receiptRefs.length === 6, "expected six v0.6.73 real execution receipts");
-  assert(handoffRefs.length === 6, "expected six v0.6.73 real execution review handoffs");
+  assert(receiptRefs.length === 7, "expected seven v0.6.73 real execution receipts");
+  assert(handoffRefs.length === 7, "expected seven v0.6.73 real execution review handoffs");
 
   let localAdminRouteCount = 0;
   let eligibleArtifactRecordCount = 0;
