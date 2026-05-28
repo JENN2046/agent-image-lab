@@ -13,6 +13,7 @@ const queryPath = "tests/schema_examples/visual_eval_readonly_review_collection_
 const negativeCasesPath = "tests/schema_examples/visual_eval_readonly_review_collection_query_negative_cases.example.json";
 const collectionConsumerPath = "tests/schema_examples/visual_eval_readonly_review_collection_consumer.example.json";
 const expectedOutcomes = ["pass", "patch", "reject"];
+const expectedSelectedReviewResultId = "visual_eval_review_result_patch_synthetic_001";
 const expectedIndexNames = [
   "by_outcome",
   "by_taxonomy_tag",
@@ -22,6 +23,9 @@ const expectedIndexNames = [
 const expectedNegativeCases = new Map([
   ["missing_pass_outcome_index", "query_outcome_index_complete"],
   ["dangling_query_row_ref", "query_row_ref_resolves"],
+  ["missing_selected_review_result_id", "collection_query_selected_patch_explicit"],
+  ["selected_patch_id_drift", "selected_patch_cross_layer_consistent"],
+  ["selected_patch_missing", "collection_query_selected_patch_explicit"],
   ["query_guard_memory_true", "query_guard_memory_write_performed_false"],
   ["absolute_local_source_consumer", "query_no_absolute_or_loopback"],
 ]);
@@ -80,9 +84,22 @@ function setByPath(target, fieldPath, value) {
   cursor[segments[segments.length - 1]] = value;
 }
 
+function deleteByPath(target, fieldPath) {
+  const segments = fieldPath.split(".");
+  let cursor = target;
+  for (let index = 0; index < segments.length - 1; index += 1) {
+    cursor = cursor?.[segments[index]];
+  }
+  if (cursor && typeof cursor === "object") delete cursor[segments[segments.length - 1]];
+}
+
 function applyMutation(query, negativeCase) {
   if (negativeCase.mutation.operation === "set_field") {
     setByPath(query, negativeCase.mutation.field, negativeCase.mutation.value);
+    return;
+  }
+  if (negativeCase.mutation.operation === "remove_field") {
+    deleteByPath(query, negativeCase.mutation.field);
     return;
   }
   if (negativeCase.mutation.operation === "remove_index_key") {
@@ -114,6 +131,20 @@ function rowLookup(collectionConsumer) {
   return new Map((collectionConsumer.collection_rows || []).map((row) => [row.review_result_id, row]));
 }
 
+function selectedPatchMatches(row, selectedPatch) {
+  return Boolean(row) &&
+    selectedPatch?.selected_patch === true &&
+    selectedPatch.review_result_id === row.review_result_id &&
+    selectedPatch.candidate_id === row.candidate_id &&
+    selectedPatch.session_id === row.session_id &&
+    selectedPatch.case_id === row.case_id &&
+    selectedPatch.outcome === "patch" &&
+    (!Object.prototype.hasOwnProperty.call(selectedPatch, "next_review_action") ||
+      selectedPatch.next_review_action === "write_patch_plan_only") &&
+    (!Object.prototype.hasOwnProperty.call(selectedPatch, "metadata_accumulation_action") ||
+      selectedPatch.metadata_accumulation_action === row.metadata_accumulation_action);
+}
+
 function validateQueryShape(query, collectionConsumer, options = {}) {
   addResult("query_payload_type_expected", query.query_payload_type === "metadata_only_visual_eval_readonly_review_collection_query");
   addResult("query_status_ready", query.status === "readonly_collection_query_payload_ready");
@@ -125,6 +156,22 @@ function validateQueryShape(query, collectionConsumer, options = {}) {
   addResult("query_outcome_index_complete", expectedOutcomes.every((outcome) => Array.isArray(query.indexes?.by_outcome?.[outcome]) && query.indexes.by_outcome[outcome].length > 0));
 
   const rowsById = rowLookup(collectionConsumer);
+  const selectedRow = rowsById.get(query.selected_review_result_id);
+  addResult(
+    "collection_query_selected_patch_explicit",
+    query.selected_review_result_id === expectedSelectedReviewResultId && query.selected_patch?.selected_patch === true,
+    query.selected_review_result_id
+  );
+  addResult("selected_review_result_id_resolves", Boolean(selectedRow), query.selected_review_result_id);
+  addResult(
+    "selected_patch_cross_layer_consistent",
+    query.selected_review_result_id === collectionConsumer.selected_review_result_id &&
+      query.selected_patch?.review_result_id === query.selected_review_result_id &&
+      collectionConsumer.selected_patch?.review_result_id === query.selected_review_result_id &&
+      selectedPatchMatches(selectedRow, query.selected_patch) &&
+      selectedPatchMatches(selectedRow, collectionConsumer.selected_patch),
+    query.selected_patch?.review_result_id
+  );
   for (const [indexName, index] of Object.entries(query.indexes || {})) {
     for (const [key, refs] of Object.entries(index || {})) {
       addResult(`query_${indexName}_${key}_refs_non_empty`, Array.isArray(refs) && refs.length > 0);

@@ -13,6 +13,7 @@ const collectionPath = "tests/schema_examples/visual_eval_readonly_review_collec
 const consumerExamplePath = "tests/schema_examples/visual_eval_readonly_review_collection_consumer.example.json";
 const negativeCasesPath = "tests/schema_examples/visual_eval_readonly_review_collection_negative_cases.example.json";
 const expectedOutcomes = ["pass", "patch", "reject"];
+const expectedSelectedReviewResultId = "visual_eval_review_result_patch_synthetic_001";
 const expectedDisplayFields = [
   "outcome",
   "summary",
@@ -75,6 +76,18 @@ function runCli(relativeScript, args) {
   return JSON.parse(result.stdout);
 }
 
+function selectedPatchMatches(row, selectedPatch) {
+  return Boolean(row) &&
+    selectedPatch?.selected_patch === true &&
+    selectedPatch.review_result_id === row.review_result_id &&
+    selectedPatch.candidate_id === row.candidate_id &&
+    selectedPatch.session_id === row.session_id &&
+    selectedPatch.case_id === row.case_id &&
+    selectedPatch.outcome === "patch" &&
+    selectedPatch.next_review_action === "write_patch_plan_only" &&
+    selectedPatch.metadata_accumulation_action === row.metadata_accumulation_action;
+}
+
 function setByPath(target, fieldPath, value) {
   const segments = fieldPath.split(".");
   let cursor = target;
@@ -132,6 +145,10 @@ function validatePositiveCase(collection, expectedConsumer) {
   addResult("collection_member_count_matches", directPayload.collection.member_count === collection.expected_collection_summary.member_count);
   addResult("collection_display_row_count_matches", directPayload.collection.display_row_count === collection.expected_collection_summary.display_row_count);
   addResult("collection_outcome_summary_matches_members", JSON.stringify(directPayload.collection.outcome_summary) === JSON.stringify(collection.expected_collection_summary.outcome_summary));
+  const selectedRow = directPayload.collection_rows.find((row) => row.review_result_id === directPayload.selected_review_result_id);
+  addResult("collection_selected_patch_explicit", directPayload.selected_review_result_id === expectedSelectedReviewResultId && directPayload.selected_patch?.selected_patch === true);
+  addResult("selected_review_result_id_resolves", Boolean(selectedRow), directPayload.selected_review_result_id);
+  addResult("selected_patch_cross_layer_consistent", selectedPatchMatches(selectedRow, directPayload.selected_patch), directPayload.selected_patch?.review_result_id);
   addResult("collection_rows_include_pass_patch_reject", sameSet([...new Set(directPayload.collection_rows.map((row) => row.outcome))], expectedOutcomes));
   for (const field of expectedDisplayFields) {
     addResult(`collection_rows_expose_${field}`, directPayload.collection_rows.every((row) => Object.prototype.hasOwnProperty.call(row, field)));

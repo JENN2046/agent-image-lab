@@ -276,6 +276,44 @@ const expectedNegativeCases = [
     },
   },
   {
+    case_id: "missing_selected_patch_at_collection_entry",
+    expected_failure_code: "collection_selected_patch_explicit",
+    mutate(graph) {
+      delete graph.artifacts.readonly_collection_consumer_payload.data.selected_patch;
+    },
+  },
+  {
+    case_id: "missing_selected_review_result_id",
+    expected_failure_code: "collection_query_selected_patch_explicit",
+    mutate(graph) {
+      delete graph.artifacts.readonly_collection_query_payload.data.selected_review_result_id;
+    },
+  },
+  {
+    case_id: "selected_patch_id_drift",
+    expected_failure_code: "selected_patch_cross_layer_consistent",
+    mutate(graph) {
+      graph.artifacts.readonly_collection_consumer_payload.data.selected_patch.review_result_id =
+        "visual_eval_review_result_reject_synthetic_001";
+    },
+  },
+  {
+    case_id: "selected_patch_cross_layer_mismatch",
+    expected_failure_code: "selected_patch_cross_layer_consistent",
+    mutate(graph) {
+      graph.artifacts.readonly_collection_query_payload.data.selected_patch.candidate_id =
+        "synthetic_product_still_life_reject_001";
+    },
+  },
+  {
+    case_id: "selected_patch_metadata_lane_mismatch",
+    expected_failure_code: "selected_patch_metadata_lane_consistent",
+    mutate(graph) {
+      graph.artifacts.readonly_metadata_accumulation_queue_surface_snapshot.data.surface.selected_items[0].review_result_id =
+        "visual_eval_review_result_reject_synthetic_001";
+    },
+  },
+  {
     case_id: "derived_accumulation_action_drift",
     expected_failure_code: "graph_accumulation_semantics_exact",
     mutate(graph) {
@@ -716,6 +754,20 @@ function pathIsProjectionOnly(pathLabel, row) {
   return row.section_id === "next_review_actions" ||
     /\.next_review_actions(?:\.|\[)/.test(pathLabel) ||
     /sections\.4\.items\.\d+$/.test(pathLabel);
+}
+
+function selectedPatchMatchesRow(row, selectedPatch) {
+  return Boolean(row) &&
+    selectedPatch?.selected_patch === true &&
+    selectedPatch.review_result_id === row.review_result_id &&
+    selectedPatch.candidate_id === row.candidate_id &&
+    selectedPatch.session_id === row.session_id &&
+    selectedPatch.case_id === row.case_id &&
+    selectedPatch.outcome === "patch" &&
+    (!Object.prototype.hasOwnProperty.call(selectedPatch, "next_review_action") ||
+      selectedPatch.next_review_action === "write_patch_plan_only") &&
+    (!Object.prototype.hasOwnProperty.call(selectedPatch, "metadata_accumulation_action") ||
+      selectedPatch.metadata_accumulation_action === row.metadata_accumulation_action);
 }
 
 function validateDerivedOwnership(graph, ctx) {
@@ -1232,8 +1284,43 @@ function validateReviewConsistency(graph, ctx) {
 }
 
 function validateSelectedPatchThread(graph, ctx) {
+  const collectionConsumer = graph.artifacts.readonly_collection_consumer_payload.data;
+  const collectionQuery = graph.artifacts.readonly_collection_query_payload.data;
+  const collectionRows = collectionConsumer.collection_rows || [];
+  const selectedRow = collectionRows.find((row) => row.review_result_id === expectedSelectedReviewResultId);
+  const collectionSelectedMismatches = [];
+  const querySelectedMismatches = [];
   const selectedMismatches = [];
+  const selectedResolveMismatches = [];
+  const metadataLaneMismatches = [];
+
+  if (collectionConsumer.selected_review_result_id !== expectedSelectedReviewResultId) {
+    collectionSelectedMismatches.push(`readonly_collection_consumer_payload.selected_review_result_id=${collectionConsumer.selected_review_result_id}`);
+  }
+  if (!selectedPatchMatchesRow(selectedRow, collectionConsumer.selected_patch)) {
+    collectionSelectedMismatches.push(`readonly_collection_consumer_payload.selected_patch=${stableJson(collectionConsumer.selected_patch)}`);
+  }
+  if (collectionQuery.selected_review_result_id !== expectedSelectedReviewResultId) {
+    querySelectedMismatches.push(`readonly_collection_query_payload.selected_review_result_id=${collectionQuery.selected_review_result_id}`);
+  }
+  if (!selectedPatchMatchesRow(selectedRow, collectionQuery.selected_patch)) {
+    querySelectedMismatches.push(`readonly_collection_query_payload.selected_patch=${stableJson(collectionQuery.selected_patch)}`);
+  }
+  if (!selectedRow) {
+    selectedResolveMismatches.push(`collection_rows missing ${expectedSelectedReviewResultId}`);
+  }
+  if (collectionConsumer.selected_review_result_id && !collectionRows.some((row) => row.review_result_id === collectionConsumer.selected_review_result_id)) {
+    selectedResolveMismatches.push(`readonly_collection_consumer_payload.selected_review_result_id=${collectionConsumer.selected_review_result_id}`);
+  }
+  if (collectionQuery.selected_review_result_id && !collectionRows.some((row) => row.review_result_id === collectionQuery.selected_review_result_id)) {
+    selectedResolveMismatches.push(`readonly_collection_query_payload.selected_review_result_id=${collectionQuery.selected_review_result_id}`);
+  }
+
   const selectedPaths = [
+    ["readonly_collection_consumer_payload", "selected_review_result_id"],
+    ["readonly_collection_consumer_payload", "selected_patch.review_result_id"],
+    ["readonly_collection_query_payload", "selected_review_result_id"],
+    ["readonly_collection_query_payload", "selected_patch.review_result_id"],
     ["readonly_detail_view", "selected_review_result_id"],
     ["readonly_detail_view", "selected_card.review_result_id"],
     ["readonly_detail_navigation", "selected_review_result_id"],
@@ -1267,12 +1354,48 @@ function validateSelectedPatchThread(graph, ctx) {
     }
   }
 
+  const queuePatchPlan = graph.artifacts.readonly_metadata_accumulation_queue.data.queues?.patch_plan_only || [];
+  if (!queuePatchPlan.some((item) => item.review_result_id === expectedSelectedReviewResultId && item.selected === true)) {
+    metadataLaneMismatches.push("readonly_metadata_accumulation_queue.queues.patch_plan_only missing selected patch");
+  }
+  const metadataSelectedPatchPlan =
+    graph.artifacts.readonly_metadata_accumulation_queue_consumer.data.selected_patch_plan;
+  if (metadataSelectedPatchPlan?.review_result_id !== expectedSelectedReviewResultId || metadataSelectedPatchPlan.selected !== true) {
+    metadataLaneMismatches.push(`readonly_metadata_accumulation_queue_consumer.selected_patch_plan=${stableJson(metadataSelectedPatchPlan)}`);
+  }
+  const metadataQuerySelectedItems =
+    graph.artifacts.readonly_metadata_accumulation_queue_query.data.indexes?.selected_items || [];
+  if (!metadataQuerySelectedItems.some((item) => item.section_id === "patch_plan_only" && item.review_result_id === expectedSelectedReviewResultId && item.selected === true)) {
+    metadataLaneMismatches.push("readonly_metadata_accumulation_queue_query.indexes.selected_items missing patch_plan_only selected patch");
+  }
+  if (!selectedSurfaceItems.some((item) => item.section_id === "patch_plan_only" && item.review_result_id === expectedSelectedReviewResultId && item.selected === true)) {
+    metadataLaneMismatches.push("readonly_metadata_accumulation_queue_surface_snapshot.surface.selected_items missing patch_plan_only selected patch");
+  }
+
   const selectedNavigationKey =
     graph.artifacts.readonly_metadata_accumulation_queue_detail_navigation.data.selected_navigation_key;
   if (selectedNavigationKey !== `patch_plan_only:${expectedSelectedReviewResultId}`) {
     selectedMismatches.push(`readonly_metadata_accumulation_queue_detail_navigation.selected_navigation_key=${selectedNavigationKey}`);
   }
 
+  ctx.addResult("collection_selected_patch_explicit", collectionSelectedMismatches.length === 0, collectionSelectedMismatches.join("; "));
+  ctx.addResult("collection_query_selected_patch_explicit", querySelectedMismatches.length === 0, querySelectedMismatches.join("; "));
+  ctx.addResult("selected_review_result_id_resolves", selectedResolveMismatches.length === 0, selectedResolveMismatches.join("; "));
+  ctx.addResult(
+    "selected_patch_cross_layer_consistent",
+    collectionSelectedMismatches.length === 0 && querySelectedMismatches.length === 0 && selectedMismatches.length === 0,
+    collectionSelectedMismatches.concat(querySelectedMismatches, selectedMismatches).join("; ")
+  );
+  ctx.addResult("selected_patch_metadata_lane_consistent", metadataLaneMismatches.length === 0, metadataLaneMismatches.join("; "));
+  ctx.addResult(
+    "forbidden_selected_patch_drift",
+    collectionSelectedMismatches.length === 0 &&
+      querySelectedMismatches.length === 0 &&
+      selectedResolveMismatches.length === 0 &&
+      selectedMismatches.length === 0 &&
+      metadataLaneMismatches.length === 0,
+    collectionSelectedMismatches.concat(querySelectedMismatches, selectedResolveMismatches, selectedMismatches, metadataLaneMismatches).join("; ")
+  );
   ctx.addResult("graph_selected_review_result_consistency", selectedMismatches.length === 0, selectedMismatches.join("; "));
 }
 
@@ -1319,7 +1442,7 @@ function collectFailureCodes(fn) {
 }
 
 function validateNegativeCases(baseGraph, ctx) {
-  ctx.addResult("graph_negative_cases_count_expected", expectedNegativeCases.length === 54, expectedNegativeCases.length);
+  ctx.addResult("graph_negative_cases_count_expected", expectedNegativeCases.length === 59, expectedNegativeCases.length);
   for (const negativeCase of expectedNegativeCases) {
     const graph = deepClone(baseGraph);
     negativeCase.mutate(graph);

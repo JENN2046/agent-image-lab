@@ -23,6 +23,31 @@
       }
     },
     {
+      "case_id": "missing_selected_review_result_id",
+      "expected_failure_code": "collection_query_selected_patch_explicit",
+      "mutation": {
+        "operation": "remove_field",
+        "field": "selected_review_result_id"
+      }
+    },
+    {
+      "case_id": "selected_patch_id_drift",
+      "expected_failure_code": "selected_patch_cross_layer_consistent",
+      "mutation": {
+        "operation": "set_field",
+        "field": "selected_patch.review_result_id",
+        "value": "visual_eval_review_result_reject_synthetic_001"
+      }
+    },
+    {
+      "case_id": "selected_patch_missing",
+      "expected_failure_code": "collection_query_selected_patch_explicit",
+      "mutation": {
+        "operation": "remove_field",
+        "field": "selected_patch"
+      }
+    },
+    {
       "case_id": "query_guard_memory_true",
       "expected_failure_code": "query_guard_memory_write_performed_false",
       "mutation": {

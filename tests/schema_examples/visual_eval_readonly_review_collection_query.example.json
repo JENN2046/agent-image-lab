@@ -3,6 +3,15 @@
   "query_payload_type": "metadata_only_visual_eval_readonly_review_collection_query",
   "status": "readonly_collection_query_payload_ready",
   "source_collection_consumer": "tests/schema_examples/visual_eval_readonly_review_collection_consumer.example.json",
+  "selected_review_result_id": "visual_eval_review_result_patch_synthetic_001",
+  "selected_patch": {
+    "selected_patch": true,
+    "review_result_id": "visual_eval_review_result_patch_synthetic_001",
+    "candidate_id": "synthetic_product_still_life_patch_001",
+    "session_id": "visual_eval_review_session_synthetic_bundle_001",
+    "case_id": "visual_eval_image_case_patch_synthetic_001",
+    "outcome": "patch"
+  },
   "query_contract": {
     "metadata_only": true,
     "read_only": true,

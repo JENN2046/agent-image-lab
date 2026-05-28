@@ -58,6 +58,17 @@ function idRef(row) {
   };
 }
 
+function querySelectedPatchEntry(selectedPatch) {
+  return {
+    selected_patch: true,
+    review_result_id: selectedPatch.review_result_id,
+    candidate_id: selectedPatch.candidate_id,
+    session_id: selectedPatch.session_id,
+    case_id: selectedPatch.case_id,
+    outcome: selectedPatch.outcome,
+  };
+}
+
 function buildIndex(rows, keyFn) {
   const index = {};
   for (const row of rows) {
@@ -84,6 +95,14 @@ function loadReadonlyReviewCollectionQuery(input) {
   assert(rows.length > 0, "collection rows must be non-empty");
   const rowIds = new Set(rows.map((row) => row.review_result_id));
   assert(rowIds.size === rows.length, "collection rows must have unique review_result_id");
+  const selectedReviewResultId = collectionConsumer.selected_review_result_id;
+  assert(typeof selectedReviewResultId === "string" && selectedReviewResultId.length > 0, "collection consumer selected_review_result_id must be explicit");
+  assert(collectionConsumer.selected_patch?.selected_patch === true, "collection consumer selected_patch must be explicit");
+  assert(collectionConsumer.selected_patch?.review_result_id === selectedReviewResultId, "collection consumer selected_patch id must match selected_review_result_id");
+  const selectedPatch = rows.find((row) => row.review_result_id === selectedReviewResultId);
+  assert(selectedPatch, "collection query selected_review_result_id must resolve to collection row");
+  assert(selectedPatch.outcome === "patch", "collection query selected patch must have patch outcome");
+  assert(selectedPatch.next_review_action === "write_patch_plan_only", "collection query selected patch must route to patch plan");
 
   const byOutcome = buildIndex(rows, (row) => [row.outcome]);
   assert(expectedOutcomes.every((outcome) => Array.isArray(byOutcome[outcome]) && byOutcome[outcome].length > 0), "outcome index must cover pass/patch/reject");
@@ -97,6 +116,8 @@ function loadReadonlyReviewCollectionQuery(input) {
     query_payload_type: "metadata_only_visual_eval_readonly_review_collection_query",
     status: "readonly_collection_query_payload_ready",
     source_collection_consumer: collectionConsumerPath,
+    selected_review_result_id: selectedReviewResultId,
+    selected_patch: querySelectedPatchEntry(collectionConsumer.selected_patch),
     query_contract: {
       metadata_only: true,
       read_only: true,

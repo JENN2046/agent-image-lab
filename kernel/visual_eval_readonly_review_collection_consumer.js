@@ -11,6 +11,7 @@ const {
 const repoRoot = path.resolve(__dirname, "..");
 const defaultCollectionPath = "tests/schema_examples/visual_eval_readonly_review_collection.example.json";
 const expectedOutcomes = ["pass", "patch", "reject"];
+const expectedSelectedReviewResultId = "visual_eval_review_result_patch_synthetic_001";
 
 function assert(condition, message) {
   if (!condition) throw new Error(message);
@@ -48,6 +49,19 @@ function addOutcomeSummary(target, source) {
   for (const outcome of expectedOutcomes) {
     target[outcome] += source[outcome] || 0;
   }
+}
+
+function selectedPatchEntry(row) {
+  return {
+    selected_patch: true,
+    review_result_id: row.review_result_id,
+    candidate_id: row.candidate_id,
+    session_id: row.session_id,
+    case_id: row.case_id,
+    outcome: row.outcome,
+    next_review_action: row.next_review_action,
+    metadata_accumulation_action: row.metadata_accumulation_action,
+  };
 }
 
 function assertBoundaryFalse(boundary, label) {
@@ -126,12 +140,18 @@ function loadReadonlyReviewCollectionConsumer(input) {
 
   assert(JSON.stringify(aggregate) === JSON.stringify(collection.expected_collection_summary?.outcome_summary), "collection outcome summary mismatch");
   assert(collectionRows.length === collection.expected_collection_summary?.display_row_count, "collection display row count mismatch");
+  const selectedPatch = collectionRows.find((row) => row.review_result_id === expectedSelectedReviewResultId);
+  assert(selectedPatch, "collection selected patch must resolve to a collection row");
+  assert(selectedPatch.outcome === "patch", "collection selected patch must have patch outcome");
+  assert(selectedPatch.next_review_action === "write_patch_plan_only", "collection selected patch must route to patch plan");
 
   return {
     consumer_payload_id: "visual_eval_readonly_review_collection_consumer_v1_synthetic_001",
     consumer_payload_type: "metadata_only_visual_eval_readonly_review_collection_consumer",
     status: "readonly_collection_consumer_payload_ready",
     source_collection: collectionPath,
+    selected_review_result_id: selectedPatch.review_result_id,
+    selected_patch: selectedPatchEntry(selectedPatch),
     collection: {
       collection_id: collection.artifact_id,
       member_count: collection.collection_members.length,

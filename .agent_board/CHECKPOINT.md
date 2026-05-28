@@ -1,5 +1,66 @@
 ---
 
+## Checkpoint - Readonly Selected Patch Display Contract Migration Entry Slice
+
+```text
+phase: readonly_selected_patch_display_contract_migration
+slice: collection_query_selected_patch_entry
+status: completed_validated_no_commit_no_push
+result: PASS
+mode: Green local metadata-only readonly display contract migration
+summary: Added explicit selected patch display contract at the readonly collection consumer and collection query entry layers. Operators can now read selected_review_result_id and selected_patch directly instead of inferring the selected patch from the unique patch row plus next_review_action. Downstream selected semantics remain aligned through detail, navigation, session drilldown, and metadata queue surfaces.
+changed_files_current_task:
+  - kernel/visual_eval_readonly_review_collection_consumer.js
+  - kernel/visual_eval_readonly_review_collection_query.js
+  - scripts/validate_visual_eval_readonly_artifact_graph.js
+  - scripts/validate_visual_eval_readonly_review_collection_consumer.js
+  - scripts/validate_visual_eval_readonly_review_collection_query.js
+  - tests/schema_examples/visual_eval_readonly_review_collection_consumer.example.json
+  - tests/schema_examples/visual_eval_readonly_review_collection_query.example.json
+  - tests/schema_examples/visual_eval_readonly_review_collection_query_negative_cases.example.json
+  - .agent_board/CHECKPOINT.md
+selected_contract_added:
+  - readonly_collection_consumer_payload.selected_review_result_id
+  - readonly_collection_consumer_payload.selected_patch.selected_patch
+  - readonly_collection_query_payload.selected_review_result_id
+  - readonly_collection_query_payload.selected_patch.selected_patch
+new_negative_cases:
+  - missing_selected_patch_at_collection_entry
+  - missing_selected_review_result_id
+  - selected_patch_id_drift
+  - selected_patch_cross_layer_mismatch
+  - selected_patch_metadata_lane_mismatch
+validation_run:
+  - node --check scripts\validate_visual_eval_readonly_artifact_graph.js: passed
+  - node --check scripts\validate_visual_eval_readonly_review_collection_consumer.js: passed
+  - node --check scripts\validate_visual_eval_readonly_review_collection_query.js: passed
+  - node scripts\validate_visual_eval_readonly_artifact_graph.js: passed
+  - node scripts\validate_visual_eval_readonly_review_collection_consumer.js: passed
+  - node scripts\validate_visual_eval_readonly_review_collection_query.js: passed
+  - node scripts\validate_visual_eval_readonly_review_detail_view.js: passed
+  - node scripts\validate_visual_eval_readonly_review_detail_navigation.js: passed
+  - node scripts\validate_visual_eval_readonly_review_session_drilldown.js: passed
+  - node scripts\validate_visual_eval_readonly_metadata_accumulation_queue_consumer.js: passed
+  - node scripts\validate_visual_eval_readonly_metadata_accumulation_queue_query.js: passed
+  - node scripts\validate_visual_eval_readonly_metadata_accumulation_queue_surface_snapshot.js: passed
+  - node scripts\validate_visual_eval_readonly_review_artifact_catalog.js: passed
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+memory_written: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+production_candidate_002_started: false
+Batch_005_started: false
+commit_performed: false
+push_performed: false
+tag_release_deploy_performed: false
+next_phase_started: false
+```
+
+---
+
 ## Checkpoint - Readonly Registry Single Source Hardening
 
 ```text

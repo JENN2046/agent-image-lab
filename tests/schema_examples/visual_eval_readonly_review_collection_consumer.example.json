@@ -3,6 +3,17 @@
   "consumer_payload_type": "metadata_only_visual_eval_readonly_review_collection_consumer",
   "status": "readonly_collection_consumer_payload_ready",
   "source_collection": "tests/schema_examples/visual_eval_readonly_review_collection.example.json",
+  "selected_review_result_id": "visual_eval_review_result_patch_synthetic_001",
+  "selected_patch": {
+    "selected_patch": true,
+    "review_result_id": "visual_eval_review_result_patch_synthetic_001",
+    "candidate_id": "synthetic_product_still_life_patch_001",
+    "session_id": "visual_eval_review_session_synthetic_bundle_001",
+    "case_id": "visual_eval_image_case_patch_synthetic_001",
+    "outcome": "patch",
+    "next_review_action": "write_patch_plan_only",
+    "metadata_accumulation_action": "metadata_only_reference"
+  },
   "collection": {
     "collection_id": "visual_eval_readonly_review_collection_v1_synthetic_001",
     "member_count": 1,
