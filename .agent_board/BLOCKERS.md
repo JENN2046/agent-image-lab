@@ -4,7 +4,7 @@
 
 ## BLOCKER-20260529-01 - validate:all governance tag mismatch blocks retry_007 patch preview checkpoint commit
 
-Status: resolved_by_explicit_short_hash_validation_fix_full_checkpoint_ready
+Status: resolved_by_retry_007_patch_preview_checkpoint_push
 Detected during: retry_007_vcptoolbox_patch_preview_gate_20260529
 Task: retry_007 VCPToolBox output override patch preview gate
 Active current phase: v0_3_3_first_live_generation_pilot
@@ -12,10 +12,10 @@ Resume guard source phase: v0_3_2_live_candidate_action_packet
 Legacy active next Red decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
 Reason: `npm run validate:all` previously failed in `npm run validate:governance` because the validator used Git's default `--short` abbreviation and current Git returned `6d4253fc`; the recorded 7-character checkpoint hash `6d4253f` is correct.
 Resolution: `scripts/validate_governance.ps1` and legacy `scripts/validate_mvp.ps1` now use `git rev-parse --short=7 v4.8-local-validation-checkpoint`; `npm run validate:governance` passed after the fix.
-Hard stop gate: cleared_for_local_checkpoint_when_exact_file_staging_pass.
+Hard stop gate: cleared_for_checkpoint; future external VCPToolBox modification still requires exact repair authorization phrase.
 Files involved: scripts/preview_exact_a5_provider_retry_007_vcptoolbox_output_override_patch.js; scripts/validate_exact_a5_provider_retry_007_vcptoolbox_output_override_repair_package.js; scripts/lib/governance_tooling_maintenance_slice.js; scripts/validate_governance.ps1; scripts/validate_mvp.ps1; docs/EXACT_A5_PROVIDER_RETRY_007_VCPTOOLBOX_OUTPUT_OVERRIDE_REPAIR_PACKAGE.md; .agent_board/HANDOFF.md; .agent_board/RUN_STATE.md; .agent_board/TASK_QUEUE.md; .agent_board/CHECKPOINT.md; .agent_board/BLOCKERS.md
-Validation state: targeted retry_007 preview, repair package, activation packet, governance structure, agent board, core, public-disclosure, provider-evidence-integrity, MVP, capsule regression readiness subchecks, `npm run validate:governance`, `npm run validate:all`, and `git diff --check` passed.
-Required next safe action: exact-file stage, commit, and guarded push if safe.
+Validation state: targeted retry_007 preview, repair package, activation packet, governance structure, agent board, core, public-disclosure, provider-evidence-integrity, MVP, capsule regression readiness subchecks, `npm run validate:governance`, `npm run validate:all`, push safety, and git diff checks passed; checkpoint commit `91b5b7dc` was pushed to origin/master and verified synced.
+Required next safe action: wait for the exact VCPToolBox repair authorization phrase before external repo modification; provider/image execution remains separately gated by the retry_007 activation phrase.
 Rollback or cleanup path: revert this uncommitted retry_007 patch preview/checkpoint slice locally; no VCPToolBox modification, provider/API/image execution, output write, receipt write, DailyNote/VCP memory write, accepted_samples write, production candidate write, tag, release, deploy, or push was performed.
 
 ## BLOCKER-20260525-27 - No blocker for next exact Amber_B execution gate, execution not yet performed
