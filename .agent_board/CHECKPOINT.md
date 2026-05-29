@@ -1,5 +1,39 @@
 ---
 
+## Checkpoint - Commercial KV Prompt Package Gate
+
+```text
+phase: commercial_kv_prompt_package_gate_20260529
+status: completed_validated
+result: COMPLETED_VALIDATED
+mode: Green static prompt package and acceptance gate; no provider/plugin/API/image call
+summary: Added a dedicated commercial KV prompt package for a premium portable LED camping lantern. The package is designed for campaign-grade key visual review with product-dominant composition, clean negative space for later headline placement, premium material/lighting controls, and hard exclusions for generated text, logos, watermarks, people, hands, duplicate products, and implausible lantern geometry.
+changed_files_current_task:
+  - prompts/image_generation/product_commercial_kv_premium_portable_led_camping_lantern_v1.yaml
+  - scripts/validate_commercial_kv_prompt_package_gate.js
+  - package.json
+  - prompts/image_generation/README.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/VALIDATION_LOG.md
+  - .agent_board/HANDOFF.md
+validation_completed:
+  - node scripts/validate_commercial_kv_prompt_package_gate.js: passed
+  - node --check scripts/validate_commercial_kv_prompt_package_gate.js: passed
+boundaries:
+  - provider_contact_performed: false
+  - plugin_call_performed: false
+  - api_call_performed: false
+  - image_generation_performed: false
+  - DailyNote_write_performed: false
+  - VCP_memory_write_performed: false
+  - accepted_samples_write_performed: false
+  - production_candidate_write_performed: false
+  - push_status: not_performed
+recommended_next_phase: commercial_kv_single_image_runtime_preflight_if_owner_wants_generation
+```
+
 ## Checkpoint - Runtime To Review V1 VCPToolBox Timeout Smoke Accepted Evidence
 
 ```text

@@ -1,5 +1,31 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260529-COMMERCIAL-KV-PROMPT-PACKAGE-GATE
+
+Task: commercial_kv_prompt_package_gate_20260529
+Status: completed_validated
+Validation run:
+  - node scripts/validate_commercial_kv_prompt_package_gate.js: passed
+  - node --check scripts/validate_commercial_kv_prompt_package_gate.js: passed
+Result:
+  - prompt_package_ref: prompts/image_generation/product_commercial_kv_premium_portable_led_camping_lantern_v1.yaml
+  - prompt_package_id: product_commercial_kv_premium_portable_led_camping_lantern_v1
+  - quality_score: 93
+  - quality_rating: production_ready
+  - acceptance_gate_present: true
+Side effects:
+  - provider_contact_performed: false
+  - plugin_call_performed: false
+  - api_call_performed: false
+  - image_generation_performed: false
+  - VCP_memory_write_performed: false
+  - DailyNote_write_performed: false
+  - production_candidate_created: false
+  - accepted_sample_auto_promotion: false
+  - push_status: not_performed
+Next:
+  - commercial_kv_single_image_runtime_preflight_if_owner_wants_generation
+
 ## VALIDATION-20260529-RUNTIME-TO-REVIEW-V1-VCPTB-TIMEOUT-SMOKE-ACCEPTED-EVIDENCE
 
 Task: runtime_to_review_v1_vcptoolbox_timeout_smoke_accepted_evidence_20260529

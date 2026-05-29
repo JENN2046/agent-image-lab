@@ -1,0 +1,198 @@
+prompt_package_id: product_commercial_kv_premium_portable_led_camping_lantern_v1
+version: v1
+language: en
+mode: text_to_image
+reference_policy: text_only_no_image_input
+title_cn: "高端便携 LED 露营灯商业 KV prompt package v1"
+purpose_cn: "创建强商业 KV 级产品主视觉提示词包；本文件不生成图片、不调用 provider、不写 memory、不创建 A5 授权。"
+
+product_brief_ref: null
+source_phase: runtime_to_review_v1_post_smoke_commercial_kv_prompt_gate
+status_cn: "商业 KV prompt package 草案；仅供静态审查和未来独立 A5 授权输入。"
+
+product_identity:
+  product_type: premium_portable_led_camping_lantern
+  product_category: outdoor_lighting_product
+  category_terms:
+    - premium portable LED camping lantern
+    - modern outdoor lantern
+    - rechargeable camp light
+    - compact lifestyle lighting product
+  must_not_be:
+    - oil lamp
+    - kerosene lantern
+    - flashlight
+    - speaker
+    - bottle
+    - generic glowing cylinder
+
+commercial_kv_strategy:
+  usage: brand_campaign_key_visual
+  target_quality: commercial_kv_candidate
+  audience_read: premium outdoor lifestyle, design-conscious camping gear buyer
+  hero_message_without_text: "quiet premium outdoor readiness, warm light, reliable design"
+  composition_priority:
+    - product-first hero read
+    - premium material and light behavior
+    - clean negative space suitable for later headline placement
+    - believable outdoor context without clutter
+  production_boundary:
+    generated_text_allowed: false
+    logo_allowed: false
+    watermark_allowed: false
+    people_allowed: false
+    hands_allowed: false
+
+structure_lock:
+  locked_structure: compact_cylindrical_lantern_with_handle_and_visible_led_diffuser
+  body: matte dark graphite or warm brushed metal cylindrical housing
+  light_core: warm translucent LED diffuser, softly glowing from inside
+  handle: clean arched carry handle attached to visible side pivots
+  controls: minimal non-readable button detail only
+  extra_products_allowed: false
+  malformed_handle_allowed: false
+  impossible_glow_allowed: false
+
+scene_direction:
+  shot_type: premium commercial outdoor product key visual
+  aspect_ratio: "9:16"
+  camera_angle: low three-quarter hero angle, product slightly above eye level or at tabletop height
+  surface: dark stone, weathered wood, or refined outdoor tabletop with realistic contact shadow
+  background: deep dusk forest or mountain campsite atmosphere, softly blurred, not busy
+  text_safe_zone: upper third or left side clean negative space with no generated text
+  props_allowed: restrained context only, such as one folded canvas cloth or small shadowed rock
+  props_forbidden:
+    - labels
+    - maps with readable text
+    - cups with logos
+    - busy camping gear pile
+    - fire flames touching the product
+
+lighting_camera_language:
+  lighting_quality: premium cinematic dusk product photography
+  product_light: warm amber lantern glow, believable diffusion, no blown-out center
+  external_light: soft cool blue dusk rim light on metal edges
+  material_detail: crisp matte metal, brushed texture, rubberized base, translucent diffuser
+  shadow: grounded contact shadow and subtle reflected warm light on surface
+  depth_of_field: product sharp, background softly blurred
+  realism: realistic commercial photography, not CGI, not illustration
+
+runner_prompt_mapping:
+  canonical_prompt_field: prompt
+  positive_prompt_retained_for_review: true
+  runner_expected_prompt_field: prompt
+  positive_prompt_sync_required: true
+
+prompt: |
+  Create a vertical premium commercial key visual for a modern portable LED camping lantern. The lantern is the clear hero product: a compact cylindrical outdoor light with a matte dark graphite or warm brushed metal body, a warm translucent LED diffuser glowing softly from within, a clean arched carry handle attached to visible side pivots, a stable rubberized base, and minimal non-readable button details. The product must be fully visible, sharply focused, structurally believable, and visually dominant.
+
+  Compose the image like a high-end outdoor gear campaign KV. Place the lantern on a dark stone, weathered wood, or refined outdoor tabletop with a realistic contact shadow and a small pool of warm reflected light. Use a low three-quarter hero camera angle and premium product photography framing. Keep clean negative space in the upper third or on the left side for later headline placement, but do not generate any text. The background should suggest a quiet dusk campsite, forest edge, or distant mountain atmosphere, softly blurred and elegant, never cluttered.
+
+  Lighting should combine warm amber lantern glow with cool blue dusk rim light on the metal edges. The glow must be believable and softly diffused, not overexposed and not a magical aura. Show tactile material detail: matte metal or brushed metal texture, translucent diffuser, subtle seams, handle pivots, stable base, and refined product edges. The mood is premium, calm, reliable, design-conscious outdoor lifestyle.
+
+  The final image should look like a real commercial photography campaign asset suitable for a brand key visual: product-first, polished, emotionally warm, with strong silhouette, readable structure, premium material, clean composition, and clear advertising usability. No people, no hands, no readable text, no logo, no watermark, no labels, no fake brand marks, no QR codes, no generated typography, no extra lanterns.
+
+positive_prompt: |
+  Create a vertical premium commercial key visual for a modern portable LED camping lantern. The lantern is the clear hero product: a compact cylindrical outdoor light with a matte dark graphite or warm brushed metal body, a warm translucent LED diffuser glowing softly from within, a clean arched carry handle attached to visible side pivots, a stable rubberized base, and minimal non-readable button details. The product must be fully visible, sharply focused, structurally believable, and visually dominant.
+
+  Compose the image like a high-end outdoor gear campaign KV. Place the lantern on a dark stone, weathered wood, or refined outdoor tabletop with a realistic contact shadow and a small pool of warm reflected light. Use a low three-quarter hero camera angle and premium product photography framing. Keep clean negative space in the upper third or on the left side for later headline placement, but do not generate any text. The background should suggest a quiet dusk campsite, forest edge, or distant mountain atmosphere, softly blurred and elegant, never cluttered.
+
+  Lighting should combine warm amber lantern glow with cool blue dusk rim light on the metal edges. The glow must be believable and softly diffused, not overexposed and not a magical aura. Show tactile material detail: matte metal or brushed metal texture, translucent diffuser, subtle seams, handle pivots, stable base, and refined product edges. The mood is premium, calm, reliable, design-conscious outdoor lifestyle.
+
+  The final image should look like a real commercial photography campaign asset suitable for a brand key visual: product-first, polished, emotionally warm, with strong silhouette, readable structure, premium material, clean composition, and clear advertising usability. No people, no hands, no readable text, no logo, no watermark, no labels, no fake brand marks, no QR codes, no generated typography, no extra lanterns.
+
+negative_prompt: |
+  readable text, generated text, random letters, logo, brand mark, fake brand, label text, watermark, signature, QR code,
+  people, hands, faces, model, human body,
+  extra lanterns, duplicated product, cropped product, product too small, product hidden by props,
+  oil lamp, kerosene lantern, flashlight, speaker, bottle, generic glowing cylinder,
+  broken handle, missing handle pivots, floating handle, impossible handle geometry, warped cylinder, melted body, unstable base,
+  overexposed light core, blown-out glow, magical aura, unrealistic light beams, noisy reflections,
+  cluttered campsite, busy gear pile, readable map, branded cup, fire touching product, messy background,
+  CGI look, plastic toy look, cartoon, illustration, low resolution, over-sharpened, muddy material, poor contact shadow
+
+negative_constraints:
+  product_identity:
+    - do not turn the lantern into an oil lamp, kerosene lantern, flashlight, speaker, bottle, or generic glowing cylinder
+    - do not add extra lanterns or product variants
+  structure:
+    - keep one compact cylindrical LED lantern with a clean arched carry handle
+    - keep side handle pivots visible and physically plausible
+    - do not crop the product, remove the handle, melt the body, or create impossible geometry
+  commercial_kv:
+    - keep clean negative space suitable for later headline placement
+    - do not generate text, logos, labels, fake brand marks, watermarks, signatures, or QR codes
+    - keep the product dominant and immediately readable as the hero
+  lighting:
+    - keep the warm LED glow softly diffused and believable
+    - do not create blown-out light cores, magical aura, or unrealistic beams
+  scene:
+    - no people, hands, or faces
+    - no cluttered camping gear pile
+    - no readable maps or branded props
+    - no fire touching or obscuring the product
+
+acceptance_gate:
+  gate_id: commercial_kv_prompt_package_acceptance_gate_v1
+  asset_status_allowed_after_generation:
+    - needs_human_review
+    - accepted_candidate
+    - rejected
+    - blocked
+  prompt_subject_match: true
+  style_direction_match: true
+  commercial_kv_intent_clear: true
+  product_identity_clear: true
+  product_fully_visible: true
+  product_dominant_hero: true
+  product_structure_plausible: true
+  handle_and_pivots_plausible: true
+  led_diffuser_visible: true
+  warm_glow_believable: true
+  material_detail_premium: true
+  grounded_contact_shadow: true
+  clean_negative_space_for_headline: true
+  no_generated_text_or_logo: true
+  no_watermark_or_signature: true
+  no_people_or_hands: true
+  no_extra_products: true
+  background_supports_product: true
+  composition_campaign_grade: true
+  commercial_usability: true
+  memory_suitability: false
+  archive_suitability: true
+  accepted_candidate_requires_human_review: true
+  accepted_candidate_does_not_authorize_delivery: true
+
+prompt_quality_gate:
+  score: 93
+  rating: production_ready
+  subject_clarity: 24
+  composition_control: 19
+  material_lighting_control: 18
+  failure_mode_coverage: 16
+  commercial_usability: 16
+  a5_single_test_allowed_later: true
+  batch_generation_allowed_by_this_file: false
+
+human_review_checklist:
+  - Does the product immediately read as a premium portable LED camping lantern?
+  - Is the lantern the dominant hero product and fully visible?
+  - Are the cylindrical body, handle, side pivots, diffuser, and base structurally plausible?
+  - Is the warm LED glow believable, softly diffused, and not blown out?
+  - Do the metal, diffuser, and base materials feel premium and tactile?
+  - Is there clean negative space suitable for later headline placement without generated text?
+  - Is the dusk outdoor background supportive rather than cluttered?
+  - Are people, hands, logos, readable text, labels, watermarks, and QR codes absent?
+  - Does the image feel like a campaign-grade commercial KV rather than a neutral smoke test?
+  - Would the asset be eligible for accepted_candidate only after human review?
+
+A5_authorization_required_later: true
+plugin_call_allowed_by_this_file: false
+provider_contact_allowed_by_this_file: false
+image_generation_allowed_by_this_file: false
+memory_write_allowed: false
+daily_note_write_allowed: false
+production_candidate_allowed_by_this_file: false
+accepted_samples_write_allowed: false
+runs_output_creation_allowed: false

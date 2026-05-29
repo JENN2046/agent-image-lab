@@ -1,5 +1,14 @@
 ---
 
+- [x] ID: commercial_kv_prompt_package_gate_20260529
+      Lane: Green static prompt package and acceptance gate; no provider/plugin/API/image call.
+      Status: completed_validated.
+      Goal: Create a dedicated commercial KV prompt package so future generated images can be judged by campaign-grade KV criteria rather than neutral smoke criteria.
+      Completed: added `prompts/image_generation/product_commercial_kv_premium_portable_led_camping_lantern_v1.yaml`; embedded a commercial KV acceptance gate; added `scripts/validate_commercial_kv_prompt_package_gate.js`; wired `validate:commercial-kv-prompt-package`; updated `prompts/image_generation/README.md`.
+      Result: prompt package quality gate is `production_ready` with score `93`; future A5 single test is allowed later by the static prompt gate but not authorized by the file itself.
+      Boundary fields: provider_contact_performed: false; plugin_call_performed: false; api_call_performed: false; image_generation_performed: false; DailyNote_write_performed: false; VCP_memory_write_performed: false; accepted_samples_write_performed: false; production_candidate_write_performed: false; push_status: not_performed.
+      Recommended next: run a separate one-image commercial KV generation attempt only after an explicit runtime action packet/preflight.
+
 - [x] ID: runtime_to_review_v1_vcptoolbox_timeout_smoke_accepted_evidence_20260529
       Lane: Amber_B one budgeted timeout smoke through VCPToolBox admin port 6006 plus Green metadata-only human review note.
       Status: completed_validated_human_reviewed.

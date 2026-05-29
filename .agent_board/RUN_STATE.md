@@ -1,5 +1,34 @@
 ---
 
+## Current Run State - Commercial KV Prompt Package Gate
+
+```text
+phase: commercial_kv_prompt_package_gate_20260529
+status: COMPLETED_VALIDATED
+mode: Green static prompt package and acceptance gate; no provider/plugin/API/image call
+branch: master
+goal: Create a dedicated commercial KV prompt package and acceptance gate so future image attempts are judged against commercial KV criteria instead of neutral smoke criteria.
+prompt_package_ref: prompts/image_generation/product_commercial_kv_premium_portable_led_camping_lantern_v1.yaml
+validation_ref: scripts/validate_commercial_kv_prompt_package_gate.js
+npm_script: validate:commercial-kv-prompt-package
+prompt_package_id: product_commercial_kv_premium_portable_led_camping_lantern_v1
+target_quality: commercial_kv_candidate
+quality_score: 93
+quality_rating: production_ready
+future_a5_single_test_allowed_later_by_prompt_gate: true
+batch_generation_allowed_by_this_file: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+push_status: not_performed
+next_safe_task: if owner wants a real commercial KV attempt, run a separate auth preflight and one-image timeout smoke against this prompt package through 6006 only.
+```
+
 ## Current Run State - Runtime To Review V1 VCPToolBox Timeout Smoke Accepted Evidence
 
 ```text

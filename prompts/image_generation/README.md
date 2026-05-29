@@ -2,7 +2,7 @@
 
 成品提示词包。每个 YAML 文件是一个完整的提示词包。
 
-## 包列表（20 个）
+## 包列表（21+ 个）
 
 | prompt_package_id | scene_type | 说明 |
 |---|---|---|
@@ -27,3 +27,4 @@
 | `product_jewelry_dark_velvet_v1` | — | 珠宝暗色天鹅绒图 |
 | `product_minimal_business_desk_v1` | — | 极简办公桌图 |
 | `product_still_life_outdoor_tennis_wallet_hero_no_text_v3` | outdoor_sport_product_closeup | 无文字无遮挡户外网球皮具 V3 |
+| `product_commercial_kv_premium_portable_led_camping_lantern_v1` | premium_outdoor_commercial_kv | 高端便携 LED 露营灯商业 KV；静态 prompt package，不授权生成 |
