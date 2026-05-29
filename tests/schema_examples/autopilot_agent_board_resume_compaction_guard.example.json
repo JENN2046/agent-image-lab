@@ -72,7 +72,7 @@
         "case_id": "task_queue_missing_red_boundary_fails",
         "result": "caught",
         "expected_failure": true,
-        "failure_message": "task queue missing inspect_failed_provider_tool_attempt_or_authorize_new_trial"
+        "failure_message": ".agent_board/TASK_QUEUE.md latest section must cite active next Red decision"
       },
       {
         "case_id": "task_queue_v0_3_3_missing_bound_authorization_fails",

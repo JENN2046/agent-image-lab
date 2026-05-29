@@ -1,3 +1,14 @@
+- [x] ID: inspect_failed_provider_tool_attempt_or_authorize_new_trial_clean_baseline_recheck
+      Lane: Green local repository reality check.
+      Status: completed_validated.
+      Goal: Confirm the current branch, HEAD, and worktree state before continuing the red decision or any local follow-up.
+      active_current_phase: v0_3_3_first_live_generation_pilot
+      active_source_phase: v0_3_2_live_candidate_action_packet
+      active_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+      Completed: branch `inspect_failed_provider_tool_attempt_or_authorize_new_trial` confirmed; HEAD `47f9610c` confirmed; worktree clean; `.agent_board` resume surfaces inspected; no repository files changed outside this board sync.
+      Boundary fields: provider_contact_performed: false; plugin_call_performed: false; api_call_performed: false; image_generation_performed: false; secret_value_read_performed: false; DailyNote_write_performed: false; VCP_memory_write_performed: false; push_status: not_performed.
+      Recommended next: continue from the current red decision or start the next clearly scoped local task.
+
 ---
 
 - [x] ID: governance_validator_smart_v3_remote_sync_repair

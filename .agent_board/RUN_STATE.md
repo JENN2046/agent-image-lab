@@ -1,5 +1,26 @@
 ---
 
+## Current Run State - Main Project Clean Baseline Recheck
+
+```text
+phase: inspect_failed_provider_tool_attempt_or_authorize_new_trial_clean_baseline_recheck
+status: completed_validated
+mode: Green local repository reality check
+goal: Confirm the current branch, HEAD, and worktree state before continuing the red decision or any local follow-up.
+branch: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+head: 47f9610c
+worktree: clean
+active_current_phase: v0_3_3_first_live_generation_pilot
+active_source_phase: v0_3_2_live_candidate_action_packet
+active_next_boundary: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+image_generation_performed: false
+secret_value_read_performed: false
+push_status: not_performed
+summary: The repository baseline is clean and current. The memory-service work was performed in the separate codex-memory repository and did not alter this repository.
+```
+
+---
+
 ## Current Run State - Governance Validator Smart V3 Remote Sync Repair
 
 ```text
