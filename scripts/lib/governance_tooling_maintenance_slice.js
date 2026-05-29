@@ -905,6 +905,8 @@ const EXPECTED_V0_6_11_EXACT_NEW_TRIAL_PREFLIGHT_AUTHORIZATION_GATE_SLICE = [
   "tests/schema_examples/exact_new_trial_preflight_authorization_gate_fail.example.json"
 ].sort();
 
+// Covers small post-pull validator baseline cleanups where MVP validation and
+// this helper move together to preserve exact-slice readiness checks.
 const EXPECTED_V0_6_11_POST_PULL_CLEANUP_SLICE = [
   "scripts/lib/governance_tooling_maintenance_slice.js",
   "scripts/validate_mvp.ps1"
