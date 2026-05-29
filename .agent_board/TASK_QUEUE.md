@@ -1,5 +1,19 @@
 ---
 
+- [x] ID: runtime_to_review_minimal_real_loop_v1_static_real_entry_viewer_20260529
+      Lane: Green local Review Console static real-entry implementation.
+      Status: completed_validated_pending_stage_closeout.
+      Goal: Add a separate Review Console readonly real-entry mode for runtime v1 session metadata without depending on `mock_data.js`.
+      Active current phase reference: v0_3_3_first_live_generation_pilot.
+      Active source phase reference: v0_3_2_live_candidate_action_packet.
+      Active next Red decision reference: guarded_live_probe_execution_requires_delegate_and_exact_confirmation.
+      Legacy active next Red decision reference: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Completed: added `runtime_v1_real_entry_viewer.html`, `runtime_v1_real_entry_session.js`, `runtime_v1_real_entry_viewer.js`, and `validate_runtime_to_review_v1_static_real_entry_viewer.js`.
+      Runtime-to-review value: Review Console now has a separate real-entry mode for runtime v1 readonly metadata, not only `mock_data.js` demo mode.
+      Browser verification: local static server rendered `readonly_real_session` at `/runtime_v1_real_entry_viewer.html` and loaded no `mock_data.js`.
+      Boundary fields: provider_contact_performed: false; plugin_call_performed: false; api_call_performed: false; image_generation_performed: false; secret_value_read_performed: false; DailyNote_write_performed: false; VCP_memory_write_performed: false; accepted_samples_write_performed: false; production_candidate_write_performed: false; push_status: not_performed.
+      Recommended next: `guarded_live_probe_execution_requires_delegate_and_exact_confirmation`.
+
 - [x] ID: runtime_to_review_minimal_real_loop_v1_phase_7_validation_gate_split_20260529
       Lane: Green local validation gate implementation.
       Status: completed_validated_pending_stage_closeout.

@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Runtime v1 readonly real-entry session</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="review-shell" aria-label="Runtime v1 readonly real-entry session">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Agent Image Lab / Review Console</p>
+          <h1 id="runtimeV1RealEntryTitle">Runtime v1 readonly real-entry session</h1>
+        </div>
+        <div class="session-meta" aria-label="session state">
+          <a class="lock-pill" href="./index.html">Mock console</a>
+          <span id="runtimeV1RealEntryStatus" class="status-pill">not_loaded</span>
+          <span class="lock-pill">metadata only</span>
+          <span class="lock-pill">no mock_data.js</span>
+        </div>
+      </header>
+
+      <section class="workspace-grid">
+        <section class="panel scoring-panel" aria-labelledby="runtimeV1RealEntryTitle">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">Runtime v1 real-entry mode</p>
+              <h2>Review session metadata</h2>
+            </div>
+          </div>
+          <div id="runtimeV1RealEntryFields" class="protocol-summary" aria-label="runtime v1 display fields"></div>
+        </section>
+
+        <aside class="panel decision-panel" aria-label="runtime v1 guard summary">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">Readonly guard</p>
+              <h2>Side-effect boundary</h2>
+            </div>
+          </div>
+          <div id="runtimeV1RealEntryGuard" class="protocol-guard-summary" aria-label="runtime v1 guard fields"></div>
+        </aside>
+      </section>
+    </main>
+    <script src="./runtime_v1_real_entry_session.js"></script>
+    <script src="./runtime_v1_real_entry_viewer.js"></script>
+  </body>
+</html>

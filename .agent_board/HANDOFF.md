@@ -1,5 +1,52 @@
 ---
 
+## Current Handoff Update - Runtime To Review Minimal Real Loop V1 Static Real Entry Viewer
+
+```text
+phase: runtime_to_review_minimal_real_loop_v1_static_real_entry_viewer_20260529
+status: COMPLETED_VALIDATED_PENDING_STAGE_CLOSEOUT
+mode: Green local Review Console static real-entry implementation
+branch: master
+active_current_phase_reference: v0_3_3_first_live_generation_pilot
+active_source_phase_reference: v0_3_2_live_candidate_action_packet
+active_next_red_decision_reference: guarded_live_probe_execution_requires_delegate_and_exact_confirmation
+legacy_active_next_red_decision_reference: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+summary: Review Console now has a separate runtime v1 readonly real-entry static mode. It loads `runtime_v1_real_entry_session.js` and `runtime_v1_real_entry_viewer.js`, not `mock_data.js`, and renders runtime v1 readonly session metadata from an adapter snapshot. The validator verifies adapter snapshot alignment and blocks missing hash, image binary loaded, and provider side-effect drift.
+changed_by_this_task:
+  - README.md
+  - docs/RUNTIME_TO_PRODUCTION_LANDING_ROADMAP.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - package.json
+  - review_console/static_prototype/runtime_v1_real_entry_session.js
+  - review_console/static_prototype/runtime_v1_real_entry_viewer.html
+  - review_console/static_prototype/runtime_v1_real_entry_viewer.js
+  - scripts/lib/governance_tooling_maintenance_slice.js
+  - scripts/validate_local_commit_scope.js
+  - scripts/validate_mvp_core.js
+  - scripts/validate_runtime_to_review_v1_default_local_gate.js
+  - scripts/validate_runtime_to_review_v1_static_real_entry_viewer.js
+validation:
+  - npm run validate:runtime-to-review-static-real-entry-viewer: passed
+  - npm run validate:runtime-to-review-default-local: passed
+  - npm run validate:mvp: passed
+  - browser verification: passed; rendered readonly_real_session and loaded no mock_data.js
+boundaries:
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  secret_value_read_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  accepted_samples_write_performed: false
+  production_candidate_write_performed: false
+  push_status: not_performed
+next_safe_task: guarded_live_probe_execution_requires_delegate_and_exact_confirmation
+```
+
 ## Current Handoff Update - Runtime To Review Minimal Real Loop V1 Phase 7 Validation Gate Split
 
 ```text

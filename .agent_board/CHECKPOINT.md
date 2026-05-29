@@ -1,5 +1,55 @@
 ---
 
+## Checkpoint - Runtime To Review Minimal Real Loop V1 Static Real Entry Viewer
+
+```text
+phase: runtime_to_review_minimal_real_loop_v1_static_real_entry_viewer_20260529
+status: completed_validated_pending_stage_closeout
+result: COMPLETED_VALIDATED
+mode: Green local Review Console static real-entry implementation
+active_current_phase_reference: v0_3_3_first_live_generation_pilot
+active_source_phase_reference: v0_3_2_live_candidate_action_packet
+active_next_red_decision_reference: guarded_live_probe_execution_requires_delegate_and_exact_confirmation
+legacy_active_next_red_decision_reference: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+summary: Added a separate static Review Console runtime v1 readonly real-entry mode. The new page uses a runtime v1 adapter snapshot seed and a focused viewer, does not load mock_data.js, and renders run id, prompt package ref, provider route/mode, model sent/required, dimensions/hash, artifact/audit refs, review status, calls used, and readonly guard fields. Validator catches missing hash, image binary loaded, and provider side-effect drift.
+changed_files_current_task:
+  - README.md
+  - docs/RUNTIME_TO_PRODUCTION_LANDING_ROADMAP.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - package.json
+  - review_console/static_prototype/runtime_v1_real_entry_session.js
+  - review_console/static_prototype/runtime_v1_real_entry_viewer.html
+  - review_console/static_prototype/runtime_v1_real_entry_viewer.js
+  - scripts/lib/governance_tooling_maintenance_slice.js
+  - scripts/validate_local_commit_scope.js
+  - scripts/validate_mvp_core.js
+  - scripts/validate_runtime_to_review_v1_default_local_gate.js
+  - scripts/validate_runtime_to_review_v1_static_real_entry_viewer.js
+validation_completed:
+  - node --check review_console/static_prototype/runtime_v1_real_entry_viewer.js
+  - node --check review_console/static_prototype/runtime_v1_real_entry_session.js
+  - node --check scripts/validate_runtime_to_review_v1_static_real_entry_viewer.js
+  - node scripts/validate_runtime_to_review_v1_static_real_entry_viewer.js
+  - npm run validate:runtime-to-review-static-real-entry-viewer
+  - npm run validate:runtime-to-review-default-local
+  - npm run validate:mvp
+  - browser check: http://127.0.0.1:4174/runtime_v1_real_entry_viewer.html rendered readonly_real_session and loaded no mock_data.js
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+secret_value_read_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+push_status: not_performed
+recommended_next_phase: guarded_live_probe_execution_requires_delegate_and_exact_confirmation
+```
+
 ## Checkpoint - Runtime To Review Minimal Real Loop V1 Phase 7 Validation Gate Split
 
 ```text

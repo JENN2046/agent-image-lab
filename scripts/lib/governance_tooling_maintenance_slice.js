@@ -2607,6 +2607,24 @@ const EXPECTED_RUNTIME_TO_REVIEW_V1_PHASE_7_VALIDATION_GATE_SLICE = [
   "scripts/validate_runtime_to_review_v1_guarded_live_probe_gate.js"
 ].sort();
 
+const EXPECTED_RUNTIME_TO_REVIEW_V1_STATIC_REAL_ENTRY_VIEWER_SLICE = [
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  "README.md",
+  "docs/RUNTIME_TO_PRODUCTION_LANDING_ROADMAP.md",
+  "package.json",
+  "review_console/static_prototype/runtime_v1_real_entry_session.js",
+  "review_console/static_prototype/runtime_v1_real_entry_viewer.html",
+  "review_console/static_prototype/runtime_v1_real_entry_viewer.js",
+  "scripts/lib/governance_tooling_maintenance_slice.js",
+  "scripts/validate_local_commit_scope.js",
+  "scripts/validate_mvp_core.js",
+  "scripts/validate_runtime_to_review_v1_default_local_gate.js",
+  "scripts/validate_runtime_to_review_v1_static_real_entry_viewer.js"
+].sort();
+
 const EXPECTED_RETRY_007_VCPTOOLBOX_PATCH_PREVIEW_GATE_SLICE = [
   ".agent_board/BLOCKERS.md",
   ".agent_board/CHECKPOINT.md",
@@ -2699,7 +2717,15 @@ const EXPECTED_RUNTIME_TO_REVIEW_V1_PHASE_7_PACKAGE_SCRIPTS = {
   "runtime-to-review:guarded-live-probe": "node scripts/run_runtime_to_review_v1_guarded_live_probe.js"
 };
 
+const EXPECTED_RUNTIME_TO_REVIEW_V1_STATIC_REAL_ENTRY_PACKAGE_SCRIPTS = {
+  "validate:runtime-to-review-static-real-entry-viewer": "node scripts/validate_runtime_to_review_v1_static_real_entry_viewer.js"
+};
+
 const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
+  {
+    id: "runtime_to_review_v1_static_real_entry_viewer_slice",
+    files: EXPECTED_RUNTIME_TO_REVIEW_V1_STATIC_REAL_ENTRY_VIEWER_SLICE
+  },
   {
     id: "runtime_to_review_v1_phase_7_validation_gate_slice",
     files: EXPECTED_RUNTIME_TO_REVIEW_V1_PHASE_7_VALIDATION_GATE_SLICE
@@ -3674,6 +3700,39 @@ function packageChangeIsRuntimeToReviewV1Phase7Only(currentPackageJson, baseline
   };
 }
 
+function packageChangeIsRuntimeToReviewV1StaticRealEntryOnly(currentPackageJson, baselinePackageJson, changedFiles) {
+  if (!changedFiles.includes("package.json")) {
+    return { allowed: true, mode: "package_json_unchanged" };
+  }
+
+  const current = cloneJson(currentPackageJson);
+  const baseline = cloneJson(baselinePackageJson);
+  const currentScripts = current.scripts || {};
+  const baselineScripts = baseline.scripts || {};
+  const expectedScripts = EXPECTED_RUNTIME_TO_REVIEW_V1_STATIC_REAL_ENTRY_PACKAGE_SCRIPTS;
+
+  for (const [name, value] of Object.entries(expectedScripts)) {
+    if (currentScripts[name] !== value) {
+      return { allowed: false, mode: `runtime_to_review_v1_static_real_entry_script_${name}_unexpected` };
+    }
+  }
+
+  for (const name of Object.keys(expectedScripts)) {
+    if (baselineScripts[name] !== undefined) {
+      baselineScripts[name] = currentScripts[name];
+    } else {
+      delete currentScripts[name];
+    }
+  }
+
+  return {
+    allowed: sameJson(current, baseline),
+    mode: sameJson(current, baseline)
+      ? "runtime_to_review_v1_static_real_entry_package_script_only"
+      : "runtime_to_review_v1_static_real_entry_package_has_other_changes"
+  };
+}
+
 function buildGovernanceToolingMaintenanceSliceReport({ changedFiles, stagedFiles, behind, currentPackageJson, baselinePackageJson }) {
   const sortedChangedFiles = [...changedFiles].sort();
   const normalizedChangedFiles = normalizeChangedFilesForSliceMatching(sortedChangedFiles);
@@ -3681,7 +3740,9 @@ function buildGovernanceToolingMaintenanceSliceReport({ changedFiles, stagedFile
   const matchingSlice = findMatchingGovernanceToolingSlice(sortedChangedFiles);
   const closestSlice = matchingSlice || closestGovernanceToolingSlice(normalizedChangedFiles);
   const exactSliceMatches = matchingSlice !== null;
-  const packageReport = matchingSlice?.id === "runtime_to_review_v1_phase_7_validation_gate_slice"
+  const packageReport = matchingSlice?.id === "runtime_to_review_v1_static_real_entry_viewer_slice"
+    ? packageChangeIsRuntimeToReviewV1StaticRealEntryOnly(currentPackageJson, baselinePackageJson, sortedChangedFiles)
+    : matchingSlice?.id === "runtime_to_review_v1_phase_7_validation_gate_slice"
     ? packageChangeIsRuntimeToReviewV1Phase7Only(currentPackageJson, baselinePackageJson, sortedChangedFiles)
     : matchingSlice?.id === "runtime_to_review_v1_guarded_runtime_skeleton_slice"
     ? packageChangeIsRuntimeToReviewV1Only(currentPackageJson, baselinePackageJson, sortedChangedFiles)
@@ -3763,6 +3824,15 @@ function governanceToolingMaintenanceSliceSelfCheck() {
   runtimeToReviewPhase7DependencyChangedPackage.dependencies.extra = "2.0.0";
   const runtimeToReviewPhase7ArbitraryScriptPackage = cloneJson(runtimeToReviewPhase7Package);
   runtimeToReviewPhase7ArbitraryScriptPackage.scripts["other:new-script"] = "node scripts/other.js";
+  const runtimeToReviewStaticRealEntryPackage = cloneJson(baselinePackage);
+  Object.assign(
+    runtimeToReviewStaticRealEntryPackage.scripts,
+    EXPECTED_RUNTIME_TO_REVIEW_V1_STATIC_REAL_ENTRY_PACKAGE_SCRIPTS
+  );
+  const runtimeToReviewStaticRealEntryDependencyChangedPackage = cloneJson(runtimeToReviewStaticRealEntryPackage);
+  runtimeToReviewStaticRealEntryDependencyChangedPackage.dependencies.extra = "2.0.0";
+  const runtimeToReviewStaticRealEntryArbitraryScriptPackage = cloneJson(runtimeToReviewStaticRealEntryPackage);
+  runtimeToReviewStaticRealEntryArbitraryScriptPackage.scripts["other:new-script"] = "node scripts/other.js";
 
   const checks = [
     {
@@ -3778,6 +3848,19 @@ function governanceToolingMaintenanceSliceSelfCheck() {
       passed: findMatchingGovernanceToolingSlice(
         EXPECTED_RUNTIME_TO_REVIEW_V1_PHASE_7_VALIDATION_GATE_SLICE
       )?.id === "runtime_to_review_v1_phase_7_validation_gate_slice"
+    },
+    {
+      check: "exact_slice_matches_runtime_to_review_v1_static_real_entry_viewer",
+      passed: findMatchingGovernanceToolingSlice(
+        EXPECTED_RUNTIME_TO_REVIEW_V1_STATIC_REAL_ENTRY_VIEWER_SLICE
+      )?.id === "runtime_to_review_v1_static_real_entry_viewer_slice"
+    },
+    {
+      check: "runtime_to_review_v1_static_real_entry_viewer_rejects_mock_data_dependency",
+      passed: findMatchingGovernanceToolingSlice([
+        ...EXPECTED_RUNTIME_TO_REVIEW_V1_STATIC_REAL_ENTRY_VIEWER_SLICE,
+        "review_console/static_prototype/mock_data.js"
+      ]) === null
     },
     {
       check: "runtime_to_review_v1_phase_7_validation_gate_rejects_runs_write",
@@ -4820,6 +4903,30 @@ function governanceToolingMaintenanceSliceSelfCheck() {
         baselinePackage,
         ["package.json"]
       ).allowed
+    },
+    {
+      check: "runtime_to_review_v1_static_real_entry_package_allows_expected_script_only",
+      passed: packageChangeIsRuntimeToReviewV1StaticRealEntryOnly(
+        runtimeToReviewStaticRealEntryPackage,
+        baselinePackage,
+        ["package.json"]
+      ).allowed
+    },
+    {
+      check: "runtime_to_review_v1_static_real_entry_package_rejects_dependency_change",
+      passed: !packageChangeIsRuntimeToReviewV1StaticRealEntryOnly(
+        runtimeToReviewStaticRealEntryDependencyChangedPackage,
+        baselinePackage,
+        ["package.json"]
+      ).allowed
+    },
+    {
+      check: "runtime_to_review_v1_static_real_entry_package_rejects_arbitrary_script_change",
+      passed: !packageChangeIsRuntimeToReviewV1StaticRealEntryOnly(
+        runtimeToReviewStaticRealEntryArbitraryScriptPackage,
+        baselinePackage,
+        ["package.json"]
+      ).allowed
     }
   ];
 
@@ -4960,11 +5067,13 @@ module.exports = {
   EXPECTED_P2_2_RETRY_007_PREFLIGHT_DECISION_SLICE,
   EXPECTED_RUNTIME_TO_REVIEW_V1_GUARDED_RUNTIME_SKELETON_SLICE,
   EXPECTED_RUNTIME_TO_REVIEW_V1_PHASE_7_VALIDATION_GATE_SLICE,
+  EXPECTED_RUNTIME_TO_REVIEW_V1_STATIC_REAL_ENTRY_VIEWER_SLICE,
   EXPECTED_RETRY_007_VCPTOOLBOX_PATCH_PREVIEW_GATE_SLICE,
   EXPECTED_RETRY_007_VCPTOOLBOX_EXECUTION_SURFACE_RECHECK_SLICE,
   EXPECTED_P2_2_RETRY_007_PREFLIGHT_DECISION_PACKAGE_SCRIPTS,
   EXPECTED_RUNTIME_TO_REVIEW_V1_PACKAGE_SCRIPTS,
   EXPECTED_RUNTIME_TO_REVIEW_V1_PHASE_7_PACKAGE_SCRIPTS,
+  EXPECTED_RUNTIME_TO_REVIEW_V1_STATIC_REAL_ENTRY_PACKAGE_SCRIPTS,
   EXPECTED_P2_1_PROVIDER_EVIDENCE_INTEGRITY_PHASE_2_SLICE,
   EXPECTED_PROVIDER_EVIDENCE_INTEGRITY_SCOPE_NARROWING_FIX_SLICE,
   EXPECTED_P2_1_PROVIDER_EVIDENCE_INTEGRITY_PACKAGE_SCRIPTS,
@@ -4979,5 +5088,6 @@ module.exports = {
   packageChangeIsPreviewScriptOnly,
   packageChangeIsEvidenceGovernanceSanitizationOnly,
   packageChangeIsRuntimeToReviewV1Only,
-  packageChangeIsRuntimeToReviewV1Phase7Only
+  packageChangeIsRuntimeToReviewV1Phase7Only,
+  packageChangeIsRuntimeToReviewV1StaticRealEntryOnly
 };

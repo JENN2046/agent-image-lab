@@ -295,6 +295,30 @@ safeCheck("runtime_to_review_v1_guarded_live_probe_gate", () => {
     result.production_candidate_write_performed === false;
 });
 
+safeCheck("runtime_to_review_v1_static_real_entry_viewer", () => {
+  const result = parseJson(runNode(["scripts/validate_runtime_to_review_v1_static_real_entry_viewer.js"]));
+  return result.passed === true &&
+    result.validator === "runtime_to_review_v1_static_real_entry_viewer" &&
+    result.session_mode === "runtime_v1_real_entry_readonly" &&
+    result.status === "readonly_real_session" &&
+    result.mock_data_js_used === false &&
+    result.fetch_performed === false &&
+    result.file_write_performed === false &&
+    result.image_binary_read_performed === false &&
+    result.provider_contact_performed === false &&
+    result.plugin_call_performed === false &&
+    result.api_call_performed === false &&
+    result.image_generation_performed === false &&
+    result.DailyNote_write_performed === false &&
+    result.VCP_memory_write_performed === false &&
+    result.accepted_samples_write_performed === false &&
+    result.production_candidate_write_performed === false &&
+    result.adapter_snapshot_match === true &&
+    result.invalid_missing_hash_blocked === true &&
+    result.invalid_image_binary_blocked === true &&
+    result.invalid_provider_side_effect_blocked === true;
+});
+
 safeCheck("runtime_kernel_v1_real_provider_guarded", () => {
   const result = parseJson(runNode(["scripts/validate_runtime_kernel_v1_real_provider_guarded.js"]));
   return result.passed === true &&
