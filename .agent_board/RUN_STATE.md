@@ -1,5 +1,41 @@
 ---
 
+## Current Run State - Retry 007 Human Visual Review
+
+```text
+phase: retry_007_human_visual_review_gate_20260529
+status: COMPLETED_VALIDATED_PENDING_LOCAL_COMMIT_AND_PUSH
+mode: Green local human visual review evidence sync
+branch: master
+active_current_phase_reference: v0_3_3_first_live_generation_pilot
+active_source_phase_reference: v0_3_2_live_candidate_action_packet
+active_next_red_decision_reference: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+local_review_decision_reference: retry_007_no_accepted_sample_closeout
+goal: Record the owner-collaborative visual review decision for the retry_007 generated image.
+decision: provider_link_success_evidence_only
+review_status: reviewed_not_accepted_sample
+image_ref: runs/real_generation/v0_6_73_real_vcp_agent_generation_retry_007/image/doubaogen/d3155f44-cc09-4d63-8974-791bca90e8c3.png
+prompt_package_ref: prompts/image_generation/neutral_smoke_test_red_apple_v1.yaml
+prompt_subject_match: true
+prompt_9_16_gate_passed: false
+primary_failure_reason: prompt required vertical 9:16 composition, but artifact is 1920x2048 and visually has excessive top negative space.
+owner_decision_cn: "算 provider 链路成功证据，不是通过样张"
+review_note_ref: review_console/live_receipt_bridge/v0_6_73_real_vcp_agent_generation_retry_007/review_note.json
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+secret_value_read_performed: false
+push_status: not_performed_pending_exact_file_commit_and_push
+push_allowed: false
+tag_release_deploy_performed: false
+next_safe_task: exact-file local commit and fast-forward push if safety checks pass; do not create accepted_samples, production_candidate, DailyNote, or VCP memory from retry_007.
+```
+
 ## Current Run State - Retry 007 NativeDoubao Seedream 5 Real Generation
 
 ```text
@@ -70,6 +106,7 @@ secret_value_written: false
 vcptoolbox_cache_cleanup_performed_without_reading_contents: true
 new_runner_created: false
 push_status: not_performed_pending_exact_file_commit_and_push
+push_allowed: false
 tag_release_deploy_performed: false
 review_status: ready_for_human_review
 next_safe_task: exact-file local commit and fast-forward push if safety checks pass; then human visual review. Do not write accepted_samples, production_candidate, DailyNote, or VCP memory without a later gate.

@@ -414,6 +414,9 @@ safeCheck("exact_a5_retry_007_activation_receipt", () => {
     result.public_absolute_paths_absent === true &&
     result.output_scope_violation === false &&
     result.review_eligible === true &&
+    result.local_review_decision === "provider_link_success_evidence_only" &&
+    result.accepted_sample_candidate === false &&
+    result.prompt_9_16_gate_passed === false &&
     result.further_retry_allowed === false;
 });
 

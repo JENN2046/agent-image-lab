@@ -9,6 +9,7 @@ const root = path.resolve(__dirname, "..");
 const authorizationId = "AUTH-DRAFT-NATIVE-DOUBAO-SEEDREAM5-RETRY-20260527-007";
 const receiptRef = "reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_007_receipt.json";
 const reviewHandoffRef = "review_console/live_receipt_bridge/v0_6_73_real_vcp_agent_generation_retry_007/bridge_entry.json";
+const reviewNoteRef = "review_console/live_receipt_bridge/v0_6_73_real_vcp_agent_generation_retry_007/review_note.json";
 const auditRef = ".agent_private/runtime_audit_store/v0_6_73_real_vcp_agent_generation_retry_007/activation_attempt_007.audit.json";
 const outputDirectoryRef = "runs/real_generation/v0_6_73_real_vcp_agent_generation_retry_007/";
 const requiredModel = "doubao-seedream-5-0-260128";
@@ -53,10 +54,12 @@ function runArtifactIntegrityValidator() {
 function main() {
   assert(fs.existsSync(repoPath(receiptRef)), "retry_007 provider receipt missing");
   assert(fs.existsSync(repoPath(reviewHandoffRef)), "retry_007 review handoff missing");
+  assert(fs.existsSync(repoPath(reviewNoteRef)), "retry_007 local review note missing");
   assert(fs.existsSync(repoPath(auditRef)), "retry_007 durable audit receipt missing");
 
   const receipt = readJson(receiptRef);
   const handoff = readJson(reviewHandoffRef);
+  const reviewNote = readJson(reviewNoteRef);
   const audit = readJson(auditRef);
 
   assert(receipt.schema === "exact_a5_provider_retry_activation_receipt.v0", "receipt schema mismatch");
@@ -97,12 +100,29 @@ function main() {
   assert(receipt.secret_handling.secret_values_written === false, "secret values must not be written");
   assert(handoff.review_status === "ready_for_human_review", "handoff review status mismatch");
   assert(handoff.accepted_candidate === false, "handoff must not auto-accept candidate");
+  assert(reviewNote.schema === "local_image_review_note.v0", "review note schema mismatch");
+  assert(reviewNote.source_generation_authorization_id === authorizationId, "review note source authorization mismatch");
+  assert(reviewNote.image_ref === receipt.image_files[0].path, "review note image ref mismatch");
+  assert(reviewNote.prompt_package_ref === receipt.prompt_package_ref, "review note prompt ref mismatch");
+  assert(reviewNote.acceptance_gate.prompt_subject_match === true, "review note subject match should be true");
+  assert(reviewNote.acceptance_gate.vertical_9_16_composition === false, "review note must record 9:16 mismatch");
+  assert(reviewNote.acceptance_gate.passed === false, "review note acceptance gate must fail");
+  assert(reviewNote.decision === "provider_link_success_evidence_only", "review note decision mismatch");
+  assert(reviewNote.review_status === "reviewed_not_accepted_sample", "review note status mismatch");
+  assert(reviewNote.accepted_sample_candidate === false, "review note must not mark accepted sample candidate");
+  assert(reviewNote.production_candidate === false, "review note must not mark production candidate");
+  assert(reviewNote.accepted_samples_write_performed === false, "review note accepted_samples write must be false");
+  assert(reviewNote.production_candidate_write_performed === false, "review note production write must be false");
+  assert(reviewNote.DailyNote_write_performed === false, "review note DailyNote write must be false");
+  assert(reviewNote.VCP_memory_write_performed === false, "review note VCP memory write must be false");
   assert(audit.audit_type === "durable_runtime_audit_record", "audit type mismatch");
   assertNoSecrets(receipt, "receipt");
   assertNoSecrets(handoff, "handoff");
+  assertNoSecrets(reviewNote, "review note");
   assertNoSecrets(audit, "audit");
   assertNoAbsoluteLocalPath(receipt, "receipt");
   assertNoAbsoluteLocalPath(handoff, "handoff");
+  assertNoAbsoluteLocalPath(reviewNote, "review note");
   assertNoAbsoluteLocalPath(audit, "audit");
 
   process.stdout.write(`${JSON.stringify({
@@ -122,6 +142,9 @@ function main() {
     public_absolute_paths_absent: integrity.public_absolute_paths_absent,
     output_scope_violation: receipt.output_scope_violation,
     review_eligible: receipt.review_eligible,
+    local_review_decision: reviewNote.decision,
+    accepted_sample_candidate: reviewNote.accepted_sample_candidate,
+    prompt_9_16_gate_passed: reviewNote.acceptance_gate.vertical_9_16_composition,
     further_retry_allowed: receipt.further_retry_allowed,
   }, null, 2)}\n`);
 }
