@@ -322,6 +322,30 @@ safeCheck("runtime_to_review_v1_owner_runtime_binding_contract", () => {
     result.production_candidate_write_performed === false;
 });
 
+safeCheck("runtime_to_review_v1_real_bound_owner_runtime_module", () => {
+  const result = parseJson(runNode(["scripts/validate_runtime_to_review_v1_real_bound_owner_runtime_module.js"]));
+  return result.passed === true &&
+    result.validator === "runtime_to_review_v1_real_bound_owner_runtime_module" &&
+    result.exact_confirmation_required === "RUNTIME_TO_REVIEW_V1_ONE_PROVIDER_ONE_IMAGE" &&
+    result.real_owner_runtime_module_present === true &&
+    result.real_owner_runtime_bridge_bound === true &&
+    result.exact_owner_runtime_preflight_passed === true &&
+    result.wrong_phrase_blocked === true &&
+    result.readiness_checked_without_secret_read === true &&
+    result.vcp_toolbox_plugin_entry_present === true &&
+    result.real_provider_call_performed === false &&
+    result.provider_contact_performed === false &&
+    result.plugin_call_performed === false &&
+    result.api_call_performed === false &&
+    result.image_generation_performed === false &&
+    result.secret_value_read_performed === false &&
+    result.env_file_content_read_performed === false &&
+    result.DailyNote_write_performed === false &&
+    result.VCP_memory_write_performed === false &&
+    result.accepted_samples_write_performed === false &&
+    result.production_candidate_write_performed === false;
+});
+
 safeCheck("runtime_to_review_v1_native_doubao_delegate_module", () => {
   const result = parseJson(runNode(["scripts/validate_runtime_to_review_v1_native_doubao_delegate_module.js"]));
   return result.passed === true &&

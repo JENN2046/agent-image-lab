@@ -1,5 +1,45 @@
 ---
 
+## Checkpoint - Runtime To Review V1 Real Bound Owner Runtime Live Probe
+
+```text
+phase: runtime_to_review_v1_real_bound_owner_runtime_live_probe_20260529
+status: completed_failed_closed_validated
+result: COMPLETED_FAILED_CLOSED_VALIDATED
+mode: Amber_B one budgeted guarded live probe plus Green local evidence sync
+summary: Replaced the no-provider owner runtime contract as the live-probe path with a real bound owner runtime module targeting VCPToolBox DoubaoGen. The module is bound through the controlled secretless bridge, does not read `config.env` or `.env`, and has a no-live validator. The guarded preflight passed. One live probe was executed with the exact phrase `RUNTIME_TO_REVIEW_V1_ONE_PROVIDER_ONE_IMAGE`; it failed closed with no artifact because the current process environment lacks `VOLCENGINE_API_KEY`. No second live probe was run.
+changed_files_current_task:
+  - adapters/runtime/native_doubao_runtime_v1_real_bound_owner_runtime.js
+  - scripts/validate_runtime_to_review_v1_real_bound_owner_runtime_module.js
+  - package.json
+  - scripts/validate_mvp_core.js
+  - reports/runtime_to_review_v1/guarded_live_probe_real_bound_owner_runtime_20260529_failed_closed.json
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+validation_completed:
+  - node --check adapters/runtime/native_doubao_runtime_v1_real_bound_owner_runtime.js
+  - node --check scripts/validate_runtime_to_review_v1_real_bound_owner_runtime_module.js
+  - node scripts/validate_runtime_to_review_v1_real_bound_owner_runtime_module.js
+  - node scripts/run_runtime_to_review_v1_guarded_live_probe.js --provider-delegate-module adapters/runtime/native_doubao_runtime_v1_provider_delegate.js --owner-runtime-module adapters/runtime/native_doubao_runtime_v1_real_bound_owner_runtime.js --confirm-live-provider-probe RUNTIME_TO_REVIEW_V1_ONE_PROVIDER_ONE_IMAGE --max-images 1 --preflight-only
+  - one live guarded probe: failed_closed
+  - npm run validate:mvp
+provider_contact_performed: failed_closed_attempt_reported_true_by_first_module_version
+plugin_call_performed: failed_closed_attempt_reported_true_by_first_module_version
+api_call_performed: failed_closed_attempt_reported_true_by_first_module_version
+image_generation_performed: false
+output_file_count_after_probe: 0
+secret_value_read_performed: false
+env_file_content_read_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+push_status: not_performed
+recommended_next_phase: provide_owner_runtime_secret_handle_or_running_vcptoolbox_delegate_then_new_explicit_budgeted_probe
+```
+
 ## Checkpoint - Runtime To Review Minimal Real Loop V1 Owner Runtime Binding Contract
 
 ```text

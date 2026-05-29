@@ -1,0 +1,78 @@
+{
+  "schema": "runtime_to_review_v1_guarded_live_probe_receipt.v1",
+  "receipt_id": "runtime_to_review_v1_guarded_live_probe_real_bound_owner_runtime_20260529_failed_closed",
+  "created_at": "2026-05-29T00:00:00+08:00",
+  "lane": "Amber_B_budgeted_guarded_live_probe",
+  "exact_confirmation_phrase": "RUNTIME_TO_REVIEW_V1_ONE_PROVIDER_ONE_IMAGE",
+  "provider_delegate_module": "adapters/runtime/native_doubao_runtime_v1_provider_delegate.js",
+  "owner_runtime_module": "adapters/runtime/native_doubao_runtime_v1_real_bound_owner_runtime.js",
+  "owner_runtime_module_replaced_no_provider_contract": true,
+  "previous_no_provider_contract_retained_as_regression_fixture": true,
+  "preflight_only_passed_before_live_probe": true,
+  "budget": {
+    "max_provider_calls": 1,
+    "max_plugin_calls": 1,
+    "max_api_calls": 1,
+    "max_images": 1,
+    "max_live_probe_attempts": 1
+  },
+  "live_probe_attempted": true,
+  "live_probe_attempt_count": 1,
+  "live_probe_status": "failed_closed",
+  "runtime_result_status": "failed_closed",
+  "runtime_stop_reason": "provider_delegate_result_invalid",
+  "runtime_task_id": "runtime-v1-real-guarded-task-001",
+  "runtime_run_id": "runtime_v1_real_guarded_smoke_001",
+  "prompt_package_ref": "prompts/image_generation/neutral_smoke_test_red_apple_v1.yaml",
+  "provider_route": "native_doubao_guarded",
+  "provider_mode": "real_guarded",
+  "model_required": "doubao-seedream-5-0-260128",
+  "model_sent": null,
+  "calls_used_reported_by_runtime": {
+    "provider": 0,
+    "plugin": 0,
+    "api": 0
+  },
+  "side_effect_flags_reported_by_first_live_probe": {
+    "provider_contact_performed": true,
+    "plugin_call_performed": true,
+    "api_call_performed": true,
+    "image_generation_performed": false,
+    "production_write_performed": false,
+    "accepted_samples_write_performed": false,
+    "DailyNote_write_performed": false,
+    "VCP_memory_write_performed": false,
+    "secret_value_read_performed": false,
+    "env_file_content_read_performed": false,
+    "push_tag_release_deploy_performed": false
+  },
+  "post_attempt_environment_name_check": {
+    "VOLCENGINE_API_KEY_present": false,
+    "secret_value_printed": false,
+    "secret_value_read_by_agent_image_lab": false
+  },
+  "output_directory_ref": "runs/real_generation/runtime_to_review_v1_guarded_live_probe/",
+  "output_file_count_after_probe": 0,
+  "artifact_record_created": false,
+  "audit_receipt_ref_from_runtime": "runtime-to-review-v1://runtime_v1_real_guarded_smoke_001/audit_receipt.json",
+  "review_bridge_entry_created": false,
+  "review_decision_created": false,
+  "accepted_sample_created": false,
+  "production_candidate_created": false,
+  "memory_write_performed": false,
+  "DailyNote_write_performed": false,
+  "raw_provider_payload_retained": false,
+  "secret_values_printed": false,
+  "module_fix_after_probe": {
+    "performed": true,
+    "reason": "The first module version collapsed plugin execution failures into coarse live side-effect flags. It now parses plugin stdout error JSON and categorizes missing runtime env key as fail-closed before provider contact.",
+    "second_live_probe_performed": false
+  },
+  "validation": {
+    "node_check_real_bound_owner_runtime_module": "passed",
+    "validate_runtime_to_review_v1_real_bound_owner_runtime_module": "passed",
+    "guarded_live_probe_preflight_only": "passed",
+    "guarded_live_probe_live_once": "failed_closed"
+  },
+  "next_safe_task": "provide_owner_runtime_secret_handle_or_running_vcptoolbox_delegate_without_agent_image_lab_secret_read_then_run_new_explicit_budgeted_probe"
+}

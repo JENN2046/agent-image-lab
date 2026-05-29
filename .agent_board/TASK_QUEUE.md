@@ -1,5 +1,15 @@
 ---
 
+- [x] ID: runtime_to_review_v1_real_bound_owner_runtime_live_probe_20260529
+      Lane: Amber_B one budgeted guarded live probe plus Green local evidence sync.
+      Status: completed_failed_closed_validated.
+      Goal: Replace the no-provider owner runtime contract with a real bound owner runtime module, then run exactly one guarded live probe.
+      Completed: added `adapters/runtime/native_doubao_runtime_v1_real_bound_owner_runtime.js`; added `scripts/validate_runtime_to_review_v1_real_bound_owner_runtime_module.js`; added package script `validate:runtime-to-review-real-bound-owner-runtime`; wired the no-live validator into MVP core; ran guarded live probe preflight-only; ran exactly one live probe with `RUNTIME_TO_REVIEW_V1_ONE_PROVIDER_ONE_IMAGE`; recorded sanitized failed-closed receipt.
+      Result: real owner runtime module bound successfully, but the current process environment does not provide `VOLCENGINE_API_KEY`, so no image artifact was created and runtime v1 failed closed before review bridge creation.
+      Evidence: `reports/runtime_to_review_v1/guarded_live_probe_real_bound_owner_runtime_20260529_failed_closed.json`.
+      Boundary fields: live_probe_attempt_count: 1; image_generation_performed: false; output_file_count_after_probe: 0; secret_value_read_performed: false; env_file_content_read_performed: false; DailyNote_write_performed: false; VCP_memory_write_performed: false; accepted_samples_write_performed: false; production_candidate_write_performed: false; push_status: not_performed.
+      Recommended next: `provide_owner_runtime_secret_handle_or_running_vcptoolbox_delegate_then_new_explicit_budgeted_probe`.
+
 - [x] ID: runtime_to_review_minimal_real_loop_v1_owner_runtime_binding_contract_20260529
       Lane: Green local owner runtime binding contract and no-provider harness.
       Status: completed_validated_pending_stage_closeout.

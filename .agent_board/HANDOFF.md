@@ -1,5 +1,43 @@
 ---
 
+## Current Handoff Update - Runtime To Review V1 Real Bound Owner Runtime Live Probe
+
+```text
+phase: runtime_to_review_v1_real_bound_owner_runtime_live_probe_20260529
+status: COMPLETED_FAILED_CLOSED_VALIDATED
+mode: Amber_B one budgeted guarded live probe plus Green local evidence sync
+branch: master
+summary: The no-provider owner runtime contract is no longer the live path. A real bound owner runtime module now exists at `adapters/runtime/native_doubao_runtime_v1_real_bound_owner_runtime.js` and is injectable through the runtime v1 provider delegate. The module uses the controlled secretless bridge and does not read `.env`, `config.env`, or secret values. The no-live validator passed, the guarded preflight-only run passed, and exactly one live probe was executed. The probe failed closed because `VOLCENGINE_API_KEY` is not present in the current process environment, so no image artifact, review bridge entry, accepted sample, production candidate, DailyNote, or VCP memory write was created.
+changed_by_this_task:
+  - adapters/runtime/native_doubao_runtime_v1_real_bound_owner_runtime.js
+  - scripts/validate_runtime_to_review_v1_real_bound_owner_runtime_module.js
+  - package.json
+  - scripts/validate_mvp_core.js
+  - reports/runtime_to_review_v1/guarded_live_probe_real_bound_owner_runtime_20260529_failed_closed.json
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+validation:
+  - node --check adapters/runtime/native_doubao_runtime_v1_real_bound_owner_runtime.js: passed
+  - node scripts/validate_runtime_to_review_v1_real_bound_owner_runtime_module.js: passed
+  - guarded live probe preflight-only: passed
+  - guarded live probe live once: failed_closed
+  - npm run validate:mvp: passed
+boundaries:
+  live_probe_attempt_count: 1
+  image_generation_performed: false
+  output_file_count_after_probe: 0
+  secret_value_read_performed: false
+  env_file_content_read_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  accepted_samples_write_performed: false
+  production_candidate_write_performed: false
+  push_status: not_performed
+next_safe_task: provide an owner runtime secret handle or running VCPToolBox delegate that keeps Agent Image Lab secretless, then request a new explicit budgeted probe before any second live attempt.
+```
+
 ## Current Handoff Update - Runtime To Review Minimal Real Loop V1 Owner Runtime Binding Contract
 
 ```text

@@ -1,5 +1,42 @@
 ---
 
+## Current Run State - Runtime To Review V1 Real Bound Owner Runtime Live Probe
+
+```text
+phase: runtime_to_review_v1_real_bound_owner_runtime_live_probe_20260529
+status: COMPLETED_FAILED_CLOSED_VALIDATED
+mode: Amber_B one budgeted guarded live probe plus Green local evidence sync
+branch: master
+goal: Replace the no-provider owner runtime contract with a real bound owner runtime module, then run exactly one guarded live probe.
+real_owner_runtime_module: adapters/runtime/native_doubao_runtime_v1_real_bound_owner_runtime.js
+previous_no_provider_contract: adapters/runtime/native_doubao_runtime_v1_owner_runtime_binding_contract.js
+provider_delegate_module: adapters/runtime/native_doubao_runtime_v1_provider_delegate.js
+receipt_ref: reports/runtime_to_review_v1/guarded_live_probe_real_bound_owner_runtime_20260529_failed_closed.json
+exact_confirmation_used: RUNTIME_TO_REVIEW_V1_ONE_PROVIDER_ONE_IMAGE
+preflight_only_status: passed
+live_probe_attempt_count: 1
+live_probe_status: failed_closed
+stop_reason: provider_delegate_result_invalid
+post_attempt_env_name_check: VOLCENGINE_API_KEY missing in current process environment; secret value was not read or printed.
+output_file_count_after_probe: 0
+artifact_record_created: false
+review_bridge_entry_created: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+secret_value_read_performed: false
+env_file_content_read_performed: false
+push_status: not_performed
+validation_completed:
+- node --check adapters/runtime/native_doubao_runtime_v1_real_bound_owner_runtime.js: passed
+- node scripts/validate_runtime_to_review_v1_real_bound_owner_runtime_module.js: passed
+- guarded live probe preflight-only: passed
+- guarded live probe live once: failed_closed
+- npm run validate:mvp: passed
+next_safe_task: provide owner runtime secret handle or running VCPToolBox delegate without Agent Image Lab secret read, then use a new explicit budgeted probe authorization if another live attempt is desired.
+```
+
 ## Current Run State - Runtime To Review Minimal Real Loop V1 Owner Runtime Binding Contract
 
 ```text
