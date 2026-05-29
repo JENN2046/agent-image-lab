@@ -1,5 +1,36 @@
 ---
 
+- [x] ID: runtime_to_review_v1_vcptoolbox_timeout_smoke_accepted_evidence_20260529
+      Lane: Amber_B one budgeted timeout smoke through VCPToolBox admin port 6006 plus Green metadata-only human review note.
+      Status: completed_validated_human_reviewed.
+      Goal: Resolve the auth/route blocker, run one timeout smoke through VCPToolBox admin port 6006, and record the scoped human review decision.
+      Completed: added secret-safe admin auth preflight and timeout smoke wrappers; corrected route owner runtime default execute URL to `http://127.0.0.1:6006/admin_api/ai-image-agents/execute`; added sanitized route failure diagnostics; restarted local PM2 `vcp-main`/`vcp-admin` with AI Image Agents route gates; ran one owner-entered-B64 timeout smoke; recorded metadata-only review note after owner agreement.
+      Result: `completed_provider_image_created`; one `1440x2560` red apple image created; human review accepted it as `neutral_smoke_test_red_apple_v1` runtime smoke evidence only.
+      Evidence: `runs/real_generation/runtime_to_review_v1_guarded_live_probe/image/doubaogen/4e74519f-83c3-4470-9661-fa60e371376c.png`; `review_console/live_receipt_bridge/runtime_v1_real_guarded_smoke_001/review_note.json`.
+      Boundary fields: provider_contact_performed: true; plugin_call_performed: true; api_call_performed: true; image_generation_performed: true; secret_value_printed: false; env_file_content_read_performed: false; DailyNote_write_performed: false; VCP_memory_write_performed: false; accepted_samples_write_performed: false; production_candidate_write_performed: false; push_status: not_performed.
+      Recommended next: create a separate commercial KV prompt package if the next goal is to evaluate strong commercial KV capability.
+
+- [!] ID: runtime_to_review_v1_vcptoolbox_route_owner_runtime_probe_20260529
+      Lane: Amber_B one budgeted guarded live probe through running VCPToolBox route plus Green local repair.
+      Status: blocked_by_provider_timeout_after_1440x2560_live_probe.
+      Goal: Use the running VCPToolBox `/admin_api/ai-image-agents/execute` route as the real owner runtime for runtime v1.
+      Completed: added VCPToolBox runtime v1 output scope authorization and route-order fix; added Agent Image Lab route owner runtime module; restarted PM2 `vcp-main` with the needed env gates; verified authenticated dry-run route returns 200; ran one guarded live probe with the exact phrase.
+      Result: VCP audit shows safety allowed real execution and DoubaoGen/API was contacted. The first attempt rejected `720x1280`; after local repair to `1440x2560`, the second attempt failed closed with `DoubaoGen Plugin Error: 请求超时(4分钟)`. No image artifact or review bridge entry was created.
+      Repair: route owner runtime now uses `1440x2560` and classifies both invalid-size and DoubaoGen timeout provider errors.
+      Evidence: `reports/runtime_to_review_v1/guarded_live_probe_vcptoolbox_route_owner_runtime_20260529_attempt.json`; `reports/runtime_to_review_v1/guarded_live_probe_vcptoolbox_route_owner_runtime_1440x2560_20260529_attempt.json`; VCPToolBox `state/ai-image-pipelines/audit.jsonl`.
+      Boundary fields: provider_contact_performed: true; plugin_call_performed: true; api_call_performed: true; image_generation_performed: false; artifact_record_created: false; review_bridge_entry_created: false; secret_value_printed: false; DailyNote_write_performed: false; VCP_memory_write_performed: false; accepted_samples_write_performed: false; production_candidate_write_performed: false; push_status: not_performed.
+      Recommended next: diagnose provider timeout or request a new explicit one-image live probe authorization before rerunning; do not spend another provider/API attempt automatically.
+
+- [!] ID: runtime_to_review_v1_vcptoolbox_owner_child_delegate_probe_20260529
+      Lane: Amber_B bounded guarded live probe attempts plus Green local evidence sync.
+      Status: blocked_by_running_vcptoolbox_server_required.
+      Goal: Continue after owner-provided DoubaoGen `config.env` by binding the runtime v1 provider delegate through a VCPToolBox owner child module and attempting the one-image guarded live probe.
+      Completed: added `scripts/vcptoolbox_doubao_owner_runtime_child.js`; changed `adapters/runtime/native_doubao_runtime_v1_real_bound_owner_runtime.js` to call the owner child instead of a no-provider contract; made the child load DoubaoGen `config.env` inside the child process; added exact blocker propagation through delegate and kernel receipts; extended validators and MVP core.
+      Result: latest guarded live probe failed closed before provider/API contact with `runtime_bridge_blocker:vcptoolbox_owner_runtime_child_failed_config_key_present`. This proves config is present in the child without printing secret values, but direct child plugin execution is still not the usable owner runtime path.
+      Evidence: `reports/runtime_to_review_v1/guarded_live_probe_vcptoolbox_child_key_presence_20260529_attempt.json`.
+      Boundary fields: provider_contact_performed: false; plugin_call_performed: true; api_call_performed: false; image_generation_performed: false; artifact_record_created: false; review_bridge_entry_created: false; secret_value_printed: false; DailyNote_write_performed: false; VCP_memory_write_performed: false; accepted_samples_write_performed: false; production_candidate_write_performed: false; push_status: not_performed.
+      Recommended next: owner starts VCPToolBox server with DoubaoGen enabled; then run one guarded probe through the running VCPToolBox delegate/route, not another owner-child direct call.
+
 - [x] ID: runtime_to_review_v1_next_live_readiness_gate_20260529
       Lane: Green local readiness gate; no provider/plugin/API/image call.
       Status: completed_validated_pending_stage_closeout.

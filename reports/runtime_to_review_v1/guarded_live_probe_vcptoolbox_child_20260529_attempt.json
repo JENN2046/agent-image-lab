@@ -1,0 +1,203 @@
+{
+  "passed": false,
+  "runner_id": "runtime_to_review_v1_guarded_live_probe_runner",
+  "status": "failed_closed",
+  "provider_delegate_module": "adapters/runtime/native_doubao_runtime_v1_provider_delegate.js",
+  "owner_runtime_module": "adapters/runtime/native_doubao_runtime_v1_real_bound_owner_runtime.js",
+  "runtime_result": {
+    "kernel_id": "runtime_kernel_v1_real_provider_guarded",
+    "version": "v1",
+    "contract": {
+      "contract_id": "runtime_kernel_v1_contract",
+      "contract_version": "v1.0",
+      "kernel_id": "runtime_kernel_v1_real_provider_guarded",
+      "status_values": [
+        "completed_provider_image_created",
+        "completed_fixture_artifact",
+        "failed_closed"
+      ],
+      "runtime_v1_input": {
+        "required_fields": [
+          "task_id",
+          "prompt_package_ref",
+          "provider_route",
+          "provider_mode",
+          "max_images",
+          "output_scope",
+          "review_required"
+        ],
+        "provider_route": "native_doubao_guarded | no_provider_fixture",
+        "provider_mode": "real_guarded | no_provider_fixture",
+        "max_images": 1,
+        "output_scope": "run_directory_only",
+        "review_required": true,
+        "secret_value_read_allowed": false
+      },
+      "runtime_v1_result": {
+        "status": "completed_provider_image_created | completed_fixture_artifact | failed_closed",
+        "artifact_record_ref": "string | null",
+        "audit_receipt_ref": "string",
+        "review_bridge_ref": "string | null",
+        "calls_used": {
+          "provider": "number",
+          "plugin": "number",
+          "api": "number"
+        },
+        "image_count": "number",
+        "stop_reason": "string | null"
+      },
+      "artifact_record": {
+        "required_fields": [
+          "run_id",
+          "task_id",
+          "source_prompt_package_ref",
+          "provider_route",
+          "model_required",
+          "model_sent",
+          "output_files",
+          "image_count",
+          "mime_type",
+          "dimensions",
+          "sha256",
+          "audit_receipt_ref",
+          "review_bridge_ref",
+          "status"
+        ],
+        "status_values": [
+          "created",
+          "failed",
+          "review_pending"
+        ]
+      },
+      "side_effect_policy": {
+        "secret_value_read_allowed": false,
+        "output_scope": "run_directory_only",
+        "overwrite_existing_files_allowed": false,
+        "production_write_allowed": false,
+        "memory_write_allowed": false,
+        "default_cli_real_provider_delegate_bound": false
+      }
+    },
+    "task_id": "runtime-v1-real-guarded-task-001",
+    "status": "failed_closed",
+    "artifact_record_ref": null,
+    "audit_receipt_ref": "runtime-to-review-v1://runtime_v1_real_guarded_smoke_001/audit_receipt.json",
+    "review_bridge_ref": null,
+    "calls_used": {
+      "provider": 0,
+      "plugin": 0,
+      "api": 0
+    },
+    "image_count": 0,
+    "stop_reason": "provider_delegate_result_invalid",
+    "artifact_record": {
+      "schema": "runtime_v1_artifact_record.v1",
+      "run_id": "runtime_v1_real_guarded_smoke_001",
+      "task_id": "runtime-v1-real-guarded-task-001",
+      "source_prompt_package_ref": "prompts/image_generation/neutral_smoke_test_red_apple_v1.yaml",
+      "provider_route": "native_doubao_guarded",
+      "model_required": "doubao-seedream-5-0-260128",
+      "model_sent": null,
+      "output_files": [],
+      "image_count": 0,
+      "mime_type": null,
+      "dimensions": null,
+      "sha256": null,
+      "audit_receipt_ref": "runtime-to-review-v1://runtime_v1_real_guarded_smoke_001/audit_receipt.json",
+      "review_bridge_ref": null,
+      "status": "failed"
+    },
+    "audit_receipt": {
+      "schema": "runtime_v1_audit_receipt.v1",
+      "kernel_id": "runtime_kernel_v1_real_provider_guarded",
+      "contract_id": "runtime_kernel_v1_contract",
+      "contract_version": "v1.0",
+      "run_id": "runtime_v1_real_guarded_smoke_001",
+      "task_id": "runtime-v1-real-guarded-task-001",
+      "status": "failed_closed",
+      "provider_route": "native_doubao_guarded",
+      "provider_mode": "real_guarded",
+      "source_prompt_package_ref": "prompts/image_generation/neutral_smoke_test_red_apple_v1.yaml",
+      "provider_plugin_api_call_budget": {
+        "max_provider_calls": 1,
+        "max_plugin_calls": 1,
+        "max_api_calls": 1,
+        "max_images": 1
+      },
+      "calls_used": {
+        "provider": 0,
+        "plugin": 0,
+        "api": 0
+      },
+      "image_count": 0,
+      "model_required": "doubao-seedream-5-0-260128",
+      "output_scope": "run_directory_only",
+      "forbidden_writes": {
+        "daily_note": false,
+        "vcp_memory": false,
+        "accepted_samples": false,
+        "production_candidate": false,
+        "push_tag_release_deploy": false
+      },
+      "secret_handling": {
+        "secret_value_read_allowed": false,
+        "secret_value_read_performed": false,
+        "env_file_content_read_performed": false,
+        "secret_values_printed": false,
+        "secret_values_written": false
+      },
+      "overwrite_existing_files_allowed": false,
+      "artifact_record_ref": "runtime-to-review-v1://runtime_v1_real_guarded_smoke_001/artifact_record.json",
+      "review_bridge_ref": null,
+      "stop_reason": "provider_delegate_result_invalid",
+      "issues": [
+        "delegate status must be completed provider image created",
+        "delegate model_sent must match model_required",
+        "delegate calls_used must be exactly provider=1 plugin=1 api=1",
+        "delegate image_count must be 1",
+        "delegate output_files must contain exactly one image"
+      ],
+      "side_effect_flags": {
+        "provider_contact_performed": false,
+        "plugin_call_performed": true,
+        "api_call_performed": false,
+        "image_generation_performed": false,
+        "forbidden_disk_write_performed": false,
+        "production_write_performed": false,
+        "accepted_samples_write_performed": false,
+        "DailyNote_write_performed": false,
+        "VCP_memory_write_performed": false,
+        "secret_value_read_performed": false,
+        "env_file_content_read_performed": false,
+        "push_tag_release_deploy_performed": false
+      }
+    },
+    "review_bridge_entry": null,
+    "side_effect_flags": {
+      "provider_contact_performed": false,
+      "plugin_call_performed": true,
+      "api_call_performed": false,
+      "image_generation_performed": false,
+      "forbidden_disk_write_performed": false,
+      "production_write_performed": false,
+      "accepted_samples_write_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "secret_value_read_performed": false,
+      "env_file_content_read_performed": false,
+      "push_tag_release_deploy_performed": false
+    }
+  },
+  "calls_used": {
+    "provider": 0,
+    "plugin": 0,
+    "api": 0
+  },
+  "image_count": 0,
+  "stop_reason": "provider_delegate_result_invalid",
+  "secret_value_read_performed_by_runner": false,
+  "DailyNote_write_performed": false,
+  "VCP_memory_write_performed": false,
+  "accepted_samples_write_performed": false,
+  "production_candidate_write_performed": false
+}

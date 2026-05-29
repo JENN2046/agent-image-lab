@@ -13,7 +13,9 @@ const secretlessBridge = require("../../scripts/native_doubao_secretless_provide
 const repoRoot = path.resolve(__dirname, "..", "..");
 const moduleId = "native_doubao_runtime_v1_real_bound_owner_runtime";
 const defaultVcpToolBoxRoot = "A:\\VCP\\VCPToolBox";
+const ownerRuntimeChildScript = path.join(repoRoot, "scripts", "vcptoolbox_doubao_owner_runtime_child.js");
 const pluginRelativePath = path.join("Plugin", "DoubaoGen", "DoubaoGen.js");
+const pluginConfigRelativePath = path.join("Plugin", "DoubaoGen", "config.env");
 const allowedOutputDirectory = "runs/real_generation/runtime_to_review_v1_guarded_live_probe/";
 const allowedPromptPackageRef = "prompts/image_generation/neutral_smoke_test_red_apple_v1.yaml";
 const requiredModel = "doubao-seedream-5-0-260128";
@@ -94,11 +96,13 @@ function resolveVcpToolBoxRoot(options = {}) {
 function inspectRealBoundOwnerRuntimeReadiness(options = {}) {
   const vcpToolBoxRoot = resolveVcpToolBoxRoot(options);
   const pluginEntry = path.join(vcpToolBoxRoot, pluginRelativePath);
+  const pluginConfig = path.join(vcpToolBoxRoot, pluginConfigRelativePath);
   const pluginManifest = path.join(vcpToolBoxRoot, "Plugin", "DoubaoGen", "plugin-manifest.json");
   return {
     module_id: moduleId,
     vcp_toolbox_root_ref: "owner_configured_vcptoolbox_root",
     plugin_entry_present: fs.existsSync(pluginEntry),
+    plugin_config_present: fs.existsSync(pluginConfig),
     plugin_manifest_present: fs.existsSync(pluginManifest),
     output_directory_allowed: allowedOutputDirectory,
     prompt_package_allowed: allowedPromptPackageRef,
@@ -115,9 +119,25 @@ function inspectRealBoundOwnerRuntimeReadiness(options = {}) {
 
 function categorizePluginError(parsed) {
   const rawError = parsed && typeof parsed.error === "string" ? parsed.error : "";
+  const rawCode = parsed && typeof parsed.error_code === "string" ? parsed.error_code : "";
+  const errorPayload = `${rawCode} ${rawError}`;
   if (rawError.includes("VOLCENGINE_API_KEY")) {
     return {
       blocker: "vcptoolbox_doubaogen_runtime_env_key_missing",
+      provider_contact_performed: false,
+      api_call_performed: false,
+    };
+  }
+  if (rawCode === "vcptoolbox_owner_runtime_child_timeout_4m" || rawError.includes("请求超时(4分钟)") || rawError.includes("请求超时") || rawError.includes("timeout")) {
+    return {
+      blocker: "vcptoolbox_owner_runtime_child_timeout_4m",
+      provider_contact_performed: false,
+      api_call_performed: false,
+    };
+  }
+  if (rawCode === "vcptoolbox_owner_runtime_child_invalid_request" || rawError.includes("请求参数错误") || rawError.includes("image size must be at least")) {
+    return {
+      blocker: "vcptoolbox_owner_runtime_child_invalid_request",
       provider_contact_performed: false,
       api_call_performed: false,
     };
@@ -129,8 +149,15 @@ function categorizePluginError(parsed) {
       api_call_performed: true,
     };
   }
+  if (errorPayload.includes("DoubaoGen Plugin Error")) {
+    return {
+      blocker: "vcptoolbox_doubaogen_plugin_returned_error",
+      provider_contact_performed: true,
+      api_call_performed: false,
+    };
+  }
   return {
-    blocker: "vcptoolbox_doubaogen_plugin_returned_error",
+    blocker: rawCode || "vcptoolbox_doubaogen_plugin_returned_error",
     provider_contact_performed: false,
     api_call_performed: false,
   };
@@ -154,8 +181,20 @@ function buildSafeChildEnv(baseEnv = process.env) {
   return env;
 }
 
+function buildDoubaoPluginChildEnv({ outputDirectory, model, vcpToolBoxRoot }) {
+  const env = buildSafeChildEnv();
+  env.PROJECT_BASE_PATH = outputDirectory;
+  env.DEFAULT_RESPONSE_FORMAT = "b64_json";
+  env.SEEDREAM_MODEL_ID = model;
+  env.DebugMode = "false";
+  env.DOTENV_CONFIG_PATH = path.join(vcpToolBoxRoot, pluginConfigRelativePath);
+  env.DOTENV_CONFIG_QUIET = "true";
+  return env;
+}
+
 function runDoubaoPlugin({ vcpToolBoxRoot, prompt, model, outputDirectory }) {
   const pluginEntry = path.join(vcpToolBoxRoot, pluginRelativePath);
+  const pluginConfig = path.join(vcpToolBoxRoot, pluginConfigRelativePath);
   if (!fs.existsSync(pluginEntry)) {
     return Promise.resolve({
       ok: false,
@@ -165,32 +204,50 @@ function runDoubaoPlugin({ vcpToolBoxRoot, prompt, model, outputDirectory }) {
       api_call_performed: false,
     });
   }
+  if (!fs.existsSync(pluginConfig)) {
+    return Promise.resolve({
+      ok: false,
+      blocker: "vcptoolbox_doubaogen_plugin_config_missing",
+      provider_contact_performed: false,
+      plugin_call_performed: false,
+      api_call_performed: false,
+    });
+  }
 
   const output = repoRelativePath(outputDirectory, "output directory");
   fs.mkdirSync(output.resolved, { recursive: true });
+  if (!fs.existsSync(ownerRuntimeChildScript)) {
+    return Promise.resolve({
+      ok: false,
+      blocker: "vcptoolbox_owner_runtime_child_script_missing",
+      provider_contact_performed: false,
+      plugin_call_performed: false,
+      api_call_performed: false,
+    });
+  }
 
-  const toolArgs = {
-    command: "generate",
+  const childRequest = {
+    vcpToolBoxRoot,
     prompt,
     model,
-    resolution: "720x1280",
-    watermark: false,
+    outputDirectory: output.resolved,
+    taskId: "runtime-v1-real-guarded-task-001",
+    invocationId: "runtime_v1_real_guarded_smoke_001",
   };
 
-  const childEnv = buildSafeChildEnv();
-  childEnv.PROJECT_BASE_PATH = output.resolved;
-  childEnv.DEFAULT_RESPONSE_FORMAT = "b64_json";
-  childEnv.SEEDREAM_MODEL_ID = model;
-  childEnv.DebugMode = "false";
+  const childEnv = buildDoubaoPluginChildEnv({
+    outputDirectory: output.resolved,
+    model,
+    vcpToolBoxRoot,
+  });
 
   return new Promise((resolve) => {
     const child = childProcess.execFile(
       process.execPath,
-      [pluginEntry],
+      [ownerRuntimeChildScript],
       {
-        cwd: path.dirname(pluginEntry),
+        cwd: repoRoot,
         env: childEnv,
-        input: JSON.stringify(toolArgs),
         encoding: "utf8",
         timeout: 300000,
         maxBuffer: 100 * 1024 * 1024,
@@ -210,14 +267,21 @@ function runDoubaoPlugin({ vcpToolBoxRoot, prompt, model, outputDirectory }) {
           return;
         }
 
-        if (parsed && parsed.status === "error") {
-          const category = categorizePluginError(parsed);
+      if (parsed && parsed.status === "error") {
+          const category = categorizePluginError({
+            error_code: parsed.error_code || "",
+            error: parsed.error || "",
+          });
+          let childBlocker = category.blocker || "vcptoolbox_owner_runtime_child_failed";
+          if (parsed.provider_config_key_present === false && parsed.error_code === "vcptoolbox_owner_runtime_child_failed") {
+            childBlocker = "vcptoolbox_owner_runtime_child_failed_config_key_missing";
+          }
           resolve({
             ok: false,
-            blocker: category.blocker,
-            provider_contact_performed: category.provider_contact_performed,
+            blocker: childBlocker || category.blocker,
+            provider_contact_performed: category.provider_contact_performed === true || parsed.provider_contact_performed === true,
             plugin_call_performed: true,
-            api_call_performed: category.api_call_performed,
+            api_call_performed: category.api_call_performed === true || parsed.api_call_performed === true,
           });
           return;
         }
@@ -242,7 +306,7 @@ function runDoubaoPlugin({ vcpToolBoxRoot, prompt, model, outputDirectory }) {
         });
       }
     );
-    child.stdin.end(JSON.stringify(toolArgs));
+    child.stdin.end(JSON.stringify(childRequest));
   });
 }
 
@@ -376,5 +440,6 @@ module.exports.allowedOutputDirectory = allowedOutputDirectory;
 module.exports.allowedPromptPackageRef = allowedPromptPackageRef;
 module.exports.requiredModel = requiredModel;
 module.exports.buildSafeChildEnv = buildSafeChildEnv;
+module.exports.buildDoubaoPluginChildEnv = buildDoubaoPluginChildEnv;
 module.exports.env_file_content_read_performed = false;
 module.exports.secret_value_read_performed = false;

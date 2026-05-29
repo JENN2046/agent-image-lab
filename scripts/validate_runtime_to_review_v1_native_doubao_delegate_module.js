@@ -110,6 +110,28 @@ async function main() {
   assert(fakeDelegateResult.calls_used.provider === 1, "fake runner provider call count mismatch");
   assert(fakeDelegateResult.output_files.length === 1, "fake runner output file metadata missing");
 
+  const fakeContactFailureDelegate = delegateModule.createNativeDoubaoRuntimeV1ProviderDelegate({
+    async nativeRunner() {
+      return {
+        status: "failed_closed",
+        calls_used: { provider: 1, plugin: 1, api: 1 },
+        provider_contact_performed: true,
+        plugin_call_performed: true,
+        api_call_performed: true,
+        image_generation_performed: false,
+        runtime_bridge_result: {
+          blocker: "vcptoolbox_route_doubaogen_timeout_4m",
+        },
+      };
+    },
+  });
+  const fakeContactFailureResult = await fakeContactFailureDelegate(validRequest);
+  assert(fakeContactFailureResult.status === "failed_closed", "fake contacted failure must remain failed closed");
+  assert(fakeContactFailureResult.calls_used.provider === 1, "failed contacted delegate must preserve provider call count");
+  assert(fakeContactFailureResult.calls_used.plugin === 1, "failed contacted delegate must preserve plugin call count");
+  assert(fakeContactFailureResult.calls_used.api === 1, "failed contacted delegate must preserve api call count");
+  assert(fakeContactFailureResult.provider_contact_performed === true, "failed contacted delegate must preserve provider contact flag");
+
   const runtimeTask = require(repoPath("tests/fixtures/runtime_kernel_v1_real_guarded_task.fixture.json"));
   const runtimeResult = await kernel.runRuntimeKernelV1(runtimeTask, { providerDelegate: fakeSuccessDelegate });
   assert(runtimeResult.status === "completed_provider_image_created", "runtime v1 must accept fake success delegate shape");

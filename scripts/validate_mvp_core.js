@@ -334,7 +334,38 @@ safeCheck("runtime_to_review_v1_real_bound_owner_runtime_module", () => {
     result.readiness_checked_without_secret_read === true &&
     result.safe_child_env_does_not_copy_process_env === true &&
     result.provider_secret_env_not_passed_to_child === true &&
+    result.plugin_config_present === true &&
+    result.plugin_child_uses_dotenv_config_path === true &&
+    result.vcptoolbox_owner_runtime_child_present === true &&
+    result.vcptoolbox_owner_runtime_child_diagnostic_mode_present === true &&
+    result.vcptoolbox_owner_runtime_child_loads_plugin_config === true &&
+    result.vcptoolbox_owner_runtime_child_reports_key_presence_without_value === true &&
     result.vcp_toolbox_plugin_entry_present === true &&
+    result.real_provider_call_performed === false &&
+    result.provider_contact_performed === false &&
+    result.plugin_call_performed === false &&
+    result.api_call_performed === false &&
+    result.image_generation_performed === false &&
+    result.secret_value_read_performed === false &&
+    result.env_file_content_read_performed === false &&
+    result.DailyNote_write_performed === false &&
+    result.VCP_memory_write_performed === false &&
+    result.accepted_samples_write_performed === false &&
+    result.production_candidate_write_performed === false;
+});
+
+safeCheck("runtime_to_review_v1_vcptoolbox_route_owner_runtime_module", () => {
+  const result = parseJson(runNode(["scripts/validate_runtime_to_review_v1_vcptoolbox_route_owner_runtime_module.js"]));
+  return result.passed === true &&
+    result.validator === "runtime_to_review_v1_vcptoolbox_route_owner_runtime_module" &&
+    result.route_owner_runtime_module_present === true &&
+    result.route_task_id === "AUTH-DRAFT-NATIVE-DOUBAO-RUNTIME-TO-REVIEW-V1-20260529-001" &&
+    result.exact_output_scope === "runs/real_generation/runtime_to_review_v1_guarded_live_probe/" &&
+    result.provider_valid_resolution === "1440x2560" &&
+    result.invalid_size_error_classified === true &&
+    result.admin_basic_auth_env_required === true &&
+    result.admin_basic_auth_value_printed === false &&
+    result.config_env_read_performed === false &&
     result.real_provider_call_performed === false &&
     result.provider_contact_performed === false &&
     result.plugin_call_performed === false &&
@@ -359,10 +390,12 @@ safeCheck("runtime_to_review_v1_next_live_readiness_gate", () => {
     result.second_live_probe_performed_by_validator === false &&
     result.exact_new_probe_authorization_required === true &&
     result.owner_runtime_secretless_source_required === true &&
-    result.current_owner_runtime_source_ready === false &&
-    result.current_blocker === "owner_runtime_secretless_source_not_bound_for_next_live_probe" &&
+    result.owner_config_env_present_without_value_read === true &&
+    result.current_owner_runtime_source_ready === true &&
+    result.current_blocker === null &&
     result.real_bound_owner_runtime_safe_child_env_verified === true &&
     result.provider_secret_env_not_passed_to_child === true &&
+    result.plugin_child_uses_dotenv_config_path === true &&
     result.provider_contact_performed === false &&
     result.plugin_call_performed === false &&
     result.api_call_performed === false &&

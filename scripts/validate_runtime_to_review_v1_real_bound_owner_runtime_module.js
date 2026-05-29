@@ -10,6 +10,7 @@ const validatorId = "runtime_to_review_v1_real_bound_owner_runtime_module";
 const runnerPath = "scripts/run_runtime_to_review_v1_guarded_live_probe.js";
 const delegatePath = "adapters/runtime/native_doubao_runtime_v1_provider_delegate.js";
 const ownerRuntimePath = "adapters/runtime/native_doubao_runtime_v1_real_bound_owner_runtime.js";
+const ownerRuntimeChildPath = "scripts/vcptoolbox_doubao_owner_runtime_child.js";
 
 function assert(condition, message) {
   if (!condition) throw new Error(message);
@@ -34,6 +35,7 @@ async function main() {
   runNode(["--check", runnerPath]);
   runNode(["--check", delegatePath]);
   runNode(["--check", ownerRuntimePath]);
+  runNode(["--check", ownerRuntimeChildPath]);
   runNode(["--check", "scripts/validate_runtime_to_review_v1_real_bound_owner_runtime_module.js"]);
 
   const runner = require(repoPath(runnerPath));
@@ -46,9 +48,17 @@ async function main() {
   assert(typeof ownerRuntimeModule.buildSafeChildEnv === "function", "safe child env builder missing");
   const ownerRuntimeSource = fs.readFileSync(repoPath(ownerRuntimePath), "utf8");
   assert(!ownerRuntimeSource.includes("...process.env"), "real owner runtime must not copy full process.env into child runtime");
+  assert(ownerRuntimeSource.includes("vcptoolbox_doubao_owner_runtime_child.js"), "real owner runtime must use VCPToolBox owner runtime child");
+  const childSource = fs.readFileSync(repoPath(ownerRuntimeChildPath), "utf8");
+  assert(childSource.includes("diagnosticOnly"), "owner runtime child must expose diagnosticOnly mode");
+  assert(childSource.includes("dotenv.config"), "owner runtime child must load plugin config inside the child process");
+  assert(childSource.includes("\"Plugin\", \"DoubaoGen\", \"config.env\""), "owner runtime child must use DoubaoGen config.env path");
+  assert(childSource.includes("provider_config_key_present"), "owner runtime child must report config key presence without exposing values");
+  assert(ownerRuntimeSource.includes("config_key_present"), "real owner runtime must preserve child config-key blocker precision");
 
   const readiness = ownerRuntimeModule.inspectRealBoundOwnerRuntimeReadiness();
   assert(readiness.plugin_entry_present === true, "VCPToolBox DoubaoGen plugin entry must be present");
+  assert(readiness.plugin_config_present === true, "VCPToolBox DoubaoGen plugin config.env must be present");
   assert(readiness.plugin_manifest_present === true, "VCPToolBox DoubaoGen plugin manifest must be present");
   assert(readiness.env_file_content_read_performed === false, "readiness must not read env file content");
   assert(readiness.secret_value_read_performed === false, "readiness must not read secret values");
@@ -74,6 +84,7 @@ async function main() {
   assert(typeof runtime === "function", "real owner runtime bridge must be callable");
   assert(runtime.secretless_provider_runtime_delegate_bound === true, "real owner runtime bridge must be bound");
   assert(runtime.secretless_provider_runtime_bridge_id, "real owner runtime bridge id missing");
+  assert(typeof ownerRuntimeModule.buildDoubaoPluginChildEnv === "function", "Doubao plugin child env builder missing");
   const safeEnv = ownerRuntimeModule.buildSafeChildEnv({
     PATH: "path-ok",
     VOLCENGINE_API_KEY: "must-not-pass",
@@ -82,6 +93,13 @@ async function main() {
   assert(safeEnv.PATH === "path-ok", "safe env should preserve PATH");
   assert(!Object.prototype.hasOwnProperty.call(safeEnv, "VOLCENGINE_API_KEY"), "safe env must not pass provider API key");
   assert(!Object.prototype.hasOwnProperty.call(safeEnv, "SECRET_TOKEN"), "safe env must not pass arbitrary secret token");
+  const pluginEnv = ownerRuntimeModule.buildDoubaoPluginChildEnv({
+    outputDirectory: "A:\\agent-image-lab\\agent-image-lab-v0.2\\runs\\real_generation\\runtime_to_review_v1_guarded_live_probe",
+    model: ownerRuntimeModule.requiredModel,
+    vcpToolBoxRoot: "A:\\VCP\\VCPToolBox",
+  });
+  assert(typeof pluginEnv.DOTENV_CONFIG_PATH === "string" && pluginEnv.DOTENV_CONFIG_PATH.endsWith("Plugin\\DoubaoGen\\config.env"), "plugin child env must point to DoubaoGen config.env");
+  assert(!Object.prototype.hasOwnProperty.call(pluginEnv, "VOLCENGINE_API_KEY"), "plugin child env must not receive provider API key from parent");
 
   process.stdout.write(`${JSON.stringify({
     passed: true,
@@ -97,6 +115,12 @@ async function main() {
     readiness_checked_without_secret_read: true,
     safe_child_env_does_not_copy_process_env: true,
     provider_secret_env_not_passed_to_child: true,
+    plugin_config_present: readiness.plugin_config_present,
+    plugin_child_uses_dotenv_config_path: true,
+    vcptoolbox_owner_runtime_child_present: true,
+    vcptoolbox_owner_runtime_child_diagnostic_mode_present: true,
+    vcptoolbox_owner_runtime_child_loads_plugin_config: true,
+    vcptoolbox_owner_runtime_child_reports_key_presence_without_value: true,
     vcp_toolbox_plugin_entry_present: readiness.plugin_entry_present,
     real_provider_call_performed: false,
     provider_contact_performed: false,

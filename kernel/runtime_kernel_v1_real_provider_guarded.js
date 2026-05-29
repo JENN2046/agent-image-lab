@@ -521,6 +521,16 @@ function validateProviderDelegateResult(task, result) {
   if (source.status !== "COMPLETED_PROVIDER_IMAGE_CREATED" && source.status !== "completed_provider_image_created") {
     issues.push("delegate status must be completed provider image created");
   }
+  if (Array.isArray(source.issues)) {
+    for (const issue of source.issues) {
+      if (typeof issue === "string" && issue.trim()) {
+        issues.push(`delegate_issue:${issue}`);
+      }
+    }
+  }
+  if (typeof source.reason === "string" && source.reason.trim()) {
+    issues.push(`delegate_reason:${source.reason}`);
+  }
   if (modelSent !== task.model_required) {
     issues.push("delegate model_sent must match model_required");
   }

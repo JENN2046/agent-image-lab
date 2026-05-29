@@ -1,5 +1,139 @@
 ---
 
+## Checkpoint - Runtime To Review V1 VCPToolBox Timeout Smoke Accepted Evidence
+
+```text
+phase: runtime_to_review_v1_vcptoolbox_timeout_smoke_accepted_evidence_20260529
+status: completed_validated_human_reviewed
+result: COMPLETED_VALIDATED
+mode: Amber_B one budgeted timeout smoke through VCPToolBox admin port 6006 plus Green metadata-only human review note
+summary: The VCPToolBox admin auth route was corrected to `/admin_api/check-auth`; the route owner runtime was moved to admin port `6006`; PM2 `vcp-main` and `vcp-admin` were restarted with AI Image Agents route gates. The timeout smoke through `http://127.0.0.1:6006/admin_api/ai-image-agents/execute` completed successfully with one DoubaoGen image. Human review accepted the output only as neutral smoke runtime evidence for `neutral_smoke_test_red_apple_v1`, not as a commercial KV sample, accepted sample, production candidate, DailyNote entry, or VCP memory.
+changed_files_current_task:
+  - adapters/runtime/native_doubao_runtime_v1_vcptoolbox_route_owner_runtime.js
+  - scripts/run_vcptoolbox_admin_auth_preflight.ps1
+  - scripts/run_runtime_to_review_v1_vcptoolbox_timeout_smoke.ps1
+  - scripts/validate_runtime_to_review_v1_vcptoolbox_route_owner_runtime_module.js
+  - scripts/validate_runtime_to_review_v1_smoke_review_note.js
+  - review_console/live_receipt_bridge/runtime_v1_real_guarded_smoke_001/review_note.json
+validation_completed:
+  - node scripts/validate_runtime_to_review_v1_smoke_review_note.js: passed
+  - node scripts/validate_runtime_to_review_v1_vcptoolbox_route_owner_runtime_module.js: passed
+  - git diff --check for current review note/validator and route-runtime changes: passed
+runtime_result:
+  - status: completed_provider_image_created
+  - calls_used: provider=1 plugin=1 api=1
+  - image_count: 1
+  - image_ref: runs/real_generation/runtime_to_review_v1_guarded_live_probe/image/doubaogen/4e74519f-83c3-4470-9661-fa60e371376c.png
+  - image_sha256: b33a3bb72c3c644da531a0585a49fe23abe00249a683ded34f04f5eb9ef832a3
+  - dimensions: 1440x2560
+human_review:
+  - decision: accept_for_neutral_smoke_runtime_evidence
+  - review_status: accepted_for_runtime_smoke_evidence_only
+  - promotion_status: not_promoted
+  - commercial_kv_benchmark: false
+boundaries:
+  - secret_value_printed: false
+  - env_file_content_read_performed: false
+  - DailyNote_write_performed: false
+  - VCP_memory_write_performed: false
+  - accepted_samples_write_performed: false
+  - production_candidate_write_performed: false
+  - push_status: not_performed
+recommended_next_phase: commercial_kv_prompt_package_design_if_needed
+```
+
+## Checkpoint - Runtime To Review V1 VCPToolBox Route Owner Runtime Probe
+
+```text
+phase: runtime_to_review_v1_vcptoolbox_route_owner_runtime_probe_20260529
+status: blocked_by_provider_timeout_after_1440x2560_live_probe
+result: BLOCKED
+mode: Amber_B one budgeted guarded live probe through running VCPToolBox route plus Green local repair
+summary: The runtime v1 live path now reaches the running VCPToolBox `/admin_api/ai-image-agents/execute` route with Admin Basic Auth supplied from an ignored one-time file. PM2 `vcp-main` was restarted with `ENABLE_AI_IMAGE_AGENTS_ROUTE=true`, `ENABLE_AI_IMAGE_REAL_EXECUTION=true`, `ENABLE_NATIVE_DOUBAO_SECRETLESS_RUNTIME_DELEGATE=true`, and `AIGENT_PIPELINE_ALLOW_EXECUTION=true`; authenticated dry-run returned 200. The first guarded live probe reached VCPToolBox safety allow and DoubaoGen/API, but failed closed because the provider rejected `720x1280` as below the 3686400-pixel minimum. After local repair to `1440x2560`, the follow-up guarded live probe again reached DoubaoGen/API and failed closed with `DoubaoGen Plugin Error: 请求超时(4分钟)`. No image artifact or review bridge entry was created.
+changed_files_current_task:
+  - adapters/runtime/native_doubao_runtime_v1_vcptoolbox_route_owner_runtime.js
+  - scripts/validate_runtime_to_review_v1_vcptoolbox_route_owner_runtime_module.js
+  - scripts/validate_mvp_core.js
+  - reports/runtime_to_review_v1/guarded_live_probe_vcptoolbox_route_owner_runtime_20260529_attempt.json
+  - reports/runtime_to_review_v1/guarded_live_probe_vcptoolbox_route_owner_runtime_1440x2560_20260529_attempt.json
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/VALIDATION_LOG.md
+external_local_repo_changed:
+  - A:\VCP\VCPToolBox\server.js
+  - A:\VCP\VCPToolBox\routes\admin\aiImageAgents.js
+  - A:\VCP\VCPToolBox\tests\aiImageAgentsRoute.test.js
+validation_completed:
+  - VCPToolBox node --check server.js: passed
+  - VCPToolBox node --check routes/admin/aiImageAgents.js: passed
+  - VCPToolBox node --test tests/aiImageAgentsRoute.test.js: passed 12/12
+  - npm run validate:runtime-to-review-vcptoolbox-route-owner-runtime: passed
+  - authenticated route dry-run: 200 dry_run
+  - guarded live probe: failed_closed after provider/API size validation error
+  - guarded live probe after 1440x2560 repair: failed_closed after DoubaoGen provider timeout
+provider_contact_performed: true
+plugin_call_performed: true
+api_call_performed: true
+image_generation_performed: false
+artifact_record_created: false
+review_bridge_entry_created: false
+output_file_count_after_probe: 0
+secret_value_printed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+push_status: not_performed
+recommended_next_phase: diagnose_doubaogen_timeout_or_authorize_one_more_budgeted_live_probe
+```
+
+## Checkpoint - Runtime To Review V1 VCPToolBox Owner Child Delegate Probe
+
+```text
+phase: runtime_to_review_v1_vcptoolbox_owner_child_delegate_probe_20260529
+status: blocked_by_running_vcptoolbox_server_required
+result: BLOCKED
+mode: Amber_B bounded guarded live probe attempts plus Green local evidence sync
+summary: After the owner configured `A:\VCP\VCPToolBox\Plugin\DoubaoGen\config.env`, the runtime v1 real owner module was rebound from the no-provider owner contract to a VCPToolBox owner child module. The child loads DoubaoGen config in its own process, keeps secret values out of Agent Image Lab, and reports only whether the provider key is present. The latest guarded live probe still failed closed before provider/API contact, but now with a precise blocker: `runtime_bridge_blocker:vcptoolbox_owner_runtime_child_failed_config_key_present`. The next path is a running VCPToolBox server/delegate route, not further owner-child direct probing.
+changed_files_current_task:
+  - adapters/runtime/native_doubao_runtime_v1_provider_delegate.js
+  - adapters/runtime/native_doubao_runtime_v1_real_bound_owner_runtime.js
+  - kernel/runtime_kernel_v1_real_provider_guarded.js
+  - scripts/vcptoolbox_doubao_owner_runtime_child.js
+  - scripts/validate_runtime_to_review_v1_real_bound_owner_runtime_module.js
+  - scripts/validate_runtime_to_review_v1_next_live_readiness_gate.js
+  - scripts/validate_mvp_core.js
+  - reports/runtime_to_review_v1/guarded_live_probe_config_env_20260529_attempt.json
+  - reports/runtime_to_review_v1/guarded_live_probe_vcptoolbox_child_20260529_attempt.json
+  - reports/runtime_to_review_v1/guarded_live_probe_vcptoolbox_child_error_visible_20260529_attempt.json
+  - reports/runtime_to_review_v1/guarded_live_probe_vcptoolbox_child_blocker_visible_20260529_attempt.json
+  - reports/runtime_to_review_v1/guarded_live_probe_vcptoolbox_child_dotenv_loaded_20260529_attempt.json
+  - reports/runtime_to_review_v1/guarded_live_probe_vcptoolbox_child_key_presence_20260529_attempt.json
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+validation_completed:
+  - node --check scripts/vcptoolbox_doubao_owner_runtime_child.js
+  - node --check adapters/runtime/native_doubao_runtime_v1_real_bound_owner_runtime.js
+  - npm run validate:runtime-to-review-real-bound-owner-runtime
+  - npm run validate:runtime-to-review-next-live-readiness
+  - guarded live probe: failed_closed with config key present in child
+provider_contact_performed: false
+plugin_call_performed: true
+api_call_performed: false
+image_generation_performed: false
+artifact_record_created: false
+review_bridge_entry_created: false
+secret_value_printed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+push_status: not_performed
+recommended_next_phase: running_vcptoolbox_server_delegate_guarded_live_probe
+```
+
 ## Checkpoint - Runtime To Review V1 Next Live Readiness Gate
 
 ```text

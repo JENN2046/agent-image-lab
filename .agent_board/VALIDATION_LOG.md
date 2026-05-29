@@ -1,5 +1,100 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260529-RUNTIME-TO-REVIEW-V1-VCPTB-TIMEOUT-SMOKE-ACCEPTED-EVIDENCE
+
+Task: runtime_to_review_v1_vcptoolbox_timeout_smoke_accepted_evidence_20260529
+Status: completed_validated_human_reviewed
+Validation run:
+  - node scripts/validate_runtime_to_review_v1_smoke_review_note.js: passed
+  - node scripts/validate_runtime_to_review_v1_vcptoolbox_route_owner_runtime_module.js: passed
+  - route owner runtime node --check: passed
+  - timeout smoke through VCPToolBox admin port 6006: completed_provider_image_created
+Runtime result:
+  - calls_used: provider=1 plugin=1 api=1
+  - image_count: 1
+  - image_ref: runs/real_generation/runtime_to_review_v1_guarded_live_probe/image/doubaogen/4e74519f-83c3-4470-9661-fa60e371376c.png
+  - image_sha256: b33a3bb72c3c644da531a0585a49fe23abe00249a683ded34f04f5eb9ef832a3
+Human review:
+  - decision: accept_for_neutral_smoke_runtime_evidence
+  - review_status: accepted_for_runtime_smoke_evidence_only
+  - production_candidate: false
+  - accepted_sample_candidate: false
+Side effects:
+  - secret_value_printed: false
+  - env_file_content_read_performed: false
+  - VCP_memory_write_performed: false
+  - DailyNote_write_performed: false
+  - production_candidate_created: false
+  - accepted_sample_auto_promotion: false
+  - push_status: not_performed
+Next:
+  - commercial_kv_prompt_package_design_if_needed
+
+## VALIDATION-20260529-RUNTIME-TO-REVIEW-V1-VCPTB-ROUTE-OWNER-RUNTIME-PROBE
+
+Task: runtime_to_review_v1_vcptoolbox_route_owner_runtime_probe_20260529
+Status: blocked_by_provider_timeout_after_1440x2560_live_probe
+Validation run:
+  - VCPToolBox node --check server.js: passed
+  - VCPToolBox node --check routes/admin/aiImageAgents.js: passed
+  - VCPToolBox node --test tests/aiImageAgentsRoute.test.js: passed 12/12
+  - npm run validate:runtime-to-review-vcptoolbox-route-owner-runtime: passed
+  - authenticated dry-run route probe: 200 dry_run
+  - guarded live probe through VCPToolBox route owner runtime: failed_closed
+  - guarded live probe through VCPToolBox route owner runtime after 1440x2560 repair: failed_closed
+Latest precise blocker:
+  - DoubaoGen provider timed out after the repaired `1440x2560` request.
+Local repair:
+  - route owner runtime now uses `1440x2560`
+  - invalid-size provider errors are classified
+  - DoubaoGen timeout provider errors are classified
+Side effects:
+  - provider_contact_performed: true
+  - plugin_call_performed: true
+  - api_call_performed: true
+  - image_generation_performed: false
+  - artifact_record_created: false
+  - review_bridge_entry_created: false
+  - output_file_count_after_probe: 0
+  - secret_value_printed: false
+  - VCP_memory_write_performed: false
+  - DailyNote_write_performed: false
+  - production_candidate_created: false
+  - accepted_sample_auto_promotion: false
+  - push_status: not_performed
+Next:
+  - diagnose DoubaoGen provider timeout or require new explicit one-image live probe authorization before rerunning
+
+---
+
+## VALIDATION-20260529-RUNTIME-TO-REVIEW-V1-VCPTB-OWNER-CHILD-DELEGATE-PROBE
+
+Task: runtime_to_review_v1_vcptoolbox_owner_child_delegate_probe_20260529
+Status: blocked_by_running_vcptoolbox_server_required
+Validation run:
+  - node --check scripts/vcptoolbox_doubao_owner_runtime_child.js: passed
+  - node --check adapters/runtime/native_doubao_runtime_v1_real_bound_owner_runtime.js: passed
+  - npm run validate:runtime-to-review-real-bound-owner-runtime: passed
+  - npm run validate:runtime-to-review-next-live-readiness: passed
+  - guarded live probe with owner child dotenv loading: failed_closed
+  - guarded live probe with owner child key-presence blocker: failed_closed
+Latest precise blocker:
+  - runtime_bridge_blocker:vcptoolbox_owner_runtime_child_failed_config_key_present
+Boundary:
+  - provider_contact_performed: false
+  - plugin_call_performed: true
+  - api_call_performed: false
+  - image_generation_performed: false
+  - artifact_record_created: false
+  - review_bridge_entry_created: false
+  - secret_value_printed: false
+  - VCP_memory_write_performed: false
+  - DailyNote_write_performed: false
+  - production_candidate_created: false
+  - accepted_sample_auto_promotion: false
+  - push_status: not_performed
+Next: start running VCPToolBox server/delegate path before the next guarded live probe.
+
 ## VALIDATION-20260527-P1.1-LEGACY-COMMIT-READINESS-GATE-RECONCILIATION
 
 Task: p1_1_legacy_commit_readiness_gate_reconciliation

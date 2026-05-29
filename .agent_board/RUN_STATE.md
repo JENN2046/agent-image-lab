@@ -1,5 +1,108 @@
 ---
 
+## Current Run State - Runtime To Review V1 VCPToolBox Timeout Smoke Accepted Evidence
+
+```text
+phase: runtime_to_review_v1_vcptoolbox_timeout_smoke_accepted_evidence_20260529
+status: COMPLETED_VALIDATED_HUMAN_REVIEWED
+mode: Amber_B one budgeted timeout smoke through running VCPToolBox admin route plus Green metadata-only review note
+branch: master
+goal: Prove the runtime v1 VCPToolBox route owner runtime can execute one neutral smoke prompt through VCPToolBox admin port 6006 and record scoped human review.
+vcp_auth_check_route: http://127.0.0.1:6006/admin_api/check-auth
+vcp_execute_route: http://127.0.0.1:6006/admin_api/ai-image-agents/execute
+route_owner_runtime_module: adapters/runtime/native_doubao_runtime_v1_vcptoolbox_route_owner_runtime.js
+timeout_smoke_wrapper: scripts/run_runtime_to_review_v1_vcptoolbox_timeout_smoke.ps1
+review_note_ref: review_console/live_receipt_bridge/runtime_v1_real_guarded_smoke_001/review_note.json
+validation_ref: scripts/validate_runtime_to_review_v1_smoke_review_note.js
+latest_live_probe_status: completed_provider_image_created
+latest_human_review_decision: accept_for_neutral_smoke_runtime_evidence
+review_status: accepted_for_runtime_smoke_evidence_only
+image_ref: runs/real_generation/runtime_to_review_v1_guarded_live_probe/image/doubaogen/4e74519f-83c3-4470-9661-fa60e371376c.png
+image_sha256: b33a3bb72c3c644da531a0585a49fe23abe00249a683ded34f04f5eb9ef832a3
+image_dimensions: 1440x2560
+provider_contact_performed: true
+plugin_call_performed: true
+api_call_performed: true
+image_generation_performed: true
+artifact_record_created: true
+review_bridge_entry_created: true
+secret_value_printed: false
+env_file_content_read_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+push_status: not_performed
+next_safe_task: design a separate commercial KV prompt package if commercial visual capability needs evaluation; do not infer commercial KV quality from neutral smoke prompt evidence.
+```
+
+## Current Run State - Runtime To Review V1 VCPToolBox Route Owner Runtime Probe
+
+```text
+phase: runtime_to_review_v1_vcptoolbox_route_owner_runtime_probe_20260529
+status: BLOCKED_BY_PROVIDER_TIMEOUT_AFTER_1440X2560_LIVE_PROBE
+mode: Amber_B one budgeted guarded live probe through running VCPToolBox route plus Green local repair
+branch: master
+goal: Use the running VCPToolBox `/admin_api/ai-image-agents/execute` route as the real owner runtime module for runtime v1.
+provider_delegate_module: adapters/runtime/native_doubao_runtime_v1_provider_delegate.js
+route_owner_runtime_module: adapters/runtime/native_doubao_runtime_v1_vcptoolbox_route_owner_runtime.js
+vcp_route: http://127.0.0.1:6005/admin_api/ai-image-agents/execute
+vcp_route_task_id: AUTH-DRAFT-NATIVE-DOUBAO-RUNTIME-TO-REVIEW-V1-20260529-001
+latest_attempt_ref: reports/runtime_to_review_v1/guarded_live_probe_vcptoolbox_route_owner_runtime_1440x2560_20260529_attempt.json
+latest_live_probe_status: failed_closed
+latest_vcp_audit_status: execution_failed
+latest_precise_blocker: DoubaoGen provider timed out after the repaired 1440x2560 live probe; no image was returned.
+provider_contact_performed: true
+plugin_call_performed: true
+api_call_performed: true
+image_generation_performed: false
+artifact_record_created: false
+review_bridge_entry_created: false
+output_file_count_after_probe: 0
+secret_value_printed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+local_repair_completed_after_attempt: route owner runtime now uses provider-valid 9:16 resolution 1440x2560 and classifies invalid-size and DoubaoGen timeout provider errors.
+push_status: not_performed
+next_safe_task: diagnose provider timeout or request a new explicit budgeted live probe authorization before rerunning; do not spend another provider/API attempt automatically.
+```
+
+## Current Run State - Runtime To Review V1 VCPToolBox Owner Child Delegate Probe
+
+```text
+phase: runtime_to_review_v1_vcptoolbox_owner_child_delegate_probe_20260529
+status: BLOCKED_BY_RUNNING_VCPTOOLBOX_SERVER_REQUIRED
+mode: Amber_B bounded guarded live probe attempts plus Green local evidence sync
+branch: master
+goal: Continue after owner-provided DoubaoGen config.env by binding the real provider delegate through a VCPToolBox owner child module, then attempt the budgeted guarded live probe.
+provider_delegate_module: adapters/runtime/native_doubao_runtime_v1_provider_delegate.js
+real_owner_runtime_module: adapters/runtime/native_doubao_runtime_v1_real_bound_owner_runtime.js
+owner_child_module: scripts/vcptoolbox_doubao_owner_runtime_child.js
+exact_confirmation_used: RUNTIME_TO_REVIEW_V1_ONE_PROVIDER_ONE_IMAGE
+latest_attempt_ref: reports/runtime_to_review_v1/guarded_live_probe_vcptoolbox_child_key_presence_20260529_attempt.json
+latest_live_probe_status: failed_closed
+latest_stop_reason: provider_delegate_result_invalid
+latest_precise_blocker: runtime_bridge_blocker:vcptoolbox_owner_runtime_child_failed_config_key_present
+owner_config_env_present_without_value_read: true
+child_config_key_presence_checked_without_value_print: true
+provider_contact_performed: false
+plugin_call_performed: true
+api_call_performed: false
+image_generation_performed: false
+artifact_record_created: false
+review_bridge_entry_created: false
+secret_value_printed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+push_status: not_performed
+current_blocker: VCPToolBox owner child direct plugin call fails even though DoubaoGen config key is present in child environment; switch to running VCPToolBox server/delegate path.
+next_safe_task: owner starts VCPToolBox server with DoubaoGen enabled; then run one guarded probe through the running VCPToolBox delegate/route with the same one-image budget.
+```
+
 ## Current Run State - Runtime To Review V1 Next Live Readiness Gate
 
 ```text

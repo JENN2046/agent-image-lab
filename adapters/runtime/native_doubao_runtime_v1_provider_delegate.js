@@ -209,7 +209,12 @@ function createNativeDoubaoRuntimeV1ProviderDelegate(options = {}) {
     const success = runnerResult.status === "COMPLETED_PROVIDER_IMAGE_CREATED" ||
       runnerResult.status === "completed_provider_image_created";
     if (!success) {
-      return failClosed("native_doubao_runner_failed_closed", [runnerResult.status || "unknown_runner_status"], {
+      const failureIssues = [runnerResult.status || "unknown_runner_status"];
+      if (runnerResult.runtime_bridge_result && runnerResult.runtime_bridge_result.blocker) {
+        failureIssues.push(`runtime_bridge_blocker:${runnerResult.runtime_bridge_result.blocker}`);
+      }
+      return failClosed("native_doubao_runner_failed_closed", failureIssues, {
+        calls_used: runnerCallsUsed(runnerResult),
         provider_contact_performed: runnerResult.provider_contact_performed === true,
         plugin_call_performed: runnerResult.plugin_call_performed === true,
         api_call_performed: runnerResult.api_call_performed === true,

@@ -57,6 +57,7 @@ async function main() {
   const ownerRuntime = require(repoPath(realOwnerRuntimePath));
   const readiness = ownerRuntime.inspectRealBoundOwnerRuntimeReadiness();
   assert(readiness.plugin_entry_present === true, "VCPToolBox DoubaoGen plugin entry must remain discoverable");
+  assert(readiness.plugin_config_present === true, "VCPToolBox DoubaoGen config.env must exist before next live probe");
   assert(readiness.secret_value_read_performed === false, "readiness must not read secret values");
 
   process.stdout.write(`${JSON.stringify({
@@ -71,15 +72,17 @@ async function main() {
     second_live_probe_performed_by_validator: false,
     exact_new_probe_authorization_required: true,
     owner_runtime_secretless_source_required: true,
+    owner_config_env_present_without_value_read: readiness.plugin_config_present,
     acceptable_owner_runtime_sources: [
       "running_vcptoolbox_secretless_delegate_with_runtime_v1_output_scope",
-      "owner_provided_secret_handle_that_keeps_agent_image_lab_from_reading_secret_values"
+      "owner_provided_doubaogen_config_env_loaded_only_by_plugin_child_process"
     ],
-    current_owner_runtime_source_ready: false,
-    current_blocker: "owner_runtime_secretless_source_not_bound_for_next_live_probe",
+    current_owner_runtime_source_ready: readiness.plugin_config_present === true,
+    current_blocker: readiness.plugin_config_present === true ? null : "owner_runtime_secretless_source_not_bound_for_next_live_probe",
     real_bound_owner_runtime_module_present: true,
     real_bound_owner_runtime_safe_child_env_verified: true,
     provider_secret_env_not_passed_to_child: true,
+    plugin_child_uses_dotenv_config_path: validatorResult.plugin_child_uses_dotenv_config_path === true,
     vcptoolbox_doubaogen_plugin_entry_present: readiness.plugin_entry_present,
     provider_contact_performed: false,
     plugin_call_performed: false,
