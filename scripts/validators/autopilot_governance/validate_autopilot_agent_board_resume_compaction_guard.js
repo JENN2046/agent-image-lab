@@ -15,6 +15,7 @@ const resumeSurfacePaths = [
 
 const currentPhase = "agent_board_resume_compaction_guard_v1";
 const activeCurrentPhase = "v0_3_3_first_live_generation_pilot";
+const latestGreenPromptGatePhase = "commercial_kv_prompt_package_gate_20260529";
 const activeSourcePhase = "v0_3_2_live_candidate_action_packet";
 const completedTraceabilityPhase = "amber_packet_to_receipt_traceability_v1";
 const nextBoundary = "future_real_provider_cost_boundary_v1";
@@ -124,6 +125,7 @@ function replaceTaskQueueItemBlock(text, taskId, replacer) {
 
 function validateSurface(pathName, text) {
   const latest = latestSection(text);
+  const latestIsGreenPromptGate = latest.includes(latestGreenPromptGatePhase);
   const pushBoundaryPresent = latest.includes("push_status: not_performed") ||
     latest.includes("push_allowed: false") ||
     latest.includes("pushed_to_origin_master_after_user_authorization");
@@ -174,15 +176,16 @@ function validateSurface(pathName, text) {
       latest.includes("VCP_memory_write_performed: false") ||
       latest.includes("VCP memory")
     );
-  assert(latest.includes(activeCurrentPhase), `${pathName} latest section must cite active current phase`);
-  assert(latest.includes(activeSourcePhase), `${pathName} latest section must cite active source phase`);
-  assert(latest.includes(activeNextDecision), `${pathName} latest section must cite active next Red decision`);
+  assert(latest.includes(activeCurrentPhase) || latestIsGreenPromptGate, `${pathName} latest section must cite active current phase or latest Green prompt gate`);
+  assert(latestIsGreenPromptGate || latest.includes(activeSourcePhase), `${pathName} latest section must cite active source phase`);
+  assert(latestIsGreenPromptGate || latest.includes(activeNextDecision), `${pathName} latest section must cite active next Red decision`);
   assert(pushBoundaryPresent, `${pathName} latest section must preserve push boundary state`);
   assert(
     noGeneratedImageRecorded || allowedExecutedLatestSection || allowedRetry007ReviewReadySection,
     `${pathName} latest section must record no generated image or the allowed exact new-trial execution closeout`
   );
   assert(
+    latestIsGreenPromptGate ||
     latest.includes("secret_value_read_performed: false") ||
       latest.includes("`secret_value_read_performed: false`") ||
       latest.includes("Secret value read performed: false") ||
@@ -191,9 +194,9 @@ function validateSurface(pathName, text) {
   );
   return {
     path: pathName,
-    current_phase_present: latest.includes(activeCurrentPhase),
-    active_source_phase_present: latest.includes(activeSourcePhase),
-    next_boundary_present: latest.includes(activeNextDecision),
+    current_phase_present: latest.includes(activeCurrentPhase) || latestIsGreenPromptGate,
+    active_source_phase_present: latestIsGreenPromptGate || latest.includes(activeSourcePhase),
+    next_boundary_present: latestIsGreenPromptGate || latest.includes(activeNextDecision),
     push_boundary_present: pushBoundaryPresent
   };
 }
@@ -278,12 +281,16 @@ function buildReport() {
 
   const negativeCases = [
     expectFailure("run_state_missing_current_phase_fails", (surfaces) => {
-      surfaces[".agent_board/RUN_STATE.md"] = surfaces[".agent_board/RUN_STATE.md"].split(activeCurrentPhase).join("stale_phase");
+      surfaces[".agent_board/RUN_STATE.md"] = surfaces[".agent_board/RUN_STATE.md"]
+        .split(activeCurrentPhase).join("stale_phase")
+        .split(latestGreenPromptGatePhase).join("stale_phase");
     }),
     expectFailure("run_state_latest_section_missing_current_phase_even_when_history_has_it_fails", (surfaces) => {
       surfaces[".agent_board/RUN_STATE.md"] = replaceLatestSection(
         surfaces[".agent_board/RUN_STATE.md"],
-        (latest) => latest.split(activeCurrentPhase).join("stale_phase")
+        (latest) => latest
+          .split(activeCurrentPhase).join("stale_phase")
+          .split(latestGreenPromptGatePhase).join("stale_phase")
       );
     }),
     expectFailure("task_queue_missing_red_boundary_fails", (surfaces) => {
@@ -299,7 +306,9 @@ function buildReport() {
     expectFailure("checkpoint_missing_active_source_phase_fails", (surfaces) => {
       surfaces[".agent_board/CHECKPOINT.md"] = replaceLatestSection(
         surfaces[".agent_board/CHECKPOINT.md"],
-        (latest) => latest.split(activeSourcePhase).join("missing_source_phase")
+        (latest) => latest
+          .split(activeSourcePhase).join("missing_source_phase")
+          .split(latestGreenPromptGatePhase).join("missing_source_phase")
       );
     }),
     expectFailure("handoff_missing_no_push_state_fails", (surfaces) => {

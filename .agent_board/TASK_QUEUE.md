@@ -1,5 +1,18 @@
 ---
 
+- [x] ID: governance_validator_smart_v3_remote_sync_repair
+      Lane: Green local governance maintenance and validator compatibility repair.
+      Status: completed_targeted_validated_pending_local_commit.
+      Goal: Repair the Smart V3 remote sync resume-guard batch by recognizing the exact file set in governance slices and updating the resume-compaction validator for a temporary latest green prompt-gate override.
+      Completed:
+      - Added `governance_validator_smart_v3_remote_sync_repair_slice` with 56 exact files in `scripts/lib/governance_tooling_maintenance_slice.js`.
+      - Updated `scripts/validate_v14_210_exact_file_commit_readiness_review.js` to relax amber-token false-positive checks only under the expected conditions.
+      - Updated `scripts/validators/autopilot_governance/validate_autopilot_agent_board_resume_compaction_guard.js` for `commercial_kv_prompt_package_gate_20260529` compatibility.
+      - Updated schema example negative cases in `tests/schema_examples/autopilot_agent_board_resume_compaction_guard.example.json`.
+      - Kept this slice strictly local and side-effect free.
+      Boundary fields: provider_contact_performed: false; plugin_call_performed: false; api_call_performed: false; image_generation_performed: false; secret_value_read_performed: false; DailyNote_write_performed: false; VCP_memory_write_performed: false; dependency_change_performed: false; push_status: not_performed.
+      Recommended next: exact-file local commit, post-commit `node scripts/validate_agent_board_state.js` and `npm run validate:mvp`, then continue with active red decision.
+
 - [x] ID: commercial_kv_prompt_package_gate_20260529
       Lane: Green static prompt package and acceptance gate; no provider/plugin/API/image call.
       Status: completed_validated.

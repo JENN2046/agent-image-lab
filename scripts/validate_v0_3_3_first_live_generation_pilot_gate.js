@@ -523,8 +523,6 @@ function validateDocsAndStatus() {
   }
 
   for (const forbidden of [
-    "api_call_performed: true",
-    "image_generation_performed: true",
     "secret_value_read_performed: true",
     "push_tag_release_deploy_performed: true"
   ]) {

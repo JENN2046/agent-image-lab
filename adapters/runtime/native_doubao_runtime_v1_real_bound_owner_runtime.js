@@ -12,7 +12,10 @@ const secretlessBridge = require("../../scripts/native_doubao_secretless_provide
 
 const repoRoot = path.resolve(__dirname, "..", "..");
 const moduleId = "native_doubao_runtime_v1_real_bound_owner_runtime";
-const defaultVcpToolBoxRoot = "A:\\VCP\\VCPToolBox";
+const defaultVcpToolBoxRootCandidates = [
+  "A:\\VCP\\apps\\VCPToolBox",
+  "A:\\VCP\\VCPToolBox",
+];
 const ownerRuntimeChildScript = path.join(repoRoot, "scripts", "vcptoolbox_doubao_owner_runtime_child.js");
 const pluginRelativePath = path.join("Plugin", "DoubaoGen", "DoubaoGen.js");
 const pluginConfigRelativePath = path.join("Plugin", "DoubaoGen", "config.env");
@@ -89,8 +92,10 @@ function resolvePromptText(promptPackageRef) {
 }
 
 function resolveVcpToolBoxRoot(options = {}) {
-  const requested = options.vcpToolBoxRoot || process.env.AGENT_IMAGE_LAB_VCPTOOLBOX_ROOT || defaultVcpToolBoxRoot;
-  return path.resolve(requested);
+  const requested = options.vcpToolBoxRoot || process.env.AGENT_IMAGE_LAB_VCPTOOLBOX_ROOT;
+  if (requested) return path.resolve(requested);
+  const existingCandidate = defaultVcpToolBoxRootCandidates.find((candidate) => fs.existsSync(candidate));
+  return path.resolve(existingCandidate || defaultVcpToolBoxRootCandidates[0]);
 }
 
 function inspectRealBoundOwnerRuntimeReadiness(options = {}) {

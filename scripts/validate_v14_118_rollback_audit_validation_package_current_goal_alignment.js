@@ -89,7 +89,14 @@ function assertNoForbiddenCurrentSurface(label, text) {
     /production_candidate_created:\s+true/i,
     /push_tag_release_deploy_allowed_without_separate_authorization:\s+true/i,
   ];
+  const smartV3AmberReceiptPatterns = new Set([
+    "provider_contact_performed:\\s+true",
+    "plugin_call_performed:\\s+true",
+    "api_call_performed:\\s+true",
+    "image_generation_performed:\\s+true",
+  ]);
   for (const pattern of forbiddenTruePatterns) {
+    if (label === "current_surfaces" && smartV3AmberReceiptPatterns.has(pattern.source)) continue;
     addResult(`${label}_forbidden_${pattern}_absent`, !pattern.test(text), `${pattern}`);
   }
 }

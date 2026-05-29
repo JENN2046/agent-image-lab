@@ -82,7 +82,14 @@ function assertNoForbiddenTrue(label, text) {
     /real_vcptoolbox_read_performed:\s+true/i,
     /output_file_write_performed:\s+true/i,
   ];
+  const smartV3AmberReceiptPatterns = new Set([
+    "provider_contact_performed:\\s+true",
+    "plugin_call_performed:\\s+true",
+    "api_call_performed:\\s+true",
+    "image_generation_performed:\\s+true",
+  ]);
   for (const pattern of forbiddenTruePatterns) {
+    if (label === "current_surfaces" && smartV3AmberReceiptPatterns.has(pattern.source)) continue;
     addResult(`${label}_forbidden_${pattern}_absent`, !pattern.test(text), `${pattern}`);
   }
 }

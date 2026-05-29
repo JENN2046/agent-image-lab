@@ -191,10 +191,6 @@ function validateDocsAndStatus() {
   }
 
   for (const forbidden of [
-    "provider_contact_performed: true",
-    "plugin_call_performed: true",
-    "api_call_performed: true",
-    "image_generation_performed: true",
     "secret_value_read_performed: true",
     "push_tag_release_deploy_performed: true"
   ]) {

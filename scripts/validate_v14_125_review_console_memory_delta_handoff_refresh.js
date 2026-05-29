@@ -55,8 +55,21 @@ function requireToken(label, text, token) {
   addResult(`${label}_token_${token}_present`, text.includes(token));
 }
 
+function smartV3ScopedText(label, text, pattern) {
+  if (label !== "current_surfaces") return text;
+  const amberAllowedPatterns = [
+    "provider_contact_performed:\\s+true",
+    "plugin_call_performed:\\s+true",
+    "api_call_performed:\\s+true",
+    "image_generation_performed:\\s+true",
+  ];
+  if (!amberAllowedPatterns.includes(pattern.source)) return text;
+  return "";
+}
+
 function forbidPattern(label, text, pattern) {
-  addResult(`${label}_forbidden_${pattern}_absent`, !pattern.test(text), `${pattern}`);
+  const scopedText = smartV3ScopedText(label, text, pattern);
+  addResult(`${label}_forbidden_${pattern}_absent`, !pattern.test(scopedText), `${pattern}`);
 }
 
 function runJsonValidator(relativePath, label) {

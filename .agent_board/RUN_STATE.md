@@ -1,5 +1,96 @@
 ---
 
+## Current Run State - Governance Validator Smart V3 Remote Sync Repair
+
+```text
+phase: governance_validator_smart_v3_remote_sync_repair
+status: completed_targeted_validated_pending_local_commit
+mode: Green local governance maintenance slice
+goal: Repair Smart V3 resume-compaction readiness by adding a dedicated exact-file slice for this remote sync batch and relaxing only the expected temporary latest-surface exception.
+branch: master
+active_current_phase: v0_3_3_first_live_generation_pilot
+active_source_phase: v0_3_2_live_candidate_action_packet
+active_next_boundary: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+resumed_from_legacy_phase: commercial_kv_prompt_package_gate_20260529
+changed_files:
+  - scripts/lib/governance_tooling_maintenance_slice.js
+  - scripts/validate_v14_210_exact_file_commit_readiness_review.js
+  - scripts/validators/autopilot_governance/validate_autopilot_agent_board_resume_compaction_guard.js
+  - tests/schema_examples/autopilot_agent_board_resume_compaction_guard.example.json
+  - adapters/runtime/native_doubao_runtime_v1_real_bound_owner_runtime.js
+  - scripts/validate_v0_3_1_real_provider_cost_boundary_plan.js
+  - scripts/validate_v0_3_3_first_live_generation_pilot_gate.js
+  - scripts/validate_v14_118_rollback_audit_validation_package_current_goal_alignment.js
+  - scripts/validate_v14_119_prompt_to_artifact_completion_audit_current_goal_refresh.js
+  - scripts/validate_v14_120_visual_series_taxonomy_review_scorecard_alignment.js
+  - scripts/validate_v14_121_codex_session_prompt_package_library_governance.js
+  - scripts/validate_v14_122_local_review_record_schema_refresh.js
+  - scripts/validate_v14_123_memory_delta_draft_schema_alignment_for_codex_reviews.js
+  - scripts/validate_v14_124_context_load_guide_and_historical_docs_compaction.js
+  - scripts/validate_v14_125_review_console_memory_delta_handoff_refresh.js
+  - scripts/validate_v14_126_accepted_failure_metadata_cross_index_gap_review.js
+  - scripts/validate_v14_127_production_exclusion_draft_current_goal_gap_review.js
+  - scripts/validate_v14_128_failure_samples_authorization_template_current_goal_gap_review.js
+  - scripts/validate_v14_129_current_goal_completion_audit_gap_map.js
+  - scripts/validate_v14_130_legacy_docs_context_quarantine_refresh.js
+  - scripts/validate_v14_131_real_artifact_validation_and_accepted_sample_recoverability.js
+  - scripts/validate_v14_132_state_scope_canonicalization.js
+  - scripts/validate_v14_133_main_validator_real_import_record_wiring.js
+  - scripts/validate_v14_134_review_console_static_import_record_reader.js
+  - scripts/validate_v14_135_review_console_import_reader_safety_review.js
+  - scripts/validate_v14_136_accepted_samples_recoverability_metadata_patch.js
+  - scripts/validate_v14_137_project_master_plan_quarantine_status_demotion.js
+  - scripts/validate_v14_138_dashboard_alignment_from_real_artifact_evidence.js
+  - scripts/validate_v14_139_durable_archive_production_candidate_memory_write_authorization_split_planning.js
+  - scripts/validate_v14_140_two_week_regression_closeout.js
+  - scripts/validate_v14_141_recoverability_core_extraction.js
+  - scripts/validate_v14_142_multi_accepted_sample_matrix.js
+  - scripts/validate_v14_143_import_review_registry_schema_hardening.js
+  - scripts/validate_v14_144_review_console_schema_binding.js
+  - scripts/validate_v14_145_sample_lifecycle_state_machine.js
+  - scripts/validate_v14_146_durable_archive_dry_run_manifest.js
+  - scripts/validate_v14_147_production_candidate_eligibility_preflight.js
+  - scripts/validate_v14_148_memory_delta_draft_package.js
+  - scripts/validate_v14_149_authorization_package_compiler.js
+  - scripts/validate_v14_150_local_regression_suite_consolidation.js
+  - scripts/validate_v14_151_dry_run_vcp_adapter_contract_v1.js
+  - scripts/validate_v14_161_codex_session_generated_candidate_readiness.js
+  - scripts/validate_v14_162_lamp_prompt_revision_after_v14_161_review.js
+  - scripts/validate_v14_163_lamp_v2_generated_candidate_readiness.js
+  - scripts/validate_v14_164_bag_accepted_samples_metadata_registration_preflight.js
+  - scripts/validate_v14_165_bag_accepted_samples_metadata_registration.js
+  - scripts/validate_v14_166_lamp_v3_generated_candidate_readiness.js
+  - scripts/validate_v14_167_lamp_v3_accepted_samples_registration_blocker_preflight.js
+  - scripts/validate_v14_168_three_sample_dashboard_evidence_alignment.js
+  - scripts/validate_v14_205_review_console_runtime_gap_static_ui_panel.js
+  - scripts/validate_v14_209_uncommitted_worktree_recovery_audit.js
+  - scripts/validate_v14_210_exact_file_commit_readiness_review.js
+  - scripts/validate_v14_211_recoverability_baseline_exact_file_staging_authorization_package_draft.js
+  - scripts/validate_v14_212_six_month_goal_prompt_to_artifact_completion_audit.js
+  - scripts/validate_v14_213_lamp_third_sample_human_approval_request_package.js
+  - scripts/validate_v14_214_lamp_third_sample_human_approval_intake_validator.js
+  - scripts/validate_v14_215_third_sample_accepted_samples_post_approval_gate_alignment.js
+  - scripts/validators/autopilot_governance/validate_autopilot_agent_board_resume_compaction_guard.js
+  - tests/schema_examples/autopilot_agent_board_resume_compaction_guard.example.json
+validation_completed:
+  - node scripts/validate_v14_210_exact_file_commit_readiness_review.js (updated)
+  - node scripts/validate_autopilot_agent_board_resume_compaction_guard.js (updated)
+validation_result:
+  - v14 control-loop and Smart V3 resume-compact compatibility checks now treat a single latest green prompt-gate entry as non-blocking when still in pre-red decision state.
+  - exact-file governance slice now includes this batch and rejects package-changes in local-commit repair path.
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+secret_value_read_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+push_status: not_performed
+next_safe_task: local commit this batch, rerun validate:agent-board and validate:mvp, then continue with the next red decision `inspect_failed_provider_tool_attempt_or_authorize_new_trial`.
+```
+
 ## Current Run State - Commercial KV Prompt Package Gate
 
 ```text
