@@ -5,7 +5,7 @@ Agent Image Lab 是一个接入 VCP 生态的视觉生产调度系统。它不�
 ## 当前权限策略
 
 ```yaml
-current_phase: runtime_to_review_minimal_real_loop_v1_phase_6_fixture_smoke_flow
+current_phase: runtime_to_review_minimal_real_loop_v1_phase_7_validation_gate_split
 current_goal: runtime_to_review_minimal_real_loop_v1
 semantic_tightening_active: true
 current_boundary_semantics_cleanup_active: true
@@ -34,14 +34,14 @@ false_readiness_negative_case_validator_active: true
 receipt_registry_negative_case_validator_active: true
 amber_action_packet_preflight_validator_active: true
 local_full_autopilot_ready: true
-current_next_boundary: guarded_live_probe_gate_explicit_budgeted
+current_next_boundary: guarded_live_probe_execution_requires_delegate_and_exact_confirmation
 current_next_boundary_type: local_runtime_to_review_product_mainline
 current_remote_boundary: no_auto_push_stage_commit_only
 current_remote_boundary_type: remote_push_requires_separate_authorization
-current_local_capability_completed: retry_007_closed_provider_link_evidence_only_runtime_v1_guarded_skeleton_readonly_real_review_session_decision_record_draft_registry_and_fixture_smoke_flow
-current_local_capability_completed_lane: Green_local_runtime_review_decision_draft_registry_and_fixture_smoke_metadata_no_real_provider_call
-current_local_capability_next: guarded_live_probe_gate_explicit_budgeted
-current_local_capability_next_lane: Amber_only_with_budget_receipt_and_existing_provider_delegate
+current_local_capability_completed: retry_007_closed_provider_link_evidence_only_runtime_v1_guarded_skeleton_readonly_real_review_session_decision_record_draft_registry_fixture_smoke_flow_and_validation_gate_split
+current_local_capability_completed_lane: Green_local_runtime_review_validation_gate_split_no_real_provider_call
+current_local_capability_next: guarded_live_probe_execution_requires_delegate_and_exact_confirmation
+current_local_capability_next_lane: Amber_only_with_budget_receipt_exact_confirmation_and_existing_provider_delegate
 current_local_capability_source: docs/RUNTIME_TO_PRODUCTION_LANDING_ROADMAP.md
 current_runtime_track_gate: Runnable Capability Gate
 fixture_next_safe_task_evidence: historical_test_fixture_only
@@ -61,13 +61,13 @@ push_tag_release_deploy_allowed_automatically: false
 secret_value_access_allowed_automatically: false
 destructive_action_allowed_automatically: false
 recommended_next_if_remote_sync_is_requested: explicit_push_safety_gate_only_after_stage_checkpoint_commit
-recommended_next_if_continuing_local_product_work: guarded_live_probe_gate_explicit_budgeted
-recommended_next: runtime_to_review_minimal_real_loop_v1_phase_7_validation_gate_and_guarded_live_probe_split
+recommended_next_if_continuing_local_product_work: guarded_live_probe_execution_requires_delegate_and_exact_confirmation
+recommended_next: runtime_to_review_minimal_real_loop_v1_guarded_live_probe_execution_or_review_console_real_entry_mode
 ```
 
 Smart Standing Authorization v3 means Codex can continue Green work directly and Amber work inside the budgeted envelope without step-by-step approval. It must stop at Red Lane conditions such as push/tag/release/deploy, destructive actions, secret value access, raw private data exposure, uncapped cost, unbounded loops, broad external repository modification, or dependency changes without an exact package/action list.
 
-Runtime-to-review mainline status: retry 007 is closed as provider link success evidence only and must not be promoted to accepted sample or production candidate. `runtime_kernel_v1_real_provider_guarded` now starts the product mainline beside the v0 stub: fixture mode produces canonical artifact/audit/review metadata, real-guarded mode fails closed unless a structured provider delegate is injected, `review_bridge_runtime_v1_readonly` turns runtime v1 bridge metadata into a readonly Review Console session without reading image binaries, `review_decision_record_v1` persists metadata-only human decisions with the fixed five-value enum, and `review_draft_registry_v1` generates accepted/rejected/rework draft records while keeping retry 007 at `no_registry_draft`. `run_runtime_to_review_v1_fixture_smoke_flow.js` now runs the no-provider fixture chain from prompt fixture through runtime, artifact, audit, review bridge, readonly session, request-rework decision, and rework draft registry metadata. Default validation performs no real provider/plugin/API/image action.
+Runtime-to-review mainline status: retry 007 is closed as provider link success evidence only and must not be promoted to accepted sample or production candidate. `runtime_kernel_v1_real_provider_guarded` now starts the product mainline beside the v0 stub: fixture mode produces canonical artifact/audit/review metadata, real-guarded mode fails closed unless a structured provider delegate is injected, `review_bridge_runtime_v1_readonly` turns runtime v1 bridge metadata into a readonly Review Console session without reading image binaries, `review_decision_record_v1` persists metadata-only human decisions with the fixed five-value enum, and `review_draft_registry_v1` generates accepted/rejected/rework draft records while keeping retry 007 at `no_registry_draft`. `run_runtime_to_review_v1_fixture_smoke_flow.js` now runs the no-provider fixture chain from prompt fixture through runtime, artifact, audit, review bridge, readonly session, request-rework decision, and rework draft registry metadata. Phase 7 now separates validation into `validate:runtime-to-review-default-local`, `validate:runtime-to-review-evidence`, and `validate:runtime-to-review-guarded-live-probe-gate`; the explicit live runner is `runtime-to-review:guarded-live-probe` and remains blocked unless a provider delegate module and exact confirmation are supplied. Default validation performs no real provider/plugin/API/image action.
 
 `docs/SMART_AUTOPILOT_GOVERNANCE_KERNEL.md` defines the local governance kernel for v3: Goal Compiler, Truth Model, Lane Classifier, Budget Engine, Receipt Recorder, and Continuation Judge. `scripts/validate_autopilot_governance_kernel.js` validates the envelope, receipt registry, cost accounting, structured rollback, and receipt schemas/examples, and is wired into `scripts/validate_mvp.ps1`.
 

@@ -1,5 +1,44 @@
 ---
 
+## Current Run State - Runtime To Review Minimal Real Loop V1 Phase 7 Validation Gate Split
+
+```text
+phase: runtime_to_review_minimal_real_loop_v1_phase_7_validation_gate_split_20260529
+status: COMPLETED_VALIDATED_PENDING_STAGE_CLOSEOUT
+mode: Green local validation gate implementation; no real provider/plugin/API/image call
+branch: master
+active_current_phase_reference: v0_3_3_first_live_generation_pilot
+active_source_phase_reference: v0_3_2_live_candidate_action_packet
+active_next_red_decision_reference: guarded_live_probe_execution_requires_delegate_and_exact_confirmation
+legacy_active_next_red_decision_reference: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+goal: Split runtime-to-review validation into default local, evidence validation, and guarded live probe gate without putting real provider execution into default validation.
+default_local_gate: scripts/validate_runtime_to_review_v1_default_local_gate.js
+evidence_gate: scripts/validate_runtime_to_review_v1_evidence_gate.js
+guarded_live_probe_gate: scripts/validate_runtime_to_review_v1_guarded_live_probe_gate.js
+guarded_live_probe_runner: scripts/run_runtime_to_review_v1_guarded_live_probe.js
+package_scripts:
+- validate:runtime-to-review-default-local
+- validate:runtime-to-review-evidence
+- validate:runtime-to-review-guarded-live-probe-gate
+- runtime-to-review:guarded-live-probe
+validation_completed:
+- node scripts/validate_runtime_to_review_v1_default_local_gate.js: passed
+- node scripts/validate_runtime_to_review_v1_evidence_gate.js: passed
+- node scripts/validate_runtime_to_review_v1_guarded_live_probe_gate.js: passed
+- node scripts/run_runtime_to_review_v1_guarded_live_probe.js --preflight-only: passed without live call
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+secret_value_read_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+push_status: not_performed
+next_safe_task: guarded_live_probe_execution_requires_delegate_and_exact_confirmation
+```
+
 ## Current Run State - Runtime To Review Minimal Real Loop V1 Phase 6 Fixture Smoke Flow
 
 ```text

@@ -1,5 +1,50 @@
 ---
 
+## Checkpoint - Runtime To Review Minimal Real Loop V1 Phase 7 Validation Gate Split
+
+```text
+phase: runtime_to_review_minimal_real_loop_v1_phase_7_validation_gate_split_20260529
+status: completed_validated_pending_stage_closeout
+result: COMPLETED_VALIDATED
+mode: Green local validation gate implementation
+active_current_phase_reference: v0_3_3_first_live_generation_pilot
+active_source_phase_reference: v0_3_2_live_candidate_action_packet
+active_next_red_decision_reference: guarded_live_probe_execution_requires_delegate_and_exact_confirmation
+legacy_active_next_red_decision_reference: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+summary: Added the Phase 7 runtime-to-review validation split. Default local validation now has a dedicated no-provider gate; evidence validation checks existing receipt/artifact/review records; guarded live probe gate verifies the explicit live runner and proves it does not execute without an exact confirmation and provider delegate module. The live runner itself is present but fail-closed by default and is not included in default local validation.
+changed_files_current_task:
+  - README.md
+  - docs/RUNTIME_TO_PRODUCTION_LANDING_ROADMAP.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - package.json
+  - scripts/lib/governance_tooling_maintenance_slice.js
+  - scripts/run_runtime_to_review_v1_guarded_live_probe.js
+  - scripts/validate_local_commit_scope.js
+  - scripts/validate_mvp_core.js
+  - scripts/validate_runtime_to_review_v1_default_local_gate.js
+  - scripts/validate_runtime_to_review_v1_evidence_gate.js
+  - scripts/validate_runtime_to_review_v1_guarded_live_probe_gate.js
+validation_completed:
+  - node scripts/validate_runtime_to_review_v1_default_local_gate.js
+  - node scripts/validate_runtime_to_review_v1_evidence_gate.js
+  - node scripts/validate_runtime_to_review_v1_guarded_live_probe_gate.js
+  - node scripts/run_runtime_to_review_v1_guarded_live_probe.js --preflight-only
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+secret_value_read_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+push_status: not_performed
+recommended_next_phase: guarded_live_probe_execution_requires_delegate_and_exact_confirmation
+```
+
 ## Checkpoint - Runtime To Review Minimal Real Loop V1 Phase 6 Fixture Smoke Flow
 
 ```text

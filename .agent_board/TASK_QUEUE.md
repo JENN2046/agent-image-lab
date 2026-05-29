@@ -1,5 +1,20 @@
 ---
 
+- [x] ID: runtime_to_review_minimal_real_loop_v1_phase_7_validation_gate_split_20260529
+      Lane: Green local validation gate implementation.
+      Status: completed_validated_pending_stage_closeout.
+      Goal: Split runtime-to-review validation into default local, evidence validation, and guarded live probe gate without putting real provider execution into default validation.
+      Active current phase reference: v0_3_3_first_live_generation_pilot.
+      Active source phase reference: v0_3_2_live_candidate_action_packet.
+      Active next Red decision reference: guarded_live_probe_execution_requires_delegate_and_exact_confirmation.
+      Legacy active next Red decision reference: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Completed: added `validate_runtime_to_review_v1_default_local_gate.js`, `validate_runtime_to_review_v1_evidence_gate.js`, `validate_runtime_to_review_v1_guarded_live_probe_gate.js`, and `run_runtime_to_review_v1_guarded_live_probe.js`.
+      Default local behavior: validates runtime v1, readonly bridge, decision record, draft registry, and fixture smoke flow; no real provider/plugin/API/image action.
+      Evidence behavior: validates existing retry 006/007 artifact and provider evidence plus retry 007 evidence-only decision/draft regression; no new provider call.
+      Guarded live probe behavior: proves the explicit live runner is present, default local excludes it, and the runner blocks without `RUNTIME_TO_REVIEW_V1_ONE_PROVIDER_ONE_IMAGE` plus a provider delegate module.
+      Boundary fields: provider_contact_performed: false; plugin_call_performed: false; api_call_performed: false; image_generation_performed: false; secret_value_read_performed: false; DailyNote_write_performed: false; VCP_memory_write_performed: false; accepted_samples_write_performed: false; production_candidate_write_performed: false; push_status: not_performed.
+      Recommended next: `guarded_live_probe_execution_requires_delegate_and_exact_confirmation`.
+
 - [x] ID: runtime_to_review_minimal_real_loop_v1_phase_6_fixture_smoke_flow_20260529
       Lane: Green local runtime implementation.
       Status: completed_validated_pending_stage_closeout.

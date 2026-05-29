@@ -2590,6 +2590,23 @@ const EXPECTED_RUNTIME_TO_REVIEW_V1_GUARDED_RUNTIME_SKELETON_SLICE = [
   "tests/fixtures/runtime_kernel_v1_real_guarded_task.fixture.json"
 ].sort();
 
+const EXPECTED_RUNTIME_TO_REVIEW_V1_PHASE_7_VALIDATION_GATE_SLICE = [
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  "README.md",
+  "docs/RUNTIME_TO_PRODUCTION_LANDING_ROADMAP.md",
+  "package.json",
+  "scripts/lib/governance_tooling_maintenance_slice.js",
+  "scripts/run_runtime_to_review_v1_guarded_live_probe.js",
+  "scripts/validate_local_commit_scope.js",
+  "scripts/validate_mvp_core.js",
+  "scripts/validate_runtime_to_review_v1_default_local_gate.js",
+  "scripts/validate_runtime_to_review_v1_evidence_gate.js",
+  "scripts/validate_runtime_to_review_v1_guarded_live_probe_gate.js"
+].sort();
+
 const EXPECTED_RETRY_007_VCPTOOLBOX_PATCH_PREVIEW_GATE_SLICE = [
   ".agent_board/BLOCKERS.md",
   ".agent_board/CHECKPOINT.md",
@@ -2675,7 +2692,18 @@ const EXPECTED_RUNTIME_TO_REVIEW_V1_PACKAGE_SCRIPTS = {
   "validate:runtime-kernel": "node scripts/validate_runtime_kernel_v0.js && npm run validate:runtime-kernel-audit && node scripts/validate_runtime_kernel_v1_real_provider_guarded.js"
 };
 
+const EXPECTED_RUNTIME_TO_REVIEW_V1_PHASE_7_PACKAGE_SCRIPTS = {
+  "validate:runtime-to-review-default-local": "node scripts/validate_runtime_to_review_v1_default_local_gate.js",
+  "validate:runtime-to-review-evidence": "node scripts/validate_runtime_to_review_v1_evidence_gate.js",
+  "validate:runtime-to-review-guarded-live-probe-gate": "node scripts/validate_runtime_to_review_v1_guarded_live_probe_gate.js",
+  "runtime-to-review:guarded-live-probe": "node scripts/run_runtime_to_review_v1_guarded_live_probe.js"
+};
+
 const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
+  {
+    id: "runtime_to_review_v1_phase_7_validation_gate_slice",
+    files: EXPECTED_RUNTIME_TO_REVIEW_V1_PHASE_7_VALIDATION_GATE_SLICE
+  },
   {
     id: "runtime_to_review_v1_guarded_runtime_skeleton_slice",
     files: EXPECTED_RUNTIME_TO_REVIEW_V1_GUARDED_RUNTIME_SKELETON_SLICE
@@ -3613,6 +3641,39 @@ function packageChangeIsRuntimeToReviewV1Only(currentPackageJson, baselinePackag
   };
 }
 
+function packageChangeIsRuntimeToReviewV1Phase7Only(currentPackageJson, baselinePackageJson, changedFiles) {
+  if (!changedFiles.includes("package.json")) {
+    return { allowed: true, mode: "package_json_unchanged" };
+  }
+
+  const current = cloneJson(currentPackageJson);
+  const baseline = cloneJson(baselinePackageJson);
+  const currentScripts = current.scripts || {};
+  const baselineScripts = baseline.scripts || {};
+  const expectedScripts = EXPECTED_RUNTIME_TO_REVIEW_V1_PHASE_7_PACKAGE_SCRIPTS;
+
+  for (const [name, value] of Object.entries(expectedScripts)) {
+    if (currentScripts[name] !== value) {
+      return { allowed: false, mode: `runtime_to_review_v1_phase_7_script_${name}_unexpected` };
+    }
+  }
+
+  for (const name of Object.keys(expectedScripts)) {
+    if (baselineScripts[name] !== undefined) {
+      baselineScripts[name] = currentScripts[name];
+    } else {
+      delete currentScripts[name];
+    }
+  }
+
+  return {
+    allowed: sameJson(current, baseline),
+    mode: sameJson(current, baseline)
+      ? "runtime_to_review_v1_phase_7_validation_scripts_only"
+      : "runtime_to_review_v1_phase_7_package_has_other_changes"
+  };
+}
+
 function buildGovernanceToolingMaintenanceSliceReport({ changedFiles, stagedFiles, behind, currentPackageJson, baselinePackageJson }) {
   const sortedChangedFiles = [...changedFiles].sort();
   const normalizedChangedFiles = normalizeChangedFilesForSliceMatching(sortedChangedFiles);
@@ -3620,7 +3681,9 @@ function buildGovernanceToolingMaintenanceSliceReport({ changedFiles, stagedFile
   const matchingSlice = findMatchingGovernanceToolingSlice(sortedChangedFiles);
   const closestSlice = matchingSlice || closestGovernanceToolingSlice(normalizedChangedFiles);
   const exactSliceMatches = matchingSlice !== null;
-  const packageReport = matchingSlice?.id === "runtime_to_review_v1_guarded_runtime_skeleton_slice"
+  const packageReport = matchingSlice?.id === "runtime_to_review_v1_phase_7_validation_gate_slice"
+    ? packageChangeIsRuntimeToReviewV1Phase7Only(currentPackageJson, baselinePackageJson, sortedChangedFiles)
+    : matchingSlice?.id === "runtime_to_review_v1_guarded_runtime_skeleton_slice"
     ? packageChangeIsRuntimeToReviewV1Only(currentPackageJson, baselinePackageJson, sortedChangedFiles)
     : matchingSlice?.id === "retry_007_preflight_decision_slice"
     ? packageChangeIsRetry007PreflightDecisionOnly(currentPackageJson, baselinePackageJson, sortedChangedFiles)
@@ -3691,6 +3754,15 @@ function governanceToolingMaintenanceSliceSelfCheck() {
   runtimeToReviewDependencyChangedPackage.dependencies.extra = "2.0.0";
   const runtimeToReviewArbitraryScriptPackage = cloneJson(runtimeToReviewPackage);
   runtimeToReviewArbitraryScriptPackage.scripts["other:new-script"] = "node scripts/other.js";
+  const runtimeToReviewPhase7Package = cloneJson(baselinePackage);
+  Object.assign(
+    runtimeToReviewPhase7Package.scripts,
+    EXPECTED_RUNTIME_TO_REVIEW_V1_PHASE_7_PACKAGE_SCRIPTS
+  );
+  const runtimeToReviewPhase7DependencyChangedPackage = cloneJson(runtimeToReviewPhase7Package);
+  runtimeToReviewPhase7DependencyChangedPackage.dependencies.extra = "2.0.0";
+  const runtimeToReviewPhase7ArbitraryScriptPackage = cloneJson(runtimeToReviewPhase7Package);
+  runtimeToReviewPhase7ArbitraryScriptPackage.scripts["other:new-script"] = "node scripts/other.js";
 
   const checks = [
     {
@@ -3700,6 +3772,19 @@ function governanceToolingMaintenanceSliceSelfCheck() {
     {
       check: "allowlist_rejects_env",
       passed: !fileAllowedInGovernanceToolingSlice(".env")
+    },
+    {
+      check: "exact_slice_matches_runtime_to_review_v1_phase_7_validation_gate",
+      passed: findMatchingGovernanceToolingSlice(
+        EXPECTED_RUNTIME_TO_REVIEW_V1_PHASE_7_VALIDATION_GATE_SLICE
+      )?.id === "runtime_to_review_v1_phase_7_validation_gate_slice"
+    },
+    {
+      check: "runtime_to_review_v1_phase_7_validation_gate_rejects_runs_write",
+      passed: findMatchingGovernanceToolingSlice([
+        ...EXPECTED_RUNTIME_TO_REVIEW_V1_PHASE_7_VALIDATION_GATE_SLICE,
+        "runs/real_generation/runtime_v1_live_probe/image.png"
+      ]) === null
     },
     {
       check: "exact_slice_matches_runtime_to_review_v1_guarded_runtime_skeleton",
@@ -4711,6 +4796,30 @@ function governanceToolingMaintenanceSliceSelfCheck() {
         baselinePackage,
         ["package.json"]
       ).allowed
+    },
+    {
+      check: "runtime_to_review_v1_phase_7_package_allows_expected_validation_scripts_only",
+      passed: packageChangeIsRuntimeToReviewV1Phase7Only(
+        runtimeToReviewPhase7Package,
+        baselinePackage,
+        ["package.json"]
+      ).allowed
+    },
+    {
+      check: "runtime_to_review_v1_phase_7_package_rejects_dependency_change",
+      passed: !packageChangeIsRuntimeToReviewV1Phase7Only(
+        runtimeToReviewPhase7DependencyChangedPackage,
+        baselinePackage,
+        ["package.json"]
+      ).allowed
+    },
+    {
+      check: "runtime_to_review_v1_phase_7_package_rejects_arbitrary_script_change",
+      passed: !packageChangeIsRuntimeToReviewV1Phase7Only(
+        runtimeToReviewPhase7ArbitraryScriptPackage,
+        baselinePackage,
+        ["package.json"]
+      ).allowed
     }
   ];
 
@@ -4850,10 +4959,12 @@ module.exports = {
   EXPECTED_V0_6_73AG_TO_AI_REMOTE_SYNC_CURRENT_HEAD_AND_ONE_SHOT_BLOCKED_SLICE,
   EXPECTED_P2_2_RETRY_007_PREFLIGHT_DECISION_SLICE,
   EXPECTED_RUNTIME_TO_REVIEW_V1_GUARDED_RUNTIME_SKELETON_SLICE,
+  EXPECTED_RUNTIME_TO_REVIEW_V1_PHASE_7_VALIDATION_GATE_SLICE,
   EXPECTED_RETRY_007_VCPTOOLBOX_PATCH_PREVIEW_GATE_SLICE,
   EXPECTED_RETRY_007_VCPTOOLBOX_EXECUTION_SURFACE_RECHECK_SLICE,
   EXPECTED_P2_2_RETRY_007_PREFLIGHT_DECISION_PACKAGE_SCRIPTS,
   EXPECTED_RUNTIME_TO_REVIEW_V1_PACKAGE_SCRIPTS,
+  EXPECTED_RUNTIME_TO_REVIEW_V1_PHASE_7_PACKAGE_SCRIPTS,
   EXPECTED_P2_1_PROVIDER_EVIDENCE_INTEGRITY_PHASE_2_SLICE,
   EXPECTED_PROVIDER_EVIDENCE_INTEGRITY_SCOPE_NARROWING_FIX_SLICE,
   EXPECTED_P2_1_PROVIDER_EVIDENCE_INTEGRITY_PACKAGE_SCRIPTS,
@@ -4867,5 +4978,6 @@ module.exports = {
   governanceToolingMaintenanceSliceSelfCheck,
   packageChangeIsPreviewScriptOnly,
   packageChangeIsEvidenceGovernanceSanitizationOnly,
-  packageChangeIsRuntimeToReviewV1Only
+  packageChangeIsRuntimeToReviewV1Only,
+  packageChangeIsRuntimeToReviewV1Phase7Only
 };

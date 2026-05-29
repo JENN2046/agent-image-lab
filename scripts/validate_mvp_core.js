@@ -235,6 +235,66 @@ safeCheck("runtime_to_review_v1_fixture_smoke_flow", () => {
     result.all_negative_cases_caught === true;
 });
 
+safeCheck("runtime_to_review_v1_default_local_gate", () => {
+  const result = parseJson(runNode(["scripts/validate_runtime_to_review_v1_default_local_gate.js"]));
+  return result.passed === true &&
+    result.gate_id === "runtime_to_review_v1_default_local_gate" &&
+    result.mode === "default_local_no_provider_no_external_call" &&
+    result.real_provider_call_included === false &&
+    result.fixture_smoke_status === "completed_fixture_runtime_to_review_smoke" &&
+    result.provider_contact_performed === false &&
+    result.plugin_call_performed === false &&
+    result.api_call_performed === false &&
+    result.image_generation_performed === false &&
+    result.secret_value_read_performed === false &&
+    result.DailyNote_write_performed === false &&
+    result.VCP_memory_write_performed === false &&
+    result.memory_write_performed === false &&
+    result.accepted_samples_write_performed === false &&
+    result.production_candidate_write_performed === false;
+});
+
+safeCheck("runtime_to_review_v1_evidence_gate", () => {
+  const result = parseJson(runNode(["scripts/validate_runtime_to_review_v1_evidence_gate.js"]));
+  return result.passed === true &&
+    result.gate_id === "runtime_to_review_v1_evidence_validation_gate" &&
+    result.mode === "existing_evidence_validation_no_external_call" &&
+    result.existing_receipt_and_artifact_evidence_only === true &&
+    result.retry_007_decision === "provider_link_success_evidence_only" &&
+    result.retry_007_registry_draft_type === "no_registry_draft" &&
+    result.real_provider_call_included === false &&
+    result.provider_contact_performed === false &&
+    result.plugin_call_performed === false &&
+    result.api_call_performed === false &&
+    result.image_generation_performed === false &&
+    result.secret_value_read_performed === false &&
+    result.DailyNote_write_performed === false &&
+    result.VCP_memory_write_performed === false &&
+    result.accepted_samples_write_performed === false &&
+    result.production_candidate_write_performed === false &&
+    result.memory_write_performed === false;
+});
+
+safeCheck("runtime_to_review_v1_guarded_live_probe_gate", () => {
+  const result = parseJson(runNode(["scripts/validate_runtime_to_review_v1_guarded_live_probe_gate.js"]));
+  return result.passed === true &&
+    result.gate_id === "runtime_to_review_v1_guarded_live_probe_gate" &&
+    result.mode === "guarded_live_probe_gate_no_live_call" &&
+    result.default_local_excludes_live_probe === true &&
+    result.explicit_live_probe_runner_present === true &&
+    result.live_probe_executed_by_validator === false &&
+    result.real_provider_call_performed === false &&
+    result.provider_contact_performed === false &&
+    result.plugin_call_performed === false &&
+    result.api_call_performed === false &&
+    result.image_generation_performed === false &&
+    result.secret_value_read_performed_by_runner === false &&
+    result.DailyNote_write_performed === false &&
+    result.VCP_memory_write_performed === false &&
+    result.accepted_samples_write_performed === false &&
+    result.production_candidate_write_performed === false;
+});
+
 safeCheck("runtime_kernel_v1_real_provider_guarded", () => {
   const result = parseJson(runNode(["scripts/validate_runtime_kernel_v1_real_provider_guarded.js"]));
   return result.passed === true &&

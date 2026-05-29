@@ -1,5 +1,51 @@
 ---
 
+## Current Handoff Update - Runtime To Review Minimal Real Loop V1 Phase 7 Validation Gate Split
+
+```text
+phase: runtime_to_review_minimal_real_loop_v1_phase_7_validation_gate_split_20260529
+status: COMPLETED_VALIDATED_PENDING_STAGE_CLOSEOUT
+mode: Green local validation gate implementation
+branch: master
+active_current_phase_reference: v0_3_3_first_live_generation_pilot
+active_source_phase_reference: v0_3_2_live_candidate_action_packet
+active_next_red_decision_reference: guarded_live_probe_execution_requires_delegate_and_exact_confirmation
+legacy_active_next_red_decision_reference: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+summary: Phase 7 now separates runtime-to-review validation into default local, existing evidence validation, and guarded live probe gate. Default local remains no-provider/no-external-call. Evidence validation checks existing retry 006/007 artifact, receipt, review, decision, and draft evidence. The guarded live probe runner is present but blocks without exact confirmation and a provider delegate module, and it is not included in default validation.
+changed_by_this_task:
+  - README.md
+  - docs/RUNTIME_TO_PRODUCTION_LANDING_ROADMAP.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - package.json
+  - scripts/lib/governance_tooling_maintenance_slice.js
+  - scripts/run_runtime_to_review_v1_guarded_live_probe.js
+  - scripts/validate_local_commit_scope.js
+  - scripts/validate_mvp_core.js
+  - scripts/validate_runtime_to_review_v1_default_local_gate.js
+  - scripts/validate_runtime_to_review_v1_evidence_gate.js
+  - scripts/validate_runtime_to_review_v1_guarded_live_probe_gate.js
+validation:
+  - node scripts/validate_runtime_to_review_v1_default_local_gate.js: passed
+  - node scripts/validate_runtime_to_review_v1_evidence_gate.js: passed
+  - node scripts/validate_runtime_to_review_v1_guarded_live_probe_gate.js: passed
+  - node scripts/run_runtime_to_review_v1_guarded_live_probe.js --preflight-only: passed without live call
+boundaries:
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  secret_value_read_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  accepted_samples_write_performed: false
+  production_candidate_write_performed: false
+  push_status: not_performed
+next_safe_task: guarded_live_probe_execution_requires_delegate_and_exact_confirmation
+```
+
 ## Current Handoff Update - Runtime To Review Minimal Real Loop V1 Phase 6 Fixture Smoke Flow
 
 ```text
