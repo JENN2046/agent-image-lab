@@ -1,5 +1,57 @@
 ---
 
+## Current Run State - Runtime To Review Minimal Real Loop V1 Phase 6 Fixture Smoke Flow
+
+```text
+phase: runtime_to_review_minimal_real_loop_v1_phase_6_fixture_smoke_flow_20260529
+status: COMPLETED_VALIDATED_PENDING_STAGE_CLOSEOUT
+mode: Green local runtime implementation; no real provider/plugin/API/image call
+branch: master
+active_current_phase_reference: v0_3_3_first_live_generation_pilot
+active_source_phase_reference: v0_3_2_live_candidate_action_packet
+active_next_red_decision_reference: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+goal: Start the product mainline after retry_007 closure by adding runtime_kernel_v1_real_provider_guarded, readonly runtime v1 review sessions, metadata-only human decision records, draft registry records, and a no-provider fixture smoke flow beside the v0 stub.
+retry_007_status: closed_as_provider_link_success_evidence_only_not_accepted_sample_not_production_candidate
+runtime_v1_kernel: kernel/runtime_kernel_v1_real_provider_guarded.js
+fixture_input: tests/fixtures/runtime_kernel_v1_no_provider_fixture_task.fixture.json
+real_guarded_input: tests/fixtures/runtime_kernel_v1_real_guarded_task.fixture.json
+validator: scripts/validate_runtime_kernel_v1_real_provider_guarded.js
+review_bridge_adapter: adapters/runtime/review_bridge_runtime_v1_readonly.js
+review_bridge_validator: scripts/validate_runtime_review_bridge_v1_readonly.js
+decision_record_helper: adapters/runtime/review_decision_record_v1.js
+decision_record_validator: scripts/validate_review_decision_record_v1.js
+retry_007_decision_record: review_console/review_decisions/v0_6_73_real_vcp_agent_generation_retry_007/decision_record.json
+draft_registry_helper: adapters/runtime/review_draft_registry_v1.js
+draft_registry_validator: scripts/validate_review_draft_registry_v1.js
+fixture_smoke_flow_runner: scripts/run_runtime_to_review_v1_fixture_smoke_flow.js
+fixture_smoke_flow_validator: scripts/validate_runtime_to_review_v1_fixture_smoke_flow.js
+validation_completed:
+- node scripts/validate_runtime_kernel_v1_real_provider_guarded.js: passed
+- node scripts/validate_runtime_review_bridge_v1_readonly.js: passed
+- node scripts/validate_review_decision_record_v1.js: passed
+- node scripts/validate_review_draft_registry_v1.js: passed
+- node scripts/validate_runtime_to_review_v1_fixture_smoke_flow.js: passed
+- npm run validate:review-bridge-readonly: passed
+- npm run validate:review-decision-record: passed
+- npm run validate:review-draft-registry: passed
+- npm run validate:runtime-to-review-fixture-smoke: passed
+- npm run validate:runtime-kernel: passed
+- npm run validate:mvp: passed after fresh-clone private audit dependency repair
+- node scripts/lib/governance_tooling_maintenance_slice.js: passed after registering runtime-to-review v1 exact slice
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+secret_value_read_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+push_status: not_performed
+stage_commit_status: not_performed_until_stage_closeout_validation
+next_safe_task: guarded_live_probe_gate_explicit_budgeted
+```
+
 ## Current Run State - Post-Push Sync After Retry 007 Human Visual Review
 
 ```text

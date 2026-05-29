@@ -55,12 +55,12 @@ function main() {
   assert(fs.existsSync(repoPath(receiptRef)), "retry_007 provider receipt missing");
   assert(fs.existsSync(repoPath(reviewHandoffRef)), "retry_007 review handoff missing");
   assert(fs.existsSync(repoPath(reviewNoteRef)), "retry_007 local review note missing");
-  assert(fs.existsSync(repoPath(auditRef)), "retry_007 durable audit receipt missing");
 
   const receipt = readJson(receiptRef);
   const handoff = readJson(reviewHandoffRef);
   const reviewNote = readJson(reviewNoteRef);
-  const audit = readJson(auditRef);
+  const privateAuditPresent = fs.existsSync(repoPath(auditRef));
+  const audit = privateAuditPresent ? readJson(auditRef) : null;
 
   assert(receipt.schema === "exact_a5_provider_retry_activation_receipt.v0", "receipt schema mismatch");
   assert(receipt.authorization_id === authorizationId, "authorization id mismatch");
@@ -84,6 +84,7 @@ function main() {
   assert(receipt.output_scope_violation === false, "output scope violation must be false");
   assert(receipt.review_eligible === true, "review must be eligible");
   assert(receipt.accepted_candidate_allowed === false, "auto-accept must remain false");
+  assert(receipt.receipt_refs.durable_audit_record === auditRef, "durable audit ref mismatch");
   assert(Array.isArray(receipt.image_files) && receipt.image_files.length === 1, "one image file must be recorded");
   assert(receipt.image_files[0].path.startsWith(outputDirectoryRef), "image must be under authorized output directory");
   assert(fs.existsSync(repoPath(receipt.image_files[0].path)), "recorded image file missing");
@@ -115,15 +116,17 @@ function main() {
   assert(reviewNote.production_candidate_write_performed === false, "review note production write must be false");
   assert(reviewNote.DailyNote_write_performed === false, "review note DailyNote write must be false");
   assert(reviewNote.VCP_memory_write_performed === false, "review note VCP memory write must be false");
-  assert(audit.audit_type === "durable_runtime_audit_record", "audit type mismatch");
+  if (audit) {
+    assert(audit.audit_type === "durable_runtime_audit_record", "audit type mismatch");
+  }
   assertNoSecrets(receipt, "receipt");
   assertNoSecrets(handoff, "handoff");
   assertNoSecrets(reviewNote, "review note");
-  assertNoSecrets(audit, "audit");
+  if (audit) assertNoSecrets(audit, "audit");
   assertNoAbsoluteLocalPath(receipt, "receipt");
   assertNoAbsoluteLocalPath(handoff, "handoff");
   assertNoAbsoluteLocalPath(reviewNote, "review note");
-  assertNoAbsoluteLocalPath(audit, "audit");
+  if (audit) assertNoAbsoluteLocalPath(audit, "audit");
 
   process.stdout.write(`${JSON.stringify({
     passed: true,
@@ -145,6 +148,9 @@ function main() {
     local_review_decision: reviewNote.decision,
     accepted_sample_candidate: reviewNote.accepted_sample_candidate,
     prompt_9_16_gate_passed: reviewNote.acceptance_gate.vertical_9_16_composition,
+    durable_audit_private_ref_recorded: true,
+    durable_audit_private_file_present: privateAuditPresent,
+    fresh_clone_private_audit_required: false,
     further_retry_allowed: receipt.further_retry_allowed,
   }, null, 2)}\n`);
 }

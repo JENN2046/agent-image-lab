@@ -38,11 +38,18 @@ production last
 - `provider_preflight_no_provider_call_v0` 已接入 Green provider preflight path。
 - `exact_a5_provider_execution_packet_draft_v0` 已生成 inactive exact A5 one-shot packet draft。
 - `AUTH-DRAFT-NATIVE-DOUBAO-ONE-SHOT-20260526-001` 已按精确授权短语尝试一次，结果为 `BLOCKED_SECRETLESS_RUNTIME_NOT_CALLABLE`，在 provider contact 前 fail-closed。
+- `AUTH-DRAFT-NATIVE-DOUBAO-SEEDREAM5-RETRY-20260527-007` 已完成一次真实 provider 链路验证，但人工审片结论固定为 `provider_link_success_evidence_only`；它不是 accepted sample，也不是 production candidate，不能作为 retry 008 的自动继续轨。
+- `runtime_kernel_v1_real_provider_guarded` 已在 v0 stub 旁启动：fixture mode 产出 canonical artifact record、audit receipt、review bridge metadata entry；real-guarded mode 默认 fail-closed，只有注入结构化 provider delegate 时才会进入 provider-success result。
+- `review_bridge_runtime_v1_readonly` 已接到 runtime v1 bridge metadata entry：它输出 metadata-only readonly review session，显示 run id、prompt ref、provider route、model sent/required、dimensions/hash、artifact/audit refs，并拒绝缺字段、failed result、secret/production/memory side effect、image binary read。
+- `review_decision_record_v1` 已接到 runtime v1 readonly session 和 retry 007 historical review note：它固定 `accept_sample_draft`、`reject_sample_draft`、`request_rework`、`provider_link_success_evidence_only`、`invalid_artifact` 五个 decision enum，只写 metadata-only local decision record，不复制图、不写 production、不写 memory。
+- `review_draft_registry_v1` 已接到 `review_decision_record.v1`：`accept_sample_draft` 生成 accepted draft，`reject_sample_draft` / `invalid_artifact` 生成 rejected draft，`request_rework` 生成 rework draft；所有 draft 都保持 `production_candidate: false`，retry 007 的 `provider_link_success_evidence_only` 只能生成 `no_registry_draft`。
+- `run_runtime_to_review_v1_fixture_smoke_flow.js` 已建立 no-provider fixture smoke flow：prompt fixture -> runtime v1 -> artifact record -> audit receipt -> review bridge entry -> readonly review session -> `request_rework` decision record -> rework draft registry metadata，全程不写文件、不读图像二进制、不触发 provider/plugin/API/image/memory/production。
 - Green fixture 可以走到 `completed_stub`，路径为 `queued -> gated -> executed_stub -> artifact_recorded -> artifact_adapter_stubbed -> review_pending -> completed_stub`。
 - Green fixture runtime result can be mapped to Review Console-readable `image_case_draft` and `review_session_draft` with no write actions.
+- Runtime v1 fixture result 可以走到 `completed_fixture_artifact`，real-guarded 缺少 delegate 时走到 `failed_closed`，validator 使用 fake delegate 只验证结构，不触发真实 provider/plugin/API/image action；Review bridge v1 validator 能把 fixture/fake-provider bridge entry 打开为 readonly real session；decision record 和 draft registry validators 能写入并清理本地 metadata-only probe；fixture smoke validator 能验证完整 no-provider runtime-to-review metadata chain，并捕获 provider failure、model mismatch、invalid MIME metadata、invalid review decision、forbidden production flag、forbidden memory write。
 - Red fixture 可以在 policy gate 进入 `blocked_red`，executor 不运行。
 - audit write and durable audit store 已进入受控本地 `.agent_private` 路线。
-- 这仍是 stub runtime，不是 production runtime。
+- 这仍不是 production runtime；当前只证明了 runtime-to-review metadata envelope、fail-closed delegate boundary、readonly review session read path、metadata-only human decision record、draft registry metadata route 和 no-provider fixture smoke flow。
 
 ## Landing Stages
 
@@ -205,8 +212,10 @@ production last
 
 推荐顺序：
 
-1. Bind an owner-authorized secretless provider runtime delegate for the NativeDoubao route, without reading or printing secret values.
-2. Start production workflow only after provider output can enter artifact / review / audit safely.
+1. Add fixture-first product mainline smoke flow: prompt fixture -> runtime v1 -> artifact/audit -> readonly review session -> decision record -> draft registry.
+2. Wire the static/runtime console to consume `runtime_v1_readonly_review_session.v1` separately from `mock_data.js`, still without image binary reads or writes.
+3. Bind an owner-authorized secretless provider runtime delegate for the NativeDoubao route only after the artifact / review / audit / decision / draft registry records remain stable under validation, without reading or printing secret values.
+4. Start production workflow only after provider output can enter artifact / review / audit and human decision records safely.
 
 ## Anti-Drift Rules
 

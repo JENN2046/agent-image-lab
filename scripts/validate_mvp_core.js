@@ -148,6 +148,120 @@ safeCheck("runtime_review_bridge_readonly_stub", () => {
     result.all_negative_cases_caught === true;
 });
 
+safeCheck("runtime_review_bridge_v1_readonly", () => {
+  const result = parseJson(runNode(["scripts/validate_runtime_review_bridge_v1_readonly.js"]));
+  return result.passed === true &&
+    result.adapter_id === "review_bridge_runtime_v1_readonly" &&
+    result.display_fields_verified === true &&
+    result.readonly_real_session_verified === true &&
+    result.image_binary_read_performed === false &&
+    result.file_write_performed === false &&
+    result.provider_contact_performed === false &&
+    result.plugin_call_performed === false &&
+    result.api_call_performed === false &&
+    result.image_generation_performed === false &&
+    result.DailyNote_write_performed === false &&
+    result.VCP_memory_write_performed === false &&
+    result.production_candidate_write_performed === false &&
+    result.all_negative_cases_caught === true;
+});
+
+safeCheck("review_decision_record_v1", () => {
+  const result = parseJson(runNode(["scripts/validate_review_decision_record_v1.js"]));
+  return result.passed === true &&
+    result.helper_id === "review_decision_record_v1" &&
+    result.decision_enum_count === 5 &&
+    result.runtime_decision_record_verified === true &&
+    result.retry_007_regression_decision === "provider_link_success_evidence_only" &&
+    result.retry_007_not_accepted_sample === true &&
+    result.retry_007_not_production_candidate === true &&
+    result.provider_contact_performed === false &&
+    result.plugin_call_performed === false &&
+    result.api_call_performed === false &&
+    result.image_generation_performed === false &&
+    result.image_binary_read_performed === false &&
+    result.accepted_samples_write_performed === false &&
+    result.production_candidate_write_performed === false &&
+    result.DailyNote_write_performed === false &&
+    result.VCP_memory_write_performed === false &&
+    result.memory_write_performed === false &&
+    result.all_negative_cases_caught === true;
+});
+
+safeCheck("review_draft_registry_v1", () => {
+  const result = parseJson(runNode(["scripts/validate_review_draft_registry_v1.js"]));
+  return result.passed === true &&
+    result.helper_id === "review_draft_registry_v1" &&
+    result.accepted_draft_created === true &&
+    result.rejected_draft_created === true &&
+    result.rework_draft_created === true &&
+    result.retry_007_draft_type === "no_registry_draft" &&
+    result.retry_007_accepted_draft_created === false &&
+    result.provider_contact_performed === false &&
+    result.plugin_call_performed === false &&
+    result.api_call_performed === false &&
+    result.image_generation_performed === false &&
+    result.image_binary_read_performed === false &&
+    result.accepted_samples_write_performed === false &&
+    result.production_candidate_write_performed === false &&
+    result.DailyNote_write_performed === false &&
+    result.VCP_memory_write_performed === false &&
+    result.memory_write_performed === false &&
+    result.all_negative_cases_caught === true;
+});
+
+safeCheck("runtime_to_review_v1_fixture_smoke_flow", () => {
+  const result = parseJson(runNode(["scripts/validate_runtime_to_review_v1_fixture_smoke_flow.js"]));
+  return result.passed === true &&
+    result.flow_id === "runtime_to_review_v1_fixture_smoke_flow" &&
+    result.status === "completed_fixture_runtime_to_review_smoke" &&
+    result.runtime_status === "completed_fixture_artifact" &&
+    result.review_session_status === "readonly_real_session" &&
+    result.decision === "request_rework" &&
+    result.draft_type === "rework_sample_draft" &&
+    result.provider_failure_failed_closed === true &&
+    result.model_mismatch_failed_closed === true &&
+    result.file_write_performed === false &&
+    result.provider_contact_performed === false &&
+    result.plugin_call_performed === false &&
+    result.api_call_performed === false &&
+    result.image_generation_performed === false &&
+    result.image_binary_read_performed === false &&
+    result.accepted_samples_write_performed === false &&
+    result.production_candidate_write_performed === false &&
+    result.DailyNote_write_performed === false &&
+    result.VCP_memory_write_performed === false &&
+    result.memory_write_performed === false &&
+    result.all_negative_cases_caught === true;
+});
+
+safeCheck("runtime_kernel_v1_real_provider_guarded", () => {
+  const result = parseJson(runNode(["scripts/validate_runtime_kernel_v1_real_provider_guarded.js"]));
+  return result.passed === true &&
+    result.kernel_id === "runtime_kernel_v1_real_provider_guarded" &&
+    result.contract_id === "runtime_kernel_v1_contract" &&
+    result.fixture_status === "completed_fixture_artifact" &&
+    result.no_delegate_status === "failed_closed" &&
+    result.fake_provider_status === "completed_provider_image_created" &&
+    result.bad_model_failed_closed === true &&
+    result.invalid_input_failed_closed === true &&
+    result.artifact_record_schema_verified === true &&
+    result.audit_receipt_schema_verified === true &&
+    result.review_bridge_real_entry_metadata_only_verified === true &&
+    result.provider_delegate_default_bound === false &&
+    result.real_provider_call_performed_by_validator === false &&
+    result.provider_contact_performed === false &&
+    result.plugin_call_performed === false &&
+    result.api_call_performed === false &&
+    result.image_generation_performed === false &&
+    result.secret_value_read_performed === false &&
+    result.env_file_content_read_performed === false &&
+    result.production_write_performed === false &&
+    result.accepted_samples_write_performed === false &&
+    result.DailyNote_write_performed === false &&
+    result.VCP_memory_write_performed === false;
+});
+
 safeCheck("runtime_durable_audit_store", () => {
   const result = parseJson(runNode(["scripts/validate_runtime_durable_audit_store.js"]));
   return result.passed === true &&
@@ -417,6 +531,8 @@ safeCheck("exact_a5_retry_007_activation_receipt", () => {
     result.local_review_decision === "provider_link_success_evidence_only" &&
     result.accepted_sample_candidate === false &&
     result.prompt_9_16_gate_passed === false &&
+    result.durable_audit_private_ref_recorded === true &&
+    result.fresh_clone_private_audit_required === false &&
     result.further_retry_allowed === false;
 });
 

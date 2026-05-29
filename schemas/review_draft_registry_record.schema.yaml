@@ -1,0 +1,27 @@
+schema: review_draft_registry_record.v1
+source: review_decision_record.v1
+draft_type:
+  enum:
+    - accepted_sample_draft
+    - rejected_sample_draft
+    - rework_sample_draft
+    - no_registry_draft
+required_refs:
+  source_decision_id: string
+  artifact_record_ref: string
+  artifact_sha256: string | null
+  audit_receipt_ref: string
+invariants:
+  production_candidate: false
+  production_candidate_write_performed: false
+  accepted_samples_write_performed: false
+  memory_write_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  metadata_only: true
+  image_binary_copied: false
+  image_binary_read_performed: false
+  source_image_moved_or_copied: false
+  formal_registry_write_performed: false
+  provider_link_success_evidence_only_creates_no_registry_draft: true
+  output_directory: review_console/draft_registry

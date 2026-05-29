@@ -1,5 +1,84 @@
 ---
 
+## Checkpoint - Runtime To Review Minimal Real Loop V1 Phase 6 Fixture Smoke Flow
+
+```text
+phase: runtime_to_review_minimal_real_loop_v1_phase_6_fixture_smoke_flow_20260529
+status: completed_validated_pending_stage_closeout
+result: COMPLETED_VALIDATED
+mode: Green local runtime implementation
+summary: Added the first runtime-to-review v1 skeleton beside the v0 stub, a readonly runtime v1 review session adapter, metadata-only human decision records, draft registry metadata records, and a no-provider fixture smoke flow. The new kernel produces canonical artifact, audit, and review bridge metadata in fixture mode; real-guarded mode fails closed unless a structured provider delegate is injected. The review bridge adapter consumes runtime v1 bridge metadata and outputs a metadata-only readonly session. The decision helper writes metadata-only local review decisions with the fixed five-value enum. The draft registry helper generates accepted/rejected/rework metadata drafts while keeping retry_007 out of accepted drafts. The fixture smoke flow runs prompt fixture -> runtime v1 -> artifact/audit/bridge -> readonly session -> request-rework decision -> rework draft metadata without file writes or external calls. Validation uses a fake delegate only and performs no real provider/plugin/API/image action.
+active_current_phase_reference: v0_3_3_first_live_generation_pilot
+active_source_phase_reference: v0_3_2_live_candidate_action_packet
+active_next_red_decision_reference: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+retry_007_status: provider_link_success_evidence_only_not_accepted_sample_not_production_candidate
+changed_files_current_task:
+  - README.md
+  - adapters/runtime/review_decision_record_v1.js
+  - adapters/runtime/review_draft_registry_v1.js
+  - adapters/runtime/review_bridge_runtime_v1_readonly.js
+  - docs/RUNTIME_TO_PRODUCTION_LANDING_ROADMAP.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - kernel/runtime_kernel_v1_real_provider_guarded.js
+  - package.json
+  - review_console/review_decisions/v0_6_73_real_vcp_agent_generation_retry_007/decision_record.json
+  - schemas/review_draft_registry_record.schema.yaml
+  - schemas/review_decision_record.schema.yaml
+  - scripts/lib/governance_tooling_maintenance_slice.js
+  - scripts/validate_exact_a5_provider_retry_007_activation_receipt.js
+  - scripts/validate_local_commit_scope.js
+  - scripts/validate_mvp.ps1
+  - scripts/validate_mvp_core.js
+  - scripts/validate_review_decision_record_v1.js
+  - scripts/validate_review_draft_registry_v1.js
+  - scripts/run_runtime_to_review_v1_fixture_smoke_flow.js
+  - scripts/validate_runtime_to_review_v1_fixture_smoke_flow.js
+  - scripts/validate_runtime_review_bridge_v1_readonly.js
+  - scripts/validate_runtime_kernel_v1_real_provider_guarded.js
+  - tests/fixtures/runtime_kernel_v1_no_provider_fixture_task.fixture.json
+  - tests/fixtures/runtime_kernel_v1_real_guarded_task.fixture.json
+validation_completed:
+  - node --check kernel/runtime_kernel_v1_real_provider_guarded.js
+  - node --check scripts/validate_runtime_kernel_v1_real_provider_guarded.js
+  - node --check scripts/validate_exact_a5_provider_retry_007_activation_receipt.js
+  - node scripts/validate_runtime_kernel_v1_real_provider_guarded.js
+  - node --check adapters/runtime/review_bridge_runtime_v1_readonly.js
+  - node --check scripts/validate_runtime_review_bridge_v1_readonly.js
+  - node scripts/validate_runtime_review_bridge_v1_readonly.js
+  - node --check adapters/runtime/review_decision_record_v1.js
+  - node --check scripts/validate_review_decision_record_v1.js
+  - node scripts/validate_review_decision_record_v1.js
+  - node --check adapters/runtime/review_draft_registry_v1.js
+  - node --check scripts/validate_review_draft_registry_v1.js
+  - node scripts/validate_review_draft_registry_v1.js
+  - node --check scripts/run_runtime_to_review_v1_fixture_smoke_flow.js
+  - node --check scripts/validate_runtime_to_review_v1_fixture_smoke_flow.js
+  - node scripts/validate_runtime_to_review_v1_fixture_smoke_flow.js
+  - npm run validate:runtime-to-review-fixture-smoke
+  - npm run validate:review-bridge-readonly
+  - npm run validate:review-decision-record
+  - npm run validate:review-draft-registry
+  - node scripts/validate_exact_a5_provider_retry_007_activation_receipt.js
+  - node --check scripts/lib/governance_tooling_maintenance_slice.js
+  - node scripts/lib/governance_tooling_maintenance_slice.js
+  - npm run validate:runtime-kernel
+  - npm run validate:mvp
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+secret_value_read_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+push_status: not_performed
+recommended_next_phase: guarded_live_probe_gate_explicit_budgeted
+```
+
 ## Checkpoint - Post-Push Sync After Retry 007 Human Visual Review
 
 ```text

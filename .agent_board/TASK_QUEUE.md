@@ -1,5 +1,22 @@
 ---
 
+- [x] ID: runtime_to_review_minimal_real_loop_v1_phase_6_fixture_smoke_flow_20260529
+      Lane: Green local runtime implementation.
+      Status: completed_validated_pending_stage_closeout.
+      Goal: Start the runtime-to-review product mainline after retry_007 closure without continuing retry_008.
+      Active current phase reference: v0_3_3_first_live_generation_pilot.
+      Active source phase reference: v0_3_2_live_candidate_action_packet.
+      Active next Red decision reference: inspect_failed_provider_tool_attempt_or_authorize_new_trial.
+      Completed: added `runtime_kernel_v1_real_provider_guarded` beside the v0 stub; added fixture and real-guarded input fixtures; added validator and MVP/runtime validation wiring; added `review_bridge_runtime_v1_readonly` for metadata-only readonly real sessions; added `review_decision_record_v1` plus a retry_007 `provider_link_success_evidence_only` regression record; added `review_draft_registry_v1` for accepted/rejected/rework draft metadata; added `run_runtime_to_review_v1_fixture_smoke_flow.js` plus validator to run prompt fixture -> runtime v1 -> artifact/audit/bridge -> readonly session -> request-rework decision -> rework draft metadata; repaired retry_007 validator so default local validation does not require gitignored private audit files on a fresh clone.
+      Slice validation: registered `runtime_to_review_v1_guarded_runtime_skeleton_slice` in `scripts/lib/governance_tooling_maintenance_slice.js` so legacy exact-file readiness validators recognize this product-mainline stage.
+      Runtime v1 behavior: fixture mode returns `completed_fixture_artifact`; real-guarded mode without a delegate returns `failed_closed`; fake delegate validation returns `completed_provider_image_created` without real provider calls; model mismatch and invalid input fail closed.
+      Review bridge v1 behavior: runtime v1 bridge metadata opens as `runtime_v1_readonly_review_session.v1`; missing fields, failed runtime result, secret/production/memory side effects, image binary reads, and artifact hash drift are rejected.
+      Decision record behavior: runtime v1 readonly sessions can produce metadata-only `review_decision_record.v1`; retry_007 maps only to `provider_link_success_evidence_only`; invalid enum, missing note/ref, production true, and memory write true are rejected.
+      Draft registry behavior: `accept_sample_draft` creates accepted draft metadata; `reject_sample_draft` / `invalid_artifact` create rejected draft metadata; `request_rework` creates rework draft metadata; retry_007 creates `no_registry_draft`; all keep `production_candidate: false`.
+      Fixture smoke behavior: no-provider fixture smoke flow returns `completed_fixture_runtime_to_review_smoke`, uses zero provider/plugin/API calls, performs no writes, and catches provider failure, model mismatch, invalid MIME metadata, invalid review decision, forbidden production flag, and forbidden memory write.
+      Boundary fields: provider_contact_performed: false; plugin_call_performed: false; api_call_performed: false; image_generation_performed: false; secret_value_read_performed: false; DailyNote_write_performed: false; VCP_memory_write_performed: false; accepted_samples_write_performed: false; production_candidate_write_performed: false; push_status: not_performed.
+      Recommended next: `guarded_live_probe_gate_explicit_budgeted`.
+
 - [x] ID: post_push_sync_after_retry_007_human_visual_review_20260529
       Lane: Green local post-push state-surface sync.
       Status: completed_validated_post_push_sync.

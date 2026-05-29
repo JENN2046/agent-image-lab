@@ -7932,6 +7932,8 @@ if (-not $node) {
       'plugins/',
       'prompts/',
       'review_console/embed_contract/',
+      'review_console/draft_registry/',
+      'review_console/review_decisions/',
       'review_console/live_receipt_bridge/',
       'review_console/runtime_prototype/',
       'review_console/static_prototype/',
@@ -7939,6 +7941,7 @@ if (-not $node) {
       'schemas/',
       'scripts/',
       'stability_tests/',
+      'tests/fixtures/',
       'tests/schema_examples/'
     )
     $allowedCurrentA4ChangeFiles = @(

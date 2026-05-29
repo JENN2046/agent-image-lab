@@ -1,0 +1,12 @@
+{
+  "task_id": "runtime-v1-real-guarded-task-001",
+  "run_id": "runtime_v1_real_guarded_smoke_001",
+  "prompt_package_ref": "prompts/image_generation/neutral_smoke_test_red_apple_v1.yaml",
+  "provider_route": "native_doubao_guarded",
+  "provider_mode": "real_guarded",
+  "model_required": "doubao-seedream-5-0-260128",
+  "max_images": 1,
+  "output_scope": "run_directory_only",
+  "review_required": true,
+  "secret_value_read_allowed": false
+}

@@ -1,0 +1,19 @@
+{
+  "task_id": "runtime-v1-fixture-task-001",
+  "run_id": "runtime_v1_fixture_smoke_001",
+  "prompt_package_ref": "prompts/image_generation/neutral_smoke_test_red_apple_v1.yaml",
+  "provider_route": "no_provider_fixture",
+  "provider_mode": "no_provider_fixture",
+  "model_required": "doubao-seedream-5-0-260128",
+  "max_images": 1,
+  "output_scope": "run_directory_only",
+  "review_required": true,
+  "secret_value_read_allowed": false,
+  "fixture_artifact": {
+    "path": "tests/fixtures/runtime_v1_fixture_artifact.metadata.json",
+    "bytes": 0,
+    "sha256": "fixture-runtime-v1-metadata-only-sha256",
+    "mime_type": "application/json",
+    "dimensions": "metadata_only"
+  }
+}

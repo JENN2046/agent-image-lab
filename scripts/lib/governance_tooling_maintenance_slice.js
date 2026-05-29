@@ -2560,6 +2560,36 @@ const EXPECTED_P2_2_RETRY_007_PREFLIGHT_DECISION_SLICE = [
   "scripts/validate_mvp_core.js"
 ].sort();
 
+const EXPECTED_RUNTIME_TO_REVIEW_V1_GUARDED_RUNTIME_SKELETON_SLICE = [
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  "README.md",
+  "adapters/runtime/review_decision_record_v1.js",
+  "adapters/runtime/review_draft_registry_v1.js",
+  "adapters/runtime/review_bridge_runtime_v1_readonly.js",
+  "docs/RUNTIME_TO_PRODUCTION_LANDING_ROADMAP.md",
+  "kernel/runtime_kernel_v1_real_provider_guarded.js",
+  "package.json",
+  "review_console/review_decisions/v0_6_73_real_vcp_agent_generation_retry_007/decision_record.json",
+  "schemas/review_draft_registry_record.schema.yaml",
+  "schemas/review_decision_record.schema.yaml",
+  "scripts/lib/governance_tooling_maintenance_slice.js",
+  "scripts/validate_exact_a5_provider_retry_007_activation_receipt.js",
+  "scripts/validate_local_commit_scope.js",
+  "scripts/validate_mvp.ps1",
+  "scripts/validate_mvp_core.js",
+  "scripts/validate_review_decision_record_v1.js",
+  "scripts/validate_review_draft_registry_v1.js",
+  "scripts/run_runtime_to_review_v1_fixture_smoke_flow.js",
+  "scripts/validate_runtime_to_review_v1_fixture_smoke_flow.js",
+  "scripts/validate_runtime_review_bridge_v1_readonly.js",
+  "scripts/validate_runtime_kernel_v1_real_provider_guarded.js",
+  "tests/fixtures/runtime_kernel_v1_no_provider_fixture_task.fixture.json",
+  "tests/fixtures/runtime_kernel_v1_real_guarded_task.fixture.json"
+].sort();
+
 const EXPECTED_RETRY_007_VCPTOOLBOX_PATCH_PREVIEW_GATE_SLICE = [
   ".agent_board/BLOCKERS.md",
   ".agent_board/CHECKPOINT.md",
@@ -2637,7 +2667,19 @@ const EXPECTED_P2_2_RETRY_007_PREFLIGHT_DECISION_PACKAGE_SCRIPTS = {
   "validate:retry-007-preflight-decision": "node scripts/validate_exact_a5_provider_retry_007_preflight_decision.js"
 };
 
+const EXPECTED_RUNTIME_TO_REVIEW_V1_PACKAGE_SCRIPTS = {
+  "validate:review-decision-record": "node scripts/validate_review_decision_record_v1.js",
+  "validate:review-draft-registry": "node scripts/validate_review_draft_registry_v1.js",
+  "validate:review-bridge-readonly": "node scripts/validate_runtime_review_bridge_readonly_stub.js && node scripts/validate_runtime_review_bridge_v1_readonly.js",
+  "validate:runtime-to-review-fixture-smoke": "node scripts/validate_runtime_to_review_v1_fixture_smoke_flow.js",
+  "validate:runtime-kernel": "node scripts/validate_runtime_kernel_v0.js && npm run validate:runtime-kernel-audit && node scripts/validate_runtime_kernel_v1_real_provider_guarded.js"
+};
+
 const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
+  {
+    id: "runtime_to_review_v1_guarded_runtime_skeleton_slice",
+    files: EXPECTED_RUNTIME_TO_REVIEW_V1_GUARDED_RUNTIME_SKELETON_SLICE
+  },
   {
     id: "governance_recoverability_count_sync_slice",
     files: EXPECTED_P2_3_GOVERNANCE_RECOVERABILITY_COUNT_SYNC_SLICE
@@ -3538,6 +3580,39 @@ function packageChangeIsRetry007PreflightDecisionOnly(currentPackageJson, baseli
   };
 }
 
+function packageChangeIsRuntimeToReviewV1Only(currentPackageJson, baselinePackageJson, changedFiles) {
+  if (!changedFiles.includes("package.json")) {
+    return { allowed: true, mode: "package_json_unchanged" };
+  }
+
+  const current = cloneJson(currentPackageJson);
+  const baseline = cloneJson(baselinePackageJson);
+  const currentScripts = current.scripts || {};
+  const baselineScripts = baseline.scripts || {};
+  const expectedScripts = EXPECTED_RUNTIME_TO_REVIEW_V1_PACKAGE_SCRIPTS;
+
+  for (const [name, value] of Object.entries(expectedScripts)) {
+    if (currentScripts[name] !== value) {
+      return { allowed: false, mode: `runtime_to_review_v1_script_${name}_unexpected` };
+    }
+  }
+
+  for (const name of Object.keys(expectedScripts)) {
+    if (baselineScripts[name] !== undefined) {
+      baselineScripts[name] = currentScripts[name];
+    } else {
+      delete currentScripts[name];
+    }
+  }
+
+  return {
+    allowed: sameJson(current, baseline),
+    mode: sameJson(current, baseline)
+      ? "runtime_to_review_v1_validation_scripts_only"
+      : "runtime_to_review_v1_package_has_other_changes"
+  };
+}
+
 function buildGovernanceToolingMaintenanceSliceReport({ changedFiles, stagedFiles, behind, currentPackageJson, baselinePackageJson }) {
   const sortedChangedFiles = [...changedFiles].sort();
   const normalizedChangedFiles = normalizeChangedFilesForSliceMatching(sortedChangedFiles);
@@ -3545,7 +3620,9 @@ function buildGovernanceToolingMaintenanceSliceReport({ changedFiles, stagedFile
   const matchingSlice = findMatchingGovernanceToolingSlice(sortedChangedFiles);
   const closestSlice = matchingSlice || closestGovernanceToolingSlice(normalizedChangedFiles);
   const exactSliceMatches = matchingSlice !== null;
-  const packageReport = matchingSlice?.id === "retry_007_preflight_decision_slice"
+  const packageReport = matchingSlice?.id === "runtime_to_review_v1_guarded_runtime_skeleton_slice"
+    ? packageChangeIsRuntimeToReviewV1Only(currentPackageJson, baselinePackageJson, sortedChangedFiles)
+    : matchingSlice?.id === "retry_007_preflight_decision_slice"
     ? packageChangeIsRetry007PreflightDecisionOnly(currentPackageJson, baselinePackageJson, sortedChangedFiles)
     : matchingSlice?.id === "provider_evidence_integrity_phase_2_slice"
       ? packageChangeIsProviderEvidenceIntegrityPhase2Only(currentPackageJson, baselinePackageJson, sortedChangedFiles)
@@ -3605,6 +3682,15 @@ function governanceToolingMaintenanceSliceSelfCheck() {
   evidenceGovernanceArbitraryScriptPackage.scripts["other:new-script"] = "node scripts/other.js";
   const evidenceGovernanceUnexpectedScriptPackage = cloneJson(evidenceGovernancePackage);
   evidenceGovernanceUnexpectedScriptPackage.scripts["validate:core"] = "echo unexpected";
+  const runtimeToReviewPackage = cloneJson(baselinePackage);
+  Object.assign(
+    runtimeToReviewPackage.scripts,
+    EXPECTED_RUNTIME_TO_REVIEW_V1_PACKAGE_SCRIPTS
+  );
+  const runtimeToReviewDependencyChangedPackage = cloneJson(runtimeToReviewPackage);
+  runtimeToReviewDependencyChangedPackage.dependencies.extra = "2.0.0";
+  const runtimeToReviewArbitraryScriptPackage = cloneJson(runtimeToReviewPackage);
+  runtimeToReviewArbitraryScriptPackage.scripts["other:new-script"] = "node scripts/other.js";
 
   const checks = [
     {
@@ -3614,6 +3700,19 @@ function governanceToolingMaintenanceSliceSelfCheck() {
     {
       check: "allowlist_rejects_env",
       passed: !fileAllowedInGovernanceToolingSlice(".env")
+    },
+    {
+      check: "exact_slice_matches_runtime_to_review_v1_guarded_runtime_skeleton",
+      passed: findMatchingGovernanceToolingSlice(
+        EXPECTED_RUNTIME_TO_REVIEW_V1_GUARDED_RUNTIME_SKELETON_SLICE
+      )?.id === "runtime_to_review_v1_guarded_runtime_skeleton_slice"
+    },
+    {
+      check: "runtime_to_review_v1_guarded_runtime_skeleton_rejects_runs_write",
+      passed: findMatchingGovernanceToolingSlice([
+        ...EXPECTED_RUNTIME_TO_REVIEW_V1_GUARDED_RUNTIME_SKELETON_SLICE,
+        "runs/real_generation/runtime_v1_probe/image.png"
+      ]) === null
     },
     {
       check: "exact_slice_matches_retry_007_preflight_decision",
@@ -4588,6 +4687,30 @@ function governanceToolingMaintenanceSliceSelfCheck() {
         baselinePackage,
         ["package.json"]
       ).allowed
+    },
+    {
+      check: "runtime_to_review_v1_package_allows_expected_validation_script_only",
+      passed: packageChangeIsRuntimeToReviewV1Only(
+        runtimeToReviewPackage,
+        baselinePackage,
+        ["package.json"]
+      ).allowed
+    },
+    {
+      check: "runtime_to_review_v1_package_rejects_dependency_change",
+      passed: !packageChangeIsRuntimeToReviewV1Only(
+        runtimeToReviewDependencyChangedPackage,
+        baselinePackage,
+        ["package.json"]
+      ).allowed
+    },
+    {
+      check: "runtime_to_review_v1_package_rejects_arbitrary_script_change",
+      passed: !packageChangeIsRuntimeToReviewV1Only(
+        runtimeToReviewArbitraryScriptPackage,
+        baselinePackage,
+        ["package.json"]
+      ).allowed
     }
   ];
 
@@ -4726,9 +4849,11 @@ module.exports = {
   EXPECTED_V0_6_73AG_TO_AH_REMOTE_SYNC_AND_CURRENT_HEAD_GO_NO_GO_SLICE,
   EXPECTED_V0_6_73AG_TO_AI_REMOTE_SYNC_CURRENT_HEAD_AND_ONE_SHOT_BLOCKED_SLICE,
   EXPECTED_P2_2_RETRY_007_PREFLIGHT_DECISION_SLICE,
+  EXPECTED_RUNTIME_TO_REVIEW_V1_GUARDED_RUNTIME_SKELETON_SLICE,
   EXPECTED_RETRY_007_VCPTOOLBOX_PATCH_PREVIEW_GATE_SLICE,
   EXPECTED_RETRY_007_VCPTOOLBOX_EXECUTION_SURFACE_RECHECK_SLICE,
   EXPECTED_P2_2_RETRY_007_PREFLIGHT_DECISION_PACKAGE_SCRIPTS,
+  EXPECTED_RUNTIME_TO_REVIEW_V1_PACKAGE_SCRIPTS,
   EXPECTED_P2_1_PROVIDER_EVIDENCE_INTEGRITY_PHASE_2_SLICE,
   EXPECTED_PROVIDER_EVIDENCE_INTEGRITY_SCOPE_NARROWING_FIX_SLICE,
   EXPECTED_P2_1_PROVIDER_EVIDENCE_INTEGRITY_PACKAGE_SCRIPTS,
@@ -4741,5 +4866,6 @@ module.exports = {
   fileAllowedInGovernanceToolingSlice,
   governanceToolingMaintenanceSliceSelfCheck,
   packageChangeIsPreviewScriptOnly,
-  packageChangeIsEvidenceGovernanceSanitizationOnly
+  packageChangeIsEvidenceGovernanceSanitizationOnly,
+  packageChangeIsRuntimeToReviewV1Only
 };

@@ -1,0 +1,30 @@
+schema: review_decision_record.v1
+required:
+  decision_id: string
+  artifact_record_ref: string
+  audit_receipt_ref: string
+  artifact_sha256: string | null
+  artifact_dimensions: string | null
+  reviewer_note: string
+  decision:
+    enum:
+      - accept_sample_draft
+      - reject_sample_draft
+      - request_rework
+      - provider_link_success_evidence_only
+      - invalid_artifact
+  production_candidate: false
+  memory_write_performed: false
+  created_at: string
+invariants:
+  metadata_only: true
+  image_binary_copied: false
+  image_binary_read_performed: false
+  source_image_moved_or_copied: false
+  accepted_samples_write_performed: false
+  production_candidate_write_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  formal_registry_write_performed: false
+  output_directory: review_console/review_decisions
+  no_provider_plugin_api_or_image_action: true

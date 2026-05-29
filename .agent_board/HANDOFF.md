@@ -1,5 +1,72 @@
 ---
 
+## Current Handoff Update - Runtime To Review Minimal Real Loop V1 Phase 6 Fixture Smoke Flow
+
+```text
+phase: runtime_to_review_minimal_real_loop_v1_phase_6_fixture_smoke_flow_20260529
+status: COMPLETED_VALIDATED_PENDING_STAGE_CLOSEOUT
+mode: Green local runtime implementation
+branch: master
+active_current_phase_reference: v0_3_3_first_live_generation_pilot
+active_source_phase_reference: v0_3_2_live_candidate_action_packet
+active_next_red_decision_reference: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+summary: The product mainline has moved off retry_007 continuation and into runtime-to-review v1. retry_007 remains provider link success evidence only. A guarded runtime v1 skeleton now produces canonical artifact/audit/review metadata in fixture mode, fails closed without a real provider delegate, and validates provider-success shape with a fake delegate only. A readonly runtime v1 review adapter now turns bridge metadata into `runtime_v1_readonly_review_session.v1` without image binary reads or writes. A metadata-only decision helper now records fixed-enum human decisions and keeps retry_007 mapped to `provider_link_success_evidence_only`. A draft registry helper now generates accepted/rejected/rework metadata drafts while keeping retry_007 at `no_registry_draft`. The no-provider fixture smoke flow now runs prompt fixture -> runtime v1 -> artifact/audit/bridge -> readonly session -> request-rework decision -> rework draft metadata with zero external calls and no writes.
+changed_by_this_task:
+  - README.md
+  - adapters/runtime/review_decision_record_v1.js
+  - adapters/runtime/review_draft_registry_v1.js
+  - adapters/runtime/review_bridge_runtime_v1_readonly.js
+  - docs/RUNTIME_TO_PRODUCTION_LANDING_ROADMAP.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - kernel/runtime_kernel_v1_real_provider_guarded.js
+  - package.json
+  - review_console/review_decisions/v0_6_73_real_vcp_agent_generation_retry_007/decision_record.json
+  - schemas/review_draft_registry_record.schema.yaml
+  - schemas/review_decision_record.schema.yaml
+  - scripts/lib/governance_tooling_maintenance_slice.js
+  - scripts/validate_exact_a5_provider_retry_007_activation_receipt.js
+  - scripts/validate_local_commit_scope.js
+  - scripts/validate_mvp.ps1
+  - scripts/validate_mvp_core.js
+  - scripts/validate_review_decision_record_v1.js
+  - scripts/validate_review_draft_registry_v1.js
+  - scripts/run_runtime_to_review_v1_fixture_smoke_flow.js
+  - scripts/validate_runtime_to_review_v1_fixture_smoke_flow.js
+  - scripts/validate_runtime_review_bridge_v1_readonly.js
+  - scripts/validate_runtime_kernel_v1_real_provider_guarded.js
+  - tests/fixtures/runtime_kernel_v1_no_provider_fixture_task.fixture.json
+  - tests/fixtures/runtime_kernel_v1_real_guarded_task.fixture.json
+validation:
+  - node scripts/validate_runtime_kernel_v1_real_provider_guarded.js: passed
+  - node scripts/validate_runtime_review_bridge_v1_readonly.js: passed
+  - node scripts/validate_review_decision_record_v1.js: passed
+  - node scripts/validate_review_draft_registry_v1.js: passed
+  - node scripts/validate_runtime_to_review_v1_fixture_smoke_flow.js: passed
+  - npm run validate:review-bridge-readonly: passed
+  - npm run validate:review-decision-record: passed
+  - npm run validate:review-draft-registry: passed
+  - npm run validate:runtime-to-review-fixture-smoke: passed
+  - node scripts/validate_exact_a5_provider_retry_007_activation_receipt.js: passed
+  - node scripts/lib/governance_tooling_maintenance_slice.js: passed
+  - npm run validate:runtime-kernel: passed
+  - npm run validate:mvp: passed
+boundaries:
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  secret_value_read_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  accepted_samples_write_performed: false
+  production_candidate_write_performed: false
+  push_status: not_performed
+next_safe_task: guarded_live_probe_gate_explicit_budgeted
+```
+
 ## Current Handoff Update - Post-Push Sync After Retry 007 Human Visual Review
 
 ```text
