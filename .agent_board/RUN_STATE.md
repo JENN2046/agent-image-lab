@@ -1,5 +1,41 @@
 ---
 
+## Current Run State - Runtime To Review V1 Next Live Readiness Gate
+
+```text
+phase: runtime_to_review_v1_next_live_readiness_gate_20260529
+status: COMPLETED_VALIDATED_PENDING_STAGE_CLOSEOUT
+mode: Green local readiness gate; no provider/plugin/API/image call
+branch: master
+goal: Convert the failed real-bound owner runtime live probe into a hard no-live readiness gate before any future provider attempt.
+real_owner_runtime_module: adapters/runtime/native_doubao_runtime_v1_real_bound_owner_runtime.js
+readiness_gate: scripts/validate_runtime_to_review_v1_next_live_readiness_gate.js
+previous_receipt_ref: reports/runtime_to_review_v1/guarded_live_probe_real_bound_owner_runtime_20260529_failed_closed.json
+boundary_fix: real owner runtime no longer copies full process.env into child runtime; provider secret env is not passed by default.
+next_live_probe_authorized_now: false
+second_live_probe_performed: false
+current_blocker: owner_runtime_secretless_source_not_bound_for_next_live_probe
+required_before_next_live_probe:
+- running VCPToolBox secretless delegate with runtime v1 output scope, or owner-provided secret handle that keeps Agent Image Lab from reading secret values
+- new exact budgeted probe authorization
+validation_completed:
+- npm run validate:runtime-to-review-real-bound-owner-runtime: passed
+- npm run validate:runtime-to-review-next-live-readiness: passed
+- npm run validate:mvp: passed
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+secret_value_read_performed: false
+env_file_content_read_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+push_status: not_performed
+next_safe_task: design or bind running VCPToolBox secretless delegate with runtime v1 output scope; do not run another live probe until the readiness gate reports source ready and owner gives a new exact budgeted probe phrase.
+```
+
 ## Current Run State - Runtime To Review V1 Real Bound Owner Runtime Live Probe
 
 ```text

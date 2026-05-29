@@ -1,5 +1,41 @@
 ---
 
+## Checkpoint - Runtime To Review V1 Next Live Readiness Gate
+
+```text
+phase: runtime_to_review_v1_next_live_readiness_gate_20260529
+status: completed_validated_pending_stage_closeout
+result: COMPLETED_VALIDATED
+mode: Green local readiness gate
+summary: Converted the failed real-bound owner runtime live probe into a hard no-live readiness gate. The real-bound owner runtime now builds a minimal safe child environment instead of copying full `process.env`, and the validator proves provider secret env values are not passed to child runtime. The new readiness gate verifies the previous one-attempt failed-closed receipt, blocks a second live probe, and names the required unblock condition: a running VCPToolBox secretless delegate with runtime v1 output scope or an owner-provided secret handle that keeps Agent Image Lab from reading secret values, plus a new exact budgeted probe phrase.
+changed_files_current_task:
+  - adapters/runtime/native_doubao_runtime_v1_real_bound_owner_runtime.js
+  - scripts/validate_runtime_to_review_v1_real_bound_owner_runtime_module.js
+  - scripts/validate_runtime_to_review_v1_next_live_readiness_gate.js
+  - scripts/validate_mvp_core.js
+  - package.json
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+validation_completed:
+  - npm run validate:runtime-to-review-real-bound-owner-runtime
+  - npm run validate:runtime-to-review-next-live-readiness
+  - npm run validate:mvp
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+secret_value_read_performed: false
+env_file_content_read_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+push_status: not_performed
+recommended_next_phase: running_vcptoolbox_secretless_delegate_runtime_v1_output_scope_design_or_binding
+```
+
 ## Checkpoint - Runtime To Review V1 Real Bound Owner Runtime Live Probe
 
 ```text

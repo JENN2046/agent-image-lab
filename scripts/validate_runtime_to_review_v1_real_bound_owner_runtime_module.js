@@ -2,6 +2,7 @@
 "use strict";
 
 const childProcess = require("node:child_process");
+const fs = require("node:fs");
 const path = require("node:path");
 
 const root = path.resolve(__dirname, "..");
@@ -42,6 +43,9 @@ async function main() {
   assert(ownerRuntimeModule.allowedOutputDirectory === "runs/real_generation/runtime_to_review_v1_guarded_live_probe/", "allowed output directory mismatch");
   assert(ownerRuntimeModule.allowedPromptPackageRef === "prompts/image_generation/neutral_smoke_test_red_apple_v1.yaml", "allowed prompt package mismatch");
   assert(ownerRuntimeModule.requiredModel === "doubao-seedream-5-0-260128", "required model mismatch");
+  assert(typeof ownerRuntimeModule.buildSafeChildEnv === "function", "safe child env builder missing");
+  const ownerRuntimeSource = fs.readFileSync(repoPath(ownerRuntimePath), "utf8");
+  assert(!ownerRuntimeSource.includes("...process.env"), "real owner runtime must not copy full process.env into child runtime");
 
   const readiness = ownerRuntimeModule.inspectRealBoundOwnerRuntimeReadiness();
   assert(readiness.plugin_entry_present === true, "VCPToolBox DoubaoGen plugin entry must be present");
@@ -70,6 +74,14 @@ async function main() {
   assert(typeof runtime === "function", "real owner runtime bridge must be callable");
   assert(runtime.secretless_provider_runtime_delegate_bound === true, "real owner runtime bridge must be bound");
   assert(runtime.secretless_provider_runtime_bridge_id, "real owner runtime bridge id missing");
+  const safeEnv = ownerRuntimeModule.buildSafeChildEnv({
+    PATH: "path-ok",
+    VOLCENGINE_API_KEY: "must-not-pass",
+    SECRET_TOKEN: "must-not-pass",
+  });
+  assert(safeEnv.PATH === "path-ok", "safe env should preserve PATH");
+  assert(!Object.prototype.hasOwnProperty.call(safeEnv, "VOLCENGINE_API_KEY"), "safe env must not pass provider API key");
+  assert(!Object.prototype.hasOwnProperty.call(safeEnv, "SECRET_TOKEN"), "safe env must not pass arbitrary secret token");
 
   process.stdout.write(`${JSON.stringify({
     passed: true,
@@ -83,6 +95,8 @@ async function main() {
     exact_owner_runtime_preflight_passed: true,
     wrong_phrase_blocked: true,
     readiness_checked_without_secret_read: true,
+    safe_child_env_does_not_copy_process_env: true,
+    provider_secret_env_not_passed_to_child: true,
     vcp_toolbox_plugin_entry_present: readiness.plugin_entry_present,
     real_provider_call_performed: false,
     provider_contact_performed: false,

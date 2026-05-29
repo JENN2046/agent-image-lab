@@ -1,5 +1,14 @@
 ---
 
+- [x] ID: runtime_to_review_v1_next_live_readiness_gate_20260529
+      Lane: Green local readiness gate; no provider/plugin/API/image call.
+      Status: completed_validated_pending_stage_closeout.
+      Goal: Convert the failed real-bound owner runtime live probe into a hard no-live readiness gate before any future provider attempt.
+      Completed: tightened `adapters/runtime/native_doubao_runtime_v1_real_bound_owner_runtime.js` so it no longer copies full `process.env` into the child runtime; extended `scripts/validate_runtime_to_review_v1_real_bound_owner_runtime_module.js`; added `scripts/validate_runtime_to_review_v1_next_live_readiness_gate.js`; wired the gate into `package.json` and MVP core.
+      Result: a second live probe is explicitly not authorized now; the next live attempt requires an owner-runtime secretless source plus a new exact budgeted probe phrase.
+      Boundary fields: provider_contact_performed: false; plugin_call_performed: false; api_call_performed: false; image_generation_performed: false; secret_value_read_performed: false; env_file_content_read_performed: false; DailyNote_write_performed: false; VCP_memory_write_performed: false; accepted_samples_write_performed: false; production_candidate_write_performed: false; push_status: not_performed.
+      Recommended next: `running_vcptoolbox_secretless_delegate_runtime_v1_output_scope_design_or_binding`.
+
 - [x] ID: runtime_to_review_v1_real_bound_owner_runtime_live_probe_20260529
       Lane: Amber_B one budgeted guarded live probe plus Green local evidence sync.
       Status: completed_failed_closed_validated.

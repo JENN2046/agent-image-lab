@@ -17,6 +17,14 @@ const pluginRelativePath = path.join("Plugin", "DoubaoGen", "DoubaoGen.js");
 const allowedOutputDirectory = "runs/real_generation/runtime_to_review_v1_guarded_live_probe/";
 const allowedPromptPackageRef = "prompts/image_generation/neutral_smoke_test_red_apple_v1.yaml";
 const requiredModel = "doubao-seedream-5-0-260128";
+const safeChildEnvKeys = Object.freeze([
+  "PATH",
+  "Path",
+  "SystemRoot",
+  "WINDIR",
+  "TEMP",
+  "TMP",
+]);
 
 function clone(value) {
   return JSON.parse(JSON.stringify(value));
@@ -136,6 +144,16 @@ function parsePluginStdout(stdout) {
   }
 }
 
+function buildSafeChildEnv(baseEnv = process.env) {
+  const env = {};
+  for (const key of safeChildEnvKeys) {
+    if (typeof baseEnv[key] === "string" && baseEnv[key]) {
+      env[key] = baseEnv[key];
+    }
+  }
+  return env;
+}
+
 function runDoubaoPlugin({ vcpToolBoxRoot, prompt, model, outputDirectory }) {
   const pluginEntry = path.join(vcpToolBoxRoot, pluginRelativePath);
   if (!fs.existsSync(pluginEntry)) {
@@ -159,13 +177,11 @@ function runDoubaoPlugin({ vcpToolBoxRoot, prompt, model, outputDirectory }) {
     watermark: false,
   };
 
-  const childEnv = {
-    ...process.env,
-    PROJECT_BASE_PATH: output.resolved,
-    DEFAULT_RESPONSE_FORMAT: "b64_json",
-    SEEDREAM_MODEL_ID: model,
-    DebugMode: "false",
-  };
+  const childEnv = buildSafeChildEnv();
+  childEnv.PROJECT_BASE_PATH = output.resolved;
+  childEnv.DEFAULT_RESPONSE_FORMAT = "b64_json";
+  childEnv.SEEDREAM_MODEL_ID = model;
+  childEnv.DebugMode = "false";
 
   return new Promise((resolve) => {
     const child = childProcess.execFile(
@@ -359,5 +375,6 @@ module.exports.inspectRealBoundOwnerRuntimeReadiness = inspectRealBoundOwnerRunt
 module.exports.allowedOutputDirectory = allowedOutputDirectory;
 module.exports.allowedPromptPackageRef = allowedPromptPackageRef;
 module.exports.requiredModel = requiredModel;
+module.exports.buildSafeChildEnv = buildSafeChildEnv;
 module.exports.env_file_content_read_performed = false;
 module.exports.secret_value_read_performed = false;

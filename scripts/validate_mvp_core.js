@@ -332,8 +332,37 @@ safeCheck("runtime_to_review_v1_real_bound_owner_runtime_module", () => {
     result.exact_owner_runtime_preflight_passed === true &&
     result.wrong_phrase_blocked === true &&
     result.readiness_checked_without_secret_read === true &&
+    result.safe_child_env_does_not_copy_process_env === true &&
+    result.provider_secret_env_not_passed_to_child === true &&
     result.vcp_toolbox_plugin_entry_present === true &&
     result.real_provider_call_performed === false &&
+    result.provider_contact_performed === false &&
+    result.plugin_call_performed === false &&
+    result.api_call_performed === false &&
+    result.image_generation_performed === false &&
+    result.secret_value_read_performed === false &&
+    result.env_file_content_read_performed === false &&
+    result.DailyNote_write_performed === false &&
+    result.VCP_memory_write_performed === false &&
+    result.accepted_samples_write_performed === false &&
+    result.production_candidate_write_performed === false;
+});
+
+safeCheck("runtime_to_review_v1_next_live_readiness_gate", () => {
+  const result = parseJson(runNode(["scripts/validate_runtime_to_review_v1_next_live_readiness_gate.js"]));
+  return result.passed === true &&
+    result.gate_id === "runtime_to_review_v1_next_live_readiness_gate" &&
+    result.mode === "next_live_readiness_gate_no_provider_call" &&
+    result.previous_live_probe_attempt_count === 1 &&
+    result.previous_live_probe_failed_closed_verified === true &&
+    result.second_live_probe_authorized_now === false &&
+    result.second_live_probe_performed_by_validator === false &&
+    result.exact_new_probe_authorization_required === true &&
+    result.owner_runtime_secretless_source_required === true &&
+    result.current_owner_runtime_source_ready === false &&
+    result.current_blocker === "owner_runtime_secretless_source_not_bound_for_next_live_probe" &&
+    result.real_bound_owner_runtime_safe_child_env_verified === true &&
+    result.provider_secret_env_not_passed_to_child === true &&
     result.provider_contact_performed === false &&
     result.plugin_call_performed === false &&
     result.api_call_performed === false &&

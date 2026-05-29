@@ -1,5 +1,42 @@
 ---
 
+## Current Handoff Update - Runtime To Review V1 Next Live Readiness Gate
+
+```text
+phase: runtime_to_review_v1_next_live_readiness_gate_20260529
+status: COMPLETED_VALIDATED_PENDING_STAGE_CLOSEOUT
+mode: Green local readiness gate; no provider/plugin/API/image call
+branch: master
+summary: Added a no-live readiness gate after the failed real-bound owner runtime probe. The real-bound owner runtime no longer copies full `process.env` into the child runtime, so Agent Image Lab does not pass provider secret env values by default. `validate_runtime_to_review_v1_next_live_readiness_gate.js` verifies the previous one-attempt failed-closed receipt, blocks a second live probe, and records the unblock condition for future live work.
+changed_by_this_task:
+  - adapters/runtime/native_doubao_runtime_v1_real_bound_owner_runtime.js
+  - scripts/validate_runtime_to_review_v1_real_bound_owner_runtime_module.js
+  - scripts/validate_runtime_to_review_v1_next_live_readiness_gate.js
+  - scripts/validate_mvp_core.js
+  - package.json
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+validation:
+  - npm run validate:runtime-to-review-real-bound-owner-runtime: passed
+  - npm run validate:runtime-to-review-next-live-readiness: passed
+  - npm run validate:mvp: passed
+boundaries:
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  secret_value_read_performed: false
+  env_file_content_read_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  accepted_samples_write_performed: false
+  production_candidate_write_performed: false
+  push_status: not_performed
+next_safe_task: design or bind a running VCPToolBox secretless delegate with runtime v1 output scope; do not run another live probe until a new exact budgeted probe phrase is provided.
+```
+
 ## Current Handoff Update - Runtime To Review V1 Real Bound Owner Runtime Live Probe
 
 ```text
