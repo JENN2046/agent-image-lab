@@ -8,6 +8,7 @@ const path = require("node:path");
 const root = path.resolve(__dirname, "..");
 const gateId = "runtime_to_review_v1_guarded_live_probe_gate";
 const runnerPath = "scripts/run_runtime_to_review_v1_guarded_live_probe.js";
+const delegatePath = "adapters/runtime/native_doubao_runtime_v1_provider_delegate.js";
 
 function assert(condition, message) {
   if (!condition) throw new Error(message);
@@ -35,17 +36,29 @@ function runNode(args, allowFailure = false) {
 
 function main() {
   assert(fs.existsSync(repoPath(runnerPath)), "guarded live probe runner missing");
+  assert(fs.existsSync(repoPath(delegatePath)), "native Doubao runtime v1 provider delegate module missing");
   runNode(["--check", runnerPath]);
   runNode(["--check", "scripts/validate_runtime_to_review_v1_guarded_live_probe_gate.js"]);
+  runNode(["--check", delegatePath]);
 
   const runner = require(repoPath(runnerPath));
   assert(runner.exactConfirmation === "RUNTIME_TO_REVIEW_V1_ONE_PROVIDER_ONE_IMAGE", "exact confirmation mismatch");
   assert(runner.validatePreflight({ max_images: 1 }).passed === false, "missing delegate and confirmation must fail preflight");
   assert(runner.validatePreflight({
     max_images: 2,
-    provider_delegate_module: "scripts/validate_runtime_to_review_v1_guarded_live_probe_gate.js",
+    provider_delegate_module: delegatePath,
     confirm_live_provider_probe: runner.exactConfirmation,
   }).passed === false, "max_images above one must fail preflight");
+  assert(runner.validatePreflight({
+    max_images: 1,
+    provider_delegate_module: delegatePath,
+    confirm_live_provider_probe: "WRONG_CONFIRMATION",
+  }).passed === false, "wrong exact confirmation phrase must fail preflight");
+  assert(runner.validatePreflight({
+    max_images: 1,
+    provider_delegate_module: delegatePath,
+    confirm_live_provider_probe: runner.exactConfirmation,
+  }).passed === true, "delegate module plus exact confirmation must pass preflight");
 
   const blockedOutput = JSON.parse(runNode([runnerPath], true));
   assert(blockedOutput.status === "blocked_live_probe_not_executed", "runner without exact args must block");
@@ -56,6 +69,16 @@ function main() {
   assert(preflightOnly.status === "preflight_only_no_live_probe_executed", "preflight-only status mismatch");
   assert(preflightOnly.real_provider_call_performed === false, "preflight-only must not call provider");
   assert(preflightOnly.image_generation_performed === false, "preflight-only must not generate image");
+  const exactPreflightOnly = JSON.parse(runNode([
+    runnerPath,
+    "--provider-delegate-module",
+    delegatePath,
+    "--confirm-live-provider-probe",
+    runner.exactConfirmation,
+    "--preflight-only",
+  ]));
+  assert(exactPreflightOnly.preflight_would_pass_with_current_args === true, "preflight-only exact delegate args should pass");
+  assert(exactPreflightOnly.real_provider_call_performed === false, "exact preflight-only must not call provider");
 
   const packageJson = JSON.parse(fs.readFileSync(repoPath("package.json"), "utf8"));
   const scripts = packageJson.scripts || {};
@@ -72,6 +95,9 @@ function main() {
     exact_confirmation_required: runner.exactConfirmation,
     default_local_excludes_live_probe: true,
     explicit_live_probe_runner_present: true,
+    provider_delegate_module_present: true,
+    exact_delegate_preflight_would_pass: true,
+    wrong_exact_confirmation_blocked: true,
     live_probe_executed_by_validator: false,
     real_provider_call_performed: false,
     provider_contact_performed: false,

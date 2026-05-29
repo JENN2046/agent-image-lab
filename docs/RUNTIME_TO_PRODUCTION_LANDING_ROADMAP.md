@@ -45,13 +45,15 @@ production last
 - `review_draft_registry_v1` 已接到 `review_decision_record.v1`：`accept_sample_draft` 生成 accepted draft，`reject_sample_draft` / `invalid_artifact` 生成 rejected draft，`request_rework` 生成 rework draft；所有 draft 都保持 `production_candidate: false`，retry 007 的 `provider_link_success_evidence_only` 只能生成 `no_registry_draft`。
 - `run_runtime_to_review_v1_fixture_smoke_flow.js` 已建立 no-provider fixture smoke flow：prompt fixture -> runtime v1 -> artifact record -> audit receipt -> review bridge entry -> readonly review session -> `request_rework` decision record -> rework draft registry metadata，全程不写文件、不读图像二进制、不触发 provider/plugin/API/image/memory/production。
 - Phase 7 validation split 已建立三层命令：`validate:runtime-to-review-default-local` 跑无 provider 默认本地链路；`validate:runtime-to-review-evidence` 校验已有 receipt/artifact/review evidence；`validate:runtime-to-review-guarded-live-probe-gate` 只校验 live probe 门禁不会默认执行。显式 live runner 为 `runtime-to-review:guarded-live-probe`，没有 provider delegate module 和精确确认短语时会 fail-closed。
+- `adapters/runtime/native_doubao_runtime_v1_provider_delegate.js` 已建立 NativeDoubao runtime v1 provider delegate module：它验证 `runtime_v1_provider_delegate_request.v1`，只映射到 secretless controlled bridge path，默认没有 bound owner runtime 时 fail-closed，不走 legacy `.env.local` secret-reading path。`validate:runtime-to-review-native-doubao-delegate` 用 fake runner 验证 provider-success shape 可被 runtime v1 接收，同时证明 validator 不执行 live probe。
+- 精确确认短语固定为 `RUNTIME_TO_REVIEW_V1_ONE_PROVIDER_ONE_IMAGE`。`validate:runtime-to-review-guarded-live-probe-gate` 现在验证 delegate module + 精确确认短语会通过 preflight-only，错误短语会阻断；这仍然不是 provider 执行。
 - Review Console 已有独立 runtime v1 readonly real-entry 静态入口：`review_console/static_prototype/runtime_v1_real_entry_viewer.html` 只加载 `runtime_v1_real_entry_session.js` 与 `runtime_v1_real_entry_viewer.js`，不依赖 `mock_data.js`；它显示 run id、prompt package ref、provider route/mode、model sent/required、dimensions/hash、artifact/audit refs、review status 与 guard fields，缺字段、image binary loaded、provider side effect 会被 validator 阻断。
 - Green fixture 可以走到 `completed_stub`，路径为 `queued -> gated -> executed_stub -> artifact_recorded -> artifact_adapter_stubbed -> review_pending -> completed_stub`。
 - Green fixture runtime result can be mapped to Review Console-readable `image_case_draft` and `review_session_draft` with no write actions.
-- Runtime v1 fixture result 可以走到 `completed_fixture_artifact`，real-guarded 缺少 delegate 时走到 `failed_closed`，validator 使用 fake delegate 只验证结构，不触发真实 provider/plugin/API/image action；Review bridge v1 validator 能把 fixture/fake-provider bridge entry 打开为 readonly real session；decision record 和 draft registry validators 能写入并清理本地 metadata-only probe；fixture smoke validator 能验证完整 no-provider runtime-to-review metadata chain，并捕获 provider failure、model mismatch、invalid MIME metadata、invalid review decision、forbidden production flag、forbidden memory write；Phase 7 gate validator 能证明默认本地验证不包含 live probe，evidence validation 只检查既有证据，live probe runner 缺少 delegate/精确确认时不执行。
+- Runtime v1 fixture result 可以走到 `completed_fixture_artifact`，real-guarded 缺少 delegate 或缺少 bound owner runtime 时走到 `failed_closed`，validator 使用 fake delegate/runner 只验证结构，不触发真实 provider/plugin/API/image action；Review bridge v1 validator 能把 fixture/fake-provider bridge entry 打开为 readonly real session；decision record 和 draft registry validators 能写入并清理本地 metadata-only probe；fixture smoke validator 能验证完整 no-provider runtime-to-review metadata chain，并捕获 provider failure、model mismatch、invalid MIME metadata、invalid review decision、forbidden production flag、forbidden memory write；Phase 7 gate validator 能证明默认本地验证不包含 live probe，evidence validation 只检查既有证据，live probe runner 缺少 delegate/精确确认时不执行，错误精确短语会阻断。
 - Red fixture 可以在 policy gate 进入 `blocked_red`，executor 不运行。
 - audit write and durable audit store 已进入受控本地 `.agent_private` 路线。
-- 这仍不是 production runtime；当前只证明了 runtime-to-review metadata envelope、fail-closed delegate boundary、readonly review session read path、metadata-only human decision record、draft registry metadata route、no-provider fixture smoke flow、三层 validation gate split 和独立 Review Console static real-entry viewer。
+- 这仍不是 production runtime；当前只证明了 runtime-to-review metadata envelope、fail-closed NativeDoubao delegate module、精确确认短语 preflight gate、readonly review session read path、metadata-only human decision record、draft registry metadata route、no-provider fixture smoke flow、三层 validation gate split 和独立 Review Console static real-entry viewer。
 
 ## Landing Stages
 
@@ -214,9 +216,9 @@ production last
 
 推荐顺序：
 
-1. Add fixture-first product mainline smoke flow: prompt fixture -> runtime v1 -> artifact/audit -> readonly review session -> decision record -> draft registry.
-2. Wire the static/runtime console to consume `runtime_v1_readonly_review_session.v1` separately from `mock_data.js`, still without image binary reads or writes.
-3. Bind an owner-authorized secretless provider runtime delegate for the NativeDoubao route only after the artifact / review / audit / decision / draft registry records remain stable under validation, without reading or printing secret values.
+1. Keep default local validation no-provider and repeatable.
+2. Bind an owner-authorized secretless provider runtime for `adapters/runtime/native_doubao_runtime_v1_provider_delegate.js`, without reading or printing secret values.
+3. Execute `runtime-to-review:guarded-live-probe` only with `RUNTIME_TO_REVIEW_V1_ONE_PROVIDER_ONE_IMAGE`, one provider/plugin/API call, one image max, and receipt/status sync.
 4. Start production workflow only after provider output can enter artifact / review / audit and human decision records safely.
 
 ## Anti-Drift Rules

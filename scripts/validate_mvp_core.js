@@ -282,6 +282,9 @@ safeCheck("runtime_to_review_v1_guarded_live_probe_gate", () => {
     result.mode === "guarded_live_probe_gate_no_live_call" &&
     result.default_local_excludes_live_probe === true &&
     result.explicit_live_probe_runner_present === true &&
+    result.provider_delegate_module_present === true &&
+    result.exact_delegate_preflight_would_pass === true &&
+    result.wrong_exact_confirmation_blocked === true &&
     result.live_probe_executed_by_validator === false &&
     result.real_provider_call_performed === false &&
     result.provider_contact_performed === false &&
@@ -289,6 +292,30 @@ safeCheck("runtime_to_review_v1_guarded_live_probe_gate", () => {
     result.api_call_performed === false &&
     result.image_generation_performed === false &&
     result.secret_value_read_performed_by_runner === false &&
+    result.DailyNote_write_performed === false &&
+    result.VCP_memory_write_performed === false &&
+    result.accepted_samples_write_performed === false &&
+    result.production_candidate_write_performed === false;
+});
+
+safeCheck("runtime_to_review_v1_native_doubao_delegate_module", () => {
+  const result = parseJson(runNode(["scripts/validate_runtime_to_review_v1_native_doubao_delegate_module.js"]));
+  return result.passed === true &&
+    result.validator === "runtime_to_review_v1_native_doubao_delegate_module" &&
+    result.delegate_id === "native_doubao_runtime_v1_provider_delegate" &&
+    result.exact_confirmation_required === "RUNTIME_TO_REVIEW_V1_ONE_PROVIDER_ONE_IMAGE" &&
+    result.default_delegate_fails_closed_without_bound_owner_runtime === true &&
+    result.fake_success_runtime_status === "completed_provider_image_created" &&
+    result.exact_phrase_preflight_passed === true &&
+    result.wrong_phrase_preflight_blocked === true &&
+    result.live_probe_executed_by_validator === false &&
+    result.real_provider_call_performed === false &&
+    result.provider_contact_performed === false &&
+    result.plugin_call_performed === false &&
+    result.api_call_performed === false &&
+    result.image_generation_performed === false &&
+    result.secret_value_read_performed === false &&
+    result.env_file_content_read_performed === false &&
     result.DailyNote_write_performed === false &&
     result.VCP_memory_write_performed === false &&
     result.accepted_samples_write_performed === false &&

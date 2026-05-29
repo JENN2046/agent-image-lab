@@ -1,5 +1,53 @@
 ---
 
+## Current Handoff Update - Runtime To Review Minimal Real Loop V1 Native Doubao Delegate Module
+
+```text
+phase: runtime_to_review_minimal_real_loop_v1_native_doubao_delegate_module_20260529
+status: COMPLETED_VALIDATED_PENDING_STAGE_CLOSEOUT
+mode: Green local delegate module and guarded live-probe preflight
+branch: master
+active_current_phase_reference: v0_3_3_first_live_generation_pilot
+active_source_phase_reference: v0_3_2_live_candidate_action_packet
+active_next_red_decision_reference: guarded_live_probe_execution_with_bound_owner_runtime_delegate
+legacy_active_next_red_decision_reference: guarded_live_probe_execution_requires_delegate_and_exact_confirmation
+summary: NativeDoubao now has a runtime v1 provider delegate module at `adapters/runtime/native_doubao_runtime_v1_provider_delegate.js`. It validates the runtime v1 delegate request, maps only to the secretless controlled bridge path, fails closed when no bound owner runtime exists, and avoids the legacy `.env.local` secret-reading path. The guarded live probe gate now proves that delegate module + `RUNTIME_TO_REVIEW_V1_ONE_PROVIDER_ONE_IMAGE` passes preflight-only and a wrong phrase blocks. No real provider call was executed.
+changed_by_this_task:
+  - README.md
+  - adapters/runtime/native_doubao_runtime_v1_provider_delegate.js
+  - docs/RUNTIME_TO_PRODUCTION_LANDING_ROADMAP.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - package.json
+  - scripts/lib/governance_tooling_maintenance_slice.js
+  - scripts/native_doubao_secretless_provider_runtime_bridge.js
+  - scripts/validate_local_commit_scope.js
+  - scripts/validate_mvp_core.js
+  - scripts/validate_runtime_to_review_v1_guarded_live_probe_gate.js
+  - scripts/validate_runtime_to_review_v1_native_doubao_delegate_module.js
+validation:
+  - node scripts/validate_runtime_to_review_v1_native_doubao_delegate_module.js: passed
+  - node scripts/validate_runtime_to_review_v1_guarded_live_probe_gate.js: passed
+  - npm run validate:runtime-to-review-native-doubao-delegate: passed
+  - npm run validate:runtime-to-review-guarded-live-probe-gate: passed
+  - npm run validate:mvp: passed
+boundaries:
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  secret_value_read_performed: false
+  env_file_content_read_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  accepted_samples_write_performed: false
+  production_candidate_write_performed: false
+  push_status: not_performed
+next_safe_task: guarded_live_probe_execution_with_bound_owner_runtime_delegate
+```
+
 ## Current Handoff Update - Runtime To Review Minimal Real Loop V1 Static Real Entry Viewer
 
 ```text

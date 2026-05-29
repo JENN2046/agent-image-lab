@@ -1,5 +1,52 @@
 ---
 
+## Checkpoint - Runtime To Review Minimal Real Loop V1 Native Doubao Delegate Module
+
+```text
+phase: runtime_to_review_minimal_real_loop_v1_native_doubao_delegate_module_20260529
+status: completed_validated_pending_stage_closeout
+result: COMPLETED_VALIDATED
+mode: Green local delegate module and guarded live-probe preflight
+active_current_phase_reference: v0_3_3_first_live_generation_pilot
+active_source_phase_reference: v0_3_2_live_candidate_action_packet
+active_next_red_decision_reference: guarded_live_probe_execution_with_bound_owner_runtime_delegate
+legacy_active_next_red_decision_reference: guarded_live_probe_execution_requires_delegate_and_exact_confirmation
+summary: Added the NativeDoubao runtime v1 provider delegate module and exact-confirmation preflight proof. The delegate validates the runtime v1 request, maps only to the secretless controlled bridge path, fails closed without a bound owner runtime, and avoids the legacy .env.local secret-reading path. The validator uses a fake runner to prove the provider-success metadata shape can be accepted by runtime v1, and the guarded live-probe gate proves that the delegate module plus the exact phrase passes preflight-only while a wrong phrase blocks.
+changed_files_current_task:
+  - README.md
+  - adapters/runtime/native_doubao_runtime_v1_provider_delegate.js
+  - docs/RUNTIME_TO_PRODUCTION_LANDING_ROADMAP.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - package.json
+  - scripts/lib/governance_tooling_maintenance_slice.js
+  - scripts/native_doubao_secretless_provider_runtime_bridge.js
+  - scripts/validate_local_commit_scope.js
+  - scripts/validate_mvp_core.js
+  - scripts/validate_runtime_to_review_v1_guarded_live_probe_gate.js
+  - scripts/validate_runtime_to_review_v1_native_doubao_delegate_module.js
+validation_completed:
+  - node scripts/validate_runtime_to_review_v1_native_doubao_delegate_module.js
+  - node scripts/validate_runtime_to_review_v1_guarded_live_probe_gate.js
+  - npm run validate:runtime-to-review-native-doubao-delegate
+  - npm run validate:runtime-to-review-guarded-live-probe-gate
+  - npm run validate:mvp
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+secret_value_read_performed: false
+env_file_content_read_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+push_status: not_performed
+recommended_next_phase: guarded_live_probe_execution_with_bound_owner_runtime_delegate
+```
+
 ## Checkpoint - Runtime To Review Minimal Real Loop V1 Static Real Entry Viewer
 
 ```text

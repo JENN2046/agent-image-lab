@@ -10,6 +10,7 @@ const SECRETLESS_PROVIDER_RUNTIME_BRIDGE_MARKER = Symbol("agent_image_lab_secret
 const ALLOWED_OUTPUT_DIRECTORY_REFS = new Set([
   "runs/real_generation/v0_6_73_real_vcp_agent_generation_one_shot/",
   "runs/real_generation/v0_6_73_real_vcp_agent_generation_retry_002/",
+  "runs/real_generation/runtime_to_review_v1_guarded_live_probe/",
 ]);
 
 function cloneJson(value) {
@@ -102,6 +103,12 @@ function sanitizeSecretlessProviderRuntimeResult(result) {
     image_generation_performed: safeResult.image_generation_performed === true,
     image_binary_read_performed: false,
     output_write_performed: safeResult.output_write_performed === true,
+    calls_used: safeResult.calls_used && typeof safeResult.calls_used === "object"
+      ? cloneJson(safeResult.calls_used)
+      : undefined,
+    image_count: Number(safeResult.image_count || 0),
+    model_sent: typeof safeResult.model_sent === "string" ? safeResult.model_sent : null,
+    output_files: Array.isArray(safeResult.output_files) ? cloneJson(safeResult.output_files) : [],
     env_file_content_read_performed: false,
     secret_value_read_performed: false,
     raw_provider_payload_retained: false,

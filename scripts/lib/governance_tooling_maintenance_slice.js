@@ -2625,6 +2625,23 @@ const EXPECTED_RUNTIME_TO_REVIEW_V1_STATIC_REAL_ENTRY_VIEWER_SLICE = [
   "scripts/validate_runtime_to_review_v1_static_real_entry_viewer.js"
 ].sort();
 
+const EXPECTED_RUNTIME_TO_REVIEW_V1_NATIVE_DOUBAO_DELEGATE_MODULE_SLICE = [
+  ".agent_board/CHECKPOINT.md",
+  ".agent_board/HANDOFF.md",
+  ".agent_board/RUN_STATE.md",
+  ".agent_board/TASK_QUEUE.md",
+  "README.md",
+  "adapters/runtime/native_doubao_runtime_v1_provider_delegate.js",
+  "docs/RUNTIME_TO_PRODUCTION_LANDING_ROADMAP.md",
+  "package.json",
+  "scripts/lib/governance_tooling_maintenance_slice.js",
+  "scripts/native_doubao_secretless_provider_runtime_bridge.js",
+  "scripts/validate_local_commit_scope.js",
+  "scripts/validate_mvp_core.js",
+  "scripts/validate_runtime_to_review_v1_guarded_live_probe_gate.js",
+  "scripts/validate_runtime_to_review_v1_native_doubao_delegate_module.js"
+].sort();
+
 const EXPECTED_RETRY_007_VCPTOOLBOX_PATCH_PREVIEW_GATE_SLICE = [
   ".agent_board/BLOCKERS.md",
   ".agent_board/CHECKPOINT.md",
@@ -2721,7 +2738,15 @@ const EXPECTED_RUNTIME_TO_REVIEW_V1_STATIC_REAL_ENTRY_PACKAGE_SCRIPTS = {
   "validate:runtime-to-review-static-real-entry-viewer": "node scripts/validate_runtime_to_review_v1_static_real_entry_viewer.js"
 };
 
+const EXPECTED_RUNTIME_TO_REVIEW_V1_NATIVE_DOUBAO_DELEGATE_PACKAGE_SCRIPTS = {
+  "validate:runtime-to-review-native-doubao-delegate": "node scripts/validate_runtime_to_review_v1_native_doubao_delegate_module.js"
+};
+
 const GOVERNANCE_TOOLING_ALLOWED_SLICES = [
+  {
+    id: "runtime_to_review_v1_native_doubao_delegate_module_slice",
+    files: EXPECTED_RUNTIME_TO_REVIEW_V1_NATIVE_DOUBAO_DELEGATE_MODULE_SLICE
+  },
   {
     id: "runtime_to_review_v1_static_real_entry_viewer_slice",
     files: EXPECTED_RUNTIME_TO_REVIEW_V1_STATIC_REAL_ENTRY_VIEWER_SLICE
@@ -3733,6 +3758,39 @@ function packageChangeIsRuntimeToReviewV1StaticRealEntryOnly(currentPackageJson,
   };
 }
 
+function packageChangeIsRuntimeToReviewV1NativeDoubaoDelegateOnly(currentPackageJson, baselinePackageJson, changedFiles) {
+  if (!changedFiles.includes("package.json")) {
+    return { allowed: true, mode: "package_json_unchanged" };
+  }
+
+  const current = cloneJson(currentPackageJson);
+  const baseline = cloneJson(baselinePackageJson);
+  const currentScripts = current.scripts || {};
+  const baselineScripts = baseline.scripts || {};
+  const expectedScripts = EXPECTED_RUNTIME_TO_REVIEW_V1_NATIVE_DOUBAO_DELEGATE_PACKAGE_SCRIPTS;
+
+  for (const [name, value] of Object.entries(expectedScripts)) {
+    if (currentScripts[name] !== value) {
+      return { allowed: false, mode: `runtime_to_review_v1_native_doubao_delegate_script_${name}_unexpected` };
+    }
+  }
+
+  for (const name of Object.keys(expectedScripts)) {
+    if (baselineScripts[name] !== undefined) {
+      baselineScripts[name] = currentScripts[name];
+    } else {
+      delete currentScripts[name];
+    }
+  }
+
+  return {
+    allowed: sameJson(current, baseline),
+    mode: sameJson(current, baseline)
+      ? "runtime_to_review_v1_native_doubao_delegate_package_script_only"
+      : "runtime_to_review_v1_native_doubao_delegate_package_has_other_changes"
+  };
+}
+
 function buildGovernanceToolingMaintenanceSliceReport({ changedFiles, stagedFiles, behind, currentPackageJson, baselinePackageJson }) {
   const sortedChangedFiles = [...changedFiles].sort();
   const normalizedChangedFiles = normalizeChangedFilesForSliceMatching(sortedChangedFiles);
@@ -3740,7 +3798,9 @@ function buildGovernanceToolingMaintenanceSliceReport({ changedFiles, stagedFile
   const matchingSlice = findMatchingGovernanceToolingSlice(sortedChangedFiles);
   const closestSlice = matchingSlice || closestGovernanceToolingSlice(normalizedChangedFiles);
   const exactSliceMatches = matchingSlice !== null;
-  const packageReport = matchingSlice?.id === "runtime_to_review_v1_static_real_entry_viewer_slice"
+  const packageReport = matchingSlice?.id === "runtime_to_review_v1_native_doubao_delegate_module_slice"
+    ? packageChangeIsRuntimeToReviewV1NativeDoubaoDelegateOnly(currentPackageJson, baselinePackageJson, sortedChangedFiles)
+    : matchingSlice?.id === "runtime_to_review_v1_static_real_entry_viewer_slice"
     ? packageChangeIsRuntimeToReviewV1StaticRealEntryOnly(currentPackageJson, baselinePackageJson, sortedChangedFiles)
     : matchingSlice?.id === "runtime_to_review_v1_phase_7_validation_gate_slice"
     ? packageChangeIsRuntimeToReviewV1Phase7Only(currentPackageJson, baselinePackageJson, sortedChangedFiles)

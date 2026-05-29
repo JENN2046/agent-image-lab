@@ -1,5 +1,18 @@
 ---
 
+- [x] ID: runtime_to_review_minimal_real_loop_v1_native_doubao_delegate_module_20260529
+      Lane: Green local delegate module and guarded live-probe preflight.
+      Status: completed_validated_pending_stage_closeout.
+      Goal: Add the NativeDoubao runtime v1 provider delegate module and exact-confirmation preflight proof.
+      Active current phase reference: v0_3_3_first_live_generation_pilot.
+      Active source phase reference: v0_3_2_live_candidate_action_packet.
+      Active next Red decision reference: guarded_live_probe_execution_with_bound_owner_runtime_delegate.
+      Legacy active next Red decision reference: guarded_live_probe_execution_requires_delegate_and_exact_confirmation.
+      Completed: added `adapters/runtime/native_doubao_runtime_v1_provider_delegate.js`; added `scripts/validate_runtime_to_review_v1_native_doubao_delegate_module.js`; hardened `validate_runtime_to_review_v1_guarded_live_probe_gate.js` so delegate module plus `RUNTIME_TO_REVIEW_V1_ONE_PROVIDER_ONE_IMAGE` passes preflight-only and wrong phrase blocks; extended the secretless bridge sanitizer for safe metadata output fields.
+      Runtime-to-review value: the live probe now has an actual runtime v1 delegate module boundary while still avoiding real provider execution in default validation.
+      Boundary fields: provider_contact_performed: false; plugin_call_performed: false; api_call_performed: false; image_generation_performed: false; secret_value_read_performed: false; env_file_content_read_performed: false; DailyNote_write_performed: false; VCP_memory_write_performed: false; accepted_samples_write_performed: false; production_candidate_write_performed: false; push_status: not_performed.
+      Recommended next: `guarded_live_probe_execution_with_bound_owner_runtime_delegate`.
+
 - [x] ID: runtime_to_review_minimal_real_loop_v1_static_real_entry_viewer_20260529
       Lane: Green local Review Console static real-entry implementation.
       Status: completed_validated_pending_stage_closeout.
