@@ -1,5 +1,18 @@
 ---
 
+- [x] ID: runtime_to_review_minimal_real_loop_v1_owner_runtime_binding_contract_20260529
+      Lane: Green local owner runtime binding contract and no-provider harness.
+      Status: completed_validated_pending_stage_closeout.
+      Goal: Add an explicit owner-runtime module injection path for the guarded live probe and prove it fails closed with a no-provider contract.
+      Active current phase reference: v0_3_3_first_live_generation_pilot.
+      Active source phase reference: v0_3_2_live_candidate_action_packet.
+      Active next Red decision reference: guarded_live_probe_execution_with_real_bound_owner_runtime.
+      Legacy active next Red decision reference: guarded_live_probe_execution_with_bound_owner_runtime_delegate.
+      Completed: extended `run_runtime_to_review_v1_guarded_live_probe.js` with `--owner-runtime-module`; added `adapters/runtime/native_doubao_runtime_v1_owner_runtime_binding_contract.js`; added `scripts/validate_runtime_to_review_v1_owner_runtime_binding_contract.js`; updated the guarded live probe gate to verify delegate + owner runtime + exact phrase preflight.
+      Runtime-to-review value: the live probe now has an explicit owner runtime binding slot, and the no-provider contract proves the binding path without claiming provider success or touching external services.
+      Boundary fields: provider_contact_performed: false; plugin_call_performed: false; api_call_performed: false; image_generation_performed: false; secret_value_read_performed: false; env_file_content_read_performed: false; DailyNote_write_performed: false; VCP_memory_write_performed: false; accepted_samples_write_performed: false; production_candidate_write_performed: false; push_status: not_performed.
+      Recommended next: `guarded_live_probe_execution_with_real_bound_owner_runtime`.
+
 - [x] ID: runtime_to_review_minimal_real_loop_v1_native_doubao_delegate_module_20260529
       Lane: Green local delegate module and guarded live-probe preflight.
       Status: completed_validated_pending_stage_closeout.

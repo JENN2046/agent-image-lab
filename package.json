@@ -38,6 +38,7 @@
     "validate:runtime-to-review-evidence": "node scripts/validate_runtime_to_review_v1_evidence_gate.js",
     "validate:runtime-to-review-guarded-live-probe-gate": "node scripts/validate_runtime_to_review_v1_guarded_live_probe_gate.js",
     "validate:runtime-to-review-native-doubao-delegate": "node scripts/validate_runtime_to_review_v1_native_doubao_delegate_module.js",
+    "validate:runtime-to-review-owner-runtime-binding": "node scripts/validate_runtime_to_review_v1_owner_runtime_binding_contract.js",
     "validate:runtime-to-review-static-real-entry-viewer": "node scripts/validate_runtime_to_review_v1_static_real_entry_viewer.js",
     "runtime-to-review:guarded-live-probe": "node scripts/run_runtime_to_review_v1_guarded_live_probe.js",
     "validate:durable-audit-store": "node scripts/validate_runtime_durable_audit_store.js",

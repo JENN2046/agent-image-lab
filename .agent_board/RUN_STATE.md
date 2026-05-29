@@ -1,5 +1,43 @@
 ---
 
+## Current Run State - Runtime To Review Minimal Real Loop V1 Owner Runtime Binding Contract
+
+```text
+phase: runtime_to_review_minimal_real_loop_v1_owner_runtime_binding_contract_20260529
+status: COMPLETED_VALIDATED_PENDING_STAGE_CLOSEOUT
+mode: Green local owner runtime binding contract and no-provider harness; no real provider/plugin/API/image call
+branch: master
+active_current_phase_reference: v0_3_3_first_live_generation_pilot
+active_source_phase_reference: v0_3_2_live_candidate_action_packet
+active_next_red_decision_reference: guarded_live_probe_execution_with_real_bound_owner_runtime
+legacy_active_next_red_decision_reference: guarded_live_probe_execution_with_bound_owner_runtime_delegate
+goal: Add an explicit owner-runtime module injection path for the guarded live probe and prove it fails closed with a no-provider contract.
+runner: scripts/run_runtime_to_review_v1_guarded_live_probe.js
+delegate_module: adapters/runtime/native_doubao_runtime_v1_provider_delegate.js
+owner_runtime_contract: adapters/runtime/native_doubao_runtime_v1_owner_runtime_binding_contract.js
+validator: scripts/validate_runtime_to_review_v1_owner_runtime_binding_contract.js
+exact_confirmation_required: RUNTIME_TO_REVIEW_V1_ONE_PROVIDER_ONE_IMAGE
+behavior: live runner accepts --owner-runtime-module, injects the controlled secretless runtime into delegate factories, and the no-provider contract returns BLOCKED_OWNER_RUNTIME_CONTRACT_NO_PROVIDER so runtime v1 fails closed without claiming provider success.
+validation_completed:
+- node scripts/validate_runtime_to_review_v1_owner_runtime_binding_contract.js: passed
+- node scripts/validate_runtime_to_review_v1_guarded_live_probe_gate.js: passed after owner-runtime preflight wiring
+- npm run validate:runtime-to-review-owner-runtime-binding: passed
+- npm run validate:runtime-to-review-guarded-live-probe-gate: passed
+- npm run validate:mvp: passed
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+secret_value_read_performed: false
+env_file_content_read_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+push_status: not_performed
+next_safe_task: guarded_live_probe_execution_with_real_bound_owner_runtime
+```
+
 ## Current Run State - Runtime To Review Minimal Real Loop V1 Native Doubao Delegate Module
 
 ```text

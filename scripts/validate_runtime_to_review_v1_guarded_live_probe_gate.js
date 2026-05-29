@@ -9,6 +9,7 @@ const root = path.resolve(__dirname, "..");
 const gateId = "runtime_to_review_v1_guarded_live_probe_gate";
 const runnerPath = "scripts/run_runtime_to_review_v1_guarded_live_probe.js";
 const delegatePath = "adapters/runtime/native_doubao_runtime_v1_provider_delegate.js";
+const ownerRuntimePath = "adapters/runtime/native_doubao_runtime_v1_owner_runtime_binding_contract.js";
 
 function assert(condition, message) {
   if (!condition) throw new Error(message);
@@ -37,9 +38,11 @@ function runNode(args, allowFailure = false) {
 function main() {
   assert(fs.existsSync(repoPath(runnerPath)), "guarded live probe runner missing");
   assert(fs.existsSync(repoPath(delegatePath)), "native Doubao runtime v1 provider delegate module missing");
+  assert(fs.existsSync(repoPath(ownerRuntimePath)), "native Doubao runtime v1 owner runtime binding contract missing");
   runNode(["--check", runnerPath]);
   runNode(["--check", "scripts/validate_runtime_to_review_v1_guarded_live_probe_gate.js"]);
   runNode(["--check", delegatePath]);
+  runNode(["--check", ownerRuntimePath]);
 
   const runner = require(repoPath(runnerPath));
   assert(runner.exactConfirmation === "RUNTIME_TO_REVIEW_V1_ONE_PROVIDER_ONE_IMAGE", "exact confirmation mismatch");
@@ -57,8 +60,9 @@ function main() {
   assert(runner.validatePreflight({
     max_images: 1,
     provider_delegate_module: delegatePath,
+    owner_runtime_module: ownerRuntimePath,
     confirm_live_provider_probe: runner.exactConfirmation,
-  }).passed === true, "delegate module plus exact confirmation must pass preflight");
+  }).passed === true, "delegate module plus owner runtime module plus exact confirmation must pass preflight");
 
   const blockedOutput = JSON.parse(runNode([runnerPath], true));
   assert(blockedOutput.status === "blocked_live_probe_not_executed", "runner without exact args must block");
@@ -73,6 +77,8 @@ function main() {
     runnerPath,
     "--provider-delegate-module",
     delegatePath,
+    "--owner-runtime-module",
+    ownerRuntimePath,
     "--confirm-live-provider-probe",
     runner.exactConfirmation,
     "--preflight-only",
@@ -96,6 +102,7 @@ function main() {
     default_local_excludes_live_probe: true,
     explicit_live_probe_runner_present: true,
     provider_delegate_module_present: true,
+    owner_runtime_module_present: true,
     exact_delegate_preflight_would_pass: true,
     wrong_exact_confirmation_blocked: true,
     live_probe_executed_by_validator: false,

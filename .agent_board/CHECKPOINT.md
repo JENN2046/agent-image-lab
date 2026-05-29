@@ -1,5 +1,52 @@
 ---
 
+## Checkpoint - Runtime To Review Minimal Real Loop V1 Owner Runtime Binding Contract
+
+```text
+phase: runtime_to_review_minimal_real_loop_v1_owner_runtime_binding_contract_20260529
+status: completed_validated_pending_stage_closeout
+result: COMPLETED_VALIDATED
+mode: Green local owner runtime binding contract and no-provider harness
+active_current_phase_reference: v0_3_3_first_live_generation_pilot
+active_source_phase_reference: v0_3_2_live_candidate_action_packet
+active_next_red_decision_reference: guarded_live_probe_execution_with_real_bound_owner_runtime
+legacy_active_next_red_decision_reference: guarded_live_probe_execution_with_bound_owner_runtime_delegate
+summary: Added an explicit owner-runtime module injection path for the guarded live probe. The runner now accepts `--owner-runtime-module`, injects the exported controlled secretless runtime into delegate factories, and keeps the runner itself secretless. Added a no-provider owner-runtime contract module that returns `BLOCKED_OWNER_RUNTIME_CONTRACT_NO_PROVIDER`; a non-preflight run through that contract reaches runtime v1 and fails closed without provider/plugin/API/image side effects or live success claims.
+changed_files_current_task:
+  - README.md
+  - adapters/runtime/native_doubao_runtime_v1_owner_runtime_binding_contract.js
+  - docs/RUNTIME_TO_PRODUCTION_LANDING_ROADMAP.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - package.json
+  - scripts/lib/governance_tooling_maintenance_slice.js
+  - scripts/run_runtime_to_review_v1_guarded_live_probe.js
+  - scripts/validate_local_commit_scope.js
+  - scripts/validate_mvp_core.js
+  - scripts/validate_runtime_to_review_v1_guarded_live_probe_gate.js
+  - scripts/validate_runtime_to_review_v1_owner_runtime_binding_contract.js
+validation_completed:
+  - node scripts/validate_runtime_to_review_v1_owner_runtime_binding_contract.js
+  - node scripts/validate_runtime_to_review_v1_guarded_live_probe_gate.js
+  - npm run validate:runtime-to-review-owner-runtime-binding
+  - npm run validate:runtime-to-review-guarded-live-probe-gate
+  - npm run validate:mvp
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+secret_value_read_performed: false
+env_file_content_read_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+accepted_samples_write_performed: false
+production_candidate_write_performed: false
+push_status: not_performed
+recommended_next_phase: guarded_live_probe_execution_with_real_bound_owner_runtime
+```
+
 ## Checkpoint - Runtime To Review Minimal Real Loop V1 Native Doubao Delegate Module
 
 ```text

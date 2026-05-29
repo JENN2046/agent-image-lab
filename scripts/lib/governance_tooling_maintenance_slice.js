@@ -2632,14 +2632,17 @@ const EXPECTED_RUNTIME_TO_REVIEW_V1_NATIVE_DOUBAO_DELEGATE_MODULE_SLICE = [
   ".agent_board/TASK_QUEUE.md",
   "README.md",
   "adapters/runtime/native_doubao_runtime_v1_provider_delegate.js",
+  "adapters/runtime/native_doubao_runtime_v1_owner_runtime_binding_contract.js",
   "docs/RUNTIME_TO_PRODUCTION_LANDING_ROADMAP.md",
   "package.json",
   "scripts/lib/governance_tooling_maintenance_slice.js",
   "scripts/native_doubao_secretless_provider_runtime_bridge.js",
+  "scripts/run_runtime_to_review_v1_guarded_live_probe.js",
   "scripts/validate_local_commit_scope.js",
   "scripts/validate_mvp_core.js",
   "scripts/validate_runtime_to_review_v1_guarded_live_probe_gate.js",
-  "scripts/validate_runtime_to_review_v1_native_doubao_delegate_module.js"
+  "scripts/validate_runtime_to_review_v1_native_doubao_delegate_module.js",
+  "scripts/validate_runtime_to_review_v1_owner_runtime_binding_contract.js"
 ].sort();
 
 const EXPECTED_RETRY_007_VCPTOOLBOX_PATCH_PREVIEW_GATE_SLICE = [
@@ -2739,7 +2742,8 @@ const EXPECTED_RUNTIME_TO_REVIEW_V1_STATIC_REAL_ENTRY_PACKAGE_SCRIPTS = {
 };
 
 const EXPECTED_RUNTIME_TO_REVIEW_V1_NATIVE_DOUBAO_DELEGATE_PACKAGE_SCRIPTS = {
-  "validate:runtime-to-review-native-doubao-delegate": "node scripts/validate_runtime_to_review_v1_native_doubao_delegate_module.js"
+  "validate:runtime-to-review-native-doubao-delegate": "node scripts/validate_runtime_to_review_v1_native_doubao_delegate_module.js",
+  "validate:runtime-to-review-owner-runtime-binding": "node scripts/validate_runtime_to_review_v1_owner_runtime_binding_contract.js"
 };
 
 const GOVERNANCE_TOOLING_ALLOWED_SLICES = [

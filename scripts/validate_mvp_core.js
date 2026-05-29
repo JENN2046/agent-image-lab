@@ -283,6 +283,7 @@ safeCheck("runtime_to_review_v1_guarded_live_probe_gate", () => {
     result.default_local_excludes_live_probe === true &&
     result.explicit_live_probe_runner_present === true &&
     result.provider_delegate_module_present === true &&
+    result.owner_runtime_module_present === true &&
     result.exact_delegate_preflight_would_pass === true &&
     result.wrong_exact_confirmation_blocked === true &&
     result.live_probe_executed_by_validator === false &&
@@ -292,6 +293,29 @@ safeCheck("runtime_to_review_v1_guarded_live_probe_gate", () => {
     result.api_call_performed === false &&
     result.image_generation_performed === false &&
     result.secret_value_read_performed_by_runner === false &&
+    result.DailyNote_write_performed === false &&
+    result.VCP_memory_write_performed === false &&
+    result.accepted_samples_write_performed === false &&
+    result.production_candidate_write_performed === false;
+});
+
+safeCheck("runtime_to_review_v1_owner_runtime_binding_contract", () => {
+  const result = parseJson(runNode(["scripts/validate_runtime_to_review_v1_owner_runtime_binding_contract.js"]));
+  return result.passed === true &&
+    result.validator === "runtime_to_review_v1_owner_runtime_binding_contract" &&
+    result.exact_confirmation_required === "RUNTIME_TO_REVIEW_V1_ONE_PROVIDER_ONE_IMAGE" &&
+    result.exact_owner_runtime_preflight_passed === true &&
+    result.wrong_phrase_blocked === true &&
+    result.missing_owner_runtime_module_blocked === true &&
+    result.no_provider_contract_failed_closed === true &&
+    result.live_provider_success_claimed === false &&
+    result.real_provider_call_performed === false &&
+    result.provider_contact_performed === false &&
+    result.plugin_call_performed === false &&
+    result.api_call_performed === false &&
+    result.image_generation_performed === false &&
+    result.secret_value_read_performed === false &&
+    result.env_file_content_read_performed === false &&
     result.DailyNote_write_performed === false &&
     result.VCP_memory_write_performed === false &&
     result.accepted_samples_write_performed === false &&

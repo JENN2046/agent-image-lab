@@ -42,6 +42,7 @@ function parseArgs(argv) {
     const item = argv[index];
     if (item === "--input") args.input = argv[++index];
     else if (item === "--provider-delegate-module") args.provider_delegate_module = argv[++index];
+    else if (item === "--owner-runtime-module") args.owner_runtime_module = argv[++index];
     else if (item === "--confirm-live-provider-probe") args.confirm_live_provider_probe = argv[++index];
     else if (item === "--max-images") args.max_images = Number(argv[++index]);
     else if (item === "--preflight-only") args.preflight_only = true;
@@ -58,6 +59,7 @@ function printHelp() {
     "",
     "Runs runtime v1 real_guarded only when an injected provider delegate module and exact confirmation are both present.",
     "The runner itself does not read secret values; the injected delegate owns provider access and must return structured runtime_v1 provider result metadata.",
+    "Use --owner-runtime-module <repo-relative-module> to inject a controlled secretless owner runtime into delegate factories that support it.",
     "Use --preflight-only for a no-call gate check.",
   ].join("\n") + "\n");
 }
@@ -100,6 +102,15 @@ function validatePreflight(args) {
       issues.push(error.message);
     }
   }
+  if (args.owner_runtime_module) {
+    try {
+      const { normalized, resolved } = normalizeRepoRelativePath(args.owner_runtime_module, "--owner-runtime-module");
+      if (!normalized.endsWith(".js")) issues.push("owner_runtime_module_must_be_js");
+      if (!fs.existsSync(resolved)) issues.push("owner_runtime_module_missing_on_disk");
+    } catch (error) {
+      issues.push(error.message);
+    }
+  }
   return {
     passed: issues.length === 0,
     issues,
@@ -116,6 +127,7 @@ async function runLiveProbe(args) {
       exact_confirmation_required: exactConfirmation,
       exact_confirmation_present: args.confirm_live_provider_probe === exactConfirmation,
       provider_delegate_module_present: Boolean(args.provider_delegate_module),
+      owner_runtime_module_present: Boolean(args.owner_runtime_module),
       preflight_would_pass_with_current_args: preflight.passed,
       preflight_issues: preflight.issues,
       real_provider_call_performed: false,
@@ -138,7 +150,26 @@ async function runLiveProbe(args) {
 
   const { resolved: inputPath } = normalizeRepoRelativePath(args.input, "--input");
   const { resolved: delegatePath, normalized: delegateRef } = normalizeRepoRelativePath(args.provider_delegate_module, "--provider-delegate-module");
-  const providerDelegate = require(delegatePath);
+  const delegateModule = require(delegatePath);
+  let providerDelegate = delegateModule;
+  let ownerRuntimeRef = null;
+  if (args.owner_runtime_module) {
+    const { resolved: ownerRuntimePath, normalized } = normalizeRepoRelativePath(args.owner_runtime_module, "--owner-runtime-module");
+    ownerRuntimeRef = normalized;
+    const ownerRuntimeModule = require(ownerRuntimePath);
+    const createOwnerRuntime = typeof ownerRuntimeModule === "function"
+      ? ownerRuntimeModule
+      : ownerRuntimeModule.createSecretlessProviderRuntime;
+    if (typeof createOwnerRuntime !== "function") {
+      throw new Error("owner runtime module must export a function or createSecretlessProviderRuntime");
+    }
+    if (!delegateModule || typeof delegateModule.createNativeDoubaoRuntimeV1ProviderDelegate !== "function") {
+      throw new Error("provider delegate module must export createNativeDoubaoRuntimeV1ProviderDelegate when owner runtime module is supplied");
+    }
+    providerDelegate = delegateModule.createNativeDoubaoRuntimeV1ProviderDelegate({
+      secretlessProviderRuntime: createOwnerRuntime(),
+    });
+  }
   if (typeof providerDelegate !== "function") {
     throw new Error("provider delegate module must export a function");
   }
@@ -153,6 +184,7 @@ async function runLiveProbe(args) {
       ? "completed_provider_image_created"
       : "failed_closed",
     provider_delegate_module: delegateRef,
+    owner_runtime_module: ownerRuntimeRef,
     runtime_result: runtimeResult,
     calls_used: runtimeResult.calls_used,
     image_count: runtimeResult.image_count,
