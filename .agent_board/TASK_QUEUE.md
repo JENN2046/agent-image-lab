@@ -1,3 +1,13 @@
+- [x] ID: ail_vis_08_retry_or_route_decision_gate
+      Lane: Green local docs-only decision gate.
+      Status: completed_validated_pushed.
+      Goal: Decide the route after the first one-shot generation review, select route_A_hold_as_review_evidence, and keep retry, editing, promotion, memory write, and production candidate paths blocked.
+      Completed: added `docs/AIL_VIS_08_RETRY_OR_ROUTE_DECISION_GATE.md`; updated `.agent_board` run state, handoff, checkpoint, and task queue surfaces to record the hold-as-review-evidence route decision for the reviewed image.
+      Boundary fields: retry_generation_performed: false; second_image_generated: false; image_editing_performed: false; provider_called: false; plugin_called: false; api_called: false; runtime_execution_performed: false; review_console_runtime_launched: false; accepted_sample_created: false; memory_candidate_created: false; actual_memory_write_performed: false; daily_note_written: false; vcp_memory_written: false; codex_memory_mutated: false; production_candidate_002_started: false; batch_005_started: false; dependency_changed: false; package_json_modified: false; git_add_dot_used: false; next_phase_started: false.
+      Recommended next: hold the image as review evidence only until a future explicit route or review instruction is given.
+
+---
+
 - [x] ID: ail_vis_07_human_visual_review_closeout
       Lane: Green local docs-only review closeout.
       Status: completed_validated_pushed.
