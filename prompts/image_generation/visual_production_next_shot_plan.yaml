@@ -1,12 +1,12 @@
-shot_plan_id: visual_production_next_shot_plan_premium_dark_tech_product_still_life_v1
-phase: AIL-VIS-11_shot_plan_and_prompt_package_planning
-mode: docs_only_prompt_and_shot_planning
-source_phase: AIL-VIS-10_next_visual_target_selection_gate
-source_commit: 3674127c082cfcd52732f984b36c0c7085a7ebc3
-selected_product: premium_dark_tech_product_still_life
-selected_product_category: dark premium tech product
-visual_goal: low-key commercial still-life route with product dominance, controlled reflections, and premium dark lighting
-composition_goal: square 1:1 commercial hero framing with clean negative space and strong material readability
+shot_plan_id: visual_production_next_shot_plan_premium_black_wireless_headphones_product_hero_v1
+phase: AIL-VIS-14_target_identity_repair_gate
+mode: docs_only_target_identity_repair
+source_phase: AIL-VIS-13_authorized_generation_reconciliation_and_evidence_review
+source_commit: a9b0b487ce2b1f3303195af989a8bdcf7ade1cc8
+selected_product: premium_black_wireless_headphones_product_hero
+selected_product_category: premium_audio_product
+visual_goal: low-key commercial product route with a concrete premium wireless headphones identity, controlled reflections, and premium dark lighting
+composition_goal: square 1:1 commercial hero framing with clean negative space and strong product readability
 generation_allowed_now: false
 review_required: true
 rubric_refs:
@@ -14,23 +14,23 @@ rubric_refs:
   - docs/VISUAL_FAILURE_TAXONOMY.md
 
 shots:
-  - shot_id: visual_production_next_shot_dark_tech_hero_01
+  - shot_id: visual_production_next_shot_black_headphones_hero_01
     shot_role: hero_product_shot
-    visual_goal: premium square hero image with the dark tech product as the dominant subject
-    subject: premium dark tech product still life
+    visual_goal: premium square hero image with the wireless headphones as the dominant subject
+    subject: premium black wireless headphones product hero
     composition_notes:
-      - keep the product fully visible
+      - keep the headphones fully visible
       - make the product large and dominant in the frame
       - keep the silhouette clean and commercial
       - preserve controlled negative space around the subject
     lighting_notes:
       - use low-key premium lighting
-      - preserve controlled highlights on metal and glass
+      - preserve controlled highlights on metal, plastic, and cushioning
       - keep reflections believable and not distracting
     material_realism_requirements:
       - premium metal should read as finished and believable
-      - glass should read as physically present and not synthetic
-      - surfaces should support a dark premium tech identity
+      - matte and soft-touch surfaces should read as physically present and not synthetic
+      - materials should support a dark premium audio identity
     commercial_usability_requirements:
       - product must read clearly on first glance
       - keep the frame headline-safe
@@ -50,10 +50,10 @@ shots:
       - docs/VISUAL_FAILURE_TAXONOMY.md
     generation_allowed_now: false
 
-  - shot_id: visual_production_next_shot_dark_tech_material_detail_01
+  - shot_id: visual_production_next_shot_black_headphones_material_detail_01
     shot_role: material_detail_supporting_shot
-    visual_goal: supporting detail shot that validates metal, glass, reflection, and surface quality
-    subject: premium dark tech product still life
+    visual_goal: supporting detail shot that validates earcup materials, headband finish, reflections, and surface quality
+    subject: premium black wireless headphones product hero
     composition_notes:
       - tighter crop than the hero shot
       - keep the key surfaces and edges readable
@@ -64,8 +64,8 @@ shots:
       - avoid noisy or overactive reflections
     material_realism_requirements:
       - metal edges should feel manufactured
-      - glass should remain plausible and clean
-      - surface finish should support dark premium styling
+      - padding and shell surfaces should remain plausible and clean
+      - surface finish should support dark premium audio styling
     commercial_usability_requirements:
       - useful as evidence, not a replacement for the hero shot
       - keep the same route identity visible

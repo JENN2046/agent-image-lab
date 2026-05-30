@@ -1,3 +1,14 @@
+- [x] ID: ail_vis_14_target_identity_repair_gate
+      Lane: Green local docs-only target identity repair.
+      Status: completed_validated_pushed.
+      Goal: Repair the broad dark tech target into the concrete premium_black_wireless_headphones_product_hero identity and update the shot plan and prompt package without opening generation, A5, or memory paths.
+      Completed: added `docs/AIL_VIS_14_TARGET_IDENTITY_REPAIR_GATE.md`; updated `prompts/image_generation/visual_production_next_shot_plan.yaml`; updated `prompts/image_generation/visual_production_next_prompt_package.yaml`; updated `.agent_board` run state, handoff, checkpoint, and task queue surfaces to record the repaired headphones target and the locked route boundary.
+      Repaired target: old_target=premium_dark_tech_product_still_life; new_target=premium_black_wireless_headphones_product_hero; target_identity_repaired=true; primary_shot_id=visual_production_next_shot_black_headphones_hero_01; secondary_shot_id=visual_production_next_shot_black_headphones_material_detail_01.
+      Boundary fields: image_generated: false; retry_generation_performed: false; third_image_generated: false; image_editing_performed: false; provider_called: false; plugin_called: false; api_called: false; runtime_execution_performed: false; output_directory_created: false; A5_authorization_requested: false; accepted_sample_created: false; memory_candidate_created: false; actual_memory_write_performed: false; production_candidate_002_started: false; batch_005_started: false; images_copied_into_repo: false; git_add_dot_used: false; next_phase_started: false.
+      Recommended next: future_generation_authorization_gate_for_the_repaired_headphones_target.
+
+---
+
 - [x] ID: ail_vis_13_authorized_generation_reconciliation_and_evidence_review
       Lane: Green local docs-only reconciliation review.
       Status: completed_validated_pushed.
