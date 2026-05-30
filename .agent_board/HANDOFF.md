@@ -1,3 +1,27 @@
+## Current Handoff Update - AIL Visual Eval Rubric And Failure Taxonomy Refresh
+
+```text
+phase: AIL-VIS-02_visual_eval_rubric_and_failure_taxonomy_refresh
+status: completed_validated
+mode: docs_only_visual_review_planning
+branch: ail-vis-02-eval-rubric-refresh
+source_phase: AIL-VIS-01_return_to_visual_production_mainline_gate
+source_commit: a49b723a
+summary: Refreshed the visual evaluation rubric and failure taxonomy so the next visual production cycle can use stable pass, patch, reject, archive, and memory-suitability language without generating new images.
+changed_by_this_task:
+  - docs/AIL_VIS_02_VISUAL_EVAL_RUBRIC_AND_FAILURE_TAXONOMY_REFRESH.md
+  - docs/VISUAL_EVAL_RUBRIC.md
+  - docs/VISUAL_FAILURE_TAXONOMY.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+boundary_checks: image_generated: false; provider_called: false; plugin_called: false; api_called: false; runtime_execution_performed: false; review_console_runtime_launched: false; actual_memory_write_performed: false; daily_note_written: false; vcp_memory_written: false; codex_memory_mutated: false; production_candidate_002_started: false; batch_005_started: false; next_phase_started: false.
+next_safe_task: proceed to AIL-VIS-03_visual_prompt_package_and_shot_plan_refresh.
+```
+
+---
+
 ## Current Handoff Update - AIL Visual Mainline Return Gate
 
 ```text
