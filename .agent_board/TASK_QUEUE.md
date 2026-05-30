@@ -1,4 +1,15 @@
 - [ ] ID: ail_vis_20_accepted_sample_candidate_review_gate
+- [x] ID: ail_vis_21_accepted_sample_promotion_authorization_gate
+      Lane: Green local docs-only promotion authorization gate.
+      Status: completed_validated_pushed.
+      Goal: Draft the promotion authorization boundary for the headphones accepted-sample candidate without copying files, creating accepted sample records, promoting the image, creating memory candidates, or writing memory.
+      Completed: added `docs/AIL_VIS_21_ACCEPTED_SAMPLE_PROMOTION_AUTHORIZATION_GATE.md`; updated `.agent_board` run state, handoff, checkpoint, and task queue surfaces to record the promotion boundary and keep accepted-sample promotion blocked until explicit owner authorization.
+      Promotion boundary: source_image_path=A:\agent-image-lab\agent-image-lab-v0.2\runs\real_generation\ail_vis_17_premium_black_wireless_headphones_hero\ail_vis_17_premium_black_wireless_headphones_hero_01.png; candidate_status=accepted_sample_candidate; accepted_sample_promotion_allowed_now=false; owner_authorization_required=true; memory_write_allowed_now=false; production_candidate_002_allowed_now=false.
+      Boundary fields: image_generated: false; image_edited: false; accepted_sample_created: false; accepted_sample_promoted: false; accepted_sample_file_created: false; image_copied_into_accepted_samples: false; accepted_sample_metadata_created: false; memory_candidate_created: false; actual_memory_write_performed: false; production_candidate_002_started: false; batch_005_started: false; git_add_dot_used: false; next_phase_started: false.
+      Recommended next: AIL-VIS-22_accepted_sample_promotion_execution_gate.
+
+---
+
 - [x] ID: ail_vis_20_accepted_sample_candidate_review_gate
       Lane: Green local docs-only candidate review gate.
       Status: completed_validated_pushed.
