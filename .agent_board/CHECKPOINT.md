@@ -1,3 +1,36 @@
+## Checkpoint - AIL Visual Pre-Execution Static Review And A5 Authorization Request
+
+```text
+phase: AIL-VIS-05_pre_execution_static_review_and_A5_authorization_request
+status: completed_validated_pushed_request_only
+result: PASS
+mode: A5_authorization_request_gate
+summary: Added the AIL-VIS-05 request gate to record the exact A5 authorization wording needed from the user while keeping generation, memory write, and production candidate paths blocked.
+changed_files_current_task:
+  - docs/AIL_VIS_05_PRE_EXECUTION_STATIC_REVIEW_AND_A5_AUTHORIZATION_REQUEST.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+boundary_checks:
+  image_generated: false
+  provider_called: false
+  plugin_called: false
+  api_called: false
+  runtime_execution_performed: false
+  review_console_runtime_launched: false
+  actual_memory_write_performed: false
+  daily_note_written: false
+  vcp_memory_written: false
+  codex_memory_mutated: false
+  production_candidate_002_started: false
+  batch_005_started: false
+  next_phase_started: false
+recommended_next: wait for explicit A5 authorization wording from the user or a separate execution gate instruction
+```
+
+---
+
 ## Checkpoint - AIL Visual Generation Authorization Gate
 
 ```text

@@ -1,3 +1,13 @@
+- [x] ID: ail_vis_05_pre_execution_static_review_and_a5_authorization_request
+      Lane: Green local docs-only A5 authorization request gate.
+      Status: completed_validated_pushed_request_only.
+      Goal: Prepare the final one-shot visual generation execution request for the premium portable LED camping lantern hero shot without generating images or opening any memory write path.
+      Completed: added `docs/AIL_VIS_05_PRE_EXECUTION_STATIC_REVIEW_AND_A5_AUTHORIZATION_REQUEST.md`; updated `.agent_board` run state, handoff, checkpoint, and task queue surfaces to record the exact A5 authorization wording needed from the user while keeping generation and memory write paths blocked.
+      Boundary fields: image_generated: false; provider_called: false; plugin_called: false; api_called: false; runtime_execution_performed: false; review_console_runtime_launched: false; actual_memory_write_performed: false; daily_note_written: false; vcp_memory_written: false; codex_memory_mutated: false; production_candidate_002_started: false; batch_005_started: false; next_phase_started: false.
+      Recommended next: wait for explicit A5 authorization wording from the user or a separate execution gate instruction.
+
+---
+
 - [x] ID: ail_vis_04_visual_generation_authorization_gate
       Lane: Green local docs-only generation authorization gate.
       Status: completed_validated_docs_only.
