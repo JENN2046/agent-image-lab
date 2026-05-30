@@ -1,4 +1,3 @@
-- [ ] ID: ail_vis_20_accepted_sample_candidate_review_gate
 - [x] ID: ail_vis_22_accepted_sample_promotion_execution_gate
       Lane: Green local docs-only promotion execution gate.
       Status: completed_validated_pushed.
