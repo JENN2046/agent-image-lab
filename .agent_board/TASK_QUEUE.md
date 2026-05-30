@@ -1,3 +1,14 @@
+- [x] ID: ail_vis_13_authorized_generation_reconciliation_and_evidence_review
+      Lane: Green local docs-only reconciliation review.
+      Status: completed_validated_pushed.
+      Goal: Reconcile owner-authorized generation evidence for premium_dark_tech_product_still_life, record the two outputs as external untracked evidence only, and block the route until target identity repair.
+      Completed: added `docs/AIL_VIS_13_AUTHORIZED_GENERATION_RECONCILIATION_AND_EVIDENCE_REVIEW.md`; updated `.agent_board` run state, handoff, checkpoint, and task queue surfaces to record that the two outputs are external untracked evidence only and that AIL-VIS-14 has not been opened.
+      Evidence fields: output_1=lantern_like_wrong_route; output_1_sha256=9D92DAAC110E32BACC55C067A3D03AFF6EACD319CB9F5E6340D31A4BFE37417A; output_2=headphones_target_identity_ambiguous; output_2_sha256=5E3A8094C54A6E271DEFDEB7938AD588F7770B5827C84B937BE3354F9D0A12D6; owner_authorized=true; formal_execution_gate_missing=true; AIL_VIS_14_not_opened=true; max_images_expected=1; max_images_observed=2; target_match_failed=true.
+      Boundary fields: additional_generation_performed: false; third_image_generated: false; image_editing_performed: false; provider_called_again: false; images_copied_into_repo: false; accepted_sample_created: false; memory_candidate_created: false; actual_memory_write_performed: false; production_candidate_002_started: false; batch_005_started: false; git_add_dot_used: false; next_phase_started: false.
+      Recommended next: AIL-VIS-14_target_identity_repair_gate.
+
+---
+
 - [x] ID: ail_vis_13_pre_execution_static_review_and_a5_authorization_request
       Lane: Green local docs-only A5 request gate.
       Status: completed_validated_pushed.
