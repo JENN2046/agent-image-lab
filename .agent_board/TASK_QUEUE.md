@@ -1,3 +1,13 @@
+- [x] ID: ail_vis_01_return_to_visual_production_mainline_gate
+      Lane: Green local docs-only route gate.
+      Status: completed_validated_docs_only.
+      Goal: Close the AIL-MEM memory-write subline as a supporting guardrail only, record that actual memory write remains blocked, and return the project route to the visual production mainline.
+      Completed: added `docs/AIL_VIS_01_RETURN_TO_VISUAL_PRODUCTION_MAINLINE_GATE.md`; updated `.agent_board` run state, handoff, checkpoint, and task queue surfaces to record that the memory line is paused after clean shadow evidence and that AIL-VIS-02 is the next visual planning task.
+      Boundary fields: actual_memory_write_performed: false; actual_memory_write_allowed_now: false; daily_note_written: false; vcp_memory_written: false; codex_memory_mutated: false; memory_candidate_mutated: false; memory_payload_mutated: false; provider_called: false; plugin_called: false; api_called: false; runtime_execution_performed: false; image_generated: false; production_candidate_002_started: false; batch_005_started: false; next_phase_started: false.
+      Recommended next: AIL-VIS-02_visual_eval_rubric_and_failure_taxonomy_refresh.
+
+---
+
 - [x] ID: ail_mem_04_first_memory_candidate_dry_run_artifact_gate
       Lane: Green local reports-only artifact gate.
       Status: completed_validated_dry_run_artifacts.
