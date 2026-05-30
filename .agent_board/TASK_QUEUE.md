@@ -1,3 +1,13 @@
+- [x] ID: ail_vis_10_visual_target_selection_gate
+      Lane: Green local docs-only target selection gate.
+      Status: completed_validated_pushed.
+      Goal: Select the next visual target as premium_dark_tech_product_still_life without writing an execution prompt, generating images, or opening any memory write path.
+      Completed: added `docs/AIL_VIS_10_VISUAL_TARGET_SELECTION_GATE.md`; updated `.agent_board` run state, handoff, checkpoint, and task queue surfaces to record the target selection only.
+      Boundary fields: generation_allowed_now: false; retry_allowed_now: false; memory_write_allowed_now: false; accepted_sample_allowed_now: false; production_candidate_002_allowed_now: false; batch_005_allowed_now: false; provider_called: false; plugin_called: false; api_called: false; runtime_execution_performed: false; review_console_runtime_launched: false; actual_memory_write_performed: false; daily_note_written: false; vcp_memory_written: false; codex_memory_mutated: false; dependency_changed: false; package_json_modified: false; git_add_dot_used: false; next_phase_started: false.
+      Recommended next: turn the selected target into a separate prompt package and shot-plan planning gate only when explicitly instructed.
+
+---
+
 - [x] ID: ail_vis_09_visual_eval_failure_taxonomy_hardening
       Lane: Green local docs-only protocol hardening.
       Status: completed_validated_pushed.
