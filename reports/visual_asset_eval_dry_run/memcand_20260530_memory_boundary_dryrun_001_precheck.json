@@ -1,0 +1,14 @@
+{
+  "candidate_id": "memcand_20260530_memory_boundary_dryrun_001",
+  "phase_name": "AIL-MEM-04_first_memory_candidate_dry_run_artifact_gate",
+  "precheck_status": "pending",
+  "no_raw_payload": true,
+  "no_private_path": true,
+  "no_image_binary": true,
+  "no_secret": true,
+  "memory_suitability_status": "pending",
+  "human_review_status": "pending",
+  "actual_memory_write_performed": false,
+  "canonical_memory_target": "A:\\codex-memory\\data\\dailynote\\Codex\\",
+  "exact_writer_target_status": "unresolved"
+}
