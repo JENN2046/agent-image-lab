@@ -1,3 +1,24 @@
+## Current Handoff Update - Exact New-Trial 006 Archive Closeout
+
+```text
+phase: v0_6_35_exact_new_trial_006_execution_closeout
+status: completed_validated_reference_only_archive_closeout
+mode: Amber_B fresh one-image generation round plus Green local archive closeout
+branch: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+summary: Opened a new exact new-trial round distinct from `005`, generated a fresh accepted candidate, and recorded it as reference-only. The new image is reviewable, accepted_candidate_with_minor_watch_items, and not commercial-delivery ready. It was not promoted to memory or production.
+changed_by_this_task:
+  - docs/V0_6_35_EXACT_NEW_TRIAL_006_EXECUTION_CLOSEOUT.md
+  - runs/real_generation/v0_3_3_exact_new_trial_006/generation_attempt_result.json
+  - reports/provider_receipts/v0_3_3_exact_new_trial_006_receipt.json
+  - reports/provider_receipts/v0_3_3_exact_new_trial_006_registry.json
+  - review_console/live_receipt_bridge/v0_3_3_exact_new_trial_006/bridge_entry.json
+  - reports/visual_asset_eval_dry_run/v0_6_35_exact_new_trial_006_execution_closeout.json
+boundary_fields: provider_contact_performed: true; plugin_call_performed: true; api_call_performed: false; image_generation_performed: true; DailyNote_write_performed: false; VCP_memory_write_performed: false; accepted_samples_write_performed: false; production_candidate_write_performed: false; push_status: not_performed.
+next_safe_task: keep `006` reference-only, or return to the red decision if yet another round is needed.
+```
+
+---
+
 ## Current Handoff Update - Exact New-Trial 005 Selected Pair Archive Closeout
 
 ```text

@@ -1,4 +1,14 @@
- - [x] ID: exact_new_trial_005_selected_pair_archive_closeout
+ - [x] ID: exact_new_trial_006_fresh_round_archive_closeout
+      Lane: Amber_B fresh one-image generation round plus Green local archive closeout.
+      Status: completed_validated_reference_only.
+      Goal: Record the `v0_3_3_exact_new_trial_006` result as a formal archive note and keep it reference-only.
+      Completed: generated a new image distinct from `005`; added `docs/V0_6_35_EXACT_NEW_TRIAL_006_EXECUTION_CLOSEOUT.md`; copied the artifact into `runs/real_generation/v0_3_3_exact_new_trial_006/`; preserved the no memory / no production / no push boundary.
+      Boundary fields: provider_contact_performed: true; plugin_call_performed: true; api_call_performed: false; image_generation_performed: true; DailyNote_write_performed: false; VCP_memory_write_performed: false; accepted_samples_write_performed: false; production_candidate_write_performed: false; push_status: not_performed.
+      Recommended next: keep `006` reference-only or return to the red decision if yet another round is needed.
+
+---
+
+- [x] ID: exact_new_trial_005_selected_pair_archive_closeout
       Lane: Green local archive closeout.
       Status: completed_validated_reference_only.
       Goal: Record the two user-selected `v0_6_34_exact_new_trial_005` passing images as a formal archive pair and keep them reference-only.
