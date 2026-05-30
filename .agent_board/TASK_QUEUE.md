@@ -1,3 +1,13 @@
+- [x] ID: ail_vis_15_generation_authorization_gate_for_repaired_target
+      Lane: Green local docs-only generation authorization gate.
+      Status: completed_validated_pushed.
+      Goal: Draft the future generation authorization gate for premium_black_wireless_headphones_product_hero without requesting A5, generating images, creating output directories, or opening memory and promotion paths.
+      Completed: added `docs/AIL_VIS_15_GENERATION_AUTHORIZATION_GATE_FOR_REPAIRED_TARGET.md`; updated `.agent_board` run state, handoff, checkpoint, and task queue surfaces to record the repaired-target future boundary only.
+      Boundary fields: image_generated: false; provider_called: false; plugin_called: false; api_called: false; runtime_execution_performed: false; output_directory_created: false; execution_prompt_authorized: false; A5_authorization_requested: false; accepted_sample_created: false; memory_candidate_created: false; actual_memory_write_performed: false; daily_note_written: false; vcp_memory_written: false; codex_memory_mutated: false; production_candidate_002_started: false; batch_005_started: false; images_copied_into_repo: false; images_deleted: false; dependency_changed: false; package_json_modified: false; git_add_dot_used: false; next_phase_started: false.
+      Recommended next: separate_pre_execution_static_review_and_A5_authorization_request_only_if_explicitly_instructed.
+
+---
+
 - [x] ID: ail_vis_14_target_identity_repair_gate
       Lane: Green local docs-only target identity repair.
       Status: completed_validated_pushed.
