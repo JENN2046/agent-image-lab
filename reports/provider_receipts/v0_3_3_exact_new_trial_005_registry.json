@@ -1,0 +1,14 @@
+{
+  "phase": "v0_6_33_exact_new_trial_005_execution_closeout",
+  "registry_status": "succeeded_image_generated",
+  "attempt_id": "v0_3_3_exact_new_trial_005",
+  "entries": [
+    {
+      "attempt_id": "v0_3_3_exact_new_trial_005",
+      "receipt_path": "reports/provider_receipts/v0_3_3_exact_new_trial_005_receipt.json",
+      "attempt_result_path": "runs/real_generation/v0_3_3_exact_new_trial_005/generation_attempt_result.json",
+      "status": "succeeded_image_generated",
+      "output_image_path": "runs/real_generation/v0_3_3_exact_new_trial_005/safe_adult_editorial_portrait_v1.png"
+    }
+  ]
+}
