@@ -1,3 +1,13 @@
+- [x] ID: ail_vis_04_visual_generation_authorization_gate
+      Lane: Green local docs-only generation authorization gate.
+      Status: completed_validated_docs_only.
+      Goal: Define the strict generation boundary for the premium portable LED camping lantern route without generating images or opening any memory write path.
+      Completed: added `docs/AIL_VIS_04_VISUAL_GENERATION_AUTHORIZATION_GATE.md`; updated `.agent_board` run state, handoff, checkpoint, and task queue surfaces to record the new generation authorization boundary and keep the hero shot as the only explicitly authorized candidate for a later execution gate.
+      Boundary fields: image_generated: false; provider_called: false; plugin_called: false; api_called: false; runtime_execution_performed: false; review_console_runtime_launched: false; actual_memory_write_performed: false; daily_note_written: false; vcp_memory_written: false; codex_memory_mutated: false; production_candidate_002_started: false; batch_005_started: false; next_phase_started: false.
+      Recommended next: AIL-VIS-05_visual_generation_execution_gate.
+
+---
+
 - [x] ID: ail_vis_03_visual_prompt_package_and_shot_plan_refresh
       Lane: Green local docs-only prompt and shot planning.
       Status: completed_validated.
