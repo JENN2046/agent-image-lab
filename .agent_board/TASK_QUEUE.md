@@ -1,3 +1,13 @@
+- [x] ID: ail_vis_12_visual_generation_authorization_gate
+      Lane: Green local docs-only generation authorization gate.
+      Status: completed_validated_pushed.
+      Goal: Define the strict future execution boundary for the selected dark tech still-life hero shot without requesting A5, creating output files, generating images, or opening any memory write path.
+      Completed: added `docs/AIL_VIS_12_VISUAL_GENERATION_AUTHORIZATION_GATE.md`; updated `.agent_board` run state, handoff, checkpoint, and task queue surfaces to record the locked future boundary only.
+      Boundary fields: image_generated: false; provider_called: false; plugin_called: false; api_called: false; runtime_execution_performed: false; review_console_runtime_launched: false; output_directory_created: false; execution_prompt_authorized: false; A5_authorization_requested: false; accepted_sample_created: false; memory_candidate_created: false; actual_memory_write_performed: false; daily_note_written: false; vcp_memory_written: false; codex_memory_mutated: false; production_candidate_002_started: false; batch_005_started: false; dependency_changed: false; package_json_modified: false; git_add_dot_used: false; next_phase_started: false.
+      Recommended next: wait for an explicit execution or authorization instruction before any future generation gate work.
+
+---
+
 - [x] ID: ail_vis_11_shot_plan_and_prompt_package_planning
       Lane: Green local docs-only prompt and shot planning.
       Status: completed_validated_pushed.
