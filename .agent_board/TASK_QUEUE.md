@@ -1,3 +1,13 @@
+- [x] ID: ail_vis_09_visual_eval_failure_taxonomy_hardening
+      Lane: Green local docs-only protocol hardening.
+      Status: completed_validated_pushed.
+      Goal: Harden the visual evaluation rubric and failure taxonomy using the first one-shot review evidence so future review rounds can distinguish scene intent mismatch, material surface mismatch, control layout mismatch, shot role adherence, and product identity strength more precisely.
+      Completed: added `docs/AIL_VIS_09_VISUAL_EVAL_FAILURE_TAXONOMY_HARDENING.md`; updated `docs/VISUAL_EVAL_RUBRIC.md`; updated `docs/VISUAL_FAILURE_TAXONOMY.md`; updated `.agent_board` run state, handoff, checkpoint, and task queue surfaces.
+      Boundary fields: retry_generation_performed: false; second_image_generated: false; image_editing_performed: false; provider_called: false; plugin_called: false; api_called: false; runtime_execution_performed: false; review_console_runtime_launched: false; accepted_sample_created: false; memory_candidate_created: false; actual_memory_write_performed: false; daily_note_written: false; vcp_memory_written: false; codex_memory_mutated: false; production_candidate_002_started: false; batch_005_started: false; dependency_changed: false; package_json_modified: false; git_add_dot_used: false; next_phase_started: false.
+      Recommended next: use the hardened review language for future visual review rounds and wait for an explicit new route instruction.
+
+---
+
 - [x] ID: ail_vis_08_retry_or_route_decision_gate
       Lane: Green local docs-only decision gate.
       Status: completed_validated_pushed.

@@ -1,3 +1,44 @@
+## Checkpoint - AIL Visual Eval Failure Taxonomy Hardening
+
+```text
+phase: AIL-VIS-09_visual_eval_failure_taxonomy_hardening
+status: completed_validated_pushed
+result: HARDENED_REVIEW_LANGUAGE_ONLY
+mode: docs_only_protocol_hardening
+summary: Hardened the visual evaluation rubric and failure taxonomy using the first one-shot review evidence so future review rounds can describe scene intent mismatch, material surface mismatch, control layout mismatch, shot role adherence, and product identity strength more precisely.
+changed_files_current_task:
+  - docs/AIL_VIS_09_VISUAL_EVAL_FAILURE_TAXONOMY_HARDENING.md
+  - docs/VISUAL_EVAL_RUBRIC.md
+  - docs/VISUAL_FAILURE_TAXONOMY.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+boundary_checks:
+  retry_generation_performed: false
+  second_image_generated: false
+  image_editing_performed: false
+  provider_called: false
+  plugin_called: false
+  api_called: false
+  runtime_execution_performed: false
+  review_console_runtime_launched: false
+  accepted_sample_created: false
+  memory_candidate_created: false
+  actual_memory_write_performed: false
+  daily_note_written: false
+  vcp_memory_written: false
+  codex_memory_mutated: false
+  production_candidate_002_started: false
+  batch_005_started: false
+  dependency_changed: false
+  package_json_modified: false
+  git_add_dot_used: false
+recommended_next: use the hardened review language for future visual review rounds and wait for an explicit new route instruction
+```
+
+---
+
 ## Checkpoint - AIL Retry Or Route Decision Gate
 
 ```text

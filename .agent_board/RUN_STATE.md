@@ -1,3 +1,29 @@
+## Current Run State - AIL Visual Eval Failure Taxonomy Hardening
+
+```text
+phase: AIL-VIS-09_visual_eval_failure_taxonomy_hardening
+status: completed_validated_pushed
+mode: docs_only_protocol_hardening
+goal: Harden the visual evaluation rubric and failure taxonomy using the first one-shot review evidence so future review rounds can distinguish scene intent mismatch, material surface mismatch, control layout mismatch, shot role adherence, and product identity strength more precisely.
+branch: ail-vis-09-eval-taxonomy-hardening
+source_phase: AIL-VIS-08_retry_or_route_decision_gate
+source_commit: 199f4854395890ce255204f43179d1aae23b0d3d
+selected_route: route_A_hold_as_review_evidence
+summary: Hardened the review rubric and failure taxonomy using the AIL-VIS-07 review gaps. `pass_with_warnings` is now explicitly review evidence only and not an automatic promotion signal.
+changed_files:
+  - docs/AIL_VIS_09_VISUAL_EVAL_FAILURE_TAXONOMY_HARDENING.md
+  - docs/VISUAL_EVAL_RUBRIC.md
+  - docs/VISUAL_FAILURE_TAXONOMY.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+boundary_checks: retry_generation_performed: false; second_image_generated: false; image_editing_performed: false; provider_called: false; plugin_called: false; api_called: false; runtime_execution_performed: false; review_console_runtime_launched: false; accepted_sample_created: false; memory_candidate_created: false; actual_memory_write_performed: false; daily_note_written: false; vcp_memory_written: false; codex_memory_mutated: false; production_candidate_002_started: false; batch_005_started: false; dependency_changed: false; package_json_modified: false; git_add_dot_used: false; next_phase_started: false.
+next_safe_task: use the hardened review language for future visual review rounds and wait for an explicit new route instruction.
+```
+
+---
+
 ## Current Run State - AIL Retry Or Route Decision Gate
 
 ```text
