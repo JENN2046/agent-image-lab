@@ -1,3 +1,13 @@
+- [x] ID: ail_mem_03_memory_candidate_dry_run_planning_gate
+      Lane: Green local docs-only planning gate.
+      Status: completed_validated_docs_only.
+      Goal: Define how the first future memory_candidate dry-run artifact will be planned without creating any candidate, payload, or write result in this phase.
+      Completed: added `docs/MEMORY_CANDIDATE_DRY_RUN_PLAN.md`; added the planning layer reference from the payload contract and pipeline map; documented candidate naming rules, allowed source evidence, required review fields, required memory_suitability labels, forbidden raw fields, rollback requirements, future dry-run output paths, validation commands, and the closeout template.
+      Boundary fields: actual_memory_write_performed: false; daily_note_written: false; vcp_memory_written: false; codex_memory_mutated: false; image_generated: false; provider_called: false; plugin_called: false; api_called: false; runtime_execution_performed: false; production_candidate_002_started: false; batch_005_started: false; next_phase_started: false.
+      Recommended next: keep the dry-run planning gate reference-only and use it as the blueprint for any future memory packet work.
+
+---
+
  - [x] ID: ail_mem_02_memory_payload_contract
       Lane: Green local docs-only schema planning.
       Status: completed_validated_docs_only.

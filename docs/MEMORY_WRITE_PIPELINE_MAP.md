@@ -248,3 +248,7 @@ unless an exact memory writer target is resolved and the A5 gate is satisfied.
 For the next layer down, see `docs/MEMORY_WRITE_PAYLOAD_CONTRACT.md`, which
 defines the candidate, draft, target package, preview, dry-run, and rollback
 schemas for a no-write or write-ready memory packet.
+
+For the planning layer below that, see `docs/MEMORY_CANDIDATE_DRY_RUN_PLAN.md`,
+which defines the exact shape of the first future memory-candidate dry-run gate
+without creating any candidate in this phase.

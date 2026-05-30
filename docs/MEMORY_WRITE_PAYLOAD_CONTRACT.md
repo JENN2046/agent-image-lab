@@ -310,3 +310,6 @@ canonical memory target remains:
 
 Any future memory packet must be able to prove exact target resolution, safety,
 rollback, and no raw field leakage before a real write is allowed.
+
+For the planning gate that defines the first future memory-candidate dry-run
+artifact, see `docs/MEMORY_CANDIDATE_DRY_RUN_PLAN.md`.

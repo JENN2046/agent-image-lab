@@ -1,3 +1,33 @@
+## Checkpoint - AIL Memory Candidate Dry-Run Planning Gate
+
+```text
+phase: AIL-MEM-03_memory_candidate_dry_run_planning_gate
+status: completed_validated_docs_only
+result: PASS
+mode: docs_only_gate
+summary: Added the planning gate for the first future memory_candidate dry-run artifact, keeping the repository on the staging side of the boundary and explicitly not creating any candidate, payload, preview, or dry-run result in this phase.
+changed_files_current_task:
+  - docs/MEMORY_CANDIDATE_DRY_RUN_PLAN.md
+  - docs/MEMORY_WRITE_PAYLOAD_CONTRACT.md
+  - docs/MEMORY_WRITE_PIPELINE_MAP.md
+boundary_checks:
+  actual_memory_write_performed: false
+  daily_note_written: false
+  vcp_memory_written: false
+  codex_memory_mutated: false
+  image_generated: false
+  provider_called: false
+  plugin_called: false
+  api_called: false
+  runtime_execution_performed: false
+  production_candidate_002_started: false
+  batch_005_started: false
+  next_phase_started: false
+recommended_next: keep the dry-run planning gate reference-only and use it as the blueprint for any future memory packet work.
+```
+
+---
+
 ## Checkpoint - AIL Memory Payload Contract
 
 ```text
