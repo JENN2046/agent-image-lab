@@ -1,28 +1,28 @@
-package_id: visual_production_next_prompt_package_premium_portable_led_camping_lantern_v1
+package_id: visual_production_next_prompt_package_premium_dark_tech_product_still_life_v1
 version: v1
 language: en
 mode: text_to_image
 reference_policy: text_only_no_image_input
-title: "Visual production next-shot prompt package v1 for premium portable LED camping lantern"
+title: "Visual production next-shot prompt package v1 for premium dark tech product still life"
 purpose: "Generation-ready planning prompt package for the next visual production cycle; this file does not contact providers, generate images, write memory, or create execution authorization."
 
-source_phase: AIL-VIS-03_visual_prompt_package_and_shot_plan_refresh
+source_phase: AIL-VIS-11_shot_plan_and_prompt_package_planning
 source_shot_plan: prompts/image_generation/visual_production_next_shot_plan.yaml
 source_rubric: docs/VISUAL_EVAL_RUBRIC.md
 source_failure_taxonomy: docs/VISUAL_FAILURE_TAXONOMY.md
-selected_product: premium_portable_led_camping_lantern
-selected_product_category: outdoor_lighting_product
-target_shot_id: visual_production_next_shot_hero_01
+selected_product: premium_dark_tech_product_still_life
+selected_product_category: dark premium tech product
+target_shot_id: visual_production_next_shot_dark_tech_hero_01
 model_or_provider: TBD
 
 product_identity:
-  product_type: premium_portable_led_camping_lantern
-  product_category: outdoor_lighting_product
+  product_type: dark premium tech product still life
+  product_category: dark premium tech product
   category_terms:
-    - premium portable LED camping lantern
-    - modern rechargeable camping lantern
-    - compact outdoor LED lantern
-    - premium metal shell lantern
+    - premium dark tech product still life
+    - dark premium metallic product
+    - glass and metal commercial hero object
+    - modern premium still-life object
   must_not_be:
     - flashlight
     - speaker
@@ -31,38 +31,34 @@ product_identity:
     - humidifier
     - thermos
     - candle
-    - vintage lantern
+    - lantern
+    - vintage lamp
 
 visual_constraints:
-  shot_goal: product-first square hero image
+  shot_goal: commercial still-life hero image
   aspect_ratio: "1:1"
   product_dominance: high
   negative_space: controlled and headline-safe
-  mood: premium blue-hour outdoor lifestyle
+  mood: low-key premium dark tech
   style: realistic commercial product photography
   review_required: true
 
 positive_prompt_draft: |
-  Create a square premium outdoor lifestyle hero image of a modern portable LED camping lantern. The lantern must be the clear hero product and should read immediately as a premium rechargeable outdoor light, not as a flashlight, speaker, bottle, desk lamp, humidifier, thermos, candle, or vintage lantern.
+  Create a square premium dark tech product still life with the subject dominating the frame. The image should feel like a premium commercial product photograph, not a casual snapshot or decorative scene.
 
-  Keep the product fully visible and dominant in the frame. Use a dark premium metal shell with refined industrial seams, a clean frosted diffuser with believable internal scattering, a smaller integrated lower-body control, and a thin compact base. The handle should be clean, attached, and physically plausible. Make the lantern slightly larger and more commanding than the previous hero plan, while still leaving controlled negative space around it.
+  Keep the object fully visible and centered as the hero. Use dark premium materials with believable metal and glass behavior, controlled reflections, and low-key lighting that keeps the silhouette strong. The product should read as high-end, modern, and technically refined. Preserve a calm, commercial composition with enough negative space for later headline placement.
 
-  Place the product on a shallow, straight, dark horizontal table or stone surface. Use a deep blue-hour atmosphere with a warm amber glow from the diffuser and cool ambient rim light on the metal edges. The glow should be believable and softly diffused, not blown out and not magical. The image should feel like premium commercial photography with strong product readability, premium materials, and clean advertising usability.
-
-  Keep the background quiet, blurred, and supportive only. The scene should suggest an elegant outdoor evening setting without clutter, extra products, hands, people, logos, labels, fake text, or watermark. Preserve a square composition with a strong subject-first silhouette, readable material detail, and enough calm negative space for later headline placement.
+  The lighting should be restrained and elegant, with readable highlights and shadows that support the product form without making the scene feel theatrical. Keep the environment quiet, premium, and uncluttered. The result should feel suitable for a high-end product campaign and should avoid anything that makes the object look generic, cheap, or over-styled.
 
 negative_prompt_draft: |
   readable text, generated text, random letters, logo, fake brand, watermark, signature, label, QR code,
   people, hands, faces, human body,
-  extra lanterns, duplicated product, cropped product, product too small, product hidden by props,
-  flashlight, speaker, bottle, desk lamp, humidifier, thermos, candle, vintage lantern,
-  broken handle, detached handle, floating handle, impossible geometry, warped body, melted shape, unstable base,
-  oversized knob, attached-looking knob, control on top cap, control on upper ring, missing lower-body control,
-  thick chunky base, heavy stacked base, oversized base,
-  flat plastic diffuser, cheap gray shell, dusty gray material, chalky surface, smooth plastic look,
-  blown-out glow, unrealistic beams, magical aura, noisy reflections, poor contact shadow,
-  cluttered campsite, busy background, fire touching the product, bright competing light,
-  CGI look, illustration, cartoon, low resolution, over-sharpened, muddy material, visible AI artifact
+  extra products, duplicated object, cropped object, product too small, product hidden by props,
+  flashlight, speaker, bottle, desk lamp, humidifier, thermos, candle, lantern, vintage lamp,
+  broken geometry, warped body, melted shape, floating parts, impossible connections,
+  cheap plastic look, glossy toy-like finish, fake metal, fake glass, muddy surface, dirty reflections,
+  noisy background, clutter, distracting props, busy scenery, overexposed highlights, flat lighting,
+  illustration, cartoon, CGI look, low resolution, over-sharpened, visible AI artifact
 
 failure_taxonomy_refs:
   - subject_drift
