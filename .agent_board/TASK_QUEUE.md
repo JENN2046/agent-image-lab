@@ -1,3 +1,14 @@
+- [x] ID: ail_vis_17_execution_reconciliation_and_review_gate
+      Lane: Green local docs-only execution reconciliation review.
+      Status: completed_validated_pushed.
+      Goal: Reconcile the owner-authorized one-shot generation evidence for premium_black_wireless_headphones_product_hero and classify the image as generated_unreviewed until human visual review.
+      Completed: added `docs/AIL_VIS_17_EXECUTION_RECONCILIATION_AND_REVIEW_GATE.md`; updated `.agent_board` run state, handoff, checkpoint, and task queue surfaces to record the generated output path, source cache path, SHA256, call/image counts, and review-required status.
+      Execution fields: owner_A5_authorization_granted=true; authorization_phrase_visible_in_chat=true; provider_tool=image_gen.imagegen; provider_plugin_calls_used=1; images_generated=1; max_images=1; image_status=generated_unreviewed; sha256=8954A5404BC6A296B6D86091A9DAB46E048CEC1DECB55CCA07B5B12FBA3C203E.
+      Boundary fields: additional_generation_performed: false; retry_generation_performed: false; second_image_generated: false; image_editing_performed: false; provider_called_again: false; plugin_called_again: false; api_called: false; runtime_execution_performed: false; accepted_sample_created: false; memory_candidate_created: false; actual_memory_write_performed: false; production_candidate_002_started: false; batch_005_started: false; git_add_dot_used: false; next_phase_started: false.
+      Recommended next: AIL-VIS-18_human_visual_review_gate.
+
+---
+
 - [x] ID: ail_vis_16_pre_execution_static_review_and_a5_authorization_request
       Lane: Green local docs-only A5 request gate.
       Status: completed_validated_pushed.
