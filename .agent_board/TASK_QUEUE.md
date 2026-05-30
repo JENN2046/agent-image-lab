@@ -1,3 +1,13 @@
+- [x] ID: ail_vis_03_visual_prompt_package_and_shot_plan_refresh
+      Lane: Green local docs-only prompt and shot planning.
+      Status: completed_validated.
+      Goal: Refresh the next visual production shot plan and prompt package using the updated visual evaluation rubric and failure taxonomy, without generating images or opening any memory write path.
+      Completed: added `docs/AIL_VIS_03_VISUAL_PROMPT_PACKAGE_AND_SHOT_PLAN_REFRESH.md`; added `prompts/image_generation/visual_production_next_shot_plan.yaml`; added `prompts/image_generation/visual_production_next_prompt_package.yaml`; updated `.agent_board` run state, handoff, checkpoint, and task queue surfaces to record the new visual planning gate.
+      Boundary fields: image_generated: false; provider_called: false; plugin_called: false; api_called: false; runtime_execution_performed: false; review_console_runtime_launched: false; actual_memory_write_performed: false; daily_note_written: false; vcp_memory_written: false; codex_memory_mutated: false; production_candidate_002_started: false; batch_005_started: false; next_phase_started: false.
+      Recommended next: AIL-VIS-04_visual_generation_authorization_gate.
+
+---
+
 - [x] ID: ail_vis_02_visual_eval_rubric_and_failure_taxonomy_refresh
       Lane: Green local docs-only visual review planning.
       Status: completed_validated.

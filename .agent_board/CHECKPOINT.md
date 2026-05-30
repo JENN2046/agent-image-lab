@@ -1,3 +1,38 @@
+## Checkpoint - AIL Visual Prompt Package And Shot Plan Refresh
+
+```text
+phase: AIL-VIS-03_visual_prompt_package_and_shot_plan_refresh
+status: completed_validated
+result: PASS
+mode: docs_only_prompt_and_shot_planning
+summary: Added the AIL-VIS-03 route gate plus a premium portable LED camping lantern shot plan and prompt package so the next visual production cycle can proceed from a stable rubric and failure taxonomy without generating images.
+changed_files_current_task:
+  - docs/AIL_VIS_03_VISUAL_PROMPT_PACKAGE_AND_SHOT_PLAN_REFRESH.md
+  - prompts/image_generation/visual_production_next_shot_plan.yaml
+  - prompts/image_generation/visual_production_next_prompt_package.yaml
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+boundary_checks:
+  image_generated: false
+  provider_called: false
+  plugin_called: false
+  api_called: false
+  runtime_execution_performed: false
+  review_console_runtime_launched: false
+  actual_memory_write_performed: false
+  daily_note_written: false
+  vcp_memory_written: false
+  codex_memory_mutated: false
+  production_candidate_002_started: false
+  batch_005_started: false
+  next_phase_started: false
+recommended_next: AIL-VIS-04_visual_generation_authorization_gate
+```
+
+---
+
 ## Checkpoint - AIL Visual Eval Rubric And Failure Taxonomy Refresh
 
 ```text

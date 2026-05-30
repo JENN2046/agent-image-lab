@@ -1,0 +1,87 @@
+shot_plan_id: visual_production_next_shot_plan_premium_portable_led_camping_lantern_v1
+phase: AIL-VIS-03_visual_prompt_package_and_shot_plan_refresh
+mode: docs_only_prompt_and_shot_planning
+source_phase: AIL-VIS-02_visual_eval_rubric_and_failure_taxonomy_refresh
+source_commit: 8a5dad0e
+selected_product: premium_portable_led_camping_lantern
+selected_product_category: outdoor_lighting_product
+visual_goal: premium outdoor lifestyle hero image with tighter product dominance than the previous hero plan
+composition_goal: square 1:1 product-first framing with full product visibility and controlled negative space
+generation_allowed_now: false
+review_required: true
+rubric_refs:
+  - docs/VISUAL_EVAL_RUBRIC.md
+  - docs/VISUAL_FAILURE_TAXONOMY.md
+
+shots:
+  - shot_id: visual_production_next_shot_hero_01
+    shot_role: hero_product_shot
+    visual_goal: premium square hero image with the lantern as the dominant product
+    subject: premium portable LED camping lantern
+    composition_notes:
+      - keep the full product visible
+      - make the lantern larger and more dominant than the previous hero plan
+      - keep the top and side negative space controlled
+      - keep the table shallow and horizontal
+    lighting_notes:
+      - use deep blue-hour ambient light
+      - preserve warm diffuser glow
+      - keep metal highlights readable
+    material_realism_requirements:
+      - frosted diffuser micro-texture
+      - dark premium metal shell
+      - thin compact base
+      - smaller integrated lower-body control
+    commercial_usability_requirements:
+      - product must read clearly on first glance
+      - keep clean negative space for later headline placement
+      - avoid text, logos, and clutter
+    failure_risks:
+      - subject drift
+      - plastic look
+      - composition too loose
+      - oversized knob
+      - flat lighting
+      - visible AI artifact risk
+    review_rubric_refs:
+      - docs/VISUAL_EVAL_RUBRIC.md
+      - docs/VISUAL_FAILURE_TAXONOMY.md
+    generation_allowed_now: false
+
+  - shot_id: visual_production_next_shot_material_detail_01
+    shot_role: material_detail_shot
+    visual_goal: tighter supporting shot that validates diffuser, metal shell, and control integration
+    subject: premium portable LED camping lantern
+    composition_notes:
+      - tighter crop than the hero shot
+      - keep key product surfaces readable
+      - avoid macro abstraction or product identity drift
+    lighting_notes:
+      - preserve warm-cool separation
+      - keep diffuser scattering believable
+    material_realism_requirements:
+      - diffuser thickness should feel physical
+      - metal seams should read as manufactured
+      - base should stay refined and thin
+    commercial_usability_requirements:
+      - useful as evidence, not a replacement for the hero shot
+      - keep the product obviously the same route asset
+    failure_risks:
+      - detail distortion
+      - material_fake_or_plastic
+      - lighting_inconsistent
+      - ai_artifact_visible
+    review_rubric_refs:
+      - docs/VISUAL_EVAL_RUBRIC.md
+      - docs/VISUAL_FAILURE_TAXONOMY.md
+    generation_allowed_now: false
+
+route_boundary:
+  provider_call_allowed_now: false
+  plugin_call_allowed_now: false
+  api_call_allowed_now: false
+  runtime_execution_allowed_now: false
+  image_generation_allowed_now: false
+  actual_memory_write_allowed_now: false
+  production_candidate_002_allowed_now: false
+  batch_005_allowed_now: false
