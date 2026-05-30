@@ -1,3 +1,40 @@
+## Checkpoint - AIL Accepted Sample Promotion Applied
+
+```text
+phase: AIL-VIS-22_accepted_sample_promotion_execution_gate
+status: completed_validated_local
+result: ACCEPTED_SAMPLE_METADATA_REGISTERED
+mode: accepted_sample_metadata_registration
+summary: Registered the premium black wireless headphones hero image as accepted sample metadata after explicit owner authorization. No image binary was copied into accepted_samples; the source remains under runs/real_generation.
+changed_files_current_task:
+  - accepted_samples/accepted_sample_registry.yaml
+  - accepted_samples/categories/product_still_life.yaml
+  - accepted_samples/ail_vis_17_premium_black_wireless_headphones_hero/manifest.json
+  - accepted_samples/ail_vis_17_premium_black_wireless_headphones_hero/metadata.json
+  - accepted_samples/ail_vis_17_premium_black_wireless_headphones_hero/source_evidence.json
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+promotion_result:
+  sample_id: accepted_premium_black_wireless_headphones_hero_ail_vis_17_001
+  accepted_sample_created: true
+  accepted_sample_promoted: true
+  accepted_sample_metadata_created: true
+  image_copied_into_accepted_samples: false
+boundary_checks:
+  image_generated: false
+  image_edited: false
+  accepted_sample_file_created: false
+  memory_candidate_created: false
+  actual_memory_write_performed: false
+  production_candidate_002_started: false
+  batch_005_started: false
+recommended_next: wait_for_explicit_instruction_before_memory_or_production_candidate_work
+```
+
+---
+
 ## Checkpoint - AIL Accepted Sample Promotion Execution Gate
 
 ```text

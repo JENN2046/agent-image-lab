@@ -1,0 +1,44 @@
+{
+  "record_type": "metadata_only_accepted_sample_source_evidence",
+  "version": "v1",
+  "sample_id": "accepted_premium_black_wireless_headphones_hero_ail_vis_17_001",
+  "created_at": "2026-05-30T22:15:00+08:00",
+  "source_generation_authorization_id": "AIL-VIS-16_explicit_A5_owner_authorization",
+  "source_review_authorization_id": "AIL-VIS-18_human_visual_review_closeout",
+  "promotion_draft_id": "AIL-VIS-21_accepted_sample_promotion_authorization_gate",
+  "promotion_apply_authorization_id": "AIL-VIS-22_owner_authorized_accepted_sample_promotion",
+  "owner_authorization": {
+    "authorized_by": "Jenn",
+    "authorization_text_ref": "chat:2026-05-30 AIL-VIS-22 explicit accepted sample promotion authorization",
+    "accepted_samples_target": "accepted_samples/ail_vis_17_premium_black_wireless_headphones_hero/",
+    "memory_write_allowed": false,
+    "production_candidate_002_allowed": false,
+    "batch_005_allowed": false
+  },
+  "evidence_refs": {
+    "review_doc_ref": "docs/AIL_VIS_18_HUMAN_VISUAL_REVIEW_CLOSEOUT.md",
+    "candidate_review_ref": "docs/AIL_VIS_20_ACCEPTED_SAMPLE_CANDIDATE_REVIEW_GATE.md",
+    "promotion_authorization_ref": "docs/AIL_VIS_21_ACCEPTED_SAMPLE_PROMOTION_AUTHORIZATION_GATE.md",
+    "promotion_execution_gate_ref": "docs/AIL_VIS_22_ACCEPTED_SAMPLE_PROMOTION_EXECUTION_GATE.md"
+  },
+  "verified_source_image": {
+    "path": "runs/real_generation/ail_vis_17_premium_black_wireless_headphones_hero/ail_vis_17_premium_black_wireless_headphones_hero_01.png",
+    "sha256": "8954A5404BC6A296B6D86091A9DAB46E048CEC1DECB55CCA07B5B12FBA3C203E",
+    "width": 1254,
+    "height": 1254,
+    "mime": "image/png",
+    "bytes": 1875509
+  },
+  "side_effects": {
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "image_copy_or_move_performed": false,
+    "DailyNote_write_performed": false,
+    "VCP_memory_write_performed": false,
+    "production_candidate_write_performed": false,
+    "push_tag_release_deploy_performed": false,
+    "secret_value_read_performed": false
+  }
+}

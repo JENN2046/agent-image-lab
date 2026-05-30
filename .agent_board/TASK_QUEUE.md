@@ -1,3 +1,13 @@
+- [x] ID: ail_vis_22_accepted_sample_promotion_apply
+      Lane: Amber owner-authorized accepted sample metadata registration.
+      Status: completed_validated_local.
+      Goal: Apply Jenn's explicit accepted sample promotion authorization for the premium black wireless headphones hero image without writing memory, starting production_candidate_002, or starting Batch 005.
+      Completed: registered accepted sample metadata for `accepted_premium_black_wireless_headphones_hero_ail_vis_17_001`; updated `accepted_samples/accepted_sample_registry.yaml`; updated `accepted_samples/categories/product_still_life.yaml`; added metadata capsule files under `accepted_samples/ail_vis_17_premium_black_wireless_headphones_hero/`; updated `.agent_board` surfaces.
+      Boundary fields: image_generated: false; image_edited: false; accepted_sample_created: true; accepted_sample_promoted: true; accepted_sample_file_created: false; image_copied_into_accepted_samples: false; accepted_sample_metadata_created: true; memory_candidate_created: false; actual_memory_write_performed: false; production_candidate_002_started: false; batch_005_started: false.
+      Recommended next: wait for explicit instruction before memory review, production candidate planning, or Batch work.
+
+---
+
 - [x] ID: ail_vis_22_accepted_sample_promotion_execution_gate
       Lane: Green local docs-only promotion execution gate.
       Status: completed_validated_pushed.

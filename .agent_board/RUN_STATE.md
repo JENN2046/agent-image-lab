@@ -1,3 +1,32 @@
+## Current Run State - AIL Accepted Sample Promotion Applied
+
+```text
+phase: AIL-VIS-22_accepted_sample_promotion_execution_gate
+status: completed_validated_local
+mode: accepted_sample_metadata_registration
+goal: Apply Jenn's explicit accepted sample promotion authorization for the premium black wireless headphones hero image without writing memory, starting production_candidate_002, or starting Batch 005.
+branch: ail-vis-22-accepted-sample-promotion-execution
+sample_id: accepted_premium_black_wireless_headphones_hero_ail_vis_17_001
+source_image: A:\agent-image-lab\agent-image-lab-v0.2\runs\real_generation\ail_vis_17_premium_black_wireless_headphones_hero\ail_vis_17_premium_black_wireless_headphones_hero_01.png
+sha256: 8954A5404BC6A296B6D86091A9DAB46E048CEC1DECB55CCA07B5B12FBA3C203E
+accepted_samples_target: accepted_samples/ail_vis_17_premium_black_wireless_headphones_hero/
+summary: Registered the headphones hero image as an accepted sample metadata entry and capsule. Source image remains in runs/real_generation; no image binary was copied into accepted_samples.
+changed_files:
+  - accepted_samples/accepted_sample_registry.yaml
+  - accepted_samples/categories/product_still_life.yaml
+  - accepted_samples/ail_vis_17_premium_black_wireless_headphones_hero/manifest.json
+  - accepted_samples/ail_vis_17_premium_black_wireless_headphones_hero/metadata.json
+  - accepted_samples/ail_vis_17_premium_black_wireless_headphones_hero/source_evidence.json
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+boundary_checks: image_generated: false; image_edited: false; accepted_sample_created: true; accepted_sample_promoted: true; accepted_sample_file_created: false; image_copied_into_accepted_samples: false; accepted_sample_metadata_created: true; memory_candidate_created: false; actual_memory_write_performed: false; production_candidate_002_started: false; batch_005_started: false.
+next_safe_task: wait for explicit instruction before memory review, production candidate planning, or Batch work.
+```
+
+---
+
 ## Current Run State - AIL Acceptance Or Hold Decision Gate
 
 ```text

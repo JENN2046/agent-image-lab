@@ -466,3 +466,62 @@ accepted_sample_registry:
         approval_record_ref: review_console/live_receipt_bridge/v0_6_73_real_vcp_agent_generation_retry_006/review_note.json
       write_to_memory_allowed: false
       daily_note_write_allowed: false
+
+    - sample_id: accepted_premium_black_wireless_headphones_hero_ail_vis_17_001
+      source_phase: AIL-VIS-17_execution_reconciliation_and_review_gate
+      source_plan: visual_production_next_shot_black_headphones_hero_01
+      asset_status: accepted_candidate
+      provider_type: codex_session_image
+      plugin_id: null
+      model: image_gen.imagegen_default_route
+      prompt_package_ref: prompts/image_generation/visual_production_next_prompt_package.yaml
+      review_doc_ref: docs/AIL_VIS_18_HUMAN_VISUAL_REVIEW_CLOSEOUT.md
+      formal_sample_package_ref: docs/AIL_VIS_21_ACCEPTED_SAMPLE_PROMOTION_AUTHORIZATION_GATE.md
+      promotion_apply_receipt_ref: accepted_samples/ail_vis_17_premium_black_wireless_headphones_hero/source_evidence.json
+      image_path: runs/real_generation/ail_vis_17_premium_black_wireless_headphones_hero/ail_vis_17_premium_black_wireless_headphones_hero_01.png
+      image_sha256: 8954A5404BC6A296B6D86091A9DAB46E048CEC1DECB55CCA07B5B12FBA3C203E
+      image_dimensions: 1254x1254
+      recoverability_status: workspace_local_verified
+      artifact_locator_scope: project_relative_runs
+      verification_mode: local_file_hash
+      verified_sha256: 8954A5404BC6A296B6D86091A9DAB46E048CEC1DECB55CCA07B5B12FBA3C203E
+      verified_dimensions: 1254x1254
+      verified_mime: image/png
+      verification_record_ref: docs/AIL_VIS_18_HUMAN_VISUAL_REVIEW_CLOSEOUT.md
+      import_record_ref: accepted_samples/ail_vis_17_premium_black_wireless_headphones_hero/metadata.json
+      capsule_manifest_ref: accepted_samples/ail_vis_17_premium_black_wireless_headphones_hero/manifest.json
+      portable_after_clone: false
+      artifact_recoverability_is_not_vcp_runtime_integration: true
+      image_files_committed_to_git: false
+      category: product_still_life
+      style_tags:
+        - premium_black_wireless_headphones
+        - product_still_life
+        - square_hero_product_image
+        - codex_session_image
+        - accepted_candidate
+      acceptance_summary:
+        target_match: pass
+        premium_black_wireless_headphones_identity: pass
+        square_hero_composition: pass
+        product_dominance: pass
+        low_key_premium_lighting: pass
+        material_readability: pass
+        no_text_logo_watermark: pass
+        no_people_hands_or_faces: pass
+        commercial_usability: pass_with_warnings
+        memory_suitability: false
+      known_minor_issues:
+        - product_identity_needs_stronger_design_signature
+        - manufacturing_plausibility_watchpoint
+        - commercial_readability_darkness_watchpoint
+        - production_candidate_promotion_requires_separate_authorization
+        - memory_write_deferred_until_separate_memory_authorization
+      commercial_use_level: accepted_candidate
+      human_approval:
+        approved: true
+        approved_by: Jenn
+        approval_statement_ref: user_authorization:AIL-VIS-22_explicit_accepted_sample_promotion
+        approval_record_ref: accepted_samples/ail_vis_17_premium_black_wireless_headphones_hero/source_evidence.json
+      write_to_memory_allowed: false
+      daily_note_write_allowed: false
