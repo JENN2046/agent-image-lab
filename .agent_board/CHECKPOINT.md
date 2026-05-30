@@ -1,3 +1,44 @@
+## Checkpoint - AIL Accepted Sample Candidate Review Gate
+
+```text
+phase: AIL-VIS-20_accepted_sample_candidate_review_gate
+status: completed_validated_pushed
+result: ACCEPTED_SAMPLE_CANDIDATE_REVIEW_ONLY
+mode: docs_only_candidate_review_gate
+summary: Recorded the headphones image as an accepted-sample candidate only. The image remains non-promoted, not copied into accepted_samples, and memory-blocked.
+changed_files_current_task:
+  - docs/AIL_VIS_20_ACCEPTED_SAMPLE_CANDIDATE_REVIEW_GATE.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+candidate_review:
+  candidate_status: accepted_sample_candidate
+  accepted_sample_created: false
+  accepted_sample_promoted: false
+  accepted_sample_file_created: false
+  memory_candidate_created: false
+  actual_memory_write_performed: false
+boundary_checks:
+  image_generated: false
+  retry_generation_performed: false
+  second_image_generated: false
+  image_editing_performed: false
+  provider_called: false
+  accepted_sample_created: false
+  accepted_sample_promoted: false
+  accepted_sample_file_created: false
+  image_copied_into_accepted_samples: false
+  memory_candidate_created: false
+  actual_memory_write_performed: false
+  production_candidate_002_started: false
+  batch_005_started: false
+  git_add_dot_used: false
+recommended_next: AIL-VIS-21_accepted_sample_promotion_authorization_gate
+```
+
+---
+
 ## Checkpoint - AIL Acceptance Or Hold Decision Gate
 
 ```text

@@ -1,3 +1,15 @@
+- [ ] ID: ail_vis_20_accepted_sample_candidate_review_gate
+- [x] ID: ail_vis_20_accepted_sample_candidate_review_gate
+      Lane: Green local docs-only candidate review gate.
+      Status: completed_validated_pushed.
+      Goal: Review whether the headphones image can become an accepted-sample candidate while keeping accepted sample files, promotion, memory, and production_candidate_002 blocked.
+      Completed: candidate review selected for the reviewed headphones image; accepted sample remains uncreated and unpromoted; memory remains blocked.
+      Candidate status: accepted_sample_candidate; review_decision=pass_with_warnings; score=86; target_match=pass; accepted_sample_created=false; accepted_sample_promoted=false; accepted_sample_file_created=false; memory_candidate_created=false; actual_memory_write_performed=false.
+      Boundary fields: image_generated: false; retry_generation_performed: false; second_image_generated: false; image_editing_performed: false; provider_called: false; plugin_called: false; api_called: false; runtime_execution_performed: false; review_console_runtime_launched: false; accepted_sample_created: false; accepted_sample_promoted: false; accepted_sample_file_created: false; image_copied_into_accepted_samples: false; memory_candidate_created: false; actual_memory_write_performed: false; production_candidate_002_started: false; batch_005_started: false; git_add_dot_used: false; next_phase_started: false.
+      Recommended next: AIL-VIS-21_accepted_sample_promotion_authorization_gate.
+
+---
+
 - [x] ID: ail_vis_19_acceptance_or_hold_decision_gate
       Lane: Green local docs-only route decision gate.
       Status: completed_validated_pushed.
