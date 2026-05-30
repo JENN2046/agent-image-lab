@@ -1,3 +1,13 @@
+- [x] ID: ail_vis_16_pre_execution_static_review_and_a5_authorization_request
+      Lane: Green local docs-only A5 request gate.
+      Status: completed_validated_pushed.
+      Goal: Prepare the exact A5 authorization request for the repaired premium black wireless headphones hero shot without accepting authorization, generating images, creating output directories, or opening memory and promotion paths.
+      Completed: added `docs/AIL_VIS_16_PRE_EXECUTION_STATIC_REVIEW_AND_A5_AUTHORIZATION_REQUEST.md`; updated `.agent_board` run state, handoff, checkpoint, and task queue surfaces to record the exact A5 wording needed from the user.
+      Boundary fields: image_generated: false; provider_called: false; plugin_called: false; api_called: false; runtime_execution_performed: false; output_directory_created: false; execution_prompt_authorized: false; A5_authorization_granted: false; accepted_sample_created: false; memory_candidate_created: false; actual_memory_write_performed: false; daily_note_written: false; vcp_memory_written: false; codex_memory_mutated: false; production_candidate_002_started: false; batch_005_started: false; images_copied_into_repo: false; images_deleted: false; dependency_changed: false; package_json_modified: false; git_add_dot_used: false; next_phase_started: false.
+      Recommended next: wait_for_complete_explicit_A5_authorization_phrase_before_any_execution_gate.
+
+---
+
 - [x] ID: ail_vis_15_generation_authorization_gate_for_repaired_target
       Lane: Green local docs-only generation authorization gate.
       Status: completed_validated_pushed.
