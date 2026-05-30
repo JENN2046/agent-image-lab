@@ -1,3 +1,13 @@
+- [x] ID: ail_vis_10_next_visual_target_selection_gate
+      Lane: Green local docs-only route selection.
+      Status: completed_validated_pushed.
+      Goal: Select the next visual production target after the LED lantern review cycle, choosing premium_dark_tech_product_still_life without writing an execution prompt, generating images, or opening any memory write path.
+      Completed: added `docs/AIL_VIS_10_NEXT_VISUAL_TARGET_SELECTION_GATE.md`; updated `.agent_board` run state, handoff, checkpoint, and task queue surfaces to record the target selection only.
+      Boundary fields: image_generated: false; generation_allowed_now: false; retry_generation_performed: false; retry_allowed_now: false; second_image_generated: false; image_editing_performed: false; provider_called: false; plugin_called: false; api_called: false; runtime_execution_performed: false; review_console_runtime_launched: false; accepted_sample_created: false; accepted_sample_allowed_now: false; memory_candidate_created: false; actual_memory_write_performed: false; memory_write_allowed_now: false; daily_note_written: false; vcp_memory_written: false; codex_memory_mutated: false; production_candidate_002_started: false; production_candidate_002_allowed_now: false; batch_005_started: false; dependency_changed: false; package_json_modified: false; git_add_dot_used: false; next_phase_started: false.
+      Recommended next: turn the selected target into a separate shot-plan and prompt-package planning gate only when explicitly instructed.
+
+---
+
 - [x] ID: ail_vis_10_visual_target_selection_gate
       Lane: Green local docs-only target selection gate.
       Status: completed_validated_pushed.
