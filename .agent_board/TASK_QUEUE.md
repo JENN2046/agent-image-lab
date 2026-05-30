@@ -1,3 +1,14 @@
+- [x] ID: ail_vis_19_acceptance_or_hold_decision_gate
+      Lane: Green local docs-only route decision gate.
+      Status: completed_validated_pushed.
+      Goal: Decide whether the reviewed headphones image should remain review evidence or move toward an accepted-sample candidate gate, without promoting the image, writing memory, generating again, editing the image, or starting production_candidate_002.
+      Completed: added `docs/AIL_VIS_19_ACCEPTANCE_OR_HOLD_DECISION_GATE.md`; updated `.agent_board` run state, handoff, checkpoint, and task queue surfaces to record the route decision and keep accepted-sample, memory, and production paths blocked.
+      Route decision: selected_route=route_B_prepare_accepted_sample_candidate_gate; review_decision=pass_with_warnings; score=86; target_match=pass; accepted_sample_created=false; accepted_sample_promoted=false; accepted_sample_file_created=false; memory_candidate_created=false; actual_memory_write_performed=false.
+      Boundary fields: image_generated: false; retry_generation_performed: false; second_image_generated: false; image_editing_performed: false; provider_called: false; plugin_called: false; api_called: false; runtime_execution_performed: false; review_console_runtime_launched: false; accepted_sample_created: false; accepted_sample_promoted: false; accepted_sample_file_created: false; memory_candidate_created: false; actual_memory_write_performed: false; production_candidate_002_started: false; batch_005_started: false; git_add_dot_used: false; next_phase_started: false.
+      Recommended next: AIL-VIS-20_accepted_sample_candidate_review_gate.
+
+---
+
 - [x] ID: ail_vis_18_human_visual_review_closeout
       Lane: Green local docs-only human visual review closeout.
       Status: completed_validated_pushed.

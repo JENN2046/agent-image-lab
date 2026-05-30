@@ -1,3 +1,41 @@
+## Checkpoint - AIL Acceptance Or Hold Decision Gate
+
+```text
+phase: AIL-VIS-19_acceptance_or_hold_decision_gate
+status: completed_validated_pushed
+result: ROUTE_B_ACCEPTED_SAMPLE_CANDIDATE_GATE_PREPARED
+mode: docs_only_route_decision_gate
+summary: Recorded the route decision that the reviewed headphones image should proceed toward a separate accepted-sample candidate gate. The image remains review evidence only and is not promoted or written to memory.
+changed_files_current_task:
+  - docs/AIL_VIS_19_ACCEPTANCE_OR_HOLD_DECISION_GATE.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+route_decision:
+  selected_route: route_B_prepare_accepted_sample_candidate_gate
+  review_decision: pass_with_warnings
+  score: 86
+  target_match: pass
+boundary_checks:
+  image_generated: false
+  retry_generation_performed: false
+  second_image_generated: false
+  image_editing_performed: false
+  provider_called: false
+  accepted_sample_created: false
+  accepted_sample_promoted: false
+  accepted_sample_file_created: false
+  memory_candidate_created: false
+  actual_memory_write_performed: false
+  production_candidate_002_started: false
+  batch_005_started: false
+  git_add_dot_used: false
+recommended_next: AIL-VIS-20_accepted_sample_candidate_review_gate
+```
+
+---
+
 ## Checkpoint - AIL Human Visual Review Closeout
 
 ```text
