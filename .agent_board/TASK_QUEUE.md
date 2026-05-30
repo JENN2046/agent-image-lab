@@ -1,3 +1,32 @@
+ - [x] ID: exact_new_trial_005_selected_pair_archive_closeout
+      Lane: Green local archive closeout.
+      Status: completed_validated_reference_only.
+      Goal: Record the two user-selected `v0_6_34_exact_new_trial_005` passing images as a formal archive pair and keep them reference-only.
+      Completed: created `docs/V0_6_34_EXACT_NEW_TRIAL_005_SELECTED_PAIR_EXECUTION_CLOSEOUT.md`; created `reports/visual_asset_eval_dry_run/v0_6_34_exact_new_trial_005_selected_pair_execution_closeout.json`; copied both selected images into `runs/real_generation/v0_3_3_exact_new_trial_005_selected_pair/`; confirmed both selected images are accepted candidates with no commercial-delivery status.
+      Boundary fields: provider_contact_performed: true; plugin_call_performed: true; api_call_performed: false; image_generation_performed: true; DailyNote_write_performed: false; VCP_memory_write_performed: false; accepted_samples_write_performed: false; production_candidate_write_performed: false; push_status: not_performed.
+      Recommended next: keep the pair reference-only or return to the red decision if another trial is needed.
+
+---
+ - [x] ID: exact_new_trial_005_fresh_round_archive_closeout
+      Lane: Amber_B fresh one-image generation round plus Green local archive closeout.
+      Status: completed_validated_reference_only.
+      Goal: Record the `v0_3_3_exact_new_trial_005` result as a formal archive note and keep it reference-only.
+      Completed: generated a new image distinct from `004`; added `docs/V0_6_33_EXACT_NEW_TRIAL_005_EXECUTION_CLOSEOUT.md`; copied the artifact into `runs/real_generation/v0_3_3_exact_new_trial_005/`; preserved the no memory / no production / no push boundary.
+      Boundary fields: provider_contact_performed: true; plugin_call_performed: true; api_call_performed: false; image_generation_performed: true; DailyNote_write_performed: false; VCP_memory_write_performed: false; accepted_samples_write_performed: false; production_candidate_write_performed: false; push_status: not_performed.
+      Recommended next: keep `005` reference-only or return to the red decision if yet another round is needed.
+
+---
+
+- [x] ID: exact_new_trial_004_formal_archive_closeout
+      Lane: Green local archive closeout.
+      Status: completed_validated_reference_only.
+      Goal: Record the `v0_3_3_exact_new_trial_004` result as a formal archive note and keep it reference-only.
+      Completed: added `docs/V0_6_32_EXACT_NEW_TRIAL_004_EXECUTION_CLOSEOUT.md`; confirmed the generated image hash and review result; preserved the no memory / no production / no push boundary.
+      Boundary fields: provider_contact_performed: true; plugin_call_performed: true; api_call_performed: false; image_generation_performed: true; DailyNote_write_performed: false; VCP_memory_write_performed: false; accepted_samples_write_performed: false; production_candidate_write_performed: false; push_status: not_performed.
+      Recommended next: keep result reference-only or return to the red decision if another trial is needed.
+
+---
+
 - [x] ID: inspect_failed_provider_tool_attempt_or_authorize_new_trial_clean_baseline_recheck
       Lane: Green local repository reality check.
       Status: completed_validated.

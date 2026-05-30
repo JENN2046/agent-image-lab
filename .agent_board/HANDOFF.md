@@ -1,3 +1,62 @@
+## Current Handoff Update - Exact New-Trial 005 Selected Pair Archive Closeout
+
+```text
+phase: v0_6_34_exact_new_trial_005_selected_pair_execution_closeout
+status: completed_validated_reference_only_archive_closeout
+mode: Green local archive closeout
+branch: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+summary: The two user-selected passing images from the `exact_new_trial_005` street-style round have been recorded as a formal reference-only archive pair. Both images are reviewable accepted candidates, but neither is commercial-delivery ready and neither was promoted to memory or production.
+changed_by_this_task:
+  - docs/V0_6_34_EXACT_NEW_TRIAL_005_SELECTED_PAIR_EXECUTION_CLOSEOUT.md
+  - reports/visual_asset_eval_dry_run/v0_6_34_exact_new_trial_005_selected_pair_execution_closeout.json
+  - runs/real_generation/v0_3_3_exact_new_trial_005_selected_pair/ig_0997cf7b50a7f3de016a1a3babee508191b420270d11bdab04.png
+  - runs/real_generation/v0_3_3_exact_new_trial_005_selected_pair/ig_0997cf7b50a7f3de016a19d39099dc8191a7e899d7e49e2e16.png
+boundary_fields: provider_call_performed: true; plugin_call_performed: true; api_call_performed: false; image_generation_performed: true; DailyNote_write_performed: false; VCP_memory_write_performed: false; accepted_samples_write_performed: false; production_candidate_write_performed: false; push_status: not_performed.
+next_safe_task: keep the selected pair reference-only, or return to the red decision if another trial is needed.
+```
+
+---
+
+## Current Handoff Update - Exact New-Trial 005 Fresh Round Archive Closeout
+
+```text
+phase: v0_6_33_exact_new_trial_005_execution_closeout
+status: completed_validated_reference_only_archive_closeout
+mode: Amber_B fresh one-image generation round plus Green local archive closeout
+branch: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+summary: Opened a new exact new-trial round distinct from `004`, generated a fresh accepted candidate, and recorded it as reference-only. The new image is reviewable, accepted_candidate_with_minor_watch_items, and not commercial-delivery ready. It was not promoted to memory or production.
+changed_by_this_task:
+  - docs/V0_6_33_EXACT_NEW_TRIAL_005_EXECUTION_CLOSEOUT.md
+  - runs/real_generation/v0_3_3_exact_new_trial_005/generation_attempt_result.json
+  - reports/provider_receipts/v0_3_3_exact_new_trial_005_receipt.json
+  - reports/provider_receipts/v0_3_3_exact_new_trial_005_registry.json
+  - review_console/live_receipt_bridge/v0_3_3_exact_new_trial_005/bridge_entry.json
+  - reports/visual_asset_eval_dry_run/v0_6_33_exact_new_trial_005_execution_closeout.json
+boundary_fields: provider_contact_performed: true; plugin_call_performed: true; api_call_performed: false; image_generation_performed: true; DailyNote_write_performed: false; VCP_memory_write_performed: false; accepted_samples_write_performed: false; production_candidate_write_performed: false; push_status: not_performed.
+next_safe_task: keep `005` reference-only, or return to the red decision if yet another round is needed.
+```
+
+---
+
+## Current Handoff Update - Exact New-Trial 004 Formal Archive Closeout
+
+```text
+phase: v0_6_32_exact_new_trial_004_execution_closeout
+status: completed_validated_reference_only_archive_closeout
+mode: Green local archive closeout
+branch: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+summary: Added a formal archive note for the successful `v0_3_3_exact_new_trial_004` result and kept it reference-only. The artifact is reviewable and accepted_candidate_with_minor_watch_items, but it is not commercial-delivery ready and was not promoted to memory or production.
+changed_by_this_task:
+  - docs/V0_6_32_EXACT_NEW_TRIAL_004_EXECUTION_CLOSEOUT.md
+  - reports/visual_asset_eval_dry_run/v0_6_32_exact_new_trial_004_execution_closeout.json
+  - runs/real_generation/v0_3_3_exact_new_trial_004/generation_attempt_result.json
+  - reports/provider_receipts/v0_3_3_exact_new_trial_004_receipt.json
+  - reports/provider_receipts/v0_3_3_exact_new_trial_004_registry.json
+  - review_console/live_receipt_bridge/v0_3_3_exact_new_trial_004/bridge_entry.json
+boundary_fields: provider_contact_performed: true; plugin_call_performed: true; api_call_performed: false; image_generation_performed: true; DailyNote_write_performed: false; VCP_memory_write_performed: false; accepted_samples_write_performed: false; production_candidate_write_performed: false; push_status: not_performed.
+next_safe_task: keep the result as reference-only or return to the red decision if another trial is needed.
+```
+
 ---
 
 ## Current Handoff Update - Main Project Clean Baseline Recheck

@@ -1,3 +1,91 @@
+## Checkpoint - Exact New-Trial 005 Selected Pair Archive Closeout
+
+```text
+phase: v0_6_34_exact_new_trial_005_selected_pair_execution_closeout
+status: completed_validated_reference_only_archive_closeout
+result: PASS
+mode: Green local archive closeout
+summary: Added a formal archive note for the two user-selected passing images from the `exact_new_trial_005` street-style round, copied them into the repository under `runs/real_generation/v0_3_3_exact_new_trial_005_selected_pair/`, recorded them as a reference-only pair, and kept the no memory / no production / no push boundary intact.
+changed_files_current_task:
+  - docs/V0_6_34_EXACT_NEW_TRIAL_005_SELECTED_PAIR_EXECUTION_CLOSEOUT.md
+  - reports/visual_asset_eval_dry_run/v0_6_34_exact_new_trial_005_selected_pair_execution_closeout.json
+boundary_fields:
+  - provider_contact_performed: true
+  - plugin_call_performed: true
+  - api_call_performed: false
+  - image_generation_performed: true
+  - DailyNote_write_performed: false
+  - VCP_memory_write_performed: false
+  - accepted_samples_write_performed: false
+  - production_candidate_write_performed: false
+  - push_status: not_performed
+recommended_next: archive_as_reference_only_without_memory_or_production_promotion
+```
+
+---
+
+## Checkpoint - Exact New-Trial 005 Fresh Round Archive Closeout
+
+```text
+phase: v0_6_33_exact_new_trial_005_execution_closeout
+status: completed_validated_reference_only_archive_closeout
+result: PASS
+mode: Amber_B fresh one-image generation round plus Green local archive closeout
+summary: Added a formal archive note for the successful exact_new_trial_005 result, recorded it as reference-only, and kept the no memory / no production / no push boundary intact.
+changed_files_current_task:
+  - docs/V0_6_33_EXACT_NEW_TRIAL_005_EXECUTION_CLOSEOUT.md
+  - runs/real_generation/v0_3_3_exact_new_trial_005/generation_attempt_result.json
+  - reports/provider_receipts/v0_3_3_exact_new_trial_005_receipt.json
+  - reports/provider_receipts/v0_3_3_exact_new_trial_005_registry.json
+  - review_console/live_receipt_bridge/v0_3_3_exact_new_trial_005/bridge_entry.json
+  - reports/visual_asset_eval_dry_run/v0_6_33_exact_new_trial_005_execution_closeout.json
+validation_completed:
+  - git diff --check: pending
+boundary_fields:
+  - provider_contact_performed: true
+  - plugin_call_performed: true
+  - api_call_performed: false
+  - image_generation_performed: true
+  - DailyNote_write_performed: false
+  - VCP_memory_write_performed: false
+  - accepted_samples_write_performed: false
+  - production_candidate_write_performed: false
+  - push_status: not_performed
+recommended_next: archive_as_reference_only_without_memory_or_production_promotion
+```
+
+---
+
+## Checkpoint - Exact New-Trial 004 Formal Archive Closeout
+
+```text
+phase: v0_6_32_exact_new_trial_004_execution_closeout
+status: completed_validated_reference_only_archive_closeout
+result: PASS
+mode: Green local archive closeout
+summary: Added a formal archive note for the successful exact_new_trial_004 result, recorded it as reference-only, and kept the no memory / no production / no push boundary intact.
+changed_files_current_task:
+  - docs/V0_6_32_EXACT_NEW_TRIAL_004_EXECUTION_CLOSEOUT.md
+  - reports/visual_asset_eval_dry_run/v0_6_32_exact_new_trial_004_execution_closeout.json
+  - runs/real_generation/v0_3_3_exact_new_trial_004/generation_attempt_result.json
+  - reports/provider_receipts/v0_3_3_exact_new_trial_004_receipt.json
+  - reports/provider_receipts/v0_3_3_exact_new_trial_004_registry.json
+  - review_console/live_receipt_bridge/v0_3_3_exact_new_trial_004/bridge_entry.json
+validation_completed:
+  - git diff --check: pending
+boundary_fields:
+  - provider_contact_performed: true
+  - plugin_call_performed: true
+  - api_call_performed: false
+  - image_generation_performed: true
+  - DailyNote_write_performed: false
+  - VCP_memory_write_performed: false
+  - accepted_samples_write_performed: false
+  - production_candidate_write_performed: false
+  - push_status: not_performed
+recommended_next: archive_as_reference_only_without_memory_or_production_promotion
+```
+
 ---
 
 ## Checkpoint - Governance Validator Smart V3 Remote Sync Repair
