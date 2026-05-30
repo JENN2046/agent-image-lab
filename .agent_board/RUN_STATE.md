@@ -1,3 +1,38 @@
+## Current Run State - AIL Memory Payload Contract
+
+```text
+phase: AIL-MEM-02_memory_payload_contract
+status: completed_validated_docs_only
+mode: docs_only_schema_planning
+goal: Define the repository-side memory payload contract and preserve the no-write boundary.
+branch: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+summary: The repository now has a payload contract that separates memory candidates, drafts, target packages, previews, and dry-run results from the canonical `codex-memory` target.
+changed_files:
+  - docs/MEMORY_WRITE_PAYLOAD_CONTRACT.md
+  - docs/MEMORY_WRITE_PIPELINE_MAP.md
+boundary_checks: actual_memory_write_performed: false; daily_note_written: false; vcp_memory_written: false; codex_memory_mutated: false; image_generated: false; provider_called: false; plugin_called: false; api_called: false; runtime_execution_performed: false; production_candidate_002_started: false; batch_005_started: false; next_phase_started: false.
+next_safe_task: keep the payload contract reference-only and use it as the template for any future memory packet work.
+```
+
+---
+
+## Current Run State - AIL Memory Write Pipeline Map
+
+```text
+phase: AIL-MEM-01_memory_write_pipeline_map
+status: completed_validated_docs_only
+mode: A0 read-only docs-only
+goal: Map the memory write pipeline for agent-image-lab while keeping the phase no-write.
+branch: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+summary: The repository-local memory write pipeline is now documented with a hard separation between staging artifacts and the canonical `codex-memory` target.
+changed_files:
+  - docs/MEMORY_WRITE_PIPELINE_MAP.md
+boundary_fields: actual_memory_write_performed: false; daily_note_written: false; vcp_memory_written: false; codex_memory_mutated: false; image_generated: false; production_candidate_002_started: false; batch_005_started: false; next_phase_started: false.
+next_safe_task: keep the map reference-only and use it as the boundary guide for any future memory-write packet work.
+```
+
+---
+
 ## Current Run State - Exact New-Trial 006 Archive Closeout
 
 ```text

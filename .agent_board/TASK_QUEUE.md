@@ -1,4 +1,24 @@
- - [x] ID: exact_new_trial_006_fresh_round_archive_closeout
+ - [x] ID: ail_mem_02_memory_payload_contract
+      Lane: Green local docs-only schema planning.
+      Status: completed_validated_docs_only.
+      Goal: Define the repository-side memory payload contract and preserve the no-write boundary to canonical `codex-memory`.
+      Completed: added `docs/MEMORY_WRITE_PAYLOAD_CONTRACT.md`; updated `docs/MEMORY_WRITE_PIPELINE_MAP.md`; documented candidate, draft, target package, preview, dry-run, forbidden fields, review fields, suitability, rollback, and closeout template.
+      Boundary fields: actual_memory_write_performed: false; daily_note_written: false; vcp_memory_written: false; codex_memory_mutated: false; image_generated: false; provider_called: false; plugin_called: false; api_called: false; runtime_execution_performed: false; production_candidate_002_started: false; batch_005_started: false; next_phase_started: false.
+      Recommended next: keep the payload contract reference-only and use it as the template for any future memory packet work.
+
+---
+
+ - [x] ID: ail_mem_01_memory_write_pipeline_map
+      Lane: Green local docs-only mapping.
+      Status: completed_validated_docs_only.
+      Goal: Map the memory write pipeline for agent-image-lab and clearly separate repository staging artifacts from the canonical `codex-memory` target.
+      Completed: added `docs/MEMORY_WRITE_PIPELINE_MAP.md`; documented write-before / write-time / write-after boundaries; documented the candidate-vs-actual-write distinction and the rollback requirement.
+      Boundary fields: actual_memory_write_performed: false; daily_note_written: false; vcp_memory_written: false; codex_memory_mutated: false; image_generated: false; production_candidate_002_started: false; batch_005_started: false; next_phase_started: false.
+      Recommended next: keep the map reference-only and use it as the boundary guide for any future memory-write packet work.
+
+---
+
+- [x] ID: exact_new_trial_006_fresh_round_archive_closeout
       Lane: Amber_B fresh one-image generation round plus Green local archive closeout.
       Status: completed_validated_reference_only.
       Goal: Record the `v0_3_3_exact_new_trial_006` result as a formal archive note and keep it reference-only.

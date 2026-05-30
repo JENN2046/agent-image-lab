@@ -1,3 +1,36 @@
+## Current Handoff Update - AIL Memory Payload Contract
+
+```text
+phase: AIL-MEM-02_memory_payload_contract
+status: completed_validated_docs_only
+mode: docs_only_schema_planning
+branch: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+summary: Added a repository-side memory payload contract that defines candidate, draft, target package, preview, and dry-run layers while preserving the no-write boundary to canonical `codex-memory`.
+changed_by_this_task:
+  - docs/MEMORY_WRITE_PAYLOAD_CONTRACT.md
+  - docs/MEMORY_WRITE_PIPELINE_MAP.md
+boundary_checks: actual_memory_write_performed: false; daily_note_written: false; vcp_memory_written: false; codex_memory_mutated: false; image_generated: false; provider_called: false; plugin_called: false; api_called: false; runtime_execution_performed: false; production_candidate_002_started: false; batch_005_started: false; next_phase_started: false.
+next_safe_task: keep the payload contract reference-only and use it as the template for any future memory packet work.
+```
+
+---
+
+## Current Handoff Update - AIL Memory Write Pipeline Map
+
+```text
+phase: AIL-MEM-01_memory_write_pipeline_map
+status: completed_validated_docs_only
+mode: A0 read-only docs-only
+branch: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+summary: Added a repository-local memory write pipeline map that separates staging artifacts from the canonical `codex-memory` target, documents write-before/write-time/write-after boundaries, and keeps the phase no-write.
+changed_by_this_task:
+  - docs/MEMORY_WRITE_PIPELINE_MAP.md
+boundary_fields: actual_memory_write_performed: false; daily_note_written: false; vcp_memory_written: false; codex_memory_mutated: false; image_generated: false; production_candidate_002_started: false; batch_005_started: false; next_phase_started: false.
+next_safe_task: keep the map reference-only and use it as the boundary guide for any future memory-write packet work.
+```
+
+---
+
 ## Current Handoff Update - Exact New-Trial 006 Archive Closeout
 
 ```text
