@@ -7,6 +7,25 @@ const path = require("node:path");
 const root = path.resolve(__dirname, "..");
 const recommenderScript = path.join(root, "scripts", "recommend_validation_for_changed_files.js");
 
+function parseArgs(argv) {
+  return {
+    includeStatus: argv.includes("--status"),
+    recommenderArgs: argv.filter((arg) => arg !== "--status"),
+  };
+}
+
+function gitOutput(args) {
+  try {
+    return execFileSync("git", args, {
+      cwd: root,
+      encoding: "utf8",
+      stdio: ["ignore", "pipe", "pipe"],
+    }).trim();
+  } catch {
+    return null;
+  }
+}
+
 function quoteYaml(value) {
   return JSON.stringify(value == null ? "" : String(value));
 }
@@ -55,6 +74,36 @@ function getRecommendation(argv) {
   return JSON.parse(output);
 }
 
+function getGitStatusSummary() {
+  const head = gitOutput(["rev-parse", "HEAD"]);
+  const branch = gitOutput(["rev-parse", "--abbrev-ref", "HEAD"]);
+  const upstream = gitOutput(["rev-parse", "--abbrev-ref", "--symbolic-full-name", "@{upstream}"]);
+  const upstreamHead = upstream ? gitOutput(["rev-parse", upstream]) : null;
+  const statusShort = gitOutput(["status", "--short"]);
+  const aheadBehindRaw = upstream ? gitOutput(["rev-list", "--left-right", "--count", `${upstream}...HEAD`]) : null;
+  const [behindRaw, aheadRaw] = (aheadBehindRaw || "").split(/\s+/);
+  const ahead = Number.parseInt(aheadRaw || "0", 10);
+  const behind = Number.parseInt(behindRaw || "0", 10);
+
+  return {
+    commit_hash: head,
+    branch,
+    local_equals_origin: Boolean(head && upstreamHead && head === upstreamHead),
+    ahead_behind: upstream ? `${Number.isNaN(ahead) ? 0 : ahead}/${Number.isNaN(behind) ? 0 : behind}` : "unavailable",
+    git_status: statusShort ? "dirty" : "clean",
+  };
+}
+
+function buildStatusBlock(status) {
+  return [
+    `commit_hash: ${quoteYaml(status.commit_hash)}`,
+    `branch: ${quoteYaml(status.branch)}`,
+    `local_equals_origin: ${status.local_equals_origin ? "true" : "false"}`,
+    `ahead_behind: ${quoteYaml(status.ahead_behind)}`,
+    `git_status: ${quoteYaml(status.git_status)}`,
+  ].join("\n");
+}
+
 function buildCloseoutValidationBlock(recommendation) {
   const lines = [
     "validation:",
@@ -72,8 +121,14 @@ function buildCloseoutValidationBlock(recommendation) {
 }
 
 function main() {
-  const recommendation = getRecommendation(process.argv.slice(2));
-  process.stdout.write(buildCloseoutValidationBlock(recommendation));
+  const args = parseArgs(process.argv.slice(2));
+  const recommendation = getRecommendation(args.recommenderArgs);
+  const blocks = [];
+  if (args.includeStatus) {
+    blocks.push(buildStatusBlock(getGitStatusSummary()));
+  }
+  blocks.push(buildCloseoutValidationBlock(recommendation).trimEnd());
+  process.stdout.write(`${blocks.join("\n")}\n`);
 }
 
 main();

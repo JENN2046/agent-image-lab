@@ -62,6 +62,14 @@ function gitList(args) {
   }).split(/\r?\n/).map((line) => normalizePath(line.trim())).filter(Boolean);
 }
 
+function gitScalar(args) {
+  return execFileSync("git", args, {
+    cwd: root,
+    encoding: "utf8",
+    stdio: ["ignore", "pipe", "pipe"],
+  }).trim();
+}
+
 function sameMembers(left, right) {
   const leftSet = new Set(left || []);
   const rightSet = new Set(right || []);
@@ -363,9 +371,24 @@ function validateWiring() {
     "--files",
     ".agent_board/CLOSEOUT_SCHEMA.md",
   ]);
+  const closeoutSummaryStatus = runRecommenderRaw([
+    closeoutHelperScript,
+    "--status",
+    "--files",
+    "package.json",
+  ]);
+  const expectedHead = gitScalar(["rev-parse", "HEAD"]);
+  const expectedBranch = gitScalar(["rev-parse", "--abbrev-ref", "HEAD"]);
+  const expectedStatus = gitScalar(["status", "--short"]) ? "dirty" : "clean";
+  const upstream = gitScalar(["rev-parse", "--abbrev-ref", "--symbolic-full-name", "@{upstream}"]);
+  const upstreamHead = gitScalar(["rev-parse", upstream]);
+  const [behindRaw, aheadRaw] = gitScalar(["rev-list", "--left-right", "--count", `${upstream}...HEAD`]).split(/\s+/);
+  const expectedAheadBehind = `${Number.parseInt(aheadRaw || "0", 10)}/${Number.parseInt(behindRaw || "0", 10)}`;
   add(
     "closeout_helper_uses_recommender_json_lite",
     closeoutHelperSource.includes('"--next-commands=json"') &&
+      closeoutHelperSource.includes("argv.filter((arg) => arg !== \"--status\")") &&
+      closeoutHelperSource.includes('gitOutput(["rev-list", "--left-right", "--count"') &&
       closeoutHelperSource.includes("recommend_validation_for_changed_files.js") &&
       closeoutHelperSource.includes("validation_decision_summary.next_commands")
   );
@@ -388,6 +411,17 @@ function validateWiring() {
       closeoutSummaryAgentBoard.includes('deferred_to_command: "npm run validate:archive-plan"') &&
       closeoutSummaryAgentBoard.includes('- ".agent_board/CLOSEOUT_SCHEMA.md"'),
     closeoutSummaryAgentBoard
+  );
+  add(
+    "closeout_helper_status_outputs_git_block",
+    closeoutSummaryStatus.includes(`commit_hash: "${expectedHead}"`) &&
+      closeoutSummaryStatus.includes(`branch: "${expectedBranch}"`) &&
+      closeoutSummaryStatus.includes(`local_equals_origin: ${expectedHead === upstreamHead ? "true" : "false"}`) &&
+      closeoutSummaryStatus.includes(`ahead_behind: "${expectedAheadBehind}"`) &&
+      closeoutSummaryStatus.includes(`git_status: "${expectedStatus}"`) &&
+      closeoutSummaryStatus.includes('primary_profile: "daily"') &&
+      closeoutSummaryStatus.includes('primary_command: "npm run validate:active"'),
+    closeoutSummaryStatus
   );
   add(
     "benchmark_summary_keeps_active_recommended",

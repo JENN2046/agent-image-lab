@@ -73,6 +73,7 @@ without requiring consumers to parse the full recommender payload.
 `validation_decision_summary.next_commands` into a paste-ready closeout
 `validation.recommender` block. It accepts the same selector arguments as the
 recommender, such as `--files`, `--cached`, and `--base`.
+Add `--status` when the closeout also needs local Git status fields.
 
 Change selection modes:
 
