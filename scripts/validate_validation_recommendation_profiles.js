@@ -9,6 +9,7 @@ const root = path.resolve(__dirname, "..");
 const recommenderScript = path.join(root, "scripts", "recommend_validation_for_changed_files.js");
 const benchmarkScript = path.join(root, "scripts", "benchmark_validation_efficiency.js");
 const packageJsonPath = path.join(root, "package.json");
+const agentsPath = path.join(root, "AGENTS.md");
 const validationSelectionMatrixPath = path.join(root, "docs", "VALIDATION_SELECTION_MATRIX.md");
 const benchmarkReportsDir = path.join(root, "reports", "validation_benchmarks");
 
@@ -266,6 +267,7 @@ function validateWiring() {
   const validateActive = scripts["validate:active"] || "";
   const recommenderSource = fs.readFileSync(recommenderScript, "utf8");
   const benchmarkSource = fs.readFileSync(benchmarkScript, "utf8");
+  const agents = fs.readFileSync(agentsPath, "utf8");
   const validationSelectionMatrix = fs.readFileSync(validationSelectionMatrixPath, "utf8");
 
   add(
@@ -382,6 +384,27 @@ function validateWiring() {
   add(
     "selection_matrix_recommender_contract_section_present",
     validationSelectionMatrix.includes("## Recommender Output Contract")
+  );
+  add(
+    "agents_closeout_consumes_recommender_next_commands",
+    agents.includes("For validation selection, daily closeouts should first consult") &&
+      agents.includes("npm run recommend:validation") &&
+      agents.includes("validation_decision_summary.next_commands") &&
+      agents.includes("recommendation was broadened, narrowed, deferred, or skipped") &&
+      agents.includes("recommender next_commands from `validation_decision_summary`")
+  );
+  add(
+    "selection_matrix_documents_daily_closeout_consumption",
+    validationSelectionMatrix.includes("## Daily Closeout Consumption") &&
+      validationSelectionMatrix.includes("run `npm run recommend:validation`") &&
+      validationSelectionMatrix.includes("before selecting") &&
+      validationSelectionMatrix.includes("validation_decision_summary.next_commands") &&
+      validationSelectionMatrix.includes("first validation plan to consider") &&
+      validationSelectionMatrix.includes("broadened for shared-risk coverage") &&
+      validationSelectionMatrix.includes("narrowed for a targeted spot check") &&
+      validationSelectionMatrix.includes("deferred") &&
+      validationSelectionMatrix.includes("archive/governance entrypoint") &&
+      validationSelectionMatrix.includes("skipped because the task was read-only")
   );
   add(
     "selection_matrix_names_profile_contract_fields",

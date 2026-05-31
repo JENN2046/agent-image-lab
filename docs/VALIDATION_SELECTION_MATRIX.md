@@ -69,6 +69,17 @@ Change selection modes:
 `explicit_file_list` so closeout reports can explain why a command was selected
 without re-running Git discovery by hand.
 
+## Daily Closeout Consumption
+
+For normal local closeout, run `npm run recommend:validation` before selecting
+validation manually. Treat `validation_decision_summary.next_commands` as the
+first validation plan to consider, then report those commands in closeout.
+
+If the closeout uses different commands, record whether the recommendation was
+broadened for shared-risk coverage, narrowed for a targeted spot check, deferred
+to an archive/governance entrypoint, or skipped because the task was read-only
+and no changed-file recommendation applied.
+
 Profile meanings:
 
 | Profile | Primary Use | Command |

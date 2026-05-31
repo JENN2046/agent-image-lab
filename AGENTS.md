@@ -1446,6 +1446,12 @@ Next:
 Chinese task summary:
 ```
 
+For validation selection, daily closeouts should first consult
+`npm run recommend:validation` and report the resulting
+`validation_decision_summary.next_commands` when the recommender applies to the
+changed files. If the closeout does not follow those commands, state why the
+recommendation was broadened, narrowed, deferred, or skipped.
+
 `Chinese task summary:` is a mandatory final footer for any task or goal
 closeout. It must not be removed for brevity, even when using Light Intake,
 compact closeout, or a highly concise final answer.
@@ -1477,6 +1483,7 @@ Changed files:
 - deleted
 
 Validation:
+- recommender next_commands from `validation_decision_summary`, or why the recommender was not used
 - git status
 - git diff --check
 - safety scan summary
