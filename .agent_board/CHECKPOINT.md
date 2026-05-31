@@ -1,3 +1,59 @@
+## Checkpoint - Closeout Helper Status Contract 2026-06-01
+
+```text
+phase: closeout_helper_status_contract_20260601
+status: completed_validated_pushed_synced
+result: CLOSEOUT_HELPER_STATUS_CONTRACT_COMPLETED
+mode: Green local validation tooling/status sync
+summary: The closeout helper now supports --status, the status block is locked by a dedicated validator, and post-push sync confirmed local and remote master at d2e8e5c7 with clean 0/0 status output.
+branch: master
+head_commit: d2e8e5c7aa71269b4a1340d142ca54c35b947cf0
+remote_sync:
+  local_head: d2e8e5c7aa71269b4a1340d142ca54c35b947cf0
+  local_origin_master: d2e8e5c7aa71269b4a1340d142ca54c35b947cf0
+  remote_refs_heads_master: d2e8e5c7aa71269b4a1340d142ca54c35b947cf0
+changed_files_mainline:
+  - docs/VALIDATION_SELECTION_MATRIX.md
+  - package.json
+  - scripts/build_validation_closeout_summary.js
+  - scripts/validate_closeout_status_summary.js
+  - scripts/validate_validation_recommendation_profiles.js
+  - scripts/validation_manifest.json
+audit_evidence:
+  closeout_status_contract_completed: true
+  validate_closeout_status_summary_added: true
+  package_script_added: validate:closeout-status-summary
+  validation_manifest_validator_id: closeout_status_summary
+  manifest_validator_count: 38
+  targeted_validator_count: 22
+  recommender_next_commands_include_status_validator: true
+  status_block_after_push: commit_hash=d2e8e5c7aa71269b4a1340d142ca54c35b947cf0; branch=master; local_equals_origin=true; ahead_behind=0/0; git_status=clean.
+validation_run:
+  - node --check scripts\validate_closeout_status_summary.js: passed
+  - node --check scripts\validate_validation_recommendation_profiles.js: passed
+  - npm run validate:closeout-status-summary: passed
+  - npm run validate:recommendation-profiles: passed
+  - node scripts\validate_validation_manifest.js: passed
+  - npm run validate:targeted-plan: passed
+  - npm run validate:active: passed before commit
+  - npm run --silent closeout:validation-summary -- --status: passed after push
+  - npm run --silent recommend:validation:next-commands -- --files scripts/build_validation_closeout_summary.js: passed after push
+boundary_checks:
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  secret_value_read_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  push_tag_release_deploy_performed: authorized_push_only
+push_allowed: false
+push_status: completed_by_explicit_user_authorization_then_synced
+recommended_next: exact-file local commit of this .agent_board status-surface sync if desired; otherwise return to higher-value product/runtime work.
+```
+
+---
+
 ## Checkpoint - Validation Recommendation Decision Summary 2026-06-01
 
 ```text

@@ -1,3 +1,30 @@
+## Current Run State - Closeout Helper Status Contract 2026-06-01
+
+```text
+phase: closeout_helper_status_contract_20260601
+status: completed_validated_pushed_synced
+mode: Green local validation tooling/status sync
+goal: Make closeout helper status output durable, testable, and discoverable.
+branch: master
+head_commit: d2e8e5c7aa71269b4a1340d142ca54c35b947cf0
+remote_sync: local HEAD equals origin/master and remote refs/heads/master.
+worktree_state: clean after post-push sync; dirty only for this .agent_board status-surface update.
+closeout_status_contract: completed
+status_block_contract: commit_hash; branch; local_equals_origin; ahead_behind; git_status.
+status_block_verified_after_push: local_equals_origin=true; ahead_behind=0/0; git_status=clean.
+validator_entry: npm run validate:closeout-status-summary
+manifest_validator_count_after_patch: 38
+targeted_validator_count_after_patch: 22
+recommender_discoverability: helper changes recommend node scripts/validate_closeout_status_summary.js.
+latest_validation: validate:closeout-status-summary passed; closeout:validation-summary -- --status passed; recommender next-commands spot check passed; post-push sync passed.
+boundary_checks: provider_contact_performed=false; plugin_call_performed=false; api_call_performed=false; image_generation_performed=false; secret_value_read_performed=false; DailyNote_write_performed=false; VCP_memory_write_performed=false.
+push_allowed: false
+push_status: completed_by_explicit_user_authorization_then_synced
+next_safe_task: no more required work for this goal; optional exact-file commit of .agent_board status-surface sync.
+```
+
+---
+
 ## Current Run State - Validation Recommendation Decision Summary 2026-06-01
 
 ```text

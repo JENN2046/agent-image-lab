@@ -1,3 +1,27 @@
+- [x] ID: closeout_helper_status_contract_20260601
+      Lane: Green local validation tooling/status sync.
+      Status: completed_validated_pushed_synced.
+      Goal: Lock closeout:validation-summary -- --status output with a dedicated validator and make it discoverable.
+      Current branch: master.
+      Head commit: d2e8e5c7aa71269b4a1340d142ca54c35b947cf0.
+      Mainline changed files:
+        - docs/VALIDATION_SELECTION_MATRIX.md
+        - package.json
+        - scripts/build_validation_closeout_summary.js
+        - scripts/validate_closeout_status_summary.js
+        - scripts/validate_validation_recommendation_profiles.js
+        - scripts/validation_manifest.json
+      Contract: closeout helper status block now reports commit_hash, branch, local_equals_origin, ahead_behind, and git_status; npm run validate:closeout-status-summary locks the contract.
+      Post-push sync: local HEAD, origin/master, origin/HEAD, and remote refs/heads/master all point to d2e8e5c7aa71269b4a1340d142ca54c35b947cf0.
+      Verified status block: local_equals_origin=true; ahead_behind=0/0; git_status=clean.
+      Recommender discoverability: scripts/build_validation_closeout_summary.js changes now include node scripts/validate_closeout_status_summary.js in next_commands.
+      Validation: npm run validate:closeout-status-summary passed; npm run --silent closeout:validation-summary -- --status passed; npm run --silent recommend:validation:next-commands -- --files scripts/build_validation_closeout_summary.js passed.
+      Boundary fields: provider_contact_performed=false; plugin_call_performed=false; api_call_performed=false; image_generation_performed=false; secret_value_read_performed=false; DailyNote_write_performed=false; VCP_memory_write_performed=false.
+      push_allowed: false
+      push_status: completed_by_explicit_user_authorization_then_synced
+      Recommended next: stop this validation-helper line; optional exact-file commit of this .agent_board status-surface sync.
+---
+
 - [x] ID: validation_recommendation_decision_summary_20260601
       Lane: Green local validation tooling/status sync.
       Status: completed_validated_local_dirty.

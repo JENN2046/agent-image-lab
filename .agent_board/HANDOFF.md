@@ -1,3 +1,38 @@
+## Current Handoff Update - Closeout Helper Status Contract 2026-06-01
+
+```text
+phase: closeout_helper_status_contract_20260601
+status: completed_validated_pushed_synced
+mode: Green local validation tooling/status sync
+goal: Lock closeout:validation-summary -- --status output with a dedicated validator and make the validator discoverable through package scripts, validation_manifest, and recommendation profiles.
+branch: master
+head_commit: d2e8e5c7aa71269b4a1340d142ca54c35b947cf0
+remote_sync: local HEAD, origin/master, origin/HEAD, and remote refs/heads/master all point to d2e8e5c7aa71269b4a1340d142ca54c35b947cf0.
+worktree_state: clean before status-surface sync; dirty only after this local .agent_board status-surface update.
+changed_files_mainline:
+  - package.json
+  - scripts/build_validation_closeout_summary.js
+  - scripts/validate_closeout_status_summary.js
+  - scripts/validate_validation_recommendation_profiles.js
+  - scripts/validation_manifest.json
+  - docs/VALIDATION_SELECTION_MATRIX.md
+contract_status: closeout helper status contract completed.
+status_helper_output_verified: commit_hash=d2e8e5c7aa71269b4a1340d142ca54c35b947cf0; branch=master; local_equals_origin=true; ahead_behind=0/0; git_status=clean.
+validator_added: npm run validate:closeout-status-summary.
+validator_discoverability: package.json script present; validation_manifest closeout_status_summary entry present; recommendation profile wiring present; recommender for scripts/build_validation_closeout_summary.js includes node scripts/validate_closeout_status_summary.js.
+latest_validation:
+  - npm run validate:closeout-status-summary: passed
+  - npm run --silent closeout:validation-summary -- --status: passed and emitted clean 0/0 status block
+  - npm run --silent recommend:validation:next-commands -- --files scripts/build_validation_closeout_summary.js: passed and included closeout status validator
+  - post-push remote sync: passed
+boundary_checks: provider_contact_performed=false; plugin_call_performed=false; api_call_performed=false; image_generation_performed=false; secret_value_read_performed=false; DailyNote_write_performed=false; VCP_memory_write_performed=false; push_tag_release_deploy_performed=authorized_push_only.
+push_allowed: false
+push_status: completed_by_explicit_user_authorization_then_synced
+next_safe_task: stop this validation helper line; return to higher-value product/runtime work or exact-file commit this .agent_board status-surface sync if desired.
+```
+
+---
+
 ## Current Handoff Update - Validation Recommendation Decision Summary 2026-06-01
 
 ```text
