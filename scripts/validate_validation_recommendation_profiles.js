@@ -10,6 +10,7 @@ const recommenderScript = path.join(root, "scripts", "recommend_validation_for_c
 const benchmarkScript = path.join(root, "scripts", "benchmark_validation_efficiency.js");
 const packageJsonPath = path.join(root, "package.json");
 const agentsPath = path.join(root, "AGENTS.md");
+const closeoutSchemaPath = path.join(root, ".agent_board", "CLOSEOUT_SCHEMA.md");
 const validationSelectionMatrixPath = path.join(root, "docs", "VALIDATION_SELECTION_MATRIX.md");
 const benchmarkReportsDir = path.join(root, "reports", "validation_benchmarks");
 
@@ -276,6 +277,7 @@ function validateWiring() {
   const recommenderSource = fs.readFileSync(recommenderScript, "utf8");
   const benchmarkSource = fs.readFileSync(benchmarkScript, "utf8");
   const agents = fs.readFileSync(agentsPath, "utf8");
+  const closeoutSchema = fs.readFileSync(closeoutSchemaPath, "utf8");
   const validationSelectionMatrix = fs.readFileSync(validationSelectionMatrixPath, "utf8");
 
   add(
@@ -447,6 +449,18 @@ function validateWiring() {
       agents.includes("validation_decision_summary.next_commands") &&
       agents.includes("recommendation was broadened, narrowed, deferred, or skipped") &&
       agents.includes("recommender next_commands from `validation_decision_summary`")
+  );
+  add(
+    "agent_board_closeout_schema_consumes_next_commands",
+    closeoutSchema.includes("recommender:") &&
+      closeoutSchema.includes("command: npm run recommend:validation:next-commands") &&
+      closeoutSchema.includes("source: validation_decision_summary.next_commands") &&
+      closeoutSchema.includes("primary_profile:") &&
+      closeoutSchema.includes("primary_command:") &&
+      closeoutSchema.includes("next_commands: []") &&
+      closeoutSchema.includes("deferred_commands: []") &&
+      closeoutSchema.includes("usage_decision: followed | broadened | narrowed | deferred | skipped") &&
+      closeoutSchema.includes("usage_reason:")
   );
   add(
     "selection_matrix_documents_daily_closeout_consumption",

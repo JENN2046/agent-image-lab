@@ -35,6 +35,15 @@ closeout:
     staged_exact_files_only:
 
   validation:
+    recommender:
+      command: npm run recommend:validation:next-commands
+      source: validation_decision_summary.next_commands
+      primary_profile:
+      primary_command:
+      next_commands: []
+      deferred_commands: []
+      usage_decision: followed | broadened | narrowed | deferred | skipped
+      usage_reason:
     git_status:
     git_diff_check:
     exact_diff_reviewed:
