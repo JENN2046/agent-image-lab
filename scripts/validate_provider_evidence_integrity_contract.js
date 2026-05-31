@@ -45,6 +45,32 @@ function git(args, allowFailure = false) {
   }
 }
 
+function gitLines(args, allowFailure = false) {
+  const output = git(args, allowFailure);
+  return output ? output.split(/\r?\n/).filter(Boolean) : [];
+}
+
+function collectArtifactPaths(record) {
+  const paths = [];
+  for (const key of ["output_files", "image_files"]) {
+    for (const artifact of Array.isArray(record[key]) ? record[key] : []) {
+      if (artifact && typeof artifact.path === "string") paths.push(artifact.path);
+    }
+  }
+  return paths;
+}
+
+function createArtifactValidationContext(records) {
+  const artifactPaths = [...new Set(records.flatMap(({ record }) => collectArtifactPaths(record)))].sort();
+  const trackedPaths = new Set(gitLines(["ls-files", "--", ...artifactPaths]));
+  const ignoredPaths = new Set(gitLines(["check-ignore", "--", ...artifactPaths], true));
+  return {
+    trackedPaths,
+    ignoredPaths,
+    artifactCache: new Map(),
+  };
+}
+
 function discoverReceiptRefs() {
   return fs.readdirSync(repoPath(receiptDir))
     .filter((name) => /^v0_6_73_real_vcp_agent_generation_(?:one_shot|retry_\d{3})_receipt\.json$/.test(name))
@@ -140,7 +166,7 @@ function assertRepoRelativePath(artifactPath, label) {
   assert(artifactPath.startsWith("runs/real_generation/"), `${label}.path must stay under runs/real_generation`);
 }
 
-async function assertEligibleArtifact(record, label) {
+async function assertEligibleArtifact(record, label, context) {
   assert(record && typeof record === "object", `${label} missing`);
   assertRepoRelativePath(record.path, label);
   assert(Number.isInteger(record.bytes) && record.bytes > 0, `${label}.bytes missing`);
@@ -150,37 +176,47 @@ async function assertEligibleArtifact(record, label) {
   assert(Number.isInteger(record.width) && record.width > 0, `${label}.width invalid`);
   assert(Number.isInteger(record.height) && record.height > 0, `${label}.height invalid`);
 
-  const artifactPath = repoPath(record.path);
-  assert(fs.existsSync(artifactPath), `${label}.path file missing`);
-  const bytes = fs.readFileSync(artifactPath);
-  const metadata = await sharp(artifactPath).metadata();
-  const sha256 = crypto.createHash("sha256").update(bytes).digest("hex");
-  const magicNumber = bytes.subarray(0, 4).toString("hex");
-  const tracked = git(["ls-files", "--", record.path]) === record.path;
-  const ignored = git(["check-ignore", "--", record.path], true) !== "";
+  if (!context.artifactCache.has(record.path)) {
+    const artifactPath = repoPath(record.path);
+    assert(fs.existsSync(artifactPath), `${label}.path file missing`);
+    const bytes = fs.readFileSync(artifactPath);
+    const metadata = await sharp(artifactPath).metadata();
+    context.artifactCache.set(record.path, {
+      path: record.path,
+      bytes: bytes.length,
+      sha256: crypto.createHash("sha256").update(bytes).digest("hex"),
+      magic_number: bytes.subarray(0, 4).toString("hex"),
+      mime_type: `image/${metadata.format === "jpeg" ? "jpeg" : metadata.format}`,
+      width: metadata.width,
+      height: metadata.height,
+      git_tracked: context.trackedPaths.has(record.path),
+      git_ignored: context.ignoredPaths.has(record.path),
+    });
+  }
+  const verified = context.artifactCache.get(record.path);
 
-  assert(bytes.length === record.bytes, `${label}.bytes mismatch`);
-  assert(sha256 === record.sha256, `${label}.sha256 mismatch`);
-  assert(record.magic_number.startsWith(magicNumber), `${label}.magic_number mismatch`);
-  assert(record.mime_type === `image/${metadata.format === "jpeg" ? "jpeg" : metadata.format}`, `${label}.mime_type mismatch`);
-  assert(metadata.width === record.width, `${label}.width mismatch`);
-  assert(metadata.height === record.height, `${label}.height mismatch`);
-  assert(tracked === true, `${label}.path must be git tracked`);
-  assert(ignored === false, `${label}.path must not be git ignored`);
+  assert(verified.bytes === record.bytes, `${label}.bytes mismatch`);
+  assert(verified.sha256 === record.sha256, `${label}.sha256 mismatch`);
+  assert(record.magic_number.startsWith(verified.magic_number), `${label}.magic_number mismatch`);
+  assert(record.mime_type === verified.mime_type, `${label}.mime_type mismatch`);
+  assert(verified.width === record.width, `${label}.width mismatch`);
+  assert(verified.height === record.height, `${label}.height mismatch`);
+  assert(verified.git_tracked === true, `${label}.path must be git tracked`);
+  assert(verified.git_ignored === false, `${label}.path must not be git ignored`);
 
   return {
     path: record.path,
-    bytes: bytes.length,
-    sha256,
+    bytes: verified.bytes,
+    sha256: verified.sha256,
     mime_type: record.mime_type,
-    width: metadata.width,
-    height: metadata.height,
-    git_tracked: tracked,
-    git_ignored: ignored,
+    width: verified.width,
+    height: verified.height,
+    git_tracked: verified.git_tracked,
+    git_ignored: verified.git_ignored,
   };
 }
 
-async function assertRecordArtifactSemantics(record, label) {
+async function assertRecordArtifactSemantics(record, label, context) {
   const outputArtifacts = Array.isArray(record.output_files)
     ? record.output_files.map((artifact) => ({ source: "output_files", artifact }))
     : [];
@@ -213,7 +249,7 @@ async function assertRecordArtifactSemantics(record, label) {
   }
 
   for (const { source, artifact } of artifacts) {
-    result.eligible_artifacts_checked.push(await assertEligibleArtifact(artifact, `${label}.${source}`));
+    result.eligible_artifacts_checked.push(await assertEligibleArtifact(artifact, `${label}.${source}`, context));
   }
   return result;
 }
@@ -225,18 +261,23 @@ async function main() {
   assert(receiptRefs.length === 7, "expected seven v0.6.73 real execution receipts");
   assert(handoffRefs.length === 7, "expected seven v0.6.73 real execution review handoffs");
 
+  const records = [...receiptRefs, ...handoffRefs].map((ref) => ({
+    ref,
+    record: readJson(ref),
+    label: toRel(repoPath(ref)),
+  }));
+  const artifactContext = createArtifactValidationContext(records);
+
   let localAdminRouteCount = 0;
   let eligibleArtifactRecordCount = 0;
   let outOfScopeArtifactCount = 0;
   const checkedArtifacts = [];
 
-  for (const ref of [...receiptRefs, ...handoffRefs]) {
-    const record = readJson(ref);
-    const label = toRel(repoPath(ref));
+  for (const { record, label } of records) {
     assertNoPublicDisclosureLeak(record, label);
     assertRedactedLocalRefs(record, label);
     if (assertLocalAdminRoute(record.local_admin_route, label)) localAdminRouteCount += 1;
-    const artifactResult = await assertRecordArtifactSemantics(record, label);
+    const artifactResult = await assertRecordArtifactSemantics(record, label, artifactContext);
     eligibleArtifactRecordCount += artifactResult.eligible_artifacts_checked.length;
     outOfScopeArtifactCount += artifactResult.out_of_scope_artifact_count;
     checkedArtifacts.push(...artifactResult.eligible_artifacts_checked);
