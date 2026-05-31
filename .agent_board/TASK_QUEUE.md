@@ -1,3 +1,17 @@
+- [x] ID: apple_smoke_prompt_freeze_20260531
+      Lane: Green local prompt metadata/documentation patch.
+      Status: completed_validated_local.
+      Goal: Freeze `neutral_smoke_test_red_apple_v1` as historical runtime smoke evidence only, not a future generation, review, accepted sample, or production-quality target.
+      Current branch: master.
+      Changed files:
+        - prompts/image_generation/neutral_smoke_test_red_apple_v1.yaml
+        - prompts/image_generation/README.md
+      Boundary fields: provider_contact_performed=false; plugin_call_performed=false; api_call_performed=false; image_generation_performed=false; secret_value_read_performed=false; DailyNote_write_performed=false; VCP_memory_write_performed=false; push_tag_release_deploy_performed=false.
+      Validation: node metadata presence check passed; node scripts\validate_agent_board_state.js passed; git diff --check passed with CRLF normalization warnings only.
+      Recommended next: exact-file local commit if authorized; push requires separate explicit instruction.
+
+---
+
 - [x] ID: runtime_to_review_v1_output_extension_normalization_patch_20260531
       Lane: Green local runtime/tooling patch.
       Status: completed_validated_local.

@@ -1,3 +1,40 @@
+## Checkpoint - Apple Smoke Prompt Freeze 2026-05-31
+
+```text
+phase: apple_smoke_prompt_freeze_20260531
+status: completed_validated_local
+result: APPLE_PROMPT_FROZEN_AS_HISTORICAL_SMOKE_ONLY
+mode: Green local prompt metadata/documentation patch
+summary: The red apple smoke-test prompt remains available for historical traceability but is now explicitly blocked from future generation reuse, human visual review, accepted sample promotion, and production-quality evaluation.
+branch: master
+changed_files_current_task:
+  - prompts/image_generation/neutral_smoke_test_red_apple_v1.yaml
+  - prompts/image_generation/README.md
+freeze_fields:
+  lifecycle_status: frozen_historical_smoke_only
+  reuse_allowed: false
+  future_generation_allowed: false
+  accepted_sample_candidate: false
+  human_visual_review_value: none
+historical_refs_preserved: true
+validation_run:
+  - node metadata presence check: passed
+  - node scripts\validate_agent_board_state.js: passed
+  - git diff --check: passed with CRLF normalization warnings only
+boundary_checks:
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  secret_value_read_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  push_tag_release_deploy_performed: false
+recommended_next: exact-file local commit if authorized; push requires separate explicit instruction.
+```
+
+---
+
 ## Checkpoint - Runtime-to-Review V1 Output Extension Normalization Patch 2026-05-31
 
 ```text

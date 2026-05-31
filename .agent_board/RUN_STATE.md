@@ -1,3 +1,26 @@
+## Current Run State - Apple Smoke Prompt Freeze 2026-05-31
+
+```text
+phase: apple_smoke_prompt_freeze_20260531
+status: completed_validated_local
+mode: Green local prompt metadata/documentation patch
+goal: Keep the red apple prompt as historical smoke evidence only and prevent future reuse as a useful generation/review/sample target.
+branch: master
+prompt_ref: prompts/image_generation/neutral_smoke_test_red_apple_v1.yaml
+readme_ref: prompts/image_generation/README.md
+lifecycle_status: frozen_historical_smoke_only
+reuse_allowed: false
+future_generation_allowed: false
+accepted_sample_candidate: false
+human_visual_review_value: none
+push_allowed: false
+boundary_checks: provider_contact_performed=false; plugin_call_performed=false; api_call_performed=false; image_generation_performed=false; secret_value_read_performed=false; DailyNote_write_performed=false; VCP_memory_write_performed=false; push_tag_release_deploy_performed=false.
+validation_status: node metadata presence check passed; agent board validator passed; git diff --check passed with CRLF normalization warnings only.
+next_safe_task: exact-file local commit if authorized.
+```
+
+---
+
 ## Current Run State - Runtime-to-Review V1 Output Extension Normalization Patch 2026-05-31
 
 ```text

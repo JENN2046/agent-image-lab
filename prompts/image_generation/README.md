@@ -2,6 +2,8 @@
 
 成品提示词包。每个 YAML 文件是一个完整的提示词包。
 
+`neutral_smoke_test_red_apple_v1` is frozen as historical runtime smoke evidence only. Do not reuse it for future generation, human visual review, accepted sample promotion, or production-quality evaluation.
+
 ## 包列表（21+ 个）
 
 | prompt_package_id | scene_type | 说明 |

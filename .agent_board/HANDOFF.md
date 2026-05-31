@@ -1,3 +1,36 @@
+## Current Handoff Update - Apple Smoke Prompt Freeze 2026-05-31
+
+```text
+phase: apple_smoke_prompt_freeze_20260531
+status: completed_validated_local
+mode: Green local prompt metadata/documentation patch
+goal: Freeze the neutral red apple smoke-test prompt so future work does not reuse it for generation, human visual review, accepted sample promotion, or production-quality evaluation.
+branch: master
+changed_files:
+  - prompts/image_generation/neutral_smoke_test_red_apple_v1.yaml
+  - prompts/image_generation/README.md
+freeze_status: frozen_historical_smoke_only
+historical_refs_preserved: true
+future_generation_allowed: false
+accepted_sample_candidate: false
+human_visual_review_value: none
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+secret_value_read_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+push_tag_release_deploy_performed: false
+validation_run:
+  - node metadata presence check: passed
+  - node scripts\validate_agent_board_state.js: passed
+  - git diff --check: passed with CRLF normalization warnings only
+next_safe_task: exact-file local commit if authorized; push requires separate explicit instruction.
+```
+
+---
+
 ## Current Handoff Update - Runtime-to-Review V1 Output Extension Normalization Patch 2026-05-31
 
 ```text

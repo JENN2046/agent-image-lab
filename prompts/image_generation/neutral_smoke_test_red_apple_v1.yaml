@@ -3,6 +3,12 @@ version: v1
 language: en
 mode: text_to_image
 reference_policy: no_reference_image_neutral_smoke_test
+lifecycle_status: frozen_historical_smoke_only
+reuse_allowed: false
+future_generation_allowed: false
+accepted_sample_candidate: false
+human_visual_review_value: none
+freeze_reason_cn: "苹果静物方向无可使用与审查价值；仅保留为历史 runtime smoke 证据，不再作为生成、审查、accepted sample promotion 或生产质量评估输入"
 
 title_cn: "极简中性红苹果生图烟测"
 purpose_cn: "v0_3_3_smoke_001_neutral 使用的极简中性 smoke test prompt；用于区分 Codex 内置 image generation 工具/路由问题与特定人物时装 prompt 问题"
