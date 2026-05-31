@@ -90,7 +90,7 @@
         "case_id": "handoff_missing_no_push_state_fails",
         "result": "caught",
         "expected_failure": true,
-        "failure_message": ".agent_board/HANDOFF.md latest section must cite active current phase, latest Green prompt gate, accepted sample promotion gate, or local maintenance gate"
+        "failure_message": ".agent_board/HANDOFF.md latest section must preserve push boundary state"
       },
       {
         "case_id": "roadmap_current_phase_drift_fails",

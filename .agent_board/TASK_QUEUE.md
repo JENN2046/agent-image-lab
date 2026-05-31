@@ -4,6 +4,7 @@
       Goal: Record the successful push of the AIL-VIS-22 accepted sample metadata promotion branch and leave a clean resume baseline.
       Source phase: AIL-VIS-22_accepted_sample_promotion_execution_gate.
       Completed: verified `origin/ail-vis-22-accepted-sample-promotion-execution` and local HEAD both point to `f47deef6ff784b8d150d7254e8168a06e93981c2`; ahead/behind is `0/0`; worktree is clean; post-push `npm run validate:mvp` and `node scripts\validate_smart_v3_push_safety_lane.js` passed.
+      Push boundary: user_authorized_push_performed: true; push_allowed: false.
       Boundary fields: force_push_performed: false; tag_release_deploy_performed: false; destructive_action_performed: false; secret_value_read_performed: false; provider_contact_performed: false; plugin_call_performed: false; api_call_performed: false; image_generation_performed: false; DailyNote_write_performed: false; VCP_memory_write_performed: false; production_candidate_002_started: false; batch_005_started: false.
       Recommended next: return to runtime-to-production roadmap guarded live probe preflight or open a review/PR step if requested.
 
@@ -79,7 +80,7 @@
       Status: completed_validated_pushed.
       Goal: Reconcile the owner-authorized one-shot generation evidence for premium_black_wireless_headphones_product_hero and classify the image as generated_unreviewed until human visual review.
       Completed: added `docs/AIL_VIS_17_EXECUTION_RECONCILIATION_AND_REVIEW_GATE.md`; updated `.agent_board` run state, handoff, checkpoint, and task queue surfaces to record the generated output path, source cache path, SHA256, call/image counts, and review-required status.
-      Execution fields: owner_A5_authorization_granted=true; authorization_phrase_visible_in_chat=true; provider_tool=image_gen.imagegen; provider_plugin_calls_used=1; images_generated=1; max_images=1; image_status=generated_unreviewed; sha256=8954A5404BC6A296B6D86091A9DAB46E048CEC1DECB55CCA07B5B12FBA3C203E.
+      Execution fields: owner_A5_authorization_granted=true; authorization_phrase_visible_in_chat=true; provider_tool=image_gen.imagegen; provider_plugin_calls_used=1; images_generated=1; max_images=1; image_status=generated_unreviewed; sha256=8954a5404bc6a296b6d86091a9dab46e048cec1decb55cca07b5b12fba3c203e.
       Boundary fields: additional_generation_performed: false; retry_generation_performed: false; second_image_generated: false; image_editing_performed: false; provider_called_again: false; plugin_called_again: false; api_called: false; runtime_execution_performed: false; accepted_sample_created: false; memory_candidate_created: false; actual_memory_write_performed: false; production_candidate_002_started: false; batch_005_started: false; git_add_dot_used: false; next_phase_started: false.
       Recommended next: AIL-VIS-18_human_visual_review_gate.
 

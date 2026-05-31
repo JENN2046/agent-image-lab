@@ -9,6 +9,8 @@ branch: ail-vis-22-accepted-sample-promotion-execution
 source_phase: AIL-VIS-22_accepted_sample_promotion_execution_gate
 remote: origin
 remote_branch: ail-vis-22-accepted-sample-promotion-execution
+user_authorized_push_performed: true
+push_allowed: false
 remote_head_after_push: f47deef6ff784b8d150d7254e8168a06e93981c2
 local_head_after_push: f47deef6ff784b8d150d7254e8168a06e93981c2
 ahead_behind_after_push: 0/0
@@ -37,7 +39,7 @@ goal: Apply Jenn's explicit accepted sample promotion authorization for the prem
 branch: ail-vis-22-accepted-sample-promotion-execution
 sample_id: accepted_premium_black_wireless_headphones_hero_ail_vis_17_001
 source_image: A:\agent-image-lab\agent-image-lab-v0.2\runs\real_generation\ail_vis_17_premium_black_wireless_headphones_hero\ail_vis_17_premium_black_wireless_headphones_hero_01.png
-sha256: 8954A5404BC6A296B6D86091A9DAB46E048CEC1DECB55CCA07B5B12FBA3C203E
+sha256: 8954a5404bc6a296b6d86091a9dab46e048cec1decb55cca07b5b12fba3c203e
 accepted_samples_target: accepted_samples/ail_vis_17_premium_black_wireless_headphones_hero/
 summary: Registered the headphones hero image as an accepted sample metadata entry and capsule. Source image remains in runs/real_generation; no image binary was copied into accepted_samples.
 changed_files:
@@ -167,7 +169,7 @@ branch: ail-vis-18-human-visual-review-closeout
 source_phase: AIL-VIS-17_execution_reconciliation_and_review_gate
 source_commit: 48b252bb549fd8ff84e393bd6c4966906e0e9e27
 reviewed_image: A:\agent-image-lab\agent-image-lab-v0.2\runs\real_generation\ail_vis_17_premium_black_wireless_headphones_hero\ail_vis_17_premium_black_wireless_headphones_hero_01.png
-sha256: 8954A5404BC6A296B6D86091A9DAB46E048CEC1DECB55CCA07B5B12FBA3C203E
+sha256: 8954a5404bc6a296b6d86091a9dab46e048cec1decb55cca07b5b12fba3c203e
 review_decision: pass_with_warnings
 score: 86
 summary: Recorded the human visual review result as pass_with_warnings with score 86. The image target match passes, but it remains non-promoted and memory-blocked.
@@ -195,7 +197,7 @@ source_phase: AIL-VIS-16_pre_execution_static_review_and_A5_authorization_reques
 selected_target: premium_black_wireless_headphones_product_hero
 selected_shot_id: visual_production_next_shot_black_headphones_hero_01
 output_file: A:\agent-image-lab\agent-image-lab-v0.2\runs\real_generation\ail_vis_17_premium_black_wireless_headphones_hero\ail_vis_17_premium_black_wireless_headphones_hero_01.png
-sha256: 8954A5404BC6A296B6D86091A9DAB46E048CEC1DECB55CCA07B5B12FBA3C203E
+sha256: 8954a5404bc6a296b6d86091a9dab46e048cec1decb55cca07b5b12fba3c203e
 summary: Recorded the AIL-VIS-17 one-shot generation evidence and kept the generated image unreviewed, non-promoted, production-blocked, and memory-blocked.
 changed_files:
   - docs/AIL_VIS_17_EXECUTION_RECONCILIATION_AND_REVIEW_GATE.md

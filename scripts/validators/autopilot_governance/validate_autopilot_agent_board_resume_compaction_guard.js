@@ -157,7 +157,8 @@ function validateSurface(pathName, text) {
   const pushBoundaryPresent = latest.includes("push_status: not_performed") ||
     latest.includes("push_allowed: false") ||
     latest.includes("pushed_to_origin_master_after_user_authorization") ||
-    latestIsAcceptedSamplePromotion;
+    latest.includes("pushed_to_origin_after_user_authorization") ||
+    latest.includes("user_authorized_push_performed: true");
   const noGeneratedImageRecorded = latest.includes("image_generation_performed: false") ||
     latest.includes("actual_image_generation_performed: false") ||
     latest.includes("Actual image generation performed: false");
@@ -344,12 +345,14 @@ function buildReport() {
       );
     }),
     expectFailure("handoff_missing_no_push_state_fails", (surfaces) => {
-      surfaces[".agent_board/HANDOFF.md"] = replaceAllowedCurrentSurfaceTokens(
-        surfaces[".agent_board/HANDOFF.md"]
+      surfaces[".agent_board/HANDOFF.md"] = replaceLatestSection(
+        surfaces[".agent_board/HANDOFF.md"],
+        (latest) => latest
           .split("push_status: not_performed").join("push_status: ambiguous")
           .split("push_allowed: false").join("push_allowed: ambiguous")
-          .split("pushed_to_origin_master_after_user_authorization").join("push_status_ambiguous"),
-        "push_status_ambiguous"
+          .split("pushed_to_origin_master_after_user_authorization").join("push_status_ambiguous")
+          .split("pushed_to_origin_after_user_authorization").join("push_status_ambiguous")
+          .split("user_authorized_push_performed").join("push_status_ambiguous")
       );
     }),
     expectFailure("roadmap_current_phase_drift_fails", (surfaces) => {
