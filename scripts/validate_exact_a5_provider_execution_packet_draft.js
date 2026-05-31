@@ -79,6 +79,7 @@ function expectFailure(caseId, fn) {
 }
 
 function main() {
+  const skipAdapterCli = process.argv.includes("--skip-adapter-cli");
   assert(fs.existsSync(repoPath(adapterPath)), "exact A5 packet adapter missing");
   runNode(["--check", adapterPath]);
 
@@ -90,8 +91,10 @@ function main() {
   assertPacket(packet, "direct");
   assert(adapter.validateExactA5ProviderExecutionPacketDraft(packet) === true, "direct packet should validate");
 
-  const cliPacket = JSON.parse(runNode([adapterPath]));
-  assertPacket(cliPacket, "cli");
+  if (!skipAdapterCli) {
+    const cliPacket = JSON.parse(runNode([adapterPath]));
+    assertPacket(cliPacket, "cli");
+  }
 
   const negativeCases = [
     expectFailure("authorization_active_true_rejected", () => {
@@ -165,6 +168,8 @@ function main() {
     negative_case_count: negativeCases.length,
     caught_negative_case_count: negativeCases.filter((item) => item.result === "caught").length,
     all_negative_cases_caught: negativeCases.every((item) => item.result === "caught"),
+    adapter_cli_skipped: skipAdapterCli,
+    adapter_cli_deferred_to_full_validator: skipAdapterCli,
     provider_contact_performed: false,
     plugin_call_performed: false,
     api_call_performed: false,

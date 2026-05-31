@@ -292,7 +292,10 @@ safeCheck("runtime_to_review_v1_evidence_gate", () => {
 });
 
 safeCheck("runtime_to_review_v1_guarded_live_probe_gate", () => {
-  const result = parseJson(runNode(["scripts/validate_runtime_to_review_v1_guarded_live_probe_gate.js"]));
+  const result = parseJson(runNode([
+    "scripts/validate_runtime_to_review_v1_guarded_live_probe_gate.js",
+    "--skip-runner-cli-cases"
+  ]));
   return result.passed === true &&
     result.gate_id === "runtime_to_review_v1_guarded_live_probe_gate" &&
     result.mode === "guarded_live_probe_gate_no_live_call" &&
@@ -302,6 +305,8 @@ safeCheck("runtime_to_review_v1_guarded_live_probe_gate", () => {
     result.owner_runtime_module_present === true &&
     result.exact_delegate_preflight_would_pass === true &&
     result.wrong_exact_confirmation_blocked === true &&
+    result.runner_cli_cases_skipped === true &&
+    result.runner_cli_cases_deferred_to_full_validator === true &&
     result.live_probe_executed_by_validator === false &&
     result.real_provider_call_performed === false &&
     result.provider_contact_performed === false &&
@@ -526,7 +531,10 @@ safeCheck("runtime_durable_audit_store", () => {
 });
 
 safeCheck("provider_preflight_no_provider_call", () => {
-  const result = parseJson(runNode(["scripts/validate_provider_preflight_no_provider_call.js"]));
+  const result = parseJson(runNode([
+    "scripts/validate_provider_preflight_no_provider_call.js",
+    "--skip-adapter-cli"
+  ]));
   return result.passed === true &&
     result.adapter_id === "provider_preflight_no_provider_call_v0" &&
     result.can_execute_now === false &&
@@ -550,11 +558,16 @@ safeCheck("provider_preflight_no_provider_call", () => {
     result.production_write_performed === false &&
     result.DailyNote_write_performed === false &&
     result.VCP_memory_write_performed === false &&
+    result.adapter_cli_skipped === true &&
+    result.adapter_cli_deferred_to_full_validator === true &&
     result.all_negative_cases_caught === true;
 });
 
 safeCheck("exact_a5_provider_execution_packet_draft", () => {
-  const result = parseJson(runNode(["scripts/validate_exact_a5_provider_execution_packet_draft.js"]));
+  const result = parseJson(runNode([
+    "scripts/validate_exact_a5_provider_execution_packet_draft.js",
+    "--skip-adapter-cli"
+  ]));
   return result.passed === true &&
     result.adapter_id === "exact_a5_provider_execution_packet_draft_v0" &&
     result.authorization_status === "draft_not_active" &&
@@ -581,11 +594,16 @@ safeCheck("exact_a5_provider_execution_packet_draft", () => {
     result.production_write_performed === false &&
     result.DailyNote_write_performed === false &&
     result.VCP_memory_write_performed === false &&
+    result.adapter_cli_skipped === true &&
+    result.adapter_cli_deferred_to_full_validator === true &&
     result.all_negative_cases_caught === true;
 });
 
 safeCheck("exact_a5_provider_retry_packet_draft", () => {
-  const result = parseJson(runNode(["scripts/validate_exact_a5_provider_retry_packet_draft.js"]));
+  const result = parseJson(runNode([
+    "scripts/validate_exact_a5_provider_retry_packet_draft.js",
+    "--skip-adapter-cli"
+  ]));
   return result.passed === true &&
     result.adapter_id === "exact_a5_provider_retry_packet_draft_v0" &&
     result.authorization_status === "draft_not_active" &&
@@ -608,6 +626,8 @@ safeCheck("exact_a5_provider_retry_packet_draft", () => {
     result.accepted_samples_write_performed === false &&
     result.DailyNote_write_performed === false &&
     result.VCP_memory_write_performed === false &&
+    result.adapter_cli_skipped === true &&
+    result.adapter_cli_deferred_to_full_validator === true &&
     result.all_negative_cases_caught === true;
 });
 

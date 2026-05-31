@@ -36,13 +36,16 @@ function runNode(args, allowFailure = false) {
 }
 
 function main() {
+  const skipRunnerCliCases = process.argv.includes("--skip-runner-cli-cases");
   assert(fs.existsSync(repoPath(runnerPath)), "guarded live probe runner missing");
   assert(fs.existsSync(repoPath(delegatePath)), "native Doubao runtime v1 provider delegate module missing");
   assert(fs.existsSync(repoPath(ownerRuntimePath)), "native Doubao runtime v1 owner runtime binding contract missing");
-  runNode(["--check", runnerPath]);
-  runNode(["--check", "scripts/validate_runtime_to_review_v1_guarded_live_probe_gate.js"]);
-  runNode(["--check", delegatePath]);
-  runNode(["--check", ownerRuntimePath]);
+  if (!skipRunnerCliCases) {
+    runNode(["--check", runnerPath]);
+    runNode(["--check", "scripts/validate_runtime_to_review_v1_guarded_live_probe_gate.js"]);
+    runNode(["--check", delegatePath]);
+    runNode(["--check", ownerRuntimePath]);
+  }
 
   const runner = require(repoPath(runnerPath));
   assert(runner.exactConfirmation === "RUNTIME_TO_REVIEW_V1_ONE_PROVIDER_ONE_IMAGE", "exact confirmation mismatch");
@@ -64,27 +67,29 @@ function main() {
     confirm_live_provider_probe: runner.exactConfirmation,
   }).passed === true, "delegate module plus owner runtime module plus exact confirmation must pass preflight");
 
-  const blockedOutput = JSON.parse(runNode([runnerPath], true));
-  assert(blockedOutput.status === "blocked_live_probe_not_executed", "runner without exact args must block");
-  assert(blockedOutput.real_provider_call_performed === false, "blocked runner must not call provider");
-  assert(blockedOutput.secret_value_read_performed_by_runner === false, "blocked runner must not read secrets");
+  if (!skipRunnerCliCases) {
+    const blockedOutput = JSON.parse(runNode([runnerPath], true));
+    assert(blockedOutput.status === "blocked_live_probe_not_executed", "runner without exact args must block");
+    assert(blockedOutput.real_provider_call_performed === false, "blocked runner must not call provider");
+    assert(blockedOutput.secret_value_read_performed_by_runner === false, "blocked runner must not read secrets");
 
-  const preflightOnly = JSON.parse(runNode([runnerPath, "--preflight-only"]));
-  assert(preflightOnly.status === "preflight_only_no_live_probe_executed", "preflight-only status mismatch");
-  assert(preflightOnly.real_provider_call_performed === false, "preflight-only must not call provider");
-  assert(preflightOnly.image_generation_performed === false, "preflight-only must not generate image");
-  const exactPreflightOnly = JSON.parse(runNode([
-    runnerPath,
-    "--provider-delegate-module",
-    delegatePath,
-    "--owner-runtime-module",
-    ownerRuntimePath,
-    "--confirm-live-provider-probe",
-    runner.exactConfirmation,
-    "--preflight-only",
-  ]));
-  assert(exactPreflightOnly.preflight_would_pass_with_current_args === true, "preflight-only exact delegate args should pass");
-  assert(exactPreflightOnly.real_provider_call_performed === false, "exact preflight-only must not call provider");
+    const preflightOnly = JSON.parse(runNode([runnerPath, "--preflight-only"]));
+    assert(preflightOnly.status === "preflight_only_no_live_probe_executed", "preflight-only status mismatch");
+    assert(preflightOnly.real_provider_call_performed === false, "preflight-only must not call provider");
+    assert(preflightOnly.image_generation_performed === false, "preflight-only must not generate image");
+    const exactPreflightOnly = JSON.parse(runNode([
+      runnerPath,
+      "--provider-delegate-module",
+      delegatePath,
+      "--owner-runtime-module",
+      ownerRuntimePath,
+      "--confirm-live-provider-probe",
+      runner.exactConfirmation,
+      "--preflight-only",
+    ]));
+    assert(exactPreflightOnly.preflight_would_pass_with_current_args === true, "preflight-only exact delegate args should pass");
+    assert(exactPreflightOnly.real_provider_call_performed === false, "exact preflight-only must not call provider");
+  }
 
   const packageJson = JSON.parse(fs.readFileSync(repoPath("package.json"), "utf8"));
   const scripts = packageJson.scripts || {};
@@ -105,6 +110,8 @@ function main() {
     owner_runtime_module_present: true,
     exact_delegate_preflight_would_pass: true,
     wrong_exact_confirmation_blocked: true,
+    runner_cli_cases_skipped: skipRunnerCliCases,
+    runner_cli_cases_deferred_to_full_validator: skipRunnerCliCases,
     live_probe_executed_by_validator: false,
     real_provider_call_performed: false,
     provider_contact_performed: false,
