@@ -1,3 +1,49 @@
+- [x] ID: runtime_to_review_v1_output_extension_normalization_patch_20260531
+      Lane: Green local runtime/tooling patch.
+      Status: completed_validated_local.
+      Goal: Normalize future runtime-to-review output paths so observed JPEG bytes are reported under `.jpg` rather than a stale `.png` extension.
+      Current branch: master.
+      Source watchpoint: reports/runtime_to_review_v1/guarded_live_probe_human_visual_review_20260531.json.
+      Patch record: docs/RUNTIME_TO_REVIEW_V1_OUTPUT_EXTENSION_NORMALIZATION_PATCH_20260531.md.
+      Runtime files changed:
+        - adapters/runtime/native_doubao_runtime_v1_real_bound_owner_runtime.js
+        - adapters/runtime/native_doubao_runtime_v1_vcptoolbox_route_owner_runtime.js
+        - adapters/runtime/native_doubao_runtime_v1_provider_delegate.js
+      Validator files changed:
+        - scripts/validate_runtime_to_review_v1_real_bound_owner_runtime_module.js
+        - scripts/validate_runtime_to_review_v1_vcptoolbox_route_owner_runtime_module.js
+        - scripts/validate_runtime_to_review_v1_native_doubao_delegate_module.js
+        - scripts/validate_mvp_core.js
+      Behavior: derive extension from sharp metadata format; rename only when mismatched; fail closed on target collision; record `extension_normalized_from`.
+      Historical artifact renamed: false.
+      Boundary fields: provider_contact_performed=false; plugin_call_performed=false; api_call_performed=false; image_generation_performed=false; secret_value_read_performed=false; accepted_samples_write_performed=false; production_candidate_write_performed=false; DailyNote_write_performed=false; VCP_memory_write_performed=false; push_tag_release_deploy_performed=false.
+      Validation: targeted runtime validators passed; full closeout validation pending.
+      Recommended next: run full closeout validation, then exact-file commit if authorized.
+
+---
+
+- [x] ID: runtime_to_review_v1_guarded_live_probe_human_visual_review_20260531
+      Lane: Green local visual review gate after Amber_B live probe.
+      Status: completed_validated_local.
+      Goal: Review the generated red apple image as runtime smoke evidence without claiming owner final approval or opening accepted_samples, memory, or production gates.
+      Current branch: master.
+      Source activation receipt: reports/runtime_to_review_v1/guarded_live_probe_real_bound_owner_runtime_20260531_receipt.json.
+      Review record: reports/runtime_to_review_v1/guarded_live_probe_human_visual_review_20260531.json.
+      Phase record: docs/RUNTIME_TO_REVIEW_V1_GUARDED_LIVE_PROBE_HUMAN_VISUAL_REVIEW_20260531.md.
+      Validator: scripts/validate_runtime_to_review_v1_guarded_live_probe_human_visual_review_20260531.js.
+      Decision: pass_as_runtime_smoke_evidence_with_watchpoint.
+      Score: 91.
+      Target match: pass.
+      Accepted sample candidate: false.
+      Owner final approval granted by this record: false.
+      Runtime tooling patch recommended: true.
+      Watchpoint: artifact path ends with .png but MIME/magic identify JPEG bytes.
+      Boundary fields: provider_contact_performed_by_this_review_gate=false; plugin_call_performed_by_this_review_gate=false; api_call_performed_by_this_review_gate=false; image_generation_performed_by_this_review_gate=false; accepted_samples_write_performed=false; production_candidate_write_performed=false; DailyNote_write_performed=false; VCP_memory_write_performed=false; secret_value_read_performed=false; push_tag_release_deploy_performed=false.
+      Validation: `node --check scripts\validate_runtime_to_review_v1_guarded_live_probe_human_visual_review_20260531.js` passed; `node scripts\validate_runtime_to_review_v1_guarded_live_probe_human_visual_review_20260531.js` passed.
+      Recommended next: runtime/tooling extension normalization patch prepared; run full closeout validation.
+
+---
+
 - [x] ID: runtime_to_review_v1_guarded_live_probe_real_bound_activation_20260531
       Lane: Amber_B provider/image live probe with exact owner confirmation.
       Status: completed_validated_local.

@@ -1,0 +1,74 @@
+{
+  "schema": "runtime_to_review_v1_human_visual_review_gate.v1",
+  "review_id": "guarded_live_probe_human_visual_review_20260531",
+  "created_at": "2026-05-31T19:35:00+08:00",
+  "phase": "runtime_to_review_v1_guarded_live_probe_human_visual_review_20260531",
+  "source_activation_receipt_ref": "reports/runtime_to_review_v1/guarded_live_probe_real_bound_owner_runtime_20260531_receipt.json",
+  "source_preflight_packet_ref": "reports/runtime_to_review_v1/guarded_live_probe_real_bound_owner_runtime_20260531_preflight_packet.json",
+  "artifact": {
+    "path": "runs/real_generation/runtime_to_review_v1_guarded_live_probe/image/doubaogen/e8188e17-cbb7-4518-99bb-56aafb283de8.png",
+    "sha256": "c8be5644a7dcc5af94f193865f2660fa327824db49f52f8190a225d4ab8c86d4",
+    "bytes": 133553,
+    "mime_type": "image/jpeg",
+    "dimensions": "1920x2048",
+    "magic_number": "ffd8ffe000104a4649460001",
+    "workspace_local_artifact": true,
+    "git_tracked_artifact": false
+  },
+  "reviewer": {
+    "reviewer_role": "Codex visual inspection for human-review gate preparation",
+    "owner_final_approval_required": true,
+    "owner_final_approval_granted_by_this_record": false
+  },
+  "visual_review": {
+    "target_prompt_package_ref": "prompts/image_generation/neutral_smoke_test_red_apple_v1.yaml",
+    "target_subject": "single red apple on a neutral studio surface",
+    "decision": "pass_as_runtime_smoke_evidence_with_watchpoint",
+    "score": 91,
+    "target_match": "pass",
+    "composition": "pass",
+    "lighting": "pass",
+    "artifact_quality": "pass",
+    "review_summary": "The generated image clearly shows a single red apple on a clean neutral studio surface. It is suitable as runtime-to-review smoke evidence and review bridge proof, not as an accepted sample or production candidate.",
+    "strengths": [
+      "clear single-subject red apple",
+      "neutral background and tabletop match smoke-test intent",
+      "clean studio lighting with readable subject edges",
+      "no obvious malformed fruit or major rendering defect"
+    ],
+    "watchpoints": [
+      "artifact path ends with .png while MIME and magic number identify JPEG bytes",
+      "large empty upper frame is acceptable for smoke proof but not a polished product composition",
+      "owner final approval is not granted by this Codex review record"
+    ],
+    "rejection_reasons": []
+  },
+  "route_decision": {
+    "route": "runtime_smoke_evidence_only",
+    "review_bridge_status": "reviewed_as_smoke_evidence",
+    "accepted_sample_candidate": false,
+    "accepted_sample_write_allowed_now": false,
+    "production_candidate_allowed_now": false,
+    "memory_write_allowed_now": false,
+    "retry_generation_recommended": false,
+    "runtime_tooling_patch_recommended": true,
+    "runtime_tooling_patch_status": "completed_by_followup_local_patch",
+    "runtime_tooling_patch_ref": "docs/RUNTIME_TO_REVIEW_V1_OUTPUT_EXTENSION_NORMALIZATION_PATCH_20260531.md",
+    "runtime_tooling_patch_reason": "The provider or runtime path should eventually align output file extension with observed MIME, or downstream review tools must trust MIME and magic number over file extension."
+  },
+  "boundary_checks": {
+    "provider_contact_performed_by_this_review_gate": false,
+    "plugin_call_performed_by_this_review_gate": false,
+    "api_call_performed_by_this_review_gate": false,
+    "image_generation_performed_by_this_review_gate": false,
+    "image_binary_copied_into_git": false,
+    "accepted_samples_write_performed": false,
+    "production_candidate_write_performed": false,
+    "DailyNote_write_performed": false,
+    "VCP_memory_write_performed": false,
+    "secret_value_read_performed": false,
+    "env_file_content_read_performed": false,
+    "push_tag_release_deploy_performed": false
+  },
+  "next_safe_task": "Prepare a narrow runtime tooling patch or review-console handling patch for the JPEG-bytes/.png-path mismatch, or commit this review gate if requested. Do not promote, write memory, start production, or push without separate authorization."
+}

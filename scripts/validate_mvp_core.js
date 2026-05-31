@@ -340,6 +340,7 @@ safeCheck("runtime_to_review_v1_real_bound_owner_runtime_module", () => {
     result.vcptoolbox_owner_runtime_child_diagnostic_mode_present === true &&
     result.vcptoolbox_owner_runtime_child_loads_plugin_config === true &&
     result.vcptoolbox_owner_runtime_child_reports_key_presence_without_value === true &&
+    result.output_extension_normalized_from_observed_format === true &&
     result.vcp_toolbox_plugin_entry_present === true &&
     result.real_provider_call_performed === false &&
     result.provider_contact_performed === false &&
@@ -363,6 +364,7 @@ safeCheck("runtime_to_review_v1_vcptoolbox_route_owner_runtime_module", () => {
     result.exact_output_scope === "runs/real_generation/runtime_to_review_v1_guarded_live_probe/" &&
     result.provider_valid_resolution === "1440x2560" &&
     result.invalid_size_error_classified === true &&
+    result.output_extension_normalized_from_observed_format === true &&
     result.admin_basic_auth_env_required === true &&
     result.admin_basic_auth_value_printed === false &&
     result.config_env_read_performed === false &&
@@ -416,6 +418,7 @@ safeCheck("runtime_to_review_v1_native_doubao_delegate_module", () => {
     result.exact_confirmation_required === "RUNTIME_TO_REVIEW_V1_ONE_PROVIDER_ONE_IMAGE" &&
     result.default_delegate_fails_closed_without_bound_owner_runtime === true &&
     result.fake_success_runtime_status === "completed_provider_image_created" &&
+    result.output_extension_normalized_from_observed_format === true &&
     result.exact_phrase_preflight_passed === true &&
     result.wrong_phrase_preflight_blocked === true &&
     result.live_probe_executed_by_validator === false &&

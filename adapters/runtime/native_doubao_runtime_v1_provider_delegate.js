@@ -89,14 +89,47 @@ function mimeFromFormat(format) {
   return null;
 }
 
+function extensionFromFormat(format) {
+  if (format === "jpeg" || format === "jpg") return ".jpg";
+  if (format === "png") return ".png";
+  if (format === "webp") return ".webp";
+  return null;
+}
+
+function outputRefWithObservedExtension(relativePath, format) {
+  const extension = extensionFromFormat(format);
+  if (!extension) return relativePath;
+  const parsed = path.posix.parse(relativePath.replace(/\\/g, "/"));
+  if (parsed.ext.toLowerCase() === extension) return relativePath;
+  return path.posix.join(parsed.dir, `${parsed.name}${extension}`);
+}
+
 function magicNumber(buffer) {
   return buffer.slice(0, Math.min(buffer.length, 12)).toString("hex");
 }
 
 async function inspectOutputFile(relativePath) {
   const { relative, resolved } = repoRelativePath(relativePath, "output file path");
-  const buffer = fs.readFileSync(resolved);
+  let buffer = fs.readFileSync(resolved);
   const metadata = await sharp(buffer).metadata();
+  const normalizedRelative = outputRefWithObservedExtension(relative, metadata.format);
+  if (normalizedRelative !== relative) {
+    const normalized = repoRelativePath(normalizedRelative, "normalized output file path");
+    if (fs.existsSync(normalized.resolved)) {
+      throw new Error("normalized_output_file_already_exists");
+    }
+    fs.renameSync(resolved, normalized.resolved);
+    buffer = fs.readFileSync(normalized.resolved);
+    return {
+      path: normalized.relative,
+      bytes: buffer.length,
+      sha256: crypto.createHash("sha256").update(buffer).digest("hex"),
+      mime_type: mimeFromFormat(metadata.format),
+      dimensions: `${metadata.width}x${metadata.height}`,
+      magic_number: magicNumber(buffer),
+      extension_normalized_from: relative,
+    };
+  }
   const format = metadata.format || null;
   return {
     path: relative,
@@ -269,6 +302,9 @@ module.exports.createNativeDoubaoRuntimeV1ProviderDelegate = createNativeDoubaoR
 module.exports._private = {
   clone,
   repoRelativePath,
+  extensionFromFormat,
+  outputRefWithObservedExtension,
+  inspectOutputFile,
   normalizeOutputFile,
   candidateOutputFiles,
   buildRunnerOptions,

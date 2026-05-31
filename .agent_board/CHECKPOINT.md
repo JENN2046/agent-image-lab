@@ -1,3 +1,106 @@
+## Checkpoint - Runtime-to-Review V1 Output Extension Normalization Patch 2026-05-31
+
+```text
+phase: runtime_to_review_v1_output_extension_normalization_patch_20260531
+status: completed_validated_local
+result: OUTPUT_EXTENSION_NORMALIZATION_PREPARED
+mode: Green local runtime/tooling patch
+summary: Future runtime-to-review output inspectors now normalize the file extension from observed image format metadata. JPEG bytes from a provider are reported under `.jpg` rather than a stale `.png` path. Existing historical artifacts are not renamed.
+branch: master
+changed_files_current_task:
+  - adapters/runtime/native_doubao_runtime_v1_real_bound_owner_runtime.js
+  - adapters/runtime/native_doubao_runtime_v1_vcptoolbox_route_owner_runtime.js
+  - adapters/runtime/native_doubao_runtime_v1_provider_delegate.js
+  - scripts/validate_runtime_to_review_v1_real_bound_owner_runtime_module.js
+  - scripts/validate_runtime_to_review_v1_vcptoolbox_route_owner_runtime_module.js
+  - scripts/validate_runtime_to_review_v1_native_doubao_delegate_module.js
+  - scripts/validate_mvp_core.js
+  - docs/RUNTIME_TO_REVIEW_V1_OUTPUT_EXTENSION_NORMALIZATION_PATCH_20260531.md
+  - docs/RUNTIME_TO_REVIEW_V1_GUARDED_LIVE_PROBE_HUMAN_VISUAL_REVIEW_20260531.md
+  - reports/runtime_to_review_v1/guarded_live_probe_human_visual_review_20260531.json
+  - scripts/validate_runtime_to_review_v1_guarded_live_probe_human_visual_review_20260531.js
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+behavior:
+  jpeg_or_jpg: .jpg
+  png: .png
+  webp: .webp
+  target_collision: fail_closed
+  records_extension_normalized_from: true
+historical_artifact_renamed: false
+validation_run:
+  - node --check adapters\runtime\native_doubao_runtime_v1_real_bound_owner_runtime.js: passed
+  - node --check adapters\runtime\native_doubao_runtime_v1_vcptoolbox_route_owner_runtime.js: passed
+  - node --check adapters\runtime\native_doubao_runtime_v1_provider_delegate.js: passed
+  - node scripts\validate_runtime_to_review_v1_real_bound_owner_runtime_module.js: passed
+  - node scripts\validate_runtime_to_review_v1_vcptoolbox_route_owner_runtime_module.js: passed
+  - node scripts\validate_runtime_to_review_v1_native_doubao_delegate_module.js: passed
+boundary_checks:
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  secret_value_read_performed: false
+  env_file_content_read_performed: false
+  accepted_samples_write_performed: false
+  production_candidate_write_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  push_tag_release_deploy_performed: false
+recommended_next: full closeout validation, then exact-file commit if authorized.
+```
+
+---
+
+## Checkpoint - Runtime-to-Review V1 Guarded Live Probe Human Visual Review 2026-05-31
+
+```text
+phase: runtime_to_review_v1_guarded_live_probe_human_visual_review_20260531
+status: completed_validated_local
+result: PASS_AS_RUNTIME_SMOKE_EVIDENCE_WITH_WATCHPOINT
+mode: Green local visual review gate after Amber_B live probe
+summary: The generated red apple image was visually reviewed as valid runtime-to-review smoke evidence. It passes the target match for a single red apple on a neutral surface, but remains only smoke evidence. The record does not grant owner final approval, accepted sample status, memory eligibility, or production readiness.
+branch: master
+changed_files_current_task:
+  - docs/RUNTIME_TO_REVIEW_V1_GUARDED_LIVE_PROBE_HUMAN_VISUAL_REVIEW_20260531.md
+  - reports/runtime_to_review_v1/guarded_live_probe_human_visual_review_20260531.json
+  - scripts/validate_runtime_to_review_v1_guarded_live_probe_human_visual_review_20260531.js
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+review_result:
+  artifact_path: runs/real_generation/runtime_to_review_v1_guarded_live_probe/image/doubaogen/e8188e17-cbb7-4518-99bb-56aafb283de8.png
+  artifact_sha256: c8be5644a7dcc5af94f193865f2660fa327824db49f52f8190a225d4ab8c86d4
+  decision: pass_as_runtime_smoke_evidence_with_watchpoint
+  score: 91
+  target_match: pass
+  accepted_sample_candidate: false
+  owner_final_approval_granted_by_this_record: false
+  route: runtime_smoke_evidence_only
+watchpoint: artifact path ends with .png but MIME/magic identify JPEG bytes.
+validation_run:
+  - node --check scripts\validate_runtime_to_review_v1_guarded_live_probe_human_visual_review_20260531.js: passed
+  - node scripts\validate_runtime_to_review_v1_guarded_live_probe_human_visual_review_20260531.js: passed
+boundary_checks:
+  provider_contact_performed_by_this_review_gate: false
+  plugin_call_performed_by_this_review_gate: false
+  api_call_performed_by_this_review_gate: false
+  image_generation_performed_by_this_review_gate: false
+  accepted_samples_write_performed: false
+  production_candidate_write_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  secret_value_read_performed: false
+  env_file_content_read_performed: false
+  push_tag_release_deploy_performed: false
+recommended_next: runtime/tooling extension normalization patch prepared; run full closeout validation.
+```
+
+---
+
 ## Checkpoint - Runtime-to-Review V1 Real-Bound Guarded Live Probe Activation 2026-05-31
 
 ```text

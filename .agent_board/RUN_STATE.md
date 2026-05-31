@@ -1,3 +1,55 @@
+## Current Run State - Runtime-to-Review V1 Output Extension Normalization Patch 2026-05-31
+
+```text
+phase: runtime_to_review_v1_output_extension_normalization_patch_20260531
+status: completed_validated_local
+mode: Green local runtime/tooling patch
+goal: Normalize future output file extension from observed image format before returning runtime metadata.
+branch: master
+patch_record_ref: docs/RUNTIME_TO_REVIEW_V1_OUTPUT_EXTENSION_NORMALIZATION_PATCH_20260531.md
+source_watchpoint_ref: reports/runtime_to_review_v1/guarded_live_probe_human_visual_review_20260531.json
+runtime_files_changed: native_doubao_runtime_v1_real_bound_owner_runtime.js; native_doubao_runtime_v1_vcptoolbox_route_owner_runtime.js; native_doubao_runtime_v1_provider_delegate.js.
+validator_files_changed: validate_runtime_to_review_v1_real_bound_owner_runtime_module.js; validate_runtime_to_review_v1_vcptoolbox_route_owner_runtime_module.js; validate_runtime_to_review_v1_native_doubao_delegate_module.js; validate_mvp_core.js.
+behavior: jpeg/jpg -> .jpg; png -> .png; webp -> .webp; collision fails closed; extension_normalized_from records the source path when renamed.
+historical_artifact_renamed: false
+validation_status: targeted runtime validators passed; full closeout validation pending.
+push_allowed: false
+boundary_checks: provider_contact_performed=false; plugin_call_performed=false; api_call_performed=false; image_generation_performed=false; secret_value_read_performed=false; accepted_samples_write_performed=false; production_candidate_write_performed=false; DailyNote_write_performed=false; VCP_memory_write_performed=false; push_tag_release_deploy_performed=false.
+next_safe_task: full closeout validation, then exact-file local commit if authorized.
+```
+
+---
+
+## Current Run State - Runtime-to-Review V1 Guarded Live Probe Human Visual Review 2026-05-31
+
+```text
+phase: runtime_to_review_v1_guarded_live_probe_human_visual_review_20260531
+status: completed_validated_local
+mode: Green local visual review gate after Amber_B live probe
+goal: Classify the generated red apple artifact for review routing while keeping owner approval, accepted sample, memory, and production gates closed.
+branch: master
+review_record_ref: reports/runtime_to_review_v1/guarded_live_probe_human_visual_review_20260531.json
+phase_record_ref: docs/RUNTIME_TO_REVIEW_V1_GUARDED_LIVE_PROBE_HUMAN_VISUAL_REVIEW_20260531.md
+validator_ref: scripts/validate_runtime_to_review_v1_guarded_live_probe_human_visual_review_20260531.js
+source_activation_receipt_ref: reports/runtime_to_review_v1/guarded_live_probe_real_bound_owner_runtime_20260531_receipt.json
+decision: pass_as_runtime_smoke_evidence_with_watchpoint
+score: 91
+target_match: pass
+route: runtime_smoke_evidence_only
+accepted_sample_candidate: false
+owner_final_approval_granted_by_this_record: false
+production_candidate_allowed_now: false
+memory_write_allowed_now: false
+runtime_tooling_patch_recommended: true
+extension_mime_mismatch_watchpoint: true
+push_allowed: false
+validation_status: review validator passed; closeout validation pending.
+boundary_checks: provider_contact_performed_by_this_review_gate=false; plugin_call_performed_by_this_review_gate=false; api_call_performed_by_this_review_gate=false; image_generation_performed_by_this_review_gate=false; accepted_samples_write_performed=false; production_candidate_write_performed=false; DailyNote_write_performed=false; VCP_memory_write_performed=false; secret_value_read_performed=false; push_tag_release_deploy_performed=false.
+next_safe_task: runtime/tooling extension normalization patch has been prepared; run full closeout validation.
+```
+
+---
+
 ## Current Run State - Runtime-to-Review V1 Real-Bound Guarded Live Probe Activation 2026-05-31
 
 ```text

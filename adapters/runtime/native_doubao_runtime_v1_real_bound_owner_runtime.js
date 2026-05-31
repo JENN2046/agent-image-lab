@@ -333,10 +333,43 @@ function mimeFromFormat(format) {
   return null;
 }
 
+function extensionFromFormat(format) {
+  if (format === "jpeg" || format === "jpg") return ".jpg";
+  if (format === "png") return ".png";
+  if (format === "webp") return ".webp";
+  return null;
+}
+
+function outputRefWithObservedExtension(relativePath, format) {
+  const extension = extensionFromFormat(format);
+  if (!extension) return relativePath;
+  const parsed = path.posix.parse(relativePath.replace(/\\/g, "/"));
+  if (parsed.ext.toLowerCase() === extension) return relativePath;
+  return path.posix.join(parsed.dir, `${parsed.name}${extension}`);
+}
+
 async function inspectOutputFile(fileRef) {
   const { relative, resolved } = repoRelativePath(fileRef, "output file");
-  const buffer = fs.readFileSync(resolved);
+  let buffer = fs.readFileSync(resolved);
   const metadata = await sharp(buffer).metadata();
+  const normalizedRelative = outputRefWithObservedExtension(relative, metadata.format);
+  if (normalizedRelative !== relative) {
+    const normalized = repoRelativePath(normalizedRelative, "normalized output file");
+    if (fs.existsSync(normalized.resolved)) {
+      throw new Error("normalized_output_file_already_exists");
+    }
+    fs.renameSync(resolved, normalized.resolved);
+    buffer = fs.readFileSync(normalized.resolved);
+    return {
+      path: normalized.relative,
+      bytes: buffer.length,
+      sha256: crypto.createHash("sha256").update(buffer).digest("hex"),
+      mime_type: mimeFromFormat(metadata.format),
+      dimensions: `${metadata.width}x${metadata.height}`,
+      magic_number: buffer.slice(0, Math.min(buffer.length, 12)).toString("hex"),
+      extension_normalized_from: relative,
+    };
+  }
   return {
     path: relative,
     bytes: buffer.length,
@@ -446,5 +479,10 @@ module.exports.allowedPromptPackageRef = allowedPromptPackageRef;
 module.exports.requiredModel = requiredModel;
 module.exports.buildSafeChildEnv = buildSafeChildEnv;
 module.exports.buildDoubaoPluginChildEnv = buildDoubaoPluginChildEnv;
+module.exports._private = {
+  extensionFromFormat,
+  outputRefWithObservedExtension,
+  inspectOutputFile,
+};
 module.exports.env_file_content_read_performed = false;
 module.exports.secret_value_read_performed = false;

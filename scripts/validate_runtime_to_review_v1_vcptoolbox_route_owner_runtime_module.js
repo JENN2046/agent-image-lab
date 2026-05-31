@@ -44,6 +44,8 @@ async function main() {
   assert(moduleSource.includes("vcptoolbox_route_doubaogen_timeout_12m"), "route owner runtime must classify DoubaoGen 12m timeout errors");
   assert(moduleSource.includes("summarizeRouteFailure"), "route owner runtime must expose sanitized route failure summaries");
   assert(moduleSource.includes("Basic <redacted>"), "route owner runtime must redact Basic auth in route summaries");
+  assert(moduleSource.includes("outputRefWithObservedExtension"), "route owner runtime must normalize output extension from observed format");
+  assert(moduleSource.includes("extension_normalized_from"), "route owner runtime must record extension normalization source");
   assert(!moduleSource.includes("config.env"), "module must not read VCPToolBox config.env");
 
   const ownerRuntimeModule = require(repoPath(ownerRuntimePath));
@@ -53,6 +55,14 @@ async function main() {
   assert(ownerRuntimeModule.requiredModel === "doubao-seedream-5-0-260128", "required model mismatch");
   assert(typeof ownerRuntimeModule.createSecretlessProviderRuntime === "function", "route owner runtime factory missing");
   assert(typeof ownerRuntimeModule.buildBasicAuthHeader === "function", "basic auth builder missing");
+  assert(ownerRuntimeModule._private.outputRefWithObservedExtension(
+    "runs/real_generation/runtime_to_review_v1_guarded_live_probe/image/doubaogen/example.png",
+    "jpeg"
+  ).endsWith("/example.jpg"), "route owner runtime must map jpeg bytes away from .png extension");
+  assert(ownerRuntimeModule._private.outputRefWithObservedExtension(
+    "runs/real_generation/runtime_to_review_v1_guarded_live_probe/image/doubaogen/example.webp",
+    "webp"
+  ).endsWith("/example.webp"), "route owner runtime must keep matching webp extension");
 
   const missingAuth = ownerRuntimeModule.buildBasicAuthHeader({});
   assert(missingAuth === null, "missing one-time admin auth env must fail closed");
@@ -87,6 +97,7 @@ async function main() {
     route_owner_runtime_timeout_ms: 840000,
     doubaogen_timeout_error_classified: true,
     sanitized_route_failure_summary_present: true,
+    output_extension_normalized_from_observed_format: true,
     admin_basic_auth_env_required: true,
     admin_basic_auth_value_printed: false,
     config_env_read_performed: false,

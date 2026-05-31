@@ -66,6 +66,14 @@ async function main() {
   assert(typeof delegateModule === "function", "delegate module must export a function");
   assert(delegateModule.delegateId === "native_doubao_runtime_v1_provider_delegate", "delegate id mismatch");
   assert(delegateModule.exactConfirmation === liveProbeRunner.exactConfirmation, "delegate exact confirmation must match live runner");
+  assert(delegateModule._private.outputRefWithObservedExtension(
+    "runs/real_generation/runtime_to_review_v1_guarded_live_probe/image/doubaogen/example.png",
+    "jpeg"
+  ).endsWith("/example.jpg"), "delegate must map jpeg bytes away from .png extension");
+  assert(delegateModule._private.outputRefWithObservedExtension(
+    "runs/real_generation/runtime_to_review_v1_guarded_live_probe/image/doubaogen/example.webp",
+    "webp"
+  ).endsWith("/example.webp"), "delegate must keep matching webp extension");
 
   const validRequest = baseDelegateRequest();
   const requestValidation = delegateModule.validateRuntimeV1DelegateRequest(validRequest);
@@ -172,6 +180,7 @@ async function main() {
     default_delegate_status: unboundResult.status,
     default_delegate_fails_closed_without_bound_owner_runtime: true,
     fake_success_runtime_status: runtimeResult.status,
+    output_extension_normalized_from_observed_format: true,
     exact_phrase_preflight_passed: true,
     wrong_phrase_preflight_blocked: true,
     live_probe_executed_by_validator: false,

@@ -55,6 +55,8 @@ async function main() {
   assert(childSource.includes("\"Plugin\", \"DoubaoGen\", \"config.env\""), "owner runtime child must use DoubaoGen config.env path");
   assert(childSource.includes("provider_config_key_present"), "owner runtime child must report config key presence without exposing values");
   assert(ownerRuntimeSource.includes("config_key_present"), "real owner runtime must preserve child config-key blocker precision");
+  assert(ownerRuntimeSource.includes("outputRefWithObservedExtension"), "real owner runtime must normalize output extension from observed format");
+  assert(ownerRuntimeSource.includes("extension_normalized_from"), "real owner runtime must record extension normalization source");
 
   const readiness = ownerRuntimeModule.inspectRealBoundOwnerRuntimeReadiness();
   assert(readiness.plugin_entry_present === true, "VCPToolBox DoubaoGen plugin entry must be present");
@@ -85,6 +87,14 @@ async function main() {
   assert(runtime.secretless_provider_runtime_delegate_bound === true, "real owner runtime bridge must be bound");
   assert(runtime.secretless_provider_runtime_bridge_id, "real owner runtime bridge id missing");
   assert(typeof ownerRuntimeModule.buildDoubaoPluginChildEnv === "function", "Doubao plugin child env builder missing");
+  assert(ownerRuntimeModule._private.outputRefWithObservedExtension(
+    "runs/real_generation/runtime_to_review_v1_guarded_live_probe/image/doubaogen/example.png",
+    "jpeg"
+  ).endsWith("/example.jpg"), "real owner runtime must map jpeg bytes away from .png extension");
+  assert(ownerRuntimeModule._private.outputRefWithObservedExtension(
+    "runs/real_generation/runtime_to_review_v1_guarded_live_probe/image/doubaogen/example.png",
+    "png"
+  ).endsWith("/example.png"), "real owner runtime must keep matching png extension");
   const safeEnv = ownerRuntimeModule.buildSafeChildEnv({
     PATH: "path-ok",
     VOLCENGINE_API_KEY: "must-not-pass",
@@ -121,6 +131,7 @@ async function main() {
     vcptoolbox_owner_runtime_child_diagnostic_mode_present: true,
     vcptoolbox_owner_runtime_child_loads_plugin_config: true,
     vcptoolbox_owner_runtime_child_reports_key_presence_without_value: true,
+    output_extension_normalized_from_observed_format: true,
     vcp_toolbox_plugin_entry_present: readiness.plugin_entry_present,
     real_provider_call_performed: false,
     provider_contact_performed: false,
