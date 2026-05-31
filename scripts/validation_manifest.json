@@ -75,6 +75,7 @@
         "review_console/**",
         "reports/**",
         "runs/real_generation/**",
+        "scripts/validate_provider_evidence_integrity_contract.js",
         "tests/schema_examples/**"
       ],
       "required_for": [
@@ -163,6 +164,26 @@
       ],
       "required_for": [
         "runtime_visual_review_gate_patch"
+      ]
+    },
+    {
+      "id": "provider_evidence_integrity_contract",
+      "command": "node scripts/validate_provider_evidence_integrity_contract.js",
+      "script": "scripts/validate_provider_evidence_integrity_contract.js",
+      "tier": "targeted",
+      "domain": "provider_evidence",
+      "status": "active",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "reports/provider_receipts/**",
+        "review_console/live_receipt_bridge/**",
+        "runs/real_generation/**",
+        "schemas/provider_evidence_integrity_contract.schema.yaml",
+        "scripts/validate_provider_evidence_integrity_contract.js"
+      ],
+      "required_for": [
+        "provider_evidence_integrity_patch",
+        "runtime_evidence_patch"
       ]
     },
     {
