@@ -71,11 +71,17 @@
       "trigger_paths": [
         "scripts/validate_mvp_core.js",
         "accepted_samples/**",
-        "adapters/**",
-        "review_console/**",
-        "reports/**",
-        "runs/real_generation/**",
+        "review_console/static_prototype/**",
+        "adapters/runtime/review_bridge_runtime_v1_readonly.js",
+        "adapters/runtime/durable_audit_store.js",
+        "kernel/runtime_kernel_v1_real_provider_guarded.js",
+        "reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_006_receipt.json",
+        "runs/real_generation/v0_6_73_real_vcp_agent_generation_retry_006/**",
         "scripts/validate_provider_evidence_integrity_contract.js",
+        "scripts/validate_readonly_visual_review_mvp.js",
+        "scripts/validate_readonly_visual_review_dataset_regression.js",
+        "scripts/validate_metadata_only_accepted_sample_retry_006.js",
+        "scripts/validate_retry_006_artifact_integrity.js",
         "tests/schema_examples/**"
       ],
       "required_for": [
@@ -99,6 +105,107 @@
       ],
       "required_for": [
         "status_surface_update"
+      ]
+    },
+    {
+      "id": "native_doubao_runner_dry_run",
+      "command": "node scripts/run_native_doubao_image_generation.js --case-id=tennis_wallet_hero_v2_preflight --dry-run=true",
+      "script": "scripts/run_native_doubao_image_generation.js",
+      "tier": "targeted",
+      "domain": "image_generation_adapter",
+      "status": "active",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "scripts/run_native_doubao_image_generation.js",
+        "adapters/image_generation/native_doubao_adapter.js",
+        "prompts/image_generation/product_still_life_tennis_wallet_hero_v2.yaml"
+      ],
+      "required_for": [
+        "native_doubao_runner_patch"
+      ]
+    },
+    {
+      "id": "native_doubao_adapter_authorization_boundary",
+      "command": "npm run validate:smoke",
+      "script": "scripts/validate_smoke.js",
+      "tier": "targeted",
+      "domain": "image_generation_adapter",
+      "status": "active",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "adapters/image_generation/native_doubao_adapter.js",
+        "plugins/image_generation/native_doubao_image/native_doubao_image.js"
+      ],
+      "required_for": [
+        "native_doubao_adapter_patch"
+      ]
+    },
+    {
+      "id": "runtime_review_bridge_readonly_stub",
+      "command": "node scripts/validate_runtime_review_bridge_readonly_stub.js",
+      "script": "scripts/validate_runtime_review_bridge_readonly_stub.js",
+      "tier": "targeted",
+      "domain": "review_bridge",
+      "status": "active",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "adapters/runtime/review_bridge_readonly_stub.js",
+        "scripts/validate_runtime_review_bridge_readonly_stub.js"
+      ],
+      "required_for": [
+        "legacy_review_bridge_stub_patch"
+      ]
+    },
+    {
+      "id": "runtime_to_review_default_local_gate",
+      "command": "npm run validate:runtime-to-review-default-local",
+      "script": "scripts/validate_runtime_to_review_v1_default_local_gate.js",
+      "tier": "targeted",
+      "domain": "runtime_to_review",
+      "status": "active",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "scripts/validate_runtime_to_review_v1_default_local_gate.js",
+        "scripts/validate_runtime_to_review_v1_fixture_smoke_flow.js",
+        "adapters/runtime/**"
+      ],
+      "required_for": [
+        "runtime_to_review_gate_patch"
+      ]
+    },
+    {
+      "id": "runtime_to_review_evidence_gate",
+      "command": "npm run validate:runtime-to-review-evidence",
+      "script": "scripts/validate_runtime_to_review_v1_evidence_gate.js",
+      "tier": "targeted",
+      "domain": "runtime_to_review",
+      "status": "active",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "scripts/validate_runtime_to_review_v1_evidence_gate.js",
+        "reports/provider_receipts/**",
+        "review_console/live_receipt_bridge/**",
+        "runs/real_generation/**"
+      ],
+      "required_for": [
+        "runtime_to_review_evidence_patch"
+      ]
+    },
+    {
+      "id": "runtime_to_review_guarded_live_probe_gate",
+      "command": "npm run validate:runtime-to-review-guarded-live-probe-gate",
+      "script": "scripts/validate_runtime_to_review_v1_guarded_live_probe_gate.js",
+      "tier": "targeted",
+      "domain": "runtime_to_review",
+      "status": "active",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "scripts/validate_runtime_to_review_v1_guarded_live_probe_gate.js",
+        "scripts/run_runtime_to_review_v1_guarded_live_probe.js",
+        "adapters/runtime/native_doubao_runtime_v1_provider_delegate.js"
+      ],
+      "required_for": [
+        "runtime_to_review_live_probe_gate_patch"
       ]
     },
     {
@@ -164,6 +271,57 @@
       ],
       "required_for": [
         "runtime_visual_review_gate_patch"
+      ]
+    },
+    {
+      "id": "runtime_to_review_next_live_readiness",
+      "command": "npm run validate:runtime-to-review-next-live-readiness",
+      "script": "scripts/validate_runtime_to_review_v1_next_live_readiness_gate.js",
+      "tier": "targeted",
+      "domain": "runtime_to_review",
+      "status": "active",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "scripts/validate_runtime_to_review_v1_next_live_readiness_gate.js",
+        "reports/runtime_to_review_v1/guarded_live_probe_real_bound_owner_runtime_20260529_failed_closed.json",
+        "adapters/runtime/native_doubao_runtime_v1_real_bound_owner_runtime.js"
+      ],
+      "required_for": [
+        "runtime_to_review_next_live_readiness_patch"
+      ]
+    },
+    {
+      "id": "runtime_to_review_static_real_entry_viewer",
+      "command": "npm run validate:runtime-to-review-static-real-entry-viewer",
+      "script": "scripts/validate_runtime_to_review_v1_static_real_entry_viewer.js",
+      "tier": "targeted",
+      "domain": "review_console",
+      "status": "active",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "scripts/validate_runtime_to_review_v1_static_real_entry_viewer.js",
+        "review_console/static_prototype/runtime_v1_real_entry_viewer.html",
+        "review_console/static_prototype/runtime_v1_real_entry_viewer.js",
+        "review_console/static_prototype/runtime_v1_real_entry_session.js"
+      ],
+      "required_for": [
+        "runtime_real_entry_viewer_patch"
+      ]
+    },
+    {
+      "id": "provider_preflight_no_provider_call",
+      "command": "npm run validate:provider-preflight",
+      "script": "scripts/validate_provider_preflight_no_provider_call.js",
+      "tier": "targeted",
+      "domain": "provider_preflight",
+      "status": "active",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "adapters/runtime/provider_preflight_no_provider_call.js",
+        "scripts/validate_provider_preflight_no_provider_call.js"
+      ],
+      "required_for": [
+        "provider_preflight_patch"
       ]
     },
     {
@@ -260,6 +418,195 @@
         "mvp_core"
       ],
       "notes": "Phase 0 timing observed this as the largest MVP child cost because it nests readonly artifact system/catalog validators."
+    },
+    {
+      "id": "historical_a5_provider_execution_packet",
+      "command": "npm run validate:exact-a5-provider-packet",
+      "script": "scripts/validate_exact_a5_provider_execution_packet_draft.js",
+      "tier": "archive",
+      "domain": "historical_a5_provider",
+      "status": "historical",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "adapters/runtime/exact_a5_provider_execution_packet_draft.js",
+        "scripts/validate_exact_a5_provider_execution_packet_draft.js",
+        "docs/EXACT_A5_PROVIDER_EXECUTION_ACTIVATION_RESULT.md"
+      ],
+      "required_for": [
+        "historical_a5_packet_regression",
+        "validate_all"
+      ]
+    },
+    {
+      "id": "historical_a5_provider_retry_packet",
+      "command": "npm run validate:exact-a5-provider-retry-packet",
+      "script": "scripts/validate_exact_a5_provider_retry_packet_draft.js",
+      "tier": "archive",
+      "domain": "historical_a5_provider",
+      "status": "historical",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "adapters/runtime/exact_a5_provider_retry_packet_draft.js",
+        "scripts/validate_exact_a5_provider_retry_packet_draft.js"
+      ],
+      "required_for": [
+        "historical_a5_packet_regression",
+        "validate_all"
+      ]
+    },
+    {
+      "id": "historical_retry_007_preflight_decision",
+      "command": "npm run validate:retry-007-preflight-decision",
+      "script": "scripts/validate_exact_a5_provider_retry_007_preflight_decision.js",
+      "tier": "archive",
+      "domain": "historical_a5_provider",
+      "status": "historical",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "adapters/runtime/exact_a5_provider_retry_007_preflight_decision_packet.js",
+        "scripts/validate_exact_a5_provider_retry_007_preflight_decision.js",
+        "docs/EXACT_A5_PROVIDER_RETRY_007_PREFLIGHT_DECISION.md"
+      ],
+      "required_for": [
+        "historical_retry_007_decision_regression",
+        "validate_all"
+      ]
+    },
+    {
+      "id": "historical_a5_activation_receipt",
+      "command": "npm run validate:exact-a5-activation-receipt",
+      "script": "scripts/validate_exact_a5_provider_execution_activation_receipt.js",
+      "tier": "archive",
+      "domain": "historical_a5_receipts",
+      "status": "historical",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "reports/provider_receipts/v0_6_73_real_vcp_agent_generation_one_shot_receipt.json",
+        "scripts/validate_exact_a5_provider_execution_activation_receipt.js"
+      ],
+      "required_for": [
+        "historical_a5_receipt_regression",
+        "validate_all"
+      ]
+    },
+    {
+      "id": "historical_a5_retry_activation_receipt",
+      "command": "npm run validate:exact-a5-retry-activation-receipt",
+      "script": "scripts/validate_exact_a5_provider_retry_activation_receipt.js",
+      "tier": "archive",
+      "domain": "historical_a5_receipts",
+      "status": "historical",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_002_receipt.json",
+        "scripts/validate_exact_a5_provider_retry_activation_receipt.js"
+      ],
+      "required_for": [
+        "historical_a5_receipt_regression",
+        "validate_all"
+      ]
+    },
+    {
+      "id": "historical_a5_retry_003_activation_receipt",
+      "command": "npm run validate:exact-a5-retry-003-activation-receipt",
+      "script": "scripts/validate_exact_a5_provider_retry_003_activation_receipt.js",
+      "tier": "archive",
+      "domain": "historical_a5_receipts",
+      "status": "historical",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_003_receipt.json",
+        "scripts/validate_exact_a5_provider_retry_003_activation_receipt.js"
+      ],
+      "required_for": [
+        "historical_a5_receipt_regression",
+        "validate_all"
+      ]
+    },
+    {
+      "id": "historical_a5_retry_004_activation_receipt",
+      "command": "npm run validate:exact-a5-retry-004-activation-receipt",
+      "script": "scripts/validate_exact_a5_provider_retry_004_activation_receipt.js",
+      "tier": "archive",
+      "domain": "historical_a5_receipts",
+      "status": "historical",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_004_receipt.json",
+        "scripts/validate_exact_a5_provider_retry_004_activation_receipt.js"
+      ],
+      "required_for": [
+        "historical_a5_receipt_regression",
+        "validate_all"
+      ]
+    },
+    {
+      "id": "historical_a5_retry_005_activation_receipt",
+      "command": "npm run validate:exact-a5-retry-005-activation-receipt",
+      "script": "scripts/validate_exact_a5_provider_retry_005_activation_receipt.js",
+      "tier": "archive",
+      "domain": "historical_a5_receipts",
+      "status": "historical",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_005_receipt.json",
+        "scripts/validate_exact_a5_provider_retry_005_activation_receipt.js"
+      ],
+      "required_for": [
+        "historical_a5_receipt_regression",
+        "validate_all"
+      ]
+    },
+    {
+      "id": "historical_a5_retry_006_activation_receipt",
+      "command": "npm run validate:exact-a5-retry-006-activation-receipt",
+      "script": "scripts/validate_exact_a5_provider_retry_006_activation_receipt.js",
+      "tier": "archive",
+      "domain": "historical_a5_receipts",
+      "status": "historical",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_006_receipt.json",
+        "scripts/validate_exact_a5_provider_retry_006_activation_receipt.js"
+      ],
+      "required_for": [
+        "historical_a5_receipt_regression",
+        "validate_all"
+      ]
+    },
+    {
+      "id": "historical_a5_retry_007_activation_receipt",
+      "command": "npm run validate:exact-a5-retry-007-activation-receipt",
+      "script": "scripts/validate_exact_a5_provider_retry_007_activation_receipt.js",
+      "tier": "archive",
+      "domain": "historical_a5_receipts",
+      "status": "historical",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "reports/provider_receipts/v0_6_73_real_vcp_agent_generation_retry_007_receipt.json",
+        "scripts/validate_exact_a5_provider_retry_007_activation_receipt.js"
+      ],
+      "required_for": [
+        "historical_a5_receipt_regression",
+        "validate_all"
+      ]
+    },
+    {
+      "id": "historical_retry_007_artifact_integrity",
+      "command": "npm run validate:retry-007-artifact-integrity",
+      "script": "scripts/validate_retry_007_artifact_integrity.js",
+      "tier": "archive",
+      "domain": "historical_a5_provider",
+      "status": "historical",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "runs/real_generation/v0_6_73_real_vcp_agent_generation_retry_007/**",
+        "scripts/validate_retry_007_artifact_integrity.js"
+      ],
+      "required_for": [
+        "historical_retry_007_artifact_regression",
+        "validate_all"
+      ]
     },
     {
       "id": "governance",

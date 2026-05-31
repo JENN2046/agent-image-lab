@@ -10,6 +10,129 @@ const root = path.resolve(__dirname, "..");
 const sampleId = "accepted_french_summer_rattan_bucket_bag_001";
 const checks = [];
 const checkTimings = [];
+const deferredChecks = [];
+const deferredFromMvp = new Map([
+  ["native_doubao_runner_dry_run_no_api", {
+    tier: "targeted",
+    command: "node scripts/run_native_doubao_image_generation.js --case-id=tennis_wallet_hero_v2_preflight --dry-run=true",
+    reason: "legacy image runner dry-run is not part of the active MVP aggregate",
+  }],
+  ["native_doubao_adapter_fail_closed_without_authorization", {
+    tier: "targeted",
+    command: "npm run validate:smoke",
+    reason: "adapter fail-closed coverage belongs to smoke or adapter-targeted validation",
+  }],
+  ["runtime_review_bridge_readonly_stub", {
+    tier: "targeted",
+    command: "node scripts/validate_runtime_review_bridge_readonly_stub.js",
+    reason: "legacy readonly stub is covered by targeted review-bridge validation",
+  }],
+  ["runtime_to_review_v1_default_local_gate", {
+    tier: "targeted",
+    command: "npm run validate:runtime-to-review-default-local",
+    reason: "runtime-to-review aggregate gate is targeted, not an MVP member",
+  }],
+  ["runtime_to_review_v1_evidence_gate", {
+    tier: "targeted",
+    command: "npm run validate:runtime-to-review-evidence",
+    reason: "runtime-to-review evidence gate is targeted, not an MVP member",
+  }],
+  ["runtime_to_review_v1_guarded_live_probe_gate", {
+    tier: "targeted",
+    command: "npm run validate:runtime-to-review-guarded-live-probe-gate",
+    reason: "live-probe preflight boundary is targeted and must not run by default MVP",
+  }],
+  ["runtime_to_review_v1_owner_runtime_binding_contract", {
+    tier: "archive",
+    command: "npm run validate:runtime-to-review-owner-runtime-binding",
+    reason: "no-provider owner-runtime binding contract is historical after real-bound owner runtime",
+  }],
+  ["runtime_to_review_v1_real_bound_owner_runtime_module", {
+    tier: "targeted",
+    command: "npm run validate:runtime-to-review-real-bound-owner-runtime",
+    reason: "real-bound owner runtime module should run when that module changes",
+  }],
+  ["runtime_to_review_v1_vcptoolbox_route_owner_runtime_module", {
+    tier: "targeted",
+    command: "npm run validate:runtime-to-review-vcptoolbox-route-owner-runtime",
+    reason: "VCPToolBox route owner runtime module should run when that route changes",
+  }],
+  ["runtime_to_review_v1_next_live_readiness_gate", {
+    tier: "targeted",
+    command: "npm run validate:runtime-to-review-next-live-readiness",
+    reason: "next-live readiness is a targeted preflight gate, not a default MVP member",
+  }],
+  ["runtime_to_review_v1_native_doubao_delegate_module", {
+    tier: "targeted",
+    command: "npm run validate:runtime-to-review-native-doubao-delegate",
+    reason: "NativeDoubao delegate module coverage is targeted to runtime delegate changes",
+  }],
+  ["runtime_to_review_v1_static_real_entry_viewer", {
+    tier: "targeted",
+    command: "npm run validate:runtime-to-review-static-real-entry-viewer",
+    reason: "static real-entry viewer coverage is targeted to review-console real-entry changes",
+  }],
+  ["provider_preflight_no_provider_call", {
+    tier: "targeted",
+    command: "npm run validate:provider-preflight",
+    reason: "provider preflight packet is a targeted runtime/provider boundary check",
+  }],
+  ["exact_a5_provider_execution_packet_draft", {
+    tier: "archive",
+    command: "npm run validate:exact-a5-provider-packet",
+    reason: "inactive historical A5 one-shot packet draft belongs to archive validation",
+  }],
+  ["exact_a5_provider_retry_packet_draft", {
+    tier: "archive",
+    command: "npm run validate:exact-a5-provider-retry-packet",
+    reason: "inactive historical A5 retry packet draft belongs to archive validation",
+  }],
+  ["retry_007_preflight_decision", {
+    tier: "archive",
+    command: "npm run validate:retry-007-preflight-decision",
+    reason: "retry_007 is a historical hold decision, not an active MVP route",
+  }],
+  ["exact_a5_activation_receipt", {
+    tier: "archive",
+    command: "npm run validate:exact-a5-activation-receipt",
+    reason: "historical A5 one-shot receipt belongs to archive validation",
+  }],
+  ["exact_a5_retry_activation_receipt", {
+    tier: "archive",
+    command: "npm run validate:exact-a5-retry-activation-receipt",
+    reason: "historical retry receipt belongs to archive validation",
+  }],
+  ["exact_a5_retry_003_activation_receipt", {
+    tier: "archive",
+    command: "npm run validate:exact-a5-retry-003-activation-receipt",
+    reason: "historical retry receipt belongs to archive validation",
+  }],
+  ["exact_a5_retry_004_activation_receipt", {
+    tier: "archive",
+    command: "npm run validate:exact-a5-retry-004-activation-receipt",
+    reason: "historical retry receipt belongs to archive validation",
+  }],
+  ["exact_a5_retry_005_activation_receipt", {
+    tier: "archive",
+    command: "npm run validate:exact-a5-retry-005-activation-receipt",
+    reason: "historical retry receipt belongs to archive validation",
+  }],
+  ["exact_a5_retry_006_activation_receipt", {
+    tier: "archive",
+    command: "npm run validate:exact-a5-retry-006-activation-receipt",
+    reason: "retry_006 receipt is historical; MVP keeps artifact and accepted-sample checks only",
+  }],
+  ["exact_a5_retry_007_activation_receipt", {
+    tier: "archive",
+    command: "npm run validate:exact-a5-retry-007-activation-receipt",
+    reason: "retry_007 receipt is historical and not an accepted sample or production candidate",
+  }],
+  ["retry_007_artifact_integrity", {
+    tier: "archive",
+    command: "npm run validate:retry-007-artifact-integrity",
+    reason: "retry_007 artifact is historical provider-link evidence only",
+  }],
+]);
 
 function relPath(file) {
   return path.join(root, file);
@@ -54,6 +177,15 @@ function assertNoExternalEffects(result) {
 }
 
 function safeCheck(name, fn) {
+  const deferred = deferredFromMvp.get(name);
+  if (deferred) {
+    deferredChecks.push({
+      check: name,
+      ...deferred,
+    });
+    return;
+  }
+
   const start = process.hrtime.bigint();
   try {
     add(name, fn());
@@ -933,6 +1065,8 @@ const output = {
   scope: "mvp_product_core_only",
   excludes_agent_board: true,
   excludes_governance_docs_phase_ledger: true,
+  deferred_check_count: deferredChecks.length,
+  deferred_checks: deferredChecks,
   provider_contact_performed: false,
   secret_value_read_performed: false,
   image_generation_performed: false,
