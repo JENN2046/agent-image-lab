@@ -1,0 +1,265 @@
+{
+  "schema_version": "validation_manifest_v1",
+  "purpose": "Index validation commands by tier, domain, and trigger paths so small changes can select targeted validation before full MVP validation.",
+  "policy": {
+    "does_not_replace_validate_mvp": true,
+    "no_provider_contact": true,
+    "no_api_call": true,
+    "no_image_generation": true,
+    "no_secret_value_read": true,
+    "tracked_assets_not_slimmed": true
+  },
+  "tiers": [
+    "smoke",
+    "mvp",
+    "targeted",
+    "archive"
+  ],
+  "validators": [
+    {
+      "id": "validation_tooling",
+      "command": "node scripts/validate_validation_manifest.js",
+      "script": "scripts/validate_validation_manifest.js",
+      "tier": "targeted",
+      "domain": "validation_tooling",
+      "status": "active",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "scripts/validation_manifest.json",
+        "scripts/validate_validation_manifest.js",
+        "scripts/recommend_validation_for_changed_files.js",
+        "scripts/run_validation_manifest_tier.js",
+        "scripts/compact_agent_board_resume_surfaces.js",
+        "package.json"
+      ],
+      "required_for": [
+        "validation_manifest_patch",
+        "validation_recommender_patch",
+        "agent_board_compaction_patch"
+      ]
+    },
+    {
+      "id": "smoke",
+      "command": "npm run validate:smoke",
+      "script": "scripts/validate_smoke.js",
+      "tier": "smoke",
+      "domain": "core_smoke",
+      "status": "active",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "package.json",
+        "scripts/validate_smoke.js",
+        "scripts/create_preview_capsule.js",
+        "scripts/agent_image_lab_read_only_adapter.js",
+        "adapters/**",
+        "review_console/static_prototype/**"
+      ],
+      "required_for": [
+        "daily_local_check",
+        "validate_all"
+      ]
+    },
+    {
+      "id": "mvp_core",
+      "command": "npm run validate:mvp",
+      "script": "scripts/validate_mvp_core.js",
+      "tier": "mvp",
+      "domain": "mvp_product_core",
+      "status": "active",
+      "estimated_runtime_class": "medium",
+      "trigger_paths": [
+        "scripts/validate_mvp_core.js",
+        "accepted_samples/**",
+        "adapters/**",
+        "review_console/**",
+        "reports/**",
+        "runs/real_generation/**",
+        "tests/schema_examples/**"
+      ],
+      "required_for": [
+        "pre_commit_high_confidence",
+        "pre_push_when_requested",
+        "merge_readiness"
+      ]
+    },
+    {
+      "id": "agent_board_state",
+      "command": "node scripts/validate_agent_board_state.js",
+      "script": "scripts/validate_agent_board_state.js",
+      "tier": "targeted",
+      "domain": "agent_board",
+      "status": "active",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        ".agent_board/**",
+        "AGENTS.md",
+        "AGENTS.autopilot-overlay.md"
+      ],
+      "required_for": [
+        "status_surface_update"
+      ]
+    },
+    {
+      "id": "runtime_to_review_real_bound_owner_runtime",
+      "command": "node scripts/validate_runtime_to_review_v1_real_bound_owner_runtime_module.js",
+      "script": "scripts/validate_runtime_to_review_v1_real_bound_owner_runtime_module.js",
+      "tier": "targeted",
+      "domain": "runtime_to_review",
+      "status": "active",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "adapters/runtime/native_doubao_runtime_v1_real_bound_owner_runtime.js",
+        "scripts/validate_runtime_to_review_v1_real_bound_owner_runtime_module.js"
+      ],
+      "required_for": [
+        "runtime_owner_patch"
+      ]
+    },
+    {
+      "id": "runtime_to_review_vcptoolbox_route_owner_runtime",
+      "command": "node scripts/validate_runtime_to_review_v1_vcptoolbox_route_owner_runtime_module.js",
+      "script": "scripts/validate_runtime_to_review_v1_vcptoolbox_route_owner_runtime_module.js",
+      "tier": "targeted",
+      "domain": "runtime_to_review",
+      "status": "active",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "adapters/runtime/native_doubao_runtime_v1_vcptoolbox_route_owner_runtime.js",
+        "scripts/validate_runtime_to_review_v1_vcptoolbox_route_owner_runtime_module.js"
+      ],
+      "required_for": [
+        "runtime_owner_patch"
+      ]
+    },
+    {
+      "id": "runtime_to_review_native_doubao_delegate",
+      "command": "node scripts/validate_runtime_to_review_v1_native_doubao_delegate_module.js",
+      "script": "scripts/validate_runtime_to_review_v1_native_doubao_delegate_module.js",
+      "tier": "targeted",
+      "domain": "runtime_to_review",
+      "status": "active",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "adapters/runtime/native_doubao_runtime_v1_provider_delegate.js",
+        "scripts/validate_runtime_to_review_v1_native_doubao_delegate_module.js"
+      ],
+      "required_for": [
+        "runtime_delegate_patch"
+      ]
+    },
+    {
+      "id": "runtime_to_review_guarded_live_probe_review",
+      "command": "node scripts/validate_runtime_to_review_v1_guarded_live_probe_human_visual_review_20260531.js",
+      "script": "scripts/validate_runtime_to_review_v1_guarded_live_probe_human_visual_review_20260531.js",
+      "tier": "targeted",
+      "domain": "runtime_to_review",
+      "status": "active",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "docs/RUNTIME_TO_REVIEW_V1_GUARDED_LIVE_PROBE_HUMAN_VISUAL_REVIEW_20260531.md",
+        "reports/runtime_to_review_v1/guarded_live_probe_human_visual_review_20260531.json",
+        "scripts/validate_runtime_to_review_v1_guarded_live_probe_human_visual_review_20260531.js"
+      ],
+      "required_for": [
+        "runtime_visual_review_gate_patch"
+      ]
+    },
+    {
+      "id": "accepted_sample_registry",
+      "command": "node scripts/validate_v7_32_accepted_sample_registry_update.js",
+      "script": "scripts/validate_v7_32_accepted_sample_registry_update.js",
+      "tier": "targeted",
+      "domain": "accepted_samples",
+      "status": "active",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "accepted_samples/**",
+        "asset_archive/**",
+        "runs/real_generation/ail_vis_17_premium_black_wireless_headphones_hero/**",
+        "scripts/validate_v7_32_accepted_sample_registry_update.js"
+      ],
+      "required_for": [
+        "accepted_sample_metadata_patch"
+      ]
+    },
+    {
+      "id": "six_month_goal_prompt_to_artifact_audit",
+      "command": "node scripts/validate_v14_212_six_month_goal_prompt_to_artifact_completion_audit.js",
+      "script": "scripts/validate_v14_212_six_month_goal_prompt_to_artifact_completion_audit.js",
+      "tier": "targeted",
+      "domain": "accepted_samples",
+      "status": "active",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "accepted_samples/**",
+        "prompts/image_generation/**",
+        "runs/real_generation/**",
+        "scripts/validate_v14_212_six_month_goal_prompt_to_artifact_completion_audit.js"
+      ],
+      "required_for": [
+        "prompt_to_artifact_recoverability_patch"
+      ]
+    },
+    {
+      "id": "metadata_only_accepted_sample_retry_006",
+      "command": "node scripts/validate_metadata_only_accepted_sample_retry_006.js",
+      "script": "scripts/validate_metadata_only_accepted_sample_retry_006.js",
+      "tier": "targeted",
+      "domain": "accepted_samples",
+      "status": "active",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "accepted_samples/**",
+        "scripts/validate_metadata_only_accepted_sample_retry_006.js"
+      ],
+      "required_for": [
+        "metadata_only_sample_patch"
+      ]
+    },
+    {
+      "id": "readonly_visual_review_mvp",
+      "command": "node scripts/validate_readonly_visual_review_mvp.js",
+      "script": "scripts/validate_readonly_visual_review_mvp.js",
+      "tier": "mvp",
+      "domain": "review_console",
+      "status": "active",
+      "estimated_runtime_class": "slow",
+      "trigger_paths": [
+        "review_console/static_prototype/**",
+        "tests/schema_examples/readonly_visual_review_mvp_state.example.json",
+        "tests/schema_examples/visual_eval_readonly_review_artifact_catalog.example.json",
+        "tests/schema_examples/visual_eval_readonly_review_corpus_renderer.example.json",
+        "tests/schema_examples/visual_eval_review_console_readonly_corpus_renderer_static_handoff.example.json",
+        "docs/READONLY_VISUAL_REVIEW_MVP.md",
+        "scripts/validate_readonly_visual_review_mvp.js"
+      ],
+      "required_for": [
+        "review_console_mvp_patch",
+        "mvp_core"
+      ],
+      "notes": "Phase 0 timing observed this as the largest MVP child cost because it nests readonly artifact system/catalog validators."
+    },
+    {
+      "id": "governance",
+      "command": "npm run validate:governance",
+      "script": "scripts/validate_governance.ps1",
+      "tier": "archive",
+      "domain": "governance",
+      "status": "active",
+      "estimated_runtime_class": "slow",
+      "trigger_paths": [
+        "AGENTS.md",
+        "AGENTS.autopilot-overlay.md",
+        "scripts/validate_governance.ps1",
+        "scripts/validate_mvp.ps1",
+        "scripts/validators/autopilot_governance/**",
+        "docs/**",
+        ".agent_board/**"
+      ],
+      "required_for": [
+        "governance_policy_patch",
+        "validate_all"
+      ]
+    }
+  ]
+}

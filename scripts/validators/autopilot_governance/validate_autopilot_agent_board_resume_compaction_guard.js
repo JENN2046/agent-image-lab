@@ -23,7 +23,8 @@ const allowedAcceptedSampleLatestPhases = [
 const allowedLocalMaintenanceLatestPhases = [
   "repository_structure_governance_baseline",
   "repository_directory_optimization_review_console_validator_split",
-  "repository_directory_optimization_readonly_visual_review_validator_split"
+  "repository_directory_optimization_readonly_visual_review_validator_split",
+  "validation_efficiency_manifest_and_recommender_20260531"
 ];
 const activeSourcePhase = "v0_3_2_live_candidate_action_packet";
 const completedTraceabilityPhase = "amber_packet_to_receipt_traceability_v1";

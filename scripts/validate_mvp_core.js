@@ -9,17 +9,20 @@ const { execFileSync } = require("node:child_process");
 const root = path.resolve(__dirname, "..");
 const sampleId = "accepted_french_summer_rattan_bucket_bag_001";
 const checks = [];
+const checkTimings = [];
 
 function relPath(file) {
   return path.join(root, file);
 }
 
 function add(check, passed, detail) {
-  checks.push({
+  const result = {
     check,
     passed: Boolean(passed),
     ...(detail === undefined ? {} : { detail }),
-  });
+  };
+  checks.push(result);
+  return result;
 }
 
 function runNode(args, timeout = 30000) {
@@ -51,10 +54,19 @@ function assertNoExternalEffects(result) {
 }
 
 function safeCheck(name, fn) {
+  const start = process.hrtime.bigint();
   try {
     add(name, fn());
   } catch (error) {
     add(name, false, error.message);
+  } finally {
+    const seconds = Number(process.hrtime.bigint() - start) / 1e9;
+    const lastResult = checks[checks.length - 1];
+    checkTimings.push({
+      check: name,
+      passed: lastResult?.passed === true,
+      seconds: Number(seconds.toFixed(3)),
+    });
   }
 }
 
@@ -879,6 +891,9 @@ safeCheck("metadata_only_accepted_sample_retry_006", () => {
 });
 
 const failed = checks.filter((check) => !check.passed);
+const slowestChecks = [...checkTimings]
+  .sort((a, b) => b.seconds - a.seconds)
+  .slice(0, 8);
 const output = {
   passed: failed.length === 0,
   validator: "validate_mvp_core",
@@ -890,6 +905,12 @@ const output = {
   provider_contact_performed: false,
   secret_value_read_performed: false,
   image_generation_performed: false,
+  timing_summary: {
+    timed_check_count: checkTimings.length,
+    measured_seconds: Number(checkTimings.reduce((sum, item) => sum + item.seconds, 0).toFixed(3)),
+    slowest_checks: slowestChecks,
+  },
+  check_timings: checkTimings,
   checks,
 };
 
