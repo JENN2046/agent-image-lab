@@ -16,6 +16,7 @@
     "recommend:validation": "node scripts/recommend_validation_for_changed_files.js",
     "validate:manifest-tier": "node scripts/run_validation_manifest_tier.js",
     "validate:archive-plan": "node scripts/run_validation_manifest_tier.js --tier archive --dry-run",
+    "validate:active": "npm run validate:smoke && npm run validate:mvp && npm run validate:runtime-kernel && npm run validate:review-bridge-readonly && npm run validate:durable-audit-store && npm run validate:provider-preflight && npm run validate:provider-evidence-integrity && npm run validate:retry-006-artifact-integrity && npm run validate:retry-007-artifact-integrity",
     "compact:agent-board:plan": "node scripts/compact_agent_board_resume_surfaces.js --dry-run",
     "benchmark:validation": "node scripts/benchmark_validation_efficiency.js",
     "validate:mvp": "node scripts/validate_mvp_core.js",

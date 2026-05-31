@@ -609,6 +609,30 @@
       ]
     },
     {
+      "id": "capsule_product_core_regression",
+      "command": "npm run validate:capsule-regression",
+      "script": "scripts/validate_capsule_product_core_regression.ps1",
+      "tier": "archive",
+      "domain": "capsule_product_core",
+      "status": "historical",
+      "estimated_runtime_class": "slow",
+      "trigger_paths": [
+        "scripts/validate_capsule_product_core_regression.ps1",
+        "scripts/validate_mvp_capsule_product_core.ps1",
+        "scripts/validate_capsule_*.js",
+        "scripts/validate_controlled_visual_production_loop_*.js",
+        "scripts/validate_v14_231_git_tracked_preview_evidence_capsule_baseline.js",
+        "docs/VALIDATION_GATE_TAXONOMY.md",
+        "docs/PROJECT_STRUCTURE.md",
+        "review_console/static_prototype/**",
+        "tests/schema_examples/**"
+      ],
+      "required_for": [
+        "capsule_product_core_regression",
+        "validate_all"
+      ]
+    },
+    {
       "id": "governance",
       "command": "npm run validate:governance",
       "script": "scripts/validate_governance.ps1",
