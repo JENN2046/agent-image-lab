@@ -27,6 +27,7 @@
       "trigger_paths": [
         "scripts/validation_manifest.json",
         "scripts/validate_validation_manifest.js",
+        "scripts/validate_validation_recommendation_profiles.js",
         "scripts/recommend_validation_for_changed_files.js",
         "scripts/run_validation_manifest_tier.js",
         "scripts/compact_agent_board_resume_surfaces.js",
@@ -37,6 +38,25 @@
         "validation_manifest_patch",
         "validation_recommender_patch",
         "agent_board_compaction_patch"
+      ]
+    },
+    {
+      "id": "validation_recommendation_profiles",
+      "command": "node scripts/validate_validation_recommendation_profiles.js",
+      "script": "scripts/validate_validation_recommendation_profiles.js",
+      "tier": "targeted",
+      "domain": "validation_tooling",
+      "status": "active",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "scripts/recommend_validation_for_changed_files.js",
+        "scripts/validate_validation_recommendation_profiles.js",
+        "scripts/validation_manifest.json",
+        "package.json"
+      ],
+      "required_for": [
+        "validation_recommender_patch",
+        "validation_profile_contract_patch"
       ]
     },
     {

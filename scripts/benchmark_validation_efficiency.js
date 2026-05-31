@@ -18,6 +18,22 @@ const commands = [
     command: "npm run recommend:validation"
   },
   {
+    id: "recommend_validation_daily_profile",
+    command: "node scripts/recommend_validation_for_changed_files.js --files package.json"
+  },
+  {
+    id: "recommend_validation_observability_profile",
+    command: "node scripts/recommend_validation_for_changed_files.js --files reports/validation_benchmarks/validation_efficiency_baseline_example.json"
+  },
+  {
+    id: "recommend_validation_mvp_profile",
+    command: "node scripts/recommend_validation_for_changed_files.js --files review_console/static_prototype/app.js"
+  },
+  {
+    id: "recommend_validation_targeted_profile",
+    command: "node scripts/recommend_validation_for_changed_files.js --files scripts/recommend_validation_for_changed_files.js"
+  },
+  {
     id: "validate_mvp",
     command: "npm run validate:mvp"
   },
@@ -135,11 +151,21 @@ function summarizeParsedOutput(parsed) {
     "validator",
     "recommender",
     "runner",
+    "source",
+    "comparison_base",
+    "change_selection",
+    "recommendation_contract_version",
     "check_count",
     "failed_count",
     "matched_validator_count",
+    "manifest_coverage",
+    "active_recommended",
     "mvp_recommended",
     "recommended_commands",
+    "deferred_commands",
+    "recommended_validation_profile",
+    "validation_plan",
+    "efficiency_summary",
     "timing_summary"
   ]) {
     if (Object.prototype.hasOwnProperty.call(parsed, key)) {
@@ -163,6 +189,10 @@ function runCommand(commandConfig, iteration, timeoutMs) {
     cwd: root,
     shell: true,
     encoding: "utf8",
+    env: {
+      ...process.env,
+      AIL_VALIDATION_BENCHMARK_IN_PROGRESS: "1"
+    },
     timeout: timeoutMs,
     maxBuffer: 20 * 1024 * 1024
   });
@@ -212,6 +242,41 @@ function summarizeDurations(results) {
   });
 }
 
+function summarizeRecommendationProfiles(results) {
+  const profileResultIds = {
+    daily: "recommend_validation_daily_profile",
+    observability: "recommend_validation_observability_profile",
+    mvp: "recommend_validation_mvp_profile",
+    targeted: "recommend_validation_targeted_profile"
+  };
+  return Object.fromEntries(Object.entries(profileResultIds).map(([profileName, resultId]) => {
+    const result = results.find((item) => item.id === resultId && item.iteration === 1);
+    const parsed = result?.parsed_summary || {};
+    const profile = parsed.recommended_validation_profile || null;
+    return [profileName, {
+      command_id: resultId,
+      passed: result?.passed === true,
+      seconds: result?.seconds ?? null,
+      recommendation_contract_version: parsed.recommendation_contract_version || null,
+      source: parsed.source || null,
+      comparison_base: parsed.comparison_base || null,
+      change_selection: parsed.change_selection || null,
+      primary_profile: profile?.primary_profile || null,
+      profiles: profile?.profiles || [],
+      primary_command: profile?.primary_command || null,
+      profile_commands: profile?.profile_commands || [],
+      profile_catalog: profile?.profile_catalog || {},
+      manifest_coverage: parsed.manifest_coverage || null,
+      validation_plan: parsed.validation_plan || null,
+      efficiency_summary: parsed.efficiency_summary || null,
+      covered_commands: parsed.validation_plan?.covered_commands || [],
+      deferred_commands: parsed.deferred_commands || parsed.validation_plan?.deferred_commands || [],
+      recommended_commands: parsed.recommended_commands || [],
+      reasons: profile?.reasons || []
+    }];
+  }));
+}
+
 function main() {
   const options = parseArgs(process.argv.slice(2));
   const startedAt = new Date();
@@ -231,6 +296,7 @@ function main() {
 
   const finishedAt = new Date();
   const summary = summarizeDurations(results);
+  const recommendationProfileBaselines = summarizeRecommendationProfiles(results);
   const passed = results.every((item) => item.passed);
   const report = {
     passed,
@@ -257,6 +323,7 @@ function main() {
     },
     commands,
     summary,
+    recommendation_profile_baselines: recommendationProfileBaselines,
     results,
     provider_contact_performed: false,
     plugin_call_performed: false,
