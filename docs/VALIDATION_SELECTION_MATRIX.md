@@ -61,12 +61,18 @@ For closeout surfaces that only need runnable commands, use:
 ```text
 npm run recommend:validation:next-commands
 node scripts/recommend_validation_for_changed_files.js --next-commands=json
+npm run --silent closeout:validation-summary
 ```
 
 The npm entry emits one command per line from
 `validation_decision_summary.next_commands`. The JSON-lite form keeps
 `primary_profile`, `primary_command`, `next_commands`, and `deferred_commands`
 without requiring consumers to parse the full recommender payload.
+
+`npm run --silent closeout:validation-summary` formats the current diff's
+`validation_decision_summary.next_commands` into a paste-ready closeout
+`validation.recommender` block. It accepts the same selector arguments as the
+recommender, such as `--files`, `--cached`, and `--base`.
 
 Change selection modes:
 

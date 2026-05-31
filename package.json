@@ -16,6 +16,7 @@
     "validate:recommendation-profiles": "node scripts/validate_validation_recommendation_profiles.js",
     "recommend:validation": "node scripts/recommend_validation_for_changed_files.js",
     "recommend:validation:next-commands": "node scripts/recommend_validation_for_changed_files.js --next-commands",
+    "closeout:validation-summary": "node scripts/build_validation_closeout_summary.js",
     "validate:manifest-tier": "node scripts/run_validation_manifest_tier.js",
     "validate:targeted-plan": "node scripts/run_validation_manifest_tier.js --tier targeted --dry-run",
     "validate:archive-plan": "node scripts/run_validation_manifest_tier.js --tier archive --dry-run",

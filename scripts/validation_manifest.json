@@ -29,6 +29,7 @@
         "scripts/validate_validation_manifest.js",
         "scripts/validate_validation_recommendation_profiles.js",
         "scripts/recommend_validation_for_changed_files.js",
+        "scripts/build_validation_closeout_summary.js",
         "scripts/run_validation_manifest_tier.js",
         "scripts/compact_agent_board_resume_surfaces.js",
         "scripts/benchmark_validation_efficiency.js",
@@ -50,6 +51,7 @@
       "estimated_runtime_class": "fast",
       "trigger_paths": [
         "scripts/recommend_validation_for_changed_files.js",
+        "scripts/build_validation_closeout_summary.js",
         "scripts/validate_validation_recommendation_profiles.js",
         "scripts/validation_manifest.json",
         "docs/VALIDATION_SELECTION_MATRIX.md",

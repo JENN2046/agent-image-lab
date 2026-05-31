@@ -7,6 +7,7 @@ const { execFileSync } = require("node:child_process");
 
 const root = path.resolve(__dirname, "..");
 const recommenderScript = path.join(root, "scripts", "recommend_validation_for_changed_files.js");
+const closeoutHelperScript = path.join(root, "scripts", "build_validation_closeout_summary.js");
 const benchmarkScript = path.join(root, "scripts", "benchmark_validation_efficiency.js");
 const packageJsonPath = path.join(root, "package.json");
 const agentsPath = path.join(root, "AGENTS.md");
@@ -275,6 +276,7 @@ function validateWiring() {
   const scripts = packageJson.scripts || {};
   const validateActive = scripts["validate:active"] || "";
   const recommenderSource = fs.readFileSync(recommenderScript, "utf8");
+  const closeoutHelperSource = fs.readFileSync(closeoutHelperScript, "utf8");
   const benchmarkSource = fs.readFileSync(benchmarkScript, "utf8");
   const agents = fs.readFileSync(agentsPath, "utf8");
   const closeoutSchema = fs.readFileSync(closeoutSchemaPath, "utf8");
@@ -289,6 +291,11 @@ function validateWiring() {
     "package_json_recommendation_next_commands_script",
     scripts["recommend:validation:next-commands"] === "node scripts/recommend_validation_for_changed_files.js --next-commands",
     scripts["recommend:validation:next-commands"]
+  );
+  add(
+    "package_json_closeout_validation_summary_script",
+    scripts["closeout:validation-summary"] === "node scripts/build_validation_closeout_summary.js",
+    scripts["closeout:validation-summary"]
   );
   add(
     "validate_active_includes_manifest_validator",
@@ -345,6 +352,42 @@ function validateWiring() {
       nextCommandsJson.next_commands.includes("npm run validate:active") &&
       Array.isArray(nextCommandsJson.deferred_commands),
     nextCommandsJson
+  );
+  const closeoutSummaryPackage = runRecommenderRaw([
+    closeoutHelperScript,
+    "--files",
+    "package.json",
+  ]);
+  const closeoutSummaryAgentBoard = runRecommenderRaw([
+    closeoutHelperScript,
+    "--files",
+    ".agent_board/CLOSEOUT_SCHEMA.md",
+  ]);
+  add(
+    "closeout_helper_uses_recommender_json_lite",
+    closeoutHelperSource.includes('"--next-commands=json"') &&
+      closeoutHelperSource.includes("recommend_validation_for_changed_files.js") &&
+      closeoutHelperSource.includes("validation_decision_summary.next_commands")
+  );
+  add(
+    "closeout_helper_package_json_outputs_daily_block",
+    closeoutSummaryPackage.includes("validation:") &&
+      closeoutSummaryPackage.includes("recommender:") &&
+      closeoutSummaryPackage.includes('primary_profile: "daily"') &&
+      closeoutSummaryPackage.includes('primary_command: "npm run validate:active"') &&
+      closeoutSummaryPackage.includes('- "node scripts/validate_validation_manifest.js"') &&
+      closeoutSummaryPackage.includes('- "npm run validate:active"') &&
+      closeoutSummaryPackage.includes('usage_decision: "followed"'),
+    closeoutSummaryPackage
+  );
+  add(
+    "closeout_helper_agent_board_outputs_deferred_block",
+    closeoutSummaryAgentBoard.includes('primary_profile: "targeted"') &&
+      closeoutSummaryAgentBoard.includes('- "npm run validate:targeted-plan"') &&
+      closeoutSummaryAgentBoard.includes('command: "npm run validate:governance"') &&
+      closeoutSummaryAgentBoard.includes('deferred_to_command: "npm run validate:archive-plan"') &&
+      closeoutSummaryAgentBoard.includes('- ".agent_board/CLOSEOUT_SCHEMA.md"'),
+    closeoutSummaryAgentBoard
   );
   add(
     "benchmark_summary_keeps_active_recommended",
@@ -492,6 +535,9 @@ function validateWiring() {
     "selection_matrix_documents_next_commands_light_outputs",
     validationSelectionMatrix.includes("npm run recommend:validation:next-commands") &&
       validationSelectionMatrix.includes("node scripts/recommend_validation_for_changed_files.js --next-commands=json") &&
+      validationSelectionMatrix.includes("npm run --silent closeout:validation-summary") &&
+      validationSelectionMatrix.includes("paste-ready closeout") &&
+      validationSelectionMatrix.includes("validation.recommender") &&
       validationSelectionMatrix.includes("one command per line") &&
       validationSelectionMatrix.includes("JSON-lite form") &&
       validationSelectionMatrix.includes("primary_profile") &&
