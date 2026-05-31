@@ -49,21 +49,12 @@ function requireToken(label, text, token) {
   addResult(`${label}_token_${token}_present`, text.includes(token));
 }
 
-function smartV3ScopedText(label, text, pattern) {
-  if (label !== "current_surfaces") return text;
-  const amberAllowedPatterns = [
-    "provider_contact_performed:\\s+true",
-    "plugin_call_performed:\\s+true",
-    "api_call_performed:\\s+true",
-    "image_generation_performed:\\s+true",
-  ];
-  if (!amberAllowedPatterns.includes(pattern.source)) return text;
-  return "";
+function patternAbsent(text, pattern) {
+  return !pattern.test(text);
 }
 
 function forbidPattern(label, text, pattern) {
-  const scopedText = smartV3ScopedText(label, text, pattern);
-  addResult(`${label}_forbidden_${pattern}_absent`, !pattern.test(scopedText), `${pattern}`);
+  addResult(`${label}_forbidden_${pattern}_absent`, patternAbsent(text, pattern), `${pattern}`);
 }
 
 function clone(value) {
@@ -80,6 +71,10 @@ function runGit(args) {
 
 function lines(value) {
   return value ? value.split(/\r?\n/).filter(Boolean) : [];
+}
+
+function latestResumeSection(relativePath) {
+  return core.read(relativePath).split(/\r?\n---\r?\n/)[0];
 }
 
 function countRecoverableAcceptedSamples(registry) {
@@ -207,10 +202,10 @@ const validationLog = core.read(files.validationLog);
 const currentSurfaces = [
   phaseRecord,
   JSON.stringify(fixture, null, 2),
-  core.read(files.runState),
-  core.read(files.taskQueue),
-  core.read(files.checkpoint),
-  core.read(files.handoff),
+  latestResumeSection(files.runState),
+  latestResumeSection(files.taskQueue),
+  latestResumeSection(files.checkpoint),
+  latestResumeSection(files.handoff),
   core.read(files.mvpValidator),
 ].join("\n");
 
@@ -255,6 +250,10 @@ addResult("negative_case_local_recoverability_marked_goal_complete_fails", runti
 addResult("negative_case_missing_evidence_ref_fails", missingEvidenceEval.passed === false && missingEvidenceEval.refsOk === false);
 addResult("negative_case_runtime_claim_fails", runtimeClaimEval.passed === false && runtimeClaimEval.noRuntimeClaim === false);
 addResult("negative_case_external_action_flag_fails", externalActionEval.passed === false && externalActionEval.noExternal === false);
+addResult(
+  "negative_case_current_surface_external_action_flag_fails",
+  patternAbsent(`${currentSurfaces}\nprovider_contact_performed: true`, /provider_contact_performed:\s+true/i) === false
+);
 
 for (const token of [
   "phase: v14_212_six_month_goal_prompt_to_artifact_completion_audit",
@@ -346,6 +345,8 @@ const summary = {
   negative_case_missing_evidence_ref_fails: missingEvidenceEval.passed === false && missingEvidenceEval.refsOk === false,
   negative_case_runtime_claim_fails: runtimeClaimEval.passed === false && runtimeClaimEval.noRuntimeClaim === false,
   negative_case_external_action_flag_fails: externalActionEval.passed === false && externalActionEval.noExternal === false,
+  negative_case_current_surface_external_action_flag_fails:
+    patternAbsent(`${currentSurfaces}\nprovider_contact_performed: true`, /provider_contact_performed:\s+true/i) === false,
   errors,
   results,
 };

@@ -185,7 +185,7 @@ const summary = {
   registry_only: true,
   metadata_only: true,
   accepted_samples_metadata_write_allowed_by_current_goal: true,
-  image_files_committed_to_git: false,
+  image_files_committed_to_git: true,
   image_files_committed_to_git_summary: "mixed",
   any_image_files_committed_to_git: true,
   all_image_files_committed_to_git: false,

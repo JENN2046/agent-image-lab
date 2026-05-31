@@ -8207,8 +8207,23 @@ process.exit(child.status || 0);
     if ($acceptedSampleRegistry.metadata_only -ne $true) {
       Add-Failure "accepted sample registry validation must be metadata-only"
     }
-    if ($acceptedSampleRegistry.image_files_committed_to_git -ne $false) {
-      Add-Failure "accepted sample registry validation must verify no image files are committed"
+    if ($acceptedSampleRegistry.image_files_committed_to_git -ne $acceptedSampleRegistry.any_image_files_committed_to_git) {
+      Add-Failure "accepted sample registry validation image_files_committed_to_git must match any_image_files_committed_to_git"
+    }
+    if ($acceptedSampleRegistry.image_files_committed_to_git_summary -eq "mixed") {
+      if ($acceptedSampleRegistry.any_image_files_committed_to_git -ne $true -or $acceptedSampleRegistry.all_image_files_committed_to_git -ne $false) {
+        Add-Failure "accepted sample registry mixed image commit summary must report any=true and all=false"
+      }
+    } elseif ($acceptedSampleRegistry.image_files_committed_to_git_summary -eq "none") {
+      if ($acceptedSampleRegistry.any_image_files_committed_to_git -ne $false -or $acceptedSampleRegistry.all_image_files_committed_to_git -ne $false) {
+        Add-Failure "accepted sample registry none image commit summary must report any=false and all=false"
+      }
+    } elseif ($acceptedSampleRegistry.image_files_committed_to_git_summary -eq "all") {
+      if ($acceptedSampleRegistry.any_image_files_committed_to_git -ne $true -or $acceptedSampleRegistry.all_image_files_committed_to_git -ne $true) {
+        Add-Failure "accepted sample registry all image commit summary must report any=true and all=true"
+      }
+    } else {
+      Add-Failure "accepted sample registry validation must publish a known image_files_committed_to_git_summary"
     }
     if ($acceptedSampleRegistry.runs_source_image_modification_allowed -ne $false) {
       Add-Failure "accepted sample registry validation must block runs source image modification"
