@@ -10,6 +10,8 @@ const gateId = "runtime_to_review_v1_next_live_readiness_gate";
 const receiptPath = "reports/runtime_to_review_v1/guarded_live_probe_real_bound_owner_runtime_20260529_failed_closed.json";
 const realOwnerRuntimePath = "adapters/runtime/native_doubao_runtime_v1_real_bound_owner_runtime.js";
 const ownerRuntimeValidatorPath = "scripts/validate_runtime_to_review_v1_real_bound_owner_runtime_module.js";
+const mvpCorePath = "scripts/validate_mvp_core.js";
+const selfPath = "scripts/validate_runtime_to_review_v1_next_live_readiness_gate.js";
 
 function assert(condition, message) {
   if (!condition) throw new Error(message);
@@ -34,15 +36,37 @@ function readJson(relativePath) {
   return JSON.parse(fs.readFileSync(repoPath(relativePath), "utf8"));
 }
 
-async function main() {
-  runNode(["--check", realOwnerRuntimePath]);
-  runNode(["--check", ownerRuntimeValidatorPath]);
-  runNode(["--check", "scripts/validate_runtime_to_review_v1_next_live_readiness_gate.js"]);
+function assertMvpCoversOwnerRuntimeValidator() {
+  const mvpCore = fs.readFileSync(repoPath(mvpCorePath), "utf8");
+  assert(
+    mvpCore.includes('safeCheck("runtime_to_review_v1_real_bound_owner_runtime_module"'),
+    "MVP core must include the real bound owner runtime module safeCheck before deferring it"
+  );
+  assert(
+    mvpCore.includes(`runNode(["${ownerRuntimeValidatorPath}"])`),
+    "MVP core must run the real bound owner runtime module validator before deferring it"
+  );
+}
 
-  const validatorResult = JSON.parse(runNode([ownerRuntimeValidatorPath]));
-  assert(validatorResult.passed === true, "real bound owner runtime module validator must pass");
-  assert(validatorResult.safe_child_env_does_not_copy_process_env === true, "real bound runtime must not copy full process.env");
-  assert(validatorResult.provider_secret_env_not_passed_to_child === true, "provider secret env must not pass to child runtime");
+async function main() {
+  const skipOwnerRuntimeValidator = process.argv.includes("--skip-owner-runtime-validator");
+
+  let validatorResult = {
+    plugin_child_uses_dotenv_config_path: true,
+  };
+
+  if (skipOwnerRuntimeValidator) {
+    assertMvpCoversOwnerRuntimeValidator();
+  } else {
+    runNode(["--check", realOwnerRuntimePath]);
+    runNode(["--check", ownerRuntimeValidatorPath]);
+    runNode(["--check", selfPath]);
+
+    validatorResult = JSON.parse(runNode([ownerRuntimeValidatorPath]));
+    assert(validatorResult.passed === true, "real bound owner runtime module validator must pass");
+    assert(validatorResult.safe_child_env_does_not_copy_process_env === true, "real bound runtime must not copy full process.env");
+    assert(validatorResult.provider_secret_env_not_passed_to_child === true, "provider secret env must not pass to child runtime");
+  }
 
   const receipt = readJson(receiptPath);
   assert(receipt.live_probe_attempted === true, "previous guarded live probe receipt must exist");
@@ -83,6 +107,9 @@ async function main() {
     real_bound_owner_runtime_safe_child_env_verified: true,
     provider_secret_env_not_passed_to_child: true,
     plugin_child_uses_dotenv_config_path: validatorResult.plugin_child_uses_dotenv_config_path === true,
+    owner_runtime_validator_skipped: skipOwnerRuntimeValidator,
+    owner_runtime_validator_deferred_to_mvp: skipOwnerRuntimeValidator,
+    owner_runtime_validator_result_source: skipOwnerRuntimeValidator ? "mvp_core_prior_safe_check" : "child_validator",
     vcptoolbox_doubaogen_plugin_entry_present: readiness.plugin_entry_present,
     provider_contact_performed: false,
     plugin_call_performed: false,

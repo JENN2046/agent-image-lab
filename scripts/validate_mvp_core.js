@@ -398,7 +398,10 @@ safeCheck("runtime_to_review_v1_vcptoolbox_route_owner_runtime_module", () => {
 });
 
 safeCheck("runtime_to_review_v1_next_live_readiness_gate", () => {
-  const result = parseJson(runNode(["scripts/validate_runtime_to_review_v1_next_live_readiness_gate.js"]));
+  const result = parseJson(runNode([
+    "scripts/validate_runtime_to_review_v1_next_live_readiness_gate.js",
+    "--skip-owner-runtime-validator"
+  ]));
   return result.passed === true &&
     result.gate_id === "runtime_to_review_v1_next_live_readiness_gate" &&
     result.mode === "next_live_readiness_gate_no_provider_call" &&
@@ -414,6 +417,9 @@ safeCheck("runtime_to_review_v1_next_live_readiness_gate", () => {
     result.real_bound_owner_runtime_safe_child_env_verified === true &&
     result.provider_secret_env_not_passed_to_child === true &&
     result.plugin_child_uses_dotenv_config_path === true &&
+    result.owner_runtime_validator_skipped === true &&
+    result.owner_runtime_validator_deferred_to_mvp === true &&
+    result.owner_runtime_validator_result_source === "mvp_core_prior_safe_check" &&
     result.provider_contact_performed === false &&
     result.plugin_call_performed === false &&
     result.api_call_performed === false &&
