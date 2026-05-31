@@ -1,8 +1,10 @@
 const childProcess = require("node:child_process");
 const fs = require("node:fs");
 const path = require("node:path");
+const { createRecoverabilityCore } = require("./lib/artifact_recoverability_core");
 
 const root = path.resolve(__dirname, "..");
+const recoverability = createRecoverabilityCore(root);
 const registryPath = "accepted_samples/accepted_sample_registry.yaml";
 const allowedCategoryFiles = [
   "accepted_samples/categories/product_still_life.yaml",
@@ -59,6 +61,10 @@ function readText(relativePath) {
   return fs.readFileSync(repoPath(relativePath), "utf8");
 }
 
+function readJson(relativePath) {
+  return JSON.parse(readText(relativePath));
+}
+
 function fileContains(relativePath, token) {
   return fileExists(relativePath) && readText(relativePath).includes(token);
 }
@@ -96,8 +102,29 @@ function listTrackedAcceptedSamplesFiles() {
   return result.stdout.split(/\r?\n/).filter(Boolean);
 }
 
+function readImageEvidence(relativePath) {
+  if (!relativePath || !fileExists(relativePath)) return null;
+  const metadata = recoverability.readImageMetadata(relativePath);
+  return {
+    sha256: recoverability.sha256File(relativePath),
+    dimensions: metadata.width && metadata.height ? `${metadata.width}x${metadata.height}` : null,
+    mime: metadata.mimeType,
+    signatureValid: metadata.signatureValid,
+    bytes: fs.statSync(repoPath(relativePath)).size,
+  };
+}
+
 const registry = readText(registryPath);
 const sampleBlocks = extractSampleBlocks(registry);
+const headphonesBlock = sampleBlocks.get(requiredHeadphonesProductSample) || "";
+const headphonesImagePath = extractField(headphonesBlock, "image_path");
+const headphonesRegistrySha256 = extractField(headphonesBlock, "verified_sha256");
+const headphonesRegistryDimensions = extractField(headphonesBlock, "verified_dimensions");
+const headphonesRegistryMime = extractField(headphonesBlock, "verified_mime");
+const headphonesImageEvidence = readImageEvidence(headphonesImagePath);
+const headphonesMetadata = readJson("accepted_samples/ail_vis_17_premium_black_wireless_headphones_hero/metadata.json");
+const headphonesManifest = readJson("accepted_samples/ail_vis_17_premium_black_wireless_headphones_hero/manifest.json");
+const headphonesSourceEvidence = readJson("accepted_samples/ail_vis_17_premium_black_wireless_headphones_hero/source_evidence.json");
 
 check("accepted_samples_readme", () => fileExists("accepted_samples/README.md"));
 check("registry_exists", () => fileExists(registryPath));
@@ -143,8 +170,35 @@ check("headphones_product_sample_provider_type", () => extractField(sampleBlocks
 check("headphones_product_sample_plugin_null", () => extractField(sampleBlocks.get(requiredHeadphonesProductSample) || "", "plugin_id") === "null");
 check("headphones_product_sample_category", () => extractField(sampleBlocks.get(requiredHeadphonesProductSample) || "", "category") === "product_still_life");
 check("headphones_product_sample_image_committed", () => (sampleBlocks.get(requiredHeadphonesProductSample) || "").includes("image_files_committed_to_git: true"));
-check("headphones_product_sample_source_file_exists", () =>
-  fileExists("runs/real_generation/ail_vis_17_premium_black_wireless_headphones_hero/ail_vis_17_premium_black_wireless_headphones_hero_01.png")
+check("headphones_product_sample_source_file_exists", () => Boolean(headphonesImagePath) && fileExists(headphonesImagePath));
+check("headphones_product_sample_source_sha256_matches_registry", () =>
+  headphonesImageEvidence?.sha256 === headphonesRegistrySha256
+);
+check("headphones_product_sample_source_dimensions_match_registry", () =>
+  headphonesImageEvidence?.dimensions === headphonesRegistryDimensions
+);
+check("headphones_product_sample_source_mime_matches_registry", () =>
+  headphonesImageEvidence?.signatureValid === true && headphonesImageEvidence?.mime === headphonesRegistryMime
+);
+check("headphones_product_sample_metadata_matches_registry", () =>
+  headphonesMetadata.artifact.source_image_ref === headphonesImagePath &&
+  headphonesMetadata.artifact.source_image_sha256 === headphonesRegistrySha256 &&
+  headphonesMetadata.artifact.source_image_dimensions === headphonesRegistryDimensions &&
+  headphonesMetadata.artifact.source_image_mime === headphonesRegistryMime
+);
+check("headphones_product_sample_manifest_matches_registry", () =>
+  headphonesManifest.artifact.original.path === headphonesImagePath &&
+  headphonesManifest.artifact.original.sha256 === headphonesRegistrySha256 &&
+  `${headphonesManifest.artifact.original.width}x${headphonesManifest.artifact.original.height}` === headphonesRegistryDimensions &&
+  headphonesManifest.artifact.original.format === "png" &&
+  headphonesManifest.artifact.original.bytes === headphonesImageEvidence?.bytes
+);
+check("headphones_product_sample_source_evidence_matches_file", () =>
+  headphonesSourceEvidence.verified_source_image.path === headphonesImagePath &&
+  headphonesSourceEvidence.verified_source_image.sha256 === headphonesImageEvidence?.sha256 &&
+  `${headphonesSourceEvidence.verified_source_image.width}x${headphonesSourceEvidence.verified_source_image.height}` === headphonesImageEvidence?.dimensions &&
+  headphonesSourceEvidence.verified_source_image.mime === headphonesImageEvidence?.mime &&
+  headphonesSourceEvidence.verified_source_image.bytes === headphonesImageEvidence?.bytes
 );
 check("headphones_product_sample_no_memory_write", () => (sampleBlocks.get(requiredHeadphonesProductSample) || "").includes("write_to_memory_allowed: false"));
 check("headphones_product_sample_no_daily_note_write", () => (sampleBlocks.get(requiredHeadphonesProductSample) || "").includes("daily_note_write_allowed: false"));
