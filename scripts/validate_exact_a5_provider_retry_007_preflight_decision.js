@@ -81,6 +81,7 @@ function expectFailure(caseId, fn) {
 }
 
 function main() {
+  const skipProviderEvidenceIntegrity = process.argv.includes("--skip-provider-evidence-integrity");
   assert(fs.existsSync(repoPath(adapterPath)), "retry_007 preflight decision adapter missing");
   runNode(["--check", adapterPath]);
 
@@ -95,8 +96,13 @@ function main() {
   const cliPacket = JSON.parse(runNode([adapterPath]));
   assertPacket(cliPacket, "cli");
 
-  const integrity = JSON.parse(runNode(["scripts/validate_provider_evidence_integrity_contract.js"]));
-  assert(integrity.passed === true, "provider evidence integrity validator must pass");
+  const integrity = skipProviderEvidenceIntegrity
+    ? { passed: false, deferred_to_mvp: true }
+    : JSON.parse(runNode(["scripts/validate_provider_evidence_integrity_contract.js"]));
+  assert(
+    integrity.passed === true || skipProviderEvidenceIntegrity,
+    "provider evidence integrity validator must pass or be deferred to MVP"
+  );
 
   const negativeCases = [
     expectFailure("can_execute_true_rejected", () => {
@@ -152,6 +158,8 @@ function main() {
     required_model: packet.selected_provider_candidate.required_model,
     retry_007_output_directory_ref: packet.retry_007_candidate_boundaries.output_directory_ref,
     provider_evidence_integrity_gate_passed: integrity.passed,
+    provider_evidence_integrity_gate_skipped: skipProviderEvidenceIntegrity,
+    provider_evidence_integrity_gate_deferred_to_mvp: skipProviderEvidenceIntegrity,
     negative_case_count: negativeCases.length,
     caught_negative_case_count: negativeCases.filter((item) => item.result === "caught").length,
     all_negative_cases_caught: negativeCases.every((item) => item.result === "caught"),

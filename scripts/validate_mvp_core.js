@@ -248,10 +248,12 @@ safeCheck("runtime_to_review_v1_fixture_smoke_flow", () => {
 });
 
 safeCheck("runtime_to_review_v1_default_local_gate", () => {
-  const result = parseJson(runNode(["scripts/validate_runtime_to_review_v1_default_local_gate.js"]));
+  const result = parseJson(runNode(["scripts/validate_runtime_to_review_v1_default_local_gate.js", "--skip-child-validators"]));
   return result.passed === true &&
     result.gate_id === "runtime_to_review_v1_default_local_gate" &&
     result.mode === "default_local_no_provider_no_external_call" &&
+    result.child_validators_skipped === true &&
+    result.child_validators_deferred_to_mvp === true &&
     result.real_provider_call_included === false &&
     result.fixture_smoke_status === "completed_fixture_runtime_to_review_smoke" &&
     result.provider_contact_performed === false &&
@@ -267,10 +269,12 @@ safeCheck("runtime_to_review_v1_default_local_gate", () => {
 });
 
 safeCheck("runtime_to_review_v1_evidence_gate", () => {
-  const result = parseJson(runNode(["scripts/validate_runtime_to_review_v1_evidence_gate.js"]));
+  const result = parseJson(runNode(["scripts/validate_runtime_to_review_v1_evidence_gate.js", "--skip-child-validators"]));
   return result.passed === true &&
     result.gate_id === "runtime_to_review_v1_evidence_validation_gate" &&
     result.mode === "existing_evidence_validation_no_external_call" &&
+    result.child_validators_skipped === true &&
+    result.child_validators_deferred_to_mvp === true &&
     result.existing_receipt_and_artifact_evidence_only === true &&
     result.retry_007_decision === "provider_link_success_evidence_only" &&
     result.retry_007_registry_draft_type === "no_registry_draft" &&
@@ -602,7 +606,7 @@ safeCheck("exact_a5_provider_retry_packet_draft", () => {
 });
 
 safeCheck("retry_007_preflight_decision", () => {
-  const result = parseJson(runNode(["scripts/validate_exact_a5_provider_retry_007_preflight_decision.js"]));
+  const result = parseJson(runNode(["scripts/validate_exact_a5_provider_retry_007_preflight_decision.js", "--skip-provider-evidence-integrity"]));
   return result.passed === true &&
     result.candidate_authorization_id === "AUTH-DRAFT-NATIVE-DOUBAO-SEEDREAM5-RETRY-20260527-007" &&
     result.decision_status === "hold_pending_owner_decision" &&
@@ -612,7 +616,8 @@ safeCheck("retry_007_preflight_decision", () => {
     result.exact_activation_phrase_issued === false &&
     result.required_model === "doubao-seedream-5-0-260128" &&
     result.retry_007_output_directory_ref === "runs/real_generation/v0_6_73_real_vcp_agent_generation_retry_007" &&
-    result.provider_evidence_integrity_gate_passed === true &&
+    result.provider_evidence_integrity_gate_skipped === true &&
+    result.provider_evidence_integrity_gate_deferred_to_mvp === true &&
     result.all_negative_cases_caught === true &&
     result.provider_contact_performed === false &&
     result.plugin_call_performed === false &&

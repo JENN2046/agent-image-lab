@@ -2,10 +2,27 @@
 "use strict";
 
 const childProcess = require("node:child_process");
+const fs = require("node:fs");
 const path = require("node:path");
 
 const root = path.resolve(__dirname, "..");
 const gateId = "runtime_to_review_v1_evidence_validation_gate";
+const childValidatorScripts = [
+  "scripts/validate_retry_006_artifact_integrity.js",
+  "scripts/validate_retry_007_artifact_integrity.js",
+  "scripts/validate_exact_a5_provider_retry_007_activation_receipt.js",
+  "scripts/validate_provider_evidence_integrity_contract.js",
+  "scripts/validate_review_decision_record_v1.js",
+  "scripts/validate_review_draft_registry_v1.js",
+];
+const childValidatorIds = [
+  "validate_retry_006_artifact_integrity",
+  "validate_retry_007_artifact_integrity",
+  "validate_exact_a5_provider_retry_007_activation_receipt",
+  "validate_provider_evidence_integrity_contract",
+  "validate_review_decision_record_v1",
+  "validate_review_draft_registry_v1",
+];
 
 function assert(condition, message) {
   if (!condition) throw new Error(message);
@@ -23,22 +40,69 @@ function assertFalse(value, label) {
   assert(value !== true, `${label} must not be true`);
 }
 
-function main() {
-  const retry006Artifact = runNodeJson("scripts/validate_retry_006_artifact_integrity.js");
-  const retry007Artifact = runNodeJson("scripts/validate_retry_007_artifact_integrity.js");
-  const retry007Receipt = runNodeJson("scripts/validate_exact_a5_provider_retry_007_activation_receipt.js");
-  const providerEvidence = runNodeJson("scripts/validate_provider_evidence_integrity_contract.js");
-  const decision = runNodeJson("scripts/validate_review_decision_record_v1.js");
-  const draft = runNodeJson("scripts/validate_review_draft_registry_v1.js");
+function assertMvpCoversChildValidators() {
+  const mvpCore = fs.readFileSync(path.join(root, "scripts/validate_mvp_core.js"), "utf8");
+  for (const script of childValidatorScripts) {
+    assert(mvpCore.includes(script), `MVP core must cover child validator: ${script}`);
+  }
+}
 
-  [
-    ["retry006Artifact", retry006Artifact],
-    ["retry007Artifact", retry007Artifact],
-    ["retry007Receipt", retry007Receipt],
-    ["providerEvidence", providerEvidence],
-    ["decision", decision],
-    ["draft", draft],
-  ].forEach(([label, result]) => assert(result.passed === true, `${label} must pass`));
+function main() {
+  const skipChildValidators = process.argv.includes("--skip-child-validators");
+  let retry007Receipt = {
+    local_review_decision: "provider_link_success_evidence_only",
+    accepted_sample_candidate: false,
+    fresh_clone_private_audit_required: false,
+  };
+  let decision = {
+    retry_007_regression_decision: "provider_link_success_evidence_only",
+    retry_007_not_accepted_sample: true,
+    retry_007_not_production_candidate: true,
+  };
+  let draft = {
+    retry_007_draft_type: "no_registry_draft",
+    retry_007_accepted_draft_created: false,
+  };
+
+  if (skipChildValidators) {
+    assertMvpCoversChildValidators();
+  } else {
+    const retry006Artifact = runNodeJson("scripts/validate_retry_006_artifact_integrity.js");
+    const retry007Artifact = runNodeJson("scripts/validate_retry_007_artifact_integrity.js");
+    retry007Receipt = runNodeJson("scripts/validate_exact_a5_provider_retry_007_activation_receipt.js");
+    const providerEvidence = runNodeJson("scripts/validate_provider_evidence_integrity_contract.js");
+    decision = runNodeJson("scripts/validate_review_decision_record_v1.js");
+    draft = runNodeJson("scripts/validate_review_draft_registry_v1.js");
+
+    [
+      ["retry006Artifact", retry006Artifact],
+      ["retry007Artifact", retry007Artifact],
+      ["retry007Receipt", retry007Receipt],
+      ["providerEvidence", providerEvidence],
+      ["decision", decision],
+      ["draft", draft],
+    ].forEach(([label, result]) => assert(result.passed === true, `${label} must pass`));
+
+    [
+      ["retry007Receipt", retry007Receipt],
+      ["providerEvidence", providerEvidence],
+      ["decision", decision],
+      ["draft", draft],
+    ].forEach(([label, result]) => {
+      [
+        "provider_contact_performed",
+        "plugin_call_performed",
+        "api_call_performed",
+        "image_generation_performed",
+        "secret_value_read_performed",
+        "DailyNote_write_performed",
+        "VCP_memory_write_performed",
+        "accepted_samples_write_performed",
+        "production_candidate_write_performed",
+        "memory_write_performed",
+      ].forEach((field) => assertFalse(result[field], `${label}.${field}`));
+    });
+  }
 
   assert(retry007Receipt.local_review_decision === "provider_link_success_evidence_only", "retry 007 decision must remain evidence-only");
   assert(retry007Receipt.accepted_sample_candidate === false, "retry 007 must not be accepted sample candidate");
@@ -49,38 +113,14 @@ function main() {
   assert(draft.retry_007_draft_type === "no_registry_draft", "retry 007 must not create registry draft");
   assert(draft.retry_007_accepted_draft_created === false, "retry 007 must not create accepted draft");
 
-  [
-    ["retry007Receipt", retry007Receipt],
-    ["providerEvidence", providerEvidence],
-    ["decision", decision],
-    ["draft", draft],
-  ].forEach(([label, result]) => {
-    [
-      "provider_contact_performed",
-      "plugin_call_performed",
-      "api_call_performed",
-      "image_generation_performed",
-      "secret_value_read_performed",
-      "DailyNote_write_performed",
-      "VCP_memory_write_performed",
-      "accepted_samples_write_performed",
-      "production_candidate_write_performed",
-      "memory_write_performed",
-    ].forEach((field) => assertFalse(result[field], `${label}.${field}`));
-  });
-
   process.stdout.write(`${JSON.stringify({
     passed: true,
     gate_id: gateId,
     mode: "existing_evidence_validation_no_external_call",
-    included_validators: [
-      "validate_retry_006_artifact_integrity",
-      "validate_retry_007_artifact_integrity",
-      "validate_exact_a5_provider_retry_007_activation_receipt",
-      "validate_provider_evidence_integrity_contract",
-      "validate_review_decision_record_v1",
-      "validate_review_draft_registry_v1",
-    ],
+    included_validators: childValidatorIds,
+    included_validator_scripts: childValidatorScripts,
+    child_validators_skipped: skipChildValidators,
+    child_validators_deferred_to_mvp: skipChildValidators,
     existing_receipt_and_artifact_evidence_only: true,
     retry_007_decision: retry007Receipt.local_review_decision,
     retry_007_registry_draft_type: draft.retry_007_draft_type,

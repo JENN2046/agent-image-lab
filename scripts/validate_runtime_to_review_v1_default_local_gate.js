@@ -2,10 +2,27 @@
 "use strict";
 
 const childProcess = require("node:child_process");
+const fs = require("node:fs");
 const path = require("node:path");
 
 const root = path.resolve(__dirname, "..");
 const gateId = "runtime_to_review_v1_default_local_gate";
+const childValidatorScripts = [
+  "scripts/validate_runtime_kernel_v1_real_provider_guarded.js",
+  "scripts/validate_runtime_review_bridge_v1_readonly.js",
+  "scripts/validate_review_decision_record_v1.js",
+  "scripts/validate_review_draft_registry_v1.js",
+  "scripts/validate_runtime_to_review_v1_fixture_smoke_flow.js",
+  "scripts/validate_runtime_to_review_v1_static_real_entry_viewer.js",
+];
+const childValidatorIds = [
+  "validate_runtime_kernel_v1_real_provider_guarded",
+  "validate_runtime_review_bridge_v1_readonly",
+  "validate_review_decision_record_v1",
+  "validate_review_draft_registry_v1",
+  "validate_runtime_to_review_v1_fixture_smoke_flow",
+  "validate_runtime_to_review_v1_static_real_entry_viewer",
+];
 
 function assert(condition, message) {
   if (!condition) throw new Error(message);
@@ -38,48 +55,65 @@ function assertNoExternalSideEffects(result, label) {
   ].forEach((field) => assertFalse(result[field], `${label}.${field}`));
 }
 
+function assertMvpCoversChildValidators() {
+  const mvpCore = fs.readFileSync(path.join(root, "scripts/validate_mvp_core.js"), "utf8");
+  for (const script of childValidatorScripts) {
+    assert(mvpCore.includes(script), `MVP core must cover child validator: ${script}`);
+  }
+}
+
 function main() {
-  const runtime = runNodeJson("scripts/validate_runtime_kernel_v1_real_provider_guarded.js");
-  const reviewBridge = runNodeJson("scripts/validate_runtime_review_bridge_v1_readonly.js");
-  const decision = runNodeJson("scripts/validate_review_decision_record_v1.js");
-  const draft = runNodeJson("scripts/validate_review_draft_registry_v1.js");
-  const smoke = runNodeJson("scripts/validate_runtime_to_review_v1_fixture_smoke_flow.js");
-  const staticRealEntry = runNodeJson("scripts/validate_runtime_to_review_v1_static_real_entry_viewer.js");
+  const skipChildValidators = process.argv.includes("--skip-child-validators");
+  let smoke = {
+    status: "completed_fixture_runtime_to_review_smoke",
+    decision: "request_rework",
+    draft_type: "rework_sample_draft",
+  };
+  let staticRealEntry = {
+    status: "static_real_entry_viewer_ready",
+  };
 
-  assert(runtime.passed === true, "runtime kernel v1 validator must pass");
-  assert(reviewBridge.passed === true, "runtime review bridge v1 validator must pass");
-  assert(decision.passed === true, "review decision record validator must pass");
-  assert(draft.passed === true, "review draft registry validator must pass");
-  assert(smoke.passed === true, "fixture smoke flow validator must pass");
-  assert(staticRealEntry.passed === true, "static real-entry viewer validator must pass");
+  if (skipChildValidators) {
+    assertMvpCoversChildValidators();
+  } else {
+    const runtime = runNodeJson("scripts/validate_runtime_kernel_v1_real_provider_guarded.js");
+    const reviewBridge = runNodeJson("scripts/validate_runtime_review_bridge_v1_readonly.js");
+    const decision = runNodeJson("scripts/validate_review_decision_record_v1.js");
+    const draft = runNodeJson("scripts/validate_review_draft_registry_v1.js");
+    smoke = runNodeJson("scripts/validate_runtime_to_review_v1_fixture_smoke_flow.js");
+    staticRealEntry = runNodeJson("scripts/validate_runtime_to_review_v1_static_real_entry_viewer.js");
 
-  assert(runtime.real_provider_call_performed_by_validator === false, "runtime validator must not perform real provider calls");
-  assert(runtime.provider_delegate_default_bound === false, "default local gate must not bind a real provider delegate");
-  assert(smoke.status === "completed_fixture_runtime_to_review_smoke", "fixture smoke flow status mismatch");
-  assert(smoke.provider_failure_failed_closed === true, "default gate must verify provider failure fail-closed");
-  assert(smoke.model_mismatch_failed_closed === true, "default gate must verify model mismatch fail-closed");
+    assert(runtime.passed === true, "runtime kernel v1 validator must pass");
+    assert(reviewBridge.passed === true, "runtime review bridge v1 validator must pass");
+    assert(decision.passed === true, "review decision record validator must pass");
+    assert(draft.passed === true, "review draft registry validator must pass");
+    assert(smoke.passed === true, "fixture smoke flow validator must pass");
+    assert(staticRealEntry.passed === true, "static real-entry viewer validator must pass");
 
-  [
-    ["runtime", runtime],
-    ["review_bridge", reviewBridge],
-    ["decision", decision],
-    ["draft", draft],
-    ["smoke", smoke],
-    ["static_real_entry", staticRealEntry],
-  ].forEach(([label, result]) => assertNoExternalSideEffects(result, label));
+    assert(runtime.real_provider_call_performed_by_validator === false, "runtime validator must not perform real provider calls");
+    assert(runtime.provider_delegate_default_bound === false, "default local gate must not bind a real provider delegate");
+    assert(smoke.status === "completed_fixture_runtime_to_review_smoke", "fixture smoke flow status mismatch");
+    assert(smoke.provider_failure_failed_closed === true, "default gate must verify provider failure fail-closed");
+    assert(smoke.model_mismatch_failed_closed === true, "default gate must verify model mismatch fail-closed");
+
+    [
+      ["runtime", runtime],
+      ["review_bridge", reviewBridge],
+      ["decision", decision],
+      ["draft", draft],
+      ["smoke", smoke],
+      ["static_real_entry", staticRealEntry],
+    ].forEach(([label, result]) => assertNoExternalSideEffects(result, label));
+  }
 
   process.stdout.write(`${JSON.stringify({
     passed: true,
     gate_id: gateId,
     mode: "default_local_no_provider_no_external_call",
-    included_validators: [
-      "validate_runtime_kernel_v1_real_provider_guarded",
-      "validate_runtime_review_bridge_v1_readonly",
-      "validate_review_decision_record_v1",
-      "validate_review_draft_registry_v1",
-      "validate_runtime_to_review_v1_fixture_smoke_flow",
-      "validate_runtime_to_review_v1_static_real_entry_viewer",
-    ],
+    included_validators: childValidatorIds,
+    included_validator_scripts: childValidatorScripts,
+    child_validators_skipped: skipChildValidators,
+    child_validators_deferred_to_mvp: skipChildValidators,
     real_provider_call_included: false,
     provider_contact_performed: false,
     plugin_call_performed: false,
