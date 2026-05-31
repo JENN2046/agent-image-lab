@@ -49,7 +49,13 @@ function changedFilesFromGit({ cached, base }) {
     stdio: ["ignore", "pipe", "pipe"],
   });
   const changed = output.split(/\r?\n/).map((line) => line.trim()).filter(Boolean);
-  if (cached) return changed;
+  if (cached) {
+    return {
+      files: changed,
+      tracked_diff_files: changed,
+      untracked_files: [],
+    };
+  }
 
   const untrackedOutput = execFileSync("git", ["ls-files", "--others", "--exclude-standard"], {
     cwd: root,
@@ -57,7 +63,11 @@ function changedFilesFromGit({ cached, base }) {
     stdio: ["ignore", "pipe", "pipe"],
   });
   const untracked = untrackedOutput.split(/\r?\n/).map((line) => line.trim()).filter(Boolean);
-  return [...new Set([...changed, ...untracked])];
+  return {
+    files: [...new Set([...changed, ...untracked])],
+    tracked_diff_files: changed,
+    untracked_files: untracked,
+  };
 }
 
 function normalizePath(file) {
@@ -306,6 +316,33 @@ function buildEfficiencySummary({ commands, matches, manifestCoverage, recommend
   };
 }
 
+function buildValidationDecisionSummary({ recommendedValidationProfile, validationPlan, efficiencySummary, manifestCoverage }) {
+  return {
+    version: 1,
+    primary_profile: recommendedValidationProfile.primary_profile,
+    primary_command: recommendedValidationProfile.primary_command,
+    execution_command_count: efficiencySummary.execution_command_count,
+    matched_validator_count: efficiencySummary.matched_validator_count,
+    all_files_matched: manifestCoverage.all_files_matched,
+    unmatched_file_count: manifestCoverage.unmatched_file_count,
+    covered_command_count: efficiencySummary.covered_command_count,
+    covered_profile_count: efficiencySummary.covered_profile_count,
+    deferred_command_count: efficiencySummary.deferred_command_count,
+    next_commands: validationPlan.execution_commands,
+    deferred_commands: validationPlan.deferred_commands.map((entry) => ({
+      command: entry.command,
+      deferred_to_command: entry.deferred_to_command,
+      matched_files: entry.matched_files,
+    })),
+    reasons: recommendedValidationProfile.reasons.map((entry) => ({
+      profile: entry.profile,
+      command: entry.command,
+      reason: entry.reason,
+      matched_files: entry.matched_files,
+    })),
+  };
+}
+
 function buildCoveredCommands({ activeRecommended, mvpRecommended, matches }) {
   const activeCoveredCommands = new Set([
     "npm run validate:smoke",
@@ -435,6 +472,12 @@ function recommend(files) {
     recommendedValidationProfile,
     validationPlan,
   });
+  const validationDecisionSummary = buildValidationDecisionSummary({
+    recommendedValidationProfile,
+    validationPlan,
+    efficiencySummary,
+    manifestCoverage,
+  });
 
   return {
     recommendation_contract_version: recommendationContractVersion,
@@ -445,6 +488,7 @@ function recommend(files) {
     deferred_commands: deferredCommands,
     validation_plan: validationPlan,
     efficiency_summary: efficiencySummary,
+    validation_decision_summary: validationDecisionSummary,
     recommended_validation_profile: recommendedValidationProfile,
     active_recommended: activeRecommended,
     validate_active_command: "npm run validate:active",
@@ -456,13 +500,17 @@ function recommend(files) {
 
 function main() {
   const args = parseArgs(process.argv.slice(2));
-  const files = args.files.length > 0 ? args.files : changedFilesFromGit({
+  const gitSelection = args.files.length > 0 ? null : changedFilesFromGit({
     cached: args.cached,
     base: args.base,
   });
+  const files = args.files.length > 0 ? args.files : gitSelection.files;
   const result = recommend(files);
   const source = args.files.length > 0 ? "argv" : (args.cached ? "git_diff_cached" : (args.base ? "git_diff_base" : "git_diff_worktree"));
   const comparisonBase = source === "git_diff_base" ? args.base : null;
+  const trackedDiffFiles = (gitSelection?.tracked_diff_files || []).map(normalizePath);
+  const untrackedFiles = (gitSelection?.untracked_files || []).map(normalizePath);
+  const explicitFiles = source === "argv" ? result.changed_files : [];
   const output = {
     passed: true,
     recommender: "recommend_validation_for_changed_files",
@@ -474,6 +522,12 @@ function main() {
       cached: source === "git_diff_cached",
       explicit_files: source === "argv",
       file_count: result.changed_files.length,
+      tracked_diff_file_count: trackedDiffFiles.length,
+      untracked_file_count: untrackedFiles.length,
+      explicit_file_count: explicitFiles.length,
+      tracked_diff_files: trackedDiffFiles,
+      untracked_files: untrackedFiles,
+      explicit_file_list: explicitFiles,
     },
     provider_contact_performed: false,
     plugin_call_performed: false,

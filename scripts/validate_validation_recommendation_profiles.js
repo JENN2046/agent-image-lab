@@ -9,6 +9,7 @@ const root = path.resolve(__dirname, "..");
 const recommenderScript = path.join(root, "scripts", "recommend_validation_for_changed_files.js");
 const benchmarkScript = path.join(root, "scripts", "benchmark_validation_efficiency.js");
 const packageJsonPath = path.join(root, "package.json");
+const validationSelectionMatrixPath = path.join(root, "docs", "VALIDATION_SELECTION_MATRIX.md");
 const benchmarkReportsDir = path.join(root, "reports", "validation_benchmarks");
 
 const checks = [];
@@ -40,6 +41,20 @@ function runRecommenderArgs(args) {
 
 function normalizePath(file) {
   return file.replace(/\\/g, "/").replace(/^\.\//, "");
+}
+
+function gitList(args) {
+  return execFileSync("git", args, {
+    cwd: root,
+    encoding: "utf8",
+    stdio: ["ignore", "pipe", "pipe"],
+  }).split(/\r?\n/).map((line) => normalizePath(line.trim())).filter(Boolean);
+}
+
+function sameMembers(left, right) {
+  const leftSet = new Set(left || []);
+  const rightSet = new Set(right || []);
+  return leftSet.size === rightSet.size && [...leftSet].every((item) => rightSet.has(item));
 }
 
 function hasCommand(result, command) {
@@ -141,18 +156,33 @@ function validateCase(caseId, files, expected) {
   const profile = result.recommended_validation_profile;
   const plan = result.validation_plan;
   const efficiency = result.efficiency_summary;
+  const decision = result.validation_decision_summary;
   add(`${caseId}_recommender_passed`, result.passed === true);
   add(`${caseId}_recommendation_contract_version_v1`, result.recommendation_contract_version === 1, result.recommendation_contract_version);
   add(`${caseId}_change_selection_present`, result.change_selection && typeof result.change_selection === "object", result.change_selection);
   add(`${caseId}_change_selection_file_count`, result.change_selection?.file_count === result.changed_files.length, result.change_selection);
   add(`${caseId}_change_selection_source_matches_output`, result.change_selection?.source === result.source, result.change_selection);
+  add(`${caseId}_change_selection_counts_present`, typeof result.change_selection?.tracked_diff_file_count === "number" &&
+    typeof result.change_selection?.untracked_file_count === "number" &&
+    typeof result.change_selection?.explicit_file_count === "number", result.change_selection);
+  add(`${caseId}_change_selection_file_lists_present`, Array.isArray(result.change_selection?.tracked_diff_files) &&
+    Array.isArray(result.change_selection?.untracked_files) &&
+    Array.isArray(result.change_selection?.explicit_file_list), result.change_selection);
+  add(`${caseId}_change_selection_argv_counts`, result.change_selection?.explicit_file_count === result.changed_files.length &&
+    result.change_selection?.tracked_diff_file_count === 0 &&
+    result.change_selection?.untracked_file_count === 0, result.change_selection);
   add(`${caseId}_profile_present`, profile && typeof profile === "object");
   add(`${caseId}_validation_plan_present`, plan && typeof plan === "object");
   add(`${caseId}_efficiency_summary_present`, efficiency && typeof efficiency === "object");
+  add(`${caseId}_validation_decision_summary_present`, decision && typeof decision === "object");
   add(`${caseId}_validation_plan_v1`, plan?.version === 1, plan?.version);
+  add(`${caseId}_validation_decision_summary_v1`, decision?.version === 1, decision?.version);
   add(`${caseId}_validation_plan_primary_profile`, plan?.primary_profile === expected.primaryProfile, plan?.primary_profile);
   add(`${caseId}_validation_plan_primary_command`, plan?.primary_command === expected.primaryCommand, plan?.primary_command);
+  add(`${caseId}_decision_primary_profile`, decision?.primary_profile === expected.primaryProfile, decision?.primary_profile);
+  add(`${caseId}_decision_primary_command`, decision?.primary_command === expected.primaryCommand, decision?.primary_command);
   add(`${caseId}_validation_plan_commands_match_recommended`, JSON.stringify(plan?.execution_commands || []) === JSON.stringify(result.recommended_commands || []));
+  add(`${caseId}_decision_next_commands_match_recommended`, JSON.stringify(decision?.next_commands || []) === JSON.stringify(result.recommended_commands || []));
   add(`${caseId}_manifest_coverage_present`, result.manifest_coverage && typeof result.manifest_coverage === "object");
   add(`${caseId}_manifest_coverage_matches_plan`, JSON.stringify(result.manifest_coverage || {}) === JSON.stringify(plan?.manifest_coverage || {}));
   add(`${caseId}_manifest_coverage_all_files_matched`, result.manifest_coverage?.all_files_matched === expected.allFilesMatched, result.manifest_coverage);
@@ -163,6 +193,9 @@ function validateCase(caseId, files, expected) {
   add(`${caseId}_efficiency_covered_command_count`, efficiency?.covered_command_count === (plan?.covered_commands || []).length, efficiency);
   add(`${caseId}_efficiency_covered_profile_count`, efficiency?.covered_profile_count === (plan?.covered_profiles || []).length, efficiency);
   add(`${caseId}_efficiency_deferred_command_count`, efficiency?.deferred_command_count === (plan?.deferred_commands || []).length, efficiency);
+  add(`${caseId}_decision_execution_command_count`, decision?.execution_command_count === (result.recommended_commands || []).length, decision);
+  add(`${caseId}_decision_deferred_command_count`, decision?.deferred_command_count === (plan?.deferred_commands || []).length, decision);
+  add(`${caseId}_decision_unmatched_file_count`, decision?.unmatched_file_count === (result.manifest_coverage?.unmatched_file_count || 0), decision);
   for (const file of expected.unmatchedFiles || []) {
     add(`${caseId}_manifest_coverage_unmatched:${file}`, Array.isArray(result.manifest_coverage?.unmatched_files) && result.manifest_coverage.unmatched_files.includes(file));
   }
@@ -231,7 +264,9 @@ function validateWiring() {
   const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, "utf8"));
   const scripts = packageJson.scripts || {};
   const validateActive = scripts["validate:active"] || "";
+  const recommenderSource = fs.readFileSync(recommenderScript, "utf8");
   const benchmarkSource = fs.readFileSync(benchmarkScript, "utf8");
+  const validationSelectionMatrix = fs.readFileSync(validationSelectionMatrixPath, "utf8");
 
   add(
     "package_json_recommendation_profiles_script",
@@ -250,6 +285,20 @@ function validateWiring() {
     "package_json_targeted_plan_script",
     scripts["validate:targeted-plan"] === "node scripts/run_validation_manifest_tier.js --tier targeted --dry-run",
     scripts["validate:targeted-plan"]
+  );
+  add(
+    "recommender_default_worktree_reads_untracked_files",
+    recommenderSource.includes('"ls-files", "--others", "--exclude-standard"') &&
+      recommenderSource.includes("const untracked = untrackedOutput.split") &&
+      recommenderSource.includes("files: [...new Set([...changed, ...untracked])]") &&
+      recommenderSource.includes("tracked_diff_files: changed") &&
+      recommenderSource.includes("untracked_files: untracked")
+  );
+  add(
+    "recommender_cached_mode_excludes_untracked_files",
+    recommenderSource.includes("if (cached)") &&
+      recommenderSource.includes("untracked_files: []") &&
+      recommenderSource.indexOf("untracked_files: []") < recommenderSource.indexOf('"ls-files", "--others", "--exclude-standard"')
   );
   add(
     "benchmark_summary_keeps_active_recommended",
@@ -297,6 +346,11 @@ function validateWiring() {
       benchmarkSource.includes("efficiency_summary: parsed.efficiency_summary || null")
   );
   add(
+    "benchmark_summary_keeps_validation_decision_summary",
+    benchmarkSource.includes('"validation_decision_summary"') &&
+      benchmarkSource.includes("validation_decision_summary: parsed.validation_decision_summary || null")
+  );
+  add(
     "benchmark_summary_keeps_covered_commands",
     benchmarkSource.includes("covered_commands: parsed.validation_plan?.covered_commands || []")
   );
@@ -325,6 +379,51 @@ function validateWiring() {
     benchmarkSource.includes('id: "recommend_validation_targeted_profile"') &&
       benchmarkSource.includes("node scripts/recommend_validation_for_changed_files.js --files scripts/recommend_validation_for_changed_files.js")
   );
+  add(
+    "selection_matrix_recommender_contract_section_present",
+    validationSelectionMatrix.includes("## Recommender Output Contract")
+  );
+  add(
+    "selection_matrix_names_profile_contract_fields",
+    validationSelectionMatrix.includes("recommended_validation_profile.primary_profile") &&
+      validationSelectionMatrix.includes("recommended_validation_profile.primary_command") &&
+      validationSelectionMatrix.includes("validation_plan.execution_commands") &&
+      validationSelectionMatrix.includes("efficiency_summary") &&
+      validationSelectionMatrix.includes("validation_decision_summary") &&
+      validationSelectionMatrix.includes("manifest_coverage") &&
+      validationSelectionMatrix.includes("change_selection.source") &&
+      validationSelectionMatrix.includes("change_selection.tracked_diff_file_count") &&
+      validationSelectionMatrix.includes("change_selection.untracked_file_count") &&
+      validationSelectionMatrix.includes("change_selection.explicit_file_count")
+  );
+  add(
+    "selection_matrix_names_recommendation_profiles",
+    validationSelectionMatrix.includes("| `daily` |") &&
+      validationSelectionMatrix.includes("| `observability` |") &&
+      validationSelectionMatrix.includes("| `mvp` |") &&
+      validationSelectionMatrix.includes("| `targeted` |")
+  );
+  add(
+    "selection_matrix_documents_change_selection_modes",
+    validationSelectionMatrix.includes("Change selection modes:") &&
+    validationSelectionMatrix.includes("`git_diff_worktree`") &&
+      validationSelectionMatrix.includes("untracked non-ignored files") &&
+      validationSelectionMatrix.includes("`git_diff_cached`") &&
+      validationSelectionMatrix.includes("intentionally excludes untracked files") &&
+      validationSelectionMatrix.includes("`git_diff_base`") &&
+      validationSelectionMatrix.includes("`argv`") &&
+      validationSelectionMatrix.includes("tracked_diff_files") &&
+      validationSelectionMatrix.includes("untracked_files") &&
+      validationSelectionMatrix.includes("explicit_file_list")
+  );
+  add(
+    "selection_matrix_documents_legacy_aliases",
+    validationSelectionMatrix.includes("active_recommended") &&
+      validationSelectionMatrix.includes("mvp_recommended") &&
+      validationSelectionMatrix.includes("compatibility aliases") &&
+      validationSelectionMatrix.includes("New") &&
+      validationSelectionMatrix.includes("consumers should not branch primarily on them")
+  );
 }
 
 function validateGitBaseMode() {
@@ -336,13 +435,46 @@ function validateGitBaseMode() {
   add("git_base_mode_change_selection_source", result.change_selection?.source === "git_diff_base", result.change_selection);
   add("git_base_mode_change_selection_comparison_base", result.change_selection?.comparison_base === "HEAD", result.change_selection);
   add("git_base_mode_change_selection_file_count", result.change_selection?.file_count === result.changed_files.length, result.change_selection);
+  add("git_base_mode_change_selection_counts_present", typeof result.change_selection?.tracked_diff_file_count === "number" &&
+    typeof result.change_selection?.untracked_file_count === "number" &&
+    typeof result.change_selection?.explicit_file_count === "number", result.change_selection);
+  add("git_base_mode_change_selection_file_count_reconciles", result.change_selection?.file_count ===
+    new Set([...(result.change_selection?.tracked_diff_files || []), ...(result.change_selection?.untracked_files || [])]).size, result.change_selection);
   add("git_base_mode_changed_files_array", Array.isArray(result.changed_files), result.changed_files);
   add("git_base_mode_profile_present", result.recommended_validation_profile && typeof result.recommended_validation_profile === "object");
   add("git_base_mode_validation_plan_present", result.validation_plan && typeof result.validation_plan === "object");
   add("git_base_mode_efficiency_summary_present", result.efficiency_summary && typeof result.efficiency_summary === "object");
+  add("git_base_mode_validation_decision_summary_present", result.validation_decision_summary && typeof result.validation_decision_summary === "object");
   add("git_base_mode_manifest_coverage_present", result.manifest_coverage && typeof result.manifest_coverage === "object");
   add("git_base_mode_provider_contact_false", result.provider_contact_performed === false, result.provider_contact_performed);
   add("git_base_mode_file_write_false", result.file_write_performed === false, result.file_write_performed);
+}
+
+function validateDefaultWorktreeMode() {
+  const result = runRecommenderArgs([recommenderScript]);
+  const trackedDiffFiles = gitList(["diff", "--name-only"]);
+  const untrackedFiles = gitList(["ls-files", "--others", "--exclude-standard"]);
+  const expectedFiles = [...new Set([...trackedDiffFiles, ...untrackedFiles])];
+
+  add("default_worktree_mode_passed", result.passed === true);
+  add("default_worktree_mode_source", result.source === "git_diff_worktree", result.source);
+  add("default_worktree_mode_comparison_base_null", result.comparison_base === null, result.comparison_base);
+  add("default_worktree_mode_change_selection_source", result.change_selection?.source === "git_diff_worktree", result.change_selection);
+  add("default_worktree_mode_file_count", result.change_selection?.file_count === result.changed_files.length, result.change_selection);
+  add("default_worktree_mode_explicit_file_count_zero", result.change_selection?.explicit_file_count === 0, result.change_selection);
+  add("default_worktree_mode_tracked_diff_matches_git", sameMembers(result.change_selection?.tracked_diff_files, trackedDiffFiles), {
+    expected: trackedDiffFiles,
+    actual: result.change_selection?.tracked_diff_files,
+  });
+  add("default_worktree_mode_untracked_matches_git", sameMembers(result.change_selection?.untracked_files, untrackedFiles), {
+    expected: untrackedFiles,
+    actual: result.change_selection?.untracked_files,
+  });
+  add("default_worktree_mode_changed_files_match_union", sameMembers(result.changed_files, expectedFiles), {
+    expected: expectedFiles,
+    actual: result.changed_files,
+  });
+  add("default_worktree_mode_manifest_coverage_count_matches", result.manifest_coverage?.changed_file_count === expectedFiles.length, result.manifest_coverage);
 }
 
 function validateEffectiveChangeSelection() {
@@ -358,6 +490,9 @@ function validateEffectiveChangeSelection() {
   add("effective_selection_argv_change_selection_omits_comparison_base", explicitFilesWithBase.change_selection?.comparison_base === null, explicitFilesWithBase.change_selection);
   add("effective_selection_argv_explicit_files_true", explicitFilesWithBase.change_selection?.explicit_files === true, explicitFilesWithBase.change_selection);
   add("effective_selection_argv_cached_false", explicitFilesWithBase.change_selection?.cached === false, explicitFilesWithBase.change_selection);
+  add("effective_selection_argv_explicit_count", explicitFilesWithBase.change_selection?.explicit_file_count === explicitFilesWithBase.changed_files.length, explicitFilesWithBase.change_selection);
+  add("effective_selection_argv_no_git_file_counts", explicitFilesWithBase.change_selection?.tracked_diff_file_count === 0 &&
+    explicitFilesWithBase.change_selection?.untracked_file_count === 0, explicitFilesWithBase.change_selection);
 
   const cachedWithBase = runRecommenderArgs([recommenderScript, "--cached", "--base", "HEAD"]);
   add("effective_selection_cached_source_wins", cachedWithBase.source === "git_diff_cached", cachedWithBase);
@@ -365,6 +500,9 @@ function validateEffectiveChangeSelection() {
   add("effective_selection_cached_change_selection_omits_comparison_base", cachedWithBase.change_selection?.comparison_base === null, cachedWithBase.change_selection);
   add("effective_selection_cached_flag_true", cachedWithBase.change_selection?.cached === true, cachedWithBase.change_selection);
   add("effective_selection_cached_explicit_files_false", cachedWithBase.change_selection?.explicit_files === false, cachedWithBase.change_selection);
+  add("effective_selection_cached_untracked_count_zero", cachedWithBase.change_selection?.untracked_file_count === 0 &&
+    Array.isArray(cachedWithBase.change_selection?.untracked_files) &&
+    cachedWithBase.change_selection.untracked_files.length === 0, cachedWithBase.change_selection);
 }
 
 function validateLatestBenchmarkReportContract() {
@@ -410,6 +548,10 @@ function validateLatestBenchmarkReportContract() {
     add(`latest_benchmark_report_${profileName}_change_selection_source_matches`, profile?.change_selection?.source === profile?.source, profile?.change_selection);
     add(`latest_benchmark_report_${profileName}_validation_plan_present`, profile?.validation_plan && typeof profile.validation_plan === "object", profile?.validation_plan);
     add(`latest_benchmark_report_${profileName}_efficiency_summary_present`, profile?.efficiency_summary && typeof profile.efficiency_summary === "object", profile?.efficiency_summary);
+    add(`latest_benchmark_report_${profileName}_decision_summary_present`, benchmarkInProgress || (profile?.validation_decision_summary && typeof profile.validation_decision_summary === "object"), {
+      benchmarkInProgress,
+      validation_decision_summary: profile?.validation_decision_summary,
+    });
     add(`latest_benchmark_report_${profileName}_deferred_commands_array`, Array.isArray(profile?.deferred_commands), profile?.deferred_commands);
     add(`latest_benchmark_report_${profileName}_plan_deferred_commands_array`, Array.isArray(profile?.validation_plan?.deferred_commands), profile?.validation_plan);
   }
@@ -593,6 +735,43 @@ function main() {
     ],
   });
 
+  validateCase("targeted_selection_matrix_contract_doc", ["docs/VALIDATION_SELECTION_MATRIX.md"], {
+    primaryProfile: "targeted",
+    primaryCommand: "npm run validate:targeted-plan",
+    dailyRecommended: false,
+    observabilityRecommended: false,
+    mvpRecommended: false,
+    allFilesMatched: true,
+    commands: [
+      "node scripts/validate_validation_manifest.js",
+      "npm run validate:smoke",
+      "npm run validate:targeted-plan",
+      "node scripts/validate_validation_recommendation_profiles.js",
+    ],
+    planSteps: [
+      { command: "node scripts/validate_validation_manifest.js", kind: "base" },
+      { command: "npm run validate:smoke", kind: "base" },
+      { command: "npm run validate:targeted-plan", kind: "profile" },
+      { command: "node scripts/validate_validation_recommendation_profiles.js", kind: "matched_validator" },
+    ],
+    deferredCommands: [
+      {
+        command: "npm run validate:governance",
+        deferredToCommand: "npm run validate:archive-plan",
+        files: ["docs/VALIDATION_SELECTION_MATRIX.md"],
+        validatorIds: ["governance"],
+      },
+    ],
+    minimumOmittedRedundantItemCount: 1,
+    profileCommands: ["npm run validate:targeted-plan"],
+    reasons: [
+      { profile: "targeted", command: "npm run validate:targeted-plan", file: "docs/VALIDATION_SELECTION_MATRIX.md" },
+    ],
+    catalog: [
+      { profile: "targeted", command: "npm run validate:targeted-plan", recommended: true, file: "docs/VALIDATION_SELECTION_MATRIX.md" },
+    ],
+  });
+
   validateCase("unmatched_local_note", ["local_notes/unindexed_surface.txt"], {
     primaryProfile: "targeted",
     primaryCommand: "npm run validate:targeted-plan",
@@ -616,6 +795,7 @@ function main() {
     ],
   });
   validateWiring();
+  validateDefaultWorktreeMode();
   validateGitBaseMode();
   validateEffectiveChangeSelection();
   validateLatestBenchmarkReportContract();

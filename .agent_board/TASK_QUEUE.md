@@ -1,3 +1,32 @@
+- [x] ID: validation_recommendation_decision_summary_20260601
+      Lane: Green local validation tooling/status sync.
+      Status: completed_validated_local_dirty.
+      Goal: Make validation selection explainable and reusable through validation_manifest, recommend_validation_for_changed_files, benchmark baseline, and validate:active/targeted entrypoints.
+      Current branch: master.
+      Changed files:
+        - docs/VALIDATION_SELECTION_MATRIX.md
+        - scripts/benchmark_validation_efficiency.js
+        - scripts/recommend_validation_for_changed_files.js
+        - scripts/validate_validation_recommendation_profiles.js
+        - scripts/validation_manifest.json
+        - reports/validation_benchmarks/validation_efficiency_baseline_2026-05-31T15-58-49-513Z.json
+        - .agent_board/HANDOFF.md
+        - .agent_board/RUN_STATE.md
+        - .agent_board/TASK_QUEUE.md
+        - .agent_board/CHECKPOINT.md
+      Contract: recommender now exposes validation_decision_summary v1, documents change-selection modes, preserves active_recommended and mvp_recommended as compatibility aliases, and recommendation profile validator guards that default worktree mode includes untracked files while cached mode excludes them using behavior-level Git comparisons plus the current object-shaped change_selection return.
+      Benchmark: baseline report passed; latest no-write benchmark total_seconds=15.803; validate_active_seconds=11.039; validate_mvp_seconds=2.869; daily/observability/mvp/targeted profiles all include validation_decision_summary.
+      Current default recommender: source=git_diff_worktree; file_count=10; tracked_diff_file_count=9; untracked_file_count=1; primary_profile=observability; all_files_matched=true.
+      Manifest tier discoverability: validate:targeted-plan dry-run selected 21 validators; validate:archive-plan dry-run selected 13 validators.
+      Completion audit: local objective requirements are verified; goal is not marked complete because the validated work is still dirty and not committed as a durable mainline fact.
+      Validation: node --check passed for changed JS; npm run validate:validation-manifest passed; npm run validate:recommendation-profiles passed including object-shaped change-selection docs, behavior-level default worktree Git comparison, and untracked omission guard; docs matrix recommender spot check passed; benchmark no-write passed; npm run validate:targeted-plan passed; npm run validate:archive-plan passed; npm run validate:active passed directly; node scripts\validate_agent_board_state.js passed; git diff --check passed with CRLF normalization warnings only.
+      Boundary fields: provider_contact_performed=false; plugin_call_performed=false; api_call_performed=false; image_generation_performed=false; secret_value_read_performed=false; DailyNote_write_performed=false; VCP_memory_write_performed=false; push_tag_release_deploy_performed=false.
+      image_generation_performed: false
+      push_allowed: false
+      push_status: not_performed
+      Recommended next: exact-file local commit if authorized; push requires separate explicit instruction.
+---
+
 - [x] ID: validation_efficiency_manifest_and_recommender_20260531
       Lane: Green local validation tooling patch.
       Status: completed_validated_local.

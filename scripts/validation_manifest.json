@@ -52,11 +52,13 @@
         "scripts/recommend_validation_for_changed_files.js",
         "scripts/validate_validation_recommendation_profiles.js",
         "scripts/validation_manifest.json",
+        "docs/VALIDATION_SELECTION_MATRIX.md",
         "package.json"
       ],
       "required_for": [
         "validation_recommender_patch",
-        "validation_profile_contract_patch"
+        "validation_profile_contract_patch",
+        "validation_selection_matrix_contract_patch"
       ]
     },
     {

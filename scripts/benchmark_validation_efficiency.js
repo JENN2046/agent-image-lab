@@ -166,6 +166,7 @@ function summarizeParsedOutput(parsed) {
     "recommended_validation_profile",
     "validation_plan",
     "efficiency_summary",
+    "validation_decision_summary",
     "timing_summary"
   ]) {
     if (Object.prototype.hasOwnProperty.call(parsed, key)) {
@@ -269,6 +270,7 @@ function summarizeRecommendationProfiles(results) {
       manifest_coverage: parsed.manifest_coverage || null,
       validation_plan: parsed.validation_plan || null,
       efficiency_summary: parsed.efficiency_summary || null,
+      validation_decision_summary: parsed.validation_decision_summary || null,
       covered_commands: parsed.validation_plan?.covered_commands || [],
       deferred_commands: parsed.deferred_commands || parsed.validation_plan?.deferred_commands || [],
       recommended_commands: parsed.recommended_commands || [],

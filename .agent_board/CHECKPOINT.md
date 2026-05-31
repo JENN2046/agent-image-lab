@@ -1,3 +1,79 @@
+## Checkpoint - Validation Recommendation Decision Summary 2026-06-01
+
+```text
+phase: validation_recommendation_decision_summary_20260601
+status: completed_validated_local_dirty
+result: VALIDATION_RECOMMENDATION_DECISION_SUMMARY_READY
+mode: Green local validation tooling/status sync
+summary: The local validation recommender now exposes a durable validation_decision_summary v1, documents the recommended_validation_profile, validation_plan, and change-selection contract, keeps active_recommended and mvp_recommended as compatibility aliases, guards against default worktree untracked omission, and records a benchmark baseline proving daily/observability/mvp/targeted profile decisions.
+branch: master
+changed_files_current_task:
+  - docs/VALIDATION_SELECTION_MATRIX.md
+  - scripts/benchmark_validation_efficiency.js
+  - scripts/recommend_validation_for_changed_files.js
+  - scripts/validate_validation_recommendation_profiles.js
+  - scripts/validation_manifest.json
+  - reports/validation_benchmarks/validation_efficiency_baseline_2026-05-31T15-58-49-513Z.json
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+audit_evidence:
+  manifest_validator_count: 37
+  manifest_active_count: 25
+  manifest_targeted_count: 21
+  manifest_mvp_count: 2
+  manifest_archive_count: 13
+  benchmark_report_passed: true
+  benchmark_validate_active_seconds: 11.039
+  benchmark_validate_mvp_seconds: 2.869
+  benchmark_total_seconds: 15.803
+  benchmark_profile_count: 4
+  benchmark_all_profiles_have_decision_summary: true
+  change_selection_contract_documented: true
+  untracked_omission_guard_validated: true
+  change_selection_counts_validated: tracked_diff_file_count=9; untracked_file_count=1; explicit_file_count=0 for current default worktree recommender run.
+  recommendation_profile_validator_repaired_for_object_selection: true
+  default_worktree_behavior_validator_added: compares recommender output to git diff --name-only plus git ls-files --others --exclude-standard.
+  targeted_plan_discoverability: selected_validator_count=21; selected_command_count=21; dry_run=true.
+  archive_plan_discoverability: selected_validator_count=13; selected_command_count=13; dry_run=true.
+completion_audit:
+  local_objective_requirements_verified: true
+  mainline_durable_fact: false
+  incomplete_reason: local dirty work is validated but not committed.
+  exact_commit_ready_files: 10
+validation_run:
+  - node --check scripts\recommend_validation_for_changed_files.js: passed
+  - node --check scripts\benchmark_validation_efficiency.js: passed
+  - node --check scripts\validate_validation_recommendation_profiles.js: passed
+  - npm run validate:validation-manifest: passed
+  - npm run validate:recommendation-profiles: passed
+  - node scripts\recommend_validation_for_changed_files.js --files docs/VALIDATION_SELECTION_MATRIX.md: passed
+  - node scripts\benchmark_validation_efficiency.js --no-write --iterations=1: passed
+  - node scripts\validate_agent_board_state.js: passed
+  - node scripts\recommend_validation_for_changed_files.js: passed; current default worktree source reported 9 tracked diff files and 1 untracked benchmark report.
+  - npm run validate:targeted-plan: passed
+  - npm run validate:archive-plan: passed
+  - npm run validate:active: passed directly
+  - docs validation selection matrix change-selection contract: passed
+  - recommender default worktree untracked omission guard: passed
+  - git diff --check: passed with CRLF normalization warnings only
+boundary_checks:
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  secret_value_read_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  push_tag_release_deploy_performed: false
+push_allowed: false
+push_status: not_performed
+recommended_next: exact-file local commit if authorized; push requires separate explicit instruction.
+```
+
+---
+
 ## Checkpoint - Validation Efficiency Manifest And Recommender 2026-05-31
 
 ```text

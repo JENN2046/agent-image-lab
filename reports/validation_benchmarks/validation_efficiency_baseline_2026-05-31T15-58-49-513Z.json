@@ -1,0 +1,2529 @@
+{
+  "passed": true,
+  "benchmark": "validation_efficiency_baseline",
+  "daily_efficiency_baseline_command": "npm run validate:active",
+  "full_regression_baseline_command": "npm run validate:all",
+  "full_regression_excluded_from_daily_baseline": true,
+  "started_at": "2026-05-31T15:59:19.147Z",
+  "finished_at": "2026-05-31T15:59:33.263Z",
+  "total_seconds": 14.116,
+  "iterations": 1,
+  "timeout_ms": 300000,
+  "output_path": "reports/validation_benchmarks/validation_efficiency_baseline_2026-05-31T15-58-49-513Z.json",
+  "environment": {
+    "node": "v24.14.0",
+    "platform": "win32",
+    "arch": "x64",
+    "npm": "11.9.0"
+  },
+  "git": {
+    "branch": "master",
+    "head": "7505c674",
+    "status_short": "M docs/VALIDATION_SELECTION_MATRIX.md\n M scripts/benchmark_validation_efficiency.js\n M scripts/recommend_validation_for_changed_files.js\n M scripts/validate_validation_recommendation_profiles.js\n M scripts/validation_manifest.json\n?? reports/validation_benchmarks/validation_efficiency_baseline_2026-05-31T15-58-49-513Z.json"
+  },
+  "commands": [
+    {
+      "id": "validate_smoke",
+      "command": "npm run validate:smoke"
+    },
+    {
+      "id": "recommend_validation",
+      "command": "npm run recommend:validation"
+    },
+    {
+      "id": "recommend_validation_daily_profile",
+      "command": "node scripts/recommend_validation_for_changed_files.js --files package.json"
+    },
+    {
+      "id": "recommend_validation_observability_profile",
+      "command": "node scripts/recommend_validation_for_changed_files.js --files reports/validation_benchmarks/validation_efficiency_baseline_example.json"
+    },
+    {
+      "id": "recommend_validation_mvp_profile",
+      "command": "node scripts/recommend_validation_for_changed_files.js --files review_console/static_prototype/app.js"
+    },
+    {
+      "id": "recommend_validation_targeted_profile",
+      "command": "node scripts/recommend_validation_for_changed_files.js --files scripts/recommend_validation_for_changed_files.js"
+    },
+    {
+      "id": "validate_mvp",
+      "command": "npm run validate:mvp"
+    },
+    {
+      "id": "validate_active",
+      "command": "npm run validate:active"
+    },
+    {
+      "id": "agent_board_state",
+      "command": "node scripts/validate_agent_board_state.js"
+    }
+  ],
+  "summary": [
+    {
+      "id": "validate_smoke",
+      "command": "npm run validate:smoke",
+      "iterations": 1,
+      "passed_iterations": 1,
+      "failed_iterations": 0,
+      "min_seconds": 0.628,
+      "max_seconds": 0.628,
+      "all_iterations_avg_seconds": 0.628,
+      "passed_min_seconds": 0.628,
+      "passed_max_seconds": 0.628,
+      "passed_avg_seconds": 0.628
+    },
+    {
+      "id": "recommend_validation",
+      "command": "npm run recommend:validation",
+      "iterations": 1,
+      "passed_iterations": 1,
+      "failed_iterations": 0,
+      "min_seconds": 0.498,
+      "max_seconds": 0.498,
+      "all_iterations_avg_seconds": 0.498,
+      "passed_min_seconds": 0.498,
+      "passed_max_seconds": 0.498,
+      "passed_avg_seconds": 0.498
+    },
+    {
+      "id": "recommend_validation_daily_profile",
+      "command": "node scripts/recommend_validation_for_changed_files.js --files package.json",
+      "iterations": 1,
+      "passed_iterations": 1,
+      "failed_iterations": 0,
+      "min_seconds": 0.072,
+      "max_seconds": 0.072,
+      "all_iterations_avg_seconds": 0.072,
+      "passed_min_seconds": 0.072,
+      "passed_max_seconds": 0.072,
+      "passed_avg_seconds": 0.072
+    },
+    {
+      "id": "recommend_validation_observability_profile",
+      "command": "node scripts/recommend_validation_for_changed_files.js --files reports/validation_benchmarks/validation_efficiency_baseline_example.json",
+      "iterations": 1,
+      "passed_iterations": 1,
+      "failed_iterations": 0,
+      "min_seconds": 0.065,
+      "max_seconds": 0.065,
+      "all_iterations_avg_seconds": 0.065,
+      "passed_min_seconds": 0.065,
+      "passed_max_seconds": 0.065,
+      "passed_avg_seconds": 0.065
+    },
+    {
+      "id": "recommend_validation_mvp_profile",
+      "command": "node scripts/recommend_validation_for_changed_files.js --files review_console/static_prototype/app.js",
+      "iterations": 1,
+      "passed_iterations": 1,
+      "failed_iterations": 0,
+      "min_seconds": 0.083,
+      "max_seconds": 0.083,
+      "all_iterations_avg_seconds": 0.083,
+      "passed_min_seconds": 0.083,
+      "passed_max_seconds": 0.083,
+      "passed_avg_seconds": 0.083
+    },
+    {
+      "id": "recommend_validation_targeted_profile",
+      "command": "node scripts/recommend_validation_for_changed_files.js --files scripts/recommend_validation_for_changed_files.js",
+      "iterations": 1,
+      "passed_iterations": 1,
+      "failed_iterations": 0,
+      "min_seconds": 0.069,
+      "max_seconds": 0.069,
+      "all_iterations_avg_seconds": 0.069,
+      "passed_min_seconds": 0.069,
+      "passed_max_seconds": 0.069,
+      "passed_avg_seconds": 0.069
+    },
+    {
+      "id": "validate_mvp",
+      "command": "npm run validate:mvp",
+      "iterations": 1,
+      "passed_iterations": 1,
+      "failed_iterations": 0,
+      "min_seconds": 2.676,
+      "max_seconds": 2.676,
+      "all_iterations_avg_seconds": 2.676,
+      "passed_min_seconds": 2.676,
+      "passed_max_seconds": 2.676,
+      "passed_avg_seconds": 2.676
+    },
+    {
+      "id": "validate_active",
+      "command": "npm run validate:active",
+      "iterations": 1,
+      "passed_iterations": 1,
+      "failed_iterations": 0,
+      "min_seconds": 9.792,
+      "max_seconds": 9.792,
+      "all_iterations_avg_seconds": 9.792,
+      "passed_min_seconds": 9.792,
+      "passed_max_seconds": 9.792,
+      "passed_avg_seconds": 9.792
+    },
+    {
+      "id": "agent_board_state",
+      "command": "node scripts/validate_agent_board_state.js",
+      "iterations": 1,
+      "passed_iterations": 1,
+      "failed_iterations": 0,
+      "min_seconds": 0.232,
+      "max_seconds": 0.232,
+      "all_iterations_avg_seconds": 0.232,
+      "passed_min_seconds": 0.232,
+      "passed_max_seconds": 0.232,
+      "passed_avg_seconds": 0.232
+    }
+  ],
+  "recommendation_profile_baselines": {
+    "daily": {
+      "command_id": "recommend_validation_daily_profile",
+      "passed": true,
+      "seconds": 0.072,
+      "recommendation_contract_version": 1,
+      "source": "argv",
+      "comparison_base": null,
+      "change_selection": {
+        "source": "argv",
+        "comparison_base": null,
+        "cached": false,
+        "explicit_files": true,
+        "file_count": 1
+      },
+      "primary_profile": "daily",
+      "profiles": [
+        "daily",
+        "mvp"
+      ],
+      "primary_command": "npm run validate:active",
+      "profile_commands": [
+        "npm run validate:active"
+      ],
+      "profile_catalog": {
+        "daily": {
+          "command": "npm run validate:active",
+          "covered_by_command": null,
+          "recommended": true,
+          "primary": true,
+          "matched_files": [
+            "package.json"
+          ],
+          "reason": "package.json changed; run the daily active aggregate to cover validation entrypoint drift."
+        },
+        "observability": {
+          "command": "node scripts/benchmark_validation_efficiency.js --no-write --iterations=1",
+          "covered_by_command": null,
+          "recommended": false,
+          "primary": false,
+          "matched_files": [],
+          "reason": "benchmark tooling or report changed; run a no-write one-iteration observability check."
+        },
+        "mvp": {
+          "command": "npm run validate:mvp",
+          "covered_by_command": "npm run validate:active",
+          "recommended": true,
+          "primary": false,
+          "matched_files": [
+            "package.json"
+          ],
+          "reason": "MVP-tier validation surface changed or package.json can affect MVP validation wiring."
+        },
+        "targeted": {
+          "command": "npm run validate:targeted-plan",
+          "covered_by_command": null,
+          "recommended": false,
+          "primary": false,
+          "matched_files": [],
+          "reason": "No aggregate profile triggered; use the targeted plan entry plus recommended_commands for manifest, smoke, and matched targeted validators."
+        }
+      },
+      "manifest_coverage": {
+        "all_files_matched": true,
+        "changed_file_count": 1,
+        "matched_file_count": 1,
+        "unmatched_file_count": 0,
+        "matched_files": [
+          "package.json"
+        ],
+        "unmatched_files": []
+      },
+      "validation_plan": {
+        "version": 1,
+        "primary_profile": "daily",
+        "primary_command": "npm run validate:active",
+        "manifest_coverage": {
+          "all_files_matched": true,
+          "changed_file_count": 1,
+          "matched_file_count": 1,
+          "unmatched_file_count": 0,
+          "matched_files": [
+            "package.json"
+          ],
+          "unmatched_files": []
+        },
+        "execution_commands": [
+          "node scripts/validate_validation_manifest.js",
+          "npm run validate:active"
+        ],
+        "steps": [
+          {
+            "order": 1,
+            "command": "node scripts/validate_validation_manifest.js",
+            "sources": [
+              {
+                "kind": "base",
+                "reason": "Always validate the validation manifest before trusting selected validators."
+              },
+              {
+                "kind": "matched_validator",
+                "validator_id": "validation_tooling",
+                "tier": "targeted",
+                "domain": "validation_tooling",
+                "estimated_runtime_class": "fast",
+                "matched_files": [
+                  "package.json"
+                ]
+              }
+            ]
+          },
+          {
+            "order": 2,
+            "command": "npm run validate:active",
+            "sources": [
+              {
+                "kind": "base",
+                "reason": "package.json changed; run the daily active aggregate."
+              },
+              {
+                "kind": "profile",
+                "profile": "daily",
+                "primary": true,
+                "matched_files": [
+                  "package.json"
+                ],
+                "reason": "package.json changed; run the daily active aggregate to cover validation entrypoint drift."
+              }
+            ]
+          }
+        ],
+        "covered_commands": [
+          {
+            "command": "node scripts/validate_validation_recommendation_profiles.js",
+            "covered_by_command": "npm run validate:active",
+            "reason": "validate:active already runs this command; omit it from execution_commands to avoid redundant daily validation.",
+            "matched_files": [
+              "package.json"
+            ],
+            "matched_validator_ids": [
+              "validation_recommendation_profiles"
+            ]
+          },
+          {
+            "command": "npm run validate:smoke",
+            "covered_by_command": "npm run validate:active",
+            "reason": "validate:active already runs this command; omit it from execution_commands to avoid redundant daily validation.",
+            "matched_files": [
+              "package.json"
+            ],
+            "matched_validator_ids": [
+              "smoke"
+            ]
+          }
+        ],
+        "covered_profiles": [
+          {
+            "profile": "mvp",
+            "command": "npm run validate:mvp",
+            "covered_by_command": "npm run validate:active",
+            "matched_files": [
+              "package.json"
+            ],
+            "reason": "MVP-tier validation surface changed or package.json can affect MVP validation wiring."
+          }
+        ],
+        "deferred_commands": []
+      },
+      "efficiency_summary": {
+        "execution_command_count": 2,
+        "matched_validator_count": 3,
+        "profile_count": 2,
+        "profile_command_count": 1,
+        "covered_command_count": 2,
+        "covered_profile_count": 1,
+        "covered_validator_count": 2,
+        "covered_file_count": 1,
+        "deferred_command_count": 0,
+        "omitted_redundant_item_count": 3,
+        "all_files_matched": true,
+        "unmatched_file_count": 0
+      },
+      "validation_decision_summary": {
+        "version": 1,
+        "primary_profile": "daily",
+        "primary_command": "npm run validate:active",
+        "execution_command_count": 2,
+        "matched_validator_count": 3,
+        "all_files_matched": true,
+        "unmatched_file_count": 0,
+        "covered_command_count": 2,
+        "covered_profile_count": 1,
+        "deferred_command_count": 0,
+        "next_commands": [
+          "node scripts/validate_validation_manifest.js",
+          "npm run validate:active"
+        ],
+        "deferred_commands": [],
+        "reasons": [
+          {
+            "profile": "daily",
+            "command": "npm run validate:active",
+            "reason": "package.json changed; run the daily active aggregate to cover validation entrypoint drift.",
+            "matched_files": [
+              "package.json"
+            ]
+          },
+          {
+            "profile": "mvp",
+            "command": "npm run validate:mvp",
+            "reason": "MVP-tier validation surface changed or package.json can affect MVP validation wiring.",
+            "matched_files": [
+              "package.json"
+            ]
+          }
+        ]
+      },
+      "covered_commands": [
+        {
+          "command": "node scripts/validate_validation_recommendation_profiles.js",
+          "covered_by_command": "npm run validate:active",
+          "reason": "validate:active already runs this command; omit it from execution_commands to avoid redundant daily validation.",
+          "matched_files": [
+            "package.json"
+          ],
+          "matched_validator_ids": [
+            "validation_recommendation_profiles"
+          ]
+        },
+        {
+          "command": "npm run validate:smoke",
+          "covered_by_command": "npm run validate:active",
+          "reason": "validate:active already runs this command; omit it from execution_commands to avoid redundant daily validation.",
+          "matched_files": [
+            "package.json"
+          ],
+          "matched_validator_ids": [
+            "smoke"
+          ]
+        }
+      ],
+      "deferred_commands": [],
+      "recommended_commands": [
+        "node scripts/validate_validation_manifest.js",
+        "npm run validate:active"
+      ],
+      "reasons": [
+        {
+          "profile": "daily",
+          "command": "npm run validate:active",
+          "reason": "package.json changed; run the daily active aggregate to cover validation entrypoint drift.",
+          "matched_files": [
+            "package.json"
+          ]
+        },
+        {
+          "profile": "mvp",
+          "command": "npm run validate:mvp",
+          "reason": "MVP-tier validation surface changed or package.json can affect MVP validation wiring.",
+          "matched_files": [
+            "package.json"
+          ]
+        }
+      ]
+    },
+    "observability": {
+      "command_id": "recommend_validation_observability_profile",
+      "passed": true,
+      "seconds": 0.065,
+      "recommendation_contract_version": 1,
+      "source": "argv",
+      "comparison_base": null,
+      "change_selection": {
+        "source": "argv",
+        "comparison_base": null,
+        "cached": false,
+        "explicit_files": true,
+        "file_count": 1
+      },
+      "primary_profile": "observability",
+      "profiles": [
+        "observability"
+      ],
+      "primary_command": "node scripts/benchmark_validation_efficiency.js --no-write --iterations=1",
+      "profile_commands": [
+        "node scripts/benchmark_validation_efficiency.js --no-write --iterations=1"
+      ],
+      "profile_catalog": {
+        "daily": {
+          "command": "npm run validate:active",
+          "covered_by_command": null,
+          "recommended": false,
+          "primary": false,
+          "matched_files": [],
+          "reason": "package.json changed; run the daily active aggregate to cover validation entrypoint drift."
+        },
+        "observability": {
+          "command": "node scripts/benchmark_validation_efficiency.js --no-write --iterations=1",
+          "covered_by_command": null,
+          "recommended": true,
+          "primary": true,
+          "matched_files": [
+            "reports/validation_benchmarks/validation_efficiency_baseline_example.json"
+          ],
+          "reason": "benchmark tooling or report changed; run a no-write one-iteration observability check."
+        },
+        "mvp": {
+          "command": "npm run validate:mvp",
+          "covered_by_command": null,
+          "recommended": false,
+          "primary": false,
+          "matched_files": [],
+          "reason": "MVP-tier validation surface changed or package.json can affect MVP validation wiring."
+        },
+        "targeted": {
+          "command": "npm run validate:targeted-plan",
+          "covered_by_command": null,
+          "recommended": false,
+          "primary": false,
+          "matched_files": [],
+          "reason": "No aggregate profile triggered; use the targeted plan entry plus recommended_commands for manifest, smoke, and matched targeted validators."
+        }
+      },
+      "manifest_coverage": {
+        "all_files_matched": true,
+        "changed_file_count": 1,
+        "matched_file_count": 1,
+        "unmatched_file_count": 0,
+        "matched_files": [
+          "reports/validation_benchmarks/validation_efficiency_baseline_example.json"
+        ],
+        "unmatched_files": []
+      },
+      "validation_plan": {
+        "version": 1,
+        "primary_profile": "observability",
+        "primary_command": "node scripts/benchmark_validation_efficiency.js --no-write --iterations=1",
+        "manifest_coverage": {
+          "all_files_matched": true,
+          "changed_file_count": 1,
+          "matched_file_count": 1,
+          "unmatched_file_count": 0,
+          "matched_files": [
+            "reports/validation_benchmarks/validation_efficiency_baseline_example.json"
+          ],
+          "unmatched_files": []
+        },
+        "execution_commands": [
+          "node scripts/validate_validation_manifest.js",
+          "npm run validate:smoke",
+          "node scripts/benchmark_validation_efficiency.js --no-write --iterations=1"
+        ],
+        "steps": [
+          {
+            "order": 1,
+            "command": "node scripts/validate_validation_manifest.js",
+            "sources": [
+              {
+                "kind": "base",
+                "reason": "Always validate the validation manifest before trusting selected validators."
+              }
+            ]
+          },
+          {
+            "order": 2,
+            "command": "npm run validate:smoke",
+            "sources": [
+              {
+                "kind": "base",
+                "reason": "Run smoke validation unless the changed files already directly trigger it."
+              }
+            ]
+          },
+          {
+            "order": 3,
+            "command": "node scripts/benchmark_validation_efficiency.js --no-write --iterations=1",
+            "sources": [
+              {
+                "kind": "profile",
+                "profile": "observability",
+                "primary": true,
+                "matched_files": [
+                  "reports/validation_benchmarks/validation_efficiency_baseline_example.json"
+                ],
+                "reason": "benchmark tooling or report changed; run a no-write one-iteration observability check."
+              },
+              {
+                "kind": "matched_validator",
+                "validator_id": "validation_benchmark_observability",
+                "tier": "targeted",
+                "domain": "validation_observability",
+                "estimated_runtime_class": "medium",
+                "matched_files": [
+                  "reports/validation_benchmarks/validation_efficiency_baseline_example.json"
+                ]
+              }
+            ]
+          }
+        ],
+        "covered_commands": [],
+        "covered_profiles": [],
+        "deferred_commands": []
+      },
+      "efficiency_summary": {
+        "execution_command_count": 3,
+        "matched_validator_count": 1,
+        "profile_count": 1,
+        "profile_command_count": 1,
+        "covered_command_count": 0,
+        "covered_profile_count": 0,
+        "covered_validator_count": 0,
+        "covered_file_count": 0,
+        "deferred_command_count": 0,
+        "omitted_redundant_item_count": 0,
+        "all_files_matched": true,
+        "unmatched_file_count": 0
+      },
+      "validation_decision_summary": {
+        "version": 1,
+        "primary_profile": "observability",
+        "primary_command": "node scripts/benchmark_validation_efficiency.js --no-write --iterations=1",
+        "execution_command_count": 3,
+        "matched_validator_count": 1,
+        "all_files_matched": true,
+        "unmatched_file_count": 0,
+        "covered_command_count": 0,
+        "covered_profile_count": 0,
+        "deferred_command_count": 0,
+        "next_commands": [
+          "node scripts/validate_validation_manifest.js",
+          "npm run validate:smoke",
+          "node scripts/benchmark_validation_efficiency.js --no-write --iterations=1"
+        ],
+        "deferred_commands": [],
+        "reasons": [
+          {
+            "profile": "observability",
+            "command": "node scripts/benchmark_validation_efficiency.js --no-write --iterations=1",
+            "reason": "benchmark tooling or report changed; run a no-write one-iteration observability check.",
+            "matched_files": [
+              "reports/validation_benchmarks/validation_efficiency_baseline_example.json"
+            ]
+          }
+        ]
+      },
+      "covered_commands": [],
+      "deferred_commands": [],
+      "recommended_commands": [
+        "node scripts/validate_validation_manifest.js",
+        "npm run validate:smoke",
+        "node scripts/benchmark_validation_efficiency.js --no-write --iterations=1"
+      ],
+      "reasons": [
+        {
+          "profile": "observability",
+          "command": "node scripts/benchmark_validation_efficiency.js --no-write --iterations=1",
+          "reason": "benchmark tooling or report changed; run a no-write one-iteration observability check.",
+          "matched_files": [
+            "reports/validation_benchmarks/validation_efficiency_baseline_example.json"
+          ]
+        }
+      ]
+    },
+    "mvp": {
+      "command_id": "recommend_validation_mvp_profile",
+      "passed": true,
+      "seconds": 0.083,
+      "recommendation_contract_version": 1,
+      "source": "argv",
+      "comparison_base": null,
+      "change_selection": {
+        "source": "argv",
+        "comparison_base": null,
+        "cached": false,
+        "explicit_files": true,
+        "file_count": 1
+      },
+      "primary_profile": "mvp",
+      "profiles": [
+        "mvp"
+      ],
+      "primary_command": "npm run validate:mvp",
+      "profile_commands": [
+        "npm run validate:mvp"
+      ],
+      "profile_catalog": {
+        "daily": {
+          "command": "npm run validate:active",
+          "covered_by_command": null,
+          "recommended": false,
+          "primary": false,
+          "matched_files": [],
+          "reason": "package.json changed; run the daily active aggregate to cover validation entrypoint drift."
+        },
+        "observability": {
+          "command": "node scripts/benchmark_validation_efficiency.js --no-write --iterations=1",
+          "covered_by_command": null,
+          "recommended": false,
+          "primary": false,
+          "matched_files": [],
+          "reason": "benchmark tooling or report changed; run a no-write one-iteration observability check."
+        },
+        "mvp": {
+          "command": "npm run validate:mvp",
+          "covered_by_command": null,
+          "recommended": true,
+          "primary": true,
+          "matched_files": [
+            "review_console/static_prototype/app.js"
+          ],
+          "reason": "MVP-tier validation surface changed or package.json can affect MVP validation wiring."
+        },
+        "targeted": {
+          "command": "npm run validate:targeted-plan",
+          "covered_by_command": null,
+          "recommended": false,
+          "primary": false,
+          "matched_files": [],
+          "reason": "No aggregate profile triggered; use the targeted plan entry plus recommended_commands for manifest, smoke, and matched targeted validators."
+        }
+      },
+      "manifest_coverage": {
+        "all_files_matched": true,
+        "changed_file_count": 1,
+        "matched_file_count": 1,
+        "unmatched_file_count": 0,
+        "matched_files": [
+          "review_console/static_prototype/app.js"
+        ],
+        "unmatched_files": []
+      },
+      "validation_plan": {
+        "version": 1,
+        "primary_profile": "mvp",
+        "primary_command": "npm run validate:mvp",
+        "manifest_coverage": {
+          "all_files_matched": true,
+          "changed_file_count": 1,
+          "matched_file_count": 1,
+          "unmatched_file_count": 0,
+          "matched_files": [
+            "review_console/static_prototype/app.js"
+          ],
+          "unmatched_files": []
+        },
+        "execution_commands": [
+          "node scripts/validate_validation_manifest.js",
+          "npm run validate:mvp",
+          "npm run validate:smoke"
+        ],
+        "steps": [
+          {
+            "order": 1,
+            "command": "node scripts/validate_validation_manifest.js",
+            "sources": [
+              {
+                "kind": "base",
+                "reason": "Always validate the validation manifest before trusting selected validators."
+              }
+            ]
+          },
+          {
+            "order": 2,
+            "command": "npm run validate:mvp",
+            "sources": [
+              {
+                "kind": "profile",
+                "profile": "mvp",
+                "primary": true,
+                "matched_files": [
+                  "review_console/static_prototype/app.js"
+                ],
+                "reason": "MVP-tier validation surface changed or package.json can affect MVP validation wiring."
+              },
+              {
+                "kind": "matched_validator",
+                "validator_id": "mvp_core",
+                "tier": "mvp",
+                "domain": "mvp_product_core",
+                "estimated_runtime_class": "medium",
+                "matched_files": [
+                  "review_console/static_prototype/app.js"
+                ]
+              }
+            ]
+          },
+          {
+            "order": 3,
+            "command": "npm run validate:smoke",
+            "sources": [
+              {
+                "kind": "matched_validator",
+                "validator_id": "smoke",
+                "tier": "smoke",
+                "domain": "core_smoke",
+                "estimated_runtime_class": "fast",
+                "matched_files": [
+                  "review_console/static_prototype/app.js"
+                ]
+              }
+            ]
+          }
+        ],
+        "covered_commands": [
+          {
+            "command": "node scripts/validate_readonly_visual_review_mvp.js",
+            "covered_by_command": "npm run validate:mvp",
+            "reason": "npm run validate:mvp already runs this MVP-tier check; omit it from execution_commands to avoid redundant profile validation.",
+            "matched_files": [
+              "review_console/static_prototype/app.js"
+            ],
+            "matched_validator_ids": [
+              "readonly_visual_review_mvp"
+            ]
+          }
+        ],
+        "covered_profiles": [],
+        "deferred_commands": [
+          {
+            "command": "npm run validate:capsule-regression",
+            "deferred_to_command": "npm run validate:archive-plan",
+            "reason": "Archive-tier validators remain discoverable but are deferred from the default execution plan.",
+            "matched_files": [
+              "review_console/static_prototype/app.js"
+            ],
+            "matched_validator_ids": [
+              "capsule_product_core_regression"
+            ]
+          }
+        ]
+      },
+      "efficiency_summary": {
+        "execution_command_count": 3,
+        "matched_validator_count": 4,
+        "profile_count": 1,
+        "profile_command_count": 1,
+        "covered_command_count": 1,
+        "covered_profile_count": 0,
+        "covered_validator_count": 1,
+        "covered_file_count": 1,
+        "deferred_command_count": 1,
+        "omitted_redundant_item_count": 2,
+        "all_files_matched": true,
+        "unmatched_file_count": 0
+      },
+      "validation_decision_summary": {
+        "version": 1,
+        "primary_profile": "mvp",
+        "primary_command": "npm run validate:mvp",
+        "execution_command_count": 3,
+        "matched_validator_count": 4,
+        "all_files_matched": true,
+        "unmatched_file_count": 0,
+        "covered_command_count": 1,
+        "covered_profile_count": 0,
+        "deferred_command_count": 1,
+        "next_commands": [
+          "node scripts/validate_validation_manifest.js",
+          "npm run validate:mvp",
+          "npm run validate:smoke"
+        ],
+        "deferred_commands": [
+          {
+            "command": "npm run validate:capsule-regression",
+            "deferred_to_command": "npm run validate:archive-plan",
+            "matched_files": [
+              "review_console/static_prototype/app.js"
+            ]
+          }
+        ],
+        "reasons": [
+          {
+            "profile": "mvp",
+            "command": "npm run validate:mvp",
+            "reason": "MVP-tier validation surface changed or package.json can affect MVP validation wiring.",
+            "matched_files": [
+              "review_console/static_prototype/app.js"
+            ]
+          }
+        ]
+      },
+      "covered_commands": [
+        {
+          "command": "node scripts/validate_readonly_visual_review_mvp.js",
+          "covered_by_command": "npm run validate:mvp",
+          "reason": "npm run validate:mvp already runs this MVP-tier check; omit it from execution_commands to avoid redundant profile validation.",
+          "matched_files": [
+            "review_console/static_prototype/app.js"
+          ],
+          "matched_validator_ids": [
+            "readonly_visual_review_mvp"
+          ]
+        }
+      ],
+      "deferred_commands": [
+        {
+          "command": "npm run validate:capsule-regression",
+          "deferred_to_command": "npm run validate:archive-plan",
+          "reason": "Archive-tier validators remain discoverable but are deferred from the default execution plan.",
+          "matched_files": [
+            "review_console/static_prototype/app.js"
+          ],
+          "matched_validator_ids": [
+            "capsule_product_core_regression"
+          ]
+        }
+      ],
+      "recommended_commands": [
+        "node scripts/validate_validation_manifest.js",
+        "npm run validate:mvp",
+        "npm run validate:smoke"
+      ],
+      "reasons": [
+        {
+          "profile": "mvp",
+          "command": "npm run validate:mvp",
+          "reason": "MVP-tier validation surface changed or package.json can affect MVP validation wiring.",
+          "matched_files": [
+            "review_console/static_prototype/app.js"
+          ]
+        }
+      ]
+    },
+    "targeted": {
+      "command_id": "recommend_validation_targeted_profile",
+      "passed": true,
+      "seconds": 0.069,
+      "recommendation_contract_version": 1,
+      "source": "argv",
+      "comparison_base": null,
+      "change_selection": {
+        "source": "argv",
+        "comparison_base": null,
+        "cached": false,
+        "explicit_files": true,
+        "file_count": 1
+      },
+      "primary_profile": "targeted",
+      "profiles": [
+        "targeted"
+      ],
+      "primary_command": "npm run validate:targeted-plan",
+      "profile_commands": [
+        "npm run validate:targeted-plan"
+      ],
+      "profile_catalog": {
+        "daily": {
+          "command": "npm run validate:active",
+          "covered_by_command": null,
+          "recommended": false,
+          "primary": false,
+          "matched_files": [],
+          "reason": "package.json changed; run the daily active aggregate to cover validation entrypoint drift."
+        },
+        "observability": {
+          "command": "node scripts/benchmark_validation_efficiency.js --no-write --iterations=1",
+          "covered_by_command": null,
+          "recommended": false,
+          "primary": false,
+          "matched_files": [],
+          "reason": "benchmark tooling or report changed; run a no-write one-iteration observability check."
+        },
+        "mvp": {
+          "command": "npm run validate:mvp",
+          "covered_by_command": null,
+          "recommended": false,
+          "primary": false,
+          "matched_files": [],
+          "reason": "MVP-tier validation surface changed or package.json can affect MVP validation wiring."
+        },
+        "targeted": {
+          "command": "npm run validate:targeted-plan",
+          "covered_by_command": null,
+          "recommended": true,
+          "primary": true,
+          "matched_files": [
+            "scripts/recommend_validation_for_changed_files.js"
+          ],
+          "reason": "No aggregate profile triggered; use the targeted plan entry plus recommended_commands for manifest, smoke, and matched targeted validators."
+        }
+      },
+      "manifest_coverage": {
+        "all_files_matched": true,
+        "changed_file_count": 1,
+        "matched_file_count": 1,
+        "unmatched_file_count": 0,
+        "matched_files": [
+          "scripts/recommend_validation_for_changed_files.js"
+        ],
+        "unmatched_files": []
+      },
+      "validation_plan": {
+        "version": 1,
+        "primary_profile": "targeted",
+        "primary_command": "npm run validate:targeted-plan",
+        "manifest_coverage": {
+          "all_files_matched": true,
+          "changed_file_count": 1,
+          "matched_file_count": 1,
+          "unmatched_file_count": 0,
+          "matched_files": [
+            "scripts/recommend_validation_for_changed_files.js"
+          ],
+          "unmatched_files": []
+        },
+        "execution_commands": [
+          "node scripts/validate_validation_manifest.js",
+          "npm run validate:smoke",
+          "npm run validate:targeted-plan",
+          "node scripts/validate_validation_recommendation_profiles.js"
+        ],
+        "steps": [
+          {
+            "order": 1,
+            "command": "node scripts/validate_validation_manifest.js",
+            "sources": [
+              {
+                "kind": "base",
+                "reason": "Always validate the validation manifest before trusting selected validators."
+              },
+              {
+                "kind": "matched_validator",
+                "validator_id": "validation_tooling",
+                "tier": "targeted",
+                "domain": "validation_tooling",
+                "estimated_runtime_class": "fast",
+                "matched_files": [
+                  "scripts/recommend_validation_for_changed_files.js"
+                ]
+              }
+            ]
+          },
+          {
+            "order": 2,
+            "command": "npm run validate:smoke",
+            "sources": [
+              {
+                "kind": "base",
+                "reason": "Run smoke validation unless the changed files already directly trigger it."
+              }
+            ]
+          },
+          {
+            "order": 3,
+            "command": "npm run validate:targeted-plan",
+            "sources": [
+              {
+                "kind": "profile",
+                "profile": "targeted",
+                "primary": true,
+                "matched_files": [
+                  "scripts/recommend_validation_for_changed_files.js"
+                ],
+                "reason": "No aggregate profile triggered; use the targeted plan entry plus recommended_commands for manifest, smoke, and matched targeted validators."
+              }
+            ]
+          },
+          {
+            "order": 4,
+            "command": "node scripts/validate_validation_recommendation_profiles.js",
+            "sources": [
+              {
+                "kind": "matched_validator",
+                "validator_id": "validation_recommendation_profiles",
+                "tier": "targeted",
+                "domain": "validation_tooling",
+                "estimated_runtime_class": "fast",
+                "matched_files": [
+                  "scripts/recommend_validation_for_changed_files.js"
+                ]
+              }
+            ]
+          }
+        ],
+        "covered_commands": [],
+        "covered_profiles": [],
+        "deferred_commands": []
+      },
+      "efficiency_summary": {
+        "execution_command_count": 4,
+        "matched_validator_count": 2,
+        "profile_count": 1,
+        "profile_command_count": 1,
+        "covered_command_count": 0,
+        "covered_profile_count": 0,
+        "covered_validator_count": 0,
+        "covered_file_count": 0,
+        "deferred_command_count": 0,
+        "omitted_redundant_item_count": 0,
+        "all_files_matched": true,
+        "unmatched_file_count": 0
+      },
+      "validation_decision_summary": {
+        "version": 1,
+        "primary_profile": "targeted",
+        "primary_command": "npm run validate:targeted-plan",
+        "execution_command_count": 4,
+        "matched_validator_count": 2,
+        "all_files_matched": true,
+        "unmatched_file_count": 0,
+        "covered_command_count": 0,
+        "covered_profile_count": 0,
+        "deferred_command_count": 0,
+        "next_commands": [
+          "node scripts/validate_validation_manifest.js",
+          "npm run validate:smoke",
+          "npm run validate:targeted-plan",
+          "node scripts/validate_validation_recommendation_profiles.js"
+        ],
+        "deferred_commands": [],
+        "reasons": [
+          {
+            "profile": "targeted",
+            "command": "npm run validate:targeted-plan",
+            "reason": "No aggregate profile triggered; use the targeted plan entry plus recommended_commands for manifest, smoke, and matched targeted validators.",
+            "matched_files": [
+              "scripts/recommend_validation_for_changed_files.js"
+            ]
+          }
+        ]
+      },
+      "covered_commands": [],
+      "deferred_commands": [],
+      "recommended_commands": [
+        "node scripts/validate_validation_manifest.js",
+        "npm run validate:smoke",
+        "npm run validate:targeted-plan",
+        "node scripts/validate_validation_recommendation_profiles.js"
+      ],
+      "reasons": [
+        {
+          "profile": "targeted",
+          "command": "npm run validate:targeted-plan",
+          "reason": "No aggregate profile triggered; use the targeted plan entry plus recommended_commands for manifest, smoke, and matched targeted validators.",
+          "matched_files": [
+            "scripts/recommend_validation_for_changed_files.js"
+          ]
+        }
+      ]
+    }
+  },
+  "results": [
+    {
+      "id": "validate_smoke",
+      "command": "npm run validate:smoke",
+      "iteration": 1,
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "error_code": null,
+      "error_message": null,
+      "seconds": 0.628,
+      "stdout_bytes": 3819,
+      "stderr_bytes": 0,
+      "parsed_summary": {
+        "passed": true,
+        "validator": "validate_smoke",
+        "check_count": 33,
+        "failed_count": 0
+      }
+    },
+    {
+      "id": "recommend_validation",
+      "command": "npm run recommend:validation",
+      "iteration": 1,
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "error_code": null,
+      "error_message": null,
+      "seconds": 0.498,
+      "stdout_bytes": 12875,
+      "stderr_bytes": 0,
+      "parsed_summary": {
+        "passed": true,
+        "recommender": "recommend_validation_for_changed_files",
+        "source": "git_diff_worktree",
+        "comparison_base": null,
+        "change_selection": {
+          "source": "git_diff_worktree",
+          "comparison_base": null,
+          "cached": false,
+          "explicit_files": false,
+          "file_count": 6
+        },
+        "recommendation_contract_version": 1,
+        "matched_validator_count": 4,
+        "manifest_coverage": {
+          "all_files_matched": true,
+          "changed_file_count": 6,
+          "matched_file_count": 6,
+          "unmatched_file_count": 0,
+          "matched_files": [
+            "scripts/benchmark_validation_efficiency.js",
+            "scripts/recommend_validation_for_changed_files.js",
+            "scripts/validate_validation_recommendation_profiles.js",
+            "scripts/validation_manifest.json",
+            "docs/VALIDATION_SELECTION_MATRIX.md",
+            "reports/validation_benchmarks/validation_efficiency_baseline_2026-05-31T15-58-49-513Z.json"
+          ],
+          "unmatched_files": []
+        },
+        "active_recommended": false,
+        "mvp_recommended": false,
+        "recommended_commands": [
+          "node scripts/validate_validation_manifest.js",
+          "npm run validate:smoke",
+          "node scripts/benchmark_validation_efficiency.js --no-write --iterations=1",
+          "node scripts/validate_validation_recommendation_profiles.js"
+        ],
+        "deferred_commands": [
+          {
+            "command": "npm run validate:governance",
+            "deferred_to_command": "npm run validate:archive-plan",
+            "reason": "Archive-tier validators remain discoverable but are deferred from the default execution plan.",
+            "matched_files": [
+              "docs/VALIDATION_SELECTION_MATRIX.md"
+            ],
+            "matched_validator_ids": [
+              "governance"
+            ]
+          }
+        ],
+        "recommended_validation_profile": {
+          "primary_profile": "observability",
+          "profiles": [
+            "observability"
+          ],
+          "primary_command": "node scripts/benchmark_validation_efficiency.js --no-write --iterations=1",
+          "profile_commands": [
+            "node scripts/benchmark_validation_efficiency.js --no-write --iterations=1"
+          ],
+          "profile_catalog": {
+            "daily": {
+              "command": "npm run validate:active",
+              "covered_by_command": null,
+              "recommended": false,
+              "primary": false,
+              "matched_files": [],
+              "reason": "package.json changed; run the daily active aggregate to cover validation entrypoint drift."
+            },
+            "observability": {
+              "command": "node scripts/benchmark_validation_efficiency.js --no-write --iterations=1",
+              "covered_by_command": null,
+              "recommended": true,
+              "primary": true,
+              "matched_files": [
+                "scripts/benchmark_validation_efficiency.js",
+                "reports/validation_benchmarks/validation_efficiency_baseline_2026-05-31T15-58-49-513Z.json"
+              ],
+              "reason": "benchmark tooling or report changed; run a no-write one-iteration observability check."
+            },
+            "mvp": {
+              "command": "npm run validate:mvp",
+              "covered_by_command": null,
+              "recommended": false,
+              "primary": false,
+              "matched_files": [],
+              "reason": "MVP-tier validation surface changed or package.json can affect MVP validation wiring."
+            },
+            "targeted": {
+              "command": "npm run validate:targeted-plan",
+              "covered_by_command": null,
+              "recommended": false,
+              "primary": false,
+              "matched_files": [],
+              "reason": "No aggregate profile triggered; use the targeted plan entry plus recommended_commands for manifest, smoke, and matched targeted validators."
+            }
+          },
+          "daily_recommended": false,
+          "observability_recommended": true,
+          "mvp_recommended": false,
+          "reasons": [
+            {
+              "profile": "observability",
+              "command": "node scripts/benchmark_validation_efficiency.js --no-write --iterations=1",
+              "reason": "benchmark tooling or report changed; run a no-write one-iteration observability check.",
+              "matched_files": [
+                "scripts/benchmark_validation_efficiency.js",
+                "reports/validation_benchmarks/validation_efficiency_baseline_2026-05-31T15-58-49-513Z.json"
+              ]
+            }
+          ]
+        },
+        "validation_plan": {
+          "version": 1,
+          "primary_profile": "observability",
+          "primary_command": "node scripts/benchmark_validation_efficiency.js --no-write --iterations=1",
+          "manifest_coverage": {
+            "all_files_matched": true,
+            "changed_file_count": 6,
+            "matched_file_count": 6,
+            "unmatched_file_count": 0,
+            "matched_files": [
+              "scripts/benchmark_validation_efficiency.js",
+              "scripts/recommend_validation_for_changed_files.js",
+              "scripts/validate_validation_recommendation_profiles.js",
+              "scripts/validation_manifest.json",
+              "docs/VALIDATION_SELECTION_MATRIX.md",
+              "reports/validation_benchmarks/validation_efficiency_baseline_2026-05-31T15-58-49-513Z.json"
+            ],
+            "unmatched_files": []
+          },
+          "execution_commands": [
+            "node scripts/validate_validation_manifest.js",
+            "npm run validate:smoke",
+            "node scripts/benchmark_validation_efficiency.js --no-write --iterations=1",
+            "node scripts/validate_validation_recommendation_profiles.js"
+          ],
+          "steps": [
+            {
+              "order": 1,
+              "command": "node scripts/validate_validation_manifest.js",
+              "sources": [
+                {
+                  "kind": "base",
+                  "reason": "Always validate the validation manifest before trusting selected validators."
+                },
+                {
+                  "kind": "matched_validator",
+                  "validator_id": "validation_tooling",
+                  "tier": "targeted",
+                  "domain": "validation_tooling",
+                  "estimated_runtime_class": "fast",
+                  "matched_files": [
+                    "scripts/benchmark_validation_efficiency.js",
+                    "scripts/recommend_validation_for_changed_files.js",
+                    "scripts/validate_validation_recommendation_profiles.js",
+                    "scripts/validation_manifest.json"
+                  ]
+                }
+              ]
+            },
+            {
+              "order": 2,
+              "command": "npm run validate:smoke",
+              "sources": [
+                {
+                  "kind": "base",
+                  "reason": "Run smoke validation unless the changed files already directly trigger it."
+                }
+              ]
+            },
+            {
+              "order": 3,
+              "command": "node scripts/benchmark_validation_efficiency.js --no-write --iterations=1",
+              "sources": [
+                {
+                  "kind": "profile",
+                  "profile": "observability",
+                  "primary": true,
+                  "matched_files": [
+                    "scripts/benchmark_validation_efficiency.js",
+                    "reports/validation_benchmarks/validation_efficiency_baseline_2026-05-31T15-58-49-513Z.json"
+                  ],
+                  "reason": "benchmark tooling or report changed; run a no-write one-iteration observability check."
+                },
+                {
+                  "kind": "matched_validator",
+                  "validator_id": "validation_benchmark_observability",
+                  "tier": "targeted",
+                  "domain": "validation_observability",
+                  "estimated_runtime_class": "medium",
+                  "matched_files": [
+                    "scripts/benchmark_validation_efficiency.js",
+                    "reports/validation_benchmarks/validation_efficiency_baseline_2026-05-31T15-58-49-513Z.json"
+                  ]
+                }
+              ]
+            },
+            {
+              "order": 4,
+              "command": "node scripts/validate_validation_recommendation_profiles.js",
+              "sources": [
+                {
+                  "kind": "matched_validator",
+                  "validator_id": "validation_recommendation_profiles",
+                  "tier": "targeted",
+                  "domain": "validation_tooling",
+                  "estimated_runtime_class": "fast",
+                  "matched_files": [
+                    "docs/VALIDATION_SELECTION_MATRIX.md",
+                    "scripts/recommend_validation_for_changed_files.js",
+                    "scripts/validate_validation_recommendation_profiles.js",
+                    "scripts/validation_manifest.json"
+                  ]
+                }
+              ]
+            }
+          ],
+          "covered_commands": [],
+          "covered_profiles": [],
+          "deferred_commands": [
+            {
+              "command": "npm run validate:governance",
+              "deferred_to_command": "npm run validate:archive-plan",
+              "reason": "Archive-tier validators remain discoverable but are deferred from the default execution plan.",
+              "matched_files": [
+                "docs/VALIDATION_SELECTION_MATRIX.md"
+              ],
+              "matched_validator_ids": [
+                "governance"
+              ]
+            }
+          ]
+        },
+        "efficiency_summary": {
+          "execution_command_count": 4,
+          "matched_validator_count": 4,
+          "profile_count": 1,
+          "profile_command_count": 1,
+          "covered_command_count": 0,
+          "covered_profile_count": 0,
+          "covered_validator_count": 0,
+          "covered_file_count": 0,
+          "deferred_command_count": 1,
+          "omitted_redundant_item_count": 1,
+          "all_files_matched": true,
+          "unmatched_file_count": 0
+        },
+        "validation_decision_summary": {
+          "version": 1,
+          "primary_profile": "observability",
+          "primary_command": "node scripts/benchmark_validation_efficiency.js --no-write --iterations=1",
+          "execution_command_count": 4,
+          "matched_validator_count": 4,
+          "all_files_matched": true,
+          "unmatched_file_count": 0,
+          "covered_command_count": 0,
+          "covered_profile_count": 0,
+          "deferred_command_count": 1,
+          "next_commands": [
+            "node scripts/validate_validation_manifest.js",
+            "npm run validate:smoke",
+            "node scripts/benchmark_validation_efficiency.js --no-write --iterations=1",
+            "node scripts/validate_validation_recommendation_profiles.js"
+          ],
+          "deferred_commands": [
+            {
+              "command": "npm run validate:governance",
+              "deferred_to_command": "npm run validate:archive-plan",
+              "matched_files": [
+                "docs/VALIDATION_SELECTION_MATRIX.md"
+              ]
+            }
+          ],
+          "reasons": [
+            {
+              "profile": "observability",
+              "command": "node scripts/benchmark_validation_efficiency.js --no-write --iterations=1",
+              "reason": "benchmark tooling or report changed; run a no-write one-iteration observability check.",
+              "matched_files": [
+                "scripts/benchmark_validation_efficiency.js",
+                "reports/validation_benchmarks/validation_efficiency_baseline_2026-05-31T15-58-49-513Z.json"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "recommend_validation_daily_profile",
+      "command": "node scripts/recommend_validation_for_changed_files.js --files package.json",
+      "iteration": 1,
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "error_code": null,
+      "error_message": null,
+      "seconds": 0.072,
+      "stdout_bytes": 8648,
+      "stderr_bytes": 0,
+      "parsed_summary": {
+        "passed": true,
+        "recommender": "recommend_validation_for_changed_files",
+        "source": "argv",
+        "comparison_base": null,
+        "change_selection": {
+          "source": "argv",
+          "comparison_base": null,
+          "cached": false,
+          "explicit_files": true,
+          "file_count": 1
+        },
+        "recommendation_contract_version": 1,
+        "matched_validator_count": 3,
+        "manifest_coverage": {
+          "all_files_matched": true,
+          "changed_file_count": 1,
+          "matched_file_count": 1,
+          "unmatched_file_count": 0,
+          "matched_files": [
+            "package.json"
+          ],
+          "unmatched_files": []
+        },
+        "active_recommended": true,
+        "mvp_recommended": true,
+        "recommended_commands": [
+          "node scripts/validate_validation_manifest.js",
+          "npm run validate:active"
+        ],
+        "deferred_commands": [],
+        "recommended_validation_profile": {
+          "primary_profile": "daily",
+          "profiles": [
+            "daily",
+            "mvp"
+          ],
+          "primary_command": "npm run validate:active",
+          "profile_commands": [
+            "npm run validate:active"
+          ],
+          "profile_catalog": {
+            "daily": {
+              "command": "npm run validate:active",
+              "covered_by_command": null,
+              "recommended": true,
+              "primary": true,
+              "matched_files": [
+                "package.json"
+              ],
+              "reason": "package.json changed; run the daily active aggregate to cover validation entrypoint drift."
+            },
+            "observability": {
+              "command": "node scripts/benchmark_validation_efficiency.js --no-write --iterations=1",
+              "covered_by_command": null,
+              "recommended": false,
+              "primary": false,
+              "matched_files": [],
+              "reason": "benchmark tooling or report changed; run a no-write one-iteration observability check."
+            },
+            "mvp": {
+              "command": "npm run validate:mvp",
+              "covered_by_command": "npm run validate:active",
+              "recommended": true,
+              "primary": false,
+              "matched_files": [
+                "package.json"
+              ],
+              "reason": "MVP-tier validation surface changed or package.json can affect MVP validation wiring."
+            },
+            "targeted": {
+              "command": "npm run validate:targeted-plan",
+              "covered_by_command": null,
+              "recommended": false,
+              "primary": false,
+              "matched_files": [],
+              "reason": "No aggregate profile triggered; use the targeted plan entry plus recommended_commands for manifest, smoke, and matched targeted validators."
+            }
+          },
+          "daily_recommended": true,
+          "observability_recommended": false,
+          "mvp_recommended": true,
+          "reasons": [
+            {
+              "profile": "daily",
+              "command": "npm run validate:active",
+              "reason": "package.json changed; run the daily active aggregate to cover validation entrypoint drift.",
+              "matched_files": [
+                "package.json"
+              ]
+            },
+            {
+              "profile": "mvp",
+              "command": "npm run validate:mvp",
+              "reason": "MVP-tier validation surface changed or package.json can affect MVP validation wiring.",
+              "matched_files": [
+                "package.json"
+              ]
+            }
+          ]
+        },
+        "validation_plan": {
+          "version": 1,
+          "primary_profile": "daily",
+          "primary_command": "npm run validate:active",
+          "manifest_coverage": {
+            "all_files_matched": true,
+            "changed_file_count": 1,
+            "matched_file_count": 1,
+            "unmatched_file_count": 0,
+            "matched_files": [
+              "package.json"
+            ],
+            "unmatched_files": []
+          },
+          "execution_commands": [
+            "node scripts/validate_validation_manifest.js",
+            "npm run validate:active"
+          ],
+          "steps": [
+            {
+              "order": 1,
+              "command": "node scripts/validate_validation_manifest.js",
+              "sources": [
+                {
+                  "kind": "base",
+                  "reason": "Always validate the validation manifest before trusting selected validators."
+                },
+                {
+                  "kind": "matched_validator",
+                  "validator_id": "validation_tooling",
+                  "tier": "targeted",
+                  "domain": "validation_tooling",
+                  "estimated_runtime_class": "fast",
+                  "matched_files": [
+                    "package.json"
+                  ]
+                }
+              ]
+            },
+            {
+              "order": 2,
+              "command": "npm run validate:active",
+              "sources": [
+                {
+                  "kind": "base",
+                  "reason": "package.json changed; run the daily active aggregate."
+                },
+                {
+                  "kind": "profile",
+                  "profile": "daily",
+                  "primary": true,
+                  "matched_files": [
+                    "package.json"
+                  ],
+                  "reason": "package.json changed; run the daily active aggregate to cover validation entrypoint drift."
+                }
+              ]
+            }
+          ],
+          "covered_commands": [
+            {
+              "command": "node scripts/validate_validation_recommendation_profiles.js",
+              "covered_by_command": "npm run validate:active",
+              "reason": "validate:active already runs this command; omit it from execution_commands to avoid redundant daily validation.",
+              "matched_files": [
+                "package.json"
+              ],
+              "matched_validator_ids": [
+                "validation_recommendation_profiles"
+              ]
+            },
+            {
+              "command": "npm run validate:smoke",
+              "covered_by_command": "npm run validate:active",
+              "reason": "validate:active already runs this command; omit it from execution_commands to avoid redundant daily validation.",
+              "matched_files": [
+                "package.json"
+              ],
+              "matched_validator_ids": [
+                "smoke"
+              ]
+            }
+          ],
+          "covered_profiles": [
+            {
+              "profile": "mvp",
+              "command": "npm run validate:mvp",
+              "covered_by_command": "npm run validate:active",
+              "matched_files": [
+                "package.json"
+              ],
+              "reason": "MVP-tier validation surface changed or package.json can affect MVP validation wiring."
+            }
+          ],
+          "deferred_commands": []
+        },
+        "efficiency_summary": {
+          "execution_command_count": 2,
+          "matched_validator_count": 3,
+          "profile_count": 2,
+          "profile_command_count": 1,
+          "covered_command_count": 2,
+          "covered_profile_count": 1,
+          "covered_validator_count": 2,
+          "covered_file_count": 1,
+          "deferred_command_count": 0,
+          "omitted_redundant_item_count": 3,
+          "all_files_matched": true,
+          "unmatched_file_count": 0
+        },
+        "validation_decision_summary": {
+          "version": 1,
+          "primary_profile": "daily",
+          "primary_command": "npm run validate:active",
+          "execution_command_count": 2,
+          "matched_validator_count": 3,
+          "all_files_matched": true,
+          "unmatched_file_count": 0,
+          "covered_command_count": 2,
+          "covered_profile_count": 1,
+          "deferred_command_count": 0,
+          "next_commands": [
+            "node scripts/validate_validation_manifest.js",
+            "npm run validate:active"
+          ],
+          "deferred_commands": [],
+          "reasons": [
+            {
+              "profile": "daily",
+              "command": "npm run validate:active",
+              "reason": "package.json changed; run the daily active aggregate to cover validation entrypoint drift.",
+              "matched_files": [
+                "package.json"
+              ]
+            },
+            {
+              "profile": "mvp",
+              "command": "npm run validate:mvp",
+              "reason": "MVP-tier validation surface changed or package.json can affect MVP validation wiring.",
+              "matched_files": [
+                "package.json"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "recommend_validation_observability_profile",
+      "command": "node scripts/recommend_validation_for_changed_files.js --files reports/validation_benchmarks/validation_efficiency_baseline_example.json",
+      "iteration": 1,
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "error_code": null,
+      "error_message": null,
+      "seconds": 0.065,
+      "stdout_bytes": 7798,
+      "stderr_bytes": 0,
+      "parsed_summary": {
+        "passed": true,
+        "recommender": "recommend_validation_for_changed_files",
+        "source": "argv",
+        "comparison_base": null,
+        "change_selection": {
+          "source": "argv",
+          "comparison_base": null,
+          "cached": false,
+          "explicit_files": true,
+          "file_count": 1
+        },
+        "recommendation_contract_version": 1,
+        "matched_validator_count": 1,
+        "manifest_coverage": {
+          "all_files_matched": true,
+          "changed_file_count": 1,
+          "matched_file_count": 1,
+          "unmatched_file_count": 0,
+          "matched_files": [
+            "reports/validation_benchmarks/validation_efficiency_baseline_example.json"
+          ],
+          "unmatched_files": []
+        },
+        "active_recommended": false,
+        "mvp_recommended": false,
+        "recommended_commands": [
+          "node scripts/validate_validation_manifest.js",
+          "npm run validate:smoke",
+          "node scripts/benchmark_validation_efficiency.js --no-write --iterations=1"
+        ],
+        "deferred_commands": [],
+        "recommended_validation_profile": {
+          "primary_profile": "observability",
+          "profiles": [
+            "observability"
+          ],
+          "primary_command": "node scripts/benchmark_validation_efficiency.js --no-write --iterations=1",
+          "profile_commands": [
+            "node scripts/benchmark_validation_efficiency.js --no-write --iterations=1"
+          ],
+          "profile_catalog": {
+            "daily": {
+              "command": "npm run validate:active",
+              "covered_by_command": null,
+              "recommended": false,
+              "primary": false,
+              "matched_files": [],
+              "reason": "package.json changed; run the daily active aggregate to cover validation entrypoint drift."
+            },
+            "observability": {
+              "command": "node scripts/benchmark_validation_efficiency.js --no-write --iterations=1",
+              "covered_by_command": null,
+              "recommended": true,
+              "primary": true,
+              "matched_files": [
+                "reports/validation_benchmarks/validation_efficiency_baseline_example.json"
+              ],
+              "reason": "benchmark tooling or report changed; run a no-write one-iteration observability check."
+            },
+            "mvp": {
+              "command": "npm run validate:mvp",
+              "covered_by_command": null,
+              "recommended": false,
+              "primary": false,
+              "matched_files": [],
+              "reason": "MVP-tier validation surface changed or package.json can affect MVP validation wiring."
+            },
+            "targeted": {
+              "command": "npm run validate:targeted-plan",
+              "covered_by_command": null,
+              "recommended": false,
+              "primary": false,
+              "matched_files": [],
+              "reason": "No aggregate profile triggered; use the targeted plan entry plus recommended_commands for manifest, smoke, and matched targeted validators."
+            }
+          },
+          "daily_recommended": false,
+          "observability_recommended": true,
+          "mvp_recommended": false,
+          "reasons": [
+            {
+              "profile": "observability",
+              "command": "node scripts/benchmark_validation_efficiency.js --no-write --iterations=1",
+              "reason": "benchmark tooling or report changed; run a no-write one-iteration observability check.",
+              "matched_files": [
+                "reports/validation_benchmarks/validation_efficiency_baseline_example.json"
+              ]
+            }
+          ]
+        },
+        "validation_plan": {
+          "version": 1,
+          "primary_profile": "observability",
+          "primary_command": "node scripts/benchmark_validation_efficiency.js --no-write --iterations=1",
+          "manifest_coverage": {
+            "all_files_matched": true,
+            "changed_file_count": 1,
+            "matched_file_count": 1,
+            "unmatched_file_count": 0,
+            "matched_files": [
+              "reports/validation_benchmarks/validation_efficiency_baseline_example.json"
+            ],
+            "unmatched_files": []
+          },
+          "execution_commands": [
+            "node scripts/validate_validation_manifest.js",
+            "npm run validate:smoke",
+            "node scripts/benchmark_validation_efficiency.js --no-write --iterations=1"
+          ],
+          "steps": [
+            {
+              "order": 1,
+              "command": "node scripts/validate_validation_manifest.js",
+              "sources": [
+                {
+                  "kind": "base",
+                  "reason": "Always validate the validation manifest before trusting selected validators."
+                }
+              ]
+            },
+            {
+              "order": 2,
+              "command": "npm run validate:smoke",
+              "sources": [
+                {
+                  "kind": "base",
+                  "reason": "Run smoke validation unless the changed files already directly trigger it."
+                }
+              ]
+            },
+            {
+              "order": 3,
+              "command": "node scripts/benchmark_validation_efficiency.js --no-write --iterations=1",
+              "sources": [
+                {
+                  "kind": "profile",
+                  "profile": "observability",
+                  "primary": true,
+                  "matched_files": [
+                    "reports/validation_benchmarks/validation_efficiency_baseline_example.json"
+                  ],
+                  "reason": "benchmark tooling or report changed; run a no-write one-iteration observability check."
+                },
+                {
+                  "kind": "matched_validator",
+                  "validator_id": "validation_benchmark_observability",
+                  "tier": "targeted",
+                  "domain": "validation_observability",
+                  "estimated_runtime_class": "medium",
+                  "matched_files": [
+                    "reports/validation_benchmarks/validation_efficiency_baseline_example.json"
+                  ]
+                }
+              ]
+            }
+          ],
+          "covered_commands": [],
+          "covered_profiles": [],
+          "deferred_commands": []
+        },
+        "efficiency_summary": {
+          "execution_command_count": 3,
+          "matched_validator_count": 1,
+          "profile_count": 1,
+          "profile_command_count": 1,
+          "covered_command_count": 0,
+          "covered_profile_count": 0,
+          "covered_validator_count": 0,
+          "covered_file_count": 0,
+          "deferred_command_count": 0,
+          "omitted_redundant_item_count": 0,
+          "all_files_matched": true,
+          "unmatched_file_count": 0
+        },
+        "validation_decision_summary": {
+          "version": 1,
+          "primary_profile": "observability",
+          "primary_command": "node scripts/benchmark_validation_efficiency.js --no-write --iterations=1",
+          "execution_command_count": 3,
+          "matched_validator_count": 1,
+          "all_files_matched": true,
+          "unmatched_file_count": 0,
+          "covered_command_count": 0,
+          "covered_profile_count": 0,
+          "deferred_command_count": 0,
+          "next_commands": [
+            "node scripts/validate_validation_manifest.js",
+            "npm run validate:smoke",
+            "node scripts/benchmark_validation_efficiency.js --no-write --iterations=1"
+          ],
+          "deferred_commands": [],
+          "reasons": [
+            {
+              "profile": "observability",
+              "command": "node scripts/benchmark_validation_efficiency.js --no-write --iterations=1",
+              "reason": "benchmark tooling or report changed; run a no-write one-iteration observability check.",
+              "matched_files": [
+                "reports/validation_benchmarks/validation_efficiency_baseline_example.json"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "recommend_validation_mvp_profile",
+      "command": "node scripts/recommend_validation_for_changed_files.js --files review_console/static_prototype/app.js",
+      "iteration": 1,
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "error_code": null,
+      "error_message": null,
+      "seconds": 0.083,
+      "stdout_bytes": 9321,
+      "stderr_bytes": 0,
+      "parsed_summary": {
+        "passed": true,
+        "recommender": "recommend_validation_for_changed_files",
+        "source": "argv",
+        "comparison_base": null,
+        "change_selection": {
+          "source": "argv",
+          "comparison_base": null,
+          "cached": false,
+          "explicit_files": true,
+          "file_count": 1
+        },
+        "recommendation_contract_version": 1,
+        "matched_validator_count": 4,
+        "manifest_coverage": {
+          "all_files_matched": true,
+          "changed_file_count": 1,
+          "matched_file_count": 1,
+          "unmatched_file_count": 0,
+          "matched_files": [
+            "review_console/static_prototype/app.js"
+          ],
+          "unmatched_files": []
+        },
+        "active_recommended": false,
+        "mvp_recommended": true,
+        "recommended_commands": [
+          "node scripts/validate_validation_manifest.js",
+          "npm run validate:mvp",
+          "npm run validate:smoke"
+        ],
+        "deferred_commands": [
+          {
+            "command": "npm run validate:capsule-regression",
+            "deferred_to_command": "npm run validate:archive-plan",
+            "reason": "Archive-tier validators remain discoverable but are deferred from the default execution plan.",
+            "matched_files": [
+              "review_console/static_prototype/app.js"
+            ],
+            "matched_validator_ids": [
+              "capsule_product_core_regression"
+            ]
+          }
+        ],
+        "recommended_validation_profile": {
+          "primary_profile": "mvp",
+          "profiles": [
+            "mvp"
+          ],
+          "primary_command": "npm run validate:mvp",
+          "profile_commands": [
+            "npm run validate:mvp"
+          ],
+          "profile_catalog": {
+            "daily": {
+              "command": "npm run validate:active",
+              "covered_by_command": null,
+              "recommended": false,
+              "primary": false,
+              "matched_files": [],
+              "reason": "package.json changed; run the daily active aggregate to cover validation entrypoint drift."
+            },
+            "observability": {
+              "command": "node scripts/benchmark_validation_efficiency.js --no-write --iterations=1",
+              "covered_by_command": null,
+              "recommended": false,
+              "primary": false,
+              "matched_files": [],
+              "reason": "benchmark tooling or report changed; run a no-write one-iteration observability check."
+            },
+            "mvp": {
+              "command": "npm run validate:mvp",
+              "covered_by_command": null,
+              "recommended": true,
+              "primary": true,
+              "matched_files": [
+                "review_console/static_prototype/app.js"
+              ],
+              "reason": "MVP-tier validation surface changed or package.json can affect MVP validation wiring."
+            },
+            "targeted": {
+              "command": "npm run validate:targeted-plan",
+              "covered_by_command": null,
+              "recommended": false,
+              "primary": false,
+              "matched_files": [],
+              "reason": "No aggregate profile triggered; use the targeted plan entry plus recommended_commands for manifest, smoke, and matched targeted validators."
+            }
+          },
+          "daily_recommended": false,
+          "observability_recommended": false,
+          "mvp_recommended": true,
+          "reasons": [
+            {
+              "profile": "mvp",
+              "command": "npm run validate:mvp",
+              "reason": "MVP-tier validation surface changed or package.json can affect MVP validation wiring.",
+              "matched_files": [
+                "review_console/static_prototype/app.js"
+              ]
+            }
+          ]
+        },
+        "validation_plan": {
+          "version": 1,
+          "primary_profile": "mvp",
+          "primary_command": "npm run validate:mvp",
+          "manifest_coverage": {
+            "all_files_matched": true,
+            "changed_file_count": 1,
+            "matched_file_count": 1,
+            "unmatched_file_count": 0,
+            "matched_files": [
+              "review_console/static_prototype/app.js"
+            ],
+            "unmatched_files": []
+          },
+          "execution_commands": [
+            "node scripts/validate_validation_manifest.js",
+            "npm run validate:mvp",
+            "npm run validate:smoke"
+          ],
+          "steps": [
+            {
+              "order": 1,
+              "command": "node scripts/validate_validation_manifest.js",
+              "sources": [
+                {
+                  "kind": "base",
+                  "reason": "Always validate the validation manifest before trusting selected validators."
+                }
+              ]
+            },
+            {
+              "order": 2,
+              "command": "npm run validate:mvp",
+              "sources": [
+                {
+                  "kind": "profile",
+                  "profile": "mvp",
+                  "primary": true,
+                  "matched_files": [
+                    "review_console/static_prototype/app.js"
+                  ],
+                  "reason": "MVP-tier validation surface changed or package.json can affect MVP validation wiring."
+                },
+                {
+                  "kind": "matched_validator",
+                  "validator_id": "mvp_core",
+                  "tier": "mvp",
+                  "domain": "mvp_product_core",
+                  "estimated_runtime_class": "medium",
+                  "matched_files": [
+                    "review_console/static_prototype/app.js"
+                  ]
+                }
+              ]
+            },
+            {
+              "order": 3,
+              "command": "npm run validate:smoke",
+              "sources": [
+                {
+                  "kind": "matched_validator",
+                  "validator_id": "smoke",
+                  "tier": "smoke",
+                  "domain": "core_smoke",
+                  "estimated_runtime_class": "fast",
+                  "matched_files": [
+                    "review_console/static_prototype/app.js"
+                  ]
+                }
+              ]
+            }
+          ],
+          "covered_commands": [
+            {
+              "command": "node scripts/validate_readonly_visual_review_mvp.js",
+              "covered_by_command": "npm run validate:mvp",
+              "reason": "npm run validate:mvp already runs this MVP-tier check; omit it from execution_commands to avoid redundant profile validation.",
+              "matched_files": [
+                "review_console/static_prototype/app.js"
+              ],
+              "matched_validator_ids": [
+                "readonly_visual_review_mvp"
+              ]
+            }
+          ],
+          "covered_profiles": [],
+          "deferred_commands": [
+            {
+              "command": "npm run validate:capsule-regression",
+              "deferred_to_command": "npm run validate:archive-plan",
+              "reason": "Archive-tier validators remain discoverable but are deferred from the default execution plan.",
+              "matched_files": [
+                "review_console/static_prototype/app.js"
+              ],
+              "matched_validator_ids": [
+                "capsule_product_core_regression"
+              ]
+            }
+          ]
+        },
+        "efficiency_summary": {
+          "execution_command_count": 3,
+          "matched_validator_count": 4,
+          "profile_count": 1,
+          "profile_command_count": 1,
+          "covered_command_count": 1,
+          "covered_profile_count": 0,
+          "covered_validator_count": 1,
+          "covered_file_count": 1,
+          "deferred_command_count": 1,
+          "omitted_redundant_item_count": 2,
+          "all_files_matched": true,
+          "unmatched_file_count": 0
+        },
+        "validation_decision_summary": {
+          "version": 1,
+          "primary_profile": "mvp",
+          "primary_command": "npm run validate:mvp",
+          "execution_command_count": 3,
+          "matched_validator_count": 4,
+          "all_files_matched": true,
+          "unmatched_file_count": 0,
+          "covered_command_count": 1,
+          "covered_profile_count": 0,
+          "deferred_command_count": 1,
+          "next_commands": [
+            "node scripts/validate_validation_manifest.js",
+            "npm run validate:mvp",
+            "npm run validate:smoke"
+          ],
+          "deferred_commands": [
+            {
+              "command": "npm run validate:capsule-regression",
+              "deferred_to_command": "npm run validate:archive-plan",
+              "matched_files": [
+                "review_console/static_prototype/app.js"
+              ]
+            }
+          ],
+          "reasons": [
+            {
+              "profile": "mvp",
+              "command": "npm run validate:mvp",
+              "reason": "MVP-tier validation surface changed or package.json can affect MVP validation wiring.",
+              "matched_files": [
+                "review_console/static_prototype/app.js"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "recommend_validation_targeted_profile",
+      "command": "node scripts/recommend_validation_for_changed_files.js --files scripts/recommend_validation_for_changed_files.js",
+      "iteration": 1,
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "error_code": null,
+      "error_message": null,
+      "seconds": 0.069,
+      "stdout_bytes": 8261,
+      "stderr_bytes": 0,
+      "parsed_summary": {
+        "passed": true,
+        "recommender": "recommend_validation_for_changed_files",
+        "source": "argv",
+        "comparison_base": null,
+        "change_selection": {
+          "source": "argv",
+          "comparison_base": null,
+          "cached": false,
+          "explicit_files": true,
+          "file_count": 1
+        },
+        "recommendation_contract_version": 1,
+        "matched_validator_count": 2,
+        "manifest_coverage": {
+          "all_files_matched": true,
+          "changed_file_count": 1,
+          "matched_file_count": 1,
+          "unmatched_file_count": 0,
+          "matched_files": [
+            "scripts/recommend_validation_for_changed_files.js"
+          ],
+          "unmatched_files": []
+        },
+        "active_recommended": false,
+        "mvp_recommended": false,
+        "recommended_commands": [
+          "node scripts/validate_validation_manifest.js",
+          "npm run validate:smoke",
+          "npm run validate:targeted-plan",
+          "node scripts/validate_validation_recommendation_profiles.js"
+        ],
+        "deferred_commands": [],
+        "recommended_validation_profile": {
+          "primary_profile": "targeted",
+          "profiles": [
+            "targeted"
+          ],
+          "primary_command": "npm run validate:targeted-plan",
+          "profile_commands": [
+            "npm run validate:targeted-plan"
+          ],
+          "profile_catalog": {
+            "daily": {
+              "command": "npm run validate:active",
+              "covered_by_command": null,
+              "recommended": false,
+              "primary": false,
+              "matched_files": [],
+              "reason": "package.json changed; run the daily active aggregate to cover validation entrypoint drift."
+            },
+            "observability": {
+              "command": "node scripts/benchmark_validation_efficiency.js --no-write --iterations=1",
+              "covered_by_command": null,
+              "recommended": false,
+              "primary": false,
+              "matched_files": [],
+              "reason": "benchmark tooling or report changed; run a no-write one-iteration observability check."
+            },
+            "mvp": {
+              "command": "npm run validate:mvp",
+              "covered_by_command": null,
+              "recommended": false,
+              "primary": false,
+              "matched_files": [],
+              "reason": "MVP-tier validation surface changed or package.json can affect MVP validation wiring."
+            },
+            "targeted": {
+              "command": "npm run validate:targeted-plan",
+              "covered_by_command": null,
+              "recommended": true,
+              "primary": true,
+              "matched_files": [
+                "scripts/recommend_validation_for_changed_files.js"
+              ],
+              "reason": "No aggregate profile triggered; use the targeted plan entry plus recommended_commands for manifest, smoke, and matched targeted validators."
+            }
+          },
+          "daily_recommended": false,
+          "observability_recommended": false,
+          "mvp_recommended": false,
+          "reasons": [
+            {
+              "profile": "targeted",
+              "command": "npm run validate:targeted-plan",
+              "reason": "No aggregate profile triggered; use the targeted plan entry plus recommended_commands for manifest, smoke, and matched targeted validators.",
+              "matched_files": [
+                "scripts/recommend_validation_for_changed_files.js"
+              ]
+            }
+          ]
+        },
+        "validation_plan": {
+          "version": 1,
+          "primary_profile": "targeted",
+          "primary_command": "npm run validate:targeted-plan",
+          "manifest_coverage": {
+            "all_files_matched": true,
+            "changed_file_count": 1,
+            "matched_file_count": 1,
+            "unmatched_file_count": 0,
+            "matched_files": [
+              "scripts/recommend_validation_for_changed_files.js"
+            ],
+            "unmatched_files": []
+          },
+          "execution_commands": [
+            "node scripts/validate_validation_manifest.js",
+            "npm run validate:smoke",
+            "npm run validate:targeted-plan",
+            "node scripts/validate_validation_recommendation_profiles.js"
+          ],
+          "steps": [
+            {
+              "order": 1,
+              "command": "node scripts/validate_validation_manifest.js",
+              "sources": [
+                {
+                  "kind": "base",
+                  "reason": "Always validate the validation manifest before trusting selected validators."
+                },
+                {
+                  "kind": "matched_validator",
+                  "validator_id": "validation_tooling",
+                  "tier": "targeted",
+                  "domain": "validation_tooling",
+                  "estimated_runtime_class": "fast",
+                  "matched_files": [
+                    "scripts/recommend_validation_for_changed_files.js"
+                  ]
+                }
+              ]
+            },
+            {
+              "order": 2,
+              "command": "npm run validate:smoke",
+              "sources": [
+                {
+                  "kind": "base",
+                  "reason": "Run smoke validation unless the changed files already directly trigger it."
+                }
+              ]
+            },
+            {
+              "order": 3,
+              "command": "npm run validate:targeted-plan",
+              "sources": [
+                {
+                  "kind": "profile",
+                  "profile": "targeted",
+                  "primary": true,
+                  "matched_files": [
+                    "scripts/recommend_validation_for_changed_files.js"
+                  ],
+                  "reason": "No aggregate profile triggered; use the targeted plan entry plus recommended_commands for manifest, smoke, and matched targeted validators."
+                }
+              ]
+            },
+            {
+              "order": 4,
+              "command": "node scripts/validate_validation_recommendation_profiles.js",
+              "sources": [
+                {
+                  "kind": "matched_validator",
+                  "validator_id": "validation_recommendation_profiles",
+                  "tier": "targeted",
+                  "domain": "validation_tooling",
+                  "estimated_runtime_class": "fast",
+                  "matched_files": [
+                    "scripts/recommend_validation_for_changed_files.js"
+                  ]
+                }
+              ]
+            }
+          ],
+          "covered_commands": [],
+          "covered_profiles": [],
+          "deferred_commands": []
+        },
+        "efficiency_summary": {
+          "execution_command_count": 4,
+          "matched_validator_count": 2,
+          "profile_count": 1,
+          "profile_command_count": 1,
+          "covered_command_count": 0,
+          "covered_profile_count": 0,
+          "covered_validator_count": 0,
+          "covered_file_count": 0,
+          "deferred_command_count": 0,
+          "omitted_redundant_item_count": 0,
+          "all_files_matched": true,
+          "unmatched_file_count": 0
+        },
+        "validation_decision_summary": {
+          "version": 1,
+          "primary_profile": "targeted",
+          "primary_command": "npm run validate:targeted-plan",
+          "execution_command_count": 4,
+          "matched_validator_count": 2,
+          "all_files_matched": true,
+          "unmatched_file_count": 0,
+          "covered_command_count": 0,
+          "covered_profile_count": 0,
+          "deferred_command_count": 0,
+          "next_commands": [
+            "node scripts/validate_validation_manifest.js",
+            "npm run validate:smoke",
+            "npm run validate:targeted-plan",
+            "node scripts/validate_validation_recommendation_profiles.js"
+          ],
+          "deferred_commands": [],
+          "reasons": [
+            {
+              "profile": "targeted",
+              "command": "npm run validate:targeted-plan",
+              "reason": "No aggregate profile triggered; use the targeted plan entry plus recommended_commands for manifest, smoke, and matched targeted validators.",
+              "matched_files": [
+                "scripts/recommend_validation_for_changed_files.js"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "validate_mvp",
+      "command": "npm run validate:mvp",
+      "iteration": 1,
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "error_code": null,
+      "error_message": null,
+      "seconds": 2.676,
+      "stdout_bytes": 10839,
+      "stderr_bytes": 0,
+      "parsed_summary": {
+        "passed": true,
+        "validator": "validate_mvp_core",
+        "check_count": 16,
+        "failed_count": 0,
+        "timing_summary": {
+          "timed_check_count": 15,
+          "measured_seconds": 2.312,
+          "slowest_checks": [
+            {
+              "check": "runtime_durable_audit_store",
+              "passed": true,
+              "seconds": 0.301
+            },
+            {
+              "check": "readonly_visual_review_mvp",
+              "passed": true,
+              "seconds": 0.301
+            },
+            {
+              "check": "provider_evidence_integrity_contract",
+              "passed": true,
+              "seconds": 0.225
+            },
+            {
+              "check": "runtime_review_bridge_v1_readonly",
+              "passed": true,
+              "seconds": 0.222
+            },
+            {
+              "check": "runtime_to_review_v1_fixture_smoke_flow",
+              "passed": true,
+              "seconds": 0.221
+            },
+            {
+              "check": "retry_006_artifact_integrity",
+              "passed": true,
+              "seconds": 0.2
+            },
+            {
+              "check": "create_preview_capsule_plan_only",
+              "passed": true,
+              "seconds": 0.177
+            },
+            {
+              "check": "runtime_kernel_v1_real_provider_guarded",
+              "passed": true,
+              "seconds": 0.171
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "validate_active",
+      "command": "npm run validate:active",
+      "iteration": 1,
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "error_code": null,
+      "error_message": null,
+      "seconds": 9.792,
+      "stdout_bytes": 291021,
+      "stderr_bytes": 0,
+      "parsed_summary": null
+    },
+    {
+      "id": "agent_board_state",
+      "command": "node scripts/validate_agent_board_state.js",
+      "iteration": 1,
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "error_code": null,
+      "error_message": null,
+      "seconds": 0.232,
+      "stdout_bytes": 1582,
+      "stderr_bytes": 0,
+      "parsed_summary": {
+        "passed": true,
+        "agent_board_state": {
+          "required_files_present": true,
+          "current_branch": "master",
+          "ahead_behind": "0\t0",
+          "phase_freshness_verified": true
+        }
+      }
+    }
+  ],
+  "provider_contact_performed": false,
+  "plugin_call_performed": false,
+  "api_call_performed": false,
+  "image_generation_performed": false,
+  "secret_value_read_performed": false,
+  "file_write_performed": true
+}

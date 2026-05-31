@@ -1,3 +1,41 @@
+## Current Run State - Validation Recommendation Decision Summary 2026-06-01
+
+```text
+phase: validation_recommendation_decision_summary_20260601
+status: completed_validated_local_dirty
+mode: Green local validation tooling/status sync
+goal: Make validation selection explainable and reusable through validation_manifest, recommend_validation_for_changed_files, benchmark baseline, and validate:active/targeted entrypoints.
+branch: master
+worktree_state: dirty local validation recommendation contract patch
+remote_sync: master aligned with origin/master before local dirty patch
+manifest_validator_count: 37
+manifest_active_count: 25
+manifest_targeted_count: 21
+manifest_mvp_count: 2
+manifest_archive_count: 13
+decision_contract_added: validation_decision_summary v1
+recommender_contract_fields: recommendation_contract_version; recommended_validation_profile; validation_plan; efficiency_summary; validation_decision_summary; manifest_coverage.
+change_selection_contract_documented: git_diff_worktree includes tracked diff plus untracked non-ignored files; git_diff_cached stages only; git_diff_base base ref plus untracked; argv explicit files.
+compatibility_aliases_retained: active_recommended; mvp_recommended; validate_active_command; validate_mvp_command.
+untracked_omission_guard: recommendation profile validator asserts git_diff_worktree includes untracked files and git_diff_cached excludes them using behavior-level Git comparisons plus the current object-shaped change_selection return.
+benchmark_report: reports/validation_benchmarks/validation_efficiency_baseline_2026-05-31T15-58-49-513Z.json
+benchmark_report_passed: true
+benchmark_total_seconds: 15.803
+benchmark_validate_active_seconds: 11.039
+benchmark_validate_mvp_seconds: 2.869
+benchmark_profile_baselines_with_decision_summary: daily; observability; mvp; targeted
+latest_default_recommender: source=git_diff_worktree; file_count=10; tracked_diff_file_count=9; untracked_file_count=1; primary_profile=observability; all_files_matched=true.
+manifest_tier_discoverability: targeted dry-run selected 21 validators; archive dry-run selected 13 validators.
+completion_audit: local objective requirements verified; not goal-complete until exact-file commit persists this dirty work.
+latest_validation: validate:active passed directly; validate:targeted-plan passed; validate:archive-plan passed; recommendation profile contract passed including object-shaped change-selection docs, behavior-level default worktree Git comparison, and untracked omission guard; benchmark no-write passed; agent_board_state passed; git diff --check passed with CRLF normalization warnings only.
+boundary_checks: provider_contact_performed=false; plugin_call_performed=false; api_call_performed=false; image_generation_performed=false; secret_value_read_performed=false; DailyNote_write_performed=false; VCP_memory_write_performed=false; push_tag_release_deploy_performed=false.
+push_allowed: false
+push_status: not_performed
+next_safe_task: exact-file local commit if authorized; then separate push safety if explicitly authorized.
+```
+
+---
+
 ## Current Run State - Validation Efficiency Manifest And Recommender 2026-05-31
 
 ```text
