@@ -1,3 +1,22 @@
+- [x] ID: runtime_to_review_v1_guarded_live_probe_real_bound_preflight
+      Lane: Amber_B provider/image preflight packet prepared as inactive local record.
+      Status: completed_validated_local.
+      Goal: Prepare the next guarded live probe with a real bound owner runtime packet while keeping live provider execution, image generation, secret value reads, memory writes, production writes, commit, and push blocked.
+      Current branch: master.
+      Packet: reports/runtime_to_review_v1/guarded_live_probe_real_bound_owner_runtime_20260531_preflight_packet.json.
+      Phase record: docs/RUNTIME_TO_REVIEW_V1_GUARDED_LIVE_PROBE_REAL_BOUND_PREFLIGHT.md.
+      Validator: scripts/validate_runtime_to_review_v1_guarded_live_probe_real_bound_preflight_packet.js.
+      Previous failed-closed receipt: reports/runtime_to_review_v1/guarded_live_probe_real_bound_owner_runtime_20260529_failed_closed.json.
+      Exact confirmation phrase: RUNTIME_TO_REVIEW_V1_ONE_PROVIDER_ONE_IMAGE.
+      Future live command recorded: true.
+      Future live command executed: false.
+      Budget: max_provider_calls=1; max_plugin_calls=1; max_api_calls=1; max_images=1; max_live_probe_attempts=1; retry_allowed=false.
+      Boundary fields: provider_contact_performed=false; plugin_call_performed=false; api_call_performed=false; image_generation_performed=false; secret_value_read_performed=false; env_file_content_read_performed=false; DailyNote_write_performed=false; VCP_memory_write_performed=false; accepted_samples_write_performed=false; production_candidate_write_performed=false; push_tag_release_deploy_performed=false.
+      Validation: `node --check scripts\validate_runtime_to_review_v1_guarded_live_probe_real_bound_preflight_packet.js` passed; `node scripts\validate_runtime_to_review_v1_guarded_live_probe_real_bound_preflight_packet.js` passed; `npm run validate:runtime-to-review-guarded-live-probe-gate` passed; `npm run validate:runtime-to-review-next-live-readiness` passed.
+      Recommended next: run local closeout validation, then wait for separate authorization before commit, push, or live guarded probe activation.
+
+---
+
 - [x] ID: conservative_branch_cleanup_closeout
       Lane: Green local post-remote-cleanup status sync.
       Status: completed_validated_local.

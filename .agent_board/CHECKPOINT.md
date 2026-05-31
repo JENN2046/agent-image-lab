@@ -1,3 +1,50 @@
+## Checkpoint - Runtime-to-Review V1 Real-Bound Guarded Live Probe Preflight
+
+```text
+phase: runtime_to_review_v1_guarded_live_probe_real_bound_preflight
+status: completed_validated_local
+result: INACTIVE_REAL_BOUND_PREFLIGHT_PACKET_PREPARED
+mode: Amber_B provider/image preflight-only local packet
+summary: Prepared an inactive exact preflight packet for the next runtime-to-review guarded live probe using the real bound owner runtime. The packet records the future one-provider/one-image command and proves the preflight-only path does not execute a live provider call.
+branch: master
+changed_files_current_task:
+  - docs/RUNTIME_TO_REVIEW_V1_GUARDED_LIVE_PROBE_REAL_BOUND_PREFLIGHT.md
+  - reports/runtime_to_review_v1/guarded_live_probe_real_bound_owner_runtime_20260531_preflight_packet.json
+  - scripts/validate_runtime_to_review_v1_guarded_live_probe_real_bound_preflight_packet.js
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+preflight_packet:
+  packet_ref: reports/runtime_to_review_v1/guarded_live_probe_real_bound_owner_runtime_20260531_preflight_packet.json
+  previous_failed_closed_receipt_ref: reports/runtime_to_review_v1/guarded_live_probe_real_bound_owner_runtime_20260529_failed_closed.json
+  exact_confirmation_phrase: RUNTIME_TO_REVIEW_V1_ONE_PROVIDER_ONE_IMAGE
+  can_execute_now: false
+  execution_authorized_by_this_packet: false
+  future_live_command_recorded: true
+  future_live_command_executed: false
+validation_run:
+  - node --check scripts\validate_runtime_to_review_v1_guarded_live_probe_real_bound_preflight_packet.js: passed
+  - node scripts\validate_runtime_to_review_v1_guarded_live_probe_real_bound_preflight_packet.js: passed
+  - npm run validate:runtime-to-review-guarded-live-probe-gate: passed
+  - npm run validate:runtime-to-review-next-live-readiness: passed
+boundary_checks:
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  secret_value_read_performed: false
+  env_file_content_read_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  accepted_samples_write_performed: false
+  production_candidate_write_performed: false
+  push_tag_release_deploy_performed: false
+recommended_next: complete local closeout validation, then stop before commit, push, or future live provider activation unless separately authorized.
+```
+
+---
+
 ## Checkpoint - Conservative Branch Cleanup Closeout
 
 ```text
