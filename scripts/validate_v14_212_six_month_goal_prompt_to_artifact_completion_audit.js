@@ -24,7 +24,7 @@ const files = {
   validationLog: ".agent_board/VALIDATION_LOG.md",
 };
 
-const expectedCurrentRecoverableAcceptedSampleCount = 5;
+const expectedCurrentRecoverableAcceptedSampleCount = 6;
 
 const expectedCriteria = [
   "three_full_recoverable_accepted_samples",
@@ -206,7 +206,7 @@ const currentSurfaces = [
 const baseEval = evaluate(fixture, evidence);
 addResult("prompt_to_artifact_audit_evaluation_passes", baseEval.passed, JSON.stringify(baseEval));
 addResult(
-  "registry_recoverable_count_is_five",
+  "registry_recoverable_count_is_six",
   evidence.registryRecoverableCount === expectedCurrentRecoverableAcceptedSampleCount
 );
 addResult("dashboard_three_sample_goal_met_local_only", evidence.dashboardHardAcceptanceMet === true && evidence.dashboardGap === 0);
@@ -248,7 +248,7 @@ addResult("negative_case_external_action_flag_fails", externalActionEval.passed 
 for (const token of [
   "phase: v14_212_six_month_goal_prompt_to_artifact_completion_audit",
   "goal_complete: false",
-  "full_recoverable_accepted_sample_count: 5",
+  "full_recoverable_accepted_sample_count: 6",
   "remaining_full_recoverable_sample_gap: 0",
   "human_approval_status: approved",
   "current_status: not_started_blocked_by_a5",

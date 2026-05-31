@@ -60,19 +60,19 @@
         "case_id": "run_state_missing_current_phase_fails",
         "result": "caught",
         "expected_failure": true,
-        "failure_message": ".agent_board/RUN_STATE.md latest section must cite active current phase or latest Green prompt gate"
+        "failure_message": ".agent_board/RUN_STATE.md latest section must cite active current phase, latest Green prompt gate, accepted sample promotion gate, or local maintenance gate"
       },
       {
         "case_id": "run_state_latest_section_missing_current_phase_even_when_history_has_it_fails",
         "result": "caught",
         "expected_failure": true,
-        "failure_message": ".agent_board/RUN_STATE.md latest section must cite active current phase or latest Green prompt gate"
+        "failure_message": ".agent_board/RUN_STATE.md latest section must cite active current phase, latest Green prompt gate, accepted sample promotion gate, or local maintenance gate"
       },
       {
         "case_id": "task_queue_missing_red_boundary_fails",
         "result": "caught",
         "expected_failure": true,
-        "failure_message": ".agent_board/TASK_QUEUE.md latest section must cite active next Red decision"
+        "failure_message": ".agent_board/TASK_QUEUE.md latest section must cite active current phase, latest Green prompt gate, accepted sample promotion gate, or local maintenance gate"
       },
       {
         "case_id": "task_queue_v0_3_3_missing_bound_authorization_fails",
@@ -84,19 +84,19 @@
         "case_id": "checkpoint_missing_active_source_phase_fails",
         "result": "caught",
         "expected_failure": true,
-        "failure_message": ".agent_board/CHECKPOINT.md latest section must cite active source phase"
+        "failure_message": ".agent_board/CHECKPOINT.md latest section must cite active current phase, latest Green prompt gate, accepted sample promotion gate, or local maintenance gate"
       },
       {
         "case_id": "handoff_missing_no_push_state_fails",
         "result": "caught",
         "expected_failure": true,
-        "failure_message": ".agent_board/HANDOFF.md latest section must preserve push boundary state"
+        "failure_message": ".agent_board/HANDOFF.md latest section must cite active current phase, latest Green prompt gate, accepted sample promotion gate, or local maintenance gate"
       },
       {
         "case_id": "roadmap_current_phase_drift_fails",
         "result": "caught",
         "expected_failure": true,
-        "failure_message": "docs/00_project_roadmap.md latest section must cite active current phase or latest Green prompt gate"
+        "failure_message": "docs/00_project_roadmap.md latest section must cite active current phase, latest Green prompt gate, accepted sample promotion gate, or local maintenance gate"
       }
     ],
     "negative_case_count": 7,

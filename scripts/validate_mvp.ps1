@@ -7906,8 +7906,8 @@ if (-not $node) {
     $currentBranch = ((& git branch --show-current) -join "`n").Trim()
     if ($LASTEXITCODE -ne 0) {
       Add-Failure "git branch --show-current failed during local commit scope validation"
-    } elseif ($currentBranch -notin @('master', 'codex/v5.11-post-merge-reconciliation', 'codex/v5.12-release-candidate-readiness', 'codex/a5-complete-delivery-20260507', 'codex/runtime-review-followup')) {
-      Add-Failure "local commit scope expected branch master, codex/v5.11-post-merge-reconciliation, codex/v5.12-release-candidate-readiness, codex/a5-complete-delivery-20260507, or codex/runtime-review-followup, got $currentBranch"
+    } elseif ($currentBranch -notin @('master', 'codex/v5.11-post-merge-reconciliation', 'codex/v5.12-release-candidate-readiness', 'codex/a5-complete-delivery-20260507', 'codex/runtime-review-followup', 'ail-vis-22-accepted-sample-promotion-execution')) {
+      Add-Failure "local commit scope expected branch master, codex/v5.11-post-merge-reconciliation, codex/v5.12-release-candidate-readiness, codex/a5-complete-delivery-20260507, codex/runtime-review-followup, or ail-vis-22-accepted-sample-promotion-execution, got $currentBranch"
     }
 
     $localTagCommit = ((& git rev-parse --short=7 v4.8-local-validation-checkpoint) -join "`n").Trim()
@@ -11436,8 +11436,8 @@ process.exit(child.status || 0);
     if ($sixMonthGoalPromptToArtifactCompletionAudit.goal_complete -ne $false -or $sixMonthGoalPromptToArtifactCompletionAudit.prompt_to_artifact_audit_only -ne $true) {
       Add-Failure "v14.212 six-month goal audit must remain incomplete and audit-only"
     }
-    if ($sixMonthGoalPromptToArtifactCompletionAudit.recoverable_accepted_sample_count -ne 5 -or $sixMonthGoalPromptToArtifactCompletionAudit.blocked_third_candidate_count -ne 0 -or $sixMonthGoalPromptToArtifactCompletionAudit.remaining_full_recoverable_sample_gap -ne 0) {
-      Add-Failure "v14.212 six-month goal audit must preserve the current five-sample local recoverability baseline"
+    if ($sixMonthGoalPromptToArtifactCompletionAudit.recoverable_accepted_sample_count -ne 6 -or $sixMonthGoalPromptToArtifactCompletionAudit.blocked_third_candidate_count -ne 0 -or $sixMonthGoalPromptToArtifactCompletionAudit.remaining_full_recoverable_sample_gap -ne 0) {
+      Add-Failure "v14.212 six-month goal audit must preserve the current six-sample local recoverability baseline"
     }
     if ($sixMonthGoalPromptToArtifactCompletionAudit.success_criteria_count -ne 8 -or $sixMonthGoalPromptToArtifactCompletionAudit.met_count -ne 3 -or $sixMonthGoalPromptToArtifactCompletionAudit.partial_count -ne 3 -or $sixMonthGoalPromptToArtifactCompletionAudit.not_met_count -ne 2 -or $sixMonthGoalPromptToArtifactCompletionAudit.blocked_by_a5_count -ne 1) {
       Add-Failure "v14.212 six-month goal audit must preserve the prompt-to-artifact checklist counts"

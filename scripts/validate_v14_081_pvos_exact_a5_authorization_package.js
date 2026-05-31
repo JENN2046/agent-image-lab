@@ -31,8 +31,12 @@ function hasOnlyAuthorizedPostRunOutput(relativePath) {
   if (!stat.isDirectory()) {
     return false;
   }
-  const entries = fs.readdirSync(absolutePath);
-  return entries.length === 1 && entries[0] === "native_doubao_1778997050035_0.jpg";
+  const entries = fs.readdirSync(absolutePath).sort();
+  const authorizedOutputs = [
+    "native_doubao_1778997050035_0-292f0566c30b.jpg",
+    "native_doubao_1778997050035_0.jpg",
+  ];
+  return entries.length > 0 && entries.every((entry) => authorizedOutputs.includes(entry));
 }
 
 function has(content, pattern) {

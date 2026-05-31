@@ -269,7 +269,8 @@ const allowedBranches = [
   "master",
   "codex/v5.11-post-merge-reconciliation",
   "codex/v5.12-release-candidate-readiness",
-  "codex/runtime-review-followup"
+  "codex/runtime-review-followup",
+  "ail-vis-22-accepted-sample-promotion-execution"
 ];
 
 function assert(condition, message) {

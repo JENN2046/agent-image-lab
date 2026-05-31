@@ -26,6 +26,35 @@ This execution gate follows the accepted-sample promotion authorization:
   - accepted sample promotion allowed now: `false`
   - owner authorization required: `true`
 
+## Post-Authorization Apply Status
+
+After this gate was drafted, Jenn supplied explicit AIL-VIS-22 accepted sample
+promotion authorization. The follow-up apply step is recorded in `.agent_board`
+as `ail_vis_22_accepted_sample_promotion_apply` and in the accepted-sample
+metadata surfaces.
+
+```yaml
+post_authorization_apply:
+  status: completed_validated_local
+  sample_id: accepted_premium_black_wireless_headphones_hero_ail_vis_17_001
+  accepted_samples_target: accepted_samples/ail_vis_17_premium_black_wireless_headphones_hero/
+  registry_ref: accepted_samples/accepted_sample_registry.yaml
+  category_index_ref: accepted_samples/categories/product_still_life.yaml
+  manifest_ref: accepted_samples/ail_vis_17_premium_black_wireless_headphones_hero/manifest.json
+  metadata_ref: accepted_samples/ail_vis_17_premium_black_wireless_headphones_hero/metadata.json
+  source_evidence_ref: accepted_samples/ail_vis_17_premium_black_wireless_headphones_hero/source_evidence.json
+  accepted_sample_created: true
+  accepted_sample_promoted: true
+  accepted_sample_metadata_created: true
+  image_copied_into_accepted_samples: false
+  memory_write_performed: false
+  production_candidate_002_started: false
+  batch_005_started: false
+```
+
+The historical boundary below remains the original pre-apply execution gate. It
+does not revoke or overwrite the later metadata-only apply record.
+
 ## Promotion Execution Boundary
 
 ```yaml

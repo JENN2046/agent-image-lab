@@ -19,11 +19,13 @@ const requiredSampleIds = [
   "accepted_fashion_lifestyle_woven_crossbody_bag_codex_v14_161_001",
   "accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001",
   "neutral_red_apple_seedream5_retry_006",
+  "accepted_premium_black_wireless_headphones_hero_ail_vis_17_001",
 ];
 const requiredCodexSample = "accepted_womens_resort_relaxed_knit_codex_v2_001";
 const requiredBagCodexSample = "accepted_fashion_lifestyle_woven_crossbody_bag_codex_v14_161_001";
 const requiredLampCodexSample = "accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001";
 const requiredRetry006ProductSample = "neutral_red_apple_seedream5_retry_006";
+const requiredHeadphonesProductSample = "accepted_premium_black_wireless_headphones_hero_ail_vis_17_001";
 const imageExtensions = /\.(png|jpe?g|webp|gif|psd|tiff?)$/i;
 
 let passed = true;
@@ -136,6 +138,13 @@ check("retry_006_product_sample_category", () => extractField(sampleBlocks.get(r
 check("retry_006_product_sample_image_not_committed", () => (sampleBlocks.get(requiredRetry006ProductSample) || "").includes("image_files_committed_to_git: false"));
 check("retry_006_product_sample_no_memory_write", () => (sampleBlocks.get(requiredRetry006ProductSample) || "").includes("write_to_memory_allowed: false"));
 check("retry_006_product_sample_no_daily_note_write", () => (sampleBlocks.get(requiredRetry006ProductSample) || "").includes("daily_note_write_allowed: false"));
+check("headphones_product_sample_present", () => sampleBlocks.has(requiredHeadphonesProductSample));
+check("headphones_product_sample_provider_type", () => extractField(sampleBlocks.get(requiredHeadphonesProductSample) || "", "provider_type") === "codex_session_image");
+check("headphones_product_sample_plugin_null", () => extractField(sampleBlocks.get(requiredHeadphonesProductSample) || "", "plugin_id") === "null");
+check("headphones_product_sample_category", () => extractField(sampleBlocks.get(requiredHeadphonesProductSample) || "", "category") === "product_still_life");
+check("headphones_product_sample_image_not_committed", () => (sampleBlocks.get(requiredHeadphonesProductSample) || "").includes("image_files_committed_to_git: false"));
+check("headphones_product_sample_no_memory_write", () => (sampleBlocks.get(requiredHeadphonesProductSample) || "").includes("write_to_memory_allowed: false"));
+check("headphones_product_sample_no_daily_note_write", () => (sampleBlocks.get(requiredHeadphonesProductSample) || "").includes("daily_note_write_allowed: false"));
 check("legacy_wallet_sample_present", () => sampleBlocks.has("accepted_product_still_life_tennis_wallet_001"));
 check("legacy_rattan_bag_samples_present", () => requiredSampleIds.slice(1, 5).every((id) => sampleBlocks.has(id)));
 check("watermark_false_history_preserved", () => registry.includes("watermark_requested: false"));
@@ -153,7 +162,7 @@ for (const index of categoryIndexes) {
   );
 }
 
-check("product_category_count_3", () => fileContains("accepted_samples/categories/product_still_life.yaml", "sample_count: 3"));
+check("product_category_count_4", () => fileContains("accepted_samples/categories/product_still_life.yaml", "sample_count: 4"));
 check("fashion_lifestyle_category_count_5", () => fileContains("accepted_samples/categories/fashion_lifestyle_still_life.yaml", "sample_count: 5"));
 check("fashion_lookbook_category_count_2", () => fileContains("accepted_samples/categories/fashion_lookbook_portrait.yaml", "sample_count: 2"));
 check("tracked_accepted_samples_are_metadata_only", () =>
@@ -166,7 +175,7 @@ check("validate_mvp_includes_accepted_samples_validator", () =>
 const summary = {
   passed,
   validator: "validate_accepted_sample_registry_metadata",
-  version: "v2",
+  version: "v3",
   phase: "accepted_samples metadata registry",
   check_count: results.length,
   failed_count: results.filter((result) => !result.passed).length,

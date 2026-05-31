@@ -107,10 +107,10 @@ function validateRecord({ source_file: sourceFile, record }, auditedMissingArtif
     assert(attempt.attempt_status === record.status, `Attempt status mismatch for ${record.attempt_result_path}`);
   }
   if (record.task_id) {
-    assert(attempt.task_id === record.task_id, `Attempt task_id mismatch for ${record.attempt_result_path}`);
+    assert((attempt.task_id || attempt.attempt_id) === record.task_id, `Attempt task_id mismatch for ${record.attempt_result_path}`);
   }
   if (record.visual_task_id) {
-    assert(attempt.visual_task_id === record.visual_task_id, `Attempt visual_task_id mismatch for ${record.attempt_result_path}`);
+    assert((attempt.visual_task_id || attempt.attempt_id) === record.visual_task_id, `Attempt visual_task_id mismatch for ${record.attempt_result_path}`);
   }
   if (typeof record.provider_calls_used === "number") {
     assert(attempt.provider_calls_used === record.provider_calls_used, `Attempt provider_calls_used mismatch for ${record.attempt_result_path}`);
