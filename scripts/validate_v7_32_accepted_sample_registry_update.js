@@ -142,7 +142,10 @@ check("headphones_product_sample_present", () => sampleBlocks.has(requiredHeadph
 check("headphones_product_sample_provider_type", () => extractField(sampleBlocks.get(requiredHeadphonesProductSample) || "", "provider_type") === "codex_session_image");
 check("headphones_product_sample_plugin_null", () => extractField(sampleBlocks.get(requiredHeadphonesProductSample) || "", "plugin_id") === "null");
 check("headphones_product_sample_category", () => extractField(sampleBlocks.get(requiredHeadphonesProductSample) || "", "category") === "product_still_life");
-check("headphones_product_sample_image_not_committed", () => (sampleBlocks.get(requiredHeadphonesProductSample) || "").includes("image_files_committed_to_git: false"));
+check("headphones_product_sample_image_committed", () => (sampleBlocks.get(requiredHeadphonesProductSample) || "").includes("image_files_committed_to_git: true"));
+check("headphones_product_sample_source_file_exists", () =>
+  fileExists("runs/real_generation/ail_vis_17_premium_black_wireless_headphones_hero/ail_vis_17_premium_black_wireless_headphones_hero_01.png")
+);
 check("headphones_product_sample_no_memory_write", () => (sampleBlocks.get(requiredHeadphonesProductSample) || "").includes("write_to_memory_allowed: false"));
 check("headphones_product_sample_no_daily_note_write", () => (sampleBlocks.get(requiredHeadphonesProductSample) || "").includes("daily_note_write_allowed: false"));
 check("legacy_wallet_sample_present", () => sampleBlocks.has("accepted_product_still_life_tennis_wallet_001"));
@@ -182,7 +185,8 @@ const summary = {
   registry_only: true,
   metadata_only: true,
   accepted_samples_metadata_write_allowed_by_current_goal: true,
-  image_files_committed_to_git: false,
+  image_files_committed_to_git: "mixed",
+  headphones_image_files_committed_to_git: true,
   runs_source_image_modification_allowed: false,
   production_candidate_write_allowed: false,
   daily_note_write_allowed: false,

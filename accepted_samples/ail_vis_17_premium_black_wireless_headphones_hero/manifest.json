@@ -19,7 +19,7 @@
       "height": 1254,
       "bytes": 1875509,
       "sha256": "8954A5404BC6A296B6D86091A9DAB46E048CEC1DECB55CCA07B5B12FBA3C203E",
-      "git_tracked": false,
+      "git_tracked": true,
       "copied_or_moved_by_this_apply": false,
       "required_for_local_validation": true
     },
