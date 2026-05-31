@@ -28,6 +28,7 @@
         "scripts/validation_manifest.json",
         "scripts/validate_validation_manifest.js",
         "scripts/validate_validation_recommendation_profiles.js",
+        "scripts/validate_closeout_status_summary.js",
         "scripts/recommend_validation_for_changed_files.js",
         "scripts/build_validation_closeout_summary.js",
         "scripts/run_validation_manifest_tier.js",
@@ -52,6 +53,7 @@
       "trigger_paths": [
         "scripts/recommend_validation_for_changed_files.js",
         "scripts/build_validation_closeout_summary.js",
+        "scripts/validate_closeout_status_summary.js",
         "scripts/validate_validation_recommendation_profiles.js",
         "scripts/validation_manifest.json",
         "docs/VALIDATION_SELECTION_MATRIX.md",
@@ -61,6 +63,22 @@
         "validation_recommender_patch",
         "validation_profile_contract_patch",
         "validation_selection_matrix_contract_patch"
+      ]
+    },
+    {
+      "id": "closeout_status_summary",
+      "command": "node scripts/validate_closeout_status_summary.js",
+      "script": "scripts/validate_closeout_status_summary.js",
+      "tier": "targeted",
+      "domain": "validation_tooling",
+      "status": "active",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "scripts/build_validation_closeout_summary.js",
+        "scripts/validate_closeout_status_summary.js"
+      ],
+      "required_for": [
+        "closeout_status_summary_contract_patch"
       ]
     },
     {

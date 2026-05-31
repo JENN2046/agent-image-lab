@@ -14,6 +14,7 @@
     "validate:smoke": "node scripts/validate_smoke.js",
     "validate:validation-manifest": "node scripts/validate_validation_manifest.js",
     "validate:recommendation-profiles": "node scripts/validate_validation_recommendation_profiles.js",
+    "validate:closeout-status-summary": "node scripts/validate_closeout_status_summary.js",
     "recommend:validation": "node scripts/recommend_validation_for_changed_files.js",
     "recommend:validation:next-commands": "node scripts/recommend_validation_for_changed_files.js --next-commands",
     "closeout:validation-summary": "node scripts/build_validation_closeout_summary.js",

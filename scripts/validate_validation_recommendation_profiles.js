@@ -306,6 +306,11 @@ function validateWiring() {
     scripts["closeout:validation-summary"]
   );
   add(
+    "package_json_closeout_status_summary_validator_script",
+    scripts["validate:closeout-status-summary"] === "node scripts/validate_closeout_status_summary.js",
+    scripts["validate:closeout-status-summary"]
+  );
+  add(
     "validate_active_includes_manifest_validator",
     validateActive.includes("npm run validate:validation-manifest")
   );
