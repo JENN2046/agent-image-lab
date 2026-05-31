@@ -1,8 +1,10 @@
 const childProcess = require("node:child_process");
 const fs = require("node:fs");
 const path = require("node:path");
+const { createRecoverabilityCore } = require("./lib/artifact_recoverability_core");
 
 const root = path.resolve(__dirname, "..");
+const recoverability = createRecoverabilityCore(root);
 const registryPath = "accepted_samples/accepted_sample_registry.yaml";
 const allowedCategoryFiles = [
   "accepted_samples/categories/product_still_life.yaml",
@@ -19,11 +21,13 @@ const requiredSampleIds = [
   "accepted_fashion_lifestyle_woven_crossbody_bag_codex_v14_161_001",
   "accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001",
   "neutral_red_apple_seedream5_retry_006",
+  "accepted_premium_black_wireless_headphones_hero_ail_vis_17_001",
 ];
 const requiredCodexSample = "accepted_womens_resort_relaxed_knit_codex_v2_001";
 const requiredBagCodexSample = "accepted_fashion_lifestyle_woven_crossbody_bag_codex_v14_161_001";
 const requiredLampCodexSample = "accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001";
 const requiredRetry006ProductSample = "neutral_red_apple_seedream5_retry_006";
+const requiredHeadphonesProductSample = "accepted_premium_black_wireless_headphones_hero_ail_vis_17_001";
 const imageExtensions = /\.(png|jpe?g|webp|gif|psd|tiff?)$/i;
 
 let passed = true;
@@ -55,6 +59,10 @@ function fileExists(relativePath) {
 
 function readText(relativePath) {
   return fs.readFileSync(repoPath(relativePath), "utf8");
+}
+
+function readJson(relativePath) {
+  return JSON.parse(readText(relativePath));
 }
 
 function fileContains(relativePath, token) {
@@ -94,8 +102,29 @@ function listTrackedAcceptedSamplesFiles() {
   return result.stdout.split(/\r?\n/).filter(Boolean);
 }
 
+function readImageEvidence(relativePath) {
+  if (!relativePath || !fileExists(relativePath)) return null;
+  const metadata = recoverability.readImageMetadata(relativePath);
+  return {
+    sha256: recoverability.sha256File(relativePath),
+    dimensions: metadata.width && metadata.height ? `${metadata.width}x${metadata.height}` : null,
+    mime: metadata.mimeType,
+    signatureValid: metadata.signatureValid,
+    bytes: fs.statSync(repoPath(relativePath)).size,
+  };
+}
+
 const registry = readText(registryPath);
 const sampleBlocks = extractSampleBlocks(registry);
+const headphonesBlock = sampleBlocks.get(requiredHeadphonesProductSample) || "";
+const headphonesImagePath = extractField(headphonesBlock, "image_path");
+const headphonesRegistrySha256 = extractField(headphonesBlock, "verified_sha256");
+const headphonesRegistryDimensions = extractField(headphonesBlock, "verified_dimensions");
+const headphonesRegistryMime = extractField(headphonesBlock, "verified_mime");
+const headphonesImageEvidence = readImageEvidence(headphonesImagePath);
+const headphonesMetadata = readJson("accepted_samples/ail_vis_17_premium_black_wireless_headphones_hero/metadata.json");
+const headphonesManifest = readJson("accepted_samples/ail_vis_17_premium_black_wireless_headphones_hero/manifest.json");
+const headphonesSourceEvidence = readJson("accepted_samples/ail_vis_17_premium_black_wireless_headphones_hero/source_evidence.json");
 
 check("accepted_samples_readme", () => fileExists("accepted_samples/README.md"));
 check("registry_exists", () => fileExists(registryPath));
@@ -136,6 +165,43 @@ check("retry_006_product_sample_category", () => extractField(sampleBlocks.get(r
 check("retry_006_product_sample_image_not_committed", () => (sampleBlocks.get(requiredRetry006ProductSample) || "").includes("image_files_committed_to_git: false"));
 check("retry_006_product_sample_no_memory_write", () => (sampleBlocks.get(requiredRetry006ProductSample) || "").includes("write_to_memory_allowed: false"));
 check("retry_006_product_sample_no_daily_note_write", () => (sampleBlocks.get(requiredRetry006ProductSample) || "").includes("daily_note_write_allowed: false"));
+check("headphones_product_sample_present", () => sampleBlocks.has(requiredHeadphonesProductSample));
+check("headphones_product_sample_provider_type", () => extractField(sampleBlocks.get(requiredHeadphonesProductSample) || "", "provider_type") === "codex_session_image");
+check("headphones_product_sample_plugin_null", () => extractField(sampleBlocks.get(requiredHeadphonesProductSample) || "", "plugin_id") === "null");
+check("headphones_product_sample_category", () => extractField(sampleBlocks.get(requiredHeadphonesProductSample) || "", "category") === "product_still_life");
+check("headphones_product_sample_image_committed", () => (sampleBlocks.get(requiredHeadphonesProductSample) || "").includes("image_files_committed_to_git: true"));
+check("headphones_product_sample_source_file_exists", () => Boolean(headphonesImagePath) && fileExists(headphonesImagePath));
+check("headphones_product_sample_source_sha256_matches_registry", () =>
+  headphonesImageEvidence?.sha256 === headphonesRegistrySha256
+);
+check("headphones_product_sample_source_dimensions_match_registry", () =>
+  headphonesImageEvidence?.dimensions === headphonesRegistryDimensions
+);
+check("headphones_product_sample_source_mime_matches_registry", () =>
+  headphonesImageEvidence?.signatureValid === true && headphonesImageEvidence?.mime === headphonesRegistryMime
+);
+check("headphones_product_sample_metadata_matches_registry", () =>
+  headphonesMetadata.artifact.source_image_ref === headphonesImagePath &&
+  headphonesMetadata.artifact.source_image_sha256 === headphonesRegistrySha256 &&
+  headphonesMetadata.artifact.source_image_dimensions === headphonesRegistryDimensions &&
+  headphonesMetadata.artifact.source_image_mime === headphonesRegistryMime
+);
+check("headphones_product_sample_manifest_matches_registry", () =>
+  headphonesManifest.artifact.original.path === headphonesImagePath &&
+  headphonesManifest.artifact.original.sha256 === headphonesRegistrySha256 &&
+  `${headphonesManifest.artifact.original.width}x${headphonesManifest.artifact.original.height}` === headphonesRegistryDimensions &&
+  headphonesManifest.artifact.original.format === "png" &&
+  headphonesManifest.artifact.original.bytes === headphonesImageEvidence?.bytes
+);
+check("headphones_product_sample_source_evidence_matches_file", () =>
+  headphonesSourceEvidence.verified_source_image.path === headphonesImagePath &&
+  headphonesSourceEvidence.verified_source_image.sha256 === headphonesImageEvidence?.sha256 &&
+  `${headphonesSourceEvidence.verified_source_image.width}x${headphonesSourceEvidence.verified_source_image.height}` === headphonesImageEvidence?.dimensions &&
+  headphonesSourceEvidence.verified_source_image.mime === headphonesImageEvidence?.mime &&
+  headphonesSourceEvidence.verified_source_image.bytes === headphonesImageEvidence?.bytes
+);
+check("headphones_product_sample_no_memory_write", () => (sampleBlocks.get(requiredHeadphonesProductSample) || "").includes("write_to_memory_allowed: false"));
+check("headphones_product_sample_no_daily_note_write", () => (sampleBlocks.get(requiredHeadphonesProductSample) || "").includes("daily_note_write_allowed: false"));
 check("legacy_wallet_sample_present", () => sampleBlocks.has("accepted_product_still_life_tennis_wallet_001"));
 check("legacy_rattan_bag_samples_present", () => requiredSampleIds.slice(1, 5).every((id) => sampleBlocks.has(id)));
 check("watermark_false_history_preserved", () => registry.includes("watermark_requested: false"));
@@ -153,7 +219,7 @@ for (const index of categoryIndexes) {
   );
 }
 
-check("product_category_count_3", () => fileContains("accepted_samples/categories/product_still_life.yaml", "sample_count: 3"));
+check("product_category_count_4", () => fileContains("accepted_samples/categories/product_still_life.yaml", "sample_count: 4"));
 check("fashion_lifestyle_category_count_5", () => fileContains("accepted_samples/categories/fashion_lifestyle_still_life.yaml", "sample_count: 5"));
 check("fashion_lookbook_category_count_2", () => fileContains("accepted_samples/categories/fashion_lookbook_portrait.yaml", "sample_count: 2"));
 check("tracked_accepted_samples_are_metadata_only", () =>
@@ -166,14 +232,18 @@ check("validate_mvp_includes_accepted_samples_validator", () =>
 const summary = {
   passed,
   validator: "validate_accepted_sample_registry_metadata",
-  version: "v2",
+  version: "v3",
   phase: "accepted_samples metadata registry",
   check_count: results.length,
   failed_count: results.filter((result) => !result.passed).length,
   registry_only: true,
   metadata_only: true,
   accepted_samples_metadata_write_allowed_by_current_goal: true,
-  image_files_committed_to_git: false,
+  image_files_committed_to_git: true,
+  image_files_committed_to_git_summary: "mixed",
+  any_image_files_committed_to_git: true,
+  all_image_files_committed_to_git: false,
+  headphones_image_files_committed_to_git: true,
   runs_source_image_modification_allowed: false,
   production_candidate_write_allowed: false,
   daily_note_write_allowed: false,

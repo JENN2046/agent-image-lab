@@ -1,0 +1,57 @@
+{
+  "record_type": "metadata_only_accepted_sample_capsule_metadata",
+  "version": "v1",
+  "sample_id": "accepted_premium_black_wireless_headphones_hero_ail_vis_17_001",
+  "created_at": "2026-05-30T22:15:00+08:00",
+  "status": "accepted_candidate",
+  "source_phase": "AIL-VIS-17_execution_reconciliation_and_review_gate",
+  "provider": {
+    "provider_type": "codex_session_image",
+    "plugin_id": null,
+    "model": "image_gen.imagegen_default_route",
+    "resolution_request": "default_square",
+    "non_target_model_observed": false
+  },
+  "artifact": {
+    "source_image_ref": "runs/real_generation/ail_vis_17_premium_black_wireless_headphones_hero/ail_vis_17_premium_black_wireless_headphones_hero_01.png",
+    "source_image_sha256": "8954a5404bc6a296b6d86091a9dab46e048cec1decb55cca07b5b12fba3c203e",
+    "source_image_dimensions": "1254x1254",
+    "source_image_mime": "image/png",
+    "source_image_extension": ".png",
+    "source_image_copied_or_moved": false,
+    "image_files_committed_to_git": true
+  },
+  "review": {
+    "decision": "pass_with_warnings",
+    "accepted_sample": true,
+    "production_candidate": false,
+    "commercial_delivery_ready": false,
+    "overall_score": 0.86,
+    "summary": "Premium black wireless headphones hero image accepted as a sample candidate after human review. Target match passed with unresolved design, manufacturing plausibility, and dark-readability watchpoints."
+  },
+  "acceptance_summary": {
+    "target_match": "pass",
+    "premium_black_wireless_headphones_identity": "pass",
+    "square_hero_composition": "pass",
+    "product_dominance": "pass",
+    "low_key_premium_lighting": "pass",
+    "material_readability": "pass",
+    "no_text_logo_watermark": "pass",
+    "no_people_hands_or_faces": "pass",
+    "commercial_usability": "pass_with_warnings",
+    "memory_suitability": false
+  },
+  "known_minor_issues": [
+    "product_identity_needs_stronger_design_signature",
+    "manufacturing_plausibility_watchpoint",
+    "commercial_readability_darkness_watchpoint",
+    "production_candidate_promotion_requires_separate_authorization",
+    "memory_write_deferred_until_separate_memory_authorization"
+  ],
+  "refs": {
+    "review_doc_ref": "docs/AIL_VIS_18_HUMAN_VISUAL_REVIEW_CLOSEOUT.md",
+    "candidate_review_ref": "docs/AIL_VIS_20_ACCEPTED_SAMPLE_CANDIDATE_REVIEW_GATE.md",
+    "promotion_authorization_ref": "docs/AIL_VIS_21_ACCEPTED_SAMPLE_PROMOTION_AUTHORIZATION_GATE.md",
+    "promotion_execution_gate_ref": "docs/AIL_VIS_22_ACCEPTED_SAMPLE_PROMOTION_EXECUTION_GATE.md"
+  }
+}

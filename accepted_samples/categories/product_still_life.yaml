@@ -1,9 +1,10 @@
 category: product_still_life
-sample_count: 3
+sample_count: 4
 samples:
   - accepted_product_still_life_tennis_wallet_001
   - accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001
   - neutral_red_apple_seedream5_retry_006
+  - accepted_premium_black_wireless_headphones_hero_ail_vis_17_001
 recoverability_metadata:
   accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001:
     recoverability_status: workspace_local_verified
@@ -28,4 +29,17 @@ recoverability_metadata:
     capsule_manifest_ref: accepted_samples/neutral_red_apple_seedream5_retry_006/manifest.json
     source_evidence_ref: accepted_samples/neutral_red_apple_seedream5_retry_006/source_evidence.json
     portable_after_clone: false
+    artifact_recoverability_is_not_vcp_runtime_integration: true
+  accepted_premium_black_wireless_headphones_hero_ail_vis_17_001:
+    recoverability_status: git_tracked_verified
+    artifact_locator_scope: project_relative_git_tracked_runs
+    verification_mode: local_file_hash
+    verified_sha256: 8954a5404bc6a296b6d86091a9dab46e048cec1decb55cca07b5b12fba3c203e
+    verified_dimensions: 1254x1254
+    verified_mime: image/png
+    verification_record_ref: docs/AIL_VIS_18_HUMAN_VISUAL_REVIEW_CLOSEOUT.md
+    import_record_ref: accepted_samples/ail_vis_17_premium_black_wireless_headphones_hero/metadata.json
+    capsule_manifest_ref: accepted_samples/ail_vis_17_premium_black_wireless_headphones_hero/manifest.json
+    source_evidence_ref: accepted_samples/ail_vis_17_premium_black_wireless_headphones_hero/source_evidence.json
+    portable_after_clone: true
     artifact_recoverability_is_not_vcp_runtime_integration: true

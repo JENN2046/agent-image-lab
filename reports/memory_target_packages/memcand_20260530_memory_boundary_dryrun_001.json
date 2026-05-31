@@ -1,0 +1,12 @@
+{
+  "candidate_id": "memcand_20260530_memory_boundary_dryrun_001",
+  "proposed_target": "A:\\codex-memory\\data\\dailynote\\Codex\\",
+  "target_is_canonical_memory_store": true,
+  "actual_write_performed": false,
+  "write_requires_independent_A5": true,
+  "rollback_required": true,
+  "memory_candidate_type": "target_package",
+  "exact_writer_target_status": "unresolved",
+  "human_review_required": true,
+  "approval_status": "pending"
+}

@@ -1,4 +1,367 @@
+- [x] ID: ail_vis_22_post_push_status_sync
+      Lane: Green local post-push closeout record.
+      Status: completed_validated_local.
+      Goal: Record the successful push of the AIL-VIS-22 accepted sample metadata promotion branch and leave a clean resume baseline.
+      Source phase: AIL-VIS-22_accepted_sample_promotion_execution_gate.
+      Completed: verified `origin/ail-vis-22-accepted-sample-promotion-execution` and local HEAD both point to `f47deef6ff784b8d150d7254e8168a06e93981c2`; ahead/behind is `0/0`; worktree is clean; post-push `npm run validate:mvp` and `node scripts\validate_smart_v3_push_safety_lane.js` passed.
+      Push boundary: user_authorized_push_performed: true; push_allowed: false.
+      Boundary fields: force_push_performed: false; tag_release_deploy_performed: false; destructive_action_performed: false; secret_value_read_performed: false; provider_contact_performed: false; plugin_call_performed: false; api_call_performed: false; image_generation_performed: false; DailyNote_write_performed: false; VCP_memory_write_performed: false; production_candidate_002_started: false; batch_005_started: false.
+      Recommended next: return to runtime-to-production roadmap guarded live probe preflight or open a review/PR step if requested.
+
 ---
+
+- [x] ID: ail_vis_22_accepted_sample_promotion_apply
+      Lane: Amber owner-authorized accepted sample metadata registration.
+      Status: completed_validated_local.
+      Goal: Apply Jenn's explicit accepted sample promotion authorization for the premium black wireless headphones hero image without writing memory, starting production_candidate_002, or starting Batch 005.
+      Completed: registered accepted sample metadata for `accepted_premium_black_wireless_headphones_hero_ail_vis_17_001`; updated `accepted_samples/accepted_sample_registry.yaml`; updated `accepted_samples/categories/product_still_life.yaml`; added metadata capsule files under `accepted_samples/ail_vis_17_premium_black_wireless_headphones_hero/`; updated `.agent_board` surfaces.
+      Boundary fields: image_generated: false; image_edited: false; accepted_sample_created: true; accepted_sample_promoted: true; accepted_sample_file_created: false; image_copied_into_accepted_samples: false; accepted_sample_metadata_created: true; memory_candidate_created: false; actual_memory_write_performed: false; production_candidate_002_started: false; batch_005_started: false.
+      Recommended next: wait for explicit instruction before memory review, production candidate planning, or Batch work.
+
+---
+
+- [x] ID: ail_vis_22_accepted_sample_promotion_execution_gate
+      Lane: Green local docs-only promotion execution gate.
+      Status: completed_validated_pushed.
+      Goal: Draft the promotion execution boundary for the headphones accepted-sample candidate without copying files, creating accepted sample records, promoting the image, creating memory candidates, or writing memory.
+      Completed: added `docs/AIL_VIS_22_ACCEPTED_SAMPLE_PROMOTION_EXECUTION_GATE.md`; updated `.agent_board` run state, handoff, checkpoint, and task queue surfaces to record the promotion execution boundary and keep accepted-sample promotion blocked until explicit owner authorization.
+      Promotion boundary: source_image_path=A:\agent-image-lab\agent-image-lab-v0.2\runs\real_generation\ail_vis_17_premium_black_wireless_headphones_hero\ail_vis_17_premium_black_wireless_headphones_hero_01.png; candidate_status=accepted_sample_candidate; accepted_sample_promotion_allowed_now=false; owner_authorization_required=true; memory_write_allowed_now=false; production_candidate_002_allowed_now=false.
+      Boundary fields: image_generated: false; image_edited: false; accepted_sample_created: false; accepted_sample_promoted: false; accepted_sample_file_created: false; image_copied_into_accepted_samples: false; accepted_sample_metadata_created: false; memory_candidate_created: false; actual_memory_write_performed: false; production_candidate_002_started: false; batch_005_started: false; git_add_dot_used: false; next_phase_started: false.
+      Recommended next: explicit_owner_authorization_required_before_any_promotion_execution_step.
+
+---
+
+- [x] ID: ail_vis_21_accepted_sample_promotion_authorization_gate
+      Lane: Green local docs-only promotion authorization gate.
+      Status: completed_validated_pushed.
+      Goal: Draft the promotion authorization boundary for the headphones accepted-sample candidate without copying files, creating accepted sample records, promoting the image, creating memory candidates, or writing memory.
+      Completed: added `docs/AIL_VIS_21_ACCEPTED_SAMPLE_PROMOTION_AUTHORIZATION_GATE.md`; updated `.agent_board` run state, handoff, checkpoint, and task queue surfaces to record the promotion boundary and keep accepted-sample promotion blocked until explicit owner authorization.
+      Promotion boundary: source_image_path=A:\agent-image-lab\agent-image-lab-v0.2\runs\real_generation\ail_vis_17_premium_black_wireless_headphones_hero\ail_vis_17_premium_black_wireless_headphones_hero_01.png; candidate_status=accepted_sample_candidate; accepted_sample_promotion_allowed_now=false; owner_authorization_required=true; memory_write_allowed_now=false; production_candidate_002_allowed_now=false.
+      Boundary fields: image_generated: false; image_edited: false; accepted_sample_created: false; accepted_sample_promoted: false; accepted_sample_file_created: false; image_copied_into_accepted_samples: false; accepted_sample_metadata_created: false; memory_candidate_created: false; actual_memory_write_performed: false; production_candidate_002_started: false; batch_005_started: false; git_add_dot_used: false; next_phase_started: false.
+      Recommended next: AIL-VIS-22_accepted_sample_promotion_execution_gate.
+
+---
+
+- [x] ID: ail_vis_20_accepted_sample_candidate_review_gate
+      Lane: Green local docs-only candidate review gate.
+      Status: completed_validated_pushed.
+      Goal: Review whether the headphones image can become an accepted-sample candidate while keeping accepted sample files, promotion, memory, and production_candidate_002 blocked.
+      Completed: candidate review selected for the reviewed headphones image; accepted sample remains uncreated and unpromoted; memory remains blocked.
+      Candidate status: accepted_sample_candidate; review_decision=pass_with_warnings; score=86; target_match=pass; accepted_sample_created=false; accepted_sample_promoted=false; accepted_sample_file_created=false; memory_candidate_created=false; actual_memory_write_performed=false.
+      Boundary fields: image_generated: false; retry_generation_performed: false; second_image_generated: false; image_editing_performed: false; provider_called: false; plugin_called: false; api_called: false; runtime_execution_performed: false; review_console_runtime_launched: false; accepted_sample_created: false; accepted_sample_promoted: false; accepted_sample_file_created: false; image_copied_into_accepted_samples: false; memory_candidate_created: false; actual_memory_write_performed: false; production_candidate_002_started: false; batch_005_started: false; git_add_dot_used: false; next_phase_started: false.
+      Recommended next: AIL-VIS-21_accepted_sample_promotion_authorization_gate.
+
+---
+
+- [x] ID: ail_vis_19_acceptance_or_hold_decision_gate
+      Lane: Green local docs-only route decision gate.
+      Status: completed_validated_pushed.
+      Goal: Decide whether the reviewed headphones image should remain review evidence or move toward an accepted-sample candidate gate, without promoting the image, writing memory, generating again, editing the image, or starting production_candidate_002.
+      Completed: added `docs/AIL_VIS_19_ACCEPTANCE_OR_HOLD_DECISION_GATE.md`; updated `.agent_board` run state, handoff, checkpoint, and task queue surfaces to record the route decision and keep accepted-sample, memory, and production paths blocked.
+      Route decision: selected_route=route_B_prepare_accepted_sample_candidate_gate; review_decision=pass_with_warnings; score=86; target_match=pass; accepted_sample_created=false; accepted_sample_promoted=false; accepted_sample_file_created=false; memory_candidate_created=false; actual_memory_write_performed=false.
+      Boundary fields: image_generated: false; retry_generation_performed: false; second_image_generated: false; image_editing_performed: false; provider_called: false; plugin_called: false; api_called: false; runtime_execution_performed: false; review_console_runtime_launched: false; accepted_sample_created: false; accepted_sample_promoted: false; accepted_sample_file_created: false; memory_candidate_created: false; actual_memory_write_performed: false; production_candidate_002_started: false; batch_005_started: false; git_add_dot_used: false; next_phase_started: false.
+      Recommended next: AIL-VIS-20_accepted_sample_candidate_review_gate.
+
+---
+
+- [x] ID: ail_vis_18_human_visual_review_closeout
+      Lane: Green local docs-only human visual review closeout.
+      Status: completed_validated_pushed.
+      Goal: Record the human visual review result for the single generated premium black wireless headphones hero image without generating, retrying, editing, promoting, or writing memory.
+      Completed: added `docs/AIL_VIS_18_HUMAN_VISUAL_REVIEW_CLOSEOUT.md`; updated `.agent_board` run state, handoff, checkpoint, and task queue surfaces to record decision=pass_with_warnings, score=86, target_match=pass, and non-promotion/non-memory boundaries.
+      Review fields: decision=pass_with_warnings; score=86; target_match=pass; accepted_sample_created=false; memory_candidate_created=false; actual_memory_write_performed=false; warnings=product_identity_needs_stronger_design_signature, manufacturing_plausibility_watchpoint, commercial_readability_darkness_watchpoint.
+      Boundary fields: retry_generation_performed: false; second_image_generated: false; image_editing_performed: false; provider_called_again: false; accepted_sample_created: false; memory_candidate_created: false; actual_memory_write_performed: false; production_candidate_002_started: false; batch_005_started: false; git_add_dot_used: false; next_phase_started: false.
+      Recommended next: explicit_route_decision_before_any_promotion_memory_production_or_retry_path.
+
+---
+
+- [x] ID: ail_vis_17_execution_reconciliation_and_review_gate
+      Lane: Green local docs-only execution reconciliation review.
+      Status: completed_validated_pushed.
+      Goal: Reconcile the owner-authorized one-shot generation evidence for premium_black_wireless_headphones_product_hero and classify the image as generated_unreviewed until human visual review.
+      Completed: added `docs/AIL_VIS_17_EXECUTION_RECONCILIATION_AND_REVIEW_GATE.md`; updated `.agent_board` run state, handoff, checkpoint, and task queue surfaces to record the generated output path, source cache path, SHA256, call/image counts, and review-required status.
+      Execution fields: owner_A5_authorization_granted=true; authorization_phrase_visible_in_chat=true; provider_tool=image_gen.imagegen; provider_plugin_calls_used=1; images_generated=1; max_images=1; image_status=generated_unreviewed; sha256=8954a5404bc6a296b6d86091a9dab46e048cec1decb55cca07b5b12fba3c203e.
+      Boundary fields: additional_generation_performed: false; retry_generation_performed: false; second_image_generated: false; image_editing_performed: false; provider_called_again: false; plugin_called_again: false; api_called: false; runtime_execution_performed: false; accepted_sample_created: false; memory_candidate_created: false; actual_memory_write_performed: false; production_candidate_002_started: false; batch_005_started: false; git_add_dot_used: false; next_phase_started: false.
+      Recommended next: AIL-VIS-18_human_visual_review_gate.
+
+---
+
+- [x] ID: ail_vis_16_pre_execution_static_review_and_a5_authorization_request
+      Lane: Green local docs-only A5 request gate.
+      Status: completed_validated_pushed.
+      Goal: Prepare the exact A5 authorization request for the repaired premium black wireless headphones hero shot without accepting authorization, generating images, creating output directories, or opening memory and promotion paths.
+      Completed: added `docs/AIL_VIS_16_PRE_EXECUTION_STATIC_REVIEW_AND_A5_AUTHORIZATION_REQUEST.md`; updated `.agent_board` run state, handoff, checkpoint, and task queue surfaces to record the exact A5 wording needed from the user.
+      Boundary fields: image_generated: false; provider_called: false; plugin_called: false; api_called: false; runtime_execution_performed: false; output_directory_created: false; execution_prompt_authorized: false; A5_authorization_granted: false; accepted_sample_created: false; memory_candidate_created: false; actual_memory_write_performed: false; daily_note_written: false; vcp_memory_written: false; codex_memory_mutated: false; production_candidate_002_started: false; batch_005_started: false; images_copied_into_repo: false; images_deleted: false; dependency_changed: false; package_json_modified: false; git_add_dot_used: false; next_phase_started: false.
+      Recommended next: wait_for_complete_explicit_A5_authorization_phrase_before_any_execution_gate.
+
+---
+
+- [x] ID: ail_vis_15_generation_authorization_gate_for_repaired_target
+      Lane: Green local docs-only generation authorization gate.
+      Status: completed_validated_pushed.
+      Goal: Draft the future generation authorization gate for premium_black_wireless_headphones_product_hero without requesting A5, generating images, creating output directories, or opening memory and promotion paths.
+      Completed: added `docs/AIL_VIS_15_GENERATION_AUTHORIZATION_GATE_FOR_REPAIRED_TARGET.md`; updated `.agent_board` run state, handoff, checkpoint, and task queue surfaces to record the repaired-target future boundary only.
+      Boundary fields: image_generated: false; provider_called: false; plugin_called: false; api_called: false; runtime_execution_performed: false; output_directory_created: false; execution_prompt_authorized: false; A5_authorization_requested: false; accepted_sample_created: false; memory_candidate_created: false; actual_memory_write_performed: false; daily_note_written: false; vcp_memory_written: false; codex_memory_mutated: false; production_candidate_002_started: false; batch_005_started: false; images_copied_into_repo: false; images_deleted: false; dependency_changed: false; package_json_modified: false; git_add_dot_used: false; next_phase_started: false.
+      Recommended next: separate_pre_execution_static_review_and_A5_authorization_request_only_if_explicitly_instructed.
+
+---
+
+- [x] ID: ail_vis_14_target_identity_repair_gate
+      Lane: Green local docs-only target identity repair.
+      Status: completed_validated_pushed.
+      Goal: Repair the broad dark tech target into the concrete premium_black_wireless_headphones_product_hero identity and update the shot plan and prompt package without opening generation, A5, or memory paths.
+      Completed: added `docs/AIL_VIS_14_TARGET_IDENTITY_REPAIR_GATE.md`; updated `prompts/image_generation/visual_production_next_shot_plan.yaml`; updated `prompts/image_generation/visual_production_next_prompt_package.yaml`; updated `.agent_board` run state, handoff, checkpoint, and task queue surfaces to record the repaired headphones target and the locked route boundary.
+      Repaired target: old_target=premium_dark_tech_product_still_life; new_target=premium_black_wireless_headphones_product_hero; target_identity_repaired=true; primary_shot_id=visual_production_next_shot_black_headphones_hero_01; secondary_shot_id=visual_production_next_shot_black_headphones_material_detail_01.
+      Boundary fields: image_generated: false; retry_generation_performed: false; third_image_generated: false; image_editing_performed: false; provider_called: false; plugin_called: false; api_called: false; runtime_execution_performed: false; output_directory_created: false; A5_authorization_requested: false; accepted_sample_created: false; memory_candidate_created: false; actual_memory_write_performed: false; production_candidate_002_started: false; batch_005_started: false; images_copied_into_repo: false; git_add_dot_used: false; next_phase_started: false.
+      Recommended next: future_generation_authorization_gate_for_the_repaired_headphones_target.
+
+---
+
+- [x] ID: ail_vis_13_authorized_generation_reconciliation_and_evidence_review
+      Lane: Green local docs-only reconciliation review.
+      Status: completed_validated_pushed.
+      Goal: Reconcile owner-authorized generation evidence for premium_dark_tech_product_still_life, record the two outputs as external untracked evidence only, and block the route until target identity repair.
+      Completed: added `docs/AIL_VIS_13_AUTHORIZED_GENERATION_RECONCILIATION_AND_EVIDENCE_REVIEW.md`; updated `.agent_board` run state, handoff, checkpoint, and task queue surfaces to record that the two outputs are external untracked evidence only and that AIL-VIS-14 has not been opened.
+      Evidence fields: output_1=lantern_like_wrong_route; output_1_sha256=9D92DAAC110E32BACC55C067A3D03AFF6EACD319CB9F5E6340D31A4BFE37417A; output_2=headphones_target_identity_ambiguous; output_2_sha256=5E3A8094C54A6E271DEFDEB7938AD588F7770B5827C84B937BE3354F9D0A12D6; owner_authorized=true; formal_execution_gate_missing=true; AIL_VIS_14_not_opened=true; max_images_expected=1; max_images_observed=2; target_match_failed=true.
+      Boundary fields: additional_generation_performed: false; third_image_generated: false; image_editing_performed: false; provider_called_again: false; images_copied_into_repo: false; accepted_sample_created: false; memory_candidate_created: false; actual_memory_write_performed: false; production_candidate_002_started: false; batch_005_started: false; git_add_dot_used: false; next_phase_started: false.
+      Recommended next: AIL-VIS-14_target_identity_repair_gate.
+
+---
+
+- [x] ID: ail_vis_13_pre_execution_static_review_and_a5_authorization_request
+      Lane: Green local docs-only A5 request gate.
+      Status: completed_validated_pushed.
+      Goal: Prepare the exact A5 authorization request for the premium dark tech product still-life hero shot without generating images, creating output directories, or opening any memory write path.
+      Completed: added `docs/AIL_VIS_13_PRE_EXECUTION_STATIC_REVIEW_AND_A5_AUTHORIZATION_REQUEST.md`; updated `.agent_board` run state, handoff, checkpoint, and task queue surfaces to record the exact A5 wording needed from the user.
+      Boundary fields: image_generated: false; provider_called: false; plugin_called: false; api_called: false; runtime_execution_performed: false; review_console_runtime_launched: false; output_directory_created: false; execution_prompt_authorized: false; A5_authorization_requested: false; accepted_sample_created: false; memory_candidate_created: false; actual_memory_write_performed: false; daily_note_written: false; vcp_memory_written: false; codex_memory_mutated: false; production_candidate_002_started: false; batch_005_started: false; dependency_changed: false; package_json_modified: false; git_add_dot_used: false; next_phase_started: false.
+      Recommended next: wait for explicit A5 authorization wording from the user before any execution gate work.
+
+---
+
+- [x] ID: ail_vis_12_visual_generation_authorization_gate
+      Lane: Green local docs-only generation authorization gate.
+      Status: completed_validated_pushed.
+      Goal: Define the strict future execution boundary for the selected dark tech still-life hero shot without requesting A5, creating output files, generating images, or opening any memory write path.
+      Completed: added `docs/AIL_VIS_12_VISUAL_GENERATION_AUTHORIZATION_GATE.md`; updated `.agent_board` run state, handoff, checkpoint, and task queue surfaces to record the locked future boundary only.
+      Boundary fields: image_generated: false; provider_called: false; plugin_called: false; api_called: false; runtime_execution_performed: false; review_console_runtime_launched: false; output_directory_created: false; execution_prompt_authorized: false; A5_authorization_requested: false; accepted_sample_created: false; memory_candidate_created: false; actual_memory_write_performed: false; daily_note_written: false; vcp_memory_written: false; codex_memory_mutated: false; production_candidate_002_started: false; batch_005_started: false; dependency_changed: false; package_json_modified: false; git_add_dot_used: false; next_phase_started: false.
+      Recommended next: wait for an explicit execution or authorization instruction before any future generation gate work.
+
+---
+
+- [x] ID: ail_vis_11_shot_plan_and_prompt_package_planning
+      Lane: Green local docs-only prompt and shot planning.
+      Status: completed_validated_pushed.
+      Goal: Build a shot plan and planning prompt package for premium_dark_tech_product_still_life while keeping generation, execution prompt authorization, and memory write paths blocked.
+      Completed: added `docs/AIL_VIS_11_SHOT_PLAN_AND_PROMPT_PACKAGE_PLANNING.md`; added `prompts/image_generation/visual_production_next_shot_plan.yaml`; added `prompts/image_generation/visual_production_next_prompt_package.yaml`; updated `.agent_board` run state, handoff, checkpoint, and task queue surfaces.
+      Boundary fields: image_generated: false; retry_generation_performed: false; second_image_generated: false; image_editing_performed: false; provider_called: false; plugin_called: false; api_called: false; runtime_execution_performed: false; review_console_runtime_launched: false; execution_prompt_authorized: false; A5_authorization_requested: false; accepted_sample_created: false; memory_candidate_created: false; actual_memory_write_performed: false; daily_note_written: false; vcp_memory_written: false; codex_memory_mutated: false; production_candidate_002_started: false; batch_005_started: false; dependency_changed: false; package_json_modified: false; git_add_dot_used: false; next_phase_started: false.
+      Recommended next: wait for an explicit next route instruction after this planning gate.
+
+---
+
+- [x] ID: ail_vis_10_next_visual_target_selection_gate
+      Lane: Green local docs-only route selection.
+      Status: completed_validated_pushed.
+      Goal: Select the next visual production target after the LED lantern review cycle, choosing premium_dark_tech_product_still_life without writing an execution prompt, generating images, or opening any memory write path.
+      Completed: added `docs/AIL_VIS_10_NEXT_VISUAL_TARGET_SELECTION_GATE.md`; updated `.agent_board` run state, handoff, checkpoint, and task queue surfaces to record the target selection only.
+      Boundary fields: image_generated: false; generation_allowed_now: false; retry_generation_performed: false; retry_allowed_now: false; second_image_generated: false; image_editing_performed: false; provider_called: false; plugin_called: false; api_called: false; runtime_execution_performed: false; review_console_runtime_launched: false; accepted_sample_created: false; accepted_sample_allowed_now: false; memory_candidate_created: false; actual_memory_write_performed: false; memory_write_allowed_now: false; daily_note_written: false; vcp_memory_written: false; codex_memory_mutated: false; production_candidate_002_started: false; production_candidate_002_allowed_now: false; batch_005_started: false; dependency_changed: false; package_json_modified: false; git_add_dot_used: false; next_phase_started: false.
+      Recommended next: turn the selected target into a separate shot-plan and prompt-package planning gate only when explicitly instructed.
+
+---
+
+- [x] ID: ail_vis_10_visual_target_selection_gate
+      Lane: Green local docs-only target selection gate.
+      Status: completed_validated_pushed.
+      Goal: Select the next visual target as premium_dark_tech_product_still_life without writing an execution prompt, generating images, or opening any memory write path.
+      Completed: added `docs/AIL_VIS_10_VISUAL_TARGET_SELECTION_GATE.md`; updated `.agent_board` run state, handoff, checkpoint, and task queue surfaces to record the target selection only.
+      Boundary fields: generation_allowed_now: false; retry_allowed_now: false; memory_write_allowed_now: false; accepted_sample_allowed_now: false; production_candidate_002_allowed_now: false; batch_005_allowed_now: false; provider_called: false; plugin_called: false; api_called: false; runtime_execution_performed: false; review_console_runtime_launched: false; actual_memory_write_performed: false; daily_note_written: false; vcp_memory_written: false; codex_memory_mutated: false; dependency_changed: false; package_json_modified: false; git_add_dot_used: false; next_phase_started: false.
+      Recommended next: turn the selected target into a separate prompt package and shot-plan planning gate only when explicitly instructed.
+
+---
+
+- [x] ID: ail_vis_09_visual_eval_failure_taxonomy_hardening
+      Lane: Green local docs-only protocol hardening.
+      Status: completed_validated_pushed.
+      Goal: Harden the visual evaluation rubric and failure taxonomy using the first one-shot review evidence so future review rounds can distinguish scene intent mismatch, material surface mismatch, control layout mismatch, shot role adherence, and product identity strength more precisely.
+      Completed: added `docs/AIL_VIS_09_VISUAL_EVAL_FAILURE_TAXONOMY_HARDENING.md`; updated `docs/VISUAL_EVAL_RUBRIC.md`; updated `docs/VISUAL_FAILURE_TAXONOMY.md`; updated `.agent_board` run state, handoff, checkpoint, and task queue surfaces.
+      Boundary fields: retry_generation_performed: false; second_image_generated: false; image_editing_performed: false; provider_called: false; plugin_called: false; api_called: false; runtime_execution_performed: false; review_console_runtime_launched: false; accepted_sample_created: false; memory_candidate_created: false; actual_memory_write_performed: false; daily_note_written: false; vcp_memory_written: false; codex_memory_mutated: false; production_candidate_002_started: false; batch_005_started: false; dependency_changed: false; package_json_modified: false; git_add_dot_used: false; next_phase_started: false.
+      Recommended next: use the hardened review language for future visual review rounds and wait for an explicit new route instruction.
+
+---
+
+- [x] ID: ail_vis_08_retry_or_route_decision_gate
+      Lane: Green local docs-only decision gate.
+      Status: completed_validated_pushed.
+      Goal: Decide the route after the first one-shot generation review, select route_A_hold_as_review_evidence, and keep retry, editing, promotion, memory write, and production candidate paths blocked.
+      Completed: added `docs/AIL_VIS_08_RETRY_OR_ROUTE_DECISION_GATE.md`; updated `.agent_board` run state, handoff, checkpoint, and task queue surfaces to record the hold-as-review-evidence route decision for the reviewed image.
+      Boundary fields: retry_generation_performed: false; second_image_generated: false; image_editing_performed: false; provider_called: false; plugin_called: false; api_called: false; runtime_execution_performed: false; review_console_runtime_launched: false; accepted_sample_created: false; memory_candidate_created: false; actual_memory_write_performed: false; daily_note_written: false; vcp_memory_written: false; codex_memory_mutated: false; production_candidate_002_started: false; batch_005_started: false; dependency_changed: false; package_json_modified: false; git_add_dot_used: false; next_phase_started: false.
+      Recommended next: hold the image as review evidence only until a future explicit route or review instruction is given.
+
+---
+
+- [x] ID: ail_vis_07_human_visual_review_closeout
+      Lane: Green local docs-only review closeout.
+      Status: completed_validated_pushed.
+      Goal: Record the human visual review result for the single generated premium portable LED camping lantern hero image without generating, retrying, editing, promoting, or writing memory.
+      Completed: added `docs/AIL_VIS_07_HUMAN_VISUAL_REVIEW_CLOSEOUT.md`; updated `.agent_board` run state, handoff, checkpoint, and task queue surfaces to record the human review result for the one-shot generated image.
+      Boundary fields: retry_generation_performed: false; second_image_generated: false; image_editing_performed: false; provider_called: false; plugin_called: false; api_called: false; runtime_execution_performed: false; review_console_runtime_launched: false; accepted_sample_created: false; memory_candidate_created: false; actual_memory_write_performed: false; daily_note_written: false; vcp_memory_written: false; codex_memory_mutated: false; production_candidate_002_started: false; batch_005_started: false; dependency_changed: false; package_json_modified: false; git_add_dot_used: false; next_phase_started: false.
+      Recommended next: AIL-VIS-08_retry_or_route_decision_gate.
+
+---
+
+- [x] ID: ail_vis_05_pre_execution_static_review_and_a5_authorization_request
+      Lane: Green local docs-only A5 authorization request gate.
+      Status: completed_validated_pushed_request_only.
+      Goal: Prepare the final one-shot visual generation execution request for the premium portable LED camping lantern hero shot without generating images or opening any memory write path.
+      Completed: added `docs/AIL_VIS_05_PRE_EXECUTION_STATIC_REVIEW_AND_A5_AUTHORIZATION_REQUEST.md`; updated `.agent_board` run state, handoff, checkpoint, and task queue surfaces to record the exact A5 authorization wording needed from the user while keeping generation and memory write paths blocked.
+      Boundary fields: image_generated: false; provider_called: false; plugin_called: false; api_called: false; runtime_execution_performed: false; review_console_runtime_launched: false; actual_memory_write_performed: false; daily_note_written: false; vcp_memory_written: false; codex_memory_mutated: false; production_candidate_002_started: false; batch_005_started: false; next_phase_started: false.
+      Recommended next: wait for explicit A5 authorization wording from the user or a separate execution gate instruction.
+
+---
+
+- [x] ID: ail_vis_04_visual_generation_authorization_gate
+      Lane: Green local docs-only generation authorization gate.
+      Status: completed_validated_docs_only.
+      Goal: Define the strict generation boundary for the premium portable LED camping lantern route without generating images or opening any memory write path.
+      Completed: added `docs/AIL_VIS_04_VISUAL_GENERATION_AUTHORIZATION_GATE.md`; updated `.agent_board` run state, handoff, checkpoint, and task queue surfaces to record the new generation authorization boundary and keep the hero shot as the only explicitly authorized candidate for a later execution gate.
+      Boundary fields: image_generated: false; provider_called: false; plugin_called: false; api_called: false; runtime_execution_performed: false; review_console_runtime_launched: false; actual_memory_write_performed: false; daily_note_written: false; vcp_memory_written: false; codex_memory_mutated: false; production_candidate_002_started: false; batch_005_started: false; next_phase_started: false.
+      Recommended next: AIL-VIS-05_visual_generation_execution_gate.
+
+---
+
+- [x] ID: ail_vis_03_visual_prompt_package_and_shot_plan_refresh
+      Lane: Green local docs-only prompt and shot planning.
+      Status: completed_validated.
+      Goal: Refresh the next visual production shot plan and prompt package using the updated visual evaluation rubric and failure taxonomy, without generating images or opening any memory write path.
+      Completed: added `docs/AIL_VIS_03_VISUAL_PROMPT_PACKAGE_AND_SHOT_PLAN_REFRESH.md`; added `prompts/image_generation/visual_production_next_shot_plan.yaml`; added `prompts/image_generation/visual_production_next_prompt_package.yaml`; updated `.agent_board` run state, handoff, checkpoint, and task queue surfaces to record the new visual planning gate.
+      Boundary fields: image_generated: false; provider_called: false; plugin_called: false; api_called: false; runtime_execution_performed: false; review_console_runtime_launched: false; actual_memory_write_performed: false; daily_note_written: false; vcp_memory_written: false; codex_memory_mutated: false; production_candidate_002_started: false; batch_005_started: false; next_phase_started: false.
+      Recommended next: AIL-VIS-04_visual_generation_authorization_gate.
+
+---
+
+- [x] ID: ail_vis_02_visual_eval_rubric_and_failure_taxonomy_refresh
+      Lane: Green local docs-only visual review planning.
+      Status: completed_validated.
+      Goal: Refresh the visual evaluation rubric and failure taxonomy for the next visual production cycle so pass, patch, reject, archive, and memory suitability language stays stable without generating new images.
+      Completed: added `docs/AIL_VIS_02_VISUAL_EVAL_RUBRIC_AND_FAILURE_TAXONOMY_REFRESH.md`; added `docs/VISUAL_EVAL_RUBRIC.md`; added `docs/VISUAL_FAILURE_TAXONOMY.md`; updated `.agent_board` run state, handoff, checkpoint, and task queue surfaces to record the new visual review planning gate.
+      Boundary fields: image_generated: false; provider_called: false; plugin_called: false; api_called: false; runtime_execution_performed: false; review_console_runtime_launched: false; actual_memory_write_performed: false; daily_note_written: false; vcp_memory_written: false; codex_memory_mutated: false; production_candidate_002_started: false; batch_005_started: false; next_phase_started: false.
+      Recommended next: AIL-VIS-03_visual_prompt_package_and_shot_plan_refresh.
+
+---
+
+- [x] ID: ail_vis_01_return_to_visual_production_mainline_gate
+      Lane: Green local docs-only route gate.
+      Status: completed_validated_docs_only.
+      Goal: Close the AIL-MEM memory-write subline as a supporting guardrail only, record that actual memory write remains blocked, and return the project route to the visual production mainline.
+      Completed: added `docs/AIL_VIS_01_RETURN_TO_VISUAL_PRODUCTION_MAINLINE_GATE.md`; updated `.agent_board` run state, handoff, checkpoint, and task queue surfaces to record that the memory line is paused after clean shadow evidence and that AIL-VIS-02 is the next visual planning task.
+      Boundary fields: actual_memory_write_performed: false; actual_memory_write_allowed_now: false; daily_note_written: false; vcp_memory_written: false; codex_memory_mutated: false; memory_candidate_mutated: false; memory_payload_mutated: false; provider_called: false; plugin_called: false; api_called: false; runtime_execution_performed: false; image_generated: false; production_candidate_002_started: false; batch_005_started: false; next_phase_started: false.
+      Recommended next: AIL-VIS-02_visual_eval_rubric_and_failure_taxonomy_refresh.
+
+---
+
+- [x] ID: ail_mem_04_first_memory_candidate_dry_run_artifact_gate
+      Lane: Green local reports-only artifact gate.
+      Status: completed_validated_dry_run_artifacts.
+      Goal: Create the first repository-side memory_candidate dry-run artifact set under reports/ without mutating canonical memory.
+      Completed: added `reports/memory_delta_drafts/memcand_20260530_memory_boundary_dryrun_001.md`; added `reports/memory_target_packages/memcand_20260530_memory_boundary_dryrun_001.json`; added `reports/memory_write_payloads/memcand_20260530_memory_boundary_dryrun_001.json`; added `reports/visual_asset_eval_dry_run/memcand_20260530_memory_boundary_dryrun_001_precheck.json`; updated `.agent_board` surfaces to record the new dry-run artifact gate and keep the canonical target untouched.
+      Boundary fields: actual_memory_write_performed: false; daily_note_written: false; vcp_memory_written: false; codex_memory_mutated: false; image_generated: false; provider_called: false; plugin_called: false; api_called: false; runtime_execution_performed: false; production_candidate_002_started: false; batch_005_started: false; next_phase_started: false.
+      Recommended next: keep the first candidate dry-run artifact set reference-only and use it as the template for the next planning or review step.
+
+---
+
+- [x] ID: ail_mem_03_memory_candidate_dry_run_planning_gate
+      Lane: Green local docs-only planning gate.
+      Status: completed_validated_docs_only.
+      Goal: Define how the first future memory_candidate dry-run artifact will be planned without creating any candidate, payload, or write result in this phase.
+      Completed: added `docs/MEMORY_CANDIDATE_DRY_RUN_PLAN.md`; added the planning layer reference from the payload contract and pipeline map; documented candidate naming rules, allowed source evidence, required review fields, required memory_suitability labels, forbidden raw fields, rollback requirements, future dry-run output paths, validation commands, and the closeout template.
+      Boundary fields: actual_memory_write_performed: false; daily_note_written: false; vcp_memory_written: false; codex_memory_mutated: false; image_generated: false; provider_called: false; plugin_called: false; api_called: false; runtime_execution_performed: false; production_candidate_002_started: false; batch_005_started: false; next_phase_started: false.
+      Recommended next: keep the dry-run planning gate reference-only and use it as the blueprint for any future memory packet work.
+
+---
+
+ - [x] ID: ail_mem_02_memory_payload_contract
+      Lane: Green local docs-only schema planning.
+      Status: completed_validated_docs_only.
+      Goal: Define the repository-side memory payload contract and preserve the no-write boundary to canonical `codex-memory`.
+      Completed: added `docs/MEMORY_WRITE_PAYLOAD_CONTRACT.md`; updated `docs/MEMORY_WRITE_PIPELINE_MAP.md`; documented candidate, draft, target package, preview, dry-run, forbidden fields, review fields, suitability, rollback, and closeout template.
+      Boundary fields: actual_memory_write_performed: false; daily_note_written: false; vcp_memory_written: false; codex_memory_mutated: false; image_generated: false; provider_called: false; plugin_called: false; api_called: false; runtime_execution_performed: false; production_candidate_002_started: false; batch_005_started: false; next_phase_started: false.
+      Recommended next: keep the payload contract reference-only and use it as the template for any future memory packet work.
+
+---
+
+ - [x] ID: ail_mem_01_memory_write_pipeline_map
+      Lane: Green local docs-only mapping.
+      Status: completed_validated_docs_only.
+      Goal: Map the memory write pipeline for agent-image-lab and clearly separate repository staging artifacts from the canonical `codex-memory` target.
+      Completed: added `docs/MEMORY_WRITE_PIPELINE_MAP.md`; documented write-before / write-time / write-after boundaries; documented the candidate-vs-actual-write distinction and the rollback requirement.
+      Boundary fields: actual_memory_write_performed: false; daily_note_written: false; vcp_memory_written: false; codex_memory_mutated: false; image_generated: false; production_candidate_002_started: false; batch_005_started: false; next_phase_started: false.
+      Recommended next: keep the map reference-only and use it as the boundary guide for any future memory-write packet work.
+
+---
+
+- [x] ID: exact_new_trial_006_fresh_round_archive_closeout
+      Lane: Amber_B fresh one-image generation round plus Green local archive closeout.
+      Status: completed_validated_reference_only.
+      Goal: Record the `v0_3_3_exact_new_trial_006` result as a formal archive note and keep it reference-only.
+      Completed: generated a new image distinct from `005`; added `docs/V0_6_35_EXACT_NEW_TRIAL_006_EXECUTION_CLOSEOUT.md`; copied the artifact into `runs/real_generation/v0_3_3_exact_new_trial_006/`; preserved the no memory / no production / no push boundary.
+      Boundary fields: provider_contact_performed: true; plugin_call_performed: true; api_call_performed: false; image_generation_performed: true; DailyNote_write_performed: false; VCP_memory_write_performed: false; accepted_samples_write_performed: false; production_candidate_write_performed: false; push_status: not_performed.
+      Recommended next: keep `006` reference-only or return to the red decision if yet another round is needed.
+
+---
+
+- [x] ID: exact_new_trial_005_selected_pair_archive_closeout
+      Lane: Green local archive closeout.
+      Status: completed_validated_reference_only.
+      Goal: Record the two user-selected `v0_6_34_exact_new_trial_005` passing images as a formal archive pair and keep them reference-only.
+      Completed: created `docs/V0_6_34_EXACT_NEW_TRIAL_005_SELECTED_PAIR_EXECUTION_CLOSEOUT.md`; created `reports/visual_asset_eval_dry_run/v0_6_34_exact_new_trial_005_selected_pair_execution_closeout.json`; copied both selected images into `runs/real_generation/v0_3_3_exact_new_trial_005_selected_pair/`; confirmed both selected images are accepted candidates with no commercial-delivery status.
+      Boundary fields: provider_contact_performed: true; plugin_call_performed: true; api_call_performed: false; image_generation_performed: true; DailyNote_write_performed: false; VCP_memory_write_performed: false; accepted_samples_write_performed: false; production_candidate_write_performed: false; push_status: not_performed.
+      Recommended next: keep the pair reference-only or return to the red decision if another trial is needed.
+
+---
+ - [x] ID: exact_new_trial_005_fresh_round_archive_closeout
+      Lane: Amber_B fresh one-image generation round plus Green local archive closeout.
+      Status: completed_validated_reference_only.
+      Goal: Record the `v0_3_3_exact_new_trial_005` result as a formal archive note and keep it reference-only.
+      Completed: generated a new image distinct from `004`; added `docs/V0_6_33_EXACT_NEW_TRIAL_005_EXECUTION_CLOSEOUT.md`; copied the artifact into `runs/real_generation/v0_3_3_exact_new_trial_005/`; preserved the no memory / no production / no push boundary.
+      Boundary fields: provider_contact_performed: true; plugin_call_performed: true; api_call_performed: false; image_generation_performed: true; DailyNote_write_performed: false; VCP_memory_write_performed: false; accepted_samples_write_performed: false; production_candidate_write_performed: false; push_status: not_performed.
+      Recommended next: keep `005` reference-only or return to the red decision if yet another round is needed.
+
+---
+
+- [x] ID: exact_new_trial_004_formal_archive_closeout
+      Lane: Green local archive closeout.
+      Status: completed_validated_reference_only.
+      Goal: Record the `v0_3_3_exact_new_trial_004` result as a formal archive note and keep it reference-only.
+      Completed: added `docs/V0_6_32_EXACT_NEW_TRIAL_004_EXECUTION_CLOSEOUT.md`; confirmed the generated image hash and review result; preserved the no memory / no production / no push boundary.
+      Boundary fields: provider_contact_performed: true; plugin_call_performed: true; api_call_performed: false; image_generation_performed: true; DailyNote_write_performed: false; VCP_memory_write_performed: false; accepted_samples_write_performed: false; production_candidate_write_performed: false; push_status: not_performed.
+      Recommended next: keep result reference-only or return to the red decision if another trial is needed.
+
+---
+
+- [x] ID: inspect_failed_provider_tool_attempt_or_authorize_new_trial_clean_baseline_recheck
+      Lane: Green local repository reality check.
+      Status: completed_validated.
+      Goal: Confirm the current branch, HEAD, and worktree state before continuing the red decision or any local follow-up.
+      active_current_phase: v0_3_3_first_live_generation_pilot
+      active_source_phase: v0_3_2_live_candidate_action_packet
+      active_next_red_decision: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+      Completed: branch `inspect_failed_provider_tool_attempt_or_authorize_new_trial` confirmed; HEAD `47f9610c` confirmed; worktree clean; `.agent_board` resume surfaces inspected; no repository files changed outside this board sync.
+      Boundary fields: provider_contact_performed: false; plugin_call_performed: false; api_call_performed: false; image_generation_performed: false; secret_value_read_performed: false; DailyNote_write_performed: false; VCP_memory_write_performed: false; push_status: not_performed.
+      Recommended next: continue from the current red decision or start the next clearly scoped local task.
+
+---
+
+- [x] ID: governance_validator_smart_v3_remote_sync_repair
+      Lane: Green local governance maintenance and validator compatibility repair.
+      Status: completed_targeted_validated_pending_local_commit.
+      Goal: Repair the Smart V3 remote sync resume-guard batch by recognizing the exact file set in governance slices and updating the resume-compaction validator for a temporary latest green prompt-gate override.
+      Completed:
+      - Added `governance_validator_smart_v3_remote_sync_repair_slice` with 56 exact files in `scripts/lib/governance_tooling_maintenance_slice.js`.
+      - Updated `scripts/validate_v14_210_exact_file_commit_readiness_review.js` to relax amber-token false-positive checks only under the expected conditions.
+      - Updated `scripts/validators/autopilot_governance/validate_autopilot_agent_board_resume_compaction_guard.js` for `commercial_kv_prompt_package_gate_20260529` compatibility.
+      - Updated schema example negative cases in `tests/schema_examples/autopilot_agent_board_resume_compaction_guard.example.json`.
+      - Kept this slice strictly local and side-effect free.
+      Boundary fields: provider_contact_performed: false; plugin_call_performed: false; api_call_performed: false; image_generation_performed: false; secret_value_read_performed: false; DailyNote_write_performed: false; VCP_memory_write_performed: false; dependency_change_performed: false; push_status: not_performed.
+      Recommended next: exact-file local commit, post-commit `node scripts/validate_agent_board_state.js` and `npm run validate:mvp`, then continue with active red decision.
 
 - [x] ID: commercial_kv_prompt_package_gate_20260529
       Lane: Green static prompt package and acceptance gate; no provider/plugin/API/image call.

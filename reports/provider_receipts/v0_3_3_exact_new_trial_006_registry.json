@@ -1,0 +1,14 @@
+{
+  "receipt_id": "receipt-v0-3-3-exact-new-trial-006",
+  "task_id": "v0_3_3_exact_new_trial_006",
+  "status": "succeeded_image_generated",
+  "review_status": "passed",
+  "asset_status": "accepted_candidate_with_minor_watch_items",
+  "archive_status": "reference_only",
+  "commercial_delivery_ready": false,
+  "memory_suitability": "deferred",
+  "output_image_path": "runs/real_generation/v0_3_3_exact_new_trial_006/safe_adult_editorial_portrait_v1.png",
+  "output_image_sha256": "b106be54cd016b5785673383a02ed993459fa81b42116a9bf1a9510bdcfac572",
+  "review_console_bridge_ref": "review_console/live_receipt_bridge/v0_3_3_exact_new_trial_006",
+  "recommended_next": "archive_as_reference_only_without_memory_or_production_promotion"
+}

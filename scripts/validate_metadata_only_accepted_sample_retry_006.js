@@ -46,6 +46,27 @@ function assertIncludes(text, needle, label) {
   assert(text.includes(needle), `${label} missing expected text: ${needle}`);
 }
 
+function parseCategorySampleIds(text) {
+  const samplesBlock = text.match(/^samples:\s*$(?<body>[\s\S]*?)(?=^[^ \t\r\n].*:|\z)/m);
+  assert(samplesBlock?.groups?.body, "category index samples block missing");
+  return samplesBlock.groups.body
+    .split(/\r?\n/)
+    .map((line) => {
+      const match = line.match(/^\s*-\s+([A-Za-z0-9_.-]+)\s*$/);
+      return match ? match[1] : null;
+    })
+    .filter(Boolean);
+}
+
+function assertCategorySampleCountMatchesIndex(text, expectedSampleId) {
+  const sampleIds = parseCategorySampleIds(text);
+  const sampleCountMatch = text.match(/^sample_count:\s*(\d+)\s*$/m);
+  assert(sampleCountMatch, "category index sample_count missing");
+  assert(sampleIds.includes(expectedSampleId), `category index missing sample id: ${expectedSampleId}`);
+  assert(Number(sampleCountMatch[1]) === sampleIds.length, "category index sample_count must match samples list length");
+  return sampleIds.length;
+}
+
 function assertFalseSideEffects(record, label, allowedTrue = []) {
   const sideEffects = record.side_effects || record.guard || {};
   for (const [key, value] of Object.entries(sideEffects)) {
@@ -87,7 +108,7 @@ function main() {
   assertIncludes(registry, "write_to_memory_allowed: false", "registry");
   assertIncludes(registry, "daily_note_write_allowed: false", "registry");
 
-  assertIncludes(categoryIndex, "sample_count: 3", "category index");
+  const currentCategorySampleCount = assertCategorySampleCountMatchesIndex(categoryIndex, sampleId);
   assertIncludes(categoryIndex, `  - ${sampleId}`, "category index");
   assertIncludes(categoryIndex, `${sampleId}:`, "category index");
   assertIncludes(categoryIndex, `verified_sha256: ${expectedSha256}`, "category index");
@@ -137,6 +158,7 @@ function main() {
   assert(categorySyncReceipt.category === category, "category sync receipt category mismatch");
   assert(categorySyncReceipt.status === "APPLIED", "category sync receipt status mismatch");
   assert(categorySyncReceipt.index_update.sample_count_after === 3, "category sync receipt sample count mismatch");
+  assert(currentCategorySampleCount >= categorySyncReceipt.index_update.sample_count_after, "current category sample count must not be lower than historical retry_006 receipt count");
   assert(categorySyncReceipt.index_update.source_image_read_or_copied === false, "category sync receipt must not read or copy image");
   assert(categorySyncReceipt.source_metadata_preserved.source_image_ref === expectedImageRef, "category sync preserved image ref mismatch");
   assert(categorySyncReceipt.source_metadata_preserved.source_image_sha256 === expectedSha256, "category sync preserved sha mismatch");
@@ -154,6 +176,8 @@ function main() {
     sample_id: sampleId,
     category,
     pipeline_id: pipelineId,
+    current_category_sample_count: currentCategorySampleCount,
+    historical_receipt_sample_count_after: categorySyncReceipt.index_update.sample_count_after,
     source_image_ref_preserved: true,
     source_image_sha256: expectedSha256,
     source_image_content_read_performed: false,

@@ -1,0 +1,90 @@
+shot_plan_id: visual_production_next_shot_plan_premium_black_wireless_headphones_product_hero_v1
+phase: AIL-VIS-14_target_identity_repair_gate
+mode: docs_only_target_identity_repair
+source_phase: AIL-VIS-13_authorized_generation_reconciliation_and_evidence_review
+source_commit: a9b0b487ce2b1f3303195af989a8bdcf7ade1cc8
+selected_product: premium_black_wireless_headphones_product_hero
+selected_product_category: premium_audio_product
+visual_goal: low-key commercial product route with a concrete premium wireless headphones identity, controlled reflections, and premium dark lighting
+composition_goal: square 1:1 commercial hero framing with clean negative space and strong product readability
+generation_allowed_now: false
+review_required: true
+rubric_refs:
+  - docs/VISUAL_EVAL_RUBRIC.md
+  - docs/VISUAL_FAILURE_TAXONOMY.md
+
+shots:
+  - shot_id: visual_production_next_shot_black_headphones_hero_01
+    shot_role: hero_product_shot
+    visual_goal: premium square hero image with the wireless headphones as the dominant subject
+    subject: premium black wireless headphones product hero
+    composition_notes:
+      - keep the headphones fully visible
+      - make the product large and dominant in the frame
+      - keep the silhouette clean and commercial
+      - preserve controlled negative space around the subject
+    lighting_notes:
+      - use low-key premium lighting
+      - preserve controlled highlights on metal, plastic, and cushioning
+      - keep reflections believable and not distracting
+    material_realism_requirements:
+      - premium metal should read as finished and believable
+      - matte and soft-touch surfaces should read as physically present and not synthetic
+      - materials should support a dark premium audio identity
+    commercial_usability_requirements:
+      - product must read clearly on first glance
+      - keep the frame headline-safe
+      - avoid text, logos, clutter, and competing objects
+    failure_risks:
+      - subject drift
+      - material_fake_or_plastic
+      - lighting_inconsistent
+      - composition_unusable
+      - commercial_unfit
+      - background_noise
+      - detail_distortion
+      - text_logo_or_brand_risk
+      - ai_artifact_visible
+    review_rubric_refs:
+      - docs/VISUAL_EVAL_RUBRIC.md
+      - docs/VISUAL_FAILURE_TAXONOMY.md
+    generation_allowed_now: false
+
+  - shot_id: visual_production_next_shot_black_headphones_material_detail_01
+    shot_role: material_detail_supporting_shot
+    visual_goal: supporting detail shot that validates earcup materials, headband finish, reflections, and surface quality
+    subject: premium black wireless headphones product hero
+    composition_notes:
+      - tighter crop than the hero shot
+      - keep the key surfaces and edges readable
+      - avoid abstract macro distortion that hides product identity
+    lighting_notes:
+      - preserve controlled specular highlights
+      - keep shadow structure coherent
+      - avoid noisy or overactive reflections
+    material_realism_requirements:
+      - metal edges should feel manufactured
+      - padding and shell surfaces should remain plausible and clean
+      - surface finish should support dark premium audio styling
+    commercial_usability_requirements:
+      - useful as evidence, not a replacement for the hero shot
+      - keep the same route identity visible
+    failure_risks:
+      - detail distortion
+      - material_fake_or_plastic
+      - lighting_inconsistent
+      - ai_artifact_visible
+    review_rubric_refs:
+      - docs/VISUAL_EVAL_RUBRIC.md
+      - docs/VISUAL_FAILURE_TAXONOMY.md
+    generation_allowed_now: false
+
+route_boundary:
+  provider_call_allowed_now: false
+  plugin_call_allowed_now: false
+  api_call_allowed_now: false
+  runtime_execution_allowed_now: false
+  image_generation_allowed_now: false
+  actual_memory_write_allowed_now: false
+  production_candidate_002_allowed_now: false
+  batch_005_allowed_now: false

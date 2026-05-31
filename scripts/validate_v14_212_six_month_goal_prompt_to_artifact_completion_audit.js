@@ -24,7 +24,7 @@ const files = {
   validationLog: ".agent_board/VALIDATION_LOG.md",
 };
 
-const expectedCurrentRecoverableAcceptedSampleCount = 5;
+const expectedCurrentRecoverableAcceptedSampleCount = 6;
 
 const expectedCriteria = [
   "three_full_recoverable_accepted_samples",
@@ -49,8 +49,12 @@ function requireToken(label, text, token) {
   addResult(`${label}_token_${token}_present`, text.includes(token));
 }
 
+function patternAbsent(text, pattern) {
+  return !pattern.test(text);
+}
+
 function forbidPattern(label, text, pattern) {
-  addResult(`${label}_forbidden_${pattern}_absent`, !pattern.test(text), `${pattern}`);
+  addResult(`${label}_forbidden_${pattern}_absent`, patternAbsent(text, pattern), `${pattern}`);
 }
 
 function clone(value) {
@@ -67,6 +71,21 @@ function runGit(args) {
 
 function lines(value) {
   return value ? value.split(/\r?\n/).filter(Boolean) : [];
+}
+
+function latestResumeSection(relativePath) {
+  return core.read(relativePath).split(/\r?\n---\r?\n/)[0];
+}
+
+function countRecoverableAcceptedSamples(registry) {
+  const recoverableStatuses = new Set([
+    "workspace_local_verified",
+    "workspace_local_verified_by_prior_receipt",
+    "git_tracked_verified",
+  ]);
+  return [...registry.matchAll(/recoverability_status:\s+([^\s]+)/g)]
+    .filter((match) => recoverableStatuses.has(match[1]))
+    .length;
 }
 
 function evaluate(input, evidence) {
@@ -154,7 +173,7 @@ function gatherEvidence() {
   const exactFileDraft = core.parseJson(files.exactFileDraft).recoverability_baseline_exact_file_staging_authorization_package_draft;
   const reviewConsoleReader = core.read(files.reviewConsoleReader);
   return {
-    registryRecoverableCount: (registry.match(/recoverability_status:\s+workspace_local_verified/g) || []).length,
+    registryRecoverableCount: countRecoverableAcceptedSamples(registry),
     dashboardRecoverableCount: dashboard.dashboard_counts.full_recoverable_accepted_sample_count,
     dashboardHardAcceptanceMet: dashboard.dashboard_counts.hard_acceptance_three_full_samples_met,
     dashboardGap: dashboard.dashboard_counts.remaining_full_recoverable_sample_gap,
@@ -183,17 +202,17 @@ const validationLog = core.read(files.validationLog);
 const currentSurfaces = [
   phaseRecord,
   JSON.stringify(fixture, null, 2),
-  core.read(files.runState),
-  core.read(files.taskQueue),
-  core.read(files.checkpoint),
-  core.read(files.handoff),
+  latestResumeSection(files.runState),
+  latestResumeSection(files.taskQueue),
+  latestResumeSection(files.checkpoint),
+  latestResumeSection(files.handoff),
   core.read(files.mvpValidator),
 ].join("\n");
 
 const baseEval = evaluate(fixture, evidence);
 addResult("prompt_to_artifact_audit_evaluation_passes", baseEval.passed, JSON.stringify(baseEval));
 addResult(
-  "registry_recoverable_count_is_five",
+  "registry_recoverable_count_is_six",
   evidence.registryRecoverableCount === expectedCurrentRecoverableAcceptedSampleCount
 );
 addResult("dashboard_three_sample_goal_met_local_only", evidence.dashboardHardAcceptanceMet === true && evidence.dashboardGap === 0);
@@ -231,11 +250,15 @@ addResult("negative_case_local_recoverability_marked_goal_complete_fails", runti
 addResult("negative_case_missing_evidence_ref_fails", missingEvidenceEval.passed === false && missingEvidenceEval.refsOk === false);
 addResult("negative_case_runtime_claim_fails", runtimeClaimEval.passed === false && runtimeClaimEval.noRuntimeClaim === false);
 addResult("negative_case_external_action_flag_fails", externalActionEval.passed === false && externalActionEval.noExternal === false);
+addResult(
+  "negative_case_current_surface_external_action_flag_fails",
+  patternAbsent(`${currentSurfaces}\nprovider_contact_performed: true`, /provider_contact_performed:\s+true/i) === false
+);
 
 for (const token of [
   "phase: v14_212_six_month_goal_prompt_to_artifact_completion_audit",
   "goal_complete: false",
-  "full_recoverable_accepted_sample_count: 5",
+  "full_recoverable_accepted_sample_count: 6",
   "remaining_full_recoverable_sample_gap: 0",
   "human_approval_status: approved",
   "current_status: not_started_blocked_by_a5",
@@ -322,6 +345,8 @@ const summary = {
   negative_case_missing_evidence_ref_fails: missingEvidenceEval.passed === false && missingEvidenceEval.refsOk === false,
   negative_case_runtime_claim_fails: runtimeClaimEval.passed === false && runtimeClaimEval.noRuntimeClaim === false,
   negative_case_external_action_flag_fails: externalActionEval.passed === false && externalActionEval.noExternal === false,
+  negative_case_current_surface_external_action_flag_fails:
+    patternAbsent(`${currentSurfaces}\nprovider_contact_performed: true`, /provider_contact_performed:\s+true/i) === false,
   errors,
   results,
 };

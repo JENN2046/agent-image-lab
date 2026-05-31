@@ -93,7 +93,7 @@ success_criteria:
       - tests/schema_examples/v14_168_three_sample_dashboard_evidence_alignment.example.json
       - accepted_samples/accepted_sample_registry.yaml
     observed:
-      full_recoverable_accepted_sample_count: 5
+      full_recoverable_accepted_sample_count: 6
       remaining_full_recoverable_sample_gap: 0
       third_accepted_sample: accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001
       blocker: null

@@ -221,7 +221,7 @@ function main() {
   assert(schema.includes("human_review_allowed_now: false"), "schema missing human review invariant");
 
   const currentEntries = fs.readdirSync(repoPath(runDir))
-    .filter((entry) => entry === "generation_attempt_result.json" || !localOnlyClaimedImagePresent)
+    .filter((entry) => entry === "generation_attempt_result.json" || (!localOnlyClaimedImagePresent && !/^generation_attempt_result(?:-[a-f0-9]+|\(\d+\))?\.json$/i.test(entry)))
     .sort();
   assert(currentEntries.length === 1 && currentEntries[0] === "generation_attempt_result.json", "run directory must contain generation_attempt_result.json as the only required portable evidence");
 

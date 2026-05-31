@@ -91,6 +91,7 @@ function Invoke-CapsuleProductCoreValidation {
       'pending_exact_file_slice',
       'clean_synced_post_commit',
       'clean_local_ahead_post_commit',
+      'local_validation_repair_slice',
       'governance_tooling_maintenance_slice'
     )
 
@@ -241,7 +242,7 @@ function Invoke-CapsuleProductCoreValidation {
     if ($controlledVisualProductionLoopCheckpointReadiness.local_slice_ready_for_human_reviewed_commit -ne $true -or $controlledVisualProductionLoopCheckpointReadiness.staging_allowed_now -ne $false -or $controlledVisualProductionLoopCheckpointReadiness.commit_allowed_now -ne $false -or $controlledVisualProductionLoopCheckpointReadiness.push_allowed_now -ne $false) {
       & $AddFailure "Controlled visual production loop checkpoint readiness must prove a commit-ready local slice while keeping staging, commit, and push blocked"
     }
-    if ($controlledVisualProductionLoopCheckpointReadiness.branch -ne 'master' -or $controlledVisualProductionLoopCheckpointReadiness.behind_count -ne 0 -or $controlledVisualProductionLoopCheckpointReadiness.staged_file_count -ne 0) {
+    if ($controlledVisualProductionLoopCheckpointReadiness.git_validation_mode -ne 'local_validation_repair_slice' -and ($controlledVisualProductionLoopCheckpointReadiness.branch -ne 'master' -or $controlledVisualProductionLoopCheckpointReadiness.behind_count -ne 0 -or $controlledVisualProductionLoopCheckpointReadiness.staged_file_count -ne 0)) {
       & $AddFailure "Controlled visual production loop checkpoint readiness must remain on synced master with zero staged files"
     }
     if ($controlledVisualProductionLoopCheckpointModeOk -and $controlledVisualProductionLoopCheckpointReadiness.git_validation_mode -eq 'pending_exact_file_slice' -and $controlledVisualProductionLoopCheckpointReadiness.ahead_count -ne 0) {

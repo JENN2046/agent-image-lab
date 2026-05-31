@@ -1,0 +1,86 @@
+package_id: visual_production_next_prompt_package_premium_black_wireless_headphones_product_hero_v1
+version: v1
+language: en
+mode: text_to_image
+reference_policy: text_only_no_image_input
+title: "Visual production next-shot prompt package v1 for premium black wireless headphones product hero"
+purpose: "Generation-ready planning prompt package for the next visual production cycle; this file does not contact providers, generate images, write memory, or create execution authorization."
+
+source_phase: AIL-VIS-14_target_identity_repair_gate
+source_shot_plan: prompts/image_generation/visual_production_next_shot_plan.yaml
+source_rubric: docs/VISUAL_EVAL_RUBRIC.md
+source_failure_taxonomy: docs/VISUAL_FAILURE_TAXONOMY.md
+selected_product: premium_black_wireless_headphones_product_hero
+selected_product_category: premium_audio_product
+target_shot_id: visual_production_next_shot_black_headphones_hero_01
+model_or_provider: TBD
+
+product_identity:
+  product_type: premium black wireless headphones product hero
+  product_category: premium audio product
+  category_terms:
+    - premium black wireless headphones product hero
+    - premium audio product hero
+    - premium black over-ear or on-ear headphones
+    - commercial headphones hero object
+  must_not_be:
+    - flashlight
+    - speaker
+    - bottle
+    - desk lamp
+    - humidifier
+    - thermos
+    - candle
+    - lantern
+    - vintage lamp
+
+visual_constraints:
+  shot_goal: commercial hero image of premium black wireless headphones
+  aspect_ratio: "1:1"
+  product_dominance: high
+  negative_space: controlled and headline-safe
+  mood: low-key premium dark audio
+  style: realistic commercial product photography
+  review_required: true
+
+positive_prompt_draft: |
+  Create a square premium black wireless headphones hero image with the subject dominating the frame. The image should feel like a premium commercial product photograph, not a casual snapshot or decorative scene.
+
+  Keep the headphones fully visible and centered as the hero. Use dark premium materials with believable metal, plastic, and cushion behavior, controlled reflections, and low-key lighting that keeps the silhouette strong. The product should read as high-end, modern, and technically refined. Preserve a calm, commercial composition with enough negative space for later headline placement.
+
+  The lighting should be restrained and elegant, with readable highlights and shadows that support the product form without making the scene feel theatrical. Keep the environment quiet, premium, and uncluttered. The result should feel suitable for a high-end audio product campaign and should avoid anything that makes the object look generic, cheap, or over-styled.
+
+negative_prompt_draft: |
+  readable text, generated text, random letters, logo, fake brand, watermark, signature, label, QR code,
+  people, hands, faces, human body,
+  extra products, duplicated object, cropped object, product too small, product hidden by props,
+  flashlight, speaker, bottle, desk lamp, humidifier, thermos, candle, lantern, vintage lamp,
+  camera lens, SSD, generic tech object,
+  broken geometry, warped body, melted shape, floating parts, impossible connections,
+  cheap plastic look, glossy toy-like finish, fake metal, fake glass, muddy surface, dirty reflections,
+  noisy background, clutter, distracting props, busy scenery, overexposed highlights, flat lighting,
+  illustration, cartoon, CGI look, low resolution, over-sharpened, visible AI artifact
+
+failure_taxonomy_refs:
+  - subject_drift
+  - material_fake_or_plastic
+  - lighting_inconsistent
+  - composition_unusable
+  - commercial_unfit
+  - background_noise
+  - detail_distortion
+  - text_logo_or_brand_risk
+  - human_or_hand_anomaly
+  - ai_artifact_visible
+  - provenance_or_trace_missing
+  - memory_unsuitable
+
+review_required: true
+provider_call_allowed_now: false
+image_generation_allowed_now: false
+runtime_execution_allowed_now: false
+memory_write_allowed_now: false
+daily_note_write_allowed_now: false
+accepted_samples_write_allowed_now: false
+production_candidate_allowed_now: false
+runs_output_creation_allowed_now: false

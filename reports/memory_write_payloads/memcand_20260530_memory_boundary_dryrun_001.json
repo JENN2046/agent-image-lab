@@ -1,0 +1,10 @@
+{
+  "candidate_id": "memcand_20260530_memory_boundary_dryrun_001",
+  "payload_type": "preview_only",
+  "redacted_summary_zh": "这是一个只读候选影子包，仍处于 pending 状态；exact writer target 还未进入实际写入，canonical memory target 保持未触碰。",
+  "forbidden_raw_fields_checked": true,
+  "actual_write_allowed": false,
+  "memory_candidate_type": "preview",
+  "exact_writer_target_status": "unresolved",
+  "canonical_memory_target": "A:\\codex-memory\\data\\dailynote\\Codex\\"
+}

@@ -1,0 +1,66 @@
+{
+  "phase": "v0_6_33_exact_new_trial_005_execution_closeout",
+  "attempt_id": "v0_3_3_exact_new_trial_005",
+  "attempt_status": "succeeded_image_generated",
+  "status": "succeeded_image_generated",
+  "created_date": "2026-05-30",
+  "attempted_at_local": "2026-05-30T01:24:01.1433672+08:00",
+  "provider_route": "image_gen.imagegen",
+  "prompt_package_ref": "prompts/image_generation/safe_adult_editorial_portrait_v1.yaml",
+  "artifact_return_trace": {
+    "trace_status": "artifact_located_and_copied_to_project",
+    "project_output_directory": "runs/real_generation/v0_3_3_exact_new_trial_005/",
+    "project_output_image_path": "runs/real_generation/v0_3_3_exact_new_trial_005/safe_adult_editorial_portrait_v1.png",
+    "artifact_returned_by_tool": true,
+    "artifact_source_path_sanitized": "<REDACTED_LOCAL_CODEX_GENERATED_IMAGE_PATH>",
+    "artifact_copied_to_project": true,
+    "project_output_sha256": "49ace6ba8ed68d2e8d52774a1a9eea0c2df868345e5ee81731ea86183880329a"
+  },
+  "provider_calls_used": 1,
+  "image_candidates_generated": 1,
+  "output_image_path": "runs/real_generation/v0_3_3_exact_new_trial_005/safe_adult_editorial_portrait_v1.png",
+  "output_image_sha256": "49ace6ba8ed68d2e8d52774a1a9eea0c2df868345e5ee81731ea86183880329a",
+  "output_image_dimensions": {
+    "width": 941,
+    "height": 1672
+  },
+  "output_image_mime": "image/png",
+  "output_image_size_bytes": 1823725,
+  "local_files_verified_count": 1,
+  "local_persistence_success": true,
+  "reviewable_sample": true,
+  "retry_limit": 0,
+  "retries_used": 0,
+  "raw_provider_payload_capture_performed": false,
+  "post_provider_payload_reconstruction_performed": false,
+  "raw_provider_response_capture_performed": false,
+  "secret_value_read_performed": false,
+  "VCP_memory_write_performed": false,
+  "DailyNote_write_performed": false,
+  "review_required": true,
+  "accepted_sample_auto_promotion": false,
+  "production_candidate_created": false,
+  "push_performed": false,
+  "review": {
+    "review_status": "passed",
+    "asset_status": "accepted_candidate_with_minor_watch_items",
+    "accepted_candidate": true,
+    "commercial_delivery_ready": false,
+    "memory_suitability": "deferred",
+    "archive_status": "reference_only",
+    "review_summary": "The image matches the prompt closely, with a clear adult editorial portrait, strong vertical composition, and no visible text, logo, or watermark. It is suitable for archival reference as an accepted candidate with minor watch items, but it is not commercial-delivery ready and should not be promoted to memory or production.",
+    "strengths": [
+      "adult subject and respectful editorial styling",
+      "vertical 9:16 composition",
+      "clean city terrace dusk background",
+      "professional lighting and readable facial expression",
+      "no visible text, logo, or watermark"
+    ],
+    "watch_items": [
+      "lower-body framing is slightly tight",
+      "foreground blur at the lower right draws a little attention",
+      "not commercial-delivery ready"
+    ]
+  },
+  "recommended_next": "archive_as_reference_only_without_memory_or_production_promotion"
+}

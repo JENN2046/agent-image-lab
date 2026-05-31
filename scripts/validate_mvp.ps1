@@ -7906,8 +7906,8 @@ if (-not $node) {
     $currentBranch = ((& git branch --show-current) -join "`n").Trim()
     if ($LASTEXITCODE -ne 0) {
       Add-Failure "git branch --show-current failed during local commit scope validation"
-    } elseif ($currentBranch -notin @('master', 'codex/v5.11-post-merge-reconciliation', 'codex/v5.12-release-candidate-readiness', 'codex/a5-complete-delivery-20260507', 'codex/runtime-review-followup')) {
-      Add-Failure "local commit scope expected branch master, codex/v5.11-post-merge-reconciliation, codex/v5.12-release-candidate-readiness, codex/a5-complete-delivery-20260507, or codex/runtime-review-followup, got $currentBranch"
+    } elseif ($currentBranch -notin @('master', 'codex/v5.11-post-merge-reconciliation', 'codex/v5.12-release-candidate-readiness', 'codex/a5-complete-delivery-20260507', 'codex/runtime-review-followup', 'ail-vis-22-accepted-sample-promotion-execution')) {
+      Add-Failure "local commit scope expected branch master, codex/v5.11-post-merge-reconciliation, codex/v5.12-release-candidate-readiness, codex/a5-complete-delivery-20260507, codex/runtime-review-followup, or ail-vis-22-accepted-sample-promotion-execution, got $currentBranch"
     }
 
     $localTagCommit = ((& git rev-parse --short=7 v4.8-local-validation-checkpoint) -join "`n").Trim()
@@ -8207,8 +8207,23 @@ process.exit(child.status || 0);
     if ($acceptedSampleRegistry.metadata_only -ne $true) {
       Add-Failure "accepted sample registry validation must be metadata-only"
     }
-    if ($acceptedSampleRegistry.image_files_committed_to_git -ne $false) {
-      Add-Failure "accepted sample registry validation must verify no image files are committed"
+    if ($acceptedSampleRegistry.image_files_committed_to_git -ne $acceptedSampleRegistry.any_image_files_committed_to_git) {
+      Add-Failure "accepted sample registry validation image_files_committed_to_git must match any_image_files_committed_to_git"
+    }
+    if ($acceptedSampleRegistry.image_files_committed_to_git_summary -eq "mixed") {
+      if ($acceptedSampleRegistry.any_image_files_committed_to_git -ne $true -or $acceptedSampleRegistry.all_image_files_committed_to_git -ne $false) {
+        Add-Failure "accepted sample registry mixed image commit summary must report any=true and all=false"
+      }
+    } elseif ($acceptedSampleRegistry.image_files_committed_to_git_summary -eq "none") {
+      if ($acceptedSampleRegistry.any_image_files_committed_to_git -ne $false -or $acceptedSampleRegistry.all_image_files_committed_to_git -ne $false) {
+        Add-Failure "accepted sample registry none image commit summary must report any=false and all=false"
+      }
+    } elseif ($acceptedSampleRegistry.image_files_committed_to_git_summary -eq "all") {
+      if ($acceptedSampleRegistry.any_image_files_committed_to_git -ne $true -or $acceptedSampleRegistry.all_image_files_committed_to_git -ne $true) {
+        Add-Failure "accepted sample registry all image commit summary must report any=true and all=true"
+      }
+    } else {
+      Add-Failure "accepted sample registry validation must publish a known image_files_committed_to_git_summary"
     }
     if ($acceptedSampleRegistry.runs_source_image_modification_allowed -ne $false) {
       Add-Failure "accepted sample registry validation must block runs source image modification"
@@ -11436,8 +11451,8 @@ process.exit(child.status || 0);
     if ($sixMonthGoalPromptToArtifactCompletionAudit.goal_complete -ne $false -or $sixMonthGoalPromptToArtifactCompletionAudit.prompt_to_artifact_audit_only -ne $true) {
       Add-Failure "v14.212 six-month goal audit must remain incomplete and audit-only"
     }
-    if ($sixMonthGoalPromptToArtifactCompletionAudit.recoverable_accepted_sample_count -ne 5 -or $sixMonthGoalPromptToArtifactCompletionAudit.blocked_third_candidate_count -ne 0 -or $sixMonthGoalPromptToArtifactCompletionAudit.remaining_full_recoverable_sample_gap -ne 0) {
-      Add-Failure "v14.212 six-month goal audit must preserve the current five-sample local recoverability baseline"
+    if ($sixMonthGoalPromptToArtifactCompletionAudit.recoverable_accepted_sample_count -ne 6 -or $sixMonthGoalPromptToArtifactCompletionAudit.blocked_third_candidate_count -ne 0 -or $sixMonthGoalPromptToArtifactCompletionAudit.remaining_full_recoverable_sample_gap -ne 0) {
+      Add-Failure "v14.212 six-month goal audit must preserve the current six-sample local recoverability baseline"
     }
     if ($sixMonthGoalPromptToArtifactCompletionAudit.success_criteria_count -ne 8 -or $sixMonthGoalPromptToArtifactCompletionAudit.met_count -ne 3 -or $sixMonthGoalPromptToArtifactCompletionAudit.partial_count -ne 3 -or $sixMonthGoalPromptToArtifactCompletionAudit.not_met_count -ne 2 -or $sixMonthGoalPromptToArtifactCompletionAudit.blocked_by_a5_count -ne 1) {
       Add-Failure "v14.212 six-month goal audit must preserve the prompt-to-artifact checklist counts"

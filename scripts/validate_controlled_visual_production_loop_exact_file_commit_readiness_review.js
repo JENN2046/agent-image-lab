@@ -97,6 +97,14 @@ const isValidatorSelfMaintenancePatch = selfMaintenanceAllowed
   && stagedFiles.length === 0
   && untrackedFiles.length === 0
   && JSON.stringify([...modifiedTracked].sort()) === JSON.stringify(validatorMaintenanceFiles);
+const exactPendingSliceMatches = JSON.stringify(changedFiles) === JSON.stringify(exactExpected);
+const branchMatchesExpected = branch === fixture.git_expectation.branch;
+const isLocalValidationRepairSlice = branchMatchesExpected
+  && behind === 0
+  && stagedFiles.length === 0
+  && untrackedFiles.length === 0
+  && changedFiles.length > 0
+  && exactPendingSliceMatches;
 const governanceToolingMaintenanceSliceReport = buildGovernanceToolingMaintenanceSliceReport({
   changedFiles,
   stagedFiles,
@@ -108,10 +116,12 @@ const governanceToolingMaintenanceSliceSelfCheck = runGovernanceToolingMaintenan
 const isGovernanceToolingMaintenanceSlice = governanceToolingMaintenanceSliceReport.passed;
 const shouldValidateGovernanceToolingSlice = changedFiles.length > 0
   && !isValidatorSelfMaintenancePatch
+  && !isLocalValidationRepairSlice
   && governanceToolingMaintenanceSliceReport.path_allowed;
-const acceptsCurrentGitShape = isCleanCommittedState || isValidatorSelfMaintenancePatch || isGovernanceToolingMaintenanceSlice;
+const acceptsCurrentGitShape = isCleanCommittedState || isValidatorSelfMaintenancePatch || isLocalValidationRepairSlice || isGovernanceToolingMaintenanceSlice;
 const currentPendingSliceEvidence = JSON.stringify(changedFiles) === JSON.stringify(exactExpected)
   || isValidatorSelfMaintenancePatch
+  || isLocalValidationRepairSlice
   || isGovernanceToolingMaintenanceSlice
   || isCleanCommittedState;
 
@@ -128,7 +138,7 @@ add("commit_trailer_present", fixture.commit_readiness_decision.commit_trailer_r
 add("governance_tooling_slice_helper_self_check", governanceToolingMaintenanceSliceSelfCheck.passed, governanceToolingMaintenanceSliceSelfCheck.failures);
 add("governance_tooling_slice_exact_current_files", !shouldValidateGovernanceToolingSlice || governanceToolingMaintenanceSliceReport.exact_slice_matches, governanceToolingMaintenanceSliceReport);
 add("governance_tooling_package_preview_script_only", !shouldValidateGovernanceToolingSlice || !changedFiles.includes("package.json") || governanceToolingMaintenanceSliceReport.package_change_allowed, governanceToolingMaintenanceSliceReport.package_change_mode);
-add("branch", branch === fixture.git_expectation.branch, branch);
+add("branch", branchMatchesExpected, branch);
 add("ahead_count_or_clean_post_commit", acceptsCurrentGitShape || ahead === fixture.git_expectation.ahead_count, String(ahead));
 add("behind_count", behind === fixture.git_expectation.behind_count, String(behind));
 add("staged_file_count", stagedFiles.length === fixture.git_expectation.staged_file_count, String(stagedFiles.length));
@@ -136,7 +146,7 @@ add("tracked_modified_count_or_allowed_post_commit_state", acceptsCurrentGitShap
 add("untracked_file_count_or_allowed_post_commit_state", acceptsCurrentGitShape || untrackedFiles.length === fixture.git_expectation.untracked_file_count, String(untrackedFiles.length));
 add("exact_stage_file_count_or_allowed_post_commit_state", acceptsCurrentGitShape || changedFiles.length === fixture.git_expectation.exact_stage_file_count, String(changedFiles.length));
 add("candidate_groups_total_matches", candidateGroupsTotal === fixture.git_expectation.exact_stage_file_count, String(candidateGroupsTotal));
-add("exact_stage_files_match_or_allowed_post_commit_state", acceptsCurrentGitShape || JSON.stringify(changedFiles) === JSON.stringify(exactExpected));
+add("exact_stage_files_match_or_allowed_post_commit_state", acceptsCurrentGitShape || exactPendingSliceMatches);
 add("post_commit_proof_exists_or_pending_slice", postCommitProof !== null || currentPendingSliceEvidence, postCommitProof?.hash || (isCleanCommittedState ? "current_clean_committed_state" : currentPendingSliceEvidence ? "current_pending_slice_evidence" : null));
 add("no_staged_files_now", stagedFiles.length === 0);
 
@@ -258,9 +268,11 @@ const output = {
       ? "clean_local_ahead_post_commit"
       : isValidatorSelfMaintenancePatch
         ? "validator_self_maintenance_patch"
-        : isGovernanceToolingMaintenanceSlice
-          ? "governance_tooling_maintenance_slice"
-          : "pending_exact_file_slice",
+        : isLocalValidationRepairSlice
+          ? "local_validation_repair_slice"
+          : isGovernanceToolingMaintenanceSlice
+            ? "governance_tooling_maintenance_slice"
+            : "pending_exact_file_slice",
   governance_tooling_maintenance_slice: isGovernanceToolingMaintenanceSlice,
   local_commit_ready_after_explicit_human_review: fixture.commit_readiness_decision.local_commit_ready_after_explicit_human_review,
   auto_commit_allowed_now: fixture.commit_readiness_decision.auto_commit_allowed_now,
