@@ -105,6 +105,10 @@ function recommend(files) {
   const baseCommands = [
     "node scripts/validate_validation_manifest.js",
   ];
+  const activeRecommended = normalizedFiles.some((file) => file === "package.json");
+  if (activeRecommended) {
+    baseCommands.push("npm run validate:active");
+  }
   if (!matches.some((entry) => entry.id === "smoke")) {
     baseCommands.push("npm run validate:smoke");
   }
@@ -117,6 +121,8 @@ function recommend(files) {
     changed_files: normalizedFiles,
     matched_validator_count: matches.length,
     recommended_commands: commands,
+    active_recommended: activeRecommended,
+    validate_active_command: "npm run validate:active",
     mvp_recommended: mvpRecommended,
     validate_mvp_command: "npm run validate:mvp",
     matches,
