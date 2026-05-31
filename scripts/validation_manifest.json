@@ -108,6 +108,23 @@
       ]
     },
     {
+      "id": "validation_benchmark_observability",
+      "command": "node scripts/benchmark_validation_efficiency.js --no-write --iterations=1",
+      "script": "scripts/benchmark_validation_efficiency.js",
+      "tier": "targeted",
+      "domain": "validation_observability",
+      "status": "active",
+      "estimated_runtime_class": "medium",
+      "trigger_paths": [
+        "scripts/benchmark_validation_efficiency.js",
+        "reports/validation_benchmarks/**"
+      ],
+      "required_for": [
+        "validation_benchmark_report_closeout",
+        "daily_efficiency_baseline_report"
+      ]
+    },
+    {
       "id": "native_doubao_runner_dry_run",
       "command": "node scripts/run_native_doubao_image_generation.js --case-id=tennis_wallet_hero_v2_preflight --dry-run=true",
       "script": "scripts/run_native_doubao_image_generation.js",
