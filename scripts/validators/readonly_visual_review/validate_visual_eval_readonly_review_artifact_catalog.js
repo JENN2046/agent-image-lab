@@ -439,13 +439,15 @@ function validateNegativeCases(catalog, negativeCases) {
 }
 
 function main() {
+  const skipReferencedValidators = process.argv.includes("--skip-referenced-validators");
   addResult(`${catalogPath}_exists`, fs.existsSync(repoPath(catalogPath)), catalogPath);
   addResult(`${negativeCasesPath}_exists`, fs.existsSync(repoPath(negativeCasesPath)), negativeCasesPath);
   const catalog = readJson(catalogPath);
   const negativeCases = readJson(negativeCasesPath);
+  const validators = [...new Set((catalog.artifact_entries || []).map((entry) => entry.validator))];
   addResult("catalog_json_parseable", true);
   addResult("negative_cases_json_parseable", true);
-  validateCatalogShape(catalog);
+  validateCatalogShape(catalog, { skipReferencedValidators });
   validateNegativeCases(catalog, negativeCases);
 
   const passed = errors.length === 0;
@@ -456,7 +458,9 @@ function main() {
     negative_cases: negativeCasesPath,
     artifact_count: catalog.artifact_entries?.length || 0,
     negative_case_count: negativeCases.negative_cases?.length || 0,
-    validators_run: [...new Set((catalog.artifact_entries || []).map((entry) => entry.validator))],
+    validators_declared: validators,
+    validators_run: skipReferencedValidators ? [] : validators,
+    referenced_validators_skipped: skipReferencedValidators,
     provider_contact_performed: false,
     plugin_call_performed: false,
     api_call_performed: false,

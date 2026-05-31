@@ -116,8 +116,8 @@ function readJson(relativePath) {
   return JSON.parse(read(relativePath));
 }
 
-function runNode(scriptPath) {
-  return execFileSync(process.execPath, [scriptPath], {
+function runNode(scriptPath, args = []) {
+  return execFileSync(process.execPath, [scriptPath, ...args], {
     cwd: root,
     encoding: "utf8",
     stdio: ["ignore", "pipe", "pipe"],
@@ -343,14 +343,29 @@ function assertPackageAndMvpWiring() {
 }
 
 function assertExistingValidatorsStillPass() {
-  const validatorScripts = [
-    "scripts/validate_visual_eval_readonly_review_artifact_system.js",
-    "scripts/validate_visual_eval_review_console_readonly_corpus_renderer.js",
-    "scripts/validate_visual_eval_readonly_review_artifact_catalog.js",
+  const validatorInvocations = [
+    {
+      script: "scripts/validate_visual_eval_readonly_review_artifact_system.js",
+      args: ["--skip-validator-runs"],
+      skipField: "validator_runs_skipped",
+    },
+    {
+      script: "scripts/validate_visual_eval_review_console_readonly_corpus_renderer.js",
+      args: [],
+    },
+    {
+      script: "scripts/validate_visual_eval_readonly_review_artifact_catalog.js",
+      args: ["--skip-referenced-validators"],
+      skipField: "referenced_validators_skipped",
+    },
   ];
-  for (const script of validatorScripts) {
-    const result = parseJson(runNode(script));
-    addResult(`mvp_existing_validator_${path.basename(script, ".js")}_passed`, result.passed === true);
+  for (const invocation of validatorInvocations) {
+    const result = parseJson(runNode(invocation.script, invocation.args));
+    const validatorId = path.basename(invocation.script, ".js");
+    if (invocation.skipField) {
+      addResult(`mvp_existing_validator_${validatorId}_${invocation.skipField}`, result[invocation.skipField] === true);
+    }
+    addResult(`mvp_existing_validator_${validatorId}_passed`, result.passed === true);
   }
 }
 

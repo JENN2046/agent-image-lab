@@ -331,10 +331,11 @@ function validateNegativeCases(baseCatalog, baseRenderer, baseConsoleHandoff) {
 }
 
 function main() {
+  const skipValidatorRuns = process.argv.includes("--skip-validator-runs");
   const catalog = readJson(catalogPath);
   const renderer = readJson(rendererPath);
   const consoleHandoff = readJson(consoleHandoffPath);
-  validateSystemShape(catalog, renderer, consoleHandoff);
+  validateSystemShape(catalog, renderer, consoleHandoff, { skipValidatorRuns });
   validateNegativeCases(catalog, renderer, consoleHandoff);
 
   const output = {
@@ -346,7 +347,9 @@ function main() {
     console_handoff: consoleHandoffPath,
     artifact_count: Array.isArray(catalog.artifact_entries) ? catalog.artifact_entries.length : 0,
     negative_case_count: negativeCases.length,
-    validators_run: [catalogValidatorPath, consoleValidatorPath],
+    validators_declared: [catalogValidatorPath, consoleValidatorPath],
+    validators_run: skipValidatorRuns ? [] : [catalogValidatorPath, consoleValidatorPath],
+    validator_runs_skipped: skipValidatorRuns,
     provider_contact_performed: false,
     plugin_call_performed: false,
     api_call_performed: false,
