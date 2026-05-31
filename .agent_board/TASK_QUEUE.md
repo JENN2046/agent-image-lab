@@ -1,3 +1,25 @@
+- [x] ID: runtime_to_review_v1_guarded_live_probe_real_bound_activation_20260531
+      Lane: Amber_B provider/image live probe with exact owner confirmation.
+      Status: completed_validated_local.
+      Goal: Execute one guarded live probe through the real bound owner runtime after exact confirmation and record review-ready receipt evidence.
+      Current branch: master.
+      Source preflight packet: reports/runtime_to_review_v1/guarded_live_probe_real_bound_owner_runtime_20260531_preflight_packet.json.
+      Activation record: docs/RUNTIME_TO_REVIEW_V1_GUARDED_LIVE_PROBE_REAL_BOUND_ACTIVATION_20260531.md.
+      Receipt: reports/runtime_to_review_v1/guarded_live_probe_real_bound_owner_runtime_20260531_receipt.json.
+      Validator: scripts/validate_runtime_to_review_v1_guarded_live_probe_20260531_receipt.js.
+      Exact confirmation phrase received: true.
+      Result: completed_provider_image_created.
+      Calls used: provider=1; plugin=1; api=1.
+      Image count: 1.
+      Artifact: runs/real_generation/runtime_to_review_v1_guarded_live_probe/image/doubaogen/e8188e17-cbb7-4518-99bb-56aafb283de8.png.
+      Artifact SHA256: c8be5644a7dcc5af94f193865f2660fa327824db49f52f8190a225d4ab8c86d4.
+      Watchpoint: artifact path ends with .png but MIME/magic identify JPEG bytes.
+      Boundary fields: provider_contact_performed=true; plugin_call_performed=true; api_call_performed=true; image_generation_performed=true; forbidden_disk_write_performed=false; secret_value_read_performed=false; env_file_content_read_performed=false; accepted_samples_write_performed=false; production_candidate_write_performed=false; DailyNote_write_performed=false; VCP_memory_write_performed=false; push_tag_release_deploy_performed=false.
+      Validation: `node --check scripts\validate_runtime_to_review_v1_guarded_live_probe_20260531_receipt.js` passed; `node scripts\validate_runtime_to_review_v1_guarded_live_probe_20260531_receipt.js` passed; visual open check passed.
+      Recommended next: closeout validation, then human visual review gate for the generated apple image. No accepted sample, memory, production candidate, commit, or push without separate instruction.
+
+---
+
 - [x] ID: runtime_to_review_v1_guarded_live_probe_real_bound_preflight
       Lane: Amber_B provider/image preflight packet prepared as inactive local record.
       Status: completed_validated_local.

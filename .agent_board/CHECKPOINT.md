@@ -1,3 +1,54 @@
+## Checkpoint - Runtime-to-Review V1 Real-Bound Guarded Live Probe Activation 2026-05-31
+
+```text
+phase: runtime_to_review_v1_guarded_live_probe_real_bound_activation_20260531
+status: completed_validated_local
+result: REAL_BOUND_GUARDED_LIVE_PROBE_CREATED_ONE_IMAGE
+mode: Amber_B provider/image live probe with exact owner confirmation
+summary: The owner supplied the exact confirmation phrase and one guarded live probe was executed through the real bound owner runtime. The run completed with one provider/plugin/API call each and one generated image. Receipt evidence was recorded; no accepted_samples, production candidate, memory, tag, release, deploy, or push action occurred.
+branch: master
+changed_files_current_task:
+  - docs/RUNTIME_TO_REVIEW_V1_GUARDED_LIVE_PROBE_REAL_BOUND_ACTIVATION_20260531.md
+  - reports/runtime_to_review_v1/guarded_live_probe_real_bound_owner_runtime_20260531_receipt.json
+  - scripts/validate_runtime_to_review_v1_guarded_live_probe_20260531_receipt.js
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+workspace_local_generated_artifact:
+  path: runs/real_generation/runtime_to_review_v1_guarded_live_probe/image/doubaogen/e8188e17-cbb7-4518-99bb-56aafb283de8.png
+  sha256: c8be5644a7dcc5af94f193865f2660fa327824db49f52f8190a225d4ab8c86d4
+  bytes: 133553
+  mime_type: image/jpeg
+  dimensions: 1920x2048
+  magic_number: ffd8ffe000104a4649460001
+  git_tracked: false
+  workspace_local: true
+watchpoint: provider wrote JPEG bytes to a .png path; future tooling should trust MIME and magic number over extension.
+validation_run:
+  - node --check scripts\validate_runtime_to_review_v1_guarded_live_probe_20260531_receipt.js: passed
+  - node scripts\validate_runtime_to_review_v1_guarded_live_probe_20260531_receipt.js: passed
+  - visual open check: passed
+boundary_checks:
+  provider_contact_performed: true
+  plugin_call_performed: true
+  api_call_performed: true
+  image_generation_performed: true
+  forbidden_disk_write_performed: false
+  secret_value_read_performed: false
+  env_file_content_read_performed: false
+  secret_values_printed: false
+  secret_values_written: false
+  accepted_samples_write_performed: false
+  production_candidate_write_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  push_tag_release_deploy_performed: false
+recommended_next: closeout validation, then human visual review gate for the generated apple image.
+```
+
+---
+
 ## Checkpoint - Runtime-to-Review V1 Real-Bound Guarded Live Probe Preflight
 
 ```text

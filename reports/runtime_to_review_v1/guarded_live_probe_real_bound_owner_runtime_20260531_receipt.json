@@ -1,0 +1,101 @@
+{
+  "schema": "runtime_to_review_v1_guarded_live_probe_activation_receipt.v1",
+  "receipt_id": "guarded_live_probe_real_bound_owner_runtime_20260531_receipt",
+  "created_at": "2026-05-31T19:12:00+08:00",
+  "source_preflight_packet_ref": "reports/runtime_to_review_v1/guarded_live_probe_real_bound_owner_runtime_20260531_preflight_packet.json",
+  "authorization": {
+    "exact_confirmation_phrase_received": true,
+    "exact_confirmation_phrase": "RUNTIME_TO_REVIEW_V1_ONE_PROVIDER_ONE_IMAGE",
+    "execution_authorized_by_owner": true,
+    "max_provider_calls": 1,
+    "max_plugin_calls": 1,
+    "max_api_calls": 1,
+    "max_images": 1,
+    "retry_allowed": false
+  },
+  "command": [
+    "node",
+    "scripts/run_runtime_to_review_v1_guarded_live_probe.js",
+    "--provider-delegate-module",
+    "adapters/runtime/native_doubao_runtime_v1_provider_delegate.js",
+    "--owner-runtime-module",
+    "adapters/runtime/native_doubao_runtime_v1_real_bound_owner_runtime.js",
+    "--confirm-live-provider-probe",
+    "RUNTIME_TO_REVIEW_V1_ONE_PROVIDER_ONE_IMAGE",
+    "--max-images",
+    "1"
+  ],
+  "result": {
+    "passed": true,
+    "runner_id": "runtime_to_review_v1_guarded_live_probe_runner",
+    "kernel_id": "runtime_kernel_v1_real_provider_guarded",
+    "status": "completed_provider_image_created",
+    "task_id": "runtime-v1-real-guarded-task-001",
+    "run_id": "runtime_v1_real_guarded_smoke_001",
+    "provider_delegate_module": "adapters/runtime/native_doubao_runtime_v1_provider_delegate.js",
+    "owner_runtime_module": "adapters/runtime/native_doubao_runtime_v1_real_bound_owner_runtime.js",
+    "source_prompt_package_ref": "prompts/image_generation/neutral_smoke_test_red_apple_v1.yaml",
+    "provider_route": "native_doubao_guarded",
+    "provider_mode": "real_guarded",
+    "model_required": "doubao-seedream-5-0-260128",
+    "model_sent": "doubao-seedream-5-0-260128",
+    "calls_used": {
+      "provider": 1,
+      "plugin": 1,
+      "api": 1
+    },
+    "image_count": 1,
+    "stop_reason": null
+  },
+  "artifact": {
+    "path": "runs/real_generation/runtime_to_review_v1_guarded_live_probe/image/doubaogen/e8188e17-cbb7-4518-99bb-56aafb283de8.png",
+    "bytes": 133553,
+    "sha256": "c8be5644a7dcc5af94f193865f2660fa327824db49f52f8190a225d4ab8c86d4",
+    "mime_type": "image/jpeg",
+    "dimensions": "1920x2048",
+    "magic_number": "ffd8ffe000104a4649460001",
+    "workspace_local_artifact": true,
+    "git_tracked_artifact": false,
+    "gitignore_rule": "/runs/real_generation/*/*",
+    "extension_mime_mismatch_watchpoint": true,
+    "extension_mime_mismatch_note": "The provider wrote JPEG bytes to a .png path. Hash, magic number, and MIME are recorded as observed; future review tooling should use MIME/magic instead of extension only."
+  },
+  "runtime_refs": {
+    "artifact_record_ref": "runtime-to-review-v1://runtime_v1_real_guarded_smoke_001/artifact_record.json",
+    "audit_receipt_ref": "runtime-to-review-v1://runtime_v1_real_guarded_smoke_001/audit_receipt.json",
+    "review_bridge_ref": "runtime-to-review-v1://runtime_v1_real_guarded_smoke_001/review_bridge_entry.json"
+  },
+  "review_gate": {
+    "human_review_required": true,
+    "current_review_status": "pending_human_review",
+    "display_only": true,
+    "metadata_only_review_bridge": true,
+    "accepted_sample_write_allowed_now": false,
+    "production_candidate_allowed_now": false,
+    "memory_write_allowed_now": false
+  },
+  "side_effect_flags": {
+    "provider_contact_performed": true,
+    "plugin_call_performed": true,
+    "api_call_performed": true,
+    "image_generation_performed": true,
+    "forbidden_disk_write_performed": false,
+    "production_write_performed": false,
+    "accepted_samples_write_performed": false,
+    "DailyNote_write_performed": false,
+    "VCP_memory_write_performed": false,
+    "secret_value_read_performed": false,
+    "env_file_content_read_performed": false,
+    "secret_values_printed": false,
+    "secret_values_written": false,
+    "push_tag_release_deploy_performed": false
+  },
+  "validation": {
+    "artifact_exists_at_closeout": true,
+    "artifact_sha256_verified_at_closeout": true,
+    "artifact_magic_number_verified_at_closeout": true,
+    "artifact_dimensions_reported_by_runtime": true,
+    "validator_ref": "scripts/validate_runtime_to_review_v1_guarded_live_probe_20260531_receipt.js"
+  },
+  "next_safe_task": "Run the receipt validator and status-surface sync, then route the generated image to a human visual review gate. Do not promote to accepted_samples, write memory, start production candidate, or push without separate authorization."
+}

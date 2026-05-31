@@ -1,3 +1,38 @@
+## Current Handoff Update - Runtime-to-Review V1 Real-Bound Guarded Live Probe Activation 2026-05-31
+
+```text
+phase: runtime_to_review_v1_guarded_live_probe_real_bound_activation_20260531
+status: completed_validated_local
+mode: Amber_B provider/image live probe with exact owner confirmation
+goal: Execute the runtime-to-review guarded live probe once with the real bound owner runtime after exact confirmation, record a receipt, and stop before accepted_samples, memory, production candidate, commit, or push.
+branch: master
+source_preflight_packet_ref: reports/runtime_to_review_v1/guarded_live_probe_real_bound_owner_runtime_20260531_preflight_packet.json
+activation_record_ref: docs/RUNTIME_TO_REVIEW_V1_GUARDED_LIVE_PROBE_REAL_BOUND_ACTIVATION_20260531.md
+receipt_ref: reports/runtime_to_review_v1/guarded_live_probe_real_bound_owner_runtime_20260531_receipt.json
+validator_ref: scripts/validate_runtime_to_review_v1_guarded_live_probe_20260531_receipt.js
+exact_confirmation_phrase_received: true
+exact_confirmation_phrase: RUNTIME_TO_REVIEW_V1_ONE_PROVIDER_ONE_IMAGE
+result_status: completed_provider_image_created
+calls_used: provider=1; plugin=1; api=1.
+image_count: 1
+artifact_path: runs/real_generation/runtime_to_review_v1_guarded_live_probe/image/doubaogen/e8188e17-cbb7-4518-99bb-56aafb283de8.png
+artifact_sha256: c8be5644a7dcc5af94f193865f2660fa327824db49f52f8190a225d4ab8c86d4
+artifact_mime_type: image/jpeg
+artifact_dimensions: 1920x2048
+artifact_magic_number: ffd8ffe000104a4649460001
+artifact_git_tracked: false
+artifact_workspace_local: true
+watchpoint: provider wrote JPEG bytes to a .png path; review/tooling should use MIME and magic number instead of extension only.
+validation_run:
+  - node --check scripts\validate_runtime_to_review_v1_guarded_live_probe_20260531_receipt.js: passed
+  - node scripts\validate_runtime_to_review_v1_guarded_live_probe_20260531_receipt.js: passed
+visual_open_check: passed
+boundary_checks: provider_contact_performed=true; plugin_call_performed=true; api_call_performed=true; image_generation_performed=true; forbidden_disk_write_performed=false; secret_value_read_performed=false; env_file_content_read_performed=false; secret_values_printed=false; secret_values_written=false; accepted_samples_write_performed=false; production_candidate_write_performed=false; DailyNote_write_performed=false; VCP_memory_write_performed=false; push_tag_release_deploy_performed=false.
+next_safe_task: run closeout validation, then open a human visual review gate for the generated apple image; do not promote, write memory, start production candidate, commit, or push without separate instruction.
+```
+
+---
+
 ## Current Handoff Update - Runtime-to-Review V1 Real-Bound Guarded Live Probe Preflight
 
 ```text
