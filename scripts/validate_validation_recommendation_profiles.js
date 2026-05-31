@@ -40,6 +40,14 @@ function runRecommenderArgs(args) {
   return JSON.parse(output);
 }
 
+function runRecommenderRaw(args) {
+  return execFileSync(process.execPath, args, {
+    cwd: root,
+    encoding: "utf8",
+    stdio: ["ignore", "pipe", "pipe"],
+  });
+}
+
 function normalizePath(file) {
   return file.replace(/\\/g, "/").replace(/^\.\//, "");
 }
@@ -276,6 +284,11 @@ function validateWiring() {
     scripts["validate:recommendation-profiles"]
   );
   add(
+    "package_json_recommendation_next_commands_script",
+    scripts["recommend:validation:next-commands"] === "node scripts/recommend_validation_for_changed_files.js --next-commands",
+    scripts["recommend:validation:next-commands"]
+  );
+  add(
     "validate_active_includes_manifest_validator",
     validateActive.includes("npm run validate:validation-manifest")
   );
@@ -301,6 +314,35 @@ function validateWiring() {
     recommenderSource.includes("if (cached)") &&
       recommenderSource.includes("untracked_files: []") &&
       recommenderSource.indexOf("untracked_files: []") < recommenderSource.indexOf('"ls-files", "--others", "--exclude-standard"')
+  );
+  const nextCommandsText = runRecommenderRaw([
+    recommenderScript,
+    "--files",
+    "package.json",
+    "--next-commands",
+  ]).trim().split(/\r?\n/).filter(Boolean);
+  const nextCommandsJson = JSON.parse(runRecommenderRaw([
+    recommenderScript,
+    "--files",
+    "package.json",
+    "--next-commands=json",
+  ]));
+  add(
+    "recommender_next_commands_text_output",
+    JSON.stringify(nextCommandsText) === JSON.stringify([
+      "node scripts/validate_validation_manifest.js",
+      "npm run validate:active",
+    ]),
+    nextCommandsText
+  );
+  add(
+    "recommender_next_commands_json_lite_output",
+    nextCommandsJson.passed === true &&
+      nextCommandsJson.primary_profile === "daily" &&
+      Array.isArray(nextCommandsJson.next_commands) &&
+      nextCommandsJson.next_commands.includes("npm run validate:active") &&
+      Array.isArray(nextCommandsJson.deferred_commands),
+    nextCommandsJson
   );
   add(
     "benchmark_summary_keeps_active_recommended",
@@ -353,6 +395,14 @@ function validateWiring() {
       benchmarkSource.includes("validation_decision_summary: parsed.validation_decision_summary || null")
   );
   add(
+    "benchmark_summary_keeps_next_commands_json_lite",
+    benchmarkSource.includes('"primary_profile"') &&
+      benchmarkSource.includes('"primary_command"') &&
+      benchmarkSource.includes('"next_commands"') &&
+      benchmarkSource.includes("next_commands_baseline") &&
+      benchmarkSource.includes("function summarizeNextCommandsBaseline")
+  );
+  add(
     "benchmark_summary_keeps_covered_commands",
     benchmarkSource.includes("covered_commands: parsed.validation_plan?.covered_commands || []")
   );
@@ -365,6 +415,11 @@ function validateWiring() {
     "benchmark_daily_profile_probe_present",
     benchmarkSource.includes('id: "recommend_validation_daily_profile"') &&
       benchmarkSource.includes("node scripts/recommend_validation_for_changed_files.js --files package.json")
+  );
+  add(
+    "benchmark_next_commands_json_lite_probe_present",
+    benchmarkSource.includes('id: "recommend_validation_next_commands_json_lite"') &&
+      benchmarkSource.includes("node scripts/recommend_validation_for_changed_files.js --files package.json --next-commands=json")
   );
   add(
     "benchmark_observability_profile_probe_present",
@@ -418,6 +473,17 @@ function validateWiring() {
       validationSelectionMatrix.includes("change_selection.tracked_diff_file_count") &&
       validationSelectionMatrix.includes("change_selection.untracked_file_count") &&
       validationSelectionMatrix.includes("change_selection.explicit_file_count")
+  );
+  add(
+    "selection_matrix_documents_next_commands_light_outputs",
+    validationSelectionMatrix.includes("npm run recommend:validation:next-commands") &&
+      validationSelectionMatrix.includes("node scripts/recommend_validation_for_changed_files.js --next-commands=json") &&
+      validationSelectionMatrix.includes("one command per line") &&
+      validationSelectionMatrix.includes("JSON-lite form") &&
+      validationSelectionMatrix.includes("primary_profile") &&
+      validationSelectionMatrix.includes("primary_command") &&
+      validationSelectionMatrix.includes("next_commands") &&
+      validationSelectionMatrix.includes("deferred_commands")
   );
   add(
     "selection_matrix_names_recommendation_profiles",
@@ -561,6 +627,22 @@ function validateLatestBenchmarkReportContract() {
   add("latest_benchmark_report_api_call_false", report.api_call_performed === false, report.api_call_performed);
   add("latest_benchmark_report_image_generation_false", report.image_generation_performed === false, report.image_generation_performed);
   add("latest_benchmark_report_secret_value_read_false", report.secret_value_read_performed === false, report.secret_value_read_performed);
+  const nextCommandsBaseline = report.next_commands_baseline || null;
+  add("latest_benchmark_report_next_commands_baseline_present", benchmarkInProgress || (nextCommandsBaseline && typeof nextCommandsBaseline === "object"), {
+    benchmarkInProgress,
+    next_commands_baseline: nextCommandsBaseline,
+  });
+  add("latest_benchmark_report_next_commands_baseline_passed", benchmarkInProgress || nextCommandsBaseline?.passed === true, {
+    benchmarkInProgress,
+    next_commands_baseline: nextCommandsBaseline,
+  });
+  add("latest_benchmark_report_next_commands_baseline_contract_v1", benchmarkInProgress || nextCommandsBaseline?.recommendation_contract_version === 1, nextCommandsBaseline?.recommendation_contract_version);
+  add("latest_benchmark_report_next_commands_baseline_daily_profile", benchmarkInProgress || nextCommandsBaseline?.primary_profile === "daily", nextCommandsBaseline?.primary_profile);
+  add("latest_benchmark_report_next_commands_baseline_active_command", benchmarkInProgress || nextCommandsBaseline?.primary_command === "npm run validate:active", nextCommandsBaseline?.primary_command);
+  add("latest_benchmark_report_next_commands_baseline_commands_array", benchmarkInProgress || (Array.isArray(nextCommandsBaseline?.next_commands) &&
+    nextCommandsBaseline.next_commands.includes("node scripts/validate_validation_manifest.js") &&
+    nextCommandsBaseline.next_commands.includes("npm run validate:active")), nextCommandsBaseline?.next_commands);
+  add("latest_benchmark_report_next_commands_baseline_deferred_array", benchmarkInProgress || Array.isArray(nextCommandsBaseline?.deferred_commands), nextCommandsBaseline?.deferred_commands);
 
   for (const profileName of ["daily", "observability", "mvp", "targeted"]) {
     const profile = profiles[profileName];

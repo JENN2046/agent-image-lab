@@ -56,6 +56,18 @@ change_selection.untracked_file_count
 change_selection.explicit_file_count
 ```
 
+For closeout surfaces that only need runnable commands, use:
+
+```text
+npm run recommend:validation:next-commands
+node scripts/recommend_validation_for_changed_files.js --next-commands=json
+```
+
+The npm entry emits one command per line from
+`validation_decision_summary.next_commands`. The JSON-lite form keeps
+`primary_profile`, `primary_command`, `next_commands`, and `deferred_commands`
+without requiring consumers to parse the full recommender payload.
+
 Change selection modes:
 
 | Source | How Files Are Selected | Use |

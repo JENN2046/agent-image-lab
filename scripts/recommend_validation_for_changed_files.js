@@ -15,6 +15,7 @@ function parseArgs(argv) {
     base: null,
     cached: false,
     files: [],
+    nextCommandsFormat: null,
   };
   for (let index = 0; index < argv.length; index += 1) {
     const arg = argv[index];
@@ -29,6 +30,11 @@ function parseArgs(argv) {
       const value = argv[index + 1] || "";
       index += 1;
       args.files.push(...value.split(",").map((item) => item.trim()).filter(Boolean));
+    } else if (arg === "--next-commands") {
+      args.nextCommandsFormat = "text";
+    } else if (arg.startsWith("--next-commands=")) {
+      const value = arg.slice("--next-commands=".length).trim().toLowerCase();
+      args.nextCommandsFormat = value === "json" || value === "json-lite" ? "json" : "text";
     } else {
       args.files.push(arg);
     }
@@ -343,6 +349,24 @@ function buildValidationDecisionSummary({ recommendedValidationProfile, validati
   };
 }
 
+function buildNextCommandsOutput(output, format) {
+  const summary = output.validation_decision_summary || {};
+  const nextCommands = Array.isArray(summary.next_commands) ? summary.next_commands : [];
+  const deferredCommands = Array.isArray(summary.deferred_commands) ? summary.deferred_commands : [];
+  if (format === "json") {
+    return `${JSON.stringify({
+      passed: output.passed === true,
+      recommender: output.recommender,
+      recommendation_contract_version: output.recommendation_contract_version,
+      primary_profile: summary.primary_profile || null,
+      primary_command: summary.primary_command || null,
+      next_commands: nextCommands,
+      deferred_commands: deferredCommands,
+    }, null, 2)}\n`;
+  }
+  return `${nextCommands.join("\n")}${nextCommands.length > 0 ? "\n" : ""}`;
+}
+
 function buildCoveredCommands({ activeRecommended, mvpRecommended, matches }) {
   const activeCoveredCommands = new Set([
     "npm run validate:smoke",
@@ -537,6 +561,10 @@ function main() {
     file_write_performed: false,
     ...result,
   };
+  if (args.nextCommandsFormat) {
+    process.stdout.write(buildNextCommandsOutput(output, args.nextCommandsFormat));
+    return;
+  }
   process.stdout.write(`${JSON.stringify(output, null, 2)}\n`);
 }
 

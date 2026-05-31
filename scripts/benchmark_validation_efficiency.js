@@ -18,6 +18,10 @@ const commands = [
     command: "npm run recommend:validation"
   },
   {
+    id: "recommend_validation_next_commands_json_lite",
+    command: "node scripts/recommend_validation_for_changed_files.js --files package.json --next-commands=json"
+  },
+  {
     id: "recommend_validation_daily_profile",
     command: "node scripts/recommend_validation_for_changed_files.js --files package.json"
   },
@@ -155,6 +159,9 @@ function summarizeParsedOutput(parsed) {
     "comparison_base",
     "change_selection",
     "recommendation_contract_version",
+    "primary_profile",
+    "primary_command",
+    "next_commands",
     "check_count",
     "failed_count",
     "matched_validator_count",
@@ -279,6 +286,21 @@ function summarizeRecommendationProfiles(results) {
   }));
 }
 
+function summarizeNextCommandsBaseline(results) {
+  const result = results.find((item) => item.id === "recommend_validation_next_commands_json_lite" && item.iteration === 1);
+  const parsed = result?.parsed_summary || {};
+  return {
+    command_id: "recommend_validation_next_commands_json_lite",
+    passed: result?.passed === true,
+    seconds: result?.seconds ?? null,
+    recommendation_contract_version: parsed.recommendation_contract_version || null,
+    primary_profile: parsed.primary_profile || null,
+    primary_command: parsed.primary_command || null,
+    next_commands: parsed.next_commands || [],
+    deferred_commands: parsed.deferred_commands || []
+  };
+}
+
 function main() {
   const options = parseArgs(process.argv.slice(2));
   const startedAt = new Date();
@@ -299,6 +321,7 @@ function main() {
   const finishedAt = new Date();
   const summary = summarizeDurations(results);
   const recommendationProfileBaselines = summarizeRecommendationProfiles(results);
+  const nextCommandsBaseline = summarizeNextCommandsBaseline(results);
   const passed = results.every((item) => item.passed);
   const report = {
     passed,
@@ -326,6 +349,7 @@ function main() {
     commands,
     summary,
     recommendation_profile_baselines: recommendationProfileBaselines,
+    next_commands_baseline: nextCommandsBaseline,
     results,
     provider_contact_performed: false,
     plugin_call_performed: false,
