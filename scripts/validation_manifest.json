@@ -30,6 +30,7 @@
         "scripts/recommend_validation_for_changed_files.js",
         "scripts/run_validation_manifest_tier.js",
         "scripts/compact_agent_board_resume_surfaces.js",
+        "scripts/benchmark_validation_efficiency.js",
         "package.json"
       ],
       "required_for": [
