@@ -1,0 +1,550 @@
+{
+  "passed": true,
+  "benchmark": "validation_efficiency_baseline",
+  "daily_efficiency_baseline_command": "npm run validate:active",
+  "full_regression_baseline_command": "npm run validate:all",
+  "full_regression_excluded_from_daily_baseline": true,
+  "started_at": "2026-05-31T14:07:14.941Z",
+  "finished_at": "2026-05-31T14:07:52.253Z",
+  "total_seconds": 37.312,
+  "iterations": 3,
+  "timeout_ms": 300000,
+  "output_path": "reports/validation_benchmarks/validation_efficiency_baseline_2026-05-31T14-07-14-941Z.json",
+  "environment": {
+    "node": "v24.14.0",
+    "platform": "win32",
+    "arch": "x64",
+    "npm": "11.9.0"
+  },
+  "git": {
+    "branch": "master",
+    "head": "c248a66e",
+    "status_short": "M scripts/benchmark_validation_efficiency.js"
+  },
+  "commands": [
+    {
+      "id": "validate_smoke",
+      "command": "npm run validate:smoke"
+    },
+    {
+      "id": "recommend_validation",
+      "command": "npm run recommend:validation"
+    },
+    {
+      "id": "validate_mvp",
+      "command": "npm run validate:mvp"
+    },
+    {
+      "id": "validate_active",
+      "command": "npm run validate:active"
+    },
+    {
+      "id": "agent_board_state",
+      "command": "node scripts/validate_agent_board_state.js"
+    }
+  ],
+  "summary": [
+    {
+      "id": "validate_smoke",
+      "command": "npm run validate:smoke",
+      "iterations": 3,
+      "passed_iterations": 3,
+      "failed_iterations": 0,
+      "min_seconds": 0.681,
+      "max_seconds": 0.796,
+      "all_iterations_avg_seconds": 0.744,
+      "passed_min_seconds": 0.681,
+      "passed_max_seconds": 0.796,
+      "passed_avg_seconds": 0.744
+    },
+    {
+      "id": "recommend_validation",
+      "command": "npm run recommend:validation",
+      "iterations": 3,
+      "passed_iterations": 3,
+      "failed_iterations": 0,
+      "min_seconds": 0.447,
+      "max_seconds": 0.616,
+      "all_iterations_avg_seconds": 0.504,
+      "passed_min_seconds": 0.447,
+      "passed_max_seconds": 0.616,
+      "passed_avg_seconds": 0.504
+    },
+    {
+      "id": "validate_mvp",
+      "command": "npm run validate:mvp",
+      "iterations": 3,
+      "passed_iterations": 3,
+      "failed_iterations": 0,
+      "min_seconds": 2.477,
+      "max_seconds": 2.882,
+      "all_iterations_avg_seconds": 2.675,
+      "passed_min_seconds": 2.477,
+      "passed_max_seconds": 2.882,
+      "passed_avg_seconds": 2.675
+    },
+    {
+      "id": "validate_active",
+      "command": "npm run validate:active",
+      "iterations": 3,
+      "passed_iterations": 3,
+      "failed_iterations": 0,
+      "min_seconds": 8.21,
+      "max_seconds": 8.327,
+      "all_iterations_avg_seconds": 8.254,
+      "passed_min_seconds": 8.21,
+      "passed_max_seconds": 8.327,
+      "passed_avg_seconds": 8.254
+    },
+    {
+      "id": "agent_board_state",
+      "command": "node scripts/validate_agent_board_state.js",
+      "iterations": 3,
+      "passed_iterations": 3,
+      "failed_iterations": 0,
+      "min_seconds": 0.225,
+      "max_seconds": 0.277,
+      "all_iterations_avg_seconds": 0.259,
+      "passed_min_seconds": 0.225,
+      "passed_max_seconds": 0.277,
+      "passed_avg_seconds": 0.259
+    }
+  ],
+  "results": [
+    {
+      "id": "validate_smoke",
+      "command": "npm run validate:smoke",
+      "iteration": 1,
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "error_code": null,
+      "error_message": null,
+      "seconds": 0.756,
+      "stdout_bytes": 3819,
+      "stderr_bytes": 0,
+      "parsed_summary": {
+        "passed": true,
+        "validator": "validate_smoke",
+        "check_count": 33,
+        "failed_count": 0
+      }
+    },
+    {
+      "id": "recommend_validation",
+      "command": "npm run recommend:validation",
+      "iteration": 1,
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "error_code": null,
+      "error_message": null,
+      "seconds": 0.616,
+      "stdout_bytes": 1054,
+      "stderr_bytes": 0,
+      "parsed_summary": {
+        "passed": true,
+        "recommender": "recommend_validation_for_changed_files",
+        "matched_validator_count": 1,
+        "mvp_recommended": false,
+        "recommended_commands": [
+          "node scripts/validate_validation_manifest.js",
+          "npm run validate:smoke"
+        ]
+      }
+    },
+    {
+      "id": "validate_mvp",
+      "command": "npm run validate:mvp",
+      "iteration": 1,
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "error_code": null,
+      "error_message": null,
+      "seconds": 2.882,
+      "stdout_bytes": 10840,
+      "stderr_bytes": 0,
+      "parsed_summary": {
+        "passed": true,
+        "validator": "validate_mvp_core",
+        "check_count": 16,
+        "failed_count": 0,
+        "timing_summary": {
+          "timed_check_count": 15,
+          "measured_seconds": 2.443,
+          "slowest_checks": [
+            {
+              "check": "readonly_visual_review_mvp",
+              "passed": true,
+              "seconds": 0.379
+            },
+            {
+              "check": "provider_evidence_integrity_contract",
+              "passed": true,
+              "seconds": 0.313
+            },
+            {
+              "check": "runtime_durable_audit_store",
+              "passed": true,
+              "seconds": 0.308
+            },
+            {
+              "check": "runtime_to_review_v1_fixture_smoke_flow",
+              "passed": true,
+              "seconds": 0.209
+            },
+            {
+              "check": "runtime_review_bridge_v1_readonly",
+              "passed": true,
+              "seconds": 0.208
+            },
+            {
+              "check": "create_preview_capsule_plan_only",
+              "passed": true,
+              "seconds": 0.194
+            },
+            {
+              "check": "retry_006_artifact_integrity",
+              "passed": true,
+              "seconds": 0.163
+            },
+            {
+              "check": "runtime_kernel_v1_real_provider_guarded",
+              "passed": true,
+              "seconds": 0.16
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "validate_active",
+      "command": "npm run validate:active",
+      "iteration": 1,
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "error_code": null,
+      "error_message": null,
+      "seconds": 8.21,
+      "stdout_bytes": 29258,
+      "stderr_bytes": 0,
+      "parsed_summary": null
+    },
+    {
+      "id": "agent_board_state",
+      "command": "node scripts/validate_agent_board_state.js",
+      "iteration": 1,
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "error_code": null,
+      "error_message": null,
+      "seconds": 0.277,
+      "stdout_bytes": 1297,
+      "stderr_bytes": 0,
+      "parsed_summary": {
+        "passed": true,
+        "agent_board_state": {
+          "required_files_present": true,
+          "current_branch": "master",
+          "ahead_behind": "0\t0",
+          "phase_freshness_verified": true
+        }
+      }
+    },
+    {
+      "id": "validate_smoke",
+      "command": "npm run validate:smoke",
+      "iteration": 2,
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "error_code": null,
+      "error_message": null,
+      "seconds": 0.681,
+      "stdout_bytes": 3819,
+      "stderr_bytes": 0,
+      "parsed_summary": {
+        "passed": true,
+        "validator": "validate_smoke",
+        "check_count": 33,
+        "failed_count": 0
+      }
+    },
+    {
+      "id": "recommend_validation",
+      "command": "npm run recommend:validation",
+      "iteration": 2,
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "error_code": null,
+      "error_message": null,
+      "seconds": 0.447,
+      "stdout_bytes": 1054,
+      "stderr_bytes": 0,
+      "parsed_summary": {
+        "passed": true,
+        "recommender": "recommend_validation_for_changed_files",
+        "matched_validator_count": 1,
+        "mvp_recommended": false,
+        "recommended_commands": [
+          "node scripts/validate_validation_manifest.js",
+          "npm run validate:smoke"
+        ]
+      }
+    },
+    {
+      "id": "validate_mvp",
+      "command": "npm run validate:mvp",
+      "iteration": 2,
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "error_code": null,
+      "error_message": null,
+      "seconds": 2.667,
+      "stdout_bytes": 10840,
+      "stderr_bytes": 0,
+      "parsed_summary": {
+        "passed": true,
+        "validator": "validate_mvp_core",
+        "check_count": 16,
+        "failed_count": 0,
+        "timing_summary": {
+          "timed_check_count": 15,
+          "measured_seconds": 2.324,
+          "slowest_checks": [
+            {
+              "check": "runtime_durable_audit_store",
+              "passed": true,
+              "seconds": 0.341
+            },
+            {
+              "check": "readonly_visual_review_mvp",
+              "passed": true,
+              "seconds": 0.34
+            },
+            {
+              "check": "provider_evidence_integrity_contract",
+              "passed": true,
+              "seconds": 0.231
+            },
+            {
+              "check": "runtime_to_review_v1_fixture_smoke_flow",
+              "passed": true,
+              "seconds": 0.201
+            },
+            {
+              "check": "runtime_review_bridge_v1_readonly",
+              "passed": true,
+              "seconds": 0.195
+            },
+            {
+              "check": "runtime_kernel_v1_real_provider_guarded",
+              "passed": true,
+              "seconds": 0.186
+            },
+            {
+              "check": "retry_006_artifact_integrity",
+              "passed": true,
+              "seconds": 0.183
+            },
+            {
+              "check": "create_preview_capsule_plan_only",
+              "passed": true,
+              "seconds": 0.165
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "validate_active",
+      "command": "npm run validate:active",
+      "iteration": 2,
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "error_code": null,
+      "error_message": null,
+      "seconds": 8.327,
+      "stdout_bytes": 29255,
+      "stderr_bytes": 0,
+      "parsed_summary": null
+    },
+    {
+      "id": "agent_board_state",
+      "command": "node scripts/validate_agent_board_state.js",
+      "iteration": 2,
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "error_code": null,
+      "error_message": null,
+      "seconds": 0.225,
+      "stdout_bytes": 1297,
+      "stderr_bytes": 0,
+      "parsed_summary": {
+        "passed": true,
+        "agent_board_state": {
+          "required_files_present": true,
+          "current_branch": "master",
+          "ahead_behind": "0\t0",
+          "phase_freshness_verified": true
+        }
+      }
+    },
+    {
+      "id": "validate_smoke",
+      "command": "npm run validate:smoke",
+      "iteration": 3,
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "error_code": null,
+      "error_message": null,
+      "seconds": 0.796,
+      "stdout_bytes": 3819,
+      "stderr_bytes": 0,
+      "parsed_summary": {
+        "passed": true,
+        "validator": "validate_smoke",
+        "check_count": 33,
+        "failed_count": 0
+      }
+    },
+    {
+      "id": "recommend_validation",
+      "command": "npm run recommend:validation",
+      "iteration": 3,
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "error_code": null,
+      "error_message": null,
+      "seconds": 0.449,
+      "stdout_bytes": 1054,
+      "stderr_bytes": 0,
+      "parsed_summary": {
+        "passed": true,
+        "recommender": "recommend_validation_for_changed_files",
+        "matched_validator_count": 1,
+        "mvp_recommended": false,
+        "recommended_commands": [
+          "node scripts/validate_validation_manifest.js",
+          "npm run validate:smoke"
+        ]
+      }
+    },
+    {
+      "id": "validate_mvp",
+      "command": "npm run validate:mvp",
+      "iteration": 3,
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "error_code": null,
+      "error_message": null,
+      "seconds": 2.477,
+      "stdout_bytes": 10841,
+      "stderr_bytes": 0,
+      "parsed_summary": {
+        "passed": true,
+        "validator": "validate_mvp_core",
+        "check_count": 16,
+        "failed_count": 0,
+        "timing_summary": {
+          "timed_check_count": 15,
+          "measured_seconds": 2.136,
+          "slowest_checks": [
+            {
+              "check": "readonly_visual_review_mvp",
+              "passed": true,
+              "seconds": 0.313
+            },
+            {
+              "check": "runtime_durable_audit_store",
+              "passed": true,
+              "seconds": 0.274
+            },
+            {
+              "check": "provider_evidence_integrity_contract",
+              "passed": true,
+              "seconds": 0.223
+            },
+            {
+              "check": "runtime_to_review_v1_fixture_smoke_flow",
+              "passed": true,
+              "seconds": 0.204
+            },
+            {
+              "check": "runtime_review_bridge_v1_readonly",
+              "passed": true,
+              "seconds": 0.193
+            },
+            {
+              "check": "create_preview_capsule_plan_only",
+              "passed": true,
+              "seconds": 0.165
+            },
+            {
+              "check": "retry_006_artifact_integrity",
+              "passed": true,
+              "seconds": 0.16
+            },
+            {
+              "check": "runtime_kernel_v1_real_provider_guarded",
+              "passed": true,
+              "seconds": 0.147
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "validate_active",
+      "command": "npm run validate:active",
+      "iteration": 3,
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "error_code": null,
+      "error_message": null,
+      "seconds": 8.224,
+      "stdout_bytes": 29264,
+      "stderr_bytes": 0,
+      "parsed_summary": null
+    },
+    {
+      "id": "agent_board_state",
+      "command": "node scripts/validate_agent_board_state.js",
+      "iteration": 3,
+      "passed": true,
+      "exit_code": 0,
+      "timed_out": false,
+      "error_code": null,
+      "error_message": null,
+      "seconds": 0.275,
+      "stdout_bytes": 1297,
+      "stderr_bytes": 0,
+      "parsed_summary": {
+        "passed": true,
+        "agent_board_state": {
+          "required_files_present": true,
+          "current_branch": "master",
+          "ahead_behind": "0\t0",
+          "phase_freshness_verified": true
+        }
+      }
+    }
+  ],
+  "provider_contact_performed": false,
+  "plugin_call_performed": false,
+  "api_call_performed": false,
+  "image_generation_performed": false,
+  "secret_value_read_performed": false,
+  "file_write_performed": true
+}

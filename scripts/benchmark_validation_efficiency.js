@@ -22,6 +22,10 @@ const commands = [
     command: "npm run validate:mvp"
   },
   {
+    id: "validate_active",
+    command: "npm run validate:active"
+  },
+  {
     id: "agent_board_state",
     command: "node scripts/validate_agent_board_state.js"
   }
@@ -231,6 +235,9 @@ function main() {
   const report = {
     passed,
     benchmark: "validation_efficiency_baseline",
+    daily_efficiency_baseline_command: "npm run validate:active",
+    full_regression_baseline_command: "npm run validate:all",
+    full_regression_excluded_from_daily_baseline: true,
     started_at: startedAt.toISOString(),
     finished_at: finishedAt.toISOString(),
     total_seconds: Number(((finishedAt.getTime() - startedAt.getTime()) / 1000).toFixed(3)),
