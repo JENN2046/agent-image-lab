@@ -82,6 +82,17 @@ function lines(value) {
   return value ? value.split(/\r?\n/).filter(Boolean) : [];
 }
 
+function countRecoverableAcceptedSamples(registry) {
+  const recoverableStatuses = new Set([
+    "workspace_local_verified",
+    "workspace_local_verified_by_prior_receipt",
+    "git_tracked_verified",
+  ]);
+  return [...registry.matchAll(/recoverability_status:\s+([^\s]+)/g)]
+    .filter((match) => recoverableStatuses.has(match[1]))
+    .length;
+}
+
 function evaluate(input, evidence) {
   const counts = input.observed_counts || {};
   const guard = input.guard || {};
@@ -167,7 +178,7 @@ function gatherEvidence() {
   const exactFileDraft = core.parseJson(files.exactFileDraft).recoverability_baseline_exact_file_staging_authorization_package_draft;
   const reviewConsoleReader = core.read(files.reviewConsoleReader);
   return {
-    registryRecoverableCount: (registry.match(/recoverability_status:\s+workspace_local_verified/g) || []).length,
+    registryRecoverableCount: countRecoverableAcceptedSamples(registry),
     dashboardRecoverableCount: dashboard.dashboard_counts.full_recoverable_accepted_sample_count,
     dashboardHardAcceptanceMet: dashboard.dashboard_counts.hard_acceptance_three_full_samples_met,
     dashboardGap: dashboard.dashboard_counts.remaining_full_recoverable_sample_gap,
