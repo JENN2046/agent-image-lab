@@ -479,12 +479,12 @@ accepted_sample_registry:
       formal_sample_package_ref: docs/AIL_VIS_21_ACCEPTED_SAMPLE_PROMOTION_AUTHORIZATION_GATE.md
       promotion_apply_receipt_ref: accepted_samples/ail_vis_17_premium_black_wireless_headphones_hero/source_evidence.json
       image_path: runs/real_generation/ail_vis_17_premium_black_wireless_headphones_hero/ail_vis_17_premium_black_wireless_headphones_hero_01.png
-      image_sha256: 8954A5404BC6A296B6D86091A9DAB46E048CEC1DECB55CCA07B5B12FBA3C203E
+      image_sha256: 8954a5404bc6a296b6d86091a9dab46e048cec1decb55cca07b5b12fba3c203e
       image_dimensions: 1254x1254
       recoverability_status: git_tracked_verified
       artifact_locator_scope: project_relative_git_tracked_runs
       verification_mode: local_file_hash
-      verified_sha256: 8954A5404BC6A296B6D86091A9DAB46E048CEC1DECB55CCA07B5B12FBA3C203E
+      verified_sha256: 8954a5404bc6a296b6d86091a9dab46e048cec1decb55cca07b5b12fba3c203e
       verified_dimensions: 1254x1254
       verified_mime: image/png
       verification_record_ref: docs/AIL_VIS_18_HUMAN_VISUAL_REVIEW_CLOSEOUT.md

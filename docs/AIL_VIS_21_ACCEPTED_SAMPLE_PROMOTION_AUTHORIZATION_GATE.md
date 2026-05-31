@@ -34,7 +34,7 @@ This authorization gate follows the accepted-sample candidate review:
 promotion_boundary:
   source_image:
     path: A:\agent-image-lab\agent-image-lab-v0.2\runs\real_generation\ail_vis_17_premium_black_wireless_headphones_hero\ail_vis_17_premium_black_wireless_headphones_hero_01.png
-    sha256: 8954A5404BC6A296B6D86091A9DAB46E048CEC1DECB55CCA07B5B12FBA3C203E
+    sha256: 8954a5404bc6a296b6d86091a9dab46e048cec1decb55cca07b5b12fba3c203e
   candidate_status: accepted_sample_candidate
   proposed_future_action: accepted_sample_promotion
   allowed_now: false
@@ -48,7 +48,7 @@ promotion_boundary:
 ```text
 我明确授权 AIL-VIS-21 执行 accepted sample promotion，
 目标图像为 A:\agent-image-lab\agent-image-lab-v0.2\runs\real_generation\ail_vis_17_premium_black_wireless_headphones_hero\ail_vis_17_premium_black_wireless_headphones_hero_01.png，
-SHA256 为 8954A5404BC6A296B6D86091A9DAB46E048CEC1DECB55CCA07B5B12FBA3C203E，
+SHA256 为 8954a5404bc6a296b6d86091a9dab46e048cec1decb55cca07b5b12fba3c203e，
 允许创建 accepted sample metadata / record，
 允许复制或登记到 <明确 accepted_samples 目标路径>，
 不允许 memory write，

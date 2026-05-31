@@ -14,7 +14,7 @@
   },
   "artifact": {
     "source_image_ref": "runs/real_generation/ail_vis_17_premium_black_wireless_headphones_hero/ail_vis_17_premium_black_wireless_headphones_hero_01.png",
-    "source_image_sha256": "8954A5404BC6A296B6D86091A9DAB46E048CEC1DECB55CCA07B5B12FBA3C203E",
+    "source_image_sha256": "8954a5404bc6a296b6d86091a9dab46e048cec1decb55cca07b5b12fba3c203e",
     "source_image_dimensions": "1254x1254",
     "source_image_mime": "image/png",
     "source_image_extension": ".png",

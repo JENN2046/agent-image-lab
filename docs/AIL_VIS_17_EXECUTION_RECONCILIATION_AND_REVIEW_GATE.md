@@ -62,7 +62,7 @@ execution:
   max_images: 1
   output_file: A:\agent-image-lab\agent-image-lab-v0.2\runs\real_generation\ail_vis_17_premium_black_wireless_headphones_hero\ail_vis_17_premium_black_wireless_headphones_hero_01.png
   source_cache_file: C:\Users\51529\.codex\generated_images\019e77d1-5e73-7980-89eb-3d8fedb35f42\ig_0c9a0fdbd4b8257d016a1ae0e17e60819188cbd376746a48a0.png
-  sha256: 8954A5404BC6A296B6D86091A9DAB46E048CEC1DECB55CCA07B5B12FBA3C203E
+  sha256: 8954a5404bc6a296b6d86091a9dab46e048cec1decb55cca07b5b12fba3c203e
 ```
 
 ## Initial Classification
@@ -156,7 +156,7 @@ AIL_VIS_17_reconciliation_closeout:
   images_generated: 1
   max_images: 1
   output_file: A:\agent-image-lab\agent-image-lab-v0.2\runs\real_generation\ail_vis_17_premium_black_wireless_headphones_hero\ail_vis_17_premium_black_wireless_headphones_hero_01.png
-  sha256: 8954A5404BC6A296B6D86091A9DAB46E048CEC1DECB55CCA07B5B12FBA3C203E
+  sha256: 8954a5404bc6a296b6d86091a9dab46e048cec1decb55cca07b5b12fba3c203e
   image_status: generated_unreviewed
   human_review_required: true
   accepted_sample_allowed_now: false
