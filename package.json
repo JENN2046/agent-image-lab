@@ -62,6 +62,7 @@
     "validate:runtime-to-review-serum-bottle-output-directory-preflight": "node scripts/validate_runtime_to_review_v1_serum_bottle_output_directory_preflight_gate.js",
     "validate:runtime-to-review-serum-bottle-live-activation-decision-draft": "node scripts/validate_runtime_to_review_v1_serum_bottle_live_activation_decision_packet_draft.js",
     "validate:runtime-to-review-serum-bottle-owner-activation-checklist": "node scripts/validate_runtime_to_review_v1_serum_bottle_owner_activation_confirmation_checklist.js",
+    "validate:runtime-to-review-serum-bottle-future-active-template": "node scripts/validate_runtime_to_review_v1_serum_bottle_future_active_probe_packet_template.js",
     "validate:runtime-to-review-static-real-entry-viewer": "node scripts/validate_runtime_to_review_v1_static_real_entry_viewer.js",
     "validate:commercial-kv-prompt-package": "node scripts/validate_commercial_kv_prompt_package_gate.js",
     "runtime-to-review:guarded-live-probe": "node scripts/run_runtime_to_review_v1_guarded_live_probe.js",
