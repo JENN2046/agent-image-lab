@@ -1,3 +1,47 @@
+## Current Handoff Update - Serum Bottle VCPToolBox Route Owner Runtime Preflight 2026-06-01
+
+```text
+phase: serum_bottle_vcptoolbox_route_owner_runtime_preflight_20260601
+status: completed_validated_local
+repository: A:\agent-image-lab\agent-image-lab-v0.2
+branch: master
+baseline_before_task: c1ce2440
+completed:
+  - added serum-bottle scoped VCPToolBox route owner runtime
+  - added local non-executing preflight record
+  - added validator and manifest/package discoverability
+result:
+  - route owner runtime binds serum prompt package and serum output directory
+  - route request shape uses DoubaoGen generate_image at 1440x2560
+  - can_execute_now=false and new_trial_authorized_now=false
+not_performed:
+  - live probe
+  - route HTTP request
+  - owner runtime delegate invocation
+  - provider contact
+  - plugin call
+  - API call
+  - image generation
+  - output directory creation
+  - secret value or config.env content read
+  - real VCPToolBox/VCPChat source read
+  - DailyNote or VCP memory write
+  - accepted_samples or production candidate write
+  - push, tag, release, deploy
+validation_run:
+  - node --check adapters\runtime\native_doubao_runtime_v1_serum_bottle_vcptoolbox_route_owner_runtime.js: passed
+  - node --check scripts\validate_runtime_to_review_v1_serum_bottle_vcptoolbox_route_owner_runtime_preflight.js: passed
+  - npm run validate:runtime-to-review-serum-bottle-vcptoolbox-route-owner-preflight: passed
+  - node scripts\validate_validation_manifest.js: passed
+  - node scripts\recommend_validation_for_changed_files.js: passed with all changed files matched
+  - npm run validate:targeted-plan: passed
+  - node scripts\validate_agent_board_state.js: passed
+  - npm run validate:active: passed
+next_safe_action: exact-file local commit if final diff checks pass. Any future real serum-bottle attempt still requires a new exact owner activation.
+```
+
+---
+
 ## Current Handoff Update - VCPToolBox DoubaoGen Direct Child Failure Diagnostic 2026-06-01
 
 ```text

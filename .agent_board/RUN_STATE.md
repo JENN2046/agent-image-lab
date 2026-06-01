@@ -1,3 +1,37 @@
+## Current Run State - Serum Bottle VCPToolBox Route Owner Runtime Preflight 2026-06-01
+
+```text
+phase: serum_bottle_vcptoolbox_route_owner_runtime_preflight_20260601
+status: completed_validated_local
+mode: Green local preflight; no live probe
+goal: Prepare serum-bottle scoped VCPToolBox route owner runtime preflight without real generation.
+branch: master
+baseline_before_task: c1ce2440
+owner_runtime_ref: adapters/runtime/native_doubao_runtime_v1_serum_bottle_vcptoolbox_route_owner_runtime.js
+preflight_ref: reports/runtime_to_review_v1/serum_bottle_vcptoolbox_route_owner_runtime_preflight_20260601.json
+validator_ref: scripts/validate_runtime_to_review_v1_serum_bottle_vcptoolbox_route_owner_runtime_preflight.js
+package_script: validate:runtime-to-review-serum-bottle-vcptoolbox-route-owner-preflight
+preflight_result: serum-scoped route owner runtime binds the serum prompt package and serum output directory to the VCPToolBox admin route request shape using DoubaoGen generate_image at 1440x2560; execution remains disabled until new exact owner activation.
+can_execute_now: false
+live_probe_performed: false
+route_http_request_performed: false
+owner_runtime_delegate_invoked: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+secret_value_read_performed: false
+env_file_content_read_performed: false
+real_vcptoolbox_source_read_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+push_tag_release_deploy_performed: false
+latest_validation: node --check serum route owner runtime passed; node --check preflight validator passed; npm run validate:runtime-to-review-serum-bottle-vcptoolbox-route-owner-preflight passed; validation manifest passed; recommender passed with all changed files matched; targeted-plan passed; agent board state passed; validate:active passed.
+next_safe_task: exact-file local commit if final diff checks pass; do not execute a live probe without a new exact owner activation.
+```
+
+---
+
 ## Current Run State - VCPToolBox DoubaoGen Direct Child Failure Diagnostic 2026-06-01
 
 ```text
