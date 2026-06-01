@@ -1,3 +1,47 @@
+## Current Handoff Update - VCPToolBox DoubaoGen Direct Child Failure Diagnostic 2026-06-01
+
+```text
+phase: vcptoolbox_doubaogen_direct_child_failure_diagnostic_20260601
+status: completed_validated_local
+repository: A:\agent-image-lab\agent-image-lab-v0.2
+branch: master
+baseline_before_task: c3082b43
+completed:
+  - inspected attempt 003 sanitized receipt
+  - inspected direct owner child request shape
+  - inspected existing VCPToolBox route owner runtime contract
+  - recorded direct-child-vs-route diagnostic
+  - added validator and manifest/package discoverability
+result:
+  - direct child path proves provider config key presence but still fails before provider/API
+  - direct child path is not recommended for the next live attempt
+  - existing VCPToolBox route owner runtime is red-apple scoped, not serum scoped
+  - preferred next local task is serum-bottle VCPToolBox route owner runtime preflight
+not_performed:
+  - live probe
+  - child diagnosticOnly process execution
+  - provider contact
+  - plugin call
+  - API call
+  - image generation
+  - secret value or config.env content read
+  - real VCPToolBox/VCPChat source read
+  - DailyNote or VCP memory write
+  - accepted_samples or production candidate write
+  - push, tag, release, deploy
+validation_run:
+  - node --check scripts\validate_runtime_to_review_v1_vcptoolbox_doubaogen_direct_child_failure_diagnostic.js: passed
+  - npm run validate:runtime-to-review-vcptoolbox-direct-child-diagnostic: passed
+  - node scripts\validate_validation_manifest.js: passed
+  - node scripts\recommend_validation_for_changed_files.js: passed with all changed files matched
+  - npm run validate:active: passed
+  - npm run validate:targeted-plan: passed
+  - node scripts\validate_agent_board_state.js: passed
+next_safe_action: exact-file local commit if final diff checks pass. Then prepare serum-bottle VCPToolBox route owner runtime preflight without execution. Any future real serum-bottle attempt still requires a new exact owner activation.
+```
+
+---
+
 ## Current Handoff Update - Serum Bottle Live Probe Attempt 003 2026-06-01
 
 ```text

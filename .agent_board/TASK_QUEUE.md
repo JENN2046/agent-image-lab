@@ -1,3 +1,17 @@
+- [x] ID: vcptoolbox_doubaogen_direct_child_failure_diagnostic_20260601
+      Lane: Green local diagnostic; no live probe.
+      Status: completed_validated_local.
+      Goal: Inspect whether the direct child DoubaoGen path should continue after attempt 003.
+      Diagnostic: `reports/runtime_to_review_v1/vcptoolbox_doubaogen_direct_child_failure_diagnostic_20260601.json`.
+      Validator: `scripts/validate_runtime_to_review_v1_vcptoolbox_doubaogen_direct_child_failure_diagnostic.js`.
+      Result: direct child path is not recommended for the next live attempt; preferred next local path is serum-bottle VCPToolBox route owner runtime preflight.
+      Boundary fields: live_probe_performed=false; child_diagnostic_only_process_executed=false; provider_contact_performed=false; plugin_call_performed=false; api_call_performed=false; image_generation_performed=false; secret_value_read_performed=false; env_file_content_read_performed=false; real_vcptoolbox_source_read_performed=false; DailyNote_write_performed=false; VCP_memory_write_performed=false; push_tag_release_deploy_performed=false.
+      Validation: diagnostic validator passed; validation manifest passed; recommender passed with all changed files matched; validate:active passed; targeted-plan passed; agent board state passed.
+      push_allowed: false
+      push_status: not_performed
+      Recommended next: exact-file local commit, then prepare serum-bottle VCPToolBox route owner runtime preflight without execution.
+---
+
 - [x] ID: serum_bottle_live_probe_attempt_003_20260601
       Lane: Amber_B owner-activated one-provider-one-image live probe; no retry.
       Status: attempted_failed_closed_before_provider_contact_validated.

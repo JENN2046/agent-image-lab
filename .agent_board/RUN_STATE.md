@@ -1,3 +1,35 @@
+## Current Run State - VCPToolBox DoubaoGen Direct Child Failure Diagnostic 2026-06-01
+
+```text
+phase: vcptoolbox_doubaogen_direct_child_failure_diagnostic_20260601
+status: completed_validated_local
+mode: Green local diagnostic; no live probe
+goal: Inspect the direct child DoubaoGen failure boundary after attempt 003 without touching provider/API/image.
+branch: master
+baseline_before_task: c3082b43
+diagnostic_ref: reports/runtime_to_review_v1/vcptoolbox_doubaogen_direct_child_failure_diagnostic_20260601.json
+validator_ref: scripts/validate_runtime_to_review_v1_vcptoolbox_doubaogen_direct_child_failure_diagnostic.js
+package_script: validate:runtime-to-review-vcptoolbox-direct-child-diagnostic
+diagnostic_result: direct child path loads config in child and calls pluginManager.processToolCall("DoubaoGen") directly; attempt 003 proves provider key presence but still fails before provider/API. Existing VCPToolBox route owner runtime avoids config.env reads in Agent Image Lab, but its current scope is red-apple, not serum.
+recommended_next_path: prepare_serum_bottle_vcptoolbox_route_owner_runtime_preflight
+live_probe_performed: false
+child_diagnostic_only_process_executed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+secret_value_read_performed: false
+env_file_content_read_performed: false
+real_vcptoolbox_source_read_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+push_tag_release_deploy_performed: false
+latest_validation: node --check diagnostic validator passed; npm run validate:runtime-to-review-vcptoolbox-direct-child-diagnostic passed; validation manifest passed; recommender passed with all changed files matched; validate:active passed; targeted-plan passed; agent board state passed.
+next_safe_task: exact-file local commit if final diff checks pass; then prepare serum-bottle VCPToolBox route owner runtime preflight without execution.
+```
+
+---
+
 ## Current Run State - Serum Bottle Live Probe Attempt 003 2026-06-01
 
 ```text
