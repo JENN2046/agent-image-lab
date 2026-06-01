@@ -17,6 +17,8 @@ const expectedProviderReceiptRef = "reports/runtime_to_review_v1/serum_bottle_ex
 const expectedArtifactRecordRef = "reports/runtime_to_review_v1/serum_bottle_exact_live_probe_artifact_record_20260601.json";
 const attempt003ProviderReceiptRef = "reports/runtime_to_review_v1/serum_bottle_exact_live_probe_receipt_20260601_attempt_003.json";
 const attempt003ArtifactRecordRef = "reports/runtime_to_review_v1/serum_bottle_exact_live_probe_artifact_record_20260601_attempt_003.json";
+const attempt004ProviderReceiptRef = "reports/runtime_to_review_v1/serum_bottle_exact_live_probe_receipt_20260601_attempt_004.json";
+const attempt004ArtifactRecordRef = "reports/runtime_to_review_v1/serum_bottle_exact_live_probe_artifact_record_20260601_attempt_004.json";
 const expectedReviewBridgeRef = "review_console/live_receipt_bridge/serum_bottle_exact_live_probe_20260601.review_entry.json";
 const expectedOutputDir = "runs/real_generation/runtime_to_review_v1_guarded_live_probe_serum_bottle/";
 const expectedPromptRef = "prompts/image_generation/product_lifestyle_premium_serum_bottle_v1.yaml";
@@ -91,6 +93,49 @@ function failedAttemptRecordIsValid(receiptRef, artifactRef, expectedFailureCate
     receipt.image_count === 0 &&
     receipt.retry_performed === false &&
     receipt.retry_allowed === false &&
+    receipt.secret_value_read_performed === false &&
+    receipt.env_file_content_read_performed === false &&
+    receipt.DailyNote_write_performed === false &&
+    receipt.VCP_memory_write_performed === false &&
+    receipt.accepted_samples_write_performed === false &&
+    receipt.production_candidate_write_performed === false &&
+    artifact.source_receipt_ref === receiptRef &&
+    artifact.source_prompt_package_ref === expectedPromptRef &&
+    artifact.target_output_directory_ref === expectedOutputDir &&
+    artifact.output_directory_entry_count === 0 &&
+    Array.isArray(receipt.output_files) &&
+    receipt.output_files.length === 0 &&
+    Array.isArray(artifact.output_files) &&
+    artifact.output_files.length === 0;
+}
+
+function failedRouteAuthAttemptRecordIsValid(receiptRef, artifactRef) {
+  const receipt = optionalJson(receiptRef);
+  const artifact = optionalJson(artifactRef);
+  if (!receipt || !artifact) return false;
+  return receipt.status === "failed_closed" &&
+    artifact.status === "failed_no_artifact_created" &&
+    receipt.failure_category === "vcptoolbox_admin_basic_auth_env_missing_closed" &&
+    artifact.failure_category === "vcptoolbox_admin_basic_auth_env_missing_closed" &&
+    receipt.precise_blocker === "runtime_bridge_blocker:vcptoolbox_admin_basic_auth_env_missing" &&
+    artifact.precise_blocker === "runtime_bridge_blocker:vcptoolbox_admin_basic_auth_env_missing" &&
+    receipt.activated_by_owner_confirmation === ownerPhrase &&
+    receipt.runner_confirmation_phrase === runnerPhrase &&
+    receipt.target_prompt_package_ref === expectedPromptRef &&
+    receipt.target_output_directory_ref === expectedOutputDir &&
+    receipt.model_required === expectedModel &&
+    receipt.provider_contact_performed === false &&
+    receipt.plugin_call_performed === false &&
+    receipt.api_call_performed === false &&
+    receipt.image_generation_performed === false &&
+    receipt.calls_used.provider === 0 &&
+    receipt.calls_used.plugin === 0 &&
+    receipt.calls_used.api === 0 &&
+    receipt.image_count === 0 &&
+    receipt.retry_performed === false &&
+    receipt.retry_allowed === false &&
+    receipt.admin_auth_env_lookup_performed === true &&
+    receipt.admin_auth_env_value_present === false &&
     receipt.secret_value_read_performed === false &&
     receipt.env_file_content_read_performed === false &&
     receipt.DailyNote_write_performed === false &&
@@ -226,6 +271,12 @@ function main() {
       "vcptoolbox_owner_runtime_child_failed_config_key_present_closed"
     )
   );
+  check("attempt_004_failed_closed_route_auth_receipt_is_valid", () =>
+    failedRouteAuthAttemptRecordIsValid(
+      attempt004ProviderReceiptRef,
+      attempt004ArtifactRecordRef
+    )
+  );
   check("future_provider_receipt_required_fields_locked", () =>
     activationDraft.future_activation_must_write_receipt === true &&
     includesAll(activationDraft.future_activation_receipt_required_fields, futureProviderReceiptRequiredFields)
@@ -341,6 +392,8 @@ function main() {
         readinessAuditPath,
         attempt003ProviderReceiptRef,
         attempt003ArtifactRecordRef,
+        attempt004ProviderReceiptRef,
+        attempt004ArtifactRecordRef,
         receiptExpectationsValidatorPath,
         "package.json",
       ]) &&

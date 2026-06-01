@@ -1,3 +1,38 @@
+## Current Run State - Serum Bottle Route Live Probe Attempt 004 2026-06-01
+
+```text
+phase: serum_bottle_route_live_probe_attempt_004_20260601
+status: attempted_failed_closed_before_provider_contact_validated
+mode: Amber_B owner-activated plus exact one-time AGENT_IMAGE_LAB_VCP_ADMIN_* env use authorization; no retry
+goal: Execute one serum-bottle VCPToolBox route live probe after precise secret-bearing route activation.
+branch: master
+baseline_before_task: 0d0a17c9
+receipt_ref: reports/runtime_to_review_v1/serum_bottle_exact_live_probe_receipt_20260601_attempt_004.json
+artifact_record_ref: reports/runtime_to_review_v1/serum_bottle_exact_live_probe_artifact_record_20260601_attempt_004.json
+activation_phrase_received: RUNTIME_TO_REVIEW_V1_SERUM_BOTTLE_ONE_PROVIDER_ONE_IMAGE
+secret_bearing_route_activation_received: one-time AGENT_IMAGE_LAB_VCP_ADMIN_* env value use authorized
+live_probe_result: failed_closed
+stop_reason: provider_delegate_result_invalid
+precise_blocker: runtime_bridge_blocker:vcptoolbox_admin_basic_auth_env_missing
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+image_count: 0
+calls_used: provider=0; plugin=0; api=0
+admin_auth_env_lookup_performed: true
+admin_auth_env_value_present: false
+secret_value_read_performed: false
+env_file_content_read_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+push_tag_release_deploy_performed: false
+latest_validation: post-run receipt integrity passed; validation manifest passed; agent board state passed; recommender passed with all changed files matched; targeted-plan passed; smoke passed; recommendation profiles passed; failed-provider/new-trial boundary passed.
+next_safe_task: exact-file local commit if final diff checks pass; do not retry without setting the required admin auth env and issuing a new exact activation.
+```
+
+---
+
 ## Current Run State - Serum Bottle Route Live Probe Blocked Before Secret-Bearing Admin Auth 2026-06-01
 
 ```text

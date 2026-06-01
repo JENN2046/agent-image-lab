@@ -1,3 +1,14 @@
+- [x] ID: serum_bottle_route_live_probe_attempt_004_20260601
+      Lane: Amber_B owner-activated plus exact one-time admin auth env use authorization; no retry.
+      Status: attempted_failed_closed_before_provider_contact_validated.
+      Receipt: `reports/runtime_to_review_v1/serum_bottle_exact_live_probe_receipt_20260601_attempt_004.json`.
+      Artifact record: `reports/runtime_to_review_v1/serum_bottle_exact_live_probe_artifact_record_20260601_attempt_004.json`.
+      Result: failed_closed; runtime_bridge_blocker=vcptoolbox_admin_basic_auth_env_missing.
+      Boundary fields: provider_contact_performed=false; plugin_call_performed=false; api_call_performed=false; image_generation_performed=false; image_count=0; admin_auth_env_lookup_performed=true; admin_auth_env_value_present=false; secret_value_read_performed=false; env_file_content_read_performed=false; DailyNote_write_performed=false; VCP_memory_write_performed=false; push_tag_release_deploy_performed=false.
+      Validation: post-run receipt integrity passed; validation manifest passed; agent board state passed; recommender passed with all changed files matched; targeted-plan passed; smoke passed; recommendation profiles passed; failed-provider/new-trial boundary passed.
+      Recommended next: exact-file local commit if final diff checks pass; do not retry without setting the required admin auth env and issuing a new exact activation.
+---
+
 - [ ] ID: serum_bottle_route_live_probe_blocked_admin_auth_secret_boundary_20260601
       Lane: Amber_B requested; blocked by Red secret-bearing admin auth boundary.
       Status: blocked_before_live_probe.

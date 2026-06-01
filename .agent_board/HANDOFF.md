@@ -1,3 +1,52 @@
+## Current Handoff Update - Serum Bottle Route Live Probe Attempt 004 2026-06-01
+
+```text
+phase: serum_bottle_route_live_probe_attempt_004_20260601
+status: attempted_failed_closed_before_provider_contact_validated
+repository: A:\agent-image-lab\agent-image-lab-v0.2
+branch: master
+baseline_before_task: 0d0a17c9
+completed:
+  - accepted precise one-time AGENT_IMAGE_LAB_VCP_ADMIN_* env use authorization
+  - ran final serum route owner runtime preflight
+  - ran guarded runner preflight-only
+  - executed exactly one live probe
+  - recorded attempt_004 failed-closed receipt and no-artifact record
+result:
+  - live_probe_status: failed_closed
+  - precise_blocker: runtime_bridge_blocker:vcptoolbox_admin_basic_auth_env_missing
+  - provider_contact_performed: false
+  - plugin_call_performed: false
+  - api_call_performed: false
+  - image_generation_performed: false
+  - admin_auth_env_value_present: false
+not_performed:
+  - retry
+  - provider contact
+  - plugin call
+  - API call
+  - image generation
+  - output write
+  - secret value read
+  - config.env content read
+  - DailyNote or VCP memory write
+  - accepted_samples or production candidate write
+  - push, tag, release, deploy
+validation_run:
+  - node --check scripts\validate_runtime_to_review_v1_serum_bottle_post_run_receipt_integrity.js: passed
+  - npm run validate:runtime-to-review-serum-bottle-post-run-receipt-integrity: passed
+  - node scripts\validate_validation_manifest.js: passed
+  - node scripts\validate_agent_board_state.js: passed
+  - node scripts\recommend_validation_for_changed_files.js: passed with all changed files matched
+  - npm run validate:targeted-plan: passed
+  - npm run validate:smoke: passed
+  - node scripts\validate_validation_recommendation_profiles.js: passed
+  - npm run validate:runtime-to-review-failed-provider-or-new-trial-boundary: passed
+next_safe_action: exact-file local commit if final diff checks pass. Do not retry without setting the required admin auth env and issuing a new exact activation.
+```
+
+---
+
 ## Current Handoff Update - Serum Bottle Route Live Probe Blocked Before Secret-Bearing Admin Auth 2026-06-01
 
 ```text
