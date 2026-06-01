@@ -725,6 +725,27 @@
       ]
     },
     {
+      "id": "runtime_to_review_vcptoolbox_owner_runtime_child_failed_boundary",
+      "command": "npm run validate:runtime-to-review-vcptoolbox-child-failed-boundary",
+      "script": "scripts/validate_runtime_to_review_v1_vcptoolbox_owner_runtime_child_failed_boundary_diagnostic.js",
+      "tier": "targeted",
+      "domain": "runtime_to_review",
+      "status": "active",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "reports/runtime_to_review_v1/vcptoolbox_owner_runtime_child_failed_boundary_diagnostic_20260601.json",
+        "reports/runtime_to_review_v1/serum_bottle_exact_live_probe_receipt_20260601_attempt_002.json",
+        "reports/runtime_to_review_v1/serum_bottle_exact_live_probe_artifact_record_20260601_attempt_002.json",
+        "adapters/runtime/native_doubao_runtime_v1_serum_bottle_owner_runtime.js",
+        "scripts/vcptoolbox_doubao_owner_runtime_child.js",
+        "scripts/validate_runtime_to_review_v1_vcptoolbox_owner_runtime_child_failed_boundary_diagnostic.js",
+        "package.json"
+      ],
+      "required_for": [
+        "runtime_to_review_vcptoolbox_owner_runtime_child_failed_boundary_patch"
+      ]
+    },
+    {
       "id": "runtime_to_review_static_real_entry_viewer",
       "command": "npm run validate:runtime-to-review-static-real-entry-viewer",
       "script": "scripts/validate_runtime_to_review_v1_static_real_entry_viewer.js",

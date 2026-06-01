@@ -1,0 +1,118 @@
+{
+  "schema": "runtime_to_review_v1_vcptoolbox_owner_runtime_child_failed_boundary_diagnostic.v1",
+  "diagnostic_id": "vcptoolbox_owner_runtime_child_failed_boundary_diagnostic_20260601",
+  "created_at": "2026-06-01T20:20:00+08:00",
+  "lane": "Green_local_diagnostic",
+  "status": "completed_local_diagnostic_no_live_probe",
+  "source_blocker": "runtime_bridge_blocker:vcptoolbox_owner_runtime_child_failed",
+  "source_attempt_receipt_ref": "reports/runtime_to_review_v1/serum_bottle_exact_live_probe_receipt_20260601_attempt_002.json",
+  "source_artifact_record_ref": "reports/runtime_to_review_v1/serum_bottle_exact_live_probe_artifact_record_20260601_attempt_002.json",
+  "source_refs": [
+    "reports/runtime_to_review_v1/serum_bottle_exact_live_probe_receipt_20260601_attempt_002.json",
+    "reports/runtime_to_review_v1/serum_bottle_exact_live_probe_artifact_record_20260601_attempt_002.json",
+    "adapters/runtime/native_doubao_runtime_v1_serum_bottle_owner_runtime.js",
+    "adapters/runtime/native_doubao_runtime_v1_real_bound_owner_runtime.js",
+    "scripts/vcptoolbox_doubao_owner_runtime_child.js",
+    "scripts/validate_runtime_to_review_v1_serum_bottle_owner_activated_packet.js"
+  ],
+  "actions_performed_by_this_diagnostic": [
+    "inspected local receipt fields from attempt 002",
+    "inspected serum owner runtime child failure categorization",
+    "inspected shared VCPToolBox owner runtime child error sanitizer",
+    "compared serum owner runtime blocker precision with real-bound owner runtime",
+    "patched serum owner runtime to preserve generic child failure config-key precision for future receipts",
+    "added this local diagnostic report and validator"
+  ],
+  "actions_not_performed": {
+    "live_probe_performed": false,
+    "child_diagnostic_only_process_executed": false,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "output_directory_created": false,
+    "image_file_written": false,
+    "secret_value_read_performed": false,
+    "env_file_content_read_performed": false,
+    "DailyNote_write_performed": false,
+    "VCP_memory_write_performed": false,
+    "accepted_samples_write_performed": false,
+    "production_candidate_write_performed": false,
+    "push_tag_release_deploy_performed": false
+  },
+  "observed_attempt_002_boundary": {
+    "status": "failed_closed",
+    "stop_reason": "provider_delegate_result_invalid",
+    "failure_category": "vcptoolbox_owner_runtime_child_failed_closed",
+    "prior_output_directory_binding_blocker_resolved": true,
+    "output_directory_created": true,
+    "output_directory_entry_count": 0,
+    "provider_contact_performed": false,
+    "plugin_call_performed": true,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "calls_used": {
+      "provider": 0,
+      "plugin": 0,
+      "api": 0
+    },
+    "image_count": 0
+  },
+  "diagnostic_findings": [
+    {
+      "id": "failure_is_after_delegate_and_before_provider_api",
+      "finding": "The second serum attempt reached the owner child boundary after output-directory binding, but failed closed before provider/API contact and before image generation."
+    },
+    {
+      "id": "output_directory_side_effect_is_empty_directory_only",
+      "finding": "Attempt 002 created the serum output directory but wrote no image files and recorded image_count=0."
+    },
+    {
+      "id": "child_error_sanitizer_has_generic_bucket",
+      "finding": "scripts/vcptoolbox_doubao_owner_runtime_child.js maps unknown child/plugin exceptions to vcptoolbox_owner_runtime_child_failed and reports only provider_config_key_present as a boolean, without exposing the secret value."
+    },
+    {
+      "id": "serum_runtime_lost_config_key_precision_before_patch",
+      "finding": "The serum owner runtime previously propagated the generic child failure without preserving whether the child reported provider_config_key_present true or false."
+    },
+    {
+      "id": "local_patch_improves_future_failure_receipts_only",
+      "finding": "The local runtime patch preserves future blockers as vcptoolbox_owner_runtime_child_failed_config_key_present or vcptoolbox_owner_runtime_child_failed_config_key_missing when the child returns the generic error plus key-presence boolean. It does not authorize or perform another live probe."
+    }
+  ],
+  "current_failure_boundary_summary": {
+    "not_a_provider_api_failure_yet": true,
+    "not_an_image_quality_failure": true,
+    "not_an_output_directory_binding_failure_anymore": true,
+    "remaining_boundary": "direct VCPToolBox owner child/plugin execution failed closed before provider/API contact",
+    "needs_live_evidence_to_determine_provider_auth_or_plugin_runtime_cause": true,
+    "live_evidence_requires_new_exact_activation": true
+  },
+  "next_live_attempt_boundary": {
+    "new_exact_owner_activation_required": true,
+    "required_owner_confirmation_phrase": "RUNTIME_TO_REVIEW_V1_SERUM_BOTTLE_ONE_PROVIDER_ONE_IMAGE",
+    "runner_confirmation_phrase_still_required": "RUNTIME_TO_REVIEW_V1_ONE_PROVIDER_ONE_IMAGE",
+    "max_live_probe_attempts": 1,
+    "max_images": 1,
+    "retry_allowed": false,
+    "pre_run_validation_required": [
+      "npm run validate:runtime-to-review-serum-bottle-owner-activated-packet",
+      "npm run validate:runtime-to-review-serum-bottle-output-directory-preflight",
+      "node scripts/run_runtime_to_review_v1_guarded_live_probe.js --preflight-only"
+    ]
+  },
+  "stop_conditions": [
+    "attempting to treat this diagnostic as an activation packet",
+    "running scripts/run_runtime_to_review_v1_guarded_live_probe.js without a new exact owner activation",
+    "running scripts/vcptoolbox_doubao_owner_runtime_child.js against real VCPToolBox as diagnosticOnly without explicit secret/config boundary authorization",
+    "reading config.env or any secret value",
+    "provider contact, API call, image generation, memory write, accepted_samples promotion, production candidate write, push, tag, release, deploy, force push, history rewrite, delete, or overwrite is required"
+  ],
+  "conclusion": {
+    "result": "local_failure_boundary_diagnostic_complete",
+    "failure_boundary_precise_enough_for_next_decision": true,
+    "new_trial_authorized_now": false,
+    "future_live_probe_requires_new_exact_activation": true,
+    "recommended_next": "If the owner wants another real attempt, issue a new exact activation after the diagnostic patch is committed and preflight validators pass."
+  }
+}

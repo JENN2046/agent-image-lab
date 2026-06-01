@@ -1,3 +1,45 @@
+## Checkpoint - VCPToolBox Owner Runtime Child Failure Boundary Diagnostic 2026-06-01
+
+```text
+phase: vcptoolbox_owner_runtime_child_failed_boundary_diagnostic_20260601
+status: completed_validated_local
+result: LOCAL_DIAGNOSTIC_NO_LIVE_PROBE
+mode: Green local diagnostic
+summary: Inspected the serum attempt 002 blocker locally. The output directory binding issue is no longer the active blocker; the remaining boundary is direct VCPToolBox owner child/plugin execution failing closed before provider/API contact and image generation. Added a local diagnostic report and validator, and patched serum owner runtime to preserve generic child failure config-key precision in future receipts.
+changed_files_current_task:
+  - adapters/runtime/native_doubao_runtime_v1_serum_bottle_owner_runtime.js
+  - reports/runtime_to_review_v1/vcptoolbox_owner_runtime_child_failed_boundary_diagnostic_20260601.json
+  - scripts/validate_runtime_to_review_v1_vcptoolbox_owner_runtime_child_failed_boundary_diagnostic.js
+  - package.json
+  - scripts/validation_manifest.json
+validation_completed:
+  - node --check adapters\runtime\native_doubao_runtime_v1_serum_bottle_owner_runtime.js: passed
+  - node --check scripts\validate_runtime_to_review_v1_vcptoolbox_owner_runtime_child_failed_boundary_diagnostic.js: passed
+  - npm run validate:runtime-to-review-vcptoolbox-child-failed-boundary: passed
+  - node scripts\validate_validation_manifest.js: passed
+  - node scripts\recommend_validation_for_changed_files.js: passed; all 9 changed files matched
+  - npm run validate:runtime-to-review-serum-bottle-owner-activated-packet: passed
+  - npm run validate:smoke: passed
+  - node scripts\validate_agent_board_state.js: passed
+  - npm run validate:active: passed
+  - npm run validate:targeted-plan: passed
+boundary_checks:
+  - live_probe_performed: false
+  - child_diagnostic_only_process_executed: false
+  - provider_contact_performed: false
+  - plugin_call_performed: false
+  - api_call_performed: false
+  - image_generation_performed: false
+  - secret_value_read_performed: false
+  - env_file_content_read_performed: false
+  - DailyNote_write_performed: false
+  - VCP_memory_write_performed: false
+  - push_tag_release_deploy_performed: false
+recommended_next_phase: exact-file local commit if final diff checks pass; new real attempt still requires new exact owner activation.
+```
+
+---
+
 ## Checkpoint - Serum Bottle Live Probe Attempt 002 2026-06-01
 
 ```text

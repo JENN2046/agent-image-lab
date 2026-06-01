@@ -1,3 +1,17 @@
+- [x] ID: vcptoolbox_owner_runtime_child_failed_boundary_diagnostic_20260601
+      Lane: Green local diagnostic; no live probe.
+      Status: completed_validated_local.
+      Goal: Inspect the serum attempt 002 vcptoolbox_owner_runtime_child_failed boundary locally.
+      Diagnostic: `reports/runtime_to_review_v1/vcptoolbox_owner_runtime_child_failed_boundary_diagnostic_20260601.json`.
+      Validator: `scripts/validate_runtime_to_review_v1_vcptoolbox_owner_runtime_child_failed_boundary_diagnostic.js`.
+      Result: local diagnostic says attempt 002 passed output-directory binding and failed closed at direct VCPToolBox owner child/plugin execution before provider/API contact. Serum owner runtime patched to preserve config-key precision for future child generic failures.
+      Boundary fields: live_probe_performed=false; child_diagnostic_only_process_executed=false; provider_contact_performed=false; plugin_call_performed=false; api_call_performed=false; image_generation_performed=false; secret_value_read_performed=false; env_file_content_read_performed=false; DailyNote_write_performed=false; VCP_memory_write_performed=false; push_tag_release_deploy_performed=false.
+      Validation: node --check changed JS passed; diagnostic validator passed; validation manifest passed; recommender passed with all files matched; serum owner activated packet validator passed; smoke passed; agent board state passed; validate:active passed; targeted-plan passed.
+      push_allowed: false
+      push_status: not_performed
+      Recommended next: exact-file local commit if final diff checks pass; require a new exact owner activation before any future real attempt.
+---
+
 - [x] ID: serum_bottle_live_probe_attempt_002_20260601
       Lane: Amber_B owner-activated one-provider-one-image live probe; no retry.
       Status: attempted_failed_closed_before_provider_contact.

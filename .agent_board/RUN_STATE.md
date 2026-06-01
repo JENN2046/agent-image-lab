@@ -1,3 +1,34 @@
+## Current Run State - VCPToolBox Owner Runtime Child Failure Boundary Diagnostic 2026-06-01
+
+```text
+phase: vcptoolbox_owner_runtime_child_failed_boundary_diagnostic_20260601
+status: completed_validated_local
+mode: Green local diagnostic; no live probe
+goal: Inspect the vcptoolbox_owner_runtime_child_failed boundary from serum bottle attempt 002 without another real attempt.
+branch: master
+baseline_before_task: 11877119
+diagnostic_ref: reports/runtime_to_review_v1/vcptoolbox_owner_runtime_child_failed_boundary_diagnostic_20260601.json
+validator_ref: scripts/validate_runtime_to_review_v1_vcptoolbox_owner_runtime_child_failed_boundary_diagnostic.js
+package_script: validate:runtime-to-review-vcptoolbox-child-failed-boundary
+diagnostic_result: attempt 002 advanced past output-directory binding but failed closed at direct VCPToolBox owner child/plugin execution before provider/API contact and before image generation.
+local_runtime_patch: serum owner runtime now preserves generic child failure config-key precision as vcptoolbox_owner_runtime_child_failed_config_key_present or vcptoolbox_owner_runtime_child_failed_config_key_missing for future receipts.
+live_probe_performed: false
+child_diagnostic_only_process_executed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+secret_value_read_performed: false
+env_file_content_read_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+push_tag_release_deploy_performed: false
+latest_validation: node --check changed JS passed; npm run validate:runtime-to-review-vcptoolbox-child-failed-boundary passed; node scripts\validate_validation_manifest.js passed; node scripts\recommend_validation_for_changed_files.js passed with all changed files matched; npm run validate:runtime-to-review-serum-bottle-owner-activated-packet passed; npm run validate:smoke passed; node scripts\validate_agent_board_state.js passed; npm run validate:active passed; npm run validate:targeted-plan passed.
+next_safe_task: inspect final diff and create exact-file local commit if clean; any future real attempt still requires a new exact owner activation.
+```
+
+---
+
 ## Current Run State - Serum Bottle Live Probe Attempt 002 2026-06-01
 
 ```text

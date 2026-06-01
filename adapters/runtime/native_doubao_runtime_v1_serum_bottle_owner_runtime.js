@@ -158,6 +158,12 @@ function buildDoubaoPluginChildEnv({ outputDirectory, model, vcpToolBoxRoot }) {
 function categorizePluginError(parsed) {
   const rawError = parsed && typeof parsed.error === "string" ? parsed.error : "";
   const rawCode = parsed && typeof parsed.error_code === "string" ? parsed.error_code : "";
+  if (rawCode === "vcptoolbox_owner_runtime_child_failed" && parsed.provider_config_key_present === true) {
+    return { blocker: "vcptoolbox_owner_runtime_child_failed_config_key_present", provider_contact_performed: false, api_call_performed: false };
+  }
+  if (rawCode === "vcptoolbox_owner_runtime_child_failed" && parsed.provider_config_key_present === false) {
+    return { blocker: "vcptoolbox_owner_runtime_child_failed_config_key_missing", provider_contact_performed: false, api_call_performed: false };
+  }
   if (rawError.includes("VOLCENGINE_API_KEY")) {
     return { blocker: "vcptoolbox_doubaogen_runtime_env_key_missing", provider_contact_performed: false, api_call_performed: false };
   }
