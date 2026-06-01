@@ -611,6 +611,29 @@
       ]
     },
     {
+      "id": "runtime_to_review_serum_bottle_future_active_receipt_expectations",
+      "command": "npm run validate:runtime-to-review-serum-bottle-future-active-receipt-expectations",
+      "script": "scripts/validate_runtime_to_review_v1_serum_bottle_future_active_packet_receipt_expectations.js",
+      "tier": "targeted",
+      "domain": "runtime_to_review",
+      "status": "active",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "scripts/validate_runtime_to_review_v1_serum_bottle_future_active_packet_receipt_expectations.js",
+        "reports/runtime_to_review_v1/serum_bottle_future_active_probe_packet_template_20260601.json",
+        "reports/runtime_to_review_v1/serum_bottle_exact_live_activation_packet_draft_20260601.json",
+        "reports/runtime_to_review_v1/serum_bottle_live_activation_decision_packet_draft_20260601.json",
+        "reports/runtime_to_review_v1/serum_bottle_output_directory_preflight_gate_20260601.json",
+        "reports/runtime_to_review_v1/serum_bottle_owner_activation_confirmation_checklist_20260601.json",
+        "reports/runtime_to_review_v1/serum_bottle_readiness_audit_20260601.json",
+        "scripts/validate_runtime_to_review_v1_serum_bottle_future_active_packet_issuance_checklist.js",
+        "package.json"
+      ],
+      "required_for": [
+        "runtime_to_review_serum_bottle_future_active_receipt_expectations_patch"
+      ]
+    },
+    {
       "id": "runtime_to_review_static_real_entry_viewer",
       "command": "npm run validate:runtime-to-review-static-real-entry-viewer",
       "script": "scripts/validate_runtime_to_review_v1_static_real_entry_viewer.js",
