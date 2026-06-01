@@ -2,6 +2,18 @@
 
 ## Active Blockers
 
+## BLOCKER-20260601-01 - Serum route live probe requires exact admin auth env authorization
+
+Status: active
+Detected during: serum_bottle_route_live_probe_activation_20260601
+Task: serum-bottle VCPToolBox route owner runtime one-provider-one-image live probe
+Reason: The owner activation phrase `RUNTIME_TO_REVIEW_V1_SERUM_BOTTLE_ONE_PROVIDER_ONE_IMAGE` authorizes a bounded serum-bottle image attempt, but the current serum VCPToolBox route owner runtime must build a VCPToolBox admin Authorization header from `AGENT_IMAGE_LAB_VCP_ADMIN_*` environment variables before the real route HTTP request. Even if the value is not printed, this is secret-bearing runtime access and needs separate exact authorization.
+Hard stop gate: secret_value_read_or_secret_bearing_env_runtime_access_requires_exact_authorization
+Files involved: reports/runtime_to_review_v1/serum_bottle_route_live_probe_blocked_admin_auth_secret_boundary_20260601.json; adapters/runtime/native_doubao_runtime_v1_serum_bottle_vcptoolbox_route_owner_runtime.js; scripts/run_runtime_to_review_v1_guarded_live_probe.js; tests/fixtures/runtime_kernel_v1_real_guarded_serum_bottle_task.fixture.json
+Validation state: route owner preflight validator passed; guarded runner preflight-only passed with the serum route owner runtime; no live probe executed.
+Required next safe action: wait for an exact secret-bearing route activation that authorizes one-time use of `AGENT_IMAGE_LAB_VCP_ADMIN_*` env values only to construct the VCPToolBox admin Authorization header, with no printing or storage of secret values.
+Rollback or cleanup path: no runtime side effect to clean up; no provider/API/image/output/secret read/memory/push/tag/release/deploy action was performed.
+
 ## BLOCKER-20260529-02 - Exact VCPToolBox repair authorization phrase required before retry_007 external write
 
 Status: resolved_by_authorized_retry_007_vcptoolbox_two_file_repair

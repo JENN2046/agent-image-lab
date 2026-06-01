@@ -1,3 +1,34 @@
+## Current Run State - Serum Bottle Route Live Probe Blocked Before Secret-Bearing Admin Auth 2026-06-01
+
+```text
+phase: serum_bottle_route_live_probe_blocked_admin_auth_secret_boundary_20260601
+status: blocked_before_live_probe
+mode: Amber_B requested; Red secret-bearing admin auth boundary detected
+goal: Respond to owner activation RUNTIME_TO_REVIEW_V1_SERUM_BOTTLE_ONE_PROVIDER_ONE_IMAGE for serum-bottle route live probe.
+branch: master
+baseline_before_task: 4df55d1e
+blocker_ref: reports/runtime_to_review_v1/serum_bottle_route_live_probe_blocked_admin_auth_secret_boundary_20260601.json
+activation_phrase_received: RUNTIME_TO_REVIEW_V1_SERUM_BOTTLE_ONE_PROVIDER_ONE_IMAGE
+preflight_validator_result: passed
+guarded_runner_preflight_only_result: passed; preflight_would_pass_with_current_args=true
+live_probe_performed: false
+route_http_request_performed: false
+owner_runtime_delegate_invoked: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+secret_value_read_performed: false
+env_file_content_read_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+push_tag_release_deploy_performed: false
+blocker: serum route runtime requires one-time AGENT_IMAGE_LAB_VCP_ADMIN_* auth header construction before route HTTP request; the serum activation did not separately authorize secret-bearing env value access.
+next_safe_task: record blocker and wait for exact secret-bearing route activation; do not run live probe until then.
+```
+
+---
+
 ## Current Run State - Serum Bottle VCPToolBox Route Owner Runtime Preflight 2026-06-01
 
 ```text

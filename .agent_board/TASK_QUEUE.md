@@ -1,3 +1,14 @@
+- [ ] ID: serum_bottle_route_live_probe_blocked_admin_auth_secret_boundary_20260601
+      Lane: Amber_B requested; blocked by Red secret-bearing admin auth boundary.
+      Status: blocked_before_live_probe.
+      Goal: Execute one serum-bottle VCPToolBox route live probe after owner activation.
+      Blocker: route owner runtime must use `AGENT_IMAGE_LAB_VCP_ADMIN_*` env values to construct the VCPToolBox admin Authorization header; this secret-bearing access was not separately exact-authorized.
+      Blocker report: `reports/runtime_to_review_v1/serum_bottle_route_live_probe_blocked_admin_auth_secret_boundary_20260601.json`.
+      Validation: serum route owner preflight validator passed; guarded runner --preflight-only passed.
+      Boundary fields: live_probe_performed=false; route_http_request_performed=false; owner_runtime_delegate_invoked=false; provider_contact_performed=false; plugin_call_performed=false; api_call_performed=false; image_generation_performed=false; secret_value_read_performed=false; env_file_content_read_performed=false; DailyNote_write_performed=false; VCP_memory_write_performed=false; push_tag_release_deploy_performed=false.
+      Required unblock: exact secret-bearing route activation authorizing one-time use of `AGENT_IMAGE_LAB_VCP_ADMIN_*` env values only for the admin Authorization header, without printing or storing the secret values.
+---
+
 - [x] ID: serum_bottle_vcptoolbox_route_owner_runtime_preflight_20260601
       Lane: Green local preflight; no live probe.
       Status: completed_validated_local.

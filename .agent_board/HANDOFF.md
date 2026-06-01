@@ -1,3 +1,42 @@
+## Current Handoff Update - Serum Bottle Route Live Probe Blocked Before Secret-Bearing Admin Auth 2026-06-01
+
+```text
+phase: serum_bottle_route_live_probe_blocked_admin_auth_secret_boundary_20260601
+status: blocked_before_live_probe
+repository: A:\agent-image-lab\agent-image-lab-v0.2
+branch: master
+baseline_before_task: 4df55d1e
+activation_phrase_received: RUNTIME_TO_REVIEW_V1_SERUM_BOTTLE_ONE_PROVIDER_ONE_IMAGE
+completed:
+  - treated the phrase as a serum-bottle one-provider-one-image activation
+  - rechecked the serum route owner runtime preflight validator
+  - ran guarded runner --preflight-only with the serum route owner runtime
+  - stopped before secret-bearing route execution
+result:
+  - preflight would pass with current runner args
+  - live probe was not executed
+  - exact blocker is one-time VCPToolBox admin auth env value use required by the route owner runtime
+not_performed:
+  - live probe
+  - route HTTP request
+  - owner runtime delegate invocation
+  - provider contact
+  - plugin call
+  - API call
+  - image generation
+  - output directory creation
+  - secret value or config.env content read
+  - DailyNote or VCP memory write
+  - accepted_samples or production candidate write
+  - push, tag, release, deploy
+validation_run:
+  - npm run validate:runtime-to-review-serum-bottle-vcptoolbox-route-owner-preflight: passed
+  - guarded runner --preflight-only with serum route owner runtime: passed
+next_safe_action: wait for exact secret-bearing route activation that authorizes one-time AGENT_IMAGE_LAB_VCP_ADMIN_* env value use only for constructing the VCPToolBox admin Authorization header, with no printing or storage.
+```
+
+---
+
 ## Current Handoff Update - Serum Bottle VCPToolBox Route Owner Runtime Preflight 2026-06-01
 
 ```text

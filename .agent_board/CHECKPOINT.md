@@ -1,3 +1,39 @@
+## Checkpoint - Serum Bottle Route Live Probe Blocked Before Secret-Bearing Admin Auth 2026-06-01
+
+```text
+phase: serum_bottle_route_live_probe_blocked_admin_auth_secret_boundary_20260601
+status: blocked_before_live_probe
+result: BLOCKED_NO_LIVE_PROBE
+mode: Amber_B requested; Red secret-bearing admin auth boundary detected
+summary: The owner activation phrase was received, but the serum VCPToolBox route owner runtime requires one-time `AGENT_IMAGE_LAB_VCP_ADMIN_*` env value use to construct the VCPToolBox admin Authorization header before a real route HTTP request. This is secret-bearing runtime access, so the live probe was blocked before execution.
+changed_files_current_task:
+  - reports/runtime_to_review_v1/serum_bottle_route_live_probe_blocked_admin_auth_secret_boundary_20260601.json
+  - .agent_board/BLOCKERS.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+validation_completed:
+  - npm run validate:runtime-to-review-serum-bottle-vcptoolbox-route-owner-preflight: passed
+  - guarded runner --preflight-only with serum route owner runtime: passed
+boundary_checks:
+  - live_probe_performed: false
+  - route_http_request_performed: false
+  - owner_runtime_delegate_invoked: false
+  - provider_contact_performed: false
+  - plugin_call_performed: false
+  - api_call_performed: false
+  - image_generation_performed: false
+  - secret_value_read_performed: false
+  - env_file_content_read_performed: false
+  - DailyNote_write_performed: false
+  - VCP_memory_write_performed: false
+  - push_tag_release_deploy_performed: false
+recommended_next_phase: exact secret-bearing route activation, or change runtime design so no Agent Image Lab admin auth secret value access is needed.
+```
+
+---
+
 ## Checkpoint - Serum Bottle VCPToolBox Route Owner Runtime Preflight 2026-06-01
 
 ```text
