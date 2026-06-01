@@ -1,3 +1,14 @@
+- [x] ID: serum_bottle_post_sync_failed_closed_active_attempt_status_note_20260601
+      Lane: Green local post-fast-forward closeout/status note.
+      Status: completed_validated_local_status_note.
+      Note: `reports/runtime_to_review_v1/serum_bottle_post_sync_failed_closed_active_attempt_status_note_20260601.json`.
+      Result: status language updated from "entirely inactive chain" to "owner-activated failed-closed attempt history with no artifact created".
+      Boundary fields: active_packet_present=true; active_packet_can_execute_now=true; four receipts failed_closed; four artifact records failed_no_artifact_created; image_generation_performed=false; output_write_performed=false; secret_value_read_performed=false.
+      Warning: attempt 002 and 003 recorded plugin_call_performed=true.
+      Validation: post-sync structured receipt/artifact audit passed; owner activated packet validator passed; post-run receipt integrity passed; admin auth env readiness passed; validation manifest passed; git diff --check passed.
+      Recommended next: exact-file local commit if accepted; any future live attempt requires a new exact activation and current admin auth readiness.
+---
+
 - [x] ID: serum_bottle_vcptoolbox_admin_auth_env_readiness_preflight_20260601
       Lane: Green local secret-boundary preflight; no live probe.
       Status: completed_validated_local.

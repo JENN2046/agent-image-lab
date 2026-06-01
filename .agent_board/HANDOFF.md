@@ -1,3 +1,46 @@
+## Current Handoff Update - Serum Bottle Post-Sync Failed-Closed Active-Attempt Status Note 2026-06-01
+
+```text
+phase: serum_bottle_post_sync_failed_closed_active_attempt_status_note_20260601
+status: completed_validated_local_status_note
+repository: A:\agent-image-lab\agent-image-lab-v0.2
+branch: master
+synced_head: eae1ac8b
+note_ref: reports/runtime_to_review_v1/serum_bottle_post_sync_failed_closed_active_attempt_status_note_20260601.json
+completed:
+  - fast-forwarded local master to origin/master
+  - audited active-attempt receipts and artifact records
+  - recorded the status-language correction
+result:
+  - do not describe serum-bottle as an entirely inactive chain
+  - describe it as owner-activated failed-closed attempt history with no artifact created
+  - active packet exists in history with can_execute_now=true
+  - four attempt receipts are failed_closed
+  - four artifact records are failed_no_artifact_created
+not_performed_by_this_note:
+  - live probe
+  - route HTTP request
+  - provider contact
+  - plugin call
+  - API call
+  - image generation
+  - output write
+  - secret value read
+  - DailyNote or VCP memory write
+  - accepted_samples or production candidate write
+  - push, tag, release, deploy
+validation_run:
+  - structured receipt/artifact audit: passed
+  - serum owner activated packet validator: passed
+  - post-run receipt integrity validator: passed
+  - admin auth env readiness validator: passed
+  - validation manifest: passed
+  - git diff --check: passed
+next_safe_action: exact-file local commit if accepted. Any further live attempt requires a new exact activation and current admin auth readiness.
+```
+
+---
+
 ## Current Handoff Update - Serum Bottle Admin Auth Env Readiness Preflight 2026-06-01
 
 ```text

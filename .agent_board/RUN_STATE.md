@@ -1,3 +1,27 @@
+## Current Run State - Serum Bottle Post-Sync Failed-Closed Active-Attempt Status Note 2026-06-01
+
+```text
+phase: serum_bottle_post_sync_failed_closed_active_attempt_status_note_20260601
+status: completed_validated_local_status_note
+mode: Green local post-fast-forward closeout/status note
+branch: master
+synced_head: eae1ac8b
+note_ref: reports/runtime_to_review_v1/serum_bottle_post_sync_failed_closed_active_attempt_status_note_20260601.json
+status_language_change: avoid "serum-bottle chain remains entirely inactive"; use "owner-activated failed-closed attempt history with no artifact created".
+active_packet_present: true
+active_packet_ref: reports/runtime_to_review_v1/serum_bottle_owner_activated_live_probe_packet_20260601.json
+active_packet_can_execute_now: true
+attempt_history: four failed_closed receipts and failed_no_artifact_created records
+image_generation_performed: false
+output_write_performed: false
+secret_value_read_performed: false
+warning: attempt 002 and 003 recorded plugin_call_performed=true
+latest_validation: post-sync audit passed; owner activated packet validator passed; post-run receipt integrity passed; admin auth env readiness passed; validation manifest passed; git diff --check passed.
+next_safe_task: exact-file local commit if accepted; any further live attempt requires a new exact activation and current admin auth readiness.
+```
+
+---
+
 ## Current Run State - Serum Bottle Admin Auth Env Readiness Preflight 2026-06-01
 
 ```text

@@ -1,3 +1,38 @@
+## Checkpoint - Serum Bottle Post-Sync Failed-Closed Active-Attempt Status Note 2026-06-01
+
+```text
+phase: serum_bottle_post_sync_failed_closed_active_attempt_status_note_20260601
+status: completed_validated_local_status_note
+result: PASS_WITH_WARNINGS_STATUS_LANGUAGE_UPDATED
+mode: Green local post-fast-forward closeout/status note
+summary: After fast-forwarding local master to origin/master at eae1ac8b, the serum-bottle line should no longer be described as entirely inactive. The correct local status language is owner-activated failed-closed attempt history with no artifact created.
+changed_files_current_task:
+  - reports/runtime_to_review_v1/serum_bottle_post_sync_failed_closed_active_attempt_status_note_20260601.json
+  - .agent_board/RUN_STATE.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/TASK_QUEUE.md
+validation_completed:
+  - post-sync structured receipt/artifact audit: passed; four failed_closed/no-artifact attempts
+  - npm run validate:runtime-to-review-serum-bottle-owner-activated-packet: passed
+  - npm run validate:runtime-to-review-serum-bottle-post-run-receipt-integrity: passed
+  - npm run validate:runtime-to-review-serum-bottle-admin-auth-env-readiness: passed
+  - npm run validate:validation-manifest: passed
+  - git diff --check: passed
+boundary_checks:
+  - active_packet_present: true
+  - active_packet_can_execute_now: true
+  - image_generation_performed: false
+  - output_write_performed: false
+  - secret_value_read_performed: false
+  - artifact_created: false
+warning:
+  - attempt 002 and attempt 003 recorded plugin_call_performed=true
+recommended_next_phase: exact-file local commit if accepted; any future live attempt requires a new exact activation and current admin auth readiness.
+```
+
+---
+
 ## Checkpoint - Serum Bottle Admin Auth Env Readiness Preflight 2026-06-01
 
 ```text
