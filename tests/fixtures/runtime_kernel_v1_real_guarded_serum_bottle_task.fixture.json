@@ -7,6 +7,7 @@
   "model_required": "doubao-seedream-5-0-260128",
   "max_images": 1,
   "output_scope": "run_directory_only",
+  "output_directory_ref": "runs/real_generation/runtime_to_review_v1_guarded_live_probe_serum_bottle/",
   "review_required": true,
   "secret_value_read_allowed": false
 }

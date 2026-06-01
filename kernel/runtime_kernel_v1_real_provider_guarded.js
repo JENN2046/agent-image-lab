@@ -439,6 +439,7 @@ async function executeRealGuarded(task, refs, providerDelegate) {
     model_required: task.model_required,
     max_images: 1,
     output_scope: "run_directory_only",
+    output_directory_ref: task.output_directory_ref || null,
     secret_value_read_allowed: false,
     raw_provider_payload_allowed: false,
     production_write_allowed: false,

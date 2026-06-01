@@ -1,3 +1,31 @@
+## Current Run State - Serum Bottle Delegate Output Binding Fix 2026-06-01
+
+```text
+phase: serum_bottle_delegate_output_binding_fix_20260601
+status: completed_validated_local
+mode: Green local runtime binding fix; no live probe
+goal: Fix provider delegate -> owner runtime serum output directory binding without executing a second live probe.
+branch: master
+baseline_before_task: 593db53a
+changed_files_current_task: adapters/runtime/native_doubao_runtime_v1_provider_delegate.js; kernel/runtime_kernel_v1_real_provider_guarded.js; scripts/validate_runtime_to_review_v1_serum_bottle_owner_activated_packet.js; tests/fixtures/runtime_kernel_v1_real_guarded_serum_bottle_task.fixture.json
+fix_summary: runtime kernel now passes task.output_directory_ref to the delegate request; serum fixture declares the serum output directory; delegate validates optional output_directory_ref under runs/real_generation/ and uses it before the old red-apple default; activated-packet validator asserts the delegate binds the serum directory from request.
+preflight_only_result: passed; status=preflight_only_no_live_probe_executed; preflight_would_pass_with_current_args=true.
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+secret_value_read_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+push_tag_release_deploy_performed: false
+latest_validation: node --check changed JS passed; npm run validate:runtime-to-review-serum-bottle-owner-activated-packet passed; preflight-only runner passed; recommender passed; npm run validate:mvp passed; npm run validate:smoke passed; npm run validate:runtime-to-review-default-local passed; npm run validate:runtime-to-review-guarded-live-probe-gate passed; node scripts\validate_runtime_to_review_v1_native_doubao_delegate_module.js passed; serum-bottle targeted preflight/draft/checklist/template validators passed; node scripts\validate_validation_manifest.js passed.
+push_allowed: false
+push_status: not_performed
+next_safe_task: commit exact binding-fix files after final diff checks; do not run a second live probe without new exact owner activation.
+```
+
+---
+
 ## Current Run State - Serum Bottle Owner Activated Live Probe 2026-06-01
 
 ```text

@@ -1,3 +1,45 @@
+## Checkpoint - Serum Bottle Delegate Output Binding Fix 2026-06-01
+
+```text
+phase: serum_bottle_delegate_output_binding_fix_20260601
+status: completed_validated_local
+result: COMPLETED_VALIDATED_NO_LIVE_PROBE
+mode: Green local runtime binding fix
+summary: Fixed the delegate-to-owner-runtime output directory binding so serum-bottle runtime tasks can carry the serum output directory into the owner runtime instead of falling back to the red-apple default.
+changed_files_current_task:
+  - adapters/runtime/native_doubao_runtime_v1_provider_delegate.js
+  - kernel/runtime_kernel_v1_real_provider_guarded.js
+  - scripts/validate_runtime_to_review_v1_serum_bottle_owner_activated_packet.js
+  - tests/fixtures/runtime_kernel_v1_real_guarded_serum_bottle_task.fixture.json
+validation_completed:
+  - node --check adapters\runtime\native_doubao_runtime_v1_provider_delegate.js: passed
+  - node --check kernel\runtime_kernel_v1_real_provider_guarded.js: passed
+  - node --check scripts\validate_runtime_to_review_v1_serum_bottle_owner_activated_packet.js: passed
+  - npm run validate:runtime-to-review-serum-bottle-owner-activated-packet: passed
+  - preflight-only guarded runner with serum owner runtime: passed; no live probe executed
+  - node scripts\recommend_validation_for_changed_files.js: passed
+  - npm run validate:mvp: passed
+  - npm run validate:smoke: passed
+  - npm run validate:runtime-to-review-default-local: passed
+  - npm run validate:runtime-to-review-guarded-live-probe-gate: passed
+  - node scripts\validate_runtime_to_review_v1_native_doubao_delegate_module.js: passed
+  - serum-bottle targeted preflight/draft/checklist/template validators: passed
+  - node scripts\validate_validation_manifest.js: passed
+boundary_checks:
+  - live_probe_executed: false
+  - provider_contact_performed: false
+  - plugin_call_performed: false
+  - api_call_performed: false
+  - image_generation_performed: false
+  - secret_value_read_performed: false
+  - DailyNote_write_performed: false
+  - VCP_memory_write_performed: false
+  - push_tag_release_deploy_performed: false
+recommended_next_phase: exact-file local commit; second live probe requires new exact owner activation.
+```
+
+---
+
 ## Checkpoint - Serum Bottle Owner Activated Live Probe 2026-06-01
 
 ```text

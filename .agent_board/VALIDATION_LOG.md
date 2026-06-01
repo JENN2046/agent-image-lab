@@ -1,5 +1,41 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260601-RUNTIME-TO-REVIEW-V1-SERUM-BOTTLE-DELEGATE-OUTPUT-BINDING-FIX
+
+Task: serum_bottle_delegate_output_binding_fix_20260601
+Status: completed_validated_local
+Validation run:
+  - node --check adapters\runtime\native_doubao_runtime_v1_provider_delegate.js: passed
+  - node --check kernel\runtime_kernel_v1_real_provider_guarded.js: passed
+  - node --check scripts\validate_runtime_to_review_v1_serum_bottle_owner_activated_packet.js: passed
+  - npm run validate:runtime-to-review-serum-bottle-owner-activated-packet: passed
+  - guarded runner --preflight-only with serum owner runtime: passed; status=preflight_only_no_live_probe_executed
+  - node scripts\recommend_validation_for_changed_files.js: passed
+  - npm run validate:mvp: passed
+  - npm run validate:smoke: passed
+  - npm run validate:runtime-to-review-default-local: passed
+  - npm run validate:runtime-to-review-guarded-live-probe-gate: passed
+  - node scripts\validate_runtime_to_review_v1_native_doubao_delegate_module.js: passed
+  - serum-bottle targeted preflight/draft/checklist/template validators: passed
+  - node scripts\validate_validation_manifest.js: passed
+Result:
+  - kernel now forwards task.output_directory_ref
+  - serum fixture declares runs/real_generation/runtime_to_review_v1_guarded_live_probe_serum_bottle/
+  - delegate uses request.output_directory_ref before the old red-apple default
+  - validator asserts the serum output directory binding
+Side effects:
+  - live_probe_executed: false
+  - provider_contact_performed: false
+  - plugin_call_performed: false
+  - api_call_performed: false
+  - image_generation_performed: false
+  - secret_value_read_performed: false
+  - DailyNote_write_performed: false
+  - VCP_memory_write_performed: false
+  - push_tag_release_deploy_performed: false
+Next:
+  - exact-file local commit; require a new exact owner activation before any second live probe.
+
 ## VALIDATION-20260601-RUNTIME-TO-REVIEW-V1-SERUM-BOTTLE-ACTIVATED-LIVE-PROBE
 
 Task: serum_bottle_owner_activated_live_probe_20260601

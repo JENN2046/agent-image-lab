@@ -129,6 +129,28 @@ async function main() {
       result.provider_contact_performed === false &&
       result.image_generation_performed === false;
   });
+  await check("delegate_binds_serum_output_directory_from_request", async () => {
+    const delegateModule = require(repoPath(delegatePath));
+    const options = delegateModule._private.buildRunnerOptions({
+      schema: "runtime_v1_provider_delegate_request.v1",
+      task_id: "runtime-v1-real-guarded-serum-bottle-task-001",
+      prompt_package_ref: promptRef,
+      output_directory_ref: outputDir,
+      provider_route: "native_doubao_guarded",
+      provider_mode: "real_guarded",
+      model_required: "doubao-seedream-5-0-260128",
+      max_images: 1,
+      output_scope: "run_directory_only",
+      secret_value_read_allowed: false,
+      raw_provider_payload_allowed: false,
+      production_write_allowed: false,
+      memory_write_allowed: false,
+    }, {});
+    return options.output_directory === outputDir &&
+      options.prompt_package_ref === promptRef &&
+      options.secretless_delegate_authorization_active === true &&
+      options.retry_allowed === false;
+  });
   await check("runtime_readiness_is_secretless_and_side_effect_free", () => {
     const readiness = ownerRuntime.inspectSerumBottleOwnerRuntimeReadiness();
     return readiness.active_packet_valid === true &&

@@ -1,3 +1,16 @@
+- [x] ID: serum_bottle_delegate_output_binding_fix_20260601
+      Lane: Green local runtime binding fix.
+      Status: completed_validated_local.
+      Goal: Fix provider delegate -> owner runtime serum output directory binding without a second live probe.
+      Changed files: adapters/runtime/native_doubao_runtime_v1_provider_delegate.js; kernel/runtime_kernel_v1_real_provider_guarded.js; scripts/validate_runtime_to_review_v1_serum_bottle_owner_activated_packet.js; tests/fixtures/runtime_kernel_v1_real_guarded_serum_bottle_task.fixture.json.
+      Fix: kernel passes output_directory_ref; serum fixture declares the serum output directory; delegate validates and uses request.output_directory_ref before old defaultOutputDirectory; activated-packet validator checks the binding.
+      Validation: node --check passed; serum owner activated packet validator passed; guarded runner preflight-only passed; recommender passed; MVP/smoke/default-local/guarded-live-probe-gate/native delegate/serum targeted validators passed.
+      Boundary fields: live_probe_executed=false; provider_contact_performed=false; plugin_call_performed=false; api_call_performed=false; image_generation_performed=false; secret_value_read_performed=false; DailyNote_write_performed=false; VCP_memory_write_performed=false; push_tag_release_deploy_performed=false.
+      push_allowed: false
+      push_status: not_performed
+      Recommended next: exact-file local commit; require a new exact owner activation before any second live probe.
+---
+
 - [x] ID: serum_bottle_owner_activated_live_probe_20260601
       Lane: Amber_B owner-activated one-provider-one-image live probe; Green receipt/status sync after attempt.
       Status: attempted_failed_closed_before_provider_contact.

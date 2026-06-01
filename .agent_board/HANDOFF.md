@@ -1,3 +1,43 @@
+## Current Handoff Update - Serum Bottle Delegate Output Binding Fix 2026-06-01
+
+```text
+phase: serum_bottle_delegate_output_binding_fix_20260601
+status: completed_validated_local
+repository: A:\agent-image-lab\agent-image-lab-v0.2
+branch: master
+baseline_before_task: 593db53a
+completed:
+  - added output_directory_ref to the serum runtime fixture
+  - passed task.output_directory_ref through runtime_kernel_v1_real_provider_guarded delegate request
+  - made native_doubao_runtime_v1_provider_delegate validate optional output_directory_ref and prefer it over defaultOutputDirectory
+  - added a validator assertion that serum activated packet binding uses the serum output directory from request
+not_performed:
+  - second live probe
+  - provider contact
+  - plugin call
+  - API call
+  - image generation
+  - output directory creation
+  - secret value read
+  - DailyNote or VCP memory write
+  - push, tag, release, deploy
+validation_run:
+  - node --check changed JS: passed
+  - npm run validate:runtime-to-review-serum-bottle-owner-activated-packet: passed
+  - guarded runner --preflight-only with serum owner runtime: passed; no live probe executed
+  - node scripts\recommend_validation_for_changed_files.js: passed
+  - npm run validate:mvp: passed
+  - npm run validate:smoke: passed
+  - npm run validate:runtime-to-review-default-local: passed
+  - npm run validate:runtime-to-review-guarded-live-probe-gate: passed
+  - node scripts\validate_runtime_to_review_v1_native_doubao_delegate_module.js: passed
+  - serum-bottle targeted preflight/draft/checklist/template validators: passed
+  - node scripts\validate_validation_manifest.js: passed
+next_safe_action: commit exact binding-fix files if final diff checks pass; do not rerun live probe without a new exact owner activation.
+```
+
+---
+
 ## Current Handoff Update - Serum Bottle Owner Activated Live Probe 2026-06-01
 
 ```text

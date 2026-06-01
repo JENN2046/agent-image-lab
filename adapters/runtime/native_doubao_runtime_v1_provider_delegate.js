@@ -14,6 +14,7 @@ const delegateId = "native_doubao_runtime_v1_provider_delegate";
 const exactConfirmation = "RUNTIME_TO_REVIEW_V1_ONE_PROVIDER_ONE_IMAGE";
 const defaultOutputDirectory = "runs/real_generation/runtime_to_review_v1_guarded_live_probe/";
 const modelRequired = "doubao-seedream-5-0-260128";
+const allowedOutputDirectoryRoot = "runs/real_generation/";
 
 function clone(value) {
   return JSON.parse(JSON.stringify(value));
@@ -53,6 +54,20 @@ function validateRuntimeV1DelegateRequest(request) {
   if (source.memory_write_allowed === true) issues.push("memory_write_allowed_must_be_false");
   if (typeof source.prompt_package_ref !== "string" || source.prompt_package_ref.trim() === "") {
     issues.push("prompt_package_ref_required");
+  }
+  if (source.output_directory_ref != null) {
+    try {
+      const normalizedOutputDirectoryRef = String(source.output_directory_ref).replace(/\\/g, "/");
+      const { relative } = repoRelativePath(source.output_directory_ref, "output_directory_ref");
+      if (!relative.startsWith(allowedOutputDirectoryRoot)) {
+        issues.push("output_directory_ref_must_be_under_runs_real_generation");
+      }
+      if (!normalizedOutputDirectoryRef.endsWith("/")) {
+        issues.push("output_directory_ref_must_end_with_slash");
+      }
+    } catch (error) {
+      issues.push(error.message);
+    }
   }
   return {
     passed: issues.length === 0,
@@ -206,10 +221,11 @@ function runnerCallsUsed(runnerResult) {
 }
 
 function buildRunnerOptions(request, options) {
+  const outputDirectory = options.outputDirectory || request.output_directory_ref || defaultOutputDirectory;
   return {
     prompt_package_ref: request.prompt_package_ref,
     plugin_profile_ref: "plugins/image_generation/native_doubao_image/plugin.profile.yaml",
-    output_directory: options.outputDirectory || defaultOutputDirectory,
+    output_directory: outputDirectory,
     model: request.model_required,
     max_plugin_calls: 1,
     max_images_created: 1,
