@@ -9,6 +9,9 @@ branch: master
 head_commit: d2e8e5c7aa71269b4a1340d142ca54c35b947cf0
 remote_sync: local HEAD, origin/master, origin/HEAD, and remote refs/heads/master all point to d2e8e5c7aa71269b4a1340d142ca54c35b947cf0.
 worktree_state: clean before status-surface sync; dirty only after this local .agent_board status-surface update.
+terminal_status_surface_sync: true
+post_push_followup: read_only_remote_sync_only
+no_followup_agent_board_write_after_push: true
 changed_files_mainline:
   - package.json
   - scripts/build_validation_closeout_summary.js
@@ -28,7 +31,7 @@ latest_validation:
 boundary_checks: provider_contact_performed=false; plugin_call_performed=false; api_call_performed=false; image_generation_performed=false; secret_value_read_performed=false; DailyNote_write_performed=false; VCP_memory_write_performed=false; push_tag_release_deploy_performed=authorized_push_only.
 push_allowed: false
 push_status: completed_by_explicit_user_authorization_then_synced
-next_safe_task: stop this validation helper line; return to higher-value product/runtime work or exact-file commit this .agent_board status-surface sync if desired.
+next_safe_task: after this terminal status-surface sync is sealed and pushed, run read-only remote sync only; do not write another .agent_board entry.
 ```
 
 ---

@@ -12,6 +12,9 @@ remote_sync:
   local_head: d2e8e5c7aa71269b4a1340d142ca54c35b947cf0
   local_origin_master: d2e8e5c7aa71269b4a1340d142ca54c35b947cf0
   remote_refs_heads_master: d2e8e5c7aa71269b4a1340d142ca54c35b947cf0
+terminal_status_surface_sync: true
+post_push_followup: read_only_remote_sync_only
+no_followup_agent_board_write_after_push: true
 changed_files_mainline:
   - docs/VALIDATION_SELECTION_MATRIX.md
   - package.json
@@ -49,7 +52,7 @@ boundary_checks:
   push_tag_release_deploy_performed: authorized_push_only
 push_allowed: false
 push_status: completed_by_explicit_user_authorization_then_synced
-recommended_next: exact-file local commit of this .agent_board status-surface sync if desired; otherwise return to higher-value product/runtime work.
+recommended_next: after this terminal status-surface sync is sealed and pushed, run read-only remote sync only; do not write another .agent_board entry.
 ```
 
 ---

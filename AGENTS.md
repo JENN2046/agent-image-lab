@@ -61,6 +61,18 @@ Remote push / tag push / release and destructive Git or filesystem operations st
 After every local fast-forward sync to the upstream remote head, Codex must run a
 local Green Lane status-surface sync and record the new baseline in `.agent_board`.
 
+Status-surface recursion stop rule: when the only local commit being pushed is a
+terminal `.agent_board` status-surface sync commit, the post-push action is
+read-only remote/head verification only. Do not write another `.agent_board`
+entry, do not create another status-surface commit, and report the read-only
+verification in chat closeout. The terminal status-surface sync must declare:
+
+```text
+terminal_status_surface_sync: true
+post_push_followup: read_only_remote_sync_only
+no_followup_agent_board_write_after_push: true
+```
+
 Stage documents should not copy this entire constitution. They should use the fixed gate template in Section 3.5 plus a narrow phase difference patch.
 
 ---
@@ -1758,5 +1770,7 @@ and branch or upstream uncertainty.
 Force push, tag, release, deploy, destructive action, and secret-sensitive
 actions remain non-auto-pushable. Every allowed push lane must run preflight,
 verify the remote head after push, and complete a Green Lane post-push state
-sync. This section defines future classification; it does not itself perform a
+sync, except that a terminal `.agent_board` status-surface sync commit ends with
+read-only post-push verification and must not trigger a second status-surface
+write. This section defines future classification; it does not itself perform a
 push.

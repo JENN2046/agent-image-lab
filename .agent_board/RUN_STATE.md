@@ -9,6 +9,9 @@ branch: master
 head_commit: d2e8e5c7aa71269b4a1340d142ca54c35b947cf0
 remote_sync: local HEAD equals origin/master and remote refs/heads/master.
 worktree_state: clean after post-push sync; dirty only for this .agent_board status-surface update.
+terminal_status_surface_sync: true
+post_push_followup: read_only_remote_sync_only
+no_followup_agent_board_write_after_push: true
 closeout_status_contract: completed
 status_block_contract: commit_hash; branch; local_equals_origin; ahead_behind; git_status.
 status_block_verified_after_push: local_equals_origin=true; ahead_behind=0/0; git_status=clean.
@@ -20,7 +23,7 @@ latest_validation: validate:closeout-status-summary passed; closeout:validation-
 boundary_checks: provider_contact_performed=false; plugin_call_performed=false; api_call_performed=false; image_generation_performed=false; secret_value_read_performed=false; DailyNote_write_performed=false; VCP_memory_write_performed=false.
 push_allowed: false
 push_status: completed_by_explicit_user_authorization_then_synced
-next_safe_task: no more required work for this goal; optional exact-file commit of .agent_board status-surface sync.
+next_safe_task: after this terminal status-surface sync is sealed and pushed, run read-only remote sync only; do not write another .agent_board entry.
 ```
 
 ---

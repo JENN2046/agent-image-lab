@@ -199,6 +199,31 @@ function main() {
   ].join("\n");
   const stalePostPushMatches = stalePostPushPatterns.filter((pattern) => currentStatusSurfaces.includes(pattern));
   const postPushStatusSyncVerified = !branchIsSynced || !worktreeIsClean || stalePostPushMatches.length === 0;
+  const terminalStatusSurfaceSyncDetected =
+    currentStatusSurfaces.includes("terminal_status_surface_sync: true") ||
+    currentStatusSurfaces.includes("no_followup_agent_board_write_after_push: true") ||
+    currentStatusSurfaces.includes("post_push_followup: read_only_remote_sync_only");
+  const terminalStatusSurfaceSyncVerified = !terminalStatusSurfaceSyncDetected || hasAll(currentStatusSurfaces, [
+    "terminal_status_surface_sync: true",
+    "post_push_followup: read_only_remote_sync_only",
+    "no_followup_agent_board_write_after_push: true",
+  ]);
+  const statusSurfaceSyncCommitRecommendsAnotherStatusSurfaceCommit =
+    currentStatusSurfaces.includes("terminal_status_surface_sync: true") &&
+    (
+      currentStatusSurfaces.includes("optional exact-file commit of .agent_board status-surface sync") ||
+      currentStatusSurfaces.includes("optional exact-file commit of this .agent_board status-surface sync") ||
+      currentStatusSurfaces.includes("exact-file local commit of this .agent_board status-surface sync") ||
+      currentStatusSurfaces.includes("commit and push this terminal status-surface sync") ||
+      currentStatusSurfaces.includes("commit this terminal status-surface sync") ||
+      currentStatusSurfaces.includes("push this terminal status-surface sync")
+    );
+  const statusSurfaceRecursionStopRuleDeclared = hasAll(agents + currentStatusSurfaces, [
+    "Status-surface recursion stop rule",
+    "terminal_status_surface_sync: true",
+    "post_push_followup: read_only_remote_sync_only",
+    "no_followup_agent_board_write_after_push: true",
+  ]);
 
   const phaseFreshnessVerified = hasAll(runState + handoff + checkpoint + taskQueue, [
     "Validator Governance Chain v1: closed",
@@ -224,6 +249,9 @@ function main() {
     postPushStatusSyncVerified,
     `Current phase ${currentPhase.phaseId || "(unknown)"} still has post-push stale wording while master equals origin/master and the worktree is clean: ${stalePostPushMatches.join(", ")}. Run post-push status sync and use completed_remote_synced_after_guarded_push or equivalent synced wording.`
   );
+  assert(terminalStatusSurfaceSyncVerified, "Terminal status-surface sync must declare terminal_status_surface_sync, read-only post-push followup, and no follow-up .agent_board write.");
+  assert(!statusSurfaceSyncCommitRecommendsAnotherStatusSurfaceCommit, "Terminal status-surface sync must not recommend another status-surface commit; after push, use read-only remote sync only.");
+  assert(statusSurfaceRecursionStopRuleDeclared, "Status-surface recursion stop rule must be declared in AGENTS.md and current status surfaces.");
   assert(phaseFreshnessVerified, "Agent board phase freshness check failed: stale board state detected (governance chain / v7.170 state not reflected).");
 
   const result = {
@@ -244,6 +272,10 @@ function main() {
       overlay_separation_decision_present: overlaySeparationDecisionPresent,
       local_work_state_declared: localWorkStateDeclared,
       post_push_status_sync_verified: postPushStatusSyncVerified,
+      terminal_status_surface_sync_detected: terminalStatusSurfaceSyncDetected,
+      terminal_status_surface_sync_verified: terminalStatusSurfaceSyncVerified,
+      status_surface_recursion_stop_rule_declared: statusSurfaceRecursionStopRuleDeclared,
+      status_surface_sync_commit_recommends_another_status_surface_commit: statusSurfaceSyncCommitRecommendsAnotherStatusSurfaceCommit,
       stale_post_push_patterns_checked: stalePostPushPatterns,
       stale_post_push_matches: stalePostPushMatches,
       current_branch: aheadBehind ? aheadBehind.branch : "unavailable",

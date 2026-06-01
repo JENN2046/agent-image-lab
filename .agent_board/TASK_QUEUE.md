@@ -4,6 +4,9 @@
       Goal: Lock closeout:validation-summary -- --status output with a dedicated validator and make it discoverable.
       Current branch: master.
       Head commit: d2e8e5c7aa71269b4a1340d142ca54c35b947cf0.
+      terminal_status_surface_sync: true
+      post_push_followup: read_only_remote_sync_only
+      no_followup_agent_board_write_after_push: true
       Mainline changed files:
         - docs/VALIDATION_SELECTION_MATRIX.md
         - package.json
@@ -19,7 +22,7 @@
       Boundary fields: provider_contact_performed=false; plugin_call_performed=false; api_call_performed=false; image_generation_performed=false; secret_value_read_performed=false; DailyNote_write_performed=false; VCP_memory_write_performed=false.
       push_allowed: false
       push_status: completed_by_explicit_user_authorization_then_synced
-      Recommended next: stop this validation-helper line; optional exact-file commit of this .agent_board status-surface sync.
+      Recommended next: after this terminal status-surface sync is sealed and pushed, run read-only remote sync only; do not write another .agent_board entry.
 ---
 
 - [x] ID: validation_recommendation_decision_summary_20260601

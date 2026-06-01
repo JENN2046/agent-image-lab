@@ -13,6 +13,9 @@ closeout:
   local_equals_origin:
   ahead_behind:
   git_status:
+  terminal_status_surface_sync: false
+  post_push_followup: normal_status_sync | read_only_remote_sync_only
+  no_followup_agent_board_write_after_push: false
 
   instruction_sources_checked:
     AGENTS_loaded:
