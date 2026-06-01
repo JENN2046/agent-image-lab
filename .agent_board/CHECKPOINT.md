@@ -1,3 +1,48 @@
+## Checkpoint - Serum Bottle Live Probe Attempt 002 2026-06-01
+
+```text
+phase: serum_bottle_live_probe_attempt_002_20260601
+status: attempted_failed_closed_before_provider_contact
+result: FAILED_CLOSED_NO_PROVIDER_CONTACT_NO_IMAGE
+mode: Amber_B owner-activated live probe; no retry
+summary: After the delegate output-directory binding fix, a new exact owner activation was received and one live probe was executed. The run advanced past the prior output-directory blocker but failed closed at the VCPToolBox owner runtime child layer before provider/API contact and before image generation.
+changed_files_current_task:
+  - reports/runtime_to_review_v1/serum_bottle_exact_live_probe_receipt_20260601_attempt_002.json
+  - reports/runtime_to_review_v1/serum_bottle_exact_live_probe_artifact_record_20260601_attempt_002.json
+  - scripts/validation_manifest.json
+validation_completed:
+  - npm run validate:runtime-to-review-serum-bottle-owner-activated-packet: passed
+  - npm run validate:runtime-to-review-serum-bottle-output-directory-preflight: passed before and after attempt
+  - guarded runner --preflight-only: passed
+  - npm run validate:runtime-to-review-serum-bottle-post-run-receipt-integrity: passed
+  - node scripts\validate_validation_manifest.js: passed
+  - node scripts\recommend_validation_for_changed_files.js: passed
+  - npm run validate:smoke: passed
+  - npm run validate:targeted-plan: passed
+  - node scripts\validate_validation_recommendation_profiles.js: passed
+live_probe:
+  - exit_code: 1
+  - status: failed_closed
+  - stop_reason: provider_delegate_result_invalid
+  - precise_blocker: runtime_bridge_blocker:vcptoolbox_owner_runtime_child_failed
+  - calls_used: provider=0; plugin=0; api=0
+  - image_count: 0
+  - output_directory_created: true
+  - output_directory_entry_count: 0
+boundary_checks:
+  - provider_contact_performed: false
+  - plugin_call_performed: true
+  - api_call_performed: false
+  - image_generation_performed: false
+  - secret_value_read_performed: false
+  - DailyNote_write_performed: false
+  - VCP_memory_write_performed: false
+  - push_tag_release_deploy_performed: false
+recommended_next_phase: inspect_vcptoolbox_owner_runtime_child_failed_closed_locally
+```
+
+---
+
 ## Checkpoint - Serum Bottle Delegate Output Binding Fix 2026-06-01
 
 ```text

@@ -1,5 +1,40 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260601-RUNTIME-TO-REVIEW-V1-SERUM-BOTTLE-LIVE-PROBE-ATTEMPT-002
+
+Task: serum_bottle_live_probe_attempt_002_20260601
+Status: attempted_failed_closed_before_provider_contact
+Validation run:
+  - npm run validate:runtime-to-review-serum-bottle-owner-activated-packet: passed
+  - npm run validate:runtime-to-review-serum-bottle-output-directory-preflight: passed before and after attempt
+  - guarded runner --preflight-only: passed
+  - npm run validate:runtime-to-review-serum-bottle-post-run-receipt-integrity: passed
+  - node scripts\validate_validation_manifest.js: passed
+  - node scripts\recommend_validation_for_changed_files.js: passed
+  - npm run validate:smoke: passed
+  - npm run validate:targeted-plan: passed
+  - node scripts\validate_validation_recommendation_profiles.js: passed
+Live probe:
+  - activation_phrase_received: RUNTIME_TO_REVIEW_V1_SERUM_BOTTLE_ONE_PROVIDER_ONE_IMAGE
+  - status: failed_closed
+  - stop_reason: provider_delegate_result_invalid
+  - precise_blocker: runtime_bridge_blocker:vcptoolbox_owner_runtime_child_failed
+  - calls_used: provider=0; plugin=0; api=0
+  - image_count: 0
+  - output_directory_created: true
+  - output_directory_entry_count: 0
+Side effects:
+  - provider_contact_performed: false
+  - plugin_call_performed: true
+  - api_call_performed: false
+  - image_generation_performed: false
+  - secret_value_read_performed: false
+  - DailyNote_write_performed: false
+  - VCP_memory_write_performed: false
+  - push_tag_release_deploy_performed: false
+Next:
+  - inspect VCPToolBox owner runtime child failure locally; require a new exact owner activation before any further live probe.
+
 ## VALIDATION-20260601-RUNTIME-TO-REVIEW-V1-SERUM-BOTTLE-DELEGATE-OUTPUT-BINDING-FIX
 
 Task: serum_bottle_delegate_output_binding_fix_20260601

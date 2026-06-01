@@ -1,3 +1,41 @@
+## Current Run State - Serum Bottle Live Probe Attempt 002 2026-06-01
+
+```text
+phase: serum_bottle_live_probe_attempt_002_20260601
+status: attempted_failed_closed_before_provider_contact
+mode: Amber_B owner-activated one-provider-one-image live probe; no retry
+goal: Execute the second exact owner-activated serum-bottle live probe after binding fix.
+branch: master
+baseline_before_task: 4feb601d
+activation_phrase_received: RUNTIME_TO_REVIEW_V1_SERUM_BOTTLE_ONE_PROVIDER_ONE_IMAGE
+receipt_ref: reports/runtime_to_review_v1/serum_bottle_exact_live_probe_receipt_20260601_attempt_002.json
+artifact_record_ref: reports/runtime_to_review_v1/serum_bottle_exact_live_probe_artifact_record_20260601_attempt_002.json
+live_attempts_used_this_task: 1
+retry_allowed: false
+live_probe_result: failed_closed
+stop_reason: provider_delegate_result_invalid
+failure_category: vcptoolbox_owner_runtime_child_failed_closed
+precise_blocker: runtime_bridge_blocker:vcptoolbox_owner_runtime_child_failed
+provider_contact_performed: false
+plugin_call_performed: true
+api_call_performed: false
+image_generation_performed: false
+image_count: 0
+output_directory_created: true
+output_directory_entry_count: 0
+secret_value_read_performed: false
+env_file_content_read_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+push_tag_release_deploy_performed: false
+latest_validation: activation packet validator passed; output directory preflight passed before and after attempt; runner preflight-only passed; post-run receipt integrity passed; validation manifest passed; recommender passed; smoke passed; targeted-plan passed; validation recommendation profiles passed.
+push_allowed: false
+push_status: not_performed
+next_safe_task: inspect VCPToolBox owner runtime child failure locally; do not run another live probe without a new exact owner activation.
+```
+
+---
+
 ## Current Run State - Serum Bottle Delegate Output Binding Fix 2026-06-01
 
 ```text
