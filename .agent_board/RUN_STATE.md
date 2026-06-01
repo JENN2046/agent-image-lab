@@ -1,3 +1,41 @@
+## Current Run State - Serum Bottle Live Probe Attempt 003 2026-06-01
+
+```text
+phase: serum_bottle_live_probe_attempt_003_20260601
+status: attempted_failed_closed_before_provider_contact_validated
+mode: Amber_B owner-activated one-provider-one-image live probe; no retry
+goal: Execute one serum-bottle guarded live probe after new exact owner activation.
+branch: master
+baseline_before_task: 704859a5
+activation_phrase_received: RUNTIME_TO_REVIEW_V1_SERUM_BOTTLE_ONE_PROVIDER_ONE_IMAGE
+receipt_ref: reports/runtime_to_review_v1/serum_bottle_exact_live_probe_receipt_20260601_attempt_003.json
+artifact_record_ref: reports/runtime_to_review_v1/serum_bottle_exact_live_probe_artifact_record_20260601_attempt_003.json
+live_attempts_used_this_task: 1
+retry_allowed: false
+live_probe_result: failed_closed
+stop_reason: provider_delegate_result_invalid
+failure_category: vcptoolbox_owner_runtime_child_failed_config_key_present_closed
+precise_blocker: runtime_bridge_blocker:vcptoolbox_owner_runtime_child_failed_config_key_present
+provider_contact_performed: false
+plugin_call_performed: true
+api_call_performed: false
+image_generation_performed: false
+image_count: 0
+output_directory_created: false
+output_directory_entry_count: 0
+secret_value_read_performed: false
+env_file_content_read_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+push_tag_release_deploy_performed: false
+latest_validation: activation packet validator passed; output directory preflight passed; runner preflight-only passed before the one live attempt; post-run receipt integrity passed; validation manifest passed; recommender passed with all changed files matched; agent board state passed; smoke passed; targeted-plan passed; recommendation profiles passed; failed-provider/new-trial boundary passed.
+push_allowed: false
+push_status: not_performed
+next_safe_task: inspect final diff and exact-file local commit; do not rerun live probe without a new exact owner activation.
+```
+
+---
+
 ## Current Run State - VCPToolBox Owner Runtime Child Failure Boundary Diagnostic 2026-06-01
 
 ```text

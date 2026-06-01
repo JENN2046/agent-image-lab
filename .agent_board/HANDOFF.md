@@ -1,3 +1,54 @@
+## Current Handoff Update - Serum Bottle Live Probe Attempt 003 2026-06-01
+
+```text
+phase: serum_bottle_live_probe_attempt_003_20260601
+status: attempted_failed_closed_before_provider_contact_validated
+repository: A:\agent-image-lab\agent-image-lab-v0.2
+branch: master
+baseline_before_task: 704859a5
+activation_phrase_received: RUNTIME_TO_REVIEW_V1_SERUM_BOTTLE_ONE_PROVIDER_ONE_IMAGE
+completed:
+  - ran activation packet validator
+  - verified serum output directory preflight
+  - ran guarded runner preflight-only
+  - executed exactly one live probe
+  - recorded attempt_003 receipt and no-artifact record
+result:
+  - live_probe_status: failed_closed
+  - stop_reason: provider_delegate_result_invalid
+  - precise_blocker: runtime_bridge_blocker:vcptoolbox_owner_runtime_child_failed_config_key_present
+  - provider_contact_performed: false
+  - plugin_call_performed: true
+  - api_call_performed: false
+  - image_generation_performed: false
+  - output_directory_entry_count: 0
+not_performed:
+  - retry
+  - provider contact
+  - API call
+  - image generation
+  - secret value read
+  - config.env content read
+  - DailyNote or VCP memory write
+  - accepted_samples or production candidate write
+  - push, tag, release, deploy
+validation_run:
+  - npm run validate:runtime-to-review-serum-bottle-owner-activated-packet: passed before attempt
+  - npm run validate:runtime-to-review-serum-bottle-output-directory-preflight: passed before attempt
+  - guarded runner --preflight-only: passed before attempt
+  - npm run validate:runtime-to-review-serum-bottle-post-run-receipt-integrity: passed
+  - node scripts\validate_validation_manifest.js: passed
+  - node scripts\recommend_validation_for_changed_files.js: passed with all changed files matched
+  - node scripts\validate_agent_board_state.js: passed
+  - npm run validate:smoke: passed
+  - npm run validate:targeted-plan: passed
+  - node scripts\validate_validation_recommendation_profiles.js: passed
+  - npm run validate:runtime-to-review-failed-provider-or-new-trial-boundary: passed
+next_safe_action: inspect final diff and exact-file local commit if clean. Any future real serum-bottle attempt still requires a new exact owner activation.
+```
+
+---
+
 ## Current Handoff Update - VCPToolBox Owner Runtime Child Failure Boundary Diagnostic 2026-06-01
 
 ```text

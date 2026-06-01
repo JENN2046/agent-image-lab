@@ -1,3 +1,17 @@
+- [x] ID: serum_bottle_live_probe_attempt_003_20260601
+      Lane: Amber_B owner-activated one-provider-one-image live probe; no retry.
+      Status: attempted_failed_closed_before_provider_contact_validated.
+      Goal: Run one exact serum-bottle live probe after the owner activation phrase was received again.
+      Receipt: `reports/runtime_to_review_v1/serum_bottle_exact_live_probe_receipt_20260601_attempt_003.json`.
+      Artifact record: `reports/runtime_to_review_v1/serum_bottle_exact_live_probe_artifact_record_20260601_attempt_003.json`.
+      Result: failed_closed; runtime_bridge_blocker=vcptoolbox_owner_runtime_child_failed_config_key_present.
+      Boundary fields: provider_contact_performed=false; plugin_call_performed=true; api_call_performed=false; image_generation_performed=false; image_count=0; output_directory_entry_count=0; secret_value_read_performed=false; env_file_content_read_performed=false; DailyNote_write_performed=false; VCP_memory_write_performed=false; push_tag_release_deploy_performed=false.
+      Validation: preflight passed before attempt; post-run receipt integrity, validation manifest, recommender, agent board state, smoke, targeted-plan, recommendation profiles, and failed-provider/new-trial boundary passed.
+      push_allowed: false
+      push_status: not_performed
+      Recommended next: exact-file local commit if final diff checks pass; require a new exact owner activation before any future real attempt.
+---
+
 - [x] ID: vcptoolbox_owner_runtime_child_failed_boundary_diagnostic_20260601
       Lane: Green local diagnostic; no live probe.
       Status: completed_validated_local.

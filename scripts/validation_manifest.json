@@ -653,6 +653,8 @@
         "reports/runtime_to_review_v1/serum_bottle_exact_live_probe_artifact_record_20260601.json",
         "reports/runtime_to_review_v1/serum_bottle_exact_live_probe_receipt_20260601_attempt_002.json",
         "reports/runtime_to_review_v1/serum_bottle_exact_live_probe_artifact_record_20260601_attempt_002.json",
+        "reports/runtime_to_review_v1/serum_bottle_exact_live_probe_receipt_20260601_attempt_003.json",
+        "reports/runtime_to_review_v1/serum_bottle_exact_live_probe_artifact_record_20260601_attempt_003.json",
         "review_console/live_receipt_bridge/serum_bottle_exact_live_probe_20260601.review_entry.json",
         "scripts/validate_runtime_to_review_v1_serum_bottle_future_active_packet_receipt_expectations.js",
         "package.json"
