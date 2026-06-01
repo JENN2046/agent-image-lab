@@ -649,6 +649,9 @@
         "reports/runtime_to_review_v1/serum_bottle_output_directory_preflight_gate_20260601.json",
         "reports/runtime_to_review_v1/serum_bottle_owner_activation_confirmation_checklist_20260601.json",
         "reports/runtime_to_review_v1/serum_bottle_readiness_audit_20260601.json",
+        "reports/runtime_to_review_v1/serum_bottle_exact_live_probe_receipt_20260601.json",
+        "reports/runtime_to_review_v1/serum_bottle_exact_live_probe_artifact_record_20260601.json",
+        "review_console/live_receipt_bridge/serum_bottle_exact_live_probe_20260601.review_entry.json",
         "scripts/validate_runtime_to_review_v1_serum_bottle_future_active_packet_receipt_expectations.js",
         "package.json"
       ],
@@ -696,6 +699,27 @@
       ],
       "required_for": [
         "runtime_to_review_serum_bottle_active_packet_candidate_patch"
+      ]
+    },
+    {
+      "id": "runtime_to_review_serum_bottle_owner_activated_packet",
+      "command": "npm run validate:runtime-to-review-serum-bottle-owner-activated-packet",
+      "script": "scripts/validate_runtime_to_review_v1_serum_bottle_owner_activated_packet.js",
+      "tier": "targeted",
+      "domain": "runtime_to_review",
+      "status": "active",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "reports/runtime_to_review_v1/serum_bottle_owner_activated_live_probe_packet_20260601.json",
+        "scripts/validate_runtime_to_review_v1_serum_bottle_owner_activated_packet.js",
+        "adapters/runtime/native_doubao_runtime_v1_serum_bottle_owner_runtime.js",
+        "scripts/native_doubao_secretless_provider_runtime_bridge.js",
+        "scripts/run_runtime_to_review_v1_guarded_live_probe.js",
+        "adapters/runtime/native_doubao_runtime_v1_provider_delegate.js",
+        "package.json"
+      ],
+      "required_for": [
+        "runtime_to_review_serum_bottle_owner_activated_packet_patch"
       ]
     },
     {

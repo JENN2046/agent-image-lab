@@ -1,3 +1,46 @@
+## Current Handoff Update - Serum Bottle Owner Activated Live Probe 2026-06-01
+
+```text
+phase: serum_bottle_owner_activated_live_probe_20260601
+status: attempted_failed_closed_before_provider_contact
+repository: A:\agent-image-lab\agent-image-lab-v0.2
+branch: master
+baseline_before_task: a3a2a15a
+activation_phrase_received: RUNTIME_TO_REVIEW_V1_SERUM_BOTTLE_ONE_PROVIDER_ONE_IMAGE
+runner_confirmation_phrase_used: RUNTIME_TO_REVIEW_V1_ONE_PROVIDER_ONE_IMAGE
+completed:
+  - created exact active serum-bottle owner packet
+  - added serum-only owner runtime module
+  - extended the secretless bridge allowlist for the serum prompt/output directory
+  - added active-packet validator and validation manifest entry
+  - ran pre-run validation
+  - performed exactly one guarded live probe attempt
+  - recorded fail-closed receipt and no-artifact record
+result:
+  - live_probe_status: failed_closed
+  - stop_reason: provider_delegate_result_invalid
+  - precise_blocker: delegate output directory binding mismatch; old red-apple output directory was passed to serum owner runtime.
+not_performed:
+  - provider contact
+  - plugin call
+  - API call
+  - image generation
+  - output directory creation
+  - secret value read
+  - DailyNote or VCP memory write
+  - accepted_samples or production candidate write
+  - push, tag, release, deploy
+validation_run:
+  - npm run validate:active: passed
+  - npm run validate:runtime-to-review-serum-bottle-owner-activated-packet: passed
+  - npm run validate:runtime-to-review-serum-bottle-post-run-receipt-integrity: passed
+  - npm run validate:runtime-to-review-default-local: passed
+  - node scripts\recommend_validation_for_changed_files.js: passed with all changed files matched
+next_safe_action: fix the delegate-to-owner-runtime output directory binding locally. Do not rerun live probe without a new exact owner activation.
+```
+
+---
+
 ## Current Handoff Update - Closeout Helper Status Contract 2026-06-01
 
 ```text

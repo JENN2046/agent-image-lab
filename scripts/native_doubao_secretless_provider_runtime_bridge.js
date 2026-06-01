@@ -11,6 +11,11 @@ const ALLOWED_OUTPUT_DIRECTORY_REFS = new Set([
   "runs/real_generation/v0_6_73_real_vcp_agent_generation_one_shot/",
   "runs/real_generation/v0_6_73_real_vcp_agent_generation_retry_002/",
   "runs/real_generation/runtime_to_review_v1_guarded_live_probe/",
+  "runs/real_generation/runtime_to_review_v1_guarded_live_probe_serum_bottle/",
+]);
+const ALLOWED_PROMPT_PACKAGE_REFS = new Set([
+  "prompts/image_generation/neutral_smoke_test_red_apple_v1.yaml",
+  "prompts/image_generation/product_lifestyle_premium_serum_bottle_v1.yaml",
 ]);
 
 function cloneJson(value) {
@@ -70,7 +75,7 @@ function validateSecretlessProviderRuntimeRequest(request) {
   addIssue(issues, request.selected_plugin_id === "NativeDoubaoImage", "selected_plugin_id mismatch");
   addIssue(issues, request.command === "generate", "command must be generate");
   addIssue(issues, request.mode === "text_to_image", "mode must be text_to_image");
-  addIssue(issues, request.prompt_package_ref === "prompts/image_generation/neutral_smoke_test_red_apple_v1.yaml", "prompt_package_ref mismatch");
+  addIssue(issues, ALLOWED_PROMPT_PACKAGE_REFS.has(request.prompt_package_ref), "prompt_package_ref mismatch");
   addIssue(issues, ALLOWED_OUTPUT_DIRECTORY_REFS.has(request.output_directory_ref), "output_directory_ref mismatch");
   addIssue(issues, request.max_plugin_calls === 1, "max_plugin_calls must be 1");
   addIssue(issues, request.max_images_created === 1, "max_images_created must be 1");

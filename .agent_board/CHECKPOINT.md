@@ -1,3 +1,49 @@
+## Checkpoint - Serum Bottle Owner Activated Live Probe 2026-06-01
+
+```text
+phase: serum_bottle_owner_activated_live_probe_20260601
+status: attempted_failed_closed_before_provider_contact
+result: FAILED_CLOSED_NO_PROVIDER_CONTACT_NO_IMAGE
+mode: Amber_B owner-activated live probe; Green receipt/status sync
+summary: The owner activation phrase was honored by preparing an exact serum-bottle active packet and runtime boundary, then running exactly one guarded live probe. The run failed closed before provider contact because the provider delegate still supplied the old red-apple output directory while the serum owner runtime only permits the serum output directory.
+changed_files_current_task:
+  - adapters/runtime/native_doubao_runtime_v1_serum_bottle_owner_runtime.js
+  - reports/runtime_to_review_v1/serum_bottle_owner_activated_live_probe_packet_20260601.json
+  - reports/runtime_to_review_v1/serum_bottle_exact_live_probe_receipt_20260601.json
+  - reports/runtime_to_review_v1/serum_bottle_exact_live_probe_artifact_record_20260601.json
+  - scripts/validate_runtime_to_review_v1_serum_bottle_owner_activated_packet.js
+  - scripts/native_doubao_secretless_provider_runtime_bridge.js
+  - scripts/validate_runtime_to_review_v1_serum_bottle_post_run_receipt_integrity.js
+  - scripts/validation_manifest.json
+  - package.json
+validation_completed:
+  - node --check changed runtime/validator scripts: passed
+  - npm run validate:runtime-to-review-serum-bottle-owner-activated-packet: passed
+  - npm run validate:runtime-to-review-serum-bottle-post-run-receipt-integrity: passed
+  - npm run validate:runtime-to-review-default-local: passed
+  - npm run validate:active: passed
+  - node scripts\recommend_validation_for_changed_files.js: passed with all changed files matched
+live_probe:
+  - command: node scripts/run_runtime_to_review_v1_guarded_live_probe.js with serum owner runtime and one-image confirmation
+  - exit_code: 1
+  - status: failed_closed
+  - calls_used: provider=0; plugin=0; api=0
+  - image_count: 0
+  - output_directory_created: false
+boundary_checks:
+  - provider_contact_performed: false
+  - plugin_call_performed: false
+  - api_call_performed: false
+  - image_generation_performed: false
+  - secret_value_read_performed: false
+  - DailyNote_write_performed: false
+  - VCP_memory_write_performed: false
+  - push_tag_release_deploy_performed: false
+recommended_next_phase: fix_serum_delegate_output_directory_binding_before_any_new_exact_activation
+```
+
+---
+
 ## Checkpoint - Closeout Helper Status Contract 2026-06-01
 
 ```text

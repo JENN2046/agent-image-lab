@@ -61,6 +61,43 @@ function allFalse(object) {
   return object && Object.values(object).every((value) => value === false);
 }
 
+function optionalJson(relativePath) {
+  if (!fs.existsSync(repoPath(relativePath))) return null;
+  return readJson(relativePath);
+}
+
+function postRunFilesAreAbsentOrValid(expectedPostRunFiles) {
+  const receipt = optionalJson(expectedProviderReceiptRef);
+  const artifact = optionalJson(expectedArtifactRecordRef);
+  const reviewBridgeExists = fs.existsSync(repoPath(expectedReviewBridgeRef));
+  if (!receipt && !artifact && !reviewBridgeExists) return true;
+  if (!receipt || !artifact) return false;
+  const failedClosed = receipt.status === "failed_closed" && artifact.status === "failed_no_artifact_created";
+  const success = receipt.status === "completed_provider_image_created" && artifact.status === "review_pending";
+  if (failedClosed && reviewBridgeExists) return false;
+  if (success && !reviewBridgeExists) return false;
+  return (failedClosed || success) &&
+    receipt.activated_by_owner_confirmation === ownerPhrase &&
+    receipt.runner_confirmation_phrase === runnerPhrase &&
+    receipt.target_prompt_package_ref === expectedPromptRef &&
+    receipt.target_output_directory_ref === expectedOutputDir &&
+    receipt.model_required === expectedModel &&
+    receipt.retry_performed === false &&
+    receipt.retry_allowed === false &&
+    receipt.secret_value_read_performed === false &&
+    receipt.env_file_content_read_performed === false &&
+    receipt.DailyNote_write_performed === false &&
+    receipt.VCP_memory_write_performed === false &&
+    receipt.accepted_samples_write_performed === false &&
+    receipt.production_candidate_write_performed === false &&
+    artifact.source_receipt_ref === expectedProviderReceiptRef &&
+    artifact.source_prompt_package_ref === expectedPromptRef &&
+    artifact.target_output_directory_ref === expectedOutputDir &&
+    Array.isArray(receipt.output_files) &&
+    Array.isArray(artifact.output_files) &&
+    expectedPostRunFiles.includes(expectedProviderReceiptRef);
+}
+
 function plannedRefsMatch(template, activationDraft, decision) {
   return template.receipt_refs_if_activated_later.provider_receipt_ref === expectedProviderReceiptRef &&
     template.receipt_refs_if_activated_later.artifact_record_ref === expectedArtifactRecordRef &&
@@ -138,8 +175,8 @@ function main() {
   check("planned_post_run_refs_are_exact_and_consistent", () =>
     plannedRefsMatch(template, activationDraft, decision)
   );
-  check("planned_post_run_files_absent_before_execution", () =>
-    expectedPostRunFiles.every((relativePath) => !fs.existsSync(repoPath(relativePath)))
+  check("planned_post_run_files_absent_or_valid_after_attempt", () =>
+    postRunFilesAreAbsentOrValid(expectedPostRunFiles)
   );
   check("future_provider_receipt_required_fields_locked", () =>
     activationDraft.future_activation_must_write_receipt === true &&

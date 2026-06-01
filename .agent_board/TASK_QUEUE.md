@@ -1,3 +1,23 @@
+- [x] ID: serum_bottle_owner_activated_live_probe_20260601
+      Lane: Amber_B owner-activated one-provider-one-image live probe; Green receipt/status sync after attempt.
+      Status: attempted_failed_closed_before_provider_contact.
+      Goal: Execute exactly one serum-bottle guarded live probe after owner activation phrase RUNTIME_TO_REVIEW_V1_SERUM_BOTTLE_ONE_PROVIDER_ONE_IMAGE.
+      Active packet: `reports/runtime_to_review_v1/serum_bottle_owner_activated_live_probe_packet_20260601.json`.
+      Receipt: `reports/runtime_to_review_v1/serum_bottle_exact_live_probe_receipt_20260601.json`.
+      Artifact record: `reports/runtime_to_review_v1/serum_bottle_exact_live_probe_artifact_record_20260601.json`.
+      Owner runtime: `adapters/runtime/native_doubao_runtime_v1_serum_bottle_owner_runtime.js`.
+      Validator: `scripts/validate_runtime_to_review_v1_serum_bottle_owner_activated_packet.js`.
+      Live attempts used: 1.
+      Retry allowed: false.
+      Result: failed_closed; no provider contact, no plugin/API call, no image, no output directory.
+      Blocker: provider delegate still passed the old red-apple output directory; serum owner runtime correctly rejected it as serum_bottle_output_directory_not_allowed.
+      Validation: npm run validate:active passed; npm run validate:runtime-to-review-serum-bottle-owner-activated-packet passed; npm run validate:runtime-to-review-serum-bottle-post-run-receipt-integrity passed; npm run validate:runtime-to-review-default-local passed; recommender passed with all 9 files matched.
+      Boundary fields: provider_contact_performed=false; plugin_call_performed=false; api_call_performed=false; image_generation_performed=false; secret_value_read_performed=false; DailyNote_write_performed=false; VCP_memory_write_performed=false; push_tag_release_deploy_performed=false.
+      push_allowed: false
+      push_status: not_performed
+      Recommended next: fix delegate-to-owner-runtime serum output directory binding locally; require a new exact owner activation before any second live attempt.
+---
+
 - [x] ID: closeout_helper_status_contract_20260601
       Lane: Green local validation tooling/status sync.
       Status: completed_validated_pushed_synced.

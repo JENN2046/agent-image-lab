@@ -1,3 +1,42 @@
+## Current Run State - Serum Bottle Owner Activated Live Probe 2026-06-01
+
+```text
+phase: serum_bottle_owner_activated_live_probe_20260601
+status: attempted_failed_closed_before_provider_contact
+mode: Amber_B owner-activated one-provider-one-image live probe; Green closeout sync after receipt
+goal: Execute exactly one serum-bottle guarded live probe after owner activation phrase RUNTIME_TO_REVIEW_V1_SERUM_BOTTLE_ONE_PROVIDER_ONE_IMAGE.
+branch: master
+baseline_before_task: a3a2a15a
+active_packet_ref: reports/runtime_to_review_v1/serum_bottle_owner_activated_live_probe_packet_20260601.json
+receipt_ref: reports/runtime_to_review_v1/serum_bottle_exact_live_probe_receipt_20260601.json
+artifact_record_ref: reports/runtime_to_review_v1/serum_bottle_exact_live_probe_artifact_record_20260601.json
+owner_runtime_ref: adapters/runtime/native_doubao_runtime_v1_serum_bottle_owner_runtime.js
+validator_ref: scripts/validate_runtime_to_review_v1_serum_bottle_owner_activated_packet.js
+live_attempts_used: 1
+retry_allowed: false
+live_probe_result: failed_closed
+stop_reason: provider_delegate_result_invalid
+root_cause: delegate_output_directory_binding_mismatch_failed_closed
+precise_blocker: provider delegate defaulted to the red-apple output directory; serum owner runtime rejected it as serum_bottle_output_directory_not_allowed.
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+image_count: 0
+output_directory_created: false
+secret_value_read_performed: false
+env_file_content_read_performed_by_runner: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+push_tag_release_deploy_performed: false
+latest_validation: npm run validate:active passed; npm run validate:runtime-to-review-serum-bottle-owner-activated-packet passed; npm run validate:runtime-to-review-serum-bottle-post-run-receipt-integrity passed; npm run validate:runtime-to-review-default-local passed; node scripts\recommend_validation_for_changed_files.js passed with all 9 files matched.
+push_allowed: false
+push_status: not_performed
+next_safe_task: fix delegate-to-owner-runtime serum output directory binding locally; do not rerun live probe without a new exact owner activation.
+```
+
+---
+
 ## Current Run State - Closeout Helper Status Contract 2026-06-01
 
 ```text
