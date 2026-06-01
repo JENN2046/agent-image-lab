@@ -1,0 +1,68 @@
+{
+  "schema": "runtime_to_review_v1_serum_bottle_vcptoolbox_admin_auth_env_readiness_preflight.v1",
+  "preflight_id": "serum_bottle_vcptoolbox_admin_auth_env_readiness_preflight_20260601",
+  "created_at": "2026-06-01T23:05:00+08:00",
+  "lane": "Green_local_secret_boundary_preflight",
+  "status": "contract_ready_current_env_checked_by_validator",
+  "intent": "Make VCPToolBox admin auth env availability a local verifiable preflight before any future serum-bottle route live probe.",
+  "source_attempt_receipt_ref": "reports/runtime_to_review_v1/serum_bottle_exact_live_probe_receipt_20260601_attempt_004.json",
+  "source_attempt_blocker": "runtime_bridge_blocker:vcptoolbox_admin_basic_auth_env_missing",
+  "owner_runtime_module_ref": "adapters/runtime/native_doubao_runtime_v1_serum_bottle_vcptoolbox_route_owner_runtime.js",
+  "validator_ref": "scripts/validate_runtime_to_review_v1_serum_bottle_admin_auth_env_readiness_preflight.js",
+  "allowed_env_keys": [
+    "AGENT_IMAGE_LAB_VCP_ADMIN_BASIC_AUTH_B64",
+    "AGENT_IMAGE_LAB_VCP_ADMIN_USERNAME",
+    "AGENT_IMAGE_LAB_VCP_ADMIN_PASSWORD"
+  ],
+  "readiness_rule": {
+    "basic_auth_b64_path_ready_when": "AGENT_IMAGE_LAB_VCP_ADMIN_BASIC_AUTH_B64 is present and non-empty",
+    "username_password_path_ready_when": "AGENT_IMAGE_LAB_VCP_ADMIN_USERNAME and AGENT_IMAGE_LAB_VCP_ADMIN_PASSWORD are both present and non-empty",
+    "header_constructable_when": "either basic_auth_b64_path_ready_when or username_password_path_ready_when is true",
+    "header_value_output_allowed": false,
+    "header_value_storage_allowed": false,
+    "secret_values_printed_allowed": false,
+    "secret_values_written_allowed": false
+  },
+  "actions_not_performed": {
+    "live_probe_performed": false,
+    "route_http_request_performed": false,
+    "owner_runtime_delegate_invoked": false,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "output_directory_created": false,
+    "image_file_written": false,
+    "env_file_content_read_performed": false,
+    "config_env_read_performed": false,
+    "secret_values_printed": false,
+    "secret_values_written": false,
+    "real_vcptoolbox_source_read_performed": false,
+    "real_vcpchat_source_read_performed": false,
+    "DailyNote_write_performed": false,
+    "VCP_memory_write_performed": false,
+    "accepted_samples_write_performed": false,
+    "production_candidate_write_performed": false,
+    "push_tag_release_deploy_performed": false
+  },
+  "validation_required": [
+    "node --check scripts/validate_runtime_to_review_v1_serum_bottle_admin_auth_env_readiness_preflight.js",
+    "npm run validate:runtime-to-review-serum-bottle-admin-auth-env-readiness",
+    "node scripts/validate_validation_manifest.js",
+    "node scripts/recommend_validation_for_changed_files.js",
+    "node scripts/validate_agent_board_state.js"
+  ],
+  "future_live_probe_requirements": {
+    "admin_auth_env_header_constructable": true,
+    "new_exact_owner_activation_required": true,
+    "max_live_probe_attempts": 1,
+    "retry_allowed": false,
+    "secret_values_must_not_be_printed_or_stored": true
+  },
+  "conclusion": {
+    "result": "admin_auth_env_readiness_preflight_contract_ready",
+    "can_execute_now": false,
+    "live_probe_authorized_by_this_preflight": false,
+    "future_live_probe_requires_new_exact_activation": true
+  }
+}

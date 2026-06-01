@@ -1,3 +1,44 @@
+## Checkpoint - Serum Bottle Admin Auth Env Readiness Preflight 2026-06-01
+
+```text
+phase: serum_bottle_vcptoolbox_admin_auth_env_readiness_preflight_20260601
+status: completed_validated_local
+result: LOCAL_PREFLIGHT_NO_LIVE_PROBE
+mode: Green local secret-boundary preflight
+summary: Added a local preflight contract and validator that make AGENT_IMAGE_LAB_VCP_ADMIN_* env availability machine-checkable before any future serum-bottle route live probe. The validator reports only booleans/redacted shape and does not print or store secret values.
+changed_files_current_task:
+  - reports/runtime_to_review_v1/serum_bottle_vcptoolbox_admin_auth_env_readiness_preflight_20260601.json
+  - scripts/validate_runtime_to_review_v1_serum_bottle_admin_auth_env_readiness_preflight.js
+  - package.json
+  - scripts/validation_manifest.json
+validation_completed:
+  - node --check scripts\validate_runtime_to_review_v1_serum_bottle_admin_auth_env_readiness_preflight.js: passed
+  - npm run validate:runtime-to-review-serum-bottle-admin-auth-env-readiness: passed; admin_auth_header_constructable=false in current process env
+  - node scripts\validate_validation_manifest.js: passed
+  - node scripts\recommend_validation_for_changed_files.js: passed; all changed files matched
+  - npm run validate:targeted-plan: passed
+  - node scripts\validate_agent_board_state.js: passed
+  - npm run validate:active: passed
+boundary_checks:
+  - live_probe_performed: false
+  - route_http_request_performed: false
+  - provider_contact_performed: false
+  - plugin_call_performed: false
+  - api_call_performed: false
+  - image_generation_performed: false
+  - env_file_content_read_performed: false
+  - config_env_read_performed: false
+  - secret_values_printed: false
+  - secret_values_written: false
+  - admin_auth_header_constructable: false
+  - DailyNote_write_performed: false
+  - VCP_memory_write_performed: false
+  - push_tag_release_deploy_performed: false
+recommended_next_phase: exact-file local commit if final diff checks pass; future live probe still requires current env readiness and a new exact activation.
+```
+
+---
+
 ## Checkpoint - Serum Bottle Route Live Probe Attempt 004 2026-06-01
 
 ```text

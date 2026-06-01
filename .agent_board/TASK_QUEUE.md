@@ -1,3 +1,14 @@
+- [x] ID: serum_bottle_vcptoolbox_admin_auth_env_readiness_preflight_20260601
+      Lane: Green local secret-boundary preflight; no live probe.
+      Status: completed_validated_local.
+      Goal: Make `AGENT_IMAGE_LAB_VCP_ADMIN_*` env availability verifiable before future serum-bottle route live probe.
+      Preflight: `reports/runtime_to_review_v1/serum_bottle_vcptoolbox_admin_auth_env_readiness_preflight_20260601.json`.
+      Validator: `scripts/validate_runtime_to_review_v1_serum_bottle_admin_auth_env_readiness_preflight.js`.
+      Boundary fields: live_probe_performed=false; route_http_request_performed=false; provider_contact_performed=false; plugin_call_performed=false; api_call_performed=false; image_generation_performed=false; env_file_content_read_performed=false; config_env_read_performed=false; secret_values_printed=false; secret_values_written=false; admin_auth_header_constructable=false; DailyNote_write_performed=false; VCP_memory_write_performed=false; push_tag_release_deploy_performed=false.
+      Validation: node --check passed; admin auth env readiness preflight passed with current env not constructable; validation manifest passed; recommender passed with all changed files matched; targeted-plan passed; agent board state passed; validate:active passed.
+      Recommended next: exact-file local commit if final diff checks pass; future live probe still requires current env readiness and a new exact activation.
+---
+
 - [x] ID: serum_bottle_route_live_probe_attempt_004_20260601
       Lane: Amber_B owner-activated plus exact one-time admin auth env use authorization; no retry.
       Status: attempted_failed_closed_before_provider_contact_validated.
