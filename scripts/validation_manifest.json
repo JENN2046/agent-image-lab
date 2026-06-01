@@ -440,6 +440,28 @@
       ]
     },
     {
+      "id": "runtime_to_review_serum_bottle_exact_live_activation_draft",
+      "command": "npm run validate:runtime-to-review-serum-bottle-exact-live-activation-draft",
+      "script": "scripts/validate_runtime_to_review_v1_serum_bottle_exact_live_activation_packet_draft.js",
+      "tier": "targeted",
+      "domain": "runtime_to_review",
+      "status": "active",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "reports/runtime_to_review_v1/serum_bottle_exact_live_activation_packet_draft_20260601.json",
+        "scripts/validate_runtime_to_review_v1_serum_bottle_exact_live_activation_packet_draft.js",
+        "reports/runtime_to_review_v1/per_packet_owner_runtime_activation_preflight_20260601.json",
+        "adapters/runtime/native_doubao_runtime_v1_per_packet_owner_runtime.js",
+        "reports/runtime_to_review_v1/guarded_live_probe_serum_bottle_inactive_preflight_packet_20260601.json",
+        "tests/fixtures/runtime_kernel_v1_real_guarded_serum_bottle_task.fixture.json",
+        "prompts/image_generation/product_lifestyle_premium_serum_bottle_v1.yaml",
+        "package.json"
+      ],
+      "required_for": [
+        "runtime_to_review_serum_bottle_exact_live_activation_draft_patch"
+      ]
+    },
+    {
       "id": "runtime_to_review_static_real_entry_viewer",
       "command": "npm run validate:runtime-to-review-static-real-entry-viewer",
       "script": "scripts/validate_runtime_to_review_v1_static_real_entry_viewer.js",
