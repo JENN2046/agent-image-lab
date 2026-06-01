@@ -57,6 +57,7 @@
     "validate:runtime-to-review-serum-bottle-inactive-preflight": "node scripts/validate_runtime_to_review_v1_serum_bottle_inactive_preflight_packet.js",
     "validate:runtime-to-review-serum-bottle-binding-design-preflight": "node scripts/validate_runtime_to_review_v1_serum_bottle_owner_runtime_binding_design_preflight.js",
     "validate:runtime-to-review-per-packet-owner-runtime": "node scripts/validate_runtime_to_review_v1_per_packet_owner_runtime_module.js",
+    "validate:runtime-to-review-per-packet-activation-preflight": "node scripts/validate_runtime_to_review_v1_per_packet_activation_preflight.js",
     "validate:runtime-to-review-static-real-entry-viewer": "node scripts/validate_runtime_to_review_v1_static_real_entry_viewer.js",
     "validate:commercial-kv-prompt-package": "node scripts/validate_commercial_kv_prompt_package_gate.js",
     "runtime-to-review:guarded-live-probe": "node scripts/run_runtime_to_review_v1_guarded_live_probe.js",
