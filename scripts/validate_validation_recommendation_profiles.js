@@ -351,10 +351,10 @@ function validateWiring() {
   ]));
   add(
     "recommender_next_commands_text_output",
-    JSON.stringify(nextCommandsText) === JSON.stringify([
-      "node scripts/validate_validation_manifest.js",
-      "npm run validate:active",
-    ]),
+    nextCommandsText[0] === "node scripts/validate_validation_manifest.js" &&
+      nextCommandsText.includes("npm run validate:active") &&
+      nextCommandsText.includes("npm run validate:runtime-to-review-serum-bottle-owner-activation-checklist") &&
+      new Set(nextCommandsText).size === nextCommandsText.length,
     nextCommandsText
   );
   add(
