@@ -1,0 +1,113 @@
+{
+  "schema": "runtime_to_review_v1_serum_bottle_final_pre_push_readiness_summary.v1",
+  "summary_id": "serum_bottle_final_pre_push_readiness_summary_20260601",
+  "created_at": "2026-06-01T14:20:00+08:00",
+  "lane": "A0_pre_push_readiness_summary_local_only",
+  "status": "draft_inactive_not_executed",
+  "can_execute_now": false,
+  "summary_authorizes_execution": false,
+  "summary_authorizes_push": false,
+  "decision_authorized_by_this_summary": false,
+  "execution_authorized_by_this_summary": false,
+  "live_probe_authorized_by_this_summary": false,
+  "purpose": "Final local pre-push readiness summary for the serum-bottle inactive readiness-audit checkpoint. This summary records local state and validation evidence only; it does not authorize push or live provider execution.",
+  "repository_state_observed": {
+    "branch": "master",
+    "remote_tracking_branch": "origin/master",
+    "status": "ahead_by_2_before_this_summary_file",
+    "worktree_dirty_before_this_summary_file": false,
+    "remote_push_performed_by_this_summary": false
+  },
+  "local_commits_waiting_for_push": [
+    {
+      "commit": "376cbceb",
+      "message": "docs: add serum bottle readiness audit",
+      "scope": [
+        "reports/runtime_to_review_v1/serum_bottle_readiness_audit_20260601.json"
+      ]
+    },
+    {
+      "commit": "164b6861",
+      "message": "test: add serum bottle readiness audit validator",
+      "scope": [
+        "package.json",
+        "scripts/validation_manifest.json",
+        "scripts/validate_runtime_to_review_v1_serum_bottle_readiness_audit.js"
+      ]
+    }
+  ],
+  "source_refs": [
+    "reports/runtime_to_review_v1/serum_bottle_readiness_audit_20260601.json",
+    "scripts/validate_runtime_to_review_v1_serum_bottle_readiness_audit.js",
+    "reports/runtime_to_review_v1/serum_bottle_future_active_probe_packet_template_20260601.json",
+    "reports/runtime_to_review_v1/serum_bottle_owner_activation_confirmation_checklist_20260601.json",
+    "reports/runtime_to_review_v1/serum_bottle_live_activation_decision_packet_draft_20260601.json",
+    "reports/runtime_to_review_v1/serum_bottle_output_directory_preflight_gate_20260601.json",
+    "reports/runtime_to_review_v1/serum_bottle_exact_live_activation_packet_draft_20260601.json",
+    "reports/runtime_to_review_v1/per_packet_owner_runtime_activation_preflight_20260601.json",
+    "reports/runtime_to_review_v1/guarded_live_probe_serum_bottle_inactive_preflight_packet_20260601.json",
+    "package.json",
+    "scripts/validation_manifest.json"
+  ],
+  "inactive_boundary_confirmation": {
+    "serum_bottle_chain_currently_inactive": true,
+    "readiness_audit_result": "pass_with_warnings",
+    "readiness_audit_block_count": 0,
+    "readiness_audit_warning_count": 3,
+    "required_future_owner_confirmation_phrase": "RUNTIME_TO_REVIEW_V1_SERUM_BOTTLE_ONE_PROVIDER_ONE_IMAGE",
+    "runner_confirmation_phrase_still_required": "RUNTIME_TO_REVIEW_V1_ONE_PROVIDER_ONE_IMAGE",
+    "future_single_provider_required": true,
+    "future_single_image_required": true,
+    "future_retry_allowed": false,
+    "target_output_directory_ref": "runs/real_generation/runtime_to_review_v1_guarded_live_probe_serum_bottle/",
+    "overwrite_existing_files_allowed": false,
+    "future_execution_requires_separate_active_packet": true
+  },
+  "validation_evidence": [
+    "node --check scripts/validate_runtime_to_review_v1_serum_bottle_readiness_audit.js",
+    "npm run validate:runtime-to-review-serum-bottle-readiness-audit",
+    "npm run validate:validation-manifest",
+    "npm run validate:targeted-plan",
+    "node scripts/recommend_validation_for_changed_files.js --next-commands --files package.json scripts/validation_manifest.json scripts/validate_runtime_to_review_v1_serum_bottle_readiness_audit.js reports/runtime_to_review_v1/serum_bottle_readiness_audit_20260601.json",
+    "npm run validate:recommendation-profiles",
+    "npm run validate:active",
+    "git diff --check"
+  ],
+  "actions_not_performed": {
+    "push_performed": false,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "output_directory_created": false,
+    "image_file_written": false,
+    "secret_value_read_performed": false,
+    "DailyNote_write_performed": false,
+    "VCP_memory_write_performed": false,
+    "accepted_samples_write_performed": false,
+    "production_candidate_write_performed": false
+  },
+  "pre_push_checks_required_if_owner_authorizes_push_later": [
+    "git status --short --branch",
+    "git log --oneline --decorate -n 5",
+    "git diff --check",
+    "confirm exact commits to push are 376cbceb and 164b6861 plus any later explicit local summary commit",
+    "confirm no unreviewed worktree changes are staged or included",
+    "confirm owner explicitly authorizes push current master to origin/master"
+  ],
+  "stop_conditions": [
+    "owner has not authorized push",
+    "worktree contains unreviewed dirty files",
+    "staged files are broader than the exact checkpoint candidate",
+    "origin/master has moved and local branch is no longer a simple ahead-only state",
+    "any pre-push validation fails",
+    "any request expands into provider, plugin, API, image generation, memory write, tag, release, deploy, force push, history rewrite, or destructive action"
+  ],
+  "conclusion": {
+    "result": "ready_for_owner_push_decision_only",
+    "push_authorized_now": false,
+    "local_checkpoint_ready": true,
+    "remote_side_effect_pending_explicit_owner_authorization": true
+  },
+  "recommended_next": "Make this single final pre-push readiness summary file a local checkpoint commit candidate, then wait for explicit push authorization before any remote write."
+}
