@@ -657,6 +657,28 @@
       ]
     },
     {
+      "id": "runtime_to_review_failed_provider_or_new_trial_boundary",
+      "command": "npm run validate:runtime-to-review-failed-provider-or-new-trial-boundary",
+      "script": "scripts/validate_runtime_to_review_v1_failed_provider_attempt_or_new_trial_boundary_review.js",
+      "tier": "targeted",
+      "domain": "runtime_to_review",
+      "status": "active",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "reports/runtime_to_review_v1/failed_provider_attempt_or_new_trial_boundary_review_20260601.json",
+        "scripts/validate_runtime_to_review_v1_failed_provider_attempt_or_new_trial_boundary_review.js",
+        "reports/runtime_to_review_v1/serum_bottle_readiness_audit_20260601.json",
+        "reports/runtime_to_review_v1/serum_bottle_future_active_probe_packet_template_20260601.json",
+        "reports/runtime_to_review_v1/serum_bottle_live_activation_decision_packet_draft_20260601.json",
+        "reports/runtime_to_review_v1/serum_bottle_owner_activation_confirmation_checklist_20260601.json",
+        ".agent_board/TASK_QUEUE.md",
+        "package.json"
+      ],
+      "required_for": [
+        "runtime_to_review_failed_provider_or_new_trial_boundary_patch"
+      ]
+    },
+    {
       "id": "runtime_to_review_static_real_entry_viewer",
       "command": "npm run validate:runtime-to-review-static-real-entry-viewer",
       "script": "scripts/validate_runtime_to_review_v1_static_real_entry_viewer.js",

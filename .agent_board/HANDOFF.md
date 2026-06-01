@@ -66,6 +66,47 @@ next_safe_action: continue local work from 9dc4bcf0 baseline; do not push withou
 
 ---
 
+## Current Handoff Update - Failed Provider Or New Trial Boundary Review 2026-06-01
+
+```text
+phase: failed_provider_attempt_or_new_trial_boundary_review_20260601
+status: completed_validated_local
+mode: Green local boundary review; no live provider attempt
+repository: A:\agent-image-lab\agent-image-lab-v0.2
+branch: master
+baseline_before_task: 6f35f334
+report_ref: reports/runtime_to_review_v1/failed_provider_attempt_or_new_trial_boundary_review_20260601.json
+validator_ref: scripts/validate_runtime_to_review_v1_failed_provider_attempt_or_new_trial_boundary_review.js
+product_decision: prepare_future_active_serum_bottle_packet_before_any_provider_attempt
+selected_product: premium_serum_bottle
+completed:
+  - mapped inspect_failed_provider_tool_attempt_or_authorize_new_trial to the current serum-bottle inactive/future-active chain
+  - recorded exact future owner phrase and runner phrase
+  - locked one provider path, one image, one live attempt, no retry, no overwrite
+  - added package script and validation_manifest entry for the new boundary review
+not_performed:
+  - provider contact
+  - plugin call
+  - API call
+  - image generation
+  - output directory creation
+  - secret value read
+  - DailyNote or VCP memory write
+  - accepted_samples or production candidate write
+  - push, tag, release, deploy
+validation_run:
+  - node --check scripts\validate_runtime_to_review_v1_failed_provider_attempt_or_new_trial_boundary_review.js: passed
+  - npm run validate:runtime-to-review-failed-provider-or-new-trial-boundary: passed
+  - npm run validate:validation-manifest: passed
+  - npm run validate:smoke: passed after sandbox EPERM rerun with escalation
+  - npm run validate:targeted-plan: passed
+  - node scripts\validate_agent_board_state.js: passed
+  - git diff --check: passed with line-ending warnings only
+next_safe_action: run remaining recommended local validation, then exact-file local commit if requested; future provider execution still requires a separate active packet.
+```
+
+---
+
 ## Current Handoff Update - Validation Recommendation Decision Summary 2026-06-01
 
 ```text

@@ -25844,6 +25844,38 @@ side_effects:
 - push_tag_release_deploy_performed: false
 ---
 
+phase: failed_provider_attempt_or_new_trial_boundary_review_20260601
+status: completed_validated_local
+validation_run:
+- node --check scripts\validate_runtime_to_review_v1_failed_provider_attempt_or_new_trial_boundary_review.js: passed
+- npm run validate:runtime-to-review-failed-provider-or-new-trial-boundary: passed
+- npm run validate:validation-manifest: passed
+- npm run validate:smoke: failed in sandbox with spawnSync node/git EPERM, then passed after escalation
+- npm run validate:targeted-plan: passed
+- node scripts\validate_agent_board_state.js: passed
+- git diff --check: passed with line-ending warnings only
+- node scripts\recommend_validation_for_changed_files.js --files reports/runtime_to_review_v1/failed_provider_attempt_or_new_trial_boundary_review_20260601.json: passed
+boundary:
+- provider_contact_performed: false
+- plugin_call_performed: false
+- api_call_performed: false
+- image_generation_performed: false
+- live_probe_performed: false
+- output_directory_created: false
+- image_file_written: false
+- secret_value_read_performed: false
+- DailyNote_write_performed: false
+- VCP_memory_write_performed: false
+- accepted_samples_write_performed: false
+- production_candidate_write_performed: false
+- push_tag_release_deploy_performed: false
+next_required_before_provider_attempt:
+- separate owner-issued active packet
+- RUNTIME_TO_REVIEW_V1_SERUM_BOTTLE_ONE_PROVIDER_ONE_IMAGE
+- RUNTIME_TO_REVIEW_V1_ONE_PROVIDER_ONE_IMAGE
+- all pre-run validators passing immediately before execution
+---
+
 phase: v0_5_0_controlled_generation_readiness_packet
 status: completed_validated_pending_local_commit
 source_local_commit: c3e4272

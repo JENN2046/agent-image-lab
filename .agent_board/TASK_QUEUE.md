@@ -173,10 +173,19 @@ b5cb845ac280e463c3825ca0bc20e5abc772c421
       Status: attempted_failed_no_retry.
       Compatibility note: compacted hot resume surface preserves the failed no-retry attempt boundary.
 
-- [ ] ID: inspect_failed_provider_tool_attempt_or_authorize_new_trial
-      Lane: Red human decision.
-      Status: pending.
-      Required authorization: exact prompt package, output directory, receipt path, and registry path before any future live provider execution.
+- [x] ID: inspect_failed_provider_tool_attempt_or_authorize_new_trial
+      Lane: Green local boundary review, with future Amber_B execution still gated.
+      Status: completed_validated_local_boundary_review.
+      Result: resolved to `failed_provider_attempt_or_new_trial_boundary_review_20260601`.
+      Report: `reports/runtime_to_review_v1/failed_provider_attempt_or_new_trial_boundary_review_20260601.json`.
+      Validator: `scripts/validate_runtime_to_review_v1_failed_provider_attempt_or_new_trial_boundary_review.js`.
+      Product decision: prepare a future active serum-bottle packet before any provider attempt.
+      Current execution authorization: false.
+      Required future owner phrase: RUNTIME_TO_REVIEW_V1_SERUM_BOTTLE_ONE_PROVIDER_ONE_IMAGE.
+      Runner phrase still required: RUNTIME_TO_REVIEW_V1_ONE_PROVIDER_ONE_IMAGE.
+      Boundaries: no provider contact, plugin/API call, image generation, output write, secret read, DailyNote/VCP memory write, accepted_samples write, production candidate write, push, tag, release, or deploy.
+      Validation: node --check validator passed; npm run validate:runtime-to-review-failed-provider-or-new-trial-boundary passed; npm run validate:validation-manifest passed; npm run validate:smoke passed after sandbox EPERM rerun with escalation; npm run validate:targeted-plan passed; node scripts\validate_agent_board_state.js passed; git diff --check passed with line-ending warnings only.
+      Next: owner_issued_active_serum_bottle_packet_if_provider_attempt_is_desired.
 
 - [x] ID: remote_fast_forward_sync_20260601
       Lane: Green.

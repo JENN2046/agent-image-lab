@@ -89,6 +89,48 @@ recommended_next_phase: continue_from_synced_origin_master_baseline
 
 ---
 
+## Checkpoint - Failed Provider Or New Trial Boundary Review 2026-06-01
+
+```text
+phase: failed_provider_attempt_or_new_trial_boundary_review_20260601
+status: completed_validated_local
+result: COMPLETED_VALIDATED
+mode: Green local product boundary package
+summary: The pending product task inspect_failed_provider_tool_attempt_or_authorize_new_trial has been resolved into a non-executing boundary review. The current route maps to the serum-bottle future-active chain, keeps all current packets inactive, and states that any provider/image attempt still requires a separate owner-issued active packet.
+changed_files_current_task:
+  - reports/runtime_to_review_v1/failed_provider_attempt_or_new_trial_boundary_review_20260601.json
+  - scripts/validate_runtime_to_review_v1_failed_provider_attempt_or_new_trial_boundary_review.js
+  - package.json
+  - scripts/validation_manifest.json
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/VALIDATION_LOG.md
+validation_completed:
+  - node --check scripts\validate_runtime_to_review_v1_failed_provider_attempt_or_new_trial_boundary_review.js: passed
+  - npm run validate:runtime-to-review-failed-provider-or-new-trial-boundary: passed
+  - npm run validate:validation-manifest: passed
+  - npm run validate:smoke: passed after sandbox EPERM rerun with escalation
+  - npm run validate:targeted-plan: passed
+  - node scripts\validate_agent_board_state.js: passed
+  - git diff --check: passed with line-ending warnings only
+  - node scripts\recommend_validation_for_changed_files.js --files reports/runtime_to_review_v1/failed_provider_attempt_or_new_trial_boundary_review_20260601.json: passed
+boundary_checks:
+  - provider_contact_performed: false
+  - plugin_call_performed: false
+  - api_call_performed: false
+  - image_generation_performed: false
+  - secret_value_read_performed: false
+  - DailyNote_write_performed: false
+  - VCP_memory_write_performed: false
+  - push_tag_release_deploy_performed: false
+  - new_trial_authorized_now: false
+recommended_next_phase: owner_issued_active_serum_bottle_packet_if_provider_attempt_is_desired
+```
+
+---
+
 ## Checkpoint - Validation Recommendation Decision Summary 2026-06-01
 
 ```text
