@@ -25876,6 +25876,42 @@ next_required_before_provider_attempt:
 - all pre-run validators passing immediately before execution
 ---
 
+phase: serum_bottle_active_packet_candidate_no_execute_20260601
+status: completed_validated_local
+validation_run:
+- node --check scripts\validate_runtime_to_review_v1_serum_bottle_active_packet_candidate_no_execute.js: passed
+- npm run validate:runtime-to-review-serum-bottle-active-candidate: passed
+- npm run validate:validation-manifest: passed
+- npm run validate:smoke: failed in sandbox with spawnSync node/git EPERM, then passed after escalation
+- npm run validate:targeted-plan: passed
+- node scripts\validate_agent_board_state.js: passed
+- git diff --check: passed with line-ending warnings only
+- node scripts\recommend_validation_for_changed_files.js --files reports/runtime_to_review_v1/serum_bottle_active_packet_candidate_no_execute_20260601.json: passed
+boundary:
+- can_execute_now: false
+- candidate_authorizes_execution: false
+- execution_authorized_by_this_packet: false
+- live_probe_authorized_by_this_packet: false
+- provider_contact_performed: false
+- plugin_call_performed: false
+- api_call_performed: false
+- image_generation_performed: false
+- live_probe_performed: false
+- output_directory_created: false
+- image_file_written: false
+- secret_value_read_performed: false
+- DailyNote_write_performed: false
+- VCP_memory_write_performed: false
+- accepted_samples_write_performed: false
+- production_candidate_write_performed: false
+- push_tag_release_deploy_performed: false
+next_required_before_provider_attempt:
+- separate activation decision
+- RUNTIME_TO_REVIEW_V1_SERUM_BOTTLE_ONE_PROVIDER_ONE_IMAGE
+- RUNTIME_TO_REVIEW_V1_ONE_PROVIDER_ONE_IMAGE
+- all pre-run validators passing immediately before execution
+---
+
 phase: v0_5_0_controlled_generation_readiness_packet
 status: completed_validated_pending_local_commit
 source_local_commit: c3e4272

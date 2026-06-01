@@ -93,6 +93,42 @@ next_safe_task: run recommended local validation, then exact-file local commit i
 
 ---
 
+## Current Run State - Serum Bottle Active Packet Candidate No Execute 2026-06-01
+
+```text
+phase: serum_bottle_active_packet_candidate_no_execute_20260601
+status: completed_validated_local
+mode: Amber_B packet candidate prepared locally; no provider/plugin/API/image call
+goal: Prepare the serum-bottle active packet shape while honoring the instruction not to generate directly.
+branch: master
+baseline_before_task: af96eb99
+packet_ref: reports/runtime_to_review_v1/serum_bottle_active_packet_candidate_no_execute_20260601.json
+validator_ref: scripts/validate_runtime_to_review_v1_serum_bottle_active_packet_candidate_no_execute.js
+package_script: validate:runtime-to-review-serum-bottle-active-candidate
+can_execute_now: false
+candidate_authorizes_execution: false
+execution_authorized_by_this_packet: false
+live_probe_authorized_by_this_packet: false
+required_future_owner_confirmation_phrase: RUNTIME_TO_REVIEW_V1_SERUM_BOTTLE_ONE_PROVIDER_ONE_IMAGE
+runner_confirmation_phrase_still_required: RUNTIME_TO_REVIEW_V1_ONE_PROVIDER_ONE_IMAGE
+target_output_directory_ref: runs/real_generation/runtime_to_review_v1_guarded_live_probe_serum_bottle/
+max_images_if_separately_activated_later: 1
+retry_allowed: false
+latest_validation: node --check validator passed; npm run validate:runtime-to-review-serum-bottle-active-candidate passed; npm run validate:validation-manifest passed; npm run validate:smoke passed after sandbox EPERM rerun with escalation; npm run validate:targeted-plan passed; node scripts\validate_agent_board_state.js passed; git diff --check passed with line-ending warnings only.
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+secret_value_read_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+push_tag_release_deploy_performed: false
+push_status: not_performed
+next_safe_task: run recommended local validation and then commit the packet candidate if requested; actual generation still requires separate activation.
+```
+
+---
+
 ## Current Run State - Validation Recommendation Decision Summary 2026-06-01
 
 ```text
