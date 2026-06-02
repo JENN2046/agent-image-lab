@@ -1,3 +1,29 @@
+- [x] ID: secretless_serum_route_option_a_vcptoolbox_authorization_packet_draft_20260602
+      Lane: Green authorization packet draft only.
+      Status: completed_validated_local_authorization_packet_draft.
+      Goal: Draft the future Option A VCPToolBox authorization packet without reading or modifying VCPToolBox.
+      Packet: `reports/runtime_to_review_v1/secretless_serum_route_option_a_vcptoolbox_authorization_packet_draft_20260602.json`.
+      Validator: `scripts/validate_runtime_to_review_v1_secretless_serum_route_option_a_vcptoolbox_authorization_packet_draft.js`.
+      Preferred route: Option A - VCPToolBox internal authorized execution interface.
+      Current state: current_permission=cannot_run_live_probe_now; can_execute_now=false; authorization_granted_by_this_record=false; external_vcptoolbox_modification_authorized_by_this_record=false; next_auto_step_allowed=false.
+      Boundary: no VCPToolBox read/write, live probe, route HTTP request, Authorization header construction, secret/env/config read, provider/plugin/API/image generation, output write, memory write, stage, commit, push, tag, release, deploy.
+      Validation: JSON parse and boundary check passed; node --check passed; Option A authorization packet draft validator passed; validation manifest passed.
+      Recommended next: review draft; if accepted, issue a separate exact VCPToolBox read-only preflight authorization for Option A file allowlist discovery.
+---
+
+- [x] ID: secretless_serum_route_redesign_preflight_20260602
+      Lane: Green local design/preflight plus validator draft.
+      Status: completed_validated_local_design_preflight.
+      Goal: Design a serum-bottle secretless execution route so Agent Image Lab/Codex does not read, construct, print, or store VCPToolBox admin auth secret material.
+      Design: `reports/runtime_to_review_v1/secretless_serum_route_redesign_preflight_20260602.json`.
+      Validator: `scripts/validate_runtime_to_review_v1_secretless_serum_route_redesign_preflight.js`.
+      Current state: current_permission=cannot_run_live_probe_now; current_blocker=runtime_bridge_blocker:vcptoolbox_admin_basic_auth_env_missing; current_route_selection=secretless_redesign_preferred.
+      Preferred route: Option A - VCPToolBox internal authorized execution interface.
+      Boundary: no live probe, route HTTP request, Authorization header construction, current admin auth env value read, .env/config.env read, provider/plugin/API/image generation, output write, memory write, external repo modification, stage, commit, push, tag, release, deploy.
+      Validation: node --check passed; secretless serum route redesign preflight validator passed.
+      Recommended next: after validation, review whether to draft future exact VCPToolBox authorization package for Option A.
+---
+
 - [x] ID: serum_bottle_current_state_hot_surface_unification_green_trial_20260602
       Lane: Green local documentation/status-surface trial.
       Status: completed_validated_local_status_surface_clarification.

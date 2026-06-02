@@ -1,3 +1,80 @@
+## Current Run State - Secretless Serum Option A VCPToolBox Authorization Packet Draft 2026-06-02
+
+```text
+phase: secretless_serum_route_option_a_vcptoolbox_authorization_packet_draft_20260602
+status: completed_validated_local_authorization_packet_draft
+mode: Green authorization packet draft only; no runtime execution and no external repo action
+branch: master
+packet_ref: reports/runtime_to_review_v1/secretless_serum_route_option_a_vcptoolbox_authorization_packet_draft_20260602.json
+validator_ref: scripts/validate_runtime_to_review_v1_secretless_serum_route_option_a_vcptoolbox_authorization_packet_draft.js
+source_design_ref: reports/runtime_to_review_v1/secretless_serum_route_redesign_preflight_20260602.json
+preferred_route: Option A - VCPToolBox internal authorized execution interface
+current_permission: cannot_run_live_probe_now
+current_route_selection: secretless_redesign_preferred
+authorization_granted_by_this_record: false
+real_vcptoolbox_read_authorized_by_this_record: false
+external_vcptoolbox_modification_authorized_by_this_record: false
+can_execute_now: false
+next_auto_step_allowed: false
+external_repo_read_performed: false
+external_repo_modified: false
+secret_value_read_performed: false
+env_file_content_read_performed: false
+config_env_read_performed: false
+authorization_header_constructed: false
+live_probe_performed: false
+route_http_request_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+output_write_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+push_tag_release_deploy_performed: false
+latest_validation: JSON parse and boundary check passed; node --check passed; Option A authorization packet draft validator passed; validation manifest passed.
+next_safe_task: review the packet draft; any VCPToolBox read/write still requires separate exact authorization and a future exact file allowlist.
+```
+
+---
+
+## Current Run State - Secretless Serum Route Redesign Preflight 2026-06-02
+
+```text
+phase: secretless_serum_route_redesign_preflight_20260602
+status: completed_validated_local_design_preflight
+mode: Green local design/preflight; no runtime execution
+branch: master
+design_ref: reports/runtime_to_review_v1/secretless_serum_route_redesign_preflight_20260602.json
+validator_ref: scripts/validate_runtime_to_review_v1_secretless_serum_route_redesign_preflight.js
+package_script: validate:runtime-to-review-secretless-serum-route-redesign-preflight
+current_permission: cannot_run_live_probe_now
+current_blocker: runtime_bridge_blocker:vcptoolbox_admin_basic_auth_env_missing
+current_route_selection: secretless_redesign_preferred
+preferred_route: Option A - VCPToolBox internal authorized execution interface
+agent_image_lab_secret_contact_required: false
+external_vcptoolbox_change_required: future_exact_authorization_required
+can_execute_now: false
+live_probe_performed: false
+route_http_request_performed: false
+authorization_header_constructed: false
+current_admin_auth_env_values_read: false
+env_file_content_read_performed: false
+config_env_read_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+DailyNote_write_performed: false
+VCP_memory_write_performed: false
+external_repo_modified: false
+push_tag_release_deploy_performed: false
+latest_validation: node --check passed; secretless serum route redesign preflight validator passed.
+next_safe_task: review whether to draft a future exact VCPToolBox authorization package for Option A; live probe remains blocked until a secretless route exists and a new exact activation is issued.
+```
+
+---
+
 ## Current State - Serum Bottle Execution Boundary 2026-06-02
 
 ```yaml
