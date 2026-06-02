@@ -1,3 +1,46 @@
+## Current State - Serum Bottle Execution Boundary 2026-06-02
+
+```yaml
+current_state:
+  route: serum_bottle_vcptoolbox_route_owner_runtime
+  git_state_note: local master was clean before this status-surface patch and is ahead of origin/master by 1 commit; current worktree may be dirty with this uncommitted .agent_board clarification until committed or reverted.
+  status: owner_activated_failed_closed_attempt_history_no_artifact
+  current_permission: cannot_run_live_probe_now
+  current_blocker: runtime_bridge_blocker:vcptoolbox_admin_basic_auth_env_missing
+  admin_auth_readiness:
+    validator: validate:runtime-to-review-serum-bottle-admin-auth-env-readiness
+    admin_auth_header_constructable: false
+  historical_active_packet:
+    ref: reports/runtime_to_review_v1/serum_bottle_owner_activated_live_probe_packet_20260601.json
+    can_execute_now: true
+    interpretation: historical_packet_fact_not_current_permission
+  latest_attempt:
+    ref: reports/runtime_to_review_v1/serum_bottle_exact_live_probe_receipt_20260601_attempt_004.json
+    result: failed_closed
+    provider_contact_performed: false
+    plugin_call_performed: false
+    api_call_performed: false
+    image_generation_performed: false
+    output_write_performed: false
+    secret_value_read_performed: false
+  current_next_safe_action:
+    - do not retry from the consumed/historical activation
+    - require new exact activation
+    - require current admin auth readiness true
+    - or choose secretless route redesign
+  immutable_evidence_refs:
+    - reports/runtime_to_review_v1/serum_bottle_owner_activated_live_probe_packet_20260601.json
+    - reports/runtime_to_review_v1/serum_bottle_exact_live_probe_receipt_20260601*.json
+    - reports/runtime_to_review_v1/serum_bottle_exact_live_probe_artifact_record_20260601*.json
+    - reports/runtime_to_review_v1/serum_bottle_vcptoolbox_admin_auth_env_readiness_preflight_20260601.json
+    - reports/runtime_to_review_v1/serum_bottle_vcptoolbox_route_owner_runtime_preflight_20260601.json
+  immutable_evidence_rule: do_not_move_or_rename_validator_manifest_refs
+```
+
+Historical entries below are retained for audit and may contain consumed or superseded next actions.
+
+---
+
 ## Current Handoff Update - Serum Bottle Post-Sync Failed-Closed Active-Attempt Status Note 2026-06-01
 
 ```text

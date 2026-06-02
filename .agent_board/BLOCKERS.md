@@ -2,6 +2,8 @@
 
 ## Active Blockers
 
+Current active blocker is BLOCKER-20260601-01; resolved/legacy entries below are historical unless marked active.
+
 ## BLOCKER-20260601-01 - Serum route live probe requires exact admin auth env authorization
 
 Status: active
