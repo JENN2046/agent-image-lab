@@ -1,3 +1,19 @@
+- [x] ID: secretless_serum_live_probe_activation_preflight_20260603
+      Lane: Green local exact activation packet/taskbook draft plus validator.
+      Status: completed_validated_local_activation_preflight_draft_only.
+      Goal: Draft a future exact secretless serum-bottle live probe activation packet and taskbook without executing a live probe.
+      Packet: `reports/runtime_to_review_v1/secretless_serum_live_probe_activation_preflight_20260603.json`.
+      Validator: `scripts/validate_runtime_to_review_v1_secretless_serum_live_probe_activation_preflight.js`.
+      Package script: `validate:runtime-to-review-secretless-serum-live-probe-activation-preflight`.
+      Activation package id: `AUTH-DRAFT-SECRETLESS-SERUM-LIVE-PROBE-20260603-001`.
+      Required future owner phrase: `RUNTIME_TO_REVIEW_V1_SECRETLESS_SERUM_BOTTLE_ONE_PROVIDER_ONE_IMAGE`.
+      VCPToolBox Option A baseline: `cf1fa55b36e9aeece2718bf2c9425c44db24cb25`.
+      Current state: current_permission=cannot_run_live_probe_now; current_live_probe_allowed=false; can_execute_now=false; authorization_granted_by_this_record=false; activation_granted_by_this_record=false; historical_packet_fact_not_current_permission=true.
+      Boundary: this draft does not read/modify VCPToolBox, read secret/env/config, construct Authorization header, run live probe/route HTTP, provider/plugin/API/image, output, DailyNote, VCP memory, stage, commit, push, tag, release, or deploy.
+      Validation: node --check passed; activation preflight validator passed; pushed receipt validator passed; secretless redesign validator passed; validation manifest passed; agent board state passed; git diff --check passed; validate:active passed; closeout status summary passed.
+      Recommended next: review this inactive activation preflight; any live attempt still requires separate exact activation plus current preflight pass and non-secret payload.
+---
+
 - [x] ID: secretless_serum_route_option_a_vcptoolbox_implementation_pushed_receipt_20260603
       Lane: Green local documentation/validator/status sync after separately authorized VCPToolBox implementation push.
       Status: completed_validated_local_pushed_receipt_status_sync.

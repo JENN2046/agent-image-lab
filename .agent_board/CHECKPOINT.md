@@ -1,3 +1,69 @@
+## Checkpoint - Secretless Serum Live Probe Activation Preflight 2026-06-03
+
+```text
+phase: secretless_serum_live_probe_activation_preflight_20260603
+status: completed_validated_local_activation_preflight_draft_only
+result: COMPLETED_VALIDATED_LOCAL_ACTIVATION_PREFLIGHT_DRAFT_ONLY
+mode: Green local exact activation packet/taskbook draft plus validator
+summary: Drafts a future exact secretless serum-bottle live probe activation packet and taskbook. This checkpoint is Agent Image Lab local documentation/validator/status work only; it is not a live probe, route HTTP request, provider action, plugin/API call, image generation, external repo read/write, secret/env/config read, Authorization header construction, memory write, or remote action.
+changed_files_current_task:
+  - reports/runtime_to_review_v1/secretless_serum_live_probe_activation_preflight_20260603.json
+  - scripts/validate_runtime_to_review_v1_secretless_serum_live_probe_activation_preflight.js
+  - package.json
+  - scripts/validation_manifest.json
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+activation_boundary:
+  - activation_package_id: AUTH-DRAFT-SECRETLESS-SERUM-LIVE-PROBE-20260603-001
+  - required_future_owner_confirmation_phrase: RUNTIME_TO_REVIEW_V1_SECRETLESS_SERUM_BOTTLE_ONE_PROVIDER_ONE_IMAGE
+  - current_permission: cannot_run_live_probe_now
+  - can_execute_now: false
+  - current_live_probe_allowed: false
+  - authorization_granted_by_this_record: false
+  - activation_granted_by_this_record: false
+  - historical_packet_fact_not_current_permission: true
+  - vcptoolbox_option_a_pushed_commit: cf1fa55b36e9aeece2718bf2c9425c44db24cb25
+future_taskbook_summary:
+  - verify current baselines
+  - receive separate exact activation
+  - run non-executing preflight validation
+  - construct non-secret payload only
+  - execute exactly one secretless live probe only if separately activated
+  - write receipt and artifact record
+boundary_checks:
+  - external_repo_read_performed_by_this_task: false
+  - external_repo_modified_by_this_task: false
+  - secret_value_read_performed: false
+  - env_file_content_read_performed: false
+  - config_env_read_performed: false
+  - authorization_header_constructed: false
+  - live_probe_performed: false
+  - route_http_request_performed: false
+  - provider_contact_performed: false
+  - plugin_call_performed: false
+  - api_call_performed: false
+  - image_generation_performed: false
+  - output_write_performed: false
+  - DailyNote_write_performed: false
+  - VCP_memory_write_performed: false
+  - push_tag_release_deploy_performed: false
+validation_completed:
+  - node --check scripts\validate_runtime_to_review_v1_secretless_serum_live_probe_activation_preflight.js: passed
+  - npm run validate:runtime-to-review-secretless-serum-live-probe-activation-preflight: passed
+  - npm run validate:runtime-to-review-secretless-serum-option-a-vcptoolbox-implementation-pushed-receipt: passed
+  - npm run validate:runtime-to-review-secretless-serum-route-redesign-preflight: passed
+  - node scripts\validate_validation_manifest.js: passed
+  - node scripts\validate_agent_board_state.js: passed
+  - git diff --check: passed
+  - npm run validate:active: passed
+  - npm run --silent closeout:validation-summary -- --status: passed
+recommended_next_phase: review this inactive activation preflight draft; live probe still requires separate exact activation naming the package id and phrase.
+```
+
+---
+
 ## Checkpoint - Secretless Serum Option A VCPToolBox Implementation Pushed Receipt 2026-06-03
 
 ```text
