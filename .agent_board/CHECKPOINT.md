@@ -1,3 +1,58 @@
+## Checkpoint - Secretless Serum Live Probe Exact Activation Attempt 001 2026-06-03
+
+```text
+phase: secretless_serum_live_probe_exact_activation_20260603_attempt_001
+status: attempted_failed_closed_before_route_http_request_validated
+result: FAILED_CLOSED_BEFORE_ROUTE_HTTP_REQUEST
+mode: Amber exact live probe activation, one attempt only
+summary: Required preflight and VCPToolBox baseline verification passed, and a non-secret payload scan found no forbidden keys. The activation failed closed before route HTTP because Agent Image Lab did not contain a verifiable exact runner or callable invocation contract for the VCPToolBox Option A secretless internal authorized execution interface. The old admin-auth guarded live probe route was not used.
+changed_files_current_task:
+  - reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_001.json
+  - reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_001.json
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/BLOCKERS.md
+activation:
+  - activation_package_id: AUTH-DRAFT-SECRETLESS-SERUM-LIVE-PROBE-20260603-001
+  - phrase_received: RUNTIME_TO_REVIEW_V1_SECRETLESS_SERUM_BOTTLE_ONE_PROVIDER_ONE_IMAGE
+  - activation_attempt_consumed: true
+vcptoolbox_baseline:
+  - branch: main
+  - status: clean
+  - head: cf1fa55b36e9aeece2718bf2c9425c44db24cb25
+boundary_checks:
+  - route_http_request_performed: false
+  - provider_contact_performed: false
+  - plugin_call_performed: false
+  - api_call_performed: false
+  - image_generation_performed: false
+  - image_count: 0
+  - output_write_performed: false
+  - secret_value_read_performed: false
+  - env_file_content_read_performed: false
+  - config_env_read_performed: false
+  - authorization_header_constructed_by_agent_image_lab: false
+  - old_admin_auth_route_used: false
+  - retry_performed: false
+  - push_tag_release_deploy_performed: false
+validation_completed:
+  - git status -sb: clean master...origin/master before task
+  - node --check scripts\validate_runtime_to_review_v1_secretless_serum_live_probe_activation_preflight.js: passed
+  - npm run validate:runtime-to-review-secretless-serum-live-probe-activation-preflight: passed
+  - npm run validate:runtime-to-review-secretless-serum-option-a-vcptoolbox-implementation-pushed-receipt: passed
+  - npm run validate:runtime-to-review-secretless-serum-route-redesign-preflight: passed
+  - node scripts\validate_validation_manifest.js: passed
+  - node scripts\validate_agent_board_state.js: passed before and after status sync
+  - git diff --check: passed
+  - VCPToolBox branch/status/HEAD read-only baseline: passed
+  - receipt/artifact JSON parse: passed
+recommended_next_phase: do not retry from this consumed activation; draft/authorize an exact Agent Image Lab secretless Option A execution entry or callable invocation contract, then require a new exact activation.
+```
+
+---
+
 ## Checkpoint - Secretless Serum Live Probe Activation Preflight 2026-06-03
 
 ```text

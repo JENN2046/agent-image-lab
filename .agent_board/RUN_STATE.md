@@ -1,3 +1,44 @@
+## Current Run State - Secretless Serum Live Probe Exact Activation Attempt 001 2026-06-03
+
+```text
+phase: secretless_serum_live_probe_exact_activation_20260603_attempt_001
+status: attempted_failed_closed_before_route_http_request_validated
+mode: Amber exact live probe activation, one attempt only
+branch: master
+receipt_ref: reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_001.json
+artifact_record_ref: reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_001.json
+vcptoolbox_required_commit_verified: cf1fa55b36e9aeece2718bf2c9425c44db24cb25
+vcptoolbox_branch_status_verified: main; ## main...origin/main
+preflight_status: passed
+result: failed_closed_before_route_http_request
+precise_blocker: exact_secretless_execution_entry_missing_in_agent_image_lab
+secretless_route_gate_enabled: not_verified_no_agent_image_lab_secretless_execution_entry_available
+activation_attempt_consumed: true
+current_permission: cannot_run_live_probe_now_without_new_exact_activation
+agent_image_lab_secretless_runner_found: false
+old_admin_auth_guarded_live_probe_runner_found: true
+old_admin_auth_guarded_live_probe_runner_used: false
+route_http_request_performed: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+image_count: 0
+output_write_performed: false
+secret_value_read_performed: false
+env_file_content_read_performed: false
+config_env_read_performed: false
+authorization_header_constructed_by_agent_image_lab: false
+retry_performed: false
+push_tag_release_deploy_performed: false
+latest_validation: required local preflight passed; VCPToolBox baseline read-only verification passed; payload forbidden-key scan passed; post-write JSON parse, validation manifest, agent board state, and git diff --check passed.
+next_safe_task: no retry from consumed activation; create exact Agent Image Lab secretless Option A execution entry/callable contract first, then request a new exact activation.
+```
+
+Historical entries below are retained for audit and may contain consumed or superseded next actions.
+
+---
+
 ## Current Run State - Secretless Serum Live Probe Activation Preflight 2026-06-03
 
 ```text

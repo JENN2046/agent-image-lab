@@ -1,3 +1,18 @@
+- [x] ID: secretless_serum_live_probe_exact_activation_20260603_attempt_001
+      Lane: Amber exact live probe activation, one attempt only.
+      Status: attempted_failed_closed_before_route_http_request_validated.
+      Goal: Run one serum-bottle secretless live probe through VCPToolBox Option A using only non-secret payload fields.
+      Activation package: `AUTH-DRAFT-SECRETLESS-SERUM-LIVE-PROBE-20260603-001`.
+      Phrase received: `RUNTIME_TO_REVIEW_V1_SECRETLESS_SERUM_BOTTLE_ONE_PROVIDER_ONE_IMAGE`.
+      Receipt: `reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_001.json`.
+      Artifact record: `reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_001.json`.
+      Result: failed_closed_before_route_http_request; exact Agent Image Lab secretless Option A execution entry/callable invocation contract was not present, so no route HTTP request was made.
+      VCPToolBox baseline: verified read-only as main clean at `cf1fa55b36e9aeece2718bf2c9425c44db24cb25`.
+      Boundary: route_http_request_performed=false; provider_contact_performed=false; plugin_call_performed=false; api_call_performed=false; image_generation_performed=false; output_write_performed=false; secret_value_read_performed=false; authorization_header_constructed_by_agent_image_lab=false; retry_performed=false; old_admin_auth_route_used=false; stage/commit/push/tag/release/deploy=false.
+      Validation: required local preflight passed; VCPToolBox baseline passed; non-secret payload scan found no forbidden keys; post-write JSON parse, validation manifest, agent board state, and git diff --check passed.
+      Recommended next: do not retry from this consumed activation; draft/authorize an exact Agent Image Lab secretless Option A execution entry or callable invocation contract, then require a new exact activation.
+---
+
 - [x] ID: secretless_serum_live_probe_activation_preflight_20260603
       Lane: Green local exact activation packet/taskbook draft plus validator.
       Status: completed_validated_local_activation_preflight_draft_only.
