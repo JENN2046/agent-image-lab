@@ -1,3 +1,29 @@
+- [x] ID: secretless_serum_route_option_a_vcptoolbox_implementation_authorization_packet_draft_20260602
+      Lane: Green future exact implementation authorization packet draft only.
+      Status: completed_validated_local_implementation_authorization_packet_draft.
+      Goal: Draft the future exact VCPToolBox implementation authorization packet for Option A without modifying VCPToolBox.
+      Packet: `reports/runtime_to_review_v1/secretless_serum_route_option_a_vcptoolbox_implementation_authorization_packet_draft_20260602.json`.
+      Validator: `scripts/validate_runtime_to_review_v1_secretless_serum_route_option_a_vcptoolbox_authorization_packet_draft.js`.
+      Confirmed allowlist: `routes/admin/aiImageAgents.js`; `tests/aiImageAgentsRoute.test.js`.
+      Optional third file required now: false.
+      Current state: current_permission=cannot_run_live_probe_now; can_execute_now=false; authorization_granted_by_this_record=false; implementation_authorized_by_this_record=false; external_vcptoolbox_modification_authorized_by_this_record=false; next_auto_step_allowed=false.
+      Boundary: no VCPToolBox read/write by this draft task, no secret/env/config read, no Authorization header construction, no live probe, no provider/plugin/API/image generation, no output write, no memory write, no stage, commit, push, tag, release, deploy.
+      Validation: node --check passed; Option A authorization packet validator passed with implementation packet checks; validation manifest passed; agent board state passed; git diff --check passed with line-ending warnings only; recommender matched all changed files and targeted validation set passed.
+      Recommended next: review draft; actual VCPToolBox implementation requires separate exact authorization limited to the two confirmed files.
+---
+
+- [x] ID: secretless_serum_route_option_a_vcptoolbox_exact_read_preflight_20260602
+      Lane: Amber_A exact read-only VCPToolBox preflight.
+      Status: completed_read_only_exact_file_allowlist_confirmed.
+      Goal: Confirm Option A required exact VCPToolBox file allowlist without modifying VCPToolBox.
+      Receipt: `reports/runtime_to_review_v1/secretless_serum_route_option_a_vcptoolbox_exact_read_preflight_receipt_20260602.json`.
+      Confirmed allowlist: `routes/admin/aiImageAgents.js`; `tests/aiImageAgentsRoute.test.js`.
+      Optional third file required now: false.
+      Boundary: external_repo_read_performed=true; external_repo_modified=false; secret/env/config read=false; live probe=false; provider/plugin/API/image=false; VCPToolBox stage/commit/push/tag/release/deploy=false.
+      Validation observed: VCPToolBox git status clean before and after; node --check passed for the two confirmed files; Agent Image Lab Option A packet/receipt validator passed.
+      Recommended next: draft future exact VCPToolBox implementation authorization limited to the two confirmed files, or stop for commander review.
+---
+
 - [x] ID: secretless_serum_route_option_a_vcptoolbox_authorization_packet_draft_20260602
       Lane: Green authorization packet draft only.
       Status: completed_validated_local_authorization_packet_draft.
