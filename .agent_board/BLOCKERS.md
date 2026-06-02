@@ -3,6 +3,7 @@
 ## Active Blockers
 
 Current active blocker is BLOCKER-20260601-01; resolved/legacy entries below are historical unless marked active.
+Status sync 2026-06-03: VCPToolBox Option A secretless implementation has been pushed to origin/main at cf1fa55b, but Agent Image Lab still cannot run a live probe now. BLOCKER-20260601-01 remains active for the historical admin-auth route-owner runtime path; the secretless path requires a separate exact activation/preflight before any live attempt.
 
 ## BLOCKER-20260601-01 - Serum route live probe requires exact admin auth env authorization
 
