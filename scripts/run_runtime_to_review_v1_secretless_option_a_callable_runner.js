@@ -9,6 +9,7 @@ const exactRouteHttpActivationPackageId = "AUTH-SECRETLESS-SERUM-LIVE-PROBE-2026
 const exactRouteHttpActivationPackageIdAttempt004 = "AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-004";
 const exactRouteHttpActivationPackageIdAttempt005 = "AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-005";
 const exactRouteHttpActivationPackageIdAttempt006 = "AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-006";
+const exactRouteHttpActivationPackageIdAttempt007 = "AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-007";
 const exactConfirmationPhrase = "RUNTIME_TO_REVIEW_V1_SECRETLESS_SERUM_BOTTLE_ONE_PROVIDER_ONE_IMAGE";
 const exactRouteHttpMethod = "POST";
 const exactRouteHttpPath = "/admin_api/ai-image-agents/execute/serum-bottle-secretless";
@@ -16,6 +17,7 @@ const exactRouteHttpEndpointSource = "VCPToolBox bcb8219a server.js mounts /admi
 const exactRouteHttpPathAttempt005 = "/internal/ai-image-agents/execute/serum-bottle-secretless";
 const exactRouteHttpEndpointSourceAttempt005 = "VCPToolBox f8ba23130f714e1e1d7641f5f89726846aaf8bb2 server.js mounts loopback-only /internal/ai-image-agents and routes/admin/aiImageAgents.js defines POST /execute/serum-bottle-secretless";
 const exactRouteHttpEndpointSourceAttempt006 = "VCPToolBox d0d5c104ae741e7be993cf1c760126bea9a44567 server.js mounts loopback-only /internal/ai-image-agents, injects pluginManager and internal authorizer into routeOptions, and routes/admin/aiImageAgents.js defines POST /execute/serum-bottle-secretless";
+const exactRouteHttpEndpointSourceAttempt007 = "VCPToolBox 0d10ff306b20abd1aac00389711f0a67d01ece58 mounts loopback-only /internal/ai-image-agents, requires NativeImageDelegateRegistry serum_bottle_secretless_doubao_v1, strict canonical secretless payload validation, route/runtime/delegate flags, and routes/admin/aiImageAgents.js defines POST /execute/serum-bottle-secretless";
 
 const allowedNonSecretPayloadFields = Object.freeze([
   "task_id",
@@ -125,14 +127,29 @@ const defaultRouteHttpInputAttempt006 = Object.freeze({
   outputDirectoryRef: "runs/real_generation/runtime_to_review_v1_guarded_live_probe_serum_bottle_secretless_attempt_006/"
 });
 
+const defaultRouteHttpInputAttempt007 = Object.freeze({
+  ...defaultRouteHttpInputAttempt006,
+  activationPackageId: exactRouteHttpActivationPackageIdAttempt007,
+  routeHttpEndpointSource: exactRouteHttpEndpointSourceAttempt007,
+  pipelineId: "secretless-serum-live-probe-attempt-007",
+  taskId: exactRouteHttpActivationPackageIdAttempt007,
+  receiptRef: "reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_007.json",
+  artifactRecordRef: "reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_007.json",
+  outputDirectoryRef: "runs/real_generation/runtime_to_review_v1_guarded_live_probe_serum_bottle_secretless_attempt_007/"
+});
+
 const allowedExactRouteHttpActivationPackageIds = Object.freeze([
   exactRouteHttpActivationPackageId,
   exactRouteHttpActivationPackageIdAttempt004,
   exactRouteHttpActivationPackageIdAttempt005,
-  exactRouteHttpActivationPackageIdAttempt006
+  exactRouteHttpActivationPackageIdAttempt006,
+  exactRouteHttpActivationPackageIdAttempt007
 ]);
 
 function routeHttpDefaultsForActivationPackage(activationPackageId) {
+  if (activationPackageId === exactRouteHttpActivationPackageIdAttempt007) {
+    return defaultRouteHttpInputAttempt007;
+  }
   if (activationPackageId === exactRouteHttpActivationPackageIdAttempt006) {
     return defaultRouteHttpInputAttempt006;
   }
@@ -641,6 +658,8 @@ function parseArgs(argv) {
       input.attempt005RouteHttp = true;
     } else if (arg === "--attempt-006-route-http") {
       input.attempt006RouteHttp = true;
+    } else if (arg === "--attempt-007-route-http") {
+      input.attempt007RouteHttp = true;
     } else if (arg === "--route-http-origin") {
       input.routeHttpOrigin = argv[index + 1];
       index += 1;
@@ -666,7 +685,7 @@ function parseArgs(argv) {
 
 if (require.main === module) {
   const input = parseArgs(process.argv.slice(2));
-  const run = input.attempt003RouteHttp || input.attempt004RouteHttp || input.attempt005RouteHttp || input.attempt006RouteHttp
+  const run = input.attempt003RouteHttp || input.attempt004RouteHttp || input.attempt005RouteHttp || input.attempt006RouteHttp || input.attempt007RouteHttp
     ? runSecretlessOptionAExactRouteHttpTransport(input)
     : Promise.resolve(runSecretlessOptionACallableRunner(input));
   run.then((result) => {
@@ -692,6 +711,7 @@ module.exports = {
   exactRouteHttpActivationPackageIdAttempt004,
   exactRouteHttpActivationPackageIdAttempt005,
   exactRouteHttpActivationPackageIdAttempt006,
+  exactRouteHttpActivationPackageIdAttempt007,
   exactConfirmationPhrase,
   exactRouteHttpMethod,
   exactRouteHttpPath,
@@ -699,11 +719,13 @@ module.exports = {
   exactRouteHttpPathAttempt005,
   exactRouteHttpEndpointSourceAttempt005,
   exactRouteHttpEndpointSourceAttempt006,
+  exactRouteHttpEndpointSourceAttempt007,
   defaultInput,
   defaultRouteHttpInput,
   defaultRouteHttpInputAttempt004,
   defaultRouteHttpInputAttempt005,
   defaultRouteHttpInputAttempt006,
+  defaultRouteHttpInputAttempt007,
   allowedExactRouteHttpActivationPackageIds,
   allowedNonSecretPayloadFields,
   forbiddenPayloadKeysNormalized,
