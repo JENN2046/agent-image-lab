@@ -1,3 +1,48 @@
+## Current Handoff Update - Secretless Option A Callable Binding Preflight 2026-06-03
+
+```text
+phase: secretless_option_a_callable_binding_preflight_20260603
+status: completed_validated_local_binding_preflight_no_execution
+mode: Green local binding preflight plus validator only; no route HTTP/runtime execution
+repository: A:\agent-image-lab\agent-image-lab-v0.2
+branch: master
+baseline_before_task: c6e0d235 test: add secretless option a callable runner preflight
+binding_preflight_ref: reports/runtime_to_review_v1/secretless_option_a_callable_binding_preflight_20260603.json
+validator_ref: scripts/validate_runtime_to_review_v1_secretless_option_a_callable_binding_preflight.js
+package_script: validate:runtime-to-review-secretless-option-a-callable-binding-preflight
+manifest_id: runtime_to_review_secretless_option_a_callable_binding_preflight
+current_blocker: BLOCKER-20260603-01 narrowed_by_binding_preflight_runner_exists_binding_packet_missing
+current_permission: cannot_run_live_probe_now
+current_live_probe_allowed: false
+can_execute_now: false
+runner_status: local_preflight_only_fail_closed_runner_exists
+binding_status: design_preflight_only_no_callable_binding_implemented
+binding_executable_now: false
+new_exact_activation_required_before_any_live_probe: true
+future_exact_binding_packet_required: true
+route_http_request_performed: false
+live_probe_performed: false
+external_vcptoolbox_read_performed_by_this_task: false
+external_vcptoolbox_modified_by_this_task: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+output_write_performed: false
+secret_value_read_performed: false
+env_file_content_read_performed: false
+config_env_read_performed: false
+authorization_header_constructed_by_agent_image_lab: false
+stage_commit_push_tag_release_deploy_performed: false
+binding_boundary: Agent Image Lab must not guess transport kind, endpoint, method, or callable target from VCPToolBox; future route HTTP/live probe requires a new exact activation plus exact binding packet using only non-secret payload fields.
+validation_completed: node --check binding validator passed; binding preflight validator passed; validation manifest passed; agent board state passed; git diff --check passed.
+next_safe_action: review/commit this local binding preflight; do not run route HTTP/live probe until a future exact binding packet and new exact activation are both present.
+```
+
+Historical entries below are retained for audit and may contain consumed or superseded next actions.
+
+---
+
 ## Current Handoff Update - Secretless Option A Callable Runner Implementation 2026-06-03
 
 ```text

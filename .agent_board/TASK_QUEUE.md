@@ -1,3 +1,17 @@
+- [x] ID: secretless_option_a_callable_binding_preflight_20260603
+      Lane: Green local binding preflight plus validator only.
+      Status: completed_validated_local_binding_preflight_no_execution.
+      Goal: Draft the Agent Image Lab Option A callable binding preflight and validator without route HTTP, VCPToolBox read/write, secret/env/config read, or live probe execution.
+      Binding preflight: `reports/runtime_to_review_v1/secretless_option_a_callable_binding_preflight_20260603.json`.
+      Validator: `scripts/validate_runtime_to_review_v1_secretless_option_a_callable_binding_preflight.js`.
+      Package script: `validate:runtime-to-review-secretless-option-a-callable-binding-preflight`.
+      Current state: current_permission=cannot_run_live_probe_now; current_live_probe_allowed=false; can_execute_now=false; runner_status=local_preflight_only_fail_closed_runner_exists; binding_status=design_preflight_only_no_callable_binding_implemented; binding_executable_now=false; future_exact_binding_packet_required=true; new_exact_activation_required_before_any_live_probe=true.
+      Boundary: route_http_request_performed=false; live_probe_performed=false; external_vcptoolbox_read_performed_by_this_task=false; external_vcptoolbox_modified=false; provider_contact_performed=false; plugin_call_performed=false; api_call_performed=false; image_generation_performed=false; output_write_performed=false; secret/env/config read=false; Authorization header construction=false; stage/commit/push/tag/release/deploy=false.
+      Binding contract: future route HTTP/live probe must receive a new exact activation plus an exact binding packet naming transport kind, callable target or endpoint, method/operation, non-secret payload schema, receipt/artifact refs, stop conditions, and validation; Agent Image Lab must not infer those fields from VCPToolBox.
+      Validation: node --check binding validator passed; binding preflight validator passed; validation manifest passed; agent board state passed; git diff --check passed.
+      Recommended next: review/commit this local binding preflight; do not run route HTTP/live probe until future exact binding and activation are both present.
+---
+
 - [x] ID: secretless_option_a_callable_runner_implementation_preflight_20260603
       Lane: Green exact-file local runner implementation.
       Status: completed_validated_local_runner_implementation_no_route_http.
