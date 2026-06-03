@@ -1,3 +1,62 @@
+## Checkpoint - Secretless Option A Exact Binding Packet Draft 2026-06-03
+
+```text
+phase: secretless_option_a_exact_binding_packet_draft_20260603
+status: completed_validated_local_exact_binding_packet_draft_no_execution
+result: COMPLETED_VALIDATED_LOCAL_EXACT_BINDING_PACKET_DRAFT_NO_EXECUTION
+mode: Green local exact binding packet draft plus validator only
+summary: Drafts the Agent Image Lab exact binding packet for the VCPToolBox Option A secretless serum-bottle route. This checkpoint is packet/validator/status work only; it does not implement a live binding, trigger route HTTP, read or modify VCPToolBox, read secret/env/config, execute a live probe, contact provider/plugin/API, generate images, write output, or stage/commit/push.
+changed_files_current_task:
+  - reports/runtime_to_review_v1/secretless_option_a_exact_binding_packet_draft_20260603.json
+  - scripts/validate_runtime_to_review_v1_secretless_option_a_exact_binding_packet_draft.js
+  - package.json
+  - scripts/validation_manifest.json
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/BLOCKERS.md
+binding_packet_boundary:
+  - binding_packet_id: BINDING-DRAFT-SECRETLESS-OPTION-A-SERUM-20260603-001
+  - current_permission: cannot_run_live_probe_now
+  - current_live_probe_allowed: false
+  - can_execute_now: false
+  - binding_active: false
+  - binding_executable_now: false
+  - route_http_allowed_by_this_packet: false
+  - runner_status: local_preflight_only_fail_closed_runner_exists
+  - binding_status: draft_not_active_non_executable
+  - new_exact_activation_required_before_any_live_probe: true
+  - route_http_shape_must_not_be_guessed: true
+  - vcptoolbox_endpoint_or_method_not_included: true
+boundary_checks:
+  - route_http_request_performed: false
+  - live_probe_performed: false
+  - external_vcptoolbox_read_performed_by_this_task: false
+  - external_vcptoolbox_modified_by_this_task: false
+  - provider_contact_performed: false
+  - plugin_call_performed: false
+  - api_call_performed: false
+  - image_generation_performed: false
+  - output_write_performed: false
+  - secret_value_read_performed: false
+  - env_file_content_read_performed: false
+  - config_env_read_performed: false
+  - authorization_header_constructed_by_agent_image_lab: false
+  - DailyNote_write_performed: false
+  - VCP_memory_write_performed: false
+  - staging_commit_push_tag_release_deploy_performed: false
+validation_completed:
+  - node --check scripts\validate_runtime_to_review_v1_secretless_option_a_exact_binding_packet_draft.js: passed
+  - npm run validate:runtime-to-review-secretless-option-a-exact-binding-packet-draft: passed
+  - node scripts\validate_validation_manifest.js: passed
+  - node scripts\validate_agent_board_state.js: passed
+  - git diff --check: passed
+recommended_next_phase: review/commit this inactive exact binding packet draft if accepted; route HTTP/live probe still requires a new exact activation and separately verified binding evidence.
+```
+
+---
+
 ## Checkpoint - Secretless Option A Callable Binding Preflight 2026-06-03
 
 ```text

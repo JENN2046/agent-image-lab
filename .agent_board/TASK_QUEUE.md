@@ -1,3 +1,17 @@
+- [x] ID: secretless_option_a_exact_binding_packet_draft_20260603
+      Lane: Green local exact binding packet draft plus validator only.
+      Status: completed_validated_local_exact_binding_packet_draft_no_execution.
+      Goal: Draft the Agent Image Lab Option A exact binding packet and validator without route HTTP, VCPToolBox read/write, secret/env/config read, or live probe execution.
+      Packet: `reports/runtime_to_review_v1/secretless_option_a_exact_binding_packet_draft_20260603.json`.
+      Validator: `scripts/validate_runtime_to_review_v1_secretless_option_a_exact_binding_packet_draft.js`.
+      Package script: `validate:runtime-to-review-secretless-option-a-exact-binding-packet-draft`.
+      Current state: current_permission=cannot_run_live_probe_now; current_live_probe_allowed=false; can_execute_now=false; binding_active=false; binding_executable_now=false; route_http_allowed_by_this_packet=false; runner_status=local_preflight_only_fail_closed_runner_exists; binding_status=draft_not_active_non_executable; new_exact_activation_required_before_any_live_probe=true.
+      Boundary: route_http_request_performed=false; live_probe_performed=false; external_vcptoolbox_read_performed_by_this_task=false; external_vcptoolbox_modified=false; provider_contact_performed=false; plugin_call_performed=false; api_call_performed=false; image_generation_performed=false; output_write_performed=false; secret/env/config read=false; Authorization header construction=false; stage/commit/push/tag/release/deploy=false.
+      Packet contract: binds the draft to the local AIL callable runner target/export, leaves VCPToolBox endpoint/method null, forbids guessing route HTTP shape, and requires future exact activation plus separately verified binding evidence before any live route attempt.
+      Validation: node --check exact binding packet validator passed; exact binding packet validator passed; validation manifest passed; agent board state passed; git diff --check passed.
+      Recommended next: review/commit this inactive exact binding packet draft; do not run route HTTP/live probe until future exact activation and verified binding evidence are both present.
+---
+
 - [x] ID: secretless_option_a_callable_binding_preflight_20260603
       Lane: Green local binding preflight plus validator only.
       Status: completed_validated_local_binding_preflight_no_execution.

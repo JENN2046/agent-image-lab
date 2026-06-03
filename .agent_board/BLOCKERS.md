@@ -2,7 +2,8 @@
 
 ## Active Blockers
 
-Current active blockers are BLOCKER-20260601-01 for the historical admin-auth route-owner runtime path and BLOCKER-20260603-01 narrowed for the secretless Option A route: a local preflight-only/fail-closed Agent Image Lab runner and binding preflight now exist, but route HTTP remains closed until a new exact activation supplies an explicit callable binding packet; resolved/legacy entries below are historical unless marked active.
+Current active blockers are BLOCKER-20260601-01 for the historical admin-auth route-owner runtime path and BLOCKER-20260603-01 narrowed for the secretless Option A route: a local preflight-only/fail-closed Agent Image Lab runner, binding preflight, and inactive exact binding packet draft now exist, but route HTTP remains closed until a new exact activation and separately verified binding evidence make a binding active; resolved/legacy entries below are historical unless marked active.
+Status sync 2026-06-03 exact binding packet draft: local Agent Image Lab exact binding packet draft and validator were added for BLOCKER-20260603-01; the draft is inactive/non-executable, names only the local AIL callable runner target/export, leaves VCPToolBox endpoint/method null, and does not authorize route HTTP.
 Status sync 2026-06-03 callable binding preflight: local Agent Image Lab binding preflight and validator were added for BLOCKER-20260603-01; the remaining gap is no current exact activation plus no exact binding packet naming transport kind, callable target or endpoint, and method/operation.
 Status sync 2026-06-03 callable runner implementation: local Agent Image Lab runner and validator were added and validated for BLOCKER-20260603-01; the remaining gap is not a missing local runner surface, but no current exact activation plus no explicit route HTTP binding inside Agent Image Lab.
 Status sync 2026-06-03 callable runner contract preflight: local Agent Image Lab contract draft and validator were added and validated for BLOCKER-20260603-01, but the actual callable runner is not implemented by this task and live probe remains closed.
@@ -10,14 +11,14 @@ Status sync 2026-06-03: VCPToolBox Option A secretless implementation has been p
 
 ## BLOCKER-20260603-01 - Secretless Option A live probe lacks Agent Image Lab execution entry
 
-Status: narrowed_by_binding_preflight_runner_exists_binding_packet_missing
+Status: narrowed_by_exact_binding_packet_draft_inactive_route_http_still_closed
 Detected during: secretless_serum_live_probe_exact_activation_20260603_attempt_001
 Task: run exactly one serum-bottle secretless live probe through VCPToolBox Option A
-Reason: Required local preflight and VCPToolBox clean-main baseline passed, but the consumed activation found no verifiable exact runner or callable invocation contract for the VCPToolBox Option A secretless internal authorized execution interface. The local Agent Image Lab preflight-only/fail-closed runner and binding preflight now exist, but route HTTP remains closed because there is still no new exact activation and no exact binding packet naming transport kind, callable target or endpoint, and method/operation.
+Reason: Required local preflight and VCPToolBox clean-main baseline passed, but the consumed activation found no verifiable exact runner or callable invocation contract for the VCPToolBox Option A secretless internal authorized execution interface. The local Agent Image Lab preflight-only/fail-closed runner, binding preflight, and inactive exact binding packet draft now exist, but route HTTP remains closed because there is still no new exact activation and no separately verified binding evidence for VCPToolBox endpoint/method or active callable route transport.
 Hard stop gate: do_not_guess_route_http_shape_or_use_old_admin_auth_route
 Files involved: reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_001.json; reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_001.json
 Validation state: preflight validators passed; VCPToolBox branch/status/HEAD matched main clean at cf1fa55b36e9aeece2718bf2c9425c44db24cb25; non-secret payload scan found no forbidden keys; no route HTTP request/provider/plugin/API/image/output was performed.
-Required next safe action: review/commit the local Agent Image Lab secretless Option A callable binding preflight; after that, issue a new exact binding packet and a new exact activation before any route HTTP request. Do not retry from attempt_001.
+Required next safe action: review/commit the local Agent Image Lab secretless Option A exact binding packet draft; after that, supply separately verified binding evidence and a new exact activation before any route HTTP request. Do not retry from attempt_001.
 Rollback or cleanup path: no runtime side effect to clean up; only local receipt/artifact/status files need reverting if this failed-closed record is rejected.
 
 ## BLOCKER-20260601-01 - Serum route live probe requires exact admin auth env authorization
