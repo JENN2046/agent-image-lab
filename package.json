@@ -85,6 +85,7 @@
     "validate:runtime-to-review-secretless-serum-live-probe-receipt-attempt-006": "node scripts/validate_runtime_to_review_v1_secretless_serum_live_probe_receipt_attempt_006.js",
     "validate:runtime-to-review-secretless-serum-live-probe-receipt-attempt-007": "node scripts/validate_runtime_to_review_v1_secretless_serum_live_probe_receipt_attempt_007.js",
     "validate:runtime-to-review-secretless-serum-live-probe-receipt-attempt-008": "node scripts/validate_runtime_to_review_v1_secretless_serum_live_probe_receipt_attempt_008.js",
+    "validate:runtime-to-review-secretless-serum-live-probe-receipt-attempt-009": "node scripts/validate_runtime_to_review_v1_secretless_serum_live_probe_receipt_attempt_009.js",
     "validate:runtime-to-review-secretless-option-a-exact-route-http-transport-preflight-attempt-003": "node scripts/validate_runtime_to_review_v1_secretless_option_a_exact_route_http_transport_preflight_attempt_003.js",
     "validate:runtime-to-review-secretless-serum-live-probe-activation-preflight-attempt-003": "node scripts/validate_runtime_to_review_v1_secretless_serum_live_probe_activation_preflight_attempt_003.js",
     "validate:runtime-to-review-secretless-option-a-callable-runner-contract-preflight": "node scripts/validate_runtime_to_review_v1_secretless_option_a_callable_runner_contract_preflight.js",
