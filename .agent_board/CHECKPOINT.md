@@ -1,3 +1,61 @@
+## Checkpoint - Secretless Option A Callable Runner Contract Preflight 2026-06-03
+
+```text
+phase: secretless_option_a_callable_runner_contract_preflight_20260603
+status: completed_validated_local_contract_preflight
+result: COMPLETED_VALIDATED_LOCAL_CONTRACT_PREFLIGHT_NO_EXECUTION
+mode: Green local contract preflight plus validator only
+summary: Drafts the Agent Image Lab callable runner contract required before any future VCPToolBox Option A secretless serum-bottle live probe. This checkpoint is design/validator/status work only; it does not implement the runner, does not trigger route HTTP, does not read VCPToolBox, and does not execute a live probe.
+changed_files_current_task:
+  - reports/runtime_to_review_v1/secretless_option_a_callable_runner_contract_preflight_20260603.json
+  - scripts/validate_runtime_to_review_v1_secretless_option_a_callable_runner_contract_preflight.js
+  - package.json
+  - scripts/validation_manifest.json
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/BLOCKERS.md
+contract_boundary:
+  - current_permission: cannot_run_live_probe_now
+  - current_live_probe_allowed: false
+  - can_execute_now: false
+  - runner_status: draft_contract_only_runner_not_implemented
+  - historical_packet_fact_not_current_permission: true
+  - new_exact_activation_required_before_any_live_probe: true
+  - route_http_shape_must_not_be_guessed: true
+  - old_admin_auth_route_must_not_be_used: true
+  - agent_image_lab_must_not_read_vcptoolbox_source_to_discover_contract: true
+boundary_checks:
+  - route_http_request_performed: false
+  - live_probe_performed: false
+  - external_vcptoolbox_read_performed_by_this_task: false
+  - external_vcptoolbox_modified_by_this_task: false
+  - provider_contact_performed: false
+  - plugin_call_performed: false
+  - api_call_performed: false
+  - image_generation_performed: false
+  - output_write_performed: false
+  - secret_value_read_performed: false
+  - env_file_content_read_performed: false
+  - config_env_read_performed: false
+  - authorization_header_constructed_by_agent_image_lab: false
+  - DailyNote_write_performed: false
+  - VCP_memory_write_performed: false
+  - staging_commit_push_tag_release_deploy_performed: false
+validation_completed:
+  - node --check scripts\validate_runtime_to_review_v1_secretless_option_a_callable_runner_contract_preflight.js: passed
+  - npm run validate:runtime-to-review-secretless-option-a-callable-runner-contract-preflight: passed
+  - node scripts\validate_validation_manifest.js: passed
+  - node scripts\validate_agent_board_state.js: passed
+  - git diff --check: passed with line-ending warnings only
+  - node scripts\recommend_validation_for_changed_files.js: passed with all changed files matched
+  - npm run validate:active: passed
+recommended_next_phase: review/commit this draft; future live probe still requires implementing an exact local callable runner plus a new exact activation.
+```
+
+---
+
 ## Checkpoint - Secretless Serum Live Probe Exact Activation Attempt 001 2026-06-03
 
 ```text

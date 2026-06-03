@@ -1,3 +1,48 @@
+## Current Handoff Update - Secretless Option A Callable Runner Contract Preflight 2026-06-03
+
+```text
+phase: secretless_option_a_callable_runner_contract_preflight_20260603
+status: completed_validated_local_contract_preflight
+mode: Green local contract preflight plus validator only; no route HTTP/runtime execution
+repository: A:\agent-image-lab\agent-image-lab-v0.2
+branch: master
+baseline_before_task: 57561d26 test: record secretless serum failed-closed receipt
+contract_ref: reports/runtime_to_review_v1/secretless_option_a_callable_runner_contract_preflight_20260603.json
+validator_ref: scripts/validate_runtime_to_review_v1_secretless_option_a_callable_runner_contract_preflight.js
+package_script: validate:runtime-to-review-secretless-option-a-callable-runner-contract-preflight
+manifest_id: runtime_to_review_secretless_option_a_callable_runner_contract_preflight
+current_blocker: BLOCKER-20260603-01 exact_secretless_execution_entry_missing_in_agent_image_lab
+contract_result: draft_only_runner_not_implemented_by_this_task
+current_permission: cannot_run_live_probe_now
+current_live_probe_allowed: false
+can_execute_now: false
+authorization_granted_by_this_record: false
+activation_granted_by_this_record: false
+historical_packet_fact_not_current_permission: true
+new_exact_activation_required_before_any_live_probe: true
+route_http_request_performed: false
+live_probe_performed: false
+external_vcptoolbox_read_performed_by_this_task: false
+external_vcptoolbox_modified_by_this_task: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+output_write_performed: false
+secret_value_read_performed: false
+env_file_content_read_performed: false
+config_env_read_performed: false
+authorization_header_constructed_by_agent_image_lab: false
+stage_commit_push_tag_release_deploy_performed: false
+contract_boundary: future runner must use only non-secret payload fields, must reject authorization/headers/basic_auth/auth/token/cookie/password/apikey keys recursively, must not guess HTTP shape, must not use old admin-auth route, and must not read VCPToolBox source to discover the contract.
+validation_completed: node --check passed; contract validator passed; validation manifest passed; agent board state passed; git diff --check passed with line-ending warnings only; validate:active passed.
+next_safe_action: review this contract preflight; if accepted, implement the local Agent Image Lab callable runner under a separate exact file allowlist, then require a new exact live activation before any route HTTP.
+```
+
+Historical entries below are retained for audit and may contain consumed or superseded next actions.
+
+---
+
 ## Current Handoff Update - Secretless Serum Live Probe Exact Activation Attempt 001 2026-06-03
 
 ```text

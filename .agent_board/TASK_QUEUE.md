@@ -1,3 +1,17 @@
+- [x] ID: secretless_option_a_callable_runner_contract_preflight_20260603
+      Lane: Green local contract preflight plus validator only.
+      Status: completed_validated_local_contract_preflight.
+      Goal: Draft the Agent Image Lab Option A callable runner contract that was missing from the failed-closed secretless serum live probe attempt, without route HTTP or runtime execution.
+      Contract: `reports/runtime_to_review_v1/secretless_option_a_callable_runner_contract_preflight_20260603.json`.
+      Validator: `scripts/validate_runtime_to_review_v1_secretless_option_a_callable_runner_contract_preflight.js`.
+      Package script: `validate:runtime-to-review-secretless-option-a-callable-runner-contract-preflight`.
+      Current state: current_permission=cannot_run_live_probe_now; current_live_probe_allowed=false; can_execute_now=false; runner_not_implemented_by_this_task=true; historical_packet_fact_not_current_permission=true; new_exact_activation_required_before_any_live_probe=true.
+      Boundary: route_http_request_performed=false; live_probe_performed=false; external_vcptoolbox_read_performed_by_this_task=false; external_vcptoolbox_modified=false; provider_contact_performed=false; plugin_call_performed=false; api_call_performed=false; image_generation_performed=false; output_write_performed=false; secret/env/config read=false; Authorization header construction=false; stage/commit/push/tag/release/deploy=false.
+      Contract: future runner must use only non-secret payload fields, reject authorization/headers/basic_auth/auth/token/cookie/password/apikey keys recursively, not guess route HTTP shape, not use the old admin-auth route, and not read VCPToolBox source to discover the contract.
+      Validation: node --check passed; contract validator passed; validation manifest passed; agent board state passed; git diff --check passed with line-ending warnings only; validate:active passed.
+      Recommended next: if accepted, implement a local callable runner under a separate exact file allowlist, then require a new exact live activation before route HTTP.
+---
+
 - [x] ID: secretless_serum_live_probe_exact_activation_20260603_attempt_001
       Lane: Amber exact live probe activation, one attempt only.
       Status: attempted_failed_closed_before_route_http_request_validated.

@@ -1,3 +1,42 @@
+## Current Run State - Secretless Option A Callable Runner Contract Preflight 2026-06-03
+
+```text
+phase: secretless_option_a_callable_runner_contract_preflight_20260603
+status: completed_validated_local_contract_preflight
+mode: Green local contract preflight plus validator only
+branch: master
+contract_ref: reports/runtime_to_review_v1/secretless_option_a_callable_runner_contract_preflight_20260603.json
+validator_ref: scripts/validate_runtime_to_review_v1_secretless_option_a_callable_runner_contract_preflight.js
+package_script: validate:runtime-to-review-secretless-option-a-callable-runner-contract-preflight
+current_blocker: BLOCKER-20260603-01 exact_secretless_execution_entry_missing_in_agent_image_lab
+current_permission: cannot_run_live_probe_now
+current_live_probe_allowed: false
+can_execute_now: false
+runner_status: draft_contract_only_runner_not_implemented
+new_exact_activation_required_before_any_live_probe: true
+historical_packet_fact_not_current_permission: true
+route_http_request_performed: false
+live_probe_performed: false
+external_vcptoolbox_read_performed_by_this_task: false
+external_vcptoolbox_modified_by_this_task: false
+provider_contact_performed: false
+plugin_call_performed: false
+api_call_performed: false
+image_generation_performed: false
+output_write_performed: false
+secret_value_read_performed: false
+env_file_content_read_performed: false
+config_env_read_performed: false
+authorization_header_constructed_by_agent_image_lab: false
+push_tag_release_deploy_performed: false
+latest_validation: node --check passed; contract validator passed; validation manifest passed; agent board state passed; git diff --check passed with line-ending warnings only; validate:active passed.
+next_safe_task: review/commit the draft or separately authorize an exact local runner implementation. Do not run live probe until a runner exists and a new exact activation is issued.
+```
+
+Historical entries below are retained for audit and may contain consumed or superseded next actions.
+
+---
+
 ## Current Run State - Secretless Serum Live Probe Exact Activation Attempt 001 2026-06-03
 
 ```text
