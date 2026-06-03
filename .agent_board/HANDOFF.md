@@ -1,3 +1,31 @@
+## Current Handoff Update - Secretless Option A VCPToolBox Binding Read-only Verification 2026-06-03
+
+```text
+phase: secretless_option_a_vcptoolbox_binding_readonly_verification_20260603
+status: completed_read_only_verification_blocked_not_bound_in_router_refs
+mode: Amber_A exact VCPToolBox read-only binding verification plus local AIL receipt; no runtime execution
+repository: A:\agent-image-lab\agent-image-lab-v0.2
+branch: master
+receipt_ref: reports/runtime_to_review_v1/secretless_option_a_vcptoolbox_binding_readonly_verification_receipt_20260603.json
+vcptoolbox_workspace_read: A:\VCP\apps\VCPToolBox
+vcptoolbox_head_observed: c0a7a32fcd2ea165124c85e175f2b214950741d6
+vcptoolbox_branch_observed: codex/r15c-geodesic-tuning-backend-20260603
+vcptoolbox_head_relationship_observed: HEAD, main, origin/main, and origin/HEAD point to c0a7a32fcd2ea165124c85e175f2b214950741d6
+vcptoolbox_worktree_observed: initially dirty with unrelated r15c files, final observed status clean; authorized binding refs had no diff
+files_read: routes/admin/aiImageAgents.js; tests/aiImageAgentsRoute.test.js; package.json; Server.js; server.js; adminServer.js pattern-only router ref
+verification_result: blocked_not_bound_in_router_refs
+current_permission: cannot_run_live_probe_now
+can_run_route_http_now: false
+can_run_live_probe_now: false
+binding_evidence: route helper declares /execute/serum-bottle-secretless behind options.enableSerumBottleSecretlessInternalRoute === true; tests cover authorizer, budget, plugin count, and recursive secret-key guards; Server.js/server.js mount /admin_api/ai-image-agents but do not set enableSerumBottleSecretlessInternalRoute and do not bind authorizeSerumBottleSecretlessExecution.
+boundary: VCPToolBox read-only only; no VCPToolBox modification; no route HTTP; no live probe; no runtime/provider/plugin/API/image/output; no secret/env/config read; no Authorization header construction; no DailyNote/VCP memory; no stage/commit/push/tag/release/deploy.
+next_safe_action: draft or authorize an exact VCPToolBox router binding patch/preflight limited to enabling the secretless route gate and binding a non-secret internal authorizer, then verify from a clean main checkout before any route HTTP/live probe.
+```
+
+Historical entries below are retained for audit and may contain consumed or superseded next actions.
+
+---
+
 ## Current Handoff Update - Secretless Option A Exact Binding Packet Draft 2026-06-03
 
 ```text

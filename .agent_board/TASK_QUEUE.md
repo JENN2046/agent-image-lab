@@ -1,3 +1,15 @@
+- [x] ID: secretless_option_a_vcptoolbox_binding_readonly_verification_20260603
+      Lane: Amber_A exact VCPToolBox read-only verification.
+      Status: completed_read_only_verification_blocked_not_bound_in_router_refs.
+      Goal: Verify VCPToolBox Option A secretless serum-bottle binding evidence from confirmed route/test files and minimal package/router refs without runtime, route HTTP, secrets, or external modification.
+      Receipt: `reports/runtime_to_review_v1/secretless_option_a_vcptoolbox_binding_readonly_verification_receipt_20260603.json`.
+      Files read: `routes/admin/aiImageAgents.js`; `tests/aiImageAgentsRoute.test.js`; `package.json`; `Server.js`; `server.js`; `adminServer.js` pattern-only.
+      Current state: current_permission=cannot_run_live_probe_now; can_run_route_http_now=false; can_run_live_probe_now=false; verification_result=blocked_not_bound_in_router_refs.
+      Finding: route helper declares `/execute/serum-bottle-secretless` behind `enableSerumBottleSecretlessInternalRoute`, and tests cover the authorizer/budget/plugin/recursive secret-key guards, but `Server.js`/`server.js` do not bind `enableSerumBottleSecretlessInternalRoute` or `authorizeSerumBottleSecretlessExecution` in `routeOptions`.
+      Boundary: VCPToolBox read-only only; no VCPToolBox modification; no route HTTP/live probe/runtime/provider/plugin/API/image/output; no secret/env/config read; no Authorization header construction; no stage/commit/push/tag/release/deploy.
+      Recommended next: exact router binding authorization/preflight limited to enabling the secretless route gate and binding a non-secret internal authorizer; then clean-main read-only verification before any route HTTP/live probe.
+---
+
 - [x] ID: secretless_option_a_exact_binding_packet_draft_20260603
       Lane: Green local exact binding packet draft plus validator only.
       Status: completed_validated_local_exact_binding_packet_draft_no_execution.
