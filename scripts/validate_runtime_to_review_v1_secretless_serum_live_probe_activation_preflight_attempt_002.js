@@ -9,6 +9,7 @@ const validator = "runtime_to_review_v1_secretless_serum_live_probe_activation_p
 const packetPath = "reports/runtime_to_review_v1/secretless_serum_live_probe_activation_preflight_20260603_attempt_002.json";
 const routerBindingPushedReceiptPath = "reports/runtime_to_review_v1/secretless_option_a_vcptoolbox_router_binding_implementation_pushed_receipt_20260603.json";
 const exactBindingPacketPath = "reports/runtime_to_review_v1/secretless_option_a_exact_binding_packet_draft_20260603.json";
+const refreshedBindingPacketPath = "reports/runtime_to_review_v1/secretless_option_a_exact_binding_packet_draft_20260603_attempt_002.json";
 const callableRunnerPath = "reports/runtime_to_review_v1/secretless_option_a_callable_runner_implementation_preflight_20260603.json";
 const consumedReceiptPath = "reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_001.json";
 const consumedArtifactPath = "reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_001.json";
@@ -64,6 +65,7 @@ function main() {
   const packet = readJson(packetPath);
   const routerBindingReceipt = readJson(routerBindingPushedReceiptPath);
   const exactBindingPacket = readJson(exactBindingPacketPath);
+  const refreshedBindingPacket = readJson(refreshedBindingPacketPath);
   const callableRunner = readJson(callableRunnerPath);
   const consumedReceipt = readJson(consumedReceiptPath);
   const consumedArtifact = readJson(consumedArtifactPath);
@@ -144,8 +146,10 @@ function main() {
     packet.superseded_or_historical_refs.prior_vcptoolbox_commit === oldCommit &&
     packet.superseded_or_historical_refs.exact_binding_packet_vcptoolbox_commit === oldCommit &&
     exactBindingPacket.exact_binding_packet_draft.vcptoolbox_required_commit === oldCommit &&
-    packet.superseded_or_historical_refs.new_binding_packet_required_before_execution === true &&
-    packet.go_no_go.future_live_probe_requires_binding_packet_refresh_for_bcb8219a === true
+    packet.superseded_or_historical_refs.new_binding_packet_ref === refreshedBindingPacketPath &&
+    packet.superseded_or_historical_refs.new_binding_packet_vcptoolbox_commit === pushedCommit &&
+    packet.superseded_or_historical_refs.new_binding_packet_required_before_execution === false &&
+    packet.go_no_go.future_live_probe_requires_binding_packet_refresh_for_bcb8219a === false
   );
 
   check("authorization_state_is_inactive", () =>
@@ -175,6 +179,7 @@ function main() {
     packet.future_execution_scope_if_later_separately_activated.target_product === "premium_serum_bottle" &&
     packet.future_execution_scope_if_later_separately_activated.vcptoolbox_required_commit === pushedCommit &&
     packet.future_execution_scope_if_later_separately_activated.binding_packet_required_before_execution === true &&
+    packet.future_execution_scope_if_later_separately_activated.binding_packet_ref === refreshedBindingPacketPath &&
     packet.future_execution_scope_if_later_separately_activated.binding_packet_must_reference_commit === pushedCommit &&
     packet.future_execution_scope_if_later_separately_activated.max_provider_calls === 1 &&
     packet.future_execution_scope_if_later_separately_activated.max_plugin_calls === 1 &&
@@ -193,7 +198,7 @@ function main() {
     Array.isArray(packet.preflight_taskbook_before_any_execution) &&
     packet.preflight_taskbook_before_any_execution.length === 6 &&
     packet.preflight_taskbook_before_any_execution.every((step) => step.required_before_execution === true) &&
-    packet.preflight_taskbook_before_any_execution.some((step) => step.name === "refresh_exact_binding_packet") &&
+    packet.preflight_taskbook_before_any_execution.some((step) => step.name === "verify_refreshed_exact_binding_packet") &&
     packet.preflight_taskbook_before_any_execution.some((step) => step.name === "receive_exact_activation") &&
     packet.preflight_taskbook_before_any_execution.some((step) => step.name === "execute_one_live_probe_only_after_activation")
   );
@@ -221,7 +226,7 @@ function main() {
     includesAll(packet.stop_conditions, [
       "this record is treated as current execution permission",
       "separate exact activation is missing",
-      "new binding packet for bcb8219a is missing when execution would begin",
+      "refreshed binding packet for bcb8219a is missing or fails validation when execution would begin",
       "old cf1fa55b activation or binding packet is used as current permission",
       "Agent Image Lab must read .env, config.env, secrets, cookies, tokens, or private raw data",
       "Agent Image Lab must construct or send an Authorization header",
@@ -261,7 +266,16 @@ function main() {
     packet.go_no_go.activation_preflight_prepared === true &&
     packet.go_no_go.current_live_probe_allowed === false &&
     packet.go_no_go.future_live_probe_requires_separate_exact_activation === true &&
+    packet.go_no_go.future_live_probe_requires_refreshed_binding_packet_validation === true &&
     packet.go_no_go.next_auto_step_allowed === false
+  );
+
+  check("refreshed_binding_packet_points_to_bcb8219a", () =>
+    includesAll(packet.source_refs, [refreshedBindingPacketPath]) &&
+    refreshedBindingPacket.exact_binding_packet_draft.activation_package_id_required === packet.activation_package_id &&
+    refreshedBindingPacket.exact_binding_packet_draft.vcptoolbox_required_commit === pushedCommit &&
+    refreshedBindingPacket.current_permission.can_execute_now === false &&
+    refreshedBindingPacket.current_permission.new_exact_activation_required_before_any_live_probe === true
   );
 
   check("validator_source_does_not_access_env_or_http", () =>
@@ -297,6 +311,7 @@ function main() {
         packetPath,
         validatorPath,
         routerBindingPushedReceiptPath,
+        refreshedBindingPacketPath,
         exactBindingPacketPath,
         callableRunnerPath,
         consumedReceiptPath,

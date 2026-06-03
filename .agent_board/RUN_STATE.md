@@ -1,3 +1,35 @@
+## Current Run State - Secretless Option A Exact Binding Packet Refresh Attempt 002 2026-06-03
+
+```text
+phase: secretless_option_a_exact_binding_packet_refresh_attempt_002_20260603
+status: completed_validated_local_binding_packet_refresh_no_execution
+mode: Green local exact binding packet refresh plus validator; no route HTTP/live probe
+branch: master
+baseline_before_task: 9a61916b
+binding_packet_ref: reports/runtime_to_review_v1/secretless_option_a_exact_binding_packet_draft_20260603_attempt_002.json
+validator_ref: scripts/validate_runtime_to_review_v1_secretless_option_a_exact_binding_packet_draft_attempt_002.js
+activation_preflight_ref: reports/runtime_to_review_v1/secretless_serum_live_probe_activation_preflight_20260603_attempt_002.json
+package_script: validate:runtime-to-review-secretless-option-a-exact-binding-packet-draft-attempt-002
+activation_package_id_required: AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-002
+required_future_owner_confirmation_phrase: RUNTIME_TO_REVIEW_V1_SECRETLESS_SERUM_BOTTLE_ONE_PROVIDER_ONE_IMAGE
+vcptoolbox_required_commit: bcb8219a0990f9828df6789d62ed35e14293461d
+supersedes_historical_binding_packet: reports/runtime_to_review_v1/secretless_option_a_exact_binding_packet_draft_20260603.json
+superseded_binding_commit: cf1fa55b36e9aeece2718bf2c9425c44db24cb25
+current_permission: cannot_run_live_probe_now
+can_execute_now: false
+can_run_route_http_now: false
+can_run_live_probe_now: false
+result: Refreshed the inactive exact binding packet to bind AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-002 to VCPToolBox router-binding commit bcb8219a. Attempt-002 activation/preflight now references the refreshed packet and no longer requires a binding refresh before a future separately activated execution.
+remaining_gate: receive separate exact activation and re-run current preflight validation before any route HTTP/live probe.
+boundary_checks: route_http_request_performed=false; live_probe_performed=false; runtime_execution_performed=false; provider_contact_performed=false; plugin_call_performed=false; api_call_performed=false; image_generation_performed=false; output_write_performed=false; secret_value_read_performed=false; env_file_content_read_performed=false; config_env_read_performed=false; authorization_header_constructed_by_agent_image_lab=false; external_vcptoolbox_read_performed=false; external_vcptoolbox_modified=false; push_tag_release_deploy_performed=false.
+latest_validation: node --check binding packet validator passed; binding packet validator passed; attempt-002 activation preflight validator passed after manifest trigger-path alignment; validation manifest passed; recommender passed with all files matched; agent board state passed; validate:active passed; git diff --check passed with CRLF normalization warnings only.
+next_safe_task: receive separate exact activation; do not run route HTTP/live probe from this refresh alone.
+```
+
+Historical entries below are retained for audit and may contain consumed or superseded next actions.
+
+---
+
 ## Current Run State - Secretless Serum Live Probe Activation Preflight Attempt 002 2026-06-03
 
 ```text
@@ -16,11 +48,11 @@ current_permission: cannot_run_live_probe_now
 can_execute_now: false
 can_run_route_http_now: false
 can_run_live_probe_now: false
-result: New inactive successor activation/preflight prepared against the pushed VCPToolBox router-binding commit bcb8219a. The packet does not authorize execution and explicitly marks the older cf1fa55b activation/binding evidence as historical for current execution.
-remaining_gate: refresh exact binding packet for bcb8219a before any separate live activation or route HTTP.
+result: New inactive successor activation/preflight prepared against the pushed VCPToolBox router-binding commit bcb8219a. The packet does not authorize execution and explicitly marks the older cf1fa55b activation/binding evidence as historical for current execution. The refreshed attempt-002 exact binding packet now points to bcb8219a.
+remaining_gate: receive separate exact activation and re-run current preflight validation before any route HTTP/live probe.
 boundary_checks: route_http_request_performed=false; live_probe_performed=false; runtime_execution_performed=false; provider_contact_performed=false; plugin_call_performed=false; api_call_performed=false; image_generation_performed=false; output_write_performed=false; secret_value_read_performed=false; env_file_content_read_performed=false; config_env_read_performed=false; authorization_header_constructed_by_agent_image_lab=false; external_vcptoolbox_read_performed=false; external_vcptoolbox_modified=false; push_tag_release_deploy_performed=false.
 latest_validation: node --check passed; attempt-002 activation preflight validator passed; validation manifest passed; recommender passed with all files matched; agent board state passed; validate:active passed; git diff --check passed with CRLF normalization warnings only.
-next_safe_task: exact-file local commit if accepted; before route HTTP/live probe, refresh the exact binding packet for bcb8219a and receive separate exact activation.
+next_safe_task: exact-file local commit if accepted; before route HTTP/live probe, receive separate exact activation.
 ```
 
 Historical entries below are retained for audit and may contain consumed or superseded next actions.
