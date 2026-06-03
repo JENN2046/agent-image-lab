@@ -1,5 +1,7 @@
 # BLOCKERS.md — Agent Image Lab
 
+Status sync 2026-06-03 attempt-008 exact-file refresh validated: VCPToolBox exact binding baseline `603bbcdfc4c43479ba2aea9dc1915945c7d64e77` and Agent Image Lab runner/binding/preflight/validator now prepare `AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-008`; local validation passed and no route HTTP/live probe/provider/plugin/API/image/output/secret/env/config/Authorization header/push/tag/release/deploy occurred during this refresh.
+
 ## Active Blockers
 
 Status sync 2026-06-03 attempt-007 CLI flag fix validated: the prior command failed closed locally with `secretless_option_a_activation_package_mismatch` before any route HTTP request because `--attempt-007-route-http` did not bind the attempt-007 activation id. Runner CLI parsing now maps the flag to `AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-007`; local validation passed and exact-file commit is pending. No route HTTP/live probe/provider/plugin/API/image/output/secret/env/config/Authorization header/push/tag/release/deploy occurred.
