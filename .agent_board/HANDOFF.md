@@ -1,3 +1,47 @@
+## Current Handoff Update - Secretless Serum Attempt 010 Exact-File Refresh 2026-06-03
+
+```text
+phase: secretless_serum_attempt_010_exact_file_refresh_20260603
+status: completed_validated_local_runner_refresh_no_execution
+repository: A:\agent-image-lab\agent-image-lab-v0.2
+branch: codex/secretless-serum-live-channel
+activation_package_id_prepared: AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-010
+route_http_origin_required: http://127.0.0.1:6005
+route_http_path: /internal/ai-image-agents/execute/serum-bottle-secretless
+vcptoolbox_required_commit: 39275a211964986b97fdb0d81119851353592071
+binding_packet_ref: reports/runtime_to_review_v1/secretless_option_a_exact_binding_packet_draft_20260603_attempt_010.json
+activation_preflight_ref: reports/runtime_to_review_v1/secretless_serum_live_probe_activation_preflight_20260603_attempt_010.json
+runner_ref: scripts/run_runtime_to_review_v1_secretless_option_a_callable_runner.js
+validator_ref: scripts/validate_runtime_to_review_v1_secretless_serum_live_probe_receipt_attempt_010.js
+receipt_ref_future: reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_010.json
+artifact_record_ref_future: reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_010.json
+completed:
+  - VCPToolBox exact attempt-010 binding committed locally at 39275a211964986b97fdb0d81119851353592071
+  - Agent Image Lab runner now supports --attempt-010-route-http and exact attempt-010 defaults
+  - Agent Image Lab binding packet, activation preflight, validator, package script, and validation manifest now reference attempt-010 paths
+  - attempt-009 is consumed and must not be retried
+validation_run:
+  - node --check runner and attempt-010 receipt validator: passed
+  - attempt-010 pending-safe receipt validator: passed
+  - attempt-009 full receipt validator: passed
+  - callable runner validator: passed
+  - validation manifest: passed
+not_performed:
+  - route HTTP POST for attempt-010
+  - live probe
+  - provider contact
+  - plugin call
+  - API call
+  - image generation
+  - output write
+  - secret value or env/config content read
+  - Authorization header construction by Agent Image Lab
+  - push, tag, release, deploy
+next_safe_action: exact-file local commit this validated Agent Image Lab refresh; restart VCPToolBox to 39275a211964986b97fdb0d81119851353592071 with ENABLE_AI_IMAGE_REAL_EXECUTION=true and ENABLE_NATIVE_DOUBAO_SECRETLESS_RUNTIME_DELEGATE=true; after restart, issue a new exact activation before executing attempt-010.
+```
+
+---
+
 ## Current Handoff Update - Secretless Serum Attempt 009 Exact-File Refresh 2026-06-03
 
 ```text

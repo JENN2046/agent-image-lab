@@ -1,3 +1,19 @@
+- [x] ID: secretless_serum_attempt_010_exact_file_refresh_20260603
+      Lane: Green local runner/binding/preflight/validator registration.
+      Status: completed_validated_local_runner_refresh_no_execution.
+      Goal: Register AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-010 in the local runner with the internal path and VCPToolBox exact attempt-010 binding baseline before any future exact live attempt.
+      VCPToolBox required commit: `39275a211964986b97fdb0d81119851353592071`.
+      Binding packet: `reports/runtime_to_review_v1/secretless_option_a_exact_binding_packet_draft_20260603_attempt_010.json`.
+      Activation preflight: `reports/runtime_to_review_v1/secretless_serum_live_probe_activation_preflight_20260603_attempt_010.json`.
+      Runner: `scripts/run_runtime_to_review_v1_secretless_option_a_callable_runner.js`.
+      Validator: `scripts/validate_runtime_to_review_v1_secretless_serum_live_probe_receipt_attempt_010.js`.
+      Future receipt: `reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_010.json`.
+      Future artifact record: `reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_010.json`.
+      Boundary: no route HTTP/live probe/provider/plugin/API/image/output; no secret/env/config read; no Authorization header construction; no push/tag/release/deploy.
+      Validation: node --check runner and attempt-010 validator passed; attempt-010 pending-safe validator passed; attempt-009 full receipt validator passed; callable runner validator passed; validation manifest passed.
+      Remaining gate: exact-file local commit; restart VCPToolBox to new baseline with required non-secret flags; then receive a new exact activation before live POST. Do not retry consumed attempt-009.
+---
+
 - [x] ID: secretless_serum_attempt_009_exact_file_refresh_20260603
       Lane: Green local runner/binding/preflight/validator registration.
       Status: completed_validated_local_runner_refresh_no_execution.
