@@ -127,7 +127,9 @@ check("attempt_012_prompt_targets_attempt_011_gaps", () =>
   attempt012Package.proposed_prompt.prompt.includes("product fills most of a square frame") &&
   attempt012Package.proposed_prompt.negative_prompt.includes("no readable text") &&
   attempt012Package.quality_targets.composition.includes("less unused top whitespace") &&
-  attempt012Package.required_future_baselines.vcptoolbox_attempt_012_exact_binding_refresh_required === true &&
+  attempt012Package.required_future_baselines.vcptoolbox_attempt_012_exact_binding_refresh_required === false &&
+  attempt012Package.required_future_baselines.vcptoolbox_attempt_012_exact_binding_refresh_commit === "24b9f887b77c1db48da2d23d6ef9fb9cd080ea83" &&
+  attempt012Package.required_future_baselines.agent_image_lab_attempt_012_runner_refresh_required === false &&
   attempt012Package.pre_execution_requirements.includes("receive separate exact activation before any POST")
 );
 

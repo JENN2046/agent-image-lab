@@ -1,3 +1,36 @@
+## Checkpoint - Secretless Serum Attempt 012 Exact-File Refresh 2026-06-03
+
+```text
+phase: secretless_serum_attempt_012_exact_file_refresh_20260603
+status: completed_validated_local_runner_refresh_no_execution
+result: ATTEMPT_012_REGISTERED_PENDING_SAFE_NO_ROUTE_HTTP
+summary: Refreshed VCPToolBox exact binding to attempt-012 at commit 24b9f887b77c1db48da2d23d6ef9fb9cd080ea83, then refreshed Agent Image Lab runner defaults, binding packet, activation preflight, receipt/artifact validator, validation manifest, and attempt-012 prompt quality package references. The new CLI flag --attempt-012-route-http binds AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-012 and preflight-only remains dominant over confirm-route-http.
+changed_files_current_task:
+  - scripts/run_runtime_to_review_v1_secretless_option_a_callable_runner.js
+  - scripts/validate_runtime_to_review_v1_secretless_serum_live_probe_receipt_attempt_012.js
+  - scripts/validate_runtime_to_review_v1_secretless_serum_attempt_011_quality_channel_review.js
+  - reports/runtime_to_review_v1/secretless_option_a_exact_binding_packet_draft_20260603_attempt_012.json
+  - reports/runtime_to_review_v1/secretless_serum_live_probe_activation_preflight_20260603_attempt_012.json
+  - reports/runtime_to_review_v1/secretless_serum_attempt_012_prompt_quality_package_20260603.json
+  - package.json
+  - scripts/validation_manifest.json
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/BLOCKERS.md
+validation_completed:
+  - node --check scripts/run_runtime_to_review_v1_secretless_option_a_callable_runner.js: passed
+  - node --check scripts/validate_runtime_to_review_v1_secretless_serum_live_probe_receipt_attempt_012.js: passed
+  - npm run validate:runtime-to-review-secretless-serum-live-probe-receipt-attempt-012 -- --allow-pending: passed
+  - npm run validate:runtime-to-review-secretless-serum-attempt-011-quality-channel-review: passed
+  - node scripts/validate_validation_manifest.js: passed
+boundary_checks: no route HTTP/live probe/provider/plugin/API/image/output; no secret/env/config read; no Authorization header construction; no old admin-auth route; no push/tag/release/deploy.
+recommended_next_phase: run final agent board/diff validation, exact-file local commit this refresh, then restart VCPToolBox to 24b9f887... before any new exact activation.
+```
+
+---
+
 ## Checkpoint - Secretless Serum Attempt 011 Quality Channel Review 2026-06-03
 
 ```text

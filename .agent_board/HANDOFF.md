@@ -1,3 +1,42 @@
+## Current Handoff Update - Secretless Serum Attempt 012 Exact-File Refresh 2026-06-03
+
+```text
+phase: secretless_serum_attempt_012_exact_file_refresh_20260603
+status: completed_validated_local_runner_refresh_no_execution
+repository: A:\agent-image-lab\agent-image-lab-v0.2
+branch: codex/secretless-serum-live-channel
+vcptoolbox_exact_binding_commit: 24b9f887b77c1db48da2d23d6ef9fb9cd080ea83
+activation_package_id_prepared: AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-012
+binding_packet_ref: reports/runtime_to_review_v1/secretless_option_a_exact_binding_packet_draft_20260603_attempt_012.json
+activation_preflight_ref: reports/runtime_to_review_v1/secretless_serum_live_probe_activation_preflight_20260603_attempt_012.json
+attempt_012_package_ref: reports/runtime_to_review_v1/secretless_serum_attempt_012_prompt_quality_package_20260603.json
+completed:
+  - VCPToolBox exact route binding refreshed and committed locally at 24b9f887b77c1db48da2d23d6ef9fb9cd080ea83
+  - Agent Image Lab runner now supports --attempt-012-route-http and exact attempt-012 defaults
+  - Agent Image Lab binding packet, activation preflight, validator, package script, and validation manifest now reference attempt-012 paths
+  - attempt-012 prompt package records the VCPToolBox refresh commit and remains non-executable
+validation_run:
+  - node --check scripts/run_runtime_to_review_v1_secretless_option_a_callable_runner.js: passed
+  - node --check scripts/validate_runtime_to_review_v1_secretless_serum_live_probe_receipt_attempt_012.js: passed
+  - npm run validate:runtime-to-review-secretless-serum-live-probe-receipt-attempt-012 -- --allow-pending: passed
+  - npm run validate:runtime-to-review-secretless-serum-attempt-011-quality-channel-review: passed
+  - node scripts/validate_validation_manifest.js: passed
+not_performed:
+  - route HTTP POST
+  - live probe
+  - provider contact
+  - plugin call
+  - API call
+  - image generation
+  - output write
+  - secret value or env/config content read
+  - Authorization header construction by Agent Image Lab
+  - push, tag, release, deploy
+next_safe_action: final local validation and exact-file local commit this Agent Image Lab refresh. Future attempt-012 live execution requires VCPToolBox restart/load of 24b9f887..., listener and non-POST surface checks, baseline checks, and a separate exact activation.
+```
+
+---
+
 ## Current Handoff Update - Secretless Serum Attempt 011 Quality Channel Review 2026-06-03
 
 ```text
