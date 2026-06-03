@@ -1,3 +1,34 @@
+## Current Handoff Update - Secretless Option A VCPToolBox Clean-Main Router Binding Read-only Verification 2026-06-03
+
+```text
+phase: secretless_option_a_vcptoolbox_clean_main_router_binding_readonly_verification_20260603
+status: completed_read_only_clean_main_verification_router_binding_still_missing
+mode: Amber_A exact VCPToolBox clean-main read-only verification plus local AIL receipt; no runtime execution
+repository: A:\agent-image-lab\agent-image-lab-v0.2
+branch: master
+receipt_ref: reports/runtime_to_review_v1/secretless_option_a_vcptoolbox_clean_main_router_binding_readonly_verification_receipt_20260603.json
+source_preflight_ref: reports/runtime_to_review_v1/secretless_option_a_vcptoolbox_router_binding_preflight_20260603.json
+vcptoolbox_workspace_read: A:\VCP\apps\VCPToolBox
+vcptoolbox_branch_observed: main
+vcptoolbox_status_observed: ## main...origin/main
+vcptoolbox_head_observed: 0d5d5bb74d3137aa0ddf0dd16e61a6cb85514ec4
+vcptoolbox_clean_main_verified: true
+files_read: routes/admin/aiImageAgents.js; tests/aiImageAgentsRoute.test.js; Server.js; server.js; adminServer.js; package.json
+verification_result: clean_main_verified_router_binding_still_missing
+current_permission: cannot_run_live_probe_now
+can_run_route_http_now: false
+can_run_live_probe_now: false
+binding_evidence: route helper and tests are present on clean main, but Server.js/server.js still do not set enableSerumBottleSecretlessInternalRoute or bind authorizeSerumBottleSecretlessExecution in routeOptions; adminServer.js has no AI Image Agents router binding observed.
+candidate_future_exact_file_allowlist_confirmed_by_readonly_evidence: Server.js; server.js
+future_implementation_authorized_by_this_receipt: false
+boundary: VCPToolBox read-only only; no VCPToolBox modification; no route HTTP; no live probe; no runtime/provider/plugin/API/image/output; no secret/env/config read; no Authorization header construction; no DailyNote/VCP memory; no stage/commit/push/tag/release/deploy.
+next_safe_action: review this clean-main receipt; if accepted, separately authorize exact VCPToolBox router-binding implementation from clean main before any route HTTP/live probe.
+```
+
+Historical entries below are retained for audit and may contain consumed or superseded next actions.
+
+---
+
 ## Current Handoff Update - Secretless Option A VCPToolBox Router Binding Preflight 2026-06-03
 
 ```text

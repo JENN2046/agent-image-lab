@@ -1,3 +1,17 @@
+- [x] ID: secretless_option_a_vcptoolbox_clean_main_router_binding_readonly_verification_20260603
+      Lane: Amber_A exact VCPToolBox clean-main read-only verification.
+      Status: completed_read_only_clean_main_verification_router_binding_still_missing.
+      Goal: Verify VCPToolBox clean-main router-binding state from exactly six allowed files without runtime, route HTTP, secrets, or external modification, and record an Agent Image Lab receipt.
+      Receipt: `reports/runtime_to_review_v1/secretless_option_a_vcptoolbox_clean_main_router_binding_readonly_verification_receipt_20260603.json`.
+      Files read: `routes/admin/aiImageAgents.js`; `tests/aiImageAgentsRoute.test.js`; `Server.js`; `server.js`; `adminServer.js`; `package.json`.
+      Clean-main baseline: branch=main; status=`## main...origin/main`; HEAD/main/origin_main=`0d5d5bb74d3137aa0ddf0dd16e61a6cb85514ec4`.
+      Current state: current_permission=cannot_run_live_probe_now; can_run_route_http_now=false; can_run_live_probe_now=false; verification_result=clean_main_verified_router_binding_still_missing.
+      Finding: route helper/tests are present, but Server.js/server.js still do not bind `enableSerumBottleSecretlessInternalRoute` or `authorizeSerumBottleSecretlessExecution`; adminServer.js has no AI Image Agents router binding observed.
+      Candidate future exact file allowlist confirmed by readonly evidence: `Server.js`; `server.js`.
+      Boundary: VCPToolBox read-only only; no VCPToolBox modification; no route HTTP/live probe/runtime/provider/plugin/API/image/output; no secret/env/config read; no Authorization header construction; no stage/commit/push/tag/release/deploy.
+      Recommended next: review/commit this receipt if accepted; separately authorize exact VCPToolBox router-binding implementation from clean main before any route HTTP/live probe.
+---
+
 - [x] ID: secretless_option_a_vcptoolbox_router_binding_preflight_20260603
       Lane: Green local Agent Image Lab router binding preflight plus validator/status sync.
       Status: completed_validated_local_router_binding_preflight_no_execution.

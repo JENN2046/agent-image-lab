@@ -1,3 +1,53 @@
+## Checkpoint - Secretless Option A VCPToolBox Clean-Main Router Binding Read-only Verification 2026-06-03
+
+```text
+phase: secretless_option_a_vcptoolbox_clean_main_router_binding_readonly_verification_20260603
+status: completed_read_only_clean_main_verification_router_binding_still_missing
+result: COMPLETED_READ_ONLY_CLEAN_MAIN_VERIFICATION_ROUTER_BINDING_STILL_MISSING
+mode: Amber_A exact VCPToolBox clean-main read-only verification plus local AIL receipt/status sync
+summary: Verified VCPToolBox is on clean main at 0d5d5bb74d3137aa0ddf0dd16e61a6cb85514ec4 and read only the six authorized files. The route helper and tests remain present, but Server.js/server.js still do not enable the serum-bottle secretless route gate or bind the internal authorizer, so Agent Image Lab still cannot run route HTTP/live probe now.
+changed_files_current_task:
+  - reports/runtime_to_review_v1/secretless_option_a_vcptoolbox_clean_main_router_binding_readonly_verification_receipt_20260603.json
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/BLOCKERS.md
+vcptoolbox_files_read:
+  - routes/admin/aiImageAgents.js
+  - tests/aiImageAgentsRoute.test.js
+  - Server.js
+  - server.js
+  - adminServer.js
+  - package.json
+verification:
+  - branch main clean and aligned with origin/main
+  - route helper declares /execute/serum-bottle-secretless behind options.enableSerumBottleSecretlessInternalRoute === true
+  - route requires authorizeSerumBottleSecretlessExecution before delegated execution
+  - tests cover authorizer success, missing authorizer fail-closed, budget drift, multiple plugin steps, and recursive secret-key guards
+  - Server.js/server.js mount /admin_api/ai-image-agents but do not pass enableSerumBottleSecretlessInternalRoute or authorizeSerumBottleSecretlessExecution
+  - adminServer.js has no AI Image Agents router binding observed
+boundary_checks:
+  - vcptoolbox_read_performed: true
+  - vcptoolbox_modified: false
+  - route_http_request_performed: false
+  - live_probe_performed: false
+  - runtime_execution_performed: false
+  - provider_contact_performed: false
+  - plugin_call_performed: false
+  - api_call_performed: false
+  - image_generation_performed: false
+  - output_write_performed: false
+  - secret_value_read_performed: false
+  - env_file_content_read_performed: false
+  - config_env_read_performed: false
+  - authorization_header_constructed_by_agent_image_lab: false
+  - staging_commit_push_tag_release_deploy_performed: false
+recommended_next_phase: exact VCPToolBox router-binding implementation authorization limited to clean-main verified files, or stop for review; do not run route HTTP/live probe from this receipt.
+```
+
+---
+
 ## Checkpoint - Secretless Option A VCPToolBox Router Binding Preflight 2026-06-03
 
 ```text
