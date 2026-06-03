@@ -78,6 +78,7 @@
     "validate:runtime-to-review-secretless-serum-option-a-vcptoolbox-authorization-packet-draft": "node scripts/validate_runtime_to_review_v1_secretless_serum_route_option_a_vcptoolbox_authorization_packet_draft.js",
     "validate:runtime-to-review-secretless-serum-option-a-vcptoolbox-implementation-pushed-receipt": "node scripts/validate_runtime_to_review_v1_secretless_serum_route_option_a_vcptoolbox_implementation_pushed_receipt.js",
     "validate:runtime-to-review-secretless-serum-live-probe-activation-preflight": "node scripts/validate_runtime_to_review_v1_secretless_serum_live_probe_activation_preflight.js",
+    "validate:runtime-to-review-secretless-serum-live-probe-activation-preflight-attempt-002": "node scripts/validate_runtime_to_review_v1_secretless_serum_live_probe_activation_preflight_attempt_002.js",
     "validate:runtime-to-review-secretless-option-a-callable-runner-contract-preflight": "node scripts/validate_runtime_to_review_v1_secretless_option_a_callable_runner_contract_preflight.js",
     "validate:runtime-to-review-secretless-option-a-callable-runner": "node scripts/validate_runtime_to_review_v1_secretless_option_a_callable_runner.js",
     "validate:runtime-to-review-secretless-option-a-callable-binding-preflight": "node scripts/validate_runtime_to_review_v1_secretless_option_a_callable_binding_preflight.js",

@@ -1,3 +1,15 @@
+- [x] ID: secretless_serum_live_probe_activation_preflight_attempt_002_20260603
+      Lane: Green local activation/preflight successor packet plus validator.
+      Status: completed_validated_local_preflight_no_execution.
+      Goal: Prepare a new exact secretless serum live activation/preflight against VCPToolBox router-binding commit `bcb8219a0990f9828df6789d62ed35e14293461d`.
+      Packet: `reports/runtime_to_review_v1/secretless_serum_live_probe_activation_preflight_20260603_attempt_002.json`.
+      Validator: `scripts/validate_runtime_to_review_v1_secretless_serum_live_probe_activation_preflight_attempt_002.js`.
+      Package script: `validate:runtime-to-review-secretless-serum-live-probe-activation-preflight-attempt-002`.
+      Current state: current_permission=cannot_run_live_probe_now; can_execute_now=false; can_run_route_http_now=false; can_run_live_probe_now=false.
+      Boundary: no route HTTP/live probe/runtime/provider/plugin/API/image/output; no secret/env/config read; no Authorization header construction; no external VCPToolBox read/write; no push/tag/release/deploy.
+      Remaining gate: refresh exact binding packet for `bcb8219a` and receive separate exact activation before any route HTTP/live probe.
+---
+
 - [x] ID: local_fast_forward_remote_sync_20260603
       Lane: Green local sync/status-surface recording.
       Status: completed_validated_local_sync.
