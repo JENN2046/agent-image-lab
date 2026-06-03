@@ -1,3 +1,31 @@
+## Checkpoint - Secretless Route HTTP Preflight Guard Fix 2026-06-03
+
+```text
+phase: secretless_route_http_preflight_guard_fix_20260603
+status: completed_validated_local_guard_fix
+result: PREFLIGHT_ONLY_NOW_DOMINATES_CONFIRM_ROUTE_HTTP
+summary: Hardened the Agent Image Lab exact route HTTP runner so --preflight-only cannot perform route HTTP even when --confirm-route-http is also supplied. Added an attempt-011 validator regression check that runs the accident-shape CLI and requires all live/provider/plugin/API/image boundaries to remain false.
+changed_files_current_task:
+  - scripts/run_runtime_to_review_v1_secretless_option_a_callable_runner.js
+  - scripts/validate_runtime_to_review_v1_secretless_serum_live_probe_receipt_attempt_011.js
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/BLOCKERS.md
+validation_completed:
+  - accident-shape CLI preflight with --confirm-route-http: passed with route_http_request_performed=false
+  - node --check scripts/run_runtime_to_review_v1_secretless_option_a_callable_runner.js: passed
+  - node --check scripts/validate_runtime_to_review_v1_secretless_serum_live_probe_receipt_attempt_011.js: passed
+  - npm run validate:runtime-to-review-secretless-serum-live-probe-receipt-attempt-011: passed
+  - npm run validate:runtime-to-review-secretless-option-a-callable-runner: passed
+  - node scripts/validate_validation_manifest.js: passed
+boundary_checks: no route HTTP/live probe/provider/plugin/API/image/output; no secret/env/config read; no Authorization header construction; no push/tag/release/deploy.
+recommended_next_phase: exact-file local commit this guard fix; do not run another live probe without a new exact activation.
+```
+
+---
+
 ## Checkpoint - Secretless Serum Attempt 011 Live Execution Evidence 2026-06-03
 
 ```text

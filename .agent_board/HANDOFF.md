@@ -1,3 +1,37 @@
+## Current Handoff Update - Secretless Route HTTP Preflight Guard Fix 2026-06-03
+
+```text
+phase: secretless_route_http_preflight_guard_fix_20260603
+status: completed_validated_local_guard_fix
+repository: A:\agent-image-lab\agent-image-lab-v0.2
+branch: codex/secretless-serum-live-channel
+reason: attempt-011 showed --preflight-only plus --confirm-route-http still executed POST; this is now fixed locally.
+completed:
+  - exact route HTTP runner returns before fetch when input.preflightOnly is true
+  - attempt-011 validator now includes a CLI regression check for --preflight-only plus --confirm-route-http
+validation_run:
+  - accident-shape CLI returned route_http_request_performed=false and all live/provider/plugin/API/image counters false
+  - node --check runner: passed
+  - node --check attempt-011 validator: passed
+  - attempt-011 receipt/artifact validator: passed
+  - callable runner validator: passed
+  - validation manifest: passed
+not_performed:
+  - route HTTP POST
+  - live probe
+  - provider contact
+  - plugin call
+  - API call
+  - image generation
+  - retry
+  - secret value or env/config content read
+  - Authorization header construction by Agent Image Lab
+  - push, tag, release, deploy
+next_safe_action: exact-file local commit this guard fix. Any future live probe needs a new exact activation.
+```
+
+---
+
 ## Current Handoff Update - Secretless Serum Attempt 011 Live Execution Evidence 2026-06-03
 
 ```text

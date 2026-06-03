@@ -1,3 +1,13 @@
+- [x] ID: secretless_route_http_preflight_guard_fix_20260603
+      Lane: Green local runner safety hardening.
+      Status: completed_validated_local_guard_fix.
+      Goal: Ensure --preflight-only cannot send route HTTP even when --confirm-route-http is supplied.
+      Changed files: `scripts/run_runtime_to_review_v1_secretless_option_a_callable_runner.js`; `scripts/validate_runtime_to_review_v1_secretless_serum_live_probe_receipt_attempt_011.js`; `.agent_board` status surfaces.
+      Validation: accident-shape CLI returned route_http_request_performed=false; node --check runner passed; node --check attempt-011 validator passed; attempt-011 validator passed; callable runner validator passed; validation manifest passed.
+      Boundary: no route HTTP/live probe/provider/plugin/API/image/output; no secret/env/config read; no Authorization header construction; no push/tag/release/deploy.
+      Remaining gate: exact-file local commit this guard fix; future live execution requires a new exact activation and cannot reuse attempt-011.
+---
+
 - [x] ID: secretless_serum_attempt_011_live_execution_evidence_20260603
       Lane: Amber exact activation execution evidence.
       Status: completed_validated_one_live_probe_succeeded.

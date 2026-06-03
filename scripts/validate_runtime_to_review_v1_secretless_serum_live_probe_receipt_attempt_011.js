@@ -3,6 +3,7 @@
 
 const fs = require("node:fs");
 const path = require("node:path");
+const { spawnSync } = require("node:child_process");
 
 const root = path.resolve(__dirname, "..");
 const validator = "runtime_to_review_v1_secretless_serum_live_probe_receipt_attempt_011";
@@ -115,6 +116,33 @@ function registrationChecks() {
       result.body.receipt_ref === receiptPath &&
       result.body.artifact_record_ref === artifactPath &&
       result.route_http_request_performed === false;
+  });
+  check("runner_cli_preflight_only_dominates_confirm_route_http", () => {
+    const cli = spawnSync(process.execPath, [
+      repoPath(runnerPath),
+      "--attempt-011-route-http",
+      "--route-http-origin",
+      "http://127.0.0.1:6005",
+      "--confirmation-phrase",
+      "RUNTIME_TO_REVIEW_V1_SECRETLESS_SERUM_BOTTLE_ONE_PROVIDER_ONE_IMAGE",
+      "--confirm-route-http",
+      "--preflight-only"
+    ], {
+      cwd: root,
+      encoding: "utf8"
+    });
+    if (cli.status !== 0) return false;
+    const result = JSON.parse(cli.stdout);
+    return result.ok === true &&
+      result.passed === true &&
+      result.status === "secretless_option_a_route_http_preflight_only_passed_no_route_http" &&
+      result.route_http_request_performed === false &&
+      result.live_probe_performed === false &&
+      result.provider_contact_performed === false &&
+      result.plugin_call_performed === false &&
+      result.api_call_performed === false &&
+      result.image_generation_performed === false &&
+      result.retry_performed === false;
   });
 
   check("binding_packet_attempt_011_scope", () =>

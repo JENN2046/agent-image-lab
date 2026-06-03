@@ -1,3 +1,19 @@
+## Current Run State - Secretless Route HTTP Preflight Guard Fix 2026-06-03
+
+```text
+phase: secretless_route_http_preflight_guard_fix_20260603
+status: completed_validated_local_guard_fix
+mode: Green local runner safety hardening; no route HTTP request
+reason: attempt-011 exposed that --preflight-only did not dominate --confirm-route-http in the exact route HTTP runner path.
+changed_files: scripts/run_runtime_to_review_v1_secretless_option_a_callable_runner.js; scripts/validate_runtime_to_review_v1_secretless_serum_live_probe_receipt_attempt_011.js; .agent_board status surfaces.
+result: runSecretlessOptionAExactRouteHttpTransport now returns secretless_option_a_route_http_preflight_only_passed_no_route_http before fetch when input.preflightOnly is true, even if confirmRouteHttp is true.
+validation: accident-shape CLI with --attempt-011-route-http --confirm-route-http --preflight-only returned route_http_request_performed=false; node --check runner passed; node --check attempt-011 validator passed; attempt-011 validator passed; callable runner validator passed; validation manifest passed.
+boundary_checks: route_http_request_performed=false; live_probe_performed=false; provider_contact_performed=false; plugin_call_performed=false; api_call_performed=false; image_generation_performed=false; retry_performed=false; secret_value_read_performed=false; env_file_content_read_performed=false; config_env_read_performed=false; authorization_header_constructed_by_agent_image_lab=false; push_tag_release_deploy_performed=false.
+next_safe_task: exact-file local commit this guard fix. Future live probes still require a new exact activation and must not reuse attempt-011.
+```
+
+---
+
 ## Current Run State - Secretless Serum Attempt 011 Live Execution Evidence 2026-06-03
 
 ```text

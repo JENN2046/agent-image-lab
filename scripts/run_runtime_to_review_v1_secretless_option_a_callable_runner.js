@@ -920,6 +920,33 @@ async function runSecretlessOptionAExactRouteHttpTransport(input = {}) {
     };
   }
 
+  if (input.preflightOnly) {
+    return {
+      ok: true,
+      passed: true,
+      runner_id: runnerId,
+      status: "secretless_option_a_route_http_preflight_only_passed_no_route_http",
+      route_http_request_performed: false,
+      live_probe_performed: false,
+      provider_contact_performed: false,
+      plugin_call_performed: false,
+      api_call_performed: false,
+      image_generation_performed: false,
+      image_count: 0,
+      output_write_performed: false,
+      output_refs: [],
+      secret_value_read_performed: false,
+      env_file_content_read_performed: false,
+      config_env_read_performed: false,
+      authorization_header_constructed_by_agent_image_lab: false,
+      authorizer_call_count: 0,
+      executor_call_count: 0,
+      retry_performed: false,
+      calls_used: boundary.calls_used,
+      validation
+    };
+  }
+
   let response = null;
   let text = "";
   let json = null;
