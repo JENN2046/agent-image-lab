@@ -830,6 +830,22 @@ async function runSecretlessOptionAExactRouteHttpTransport(input = {}) {
   };
 }
 
+function applyAttemptRouteDefaults(input) {
+  if (input.attempt007RouteHttp === true && !input.activationPackageId) {
+    input.activationPackageId = exactRouteHttpActivationPackageIdAttempt007;
+  } else if (input.attempt006RouteHttp === true && !input.activationPackageId) {
+    input.activationPackageId = exactRouteHttpActivationPackageIdAttempt006;
+  } else if (input.attempt005RouteHttp === true && !input.activationPackageId) {
+    input.activationPackageId = exactRouteHttpActivationPackageIdAttempt005;
+  } else if (input.attempt004RouteHttp === true && !input.activationPackageId) {
+    input.activationPackageId = exactRouteHttpActivationPackageIdAttempt004;
+  } else if (input.attempt003RouteHttp === true && !input.activationPackageId) {
+    input.activationPackageId = exactRouteHttpActivationPackageId;
+  }
+
+  return input;
+}
+
 function parseArgs(argv) {
   const input = {};
   for (let index = 0; index < argv.length; index += 1) {
@@ -889,7 +905,7 @@ function parseArgs(argv) {
       index += 1;
     }
   }
-  return input;
+  return applyAttemptRouteDefaults(input);
 }
 
 if (require.main === module) {
@@ -945,5 +961,7 @@ module.exports = {
   validateRunnerInput,
   validateExactRouteHttpTransportInput,
   runSecretlessOptionACallableRunner,
-  runSecretlessOptionAExactRouteHttpTransport
+  runSecretlessOptionAExactRouteHttpTransport,
+  applyAttemptRouteDefaults,
+  parseArgs
 };

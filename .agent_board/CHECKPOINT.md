@@ -1,3 +1,32 @@
+## Checkpoint - Secretless Serum Attempt 007 CLI Flag Fix 2026-06-03
+
+```text
+phase: secretless_serum_attempt_007_cli_flag_fix_20260603
+status: completed_validated_local_cli_fix_no_execution
+result: LOCAL_CLI_FIX_VALIDATED_NO_ROUTE_HTTP_NO_LIVE_PROBE
+summary: The previous attempt-007 execution command failed closed before any route HTTP request because --attempt-007-route-http did not bind the attempt-007 activation id. The runner now applies activation defaults for attempt route flags, and the attempt-007 validator checks the CLI flag path.
+changed_files_current_task:
+  - scripts/run_runtime_to_review_v1_secretless_option_a_callable_runner.js
+  - scripts/validate_runtime_to_review_v1_secretless_serum_live_probe_receipt_attempt_007.js
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/BLOCKERS.md
+validation_completed:
+  - node --check scripts/run_runtime_to_review_v1_secretless_option_a_callable_runner.js: passed
+  - node --check scripts/validate_runtime_to_review_v1_secretless_serum_live_probe_receipt_attempt_007.js: passed
+  - npm run validate:runtime-to-review-secretless-serum-live-probe-receipt-attempt-007 -- --allow-pending: passed
+  - npm run validate:runtime-to-review-secretless-option-a-callable-runner: passed
+  - node scripts/validate_agent_board_state.js: passed
+  - direct parseArgs preflight check: passed without route HTTP request
+  - git diff --check: passed with CRLF normalization warnings only
+boundary_checks: no route HTTP/live probe/provider/plugin/API/image/output; no secret/env/config read; no Authorization header construction; no push/tag/release/deploy.
+recommended_next_phase: validate and exact-file commit this CLI fix; then require a new exact activation before executing attempt-007.
+```
+
+---
+
 ## Checkpoint - Secretless Serum Attempt 007 Review Fix 2026-06-03
 
 ```text

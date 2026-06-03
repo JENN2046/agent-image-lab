@@ -96,6 +96,25 @@ function registrationChecks() {
       result.route_http_request_performed === false;
   });
 
+  check("runner_cli_attempt_007_flag_binds_activation_defaults", () => {
+    const input = runner.parseArgs([
+      "--attempt-007-route-http",
+      "--route-http-origin",
+      "http://127.0.0.1:6005",
+      "--confirmation-phrase",
+      "RUNTIME_TO_REVIEW_V1_SECRETLESS_SERUM_BOTTLE_ONE_PROVIDER_ONE_IMAGE"
+    ]);
+    const result = runner.validateExactRouteHttpTransportInput(input);
+    return input.activationPackageId === activationPackageId &&
+      result.ok === true &&
+      result.route_http_url === `http://127.0.0.1:6005${routePath}` &&
+      result.body.task_id === activationPackageId &&
+      result.body.pipeline_id === "secretless-serum-live-probe-attempt-007" &&
+      result.body.receipt_ref === receiptPath &&
+      result.body.artifact_record_ref === artifactPath &&
+      result.route_http_request_performed === false;
+  });
+
   check("binding_packet_attempt_007_scope", () =>
     binding.packet_id === "BINDING-DRAFT-SECRETLESS-OPTION-A-SERUM-20260603-007" &&
     binding.status === "draft_not_active_non_executable" &&

@@ -1,3 +1,41 @@
+## Current Handoff Update - Secretless Serum Attempt 007 CLI Flag Fix 2026-06-03
+
+```text
+phase: secretless_serum_attempt_007_cli_flag_fix_20260603
+status: completed_validated_local_cli_fix_no_execution
+repository: A:\agent-image-lab\agent-image-lab-v0.2
+branch: codex/secretless-serum-live-channel
+activation_package_id_prepared: AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-007
+route_http_origin_required: http://127.0.0.1:6005
+route_http_path: /internal/ai-image-agents/execute/serum-bottle-secretless
+agent_image_lab_current_commit_before_fix: 60358f626494ef749814684b87e5e44ca4fba871
+vcptoolbox_required_commit: 9e3817320f36d3c5735d476a238a2251cbf50b32
+completed:
+  - identified failed-closed CLI parsing gap after no route HTTP request was sent
+  - --attempt-007-route-http now binds AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-007 when activationPackageId is not explicitly supplied
+  - attempt-007 validator now covers the CLI flag path
+validation_run:
+  - node --check runner and attempt-007 receipt validator: passed
+  - attempt-007 pending-safe receipt validator: passed
+  - callable runner validator: passed
+  - agent board state validator: passed
+  - direct parseArgs preflight check: passed with route_http_request_performed=false
+not_performed:
+  - route HTTP POST
+  - live probe
+  - provider contact
+  - plugin call
+  - API call
+  - image generation
+  - output write
+  - secret value or env/config content read
+  - Authorization header construction by Agent Image Lab
+  - push, tag, release, deploy
+next_safe_action: run local validation, exact-file commit this CLI fix, then require a new exact activation before executing attempt-007.
+```
+
+---
+
 ## Current Handoff Update - Secretless Serum Attempt 007 Review Fix 2026-06-03
 
 ```text

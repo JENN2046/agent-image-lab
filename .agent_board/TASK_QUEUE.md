@@ -1,3 +1,14 @@
+- [x] ID: secretless_serum_attempt_007_cli_flag_fix_20260603
+      Lane: Green local CLI fix.
+      Status: completed_validated_local_cli_fix_no_execution.
+      Goal: Make --attempt-007-route-http automatically bind AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-007 so the exact activation CLI path does not fall back to attempt-003 defaults.
+      Runner: `scripts/run_runtime_to_review_v1_secretless_option_a_callable_runner.js`.
+      Validator: `scripts/validate_runtime_to_review_v1_secretless_serum_live_probe_receipt_attempt_007.js`.
+      Boundary: no route HTTP/live probe/provider/plugin/API/image/output; no secret/env/config read; no Authorization header construction; no push/tag/release/deploy.
+      Validation: node --check runner and attempt-007 validator passed; attempt-007 pending-safe validator passed; callable runner validator passed; agent board state validator passed; direct parseArgs preflight check passed with route_http_request_performed=false.
+      Remaining gate: exact-file local commit; then receive a new exact activation before live POST.
+---
+
 - [x] ID: secretless_serum_attempt_007_review_fix_20260603
       Lane: Green local review fix.
       Status: completed_validated_local_review_fix_no_execution.

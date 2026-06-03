@@ -1,3 +1,26 @@
+## Current Run State - Secretless Serum Attempt 007 CLI Flag Fix 2026-06-03
+
+```text
+phase: secretless_serum_attempt_007_cli_flag_fix_20260603
+status: completed_validated_local_cli_fix_no_execution
+mode: Green local CLI fix; no live request
+activation_package_id_prepared: AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-007
+route_http_origin_required: http://127.0.0.1:6005
+route_http_method: POST
+route_http_path: /internal/ai-image-agents/execute/serum-bottle-secretless
+agent_image_lab_current_commit_before_fix: 60358f626494ef749814684b87e5e44ca4fba871
+vcptoolbox_required_commit: 9e3817320f36d3c5735d476a238a2251cbf50b32
+current_permission: cannot_run_live_probe_from_cli_fix_alone
+can_run_route_http_now: false
+can_run_live_probe_now: false
+result: CLI parse gap was fixed locally after a failed-closed preflight that performed no route HTTP request; --attempt-007-route-http now binds AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-007.
+latest_validation: node --check runner and attempt-007 validator passed; attempt-007 pending-safe validator passed; callable runner validator passed; agent board state validator passed; direct parseArgs preflight check passed with route_http_request_performed=false.
+boundary_checks: route_http_request_performed=false; live_probe_performed=false; provider_contact_performed=false; plugin_call_performed=false; api_call_performed=false; image_generation_performed=false; output_write_performed=false; secret_value_read_performed=false; env_file_content_read_performed=false; config_env_read_performed=false; authorization_header_constructed_by_agent_image_lab=false; push_tag_release_deploy_performed=false.
+next_safe_task: validate and exact-file commit this CLI fix; then require a new exact activation before attempt-007 live POST.
+```
+
+---
+
 ## Current Run State - Secretless Serum Attempt 007 Review Fix 2026-06-03
 
 ```text
