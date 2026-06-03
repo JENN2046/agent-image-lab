@@ -1,3 +1,18 @@
+- [x] ID: secretless_option_a_callable_runner_implementation_preflight_20260603
+      Lane: Green exact-file local runner implementation.
+      Status: completed_validated_local_runner_implementation_no_route_http.
+      Goal: Create an exact-file implementation taskbook and implement the local Agent Image Lab Option A callable runner surface without route HTTP or live probe execution.
+      Implementation preflight: `reports/runtime_to_review_v1/secretless_option_a_callable_runner_implementation_preflight_20260603.json`.
+      Runner: `scripts/run_runtime_to_review_v1_secretless_option_a_callable_runner.js`.
+      Validator: `scripts/validate_runtime_to_review_v1_secretless_option_a_callable_runner.js`.
+      Package script: `validate:runtime-to-review-secretless-option-a-callable-runner`.
+      Current state: current_permission=cannot_run_live_probe_now; current_live_probe_allowed=false; can_execute_now=false; runner_status=local_preflight_only_fail_closed_runner_implemented; route_http_binding_status=not_implemented_not_guessed_by_this_task; historical_packet_fact_not_current_permission=true; new_exact_activation_required_before_any_live_probe=true.
+      Boundary: route_http_request_performed=false; live_probe_performed=false; external_vcptoolbox_read_performed_by_this_task=false; external_vcptoolbox_modified=false; provider_contact_performed=false; plugin_call_performed=false; api_call_performed=false; image_generation_performed=false; output_write_performed=false; secret/env/config read=false; Authorization header construction=false; authorizer_call_count=0; executor_call_count=0; stage/commit/push/tag/release/deploy=false.
+      Runner behavior: preflight-only path builds exact non-secret payload and recursively rejects forbidden keys; route HTTP/non-preflight path fails closed until a new exact activation supplies explicit callable binding.
+      Validation: node --check runner passed; node --check validator passed; runner --preflight-only passed; runner validator passed; validation manifest passed; agent board state passed; git diff --check passed.
+      Recommended next: review/commit this local runner implementation; future live probe still requires a new exact activation plus explicit callable route binding.
+---
+
 - [x] ID: secretless_option_a_callable_runner_contract_preflight_20260603
       Lane: Green local contract preflight plus validator only.
       Status: completed_validated_local_contract_preflight.

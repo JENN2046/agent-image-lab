@@ -2,20 +2,21 @@
 
 ## Active Blockers
 
-Current active blockers are BLOCKER-20260601-01 for the historical admin-auth route-owner runtime path and BLOCKER-20260603-01 for the secretless Option A Agent Image Lab execution entry gap; resolved/legacy entries below are historical unless marked active.
+Current active blockers are BLOCKER-20260601-01 for the historical admin-auth route-owner runtime path and BLOCKER-20260603-01 narrowed for the secretless Option A route: a local preflight-only/fail-closed Agent Image Lab runner now exists, but route HTTP remains closed until a new exact activation supplies explicit callable binding; resolved/legacy entries below are historical unless marked active.
+Status sync 2026-06-03 callable runner implementation: local Agent Image Lab runner and validator were added and validated for BLOCKER-20260603-01; the remaining gap is not a missing local runner surface, but no current exact activation plus no explicit route HTTP binding inside Agent Image Lab.
 Status sync 2026-06-03 callable runner contract preflight: local Agent Image Lab contract draft and validator were added and validated for BLOCKER-20260603-01, but the actual callable runner is not implemented by this task and live probe remains closed.
 Status sync 2026-06-03: VCPToolBox Option A secretless implementation has been pushed to origin/main at cf1fa55b, but Agent Image Lab still cannot run a live probe now. BLOCKER-20260601-01 remains active for the historical admin-auth route-owner runtime path; the secretless path requires a separate exact activation/preflight before any live attempt.
 
 ## BLOCKER-20260603-01 - Secretless Option A live probe lacks Agent Image Lab execution entry
 
-Status: active
+Status: narrowed_by_local_runner_implementation_route_http_still_closed
 Detected during: secretless_serum_live_probe_exact_activation_20260603_attempt_001
 Task: run exactly one serum-bottle secretless live probe through VCPToolBox Option A
-Reason: Required local preflight and VCPToolBox clean-main baseline passed, but Agent Image Lab does not currently contain a verifiable exact runner or callable invocation contract for the VCPToolBox Option A secretless internal authorized execution interface. The old guarded live probe runner is tied to the admin-auth route owner runtime and was forbidden for this task.
+Reason: Required local preflight and VCPToolBox clean-main baseline passed, but the consumed activation found no verifiable exact runner or callable invocation contract for the VCPToolBox Option A secretless internal authorized execution interface. The local Agent Image Lab preflight-only/fail-closed runner now exists, but route HTTP remains closed because this task does not provide a new exact activation or explicit callable endpoint/operation binding.
 Hard stop gate: do_not_guess_route_http_shape_or_use_old_admin_auth_route
 Files involved: reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_001.json; reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_001.json
 Validation state: preflight validators passed; VCPToolBox branch/status/HEAD matched main clean at cf1fa55b36e9aeece2718bf2c9425c44db24cb25; non-secret payload scan found no forbidden keys; no route HTTP request/provider/plugin/API/image/output was performed.
-Required next safe action: review/commit the local Agent Image Lab secretless Option A callable runner contract preflight, then separately authorize/implement an exact local callable runner; after that, issue a new exact activation before any route HTTP request. Do not retry from attempt_001.
+Required next safe action: review/commit the local Agent Image Lab secretless Option A callable runner implementation; after that, issue a new exact activation with explicit callable binding before any route HTTP request. Do not retry from attempt_001.
 Rollback or cleanup path: no runtime side effect to clean up; only local receipt/artifact/status files need reverting if this failed-closed record is rejected.
 
 ## BLOCKER-20260601-01 - Serum route live probe requires exact admin auth env authorization
