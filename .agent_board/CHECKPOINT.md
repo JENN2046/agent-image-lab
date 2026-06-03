@@ -1,3 +1,32 @@
+## Checkpoint - Secretless Serum Attempt 007 Review Fix 2026-06-03
+
+```text
+phase: secretless_serum_attempt_007_review_fix_20260603
+status: completed_validated_local_review_fix_no_execution
+result: LOCAL_REVIEW_FIX_VALIDATED_NO_ROUTE_HTTP_NO_LIVE_PROBE
+summary: VCPToolBox now requires exact attempt-007 activation/binding before internal authorization, and Agent Image Lab runner now prepares attempt-007 receipt/artifact writing to exact planned paths after a future separately activated POST. VCPToolBox required baseline refreshed to 9e3817320f36d3c5735d476a238a2251cbf50b32.
+changed_files_current_task:
+  - scripts/run_runtime_to_review_v1_secretless_option_a_callable_runner.js
+  - scripts/validate_runtime_to_review_v1_secretless_serum_live_probe_receipt_attempt_007.js
+  - reports/runtime_to_review_v1/secretless_option_a_exact_binding_packet_draft_20260603_attempt_007.json
+  - reports/runtime_to_review_v1/secretless_serum_live_probe_activation_preflight_20260603_attempt_007.json
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/BLOCKERS.md
+validation_completed:
+  - node --check scripts/run_runtime_to_review_v1_secretless_option_a_callable_runner.js: passed
+  - node --check scripts/validate_runtime_to_review_v1_secretless_serum_live_probe_receipt_attempt_007.js: passed
+  - npm run validate:runtime-to-review-secretless-serum-live-probe-receipt-attempt-007 -- --allow-pending: passed
+  - npm run validate:runtime-to-review-secretless-option-a-callable-runner: passed
+  - node scripts/validate_validation_manifest.js: passed
+boundary_checks: no route HTTP/live probe/provider/plugin/API/image/output; no secret/env/config read; no Authorization header construction; no push/tag/release/deploy.
+recommended_next_phase: validate and exact-file commit this review fix; then require a new exact activation before executing attempt-007.
+```
+
+---
+
 ## Checkpoint - Secretless Serum Attempt 007 Runner Refresh 2026-06-03
 
 ```text

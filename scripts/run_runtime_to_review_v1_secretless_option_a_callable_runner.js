@@ -2,8 +2,11 @@
 "use strict";
 
 const crypto = require("node:crypto");
+const fs = require("node:fs");
+const path = require("node:path");
 
 const runnerId = "runtime_to_review_v1_secretless_option_a_callable_runner";
+const repoRoot = path.resolve(__dirname, "..");
 const exactActivationPackageId = "AUTH-DRAFT-SECRETLESS-SERUM-LIVE-PROBE-20260603-001";
 const exactRouteHttpActivationPackageId = "AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-003";
 const exactRouteHttpActivationPackageIdAttempt004 = "AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-004";
@@ -17,7 +20,19 @@ const exactRouteHttpEndpointSource = "VCPToolBox bcb8219a server.js mounts /admi
 const exactRouteHttpPathAttempt005 = "/internal/ai-image-agents/execute/serum-bottle-secretless";
 const exactRouteHttpEndpointSourceAttempt005 = "VCPToolBox f8ba23130f714e1e1d7641f5f89726846aaf8bb2 server.js mounts loopback-only /internal/ai-image-agents and routes/admin/aiImageAgents.js defines POST /execute/serum-bottle-secretless";
 const exactRouteHttpEndpointSourceAttempt006 = "VCPToolBox d0d5c104ae741e7be993cf1c760126bea9a44567 server.js mounts loopback-only /internal/ai-image-agents, injects pluginManager and internal authorizer into routeOptions, and routes/admin/aiImageAgents.js defines POST /execute/serum-bottle-secretless";
-const exactRouteHttpEndpointSourceAttempt007 = "VCPToolBox 0d10ff306b20abd1aac00389711f0a67d01ece58 mounts loopback-only /internal/ai-image-agents, requires NativeImageDelegateRegistry serum_bottle_secretless_doubao_v1, strict canonical secretless payload validation, route/runtime/delegate flags, and routes/admin/aiImageAgents.js defines POST /execute/serum-bottle-secretless";
+const exactRouteHttpEndpointSourceAttempt007 = "VCPToolBox 9e3817320f36d3c5735d476a238a2251cbf50b32 mounts loopback-only /internal/ai-image-agents, requires exact attempt-007 activation binding, NativeImageDelegateRegistry serum_bottle_secretless_doubao_v1, strict canonical secretless payload validation, route/runtime/delegate flags, and routes/admin/aiImageAgents.js defines POST /execute/serum-bottle-secretless";
+const vcptoolboxRequiredCommitAttempt007 = "9e3817320f36d3c5735d476a238a2251cbf50b32";
+const agentImageLabRunnerRequiredCommitAttempt007 =
+  "resolved_by_separate_exact_activation_after_local_commit";
+const bindingPacketIdAttempt007 = "BINDING-DRAFT-SECRETLESS-OPTION-A-SERUM-20260603-007";
+const bindingPacketRefAttempt007 =
+  "reports/runtime_to_review_v1/secretless_option_a_exact_binding_packet_draft_20260603_attempt_007.json";
+const receiptRefAttempt007 =
+  "reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_007.json";
+const artifactRecordRefAttempt007 =
+  "reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_007.json";
+const outputDirectoryRefAttempt007 =
+  "runs/real_generation/runtime_to_review_v1_guarded_live_probe_serum_bottle_secretless_attempt_007/";
 
 const allowedNonSecretPayloadFields = Object.freeze([
   "task_id",
@@ -135,7 +150,7 @@ const defaultRouteHttpInputAttempt007 = Object.freeze({
   taskId: exactRouteHttpActivationPackageIdAttempt007,
   receiptRef: "reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_007.json",
   artifactRecordRef: "reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_007.json",
-  outputDirectoryRef: "runs/real_generation/runtime_to_review_v1_guarded_live_probe_serum_bottle_secretless_attempt_007/"
+  outputDirectoryRef: outputDirectoryRefAttempt007
 });
 
 const allowedExactRouteHttpActivationPackageIds = Object.freeze([
@@ -550,6 +565,161 @@ function runSecretlessOptionACallableRunner(input = {}) {
   };
 }
 
+function repoPathForExactAttempt007(relativePath, expectedRelativePath) {
+  if (relativePath !== expectedRelativePath) {
+    throw new Error(`attempt-007 may only write ${expectedRelativePath}`);
+  }
+
+  const resolved = path.resolve(repoRoot, relativePath);
+  const relative = path.relative(repoRoot, resolved);
+  if (relative.startsWith("..") || path.isAbsolute(relative)) {
+    throw new Error(`attempt-007 path escapes repository: ${relativePath}`);
+  }
+
+  return resolved;
+}
+
+function writeJsonNoOverwrite(relativePath, expectedRelativePath, payload) {
+  const target = repoPathForExactAttempt007(relativePath, expectedRelativePath);
+  fs.mkdirSync(path.dirname(target), { recursive: true });
+  fs.writeFileSync(target, `${JSON.stringify(payload, null, 2)}\n`, { encoding: "utf8", flag: "wx" });
+}
+
+function summarizeRouteResult(json) {
+  const result = json && json.result && typeof json.result === "object"
+    ? json.result
+    : {};
+  const evidence = result.serumBottleSecretlessRuntimeEvidence &&
+    typeof result.serumBottleSecretlessRuntimeEvidence === "object"
+    ? result.serumBottleSecretlessRuntimeEvidence
+    : {};
+
+  return {
+    ok: json && json.ok === true,
+    route_result_status: result.status || null,
+    route_result_mode: result.mode || null,
+    delegate_id: evidence.delegateId || null,
+    provider_id: evidence.providerId || null,
+    plugin_id: evidence.pluginId || null,
+    api_id: evidence.apiId || null,
+    internal_command: evidence.internalCommand || null,
+    provider_calls: Number(evidence.providerCalls) || 0,
+    plugin_calls: Number(evidence.pluginCalls) || 0,
+    api_calls: Number(evidence.apiCalls) || 0,
+    images: Number(evidence.images) || 0,
+    artifact: evidence.artifact || null
+  };
+}
+
+function buildAttempt007ReceiptAndArtifact(execution, validation, json, responseStatus) {
+  const body = validation.body;
+  const routeSummary = summarizeRouteResult(json);
+  const succeeded = execution.ok === true;
+  const providerConsumed = execution.calls_used.provider > 0;
+  const resultStatus = succeeded
+    ? "succeeded"
+    : providerConsumed
+      ? "failed_after_provider_budget_consumed"
+      : "failed_closed_before_provider_call";
+
+  const boundary = {
+    secret_value_read_performed: false,
+    env_file_content_read_performed: false,
+    config_env_read_performed: false,
+    authorization_header_constructed_by_agent_image_lab: false,
+    old_admin_auth_route_used: false,
+    retry_performed: false,
+    push_tag_release_deploy_performed: false
+  };
+
+  const receipt = {
+    schema: "runtime_to_review_v1_secretless_serum_live_probe_receipt.v3",
+    receipt_id: "secretless_serum_live_probe_receipt_20260603_attempt_007",
+    activation_package_id: exactRouteHttpActivationPackageIdAttempt007,
+    binding_packet_id: bindingPacketIdAttempt007,
+    binding_packet_ref: bindingPacketRefAttempt007,
+    agent_image_lab_runner_required_commit: agentImageLabRunnerRequiredCommitAttempt007,
+    vcptoolbox_required_commit: vcptoolboxRequiredCommitAttempt007,
+    status: resultStatus,
+    result: succeeded ? "succeeded" : "failed_closed",
+    activation_attempt_consumed: true,
+    route_http_transport: {
+      origin: validation.route_http_origin,
+      method: validation.route_http_method,
+      path: validation.route_http_path,
+      endpoint_source: validation.endpoint_source
+    },
+    payload_summary: {
+      pipeline_id: body.pipeline_id,
+      task_id: body.task_id,
+      route_id: body.route_id,
+      max_provider_calls: body.max_provider_calls,
+      max_plugin_calls: body.max_plugin_calls,
+      max_api_calls: body.max_api_calls,
+      max_images: body.max_images,
+      retry_allowed: body.retry_allowed,
+      receipt_ref: body.receipt_ref,
+      artifact_record_ref: body.artifact_record_ref,
+      output_directory_ref: body.plan.steps[0].output_directory_ref,
+      non_secret_payload_hash: body.non_secret_payload_hash
+    },
+    route_http_request_performed: execution.route_http_request_performed,
+    live_probe_performed: execution.live_probe_performed,
+    provider_contact_performed: execution.provider_contact_performed,
+    plugin_call_performed: execution.plugin_call_performed,
+    api_call_performed: execution.api_call_performed,
+    image_generation_performed: execution.image_generation_performed,
+    image_count: execution.image_count,
+    output_write_performed: execution.output_write_performed,
+    output_refs: execution.output_refs,
+    calls_used: execution.calls_used,
+    route_response_status_code: responseStatus,
+    route_response_summary: routeSummary,
+    receipt_write_performed: true,
+    artifact_record_ref: artifactRecordRefAttempt007,
+    boundary
+  };
+
+  const artifact = {
+    schema: "runtime_to_review_v1_secretless_serum_live_probe_artifact_record.v3",
+    artifact_record_id: "secretless_serum_live_probe_artifact_record_20260603_attempt_007",
+    activation_package_id: exactRouteHttpActivationPackageIdAttempt007,
+    receipt_ref: receiptRefAttempt007,
+    status: succeeded ? "artifact_recorded" : "failed_no_artifact_created",
+    result: resultStatus,
+    artifact_created: succeeded && execution.image_count === 1,
+    output_directory_ref: outputDirectoryRefAttempt007,
+    output_refs: execution.output_refs,
+    provider_contact_performed: execution.provider_contact_performed,
+    plugin_call_performed: execution.plugin_call_performed,
+    api_call_performed: execution.api_call_performed,
+    image_generation_performed: execution.image_generation_performed,
+    image_count: execution.image_count,
+    output_write_performed: execution.output_write_performed,
+    route_response_summary: routeSummary,
+    artifact_evidence: routeSummary.artifact,
+    boundary
+  };
+
+  return { receipt, artifact };
+}
+
+function writeAttempt007ReceiptAndArtifact(execution, validation, json, responseStatus) {
+  if (validation.activation_package_id !== exactRouteHttpActivationPackageIdAttempt007) {
+    return { receipt_write_performed: false, artifact_record_write_performed: false };
+  }
+
+  const records = buildAttempt007ReceiptAndArtifact(execution, validation, json, responseStatus);
+  writeJsonNoOverwrite(receiptRefAttempt007, receiptRefAttempt007, records.receipt);
+  writeJsonNoOverwrite(artifactRecordRefAttempt007, artifactRecordRefAttempt007, records.artifact);
+  return {
+    receipt_write_performed: true,
+    artifact_record_write_performed: true,
+    receipt_ref: receiptRefAttempt007,
+    artifact_record_ref: artifactRecordRefAttempt007
+  };
+}
+
 async function runSecretlessOptionAExactRouteHttpTransport(input = {}) {
   const validation = validateExactRouteHttpTransportInput(input);
   const boundary = baseBoundary();
@@ -570,38 +740,65 @@ async function runSecretlessOptionAExactRouteHttpTransport(input = {}) {
     };
   }
 
-  const response = await fetch(validation.route_http_url, {
-    method: exactRouteHttpMethod,
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(validation.body)
-  });
-  const text = await response.text();
+  let response = null;
+  let text = "";
   let json = null;
+  let fetchError = null;
+
   try {
-    json = text ? JSON.parse(text) : null;
+    response = await fetch(validation.route_http_url, {
+      method: exactRouteHttpMethod,
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(validation.body)
+    });
+    text = await response.text();
   } catch (error) {
-    json = {
-      parse_error: error instanceof Error ? error.message : String(error),
-      raw_text: text
-    };
+    fetchError = error;
   }
 
-  return {
-    ok: response.ok && json && json.ok === true,
-    passed: response.ok && json && json.ok === true,
+  if (fetchError) {
+    json = {
+      ok: false,
+      result: {
+        status: "secretless_option_a_route_http_fetch_failed_closed",
+        reason: fetchError instanceof Error ? fetchError.message : String(fetchError)
+      }
+    };
+  } else {
+    try {
+      json = text ? JSON.parse(text) : null;
+    } catch (error) {
+      json = {
+        ok: false,
+        result: {
+          status: "secretless_option_a_route_http_response_parse_failed_closed",
+          reason: error instanceof Error ? error.message : String(error)
+        }
+      };
+    }
+  }
+
+  const routeSummaryForExecution = summarizeRouteResult(json);
+  const routeResult = json && json.result && typeof json.result === "object"
+    ? json.result
+    : {};
+
+  const execution = {
+    ok: Boolean(response && response.ok && json && json.ok === true),
+    passed: Boolean(response && response.ok && json && json.ok === true),
     runner_id: runnerId,
-    status: response.ok ? "secretless_option_a_route_http_response_received" : "secretless_option_a_route_http_response_not_ok",
+    status: response && response.ok ? "secretless_option_a_route_http_response_received" : "secretless_option_a_route_http_response_not_ok",
     route_http_request_performed: true,
     live_probe_performed: true,
-    provider_contact_performed: Boolean(json && json.result && json.result.provider_contact_performed),
-    plugin_call_performed: Boolean(json && json.result && json.result.plugin_call_performed),
-    api_call_performed: Boolean(json && json.result && json.result.api_call_performed),
-    image_generation_performed: Boolean(json && json.result && json.result.image_generation_performed),
-    image_count: Number(json && json.result && json.result.image_count) || 0,
-    output_write_performed: Boolean(json && json.result && json.result.output_write_performed),
-    output_refs: Array.isArray(json && json.result && json.result.output_refs) ? json.result.output_refs : [],
+    provider_contact_performed: routeSummaryForExecution.provider_calls > 0 || routeResult.provider_contact_performed === true,
+    plugin_call_performed: routeSummaryForExecution.plugin_calls > 0 || routeResult.plugin_call_performed === true,
+    api_call_performed: routeSummaryForExecution.api_calls > 0 || routeResult.api_call_performed === true,
+    image_generation_performed: routeSummaryForExecution.images > 0 || routeResult.image_generation_performed === true,
+    image_count: routeSummaryForExecution.images || Number(routeResult.image_count) || 0,
+    output_write_performed: Boolean(routeResult.output_write_performed),
+    output_refs: Array.isArray(routeResult.output_refs) ? routeResult.output_refs : [],
     secret_value_read_performed: false,
     env_file_content_read_performed: false,
     config_env_read_performed: false,
@@ -610,14 +807,26 @@ async function runSecretlessOptionAExactRouteHttpTransport(input = {}) {
     executor_call_count: 0,
     retry_performed: false,
     calls_used: {
-      provider: Boolean(json && json.result && json.result.provider_contact_performed) ? 1 : 0,
-      plugin: Boolean(json && json.result && json.result.plugin_call_performed) ? 1 : 0,
-      api: Boolean(json && json.result && json.result.api_call_performed) ? 1 : 0,
-      image: Number(json && json.result && json.result.image_count) || 0,
+      provider: routeSummaryForExecution.provider_calls || (routeResult.provider_contact_performed === true ? 1 : 0),
+      plugin: routeSummaryForExecution.plugin_calls || (routeResult.plugin_call_performed === true ? 1 : 0),
+      api: routeSummaryForExecution.api_calls || (routeResult.api_call_performed === true ? 1 : 0),
+      image: routeSummaryForExecution.images || Number(routeResult.image_count) || 0,
       route_http_request: 1
     },
     result: json,
     validation
+  };
+
+  const writeResult = writeAttempt007ReceiptAndArtifact(
+    execution,
+    validation,
+    json,
+    response ? response.status : null
+  );
+
+  return {
+    ...execution,
+    ...writeResult
   };
 }
 

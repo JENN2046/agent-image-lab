@@ -1,3 +1,31 @@
+## Current Run State - Secretless Serum Attempt 007 Review Fix 2026-06-03
+
+```text
+phase: secretless_serum_attempt_007_review_fix_20260603
+status: completed_validated_local_review_fix_no_execution
+mode: Green local review fix; no live request
+activation_package_id_prepared: AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-007
+route_http_origin_required: http://127.0.0.1:6005
+route_http_method: POST
+route_http_path: /internal/ai-image-agents/execute/serum-bottle-secretless
+binding_packet_ref: reports/runtime_to_review_v1/secretless_option_a_exact_binding_packet_draft_20260603_attempt_007.json
+activation_preflight_ref: reports/runtime_to_review_v1/secretless_serum_live_probe_activation_preflight_20260603_attempt_007.json
+vcptoolbox_required_commit: 9e3817320f36d3c5735d476a238a2251cbf50b32
+runner_ref: scripts/run_runtime_to_review_v1_secretless_option_a_callable_runner.js
+validator_ref: scripts/validate_runtime_to_review_v1_secretless_serum_live_probe_receipt_attempt_007.js
+receipt_ref_future: reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_007.json
+artifact_record_ref_future: reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_007.json
+current_permission: cannot_run_live_probe_from_review_fix_alone
+can_run_route_http_now: false
+can_run_live_probe_now: false
+result: Review findings were fixed locally and validated: VCPToolBox exact activation/binding enforcement is now the required baseline, and Agent Image Lab has an exact-path receipt/artifact writer for future attempt-007 execution.
+latest_validation: node --check runner and attempt-007 validator passed; attempt-007 pending-safe validator passed; callable runner validator passed; validation manifest passed.
+boundary_checks: route_http_request_performed=false; live_probe_performed=false; provider_contact_performed=false; plugin_call_performed=false; api_call_performed=false; image_generation_performed=false; output_write_performed=false; secret_value_read_performed=false; env_file_content_read_performed=false; config_env_read_performed=false; authorization_header_constructed_by_agent_image_lab=false; push_tag_release_deploy_performed=false.
+next_safe_task: validate and exact-file commit this review fix; then require a new exact activation before attempt-007 live POST.
+```
+
+---
+
 ## Current Run State - Secretless Serum Attempt 007 Runner Refresh 2026-06-03
 
 ```text

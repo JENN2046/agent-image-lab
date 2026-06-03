@@ -1,3 +1,19 @@
+- [x] ID: secretless_serum_attempt_007_review_fix_20260603
+      Lane: Green local review fix.
+      Status: completed_validated_local_review_fix_no_execution.
+      Goal: Close review findings before attempt-007 by requiring exact activation/binding on the VCPToolBox internal route and adding exact-path receipt/artifact writing in the Agent Image Lab runner.
+      VCPToolBox required commit: `9e3817320f36d3c5735d476a238a2251cbf50b32`.
+      Binding packet: `reports/runtime_to_review_v1/secretless_option_a_exact_binding_packet_draft_20260603_attempt_007.json`.
+      Activation preflight: `reports/runtime_to_review_v1/secretless_serum_live_probe_activation_preflight_20260603_attempt_007.json`.
+      Runner: `scripts/run_runtime_to_review_v1_secretless_option_a_callable_runner.js`.
+      Validator: `scripts/validate_runtime_to_review_v1_secretless_serum_live_probe_receipt_attempt_007.js`.
+      Future receipt: `reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_007.json`.
+      Future artifact record: `reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_007.json`.
+      Boundary: no route HTTP/live probe/provider/plugin/API/image/output; no secret/env/config read; no Authorization header construction; no push/tag/release/deploy.
+      Validation: node --check runner and attempt-007 validator passed; attempt-007 pending-safe validator passed; callable runner validator passed; validation manifest passed.
+      Remaining gate: exact-file local commit; then receive a new exact activation before live POST.
+---
+
 - [x] ID: secretless_serum_attempt_007_runner_refresh_20260603
       Lane: Green local runner/binding/validator registration.
       Status: completed_validated_local_runner_refresh_no_execution.
