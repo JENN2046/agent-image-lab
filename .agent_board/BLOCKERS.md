@@ -1,5 +1,7 @@
 # BLOCKERS.md — Agent Image Lab
 
+Status sync 2026-06-03 attempt-011 exact-file refresh validated: VCPToolBox fixed-size native delegate baseline `76ee3f2345d8fe490f6104bd0e670a5bebb99db2` and Agent Image Lab runner/binding/preflight/validator now prepare `AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-011`; local validation passed and no attempt-011 route HTTP/live probe/provider/plugin/API/image/output/secret/env/config/Authorization header/push/tag/release/deploy occurred during this refresh. attempt-010 is consumed and must not be retried.
+
 Status sync 2026-06-03 attempt-010 exact-file refresh validated: VCPToolBox exact attempt-010 binding baseline `39275a211964986b97fdb0d81119851353592071` and Agent Image Lab runner/binding/preflight/validator now prepare `AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-010`; local validation passed and no attempt-010 route HTTP/live probe/provider/plugin/API/image/output/secret/env/config/Authorization header/push/tag/release/deploy occurred during this refresh. attempt-009 is consumed and must not be retried.
 
 Status sync 2026-06-03 attempt-008 exact-file refresh validated: VCPToolBox exact binding baseline `603bbcdfc4c43479ba2aea9dc1915945c7d64e77` and Agent Image Lab runner/binding/preflight/validator now prepare `AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-008`; local validation passed and no route HTTP/live probe/provider/plugin/API/image/output/secret/env/config/Authorization header/push/tag/release/deploy occurred during this refresh.

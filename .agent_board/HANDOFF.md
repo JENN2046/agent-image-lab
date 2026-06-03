@@ -1,3 +1,50 @@
+## Current Handoff Update - Secretless Serum Attempt 011 Exact-File Refresh 2026-06-03
+
+```text
+phase: secretless_serum_attempt_011_exact_file_refresh_20260603
+status: completed_validated_local_runner_refresh_no_execution
+repository: A:\agent-image-lab\agent-image-lab-v0.2
+branch: codex/secretless-serum-live-channel
+activation_package_id_prepared: AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-011
+route_http_origin_required: http://127.0.0.1:6005
+route_http_path: /internal/ai-image-agents/execute/serum-bottle-secretless
+vcptoolbox_required_commit: 76ee3f2345d8fe490f6104bd0e670a5bebb99db2
+binding_packet_ref: reports/runtime_to_review_v1/secretless_option_a_exact_binding_packet_draft_20260603_attempt_011.json
+activation_preflight_ref: reports/runtime_to_review_v1/secretless_serum_live_probe_activation_preflight_20260603_attempt_011.json
+runner_ref: scripts/run_runtime_to_review_v1_secretless_option_a_callable_runner.js
+validator_ref: scripts/validate_runtime_to_review_v1_secretless_serum_live_probe_receipt_attempt_011.js
+receipt_ref_future: reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_011.json
+artifact_record_ref_future: reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_011.json
+completed:
+  - VCPToolBox native Doubao secretless delegate fixes size to 1920x1920 and strips caller size overrides
+  - VCPToolBox exact attempt-011 binding committed locally at 76ee3f2345d8fe490f6104bd0e670a5bebb99db2
+  - Agent Image Lab runner now supports --attempt-011-route-http and exact attempt-011 defaults
+  - Agent Image Lab binding packet, activation preflight, validator, package script, and validation manifest now reference attempt-011 paths
+  - attempt-010 is consumed and must not be retried
+validation_run:
+  - node --check runner and attempt-011 receipt validator: passed
+  - attempt-011 pending-safe receipt validator: passed
+  - attempt-010 full receipt validator: passed
+  - callable runner validator: passed
+  - validation manifest: passed
+  - agent board state validator: passed
+  - git diff --check: passed with CRLF normalization warnings only
+not_performed:
+  - route HTTP POST for attempt-011
+  - live probe
+  - provider contact
+  - plugin call
+  - API call
+  - image generation
+  - output write
+  - secret value or env/config content read
+  - Authorization header construction by Agent Image Lab
+  - push, tag, release, deploy
+next_safe_action: exact-file local commit this Agent Image Lab refresh; restart VCPToolBox to 76ee3f2345d8fe490f6104bd0e670a5bebb99db2 with ENABLE_AI_IMAGE_REAL_EXECUTION=true and ENABLE_NATIVE_DOUBAO_SECRETLESS_RUNTIME_DELEGATE=true; after restart, issue a new exact activation before executing attempt-011.
+```
+
+---
+
 ## Current Handoff Update - Secretless Serum Attempt 010 Exact-File Refresh 2026-06-03
 
 ```text
