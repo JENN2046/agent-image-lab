@@ -1,3 +1,29 @@
+## Checkpoint - Secretless Serum Attempt 011 Live Execution Evidence 2026-06-03
+
+```text
+phase: secretless_serum_attempt_011_live_execution_evidence_20260603
+status: completed_validated_one_live_probe_succeeded
+result: ONE_SECRETLESS_SERUM_IMAGE_GENERATED_AND_EVIDENCE_RECORDED
+summary: attempt-011 exact activation was consumed once against Agent Image Lab runner commit 6277ffaeb34a8ecbe16d9a4f1098210bf67a2ec8 and VCPToolBox commit 76ee3f2345d8fe490f6104bd0e670a5bebb99db2. The route returned one DoubaoGen image through the internal secretless delegate. Agent Image Lab copied the generated file into the planned attempt-011 output directory and recorded sha256, real mime, and dimensions in the planned receipt/artifact record.
+changed_files_current_task:
+  - reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_011.json
+  - reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_011.json
+  - runs/real_generation/runtime_to_review_v1_guarded_live_probe_serum_bottle_secretless_attempt_011/8380a822-d81a-47ea-88d3-acf6898a920a.png
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/BLOCKERS.md
+validation_completed:
+  - npm run validate:runtime-to-review-secretless-serum-live-probe-receipt-attempt-011: passed
+  - local image open/view check: passed
+boundary_checks: route HTTP POST=1; provider/plugin/API/image=1 each; retry=false; no secret/env/config read; no Authorization header construction by Agent Image Lab; no old admin-auth route; no push/tag/release/deploy.
+artifact_evidence: sha256=5eadf251184d36f9573003a108939ac32851c81a228b8d46715eb2d3e71c864d; mime=image/jpeg; dimensions=1920x1920.
+recommended_next_phase: exact-file local commit attempt-011 evidence, then fix runner so --preflight-only cannot POST even when --confirm-route-http is supplied.
+```
+
+---
+
 ## Checkpoint - Secretless Serum Attempt 011 Exact-File Refresh 2026-06-03
 
 ```text

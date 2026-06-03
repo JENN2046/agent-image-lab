@@ -1,3 +1,31 @@
+## Current Run State - Secretless Serum Attempt 011 Live Execution Evidence 2026-06-03
+
+```text
+phase: secretless_serum_attempt_011_live_execution_evidence_20260603
+status: completed_validated_one_live_probe_succeeded
+mode: Amber exact activation execution evidence; no retry
+activation_package_id_consumed: AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-011
+confirmation_phrase: RUNTIME_TO_REVIEW_V1_SECRETLESS_SERUM_BOTTLE_ONE_PROVIDER_ONE_IMAGE
+route_http_origin: http://127.0.0.1:6005
+route_http_method: POST
+route_http_path: /internal/ai-image-agents/execute/serum-bottle-secretless
+binding_packet_id: BINDING-DRAFT-SECRETLESS-OPTION-A-SERUM-20260603-011
+agent_image_lab_runner_commit: 6277ffaeb34a8ecbe16d9a4f1098210bf67a2ec8
+vcptoolbox_required_commit: 76ee3f2345d8fe490f6104bd0e670a5bebb99db2
+receipt_ref: reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_011.json
+artifact_record_ref: reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_011.json
+output_ref: runs/real_generation/runtime_to_review_v1_guarded_live_probe_serum_bottle_secretless_attempt_011/8380a822-d81a-47ea-88d3-acf6898a920a.png
+artifact_sha256: 5eadf251184d36f9573003a108939ac32851c81a228b8d46715eb2d3e71c864d
+artifact_mime: image/jpeg
+artifact_dimensions: 1920x1920
+calls_used: route_http_request=1; provider=1; plugin=1; api=1; image=1
+boundary_checks: retry_performed=false; secret_value_read_performed=false; env_file_content_read_performed=false; config_env_read_performed=false; authorization_header_constructed_by_agent_image_lab=false; old_admin_auth_route_used=false; push_tag_release_deploy_performed=false.
+latest_validation: npm run validate:runtime-to-review-secretless-serum-live-probe-receipt-attempt-011 passed after artifact evidence completion.
+next_safe_task: exact-file local commit attempt-011 receipt, artifact record, output image, and this status sync; then fix runner so --preflight-only cannot POST even when --confirm-route-http is also supplied.
+```
+
+---
+
 ## Current Run State - Secretless Serum Attempt 011 Exact-File Refresh 2026-06-03
 
 ```text

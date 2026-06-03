@@ -1,3 +1,20 @@
+- [x] ID: secretless_serum_attempt_011_live_execution_evidence_20260603
+      Lane: Amber exact activation execution evidence.
+      Status: completed_validated_one_live_probe_succeeded.
+      Goal: Execute one secretless serum bottle live probe through the internal route and record planned attempt-011 evidence.
+      Activation consumed: `AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-011`.
+      Agent Image Lab commit: `6277ffaeb34a8ecbe16d9a4f1098210bf67a2ec8`.
+      VCPToolBox commit: `76ee3f2345d8fe490f6104bd0e670a5bebb99db2`.
+      Receipt: `reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_011.json`.
+      Artifact record: `reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_011.json`.
+      Output: `runs/real_generation/runtime_to_review_v1_guarded_live_probe_serum_bottle_secretless_attempt_011/8380a822-d81a-47ea-88d3-acf6898a920a.png`.
+      Calls used: route_http_request=1; provider=1; plugin=1; api=1; image=1; retry=false.
+      Artifact evidence: sha256=5eadf251184d36f9573003a108939ac32851c81a228b8d46715eb2d3e71c864d; mime=image/jpeg; dimensions=1920x1920.
+      Boundary: no secret/env/config read; no Authorization header construction; no old admin-auth route; no push/tag/release/deploy.
+      Validation: attempt-011 receipt/artifact validator passed; local image view check passed.
+      Remaining gate: exact-file local commit this evidence; then fix runner --preflight-only guard before any future activation.
+---
+
 - [x] ID: secretless_serum_attempt_011_exact_file_refresh_20260603
       Lane: Green local runner/binding/preflight/validator registration.
       Status: completed_validated_local_runner_refresh_no_execution.

@@ -1,3 +1,38 @@
+## Current Handoff Update - Secretless Serum Attempt 011 Live Execution Evidence 2026-06-03
+
+```text
+phase: secretless_serum_attempt_011_live_execution_evidence_20260603
+status: completed_validated_one_live_probe_succeeded
+repository: A:\agent-image-lab\agent-image-lab-v0.2
+branch: codex/secretless-serum-live-channel
+activation_package_id_consumed: AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-011
+agent_image_lab_runner_commit: 6277ffaeb34a8ecbe16d9a4f1098210bf67a2ec8
+vcptoolbox_required_commit: 76ee3f2345d8fe490f6104bd0e670a5bebb99db2
+route_http: POST http://127.0.0.1:6005/internal/ai-image-agents/execute/serum-bottle-secretless
+receipt_ref: reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_011.json
+artifact_record_ref: reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_011.json
+output_ref: runs/real_generation/runtime_to_review_v1_guarded_live_probe_serum_bottle_secretless_attempt_011/8380a822-d81a-47ea-88d3-acf6898a920a.png
+completed:
+  - exactly one route HTTP POST was sent for attempt-011
+  - provider/plugin/API/image counts are exactly one each
+  - generated image was copied into the planned attempt-011 output directory
+  - receipt and artifact record include sha256, mime, and dimensions evidence
+validation_run:
+  - npm run validate:runtime-to-review-secretless-serum-live-probe-receipt-attempt-011: passed
+  - local image view check: passed
+not_performed:
+  - retry
+  - second route HTTP POST
+  - secret value or env/config content read
+  - Authorization header construction by Agent Image Lab
+  - old admin-auth route
+  - push, tag, release, deploy
+risk_note: runner allowed route HTTP when --preflight-only and --confirm-route-http were supplied together; attempt-011 was validly consumed once, but the next local task must harden --preflight-only so it cannot POST.
+next_safe_action: exact-file local commit attempt-011 evidence, then fix runner --preflight-only guard and validate before any future activation.
+```
+
+---
+
 ## Current Handoff Update - Secretless Serum Attempt 011 Exact-File Refresh 2026-06-03
 
 ```text
