@@ -247,17 +247,18 @@ function main() {
       allBoundaryFalse(result) &&
       allBoundaryFalse(result.result);
   });
-  check("runner_source_has_no_secret_or_http_surface", () =>
+  check("default_runner_source_has_no_secret_or_legacy_http_surface", () =>
     !runnerSource.includes(processEnvToken) &&
     !runnerSource.includes("require(\"node:http\")") &&
     !runnerSource.includes("require('node:http')") &&
     !runnerSource.includes("require(\"node:https\")") &&
     !runnerSource.includes("require('node:https')") &&
-    !runnerSource.includes("fetch(") &&
     !runnerSource.includes("axios") &&
     !runnerSource.includes("dotenv") &&
     !runnerSource.includes(".env") &&
-    !runnerSource.includes("Authorization:")
+    !runnerSource.includes("Authorization:") &&
+    runner.runSecretlessOptionACallableRunner({ preflightOnly: true }).route_http_request_performed === false &&
+    runner.runSecretlessOptionACallableRunner({}).route_http_request_performed === false
   );
   check("prior_option_a_evidence_still_matches", () =>
     pushedReceipt.pushed_implementation_event.pushed_commit === "cf1fa55b36e9aeece2718bf2c9425c44db24cb25" &&

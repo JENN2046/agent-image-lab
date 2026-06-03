@@ -1,3 +1,62 @@
+- [x] ID: secretless_serum_attempt_006_runner_refresh_20260603
+      Lane: Green local runner/validator registration.
+      Status: completed_validated_local_runner_refresh_no_execution.
+      Goal: Register AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-006 in the local runner with the internal path and VCPToolBox d0d5c104 baseline before any future exact live attempt.
+      Runner: `scripts/run_runtime_to_review_v1_secretless_option_a_callable_runner.js`.
+      Validator: `scripts/validate_runtime_to_review_v1_secretless_serum_live_probe_receipt_attempt_006.js`.
+      Future receipt: `reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_006.json`.
+      Future artifact record: `reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_006.json`.
+      Boundary: no route HTTP/live probe/provider/plugin/API/image/output; no secret/env/config read; no Authorization header construction; no push/tag/release/deploy.
+      Validation: node --check runner and attempt-006 validator passed; attempt-006 pending-safe validator passed; callable runner validator passed; validation manifest passed; recommender passed with all files matched; agent board state passed; npm run validate:active passed; git diff --check passed with CRLF normalization warnings only.
+      Remaining gate: commit exact files; then receive a new exact activation before live POST.
+---
+
+- [x] ID: secretless_serum_live_probe_exact_activation_attempt_005_20260603
+      Lane: Amber exact live probe activation attempt.
+      Status: attempted_failed_closed_route_http_response_received_not_ok.
+      Goal: Run one secretless serum bottle live probe using AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-005 against internal routeHttpOrigin `http://127.0.0.1:6005`.
+      Receipt: `reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_005.json`.
+      Artifact record: `reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_005.json`.
+      Result: one POST was performed and VCPToolBox returned fail-closed status `serum_bottle_secretless_plugin_manager_missing`; no provider/plugin/API/image/output occurred.
+      Boundary: no secret/env/config read; no Authorization header construction by Agent Image Lab; no retry; no push/tag/release/deploy.
+      Remaining gate: do not retry attempt-005; clarify or enable VCPToolBox internal secretless runtime injection before any new exact activation.
+---
+
+- [x] ID: secretless_serum_live_probe_exact_activation_attempt_004_20260603
+      Lane: Amber exact live probe activation attempt.
+      Status: attempted_failed_closed_route_http_unauthorized.
+      Goal: Run one secretless serum bottle live probe using AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-004 against routeHttpOrigin `http://127.0.0.1:6005`.
+      Receipt: `reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_004.json`.
+      Artifact record: `reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_004.json`.
+      Result: one POST was performed and returned `Unauthorized`; no provider/plugin/API/image/output occurred.
+      Boundary: no secret/env/config read; no Authorization header construction by Agent Image Lab; no retry; no push/tag/release/deploy.
+      Remaining gate: clarify VCPToolBox secretless route authorization behavior before any new exact activation.
+---
+
+- [x] ID: secretless_option_a_exact_route_http_transport_activation_preflight_attempt_003_20260603
+      Lane: Green local exact route HTTP transport and inactive activation/preflight.
+      Status: completed_validated_local_transport_and_activation_preflight_no_execution.
+      Goal: Authorize/preflight one exact route HTTP/callable transport without guessing endpoint/method, then prepare the next exact activation package shape.
+      Transport preflight: `reports/runtime_to_review_v1/secretless_option_a_exact_route_http_transport_preflight_20260603_attempt_003.json`.
+      Activation preflight: `reports/runtime_to_review_v1/secretless_serum_live_probe_activation_preflight_20260603_attempt_003.json`.
+      Runner: `scripts/run_runtime_to_review_v1_secretless_option_a_callable_runner.js`.
+      Exact route: `POST /admin_api/ai-image-agents/execute/serum-bottle-secretless`, sourced from VCPToolBox `bcb8219a0990f9828df6789d62ed35e14293461d`.
+      Current state: current_permission=cannot_run_live_probe_now; can_execute_now=false; can_run_route_http_now=false; can_run_live_probe_now=false; `routeHttpOrigin` must be supplied by a new exact activation and must not be guessed.
+      Boundary: no route HTTP/live probe/provider/plugin/API/image/output; no secret/env/config read; no Authorization header construction; no stage/commit/push/tag/release/deploy.
+      Remaining gate: owner must provide new exact activation `AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-003` with a concrete origin-only `routeHttpOrigin`.
+---
+
+- [x] ID: secretless_serum_live_probe_exact_activation_attempt_002_20260603
+      Lane: Amber exact live probe activation attempt.
+      Status: attempted_failed_closed_before_route_http_request_validated.
+      Goal: Run one secretless serum bottle live probe using AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-002 and binding packet BINDING-DRAFT-SECRETLESS-OPTION-A-SERUM-20260603-002.
+      Receipt: `reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_002.json`.
+      Artifact record: `reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_002.json`.
+      Result: failed_closed_before_route_http_request; the local callable runner input validated but non-preflight route HTTP remains not authorized/implemented by the current runner.
+      Boundary: no route HTTP/live probe/provider/plugin/API/image/output; no secret/env/config read; no Authorization header construction; no retry; no VCPToolBox modification; no push/tag/release/deploy.
+      Remaining gate: do not retry from this consumed activation; implement or authorize exact route HTTP/callable transport without guessing, then require a new exact activation.
+---
+
 - [x] ID: secretless_option_a_exact_binding_packet_refresh_attempt_002_20260603
       Lane: Green local exact binding packet refresh plus validator.
       Status: completed_validated_local_binding_packet_refresh_no_execution.
