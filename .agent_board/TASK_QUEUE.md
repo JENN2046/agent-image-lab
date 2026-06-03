@@ -1,3 +1,15 @@
+- [x] ID: secretless_serum_attempt_011_quality_channel_review_20260603
+      Lane: Green local quality/channel review.
+      Status: completed_validated_local_review_no_execution.
+      Goal: Decide whether attempt-011 proves the secretless live channel enough to upgrade it, and prepare attempt-012 prompt improvement package if useful.
+      Review: `reports/runtime_to_review_v1/secretless_serum_attempt_011_quality_channel_review_20260603.json`.
+      Attempt-012 package: `reports/runtime_to_review_v1/secretless_serum_attempt_012_prompt_quality_package_20260603.json`.
+      Decision: channel upgrades to controlled production candidate channel; attempt-011 image remains patch-first review evidence and is not a production candidate.
+      Boundary: no route HTTP/live probe/provider/plugin/API/image/output; no secret/env/config read; no Authorization header construction; no production candidate write; no accepted samples write; no push/tag/release/deploy.
+      Validation: node --check review validator passed; review package validator passed; validation manifest passed; agent board state passed; git diff --check passed with CRLF normalization warnings only.
+      Remaining gate: exact-file local commit; future attempt-012 execution requires VCPToolBox exact binding refresh, AIL attempt-012 refresh, and new exact activation.
+---
+
 - [x] ID: secretless_route_http_preflight_guard_fix_20260603
       Lane: Green local runner safety hardening.
       Status: completed_validated_local_guard_fix.
