@@ -1,3 +1,36 @@
+## Current Handoff Update - Secretless Option A VCPToolBox Router Binding Preflight 2026-06-03
+
+```text
+phase: secretless_option_a_vcptoolbox_router_binding_preflight_20260603
+status: completed_validated_local_router_binding_preflight_no_execution
+mode: Green local Agent Image Lab preflight plus validator/status sync only; no VCPToolBox read/write and no route HTTP/runtime execution
+repository: A:\agent-image-lab\agent-image-lab-v0.2
+branch: master
+preflight_ref: reports/runtime_to_review_v1/secretless_option_a_vcptoolbox_router_binding_preflight_20260603.json
+source_receipt_ref: reports/runtime_to_review_v1/secretless_option_a_vcptoolbox_binding_readonly_verification_receipt_20260603.json
+validator_ref: scripts/validate_runtime_to_review_v1_secretless_option_a_vcptoolbox_router_binding_preflight.js
+package_script: validate:runtime-to-review-secretless-option-a-vcptoolbox-router-binding-preflight
+manifest_id: runtime_to_review_secretless_option_a_vcptoolbox_router_binding_preflight
+current_blocker: BLOCKER-20260603-01 narrowed_by_router_binding_preflight_future_exact_external_patch_required
+current_permission: cannot_run_live_probe_now
+can_run_route_http_now: false
+can_run_live_probe_now: false
+current_route_selection: secretless_option_a_router_binding_preflight_only
+router_binding_status: preflight_only_no_vcptoolbox_implementation_authorized_by_this_record
+candidate_future_exact_file_allowlist: Server.js; server.js
+future_external_repo_modification_authorized_by_this_record: false
+future_router_binding_implementation_authorized_by_this_record: false
+clean_main_baseline_required_before_external_patch: true
+new_exact_activation_required_before_any_live_probe: true
+boundary: no VCPToolBox read/write; no route HTTP; no live probe; no runtime/provider/plugin/API/image/output; no secret/env/config read; no Authorization header construction; no DailyNote/VCP memory; no stage/commit/push/tag/release/deploy.
+validation_completed: node --check router binding preflight validator passed; router binding preflight validator passed; validation manifest passed; agent board state passed; git diff --check passed with line-ending warnings only; npm run validate:active passed.
+next_safe_action: review this local preflight; any VCPToolBox router binding implementation requires separate exact authorization, clean-main verification, and exact changed-file proof before any route HTTP/live probe.
+```
+
+Historical entries below are retained for audit and may contain consumed or superseded next actions.
+
+---
+
 ## Current Handoff Update - Secretless Option A VCPToolBox Binding Read-only Verification 2026-06-03
 
 ```text

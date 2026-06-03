@@ -1,3 +1,62 @@
+## Checkpoint - Secretless Option A VCPToolBox Router Binding Preflight 2026-06-03
+
+```text
+phase: secretless_option_a_vcptoolbox_router_binding_preflight_20260603
+status: completed_validated_local_router_binding_preflight_no_execution
+result: COMPLETED_VALIDATED_LOCAL_ROUTER_BINDING_PREFLIGHT_NO_EXECUTION
+mode: Green local Agent Image Lab preflight plus validator/status sync
+summary: Drafts the local Agent Image Lab preflight for a future VCPToolBox Option A router-binding step. This checkpoint uses the completed binding readonly receipt as source evidence and does not read or modify VCPToolBox, trigger route HTTP, run a live probe, contact provider/plugin/API, generate images, write output, read secret/env/config, or stage/commit/push.
+changed_files_current_task:
+  - reports/runtime_to_review_v1/secretless_option_a_vcptoolbox_router_binding_preflight_20260603.json
+  - scripts/validate_runtime_to_review_v1_secretless_option_a_vcptoolbox_router_binding_preflight.js
+  - package.json
+  - scripts/validation_manifest.json
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/BLOCKERS.md
+router_binding_boundary:
+  - current_permission: cannot_run_live_probe_now
+  - can_run_route_http_now: false
+  - can_run_live_probe_now: false
+  - current_route_selection: secretless_option_a_router_binding_preflight_only
+  - source_receipt_ref: reports/runtime_to_review_v1/secretless_option_a_vcptoolbox_binding_readonly_verification_receipt_20260603.json
+  - source_receipt_result: blocked_not_bound_in_router_refs
+  - candidate_future_exact_file_allowlist: Server.js; server.js
+  - future_external_repo_modification_authorized_by_this_record: false
+  - future_router_binding_implementation_authorized_by_this_record: false
+  - clean_main_baseline_required_before_external_patch: true
+boundary_checks:
+  - external_vcptoolbox_read_performed_by_this_task: false
+  - external_vcptoolbox_modified_by_this_task: false
+  - route_http_request_performed: false
+  - live_probe_performed: false
+  - runtime_execution_performed: false
+  - provider_contact_performed: false
+  - plugin_call_performed: false
+  - api_call_performed: false
+  - image_generation_performed: false
+  - output_write_performed: false
+  - secret_value_read_performed: false
+  - env_file_content_read_performed: false
+  - config_env_read_performed: false
+  - authorization_header_constructed_by_agent_image_lab: false
+  - DailyNote_write_performed: false
+  - VCP_memory_write_performed: false
+  - staging_commit_push_tag_release_deploy_performed: false
+validation_completed:
+  - node --check scripts\validate_runtime_to_review_v1_secretless_option_a_vcptoolbox_router_binding_preflight.js: passed
+  - npm run validate:runtime-to-review-secretless-option-a-vcptoolbox-router-binding-preflight: passed
+  - node scripts\validate_validation_manifest.js: passed
+  - node scripts\validate_agent_board_state.js: passed
+  - git diff --check: passed with line-ending warnings only
+  - npm run validate:active: passed
+recommended_next_phase: review/commit this Agent Image Lab preflight if accepted; separately authorize exact VCPToolBox router binding implementation from clean main before any route HTTP/live probe.
+```
+
+---
+
 ## Checkpoint - Secretless Option A VCPToolBox Binding Read-only Verification 2026-06-03
 
 ```text
