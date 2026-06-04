@@ -2712,3 +2712,26 @@ boundary_checks_addendum:
   image_generation_performed: false
 recommended_next: commit exact activation issuance, then run final gate and allow exactly one POST only if every final-gate check passes.
 ```
+
+### Checkpoint Addendum - Attempt 015 Consumed Failed Closed 2026-06-04
+
+```text
+status: completed_validated_consumed_failed_closed_no_retry
+result: ATTEMPT_015_ONE_POST_CONSUMED_FAILED_CLOSED_BEFORE_PROVIDER_CALL
+summary: The one-shot exact activation was consumed by one POST. VCPToolBox returned exact activation binding mismatch against attempt-013 runtime binding; no provider/plugin/API/image/output occurred. Lock was sealed consumed with retry forbidden.
+evidence_refs:
+  - reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_015.json
+  - reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_015.json
+validation_run_addendum:
+  - node scripts/verify_runtime_to_review_v1_secretless_serum_attempt_lock_binding.js: passed consumed state
+  - npm run validate:runtime-to-review-secretless-serum-attempt-015-activation-refresh: passed
+  - npm run validate:runtime-to-review-secretless-serum-attempt-015-exact-activation-issued: passed
+  - runner rerun with exact phrase: failed closed at lock authorization boundary with route_http_request_performed=false
+boundary_checks_addendum:
+  route_http_request_performed: 1_consumed
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+recommended_next: commit consumed evidence; do not retry attempt-015; require VCPToolBox process reload to current binding before any future activation.
+```

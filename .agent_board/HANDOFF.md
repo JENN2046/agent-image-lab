@@ -2517,3 +2517,29 @@ not_performed_addendum:
   - no push/tag/release/deploy
 next_safe_action: exact-file commit activation issuance, then run final gate; if final gate passes, exactly one POST is authorized.
 ```
+
+### Handoff Addendum - Attempt 015 Consumed Failed Closed 2026-06-04
+
+```text
+status: completed_validated_consumed_failed_closed_no_retry
+completed_addendum:
+  - Consumed the one-shot attempt-015 exact activation with exactly one POST.
+  - Wrote receipt and artifact record evidence for failed-closed response.
+  - Sealed the lock as consumed and non-retryable.
+observed_failure:
+  - VCPToolBox runtime responded serum_bottle_secretless_exact_activation_binding_mismatch.
+  - Runtime expected attempt-013 fields while AIL sent attempt-015 fields.
+  - Disk/source verifier still proves current VCPToolBox route/server source is attempt-015, so the likely gap is a stale running VCPToolBox process not reloaded to cd25e1485dd1b31f84fe5ad0d09c90ab1c1d0143.
+validation_addendum:
+  - consumed-state source verifier passed.
+  - exact activation issued validator passed.
+  - activation refresh validator passed.
+  - runner rerun failed closed before listener/POST due consumed lock authorization boundary.
+not_performed_addendum:
+  - no provider/plugin/API/image generation
+  - no output write
+  - no retry
+  - no secret/env/config value read
+  - no push/tag/release/deploy
+next_safe_action: exact-file commit consumed evidence; future attempt must be attempt-016 after VCPToolBox process reload/current-binding runtime verification.
+```

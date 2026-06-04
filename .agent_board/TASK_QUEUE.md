@@ -979,12 +979,15 @@ done:
     evidence: activation preflight and binding packet are bound to the single lock and VCPToolBox current-attempt binding commit cd25e1485dd1b31f84fe5ad0d09c90ab1c1d0143; activation refresh validator passed
   - task: issue attempt-015 exact activation
     evidence: lock authorization boundary flipped to one-shot active; exact activation issued validator passed; no POST performed yet
+  - task: consume attempt-015 exact activation
+    evidence: one POST consumed; VCPToolBox returned attempt-013 runtime binding mismatch; provider/plugin/API/image all false; lock sealed consumed no-retry
 in_progress:
-  - task: run final gate and consume exactly one POST only if all checks pass
-blocked:
   - none
+blocked:
+  - task: future live attempt
+    reason: VCPToolBox running process appears stale at attempt-013 despite disk source binding verifier proving attempt-015; reload/restart current VCPToolBox binding before attempt-016.
 remaining:
-  - exact-file commit activation issuance
-  - run final gate; if it passes, allow one POST and then record receipt/artifact evidence
+  - exact-file commit consumed failed-closed evidence
+  - do not retry attempt-015
   - push/tag/release/deploy remain unauthorized
 ```

@@ -1970,3 +1970,17 @@ validation: npm run validate:runtime-to-review-secretless-serum-attempt-015-exac
 boundary_checks: route_http_request_performed=false; provider_contact_performed=false; plugin_call_performed=false; api_call_performed=false; image_generation_performed=false; output_write_performed=false.
 next_safe_task: exact-file commit activation issuance, then run runner final gate; if listener/surface/source binding/pending outputs pass, one POST is authorized.
 ```
+
+### Attempt 015 Exact Activation Consumed Failed Closed - 2026-06-04
+
+```text
+status: completed_validated_consumed_failed_closed_no_retry
+activation_package_id_consumed: AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-015
+receipt_ref: reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_015.json
+artifact_record_ref: reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_015.json
+result: One final-gated POST was performed. VCPToolBox runtime returned serum_bottle_secretless_exact_activation_binding_mismatch because the live process expected attempt-013 while current source binding verifier proved disk route/server source is attempt-015 at commit cd25e1485dd1b31f84fe5ad0d09c90ab1c1d0143.
+lock_status: exact_activation_consumed_failed_closed_before_provider_call; can_execute_now=false; route_http_allowed_by_this_lock=false; activation_consumed=true; route_http_requests_used=1; retry_allowed_after_consumption=false.
+validation: verifier passed in consumed state; activation refresh validator passed; exact activation issued validator passed; rerunning runner failed closed at lock authorization boundary with route_http_request_performed=false.
+boundary_checks: route_http_request_performed=1_consumed; provider_contact_performed=false; plugin_call_performed=false; api_call_performed=false; image_generation_performed=false; output_write_performed=false; retry_performed=false.
+next_safe_task: commit consumed evidence; do not retry attempt-015. Restart/reload VCPToolBox to current binding before any future attempt-016 activation.
+```

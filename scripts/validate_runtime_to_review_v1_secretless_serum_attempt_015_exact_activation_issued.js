@@ -62,18 +62,36 @@ const manifest = readJson("scripts/validation_manifest.json");
 const verifier = verifyAttemptLockBinding({ lockPath });
 const ailHead = gitHead(root);
 
-check("lock_is_attempt_015_active_one_shot", () =>
-  lock.status === "exact_activation_issued_one_shot_active" &&
-  lock.attempt === "015" &&
-  lock.activation_id === activation.activation_package_id &&
-  lock.authorization_boundary.can_execute_now === true &&
-  lock.authorization_boundary.route_http_allowed_by_this_lock === true &&
-  lock.authorization_boundary.separate_exact_activation_required === false &&
-  lock.authorization_boundary.max_route_http_requests === 1 &&
-  lock.authorization_boundary.activation_consumed === false
-);
+const consumed = lock.authorization_boundary?.activation_consumed === true;
+const receiptExists = fs.existsSync(repoPath(lock.receipt_ref));
+const artifactExists = fs.existsSync(repoPath(lock.artifact_record_ref));
+const receipt = receiptExists ? readJson(lock.receipt_ref) : null;
+const artifact = artifactExists ? readJson(lock.artifact_record_ref) : null;
+
+check("lock_is_attempt_015_active_or_consumed_one_shot", () => {
+  const activeOneShot =
+    lock.status === "exact_activation_issued_one_shot_active" &&
+    lock.authorization_boundary.can_execute_now === true &&
+    lock.authorization_boundary.route_http_allowed_by_this_lock === true &&
+    lock.authorization_boundary.separate_exact_activation_required === false &&
+    lock.authorization_boundary.activation_consumed === false;
+  const consumedOneShot =
+    lock.status === "exact_activation_consumed_failed_closed_before_provider_call" &&
+    lock.authorization_boundary.can_execute_now === false &&
+    lock.authorization_boundary.route_http_allowed_by_this_lock === false &&
+    lock.authorization_boundary.separate_exact_activation_required === true &&
+    lock.authorization_boundary.activation_consumed === true &&
+    lock.authorization_boundary.route_http_requests_used === 1 &&
+    lock.authorization_boundary.retry_allowed_after_consumption === false;
+  return lock.attempt === "015" &&
+    lock.activation_id === activation.activation_package_id &&
+    lock.authorization_boundary.max_route_http_requests === 1 &&
+    (activeOneShot || consumedOneShot);
+});
 check("lock_hash_matches_activation_record", () =>
-  sha256File(lockPath) === activation.lock_sha256_after_activation
+  consumed
+    ? sha256File(lockPath) === activation.lock_sha256_after_consumption
+    : sha256File(lockPath) === activation.lock_sha256_after_activation
 );
 check("lock_prompt_hash_matches", () => lock.prompt_sha256 === sha256Text(lock.prompt || ""));
 check("source_binding_verified_current_attempt", () =>
@@ -101,11 +119,28 @@ check("route_scope_matches_lock", () =>
   activation.scope.max_images === lock.budget.max_images &&
   activation.scope.retry_allowed === lock.budget.retry_allowed
 );
-check("pending_outputs_are_empty_before_post", () =>
-  pathPending(lock.receipt_ref) &&
-  pathPending(lock.artifact_record_ref) &&
-  pathPending(lock.output_directory_ref)
-);
+check("pending_outputs_or_consumed_evidence_are_consistent", () => {
+  if (!consumed) {
+    return pathPending(lock.receipt_ref) &&
+      pathPending(lock.artifact_record_ref) &&
+      pathPending(lock.output_directory_ref);
+  }
+  return receipt &&
+    artifact &&
+    receipt.activation_attempt_consumed === true &&
+    receipt.route_http_request_performed === true &&
+    receipt.calls_used.route_http_request === 1 &&
+    receipt.provider_contact_performed === false &&
+    receipt.plugin_call_performed === false &&
+    receipt.api_call_performed === false &&
+    receipt.image_generation_performed === false &&
+    receipt.image_count === 0 &&
+    artifact.artifact_created === false &&
+    artifact.image_generation_performed === false &&
+    activation.consumption.activation_consumed === true &&
+    activation.consumption.route_http_requests_used === 1 &&
+    activation.consumption.retry_allowed_after_consumption === false;
+});
 check("forbidden_secret_and_remote_boundaries_stay_false", () =>
   activation.forbidden.secret_value_read_allowed === false &&
   activation.forbidden.authorization_header_constructed_by_agent_image_lab === false &&
@@ -139,7 +174,8 @@ process.stdout.write(`${JSON.stringify({
   lock_sha256: sha256File(lockPath),
   can_execute_now: lock.authorization_boundary.can_execute_now,
   route_http_allowed_by_this_lock: lock.authorization_boundary.route_http_allowed_by_this_lock,
-  route_http_request_performed: false,
+  activation_consumed: consumed,
+  route_http_request_performed: consumed ? true : false,
   provider_contact_performed: false,
   plugin_call_performed: false,
   api_call_performed: false,

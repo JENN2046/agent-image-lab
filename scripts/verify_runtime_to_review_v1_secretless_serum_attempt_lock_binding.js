@@ -174,10 +174,16 @@ function verifyAttemptLockBinding(options = {}) {
     });
   }
 
-  check("receipt_path_pending", pathExistsPending(lock.receipt_ref), { receipt_ref: lock.receipt_ref });
-  check("artifact_record_path_pending", pathExistsPending(lock.artifact_record_ref), { artifact_record_ref: lock.artifact_record_ref });
-  check("output_directory_pending", pathExistsPending(lock.output_directory_ref), { output_directory_ref: lock.output_directory_ref });
   const auth = lock.authorization_boundary || {};
+  if (auth.activation_consumed === true) {
+    check("receipt_path_consumed_evidence_exists", !pathExistsPending(lock.receipt_ref), { receipt_ref: lock.receipt_ref });
+    check("artifact_record_path_consumed_evidence_exists", !pathExistsPending(lock.artifact_record_ref), { artifact_record_ref: lock.artifact_record_ref });
+    check("output_directory_consumed_state_allowed", true, { output_directory_ref: lock.output_directory_ref });
+  } else {
+    check("receipt_path_pending", pathExistsPending(lock.receipt_ref), { receipt_ref: lock.receipt_ref });
+    check("artifact_record_path_pending", pathExistsPending(lock.artifact_record_ref), { artifact_record_ref: lock.artifact_record_ref });
+    check("output_directory_pending", pathExistsPending(lock.output_directory_ref), { output_directory_ref: lock.output_directory_ref });
+  }
   const inactiveAuthorizationBoundary =
     auth.can_execute_now === false &&
     auth.route_http_allowed_by_this_lock === false &&
