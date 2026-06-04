@@ -2755,3 +2755,29 @@ boundary_checks_addendum:
   image_generation_performed: false
 recommended_next: commit attempt-016 prepare; do not POST until a separate exact activation flips the attempt-016 lock.
 ```
+
+### Checkpoint Addendum - Attempt 016 Exact Activation Consumed 2026-06-04
+
+```text
+status: completed_validated_consumed_failed_closed_no_retry_pending_commit
+result: ATTEMPT_016_ONE_POST_CONSUMED_FAILED_CLOSED_BEFORE_PROVIDER_CALL
+summary: User issued separate exact activation for attempt-016. The lock was flipped to one-shot active, final gate passed, and exactly one POST was sent. VCPToolBox failed closed at serum_bottle_secretless_real_execution_flag_disabled before provider/plugin/API/image execution. The lock is now consumed and non-retryable.
+evidence_refs:
+  - reports/runtime_to_review_v1/secretless_serum_exact_activation_issued_20260604_attempt_016.json
+  - reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_016.json
+  - reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_016.json
+validation_run_addendum:
+  - node --check attempt-016 exact activation validator: passed
+  - npm run validate:runtime-to-review-secretless-serum-attempt-016-exact-activation-issued: passed before POST
+  - source binding verifier: passed before POST
+  - runner preflight-only: passed with 0 route HTTP before POST
+boundary_checks_addendum:
+  route_http_request_performed: 1_consumed
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  output_write_performed: false
+  retry_performed: false
+recommended_next: validate consumed state and exact-file commit; do not retry attempt-016.
+```

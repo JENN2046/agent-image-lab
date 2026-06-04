@@ -1012,3 +1012,23 @@ remaining:
   - exact-file commit attempt-016 prepare
   - separate exact activation required before any attempt-016 POST
 ```
+
+## Queue - Secretless Serum Attempt 016 Exact Activation 2026-06-04
+
+```text
+done:
+  - task: issue attempt-016 exact activation
+    evidence: lock flipped to one-shot active; activation-issued record created.
+  - task: run final gate and consume one route POST
+    evidence: route_http_request=1; VCPToolBox returned serum_bottle_secretless_real_execution_flag_disabled.
+  - task: seal attempt-016 lock consumed/no-retry
+    evidence: lock authorization boundary now can_execute_now=false, activation_consumed=true, route_http_requests_used=1, retry_allowed_after_consumption=false.
+in_progress:
+  - task: validate consumed state and exact-file local commit
+blocked:
+  - none
+remaining:
+  - rerun guard must fail closed with 0 POST
+  - exact-file commit attempt-016 activation/evidence
+  - do not retry attempt-016
+```

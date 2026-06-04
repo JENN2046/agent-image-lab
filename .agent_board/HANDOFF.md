@@ -2566,3 +2566,29 @@ not_performed_addendum:
   - no push/tag/release/deploy
 next_safe_action: exact-file commit AIL attempt-016 prepare; future live POST requires separate exact activation.
 ```
+
+### Handoff Addendum - Attempt 016 Exact Activation Consumed 2026-06-04
+
+```text
+status: completed_validated_consumed_failed_closed_no_retry_pending_commit
+completed_addendum:
+  - Flipped reports/runtime_to_review_v1/secretless_serum_attempt_016.lock.json to one-shot active for the separate exact activation.
+  - Ran final gate; source binding, AIL HEAD, VCPToolBox HEAD, listener/surface, lock hash, and pending output refs passed before POST.
+  - Consumed exactly one POST.
+  - Wrote receipt and artifact evidence.
+  - Sealed the lock consumed with retry forbidden.
+observed_failure:
+  - VCPToolBox returned serum_bottle_secretless_real_execution_flag_disabled.
+  - Provider/plugin/API/image all remained false/0, and no artifact/output was created.
+validation_addendum:
+  - attempt-016 exact activation issued validator passed before POST.
+  - attempt-016 source binding verifier passed before POST.
+  - attempt-016 preflight-only runner passed with 0 route HTTP before POST.
+not_performed_addendum:
+  - no provider/plugin/API/image generation
+  - no output write
+  - no retry
+  - no secret/env/config value read
+  - no push/tag/release/deploy
+next_safe_action: validate consumed state, verify rerun fails closed with 0 POST, then exact-file local commit.
+```

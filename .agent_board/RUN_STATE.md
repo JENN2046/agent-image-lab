@@ -38,6 +38,30 @@ next_safe_task: run prepare with exact external-write authorization or manually 
 
 ---
 
+## Current Run State - Secretless Serum Attempt 016 Exact Activation 2026-06-04
+
+```text
+phase: secretless_serum_attempt_016_exact_activation_20260604
+status: completed_validated_consumed_failed_closed_no_retry_pending_commit
+mode: Amber exact activation plus one final-gated route POST; no retry
+activation_package_id_consumed: AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-016
+binding_packet_id: BINDING-DRAFT-SECRETLESS-OPTION-A-SERUM-20260603-016
+agent_image_lab_required_commit: 5dd3845d40ae9e46e29a51564f5fe91455ee8eb0
+vcptoolbox_required_commit: 459f4729a9c334b1b8c3fed140a4e044554d23c8
+lock_ref: reports/runtime_to_review_v1/secretless_serum_attempt_016.lock.json
+activation_issued_ref: reports/runtime_to_review_v1/secretless_serum_exact_activation_issued_20260604_attempt_016.json
+receipt_ref: reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_016.json
+artifact_record_ref: reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_016.json
+route_result_status: serum_bottle_secretless_real_execution_flag_disabled
+calls_used: route_http_request=1; provider=0; plugin=0; api=0; image=0; retry=false
+artifact_created: false
+result: Attempt-016 lock was flipped to one-shot active, final gate passed, one POST was consumed, and VCPToolBox failed closed before provider because real execution flag is disabled. Lock is now sealed consumed and non-retryable.
+boundary_checks: no secret/env/config read; no Authorization header construction by Agent Image Lab; no provider/plugin/API/image generation; no output write; no push/tag/release/deploy.
+next_safe_task: exact-file local commit attempt-016 exact activation and failed-closed evidence. Do not retry attempt-016 from this activation.
+```
+
+---
+
 ## Current Run State - Secretless Serum Attempt 014 Failed-Closed Evidence 2026-06-04
 
 ```text
