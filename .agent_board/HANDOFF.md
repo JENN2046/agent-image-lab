@@ -1,3 +1,45 @@
+## Current Handoff Update - PR8 JPEG Archive Extension Guard 2026-06-04
+
+```text
+phase: pr8_jpeg_archive_extension_guard_20260604
+status: completed_validated_unpushed
+repository: A:\agent-image-lab\agent-image-lab-v0.2
+branch: codex/secretless-serum-live-channel
+pr: JENN2046/agent-image-lab#8
+finding_triage:
+  attempt_017_committed_copy_extension_mismatch: true
+  attempt_018_committed_copy_extension_mismatch: true
+  file_magic: ffd8ffe0
+  recorded_mime: image/jpeg
+completed:
+  - renamed committed AIL attempt-017/018 archive copies from .png to .jpg without changing bytes or sha256
+  - updated top-level archived output refs and post-run copy refs to .jpg
+  - preserved raw VCPToolBox source_ref and raw route_response_summary.outputRefs where they document the original source/route .png path
+  - extended the successful-attempt evidence validator so lock/activation/receipt/artifact archive refs must use .jpg when mime is image/jpeg
+validation_run:
+  - npm run validate:runtime-to-review-secretless-serum-successful-attempt-evidence: passed
+  - node --check scripts\validate_runtime_to_review_v1_secretless_serum_successful_attempt_evidence.js: passed
+  - rg old committed-copy .png refs: no matches
+  - npm run validate:runtime-to-review-secretless-serum-attempt-015-exact-activation-issued: passed
+  - npm run validate:runtime-to-review-secretless-serum-attempt-016-exact-activation-issued: passed
+  - npm run validate:validation-manifest: passed
+  - node scripts\validate_agent_board_state.js: passed
+  - npm run recommend:validation for changed files: all files matched; unmatched_file_count 0
+  - npm run validate:smoke: passed
+  - npm run validate:targeted-plan: passed
+  - node scripts\validate_validation_recommendation_profiles.js: passed
+  - git diff --check and git diff --cached --check: passed with line-ending warnings only
+not_performed:
+  - no route HTTP POST
+  - no provider/plugin/API/image generation
+  - no secret/env/config value read
+  - no GitHub write/comment/review
+  - no push/tag/release/deploy for this follow-up
+next_safe_action: exact-file guarded local commit from this allowlist; push only with explicit remote authorization.
+```
+
+---
+
 ## Current Handoff Update - PR8 Archived Evidence Terminal Post-Push Sync 2026-06-04
 
 ```text

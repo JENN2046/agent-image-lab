@@ -1,3 +1,34 @@
+## Current Run State - PR8 JPEG Archive Extension Guard 2026-06-04
+
+```text
+phase: pr8_jpeg_archive_extension_guard_20260604
+status: completed_validated_unpushed
+mode: Green local PR review follow-up; no remote write
+pr: JENN2046/agent-image-lab#8
+triage_result:
+  true_finding: attempt-017/018 committed AIL copies had .png suffix with JPEG magic ffd8ffe0 and recorded image/jpeg mime.
+  fix: committed archive copies and top-level archived refs now use .jpg; raw route/source .png refs remain only as source/route truth.
+changed_refs:
+  - reports/runtime_to_review_v1/secretless_serum_attempt_017.lock.json
+  - reports/runtime_to_review_v1/secretless_serum_exact_activation_issued_20260604_attempt_017.json
+  - reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_017.json
+  - reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_017.json
+  - reports/runtime_to_review_v1/secretless_serum_attempt_018.lock.json
+  - reports/runtime_to_review_v1/secretless_serum_exact_activation_issued_20260604_attempt_018.json
+  - reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_018.json
+  - reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_018.json
+  - reports/runtime_to_review_v1/secretless_serum_attempt_018_quality_channel_review_20260604.json
+  - runs/real_generation/runtime_to_review_v1_guarded_live_probe_serum_bottle_secretless_attempt_017/a504b6e8-e47c-44f4-831b-71fb31a610ff.jpg
+  - runs/real_generation/runtime_to_review_v1_guarded_live_probe_serum_bottle_secretless_attempt_018/3551a0c1-029b-4631-aa5b-45a900e1718a.jpg
+  - scripts/validate_runtime_to_review_v1_secretless_serum_successful_attempt_evidence.js
+  - scripts/validation_manifest.json
+validation: successful-attempt evidence validator passed; node --check passed; old committed-copy .png refs scan found no matches; attempt-015 and attempt-016 exact activation validators passed; validation-manifest passed; agent-board validator passed; recommender matched all changed files with unmatched_file_count 0; smoke passed; targeted-plan passed; validation recommendation profiles passed; git diff --check and git diff --cached --check passed with line-ending warnings only.
+boundary_checks: route_http_request_performed=false; provider/plugin/API/image=false; secret/env/config read=false; GitHub write=false; push/tag/release/deploy=false.
+next_safe_task: exact-file guarded local commit from this allowlist; no push without explicit authorization.
+```
+
+---
+
 ## Current Run State - PR8 Archived Evidence Terminal Post-Push Sync 2026-06-04
 
 ```text

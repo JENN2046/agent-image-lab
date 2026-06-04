@@ -1,3 +1,14 @@
+- [x] ID: pr8_jpeg_archive_extension_guard_20260604
+      Lane: Green local PR review follow-up.
+      Status: completed_validated_unpushed.
+      Goal: Address P2 review note that attempt-017/018 committed archive images used .png suffix while bytes and records are image/jpeg.
+      Triage: true finding; both committed AIL archive copies start with JPEG magic ffd8ffe0 and preserve image/jpeg sha evidence.
+      Fix: committed AIL archive copies now use .jpg; top-level archived output refs/copy refs now use .jpg; raw source/route .png refs remain only where they document VCPToolBox source/route output.
+      Validation: successful-attempt evidence validator passed; node --check passed; old committed-copy .png refs scan found no matches; attempt-015 and attempt-016 exact activation validators passed; validation-manifest passed; agent-board validator passed; recommender matched all changed files with unmatched_file_count 0; smoke passed; targeted-plan passed; validation recommendation profiles passed; git diff --check and git diff --cached --check passed with line-ending warnings only.
+      Boundary: no route HTTP POST; no provider/plugin/API/image; no secret/env/config read; no GitHub write/comment/review; no push/tag/release/deploy.
+      Remaining gate: exact-file guarded local commit; push only when authorized.
+---
+
 - [x] ID: pr8_archived_evidence_terminal_post_push_sync_20260604
       Lane: Green terminal status-surface sync after explicit push authorization.
       Status: completed_validated_terminal_status_surface_sync.

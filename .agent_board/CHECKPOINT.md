@@ -1,3 +1,43 @@
+## Checkpoint - PR8 JPEG Archive Extension Guard 2026-06-04
+
+```text
+phase: pr8_jpeg_archive_extension_guard_20260604
+status: completed_validated_unpushed
+result: P2_REVIEW_FINDING_FIXED_LOCALLY
+summary: Confirmed attempt-017 and attempt-018 committed AIL evidence copies used .png filenames while their bytes are JPEG magic ffd8ffe0 and records declare image/jpeg. Renamed the committed AIL archive copies to .jpg, updated top-level archived output refs and copy refs to .jpg, preserved raw VCPToolBox source/route .png refs where they document the original route/source path, and extended the successful-attempt evidence validator to require .jpg archive refs for image/jpeg artifacts.
+changed_files_current_task:
+  - reports/runtime_to_review_v1/secretless_serum_attempt_017.lock.json
+  - reports/runtime_to_review_v1/secretless_serum_exact_activation_issued_20260604_attempt_017.json
+  - reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_017.json
+  - reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_017.json
+  - reports/runtime_to_review_v1/secretless_serum_attempt_018.lock.json
+  - reports/runtime_to_review_v1/secretless_serum_exact_activation_issued_20260604_attempt_018.json
+  - reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_018.json
+  - reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_018.json
+  - reports/runtime_to_review_v1/secretless_serum_attempt_018_quality_channel_review_20260604.json
+  - runs/real_generation/runtime_to_review_v1_guarded_live_probe_serum_bottle_secretless_attempt_017/a504b6e8-e47c-44f4-831b-71fb31a610ff.jpg
+  - runs/real_generation/runtime_to_review_v1_guarded_live_probe_serum_bottle_secretless_attempt_018/3551a0c1-029b-4631-aa5b-45a900e1718a.jpg
+  - scripts/validate_runtime_to_review_v1_secretless_serum_successful_attempt_evidence.js
+  - scripts/validation_manifest.json
+validation_completed:
+  - npm run validate:runtime-to-review-secretless-serum-successful-attempt-evidence: passed
+  - node --check scripts\validate_runtime_to_review_v1_secretless_serum_successful_attempt_evidence.js: passed
+  - rg old committed-copy .png refs: no matches
+  - npm run validate:runtime-to-review-secretless-serum-attempt-015-exact-activation-issued: passed
+  - npm run validate:runtime-to-review-secretless-serum-attempt-016-exact-activation-issued: passed
+  - npm run validate:validation-manifest: passed
+  - node scripts\validate_agent_board_state.js: passed
+  - npm run recommend:validation for changed files: all files matched; unmatched_file_count 0
+  - npm run validate:smoke: passed
+  - npm run validate:targeted-plan: passed
+  - node scripts\validate_validation_recommendation_profiles.js: passed
+  - git diff --check and git diff --cached --check: passed with line-ending warnings only
+boundary_checks: no route HTTP POST; no provider/plugin/API/image; no secret/env/config read; no GitHub write/comment/review; no push/tag/release/deploy for this follow-up.
+recommended_next: exact-file guarded local commit from this allowlist; push only with explicit remote authorization.
+```
+
+---
+
 ## Checkpoint - PR8 Archived Evidence Terminal Post-Push Sync 2026-06-04
 
 ```text
