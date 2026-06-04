@@ -1,3 +1,27 @@
+## Current Run State - PR8 Archived Evidence Commit Reachability Guard 2026-06-04
+
+```text
+phase: pr8_archived_evidence_commit_reachability_guard_20260604
+status: completed_validated_unpushed
+mode: Green local PR review follow-up; no remote write
+pr: JENN2046/agent-image-lab#8
+triage_result:
+  current_pr_head_and_merge_ref_failed_before_patch: false
+  validator_design_risk_confirmed: true
+  fix: archived evidence commit refs no longer require current-checkout ancestry
+changed_refs:
+  - scripts/validate_runtime_to_review_v1_secretless_serum_successful_attempt_evidence.js
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+validation: successful-attempt evidence validator passed; node --check passed; validation-manifest passed; agent-board validator passed; recommender matched all changed files; smoke passed; targeted-plan passed; git diff --check passed with line-ending warnings only; ancestry gate pattern scan confirms no merge-base/is-ancestor/gitIsAncestor pattern remains.
+boundary_checks: route_http_request_performed=false; provider/plugin/API/image=false; secret/env/config read=false; GitHub write=false; push/tag/release/deploy=false.
+next_safe_task: guarded local commit if desired; no push without explicit authorization.
+```
+
+---
+
 ## Current Run State - PR8 Terminal Post-Push Status Surface Sync 2026-06-04
 
 ```text

@@ -4,7 +4,6 @@
 const fs = require("node:fs");
 const path = require("node:path");
 const crypto = require("node:crypto");
-const { spawnSync } = require("node:child_process");
 
 const root = path.resolve(__dirname, "..");
 const validator = "runtime_to_review_v1_secretless_serum_successful_attempt_evidence";
@@ -23,6 +22,7 @@ const attempts = [
     expectedOutputRefs: [
       "runs/real_generation/runtime_to_review_v1_guarded_live_probe_serum_bottle_secretless_attempt_017/a504b6e8-e47c-44f4-831b-71fb31a610ff.png"
     ],
+    evidenceMode: "archived_consumed_evidence",
     routeResponseOutputRefsReturned: false,
     artifactSha256: "1a73684dd24bad53c50d36fb5b8183f2fe2a2d2aa2361a428dc5717c1d26bd93"
   },
@@ -36,6 +36,7 @@ const attempts = [
     expectedOutputRefs: [
       "image/doubaogen/3551a0c1-029b-4631-aa5b-45a900e1718a.png"
     ],
+    evidenceMode: "archived_consumed_evidence",
     routeResponseOutputRefsReturned: true,
     artifactSha256: "950eec0c7afa7c86567c10f2e73b657e872cbee12c2e85d77a9f75c82de49075"
   }
@@ -78,14 +79,6 @@ function sameArray(actual, expected) {
     expected.every((value, index) => actual[index] === value);
 }
 
-function gitIsAncestor(commit) {
-  const result = spawnSync("git", ["merge-base", "--is-ancestor", commit, "HEAD"], {
-    cwd: root,
-    encoding: "utf8"
-  });
-  return result.status === 0;
-}
-
 function falseSecretAndRemoteBoundary(boundary) {
   return boundary &&
     boundary.secret_value_read_performed === false &&
@@ -119,10 +112,10 @@ function validateAttempt(config) {
     artifact.receipt_ref === config.receiptPath
   );
 
-  check(`${prefix}_required_ail_commit_is_reachable`, () =>
+  check(`${prefix}_required_ail_commit_is_archived_reference`, () =>
     /^[0-9a-f]{40}$/.test(lock.agent_image_lab_commit_required) &&
     lock.agent_image_lab_commit_required === activation.agent_image_lab_commit_required &&
-    gitIsAncestor(lock.agent_image_lab_commit_required)
+    config.evidenceMode === "archived_consumed_evidence"
   );
 
   check(`${prefix}_consumed_success_no_retry_shape`, () =>
@@ -236,6 +229,8 @@ process.stdout.write(`${JSON.stringify({
   passed,
   validator,
   attempts: attempts.map((attempt) => attempt.attempt),
+  evidence_mode: "archived_consumed_evidence",
+  commit_reachability_required: false,
   route_http_request_performed: false,
   provider_contact_performed: false,
   plugin_call_performed: false,

@@ -1,3 +1,32 @@
+## Checkpoint - PR8 Archived Evidence Commit Reachability Guard 2026-06-04
+
+```text
+phase: pr8_archived_evidence_commit_reachability_guard_20260604
+status: completed_validated_unpushed
+result: P1_REVIEW_FINDING_DESIGN_RISK_FIXED_LOCALLY
+summary: Rechecked the PR #8 P1 review note about successful attempt locks requiring agent_image_lab_commit_required to be reachable from the current checkout. Current PR head and fetched PR merge ref both validate successfully before this patch, but the validator was still too strict for archived consumed evidence because it tied evidence validity to current Git ancestry. The successful attempt evidence validator now treats attempt-017/018 commit refs as archived evidence references: hash format and lock/activation agreement are still required, while current-checkout ancestry is no longer required.
+changed_files_current_task:
+  - scripts/validate_runtime_to_review_v1_secretless_serum_successful_attempt_evidence.js
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+validation_completed:
+  - npm run validate:runtime-to-review-secretless-serum-successful-attempt-evidence: passed
+  - node --check scripts\validate_runtime_to_review_v1_secretless_serum_successful_attempt_evidence.js: passed
+  - npm run validate:validation-manifest: passed
+  - node scripts\validate_agent_board_state.js: passed
+  - npm run recommend:validation for changed files: all files matched; targeted profile recommended
+  - npm run validate:smoke: passed
+  - npm run validate:targeted-plan: passed
+  - git diff --check: passed with line-ending warnings only
+  - ancestry gate pattern scan: no merge-base/is-ancestor/gitIsAncestor pattern remains in successful attempt validator
+boundary_checks: no route HTTP POST; no provider/plugin/API/image; no secret/env/config read; no GitHub write/comment/review; no push/tag/release/deploy for this follow-up.
+recommended_next: guarded local commit if desired; push only with explicit remote authorization.
+```
+
+---
+
 ## Checkpoint - PR8 Terminal Post-Push Status Surface Sync 2026-06-04
 
 ```text

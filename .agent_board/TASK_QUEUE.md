@@ -1,3 +1,14 @@
+- [x] ID: pr8_archived_evidence_commit_reachability_guard_20260604
+      Lane: Green local PR review follow-up.
+      Status: completed_validated_unpushed.
+      Goal: Address P1 review note that successful attempt evidence validator required archived lock commits to be ancestors of the current checkout.
+      Triage: current PR head and fetched PR merge ref both passed before this patch, but the validator design risk was real for archived evidence on alternate validation lineages.
+      Fix: successful attempt evidence validator now treats attempt-017/018 commit refs as archived consumed evidence references; hash format and lock/activation agreement remain required, current-checkout ancestry is no longer required.
+      Validation: successful-attempt evidence validator passed; node --check passed; validation-manifest passed; agent-board validator passed; recommender matched all changed files; smoke passed; targeted-plan passed; git diff --check passed with line-ending warnings only; ancestry gate pattern scan found no merge-base/is-ancestor/gitIsAncestor pattern in the successful attempt validator.
+      Boundary: no route HTTP POST; no provider/plugin/API/image; no secret/env/config read; no GitHub write/comment/review; no push/tag/release/deploy.
+      Remaining gate: guarded local commit if desired; push only when authorized.
+---
+
 - [x] ID: pr8_terminal_post_push_status_surface_sync_20260604
       Lane: Green terminal status-surface sync after explicit commit/push authorization.
       Status: completed_validated_terminal_status_surface_sync.
