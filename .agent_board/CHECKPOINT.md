@@ -2842,6 +2842,29 @@ boundary_checks_addendum:
 recommended_next: validate consumed state, verify rerun fails closed with 0 POST, then exact-file local commit. Do not retry attempt-018.
 ```
 
+### Checkpoint Addendum - Attempt 018 Quality Review 2026-06-04
+
+```text
+status: completed_validated_quality_review_pending_commit
+result: ATTEMPT_018_PRODUCTION_CANDIDATE_PENDING_HUMAN_BRAND_APPROVAL
+summary: Reviewed the attempt-018 image and evidence. The image fixes the prior bottom-crop issue, keeps the full serum bottle visible, preserves a blank brandable label, and has no text/logo hallucination. It is a production candidate pending human/brand approval; attempt-019 is not the immediate next step.
+review_ref: reports/runtime_to_review_v1/secretless_serum_attempt_018_quality_channel_review_20260604.json
+visual_score: 91
+channel_score: 96
+artifact_sha256: 950eec0c7afa7c86567c10f2e73b657e872cbee12c2e85d77a9f75c82de49075
+validation_run_addendum:
+  - manual visual review completed
+  - receipt/artifact/image sha evidence checked
+boundary_checks_addendum:
+  route_http_request_performed_by_review: false
+  provider_contact_performed_by_review: false
+  plugin_call_performed_by_review: false
+  api_call_performed_by_review: false
+  image_generation_performed_by_review: false
+  attempt_019_prepared: false
+recommended_next: exact-file local commit this quality review. Then prefer human/brand approval or a runner outputRefs writer fix, not attempt-019.
+```
+
 ### Checkpoint Addendum - Attempt 016 Prepared 2026-06-04
 
 ```text
