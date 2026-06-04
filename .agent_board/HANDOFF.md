@@ -1,3 +1,45 @@
+## Current Handoff Update - Secretless Serum Attempt 013 Exact-File Refresh 2026-06-04
+
+```text
+phase: secretless_serum_attempt_013_exact_file_refresh_20260604
+status: completed_validated_local_runner_refresh_no_execution_pending_commit
+repository: A:\agent-image-lab\agent-image-lab-v0.2
+branch: codex/secretless-serum-live-channel
+activation_package_id_prepared: AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-013
+binding_packet_id: BINDING-DRAFT-SECRETLESS-OPTION-A-SERUM-20260603-013
+vcptoolbox_required_commit: 82b83028efaa2dcefa19edb03b6a8b3854941090
+route_http: POST http://127.0.0.1:6005/internal/ai-image-agents/execute/serum-bottle-secretless
+binding_packet_ref: reports/runtime_to_review_v1/secretless_option_a_exact_binding_packet_draft_20260603_attempt_013.json
+activation_preflight_ref: reports/runtime_to_review_v1/secretless_serum_live_probe_activation_preflight_20260603_attempt_013.json
+validator_ref: scripts/validate_runtime_to_review_v1_secretless_serum_live_probe_receipt_attempt_013.js
+future_receipt_ref: reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_013.json
+future_artifact_record_ref: reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_013.json
+completed:
+  - VCPToolBox route/server exact binding was refreshed and locally committed at 82b83028efaa2dcefa19edb03b6a8b3854941090
+  - Agent Image Lab runner now supports --attempt-013-route-http and exact attempt-013 defaults
+  - Agent Image Lab binding packet, activation preflight, validator, package script, validation manifest, and resume surfaces now reference attempt-013 paths
+validation_run:
+  - node --check scripts/run_runtime_to_review_v1_secretless_option_a_callable_runner.js: passed
+  - node --check scripts/validate_runtime_to_review_v1_secretless_serum_live_probe_receipt_attempt_013.js: passed
+  - npm run validate:runtime-to-review-secretless-serum-live-probe-receipt-attempt-013 -- --allow-pending: passed
+  - node scripts/validate_validation_manifest.js: passed
+not_performed:
+  - route HTTP POST
+  - live probe
+  - provider contact
+  - plugin call
+  - API call
+  - image generation
+  - output image write
+  - secret value or env/config content read
+  - Authorization header construction by Agent Image Lab
+  - old admin-auth route
+  - push, tag, release, deploy
+next_safe_action: final local validation and exact-file local commit this Agent Image Lab refresh. Future attempt-013 live execution requires VCPToolBox restart/load of 82b83028..., listener and non-POST surface checks, baseline checks, and a separate exact activation.
+```
+
+---
+
 ## Current Handoff Update - Secretless Serum Attempt 012 Live Execution Evidence 2026-06-04
 
 ```text

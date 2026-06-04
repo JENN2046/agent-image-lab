@@ -1,3 +1,33 @@
+## Checkpoint - Secretless Serum Attempt 013 Exact-File Refresh 2026-06-04
+
+```text
+phase: secretless_serum_attempt_013_exact_file_refresh_20260604
+status: completed_validated_local_runner_refresh_no_execution_pending_commit
+result: ATTEMPT_013_EXACT_FILE_REFRESH_READY_NO_LIVE_PROBE
+summary: Refreshed VCPToolBox exact route/server binding to attempt-013 at commit 82b83028efaa2dcefa19edb03b6a8b3854941090, then refreshed Agent Image Lab runner defaults, binding packet, activation preflight, receipt/artifact validator, validation manifest, and resume surfaces for AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-013. No route HTTP POST or live probe was executed.
+changed_files_current_task:
+  - scripts/run_runtime_to_review_v1_secretless_option_a_callable_runner.js
+  - scripts/validate_runtime_to_review_v1_secretless_serum_live_probe_receipt_attempt_013.js
+  - scripts/validation_manifest.json
+  - package.json
+  - reports/runtime_to_review_v1/secretless_option_a_exact_binding_packet_draft_20260603_attempt_013.json
+  - reports/runtime_to_review_v1/secretless_serum_live_probe_activation_preflight_20260603_attempt_013.json
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/BLOCKERS.md
+validation_completed:
+  - node --check scripts/run_runtime_to_review_v1_secretless_option_a_callable_runner.js: passed
+  - node --check scripts/validate_runtime_to_review_v1_secretless_serum_live_probe_receipt_attempt_013.js: passed
+  - npm run validate:runtime-to-review-secretless-serum-live-probe-receipt-attempt-013 -- --allow-pending: passed
+  - node scripts/validate_validation_manifest.js: passed
+boundary_checks: route HTTP POST=0; provider/plugin/API/image=0 each; retry=false; no output image; no secret/env/config read; no Authorization header construction by Agent Image Lab; no old admin-auth route; no push/tag/release/deploy.
+recommended_next_phase: final agent board/diff validation, exact-file local commit this refresh, then restart VCPToolBox to 82b83028... before any new attempt-013 exact activation.
+```
+
+---
+
 ## Checkpoint - Secretless Serum Attempt 012 Live Execution Evidence 2026-06-04
 
 ```text

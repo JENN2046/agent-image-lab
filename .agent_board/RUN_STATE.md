@@ -1,3 +1,29 @@
+## Current Run State - Secretless Serum Attempt 013 Exact-File Refresh 2026-06-04
+
+```text
+phase: secretless_serum_attempt_013_exact_file_refresh_20260604
+status: completed_validated_local_runner_refresh_no_execution_pending_commit
+mode: Green local runner/binding/preflight/validator registration; no live request
+activation_package_id_prepared: AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-013
+binding_packet_id: BINDING-DRAFT-SECRETLESS-OPTION-A-SERUM-20260603-013
+route_http_origin_required: http://127.0.0.1:6005
+route_http_method: POST
+route_http_path: /internal/ai-image-agents/execute/serum-bottle-secretless
+vcptoolbox_required_commit: 82b83028efaa2dcefa19edb03b6a8b3854941090
+binding_packet_ref: reports/runtime_to_review_v1/secretless_option_a_exact_binding_packet_draft_20260603_attempt_013.json
+activation_preflight_ref: reports/runtime_to_review_v1/secretless_serum_live_probe_activation_preflight_20260603_attempt_013.json
+validator_ref: scripts/validate_runtime_to_review_v1_secretless_serum_live_probe_receipt_attempt_013.js
+receipt_ref_future: reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_013.json
+artifact_record_ref_future: reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_013.json
+output_directory_ref_future: runs/real_generation/runtime_to_review_v1_guarded_live_probe_serum_bottle_secretless_attempt_013/
+result: Local runner, binding packet, activation preflight, validation manifest, and receipt/artifact validator now know attempt-013 and the VCPToolBox baseline 82b83028efaa2dcefa19edb03b6a8b3854941090. --attempt-013-route-http binds the exact activation package and preflight-only performs no route HTTP.
+latest_validation: node --check runner and attempt-013 validator passed; attempt-013 pending-safe validator passed; validation manifest passed.
+boundary_checks: route_http_request_performed=false; provider/plugin/API/image=false; retry=false; no secret/env/config read; no Authorization header construction by Agent Image Lab; no old admin-auth route; no push/tag/release/deploy.
+next_safe_task: final agent board/diff validation and exact-file local commit this refresh. Future attempt-013 live execution requires VCPToolBox restart/load of 82b83028..., listener/surface/baseline checks, and a separate exact activation.
+```
+
+---
+
 ## Current Run State - Secretless Serum Attempt 012 Live Execution Evidence 2026-06-04
 
 ```text
