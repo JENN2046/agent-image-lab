@@ -1524,6 +1524,33 @@
       ]
     },
     {
+      "id": "runtime_to_review_secretless_serum_successful_attempt_evidence",
+      "command": "npm run validate:runtime-to-review-secretless-serum-successful-attempt-evidence",
+      "script": "scripts/validate_runtime_to_review_v1_secretless_serum_successful_attempt_evidence.js",
+      "tier": "targeted",
+      "domain": "runtime_to_review",
+      "status": "active",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "reports/runtime_to_review_v1/secretless_serum_attempt_017.lock.json",
+        "reports/runtime_to_review_v1/secretless_serum_exact_activation_issued_20260604_attempt_017.json",
+        "reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_017.json",
+        "reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_017.json",
+        "runs/real_generation/runtime_to_review_v1_guarded_live_probe_serum_bottle_secretless_attempt_017/**",
+        "reports/runtime_to_review_v1/secretless_serum_attempt_018.lock.json",
+        "reports/runtime_to_review_v1/secretless_serum_exact_activation_issued_20260604_attempt_018.json",
+        "reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_018.json",
+        "reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_018.json",
+        "runs/real_generation/runtime_to_review_v1_guarded_live_probe_serum_bottle_secretless_attempt_018/**",
+        "scripts/validate_runtime_to_review_v1_secretless_serum_successful_attempt_evidence.js",
+        "package.json",
+        "scripts/validation_manifest.json"
+      ],
+      "required_for": [
+        "runtime_to_review_secretless_serum_successful_attempt_evidence"
+      ]
+    },
+    {
       "id": "runtime_to_review_static_real_entry_viewer",
       "command": "npm run validate:runtime-to-review-static-real-entry-viewer",
       "script": "scripts/validate_runtime_to_review_v1_static_real_entry_viewer.js",

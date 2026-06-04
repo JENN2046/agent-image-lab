@@ -1,3 +1,37 @@
+## Current Run State - PR8 Successful Attempt Evidence Guard 2026-06-04
+
+```text
+phase: pr8_successful_attempt_evidence_guard_20260604
+status: completed_validated
+mode: Green local PR review follow-up; no route POST and no remote write
+pr: JENN2046/agent-image-lab#8
+triage_result:
+  true_fixed_now:
+    - attempt-017 successful evidence under-reported output writes and had empty output_refs
+    - attempt-017/018 evidence files lacked targeted manifest coverage
+  already_fixed_or_currently_validated:
+    - narrow auth-header source scan
+    - derive output_write_performed from route artifacts
+    - avoid counting listener HEAD as route POST consumption
+    - reject lock-drifting payload-json/input.body
+    - validate consumed attempts from archived evidence instead of current external VCPToolBox HEAD
+    - scope internal route HEAD repair to the internal router
+    - AIL commit required by attempt-018 is reachable from current HEAD
+changed_refs:
+  - reports/runtime_to_review_v1/secretless_serum_attempt_017.lock.json
+  - reports/runtime_to_review_v1/secretless_serum_exact_activation_issued_20260604_attempt_017.json
+  - reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_017.json
+  - reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_017.json
+  - scripts/validate_runtime_to_review_v1_secretless_serum_successful_attempt_evidence.js
+  - package.json
+  - scripts/validation_manifest.json
+validation: successful-attempt evidence validator passed; validation manifest passed; recommender now matches attempt-017/018 evidence files; validate:active passed; agent-board validator passed; targeted-plan passed; git diff --check passed with line-ending warnings only.
+boundary_checks: route_http_request_performed=false; provider/plugin/API/image=false; secret/env/config read=false; GitHub write=false; push/tag/release/deploy=false.
+next_safe_task: exact-file review/stage/commit only if separately desired. No push without separate authorization.
+```
+
+---
+
 ## Current Run State - Attempt Binding Lock P0 Guard 2026-06-04
 
 ```text
@@ -60,7 +94,7 @@ observed_vcptoolbox_output_ref: A:\VCP\apps\VCPToolBox\image\doubaogen\a504b6e8-
 ail_evidence_copy_ref: runs/real_generation/runtime_to_review_v1_guarded_live_probe_serum_bottle_secretless_attempt_017/a504b6e8-e47c-44f4-831b-71fb31a610ff.png
 result: Attempt-017 lock was flipped to one-shot active, final gate passed, exactly one POST was consumed, and VCPToolBox completed real execution. Lock is now sealed consumed and non-retryable.
 boundary_checks: no secret/env/config read; no Authorization header construction by Agent Image Lab; no old admin-auth route; no retry; no push/tag/release/deploy.
-known_gap: route response did not return outputRefs to AIL, so receipt output_refs remain empty even though the VCPToolBox output file and AIL evidence copy exist and match the artifact sha.
+known_gap: route response did not return outputRefs to AIL, so route_response_output_refs_returned remains false; AIL receipt/artifact/activation/lock now record output_write_performed=true and use the AIL evidence copy as canonical output_refs.
 next_safe_task: exact-file commit attempt-017 evidence. Before attempt-018, fix or explicitly accept the route response outputRefs boundary.
 ```
 

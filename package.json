@@ -95,6 +95,7 @@
     "validate:runtime-to-review-secretless-serum-attempt-015-activation-refresh": "node scripts/validate_runtime_to_review_v1_secretless_serum_attempt_015_activation_refresh.js",
     "validate:runtime-to-review-secretless-serum-attempt-015-exact-activation-issued": "node scripts/validate_runtime_to_review_v1_secretless_serum_attempt_015_exact_activation_issued.js",
     "validate:runtime-to-review-secretless-serum-attempt-016-exact-activation-issued": "node scripts/validate_runtime_to_review_v1_secretless_serum_attempt_016_exact_activation_issued.js",
+    "validate:runtime-to-review-secretless-serum-successful-attempt-evidence": "node scripts/validate_runtime_to_review_v1_secretless_serum_successful_attempt_evidence.js",
     "prepare:runtime-to-review-secretless-serum-attempt": "node scripts/prepare_runtime_to_review_v1_secretless_serum_attempt.js",
     "validate:runtime-to-review-secretless-serum-attempt-011-quality-channel-review": "node scripts/validate_runtime_to_review_v1_secretless_serum_attempt_011_quality_channel_review.js",
     "validate:runtime-to-review-secretless-option-a-exact-route-http-transport-preflight-attempt-003": "node scripts/validate_runtime_to_review_v1_secretless_option_a_exact_route_http_transport_preflight_attempt_003.js",

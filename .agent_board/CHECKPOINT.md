@@ -1,3 +1,37 @@
+## Checkpoint - PR8 Successful Attempt Evidence Guard 2026-06-04
+
+```text
+phase: pr8_successful_attempt_evidence_guard_20260604
+status: completed_validated
+result: PR8_REVIEW_FINDINGS_TRIAGED_ATTEMPT_017_018_EVIDENCE_GUARDED
+summary: Confirmed most PR #8 review findings had already been fixed in current HEAD, then fixed the remaining real evidence gap for attempt-017 and registered targeted validation for successful attempt evidence. Attempt-017 still truthfully records route_response_output_refs_returned=false, but its lock, activation consumption, receipt, and artifact now mark output_write_performed=true and point output_refs to the AIL evidence copy. Attempt-018 evidence is now matched by the recommender through the same validator.
+changed_files_current_task:
+  - reports/runtime_to_review_v1/secretless_serum_attempt_017.lock.json
+  - reports/runtime_to_review_v1/secretless_serum_exact_activation_issued_20260604_attempt_017.json
+  - reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_017.json
+  - reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_017.json
+  - scripts/validate_runtime_to_review_v1_secretless_serum_successful_attempt_evidence.js
+  - package.json
+  - scripts/validation_manifest.json
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+validation_completed:
+  - npm run validate:runtime-to-review-secretless-serum-successful-attempt-evidence: passed
+  - npm run validate:validation-manifest: passed
+  - npm run recommend:validation for attempt-017 evidence: all files matched
+  - npm run recommend:validation for attempt-018 evidence: all files matched
+  - npm run validate:active: passed
+  - node scripts\validate_agent_board_state.js: passed
+  - npm run validate:targeted-plan: passed
+  - git diff --check: passed with line-ending warnings only
+boundary_checks: route HTTP POST=0; provider/plugin/API/image=0; no secret/env/config read; no GitHub write/comment/review; no commit/push/tag/release/deploy.
+recommended_next: exact-file review/stage/commit only if separately desired; no push without separate authorization.
+```
+
+---
+
 ## Checkpoint - Attempt Binding Lock P0 Guard 2026-06-04
 
 ```text
@@ -62,7 +96,7 @@ boundary_checks_addendum:
   api_call_performed: true
   image_generation_performed: true
   retry_performed: false
-known_gap: route response omitted outputRefs, so AIL receipt output_refs are empty; VCPToolBox local output was observed separately, copied into AIL evidence storage, and sha matched.
+known_gap: route response omitted outputRefs, so route_response_output_refs_returned remains false; AIL receipt/artifact/activation/lock now mark output_write_performed=true and use the AIL evidence copy as canonical output_refs.
 recommended_next: exact-file local commit. Do not retry attempt-017. Before attempt-018, fix or explicitly accept the route response outputRefs boundary.
 ```
 

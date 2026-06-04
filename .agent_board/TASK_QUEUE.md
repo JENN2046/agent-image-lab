@@ -1,3 +1,24 @@
+- [x] ID: pr8_successful_attempt_evidence_guard_20260604
+      Lane: Green local PR review follow-up.
+      Status: completed_validated.
+      Goal: Confirm which PR #8 review findings still apply, fix the real remaining evidence/validation gaps, and avoid remote writes.
+      True findings fixed:
+        - attempt-017 successful evidence had output_write_performed=false and empty output_refs despite a copied image artifact.
+        - attempt-017/018 successful evidence files were not covered by an attempt-specific targeted validator.
+      Findings already fixed/currently validated before this patch:
+        - auth-header validator false positive
+        - route output write derivation
+        - final-gate listener probe accounting
+        - lock-bound custom payload drift rejection
+        - consumed validator current external VCPToolBox HEAD dependency
+        - internal HEAD route repair scoping
+        - attempt-018 AIL commit reachability
+      Validator: `scripts/validate_runtime_to_review_v1_secretless_serum_successful_attempt_evidence.js`.
+      Validation: successful-attempt evidence validator passed; validation manifest passed; recommender now matches attempt-017/018 evidence files; validate:active passed; agent-board validator passed; targeted-plan passed; git diff --check passed with line-ending warnings only.
+      Boundary: no route HTTP POST; no provider/plugin/API/image; no secret/env/config read; no GitHub write/comment/review; no push/tag/release/deploy.
+      Remaining gate: exact-file review/stage/commit only if separately desired; push remains unauthorized.
+---
+
 - [x] ID: secretless_serum_attempt_017_exact_activation_20260604
       Lane: Amber exact activation plus one final-gated route POST.
       Status: completed_validated_consumed_succeeded_no_retry_pending_commit.
@@ -11,7 +32,7 @@
       AIL evidence copy: `runs/real_generation/runtime_to_review_v1_guarded_live_probe_serum_bottle_secretless_attempt_017/a504b6e8-e47c-44f4-831b-71fb31a610ff.png`.
       Artifact sha256: `1a73684dd24bad53c50d36fb5b8183f2fe2a2d2aa2361a428dc5717c1d26bd93`.
       Boundary: no retry; no secret/env/config read; no Authorization header construction; no old admin-auth route; no push/tag/release/deploy.
-      Known gap: route response omitted outputRefs, so AIL receipt output_refs are empty even though the observed VCPToolBox output and AIL evidence copy exist and match sha.
+      Known gap resolved: route response omitted outputRefs, so route_response_output_refs_returned remains false; AIL receipt/artifact/activation/lock now mark output_write_performed=true and use the AIL evidence copy as canonical output_refs.
       Validation: consumed-state source binding verifier passed; runner rerun with exact phrase failed closed at lock authorization boundary with route_http_request_performed=false.
       Remaining gate: exact-file local commit.
 ---
