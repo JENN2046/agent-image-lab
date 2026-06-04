@@ -145,6 +145,11 @@ function verifyAttemptLockBinding(options = {}) {
   check("vcptoolbox_binding_commit_is_not_placeholder",
     /^[0-9a-f]{40}$/.test(String(lock.vcptoolbox_current_attempt_binding_commit_required || "")),
     { value: lock.vcptoolbox_current_attempt_binding_commit_required });
+  if (lock.vcptoolbox_output_refs_boundary_commit_required) {
+    check("vcptoolbox_head_contains_output_refs_boundary_commit",
+      gitCommitIsAncestor(vcpRoot, lock.vcptoolbox_output_refs_boundary_commit_required, vcpHead),
+      { expected: lock.vcptoolbox_output_refs_boundary_commit_required, actual: vcpHead });
+  }
 
   const routeSource = fs.existsSync(routeSourcePath) ? fs.readFileSync(routeSourcePath, "utf8") : null;
   const serverSource = fs.existsSync(serverSourcePath) ? fs.readFileSync(serverSourcePath, "utf8") : null;

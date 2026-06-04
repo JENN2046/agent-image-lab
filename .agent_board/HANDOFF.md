@@ -2573,6 +2573,31 @@ not_performed_addendum:
 next_safe_action: exact-file commit consumed evidence; future attempt must be attempt-016 after VCPToolBox process reload/current-binding runtime verification.
 ```
 
+### Handoff Addendum - Attempt 018 Prepared 2026-06-04
+
+```text
+status: completed_validated_inactive_pending_commit
+completed_addendum:
+  - Created reports/runtime_to_review_v1/secretless_serum_attempt_018.lock.json.
+  - Created attempt-018 binding packet and activation preflight records.
+  - Refreshed VCPToolBox route/server source binding to attempt-018 at commit 0632a44dadd168e2e206ebd19d87b118dae27c60.
+  - Aligned VCPToolBox secretless tests to attempt-018 at commit eb8d4e10261d8ac2e0ae0fd26cb3595ddcef7962.
+  - Enhanced AIL verifier to require VCPToolBox HEAD to contain the outputRefs boundary commit when the lock declares one.
+validation_addendum:
+  - VCPToolBox targeted secretless tests passed 30/30.
+  - attempt-018 source binding verifier passed and proved HEAD contains deeebbfa17ec56a9ad477ce8cdfd09fe50750b1f.
+  - attempt-018 lock-driven preflight-only runner passed with 0 route HTTP.
+  - attempt-018 lock-driven exact phrase runner failed closed at inactive lock boundary with 0 route HTTP.
+not_performed_addendum:
+  - no attempt-018 route HTTP POST
+  - no provider/plugin/API/image generation
+  - no output write
+  - no secret/env/config value read
+  - no Authorization header construction by Agent Image Lab
+  - no push/tag/release/deploy
+next_safe_action: exact-file commit AIL attempt-018 prepare. Future live POST requires VCPToolBox restart/reload to eb8d4e10261d8ac2e0ae0fd26cb3595ddcef7962 and a separate exact activation.
+```
+
 ### Handoff Addendum - Attempt 016 Prepared 2026-06-04
 
 ```text

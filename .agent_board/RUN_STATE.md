@@ -66,6 +66,29 @@ next_safe_task: exact-file commit attempt-017 evidence. Before attempt-018, fix 
 
 ---
 
+## Current Run State - Secretless Serum Attempt 018 Prepared 2026-06-04
+
+```text
+phase: secretless_serum_attempt_018_prepare_20260604
+status: completed_validated_inactive_pending_commit
+mode: Amber exact VCPToolBox source binding refresh plus Green AIL prepare; no attempt-018 POST
+activation_package_id_prepared: AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-018
+binding_packet_id: BINDING-DRAFT-SECRETLESS-OPTION-A-SERUM-20260603-018
+agent_image_lab_required_commit: 629c2e5eff1fba787585f07b0469396efc31838b
+vcptoolbox_output_refs_boundary_commit_required: deeebbfa17ec56a9ad477ce8cdfd09fe50750b1f
+vcptoolbox_attempt_018_binding_commit: 0632a44dadd168e2e206ebd19d87b118dae27c60
+vcptoolbox_current_attempt_binding_commit: eb8d4e10261d8ac2e0ae0fd26cb3595ddcef7962
+lock_ref: reports/runtime_to_review_v1/secretless_serum_attempt_018.lock.json
+binding_packet_ref: reports/runtime_to_review_v1/secretless_option_a_exact_binding_packet_draft_20260603_attempt_018.json
+activation_preflight_ref: reports/runtime_to_review_v1/secretless_serum_live_probe_activation_preflight_20260603_attempt_018.json
+result: attempt-018 is prepared inactive. VCPToolBox route/server source binding now proves activation, pipeline, receipt, artifact, and output refs all match attempt-018, and HEAD contains the deeebbfa outputRefs boundary fix.
+validation: VCPToolBox targeted tests passed 30/30; attempt-018 source binding verifier passed; runner --route-http-from-lock --attempt-lock attempt-018 --preflight-only passed with 0 route HTTP; runner with exact phrase failed closed at inactive lock authorization boundary with 0 route HTTP.
+boundary_checks: route_http_request_performed=false; provider_contact_performed=false; plugin_call_performed=false; api_call_performed=false; image_generation_performed=false; output_write_performed=false; no secret/env/config read; no Authorization header construction; no push/tag/release/deploy.
+next_safe_task: exact-file local commit attempt-018 prepare. Future exact activation must first restart/reload VCPToolBox so the live process loads eb8d4e10261d8ac2e0ae0fd26cb3595ddcef7962, then flip the lock authorization boundary in a separate one-shot activation.
+```
+
+---
+
 ## Current Run State - Secretless Serum Attempt 016 Exact Activation 2026-06-04
 
 ```text

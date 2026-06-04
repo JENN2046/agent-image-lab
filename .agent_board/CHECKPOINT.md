@@ -2764,6 +2764,32 @@ boundary_checks_addendum:
 recommended_next: commit consumed evidence; do not retry attempt-015; require VCPToolBox process reload to current binding before any future activation.
 ```
 
+### Checkpoint Addendum - Attempt 018 Prepared 2026-06-04
+
+```text
+status: completed_validated_inactive_pending_commit
+result: ATTEMPT_018_PREPARED_WITH_OUTPUT_REFS_BOUNDARY_COMMIT
+summary: Prepared attempt-018 as an inactive lock-bound package after fixing VCPToolBox route response outputRefs. The attempt-018 lock records deeebbfa17ec56a9ad477ce8cdfd09fe50750b1f as the required outputRefs boundary commit and eb8d4e10261d8ac2e0ae0fd26cb3595ddcef7962 as the current VCPToolBox attempt binding HEAD.
+changed_refs:
+  - reports/runtime_to_review_v1/secretless_serum_attempt_018.lock.json
+  - reports/runtime_to_review_v1/secretless_option_a_exact_binding_packet_draft_20260603_attempt_018.json
+  - reports/runtime_to_review_v1/secretless_serum_live_probe_activation_preflight_20260603_attempt_018.json
+  - scripts/verify_runtime_to_review_v1_secretless_serum_attempt_lock_binding.js
+validation_run_addendum:
+  - VCPToolBox targeted secretless tests: passed 30/30
+  - source binding verifier: passed for attempt-018 and proved VCPToolBox HEAD contains deeebbfa
+  - runner --route-http-from-lock --attempt-lock attempt-018 --preflight-only: passed with 0 route HTTP
+  - runner --route-http-from-lock --attempt-lock attempt-018 with exact phrase: failed closed at inactive lock boundary with 0 route HTTP
+boundary_checks_addendum:
+  route_http_request_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  output_write_performed: false
+recommended_next: exact-file local commit. Future exact activation must restart/reload VCPToolBox to eb8d4e10261d8ac2e0ae0fd26cb3595ddcef7962 before flipping the attempt-018 lock active.
+```
+
 ### Checkpoint Addendum - Attempt 016 Prepared 2026-06-04
 
 ```text
