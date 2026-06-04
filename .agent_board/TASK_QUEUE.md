@@ -1032,3 +1032,26 @@ remaining:
   - exact-file commit attempt-016 activation/evidence
   - do not retry attempt-016
 ```
+
+## Queue - Secretless Serum Attempt 017 Prepare 2026-06-04
+
+```text
+done:
+  - task: resolve VCPToolBox real execution flag boundary
+    evidence: VCPToolBox restarted with real execution and native delegate flags; listener PID 31812; internal HEAD surface 204.
+  - task: refresh VCPToolBox attempt-017 source binding
+    evidence: VCPToolBox commit 93741eb14d6bc73dfaffbe7344b839e2640f2c01.
+  - task: align VCPToolBox secretless tests to attempt-017
+    evidence: VCPToolBox commit 3bb285cdfc58feb6d6452d0cf4837495041362e7; targeted tests passed 30/30.
+  - task: prepare AIL attempt-017 inactive lock and package refs
+    evidence: source binding verifier passed; runner preflight-only passed with 0 route HTTP.
+  - task: add lock-driven runner path
+    evidence: --route-http-from-lock --attempt-lock works for attempt-017 and fails closed when inactive.
+in_progress:
+  - task: exact-file local commit attempt-017 prepare
+blocked:
+  - none
+remaining:
+  - separate exact activation required before any attempt-017 POST
+  - push/tag/release/deploy remain separately gated
+```

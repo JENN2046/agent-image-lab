@@ -62,6 +62,34 @@ next_safe_task: exact-file local commit attempt-016 exact activation and failed-
 
 ---
 
+## Current Run State - Secretless Serum Attempt 017 Prepared 2026-06-04
+
+```text
+phase: secretless_serum_attempt_017_prepare_20260604
+status: completed_validated_inactive_pending_commit
+mode: Amber exact VCPToolBox runtime flag boundary handling plus Green AIL prepare; no attempt-017 POST
+activation_package_id_prepared: AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-017
+binding_packet_id: BINDING-DRAFT-SECRETLESS-OPTION-A-SERUM-20260603-017
+agent_image_lab_required_commit: f3f45577361d59e8fd332ce85777ecace8a7dddf
+vcptoolbox_current_attempt_binding_commit: 3bb285cdfc58feb6d6452d0cf4837495041362e7
+vcptoolbox_binding_commit: 93741eb14d6bc73dfaffbe7344b839e2640f2c01
+vcptoolbox_test_alignment_commit: 3bb285cdfc58feb6d6452d0cf4837495041362e7
+runtime_boundary_resolution: VCPToolBox process restarted with ENABLE_AI_IMAGE_REAL_EXECUTION=true and ENABLE_NATIVE_DOUBAO_SECRETLESS_RUNTIME_DELEGATE=true; listener PID 31812.
+lock_ref: reports/runtime_to_review_v1/secretless_serum_attempt_017.lock.json
+binding_packet_ref: reports/runtime_to_review_v1/secretless_option_a_exact_binding_packet_draft_20260603_attempt_017.json
+activation_preflight_ref: reports/runtime_to_review_v1/secretless_serum_live_probe_activation_preflight_20260603_attempt_017.json
+validation_run:
+  - VCPToolBox node --check route/server passed.
+  - VCPToolBox targeted secretless tests passed 30/30 after attempt-017 fixture alignment.
+  - AIL source binding verifier passed for attempt-017.
+  - AIL lock-driven runner preflight-only passed with 0 route HTTP.
+  - AIL lock-driven exact phrase path failed closed at inactive lock boundary with 0 route HTTP.
+boundary_checks: attempt-017 route_http_request_performed=false; provider/plugin/API/image=false; no secret/env/config read; no Authorization header construction by Agent Image Lab; no push/tag/release/deploy.
+next_safe_task: exact-file local commit attempt-017 prepare. Separate exact activation must flip the lock authorization boundary before any attempt-017 POST.
+```
+
+---
+
 ## Current Run State - Secretless Serum Attempt 014 Failed-Closed Evidence 2026-06-04
 
 ```text

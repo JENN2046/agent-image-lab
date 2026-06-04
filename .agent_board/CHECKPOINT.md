@@ -2781,3 +2781,28 @@ boundary_checks_addendum:
   retry_performed: false
 recommended_next: validate consumed state and exact-file commit; do not retry attempt-016.
 ```
+
+### Checkpoint Addendum - Attempt 017 Prepared 2026-06-04
+
+```text
+status: completed_validated_inactive_pending_commit
+result: ATTEMPT_017_PREPARED_WITH_REAL_EXECUTION_FLAG_BOUNDARY_RESOLVED
+summary: Resolved the attempt-016 real execution flag boundary by restarting VCPToolBox with explicit non-secret runtime flags for real execution and native Doubao secretless delegate. Prepared attempt-017 as an inactive lock-bound package, refreshed VCPToolBox source binding, aligned VCPToolBox tests, and added AIL lock-driven runner support.
+changed_refs:
+  - reports/runtime_to_review_v1/secretless_serum_attempt_017.lock.json
+  - reports/runtime_to_review_v1/secretless_option_a_exact_binding_packet_draft_20260603_attempt_017.json
+  - reports/runtime_to_review_v1/secretless_serum_live_probe_activation_preflight_20260603_attempt_017.json
+  - scripts/run_runtime_to_review_v1_secretless_option_a_callable_runner.js
+validation_run_addendum:
+  - VCPToolBox targeted secretless tests: passed 30/30
+  - source binding verifier: passed for attempt-017
+  - runner --route-http-from-lock --attempt-lock attempt-017 --preflight-only: passed with 0 route HTTP
+  - runner --route-http-from-lock --attempt-lock attempt-017 with exact phrase: failed closed at inactive lock boundary with 0 route HTTP
+boundary_checks_addendum:
+  route_http_request_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+recommended_next: commit attempt-017 prepare; exact activation must be separate.
+```

@@ -194,6 +194,25 @@ function routeDefaultsFromAttemptLock(relativePath) {
   };
 }
 
+function configFromAttemptLock(relativePath) {
+  const lock = readAttemptLock(relativePath);
+  const receiptId = path.basename(lock.receipt_ref, ".json");
+  const artifactRecordId = path.basename(lock.artifact_record_ref, ".json");
+  return Object.freeze({
+    activationPackageId: lock.activation_id,
+    bindingPacketId: lock.binding_packet?.binding_packet_id,
+    bindingPacketRef: lock.binding_packet?.binding_packet_ref,
+    receiptRef: lock.receipt_ref,
+    receiptId,
+    artifactRecordRef: lock.artifact_record_ref,
+    artifactRecordId,
+    outputDirectoryRef: lock.output_directory_ref,
+    agentImageLabRunnerRequiredCommit: lock.agent_image_lab_commit_required,
+    vcptoolboxRequiredCommit: lock.vcptoolbox_current_attempt_binding_commit_required,
+    attemptLockRef: relativePath
+  });
+}
+
 const allowedNonSecretPayloadFields = Object.freeze([
   "task_id",
   "route_id",
@@ -462,6 +481,23 @@ function routeHttpDefaultsForActivationPackage(activationPackageId) {
   return defaultRouteHttpInput;
 }
 
+function routeHttpDefaultsForInput(input = {}) {
+  if (input.attemptLockRef) {
+    return {
+      ...routeDefaultsFromAttemptLock(input.attemptLockRef),
+      routeHttpEndpointSource: `VCPToolBox current-attempt binding commit must match ${input.attemptLockRef}; route/server source binding verifier must prove activation, pipeline, receipt, artifact, and output refs are all the same attempt before POST`
+    };
+  }
+  return routeHttpDefaultsForActivationPackage(input.activationPackageId);
+}
+
+function exactAttemptConfigForValidation(validation = {}) {
+  if (validation.attempt_lock_ref) {
+    return configFromAttemptLock(validation.attempt_lock_ref);
+  }
+  return exactAttemptReceiptArtifactConfigs[validation.activation_package_id];
+}
+
 function normalizePayloadKey(value) {
   return String(value).toLowerCase().replace(/[^a-z0-9]/g, "");
 }
@@ -683,7 +719,10 @@ function normalizeRouteHttpOrigin(value) {
 }
 
 function validateExactRouteHttpTransportInput(input = {}) {
-  const routeHttpDefaults = routeHttpDefaultsForActivationPackage(input.activationPackageId);
+  const routeHttpDefaults = routeHttpDefaultsForInput(input);
+  if (input.attemptLockRef && !input.activationPackageId) {
+    input.activationPackageId = routeHttpDefaults.activationPackageId;
+  }
   const body = input.body || input.payload || buildExactRouteHttpBody({
     ...routeHttpDefaults,
     ...input
@@ -713,10 +752,19 @@ function validateExactRouteHttpTransportInput(input = {}) {
       reason: "exact route HTTP origin must be provided by a new activation; runner must not guess host or port"
     });
   }
-  if (!allowedExactRouteHttpActivationPackageIds.includes(input.activationPackageId)) {
+  if (
+    !input.attemptLockRef &&
+    !allowedExactRouteHttpActivationPackageIds.includes(input.activationPackageId)
+  ) {
     failures.push({
       status: "secretless_option_a_activation_package_mismatch",
       reason: "route HTTP transport requires an allowed exact activation package"
+    });
+  }
+  if (input.attemptLockRef && routeHttpDefaults.activationPackageId !== input.activationPackageId) {
+    failures.push({
+      status: "secretless_option_a_activation_package_mismatch",
+      reason: "route HTTP transport activation package must match the supplied attempt lock"
     });
   }
   if (!input.preflightOnly && input.confirmationPhrase !== exactConfirmationPhrase) {
@@ -791,6 +839,7 @@ function validateExactRouteHttpTransportInput(input = {}) {
     route_http_origin: origin,
     route_http_url: origin ? `${origin}${pathValue}` : null,
     endpoint_source: expectedEndpointSource,
+    attempt_lock_ref: input.attemptLockRef || null,
     forbidden_payload_keys_detected: forbiddenPayloadKeys,
     failures,
     body,
@@ -1221,7 +1270,7 @@ function buildAttemptReceiptAndArtifact(execution, validation, json, responseSta
 }
 
 function writeAttemptReceiptAndArtifact(execution, validation, json, responseStatus) {
-  const config = exactAttemptReceiptArtifactConfigs[validation.activation_package_id];
+  const config = exactAttemptConfigForValidation(validation);
   if (!config) {
     return { receipt_write_performed: false, artifact_record_write_performed: false };
   }
@@ -1284,7 +1333,7 @@ async function runSecretlessOptionAExactRouteHttpTransport(input = {}) {
     };
   }
 
-  const config = exactAttemptReceiptArtifactConfigs[validation.activation_package_id];
+  const config = exactAttemptConfigForValidation(validation);
   const finalGate = await runAttemptFinalGate(validation, config);
   if (finalGate.passed !== true) {
     return {
@@ -1388,6 +1437,10 @@ async function runSecretlessOptionAExactRouteHttpTransport(input = {}) {
 }
 
 function applyAttemptRouteDefaults(input) {
+  if (input.routeHttpFromLock === true && input.attemptLockRef && !input.activationPackageId) {
+    input.activationPackageId = routeDefaultsFromAttemptLock(input.attemptLockRef).activationPackageId;
+    return input;
+  }
   if (input.attempt015RouteHttp === true && !input.activationPackageId) {
     input.activationPackageId = exactRouteHttpActivationPackageIdAttempt015;
   } else if (input.attempt016RouteHttp === true && !input.activationPackageId) {
@@ -1432,6 +1485,11 @@ function parseArgs(argv) {
     } else if (arg === "--activation-package-id") {
       input.activationPackageId = argv[index + 1];
       index += 1;
+    } else if (arg === "--attempt-lock") {
+      input.attemptLockRef = argv[index + 1];
+      index += 1;
+    } else if (arg === "--route-http-from-lock") {
+      input.routeHttpFromLock = true;
     } else if (arg === "--confirmation-phrase") {
       input.confirmationPhrase = argv[index + 1];
       index += 1;
@@ -1503,7 +1561,7 @@ function parseArgs(argv) {
 
 if (require.main === module) {
   const input = parseArgs(process.argv.slice(2));
-  const run = input.attempt003RouteHttp || input.attempt004RouteHttp || input.attempt005RouteHttp || input.attempt006RouteHttp || input.attempt007RouteHttp || input.attempt008RouteHttp || input.attempt009RouteHttp || input.attempt010RouteHttp || input.attempt011RouteHttp || input.attempt012RouteHttp || input.attempt013RouteHttp || input.attempt014RouteHttp || input.attempt015RouteHttp || input.attempt016RouteHttp
+  const run = input.routeHttpFromLock || input.attempt003RouteHttp || input.attempt004RouteHttp || input.attempt005RouteHttp || input.attempt006RouteHttp || input.attempt007RouteHttp || input.attempt008RouteHttp || input.attempt009RouteHttp || input.attempt010RouteHttp || input.attempt011RouteHttp || input.attempt012RouteHttp || input.attempt013RouteHttp || input.attempt014RouteHttp || input.attempt015RouteHttp || input.attempt016RouteHttp
     ? runSecretlessOptionAExactRouteHttpTransport(input)
     : Promise.resolve(runSecretlessOptionACallableRunner(input));
   run.then((result) => {

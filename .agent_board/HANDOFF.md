@@ -2592,3 +2592,27 @@ not_performed_addendum:
   - no push/tag/release/deploy
 next_safe_action: validate consumed state, verify rerun fails closed with 0 POST, then exact-file local commit.
 ```
+
+### Handoff Addendum - Attempt 017 Prepared 2026-06-04
+
+```text
+status: completed_validated_inactive_pending_commit
+completed_addendum:
+  - Restarted VCPToolBox with ENABLE_AI_IMAGE_REAL_EXECUTION=true and ENABLE_NATIVE_DOUBAO_SECRETLESS_RUNTIME_DELEGATE=true; listener PID 31812.
+  - Prepared attempt-017 inactive lock and package refs.
+  - Refreshed VCPToolBox route/server binding to attempt-017 at commit 93741eb14d6bc73dfaffbe7344b839e2640f2c01.
+  - Aligned VCPToolBox secretless tests to attempt-017 at commit 3bb285cdfc58feb6d6452d0cf4837495041362e7.
+  - Added lock-driven runner path using --route-http-from-lock --attempt-lock so future attempts do not require hard-coded runner constants.
+validation_addendum:
+  - VCPToolBox targeted secretless tests passed 30/30.
+  - attempt-017 source binding verifier passed.
+  - attempt-017 lock-driven preflight-only runner passed with 0 route HTTP.
+  - attempt-017 lock-driven exact phrase runner failed closed at inactive lock boundary with 0 route HTTP.
+not_performed_addendum:
+  - no attempt-017 route HTTP POST
+  - no provider/plugin/API/image generation
+  - no output write
+  - no secret/env/config value read
+  - no push/tag/release/deploy
+next_safe_action: exact-file commit AIL attempt-017 prepare; future live POST requires separate exact activation.
+```
