@@ -2650,3 +2650,23 @@ boundary_checks_addendum:
   image_generation_performed: false
 recommended_next: final diff review; exact-file AIL local commit if allowed; separate activation package required before any live POST.
 ```
+
+### Checkpoint Addendum - Attempt 015 Lock AIL Commit Seal 2026-06-04
+
+```text
+status: completed_validated_pending_commit
+result: ATTEMPT_015_LOCK_BOUND_TO_AIL_GUARD_COMMIT
+summary: Bound attempt-015 lock agent_image_lab_commit_required to the completed P0 guard commit 6ad539c70d6443d7dcbe6e2ea091dd6169740522. Because Git commits cannot self-reference their own hash, verifier strict mode now requires current AIL HEAD to contain that required guard commit.
+validation_run_addendum:
+  - verifier: passed with ail_head_contains_required_lock_commit
+  - npm run validate:runtime-to-review-secretless-serum-attempt-015-binding-guard: passed
+  - runner --attempt-015-route-http --confirm-route-http --confirmation-phrase RUNTIME_TO_REVIEW_V1_SECRETLESS_SERUM_BOTTLE_ONE_PROVIDER_ONE_IMAGE: failed closed at inactive lock authorization boundary, listener not checked, route_http_request_performed=false
+boundary_checks_addendum:
+  route_http_post_performed: false
+  listener_head_performed_when_lock_inactive: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+recommended_next: commit lock seal; exact activation refresh must be separate and must explicitly flip lock authorization before any live POST can pass.
+```

@@ -33,6 +33,16 @@ function gitHead(cwd) {
   return result.stdout.trim();
 }
 
+function gitCommitIsAncestor(cwd, requiredCommit, headCommit) {
+  if (!/^[0-9a-f]{40}$/.test(String(requiredCommit || "")) ||
+      !/^[0-9a-f]{40}$/.test(String(headCommit || ""))) {
+    return false;
+  }
+  if (requiredCommit === headCommit) return true;
+  const result = spawnSync("git", ["merge-base", "--is-ancestor", requiredCommit, headCommit], { cwd, encoding: "utf8" });
+  return result.status === 0;
+}
+
 function extractConstString(source, name) {
   const escaped = name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   const pattern = new RegExp(`const\\s+${escaped}\\s*=\\s*['"]([^'"]+)['"]`, "m");
@@ -125,8 +135,8 @@ function verifyAttemptLockBinding(options = {}) {
 
   check("lock_schema", lock.schema === "runtime_to_review_v1_secretless_serum_attempt_lock.v1", { lock_id: lock.lock_id });
   check("lock_prompt_hash", lock.prompt_sha256 === sha256Text(lock.prompt || ""), { prompt_sha256: lock.prompt_sha256 });
-  check("ail_head_matches_lock_or_is_prepare_placeholder",
-    lock.agent_image_lab_commit_required === ailHead ||
+  check("ail_head_contains_required_lock_commit",
+    gitCommitIsAncestor(repoRoot, lock.agent_image_lab_commit_required, ailHead) ||
     (!options.strictCommits && lock.agent_image_lab_commit_required === "resolved_by_prepare_attempt_after_local_commit"),
     { expected: lock.agent_image_lab_commit_required, actual: ailHead });
   check("vcptoolbox_head_matches_current_attempt_binding_commit",

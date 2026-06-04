@@ -1932,3 +1932,14 @@ validation: runner --attempt-015-route-http --confirm-route-http --confirmation-
 boundary_checks: route_http_post_performed=false; listener_head_performed=false_on_lock_boundary; provider_contact_performed=false; plugin_call_performed=false; api_call_performed=false; image_generation_performed=false; push_tag_release_deploy_performed=false.
 next_safe_task: final diff review and exact-file AIL local commit if allowed; next exact activation must flip lock authorization in a separate activation package.
 ```
+
+### Attempt 015 Lock AIL Commit Seal - 2026-06-04
+
+```text
+status: completed_validated_pending_commit
+ail_required_guard_commit: 6ad539c70d6443d7dcbe6e2ea091dd6169740522
+seal_note: lock cannot self-reference the commit that contains itself; verifier now requires current AIL HEAD to contain the required guard commit.
+validation: verifier passed with ail_head_contains_required_lock_commit; binding guard passed; runner confirm-route-http with exact confirmation phrase still failed closed at inactive lock authorization boundary with listener not_checked and route_http_request_performed=false.
+boundary_checks: route_http_post_performed=false; listener_head_performed_when_lock_inactive=false; provider_contact_performed=false; plugin_call_performed=false; api_call_performed=false; image_generation_performed=false.
+next_safe_task: commit lock seal, then prepare exact activation refresh without enabling POST until separate activation flips lock authorization.
+```
