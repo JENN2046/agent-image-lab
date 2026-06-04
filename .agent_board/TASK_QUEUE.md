@@ -1,3 +1,19 @@
+- [x] ID: secretless_serum_attempt_012_live_execution_evidence_20260604
+      Lane: Amber exact activation execution evidence.
+      Status: completed_validated_one_live_probe_failed_closed_before_provider.
+      Goal: Execute one secretless serum bottle live probe through the internal route and record planned attempt-012 evidence.
+      Activation consumed: `AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-012`.
+      Agent Image Lab commit: `9d48fc5ed6856f0f1bd7d88e62ca52c70843b630`.
+      VCPToolBox commit: `24b9f887b77c1db48da2d23d6ef9fb9cd080ea83`.
+      Receipt: `reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_012.json`.
+      Artifact record: `reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_012.json`.
+      Route result: `serum_bottle_secretless_internal_authorization_denied`.
+      Calls used: route_http_request=1; provider=0; plugin=0; api=0; image=0; retry=false.
+      Boundary: no output image; no secret/env/config read; no Authorization header construction; no old admin-auth route; no push/tag/release/deploy.
+      Validation: attempt-012 full receipt/artifact validator passed after failed-closed evidence write.
+      Remaining gate: exact-file local commit this failed-closed evidence; next technical task is VCPToolBox internal secretless authorizer inspection before any attempt-013.
+---
+
 - [x] ID: secretless_serum_attempt_012_exact_file_refresh_20260603
       Lane: Green local runner/binding/preflight/validator registration.
       Status: completed_validated_local_runner_refresh_no_execution.

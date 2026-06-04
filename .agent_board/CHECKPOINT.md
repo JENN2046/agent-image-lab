@@ -1,3 +1,29 @@
+## Checkpoint - Secretless Serum Attempt 012 Live Execution Evidence 2026-06-04
+
+```text
+phase: secretless_serum_attempt_012_live_execution_evidence_20260604
+status: completed_validated_one_live_probe_failed_closed_before_provider
+result: ATTEMPT_012_CONSUMED_FAILED_CLOSED_INTERNAL_AUTHORIZATION_DENIED
+summary: attempt-012 exact activation was consumed once against Agent Image Lab runner commit 9d48fc5ed6856f0f1bd7d88e62ca52c70843b630 and VCPToolBox commit 24b9f887b77c1db48da2d23d6ef9fb9cd080ea83. Listener, non-POST route surface, baseline, binding packet, route transport, and activation preflight checks passed before execution. The single POST returned serum_bottle_secretless_internal_authorization_denied before provider/plugin/API/image. Planned failed-closed receipt and artifact record were written.
+changed_files_current_task:
+  - reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_012.json
+  - reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_012.json
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/BLOCKERS.md
+validation_completed:
+  - non-POST OPTIONS route surface check: passed with 204 and no POST
+  - npm run validate:runtime-to-review-secretless-serum-live-probe-receipt-attempt-012 -- --allow-pending: passed before POST
+  - runner --attempt-012-route-http --preflight-only: passed with route_http_request_performed=false
+  - npm run validate:runtime-to-review-secretless-serum-live-probe-receipt-attempt-012: passed after failed-closed receipt/artifact write
+boundary_checks: route HTTP POST=1; provider/plugin/API/image=0 each; retry=false; no output image; no secret/env/config read; no Authorization header construction by Agent Image Lab; no old admin-auth route; no push/tag/release/deploy.
+recommended_next_phase: exact-file local commit attempt-012 failed-closed evidence, then inspect VCPToolBox internal secretless authorizer state without reading env/config/secrets before preparing any attempt-013.
+```
+
+---
+
 ## Checkpoint - Secretless Serum Attempt 012 Exact-File Refresh 2026-06-03
 
 ```text
