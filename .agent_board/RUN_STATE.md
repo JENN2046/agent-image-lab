@@ -87,6 +87,23 @@ boundary_checks: route_http_request_performed=false; provider_contact_performed=
 next_safe_task: exact-file local commit attempt-018 prepare. Future exact activation must first restart/reload VCPToolBox so the live process loads eb8d4e10261d8ac2e0ae0fd26cb3595ddcef7962, then flip the lock authorization boundary in a separate one-shot activation.
 ```
 
+### Attempt 018 VCPToolBox Reload And Exact Activation Issued - 2026-06-04
+
+```text
+status: exact_activation_issued_validated_pending_final_gate_and_one_post
+mode: Amber bounded runtime reload plus separate exact activation issuance; no route POST
+vcptoolbox_reloaded_head: eb8d4e10261d8ac2e0ae0fd26cb3595ddcef7962
+vcptoolbox_listener_pid: 29728
+vcptoolbox_listener_port: 6005
+vcptoolbox_internal_head_surface_status: 204
+activation_issued_ref: reports/runtime_to_review_v1/secretless_serum_exact_activation_issued_20260604_attempt_018.json
+lock_ref: reports/runtime_to_review_v1/secretless_serum_attempt_018.lock.json
+lock_sha256_after_activation: 1027ea338d2c84ef43885d158adc73440e407b5ba6f702b1e1d9ebbc58ccdc20
+authorization_boundary: can_execute_now=true; route_http_allowed_by_this_lock=true; separate_exact_activation_required=false; max_route_http_requests=1; activation_consumed=false; route_http_requests_used=0.
+boundary_checks: route_http_request_performed=false; provider_contact_performed=false; plugin_call_performed=false; api_call_performed=false; image_generation_performed=false; output_write_performed=false; no secret/env/config read; no Authorization header construction; no push/tag/release/deploy.
+next_safe_task: run final gate only. If listener, surface, AIL HEAD, VCPToolBox HEAD, lock hash, VCPToolBox source binding, and pending output paths all pass, consume exactly one attempt-018 POST and then seal the lock no-retry.
+```
+
 ---
 
 ## Current Run State - Secretless Serum Attempt 016 Exact Activation 2026-06-04

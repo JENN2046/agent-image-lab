@@ -2598,6 +2598,26 @@ not_performed_addendum:
 next_safe_action: exact-file commit AIL attempt-018 prepare. Future live POST requires VCPToolBox restart/reload to eb8d4e10261d8ac2e0ae0fd26cb3595ddcef7962 and a separate exact activation.
 ```
 
+### Handoff Addendum - Attempt 018 VCPToolBox Reload And Exact Activation Issued 2026-06-04
+
+```text
+status: exact_activation_issued_validated_pending_final_gate_and_one_post
+completed_addendum:
+  - Restarted/reloaded VCPToolBox to current HEAD eb8d4e10261d8ac2e0ae0fd26cb3595ddcef7962.
+  - Confirmed port 6005 listener PID 29728.
+  - Confirmed internal HEAD surface returned 204.
+  - Flipped reports/runtime_to_review_v1/secretless_serum_attempt_018.lock.json from inactive to one-shot active for the separate exact activation.
+  - Added reports/runtime_to_review_v1/secretless_serum_exact_activation_issued_20260604_attempt_018.json with lock sha256 1027ea338d2c84ef43885d158adc73440e407b5ba6f702b1e1d9ebbc58ccdc20.
+not_performed_addendum:
+  - no attempt-018 route HTTP POST
+  - no provider/plugin/API/image generation
+  - no output write
+  - no secret/env/config value read
+  - no Authorization header construction by Agent Image Lab
+  - no push/tag/release/deploy
+next_safe_action: run final gate for listener, surface, AIL HEAD, VCPToolBox HEAD, lock hash, VCPToolBox source binding, and pending output paths. If it passes, consume exactly one attempt-018 POST and seal the lock consumed/no-retry.
+```
+
 ### Handoff Addendum - Attempt 016 Prepared 2026-06-04
 
 ```text

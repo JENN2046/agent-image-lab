@@ -2790,6 +2790,31 @@ boundary_checks_addendum:
 recommended_next: exact-file local commit. Future exact activation must restart/reload VCPToolBox to eb8d4e10261d8ac2e0ae0fd26cb3595ddcef7962 before flipping the attempt-018 lock active.
 ```
 
+### Checkpoint Addendum - Attempt 018 VCPToolBox Reload And Exact Activation Issued 2026-06-04
+
+```text
+status: exact_activation_issued_validated_pending_final_gate_and_one_post
+result: ATTEMPT_018_LOCK_AUTHORIZATION_BOUNDARY_FLIPPED_TO_ONE_SHOT_ACTIVE
+summary: Restarted/reloaded VCPToolBox so the live listener loads eb8d4e10261d8ac2e0ae0fd26cb3595ddcef7962, confirmed the internal HEAD surface returned 204, then issued the separate attempt-018 exact activation by flipping the lock authorization boundary from inactive to active for one final-gated POST.
+activation_issued_ref: reports/runtime_to_review_v1/secretless_serum_exact_activation_issued_20260604_attempt_018.json
+lock_ref: reports/runtime_to_review_v1/secretless_serum_attempt_018.lock.json
+lock_sha256_after_activation: 1027ea338d2c84ef43885d158adc73440e407b5ba6f702b1e1d9ebbc58ccdc20
+vcptoolbox_listener_pid: 29728
+vcptoolbox_head: eb8d4e10261d8ac2e0ae0fd26cb3595ddcef7962
+vcptoolbox_output_refs_boundary_commit_required: deeebbfa17ec56a9ad477ce8cdfd09fe50750b1f
+validation_run_addendum:
+  - VCPToolBox listener on port 6005: present, PID 29728
+  - VCPToolBox internal HEAD surface: 204
+boundary_checks_addendum:
+  route_http_request_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  output_write_performed: false
+recommended_next: run final gate. Only if all final-gate checks pass, consume exactly one attempt-018 POST; do not retry after consumption.
+```
+
 ### Checkpoint Addendum - Attempt 016 Prepared 2026-06-04
 
 ```text

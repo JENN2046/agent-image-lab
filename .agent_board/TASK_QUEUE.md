@@ -30,6 +30,18 @@
       Remaining gate: exact-file local commit. Future live POST requires VCPToolBox restart/reload to current binding and separate exact activation.
 ---
 
+- [x] ID: secretless_serum_attempt_018_exact_activation_issued_20260604
+      Lane: Amber bounded runtime reload plus separate exact activation issuance.
+      Status: exact_activation_issued_validated_pending_final_gate_and_one_post.
+      Goal: Reload VCPToolBox to eb8d4e10261d8ac2e0ae0fd26cb3595ddcef7962 and flip the attempt-018 lock from inactive to one-shot active without consuming POST.
+      Lock: `reports/runtime_to_review_v1/secretless_serum_attempt_018.lock.json`.
+      Activation record: `reports/runtime_to_review_v1/secretless_serum_exact_activation_issued_20260604_attempt_018.json`.
+      Lock sha256 after activation: `1027ea338d2c84ef43885d158adc73440e407b5ba6f702b1e1d9ebbc58ccdc20`.
+      VCPToolBox listener: port 6005, PID 29728, internal HEAD surface 204.
+      Boundary: route_http_request=0; provider=0; plugin=0; api=0; image=0; output=0; no secret/env/config read; no Authorization header construction; no push/tag/release/deploy.
+      Remaining gate: run final gate; if all checks pass, consume exactly one attempt-018 POST and seal consumed/no-retry.
+---
+
 - [x] ID: attempt_binding_lock_p0_guard_20260604
       Lane: Green/Amber exact source-read plus local AIL guard implementation.
       Status: completed_validated_local_guard_current_vcptoolbox_failed_closed.
