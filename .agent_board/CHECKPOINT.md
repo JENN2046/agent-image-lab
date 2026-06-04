@@ -2692,3 +2692,23 @@ boundary_checks_addendum:
   image_generation_performed: false
 recommended_next: commit exact activation refresh package, then wait for/issue a separate exact activation that explicitly flips lock authorization before any live POST.
 ```
+
+### Checkpoint Addendum - Attempt 015 Exact Activation Issued 2026-06-04
+
+```text
+status: exact_activation_issued_validated_pending_commit_and_final_gate
+result: ATTEMPT_015_LOCK_AUTHORIZATION_BOUNDARY_FLIPPED_TO_ONE_SHOT_ACTIVE
+summary: User issued separate exact activation for attempt-015. The lock is active for one final-gated POST only, with source binding still verified against VCPToolBox current-attempt binding commit cd25e1485dd1b31f84fe5ad0d09c90ab1c1d0143 and pending outputs still empty.
+activation_issued_ref: reports/runtime_to_review_v1/secretless_serum_exact_activation_issued_20260604_attempt_015.json
+validation_run_addendum:
+  - npm run validate:runtime-to-review-secretless-serum-attempt-015-exact-activation-issued: passed
+  - npm run validate:runtime-to-review-secretless-serum-attempt-015-activation-refresh: passed
+  - node scripts/verify_runtime_to_review_v1_secretless_serum_attempt_lock_binding.js: passed
+boundary_checks_addendum:
+  route_http_post_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+recommended_next: commit exact activation issuance, then run final gate and allow exactly one POST only if every final-gate check passes.
+```

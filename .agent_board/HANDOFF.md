@@ -2495,3 +2495,25 @@ not_performed_addendum:
   - no push/tag/release/deploy
 next_safe_action: final validation/diff review and exact-file AIL local commit; live POST remains blocked until a separate exact activation flips the lock authorization boundary.
 ```
+
+### Handoff Addendum - Attempt 015 Exact Activation Issued 2026-06-04
+
+```text
+status: exact_activation_issued_validated_pending_commit_and_final_gate
+completed_addendum:
+  - Flipped reports/runtime_to_review_v1/secretless_serum_attempt_015.lock.json to one-shot active.
+  - Added reports/runtime_to_review_v1/secretless_serum_exact_activation_issued_20260604_attempt_015.json.
+  - Updated source binding verifier so active and inactive lock authorization shapes are both legal, while secretless constraints remain enforced.
+  - Added exact activation issued validator and registered it.
+validation_addendum:
+  - npm run validate:runtime-to-review-secretless-serum-attempt-015-exact-activation-issued passed.
+  - npm run validate:runtime-to-review-secretless-serum-attempt-015-activation-refresh passed.
+  - node scripts/verify_runtime_to_review_v1_secretless_serum_attempt_lock_binding.js passed.
+not_performed_addendum:
+  - no route HTTP POST yet
+  - no provider/plugin/API/image generation yet
+  - no output write yet
+  - no secret/env/config value read
+  - no push/tag/release/deploy
+next_safe_action: exact-file commit activation issuance, then run final gate; if final gate passes, exactly one POST is authorized.
+```

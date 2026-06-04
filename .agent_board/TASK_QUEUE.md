@@ -977,12 +977,14 @@ done:
     evidence: prepare --apply-vcptoolbox-binding passed with vcptoolbox_binding_already_matches_lock and commit skipped
   - task: prepare attempt-015 exact activation refresh package
     evidence: activation preflight and binding packet are bound to the single lock and VCPToolBox current-attempt binding commit cd25e1485dd1b31f84fe5ad0d09c90ab1c1d0143; activation refresh validator passed
+  - task: issue attempt-015 exact activation
+    evidence: lock authorization boundary flipped to one-shot active; exact activation issued validator passed; no POST performed yet
 in_progress:
-  - none
+  - task: run final gate and consume exactly one POST only if all checks pass
 blocked:
   - none
 remaining:
-  - review activation refresh diff and run final targeted validation before any AIL local commit
-  - separate exact activation must flip lock authorization before any live POST can pass
+  - exact-file commit activation issuance
+  - run final gate; if it passes, allow one POST and then record receipt/artifact evidence
   - push/tag/release/deploy remain unauthorized
 ```

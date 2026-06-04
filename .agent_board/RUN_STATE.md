@@ -1957,3 +1957,16 @@ validation: npm run validate:runtime-to-review-secretless-serum-attempt-015-acti
 boundary_checks: can_execute_now=false; route_http_request_performed=false; provider_contact_performed=false; plugin_call_performed=false; api_call_performed=false; image_generation_performed=false; secret_value_read_performed=false; authorization_header_constructed_by_agent_image_lab=false.
 next_safe_task: final validation/diff review and exact-file local commit; actual exact activation must separately flip lock authorization before any POST can pass.
 ```
+
+### Attempt 015 Exact Activation Issued - 2026-06-04
+
+```text
+status: exact_activation_issued_validated_pending_commit_and_final_gate
+activation_issued_ref: reports/runtime_to_review_v1/secretless_serum_exact_activation_issued_20260604_attempt_015.json
+lock_ref: reports/runtime_to_review_v1/secretless_serum_attempt_015.lock.json
+lock_sha256_after_activation: 5f589f7b66ed412566ed82a7336a69517a340c8e05821de58acd259b07317045
+authorization_boundary: can_execute_now=true; route_http_allowed_by_this_lock=true; separate_exact_activation_required=false; max_route_http_requests=1; activation_consumed=false.
+validation: npm run validate:runtime-to-review-secretless-serum-attempt-015-exact-activation-issued passed; npm run validate:runtime-to-review-secretless-serum-attempt-015-activation-refresh passed; node scripts/verify_runtime_to_review_v1_secretless_serum_attempt_lock_binding.js passed.
+boundary_checks: route_http_request_performed=false; provider_contact_performed=false; plugin_call_performed=false; api_call_performed=false; image_generation_performed=false; output_write_performed=false.
+next_safe_task: exact-file commit activation issuance, then run runner final gate; if listener/surface/source binding/pending outputs pass, one POST is authorized.
+```

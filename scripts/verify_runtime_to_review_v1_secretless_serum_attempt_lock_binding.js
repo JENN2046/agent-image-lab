@@ -177,8 +177,26 @@ function verifyAttemptLockBinding(options = {}) {
   check("receipt_path_pending", pathExistsPending(lock.receipt_ref), { receipt_ref: lock.receipt_ref });
   check("artifact_record_path_pending", pathExistsPending(lock.artifact_record_ref), { artifact_record_ref: lock.artifact_record_ref });
   check("output_directory_pending", pathExistsPending(lock.output_directory_ref), { output_directory_ref: lock.output_directory_ref });
-  check("no_route_http_authorized_by_lock", lock.authorization_boundary?.route_http_allowed_by_this_lock === false);
-  check("separate_exact_activation_required", lock.authorization_boundary?.separate_exact_activation_required === true);
+  const auth = lock.authorization_boundary || {};
+  const inactiveAuthorizationBoundary =
+    auth.can_execute_now === false &&
+    auth.route_http_allowed_by_this_lock === false &&
+    auth.separate_exact_activation_required === true;
+  const activeAuthorizationBoundary =
+    auth.can_execute_now === true &&
+    auth.route_http_allowed_by_this_lock === true &&
+    auth.separate_exact_activation_required === false;
+  check("authorization_boundary_shape_valid",
+    inactiveAuthorizationBoundary || activeAuthorizationBoundary, {
+      can_execute_now: auth.can_execute_now,
+      route_http_allowed_by_this_lock: auth.route_http_allowed_by_this_lock,
+      separate_exact_activation_required: auth.separate_exact_activation_required
+    });
+  check("authorization_boundary_secretless_constraints",
+    auth.secret_value_read_allowed === false &&
+    auth.authorization_header_constructed_by_agent_image_lab === false &&
+    auth.overwrite_existing_files_allowed === false &&
+    auth.push_tag_release_deploy_performed === false);
 
   const passed = checks.every((item) => item.passed);
   return {

@@ -87,15 +87,24 @@ const boundaryFalseFields = [
   "push_tag_release_deploy_performed"
 ];
 
-check("lock_is_attempt_015_and_inactive", () =>
+check("lock_is_attempt_015_and_authorization_shape_valid", () => {
+  const auth = lock.authorization_boundary || {};
+  const inactive =
+    auth.can_execute_now === false &&
+    auth.route_http_allowed_by_this_lock === false &&
+    auth.separate_exact_activation_required === true;
+  const active =
+    auth.can_execute_now === true &&
+    auth.route_http_allowed_by_this_lock === true &&
+    auth.separate_exact_activation_required === false;
+  return (
   lock.schema === "runtime_to_review_v1_secretless_serum_attempt_lock.v1" &&
   lock.attempt === "015" &&
   lock.activation_id === "AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-015" &&
   lock.pipeline_id === "secretless-serum-live-probe-attempt-015" &&
-  lock.authorization_boundary.can_execute_now === false &&
-  lock.authorization_boundary.route_http_allowed_by_this_lock === false &&
-  lock.authorization_boundary.separate_exact_activation_required === true
-);
+  (inactive || active)
+  );
+});
 check("lock_prompt_hash_matches", () => lock.prompt_sha256 === sha256Text(lock.prompt || ""));
 check("verifier_passes_current_source_binding", () =>
   verifier.passed === true &&
@@ -201,7 +210,7 @@ process.stdout.write(`${JSON.stringify({
   agent_image_lab_head: ailHead,
   vcptoolbox_head: verifier.vcptoolbox_head,
   verifier_status: verifier.status,
-  can_execute_now: false,
+  can_execute_now: lock.authorization_boundary?.can_execute_now === true,
   route_http_request_performed: false,
   provider_contact_performed: false,
   plugin_call_performed: false,
