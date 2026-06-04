@@ -1,3 +1,48 @@
+## Current Handoff Update - Secretless Serum Attempt 014 Exact-File Refresh 2026-06-04
+
+```text
+phase: secretless_serum_attempt_014_exact_file_refresh_20260604
+status: completed_validated_local_runner_refresh_no_execution_pending_commit
+repository: A:\agent-image-lab\agent-image-lab-v0.2
+branch: codex/secretless-serum-live-channel
+activation_package_id_prepared: AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-014
+binding_packet_id: BINDING-DRAFT-SECRETLESS-OPTION-A-SERUM-20260603-014
+vcptoolbox_required_commit: 549a26abc7d34e973c9d1ac6d4491aa8d92e88f1
+route_http: POST http://127.0.0.1:6005/internal/ai-image-agents/execute/serum-bottle-secretless
+binding_packet_ref: reports/runtime_to_review_v1/secretless_option_a_exact_binding_packet_draft_20260603_attempt_014.json
+activation_preflight_ref: reports/runtime_to_review_v1/secretless_serum_live_probe_activation_preflight_20260603_attempt_014.json
+prompt_package_ref: reports/runtime_to_review_v1/secretless_serum_attempt_014_prompt_quality_package_20260604.json
+validator_ref: scripts/validate_runtime_to_review_v1_secretless_serum_live_probe_receipt_attempt_014.js
+future_receipt_ref: reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_014.json
+future_artifact_record_ref: reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_014.json
+completed:
+  - VCPToolBox artifact evidence fix was locally committed at 549a26abc7d34e973c9d1ac6d4491aa8d92e88f1
+  - Agent Image Lab runner now supports --attempt-014-route-http and exact attempt-014 defaults
+  - Agent Image Lab binding packet, activation preflight, prompt package, validator, package script, validation manifest, and resume surfaces now reference attempt-014 paths
+  - attempt-014 prompt includes complete full bottle visibility, generous bottom margin, and no cropping
+validation_run:
+  - node --check scripts/run_runtime_to_review_v1_secretless_option_a_callable_runner.js: passed
+  - node --check scripts/validate_runtime_to_review_v1_secretless_serum_live_probe_receipt_attempt_014.js: passed
+  - npm run validate:runtime-to-review-secretless-serum-live-probe-receipt-attempt-014 -- --allow-pending: passed
+  - node scripts/validate_validation_manifest.js: passed
+  - runner --attempt-014-route-http --preflight-only: passed
+not_performed:
+  - route HTTP POST
+  - live probe
+  - provider contact
+  - plugin call
+  - API call
+  - image generation
+  - output image write
+  - secret value or env/config content read
+  - Authorization header construction by Agent Image Lab
+  - old admin-auth route
+  - push, tag, release, deploy
+next_safe_action: final local validation and exact-file local commit this Agent Image Lab refresh. Future attempt-014 live execution requires VCPToolBox restart/load of 549a26ab..., listener and non-POST surface checks, baseline checks, and a separate exact activation.
+```
+
+---
+
 ## Current Handoff Update - Secretless Serum Attempt 013 Evidence And Quality Review 2026-06-04
 
 ```text

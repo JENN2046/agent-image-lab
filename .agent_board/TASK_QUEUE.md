@@ -1,3 +1,20 @@
+- [x] ID: secretless_serum_attempt_014_exact_file_refresh_20260604
+      Lane: Green local runner/binding/preflight/validator/prompt registration.
+      Status: completed_validated_local_runner_refresh_no_execution_pending_commit.
+      Goal: Register AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-014 after the VCPToolBox artifact evidence fix, with a prompt that keeps the full bottle visible and prevents bottom crop.
+      VCPToolBox required commit: `549a26abc7d34e973c9d1ac6d4491aa8d92e88f1`.
+      Binding packet: `reports/runtime_to_review_v1/secretless_option_a_exact_binding_packet_draft_20260603_attempt_014.json`.
+      Activation preflight: `reports/runtime_to_review_v1/secretless_serum_live_probe_activation_preflight_20260603_attempt_014.json`.
+      Prompt package: `reports/runtime_to_review_v1/secretless_serum_attempt_014_prompt_quality_package_20260604.json`.
+      CLI flag: `--attempt-014-route-http`.
+      Validator: `scripts/validate_runtime_to_review_v1_secretless_serum_live_probe_receipt_attempt_014.js`.
+      Future receipt: `reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_014.json`.
+      Future artifact record: `reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_014.json`.
+      Boundary: route_http_request=0; provider=0; plugin=0; api=0; image=0; retry=false; no secret/env/config read; no Authorization header construction; no old admin-auth route; no push/tag/release/deploy.
+      Validation: node --check runner and attempt-014 validator passed; attempt-014 pending-safe validator passed; validation manifest passed; preflight-only passed with no route HTTP.
+      Remaining gate: final agent board/diff validation and exact-file local commit; future attempt-014 execution requires VCPToolBox restart/load of 549a26ab..., listener/surface/baseline checks, and a new exact activation.
+---
+
 - [x] ID: secretless_serum_attempt_013_evidence_quality_review_20260604
       Lane: Amber exact activation evidence closeout plus Green quality review.
       Status: completed_validated_success_evidence_review_pending_commit.

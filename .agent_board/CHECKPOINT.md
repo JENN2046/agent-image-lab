@@ -1,3 +1,35 @@
+## Checkpoint - Secretless Serum Attempt 014 Exact-File Refresh 2026-06-04
+
+```text
+phase: secretless_serum_attempt_014_exact_file_refresh_20260604
+status: completed_validated_local_runner_refresh_no_execution_pending_commit
+result: ATTEMPT_014_EXACT_FILE_REFRESH_READY_NO_LIVE_PROBE
+summary: Refreshed Agent Image Lab runner defaults, binding packet, activation preflight, prompt quality package, receipt/artifact validator, validation manifest, and resume surfaces for AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-014. The new VCPToolBox baseline is 549a26abc7d34e973c9d1ac6d4491aa8d92e88f1, which fills artifact sha256/mime/dimensions in route evidence. The attempt-014 prompt explicitly asks for complete full bottle visibility, generous bottom margin, and no cropping. No route HTTP POST or live probe was executed.
+changed_files_current_task:
+  - scripts/run_runtime_to_review_v1_secretless_option_a_callable_runner.js
+  - scripts/validate_runtime_to_review_v1_secretless_serum_live_probe_receipt_attempt_014.js
+  - scripts/validation_manifest.json
+  - package.json
+  - reports/runtime_to_review_v1/secretless_option_a_exact_binding_packet_draft_20260603_attempt_014.json
+  - reports/runtime_to_review_v1/secretless_serum_live_probe_activation_preflight_20260603_attempt_014.json
+  - reports/runtime_to_review_v1/secretless_serum_attempt_014_prompt_quality_package_20260604.json
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/BLOCKERS.md
+validation_completed:
+  - node --check scripts/run_runtime_to_review_v1_secretless_option_a_callable_runner.js: passed
+  - node --check scripts/validate_runtime_to_review_v1_secretless_serum_live_probe_receipt_attempt_014.js: passed
+  - npm run validate:runtime-to-review-secretless-serum-live-probe-receipt-attempt-014 -- --allow-pending: passed
+  - node scripts/validate_validation_manifest.js: passed
+  - runner --attempt-014-route-http --preflight-only: passed with route_http_request_performed=false
+boundary_checks: route HTTP POST=0; provider/plugin/API/image=0 each; retry=false; no output image; no secret/env/config read; no Authorization header construction by Agent Image Lab; no old admin-auth route; no push/tag/release/deploy.
+recommended_next_phase: exact-file local commit this refresh, then restart VCPToolBox to 549a26ab... before any new attempt-014 exact activation.
+```
+
+---
+
 ## Checkpoint - Secretless Serum Attempt 013 Evidence And Quality Review 2026-06-04
 
 ```text

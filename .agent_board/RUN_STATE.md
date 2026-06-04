@@ -1,3 +1,31 @@
+## Current Run State - Secretless Serum Attempt 014 Exact-File Refresh 2026-06-04
+
+```text
+phase: secretless_serum_attempt_014_exact_file_refresh_20260604
+status: completed_validated_local_runner_refresh_no_execution_pending_commit
+mode: Green local runner/binding/preflight/validator/prompt registration; no live request
+activation_package_id_prepared: AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-014
+binding_packet_id: BINDING-DRAFT-SECRETLESS-OPTION-A-SERUM-20260603-014
+route_http_origin_required: http://127.0.0.1:6005
+route_http_method: POST
+route_http_path: /internal/ai-image-agents/execute/serum-bottle-secretless
+vcptoolbox_required_commit: 549a26abc7d34e973c9d1ac6d4491aa8d92e88f1
+binding_packet_ref: reports/runtime_to_review_v1/secretless_option_a_exact_binding_packet_draft_20260603_attempt_014.json
+activation_preflight_ref: reports/runtime_to_review_v1/secretless_serum_live_probe_activation_preflight_20260603_attempt_014.json
+prompt_package_ref: reports/runtime_to_review_v1/secretless_serum_attempt_014_prompt_quality_package_20260604.json
+validator_ref: scripts/validate_runtime_to_review_v1_secretless_serum_live_probe_receipt_attempt_014.js
+receipt_ref_future: reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_014.json
+artifact_record_ref_future: reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_014.json
+output_directory_ref_future: runs/real_generation/runtime_to_review_v1_guarded_live_probe_serum_bottle_secretless_attempt_014/
+prompt_goal: complete full bottle fully visible, generous bottom margin, no cropping.
+result: Local runner, binding packet, activation preflight, prompt quality package, validation manifest, and receipt/artifact validator now know attempt-014 and the VCPToolBox baseline 549a26abc7d34e973c9d1ac6d4491aa8d92e88f1. --attempt-014-route-http binds the exact activation package and preflight-only performs no route HTTP.
+latest_validation: node --check runner and attempt-014 validator passed; attempt-014 pending-safe validator passed; validation manifest passed; preflight-only passed with route_http_request_performed=false.
+boundary_checks: route_http_request_performed=false; provider/plugin/API/image=false; retry=false; no secret/env/config read; no Authorization header construction by Agent Image Lab; no old admin-auth route; no push/tag/release/deploy.
+next_safe_task: final agent board/diff validation and exact-file local commit this refresh. Future attempt-014 live execution requires VCPToolBox restart/load of 549a26ab..., listener/surface/baseline checks, and a separate exact activation.
+```
+
+---
+
 ## Current Run State - Secretless Serum Attempt 013 Evidence And Quality Review 2026-06-04
 
 ```text
