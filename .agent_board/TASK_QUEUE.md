@@ -1,3 +1,16 @@
+- [x] ID: pr8_jpeg_archive_terminal_post_push_sync_20260604
+      Lane: Green terminal status-surface sync after explicit push authorization.
+      Status: completed_validated_terminal_status_surface_sync.
+      Functional commit pushed: `0e1139a9d58805b50d7bc67832a341dbc0b73914`.
+      PR: `JENN2046/agent-image-lab#8`.
+      Remote verification after functional push: PR head `0e1139a9d58805b50d7bc67832a341dbc0b73914`; merge state `CLEAN`.
+      terminal_status_surface_sync: true
+      post_push_followup: read_only_remote_sync_only
+      no_followup_agent_board_write_after_push: true
+      Validation: `node scripts\validate_agent_board_state.js` passed; `git diff --check` passed with line-ending warnings only.
+      Remaining gate: exact-file commit and push, then read-only remote/head verification only.
+---
+
 - [x] ID: pr8_jpeg_archive_extension_guard_20260604
       Lane: Green local PR review follow-up.
       Status: completed_validated_unpushed.

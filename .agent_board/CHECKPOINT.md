@@ -1,3 +1,25 @@
+## Checkpoint - PR8 JPEG Archive Terminal Post-Push Sync 2026-06-04
+
+```text
+phase: pr8_jpeg_archive_terminal_post_push_sync_20260604
+status: completed_validated_terminal_status_surface_sync
+result: JPEG_ARCHIVE_EXTENSION_FIX_PUSHED_AND_PR_HEAD_VERIFIED
+functional_commit: 0e1139a9d58805b50d7bc67832a341dbc0b73914
+functional_commit_subject: Use JPEG extensions for PR8 archive assets
+remote_branch: origin/codex/secretless-serum-live-channel
+pr: JENN2046/agent-image-lab#8
+pr_url: https://github.com/JENN2046/agent-image-lab/pull/8
+pr_head_verified_after_functional_push: 0e1139a9d58805b50d7bc67832a341dbc0b73914
+merge_state_after_functional_push: CLEAN
+terminal_status_surface_sync: true
+post_push_followup: read_only_remote_sync_only
+no_followup_agent_board_write_after_push: true
+validation_before_terminal_commit: node scripts\validate_agent_board_state.js passed; git diff --check passed with line-ending warnings only
+boundary: terminal local status-surface sync only; no runtime/provider/plugin/API/image/secret action.
+```
+
+---
+
 ## Checkpoint - PR8 JPEG Archive Extension Guard 2026-06-04
 
 ```text
