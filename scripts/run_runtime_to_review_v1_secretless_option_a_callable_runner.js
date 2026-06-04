@@ -255,6 +255,30 @@ const forbiddenPayloadKeysNormalized = Object.freeze([
   "headers"
 ]);
 
+const allowedExactRouteHttpBodyFields = Object.freeze([
+  "pipeline_id",
+  "task_id",
+  "route_id",
+  "max_provider_calls",
+  "max_plugin_calls",
+  "max_api_calls",
+  "max_images",
+  "retry_allowed",
+  "receipt_ref",
+  "artifact_record_ref",
+  "plan",
+  "non_secret_payload_hash"
+]);
+
+const allowedExactRouteHttpPlanFields = Object.freeze(["steps"]);
+const allowedExactRouteHttpStepFields = Object.freeze([
+  "type",
+  "plugin",
+  "prompt",
+  "model",
+  "output_directory_ref"
+]);
+
 const defaultInput = Object.freeze({
   activationPackageId: exactActivationPackageId,
   confirmationPhrase: exactConfirmationPhrase,
@@ -605,6 +629,46 @@ function collectForbiddenPayloadKeys(body, rootPath = "body") {
   return found;
 }
 
+function collectUnknownExactRouteHttpPayloadFields(body) {
+  const found = [];
+  if (!body || typeof body !== "object" || Array.isArray(body)) {
+    return [{ path: "body", reason: "body_must_be_object" }];
+  }
+
+  for (const key of Object.keys(body)) {
+    if (!allowedExactRouteHttpBodyFields.includes(key)) {
+      found.push({ path: `body.${key}`, key });
+    }
+  }
+
+  const plan = body.plan;
+  if (!plan || typeof plan !== "object" || Array.isArray(plan)) {
+    found.push({ path: "body.plan", reason: "plan_must_be_object" });
+    return found;
+  }
+
+  for (const key of Object.keys(plan)) {
+    if (!allowedExactRouteHttpPlanFields.includes(key)) {
+      found.push({ path: `body.plan.${key}`, key });
+    }
+  }
+
+  const steps = Array.isArray(plan.steps) ? plan.steps : [];
+  const step = steps[0];
+  if (steps.length !== 1 || !step || typeof step !== "object" || Array.isArray(step)) {
+    found.push({ path: "body.plan.steps", reason: "exactly_one_object_step_required" });
+    return found;
+  }
+
+  for (const key of Object.keys(step)) {
+    if (!allowedExactRouteHttpStepFields.includes(key)) {
+      found.push({ path: `body.plan.steps[0].${key}`, key });
+    }
+  }
+
+  return found;
+}
+
 function valueAtPath(object, pathParts) {
   return pathParts.reduce((current, part) => {
     if (current === null || current === undefined) return undefined;
@@ -775,6 +839,7 @@ function validateExactRouteHttpTransportInput(input = {}) {
   const attemptLockBodyMismatches = expectedAttemptLockBody
     ? compareAttemptLockBodyFields(body, expectedAttemptLockBody)
     : [];
+  const unknownExactRoutePayloadFields = collectUnknownExactRouteHttpPayloadFields(body);
   const forbiddenPayloadKeys = collectForbiddenPayloadKeys(body);
   const failures = [];
   const boundary = baseBoundary();
@@ -820,6 +885,13 @@ function validateExactRouteHttpTransportInput(input = {}) {
       status: "secretless_option_a_attempt_lock_payload_drift",
       reason: "route HTTP body must match the supplied attempt lock for all attempt-bound fields",
       mismatches: attemptLockBodyMismatches
+    });
+  }
+  if (unknownExactRoutePayloadFields.length > 0) {
+    failures.push({
+      status: "secretless_option_a_payload_contains_unknown_route_field",
+      reason: "route HTTP body contains fields outside the exact canonical secretless payload schema",
+      unknownExactRoutePayloadFields
     });
   }
   if (!input.preflightOnly && input.confirmationPhrase !== exactConfirmationPhrase) {
@@ -896,6 +968,7 @@ function validateExactRouteHttpTransportInput(input = {}) {
     endpoint_source: expectedEndpointSource,
     attempt_lock_ref: input.attemptLockRef || null,
     attempt_lock_body_mismatches: attemptLockBodyMismatches,
+    unknown_exact_route_payload_fields: unknownExactRoutePayloadFields,
     forbidden_payload_keys_detected: forbiddenPayloadKeys,
     failures,
     body,
@@ -1768,9 +1841,13 @@ module.exports = {
   attemptLockRefAttempt015,
   attemptLockRefAttempt016,
   allowedNonSecretPayloadFields,
+  allowedExactRouteHttpBodyFields,
+  allowedExactRouteHttpPlanFields,
+  allowedExactRouteHttpStepFields,
   forbiddenPayloadKeysNormalized,
   normalizePayloadKey,
   collectForbiddenPayloadKeys,
+  collectUnknownExactRouteHttpPayloadFields,
   buildNonSecretPayload,
   buildExactRouteHttpBody,
   normalizeRouteOutputRefs,

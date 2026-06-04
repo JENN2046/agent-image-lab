@@ -402,6 +402,50 @@ function main() {
       rejectedFields.includes("plan.steps[0].output_directory_ref") &&
       rejectedFields.includes("non_secret_payload_hash");
   });
+  check("exact_route_payload_rejects_unknown_fields_before_post", () => {
+    const exactBody = runner.buildExactRouteHttpBody({
+      pipelineId: attempt018Lock.pipeline_id,
+      taskId: attempt018Lock.activation_id,
+      routeId: attempt018Lock.route.route_id,
+      prompt: attempt018Lock.prompt,
+      maxProviderCalls: attempt018Lock.budget.max_provider_calls,
+      maxPluginCalls: attempt018Lock.budget.max_plugin_calls,
+      maxApiCalls: attempt018Lock.budget.max_api_calls,
+      maxImages: attempt018Lock.budget.max_images,
+      retryAllowed: attempt018Lock.budget.retry_allowed,
+      receiptRef: attempt018Lock.receipt_ref,
+      artifactRecordRef: attempt018Lock.artifact_record_ref,
+      outputDirectoryRef: attempt018Lock.output_directory_ref
+    });
+    const bodyWithUnknownFields = {
+      ...exactBody,
+      context: { doubaoProjectBasePathOverride: "C:/tmp/override" },
+      plan: {
+        ...exactBody.plan,
+        metadata: { should_not_be_forwarded: true },
+        steps: [
+          {
+            ...exactBody.plan.steps[0],
+            size: "4096x4096"
+          }
+        ]
+      }
+    };
+    const rejected = runner.validateExactRouteHttpTransportInput({
+      attemptLockRef: attempt018LockPath,
+      confirmationPhrase: runner.exactConfirmationPhrase,
+      body: bodyWithUnknownFields
+    });
+    const unknownFields = rejected.unknown_exact_route_payload_fields.map((item) => item.path);
+    return rejected.ok === false &&
+      rejected.status === "secretless_option_a_payload_contains_unknown_route_field" &&
+      rejected.route_http_request_performed === false &&
+      rejected.provider_contact_performed === false &&
+      rejected.plugin_call_performed === false &&
+      unknownFields.includes("body.context") &&
+      unknownFields.includes("body.plan.metadata") &&
+      unknownFields.includes("body.plan.steps[0].size");
+  });
   check("default_runner_source_has_no_secret_or_legacy_http_surface", () =>
     !runnerSource.includes(processEnvToken) &&
     !runnerSource.includes("require(\"node:http\")") &&
