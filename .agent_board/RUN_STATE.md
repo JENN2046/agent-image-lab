@@ -1,3 +1,26 @@
+## Current Run State - Secretless Serum Attempt 014 Failed-Closed Evidence 2026-06-04
+
+```text
+phase: secretless_serum_attempt_014_failed_closed_evidence_20260604
+status: completed_validated_one_post_failed_closed_before_provider_pending_commit
+mode: Amber exact activation execution evidence; no retry
+activation_package_id_consumed: AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-014
+binding_packet_id: BINDING-DRAFT-SECRETLESS-OPTION-A-SERUM-20260603-014
+agent_image_lab_runner_commit: e66ce2aed24b70beb0bc47a9a1d7f288eaeb8360
+vcptoolbox_required_commit: 549a26abc7d34e973c9d1ac6d4491aa8d92e88f1
+receipt_ref: reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_014.json
+artifact_record_ref: reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_014.json
+route_result_status: serum_bottle_secretless_exact_activation_binding_mismatch
+failure_cause: VCPToolBox route/server exact binding still expected attempt-013 while AIL sent attempt-014 payload.
+calls_used: route_http_request=1; provider=0; plugin=0; api=0; image=0; retry=false
+artifact_created: false
+latest_validation: npm run validate:runtime-to-review-secretless-serum-live-probe-receipt-attempt-014 passed after failed-closed receipt/artifact completion.
+boundary_checks: no secret/env/config read; no Authorization header construction by Agent Image Lab; no old admin-auth route; no push/tag/release/deploy.
+next_safe_task: exact-file local commit attempt-014 failed-closed evidence, then implement a cross-repo VCPToolBox binding verifier before preparing attempt-015. Do not retry attempt-014.
+```
+
+---
+
 ## Current Run State - Secretless Serum Attempt 014 Exact-File Refresh 2026-06-04
 
 ```text
