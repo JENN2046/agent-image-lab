@@ -1,3 +1,17 @@
+- [x] ID: attempt_binding_lock_p0_guard_20260604
+      Lane: Green/Amber exact source-read plus local AIL guard implementation.
+      Status: completed_validated_local_guard_current_vcptoolbox_failed_closed.
+      Goal: Add a single attempt lock, VCPToolBox source binding verifier, prepare command, and runner final gate before any attempt-015 POST.
+      Attempt lock: `reports/runtime_to_review_v1/secretless_serum_attempt_015.lock.json`.
+      Verifier: `scripts/verify_runtime_to_review_v1_secretless_serum_attempt_lock_binding.js`.
+      Prepare command: `node scripts/prepare_runtime_to_review_v1_secretless_serum_attempt.js`.
+      Optional binding apply: `node scripts/prepare_runtime_to_review_v1_secretless_serum_attempt.js --apply-vcptoolbox-binding`.
+      Current VCPToolBox result: failed closed because route/server are not attempt-015.
+      Boundary: route_http_post=0; provider=0; plugin=0; api=0; image=0; no secret/env/config read; no VCPToolBox write by this task; no push/tag/release/deploy.
+      Validation: targeted guard passed; validation manifest passed; runner preflight-only passed; runner confirm-route-http failed closed before POST.
+      Remaining gate: refresh VCPToolBox current-attempt binding to attempt-015 and rerun verifier before any exact activation.
+---
+
 - [x] ID: secretless_serum_attempt_014_exact_file_refresh_20260604
       Lane: Green local runner/binding/preflight/validator/prompt registration.
       Status: completed_validated_local_runner_refresh_no_execution_pending_commit.
@@ -938,3 +952,34 @@ b5cb845ac280e463c3825ca0bc20e5abc772c421
       Boundaries: no push, tag, release, deploy, provider/API/plugin/image call, DailyNote write, VCP memory write, or secret value read.
       Validation: git diff --check passed with line-ending warnings only; node scripts\validate_agent_board_state.js passed.
       Next: continue local work from the synced 9dc4bcf0 baseline.
+
+---
+
+## Queue - Secretless Serum Attempt 015 Binding Refresh 2026-06-04
+
+```text
+done:
+  - task: fix VCPToolBox route authorizer call to pass outputDirectoryRef
+    evidence: VCPToolBox commit ab62ed0b5ba9d3620316ccd8441c7c5bde9728fa
+  - task: update AIL attempt-015 lock to require current VCPToolBox binding commit
+    evidence: npm run prepare:runtime-to-review-secretless-serum-attempt passed elevated
+  - task: harden prepare/verifier/validator behavior for actual binding and sandbox fail-closed states
+    evidence: binding guard passed in sandbox and elevated modes
+  - task: remove final-gate HEAD 204 assumption
+    evidence: runner final gate uses listener_surface_http_response_observed and expected_status any_http_response
+  - task: add internal route HEAD surface and verify actual internal route surface
+    evidence: VCPToolBox commit cd25e1485dd1b31f84fe5ad0d09c90ab1c1d0143; verifier check internal_route_head_surface_present passed
+  - task: make attempt-015 runner route defaults read origin/path/refs from lock
+    evidence: runner --attempt-015-route-http --preflight-only passed with route_http_request_performed=false
+  - task: enforce inactive lock authorization boundary before listener/POST
+    evidence: runner with exact confirmation phrase failed closed at secretless_option_a_final_gate_failed_closed_lock_authorization_boundary, listener not_checked, route_http_request_performed=false
+  - task: make prepare --apply idempotent on already-bound VCPToolBox HEAD
+    evidence: prepare --apply-vcptoolbox-binding passed with vcptoolbox_binding_already_matches_lock and commit skipped
+in_progress:
+  - none
+blocked:
+  - none
+remaining:
+  - review AIL diff and run final targeted validation before any AIL local commit
+  - push/tag/release/deploy remain unauthorized
+```

@@ -1,3 +1,43 @@
+## Current Run State - Attempt Binding Lock P0 Guard 2026-06-04
+
+```text
+phase: attempt_binding_lock_p0_guard_20260604
+status: completed_validated_local_guard_current_vcptoolbox_failed_closed
+mode: Green/Amber exact VCPToolBox source read plus local AIL guard implementation; no live POST
+attempt_lock_ref: reports/runtime_to_review_v1/secretless_serum_attempt_015.lock.json
+verifier_ref: scripts/verify_runtime_to_review_v1_secretless_serum_attempt_lock_binding.js
+prepare_ref: scripts/prepare_runtime_to_review_v1_secretless_serum_attempt.js
+runner_ref: scripts/run_runtime_to_review_v1_secretless_option_a_callable_runner.js
+validator_ref: scripts/validate_runtime_to_review_v1_secretless_serum_attempt_015_binding_guard.js
+current_vcptoolbox_head: 549a26abc7d34e973c9d1ac6d4491aa8d92e88f1
+current_vcptoolbox_binding_result: failed_closed; route/server still expose attempt-013 binding, not attempt-015.
+completed:
+  - attempt-014 failed-closed evidence committed locally at 0a1baec34f589e4c797d8891b6026b176fdc6314
+  - single attempt-015 lock added with AIL/VCP commit slots, activation id, binding packet, pipeline id, receipt/artifact/output refs, route path, budget, and prompt hash
+  - cross-repo verifier reads VCPToolBox route and server source and requires activation, pipeline, receipt, artifact, and output refs to match one attempt
+  - runner attempt-015 final gate checks lock hash, AIL HEAD, VCPToolBox HEAD, VCPToolBox source binding, listener/surface, and pending output refs before POST
+  - prepare command added; default mode validates and fails closed, optional --apply-vcptoolbox-binding can update exact VCPToolBox route/server binding and commit from one command
+validation_run:
+  - node --check runner/verifier/prepare/validator: passed
+  - npm run validate:runtime-to-review-secretless-serum-attempt-015-binding-guard: passed
+  - runner --attempt-015-route-http --preflight-only: passed with 0 POST
+  - runner --attempt-015-route-http --confirm-route-http: failed closed before POST with route_http_request_performed=false
+  - node scripts/prepare_runtime_to_review_v1_secretless_serum_attempt.js: failed closed because VCPToolBox current source is not attempt-015
+  - node scripts/validate_validation_manifest.js: passed
+not_performed:
+  - VCPToolBox write
+  - route HTTP POST
+  - provider contact
+  - plugin call
+  - API call
+  - image generation
+  - secret/env/config read
+  - push/tag/release/deploy
+next_safe_task: run prepare with exact external-write authorization or manually refresh VCPToolBox route/server to attempt-015, then rerun verifier. Only after verifier passes may a new exact activation be issued.
+```
+
+---
+
 ## Current Run State - Secretless Serum Attempt 014 Failed-Closed Evidence 2026-06-04
 
 ```text
@@ -1845,4 +1885,50 @@ commit_message: test: add agent board queue reconciler
 no push
 not_performed
 b5cb845ac280e463c3825ca0bc20e5abc772c421
+```
+
+---
+
+## Current Run State - Secretless Serum Attempt 015 Binding Refresh 2026-06-04
+
+```text
+phase: secretless_serum_attempt_015_binding_refresh
+status: completed_validated_local_with_external_vcptoolbox_binding_commit
+lane: Amber exact VCPToolBox write plus Green AIL validator/status sync
+goal: Fix reviewed P1/P2 gaps for attempt-015 binding: route passes outputDirectoryRef to server authorizer, lock records the current VCPToolBox binding commit, prepare/verifier fail closed cleanly, and final gate no longer assumes HEAD 204.
+ail_branch: codex/secretless-serum-live-channel
+ail_head_at_validation: 0a1baec34f589e4c797d8891b6026b176fdc6314
+vcptoolbox_branch: codex/secretless-serum-live-channel
+vcptoolbox_binding_commit: ab62ed0b5ba9d3620316ccd8441c7c5bde9728fa
+vcptoolbox_commit_message: Bind secretless serum attempt 015 output ref
+vcptoolbox_files_changed: routes/admin/aiImageAgents.js
+ail_files_changed: reports/runtime_to_review_v1/secretless_serum_attempt_015.lock.json; scripts/prepare_runtime_to_review_v1_secretless_serum_attempt.js; scripts/verify_runtime_to_review_v1_secretless_serum_attempt_lock_binding.js; scripts/validate_runtime_to_review_v1_secretless_serum_attempt_015_binding_guard.js; scripts/run_runtime_to_review_v1_secretless_option_a_callable_runner.js; scripts/validate_runtime_to_review_v1_secretless_option_a_callable_binding_preflight.js; package.json; scripts/validation_manifest.json; .agent_board/*
+receipt: Amber exact external write used 1 VCPToolBox commit, 1 file changed, no push, no tag, no release, no deploy, no secret read, no provider/plugin/API/image call.
+validation: node --check target scripts passed; npm run validate:runtime-to-review-secretless-option-a-callable-binding-preflight passed; npm run validate:runtime-to-review-secretless-option-a-callable-runner passed; npm run validate:runtime-to-review-secretless-serum-attempt-015-binding-guard passed in sandbox fail-closed mode and elevated verified mode; npm run prepare:runtime-to-review-secretless-serum-attempt passed elevated; npm run validate:validation-manifest passed; git diff --check passed with CRLF warnings only.
+boundary_checks: route_http_post_performed=false; provider_contact_performed=false; plugin_call_performed=false; api_call_performed=false; image_generation_performed=false; secret_value_read_performed=false; push_tag_release_deploy_performed=false.
+next_safe_task: review AIL diff, run final targeted validation, then exact-file local commit if allowed; push remains not authorized.
+```
+
+### Attempt 015 Binding Refresh Guard Addendum - 2026-06-04
+
+```text
+status: completed_validated_internal_surface_guard_fixed
+reason: Follow-up review found VCPToolBox internal router lacked the HEAD listener surface and AIL prepare/verifier only checked broad route-source strings.
+vcptoolbox_current_binding_commit: cd25e1485dd1b31f84fe5ad0d09c90ab1c1d0143
+vcptoolbox_commit_message: Bind secretless serum attempt 015 internal surface
+ail_lock_hash_after_update: 41b955b5fc460c320a64fe35b1b85e884dc42d88b2d2d086d027961fc84c7239
+fixes: VCPToolBox internal route HEAD surface added; AIL verifier now requires internal_route_head_surface_present; AIL prepare targets createSerumBottleSecretlessInternalRouter; runner attempt-015 route defaults read origin/path/refs from lock and preflight no longer requires execution confirmation.
+validation: node --check target scripts passed; node scripts/verify_runtime_to_review_v1_secretless_serum_attempt_lock_binding.js passed; npm run validate:runtime-to-review-secretless-serum-attempt-015-binding-guard passed; runner --attempt-015-route-http --preflight-only passed with route_http_request_performed=false; runner --attempt-015-route-http --confirm-route-http failed closed before POST due missing confirmation phrase with route_http_request_performed=false.
+boundary_checks: route_http_post_performed=false; provider_contact_performed=false; plugin_call_performed=false; api_call_performed=false; image_generation_performed=false; secret_value_read_performed=false; push_tag_release_deploy_performed=false.
+next_safe_task: review AIL diff, run final targeted validation, then exact-file AIL local commit if allowed; push remains not authorized.
+```
+
+### Attempt 015 Binding Guard P1 Fix Addendum - 2026-06-04
+
+```text
+status: completed_validated_p1_guard_fix
+fixes: runner final gate now enforces lock authorization_boundary before listener/POST; prepare --apply-vcptoolbox-binding is idempotent when route/server already match lock and skips empty VCPToolBox commit.
+validation: runner --attempt-015-route-http --confirm-route-http --confirmation-phrase RUNTIME_TO_REVIEW_V1_SECRETLESS_SERUM_BOTTLE_ONE_PROVIDER_ONE_IMAGE failed closed at secretless_option_a_final_gate_failed_closed_lock_authorization_boundary with listener.status=not_checked and route_http_request_performed=false; npm run validate:runtime-to-review-secretless-serum-attempt-015-binding-guard passed; prepare --apply-vcptoolbox-binding passed with vcptoolbox_binding_already_matches_lock and commit skipped; VCPToolBox status has only pre-existing untracked image files.
+boundary_checks: route_http_post_performed=false; listener_head_performed=false_on_lock_boundary; provider_contact_performed=false; plugin_call_performed=false; api_call_performed=false; image_generation_performed=false; push_tag_release_deploy_performed=false.
+next_safe_task: final diff review and exact-file AIL local commit if allowed; next exact activation must flip lock authorization in a separate activation package.
 ```

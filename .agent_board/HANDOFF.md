@@ -1,3 +1,40 @@
+## Current Handoff Update - Attempt Binding Lock P0 Guard 2026-06-04
+
+```text
+phase: attempt_binding_lock_p0_guard_20260604
+status: completed_validated_local_guard_current_vcptoolbox_failed_closed
+repository: A:\agent-image-lab\agent-image-lab-v0.2
+branch: codex/secretless-serum-live-channel
+attempt_014_evidence_commit: 0a1baec34f589e4c797d8891b6026b176fdc6314
+attempt_lock_ref: reports/runtime_to_review_v1/secretless_serum_attempt_015.lock.json
+verifier_ref: scripts/verify_runtime_to_review_v1_secretless_serum_attempt_lock_binding.js
+prepare_ref: scripts/prepare_runtime_to_review_v1_secretless_serum_attempt.js
+validator_ref: scripts/validate_runtime_to_review_v1_secretless_serum_attempt_015_binding_guard.js
+vcptoolbox_current_head: 549a26abc7d34e973c9d1ac6d4491aa8d92e88f1
+vcptoolbox_current_binding: failed_closed_not_attempt_015; route currently attempt-013 and server lacks pipeline/receipt/artifact/output constants.
+completed:
+  - committed attempt-014 failed-closed evidence first, per owner sequence
+  - implemented single attempt lock and attempt-015 runner defaults
+  - implemented VCPToolBox source binding verifier for route/server exact binding
+  - implemented runner final gate before POST with lock/source/head/pending-output/listener-surface checks
+  - implemented prepare command with optional --apply-vcptoolbox-binding exact route/server update path
+validation_run:
+  - npm run validate:runtime-to-review-secretless-serum-attempt-015-binding-guard: passed
+  - node scripts/prepare_runtime_to_review_v1_secretless_serum_attempt.js: failed closed as expected on current VCPToolBox attempt-013 source
+  - runner --attempt-015-route-http --preflight-only: passed with 0 POST
+  - runner --attempt-015-route-http --confirm-route-http: failed closed before POST with 0 route_http_request
+  - node scripts/validate_validation_manifest.js: passed
+not_performed:
+  - VCPToolBox write
+  - live POST
+  - provider/plugin/API/image
+  - secret/env/config read
+  - push/tag/release/deploy
+next_safe_action: refresh VCPToolBox current-attempt binding to attempt-015 and commit it as the binding commit, then rerun prepare/verifier. Do not issue exact activation until verifier passes.
+```
+
+---
+
 ## Current Handoff Update - Secretless Serum Attempt 014 Exact-File Refresh 2026-06-04
 
 ```text
@@ -2349,4 +2386,90 @@ Local work state tokens: Worktree: dirty local validation efficiency patch; Vali
 Freshness tokens: batch_005_allowed_now: false; production_candidate_002_allowed_now: false; memory_write_path_allowed_now: false.
 Boundary: provider_contact_performed=false; plugin_call_performed=false; api_call_performed=false; image_generation_performed=false; secret_value_read_performed=false; DailyNote_write_performed=false; VCP_memory_write_performed=false; push_tag_release_deploy_performed=false.
 push_allowed: false
+```
+
+---
+
+## Current Handoff - Secretless Serum Attempt 015 Binding Refresh 2026-06-04
+
+```text
+phase: secretless_serum_attempt_015_binding_refresh
+status: completed_validated_local_with_external_vcptoolbox_binding_commit
+workspace: A:\agent-image-lab\agent-image-lab-v0.2
+branch: codex/secretless-serum-live-channel
+vcptoolbox_workspace: A:\VCP\apps\VCPToolBox
+vcptoolbox_branch: codex/secretless-serum-live-channel
+vcptoolbox_new_binding_commit: ab62ed0b5ba9d3620316ccd8441c7c5bde9728fa
+vcptoolbox_pre_existing_untracked: image/doubaogen/5c097e0d-326d-4b7f-b091-1e00c2992eaa.png; image/doubaogen/8380a822-d81a-47ea-88d3-acf6898a920a.png
+completed:
+  - VCPToolBox route now passes outputDirectoryRef into authorizeSerumBottleSecretlessExecution.
+  - AIL lock now requires VCPToolBox commit ab62ed0b5ba9d3620316ccd8441c7c5bde9728fa.
+  - prepare script no longer crashes when sandbox blocks spawnSync output; it records error and fails closed.
+  - binding guard now supports both sandbox fail-closed and elevated verified binding.
+  - runner final gate no longer assumes HEAD 204; it records any HTTP response as listener evidence and still fails closed before POST when gates are missing.
+validation:
+  - VCPToolBox node --check route/server passed.
+  - AIL attempt lock verifier passed elevated.
+  - npm run prepare:runtime-to-review-secretless-serum-attempt passed elevated.
+  - npm run validate:runtime-to-review-secretless-serum-attempt-015-binding-guard passed in sandbox and elevated modes.
+  - npm run validate:runtime-to-review-secretless-option-a-callable-binding-preflight passed.
+  - npm run validate:runtime-to-review-secretless-option-a-callable-runner passed.
+  - npm run validate:runtime-to-review-secretless-option-a-callable-runner-contract-preflight passed.
+  - npm run validate:validation-manifest passed.
+  - git diff --check passed with CRLF warnings only.
+not_performed:
+  - no route HTTP POST
+  - no provider/plugin/API/image generation
+  - no secret/env/config value read
+  - no push/tag/release/deploy
+next_safe_action: review AIL diff and run final targeted validation; exact-file AIL local commit only if allowed.
+```
+
+### Handoff Addendum - Secretless Serum Attempt 015 Internal Surface Guard 2026-06-04
+
+```text
+status: completed_validated_internal_surface_guard_fixed
+vcptoolbox_latest_binding_commit: cd25e1485dd1b31f84fe5ad0d09c90ab1c1d0143
+vcptoolbox_commit_message: Bind secretless serum attempt 015 internal surface
+completed_addendum:
+  - Added HEAD surface to createSerumBottleSecretlessInternalRouter for the actual /internal/ai-image-agents route surface.
+  - Updated AIL lock to require cd25e1485dd1b31f84fe5ad0d09c90ab1c1d0143.
+  - Updated verifier to require internal_route_head_surface_present.
+  - Updated prepare to patch createSerumBottleSecretlessInternalRouter specifically.
+  - Updated attempt-015 runner route defaults to read route origin/path/refs from the lock and let preflight run without execution confirmation.
+validation_addendum:
+  - node --check target scripts passed.
+  - node scripts/verify_runtime_to_review_v1_secretless_serum_attempt_lock_binding.js passed.
+  - npm run validate:runtime-to-review-secretless-serum-attempt-015-binding-guard passed.
+  - runner --attempt-015-route-http --preflight-only passed, route_http_request_performed=false.
+  - runner --attempt-015-route-http --confirm-route-http failed closed before POST due missing confirmation phrase, route_http_request_performed=false.
+not_performed_addendum:
+  - no route HTTP POST
+  - no provider/plugin/API/image generation
+  - no secret/env/config value read
+  - no push/tag/release/deploy
+next_safe_action: final diff review and exact-file AIL local commit if allowed; push remains unauthorized.
+```
+
+### Handoff Addendum - Attempt 015 P1 Guard Fix 2026-06-04
+
+```text
+status: completed_validated_p1_guard_fix
+completed_addendum:
+  - Runner final gate now reads the attempt lock authorization_boundary and fails closed before listener/POST when can_execute_now=false, route_http_allowed_by_this_lock=false, or separate_exact_activation_required=true.
+  - Prepare --apply-vcptoolbox-binding now checks git diff --quiet for the exact VCPToolBox route/server files and treats an already matching current HEAD as success without creating an empty commit.
+  - Binding guard validator now behavior-tests the exact-confirmation attempt-015 path and requires lock-boundary fail-closed with listener not checked and route_http_request_performed=false.
+validation_addendum:
+  - node --check target scripts passed.
+  - npm run validate:runtime-to-review-secretless-serum-attempt-015-binding-guard passed.
+  - prepare --apply-vcptoolbox-binding passed idempotently with commit skipped.
+  - runner preflight-only passed with 0 route HTTP.
+  - runner confirm-route-http with exact confirmation phrase failed closed before listener/POST due inactive lock authorization.
+not_performed_addendum:
+  - no route HTTP POST
+  - no listener HEAD after inactive lock boundary
+  - no provider/plugin/API/image generation
+  - no secret/env/config value read
+  - no push/tag/release/deploy
+next_safe_action: final diff review and exact-file AIL local commit if allowed; separate exact activation must update lock authorization before any live POST can pass.
 ```
