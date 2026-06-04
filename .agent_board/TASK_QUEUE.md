@@ -67,6 +67,16 @@
       Remaining gate: exact-file local commit quality review.
 ---
 
+- [x] ID: runner_output_refs_receipt_writer_fix_20260604
+      Lane: Green local runner evidence writer fix.
+      Status: completed_validated_pending_commit.
+      Goal: Make the AIL runner automatically write route response outputRefs into receipt/artifact evidence.
+      Changed: `scripts/run_runtime_to_review_v1_secretless_option_a_callable_runner.js`; `scripts/validate_runtime_to_review_v1_secretless_option_a_callable_runner.js`.
+      Validation: node --check passed; callable runner validator passed including outputRefs regression; attempt-018 preflight-only passed with 0 route HTTP.
+      Boundary: no route HTTP POST; no provider/plugin/API/image; no output write; no attempt-019 preparation; no secret/env/config read; no push/tag/release/deploy.
+      Remaining gate: exact-file local commit.
+---
+
 - [x] ID: attempt_binding_lock_p0_guard_20260604
       Lane: Green/Amber exact source-read plus local AIL guard implementation.
       Status: completed_validated_local_guard_current_vcptoolbox_failed_closed.

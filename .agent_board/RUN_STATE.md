@@ -141,6 +141,18 @@ boundary_checks: route_http_request_performed_by_review=false; provider/plugin/a
 next_safe_task: commit quality review, then either human/brand approval or targeted runner outputRefs writer fix. Do not prepare attempt-019 yet.
 ```
 
+### Runner OutputRefs Receipt Writer Fix - 2026-06-04
+
+```text
+status: completed_validated_pending_commit
+mode: Green local runner evidence writer fix; no route POST
+changed_refs: scripts/run_runtime_to_review_v1_secretless_option_a_callable_runner.js; scripts/validate_runtime_to_review_v1_secretless_option_a_callable_runner.js; .agent_board/*
+fix: runner now extracts VCPToolBox route response outputRefs from result.outputRefs, serumBottleSecretlessRuntimeEvidence.outputRefs, or result.output_refs, deduplicates them, and writes them into receipt.output_refs, artifact.output_refs, and route_response_summary.outputRefs automatically.
+validation: node --check runner/validator passed; npm run validate:runtime-to-review-secretless-option-a-callable-runner passed with route_response_output_refs_are_written_to_attempt_records; attempt-018 lock-driven preflight-only passed with route_http_request_performed=false.
+boundary_checks: route_http_request_performed=false; provider/plugin/api/image=false; output_write_performed=false; no secret/env/config read; no attempt-019 preparation; no push/tag/release/deploy.
+next_safe_task: run final local validation/diff review and exact-file local commit. Future exact activations should no longer need manual outputRefs normalization in receipt/artifact evidence.
+```
+
 ---
 
 ## Current Run State - Secretless Serum Attempt 016 Exact Activation 2026-06-04

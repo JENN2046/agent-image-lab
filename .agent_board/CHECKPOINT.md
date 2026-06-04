@@ -2865,6 +2865,29 @@ boundary_checks_addendum:
 recommended_next: exact-file local commit this quality review. Then prefer human/brand approval or a runner outputRefs writer fix, not attempt-019.
 ```
 
+### Checkpoint Addendum - Runner OutputRefs Receipt Writer Fix 2026-06-04
+
+```text
+status: completed_validated_pending_commit
+result: RUNNER_ROUTE_OUTPUT_REFS_WRITTEN_AUTOMATICALLY_TO_RECEIPT_AND_ARTIFACT
+summary: Fixed the AIL runner evidence writer so VCPToolBox route response outputRefs are automatically preserved in receipt/artifact records. The regression test uses an in-memory route response and performs no route HTTP/provider/plugin/API/image calls.
+changed_refs:
+  - scripts/run_runtime_to_review_v1_secretless_option_a_callable_runner.js
+  - scripts/validate_runtime_to_review_v1_secretless_option_a_callable_runner.js
+validation_run_addendum:
+  - node --check runner and validator: passed
+  - npm run validate:runtime-to-review-secretless-option-a-callable-runner: passed
+  - lock-driven attempt-018 preflight-only: passed with route_http_request_performed=false
+boundary_checks_addendum:
+  route_http_request_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  attempt_019_prepared: false
+recommended_next: final validation/diff review and exact-file local commit.
+```
+
 ### Checkpoint Addendum - Attempt 016 Prepared 2026-06-04
 
 ```text

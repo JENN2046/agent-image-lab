@@ -1150,6 +1150,17 @@ function writeJsonNoOverwrite(relativePath, expectedRelativePath, payload) {
   fs.writeFileSync(target, `${JSON.stringify(payload, null, 2)}\n`, { encoding: "utf8", flag: "wx" });
 }
 
+function normalizeRouteOutputRefs(...values) {
+  const refs = [];
+  for (const value of values) {
+    if (!Array.isArray(value)) continue;
+    for (const item of value) {
+      if (typeof item === "string" && item.trim()) refs.push(item);
+    }
+  }
+  return Array.from(new Set(refs));
+}
+
 function summarizeRouteResult(json) {
   const result = json && json.result && typeof json.result === "object"
     ? json.result
@@ -1172,6 +1183,7 @@ function summarizeRouteResult(json) {
     plugin_calls: Number(evidence.pluginCalls) || 0,
     api_calls: Number(evidence.apiCalls) || 0,
     images: Number(evidence.images) || 0,
+    outputRefs: normalizeRouteOutputRefs(result.outputRefs, evidence.outputRefs, result.output_refs),
     artifact: evidence.artifact || null
   };
 }
@@ -1179,6 +1191,7 @@ function summarizeRouteResult(json) {
 function buildAttemptReceiptAndArtifact(execution, validation, json, responseStatus, config) {
   const body = validation.body;
   const routeSummary = summarizeRouteResult(json);
+  const outputRefs = normalizeRouteOutputRefs(execution.output_refs, routeSummary.outputRefs);
   const succeeded = execution.ok === true;
   const providerConsumed = execution.calls_used.provider > 0;
   const resultStatus = succeeded
@@ -1236,7 +1249,7 @@ function buildAttemptReceiptAndArtifact(execution, validation, json, responseSta
     image_generation_performed: execution.image_generation_performed,
     image_count: execution.image_count,
     output_write_performed: execution.output_write_performed,
-    output_refs: execution.output_refs,
+    output_refs: outputRefs,
     calls_used: execution.calls_used,
     route_response_status_code: responseStatus,
     route_response_summary: routeSummary,
@@ -1254,7 +1267,7 @@ function buildAttemptReceiptAndArtifact(execution, validation, json, responseSta
     result: resultStatus,
     artifact_created: succeeded && execution.image_count === 1,
     output_directory_ref: config.outputDirectoryRef,
-    output_refs: execution.output_refs,
+    output_refs: outputRefs,
     provider_contact_performed: execution.provider_contact_performed,
     plugin_call_performed: execution.plugin_call_performed,
     api_call_performed: execution.api_call_performed,
@@ -1404,7 +1417,7 @@ async function runSecretlessOptionAExactRouteHttpTransport(input = {}) {
     image_generation_performed: routeSummaryForExecution.images > 0 || routeResult.image_generation_performed === true,
     image_count: routeSummaryForExecution.images || Number(routeResult.image_count) || 0,
     output_write_performed: Boolean(routeResult.output_write_performed),
-    output_refs: Array.isArray(routeResult.output_refs) ? routeResult.output_refs : [],
+    output_refs: routeSummaryForExecution.outputRefs,
     secret_value_read_performed: false,
     env_file_content_read_performed: false,
     config_env_read_performed: false,
@@ -1638,6 +1651,9 @@ module.exports = {
   collectForbiddenPayloadKeys,
   buildNonSecretPayload,
   buildExactRouteHttpBody,
+  normalizeRouteOutputRefs,
+  summarizeRouteResult,
+  buildAttemptReceiptAndArtifact,
   validateRunnerInput,
   validateExactRouteHttpTransportInput,
   runSecretlessOptionACallableRunner,

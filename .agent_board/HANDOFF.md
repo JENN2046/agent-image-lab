@@ -2667,6 +2667,27 @@ not_performed_addendum:
 next_safe_action: exact-file local commit quality review. After that, prefer human/brand approval or a targeted runner fix so receipt/artifact outputRefs are captured automatically before future attempts.
 ```
 
+### Handoff Addendum - Runner OutputRefs Receipt Writer Fix 2026-06-04
+
+```text
+status: completed_validated_pending_commit
+completed_addendum:
+  - Updated scripts/run_runtime_to_review_v1_secretless_option_a_callable_runner.js to normalize route outputRefs from the VCPToolBox response.
+  - Updated scripts/validate_runtime_to_review_v1_secretless_option_a_callable_runner.js with an in-memory regression proving outputRefs flow into receipt and artifact records even when execution.output_refs starts empty.
+validation_addendum:
+  - node --check runner/validator passed.
+  - npm run validate:runtime-to-review-secretless-option-a-callable-runner passed.
+  - attempt-018 lock-driven preflight-only passed with 0 route HTTP.
+not_performed_addendum:
+  - no route HTTP POST
+  - no provider/plugin/API/image generation
+  - no output write
+  - no attempt-019 preparation
+  - no secret/env/config value read
+  - no push/tag/release/deploy
+next_safe_action: exact-file local commit. Future live attempts should no longer require manual outputRefs patching after route response evidence.
+```
+
 ### Handoff Addendum - Attempt 016 Prepared 2026-06-04
 
 ```text

@@ -247,6 +247,92 @@ function main() {
       allBoundaryFalse(result) &&
       allBoundaryFalse(result.result);
   });
+  check("route_response_output_refs_are_written_to_attempt_records", () => {
+    const outputRef = "image/doubaogen/output-ref-from-route.png";
+    const routeJson = {
+      ok: true,
+      result: {
+        status: "completed",
+        mode: "real_execution",
+        outputRefs: [outputRef],
+        serumBottleSecretlessRuntimeEvidence: {
+          delegateId: "serum_bottle_secretless_doubao_v1",
+          providerId: "doubao",
+          pluginId: "DoubaoGen",
+          apiId: "generate_image",
+          internalCommand: "generate",
+          providerCalls: 1,
+          pluginCalls: 1,
+          apiCalls: 1,
+          images: 1,
+          outputRefs: [outputRef],
+          artifact: {
+            sha256: "abc123",
+            mime: "image/jpeg",
+            dimensions: { width: 1920, height: 1920 }
+          }
+        }
+      }
+    };
+    const execution = {
+      ok: true,
+      route_http_request_performed: true,
+      live_probe_performed: true,
+      provider_contact_performed: true,
+      plugin_call_performed: true,
+      api_call_performed: true,
+      image_generation_performed: true,
+      image_count: 1,
+      output_write_performed: false,
+      output_refs: [],
+      calls_used: { provider: 1, plugin: 1, api: 1, image: 1, route_http_request: 1 }
+    };
+    const validation = {
+      route_http_origin: "http://127.0.0.1:6005",
+      route_http_method: "POST",
+      route_http_path: "/internal/ai-image-agents/execute/serum-bottle-secretless",
+      endpoint_source: "test",
+      body: {
+        pipeline_id: "secretless-serum-live-probe-attempt-test",
+        task_id: "AUTH-SECRETLESS-SERUM-LIVE-PROBE-TEST",
+        route_id: "serum_bottle_vcptoolbox_route_owner_runtime",
+        max_provider_calls: 1,
+        max_plugin_calls: 1,
+        max_api_calls: 1,
+        max_images: 1,
+        retry_allowed: false,
+        receipt_ref: "reports/runtime_to_review_v1/test_receipt.json",
+        artifact_record_ref: "reports/runtime_to_review_v1/test_artifact.json",
+        plan: {
+          steps: [
+            {
+              output_directory_ref: "runs/real_generation/test/"
+            }
+          ]
+        },
+        non_secret_payload_hash: "hash"
+      }
+    };
+    const config = {
+      receiptId: "test_receipt",
+      activationPackageId: "AUTH-SECRETLESS-SERUM-LIVE-PROBE-TEST",
+      bindingPacketId: "BINDING-TEST",
+      bindingPacketRef: "reports/runtime_to_review_v1/test_binding.json",
+      agentImageLabRunnerRequiredCommit: "runner",
+      vcptoolboxRequiredCommit: "vcptoolbox",
+      artifactRecordId: "test_artifact",
+      artifactRecordRef: "reports/runtime_to_review_v1/test_artifact.json",
+      receiptRef: "reports/runtime_to_review_v1/test_receipt.json",
+      outputDirectoryRef: "runs/real_generation/test/"
+    };
+    const summary = runner.summarizeRouteResult(routeJson);
+    const records = runner.buildAttemptReceiptAndArtifact(execution, validation, routeJson, 200, config);
+    return summary.outputRefs.includes(outputRef) &&
+      records.receipt.output_refs.includes(outputRef) &&
+      records.artifact.output_refs.includes(outputRef) &&
+      records.receipt.route_response_summary.outputRefs.includes(outputRef) &&
+      records.artifact.route_response_summary.outputRefs.includes(outputRef);
+  });
   check("default_runner_source_has_no_secret_or_legacy_http_surface", () =>
     !runnerSource.includes(processEnvToken) &&
     !runnerSource.includes("require(\"node:http\")") &&
