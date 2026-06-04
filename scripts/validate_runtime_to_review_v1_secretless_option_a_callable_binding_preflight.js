@@ -322,8 +322,10 @@ function main() {
     !runnerSource.includes("require('node:https')") &&
     !runnerSource.includes("axios") &&
     !runnerSource.includes("Authorization:") &&
-    runnerSource.includes("listener_surface_http_response_observed") &&
-    runnerSource.includes("expected_status = \"any_http_response\"")
+    runnerSource.includes("function probeTcpListener") &&
+    runnerSource.includes("tcp_listener_probe_observed_no_route_http_request") &&
+    runnerSource.includes("expected_status = \"tcp_connect_success_without_http_route_request\"") &&
+    runnerSource.includes("route_http_request_performed: false")
   );
   check("conclusion_keeps_live_probe_closed", () =>
     binding.conclusion.result === "callable_binding_preflight_drafted_no_execution" &&
