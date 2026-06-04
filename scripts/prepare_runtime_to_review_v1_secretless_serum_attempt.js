@@ -44,9 +44,29 @@ function ensureConstAfter(source, anchorName, name, value) {
   return source.replace(anchorPattern, `$1const ${name} =\n    '${value}';\n`);
 }
 
+function internalRouterStartIndex(source) {
+  return source.indexOf("function createSerumBottleSecretlessInternalRouter(options = {})");
+}
+
+function internalRouterSource(source) {
+  const start = internalRouterStartIndex(source);
+  if (start === -1) return "";
+  const end = source.indexOf("// \u2500\u2500 Handler", start);
+  return end === -1 ? source.slice(start) : source.slice(start, end);
+}
+
+function adminRouterSource(source) {
+  const internalStart = internalRouterStartIndex(source);
+  return internalStart === -1 ? source : source.slice(0, internalStart);
+}
+
+function routeSectionHasSerumBottleHead(source) {
+  return source.includes("router.head('/execute/serum-bottle-secretless'");
+}
+
 function patchRouteSource(source) {
   let patched = source;
-  if (!patched.includes("router.head('/execute/serum-bottle-secretless'")) {
+  if (!routeSectionHasSerumBottleHead(adminRouterSource(patched))) {
     patched = patched.replace(
       "  router.post('/execute/serum-bottle-secretless', async (req, res) => {",
       [
@@ -60,7 +80,7 @@ function patchRouteSource(source) {
     );
   }
   const internalPost = "function createSerumBottleSecretlessInternalRouter(options = {}) {\n  const router = express.Router();\n\n  router.post('/execute/serum-bottle-secretless', async (req, res) => {";
-  if (patched.includes(internalPost)) {
+  if (patched.includes(internalPost) && !routeSectionHasSerumBottleHead(internalRouterSource(patched))) {
     patched = patched.replace(
       internalPost,
       [
@@ -241,4 +261,12 @@ function main() {
   if (!passed) process.exitCode = 1;
 }
 
-main();
+if (require.main === module) {
+  main();
+}
+
+module.exports = {
+  patchRouteSource,
+  internalRouterSource,
+  routeSectionHasSerumBottleHead
+};

@@ -5,6 +5,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 const { spawnSync } = require("node:child_process");
 const { verifyAttemptLockBinding, sha256Text } = require("./verify_runtime_to_review_v1_secretless_serum_attempt_lock_binding");
+const { patchRouteSource, internalRouterSource, routeSectionHasSerumBottleHead } = require("./prepare_runtime_to_review_v1_secretless_serum_attempt");
 
 const root = path.resolve(__dirname, "..");
 const validator = "runtime_to_review_v1_secretless_serum_attempt_015_binding_guard";
@@ -162,6 +163,36 @@ check("prepare_apply_is_idempotent_when_binding_already_matches_lock", () =>
     prepareSource.includes("vcptoolbox_binding_already_matches_lock")
   )
 );
+check("prepare_scopes_internal_head_surface_independently", () => {
+  const sourceWithAdminHeadOnly = [
+    "function createAiImageAgentsAdminRouter() {",
+    "  const router = express.Router();",
+    "",
+    "  router.head('/execute/serum-bottle-secretless', (_req, res) => {",
+    "    res.status(204).end();",
+    "  });",
+    "",
+    "  router.post('/execute/serum-bottle-secretless', async (req, res) => {",
+    "    res.json({ ok: true });",
+    "  });",
+    "}",
+    "",
+    "function createSerumBottleSecretlessInternalRouter(options = {}) {",
+    "  const router = express.Router();",
+    "",
+    "  router.post('/execute/serum-bottle-secretless', async (req, res) => {",
+    "    res.json({ ok: true });",
+    "  });",
+    "}",
+    "",
+    "// \u2500\u2500 Handler"
+  ].join("\n");
+  const patched = patchRouteSource(sourceWithAdminHeadOnly);
+  const internal = internalRouterSource(patched);
+  return routeSectionHasSerumBottleHead(internal) &&
+    (patched.match(/router.head\('\/execute\/serum-bottle-secretless'/g) || []).length === 2 &&
+    !prepareSource.includes("if (!patched.includes(\"router.head('/execute/serum-bottle-secretless'\"))");
+});
 check("package_script_registered", () =>
   packageJson.scripts[packageScriptName] === `node ${repoPath(manifestId).includes(":") ? "" : ""}${"scripts/validate_runtime_to_review_v1_secretless_serum_attempt_015_binding_guard.js"}`
 );
