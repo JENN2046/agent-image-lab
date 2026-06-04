@@ -187,6 +187,11 @@ function routeDefaultsFromAttemptLock(relativePath) {
     pipelineId: lock.pipeline_id,
     taskId: lock.activation_id,
     prompt: lock.prompt,
+    maxProviderCalls: lock.budget?.max_provider_calls,
+    maxPluginCalls: lock.budget?.max_plugin_calls,
+    maxApiCalls: lock.budget?.max_api_calls,
+    maxImages: lock.budget?.max_images,
+    retryAllowed: lock.budget?.retry_allowed,
     receiptRef: lock.receipt_ref,
     artifactRecordRef: lock.artifact_record_ref,
     outputDirectoryRef: lock.output_directory_ref,
@@ -600,6 +605,42 @@ function collectForbiddenPayloadKeys(body, rootPath = "body") {
   return found;
 }
 
+function valueAtPath(object, pathParts) {
+  return pathParts.reduce((current, part) => {
+    if (current === null || current === undefined) return undefined;
+    return current[part];
+  }, object);
+}
+
+function compareAttemptLockBodyFields(body, expectedBody) {
+  const fieldSpecs = [
+    ["pipeline_id", ["pipeline_id"]],
+    ["task_id", ["task_id"]],
+    ["route_id", ["route_id"]],
+    ["max_provider_calls", ["max_provider_calls"]],
+    ["max_plugin_calls", ["max_plugin_calls"]],
+    ["max_api_calls", ["max_api_calls"]],
+    ["max_images", ["max_images"]],
+    ["retry_allowed", ["retry_allowed"]],
+    ["receipt_ref", ["receipt_ref"]],
+    ["artifact_record_ref", ["artifact_record_ref"]],
+    ["plan.steps[0].type", ["plan", "steps", 0, "type"]],
+    ["plan.steps[0].plugin", ["plan", "steps", 0, "plugin"]],
+    ["plan.steps[0].prompt", ["plan", "steps", 0, "prompt"]],
+    ["plan.steps[0].model", ["plan", "steps", 0, "model"]],
+    ["plan.steps[0].output_directory_ref", ["plan", "steps", 0, "output_directory_ref"]],
+    ["non_secret_payload_hash", ["non_secret_payload_hash"]]
+  ];
+
+  return fieldSpecs
+    .map(([field, pathParts]) => {
+      const expected = valueAtPath(expectedBody, pathParts);
+      const actual = valueAtPath(body, pathParts);
+      return actual === expected ? null : { field, expected, actual };
+    })
+    .filter(Boolean);
+}
+
 function baseBoundary() {
   return {
     route_http_request_performed: false,
@@ -728,6 +769,12 @@ function validateExactRouteHttpTransportInput(input = {}) {
     ...routeHttpDefaults,
     ...input
   });
+  const expectedAttemptLockBody = input.attemptLockRef
+    ? buildExactRouteHttpBody(routeHttpDefaults)
+    : null;
+  const attemptLockBodyMismatches = expectedAttemptLockBody
+    ? compareAttemptLockBodyFields(body, expectedAttemptLockBody)
+    : [];
   const forbiddenPayloadKeys = collectForbiddenPayloadKeys(body);
   const failures = [];
   const boundary = baseBoundary();
@@ -766,6 +813,13 @@ function validateExactRouteHttpTransportInput(input = {}) {
     failures.push({
       status: "secretless_option_a_activation_package_mismatch",
       reason: "route HTTP transport activation package must match the supplied attempt lock"
+    });
+  }
+  if (attemptLockBodyMismatches.length > 0) {
+    failures.push({
+      status: "secretless_option_a_attempt_lock_payload_drift",
+      reason: "route HTTP body must match the supplied attempt lock for all attempt-bound fields",
+      mismatches: attemptLockBodyMismatches
     });
   }
   if (!input.preflightOnly && input.confirmationPhrase !== exactConfirmationPhrase) {
@@ -841,6 +895,7 @@ function validateExactRouteHttpTransportInput(input = {}) {
     route_http_url: origin ? `${origin}${pathValue}` : null,
     endpoint_source: expectedEndpointSource,
     attempt_lock_ref: input.attemptLockRef || null,
+    attempt_lock_body_mismatches: attemptLockBodyMismatches,
     forbidden_payload_keys_detected: forbiddenPayloadKeys,
     failures,
     body,

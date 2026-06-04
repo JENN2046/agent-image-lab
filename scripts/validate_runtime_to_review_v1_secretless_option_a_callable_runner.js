@@ -12,6 +12,7 @@ const pushedReceiptPath = "reports/runtime_to_review_v1/secretless_serum_route_o
 const failedReceiptPath = "reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_001.json";
 const failedArtifactPath = "reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_001.json";
 const activationPreflightPath = "reports/runtime_to_review_v1/secretless_serum_live_probe_activation_preflight_20260603.json";
+const attempt018LockPath = "reports/runtime_to_review_v1/secretless_serum_attempt_018.lock.json";
 const runnerPath = "scripts/run_runtime_to_review_v1_secretless_option_a_callable_runner.js";
 const validatorPath = "scripts/validate_runtime_to_review_v1_secretless_option_a_callable_runner.js";
 const packageScriptName = "validate:runtime-to-review-secretless-option-a-callable-runner";
@@ -79,6 +80,7 @@ function main() {
   const failedReceipt = readJson(failedReceiptPath);
   const failedArtifact = readJson(failedArtifactPath);
   const activationPreflight = readJson(activationPreflightPath);
+  const attempt018Lock = readJson(attempt018LockPath);
   const packageJson = readJson("package.json");
   const manifest = readJson("scripts/validation_manifest.json");
   const runnerSource = fs.readFileSync(repoPath(runnerPath), "utf8");
@@ -346,6 +348,59 @@ function main() {
       runnerSource.includes("tcp_listener_probe_observed_no_route_http_request") &&
       !runnerSource.includes("fetch(validation.route_http_url, { method: \"HEAD\" })") &&
       !runnerSource.includes("fetch(validation.route_http_url, { method: 'HEAD' })");
+  });
+  check("attempt_lock_custom_payload_must_match_lock_bound_refs", () => {
+    const exactBody = runner.buildExactRouteHttpBody({
+      pipelineId: attempt018Lock.pipeline_id,
+      taskId: attempt018Lock.activation_id,
+      routeId: attempt018Lock.route.route_id,
+      prompt: attempt018Lock.prompt,
+      maxProviderCalls: attempt018Lock.budget.max_provider_calls,
+      maxPluginCalls: attempt018Lock.budget.max_plugin_calls,
+      maxApiCalls: attempt018Lock.budget.max_api_calls,
+      maxImages: attempt018Lock.budget.max_images,
+      retryAllowed: attempt018Lock.budget.retry_allowed,
+      receiptRef: attempt018Lock.receipt_ref,
+      artifactRecordRef: attempt018Lock.artifact_record_ref,
+      outputDirectoryRef: attempt018Lock.output_directory_ref
+    });
+    const driftBody = runner.buildExactRouteHttpBody({
+      pipelineId: "secretless-serum-live-probe-attempt-999",
+      taskId: "AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-999",
+      routeId: attempt018Lock.route.route_id,
+      prompt: attempt018Lock.prompt,
+      maxProviderCalls: attempt018Lock.budget.max_provider_calls,
+      maxPluginCalls: attempt018Lock.budget.max_plugin_calls,
+      maxApiCalls: attempt018Lock.budget.max_api_calls,
+      maxImages: attempt018Lock.budget.max_images,
+      retryAllowed: attempt018Lock.budget.retry_allowed,
+      receiptRef: "reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_999.json",
+      artifactRecordRef: "reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_999.json",
+      outputDirectoryRef: "runs/real_generation/runtime_to_review_v1_guarded_live_probe_serum_bottle_secretless_attempt_999/"
+    });
+    const accepted = runner.validateExactRouteHttpTransportInput({
+      attemptLockRef: attempt018LockPath,
+      confirmationPhrase: runner.exactConfirmationPhrase,
+      body: exactBody
+    });
+    const rejected = runner.validateExactRouteHttpTransportInput({
+      attemptLockRef: attempt018LockPath,
+      confirmationPhrase: runner.exactConfirmationPhrase,
+      body: driftBody
+    });
+    const rejectedFields = rejected.attempt_lock_body_mismatches.map((item) => item.field);
+    return accepted.ok === true &&
+      accepted.status === "secretless_option_a_route_http_transport_input_validated" &&
+      rejected.ok === false &&
+      rejected.status === "secretless_option_a_attempt_lock_payload_drift" &&
+      rejected.route_http_request_performed === false &&
+      rejected.provider_contact_performed === false &&
+      rejectedFields.includes("pipeline_id") &&
+      rejectedFields.includes("task_id") &&
+      rejectedFields.includes("receipt_ref") &&
+      rejectedFields.includes("artifact_record_ref") &&
+      rejectedFields.includes("plan.steps[0].output_directory_ref") &&
+      rejectedFields.includes("non_secret_payload_hash");
   });
   check("default_runner_source_has_no_secret_or_legacy_http_surface", () =>
     !runnerSource.includes(processEnvToken) &&
