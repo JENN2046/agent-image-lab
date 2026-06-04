@@ -1,3 +1,16 @@
+- [x] ID: post_pr8_backlog_audit_20260604
+      Lane: Green .agent_board-only backlog hygiene.
+      Status: completed_validated_local_audit.
+      Goal: Classify stale pending/remaining-gate text after PR #8 merged to master and collapse the active next step.
+      Baseline: `master@6eede9fc416ede321a4b9a31cd4e4975158416e3`.
+      Superseded by PR8 merge: PR8 commit/push/terminal-sync remaining gates; attempt-017/018 pending_commit entries; attempt-007 through attempt-016 exact-file local commit history; route outputRefs writer and PR8 review-fix pending text.
+      Still current: attempt-018 human/brand approval or explicit attempt-019 exact activation decision.
+      Not current mainline: historical admin-auth secret-bearing route blocker unless the owner intentionally reopens that route.
+      Boundary: .agent_board-only; no runtime/provider/plugin/API/image; no secret/env/config read; no commit; no push.
+      Validation: `node scripts\validate_agent_board_state.js` passed; `git diff --check` passed with line-ending warnings only.
+      Remaining gate: review/commit this local audit patch if accepted; push remains unauthorized.
+---
+
 - [x] ID: pr8_jpeg_archive_terminal_post_push_sync_20260604
       Lane: Green terminal status-surface sync after explicit push authorization.
       Status: completed_validated_terminal_status_surface_sync.

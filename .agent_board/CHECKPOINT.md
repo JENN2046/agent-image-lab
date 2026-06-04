@@ -1,3 +1,29 @@
+## Checkpoint - Post-PR8 Backlog Audit 2026-06-04
+
+```text
+phase: post_pr8_backlog_audit_20260604
+status: completed_validated_local_audit
+result: BACKLOG_PENDING_CLASSIFIED_AFTER_PR8_MERGE
+baseline: master@6eede9fc416ede321a4b9a31cd4e4975158416e3
+pr: JENN2046/agent-image-lab#8
+pr8_merge_commit: 6eede9fc416ede321a4b9a31cd4e4975158416e3
+audit_scope: .agent_board pending/blocked/remaining-gate text only
+superseded_by_pr8_merge:
+  - pr8 commit/push/terminal-sync remaining gates
+  - attempt-017 and attempt-018 pending_commit entries for evidence, activation, consumed state, and quality review
+  - attempt-007 through attempt-016 exact-file local commit / pending_commit history that is now included in PR8's merged commit range
+  - route outputRefs writer and PR8 review-fix pending text now covered by merged validators and evidence
+current_active_next_step:
+  - attempt-018 human/brand approval
+  - or explicit attempt-019 exact activation decision
+not_current_mainline:
+  - historical admin-auth secret-bearing route blocker unless the owner intentionally reopens that route
+boundary_checks: .agent_board-only local audit; no runtime/provider/plugin/API/image/secret action; no commit; no push.
+validation: node scripts\validate_agent_board_state.js passed; git diff --check passed with line-ending warnings only
+```
+
+---
+
 ## Checkpoint - PR8 JPEG Archive Terminal Post-Push Sync 2026-06-04
 
 ```text
