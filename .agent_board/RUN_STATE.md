@@ -1943,3 +1943,17 @@ validation: verifier passed with ail_head_contains_required_lock_commit; binding
 boundary_checks: route_http_post_performed=false; listener_head_performed_when_lock_inactive=false; provider_contact_performed=false; plugin_call_performed=false; api_call_performed=false; image_generation_performed=false.
 next_safe_task: commit lock seal, then prepare exact activation refresh without enabling POST until separate activation flips lock authorization.
 ```
+
+### Attempt 015 Exact Activation Refresh Prepared - 2026-06-04
+
+```text
+status: completed_validated_pending_commit
+mode: Green activation refresh package only; no route HTTP/live probe
+activation_preflight_ref: reports/runtime_to_review_v1/secretless_serum_live_probe_activation_preflight_20260603_attempt_015.json
+binding_packet_ref: reports/runtime_to_review_v1/secretless_option_a_exact_binding_packet_draft_20260603_attempt_015.json
+validator_ref: scripts/validate_runtime_to_review_v1_secretless_serum_attempt_015_activation_refresh.js
+result: attempt-015 activation refresh now points to the single lock, the lock-bound binding packet, AIL lock seal commit 1c60412746f60fdd642243460390dabbc15bb66f, AIL guard commit 6ad539c70d6443d7dcbe6e2ea091dd6169740522, and VCPToolBox current-attempt binding commit cd25e1485dd1b31f84fe5ad0d09c90ab1c1d0143.
+validation: npm run validate:runtime-to-review-secretless-serum-attempt-015-activation-refresh passed; npm run validate:runtime-to-review-secretless-serum-attempt-015-binding-guard passed.
+boundary_checks: can_execute_now=false; route_http_request_performed=false; provider_contact_performed=false; plugin_call_performed=false; api_call_performed=false; image_generation_performed=false; secret_value_read_performed=false; authorization_header_constructed_by_agent_image_lab=false.
+next_safe_task: final validation/diff review and exact-file local commit; actual exact activation must separately flip lock authorization before any POST can pass.
+```

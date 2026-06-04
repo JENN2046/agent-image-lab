@@ -2670,3 +2670,25 @@ boundary_checks_addendum:
   image_generation_performed: false
 recommended_next: commit lock seal; exact activation refresh must be separate and must explicitly flip lock authorization before any live POST can pass.
 ```
+
+### Checkpoint Addendum - Attempt 015 Exact Activation Refresh Prepared 2026-06-04
+
+```text
+status: completed_validated_pending_commit
+result: ATTEMPT_015_EXACT_ACTIVATION_REFRESH_PREPARED_NO_EXECUTION
+summary: Added attempt-015 binding packet and activation preflight refresh, both bound to the single attempt lock and to VCPToolBox current-attempt binding commit cd25e1485dd1b31f84fe5ad0d09c90ab1c1d0143. The activation refresh explicitly does not authorize route HTTP or live POST; separate exact activation must flip the lock authorization boundary.
+changed_refs:
+  - reports/runtime_to_review_v1/secretless_option_a_exact_binding_packet_draft_20260603_attempt_015.json
+  - reports/runtime_to_review_v1/secretless_serum_live_probe_activation_preflight_20260603_attempt_015.json
+  - scripts/validate_runtime_to_review_v1_secretless_serum_attempt_015_activation_refresh.js
+validation_run_addendum:
+  - npm run validate:runtime-to-review-secretless-serum-attempt-015-activation-refresh: passed
+  - npm run validate:runtime-to-review-secretless-serum-attempt-015-binding-guard: passed
+boundary_checks_addendum:
+  route_http_post_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+recommended_next: commit exact activation refresh package, then wait for/issue a separate exact activation that explicitly flips lock authorization before any live POST.
+```

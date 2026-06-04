@@ -975,11 +975,14 @@ done:
     evidence: runner with exact confirmation phrase failed closed at secretless_option_a_final_gate_failed_closed_lock_authorization_boundary, listener not_checked, route_http_request_performed=false
   - task: make prepare --apply idempotent on already-bound VCPToolBox HEAD
     evidence: prepare --apply-vcptoolbox-binding passed with vcptoolbox_binding_already_matches_lock and commit skipped
+  - task: prepare attempt-015 exact activation refresh package
+    evidence: activation preflight and binding packet are bound to the single lock and VCPToolBox current-attempt binding commit cd25e1485dd1b31f84fe5ad0d09c90ab1c1d0143; activation refresh validator passed
 in_progress:
   - none
 blocked:
   - none
 remaining:
-  - review AIL diff and run final targeted validation before any AIL local commit
+  - review activation refresh diff and run final targeted validation before any AIL local commit
+  - separate exact activation must flip lock authorization before any live POST can pass
   - push/tag/release/deploy remain unauthorized
 ```

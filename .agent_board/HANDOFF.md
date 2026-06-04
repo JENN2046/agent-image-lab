@@ -2473,3 +2473,25 @@ not_performed_addendum:
   - no push/tag/release/deploy
 next_safe_action: final diff review and exact-file AIL local commit if allowed; separate exact activation must update lock authorization before any live POST can pass.
 ```
+
+### Handoff Addendum - Attempt 015 Exact Activation Refresh Prepared 2026-06-04
+
+```text
+status: completed_validated_pending_commit
+completed_addendum:
+  - Added attempt-015 binding packet at reports/runtime_to_review_v1/secretless_option_a_exact_binding_packet_draft_20260603_attempt_015.json.
+  - Added attempt-015 activation preflight refresh at reports/runtime_to_review_v1/secretless_serum_live_probe_activation_preflight_20260603_attempt_015.json.
+  - Added validator scripts/validate_runtime_to_review_v1_secretless_serum_attempt_015_activation_refresh.js and registered it in package.json plus scripts/validation_manifest.json.
+  - Activation refresh binds to lock ref reports/runtime_to_review_v1/secretless_serum_attempt_015.lock.json, AIL lock seal commit 1c60412746f60fdd642243460390dabbc15bb66f, AIL guard commit 6ad539c70d6443d7dcbe6e2ea091dd6169740522, and VCPToolBox current-attempt binding commit cd25e1485dd1b31f84fe5ad0d09c90ab1c1d0143.
+validation_addendum:
+  - npm run validate:runtime-to-review-secretless-serum-attempt-015-activation-refresh passed.
+  - npm run validate:runtime-to-review-secretless-serum-attempt-015-binding-guard passed.
+not_performed_addendum:
+  - no route HTTP POST
+  - no provider/plugin/API/image generation
+  - no output write
+  - no secret/env/config value read
+  - no Authorization header construction by Agent Image Lab
+  - no push/tag/release/deploy
+next_safe_action: final validation/diff review and exact-file AIL local commit; live POST remains blocked until a separate exact activation flips the lock authorization boundary.
+```
