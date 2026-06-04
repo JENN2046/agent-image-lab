@@ -3,6 +3,7 @@
 
 const crypto = require("node:crypto");
 const fs = require("node:fs");
+const net = require("node:net");
 const path = require("node:path");
 const { verifyAttemptLockBinding } = require("./verify_runtime_to_review_v1_secretless_serum_attempt_lock_binding");
 
@@ -1024,6 +1025,52 @@ const exactAttemptReceiptArtifactConfigs = Object.freeze({
   })
 });
 
+function tcpProbeTargetFromRouteUrl(routeHttpUrl) {
+  const parsed = new URL(routeHttpUrl);
+  const defaultPort = parsed.protocol === "https:" ? 443 : 80;
+  return {
+    protocol: parsed.protocol,
+    host: parsed.hostname,
+    port: parsed.port ? Number(parsed.port) : defaultPort,
+    route_path_not_requested: parsed.pathname
+  };
+}
+
+function probeTcpListener(routeHttpUrl, timeoutMs = 1500) {
+  const target = tcpProbeTargetFromRouteUrl(routeHttpUrl);
+  return new Promise((resolve) => {
+    const socket = net.createConnection({ host: target.host, port: target.port });
+    let settled = false;
+
+    function finish(result) {
+      if (settled) return;
+      settled = true;
+      socket.destroy();
+      resolve({
+        ...target,
+        ...result,
+        probe_transport: "tcp_connect",
+        route_http_request_performed: false
+      });
+    }
+
+    socket.setTimeout(timeoutMs);
+    socket.once("connect", () => finish({
+      passed: true,
+      status: "tcp_listener_probe_observed_no_route_http_request"
+    }));
+    socket.once("timeout", () => finish({
+      passed: false,
+      status: "tcp_listener_probe_timeout_failed_closed"
+    }));
+    socket.once("error", (error) => finish({
+      passed: false,
+      status: "tcp_listener_probe_error_failed_closed",
+      error: error instanceof Error ? error.message : String(error)
+    }));
+  });
+}
+
 async function runAttemptFinalGate(validation, config) {
   if (!config || !config.attemptLockRef) {
     return {
@@ -1050,7 +1097,8 @@ async function runAttemptFinalGate(validation, config) {
   const listener = {
     passed: false,
     status: "not_checked",
-    http_status: null
+    http_status: null,
+    route_http_request_performed: false
   };
 
   if (lockAuthorization.passed !== true) {
@@ -1084,17 +1132,14 @@ async function runAttemptFinalGate(validation, config) {
   }
 
   try {
-    const response = await fetch(validation.route_http_url, { method: "HEAD" });
-    listener.passed = Number.isInteger(response.status) &&
-      response.status >= 100 &&
-      response.status < 600;
-    listener.status = listener.passed
-      ? "listener_surface_http_response_observed"
-      : "listener_surface_failed_closed";
-    listener.http_status = response.status;
-    listener.expected_status = "any_http_response";
+    const tcpProbe = await probeTcpListener(validation.route_http_url);
+    listener.passed = tcpProbe.passed === true;
+    listener.status = tcpProbe.status;
+    listener.http_status = null;
+    listener.expected_status = "tcp_connect_success_without_http_route_request";
+    listener.probe = tcpProbe;
   } catch (error) {
-    listener.status = "listener_fetch_failed_closed";
+    listener.status = "tcp_listener_probe_unhandled_error_failed_closed";
     listener.error = error instanceof Error ? error.message : String(error);
   }
 
@@ -1676,6 +1721,8 @@ module.exports = {
   normalizeRouteOutputRefs,
   summarizeRouteResult,
   deriveOutputWritePerformed,
+  tcpProbeTargetFromRouteUrl,
+  probeTcpListener,
   buildAttemptReceiptAndArtifact,
   validateRunnerInput,
   validateExactRouteHttpTransportInput,

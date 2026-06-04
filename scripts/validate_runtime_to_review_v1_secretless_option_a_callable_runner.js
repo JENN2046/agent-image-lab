@@ -336,6 +336,17 @@ function main() {
       records.receipt.route_response_summary.outputRefs.includes(outputRef) &&
       records.artifact.route_response_summary.outputRefs.includes(outputRef);
   });
+  check("final_gate_listener_probe_targets_origin_without_route_http_request", () => {
+    const target = runner.tcpProbeTargetFromRouteUrl("http://127.0.0.1:6005/internal/ai-image-agents/execute/serum-bottle-secretless");
+    return target.protocol === "http:" &&
+      target.host === "127.0.0.1" &&
+      target.port === 6005 &&
+      target.route_path_not_requested === "/internal/ai-image-agents/execute/serum-bottle-secretless" &&
+      runnerSource.includes("probeTcpListener(validation.route_http_url)") &&
+      runnerSource.includes("tcp_listener_probe_observed_no_route_http_request") &&
+      !runnerSource.includes("fetch(validation.route_http_url, { method: \"HEAD\" })") &&
+      !runnerSource.includes("fetch(validation.route_http_url, { method: 'HEAD' })");
+  });
   check("default_runner_source_has_no_secret_or_legacy_http_surface", () =>
     !runnerSource.includes(processEnvToken) &&
     !runnerSource.includes("require(\"node:http\")") &&

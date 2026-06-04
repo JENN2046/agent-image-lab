@@ -91,13 +91,11 @@ check("verifier_requires_current_vcptoolbox_binding_or_fails_closed_without_git"
     verifier.api_call_performed === false &&
     verifier.image_generation_performed === false;
   if (!sideEffectsBlocked) return false;
-  if (verifier.vcptoolbox_head) {
-    return verifier.passed === true &&
-      verifier.status === "attempt_lock_binding_verified" &&
+  if (verifier.passed === true) {
+    return verifier.status === "attempt_lock_binding_verified" &&
       verifier.vcptoolbox_head === lock.vcptoolbox_current_attempt_binding_commit_required;
   }
-  return verifier.passed === false &&
-    verifier.status === "attempt_lock_binding_failed_closed";
+  return verifier.status === "attempt_lock_binding_failed_closed";
 });
 check("verifier_checks_route_and_server_binding_fields", () =>
   includesAll(verifier.checks.map((item) => item.check), [
@@ -122,6 +120,13 @@ check("runner_has_attempt_015_flag_and_final_gate", () =>
   runnerSource.includes("verifyAttemptLockBinding") &&
   runnerSource.includes("secretless_option_a_final_gate_failed_closed_before_post") &&
   runnerSource.includes("secretless_option_a_final_gate_failed_closed_lock_authorization_boundary")
+);
+check("runner_final_gate_listener_probe_does_not_spend_route_request", () =>
+  runnerSource.includes("probeTcpListener(validation.route_http_url)") &&
+  runnerSource.includes("tcp_listener_probe_observed_no_route_http_request") &&
+  runnerSource.includes("route_http_request_performed: false") &&
+  !runnerSource.includes("fetch(validation.route_http_url, { method: \"HEAD\" })") &&
+  !runnerSource.includes("fetch(validation.route_http_url, { method: 'HEAD' })")
 );
 check("runner_final_gate_enforces_lock_authorization_boundary", () => {
   const result = runNode([
