@@ -1,3 +1,501 @@
+- [x] ID: pr8_jpeg_archive_terminal_post_push_sync_20260604
+      Lane: Green terminal status-surface sync after explicit push authorization.
+      Status: completed_validated_terminal_status_surface_sync.
+      Functional commit pushed: `0e1139a9d58805b50d7bc67832a341dbc0b73914`.
+      PR: `JENN2046/agent-image-lab#8`.
+      Remote verification after functional push: PR head `0e1139a9d58805b50d7bc67832a341dbc0b73914`; merge state `CLEAN`.
+      terminal_status_surface_sync: true
+      post_push_followup: read_only_remote_sync_only
+      no_followup_agent_board_write_after_push: true
+      Validation: `node scripts\validate_agent_board_state.js` passed; `git diff --check` passed with line-ending warnings only.
+      Remaining gate: exact-file commit and push, then read-only remote/head verification only.
+---
+
+- [x] ID: pr8_jpeg_archive_extension_guard_20260604
+      Lane: Green local PR review follow-up.
+      Status: completed_validated_unpushed.
+      Goal: Address P2 review note that attempt-017/018 committed archive images used .png suffix while bytes and records are image/jpeg.
+      Triage: true finding; both committed AIL archive copies start with JPEG magic ffd8ffe0 and preserve image/jpeg sha evidence.
+      Fix: committed AIL archive copies now use .jpg; top-level archived output refs/copy refs now use .jpg; raw source/route .png refs remain only where they document VCPToolBox source/route output.
+      Validation: successful-attempt evidence validator passed; node --check passed; old committed-copy .png refs scan found no matches; attempt-015 and attempt-016 exact activation validators passed; validation-manifest passed; agent-board validator passed; recommender matched all changed files with unmatched_file_count 0; smoke passed; targeted-plan passed; validation recommendation profiles passed; git diff --check and git diff --cached --check passed with line-ending warnings only.
+      Boundary: no route HTTP POST; no provider/plugin/API/image; no secret/env/config read; no GitHub write/comment/review; no push/tag/release/deploy.
+      Remaining gate: exact-file guarded local commit; push only when authorized.
+---
+
+- [x] ID: pr8_archived_evidence_terminal_post_push_sync_20260604
+      Lane: Green terminal status-surface sync after explicit push authorization.
+      Status: completed_validated_terminal_status_surface_sync.
+      Functional commit pushed: `9053fb43e22f2584c117c4396cf763495361cd02`.
+      PR: `JENN2046/agent-image-lab#8`.
+      Remote verification after functional push: PR head `9053fb43e22f2584c117c4396cf763495361cd02`; merge state `UNKNOWN`.
+      terminal_status_surface_sync: true
+      post_push_followup: read_only_remote_sync_only
+      no_followup_agent_board_write_after_push: true
+      Validation: `node scripts\validate_agent_board_state.js` passed; `git diff --check` passed with line-ending warnings only.
+      Remaining gate: exact-file commit and push, then read-only remote/head verification only.
+---
+
+- [x] ID: pr8_archived_evidence_commit_reachability_guard_20260604
+      Lane: Green local PR review follow-up.
+      Status: completed_validated_pushed.
+      Goal: Address P1 review note that successful attempt evidence validator required archived lock commits to be ancestors of the current checkout.
+      Triage: current PR head and fetched PR merge ref both passed before this patch, but the validator design risk was real for archived evidence on alternate validation lineages.
+      Fix: successful attempt evidence validator now treats attempt-017/018 commit refs as archived consumed evidence references; hash format and lock/activation agreement remain required, current-checkout ancestry is no longer required.
+      Validation: successful-attempt evidence validator passed; node --check passed; validation-manifest passed; agent-board validator passed; recommender matched all changed files; smoke passed; targeted-plan passed; git diff --check passed with line-ending warnings only; ancestry gate pattern scan found no merge-base/is-ancestor/gitIsAncestor pattern in the successful attempt validator.
+      Boundary: no route HTTP POST; no provider/plugin/API/image; no secret/env/config read; no GitHub write/comment/review; pushed only after explicit user authorization; no tag/release/deploy.
+      Remaining gate: terminal post-push status-surface sync, then read-only remote/head verification only.
+---
+
+- [x] ID: pr8_terminal_post_push_status_surface_sync_20260604
+      Lane: Green terminal status-surface sync after explicit commit/push authorization.
+      Status: completed_validated_terminal_status_surface_sync.
+      Functional commit pushed: `716aad16af661e2ec74e720dc95cf253508dc163`.
+      PR: `JENN2046/agent-image-lab#8`.
+      Remote verification after functional push: PR head `716aad16af661e2ec74e720dc95cf253508dc163`; merge state `CLEAN`.
+      terminal_status_surface_sync: true
+      post_push_followup: read_only_remote_sync_only
+      no_followup_agent_board_write_after_push: true
+      Validation: `node scripts\validate_agent_board_state.js` passed; `git diff --check` passed with line-ending warnings only.
+      Remaining gate: exact-file commit and push, then read-only remote/head verification only.
+---
+
+- [x] ID: pr8_successful_attempt_evidence_guard_20260604
+      Lane: Green local PR review follow-up.
+      Status: completed_validated.
+      Goal: Confirm which PR #8 review findings still apply, fix the real remaining evidence/validation gaps, and avoid remote writes.
+      True findings fixed:
+        - attempt-017 successful evidence had output_write_performed=false and empty output_refs despite a copied image artifact.
+        - attempt-017/018 successful evidence files were not covered by an attempt-specific targeted validator.
+      Findings already fixed/currently validated before this patch:
+        - auth-header validator false positive
+        - route output write derivation
+        - final-gate listener probe accounting
+        - lock-bound custom payload drift rejection
+        - consumed validator current external VCPToolBox HEAD dependency
+        - internal HEAD route repair scoping
+        - attempt-018 AIL commit reachability
+      Validator: `scripts/validate_runtime_to_review_v1_secretless_serum_successful_attempt_evidence.js`.
+      Validation: successful-attempt evidence validator passed; validation manifest passed; recommender now matches attempt-017/018 evidence files; validate:active passed; agent-board validator passed; targeted-plan passed; git diff --check passed with line-ending warnings only.
+      Boundary: no route HTTP POST; no provider/plugin/API/image; no secret/env/config read; no GitHub write/comment/review; no push/tag/release/deploy.
+      Remaining gate: exact-file review/stage/commit only if separately desired; push remains unauthorized.
+---
+
+- [x] ID: secretless_serum_attempt_017_exact_activation_20260604
+      Lane: Amber exact activation plus one final-gated route POST.
+      Status: completed_validated_consumed_succeeded_no_retry_pending_commit.
+      Goal: Consume exactly one attempt-017 POST after final gate and seal the lock.
+      Lock: `reports/runtime_to_review_v1/secretless_serum_attempt_017.lock.json`.
+      Activation record: `reports/runtime_to_review_v1/secretless_serum_exact_activation_issued_20260604_attempt_017.json`.
+      Receipt: `reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_017.json`.
+      Artifact record: `reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_017.json`.
+      Result: VCPToolBox completed real execution with route_http_request=1, provider=1, plugin=1, api=1, image=1.
+      Observed output: `A:\VCP\apps\VCPToolBox\image\doubaogen\a504b6e8-e47c-44f4-831b-71fb31a610ff.png`.
+      AIL evidence copy: `runs/real_generation/runtime_to_review_v1_guarded_live_probe_serum_bottle_secretless_attempt_017/a504b6e8-e47c-44f4-831b-71fb31a610ff.png`.
+      Artifact sha256: `1a73684dd24bad53c50d36fb5b8183f2fe2a2d2aa2361a428dc5717c1d26bd93`.
+      Boundary: no retry; no secret/env/config read; no Authorization header construction; no old admin-auth route; no push/tag/release/deploy.
+      Known gap resolved: route response omitted outputRefs, so route_response_output_refs_returned remains false; AIL receipt/artifact/activation/lock now mark output_write_performed=true and use the AIL evidence copy as canonical output_refs.
+      Validation: consumed-state source binding verifier passed; runner rerun with exact phrase failed closed at lock authorization boundary with route_http_request_performed=false.
+      Remaining gate: exact-file local commit.
+---
+
+- [x] ID: secretless_serum_attempt_018_prepare_20260604
+      Lane: Amber exact VCPToolBox source binding refresh plus Green AIL prepare.
+      Status: completed_validated_inactive_pending_commit.
+      Goal: Prepare attempt-018 inactive lock-bound package after the VCPToolBox outputRefs response boundary fix.
+      Lock: `reports/runtime_to_review_v1/secretless_serum_attempt_018.lock.json`.
+      Binding packet: `reports/runtime_to_review_v1/secretless_option_a_exact_binding_packet_draft_20260603_attempt_018.json`.
+      Activation preflight: `reports/runtime_to_review_v1/secretless_serum_live_probe_activation_preflight_20260603_attempt_018.json`.
+      VCPToolBox outputRefs boundary commit: `deeebbfa17ec56a9ad477ce8cdfd09fe50750b1f`.
+      VCPToolBox current attempt binding commit: `eb8d4e10261d8ac2e0ae0fd26cb3595ddcef7962`.
+      Validation: VCPToolBox targeted tests passed 30/30; verifier passed and proved HEAD contains deeebbfa; preflight-only runner passed with 0 route HTTP; exact phrase runner failed closed at inactive lock boundary with 0 route HTTP.
+      Boundary: no attempt-018 route HTTP POST; no provider/plugin/API/image; no output write; no secret/env/config read; no Authorization header construction; no push/tag/release/deploy.
+      Remaining gate: exact-file local commit. Future live POST requires VCPToolBox restart/reload to current binding and separate exact activation.
+---
+
+- [x] ID: secretless_serum_attempt_018_exact_activation_issued_20260604
+      Lane: Amber bounded runtime reload plus separate exact activation issuance.
+      Status: exact_activation_issued_validated_pending_final_gate_and_one_post.
+      Goal: Reload VCPToolBox to eb8d4e10261d8ac2e0ae0fd26cb3595ddcef7962 and flip the attempt-018 lock from inactive to one-shot active without consuming POST.
+      Lock: `reports/runtime_to_review_v1/secretless_serum_attempt_018.lock.json`.
+      Activation record: `reports/runtime_to_review_v1/secretless_serum_exact_activation_issued_20260604_attempt_018.json`.
+      Lock sha256 after activation: `1027ea338d2c84ef43885d158adc73440e407b5ba6f702b1e1d9ebbc58ccdc20`.
+      VCPToolBox listener: port 6005, PID 29728, internal HEAD surface 204.
+      Boundary: route_http_request=0; provider=0; plugin=0; api=0; image=0; output=0; no secret/env/config read; no Authorization header construction; no push/tag/release/deploy.
+      Remaining gate: run final gate; if all checks pass, consume exactly one attempt-018 POST and seal consumed/no-retry.
+---
+
+- [x] ID: secretless_serum_attempt_018_exact_activation_consumed_20260604
+      Lane: Amber exact activation final gate plus one route POST.
+      Status: completed_validated_consumed_succeeded_no_retry_pending_commit.
+      Goal: Consume the already-issued attempt-018 exact activation once, record evidence, and seal no-retry.
+      Lock: `reports/runtime_to_review_v1/secretless_serum_attempt_018.lock.json`.
+      Receipt: `reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_018.json`.
+      Artifact record: `reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_018.json`.
+      Observed output: `A:\VCP\apps\VCPToolBox\image\doubaogen\3551a0c1-029b-4631-aa5b-45a900e1718a.png`.
+      AIL evidence copy: `runs/real_generation/runtime_to_review_v1_guarded_live_probe_serum_bottle_secretless_attempt_018/3551a0c1-029b-4631-aa5b-45a900e1718a.png`.
+      Artifact sha256: `950eec0c7afa7c86567c10f2e73b657e872cbee12c2e85d77a9f75c82de49075`.
+      Boundary: route_http_request=1 consumed; provider=1; plugin=1; api=1; image=1; retry=false; no second POST; no secret/env/config read; no Authorization header construction; no push/tag/release/deploy.
+      Remaining gate: exact-file local commit; do not retry attempt-018.
+---
+
+- [x] ID: secretless_serum_attempt_018_quality_review_20260604
+      Lane: Green local visual/evidence review.
+      Status: completed_validated_quality_review_pending_commit.
+      Goal: Review attempt-018 quality without entering attempt-019.
+      Review: `reports/runtime_to_review_v1/secretless_serum_attempt_018_quality_channel_review_20260604.json`.
+      Output: `runs/real_generation/runtime_to_review_v1_guarded_live_probe_serum_bottle_secretless_attempt_018/3551a0c1-029b-4631-aa5b-45a900e1718a.png`.
+      Decision: attempt-018 image is `production_candidate_pending_human_brand_approval`; attempt-019 is not needed immediately and is not authorized by this review.
+      Boundary: no route HTTP POST; no provider/plugin/API/image; no attempt-019 preparation; no secret/env/config read; no accepted sample or production candidate registry write; no DailyNote/VCP memory write; no push/tag/release/deploy.
+      Remaining gate: exact-file local commit quality review.
+---
+
+- [x] ID: runner_output_refs_receipt_writer_fix_20260604
+      Lane: Green local runner evidence writer fix.
+      Status: completed_validated_pending_commit.
+      Goal: Make the AIL runner automatically write route response outputRefs into receipt/artifact evidence.
+      Changed: `scripts/run_runtime_to_review_v1_secretless_option_a_callable_runner.js`; `scripts/validate_runtime_to_review_v1_secretless_option_a_callable_runner.js`.
+      Validation: node --check passed; callable runner validator passed including outputRefs regression; attempt-018 preflight-only passed with 0 route HTTP.
+      Boundary: no route HTTP POST; no provider/plugin/API/image; no output write; no attempt-019 preparation; no secret/env/config read; no push/tag/release/deploy.
+      Remaining gate: exact-file local commit.
+---
+
+- [x] ID: attempt_binding_lock_p0_guard_20260604
+      Lane: Green/Amber exact source-read plus local AIL guard implementation.
+      Status: completed_validated_local_guard_current_vcptoolbox_failed_closed.
+      Goal: Add a single attempt lock, VCPToolBox source binding verifier, prepare command, and runner final gate before any attempt-015 POST.
+      Attempt lock: `reports/runtime_to_review_v1/secretless_serum_attempt_015.lock.json`.
+      Verifier: `scripts/verify_runtime_to_review_v1_secretless_serum_attempt_lock_binding.js`.
+      Prepare command: `node scripts/prepare_runtime_to_review_v1_secretless_serum_attempt.js`.
+      Optional binding apply: `node scripts/prepare_runtime_to_review_v1_secretless_serum_attempt.js --apply-vcptoolbox-binding`.
+      Current VCPToolBox result: failed closed because route/server are not attempt-015.
+      Boundary: route_http_post=0; provider=0; plugin=0; api=0; image=0; no secret/env/config read; no VCPToolBox write by this task; no push/tag/release/deploy.
+      Validation: targeted guard passed; validation manifest passed; runner preflight-only passed; runner confirm-route-http failed closed before POST.
+      Remaining gate: refresh VCPToolBox current-attempt binding to attempt-015 and rerun verifier before any exact activation.
+---
+
+- [x] ID: secretless_serum_attempt_014_exact_file_refresh_20260604
+      Lane: Green local runner/binding/preflight/validator/prompt registration.
+      Status: completed_validated_local_runner_refresh_no_execution_pending_commit.
+      Goal: Register AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-014 after the VCPToolBox artifact evidence fix, with a prompt that keeps the full bottle visible and prevents bottom crop.
+      VCPToolBox required commit: `549a26abc7d34e973c9d1ac6d4491aa8d92e88f1`.
+      Binding packet: `reports/runtime_to_review_v1/secretless_option_a_exact_binding_packet_draft_20260603_attempt_014.json`.
+      Activation preflight: `reports/runtime_to_review_v1/secretless_serum_live_probe_activation_preflight_20260603_attempt_014.json`.
+      Prompt package: `reports/runtime_to_review_v1/secretless_serum_attempt_014_prompt_quality_package_20260604.json`.
+      CLI flag: `--attempt-014-route-http`.
+      Validator: `scripts/validate_runtime_to_review_v1_secretless_serum_live_probe_receipt_attempt_014.js`.
+      Future receipt: `reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_014.json`.
+      Future artifact record: `reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_014.json`.
+      Boundary: route_http_request=0; provider=0; plugin=0; api=0; image=0; retry=false; no secret/env/config read; no Authorization header construction; no old admin-auth route; no push/tag/release/deploy.
+      Validation: node --check runner and attempt-014 validator passed; attempt-014 pending-safe validator passed; validation manifest passed; preflight-only passed with no route HTTP.
+      Remaining gate: final agent board/diff validation and exact-file local commit; future attempt-014 execution requires VCPToolBox restart/load of 549a26ab..., listener/surface/baseline checks, and a new exact activation.
+---
+
+- [x] ID: secretless_serum_attempt_013_evidence_quality_review_20260604
+      Lane: Amber exact activation evidence closeout plus Green quality review.
+      Status: completed_validated_success_evidence_review_pending_commit.
+      Goal: Review attempt-013 image/evidence and archive successful controlled-channel proof.
+      Activation consumed: `AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-013`.
+      Agent Image Lab commit: `ef31a2199a1bcd682cca286bebbafb1e20b26518`.
+      VCPToolBox commit: `82b83028efaa2dcefa19edb03b6a8b3854941090`.
+      Receipt: `reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_013.json`.
+      Artifact record: `reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_013.json`.
+      Quality review: `reports/runtime_to_review_v1/secretless_serum_attempt_013_quality_channel_review_20260604.json`.
+      Output: `runs/real_generation/runtime_to_review_v1_guarded_live_probe_serum_bottle_secretless_attempt_013/5c097e0d-326d-4b7f-b091-1e00c2992eaa.png`.
+      Artifact evidence: sha256 `89479934d09c6d6dd5485981e90f38b7239ca8e7f08ce4eb33caa499c38ac0d4`; mime `image/jpeg`; dimensions `1920x1920`.
+      Calls used: route_http_request=1; provider=1; plugin=1; api=1; image=1; retry=false.
+      Visual review: channel positive and approved as controlled production candidate; image is a review candidate, not final production asset, because the bottle bottom is cropped.
+      Boundary: no secret/env/config read; no Authorization header construction; no old admin-auth route; no push/tag/release/deploy.
+      Validation: attempt-013 full receipt/artifact validator passed after evidence completion.
+      Remaining gate: exact-file local commit this evidence archive; future quality refinement should use attempt-014, not a retry of attempt-013.
+---
+
+- [x] ID: secretless_serum_attempt_013_exact_file_refresh_20260604
+      Lane: Green local runner/binding/preflight/validator registration.
+      Status: completed_validated_local_runner_refresh_no_execution_pending_commit.
+      Goal: Register AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-013 in the local runner and exact files after the VCPToolBox route/server binding refresh.
+      VCPToolBox required commit: `82b83028efaa2dcefa19edb03b6a8b3854941090`.
+      Binding packet: `reports/runtime_to_review_v1/secretless_option_a_exact_binding_packet_draft_20260603_attempt_013.json`.
+      Activation preflight: `reports/runtime_to_review_v1/secretless_serum_live_probe_activation_preflight_20260603_attempt_013.json`.
+      CLI flag: `--attempt-013-route-http`.
+      Validator: `scripts/validate_runtime_to_review_v1_secretless_serum_live_probe_receipt_attempt_013.js`.
+      Future receipt: `reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_013.json`.
+      Future artifact record: `reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_013.json`.
+      Boundary: route_http_request=0; provider=0; plugin=0; api=0; image=0; retry=false; no secret/env/config read; no Authorization header construction; no old admin-auth route; no push/tag/release/deploy.
+      Validation: node --check runner and attempt-013 validator passed; attempt-013 pending-safe validator passed; validation manifest passed.
+      Remaining gate: final agent board/diff validation and exact-file local commit; future attempt-013 execution requires VCPToolBox restart/load of 82b83028..., listener/surface/baseline checks, and a new exact activation.
+---
+
+- [x] ID: secretless_serum_attempt_012_live_execution_evidence_20260604
+      Lane: Amber exact activation execution evidence.
+      Status: completed_validated_one_live_probe_failed_closed_before_provider.
+      Goal: Execute one secretless serum bottle live probe through the internal route and record planned attempt-012 evidence.
+      Activation consumed: `AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-012`.
+      Agent Image Lab commit: `9d48fc5ed6856f0f1bd7d88e62ca52c70843b630`.
+      VCPToolBox commit: `24b9f887b77c1db48da2d23d6ef9fb9cd080ea83`.
+      Receipt: `reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_012.json`.
+      Artifact record: `reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_012.json`.
+      Route result: `serum_bottle_secretless_internal_authorization_denied`.
+      Calls used: route_http_request=1; provider=0; plugin=0; api=0; image=0; retry=false.
+      Boundary: no output image; no secret/env/config read; no Authorization header construction; no old admin-auth route; no push/tag/release/deploy.
+      Validation: attempt-012 full receipt/artifact validator passed after failed-closed evidence write.
+      Remaining gate: exact-file local commit this failed-closed evidence; next technical task is VCPToolBox internal secretless authorizer inspection before any attempt-013.
+---
+
+- [x] ID: secretless_serum_attempt_012_exact_file_refresh_20260603
+      Lane: Green local runner/binding/preflight/validator registration.
+      Status: completed_validated_local_runner_refresh_no_execution.
+      Goal: Register AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-012 in the local runner with the improved prompt quality package and VCPToolBox attempt-012 exact binding baseline.
+      VCPToolBox required commit: `24b9f887b77c1db48da2d23d6ef9fb9cd080ea83`.
+      Binding packet: `reports/runtime_to_review_v1/secretless_option_a_exact_binding_packet_draft_20260603_attempt_012.json`.
+      Activation preflight: `reports/runtime_to_review_v1/secretless_serum_live_probe_activation_preflight_20260603_attempt_012.json`.
+      Runner: `scripts/run_runtime_to_review_v1_secretless_option_a_callable_runner.js`.
+      Validator: `scripts/validate_runtime_to_review_v1_secretless_serum_live_probe_receipt_attempt_012.js`.
+      Future receipt: `reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_012.json`.
+      Future artifact record: `reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_012.json`.
+      Boundary: no route HTTP/live probe/provider/plugin/API/image/output; no secret/env/config read; no Authorization header construction; no push/tag/release/deploy.
+      Validation: node --check runner and attempt-012 validator passed; attempt-012 pending-safe validator passed; attempt-011 quality/package validator passed; validation manifest passed.
+      Remaining gate: final agent board/diff validation and exact-file local commit; future attempt-012 execution requires VCPToolBox restart/load of 24b9f887..., listener/surface/baseline checks, and a new exact activation.
+---
+
+- [x] ID: secretless_serum_attempt_011_quality_channel_review_20260603
+      Lane: Green local quality/channel review.
+      Status: completed_validated_local_review_no_execution.
+      Goal: Decide whether attempt-011 proves the secretless live channel enough to upgrade it, and prepare attempt-012 prompt improvement package if useful.
+      Review: `reports/runtime_to_review_v1/secretless_serum_attempt_011_quality_channel_review_20260603.json`.
+      Attempt-012 package: `reports/runtime_to_review_v1/secretless_serum_attempt_012_prompt_quality_package_20260603.json`.
+      Decision: channel upgrades to controlled production candidate channel; attempt-011 image remains patch-first review evidence and is not a production candidate.
+      Boundary: no route HTTP/live probe/provider/plugin/API/image/output; no secret/env/config read; no Authorization header construction; no production candidate write; no accepted samples write; no push/tag/release/deploy.
+      Validation: node --check review validator passed; review package validator passed; validation manifest passed; agent board state passed; git diff --check passed with CRLF normalization warnings only.
+      Remaining gate: exact-file local commit; future attempt-012 execution requires VCPToolBox exact binding refresh, AIL attempt-012 refresh, and new exact activation.
+---
+
+- [x] ID: secretless_route_http_preflight_guard_fix_20260603
+      Lane: Green local runner safety hardening.
+      Status: completed_validated_local_guard_fix.
+      Goal: Ensure --preflight-only cannot send route HTTP even when --confirm-route-http is supplied.
+      Changed files: `scripts/run_runtime_to_review_v1_secretless_option_a_callable_runner.js`; `scripts/validate_runtime_to_review_v1_secretless_serum_live_probe_receipt_attempt_011.js`; `.agent_board` status surfaces.
+      Validation: accident-shape CLI returned route_http_request_performed=false; node --check runner passed; node --check attempt-011 validator passed; attempt-011 validator passed; callable runner validator passed; validation manifest passed.
+      Boundary: no route HTTP/live probe/provider/plugin/API/image/output; no secret/env/config read; no Authorization header construction; no push/tag/release/deploy.
+      Remaining gate: exact-file local commit this guard fix; future live execution requires a new exact activation and cannot reuse attempt-011.
+---
+
+- [x] ID: secretless_serum_attempt_011_live_execution_evidence_20260603
+      Lane: Amber exact activation execution evidence.
+      Status: completed_validated_one_live_probe_succeeded.
+      Goal: Execute one secretless serum bottle live probe through the internal route and record planned attempt-011 evidence.
+      Activation consumed: `AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-011`.
+      Agent Image Lab commit: `6277ffaeb34a8ecbe16d9a4f1098210bf67a2ec8`.
+      VCPToolBox commit: `76ee3f2345d8fe490f6104bd0e670a5bebb99db2`.
+      Receipt: `reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_011.json`.
+      Artifact record: `reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_011.json`.
+      Output: `runs/real_generation/runtime_to_review_v1_guarded_live_probe_serum_bottle_secretless_attempt_011/8380a822-d81a-47ea-88d3-acf6898a920a.png`.
+      Calls used: route_http_request=1; provider=1; plugin=1; api=1; image=1; retry=false.
+      Artifact evidence: sha256=5eadf251184d36f9573003a108939ac32851c81a228b8d46715eb2d3e71c864d; mime=image/jpeg; dimensions=1920x1920.
+      Boundary: no secret/env/config read; no Authorization header construction; no old admin-auth route; no push/tag/release/deploy.
+      Validation: attempt-011 receipt/artifact validator passed; local image view check passed.
+      Remaining gate: exact-file local commit this evidence; then fix runner --preflight-only guard before any future activation.
+---
+
+- [x] ID: secretless_serum_attempt_011_exact_file_refresh_20260603
+      Lane: Green local runner/binding/preflight/validator registration.
+      Status: completed_validated_local_runner_refresh_no_execution.
+      Goal: Register AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-011 in the local runner with the internal path and VCPToolBox fixed-size native delegate baseline before any future exact live attempt.
+      VCPToolBox required commit: `76ee3f2345d8fe490f6104bd0e670a5bebb99db2`.
+      Binding packet: `reports/runtime_to_review_v1/secretless_option_a_exact_binding_packet_draft_20260603_attempt_011.json`.
+      Activation preflight: `reports/runtime_to_review_v1/secretless_serum_live_probe_activation_preflight_20260603_attempt_011.json`.
+      Runner: `scripts/run_runtime_to_review_v1_secretless_option_a_callable_runner.js`.
+      Validator: `scripts/validate_runtime_to_review_v1_secretless_serum_live_probe_receipt_attempt_011.js`.
+      Future receipt: `reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_011.json`.
+      Future artifact record: `reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_011.json`.
+      Boundary: no route HTTP/live probe/provider/plugin/API/image/output; no secret/env/config read; no Authorization header construction; no push/tag/release/deploy.
+      Validation: node --check runner and attempt-011 validator passed; attempt-011 pending-safe validator passed; attempt-010 full receipt validator passed; callable runner validator passed; validation manifest passed; agent board state validator passed; git diff --check passed with CRLF normalization warnings only.
+      Remaining gate: exact-file local commit; restart VCPToolBox to new baseline with required non-secret flags; then receive a new exact activation before live POST. Do not retry consumed attempt-010.
+---
+
+- [x] ID: secretless_serum_attempt_010_exact_file_refresh_20260603
+      Lane: Green local runner/binding/preflight/validator registration.
+      Status: completed_validated_local_runner_refresh_no_execution.
+      Goal: Register AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-010 in the local runner with the internal path and VCPToolBox exact attempt-010 binding baseline before any future exact live attempt.
+      VCPToolBox required commit: `39275a211964986b97fdb0d81119851353592071`.
+      Binding packet: `reports/runtime_to_review_v1/secretless_option_a_exact_binding_packet_draft_20260603_attempt_010.json`.
+      Activation preflight: `reports/runtime_to_review_v1/secretless_serum_live_probe_activation_preflight_20260603_attempt_010.json`.
+      Runner: `scripts/run_runtime_to_review_v1_secretless_option_a_callable_runner.js`.
+      Validator: `scripts/validate_runtime_to_review_v1_secretless_serum_live_probe_receipt_attempt_010.js`.
+      Future receipt: `reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_010.json`.
+      Future artifact record: `reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_010.json`.
+      Boundary: no route HTTP/live probe/provider/plugin/API/image/output; no secret/env/config read; no Authorization header construction; no push/tag/release/deploy.
+      Validation: node --check runner and attempt-010 validator passed; attempt-010 pending-safe validator passed; attempt-009 full receipt validator passed; callable runner validator passed; validation manifest passed.
+      Remaining gate: exact-file local commit; restart VCPToolBox to new baseline with required non-secret flags; then receive a new exact activation before live POST. Do not retry consumed attempt-009.
+---
+
+- [x] ID: secretless_serum_attempt_009_exact_file_refresh_20260603
+      Lane: Green local runner/binding/preflight/validator registration.
+      Status: completed_validated_local_runner_refresh_no_execution.
+      Goal: Register AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-009 in the local runner with the internal path and VCPToolBox exact internal pipeline execution baseline before any future exact live attempt.
+      VCPToolBox required commit: `32e5c2a7de9edb7e243671a5a18b517caafc8645`.
+      Binding packet: `reports/runtime_to_review_v1/secretless_option_a_exact_binding_packet_draft_20260603_attempt_009.json`.
+      Activation preflight: `reports/runtime_to_review_v1/secretless_serum_live_probe_activation_preflight_20260603_attempt_009.json`.
+      Runner: `scripts/run_runtime_to_review_v1_secretless_option_a_callable_runner.js`.
+      Validator: `scripts/validate_runtime_to_review_v1_secretless_serum_live_probe_receipt_attempt_009.js`.
+      Future receipt: `reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_009.json`.
+      Future artifact record: `reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_009.json`.
+      Boundary: no route HTTP/live probe/provider/plugin/API/image/output; no secret/env/config read; no Authorization header construction; no push/tag/release/deploy.
+      Validation: node --check runner and attempt-009 validator passed; attempt-009 pending-safe validator passed; attempt-008 full receipt validator passed; callable runner validator passed; validation manifest passed.
+      Remaining gate: exact-file local commit; restart VCPToolBox to new baseline; then receive a new exact activation before live POST.
+---
+
+- [x] ID: secretless_serum_attempt_008_exact_file_refresh_20260603
+      Lane: Green local runner/binding/preflight/validator registration.
+      Status: completed_validated_local_runner_refresh_no_execution.
+      Goal: Register AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-008 in the local runner with the internal path and VCPToolBox exact binding baseline before any future exact live attempt.
+      VCPToolBox required commit: `603bbcdfc4c43479ba2aea9dc1915945c7d64e77`.
+      Binding packet: `reports/runtime_to_review_v1/secretless_option_a_exact_binding_packet_draft_20260603_attempt_008.json`.
+      Activation preflight: `reports/runtime_to_review_v1/secretless_serum_live_probe_activation_preflight_20260603_attempt_008.json`.
+      Runner: `scripts/run_runtime_to_review_v1_secretless_option_a_callable_runner.js`.
+      Validator: `scripts/validate_runtime_to_review_v1_secretless_serum_live_probe_receipt_attempt_008.js`.
+      Future receipt: `reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_008.json`.
+      Future artifact record: `reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_008.json`.
+      Boundary: no route HTTP/live probe/provider/plugin/API/image/output; no secret/env/config read; no Authorization header construction; no push/tag/release/deploy.
+      Validation: node --check runner and attempt-008 validator passed; attempt-008 pending-safe validator passed; attempt-007 regression validator passed; callable runner validator passed; validation manifest passed.
+      Remaining gate: exact-file local commit; then receive a new exact activation before live POST.
+---
+
+- [x] ID: secretless_serum_attempt_007_cli_flag_fix_20260603
+      Lane: Green local CLI fix.
+      Status: completed_validated_local_cli_fix_no_execution.
+      Goal: Make --attempt-007-route-http automatically bind AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-007 so the exact activation CLI path does not fall back to attempt-003 defaults.
+      Runner: `scripts/run_runtime_to_review_v1_secretless_option_a_callable_runner.js`.
+      Validator: `scripts/validate_runtime_to_review_v1_secretless_serum_live_probe_receipt_attempt_007.js`.
+      Boundary: no route HTTP/live probe/provider/plugin/API/image/output; no secret/env/config read; no Authorization header construction; no push/tag/release/deploy.
+      Validation: node --check runner and attempt-007 validator passed; attempt-007 pending-safe validator passed; callable runner validator passed; agent board state validator passed; direct parseArgs preflight check passed with route_http_request_performed=false.
+      Remaining gate: exact-file local commit; then receive a new exact activation before live POST.
+---
+
+- [x] ID: secretless_serum_attempt_007_review_fix_20260603
+      Lane: Green local review fix.
+      Status: completed_validated_local_review_fix_no_execution.
+      Goal: Close review findings before attempt-007 by requiring exact activation/binding on the VCPToolBox internal route and adding exact-path receipt/artifact writing in the Agent Image Lab runner.
+      VCPToolBox required commit: `9e3817320f36d3c5735d476a238a2251cbf50b32`.
+      Binding packet: `reports/runtime_to_review_v1/secretless_option_a_exact_binding_packet_draft_20260603_attempt_007.json`.
+      Activation preflight: `reports/runtime_to_review_v1/secretless_serum_live_probe_activation_preflight_20260603_attempt_007.json`.
+      Runner: `scripts/run_runtime_to_review_v1_secretless_option_a_callable_runner.js`.
+      Validator: `scripts/validate_runtime_to_review_v1_secretless_serum_live_probe_receipt_attempt_007.js`.
+      Future receipt: `reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_007.json`.
+      Future artifact record: `reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_007.json`.
+      Boundary: no route HTTP/live probe/provider/plugin/API/image/output; no secret/env/config read; no Authorization header construction; no push/tag/release/deploy.
+      Validation: node --check runner and attempt-007 validator passed; attempt-007 pending-safe validator passed; callable runner validator passed; validation manifest passed.
+      Remaining gate: exact-file local commit; then receive a new exact activation before live POST.
+---
+
+- [x] ID: secretless_serum_attempt_007_runner_refresh_20260603
+      Lane: Green local runner/binding/validator registration.
+      Status: completed_validated_local_runner_refresh_no_execution.
+      Goal: Register AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-007 in the local runner with the internal path and VCPToolBox NativeImageDelegateRegistry baseline before any future exact live attempt.
+      Binding packet: `reports/runtime_to_review_v1/secretless_option_a_exact_binding_packet_draft_20260603_attempt_007.json`.
+      Activation preflight: `reports/runtime_to_review_v1/secretless_serum_live_probe_activation_preflight_20260603_attempt_007.json`.
+      Runner: `scripts/run_runtime_to_review_v1_secretless_option_a_callable_runner.js`.
+      Validator: `scripts/validate_runtime_to_review_v1_secretless_serum_live_probe_receipt_attempt_007.js`.
+      Future receipt: `reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_007.json`.
+      Future artifact record: `reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_007.json`.
+      Boundary: no route HTTP/live probe/provider/plugin/API/image/output; no secret/env/config read; no Authorization header construction; no push/tag/release/deploy.
+      Validation: node --check runner and attempt-007 validator passed; attempt-007 pending-safe validator passed; callable runner validator passed; validation manifest passed.
+      Remaining gate: exact-file local commit; then receive a new exact activation before live POST.
+---
+
+- [x] ID: secretless_serum_attempt_006_runner_refresh_20260603
+      Lane: Green local runner/validator registration.
+      Status: completed_validated_local_runner_refresh_no_execution.
+      Goal: Register AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-006 in the local runner with the internal path and VCPToolBox d0d5c104 baseline before any future exact live attempt.
+      Runner: `scripts/run_runtime_to_review_v1_secretless_option_a_callable_runner.js`.
+      Validator: `scripts/validate_runtime_to_review_v1_secretless_serum_live_probe_receipt_attempt_006.js`.
+      Future receipt: `reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_006.json`.
+      Future artifact record: `reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_006.json`.
+      Boundary: no route HTTP/live probe/provider/plugin/API/image/output; no secret/env/config read; no Authorization header construction; no push/tag/release/deploy.
+      Validation: node --check runner and attempt-006 validator passed; attempt-006 pending-safe validator passed; callable runner validator passed; validation manifest passed; recommender passed with all files matched; agent board state passed; npm run validate:active passed; git diff --check passed with CRLF normalization warnings only.
+      Remaining gate: commit exact files; then receive a new exact activation before live POST.
+---
+
+- [x] ID: secretless_serum_live_probe_exact_activation_attempt_005_20260603
+      Lane: Amber exact live probe activation attempt.
+      Status: attempted_failed_closed_route_http_response_received_not_ok.
+      Goal: Run one secretless serum bottle live probe using AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-005 against internal routeHttpOrigin `http://127.0.0.1:6005`.
+      Receipt: `reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_005.json`.
+      Artifact record: `reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_005.json`.
+      Result: one POST was performed and VCPToolBox returned fail-closed status `serum_bottle_secretless_plugin_manager_missing`; no provider/plugin/API/image/output occurred.
+      Boundary: no secret/env/config read; no Authorization header construction by Agent Image Lab; no retry; no push/tag/release/deploy.
+      Remaining gate: do not retry attempt-005; clarify or enable VCPToolBox internal secretless runtime injection before any new exact activation.
+---
+
+- [x] ID: secretless_serum_live_probe_exact_activation_attempt_004_20260603
+      Lane: Amber exact live probe activation attempt.
+      Status: attempted_failed_closed_route_http_unauthorized.
+      Goal: Run one secretless serum bottle live probe using AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-004 against routeHttpOrigin `http://127.0.0.1:6005`.
+      Receipt: `reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_004.json`.
+      Artifact record: `reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_004.json`.
+      Result: one POST was performed and returned `Unauthorized`; no provider/plugin/API/image/output occurred.
+      Boundary: no secret/env/config read; no Authorization header construction by Agent Image Lab; no retry; no push/tag/release/deploy.
+      Remaining gate: clarify VCPToolBox secretless route authorization behavior before any new exact activation.
+---
+
+- [x] ID: secretless_option_a_exact_route_http_transport_activation_preflight_attempt_003_20260603
+      Lane: Green local exact route HTTP transport and inactive activation/preflight.
+      Status: completed_validated_local_transport_and_activation_preflight_no_execution.
+      Goal: Authorize/preflight one exact route HTTP/callable transport without guessing endpoint/method, then prepare the next exact activation package shape.
+      Transport preflight: `reports/runtime_to_review_v1/secretless_option_a_exact_route_http_transport_preflight_20260603_attempt_003.json`.
+      Activation preflight: `reports/runtime_to_review_v1/secretless_serum_live_probe_activation_preflight_20260603_attempt_003.json`.
+      Runner: `scripts/run_runtime_to_review_v1_secretless_option_a_callable_runner.js`.
+      Exact route: `POST /admin_api/ai-image-agents/execute/serum-bottle-secretless`, sourced from VCPToolBox `bcb8219a0990f9828df6789d62ed35e14293461d`.
+      Current state: current_permission=cannot_run_live_probe_now; can_execute_now=false; can_run_route_http_now=false; can_run_live_probe_now=false; `routeHttpOrigin` must be supplied by a new exact activation and must not be guessed.
+      Boundary: no route HTTP/live probe/provider/plugin/API/image/output; no secret/env/config read; no Authorization header construction; no stage/commit/push/tag/release/deploy.
+      Remaining gate: owner must provide new exact activation `AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-003` with a concrete origin-only `routeHttpOrigin`.
+---
+
+- [x] ID: secretless_serum_live_probe_exact_activation_attempt_002_20260603
+      Lane: Amber exact live probe activation attempt.
+      Status: attempted_failed_closed_before_route_http_request_validated.
+      Goal: Run one secretless serum bottle live probe using AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-002 and binding packet BINDING-DRAFT-SECRETLESS-OPTION-A-SERUM-20260603-002.
+      Receipt: `reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_002.json`.
+      Artifact record: `reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_002.json`.
+      Result: failed_closed_before_route_http_request; the local callable runner input validated but non-preflight route HTTP remains not authorized/implemented by the current runner.
+      Boundary: no route HTTP/live probe/provider/plugin/API/image/output; no secret/env/config read; no Authorization header construction; no retry; no VCPToolBox modification; no push/tag/release/deploy.
+      Remaining gate: do not retry from this consumed activation; implement or authorize exact route HTTP/callable transport without guessing, then require a new exact activation.
+---
+
+- [x] ID: secretless_option_a_exact_binding_packet_refresh_attempt_002_20260603
+      Lane: Green local exact binding packet refresh plus validator.
+      Status: completed_validated_local_binding_packet_refresh_no_execution.
+      Goal: Refresh the Agent Image Lab Option A exact binding packet to VCPToolBox router-binding commit `bcb8219a0990f9828df6789d62ed35e14293461d` before any separately activated serum-bottle secretless live probe.
+      Packet: `reports/runtime_to_review_v1/secretless_option_a_exact_binding_packet_draft_20260603_attempt_002.json`.
+      Validator: `scripts/validate_runtime_to_review_v1_secretless_option_a_exact_binding_packet_draft_attempt_002.js`.
+      Activation preflight updated: `reports/runtime_to_review_v1/secretless_serum_live_probe_activation_preflight_20260603_attempt_002.json`.
+      Package script: `validate:runtime-to-review-secretless-option-a-exact-binding-packet-draft-attempt-002`.
+      Current state: current_permission=cannot_run_live_probe_now; can_execute_now=false; can_run_route_http_now=false; can_run_live_probe_now=false.
+      Boundary: no route HTTP/live probe/runtime/provider/plugin/API/image/output; no secret/env/config read; no Authorization header construction; no external VCPToolBox read/write; no push/tag/release/deploy.
+      Remaining gate: separate exact activation plus current preflight validation before any route HTTP/live probe.
+---
+
+- [x] ID: secretless_serum_live_probe_activation_preflight_attempt_002_20260603
+      Lane: Green local activation/preflight successor packet plus validator.
+      Status: completed_validated_local_preflight_no_execution.
+      Goal: Prepare a new exact secretless serum live activation/preflight against VCPToolBox router-binding commit `bcb8219a0990f9828df6789d62ed35e14293461d`.
+      Packet: `reports/runtime_to_review_v1/secretless_serum_live_probe_activation_preflight_20260603_attempt_002.json`.
+      Validator: `scripts/validate_runtime_to_review_v1_secretless_serum_live_probe_activation_preflight_attempt_002.js`.
+      Package script: `validate:runtime-to-review-secretless-serum-live-probe-activation-preflight-attempt-002`.
+      Current state: current_permission=cannot_run_live_probe_now; can_execute_now=false; can_run_route_http_now=false; can_run_live_probe_now=false.
+      Boundary: no route HTTP/live probe/runtime/provider/plugin/API/image/output; no secret/env/config read; no Authorization header construction; no external VCPToolBox read/write; no push/tag/release/deploy.
+      Remaining gate: refreshed exact binding packet for `bcb8219a` now exists; receive separate exact activation before any route HTTP/live probe.
+---
+
+- [x] ID: local_fast_forward_remote_sync_20260603
+      Lane: Green local sync/status-surface recording.
+      Status: completed_validated_local_sync.
+      Goal: Fast-forward local `master` to the refreshed `origin/master` remote head and record the new baseline in `.agent_board`.
+      Sync: `master` fast-forwarded from `eae1ac8b` to `da1c5ad8` after `git fetch --prune origin` showed 15 remote commits.
+      Current state: local `master`, `origin/master`, and `origin/HEAD` are aligned at `da1c5ad8`; route HTTP/live probe remains not authorized by this sync.
+      Boundary: no route HTTP/live probe/runtime/provider/plugin/API/image/output; no secret/env/config read; no external repository modification; no stage/commit/push/tag/release/deploy.
+      Recommended next: wait for a new exact activation before any route HTTP/live probe work.
+---
+
 - [x] ID: secretless_option_a_vcptoolbox_router_binding_implementation_pushed_receipt_20260603
       Lane: Green local Agent Image Lab receipt/status sync.
       Status: completed_local_pushed_receipt_status_sync_router_binding_pushed.
@@ -615,3 +1113,106 @@ b5cb845ac280e463c3825ca0bc20e5abc772c421
       Boundaries: no push, tag, release, deploy, provider/API/plugin/image call, DailyNote write, VCP memory write, or secret value read.
       Validation: git diff --check passed with line-ending warnings only; node scripts\validate_agent_board_state.js passed.
       Next: continue local work from the synced 9dc4bcf0 baseline.
+
+---
+
+## Queue - Secretless Serum Attempt 015 Binding Refresh 2026-06-04
+
+```text
+done:
+  - task: fix VCPToolBox route authorizer call to pass outputDirectoryRef
+    evidence: VCPToolBox commit ab62ed0b5ba9d3620316ccd8441c7c5bde9728fa
+  - task: update AIL attempt-015 lock to require current VCPToolBox binding commit
+    evidence: npm run prepare:runtime-to-review-secretless-serum-attempt passed elevated
+  - task: harden prepare/verifier/validator behavior for actual binding and sandbox fail-closed states
+    evidence: binding guard passed in sandbox and elevated modes
+  - task: remove final-gate HEAD 204 assumption
+    evidence: runner final gate uses listener_surface_http_response_observed and expected_status any_http_response
+  - task: add internal route HEAD surface and verify actual internal route surface
+    evidence: VCPToolBox commit cd25e1485dd1b31f84fe5ad0d09c90ab1c1d0143; verifier check internal_route_head_surface_present passed
+  - task: make attempt-015 runner route defaults read origin/path/refs from lock
+    evidence: runner --attempt-015-route-http --preflight-only passed with route_http_request_performed=false
+  - task: enforce inactive lock authorization boundary before listener/POST
+    evidence: runner with exact confirmation phrase failed closed at secretless_option_a_final_gate_failed_closed_lock_authorization_boundary, listener not_checked, route_http_request_performed=false
+  - task: make prepare --apply idempotent on already-bound VCPToolBox HEAD
+    evidence: prepare --apply-vcptoolbox-binding passed with vcptoolbox_binding_already_matches_lock and commit skipped
+  - task: prepare attempt-015 exact activation refresh package
+    evidence: activation preflight and binding packet are bound to the single lock and VCPToolBox current-attempt binding commit cd25e1485dd1b31f84fe5ad0d09c90ab1c1d0143; activation refresh validator passed
+  - task: issue attempt-015 exact activation
+    evidence: lock authorization boundary flipped to one-shot active; exact activation issued validator passed; no POST performed yet
+  - task: consume attempt-015 exact activation
+    evidence: one POST consumed; VCPToolBox returned attempt-013 runtime binding mismatch; provider/plugin/API/image all false; lock sealed consumed no-retry
+in_progress:
+  - none
+blocked:
+  - task: future live attempt
+    reason: VCPToolBox running process appears stale at attempt-013 despite disk source binding verifier proving attempt-015; reload/restart current VCPToolBox binding before attempt-016.
+remaining:
+  - exact-file commit consumed failed-closed evidence
+  - do not retry attempt-015
+  - push/tag/release/deploy remain unauthorized
+```
+
+---
+
+## Queue - Secretless Serum Attempt 016 Prepare 2026-06-04
+
+```text
+done:
+  - task: restart/reload VCPToolBox after attempt-015 consumed mismatch
+    evidence: port 6005 listener restarted; later restarted again after attempt-016 binding commit.
+  - task: prepare attempt-016 lock and VCPToolBox source binding
+    evidence: VCPToolBox commit 459f4729a9c334b1b8c3fed140a4e044554d23c8; verifier passed.
+  - task: add AIL runner attempt-016 support and inactive package refs
+    evidence: runner preflight-only passed; exact phrase path failed closed at inactive lock boundary with 0 POST.
+in_progress:
+  - none
+blocked:
+  - none
+remaining:
+  - exact-file commit attempt-016 prepare
+  - separate exact activation required before any attempt-016 POST
+```
+
+## Queue - Secretless Serum Attempt 016 Exact Activation 2026-06-04
+
+```text
+done:
+  - task: issue attempt-016 exact activation
+    evidence: lock flipped to one-shot active; activation-issued record created.
+  - task: run final gate and consume one route POST
+    evidence: route_http_request=1; VCPToolBox returned serum_bottle_secretless_real_execution_flag_disabled.
+  - task: seal attempt-016 lock consumed/no-retry
+    evidence: lock authorization boundary now can_execute_now=false, activation_consumed=true, route_http_requests_used=1, retry_allowed_after_consumption=false.
+in_progress:
+  - task: validate consumed state and exact-file local commit
+blocked:
+  - none
+remaining:
+  - rerun guard must fail closed with 0 POST
+  - exact-file commit attempt-016 activation/evidence
+  - do not retry attempt-016
+```
+
+## Queue - Secretless Serum Attempt 017 Prepare 2026-06-04
+
+```text
+done:
+  - task: resolve VCPToolBox real execution flag boundary
+    evidence: VCPToolBox restarted with real execution and native delegate flags; listener PID 31812; internal HEAD surface 204.
+  - task: refresh VCPToolBox attempt-017 source binding
+    evidence: VCPToolBox commit 93741eb14d6bc73dfaffbe7344b839e2640f2c01.
+  - task: align VCPToolBox secretless tests to attempt-017
+    evidence: VCPToolBox commit 3bb285cdfc58feb6d6452d0cf4837495041362e7; targeted tests passed 30/30.
+  - task: prepare AIL attempt-017 inactive lock and package refs
+    evidence: source binding verifier passed; runner preflight-only passed with 0 route HTTP.
+  - task: add lock-driven runner path
+    evidence: --route-http-from-lock --attempt-lock works for attempt-017 and fails closed when inactive.
+in_progress:
+  - task: exact-file local commit attempt-017 prepare
+blocked:
+  - none
+remaining:
+  - separate exact activation required before any attempt-017 POST
+  - push/tag/release/deploy remain separately gated
+```

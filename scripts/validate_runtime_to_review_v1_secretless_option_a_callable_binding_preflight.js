@@ -313,16 +313,19 @@ function main() {
   check("non_execution_boundary_all_false", () =>
     fieldsAreFalse(binding.non_execution_boundary, boundaryFalseFields)
   );
-  check("sources_do_not_access_secret_or_http_surface", () =>
+  check("sources_do_not_access_secret_or_uncontrolled_http_surface", () =>
     !runnerSource.includes(processEnvToken) &&
     !validatorSource.includes(processEnvToken) &&
     !runnerSource.includes("require(\"node:http\")") &&
     !runnerSource.includes("require('node:http')") &&
     !runnerSource.includes("require(\"node:https\")") &&
     !runnerSource.includes("require('node:https')") &&
-    !runnerSource.includes("fetch(") &&
     !runnerSource.includes("axios") &&
-    !runnerSource.includes("Authorization:")
+    !runnerSource.includes("Authorization:") &&
+    runnerSource.includes("function probeTcpListener") &&
+    runnerSource.includes("tcp_listener_probe_observed_no_route_http_request") &&
+    runnerSource.includes("expected_status = \"tcp_connect_success_without_http_route_request\"") &&
+    runnerSource.includes("route_http_request_performed: false")
   );
   check("conclusion_keeps_live_probe_closed", () =>
     binding.conclusion.result === "callable_binding_preflight_drafted_no_execution" &&

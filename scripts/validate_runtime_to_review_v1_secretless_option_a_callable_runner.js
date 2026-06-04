@@ -12,6 +12,7 @@ const pushedReceiptPath = "reports/runtime_to_review_v1/secretless_serum_route_o
 const failedReceiptPath = "reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_001.json";
 const failedArtifactPath = "reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_001.json";
 const activationPreflightPath = "reports/runtime_to_review_v1/secretless_serum_live_probe_activation_preflight_20260603.json";
+const attempt018LockPath = "reports/runtime_to_review_v1/secretless_serum_attempt_018.lock.json";
 const runnerPath = "scripts/run_runtime_to_review_v1_secretless_option_a_callable_runner.js";
 const validatorPath = "scripts/validate_runtime_to_review_v1_secretless_option_a_callable_runner.js";
 const packageScriptName = "validate:runtime-to-review-secretless-option-a-callable-runner";
@@ -79,6 +80,7 @@ function main() {
   const failedReceipt = readJson(failedReceiptPath);
   const failedArtifact = readJson(failedArtifactPath);
   const activationPreflight = readJson(activationPreflightPath);
+  const attempt018Lock = readJson(attempt018LockPath);
   const packageJson = readJson("package.json");
   const manifest = readJson("scripts/validation_manifest.json");
   const runnerSource = fs.readFileSync(repoPath(runnerPath), "utf8");
@@ -247,17 +249,215 @@ function main() {
       allBoundaryFalse(result) &&
       allBoundaryFalse(result.result);
   });
-  check("runner_source_has_no_secret_or_http_surface", () =>
+  check("route_response_output_refs_are_written_to_attempt_records", () => {
+    const outputRef = "image/doubaogen/output-ref-from-route.png";
+    const routeJson = {
+      ok: true,
+      result: {
+        status: "completed",
+        mode: "real_execution",
+        outputRefs: [outputRef],
+        serumBottleSecretlessRuntimeEvidence: {
+          delegateId: "serum_bottle_secretless_doubao_v1",
+          providerId: "doubao",
+          pluginId: "DoubaoGen",
+          apiId: "generate_image",
+          internalCommand: "generate",
+          providerCalls: 1,
+          pluginCalls: 1,
+          apiCalls: 1,
+          images: 1,
+          outputRefs: [outputRef],
+          artifact: {
+            sha256: "abc123",
+            mime: "image/jpeg",
+            dimensions: { width: 1920, height: 1920 }
+          }
+        }
+      }
+    };
+    const execution = {
+      ok: true,
+      route_http_request_performed: true,
+      live_probe_performed: true,
+      provider_contact_performed: true,
+      plugin_call_performed: true,
+      api_call_performed: true,
+      image_generation_performed: true,
+      image_count: 1,
+      output_write_performed: false,
+      output_refs: [],
+      calls_used: { provider: 1, plugin: 1, api: 1, image: 1, route_http_request: 1 }
+    };
+    const validation = {
+      route_http_origin: "http://127.0.0.1:6005",
+      route_http_method: "POST",
+      route_http_path: "/internal/ai-image-agents/execute/serum-bottle-secretless",
+      endpoint_source: "test",
+      body: {
+        pipeline_id: "secretless-serum-live-probe-attempt-test",
+        task_id: "AUTH-SECRETLESS-SERUM-LIVE-PROBE-TEST",
+        route_id: "serum_bottle_vcptoolbox_route_owner_runtime",
+        max_provider_calls: 1,
+        max_plugin_calls: 1,
+        max_api_calls: 1,
+        max_images: 1,
+        retry_allowed: false,
+        receipt_ref: "reports/runtime_to_review_v1/test_receipt.json",
+        artifact_record_ref: "reports/runtime_to_review_v1/test_artifact.json",
+        plan: {
+          steps: [
+            {
+              output_directory_ref: "runs/real_generation/test/"
+            }
+          ]
+        },
+        non_secret_payload_hash: "hash"
+      }
+    };
+    const config = {
+      receiptId: "test_receipt",
+      activationPackageId: "AUTH-SECRETLESS-SERUM-LIVE-PROBE-TEST",
+      bindingPacketId: "BINDING-TEST",
+      bindingPacketRef: "reports/runtime_to_review_v1/test_binding.json",
+      agentImageLabRunnerRequiredCommit: "runner",
+      vcptoolboxRequiredCommit: "vcptoolbox",
+      artifactRecordId: "test_artifact",
+      artifactRecordRef: "reports/runtime_to_review_v1/test_artifact.json",
+      receiptRef: "reports/runtime_to_review_v1/test_receipt.json",
+      outputDirectoryRef: "runs/real_generation/test/"
+    };
+    const summary = runner.summarizeRouteResult(routeJson);
+    const records = runner.buildAttemptReceiptAndArtifact(execution, validation, routeJson, 200, config);
+    return summary.outputRefs.includes(outputRef) &&
+      runner.deriveOutputWritePerformed(routeJson.result, summary, summary.outputRefs) === true &&
+      records.receipt.output_write_performed === true &&
+      records.artifact.output_write_performed === true &&
+      records.receipt.output_refs.includes(outputRef) &&
+      records.artifact.output_refs.includes(outputRef) &&
+      records.receipt.route_response_summary.outputRefs.includes(outputRef) &&
+      records.artifact.route_response_summary.outputRefs.includes(outputRef);
+  });
+  check("final_gate_listener_probe_targets_origin_without_route_http_request", () => {
+    const target = runner.tcpProbeTargetFromRouteUrl("http://127.0.0.1:6005/internal/ai-image-agents/execute/serum-bottle-secretless");
+    return target.protocol === "http:" &&
+      target.host === "127.0.0.1" &&
+      target.port === 6005 &&
+      target.route_path_not_requested === "/internal/ai-image-agents/execute/serum-bottle-secretless" &&
+      runnerSource.includes("probeTcpListener(validation.route_http_url)") &&
+      runnerSource.includes("tcp_listener_probe_observed_no_route_http_request") &&
+      !runnerSource.includes("fetch(validation.route_http_url, { method: \"HEAD\" })") &&
+      !runnerSource.includes("fetch(validation.route_http_url, { method: 'HEAD' })");
+  });
+  check("attempt_lock_custom_payload_must_match_lock_bound_refs", () => {
+    const exactBody = runner.buildExactRouteHttpBody({
+      pipelineId: attempt018Lock.pipeline_id,
+      taskId: attempt018Lock.activation_id,
+      routeId: attempt018Lock.route.route_id,
+      prompt: attempt018Lock.prompt,
+      maxProviderCalls: attempt018Lock.budget.max_provider_calls,
+      maxPluginCalls: attempt018Lock.budget.max_plugin_calls,
+      maxApiCalls: attempt018Lock.budget.max_api_calls,
+      maxImages: attempt018Lock.budget.max_images,
+      retryAllowed: attempt018Lock.budget.retry_allowed,
+      receiptRef: attempt018Lock.receipt_ref,
+      artifactRecordRef: attempt018Lock.artifact_record_ref,
+      outputDirectoryRef: attempt018Lock.output_directory_ref
+    });
+    const driftBody = runner.buildExactRouteHttpBody({
+      pipelineId: "secretless-serum-live-probe-attempt-999",
+      taskId: "AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-999",
+      routeId: attempt018Lock.route.route_id,
+      prompt: attempt018Lock.prompt,
+      maxProviderCalls: attempt018Lock.budget.max_provider_calls,
+      maxPluginCalls: attempt018Lock.budget.max_plugin_calls,
+      maxApiCalls: attempt018Lock.budget.max_api_calls,
+      maxImages: attempt018Lock.budget.max_images,
+      retryAllowed: attempt018Lock.budget.retry_allowed,
+      receiptRef: "reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_999.json",
+      artifactRecordRef: "reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_999.json",
+      outputDirectoryRef: "runs/real_generation/runtime_to_review_v1_guarded_live_probe_serum_bottle_secretless_attempt_999/"
+    });
+    const accepted = runner.validateExactRouteHttpTransportInput({
+      attemptLockRef: attempt018LockPath,
+      confirmationPhrase: runner.exactConfirmationPhrase,
+      body: exactBody
+    });
+    const rejected = runner.validateExactRouteHttpTransportInput({
+      attemptLockRef: attempt018LockPath,
+      confirmationPhrase: runner.exactConfirmationPhrase,
+      body: driftBody
+    });
+    const rejectedFields = rejected.attempt_lock_body_mismatches.map((item) => item.field);
+    return accepted.ok === true &&
+      accepted.status === "secretless_option_a_route_http_transport_input_validated" &&
+      rejected.ok === false &&
+      rejected.status === "secretless_option_a_attempt_lock_payload_drift" &&
+      rejected.route_http_request_performed === false &&
+      rejected.provider_contact_performed === false &&
+      rejectedFields.includes("pipeline_id") &&
+      rejectedFields.includes("task_id") &&
+      rejectedFields.includes("receipt_ref") &&
+      rejectedFields.includes("artifact_record_ref") &&
+      rejectedFields.includes("plan.steps[0].output_directory_ref") &&
+      rejectedFields.includes("non_secret_payload_hash");
+  });
+  check("exact_route_payload_rejects_unknown_fields_before_post", () => {
+    const exactBody = runner.buildExactRouteHttpBody({
+      pipelineId: attempt018Lock.pipeline_id,
+      taskId: attempt018Lock.activation_id,
+      routeId: attempt018Lock.route.route_id,
+      prompt: attempt018Lock.prompt,
+      maxProviderCalls: attempt018Lock.budget.max_provider_calls,
+      maxPluginCalls: attempt018Lock.budget.max_plugin_calls,
+      maxApiCalls: attempt018Lock.budget.max_api_calls,
+      maxImages: attempt018Lock.budget.max_images,
+      retryAllowed: attempt018Lock.budget.retry_allowed,
+      receiptRef: attempt018Lock.receipt_ref,
+      artifactRecordRef: attempt018Lock.artifact_record_ref,
+      outputDirectoryRef: attempt018Lock.output_directory_ref
+    });
+    const bodyWithUnknownFields = {
+      ...exactBody,
+      context: { doubaoProjectBasePathOverride: "C:/tmp/override" },
+      plan: {
+        ...exactBody.plan,
+        metadata: { should_not_be_forwarded: true },
+        steps: [
+          {
+            ...exactBody.plan.steps[0],
+            size: "4096x4096"
+          }
+        ]
+      }
+    };
+    const rejected = runner.validateExactRouteHttpTransportInput({
+      attemptLockRef: attempt018LockPath,
+      confirmationPhrase: runner.exactConfirmationPhrase,
+      body: bodyWithUnknownFields
+    });
+    const unknownFields = rejected.unknown_exact_route_payload_fields.map((item) => item.path);
+    return rejected.ok === false &&
+      rejected.status === "secretless_option_a_payload_contains_unknown_route_field" &&
+      rejected.route_http_request_performed === false &&
+      rejected.provider_contact_performed === false &&
+      rejected.plugin_call_performed === false &&
+      unknownFields.includes("body.context") &&
+      unknownFields.includes("body.plan.metadata") &&
+      unknownFields.includes("body.plan.steps[0].size");
+  });
+  check("default_runner_source_has_no_secret_or_legacy_http_surface", () =>
     !runnerSource.includes(processEnvToken) &&
     !runnerSource.includes("require(\"node:http\")") &&
     !runnerSource.includes("require('node:http')") &&
     !runnerSource.includes("require(\"node:https\")") &&
     !runnerSource.includes("require('node:https')") &&
-    !runnerSource.includes("fetch(") &&
     !runnerSource.includes("axios") &&
     !runnerSource.includes("dotenv") &&
     !runnerSource.includes(".env") &&
-    !runnerSource.includes("Authorization:")
+    !runnerSource.includes("Authorization:") &&
+    runner.runSecretlessOptionACallableRunner({ preflightOnly: true }).route_http_request_performed === false &&
+    runner.runSecretlessOptionACallableRunner({}).route_http_request_performed === false
   );
   check("prior_option_a_evidence_still_matches", () =>
     pushedReceipt.pushed_implementation_event.pushed_commit === "cf1fa55b36e9aeece2718bf2c9425c44db24cb25" &&
