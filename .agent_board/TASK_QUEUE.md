@@ -1,12 +1,25 @@
+- [x] ID: pr8_archived_evidence_terminal_post_push_sync_20260604
+      Lane: Green terminal status-surface sync after explicit push authorization.
+      Status: completed_validated_terminal_status_surface_sync.
+      Functional commit pushed: `9053fb43e22f2584c117c4396cf763495361cd02`.
+      PR: `JENN2046/agent-image-lab#8`.
+      Remote verification after functional push: PR head `9053fb43e22f2584c117c4396cf763495361cd02`; merge state `UNKNOWN`.
+      terminal_status_surface_sync: true
+      post_push_followup: read_only_remote_sync_only
+      no_followup_agent_board_write_after_push: true
+      Validation: `node scripts\validate_agent_board_state.js` passed; `git diff --check` passed with line-ending warnings only.
+      Remaining gate: exact-file commit and push, then read-only remote/head verification only.
+---
+
 - [x] ID: pr8_archived_evidence_commit_reachability_guard_20260604
       Lane: Green local PR review follow-up.
-      Status: completed_validated_unpushed.
+      Status: completed_validated_pushed.
       Goal: Address P1 review note that successful attempt evidence validator required archived lock commits to be ancestors of the current checkout.
       Triage: current PR head and fetched PR merge ref both passed before this patch, but the validator design risk was real for archived evidence on alternate validation lineages.
       Fix: successful attempt evidence validator now treats attempt-017/018 commit refs as archived consumed evidence references; hash format and lock/activation agreement remain required, current-checkout ancestry is no longer required.
       Validation: successful-attempt evidence validator passed; node --check passed; validation-manifest passed; agent-board validator passed; recommender matched all changed files; smoke passed; targeted-plan passed; git diff --check passed with line-ending warnings only; ancestry gate pattern scan found no merge-base/is-ancestor/gitIsAncestor pattern in the successful attempt validator.
-      Boundary: no route HTTP POST; no provider/plugin/API/image; no secret/env/config read; no GitHub write/comment/review; no push/tag/release/deploy.
-      Remaining gate: guarded local commit if desired; push only when authorized.
+      Boundary: no route HTTP POST; no provider/plugin/API/image; no secret/env/config read; no GitHub write/comment/review; pushed only after explicit user authorization; no tag/release/deploy.
+      Remaining gate: terminal post-push status-surface sync, then read-only remote/head verification only.
 ---
 
 - [x] ID: pr8_terminal_post_push_status_surface_sync_20260604

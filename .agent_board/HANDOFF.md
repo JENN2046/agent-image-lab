@@ -1,8 +1,32 @@
+## Current Handoff Update - PR8 Archived Evidence Terminal Post-Push Sync 2026-06-04
+
+```text
+phase: pr8_archived_evidence_terminal_post_push_sync_20260604
+status: completed_validated_terminal_status_surface_sync
+repository: A:\agent-image-lab\agent-image-lab-v0.2
+branch: codex/secretless-serum-live-channel
+functional_commit_pushed: 9053fb43e22f2584c117c4396cf763495361cd02
+functional_commit_subject: Treat PR8 attempt commits as archived evidence
+pr: JENN2046/agent-image-lab#8
+pr_url: https://github.com/JENN2046/agent-image-lab/pull/8
+remote_verification_after_functional_push:
+  head_ref: codex/secretless-serum-live-channel
+  head_oid: 9053fb43e22f2584c117c4396cf763495361cd02
+  merge_state: UNKNOWN
+terminal_status_surface_sync: true
+post_push_followup: read_only_remote_sync_only
+no_followup_agent_board_write_after_push: true
+validation_before_terminal_commit: node scripts\validate_agent_board_state.js passed; git diff --check passed with line-ending warnings only
+next_safe_action: exact-file commit and push this terminal status sync, then read-only PR/head verification only.
+```
+
+---
+
 ## Current Handoff Update - PR8 Archived Evidence Commit Reachability Guard 2026-06-04
 
 ```text
 phase: pr8_archived_evidence_commit_reachability_guard_20260604
-status: completed_validated_unpushed
+status: completed_validated_pushed
 repository: A:\agent-image-lab\agent-image-lab-v0.2
 branch: codex/secretless-serum-live-channel
 pr: JENN2046/agent-image-lab#8
@@ -29,8 +53,8 @@ not_performed:
   - no provider/plugin/API/image generation
   - no secret/env/config value read
   - no GitHub write/comment/review
-  - no push/tag/release/deploy for this follow-up
-next_safe_action: guarded local commit if desired; push only with explicit remote authorization.
+  - no tag/release/deploy for this follow-up
+next_safe_action: terminal post-push status-surface sync, then read-only PR/head verification only.
 ```
 
 ---

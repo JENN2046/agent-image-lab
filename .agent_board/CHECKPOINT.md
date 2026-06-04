@@ -1,8 +1,30 @@
+## Checkpoint - PR8 Archived Evidence Terminal Post-Push Sync 2026-06-04
+
+```text
+phase: pr8_archived_evidence_terminal_post_push_sync_20260604
+status: completed_validated_terminal_status_surface_sync
+result: ARCHIVED_EVIDENCE_FIX_PUSHED_AND_PR_HEAD_VERIFIED
+functional_commit: 9053fb43e22f2584c117c4396cf763495361cd02
+functional_commit_subject: Treat PR8 attempt commits as archived evidence
+remote_branch: origin/codex/secretless-serum-live-channel
+pr: JENN2046/agent-image-lab#8
+pr_url: https://github.com/JENN2046/agent-image-lab/pull/8
+pr_head_verified_after_functional_push: 9053fb43e22f2584c117c4396cf763495361cd02
+merge_state_after_functional_push: UNKNOWN
+terminal_status_surface_sync: true
+post_push_followup: read_only_remote_sync_only
+no_followup_agent_board_write_after_push: true
+validation_before_terminal_commit: node scripts\validate_agent_board_state.js passed; git diff --check passed with line-ending warnings only
+boundary: terminal local status-surface sync only; no runtime/provider/plugin/API/image/secret action.
+```
+
+---
+
 ## Checkpoint - PR8 Archived Evidence Commit Reachability Guard 2026-06-04
 
 ```text
 phase: pr8_archived_evidence_commit_reachability_guard_20260604
-status: completed_validated_unpushed
+status: completed_validated_pushed
 result: P1_REVIEW_FINDING_DESIGN_RISK_FIXED_LOCALLY
 summary: Rechecked the PR #8 P1 review note about successful attempt locks requiring agent_image_lab_commit_required to be reachable from the current checkout. Current PR head and fetched PR merge ref both validate successfully before this patch, but the validator was still too strict for archived consumed evidence because it tied evidence validity to current Git ancestry. The successful attempt evidence validator now treats attempt-017/018 commit refs as archived evidence references: hash format and lock/activation agreement are still required, while current-checkout ancestry is no longer required.
 changed_files_current_task:
@@ -21,8 +43,8 @@ validation_completed:
   - npm run validate:targeted-plan: passed
   - git diff --check: passed with line-ending warnings only
   - ancestry gate pattern scan: no merge-base/is-ancestor/gitIsAncestor pattern remains in successful attempt validator
-boundary_checks: no route HTTP POST; no provider/plugin/API/image; no secret/env/config read; no GitHub write/comment/review; no push/tag/release/deploy for this follow-up.
-recommended_next: guarded local commit if desired; push only with explicit remote authorization.
+boundary_checks: no route HTTP POST; no provider/plugin/API/image; no secret/env/config read; no GitHub write/comment/review; pushed only after explicit user authorization; no tag/release/deploy.
+recommended_next: terminal post-push status-surface sync, then read-only remote/head verification only.
 ```
 
 ---
