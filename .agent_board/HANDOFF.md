@@ -2543,3 +2543,26 @@ not_performed_addendum:
   - no push/tag/release/deploy
 next_safe_action: exact-file commit consumed evidence; future attempt must be attempt-016 after VCPToolBox process reload/current-binding runtime verification.
 ```
+
+### Handoff Addendum - Attempt 016 Prepared 2026-06-04
+
+```text
+status: completed_validated_pending_commit
+completed_addendum:
+  - Restarted VCPToolBox local server process and confirmed port 6005 listener.
+  - Prepared attempt-016 inactive lock and package refs.
+  - Ran prepare with --lock and --apply-vcptoolbox-binding, producing VCPToolBox commit 459f4729a9c334b1b8c3fed140a4e044554d23c8.
+  - Restarted VCPToolBox again so the local server process loads the attempt-016 binding.
+  - Added --attempt-016-route-http runner support.
+validation_addendum:
+  - source binding verifier for attempt-016 passed.
+  - attempt-016 preflight-only runner passed with 0 route HTTP.
+  - attempt-016 exact phrase runner failed closed at inactive lock authorization boundary with 0 route HTTP.
+not_performed_addendum:
+  - no attempt-016 route HTTP POST
+  - no provider/plugin/API/image generation
+  - no output write
+  - no secret/env/config value read
+  - no push/tag/release/deploy
+next_safe_action: exact-file commit AIL attempt-016 prepare; future live POST requires separate exact activation.
+```

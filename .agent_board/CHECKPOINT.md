@@ -2735,3 +2735,23 @@ boundary_checks_addendum:
   image_generation_performed: false
 recommended_next: commit consumed evidence; do not retry attempt-015; require VCPToolBox process reload to current binding before any future activation.
 ```
+
+### Checkpoint Addendum - Attempt 016 Prepared 2026-06-04
+
+```text
+status: completed_validated_pending_commit
+result: ATTEMPT_016_PREPARED_INACTIVE_WITH_CURRENT_VCPTOOLBOX_BINDING
+summary: Restarted/reloaded VCPToolBox, then prepared attempt-016 with a single inactive lock, binding packet, activation preflight, runner flag, and prepare --lock support. VCPToolBox route/server source binding was refreshed and committed at 459f4729a9c334b1b8c3fed140a4e044554d23c8.
+validation_run_addendum:
+  - node scripts/prepare_runtime_to_review_v1_secretless_serum_attempt.js --lock reports/runtime_to_review_v1/secretless_serum_attempt_016.lock.json --apply-vcptoolbox-binding: passed
+  - node scripts/verify_runtime_to_review_v1_secretless_serum_attempt_lock_binding.js --lock reports/runtime_to_review_v1/secretless_serum_attempt_016.lock.json: passed
+  - runner --attempt-016-route-http --preflight-only: passed with route_http_request_performed=false
+  - runner --attempt-016-route-http --confirm-route-http with exact phrase: failed closed at inactive lock authorization boundary, route_http_request_performed=false
+boundary_checks_addendum:
+  route_http_post_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+recommended_next: commit attempt-016 prepare; do not POST until a separate exact activation flips the attempt-016 lock.
+```

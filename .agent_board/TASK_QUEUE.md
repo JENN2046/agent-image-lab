@@ -991,3 +991,24 @@ remaining:
   - do not retry attempt-015
   - push/tag/release/deploy remain unauthorized
 ```
+
+---
+
+## Queue - Secretless Serum Attempt 016 Prepare 2026-06-04
+
+```text
+done:
+  - task: restart/reload VCPToolBox after attempt-015 consumed mismatch
+    evidence: port 6005 listener restarted; later restarted again after attempt-016 binding commit.
+  - task: prepare attempt-016 lock and VCPToolBox source binding
+    evidence: VCPToolBox commit 459f4729a9c334b1b8c3fed140a4e044554d23c8; verifier passed.
+  - task: add AIL runner attempt-016 support and inactive package refs
+    evidence: runner preflight-only passed; exact phrase path failed closed at inactive lock boundary with 0 POST.
+in_progress:
+  - none
+blocked:
+  - none
+remaining:
+  - exact-file commit attempt-016 prepare
+  - separate exact activation required before any attempt-016 POST
+```

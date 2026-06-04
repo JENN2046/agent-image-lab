@@ -1984,3 +1984,19 @@ validation: verifier passed in consumed state; activation refresh validator pass
 boundary_checks: route_http_request_performed=1_consumed; provider_contact_performed=false; plugin_call_performed=false; api_call_performed=false; image_generation_performed=false; output_write_performed=false; retry_performed=false.
 next_safe_task: commit consumed evidence; do not retry attempt-015. Restart/reload VCPToolBox to current binding before any future attempt-016 activation.
 ```
+
+### Attempt 016 Prepared After VCPToolBox Reload - 2026-06-04
+
+```text
+status: completed_validated_pending_commit
+vcptoolbox_restart: restarted local node server.js; new listener pid 22616 on port 6005.
+vcptoolbox_current_attempt_binding_commit: 459f4729a9c334b1b8c3fed140a4e044554d23c8
+vcptoolbox_commit_message: Bind secretless serum attempt 016
+lock_ref: reports/runtime_to_review_v1/secretless_serum_attempt_016.lock.json
+binding_packet_ref: reports/runtime_to_review_v1/secretless_option_a_exact_binding_packet_draft_20260603_attempt_016.json
+activation_preflight_ref: reports/runtime_to_review_v1/secretless_serum_live_probe_activation_preflight_20260603_attempt_016.json
+result: attempt-016 lock prepared inactive; VCPToolBox route/server source binding verifier proves activation, pipeline, receipt, artifact, and output refs all match attempt-016; runner supports --attempt-016-route-http.
+validation: node --check runner and prepare passed; node scripts/verify_runtime_to_review_v1_secretless_serum_attempt_lock_binding.js --lock reports/runtime_to_review_v1/secretless_serum_attempt_016.lock.json passed; runner --attempt-016-route-http --preflight-only passed; runner --attempt-016-route-http --confirm-route-http with exact phrase failed closed at inactive lock authorization boundary with route_http_request_performed=false.
+boundary_checks: route_http_request_performed=false; provider_contact_performed=false; plugin_call_performed=false; api_call_performed=false; image_generation_performed=false; output_write_performed=false.
+next_safe_task: exact-file commit attempt-016 prepare. Future live execution requires a separate exact activation that flips attempt-016 lock authorization.
+```

@@ -22,6 +22,7 @@ const exactRouteHttpActivationPackageIdAttempt012 = "AUTH-SECRETLESS-SERUM-LIVE-
 const exactRouteHttpActivationPackageIdAttempt013 = "AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-013";
 const exactRouteHttpActivationPackageIdAttempt014 = "AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-014";
 const exactRouteHttpActivationPackageIdAttempt015 = "AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-015";
+const exactRouteHttpActivationPackageIdAttempt016 = "AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-016";
 const exactConfirmationPhrase = "RUNTIME_TO_REVIEW_V1_SECRETLESS_SERUM_BOTTLE_ONE_PROVIDER_ONE_IMAGE";
 const exactRouteHttpMethod = "POST";
 const exactRouteHttpPath = "/admin_api/ai-image-agents/execute/serum-bottle-secretless";
@@ -38,6 +39,7 @@ const exactRouteHttpEndpointSourceAttempt012 = "VCPToolBox 24b9f887b77c1db48da2d
 const exactRouteHttpEndpointSourceAttempt013 = "VCPToolBox 82b83028efaa2dcefa19edb03b6a8b3854941090 mounts loopback-only /internal/ai-image-agents, requires exact attempt-013 activation binding in route and server authorizer, NativeImageDelegateRegistry serum_bottle_secretless_doubao_v1, strict canonical secretless payload validation, route/runtime/delegate flags, allows exact internal secretless pipeline execution past the old AIGENT env gate, and keeps the native Doubao secretless delegate size fixed to 1920x1920";
 const exactRouteHttpEndpointSourceAttempt014 = "VCPToolBox 549a26abc7d34e973c9d1ac6d4491aa8d92e88f1 mounts loopback-only /internal/ai-image-agents, requires exact attempt-014 activation binding in route and server authorizer, NativeImageDelegateRegistry serum_bottle_secretless_doubao_v1, strict canonical secretless payload validation, route/runtime/delegate flags, allows exact internal secretless pipeline execution past the old AIGENT env gate, keeps the native Doubao secretless delegate size fixed to 1920x1920, and records generated artifact sha256/mime/dimensions from restricted local artifact evidence when provider metadata is missing";
 const exactRouteHttpEndpointSourceAttempt015 = "VCPToolBox current-attempt binding commit must match reports/runtime_to_review_v1/secretless_serum_attempt_015.lock.json; route/server source binding verifier must prove activation, pipeline, receipt, artifact, and output refs are all attempt-015 before POST";
+const exactRouteHttpEndpointSourceAttempt016 = "VCPToolBox current-attempt binding commit must match reports/runtime_to_review_v1/secretless_serum_attempt_016.lock.json; route/server source binding verifier must prove activation, pipeline, receipt, artifact, and output refs are all attempt-016 before POST";
 const vcptoolboxRequiredCommitAttempt007 = "9e3817320f36d3c5735d476a238a2251cbf50b32";
 const vcptoolboxRequiredCommitAttempt008 = "603bbcdfc4c43479ba2aea9dc1915945c7d64e77";
 const vcptoolboxRequiredCommitAttempt009 = "32e5c2a7de9edb7e243671a5a18b517caafc8645";
@@ -47,6 +49,8 @@ const vcptoolboxRequiredCommitAttempt012 = "24b9f887b77c1db48da2d23d6ef9fb9cd080
 const vcptoolboxRequiredCommitAttempt013 = "82b83028efaa2dcefa19edb03b6a8b3854941090";
 const vcptoolboxRequiredCommitAttempt014 = "549a26abc7d34e973c9d1ac6d4491aa8d92e88f1";
 const vcptoolboxRequiredCommitAttempt015 =
+  "resolved_by_prepare_attempt_after_vcptoolbox_binding_commit";
+const vcptoolboxRequiredCommitAttempt016 =
   "resolved_by_prepare_attempt_after_vcptoolbox_binding_commit";
 const agentImageLabRunnerRequiredCommitAttempt007 =
   "resolved_by_separate_exact_activation_after_local_commit";
@@ -66,6 +70,8 @@ const agentImageLabRunnerRequiredCommitAttempt014 =
   "resolved_by_separate_exact_activation_after_local_commit";
 const agentImageLabRunnerRequiredCommitAttempt015 =
   "resolved_by_prepare_attempt_after_local_commit";
+const agentImageLabRunnerRequiredCommitAttempt016 =
+  "resolved_by_prepare_attempt_after_local_commit";
 const bindingPacketIdAttempt007 = "BINDING-DRAFT-SECRETLESS-OPTION-A-SERUM-20260603-007";
 const bindingPacketIdAttempt008 = "BINDING-DRAFT-SECRETLESS-OPTION-A-SERUM-20260603-008";
 const bindingPacketIdAttempt009 = "BINDING-DRAFT-SECRETLESS-OPTION-A-SERUM-20260603-009";
@@ -75,6 +81,7 @@ const bindingPacketIdAttempt012 = "BINDING-DRAFT-SECRETLESS-OPTION-A-SERUM-20260
 const bindingPacketIdAttempt013 = "BINDING-DRAFT-SECRETLESS-OPTION-A-SERUM-20260603-013";
 const bindingPacketIdAttempt014 = "BINDING-DRAFT-SECRETLESS-OPTION-A-SERUM-20260603-014";
 const bindingPacketIdAttempt015 = "BINDING-DRAFT-SECRETLESS-OPTION-A-SERUM-20260603-015";
+const bindingPacketIdAttempt016 = "BINDING-DRAFT-SECRETLESS-OPTION-A-SERUM-20260603-016";
 const bindingPacketRefAttempt007 =
   "reports/runtime_to_review_v1/secretless_option_a_exact_binding_packet_draft_20260603_attempt_007.json";
 const bindingPacketRefAttempt008 =
@@ -93,6 +100,8 @@ const bindingPacketRefAttempt014 =
   "reports/runtime_to_review_v1/secretless_option_a_exact_binding_packet_draft_20260603_attempt_014.json";
 const bindingPacketRefAttempt015 =
   "reports/runtime_to_review_v1/secretless_option_a_exact_binding_packet_draft_20260603_attempt_015.json";
+const bindingPacketRefAttempt016 =
+  "reports/runtime_to_review_v1/secretless_option_a_exact_binding_packet_draft_20260603_attempt_016.json";
 const receiptRefAttempt007 =
   "reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_007.json";
 const receiptRefAttempt008 =
@@ -111,6 +120,8 @@ const receiptRefAttempt014 =
   "reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_014.json";
 const receiptRefAttempt015 =
   "reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_015.json";
+const receiptRefAttempt016 =
+  "reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_016.json";
 const artifactRecordRefAttempt007 =
   "reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_007.json";
 const artifactRecordRefAttempt008 =
@@ -129,6 +140,8 @@ const artifactRecordRefAttempt014 =
   "reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_014.json";
 const artifactRecordRefAttempt015 =
   "reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_015.json";
+const artifactRecordRefAttempt016 =
+  "reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_016.json";
 const outputDirectoryRefAttempt007 =
   "runs/real_generation/runtime_to_review_v1_guarded_live_probe_serum_bottle_secretless_attempt_007/";
 const outputDirectoryRefAttempt008 =
@@ -147,6 +160,8 @@ const outputDirectoryRefAttempt014 =
   "runs/real_generation/runtime_to_review_v1_guarded_live_probe_serum_bottle_secretless_attempt_014/";
 const outputDirectoryRefAttempt015 =
   "runs/real_generation/runtime_to_review_v1_guarded_live_probe_serum_bottle_secretless_attempt_015/";
+const outputDirectoryRefAttempt016 =
+  "runs/real_generation/runtime_to_review_v1_guarded_live_probe_serum_bottle_secretless_attempt_016/";
 const promptAttempt012 =
   "premium skincare serum bottle product hero image, one full bottle centered vertically, product fills most of a square frame, frosted translucent glass bottle with warm amber serum inside, elegant metallic gold dropper cap, blank satin cream label panel with no readable text and no logo, refined white and soft warm gray studio background, subtle grounded reflection, clean cosmetic studio lighting, realistic glass thickness and edge highlights, high-end ecommerce beauty product photography";
 const promptAttempt014 =
@@ -154,6 +169,8 @@ const promptAttempt014 =
 const promptAttempt015 = promptAttempt014;
 const attemptLockRefAttempt015 =
   "reports/runtime_to_review_v1/secretless_serum_attempt_015.lock.json";
+const attemptLockRefAttempt016 =
+  "reports/runtime_to_review_v1/secretless_serum_attempt_016.lock.json";
 
 function readAttemptLock(relativePath) {
   return JSON.parse(fs.readFileSync(path.join(repoRoot, relativePath), "utf8"));
@@ -380,6 +397,11 @@ const defaultRouteHttpInputAttempt015 = Object.freeze({
   routeHttpEndpointSource: exactRouteHttpEndpointSourceAttempt015
 });
 
+const defaultRouteHttpInputAttempt016 = Object.freeze({
+  ...routeDefaultsFromAttemptLock(attemptLockRefAttempt016),
+  routeHttpEndpointSource: exactRouteHttpEndpointSourceAttempt016
+});
+
 const allowedExactRouteHttpActivationPackageIds = Object.freeze([
   exactRouteHttpActivationPackageId,
   exactRouteHttpActivationPackageIdAttempt004,
@@ -393,10 +415,14 @@ const allowedExactRouteHttpActivationPackageIds = Object.freeze([
   exactRouteHttpActivationPackageIdAttempt012,
   exactRouteHttpActivationPackageIdAttempt013,
   exactRouteHttpActivationPackageIdAttempt014,
-  exactRouteHttpActivationPackageIdAttempt015
+  exactRouteHttpActivationPackageIdAttempt015,
+  exactRouteHttpActivationPackageIdAttempt016
 ]);
 
 function routeHttpDefaultsForActivationPackage(activationPackageId) {
+  if (activationPackageId === exactRouteHttpActivationPackageIdAttempt016) {
+    return defaultRouteHttpInputAttempt016;
+  }
   if (activationPackageId === exactRouteHttpActivationPackageIdAttempt015) {
     return defaultRouteHttpInputAttempt015;
   }
@@ -933,6 +959,19 @@ const exactAttemptReceiptArtifactConfigs = Object.freeze({
     agentImageLabRunnerRequiredCommit: agentImageLabRunnerRequiredCommitAttempt015,
     vcptoolboxRequiredCommit: vcptoolboxRequiredCommitAttempt015,
     attemptLockRef: attemptLockRefAttempt015
+  }),
+  [exactRouteHttpActivationPackageIdAttempt016]: Object.freeze({
+    activationPackageId: exactRouteHttpActivationPackageIdAttempt016,
+    bindingPacketId: bindingPacketIdAttempt016,
+    bindingPacketRef: bindingPacketRefAttempt016,
+    receiptRef: receiptRefAttempt016,
+    receiptId: "secretless_serum_live_probe_receipt_20260603_attempt_016",
+    artifactRecordRef: artifactRecordRefAttempt016,
+    artifactRecordId: "secretless_serum_live_probe_artifact_record_20260603_attempt_016",
+    outputDirectoryRef: outputDirectoryRefAttempt016,
+    agentImageLabRunnerRequiredCommit: agentImageLabRunnerRequiredCommitAttempt016,
+    vcptoolboxRequiredCommit: vcptoolboxRequiredCommitAttempt016,
+    attemptLockRef: attemptLockRefAttempt016
   })
 });
 
@@ -1351,6 +1390,8 @@ async function runSecretlessOptionAExactRouteHttpTransport(input = {}) {
 function applyAttemptRouteDefaults(input) {
   if (input.attempt015RouteHttp === true && !input.activationPackageId) {
     input.activationPackageId = exactRouteHttpActivationPackageIdAttempt015;
+  } else if (input.attempt016RouteHttp === true && !input.activationPackageId) {
+    input.activationPackageId = exactRouteHttpActivationPackageIdAttempt016;
   } else if (input.attempt014RouteHttp === true && !input.activationPackageId) {
     input.activationPackageId = exactRouteHttpActivationPackageIdAttempt014;
   } else if (input.attempt013RouteHttp === true && !input.activationPackageId) {
@@ -1435,6 +1476,8 @@ function parseArgs(argv) {
       input.attempt014RouteHttp = true;
     } else if (arg === "--attempt-015-route-http") {
       input.attempt015RouteHttp = true;
+    } else if (arg === "--attempt-016-route-http") {
+      input.attempt016RouteHttp = true;
     } else if (arg === "--route-http-origin") {
       input.routeHttpOrigin = argv[index + 1];
       index += 1;
@@ -1460,7 +1503,7 @@ function parseArgs(argv) {
 
 if (require.main === module) {
   const input = parseArgs(process.argv.slice(2));
-  const run = input.attempt003RouteHttp || input.attempt004RouteHttp || input.attempt005RouteHttp || input.attempt006RouteHttp || input.attempt007RouteHttp || input.attempt008RouteHttp || input.attempt009RouteHttp || input.attempt010RouteHttp || input.attempt011RouteHttp || input.attempt012RouteHttp || input.attempt013RouteHttp || input.attempt014RouteHttp || input.attempt015RouteHttp
+  const run = input.attempt003RouteHttp || input.attempt004RouteHttp || input.attempt005RouteHttp || input.attempt006RouteHttp || input.attempt007RouteHttp || input.attempt008RouteHttp || input.attempt009RouteHttp || input.attempt010RouteHttp || input.attempt011RouteHttp || input.attempt012RouteHttp || input.attempt013RouteHttp || input.attempt014RouteHttp || input.attempt015RouteHttp || input.attempt016RouteHttp
     ? runSecretlessOptionAExactRouteHttpTransport(input)
     : Promise.resolve(runSecretlessOptionACallableRunner(input));
   run.then((result) => {
@@ -1495,6 +1538,7 @@ module.exports = {
   exactRouteHttpActivationPackageIdAttempt013,
   exactRouteHttpActivationPackageIdAttempt014,
   exactRouteHttpActivationPackageIdAttempt015,
+  exactRouteHttpActivationPackageIdAttempt016,
   exactConfirmationPhrase,
   exactRouteHttpMethod,
   exactRouteHttpPath,
@@ -1511,6 +1555,7 @@ module.exports = {
   exactRouteHttpEndpointSourceAttempt013,
   exactRouteHttpEndpointSourceAttempt014,
   exactRouteHttpEndpointSourceAttempt015,
+  exactRouteHttpEndpointSourceAttempt016,
   defaultInput,
   defaultRouteHttpInput,
   defaultRouteHttpInputAttempt004,
@@ -1525,8 +1570,10 @@ module.exports = {
   defaultRouteHttpInputAttempt013,
   defaultRouteHttpInputAttempt014,
   defaultRouteHttpInputAttempt015,
+  defaultRouteHttpInputAttempt016,
   allowedExactRouteHttpActivationPackageIds,
   attemptLockRefAttempt015,
+  attemptLockRefAttempt016,
   allowedNonSecretPayloadFields,
   forbiddenPayloadKeysNormalized,
   normalizePayloadKey,

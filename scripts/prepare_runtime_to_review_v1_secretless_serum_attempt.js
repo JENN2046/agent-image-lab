@@ -7,7 +7,7 @@ const { spawnSync } = require("node:child_process");
 const { verifyAttemptLockBinding } = require("./verify_runtime_to_review_v1_secretless_serum_attempt_lock_binding");
 
 const root = path.resolve(__dirname, "..");
-const lockPath = "reports/runtime_to_review_v1/secretless_serum_attempt_015.lock.json";
+const defaultLockPath = "reports/runtime_to_review_v1/secretless_serum_attempt_015.lock.json";
 
 function run(command, args, cwd) {
   const result = spawnSync(command, args, { cwd, encoding: "utf8" });
@@ -178,12 +178,28 @@ function applyVcpToolBoxBinding(lock, vcpRoot) {
   return { passed: routeCheck.passed && serverCheck.passed && add.passed && commit.passed, routeCheck, serverCheck, diffCheck, add, commit };
 }
 
+function parseArgs(argv) {
+  const options = { lockPath: defaultLockPath, applyBinding: false };
+  for (let index = 0; index < argv.length; index += 1) {
+    const arg = argv[index];
+    if (arg === "--lock") {
+      options.lockPath = argv[index + 1];
+      index += 1;
+    } else if (arg === "--apply-vcptoolbox-binding") {
+      options.applyBinding = true;
+    }
+  }
+  return options;
+}
+
 function main() {
+  const options = parseArgs(process.argv.slice(2));
   const steps = [];
+  const lockPath = options.lockPath;
   const lockAbs = path.resolve(root, lockPath);
   const lock = JSON.parse(fs.readFileSync(lockAbs, "utf8"));
   const vcpRoot = lock.source_binding_requirements.vcptoolbox_root_default;
-  const applyBinding = process.argv.includes("--apply-vcptoolbox-binding");
+  const applyBinding = options.applyBinding;
   let bindingApply = null;
   if (applyBinding) {
     bindingApply = applyVcpToolBoxBinding(lock, vcpRoot);
