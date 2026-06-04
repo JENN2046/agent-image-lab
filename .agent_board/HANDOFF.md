@@ -2618,6 +2618,33 @@ not_performed_addendum:
 next_safe_action: run final gate for listener, surface, AIL HEAD, VCPToolBox HEAD, lock hash, VCPToolBox source binding, and pending output paths. If it passes, consume exactly one attempt-018 POST and seal the lock consumed/no-retry.
 ```
 
+### Handoff Addendum - Attempt 018 Consumed Succeeded 2026-06-04
+
+```text
+status: completed_validated_consumed_succeeded_no_retry_pending_commit
+completed_addendum:
+  - Ran attempt-018 final gate through the lock-driven runner.
+  - Consumed exactly one POST.
+  - VCPToolBox completed real execution with route_http_request=1, provider=1, plugin=1, api=1, image=1.
+  - Captured returned outputRef image/doubaogen/3551a0c1-029b-4631-aa5b-45a900e1718a.png.
+  - Copied the VCPToolBox output to AIL evidence storage.
+  - Sealed reports/runtime_to_review_v1/secretless_serum_attempt_018.lock.json consumed/no-retry.
+evidence_addendum:
+  - receipt: reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_018.json
+  - artifact: reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_018.json
+  - observed output: A:\VCP\apps\VCPToolBox\image\doubaogen\3551a0c1-029b-4631-aa5b-45a900e1718a.png
+  - AIL evidence copy: runs/real_generation/runtime_to_review_v1_guarded_live_probe_serum_bottle_secretless_attempt_018/3551a0c1-029b-4631-aa5b-45a900e1718a.png
+  - artifact sha256: 950eec0c7afa7c86567c10f2e73b657e872cbee12c2e85d77a9f75c82de49075
+  - sealed lock sha256: 0929b9324d49293424ef3abf492256b0fdd41981624140f30eb2f70e33a217d6
+not_performed_addendum:
+  - no retry
+  - no second POST
+  - no secret/env/config value read
+  - no Authorization header construction by Agent Image Lab
+  - no push/tag/release/deploy
+next_safe_action: validate consumed-state verifier and rerun fail-closed behavior, then exact-file local commit attempt-018 evidence. Do not retry attempt-018.
+```
+
 ### Handoff Addendum - Attempt 016 Prepared 2026-06-04
 
 ```text

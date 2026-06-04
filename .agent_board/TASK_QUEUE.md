@@ -42,6 +42,20 @@
       Remaining gate: run final gate; if all checks pass, consume exactly one attempt-018 POST and seal consumed/no-retry.
 ---
 
+- [x] ID: secretless_serum_attempt_018_exact_activation_consumed_20260604
+      Lane: Amber exact activation final gate plus one route POST.
+      Status: completed_validated_consumed_succeeded_no_retry_pending_commit.
+      Goal: Consume the already-issued attempt-018 exact activation once, record evidence, and seal no-retry.
+      Lock: `reports/runtime_to_review_v1/secretless_serum_attempt_018.lock.json`.
+      Receipt: `reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_018.json`.
+      Artifact record: `reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_018.json`.
+      Observed output: `A:\VCP\apps\VCPToolBox\image\doubaogen\3551a0c1-029b-4631-aa5b-45a900e1718a.png`.
+      AIL evidence copy: `runs/real_generation/runtime_to_review_v1_guarded_live_probe_serum_bottle_secretless_attempt_018/3551a0c1-029b-4631-aa5b-45a900e1718a.png`.
+      Artifact sha256: `950eec0c7afa7c86567c10f2e73b657e872cbee12c2e85d77a9f75c82de49075`.
+      Boundary: route_http_request=1 consumed; provider=1; plugin=1; api=1; image=1; retry=false; no second POST; no secret/env/config read; no Authorization header construction; no push/tag/release/deploy.
+      Remaining gate: exact-file local commit; do not retry attempt-018.
+---
+
 - [x] ID: attempt_binding_lock_p0_guard_20260604
       Lane: Green/Amber exact source-read plus local AIL guard implementation.
       Status: completed_validated_local_guard_current_vcptoolbox_failed_closed.

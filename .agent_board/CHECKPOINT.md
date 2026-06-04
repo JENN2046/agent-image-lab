@@ -2815,6 +2815,33 @@ boundary_checks_addendum:
 recommended_next: run final gate. Only if all final-gate checks pass, consume exactly one attempt-018 POST; do not retry after consumption.
 ```
 
+### Checkpoint Addendum - Attempt 018 Consumed Succeeded 2026-06-04
+
+```text
+status: completed_validated_consumed_succeeded_no_retry_pending_commit
+result: ATTEMPT_018_ONE_POST_CONSUMED_SUCCEEDED_REAL_EXECUTION
+summary: Final gate passed and exactly one attempt-018 POST was consumed. VCPToolBox completed real execution, returned outputRefs, and produced one image. The lock was sealed consumed with retry forbidden.
+evidence_refs:
+  - reports/runtime_to_review_v1/secretless_serum_attempt_018.lock.json
+  - reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_018.json
+  - reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_018.json
+  - runs/real_generation/runtime_to_review_v1_guarded_live_probe_serum_bottle_secretless_attempt_018/3551a0c1-029b-4631-aa5b-45a900e1718a.png
+observed_output_ref: A:\VCP\apps\VCPToolBox\image\doubaogen\3551a0c1-029b-4631-aa5b-45a900e1718a.png
+artifact_sha256: 950eec0c7afa7c86567c10f2e73b657e872cbee12c2e85d77a9f75c82de49075
+sealed_lock_sha256: 0929b9324d49293424ef3abf492256b0fdd41981624140f30eb2f70e33a217d6
+validation_run_addendum:
+  - one final-gated POST: succeeded
+  - VCPToolBox output ref exists and sha256 matches artifact evidence
+boundary_checks_addendum:
+  route_http_request_performed: 1_consumed
+  provider_contact_performed: true
+  plugin_call_performed: true
+  api_call_performed: true
+  image_generation_performed: true
+  retry_performed: false
+recommended_next: validate consumed state, verify rerun fails closed with 0 POST, then exact-file local commit. Do not retry attempt-018.
+```
+
 ### Checkpoint Addendum - Attempt 016 Prepared 2026-06-04
 
 ```text

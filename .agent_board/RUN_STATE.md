@@ -104,6 +104,28 @@ boundary_checks: route_http_request_performed=false; provider_contact_performed=
 next_safe_task: run final gate only. If listener, surface, AIL HEAD, VCPToolBox HEAD, lock hash, VCPToolBox source binding, and pending output paths all pass, consume exactly one attempt-018 POST and then seal the lock no-retry.
 ```
 
+### Attempt 018 Exact Activation Consumed - 2026-06-04
+
+```text
+status: completed_validated_consumed_succeeded_no_retry_pending_commit
+mode: Amber exact activation final gate plus one route POST; no retry
+activation_package_id_consumed: AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-018
+lock_ref: reports/runtime_to_review_v1/secretless_serum_attempt_018.lock.json
+sealed_lock_sha256: 0929b9324d49293424ef3abf492256b0fdd41981624140f30eb2f70e33a217d6
+receipt_ref: reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_018.json
+artifact_record_ref: reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_018.json
+route_result_status: completed
+route_result_mode: real_execution
+calls_used: route_http_request=1; provider=1; plugin=1; api=1; image=1; retry=false
+observed_vcptoolbox_output_ref: A:\VCP\apps\VCPToolBox\image\doubaogen\3551a0c1-029b-4631-aa5b-45a900e1718a.png
+ail_evidence_copy_ref: runs/real_generation/runtime_to_review_v1_guarded_live_probe_serum_bottle_secretless_attempt_018/3551a0c1-029b-4631-aa5b-45a900e1718a.png
+artifact_sha256: 950eec0c7afa7c86567c10f2e73b657e872cbee12c2e85d77a9f75c82de49075
+output_refs_returned: true
+lock_status: exact_activation_consumed_succeeded_no_retry; can_execute_now=false; route_http_allowed_by_this_lock=false; separate_exact_activation_required=true; activation_consumed=true; route_http_requests_used=1; retry_allowed_after_consumption=false.
+boundary_checks: no second POST; no retry; no secret/env/config read; no Authorization header construction by Agent Image Lab; no push/tag/release/deploy.
+next_safe_task: validate consumed state and exact-file local commit attempt-018 evidence. Do not retry attempt-018.
+```
+
 ---
 
 ## Current Run State - Secretless Serum Attempt 016 Exact Activation 2026-06-04
