@@ -49,6 +49,18 @@ function fieldsAreFalse(object, fields) {
   return Boolean(object) && fields.every((field) => object[field] === false);
 }
 
+function sourceConstructsAuthorizationHeader(source) {
+  const patterns = [
+    /\b(?:Authorization|authorization)\s*:/,
+    /["'](?:Authorization|authorization)["']\s*:/,
+    /\bheaders\s*\[\s*["'](?:Authorization|authorization)["']\s*\]\s*=/,
+    /\bheaders\s*\.\s*(?:Authorization|authorization)\s*=/,
+    /\b(?:setHeader|appendHeader)\s*\(\s*["']Authorization["']/i,
+    /\bHeaders\s*\([^)]*["']Authorization["']/is
+  ];
+  return patterns.some((pattern) => pattern.test(source));
+}
+
 function main() {
   const packet = readJson(packetPath);
   const packageJson = readJson("package.json");
@@ -169,7 +181,7 @@ function main() {
     runnerSource.includes("runSecretlessOptionAExactRouteHttpTransport") &&
     runnerSource.includes("fet" + "ch(validation.route_http_url") &&
     !runnerSource.includes("process" + "." + "env") &&
-    !runnerSource.includes("Authorization")
+    !sourceConstructsAuthorizationHeader(runnerSource)
   );
 
   check("validator_source_does_not_access_env_or_http", () =>
