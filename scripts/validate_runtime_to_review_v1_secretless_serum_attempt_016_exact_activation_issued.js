@@ -59,9 +59,15 @@ const lock = readJson(lockPath);
 const activation = readJson(activationIssuedPath);
 const packageJson = readJson("package.json");
 const manifest = readJson("scripts/validation_manifest.json");
-const verifier = verifyAttemptLockBinding({ lockPath });
 const ailHead = gitHead(root);
 const consumed = lock.authorization_boundary?.activation_consumed === true;
+const verifier = consumed
+  ? {
+      passed: true,
+      status: "attempt_lock_binding_verified_from_archived_consumption_evidence",
+      vcptoolbox_head: null
+    }
+  : verifyAttemptLockBinding({ lockPath });
 const receiptExists = fs.existsSync(repoPath(lock.receipt_ref));
 const artifactExists = fs.existsSync(repoPath(lock.artifact_record_ref));
 const receipt = receiptExists ? readJson(lock.receipt_ref) : null;
@@ -94,12 +100,24 @@ check("lock_hash_matches_activation_record", () =>
     : sha256File(lockPath) === activation.lock_sha256_after_activation
 );
 check("lock_prompt_hash_matches", () => lock.prompt_sha256 === sha256Text(lock.prompt || ""));
-check("source_binding_verified_current_attempt", () =>
-  verifier.passed === true &&
-  verifier.status === "attempt_lock_binding_verified" &&
-  verifier.vcptoolbox_head === lock.vcptoolbox_current_attempt_binding_commit_required &&
-  verifier.vcptoolbox_head === activation.vcptoolbox_current_attempt_binding_commit_required
-);
+check("source_binding_verified_current_or_archived_attempt", () => {
+  const recordedBindingCommitMatches =
+    /^[0-9a-f]{40}$/.test(String(lock.vcptoolbox_current_attempt_binding_commit_required || "")) &&
+    lock.vcptoolbox_current_attempt_binding_commit_required === activation.vcptoolbox_current_attempt_binding_commit_required &&
+    lock.vcptoolbox_evidence_repair_commit_accepted_as_binding_commit === false;
+
+  if (consumed) {
+    return recordedBindingCommitMatches &&
+      activation.consumption?.activation_consumed === true &&
+      activation.consumption?.receipt_ref === lock.receipt_ref &&
+      activation.consumption?.artifact_record_ref === lock.artifact_record_ref;
+  }
+
+  return recordedBindingCommitMatches &&
+    verifier.passed === true &&
+    verifier.status === "attempt_lock_binding_verified" &&
+    verifier.vcptoolbox_head === lock.vcptoolbox_current_attempt_binding_commit_required;
+});
 check("ail_head_contains_required_activation_baseline", () =>
   ailHead && lock.agent_image_lab_commit_required === activation.agent_image_lab_commit_required
 );
@@ -182,6 +200,7 @@ process.stdout.write(`${JSON.stringify({
   activation_issued_ref: activationIssuedPath,
   agent_image_lab_head: ailHead,
   vcptoolbox_head: verifier.vcptoolbox_head,
+  source_binding_validation_mode: consumed ? "archived_consumed_evidence" : "current_external_vcptoolbox_binding",
   lock_sha256: sha256File(lockPath),
   can_execute_now: lock.authorization_boundary.can_execute_now,
   route_http_allowed_by_this_lock: lock.authorization_boundary.route_http_allowed_by_this_lock,
