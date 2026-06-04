@@ -328,6 +328,9 @@ function main() {
     const summary = runner.summarizeRouteResult(routeJson);
     const records = runner.buildAttemptReceiptAndArtifact(execution, validation, routeJson, 200, config);
     return summary.outputRefs.includes(outputRef) &&
+      runner.deriveOutputWritePerformed(routeJson.result, summary, summary.outputRefs) === true &&
+      records.receipt.output_write_performed === true &&
+      records.artifact.output_write_performed === true &&
       records.receipt.output_refs.includes(outputRef) &&
       records.artifact.output_refs.includes(outputRef) &&
       records.receipt.route_response_summary.outputRefs.includes(outputRef) &&

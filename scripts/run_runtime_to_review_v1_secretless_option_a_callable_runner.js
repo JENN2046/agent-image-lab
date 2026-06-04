@@ -1188,10 +1188,28 @@ function summarizeRouteResult(json) {
   };
 }
 
+function routeSummaryIndicatesOutputWrite(routeSummary, outputRefs) {
+  const refs = normalizeRouteOutputRefs(outputRefs, routeSummary && routeSummary.outputRefs);
+  const artifact = routeSummary && routeSummary.artifact && typeof routeSummary.artifact === "object"
+    ? routeSummary.artifact
+    : null;
+  return refs.length > 0 || (Number(routeSummary && routeSummary.images) > 0 && artifact !== null);
+}
+
+function deriveOutputWritePerformed(routeResult, routeSummary, outputRefs) {
+  return Boolean(routeResult && routeResult.output_write_performed === true) ||
+    routeSummaryIndicatesOutputWrite(routeSummary, outputRefs);
+}
+
 function buildAttemptReceiptAndArtifact(execution, validation, json, responseStatus, config) {
   const body = validation.body;
   const routeSummary = summarizeRouteResult(json);
   const outputRefs = normalizeRouteOutputRefs(execution.output_refs, routeSummary.outputRefs);
+  const routeResult = json && json.result && typeof json.result === "object"
+    ? json.result
+    : {};
+  const outputWritePerformed = execution.output_write_performed === true ||
+    deriveOutputWritePerformed(routeResult, routeSummary, outputRefs);
   const succeeded = execution.ok === true;
   const providerConsumed = execution.calls_used.provider > 0;
   const resultStatus = succeeded
@@ -1248,7 +1266,7 @@ function buildAttemptReceiptAndArtifact(execution, validation, json, responseSta
     api_call_performed: execution.api_call_performed,
     image_generation_performed: execution.image_generation_performed,
     image_count: execution.image_count,
-    output_write_performed: execution.output_write_performed,
+    output_write_performed: outputWritePerformed,
     output_refs: outputRefs,
     calls_used: execution.calls_used,
     route_response_status_code: responseStatus,
@@ -1273,7 +1291,7 @@ function buildAttemptReceiptAndArtifact(execution, validation, json, responseSta
     api_call_performed: execution.api_call_performed,
     image_generation_performed: execution.image_generation_performed,
     image_count: execution.image_count,
-    output_write_performed: execution.output_write_performed,
+    output_write_performed: outputWritePerformed,
     route_response_summary: routeSummary,
     artifact_evidence: routeSummary.artifact,
     boundary
@@ -1416,7 +1434,11 @@ async function runSecretlessOptionAExactRouteHttpTransport(input = {}) {
     api_call_performed: routeSummaryForExecution.api_calls > 0 || routeResult.api_call_performed === true,
     image_generation_performed: routeSummaryForExecution.images > 0 || routeResult.image_generation_performed === true,
     image_count: routeSummaryForExecution.images || Number(routeResult.image_count) || 0,
-    output_write_performed: Boolean(routeResult.output_write_performed),
+    output_write_performed: deriveOutputWritePerformed(
+      routeResult,
+      routeSummaryForExecution,
+      routeSummaryForExecution.outputRefs
+    ),
     output_refs: routeSummaryForExecution.outputRefs,
     secret_value_read_performed: false,
     env_file_content_read_performed: false,
@@ -1653,6 +1675,7 @@ module.exports = {
   buildExactRouteHttpBody,
   normalizeRouteOutputRefs,
   summarizeRouteResult,
+  deriveOutputWritePerformed,
   buildAttemptReceiptAndArtifact,
   validateRunnerInput,
   validateExactRouteHttpTransportInput,
