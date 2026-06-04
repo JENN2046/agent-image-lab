@@ -1,3 +1,21 @@
+- [x] ID: secretless_serum_attempt_017_exact_activation_20260604
+      Lane: Amber exact activation plus one final-gated route POST.
+      Status: completed_validated_consumed_succeeded_no_retry_pending_commit.
+      Goal: Consume exactly one attempt-017 POST after final gate and seal the lock.
+      Lock: `reports/runtime_to_review_v1/secretless_serum_attempt_017.lock.json`.
+      Activation record: `reports/runtime_to_review_v1/secretless_serum_exact_activation_issued_20260604_attempt_017.json`.
+      Receipt: `reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_017.json`.
+      Artifact record: `reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_017.json`.
+      Result: VCPToolBox completed real execution with route_http_request=1, provider=1, plugin=1, api=1, image=1.
+      Observed output: `A:\VCP\apps\VCPToolBox\image\doubaogen\a504b6e8-e47c-44f4-831b-71fb31a610ff.png`.
+      AIL evidence copy: `runs/real_generation/runtime_to_review_v1_guarded_live_probe_serum_bottle_secretless_attempt_017/a504b6e8-e47c-44f4-831b-71fb31a610ff.png`.
+      Artifact sha256: `1a73684dd24bad53c50d36fb5b8183f2fe2a2d2aa2361a428dc5717c1d26bd93`.
+      Boundary: no retry; no secret/env/config read; no Authorization header construction; no old admin-auth route; no push/tag/release/deploy.
+      Known gap: route response omitted outputRefs, so AIL receipt output_refs are empty even though the observed VCPToolBox output and AIL evidence copy exist and match sha.
+      Validation: consumed-state source binding verifier passed; runner rerun with exact phrase failed closed at lock authorization boundary with route_http_request_performed=false.
+      Remaining gate: exact-file local commit.
+---
+
 - [x] ID: attempt_binding_lock_p0_guard_20260604
       Lane: Green/Amber exact source-read plus local AIL guard implementation.
       Status: completed_validated_local_guard_current_vcptoolbox_failed_closed.

@@ -33,6 +33,35 @@ not_performed:
 next_safe_action: refresh VCPToolBox current-attempt binding to attempt-015 and commit it as the binding commit, then rerun prepare/verifier. Do not issue exact activation until verifier passes.
 ```
 
+### Handoff Addendum - Attempt 017 Exact Activation Consumed 2026-06-04
+
+```text
+status: completed_validated_consumed_succeeded_no_retry_pending_commit
+completed_addendum:
+  - Flipped reports/runtime_to_review_v1/secretless_serum_attempt_017.lock.json to one-shot active for the separate exact activation.
+  - Final gate passed for listener, surface, AIL HEAD, VCPToolBox HEAD, lock hash, source binding, and pending evidence paths.
+  - Consumed exactly one POST.
+  - VCPToolBox completed real execution and returned route_result_status=completed.
+  - Sealed the lock consumed with retry forbidden.
+evidence_addendum:
+  - receipt: reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_017.json
+  - artifact: reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_017.json
+  - observed output: A:\VCP\apps\VCPToolBox\image\doubaogen\a504b6e8-e47c-44f4-831b-71fb31a610ff.png
+  - AIL evidence copy: runs/real_generation/runtime_to_review_v1_guarded_live_probe_serum_bottle_secretless_attempt_017/a504b6e8-e47c-44f4-831b-71fb31a610ff.png
+  - artifact sha256: 1a73684dd24bad53c50d36fb5b8183f2fe2a2d2aa2361a428dc5717c1d26bd93
+known_gap:
+  - route response omitted outputRefs, so AIL receipt output_refs remain empty while the observed VCPToolBox file and AIL evidence copy exist and match sha.
+validation_addendum:
+  - consumed-state source binding verifier passed for attempt-017.
+  - runner rerun with exact phrase failed closed at lock authorization boundary with route_http_request_performed=false.
+not_performed_addendum:
+  - no retry
+  - no secret/env/config value read
+  - no Authorization header construction by Agent Image Lab
+  - no push/tag/release/deploy
+next_safe_action: exact-file local commit. Before attempt-018, fix or explicitly accept the route response outputRefs boundary.
+```
+
 ---
 
 ## Current Handoff Update - Secretless Serum Attempt 014 Exact-File Refresh 2026-06-04

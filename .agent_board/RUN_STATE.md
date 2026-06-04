@@ -38,6 +38,34 @@ next_safe_task: run prepare with exact external-write authorization or manually 
 
 ---
 
+## Current Run State - Secretless Serum Attempt 017 Exact Activation Consumed 2026-06-04
+
+```text
+phase: secretless_serum_attempt_017_exact_activation_20260604
+status: completed_validated_consumed_succeeded_no_retry_pending_commit
+mode: Amber exact activation plus one final-gated route POST; no retry
+activation_package_id_consumed: AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-017
+binding_packet_id: BINDING-DRAFT-SECRETLESS-OPTION-A-SERUM-20260603-017
+agent_image_lab_required_commit: df9a26b41236835204297b1d7d3d920ff0deb57c
+vcptoolbox_required_commit: 3bb285cdfc58feb6d6452d0cf4837495041362e7
+lock_ref: reports/runtime_to_review_v1/secretless_serum_attempt_017.lock.json
+activation_issued_ref: reports/runtime_to_review_v1/secretless_serum_exact_activation_issued_20260604_attempt_017.json
+receipt_ref: reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_017.json
+artifact_record_ref: reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_017.json
+route_result_status: completed
+route_result_mode: real_execution
+calls_used: route_http_request=1; provider=1; plugin=1; api=1; image=1; retry=false
+artifact_sha256: 1a73684dd24bad53c50d36fb5b8183f2fe2a2d2aa2361a428dc5717c1d26bd93
+observed_vcptoolbox_output_ref: A:\VCP\apps\VCPToolBox\image\doubaogen\a504b6e8-e47c-44f4-831b-71fb31a610ff.png
+ail_evidence_copy_ref: runs/real_generation/runtime_to_review_v1_guarded_live_probe_serum_bottle_secretless_attempt_017/a504b6e8-e47c-44f4-831b-71fb31a610ff.png
+result: Attempt-017 lock was flipped to one-shot active, final gate passed, exactly one POST was consumed, and VCPToolBox completed real execution. Lock is now sealed consumed and non-retryable.
+boundary_checks: no secret/env/config read; no Authorization header construction by Agent Image Lab; no old admin-auth route; no retry; no push/tag/release/deploy.
+known_gap: route response did not return outputRefs to AIL, so receipt output_refs remain empty even though the VCPToolBox output file and AIL evidence copy exist and match the artifact sha.
+next_safe_task: exact-file commit attempt-017 evidence. Before attempt-018, fix or explicitly accept the route response outputRefs boundary.
+```
+
+---
+
 ## Current Run State - Secretless Serum Attempt 016 Exact Activation 2026-06-04
 
 ```text

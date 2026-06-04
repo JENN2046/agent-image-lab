@@ -38,6 +38,34 @@ boundary_checks:
 recommended_next: refresh VCPToolBox current-attempt binding to attempt-015 and commit that binding commit; rerun verifier before any exact activation.
 ```
 
+### Checkpoint Addendum - Attempt 017 Exact Activation Consumed 2026-06-04
+
+```text
+status: completed_validated_consumed_succeeded_no_retry_pending_commit
+result: ATTEMPT_017_ONE_POST_CONSUMED_SUCCEEDED_REAL_EXECUTION
+summary: User issued separate exact activation for attempt-017. The lock was flipped to one-shot active, final gate passed, and exactly one POST was consumed. VCPToolBox real execution completed with provider/plugin/API/image calls each used once.
+evidence_refs:
+  - reports/runtime_to_review_v1/secretless_serum_attempt_017.lock.json
+  - reports/runtime_to_review_v1/secretless_serum_exact_activation_issued_20260604_attempt_017.json
+  - reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_017.json
+  - reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_017.json
+observed_output_ref: A:\VCP\apps\VCPToolBox\image\doubaogen\a504b6e8-e47c-44f4-831b-71fb31a610ff.png
+ail_evidence_copy_ref: runs/real_generation/runtime_to_review_v1_guarded_live_probe_serum_bottle_secretless_attempt_017/a504b6e8-e47c-44f4-831b-71fb31a610ff.png
+artifact_sha256: 1a73684dd24bad53c50d36fb5b8183f2fe2a2d2aa2361a428dc5717c1d26bd93
+validation_run_addendum:
+  - node scripts/verify_runtime_to_review_v1_secretless_serum_attempt_lock_binding.js --lock reports/runtime_to_review_v1/secretless_serum_attempt_017.lock.json: passed in consumed state
+  - runner rerun with exact phrase: failed closed at lock authorization boundary with route_http_request_performed=false
+boundary_checks_addendum:
+  route_http_request_performed: 1_consumed
+  provider_contact_performed: true
+  plugin_call_performed: true
+  api_call_performed: true
+  image_generation_performed: true
+  retry_performed: false
+known_gap: route response omitted outputRefs, so AIL receipt output_refs are empty; VCPToolBox local output was observed separately, copied into AIL evidence storage, and sha matched.
+recommended_next: exact-file local commit. Do not retry attempt-017. Before attempt-018, fix or explicitly accept the route response outputRefs boundary.
+```
+
 ---
 
 ## Checkpoint - Secretless Serum Attempt 014 Exact-File Refresh 2026-06-04
