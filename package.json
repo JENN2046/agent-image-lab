@@ -43,6 +43,7 @@
     "validate:runtime-kernel-audit": "node scripts/validate_runtime_kernel_v0_audit_write.js",
     "validate:runtime-kernel": "node scripts/validate_runtime_kernel_v0.js && npm run validate:runtime-kernel-audit && node scripts/validate_runtime_kernel_v1_real_provider_guarded.js",
     "validate:review-bridge-readonly": "node scripts/validate_runtime_review_bridge_readonly_stub.js && node scripts/validate_runtime_review_bridge_v1_readonly.js",
+    "validate:ail-dailynote-write-adapter": "node scripts/validate_ail_dailynote_write_adapter.js",
     "validate:review-decision-record": "node scripts/validate_review_decision_record_v1.js",
     "validate:review-draft-registry": "node scripts/validate_review_draft_registry_v1.js",
     "validate:runtime-to-review-fixture-smoke": "node scripts/validate_runtime_to_review_v1_fixture_smoke_flow.js",

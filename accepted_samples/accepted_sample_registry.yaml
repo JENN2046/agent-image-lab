@@ -1,6 +1,6 @@
 accepted_sample_registry:
   version: v1
-  updated_by_phase: v14_165
+  updated_by_phase: v14_216_agent_image_lab_complete_ecosystem_loop_20260606
   image_files_committed_to_git: false
   registry_only: true
   memory_write_allowed: false
@@ -523,5 +523,62 @@ accepted_sample_registry:
         approved_by: Jenn
         approval_statement_ref: user_authorization:AIL-VIS-22_explicit_accepted_sample_promotion
         approval_record_ref: accepted_samples/ail_vis_17_premium_black_wireless_headphones_hero/source_evidence.json
+      write_to_memory_allowed: false
+      daily_note_write_allowed: false
+
+    - sample_id: accepted_premium_skincare_serum_bottle_secretless_attempt_018_001
+      source_phase: runtime_to_review_v1_secretless_serum_attempt_018
+      source_plan: secretless-serum-live-probe-attempt-018
+      asset_status: accepted_candidate
+      provider_type: project_plugin
+      plugin_id: DoubaoGen
+      model: doubao-seedream-5-0-260128
+      prompt_package_ref: reports/runtime_to_review_v1/secretless_option_a_exact_binding_packet_draft_20260603_attempt_018.json
+      review_doc_ref: reports/runtime_to_review_v1/secretless_serum_attempt_018_quality_channel_review_20260604.json
+      formal_sample_package_ref: reports/runtime_to_review_v1/secretless_serum_attempt_018_complete_ecosystem_loop_receipt_20260606.json
+      promotion_apply_receipt_ref: accepted_samples/accepted_premium_skincare_serum_bottle_secretless_attempt_018_001/source_evidence.json
+      memory_write_receipt_ref: reports/memory_write_receipts/secretless_serum_attempt_018_codex_knowledge_memory_write_receipt_20260606.json
+      image_path: runs/real_generation/runtime_to_review_v1_guarded_live_probe_serum_bottle_secretless_attempt_018/3551a0c1-029b-4631-aa5b-45a900e1718a.jpg
+      image_sha256: 950eec0c7afa7c86567c10f2e73b657e872cbee12c2e85d77a9f75c82de49075
+      image_dimensions: 1920x1920
+      recoverability_status: workspace_local_verified
+      artifact_locator_scope: project_relative_runs
+      verification_mode: local_file_hash
+      verified_sha256: 950eec0c7afa7c86567c10f2e73b657e872cbee12c2e85d77a9f75c82de49075
+      verified_dimensions: 1920x1920
+      verified_mime: image/jpeg
+      verification_record_ref: reports/runtime_to_review_v1/secretless_serum_attempt_018_final_evidence_seal_20260606.json
+      import_record_ref: accepted_samples/accepted_premium_skincare_serum_bottle_secretless_attempt_018_001/metadata.json
+      capsule_manifest_ref: accepted_samples/accepted_premium_skincare_serum_bottle_secretless_attempt_018_001/manifest.json
+      portable_after_clone: false
+      artifact_recoverability_is_not_vcp_runtime_integration: true
+      image_files_committed_to_git: false
+      category: product_still_life
+      style_tags:
+        - premium_skincare
+        - serum_bottle
+        - product_still_life
+        - square_hero_product_image
+        - secretless_runtime_route
+        - accepted_candidate
+        - memory_written
+      acceptance_summary:
+        prompt_subject_match: pass
+        complete_full_bottle_visible: pass
+        bottom_margin_present: pass
+        blank_brandable_label: pass
+        no_text_logo_watermark: pass
+        studio_reflection_grounding: pass
+        commercial_usability: pass_with_brand_label_needed
+        memory_suitability: true
+      known_minor_issues:
+        - final_brand_delivery_requires_label_copy_or_brand_visual_design
+        - cap_highlight_slightly_stylized_but_acceptable
+      commercial_use_level: accepted_candidate
+      human_approval:
+        approved: true
+        approved_by: Codex commander visual review
+        approval_statement_ref: reports/runtime_to_review_v1/secretless_serum_attempt_018_accepted_candidate_record_20260606.json
+        approval_record_ref: reports/runtime_to_review_v1/secretless_serum_attempt_018_final_evidence_seal_20260606.json
       write_to_memory_allowed: false
       daily_note_write_allowed: false

@@ -1,3 +1,30 @@
+- [x] ID: ail_dailynote_write_adapter_preflight_20260606
+      Lane: Green local adapter/preflight implementation.
+      Status: completed_validated_local_no_write_adapter_preflight.
+      Goal: Add an Agent Image Lab DailyNoteWrite adapter layer that builds and validates a future stdio payload, execution audit stub, and rollback/revoke plan without calling VCPToolBox.
+      Adapter: `adapters/runtime/ail_dailynote_write_adapter.js`.
+      Schema: `schemas/ail_dailynote_write_adapter.schema.yaml`.
+      Fixture: `tests/fixtures/ail_dailynote_write_adapter_attempt_018_confirmed.fixture.json`.
+      Validator: `scripts/validate_ail_dailynote_write_adapter.js`.
+      Completed: no-write adapter; schema; fixture; validator; package/manifest registration; ecosystem receipt and closeout references.
+      Validation: adapter node checks passed; adapter validator passed; validation manifest passed; agent_board validator passed; smoke validator passed; git diff --check passed with CRLF warnings only; trailing whitespace check passed.
+      Boundary: no VCPToolBox DailyNoteWrite call; no VCP config/env read; no secret; no actual DailyNote/VCP memory file write; no commit; no push/tag/release/deploy.
+      Remaining gate: optional exact-file local commit; real DailyNoteWrite execution requires separate executable command/root preflight and one-write gate.
+---
+
+- [x] ID: agent_image_lab_complete_ecosystem_loop_20260606
+      Lane: Green accepted_samples metadata write plus Amber_C Codex knowledge memory write.
+      Status: completed_local_registry_and_codex_memory_written_daily_note_project_writer_blocked.
+      Goal: Complete the ideal ecosystem loop by promoting attempt-018 into formal accepted_samples and writing the reusable Chinese lesson into Codex knowledge memory.
+      Final sample: `accepted_premium_skincare_serum_bottle_secretless_attempt_018_001`.
+      Ecosystem receipt: `reports/runtime_to_review_v1/secretless_serum_attempt_018_complete_ecosystem_loop_receipt_20260606.json`.
+      Memory receipt: `reports/memory_write_receipts/secretless_serum_attempt_018_codex_knowledge_memory_write_receipt_20260606.json`.
+      Codex memory id: `codex-knowledge-ed261a74438b43059178c4e12e09a16a`.
+      Completed: accepted_samples registry/capsule/category index; Codex knowledge memory write; final closeout update.
+      Boundary: no new route HTTP/provider/plugin/API/image; no image copy/move; no project DailyNote writer due unavailable exact callable target; no production candidate registry write; no secret/env/config read; no commit; no push/tag/release/deploy.
+      Remaining gate: validation, then optional exact-file local commit; push/tag/release require separate explicit authorization.
+---
+
 - [x] ID: agent_image_lab_final_project_closeout_20260606
       Lane: Green local closeout report after explicit user-authorized push verification.
       Status: completed_validated_remote_aligned_pending_optional_registry_or_release.

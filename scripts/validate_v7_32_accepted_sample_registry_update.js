@@ -22,12 +22,14 @@ const requiredSampleIds = [
   "accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001",
   "neutral_red_apple_seedream5_retry_006",
   "accepted_premium_black_wireless_headphones_hero_ail_vis_17_001",
+  "accepted_premium_skincare_serum_bottle_secretless_attempt_018_001",
 ];
 const requiredCodexSample = "accepted_womens_resort_relaxed_knit_codex_v2_001";
 const requiredBagCodexSample = "accepted_fashion_lifestyle_woven_crossbody_bag_codex_v14_161_001";
 const requiredLampCodexSample = "accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001";
 const requiredRetry006ProductSample = "neutral_red_apple_seedream5_retry_006";
 const requiredHeadphonesProductSample = "accepted_premium_black_wireless_headphones_hero_ail_vis_17_001";
+const requiredSerumAttempt018ProductSample = "accepted_premium_skincare_serum_bottle_secretless_attempt_018_001";
 const imageExtensions = /\.(png|jpe?g|webp|gif|psd|tiff?)$/i;
 
 let passed = true;
@@ -125,6 +127,15 @@ const headphonesImageEvidence = readImageEvidence(headphonesImagePath);
 const headphonesMetadata = readJson("accepted_samples/ail_vis_17_premium_black_wireless_headphones_hero/metadata.json");
 const headphonesManifest = readJson("accepted_samples/ail_vis_17_premium_black_wireless_headphones_hero/manifest.json");
 const headphonesSourceEvidence = readJson("accepted_samples/ail_vis_17_premium_black_wireless_headphones_hero/source_evidence.json");
+const serumBlock = sampleBlocks.get(requiredSerumAttempt018ProductSample) || "";
+const serumImagePath = extractField(serumBlock, "image_path");
+const serumRegistrySha256 = extractField(serumBlock, "verified_sha256");
+const serumRegistryDimensions = extractField(serumBlock, "verified_dimensions");
+const serumRegistryMime = extractField(serumBlock, "verified_mime");
+const serumImageEvidence = readImageEvidence(serumImagePath);
+const serumMetadata = readJson("accepted_samples/accepted_premium_skincare_serum_bottle_secretless_attempt_018_001/metadata.json");
+const serumManifest = readJson("accepted_samples/accepted_premium_skincare_serum_bottle_secretless_attempt_018_001/manifest.json");
+const serumSourceEvidence = readJson("accepted_samples/accepted_premium_skincare_serum_bottle_secretless_attempt_018_001/source_evidence.json");
 
 check("accepted_samples_readme", () => fileExists("accepted_samples/README.md"));
 check("registry_exists", () => fileExists(registryPath));
@@ -202,6 +213,55 @@ check("headphones_product_sample_source_evidence_matches_file", () =>
 );
 check("headphones_product_sample_no_memory_write", () => (sampleBlocks.get(requiredHeadphonesProductSample) || "").includes("write_to_memory_allowed: false"));
 check("headphones_product_sample_no_daily_note_write", () => (sampleBlocks.get(requiredHeadphonesProductSample) || "").includes("daily_note_write_allowed: false"));
+check("serum_attempt_018_product_sample_present", () => sampleBlocks.has(requiredSerumAttempt018ProductSample));
+check("serum_attempt_018_product_sample_provider_type", () => extractField(serumBlock, "provider_type") === "project_plugin");
+check("serum_attempt_018_product_sample_plugin", () => extractField(serumBlock, "plugin_id") === "DoubaoGen");
+check("serum_attempt_018_product_sample_category", () => extractField(serumBlock, "category") === "product_still_life");
+check("serum_attempt_018_product_sample_image_not_committed", () => serumBlock.includes("image_files_committed_to_git: false"));
+check("serum_attempt_018_product_sample_source_file_exists", () => Boolean(serumImagePath) && fileExists(serumImagePath));
+check("serum_attempt_018_product_sample_source_sha256_matches_registry", () =>
+  serumImageEvidence?.sha256 === serumRegistrySha256
+);
+check("serum_attempt_018_product_sample_source_dimensions_match_registry", () =>
+  serumImageEvidence?.dimensions === serumRegistryDimensions
+);
+check("serum_attempt_018_product_sample_source_mime_matches_registry", () =>
+  serumImageEvidence?.signatureValid === true && serumImageEvidence?.mime === serumRegistryMime
+);
+check("serum_attempt_018_product_sample_metadata_matches_registry", () =>
+  serumMetadata.artifact.source_image_ref === serumImagePath &&
+  serumMetadata.artifact.source_image_sha256 === serumRegistrySha256 &&
+  serumMetadata.artifact.source_image_dimensions === serumRegistryDimensions &&
+  serumMetadata.artifact.source_image_mime === serumRegistryMime
+);
+check("serum_attempt_018_product_sample_manifest_matches_registry", () =>
+  serumManifest.artifact.original.path === serumImagePath &&
+  serumManifest.artifact.original.sha256 === serumRegistrySha256 &&
+  `${serumManifest.artifact.original.width}x${serumManifest.artifact.original.height}` === serumRegistryDimensions &&
+  serumManifest.artifact.original.format === "jpeg" &&
+  serumManifest.artifact.original.bytes === serumImageEvidence?.bytes
+);
+check("serum_attempt_018_product_sample_source_evidence_matches_file", () =>
+  serumSourceEvidence.verified_source_image.path === serumImagePath &&
+  serumSourceEvidence.verified_source_image.sha256 === serumImageEvidence?.sha256 &&
+  `${serumSourceEvidence.verified_source_image.width}x${serumSourceEvidence.verified_source_image.height}` === serumImageEvidence?.dimensions &&
+  serumSourceEvidence.verified_source_image.mime === serumImageEvidence?.mime &&
+  serumSourceEvidence.verified_source_image.bytes === serumImageEvidence?.bytes
+);
+check("serum_attempt_018_product_sample_memory_receipt_ref_present", () =>
+  serumBlock.includes("memory_write_receipt_ref: reports/memory_write_receipts/secretless_serum_attempt_018_codex_knowledge_memory_write_receipt_20260606.json") &&
+  fileExists("reports/memory_write_receipts/secretless_serum_attempt_018_codex_knowledge_memory_write_receipt_20260606.json")
+);
+check("serum_attempt_018_product_sample_memory_written_receipt_consistent", () =>
+  serumSourceEvidence.side_effects.Codex_knowledge_memory_write_performed === true &&
+  serumSourceEvidence.side_effects.Codex_knowledge_memory_id === "codex-knowledge-ed261a74438b43059178c4e12e09a16a"
+);
+check("serum_attempt_018_product_sample_no_daily_note_project_writer", () =>
+  serumSourceEvidence.side_effects.project_DailyNote_writer_performed === false &&
+  serumSourceEvidence.side_effects.project_DailyNote_writer_blocker.includes("no exact non-secret callable DailyNote writer target")
+);
+check("serum_attempt_018_product_sample_registry_no_memory_authorization", () => serumBlock.includes("write_to_memory_allowed: false"));
+check("serum_attempt_018_product_sample_registry_no_daily_note_authorization", () => serumBlock.includes("daily_note_write_allowed: false"));
 check("legacy_wallet_sample_present", () => sampleBlocks.has("accepted_product_still_life_tennis_wallet_001"));
 check("legacy_rattan_bag_samples_present", () => requiredSampleIds.slice(1, 5).every((id) => sampleBlocks.has(id)));
 check("watermark_false_history_preserved", () => registry.includes("watermark_requested: false"));
@@ -219,7 +279,7 @@ for (const index of categoryIndexes) {
   );
 }
 
-check("product_category_count_4", () => fileContains("accepted_samples/categories/product_still_life.yaml", "sample_count: 4"));
+check("product_category_count_5", () => fileContains("accepted_samples/categories/product_still_life.yaml", "sample_count: 5"));
 check("fashion_lifestyle_category_count_5", () => fileContains("accepted_samples/categories/fashion_lifestyle_still_life.yaml", "sample_count: 5"));
 check("fashion_lookbook_category_count_2", () => fileContains("accepted_samples/categories/fashion_lookbook_portrait.yaml", "sample_count: 2"));
 check("tracked_accepted_samples_are_metadata_only", () =>

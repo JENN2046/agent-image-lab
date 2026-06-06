@@ -1,0 +1,61 @@
+{
+  "manifest_type": "metadata_only_accepted_sample_capsule_manifest",
+  "version": "v1",
+  "sample_id": "accepted_premium_skincare_serum_bottle_secretless_attempt_018_001",
+  "created_at": "2026-06-06T14:33:13+08:00",
+  "source": {
+    "pipeline_id": "secretless-serum-live-probe-attempt-018",
+    "generation_authorization_id": "AUTH-SECRETLESS-SERUM-LIVE-PROBE-20260603-018",
+    "review_authorization_id": "secretless_serum_attempt_018_final_evidence_seal_20260606",
+    "promotion_draft_id": "secretless_serum_attempt_018_accepted_candidate_record_20260606",
+    "promotion_apply_authorization_id": "user_request:2026-06-06_complete_ecosystem_loop"
+  },
+  "artifact": {
+    "original": {
+      "path": "runs/real_generation/runtime_to_review_v1_guarded_live_probe_serum_bottle_secretless_attempt_018/3551a0c1-029b-4631-aa5b-45a900e1718a.jpg",
+      "format": "jpeg",
+      "file_extension": ".jpg",
+      "width": 1920,
+      "height": 1920,
+      "bytes": 134026,
+      "sha256": "950eec0c7afa7c86567c10f2e73b657e872cbee12c2e85d77a9f75c82de49075",
+      "git_tracked": false,
+      "copied_or_moved_by_this_apply": false,
+      "required_for_local_validation": true
+    },
+    "preview": {
+      "created": false,
+      "reason": "accepted sample promotion records metadata only; source image remains under runs/real_generation"
+    }
+  },
+  "chain": {
+    "metadata": "metadata.json",
+    "source_evidence": "source_evidence.json",
+    "memory_write_receipt": "reports/memory_write_receipts/secretless_serum_attempt_018_codex_knowledge_memory_write_receipt_20260606.json"
+  },
+  "source_refs": {
+    "registry_ref": "accepted_samples/accepted_sample_registry.yaml",
+    "category_index_ref": "accepted_samples/categories/product_still_life.yaml",
+    "receipt_ref": "reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_018.json",
+    "artifact_record_ref": "reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_018.json",
+    "quality_review_ref": "reports/runtime_to_review_v1/secretless_serum_attempt_018_quality_channel_review_20260604.json",
+    "final_evidence_seal_ref": "reports/runtime_to_review_v1/secretless_serum_attempt_018_final_evidence_seal_20260606.json",
+    "complete_ecosystem_receipt_ref": "reports/runtime_to_review_v1/secretless_serum_attempt_018_complete_ecosystem_loop_receipt_20260606.json"
+  },
+  "guard": {
+    "provider_contact_performed_by_this_apply": false,
+    "plugin_call_performed_by_this_apply": false,
+    "api_call_performed_by_this_apply": false,
+    "image_generation_performed_by_this_apply": false,
+    "image_copy_or_move_performed_by_this_apply": false,
+    "accepted_samples_registry_write_performed": true,
+    "Codex_knowledge_memory_write_performed": true,
+    "DailyNote_project_writer_performed": false,
+    "production_candidate_write_performed": false,
+    "push_tag_release_deploy_performed": false,
+    "secret_value_read_performed": false
+  },
+  "production_candidate_allowed": false,
+  "memory_write_receipt_ref": "reports/memory_write_receipts/secretless_serum_attempt_018_codex_knowledge_memory_write_receipt_20260606.json",
+  "commercial_delivery_allowed": false
+}

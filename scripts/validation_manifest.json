@@ -219,6 +219,27 @@
       ]
     },
     {
+      "id": "ail_dailynote_write_adapter",
+      "command": "node scripts/validate_ail_dailynote_write_adapter.js",
+      "script": "scripts/validate_ail_dailynote_write_adapter.js",
+      "tier": "targeted",
+      "domain": "memory_write_adapter",
+      "status": "active",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "adapters/runtime/ail_dailynote_write_adapter.js",
+        "scripts/validate_ail_dailynote_write_adapter.js",
+        "schemas/ail_dailynote_write_adapter.schema.yaml",
+        "tests/fixtures/ail_dailynote_write_adapter_attempt_018_confirmed.fixture.json",
+        "memory_policy/**",
+        "reports/runtime_to_review_v1/*memory_delta*"
+      ],
+      "required_for": [
+        "daily_note_write_adapter_patch",
+        "memory_write_adapter_contract_patch"
+      ]
+    },
+    {
       "id": "runtime_to_review_default_local_gate",
       "command": "npm run validate:runtime-to-review-default-local",
       "script": "scripts/validate_runtime_to_review_v1_default_local_gate.js",

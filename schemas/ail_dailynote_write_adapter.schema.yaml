@@ -1,0 +1,70 @@
+# ail_dailynote_write_adapter.schema.yaml
+# Local no-write contract for converting approved memory_delta records into a
+# future VCPToolBox DailyNoteWrite stdio payload.
+
+ail_dailynote_write_envelope:
+  schema: ail_dailynote_write_envelope.v1
+  adapter_id: ail_dailynote_write_adapter_v1
+  status: payload_ready_no_write
+  lane: Amber_C_memory_preflight
+  can_execute_now: false
+  selected_plugin:
+    plugin_id: DailyNoteWrite
+    plugin_type: synchronous_stdio
+    command: node daily-note-write.js
+    command_resolved_now: false
+    root_class_expected: vcp_root_dailynote
+  daily_note_write_payload:
+    maidName: "[<target_notebook>]<agent_name>"
+    dateString: YYYY-MM-DD
+    contentText: zh-CN body ending with normalized "Tag: ..."
+    fileName: safe single path component
+  guard:
+    preflight_only: true
+    calls_vcptoolbox_plugin_now: false
+    reads_vcp_config_now: false
+    writes_daily_note_now: false
+    plugin_success_sufficient: false
+    canonical_root_preflight_required: true
+    canonical_target_file_check_required: true
+    canonical_hash_match_required: true
+
+execution_audit_schema:
+  schema: ail_dailynote_write_execution_audit_stub.v1
+  status: prepared_no_write
+  DailyNoteWrite_called: false
+  actual_write_performed: false
+  canonical_target_file_exists: false
+  canonical_target_hash_match: false
+  wrong_location_file_is_success: false
+  side_effect_flags_all_false_until_future_exact_write: true
+
+rollback_or_revoke_schema:
+  schema: ail_dailynote_write_rollback_or_revoke_plan.v1
+  if_no_write_performed: discard envelope and audit stub
+  if_plugin_success_wrong_location: stop for human-approved repair or revoke path
+  if_hash_mismatch: mark rejected_integrity_mismatch and do not auto-retry
+  if_user_revokes_after_success: create separate revocation/tombstone record
+  destructive_cleanup_allowed_now: false
+
+hard_requirements_before_future_execution:
+  - memory_delta.write_mode == confirmed
+  - memory_delta.approval_status == approved
+  - memory_delta.final_decision.should_write_to_vcp == true
+  - memory_safety flags are all false
+  - independent daily_note_write_authorized == true
+  - independent vcp_memory_write_authorized == true
+  - selected_plugin_id == DailyNoteWrite
+  - expected_root_class == vcp_root_dailynote
+  - max_write_entries == 1
+  - secret_value_read_allowed == false
+  - overwrite_existing_files_allowed == false
+
+forbidden_now:
+  - calling VCPToolBox DailyNoteWrite
+  - reading VCPToolBox config.env
+  - reading API keys or Authorization headers
+  - writing DailyNote files
+  - declaring plugin success as sufficient
+  - recording raw private absolute paths
+  - saving image binaries or raw runtime logs to memory

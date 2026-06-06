@@ -1,10 +1,11 @@
 category: product_still_life
-sample_count: 4
+sample_count: 5
 samples:
   - accepted_product_still_life_tennis_wallet_001
   - accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001
   - neutral_red_apple_seedream5_retry_006
   - accepted_premium_black_wireless_headphones_hero_ail_vis_17_001
+  - accepted_premium_skincare_serum_bottle_secretless_attempt_018_001
 recoverability_metadata:
   accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001:
     recoverability_status: workspace_local_verified
@@ -42,4 +43,17 @@ recoverability_metadata:
     capsule_manifest_ref: accepted_samples/ail_vis_17_premium_black_wireless_headphones_hero/manifest.json
     source_evidence_ref: accepted_samples/ail_vis_17_premium_black_wireless_headphones_hero/source_evidence.json
     portable_after_clone: true
+    artifact_recoverability_is_not_vcp_runtime_integration: true
+  accepted_premium_skincare_serum_bottle_secretless_attempt_018_001:
+    recoverability_status: workspace_local_verified
+    artifact_locator_scope: project_relative_runs
+    verification_mode: local_file_hash
+    verified_sha256: 950eec0c7afa7c86567c10f2e73b657e872cbee12c2e85d77a9f75c82de49075
+    verified_dimensions: 1920x1920
+    verified_mime: image/jpeg
+    verification_record_ref: reports/runtime_to_review_v1/secretless_serum_attempt_018_final_evidence_seal_20260606.json
+    import_record_ref: accepted_samples/accepted_premium_skincare_serum_bottle_secretless_attempt_018_001/metadata.json
+    capsule_manifest_ref: accepted_samples/accepted_premium_skincare_serum_bottle_secretless_attempt_018_001/manifest.json
+    source_evidence_ref: accepted_samples/accepted_premium_skincare_serum_bottle_secretless_attempt_018_001/source_evidence.json
+    portable_after_clone: false
     artifact_recoverability_is_not_vcp_runtime_integration: true
