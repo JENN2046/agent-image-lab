@@ -47,6 +47,23 @@ rollback_or_revoke_schema:
   if_user_revokes_after_success: create separate revocation/tombstone record
   destructive_cleanup_allowed_now: false
 
+future_strict_json_schema_plan:
+  status: planned_before_real_write
+  purpose: replace the current contract YAML with machine-strict JSON schemas before any real DailyNoteWrite execution
+  required_schema_files:
+    - ail_dailynote_write_envelope.v1.schema.json
+    - ail_dailynote_write_execution_audit_stub.v1.schema.json
+    - ail_dailynote_write_rollback_or_revoke_plan.v1.schema.json
+  must_preserve:
+    - can_execute_now false until a future exact one-write packet flips it
+    - selected_plugin_id DailyNoteWrite
+    - expected_root_class vcp_root_dailynote
+    - max_write_entries 1
+    - secret_value_read_allowed false
+    - overwrite_existing_files_allowed false
+    - plugin_success_sufficient false
+    - canonical_target_hash_match required after future write
+
 hard_requirements_before_future_execution:
   - memory_delta.write_mode == confirmed
   - memory_delta.approval_status == approved

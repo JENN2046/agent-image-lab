@@ -1,3 +1,31 @@
+- [x] ID: v7_34_full_code_surface_hardening_closeout
+      Lane: Green docs/schema/metadata/validator hardening.
+      Status: completed_validated_local.
+      Goal: Apply Pro static review hardening without runtime side effects by splitting memory layers, recording native Doubao / VCP broker ownership boundaries, marking the AIL VCPToolBox patch script as migration/bootstrap only, and validating those fields.
+      Source review observed remote head: `7e21d7da645407d50c4c9623cc29943445d7d6de`.
+      Prior local reconciliation commit: `4af8f2ae0241454afd8b3b8c3aa7ea8a99193b12`.
+      Done so far:
+        - added v7_34 hardening closeout doc
+        - updated memory architecture, accepted sample schema, DailyNote adapter schema
+        - updated attempt-018 registry/source evidence/receipt/final closeout
+        - updated accepted sample validator with v7_34 checks
+        - repaired v14.212 prompt-to-artifact audit validator from exact-six to at-least-six recoverable sample count
+      Validation:
+        - node --check scripts\validate_v7_32_accepted_sample_registry_update.js passed
+        - node scripts\validate_v7_32_accepted_sample_registry_update.js passed, 104 checks
+        - npm run validate:ail-dailynote-write-adapter passed, 34 checks
+        - node --check scripts\validate_v14_212_six_month_goal_prompt_to_artifact_completion_audit.js passed
+        - node scripts\validate_v14_212_six_month_goal_prompt_to_artifact_completion_audit.js passed, 67 checks
+        - node scripts\validate_validation_manifest.js passed
+        - npm run validate:smoke passed, 33 checks
+        - npm run validate:mvp passed, 16 checks
+        - node scripts\validate_agent_board_state.js passed
+        - git diff --check passed with CRLF normalization warnings only
+        - git diff --cached --check passed with no staged files
+      Boundary: no provider/plugin/API/image; no DailyNoteWrite; no VCP memory; no additional Codex memory; no VCPToolBox external repo modification; no secret/env/config read; no production candidate registry; no tag/release/deploy; no push.
+      Remaining gate: exact-file local commit only if the user explicitly asks; push remains separately gated.
+---
+
 - [x] ID: v7_33_post_push_closeout_surface_reconciliation
       Lane: Green docs_and_metadata_only_reconciliation.
       Status: completed_validated_local_reconciliation.

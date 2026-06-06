@@ -12,7 +12,7 @@ sample_entry:
   sample_id: string
   source_phase: string
   asset_status: accepted_candidate | accepted_with_support_logic_warning
-  provider_type: codex_session_image | direct_api
+  provider_type: codex_session_image | direct_api | project_plugin
   plugin_id: string | null
   model: string
   prompt_package_ref: string
@@ -25,6 +25,14 @@ sample_entry:
   commercial_use_level: accepted_candidate | accepted_with_support_logic_warning
   write_to_memory_allowed: false
   daily_note_write_allowed: false
+  memory_effects:
+    codex_knowledge_memory_written: boolean
+    codex_knowledge_memory_receipt_ref: project_relative_json_path | null
+    daily_note_write_allowed: false
+    vcptoolbox_dailynote_write_called: false
+    vcp_long_term_memory_write_allowed: false
+    project_memory_write_allowed: false
+    project_dailynote_writer_performed: false
 
 full_recoverability_metadata:
   recoverability_status: workspace_local_verified
@@ -77,3 +85,9 @@ non_authorization:
   VCP_memory_write_allowed_by_schema: false
   provider_api_plugin_mcp_allowed_by_schema: false
   real_manifest_vcpchat_vcptoolbox_read_allowed_by_schema: false
+
+attempt_018_hardening_notes:
+  Codex_knowledge_memory_written_is_not_DailyNoteWrite: true
+  accepted_sample_is_not_production_candidate_registry_write: true
+  native_doubao_image_is_not_secretless_delegate: true
+  exact_execution_packet_required_for_future_side_effects: true

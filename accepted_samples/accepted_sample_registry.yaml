@@ -561,7 +561,7 @@ accepted_sample_registry:
         - square_hero_product_image
         - secretless_runtime_route
         - accepted_candidate
-        - memory_written
+        - codex_knowledge_memory_written
       acceptance_summary:
         prompt_subject_match: pass
         complete_full_bottle_visible: pass
@@ -580,5 +580,16 @@ accepted_sample_registry:
         approved_by: Codex commander visual review
         approval_statement_ref: reports/runtime_to_review_v1/secretless_serum_attempt_018_accepted_candidate_record_20260606.json
         approval_record_ref: reports/runtime_to_review_v1/secretless_serum_attempt_018_final_evidence_seal_20260606.json
+      memory_effects:
+        codex_knowledge_memory_written: true
+        codex_knowledge_memory_id: codex-knowledge-ed261a74438b43059178c4e12e09a16a
+        codex_knowledge_memory_receipt_ref: reports/memory_write_receipts/secretless_serum_attempt_018_codex_knowledge_memory_write_receipt_20260606.json
+        ail_dailynote_write_adapter_preflight: true
+        daily_note_write_allowed: false
+        vcptoolbox_dailynote_write_called: false
+        project_dailynote_writer_performed: false
+        vcp_long_term_memory_write_allowed: false
+        project_memory_write_allowed: false
+        additional_memory_write_performed_after_codex_receipt: false
       write_to_memory_allowed: false
       daily_note_write_allowed: false

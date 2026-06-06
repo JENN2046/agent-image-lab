@@ -1,3 +1,51 @@
+## Current Handoff Update - v7_34 Full Code Surface Hardening Closeout 2026-06-06
+
+```text
+phase: v7_34_full_code_surface_hardening_closeout
+status: completed_validated_local_docs_schema_validator_hardening
+repository: A:\agent-image-lab\agent-image-lab-v0.2
+branch: master
+source_review_observed_remote_head: 7e21d7da645407d50c4c9623cc29943445d7d6de
+prior_local_reconciliation_commit: 4af8f2ae0241454afd8b3b8c3aa7ea8a99193b12
+goal: Harden Pro review warnings into layer-specific memory fields, VCP broker proof checklist, native Doubao role boundary, DailyNote schema plan, and validator coverage.
+completed:
+  - added docs/v7_34_full_code_surface_hardening_closeout.md
+  - updated memory_policy/memory_architecture.md with attempt-018 memory layer split
+  - updated accepted sample and DailyNote adapter schemas with memory_effects and strict-schema plan
+  - updated attempt-018 accepted sample registry/source evidence and ecosystem receipt with layer-specific fields
+  - updated final closeout local state to distinguish pushed remote head from unpushed local reconciliation/hardening
+  - tightened scripts/validate_v7_32_accepted_sample_registry_update.js for v7_34 checks
+  - repaired scripts/validate_v14_212_six_month_goal_prompt_to_artifact_completion_audit.js so later accepted samples do not fail an exact-six historical count
+boundary_checks:
+  - runtime_execution_performed: false
+  - provider_contact_performed: false
+  - plugin_call_performed: false
+  - api_call_performed: false
+  - image_generation_performed: false
+  - DailyNoteWrite_called: false
+  - VCP_memory_write_performed: false
+  - additional_Codex_memory_write_performed: false
+  - external_repository_modification_performed: false
+  - secret_env_config_read_performed: false
+  - production_candidate_registry_write_performed: false
+  - push_tag_release_deploy_performed: false
+validation_completed:
+  - node --check scripts\validate_v7_32_accepted_sample_registry_update.js: passed
+  - node scripts\validate_v7_32_accepted_sample_registry_update.js: passed, 104 checks
+  - npm run validate:ail-dailynote-write-adapter: passed, 34 checks
+  - node --check scripts\validate_v14_212_six_month_goal_prompt_to_artifact_completion_audit.js: passed
+  - node scripts\validate_v14_212_six_month_goal_prompt_to_artifact_completion_audit.js: passed, 67 checks
+  - node scripts\validate_validation_manifest.js: passed
+  - npm run validate:smoke: passed, 33 checks
+  - npm run validate:mvp: passed, 16 checks
+  - node scripts\validate_agent_board_state.js: passed
+  - git diff --check: passed with CRLF normalization warnings only
+  - git diff --cached --check: passed, no staged files
+next_safe_action: exact-file local commit only if the user explicitly asks; push remains unauthorized unless separately requested.
+```
+
+---
+
 ## Current Handoff Update - v7_33 Post-Push Closeout Surface Reconciliation 2026-06-06
 
 ```text

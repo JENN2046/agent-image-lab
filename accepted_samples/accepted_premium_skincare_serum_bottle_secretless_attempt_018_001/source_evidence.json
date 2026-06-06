@@ -32,6 +32,34 @@
     "mime": "image/jpeg",
     "bytes": 134026
   },
+  "recoverability": {
+    "workspace_local_verified": true,
+    "portable_after_clone": false,
+    "needs_external_artifact_restore": true,
+    "artifact_locator_scope": "project_relative_runs",
+    "image_files_committed_to_git": false,
+    "artifact_recoverability_is_not_vcp_runtime_integration": true
+  },
+  "memory_effects": {
+    "codex_knowledge_memory_written": true,
+    "codex_knowledge_memory_id": "codex-knowledge-ed261a74438b43059178c4e12e09a16a",
+    "codex_knowledge_memory_receipt_ref": "reports/memory_write_receipts/secretless_serum_attempt_018_codex_knowledge_memory_write_receipt_20260606.json",
+    "ail_dailynote_write_adapter_preflight": true,
+    "vcptoolbox_dailynote_write_called": false,
+    "daily_note_write_allowed": false,
+    "vcp_long_term_memory_write_allowed": false,
+    "project_memory_write_allowed": false,
+    "project_daily_note_writer_performed": false,
+    "additional_memory_write_performed_after_codex_receipt": false
+  },
+  "broker_boundary": {
+    "native_doubao_image_role": "local_A5_guarded_provider_plugin_not_secretless_delegate",
+    "secretless_delegate_owner": "VCPToolBox",
+    "provider_secret_owner": "VCPToolBox",
+    "authorization_header_owner": "VCPToolBox",
+    "vcp_broker_source_proof_required_before_preferred_channel": true,
+    "ail_vcptoolbox_patch_script_status": "migration_bootstrap_only"
+  },
   "side_effects": {
     "provider_contact_performed_by_this_apply": false,
     "plugin_call_performed_by_this_apply": false,

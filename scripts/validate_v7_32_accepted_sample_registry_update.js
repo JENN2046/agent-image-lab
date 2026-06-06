@@ -6,6 +6,7 @@ const { createRecoverabilityCore } = require("./lib/artifact_recoverability_core
 const root = path.resolve(__dirname, "..");
 const recoverability = createRecoverabilityCore(root);
 const registryPath = "accepted_samples/accepted_sample_registry.yaml";
+const v734HardeningDocPath = "docs/v7_34_full_code_surface_hardening_closeout.md";
 const allowedCategoryFiles = [
   "accepted_samples/categories/product_still_life.yaml",
   "accepted_samples/categories/fashion_lifestyle_still_life.yaml",
@@ -256,12 +257,97 @@ check("serum_attempt_018_product_sample_memory_written_receipt_consistent", () =
   serumSourceEvidence.side_effects.Codex_knowledge_memory_write_performed === true &&
   serumSourceEvidence.side_effects.Codex_knowledge_memory_id === "codex-knowledge-ed261a74438b43059178c4e12e09a16a"
 );
+check("serum_attempt_018_product_sample_memory_tag_split", () =>
+  serumBlock.includes("- codex_knowledge_memory_written") &&
+  !serumBlock.includes("\n        - memory_written")
+);
+check("serum_attempt_018_product_sample_memory_effects_split", () =>
+  serumBlock.includes("memory_effects:") &&
+  serumBlock.includes("codex_knowledge_memory_written: true") &&
+  serumBlock.includes("codex_knowledge_memory_id: codex-knowledge-ed261a74438b43059178c4e12e09a16a") &&
+  serumBlock.includes("ail_dailynote_write_adapter_preflight: true") &&
+  serumBlock.includes("daily_note_write_allowed: false") &&
+  serumBlock.includes("vcptoolbox_dailynote_write_called: false") &&
+  serumBlock.includes("project_dailynote_writer_performed: false") &&
+  serumBlock.includes("vcp_long_term_memory_write_allowed: false") &&
+  serumBlock.includes("project_memory_write_allowed: false") &&
+  serumBlock.includes("additional_memory_write_performed_after_codex_receipt: false")
+);
+check("serum_attempt_018_source_evidence_memory_effects_split", () =>
+  serumSourceEvidence.memory_effects?.codex_knowledge_memory_written === true &&
+  serumSourceEvidence.memory_effects?.codex_knowledge_memory_id === "codex-knowledge-ed261a74438b43059178c4e12e09a16a" &&
+  serumSourceEvidence.memory_effects?.ail_dailynote_write_adapter_preflight === true &&
+  serumSourceEvidence.memory_effects?.vcptoolbox_dailynote_write_called === false &&
+  serumSourceEvidence.memory_effects?.daily_note_write_allowed === false &&
+  serumSourceEvidence.memory_effects?.vcp_long_term_memory_write_allowed === false &&
+  serumSourceEvidence.memory_effects?.project_memory_write_allowed === false &&
+  serumSourceEvidence.memory_effects?.project_daily_note_writer_performed === false &&
+  serumSourceEvidence.memory_effects?.additional_memory_write_performed_after_codex_receipt === false
+);
 check("serum_attempt_018_product_sample_no_daily_note_project_writer", () =>
   serumSourceEvidence.side_effects.project_DailyNote_writer_performed === false &&
   serumSourceEvidence.side_effects.project_DailyNote_writer_blocker.includes("no exact non-secret callable DailyNote writer target")
 );
+check("serum_attempt_018_source_evidence_recoverability_recorded", () =>
+  serumSourceEvidence.recoverability?.workspace_local_verified === true &&
+  serumSourceEvidence.recoverability?.portable_after_clone === false &&
+  serumSourceEvidence.recoverability?.needs_external_artifact_restore === true &&
+  serumSourceEvidence.recoverability?.artifact_locator_scope === "project_relative_runs" &&
+  serumSourceEvidence.recoverability?.image_files_committed_to_git === false &&
+  serumSourceEvidence.recoverability?.artifact_recoverability_is_not_vcp_runtime_integration === true
+);
+check("serum_attempt_018_broker_boundary_recorded", () =>
+  serumSourceEvidence.broker_boundary?.native_doubao_image_role === "local_A5_guarded_provider_plugin_not_secretless_delegate" &&
+  serumSourceEvidence.broker_boundary?.secretless_delegate_owner === "VCPToolBox" &&
+  serumSourceEvidence.broker_boundary?.provider_secret_owner === "VCPToolBox" &&
+  serumSourceEvidence.broker_boundary?.authorization_header_owner === "VCPToolBox" &&
+  serumSourceEvidence.broker_boundary?.vcp_broker_source_proof_required_before_preferred_channel === true &&
+  serumSourceEvidence.broker_boundary?.ail_vcptoolbox_patch_script_status === "migration_bootstrap_only"
+);
 check("serum_attempt_018_product_sample_registry_no_memory_authorization", () => serumBlock.includes("write_to_memory_allowed: false"));
 check("serum_attempt_018_product_sample_registry_no_daily_note_authorization", () => serumBlock.includes("daily_note_write_allowed: false"));
+check("v7_34_hardening_doc_exists", () => fileExists(v734HardeningDocPath));
+check("v7_34_hardening_doc_records_memory_layer_split", () =>
+  fileContains(v734HardeningDocPath, "Codex_knowledge_memory") &&
+  fileContains(v734HardeningDocPath, "VCPToolBox_DailyNoteWrite") &&
+  fileContains(v734HardeningDocPath, "exact_execution_packet_required_for_side_effects")
+);
+check("v7_34_hardening_doc_records_broker_proof", () =>
+  fileContains(v734HardeningDocPath, "VCP_broker_proof_required") &&
+  fileContains(v734HardeningDocPath, "provider secret and Authorization header stay inside VCPToolBox") &&
+  fileContains(v734HardeningDocPath, "migration/bootstrap tooling only")
+);
+check("memory_architecture_attempt_018_layer_split_recorded", () =>
+  fileContains("memory_policy/memory_architecture.md", "Attempt-018 记忆层级拆分") &&
+  fileContains("memory_policy/memory_architecture.md", "Codex workspace knowledge memory") &&
+  fileContains("memory_policy/memory_architecture.md", "vcp_root_dailynote")
+);
+check("accepted_sample_schema_memory_effects_contract", () =>
+  fileContains("schemas/accepted_sample_registry.schema.yaml", "provider_type: codex_session_image | direct_api | project_plugin") &&
+  fileContains("schemas/accepted_sample_registry.schema.yaml", "memory_effects:") &&
+  fileContains("schemas/accepted_sample_registry.schema.yaml", "native_doubao_image_is_not_secretless_delegate: true")
+);
+check("dailynote_adapter_strict_schema_plan_recorded", () =>
+  fileContains("schemas/ail_dailynote_write_adapter.schema.yaml", "future_strict_json_schema_plan:") &&
+  fileContains("schemas/ail_dailynote_write_adapter.schema.yaml", "ail_dailynote_write_envelope.v1.schema.json") &&
+  fileContains("schemas/ail_dailynote_write_adapter.schema.yaml", "canonical_target_hash_match required after future write")
+);
+check("ecosystem_receipt_v7_34_hardening_recorded", () => {
+  const receipt = readJson("reports/runtime_to_review_v1/secretless_serum_attempt_018_complete_ecosystem_loop_receipt_20260606.json");
+  return receipt.post_push_static_review_hardening?.phase === "v7_34_full_code_surface_hardening_closeout" &&
+    receipt.post_push_static_review_hardening?.memory_layer_distinction?.Codex_knowledge_memory_written === true &&
+    receipt.post_push_static_review_hardening?.memory_layer_distinction?.VCPToolBox_DailyNoteWrite_called === false &&
+    receipt.post_push_static_review_hardening?.broker_boundary?.native_doubao_image_is_secretless_delegate === false &&
+    receipt.post_push_static_review_hardening?.future_execution_boundary?.exact_execution_packet_required_for_side_effects === true &&
+    receipt.post_push_static_review_hardening?.new_runtime_execution_performed === false &&
+    receipt.post_push_static_review_hardening?.new_image_generation_performed === false &&
+    receipt.post_push_static_review_hardening?.additional_memory_write_performed === false;
+});
+check("final_closeout_v7_34_hardening_recorded", () =>
+  fileContains("reports/runtime_to_review_v1/agent_image_lab_final_project_closeout_20260606.md", "v7_34_full_code_surface_hardening_closeout") &&
+  fileContains("reports/runtime_to_review_v1/agent_image_lab_final_project_closeout_20260606.md", "native_doubao_image_is_secretless_delegate: false") &&
+  fileContains("reports/runtime_to_review_v1/agent_image_lab_final_project_closeout_20260606.md", "local_master_has_unpushed_reconciliation_or_hardening_work: true")
+);
 check("legacy_wallet_sample_present", () => sampleBlocks.has("accepted_product_still_life_tennis_wallet_001"));
 check("legacy_rattan_bag_samples_present", () => requiredSampleIds.slice(1, 5).every((id) => sampleBlocks.has(id)));
 check("watermark_false_history_preserved", () => registry.includes("watermark_requested: false"));
@@ -292,7 +378,7 @@ check("validate_mvp_includes_accepted_samples_validator", () =>
 const summary = {
   passed,
   validator: "validate_accepted_sample_registry_metadata",
-  version: "v3",
+  version: "v4",
   phase: "accepted_samples metadata registry",
   check_count: results.length,
   failed_count: results.filter((result) => !result.passed).length,

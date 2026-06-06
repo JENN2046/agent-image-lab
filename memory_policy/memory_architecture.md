@@ -42,6 +42,35 @@ TopicMemo 用于完整话题回看，适合复盘长项目，不适合日常轻�
 → DailyNote 写入或拒绝
 ```
 
+## Attempt-018 记忆层级拆分
+
+`attempt-018` 的完整生态闭环写入的是 Codex workspace knowledge memory，不是
+项目 DailyNote，也不是 VCPToolBox `DailyNoteWrite` 插件结果。
+
+```yaml
+attempt_018_memory_layers:
+  Codex_knowledge_memory:
+    written: true
+    receipt_ref: reports/memory_write_receipts/secretless_serum_attempt_018_codex_knowledge_memory_write_receipt_20260606.json
+    layer_identity: Codex workspace knowledge
+  AIL_DailyNoteWrite_adapter:
+    preflight_available: true
+    writes_now: false
+    calls_VCPToolBox_DailyNoteWrite_now: false
+  VCPToolBox_DailyNoteWrite:
+    called: false
+  project_DailyNote_writer:
+    performed: false
+  VCP_long_term_memory:
+    written_by_attempt_018_closeout: false
+```
+
+Any future real DailyNote / VCP long-term memory write must use a separate exact
+one-write execution packet, prove the canonical `vcp_root_dailynote` root, and
+verify the target file hash after plugin execution. A prior Codex knowledge
+memory receipt is supporting context only; it is not authorization to write
+DailyNote or VCP long-term memory.
+
 ## Memory Router 状态
 
 MVP 阶段不单独实现 Memory Router。记忆初筛由 Archivist_Agent 与 Gatekeeper_Agent 共同承担：

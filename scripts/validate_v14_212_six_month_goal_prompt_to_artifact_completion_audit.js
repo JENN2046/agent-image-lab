@@ -24,7 +24,7 @@ const files = {
   validationLog: ".agent_board/VALIDATION_LOG.md",
 };
 
-const expectedCurrentRecoverableAcceptedSampleCount = 6;
+const minimumCurrentRecoverableAcceptedSampleCount = 6;
 
 const expectedCriteria = [
   "three_full_recoverable_accepted_samples",
@@ -109,7 +109,7 @@ function evaluate(input, evidence) {
     statuses.get("authorized_real_vcp_pilot") === "not_started_blocked_by_a5" &&
     statuses.get("v1_visual_production_control_layer_closeout") === "not_met";
   const countsOk =
-    counts.recoverable_accepted_sample_count === expectedCurrentRecoverableAcceptedSampleCount &&
+    counts.recoverable_accepted_sample_count >= minimumCurrentRecoverableAcceptedSampleCount &&
     counts.blocked_third_candidate_count === 0 &&
     counts.remaining_full_recoverable_sample_gap === 0 &&
     counts.success_criteria_count === expectedCriteria.length &&
@@ -118,7 +118,7 @@ function evaluate(input, evidence) {
     counts.not_met_count === 2 &&
     counts.blocked_by_a5_count === 1;
   const evidenceOk =
-    evidence.registryRecoverableCount === expectedCurrentRecoverableAcceptedSampleCount &&
+    evidence.registryRecoverableCount >= minimumCurrentRecoverableAcceptedSampleCount &&
     evidence.dashboardRecoverableCount === 3 &&
     evidence.dashboardHardAcceptanceMet === true &&
     evidence.dashboardGap === 0 &&
@@ -212,8 +212,8 @@ const currentSurfaces = [
 const baseEval = evaluate(fixture, evidence);
 addResult("prompt_to_artifact_audit_evaluation_passes", baseEval.passed, JSON.stringify(baseEval));
 addResult(
-  "registry_recoverable_count_is_six",
-  evidence.registryRecoverableCount === expectedCurrentRecoverableAcceptedSampleCount
+  "registry_recoverable_count_at_least_six",
+  evidence.registryRecoverableCount >= minimumCurrentRecoverableAcceptedSampleCount
 );
 addResult("dashboard_three_sample_goal_met_local_only", evidence.dashboardHardAcceptanceMet === true && evidence.dashboardGap === 0);
 addResult("lamp_candidate_human_approval_registered", evidence.lampRegistryApproved === true && evidence.lampAcceptedSampleRegistered === true);
