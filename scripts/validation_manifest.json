@@ -1552,6 +1552,34 @@
       ]
     },
     {
+      "id": "runtime_to_review_secretless_serum_attempt_018_final_evidence_seal",
+      "command": "npm run validate:runtime-to-review-secretless-serum-attempt-018-final-evidence-seal",
+      "script": "scripts/validate_runtime_to_review_v1_secretless_serum_attempt_018_final_evidence_seal.js",
+      "tier": "targeted",
+      "domain": "runtime_to_review",
+      "status": "active",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "reports/runtime_to_review_v1/secretless_serum_attempt_018_final_evidence_seal_20260606.json",
+        "reports/runtime_to_review_v1/secretless_serum_attempt_018_accepted_candidate_record_20260606.json",
+        "reports/runtime_to_review_v1/secretless_serum_attempt_018_review_session_draft_20260606.json",
+        "reports/runtime_to_review_v1/secretless_serum_attempt_018_image_case_draft_20260606.json",
+        "reports/runtime_to_review_v1/secretless_serum_attempt_018_memory_delta_draft_20260606.yaml",
+        "reports/runtime_to_review_v1/secretless_serum_attempt_018_final_validation_checklist_20260606.md",
+        "reports/runtime_to_review_v1/secretless_serum_attempt_018.lock.json",
+        "reports/runtime_to_review_v1/secretless_serum_live_probe_receipt_20260603_attempt_018.json",
+        "reports/runtime_to_review_v1/secretless_serum_live_probe_artifact_record_20260603_attempt_018.json",
+        "reports/runtime_to_review_v1/secretless_serum_attempt_018_quality_channel_review_20260604.json",
+        "runs/real_generation/runtime_to_review_v1_guarded_live_probe_serum_bottle_secretless_attempt_018/3551a0c1-029b-4631-aa5b-45a900e1718a.jpg",
+        "scripts/validate_runtime_to_review_v1_secretless_serum_attempt_018_final_evidence_seal.js",
+        "package.json",
+        "scripts/validation_manifest.json"
+      ],
+      "required_for": [
+        "runtime_to_review_secretless_serum_attempt_018_final_evidence_seal"
+      ]
+    },
+    {
       "id": "runtime_to_review_static_real_entry_viewer",
       "command": "npm run validate:runtime-to-review-static-real-entry-viewer",
       "script": "scripts/validate_runtime_to_review_v1_static_real_entry_viewer.js",
