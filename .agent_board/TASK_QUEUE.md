@@ -924,12 +924,14 @@ done:
     evidence: contract doc, golden example, and validator added; validator passed 23 checks with can_execute_now=false and all real asset_archive read/load/write flags false.
   - task: prepare exact-read preview probe gate
     evidence: gate doc, golden example, and validator added; selected 3 concrete repo-relative preview refs and validator passed 24 checks with can_execute_now=false.
+  - task: prepare exact-read activation package
+    evidence: activation package, golden example, and validator added; validator passed 25 checks with can_execute_now=false and read_execution_decision_state=undecided.
 in_progress:
   - none
 blocked:
   - none
 remaining:
-  - optional exact-read activation package only if explicitly requested
+  - explicit yes/no decision: "Execute the exact-read preview probe now for the 3 selected refs, yes or no?"
   - optional exact-file local commit only if explicitly requested
   - push/tag/release/deploy remain unauthorized
 ```

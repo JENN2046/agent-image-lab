@@ -1,0 +1,133 @@
+{
+  "asset_archive_exact_read_activation_package": {
+    "phase": "review_console_asset_archive_exact_read_activation_package",
+    "package_status": "prepared_execute_decision_required",
+    "package_type": "exact_read_activation_package",
+    "source_probe_gate_ref": "docs/review_console_asset_archive_exact_read_preview_probe_gate.md",
+    "source_probe_gate_fixture_ref": "tests/schema_examples/ASSET_ARCHIVE_EXACT_READ_PREVIEW_PROBE_GATE.example.json",
+    "fixture_ref": "tests/schema_examples/ASSET_ARCHIVE_EXACT_READ_ACTIVATION_PACKAGE.example.json",
+    "execution_mode": "activation_package_no_read_execution",
+    "can_execute_now": false,
+    "actual_read_execution_authorized_now": false,
+    "read_execution_decision_state": "undecided",
+    "explicit_execute_question": "Execute the exact-read preview probe now for the 3 selected refs, yes or no?",
+    "selected_preview_refs": [
+      {
+        "activation_ref_id": "activation-exact-read-accepted-french-summer-rattan-bucket-bag-001",
+        "preview_probe_id": "exact-read-preview-probe-accepted-french-summer-rattan-bucket-bag-001",
+        "lane": "accepted",
+        "sample_id": "accepted_french_summer_rattan_bucket_bag_001",
+        "manifest_ref": "asset_archive/accepted_samples/accepted_french_summer_rattan_bucket_bag_001/manifest.json",
+        "preview_ref": "asset_archive/accepted_samples/accepted_french_summer_rattan_bucket_bag_001/preview.webp",
+        "css_skin_fallback": "product_still_life",
+        "planned_operation_if_activated": "read_manifest_then_load_preview_once",
+        "existence_verified_now": false,
+        "manifest_read_performed": false,
+        "preview_binary_read_performed": false,
+        "preview_loaded_or_rendered": false
+      },
+      {
+        "activation_ref_id": "activation-exact-read-accepted-product-still-life-tennis-wallet-001",
+        "preview_probe_id": "exact-read-preview-probe-accepted-product-still-life-tennis-wallet-001",
+        "lane": "accepted",
+        "sample_id": "accepted_product_still_life_tennis_wallet_001",
+        "manifest_ref": "asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/manifest.json",
+        "preview_ref": "asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/preview.webp",
+        "css_skin_fallback": "studio_dashboard",
+        "planned_operation_if_activated": "read_manifest_then_load_preview_once",
+        "existence_verified_now": false,
+        "manifest_read_performed": false,
+        "preview_binary_read_performed": false,
+        "preview_loaded_or_rendered": false
+      },
+      {
+        "activation_ref_id": "activation-exact-read-failure-french-summer-rattan-bag-v7-29-001",
+        "preview_probe_id": "exact-read-preview-probe-failure-french-summer-rattan-bag-v7-29-001",
+        "lane": "failure",
+        "sample_id": "failure_french_summer_rattan_bag_v7_29_001",
+        "manifest_ref": "asset_archive/failure_samples/failure_french_summer_rattan_bag_v7_29_001/manifest.json",
+        "preview_ref": "asset_archive/failure_samples/failure_french_summer_rattan_bag_v7_29_001/preview.webp",
+        "css_skin_fallback": "evidence_blocker",
+        "planned_operation_if_activated": "read_manifest_then_load_preview_once",
+        "existence_verified_now": false,
+        "manifest_read_performed": false,
+        "preview_binary_read_performed": false,
+        "preview_loaded_or_rendered": false
+      }
+    ],
+    "future_execution_budget": {
+      "max_manifest_reads": 3,
+      "max_preview_loads": 3,
+      "max_directory_listings": 0,
+      "max_original_asset_reads": 0,
+      "max_writes_before_receipt": 0,
+      "retry_allowed": false,
+      "fallback_to_glob_allowed": false,
+      "provider_plugin_api_allowed": false,
+      "allowed_operation_if_activated": "read_selected_manifest_and_preview_refs_once"
+    },
+    "receipt_plan": {
+      "receipt_required_if_executed": true,
+      "receipt_write_authorized_now": false,
+      "planned_receipt_ref": "reports/review_console_asset_archive_readonly_preview_probe/asset_archive_exact_read_preview_probe_receipt_20260607.json",
+      "receipt_must_record": [
+        "selected_refs_repeated_exactly",
+        "files_read",
+        "missing_refs",
+        "preview_load_outcome",
+        "guard_flags",
+        "fallback_decision"
+      ]
+    },
+    "rollback_plan": {
+      "no_persistent_state_before_execution": true,
+      "if_executed_drop_in_memory_preview_overlay": true,
+      "restore_css_skin_only_preview_display_fallback": true,
+      "no_asset_archive_cleanup_needed_because_no_writes_allowed": true
+    },
+    "stop_conditions": {
+      "stop_on_fourth_ref": true,
+      "stop_on_directory_listing_need": true,
+      "stop_on_broad_asset_archive_glob": true,
+      "stop_on_original_asset_read_need": true,
+      "stop_on_runs_source_image_read_need": true,
+      "stop_on_write_need_before_receipt": true,
+      "stop_on_provider_plugin_api_need": true,
+      "stop_on_daily_note_or_vcp_memory_need": true,
+      "stop_on_production_candidate_write_need": true,
+      "stop_on_secret_or_absolute_path": true
+    },
+    "guard": {
+      "activation_package_only": true,
+      "read_only_intent": true,
+      "execute_decision_required": true,
+      "can_execute_now": false,
+      "actual_read_execution_authorized_now": false,
+      "real_asset_archive_read_performed": false,
+      "asset_archive_directory_listing_performed": false,
+      "asset_archive_manifest_read_performed": false,
+      "asset_archive_preview_binary_read_performed": false,
+      "asset_archive_original_binary_read_performed": false,
+      "preview_loaded_or_rendered": false,
+      "preview_creation_or_copy_performed": false,
+      "fetch_performed": false,
+      "file_write_performed": false,
+      "source_image_binary_read_performed": false,
+      "hash_extraction_performed": false,
+      "dimensions_extraction_performed": false,
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "image_generation_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "accepted_samples_write_performed": false,
+      "failure_samples_write_performed": false,
+      "production_candidate_write_performed": false,
+      "real_manifest_read_performed": false,
+      "real_vcpchat_read_performed": false,
+      "real_vcptoolbox_read_performed": false,
+      "push_tag_release_deploy_performed": false
+    }
+  }
+}

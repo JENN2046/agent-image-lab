@@ -250,6 +250,46 @@ boundary_checks_addendum:
 recommended_next: exact-read activation package only if the owner explicitly requests the actual read-only probe.
 ```
 
+### Checkpoint Addendum - Asset Archive Exact-read Activation Package 2026-06-07
+
+```text
+status: completed_validated_local_activation_package
+result: ASSET_ARCHIVE_EXACT_READ_ACTIVATION_PACKAGE_PREPARED
+summary: Prepared a non-executing activation package for the exact-read preview probe. The package repeats the three sealed repo-relative refs, defines future receipt and rollback requirements, and keeps can_execute_now=false with read_execution_decision_state=undecided.
+changed_refs:
+  - docs/review_console_asset_archive_exact_read_activation_package.md
+  - tests/schema_examples/ASSET_ARCHIVE_EXACT_READ_ACTIVATION_PACKAGE.example.json
+  - scripts/validate_asset_archive_exact_read_activation_package.js
+  - scripts/validators/review_console/validate_asset_archive_exact_read_activation_package.js
+selected_preview_refs:
+  - asset_archive/accepted_samples/accepted_french_summer_rattan_bucket_bag_001/preview.webp
+  - asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/preview.webp
+  - asset_archive/failure_samples/failure_french_summer_rattan_bag_v7_29_001/preview.webp
+validation_run_addendum:
+  - node --check scripts/validate_asset_archive_exact_read_activation_package.js: passed
+  - node --check scripts/validators/review_console/validate_asset_archive_exact_read_activation_package.js: passed
+  - node scripts/validate_asset_archive_exact_read_activation_package.js: passed, 25 checks
+boundary_checks_addendum:
+  can_execute_now: false
+  actual_read_execution_authorized_now: false
+  read_execution_decision_state: undecided
+  real_asset_archive_read_performed: false
+  asset_archive_directory_listing_performed: false
+  asset_archive_manifest_read_performed: false
+  asset_archive_preview_binary_read_performed: false
+  preview_loaded_or_rendered: false
+  file_write_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  production_candidate_write_performed: false
+  push_tag_release_deploy_performed: false
+recommended_next: explicit yes/no execution decision for the exact-read preview probe; ambiguous continuation must not execute it.
+```
+
 ---
 
 ## Checkpoint - v7_34 Full Code Surface Hardening Closeout 2026-06-06

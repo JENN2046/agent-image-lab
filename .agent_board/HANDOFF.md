@@ -196,6 +196,36 @@ not_performed_addendum:
 next_safe_action: exact-read activation package only if explicitly requested; current probe gate is not executable.
 ```
 
+### Handoff Addendum - Asset Archive Exact-read Activation Package 2026-06-07
+
+```text
+status: completed_validated_local_activation_package
+completed_addendum:
+  - Added docs/review_console_asset_archive_exact_read_activation_package.md as a prepared_execute_decision_required activation package.
+  - Added tests/schema_examples/ASSET_ARCHIVE_EXACT_READ_ACTIVATION_PACKAGE.example.json with the same three refs as the sealed probe gate.
+  - Added scripts/validate_asset_archive_exact_read_activation_package.js and scripts/validators/review_console/validate_asset_archive_exact_read_activation_package.js.
+  - Kept can_execute_now=false, actual_read_execution_authorized_now=false, and read_execution_decision_state=undecided.
+selected_preview_refs:
+  - asset_archive/accepted_samples/accepted_french_summer_rattan_bucket_bag_001/preview.webp
+  - asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/preview.webp
+  - asset_archive/failure_samples/failure_french_summer_rattan_bag_v7_29_001/preview.webp
+validation_addendum:
+  - node --check scripts/validate_asset_archive_exact_read_activation_package.js passed.
+  - node --check scripts/validators/review_console/validate_asset_archive_exact_read_activation_package.js passed.
+  - node scripts/validate_asset_archive_exact_read_activation_package.js passed, 25 checks.
+not_performed_addendum:
+  - no real asset_archive read
+  - no directory listing
+  - no manifest read
+  - no preview image load or binary read
+  - no file copy, write, hash extraction, or dimension extraction
+  - no provider/plugin/API/image generation
+  - no DailyNote or VCP memory write
+  - no production candidate write
+  - no commit, push, tag, release, or deploy
+next_safe_action: obtain an explicit yes/no answer to "Execute the exact-read preview probe now for the 3 selected refs, yes or no?" before any read.
+```
+
 ---
 
 ## Current Handoff Update - v7_34 Full Code Surface Hardening Closeout 2026-06-06

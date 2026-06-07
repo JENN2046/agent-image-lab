@@ -297,6 +297,56 @@ boundary_checks:
 next_safe_task: activation package only if the user explicitly wants the future exact read; current gate remains non-executing.
 ```
 
+### Current Run State Addendum - Asset Archive Exact-read Activation Package 2026-06-07
+
+```text
+phase: review_console_asset_archive_exact_read_activation_package
+status: completed_validated_local_activation_package
+lane: Green local docs/schema/validator only
+goal: Prepare an exact-read activation package while keeping the actual read execution decision undecided and unauthorized.
+branch: master
+changed_refs:
+  - docs/review_console_asset_archive_exact_read_activation_package.md
+  - tests/schema_examples/ASSET_ARCHIVE_EXACT_READ_ACTIVATION_PACKAGE.example.json
+  - scripts/validate_asset_archive_exact_read_activation_package.js
+  - scripts/validators/review_console/validate_asset_archive_exact_read_activation_package.js
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+selected_preview_refs:
+  - asset_archive/accepted_samples/accepted_french_summer_rattan_bucket_bag_001/preview.webp
+  - asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/preview.webp
+  - asset_archive/failure_samples/failure_french_summer_rattan_bag_v7_29_001/preview.webp
+result:
+  - Added a prepared_execute_decision_required activation package.
+  - Cross-checked activation refs against the sealed exact-read probe gate fixture.
+  - Defined future receipt path, rollback plan, stop conditions, and the exact explicit question required before any read.
+validation:
+  - node --check scripts/validate_asset_archive_exact_read_activation_package.js passed.
+  - node --check scripts/validators/review_console/validate_asset_archive_exact_read_activation_package.js passed.
+  - node scripts/validate_asset_archive_exact_read_activation_package.js passed, 25 checks.
+boundary_checks:
+  can_execute_now: false
+  actual_read_execution_authorized_now: false
+  read_execution_decision_state: undecided
+  real_asset_archive_read_performed: false
+  asset_archive_directory_listing_performed: false
+  asset_archive_manifest_read_performed: false
+  asset_archive_preview_binary_read_performed: false
+  preview_loaded_or_rendered: false
+  file_write_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  production_candidate_write_performed: false
+  push_tag_release_deploy_performed: false
+next_safe_task: ask and answer exactly "Execute the exact-read preview probe now for the 3 selected refs, yes or no?"; do not execute on ambiguous continuation.
+```
+
 ---
 
 ## Current Run State - v7_34 Full Code Surface Hardening Closeout 2026-06-06
