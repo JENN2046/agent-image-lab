@@ -902,6 +902,33 @@ current_state:
   immutable_evidence_rule: do_not_move_or_rename_validator_manifest_refs
 ```
 
+## Queue - Preview Display Static Proxy Layer 2026-06-07
+
+```text
+done:
+  - task: inspect Review Console static prototype and dirty target files
+    evidence: AGENTS/overlay/.agent_board intake completed; target dirty files were read before editing.
+  - task: implement preview_display static proxy state
+    evidence: draft output now includes preview_display_state with css_skin_only and all asset/archive/runtime guard fields false.
+  - task: implement four thumbnail and stage skins
+    evidence: studio_dashboard, product_still_life, editorial_portrait, and evidence_blocker skin classes render in the sample rail and stage.
+  - task: verify static boundary and UI behavior
+    evidence: node --check passed; npm run validate:review-console-static passed; Browser localhost check verified four skins and filler skin switching without asset_archive read.
+  - task: add preview_display_state schema/example validator
+    evidence: REVIEW_CONSOLE_PREVIEW_DISPLAY_STATE fixture plus validate_review_console_preview_display_state passed 55 checks and is now chained into validate:review-console-static.
+  - task: visual review preview_display skins
+    evidence: Browser desktop and 390px mobile audits passed for four skin classes and main preview stage; no preview_display CSS polish needed.
+  - task: remove mobile summary/evidence horizontal scroll
+    evidence: styles.css mobile override wraps reviewer summary cards and converts evidence rows to labeled mobile cards; Browser 390px and 1280px audits passed.
+in_progress:
+  - none
+blocked:
+  - none
+remaining:
+  - optional exact-file local commit only if explicitly requested
+  - push/tag/release/deploy remain unauthorized
+```
+
 Historical entries below are retained for audit and may contain consumed or superseded next actions.
 
 ---

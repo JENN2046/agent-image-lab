@@ -7,20 +7,167 @@
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <main class="review-shell" aria-label="ImageLab Review Console 静态原型">
-      <header class="topbar">
-        <div>
-          <p class="eyebrow">Agent Image Lab / Review Console</p>
-          <h1>Photo Studio OS 审片台</h1>
+    <main class="review-shell evidence-mode-triage" aria-label="ImageLab Review Console 静态原型">
+      <header class="topbar app-topbar">
+        <div class="brand-lockup">
+          <button class="icon-button" type="button" data-sample-drawer-toggle aria-label="打开样片抽屉">&#9776;</button>
+          <div>
+            <p class="eyebrow">Agent Image Lab</p>
+            <h1>审片台</h1>
+          </div>
+          <span class="review-spine-badge">审片脊柱 v1.1</span>
         </div>
-        <div class="session-meta" aria-label="会话状态">
+        <div class="sample-switcher" aria-label="样片导航">
+          <button class="icon-button" type="button" data-spine-sample-prev aria-label="上一张样片">&#8249;</button>
+          <strong id="spineTopSampleLabel">样片 12 / 48</strong>
+          <button class="icon-button" type="button" data-spine-sample-next aria-label="下一张样片">&#8250;</button>
+        </div>
+        <div class="session-meta topbar-actions" aria-label="会话状态">
+          <span class="status-dot"></span>
+          <span>审片中</span>
           <a class="lock-pill" href="./readonly_operator_console.html" aria-label="打开只读审片操作台">只读审片操作台</a>
           <span id="sessionId">session-photo-studio-os-001</span>
-          <span id="sessionStatus" class="status-pill">human_reviewing</span>
-          <span class="lock-pill">Dry-run only</span>
+          <span id="sessionStatus" class="status-pill">人工审片中</span>
+          <span class="lock-pill">静态草案</span>
+          <span hidden>Dry-run only</span>
         </div>
       </header>
 
+      <section class="reviewer-sticky-summary" aria-label="审片人当前决策摘要">
+        <div class="sticky-summary-title">
+          <p class="eyebrow">决策摘要</p>
+          <h2>审片人状态</h2>
+        </div>
+        <div id="reviewerStickySummary" class="sticky-summary-grid"></div>
+      </section>
+
+      <section class="review-spine-shell" aria-label="Review Spine v1.1 审片台框架">
+        <section class="review-spine-main">
+          <aside class="spine-panel sample-rail" id="spineSampleDrawer" aria-labelledby="spineSampleRailTitle">
+            <div class="spine-panel-head">
+              <h2 id="spineSampleRailTitle">样片轨</h2>
+              <button class="icon-button" type="button" data-sample-drawer-toggle aria-label="折叠样片抽屉">&#171;</button>
+            </div>
+            <label class="spine-search">
+              <span>搜索样片</span>
+              <input id="spineSampleSearch" type="search" autocomplete="off" placeholder="按编号、版本或状态搜索" />
+            </label>
+            <div id="spineSampleRail" class="spine-sample-list" aria-label="样片列表"></div>
+            <button type="button" class="spine-wide-button">查看全部样片</button>
+          </aside>
+
+          <section class="spine-panel image-stage-panel" aria-labelledby="spineImageStageTitle">
+            <div class="spine-panel-head">
+              <h2 id="spineImageStageTitle">图像舞台（主视图）</h2>
+              <button class="icon-button" type="button" data-stage-fullscreen aria-label="全屏查看">&#9974;</button>
+            </div>
+            <div class="stage-toolbar" aria-label="图像审片工具栏">
+              <div class="stage-tool-group">
+                <button type="button" class="icon-button" aria-label="比较视图">&#9638;</button>
+                <button type="button" class="icon-button" aria-label="网格视图">&#9639;</button>
+                <button type="button" class="icon-button" aria-label="矩阵视图">&#8862;</button>
+              </div>
+              <div class="stage-tool-group">
+                <button type="button" class="icon-button" aria-label="缩小">&#8722;</button>
+                <button type="button" class="icon-button" aria-label="放大">+</button>
+              </div>
+              <div class="stage-counter">
+                <button type="button" class="icon-button" data-spine-sample-prev aria-label="上一张">&#8249;</button>
+                <strong id="spineStageCounter">12 / 48</strong>
+                <button type="button" class="icon-button" data-spine-sample-next aria-label="下一张">&#8250;</button>
+              </div>
+              <div class="stage-tool-group annotate-tools">
+                <button type="button" class="icon-button" aria-label="圆形标注">&#9675;</button>
+                <button type="button" class="icon-button" aria-label="矩形标注">&#9633;</button>
+                <button type="button" class="icon-button" aria-label="画笔">&#9998;</button>
+                <button type="button" class="icon-button" aria-label="文字标注">T</button>
+                <button type="button" class="icon-button" aria-label="更多">&#8942;</button>
+              </div>
+            </div>
+            <div class="spine-image-stage" aria-label="当前审片图像舞台">
+              <div class="stage-art">
+                <span class="stage-orbit orbit-one"></span>
+                <span class="stage-orbit orbit-two"></span>
+                <span class="stage-light light-one"></span>
+              </div>
+            </div>
+            <div id="spineStageMeta" class="spine-stage-meta" aria-label="样片元数据"></div>
+          </section>
+
+          <aside class="spine-panel decision-spine-panel" aria-labelledby="spineDecisionTitle">
+            <div class="spine-panel-head">
+              <h2 id="spineDecisionTitle">决策脊柱（常驻）</h2>
+              <span class="spine-signal"></span>
+            </div>
+            <div id="spineDecisionSpine" class="spine-decision-stack" aria-label="持久决策脊柱"></div>
+          </aside>
+        </section>
+
+        <section id="spineTriageBar" class="spine-triage-bar" aria-label="证据分诊栏"></section>
+
+        <section class="spine-evidence-layout">
+          <section class="spine-panel evidence-workbench-panel" aria-labelledby="spineEvidenceWorkbenchTitle">
+            <div class="spine-panel-head">
+              <h2 id="spineEvidenceWorkbenchTitle">证据工作台</h2>
+              <div class="spine-tab-strip" aria-label="证据视图">
+                <button type="button" class="is-active">全部证据</button>
+                <button type="button">审片会话</button>
+                <button type="button">图像案例</button>
+                <button type="button">记忆增量</button>
+                <button type="button">校验详情</button>
+              </div>
+            </div>
+            <div id="spineWorkbenchSummary" class="spine-workbench-summary" aria-label="证据筛选摘要"></div>
+            <div class="spine-evidence-table" role="table" aria-label="证据工作台表格">
+              <div class="spine-evidence-header" role="row">
+                <span role="columnheader">风险级别</span>
+                <span role="columnheader">来源</span>
+                <span role="columnheader">证据类型</span>
+                <span role="columnheader">关联对象</span>
+                <span role="columnheader">状态</span>
+              </div>
+              <div id="spineEvidenceRows" class="spine-evidence-rows" role="rowgroup"></div>
+            </div>
+          </section>
+
+          <aside class="spine-panel cross-reference-panel" aria-labelledby="spineCrossReferenceTitle">
+            <div class="spine-panel-head">
+              <h2 id="spineCrossReferenceTitle">关联证据抽屉</h2>
+              <button class="icon-button" type="button" data-cross-reference-close aria-label="收起交叉引用">&#171;</button>
+            </div>
+            <div id="spineCrossReferenceDrawer" class="spine-cross-reference" aria-label="上下文交叉引用"></div>
+          </aside>
+        </section>
+
+        <section class="mobile-priority-flow" aria-label="移动端主任务流">
+          <span><strong>1. 看图</strong> 图像舞台</span>
+          <span><strong>2. 定夺</strong> 风险动作</span>
+          <span><strong>3. 查证</strong> 证据工作台</span>
+          <span><strong>返回</strong> 回到图像</span>
+        </section>
+
+        <section id="spineActionSheet" class="spine-action-sheet" aria-label="风险动作确认">
+          <div class="spine-sheet-panel">
+            <div class="spine-panel-head">
+              <h2>确认高风险动作</h2>
+              <button class="icon-button" type="button" data-action-sheet-close aria-label="关闭">&#215;</button>
+            </div>
+            <p id="spineActionSheetText">真实工作流中，高风险动作必须填写原因并二次确认。</p>
+            <label>
+              原因
+              <textarea id="spineActionReason" rows="4">当前为静态草案，只记录 UI 状态，不执行生产动作。</textarea>
+            </label>
+            <label class="spine-check-row">
+              <input id="spineActionConfirmCheck" type="checkbox" />
+              <span>我已知晓风险，继续确认</span>
+            </label>
+            <button type="button" class="risk-action high" data-confirm-high-risk>确认高风险</button>
+            <button type="button" data-action-sheet-close>取消</button>
+          </div>
+        </section>
+      </section>
+
+      <section class="legacy-render-surfaces" aria-label="Legacy static validation render surfaces">
       <section class="workspace-grid">
         <aside class="panel preview-panel" aria-labelledby="previewTitle">
           <div class="panel-head">
@@ -113,11 +260,20 @@
             </div>
           </div>
 
+          <section class="current-decision-strip" aria-labelledby="currentDecisionTitle">
+            <div>
+              <p class="eyebrow">Current Decision</p>
+              <h3 id="currentDecisionTitle">当前决策状态</h3>
+            </div>
+            <div id="currentDecisionSummary" class="decision-summary" aria-label="当前决策摘要"></div>
+            <div id="decisionFeedback" class="decision-feedback" role="status" aria-live="polite"></div>
+          </section>
+
           <div class="action-group" aria-label="资产审批动作">
-            <button type="button" data-archive="accepted">批准入库</button>
-            <button type="button" data-archive="candidate" class="is-active">标记候选</button>
-            <button type="button" data-archive="rejected">拒绝入库</button>
-            <button type="button" data-archive="draft">继续迭代</button>
+            <button type="button" data-archive="accepted" class="action-success" aria-pressed="false">批准入库</button>
+            <button type="button" data-archive="candidate" class="action-primary is-active" aria-pressed="true">标记候选</button>
+            <button type="button" data-archive="rejected" class="action-danger" aria-pressed="false">拒绝入库</button>
+            <button type="button" data-archive="draft" class="action-secondary" aria-pressed="false">继续迭代</button>
           </div>
 
           <section class="memory-preview" aria-label="中文记忆预览">
@@ -141,14 +297,29 @@
           </section>
 
           <div class="action-group" aria-label="记忆审批动作">
-            <button type="button" data-memory="approved">批准记忆</button>
-            <button type="button" data-memory="rejected">拒绝记忆</button>
-            <button type="button" data-memory="pending" class="is-active">要求修改</button>
+            <button type="button" data-memory="approved" class="action-success" aria-pressed="false">批准记忆</button>
+            <button type="button" data-memory="rejected" class="action-danger" aria-pressed="false">拒绝记忆</button>
+            <button type="button" data-memory="pending" class="action-primary is-active" aria-pressed="true">要求修改</button>
           </div>
         </aside>
       </section>
 
       <section class="bottom-grid">
+        <section class="panel evidence-focus-panel" aria-labelledby="evidenceFocusTitle">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">Evidence Focus</p>
+              <h2 id="evidenceFocusTitle">证据焦点</h2>
+            </div>
+            <div class="action-group evidence-mode-actions" aria-label="证据显示模式">
+              <button type="button" data-evidence-mode="triage" class="is-active" aria-pressed="true">关键证据</button>
+              <button type="button" data-evidence-mode="full" aria-pressed="false">完整证据</button>
+            </div>
+          </div>
+          <div id="evidenceFocusSummary" class="evidence-focus-summary" aria-label="证据焦点摘要"></div>
+          <div id="evidenceFocusBody" class="evidence-focus-body" aria-label="证据焦点内容"></div>
+        </section>
+
         <section class="panel iteration-panel" aria-labelledby="iterationTitle">
           <div class="panel-head">
             <div>
@@ -511,6 +682,7 @@
           </section>
           <textarea id="draftOutput" rows="14" readonly></textarea>
         </section>
+      </section>
       </section>
     </main>
 

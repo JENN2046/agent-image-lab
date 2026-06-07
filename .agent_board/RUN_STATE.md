@@ -36,6 +36,177 @@ validation: agent_board validator passed; validation manifest passed; smoke pass
 next_safe_task: create exact-file local commit "docs: sync final closeout to f4849f3"; push remains separately gated.
 ```
 
+### Current Run State - Preview Display Static Proxy Layer 2026-06-07
+
+```text
+phase: review_console_preview_display_static_proxy_layer
+status: completed_validated_local
+lane: Green static prototype only
+goal: Implement a preview_display static proxy layer and four sample thumbnail skins without touching real asset_archive.
+branch: master
+changed_refs:
+  - review_console/static_prototype/app.js
+  - review_console/static_prototype/styles.css
+result:
+  - Added an in-memory preview_display_state with css_skin_only rendering, selected skin state, and static guard fields.
+  - Added four thumbnail/stage skins: studio_dashboard, product_still_life, editorial_portrait, evidence_blocker.
+  - Wired filler sample skin clicks to change only the current preview skin, not the underlying review_session currentVersionId.
+validation:
+  - node --check review_console/static_prototype/app.js passed.
+  - npm run validate:review-console-static passed.
+  - git diff --check passed with existing CRLF warnings only.
+  - Browser localhost check verified preview_display_state, four skin classes, skin switching, desktop layout, and mobile 390px layout.
+boundary_checks:
+  asset_archive_read_performed: false
+  asset_archive_ui_read_performed: false
+  preview_loaded_or_rendered: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  push_tag_release_deploy_performed: false
+next_safe_task: review the static proxy layer visually, then decide whether to add a schema/example validator for preview_display_state.
+```
+
+### Current Run State Addendum - Preview Display State Validator 2026-06-07
+
+```text
+phase: review_console_preview_display_state_validator
+status: completed_validated_local
+lane: Green local schema/example validator only
+goal: Add a narrow schema/example validator for preview_display_state so the static proxy can behave as a stable contract surface.
+branch: master
+changed_refs:
+  - tests/schema_examples/REVIEW_CONSOLE_PREVIEW_DISPLAY_STATE.example.json
+  - scripts/validate_review_console_preview_display_state.js
+  - scripts/validators/review_console/validate_review_console_preview_display_state.js
+  - package.json
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+result:
+  - Added a golden static example for preview_display_state with four representative css_skin_only samples.
+  - Added a Review Console validator that checks fixture shape, four skin ids/classes, app tokens, CSS selectors, false guard fields, and negative cases.
+  - Added npm script validate:review-console-preview-display and chained it into validate:review-console-static.
+validation:
+  - node scripts\validate_review_console_preview_display_state.js passed, 55 checks.
+  - node --check scripts\validate_review_console_preview_display_state.js passed.
+  - node --check scripts\validators\review_console\validate_review_console_preview_display_state.js passed.
+  - npm run validate:review-console-preview-display passed.
+  - npm run validate:review-console-static passed.
+  - npm run validate:validation-manifest passed.
+  - git diff --check for the validator/package fixture allowlist passed with CRLF normalization warning only.
+boundary_checks:
+  asset_archive_read_performed: false
+  asset_archive_ui_read_performed: false
+  preview_loaded_or_rendered: false
+  preview_creation_or_copy_performed: false
+  source_image_binary_read_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  real_manifest_read_performed: false
+  real_vcpchat_read_performed: false
+  real_vcptoolbox_read_performed: false
+  push_tag_release_deploy_performed: false
+next_safe_task: optional visual review of the static proxy layer; any real asset_archive integration remains separately gated.
+```
+
+### Current Run State Addendum - Preview Display Visual Review 2026-06-07
+
+```text
+phase: review_console_preview_display_visual_review
+status: completed_validated_no_code_change
+lane: Green local browser visual review only
+goal: Perform a small visual review pass on the preview_display static proxy skins and polish only if concrete skin-specific issues appear.
+branch: master
+changed_refs:
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+result:
+  - Reviewed preview_display in the local Browser at http://127.0.0.1:4173/.
+  - Desktop review verified four skin classes, stage chip text, metadata aspect ratio, and body-level horizontal overflow false during skin switches.
+  - Mobile 390px review verified the main preview stage has no body-level horizontal overflow and the four skin classes remain present.
+  - No skin-specific CSS polish was applied because the observed preview_display skins were usable and stable.
+observed_non_scope_issue:
+  - Mobile top decision summary and lower evidence table retain existing horizontal scroll behavior outside the preview_display skin scope.
+validation:
+  - Browser desktop visual audit passed for studio_dashboard, product_still_life, editorial_portrait, evidence_blocker.
+  - Browser mobile 390px visual audit passed for the main preview stage.
+  - node --check review_console/static_prototype/app.js passed.
+  - npm run validate:review-console-preview-display passed.
+  - npm run validate:review-console-static passed.
+  - git diff --check passed with CRLF normalization warnings only.
+boundary_checks:
+  asset_archive_read_performed: false
+  asset_archive_ui_read_performed: false
+  preview_loaded_or_rendered: false
+  preview_creation_or_copy_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  real_manifest_read_performed: false
+  real_vcpchat_read_performed: false
+  real_vcptoolbox_read_performed: false
+  push_tag_release_deploy_performed: false
+next_safe_task: decide whether to address the broader mobile decision-summary/evidence-table scroll behavior as a separate layout task.
+```
+
+### Current Run State Addendum - Mobile Summary Evidence Layout Pass 2026-06-07
+
+```text
+phase: review_console_mobile_summary_evidence_layout_pass
+status: completed_validated_local
+lane: Green static prototype CSS only
+goal: Resolve the mobile horizontal-scroll behavior in the non-preview_display top decision summary and evidence table.
+branch: master
+changed_refs:
+  - review_console/static_prototype/styles.css
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+result:
+  - Added a narrow mobile override that turns sticky reviewer summary cards into a wrapped grid instead of an internal horizontal scroller.
+  - Changed the mobile evidence table into stacked card-like rows with per-cell labels and no horizontal table scroll.
+  - Made the reviewer summary non-sticky on mobile to avoid topbar overlap.
+  - Preserved desktop summary and evidence table behavior at an explicit 1280px validation viewport.
+validation:
+  - Browser 390px audit: body horizontal overflow false; sticky summary grid overflow false; 6 summary cards visible; evidence table overflow false; evidence rows overflow false.
+  - Browser 1280px audit: desktop sticky summary remains 6-column grid; evidence table header and rows remain table layout; body horizontal overflow false.
+  - node --check review_console/static_prototype/app.js passed.
+  - npm run validate:review-console-preview-display passed.
+  - npm run validate:review-console-static passed.
+  - git diff --check -- review_console/static_prototype/styles.css passed with CRLF normalization warning only.
+boundary_checks:
+  asset_archive_read_performed: false
+  asset_archive_ui_read_performed: false
+  preview_loaded_or_rendered: false
+  preview_creation_or_copy_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  real_manifest_read_performed: false
+  real_vcpchat_read_performed: false
+  real_vcptoolbox_read_performed: false
+  push_tag_release_deploy_performed: false
+next_safe_task: optional final browser smoke only if more visual surfaces are changed; otherwise the static proxy and mobile layout pass are complete locally.
+```
+
 ---
 
 ## Current Run State - v7_34 Full Code Surface Hardening Closeout 2026-06-06

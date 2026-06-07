@@ -44,6 +44,142 @@ validation_completed:
 recommended_next_phase: exact_file_local_commit_with_message_docs_sync_final_closeout_to_f4849f3_then_stop_no_push
 ```
 
+### Checkpoint Addendum - Preview Display Static Proxy Layer 2026-06-07
+
+```text
+status: completed_validated_local
+result: PREVIEW_DISPLAY_STATIC_PROXY_LAYER_RENDERED_WITH_FOUR_CSS_SKINS
+summary: Implemented preview_display as an in-memory static display proxy for the Review Console. The proxy maps review_session image_versions plus local filler samples into css_skin_only thumbnails and stage skins, preserving the no asset_archive read boundary.
+changed_refs:
+  - review_console/static_prototype/app.js
+  - review_console/static_prototype/styles.css
+validation_run_addendum:
+  - node --check review_console/static_prototype/app.js: passed
+  - npm run validate:review-console-static: passed
+  - git diff --check: passed with CRLF warnings only
+  - forbidden API / true side-effect scan: no hits
+  - Browser localhost check: preview_display_state present; four skin classes present; filler click switches selectedSkinId while selectedVersionId remains v2; desktop and 390px mobile layout have no stage meta or sample text overflow after trim
+boundary_checks_addendum:
+  asset_archive_read_performed: false
+  asset_archive_ui_read_performed: false
+  preview_loaded_or_rendered: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  push_tag_release_deploy_performed: false
+recommended_next: add a narrow preview_display_state schema/example validator if the proxy should become a contract surface.
+```
+
+### Checkpoint Addendum - Preview Display State Validator 2026-06-07
+
+```text
+status: completed_validated_local
+result: PREVIEW_DISPLAY_STATE_CONTRACT_VALIDATOR_ADDED
+summary: Added a narrow preview_display_state schema/example validator for the Review Console static proxy layer. The validator checks the fixture contract, four css_skin_only preview skins, app wiring tokens, CSS selector coverage, no asset_archive/read/preview side-effect claims, and in-memory negative cases for missing skin ids and accidental asset render modes.
+changed_refs:
+  - tests/schema_examples/REVIEW_CONSOLE_PREVIEW_DISPLAY_STATE.example.json
+  - scripts/validate_review_console_preview_display_state.js
+  - scripts/validators/review_console/validate_review_console_preview_display_state.js
+  - package.json
+validation_run_addendum:
+  - node scripts\validate_review_console_preview_display_state.js: passed, 55 checks
+  - node --check scripts\validate_review_console_preview_display_state.js: passed
+  - node --check scripts\validators\review_console\validate_review_console_preview_display_state.js: passed
+  - npm run validate:review-console-preview-display: passed
+  - npm run validate:review-console-static: passed
+  - npm run validate:validation-manifest: passed
+  - git diff --check for validator/package fixture allowlist: passed with CRLF normalization warning only
+boundary_checks_addendum:
+  asset_archive_read_performed: false
+  asset_archive_ui_read_performed: false
+  preview_loaded_or_rendered: false
+  preview_creation_or_copy_performed: false
+  source_image_binary_read_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  real_manifest_read_performed: false
+  real_vcpchat_read_performed: false
+  real_vcptoolbox_read_performed: false
+  push_tag_release_deploy_performed: false
+recommended_next: optional visual review of the static proxy layer; real asset_archive integration remains separately gated.
+```
+
+### Checkpoint Addendum - Preview Display Visual Review 2026-06-07
+
+```text
+status: completed_validated_no_code_change
+result: PREVIEW_DISPLAY_VISUAL_REVIEW_PASSED_NO_SKIN_POLISH_NEEDED
+summary: Ran a Browser visual audit for the preview_display static proxy skins on desktop and 390px mobile. All four skins switched correctly in the main preview stage with matching chip labels and metadata. No preview_display-specific overlap or body-level horizontal overflow was found, so no CSS polish was applied.
+changed_refs:
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+validation_run_addendum:
+  - Browser desktop audit: four skins switched and stage state updated.
+  - Browser mobile 390px audit: main preview stage stable, no body-level horizontal overflow.
+  - node --check review_console/static_prototype/app.js: passed
+  - npm run validate:review-console-preview-display: passed
+  - npm run validate:review-console-static: passed
+  - git diff --check: passed with CRLF normalization warnings only
+boundary_checks_addendum:
+  asset_archive_read_performed: false
+  asset_archive_ui_read_performed: false
+  preview_loaded_or_rendered: false
+  preview_creation_or_copy_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  real_manifest_read_performed: false
+  real_vcpchat_read_performed: false
+  real_vcptoolbox_read_performed: false
+  push_tag_release_deploy_performed: false
+recommended_next: optional separate mobile layout pass for non-preview_display decision summary and evidence table scroll behavior.
+```
+
+### Checkpoint Addendum - Mobile Summary Evidence Layout Pass 2026-06-07
+
+```text
+status: completed_validated_local
+result: MOBILE_SUMMARY_AND_EVIDENCE_SCROLL_REMOVED
+summary: Added a narrow responsive CSS override so the mobile reviewer summary wraps into a compact grid and the evidence table becomes stacked labeled rows. This removes the internal horizontal scroll behavior observed at 390px without changing the desktop evidence table layout.
+changed_refs:
+  - review_console/static_prototype/styles.css
+validation_run_addendum:
+  - Browser 390px audit: sticky summary grid overflow false; evidence table overflow false; evidence rows overflow false; body horizontal overflow false.
+  - Browser 1280px audit: desktop sticky summary remains grid; evidence table remains tabular; body horizontal overflow false.
+  - node --check review_console/static_prototype/app.js: passed
+  - npm run validate:review-console-preview-display: passed
+  - npm run validate:review-console-static: passed
+  - git diff --check -- review_console/static_prototype/styles.css: passed with CRLF normalization warning only
+boundary_checks_addendum:
+  asset_archive_read_performed: false
+  asset_archive_ui_read_performed: false
+  preview_loaded_or_rendered: false
+  preview_creation_or_copy_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  real_manifest_read_performed: false
+  real_vcpchat_read_performed: false
+  real_vcptoolbox_read_performed: false
+  push_tag_release_deploy_performed: false
+recommended_next: no further preview_display or mobile summary/evidence task required before local handoff.
+```
+
 ---
 
 ## Checkpoint - v7_34 Full Code Surface Hardening Closeout 2026-06-06

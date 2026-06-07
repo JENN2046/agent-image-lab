@@ -41,6 +41,107 @@ validation_completed:
 next_safe_action: exact-file stage only the five allowed files, then create the local commit "docs: sync final closeout to f4849f3"; push remains separately gated.
 ```
 
+### Handoff Addendum - Preview Display Static Proxy Layer 2026-06-07
+
+```text
+status: completed_validated_local
+completed_addendum:
+  - Implemented Review Console preview_display_state as a static, in-memory proxy layer.
+  - Added four reusable CSS-only sample skins for thumbnails and the main stage: studio_dashboard, product_still_life, editorial_portrait, evidence_blocker.
+  - Added filler skin click behavior that changes only the current preview skin and does not alter the underlying review_session currentVersionId unless a real image_version row is selected.
+  - Included preview_display_state in draft output with asset_archive/read/runtime/provider/plugin/API/image/DailyNote/VCP memory/write guard fields false.
+validation_addendum:
+  - node --check review_console/static_prototype/app.js passed.
+  - npm run validate:review-console-static passed.
+  - git diff --check passed with existing CRLF warnings only.
+  - Browser check on http://127.0.0.1:4173/ verified four skin classes, skin switching, and desktop/mobile layout bounds.
+not_performed_addendum:
+  - no real asset_archive read
+  - no preview image load or copy
+  - no provider/plugin/API/image generation
+  - no DailyNote or VCP memory write
+  - no file write outside project root
+  - no commit, push, tag, release, or deploy
+next_safe_action: review visually, then optionally add a dedicated schema/example validator for preview_display_state.
+```
+
+### Handoff Addendum - Preview Display State Validator 2026-06-07
+
+```text
+status: completed_validated_local
+completed_addendum:
+  - Added tests/schema_examples/REVIEW_CONSOLE_PREVIEW_DISPLAY_STATE.example.json as the golden static preview_display_state example.
+  - Added scripts/validators/review_console/validate_review_console_preview_display_state.js with positive contract checks and negative cases.
+  - Added scripts/validate_review_console_preview_display_state.js as the top-level wrapper.
+  - Added validate:review-console-preview-display and chained it into validate:review-console-static.
+validation_addendum:
+  - node scripts\validate_review_console_preview_display_state.js passed, 55 checks.
+  - node --check scripts\validate_review_console_preview_display_state.js passed.
+  - node --check scripts\validators\review_console\validate_review_console_preview_display_state.js passed.
+  - npm run validate:review-console-preview-display passed.
+  - npm run validate:review-console-static passed.
+  - npm run validate:validation-manifest passed.
+  - git diff --check for the validator/package fixture allowlist passed with CRLF normalization warning only.
+not_performed_addendum:
+  - no real asset_archive read
+  - no preview image load or copy
+  - no provider/plugin/API/image generation
+  - no DailyNote or VCP memory write
+  - no real manifest/VCPChat/VCPToolBox read
+  - no commit, push, tag, release, or deploy
+next_safe_action: optional visual review of the static proxy layer; any real asset_archive integration remains separately gated.
+```
+
+### Handoff Addendum - Preview Display Visual Review 2026-06-07
+
+```text
+status: completed_validated_no_code_change
+completed_addendum:
+  - Performed Browser visual review of preview_display static proxy skins at http://127.0.0.1:4173/.
+  - Verified desktop skin switches for studio_dashboard, product_still_life, editorial_portrait, and evidence_blocker.
+  - Verified 390px mobile main preview stage stability and no body-level horizontal overflow.
+  - Applied no CSS/code changes because no concrete preview_display skin issue appeared.
+validation_addendum:
+  - node --check review_console/static_prototype/app.js passed.
+  - npm run validate:review-console-preview-display passed.
+  - npm run validate:review-console-static passed.
+  - git diff --check passed with CRLF normalization warnings only.
+not_performed_addendum:
+  - no real asset_archive read
+  - no preview image load or copy
+  - no provider/plugin/API/image generation
+  - no DailyNote or VCP memory write
+  - no real manifest/VCPChat/VCPToolBox read
+  - no commit, push, tag, release, or deploy
+next_safe_action: optional separate mobile layout pass for the existing non-preview_display decision-summary/evidence-table scroll behavior.
+```
+
+### Handoff Addendum - Mobile Summary Evidence Layout Pass 2026-06-07
+
+```text
+status: completed_validated_local
+completed_addendum:
+  - Added mobile responsive CSS for the reviewer sticky summary to wrap as grid cards instead of horizontal scrolling.
+  - Converted mobile evidence table rows into stacked card-like rows with per-cell labels.
+  - Made the mobile reviewer summary relative instead of sticky to avoid overlap with the topbar.
+  - Verified desktop layout still uses the original summary grid and tabular evidence rows.
+validation_addendum:
+  - Browser 390px audit passed: no body overflow, no summary grid overflow, no evidence table/row overflow.
+  - Browser 1280px audit passed: desktop layout preserved.
+  - node --check review_console/static_prototype/app.js passed.
+  - npm run validate:review-console-preview-display passed.
+  - npm run validate:review-console-static passed.
+  - git diff --check -- review_console/static_prototype/styles.css passed with CRLF normalization warning only.
+not_performed_addendum:
+  - no real asset_archive read
+  - no preview image load or copy
+  - no provider/plugin/API/image generation
+  - no DailyNote or VCP memory write
+  - no real manifest/VCPChat/VCPToolBox read
+  - no commit, push, tag, release, or deploy
+next_safe_action: local implementation is complete; optional next action is exact-file commit only if explicitly requested.
+```
+
 ---
 
 ## Current Handoff Update - v7_34 Full Code Surface Hardening Closeout 2026-06-06
