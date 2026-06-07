@@ -3720,6 +3720,40 @@ function currentPreviewDisplay() {
     null;
 }
 
+function currentReviewTarget(currentPreview = currentPreviewDisplay()) {
+  const selectedVersion = state.image_versions.find((version) => version.version_id === currentPreview?.version_id);
+  const fallbackVersion = selectedVersion || currentVersion();
+  const usesAssetArchivePreview = previewDisplayUsesRealImage(currentPreview);
+  const sourceAssetRef = currentPreview?.source_asset_ref || fallbackVersion?.asset_ref || "static_proxy/no_asset_archive_read";
+  const outputAssetRef = usesAssetArchivePreview
+    ? currentPreview.source_preview_ref || currentPreview.stage_image_ref || sourceAssetRef
+    : sourceAssetRef;
+  const sampleId = currentPreview?.version_id || fallbackVersion?.version_id || state.currentVersionId;
+  const targetSource = usesAssetArchivePreview
+    ? "selected_asset_archive_preview"
+    : (selectedVersion ? "review_session_image_version" : "preview_display_static_sample");
+  return {
+    sample_id: sampleId,
+    version_id: sampleId,
+    preview_id: currentPreview?.preview_id || null,
+    review_session_current_version_id: state.currentVersionId,
+    sample_number: currentPreview?.sample_number || null,
+    label: currentPreview?.label || null,
+    variant: currentPreview?.variant || fallbackVersion?.label || null,
+    score: currentPreview?.score ?? fallbackVersion?.score ?? null,
+    source_asset_ref: sourceAssetRef,
+    output_asset_ref: outputAssetRef,
+    source_preview_ref: currentPreview?.source_preview_ref || null,
+    source_original_ref: currentPreview?.source_original_ref || null,
+    stage_image_ref: currentPreview?.stage_image_ref || null,
+    render_mode: currentPreview?.render_mode || "review_session_image_version",
+    image_source_mode: currentPreview?.image_source_mode || "review_session_image_version",
+    decision_target_source: targetSource,
+    uses_asset_archive_preview: usesAssetArchivePreview,
+    current_version_id_aligned: sampleId === state.currentVersionId
+  };
+}
+
 function previewDisplayUsesRealImage(preview) {
   return preview?.render_mode === "asset_archive_preview_image" &&
     typeof previewDisplayStageImageRef(preview) === "string" &&
@@ -3828,6 +3862,7 @@ function previewOriginalRenderState(currentPreview = currentPreviewDisplay()) {
 
 function previewDisplayProxyState() {
   const current = currentPreviewDisplay();
+  const reviewTarget = currentReviewTarget(current);
   const realRenderActive = assetArchiveRealPreviewRenderActivation.enabled;
   const realPreviewRecords = previewDisplayRealPreviewRecords();
   return {
@@ -3838,8 +3873,12 @@ function previewDisplayProxyState() {
     original_render_activation_ref: assetArchiveRealPreviewRenderActivation.original_render_phase,
     render_gate_ref: assetArchiveRealPreviewRenderActivation.gate_ref,
     real_image_source_policy: assetArchiveRealPreviewRenderActivation.real_image_source_policy,
-    selected_version_id: state.currentVersionId,
+    selected_version_id: reviewTarget.version_id,
+    review_session_current_version_id: state.currentVersionId,
     selected_preview_id: current?.preview_id || null,
+    selected_sample_number: reviewTarget.sample_number,
+    selected_asset_ref: reviewTarget.output_asset_ref,
+    selected_decision_target_source: reviewTarget.decision_target_source,
     selected_skin_id: current?.skin_id || null,
     available_skin_ids: previewDisplaySkins.map((skin) => skin.skin_id),
     thumbnail_skin_count: previewDisplaySkins.length,
@@ -5032,6 +5071,7 @@ function memoryWriteMode(memoryApproval) {
 }
 
 function buildReviewSession(memoryApproval, humanTotal) {
+  const reviewTarget = currentReviewTarget();
   return {
     session_id: state.session_id,
     task_id: state.task_id,
@@ -5040,6 +5080,8 @@ function buildReviewSession(memoryApproval, humanTotal) {
     status: state.status,
     image_versions: state.image_versions,
     current_version_id: state.currentVersionId,
+    current_preview_id: reviewTarget.preview_id,
+    current_review_target: reviewTarget,
     compare_version_id: state.compareVersionId,
     ai_review: {
       ...state.ai_review,
@@ -5094,13 +5136,15 @@ function buildReviewSession(memoryApproval, humanTotal) {
 
 function buildImageCase(humanTotal) {
   const approvedAsset = state.assetStatus === "accepted";
+  const reviewTarget = currentReviewTarget();
   return {
     case_id: state.case_id,
     project: state.project,
     task_id: state.task_id,
     image_type: "Photo Studio OS dashboard",
     input_assets: mock.image_case_seed.input_assets,
-    output_assets: [currentVersion().asset_ref],
+    output_assets: [reviewTarget.output_asset_ref],
+    selected_review_target: reviewTarget,
     plugin_used: null,
     prompt_package_id: mock.image_case_seed.prompt_package_id,
     review_ids: mock.image_case_seed.review_ids,
@@ -5126,6 +5170,7 @@ function buildImageCase(humanTotal) {
 
 function buildMemoryDelta(memoryApproval) {
   const writeMode = memoryWriteMode(memoryApproval);
+  const reviewTarget = currentReviewTarget();
   return {
     delta_id: "delta-photo-studio-os-review-001",
     task_id: state.task_id,
@@ -5156,7 +5201,8 @@ function buildMemoryDelta(memoryApproval) {
       prompt_en: null,
       plugin_name: null,
       model_name: null,
-      file_ref: currentVersion().asset_ref
+      file_ref: reviewTarget.output_asset_ref,
+      selected_review_target: reviewTarget
     },
     tags: state.memory_preview.tags,
     visibility: "audit",
@@ -5214,6 +5260,7 @@ function renderDraft() {
   const memoryApproval = approvalPayload();
   const humanTotal = totalFrom(state.humanScores);
   const realRenderActive = assetArchiveRealPreviewRenderActivation.enabled;
+  const decisionTarget = currentReviewTarget();
   const previewBoundaryState = previewRenderBoundaryState();
   const previewOriginalState = previewOriginalRenderState();
   const draft = {
@@ -5303,7 +5350,16 @@ function renderDraft() {
     preview_original_render_state: previewOriginalState,
     evidence_progressive_disclosure_state: evidenceFocusState(),
     current_decision_state: {
-      sample_id: currentVersion()?.version_id || state.currentVersionId,
+      sample_id: decisionTarget.sample_id,
+      preview_id: decisionTarget.preview_id,
+      sample_number: decisionTarget.sample_number,
+      review_session_current_version_id: decisionTarget.review_session_current_version_id,
+      source_asset_ref: decisionTarget.source_asset_ref,
+      output_asset_ref: decisionTarget.output_asset_ref,
+      source_preview_ref: decisionTarget.source_preview_ref,
+      source_original_ref: decisionTarget.source_original_ref,
+      render_mode: decisionTarget.render_mode,
+      decision_target_source: decisionTarget.decision_target_source,
       asset_status: state.assetStatus,
       asset_status_cn: archiveStatusLabel(state.assetStatus),
       archive_action: state.approval.archive_action,

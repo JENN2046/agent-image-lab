@@ -11,8 +11,12 @@
     "original_render_activation_ref": "review_console_asset_archive_original_image_zoom_20260608",
     "render_gate_ref": "tests/schema_examples/ASSET_ARCHIVE_REAL_PREVIEW_RENDER_GATE.example.json",
     "real_image_source_policy": "tracked_asset_archive_preview_ref_required_for_clean_checkout_review",
-    "selected_version_id": "v2",
+    "selected_version_id": "accepted_french_summer_rattan_bucket_bag_001",
+    "review_session_current_version_id": "v2",
     "selected_preview_id": "preview-display-asset-archive-accepted-french-summer-rattan-bucket-bag-001",
+    "selected_sample_number": 21,
+    "selected_asset_ref": "asset_archive/accepted_samples/accepted_french_summer_rattan_bucket_bag_001/preview.webp",
+    "selected_decision_target_source": "selected_asset_archive_preview",
     "selected_skin_id": "product_still_life",
     "available_skin_ids": [
       "studio_dashboard",

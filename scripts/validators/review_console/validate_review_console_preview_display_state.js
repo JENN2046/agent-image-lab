@@ -230,8 +230,12 @@ function evaluateSnapshot(snapshot) {
     snapshot.real_image_source_policy === "tracked_asset_archive_preview_ref_required_for_clean_checkout_review";
 
   const selectionOk =
-    snapshot.selected_version_id === "v2" &&
+    snapshot.selected_version_id === "accepted_french_summer_rattan_bucket_bag_001" &&
+    snapshot.review_session_current_version_id === "v2" &&
     snapshot.selected_preview_id === "preview-display-asset-archive-accepted-french-summer-rattan-bucket-bag-001" &&
+    snapshot.selected_sample_number === 21 &&
+    snapshot.selected_asset_ref === selectedTrackedPreviewRefs[0] &&
+    snapshot.selected_decision_target_source === "selected_asset_archive_preview" &&
     snapshot.selected_skin_id === "product_still_life";
 
   const skinSetOk =
@@ -337,7 +341,18 @@ addResult("negative_case_fourth_real_preview_ref_fails", evaluateSnapshot(fourth
 for (const token of [
   "const previewDisplaySkins = [",
   "function previewDisplayProxyState()",
+  "function currentReviewTarget(",
   'draft_output_key: "preview_display_state"',
+  "const reviewTarget = currentReviewTarget(current)",
+  "const decisionTarget = currentReviewTarget()",
+  "selected_version_id: reviewTarget.version_id",
+  "review_session_current_version_id: state.currentVersionId",
+  "selected_asset_ref: reviewTarget.output_asset_ref",
+  "selected_decision_target_source: reviewTarget.decision_target_source",
+  "output_assets: [reviewTarget.output_asset_ref]",
+  "file_ref: reviewTarget.output_asset_ref",
+  "sample_id: decisionTarget.sample_id",
+  "decision_target_source: decisionTarget.decision_target_source",
   "review_console_static_preview_display_proxy_only",
   "review_session_image_versions_to_css_skin_proxy",
   "review_console_asset_archive_real_preview_render_activated",
@@ -361,6 +376,15 @@ for (const token of [
   "data-preview-skin-id"
 ]) {
   addResult(`app_token_${token}`, app.includes(token));
+}
+
+for (const token of [
+  "output_assets: [currentVersion().asset_ref]",
+  "file_ref: currentVersion().asset_ref",
+  "sample_id: currentVersion()?.version_id || state.currentVersionId",
+  "selected_version_id: state.currentVersionId"
+]) {
+  addResult(`app_forbids_stale_decision_token_${token}`, !app.includes(token));
 }
 
 for (const token of [
