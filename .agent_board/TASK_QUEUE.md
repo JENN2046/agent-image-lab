@@ -920,11 +920,16 @@ done:
     evidence: Browser desktop and 390px mobile audits passed for four skin classes and main preview stage; no preview_display CSS polish needed.
   - task: remove mobile summary/evidence horizontal scroll
     evidence: styles.css mobile override wraps reviewer summary cards and converts evidence rows to labeled mobile cards; Browser 390px and 1280px audits passed.
+  - task: draft asset_archive read-only preview adapter contract
+    evidence: contract doc, golden example, and validator added; validator passed 23 checks with can_execute_now=false and all real asset_archive read/load/write flags false.
+  - task: prepare exact-read preview probe gate
+    evidence: gate doc, golden example, and validator added; selected 3 concrete repo-relative preview refs and validator passed 24 checks with can_execute_now=false.
 in_progress:
   - none
 blocked:
   - none
 remaining:
+  - optional exact-read activation package only if explicitly requested
   - optional exact-file local commit only if explicitly requested
   - push/tag/release/deploy remain unauthorized
 ```

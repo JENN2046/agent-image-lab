@@ -207,6 +207,96 @@ boundary_checks:
 next_safe_task: optional final browser smoke only if more visual surfaces are changed; otherwise the static proxy and mobile layout pass are complete locally.
 ```
 
+### Current Run State Addendum - Asset Archive Read-only Preview Adapter Contract Draft 2026-06-07
+
+```text
+phase: review_console_asset_archive_readonly_preview_adapter_contract_draft
+status: completed_validated_local_contract_draft
+lane: Green local docs/schema/validator only
+goal: Draft the local contract for a future asset_archive read-only preview adapter without executing a real asset_archive read.
+branch: master
+changed_refs:
+  - docs/review_console_asset_archive_readonly_preview_adapter_contract.md
+  - tests/schema_examples/ASSET_ARCHIVE_READONLY_PREVIEW_ADAPTER_CONTRACT.example.json
+  - scripts/validate_asset_archive_readonly_preview_adapter_contract.js
+  - scripts/validators/review_console/validate_asset_archive_readonly_preview_adapter_contract.js
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+result:
+  - Added a draft-only contract for mapping repo-relative asset_archive preview refs into preview_display_state.
+  - Added a golden example with three placeholder preview records and future max_manifest_reads/max_preview_loads capped at 3.
+  - Added a narrow validator with negative cases for accidental manifest-read claims, preview-load claims, broad asset_archive globs, and non-placeholder preview refs.
+validation:
+  - node --check scripts/validate_asset_archive_readonly_preview_adapter_contract.js passed.
+  - node --check scripts/validators/review_console/validate_asset_archive_readonly_preview_adapter_contract.js passed.
+  - node scripts/validate_asset_archive_readonly_preview_adapter_contract.js passed, 23 checks.
+boundary_checks:
+  real_asset_archive_read_performed: false
+  asset_archive_manifest_read_performed: false
+  asset_archive_preview_binary_read_performed: false
+  preview_loaded_or_rendered: false
+  file_write_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  production_candidate_write_performed: false
+  push_tag_release_deploy_performed: false
+next_safe_task: if desired, prepare a separate exact-read probe gate for 1-3 concrete repo-relative preview refs; do not read real asset_archive until that gate is active.
+```
+
+### Current Run State Addendum - Asset Archive Exact-read Preview Probe Gate 2026-06-07
+
+```text
+phase: review_console_asset_archive_exact_read_preview_probe_gate
+status: completed_validated_local_gate_package
+lane: Green local docs/schema/validator only
+goal: Prepare an exact-read preview probe gate with 1-3 concrete repo-relative preview refs, without executing any real asset_archive read.
+branch: master
+changed_refs:
+  - docs/review_console_asset_archive_exact_read_preview_probe_gate.md
+  - tests/schema_examples/ASSET_ARCHIVE_EXACT_READ_PREVIEW_PROBE_GATE.example.json
+  - scripts/validate_asset_archive_exact_read_preview_probe_gate.js
+  - scripts/validators/review_console/validate_asset_archive_exact_read_preview_probe_gate.js
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+selected_preview_refs:
+  - asset_archive/accepted_samples/accepted_french_summer_rattan_bucket_bag_001/preview.webp
+  - asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/preview.webp
+  - asset_archive/failure_samples/failure_french_summer_rattan_bag_v7_29_001/preview.webp
+result:
+  - Added a prepared_not_authorized exact-read probe gate package.
+  - Capped a future probe at exactly the three selected preview refs, max_manifest_reads=3, and max_preview_loads=3.
+  - Added validator negative cases for can_execute_now drift, broad asset_archive refs, fourth ref expansion, preview-loaded claims, and original-asset refs.
+validation:
+  - node --check scripts/validate_asset_archive_exact_read_preview_probe_gate.js passed.
+  - node --check scripts/validators/review_console/validate_asset_archive_exact_read_preview_probe_gate.js passed.
+  - node scripts/validate_asset_archive_exact_read_preview_probe_gate.js passed, 24 checks.
+boundary_checks:
+  can_execute_now: false
+  real_asset_archive_read_performed: false
+  asset_archive_directory_listing_performed: false
+  asset_archive_manifest_read_performed: false
+  asset_archive_preview_binary_read_performed: false
+  preview_loaded_or_rendered: false
+  file_write_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  production_candidate_write_performed: false
+  push_tag_release_deploy_performed: false
+next_safe_task: activation package only if the user explicitly wants the future exact read; current gate remains non-executing.
+```
+
 ---
 
 ## Current Run State - v7_34 Full Code Surface Hardening Closeout 2026-06-06

@@ -142,6 +142,60 @@ not_performed_addendum:
 next_safe_action: local implementation is complete; optional next action is exact-file commit only if explicitly requested.
 ```
 
+### Handoff Addendum - Asset Archive Read-only Preview Adapter Contract Draft 2026-06-07
+
+```text
+status: completed_validated_local_contract_draft
+completed_addendum:
+  - Added docs/review_console_asset_archive_readonly_preview_adapter_contract.md as a non-executing local contract for a future asset_archive read-only preview adapter.
+  - Added tests/schema_examples/ASSET_ARCHIVE_READONLY_PREVIEW_ADAPTER_CONTRACT.example.json with three placeholder preview records and preview_display_state mapping rules.
+  - Added scripts/validate_asset_archive_readonly_preview_adapter_contract.js and scripts/validators/review_console/validate_asset_archive_readonly_preview_adapter_contract.js.
+  - Kept can_execute_now=false and requires_separate_exact_read_gate=true for any future real read probe.
+validation_addendum:
+  - node --check scripts/validate_asset_archive_readonly_preview_adapter_contract.js passed.
+  - node --check scripts/validators/review_console/validate_asset_archive_readonly_preview_adapter_contract.js passed.
+  - node scripts/validate_asset_archive_readonly_preview_adapter_contract.js passed, 23 checks.
+not_performed_addendum:
+  - no real asset_archive read
+  - no manifest read
+  - no preview image load or binary read
+  - no file copy, write, hash extraction, or dimension extraction
+  - no provider/plugin/API/image generation
+  - no DailyNote or VCP memory write
+  - no production candidate write
+  - no commit, push, tag, release, or deploy
+next_safe_action: prepare a separate exact-read probe gate only if the next task explicitly selects 1-3 concrete repo-relative preview refs.
+```
+
+### Handoff Addendum - Asset Archive Exact-read Preview Probe Gate 2026-06-07
+
+```text
+status: completed_validated_local_gate_package
+completed_addendum:
+  - Added docs/review_console_asset_archive_exact_read_preview_probe_gate.md as a prepared_not_authorized exact-read probe gate.
+  - Added tests/schema_examples/ASSET_ARCHIVE_EXACT_READ_PREVIEW_PROBE_GATE.example.json with three concrete repo-relative preview refs.
+  - Added scripts/validate_asset_archive_exact_read_preview_probe_gate.js and scripts/validators/review_console/validate_asset_archive_exact_read_preview_probe_gate.js.
+selected_preview_refs:
+  - asset_archive/accepted_samples/accepted_french_summer_rattan_bucket_bag_001/preview.webp
+  - asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/preview.webp
+  - asset_archive/failure_samples/failure_french_summer_rattan_bag_v7_29_001/preview.webp
+validation_addendum:
+  - node --check scripts/validate_asset_archive_exact_read_preview_probe_gate.js passed.
+  - node --check scripts/validators/review_console/validate_asset_archive_exact_read_preview_probe_gate.js passed.
+  - node scripts/validate_asset_archive_exact_read_preview_probe_gate.js passed, 24 checks.
+not_performed_addendum:
+  - no real asset_archive read
+  - no directory listing
+  - no manifest read
+  - no preview image load or binary read
+  - no file copy, write, hash extraction, or dimension extraction
+  - no provider/plugin/API/image generation
+  - no DailyNote or VCP memory write
+  - no production candidate write
+  - no commit, push, tag, release, or deploy
+next_safe_action: exact-read activation package only if explicitly requested; current probe gate is not executable.
+```
+
 ---
 
 ## Current Handoff Update - v7_34 Full Code Surface Hardening Closeout 2026-06-06

@@ -1,0 +1,142 @@
+{
+  "asset_archive_readonly_preview_adapter_contract": {
+    "phase": "review_console_asset_archive_readonly_preview_adapter_contract_draft",
+    "contract_status": "draft_no_real_read",
+    "adapter_id": "asset_archive_readonly_preview_adapter_v0",
+    "draft_output_key": "asset_archive_readonly_preview_adapter_state",
+    "consumer_contract": "preview_display_state",
+    "execution_mode": "local_contract_no_real_asset_archive_read",
+    "source_mode": "asset_archive_repo_relative_preview_refs_to_preview_display_state",
+    "can_execute_now": false,
+    "future_allowed_read_ref_patterns": [
+      "asset_archive/accepted_samples/{sample_id}/manifest.json",
+      "asset_archive/accepted_samples/{sample_id}/preview.webp",
+      "asset_archive/failure_samples/{sample_id}/manifest.json",
+      "asset_archive/failure_samples/{sample_id}/preview.webp"
+    ],
+    "forbidden_ref_patterns": [
+      "asset_archive/**",
+      "asset_archive/original_assets/**",
+      "runs/**",
+      "production/**",
+      "http://*",
+      "https://*",
+      "file://*",
+      "absolute_path:*"
+    ],
+    "max_manifest_reads": 3,
+    "max_preview_loads": 3,
+    "preview_records": [
+      {
+        "adapter_preview_id": "asset-archive-readonly-preview-accepted-001",
+        "lane": "accepted",
+        "source_sample_id": "sample_readonly_preview_accepted_001",
+        "manifest_ref": "asset_archive/accepted_samples/sample_readonly_preview_accepted_001/manifest.json.placeholder",
+        "preview_ref": "asset_archive/accepted_samples/sample_readonly_preview_accepted_001/preview.webp.placeholder",
+        "preview_mime_type": "image/webp",
+        "preview_dimensions": {
+          "width": 512,
+          "height": 512
+        },
+        "css_skin_fallback": "product_still_life",
+        "adapter_output_ref_only": true,
+        "source_manifest_read_performed": false,
+        "preview_loaded_or_rendered": false,
+        "preview_binary_read_performed": false,
+        "asset_archive_write_performed": false
+      },
+      {
+        "adapter_preview_id": "asset-archive-readonly-preview-accepted-002",
+        "lane": "accepted",
+        "source_sample_id": "sample_readonly_preview_accepted_002",
+        "manifest_ref": "asset_archive/accepted_samples/sample_readonly_preview_accepted_002/manifest.json.placeholder",
+        "preview_ref": "asset_archive/accepted_samples/sample_readonly_preview_accepted_002/preview.webp.placeholder",
+        "preview_mime_type": "image/webp",
+        "preview_dimensions": {
+          "width": 512,
+          "height": 640
+        },
+        "css_skin_fallback": "editorial_portrait",
+        "adapter_output_ref_only": true,
+        "source_manifest_read_performed": false,
+        "preview_loaded_or_rendered": false,
+        "preview_binary_read_performed": false,
+        "asset_archive_write_performed": false
+      },
+      {
+        "adapter_preview_id": "asset-archive-readonly-preview-failure-001",
+        "lane": "failure",
+        "source_sample_id": "sample_readonly_preview_failure_001",
+        "manifest_ref": "asset_archive/failure_samples/sample_readonly_preview_failure_001/manifest.json.placeholder",
+        "preview_ref": "asset_archive/failure_samples/sample_readonly_preview_failure_001/preview.webp.placeholder",
+        "preview_mime_type": "image/webp",
+        "preview_dimensions": {
+          "width": 512,
+          "height": 512
+        },
+        "css_skin_fallback": "evidence_blocker",
+        "adapter_output_ref_only": true,
+        "source_manifest_read_performed": false,
+        "preview_loaded_or_rendered": false,
+        "preview_binary_read_performed": false,
+        "asset_archive_write_performed": false
+      }
+    ],
+    "preview_display_state_mapping": {
+      "target_draft_output_key": "preview_display_state",
+      "adapter_preview_id_to_preview_id": true,
+      "source_sample_id_to_version_id": true,
+      "preview_ref_to_thumbnail_ref_future_only": true,
+      "css_skin_fallback_to_skin_id": true,
+      "preserve_current_review_session_version": true,
+      "do_not_infer_archive_approval": true,
+      "do_not_infer_production_candidate_readiness": true,
+      "do_not_infer_memory_readiness": true
+    },
+    "future_probe_gate": {
+      "gate_status": "prepared_not_authorized",
+      "can_execute_now": false,
+      "requires_separate_exact_read_gate": true,
+      "allowed_operation": "read_existing_preview_refs_only",
+      "max_manifest_reads": 3,
+      "max_preview_loads": 3,
+      "receipt_required": true,
+      "rollback_plan": "drop in-memory adapter output and restore css_skin_only preview_display fallback",
+      "stop_on_missing_manifest": true,
+      "stop_on_missing_preview": true,
+      "stop_on_absolute_path": true,
+      "stop_on_secret_or_private_raw_data": true,
+      "stop_on_write_requirement": true
+    },
+    "guard": {
+      "contract_draft_only": true,
+      "read_only_intent": true,
+      "adapter_output_ref_only": true,
+      "real_asset_archive_read_performed": false,
+      "asset_archive_manifest_read_performed": false,
+      "asset_archive_preview_binary_read_performed": false,
+      "asset_archive_original_binary_read_performed": false,
+      "asset_archive_directory_listing_performed": false,
+      "preview_loaded_or_rendered": false,
+      "preview_creation_or_copy_performed": false,
+      "fetch_performed": false,
+      "file_write_performed": false,
+      "source_image_binary_read_performed": false,
+      "hash_extraction_performed": false,
+      "dimensions_extraction_performed": false,
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "image_generation_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "accepted_samples_write_performed": false,
+      "failure_samples_write_performed": false,
+      "production_candidate_write_performed": false,
+      "real_manifest_read_performed": false,
+      "real_vcpchat_read_performed": false,
+      "real_vcptoolbox_read_performed": false,
+      "push_tag_release_deploy_performed": false
+    }
+  }
+}
