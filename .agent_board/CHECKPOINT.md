@@ -386,6 +386,57 @@ boundary_checks_addendum:
 recommended_next: final validation, then exact-file local commit only if requested; real preview rendering remains separately gated.
 ```
 
+### Checkpoint Addendum - Asset Archive Real-preview Render Gate Draft 2026-06-08
+
+```text
+status: completed_validated_local_render_gate_draft
+result: REAL_PREVIEW_RENDER_GATE_PREPARED_NOT_AUTHORIZED
+summary: Added a separate real-preview render gate draft for the three mapped asset_archive preview refs. The gate defines the future activation question and render budget but keeps actual render execution unauthorized: no browser preview load, no thumbnail_ref population, no new asset_archive read, and no UI integration.
+source_mapping_ref: tests/schema_examples/ASSET_ARCHIVE_READONLY_PREVIEW_ADAPTER_MAPPING_DRAFT.example.json
+required_future_question: Render the 3 selected asset_archive preview refs in the Review Console now, yes or no?
+changed_refs:
+  - docs/review_console_asset_archive_real_preview_render_gate.md
+  - tests/schema_examples/ASSET_ARCHIVE_REAL_PREVIEW_RENDER_GATE.example.json
+  - scripts/validate_asset_archive_real_preview_render_gate.js
+  - scripts/validators/review_console/validate_asset_archive_real_preview_render_gate.js
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+observed:
+  - gate_status: prepared_not_authorized
+  - gate_type: real_preview_render_gate
+  - selected_preview_ref_count: 3
+  - max_browser_preview_loads: 3
+  - can_render_real_preview_now: false
+  - preview_loaded_or_rendered: false
+validation_run_addendum:
+  - node --check scripts/validate_asset_archive_real_preview_render_gate.js: passed
+  - node --check scripts/validators/review_console/validate_asset_archive_real_preview_render_gate.js: passed
+  - node scripts/validate_asset_archive_real_preview_render_gate.js: passed, 27 checks
+  - node scripts/validate_asset_archive_readonly_preview_adapter_mapping_draft.js: passed, 26 checks
+  - node scripts/validate_review_console_preview_display_state.js: passed, 55 checks
+  - node scripts/validate_agent_board_state.js: passed
+boundary_checks_addendum:
+  can_execute_now: false
+  actual_render_execution_authorized_now: false
+  render_execution_decision_state: undecided
+  browser_preview_load_performed: false
+  thumbnail_ref_populated: false
+  asset_archive_read_performed_by_this_gate: false
+  asset_archive_directory_listing_performed: false
+  asset_archive_glob_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  production_candidate_write_performed: false
+  push_tag_release_deploy_performed: false
+recommended_next: exact-file local commit only if requested; real preview render requires the separate activation question.
+```
+
 ---
 
 ## Checkpoint - v7_34 Full Code Surface Hardening Closeout 2026-06-06

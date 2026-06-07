@@ -1,3 +1,18 @@
+- [x] ID: review_console_asset_archive_real_preview_render_gate_draft_20260608
+      Lane: Green local docs/schema/validator only.
+      Status: completed_validated_local_render_gate_draft.
+      Goal: Prepare a separate real-preview render gate while keeping actual rendering unauthorized.
+      Changed refs:
+        - `docs/review_console_asset_archive_real_preview_render_gate.md`
+        - `tests/schema_examples/ASSET_ARCHIVE_REAL_PREVIEW_RENDER_GATE.example.json`
+        - `scripts/validate_asset_archive_real_preview_render_gate.js`
+        - `scripts/validators/review_console/validate_asset_archive_real_preview_render_gate.js`
+      Completed: defined a prepared_not_authorized render gate for exactly 3 mapped preview refs; required a separate exact yes/no activation; kept max_browser_preview_loads future-capped at 3 and all current render/load flags false.
+      Boundary: no real preview render, no browser image load, no thumbnail_ref population, no new asset_archive read, no directory listing, no glob, no provider/plugin/API/image generation, no DailyNote/VCP memory write, no production candidate write, no push/tag/release/deploy.
+      Validation: render gate validator passed, 27 checks; mapping validator passed, 26 checks; preview_display_state validator passed, 55 checks; agent_board validator passed.
+      Remaining gate: exact-file local commit only if requested; future render activation must answer the exact yes/no render question.
+---
+
 - [x] ID: review_console_asset_archive_readonly_preview_adapter_mapping_draft_20260608
       Lane: Green local docs/schema/validator only.
       Status: completed_validated_local_mapping_draft.
@@ -9,7 +24,7 @@
         - `scripts/validators/review_console/validate_asset_archive_readonly_preview_adapter_mapping_draft.js`
       Completed: mapped exactly 3 receipt refs into display_samples; kept `thumbnail_ref=null`; kept `render_mode=css_skin_only`; added validator negative cases for render enablement, thumbnail refs, asset render mode, fourth sample, and refs not in receipt.
       Boundary: source receipt had real read evidence, but this mapping task performed no new asset_archive read, no directory listing, no glob, no preview load/render, no provider/plugin/API/image generation, no DailyNote/VCP memory write, no production candidate write, no push/tag/release/deploy.
-      Validation: mapping validator passed, 26 checks; final local validation in progress.
+      Validation: mapping validator passed, 26 checks; preview_display_state validator passed; adapter contract validator passed; agent_board validator passed; allowlist diff check passed with CRLF warnings only.
       Remaining gate: exact-file local commit only if requested; real preview rendering requires a separate render gate.
 ---
 

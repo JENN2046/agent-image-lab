@@ -297,6 +297,42 @@ boundary_checks:
 next_safe_action: validate agent-board sync and optionally seal this mapping draft with an exact-file local commit if requested.
 ```
 
+### Handoff Addendum - Asset Archive Real-preview Render Gate Draft 2026-06-08
+
+```text
+status: completed_validated_local_render_gate_draft
+completed_addendum:
+  - Added a separate real-preview render gate draft after the read-only mapping layer.
+  - Kept gate_status=prepared_not_authorized, can_execute_now=false, can_render_real_preview_now=false, and actual_render_execution_authorized_now=false.
+  - Selected exactly the same three preview refs from the mapping draft for a future render activation.
+  - Added a validator that cross-checks selected refs against the mapping fixture without opening real asset_archive files.
+changed_refs:
+  - docs/review_console_asset_archive_real_preview_render_gate.md
+  - tests/schema_examples/ASSET_ARCHIVE_REAL_PREVIEW_RENDER_GATE.example.json
+  - scripts/validate_asset_archive_real_preview_render_gate.js
+  - scripts/validators/review_console/validate_asset_archive_real_preview_render_gate.js
+validation_addendum:
+  - node --check scripts/validate_asset_archive_real_preview_render_gate.js passed.
+  - node --check scripts/validators/review_console/validate_asset_archive_real_preview_render_gate.js passed.
+  - node scripts/validate_asset_archive_real_preview_render_gate.js passed, 27 checks.
+  - node scripts/validate_asset_archive_readonly_preview_adapter_mapping_draft.js passed, 26 checks.
+  - node scripts/validate_review_console_preview_display_state.js passed, 55 checks.
+  - node scripts/validate_agent_board_state.js passed.
+boundary_checks:
+  - preview_loaded_or_rendered: false
+  - browser_preview_load_performed: false
+  - thumbnail_ref_populated: false
+  - asset_archive_read_performed_by_this_gate: false
+  - asset_archive_directory_listing_performed: false
+  - can_execute_now: false
+  - can_render_real_preview_now: false
+  - provider/plugin/API/image generation performed: false
+  - DailyNote/VCP memory write performed: false
+  - production candidate write performed: false
+  - commit/push/tag/release/deploy performed: false
+next_safe_action: optional exact-file local commit only if requested. Future render still requires the exact yes/no render activation question.
+```
+
 ---
 
 ## Current Handoff Update - v7_34 Full Code Surface Hardening Closeout 2026-06-06
