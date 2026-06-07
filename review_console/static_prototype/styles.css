@@ -3719,3 +3719,42 @@ body.sample-drawer-open {
     grid-template-columns: 1fr;
   }
 }
+
+/* Original-image review needs a taller inspection window than the earlier static preview skins. */
+.image-stage-panel {
+  grid-template-rows: auto auto minmax(clamp(560px, 58vh, 820px), 1fr) auto auto;
+}
+
+.spine-image-stage {
+  min-height: clamp(560px, 58vh, 820px);
+}
+
+@media (max-width: 1180px) {
+  .image-stage-panel {
+    grid-template-rows: auto auto minmax(clamp(520px, 60vh, 760px), 1fr) auto auto;
+  }
+
+  .spine-image-stage {
+    min-height: clamp(520px, 60vh, 760px);
+  }
+}
+
+@media (max-width: 760px) {
+  .image-stage-panel {
+    grid-template-rows: auto auto minmax(520px, 1fr) auto auto;
+  }
+
+  .spine-image-stage {
+    min-height: 520px;
+  }
+}
+
+@media (max-width: 520px) {
+  .image-stage-panel {
+    grid-template-rows: auto auto minmax(460px, 1fr) auto auto;
+  }
+
+  .spine-image-stage {
+    min-height: 460px;
+  }
+}
