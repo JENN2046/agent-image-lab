@@ -11,14 +11,8 @@ const exactAssetArchivePreviewRefs = new Set([
   "asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/preview.webp",
   "asset_archive/failure_samples/failure_french_summer_rattan_bag_v7_29_001/preview.webp"
 ]);
-const exactSourceOriginalImageRefs = new Set([
-  "runs/real_generation/v7_31_native_doubao_french_summer_rattan_bag_v2_watermark_off_run/native_doubao_1778327047448_0.jpg",
-  "runs/real_generation/v7_24_native_doubao_v3_single_real_run/native_doubao_1778322474131_0.jpg",
-  "runs/real_generation/v7_29_native_doubao_french_summer_rattan_bag_v2_single_real_run/native_doubao_1778325901725_0.jpg"
-]);
 const exactReviewConsoleImageRefs = new Set([
-  ...exactAssetArchivePreviewRefs,
-  ...exactSourceOriginalImageRefs
+  ...exactAssetArchivePreviewRefs
 ]);
 
 const mimeTypes = {
@@ -87,13 +81,12 @@ const server = http.createServer((request, response) => {
 if (require.main === module) {
   server.listen(port, host, () => {
     console.log(`Review Console static preview: http://${host}:${port}/`);
-    console.log("Serving local files from review_console/static_prototype plus 3 exact asset_archive preview refs and 3 exact source original refs.");
+    console.log("Serving local files from review_console/static_prototype plus 3 exact tracked asset_archive preview refs.");
   });
 }
 
 module.exports = {
   exactAssetArchivePreviewRefs,
-  exactSourceOriginalImageRefs,
   exactReviewConsoleImageRefs,
   resolveRequestPath,
   server

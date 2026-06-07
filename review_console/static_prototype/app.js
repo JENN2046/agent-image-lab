@@ -161,8 +161,8 @@ const assetArchiveRealPreviewRenderActivation = {
   source_mapping_ref: "tests/schema_examples/ASSET_ARCHIVE_READONLY_PREVIEW_ADAPTER_MAPPING_DRAFT.example.json",
   enabled: "yes" === "yes",
   authorized_answer: "yes",
-  allowed_operation: "browser_load_existing_original_refs_only",
-  real_image_source_policy: "source_original_ref_required_for_real_review",
+  allowed_operation: "browser_load_existing_tracked_preview_refs_only",
+  real_image_source_policy: "tracked_asset_archive_preview_ref_required_for_clean_checkout_review",
   max_preview_refs: 3,
   max_original_refs: 3,
   selected_preview_refs: [
@@ -174,7 +174,7 @@ const assetArchiveRealPreviewRenderActivation = {
       variant: "Receipt mapped accepted preview",
       score: null,
       skin_id: "product_still_life",
-      source_asset_ref: "runs/real_generation/v7_31_native_doubao_french_summer_rattan_bag_v2_watermark_off_run/native_doubao_1778327047448_0.jpg",
+      source_asset_ref: "asset_archive/accepted_samples/accepted_french_summer_rattan_bucket_bag_001/preview.webp",
       source_original_ref: "runs/real_generation/v7_31_native_doubao_french_summer_rattan_bag_v2_watermark_off_run/native_doubao_1778327047448_0.jpg",
       source_preview_ref: "asset_archive/accepted_samples/accepted_french_summer_rattan_bucket_bag_001/preview.webp",
       source_manifest_ref: "asset_archive/accepted_samples/accepted_french_summer_rattan_bucket_bag_001/manifest.json"
@@ -187,7 +187,7 @@ const assetArchiveRealPreviewRenderActivation = {
       variant: "Receipt mapped accepted preview",
       score: null,
       skin_id: "studio_dashboard",
-      source_asset_ref: "runs/real_generation/v7_24_native_doubao_v3_single_real_run/native_doubao_1778322474131_0.jpg",
+      source_asset_ref: "asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/preview.webp",
       source_original_ref: "runs/real_generation/v7_24_native_doubao_v3_single_real_run/native_doubao_1778322474131_0.jpg",
       source_preview_ref: "asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/preview.webp",
       source_manifest_ref: "asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/manifest.json"
@@ -200,7 +200,7 @@ const assetArchiveRealPreviewRenderActivation = {
       variant: "Receipt mapped failure preview",
       score: null,
       skin_id: "evidence_blocker",
-      source_asset_ref: "runs/real_generation/v7_29_native_doubao_french_summer_rattan_bag_v2_single_real_run/native_doubao_1778325901725_0.jpg",
+      source_asset_ref: "asset_archive/failure_samples/failure_french_summer_rattan_bag_v7_29_001/preview.webp",
       source_original_ref: "runs/real_generation/v7_29_native_doubao_french_summer_rattan_bag_v2_single_real_run/native_doubao_1778325901725_0.jpg",
       source_preview_ref: "asset_archive/failure_samples/failure_french_summer_rattan_bag_v7_29_001/preview.webp",
       source_manifest_ref: "asset_archive/failure_samples/failure_french_summer_rattan_bag_v7_29_001/manifest.json"
@@ -3664,6 +3664,7 @@ function previewDisplayRealPreviewRecords() {
     const skin = previewDisplaySkinById(sample.skin_id);
     const renderedNow = assetArchiveRealPreviewRenderActivation.enabled;
     const originalRef = sample.source_original_ref || null;
+    const previewRef = sample.source_preview_ref || null;
     return {
       preview_id: sample.preview_id,
       version_id: sample.version_id,
@@ -3672,27 +3673,29 @@ function previewDisplayRealPreviewRecords() {
       variant: sample.variant,
       score: sample.score,
       tone: skin.tone,
-      source_asset_ref: originalRef,
+      source_asset_ref: previewRef,
       source_original_ref: originalRef,
-      source_preview_ref: sample.source_preview_ref,
+      source_preview_ref: previewRef,
       source_manifest_ref: sample.source_manifest_ref,
-      thumbnail_ref: originalRef,
-      stage_image_ref: originalRef,
-      image_source_mode: "source_original_ref",
+      thumbnail_ref: previewRef,
+      stage_image_ref: previewRef,
+      image_source_mode: "source_preview_ref",
       skin_id: skin.skin_id,
       skin_class: skin.skin_class,
       skin_label_cn: skin.label_cn,
       aspect_ratio: skin.aspect_ratio,
-      render_mode: "asset_archive_original_image",
-      proxy_recipe_cn: "Gate-authorized exact source original render with CSS skin fallback.",
-      original_image_required: true,
-      source_original_available: typeof originalRef === "string" && originalRef.length > 0,
+      render_mode: "asset_archive_preview_image",
+      proxy_recipe_cn: "Gate-authorized exact tracked asset_archive preview render; source_original_ref is provenance only.",
+      original_image_required: false,
+      source_original_available: false,
+      source_original_provenance_only: typeof originalRef === "string" && originalRef.length > 0,
+      source_preview_available: typeof previewRef === "string" && previewRef.length > 0,
       static_proxy_only: !renderedNow,
       asset_archive_read_performed: renderedNow,
       asset_archive_ui_read_performed: renderedNow,
-      browser_preview_load_performed: false,
-      browser_original_image_load_performed: renderedNow,
-      source_image_binary_read_performed: renderedNow,
+      browser_preview_load_performed: renderedNow,
+      browser_original_image_load_performed: false,
+      source_image_binary_read_performed: false,
       preview_loaded_or_rendered: renderedNow
     };
   });
@@ -3718,13 +3721,13 @@ function currentPreviewDisplay() {
 }
 
 function previewDisplayUsesRealImage(preview) {
-  return ["asset_archive_preview_image", "asset_archive_original_image"].includes(preview?.render_mode) &&
+  return preview?.render_mode === "asset_archive_preview_image" &&
     typeof previewDisplayStageImageRef(preview) === "string" &&
     previewDisplayStageImageRef(preview).length > 0;
 }
 
 function previewDisplayStageImageRef(preview) {
-  return preview?.stage_image_ref || preview?.source_original_ref || preview?.thumbnail_ref || "";
+  return preview?.stage_image_ref || preview?.source_preview_ref || preview?.thumbnail_ref || "";
 }
 
 function previewDisplayImageSrc(preview) {
@@ -3737,11 +3740,11 @@ function previewRenderBoundaryState(currentPreview = currentPreviewDisplay()) {
   const realPreviewActive = assetArchiveRealPreviewRenderActivation.enabled;
   const selectedOriginalRefs = realPreviewRecords.map((sample) => sample.source_original_ref).filter(Boolean);
   const selectedPreviewRefs = realPreviewRecords.map((sample) => sample.source_preview_ref).filter(Boolean);
-  const currentOriginalRef = previewDisplayUsesRealImage(currentPreview) ? previewDisplayStageImageRef(currentPreview) : null;
-  const currentRefIndex = currentOriginalRef ? selectedOriginalRefs.indexOf(currentOriginalRef) : -1;
+  const currentRenderRef = previewDisplayUsesRealImage(currentPreview) ? previewDisplayStageImageRef(currentPreview) : null;
+  const currentRefIndex = currentRenderRef ? selectedPreviewRefs.indexOf(currentRenderRef) : -1;
   return {
     draft_output_key: "preview_render_boundary_state",
-    boundary_status: realPreviewActive ? "exact_original_refs_render_active" : "css_skin_only",
+    boundary_status: realPreviewActive ? "exact_tracked_preview_refs_render_active" : "css_skin_only",
     target_surface: "review_console_review_spine",
     render_gate_ref: assetArchiveRealPreviewRenderActivation.gate_ref,
     source_mapping_ref: assetArchiveRealPreviewRenderActivation.source_mapping_ref,
@@ -3751,25 +3754,26 @@ function previewRenderBoundaryState(currentPreview = currentPreviewDisplay()) {
     max_preview_refs: assetArchiveRealPreviewRenderActivation.max_preview_refs,
     max_original_refs: assetArchiveRealPreviewRenderActivation.max_original_refs,
     current_preview_ref: currentPreview?.source_preview_ref || null,
-    current_original_ref: currentOriginalRef,
-    current_original_ref_index: currentRefIndex >= 0 ? currentRefIndex + 1 : null,
+    current_original_ref: currentPreview?.source_original_ref || null,
+    current_original_ref_index: null,
+    current_render_ref: currentRenderRef,
     current_preview_ref_index: currentRefIndex >= 0 ? currentRefIndex + 1 : null,
     current_ref_in_exact_allowlist: currentRefIndex >= 0,
     selected_preview_refs: selectedPreviewRefs,
     selected_original_refs: selectedOriginalRefs,
     stage_zoom_percent: state.previewStageZoomPercent,
-    ui_summary_cn: realPreviewActive ? `原图预览 ${selectedOriginalRefs.length}/${assetArchiveRealPreviewRenderActivation.max_original_refs} · exact original refs · read-only` : "CSS 皮肤预览 · no asset_archive render",
+    ui_summary_cn: realPreviewActive ? `预览图 ${selectedPreviewRefs.length}/${assetArchiveRealPreviewRenderActivation.max_preview_refs} · tracked preview refs · read-only` : "CSS 皮肤预览 · no asset_archive render",
     guard: {
-      exact_asset_archive_preview_refs_only: false,
-      exact_source_original_refs_only: realPreviewActive,
-      browser_preview_load_performed: false,
-      browser_original_image_load_performed: realPreviewActive,
+      exact_asset_archive_preview_refs_only: realPreviewActive,
+      exact_source_original_refs_only: false,
+      browser_preview_load_performed: realPreviewActive,
+      browser_original_image_load_performed: false,
       preview_loaded_or_rendered: realPreviewActive,
       asset_archive_ui_read_performed: realPreviewActive,
       preview_creation_or_copy_performed: false,
       fetch_performed: false,
       file_write_performed: false,
-      source_image_binary_read_performed: realPreviewActive,
+      source_image_binary_read_performed: false,
       provider_contact_performed: false,
       plugin_call_performed: false,
       api_call_performed: false,
@@ -3785,27 +3789,29 @@ function previewOriginalRenderState(currentPreview = currentPreviewDisplay()) {
   const realPreviewRecords = previewDisplayRealPreviewRecords();
   const selectedOriginalRefs = realPreviewRecords.map((sample) => sample.source_original_ref).filter(Boolean);
   const selectedPreviewRefs = realPreviewRecords.map((sample) => sample.source_preview_ref).filter(Boolean);
-  const currentOriginalRef = previewDisplayUsesRealImage(currentPreview) ? previewDisplayStageImageRef(currentPreview) : null;
+  const currentPreviewRef = previewDisplayUsesRealImage(currentPreview) ? previewDisplayStageImageRef(currentPreview) : null;
   return {
     draft_output_key: "preview_original_render_state",
-    state_status: assetArchiveRealPreviewRenderActivation.enabled ? "original_image_render_active" : "original_image_render_inactive",
+    state_status: assetArchiveRealPreviewRenderActivation.enabled ? "tracked_preview_render_active_original_refs_provenance_only" : "original_image_render_inactive",
     policy: assetArchiveRealPreviewRenderActivation.real_image_source_policy,
     selected_original_ref_count: selectedOriginalRefs.length,
     selected_preview_ref_count: selectedPreviewRefs.length,
-    current_original_ref: currentOriginalRef,
-    current_preview_ref: currentPreview?.source_preview_ref || null,
+    current_original_ref: currentPreview?.source_original_ref || null,
+    current_preview_ref: currentPreviewRef,
+    current_render_ref: currentPreviewRef,
     stage_zoom_percent: state.previewStageZoomPercent,
     min_zoom_percent: stageZoomRange.min,
     max_zoom_percent: stageZoomRange.max,
     zoom_step_percent: stageZoomRange.step,
     selected_original_refs: selectedOriginalRefs,
     selected_preview_refs: selectedPreviewRefs,
-    preview_ref_role: "provenance_only_not_review_render_source",
+    preview_ref_role: "tracked_review_render_source",
+    original_ref_role: "provenance_only_not_review_render_source",
     fallback_to_preview_allowed: false,
     guard: {
-      browser_original_image_load_performed: assetArchiveRealPreviewRenderActivation.enabled,
-      browser_preview_load_performed: false,
-      source_image_binary_read_performed: assetArchiveRealPreviewRenderActivation.enabled,
+      browser_original_image_load_performed: false,
+      browser_preview_load_performed: assetArchiveRealPreviewRenderActivation.enabled,
+      source_image_binary_read_performed: false,
       preview_creation_or_copy_performed: false,
       fetch_performed: false,
       file_write_performed: false,
@@ -3827,7 +3833,7 @@ function previewDisplayProxyState() {
   return {
     draft_output_key: "preview_display_state",
     execution_mode: realRenderActive ? "review_console_asset_archive_real_preview_render_activated" : "review_console_static_preview_display_proxy_only",
-    source_mode: realRenderActive ? "asset_archive_exact_original_refs_to_preview_display_state" : "review_session_image_versions_to_css_skin_proxy",
+    source_mode: realRenderActive ? "asset_archive_exact_tracked_preview_refs_to_preview_display_state" : "review_session_image_versions_to_css_skin_proxy",
     render_activation_ref: assetArchiveRealPreviewRenderActivation.phase,
     original_render_activation_ref: assetArchiveRealPreviewRenderActivation.original_render_phase,
     render_gate_ref: assetArchiveRealPreviewRenderActivation.gate_ref,
@@ -3870,8 +3876,8 @@ function previewDisplayProxyState() {
     guard: {
       static_proxy_only: !realRenderActive,
       css_skin_only: !realRenderActive,
-      exact_asset_archive_preview_refs_only: false,
-      exact_source_original_refs_only: realRenderActive,
+      exact_asset_archive_preview_refs_only: realRenderActive,
+      exact_source_original_refs_only: false,
       selected_preview_ref_count: realPreviewRecords.length,
       selected_original_ref_count: realPreviewRecords.filter((sample) => sample.source_original_ref).length,
       max_preview_refs: assetArchiveRealPreviewRenderActivation.max_preview_refs,
@@ -3879,12 +3885,12 @@ function previewDisplayProxyState() {
       asset_archive_read_performed: realRenderActive,
       asset_archive_ui_read_performed: realRenderActive,
       preview_loaded_or_rendered: realRenderActive,
-      browser_preview_load_performed: false,
-      browser_original_image_load_performed: realRenderActive,
+      browser_preview_load_performed: realRenderActive,
+      browser_original_image_load_performed: false,
       preview_creation_or_copy_performed: false,
       fetch_performed: false,
       file_write_performed: false,
-      source_image_binary_read_performed: realRenderActive,
+      source_image_binary_read_performed: false,
       provider_contact_performed: false,
       plugin_call_performed: false,
       api_call_performed: false,
@@ -3904,13 +3910,14 @@ function previewDisplayProxyState() {
 function previewStageMarkup(preview) {
   if (previewDisplayUsesRealImage(preview)) {
     const imageSrc = previewDisplayImageSrc(preview);
-    const originalRef = previewDisplayStageImageRef(preview);
+    const stageImageRef = previewDisplayStageImageRef(preview);
+    const originalRef = preview?.source_original_ref || "";
     const previewRef = preview?.source_preview_ref || "";
     return `
       <div class="preview-image-scroll" data-preview-image-scroll>
-        <img class="preview-stage-image" src="${escapeHtml(imageSrc)}" alt="${escapeHtml(preview.label)} ${escapeHtml(preview.variant)}" data-real-original-ref="${escapeHtml(originalRef)}" data-real-preview-ref="${escapeHtml(previewRef)}" data-stage-image-ref="${escapeHtml(originalRef)}" loading="eager" decoding="async" />
+        <img class="preview-stage-image" src="${escapeHtml(imageSrc)}" alt="${escapeHtml(preview.label)} ${escapeHtml(preview.variant)}" data-real-original-ref="${escapeHtml(originalRef)}" data-real-preview-ref="${escapeHtml(previewRef)}" data-stage-image-ref="${escapeHtml(stageImageRef)}" loading="eager" decoding="async" />
       </div>
-      <span class="preview-stage-chip">${escapeHtml(preview.skin_label_cn || "原图预览")} · original</span>
+      <span class="preview-stage-chip">${escapeHtml(preview.skin_label_cn || "预览图")} · preview</span>
     `;
   }
   return `
@@ -4016,10 +4023,11 @@ function renderReviewSpineV11() {
   const currentStageImageRef = currentUsesRealImage ? previewDisplayStageImageRef(currentPreview) : "";
   if (stage && currentPreview) {
     stage.className = `spine-image-stage ${safeClassToken(currentPreview.skin_class)}`;
-    stage.dataset.previewProxy = currentUsesRealImage ? "asset_archive_original_exact_render" : "static";
+    stage.dataset.previewProxy = currentUsesRealImage ? "asset_archive_tracked_preview_exact_render" : "static";
     stage.dataset.previewSkin = currentPreview.skin_id;
     stage.dataset.realPreviewRef = currentUsesRealImage ? currentPreview.source_preview_ref || "" : "";
-    stage.dataset.realOriginalRef = currentStageImageRef;
+    stage.dataset.realOriginalRef = currentUsesRealImage ? currentPreview.source_original_ref || "" : "";
+    stage.dataset.stageImageRef = currentStageImageRef;
     stage.dataset.stageZoomPercent = String(state.previewStageZoomPercent);
   }
   if (stageArt && currentPreview) {
@@ -4027,7 +4035,7 @@ function renderReviewSpineV11() {
     stageArt.style.setProperty("--stage-zoom-scale", String(state.previewStageZoomPercent / 100));
     stageArt.style.setProperty("--stage-zoom-size", `${state.previewStageZoomPercent}%`);
     stageArt.dataset.stageZoomPercent = String(state.previewStageZoomPercent);
-    stageArt.setAttribute("aria-label", currentUsesRealImage ? `${currentPreview.label} 原图预览图` : `${currentPreview.skin_label_cn} 静态预览皮肤`);
+    stageArt.setAttribute("aria-label", currentUsesRealImage ? `${currentPreview.label} 已跟踪预览图` : `${currentPreview.skin_label_cn} 静态预览皮肤`);
     stageArt.innerHTML = previewStageMarkup(currentPreview);
   }
   renderPreviewBoundaryStrip(boundaryState);
@@ -4035,7 +4043,7 @@ function renderReviewSpineV11() {
   shellRoot.innerHTML = samples.map((sample, index) => {
     const isActive = sample.preview_id === currentPreview?.preview_id || (!currentPreview && index === 0);
     const thumb = previewDisplayUsesRealImage(sample)
-      ? `<span class="spine-sample-thumb ${escapeHtml(sample.skin_class)} has-real-preview" aria-hidden="true"><img src="${escapeHtml(previewDisplayImageSrc(sample))}" alt="" data-real-original-ref="${escapeHtml(previewDisplayStageImageRef(sample))}" data-real-preview-ref="${escapeHtml(sample.source_preview_ref || "")}" loading="eager" decoding="async" /></span>`
+      ? `<span class="spine-sample-thumb ${escapeHtml(sample.skin_class)} has-real-preview" aria-hidden="true"><img src="${escapeHtml(previewDisplayImageSrc(sample))}" alt="" data-real-original-ref="${escapeHtml(sample.source_original_ref || "")}" data-real-preview-ref="${escapeHtml(sample.source_preview_ref || "")}" data-stage-image-ref="${escapeHtml(previewDisplayStageImageRef(sample))}" loading="eager" decoding="async" /></span>`
       : `<span class="spine-sample-thumb ${escapeHtml(sample.skin_class)}" aria-hidden="true"></span>`;
     return `
       <button type="button" class="spine-sample-item${isActive ? " is-active" : ""}" data-spine-version-id="${escapeHtml(sample.version_id)}" data-preview-id="${escapeHtml(sample.preview_id)}" data-preview-skin-id="${escapeHtml(sample.skin_id)}" title="${escapeHtml(sample.skin_label_cn)} / ${escapeHtml(sample.render_mode)}">

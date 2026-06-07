@@ -1,34 +1,34 @@
-## Current Run State - Original Image Render Zoom 2026-06-08
+## Current Run State - Tracked Preview Render P1 Fix 2026-06-08
 
 ```text
-phase: review_console_asset_archive_original_image_render_zoom_20260608
-status: completed_validated_original_first_render_with_zoom_pending_final_validation
-lane: Amber exact asset_archive chain-record read plus local Review Console original render, followed by Green status-surface sync
-goal: Use the selected source original images for real Review Console image rendering and add reviewer zoom controls.
-branch: master
-receipt: reports/review_console_asset_archive_original_image_render/original_image_render_zoom_receipt_20260608.json
+phase: review_console_asset_archive_tracked_preview_render_p1_fix_20260608
+status: completed_validated_clean_checkout_render_fix_pending_final_validation
+lane: Green local PR review fix with browser and route validation
+goal: Make the activated Review Console real preview render from tracked asset_archive preview.webp refs so clean checkouts do not show broken images.
+branch: codex/review-console-preview-gates-onering
+receipt: reports/review_console_asset_archive_tracked_preview_render/tracked_preview_render_p1_fix_receipt_20260608.json
+supersedes: reports/review_console_asset_archive_original_image_render/original_image_render_zoom_receipt_20260608.json
 changed_refs:
-  - review_console/static_prototype/index.html
   - review_console/static_prototype/app.js
-  - review_console/static_prototype/styles.css
   - scripts/serve_review_console_static.js
+  - scripts/validators/review_console/validate_review_console_preview_display_state.js
+  - reports/review_console_asset_archive_tracked_preview_render/tracked_preview_render_p1_fix_receipt_20260608.json
   - reports/review_console_asset_archive_original_image_render/original_image_render_zoom_receipt_20260608.json
   - .agent_board/HANDOFF.md
   - .agent_board/RUN_STATE.md
   - .agent_board/TASK_QUEUE.md
   - .agent_board/CHECKPOINT.md
 result:
-  - real-image display records now carry source_original_ref and source_preview_ref separately
-  - Review Console stage and real sample rail render original JPG refs from runs/real_generation, not preview.webp
-  - preview_display_state records original_image_required and image_source_mode=source_original_ref
-  - preview_original_render_state records original-first policy, exact original refs, zoom percent, and fallback_to_preview_allowed=false
-  - local server permits only 3 exact original refs and the prior 3 exact preview provenance refs
+  - real-image display records carry source_preview_ref for img src and source_original_ref for provenance only
+  - Review Console stage and real sample rail render tracked asset_archive preview.webp refs, not untracked runs/real_generation JPG refs
+  - preview_display_state records image_source_mode=source_preview_ref and exact_asset_archive_preview_refs_only=true
+  - preview_original_render_state records tracked_preview_render_active_original_refs_provenance_only
+  - local server permits only the 3 exact tracked asset_archive preview refs; the 3 legacy source original run refs return 403
 validation:
   - app/server syntax passed
-  - preview display validator passed
-  - original route probes passed and unselected runs ref returned 403
-  - Browser DOM verified all 3 original images complete with natural dimensions 1920x1920
-  - Browser zoom verified 150% zoom and scroll range, then reset to 100%
+  - preview display validator passed with 77 checks
+  - route probes passed: 3 tracked preview refs 200 image/webp; 3 legacy source original run refs 403
+  - Browser DOM verified all 4 rendered stage/rail img src values use /asset_archive/.../preview.webp and none use /runs/real_generation; decoded dimensions 512x512
 boundary_checks:
   asset_archive_directory_listing_performed: false
   asset_archive_glob_performed: false
@@ -44,7 +44,7 @@ boundary_checks:
   VCP_memory_write_performed: false
   production_candidate_write_performed: false
   push_tag_release_deploy_performed: false
-next_safe_task: final validation, then exact-file local commit only if requested; push remains separately gated.
+next_safe_task: final validation, then exact-file local commit; push remains separately gated.
 ```
 
 ## Current Run State - Review Console Width Unlock 2026-06-08

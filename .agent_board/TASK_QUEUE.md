@@ -1,22 +1,31 @@
-- [x] ID: review_console_asset_archive_original_image_render_zoom_20260608
-      Lane: Amber exact asset_archive chain-record read plus Green local Review Console implementation/status sync.
-      Status: completed_validated_original_first_render_with_zoom_pending_final_validation.
-      Goal: Render future real Review Console images from source originals rather than 512px preview.webp, and add stage zoom controls.
-      Receipt: `reports/review_console_asset_archive_original_image_render/original_image_render_zoom_receipt_20260608.json`.
+- [x] ID: review_console_asset_archive_tracked_preview_render_p1_fix_20260608
+      Lane: Green local PR review fix with browser and route validation.
+      Status: completed_validated_clean_checkout_render_fix_pending_final_validation.
+      Goal: Render activated real Review Console previews from tracked asset_archive preview.webp refs so clean checkouts do not show broken images; keep source_original_ref as provenance only.
+      Receipt: `reports/review_console_asset_archive_tracked_preview_render/tracked_preview_render_p1_fix_receipt_20260608.json`.
+      Supersedes: `reports/review_console_asset_archive_original_image_render/original_image_render_zoom_receipt_20260608.json`.
       Changed refs:
-        - `review_console/static_prototype/index.html`
         - `review_console/static_prototype/app.js`
-        - `review_console/static_prototype/styles.css`
         - `scripts/serve_review_console_static.js`
+        - `scripts/validators/review_console/validate_review_console_preview_display_state.js`
+        - `reports/review_console_asset_archive_tracked_preview_render/tracked_preview_render_p1_fix_receipt_20260608.json`
         - `reports/review_console_asset_archive_original_image_render/original_image_render_zoom_receipt_20260608.json`
         - `.agent_board/HANDOFF.md`
         - `.agent_board/RUN_STATE.md`
         - `.agent_board/TASK_QUEUE.md`
         - `.agent_board/CHECKPOINT.md`
-      Completed: mapped the 3 selected source original refs from exact capsule records; changed the real stage and real rail images to original JPG refs; added zoom out/in/reset controls; added `preview_original_render_state`; kept `preview.webp` as provenance only.
-      Boundary: no asset_archive listing/glob; no broad runs route; no asset copy/write/hash extraction; no provider/plugin/API/image generation; no DailyNote/VCP memory write; no production candidate write; no push/tag/release/deploy.
-      Validation: syntax passed; preview_display validator passed; route probes passed; Browser original render and zoom audits passed.
-      Remaining gate: final local validation; exact-file commit only if requested.
+      Completed: changed stage and rail img src values to source_preview_ref; blocked the legacy source original run refs in the static server; preserved zoom controls; added validator checks for tracked preview routing and run-ref blocking.
+      Boundary: no asset_archive listing/glob; no runs route allowlist; no asset copy/write/hash extraction; no provider/plugin/API/image generation; no DailyNote/VCP memory write; no production candidate write; no push/tag/release/deploy.
+      Validation: syntax passed; preview_display validator passed; route probes passed; Browser DOM audit passed.
+      Remaining gate: final local validation; exact-file local commit; push remains separately gated.
+---
+
+- [x] ID: review_console_asset_archive_original_image_render_zoom_20260608
+      Lane: Amber exact asset_archive chain-record read plus Green local Review Console implementation/status sync.
+      Status: superseded_by_review_console_asset_archive_tracked_preview_render_p1_fix_20260608.
+      Goal: Original-first render with zoom.
+      Receipt: `reports/review_console_asset_archive_original_image_render/original_image_render_zoom_receipt_20260608.json`.
+      Supersession: clean-checkout P1 showed the selected source original run refs are not tracked, so current rendering must use tracked preview.webp refs and keep source_original_ref as provenance only.
 ---
 
 - [x] ID: review_console_width_unlock_20260608

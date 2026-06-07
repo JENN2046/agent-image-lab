@@ -1,29 +1,30 @@
-## Current Handoff Update - Original Image Render Zoom 2026-06-08
+## Current Handoff Update - Tracked Preview Render P1 Fix 2026-06-08
 
 ```text
-phase: review_console_asset_archive_original_image_render_zoom_20260608
-status: completed_validated_original_first_render_with_zoom_pending_final_validation
+phase: review_console_asset_archive_tracked_preview_render_p1_fix_20260608
+status: completed_validated_clean_checkout_render_fix_pending_final_validation
 repository: A:\agent-image-lab\agent-image-lab-v0.2
-branch: master
-goal: Replace the Review Console real preview render source with the 3 selected source original images and add stage zoom controls so reviewers can inspect details.
-receipt: reports/review_console_asset_archive_original_image_render/original_image_render_zoom_receipt_20260608.json
+branch: codex/review-console-preview-gates-onering
+goal: Fix the P1 clean-checkout Review Console regression by rendering activated real previews from tracked asset_archive preview.webp refs while keeping source_original_ref as provenance only.
+receipt: reports/review_console_asset_archive_tracked_preview_render/tracked_preview_render_p1_fix_receipt_20260608.json
+supersedes: reports/review_console_asset_archive_original_image_render/original_image_render_zoom_receipt_20260608.json
 policy_update:
-  future_real_review_images_must_use_original: true
-  preview_webp_role: provenance_only_not_review_render_source
-  fallback_to_preview_allowed: false
+  render_source_policy: tracked_asset_archive_preview_ref_required_for_clean_checkout_review
+  source_original_ref_role: provenance_only_not_review_render_source
+  fallback_to_untracked_runs_ref_allowed: false
 completed:
-  - read exactly the selected manifest and chain-record refs to map source.source_image_path values
-  - added source_original_ref fields for the 3 selected Review Console real-image records
-  - changed the main stage and real sample rail image srcs from preview.webp to source original JPG refs
-  - added 50%-400% stage zoom controls with 25% steps and a 100% reset control
-  - expanded the local static server exact allowlist to only the 3 original refs plus the existing 3 preview provenance refs
+  - changed the main stage and real sample rail image srcs from source_original_ref run artifacts back to tracked source_preview_ref values
+  - retained source_original_ref fields for provenance and metadata display only
+  - kept the existing 50%-400% stage zoom controls
+  - tightened the local static server allowlist to only the 3 tracked preview.webp refs
+  - extended preview_display validation to prove tracked preview refs resolve and legacy source original run refs are blocked
 validation_completed:
   - node --check review_console/static_prototype/app.js passed
   - node --check scripts/serve_review_console_static.js passed
+  - node --check scripts/validators/review_console/validate_review_console_preview_display_state.js passed
   - npm run validate:review-console-preview-display passed
-  - route probes passed: 3 original refs 200 image/jpeg; unselected runs ref 403
-  - Browser audit passed: stage and 3 rail images load original refs, natural dimensions 1920x1920, body overflow false
-  - Browser zoom audit passed: 100% -> 150% -> 100%, zoom wrapper has horizontal and vertical scroll range at 150%
+  - route probes passed: 3 tracked preview refs 200 image/webp; 3 legacy source original run refs 403
+  - Browser audit passed: stage and 3 rail images load /asset_archive/.../preview.webp; no /runs/real_generation img src; decoded dimensions 512x512; body overflow false
 not_performed:
   - no asset_archive directory listing or glob
   - no open runs/real_generation allowlist
@@ -31,8 +32,8 @@ not_performed:
   - no provider/plugin/API/image generation
   - no DailyNote/VCP memory write
   - no production candidate write
-  - no commit, push, tag, release, or deploy
-next_safe_action: run final local validation and optionally exact-file local commit if requested.
+  - no push, tag, release, or deploy
+next_safe_action: run final local validation, exact-file local commit, then wait for explicit push authorization.
 ```
 
 ## Current Handoff Update - Review Console Width Unlock 2026-06-08

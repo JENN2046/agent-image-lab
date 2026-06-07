@@ -1,6 +1,8 @@
 {
   "receipt_id": "review_console_asset_archive_original_image_render_zoom_20260608",
   "created_at": "2026-06-08T01:38:25.3137321+08:00",
+  "superseded_by": "reports/review_console_asset_archive_tracked_preview_render/tracked_preview_render_p1_fix_receipt_20260608.json",
+  "supersession_reason": "P1 clean-checkout review found the source_original_ref run artifacts are not tracked; current Review Console rendering now uses tracked asset_archive preview.webp refs as img src values and keeps source_original_ref as provenance only.",
   "lane": "Amber_A_exact_read_render_with_green_status_surface_sync",
   "task": "Render the three selected asset_archive-derived source originals in the Review Console and add local zoom controls.",
   "user_policy_update": {

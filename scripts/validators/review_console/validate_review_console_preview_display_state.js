@@ -8,7 +8,8 @@ const root = path.resolve(__dirname, "../../..");
 const files = {
   fixture: "tests/schema_examples/REVIEW_CONSOLE_PREVIEW_DISPLAY_STATE.example.json",
   app: "review_console/static_prototype/app.js",
-  styles: "review_console/static_prototype/styles.css"
+  styles: "review_console/static_prototype/styles.css",
+  server: "scripts/serve_review_console_static.js"
 };
 
 const expectedSkins = [
@@ -66,6 +67,18 @@ const forbiddenTrueSourcePatterns = [
   { name: "preview_loaded_true", pattern: /preview_loaded_or_rendered:\s*true/ },
   { name: "preview_creation_true", pattern: /preview_creation_or_copy_performed:\s*true/ },
   { name: "source_image_binary_read_true", pattern: /source_image_binary_read_performed:\s*true/ }
+];
+
+const selectedTrackedPreviewRefs = [
+  "asset_archive/accepted_samples/accepted_french_summer_rattan_bucket_bag_001/preview.webp",
+  "asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/preview.webp",
+  "asset_archive/failure_samples/failure_french_summer_rattan_bag_v7_29_001/preview.webp"
+];
+
+const legacyUntrackedSourceOriginalRefs = [
+  "runs/real_generation/v7_31_native_doubao_french_summer_rattan_bag_v2_watermark_off_run/native_doubao_1778327047448_0.jpg",
+  "runs/real_generation/v7_24_native_doubao_v3_single_real_run/native_doubao_1778322474131_0.jpg",
+  "runs/real_generation/v7_29_native_doubao_french_summer_rattan_bag_v2_single_real_run/native_doubao_1778325901725_0.jpg"
 ];
 
 const checks = [];
@@ -180,6 +193,8 @@ for (const [key, rel] of Object.entries(files)) {
 const fixture = readJson(files.fixture).review_console_preview_display_state_snapshot;
 const app = readText(files.app);
 const styles = readText(files.styles);
+const serverText = readText(files.server);
+const staticServer = require(relPath(files.server));
 
 const baseEval = evaluateSnapshot(fixture);
 addResult("preview_display_state_fixture_contract_passes", baseEval.passed, baseEval);
@@ -208,6 +223,12 @@ for (const token of [
   'draft_output_key: "preview_display_state"',
   "review_console_static_preview_display_proxy_only",
   "review_session_image_versions_to_css_skin_proxy",
+  "asset_archive_exact_tracked_preview_refs_to_preview_display_state",
+  'real_image_source_policy: "tracked_asset_archive_preview_ref_required_for_clean_checkout_review"',
+  'stage_image_ref: previewRef',
+  'image_source_mode: "source_preview_ref"',
+  'render_mode: "asset_archive_preview_image"',
+  "source_original_provenance_only",
   'render_mode: "css_skin_only"',
   "static_proxy_only: true",
   "asset_archive_ui_read_performed",
@@ -216,6 +237,17 @@ for (const token of [
   "data-preview-skin-id"
 ]) {
   addResult(`app_token_${token}`, app.includes(token));
+}
+
+for (const token of [
+  'stage_image_ref: originalRef',
+  'thumbnail_ref: originalRef',
+  'image_source_mode: "source_original_ref"',
+  'render_mode: "asset_archive_original_image"',
+  'real_image_source_policy: "source_original_ref_required_for_real_review"',
+  'preview_ref_role: "provenance_only_not_review_render_source"'
+]) {
+  addResult(`app_forbids_${token}`, !app.includes(token));
 }
 
 for (const skin of expectedSkins) {
@@ -229,6 +261,25 @@ const sourceHits = forbiddenTrueSourcePatterns
   .filter(({ pattern }) => pattern.test(app))
   .map(({ name }) => name);
 addResult("app_does_not_claim_preview_or_archive_side_effects", sourceHits.length === 0, sourceHits);
+
+addResult(
+  "server_exports_three_tracked_preview_refs",
+  staticServer.exactAssetArchivePreviewRefs instanceof Set &&
+    staticServer.exactAssetArchivePreviewRefs.size === selectedTrackedPreviewRefs.length &&
+    selectedTrackedPreviewRefs.every((ref) => staticServer.exactAssetArchivePreviewRefs.has(ref))
+);
+addResult("server_does_not_export_source_original_allowlist", !Object.prototype.hasOwnProperty.call(staticServer, "exactSourceOriginalImageRefs"));
+addResult("server_text_does_not_allow_exact_source_original_refs", !serverText.includes("exactSourceOriginalImageRefs"));
+
+for (const ref of selectedTrackedPreviewRefs) {
+  const resolved = staticServer.resolveRequestPath(`/${ref}`);
+  addResult(`server_allows_tracked_preview_${ref}`, !resolved.errorStatus && fs.existsSync(resolved.filePath), resolved);
+}
+
+for (const ref of legacyUntrackedSourceOriginalRefs) {
+  const resolved = staticServer.resolveRequestPath(`/${ref}`);
+  addResult(`server_blocks_untracked_original_${ref}`, resolved.errorStatus === 403, resolved);
+}
 
 const fixtureText = JSON.stringify(fixture, null, 2);
 for (const key of falseGuardKeys) {
