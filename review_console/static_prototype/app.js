@@ -3397,18 +3397,44 @@ function updatePressedState(selector, dataKey, activeValue) {
   });
 }
 
+function decisionTargetDisplayLabel(target) {
+  const samplePrefix = target?.sample_number ? `样片 ${target.sample_number}` : "样片";
+  return `${samplePrefix}: ${target?.sample_id || state.currentVersionId}`;
+}
+
+function decisionTargetSourceLabel(target) {
+  if (target?.decision_target_source === "selected_asset_archive_preview") return "asset_archive 预览";
+  if (target?.decision_target_source === "review_session_image_version") return "审片会话版本";
+  return "静态样片";
+}
+
+function decisionEventWithTarget(event = state.lastDecisionEvent, target = currentReviewTarget()) {
+  return {
+    ...(event || {}),
+    target_sample_id: target.sample_id,
+    target_preview_id: target.preview_id,
+    target_sample_number: target.sample_number,
+    target_source_cn: decisionTargetSourceLabel(target)
+  };
+}
+
 function recordDecisionEvent(scope, message, downstreamEffect) {
+  const target = currentReviewTarget();
   state.lastDecisionEvent = {
     scope,
     message_cn: message,
     changed_at: nowIso(),
     changed_by: "human_reviewer",
+    target_sample_id: target.sample_id,
+    target_preview_id: target.preview_id,
+    target_sample_number: target.sample_number,
+    target_source_cn: decisionTargetSourceLabel(target),
     downstream_effect_cn: downstreamEffect
   };
 }
 
 function renderDecisionStatus() {
-  const current = currentVersion();
+  const decisionTarget = currentReviewTarget();
   const summary = qs("#currentDecisionSummary");
   const feedback = qs("#decisionFeedback");
   if (!summary || !feedback) return;
@@ -3417,19 +3443,20 @@ function renderDecisionStatus() {
   updatePressedState("[data-memory]", "memory", state.memoryStatus);
 
   summary.innerHTML = `
-    <span><strong>样片</strong>${escapeHtml(current?.version_id || state.currentVersionId)}</span>
+    <span><strong>审片目标</strong>${escapeHtml(decisionTargetDisplayLabel(decisionTarget))}</span>
+    <span><strong>目标来源</strong>${escapeHtml(decisionTargetSourceLabel(decisionTarget))}</span>
     <span><strong>资产决定</strong>${escapeHtml(archiveStatusLabel(state.assetStatus))}</span>
     <span><strong>记忆决定</strong>${escapeHtml(memoryStatusLabel(state.memoryStatus))}</span>
     <span><strong>安全边界</strong>生产 / DailyNote / VCP 均不写</span>
   `;
 
-  const event = state.lastDecisionEvent;
+  const event = decisionEventWithTarget(state.lastDecisionEvent, decisionTarget);
   const tone = event.scope === "memory" ? memoryTone(state.memoryStatus) : archiveTone(state.assetStatus);
   feedback.className = `decision-feedback${tone ? ` ${tone}` : ""}`;
   feedback.innerHTML = `
     <strong>${escapeHtml(event.message_cn)}</strong><br />
     ${escapeHtml(event.downstream_effect_cn)}
-    <small> ${escapeHtml(event.changed_by)} · ${escapeHtml(event.changed_at)}</small>
+    <small> ${escapeHtml(event.changed_by)} · ${escapeHtml(event.changed_at)} · ${escapeHtml(event.target_sample_id || decisionTarget.sample_id)}</small>
   `;
   renderReviewerStickySummary();
 }
@@ -3437,12 +3464,13 @@ function renderDecisionStatus() {
 function renderReviewerStickySummary() {
   const root = qs("#reviewerStickySummary");
   if (!root) return;
-  const current = currentVersion();
+  const decisionTarget = currentReviewTarget();
   const humanTotal = totalFrom(state.humanScores);
   const assetTone = archiveTone(state.assetStatus);
   const memoryToneClass = memoryTone(state.memoryStatus);
   root.innerHTML = `
-    <span><strong>样片</strong>${escapeHtml(current?.version_id || state.currentVersionId)}</span>
+    <span><strong>审片目标</strong>${escapeHtml(decisionTargetDisplayLabel(decisionTarget))}</span>
+    <span><strong>来源</strong>${escapeHtml(decisionTargetSourceLabel(decisionTarget))}</span>
     <span><strong>总分</strong>${escapeHtml(humanTotal)}</span>
     <span class="${escapeHtml(assetTone)}"><strong>资产决定</strong>${escapeHtml(archiveStatusLabel(state.assetStatus))}</span>
     <span class="${escapeHtml(memoryToneClass || "warning")}"><strong>记忆决定</strong>${escapeHtml(memoryStatusLabel(state.memoryStatus))}</span>
@@ -4040,6 +4068,7 @@ function renderReviewSpineV11() {
 
   const current = currentVersion();
   const currentPreview = currentPreviewDisplay();
+  const decisionTarget = currentReviewTarget(currentPreview);
   const currentSampleNumber = reviewSpineSampleNumber();
   const focus = evidenceFocusState();
   const blockers = reviewSpineActiveBlockers();
@@ -4116,7 +4145,8 @@ function renderReviewSpineV11() {
   decisionRoot.innerHTML = `
     <section class="spine-decision-section">
       <h3>决策状态</h3>
-      <span>${escapeHtml(archiveStatusLabel(state.assetStatus))} / ${escapeHtml(memoryStatusLabel(state.memoryStatus))}</span>
+      <span>${escapeHtml(decisionTargetDisplayLabel(decisionTarget))}</span>
+      <span>${escapeHtml(decisionTargetSourceLabel(decisionTarget))} / ${escapeHtml(archiveStatusLabel(state.assetStatus))} / ${escapeHtml(memoryStatusLabel(state.memoryStatus))}</span>
     </section>
     <section class="spine-decision-section">
       <h3>待处理动作</h3>
@@ -5387,7 +5417,7 @@ function renderDraft() {
       memory_status: state.memoryStatus,
       memory_status_cn: memoryStatusLabel(state.memoryStatus),
       memory_action: state.approval.memory_action,
-      last_decision_event: state.lastDecisionEvent,
+      last_decision_event: decisionEventWithTarget(state.lastDecisionEvent, decisionTarget),
       next_reviewer_action_cn: nextReviewerActionLabel(),
       production_write_now: false,
       DailyNote_write_now: false,

@@ -342,6 +342,9 @@ for (const token of [
   "const previewDisplaySkins = [",
   "function previewDisplayProxyState()",
   "function currentReviewTarget(",
+  "function decisionTargetDisplayLabel(target)",
+  "function decisionTargetSourceLabel(target)",
+  "function decisionEventWithTarget(event = state.lastDecisionEvent, target = currentReviewTarget())",
   "function setCurrentReviewSampleByOffset(offset)",
   "const samples = reviewSpineSamples()",
   "selectReviewSpineSample(samples[nextIndex])",
@@ -351,6 +354,13 @@ for (const token of [
   'draft_output_key: "preview_display_state"',
   "const reviewTarget = currentReviewTarget(current)",
   "const decisionTarget = currentReviewTarget()",
+  "target_sample_id: target.sample_id",
+  "target_preview_id: target.preview_id",
+  "target_source_cn: decisionTargetSourceLabel(target)",
+  "last_decision_event: decisionEventWithTarget(state.lastDecisionEvent, decisionTarget)",
+  "decisionTargetDisplayLabel(decisionTarget)",
+  "decisionTargetSourceLabel(decisionTarget)",
+  "event.target_sample_id || decisionTarget.sample_id",
   "selected_version_id: reviewTarget.version_id",
   "review_session_current_version_id: state.currentVersionId",
   "selected_asset_ref: reviewTarget.output_asset_ref",
@@ -390,7 +400,14 @@ for (const token of [
   "sample_id: currentVersion()?.version_id || state.currentVersionId",
   "selected_version_id: state.currentVersionId",
   "function setCurrentVersionByOffset(offset)",
-  "state.image_versions[nextIndex].version_id"
+  "state.image_versions[nextIndex].version_id",
+  "<span><strong>样片</strong>${escapeHtml(current?.version_id || state.currentVersionId)}</span>",
+  "function renderDecisionStatus() {\n  const current = currentVersion();",
+  "function renderReviewerStickySummary() {\n  const root = qs(\"#reviewerStickySummary\");\n  if (!root) return;\n  const current = currentVersion();",
+  "last_decision_event: state.lastDecisionEvent",
+  "target_sample_id: event?.target_sample_id || target.sample_id",
+  "target_preview_id: event?.target_preview_id || target.preview_id",
+  "target_source_cn: event?.target_source_cn || decisionTargetSourceLabel(target)"
 ]) {
   addResult(`app_forbids_stale_decision_token_${token}`, !app.includes(token));
 }
