@@ -265,6 +265,38 @@ boundary_checks:
 next_safe_action: validate the receipt and agent-board sync; optional next step is a read-only adapter mapping draft from the receipt, not preview rendering.
 ```
 
+### Handoff Addendum - Asset Archive Read-only Preview Adapter Mapping Draft 2026-06-08
+
+```text
+status: completed_validated_local_mapping_draft
+completed_addendum:
+  - Added a ref-only mapping draft from the sealed exact-read probe receipt back into preview_display_state.
+  - Added a golden example with exactly three display_samples derived from the receipt selected_refs.
+  - Kept thumbnail_ref=null, render_mode=css_skin_only, and can_render_real_preview_now=false for all mapped records.
+  - Added a validator that reads only the mapping doc, example, sealed receipt, and validator source.
+changed_refs:
+  - docs/review_console_asset_archive_readonly_preview_adapter_mapping_draft.md
+  - tests/schema_examples/ASSET_ARCHIVE_READONLY_PREVIEW_ADAPTER_MAPPING_DRAFT.example.json
+  - scripts/validate_asset_archive_readonly_preview_adapter_mapping_draft.js
+  - scripts/validators/review_console/validate_asset_archive_readonly_preview_adapter_mapping_draft.js
+validation_addendum:
+  - node --check scripts/validate_asset_archive_readonly_preview_adapter_mapping_draft.js passed.
+  - node --check scripts/validators/review_console/validate_asset_archive_readonly_preview_adapter_mapping_draft.js passed.
+  - node scripts/validate_asset_archive_readonly_preview_adapter_mapping_draft.js passed, 26 checks.
+boundary_checks:
+  - source_receipt_real_asset_archive_read_performed: true
+  - mapping_asset_archive_read_performed: false
+  - asset_archive_directory_listing_performed: false
+  - preview_loaded_or_rendered: false
+  - thumbnail_ref_populated: false
+  - can_render_real_preview_now: false
+  - provider/plugin/API/image generation performed: false
+  - DailyNote/VCP memory write performed: false
+  - production candidate write performed: false
+  - commit/push/tag/release/deploy performed: false
+next_safe_action: validate agent-board sync and optionally seal this mapping draft with an exact-file local commit if requested.
+```
+
 ---
 
 ## Current Handoff Update - v7_34 Full Code Surface Hardening Closeout 2026-06-06

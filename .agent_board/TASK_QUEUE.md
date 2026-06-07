@@ -1,3 +1,18 @@
+- [x] ID: review_console_asset_archive_readonly_preview_adapter_mapping_draft_20260608
+      Lane: Green local docs/schema/validator only.
+      Status: completed_validated_local_mapping_draft.
+      Goal: Map the sealed exact-read probe receipt into preview_display_state without rendering real previews.
+      Changed refs:
+        - `docs/review_console_asset_archive_readonly_preview_adapter_mapping_draft.md`
+        - `tests/schema_examples/ASSET_ARCHIVE_READONLY_PREVIEW_ADAPTER_MAPPING_DRAFT.example.json`
+        - `scripts/validate_asset_archive_readonly_preview_adapter_mapping_draft.js`
+        - `scripts/validators/review_console/validate_asset_archive_readonly_preview_adapter_mapping_draft.js`
+      Completed: mapped exactly 3 receipt refs into display_samples; kept `thumbnail_ref=null`; kept `render_mode=css_skin_only`; added validator negative cases for render enablement, thumbnail refs, asset render mode, fourth sample, and refs not in receipt.
+      Boundary: source receipt had real read evidence, but this mapping task performed no new asset_archive read, no directory listing, no glob, no preview load/render, no provider/plugin/API/image generation, no DailyNote/VCP memory write, no production candidate write, no push/tag/release/deploy.
+      Validation: mapping validator passed, 26 checks; final local validation in progress.
+      Remaining gate: exact-file local commit only if requested; real preview rendering requires a separate render gate.
+---
+
 - [x] ID: review_console_asset_archive_exact_read_preview_probe_execution_20260608
       Lane: Amber exact asset_archive read within the bounded autonomy envelope after explicit user yes response.
       Status: completed_validated_real_read_only_probe.

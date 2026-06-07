@@ -340,6 +340,52 @@ boundary_checks_addendum:
 recommended_next: validate receipt/status sync, then draft a read-only adapter mapping from this receipt if desired.
 ```
 
+### Checkpoint Addendum - Asset Archive Read-only Preview Adapter Mapping Draft 2026-06-08
+
+```text
+status: completed_validated_local_mapping_draft
+result: ASSET_ARCHIVE_RECEIPT_MAPPED_TO_PREVIEW_DISPLAY_STATE_REF_ONLY
+summary: Added a read-only adapter mapping draft that projects the sealed exact-read probe receipt into a preview_display_state-compatible shape. The draft keeps real preview paths as source_asset_ref evidence only, leaves thumbnail_ref null, keeps render_mode css_skin_only, and blocks real preview rendering.
+source_receipt_ref: reports/review_console_asset_archive_readonly_preview_probe/asset_archive_exact_read_preview_probe_receipt_20260607.json
+changed_refs:
+  - docs/review_console_asset_archive_readonly_preview_adapter_mapping_draft.md
+  - tests/schema_examples/ASSET_ARCHIVE_READONLY_PREVIEW_ADAPTER_MAPPING_DRAFT.example.json
+  - scripts/validate_asset_archive_readonly_preview_adapter_mapping_draft.js
+  - scripts/validators/review_console/validate_asset_archive_readonly_preview_adapter_mapping_draft.js
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+observed:
+  - display_sample_count: 3
+  - draft_output_key: preview_display_state
+  - can_render_real_preview_now: false
+  - thumbnail_ref_populated: false
+  - mapping_asset_archive_read_performed: false
+validation_run_addendum:
+  - node --check scripts/validate_asset_archive_readonly_preview_adapter_mapping_draft.js: passed
+  - node --check scripts/validators/review_console/validate_asset_archive_readonly_preview_adapter_mapping_draft.js: passed
+  - node scripts/validate_asset_archive_readonly_preview_adapter_mapping_draft.js: passed, 26 checks
+boundary_checks_addendum:
+  source_receipt_real_asset_archive_read_performed: true
+  mapping_asset_archive_read_performed: false
+  asset_archive_manifest_read_performed_by_mapping: false
+  asset_archive_preview_binary_read_performed_by_mapping: false
+  asset_archive_directory_listing_performed: false
+  asset_archive_glob_performed: false
+  preview_loaded_or_rendered: false
+  preview_creation_or_copy_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  production_candidate_write_performed: false
+  push_tag_release_deploy_performed: false
+recommended_next: final validation, then exact-file local commit only if requested; real preview rendering remains separately gated.
+```
+
 ---
 
 ## Checkpoint - v7_34 Full Code Surface Hardening Closeout 2026-06-06

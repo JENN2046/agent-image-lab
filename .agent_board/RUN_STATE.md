@@ -399,6 +399,55 @@ boundary_checks:
 next_safe_task: run local validation for the receipt/status sync; optional future adapter mapping remains separate and non-rendering unless explicitly requested.
 ```
 
+### Current Run State Addendum - Asset Archive Read-only Preview Adapter Mapping Draft 2026-06-08
+
+```text
+phase: review_console_asset_archive_readonly_preview_adapter_mapping_draft
+status: completed_validated_local_mapping_draft
+lane: Green local docs/schema/validator only
+goal: Map the sealed exact-read probe receipt into preview_display_state without rendering real previews.
+branch: master
+changed_refs:
+  - docs/review_console_asset_archive_readonly_preview_adapter_mapping_draft.md
+  - tests/schema_examples/ASSET_ARCHIVE_READONLY_PREVIEW_ADAPTER_MAPPING_DRAFT.example.json
+  - scripts/validate_asset_archive_readonly_preview_adapter_mapping_draft.js
+  - scripts/validators/review_console/validate_asset_archive_readonly_preview_adapter_mapping_draft.js
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+source_receipt_ref: reports/review_console_asset_archive_readonly_preview_probe/asset_archive_exact_read_preview_probe_receipt_20260607.json
+result:
+  - Created a receipt_to_preview_display_state_ref_only_no_render mapping draft.
+  - Mapped exactly three receipt selected_refs into preview_display_state display_samples.
+  - Kept source_asset_ref as repo-relative evidence refs and kept thumbnail_ref null.
+  - Preserved CSS fallback skins: product_still_life, studio_dashboard, evidence_blocker.
+validation:
+  - node --check scripts/validate_asset_archive_readonly_preview_adapter_mapping_draft.js passed.
+  - node --check scripts/validators/review_console/validate_asset_archive_readonly_preview_adapter_mapping_draft.js passed.
+  - node scripts/validate_asset_archive_readonly_preview_adapter_mapping_draft.js passed, 26 checks.
+boundary_checks:
+  source_receipt_real_asset_archive_read_performed: true
+  mapping_asset_archive_read_performed: false
+  asset_archive_manifest_read_performed_by_mapping: false
+  asset_archive_preview_binary_read_performed_by_mapping: false
+  asset_archive_directory_listing_performed: false
+  asset_archive_glob_performed: false
+  preview_loaded_or_rendered: false
+  preview_creation_or_copy_performed: false
+  thumbnail_ref_populated: false
+  can_render_real_preview_now: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  production_candidate_write_performed: false
+  push_tag_release_deploy_performed: false
+next_safe_task: run final local validation; optional exact-file local commit only if requested.
+```
+
 ---
 
 ## Current Run State - v7_34 Full Code Surface Hardening Closeout 2026-06-06
