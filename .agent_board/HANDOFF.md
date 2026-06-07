@@ -226,6 +226,45 @@ not_performed_addendum:
 next_safe_action: obtain an explicit yes/no answer to "Execute the exact-read preview probe now for the 3 selected refs, yes or no?" before any read.
 ```
 
+### Handoff Addendum - Asset Archive Exact-read Preview Probe Executed 2026-06-08
+
+```text
+status: completed_validated_real_read_only_probe
+receipt: reports/review_console_asset_archive_readonly_preview_probe/asset_archive_exact_read_preview_probe_receipt_20260607.json
+completed_addendum:
+  - Executed the exact-read preview probe after the explicit user yes response.
+  - Read exactly three selected manifest refs and parsed them as JSON.
+  - Read exactly the first 12 bytes of each selected preview.webp ref and verified RIFF/WebP headers.
+  - Wrote a local receipt with root-key and header evidence only; no manifest raw body or preview binary copy was stored.
+selected_preview_refs:
+  - asset_archive/accepted_samples/accepted_french_summer_rattan_bucket_bag_001/preview.webp
+  - asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/preview.webp
+  - asset_archive/failure_samples/failure_french_summer_rattan_bag_v7_29_001/preview.webp
+validation_addendum:
+  - node -e JSON.parse receipt check passed.
+  - node scripts/validate_agent_board_state.js passed.
+  - node scripts/validate_asset_archive_exact_read_activation_package.js passed, 25 checks.
+  - node scripts/validate_asset_archive_exact_read_preview_probe_gate.js passed, 24 checks.
+  - git diff --check passed with CRLF normalization warnings only.
+boundary_checks:
+  - real_asset_archive_read_performed: true
+  - manifest_reads_performed: 3
+  - preview_header_reads_performed: 3
+  - missing_ref_count: 0
+  - asset_archive_directory_listing_performed: false
+  - asset_archive_glob_performed: false
+  - source_image_binary_read_performed: false
+  - preview_hash_performed: false
+  - preview_dimension_extraction_performed: false
+  - preview_loaded_or_rendered: false
+  - asset_archive_write_performed: false
+  - provider/plugin/API/image generation performed: false
+  - DailyNote/VCP memory write performed: false
+  - production candidate write performed: false
+  - commit/push/tag/release/deploy performed: false
+next_safe_action: validate the receipt and agent-board sync; optional next step is a read-only adapter mapping draft from the receipt, not preview rendering.
+```
+
 ---
 
 ## Current Handoff Update - v7_34 Full Code Surface Hardening Closeout 2026-06-06

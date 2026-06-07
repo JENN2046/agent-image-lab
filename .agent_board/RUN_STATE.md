@@ -347,6 +347,58 @@ boundary_checks:
 next_safe_task: ask and answer exactly "Execute the exact-read preview probe now for the 3 selected refs, yes or no?"; do not execute on ambiguous continuation.
 ```
 
+### Current Run State Addendum - Asset Archive Exact-read Preview Probe Executed 2026-06-08
+
+```text
+phase: review_console_asset_archive_exact_read_preview_probe_execution
+status: completed_validated_real_read_only_probe
+lane: Amber exact asset_archive read within Smart Standing Authorization v3 envelope after explicit user yes response
+goal: Execute the sealed exact-read preview probe for the three selected refs only.
+branch: master
+changed_refs:
+  - reports/review_console_asset_archive_readonly_preview_probe/asset_archive_exact_read_preview_probe_receipt_20260607.json
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+selected_preview_refs:
+  - asset_archive/accepted_samples/accepted_french_summer_rattan_bucket_bag_001/preview.webp
+  - asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/preview.webp
+  - asset_archive/failure_samples/failure_french_summer_rattan_bag_v7_29_001/preview.webp
+result:
+  - Manifest reads performed: 3 of 3, all parsed as JSON.
+  - Preview header reads performed: 3 of 3, each limited to first 12 bytes.
+  - All preview headers detected as riff_webp_header.
+  - Missing refs: 0.
+  - Receipt written with root-key and header evidence only.
+validation:
+  - node -e JSON.parse receipt check passed.
+  - node scripts/validate_agent_board_state.js passed.
+  - node scripts/validate_asset_archive_exact_read_activation_package.js passed, 25 checks.
+  - node scripts/validate_asset_archive_exact_read_preview_probe_gate.js passed, 24 checks.
+  - git diff --check passed with CRLF normalization warnings only.
+boundary_checks:
+  real_asset_archive_read_performed: true
+  asset_archive_manifest_read_performed: true
+  asset_archive_preview_binary_header_read_performed: true
+  asset_archive_directory_listing_performed: false
+  asset_archive_glob_performed: false
+  source_image_binary_read_performed: false
+  preview_hash_performed: false
+  preview_dimension_extraction_performed: false
+  preview_loaded_or_rendered: false
+  asset_archive_write_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  production_candidate_write_performed: false
+  push_tag_release_deploy_performed: false
+next_safe_task: run local validation for the receipt/status sync; optional future adapter mapping remains separate and non-rendering unless explicitly requested.
+```
+
 ---
 
 ## Current Run State - v7_34 Full Code Surface Hardening Closeout 2026-06-06

@@ -1,0 +1,169 @@
+{
+  "receipt_type": "asset_archive_exact_read_preview_probe_receipt",
+  "version": "v1",
+  "task_id": "asset_archive_exact_read_preview_probe_execution_20260608",
+  "source_activation_package_ref": "docs/review_console_asset_archive_exact_read_activation_package.md",
+  "source_probe_gate_ref": "docs/review_console_asset_archive_exact_read_preview_probe_gate.md",
+  "planned_receipt_ref_from_activation_package": "reports/review_console_asset_archive_readonly_preview_probe/asset_archive_exact_read_preview_probe_receipt_20260607.json",
+  "lane": "Amber",
+  "envelope": "Smart Standing Authorization v3 budgeted exact-read envelope",
+  "authorization": {
+    "actual_read_execution_authorized_now": true,
+    "authorization_source": "explicit user yes response in chat",
+    "authorization_scope": "execute the exact-read preview probe for the 3 selected refs only",
+    "selected_ref_count": 3,
+    "additional_asset_archive_refs_allowed": false,
+    "broad_asset_archive_scan_allowed": false
+  },
+  "execution_summary": {
+    "status": "completed_validated_real_read_only_probe",
+    "real_asset_archive_read_performed": true,
+    "manifest_reads_attempted": 3,
+    "manifest_reads_performed": 3,
+    "preview_header_reads_attempted": 3,
+    "preview_header_reads_performed": 3,
+    "missing_ref_count": 0,
+    "asset_archive_directory_listing_performed": false,
+    "asset_archive_glob_performed": false,
+    "source_image_binary_read_performed": false,
+    "preview_hash_performed": false,
+    "preview_dimension_extraction_performed": false,
+    "preview_loaded_or_rendered": false,
+    "asset_archive_write_performed": false,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "DailyNote_write_performed": false,
+    "VCP_memory_write_performed": false,
+    "production_candidate_write_performed": false,
+    "push_tag_release_deploy_performed": false
+  },
+  "read_method": {
+    "manifest_method": "Get-Content -Raw -LiteralPath for exact manifest refs, then ConvertFrom-Json",
+    "preview_method": "System.IO.File.Open exact preview refs and read first 12 bytes only",
+    "directory_listing_method": "not_performed",
+    "hash_method": "not_performed",
+    "dimension_method": "not_performed",
+    "render_method": "not_performed"
+  },
+  "selected_refs": [
+    {
+      "ref_id": "accepted_french_summer_rattan_bucket_bag_001",
+      "fallback_skin": "product_still_life",
+      "manifest": {
+        "path": "asset_archive/accepted_samples/accepted_french_summer_rattan_bucket_bag_001/manifest.json",
+        "exists": true,
+        "read_performed": true,
+        "parse_status": "parsed_json",
+        "byte_count": 1937,
+        "root_keys": [
+          "manifest_type",
+          "version",
+          "sample_id",
+          "created_at",
+          "artifact",
+          "chain",
+          "source_refs",
+          "guard",
+          "production_candidate_allowed",
+          "memory_write_allowed",
+          "DailyNote_write_allowed",
+          "VCP_memory_write_allowed",
+          "commercial_delivery_allowed"
+        ]
+      },
+      "preview": {
+        "path": "asset_archive/accepted_samples/accepted_french_summer_rattan_bucket_bag_001/preview.webp",
+        "exists": true,
+        "header_read_performed": true,
+        "bytes_read": 12,
+        "file_size_bytes": 51800,
+        "header_hex": "52 49 46 46 50 CA 00 00 57 45 42 50",
+        "detected_container": "riff_webp_header"
+      }
+    },
+    {
+      "ref_id": "accepted_product_still_life_tennis_wallet_001",
+      "fallback_skin": "studio_dashboard",
+      "manifest": {
+        "path": "asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/manifest.json",
+        "exists": true,
+        "read_performed": true,
+        "parse_status": "parsed_json",
+        "byte_count": 1871,
+        "root_keys": [
+          "manifest_type",
+          "version",
+          "sample_id",
+          "created_at",
+          "artifact",
+          "chain",
+          "source_refs",
+          "guard",
+          "production_candidate_allowed",
+          "memory_write_allowed",
+          "DailyNote_write_allowed",
+          "VCP_memory_write_allowed",
+          "commercial_delivery_allowed"
+        ]
+      },
+      "preview": {
+        "path": "asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/preview.webp",
+        "exists": true,
+        "header_read_performed": true,
+        "bytes_read": 12,
+        "file_size_bytes": 107088,
+        "header_hex": "52 49 46 46 48 A2 01 00 57 45 42 50",
+        "detected_container": "riff_webp_header"
+      }
+    },
+    {
+      "ref_id": "failure_french_summer_rattan_bag_v7_29_001",
+      "fallback_skin": "evidence_blocker",
+      "manifest": {
+        "path": "asset_archive/failure_samples/failure_french_summer_rattan_bag_v7_29_001/manifest.json",
+        "exists": true,
+        "read_performed": true,
+        "parse_status": "parsed_json",
+        "byte_count": 1610,
+        "root_keys": [
+          "manifest_type",
+          "version",
+          "sample_id",
+          "created_at",
+          "artifact",
+          "chain",
+          "source_refs",
+          "production_candidate_allowed",
+          "memory_write_allowed",
+          "DailyNote_write_allowed",
+          "guard"
+        ]
+      },
+      "preview": {
+        "path": "asset_archive/failure_samples/failure_french_summer_rattan_bag_v7_29_001/preview.webp",
+        "exists": true,
+        "header_read_performed": true,
+        "bytes_read": 12,
+        "file_size_bytes": 52270,
+        "header_hex": "52 49 46 46 26 CC 00 00 57 45 42 50",
+        "detected_container": "riff_webp_header"
+      }
+    }
+  ],
+  "contract_result": {
+    "all_selected_refs_exist": true,
+    "all_manifests_parse_as_json": true,
+    "all_previews_have_webp_header": true,
+    "safe_for_next_read_only_adapter_mapping_draft": true,
+    "safe_for_preview_display_rendering_without_separate_render_gate": false
+  },
+  "rollback_or_cleanup": {
+    "asset_archive_mutation_to_revert": false,
+    "receipt_can_be_removed_by_deleting_this_file": true,
+    "agent_board_status_can_be_reverted_by_exact_file_patch": true
+  },
+  "next_auto_step_allowed": "Green status-surface sync and local validation only",
+  "stop_reason": "probe completed at selected exact-read boundary"
+}

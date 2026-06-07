@@ -1,3 +1,18 @@
+- [x] ID: review_console_asset_archive_exact_read_preview_probe_execution_20260608
+      Lane: Amber exact asset_archive read within the bounded autonomy envelope after explicit user yes response.
+      Status: completed_validated_real_read_only_probe.
+      Goal: Execute the sealed exact-read preview probe for only the three selected repo-relative refs.
+      Receipt: `reports/review_console_asset_archive_readonly_preview_probe/asset_archive_exact_read_preview_probe_receipt_20260607.json`.
+      Completed:
+        - read 3 exact manifest refs and parsed each as JSON
+        - read only the first 12 bytes from each of the 3 exact preview.webp refs
+        - recorded RIFF/WebP header evidence and manifest root keys
+        - wrote local receipt and status-surface sync
+      Boundary: no asset_archive directory listing; no glob; no source image binary read; no preview hash; no dimension extraction; no preview render/load; no asset_archive write; no provider/plugin/API/image generation; no DailyNote/VCP memory write; no production candidate write; no push/tag/release/deploy.
+      Validation: receipt JSON parse passed; agent_board validator passed; activation package validator passed; exact-read probe gate validator passed; git diff --check passed with CRLF normalization warnings only.
+      Remaining gate: optional future read-only adapter mapping from the receipt; preview rendering or real integration remains separate.
+---
+
 - [x] ID: v7_35_remote_head_f484_closeout_surface_sync
       Lane: Green docs/metadata-only post-push reconciliation.
       Status: completed_validated_local_docs_metadata_post_push_surface_sync.

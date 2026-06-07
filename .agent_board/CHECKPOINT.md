@@ -290,6 +290,56 @@ boundary_checks_addendum:
 recommended_next: explicit yes/no execution decision for the exact-read preview probe; ambiguous continuation must not execute it.
 ```
 
+### Checkpoint Addendum - Asset Archive Exact-read Preview Probe Executed 2026-06-08
+
+```text
+status: completed_validated_real_read_only_probe
+result: ASSET_ARCHIVE_EXACT_READ_PREVIEW_PROBE_EXECUTED_WITH_THREE_REFS
+summary: Executed the exact-read probe after explicit user yes. The probe read exactly three selected manifest files as JSON and exactly the first 12 bytes from each selected preview.webp file. It did not enumerate asset_archive, load or render previews, compute hashes, extract dimensions, or write to asset_archive.
+receipt_ref: reports/review_console_asset_archive_readonly_preview_probe/asset_archive_exact_read_preview_probe_receipt_20260607.json
+selected_preview_refs:
+  - asset_archive/accepted_samples/accepted_french_summer_rattan_bucket_bag_001/preview.webp
+  - asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/preview.webp
+  - asset_archive/failure_samples/failure_french_summer_rattan_bag_v7_29_001/preview.webp
+observed:
+  - manifest_reads_performed: 3
+  - preview_header_reads_performed: 3
+  - missing_ref_count: 0
+  - detected_preview_container: riff_webp_header for all three selected previews
+changed_refs:
+  - reports/review_console_asset_archive_readonly_preview_probe/asset_archive_exact_read_preview_probe_receipt_20260607.json
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+validation_run_addendum:
+  - node -e JSON.parse receipt check: passed
+  - node scripts/validate_agent_board_state.js: passed
+  - node scripts/validate_asset_archive_exact_read_activation_package.js: passed, 25 checks
+  - node scripts/validate_asset_archive_exact_read_preview_probe_gate.js: passed, 24 checks
+  - git diff --check: passed with CRLF normalization warnings only
+boundary_checks_addendum:
+  real_asset_archive_read_performed: true
+  asset_archive_manifest_read_performed: true
+  asset_archive_preview_binary_header_read_performed: true
+  asset_archive_directory_listing_performed: false
+  asset_archive_glob_performed: false
+  source_image_binary_read_performed: false
+  preview_hash_performed: false
+  preview_dimension_extraction_performed: false
+  preview_loaded_or_rendered: false
+  asset_archive_write_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  production_candidate_write_performed: false
+  push_tag_release_deploy_performed: false
+recommended_next: validate receipt/status sync, then draft a read-only adapter mapping from this receipt if desired.
+```
+
 ---
 
 ## Checkpoint - v7_34 Full Code Surface Hardening Closeout 2026-06-06
