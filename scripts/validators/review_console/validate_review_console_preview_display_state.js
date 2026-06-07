@@ -342,6 +342,12 @@ for (const token of [
   "const previewDisplaySkins = [",
   "function previewDisplayProxyState()",
   "function currentReviewTarget(",
+  "function setCurrentReviewSampleByOffset(offset)",
+  "const samples = reviewSpineSamples()",
+  "selectReviewSpineSample(samples[nextIndex])",
+  "button.addEventListener(\"click\", () => setCurrentReviewSampleByOffset(1))",
+  "button.addEventListener(\"click\", () => setCurrentReviewSampleByOffset(-1))",
+  "setReviewSampleFromDataset(versionId, previewId, skinId)",
   'draft_output_key: "preview_display_state"',
   "const reviewTarget = currentReviewTarget(current)",
   "const decisionTarget = currentReviewTarget()",
@@ -382,7 +388,9 @@ for (const token of [
   "output_assets: [currentVersion().asset_ref]",
   "file_ref: currentVersion().asset_ref",
   "sample_id: currentVersion()?.version_id || state.currentVersionId",
-  "selected_version_id: state.currentVersionId"
+  "selected_version_id: state.currentVersionId",
+  "function setCurrentVersionByOffset(offset)",
+  "state.image_versions[nextIndex].version_id"
 ]) {
   addResult(`app_forbids_stale_decision_token_${token}`, !app.includes(token));
 }

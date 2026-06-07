@@ -4215,12 +4215,33 @@ function renderReviewSpineV11() {
   qs("#spineActionSheet").classList.toggle("is-open", state.highRiskSheetOpen);
 }
 
-function setCurrentVersionByOffset(offset) {
-  const currentIndex = Math.max(0, state.image_versions.findIndex((version) => version.version_id === state.currentVersionId));
-  const nextIndex = (currentIndex + offset + state.image_versions.length) % state.image_versions.length;
-  state.currentVersionId = state.image_versions[nextIndex].version_id;
-  state.previewDisplaySelectedPreviewId = `preview-display-${safeClassToken(state.currentVersionId)}`;
+function selectReviewSpineSample(sample, closeDrawer = false) {
+  if (!sample) return;
+  const hasReviewSessionVersion = state.image_versions.some((version) => version.version_id === sample.version_id);
+  if (hasReviewSessionVersion) state.currentVersionId = sample.version_id;
+  state.previewDisplaySelectedPreviewId = sample.preview_id || `preview-display-${safeClassToken(sample.version_id)}`;
+  state.previewDisplaySkinId = sample.skin_id || state.previewDisplaySkinId;
+  if (closeDrawer) setSampleDrawerOpen(false);
   renderAll();
+}
+
+function setCurrentReviewSampleByOffset(offset) {
+  const samples = reviewSpineSamples();
+  if (samples.length === 0) return;
+  const currentPreview = currentPreviewDisplay();
+  const currentIndex = samples.findIndex((sample) => sample.preview_id === currentPreview?.preview_id);
+  const safeCurrentIndex = currentIndex >= 0 ? currentIndex : 0;
+  const nextIndex = (safeCurrentIndex + offset + samples.length) % samples.length;
+  selectReviewSpineSample(samples[nextIndex]);
+}
+
+function setReviewSampleFromDataset(versionId, previewId, skinId) {
+  const samples = reviewSpineSamples();
+  const sample = samples.find((item) => item.preview_id === previewId) ||
+    samples.find((item) => item.version_id === versionId) ||
+    { version_id: versionId, preview_id: previewId, skin_id: skinId };
+  const hasReviewSessionVersion = state.image_versions.some((version) => version.version_id === sample.version_id);
+  selectReviewSpineSample({ ...sample, preview_id: previewId || sample.preview_id, skin_id: skinId || sample.skin_id }, hasReviewSessionVersion);
 }
 
 const stageZoomRange = {
@@ -5459,10 +5480,10 @@ qsa("[data-evidence-mode]").forEach((button) => {
   button.addEventListener("click", () => setEvidenceMode(button.dataset.evidenceMode));
 });
 qsa("[data-spine-sample-prev]").forEach((button) => {
-  button.addEventListener("click", () => setCurrentVersionByOffset(-1));
+  button.addEventListener("click", () => setCurrentReviewSampleByOffset(-1));
 });
 qsa("[data-spine-sample-next]").forEach((button) => {
-  button.addEventListener("click", () => setCurrentVersionByOffset(1));
+  button.addEventListener("click", () => setCurrentReviewSampleByOffset(1));
 });
 qsa("[data-stage-zoom-out]").forEach((button) => {
   button.addEventListener("click", () => bumpPreviewStageZoom(-1));
@@ -5482,18 +5503,7 @@ qs("#spineSampleRail").addEventListener("click", (event) => {
   const versionId = sampleButton.dataset.spineVersionId;
   const previewId = sampleButton.dataset.previewId;
   const skinId = sampleButton.dataset.previewSkinId;
-  if (!state.image_versions.some((version) => version.version_id === versionId)) {
-    state.previewDisplaySelectedPreviewId = previewId || state.previewDisplaySelectedPreviewId;
-    state.previewDisplaySkinId = skinId || state.previewDisplaySkinId;
-    renderReviewSpineV11();
-    renderDraft();
-    return;
-  }
-  state.currentVersionId = versionId;
-  state.previewDisplaySelectedPreviewId = previewId || `preview-display-${safeClassToken(versionId)}`;
-  state.previewDisplaySkinId = skinId || state.previewDisplaySkinId;
-  setSampleDrawerOpen(false);
-  renderAll();
+  setReviewSampleFromDataset(versionId, previewId, skinId);
 });
 qs("#spineDecisionSpine").addEventListener("click", (event) => {
   const blockerButton = event.target.closest("[data-spine-blocker-id]");
