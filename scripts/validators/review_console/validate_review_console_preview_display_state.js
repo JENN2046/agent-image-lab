@@ -39,10 +39,31 @@ const expectedSkins = [
   }
 ];
 
-const falseGuardKeys = [
+const selectedTrackedPreviewRefs = [
+  "asset_archive/accepted_samples/accepted_french_summer_rattan_bucket_bag_001/preview.webp",
+  "asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/preview.webp",
+  "asset_archive/failure_samples/failure_french_summer_rattan_bag_v7_29_001/preview.webp"
+];
+
+const legacyUntrackedSourceOriginalRefs = [
+  "runs/real_generation/v7_31_native_doubao_french_summer_rattan_bag_v2_watermark_off_run/native_doubao_1778327047448_0.jpg",
+  "runs/real_generation/v7_24_native_doubao_v3_single_real_run/native_doubao_1778322474131_0.jpg",
+  "runs/real_generation/v7_29_native_doubao_french_summer_rattan_bag_v2_single_real_run/native_doubao_1778325901725_0.jpg"
+];
+
+const trueGuardKeys = [
+  "exact_asset_archive_preview_refs_only",
   "asset_archive_read_performed",
   "asset_archive_ui_read_performed",
   "preview_loaded_or_rendered",
+  "browser_preview_load_performed"
+];
+
+const falseGuardKeys = [
+  "static_proxy_only",
+  "css_skin_only",
+  "exact_source_original_refs_only",
+  "browser_original_image_load_performed",
   "preview_creation_or_copy_performed",
   "fetch_performed",
   "file_write_performed",
@@ -61,24 +82,14 @@ const falseGuardKeys = [
   "real_vcptoolbox_read_performed"
 ];
 
-const forbiddenTrueSourcePatterns = [
-  { name: "asset_archive_read_true", pattern: /asset_archive_read_performed:\s*true/ },
-  { name: "asset_archive_ui_read_true", pattern: /asset_archive_ui_read_performed:\s*true/ },
-  { name: "preview_loaded_true", pattern: /preview_loaded_or_rendered:\s*true/ },
-  { name: "preview_creation_true", pattern: /preview_creation_or_copy_performed:\s*true/ },
-  { name: "source_image_binary_read_true", pattern: /source_image_binary_read_performed:\s*true/ }
-];
-
-const selectedTrackedPreviewRefs = [
-  "asset_archive/accepted_samples/accepted_french_summer_rattan_bucket_bag_001/preview.webp",
-  "asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/preview.webp",
-  "asset_archive/failure_samples/failure_french_summer_rattan_bag_v7_29_001/preview.webp"
-];
-
-const legacyUntrackedSourceOriginalRefs = [
-  "runs/real_generation/v7_31_native_doubao_french_summer_rattan_bag_v2_watermark_off_run/native_doubao_1778327047448_0.jpg",
-  "runs/real_generation/v7_24_native_doubao_v3_single_real_run/native_doubao_1778322474131_0.jpg",
-  "runs/real_generation/v7_29_native_doubao_french_summer_rattan_bag_v2_single_real_run/native_doubao_1778325901725_0.jpg"
+const forbiddenSourcePatterns = [
+  { name: "source_image_binary_read_true", pattern: /source_image_binary_read_performed:\s*true/ },
+  { name: "browser_original_image_load_true", pattern: /browser_original_image_load_performed:\s*true/ },
+  { name: "stage_original_ref_source", pattern: /stage_image_ref:\s*originalRef/ },
+  { name: "thumbnail_original_ref_source", pattern: /thumbnail_ref:\s*originalRef/ },
+  { name: "original_ref_image_source_mode", pattern: /image_source_mode:\s*"source_original_ref"/ },
+  { name: "asset_archive_original_render_mode", pattern: /render_mode:\s*"asset_archive_original_image"/ },
+  { name: "source_original_required_policy", pattern: /source_original_ref_required_for_real_review/ }
 ];
 
 const checks = [];
@@ -116,10 +127,84 @@ function arrayEquals(left, right) {
     left.every((value, index) => value === right[index]);
 }
 
-function hasValidAssetRef(sample) {
-  if (typeof sample.source_asset_ref !== "string" || sample.source_asset_ref.length === 0) return false;
-  if (sample.source_asset_ref.startsWith("asset_archive/")) return sample.source_asset_ref.endsWith(".placeholder");
-  return sample.source_asset_ref === "static_proxy/no_asset_archive_read";
+function skinById(skinId) {
+  return expectedSkins.find((skin) => skin.skin_id === skinId) || null;
+}
+
+function isString(value) {
+  return typeof value === "string" && value.length > 0;
+}
+
+function scoreOk(score) {
+  return score === null || Number.isInteger(score);
+}
+
+function hasValidCssAssetRef(sample) {
+  if (!isString(sample.source_asset_ref)) return false;
+  return sample.source_asset_ref === "static_proxy/no_asset_archive_read" ||
+    (sample.source_asset_ref.startsWith("asset_archive/candidates/") && sample.source_asset_ref.endsWith(".placeholder"));
+}
+
+function isRealPreviewSample(sample, expectedIndex) {
+  const skin = skinById(sample.skin_id);
+  const expectedPreviewRef = selectedTrackedPreviewRefs[expectedIndex];
+  const expectedOriginalRef = legacyUntrackedSourceOriginalRefs[expectedIndex];
+  return Boolean(skin) &&
+    isString(sample.preview_id) &&
+    sample.preview_id.startsWith("preview-display-asset-archive-") &&
+    isString(sample.version_id) &&
+    Number.isInteger(sample.sample_number) &&
+    isString(sample.label) &&
+    isString(sample.variant) &&
+    scoreOk(sample.score) &&
+    sample.skin_label_cn === skin.label_cn &&
+    sample.aspect_ratio === skin.aspect_ratio &&
+    sample.source_asset_ref === expectedPreviewRef &&
+    sample.source_preview_ref === expectedPreviewRef &&
+    sample.source_original_ref === expectedOriginalRef &&
+    sample.thumbnail_ref === expectedPreviewRef &&
+    sample.stage_image_ref === expectedPreviewRef &&
+    sample.image_source_mode === "source_preview_ref" &&
+    sample.render_mode === "asset_archive_preview_image" &&
+    sample.original_image_required === false &&
+    sample.source_original_available === false &&
+    sample.static_proxy_only === false &&
+    sample.asset_archive_read_performed === true &&
+    sample.asset_archive_ui_read_performed === true &&
+    sample.browser_preview_load_performed === true &&
+    sample.browser_original_image_load_performed === false &&
+    sample.source_image_binary_read_performed === false &&
+    sample.preview_loaded_or_rendered === true;
+}
+
+function isCssProxySample(sample) {
+  const skin = skinById(sample.skin_id);
+  return Boolean(skin) &&
+    isString(sample.preview_id) &&
+    sample.preview_id.startsWith("preview-display-") &&
+    isString(sample.version_id) &&
+    Number.isInteger(sample.sample_number) &&
+    isString(sample.label) &&
+    isString(sample.variant) &&
+    scoreOk(sample.score) &&
+    sample.skin_label_cn === skin.label_cn &&
+    sample.aspect_ratio === skin.aspect_ratio &&
+    hasValidCssAssetRef(sample) &&
+    sample.source_preview_ref === null &&
+    sample.source_original_ref === null &&
+    sample.thumbnail_ref === null &&
+    sample.stage_image_ref === null &&
+    sample.image_source_mode === "css_skin_only" &&
+    sample.render_mode === "css_skin_only" &&
+    sample.original_image_required === false &&
+    sample.source_original_available === false &&
+    sample.static_proxy_only === true &&
+    sample.asset_archive_read_performed === false &&
+    sample.asset_archive_ui_read_performed === false &&
+    sample.browser_preview_load_performed === false &&
+    sample.browser_original_image_load_performed === false &&
+    sample.source_image_binary_read_performed === false &&
+    sample.preview_loaded_or_rendered === false;
 }
 
 function evaluateSnapshot(snapshot) {
@@ -127,60 +212,71 @@ function evaluateSnapshot(snapshot) {
   const samples = Array.isArray(snapshot.display_samples) ? snapshot.display_samples : [];
   const skinIds = expectedSkins.map((skin) => skin.skin_id);
   const sampleSkinIds = new Set(samples.map((sample) => sample.skin_id));
+  const firstThreeSamples = samples.slice(0, selectedTrackedPreviewRefs.length);
+  const realSamples = samples.filter((sample) => sample.render_mode === "asset_archive_preview_image");
+  const cssSamples = samples.filter((sample) => sample.render_mode === "css_skin_only");
 
   const identityOk =
-    snapshot.phase === "review_console_static_preview_display_proxy_contract" &&
-    snapshot.snapshot_status === "golden_static_example" &&
-    snapshot.execution_mode === "review_console_static_preview_display_proxy_only" &&
+    snapshot.phase === "review_console_asset_archive_real_preview_render_contract" &&
+    snapshot.snapshot_status === "golden_activated_tracked_preview_example" &&
+    snapshot.execution_mode === "review_console_asset_archive_real_preview_render_activated" &&
     snapshot.draft_output_key === "preview_display_state" &&
     snapshot.source_static_app_ref === "review_console/static_prototype/app.js#previewDisplayProxyState" &&
     snapshot.source_style_ref === "review_console/static_prototype/styles.css#preview-skin-*" &&
-    snapshot.source_mode === "review_session_image_versions_to_css_skin_proxy";
+    snapshot.source_mode === "asset_archive_exact_tracked_preview_refs_to_preview_display_state" &&
+    snapshot.render_activation_ref === "review_console_asset_archive_real_preview_render_activation_20260608" &&
+    snapshot.original_render_activation_ref === "review_console_asset_archive_original_image_zoom_20260608" &&
+    snapshot.render_gate_ref === "tests/schema_examples/ASSET_ARCHIVE_REAL_PREVIEW_RENDER_GATE.example.json" &&
+    snapshot.real_image_source_policy === "tracked_asset_archive_preview_ref_required_for_clean_checkout_review";
 
   const selectionOk =
     snapshot.selected_version_id === "v2" &&
-    snapshot.selected_preview_id === "preview-display-v2" &&
-    snapshot.selected_skin_id === "studio_dashboard";
+    snapshot.selected_preview_id === "preview-display-asset-archive-accepted-french-summer-rattan-bucket-bag-001" &&
+    snapshot.selected_skin_id === "product_still_life";
 
   const skinSetOk =
     arrayEquals(snapshot.available_skin_ids, skinIds) &&
-    snapshot.thumbnail_skin_count === expectedSkins.length;
+    snapshot.thumbnail_skin_count === expectedSkins.length &&
+    skinIds.every((skinId) => sampleSkinIds.has(skinId));
+
+  const countsOk =
+    snapshot.real_preview_ref_count === selectedTrackedPreviewRefs.length &&
+    snapshot.real_original_ref_count === legacyUntrackedSourceOriginalRefs.length &&
+    Number.isInteger(snapshot.stage_zoom_percent) &&
+    snapshot.stage_zoom_percent >= 50 &&
+    snapshot.stage_zoom_percent <= 400 &&
+    guard.selected_preview_ref_count === selectedTrackedPreviewRefs.length &&
+    guard.selected_original_ref_count === legacyUntrackedSourceOriginalRefs.length &&
+    guard.max_preview_refs === selectedTrackedPreviewRefs.length &&
+    guard.max_original_refs === legacyUntrackedSourceOriginalRefs.length;
+
+  const realSamplesOk =
+    realSamples.length === selectedTrackedPreviewRefs.length &&
+    firstThreeSamples.length === selectedTrackedPreviewRefs.length &&
+    firstThreeSamples.every((sample, index) => sample === realSamples[index]) &&
+    realSamples.every((sample, index) => isRealPreviewSample(sample, index));
+
+  const cssSamplesOk =
+    cssSamples.length >= expectedSkins.length &&
+    cssSamples.every((sample) => isCssProxySample(sample));
 
   const samplesOk =
-    samples.length >= expectedSkins.length &&
-    skinIds.every((skinId) => sampleSkinIds.has(skinId)) &&
-    samples.every((sample) => {
-      const skin = expectedSkins.find((item) => item.skin_id === sample.skin_id);
-      return Boolean(skin) &&
-        typeof sample.preview_id === "string" &&
-        sample.preview_id.startsWith("preview-display-") &&
-        typeof sample.version_id === "string" &&
-        Number.isInteger(sample.sample_number) &&
-        typeof sample.label === "string" &&
-        typeof sample.variant === "string" &&
-        Number.isInteger(sample.score) &&
-        sample.skin_label_cn === skin.label_cn &&
-        sample.aspect_ratio === skin.aspect_ratio &&
-        hasValidAssetRef(sample) &&
-        sample.thumbnail_ref === null &&
-        sample.render_mode === "css_skin_only" &&
-        sample.static_proxy_only === true &&
-        sample.asset_archive_read_performed === false &&
-        sample.preview_loaded_or_rendered === false;
-    });
+    samples.length >= selectedTrackedPreviewRefs.length + expectedSkins.length &&
+    realSamplesOk &&
+    cssSamplesOk;
 
-  const guardTrueOk =
-    guard.static_proxy_only === true &&
-    guard.css_skin_only === true;
-
+  const guardTrueOk = trueGuardKeys.every((key) => guard[key] === true);
   const guardFalseOk = falseGuardKeys.every((key) => guard[key] === false);
 
   return {
-    passed: identityOk && selectionOk && skinSetOk && samplesOk && guardTrueOk && guardFalseOk,
+    passed: identityOk && selectionOk && skinSetOk && countsOk && samplesOk && guardTrueOk && guardFalseOk,
     identityOk,
     selectionOk,
     skinSetOk,
+    countsOk,
     samplesOk,
+    realSamplesOk,
+    cssSamplesOk,
     guardTrueOk,
     guardFalseOk
   };
@@ -204,18 +300,39 @@ missingSkin.available_skin_ids = missingSkin.available_skin_ids.filter((skinId) 
 addResult("negative_case_missing_skin_fails", evaluateSnapshot(missingSkin).skinSetOk === false);
 
 const wrongRenderMode = clone(fixture);
-wrongRenderMode.display_samples[0].render_mode = "asset_archive_image";
-addResult("negative_case_asset_render_mode_fails", evaluateSnapshot(wrongRenderMode).samplesOk === false);
+wrongRenderMode.display_samples[0].render_mode = "css_skin_only";
+addResult("negative_case_first_real_render_mode_fails", evaluateSnapshot(wrongRenderMode).realSamplesOk === false);
 
-const archiveReadClaim = clone(fixture);
-archiveReadClaim.guard.asset_archive_read_performed = true;
-archiveReadClaim.display_samples[0].asset_archive_read_performed = true;
-addResult("negative_case_asset_archive_read_claim_fails", evaluateSnapshot(archiveReadClaim).passed === false);
+const staticOnlyIdentity = clone(fixture);
+staticOnlyIdentity.phase = "review_console_static_preview_display_proxy_contract";
+staticOnlyIdentity.snapshot_status = "golden_static_example";
+staticOnlyIdentity.execution_mode = "review_console_static_preview_display_proxy_only";
+staticOnlyIdentity.source_mode = "review_session_image_versions_to_css_skin_proxy";
+staticOnlyIdentity.guard.asset_archive_read_performed = false;
+staticOnlyIdentity.guard.asset_archive_ui_read_performed = false;
+staticOnlyIdentity.guard.preview_loaded_or_rendered = false;
+staticOnlyIdentity.guard.browser_preview_load_performed = false;
+addResult("negative_case_static_only_contract_fails", evaluateSnapshot(staticOnlyIdentity).passed === false);
 
-const previewLoadedClaim = clone(fixture);
-previewLoadedClaim.guard.preview_loaded_or_rendered = true;
-previewLoadedClaim.display_samples[0].preview_loaded_or_rendered = true;
-addResult("negative_case_preview_loaded_claim_fails", evaluateSnapshot(previewLoadedClaim).passed === false);
+const previewLoadedMissing = clone(fixture);
+previewLoadedMissing.guard.preview_loaded_or_rendered = false;
+previewLoadedMissing.display_samples[0].preview_loaded_or_rendered = false;
+addResult("negative_case_preview_loaded_false_fails", evaluateSnapshot(previewLoadedMissing).passed === false);
+
+const originalImageLoadClaim = clone(fixture);
+originalImageLoadClaim.guard.browser_original_image_load_performed = true;
+originalImageLoadClaim.display_samples[0].browser_original_image_load_performed = true;
+addResult("negative_case_original_image_load_claim_fails", evaluateSnapshot(originalImageLoadClaim).passed === false);
+
+const fourthRealPreview = clone(fixture);
+fourthRealPreview.display_samples.push({
+  ...clone(fixture.display_samples[0]),
+  source_asset_ref: "asset_archive/unselected/preview.webp",
+  source_preview_ref: "asset_archive/unselected/preview.webp",
+  thumbnail_ref: "asset_archive/unselected/preview.webp",
+  stage_image_ref: "asset_archive/unselected/preview.webp"
+});
+addResult("negative_case_fourth_real_preview_ref_fails", evaluateSnapshot(fourthRealPreview).realSamplesOk === false);
 
 for (const token of [
   "const previewDisplaySkins = [",
@@ -223,6 +340,7 @@ for (const token of [
   'draft_output_key: "preview_display_state"',
   "review_console_static_preview_display_proxy_only",
   "review_session_image_versions_to_css_skin_proxy",
+  "review_console_asset_archive_real_preview_render_activated",
   "asset_archive_exact_tracked_preview_refs_to_preview_display_state",
   'real_image_source_policy: "tracked_asset_archive_preview_ref_required_for_clean_checkout_review"',
   'const trackedPreviewActive = boundary.boundary_status === "exact_tracked_preview_refs_render_active"',
@@ -232,10 +350,13 @@ for (const token of [
   'image_source_mode: "source_preview_ref"',
   'render_mode: "asset_archive_preview_image"',
   "source_original_provenance_only",
+  'preview_ref_role: "tracked_review_render_source"',
+  'original_ref_role: "provenance_only_not_review_render_source"',
   'render_mode: "css_skin_only"',
   "static_proxy_only: true",
   "asset_archive_ui_read_performed",
-  "preview_loaded_or_rendered: false",
+  "preview_loaded_or_rendered: realRenderActive",
+  "browser_preview_load_performed: realRenderActive",
   "preview_display_state: previewDisplayProxyState()",
   "data-preview-skin-id"
 ]) {
@@ -260,10 +381,10 @@ for (const skin of expectedSkins) {
   addResult(`style_stage_${skin.skin_class}`, styles.includes(`.preview-stage-art.${skin.skin_class}`));
 }
 
-const sourceHits = forbiddenTrueSourcePatterns
+const sourceHits = forbiddenSourcePatterns
   .filter(({ pattern }) => pattern.test(app))
   .map(({ name }) => name);
-addResult("app_does_not_claim_preview_or_archive_side_effects", sourceHits.length === 0, sourceHits);
+addResult("app_does_not_render_original_or_read_source_binary", sourceHits.length === 0, sourceHits);
 
 addResult(
   "server_exports_three_tracked_preview_refs",
@@ -285,24 +406,38 @@ for (const ref of legacyUntrackedSourceOriginalRefs) {
 }
 
 const fixtureText = JSON.stringify(fixture, null, 2);
+for (const key of trueGuardKeys) {
+  addResult(`fixture_guard_${key}_true`, fixtureText.includes(`"${key}": true`));
+}
 for (const key of falseGuardKeys) {
   addResult(`fixture_guard_${key}_false`, fixtureText.includes(`"${key}": false`));
 }
 
+const realSamples = fixture.display_samples.filter((sample) => sample.render_mode === "asset_archive_preview_image");
 const passed = failures.length === 0;
 const output = {
   validator: "validate_review_console_preview_display_state",
-  version: "v1",
+  version: "v2",
   passed,
-  status: passed ? "review_console_preview_display_state_verified" : "review_console_preview_display_state_failed",
+  status: passed
+    ? "review_console_preview_display_state_activated_tracked_preview_verified"
+    : "review_console_preview_display_state_failed",
   draft_output_key: fixture.draft_output_key,
   execution_mode: fixture.execution_mode,
+  source_mode: fixture.source_mode,
+  real_image_source_policy: fixture.real_image_source_policy,
   thumbnail_skin_count: fixture.thumbnail_skin_count,
   available_skin_ids: fixture.available_skin_ids,
   display_sample_count: fixture.display_samples.length,
+  real_preview_ref_count: fixture.real_preview_ref_count,
+  real_original_ref_count: fixture.real_original_ref_count,
+  selected_preview_refs: realSamples.map((sample) => sample.source_preview_ref),
+  source_original_refs_provenance_only: realSamples.map((sample) => sample.source_original_ref),
   asset_archive_read_performed: fixture.guard.asset_archive_read_performed,
   asset_archive_ui_read_performed: fixture.guard.asset_archive_ui_read_performed,
   preview_loaded_or_rendered: fixture.guard.preview_loaded_or_rendered,
+  browser_preview_load_performed: fixture.guard.browser_preview_load_performed,
+  browser_original_image_load_performed: fixture.guard.browser_original_image_load_performed,
   preview_creation_or_copy_performed: fixture.guard.preview_creation_or_copy_performed,
   source_image_binary_read_performed: fixture.guard.source_image_binary_read_performed,
   provider_contact_performed: fixture.guard.provider_contact_performed,
