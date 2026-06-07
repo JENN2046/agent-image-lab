@@ -53,6 +53,7 @@ const state = {
   sampleDrawerOpen: false,
   previewDisplaySkinId: "studio_dashboard",
   previewDisplaySelectedPreviewId: "preview-display-asset-archive-accepted-french-summer-rattan-bucket-bag-001",
+  previewStageZoomPercent: 100,
   highRiskSheetOpen: false,
   selectedSpineBlockerId: null,
   evidenceMode: "triage",
@@ -155,12 +156,15 @@ const previewDisplaySkins = [
 
 const assetArchiveRealPreviewRenderActivation = {
   phase: "review_console_asset_archive_real_preview_render_activation_20260608",
+  original_render_phase: "review_console_asset_archive_original_image_zoom_20260608",
   gate_ref: "tests/schema_examples/ASSET_ARCHIVE_REAL_PREVIEW_RENDER_GATE.example.json",
   source_mapping_ref: "tests/schema_examples/ASSET_ARCHIVE_READONLY_PREVIEW_ADAPTER_MAPPING_DRAFT.example.json",
   enabled: "yes" === "yes",
   authorized_answer: "yes",
-  allowed_operation: "browser_load_existing_preview_refs_only",
+  allowed_operation: "browser_load_existing_original_refs_only",
+  real_image_source_policy: "source_original_ref_required_for_real_review",
   max_preview_refs: 3,
+  max_original_refs: 3,
   selected_preview_refs: [
     {
       preview_id: "preview-display-asset-archive-accepted-french-summer-rattan-bucket-bag-001",
@@ -170,7 +174,9 @@ const assetArchiveRealPreviewRenderActivation = {
       variant: "Receipt mapped accepted preview",
       score: null,
       skin_id: "product_still_life",
-      source_asset_ref: "asset_archive/accepted_samples/accepted_french_summer_rattan_bucket_bag_001/preview.webp",
+      source_asset_ref: "runs/real_generation/v7_31_native_doubao_french_summer_rattan_bag_v2_watermark_off_run/native_doubao_1778327047448_0.jpg",
+      source_original_ref: "runs/real_generation/v7_31_native_doubao_french_summer_rattan_bag_v2_watermark_off_run/native_doubao_1778327047448_0.jpg",
+      source_preview_ref: "asset_archive/accepted_samples/accepted_french_summer_rattan_bucket_bag_001/preview.webp",
       source_manifest_ref: "asset_archive/accepted_samples/accepted_french_summer_rattan_bucket_bag_001/manifest.json"
     },
     {
@@ -181,7 +187,9 @@ const assetArchiveRealPreviewRenderActivation = {
       variant: "Receipt mapped accepted preview",
       score: null,
       skin_id: "studio_dashboard",
-      source_asset_ref: "asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/preview.webp",
+      source_asset_ref: "runs/real_generation/v7_24_native_doubao_v3_single_real_run/native_doubao_1778322474131_0.jpg",
+      source_original_ref: "runs/real_generation/v7_24_native_doubao_v3_single_real_run/native_doubao_1778322474131_0.jpg",
+      source_preview_ref: "asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/preview.webp",
       source_manifest_ref: "asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/manifest.json"
     },
     {
@@ -192,7 +200,9 @@ const assetArchiveRealPreviewRenderActivation = {
       variant: "Receipt mapped failure preview",
       score: null,
       skin_id: "evidence_blocker",
-      source_asset_ref: "asset_archive/failure_samples/failure_french_summer_rattan_bag_v7_29_001/preview.webp",
+      source_asset_ref: "runs/real_generation/v7_29_native_doubao_french_summer_rattan_bag_v2_single_real_run/native_doubao_1778325901725_0.jpg",
+      source_original_ref: "runs/real_generation/v7_29_native_doubao_french_summer_rattan_bag_v2_single_real_run/native_doubao_1778325901725_0.jpg",
+      source_preview_ref: "asset_archive/failure_samples/failure_french_summer_rattan_bag_v7_29_001/preview.webp",
       source_manifest_ref: "asset_archive/failure_samples/failure_french_summer_rattan_bag_v7_29_001/manifest.json"
     }
   ]
@@ -3653,6 +3663,7 @@ function previewDisplayRealPreviewRecords() {
   return assetArchiveRealPreviewRenderActivation.selected_preview_refs.map((sample) => {
     const skin = previewDisplaySkinById(sample.skin_id);
     const renderedNow = assetArchiveRealPreviewRenderActivation.enabled;
+    const originalRef = sample.source_original_ref || null;
     return {
       preview_id: sample.preview_id,
       version_id: sample.version_id,
@@ -3661,19 +3672,27 @@ function previewDisplayRealPreviewRecords() {
       variant: sample.variant,
       score: sample.score,
       tone: skin.tone,
-      source_asset_ref: sample.source_asset_ref,
+      source_asset_ref: originalRef,
+      source_original_ref: originalRef,
+      source_preview_ref: sample.source_preview_ref,
       source_manifest_ref: sample.source_manifest_ref,
-      thumbnail_ref: sample.source_asset_ref,
+      thumbnail_ref: originalRef,
+      stage_image_ref: originalRef,
+      image_source_mode: "source_original_ref",
       skin_id: skin.skin_id,
       skin_class: skin.skin_class,
       skin_label_cn: skin.label_cn,
       aspect_ratio: skin.aspect_ratio,
-      render_mode: "asset_archive_preview_image",
-      proxy_recipe_cn: "Gate-authorized exact asset_archive preview render with CSS skin fallback.",
+      render_mode: "asset_archive_original_image",
+      proxy_recipe_cn: "Gate-authorized exact source original render with CSS skin fallback.",
+      original_image_required: true,
+      source_original_available: typeof originalRef === "string" && originalRef.length > 0,
       static_proxy_only: !renderedNow,
       asset_archive_read_performed: renderedNow,
       asset_archive_ui_read_performed: renderedNow,
-      browser_preview_load_performed: renderedNow,
+      browser_preview_load_performed: false,
+      browser_original_image_load_performed: renderedNow,
+      source_image_binary_read_performed: renderedNow,
       preview_loaded_or_rendered: renderedNow
     };
   });
@@ -3699,29 +3718,128 @@ function currentPreviewDisplay() {
 }
 
 function previewDisplayUsesRealImage(preview) {
-  return preview?.render_mode === "asset_archive_preview_image" && typeof preview.thumbnail_ref === "string" && preview.thumbnail_ref.length > 0;
+  return ["asset_archive_preview_image", "asset_archive_original_image"].includes(preview?.render_mode) &&
+    typeof previewDisplayStageImageRef(preview) === "string" &&
+    previewDisplayStageImageRef(preview).length > 0;
+}
+
+function previewDisplayStageImageRef(preview) {
+  return preview?.stage_image_ref || preview?.source_original_ref || preview?.thumbnail_ref || "";
 }
 
 function previewDisplayImageSrc(preview) {
   if (!previewDisplayUsesRealImage(preview)) return "";
-  return `/${preview.thumbnail_ref}`;
+  return `/${previewDisplayStageImageRef(preview)}`;
+}
+
+function previewRenderBoundaryState(currentPreview = currentPreviewDisplay()) {
+  const realPreviewRecords = previewDisplayRealPreviewRecords();
+  const realPreviewActive = assetArchiveRealPreviewRenderActivation.enabled;
+  const selectedOriginalRefs = realPreviewRecords.map((sample) => sample.source_original_ref).filter(Boolean);
+  const selectedPreviewRefs = realPreviewRecords.map((sample) => sample.source_preview_ref).filter(Boolean);
+  const currentOriginalRef = previewDisplayUsesRealImage(currentPreview) ? previewDisplayStageImageRef(currentPreview) : null;
+  const currentRefIndex = currentOriginalRef ? selectedOriginalRefs.indexOf(currentOriginalRef) : -1;
+  return {
+    draft_output_key: "preview_render_boundary_state",
+    boundary_status: realPreviewActive ? "exact_original_refs_render_active" : "css_skin_only",
+    target_surface: "review_console_review_spine",
+    render_gate_ref: assetArchiveRealPreviewRenderActivation.gate_ref,
+    source_mapping_ref: assetArchiveRealPreviewRenderActivation.source_mapping_ref,
+    real_image_source_policy: assetArchiveRealPreviewRenderActivation.real_image_source_policy,
+    selected_preview_ref_count: selectedPreviewRefs.length,
+    selected_original_ref_count: selectedOriginalRefs.length,
+    max_preview_refs: assetArchiveRealPreviewRenderActivation.max_preview_refs,
+    max_original_refs: assetArchiveRealPreviewRenderActivation.max_original_refs,
+    current_preview_ref: currentPreview?.source_preview_ref || null,
+    current_original_ref: currentOriginalRef,
+    current_original_ref_index: currentRefIndex >= 0 ? currentRefIndex + 1 : null,
+    current_preview_ref_index: currentRefIndex >= 0 ? currentRefIndex + 1 : null,
+    current_ref_in_exact_allowlist: currentRefIndex >= 0,
+    selected_preview_refs: selectedPreviewRefs,
+    selected_original_refs: selectedOriginalRefs,
+    stage_zoom_percent: state.previewStageZoomPercent,
+    ui_summary_cn: realPreviewActive ? `原图预览 ${selectedOriginalRefs.length}/${assetArchiveRealPreviewRenderActivation.max_original_refs} · exact original refs · read-only` : "CSS 皮肤预览 · no asset_archive render",
+    guard: {
+      exact_asset_archive_preview_refs_only: false,
+      exact_source_original_refs_only: realPreviewActive,
+      browser_preview_load_performed: false,
+      browser_original_image_load_performed: realPreviewActive,
+      preview_loaded_or_rendered: realPreviewActive,
+      asset_archive_ui_read_performed: realPreviewActive,
+      preview_creation_or_copy_performed: false,
+      fetch_performed: false,
+      file_write_performed: false,
+      source_image_binary_read_performed: realPreviewActive,
+      provider_contact_performed: false,
+      plugin_call_performed: false,
+      api_call_performed: false,
+      image_generation_performed: false,
+      DailyNote_write_performed: false,
+      VCP_memory_write_performed: false,
+      production_candidate_write_performed: false
+    }
+  };
+}
+
+function previewOriginalRenderState(currentPreview = currentPreviewDisplay()) {
+  const realPreviewRecords = previewDisplayRealPreviewRecords();
+  const selectedOriginalRefs = realPreviewRecords.map((sample) => sample.source_original_ref).filter(Boolean);
+  const selectedPreviewRefs = realPreviewRecords.map((sample) => sample.source_preview_ref).filter(Boolean);
+  const currentOriginalRef = previewDisplayUsesRealImage(currentPreview) ? previewDisplayStageImageRef(currentPreview) : null;
+  return {
+    draft_output_key: "preview_original_render_state",
+    state_status: assetArchiveRealPreviewRenderActivation.enabled ? "original_image_render_active" : "original_image_render_inactive",
+    policy: assetArchiveRealPreviewRenderActivation.real_image_source_policy,
+    selected_original_ref_count: selectedOriginalRefs.length,
+    selected_preview_ref_count: selectedPreviewRefs.length,
+    current_original_ref: currentOriginalRef,
+    current_preview_ref: currentPreview?.source_preview_ref || null,
+    stage_zoom_percent: state.previewStageZoomPercent,
+    min_zoom_percent: stageZoomRange.min,
+    max_zoom_percent: stageZoomRange.max,
+    zoom_step_percent: stageZoomRange.step,
+    selected_original_refs: selectedOriginalRefs,
+    selected_preview_refs: selectedPreviewRefs,
+    preview_ref_role: "provenance_only_not_review_render_source",
+    fallback_to_preview_allowed: false,
+    guard: {
+      browser_original_image_load_performed: assetArchiveRealPreviewRenderActivation.enabled,
+      browser_preview_load_performed: false,
+      source_image_binary_read_performed: assetArchiveRealPreviewRenderActivation.enabled,
+      preview_creation_or_copy_performed: false,
+      fetch_performed: false,
+      file_write_performed: false,
+      provider_contact_performed: false,
+      plugin_call_performed: false,
+      api_call_performed: false,
+      image_generation_performed: false,
+      DailyNote_write_performed: false,
+      VCP_memory_write_performed: false,
+      production_candidate_write_performed: false
+    }
+  };
 }
 
 function previewDisplayProxyState() {
   const current = currentPreviewDisplay();
   const realRenderActive = assetArchiveRealPreviewRenderActivation.enabled;
+  const realPreviewRecords = previewDisplayRealPreviewRecords();
   return {
     draft_output_key: "preview_display_state",
     execution_mode: realRenderActive ? "review_console_asset_archive_real_preview_render_activated" : "review_console_static_preview_display_proxy_only",
-    source_mode: realRenderActive ? "asset_archive_exact_refs_to_preview_display_state" : "review_session_image_versions_to_css_skin_proxy",
+    source_mode: realRenderActive ? "asset_archive_exact_original_refs_to_preview_display_state" : "review_session_image_versions_to_css_skin_proxy",
     render_activation_ref: assetArchiveRealPreviewRenderActivation.phase,
+    original_render_activation_ref: assetArchiveRealPreviewRenderActivation.original_render_phase,
     render_gate_ref: assetArchiveRealPreviewRenderActivation.gate_ref,
+    real_image_source_policy: assetArchiveRealPreviewRenderActivation.real_image_source_policy,
     selected_version_id: state.currentVersionId,
     selected_preview_id: current?.preview_id || null,
     selected_skin_id: current?.skin_id || null,
     available_skin_ids: previewDisplaySkins.map((skin) => skin.skin_id),
     thumbnail_skin_count: previewDisplaySkins.length,
-    real_preview_ref_count: previewDisplayRealPreviewRecords().length,
+    real_preview_ref_count: realPreviewRecords.length,
+    real_original_ref_count: realPreviewRecords.filter((sample) => sample.source_original_ref).length,
+    stage_zoom_percent: state.previewStageZoomPercent,
     display_samples: reviewSpineSamples().map((sample) => ({
       preview_id: sample.preview_id,
       version_id: sample.version_id,
@@ -3733,28 +3851,40 @@ function previewDisplayProxyState() {
       skin_label_cn: sample.skin_label_cn,
       aspect_ratio: sample.aspect_ratio,
       source_asset_ref: sample.source_asset_ref,
+      source_preview_ref: sample.source_preview_ref || null,
+      source_original_ref: sample.source_original_ref || null,
       thumbnail_ref: sample.thumbnail_ref,
+      stage_image_ref: sample.stage_image_ref || null,
+      image_source_mode: sample.image_source_mode || "css_skin_only",
       render_mode: sample.render_mode,
+      original_image_required: sample.original_image_required === true,
+      source_original_available: sample.source_original_available === true,
       static_proxy_only: sample.static_proxy_only,
       asset_archive_read_performed: sample.asset_archive_read_performed,
       asset_archive_ui_read_performed: sample.asset_archive_ui_read_performed === true,
       browser_preview_load_performed: sample.browser_preview_load_performed === true,
+      browser_original_image_load_performed: sample.browser_original_image_load_performed === true,
+      source_image_binary_read_performed: sample.source_image_binary_read_performed === true,
       preview_loaded_or_rendered: sample.preview_loaded_or_rendered
     })),
     guard: {
       static_proxy_only: !realRenderActive,
       css_skin_only: !realRenderActive,
-      exact_asset_archive_preview_refs_only: realRenderActive,
-      selected_preview_ref_count: previewDisplayRealPreviewRecords().length,
+      exact_asset_archive_preview_refs_only: false,
+      exact_source_original_refs_only: realRenderActive,
+      selected_preview_ref_count: realPreviewRecords.length,
+      selected_original_ref_count: realPreviewRecords.filter((sample) => sample.source_original_ref).length,
       max_preview_refs: assetArchiveRealPreviewRenderActivation.max_preview_refs,
+      max_original_refs: assetArchiveRealPreviewRenderActivation.max_original_refs,
       asset_archive_read_performed: realRenderActive,
       asset_archive_ui_read_performed: realRenderActive,
       preview_loaded_or_rendered: realRenderActive,
-      browser_preview_load_performed: realRenderActive,
+      browser_preview_load_performed: false,
+      browser_original_image_load_performed: realRenderActive,
       preview_creation_or_copy_performed: false,
       fetch_performed: false,
       file_write_performed: false,
-      source_image_binary_read_performed: false,
+      source_image_binary_read_performed: realRenderActive,
       provider_contact_performed: false,
       plugin_call_performed: false,
       api_call_performed: false,
@@ -3774,9 +3904,13 @@ function previewDisplayProxyState() {
 function previewStageMarkup(preview) {
   if (previewDisplayUsesRealImage(preview)) {
     const imageSrc = previewDisplayImageSrc(preview);
+    const originalRef = previewDisplayStageImageRef(preview);
+    const previewRef = preview?.source_preview_ref || "";
     return `
-      <img class="preview-stage-image" src="${escapeHtml(imageSrc)}" alt="${escapeHtml(preview.label)} ${escapeHtml(preview.variant)}" data-real-preview-ref="${escapeHtml(preview.thumbnail_ref)}" loading="eager" decoding="async" />
-      <span class="preview-stage-chip">${escapeHtml(preview.skin_label_cn || "真实预览")} · real</span>
+      <div class="preview-image-scroll" data-preview-image-scroll>
+        <img class="preview-stage-image" src="${escapeHtml(imageSrc)}" alt="${escapeHtml(preview.label)} ${escapeHtml(preview.variant)}" data-real-original-ref="${escapeHtml(originalRef)}" data-real-preview-ref="${escapeHtml(previewRef)}" data-stage-image-ref="${escapeHtml(originalRef)}" loading="eager" decoding="async" />
+      </div>
+      <span class="preview-stage-chip">${escapeHtml(preview.skin_label_cn || "原图预览")} · original</span>
     `;
   }
   return `
@@ -3787,6 +3921,21 @@ function previewStageMarkup(preview) {
     <span class="preview-stage-plane plane-b"></span>
     <span class="preview-stage-plane plane-c"></span>
     <span class="preview-stage-chip">${escapeHtml(preview?.skin_label_cn || "静态预览")}</span>
+  `;
+}
+
+function renderPreviewBoundaryStrip(boundary) {
+  const root = qs("#previewBoundaryStrip");
+  if (!root || !boundary) return;
+  const active = boundary.boundary_status === "exact_refs_render_active" || boundary.boundary_status === "exact_original_refs_render_active";
+  root.classList.toggle("is-active", active);
+  root.innerHTML = `
+    <span class="preview-boundary-lede"><strong>${escapeHtml(active ? "ORIGINAL PREVIEW" : "CSS PREVIEW")}</strong>${escapeHtml(boundary.ui_summary_cn)}</span>
+    <span><strong>refs</strong>${escapeHtml(boundary.selected_original_ref_count || boundary.selected_preview_ref_count)} / ${escapeHtml(boundary.max_original_refs || boundary.max_preview_refs)}</span>
+    <span><strong>current</strong>${escapeHtml(boundary.current_original_ref_index || boundary.current_preview_ref_index || "-")}</span>
+    <span><strong>zoom</strong>${escapeHtml(boundary.stage_zoom_percent || 100)}%</span>
+    <span><strong>writes</strong>${escapeHtml(boundary.guard.file_write_performed ? "on" : "off")}</span>
+    <span><strong>generation</strong>${escapeHtml(boundary.guard.image_generation_performed ? "on" : "off")}</span>
   `;
 }
 
@@ -3848,29 +3997,45 @@ function renderReviewSpineV11() {
   const mediumCount = blockers.filter((blocker) => blocker.severity === "medium").length;
   const lowCount = blockers.filter((blocker) => blocker.severity === "low").length;
   const samples = reviewSpineSamples();
+  const boundaryState = previewRenderBoundaryState(currentPreview);
 
   qs("#spineTopSampleLabel").textContent = `样片 ${currentSampleNumber} / 48`;
   qs("#spineStageCounter").textContent = `${currentSampleNumber} / 48`;
+  const zoomLabel = qs("#stageZoomLabel");
+  if (zoomLabel) zoomLabel.textContent = `${state.previewStageZoomPercent}%`;
+  qsa("[data-stage-zoom-out]").forEach((button) => {
+    button.disabled = state.previewStageZoomPercent <= stageZoomRange.min;
+  });
+  qsa("[data-stage-zoom-in]").forEach((button) => {
+    button.disabled = state.previewStageZoomPercent >= stageZoomRange.max;
+  });
 
   const stage = qs(".spine-image-stage");
   const stageArt = qs(".stage-art");
   const currentUsesRealImage = previewDisplayUsesRealImage(currentPreview);
+  const currentStageImageRef = currentUsesRealImage ? previewDisplayStageImageRef(currentPreview) : "";
   if (stage && currentPreview) {
     stage.className = `spine-image-stage ${safeClassToken(currentPreview.skin_class)}`;
-    stage.dataset.previewProxy = currentUsesRealImage ? "asset_archive_exact_render" : "static";
+    stage.dataset.previewProxy = currentUsesRealImage ? "asset_archive_original_exact_render" : "static";
     stage.dataset.previewSkin = currentPreview.skin_id;
-    stage.dataset.realPreviewRef = currentUsesRealImage ? currentPreview.thumbnail_ref : "";
+    stage.dataset.realPreviewRef = currentUsesRealImage ? currentPreview.source_preview_ref || "" : "";
+    stage.dataset.realOriginalRef = currentStageImageRef;
+    stage.dataset.stageZoomPercent = String(state.previewStageZoomPercent);
   }
   if (stageArt && currentPreview) {
     stageArt.className = `stage-art preview-stage-art ${safeClassToken(currentPreview.skin_class)}${currentUsesRealImage ? " has-real-preview" : ""}`;
-    stageArt.setAttribute("aria-label", currentUsesRealImage ? `${currentPreview.label} 真实预览图` : `${currentPreview.skin_label_cn} 静态预览皮肤`);
+    stageArt.style.setProperty("--stage-zoom-scale", String(state.previewStageZoomPercent / 100));
+    stageArt.style.setProperty("--stage-zoom-size", `${state.previewStageZoomPercent}%`);
+    stageArt.dataset.stageZoomPercent = String(state.previewStageZoomPercent);
+    stageArt.setAttribute("aria-label", currentUsesRealImage ? `${currentPreview.label} 原图预览图` : `${currentPreview.skin_label_cn} 静态预览皮肤`);
     stageArt.innerHTML = previewStageMarkup(currentPreview);
   }
+  renderPreviewBoundaryStrip(boundaryState);
 
   shellRoot.innerHTML = samples.map((sample, index) => {
     const isActive = sample.preview_id === currentPreview?.preview_id || (!currentPreview && index === 0);
     const thumb = previewDisplayUsesRealImage(sample)
-      ? `<span class="spine-sample-thumb ${escapeHtml(sample.skin_class)} has-real-preview" aria-hidden="true"><img src="${escapeHtml(previewDisplayImageSrc(sample))}" alt="" data-real-preview-ref="${escapeHtml(sample.thumbnail_ref)}" loading="eager" decoding="async" /></span>`
+      ? `<span class="spine-sample-thumb ${escapeHtml(sample.skin_class)} has-real-preview" aria-hidden="true"><img src="${escapeHtml(previewDisplayImageSrc(sample))}" alt="" data-real-original-ref="${escapeHtml(previewDisplayStageImageRef(sample))}" data-real-preview-ref="${escapeHtml(sample.source_preview_ref || "")}" loading="eager" decoding="async" /></span>`
       : `<span class="spine-sample-thumb ${escapeHtml(sample.skin_class)}" aria-hidden="true"></span>`;
     return `
       <button type="button" class="spine-sample-item${isActive ? " is-active" : ""}" data-spine-version-id="${escapeHtml(sample.version_id)}" data-preview-id="${escapeHtml(sample.preview_id)}" data-preview-skin-id="${escapeHtml(sample.skin_id)}" title="${escapeHtml(sample.skin_label_cn)} / ${escapeHtml(sample.render_mode)}">
@@ -3889,7 +4054,8 @@ function renderReviewSpineV11() {
     <span><strong>版本</strong>${escapeHtml(currentPreview?.variant || current?.label || "备选版本 B")}</span>
     <span><strong>预览代理</strong>${escapeHtml(currentPreview?.render_mode || "css_skin_only")}</span>
     <span><strong>皮肤</strong>${escapeHtml(currentPreview?.skin_label_cn || "静态预览")}</span>
-    <span><strong>来源</strong>${escapeHtml(currentPreview?.source_asset_ref || "mock image_versions")}</span>
+    <span><strong>缩放</strong>${escapeHtml(state.previewStageZoomPercent)}%</span>
+    <span><strong>来源</strong>${escapeHtml(currentStageImageRef || currentPreview?.source_asset_ref || "mock image_versions")}</span>
     <span><strong>画幅</strong>${escapeHtml(currentPreview?.aspect_ratio || "16:9")}</span>
   `;
 
@@ -4001,6 +4167,29 @@ function setCurrentVersionByOffset(offset) {
   state.currentVersionId = state.image_versions[nextIndex].version_id;
   state.previewDisplaySelectedPreviewId = `preview-display-${safeClassToken(state.currentVersionId)}`;
   renderAll();
+}
+
+const stageZoomRange = {
+  min: 50,
+  max: 400,
+  step: 25,
+  reset: 100
+};
+
+function clampStageZoom(percent) {
+  const numericPercent = Number(percent);
+  if (!Number.isFinite(numericPercent)) return stageZoomRange.reset;
+  return Math.min(stageZoomRange.max, Math.max(stageZoomRange.min, Math.round(numericPercent / stageZoomRange.step) * stageZoomRange.step));
+}
+
+function setPreviewStageZoom(percent) {
+  state.previewStageZoomPercent = clampStageZoom(percent);
+  renderReviewSpineV11();
+  renderDraft();
+}
+
+function bumpPreviewStageZoom(direction) {
+  setPreviewStageZoom(state.previewStageZoomPercent + direction * stageZoomRange.step);
 }
 
 function setSampleDrawerOpen(open) {
@@ -5010,6 +5199,8 @@ function renderDraft() {
   const memoryApproval = approvalPayload();
   const humanTotal = totalFrom(state.humanScores);
   const realRenderActive = assetArchiveRealPreviewRenderActivation.enabled;
+  const previewBoundaryState = previewRenderBoundaryState();
+  const previewOriginalState = previewOriginalRenderState();
   const draft = {
     adapter_dry_run_handoff: state.adapter_dry_run_handoff,
     review_result_protocol_static_handoff: state.review_result_protocol_static_handoff,
@@ -5093,6 +5284,8 @@ function renderDraft() {
     readonly_visual_review_dataset_regression_state: readonlyVisualReviewDatasetRegressionState(),
     codex_session_import_record_reader: state.import_record_reader,
     preview_display_state: previewDisplayProxyState(),
+    preview_render_boundary_state: previewBoundaryState,
+    preview_original_render_state: previewOriginalState,
     evidence_progressive_disclosure_state: evidenceFocusState(),
     current_decision_state: {
       sample_id: currentVersion()?.version_id || state.currentVersionId,
@@ -5199,6 +5392,15 @@ qsa("[data-spine-sample-prev]").forEach((button) => {
 });
 qsa("[data-spine-sample-next]").forEach((button) => {
   button.addEventListener("click", () => setCurrentVersionByOffset(1));
+});
+qsa("[data-stage-zoom-out]").forEach((button) => {
+  button.addEventListener("click", () => bumpPreviewStageZoom(-1));
+});
+qsa("[data-stage-zoom-in]").forEach((button) => {
+  button.addEventListener("click", () => bumpPreviewStageZoom(1));
+});
+qsa("[data-stage-zoom-reset]").forEach((button) => {
+  button.addEventListener("click", () => setPreviewStageZoom(stageZoomRange.reset));
 });
 qsa("[data-sample-drawer-toggle]").forEach((button) => {
   button.addEventListener("click", () => setSampleDrawerOpen(!state.sampleDrawerOpen));

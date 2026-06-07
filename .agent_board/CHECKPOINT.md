@@ -1,3 +1,115 @@
+## Checkpoint - Original Image Render Zoom 2026-06-08
+
+```text
+phase: review_console_asset_archive_original_image_render_zoom_20260608
+status: completed_validated_original_first_render_with_zoom_pending_final_validation
+result: REVIEW_CONSOLE_REAL_IMAGES_USE_SOURCE_ORIGINALS_WITH_STAGE_ZOOM
+summary: Updated the Review Console real-image path so the activated three selected records render source original JPG refs instead of 512px preview.webp. Added reviewer zoom controls and an explicit preview_original_render_state so future real review images are original-first and preview refs remain provenance only.
+receipt: reports/review_console_asset_archive_original_image_render/original_image_render_zoom_receipt_20260608.json
+policy_update:
+  - future_real_review_images_must_use_original: true
+  - preview_webp_role: provenance_only_not_review_render_source
+  - fallback_to_preview_allowed: false
+selected_original_refs:
+  - runs/real_generation/v7_31_native_doubao_french_summer_rattan_bag_v2_watermark_off_run/native_doubao_1778327047448_0.jpg
+  - runs/real_generation/v7_24_native_doubao_v3_single_real_run/native_doubao_1778322474131_0.jpg
+  - runs/real_generation/v7_29_native_doubao_french_summer_rattan_bag_v2_single_real_run/native_doubao_1778325901725_0.jpg
+changed_refs:
+  - review_console/static_prototype/index.html
+  - review_console/static_prototype/app.js
+  - review_console/static_prototype/styles.css
+  - scripts/serve_review_console_static.js
+  - reports/review_console_asset_archive_original_image_render/original_image_render_zoom_receipt_20260608.json
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+validation_run:
+  - node --check review_console/static_prototype/app.js: passed
+  - node --check scripts/serve_review_console_static.js: passed
+  - npm run validate:review-console-preview-display: passed
+  - route probes: 3 selected source originals 200 image/jpeg; unselected runs ref 403
+  - Browser audit: stage and 3 rail images use original refs; all natural dimensions 1920x1920; body overflow false
+  - Browser zoom audit: 100% default, 150% zoom with scroll range, reset to 100%
+boundary_checks:
+  - asset_archive_directory_listing_performed: false
+  - asset_archive_glob_performed: false
+  - open_runs_route_performed: false
+  - asset_archive_write_performed: false
+  - runs_write_performed: false
+  - preview_creation_or_copy_performed: false
+  - provider_contact_performed: false
+  - plugin_call_performed: false
+  - api_call_performed: false
+  - image_generation_performed: false
+  - DailyNote_write_performed: false
+  - VCP_memory_write_performed: false
+  - production_candidate_write_performed: false
+  - push_tag_release_deploy_performed: false
+recommended_next: run final local validation; exact-file local commit only if requested.
+```
+
+## Checkpoint - Review Console Width Unlock 2026-06-08
+
+```text
+phase: review_console_width_unlock_20260608
+status: completed_validated_local_css_refinement
+result: REVIEW_CONSOLE_DESKTOP_WIDTH_CAP_REMOVED
+summary: Removed the desktop `.review-shell` max-width behavior that kept the审片台 visually narrow on wide screens. The shell now uses the available browser width minus a small gutter, while the mobile override remains unchanged.
+changed_refs:
+  - review_console/static_prototype/styles.css
+validation_run:
+  - Browser current viewport audit: shell width equals body width minus gutter, body overflow false
+  - Browser temporary wide viewport audit: viewport 1932px, shell width 1890px, body overflow false
+boundary_checks:
+  - asset_archive_ref_changes: false
+  - asset_archive_directory_listing_performed: false
+  - asset_archive_glob_performed: false
+  - provider_contact_performed: false
+  - plugin_call_performed: false
+  - api_call_performed: false
+  - image_generation_performed: false
+  - DailyNote_write_performed: false
+  - VCP_memory_write_performed: false
+  - production_candidate_write_performed: false
+  - push_tag_release_deploy_performed: false
+recommended_next: final local validation, then exact-file local commit only if requested.
+```
+
+## Checkpoint - Preview Boundary Strip 2026-06-08
+
+```text
+phase: review_console_preview_boundary_strip_20260608
+status: completed_validated_local_ui_refinement
+result: REVIEW_CONSOLE_REAL_PREVIEW_BOUNDARY_VISIBLE_IN_STAGE
+summary: Added a compact preview boundary strip to the Review Console image stage so reviewers can see that the current real preview render is exact-ref, read-only, and non-generative without opening the draft output.
+changed_refs:
+  - review_console/static_prototype/index.html
+  - review_console/static_prototype/app.js
+  - review_console/static_prototype/styles.css
+validation_run:
+  - node --check review_console/static_prototype/app.js: passed
+  - npm run validate:review-console-static: passed
+  - Browser desktop audit: boundary strip visible, draft preview_render_boundary_state active, 3/3 refs, writes off, generation off
+  - Browser mobile audit: boundary strip one column, stage overflow false, body overflow false
+boundary_checks:
+  - new_asset_archive_ref_selected: false
+  - asset_archive_directory_listing_performed: false
+  - asset_archive_glob_performed: false
+  - additional_manifest_read_performed: false
+  - preview_creation_or_copy_performed: false
+  - asset_archive_write_performed: false
+  - provider_contact_performed: false
+  - plugin_call_performed: false
+  - api_call_performed: false
+  - image_generation_performed: false
+  - DailyNote_write_performed: false
+  - VCP_memory_write_performed: false
+  - production_candidate_write_performed: false
+  - push_tag_release_deploy_performed: false
+recommended_next: exact-file local commit only if requested; otherwise continue with another small Review Console review workflow improvement.
+```
+
 ## Checkpoint - Asset Archive Real Preview Render Activation 2026-06-08
 
 ```text

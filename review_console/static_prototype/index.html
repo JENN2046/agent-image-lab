@@ -68,8 +68,9 @@
                 <button type="button" class="icon-button" aria-label="矩阵视图">&#8862;</button>
               </div>
               <div class="stage-tool-group">
-                <button type="button" class="icon-button" aria-label="缩小">&#8722;</button>
-                <button type="button" class="icon-button" aria-label="放大">+</button>
+                <button type="button" class="icon-button" data-stage-zoom-out aria-label="缩小">&#8722;</button>
+                <button type="button" id="stageZoomLabel" class="stage-zoom-label" data-stage-zoom-reset aria-label="重置缩放">100%</button>
+                <button type="button" class="icon-button" data-stage-zoom-in aria-label="放大">+</button>
               </div>
               <div class="stage-counter">
                 <button type="button" class="icon-button" data-spine-sample-prev aria-label="上一张">&#8249;</button>
@@ -91,6 +92,7 @@
                 <span class="stage-light light-one"></span>
               </div>
             </div>
+            <div id="previewBoundaryStrip" class="preview-boundary-strip" data-preview-boundary-strip aria-label="预览渲染边界状态"></div>
             <div id="spineStageMeta" class="spine-stage-meta" aria-label="样片元数据"></div>
           </section>
 

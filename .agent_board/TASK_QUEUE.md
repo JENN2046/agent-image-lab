@@ -1,3 +1,50 @@
+- [x] ID: review_console_asset_archive_original_image_render_zoom_20260608
+      Lane: Amber exact asset_archive chain-record read plus Green local Review Console implementation/status sync.
+      Status: completed_validated_original_first_render_with_zoom_pending_final_validation.
+      Goal: Render future real Review Console images from source originals rather than 512px preview.webp, and add stage zoom controls.
+      Receipt: `reports/review_console_asset_archive_original_image_render/original_image_render_zoom_receipt_20260608.json`.
+      Changed refs:
+        - `review_console/static_prototype/index.html`
+        - `review_console/static_prototype/app.js`
+        - `review_console/static_prototype/styles.css`
+        - `scripts/serve_review_console_static.js`
+        - `reports/review_console_asset_archive_original_image_render/original_image_render_zoom_receipt_20260608.json`
+        - `.agent_board/HANDOFF.md`
+        - `.agent_board/RUN_STATE.md`
+        - `.agent_board/TASK_QUEUE.md`
+        - `.agent_board/CHECKPOINT.md`
+      Completed: mapped the 3 selected source original refs from exact capsule records; changed the real stage and real rail images to original JPG refs; added zoom out/in/reset controls; added `preview_original_render_state`; kept `preview.webp` as provenance only.
+      Boundary: no asset_archive listing/glob; no broad runs route; no asset copy/write/hash extraction; no provider/plugin/API/image generation; no DailyNote/VCP memory write; no production candidate write; no push/tag/release/deploy.
+      Validation: syntax passed; preview_display validator passed; route probes passed; Browser original render and zoom audits passed.
+      Remaining gate: final local validation; exact-file commit only if requested.
+---
+
+- [x] ID: review_console_width_unlock_20260608
+      Lane: Green local Review Console CSS refinement.
+      Status: completed_validated_local_css_refinement.
+      Goal: Remove the Review Console desktop width cap so the审片台 uses wide browser space.
+      Changed refs:
+        - `review_console/static_prototype/styles.css`
+      Completed: replaced `.review-shell` desktop width cap with `width: calc(100% - 28px)` while keeping the existing mobile width override.
+      Boundary: no asset refs; no asset_archive read/list/glob; no provider/plugin/API/image generation; no DailyNote/VCP memory write; no production candidate write; no push/tag/release/deploy.
+      Validation: Browser current viewport and temporary wide viewport audits passed; final local validation pending.
+      Remaining gate: optional exact-file local commit only if requested.
+---
+
+- [x] ID: review_console_preview_boundary_strip_20260608
+      Lane: Green local Review Console static prototype refinement.
+      Status: completed_validated_local_ui_refinement.
+      Goal: Continue improving the Review Console by making the real-preview exact refs boundary visible in the image stage.
+      Changed refs:
+        - `review_console/static_prototype/index.html`
+        - `review_console/static_prototype/app.js`
+        - `review_console/static_prototype/styles.css`
+      Completed: added a preview boundary strip and `preview_render_boundary_state`; desktop shows a compact five-cell status row; mobile folds to one column.
+      Boundary: no new asset refs; no asset_archive listing/glob; no additional manifest read; no asset copy/write; no provider/plugin/API/image generation; no DailyNote/VCP memory write; no production candidate write; no push/tag/release/deploy.
+      Validation: app syntax passed; review-console-static passed; Browser desktop and mobile audits passed.
+      Remaining gate: optional exact-file local commit only if requested.
+---
+
 - [x] ID: review_console_asset_archive_real_preview_render_activation_20260608
       Lane: Amber exact asset_archive preview render after explicit user yes response, followed by Green status-surface sync.
       Status: completed_validated_real_preview_render.

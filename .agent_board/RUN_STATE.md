@@ -1,3 +1,129 @@
+## Current Run State - Original Image Render Zoom 2026-06-08
+
+```text
+phase: review_console_asset_archive_original_image_render_zoom_20260608
+status: completed_validated_original_first_render_with_zoom_pending_final_validation
+lane: Amber exact asset_archive chain-record read plus local Review Console original render, followed by Green status-surface sync
+goal: Use the selected source original images for real Review Console image rendering and add reviewer zoom controls.
+branch: master
+receipt: reports/review_console_asset_archive_original_image_render/original_image_render_zoom_receipt_20260608.json
+changed_refs:
+  - review_console/static_prototype/index.html
+  - review_console/static_prototype/app.js
+  - review_console/static_prototype/styles.css
+  - scripts/serve_review_console_static.js
+  - reports/review_console_asset_archive_original_image_render/original_image_render_zoom_receipt_20260608.json
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+result:
+  - real-image display records now carry source_original_ref and source_preview_ref separately
+  - Review Console stage and real sample rail render original JPG refs from runs/real_generation, not preview.webp
+  - preview_display_state records original_image_required and image_source_mode=source_original_ref
+  - preview_original_render_state records original-first policy, exact original refs, zoom percent, and fallback_to_preview_allowed=false
+  - local server permits only 3 exact original refs and the prior 3 exact preview provenance refs
+validation:
+  - app/server syntax passed
+  - preview display validator passed
+  - original route probes passed and unselected runs ref returned 403
+  - Browser DOM verified all 3 original images complete with natural dimensions 1920x1920
+  - Browser zoom verified 150% zoom and scroll range, then reset to 100%
+boundary_checks:
+  asset_archive_directory_listing_performed: false
+  asset_archive_glob_performed: false
+  open_runs_route_performed: false
+  asset_archive_write_performed: false
+  runs_write_performed: false
+  preview_creation_or_copy_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  production_candidate_write_performed: false
+  push_tag_release_deploy_performed: false
+next_safe_task: final validation, then exact-file local commit only if requested; push remains separately gated.
+```
+
+## Current Run State - Review Console Width Unlock 2026-06-08
+
+```text
+phase: review_console_width_unlock_20260608
+status: completed_validated_local_css_refinement
+lane: Green local Review Console CSS refinement
+goal: Remove the desktop page-width cap that kept the审片台 centered and narrow on wide screens.
+branch: master
+changed_refs:
+  - review_console/static_prototype/styles.css
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+result:
+  - .review-shell now uses width: calc(100% - 28px)
+  - wide desktop view expands to available browser width with fixed gutters
+  - mobile override remains unchanged
+validation:
+  - Browser current viewport audit passed
+  - Browser temporary wide viewport audit passed: shell width 1890px at 1932px viewport, body overflow false
+boundary_checks:
+  asset_archive_ref_changes: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  production_candidate_write_performed: false
+  push_tag_release_deploy_performed: false
+next_safe_task: final local validation; commit only if explicitly requested.
+```
+
+## Current Run State - Preview Boundary Strip 2026-06-08
+
+```text
+phase: review_console_preview_boundary_strip_20260608
+status: completed_validated_local_ui_refinement
+lane: Green local Review Console static prototype refinement
+goal: Continue improving the Review Console by surfacing the exact real-preview render boundary in the审片台 UI.
+branch: master
+changed_refs:
+  - review_console/static_prototype/index.html
+  - review_console/static_prototype/app.js
+  - review_console/static_prototype/styles.css
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+result:
+  - added previewBoundaryStrip mount point in the image stage panel
+  - added previewRenderBoundaryState and draft output key preview_render_boundary_state
+  - rendered a compact boundary strip showing REAL PREVIEW, refs 3/3, current index, writes off, generation off
+  - added responsive styling so the strip is a five-cell row on desktop and one column on mobile
+validation:
+  - node --check review_console/static_prototype/app.js passed
+  - npm run validate:review-console-static passed
+  - Browser desktop DOM audit passed
+  - Browser mobile 390px audit passed
+boundary_checks:
+  new_asset_archive_ref_selected: false
+  asset_archive_directory_listing_performed: false
+  asset_archive_glob_performed: false
+  additional_manifest_read_performed: false
+  asset_archive_write_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  production_candidate_write_performed: false
+  push_tag_release_deploy_performed: false
+next_safe_task: final diff/validation checks; commit only if explicitly requested.
+```
+
 ## Current Run State - Asset Archive Real Preview Render Activation 2026-06-08
 
 ```text

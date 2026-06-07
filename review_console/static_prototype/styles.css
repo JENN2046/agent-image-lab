@@ -129,7 +129,7 @@ h2 {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: 16px;
-  width: min(1500px, calc(100% - 28px));
+  width: calc(100% - 28px);
   margin: 0 auto;
   padding: 18px 0 24px;
   min-width: 0;
@@ -2464,7 +2464,7 @@ input[type="range"] {
 }
 
 .image-stage-panel {
-  grid-template-rows: auto auto minmax(360px, 1fr) auto;
+  grid-template-rows: auto auto minmax(360px, 1fr) auto auto;
 }
 
 .stage-toolbar {
@@ -2490,6 +2490,21 @@ input[type="range"] {
 .stage-counter .icon-button {
   border-width: 0 1px 0 0;
   border-radius: 0;
+}
+
+.stage-zoom-label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 58px;
+  height: 30px;
+  min-height: 30px;
+  padding: 0 10px;
+  border-width: 0 1px 0 0;
+  border-radius: 0;
+  color: var(--text);
+  font-size: 11px;
+  font-weight: 800;
 }
 
 .stage-tool-group .icon-button:last-child,
@@ -2578,8 +2593,10 @@ input[type="range"] {
 }
 
 .preview-stage-art.has-real-preview {
-  display: grid;
-  place-items: center;
+  display: block;
+  overflow: auto;
+  --stage-zoom-scale: 1;
+  --stage-zoom-size: 100%;
   background: #02030b;
 }
 
@@ -2588,12 +2605,23 @@ input[type="range"] {
   content: none;
 }
 
-.preview-stage-image {
+.preview-image-scroll {
   position: absolute;
   inset: 0;
   z-index: 1;
-  width: 100%;
-  height: 100%;
+  display: grid;
+  place-items: center;
+  min-width: 100%;
+  min-height: 100%;
+  overflow: auto;
+}
+
+.preview-stage-image {
+  position: relative;
+  width: var(--stage-zoom-size);
+  height: var(--stage-zoom-size);
+  max-width: none;
+  max-height: none;
   background: #02030b;
   object-fit: contain;
 }
@@ -2773,6 +2801,47 @@ input[type="range"] {
   padding: 10px;
   border: 1px solid rgba(139, 165, 184, 0.32);
   border-radius: 6px;
+}
+
+.preview-boundary-strip {
+  display: grid;
+  grid-template-columns: minmax(180px, 1.35fr) repeat(5, minmax(72px, 0.7fr));
+  gap: 8px;
+  align-items: stretch;
+  min-width: 0;
+  padding: 8px;
+  border: 1px solid rgba(139, 165, 184, 0.32);
+  border-left: 3px solid var(--cyan);
+  border-radius: 6px;
+  background: rgba(2, 3, 11, 0.66);
+}
+
+.preview-boundary-strip.is-active {
+  border-left-color: var(--green);
+}
+
+.preview-boundary-strip span {
+  min-width: 0;
+  padding: 7px 8px;
+  border: 1px solid rgba(139, 165, 184, 0.28);
+  border-radius: 5px;
+  background: rgba(7, 12, 24, 0.72);
+  color: var(--text);
+  font-size: 12px;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+
+.preview-boundary-strip strong {
+  display: block;
+  margin-bottom: 3px;
+  color: var(--muted);
+  font-size: 10px;
+  text-transform: uppercase;
+}
+
+.preview-boundary-strip .preview-boundary-lede {
+  border-color: rgba(103, 212, 223, 0.34);
 }
 
 .spine-stage-meta span,
@@ -3154,7 +3223,7 @@ body.sample-drawer-open {
   }
 
   .image-stage-panel {
-    grid-template-rows: auto auto minmax(330px, 1fr) auto;
+    grid-template-rows: auto auto minmax(330px, 1fr) auto auto;
   }
 
   .stage-toolbar {
@@ -3172,6 +3241,7 @@ body.sample-drawer-open {
   }
 
   .spine-stage-meta,
+  .preview-boundary-strip,
   .spine-triage-bar,
   .spine-workbench-summary {
     grid-template-columns: 1fr;
@@ -3435,7 +3505,7 @@ body.sample-drawer-open {
 }
 
 .image-stage-panel {
-  grid-template-rows: auto auto minmax(348px, 1fr) auto;
+  grid-template-rows: auto auto minmax(348px, 1fr) auto auto;
 }
 
 .spine-image-stage {

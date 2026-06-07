@@ -1,3 +1,93 @@
+## Current Handoff Update - Original Image Render Zoom 2026-06-08
+
+```text
+phase: review_console_asset_archive_original_image_render_zoom_20260608
+status: completed_validated_original_first_render_with_zoom_pending_final_validation
+repository: A:\agent-image-lab\agent-image-lab-v0.2
+branch: master
+goal: Replace the Review Console real preview render source with the 3 selected source original images and add stage zoom controls so reviewers can inspect details.
+receipt: reports/review_console_asset_archive_original_image_render/original_image_render_zoom_receipt_20260608.json
+policy_update:
+  future_real_review_images_must_use_original: true
+  preview_webp_role: provenance_only_not_review_render_source
+  fallback_to_preview_allowed: false
+completed:
+  - read exactly the selected manifest and chain-record refs to map source.source_image_path values
+  - added source_original_ref fields for the 3 selected Review Console real-image records
+  - changed the main stage and real sample rail image srcs from preview.webp to source original JPG refs
+  - added 50%-400% stage zoom controls with 25% steps and a 100% reset control
+  - expanded the local static server exact allowlist to only the 3 original refs plus the existing 3 preview provenance refs
+validation_completed:
+  - node --check review_console/static_prototype/app.js passed
+  - node --check scripts/serve_review_console_static.js passed
+  - npm run validate:review-console-preview-display passed
+  - route probes passed: 3 original refs 200 image/jpeg; unselected runs ref 403
+  - Browser audit passed: stage and 3 rail images load original refs, natural dimensions 1920x1920, body overflow false
+  - Browser zoom audit passed: 100% -> 150% -> 100%, zoom wrapper has horizontal and vertical scroll range at 150%
+not_performed:
+  - no asset_archive directory listing or glob
+  - no open runs/real_generation allowlist
+  - no asset copy/write/hash extraction
+  - no provider/plugin/API/image generation
+  - no DailyNote/VCP memory write
+  - no production candidate write
+  - no commit, push, tag, release, or deploy
+next_safe_action: run final local validation and optionally exact-file local commit if requested.
+```
+
+## Current Handoff Update - Review Console Width Unlock 2026-06-08
+
+```text
+phase: review_console_width_unlock_20260608
+status: completed_validated_local_css_refinement
+repository: A:\agent-image-lab\agent-image-lab-v0.2
+branch: master
+goal: Remove the desktop Review Console page-width cap so the审片台 can use wide browser space.
+completed:
+  - changed .review-shell from width: min(1500px, calc(100% - 28px)) to width: calc(100% - 28px)
+  - preserved the existing mobile width override at calc(100% - 18px)
+validation_completed:
+  - Browser current viewport audit: shell width matched body width minus gutter, no body overflow
+  - Browser temporary wide viewport audit: viewport 1932px, shell width 1890px, no body overflow
+not_performed:
+  - no asset_archive ref changes
+  - no provider/plugin/API/image generation
+  - no DailyNote/VCP memory write
+  - no production candidate write
+  - no commit, push, tag, release, or deploy
+next_safe_action: run final local validation and optionally exact-file commit the Review Console UI refinements when requested.
+```
+
+## Current Handoff Update - Preview Boundary Strip 2026-06-08
+
+```text
+phase: review_console_preview_boundary_strip_20260608
+status: completed_validated_local_ui_refinement
+repository: A:\agent-image-lab\agent-image-lab-v0.2
+branch: master
+goal: Improve the Review Console after real-preview activation by making the exact preview render boundary visible in the image stage.
+completed:
+  - added a preview boundary strip between the main image stage and stage metadata
+  - added preview_render_boundary_state to the draft output
+  - displayed exact refs count, current ref index, writes off, and generation off
+  - kept the real-preview render limited to the already activated three selected refs
+validation_completed:
+  - node --check review_console/static_prototype/app.js passed
+  - npm run validate:review-console-static passed
+  - Browser desktop audit passed: boundary strip visible, draft boundary state active, 3/3 refs, write/generation off
+  - Browser mobile audit passed: boundary strip visible as one column, stage overflow false, body overflow false
+not_performed:
+  - no new asset_archive ref selected
+  - no asset_archive directory listing or glob
+  - no additional manifest read
+  - no asset copy/write
+  - no provider/plugin/API/image generation
+  - no DailyNote/VCP memory write
+  - no production candidate write
+  - no commit, push, tag, release, or deploy
+next_safe_action: optional exact-file local commit for the preview boundary strip when requested.
+```
+
 ## Current Handoff Update - Asset Archive Real Preview Render Activation 2026-06-08
 
 ```text

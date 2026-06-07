@@ -1,0 +1,133 @@
+{
+  "receipt_id": "review_console_asset_archive_original_image_render_zoom_20260608",
+  "created_at": "2026-06-08T01:38:25.3137321+08:00",
+  "lane": "Amber_A_exact_read_render_with_green_status_surface_sync",
+  "task": "Render the three selected asset_archive-derived source originals in the Review Console and add local zoom controls.",
+  "user_policy_update": {
+    "future_real_review_images_must_use_original": true,
+    "preview_webp_role": "provenance_only_not_review_render_source",
+    "fallback_to_preview_allowed": false
+  },
+  "exact_source_reads": {
+    "asset_archive_directory_listing_performed": false,
+    "asset_archive_glob_performed": false,
+    "manifest_reads_performed": 3,
+    "chain_record_reads_performed": 8,
+    "manifest_refs": [
+      "asset_archive/accepted_samples/accepted_french_summer_rattan_bucket_bag_001/manifest.json",
+      "asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/manifest.json",
+      "asset_archive/failure_samples/failure_french_summer_rattan_bag_v7_29_001/manifest.json"
+    ],
+    "chain_record_refs": [
+      "asset_archive/accepted_samples/accepted_french_summer_rattan_bucket_bag_001/import_record.json",
+      "asset_archive/accepted_samples/accepted_french_summer_rattan_bucket_bag_001/review_record.json",
+      "asset_archive/accepted_samples/accepted_french_summer_rattan_bucket_bag_001/approval_record.json",
+      "asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/import_record.json",
+      "asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/review_record.json",
+      "asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/approval_record.json",
+      "asset_archive/failure_samples/failure_french_summer_rattan_bag_v7_29_001/failure_record.json",
+      "asset_archive/failure_samples/failure_french_summer_rattan_bag_v7_29_001/review_record.json"
+    ]
+  },
+  "selected_refs": [
+    {
+      "sample_id": "accepted_french_summer_rattan_bucket_bag_001",
+      "source_preview_ref": "asset_archive/accepted_samples/accepted_french_summer_rattan_bucket_bag_001/preview.webp",
+      "source_original_ref": "runs/real_generation/v7_31_native_doubao_french_summer_rattan_bag_v2_watermark_off_run/native_doubao_1778327047448_0.jpg",
+      "route_status": 200,
+      "content_type": "image/jpeg",
+      "dom_complete": true,
+      "dom_natural_width": 1920,
+      "dom_natural_height": 1920
+    },
+    {
+      "sample_id": "accepted_product_still_life_tennis_wallet_001",
+      "source_preview_ref": "asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/preview.webp",
+      "source_original_ref": "runs/real_generation/v7_24_native_doubao_v3_single_real_run/native_doubao_1778322474131_0.jpg",
+      "route_status": 200,
+      "content_type": "image/jpeg",
+      "dom_complete": true,
+      "dom_natural_width": 1920,
+      "dom_natural_height": 1920
+    },
+    {
+      "sample_id": "failure_french_summer_rattan_bag_v7_29_001",
+      "source_preview_ref": "asset_archive/failure_samples/failure_french_summer_rattan_bag_v7_29_001/preview.webp",
+      "source_original_ref": "runs/real_generation/v7_29_native_doubao_french_summer_rattan_bag_v2_single_real_run/native_doubao_1778325901725_0.jpg",
+      "route_status": 200,
+      "content_type": "image/jpeg",
+      "dom_complete": true,
+      "dom_natural_width": 1920,
+      "dom_natural_height": 1920
+    }
+  ],
+  "local_server_gate": {
+    "server_ref": "scripts/serve_review_console_static.js",
+    "exact_source_original_refs_allowed": 3,
+    "exact_asset_archive_preview_refs_still_allowed_for_provenance": 3,
+    "unauthorized_runs_ref_status": 403,
+    "open_runs_directory_allowed": false,
+    "open_asset_archive_directory_allowed": false
+  },
+  "browser_render_evidence": {
+    "url": "http://127.0.0.1:4173/",
+    "stage_proxy": "asset_archive_original_exact_render",
+    "stage_image_src": "/runs/real_generation/v7_31_native_doubao_french_summer_rattan_bag_v2_watermark_off_run/native_doubao_1778327047448_0.jpg",
+    "stage_original_ref": "runs/real_generation/v7_31_native_doubao_french_summer_rattan_bag_v2_watermark_off_run/native_doubao_1778327047448_0.jpg",
+    "stage_preview_ref": "asset_archive/accepted_samples/accepted_french_summer_rattan_bucket_bag_001/preview.webp",
+    "stage_natural_width": 1920,
+    "stage_natural_height": 1920,
+    "rail_original_ref_count": 3,
+    "rail_all_images_complete": true,
+    "body_horizontal_overflow": false
+  },
+  "zoom_evidence": {
+    "default_zoom_percent": 100,
+    "validated_zoom_percent": 150,
+    "reset_zoom_percent": 100,
+    "zoom_step_percent": 25,
+    "min_zoom_percent": 50,
+    "max_zoom_percent": 400,
+    "zoom_label_after_two_clicks": "150%",
+    "zoom_wrapper_horizontal_scroll_range": true,
+    "zoom_wrapper_vertical_scroll_range": true,
+    "body_horizontal_overflow_after_zoom": false
+  },
+  "files_changed_by_task": [
+    "review_console/static_prototype/index.html",
+    "review_console/static_prototype/app.js",
+    "review_console/static_prototype/styles.css",
+    "scripts/serve_review_console_static.js",
+    "reports/review_console_asset_archive_original_image_render/original_image_render_zoom_receipt_20260608.json",
+    ".agent_board/HANDOFF.md",
+    ".agent_board/RUN_STATE.md",
+    ".agent_board/TASK_QUEUE.md",
+    ".agent_board/CHECKPOINT.md"
+  ],
+  "boundary_checks": {
+    "asset_archive_write_performed": false,
+    "runs_write_performed": false,
+    "preview_creation_or_copy_performed": false,
+    "hash_extraction_performed": false,
+    "image_generation_performed": false,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "DailyNote_write_performed": false,
+    "VCP_memory_write_performed": false,
+    "production_candidate_write_performed": false,
+    "secret_env_config_read_performed": false,
+    "push_tag_release_deploy_performed": false
+  },
+  "validation": {
+    "node_check_app_js": "passed",
+    "node_check_server_js": "passed",
+    "review_console_preview_display_validator": "passed",
+    "route_probe_original_refs": "passed",
+    "route_probe_unauthorized_runs_ref": "passed",
+    "browser_original_render_and_zoom_audit": "passed",
+    "final_validation_pending_at_receipt_write": true
+  },
+  "next_auto_step_allowed": "run final local validation and wait for exact-file commit request if the user wants to seal this checkpoint",
+  "push_allowed": false
+}
