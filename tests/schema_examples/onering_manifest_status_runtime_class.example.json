@@ -1,0 +1,188 @@
+{
+  "fixture_type": "onering_manifest_status_runtime_class",
+  "schema_version": "v0_1",
+  "purpose": "Prove OneRing validation manifest entries stay active and fast.",
+  "manifest_ref": "scripts/validation_manifest.json",
+  "domain": "onering_contract",
+  "expected_status": "active",
+  "expected_runtime_class": "fast",
+  "expected_entries": [
+    {
+      "manifest_id": "onering_sql_hash_contract",
+      "status": "active",
+      "estimated_runtime_class": "fast"
+    },
+    {
+      "manifest_id": "onering_hash_identity_drift_guard",
+      "status": "active",
+      "estimated_runtime_class": "fast"
+    },
+    {
+      "manifest_id": "onering_sql_migration_preview",
+      "status": "active",
+      "estimated_runtime_class": "fast"
+    },
+    {
+      "manifest_id": "onering_sql_migration_preview_drift_guard",
+      "status": "active",
+      "estimated_runtime_class": "fast"
+    },
+    {
+      "manifest_id": "onering_contract_bundle_index",
+      "status": "active",
+      "estimated_runtime_class": "fast"
+    },
+    {
+      "manifest_id": "onering_manifest_recommendation_selector_guard",
+      "status": "active",
+      "estimated_runtime_class": "fast"
+    },
+    {
+      "manifest_id": "onering_selector_negative_cases_guard",
+      "status": "active",
+      "estimated_runtime_class": "fast"
+    },
+    {
+      "manifest_id": "onering_recommendation_closeout_summary_guard",
+      "status": "active",
+      "estimated_runtime_class": "fast"
+    },
+    {
+      "manifest_id": "onering_mixed_change_closeout_guard",
+      "status": "active",
+      "estimated_runtime_class": "fast"
+    },
+    {
+      "manifest_id": "onering_closeout_deferred_commands_guard",
+      "status": "active",
+      "estimated_runtime_class": "fast"
+    },
+    {
+      "manifest_id": "onering_validator_manifest_ordering_guard",
+      "status": "active",
+      "estimated_runtime_class": "fast"
+    },
+    {
+      "manifest_id": "onering_npm_script_manifest_command_mapping_guard",
+      "status": "active",
+      "estimated_runtime_class": "fast"
+    },
+    {
+      "manifest_id": "onering_trigger_paths_coverage_guard",
+      "status": "active",
+      "estimated_runtime_class": "fast"
+    },
+    {
+      "manifest_id": "onering_required_for_coverage_guard",
+      "status": "active",
+      "estimated_runtime_class": "fast"
+    },
+    {
+      "manifest_id": "onering_manifest_status_runtime_class_guard",
+      "status": "active",
+      "estimated_runtime_class": "fast"
+    },
+    {
+      "manifest_id": "onering_manifest_tier_domain_guard",
+      "status": "active",
+      "estimated_runtime_class": "fast"
+    },
+    {
+      "manifest_id": "onering_manifest_command_script_basename_guard",
+      "status": "active",
+      "estimated_runtime_class": "fast"
+    },
+    {
+      "manifest_id": "onering_manifest_duplicate_command_guard",
+      "status": "active",
+      "estimated_runtime_class": "fast"
+    },
+    {
+      "manifest_id": "onering_manifest_duplicate_script_guard",
+      "status": "active",
+      "estimated_runtime_class": "fast"
+    },
+    {
+      "manifest_id": "onering_manifest_id_script_basename_bijection_guard",
+      "status": "active",
+      "estimated_runtime_class": "fast"
+    },
+    {
+      "manifest_id": "onering_npm_script_name_manifest_id_slug_guard",
+      "status": "active",
+      "estimated_runtime_class": "fast"
+    },
+    {
+      "manifest_id": "onering_manifest_command_target_npm_script_target_guard",
+      "status": "active",
+      "estimated_runtime_class": "fast"
+    },
+    {
+      "manifest_id": "onering_command_parser_strictness_guard",
+      "status": "active",
+      "estimated_runtime_class": "fast"
+    },
+    {
+      "manifest_id": "onering_command_parser_negative_cases_guard",
+      "status": "active",
+      "estimated_runtime_class": "fast"
+    },
+    {
+      "manifest_id": "onering_command_parser_regex_source_consistency_guard",
+      "status": "active",
+      "estimated_runtime_class": "fast"
+    },
+    {
+      "manifest_id": "onering_command_parser_regex_canonicalization_guard",
+      "status": "active",
+      "estimated_runtime_class": "fast"
+    },
+    {
+      "manifest_id": "onering_command_parser_extractor_robustness_guard",
+      "status": "active",
+      "estimated_runtime_class": "fast"
+    },
+    {
+      "manifest_id": "onering_command_parser_extractor_negative_source_shape_guard",
+      "status": "active",
+      "estimated_runtime_class": "fast"
+    },
+    {
+      "manifest_id": "onering_command_parser_extractor_policy_ref_consistency_guard",
+      "status": "active",
+      "estimated_runtime_class": "fast"
+    },
+    {
+      "manifest_id": "onering_command_parser_extractor_policy_ref_negative_fixture_guard",
+      "status": "active",
+      "estimated_runtime_class": "fast"
+    },
+    {
+      "manifest_id": "onering_command_parser_extractor_policy_ref_fixture_index_guard",
+      "status": "active",
+      "estimated_runtime_class": "fast"
+    },
+    {
+      "manifest_id": "onering_command_parser_extractor_policy_ref_fixture_index_negative_guard",
+      "status": "active",
+      "estimated_runtime_class": "fast"
+    },
+    {
+      "manifest_id": "onering_command_parser_extractor_policy_ref_fixture_index_negative_coverage_guard",
+      "status": "active",
+      "estimated_runtime_class": "fast"
+    }
+  ],
+  "runtime_boundary": {
+    "no_handler": true,
+    "handler_execution_performed": false,
+    "migration_execution_performed": false,
+    "sqlite_file_created": false,
+    "database_write_performed": false,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "secret_value_read_performed": false
+  }
+}

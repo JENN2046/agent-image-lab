@@ -1,0 +1,278 @@
+{
+  "fixture_type": "onering_command_parser_extractor_policy_ref_fixture_index_negative",
+  "schema_version": "v0_1",
+  "purpose": "Prove bad OneRing extractor policy-ref fixture index refs are rejected when mutual refs or canonical refs drift.",
+  "index_fixture_ref": "tests/schema_examples/onering_command_parser_extractor_policy_ref_fixture_index.example.json",
+  "expected_index_fixture_type": "onering_command_parser_extractor_policy_ref_fixture_index",
+  "negative_index_cases": [
+    {
+      "case_id": "index_consistency_ref_points_to_negative_fixture",
+      "candidate_index_fixture": {
+        "policy_ref_consistency_fixture_ref": "tests/schema_examples/onering_command_parser_extractor_policy_ref_negative_fixture.example.json"
+      },
+      "expected_rejection_ids": [
+        "consistency_fixture_type_must_match_index",
+        "consistency_backref_must_point_to_index_negative_fixture",
+        "negative_backref_must_point_to_index_consistency_fixture",
+        "policy_ref_fixtures_must_mutually_reference_index_refs"
+      ]
+    },
+    {
+      "case_id": "index_negative_ref_points_to_consistency_fixture",
+      "candidate_index_fixture": {
+        "policy_ref_negative_fixture_ref": "tests/schema_examples/onering_command_parser_extractor_policy_ref_consistency.example.json"
+      },
+      "expected_rejection_ids": [
+        "negative_fixture_type_must_match_index",
+        "consistency_backref_must_point_to_index_negative_fixture",
+        "negative_backref_must_point_to_index_consistency_fixture",
+        "policy_ref_fixtures_must_mutually_reference_index_refs"
+      ]
+    },
+    {
+      "case_id": "consistency_backref_points_to_robustness_fixture",
+      "candidate_consistency_fixture": {
+        "policy_ref_negative_fixture_ref": "tests/schema_examples/onering_command_parser_extractor_robustness.example.json"
+      },
+      "expected_rejection_ids": [
+        "consistency_backref_must_point_to_index_negative_fixture",
+        "policy_ref_fixtures_must_mutually_reference_index_refs"
+      ]
+    },
+    {
+      "case_id": "negative_backref_points_to_robustness_fixture",
+      "candidate_negative_fixture": {
+        "policy_ref_consistency_fixture_ref": "tests/schema_examples/onering_command_parser_extractor_robustness.example.json"
+      },
+      "expected_rejection_ids": [
+        "negative_backref_must_point_to_index_consistency_fixture",
+        "policy_ref_fixtures_must_mutually_reference_index_refs"
+      ]
+    },
+    {
+      "case_id": "index_canonical_ref_points_to_regex_source_fixture",
+      "candidate_index_fixture": {
+        "canonical_fixture_ref": "tests/schema_examples/onering_command_parser_regex_source_consistency.example.json"
+      },
+      "expected_rejection_ids": [
+        "canonical_source_fixture_ref_required",
+        "canonical_fixture_type_must_match_index",
+        "canonical_source_fixture_type_must_match_index",
+        "consistency_canonical_ref_must_match_index",
+        "negative_canonical_ref_must_match_index",
+        "robustness_canonical_ref_must_match_index",
+        "shared_canonical_ref_must_match_index_canonical_ref",
+        "common_canonical_refs_must_match_index"
+      ]
+    },
+    {
+      "case_id": "index_shared_canonical_ref_points_to_regex_source_fixture",
+      "candidate_index_fixture": {
+        "expected_shared_canonical_fixture_ref": "tests/schema_examples/onering_command_parser_regex_source_consistency.example.json"
+      },
+      "expected_rejection_ids": [
+        "consistency_shared_canonical_ref_must_match_index",
+        "negative_shared_canonical_ref_must_match_index",
+        "shared_canonical_ref_must_match_index_canonical_ref"
+      ]
+    },
+    {
+      "case_id": "consistency_canonical_ref_points_to_regex_source_fixture",
+      "candidate_consistency_fixture": {
+        "canonical_fixture_ref": "tests/schema_examples/onering_command_parser_regex_source_consistency.example.json"
+      },
+      "expected_rejection_ids": [
+        "consistency_canonical_ref_must_match_index",
+        "common_canonical_refs_must_match_index"
+      ]
+    },
+    {
+      "case_id": "negative_canonical_ref_points_to_regex_source_fixture",
+      "candidate_negative_fixture": {
+        "canonical_fixture_ref": "tests/schema_examples/onering_command_parser_regex_source_consistency.example.json"
+      },
+      "expected_rejection_ids": [
+        "negative_canonical_ref_must_match_index",
+        "common_canonical_refs_must_match_index"
+      ]
+    },
+    {
+      "case_id": "robustness_canonical_ref_points_to_regex_source_fixture",
+      "candidate_robustness_fixture": {
+        "canonical_fixture_ref": "tests/schema_examples/onering_command_parser_regex_source_consistency.example.json"
+      },
+      "expected_rejection_ids": [
+        "robustness_canonical_ref_must_match_index",
+        "policy_canonical_ref_must_match_robustness",
+        "common_canonical_refs_must_match_index"
+      ]
+    },
+    {
+      "case_id": "consistency_fixture_ref_missing",
+      "candidate_index_fixture": {
+        "policy_ref_consistency_fixture_ref": "tests/schema_examples/missing_onering_policy_ref_consistency.example.json"
+      },
+      "expected_rejection_ids": [
+        "consistency_fixture_must_be_readable",
+        "consistency_fixture_type_must_match_index",
+        "consistency_backref_must_point_to_index_negative_fixture",
+        "policy_ref_fixtures_must_mutually_reference_index_refs",
+        "consistency_robustness_ref_must_match_index",
+        "consistency_negative_source_shape_ref_must_match_index",
+        "consistency_canonical_ref_must_match_index",
+        "consistency_shared_canonical_ref_must_match_index"
+      ]
+    },
+    {
+      "case_id": "negative_fixture_ref_missing",
+      "candidate_index_fixture": {
+        "policy_ref_negative_fixture_ref": "tests/schema_examples/missing_onering_policy_ref_negative.example.json"
+      },
+      "expected_rejection_ids": [
+        "negative_fixture_must_be_readable",
+        "negative_fixture_type_must_match_index",
+        "negative_backref_must_point_to_index_consistency_fixture",
+        "policy_ref_fixtures_must_mutually_reference_index_refs",
+        "negative_robustness_ref_must_match_index",
+        "negative_negative_source_shape_ref_must_match_index",
+        "negative_canonical_ref_must_match_index",
+        "negative_shared_canonical_ref_must_match_index"
+      ]
+    },
+    {
+      "case_id": "robustness_fixture_ref_missing",
+      "candidate_index_fixture": {
+        "robustness_fixture_ref": "tests/schema_examples/missing_onering_extractor_robustness.example.json"
+      },
+      "expected_rejection_ids": [
+        "robustness_fixture_must_be_readable",
+        "robustness_fixture_type_must_match_index",
+        "consistency_robustness_ref_must_match_index",
+        "negative_robustness_ref_must_match_index",
+        "robustness_canonical_ref_must_match_index",
+        "negative_source_shape_policy_ref_must_match_index_robustness",
+        "policy_fixture_type_must_match_robustness",
+        "policy_canonical_ref_must_match_robustness",
+        "common_canonical_refs_must_match_index"
+      ]
+    },
+    {
+      "case_id": "negative_source_shape_fixture_ref_missing",
+      "candidate_index_fixture": {
+        "negative_source_shape_fixture_ref": "tests/schema_examples/missing_onering_extractor_negative_source_shape.example.json"
+      },
+      "expected_rejection_ids": [
+        "negative_source_shape_fixture_must_be_readable",
+        "negative_source_shape_fixture_type_must_match_index",
+        "consistency_negative_source_shape_ref_must_match_index",
+        "negative_negative_source_shape_ref_must_match_index",
+        "negative_source_shape_policy_ref_must_match_index_robustness",
+        "policy_fixture_must_be_readable",
+        "policy_fixture_type_must_match_robustness",
+        "policy_canonical_ref_must_match_robustness",
+        "common_canonical_refs_must_match_index"
+      ]
+    },
+    {
+      "case_id": "canonical_fixture_ref_missing",
+      "candidate_index_fixture": {
+        "canonical_fixture_ref": "tests/schema_examples/missing_onering_regex_canonicalization.example.json"
+      },
+      "expected_rejection_ids": [
+        "canonical_fixture_must_be_readable",
+        "canonical_source_fixture_ref_required",
+        "canonical_fixture_type_must_match_index",
+        "canonical_source_fixture_type_must_match_index",
+        "consistency_canonical_ref_must_match_index",
+        "negative_canonical_ref_must_match_index",
+        "robustness_canonical_ref_must_match_index",
+        "shared_canonical_ref_must_match_index_canonical_ref",
+        "common_canonical_refs_must_match_index"
+      ]
+    },
+    {
+      "case_id": "robustness_fixture_type_mismatches_index",
+      "candidate_robustness_fixture": {
+        "fixture_type": "onering_command_parser_regex_canonicalization"
+      },
+      "expected_rejection_ids": [
+        "robustness_fixture_type_must_match_index",
+        "policy_fixture_type_must_match_robustness"
+      ]
+    },
+    {
+      "case_id": "negative_source_shape_fixture_type_mismatches_index",
+      "candidate_negative_source_shape_fixture": {
+        "fixture_type": "onering_command_parser_regex_canonicalization"
+      },
+      "expected_rejection_ids": [
+        "negative_source_shape_fixture_type_must_match_index"
+      ]
+    },
+    {
+      "case_id": "negative_source_shape_policy_ref_points_to_canonical_fixture",
+      "candidate_negative_source_shape_fixture": {
+        "policy_fixture_ref": "tests/schema_examples/onering_command_parser_regex_canonicalization.example.json"
+      },
+      "expected_rejection_ids": [
+        "negative_source_shape_policy_ref_must_match_index_robustness",
+        "policy_fixture_type_must_match_robustness",
+        "policy_canonical_ref_must_match_robustness",
+        "common_canonical_refs_must_match_index"
+      ]
+    },
+    {
+      "case_id": "consistency_robustness_ref_points_to_canonical_fixture",
+      "candidate_consistency_fixture": {
+        "robustness_fixture_ref": "tests/schema_examples/onering_command_parser_regex_canonicalization.example.json"
+      },
+      "expected_rejection_ids": [
+        "consistency_robustness_ref_must_match_index"
+      ]
+    },
+    {
+      "case_id": "negative_robustness_ref_points_to_canonical_fixture",
+      "candidate_negative_fixture": {
+        "robustness_fixture_ref": "tests/schema_examples/onering_command_parser_regex_canonicalization.example.json"
+      },
+      "expected_rejection_ids": [
+        "negative_robustness_ref_must_match_index"
+      ]
+    },
+    {
+      "case_id": "consistency_negative_source_shape_ref_points_to_robustness_fixture",
+      "candidate_consistency_fixture": {
+        "negative_source_shape_fixture_ref": "tests/schema_examples/onering_command_parser_extractor_robustness.example.json"
+      },
+      "expected_rejection_ids": [
+        "consistency_negative_source_shape_ref_must_match_index"
+      ]
+    },
+    {
+      "case_id": "negative_negative_source_shape_ref_points_to_robustness_fixture",
+      "candidate_negative_fixture": {
+        "negative_source_shape_fixture_ref": "tests/schema_examples/onering_command_parser_extractor_robustness.example.json"
+      },
+      "expected_rejection_ids": [
+        "negative_negative_source_shape_ref_must_match_index"
+      ]
+    }
+  ],
+  "positive_controls": [
+    {
+      "case_id": "canonical_fixture_index"
+    }
+  ],
+  "runtime_boundary": {
+    "no_handler": true,
+    "handler_execution_performed": false,
+    "migration_execution_performed": false,
+    "sqlite_file_created": false,
+    "database_write_performed": false,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "secret_value_read_performed": false
+  }
+}

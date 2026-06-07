@@ -1,0 +1,58 @@
+{
+  "fixture_type": "onering_selector_negative_cases",
+  "schema_version": "v0_1",
+  "purpose": "Prove the OneRing-only recommendation selector exception does not leak into non-OneRing tests/schema_examples changes.",
+  "expected_primary_profile": "mvp",
+  "expected_primary_command": "npm run validate:mvp",
+  "required_commands": [
+    "node scripts/validate_validation_manifest.js",
+    "npm run validate:smoke",
+    "npm run validate:mvp"
+  ],
+  "forbidden_commands": [
+    "npm run validate:targeted-plan",
+    "node scripts/validate_onering_sql_hash_contract.js",
+    "node scripts/validate_onering_hash_identity_drift_guard.js",
+    "node scripts/validate_onering_sql_migration_preview.js",
+    "node scripts/validate_onering_sql_migration_preview_drift_guard.js",
+    "node scripts/validate_onering_contract_bundle_index.js",
+    "node scripts/validate_onering_manifest_recommendation_selector_guard.js"
+  ],
+  "cases": [
+    {
+      "case_id": "readonly_visual_review_state",
+      "changed_files": ["tests/schema_examples/readonly_visual_review_mvp_state.example.json"]
+    },
+    {
+      "case_id": "readonly_artifact_catalog",
+      "changed_files": ["tests/schema_examples/visual_eval_readonly_review_artifact_catalog.example.json"]
+    },
+    {
+      "case_id": "visual_prompt_correction_hint",
+      "changed_files": ["tests/schema_examples/visual_prompt_correction_hint.example.json"]
+    },
+    {
+      "case_id": "autopilot_goal",
+      "changed_files": ["tests/schema_examples/autopilot_goal.example.json"]
+    },
+    {
+      "case_id": "mixed_non_onering_schema_examples",
+      "changed_files": [
+        "tests/schema_examples/readonly_visual_review_mvp_state.example.json",
+        "tests/schema_examples/visual_prompt_correction_hint.example.json"
+      ]
+    }
+  ],
+  "runtime_boundary": {
+    "no_handler": true,
+    "handler_execution_performed": false,
+    "migration_execution_performed": false,
+    "sqlite_file_created": false,
+    "database_write_performed": false,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "secret_value_read_performed": false
+  }
+}

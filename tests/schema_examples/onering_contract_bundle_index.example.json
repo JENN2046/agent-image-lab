@@ -1,0 +1,141 @@
+{
+  "fixture_type": "onering_contract_bundle_index",
+  "schema_version": "v0_1",
+  "bundle_id": "onering_contract_bundle_index_v0_1",
+  "purpose": "Index the four OneRing SQL/hash contract validators and fixtures so source refs, hash refs, and validation manifest trigger paths cannot drift independently.",
+  "source_contract": "tests/schema_examples/onering_sql_hash_contract.example.json",
+  "source_preview": "tests/schema_examples/onering_sql_migration_preview.example.json",
+  "hash_refs": {
+    "contract_id": "onering_sql_hash_contract_v0_1",
+    "migration_id": "onering_local_contract_001",
+    "ddl_hash": "sha256:eb14d66a4ca7da60befa2e0576e29791c72cf41662ebbe16a11ba2ff6c626c1b",
+    "request_hash": "sha256:f1001d1ac2f8fae3e9e81bb757aa83565bf7cdccac1d685c4b2606a0e05ae4c0",
+    "request_identity": "sha256:ea0b4f3ab720fb931535c0e1c048c9bf4cc6a3e1bcc16699c66b9a1273beffe6",
+    "snapshot_hash": "sha256:aa3cfb787637816d2f3199676de7a02f8cffa3b4c0b79e1f1d61dc89e02ea6e0",
+    "temp_key_hash": "sha256:7a2c19b4648a58f9f78b9a439b72e528f496c2419511949e2d2d6555b24956de",
+    "preview_hash": "sha256:1fb8bbd4a3e8a2e41f36f64b232e206770fc7b26211ca7ad184ff51ac07ce629"
+  },
+  "members": [
+    {
+      "validator_id": "onering_sql_hash_contract",
+      "npm_script": "validate:onering-sql-hash-contract",
+      "script": "scripts/validate_onering_sql_hash_contract.js",
+      "fixtures": [
+        "tests/schema_examples/onering_sql_hash_contract.example.json",
+        "tests/schema_examples/onering_sql_hash_contract_negative_cases.example.json"
+      ],
+      "source_refs": {
+        "contract_fixture": "tests/schema_examples/onering_sql_hash_contract.example.json"
+      },
+      "hash_refs": [
+        "ddl_hash",
+        "request_hash",
+        "request_identity",
+        "snapshot_hash",
+        "temp_key_hash"
+      ],
+      "manifest_trigger_paths": [
+        "tests/schema_examples/onering_sql_hash_contract.example.json",
+        "tests/schema_examples/onering_sql_hash_contract_negative_cases.example.json",
+        "scripts/validate_onering_sql_hash_contract.js",
+        "package.json"
+      ]
+    },
+    {
+      "validator_id": "onering_hash_identity_drift_guard",
+      "npm_script": "validate:onering-hash-identity-drift",
+      "script": "scripts/validate_onering_hash_identity_drift_guard.js",
+      "fixtures": [
+        "tests/schema_examples/onering_sql_hash_contract.example.json",
+        "tests/schema_examples/onering_hash_identity_drift_cases.example.json"
+      ],
+      "source_refs": {
+        "source_contract": "tests/schema_examples/onering_sql_hash_contract.example.json"
+      },
+      "hash_refs": [
+        "request_hash",
+        "request_identity",
+        "snapshot_hash",
+        "temp_key_hash"
+      ],
+      "manifest_trigger_paths": [
+        "tests/schema_examples/onering_sql_hash_contract.example.json",
+        "tests/schema_examples/onering_hash_identity_drift_cases.example.json",
+        "scripts/validate_onering_sql_hash_contract.js",
+        "scripts/validate_onering_hash_identity_drift_guard.js",
+        "package.json"
+      ]
+    },
+    {
+      "validator_id": "onering_sql_migration_preview",
+      "npm_script": "validate:onering-sql-migration-preview",
+      "script": "scripts/validate_onering_sql_migration_preview.js",
+      "fixtures": [
+        "tests/schema_examples/onering_sql_hash_contract.example.json",
+        "tests/schema_examples/onering_sql_migration_preview.example.json",
+        "tests/schema_examples/onering_sql_migration_preview_negative_cases.example.json"
+      ],
+      "source_refs": {
+        "source_contract": "tests/schema_examples/onering_sql_hash_contract.example.json",
+        "source_preview": "tests/schema_examples/onering_sql_migration_preview.example.json"
+      },
+      "hash_refs": [
+        "ddl_hash",
+        "request_identity",
+        "snapshot_hash",
+        "temp_key_hash",
+        "preview_hash"
+      ],
+      "manifest_trigger_paths": [
+        "tests/schema_examples/onering_sql_hash_contract.example.json",
+        "tests/schema_examples/onering_sql_migration_preview.example.json",
+        "tests/schema_examples/onering_sql_migration_preview_negative_cases.example.json",
+        "scripts/validate_onering_sql_hash_contract.js",
+        "scripts/validate_onering_sql_migration_preview.js",
+        "package.json"
+      ]
+    },
+    {
+      "validator_id": "onering_sql_migration_preview_drift_guard",
+      "npm_script": "validate:onering-sql-migration-preview-drift",
+      "script": "scripts/validate_onering_sql_migration_preview_drift_guard.js",
+      "fixtures": [
+        "tests/schema_examples/onering_sql_hash_contract.example.json",
+        "tests/schema_examples/onering_sql_migration_preview.example.json",
+        "tests/schema_examples/onering_sql_migration_preview_drift_cases.example.json"
+      ],
+      "source_refs": {
+        "source_contract": "tests/schema_examples/onering_sql_hash_contract.example.json",
+        "source_preview": "tests/schema_examples/onering_sql_migration_preview.example.json"
+      },
+      "hash_refs": [
+        "ddl_hash",
+        "request_identity",
+        "snapshot_hash",
+        "temp_key_hash",
+        "preview_hash"
+      ],
+      "manifest_trigger_paths": [
+        "tests/schema_examples/onering_sql_hash_contract.example.json",
+        "tests/schema_examples/onering_sql_migration_preview.example.json",
+        "tests/schema_examples/onering_sql_migration_preview_drift_cases.example.json",
+        "scripts/validate_onering_sql_hash_contract.js",
+        "scripts/validate_onering_sql_migration_preview.js",
+        "scripts/validate_onering_sql_migration_preview_drift_guard.js",
+        "package.json"
+      ]
+    }
+  ],
+  "runtime_boundary": {
+    "no_handler": true,
+    "handler_execution_performed": false,
+    "migration_execution_performed": false,
+    "sqlite_file_created": false,
+    "database_write_performed": false,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "secret_value_read_performed": false
+  }
+}

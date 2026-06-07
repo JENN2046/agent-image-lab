@@ -1,0 +1,26 @@
+{
+  "fixture_type": "onering_command_parser_extractor_policy_ref_consistency",
+  "schema_version": "v0_1",
+  "purpose": "Prove the OneRing extractor robustness fixture and negative-source-shape fixture resolve to the same canonical command parser regex fixture.",
+  "robustness_fixture_ref": "tests/schema_examples/onering_command_parser_extractor_robustness.example.json",
+  "negative_source_shape_fixture_ref": "tests/schema_examples/onering_command_parser_extractor_negative_source_shape.example.json",
+  "policy_ref_negative_fixture_ref": "tests/schema_examples/onering_command_parser_extractor_policy_ref_negative_fixture.example.json",
+  "canonical_fixture_ref": "tests/schema_examples/onering_command_parser_regex_canonicalization.example.json",
+  "expected_robustness_fixture_type": "onering_command_parser_extractor_robustness",
+  "expected_negative_source_shape_fixture_type": "onering_command_parser_extractor_negative_source_shape",
+  "expected_canonical_fixture_type": "onering_command_parser_regex_canonicalization",
+  "expected_policy_fixture_ref": "tests/schema_examples/onering_command_parser_extractor_robustness.example.json",
+  "expected_shared_canonical_fixture_ref": "tests/schema_examples/onering_command_parser_regex_canonicalization.example.json",
+  "runtime_boundary": {
+    "no_handler": true,
+    "handler_execution_performed": false,
+    "migration_execution_performed": false,
+    "sqlite_file_created": false,
+    "database_write_performed": false,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "secret_value_read_performed": false
+  }
+}

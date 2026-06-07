@@ -1655,6 +1655,766 @@
       ]
     },
     {
+      "id": "onering_sql_hash_contract",
+      "command": "node scripts/validate_onering_sql_hash_contract.js",
+      "script": "scripts/validate_onering_sql_hash_contract.js",
+      "tier": "targeted",
+      "domain": "onering_contract",
+      "status": "active",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "tests/schema_examples/onering_sql_hash_contract.example.json",
+        "tests/schema_examples/onering_sql_hash_contract_negative_cases.example.json",
+        "scripts/validate_onering_sql_hash_contract.js",
+        "package.json",
+        "scripts/validation_manifest.json"
+      ],
+      "required_for": [
+        "onering_sql_hash_contract_patch",
+        "onering_request_identity_contract_patch",
+        "onering_temp_store_contract_patch"
+      ]
+    },
+    {
+      "id": "onering_hash_identity_drift_guard",
+      "command": "node scripts/validate_onering_hash_identity_drift_guard.js",
+      "script": "scripts/validate_onering_hash_identity_drift_guard.js",
+      "tier": "targeted",
+      "domain": "onering_contract",
+      "status": "active",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "tests/schema_examples/onering_sql_hash_contract.example.json",
+        "tests/schema_examples/onering_hash_identity_drift_cases.example.json",
+        "scripts/validate_onering_sql_hash_contract.js",
+        "scripts/validate_onering_hash_identity_drift_guard.js",
+        "package.json",
+        "scripts/validation_manifest.json"
+      ],
+      "required_for": [
+        "onering_hash_identity_drift_guard_patch",
+        "onering_request_identity_contract_patch",
+        "onering_temp_store_contract_patch"
+      ]
+    },
+    {
+      "id": "onering_sql_migration_preview",
+      "command": "node scripts/validate_onering_sql_migration_preview.js",
+      "script": "scripts/validate_onering_sql_migration_preview.js",
+      "tier": "targeted",
+      "domain": "onering_contract",
+      "status": "active",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "tests/schema_examples/onering_sql_hash_contract.example.json",
+        "tests/schema_examples/onering_sql_migration_preview.example.json",
+        "tests/schema_examples/onering_sql_migration_preview_negative_cases.example.json",
+        "scripts/validate_onering_sql_hash_contract.js",
+        "scripts/validate_onering_sql_migration_preview.js",
+        "package.json",
+        "scripts/validation_manifest.json"
+      ],
+      "required_for": [
+        "onering_sql_migration_preview_patch",
+        "onering_no_handler_migration_preview_patch",
+        "onering_sql_hash_contract_patch"
+      ]
+    },
+    {
+      "id": "onering_sql_migration_preview_drift_guard",
+      "command": "node scripts/validate_onering_sql_migration_preview_drift_guard.js",
+      "script": "scripts/validate_onering_sql_migration_preview_drift_guard.js",
+      "tier": "targeted",
+      "domain": "onering_contract",
+      "status": "active",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "tests/schema_examples/onering_sql_hash_contract.example.json",
+        "tests/schema_examples/onering_sql_migration_preview.example.json",
+        "tests/schema_examples/onering_sql_migration_preview_drift_cases.example.json",
+        "scripts/validate_onering_sql_hash_contract.js",
+        "scripts/validate_onering_sql_migration_preview.js",
+        "scripts/validate_onering_sql_migration_preview_drift_guard.js",
+        "package.json",
+        "scripts/validation_manifest.json"
+      ],
+      "required_for": [
+        "onering_sql_migration_preview_drift_guard_patch",
+        "onering_no_handler_migration_preview_patch",
+        "onering_sql_hash_contract_patch"
+      ]
+    },
+    {
+      "id": "onering_contract_bundle_index",
+      "command": "node scripts/validate_onering_contract_bundle_index.js",
+      "script": "scripts/validate_onering_contract_bundle_index.js",
+      "tier": "targeted",
+      "domain": "onering_contract",
+      "status": "active",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "tests/schema_examples/onering_contract_bundle_index.example.json",
+        "tests/schema_examples/onering_sql_hash_contract.example.json",
+        "tests/schema_examples/onering_sql_hash_contract_negative_cases.example.json",
+        "tests/schema_examples/onering_hash_identity_drift_cases.example.json",
+        "tests/schema_examples/onering_sql_migration_preview.example.json",
+        "tests/schema_examples/onering_sql_migration_preview_negative_cases.example.json",
+        "tests/schema_examples/onering_sql_migration_preview_drift_cases.example.json",
+        "scripts/validate_onering_sql_hash_contract.js",
+        "scripts/validate_onering_hash_identity_drift_guard.js",
+        "scripts/validate_onering_sql_migration_preview.js",
+        "scripts/validate_onering_sql_migration_preview_drift_guard.js",
+        "scripts/validate_onering_contract_bundle_index.js",
+        "package.json",
+        "scripts/validation_manifest.json"
+      ],
+      "required_for": [
+        "onering_contract_bundle_index_patch",
+        "onering_sql_hash_contract_patch",
+        "onering_sql_migration_preview_patch",
+        "onering_sql_migration_preview_drift_guard_patch"
+      ]
+    },
+    {
+      "id": "onering_manifest_recommendation_selector_guard",
+      "command": "node scripts/validate_onering_manifest_recommendation_selector_guard.js",
+      "script": "scripts/validate_onering_manifest_recommendation_selector_guard.js",
+      "tier": "targeted",
+      "domain": "onering_contract",
+      "status": "active",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "tests/schema_examples/onering_manifest_recommendation_selector_cases.example.json",
+        "tests/schema_examples/onering_contract_bundle_index.example.json",
+        "tests/schema_examples/onering_sql_hash_contract.example.json",
+        "tests/schema_examples/onering_sql_hash_contract_negative_cases.example.json",
+        "tests/schema_examples/onering_hash_identity_drift_cases.example.json",
+        "tests/schema_examples/onering_sql_migration_preview.example.json",
+        "tests/schema_examples/onering_sql_migration_preview_negative_cases.example.json",
+        "tests/schema_examples/onering_sql_migration_preview_drift_cases.example.json",
+        "scripts/validate_onering_sql_hash_contract.js",
+        "scripts/validate_onering_hash_identity_drift_guard.js",
+        "scripts/validate_onering_sql_migration_preview.js",
+        "scripts/validate_onering_sql_migration_preview_drift_guard.js",
+        "scripts/validate_onering_contract_bundle_index.js",
+        "scripts/validate_onering_manifest_recommendation_selector_guard.js",
+        "scripts/recommend_validation_for_changed_files.js",
+        "scripts/run_validation_manifest_tier.js",
+        "package.json",
+        "scripts/validation_manifest.json"
+      ],
+      "required_for": [
+        "onering_manifest_recommendation_selector_guard_patch",
+        "onering_contract_bundle_index_patch",
+        "validation_recommender_patch"
+      ]
+    },
+    {
+      "id": "onering_selector_negative_cases_guard",
+      "command": "node scripts/validate_onering_selector_negative_cases_guard.js",
+      "script": "scripts/validate_onering_selector_negative_cases_guard.js",
+      "tier": "targeted",
+      "domain": "onering_contract",
+      "status": "active",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "tests/schema_examples/onering_selector_negative_cases.example.json",
+        "scripts/validate_onering_selector_negative_cases_guard.js",
+        "scripts/recommend_validation_for_changed_files.js",
+        "package.json",
+        "scripts/validation_manifest.json"
+      ],
+      "required_for": [
+        "onering_selector_negative_cases_guard_patch",
+        "onering_manifest_recommendation_selector_guard_patch",
+        "validation_recommender_patch"
+      ]
+    },
+    {
+      "id": "onering_recommendation_closeout_summary_guard",
+      "command": "node scripts/validate_onering_recommendation_closeout_summary_guard.js",
+      "script": "scripts/validate_onering_recommendation_closeout_summary_guard.js",
+      "tier": "targeted",
+      "domain": "onering_contract",
+      "status": "active",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "tests/schema_examples/onering_recommendation_closeout_summary_cases.example.json",
+        "tests/schema_examples/onering_manifest_recommendation_selector_cases.example.json",
+        "scripts/validate_onering_recommendation_closeout_summary_guard.js",
+        "scripts/validate_onering_manifest_recommendation_selector_guard.js",
+        "scripts/build_validation_closeout_summary.js",
+        "scripts/recommend_validation_for_changed_files.js",
+        "package.json",
+        "scripts/validation_manifest.json"
+      ],
+      "required_for": [
+        "onering_recommendation_closeout_summary_guard_patch",
+        "onering_manifest_recommendation_selector_guard_patch",
+        "validation_closeout_summary_patch",
+        "validation_recommender_patch"
+      ]
+    },
+    {
+      "id": "onering_mixed_change_closeout_guard",
+      "command": "node scripts/validate_onering_mixed_change_closeout_guard.js",
+      "script": "scripts/validate_onering_mixed_change_closeout_guard.js",
+      "tier": "targeted",
+      "domain": "onering_contract",
+      "status": "active",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "tests/schema_examples/onering_mixed_change_closeout_cases.example.json",
+        "tests/schema_examples/onering_selector_negative_cases.example.json",
+        "scripts/validate_onering_mixed_change_closeout_guard.js",
+        "scripts/validate_onering_selector_negative_cases_guard.js",
+        "scripts/build_validation_closeout_summary.js",
+        "scripts/recommend_validation_for_changed_files.js",
+        "package.json",
+        "scripts/validation_manifest.json"
+      ],
+      "required_for": [
+        "onering_mixed_change_closeout_guard_patch",
+        "onering_selector_negative_cases_guard_patch",
+        "validation_closeout_summary_patch",
+        "validation_recommender_patch"
+      ]
+    },
+    {
+      "id": "onering_closeout_deferred_commands_guard",
+      "command": "node scripts/validate_onering_closeout_deferred_commands_guard.js",
+      "script": "scripts/validate_onering_closeout_deferred_commands_guard.js",
+      "tier": "targeted",
+      "domain": "onering_contract",
+      "status": "active",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "tests/schema_examples/onering_closeout_deferred_commands_cases.example.json",
+        "tests/schema_examples/onering_mixed_change_closeout_cases.example.json",
+        "scripts/validate_onering_closeout_deferred_commands_guard.js",
+        "scripts/validate_onering_mixed_change_closeout_guard.js",
+        "scripts/build_validation_closeout_summary.js",
+        "scripts/recommend_validation_for_changed_files.js",
+        "package.json",
+        "scripts/validation_manifest.json"
+      ],
+      "required_for": [
+        "onering_closeout_deferred_commands_guard_patch",
+        "onering_mixed_change_closeout_guard_patch",
+        "validation_closeout_summary_patch",
+        "validation_recommender_patch"
+      ]
+    },
+    {
+      "id": "onering_validator_manifest_ordering_guard",
+      "command": "node scripts/validate_onering_validator_manifest_ordering_guard.js",
+      "script": "scripts/validate_onering_validator_manifest_ordering_guard.js",
+      "tier": "targeted",
+      "domain": "onering_contract",
+      "status": "active",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "tests/schema_examples/onering_validator_manifest_ordering.example.json",
+        "scripts/validate_onering_validator_manifest_ordering_guard.js",
+        "scripts/run_validation_manifest_tier.js",
+        "package.json",
+        "scripts/validation_manifest.json"
+      ],
+      "required_for": [
+        "onering_validator_manifest_ordering_guard_patch",
+        "validation_manifest_patch",
+        "targeted_plan_patch"
+      ]
+    },
+    {
+      "id": "onering_npm_script_manifest_command_mapping_guard",
+      "command": "node scripts/validate_onering_npm_script_manifest_command_mapping_guard.js",
+      "script": "scripts/validate_onering_npm_script_manifest_command_mapping_guard.js",
+      "tier": "targeted",
+      "domain": "onering_contract",
+      "status": "active",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "tests/schema_examples/onering_npm_script_manifest_command_mapping.example.json",
+        "scripts/validate_onering_npm_script_manifest_command_mapping_guard.js",
+        "package.json",
+        "scripts/validation_manifest.json"
+      ],
+      "required_for": [
+        "onering_npm_script_manifest_command_mapping_guard_patch",
+        "validation_manifest_patch",
+        "package_script_patch"
+      ]
+    },
+    {
+      "id": "onering_trigger_paths_coverage_guard",
+      "command": "node scripts/validate_onering_trigger_paths_coverage_guard.js",
+      "script": "scripts/validate_onering_trigger_paths_coverage_guard.js",
+      "tier": "targeted",
+      "domain": "onering_contract",
+      "status": "active",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "tests/schema_examples/onering_trigger_paths_coverage.example.json",
+        "scripts/validate_onering_trigger_paths_coverage_guard.js",
+        "package.json",
+        "scripts/validation_manifest.json"
+      ],
+      "required_for": [
+        "onering_trigger_paths_coverage_guard_patch",
+        "validation_manifest_patch",
+        "targeted_plan_patch"
+      ]
+    },
+    {
+      "id": "onering_required_for_coverage_guard",
+      "command": "node scripts/validate_onering_required_for_coverage_guard.js",
+      "script": "scripts/validate_onering_required_for_coverage_guard.js",
+      "tier": "targeted",
+      "domain": "onering_contract",
+      "status": "active",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "tests/schema_examples/onering_required_for_coverage.example.json",
+        "scripts/validate_onering_required_for_coverage_guard.js",
+        "package.json",
+        "scripts/validation_manifest.json"
+      ],
+      "required_for": [
+        "onering_required_for_coverage_guard_patch",
+        "validation_manifest_patch",
+        "targeted_plan_patch"
+      ]
+    },
+    {
+      "id": "onering_manifest_status_runtime_class_guard",
+      "command": "node scripts/validate_onering_manifest_status_runtime_class_guard.js",
+      "script": "scripts/validate_onering_manifest_status_runtime_class_guard.js",
+      "tier": "targeted",
+      "domain": "onering_contract",
+      "status": "active",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "tests/schema_examples/onering_manifest_status_runtime_class.example.json",
+        "scripts/validate_onering_manifest_status_runtime_class_guard.js",
+        "package.json",
+        "scripts/validation_manifest.json"
+      ],
+      "required_for": [
+        "onering_manifest_status_runtime_class_guard_patch",
+        "validation_manifest_patch",
+        "targeted_plan_patch"
+      ]
+    },
+    {
+      "id": "onering_manifest_tier_domain_guard",
+      "command": "node scripts/validate_onering_manifest_tier_domain_guard.js",
+      "script": "scripts/validate_onering_manifest_tier_domain_guard.js",
+      "tier": "targeted",
+      "domain": "onering_contract",
+      "status": "active",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "tests/schema_examples/onering_manifest_tier_domain.example.json",
+        "scripts/validate_onering_manifest_tier_domain_guard.js",
+        "package.json",
+        "scripts/validation_manifest.json"
+      ],
+      "required_for": [
+        "onering_manifest_tier_domain_guard_patch",
+        "validation_manifest_patch",
+        "targeted_plan_patch"
+      ]
+    },
+    {
+      "id": "onering_manifest_command_script_basename_guard",
+      "command": "node scripts/validate_onering_manifest_command_script_basename_guard.js",
+      "script": "scripts/validate_onering_manifest_command_script_basename_guard.js",
+      "tier": "targeted",
+      "domain": "onering_contract",
+      "status": "active",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "tests/schema_examples/onering_manifest_command_script_basename.example.json",
+        "scripts/validate_onering_manifest_command_script_basename_guard.js",
+        "package.json",
+        "scripts/validation_manifest.json"
+      ],
+      "required_for": [
+        "onering_manifest_command_script_basename_guard_patch",
+        "validation_manifest_patch",
+        "targeted_plan_patch"
+      ]
+    },
+    {
+      "id": "onering_manifest_duplicate_command_guard",
+      "command": "node scripts/validate_onering_manifest_duplicate_command_guard.js",
+      "script": "scripts/validate_onering_manifest_duplicate_command_guard.js",
+      "tier": "targeted",
+      "domain": "onering_contract",
+      "status": "active",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "tests/schema_examples/onering_manifest_duplicate_command.example.json",
+        "scripts/validate_onering_manifest_duplicate_command_guard.js",
+        "package.json",
+        "scripts/validation_manifest.json"
+      ],
+      "required_for": [
+        "onering_manifest_duplicate_command_guard_patch",
+        "validation_manifest_patch",
+        "targeted_plan_patch"
+      ]
+    },
+    {
+      "id": "onering_manifest_duplicate_script_guard",
+      "command": "node scripts/validate_onering_manifest_duplicate_script_guard.js",
+      "script": "scripts/validate_onering_manifest_duplicate_script_guard.js",
+      "tier": "targeted",
+      "domain": "onering_contract",
+      "status": "active",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "tests/schema_examples/onering_manifest_duplicate_script.example.json",
+        "scripts/validate_onering_manifest_duplicate_script_guard.js",
+        "package.json",
+        "scripts/validation_manifest.json"
+      ],
+      "required_for": [
+        "onering_manifest_duplicate_script_guard_patch",
+        "validation_manifest_patch",
+        "targeted_plan_patch"
+      ]
+    },
+    {
+      "id": "onering_manifest_id_script_basename_bijection_guard",
+      "command": "node scripts/validate_onering_manifest_id_script_basename_bijection_guard.js",
+      "script": "scripts/validate_onering_manifest_id_script_basename_bijection_guard.js",
+      "tier": "targeted",
+      "domain": "onering_contract",
+      "status": "active",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "tests/schema_examples/onering_manifest_id_script_basename_bijection.example.json",
+        "scripts/validate_onering_manifest_id_script_basename_bijection_guard.js",
+        "package.json",
+        "scripts/validation_manifest.json"
+      ],
+      "required_for": [
+        "onering_manifest_id_script_basename_bijection_guard_patch",
+        "validation_manifest_patch",
+        "targeted_plan_patch"
+      ]
+    },
+    {
+      "id": "onering_npm_script_name_manifest_id_slug_guard",
+      "command": "node scripts/validate_onering_npm_script_name_manifest_id_slug_guard.js",
+      "script": "scripts/validate_onering_npm_script_name_manifest_id_slug_guard.js",
+      "tier": "targeted",
+      "domain": "onering_contract",
+      "status": "active",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "tests/schema_examples/onering_npm_script_name_manifest_id_slug.example.json",
+        "scripts/validate_onering_npm_script_name_manifest_id_slug_guard.js",
+        "package.json",
+        "scripts/validation_manifest.json"
+      ],
+      "required_for": [
+        "onering_npm_script_name_manifest_id_slug_guard_patch",
+        "validation_manifest_patch",
+        "package_script_patch",
+        "targeted_plan_patch"
+      ]
+    },
+    {
+      "id": "onering_manifest_command_target_npm_script_target_guard",
+      "command": "node scripts/validate_onering_manifest_command_target_npm_script_target_guard.js",
+      "script": "scripts/validate_onering_manifest_command_target_npm_script_target_guard.js",
+      "tier": "targeted",
+      "domain": "onering_contract",
+      "status": "active",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "tests/schema_examples/onering_manifest_command_target_npm_script_target.example.json",
+        "scripts/validate_onering_manifest_command_target_npm_script_target_guard.js",
+        "package.json",
+        "scripts/validation_manifest.json"
+      ],
+      "required_for": [
+        "onering_manifest_command_target_npm_script_target_guard_patch",
+        "validation_manifest_patch",
+        "package_script_patch",
+        "targeted_plan_patch"
+      ]
+    },
+    {
+      "id": "onering_command_parser_strictness_guard",
+      "command": "node scripts/validate_onering_command_parser_strictness_guard.js",
+      "script": "scripts/validate_onering_command_parser_strictness_guard.js",
+      "tier": "targeted",
+      "domain": "onering_contract",
+      "status": "active",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "tests/schema_examples/onering_command_parser_strictness.example.json",
+        "scripts/validate_onering_command_parser_strictness_guard.js",
+        "package.json",
+        "scripts/validation_manifest.json"
+      ],
+      "required_for": [
+        "onering_command_parser_strictness_guard_patch",
+        "validation_manifest_patch",
+        "package_script_patch",
+        "targeted_plan_patch"
+      ]
+    },
+    {
+      "id": "onering_command_parser_negative_cases_guard",
+      "command": "node scripts/validate_onering_command_parser_negative_cases_guard.js",
+      "script": "scripts/validate_onering_command_parser_negative_cases_guard.js",
+      "tier": "targeted",
+      "domain": "onering_contract",
+      "status": "active",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "tests/schema_examples/onering_command_parser_negative_cases.example.json",
+        "scripts/validate_onering_command_parser_negative_cases_guard.js",
+        "package.json",
+        "scripts/validation_manifest.json"
+      ],
+      "required_for": [
+        "onering_command_parser_negative_cases_guard_patch",
+        "validation_manifest_patch",
+        "package_script_patch",
+        "targeted_plan_patch"
+      ]
+    },
+    {
+      "id": "onering_command_parser_regex_source_consistency_guard",
+      "command": "node scripts/validate_onering_command_parser_regex_source_consistency_guard.js",
+      "script": "scripts/validate_onering_command_parser_regex_source_consistency_guard.js",
+      "tier": "targeted",
+      "domain": "onering_contract",
+      "status": "active",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "tests/schema_examples/onering_command_parser_regex_source_consistency.example.json",
+        "tests/schema_examples/onering_command_parser_strictness.example.json",
+        "tests/schema_examples/onering_command_parser_negative_cases.example.json",
+        "scripts/validate_onering_command_parser_regex_source_consistency_guard.js",
+        "package.json",
+        "scripts/validation_manifest.json"
+      ],
+      "required_for": [
+        "onering_command_parser_regex_source_consistency_guard_patch",
+        "validation_manifest_patch",
+        "package_script_patch",
+        "targeted_plan_patch"
+      ]
+    },
+    {
+      "id": "onering_command_parser_regex_canonicalization_guard",
+      "command": "node scripts/validate_onering_command_parser_regex_canonicalization_guard.js",
+      "script": "scripts/validate_onering_command_parser_regex_canonicalization_guard.js",
+      "tier": "targeted",
+      "domain": "onering_contract",
+      "status": "active",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "tests/schema_examples/onering_command_parser_regex_canonicalization.example.json",
+        "tests/schema_examples/onering_command_parser_regex_source_consistency.example.json",
+        "scripts/validate_onering_command_parser_strictness_guard.js",
+        "scripts/validate_onering_command_parser_negative_cases_guard.js",
+        "scripts/validate_onering_command_parser_regex_canonicalization_guard.js",
+        "package.json",
+        "scripts/validation_manifest.json"
+      ],
+      "required_for": [
+        "onering_command_parser_regex_canonicalization_guard_patch",
+        "validation_manifest_patch",
+        "package_script_patch",
+        "targeted_plan_patch"
+      ]
+    },
+    {
+      "id": "onering_command_parser_extractor_robustness_guard",
+      "command": "node scripts/validate_onering_command_parser_extractor_robustness_guard.js",
+      "script": "scripts/validate_onering_command_parser_extractor_robustness_guard.js",
+      "tier": "targeted",
+      "domain": "onering_contract",
+      "status": "active",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "tests/schema_examples/onering_command_parser_extractor_robustness.example.json",
+        "tests/schema_examples/onering_command_parser_regex_canonicalization.example.json",
+        "scripts/validate_onering_command_parser_strictness_guard.js",
+        "scripts/validate_onering_command_parser_negative_cases_guard.js",
+        "scripts/validate_onering_command_parser_extractor_robustness_guard.js",
+        "package.json",
+        "scripts/validation_manifest.json"
+      ],
+      "required_for": [
+        "onering_command_parser_extractor_robustness_guard_patch",
+        "validation_manifest_patch",
+        "package_script_patch",
+        "targeted_plan_patch"
+      ]
+    },
+    {
+      "id": "onering_command_parser_extractor_negative_source_shape_guard",
+      "command": "node scripts/validate_onering_command_parser_extractor_negative_source_shape_guard.js",
+      "script": "scripts/validate_onering_command_parser_extractor_negative_source_shape_guard.js",
+      "tier": "targeted",
+      "domain": "onering_contract",
+      "status": "active",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "tests/schema_examples/onering_command_parser_extractor_negative_source_shape.example.json",
+        "tests/schema_examples/onering_command_parser_extractor_robustness.example.json",
+        "tests/schema_examples/onering_command_parser_regex_canonicalization.example.json",
+        "scripts/validate_onering_command_parser_extractor_robustness_guard.js",
+        "scripts/validate_onering_command_parser_extractor_negative_source_shape_guard.js",
+        "package.json",
+        "scripts/validation_manifest.json"
+      ],
+      "required_for": [
+        "onering_command_parser_extractor_negative_source_shape_guard_patch",
+        "validation_manifest_patch",
+        "package_script_patch",
+        "targeted_plan_patch"
+      ]
+    },
+    {
+      "id": "onering_command_parser_extractor_policy_ref_consistency_guard",
+      "command": "node scripts/validate_onering_command_parser_extractor_policy_ref_consistency_guard.js",
+      "script": "scripts/validate_onering_command_parser_extractor_policy_ref_consistency_guard.js",
+      "tier": "targeted",
+      "domain": "onering_contract",
+      "status": "active",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "tests/schema_examples/onering_command_parser_extractor_policy_ref_consistency.example.json",
+        "tests/schema_examples/onering_command_parser_extractor_robustness.example.json",
+        "tests/schema_examples/onering_command_parser_extractor_negative_source_shape.example.json",
+        "tests/schema_examples/onering_command_parser_regex_canonicalization.example.json",
+        "scripts/validate_onering_command_parser_extractor_policy_ref_consistency_guard.js",
+        "package.json",
+        "scripts/validation_manifest.json"
+      ],
+      "required_for": [
+        "onering_command_parser_extractor_policy_ref_consistency_guard_patch",
+        "validation_manifest_patch",
+        "package_script_patch",
+        "targeted_plan_patch"
+      ]
+    },
+    {
+      "id": "onering_command_parser_extractor_policy_ref_negative_fixture_guard",
+      "command": "node scripts/validate_onering_command_parser_extractor_policy_ref_negative_fixture_guard.js",
+      "script": "scripts/validate_onering_command_parser_extractor_policy_ref_negative_fixture_guard.js",
+      "tier": "targeted",
+      "domain": "onering_contract",
+      "status": "active",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "tests/schema_examples/onering_command_parser_extractor_policy_ref_negative_fixture.example.json",
+        "tests/schema_examples/onering_command_parser_extractor_policy_ref_consistency.example.json",
+        "tests/schema_examples/onering_command_parser_extractor_robustness.example.json",
+        "tests/schema_examples/onering_command_parser_extractor_negative_source_shape.example.json",
+        "tests/schema_examples/onering_command_parser_regex_canonicalization.example.json",
+        "tests/schema_examples/onering_command_parser_regex_source_consistency.example.json",
+        "scripts/validate_onering_command_parser_extractor_policy_ref_negative_fixture_guard.js",
+        "package.json",
+        "scripts/validation_manifest.json"
+      ],
+      "required_for": [
+        "onering_command_parser_extractor_policy_ref_negative_fixture_guard_patch",
+        "validation_manifest_patch",
+        "package_script_patch",
+        "targeted_plan_patch"
+      ]
+    },
+    {
+      "id": "onering_command_parser_extractor_policy_ref_fixture_index_guard",
+      "command": "node scripts/validate_onering_command_parser_extractor_policy_ref_fixture_index_guard.js",
+      "script": "scripts/validate_onering_command_parser_extractor_policy_ref_fixture_index_guard.js",
+      "tier": "targeted",
+      "domain": "onering_contract",
+      "status": "active",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "tests/schema_examples/onering_command_parser_extractor_policy_ref_fixture_index.example.json",
+        "tests/schema_examples/onering_command_parser_extractor_policy_ref_consistency.example.json",
+        "tests/schema_examples/onering_command_parser_extractor_policy_ref_negative_fixture.example.json",
+        "tests/schema_examples/onering_command_parser_extractor_robustness.example.json",
+        "tests/schema_examples/onering_command_parser_extractor_negative_source_shape.example.json",
+        "tests/schema_examples/onering_command_parser_regex_canonicalization.example.json",
+        "tests/schema_examples/onering_command_parser_regex_source_consistency.example.json",
+        "scripts/validate_onering_command_parser_extractor_policy_ref_fixture_index_guard.js",
+        "package.json",
+        "scripts/validation_manifest.json"
+      ],
+      "required_for": [
+        "onering_command_parser_extractor_policy_ref_fixture_index_guard_patch",
+        "validation_manifest_patch",
+        "package_script_patch",
+        "targeted_plan_patch"
+      ]
+    },
+    {
+      "id": "onering_command_parser_extractor_policy_ref_fixture_index_negative_guard",
+      "command": "node scripts/validate_onering_command_parser_extractor_policy_ref_fixture_index_negative_guard.js",
+      "script": "scripts/validate_onering_command_parser_extractor_policy_ref_fixture_index_negative_guard.js",
+      "tier": "targeted",
+      "domain": "onering_contract",
+      "status": "active",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "tests/schema_examples/onering_command_parser_extractor_policy_ref_fixture_index_negative.example.json",
+        "tests/schema_examples/onering_command_parser_extractor_policy_ref_fixture_index.example.json",
+        "tests/schema_examples/onering_command_parser_extractor_policy_ref_consistency.example.json",
+        "tests/schema_examples/onering_command_parser_extractor_policy_ref_negative_fixture.example.json",
+        "tests/schema_examples/onering_command_parser_extractor_robustness.example.json",
+        "tests/schema_examples/onering_command_parser_extractor_negative_source_shape.example.json",
+        "tests/schema_examples/onering_command_parser_regex_canonicalization.example.json",
+        "tests/schema_examples/onering_command_parser_regex_source_consistency.example.json",
+        "scripts/validate_onering_command_parser_extractor_policy_ref_fixture_index_negative_guard.js",
+        "package.json",
+        "scripts/validation_manifest.json"
+      ],
+      "required_for": [
+        "onering_command_parser_extractor_policy_ref_fixture_index_negative_guard_patch",
+        "validation_manifest_patch",
+        "package_script_patch",
+        "targeted_plan_patch"
+      ]
+    },
+    {
+      "id": "onering_command_parser_extractor_policy_ref_fixture_index_negative_coverage_guard",
+      "command": "node scripts/validate_onering_command_parser_extractor_policy_ref_fixture_index_negative_coverage_guard.js",
+      "script": "scripts/validate_onering_command_parser_extractor_policy_ref_fixture_index_negative_coverage_guard.js",
+      "tier": "targeted",
+      "domain": "onering_contract",
+      "status": "active",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "tests/schema_examples/onering_command_parser_extractor_policy_ref_fixture_index_negative_coverage.example.json",
+        "tests/schema_examples/onering_command_parser_extractor_policy_ref_fixture_index_negative.example.json",
+        "tests/schema_examples/onering_command_parser_extractor_policy_ref_fixture_index.example.json",
+        "scripts/validate_onering_command_parser_extractor_policy_ref_fixture_index_negative_coverage_guard.js",
+        "scripts/validate_onering_command_parser_extractor_policy_ref_fixture_index_negative_guard.js",
+        "package.json",
+        "scripts/validation_manifest.json"
+      ],
+      "required_for": [
+        "onering_command_parser_extractor_policy_ref_fixture_index_negative_coverage_guard_patch",
+        "validation_manifest_patch",
+        "package_script_patch",
+        "targeted_plan_patch"
+      ]
+    },
+    {
       "id": "accepted_sample_registry",
       "command": "node scripts/validate_v7_32_accepted_sample_registry_update.js",
       "script": "scripts/validate_v7_32_accepted_sample_registry_update.js",

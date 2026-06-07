@@ -1,0 +1,62 @@
+{
+  "fixture_type": "onering_command_parser_regex_source_consistency",
+  "schema_version": "v0_1",
+  "purpose": "Prove the OneRing command parser strictness and negative-case fixtures use the same allowed command regex source.",
+  "expected_allowed_command_regex": "^node scripts/validate_onering[a-z0-9_]*\\.js$",
+  "source_fixtures": [
+    {
+      "id": "strictness_fixture",
+      "fixture_ref": "tests/schema_examples/onering_command_parser_strictness.example.json",
+      "expected_fixture_type": "onering_command_parser_strictness"
+    },
+    {
+      "id": "negative_cases_fixture",
+      "fixture_ref": "tests/schema_examples/onering_command_parser_negative_cases.example.json",
+      "expected_fixture_type": "onering_command_parser_negative_cases"
+    }
+  ],
+  "positive_controls": [
+    {
+      "id": "canonical_sql_hash_contract",
+      "command": "node scripts/validate_onering_sql_hash_contract.js"
+    },
+    {
+      "id": "canonical_regex_source_consistency_guard",
+      "command": "node scripts/validate_onering_command_parser_regex_source_consistency_guard.js"
+    }
+  ],
+  "negative_controls": [
+    {
+      "id": "reject_extra_arg",
+      "command": "node scripts/validate_onering_sql_hash_contract.js --dry-run",
+      "reason": "The shared regex must reject trailing arguments."
+    },
+    {
+      "id": "reject_non_node_runtime",
+      "command": "npm run validate:onering-sql-hash-contract",
+      "reason": "The shared regex must reject non-node runtimes."
+    },
+    {
+      "id": "reject_non_scripts_target",
+      "command": "node validate_onering_sql_hash_contract.js",
+      "reason": "The shared regex must reject targets outside scripts/."
+    },
+    {
+      "id": "reject_non_validate_onering_target",
+      "command": "node scripts/validate_smoke.js",
+      "reason": "The shared regex must reject non validate_onering script targets."
+    }
+  ],
+  "runtime_boundary": {
+    "no_handler": true,
+    "handler_execution_performed": false,
+    "migration_execution_performed": false,
+    "sqlite_file_created": false,
+    "database_write_performed": false,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "secret_value_read_performed": false
+  }
+}

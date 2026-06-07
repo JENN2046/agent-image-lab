@@ -1,0 +1,54 @@
+{
+  "fixture_type": "onering_sql_migration_preview_negative_cases",
+  "schema_version": "v0_1",
+  "source_fixture": "tests/schema_examples/onering_sql_migration_preview.example.json",
+  "cases": [
+    {
+      "case_id": "preview_hash_mismatch",
+      "mutation": {
+        "path": "migration_preview.preview_hash",
+        "value": "sha256:3333333333333333333333333333333333333333333333333333333333333333"
+      },
+      "expected_failure": "preview_hash_matches_statements"
+    },
+    {
+      "case_id": "migration_execution_claimed",
+      "mutation": {
+        "path": "preview_boundary.migration_execution_performed",
+        "value": true
+      },
+      "expected_failure": "migration_execution_forbidden"
+    },
+    {
+      "case_id": "handler_files_touched",
+      "mutation": {
+        "path": "preview_boundary.handler_files_touched",
+        "value": true
+      },
+      "expected_failure": "handler_files_untouched"
+    },
+    {
+      "case_id": "missing_temp_store_statement",
+      "mutation": {
+        "remove_statement_including": "onering_temp_store"
+      },
+      "expected_failure": "preview_tables_match_contract"
+    },
+    {
+      "case_id": "persistent_temp_store_enabled",
+      "mutation": {
+        "path": "temp_store_preview.persistent_store_allowed",
+        "value": true
+      },
+      "expected_failure": "temp_store_persistent_store_forbidden"
+    },
+    {
+      "case_id": "source_ddl_hash_drift",
+      "mutation": {
+        "path": "source_ddl_hash",
+        "value": "sha256:4444444444444444444444444444444444444444444444444444444444444444"
+      },
+      "expected_failure": "source_ddl_hash_matches_contract"
+    }
+  ]
+}

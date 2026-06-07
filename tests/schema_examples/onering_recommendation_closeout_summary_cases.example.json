@@ -1,0 +1,23 @@
+{
+  "fixture_type": "onering_recommendation_closeout_summary_cases",
+  "schema_version": "v0_1",
+  "purpose": "Prove the validation closeout helper emits next_commands for OneRing changes that match the selector/recommender contract.",
+  "source_selector_cases": "tests/schema_examples/onering_manifest_recommendation_selector_cases.example.json",
+  "closeout_helper": "scripts/build_validation_closeout_summary.js",
+  "recommender": "scripts/recommend_validation_for_changed_files.js",
+  "expected_summary_path": "validation.recommender.next_commands",
+  "expected_primary_profile": "targeted",
+  "expected_primary_command": "npm run validate:targeted-plan",
+  "runtime_boundary": {
+    "no_handler": true,
+    "handler_execution_performed": false,
+    "migration_execution_performed": false,
+    "sqlite_file_created": false,
+    "database_write_performed": false,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "secret_value_read_performed": false
+  }
+}

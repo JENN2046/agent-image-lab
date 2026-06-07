@@ -447,6 +447,14 @@ function recommend(files) {
     }
   }
 
+  const oneRingContractOnly = normalizedFiles.length > 0 && normalizedFiles.every((file) =>
+    /^scripts\/validate_onering_.*\.js$/.test(file) ||
+      /^tests\/schema_examples\/onering_.*\.example\.json$/.test(file)
+  );
+  if (oneRingContractOnly) {
+    const oneRingMatches = matches.filter((entry) => entry.domain === "onering_contract");
+    matches.splice(0, matches.length, ...oneRingMatches);
+  }
   const baseCommands = [
     "node scripts/validate_validation_manifest.js",
   ];
@@ -458,7 +466,7 @@ function recommend(files) {
     baseCommands.push("npm run validate:smoke");
   }
 
-  const mvpRecommended = matches.some((entry) => entry.tier === "mvp") ||
+  const mvpRecommended = (!oneRingContractOnly && matches.some((entry) => entry.tier === "mvp")) ||
     normalizedFiles.some((file) => file === "scripts/validate_mvp_core.js" || file === "package.json");
   const observabilityRecommended = matches.some((entry) => entry.domain === "validation_observability");
   const manifestCoverage = buildManifestCoverage({ normalizedFiles, matches });

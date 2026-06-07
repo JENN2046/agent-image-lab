@@ -1,0 +1,50 @@
+{
+  "fixture_type": "onering_sql_migration_preview",
+  "schema_version": "v0_1",
+  "preview_id": "onering_sql_migration_preview_v0_1",
+  "source_contract": "tests/schema_examples/onering_sql_hash_contract.example.json",
+  "source_contract_id": "onering_sql_hash_contract_v0_1",
+  "source_migration_id": "onering_local_contract_001",
+  "source_ddl_hash": "sha256:eb14d66a4ca7da60befa2e0576e29791c72cf41662ebbe16a11ba2ff6c626c1b",
+  "preview_boundary": {
+    "no_handler": true,
+    "handler_files_touched": false,
+    "handler_execution_performed": false,
+    "migration_execution_performed": false,
+    "sqlite_file_created": false,
+    "database_write_performed": false,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "secret_value_read_performed": false
+  },
+  "migration_preview": {
+    "engine": "sqlite",
+    "mode": "preview_only",
+    "statement_count": 8,
+    "statements": [
+      "CREATE TABLE IF NOT EXISTS onering_requests (request_identity TEXT PRIMARY KEY NOT NULL, request_hash TEXT NOT NULL, snapshot_hash TEXT NOT NULL, idempotency_key TEXT NOT NULL, created_at_utc TEXT NOT NULL, state TEXT NOT NULL);",
+      "CREATE UNIQUE INDEX IF NOT EXISTS idx_onering_requests_idempotency ON onering_requests (idempotency_key);",
+      "CREATE TABLE IF NOT EXISTS onering_snapshots (snapshot_hash TEXT PRIMARY KEY NOT NULL, request_identity TEXT NOT NULL, canonical_json TEXT NOT NULL, created_at_utc TEXT NOT NULL);",
+      "CREATE INDEX IF NOT EXISTS idx_onering_snapshots_request ON onering_snapshots (request_identity);",
+      "CREATE TABLE IF NOT EXISTS onering_temp_store (temp_key_hash TEXT PRIMARY KEY NOT NULL, request_identity TEXT NOT NULL, namespace TEXT NOT NULL, payload_hash TEXT NOT NULL, expires_at_utc TEXT NOT NULL, purgeable INTEGER NOT NULL CHECK (purgeable = 1));",
+      "CREATE INDEX IF NOT EXISTS idx_onering_temp_store_request ON onering_temp_store (request_identity);",
+      "CREATE INDEX IF NOT EXISTS idx_onering_temp_store_expiry ON onering_temp_store (expires_at_utc);",
+      "PRAGMA user_version = 1;"
+    ],
+    "preview_hash": "sha256:1fb8bbd4a3e8a2e41f36f64b232e206770fc7b26211ca7ad184ff51ac07ce629"
+  },
+  "request_identity_preview": {
+    "request_identity": "sha256:ea0b4f3ab720fb931535c0e1c048c9bf4cc6a3e1bcc16699c66b9a1273beffe6",
+    "snapshot_hash": "sha256:aa3cfb787637816d2f3199676de7a02f8cffa3b4c0b79e1f1d61dc89e02ea6e0",
+    "temp_key_hash": "sha256:7a2c19b4648a58f9f78b9a439b72e528f496c2419511949e2d2d6555b24956de"
+  },
+  "temp_store_preview": {
+    "persistent_store_allowed": false,
+    "preview_temp_write_allowed": false,
+    "ttl_seconds_max": 3600,
+    "source_temp_entries": 1,
+    "all_entries_purgeable": true
+  }
+}

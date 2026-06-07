@@ -1,0 +1,71 @@
+{
+  "fixture_type": "onering_mixed_change_closeout_cases",
+  "schema_version": "v0_1",
+  "purpose": "Prove mixed OneRing plus non-OneRing schema example changes keep the closeout helper on the MVP profile without leaking the targeted-plan profile.",
+  "closeout_helper": "scripts/build_validation_closeout_summary.js",
+  "recommender": "scripts/recommend_validation_for_changed_files.js",
+  "expected_summary_path": "validation.recommender.next_commands",
+  "expected_primary_profile": "mvp",
+  "expected_primary_command": "npm run validate:mvp",
+  "required_commands": [
+    "node scripts/validate_validation_manifest.js",
+    "npm run validate:smoke",
+    "npm run validate:mvp"
+  ],
+  "forbidden_commands": [
+    "npm run validate:targeted-plan"
+  ],
+  "cases": [
+    {
+      "case_id": "source_contract_plus_readonly_visual_review",
+      "changed_files": [
+        "tests/schema_examples/onering_sql_hash_contract.example.json",
+        "tests/schema_examples/readonly_visual_review_mvp_state.example.json"
+      ],
+      "expected_onering_commands": [
+        "node scripts/validate_onering_sql_hash_contract.js",
+        "node scripts/validate_onering_hash_identity_drift_guard.js",
+        "node scripts/validate_onering_sql_migration_preview.js",
+        "node scripts/validate_onering_sql_migration_preview_drift_guard.js",
+        "node scripts/validate_onering_contract_bundle_index.js",
+        "node scripts/validate_onering_manifest_recommendation_selector_guard.js"
+      ]
+    },
+    {
+      "case_id": "migration_preview_plus_visual_prompt_correction",
+      "changed_files": [
+        "tests/schema_examples/onering_sql_migration_preview.example.json",
+        "tests/schema_examples/visual_prompt_correction_hint.example.json"
+      ],
+      "expected_onering_commands": [
+        "node scripts/validate_onering_sql_migration_preview.js",
+        "node scripts/validate_onering_sql_migration_preview_drift_guard.js",
+        "node scripts/validate_onering_contract_bundle_index.js",
+        "node scripts/validate_onering_manifest_recommendation_selector_guard.js"
+      ]
+    },
+    {
+      "case_id": "bundle_index_plus_autopilot_goal",
+      "changed_files": [
+        "tests/schema_examples/onering_contract_bundle_index.example.json",
+        "tests/schema_examples/autopilot_goal.example.json"
+      ],
+      "expected_onering_commands": [
+        "node scripts/validate_onering_contract_bundle_index.js",
+        "node scripts/validate_onering_manifest_recommendation_selector_guard.js"
+      ]
+    }
+  ],
+  "runtime_boundary": {
+    "no_handler": true,
+    "handler_execution_performed": false,
+    "migration_execution_performed": false,
+    "sqlite_file_created": false,
+    "database_write_performed": false,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "secret_value_read_performed": false
+  }
+}
