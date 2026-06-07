@@ -1,3 +1,49 @@
+## Current Run State - Asset Archive Real Preview Render Activation 2026-06-08
+
+```text
+phase: review_console_asset_archive_real_preview_render_activation_20260608
+status: completed_validated_real_preview_render
+lane: Amber exact asset_archive preview render after explicit user yes response, followed by Green status-surface sync
+goal: Render the three selected asset_archive preview refs in the Review Console now.
+branch: master
+receipt: reports/review_console_asset_archive_real_preview_render/asset_archive_real_preview_render_receipt_20260608.json
+changed_refs:
+  - review_console/static_prototype/app.js
+  - review_console/static_prototype/styles.css
+  - scripts/serve_review_console_static.js
+  - scripts/validators/review_console/validate_review_console_preview_display_state.js
+  - reports/review_console_asset_archive_real_preview_render/asset_archive_real_preview_render_receipt_20260608.json
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+result:
+  - preview_display_state now has an activated exact-render mode for the three selected asset_archive refs
+  - Review Console sample rail renders three real WebP previews
+  - main stage renders the first selected real preview and records stage proxy asset_archive_exact_render
+  - local static server serves only the three selected refs from asset_archive and returns 403 for an unselected asset_archive preview ref
+validation:
+  - syntax checks passed for app.js and serve_review_console_static.js
+  - render gate validator passed
+  - preview_display_state validator passed after activation-compatible token widening
+  - Browser DOM/layout audits passed
+boundary_checks:
+  asset_archive_directory_listing_performed: false
+  asset_archive_glob_performed: false
+  additional_manifest_read_performed: false
+  preview_creation_or_copy_performed: false
+  asset_archive_write_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  production_candidate_write_performed: false
+  push_tag_release_deploy_performed: false
+next_safe_task: run final exact-file diff/validation checks; commit only if explicitly requested.
+```
+
 ## Current Run State - v7_35 Remote Head f484 Closeout Surface Sync 2026-06-07
 
 ```text

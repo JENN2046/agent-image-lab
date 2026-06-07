@@ -1,3 +1,40 @@
+## Current Handoff Update - Asset Archive Real Preview Render Activation 2026-06-08
+
+```text
+phase: review_console_asset_archive_real_preview_render_activation_20260608
+status: completed_validated_real_preview_render
+repository: A:\agent-image-lab\agent-image-lab-v0.2
+branch: master
+goal: Execute the exact yes-authorized render gate for the three selected asset_archive preview refs in the Review Console.
+receipt: reports/review_console_asset_archive_real_preview_render/asset_archive_real_preview_render_receipt_20260608.json
+selected_preview_refs:
+  - asset_archive/accepted_samples/accepted_french_summer_rattan_bucket_bag_001/preview.webp
+  - asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/preview.webp
+  - asset_archive/failure_samples/failure_french_summer_rattan_bag_v7_29_001/preview.webp
+completed:
+  - added a Review Console real-preview activation layer for exactly the three selected refs
+  - added an exact allowlist route in the local static preview server for those refs only
+  - rendered the three preview refs in the sample rail and reused the first selected ref in the main stage
+  - recorded a local render receipt with server route preflight and browser DOM/layout evidence
+validation_completed:
+  - node --check review_console/static_prototype/app.js passed
+  - node --check scripts/serve_review_console_static.js passed
+  - node scripts/validate_asset_archive_real_preview_render_gate.js passed, 27 checks
+  - node scripts/validate_review_console_preview_display_state.js passed, 55 checks
+  - Browser DOM audit passed: 3 unique selected refs, all decoded images complete, stage proxy asset_archive_exact_render
+  - Browser layout audit passed: stage image visible, 3 rail images visible, body horizontal overflow false
+boundary:
+  - no asset_archive directory listing or glob
+  - no additional manifest read
+  - no preview copy or asset_archive write
+  - no provider/plugin/API/image generation
+  - no DailyNote/VCP memory write
+  - no accepted_samples/failure_samples/production candidate write
+  - no secret/env/config read
+  - no push/tag/release/deploy
+next_safe_action: run final narrow validation and optionally create an exact-file local commit only if requested; push remains separately gated.
+```
+
 ## Current Handoff Update - v7_35 Remote Head f484 Closeout Surface Sync 2026-06-07
 
 ```text

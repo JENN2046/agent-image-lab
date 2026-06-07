@@ -1,3 +1,45 @@
+## Checkpoint - Asset Archive Real Preview Render Activation 2026-06-08
+
+```text
+phase: review_console_asset_archive_real_preview_render_activation_20260608
+status: completed_validated_real_preview_render
+result: ASSET_ARCHIVE_REAL_PREVIEW_RENDER_ACTIVATED_FOR_THREE_SELECTED_REFS
+summary: After the user answered the exact render gate question with yes, the Review Console now renders the three selected asset_archive preview refs. The local static server exposes only those three refs, the sample rail shows all three real previews, and the main stage renders the first selected preview.
+receipt: reports/review_console_asset_archive_real_preview_render/asset_archive_real_preview_render_receipt_20260608.json
+selected_preview_refs:
+  - asset_archive/accepted_samples/accepted_french_summer_rattan_bucket_bag_001/preview.webp
+  - asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/preview.webp
+  - asset_archive/failure_samples/failure_french_summer_rattan_bag_v7_29_001/preview.webp
+changed_refs:
+  - review_console/static_prototype/app.js
+  - review_console/static_prototype/styles.css
+  - scripts/serve_review_console_static.js
+  - scripts/validators/review_console/validate_review_console_preview_display_state.js
+  - reports/review_console_asset_archive_real_preview_render/asset_archive_real_preview_render_receipt_20260608.json
+validation_run:
+  - node --check review_console/static_prototype/app.js: passed
+  - node --check scripts/serve_review_console_static.js: passed
+  - node scripts/validate_asset_archive_real_preview_render_gate.js: passed, 27 checks
+  - node scripts/validate_review_console_preview_display_state.js: passed, 55 checks
+  - Browser DOM audit: passed, 3 unique selected refs, all decoded images complete, stage proxy asset_archive_exact_render
+  - Browser layout audit: passed, stage image visible, 3 rail images visible, body horizontal overflow false
+boundary_checks:
+  - asset_archive_directory_listing_performed: false
+  - asset_archive_glob_performed: false
+  - additional_manifest_read_performed: false
+  - preview_creation_or_copy_performed: false
+  - asset_archive_write_performed: false
+  - provider_contact_performed: false
+  - plugin_call_performed: false
+  - api_call_performed: false
+  - image_generation_performed: false
+  - DailyNote_write_performed: false
+  - VCP_memory_write_performed: false
+  - production_candidate_write_performed: false
+  - push_tag_release_deploy_performed: false
+recommended_next: final narrow validation and optional exact-file local commit only if requested.
+```
+
 ## Checkpoint - v7_35 Remote Head f484 Closeout Surface Sync 2026-06-07
 
 ```text

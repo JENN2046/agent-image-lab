@@ -1,3 +1,20 @@
+- [x] ID: review_console_asset_archive_real_preview_render_activation_20260608
+      Lane: Amber exact asset_archive preview render after explicit user yes response, followed by Green status-surface sync.
+      Status: completed_validated_real_preview_render.
+      Goal: Render the 3 selected asset_archive preview refs in the Review Console now.
+      Receipt: `reports/review_console_asset_archive_real_preview_render/asset_archive_real_preview_render_receipt_20260608.json`.
+      Changed refs:
+        - `review_console/static_prototype/app.js`
+        - `review_console/static_prototype/styles.css`
+        - `scripts/serve_review_console_static.js`
+        - `scripts/validators/review_console/validate_review_console_preview_display_state.js`
+        - `reports/review_console_asset_archive_real_preview_render/asset_archive_real_preview_render_receipt_20260608.json`
+      Completed: activated real preview render mode for exactly 3 selected refs; added an exact local static server allowlist route; browser-rendered 3 unique real preview refs; recorded receipt and status surface.
+      Boundary: no fourth ref; no asset_archive directory listing/glob; no additional manifest read; no preview copy/write; no provider/plugin/API/image generation; no DailyNote/VCP memory write; no production candidate write; no push/tag/release/deploy.
+      Validation: app/server syntax checks passed; render gate validator passed; preview_display_state validator passed; Browser DOM/layout audits passed.
+      Remaining gate: final narrow validation, then exact-file local commit only if requested; push remains separately gated.
+---
+
 - [x] ID: review_console_asset_archive_real_preview_render_gate_draft_20260608
       Lane: Green local docs/schema/validator only.
       Status: completed_validated_local_render_gate_draft.

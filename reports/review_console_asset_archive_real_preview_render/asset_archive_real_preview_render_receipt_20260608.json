@@ -1,0 +1,134 @@
+{
+  "asset_archive_real_preview_render_receipt": {
+    "phase": "review_console_asset_archive_real_preview_render_activation_20260608",
+    "receipt_status": "completed_validated_real_preview_render",
+    "created_at": "2026-06-08T00:47:42.6644276+08:00",
+    "lane": "Amber exact asset_archive preview render within the bounded autonomy envelope after explicit user yes response",
+    "activation_question": "Render the 3 selected asset_archive preview refs in the Review Console now, yes or no?",
+    "activation_answer": "yes",
+    "target_surface": "Review Console static prototype",
+    "target_url": "http://127.0.0.1:4173/",
+    "source_gate_ref": "tests/schema_examples/ASSET_ARCHIVE_REAL_PREVIEW_RENDER_GATE.example.json",
+    "source_mapping_ref": "tests/schema_examples/ASSET_ARCHIVE_READONLY_PREVIEW_ADAPTER_MAPPING_DRAFT.example.json",
+    "allowed_operation": "browser_load_existing_preview_refs_only",
+    "selected_preview_ref_count": 3,
+    "selected_preview_refs": [
+      "asset_archive/accepted_samples/accepted_french_summer_rattan_bucket_bag_001/preview.webp",
+      "asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/preview.webp",
+      "asset_archive/failure_samples/failure_french_summer_rattan_bag_v7_29_001/preview.webp"
+    ],
+    "implementation": {
+      "review_console_app_updated": true,
+      "exact_static_server_route_added": true,
+      "thumbnail_ref_populated_for_selected_refs": true,
+      "render_mode_after_activation": "asset_archive_preview_image",
+      "css_skin_fallback_preserved": true,
+      "no_asset_archive_copy_or_write": true
+    },
+    "server_route_preflight": {
+      "server_process_restarted_for_updated_resolver": true,
+      "allowed_preview_head_statuses": [
+        {
+          "ref": "asset_archive/accepted_samples/accepted_french_summer_rattan_bucket_bag_001/preview.webp",
+          "status": 200,
+          "content_type": "image/webp"
+        },
+        {
+          "ref": "asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/preview.webp",
+          "status": 200,
+          "content_type": "image/webp"
+        },
+        {
+          "ref": "asset_archive/failure_samples/failure_french_summer_rattan_bag_v7_29_001/preview.webp",
+          "status": 200,
+          "content_type": "image/webp"
+        }
+      ],
+      "unselected_asset_archive_ref_status": 403,
+      "directory_listing_performed": false,
+      "glob_performed": false
+    },
+    "browser_render_evidence": {
+      "url": "http://127.0.0.1:4173/",
+      "title": "ImageLab Review Console Static Prototype",
+      "img_nodes_with_real_preview_ref": 4,
+      "unique_real_preview_ref_count": 3,
+      "unique_refs_match_selected_refs": true,
+      "all_images_complete": true,
+      "all_images_have_decoded_dom_dimensions": true,
+      "stage_preview_proxy": "asset_archive_exact_render",
+      "stage_real_preview_ref": "asset_archive/accepted_samples/accepted_french_summer_rattan_bucket_bag_001/preview.webp",
+      "stage_reuses_first_selected_ref": true,
+      "rail_real_preview_image_count": 3,
+      "rail_images_visible": true,
+      "stage_image_visible": true,
+      "body_horizontal_overflow": false,
+      "observed_dom_image_dimensions_note": "Browser DOM naturalWidth/naturalHeight were observed only to verify decoded render success; no file hash or metadata extraction was performed."
+    },
+    "preview_display_state_result": {
+      "execution_mode": "review_console_asset_archive_real_preview_render_activated",
+      "source_mode": "asset_archive_exact_refs_to_preview_display_state",
+      "selected_preview_id": "preview-display-asset-archive-accepted-french-summer-rattan-bucket-bag-001",
+      "real_preview_ref_count": 3,
+      "guard": {
+        "static_proxy_only": false,
+        "css_skin_only": false,
+        "exact_asset_archive_preview_refs_only": true,
+        "selected_preview_ref_count": 3,
+        "max_preview_refs": 3,
+        "asset_archive_read_performed": true,
+        "asset_archive_ui_read_performed": true,
+        "preview_loaded_or_rendered": true,
+        "browser_preview_load_performed": true,
+        "preview_creation_or_copy_performed": false,
+        "fetch_performed": false,
+        "file_write_performed": false,
+        "source_image_binary_read_performed": false,
+        "provider_contact_performed": false,
+        "plugin_call_performed": false,
+        "api_call_performed": false,
+        "image_generation_performed": false,
+        "DailyNote_write_performed": false,
+        "VCP_memory_write_performed": false,
+        "accepted_samples_write_performed": false,
+        "failure_samples_write_performed": false,
+        "production_candidate_write_performed": false,
+        "real_manifest_read_performed": false,
+        "real_vcpchat_read_performed": false,
+        "real_vcptoolbox_read_performed": false
+      }
+    },
+    "boundary": {
+      "additional_manifest_read_performed": false,
+      "asset_archive_directory_listing_performed": false,
+      "asset_archive_glob_performed": false,
+      "asset_archive_write_performed": false,
+      "preview_creation_or_copy_performed": false,
+      "source_image_binary_read_performed_by_probe": false,
+      "hash_extraction_performed": false,
+      "file_metadata_dimension_extraction_performed": false,
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "image_generation_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "accepted_samples_write_performed": false,
+      "failure_samples_write_performed": false,
+      "production_candidate_write_performed": false,
+      "push_tag_release_deploy_performed": false,
+      "secret_env_config_read_performed": false
+    },
+    "validation_observed": [
+      "node --check review_console/static_prototype/app.js passed",
+      "node --check scripts/serve_review_console_static.js passed",
+      "node scripts/validate_asset_archive_real_preview_render_gate.js passed, 27 checks",
+      "node scripts/validate_review_console_preview_display_state.js passed, 55 checks after token check was widened for activation-compatible source",
+      "Review Console browser DOM audit passed: 3 unique selected refs, decoded images complete, stage proxy asset_archive_exact_render",
+      "Review Console layout audit passed: stage image visible, rail images visible, no body horizontal overflow"
+    ],
+    "rollback_or_cleanup_available": "restore review_console/static_prototype/app.js to css_skin_only mapping, remove exact asset_archive route from scripts/serve_review_console_static.js, and keep thumbnail_ref null / render_mode css_skin_only",
+    "next_auto_step_allowed": "Green status-surface sync and narrow validation only",
+    "stop_reason": "real preview render activation completed and receipt recorded"
+  }
+}

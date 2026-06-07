@@ -4,7 +4,13 @@ const path = require("path");
 
 const host = "127.0.0.1";
 const port = Number(process.env.REVIEW_CONSOLE_PORT || process.argv[2] || 4173);
+const projectRoot = path.resolve(__dirname, "..");
 const root = path.resolve(__dirname, "..", "review_console", "static_prototype");
+const exactAssetArchivePreviewRefs = new Set([
+  "asset_archive/accepted_samples/accepted_french_summer_rattan_bucket_bag_001/preview.webp",
+  "asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/preview.webp",
+  "asset_archive/failure_samples/failure_french_summer_rattan_bag_v7_29_001/preview.webp"
+]);
 
 const mimeTypes = {
   ".css": "text/css; charset=utf-8",
@@ -26,6 +32,17 @@ function resolveRequestPath(urlPath) {
     return { errorStatus: 400, errorMessage: "Bad request" };
   }
   const relativePath = decodedPath === "/" ? "index.html" : decodedPath.replace(/^\/+/, "");
+  const normalizedRepoPath = relativePath.replace(/\\/g, "/");
+  if (normalizedRepoPath.startsWith("asset_archive/")) {
+    if (!exactAssetArchivePreviewRefs.has(normalizedRepoPath)) {
+      return { errorStatus: 403, errorMessage: "Forbidden" };
+    }
+    const absolutePreviewPath = path.resolve(projectRoot, normalizedRepoPath);
+    if (absolutePreviewPath !== projectRoot && absolutePreviewPath.startsWith(`${projectRoot}${path.sep}`)) {
+      return { filePath: absolutePreviewPath, exactAssetArchivePreviewRef: normalizedRepoPath };
+    }
+    return { errorStatus: 403, errorMessage: "Forbidden" };
+  }
   const absolutePath = path.resolve(root, relativePath);
   if (absolutePath !== root && !absolutePath.startsWith(`${root}${path.sep}`)) {
     return { errorStatus: 403, errorMessage: "Forbidden" };
@@ -61,11 +78,12 @@ const server = http.createServer((request, response) => {
 if (require.main === module) {
   server.listen(port, host, () => {
     console.log(`Review Console static preview: http://${host}:${port}/`);
-    console.log("Serving local files only from review_console/static_prototype.");
+    console.log("Serving local files from review_console/static_prototype plus 3 exact asset_archive preview refs.");
   });
 }
 
 module.exports = {
+  exactAssetArchivePreviewRefs,
   resolveRequestPath,
   server
 };
