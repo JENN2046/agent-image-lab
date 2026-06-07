@@ -3934,12 +3934,19 @@ function previewStageMarkup(preview) {
 function renderPreviewBoundaryStrip(boundary) {
   const root = qs("#previewBoundaryStrip");
   if (!root || !boundary) return;
-  const active = boundary.boundary_status === "exact_refs_render_active" || boundary.boundary_status === "exact_original_refs_render_active";
+  const trackedPreviewActive = boundary.boundary_status === "exact_tracked_preview_refs_render_active";
+  const originalPreviewActive = boundary.boundary_status === "exact_original_refs_render_active";
+  const legacyExactPreviewActive = boundary.boundary_status === "exact_refs_render_active";
+  const active = trackedPreviewActive || originalPreviewActive || legacyExactPreviewActive;
+  const label = trackedPreviewActive ? "TRACKED PREVIEW" : active ? "ORIGINAL PREVIEW" : "CSS PREVIEW";
+  const refCount = trackedPreviewActive ? boundary.selected_preview_ref_count : boundary.selected_original_ref_count || boundary.selected_preview_ref_count;
+  const maxRefs = trackedPreviewActive ? boundary.max_preview_refs : boundary.max_original_refs || boundary.max_preview_refs;
+  const currentRefIndex = trackedPreviewActive ? boundary.current_preview_ref_index : boundary.current_original_ref_index || boundary.current_preview_ref_index;
   root.classList.toggle("is-active", active);
   root.innerHTML = `
-    <span class="preview-boundary-lede"><strong>${escapeHtml(active ? "ORIGINAL PREVIEW" : "CSS PREVIEW")}</strong>${escapeHtml(boundary.ui_summary_cn)}</span>
-    <span><strong>refs</strong>${escapeHtml(boundary.selected_original_ref_count || boundary.selected_preview_ref_count)} / ${escapeHtml(boundary.max_original_refs || boundary.max_preview_refs)}</span>
-    <span><strong>current</strong>${escapeHtml(boundary.current_original_ref_index || boundary.current_preview_ref_index || "-")}</span>
+    <span class="preview-boundary-lede"><strong>${escapeHtml(label)}</strong>${escapeHtml(boundary.ui_summary_cn)}</span>
+    <span><strong>refs</strong>${escapeHtml(refCount)} / ${escapeHtml(maxRefs)}</span>
+    <span><strong>current</strong>${escapeHtml(currentRefIndex || "-")}</span>
     <span><strong>zoom</strong>${escapeHtml(boundary.stage_zoom_percent || 100)}%</span>
     <span><strong>writes</strong>${escapeHtml(boundary.guard.file_write_performed ? "on" : "off")}</span>
     <span><strong>generation</strong>${escapeHtml(boundary.guard.image_generation_performed ? "on" : "off")}</span>
