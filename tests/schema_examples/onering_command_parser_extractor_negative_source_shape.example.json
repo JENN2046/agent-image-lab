@@ -1,0 +1,74 @@
+{
+  "fixture_type": "onering_command_parser_extractor_negative_source_shape",
+  "schema_version": "v0_1",
+  "purpose": "Prove the OneRing command parser extractor rejects bad source shapes: multiple command.match calls, dynamic RegExp construction, regex.test(command), and parser constants.",
+  "policy_fixture_ref": "tests/schema_examples/onering_command_parser_extractor_robustness.example.json",
+  "expected_policy_fixture_type": "onering_command_parser_extractor_robustness",
+  "expected_canonical_fixture_type": "onering_command_parser_regex_canonicalization",
+  "negative_source_shapes": [
+    {
+      "case_id": "multiple_command_match_calls",
+      "source_text": "function parse(command) {\n  const first = command.match(/^node (scripts\\/validate_onering[a-z0-9_]*\\.js)$/);\n  const second = command.match(/^node (scripts\\/validate_onering_extra\\.js)$/);\n  return first || second;\n}",
+      "expected_rejection_ids": [
+        "direct_command_match_literal_count_mismatch",
+        "command_match_call_count_mismatch"
+      ]
+    },
+    {
+      "case_id": "dynamic_new_regexp_constructor",
+      "source_text": "function parse(command) {\n  const parser = new RegExp(\"^node (scripts/validate_onering[a-z0-9_]*\\\\.js)$\");\n  return command.match(parser);\n}",
+      "expected_rejection_ids": [
+        "direct_command_match_literal_count_mismatch",
+        "direct_regex_source_mismatch",
+        "forbidden:new_regexp_constructor",
+        "forbidden:regexp_constructor"
+      ]
+    },
+    {
+      "case_id": "dynamic_regexp_function",
+      "source_text": "function parse(command) {\n  const parser = RegExp(\"^node (scripts/validate_onering[a-z0-9_]*\\\\.js)$\");\n  return command.match(parser);\n}",
+      "expected_rejection_ids": [
+        "direct_command_match_literal_count_mismatch",
+        "direct_regex_source_mismatch",
+        "forbidden:regexp_constructor"
+      ]
+    },
+    {
+      "case_id": "regex_test_command",
+      "source_text": "function parse(command) {\n  if (/^node (scripts\\/validate_onering[a-z0-9_]*\\.js)$/.test(command)) {\n    return command;\n  }\n  return null;\n}",
+      "expected_rejection_ids": [
+        "direct_command_match_literal_count_mismatch",
+        "command_match_call_count_mismatch",
+        "direct_regex_source_mismatch",
+        "forbidden:regex_test_command"
+      ]
+    },
+    {
+      "case_id": "parser_constant_command_regex",
+      "source_text": "function parse(command) {\n  const commandRegex = /^node (scripts\\/validate_onering[a-z0-9_]*\\.js)$/;\n  return command.match(commandRegex);\n}",
+      "expected_rejection_ids": [
+        "direct_command_match_literal_count_mismatch",
+        "direct_regex_source_mismatch",
+        "forbidden:split_parser_constant"
+      ]
+    }
+  ],
+  "positive_controls": [
+    {
+      "case_id": "single_direct_command_match_literal",
+      "source_text": "function parse(command) {\n  return command.match(/^node (scripts\\/validate_onering[a-z0-9_]*\\.js)$/);\n}"
+    }
+  ],
+  "runtime_boundary": {
+    "no_handler": true,
+    "handler_execution_performed": false,
+    "migration_execution_performed": false,
+    "sqlite_file_created": false,
+    "database_write_performed": false,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "secret_value_read_performed": false
+  }
+}

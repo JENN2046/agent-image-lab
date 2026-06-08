@@ -1,0 +1,43 @@
+{
+  "fixture_type": "onering_command_parser_extractor_robustness",
+  "schema_version": "v0_1",
+  "purpose": "Prove OneRing command parser validators keep a single direct command.match(/.../) parser shape and do not drift into dynamic parser construction.",
+  "canonical_fixture_ref": "tests/schema_examples/onering_command_parser_regex_canonicalization.example.json",
+  "expected_canonical_fixture_type": "onering_command_parser_regex_canonicalization",
+  "expected_direct_command_match_count": 1,
+  "expected_command_match_call_count": 1,
+  "forbidden_source_patterns": [
+    {
+      "id": "new_regexp_constructor",
+      "pattern": "new\\s+RegExp\\s*\\(",
+      "reason": "Dynamic RegExp construction would hide the parser source from the canonical extractor."
+    },
+    {
+      "id": "regexp_constructor",
+      "pattern": "\\bRegExp\\s*\\(",
+      "reason": "Dynamic RegExp construction would hide the parser source from the canonical extractor."
+    },
+    {
+      "id": "regex_test_command",
+      "pattern": "\\.test\\(command\\)",
+      "reason": "The parser must remain a direct command.match(/.../) call."
+    },
+    {
+      "id": "split_parser_constant",
+      "pattern": "parserRegex|allowedCommandRegex|commandRegex",
+      "reason": "Named parser constants would allow the parser source to split away from the extractor fixture."
+    }
+  ],
+  "runtime_boundary": {
+    "no_handler": true,
+    "handler_execution_performed": false,
+    "migration_execution_performed": false,
+    "sqlite_file_created": false,
+    "database_write_performed": false,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "secret_value_read_performed": false
+  }
+}

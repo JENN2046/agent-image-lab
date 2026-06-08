@@ -1,0 +1,117 @@
+{
+  "fixture_type": "onering_sql_hash_contract",
+  "schema_version": "v0_1",
+  "contract_id": "onering_sql_hash_contract_v0_1",
+  "purpose": "Pin OneRing local SQL, hash, snapshot, request identity, and temp store invariants before any handler implementation.",
+  "runtime_boundary": {
+    "handlers_touched": false,
+    "handler_execution_performed": false,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "secret_value_read_performed": false,
+    "external_repository_modification_performed": false
+  },
+  "sql_contract": {
+    "engine": "sqlite",
+    "migration_id": "onering_local_contract_001",
+    "ddl_hash": "sha256:eb14d66a4ca7da60befa2e0576e29791c72cf41662ebbe16a11ba2ff6c626c1b",
+    "tables": [
+      {
+        "name": "onering_requests",
+        "columns": [
+          { "name": "request_identity", "type": "TEXT", "constraints": ["PRIMARY KEY", "NOT NULL"] },
+          { "name": "request_hash", "type": "TEXT", "constraints": ["NOT NULL"] },
+          { "name": "snapshot_hash", "type": "TEXT", "constraints": ["NOT NULL"] },
+          { "name": "idempotency_key", "type": "TEXT", "constraints": ["NOT NULL"] },
+          { "name": "created_at_utc", "type": "TEXT", "constraints": ["NOT NULL"] },
+          { "name": "state", "type": "TEXT", "constraints": ["NOT NULL"] }
+        ],
+        "indexes": [
+          { "name": "idx_onering_requests_idempotency", "columns": ["idempotency_key"], "unique": true }
+        ]
+      },
+      {
+        "name": "onering_snapshots",
+        "columns": [
+          { "name": "snapshot_hash", "type": "TEXT", "constraints": ["PRIMARY KEY", "NOT NULL"] },
+          { "name": "request_identity", "type": "TEXT", "constraints": ["NOT NULL"] },
+          { "name": "canonical_json", "type": "TEXT", "constraints": ["NOT NULL"] },
+          { "name": "created_at_utc", "type": "TEXT", "constraints": ["NOT NULL"] }
+        ],
+        "indexes": [
+          { "name": "idx_onering_snapshots_request", "columns": ["request_identity"], "unique": false }
+        ]
+      },
+      {
+        "name": "onering_temp_store",
+        "columns": [
+          { "name": "temp_key_hash", "type": "TEXT", "constraints": ["PRIMARY KEY", "NOT NULL"] },
+          { "name": "request_identity", "type": "TEXT", "constraints": ["NOT NULL"] },
+          { "name": "namespace", "type": "TEXT", "constraints": ["NOT NULL"] },
+          { "name": "payload_hash", "type": "TEXT", "constraints": ["NOT NULL"] },
+          { "name": "expires_at_utc", "type": "TEXT", "constraints": ["NOT NULL"] },
+          { "name": "purgeable", "type": "INTEGER", "constraints": ["NOT NULL", "CHECK (purgeable = 1)"] }
+        ],
+        "indexes": [
+          { "name": "idx_onering_temp_store_request", "columns": ["request_identity"], "unique": false },
+          { "name": "idx_onering_temp_store_expiry", "columns": ["expires_at_utc"], "unique": false }
+        ]
+      }
+    ]
+  },
+  "request_contract": {
+    "canonicalization": "stable_json_sort_keys_no_undefined",
+    "hash_algorithm": "sha256",
+    "identity_fields": ["contract_id", "route", "request_hash", "idempotency_key"],
+    "request": {
+      "contract_id": "onering_sql_hash_contract_v0_1",
+      "route": "local://onering/contract-fixture/no-handler",
+      "idempotency_key": "onering-fixture-001",
+      "body": {
+        "operation": "snapshot_contract_probe",
+        "asset_ref": "accepted_samples/accepted_premium_skincare_serum_bottle_secretless_attempt_018_001",
+        "requested_by": "local_contract_fixture",
+        "dry_run": true
+      }
+    },
+    "request_hash": "sha256:f1001d1ac2f8fae3e9e81bb757aa83565bf7cdccac1d685c4b2606a0e05ae4c0",
+    "request_identity": "sha256:ea0b4f3ab720fb931535c0e1c048c9bf4cc6a3e1bcc16699c66b9a1273beffe6"
+  },
+  "snapshot_contract": {
+    "snapshot_type": "onering_local_contract_snapshot",
+    "canonicalization": "stable_json_sort_keys_no_undefined",
+    "hash_algorithm": "sha256",
+    "payload": {
+      "request_identity": "sha256:ea0b4f3ab720fb931535c0e1c048c9bf4cc6a3e1bcc16699c66b9a1273beffe6",
+      "status": "contract_fixture_ready",
+      "result_refs": [
+        "tests/schema_examples/onering_sql_hash_contract.example.json"
+      ],
+      "guards": {
+        "handlers_touched": false,
+        "handler_execution_performed": false,
+        "temp_store_persistent": false
+      }
+    },
+    "snapshot_hash": "sha256:aa3cfb787637816d2f3199676de7a02f8cffa3b4c0b79e1f1d61dc89e02ea6e0"
+  },
+  "temp_store_contract": {
+    "store_scope": "local_ephemeral_contract_fixture",
+    "persistent_store_allowed": false,
+    "git_tracked_allowed": false,
+    "overwrite_existing_allowed": false,
+    "entries": [
+      {
+        "namespace": "onering_contract_validation",
+        "slot": "request_snapshot_cache",
+        "request_identity": "sha256:ea0b4f3ab720fb931535c0e1c048c9bf4cc6a3e1bcc16699c66b9a1273beffe6",
+        "payload_hash": "sha256:aa3cfb787637816d2f3199676de7a02f8cffa3b4c0b79e1f1d61dc89e02ea6e0",
+        "ttl_seconds": 900,
+        "purgeable": true,
+        "temp_key_hash": "sha256:7a2c19b4648a58f9f78b9a439b72e528f496c2419511949e2d2d6555b24956de"
+      }
+    ]
+  }
+}

@@ -50,6 +50,22 @@ const state = {
   lifecycleFilter: "all",
   lifecycleSearch: "",
   selectedArtifactId: mock.artifact_lifecycle_state_reader_seed.records[0].sample_id,
+  sampleDrawerOpen: false,
+  previewDisplaySkinId: "studio_dashboard",
+  previewDisplaySelectedPreviewId: "preview-display-asset-archive-accepted-french-summer-rattan-bucket-bag-001",
+  previewStageZoomPercent: 100,
+  highRiskSheetOpen: false,
+  selectedSpineBlockerId: null,
+  evidenceMode: "triage",
+  blockerSeverityFilter: "all",
+  blockerSourceFilter: "all",
+  lastEvidenceAnchor: {
+    anchor_id: null,
+    source: null,
+    target: null,
+    located: false,
+    located_at: null
+  },
   import_record_reader: {
     source_mode: "project_local_seed",
     parsed: null,
@@ -67,7 +83,14 @@ const state = {
       vcp_memory_write_performed: false
     }
   },
-  humanScores: { ...mock.review_session.human_review.breakdown }
+  humanScores: { ...mock.review_session.human_review.breakdown },
+  lastDecisionEvent: {
+    scope: "archive",
+    message_cn: "当前资产已标记为候选，等待人工最终确认。",
+    changed_at: "seed_state",
+    changed_by: "seed_state",
+    downstream_effect_cn: "仅刷新本地草案；production、DailyNote、VCP 写入仍为 false。"
+  }
 };
 
 const qs = (selector) => document.querySelector(selector);
@@ -95,6 +118,95 @@ function inlineList(items, fallback = "none") {
   const values = Array.isArray(items) ? items : [];
   return escapeHtml(values.length > 0 ? values.join(", ") : fallback);
 }
+
+const previewDisplaySkins = [
+  {
+    skin_id: "studio_dashboard",
+    skin_class: "preview-skin-studio-dashboard",
+    label_cn: "三仪表看板",
+    aspect_ratio: "16:9",
+    tone: "",
+    recipe_cn: "中央大仪表、左右辅仪表、右侧风险栏和底部任务条。"
+  },
+  {
+    skin_id: "product_still_life",
+    skin_class: "preview-skin-product-still-life",
+    label_cn: "商品静物",
+    aspect_ratio: "4:5",
+    tone: "success",
+    recipe_cn: "单品主体、台面切线、柔和冷白高光和可复用样片感。"
+  },
+  {
+    skin_id: "editorial_portrait",
+    skin_class: "preview-skin-editorial-portrait",
+    label_cn: "编辑肖像",
+    aspect_ratio: "3:4",
+    tone: "warning",
+    recipe_cn: "人物轮廓、竖幅构图、背景分区和审片备注焦点。"
+  },
+  {
+    skin_id: "evidence_blocker",
+    skin_class: "preview-skin-evidence-blocker",
+    label_cn: "阻断证据",
+    aspect_ratio: "1:1",
+    tone: "danger",
+    recipe_cn: "局部缺口、红黄风险边、证据锚点和待批准状态。"
+  }
+];
+
+const assetArchiveRealPreviewRenderActivation = {
+  phase: "review_console_asset_archive_real_preview_render_activation_20260608",
+  original_render_phase: "review_console_asset_archive_original_image_zoom_20260608",
+  gate_ref: "tests/schema_examples/ASSET_ARCHIVE_REAL_PREVIEW_RENDER_GATE.example.json",
+  source_mapping_ref: "tests/schema_examples/ASSET_ARCHIVE_READONLY_PREVIEW_ADAPTER_MAPPING_DRAFT.example.json",
+  enabled: "yes" === "yes",
+  authorized_answer: "yes",
+  allowed_operation: "browser_load_existing_tracked_preview_refs_only",
+  real_image_source_policy: "tracked_asset_archive_preview_ref_required_for_clean_checkout_review",
+  max_preview_refs: 3,
+  max_original_refs: 3,
+  selected_preview_refs: [
+    {
+      preview_id: "preview-display-asset-archive-accepted-french-summer-rattan-bucket-bag-001",
+      version_id: "accepted_french_summer_rattan_bucket_bag_001",
+      sample_number: 21,
+      label: "Accepted probe 01",
+      variant: "Receipt mapped accepted preview",
+      score: null,
+      skin_id: "product_still_life",
+      source_asset_ref: "asset_archive/accepted_samples/accepted_french_summer_rattan_bucket_bag_001/preview.webp",
+      source_original_ref: "runs/real_generation/v7_31_native_doubao_french_summer_rattan_bag_v2_watermark_off_run/native_doubao_1778327047448_0.jpg",
+      source_preview_ref: "asset_archive/accepted_samples/accepted_french_summer_rattan_bucket_bag_001/preview.webp",
+      source_manifest_ref: "asset_archive/accepted_samples/accepted_french_summer_rattan_bucket_bag_001/manifest.json"
+    },
+    {
+      preview_id: "preview-display-asset-archive-accepted-product-still-life-tennis-wallet-001",
+      version_id: "accepted_product_still_life_tennis_wallet_001",
+      sample_number: 22,
+      label: "Accepted probe 02",
+      variant: "Receipt mapped accepted preview",
+      score: null,
+      skin_id: "studio_dashboard",
+      source_asset_ref: "asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/preview.webp",
+      source_original_ref: "runs/real_generation/v7_24_native_doubao_v3_single_real_run/native_doubao_1778322474131_0.jpg",
+      source_preview_ref: "asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/preview.webp",
+      source_manifest_ref: "asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/manifest.json"
+    },
+    {
+      preview_id: "preview-display-asset-archive-failure-french-summer-rattan-bag-v7-29-001",
+      version_id: "failure_french_summer_rattan_bag_v7_29_001",
+      sample_number: 23,
+      label: "Failure probe 01",
+      variant: "Receipt mapped failure preview",
+      score: null,
+      skin_id: "evidence_blocker",
+      source_asset_ref: "asset_archive/failure_samples/failure_french_summer_rattan_bag_v7_29_001/preview.webp",
+      source_original_ref: "runs/real_generation/v7_29_native_doubao_french_summer_rattan_bag_v2_single_real_run/native_doubao_1778325901725_0.jpg",
+      source_preview_ref: "asset_archive/failure_samples/failure_french_summer_rattan_bag_v7_29_001/preview.webp",
+      source_manifest_ref: "asset_archive/failure_samples/failure_french_summer_rattan_bag_v7_29_001/manifest.json"
+    }
+  ]
+};
 
 function totalFrom(values, scoreIndex) {
   return scoreModel.reduce((sum, item) => {
@@ -1045,6 +1157,7 @@ function renderArtifactLifecycleStateReader() {
       const artifactId = artifactLifecycleId(record);
       const card = document.createElement("article");
       card.className = `artifact-lifecycle-card ${record.recoverable ? "recoverable" : "blocked"}${artifactId === state.selectedArtifactId ? " is-selected" : ""}`;
+      card.id = artifactLifecycleAnchorId(artifactId);
       card.tabIndex = 0;
       card.setAttribute("aria-selected", String(artifactId === state.selectedArtifactId));
       card.innerHTML = `
@@ -1087,6 +1200,7 @@ function setSelectedArtifact(id) {
   renderArtifactLifecycleStateReader();
   renderArtifactDetailDrawer();
   renderArtifactEvidenceCompare();
+  renderReviewSpineV11();
   renderDraft();
 }
 
@@ -2277,7 +2391,7 @@ function renderHumanApprovalBlockerQueue() {
   `;
   qs("#humanApprovalBlockerQueueBody").innerHTML = queue.blockers
     .map((blocker) => `
-      <article class="human-approval-blocker-queue-card blocked">
+      <article id="${escapeHtml(humanApprovalBlockerAnchorId(blocker))}" class="human-approval-blocker-queue-card blocked" tabindex="-1">
         <div class="protocol-card-head">
           <strong>${escapeHtml(blocker.target_sample_id || "no blocked sample")}</strong>
           <span>${escapeHtml(blocker.severity)}</span>
@@ -2826,6 +2940,19 @@ function handleImportRecordFile(event) {
   reader.readAsText(file);
 }
 
+function reviewSessionVersionPreviewId(versionId) {
+  return `preview-display-${safeClassToken(versionId)}`;
+}
+
+function selectReviewSessionVersion(versionId) {
+  const nextVersion = state.image_versions.find((version) => version.version_id === versionId);
+  if (!nextVersion) return;
+  state.currentVersionId = nextVersion.version_id;
+  const versionPreview = previewDisplayVersionRecords().find((sample) => sample.version_id === nextVersion.version_id);
+  state.previewDisplaySelectedPreviewId = versionPreview?.preview_id || reviewSessionVersionPreviewId(nextVersion.version_id);
+  state.previewDisplaySkinId = versionPreview?.skin_id || state.previewDisplaySkinId;
+}
+
 function renderVersions() {
   const root = qs("#versionList");
   root.innerHTML = "";
@@ -2841,7 +2968,7 @@ function renderVersions() {
       <span>${escapeHtml(version.score)}</span>
     `;
     button.addEventListener("click", () => {
-      state.currentVersionId = version.version_id;
+      selectReviewSessionVersion(version.version_id);
       renderAll();
     });
     root.appendChild(button);
@@ -2865,6 +2992,8 @@ function renderScores() {
       state.humanScores[key] = Number(event.target.value);
       row.querySelector("output").textContent = `${state.humanScores[key]} / ${max}`;
       updateTotals();
+      renderReviewerStickySummary();
+      renderReviewSpineV11();
       renderDraft();
     });
     row.title = `AI 初评：${ai} / ${max}`;
@@ -2921,12 +3050,1359 @@ function archiveActionFor(status) {
   return "request_iteration";
 }
 
+function archiveStatusLabel(status) {
+  if (status === "accepted") return "批准入库";
+  if (status === "candidate") return "候选";
+  if (status === "rejected") return "拒绝入库";
+  return "继续迭代";
+}
+
+function memoryStatusLabel(status) {
+  if (status === "approved") return "批准记忆";
+  if (status === "rejected") return "拒绝记忆";
+  return "要求修改";
+}
+
+function sessionStatusLabel(status) {
+  if (status === "human_reviewing") return "人工审片中";
+  if (status === "in_review") return "审片中";
+  if (status === "complete") return "已完成";
+  if (status === "draft") return "草案";
+  return status;
+}
+
+function archiveTone(status) {
+  if (status === "accepted") return "success";
+  if (status === "rejected") return "danger";
+  if (status === "draft") return "warning";
+  return "";
+}
+
+function memoryTone(status) {
+  if (status === "approved") return "success";
+  if (status === "rejected") return "danger";
+  return "";
+}
+
+function archiveDownstreamEffect(status) {
+  if (status === "accepted") return "仅生成已批准归档草案；production candidate registry 仍未写入。";
+  if (status === "rejected") return "进入拒绝/失败学习路径；production 与记忆写入继续阻断。";
+  if (status === "draft") return "要求继续迭代；当前版本不进入归档或记忆写入。";
+  return "保持候选状态；等待人工最终批准或继续迭代。";
+}
+
+function memoryDownstreamEffect(status) {
+  if (status === "approved") return "仅解锁已审批写入申请草案；仍不直接调用 DailyNote 或 VCP 记忆。";
+  if (status === "rejected") return "记忆写入被拒绝；DailyNote 与 VCP 记忆写入继续为 false。";
+  return "记忆需要修改；DailyNote 与 VCP 记忆写入保持锁定。";
+}
+
+function nextReviewerActionLabel() {
+  if (state.assetStatus === "rejected") return "确认拒绝证据";
+  if (state.assetStatus === "draft") return "进入下一轮迭代";
+  if (state.assetStatus === "accepted" && state.memoryStatus === "approved") return "准备最终封存";
+  if (state.assetStatus === "accepted") return "补齐记忆审批";
+  if (state.memoryStatus === "approved") return "确认资产批准";
+  return "人工批准或继续迭代";
+}
+
+function evidenceModeLabel(mode) {
+  return mode === "full" ? "完整证据" : "关键证据";
+}
+
+function evidenceFocusStatusLabel(status) {
+  if (status === "sufficient") return "证据充足";
+  if (status === "sufficient_with_active_blockers") return "证据充足但仍有阻断";
+  return "证据不足";
+}
+
+function blockerSeverityLabel(severity) {
+  if (severity === "hard_blocker") return "强阻断";
+  if (severity === "critical") return "严重";
+  if (severity === "high") return "高";
+  if (severity === "medium") return "中";
+  if (severity === "low") return "低";
+  return "未知";
+}
+
+function blockerSourceLabel(source) {
+  if (source === "human_approval_blocker_queue") return "人工批准";
+  if (source === "evidence_blocker_contract") return "证据合约";
+  if (source === "review_blocker_arbiter") return "阻断仲裁";
+  if (source === "artifact_lifecycle_state_reader") return "资产生命周期";
+  return source || "未知";
+}
+
+function reviewTokenLabel(value) {
+  const token = String(value || "");
+  const labels = {
+    human_approval_missing: "缺少人工批准",
+    human_review_required: "需要人工复核",
+    production_promotion: "生产推广",
+    production_exclusion: "生产排除",
+    blocked: "已阻断",
+    unknown_scope: "未知范围"
+  };
+  if (labels[token]) return labels[token];
+  return token.replace(/_/g, " ");
+}
+
+function reviewBlockerMessageLabel(message) {
+  return String(message || "未知阻断")
+    .split("/")
+    .map((part) => reviewTokenLabel(part.trim()))
+    .join(" / ");
+}
+
+function reviewActionLabel(action) {
+  const text = String(action || "");
+  if (text.includes("wait_for_jenn_user_submission_then_run_v14_214_intake")) return "等待 Jenn 提交后运行 v14.214 intake";
+  if (text.includes("wait_for_jenn_human_approval")) return "等待 Jenn 完成人工批准";
+  if (text.includes("production_candidate=false")) return "保持非生产候选，等待人工审批或失败学习归档";
+  if (text.includes("production promotion")) return text.replace("production promotion", "生产推广");
+  if (text.includes("blocker action")) return "当前筛选没有命中阻断动作。";
+  return text || "暂无动作";
+}
+
+function sortedUniqueValues(values, rank = {}) {
+  return Array.from(new Set(values.filter(Boolean))).sort((left, right) => {
+    const leftRank = rank[left] ?? 99;
+    const rightRank = rank[right] ?? 99;
+    if (leftRank !== rightRank) return leftRank - rightRank;
+    return left.localeCompare(right);
+  });
+}
+
+function blockerFilterButtonHtml(filterType, value, label, count, activeValue) {
+  const dataAttribute = filterType === "severity" ? "data-blocker-severity-filter" : "data-blocker-source-filter";
+  const active = value === activeValue;
+  return `
+    <button type="button" ${dataAttribute}="${escapeHtml(value)}" class="${active ? "is-active" : ""}" aria-pressed="${escapeHtml(active)}">
+      ${escapeHtml(label)} <span>${escapeHtml(count)}</span>
+    </button>
+  `;
+}
+
+function evidenceAnchorId(kind, value) {
+  return `evidence-anchor-${safeClassToken(kind)}-${safeClassToken(value || "unknown")}`;
+}
+
+function humanApprovalBlockerAnchorId(blocker) {
+  return evidenceAnchorId("human-approval", blocker.blocker_id || blocker.target_sample_id || blocker.target_candidate_id);
+}
+
+function evidenceBlockerAnchorId(blocker) {
+  return evidenceAnchorId("evidence-blocker", blocker.blocker_id || blocker.candidate_id);
+}
+
+function blockerArbiterAnchorId(item) {
+  return evidenceAnchorId("arbiter", item.production_blocker_decision_id || item.candidate_id);
+}
+
+function artifactLifecycleAnchorId(artifactId) {
+  return evidenceAnchorId("artifact-lifecycle", artifactId);
+}
+
+function evidenceFocusState() {
+  const queue = humanApprovalBlockerQueueState();
+  const evidenceHandoff = state.review_evidence_blocker_contract_static_handoff || {};
+  const arbiterHandoff = state.review_blocker_arbiter_static_handoff || {};
+  const blockerSummary = evidenceHandoff.blocker_summary || {};
+  const arbiterSummary = arbiterHandoff.arbiter_summary || {};
+  const arbitrationGuard = evidenceHandoff.arbitration_guard || {};
+  const artifactSort = artifactEvidenceStatusSortState();
+  const activeBlockers = [];
+
+  queue.blockers.forEach((blocker) => {
+    activeBlockers.push({
+      source: "human_approval_blocker_queue",
+      id: blocker.blocker_id,
+      severity: blocker.severity,
+      target: blocker.target_sample_id || blocker.target_candidate_id || "unknown",
+      message: blocker.blocker_type,
+      required_action: blocker.next_allowed_local_action,
+      anchor_id: humanApprovalBlockerAnchorId(blocker),
+      anchor_label_cn: "人工批准阻断队列"
+    });
+  });
+
+  (evidenceHandoff.blocker_decisions || []).forEach((blocker) => {
+    const isBlocking = blocker.permanent_block === true || blocker.production_candidate === false || String(blocker.decision || "").includes("block");
+    if (!isBlocking) return;
+    activeBlockers.push({
+      source: "evidence_blocker_contract",
+      id: blocker.blocker_id || blocker.candidate_id,
+      severity: blocker.permanent_block ? "critical" : "high",
+      target: blocker.candidate_id,
+      message: `${blocker.blocker_type || "blocker"} / ${blocker.blocking_scope || "unknown_scope"}`,
+      required_action: "保持 production_candidate=false，等待人工审批或失败学习归档",
+      anchor_id: evidenceBlockerAnchorId(blocker),
+      anchor_label_cn: "证据阻断决策"
+    });
+  });
+
+  (arbiterHandoff.candidate_arbitrations || []).forEach((item) => {
+    const isBlocking = item.never_production === true || item.memory_forbidden === true || String(item.production_decision || "").includes("blocked");
+    if (!isBlocking) return;
+    activeBlockers.push({
+      source: "review_blocker_arbiter",
+      id: item.production_blocker_decision_id || item.candidate_id,
+      severity: item.never_production ? "critical" : "high",
+      target: item.candidate_id,
+      message: item.final_route || item.production_decision || "blocked",
+      required_action: item.memory_forbidden ? "禁止记忆写入；保留为失败学习证据" : "禁止 production promotion",
+      anchor_id: blockerArbiterAnchorId(item),
+      anchor_label_cn: "阻断仲裁"
+    });
+  });
+
+  if (artifactSort.blocked_candidate_artifact_id) {
+    activeBlockers.push({
+      source: "artifact_lifecycle_state_reader",
+      id: artifactSort.blocked_candidate_artifact_id,
+      severity: "high",
+      target: artifactSort.blocked_candidate_artifact_id,
+      message: "human_approval_missing",
+      required_action: "补齐正式人工批准证据后重新校验",
+      anchor_id: artifactLifecycleAnchorId(artifactSort.blocked_candidate_artifact_id),
+      anchor_label_cn: "资产生命周期"
+    });
+  }
+
+  const sufficiencyChecks = [
+    {
+      check_id: "every_candidate_has_evidence_record",
+      label_cn: "每个候选都有 evidence record",
+      passed: arbitrationGuard.every_candidate_has_evidence_record === true
+    },
+    {
+      check_id: "every_candidate_has_production_blocker_decision",
+      label_cn: "每个候选都有 production blocker decision",
+      passed: arbitrationGuard.every_candidate_has_production_blocker_decision === true
+    },
+    {
+      check_id: "evidence_record_is_not_approval",
+      label_cn: "evidence record 不等于人工批准",
+      passed: arbitrationGuard.evidence_record_is_not_approval === true
+    },
+    {
+      check_id: "blocker_decision_is_not_write",
+      label_cn: "blocker decision 不等于写入动作",
+      passed: arbitrationGuard.blocker_decision_is_not_write === true
+    }
+  ];
+  const sufficiencyPassed = sufficiencyChecks.every((check) => check.passed);
+  const sufficiencyStatus = sufficiencyPassed
+    ? activeBlockers.length > 0 ? "sufficient_with_active_blockers" : "sufficient"
+    : "insufficient";
+  const severityRank = { hard_blocker: 0, critical: 1, high: 2, medium: 3, low: 4, unknown: 5 };
+  const sourceRank = {
+    human_approval_blocker_queue: 0,
+    evidence_blocker_contract: 1,
+    review_blocker_arbiter: 2,
+    artifact_lifecycle_state_reader: 3
+  };
+  const severityValues = sortedUniqueValues(activeBlockers.map((blocker) => blocker.severity || "unknown"), severityRank);
+  const sourceValues = sortedUniqueValues(activeBlockers.map((blocker) => blocker.source || "unknown"), sourceRank);
+  const severityFilter = severityValues.includes(state.blockerSeverityFilter) ? state.blockerSeverityFilter : "all";
+  const sourceFilter = sourceValues.includes(state.blockerSourceFilter) ? state.blockerSourceFilter : "all";
+  const filteredActiveBlockers = activeBlockers.filter((blocker) => (
+    (severityFilter === "all" || blocker.severity === severityFilter)
+    && (sourceFilter === "all" || blocker.source === sourceFilter)
+  ));
+  const primaryFilteredBlocker = filteredActiveBlockers[0] || null;
+  const filterOptions = {
+    severity: [
+      { value: "all", label: "All", count: activeBlockers.length },
+      ...severityValues.map((value) => ({
+        value,
+        label: blockerSeverityLabel(value),
+        count: activeBlockers.filter((blocker) => blocker.severity === value).length
+      }))
+    ],
+    source: [
+      { value: "all", label: "All", count: activeBlockers.length },
+      ...sourceValues.map((value) => ({
+        value,
+        label: blockerSourceLabel(value),
+        count: activeBlockers.filter((blocker) => blocker.source === value).length
+      }))
+    ]
+  };
+
+  return {
+    draft_output_key: "evidence_progressive_disclosure_state",
+    mode: state.evidenceMode,
+    mode_cn: evidenceModeLabel(state.evidenceMode),
+    raw_evidence_visible: state.evidenceMode === "full",
+    default_triage_only: state.evidenceMode === "triage",
+    active_blockers: activeBlockers,
+    active_blocker_count: activeBlockers.length,
+    active_blocker_filter: {
+      severity: severityFilter,
+      source: sourceFilter,
+      severity_cn: severityFilter === "all" ? "全部严重度" : blockerSeverityLabel(severityFilter),
+      source_cn: sourceFilter === "all" ? "全部来源" : blockerSourceLabel(sourceFilter),
+      filtered_count: filteredActiveBlockers.length,
+      total_count: activeBlockers.length,
+      options: filterOptions
+    },
+    filtered_active_blockers: filteredActiveBlockers,
+    filtered_active_blocker_count: filteredActiveBlockers.length,
+    filtered_required_action_summary: {
+      matched_count: filteredActiveBlockers.length,
+      total_count: activeBlockers.length,
+      filter_applied: severityFilter !== "all" || sourceFilter !== "all",
+      summary_cn: primaryFilteredBlocker
+        ? `当前筛选命中 ${filteredActiveBlockers.length}/${activeBlockers.length} 条；优先处理 ${primaryFilteredBlocker.target}。`
+        : `当前筛选命中 0/${activeBlockers.length} 条；恢复 All 或调整筛选。`,
+      primary_target: primaryFilteredBlocker?.target || null,
+      primary_source: primaryFilteredBlocker?.source || null,
+      primary_source_cn: primaryFilteredBlocker ? blockerSourceLabel(primaryFilteredBlocker.source) : null,
+      primary_severity: primaryFilteredBlocker?.severity || null,
+      primary_severity_cn: primaryFilteredBlocker ? blockerSeverityLabel(primaryFilteredBlocker.severity) : null,
+      primary_message: primaryFilteredBlocker?.message || null,
+      primary_required_action: primaryFilteredBlocker?.required_action || null,
+      primary_anchor_id: primaryFilteredBlocker?.anchor_id || null,
+      primary_anchor_label_cn: primaryFilteredBlocker?.anchor_label_cn || null,
+      production_write_now: false,
+      DailyNote_write_now: false,
+      VCP_memory_write_now: false
+    },
+    required_action: {
+      primary_action_cn: nextReviewerActionLabel(),
+      first_blocker_action: activeBlockers[0]?.required_action || null,
+      first_filtered_blocker_action: primaryFilteredBlocker?.required_action || null,
+      production_write_now: false,
+      DailyNote_write_now: false,
+      VCP_memory_write_now: false
+    },
+    evidence_sufficiency: {
+      status: sufficiencyStatus,
+      status_cn: evidenceFocusStatusLabel(sufficiencyStatus),
+      checks: sufficiencyChecks,
+      evidence_record_count: Number(blockerSummary.evidence_record_count || 0),
+      blocker_decision_count: Number(blockerSummary.blocker_decision_count || 0),
+      permanent_block_count: Number(blockerSummary.permanent_block_count || 0),
+      production_blocked_count: Number(arbiterSummary.production_blocked_count || 0),
+      artifact_blocked_count: artifactSort.blocked_count
+    },
+    full_protocol_panel_available: true,
+    full_output_panel_available: true,
+    full_evidence_anchor_state: state.lastEvidenceAnchor,
+    static_ui_only: true,
+    fetch_performed: false,
+    file_write_performed: false,
+    provider_contact_performed: false,
+    plugin_call_performed: false,
+    api_call_performed: false,
+    image_generation_performed: false,
+    DailyNote_write_performed: false,
+    VCP_memory_write_performed: false
+  };
+}
+
+function updatePressedState(selector, dataKey, activeValue) {
+  qsa(selector).forEach((button) => {
+    const isActive = button.dataset[dataKey] === activeValue;
+    button.classList.toggle("is-active", isActive);
+    button.setAttribute("aria-pressed", String(isActive));
+  });
+}
+
+function decisionTargetDisplayLabel(target) {
+  const samplePrefix = target?.sample_number ? `样片 ${target.sample_number}` : "样片";
+  return `${samplePrefix}: ${target?.sample_id || state.currentVersionId}`;
+}
+
+function decisionTargetSourceLabel(target) {
+  if (target?.decision_target_source === "selected_asset_archive_preview") return "asset_archive 预览";
+  if (target?.decision_target_source === "review_session_image_version") return "审片会话版本";
+  return "静态样片";
+}
+
+function decisionEventWithTarget(event = state.lastDecisionEvent, target = currentReviewTarget()) {
+  return {
+    ...(event || {}),
+    target_sample_id: target.sample_id,
+    target_preview_id: target.preview_id,
+    target_sample_number: target.sample_number,
+    target_source_cn: decisionTargetSourceLabel(target)
+  };
+}
+
+function recordDecisionEvent(scope, message, downstreamEffect) {
+  const target = currentReviewTarget();
+  state.lastDecisionEvent = {
+    scope,
+    message_cn: message,
+    changed_at: nowIso(),
+    changed_by: "human_reviewer",
+    target_sample_id: target.sample_id,
+    target_preview_id: target.preview_id,
+    target_sample_number: target.sample_number,
+    target_source_cn: decisionTargetSourceLabel(target),
+    downstream_effect_cn: downstreamEffect
+  };
+}
+
+function renderDecisionStatus() {
+  const decisionTarget = currentReviewTarget();
+  const summary = qs("#currentDecisionSummary");
+  const feedback = qs("#decisionFeedback");
+  if (!summary || !feedback) return;
+
+  updatePressedState("[data-archive]", "archive", state.assetStatus);
+  updatePressedState("[data-memory]", "memory", state.memoryStatus);
+
+  summary.innerHTML = `
+    <span><strong>审片目标</strong>${escapeHtml(decisionTargetDisplayLabel(decisionTarget))}</span>
+    <span><strong>目标来源</strong>${escapeHtml(decisionTargetSourceLabel(decisionTarget))}</span>
+    <span><strong>资产决定</strong>${escapeHtml(archiveStatusLabel(state.assetStatus))}</span>
+    <span><strong>记忆决定</strong>${escapeHtml(memoryStatusLabel(state.memoryStatus))}</span>
+    <span><strong>安全边界</strong>生产 / DailyNote / VCP 均不写</span>
+  `;
+
+  const event = decisionEventWithTarget(state.lastDecisionEvent, decisionTarget);
+  const tone = event.scope === "memory" ? memoryTone(state.memoryStatus) : archiveTone(state.assetStatus);
+  feedback.className = `decision-feedback${tone ? ` ${tone}` : ""}`;
+  feedback.innerHTML = `
+    <strong>${escapeHtml(event.message_cn)}</strong><br />
+    ${escapeHtml(event.downstream_effect_cn)}
+    <small> ${escapeHtml(event.changed_by)} · ${escapeHtml(event.changed_at)} · ${escapeHtml(event.target_sample_id || decisionTarget.sample_id)}</small>
+  `;
+  renderReviewerStickySummary();
+}
+
+function renderReviewerStickySummary() {
+  const root = qs("#reviewerStickySummary");
+  if (!root) return;
+  const decisionTarget = currentReviewTarget();
+  const humanTotal = totalFrom(state.humanScores);
+  const assetTone = archiveTone(state.assetStatus);
+  const memoryToneClass = memoryTone(state.memoryStatus);
+  root.innerHTML = `
+    <span><strong>审片目标</strong>${escapeHtml(decisionTargetDisplayLabel(decisionTarget))}</span>
+    <span><strong>来源</strong>${escapeHtml(decisionTargetSourceLabel(decisionTarget))}</span>
+    <span><strong>总分</strong>${escapeHtml(humanTotal)}</span>
+    <span class="${escapeHtml(assetTone)}"><strong>资产决定</strong>${escapeHtml(archiveStatusLabel(state.assetStatus))}</span>
+    <span class="${escapeHtml(memoryToneClass || "warning")}"><strong>记忆决定</strong>${escapeHtml(memoryStatusLabel(state.memoryStatus))}</span>
+    <span><strong>写入边界</strong>生产 / DailyNote / VCP 均不写</span>
+    <span><strong>下一步</strong>${escapeHtml(nextReviewerActionLabel())}</span>
+  `;
+}
+
+function applyEvidenceMode() {
+  let shell = null;
+  try {
+    shell = qs(".review-shell");
+  } catch (error) {
+    shell = null;
+  }
+  if (shell) {
+    shell.classList.toggle("evidence-mode-triage", state.evidenceMode === "triage");
+    shell.classList.toggle("evidence-mode-full", state.evidenceMode === "full");
+  }
+  try {
+    updatePressedState("[data-evidence-mode]", "evidenceMode", state.evidenceMode);
+  } catch (error) {
+    // Some static draft validators emulate only the draft output fields, not every UI control.
+  }
+}
+
+function renderEvidenceFocus() {
+  const summaryRoot = qs("#evidenceFocusSummary");
+  const bodyRoot = qs("#evidenceFocusBody");
+  if (!summaryRoot || !bodyRoot) return;
+  applyEvidenceMode();
+  const focus = evidenceFocusState();
+  const blockerTone = focus.active_blocker_count > 0 ? "blocked" : "sufficient";
+  const sufficiencyTone = focus.evidence_sufficiency.status === "insufficient"
+    ? "insufficient"
+    : focus.evidence_sufficiency.status === "sufficient_with_active_blockers" ? "warning" : "sufficient";
+  const visibleBlockers = focus.filtered_active_blockers.slice(0, 6);
+  const blockerFilter = focus.active_blocker_filter;
+  const filteredAction = focus.filtered_required_action_summary;
+
+  summaryRoot.innerHTML = `
+    <span>mode <strong>${escapeHtml(focus.mode_cn)}</strong></span>
+    <span>active blockers <strong>${escapeHtml(`${focus.filtered_active_blocker_count}/${focus.active_blocker_count}`)}</strong></span>
+    <span>severity <strong>${escapeHtml(blockerFilter.severity_cn)}</strong></span>
+    <span>source <strong>${escapeHtml(blockerFilter.source_cn)}</strong></span>
+    <span>required action <strong>${escapeHtml(focus.required_action.primary_action_cn)}</strong></span>
+    <span>sufficiency <strong>${escapeHtml(focus.evidence_sufficiency.status_cn)}</strong></span>
+    <span>raw evidence <strong>${escapeHtml(focus.raw_evidence_visible ? "visible" : "collapsed")}</strong></span>
+  `;
+
+  bodyRoot.innerHTML = `
+    <article class="evidence-focus-card ${blockerTone}">
+      <div class="evidence-focus-card-head">
+        <strong>Active blockers</strong>
+        <span>${escapeHtml(focus.filtered_active_blocker_count)} / ${escapeHtml(focus.active_blocker_count)}</span>
+      </div>
+      <div class="evidence-focus-filter-bar" aria-label="活动阻断快速筛选">
+        <div class="evidence-filter-group">
+          <span>风险级别</span>
+          <div class="evidence-filter-buttons">
+            ${blockerFilter.options.severity.map((option) => blockerFilterButtonHtml("severity", option.value, option.label, option.count, blockerFilter.severity)).join("")}
+          </div>
+        </div>
+        <div class="evidence-filter-group">
+          <span>来源</span>
+          <div class="evidence-filter-buttons">
+            ${blockerFilter.options.source.map((option) => blockerFilterButtonHtml("source", option.value, option.label, option.count, blockerFilter.source)).join("")}
+          </div>
+        </div>
+      </div>
+      <div class="evidence-filter-action-summary" aria-label="当前筛选命中的 required action">
+        <div>
+          <strong>筛选后的待处理动作</strong>
+          <span>${escapeHtml(filteredAction.summary_cn)}</span>
+        </div>
+        <p>${escapeHtml(reviewActionLabel(filteredAction.primary_required_action || "当前筛选没有命中 blocker action。"))}</p>
+        ${filteredAction.primary_anchor_id ? `
+          <button type="button" class="evidence-anchor-button" data-full-evidence-anchor="${escapeHtml(filteredAction.primary_anchor_id)}">
+            定位到完整证据
+          </button>
+        ` : ""}
+        <dl>
+          <div><dt>对象</dt><dd>${escapeHtml(filteredAction.primary_target || "无")}</dd></div>
+          <div><dt>风险</dt><dd>${escapeHtml(filteredAction.primary_severity_cn || "无")}</dd></div>
+          <div><dt>来源</dt><dd>${escapeHtml(filteredAction.primary_source_cn || "无")}</dd></div>
+        </dl>
+      </div>
+      ${visibleBlockers.length > 0 ? `
+        <ul class="evidence-focus-list">
+          ${visibleBlockers.map((blocker) => `
+            <li class="${escapeHtml(safeClassToken(blocker.severity))}">
+              <strong>${escapeHtml(blocker.target)} · ${escapeHtml(reviewBlockerMessageLabel(blocker.message))}</strong>
+              <span>${escapeHtml(blockerSeverityLabel(blocker.severity))} / ${escapeHtml(blockerSourceLabel(blocker.source))} / ${escapeHtml(reviewActionLabel(blocker.required_action))}</span>
+              <button type="button" class="evidence-anchor-button" data-full-evidence-anchor="${escapeHtml(blocker.anchor_id)}">
+                定位到完整证据
+              </button>
+            </li>
+          `).join("")}
+        </ul>
+        ${focus.filtered_active_blocker_count > visibleBlockers.length ? `<p class="evidence-focus-overflow">当前筛选另有 ${escapeHtml(focus.filtered_active_blocker_count - visibleBlockers.length)} 条阻断保留在完整证据中。</p>` : ""}
+      ` : `<p class="evidence-focus-note">当前筛选没有命中；调整 severity/source 可恢复阻断列表。</p>`}
+    </article>
+    <article class="evidence-focus-card action">
+      <div class="evidence-focus-card-head">
+        <strong>Required action</strong>
+        <span>reviewer next</span>
+      </div>
+      <p>${escapeHtml(focus.required_action.primary_action_cn)}</p>
+      <p class="evidence-focus-note">${escapeHtml(focus.required_action.first_blocker_action || "无额外 blocker action。")}</p>
+      <ul class="evidence-focus-checklist">
+        <li class="blocked"><strong>production write</strong><span>${escapeHtml(focus.required_action.production_write_now)}</span></li>
+        <li class="blocked"><strong>DailyNote write</strong><span>${escapeHtml(focus.required_action.DailyNote_write_now)}</span></li>
+        <li class="blocked"><strong>VCP memory write</strong><span>${escapeHtml(focus.required_action.VCP_memory_write_now)}</span></li>
+      </ul>
+    </article>
+    <article class="evidence-focus-card ${sufficiencyTone}">
+      <div class="evidence-focus-card-head">
+        <strong>Evidence sufficiency</strong>
+        <span>${escapeHtml(focus.evidence_sufficiency.status_cn)}</span>
+      </div>
+      <ul class="evidence-focus-checklist">
+        ${focus.evidence_sufficiency.checks.map((check) => `
+          <li class="${check.passed ? "pass" : "blocked"}">
+            <strong>${escapeHtml(check.label_cn)}</strong>
+            <span>${escapeHtml(check.passed ? "pass" : "blocked")}</span>
+          </li>
+        `).join("")}
+      </ul>
+      <p class="evidence-focus-note">
+        evidence ${escapeHtml(focus.evidence_sufficiency.evidence_record_count)} /
+        blocker ${escapeHtml(focus.evidence_sufficiency.blocker_decision_count)} /
+        artifact blocked ${escapeHtml(focus.evidence_sufficiency.artifact_blocked_count)}
+      </p>
+    </article>
+  `;
+}
+
+function reviewSpineSampleNumber() {
+  return currentPreviewDisplay()?.sample_number || 12;
+}
+
+function previewDisplaySkinById(skinId) {
+  return previewDisplaySkins.find((skin) => skin.skin_id === skinId) || previewDisplaySkins[0];
+}
+
+function previewDisplaySkinByIndex(index) {
+  return previewDisplaySkins[index % previewDisplaySkins.length];
+}
+
+function previewDisplaySkinForVersion(version, index) {
+  if (version?.version_id === state.currentVersionId && state.previewDisplaySkinId) return previewDisplaySkinById(state.previewDisplaySkinId);
+  if (String(version?.asset_ref || "").includes("photo_studio_os")) return previewDisplaySkinById("studio_dashboard");
+  return previewDisplaySkinByIndex(index);
+}
+
+function previewDisplayVersionRecord(version, index, sampleNumber) {
+  const skin = previewDisplaySkinForVersion(version, index);
+  return {
+    preview_id: `preview-display-${safeClassToken(version.version_id)}`,
+    version_id: version.version_id,
+    sample_number: sampleNumber,
+    label: `样片 ${sampleNumber}`,
+    variant: version.label || `版本 ${String.fromCharCode(65 + index)}`,
+    score: version.score,
+    tone: index === state.image_versions.findIndex((item) => item.version_id === state.currentVersionId) ? "" : skin.tone,
+    source_asset_ref: version.asset_ref,
+    thumbnail_ref: version.thumbnail_ref || null,
+    skin_id: skin.skin_id,
+    skin_class: skin.skin_class,
+    skin_label_cn: skin.label_cn,
+    aspect_ratio: skin.aspect_ratio,
+    render_mode: "css_skin_only",
+    proxy_recipe_cn: skin.recipe_cn,
+    static_proxy_only: true,
+    asset_archive_read_performed: false,
+    preview_loaded_or_rendered: false
+  };
+}
+
+function previewDisplayFillerRecords() {
+  return [
+    { version_id: "sample-rail-static-11", sample_number: 11, variant: "备选版本 A", score: 78, skin_id: "evidence_blocker" },
+    { version_id: "sample-rail-static-13", sample_number: 13, variant: "商品样片", score: 86, skin_id: "product_still_life" },
+    { version_id: "sample-rail-static-14", sample_number: 14, variant: "编辑肖像", score: 82, skin_id: "editorial_portrait" },
+    { version_id: "sample-rail-static-15", sample_number: 15, variant: "看板候选", score: 88, skin_id: "studio_dashboard" },
+    { version_id: "sample-rail-static-16", sample_number: 16, variant: "阻断复核", score: 74, skin_id: "evidence_blocker" }
+  ].map((sample) => {
+    const skin = previewDisplaySkinById(sample.skin_id);
+    return {
+      preview_id: `preview-display-${safeClassToken(sample.version_id)}`,
+      version_id: sample.version_id,
+      sample_number: sample.sample_number,
+      label: `样片 ${sample.sample_number}`,
+      variant: sample.variant,
+      score: sample.score,
+      tone: skin.tone,
+      source_asset_ref: "static_proxy/no_asset_archive_read",
+      thumbnail_ref: null,
+      skin_id: skin.skin_id,
+      skin_class: skin.skin_class,
+      skin_label_cn: skin.label_cn,
+      aspect_ratio: skin.aspect_ratio,
+      render_mode: "css_skin_only",
+      proxy_recipe_cn: skin.recipe_cn,
+      static_proxy_only: true,
+      asset_archive_read_performed: false,
+      preview_loaded_or_rendered: false
+    };
+  });
+}
+
+function previewDisplayVersionRecords() {
+  return state.image_versions.map((version, index) => previewDisplayVersionRecord(version, index, 12 + index));
+}
+
+function previewDisplayRealPreviewRecords() {
+  if (!assetArchiveRealPreviewRenderActivation.enabled) return [];
+  return assetArchiveRealPreviewRenderActivation.selected_preview_refs.map((sample) => {
+    const skin = previewDisplaySkinById(sample.skin_id);
+    const renderedNow = assetArchiveRealPreviewRenderActivation.enabled;
+    const originalRef = sample.source_original_ref || null;
+    const previewRef = sample.source_preview_ref || null;
+    return {
+      preview_id: sample.preview_id,
+      version_id: sample.version_id,
+      sample_number: sample.sample_number,
+      label: sample.label,
+      variant: sample.variant,
+      score: sample.score,
+      tone: skin.tone,
+      source_asset_ref: previewRef,
+      source_original_ref: originalRef,
+      source_preview_ref: previewRef,
+      source_manifest_ref: sample.source_manifest_ref,
+      thumbnail_ref: previewRef,
+      stage_image_ref: previewRef,
+      image_source_mode: "source_preview_ref",
+      skin_id: skin.skin_id,
+      skin_class: skin.skin_class,
+      skin_label_cn: skin.label_cn,
+      aspect_ratio: skin.aspect_ratio,
+      render_mode: "asset_archive_preview_image",
+      proxy_recipe_cn: "Gate-authorized exact tracked asset_archive preview render; source_original_ref is provenance only.",
+      original_image_required: false,
+      source_original_available: false,
+      source_original_provenance_only: typeof originalRef === "string" && originalRef.length > 0,
+      source_preview_available: typeof previewRef === "string" && previewRef.length > 0,
+      static_proxy_only: !renderedNow,
+      asset_archive_read_performed: renderedNow,
+      asset_archive_ui_read_performed: renderedNow,
+      browser_preview_load_performed: renderedNow,
+      browser_original_image_load_performed: false,
+      source_image_binary_read_performed: false,
+      preview_loaded_or_rendered: renderedNow
+    };
+  });
+}
+
+function reviewSpineSamples() {
+  const currentIndex = Math.max(0, state.image_versions.findIndex((version) => version.version_id === state.currentVersionId));
+  const versionSamples = previewDisplayVersionRecords();
+  return [
+    ...previewDisplayRealPreviewRecords(),
+    versionSamples[currentIndex],
+    ...previewDisplayFillerRecords(),
+    ...versionSamples.filter((_, index) => index !== currentIndex)
+  ].filter(Boolean);
+}
+
+function currentPreviewDisplay() {
+  const samples = reviewSpineSamples();
+  return samples.find((sample) => sample.preview_id === state.previewDisplaySelectedPreviewId) ||
+    samples.find((sample) => sample.version_id === state.currentVersionId) ||
+    samples[0] ||
+    null;
+}
+
+function currentReviewTarget(currentPreview = currentPreviewDisplay()) {
+  const selectedVersion = state.image_versions.find((version) => version.version_id === currentPreview?.version_id);
+  const fallbackVersion = selectedVersion || currentVersion();
+  const usesAssetArchivePreview = previewDisplayUsesRealImage(currentPreview);
+  const sourceAssetRef = currentPreview?.source_asset_ref || fallbackVersion?.asset_ref || "static_proxy/no_asset_archive_read";
+  const outputAssetRef = usesAssetArchivePreview
+    ? currentPreview.source_preview_ref || currentPreview.stage_image_ref || sourceAssetRef
+    : sourceAssetRef;
+  const sampleId = currentPreview?.version_id || fallbackVersion?.version_id || state.currentVersionId;
+  const targetSource = usesAssetArchivePreview
+    ? "selected_asset_archive_preview"
+    : (selectedVersion ? "review_session_image_version" : "preview_display_static_sample");
+  return {
+    sample_id: sampleId,
+    version_id: sampleId,
+    preview_id: currentPreview?.preview_id || null,
+    review_session_current_version_id: state.currentVersionId,
+    sample_number: currentPreview?.sample_number || null,
+    label: currentPreview?.label || null,
+    variant: currentPreview?.variant || fallbackVersion?.label || null,
+    score: currentPreview?.score ?? fallbackVersion?.score ?? null,
+    source_asset_ref: sourceAssetRef,
+    output_asset_ref: outputAssetRef,
+    source_preview_ref: currentPreview?.source_preview_ref || null,
+    source_original_ref: currentPreview?.source_original_ref || null,
+    stage_image_ref: currentPreview?.stage_image_ref || null,
+    render_mode: currentPreview?.render_mode || "review_session_image_version",
+    image_source_mode: currentPreview?.image_source_mode || "review_session_image_version",
+    decision_target_source: targetSource,
+    uses_asset_archive_preview: usesAssetArchivePreview,
+    current_version_id_aligned: sampleId === state.currentVersionId
+  };
+}
+
+function previewDisplayUsesRealImage(preview) {
+  return preview?.render_mode === "asset_archive_preview_image" &&
+    typeof previewDisplayStageImageRef(preview) === "string" &&
+    previewDisplayStageImageRef(preview).length > 0;
+}
+
+function previewDisplayStageImageRef(preview) {
+  return preview?.stage_image_ref || preview?.source_preview_ref || preview?.thumbnail_ref || "";
+}
+
+function previewDisplayImageSrc(preview) {
+  if (!previewDisplayUsesRealImage(preview)) return "";
+  return `/${previewDisplayStageImageRef(preview)}`;
+}
+
+function previewRenderBoundaryState(currentPreview = currentPreviewDisplay()) {
+  const realPreviewRecords = previewDisplayRealPreviewRecords();
+  const realPreviewActive = assetArchiveRealPreviewRenderActivation.enabled;
+  const selectedOriginalRefs = realPreviewRecords.map((sample) => sample.source_original_ref).filter(Boolean);
+  const selectedPreviewRefs = realPreviewRecords.map((sample) => sample.source_preview_ref).filter(Boolean);
+  const currentRenderRef = previewDisplayUsesRealImage(currentPreview) ? previewDisplayStageImageRef(currentPreview) : null;
+  const currentRefIndex = currentRenderRef ? selectedPreviewRefs.indexOf(currentRenderRef) : -1;
+  return {
+    draft_output_key: "preview_render_boundary_state",
+    boundary_status: realPreviewActive ? "exact_tracked_preview_refs_render_active" : "css_skin_only",
+    target_surface: "review_console_review_spine",
+    render_gate_ref: assetArchiveRealPreviewRenderActivation.gate_ref,
+    source_mapping_ref: assetArchiveRealPreviewRenderActivation.source_mapping_ref,
+    real_image_source_policy: assetArchiveRealPreviewRenderActivation.real_image_source_policy,
+    selected_preview_ref_count: selectedPreviewRefs.length,
+    selected_original_ref_count: selectedOriginalRefs.length,
+    max_preview_refs: assetArchiveRealPreviewRenderActivation.max_preview_refs,
+    max_original_refs: assetArchiveRealPreviewRenderActivation.max_original_refs,
+    current_preview_ref: currentPreview?.source_preview_ref || null,
+    current_original_ref: currentPreview?.source_original_ref || null,
+    current_original_ref_index: null,
+    current_render_ref: currentRenderRef,
+    current_preview_ref_index: currentRefIndex >= 0 ? currentRefIndex + 1 : null,
+    current_ref_in_exact_allowlist: currentRefIndex >= 0,
+    selected_preview_refs: selectedPreviewRefs,
+    selected_original_refs: selectedOriginalRefs,
+    stage_zoom_percent: state.previewStageZoomPercent,
+    ui_summary_cn: realPreviewActive ? `预览图 ${selectedPreviewRefs.length}/${assetArchiveRealPreviewRenderActivation.max_preview_refs} · tracked preview refs · read-only` : "CSS 皮肤预览 · no asset_archive render",
+    guard: {
+      exact_asset_archive_preview_refs_only: realPreviewActive,
+      exact_source_original_refs_only: false,
+      browser_preview_load_performed: realPreviewActive,
+      browser_original_image_load_performed: false,
+      preview_loaded_or_rendered: realPreviewActive,
+      asset_archive_ui_read_performed: realPreviewActive,
+      preview_creation_or_copy_performed: false,
+      fetch_performed: false,
+      file_write_performed: false,
+      source_image_binary_read_performed: false,
+      provider_contact_performed: false,
+      plugin_call_performed: false,
+      api_call_performed: false,
+      image_generation_performed: false,
+      DailyNote_write_performed: false,
+      VCP_memory_write_performed: false,
+      production_candidate_write_performed: false
+    }
+  };
+}
+
+function previewOriginalRenderState(currentPreview = currentPreviewDisplay()) {
+  const realPreviewRecords = previewDisplayRealPreviewRecords();
+  const selectedOriginalRefs = realPreviewRecords.map((sample) => sample.source_original_ref).filter(Boolean);
+  const selectedPreviewRefs = realPreviewRecords.map((sample) => sample.source_preview_ref).filter(Boolean);
+  const currentPreviewRef = previewDisplayUsesRealImage(currentPreview) ? previewDisplayStageImageRef(currentPreview) : null;
+  return {
+    draft_output_key: "preview_original_render_state",
+    state_status: assetArchiveRealPreviewRenderActivation.enabled ? "tracked_preview_render_active_original_refs_provenance_only" : "original_image_render_inactive",
+    policy: assetArchiveRealPreviewRenderActivation.real_image_source_policy,
+    selected_original_ref_count: selectedOriginalRefs.length,
+    selected_preview_ref_count: selectedPreviewRefs.length,
+    current_original_ref: currentPreview?.source_original_ref || null,
+    current_preview_ref: currentPreviewRef,
+    current_render_ref: currentPreviewRef,
+    stage_zoom_percent: state.previewStageZoomPercent,
+    min_zoom_percent: stageZoomRange.min,
+    max_zoom_percent: stageZoomRange.max,
+    zoom_step_percent: stageZoomRange.step,
+    selected_original_refs: selectedOriginalRefs,
+    selected_preview_refs: selectedPreviewRefs,
+    preview_ref_role: "tracked_review_render_source",
+    original_ref_role: "provenance_only_not_review_render_source",
+    fallback_to_preview_allowed: false,
+    guard: {
+      browser_original_image_load_performed: false,
+      browser_preview_load_performed: assetArchiveRealPreviewRenderActivation.enabled,
+      source_image_binary_read_performed: false,
+      preview_creation_or_copy_performed: false,
+      fetch_performed: false,
+      file_write_performed: false,
+      provider_contact_performed: false,
+      plugin_call_performed: false,
+      api_call_performed: false,
+      image_generation_performed: false,
+      DailyNote_write_performed: false,
+      VCP_memory_write_performed: false,
+      production_candidate_write_performed: false
+    }
+  };
+}
+
+function previewDisplayProxyState() {
+  const current = currentPreviewDisplay();
+  const reviewTarget = currentReviewTarget(current);
+  const realRenderActive = assetArchiveRealPreviewRenderActivation.enabled;
+  const realPreviewRecords = previewDisplayRealPreviewRecords();
+  return {
+    draft_output_key: "preview_display_state",
+    execution_mode: realRenderActive ? "review_console_asset_archive_real_preview_render_activated" : "review_console_static_preview_display_proxy_only",
+    source_mode: realRenderActive ? "asset_archive_exact_tracked_preview_refs_to_preview_display_state" : "review_session_image_versions_to_css_skin_proxy",
+    render_activation_ref: assetArchiveRealPreviewRenderActivation.phase,
+    original_render_activation_ref: assetArchiveRealPreviewRenderActivation.original_render_phase,
+    render_gate_ref: assetArchiveRealPreviewRenderActivation.gate_ref,
+    real_image_source_policy: assetArchiveRealPreviewRenderActivation.real_image_source_policy,
+    selected_version_id: reviewTarget.version_id,
+    review_session_current_version_id: state.currentVersionId,
+    selected_preview_id: current?.preview_id || null,
+    selected_sample_number: reviewTarget.sample_number,
+    selected_asset_ref: reviewTarget.output_asset_ref,
+    selected_decision_target_source: reviewTarget.decision_target_source,
+    selected_skin_id: current?.skin_id || null,
+    available_skin_ids: previewDisplaySkins.map((skin) => skin.skin_id),
+    thumbnail_skin_count: previewDisplaySkins.length,
+    real_preview_ref_count: realPreviewRecords.length,
+    real_original_ref_count: realPreviewRecords.filter((sample) => sample.source_original_ref).length,
+    stage_zoom_percent: state.previewStageZoomPercent,
+    display_samples: reviewSpineSamples().map((sample) => ({
+      preview_id: sample.preview_id,
+      version_id: sample.version_id,
+      sample_number: sample.sample_number,
+      label: sample.label,
+      variant: sample.variant,
+      score: sample.score,
+      skin_id: sample.skin_id,
+      skin_label_cn: sample.skin_label_cn,
+      aspect_ratio: sample.aspect_ratio,
+      source_asset_ref: sample.source_asset_ref,
+      source_preview_ref: sample.source_preview_ref || null,
+      source_original_ref: sample.source_original_ref || null,
+      thumbnail_ref: sample.thumbnail_ref,
+      stage_image_ref: sample.stage_image_ref || null,
+      image_source_mode: sample.image_source_mode || "css_skin_only",
+      render_mode: sample.render_mode,
+      original_image_required: sample.original_image_required === true,
+      source_original_available: sample.source_original_available === true,
+      static_proxy_only: sample.static_proxy_only,
+      asset_archive_read_performed: sample.asset_archive_read_performed,
+      asset_archive_ui_read_performed: sample.asset_archive_ui_read_performed === true,
+      browser_preview_load_performed: sample.browser_preview_load_performed === true,
+      browser_original_image_load_performed: sample.browser_original_image_load_performed === true,
+      source_image_binary_read_performed: sample.source_image_binary_read_performed === true,
+      preview_loaded_or_rendered: sample.preview_loaded_or_rendered
+    })),
+    guard: {
+      static_proxy_only: !realRenderActive,
+      css_skin_only: !realRenderActive,
+      exact_asset_archive_preview_refs_only: realRenderActive,
+      exact_source_original_refs_only: false,
+      selected_preview_ref_count: realPreviewRecords.length,
+      selected_original_ref_count: realPreviewRecords.filter((sample) => sample.source_original_ref).length,
+      max_preview_refs: assetArchiveRealPreviewRenderActivation.max_preview_refs,
+      max_original_refs: assetArchiveRealPreviewRenderActivation.max_original_refs,
+      asset_archive_read_performed: realRenderActive,
+      asset_archive_ui_read_performed: realRenderActive,
+      preview_loaded_or_rendered: realRenderActive,
+      browser_preview_load_performed: realRenderActive,
+      browser_original_image_load_performed: false,
+      preview_creation_or_copy_performed: false,
+      fetch_performed: false,
+      file_write_performed: false,
+      source_image_binary_read_performed: false,
+      provider_contact_performed: false,
+      plugin_call_performed: false,
+      api_call_performed: false,
+      image_generation_performed: false,
+      DailyNote_write_performed: false,
+      VCP_memory_write_performed: false,
+      accepted_samples_write_performed: false,
+      failure_samples_write_performed: false,
+      production_candidate_write_performed: false,
+      real_manifest_read_performed: false,
+      real_vcpchat_read_performed: false,
+      real_vcptoolbox_read_performed: false
+    }
+  };
+}
+
+function previewStageMarkup(preview) {
+  if (previewDisplayUsesRealImage(preview)) {
+    const imageSrc = previewDisplayImageSrc(preview);
+    const stageImageRef = previewDisplayStageImageRef(preview);
+    const originalRef = preview?.source_original_ref || "";
+    const previewRef = preview?.source_preview_ref || "";
+    return `
+      <div class="preview-image-scroll" data-preview-image-scroll>
+        <img class="preview-stage-image" src="${escapeHtml(imageSrc)}" alt="${escapeHtml(preview.label)} ${escapeHtml(preview.variant)}" data-real-original-ref="${escapeHtml(originalRef)}" data-real-preview-ref="${escapeHtml(previewRef)}" data-stage-image-ref="${escapeHtml(stageImageRef)}" loading="eager" decoding="async" />
+      </div>
+      <span class="preview-stage-chip">${escapeHtml(preview.skin_label_cn || "预览图")} · preview</span>
+    `;
+  }
+  return `
+    <span class="stage-orbit orbit-one"></span>
+    <span class="stage-orbit orbit-two"></span>
+    <span class="stage-light light-one"></span>
+    <span class="preview-stage-plane plane-a"></span>
+    <span class="preview-stage-plane plane-b"></span>
+    <span class="preview-stage-plane plane-c"></span>
+    <span class="preview-stage-chip">${escapeHtml(preview?.skin_label_cn || "静态预览")}</span>
+  `;
+}
+
+function renderPreviewBoundaryStrip(boundary) {
+  const root = qs("#previewBoundaryStrip");
+  if (!root || !boundary) return;
+  const trackedPreviewActive = boundary.boundary_status === "exact_tracked_preview_refs_render_active";
+  const originalPreviewActive = boundary.boundary_status === "exact_original_refs_render_active";
+  const legacyExactPreviewActive = boundary.boundary_status === "exact_refs_render_active";
+  const active = trackedPreviewActive || originalPreviewActive || legacyExactPreviewActive;
+  const label = trackedPreviewActive ? "TRACKED PREVIEW" : active ? "ORIGINAL PREVIEW" : "CSS PREVIEW";
+  const refCount = trackedPreviewActive ? boundary.selected_preview_ref_count : boundary.selected_original_ref_count || boundary.selected_preview_ref_count;
+  const maxRefs = trackedPreviewActive ? boundary.max_preview_refs : boundary.max_original_refs || boundary.max_preview_refs;
+  const currentRefIndex = trackedPreviewActive ? boundary.current_preview_ref_index : boundary.current_original_ref_index || boundary.current_preview_ref_index;
+  root.classList.toggle("is-active", active);
+  root.innerHTML = `
+    <span class="preview-boundary-lede"><strong>${escapeHtml(label)}</strong>${escapeHtml(boundary.ui_summary_cn)}</span>
+    <span><strong>refs</strong>${escapeHtml(refCount)} / ${escapeHtml(maxRefs)}</span>
+    <span><strong>current</strong>${escapeHtml(currentRefIndex || "-")}</span>
+    <span><strong>zoom</strong>${escapeHtml(boundary.stage_zoom_percent || 100)}%</span>
+    <span><strong>writes</strong>${escapeHtml(boundary.guard.file_write_performed ? "on" : "off")}</span>
+    <span><strong>generation</strong>${escapeHtml(boundary.guard.image_generation_performed ? "on" : "off")}</span>
+  `;
+}
+
+function reviewSpineSeverityTone(severity) {
+  if (severity === "hard_blocker" || severity === "critical" || severity === "high") return "danger";
+  if (severity === "medium") return "warning";
+  if (severity === "low") return "success";
+  return "";
+}
+
+function reviewSpineStatusTone(status) {
+  if (String(status || "").toLowerCase().includes("open")) return "danger";
+  if (String(status || "").toLowerCase().includes("closed")) return "success";
+  if (String(status || "").toLowerCase().includes("review")) return "";
+  return "warning";
+}
+
+function reviewSpineActiveBlockers() {
+  const focus = evidenceFocusState();
+  const blockers = focus.active_blockers.length > 0 ? focus.active_blockers : [{
+    id: "no-active-blocker",
+    source: "review_session",
+    severity: "low",
+    target: currentVersion()?.version_id || state.currentVersionId,
+    message: "暂无活动阻断",
+    required_action: nextReviewerActionLabel(),
+    anchor_id: null,
+    anchor_label_cn: "审片会话"
+  }];
+  if (!state.selectedSpineBlockerId || !blockers.some((blocker) => blocker.id === state.selectedSpineBlockerId)) {
+    state.selectedSpineBlockerId = blockers[0].id;
+  }
+  return blockers;
+}
+
+function sufficiencyPercent(focus) {
+  const checks = focus.evidence_sufficiency.checks || [];
+  if (checks.length === 0) return 0;
+  return Math.round((checks.filter((check) => check.passed).length / checks.length) * 100);
+}
+
+function renderReviewSpineV11() {
+  const shellRoot = qs("#spineSampleRail");
+  const decisionRoot = qs("#spineDecisionSpine");
+  const triageRoot = qs("#spineTriageBar");
+  const evidenceRowsRoot = qs("#spineEvidenceRows");
+  const crossReferenceRoot = qs("#spineCrossReferenceDrawer");
+  if (!shellRoot || !decisionRoot || !triageRoot || !evidenceRowsRoot || !crossReferenceRoot) return;
+
+  const current = currentVersion();
+  const currentPreview = currentPreviewDisplay();
+  const decisionTarget = currentReviewTarget(currentPreview);
+  const currentSampleNumber = reviewSpineSampleNumber();
+  const focus = evidenceFocusState();
+  const blockers = reviewSpineActiveBlockers();
+  const selectedBlocker = blockers.find((blocker) => blocker.id === state.selectedSpineBlockerId) || blockers[0];
+  const humanTotal = totalFrom(state.humanScores);
+  const percent = sufficiencyPercent(focus);
+  const hardCount = blockers.filter((blocker) => ["hard_blocker", "critical", "high"].includes(blocker.severity)).length;
+  const mediumCount = blockers.filter((blocker) => blocker.severity === "medium").length;
+  const lowCount = blockers.filter((blocker) => blocker.severity === "low").length;
+  const samples = reviewSpineSamples();
+  const boundaryState = previewRenderBoundaryState(currentPreview);
+
+  qs("#spineTopSampleLabel").textContent = `样片 ${currentSampleNumber} / 48`;
+  qs("#spineStageCounter").textContent = `${currentSampleNumber} / 48`;
+  const zoomLabel = qs("#stageZoomLabel");
+  if (zoomLabel) zoomLabel.textContent = `${state.previewStageZoomPercent}%`;
+  qsa("[data-stage-zoom-out]").forEach((button) => {
+    button.disabled = state.previewStageZoomPercent <= stageZoomRange.min;
+  });
+  qsa("[data-stage-zoom-in]").forEach((button) => {
+    button.disabled = state.previewStageZoomPercent >= stageZoomRange.max;
+  });
+
+  const stage = qs(".spine-image-stage");
+  const stageArt = qs(".stage-art");
+  const currentUsesRealImage = previewDisplayUsesRealImage(currentPreview);
+  const currentStageImageRef = currentUsesRealImage ? previewDisplayStageImageRef(currentPreview) : "";
+  if (stage && currentPreview) {
+    stage.className = `spine-image-stage ${safeClassToken(currentPreview.skin_class)}`;
+    stage.dataset.previewProxy = currentUsesRealImage ? "asset_archive_tracked_preview_exact_render" : "static";
+    stage.dataset.previewSkin = currentPreview.skin_id;
+    stage.dataset.realPreviewRef = currentUsesRealImage ? currentPreview.source_preview_ref || "" : "";
+    stage.dataset.realOriginalRef = currentUsesRealImage ? currentPreview.source_original_ref || "" : "";
+    stage.dataset.stageImageRef = currentStageImageRef;
+    stage.dataset.stageZoomPercent = String(state.previewStageZoomPercent);
+  }
+  if (stageArt && currentPreview) {
+    stageArt.className = `stage-art preview-stage-art ${safeClassToken(currentPreview.skin_class)}${currentUsesRealImage ? " has-real-preview" : ""}`;
+    stageArt.style.setProperty("--stage-zoom-scale", String(state.previewStageZoomPercent / 100));
+    stageArt.style.setProperty("--stage-zoom-size", `${state.previewStageZoomPercent}%`);
+    stageArt.dataset.stageZoomPercent = String(state.previewStageZoomPercent);
+    stageArt.setAttribute("aria-label", currentUsesRealImage ? `${currentPreview.label} 已跟踪预览图` : `${currentPreview.skin_label_cn} 静态预览皮肤`);
+    stageArt.innerHTML = previewStageMarkup(currentPreview);
+  }
+  renderPreviewBoundaryStrip(boundaryState);
+
+  shellRoot.innerHTML = samples.map((sample, index) => {
+    const isActive = sample.preview_id === currentPreview?.preview_id || (!currentPreview && index === 0);
+    const thumb = previewDisplayUsesRealImage(sample)
+      ? `<span class="spine-sample-thumb ${escapeHtml(sample.skin_class)} has-real-preview" aria-hidden="true"><img src="${escapeHtml(previewDisplayImageSrc(sample))}" alt="" data-real-original-ref="${escapeHtml(sample.source_original_ref || "")}" data-real-preview-ref="${escapeHtml(sample.source_preview_ref || "")}" data-stage-image-ref="${escapeHtml(previewDisplayStageImageRef(sample))}" loading="eager" decoding="async" /></span>`
+      : `<span class="spine-sample-thumb ${escapeHtml(sample.skin_class)}" aria-hidden="true"></span>`;
+    return `
+      <button type="button" class="spine-sample-item${isActive ? " is-active" : ""}" data-spine-version-id="${escapeHtml(sample.version_id)}" data-preview-id="${escapeHtml(sample.preview_id)}" data-preview-skin-id="${escapeHtml(sample.skin_id)}" title="${escapeHtml(sample.skin_label_cn)} / ${escapeHtml(sample.render_mode)}">
+        ${thumb}
+        <span>
+          <strong>${escapeHtml(sample.label)}</strong>
+          <small>${escapeHtml(sample.variant)} · ${escapeHtml(sample.score)}</small>
+        </span>
+        <span class="spine-state-dot ${escapeHtml(sample.tone)}" aria-hidden="true"></span>
+      </button>
+    `;
+  }).join("");
+
+  qs("#spineStageMeta").innerHTML = `
+    <span><strong>样片 ID</strong>${escapeHtml(currentPreview?.version_id || current?.version_id || state.currentVersionId)}</span>
+    <span><strong>版本</strong>${escapeHtml(currentPreview?.variant || current?.label || "备选版本 B")}</span>
+    <span><strong>预览代理</strong>${escapeHtml(currentPreview?.render_mode || "css_skin_only")}</span>
+    <span><strong>皮肤</strong>${escapeHtml(currentPreview?.skin_label_cn || "静态预览")}</span>
+    <span><strong>缩放</strong>${escapeHtml(state.previewStageZoomPercent)}%</span>
+    <span><strong>来源</strong>${escapeHtml(currentStageImageRef || currentPreview?.source_asset_ref || "mock image_versions")}</span>
+    <span><strong>画幅</strong>${escapeHtml(currentPreview?.aspect_ratio || "16:9")}</span>
+  `;
+
+  decisionRoot.innerHTML = `
+    <section class="spine-decision-section">
+      <h3>决策状态</h3>
+      <span>${escapeHtml(decisionTargetDisplayLabel(decisionTarget))}</span>
+      <span>${escapeHtml(decisionTargetSourceLabel(decisionTarget))} / ${escapeHtml(archiveStatusLabel(state.assetStatus))} / ${escapeHtml(memoryStatusLabel(state.memoryStatus))}</span>
+    </section>
+    <section class="spine-decision-section">
+      <h3>待处理动作</h3>
+      <ul class="spine-check-list">
+        <li><span class="severity-ring square"></span><span>复核活动阻断</span><b>${escapeHtml(blockers.length)}</b></li>
+        <li><span class="severity-ring square"></span><span>${escapeHtml(nextReviewerActionLabel())}</span><b>${escapeHtml(hardCount)}</b></li>
+        <li><span class="severity-ring square"></span><span>补充审片备注</span><b>可选</b></li>
+      </ul>
+      <button type="button" class="spine-wide-button" data-open-required-actions>打开待处理动作</button>
+    </section>
+    <section class="spine-decision-section">
+      <h3>风险动作</h3>
+      <div class="risk-actions">
+        <button type="button" class="risk-action low" data-risk-action="low">低风险</button>
+        <button type="button" class="risk-action medium" data-risk-action="medium">中风险</button>
+        <button type="button" class="risk-action high" data-risk-action="high">高风险</button>
+      </div>
+    </section>
+    <section class="spine-decision-section">
+      <h3>主要阻断</h3>
+      <ul class="spine-blocker-list">
+        ${blockers.slice(0, 3).map((blocker) => `
+          <li>
+            <span class="severity-ring ${escapeHtml(reviewSpineSeverityTone(blocker.severity))}"></span>
+            <button type="button" data-spine-blocker-id="${escapeHtml(blocker.id)}">${escapeHtml(reviewBlockerMessageLabel(blocker.message))}</button>
+            <b>${escapeHtml(blockerSeverityLabel(blocker.severity))}</b>
+          </li>
+        `).join("")}
+      </ul>
+      <button type="button" class="spine-wide-button" data-evidence-mode="full">查看全部活动阻断</button>
+    </section>
+    <section class="spine-decision-section">
+      <h3>最近反馈</h3>
+      <ul class="spine-feedback-list">
+        <li><span class="severity-ring success"></span><span>分析员已复核</span><b>2 分钟前</b></li>
+        <li><span class="severity-ring warning"></span><span>自动校验完成</span><b>15 分钟前</b></li>
+      </ul>
+    </section>
+  `;
+
+  triageRoot.innerHTML = `
+    <div class="spine-triage-cell">
+      <span><strong>活动阻断</strong><span class="metric-row"><span class="severity-ring danger"></span><b>${escapeHtml(hardCount)}</b><span class="severity-ring warning"></span><b>${escapeHtml(mediumCount)}</b><span class="severity-ring square"></span><b>${escapeHtml(blockers.length - hardCount - mediumCount - lowCount)}</b><span class="severity-ring success"></span><b>${escapeHtml(lowCount)}</b></span></span>
+      <button type="button" class="icon-button" data-evidence-mode="full" aria-label="打开完整阻断">&#8250;</button>
+    </div>
+    <div class="spine-triage-cell">
+      <span><strong>动作摘要</strong>${escapeHtml(focus.required_action.primary_action_cn)}</span>
+      <button type="button" class="icon-button" data-open-required-actions aria-label="打开要求动作">&#8250;</button>
+    </div>
+    <div class="spine-triage-cell">
+      <span><strong>证据充分度</strong><span class="sufficiency-meter"><span style="width: ${escapeHtml(percent)}%;"></span></span></span>
+      <b>${escapeHtml(percent)}%</b>
+    </div>
+  `;
+
+  qs("#spineWorkbenchSummary").innerHTML = `
+    <span><strong>来源</strong>全部来源</span>
+    <span><strong>类型</strong>全部类型</span>
+    <span><strong>风险</strong>${escapeHtml(focus.active_blocker_filter.severity_cn)}</span>
+    <span><strong>检索</strong>${escapeHtml(selectedBlocker?.target || "样片 12")}</span>
+    <button type="button" data-evidence-mode="triage">筛选</button>
+  `;
+
+  evidenceRowsRoot.innerHTML = blockers.map((blocker) => `
+    <button type="button" class="spine-evidence-row${blocker.id === state.selectedSpineBlockerId ? " is-selected" : ""}" data-spine-blocker-id="${escapeHtml(blocker.id)}" role="row">
+      <span role="cell"><i class="severity-ring ${escapeHtml(reviewSpineSeverityTone(blocker.severity))}"></i> ${escapeHtml(blockerSeverityLabel(blocker.severity))}</span>
+      <span role="cell">${escapeHtml(blockerSourceLabel(blocker.source))}</span>
+      <span role="cell">${escapeHtml(reviewBlockerMessageLabel(blocker.message))}</span>
+      <span role="cell">${escapeHtml(blocker.target)}</span>
+      <span role="cell">${escapeHtml(blocker.required_action ? "待处理" : "信息")}</span>
+    </button>
+  `).join("");
+
+  crossReferenceRoot.innerHTML = `
+    <article class="spine-reference-card">
+      <h3>${escapeHtml(reviewBlockerMessageLabel(selectedBlocker?.message || "已选阻断"))}</h3>
+      <span>${escapeHtml(selectedBlocker ? blockerSeverityLabel(selectedBlocker.severity) : "信息")} / ${escapeHtml(selectedBlocker ? blockerSourceLabel(selectedBlocker.source) : "审片")}</span>
+      <span>${escapeHtml(reviewActionLabel(selectedBlocker?.required_action || nextReviewerActionLabel()))}</span>
+    </article>
+    <article class="spine-reference-card">
+      <h3>关联证据锚点</h3>
+      <ul class="spine-reference-list">
+        <li><span>${escapeHtml(selectedBlocker?.anchor_label_cn || "全部证据")}</span><b>&#8250;</b></li>
+        <li><span>审片会话草案</span><b>&#8250;</b></li>
+        <li><span>图像案例上下文</span><b>&#8250;</b></li>
+      </ul>
+    </article>
+    <article class="spine-reference-card">
+      <h3>图像案例上下文</h3>
+      <span>${escapeHtml(currentPreview?.source_asset_ref || current?.asset_ref || "static_proxy/no_asset_archive_read")}</span>
+      <span>${escapeHtml(currentPreview?.skin_label_cn || "静态预览")} / ${escapeHtml(currentPreview?.render_mode || "css_skin_only")}</span>
+      <span>人工总分 ${escapeHtml(humanTotal)} / AI ${escapeHtml(totalFrom(null, 3))}</span>
+    </article>
+  `;
+
+  qs("#spineActionSheet").classList.toggle("is-open", state.highRiskSheetOpen);
+}
+
+function selectReviewSpineSample(sample, closeDrawer = false) {
+  if (!sample) return;
+  const hasReviewSessionVersion = state.image_versions.some((version) => version.version_id === sample.version_id);
+  if (hasReviewSessionVersion) state.currentVersionId = sample.version_id;
+  state.previewDisplaySelectedPreviewId = sample.preview_id || `preview-display-${safeClassToken(sample.version_id)}`;
+  state.previewDisplaySkinId = sample.skin_id || state.previewDisplaySkinId;
+  if (closeDrawer) setSampleDrawerOpen(false);
+  renderAll();
+}
+
+function setCurrentReviewSampleByOffset(offset) {
+  const samples = reviewSpineSamples();
+  if (samples.length === 0) return;
+  const currentPreview = currentPreviewDisplay();
+  const currentIndex = samples.findIndex((sample) => sample.preview_id === currentPreview?.preview_id);
+  const safeCurrentIndex = currentIndex >= 0 ? currentIndex : 0;
+  const nextIndex = (safeCurrentIndex + offset + samples.length) % samples.length;
+  selectReviewSpineSample(samples[nextIndex]);
+}
+
+function setReviewSampleFromDataset(versionId, previewId, skinId) {
+  const samples = reviewSpineSamples();
+  const sample = samples.find((item) => item.preview_id === previewId) ||
+    samples.find((item) => item.version_id === versionId) ||
+    { version_id: versionId, preview_id: previewId, skin_id: skinId };
+  const hasReviewSessionVersion = state.image_versions.some((version) => version.version_id === sample.version_id);
+  selectReviewSpineSample({ ...sample, preview_id: previewId || sample.preview_id, skin_id: skinId || sample.skin_id }, hasReviewSessionVersion);
+}
+
+const stageZoomRange = {
+  min: 50,
+  max: 400,
+  step: 25,
+  reset: 100
+};
+
+function clampStageZoom(percent) {
+  const numericPercent = Number(percent);
+  if (!Number.isFinite(numericPercent)) return stageZoomRange.reset;
+  return Math.min(stageZoomRange.max, Math.max(stageZoomRange.min, Math.round(numericPercent / stageZoomRange.step) * stageZoomRange.step));
+}
+
+function setPreviewStageZoom(percent) {
+  state.previewStageZoomPercent = clampStageZoom(percent);
+  renderReviewSpineV11();
+  renderDraft();
+}
+
+function bumpPreviewStageZoom(direction) {
+  setPreviewStageZoom(state.previewStageZoomPercent + direction * stageZoomRange.step);
+}
+
+function setSampleDrawerOpen(open) {
+  state.sampleDrawerOpen = Boolean(open);
+  if (document.body) document.body.classList.toggle("sample-drawer-open", state.sampleDrawerOpen);
+}
+
+function setHighRiskSheetOpen(open) {
+  state.highRiskSheetOpen = Boolean(open);
+  renderReviewSpineV11();
+}
+
+function setSelectedSpineBlocker(id) {
+  state.selectedSpineBlockerId = id;
+  renderReviewSpineV11();
+  renderDraft();
+}
+
+function handleRiskAction(action) {
+  if (action === "low") {
+    setArchiveStatus("candidate");
+    return;
+  }
+  if (action === "medium") {
+    setArchiveStatus("draft");
+    return;
+  }
+  if (action === "high") {
+    setHighRiskSheetOpen(true);
+  }
+}
+
+function setEvidenceMode(mode) {
+  if (!["triage", "full"].includes(mode)) return;
+  state.evidenceMode = mode;
+  renderEvidenceFocus();
+  renderReviewSpineV11();
+  renderDraft();
+}
+
+function focusFullEvidenceAnchor(anchorId) {
+  if (!anchorId) return;
+  state.evidenceMode = "full";
+  state.lastEvidenceAnchor = {
+    anchor_id: anchorId,
+    source: "active_blocker_filter",
+    target: null,
+    located: false,
+    located_at: nowIso()
+  };
+  renderEvidenceFocus();
+  renderDraft();
+
+  window.requestAnimationFrame(() => {
+    qsa(".is-evidence-anchor-target").forEach((node) => {
+      node.classList.remove("is-evidence-anchor-target");
+    });
+    const target = document.getElementById(anchorId);
+    state.lastEvidenceAnchor = {
+      anchor_id: anchorId,
+      source: "active_blocker_filter",
+      target: target ? target.id : null,
+      located: Boolean(target),
+      located_at: nowIso()
+    };
+    if (target) {
+      target.classList.add("is-evidence-anchor-target");
+      if (!target.hasAttribute("tabindex")) target.setAttribute("tabindex", "-1");
+      target.scrollIntoView({ behavior: "smooth", block: "center" });
+      target.focus({ preventScroll: true });
+    }
+    renderDraft();
+  });
+}
+
+function setActiveBlockerFilter(filterType, value) {
+  if (filterType === "severity") state.blockerSeverityFilter = value || "all";
+  if (filterType === "source") state.blockerSourceFilter = value || "all";
+  renderEvidenceFocus();
+  renderReviewSpineV11();
+  renderDraft();
+}
+
 function setArchiveStatus(status) {
   state.assetStatus = status;
   state.approval.archive_action = archiveActionFor(status);
-  qsa("[data-archive]").forEach((button) => {
-    button.classList.toggle("is-active", button.dataset.archive === status);
-  });
+  updatePressedState("[data-archive]", "archive", status);
+  recordDecisionEvent(
+    "archive",
+    `资产动作已更新为：${archiveStatusLabel(status)}。`,
+    archiveDownstreamEffect(status)
+  );
+  renderDecisionStatus();
+  renderEvidenceFocus();
+  renderReviewSpineV11();
   renderDraft();
 }
 
@@ -2936,9 +4412,7 @@ function setMemoryStatus(status) {
   if (status === "rejected") {
     state.approval.memory_action = "reject_memory_write";
   }
-  qsa("[data-memory]").forEach((button) => {
-    button.classList.toggle("is-active", button.dataset.memory === status);
-  });
+  updatePressedState("[data-memory]", "memory", status);
   const lock = qs("#dailyNoteLock");
   if (status === "approved") {
     lock.textContent = "DailyNote request unlocked: 仅生成已审批写入申请，仍不直接调用 DailyNote。";
@@ -2947,6 +4421,14 @@ function setMemoryStatus(status) {
     lock.textContent = "DailyNote locked: memory_approval.status 不是 approved。";
     lock.classList.remove("approved");
   }
+  recordDecisionEvent(
+    "memory",
+    `记忆动作已更新为：${memoryStatusLabel(status)}。`,
+    memoryDownstreamEffect(status)
+  );
+  renderDecisionStatus();
+  renderEvidenceFocus();
+  renderReviewSpineV11();
   renderDraft();
 }
 
@@ -3157,6 +4639,8 @@ function renderEvidenceBlockerHandoff() {
   handoff.blocker_decisions.forEach((blocker) => {
     const card = document.createElement("article");
     card.className = `blocker-card ${blocker.permanent_block ? "permanent" : "temporary"}`;
+    card.id = evidenceBlockerAnchorId(blocker);
+    card.tabIndex = -1;
     card.innerHTML = `
       <div class="protocol-card-head">
         <strong>${escapeHtml(blocker.candidate_id)}</strong>
@@ -3222,6 +4706,8 @@ function renderReviewBlockerArbiterHandoff() {
   handoff.candidate_arbitrations.forEach((item) => {
     const card = document.createElement("article");
     card.className = `blocker-arbiter-card ${item.never_production ? "never-production" : "human-review"}`;
+    card.id = blockerArbiterAnchorId(item);
+    card.tabIndex = -1;
     card.innerHTML = `
       <div class="protocol-card-head">
         <strong>${escapeHtml(item.candidate_id)}</strong>
@@ -3649,6 +5135,7 @@ function memoryWriteMode(memoryApproval) {
 }
 
 function buildReviewSession(memoryApproval, humanTotal) {
+  const reviewTarget = currentReviewTarget();
   return {
     session_id: state.session_id,
     task_id: state.task_id,
@@ -3657,6 +5144,8 @@ function buildReviewSession(memoryApproval, humanTotal) {
     status: state.status,
     image_versions: state.image_versions,
     current_version_id: state.currentVersionId,
+    current_preview_id: reviewTarget.preview_id,
+    current_review_target: reviewTarget,
     compare_version_id: state.compareVersionId,
     ai_review: {
       ...state.ai_review,
@@ -3711,13 +5200,15 @@ function buildReviewSession(memoryApproval, humanTotal) {
 
 function buildImageCase(humanTotal) {
   const approvedAsset = state.assetStatus === "accepted";
+  const reviewTarget = currentReviewTarget();
   return {
     case_id: state.case_id,
     project: state.project,
     task_id: state.task_id,
     image_type: "Photo Studio OS dashboard",
     input_assets: mock.image_case_seed.input_assets,
-    output_assets: [currentVersion().asset_ref],
+    output_assets: [reviewTarget.output_asset_ref],
+    selected_review_target: reviewTarget,
     plugin_used: null,
     prompt_package_id: mock.image_case_seed.prompt_package_id,
     review_ids: mock.image_case_seed.review_ids,
@@ -3743,6 +5234,7 @@ function buildImageCase(humanTotal) {
 
 function buildMemoryDelta(memoryApproval) {
   const writeMode = memoryWriteMode(memoryApproval);
+  const reviewTarget = currentReviewTarget();
   return {
     delta_id: "delta-photo-studio-os-review-001",
     task_id: state.task_id,
@@ -3773,7 +5265,8 @@ function buildMemoryDelta(memoryApproval) {
       prompt_en: null,
       plugin_name: null,
       model_name: null,
-      file_ref: currentVersion().asset_ref
+      file_ref: reviewTarget.output_asset_ref,
+      selected_review_target: reviewTarget
     },
     tags: state.memory_preview.tags,
     visibility: "audit",
@@ -3830,6 +5323,10 @@ function renderUnifiedCapsuleContractReport() {
 function renderDraft() {
   const memoryApproval = approvalPayload();
   const humanTotal = totalFrom(state.humanScores);
+  const realRenderActive = assetArchiveRealPreviewRenderActivation.enabled;
+  const decisionTarget = currentReviewTarget();
+  const previewBoundaryState = previewRenderBoundaryState();
+  const previewOriginalState = previewOriginalRenderState();
   const draft = {
     adapter_dry_run_handoff: state.adapter_dry_run_handoff,
     review_result_protocol_static_handoff: state.review_result_protocol_static_handoff,
@@ -3912,6 +5409,36 @@ function renderDraft() {
     readonly_visual_review_mvp_state: readonlyVisualReviewMvpState(),
     readonly_visual_review_dataset_regression_state: readonlyVisualReviewDatasetRegressionState(),
     codex_session_import_record_reader: state.import_record_reader,
+    preview_display_state: previewDisplayProxyState(),
+    preview_render_boundary_state: previewBoundaryState,
+    preview_original_render_state: previewOriginalState,
+    evidence_progressive_disclosure_state: evidenceFocusState(),
+    current_decision_state: {
+      sample_id: decisionTarget.sample_id,
+      preview_id: decisionTarget.preview_id,
+      sample_number: decisionTarget.sample_number,
+      review_session_current_version_id: decisionTarget.review_session_current_version_id,
+      source_asset_ref: decisionTarget.source_asset_ref,
+      output_asset_ref: decisionTarget.output_asset_ref,
+      source_preview_ref: decisionTarget.source_preview_ref,
+      source_original_ref: decisionTarget.source_original_ref,
+      render_mode: decisionTarget.render_mode,
+      decision_target_source: decisionTarget.decision_target_source,
+      asset_status: state.assetStatus,
+      asset_status_cn: archiveStatusLabel(state.assetStatus),
+      archive_action: state.approval.archive_action,
+      memory_status: state.memoryStatus,
+      memory_status_cn: memoryStatusLabel(state.memoryStatus),
+      memory_action: state.approval.memory_action,
+      last_decision_event: decisionEventWithTarget(state.lastDecisionEvent, decisionTarget),
+      next_reviewer_action_cn: nextReviewerActionLabel(),
+      production_write_now: false,
+      DailyNote_write_now: false,
+      VCP_memory_write_now: false,
+      sticky_reviewer_summary_rendered: true,
+      evidence_progressive_disclosure_rendered: true,
+      action_feedback_rendered: true
+    },
     review_session: buildReviewSession(memoryApproval, humanTotal),
     image_case: buildImageCase(humanTotal),
     memory_delta: buildMemoryDelta(memoryApproval),
@@ -3920,7 +5447,13 @@ function renderDraft() {
       daily_note_called: false,
       vcp_plugin_called: false,
       disk_write_performed: false,
-      image_file_created: false
+      image_file_created: false,
+      asset_archive_read_performed: realRenderActive,
+      asset_archive_ui_read_performed: realRenderActive,
+      preview_loaded_or_rendered: realRenderActive,
+      browser_preview_load_performed: realRenderActive,
+      preview_display_static_proxy_rendered: !realRenderActive,
+      exact_asset_archive_preview_refs_only: realRenderActive
     }
   };
   qs("#draftOutput").value = JSON.stringify(draft, null, 2);
@@ -3928,10 +5461,12 @@ function renderDraft() {
 
 function renderAll() {
   qs("#sessionId").textContent = state.session_id;
-  qs("#sessionStatus").textContent = state.status;
+  qs("#sessionStatus").textContent = sessionStatusLabel(state.status);
   renderVersions();
   renderScores();
   renderComments();
+  renderReviewerStickySummary();
+  renderDecisionStatus();
   renderIteration();
   renderProtocolHandoff();
   renderDecisionPackageHandoff();
@@ -3964,6 +5499,8 @@ function renderAll() {
   renderExactNewTrial003FormalHumanApprovalCaptureSurface();
   renderThirdSampleAcceptedSamplesAuthorizationPackage();
   renderReviewConsoleRuntimeGapDashboard();
+  renderEvidenceFocus();
+  renderReviewSpineV11();
   renderReadonlyReviewCorpusRenderer();
   renderReadonlyVisualReviewMvp();
   renderReadonlyVisualReviewDatasetRegression();
@@ -3981,6 +5518,95 @@ qsa("[data-archive]").forEach((button) => {
 });
 qsa("[data-memory]").forEach((button) => {
   button.addEventListener("click", () => setMemoryStatus(button.dataset.memory));
+});
+qsa("[data-evidence-mode]").forEach((button) => {
+  button.addEventListener("click", () => setEvidenceMode(button.dataset.evidenceMode));
+});
+qsa("[data-spine-sample-prev]").forEach((button) => {
+  button.addEventListener("click", () => setCurrentReviewSampleByOffset(-1));
+});
+qsa("[data-spine-sample-next]").forEach((button) => {
+  button.addEventListener("click", () => setCurrentReviewSampleByOffset(1));
+});
+qsa("[data-stage-zoom-out]").forEach((button) => {
+  button.addEventListener("click", () => bumpPreviewStageZoom(-1));
+});
+qsa("[data-stage-zoom-in]").forEach((button) => {
+  button.addEventListener("click", () => bumpPreviewStageZoom(1));
+});
+qsa("[data-stage-zoom-reset]").forEach((button) => {
+  button.addEventListener("click", () => setPreviewStageZoom(stageZoomRange.reset));
+});
+qsa("[data-sample-drawer-toggle]").forEach((button) => {
+  button.addEventListener("click", () => setSampleDrawerOpen(!state.sampleDrawerOpen));
+});
+qs("#spineSampleRail").addEventListener("click", (event) => {
+  const sampleButton = event.target.closest("[data-spine-version-id]");
+  if (!sampleButton) return;
+  const versionId = sampleButton.dataset.spineVersionId;
+  const previewId = sampleButton.dataset.previewId;
+  const skinId = sampleButton.dataset.previewSkinId;
+  setReviewSampleFromDataset(versionId, previewId, skinId);
+});
+qs("#spineDecisionSpine").addEventListener("click", (event) => {
+  const blockerButton = event.target.closest("[data-spine-blocker-id]");
+  if (blockerButton) {
+    setSelectedSpineBlocker(blockerButton.dataset.spineBlockerId);
+    return;
+  }
+  const riskButton = event.target.closest("[data-risk-action]");
+  if (riskButton) {
+    handleRiskAction(riskButton.dataset.riskAction);
+    return;
+  }
+  const evidenceButton = event.target.closest("[data-evidence-mode]");
+  if (evidenceButton) {
+    setEvidenceMode(evidenceButton.dataset.evidenceMode);
+  }
+});
+qs("#spineTriageBar").addEventListener("click", (event) => {
+  const evidenceButton = event.target.closest("[data-evidence-mode]");
+  if (evidenceButton) {
+    setEvidenceMode(evidenceButton.dataset.evidenceMode);
+  }
+});
+qs("#spineWorkbenchSummary").addEventListener("click", (event) => {
+  const evidenceButton = event.target.closest("[data-evidence-mode]");
+  if (evidenceButton) {
+    setEvidenceMode(evidenceButton.dataset.evidenceMode);
+  }
+});
+qs("#spineEvidenceRows").addEventListener("click", (event) => {
+  const row = event.target.closest("[data-spine-blocker-id]");
+  if (row) setSelectedSpineBlocker(row.dataset.spineBlockerId);
+});
+qs("#spineActionSheet").addEventListener("click", (event) => {
+  if (event.target.closest("[data-action-sheet-close]")) {
+    setHighRiskSheetOpen(false);
+    return;
+  }
+  if (event.target.closest("[data-confirm-high-risk]")) {
+    const confirmed = qs("#spineActionConfirmCheck").checked;
+    if (!confirmed) return;
+    setArchiveStatus("rejected");
+    setHighRiskSheetOpen(false);
+  }
+});
+qs("#evidenceFocusBody").addEventListener("click", (event) => {
+  const severityButton = event.target.closest("[data-blocker-severity-filter]");
+  if (severityButton) {
+    setActiveBlockerFilter("severity", severityButton.dataset.blockerSeverityFilter);
+    return;
+  }
+  const sourceButton = event.target.closest("[data-blocker-source-filter]");
+  if (sourceButton) {
+    setActiveBlockerFilter("source", sourceButton.dataset.blockerSourceFilter);
+    return;
+  }
+  const anchorButton = event.target.closest("[data-full-evidence-anchor]");
+  if (anchorButton) {
+    focusFullEvidenceAnchor(anchorButton.dataset.fullEvidenceAnchor);
+  }
 });
 qsa("[data-lifecycle-filter]").forEach((button) => {
   button.addEventListener("click", () => setLifecycleFilter(button.dataset.lifecycleFilter));

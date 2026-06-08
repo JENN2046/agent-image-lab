@@ -1,0 +1,81 @@
+{
+  "fixture_type": "onering_hash_identity_drift_cases",
+  "schema_version": "v0_1",
+  "source_contract": "tests/schema_examples/onering_sql_hash_contract.example.json",
+  "purpose": "Prove that OneRing request hash, request identity, snapshot hash, and temp store hash fields fail fast when source fields drift without synchronized hash updates.",
+  "drift_cases": [
+    {
+      "case_id": "request_body_operation_changes",
+      "contract_mutation": {
+        "path": "request_contract.request.body.operation",
+        "value": "snapshot_contract_probe_v2"
+      },
+      "expected_failures": [
+        "request_hash_matches_canonical_body"
+      ]
+    },
+    {
+      "case_id": "request_route_changes",
+      "contract_mutation": {
+        "path": "request_contract.request.route",
+        "value": "local://onering/contract-fixture/no-handler-v2"
+      },
+      "expected_failures": [
+        "request_identity_matches_contract"
+      ]
+    },
+    {
+      "case_id": "idempotency_key_changes",
+      "contract_mutation": {
+        "path": "request_contract.request.idempotency_key",
+        "value": "onering-fixture-002"
+      },
+      "expected_failures": [
+        "request_identity_matches_contract"
+      ]
+    },
+    {
+      "case_id": "snapshot_status_changes",
+      "contract_mutation": {
+        "path": "snapshot_contract.payload.status",
+        "value": "contract_fixture_ready_v2"
+      },
+      "expected_failures": [
+        "snapshot_hash_matches_canonical_payload",
+        "temp_store_payload_hash_matches_snapshot"
+      ]
+    },
+    {
+      "case_id": "temp_store_namespace_changes",
+      "contract_mutation": {
+        "path": "temp_store_contract.entries.0.namespace",
+        "value": "onering_contract_validation_v2"
+      },
+      "expected_failures": [
+        "temp_store_key_hash_matches_contract"
+      ]
+    },
+    {
+      "case_id": "temp_store_slot_changes",
+      "contract_mutation": {
+        "path": "temp_store_contract.entries.0.slot",
+        "value": "request_snapshot_cache_v2"
+      },
+      "expected_failures": [
+        "temp_store_key_hash_matches_contract"
+      ]
+    }
+  ],
+  "runtime_boundary": {
+    "no_handler": true,
+    "handler_execution_performed": false,
+    "migration_execution_performed": false,
+    "sqlite_file_created": false,
+    "database_write_performed": false,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "secret_value_read_performed": false
+  }
+}

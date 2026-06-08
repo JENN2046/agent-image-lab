@@ -1,0 +1,187 @@
+{
+  "fixture_type": "onering_npm_script_name_manifest_id_slug",
+  "schema_version": "v0_1",
+  "purpose": "Prove OneRing npm script names derive from validation manifest ids by a stable slug rule.",
+  "package_ref": "package.json",
+  "manifest_ref": "scripts/validation_manifest.json",
+  "domain": "onering_contract",
+  "expected_entries": [
+    {
+      "manifest_id": "onering_sql_hash_contract",
+      "npm_script": "validate:onering-sql-hash-contract",
+      "expected_slug": "sql-hash-contract"
+    },
+    {
+      "manifest_id": "onering_hash_identity_drift_guard",
+      "npm_script": "validate:onering-hash-identity-drift",
+      "expected_slug": "hash-identity-drift"
+    },
+    {
+      "manifest_id": "onering_sql_migration_preview",
+      "npm_script": "validate:onering-sql-migration-preview",
+      "expected_slug": "sql-migration-preview"
+    },
+    {
+      "manifest_id": "onering_sql_migration_preview_drift_guard",
+      "npm_script": "validate:onering-sql-migration-preview-drift",
+      "expected_slug": "sql-migration-preview-drift"
+    },
+    {
+      "manifest_id": "onering_contract_bundle_index",
+      "npm_script": "validate:onering-contract-bundle-index",
+      "expected_slug": "contract-bundle-index"
+    },
+    {
+      "manifest_id": "onering_manifest_recommendation_selector_guard",
+      "npm_script": "validate:onering-manifest-recommendation-selector",
+      "expected_slug": "manifest-recommendation-selector"
+    },
+    {
+      "manifest_id": "onering_selector_negative_cases_guard",
+      "npm_script": "validate:onering-selector-negative-cases",
+      "expected_slug": "selector-negative-cases"
+    },
+    {
+      "manifest_id": "onering_recommendation_closeout_summary_guard",
+      "npm_script": "validate:onering-recommendation-closeout-summary",
+      "expected_slug": "recommendation-closeout-summary"
+    },
+    {
+      "manifest_id": "onering_mixed_change_closeout_guard",
+      "npm_script": "validate:onering-mixed-change-closeout",
+      "expected_slug": "mixed-change-closeout"
+    },
+    {
+      "manifest_id": "onering_closeout_deferred_commands_guard",
+      "npm_script": "validate:onering-closeout-deferred-commands",
+      "expected_slug": "closeout-deferred-commands"
+    },
+    {
+      "manifest_id": "onering_validator_manifest_ordering_guard",
+      "npm_script": "validate:onering-validator-manifest-ordering",
+      "expected_slug": "validator-manifest-ordering"
+    },
+    {
+      "manifest_id": "onering_npm_script_manifest_command_mapping_guard",
+      "npm_script": "validate:onering-npm-script-manifest-command-mapping",
+      "expected_slug": "npm-script-manifest-command-mapping"
+    },
+    {
+      "manifest_id": "onering_trigger_paths_coverage_guard",
+      "npm_script": "validate:onering-trigger-paths-coverage",
+      "expected_slug": "trigger-paths-coverage"
+    },
+    {
+      "manifest_id": "onering_required_for_coverage_guard",
+      "npm_script": "validate:onering-required-for-coverage",
+      "expected_slug": "required-for-coverage"
+    },
+    {
+      "manifest_id": "onering_manifest_status_runtime_class_guard",
+      "npm_script": "validate:onering-manifest-status-runtime-class",
+      "expected_slug": "manifest-status-runtime-class"
+    },
+    {
+      "manifest_id": "onering_manifest_tier_domain_guard",
+      "npm_script": "validate:onering-manifest-tier-domain",
+      "expected_slug": "manifest-tier-domain"
+    },
+    {
+      "manifest_id": "onering_manifest_command_script_basename_guard",
+      "npm_script": "validate:onering-manifest-command-script-basename",
+      "expected_slug": "manifest-command-script-basename"
+    },
+    {
+      "manifest_id": "onering_manifest_duplicate_command_guard",
+      "npm_script": "validate:onering-manifest-duplicate-command",
+      "expected_slug": "manifest-duplicate-command"
+    },
+    {
+      "manifest_id": "onering_manifest_duplicate_script_guard",
+      "npm_script": "validate:onering-manifest-duplicate-script",
+      "expected_slug": "manifest-duplicate-script"
+    },
+    {
+      "manifest_id": "onering_manifest_id_script_basename_bijection_guard",
+      "npm_script": "validate:onering-manifest-id-script-basename-bijection",
+      "expected_slug": "manifest-id-script-basename-bijection"
+    },
+    {
+      "manifest_id": "onering_npm_script_name_manifest_id_slug_guard",
+      "npm_script": "validate:onering-npm-script-name-manifest-id-slug",
+      "expected_slug": "npm-script-name-manifest-id-slug"
+    },
+    {
+      "manifest_id": "onering_manifest_command_target_npm_script_target_guard",
+      "npm_script": "validate:onering-manifest-command-target-npm-script-target",
+      "expected_slug": "manifest-command-target-npm-script-target"
+    },
+    {
+      "manifest_id": "onering_command_parser_strictness_guard",
+      "npm_script": "validate:onering-command-parser-strictness",
+      "expected_slug": "command-parser-strictness"
+    },
+    {
+      "manifest_id": "onering_command_parser_negative_cases_guard",
+      "npm_script": "validate:onering-command-parser-negative-cases",
+      "expected_slug": "command-parser-negative-cases"
+    },
+    {
+      "manifest_id": "onering_command_parser_regex_source_consistency_guard",
+      "npm_script": "validate:onering-command-parser-regex-source-consistency",
+      "expected_slug": "command-parser-regex-source-consistency"
+    },
+    {
+      "manifest_id": "onering_command_parser_regex_canonicalization_guard",
+      "npm_script": "validate:onering-command-parser-regex-canonicalization",
+      "expected_slug": "command-parser-regex-canonicalization"
+    },
+    {
+      "manifest_id": "onering_command_parser_extractor_robustness_guard",
+      "npm_script": "validate:onering-command-parser-extractor-robustness",
+      "expected_slug": "command-parser-extractor-robustness"
+    },
+    {
+      "manifest_id": "onering_command_parser_extractor_negative_source_shape_guard",
+      "npm_script": "validate:onering-command-parser-extractor-negative-source-shape",
+      "expected_slug": "command-parser-extractor-negative-source-shape"
+    },
+    {
+      "manifest_id": "onering_command_parser_extractor_policy_ref_consistency_guard",
+      "npm_script": "validate:onering-command-parser-extractor-policy-ref-consistency",
+      "expected_slug": "command-parser-extractor-policy-ref-consistency"
+    },
+    {
+      "manifest_id": "onering_command_parser_extractor_policy_ref_negative_fixture_guard",
+      "npm_script": "validate:onering-command-parser-extractor-policy-ref-negative-fixture",
+      "expected_slug": "command-parser-extractor-policy-ref-negative-fixture"
+    },
+    {
+      "manifest_id": "onering_command_parser_extractor_policy_ref_fixture_index_guard",
+      "npm_script": "validate:onering-command-parser-extractor-policy-ref-fixture-index",
+      "expected_slug": "command-parser-extractor-policy-ref-fixture-index"
+    },
+    {
+      "manifest_id": "onering_command_parser_extractor_policy_ref_fixture_index_negative_guard",
+      "npm_script": "validate:onering-command-parser-extractor-policy-ref-fixture-index-negative",
+      "expected_slug": "command-parser-extractor-policy-ref-fixture-index-negative"
+    },
+    {
+      "manifest_id": "onering_command_parser_extractor_policy_ref_fixture_index_negative_coverage_guard",
+      "npm_script": "validate:onering-command-parser-extractor-policy-ref-fixture-index-negative-coverage",
+      "expected_slug": "command-parser-extractor-policy-ref-fixture-index-negative-coverage"
+    }
+  ],
+  "runtime_boundary": {
+    "no_handler": true,
+    "handler_execution_performed": false,
+    "migration_execution_performed": false,
+    "sqlite_file_created": false,
+    "database_write_performed": false,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "secret_value_read_performed": false
+  }
+}

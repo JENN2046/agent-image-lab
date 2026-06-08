@@ -1,0 +1,86 @@
+{
+  "fixture_type": "onering_command_parser_negative_cases",
+  "schema_version": "v0_1",
+  "purpose": "Prove the OneRing command parser rejects commands with extra args, non-node runtimes, and non scripts/validate_onering*.js targets.",
+  "allowed_command_regex": "^node scripts/validate_onering[a-z0-9_]*\\.js$",
+  "required_negative_categories": [
+    "extra_args",
+    "non_node_runtime",
+    "non_scripts_target",
+    "non_validate_onering_target"
+  ],
+  "negative_cases": [
+    {
+      "id": "reject_extra_arg_after_target",
+      "category": "extra_args",
+      "command": "node scripts/validate_onering_sql_hash_contract.js --dry-run",
+      "reason": "OneRing commands must not include trailing arguments."
+    },
+    {
+      "id": "reject_node_option_before_target",
+      "category": "extra_args",
+      "command": "node --check scripts/validate_onering_sql_hash_contract.js",
+      "reason": "The parser only accepts exactly node followed by the script target."
+    },
+    {
+      "id": "reject_npm_runtime",
+      "category": "non_node_runtime",
+      "command": "npm run validate:onering-sql-hash-contract",
+      "reason": "Manifest/package command targets must be direct node script invocations."
+    },
+    {
+      "id": "reject_powershell_runtime",
+      "category": "non_node_runtime",
+      "command": "powershell -File scripts/validate_onering_sql_hash_contract.js",
+      "reason": "Only the node runtime is allowed for OneRing validator commands."
+    },
+    {
+      "id": "reject_root_target",
+      "category": "non_scripts_target",
+      "command": "node validate_onering_sql_hash_contract.js",
+      "reason": "The target must live under scripts/."
+    },
+    {
+      "id": "reject_nested_tmp_target",
+      "category": "non_scripts_target",
+      "command": "node tmp/validate_onering_sql_hash_contract.js",
+      "reason": "The target must use scripts/validate_onering*.js exactly."
+    },
+    {
+      "id": "reject_non_onering_validator",
+      "category": "non_validate_onering_target",
+      "command": "node scripts/validate_smoke.js",
+      "reason": "The script basename must start with validate_onering."
+    },
+    {
+      "id": "reject_onering_non_validator_prefix",
+      "category": "non_validate_onering_target",
+      "command": "node scripts/onering_validate_sql_hash_contract.js",
+      "reason": "The script basename must start with validate_onering."
+    }
+  ],
+  "positive_controls": [
+    {
+      "id": "accept_canonical_onering_validator",
+      "command": "node scripts/validate_onering_sql_hash_contract.js",
+      "expected_target": "scripts/validate_onering_sql_hash_contract.js"
+    },
+    {
+      "id": "accept_canonical_onering_guard",
+      "command": "node scripts/validate_onering_command_parser_negative_cases_guard.js",
+      "expected_target": "scripts/validate_onering_command_parser_negative_cases_guard.js"
+    }
+  ],
+  "runtime_boundary": {
+    "no_handler": true,
+    "handler_execution_performed": false,
+    "migration_execution_performed": false,
+    "sqlite_file_created": false,
+    "database_write_performed": false,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "secret_value_read_performed": false
+  }
+}

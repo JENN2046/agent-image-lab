@@ -1,3 +1,175 @@
+## Current Run State - Tracked Preview Render P1 Fix 2026-06-08
+
+```text
+phase: review_console_asset_archive_tracked_preview_render_p1_fix_20260608
+status: completed_validated_clean_checkout_render_fix_pending_final_validation
+lane: Green local PR review fix with browser and route validation
+goal: Make the activated Review Console real preview render from tracked asset_archive preview.webp refs so clean checkouts do not show broken images.
+branch: codex/review-console-preview-gates-onering
+receipt: reports/review_console_asset_archive_tracked_preview_render/tracked_preview_render_p1_fix_receipt_20260608.json
+supersedes: reports/review_console_asset_archive_original_image_render/original_image_render_zoom_receipt_20260608.json
+changed_refs:
+  - review_console/static_prototype/app.js
+  - scripts/serve_review_console_static.js
+  - scripts/validators/review_console/validate_review_console_preview_display_state.js
+  - reports/review_console_asset_archive_tracked_preview_render/tracked_preview_render_p1_fix_receipt_20260608.json
+  - reports/review_console_asset_archive_original_image_render/original_image_render_zoom_receipt_20260608.json
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+result:
+  - real-image display records carry source_preview_ref for img src and source_original_ref for provenance only
+  - Review Console stage and real sample rail render tracked asset_archive preview.webp refs, not untracked runs/real_generation JPG refs
+  - preview_display_state records image_source_mode=source_preview_ref and exact_asset_archive_preview_refs_only=true
+  - preview_original_render_state records tracked_preview_render_active_original_refs_provenance_only
+  - local server permits only the 3 exact tracked asset_archive preview refs; the 3 legacy source original run refs return 403
+validation:
+  - app/server syntax passed
+  - preview display validator passed with 77 checks
+  - route probes passed: 3 tracked preview refs 200 image/webp; 3 legacy source original run refs 403
+  - Browser DOM verified all 4 rendered stage/rail img src values use /asset_archive/.../preview.webp and none use /runs/real_generation; decoded dimensions 512x512
+boundary_checks:
+  asset_archive_directory_listing_performed: false
+  asset_archive_glob_performed: false
+  open_runs_route_performed: false
+  asset_archive_write_performed: false
+  runs_write_performed: false
+  preview_creation_or_copy_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  production_candidate_write_performed: false
+  push_tag_release_deploy_performed: false
+next_safe_task: final validation, then exact-file local commit; push remains separately gated.
+```
+
+## Current Run State - Review Console Width Unlock 2026-06-08
+
+```text
+phase: review_console_width_unlock_20260608
+status: completed_validated_local_css_refinement
+lane: Green local Review Console CSS refinement
+goal: Remove the desktop page-width cap that kept the审片台 centered and narrow on wide screens.
+branch: master
+changed_refs:
+  - review_console/static_prototype/styles.css
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+result:
+  - .review-shell now uses width: calc(100% - 28px)
+  - wide desktop view expands to available browser width with fixed gutters
+  - mobile override remains unchanged
+validation:
+  - Browser current viewport audit passed
+  - Browser temporary wide viewport audit passed: shell width 1890px at 1932px viewport, body overflow false
+boundary_checks:
+  asset_archive_ref_changes: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  production_candidate_write_performed: false
+  push_tag_release_deploy_performed: false
+next_safe_task: final local validation; commit only if explicitly requested.
+```
+
+## Current Run State - Preview Boundary Strip 2026-06-08
+
+```text
+phase: review_console_preview_boundary_strip_20260608
+status: completed_validated_local_ui_refinement
+lane: Green local Review Console static prototype refinement
+goal: Continue improving the Review Console by surfacing the exact real-preview render boundary in the审片台 UI.
+branch: master
+changed_refs:
+  - review_console/static_prototype/index.html
+  - review_console/static_prototype/app.js
+  - review_console/static_prototype/styles.css
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+result:
+  - added previewBoundaryStrip mount point in the image stage panel
+  - added previewRenderBoundaryState and draft output key preview_render_boundary_state
+  - rendered a compact boundary strip showing REAL PREVIEW, refs 3/3, current index, writes off, generation off
+  - added responsive styling so the strip is a five-cell row on desktop and one column on mobile
+validation:
+  - node --check review_console/static_prototype/app.js passed
+  - npm run validate:review-console-static passed
+  - Browser desktop DOM audit passed
+  - Browser mobile 390px audit passed
+boundary_checks:
+  new_asset_archive_ref_selected: false
+  asset_archive_directory_listing_performed: false
+  asset_archive_glob_performed: false
+  additional_manifest_read_performed: false
+  asset_archive_write_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  production_candidate_write_performed: false
+  push_tag_release_deploy_performed: false
+next_safe_task: final diff/validation checks; commit only if explicitly requested.
+```
+
+## Current Run State - Asset Archive Real Preview Render Activation 2026-06-08
+
+```text
+phase: review_console_asset_archive_real_preview_render_activation_20260608
+status: completed_validated_real_preview_render
+lane: Amber exact asset_archive preview render after explicit user yes response, followed by Green status-surface sync
+goal: Render the three selected asset_archive preview refs in the Review Console now.
+branch: master
+receipt: reports/review_console_asset_archive_real_preview_render/asset_archive_real_preview_render_receipt_20260608.json
+changed_refs:
+  - review_console/static_prototype/app.js
+  - review_console/static_prototype/styles.css
+  - scripts/serve_review_console_static.js
+  - scripts/validators/review_console/validate_review_console_preview_display_state.js
+  - reports/review_console_asset_archive_real_preview_render/asset_archive_real_preview_render_receipt_20260608.json
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+result:
+  - preview_display_state now has an activated exact-render mode for the three selected asset_archive refs
+  - Review Console sample rail renders three real WebP previews
+  - main stage renders the first selected real preview and records stage proxy asset_archive_exact_render
+  - local static server serves only the three selected refs from asset_archive and returns 403 for an unselected asset_archive preview ref
+validation:
+  - syntax checks passed for app.js and serve_review_console_static.js
+  - render gate validator passed
+  - preview_display_state validator passed after activation-compatible token widening
+  - Browser DOM/layout audits passed
+boundary_checks:
+  asset_archive_directory_listing_performed: false
+  asset_archive_glob_performed: false
+  additional_manifest_read_performed: false
+  preview_creation_or_copy_performed: false
+  asset_archive_write_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  production_candidate_write_performed: false
+  push_tag_release_deploy_performed: false
+next_safe_task: run final exact-file diff/validation checks; commit only if explicitly requested.
+```
+
 ## Current Run State - v7_35 Remote Head f484 Closeout Surface Sync 2026-06-07
 
 ```text
@@ -34,6 +206,472 @@ v7_35_tag_release_deploy_performed: false
 release_ready: false
 validation: agent_board validator passed; validation manifest passed; smoke passed; mvp passed; git diff --check passed with CRLF normalization warnings only; git diff --cached --check passed with no staged files.
 next_safe_task: create exact-file local commit "docs: sync final closeout to f4849f3"; push remains separately gated.
+```
+
+### Current Run State - Preview Display Static Proxy Layer 2026-06-07
+
+```text
+phase: review_console_preview_display_static_proxy_layer
+status: completed_validated_local
+lane: Green static prototype only
+goal: Implement a preview_display static proxy layer and four sample thumbnail skins without touching real asset_archive.
+branch: master
+changed_refs:
+  - review_console/static_prototype/app.js
+  - review_console/static_prototype/styles.css
+result:
+  - Added an in-memory preview_display_state with css_skin_only rendering, selected skin state, and static guard fields.
+  - Added four thumbnail/stage skins: studio_dashboard, product_still_life, editorial_portrait, evidence_blocker.
+  - Wired filler sample skin clicks to change only the current preview skin, not the underlying review_session currentVersionId.
+validation:
+  - node --check review_console/static_prototype/app.js passed.
+  - npm run validate:review-console-static passed.
+  - git diff --check passed with existing CRLF warnings only.
+  - Browser localhost check verified preview_display_state, four skin classes, skin switching, desktop layout, and mobile 390px layout.
+boundary_checks:
+  asset_archive_read_performed: false
+  asset_archive_ui_read_performed: false
+  preview_loaded_or_rendered: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  push_tag_release_deploy_performed: false
+next_safe_task: review the static proxy layer visually, then decide whether to add a schema/example validator for preview_display_state.
+```
+
+### Current Run State Addendum - Preview Display State Validator 2026-06-07
+
+```text
+phase: review_console_preview_display_state_validator
+status: completed_validated_local
+lane: Green local schema/example validator only
+goal: Add a narrow schema/example validator for preview_display_state so the static proxy can behave as a stable contract surface.
+branch: master
+changed_refs:
+  - tests/schema_examples/REVIEW_CONSOLE_PREVIEW_DISPLAY_STATE.example.json
+  - scripts/validate_review_console_preview_display_state.js
+  - scripts/validators/review_console/validate_review_console_preview_display_state.js
+  - package.json
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+result:
+  - Added a golden static example for preview_display_state with four representative css_skin_only samples.
+  - Added a Review Console validator that checks fixture shape, four skin ids/classes, app tokens, CSS selectors, false guard fields, and negative cases.
+  - Added npm script validate:review-console-preview-display and chained it into validate:review-console-static.
+validation:
+  - node scripts\validate_review_console_preview_display_state.js passed, 55 checks.
+  - node --check scripts\validate_review_console_preview_display_state.js passed.
+  - node --check scripts\validators\review_console\validate_review_console_preview_display_state.js passed.
+  - npm run validate:review-console-preview-display passed.
+  - npm run validate:review-console-static passed.
+  - npm run validate:validation-manifest passed.
+  - git diff --check for the validator/package fixture allowlist passed with CRLF normalization warning only.
+boundary_checks:
+  asset_archive_read_performed: false
+  asset_archive_ui_read_performed: false
+  preview_loaded_or_rendered: false
+  preview_creation_or_copy_performed: false
+  source_image_binary_read_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  real_manifest_read_performed: false
+  real_vcpchat_read_performed: false
+  real_vcptoolbox_read_performed: false
+  push_tag_release_deploy_performed: false
+next_safe_task: optional visual review of the static proxy layer; any real asset_archive integration remains separately gated.
+```
+
+### Current Run State Addendum - Preview Display Visual Review 2026-06-07
+
+```text
+phase: review_console_preview_display_visual_review
+status: completed_validated_no_code_change
+lane: Green local browser visual review only
+goal: Perform a small visual review pass on the preview_display static proxy skins and polish only if concrete skin-specific issues appear.
+branch: master
+changed_refs:
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+result:
+  - Reviewed preview_display in the local Browser at http://127.0.0.1:4173/.
+  - Desktop review verified four skin classes, stage chip text, metadata aspect ratio, and body-level horizontal overflow false during skin switches.
+  - Mobile 390px review verified the main preview stage has no body-level horizontal overflow and the four skin classes remain present.
+  - No skin-specific CSS polish was applied because the observed preview_display skins were usable and stable.
+observed_non_scope_issue:
+  - Mobile top decision summary and lower evidence table retain existing horizontal scroll behavior outside the preview_display skin scope.
+validation:
+  - Browser desktop visual audit passed for studio_dashboard, product_still_life, editorial_portrait, evidence_blocker.
+  - Browser mobile 390px visual audit passed for the main preview stage.
+  - node --check review_console/static_prototype/app.js passed.
+  - npm run validate:review-console-preview-display passed.
+  - npm run validate:review-console-static passed.
+  - git diff --check passed with CRLF normalization warnings only.
+boundary_checks:
+  asset_archive_read_performed: false
+  asset_archive_ui_read_performed: false
+  preview_loaded_or_rendered: false
+  preview_creation_or_copy_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  real_manifest_read_performed: false
+  real_vcpchat_read_performed: false
+  real_vcptoolbox_read_performed: false
+  push_tag_release_deploy_performed: false
+next_safe_task: decide whether to address the broader mobile decision-summary/evidence-table scroll behavior as a separate layout task.
+```
+
+### Current Run State Addendum - Mobile Summary Evidence Layout Pass 2026-06-07
+
+```text
+phase: review_console_mobile_summary_evidence_layout_pass
+status: completed_validated_local
+lane: Green static prototype CSS only
+goal: Resolve the mobile horizontal-scroll behavior in the non-preview_display top decision summary and evidence table.
+branch: master
+changed_refs:
+  - review_console/static_prototype/styles.css
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+result:
+  - Added a narrow mobile override that turns sticky reviewer summary cards into a wrapped grid instead of an internal horizontal scroller.
+  - Changed the mobile evidence table into stacked card-like rows with per-cell labels and no horizontal table scroll.
+  - Made the reviewer summary non-sticky on mobile to avoid topbar overlap.
+  - Preserved desktop summary and evidence table behavior at an explicit 1280px validation viewport.
+validation:
+  - Browser 390px audit: body horizontal overflow false; sticky summary grid overflow false; 6 summary cards visible; evidence table overflow false; evidence rows overflow false.
+  - Browser 1280px audit: desktop sticky summary remains 6-column grid; evidence table header and rows remain table layout; body horizontal overflow false.
+  - node --check review_console/static_prototype/app.js passed.
+  - npm run validate:review-console-preview-display passed.
+  - npm run validate:review-console-static passed.
+  - git diff --check -- review_console/static_prototype/styles.css passed with CRLF normalization warning only.
+boundary_checks:
+  asset_archive_read_performed: false
+  asset_archive_ui_read_performed: false
+  preview_loaded_or_rendered: false
+  preview_creation_or_copy_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  real_manifest_read_performed: false
+  real_vcpchat_read_performed: false
+  real_vcptoolbox_read_performed: false
+  push_tag_release_deploy_performed: false
+next_safe_task: optional final browser smoke only if more visual surfaces are changed; otherwise the static proxy and mobile layout pass are complete locally.
+```
+
+### Current Run State Addendum - Asset Archive Read-only Preview Adapter Contract Draft 2026-06-07
+
+```text
+phase: review_console_asset_archive_readonly_preview_adapter_contract_draft
+status: completed_validated_local_contract_draft
+lane: Green local docs/schema/validator only
+goal: Draft the local contract for a future asset_archive read-only preview adapter without executing a real asset_archive read.
+branch: master
+changed_refs:
+  - docs/review_console_asset_archive_readonly_preview_adapter_contract.md
+  - tests/schema_examples/ASSET_ARCHIVE_READONLY_PREVIEW_ADAPTER_CONTRACT.example.json
+  - scripts/validate_asset_archive_readonly_preview_adapter_contract.js
+  - scripts/validators/review_console/validate_asset_archive_readonly_preview_adapter_contract.js
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+result:
+  - Added a draft-only contract for mapping repo-relative asset_archive preview refs into preview_display_state.
+  - Added a golden example with three placeholder preview records and future max_manifest_reads/max_preview_loads capped at 3.
+  - Added a narrow validator with negative cases for accidental manifest-read claims, preview-load claims, broad asset_archive globs, and non-placeholder preview refs.
+validation:
+  - node --check scripts/validate_asset_archive_readonly_preview_adapter_contract.js passed.
+  - node --check scripts/validators/review_console/validate_asset_archive_readonly_preview_adapter_contract.js passed.
+  - node scripts/validate_asset_archive_readonly_preview_adapter_contract.js passed, 23 checks.
+boundary_checks:
+  real_asset_archive_read_performed: false
+  asset_archive_manifest_read_performed: false
+  asset_archive_preview_binary_read_performed: false
+  preview_loaded_or_rendered: false
+  file_write_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  production_candidate_write_performed: false
+  push_tag_release_deploy_performed: false
+next_safe_task: if desired, prepare a separate exact-read probe gate for 1-3 concrete repo-relative preview refs; do not read real asset_archive until that gate is active.
+```
+
+### Current Run State Addendum - Asset Archive Exact-read Preview Probe Gate 2026-06-07
+
+```text
+phase: review_console_asset_archive_exact_read_preview_probe_gate
+status: completed_validated_local_gate_package
+lane: Green local docs/schema/validator only
+goal: Prepare an exact-read preview probe gate with 1-3 concrete repo-relative preview refs, without executing any real asset_archive read.
+branch: master
+changed_refs:
+  - docs/review_console_asset_archive_exact_read_preview_probe_gate.md
+  - tests/schema_examples/ASSET_ARCHIVE_EXACT_READ_PREVIEW_PROBE_GATE.example.json
+  - scripts/validate_asset_archive_exact_read_preview_probe_gate.js
+  - scripts/validators/review_console/validate_asset_archive_exact_read_preview_probe_gate.js
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+selected_preview_refs:
+  - asset_archive/accepted_samples/accepted_french_summer_rattan_bucket_bag_001/preview.webp
+  - asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/preview.webp
+  - asset_archive/failure_samples/failure_french_summer_rattan_bag_v7_29_001/preview.webp
+result:
+  - Added a prepared_not_authorized exact-read probe gate package.
+  - Capped a future probe at exactly the three selected preview refs, max_manifest_reads=3, and max_preview_loads=3.
+  - Added validator negative cases for can_execute_now drift, broad asset_archive refs, fourth ref expansion, preview-loaded claims, and original-asset refs.
+validation:
+  - node --check scripts/validate_asset_archive_exact_read_preview_probe_gate.js passed.
+  - node --check scripts/validators/review_console/validate_asset_archive_exact_read_preview_probe_gate.js passed.
+  - node scripts/validate_asset_archive_exact_read_preview_probe_gate.js passed, 24 checks.
+boundary_checks:
+  can_execute_now: false
+  real_asset_archive_read_performed: false
+  asset_archive_directory_listing_performed: false
+  asset_archive_manifest_read_performed: false
+  asset_archive_preview_binary_read_performed: false
+  preview_loaded_or_rendered: false
+  file_write_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  production_candidate_write_performed: false
+  push_tag_release_deploy_performed: false
+next_safe_task: activation package only if the user explicitly wants the future exact read; current gate remains non-executing.
+```
+
+### Current Run State Addendum - Asset Archive Exact-read Activation Package 2026-06-07
+
+```text
+phase: review_console_asset_archive_exact_read_activation_package
+status: completed_validated_local_activation_package
+lane: Green local docs/schema/validator only
+goal: Prepare an exact-read activation package while keeping the actual read execution decision undecided and unauthorized.
+branch: master
+changed_refs:
+  - docs/review_console_asset_archive_exact_read_activation_package.md
+  - tests/schema_examples/ASSET_ARCHIVE_EXACT_READ_ACTIVATION_PACKAGE.example.json
+  - scripts/validate_asset_archive_exact_read_activation_package.js
+  - scripts/validators/review_console/validate_asset_archive_exact_read_activation_package.js
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+selected_preview_refs:
+  - asset_archive/accepted_samples/accepted_french_summer_rattan_bucket_bag_001/preview.webp
+  - asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/preview.webp
+  - asset_archive/failure_samples/failure_french_summer_rattan_bag_v7_29_001/preview.webp
+result:
+  - Added a prepared_execute_decision_required activation package.
+  - Cross-checked activation refs against the sealed exact-read probe gate fixture.
+  - Defined future receipt path, rollback plan, stop conditions, and the exact explicit question required before any read.
+validation:
+  - node --check scripts/validate_asset_archive_exact_read_activation_package.js passed.
+  - node --check scripts/validators/review_console/validate_asset_archive_exact_read_activation_package.js passed.
+  - node scripts/validate_asset_archive_exact_read_activation_package.js passed, 25 checks.
+boundary_checks:
+  can_execute_now: false
+  actual_read_execution_authorized_now: false
+  read_execution_decision_state: undecided
+  real_asset_archive_read_performed: false
+  asset_archive_directory_listing_performed: false
+  asset_archive_manifest_read_performed: false
+  asset_archive_preview_binary_read_performed: false
+  preview_loaded_or_rendered: false
+  file_write_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  production_candidate_write_performed: false
+  push_tag_release_deploy_performed: false
+next_safe_task: ask and answer exactly "Execute the exact-read preview probe now for the 3 selected refs, yes or no?"; do not execute on ambiguous continuation.
+```
+
+### Current Run State Addendum - Asset Archive Exact-read Preview Probe Executed 2026-06-08
+
+```text
+phase: review_console_asset_archive_exact_read_preview_probe_execution
+status: completed_validated_real_read_only_probe
+lane: Amber exact asset_archive read within Smart Standing Authorization v3 envelope after explicit user yes response
+goal: Execute the sealed exact-read preview probe for the three selected refs only.
+branch: master
+changed_refs:
+  - reports/review_console_asset_archive_readonly_preview_probe/asset_archive_exact_read_preview_probe_receipt_20260607.json
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+selected_preview_refs:
+  - asset_archive/accepted_samples/accepted_french_summer_rattan_bucket_bag_001/preview.webp
+  - asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/preview.webp
+  - asset_archive/failure_samples/failure_french_summer_rattan_bag_v7_29_001/preview.webp
+result:
+  - Manifest reads performed: 3 of 3, all parsed as JSON.
+  - Preview header reads performed: 3 of 3, each limited to first 12 bytes.
+  - All preview headers detected as riff_webp_header.
+  - Missing refs: 0.
+  - Receipt written with root-key and header evidence only.
+validation:
+  - node -e JSON.parse receipt check passed.
+  - node scripts/validate_agent_board_state.js passed.
+  - node scripts/validate_asset_archive_exact_read_activation_package.js passed, 25 checks.
+  - node scripts/validate_asset_archive_exact_read_preview_probe_gate.js passed, 24 checks.
+  - git diff --check passed with CRLF normalization warnings only.
+boundary_checks:
+  real_asset_archive_read_performed: true
+  asset_archive_manifest_read_performed: true
+  asset_archive_preview_binary_header_read_performed: true
+  asset_archive_directory_listing_performed: false
+  asset_archive_glob_performed: false
+  source_image_binary_read_performed: false
+  preview_hash_performed: false
+  preview_dimension_extraction_performed: false
+  preview_loaded_or_rendered: false
+  asset_archive_write_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  production_candidate_write_performed: false
+  push_tag_release_deploy_performed: false
+next_safe_task: run local validation for the receipt/status sync; optional future adapter mapping remains separate and non-rendering unless explicitly requested.
+```
+
+### Current Run State Addendum - Asset Archive Read-only Preview Adapter Mapping Draft 2026-06-08
+
+```text
+phase: review_console_asset_archive_readonly_preview_adapter_mapping_draft
+status: completed_validated_local_mapping_draft
+lane: Green local docs/schema/validator only
+goal: Map the sealed exact-read probe receipt into preview_display_state without rendering real previews.
+branch: master
+changed_refs:
+  - docs/review_console_asset_archive_readonly_preview_adapter_mapping_draft.md
+  - tests/schema_examples/ASSET_ARCHIVE_READONLY_PREVIEW_ADAPTER_MAPPING_DRAFT.example.json
+  - scripts/validate_asset_archive_readonly_preview_adapter_mapping_draft.js
+  - scripts/validators/review_console/validate_asset_archive_readonly_preview_adapter_mapping_draft.js
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+source_receipt_ref: reports/review_console_asset_archive_readonly_preview_probe/asset_archive_exact_read_preview_probe_receipt_20260607.json
+result:
+  - Created a receipt_to_preview_display_state_ref_only_no_render mapping draft.
+  - Mapped exactly three receipt selected_refs into preview_display_state display_samples.
+  - Kept source_asset_ref as repo-relative evidence refs and kept thumbnail_ref null.
+  - Preserved CSS fallback skins: product_still_life, studio_dashboard, evidence_blocker.
+validation:
+  - node --check scripts/validate_asset_archive_readonly_preview_adapter_mapping_draft.js passed.
+  - node --check scripts/validators/review_console/validate_asset_archive_readonly_preview_adapter_mapping_draft.js passed.
+  - node scripts/validate_asset_archive_readonly_preview_adapter_mapping_draft.js passed, 26 checks.
+boundary_checks:
+  source_receipt_real_asset_archive_read_performed: true
+  mapping_asset_archive_read_performed: false
+  asset_archive_manifest_read_performed_by_mapping: false
+  asset_archive_preview_binary_read_performed_by_mapping: false
+  asset_archive_directory_listing_performed: false
+  asset_archive_glob_performed: false
+  preview_loaded_or_rendered: false
+  preview_creation_or_copy_performed: false
+  thumbnail_ref_populated: false
+  can_render_real_preview_now: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  production_candidate_write_performed: false
+  push_tag_release_deploy_performed: false
+next_safe_task: run final local validation; optional exact-file local commit only if requested.
+```
+
+### Current Run State Addendum - Asset Archive Real-preview Render Gate Draft 2026-06-08
+
+```text
+phase: review_console_asset_archive_real_preview_render_gate
+status: completed_validated_local_render_gate_draft
+lane: Green local docs/schema/validator only
+goal: Prepare a separate real-preview render gate while keeping actual rendering unauthorized.
+branch: master
+changed_refs:
+  - docs/review_console_asset_archive_real_preview_render_gate.md
+  - tests/schema_examples/ASSET_ARCHIVE_REAL_PREVIEW_RENDER_GATE.example.json
+  - scripts/validate_asset_archive_real_preview_render_gate.js
+  - scripts/validators/review_console/validate_asset_archive_real_preview_render_gate.js
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+source_mapping_ref: tests/schema_examples/ASSET_ARCHIVE_READONLY_PREVIEW_ADAPTER_MAPPING_DRAFT.example.json
+required_future_question: Render the 3 selected asset_archive preview refs in the Review Console now, yes or no?
+result:
+  - Added prepared_not_authorized real-preview render gate.
+  - Capped a future render activation at exactly three mapped preview refs and max_browser_preview_loads=3.
+  - Kept max_manifest_reads=0, max_node_preview_binary_reads=0, max_asset_archive_directory_listings=0, and max_file_writes=0.
+  - Required css_skin fallback and rollback to thumbnail_ref=null plus render_mode=css_skin_only.
+validation:
+  - node --check scripts/validate_asset_archive_real_preview_render_gate.js passed.
+  - node --check scripts/validators/review_console/validate_asset_archive_real_preview_render_gate.js passed.
+  - node scripts/validate_asset_archive_real_preview_render_gate.js passed, 27 checks.
+  - node scripts/validate_asset_archive_readonly_preview_adapter_mapping_draft.js passed, 26 checks.
+  - node scripts/validate_review_console_preview_display_state.js passed, 55 checks.
+  - node scripts/validate_agent_board_state.js passed.
+boundary_checks:
+  gate_status: prepared_not_authorized
+  can_execute_now: false
+  can_render_real_preview_now: false
+  actual_render_execution_authorized_now: false
+  render_execution_decision_state: undecided
+  selected_preview_ref_count: 3
+  preview_loaded_or_rendered: false
+  browser_preview_load_performed: false
+  thumbnail_ref_populated: false
+  asset_archive_read_performed_by_this_gate: false
+  asset_archive_directory_listing_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  production_candidate_write_performed: false
+  push_tag_release_deploy_performed: false
+next_safe_task: optional exact-file local commit only if requested.
 ```
 
 ---

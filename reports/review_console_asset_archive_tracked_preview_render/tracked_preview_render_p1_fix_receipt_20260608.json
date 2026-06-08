@@ -1,0 +1,83 @@
+{
+  "receipt_id": "review_console_asset_archive_tracked_preview_render_p1_fix_20260608",
+  "created_at": "2026-06-08T02:40:44.2614874+08:00",
+  "lane": "Green local PR review fix with browser and route validation",
+  "task": "Fix P1 clean-checkout real preview rendering by using tracked asset_archive preview refs for Review Console image src values.",
+  "finding": {
+    "summary": "The previous original-first Review Console render used source_original_ref values under runs/real_generation as img src values.",
+    "impact": "Those exact run artifact JPG refs are not tracked in a clean checkout, so npm run preview:review-console could render 404 images.",
+    "root_cause": "Local validation allowed exact untracked run refs, masking that the PR branch did not contain those image files."
+  },
+  "implementation": {
+    "render_source_policy": "tracked_asset_archive_preview_ref_required_for_clean_checkout_review",
+    "img_src_source": "source_preview_ref",
+    "source_original_ref_role": "provenance_only_not_review_render_source",
+    "stage_render_mode": "asset_archive_preview_image",
+    "server_allowlist": "3 exact tracked asset_archive preview.webp refs only",
+    "legacy_run_refs_allowed_by_server": false,
+    "zoom_controls_preserved": true,
+    "no_asset_copy_or_write": true
+  },
+  "selected_refs": [
+    {
+      "sample_id": "accepted_french_summer_rattan_bucket_bag_001",
+      "tracked_render_ref": "asset_archive/accepted_samples/accepted_french_summer_rattan_bucket_bag_001/preview.webp",
+      "source_original_ref_provenance_only": "runs/real_generation/v7_31_native_doubao_french_summer_rattan_bag_v2_watermark_off_run/native_doubao_1778327047448_0.jpg",
+      "tracked_render_route_status": 200,
+      "legacy_original_route_status": 403,
+      "dom_natural_width": 512,
+      "dom_natural_height": 512
+    },
+    {
+      "sample_id": "accepted_product_still_life_tennis_wallet_001",
+      "tracked_render_ref": "asset_archive/accepted_samples/accepted_product_still_life_tennis_wallet_001/preview.webp",
+      "source_original_ref_provenance_only": "runs/real_generation/v7_24_native_doubao_v3_single_real_run/native_doubao_1778322474131_0.jpg",
+      "tracked_render_route_status": 200,
+      "legacy_original_route_status": 403,
+      "dom_natural_width": 512,
+      "dom_natural_height": 512
+    },
+    {
+      "sample_id": "failure_french_summer_rattan_bag_v7_29_001",
+      "tracked_render_ref": "asset_archive/failure_samples/failure_french_summer_rattan_bag_v7_29_001/preview.webp",
+      "source_original_ref_provenance_only": "runs/real_generation/v7_29_native_doubao_french_summer_rattan_bag_v2_single_real_run/native_doubao_1778325901725_0.jpg",
+      "tracked_render_route_status": 200,
+      "legacy_original_route_status": 403,
+      "dom_natural_width": 512,
+      "dom_natural_height": 512
+    }
+  ],
+  "validation": {
+    "node_check_app_js": "passed",
+    "node_check_server_js": "passed",
+    "node_check_preview_display_validator": "passed",
+    "review_console_preview_display_validator": "passed",
+    "browser_dom_audit": "passed: 4 real preview img nodes use /asset_archive/.../preview.webp and no /runs/real_generation src values",
+    "route_probe_tracked_preview_refs": "passed: 3 refs returned 200 image/webp",
+    "route_probe_legacy_original_refs": "passed: 3 refs returned 403"
+  },
+  "boundary_checks": {
+    "asset_archive_directory_listing_performed": false,
+    "asset_archive_glob_performed": false,
+    "asset_archive_write_performed": false,
+    "runs_write_performed": false,
+    "preview_creation_or_copy_performed": false,
+    "image_generation_performed": false,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "DailyNote_write_performed": false,
+    "VCP_memory_write_performed": false,
+    "production_candidate_write_performed": false,
+    "secret_env_config_read_performed": false,
+    "push_tag_release_deploy_performed": false
+  },
+  "supersedes_current_policy_in": [
+    "reports/review_console_asset_archive_original_image_render/original_image_render_zoom_receipt_20260608.json",
+    ".agent_board/HANDOFF.md",
+    ".agent_board/RUN_STATE.md",
+    ".agent_board/TASK_QUEUE.md",
+    ".agent_board/CHECKPOINT.md"
+  ],
+  "next_auto_step_allowed": "run final local validation and exact-file local commit; push remains separately gated"
+}

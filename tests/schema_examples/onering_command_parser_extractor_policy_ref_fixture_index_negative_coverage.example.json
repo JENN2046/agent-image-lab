@@ -1,0 +1,290 @@
+{
+  "fixture_type": "onering_command_parser_extractor_policy_ref_fixture_index_negative_coverage",
+  "schema_version": "v0_1",
+  "purpose": "Prove every rejection id emitted by the OneRing policy-ref fixture index negative guard is covered by at least one bad index fixture case.",
+  "negative_fixture_ref": "tests/schema_examples/onering_command_parser_extractor_policy_ref_fixture_index_negative.example.json",
+  "negative_guard_source_ref": "scripts/validate_onering_command_parser_extractor_policy_ref_fixture_index_negative_guard.js",
+  "expected_negative_fixture_type": "onering_command_parser_extractor_policy_ref_fixture_index_negative",
+  "expected_negative_index_case_count": 21,
+  "expected_positive_control_count": 1,
+  "expected_source_rejection_ids": [
+    "consistency_fixture_must_be_readable",
+    "negative_fixture_must_be_readable",
+    "robustness_fixture_must_be_readable",
+    "negative_source_shape_fixture_must_be_readable",
+    "canonical_fixture_must_be_readable",
+    "canonical_source_fixture_ref_required",
+    "policy_fixture_must_be_readable",
+    "consistency_fixture_type_must_match_index",
+    "negative_fixture_type_must_match_index",
+    "robustness_fixture_type_must_match_index",
+    "negative_source_shape_fixture_type_must_match_index",
+    "canonical_fixture_type_must_match_index",
+    "canonical_source_fixture_type_must_match_index",
+    "consistency_backref_must_point_to_index_negative_fixture",
+    "negative_backref_must_point_to_index_consistency_fixture",
+    "policy_ref_fixtures_must_mutually_reference_index_refs",
+    "consistency_robustness_ref_must_match_index",
+    "negative_robustness_ref_must_match_index",
+    "consistency_negative_source_shape_ref_must_match_index",
+    "negative_negative_source_shape_ref_must_match_index",
+    "consistency_canonical_ref_must_match_index",
+    "negative_canonical_ref_must_match_index",
+    "consistency_shared_canonical_ref_must_match_index",
+    "negative_shared_canonical_ref_must_match_index",
+    "robustness_canonical_ref_must_match_index",
+    "negative_source_shape_policy_ref_must_match_index_robustness",
+    "policy_fixture_type_must_match_robustness",
+    "policy_canonical_ref_must_match_robustness",
+    "shared_canonical_ref_must_match_index_canonical_ref",
+    "common_canonical_refs_must_match_index"
+  ],
+  "expected_rejection_coverage": [
+    {
+      "rejection_id": "consistency_fixture_must_be_readable",
+      "case_ids": [
+        "consistency_fixture_ref_missing"
+      ]
+    },
+    {
+      "rejection_id": "negative_fixture_must_be_readable",
+      "case_ids": [
+        "negative_fixture_ref_missing"
+      ]
+    },
+    {
+      "rejection_id": "robustness_fixture_must_be_readable",
+      "case_ids": [
+        "robustness_fixture_ref_missing"
+      ]
+    },
+    {
+      "rejection_id": "negative_source_shape_fixture_must_be_readable",
+      "case_ids": [
+        "negative_source_shape_fixture_ref_missing"
+      ]
+    },
+    {
+      "rejection_id": "canonical_fixture_must_be_readable",
+      "case_ids": [
+        "canonical_fixture_ref_missing"
+      ]
+    },
+    {
+      "rejection_id": "canonical_source_fixture_ref_required",
+      "case_ids": [
+        "index_canonical_ref_points_to_regex_source_fixture",
+        "canonical_fixture_ref_missing"
+      ]
+    },
+    {
+      "rejection_id": "policy_fixture_must_be_readable",
+      "case_ids": [
+        "negative_source_shape_fixture_ref_missing"
+      ]
+    },
+    {
+      "rejection_id": "consistency_fixture_type_must_match_index",
+      "case_ids": [
+        "index_consistency_ref_points_to_negative_fixture",
+        "consistency_fixture_ref_missing"
+      ]
+    },
+    {
+      "rejection_id": "negative_fixture_type_must_match_index",
+      "case_ids": [
+        "index_negative_ref_points_to_consistency_fixture",
+        "negative_fixture_ref_missing"
+      ]
+    },
+    {
+      "rejection_id": "robustness_fixture_type_must_match_index",
+      "case_ids": [
+        "robustness_fixture_ref_missing",
+        "robustness_fixture_type_mismatches_index"
+      ]
+    },
+    {
+      "rejection_id": "negative_source_shape_fixture_type_must_match_index",
+      "case_ids": [
+        "negative_source_shape_fixture_ref_missing",
+        "negative_source_shape_fixture_type_mismatches_index"
+      ]
+    },
+    {
+      "rejection_id": "canonical_fixture_type_must_match_index",
+      "case_ids": [
+        "index_canonical_ref_points_to_regex_source_fixture",
+        "canonical_fixture_ref_missing"
+      ]
+    },
+    {
+      "rejection_id": "canonical_source_fixture_type_must_match_index",
+      "case_ids": [
+        "index_canonical_ref_points_to_regex_source_fixture",
+        "canonical_fixture_ref_missing"
+      ]
+    },
+    {
+      "rejection_id": "consistency_backref_must_point_to_index_negative_fixture",
+      "case_ids": [
+        "index_consistency_ref_points_to_negative_fixture",
+        "index_negative_ref_points_to_consistency_fixture",
+        "consistency_backref_points_to_robustness_fixture",
+        "consistency_fixture_ref_missing"
+      ]
+    },
+    {
+      "rejection_id": "negative_backref_must_point_to_index_consistency_fixture",
+      "case_ids": [
+        "index_consistency_ref_points_to_negative_fixture",
+        "index_negative_ref_points_to_consistency_fixture",
+        "negative_backref_points_to_robustness_fixture",
+        "negative_fixture_ref_missing"
+      ]
+    },
+    {
+      "rejection_id": "policy_ref_fixtures_must_mutually_reference_index_refs",
+      "case_ids": [
+        "index_consistency_ref_points_to_negative_fixture",
+        "index_negative_ref_points_to_consistency_fixture",
+        "consistency_backref_points_to_robustness_fixture",
+        "negative_backref_points_to_robustness_fixture",
+        "consistency_fixture_ref_missing",
+        "negative_fixture_ref_missing"
+      ]
+    },
+    {
+      "rejection_id": "consistency_robustness_ref_must_match_index",
+      "case_ids": [
+        "consistency_fixture_ref_missing",
+        "robustness_fixture_ref_missing",
+        "consistency_robustness_ref_points_to_canonical_fixture"
+      ]
+    },
+    {
+      "rejection_id": "negative_robustness_ref_must_match_index",
+      "case_ids": [
+        "negative_fixture_ref_missing",
+        "robustness_fixture_ref_missing",
+        "negative_robustness_ref_points_to_canonical_fixture"
+      ]
+    },
+    {
+      "rejection_id": "consistency_negative_source_shape_ref_must_match_index",
+      "case_ids": [
+        "consistency_fixture_ref_missing",
+        "negative_source_shape_fixture_ref_missing",
+        "consistency_negative_source_shape_ref_points_to_robustness_fixture"
+      ]
+    },
+    {
+      "rejection_id": "negative_negative_source_shape_ref_must_match_index",
+      "case_ids": [
+        "negative_fixture_ref_missing",
+        "negative_source_shape_fixture_ref_missing",
+        "negative_negative_source_shape_ref_points_to_robustness_fixture"
+      ]
+    },
+    {
+      "rejection_id": "consistency_canonical_ref_must_match_index",
+      "case_ids": [
+        "index_canonical_ref_points_to_regex_source_fixture",
+        "consistency_canonical_ref_points_to_regex_source_fixture",
+        "consistency_fixture_ref_missing",
+        "canonical_fixture_ref_missing"
+      ]
+    },
+    {
+      "rejection_id": "negative_canonical_ref_must_match_index",
+      "case_ids": [
+        "index_canonical_ref_points_to_regex_source_fixture",
+        "negative_canonical_ref_points_to_regex_source_fixture",
+        "negative_fixture_ref_missing",
+        "canonical_fixture_ref_missing"
+      ]
+    },
+    {
+      "rejection_id": "consistency_shared_canonical_ref_must_match_index",
+      "case_ids": [
+        "index_shared_canonical_ref_points_to_regex_source_fixture",
+        "consistency_fixture_ref_missing"
+      ]
+    },
+    {
+      "rejection_id": "negative_shared_canonical_ref_must_match_index",
+      "case_ids": [
+        "index_shared_canonical_ref_points_to_regex_source_fixture",
+        "negative_fixture_ref_missing"
+      ]
+    },
+    {
+      "rejection_id": "robustness_canonical_ref_must_match_index",
+      "case_ids": [
+        "index_canonical_ref_points_to_regex_source_fixture",
+        "robustness_canonical_ref_points_to_regex_source_fixture",
+        "robustness_fixture_ref_missing",
+        "canonical_fixture_ref_missing"
+      ]
+    },
+    {
+      "rejection_id": "negative_source_shape_policy_ref_must_match_index_robustness",
+      "case_ids": [
+        "robustness_fixture_ref_missing",
+        "negative_source_shape_fixture_ref_missing",
+        "negative_source_shape_policy_ref_points_to_canonical_fixture"
+      ]
+    },
+    {
+      "rejection_id": "policy_fixture_type_must_match_robustness",
+      "case_ids": [
+        "robustness_fixture_ref_missing",
+        "negative_source_shape_fixture_ref_missing",
+        "robustness_fixture_type_mismatches_index",
+        "negative_source_shape_policy_ref_points_to_canonical_fixture"
+      ]
+    },
+    {
+      "rejection_id": "policy_canonical_ref_must_match_robustness",
+      "case_ids": [
+        "robustness_canonical_ref_points_to_regex_source_fixture",
+        "robustness_fixture_ref_missing",
+        "negative_source_shape_fixture_ref_missing",
+        "negative_source_shape_policy_ref_points_to_canonical_fixture"
+      ]
+    },
+    {
+      "rejection_id": "shared_canonical_ref_must_match_index_canonical_ref",
+      "case_ids": [
+        "index_canonical_ref_points_to_regex_source_fixture",
+        "index_shared_canonical_ref_points_to_regex_source_fixture",
+        "canonical_fixture_ref_missing"
+      ]
+    },
+    {
+      "rejection_id": "common_canonical_refs_must_match_index",
+      "case_ids": [
+        "index_canonical_ref_points_to_regex_source_fixture",
+        "consistency_canonical_ref_points_to_regex_source_fixture",
+        "negative_canonical_ref_points_to_regex_source_fixture",
+        "robustness_canonical_ref_points_to_regex_source_fixture",
+        "robustness_fixture_ref_missing",
+        "negative_source_shape_fixture_ref_missing",
+        "canonical_fixture_ref_missing",
+        "negative_source_shape_policy_ref_points_to_canonical_fixture"
+      ]
+    }
+  ],
+  "runtime_boundary": {
+    "no_handler": true,
+    "handler_execution_performed": false,
+    "migration_execution_performed": false,
+    "sqlite_file_created": false,
+    "database_write_performed": false,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "secret_value_read_performed": false
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "fixture_type": "onering_command_parser_regex_canonicalization",
+  "schema_version": "v0_1",
+  "purpose": "Prove the OneRing command parser regex literals in validators canonicalize to the fixture expected_allowed_command_regex.",
+  "canonical_fixture_ref": "tests/schema_examples/onering_command_parser_regex_source_consistency.example.json",
+  "expected_canonical_fixture_type": "onering_command_parser_regex_source_consistency",
+  "expected_parser_regex_literal_source": "^node (scripts\\/validate_onering[a-z0-9_]*\\.js)$",
+  "parser_sources": [
+    {
+      "id": "strictness_validator_parser",
+      "source_ref": "scripts/validate_onering_command_parser_strictness_guard.js"
+    },
+    {
+      "id": "negative_cases_validator_parser",
+      "source_ref": "scripts/validate_onering_command_parser_negative_cases_guard.js"
+    }
+  ],
+  "runtime_boundary": {
+    "no_handler": true,
+    "handler_execution_performed": false,
+    "migration_execution_performed": false,
+    "sqlite_file_created": false,
+    "database_write_performed": false,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "secret_value_read_performed": false
+  }
+}

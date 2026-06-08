@@ -1,0 +1,302 @@
+{
+  "fixture_type": "onering_required_for_coverage",
+  "schema_version": "v0_1",
+  "purpose": "Prove OneRing validation manifest required_for lists keep the expected patch and shared validation refs.",
+  "manifest_ref": "scripts/validation_manifest.json",
+  "domain": "onering_contract",
+  "expected_entries": [
+    {
+      "manifest_id": "onering_sql_hash_contract",
+      "required_for": [
+        "onering_sql_hash_contract_patch",
+        "onering_request_identity_contract_patch",
+        "onering_temp_store_contract_patch"
+      ]
+    },
+    {
+      "manifest_id": "onering_hash_identity_drift_guard",
+      "required_for": [
+        "onering_hash_identity_drift_guard_patch",
+        "onering_request_identity_contract_patch",
+        "onering_temp_store_contract_patch"
+      ]
+    },
+    {
+      "manifest_id": "onering_sql_migration_preview",
+      "required_for": [
+        "onering_sql_migration_preview_patch",
+        "onering_no_handler_migration_preview_patch",
+        "onering_sql_hash_contract_patch"
+      ]
+    },
+    {
+      "manifest_id": "onering_sql_migration_preview_drift_guard",
+      "required_for": [
+        "onering_sql_migration_preview_drift_guard_patch",
+        "onering_no_handler_migration_preview_patch",
+        "onering_sql_hash_contract_patch"
+      ]
+    },
+    {
+      "manifest_id": "onering_contract_bundle_index",
+      "required_for": [
+        "onering_contract_bundle_index_patch",
+        "onering_sql_hash_contract_patch",
+        "onering_sql_migration_preview_patch",
+        "onering_sql_migration_preview_drift_guard_patch"
+      ]
+    },
+    {
+      "manifest_id": "onering_manifest_recommendation_selector_guard",
+      "required_for": [
+        "onering_manifest_recommendation_selector_guard_patch",
+        "onering_contract_bundle_index_patch",
+        "validation_recommender_patch"
+      ]
+    },
+    {
+      "manifest_id": "onering_selector_negative_cases_guard",
+      "required_for": [
+        "onering_selector_negative_cases_guard_patch",
+        "onering_manifest_recommendation_selector_guard_patch",
+        "validation_recommender_patch"
+      ]
+    },
+    {
+      "manifest_id": "onering_recommendation_closeout_summary_guard",
+      "required_for": [
+        "onering_recommendation_closeout_summary_guard_patch",
+        "onering_manifest_recommendation_selector_guard_patch",
+        "validation_closeout_summary_patch",
+        "validation_recommender_patch"
+      ]
+    },
+    {
+      "manifest_id": "onering_mixed_change_closeout_guard",
+      "required_for": [
+        "onering_mixed_change_closeout_guard_patch",
+        "onering_selector_negative_cases_guard_patch",
+        "validation_closeout_summary_patch",
+        "validation_recommender_patch"
+      ]
+    },
+    {
+      "manifest_id": "onering_closeout_deferred_commands_guard",
+      "required_for": [
+        "onering_closeout_deferred_commands_guard_patch",
+        "onering_mixed_change_closeout_guard_patch",
+        "validation_closeout_summary_patch",
+        "validation_recommender_patch"
+      ]
+    },
+    {
+      "manifest_id": "onering_validator_manifest_ordering_guard",
+      "required_for": [
+        "onering_validator_manifest_ordering_guard_patch",
+        "validation_manifest_patch",
+        "targeted_plan_patch"
+      ]
+    },
+    {
+      "manifest_id": "onering_npm_script_manifest_command_mapping_guard",
+      "required_for": [
+        "onering_npm_script_manifest_command_mapping_guard_patch",
+        "validation_manifest_patch",
+        "package_script_patch"
+      ]
+    },
+    {
+      "manifest_id": "onering_trigger_paths_coverage_guard",
+      "required_for": [
+        "onering_trigger_paths_coverage_guard_patch",
+        "validation_manifest_patch",
+        "targeted_plan_patch"
+      ]
+    },
+    {
+      "manifest_id": "onering_required_for_coverage_guard",
+      "required_for": [
+        "onering_required_for_coverage_guard_patch",
+        "validation_manifest_patch",
+        "targeted_plan_patch"
+      ]
+    },
+    {
+      "manifest_id": "onering_manifest_status_runtime_class_guard",
+      "required_for": [
+        "onering_manifest_status_runtime_class_guard_patch",
+        "validation_manifest_patch",
+        "targeted_plan_patch"
+      ]
+    },
+    {
+      "manifest_id": "onering_manifest_tier_domain_guard",
+      "required_for": [
+        "onering_manifest_tier_domain_guard_patch",
+        "validation_manifest_patch",
+        "targeted_plan_patch"
+      ]
+    },
+    {
+      "manifest_id": "onering_manifest_command_script_basename_guard",
+      "required_for": [
+        "onering_manifest_command_script_basename_guard_patch",
+        "validation_manifest_patch",
+        "targeted_plan_patch"
+      ]
+    },
+    {
+      "manifest_id": "onering_manifest_duplicate_command_guard",
+      "required_for": [
+        "onering_manifest_duplicate_command_guard_patch",
+        "validation_manifest_patch",
+        "targeted_plan_patch"
+      ]
+    },
+    {
+      "manifest_id": "onering_manifest_duplicate_script_guard",
+      "required_for": [
+        "onering_manifest_duplicate_script_guard_patch",
+        "validation_manifest_patch",
+        "targeted_plan_patch"
+      ]
+    },
+    {
+      "manifest_id": "onering_manifest_id_script_basename_bijection_guard",
+      "required_for": [
+        "onering_manifest_id_script_basename_bijection_guard_patch",
+        "validation_manifest_patch",
+        "targeted_plan_patch"
+      ]
+    },
+    {
+      "manifest_id": "onering_npm_script_name_manifest_id_slug_guard",
+      "required_for": [
+        "onering_npm_script_name_manifest_id_slug_guard_patch",
+        "validation_manifest_patch",
+        "package_script_patch",
+        "targeted_plan_patch"
+      ]
+    },
+    {
+      "manifest_id": "onering_manifest_command_target_npm_script_target_guard",
+      "required_for": [
+        "onering_manifest_command_target_npm_script_target_guard_patch",
+        "validation_manifest_patch",
+        "package_script_patch",
+        "targeted_plan_patch"
+      ]
+    },
+    {
+      "manifest_id": "onering_command_parser_strictness_guard",
+      "required_for": [
+        "onering_command_parser_strictness_guard_patch",
+        "validation_manifest_patch",
+        "package_script_patch",
+        "targeted_plan_patch"
+      ]
+    },
+    {
+      "manifest_id": "onering_command_parser_negative_cases_guard",
+      "required_for": [
+        "onering_command_parser_negative_cases_guard_patch",
+        "validation_manifest_patch",
+        "package_script_patch",
+        "targeted_plan_patch"
+      ]
+    },
+    {
+      "manifest_id": "onering_command_parser_regex_source_consistency_guard",
+      "required_for": [
+        "onering_command_parser_regex_source_consistency_guard_patch",
+        "validation_manifest_patch",
+        "package_script_patch",
+        "targeted_plan_patch"
+      ]
+    },
+    {
+      "manifest_id": "onering_command_parser_regex_canonicalization_guard",
+      "required_for": [
+        "onering_command_parser_regex_canonicalization_guard_patch",
+        "validation_manifest_patch",
+        "package_script_patch",
+        "targeted_plan_patch"
+      ]
+    },
+    {
+      "manifest_id": "onering_command_parser_extractor_robustness_guard",
+      "required_for": [
+        "onering_command_parser_extractor_robustness_guard_patch",
+        "validation_manifest_patch",
+        "package_script_patch",
+        "targeted_plan_patch"
+      ]
+    },
+    {
+      "manifest_id": "onering_command_parser_extractor_negative_source_shape_guard",
+      "required_for": [
+        "onering_command_parser_extractor_negative_source_shape_guard_patch",
+        "validation_manifest_patch",
+        "package_script_patch",
+        "targeted_plan_patch"
+      ]
+    },
+    {
+      "manifest_id": "onering_command_parser_extractor_policy_ref_consistency_guard",
+      "required_for": [
+        "onering_command_parser_extractor_policy_ref_consistency_guard_patch",
+        "validation_manifest_patch",
+        "package_script_patch",
+        "targeted_plan_patch"
+      ]
+    },
+    {
+      "manifest_id": "onering_command_parser_extractor_policy_ref_negative_fixture_guard",
+      "required_for": [
+        "onering_command_parser_extractor_policy_ref_negative_fixture_guard_patch",
+        "validation_manifest_patch",
+        "package_script_patch",
+        "targeted_plan_patch"
+      ]
+    },
+    {
+      "manifest_id": "onering_command_parser_extractor_policy_ref_fixture_index_guard",
+      "required_for": [
+        "onering_command_parser_extractor_policy_ref_fixture_index_guard_patch",
+        "validation_manifest_patch",
+        "package_script_patch",
+        "targeted_plan_patch"
+      ]
+    },
+    {
+      "manifest_id": "onering_command_parser_extractor_policy_ref_fixture_index_negative_guard",
+      "required_for": [
+        "onering_command_parser_extractor_policy_ref_fixture_index_negative_guard_patch",
+        "validation_manifest_patch",
+        "package_script_patch",
+        "targeted_plan_patch"
+      ]
+    },
+    {
+      "manifest_id": "onering_command_parser_extractor_policy_ref_fixture_index_negative_coverage_guard",
+      "required_for": [
+        "onering_command_parser_extractor_policy_ref_fixture_index_negative_coverage_guard_patch",
+        "validation_manifest_patch",
+        "package_script_patch",
+        "targeted_plan_patch"
+      ]
+    }
+  ],
+  "runtime_boundary": {
+    "no_handler": true,
+    "handler_execution_performed": false,
+    "migration_execution_performed": false,
+    "sqlite_file_created": false,
+    "database_write_performed": false,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "secret_value_read_performed": false
+  }
+}

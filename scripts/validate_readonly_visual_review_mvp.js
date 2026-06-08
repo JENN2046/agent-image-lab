@@ -178,6 +178,11 @@ function createFakeElement(initial = {}) {
     innerHTML: "",
     title: "",
     className: initial.className || "",
+    style: {
+      setProperty(name, value) {
+        this[name] = String(value);
+      },
+    },
     classList: {
       add() {},
       remove() {},
@@ -207,9 +212,16 @@ function loadStaticMock() {
 
 function loadRenderedDraft(mock) {
   const elements = new Map();
+  const classElements = new Map();
   const ensureElement = (id, initial = {}) => {
     if (!elements.has(id)) elements.set(id, createFakeElement(initial));
     return elements.get(id);
+  };
+  const ensureClassElement = (className) => {
+    if (!classElements.has(className)) {
+      classElements.set(className, createFakeElement({ className }));
+    }
+    return classElements.get(className);
   };
 
   ensureElement("memoryTitle", { value: mock.review_session.memory_preview.chinese_diary_title });
@@ -231,12 +243,14 @@ function loadRenderedDraft(mock) {
     document: {
       querySelector(selector) {
         if (selector.startsWith("#")) return ensureElement(selector.slice(1));
+        if (/^\.[A-Za-z0-9_-]+$/.test(selector)) return ensureClassElement(selector.slice(1));
         throw new Error(`Unsupported static prototype selector: ${selector}`);
       },
       querySelectorAll(selector) {
         if (selector === "[data-archive]") return archiveButtons;
         if (selector === "[data-memory]") return memoryButtons;
         if (selector === "[data-lifecycle-filter]") return lifecycleButtons;
+        if (/^\.[A-Za-z0-9_-]+$/.test(selector)) return [];
         return [];
       },
       createElement() {

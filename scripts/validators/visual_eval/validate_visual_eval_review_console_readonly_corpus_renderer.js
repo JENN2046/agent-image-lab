@@ -99,6 +99,11 @@ function createFakeElement(initial = {}) {
     innerHTML: "",
     title: "",
     className: initial.className || "",
+    style: {
+      setProperty(name, value) {
+        this[name] = String(value);
+      },
+    },
     classList: {
       add() {},
       remove() {},
@@ -170,9 +175,16 @@ function collectFailureCodes(fn) {
 
 function loadRenderedStaticDraft(mock) {
   const elements = new Map();
+  const classElements = new Map();
   const ensureElement = (id, initial = {}) => {
     if (!elements.has(id)) elements.set(id, createFakeElement(initial));
     return elements.get(id);
+  };
+  const ensureClassElement = (className) => {
+    if (!classElements.has(className)) {
+      classElements.set(className, createFakeElement({ className }));
+    }
+    return classElements.get(className);
   };
 
   ensureElement("memoryTitle", { value: mock.review_session.memory_preview.chinese_diary_title });
@@ -194,12 +206,14 @@ function loadRenderedStaticDraft(mock) {
     document: {
       querySelector(selector) {
         if (selector.startsWith("#")) return ensureElement(selector.slice(1));
+        if (/^\.[A-Za-z0-9_-]+$/.test(selector)) return ensureClassElement(selector.slice(1));
         throw new Error(`Unsupported static prototype selector: ${selector}`);
       },
       querySelectorAll(selector) {
         if (selector === "[data-archive]") return archiveButtons;
         if (selector === "[data-memory]") return memoryButtons;
         if (selector === "[data-lifecycle-filter]") return lifecycleButtons;
+        if (/^\.[A-Za-z0-9_-]+$/.test(selector)) return [];
         return [];
       },
       createElement() {
@@ -226,7 +240,7 @@ function assertStaticSourceCoverage() {
   addResult("static_app_readonly_renderer_render_function_present", appSource.includes("function renderReadonlyReviewCorpusRenderer"));
   addResult("static_app_readonly_renderer_draft_output_present", appSource.includes("visual_eval_readonly_review_corpus_renderer_static_handoff"));
   addResult("static_styles_readonly_renderer_classes_present", styleSource.includes(".readonly-review-corpus-card"));
-  addResult("static_app_no_forbidden_runtime_calls", !/fetch\s*\(|XMLHttpRequest|writeFile|appendFile|fs\.|eval\s*\(|Function\s*\(/.test(appSource));
+  addResult("static_app_no_forbidden_runtime_calls", !/\bfetch\s*\(|XMLHttpRequest|writeFile|appendFile|\bfs\.|\beval\s*\(|\bFunction\s*\(/.test(appSource));
 }
 
 function validateHandoffAgainstRenderer(handoff, renderer) {

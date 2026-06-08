@@ -1,0 +1,76 @@
+{
+  "fixture_type": "onering_command_parser_extractor_policy_ref_negative_fixture",
+  "schema_version": "v0_1",
+  "purpose": "Prove bad OneRing extractor policy refs are rejected when policy_fixture_ref does not point to robustness or when canonical refs drift apart.",
+  "robustness_fixture_ref": "tests/schema_examples/onering_command_parser_extractor_robustness.example.json",
+  "negative_source_shape_fixture_ref": "tests/schema_examples/onering_command_parser_extractor_negative_source_shape.example.json",
+  "policy_ref_consistency_fixture_ref": "tests/schema_examples/onering_command_parser_extractor_policy_ref_consistency.example.json",
+  "canonical_fixture_ref": "tests/schema_examples/onering_command_parser_regex_canonicalization.example.json",
+  "expected_policy_fixture_type": "onering_command_parser_extractor_robustness",
+  "expected_negative_source_shape_fixture_type": "onering_command_parser_extractor_negative_source_shape",
+  "expected_consistency_fixture_type": "onering_command_parser_extractor_policy_ref_consistency",
+  "expected_canonical_fixture_type": "onering_command_parser_regex_canonicalization",
+  "expected_shared_canonical_fixture_ref": "tests/schema_examples/onering_command_parser_regex_canonicalization.example.json",
+  "negative_ref_cases": [
+    {
+      "case_id": "policy_ref_points_to_canonical_fixture",
+      "candidate_negative_source_shape_fixture": {
+        "policy_fixture_ref": "tests/schema_examples/onering_command_parser_regex_canonicalization.example.json"
+      },
+      "expected_rejection_ids": [
+        "policy_ref_must_equal_robustness_fixture_ref",
+        "policy_ref_type_must_be_robustness",
+        "policy_canonical_ref_must_equal_robustness_canonical_ref"
+      ]
+    },
+    {
+      "case_id": "policy_ref_points_to_negative_source_shape_fixture",
+      "candidate_negative_source_shape_fixture": {
+        "policy_fixture_ref": "tests/schema_examples/onering_command_parser_extractor_negative_source_shape.example.json"
+      },
+      "expected_rejection_ids": [
+        "policy_ref_must_equal_robustness_fixture_ref",
+        "policy_ref_type_must_be_robustness",
+        "policy_canonical_ref_must_equal_robustness_canonical_ref"
+      ]
+    },
+    {
+      "case_id": "robustness_canonical_ref_points_to_regex_source_fixture",
+      "candidate_robustness_fixture": {
+        "canonical_fixture_ref": "tests/schema_examples/onering_command_parser_regex_source_consistency.example.json"
+      },
+      "expected_rejection_ids": [
+        "robustness_canonical_ref_must_equal_shared_canonical_ref",
+        "robustness_canonical_ref_must_equal_fixture_canonical_ref",
+        "policy_canonical_ref_must_equal_robustness_canonical_ref"
+      ]
+    },
+    {
+      "case_id": "negative_expected_canonical_type_mismatches_robustness",
+      "candidate_negative_source_shape_fixture": {
+        "expected_canonical_fixture_type": "onering_command_parser_regex_source_consistency"
+      },
+      "expected_rejection_ids": [
+        "negative_expected_canonical_type_must_match_robustness",
+        "negative_expected_canonical_type_must_match_canonical_fixture"
+      ]
+    }
+  ],
+  "positive_controls": [
+    {
+      "case_id": "canonical_policy_ref_chain"
+    }
+  ],
+  "runtime_boundary": {
+    "no_handler": true,
+    "handler_execution_performed": false,
+    "migration_execution_performed": false,
+    "sqlite_file_created": false,
+    "database_write_performed": false,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "secret_value_read_performed": false
+  }
+}

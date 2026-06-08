@@ -1,0 +1,67 @@
+{
+  "fixture_type": "onering_sql_migration_preview_drift_cases",
+  "schema_version": "v0_1",
+  "source_contract": "tests/schema_examples/onering_sql_hash_contract.example.json",
+  "source_preview": "tests/schema_examples/onering_sql_migration_preview.example.json",
+  "purpose": "Prove that OneRing migration preview fails fast when the SQL/hash contract changes without a synchronized preview update.",
+  "drift_cases": [
+    {
+      "case_id": "contract_adds_request_column",
+      "contract_mutation": {
+        "add_column": {
+          "table": "onering_requests",
+          "column": { "name": "operator_ref", "type": "TEXT", "constraints": ["NOT NULL"] }
+        }
+      },
+      "expected_failures": [
+        "preview_statements_match_contract",
+        "source_ddl_hash_matches_contract"
+      ]
+    },
+    {
+      "case_id": "contract_adds_temp_index",
+      "contract_mutation": {
+        "add_index": {
+          "table": "onering_temp_store",
+          "index": { "name": "idx_onering_temp_store_namespace", "columns": ["namespace"], "unique": false }
+        }
+      },
+      "expected_failures": [
+        "preview_statements_match_contract",
+        "source_ddl_hash_matches_contract"
+      ]
+    },
+    {
+      "case_id": "contract_changes_migration_id",
+      "contract_mutation": {
+        "path": "sql_contract.migration_id",
+        "value": "onering_local_contract_002"
+      },
+      "expected_failures": [
+        "source_migration_id_matches"
+      ]
+    },
+    {
+      "case_id": "contract_changes_snapshot_hash_column_type",
+      "contract_mutation": {
+        "set_column_type": {
+          "table": "onering_snapshots",
+          "column": "canonical_json",
+          "type": "BLOB"
+        }
+      },
+      "expected_failures": [
+        "preview_statements_match_contract",
+        "source_ddl_hash_matches_contract"
+      ]
+    }
+  ],
+  "runtime_boundary": {
+    "no_handler": true,
+    "handler_execution_performed": false,
+    "migration_execution_performed": false,
+    "sqlite_file_created": false,
+    "database_write_performed": false,
+    "secret_value_read_performed": false
+  }
+}

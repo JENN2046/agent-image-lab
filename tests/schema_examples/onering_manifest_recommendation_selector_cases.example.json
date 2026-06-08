@@ -1,0 +1,128 @@
+{
+  "fixture_type": "onering_manifest_recommendation_selector_cases",
+  "schema_version": "v0_1",
+  "purpose": "Prove OneRing contract file changes stay on the targeted recommendation path and select the correct OneRing validators.",
+  "expected_primary_profile": "targeted",
+  "expected_primary_command": "npm run validate:targeted-plan",
+  "expected_base_commands": [
+    "node scripts/validate_validation_manifest.js",
+    "npm run validate:smoke",
+    "npm run validate:targeted-plan"
+  ],
+  "cases": [
+    {
+      "case_id": "source_contract_fixture",
+      "changed_files": ["tests/schema_examples/onering_sql_hash_contract.example.json"],
+      "expected_validator_ids": [
+        "onering_sql_hash_contract",
+        "onering_hash_identity_drift_guard",
+        "onering_sql_migration_preview",
+        "onering_sql_migration_preview_drift_guard",
+        "onering_contract_bundle_index"
+      ]
+    },
+    {
+      "case_id": "source_contract_negative_cases",
+      "changed_files": ["tests/schema_examples/onering_sql_hash_contract_negative_cases.example.json"],
+      "expected_validator_ids": [
+        "onering_sql_hash_contract",
+        "onering_contract_bundle_index"
+      ]
+    },
+    {
+      "case_id": "hash_identity_drift_cases",
+      "changed_files": ["tests/schema_examples/onering_hash_identity_drift_cases.example.json"],
+      "expected_validator_ids": [
+        "onering_hash_identity_drift_guard",
+        "onering_contract_bundle_index"
+      ]
+    },
+    {
+      "case_id": "migration_preview_fixture",
+      "changed_files": ["tests/schema_examples/onering_sql_migration_preview.example.json"],
+      "expected_validator_ids": [
+        "onering_sql_migration_preview",
+        "onering_sql_migration_preview_drift_guard",
+        "onering_contract_bundle_index"
+      ]
+    },
+    {
+      "case_id": "migration_preview_negative_cases",
+      "changed_files": ["tests/schema_examples/onering_sql_migration_preview_negative_cases.example.json"],
+      "expected_validator_ids": [
+        "onering_sql_migration_preview",
+        "onering_contract_bundle_index"
+      ]
+    },
+    {
+      "case_id": "migration_preview_drift_cases",
+      "changed_files": ["tests/schema_examples/onering_sql_migration_preview_drift_cases.example.json"],
+      "expected_validator_ids": [
+        "onering_sql_migration_preview_drift_guard",
+        "onering_contract_bundle_index"
+      ]
+    },
+    {
+      "case_id": "bundle_index_fixture",
+      "changed_files": ["tests/schema_examples/onering_contract_bundle_index.example.json"],
+      "expected_validator_ids": [
+        "onering_contract_bundle_index"
+      ]
+    },
+    {
+      "case_id": "source_contract_validator",
+      "changed_files": ["scripts/validate_onering_sql_hash_contract.js"],
+      "expected_validator_ids": [
+        "onering_sql_hash_contract",
+        "onering_hash_identity_drift_guard",
+        "onering_sql_migration_preview",
+        "onering_sql_migration_preview_drift_guard",
+        "onering_contract_bundle_index"
+      ]
+    },
+    {
+      "case_id": "hash_identity_drift_validator",
+      "changed_files": ["scripts/validate_onering_hash_identity_drift_guard.js"],
+      "expected_validator_ids": [
+        "onering_hash_identity_drift_guard",
+        "onering_contract_bundle_index"
+      ]
+    },
+    {
+      "case_id": "migration_preview_validator",
+      "changed_files": ["scripts/validate_onering_sql_migration_preview.js"],
+      "expected_validator_ids": [
+        "onering_sql_migration_preview",
+        "onering_sql_migration_preview_drift_guard",
+        "onering_contract_bundle_index"
+      ]
+    },
+    {
+      "case_id": "migration_preview_drift_validator",
+      "changed_files": ["scripts/validate_onering_sql_migration_preview_drift_guard.js"],
+      "expected_validator_ids": [
+        "onering_sql_migration_preview_drift_guard",
+        "onering_contract_bundle_index"
+      ]
+    },
+    {
+      "case_id": "bundle_index_validator",
+      "changed_files": ["scripts/validate_onering_contract_bundle_index.js"],
+      "expected_validator_ids": [
+        "onering_contract_bundle_index"
+      ]
+    }
+  ],
+  "runtime_boundary": {
+    "no_handler": true,
+    "handler_execution_performed": false,
+    "migration_execution_performed": false,
+    "sqlite_file_created": false,
+    "database_write_performed": false,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "secret_value_read_performed": false
+  }
+}
