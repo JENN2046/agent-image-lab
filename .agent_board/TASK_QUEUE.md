@@ -133,6 +133,58 @@
       Remaining gate: prepare `r2r_v2_trial_001_serum_detail_control` activation packet as no-execute; real execution remains separately gated.
 ---
 
+- [x] ID: review_console_preview_gates_onering_pr11_terminal_status_surface_sync_20260608
+      Lane: Green terminal post-push/PR status-surface sync.
+      Status: completed_validated_pr_head_verified.
+      Goal: Record that the current .agent_board status surfaces were committed, pushed, opened as PR #11, and later verified at the PR head after the origin/master conflict-resolution merge.
+      Branch: `codex/review-console-preview-gates-onering`.
+      Base: `master`.
+      PR: `https://github.com/JENN2046/agent-image-lab/pull/11`.
+      Published commit: resolve from the current PR/head checkout; do not use the initial local status commit as the published tree.
+      Reviewed status commit before this repair: `7f61bd7ca4b3804491cd169ae07b1645199ff503 merge: sync master into pr branch`.
+      Base head verified before this repair: `4b3c0d980d9392ed85a26f6326118b44fd2b0643`.
+      Boundary: exact-file staging only; no `git add .`; no force push/history rewrite; no tag/release/deploy; no provider/plugin/API/image generation; no DailyNote/VCP memory write; no dependency change; no secret/env/config read.
+      terminal_status_surface_sync: true.
+      post_push_followup: read_only_remote_sync_only.
+      no_followup_agent_board_write_after_push: true.
+      Remaining gate: after this review repair is committed and, if authorized, pushed by normal fast-forward, read-only remote/PR verification only.
+---
+
+- [x] ID: master_ref_fast_forward_sync_20260608
+      Lane: Green local remote-read plus non-checkout master ref fast-forward and status-surface update.
+      Status: completed_validated_local_master_ref_ff_sync.
+      Goal: Sync local `master` after the user clarified the target branch was master.
+      Current worktree branch: `codex/review-console-preview-gates-onering`.
+      Synced branch: `master`.
+      Upstream: `origin/master`.
+      Previous master HEAD: `60fa4a659927c486834dac4a582af792d9813787`.
+      New master HEAD: `4b3c0d980d9392ed85a26f6326118b44fd2b0643`.
+      Remote commit: `4b3c0d98 Merge pull request #10 from JENN2046/codex/runtime-to-review-trial002-ail-preflight-20260608`.
+      Completed: fetched origin; verified master was behind 19 / ahead 0; verified fast-forward ancestry; ran `git fetch origin master:master`.
+      Boundary: no checkout; no worktree overwrite; no merge commit; no rebase; no staging; no commit; no push/tag/release/deploy; no provider/plugin/API/image generation; no DailyNote/VCP memory write; no secret/env/config read.
+      Validation after status-surface sync: `git rev-list --left-right --count master...origin/master` returned `0 0`; `git rev-parse master` matched `origin/master` at `4b3c0d980d9392ed85a26f6326118b44fd2b0643`; `node scripts/validate_agent_board_state.js` passed; explicit-file validation recommender passed with primary_profile targeted; `node scripts/validate_validation_manifest.js` passed; `npm run validate:smoke` passed with 33 checks; `npm run validate:targeted-plan` passed as dry-run with 108 selected commands; `git diff --check` passed with CRLF normalization warnings only; `git status --short --branch` showed current branch aligned with upstream and only .agent_board status-surface edits.
+      Remaining gate: review local status-surface diff; commit only if explicitly requested; push remains unauthorized.
+---
+
+- [x] ID: remote_fast_forward_sync_current_branch_20260608
+      Lane: Green local remote-read plus fast-forward branch sync and status-surface update.
+      Status: completed_validated_local_ff_sync.
+      Goal: Sync current branch after the user reported remote updates.
+      Branch: `codex/review-console-preview-gates-onering`.
+      Upstream: `origin/codex/review-console-preview-gates-onering`.
+      Previous HEAD: `b73c6b25d4d75b8728447f1cced92daccb72174e`.
+      New HEAD: `7e23bec88bd08baf81228a83c65d83a2642948ce`.
+      Remote commit: `7e23bec8 review_console: sync version preview selection`.
+      Fast-forward files changed by remote:
+        - `review_console/static_prototype/app.js`
+        - `scripts/validators/review_console/validate_review_console_preview_display_state.js`
+      Completed: fetched origin; verified current branch was behind 1 / ahead 0; verified fast-forward ancestry; ran `git merge --ff-only`.
+      Boundary: no merge commit; no rebase; no staging; no commit; no push/tag/release/deploy; no provider/plugin/API/image generation; no DailyNote/VCP memory write; no secret/env/config read.
+      Validation before status-surface sync: app syntax passed; preview-display validator syntax passed; `npm run validate:review-console-preview-display` passed with 137 checks; `git diff --check` passed before .agent_board edits.
+      Validation after status-surface sync: `node scripts/validate_agent_board_state.js` passed; explicit-file validation recommender passed with primary_profile targeted; `node scripts/validate_validation_manifest.js` passed; `npm run validate:smoke` passed with 33 checks; `npm run validate:targeted-plan` passed as dry-run with 108 selected commands; `git diff --check` passed with CRLF normalization warnings only; `git status --short --branch` showed branch aligned with upstream and only .agent_board status-surface edits.
+      Remaining gate: review local status-surface diff; commit only if explicitly requested; push remains unauthorized.
+---
+
 - [x] ID: review_console_asset_archive_tracked_preview_render_p1_fix_20260608
       Lane: Green local PR review fix with browser and route validation.
       Status: completed_validated_clean_checkout_render_fix_pending_final_validation.

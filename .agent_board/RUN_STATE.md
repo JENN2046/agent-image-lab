@@ -419,6 +419,132 @@ boundary_checks:
 next_safe_task: prepare r2r_v2_trial_001_serum_detail_control activation packet with can_execute_now=false; do not run provider/image until a separate exact activation gate exists.
 ```
 
+## Current Run State - PR 11 Terminal Status Surface Sync 2026-06-08
+
+```text
+phase: review_console_preview_gates_onering_pr11_terminal_status_surface_sync_20260608
+status: completed_validated_pr_head_verified
+lane: Green terminal post-push/PR status-surface sync
+goal: Record that the all-current dirty status surfaces were committed, pushed, opened as PR #11, and later verified at the PR head after the origin/master conflict-resolution merge.
+repository: A:\AGENTS_OS_Workspace\domains\agent-image-lab\agent-image-lab-v0.2
+branch: codex/review-console-preview-gates-onering
+base: master
+remote: origin
+pr_number: 11
+pr_url: https://github.com/JENN2046/agent-image-lab/pull/11
+pr_state: open_ready_for_review
+published_commit:
+  - resolve from current PR/head checkout; do not use the initial local status commit as the published tree
+reviewed_status_commit_before_repair: 7f61bd7ca4b3804491cd169ae07b1645199ff503
+reviewed_status_commit_subject_before_repair: merge: sync master into pr branch
+base_head_verified_before_repair: 4b3c0d980d9392ed85a26f6326118b44fd2b0643
+mergeable_verified_before_repair: MERGEABLE
+boundary_checks:
+  git_add_dot_used: false
+  force_push_or_history_rewrite_performed: false
+  tag_release_deploy_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  dependency_change_performed: false
+  secret_env_config_read_performed: false
+terminal_status_surface_sync: true
+post_push_followup: read_only_remote_sync_only
+no_followup_agent_board_write_after_push: true
+next_safe_task: after this review repair is committed and, if authorized, pushed by normal fast-forward, perform read-only remote/PR verification only.
+```
+
+## Current Run State - Master Ref Fast-forward Sync 2026-06-08
+
+```text
+phase: master_ref_fast_forward_sync_20260608
+status: completed_validated_local_master_ref_ff_sync
+lane: Green local remote-read plus non-checkout master ref fast-forward and status-surface update
+goal: Sync the local master ref to origin/master without checking out master, because the current worktree carries dirty .agent_board status surfaces.
+current_worktree_branch: codex/review-console-preview-gates-onering
+synced_branch: master
+upstream: origin/master
+previous_master_head: 60fa4a659927c486834dac4a582af792d9813787
+new_master_head: 4b3c0d980d9392ed85a26f6326118b44fd2b0643
+remote_commit_subject: Merge pull request #10 from JENN2046/codex/runtime-to-review-trial002-ail-preflight-20260608
+result:
+  - origin fetched successfully
+  - master was behind origin/master by 19 commits and ahead by 0 commits
+  - master was fast-forwardable to origin/master
+  - local master ref was advanced from 60fa4a65 to 4b3c0d98 using git fetch origin master:master
+  - current worktree branch remained codex/review-console-preview-gates-onering
+post_status_surface_validation_completed:
+  - git rev-list --left-right --count master...origin/master returned 0 0
+  - git rev-parse master matched git rev-parse origin/master at 4b3c0d980d9392ed85a26f6326118b44fd2b0643
+  - node scripts/validate_agent_board_state.js passed
+  - node scripts/recommend_validation_for_changed_files.js .agent_board/HANDOFF.md .agent_board/RUN_STATE.md .agent_board/TASK_QUEUE.md .agent_board/CHECKPOINT.md passed with primary_profile targeted
+  - node scripts/validate_validation_manifest.js passed
+  - npm run validate:smoke passed with 33 checks
+  - npm run validate:targeted-plan passed as dry-run with 108 selected commands
+  - git diff --check passed with CRLF normalization warnings only
+  - git status --short --branch showed current branch aligned with upstream and only .agent_board status-surface edits
+boundary_checks:
+  checkout_performed: false
+  merge_commit_created: false
+  rebase_performed: false
+  push_tag_release_deploy_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  secret_env_config_read_performed: false
+next_safe_task: review the local status-surface diff; commit only if explicitly requested; push remains unauthorized.
+```
+
+## Current Run State - Remote Fast-forward Sync 2026-06-08
+
+```text
+phase: remote_fast_forward_sync_current_branch_20260608
+status: completed_validated_local_ff_sync
+lane: Green local remote-read plus fast-forward branch sync and status-surface update
+goal: Sync the current branch to the updated upstream head after the user reported remote updates.
+branch: codex/review-console-preview-gates-onering
+upstream: origin/codex/review-console-preview-gates-onering
+previous_head: b73c6b25d4d75b8728447f1cced92daccb72174e
+new_head: 7e23bec88bd08baf81228a83c65d83a2642948ce
+remote_commit_subject: review_console: sync version preview selection
+result:
+  - origin fetched successfully
+  - current branch was behind upstream by 1 commit and ahead by 0 commits
+  - current branch fast-forwarded from b73c6b25 to 7e23bec8
+  - remote changed Review Console app and preview-display validator surfaces only
+validation:
+  - node --check review_console/static_prototype/app.js passed
+  - node --check scripts/validators/review_console/validate_review_console_preview_display_state.js passed
+  - npm run validate:review-console-preview-display passed with 137 checks
+  - git diff --check passed before this status-surface update
+post_status_surface_validation_completed:
+  - node scripts/validate_agent_board_state.js passed
+  - node scripts/recommend_validation_for_changed_files.js .agent_board/HANDOFF.md .agent_board/RUN_STATE.md .agent_board/TASK_QUEUE.md .agent_board/CHECKPOINT.md passed with primary_profile targeted
+  - node scripts/validate_validation_manifest.js passed
+  - npm run validate:smoke passed with 33 checks
+  - npm run validate:targeted-plan passed as dry-run with 108 selected commands
+  - git diff --check passed with CRLF normalization warnings only
+  - git status --short --branch showed branch aligned with upstream and only .agent_board status-surface edits
+boundary_checks:
+  merge_commit_created: false
+  rebase_performed: false
+  push_tag_release_deploy_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  secret_env_config_read_performed: false
+next_safe_task: review the local status-surface diff; commit only if explicitly requested; push remains unauthorized.
+```
+
 ## Current Run State - Tracked Preview Render P1 Fix 2026-06-08
 
 ```text

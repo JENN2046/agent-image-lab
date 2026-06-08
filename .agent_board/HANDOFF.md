@@ -386,6 +386,120 @@ not_performed:
 next_safe_action: prepare the no-execute activation packet for r2r_v2_trial_001_serum_detail_control; real execution requires a separate exact activation gate.
 ```
 
+## Current Handoff Update - PR 11 Terminal Status Surface Sync 2026-06-08
+
+```text
+phase: review_console_preview_gates_onering_pr11_terminal_status_surface_sync_20260608
+status: completed_validated_pr_head_verified
+repository: A:\AGENTS_OS_Workspace\domains\agent-image-lab\agent-image-lab-v0.2
+branch: codex/review-console-preview-gates-onering
+base: master
+remote: origin
+pr_number: 11
+pr_url: https://github.com/JENN2046/agent-image-lab/pull/11
+pr_state: open_ready_for_review
+completed:
+  - exact-file staged and committed the four .agent_board status surfaces
+  - pushed codex/review-console-preview-gates-onering to origin
+  - opened PR #11 against master
+  - merged origin/master into the PR branch to resolve .agent_board conflicts
+  - verified PR #11 head before this review repair as 7f61bd7ca4b3804491cd169ae07b1645199ff503
+  - recorded that future agents must resolve the published status-surface tree from the current PR/head checkout, not from the initial local status commit
+terminal_status_surface_sync: true
+post_push_followup: read_only_remote_sync_only
+no_followup_agent_board_write_after_push: true
+not_performed:
+  - no git add .
+  - no force push or history rewrite
+  - no tag, release, or deploy
+  - no provider/plugin/API/image generation
+  - no DailyNote/VCP memory write
+  - no dependency change
+  - no secret/env/config read
+next_safe_action: after this review repair is committed and, if authorized, pushed by normal fast-forward, perform read-only remote/PR verification only and do not write another .agent_board entry.
+```
+
+## Current Handoff Update - Master Ref Fast-forward Sync 2026-06-08
+
+```text
+phase: master_ref_fast_forward_sync_20260608
+status: completed_validated_local_master_ref_ff_sync
+repository: A:\agent-image-lab\agent-image-lab-v0.2
+current_worktree_branch: codex/review-console-preview-gates-onering
+synced_branch: master
+upstream: origin/master
+goal: Sync local master after the user clarified the target branch was master, while preserving the current dirty worktree status surfaces.
+previous_master_head: 60fa4a659927c486834dac4a582af792d9813787
+new_master_head: 4b3c0d980d9392ed85a26f6326118b44fd2b0643
+remote_commit: 4b3c0d98 Merge pull request #10 from JENN2046/codex/runtime-to-review-trial002-ail-preflight-20260608
+completed:
+  - fetched origin
+  - verified local master was behind origin/master by 19 commits and ahead by 0 commits
+  - verified master was an ancestor of origin/master
+  - fast-forwarded the local master ref with git fetch origin master:master
+  - avoided git switch/checkout because current .agent_board status surfaces were dirty and origin/master also changes .agent_board files
+validation_completed_after_status_surface_sync:
+  - git rev-list --left-right --count master...origin/master returned 0 0
+  - git rev-parse master matched git rev-parse origin/master at 4b3c0d980d9392ed85a26f6326118b44fd2b0643
+  - node scripts/validate_agent_board_state.js passed
+  - node scripts/recommend_validation_for_changed_files.js .agent_board/HANDOFF.md .agent_board/RUN_STATE.md .agent_board/TASK_QUEUE.md .agent_board/CHECKPOINT.md passed with primary_profile targeted
+  - node scripts/validate_validation_manifest.js passed
+  - npm run validate:smoke passed with 33 checks
+  - npm run validate:targeted-plan passed as dry-run with 108 selected commands
+  - git diff --check passed with CRLF normalization warnings only
+  - git status --short --branch showed current branch aligned with upstream and only .agent_board status-surface edits
+not_performed:
+  - no checkout or worktree overwrite
+  - no merge commit or rebase
+  - no staging, commit, push, tag, release, or deploy
+  - no provider/plugin/API/image generation
+  - no DailyNote/VCP memory write
+  - no secret/env/config read
+next_safe_action: review the local status-surface diff; commit only if explicitly requested; push remains unauthorized.
+```
+
+## Current Handoff Update - Remote Fast-forward Sync 2026-06-08
+
+```text
+phase: remote_fast_forward_sync_current_branch_20260608
+status: completed_validated_local_ff_sync
+repository: A:\agent-image-lab\agent-image-lab-v0.2
+branch: codex/review-console-preview-gates-onering
+goal: Sync the current branch after the user reported remote updates.
+upstream: origin/codex/review-console-preview-gates-onering
+previous_head: b73c6b25d4d75b8728447f1cced92daccb72174e
+new_head: 7e23bec88bd08baf81228a83c65d83a2642948ce
+remote_commit: 7e23bec8 review_console: sync version preview selection
+fast_forward_files_changed_by_remote:
+  - review_console/static_prototype/app.js
+  - scripts/validators/review_console/validate_review_console_preview_display_state.js
+completed:
+  - fetched origin and observed current branch behind 1 / ahead 0
+  - verified HEAD was an ancestor of upstream
+  - fast-forwarded the current branch with git merge --ff-only
+  - recorded the new local baseline in the agent-board resume surfaces
+validation_completed_before_status_surface_sync:
+  - node --check review_console/static_prototype/app.js passed
+  - node --check scripts/validators/review_console/validate_review_console_preview_display_state.js passed
+  - npm run validate:review-console-preview-display passed with 137 checks
+  - git diff --check passed before .agent_board status-surface edits
+validation_completed_after_status_surface_sync:
+  - node scripts/validate_agent_board_state.js passed
+  - node scripts/recommend_validation_for_changed_files.js .agent_board/HANDOFF.md .agent_board/RUN_STATE.md .agent_board/TASK_QUEUE.md .agent_board/CHECKPOINT.md passed with primary_profile targeted
+  - node scripts/validate_validation_manifest.js passed
+  - npm run validate:smoke passed with 33 checks
+  - npm run validate:targeted-plan passed as dry-run with 108 selected commands
+  - git diff --check passed with CRLF normalization warnings only
+  - git status --short --branch showed branch aligned with upstream and only .agent_board status-surface edits
+not_performed:
+  - no merge commit or rebase
+  - no staging, commit, push, tag, release, or deploy
+  - no provider/plugin/API/image generation
+  - no DailyNote/VCP memory write
+  - no secret/env/config read
+next_safe_action: review the local status-surface diff; commit only if explicitly requested; push remains unauthorized.
+```
+
 ## Current Handoff Update - Tracked Preview Render P1 Fix 2026-06-08
 
 ```text
