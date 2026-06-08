@@ -377,6 +377,40 @@ async function main() {
       result.calls_used.api === 0 &&
       !fs.existsSync(repoPath(outputDir));
   });
+  await checkAsync("existing_output_directory_stops_before_dispatch", async () => {
+    const outputPath = repoPath(outputDir);
+    if (fs.existsSync(outputPath)) return false;
+    let postCalled = false;
+    try {
+      fs.mkdirSync(outputPath, { recursive: true });
+      const request = trial002RuntimeRequest(bridge, runner, adapter);
+      const result = await adapter.realBoundOwnerRuntimeDelegate(request, {
+        postJson: async () => {
+          postCalled = true;
+          return {
+            ok: true,
+            statusCode: 200,
+            body: { ok: true, outputRefs: [`${outputDir}should_not_be_used.png`] },
+          };
+        },
+      });
+      return result.status === "BLOCKED_R2R_V2_TRIAL_002_BROKER_DISPATCH_FAILED_CLOSED" &&
+        result.blocker === "r2r_v2_trial_002_output_directory_exists" &&
+        postCalled === false &&
+        result.output_write_performed === false &&
+        result.provider_contact_performed === false &&
+        result.plugin_call_performed === false &&
+        result.api_call_performed === false &&
+        result.image_generation_performed === false &&
+        result.calls_used.provider === 0 &&
+        result.calls_used.plugin === 0 &&
+        result.calls_used.api === 0;
+    } finally {
+      if (fs.existsSync(outputPath)) {
+        fs.rmdirSync(outputPath);
+      }
+    }
+  });
   check("recommended_next_is_external_binding_then_binding_ready_packet", () =>
     packet.recommended_next === "bind_trial_002_internal_route_and_authorizer_in_vcptoolbox_then_issue_binding_ready_execution_packet_with_can_execute_now_true"
   );

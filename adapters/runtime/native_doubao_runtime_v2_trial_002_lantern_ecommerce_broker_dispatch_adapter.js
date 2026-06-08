@@ -391,7 +391,10 @@ async function realBoundOwnerRuntimeDelegate(request, options = {}) {
     return failClosed("r2r_v2_trial_002_prompt_package_invalid");
   }
 
-  repoRelativePath(request.output_directory_ref, "output directory");
+  const output = repoRelativePath(request.output_directory_ref, "output directory");
+  if (fs.existsSync(output.resolved)) {
+    return failClosed("r2r_v2_trial_002_output_directory_exists");
+  }
 
   const post = typeof options.postJson === "function" ? options.postJson : postJson;
   const response = await post(options.routeUrl || defaultRouteUrl, routeRequestBody({

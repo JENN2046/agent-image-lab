@@ -1947,9 +1947,11 @@ done:
   - task: issue AIL-side binding preflight packet
     evidence: reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_ail_side_binding_preflight_20260608.json.
   - task: validate local binding without route/provider/plugin/API/image dispatch
-    evidence: scripts/validate_runtime_to_review_v2_trial_002_ail_side_binding_preflight.js passed, 25 checks.
+    evidence: scripts/validate_runtime_to_review_v2_trial_002_ail_side_binding_preflight.js passed, 26 checks.
   - task: fix failed dispatch output directory side effect
     evidence: adapter no longer creates the Trial 002 run directory before broker dispatch; validator failed_route_does_not_create_output_directory passed.
+  - task: enforce existing output directory stop before dispatch
+    evidence: adapter fail-closes with r2r_v2_trial_002_output_directory_exists before postJson; validator existing_output_directory_stops_before_dispatch passed.
   - task: draft exact-file staging package for AIL-side closeout
     evidence: reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_ail_side_binding_exact_file_staging_package_draft_20260608.json; package validator passed, 10 checks.
 in_progress:

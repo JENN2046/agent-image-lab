@@ -4844,7 +4844,7 @@ changed_refs:
 validation_completed:
   - node --check adapters\runtime\native_doubao_runtime_v2_trial_002_lantern_ecommerce_broker_dispatch_adapter.js: passed
   - node --check scripts\validate_runtime_to_review_v2_trial_002_ail_side_binding_preflight.js: passed
-  - node scripts\validate_runtime_to_review_v2_trial_002_ail_side_binding_preflight.js: passed, 25 checks
+  - node scripts\validate_runtime_to_review_v2_trial_002_ail_side_binding_preflight.js: passed, 26 checks
   - node scripts\validate_runtime_to_review_v2_trial_002_activation_packet_no_execute.js: passed, 20 checks
   - node scripts\validate_runtime_to_review_v2_multi_prompt_controlled_trial_plan.js: passed, 24 checks
   - node scripts\validate_prompt_schema.js --type prompt_package prompts\image_generation\product_lifestyle_premium_portable_led_camping_lantern_v2.yaml: passed
@@ -4876,7 +4876,7 @@ changed_refs:
 validation_completed:
   - node --check scripts\validate_runtime_to_review_v2_trial_002_review_and_execution_preflight_templates.js: passed
   - node scripts\validate_runtime_to_review_v2_trial_002_review_and_execution_preflight_templates.js: passed, 16 checks
-  - node scripts\validate_runtime_to_review_v2_trial_002_ail_side_binding_preflight.js: passed, 25 checks
+  - node scripts\validate_runtime_to_review_v2_trial_002_ail_side_binding_preflight.js: passed, 26 checks
   - node scripts\validate_runtime_to_review_v2_trial_002_activation_packet_no_execute.js: passed, 20 checks
 not_performed:
   - no route HTTP request
@@ -4898,20 +4898,21 @@ recommended_next: exact-file local commit for these AIL-side template files; kee
 phase: runtime_to_review_v2_trial_002_failed_dispatch_output_directory_guard_pr10
 status: completed_validated_local_pr_review_fix_pending_commit_push
 result: TRIAL_002_FAILED_DISPATCH_NO_OUTPUT_DIRECTORY_SIDE_EFFECT
-summary: Addressed PR feedback by removing the pre-dispatch mkdir for the Trial 002 output directory. The adapter now only validates the requested output directory before broker dispatch, so a missing, unreachable, or rejecting route cannot leave runs/real_generation/runtime_to_review_v2_trial_002_lantern_ecommerce_hero/ behind while reporting output_write_performed=false.
+summary: Addressed PR feedback by removing the pre-dispatch mkdir for the Trial 002 output directory and by enforcing the existing-output-directory stop condition before dispatch. The adapter now validates the requested output directory and fail-closes on collision before broker dispatch, so a missing, unreachable, rejecting, or stale-output route cannot consume call budget or leave runs/real_generation/runtime_to_review_v2_trial_002_lantern_ecommerce_hero/ in an unsafe state while reporting output_write_performed=false.
 changed_refs:
   - adapters/runtime/native_doubao_runtime_v2_trial_002_lantern_ecommerce_broker_dispatch_adapter.js
   - scripts/validate_runtime_to_review_v2_trial_002_ail_side_binding_preflight.js
 validation_completed:
   - node --check adapters\runtime\native_doubao_runtime_v2_trial_002_lantern_ecommerce_broker_dispatch_adapter.js: passed
   - node --check scripts\validate_runtime_to_review_v2_trial_002_ail_side_binding_preflight.js: passed
-  - node scripts\validate_runtime_to_review_v2_trial_002_ail_side_binding_preflight.js: passed, 25 checks
+  - node scripts\validate_runtime_to_review_v2_trial_002_ail_side_binding_preflight.js: passed, 26 checks
 not_performed:
   - no real route HTTP request
   - no provider/plugin/API call
   - no image generation
   - no output write
   - no output directory creation on failed route
+  - no route POST when output directory already exists
   - no VCPToolBox modification
 recommended_next: run final validator set, exact-file stage, commit, and push the existing PR branch.
 ```

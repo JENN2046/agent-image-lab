@@ -14,7 +14,8 @@ Result: ALL REQUIRED CHECKS PASSED
 Findings:
   - Fixed PR feedback by removing the pre-dispatch mkdir for the Trial 002 run directory.
   - The adapter now validates output_directory_ref before dispatch without creating the directory.
-  - The validator added failed_route_does_not_create_output_directory and passed 25 checks / 0 failures.
+  - Added fail-closed collision enforcement before dispatch when the Trial 002 output directory already exists.
+  - The validator added failed_route_does_not_create_output_directory and existing_output_directory_stops_before_dispatch, then passed 26 checks / 0 failures.
 
 Side effects:
   - real_route_http_request_performed: false
@@ -23,6 +24,7 @@ Side effects:
   - api_call_performed: false
   - image_generation_performed: false
   - output_directory_created_on_failed_route: false
+  - route_post_called_when_output_directory_exists: false
   - VCPToolBox_modified: false
 
 ## VALIDATION-20260608-RUNTIME-TO-REVIEW-V2-TRIAL-002-LANTERN-NO-EXECUTE-PACKET

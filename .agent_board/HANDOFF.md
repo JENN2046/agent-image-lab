@@ -4496,15 +4496,17 @@ goal: Address PR feedback that Trial 002 failed dispatch must not create the no-
 completed:
   - Removed pre-dispatch mkdir for runs/real_generation/runtime_to_review_v2_trial_002_lantern_ecommerce_hero/.
   - Added validator coverage for a stubbed missing/unreachable route returning fail-closed with no output directory created.
+  - Added fail-closed collision guard before dispatch when the Trial 002 output directory already exists.
 validation_completed:
   - node --check adapters\runtime\native_doubao_runtime_v2_trial_002_lantern_ecommerce_broker_dispatch_adapter.js passed.
   - node --check scripts\validate_runtime_to_review_v2_trial_002_ail_side_binding_preflight.js passed.
-  - node scripts\validate_runtime_to_review_v2_trial_002_ail_side_binding_preflight.js passed, 25 checks.
+  - node scripts\validate_runtime_to_review_v2_trial_002_ail_side_binding_preflight.js passed, 26 checks.
 not_performed_addendum:
   - no real route HTTP request
   - no provider/plugin/API call
   - no image generation
   - no output write
+  - no route POST when output directory already exists
   - no VCPToolBox modification
 next_safe_action: run final validators, exact-file stage, local commit, and push the PR branch.
 ```

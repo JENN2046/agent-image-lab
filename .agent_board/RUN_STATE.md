@@ -3896,7 +3896,7 @@ result:
 validation:
   - node --check adapters\runtime\native_doubao_runtime_v2_trial_002_lantern_ecommerce_broker_dispatch_adapter.js passed
   - node --check scripts\validate_runtime_to_review_v2_trial_002_ail_side_binding_preflight.js passed
-  - node scripts\validate_runtime_to_review_v2_trial_002_ail_side_binding_preflight.js passed, 25 checks
+  - node scripts\validate_runtime_to_review_v2_trial_002_ail_side_binding_preflight.js passed, 26 checks
   - node scripts\validate_runtime_to_review_v2_trial_002_activation_packet_no_execute.js passed, 20 checks
   - node scripts\validate_runtime_to_review_v2_multi_prompt_controlled_trial_plan.js passed, 24 checks
   - node scripts\validate_prompt_schema.js --type prompt_package prompts\image_generation\product_lifestyle_premium_portable_led_camping_lantern_v2.yaml passed
@@ -3932,10 +3932,11 @@ changed_refs:
 result:
   - Trial 002 runtime delegate now validates the output directory path without creating it before broker dispatch.
   - The validator now stubs a failed broker route and asserts output_write_performed=false, zero provider/plugin/API/image calls, and no output directory creation.
+  - The validator also creates a temporary existing output directory and asserts the adapter fail-closes before dispatch without calling postJson.
 validation:
   - node --check adapters\runtime\native_doubao_runtime_v2_trial_002_lantern_ecommerce_broker_dispatch_adapter.js passed
   - node --check scripts\validate_runtime_to_review_v2_trial_002_ail_side_binding_preflight.js passed
-  - node scripts\validate_runtime_to_review_v2_trial_002_ail_side_binding_preflight.js passed, 25 checks
+  - node scripts\validate_runtime_to_review_v2_trial_002_ail_side_binding_preflight.js passed, 26 checks
 boundary_checks:
   route_http_request_performed_by_validator_stub: false
   provider_contact_performed: false
@@ -3944,6 +3945,7 @@ boundary_checks:
   image_generation_performed: false
   output_write_performed: false
   output_directory_created_on_failed_route: false
+  route_post_called_when_output_directory_exists: false
   VCPToolBox_modified: false
 next_safe_task: run final local validators, exact-file stage this PR feedback fix, commit, and push the existing PR branch.
 ```
@@ -3968,7 +3970,7 @@ result:
 validation:
   - node --check scripts\validate_runtime_to_review_v2_trial_002_review_and_execution_preflight_templates.js passed
   - node scripts\validate_runtime_to_review_v2_trial_002_review_and_execution_preflight_templates.js passed, 16 checks
-  - node scripts\validate_runtime_to_review_v2_trial_002_ail_side_binding_preflight.js passed, 25 checks
+  - node scripts\validate_runtime_to_review_v2_trial_002_ail_side_binding_preflight.js passed, 26 checks
   - node scripts\validate_runtime_to_review_v2_trial_002_activation_packet_no_execute.js passed, 20 checks
 boundary_checks:
   route_http_request_performed: false
