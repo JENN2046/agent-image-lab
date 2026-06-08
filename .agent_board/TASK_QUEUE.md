@@ -1,3 +1,138 @@
+- [x] ID: runtime_to_review_v2_trial_001_vcptoolbox_internal_authorizer_binding_20260608
+      Lane: Amber local external runtime integration with exact Trial 001 scope.
+      Status: completed_validated_external_local_vcptoolbox_binding_no_generation.
+      Goal: Bind VCPToolBox Internal Authorizer / Restricted Plugin Facade for Trial 001 secretless activation.
+      External repo: `A:\VCP\apps\VCPToolBox`.
+      Changed external files:
+        - `A:\VCP\apps\VCPToolBox\server.js`
+        - `A:\VCP\apps\VCPToolBox\routes\admin\aiImageAgents.js`
+      Local validator: `scripts/validate_runtime_to_review_v2_trial_001_vcptoolbox_internal_authorizer_binding.js`.
+      Receipt: `reports/runtime_to_review_v2/r2r_v2_trial_001_vcptoolbox_internal_authorizer_binding_receipt_20260608.json`.
+      Completed: added exact Trial 001 internal route binding, route-level exact authorizer, restricted facade validation, pm2 `vcp-main` restart with AI image flags, and no-secret invalid probe.
+      Boundary: invalid route probe only; no provider/plugin/API/image generation; no secret/env/config read; no Agent Image Lab Authorization header; no accepted_samples/production/DailyNote/VCP memory write; no push/tag/release/deploy.
+      Validation: VCPToolBox syntax passed; binding validator passed, 10 checks; invalid POST now reaches route-level authorizer instead of 401/404.
+      Remaining gate: clean empty output directory or issue a new output packet, then rearm attempt 003 and execute once.
+---
+
+- [x] ID: runtime_to_review_v2_trial_001_execution_attempt_002_failed_closed_20260608
+      Lane: Amber_B exact one-shot dispatch attempt after authorized empty-dir cleanup.
+      Status: blocked_failed_closed_broker_authorization_required_no_image.
+      Goal: Re-arm Trial 001 after the local broker route was started and execute exactly once.
+      Rearm packet: `reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_rearm_packet_attempt_002_20260608.json`.
+      Attempt receipt: `reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_execution_attempt_002_failed_closed_20260608.json`.
+      Completed: verified and removed the empty output directory with explicit user authorization, re-ran pre-dispatch validators, then ran the packet command exactly once with `--max-images 1` and no retry flags.
+      Result: route was reachable, but returned HTTP 401 requiring Bearer authorization; Agent Image Lab did not construct an Authorization header.
+      Boundary: route HTTP attempted; plugin route contacted; no provider/API/image generation; no image output; no secret/env/config read; no accepted_samples/production/DailyNote/VCP memory write; no push/tag/release/deploy.
+      Filesystem effect: `runs/real_generation/runtime_to_review_v2_trial_001_serum_detail_control/` was created again and is empty; success receipt/artifact/review bridge were not created.
+      Remaining gate: bind the internal authorizer or restricted plugin facade so secretless activation can be accepted without Agent Image Lab reading/constructing secrets, then rearm with a clean output policy.
+---
+
+- [x] ID: runtime_to_review_v2_trial_001_execution_attempt_001_failed_closed_20260608
+      Lane: Amber_B exact one-shot dispatch attempt.
+      Status: blocked_failed_closed_route_unreachable_no_image.
+      Goal: Execute Trial 001 exactly once from the binding-ready packet.
+      Attempt receipt: `reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_execution_attempt_001_failed_closed_20260608.json`.
+      Completed: ran all pre-dispatch validators, then ran the packet command exactly once with `--max-images 1` and no retry flags.
+      Result: failed closed because the local broker route `http://127.0.0.1:6005/internal/ai-image-agents/execute/r2r-v2-trial-001-serum-detail-control` was unreachable.
+      Boundary: route HTTP attempted; no provider/plugin/API/image generation; no image output; no secret; no accepted_samples/production/DailyNote/VCP memory write; no push/tag/release/deploy.
+      Filesystem effect: `runs/real_generation/runtime_to_review_v2_trial_001_serum_detail_control/` was created and is empty; success receipt/artifact/review bridge were not created.
+      Validation: pre-dispatch validators passed before the attempt; no retry performed because Trial 001 is zero-retry.
+      Remaining gate: start the required local broker route and issue a new clean execution packet, or explicitly authorize cleanup of the empty output directory before rearming Trial 001.
+---
+
+- [x] ID: runtime_to_review_v2_trial_001_exact_v2_binding_ready_packet_20260608
+      Lane: Green local exact binding / packet creation; future dispatch is Amber_B and still not performed.
+      Status: completed_validated_local_exact_binding_and_binding_ready_packet_no_dispatch.
+      Goal: Create the exact v2 runtime binding / broker dispatch adapter and a binding-ready packet that flips `can_execute_now=true`.
+      Adapter: `adapters/runtime/native_doubao_runtime_v2_trial_001_serum_detail_broker_dispatch_adapter.js`.
+      Fixture: `tests/fixtures/runtime_kernel_v2_trial_001_serum_detail_control_task.fixture.json`.
+      Packet: `reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_binding_ready_execution_packet_20260608.json`.
+      Validators:
+        - `scripts/validate_runtime_to_review_v2_trial_001_exact_runtime_binding.js`
+        - `scripts/validate_runtime_to_review_v2_trial_001_binding_ready_execution_packet.js`
+      Completed: exact v2 prompt/output are allowed by the secretless bridge; adapter binds Trial 001 to the v2 detail-control prompt and run directory; packet has `can_execute_now=true`, `dispatch_performed=false`, and `activation_consumed=false`; budget remains one route / one provider / one plugin / one API / one image / zero retry.
+      Boundary: no route HTTP; no provider/plugin/API/image generation; no output write; no real manifest/VCPChat/VCPToolBox read; no secret; no accepted_samples/production/DailyNote/VCP memory write; no push/tag/release/deploy.
+      Validation: exact runtime binding validator passed, 12 checks; binding-ready packet validator passed, 14 checks; secretless bridge regression passed, 43 checks.
+      Remaining gate: run pre-dispatch validators, then perform exactly one Trial 001 dispatch only when the user explicitly says to execute Trial 001.
+---
+
+- [x] ID: runtime_to_review_v2_trial_001_future_execution_packet_20260608
+      Lane: Green local execution packet creation; future dispatch remains Amber_B and blocked until exact v2 runtime binding exists.
+      Status: completed_validated_local_future_execution_conditions_locked_no_dispatch.
+      Goal: Create the independent Trial 001 future execution packet and lock the real execution conditions to one route / one provider / one plugin / one API / one image / zero retry.
+      Packet: `reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_future_execution_packet_20260608.json`.
+      Validator: `scripts/validate_runtime_to_review_v2_trial_001_future_execution_packet.js`.
+      Completed: locked exact prompt ref, budget, output policy, review queue requirement, receipt/artifact/review-bridge writes after successful dispatch, and no accepted_samples/production/memory write before human review.
+      Binding gap: current known v1 serum runtime allows `prompts/image_generation/product_lifestyle_premium_serum_bottle_v1.yaml`; Trial 001 requires `prompts/image_generation/product_detail_premium_serum_bottle_v2.yaml`, so `can_execute_now=false` until exact v2 binding exists.
+      Boundary: no route HTTP; no provider/plugin/API/image generation; no output write; no real manifest/VCPChat/VCPToolBox read; no secret; no accepted_samples/production/DailyNote/VCP memory write; no push/tag/release/deploy.
+      Validation: future packet validator passed, 15 checks; readiness preflight validator passed, 16 checks.
+      Remaining gate: create exact v2 runtime binding or broker dispatch adapter, then issue a new binding-ready execution packet that can flip `can_execute_now=true`.
+---
+
+- [x] ID: runtime_to_review_v2_trial_001_execution_readiness_preflight_20260608
+      Lane: Green local readiness preflight for future Amber_B provider/image execution.
+      Status: completed_validated_local_readiness_preflight_no_execute.
+      Goal: Enter the controlled real-execution preflight lane for Trial 001 without performing the actual run.
+      Preflight: `reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_execution_readiness_preflight_20260608.json`.
+      Validator: `scripts/validate_runtime_to_review_v2_trial_001_execution_readiness_preflight.js`.
+      Completed: verified current packet remains `prepared_no_execute` / `can_execute_now=false`; verified prompt is detail-control and intentionally blank label only; verified output directory and expected receipt/artifact/review bridge refs are absent; recorded the requirements for a separate future execution packet.
+      Boundary: no route HTTP; no provider/plugin/API/image generation; no output write; no real manifest/VCPChat/VCPToolBox read; no secret; no accepted_samples/production/DailyNote/VCP memory write; no push/tag/release/deploy.
+      Validation: new preflight validator passed, 16 checks; Trial 001 no-execute packet validator passed, 19 checks.
+      Remaining gate: create a separate future execution packet for exactly one provider/plugin/API/image, then add exact v2 runtime/broker binding before dispatch.
+---
+
+- [x] ID: runtime_to_review_v2_trial_001_blank_label_single_choice_fix_20260608
+      Lane: Green local prompt/packet/validator correction.
+      Status: completed_validated_local_prompt_semantics_fix_no_execute.
+      Goal: Remove the blank/brandable label ambiguity by choosing intentionally blank label only for Trial 001.
+      Completed: prompt now requires an intentionally blank, plain, empty label panel; packet constraints require blank_label_required=true and forbid readable text/logo/decorative marks; validators reject brandable wording and old label-or-no-label focus fields.
+      Boundary: no route HTTP; no provider/plugin/API/image generation; no output write; no secret; no accepted_samples/production/DailyNote/VCP memory write; no push/tag/release/deploy.
+      Validation: prompt schema passed; v2 trial plan validator passed, 24 checks; Trial 001 packet validator passed, 19 checks.
+      Remaining gate: review corrected blank-label packet; branded-label generation must be separate.
+---
+
+- [x] ID: runtime_to_review_v2_trial_001_prompt_correction_20260608
+      Lane: Green local prompt package correction plus validator tightening.
+      Status: completed_validated_local_prompt_correction_no_execute.
+      Goal: Fix Trial 001 so it actually tests product_detail_controlled_studio instead of reusing the attempt-018 hero prompt as execution input.
+      New prompt: `prompts/image_generation/product_detail_premium_serum_bottle_v2.yaml`.
+      Source lineage prompt: `prompts/image_generation/product_lifestyle_premium_serum_bottle_v1.yaml`.
+      Completed: added a schema-valid detail-control prompt; updated the v2 plan, fixture, packet, and validators; validators now reject silent old hero prompt reuse and require detail-shot role tokens.
+      Boundary: no route HTTP; no provider/plugin/API/image generation; no output write; no secret; no accepted_samples/production/DailyNote/VCP memory write; no push/tag/release/deploy.
+      Validation: prompt schema passed; v2 trial plan validator passed, 24 checks; Trial 001 packet validator passed, 19 checks.
+      Remaining gate: review corrected packet; real execution still requires a separate future execution packet.
+---
+
+- [x] ID: runtime_to_review_v2_trial_001_activation_packet_no_execute_20260608
+      Lane: Green local activation packet draft only.
+      Status: completed_validated_local_packet_no_execute.
+      Goal: Prepare the no-execute activation packet for r2r_v2_trial_001_serum_detail_control.
+      Packet: `reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_activation_packet_no_execute_20260608.json`.
+      Validator: `scripts/validate_runtime_to_review_v2_trial_001_activation_packet_no_execute.js`.
+      Completed: fixed VisualJobContract, ShotPlan, ReviewPolicy, future binding id, exact future phrase, one-call budget, no-overwrite output policy, stop conditions, side-effect flags false, and corrected execution prompt ref to the v2 detail-control prompt.
+      Boundary: `can_execute_now=false`; no route HTTP; no provider/plugin/API/image generation; no output write; no real manifest/VCPChat/VCPToolBox read; no secret; no accepted_samples/production/DailyNote/VCP memory write; no push/tag/release/deploy.
+      Validation: prompt schema passed; packet validator passed, 19 checks; v2 trial plan validator passed, 23 checks.
+      Remaining gate: human/project review of packet; any real execution requires a separate future execution packet.
+---
+
+- [x] ID: runtime_to_review_v2_multi_prompt_controlled_trial_plan_20260608
+      Lane: Green local architecture planning plus validator.
+      Status: completed_validated_local_plan_no_execute.
+      Goal: Follow the "light organize now, run 2-3 controlled trials next, extract broker later" rhythm after attempt-018 closeout.
+      Changed refs:
+        - `docs/runtime_to_review_v2_multi_prompt_controlled_trial_plan.md`
+        - `tests/schema_examples/runtime_to_review_v2_multi_prompt_controlled_trial_plan.example.json`
+        - `scripts/validate_runtime_to_review_v2_multi_prompt_controlled_trial_plan.js`
+        - `.agent_board/HANDOFF.md`
+        - `.agent_board/RUN_STATE.md`
+        - `.agent_board/TASK_QUEUE.md`
+        - `.agent_board/CHECKPOINT.md`
+      Completed: defined the VisualJobContract / ShotPlan / ReviewPolicy -> VCP Image Execution Broker direction; selected 3 v2 trial cases; added a no-execute validator; required future activation packets with `can_execute_now=false`.
+      Boundary: no route HTTP; no provider/plugin/API/image generation; no real manifest/VCPChat/VCPToolBox read; no secret read; no accepted_samples/production/DailyNote/VCP memory write; no push/tag/release/deploy.
+      Validation: v2 trial plan validator passed, 21 checks.
+      Remaining gate: prepare `r2r_v2_trial_001_serum_detail_control` activation packet as no-execute; real execution remains separately gated.
+---
+
 - [x] ID: review_console_preview_gates_onering_pr11_terminal_status_surface_sync_20260608
       Lane: Green terminal post-push/PR status-surface sync.
       Status: terminal_status_surface_sync_pending_commit.

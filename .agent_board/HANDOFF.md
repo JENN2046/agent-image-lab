@@ -1,3 +1,391 @@
+## Current Handoff Update - Runtime-To-Review V2 Trial 001 VCPToolBox Internal Authorizer Binding 2026-06-08
+
+```text
+phase: runtime_to_review_v2_trial_001_vcptoolbox_internal_authorizer_binding_20260608
+status: completed_validated_external_local_vcptoolbox_binding_no_generation
+repository: A:\agent-image-lab\agent-image-lab-v0.2
+external_repository: A:\VCP\apps\VCPToolBox
+external_branch: codex/onering-server-inferred-timeline-20260608
+goal: Bind Internal Authorizer / Restricted Plugin Facade so Trial 001 secretless activation is accepted at route level without Agent Image Lab constructing Authorization headers.
+changed_external_files:
+  - A:\VCP\apps\VCPToolBox\server.js
+  - A:\VCP\apps\VCPToolBox\routes\admin\aiImageAgents.js
+changed_local_files:
+  - scripts/validate_runtime_to_review_v2_trial_001_vcptoolbox_internal_authorizer_binding.js
+  - reports/runtime_to_review_v2/r2r_v2_trial_001_vcptoolbox_internal_authorizer_binding_receipt_20260608.json
+completed:
+  - added Trial 001 exact route path to VCPToolBox internal Bearer bypass for loopback HEAD/POST
+  - added Trial 001 route-level restricted facade and exact activation validator
+  - added Trial 001 authorizer branch in VCPToolBox server authorizer
+  - restarted pm2 vcp-main with ENABLE_AI_IMAGE_AGENTS_ROUTE=true, ENABLE_AI_IMAGE_REAL_EXECUTION=true, ENABLE_NATIVE_DOUBAO_SECRETLESS_RUNTIME_DELEGATE=true
+  - verified HEAD route returns 204
+  - verified invalid no-secret POST reaches route validator and returns r2r_v2_trial_001_payload_unknown_fields
+validation_completed:
+  - node --check A:\VCP\apps\VCPToolBox\server.js passed
+  - node --check A:\VCP\apps\VCPToolBox\routes\admin\aiImageAgents.js passed
+  - node scripts\validate_runtime_to_review_v2_trial_001_vcptoolbox_internal_authorizer_binding.js passed, 10 checks
+not_performed:
+  - no provider contact
+  - no plugin call
+  - no API call
+  - no image generation
+  - no secret/env/config read
+  - no Agent Image Lab Authorization header construction
+  - no accepted_samples write
+  - no production candidate write
+  - no DailyNote/VCP memory write
+  - no commit, push, tag, release, or deploy
+remaining_blocker:
+  - empty output directory from attempt 002 still exists
+next_safe_action: clean empty output directory or issue a new output packet, then rearm attempt 003 and execute once.
+```
+
+## Current Handoff Update - Runtime-To-Review V2 Trial 001 Execution Attempt 002 Failed Closed 2026-06-08
+
+```text
+phase: runtime_to_review_v2_trial_001_execution_attempt_002_failed_closed_20260608
+status: blocked_failed_closed_broker_authorization_required_no_image
+repository: A:\agent-image-lab\agent-image-lab-v0.2
+branch: master
+goal: Re-arm and execute Trial 001 exactly once after the user started the local broker route.
+rearm_packet: reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_rearm_packet_attempt_002_20260608.json
+attempt_receipt: reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_execution_attempt_002_failed_closed_20260608.json
+completed:
+  - verified empty output directory was inside workspace and empty
+  - removed empty output directory with explicit user authorization
+  - created attempt 002 rearm packet
+  - re-ran pre-dispatch validators successfully
+  - executed the packet command exactly once
+  - did not add retry flags
+  - did not override prompt or output path
+result:
+  - status: failed_closed
+  - route was reachable
+  - HTTP 401 Unauthorized
+  - blocker: Bearer authorization required by broker route
+  - Agent Image Lab did not construct Authorization header
+  - provider/plugin/api calls used: 0/1/0
+  - image_count: 0
+  - success receipt/artifact/review bridge not created
+filesystem_effect:
+  - runs/real_generation/runtime_to_review_v2_trial_001_serum_detail_control/ was cleaned before attempt 002
+  - same directory was created again by attempt 002
+  - directory is empty after the failed-closed attempt
+not_performed:
+  - no provider contact
+  - no API call
+  - no image generation
+  - no image output write
+  - no secret/env/config read
+  - no accepted_samples write
+  - no production candidate write
+  - no DailyNote/VCP memory write
+  - no commit, push, tag, release, or deploy
+blocker:
+  - broker route requires Bearer authorization
+  - project contract forbids Agent Image Lab from constructing Authorization header
+  - same output path cannot be reused without cleanup or a new packet/path because no-overwrite now sees the empty directory
+next_safe_action: bind the internal authorizer or restricted plugin facade so secretless activation is accepted without Agent Image Lab reading/constructing secrets, then rearm with clean output policy.
+```
+
+## Current Handoff Update - Runtime-To-Review V2 Trial 001 Execution Attempt 001 Failed Closed 2026-06-08
+
+```text
+phase: runtime_to_review_v2_trial_001_execution_attempt_001_failed_closed_20260608
+status: blocked_failed_closed_route_unreachable_no_image
+repository: A:\agent-image-lab\agent-image-lab-v0.2
+branch: master
+goal: Execute Trial 001 exactly once.
+attempt_receipt: reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_execution_attempt_001_failed_closed_20260608.json
+source_packet: reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_binding_ready_execution_packet_20260608.json
+completed:
+  - ran all required pre-dispatch validators
+  - executed the packet command exactly once
+  - did not add retry flags
+  - did not override prompt or output path
+result:
+  - status: failed_closed
+  - stop_reason: provider_delegate_result_invalid
+  - delegate blocker: r2r_v2_trial_001_broker_route_unreachable
+  - route URL: http://127.0.0.1:6005/internal/ai-image-agents/execute/r2r-v2-trial-001-serum-detail-control
+  - provider/plugin/api calls used: 0/0/0
+  - image_count: 0
+  - success receipt/artifact/review bridge not created
+filesystem_effect:
+  - runs/real_generation/runtime_to_review_v2_trial_001_serum_detail_control/ was created
+  - directory is empty after the failed-closed attempt
+not_performed:
+  - no provider contact
+  - no plugin call
+  - no API call
+  - no image generation
+  - no image output write
+  - no secret/env/config read
+  - no accepted_samples write
+  - no production candidate write
+  - no DailyNote/VCP memory write
+  - no commit, push, tag, release, or deploy
+blocker:
+  - required local broker route is not reachable on 127.0.0.1:6005
+  - same output path cannot be reused without cleanup or a new packet/path because no-overwrite now sees the empty directory
+next_safe_action: start the local broker route and issue a new clean execution packet, or explicitly authorize cleanup of the empty output directory before rearming Trial 001.
+```
+
+## Current Handoff Update - Runtime-To-Review V2 Trial 001 Exact V2 Binding Ready Packet 2026-06-08
+
+```text
+phase: runtime_to_review_v2_trial_001_exact_v2_binding_ready_packet_20260608
+status: completed_validated_local_exact_binding_and_binding_ready_packet_no_dispatch
+repository: A:\agent-image-lab\agent-image-lab-v0.2
+branch: master
+goal: Create exact v2 runtime binding / broker dispatch adapter, then issue a binding-ready execution packet that flips can_execute_now=true without dispatching.
+adapter: adapters/runtime/native_doubao_runtime_v2_trial_001_serum_detail_broker_dispatch_adapter.js
+fixture: tests/fixtures/runtime_kernel_v2_trial_001_serum_detail_control_task.fixture.json
+binding_ready_packet: reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_binding_ready_execution_packet_20260608.json
+completed:
+  - extended scripts/native_doubao_secretless_provider_runtime_bridge.js allowlist to the exact v2 Trial 001 prompt/output refs
+  - added the Trial 001 v2 broker dispatch adapter
+  - added the exact runtime task fixture
+  - added the binding-ready execution packet with can_execute_now=true
+  - kept dispatch_performed=false and activation_consumed=false
+  - added validators for exact runtime binding and the binding-ready packet
+validation_completed:
+  - node --check adapters/runtime/native_doubao_runtime_v2_trial_001_serum_detail_broker_dispatch_adapter.js passed
+  - node --check scripts/validate_runtime_to_review_v2_trial_001_exact_runtime_binding.js passed
+  - node --check scripts/validate_runtime_to_review_v2_trial_001_binding_ready_execution_packet.js passed
+  - node scripts/validate_runtime_to_review_v2_trial_001_exact_runtime_binding.js passed, 12 checks
+  - node scripts/validate_runtime_to_review_v2_trial_001_binding_ready_execution_packet.js passed, 14 checks
+  - node scripts/validate_v0_6_73h_secretless_provider_runtime_bridge.js passed, 43 checks
+not_performed:
+  - no route HTTP
+  - no provider contact
+  - no plugin call
+  - no API call
+  - no image generation
+  - no output write
+  - no real manifest/VCPChat/VCPToolBox read
+  - no secret/env/config read
+  - no accepted_samples write
+  - no production candidate write
+  - no DailyNote/VCP memory write
+  - no commit, push, tag, release, or deploy
+next_safe_action: run pre-dispatch validators, then execute exactly one Trial 001 dispatch only when the user explicitly says to execute Trial 001.
+```
+
+## Current Handoff Update - Runtime-To-Review V2 Trial 001 Future Execution Packet 2026-06-08
+
+```text
+phase: runtime_to_review_v2_trial_001_future_execution_packet_20260608
+status: completed_validated_local_future_execution_conditions_locked_no_dispatch
+repository: A:\agent-image-lab\agent-image-lab-v0.2
+branch: master
+goal: Create an independent Trial 001 future execution packet that locks one route / one provider / one plugin / one API / one image / zero retry.
+packet: reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_future_execution_packet_20260608.json
+validator: scripts/validate_runtime_to_review_v2_trial_001_future_execution_packet.js
+completed:
+  - created the Trial 001 future execution packet
+  - locked prompt ref to prompts/image_generation/product_detail_premium_serum_bottle_v2.yaml
+  - locked budget to one route HTTP / one provider / one plugin / one API / one image / zero retry
+  - locked output policy to run-directory-only with no overwrite
+  - required receipt, artifact record, and review bridge after successful dispatch
+  - kept accepted_samples, production candidate, DailyNote, and VCP memory writes blocked before human review
+  - recorded current binding gap: the known v1 serum runtime only allows prompts/image_generation/product_lifestyle_premium_serum_bottle_v1.yaml
+  - kept can_execute_now=false until exact v2 runtime/broker binding exists
+validation_completed:
+  - node --check scripts/validate_runtime_to_review_v2_trial_001_future_execution_packet.js passed
+  - node scripts/validate_runtime_to_review_v2_trial_001_future_execution_packet.js passed, 15 checks
+  - node scripts/validate_runtime_to_review_v2_trial_001_execution_readiness_preflight.js passed, 16 checks
+not_performed:
+  - no route HTTP
+  - no provider contact
+  - no plugin call
+  - no API call
+  - no image generation
+  - no output write
+  - no real manifest/VCPChat/VCPToolBox read
+  - no secret/env/config read
+  - no accepted_samples write
+  - no production candidate write
+  - no DailyNote/VCP memory write
+  - no commit, push, tag, release, or deploy
+next_safe_action: create exact v2 runtime binding or broker dispatch adapter, then issue a new binding-ready execution packet that flips can_execute_now=true.
+```
+
+## Current Handoff Update - Runtime-To-Review V2 Trial 001 Execution Readiness Preflight 2026-06-08
+
+```text
+phase: runtime_to_review_v2_trial_001_execution_readiness_preflight_20260608
+status: completed_validated_local_readiness_preflight_no_execute
+repository: A:\agent-image-lab\agent-image-lab-v0.2
+branch: master
+goal: Enter the controlled real-execution preflight lane for Trial 001 while keeping the current packet non-executable.
+preflight: reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_execution_readiness_preflight_20260608.json
+validator: scripts/validate_runtime_to_review_v2_trial_001_execution_readiness_preflight.js
+completed:
+  - checked the no-execute packet and confirmed can_execute_now=false
+  - checked the v2 prompt still encodes product_detail_controlled_studio and intentionally_blank_label_only
+  - checked the run output directory is absent
+  - checked expected receipt, artifact record, and review bridge refs are absent
+  - recorded future execution packet requirements: separate file, one provider/plugin/API/image, no retry, secretless activation, generated_unreviewed review queue first, and can_execute_now=false until exact v2 runtime/broker binding exists
+validation_completed:
+  - node --check scripts/validate_runtime_to_review_v2_trial_001_execution_readiness_preflight.js passed
+  - node scripts/validate_runtime_to_review_v2_trial_001_execution_readiness_preflight.js passed, 16 checks
+  - node scripts/validate_runtime_to_review_v2_trial_001_activation_packet_no_execute.js passed, 19 checks
+not_performed:
+  - no route HTTP
+  - no provider contact
+  - no plugin call
+  - no API call
+  - no image generation
+  - no output write
+  - no real manifest/VCPChat/VCPToolBox read
+  - no secret/env/config read
+  - no accepted_samples write
+  - no production candidate write
+  - no DailyNote/VCP memory write
+  - no commit, push, tag, release, or deploy
+next_safe_action: create a separate future execution packet for Trial 001, then add exact v2 runtime/broker binding before any real dispatch.
+```
+
+## Current Handoff Update - Runtime-To-Review V2 Trial 001 Blank Label Single-Choice Fix 2026-06-08
+
+```text
+phase: runtime_to_review_v2_trial_001_blank_label_single_choice_fix_20260608
+status: completed_validated_local_prompt_semantics_fix_no_execute
+repository: A:\agent-image-lab\agent-image-lab-v0.2
+branch: master
+goal: Make Trial 001 label intent unambiguous by choosing intentionally blank label only.
+completed:
+  - removed blank-or-brandable label wording from Trial 001 prompt semantics
+  - updated prompt text to require a centered intentionally blank, plain, empty label panel
+  - updated packet constraints to require blank_label_required=true and forbid readable text/logo/decorative mark
+  - updated review focus to intentionally_blank_label_boundary and no_readable_text_logo_or_decorative_mark
+  - tightened validators to reject brandable wording and old label-or-no-label focus fields
+validation_completed:
+  - node scripts/validate_prompt_schema.js --type prompt_package prompts/image_generation/product_detail_premium_serum_bottle_v2.yaml passed
+  - node scripts/validate_runtime_to_review_v2_multi_prompt_controlled_trial_plan.js passed, 24 checks
+  - node scripts/validate_runtime_to_review_v2_trial_001_activation_packet_no_execute.js passed, 19 checks
+not_performed:
+  - no route HTTP
+  - no provider contact
+  - no plugin call
+  - no API call
+  - no image generation
+  - no output write
+  - no real manifest/VCPChat/VCPToolBox read
+  - no secret/env/config read
+  - no accepted_samples write
+  - no production candidate write
+  - no DailyNote/VCP memory write
+  - no commit, push, tag, release, or deploy
+next_safe_action: review corrected blank-label packet; branded-label generation should be a separate future trial if needed.
+```
+
+## Current Handoff Update - Runtime-To-Review V2 Trial 001 Prompt Correction 2026-06-08
+
+```text
+phase: runtime_to_review_v2_trial_001_prompt_correction_20260608
+status: completed_validated_local_prompt_correction_no_execute
+repository: A:\agent-image-lab\agent-image-lab-v0.2
+branch: master
+goal: Correct Trial 001 so the prompt package actually encodes the product_detail_controlled_studio shot role.
+new_prompt: prompts/image_generation/product_detail_premium_serum_bottle_v2.yaml
+source_prompt: prompts/image_generation/product_lifestyle_premium_serum_bottle_v1.yaml
+completed:
+  - created prompts/image_generation/product_detail_premium_serum_bottle_v2.yaml
+  - updated the v2 plan and fixture to use the new prompt for Trial 001
+  - updated the Trial 001 no-execute packet to use the new prompt as execution prompt and keep v1 only as source lineage
+  - tightened validators so old hero prompt reuse fails and detail-control tokens are required
+validation_completed:
+  - node scripts/validate_prompt_schema.js --type prompt_package prompts/image_generation/product_detail_premium_serum_bottle_v2.yaml passed
+  - node scripts/validate_runtime_to_review_v2_multi_prompt_controlled_trial_plan.js passed, 24 checks
+  - node scripts/validate_runtime_to_review_v2_trial_001_activation_packet_no_execute.js passed, 19 checks
+not_performed:
+  - no route HTTP
+  - no provider contact
+  - no plugin call
+  - no API call
+  - no image generation
+  - no output write
+  - no real manifest/VCPChat/VCPToolBox read
+  - no secret/env/config read
+  - no accepted_samples write
+  - no production candidate write
+  - no DailyNote/VCP memory write
+  - no commit, push, tag, release, or deploy
+next_safe_action: review the corrected no-execute packet; create a separate future execution packet only if Trial 001 should run.
+```
+
+## Current Handoff Update - Runtime-To-Review V2 Trial 001 No-Execute Packet 2026-06-08
+
+```text
+phase: runtime_to_review_v2_trial_001_activation_packet_no_execute_20260608
+status: completed_validated_local_packet_no_execute
+repository: A:\agent-image-lab\agent-image-lab-v0.2
+branch: master
+goal: Prepare the no-execute activation packet for the first v2 controlled trial without performing route/provider/plugin/API/image work.
+packet: reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_activation_packet_no_execute_20260608.json
+completed:
+  - created Trial 001 no-execute activation packet
+  - added scripts/validate_runtime_to_review_v2_trial_001_activation_packet_no_execute.js
+  - kept can_execute_now=false and future activation pending
+  - fixed budget at one provider / one plugin / one API / one image, retry false
+  - required output directory absence and no overwrite
+  - recorded stop conditions for missing activation, secret read, budget drift, output collision, and push/tag/release/deploy
+validation_completed:
+  - node --check scripts/validate_runtime_to_review_v2_trial_001_activation_packet_no_execute.js passed
+  - node scripts/validate_prompt_schema.js --type prompt_package prompts/image_generation/product_detail_premium_serum_bottle_v2.yaml passed
+  - node scripts/validate_runtime_to_review_v2_trial_001_activation_packet_no_execute.js passed, 19 checks
+  - node scripts/validate_runtime_to_review_v2_multi_prompt_controlled_trial_plan.js passed, 23 checks
+not_performed:
+  - no route HTTP
+  - no provider contact
+  - no plugin call
+  - no API call
+  - no image generation
+  - no output write
+  - no real manifest/VCPChat/VCPToolBox read
+  - no secret/env/config read
+  - no accepted_samples write
+  - no production candidate write
+  - no DailyNote/VCP memory write
+  - no commit, push, tag, release, or deploy
+next_safe_action: review the packet; create a separate future execution packet only if Trial 001 should run.
+```
+
+## Current Handoff Update - Runtime-To-Review V2 Multi-Prompt Trial Plan 2026-06-08
+
+```text
+phase: runtime_to_review_v2_multi_prompt_controlled_trial_plan_20260608
+status: completed_validated_local_plan_no_execute
+repository: A:\agent-image-lab\agent-image-lab-v0.2
+branch: master
+goal: Lightly organize the post-attempt-018 architecture direction and prepare a controlled v2 multi-prompt trial plan before broader broker extraction.
+completed:
+  - added docs/runtime_to_review_v2_multi_prompt_controlled_trial_plan.md
+  - added tests/schema_examples/runtime_to_review_v2_multi_prompt_controlled_trial_plan.example.json
+  - added scripts/validate_runtime_to_review_v2_multi_prompt_controlled_trial_plan.js
+  - selected 3 future one-at-a-time trials: serum detail control, lantern ecommerce hero, rattan bag support logic
+  - recorded that attempt-018 is closed out and attempt-019 is not recommended now
+  - preserved the intended architecture: AIL visual core, VCP adapter, secretless activation-bound request, VCPToolBox Image Execution Broker, restricted execution facade, artifact/review/archive/memory-candidate gates
+validation_completed:
+  - node --check scripts/validate_runtime_to_review_v2_multi_prompt_controlled_trial_plan.js passed
+  - node scripts/validate_runtime_to_review_v2_multi_prompt_controlled_trial_plan.js passed, 21 checks
+not_performed:
+  - no route HTTP
+  - no provider contact
+  - no plugin call
+  - no API call
+  - no image generation
+  - no real manifest/VCPChat/VCPToolBox read
+  - no secret/env/config read
+  - no accepted_samples write
+  - no production candidate write
+  - no DailyNote/VCP memory write
+  - no commit, push, tag, release, or deploy
+next_safe_action: prepare the no-execute activation packet for r2r_v2_trial_001_serum_detail_control; real execution requires a separate exact activation gate.
+```
+
 ## Current Handoff Update - PR 11 Terminal Status Surface Sync 2026-06-08
 
 ```text
