@@ -1914,3 +1914,22 @@ remaining:
   - exact-file local commit if appropriate or requested
   - push remains separately gated
 ```
+## Queue - Runtime-To-Review V2 Trial 002 Lantern No-Execute Packet 2026-06-08
+
+```text
+done:
+  - task: open Trial 002 as no-execute packet
+    evidence: reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_activation_packet_no_execute_20260608.json.
+  - task: write concrete Trial 002 review criteria
+    evidence: reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_review_criteria_no_execute_20260608.json.
+  - task: validate Trial 002 packet, criteria, and lantern prompt package
+    evidence: scripts/validate_runtime_to_review_v2_trial_002_activation_packet_no_execute.js and prompt schema validator passed.
+in_progress:
+  - none
+blocked:
+  - none
+remaining:
+  - decide whether to create a separate binding-ready execution packet
+  - future execution, if chosen, must remain one image / one provider / one plugin / one API / zero retry
+  - no real execution is authorized by this no-execute packet
+```

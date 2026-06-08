@@ -1,0 +1,101 @@
+{
+  "schema": "runtime_to_review_v2_review_criteria_no_execute.v1",
+  "criteria_id": "r2r_v2_trial_002_lantern_ecommerce_hero_review_criteria_no_execute_20260608",
+  "created_at": "2026-06-08T00:00:00+08:00",
+  "status": "prepared_no_execute_review_criteria",
+  "trial_id": "r2r_v2_trial_002_lantern_ecommerce_hero",
+  "source_plan_ref": "docs/runtime_to_review_v2_multi_prompt_controlled_trial_plan.md",
+  "prompt_package_ref": "prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v2.yaml",
+  "review_intent": "Judge whether the runtime-to-review pipeline can transfer product geometry and commercial still-life rules from Trial 001 to a non-beauty hard-edge product without real execution in this packet.",
+  "review_decision_options": [
+    "accepted_candidate",
+    "needs_prompt_or_binding_revision",
+    "rejected_candidate"
+  ],
+  "minimum_acceptance_bar": {
+    "single_product_only": true,
+    "modern_premium_led_camping_lantern_read": true,
+    "square_ecommerce_hero_framing": true,
+    "full_handle_diffuser_body_control_and_base_visible": true,
+    "product_first_visual_focus": true,
+    "control_position_readable": true,
+    "cylindrical_or_soft_rect_geometry_plausible": true,
+    "warm_frosted_diffuser_controlled_not_blown": true,
+    "premium_dark_metal_or_outdoor_electronics_material": true,
+    "grounded_table_or_surface_contact": true,
+    "early_blue_hour_or_refined_outdoor_support": true,
+    "no_people_hands_fire_smoke": true,
+    "no_readable_brand_text_logo_or_watermark": true,
+    "no_extra_lanterns_or_wrong_product_drift": true
+  },
+  "scoring_rubric": {
+    "product_identity_and_geometry": {
+      "weight": 0.3,
+      "pass_if": [
+        "clearly reads as a modern rechargeable LED camping lantern",
+        "handle, diffuser, lower-body control, body, and base are all plausible",
+        "does not drift into flashlight, candle, speaker, humidifier, thermos, desk lamp, smart speaker, or vintage kerosene lantern"
+      ]
+    },
+    "commercial_hero_composition": {
+      "weight": 0.25,
+      "pass_if": [
+        "product dominates the square frame as an ecommerce hero",
+        "background supports the product as a second layer",
+        "table or surface grounds the product without becoming a large distracting foreground"
+      ]
+    },
+    "material_and_light_control": {
+      "weight": 0.2,
+      "pass_if": [
+        "diffuser glow is warm and controlled",
+        "diffuser texture and product edges remain readable",
+        "dark premium body reads as metal or quality outdoor electronics, not toy plastic"
+      ]
+    },
+    "safety_and_brand_cleanliness": {
+      "weight": 0.15,
+      "pass_if": [
+        "no people, hands, faces, fire, open flame, smoke, or unsafe wet electronics",
+        "no readable text, logo, watermark, random letters, or fake brand marks",
+        "no extra product or packaging clutter"
+      ]
+    },
+    "pipeline_learning_value": {
+      "weight": 0.1,
+      "pass_if": [
+        "review notes can compare product-geometry transfer against Trial 001",
+        "failure, if any, is specific enough to update VisualJobContract, ShotPlan, ReviewPolicy, or broker binding"
+      ]
+    }
+  },
+  "watch_items": [
+    "product shrinks too much in frame",
+    "handle is cropped, detached, warped, or structurally impossible",
+    "control knob appears on the wrong part of the lantern or becomes random decoration",
+    "diffuser is blown out, dirty, mottled, or unreadable",
+    "object drifts into flashlight, speaker, candle, humidifier, thermos, desk lamp, or vintage kerosene lantern",
+    "scene becomes a camping landscape instead of a product-first hero image",
+    "foreground table becomes too large, bright, glossy, or distracting",
+    "text, logo, watermark, people, hands, fire, smoke, or extra lanterns appear"
+  ],
+  "post_generation_required_review_refs": {
+    "expected_artifact_record_ref": "reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_artifact_record.json",
+    "expected_receipt_ref": "reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_receipt.json",
+    "expected_review_bridge_ref": "review_console/live_receipt_bridge/r2r_v2_trial_002_lantern_ecommerce_hero/bridge_entry.json"
+  },
+  "side_effect_flags": {
+    "route_http_request_performed": false,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "output_write_performed": false,
+    "accepted_samples_write_performed": false,
+    "production_candidate_write_performed": false,
+    "DailyNote_write_performed": false,
+    "VCP_memory_write_performed": false,
+    "push_tag_release_deploy_performed": false
+  },
+  "recommended_next": "validate_trial_002_packet_and_criteria_then_wait_for_separate_one_image_execution_decision"
+}
