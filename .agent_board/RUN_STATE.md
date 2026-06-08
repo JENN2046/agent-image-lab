@@ -423,18 +423,22 @@ next_safe_task: prepare r2r_v2_trial_001_serum_detail_control activation packet 
 
 ```text
 phase: review_console_preview_gates_onering_pr11_terminal_status_surface_sync_20260608
-status: terminal_status_surface_sync_pending_commit
+status: completed_validated_pr_head_verified
 lane: Green terminal post-push/PR status-surface sync
-goal: Record that the all-current dirty status surfaces were committed, pushed, and opened as draft PR #11, then stop status-surface recursion after one terminal commit.
+goal: Record that the all-current dirty status surfaces were committed, pushed, opened as PR #11, and later verified at the PR head after the origin/master conflict-resolution merge.
 repository: A:\AGENTS_OS_Workspace\domains\agent-image-lab\agent-image-lab-v0.2
 branch: codex/review-console-preview-gates-onering
 base: master
 remote: origin
 pr_number: 11
 pr_url: https://github.com/JENN2046/agent-image-lab/pull/11
-pr_state: open_draft
+pr_state: open_ready_for_review
 published_commit:
-  - 5415d86e3e8838555eaea8b02f8abadef58e5634 docs: sync agent board status surfaces
+  - resolve from current PR/head checkout; do not use the initial local status commit as the published tree
+reviewed_status_commit_before_repair: 7f61bd7ca4b3804491cd169ae07b1645199ff503
+reviewed_status_commit_subject_before_repair: merge: sync master into pr branch
+base_head_verified_before_repair: 4b3c0d980d9392ed85a26f6326118b44fd2b0643
+mergeable_verified_before_repair: MERGEABLE
 boundary_checks:
   git_add_dot_used: false
   force_push_or_history_rewrite_performed: false
@@ -450,7 +454,7 @@ boundary_checks:
 terminal_status_surface_sync: true
 post_push_followup: read_only_remote_sync_only
 no_followup_agent_board_write_after_push: true
-next_safe_task: validate and push this terminal status-surface commit, then perform read-only remote/PR verification only.
+next_safe_task: after this review repair is committed and, if authorized, pushed by normal fast-forward, perform read-only remote/PR verification only.
 ```
 
 ## Current Run State - Master Ref Fast-forward Sync 2026-06-08

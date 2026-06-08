@@ -381,15 +381,19 @@ recommended_next: prepare_r2r_v2_trial_001_serum_detail_control_activation_packe
 
 ```text
 phase: review_console_preview_gates_onering_pr11_terminal_status_surface_sync_20260608
-status: terminal_status_surface_sync_pending_commit
-result: DRAFT_PR_11_OPENED_AND_TERMINAL_STATUS_SURFACE_SYNC_PREPARED
-summary: Committed the four existing .agent_board status-surface edits, pushed the current branch, and opened draft PR #11 against master. This checkpoint prepares the terminal status-surface sync so post-push follow-up is read-only remote/PR verification only.
+status: completed_validated_pr_head_verified
+result: PR_11_HEAD_VERIFIED_AND_TERMINAL_STATUS_SURFACE_SYNC_RECORDED
+summary: Committed and pushed the four .agent_board status-surface edits, opened PR #11 against master, then merged origin/master into the branch to resolve .agent_board conflicts. This checkpoint records the reviewed PR head as the status-surface publication point instead of the initial local status commit, so future agents diff and validate from the current PR checkout/head.
 branch: codex/review-console-preview-gates-onering
 base: master
 pr_url: https://github.com/JENN2046/agent-image-lab/pull/11
-pr_state: open_draft
+pr_state: open_ready_for_review
 published_commit:
-  - 5415d86e3e8838555eaea8b02f8abadef58e5634 docs: sync agent board status surfaces
+  - resolve from current PR/head checkout; do not use the initial local status commit as the published tree
+reviewed_status_commit_before_repair: 7f61bd7ca4b3804491cd169ae07b1645199ff503
+reviewed_status_commit_subject_before_repair: merge: sync master into pr branch
+base_head_verified_before_repair: 4b3c0d980d9392ed85a26f6326118b44fd2b0643
+mergeable_verified_before_repair: MERGEABLE
 terminal_status_surface_sync: true
 post_push_followup: read_only_remote_sync_only
 no_followup_agent_board_write_after_push: true
@@ -405,7 +409,7 @@ boundary_checks:
   - VCP_memory_write_performed: false
   - dependency_change_performed: false
   - secret_env_config_read_performed: false
-recommended_next: validate and push this terminal status-surface commit, then perform read-only remote/PR verification only.
+recommended_next: after this review repair is committed and, if authorized, pushed by normal fast-forward, perform read-only remote/PR verification only.
 ```
 
 ## Checkpoint - Master Ref Fast-forward Sync 2026-06-08

@@ -135,17 +135,19 @@
 
 - [x] ID: review_console_preview_gates_onering_pr11_terminal_status_surface_sync_20260608
       Lane: Green terminal post-push/PR status-surface sync.
-      Status: terminal_status_surface_sync_pending_commit.
-      Goal: Record that the current .agent_board status surfaces were committed, pushed, and opened as draft PR #11, then stop status-surface recursion after one terminal sync commit.
+      Status: completed_validated_pr_head_verified.
+      Goal: Record that the current .agent_board status surfaces were committed, pushed, opened as PR #11, and later verified at the PR head after the origin/master conflict-resolution merge.
       Branch: `codex/review-console-preview-gates-onering`.
       Base: `master`.
       PR: `https://github.com/JENN2046/agent-image-lab/pull/11`.
-      Published commit: `5415d86e3e8838555eaea8b02f8abadef58e5634 docs: sync agent board status surfaces`.
+      Published commit: resolve from the current PR/head checkout; do not use the initial local status commit as the published tree.
+      Reviewed status commit before this repair: `7f61bd7ca4b3804491cd169ae07b1645199ff503 merge: sync master into pr branch`.
+      Base head verified before this repair: `4b3c0d980d9392ed85a26f6326118b44fd2b0643`.
       Boundary: exact-file staging only; no `git add .`; no force push/history rewrite; no tag/release/deploy; no provider/plugin/API/image generation; no DailyNote/VCP memory write; no dependency change; no secret/env/config read.
       terminal_status_surface_sync: true.
       post_push_followup: read_only_remote_sync_only.
       no_followup_agent_board_write_after_push: true.
-      Remaining gate: validate and push this terminal status-surface commit; after push, read-only remote/PR verification only.
+      Remaining gate: after this review repair is committed and, if authorized, pushed by normal fast-forward, read-only remote/PR verification only.
 ---
 
 - [x] ID: master_ref_fast_forward_sync_20260608

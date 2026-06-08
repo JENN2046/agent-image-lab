@@ -390,19 +390,21 @@ next_safe_action: prepare the no-execute activation packet for r2r_v2_trial_001_
 
 ```text
 phase: review_console_preview_gates_onering_pr11_terminal_status_surface_sync_20260608
-status: terminal_status_surface_sync_pending_commit
+status: completed_validated_pr_head_verified
 repository: A:\AGENTS_OS_Workspace\domains\agent-image-lab\agent-image-lab-v0.2
 branch: codex/review-console-preview-gates-onering
 base: master
 remote: origin
 pr_number: 11
 pr_url: https://github.com/JENN2046/agent-image-lab/pull/11
-pr_state: open_draft
+pr_state: open_ready_for_review
 completed:
   - exact-file staged and committed the four .agent_board status surfaces
-  - commit 5415d86e3e8838555eaea8b02f8abadef58e5634 docs: sync agent board status surfaces
   - pushed codex/review-console-preview-gates-onering to origin
-  - opened draft PR #11 against master
+  - opened PR #11 against master
+  - merged origin/master into the PR branch to resolve .agent_board conflicts
+  - verified PR #11 head before this review repair as 7f61bd7ca4b3804491cd169ae07b1645199ff503
+  - recorded that future agents must resolve the published status-surface tree from the current PR/head checkout, not from the initial local status commit
 terminal_status_surface_sync: true
 post_push_followup: read_only_remote_sync_only
 no_followup_agent_board_write_after_push: true
@@ -414,7 +416,7 @@ not_performed:
   - no DailyNote/VCP memory write
   - no dependency change
   - no secret/env/config read
-next_safe_action: after this terminal status-surface commit is pushed, perform read-only remote/PR verification only and do not write another .agent_board entry.
+next_safe_action: after this review repair is committed and, if authorized, pushed by normal fast-forward, perform read-only remote/PR verification only and do not write another .agent_board entry.
 ```
 
 ## Current Handoff Update - Master Ref Fast-forward Sync 2026-06-08
