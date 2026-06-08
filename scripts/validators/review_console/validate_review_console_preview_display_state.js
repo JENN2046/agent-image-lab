@@ -342,6 +342,8 @@ for (const token of [
   "const previewDisplaySkins = [",
   "function previewDisplayProxyState()",
   "function currentReviewTarget(",
+  "function reviewSessionVersionPreviewId(versionId)",
+  "function selectReviewSessionVersion(versionId)",
   "function decisionTargetDisplayLabel(target)",
   "function decisionTargetSourceLabel(target)",
   "function decisionEventWithTarget(event = state.lastDecisionEvent, target = currentReviewTarget())",
@@ -350,6 +352,8 @@ for (const token of [
   "selectReviewSpineSample(samples[nextIndex])",
   "button.addEventListener(\"click\", () => setCurrentReviewSampleByOffset(1))",
   "button.addEventListener(\"click\", () => setCurrentReviewSampleByOffset(-1))",
+  "selectReviewSessionVersion(version.version_id)",
+  "state.previewDisplaySelectedPreviewId = versionPreview?.preview_id || reviewSessionVersionPreviewId(nextVersion.version_id)",
   "setReviewSampleFromDataset(versionId, previewId, skinId)",
   'draft_output_key: "preview_display_state"',
   "const reviewTarget = currentReviewTarget(current)",
@@ -411,6 +415,11 @@ for (const token of [
 ]) {
   addResult(`app_forbids_stale_decision_token_${token}`, !app.includes(token));
 }
+
+addResult(
+  "app_forbids_version_click_without_preview_selection_sync",
+  !/button\.addEventListener\("click",\s*\(\)\s*=>\s*\{\s*state\.currentVersionId\s*=\s*version\.version_id;\s*renderAll\(\);\s*\}\);/s.test(app)
+);
 
 for (const token of [
   'stage_image_ref: originalRef',

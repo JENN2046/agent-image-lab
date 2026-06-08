@@ -2940,6 +2940,19 @@ function handleImportRecordFile(event) {
   reader.readAsText(file);
 }
 
+function reviewSessionVersionPreviewId(versionId) {
+  return `preview-display-${safeClassToken(versionId)}`;
+}
+
+function selectReviewSessionVersion(versionId) {
+  const nextVersion = state.image_versions.find((version) => version.version_id === versionId);
+  if (!nextVersion) return;
+  state.currentVersionId = nextVersion.version_id;
+  const versionPreview = previewDisplayVersionRecords().find((sample) => sample.version_id === nextVersion.version_id);
+  state.previewDisplaySelectedPreviewId = versionPreview?.preview_id || reviewSessionVersionPreviewId(nextVersion.version_id);
+  state.previewDisplaySkinId = versionPreview?.skin_id || state.previewDisplaySkinId;
+}
+
 function renderVersions() {
   const root = qs("#versionList");
   root.innerHTML = "";
@@ -2955,7 +2968,7 @@ function renderVersions() {
       <span>${escapeHtml(version.score)}</span>
     `;
     button.addEventListener("click", () => {
-      state.currentVersionId = version.version_id;
+      selectReviewSessionVersion(version.version_id);
       renderAll();
     });
     root.appendChild(button);
