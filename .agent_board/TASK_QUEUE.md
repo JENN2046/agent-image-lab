@@ -1704,3 +1704,337 @@ remaining:
   - separate exact activation required before any attempt-017 POST
   - push/tag/release/deploy remain separately gated
 ```
+
+## Queue - Master Fast-Forward Sync 2026-06-08
+
+```text
+done:
+  - task: confirm local branch
+    evidence: main worktree was already on master.
+  - task: preserve pre-existing local .agent_board edits
+    evidence: exact-file stash created with message pre-master-ff-agent-board-status-surface.
+  - task: fast-forward local master
+    evidence: git merge --ff-only origin/master updated 6ef70da5..6a4c2158.
+  - task: record post-fast-forward baseline
+    evidence: .agent_board status surfaces updated locally after the fast-forward.
+  - task: triage pre-fast-forward status stash
+    evidence: stash only contains superseded af10141f_to_6ef70da5 local fast-forward notes; not restored.
+in_progress:
+  - none
+blocked:
+  - none
+remaining:
+  - keep .worktrees/ untracked and preserved
+  - keep the named stash for rollback/audit unless the owner explicitly authorizes dropping it
+```
+
+## Queue - Runtime-To-Review Next Attempt Triage 2026-06-08
+
+```text
+done:
+  - task: inspect attempt-018 final evidence seal
+    evidence: attempt_019_needed=false; accepted_candidate=true.
+  - task: inspect attempt-018 accepted candidate record
+    evidence: status accepted_candidate_sealed_pending_formal_registry.
+  - task: check for attempt-019 package
+    evidence: no reports/runtime_to_review_v1/*attempt_019* files found.
+  - task: verify attempt-018 final seal and registry closeout
+    evidence: final evidence seal, successful attempt evidence, and accepted sample registry metadata validators passed.
+  - task: repair stale closeout validator assertion
+    evidence: accepted sample registry validator now checks current remote-aligned closeout state and passes.
+in_progress:
+  - none
+blocked:
+  - task: controlled real execution attempt-019
+    reason: current evidence says attempt-019 is not needed, and no exact attempt-019 package exists.
+remaining:
+  - no runtime-to-review attempt remains required for current secretless serum mainline
+  - optional future work requires a separate exact gate: release/tag, DailyNoteWrite execution, or branded label/copy pass
+```
+
+## Queue - Runtime-To-Review V2 Trial 001 Attempt 003 2026-06-08
+
+```text
+done:
+  - task: verify and clean exact empty output directory before rearm
+    evidence: runs/real_generation/runtime_to_review_v2_trial_001_serum_detail_control/ was inside workspace, empty, then removed.
+  - task: issue independent attempt 003 rearm packet
+    evidence: reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_rearm_packet_attempt_003_20260608.json.
+  - task: run pre-dispatch validators
+    evidence: exact runtime binding, binding-ready packet, future packet, readiness preflight, no-execute packet, prompt schema, VCPToolBox internal authorizer binding, and diff checks passed.
+  - task: execute exactly one guarded dispatch
+    evidence: runner consumed one live dispatch with no retry; provider/plugin/API/image side effects true.
+  - task: record failed-closed attempt 003 receipt
+    evidence: reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_execution_attempt_003_failed_closed_20260608.json.
+in_progress:
+  - none
+blocked:
+  - task: promote generated image into review queue
+    reason: generated image exists only in VCPToolBox image/doubaogen; Agent Image Lab run directory is empty, so artifact/review records were not created.
+remaining:
+  - patch artifact import/write-back from Restricted Plugin Facade or broker dispatch adapter to visual_job_contract.output_directory_ref
+  - issue a fresh attempt 004 packet before any further provider call
+  - no retry of attempt 003
+```
+
+## Queue - Runtime-To-Review V2 Trial 001 Attempt 004 Packet 2026-06-08
+
+```text
+done:
+  - task: patch artifact import/write-back
+    evidence: adapter imports allowed VCPToolBox image/doubaogen refs into visual_job_contract.output_directory_ref using no-overwrite copy semantics.
+  - task: validate import binding without provider call
+    evidence: exact runtime binding validator now includes adapter_imports_vcptoolbox_doubaogen_refs_to_artifact_store and passes.
+  - task: clear attempt 004 no-overwrite collision
+    evidence: exact empty output directory was verified inside workspace, empty, then removed.
+  - task: issue attempt 004 rearm packet
+    evidence: reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_rearm_packet_attempt_004_20260608.json with can_execute_now=true.
+in_progress:
+  - none
+blocked:
+  - none
+remaining:
+  - execute attempt 004 exactly once when requested
+  - inspect generated candidate for blank label, full bottle visibility, crop, and material quality
+  - no retry without fresh packet
+```
+
+## Queue - Runtime-To-Review V2 Trial 001 Attempt 004 Consumed 2026-06-08
+
+```text
+done:
+  - task: execute attempt 004 exactly once
+    evidence: runner returned completed_provider_image_created with provider/plugin/API each 1 and image_count 1.
+  - task: verify artifact store import
+    evidence: runs/real_generation/runtime_to_review_v2_trial_001_serum_detail_control/7bb59380-abb4-4180-9fa6-6a71549aec41.jpg exists with matching sha256.
+  - task: write success receipt, artifact record, and review bridge
+    evidence: runtime_to_review_v2 receipt/artifact JSON and review_console bridge_entry.json created.
+in_progress:
+  - none
+blocked:
+  - none
+remaining:
+  - human review candidate
+  - if accepted, prepare separate accepted_samples/archive/memory candidate gate
+  - do not rerun attempt 004
+```
+
+## Queue - Runtime-To-Review V2 Trial 001 Human Review 2026-06-08
+
+```text
+done:
+  - task: record owner review decision
+    evidence: reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_review_decision_accepted_candidate_20260608.json.
+  - task: update artifact and review bridge status
+    evidence: artifact record and review bridge now declare accepted_candidate.
+in_progress:
+  - none
+blocked:
+  - none
+remaining:
+  - optional separate gate for accepted_samples/archive/memory candidate
+  - no automatic promotion from review decision alone
+```
+
+## Queue - Runtime-To-Review V2 Trial 001 Accepted Samples Promotion 2026-06-08
+
+```text
+done:
+  - task: choose one promotion target
+    evidence: selected accepted_samples, not archive or memory candidate.
+  - task: write metadata-only accepted sample capsule
+    evidence: accepted_samples/accepted_premium_skincare_serum_bottle_r2r_v2_trial_001_001/{metadata.json,manifest.json,source_evidence.json}.
+  - task: update accepted sample registry and product category index
+    evidence: accepted_sample_registry includes sample_id once; product_still_life sample_count is 6.
+  - task: validate promotion
+    evidence: dedicated Trial 001 promotion validator and accepted sample registry validator passed.
+in_progress:
+  - none
+blocked:
+  - none
+remaining:
+  - optional durable archive gate
+  - optional memory-candidate no-write mapping gate
+  - optional production candidate readiness gate
+```
+
+## Queue - Runtime-To-Review V2 Trial 001 Durable Archive Gate 2026-06-08
+
+```text
+done:
+  - task: open separate durable archive gate
+    evidence: reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_durable_archive_authorization_20260608.json.
+  - task: copy exactly one accepted image binary into durable archive
+    evidence: asset_archive/original_assets/by_sha256/60af66aa0f26fc8e26eabd0719408d92b4efdc21b2f26737ae3e6fce1c1f9f82.jpg.
+  - task: wire durable archive refs into accepted sample surfaces
+    evidence: accepted sample registry, product_still_life index, metadata, manifest, and source_evidence now reference the durable archive.
+  - task: validate durable archive gate
+    evidence: dedicated durable archive validator passed together with accepted_samples validators.
+in_progress:
+  - none
+blocked:
+  - none
+remaining:
+  - optional memory-candidate no-write mapping gate
+  - optional production candidate readiness gate
+  - no automatic DailyNote/VCP memory/production promotion from durable archive alone
+```
+
+## Queue - Runtime-To-Review V2 Trial 001 Memory Candidate No-Write Mapping 2026-06-08
+
+```text
+done:
+  - task: open separate memory-candidate no-write mapping gate
+    evidence: reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_memory_candidate_no_write_mapping_gate_20260608.json.
+  - task: draft Chinese memory_delta candidate without writer selection
+    evidence: reports/memory_delta_drafts/r2r_v2_trial_001_serum_detail_control_memory_delta_candidate_no_write_20260608.json.
+  - task: connect accepted sample capsule to candidate mapping refs
+    evidence: metadata.json, manifest.json, and source_evidence.json include mapping_gate_ref and memory_delta_candidate_ref with write_performed=false.
+  - task: validate no-write mapping boundary
+    evidence: dedicated memory-candidate mapping validator passed.
+in_progress:
+  - none
+blocked:
+  - none
+remaining:
+  - optional memory authorization preflight with exact writer target and post-write receipt requirements
+  - optional production candidate readiness gate
+  - no automatic memory write from this mapping gate
+```
+
+## Queue - Runtime-To-Review V2 Trial 001 Exact-File Staging Package Draft 2026-06-08
+
+```text
+done:
+  - task: review dirty worktree for Trial 001 closeout
+    evidence: package excludes .worktrees and separates VCPToolBox repo work from Agent Image Lab staging.
+  - task: draft exact-file staging package
+    evidence: reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_exact_file_staging_package_draft_20260608.json.
+  - task: validate package and final post-success gates
+    evidence: dedicated exact-file package validator and final validator set passed.
+in_progress:
+  - none
+blocked:
+  - none
+remaining:
+  - optional exact-file local commit if requested
+  - separate VCPToolBox repo review before any VCPToolBox commit
+  - push remains separately gated
+```
+
+## Queue - Runtime-To-Review V2 Trial 001 Codex Knowledge Memory Write Preflight 2026-06-08
+
+```text
+done:
+  - task: prepare Codex knowledge memory single-write preflight
+    evidence: reports/memory_write_authorization/r2r_v2_trial_001_codex_knowledge_memory_write_preflight_20260608.json.
+  - task: prepare exact Chinese payload
+    evidence: reports/memory_write_payloads/r2r_v2_trial_001_codex_knowledge_memory_write_payload_20260608.json.
+  - task: validate no-write memory boundary
+    evidence: scripts/validate_runtime_to_review_v2_trial_001_codex_knowledge_memory_write_preflight.js passed.
+in_progress:
+  - none
+blocked:
+  - none
+remaining:
+  - optional binding-ready Codex knowledge memory write packet
+  - optional exactly-one record_memory execution if requested
+  - DailyNote and VCP dual memory remain excluded
+```
+## Queue - Runtime-To-Review V2 Trial 001 Codex Knowledge Memory Write 2026-06-08
+
+```text
+done:
+  - task: issue binding-ready Codex knowledge memory execution packet
+    evidence: reports/memory_write_authorization/r2r_v2_trial_001_codex_knowledge_memory_write_binding_ready_packet_20260608.json.
+  - task: validate packet before execution
+    evidence: scripts/validate_runtime_to_review_v2_trial_001_codex_knowledge_memory_write_binding_ready_packet.js passed.
+  - task: execute exactly one record_memory call
+    evidence: memory id codex-knowledge-3a86b6bc791e427f9eeec8d53d9f3c79; canonical hash 7ed8df1cd10dfaba0d56b222109299b61d09de37922e57b295a06980908415cf.
+  - task: write sanitized project receipt
+    evidence: reports/memory_write_receipts/r2r_v2_trial_001_codex_knowledge_memory_write_receipt_20260608.json.
+  - task: update accepted sample surfaces with separate memory receipt refs
+    evidence: accepted sample registry, metadata, manifest, and source_evidence reference the receipt and memory id.
+  - task: update validators to preserve old no-write gate history while accepting later receipt-driven Codex knowledge write
+    evidence: accepted_samples promotion, memory-candidate mapping, and registry validators pass together.
+in_progress:
+  - none
+blocked:
+  - none
+remaining:
+  - run final agent_board/diff validation
+  - exact-file local commit if appropriate or requested
+  - push remains separately gated
+```
+## Queue - Runtime-To-Review V2 Trial 002 Lantern No-Execute Packet 2026-06-08
+
+```text
+done:
+  - task: open Trial 002 as no-execute packet
+    evidence: reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_activation_packet_no_execute_20260608.json.
+  - task: write concrete Trial 002 review criteria
+    evidence: reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_review_criteria_no_execute_20260608.json.
+  - task: validate Trial 002 packet, criteria, and lantern prompt package
+    evidence: scripts/validate_runtime_to_review_v2_trial_002_activation_packet_no_execute.js and prompt schema validator passed.
+in_progress:
+  - none
+blocked:
+  - none
+remaining:
+  - decide whether to create a separate binding-ready execution packet
+  - future execution, if chosen, must remain one image / one provider / one plugin / one API / zero retry
+  - no real execution is authorized by this no-execute packet
+```
+
+## Queue - Runtime-To-Review V2 Trial 002 AIL-Side Binding Preflight 2026-06-08
+
+```text
+done:
+  - task: add Trial 002 AIL-side runtime adapter
+    evidence: adapters/runtime/native_doubao_runtime_v2_trial_002_lantern_ecommerce_broker_dispatch_adapter.js.
+  - task: add Trial 002 runtime fixture
+    evidence: tests/fixtures/runtime_kernel_v2_trial_002_lantern_ecommerce_hero_task.fixture.json.
+  - task: extend AIL secretless bridge allowlist to exact Trial 002 prompt/output refs
+    evidence: scripts/native_doubao_secretless_provider_runtime_bridge.js.
+  - task: issue AIL-side binding preflight packet
+    evidence: reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_ail_side_binding_preflight_20260608.json.
+  - task: validate local binding without route/provider/plugin/API/image dispatch
+    evidence: scripts/validate_runtime_to_review_v2_trial_002_ail_side_binding_preflight.js passed, 26 checks.
+  - task: fix failed dispatch output directory side effect
+    evidence: adapter no longer creates the Trial 002 run directory before broker dispatch; validator failed_route_does_not_create_output_directory passed.
+  - task: enforce existing output directory stop before dispatch
+    evidence: adapter fail-closes with r2r_v2_trial_002_output_directory_exists before postJson; validator existing_output_directory_stops_before_dispatch passed.
+  - task: draft exact-file staging package for AIL-side closeout
+    evidence: reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_ail_side_binding_exact_file_staging_package_draft_20260608.json; package validator passed, 10 checks.
+in_progress:
+  - none
+blocked:
+  - task: Trial 002 binding-ready execution packet with can_execute_now=true
+    reason: VCPToolBox exact Trial 002 internal route/authorizer is not bound yet.
+remaining:
+  - bind Trial 002 exact internal route/authorizer in VCPToolBox
+  - after external binding, issue separate binding-ready execution packet
+  - execute exactly once only after packet validation and explicit execution intent
+  - no retry, no accepted_samples/production/memory write before review
+```
+
+## Queue - Runtime-To-Review V2 Trial 002 Review And Execution Preflight Templates 2026-06-08
+
+```text
+done:
+  - task: write Trial 002 review instruction template
+    evidence: reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_review_instruction_template_20260608.json.
+  - task: write Trial 002 execution preflight template
+    evidence: reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_execution_preflight_template_20260608.json.
+  - task: validate templates preserve no-execute boundaries
+    evidence: scripts/validate_runtime_to_review_v2_trial_002_review_and_execution_preflight_templates.js passed, 16 checks.
+in_progress:
+  - none
+blocked:
+  - task: future Trial 002 execution
+    reason: VCPToolBox exact Trial 002 internal route/authorizer remains unbound and templates do not authorize execution.
+remaining:
+  - exact-file local commit for AIL-side templates
+  - no VCPToolBox work in this AIL-only step
+  - no route/provider/plugin/API/image execution
+```

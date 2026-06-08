@@ -4540,3 +4540,493 @@ boundary_checks_addendum:
   image_generation_performed: false
 recommended_next: commit attempt-017 prepare; exact activation must be separate.
 ```
+
+### Checkpoint Addendum - Master Fast-Forward To PR9 Merge 2026-06-08
+
+```text
+status: completed_validated_remote_master_sync
+result: LOCAL_MASTER_FAST_FORWARDED_TO_ORIGIN_MASTER_PR9_MERGE
+summary: Local master was already checked out and behind origin/master by the merged PR9 range. Pre-existing local .agent_board edits were preserved in a named stash, then local master fast-forwarded to origin/master at 6a4c2158df93140f9bc11c1ee1ed35c6e9323068.
+merged_pr_ref: JENN2046/agent-image-lab#9
+merge_commit: 6a4c2158df93140f9bc11c1ee1ed35c6e9323068
+stash_preservation: pre-master-ff-agent-board-status-surface
+stash_triage: inspected; contains only superseded earlier local_fast_forward_baseline_sync_20260608 entries for af10141f_to_6ef70da5.
+not_performed:
+  - no force push
+  - no reset
+  - no clean
+  - no branch deletion
+  - no tag/release/deploy
+recommended_next: use current master as the latest local baseline; do not restore the stash unless the superseded earlier sync note is explicitly needed for audit.
+```
+
+### Checkpoint Addendum - Runtime-To-Review Attempt 019 No-Go 2026-06-08
+
+```text
+status: completed_validated_no_new_real_execution_attempt_recommended
+result: ATTEMPT_018_ALREADY_SEALED_ACCEPTED_CANDIDATE
+summary: Reviewed the current runtime-to-review evidence after master sync. The attempt-018 final evidence seal marks the candidate as accepted and explicitly says attempt_019_needed=false. No attempt-019 package exists in reports/runtime_to_review_v1.
+validated_refs:
+  - reports/runtime_to_review_v1/secretless_serum_attempt_018_final_evidence_seal_20260606.json
+  - reports/runtime_to_review_v1/secretless_serum_attempt_018_accepted_candidate_record_20260606.json
+not_performed:
+  - no route HTTP request
+  - no provider contact
+  - no plugin/API call
+  - no image generation
+  - no output write
+  - no secret read
+recommended_next: advance attempt-018 through formal accepted_samples registry or final closeout gate; do not start attempt-019 unless a new explicit product reason appears.
+```
+
+### Checkpoint Addendum - Runtime-To-Review Closeout Validation Sync 2026-06-08
+
+```text
+status: completed_validated_no_new_runtime_execution
+result: ATTEMPT_018_MAINLINE_ALREADY_CLOSED_OUT_ON_MASTER
+summary: After the no-go for attempt-019, verified that current master already contains the attempt-018 formal accepted sample registry entry and final closeout. One stale validator assertion was corrected to match the current closeout state after remote master sync.
+changed_refs:
+  - scripts/validate_v7_32_accepted_sample_registry_update.js
+  - .agent_board/RUN_STATE.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/HANDOFF.md
+validation_completed:
+  - npm run validate:runtime-to-review-secretless-serum-attempt-018-final-evidence-seal: passed
+  - npm run validate:runtime-to-review-secretless-serum-successful-attempt-evidence: passed
+  - node scripts\validate_v7_32_accepted_sample_registry_update.js: passed
+  - node scripts\validate_agent_board_state.js: passed
+not_performed:
+  - no route HTTP request
+  - no provider contact
+  - no plugin/API call
+  - no image generation
+  - no output write
+  - no secret read
+recommended_next: stop runtime execution loop for this mainline; only open a new exact gate for release/tag, DailyNoteWrite execution, or branded label/copy work.
+```
+
+### Checkpoint Addendum - Runtime-To-Review V2 Trial 001 Attempt 003 Consumed Failed Closed 2026-06-08
+
+```text
+status: completed_consumed_failed_closed_generated_external_image_not_archived_no_retry
+result: TRIAL_001_ATTEMPT_003_ONE_DISPATCH_GENERATED_EXTERNAL_IMAGE_BUT_FAILED_ARTIFACT_STORE
+summary: Cleaned the exact empty Trial 001 output directory, issued an independent attempt 003 rearm packet, ran all pre-dispatch validators, then performed exactly one live dispatch. The provider path generated one image, but the image landed in A:/VCP/apps/VCPToolBox/image/doubaogen rather than runs/real_generation/runtime_to_review_v2_trial_001_serum_detail_control/, so the runtime-to-review kernel failed closed with provider_delegate_result_invalid and r2r_v2_trial_001_output_file_invalid.
+changed_refs:
+  - reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_rearm_packet_attempt_003_20260608.json
+  - reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_execution_attempt_003_failed_closed_20260608.json
+  - .agent_board/RUN_STATE.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/HANDOFF.md
+validation_completed:
+  - node scripts/validate_runtime_to_review_v2_trial_001_exact_runtime_binding.js: passed
+  - node scripts/validate_runtime_to_review_v2_trial_001_binding_ready_execution_packet.js: passed
+  - node scripts/validate_runtime_to_review_v2_trial_001_future_execution_packet.js: passed
+  - node scripts/validate_runtime_to_review_v2_trial_001_execution_readiness_preflight.js: passed
+  - node scripts/validate_runtime_to_review_v2_trial_001_activation_packet_no_execute.js: passed
+  - node scripts/validate_prompt_schema.js --type prompt_package prompts/image_generation/product_detail_premium_serum_bottle_v2.yaml: passed
+  - node scripts/validate_runtime_to_review_v2_trial_001_vcptoolbox_internal_authorizer_binding.js: passed
+  - git diff --check: passed with line-ending warnings only
+  - git -C A:/VCP/apps/VCPToolBox diff --check: passed with line-ending warnings only
+not_performed:
+  - no retry
+  - no accepted_samples write
+  - no production candidate write
+  - no DailyNote write
+  - no VCP memory write
+  - no push/tag/release/deploy
+recommended_next: patch image import/write-back into the Agent Image Lab run directory, then issue a fresh attempt 004 packet before any further provider call.
+```
+
+### Checkpoint Addendum - Runtime-To-Review V2 Trial 001 Attempt 004 Packet Issued 2026-06-08
+
+```text
+status: completed_validated_attempt_004_signed_pending_dispatch
+result: TRIAL_001_ATTEMPT_004_PACKET_READY_WITH_ARTIFACT_IMPORT_FIX
+summary: Patched the Agent Image Lab broker dispatch adapter so a VCPToolBox image/doubaogen result ref is imported into visual_job_contract.output_directory_ref using no-overwrite copy semantics. The adapter then validates the imported image and normalizes the extension when the filename extension and detected image encoding differ. Cleared the empty output directory and issued attempt 004 rearm packet with can_execute_now=true.
+changed_refs:
+  - adapters/runtime/native_doubao_runtime_v2_trial_001_serum_detail_broker_dispatch_adapter.js
+  - scripts/validate_runtime_to_review_v2_trial_001_exact_runtime_binding.js
+  - reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_rearm_packet_attempt_004_20260608.json
+  - .agent_board/RUN_STATE.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/HANDOFF.md
+validation_completed:
+  - import simulation using attempt 003 generated image: passed with no provider/API call
+  - node scripts/validate_runtime_to_review_v2_trial_001_exact_runtime_binding.js: passed
+  - node scripts/validate_runtime_to_review_v2_trial_001_binding_ready_execution_packet.js: passed
+  - node scripts/validate_runtime_to_review_v2_trial_001_future_execution_packet.js: passed
+  - node scripts/validate_runtime_to_review_v2_trial_001_execution_readiness_preflight.js: passed
+  - node scripts/validate_runtime_to_review_v2_trial_001_activation_packet_no_execute.js: passed
+  - node scripts/validate_prompt_schema.js --type prompt_package prompts/image_generation/product_detail_premium_serum_bottle_v2.yaml: passed
+  - node scripts/validate_runtime_to_review_v2_trial_001_vcptoolbox_internal_authorizer_binding.js: passed
+  - git diff --check: passed with line-ending warnings only
+  - git -C A:/VCP/apps/VCPToolBox diff --check: passed with line-ending warnings only
+not_performed:
+  - no attempt 004 dispatch
+  - no provider/plugin/API/image generation in this packet-signing step
+  - no accepted_samples write
+  - no production candidate write
+  - no DailyNote write
+  - no VCP memory write
+  - no push/tag/release/deploy
+recommended_next: execute attempt 004 exactly once when requested; do not retry attempt 004 without a fresh packet.
+```
+
+### Checkpoint Addendum - Runtime-To-Review V2 Trial 001 Attempt 004 Consumed Success 2026-06-08
+
+```text
+status: completed_provider_image_created_review_pending_no_retry
+result: TRIAL_001_ATTEMPT_004_ONE_DISPATCH_SUCCESS_IMPORTED_TO_ARTIFACT_STORE
+summary: Executed attempt 004 exactly once. The route reached Internal Authorizer, Restricted Plugin Facade, DoubaoGen/provider/API, generated one image, and the broker imported it into the Agent Image Lab run directory. Added the v2 canonical receipt, artifact record, review bridge, and attempt success receipt. No retry was performed.
+changed_refs:
+  - runs/real_generation/runtime_to_review_v2_trial_001_serum_detail_control/7bb59380-abb4-4180-9fa6-6a71549aec41.jpg
+  - reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_receipt.json
+  - reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_artifact_record.json
+  - review_console/live_receipt_bridge/r2r_v2_trial_001_serum_detail_control/bridge_entry.json
+  - reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_execution_attempt_004_success_20260608.json
+validation_completed:
+  - pre-dispatch exact runtime binding validator: passed
+  - VCPToolBox internal authorizer binding validator: passed
+  - output sha256 verification: passed
+  - post-dispatch JSON parse for receipt/artifact/review bridge/success receipt: passed
+  - git diff --check: passed with line-ending warnings only
+post_dispatch_expected_block:
+  - exact runtime binding validator now fails output_collision_clear because output exists after success; this is expected and prevents duplicate execution.
+not_performed:
+  - no retry
+  - no accepted_samples write
+  - no production candidate write
+  - no DailyNote write
+  - no VCP memory write
+  - no push/tag/release/deploy
+recommended_next: human review the generated candidate; if accepted, prepare a separate review-to-archive or accepted-sample gate.
+```
+
+### Checkpoint Addendum - Runtime-To-Review V2 Trial 001 Accepted Candidate 2026-06-08
+
+```text
+status: completed_human_review_accepted_candidate
+result: TRIAL_001_ATTEMPT_004_ACCEPTED_CANDIDATE
+summary: Owner agreed with Codex review. The generated Trial 001 attempt 004 image is now marked accepted_candidate in the artifact record and review bridge, with a separate review decision receipt. No archive, accepted_samples, DailyNote, or VCP memory write was performed.
+changed_refs:
+  - reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_review_decision_accepted_candidate_20260608.json
+  - reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_artifact_record.json
+  - reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_receipt.json
+  - review_console/live_receipt_bridge/r2r_v2_trial_001_serum_detail_control/bridge_entry.json
+not_performed:
+  - no accepted_samples write
+  - no archive write
+  - no production candidate write
+  - no DailyNote write
+  - no VCP memory write
+  - no push/tag/release/deploy
+recommended_next: prepare a separate promotion gate for archive/accepted_samples/memory candidate if desired.
+```
+
+### Checkpoint Addendum - Runtime-To-Review V2 Trial 001 Accepted Samples Promotion 2026-06-08
+
+```text
+status: completed_validated_metadata_only_accepted_samples_promotion
+result: TRIAL_001_ATTEMPT_004_REGISTERED_AS_ACCEPTED_SAMPLE_METADATA
+summary: Opened and executed a single promotion gate targeting accepted_samples. Added metadata-only accepted sample capsule, registry entry, and product_still_life category index entry for accepted_premium_skincare_serum_bottle_r2r_v2_trial_001_001. This did not copy/move the image binary and did not write memory/archive/production records.
+changed_refs:
+  - accepted_samples/accepted_sample_registry.yaml
+  - accepted_samples/categories/product_still_life.yaml
+  - accepted_samples/accepted_premium_skincare_serum_bottle_r2r_v2_trial_001_001/metadata.json
+  - accepted_samples/accepted_premium_skincare_serum_bottle_r2r_v2_trial_001_001/manifest.json
+  - accepted_samples/accepted_premium_skincare_serum_bottle_r2r_v2_trial_001_001/source_evidence.json
+  - reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_accepted_samples_promotion_gate_20260608.json
+  - scripts/validate_runtime_to_review_v2_trial_001_accepted_samples_promotion.js
+  - scripts/validate_v7_32_accepted_sample_registry_update.js
+validation_completed:
+  - node scripts/validate_runtime_to_review_v2_trial_001_accepted_samples_promotion.js: passed
+  - node scripts/validate_v7_32_accepted_sample_registry_update.js: passed
+  - JSON parse for new capsule/gate files: passed
+  - node --check updated validators: passed
+  - git diff --check: passed with line-ending warnings only
+not_performed:
+  - no image generation
+  - no provider/plugin/API call
+  - no image binary copy or move
+  - no durable archive write
+  - no production candidate write
+  - no DailyNote write
+  - no VCP memory write
+  - no push/tag/release/deploy
+recommended_next: durable archive gate or memory-candidate no-write mapping gate, as a separate promotion step.
+```
+
+### Checkpoint Addendum - Runtime-To-Review V2 Trial 001 Durable Archive Gate 2026-06-08
+
+```text
+status: completed_validated_durable_archive_gate
+result: TRIAL_001_ATTEMPT_004_ACCEPTED_SAMPLE_DURABLY_ARCHIVED
+summary: Opened and executed a separate durable archive gate for the accepted Trial 001 candidate. Copied exactly one source image binary from runs/real_generation into asset_archive/original_assets/by_sha256 using the image sha256 as the durable filename. Updated accepted_samples registry/category/capsule metadata to point at the durable archive and added a dedicated validator.
+changed_refs:
+  - asset_archive/original_assets/by_sha256/60af66aa0f26fc8e26eabd0719408d92b4efdc21b2f26737ae3e6fce1c1f9f82.jpg
+  - reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_durable_archive_authorization_20260608.json
+  - reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_durable_archive_execution_report_20260608.json
+  - accepted_samples/accepted_sample_registry.yaml
+  - accepted_samples/categories/product_still_life.yaml
+  - accepted_samples/accepted_premium_skincare_serum_bottle_r2r_v2_trial_001_001/metadata.json
+  - accepted_samples/accepted_premium_skincare_serum_bottle_r2r_v2_trial_001_001/manifest.json
+  - accepted_samples/accepted_premium_skincare_serum_bottle_r2r_v2_trial_001_001/source_evidence.json
+  - scripts/validate_runtime_to_review_v2_trial_001_durable_archive_gate.js
+validation_completed:
+  - node scripts/validate_runtime_to_review_v2_trial_001_durable_archive_gate.js: passed
+  - node scripts/validate_runtime_to_review_v2_trial_001_accepted_samples_promotion.js: passed
+  - node scripts/validate_v7_32_accepted_sample_registry_update.js: passed
+  - JSON parse for durable archive/capsule files: passed
+  - node --check scripts/validate_runtime_to_review_v2_trial_001_durable_archive_gate.js: passed
+  - git diff --check: passed with line-ending warnings only
+not_performed:
+  - no image generation
+  - no provider/plugin/API call
+  - no retry
+  - no source delete or move
+  - no overwrite
+  - no production candidate write
+  - no DailyNote write
+  - no VCP memory write
+  - no push/tag/release/deploy
+recommended_next: memory-candidate no-write mapping gate or production candidate readiness gate, separately.
+```
+
+### Checkpoint Addendum - Runtime-To-Review V2 Trial 001 Memory Candidate No-Write Mapping 2026-06-08
+
+```text
+status: completed_validated_memory_candidate_no_write_mapping
+result: TRIAL_001_ACCEPTED_SAMPLE_MEMORY_CANDIDATE_MAPPING_CREATED_WITHOUT_WRITE
+summary: Opened a separate memory-candidate no-write mapping gate for the accepted Trial 001 sample. Added a Chinese memory_delta candidate explaining the reusable lesson, connected accepted sample metadata/manifest/source_evidence to the mapping refs, and added a validator that proves no DailyNote, VCP memory, Codex memory, provider, plugin, API, image generation, image copy/move, production, push, tag, release, or deploy action occurred.
+changed_refs:
+  - reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_memory_candidate_no_write_mapping_gate_20260608.json
+  - reports/memory_delta_drafts/r2r_v2_trial_001_serum_detail_control_memory_delta_candidate_no_write_20260608.json
+  - accepted_samples/accepted_premium_skincare_serum_bottle_r2r_v2_trial_001_001/metadata.json
+  - accepted_samples/accepted_premium_skincare_serum_bottle_r2r_v2_trial_001_001/manifest.json
+  - accepted_samples/accepted_premium_skincare_serum_bottle_r2r_v2_trial_001_001/source_evidence.json
+  - scripts/validate_runtime_to_review_v2_trial_001_memory_candidate_no_write_mapping_gate.js
+validation_completed:
+  - node scripts/validate_runtime_to_review_v2_trial_001_memory_candidate_no_write_mapping_gate.js: passed
+  - node --check scripts/validate_runtime_to_review_v2_trial_001_memory_candidate_no_write_mapping_gate.js: passed
+  - node scripts/validate_runtime_to_review_v2_trial_001_durable_archive_gate.js: passed
+  - node scripts/validate_runtime_to_review_v2_trial_001_accepted_samples_promotion.js: passed
+  - node scripts/validate_v7_32_accepted_sample_registry_update.js: passed
+not_performed:
+  - no record_memory call
+  - no DailyNote write
+  - no VCP memory write
+  - no Codex knowledge memory write
+  - no provider/plugin/API call
+  - no image generation
+  - no image binary copy or move
+  - no production candidate write
+  - no push/tag/release/deploy
+recommended_next: optional memory authorization preflight with exact writer target, or pause.
+```
+
+### Checkpoint Addendum - Runtime-To-Review V2 Trial 001 Exact-File Staging Package Draft 2026-06-08
+
+```text
+status: completed_validated_exact_file_staging_package_draft
+result: TRIAL_001_LOCAL_CLOSEOUT_EXACT_FILE_STAGING_PACKAGE_DRAFTED
+summary: Reviewed the Trial 001 local worktree and produced a machine-validated exact-file staging package. The package lists 49 normal-add files and 2 force-add binary files, excludes .worktrees, and keeps VCPToolBox as a separate repository package. No staging, commit, or push was performed.
+changed_refs:
+  - reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_exact_file_staging_package_draft_20260608.json
+  - scripts/validate_runtime_to_review_v2_trial_001_exact_file_staging_package_draft.js
+validation_completed:
+  - node scripts/validate_runtime_to_review_v2_multi_prompt_controlled_trial_plan.js: passed
+  - node scripts/validate_runtime_to_review_v2_trial_001_vcptoolbox_internal_authorizer_binding.js: passed
+  - node scripts/validate_runtime_to_review_v2_trial_001_accepted_samples_promotion.js: passed
+  - node scripts/validate_runtime_to_review_v2_trial_001_durable_archive_gate.js: passed
+  - node scripts/validate_runtime_to_review_v2_trial_001_memory_candidate_no_write_mapping_gate.js: passed
+  - node scripts/validate_v7_32_accepted_sample_registry_update.js: passed
+  - node scripts/validate_agent_board_state.js: passed
+  - node scripts/validate_runtime_to_review_v2_trial_001_exact_file_staging_package_draft.js: passed
+  - git diff --check: passed with CRLF warnings only
+not_performed:
+  - no staging
+  - no commit
+  - no push
+  - no git add .
+  - no VCPToolBox staging
+recommended_next: exact-file local commit if requested, then separate VCPToolBox review if needed.
+```
+
+### Checkpoint Addendum - Runtime-To-Review V2 Trial 001 Codex Knowledge Memory Write Preflight 2026-06-08
+
+```text
+status: completed_validated_codex_knowledge_memory_write_preflight_no_write
+result: TRIAL_001_CODEX_KNOWLEDGE_MEMORY_SINGLE_WRITE_PREFLIGHT_PREPARED
+summary: Prepared a no-write preflight for a future single Codex knowledge memory write from the Trial 001 accepted sample. Added an exact Chinese payload, selected mcp__vcp_codex_memory.record_memory as the future target surface, fixed target=knowledge and targetDiary=Codex knowledge, excluded DailyNote and VCP dual memory, and kept can_execute_now=false.
+changed_refs:
+  - reports/memory_write_authorization/r2r_v2_trial_001_codex_knowledge_memory_write_preflight_20260608.json
+  - reports/memory_write_payloads/r2r_v2_trial_001_codex_knowledge_memory_write_payload_20260608.json
+  - scripts/validate_runtime_to_review_v2_trial_001_codex_knowledge_memory_write_preflight.js
+validation_completed:
+  - node scripts/validate_runtime_to_review_v2_trial_001_codex_knowledge_memory_write_preflight.js: passed
+  - node --check scripts/validate_runtime_to_review_v2_trial_001_codex_knowledge_memory_write_preflight.js: passed
+  - git diff --check: passed
+not_performed:
+  - no record_memory call
+  - no DailyNote write
+  - no VCP memory write
+  - no Codex knowledge memory write
+  - no provider/plugin/API call
+  - no image generation
+  - no push/tag/release/deploy
+recommended_next: issue a binding-ready Codex knowledge memory write packet with can_execute_now=true if the owner wants the real memory write.
+```
+## Checkpoint - Runtime-To-Review V2 Trial 001 Codex Knowledge Memory Write Executed 2026-06-08
+
+```text
+phase: runtime_to_review_v2_trial_001_codex_knowledge_memory_write_executed_20260608
+status: completed_validated_codex_knowledge_memory_written
+result: TRIAL_001_CODEX_KNOWLEDGE_MEMORY_SINGLE_WRITE_COMMITTED
+summary: Issued a binding-ready memory execution packet for the Trial 001 accepted sample and executed exactly one record_memory call. The write targeted Codex knowledge only with target=knowledge and targetDiary=Codex knowledge. The tool accepted and committed the memory, returning memory id codex-knowledge-3a86b6bc791e427f9eeec8d53d9f3c79. No DailyNote or VCP dual-memory write was performed.
+changed_refs:
+  - reports/memory_write_authorization/r2r_v2_trial_001_codex_knowledge_memory_write_binding_ready_packet_20260608.json
+  - reports/memory_write_receipts/r2r_v2_trial_001_codex_knowledge_memory_write_receipt_20260608.json
+  - scripts/validate_runtime_to_review_v2_trial_001_codex_knowledge_memory_write_binding_ready_packet.js
+  - scripts/validate_runtime_to_review_v2_trial_001_codex_knowledge_memory_write_receipt.js
+  - accepted_samples/accepted_sample_registry.yaml
+  - accepted_samples/accepted_premium_skincare_serum_bottle_r2r_v2_trial_001_001/metadata.json
+  - accepted_samples/accepted_premium_skincare_serum_bottle_r2r_v2_trial_001_001/manifest.json
+  - accepted_samples/accepted_premium_skincare_serum_bottle_r2r_v2_trial_001_001/source_evidence.json
+  - scripts/validate_runtime_to_review_v2_trial_001_accepted_samples_promotion.js
+  - scripts/validate_runtime_to_review_v2_trial_001_memory_candidate_no_write_mapping_gate.js
+  - scripts/validate_v7_32_accepted_sample_registry_update.js
+validation_completed:
+  - node scripts\validate_runtime_to_review_v2_trial_001_codex_knowledge_memory_write_binding_ready_packet.js: passed
+  - node scripts\validate_runtime_to_review_v2_trial_001_codex_knowledge_memory_write_receipt.js: passed
+  - node scripts\validate_runtime_to_review_v2_trial_001_accepted_samples_promotion.js: passed
+  - node scripts\validate_runtime_to_review_v2_trial_001_memory_candidate_no_write_mapping_gate.js: passed
+  - node scripts\validate_v7_32_accepted_sample_registry_update.js: passed
+not_performed:
+  - no retry
+  - no DailyNote write
+  - no VCP memory write
+  - no provider/plugin/API call
+  - no image generation
+  - no push/tag/release/deploy
+  - no raw memory file path recorded in project files
+recommended_next: final local validation, exact-file staging package or local commit if needed; push remains separately gated.
+```
+## Checkpoint - Runtime-To-Review V2 Trial 002 Lantern No-Execute Packet 2026-06-08
+
+```text
+phase: runtime_to_review_v2_trial_002_lantern_ecommerce_hero_no_execute_packet_20260608
+status: completed_validated_local_packet_and_review_criteria_no_execute
+result: TRIAL_002_LANTERN_NO_EXECUTE_PACKET_AND_REVIEW_CRITERIA_PREPARED
+summary: Prepared Trial 002 as a no-execute packet for premium_portable_led_camping_lantern ecommerce square hero. Added a separate review criteria file with concrete acceptance bar, scoring weights, and watch items. No route, provider, plugin, API, image, output, memory, archive, accepted_samples, production, push, tag, release, or deploy action occurred.
+changed_refs:
+  - reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_activation_packet_no_execute_20260608.json
+  - reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_review_criteria_no_execute_20260608.json
+  - scripts/validate_runtime_to_review_v2_trial_002_activation_packet_no_execute.js
+validation_completed:
+  - node scripts\validate_runtime_to_review_v2_trial_002_activation_packet_no_execute.js: passed
+  - node scripts\validate_prompt_schema.js --type prompt_package prompts\image_generation\product_lifestyle_premium_portable_led_camping_lantern_v2.yaml: passed
+  - node scripts\validate_runtime_to_review_v2_multi_prompt_controlled_trial_plan.js: passed
+not_performed:
+  - no route HTTP
+  - no provider/plugin/API call
+  - no image generation
+  - no output write
+  - no secret read
+  - no accepted_samples/production/DailyNote/VCP memory write
+  - no push/tag/release/deploy
+recommended_next: review the packet/criteria, then create a separate binding-ready execution packet only if Trial 002 should run.
+```
+
+## Checkpoint - Runtime-To-Review V2 Trial 002 AIL-Side Binding Preflight 2026-06-08
+
+```text
+phase: runtime_to_review_v2_trial_002_lantern_ecommerce_hero_ail_side_binding_preflight_20260608
+status: completed_validated_local_ail_side_binding_preflight_external_route_pending
+result: TRIAL_002_AIL_SIDE_EXACT_BINDING_PREPARED_EXTERNAL_ROUTE_PENDING
+summary: Prepared the Agent Image Lab side of Trial 002 execution binding for the premium portable LED camping lantern ecommerce square hero. Added the exact runtime adapter, runtime fixture, secretless bridge allowlist entries, and an AIL-side binding preflight packet. This step intentionally does not flip can_execute_now=true because the matching VCPToolBox Trial 002 internal route and authorizer are not yet bound.
+changed_refs:
+  - scripts/native_doubao_secretless_provider_runtime_bridge.js
+  - adapters/runtime/native_doubao_runtime_v2_trial_002_lantern_ecommerce_broker_dispatch_adapter.js
+  - tests/fixtures/runtime_kernel_v2_trial_002_lantern_ecommerce_hero_task.fixture.json
+  - reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_ail_side_binding_preflight_20260608.json
+  - scripts/validate_runtime_to_review_v2_trial_002_ail_side_binding_preflight.js
+  - reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_ail_side_binding_exact_file_staging_package_draft_20260608.json
+  - scripts/validate_runtime_to_review_v2_trial_002_ail_side_binding_exact_file_staging_package_draft.js
+validation_completed:
+  - node --check adapters\runtime\native_doubao_runtime_v2_trial_002_lantern_ecommerce_broker_dispatch_adapter.js: passed
+  - node --check scripts\validate_runtime_to_review_v2_trial_002_ail_side_binding_preflight.js: passed
+  - node scripts\validate_runtime_to_review_v2_trial_002_ail_side_binding_preflight.js: passed, 26 checks
+  - node scripts\validate_runtime_to_review_v2_trial_002_activation_packet_no_execute.js: passed, 20 checks
+  - node scripts\validate_runtime_to_review_v2_multi_prompt_controlled_trial_plan.js: passed, 24 checks
+  - node scripts\validate_prompt_schema.js --type prompt_package prompts\image_generation\product_lifestyle_premium_portable_led_camping_lantern_v2.yaml: passed
+  - node scripts\validate_runtime_to_review_v2_trial_002_ail_side_binding_exact_file_staging_package_draft.js: passed, 10 checks
+not_performed:
+  - no route HTTP request
+  - no provider/plugin/API call
+  - no image generation
+  - no output write
+  - no secret read
+  - no accepted_samples write
+  - no production candidate write
+  - no DailyNote or VCP memory write
+  - no push/tag/release/deploy
+recommended_next: exact-file stage and commit the AIL-side package if desired; VCPToolBox binding remains a later separate step.
+```
+
+## Checkpoint - Runtime-To-Review V2 Trial 002 Review And Execution Preflight Templates 2026-06-08
+
+```text
+phase: runtime_to_review_v2_trial_002_lantern_ecommerce_hero_review_and_execution_preflight_templates_20260608
+status: completed_validated_local_templates_no_execute_external_route_pending
+result: TRIAL_002_REVIEW_AND_EXECUTION_PREFLIGHT_TEMPLATES_PREPARED_NO_EXECUTE
+summary: Added a Trial 002 review instruction template and a future execution preflight template. The review template tells the reviewer how to judge the lantern candidate after a future successful dispatch. The execution preflight template records the future one-image budget and hard stops, but explicitly keeps can_execute_now=false and marks the future command as must_not_run_from_this_template.
+changed_refs:
+  - reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_review_instruction_template_20260608.json
+  - reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_execution_preflight_template_20260608.json
+  - scripts/validate_runtime_to_review_v2_trial_002_review_and_execution_preflight_templates.js
+validation_completed:
+  - node --check scripts\validate_runtime_to_review_v2_trial_002_review_and_execution_preflight_templates.js: passed
+  - node scripts\validate_runtime_to_review_v2_trial_002_review_and_execution_preflight_templates.js: passed, 16 checks
+  - node scripts\validate_runtime_to_review_v2_trial_002_ail_side_binding_preflight.js: passed, 26 checks
+  - node scripts\validate_runtime_to_review_v2_trial_002_activation_packet_no_execute.js: passed, 20 checks
+not_performed:
+  - no route HTTP request
+  - no provider/plugin/API call
+  - no image generation
+  - no output write
+  - no secret read
+  - no accepted_samples write
+  - no production candidate write
+  - no DailyNote or VCP memory write
+  - no VCPToolBox modification
+  - no push/tag/release/deploy
+recommended_next: exact-file local commit for these AIL-side template files; keep VCPToolBox untouched until explicitly selected.
+```
+
+## Checkpoint - Trial 002 Failed Dispatch Output Directory Guard PR10 2026-06-08
+
+```text
+phase: runtime_to_review_v2_trial_002_failed_dispatch_output_directory_guard_pr10
+status: completed_validated_local_pr_review_fix_pending_commit_push
+result: TRIAL_002_FAILED_DISPATCH_NO_OUTPUT_DIRECTORY_SIDE_EFFECT
+summary: Addressed PR feedback by removing the pre-dispatch mkdir for the Trial 002 output directory and by enforcing the existing-output-directory stop condition before dispatch. The adapter now validates the requested output directory and fail-closes on collision before broker dispatch, so a missing, unreachable, rejecting, or stale-output route cannot consume call budget or leave runs/real_generation/runtime_to_review_v2_trial_002_lantern_ecommerce_hero/ in an unsafe state while reporting output_write_performed=false.
+changed_refs:
+  - adapters/runtime/native_doubao_runtime_v2_trial_002_lantern_ecommerce_broker_dispatch_adapter.js
+  - scripts/validate_runtime_to_review_v2_trial_002_ail_side_binding_preflight.js
+validation_completed:
+  - node --check adapters\runtime\native_doubao_runtime_v2_trial_002_lantern_ecommerce_broker_dispatch_adapter.js: passed
+  - node --check scripts\validate_runtime_to_review_v2_trial_002_ail_side_binding_preflight.js: passed
+  - node scripts\validate_runtime_to_review_v2_trial_002_ail_side_binding_preflight.js: passed, 26 checks
+not_performed:
+  - no real route HTTP request
+  - no provider/plugin/API call
+  - no image generation
+  - no output write
+  - no output directory creation on failed route
+  - no route POST when output directory already exists
+  - no VCPToolBox modification
+recommended_next: run final validator set, exact-file stage, commit, and push the existing PR branch.
+```
