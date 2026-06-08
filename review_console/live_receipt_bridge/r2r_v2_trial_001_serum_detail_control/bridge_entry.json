@@ -1,0 +1,33 @@
+{
+  "schema": "runtime_to_review_v2_review_bridge_entry.v1",
+  "bridge_type": "runtime_to_review_real_entry_metadata_only",
+  "created_at": "2026-06-08T00:00:00+08:00",
+  "trial_id": "r2r_v2_trial_001_serum_detail_control",
+  "attempt_number": 4,
+  "current_review_status": "accepted_candidate",
+  "display_only": true,
+  "metadata_only": true,
+  "image_binary_read_performed_by_bridge": false,
+  "artifact_record_ref": "reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_artifact_record.json",
+  "audit_receipt_ref": "reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_receipt.json",
+  "image": {
+    "path": "runs/real_generation/runtime_to_review_v2_trial_001_serum_detail_control/7bb59380-abb4-4180-9fa6-6a71549aec41.jpg",
+    "sha256": "60af66aa0f26fc8e26eabd0719408d92b4efdc21b2f26737ae3e6fce1c1f9f82",
+    "mime_type": "image/jpeg",
+    "dimensions": "1920x1920"
+  },
+  "guard_summary": {
+    "human_review_required": false,
+    "accepted_sample_write_allowed_now": false,
+    "production_candidate_allowed_now": false,
+    "memory_write_allowed_now": false,
+    "audit_receipt_status": "completed_provider_image_created"
+  },
+  "human_review_decision": {
+    "reviewed_at": "2026-06-08T00:00:00+08:00",
+    "reviewer": "project_owner",
+    "decision": "accepted_candidate",
+    "commercial_delivery_ready": false,
+    "next_gate_required_for_archive_or_memory": true
+  }
+}

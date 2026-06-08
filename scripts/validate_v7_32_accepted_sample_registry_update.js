@@ -24,6 +24,7 @@ const requiredSampleIds = [
   "neutral_red_apple_seedream5_retry_006",
   "accepted_premium_black_wireless_headphones_hero_ail_vis_17_001",
   "accepted_premium_skincare_serum_bottle_secretless_attempt_018_001",
+  "accepted_premium_skincare_serum_bottle_r2r_v2_trial_001_001",
 ];
 const requiredCodexSample = "accepted_womens_resort_relaxed_knit_codex_v2_001";
 const requiredBagCodexSample = "accepted_fashion_lifestyle_woven_crossbody_bag_codex_v14_161_001";
@@ -31,6 +32,7 @@ const requiredLampCodexSample = "accepted_product_lifestyle_portable_led_camping
 const requiredRetry006ProductSample = "neutral_red_apple_seedream5_retry_006";
 const requiredHeadphonesProductSample = "accepted_premium_black_wireless_headphones_hero_ail_vis_17_001";
 const requiredSerumAttempt018ProductSample = "accepted_premium_skincare_serum_bottle_secretless_attempt_018_001";
+const requiredSerumTrial001ProductSample = "accepted_premium_skincare_serum_bottle_r2r_v2_trial_001_001";
 const imageExtensions = /\.(png|jpe?g|webp|gif|psd|tiff?)$/i;
 
 let passed = true;
@@ -137,6 +139,15 @@ const serumImageEvidence = readImageEvidence(serumImagePath);
 const serumMetadata = readJson("accepted_samples/accepted_premium_skincare_serum_bottle_secretless_attempt_018_001/metadata.json");
 const serumManifest = readJson("accepted_samples/accepted_premium_skincare_serum_bottle_secretless_attempt_018_001/manifest.json");
 const serumSourceEvidence = readJson("accepted_samples/accepted_premium_skincare_serum_bottle_secretless_attempt_018_001/source_evidence.json");
+const serumTrial001Block = sampleBlocks.get(requiredSerumTrial001ProductSample) || "";
+const serumTrial001ImagePath = extractField(serumTrial001Block, "image_path");
+const serumTrial001RegistrySha256 = extractField(serumTrial001Block, "verified_sha256");
+const serumTrial001RegistryDimensions = extractField(serumTrial001Block, "verified_dimensions");
+const serumTrial001RegistryMime = extractField(serumTrial001Block, "verified_mime");
+const serumTrial001ImageEvidence = readImageEvidence(serumTrial001ImagePath);
+const serumTrial001Metadata = readJson("accepted_samples/accepted_premium_skincare_serum_bottle_r2r_v2_trial_001_001/metadata.json");
+const serumTrial001Manifest = readJson("accepted_samples/accepted_premium_skincare_serum_bottle_r2r_v2_trial_001_001/manifest.json");
+const serumTrial001SourceEvidence = readJson("accepted_samples/accepted_premium_skincare_serum_bottle_r2r_v2_trial_001_001/source_evidence.json");
 
 check("accepted_samples_readme", () => fileExists("accepted_samples/README.md"));
 check("registry_exists", () => fileExists(registryPath));
@@ -306,6 +317,55 @@ check("serum_attempt_018_broker_boundary_recorded", () =>
 );
 check("serum_attempt_018_product_sample_registry_no_memory_authorization", () => serumBlock.includes("write_to_memory_allowed: false"));
 check("serum_attempt_018_product_sample_registry_no_daily_note_authorization", () => serumBlock.includes("daily_note_write_allowed: false"));
+check("serum_trial_001_product_sample_present", () => sampleBlocks.has(requiredSerumTrial001ProductSample));
+check("serum_trial_001_product_sample_provider_type", () => extractField(serumTrial001Block, "provider_type") === "project_plugin");
+check("serum_trial_001_product_sample_plugin", () => extractField(serumTrial001Block, "plugin_id") === "DoubaoGen");
+check("serum_trial_001_product_sample_category", () => extractField(serumTrial001Block, "category") === "product_still_life");
+check("serum_trial_001_product_sample_image_not_committed", () => serumTrial001Block.includes("image_files_committed_to_git: false"));
+check("serum_trial_001_product_sample_source_file_exists", () => Boolean(serumTrial001ImagePath) && fileExists(serumTrial001ImagePath));
+check("serum_trial_001_product_sample_source_sha256_matches_registry", () =>
+  serumTrial001ImageEvidence?.sha256 === serumTrial001RegistrySha256
+);
+check("serum_trial_001_product_sample_source_dimensions_match_registry", () =>
+  serumTrial001ImageEvidence?.dimensions === serumTrial001RegistryDimensions
+);
+check("serum_trial_001_product_sample_source_mime_matches_registry", () =>
+  serumTrial001ImageEvidence?.signatureValid === true && serumTrial001ImageEvidence?.mime === serumTrial001RegistryMime
+);
+check("serum_trial_001_product_sample_metadata_matches_registry", () =>
+  serumTrial001Metadata.artifact.source_image_ref === serumTrial001ImagePath &&
+  serumTrial001Metadata.artifact.source_image_sha256 === serumTrial001RegistrySha256 &&
+  serumTrial001Metadata.artifact.source_image_dimensions === serumTrial001RegistryDimensions &&
+  serumTrial001Metadata.artifact.source_image_mime === serumTrial001RegistryMime
+);
+check("serum_trial_001_product_sample_manifest_matches_registry", () =>
+  serumTrial001Manifest.artifact.original.path === serumTrial001ImagePath &&
+  serumTrial001Manifest.artifact.original.sha256 === serumTrial001RegistrySha256 &&
+  `${serumTrial001Manifest.artifact.original.width}x${serumTrial001Manifest.artifact.original.height}` === serumTrial001RegistryDimensions &&
+  serumTrial001Manifest.artifact.original.format === "jpeg" &&
+  serumTrial001Manifest.artifact.original.bytes === serumTrial001ImageEvidence?.bytes
+);
+check("serum_trial_001_product_sample_source_evidence_matches_file", () =>
+  serumTrial001SourceEvidence.verified_source_image.path === serumTrial001ImagePath &&
+  serumTrial001SourceEvidence.verified_source_image.sha256 === serumTrial001ImageEvidence?.sha256 &&
+  `${serumTrial001SourceEvidence.verified_source_image.width}x${serumTrial001SourceEvidence.verified_source_image.height}` === serumTrial001ImageEvidence?.dimensions &&
+  serumTrial001SourceEvidence.verified_source_image.mime === serumTrial001ImageEvidence?.mime &&
+  serumTrial001SourceEvidence.verified_source_image.bytes === serumTrial001ImageEvidence?.bytes
+);
+check("serum_trial_001_product_sample_codex_memory_effects_split", () =>
+  serumTrial001Block.includes("write_to_memory_allowed: false") &&
+  serumTrial001Block.includes("daily_note_write_allowed: false") &&
+  serumTrial001Block.includes("memory_write_receipt_ref: reports/memory_write_receipts/r2r_v2_trial_001_codex_knowledge_memory_write_receipt_20260608.json") &&
+  serumTrial001Block.includes("codex_knowledge_memory_written: true") &&
+  serumTrial001Block.includes("codex_knowledge_memory_id: codex-knowledge-3a86b6bc791e427f9eeec8d53d9f3c79") &&
+  serumTrial001SourceEvidence.side_effects.Codex_knowledge_memory_write_performed === true &&
+  serumTrial001SourceEvidence.side_effects.Codex_knowledge_memory_id === "codex-knowledge-3a86b6bc791e427f9eeec8d53d9f3c79" &&
+  serumTrial001SourceEvidence.side_effects.project_DailyNote_writer_performed === false &&
+  serumTrial001SourceEvidence.memory_effects.codex_knowledge_memory_written === true &&
+  serumTrial001SourceEvidence.memory_effects.codex_knowledge_memory_receipt_ref === "reports/memory_write_receipts/r2r_v2_trial_001_codex_knowledge_memory_write_receipt_20260608.json" &&
+  serumTrial001Metadata.memory_effects.codex_knowledge_memory_written === true &&
+  serumTrial001Metadata.memory_effects.project_DailyNote_writer_performed === false
+);
 check("v7_34_hardening_doc_exists", () => fileExists(v734HardeningDocPath));
 check("v7_34_hardening_doc_records_memory_layer_split", () =>
   fileContains(v734HardeningDocPath, "Codex_knowledge_memory") &&
@@ -346,7 +406,8 @@ check("ecosystem_receipt_v7_34_hardening_recorded", () => {
 check("final_closeout_v7_34_hardening_recorded", () =>
   fileContains("reports/runtime_to_review_v1/agent_image_lab_final_project_closeout_20260606.md", "v7_34_full_code_surface_hardening_closeout") &&
   fileContains("reports/runtime_to_review_v1/agent_image_lab_final_project_closeout_20260606.md", "native_doubao_image_is_secretless_delegate: false") &&
-  fileContains("reports/runtime_to_review_v1/agent_image_lab_final_project_closeout_20260606.md", "local_master_has_unpushed_reconciliation_or_hardening_work: true")
+  fileContains("reports/runtime_to_review_v1/agent_image_lab_final_project_closeout_20260606.md", "remote_master_aligned_to_final_closeout_state: true") &&
+  fileContains("reports/runtime_to_review_v1/agent_image_lab_final_project_closeout_20260606.md", "local_master_has_unpushed_reconciliation_or_hardening_work: false")
 );
 check("legacy_wallet_sample_present", () => sampleBlocks.has("accepted_product_still_life_tennis_wallet_001"));
 check("legacy_rattan_bag_samples_present", () => requiredSampleIds.slice(1, 5).every((id) => sampleBlocks.has(id)));
@@ -365,7 +426,7 @@ for (const index of categoryIndexes) {
   );
 }
 
-check("product_category_count_5", () => fileContains("accepted_samples/categories/product_still_life.yaml", "sample_count: 5"));
+check("product_category_count_6", () => fileContains("accepted_samples/categories/product_still_life.yaml", "sample_count: 6"));
 check("fashion_lifestyle_category_count_5", () => fileContains("accepted_samples/categories/fashion_lifestyle_still_life.yaml", "sample_count: 5"));
 check("fashion_lookbook_category_count_2", () => fileContains("accepted_samples/categories/fashion_lookbook_portrait.yaml", "sample_count: 2"));
 check("tracked_accepted_samples_are_metadata_only", () =>

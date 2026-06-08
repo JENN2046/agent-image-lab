@@ -6,6 +6,7 @@
 !/runs/real_generation/*/generation_attempt_result.json
 /node_modules/
 /release_packages/
+/.worktrees/
 /.agent_private/
 /.omc/
 /.claude/

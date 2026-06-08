@@ -1,0 +1,95 @@
+{
+  "schema": "runtime_to_review_v2_review_instruction_template.v1",
+  "template_id": "r2r_v2_trial_002_lantern_ecommerce_hero_review_instruction_template_20260608",
+  "created_at": "2026-06-08T00:00:00+08:00",
+  "status": "prepared_review_instruction_template_no_execution",
+  "trial_id": "r2r_v2_trial_002_lantern_ecommerce_hero",
+  "source_refs": {
+    "no_execute_packet_ref": "reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_activation_packet_no_execute_20260608.json",
+    "review_criteria_ref": "reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_review_criteria_no_execute_20260608.json",
+    "ail_side_binding_preflight_ref": "reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_ail_side_binding_preflight_20260608.json",
+    "prompt_package_ref": "prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v2.yaml"
+  },
+  "review_context_plain_language_zh": [
+    "这次 Trial 002 不是复刻 Trial 001 的精华瓶，而是换成便携 LED 露营灯，测试同一套 runtime-to-review 管线能不能跨品类工作。",
+    "审查重点不是单纯好不好看，而是：产品身份有没有稳住、几何结构有没有合理、商业主图是否可用、有没有违规的手/火/烟/文字/logo。",
+    "如果未来生成结果失败，评论必须指出失败落在哪一层：VisualJobContract、ShotPlan、ReviewPolicy、prompt package、AIL adapter，还是 VCPToolBox route binding。",
+    "这份模板本身不授权生成、不授权归档、不授权 accepted_samples、不授权 memory write。"
+  ],
+  "reviewer_inputs_required_after_generation": {
+    "artifact_record_ref": "reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_artifact_record.json",
+    "receipt_ref": "reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_receipt.json",
+    "review_bridge_ref": "review_console/live_receipt_bridge/r2r_v2_trial_002_lantern_ecommerce_hero/bridge_entry.json",
+    "output_directory_ref": "runs/real_generation/runtime_to_review_v2_trial_002_lantern_ecommerce_hero/",
+    "expected_generated_status_before_review": "generated_unreviewed"
+  },
+  "review_decision_options": [
+    {
+      "decision": "accepted_candidate",
+      "meaning": "生成图可作为候选进入后续单独 promotion gate，但不能在本次 review 中直接写 accepted_samples、archive、production 或 memory。"
+    },
+    {
+      "decision": "needs_prompt_or_binding_revision",
+      "meaning": "图像有可修正问题，需要明确指出是 prompt/shot plan/review policy/adapter/broker binding 哪一层要改。"
+    },
+    {
+      "decision": "rejected_candidate",
+      "meaning": "产品身份或安全/品牌清洁度失败到不值得修补，后续必须新开 trial 或重写 prompt。"
+    }
+  ],
+  "minimum_acceptance_bar": {
+    "single_product_only": true,
+    "modern_premium_led_camping_lantern_read": true,
+    "square_ecommerce_hero_framing": true,
+    "full_handle_diffuser_body_control_and_base_visible": true,
+    "product_first_visual_focus": true,
+    "control_position_readable": true,
+    "cylindrical_or_soft_rect_geometry_plausible": true,
+    "warm_frosted_diffuser_controlled_not_blown": true,
+    "premium_dark_metal_or_outdoor_electronics_material": true,
+    "grounded_table_or_surface_contact": true,
+    "early_blue_hour_or_refined_outdoor_support": true,
+    "no_people_hands_fire_smoke": true,
+    "no_readable_brand_text_logo_or_watermark": true,
+    "no_extra_lanterns_or_wrong_product_drift": true
+  },
+  "review_questions_zh": [
+    "第一眼是否明确是现代便携 LED 露营灯，而不是手电筒、音箱、蜡烛、加湿器、保温杯、台灯或老式煤油灯？",
+    "手柄、扩散罩、下部控制/旋钮、主体和底座是否都完整可见，且结构合理？",
+    "画面是否是商品优先的方形电商主图，而不是风景照或露营氛围图？",
+    "暖色扩散罩是否发光但不过曝，边缘和材质还能读清？",
+    "背景是否只做第二层支撑，没有抢走产品注意力？",
+    "是否完全没有人物、手、脸、明火、烟、文字、logo、水印和第二个灯？",
+    "如果失败，失败最可能应该改哪一层：prompt、shot plan、review policy、AIL adapter，还是 VCPToolBox binding？"
+  ],
+  "scoring_weights": {
+    "product_identity_and_geometry": 0.3,
+    "commercial_hero_composition": 0.25,
+    "material_and_light_control": 0.2,
+    "safety_and_brand_cleanliness": 0.15,
+    "pipeline_learning_value": 0.1
+  },
+  "post_review_boundaries": {
+    "accepted_samples_write_allowed_by_review_template": false,
+    "durable_archive_write_allowed_by_review_template": false,
+    "production_candidate_write_allowed_by_review_template": false,
+    "DailyNote_write_allowed_by_review_template": false,
+    "VCP_memory_write_allowed_by_review_template": false,
+    "Codex_memory_write_allowed_by_review_template": false,
+    "separate_promotion_gate_required_after_acceptance": true
+  },
+  "side_effect_flags": {
+    "route_http_request_performed": false,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "output_write_performed": false,
+    "accepted_samples_write_performed": false,
+    "production_candidate_write_performed": false,
+    "DailyNote_write_performed": false,
+    "VCP_memory_write_performed": false,
+    "push_tag_release_deploy_performed": false
+  },
+  "recommended_next": "use_this_template_only_after_a_future_trial_002_success_receipt_and_review_bridge_exist"
+}
