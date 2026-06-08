@@ -1,0 +1,93 @@
+{
+  "schema": "runtime_to_review_v2_vcptoolbox_internal_authorizer_binding_receipt.v1",
+  "receipt_id": "r2r_v2_trial_001_vcptoolbox_internal_authorizer_binding_receipt_20260608",
+  "created_at": "2026-06-08T00:00:00+08:00",
+  "project": "Agent Image Lab",
+  "external_target": {
+    "repository": "A:/VCP/apps/VCPToolBox",
+    "branch": "codex/onering-server-inferred-timeline-20260608",
+    "changed_files": [
+      "server.js",
+      "routes/admin/aiImageAgents.js"
+    ]
+  },
+  "intent": "Bind Internal Authorizer / Restricted Plugin Facade for Trial 001 secretless activation without Agent Image Lab reading secrets or constructing Authorization headers.",
+  "binding": {
+    "route_path": "/internal/ai-image-agents/execute/r2r-v2-trial-001-serum-detail-control",
+    "method": "POST",
+    "loopback_only_bearer_bypass": true,
+    "route_level_exact_authorizer_required": true,
+    "mode": "r2r_v2_trial_001_serum_detail_control_secretless_internal_execute",
+    "activation_id": "AUTH-R2R-V2-TRIAL-001-SERUM-DETAIL-CONTROL-20260608-FUTURE-EXECUTION",
+    "pipeline_id": "runtime_to_review_v2_trial_001_serum_detail_control",
+    "route_id": "r2r_v2_trial_001_serum_detail_control_secretless",
+    "prompt_package_ref": "prompts/image_generation/product_detail_premium_serum_bottle_v2.yaml",
+    "output_directory_ref": "runs/real_generation/runtime_to_review_v2_trial_001_serum_detail_control/",
+    "receipt_ref": "reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_receipt.json",
+    "artifact_record_ref": "reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_artifact_record.json",
+    "review_bridge_ref": "review_console/live_receipt_bridge/r2r_v2_trial_001_serum_detail_control/bridge_entry.json",
+    "provider_id": "doubao",
+    "plugin_id": "DoubaoGen",
+    "api_id": "generate_image",
+    "model": "doubao-seedream-5-0-260128",
+    "resolution": "1920x1920",
+    "budget": {
+      "max_route_http_requests": 1,
+      "max_provider_calls": 1,
+      "max_plugin_calls": 1,
+      "max_api_calls": 1,
+      "max_images": 1,
+      "retry_allowed": false
+    }
+  },
+  "runtime_update": {
+    "pm2_process": "vcp-main",
+    "restart_performed": true,
+    "update_env_performed": true,
+    "env_flags_set_without_secret_values": {
+      "ENABLE_AI_IMAGE_AGENTS_ROUTE": "true",
+      "ENABLE_AI_IMAGE_REAL_EXECUTION": "true",
+      "ENABLE_NATIVE_DOUBAO_SECRETLESS_RUNTIME_DELEGATE": "true"
+    }
+  },
+  "probe_result": {
+    "head_route_status": 204,
+    "invalid_post_status": 200,
+    "invalid_post_result_status": "r2r_v2_trial_001_payload_unknown_fields",
+    "bearer_middleware_no_longer_blocks_trial_001_route": true,
+    "route_level_authorizer_reached": true,
+    "provider_contact_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false
+  },
+  "validation": {
+    "node_check_vcptoolbox_server": "passed",
+    "node_check_vcptoolbox_ai_image_agents_route": "passed",
+    "authorizer_binding_validator": {
+      "command": "node scripts/validate_runtime_to_review_v2_trial_001_vcptoolbox_internal_authorizer_binding.js",
+      "passed": true,
+      "check_count": 10
+    }
+  },
+  "side_effect_flags": {
+    "route_http_request_performed_for_invalid_probe": true,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "secret_value_read_performed": false,
+    "env_file_content_read_performed": false,
+    "authorization_header_constructed_by_agent_image_lab": false,
+    "accepted_samples_write_performed": false,
+    "production_candidate_write_performed": false,
+    "DailyNote_write_performed": false,
+    "VCP_memory_write_performed": false,
+    "push_tag_release_deploy_performed": false
+  },
+  "remaining_condition_before_next_dispatch": {
+    "empty_output_directory_exists_from_attempt_002": true,
+    "cleanup_or_new_output_packet_required_before_rearm": true,
+    "successful_generation_not_attempted_after_binding": true
+  },
+  "recommended_next": "clean_empty_output_directory_or_issue_new_output_packet_then_rearm_attempt_003_and_execute_once"
+}

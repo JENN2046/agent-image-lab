@@ -1,0 +1,117 @@
+{
+  "schema": "runtime_to_review_v2_execution_attempt_receipt.v1",
+  "receipt_id": "r2r_v2_trial_001_serum_detail_control_execution_attempt_003_failed_closed_20260608",
+  "created_at": "2026-06-08T00:00:00+08:00",
+  "project": "Agent Image Lab",
+  "trial_id": "r2r_v2_trial_001_serum_detail_control",
+  "attempt_number": 3,
+  "lane": "Amber_B_provider_image",
+  "status": "failed_closed_generated_external_image_not_archived_to_artifact_store",
+  "execution_completed": false,
+  "dispatch_performed": true,
+  "retry_performed": false,
+  "dispatch_command": {
+    "command": "node",
+    "args": [
+      "scripts/run_runtime_to_review_v1_guarded_live_probe.js",
+      "--input",
+      "tests/fixtures/runtime_kernel_v2_trial_001_serum_detail_control_task.fixture.json",
+      "--provider-delegate-module",
+      "adapters/runtime/native_doubao_runtime_v1_provider_delegate.js",
+      "--owner-runtime-module",
+      "adapters/runtime/native_doubao_runtime_v2_trial_001_serum_detail_broker_dispatch_adapter.js",
+      "--confirm-live-provider-probe",
+      "RUNTIME_TO_REVIEW_V1_ONE_PROVIDER_ONE_IMAGE",
+      "--max-images",
+      "1"
+    ]
+  },
+  "pre_dispatch_validation": {
+    "cleanup_target_verified_inside_workspace": true,
+    "cleanup_target_verified_empty_before_cleanup": true,
+    "cleanup_performed": true,
+    "output_directory_exists_after_cleanup": false,
+    "success_receipt_preexisting": false,
+    "artifact_record_preexisting": false,
+    "review_bridge_preexisting": false,
+    "validators_passed": [
+      "node scripts/validate_runtime_to_review_v2_trial_001_exact_runtime_binding.js",
+      "node scripts/validate_runtime_to_review_v2_trial_001_binding_ready_execution_packet.js",
+      "node scripts/validate_runtime_to_review_v2_trial_001_future_execution_packet.js",
+      "node scripts/validate_runtime_to_review_v2_trial_001_execution_readiness_preflight.js",
+      "node scripts/validate_runtime_to_review_v2_trial_001_activation_packet_no_execute.js",
+      "node scripts/validate_prompt_schema.js --type prompt_package prompts/image_generation/product_detail_premium_serum_bottle_v2.yaml",
+      "node scripts/validate_runtime_to_review_v2_trial_001_vcptoolbox_internal_authorizer_binding.js",
+      "git diff --check",
+      "git -C A:/VCP/apps/VCPToolBox diff --check"
+    ]
+  },
+  "runtime_result_summary": {
+    "runner_id": "runtime_to_review_v1_guarded_live_probe_runner",
+    "runner_status": "failed_closed",
+    "kernel_status": "failed_closed",
+    "kernel_stop_reason": "provider_delegate_result_invalid",
+    "delegate_status": "BLOCKED_R2R_V2_TRIAL_001_BROKER_DISPATCH_FAILED_CLOSED",
+    "delegate_blocker": "r2r_v2_trial_001_output_file_invalid",
+    "audit_issues": [
+      "delegate status must be completed provider image created",
+      "delegate_issue:BLOCKED_R2R_V2_TRIAL_001_BROKER_DISPATCH_FAILED_CLOSED",
+      "delegate_issue:runtime_bridge_blocker:r2r_v2_trial_001_output_file_invalid",
+      "delegate_reason:native_doubao_runner_failed_closed",
+      "delegate model_sent must match model_required",
+      "delegate calls_used must be exactly provider=1 plugin=1 api=1",
+      "delegate image_count must be 1",
+      "delegate output_files must contain exactly one image"
+    ]
+  },
+  "single_dispatch_budget": {
+    "max_route_http_requests": 1,
+    "max_provider_calls": 1,
+    "max_plugin_calls": 1,
+    "max_api_calls": 1,
+    "max_images": 1,
+    "retry_allowed": false
+  },
+  "observed_side_effects": {
+    "route_http_request_performed": true,
+    "provider_contact_performed": true,
+    "plugin_call_performed": true,
+    "api_call_performed": true,
+    "image_generation_performed": true,
+    "output_write_performed_to_expected_agent_image_lab_run_directory": false,
+    "output_write_performed_to_vcptoolbox_image_directory": true,
+    "secret_value_read_performed_by_agent_image_lab": false,
+    "env_file_content_read_performed_by_agent_image_lab": false,
+    "authorization_header_constructed_by_agent_image_lab": false,
+    "accepted_samples_write_performed": false,
+    "production_candidate_write_performed": false,
+    "DailyNote_write_performed": false,
+    "VCP_memory_write_performed": false,
+    "push_tag_release_deploy_performed": false
+  },
+  "observed_external_image": {
+    "repo": "A:/VCP/apps/VCPToolBox",
+    "path": "A:/VCP/apps/VCPToolBox/image/doubaogen/a6c4e87c-c7ba-44e1-9b95-3fe2b62b6fd7.png",
+    "bytes": 120603,
+    "sha256": "235f7f27781a7766c0bf0a70fc550157d6871369ea7eb52ad36cebe2df610cef",
+    "filename_extension": ".png",
+    "detected_format": "jpeg",
+    "mime_type": "image/jpeg",
+    "dimensions": "1920x1920",
+    "last_write_time": "2026-06-08T15:04:59.6178116+08:00",
+    "human_visual_note": "blank-label serum bottle candidate generated; bottom appears cropped, so it would need review rejection or prompt/crop correction even if archived"
+  },
+  "expected_agent_image_lab_outputs": {
+    "output_directory_ref": "runs/real_generation/runtime_to_review_v2_trial_001_serum_detail_control/",
+    "output_directory_exists_after_attempt": true,
+    "output_directory_item_count_after_attempt": 0,
+    "receipt_ref_created": false,
+    "artifact_record_ref_created": false,
+    "review_bridge_ref_created": false
+  },
+  "failure_interpretation": {
+    "plain_language": "The real provider path generated one image, but the VCPToolBox plugin wrote it to its own image/doubaogen store instead of the Agent Image Lab run directory. The runtime-to-review kernel therefore failed closed before creating artifact/review records.",
+    "primary_next_fix": "teach the restricted facade or broker dispatch adapter to import the returned VCPToolBox image into the exact Agent Image Lab run directory, or make the route itself write/copy the image to visual_job_contract.output_directory_ref before returning success",
+    "must_not_retry_without_new_packet": true
+  }
+}

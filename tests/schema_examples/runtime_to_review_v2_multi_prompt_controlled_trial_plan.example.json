@@ -1,0 +1,95 @@
+{
+  "runtime_to_review_v2_multi_prompt_controlled_trial_plan": {
+    "phase": "runtime_to_review_v2_multi_prompt_controlled_trial_plan_20260608",
+    "status": "local_plan_no_execute",
+    "attempt_018_status": "accepted_sample_registered_and_closed_out",
+    "attempt_019_recommended_now": false,
+    "current_architecture_state": "proven_successful_path_but_not_final_broker_abstraction",
+    "v2_learning_goal": {
+      "primary": "discover_the_stable_contract_shape_before_broker_extraction",
+      "defer_large_refactor_until": "repeated_fields_and_gates_are_observed"
+    },
+    "trial_count": 3,
+    "execute_one_trial_at_a_time": true,
+    "default_budget_per_trial": {
+      "max_provider_calls": 1,
+      "max_plugin_calls": 1,
+      "max_api_calls": 1,
+      "max_images": 1,
+      "retry_allowed": false
+    },
+    "trials": [
+      {
+        "trial_id": "r2r_v2_trial_001_serum_detail_control",
+        "product_family": "premium_skincare_serum",
+        "shot_role": "product_detail_controlled_studio",
+        "prompt_package_ref": "prompts/image_generation/product_detail_premium_serum_bottle_v2.yaml",
+        "source_prompt_package_ref": "prompts/image_generation/product_lifestyle_premium_serum_bottle_v1.yaml",
+        "prompt_revision_policy": "derive_from_attempt_018_success_but_rewrite_for_detail_control",
+        "review_policy_focus": [
+          "intentionally_blank_label_boundary",
+          "cap_and_bottle_geometry",
+          "material_reflection_control",
+          "no_readable_text_logo_or_decorative_mark"
+        ],
+        "success_signal": "generated_unreviewed_artifact_reaches_review_queue_with_clear_product_fidelity_notes"
+      },
+      {
+        "trial_id": "r2r_v2_trial_002_lantern_ecommerce_hero",
+        "product_family": "premium_portable_led_camping_lantern",
+        "shot_role": "ecommerce_square_hero",
+        "prompt_package_ref": "prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v2.yaml",
+        "review_policy_focus": [
+          "centered_product_scale",
+          "control_position_readability",
+          "cylindrical_geometry",
+          "no_people_hands_fire_smoke"
+        ],
+        "success_signal": "generated_unreviewed_artifact_reaches_review_queue_with_geometry_and_material_notes"
+      },
+      {
+        "trial_id": "r2r_v2_trial_003_bag_support_logic",
+        "product_family": "fashion_lifestyle_bag",
+        "shot_role": "lifestyle_still_life_support_logic",
+        "prompt_package_ref": "prompts/image_generation/product_still_life_french_summer_rattan_bucket_bag_bicycle_no_watermark_v3.yaml",
+        "review_policy_focus": [
+          "support_logic",
+          "contact_shadow",
+          "product_scale",
+          "no_extra_brand_text"
+        ],
+        "success_signal": "generated_unreviewed_artifact_reaches_review_queue_with_support_logic_notes"
+      }
+    ],
+    "execution_boundary": {
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "image_generation_performed": false,
+      "route_http_request_performed": false,
+      "real_manifest_read_performed": false,
+      "real_VCPChat_read_performed": false,
+      "real_VCPToolBox_read_performed": false,
+      "secret_value_read_performed": false,
+      "accepted_samples_write_performed": false,
+      "production_candidate_write_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "push_tag_release_deploy_performed": false
+    },
+    "required_future_activation_packet": {
+      "lane": "Amber_B_provider_image",
+      "max_provider_calls": 1,
+      "max_plugin_calls": 1,
+      "max_api_calls": 1,
+      "max_images": 1,
+      "retry_allowed": false,
+      "overwrite_existing_files_allowed": false,
+      "secret_value_read_allowed": false,
+      "raw_private_data_print_allowed": false,
+      "can_execute_now": false
+    },
+    "recommended_next": "prepare_r2r_v2_trial_001_serum_detail_control_activation_packet_no_execute",
+    "automatic_real_execution_allowed_by_this_plan": false
+  }
+}

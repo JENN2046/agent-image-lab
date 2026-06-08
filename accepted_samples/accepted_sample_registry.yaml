@@ -36,6 +36,68 @@ accepted_sample_registry:
       write_to_memory_allowed: false
       daily_note_write_allowed: false
 
+    - sample_id: accepted_premium_skincare_serum_bottle_r2r_v2_trial_001_001
+      source_phase: runtime_to_review_v2_trial_001_serum_detail_control
+      source_plan: r2r_v2_trial_001_serum_detail_control
+      asset_status: accepted_candidate
+      provider_type: project_plugin
+      plugin_id: DoubaoGen
+      model: doubao-seedream-5-0-260128
+      prompt_package_ref: prompts/image_generation/product_detail_premium_serum_bottle_v2.yaml
+      review_doc_ref: reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_review_decision_accepted_candidate_20260608.json
+      formal_sample_package_ref: reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_accepted_samples_promotion_gate_20260608.json
+      promotion_apply_receipt_ref: accepted_samples/accepted_premium_skincare_serum_bottle_r2r_v2_trial_001_001/source_evidence.json
+      image_path: runs/real_generation/runtime_to_review_v2_trial_001_serum_detail_control/7bb59380-abb4-4180-9fa6-6a71549aec41.jpg
+      image_sha256: 60af66aa0f26fc8e26eabd0719408d92b4efdc21b2f26737ae3e6fce1c1f9f82
+      image_dimensions: 1920x1920
+      recoverability_status: workspace_local_verified
+      artifact_locator_scope: project_relative_runs
+      verification_mode: local_file_hash
+      verified_sha256: 60af66aa0f26fc8e26eabd0719408d92b4efdc21b2f26737ae3e6fce1c1f9f82
+      verified_dimensions: 1920x1920
+      verified_mime: image/jpeg
+      verification_record_ref: reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_artifact_record.json
+      durable_archive_ref: asset_archive/original_assets/by_sha256/60af66aa0f26fc8e26eabd0719408d92b4efdc21b2f26737ae3e6fce1c1f9f82.jpg
+      durable_archive_execution_report_ref: reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_durable_archive_execution_report_20260608.json
+      durable_archive_ready: true
+      import_record_ref: accepted_samples/accepted_premium_skincare_serum_bottle_r2r_v2_trial_001_001/metadata.json
+      capsule_manifest_ref: accepted_samples/accepted_premium_skincare_serum_bottle_r2r_v2_trial_001_001/manifest.json
+      portable_after_clone: false
+      artifact_recoverability_is_not_vcp_runtime_integration: true
+      image_files_committed_to_git: false
+      category: product_still_life
+      style_tags:
+        - premium_skincare
+        - serum_bottle
+        - product_still_life
+        - square_product_detail_control
+        - blank_label
+        - runtime_to_review_v2
+        - secretless_activation
+        - accepted_candidate
+      acceptance_summary:
+        prompt_subject_match: pass
+        single_bottle_control_shot: pass
+        full_bottle_visible: pass
+        bottle_base_visible: pass
+        blank_label: pass
+        no_readable_text_logo_watermark: pass
+        artifact_store_import: pass
+        commercial_usability: pass_with_brand_label_needed
+        memory_suitability: false
+      known_minor_issues:
+        - final_brand_delivery_requires_label_copy_or_brand_visual_design
+        - high_end_commercial_polish_can_be_stronger
+        - memory_write_deferred_until_separate_memory_authorization
+      commercial_use_level: accepted_candidate
+      human_approval:
+        approved: true
+        approved_by: project_owner
+        approval_statement_ref: reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_review_decision_accepted_candidate_20260608.json
+        approval_record_ref: reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_artifact_record.json
+      write_to_memory_allowed: false
+      daily_note_write_allowed: false
+
     - sample_id: accepted_french_summer_rattan_bucket_bag_001
       source_phase: v7_31
       asset_status: accepted_candidate

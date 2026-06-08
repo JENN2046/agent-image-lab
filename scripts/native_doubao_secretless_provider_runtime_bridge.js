@@ -12,10 +12,12 @@ const ALLOWED_OUTPUT_DIRECTORY_REFS = new Set([
   "runs/real_generation/v0_6_73_real_vcp_agent_generation_retry_002/",
   "runs/real_generation/runtime_to_review_v1_guarded_live_probe/",
   "runs/real_generation/runtime_to_review_v1_guarded_live_probe_serum_bottle/",
+  "runs/real_generation/runtime_to_review_v2_trial_001_serum_detail_control/",
 ]);
 const ALLOWED_PROMPT_PACKAGE_REFS = new Set([
   "prompts/image_generation/neutral_smoke_test_red_apple_v1.yaml",
   "prompts/image_generation/product_lifestyle_premium_serum_bottle_v1.yaml",
+  "prompts/image_generation/product_detail_premium_serum_bottle_v2.yaml",
 ]);
 
 function cloneJson(value) {
