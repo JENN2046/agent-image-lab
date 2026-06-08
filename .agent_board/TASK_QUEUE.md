@@ -1889,3 +1889,28 @@ remaining:
   - optional exactly-one record_memory execution if requested
   - DailyNote and VCP dual memory remain excluded
 ```
+## Queue - Runtime-To-Review V2 Trial 001 Codex Knowledge Memory Write 2026-06-08
+
+```text
+done:
+  - task: issue binding-ready Codex knowledge memory execution packet
+    evidence: reports/memory_write_authorization/r2r_v2_trial_001_codex_knowledge_memory_write_binding_ready_packet_20260608.json.
+  - task: validate packet before execution
+    evidence: scripts/validate_runtime_to_review_v2_trial_001_codex_knowledge_memory_write_binding_ready_packet.js passed.
+  - task: execute exactly one record_memory call
+    evidence: memory id codex-knowledge-3a86b6bc791e427f9eeec8d53d9f3c79; canonical hash 7ed8df1cd10dfaba0d56b222109299b61d09de37922e57b295a06980908415cf.
+  - task: write sanitized project receipt
+    evidence: reports/memory_write_receipts/r2r_v2_trial_001_codex_knowledge_memory_write_receipt_20260608.json.
+  - task: update accepted sample surfaces with separate memory receipt refs
+    evidence: accepted sample registry, metadata, manifest, and source_evidence reference the receipt and memory id.
+  - task: update validators to preserve old no-write gate history while accepting later receipt-driven Codex knowledge write
+    evidence: accepted_samples promotion, memory-candidate mapping, and registry validators pass together.
+in_progress:
+  - none
+blocked:
+  - none
+remaining:
+  - run final agent_board/diff validation
+  - exact-file local commit if appropriate or requested
+  - push remains separately gated
+```

@@ -3790,3 +3790,44 @@ validation: dedicated Codex knowledge memory preflight validator passed; node --
 non_actions: record_memory_call=false; DailyNote_write=false; VCP_memory_write=false; Codex_memory_write=false; provider/plugin/API=false; image_generation=false; push_tag_release_deploy=false.
 next_safe_task: issue a binding-ready Codex knowledge memory write packet with can_execute_now=true, then execute exactly one record_memory call only if requested.
 ```
+## Current Run State - Runtime-To-Review V2 Trial 001 Codex Knowledge Memory Write Executed 2026-06-08
+
+```text
+phase: runtime_to_review_v2_trial_001_codex_knowledge_memory_write_executed_20260608
+status: completed_validated_codex_knowledge_memory_written
+lane: Amber_C memory, exact single Codex knowledge write
+goal: Issue a binding-ready memory execution packet and execute exactly one record_memory write to target=knowledge / targetDiary=Codex knowledge.
+branch: master
+binding_ready_packet: reports/memory_write_authorization/r2r_v2_trial_001_codex_knowledge_memory_write_binding_ready_packet_20260608.json
+receipt: reports/memory_write_receipts/r2r_v2_trial_001_codex_knowledge_memory_write_receipt_20260608.json
+target_system: mcp__vcp_codex_memory.record_memory
+target: knowledge
+targetDiary: Codex knowledge
+memory_id: codex-knowledge-3a86b6bc791e427f9eeec8d53d9f3c79
+canonical_hash: 7ed8df1cd10dfaba0d56b222109299b61d09de37922e57b295a06980908415cf
+result:
+  - binding-ready packet flipped can_execute_now=true for Codex knowledge only
+  - exactly one record_memory call was executed
+  - record_memory returned accepted / committed, replayed=false
+  - accepted sample registry and capsule surfaces now reference the Codex knowledge receipt and memory id
+  - the earlier memory-candidate no-write mapping gate remains historically no-write; this is a later separately authorized memory execution gate
+validation:
+  - node scripts\validate_runtime_to_review_v2_trial_001_codex_knowledge_memory_write_binding_ready_packet.js passed, 5 checks
+  - node scripts\validate_runtime_to_review_v2_trial_001_codex_knowledge_memory_write_receipt.js passed, 6 checks
+  - node scripts\validate_runtime_to_review_v2_trial_001_accepted_samples_promotion.js passed, 9 checks
+  - node scripts\validate_runtime_to_review_v2_trial_001_memory_candidate_no_write_mapping_gate.js passed, 7 checks
+  - node scripts\validate_v7_32_accepted_sample_registry_update.js passed, 117 checks
+boundary_checks:
+  record_memory_attempts: 1
+  successful_record_memory_writes: 1
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  retry_performed: false
+  raw_memory_file_path_recorded_in_project: false
+  push_tag_release_deploy_performed: false
+next_safe_task: run final diff/agent_board validation, then exact-file local commit if requested or appropriate; push remains separately gated.
+```

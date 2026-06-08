@@ -19,6 +19,8 @@ const metadataPath = `accepted_samples/${sampleId}/metadata.json`;
 const manifestPath = `accepted_samples/${sampleId}/manifest.json`;
 const sourceEvidencePath = `accepted_samples/${sampleId}/source_evidence.json`;
 const gatePath = "reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_accepted_samples_promotion_gate_20260608.json";
+const memoryWriteReceiptPath = "reports/memory_write_receipts/r2r_v2_trial_001_codex_knowledge_memory_write_receipt_20260608.json";
+const expectedCodexKnowledgeMemoryId = "codex-knowledge-3a86b6bc791e427f9eeec8d53d9f3c79";
 
 let passed = true;
 const results = [];
@@ -85,9 +87,14 @@ async function main() {
     registry.includes(`verified_sha256: ${expectedSha256}`) &&
     registry.includes(`verified_dimensions: ${expectedDimensions}`) &&
     registry.includes(`verified_mime: ${expectedMime}`) &&
-    registry.includes("memory_suitability: false") &&
+    registry.includes("memory_suitability: true") &&
+    registry.includes(`memory_write_receipt_ref: ${memoryWriteReceiptPath}`) &&
     registry.includes("write_to_memory_allowed: false") &&
-    registry.includes("daily_note_write_allowed: false")
+    registry.includes("daily_note_write_allowed: false") &&
+    registry.includes("codex_knowledge_memory_written: true") &&
+    registry.includes(`codex_knowledge_memory_id: ${expectedCodexKnowledgeMemoryId}`) &&
+    registry.includes("project_dailynote_writer_performed: false") &&
+    registry.includes("additional_memory_write_performed_after_codex_receipt: false")
   );
   check("category_index_contains_sample_and_count", () =>
     category.includes("sample_count: 6") &&
@@ -95,7 +102,7 @@ async function main() {
     category.includes(`${sampleId}:`) &&
     category.includes(`verified_sha256: ${expectedSha256}`)
   );
-  check("metadata_matches_registry_and_blocks_memory", () =>
+  check("metadata_matches_registry_and_records_separate_codex_memory_receipt", () =>
     metadata.sample_id === sampleId &&
     metadata.status === "accepted_candidate" &&
     metadata.artifact.source_image_ref === imagePath &&
@@ -104,7 +111,20 @@ async function main() {
     metadata.artifact.source_image_mime === expectedMime &&
     metadata.artifact.source_image_copied_or_moved === false &&
     metadata.artifact.image_files_committed_to_git === false &&
-    metadata.acceptance_summary.memory_suitability === false
+    metadata.acceptance_summary.memory_suitability === true &&
+    metadata.refs.memory_write_receipt_ref === memoryWriteReceiptPath &&
+    metadata.memory_candidate.status === "codex_knowledge_memory_written" &&
+    metadata.memory_candidate.write_performed === true &&
+    metadata.memory_candidate.memory_write_receipt_ref === memoryWriteReceiptPath &&
+    metadata.memory_candidate.codex_knowledge_memory_id === expectedCodexKnowledgeMemoryId &&
+    metadata.memory_candidate.DailyNote_write_performed === false &&
+    metadata.memory_candidate.VCP_memory_write_performed === false &&
+    metadata.memory_effects.codex_knowledge_memory_written === true &&
+    metadata.memory_effects.codex_knowledge_memory_id === expectedCodexKnowledgeMemoryId &&
+    metadata.memory_effects.codex_knowledge_memory_receipt_ref === memoryWriteReceiptPath &&
+    metadata.memory_effects.project_DailyNote_writer_performed === false &&
+    metadata.memory_effects.vcp_long_term_memory_write_allowed === false &&
+    metadata.memory_effects.additional_memory_write_performed_after_codex_receipt === false
   );
   check("manifest_is_metadata_only_no_binary_copy", () =>
     manifest.sample_id === sampleId &&
@@ -118,16 +138,24 @@ async function main() {
     manifest.guard.Codex_knowledge_memory_write_performed === false &&
     manifest.guard.DailyNote_project_writer_performed === false
   );
-  check("source_evidence_records_exact_authorization_and_no_external_writes", () =>
+  check("source_evidence_records_promotion_authorization_and_separate_codex_memory_receipt", () =>
     sourceEvidence.sample_id === sampleId &&
     sourceEvidence.owner_authorization.selected_promotion_target === "accepted_samples" &&
     sourceEvidence.owner_authorization.codex_knowledge_memory_write_allowed === false &&
     sourceEvidence.owner_authorization.archive_binary_copy_allowed === false &&
+    sourceEvidence.evidence_refs.memory_write_receipt_ref === memoryWriteReceiptPath &&
     sourceEvidence.verified_source_image.sha256 === expectedSha256 &&
     sourceEvidence.side_effects.accepted_samples_registry_write_performed === true &&
     sourceEvidence.side_effects.image_generation_performed_by_this_apply === false &&
-    sourceEvidence.side_effects.Codex_knowledge_memory_write_performed === false &&
-    sourceEvidence.side_effects.project_DailyNote_writer_performed === false
+    sourceEvidence.side_effects.Codex_knowledge_memory_write_performed === true &&
+    sourceEvidence.side_effects.Codex_knowledge_memory_id === expectedCodexKnowledgeMemoryId &&
+    sourceEvidence.side_effects.project_DailyNote_writer_performed === false &&
+    sourceEvidence.memory_effects.codex_knowledge_memory_written === true &&
+    sourceEvidence.memory_effects.codex_knowledge_memory_receipt_ref === memoryWriteReceiptPath &&
+    sourceEvidence.memory_effects.record_memory_attempts === 1 &&
+    sourceEvidence.memory_effects.successful_record_memory_writes === 1 &&
+    sourceEvidence.memory_effects.vcptoolbox_dailynote_write_called === false &&
+    sourceEvidence.memory_effects.project_memory_write_allowed === false
   );
   check("promotion_gate_selects_only_accepted_samples", () =>
     gate.selected_promotion_target === "accepted_samples" &&
@@ -159,6 +187,9 @@ async function main() {
     archive_write_performed: false,
     DailyNote_write_performed: false,
     VCP_memory_write_performed: false,
+    Codex_memory_write_performed_after_separate_binding_ready_packet: true,
+    codex_knowledge_memory_id: expectedCodexKnowledgeMemoryId,
+    memory_write_receipt_ref: memoryWriteReceiptPath,
     push_tag_release_deploy_performed: false,
     check_count: results.length,
     failed_count: results.filter((result) => !result.passed).length,

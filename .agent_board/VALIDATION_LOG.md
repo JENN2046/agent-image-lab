@@ -1,5 +1,44 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260608-RUNTIME-TO-REVIEW-V2-TRIAL-001-CODEX-KNOWLEDGE-MEMORY-WRITE
+
+Task: runtime_to_review_v2_trial_001_codex_knowledge_memory_write_executed_20260608
+
+Commands run:
+  - node scripts\validate_runtime_to_review_v2_trial_001_codex_knowledge_memory_write_binding_ready_packet.js
+  - node scripts\validate_runtime_to_review_v2_trial_001_codex_knowledge_memory_write_receipt.js
+  - node scripts\validate_runtime_to_review_v2_trial_001_accepted_samples_promotion.js
+  - node scripts\validate_runtime_to_review_v2_trial_001_memory_candidate_no_write_mapping_gate.js
+  - node scripts\validate_v7_32_accepted_sample_registry_update.js
+  - node --check scripts\validate_runtime_to_review_v2_trial_001_codex_knowledge_memory_write_binding_ready_packet.js
+  - node --check scripts\validate_runtime_to_review_v2_trial_001_codex_knowledge_memory_write_receipt.js
+  - node --check scripts\validate_runtime_to_review_v2_trial_001_accepted_samples_promotion.js
+  - node --check scripts\validate_runtime_to_review_v2_trial_001_memory_candidate_no_write_mapping_gate.js
+
+Result: ALL REQUIRED CHECKS PASSED
+
+Findings:
+  - Binding-ready memory packet is scoped to mcp__vcp_codex_memory.record_memory, target=knowledge, targetDiary=Codex knowledge, max one call, and zero retry.
+  - Exactly one record_memory call was performed and accepted.
+  - Memory id: codex-knowledge-3a86b6bc791e427f9eeec8d53d9f3c79.
+  - Canonical hash: 7ed8df1cd10dfaba0d56b222109299b61d09de37922e57b295a06980908415cf.
+  - Project receipt records raw memory file path redacted.
+  - Accepted sample registry and capsule surfaces now reference the separate Codex knowledge memory receipt.
+  - Existing no-write mapping gate remains historically no-write; validators now distinguish that gate from the later separately authorized memory execution.
+
+Warnings:
+  - DailyNote and VCP dual-memory writes remain excluded.
+  - The external memory mutation itself is not reverted by local git revert; any future memory mutation requires a separate exact memory approval.
+
+Not validated:
+  - No DailyNote write was performed.
+  - No VCP memory write was performed.
+  - No provider/plugin/API call or image generation was performed.
+  - No push, tag, release, or deploy was performed.
+
+Notes:
+  - This validation records a completed Amber_C memory action under the active Smart Standing Authorization v3 envelope and the user's exact request.
+
 ## VALIDATION-20260601-RUNTIME-TO-REVIEW-V1-SERUM-BOTTLE-LIVE-PROBE-ATTEMPT-002
 
 Task: serum_bottle_live_probe_attempt_002_20260601

@@ -62,8 +62,10 @@
     "mapping_gate_ref": "reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_memory_candidate_no_write_mapping_gate_20260608.json",
     "memory_delta_candidate_ref": "reports/memory_delta_drafts/r2r_v2_trial_001_serum_detail_control_memory_delta_candidate_no_write_20260608.json",
     "candidate_id": "memcand_r2r_v2_trial_001_serum_detail_control_20260608",
-    "status": "draft_pending_memory_review",
-    "write_performed": false,
+    "status": "codex_knowledge_memory_written",
+    "write_performed": true,
+    "memory_write_receipt_ref": "reports/memory_write_receipts/r2r_v2_trial_001_codex_knowledge_memory_write_receipt_20260608.json",
+    "codex_knowledge_memory_id": "codex-knowledge-3a86b6bc791e427f9eeec8d53d9f3c79",
     "DailyNote_write_performed": false,
     "VCP_memory_write_performed": false
   },

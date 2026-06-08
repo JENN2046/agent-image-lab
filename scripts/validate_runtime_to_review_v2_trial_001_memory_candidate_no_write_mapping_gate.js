@@ -21,7 +21,9 @@ const expected = {
   candidateId: "memcand_r2r_v2_trial_001_serum_detail_control_20260608",
   sha256: "60af66aa0f26fc8e26eabd0719408d92b4efdc21b2f26737ae3e6fce1c1f9f82",
   sourceImageRef: "runs/real_generation/runtime_to_review_v2_trial_001_serum_detail_control/7bb59380-abb4-4180-9fa6-6a71549aec41.jpg",
-  durableArchiveRef: "asset_archive/original_assets/by_sha256/60af66aa0f26fc8e26eabd0719408d92b4efdc21b2f26737ae3e6fce1c1f9f82.jpg"
+  durableArchiveRef: "asset_archive/original_assets/by_sha256/60af66aa0f26fc8e26eabd0719408d92b4efdc21b2f26737ae3e6fce1c1f9f82.jpg",
+  memoryWriteReceiptRef: "reports/memory_write_receipts/r2r_v2_trial_001_codex_knowledge_memory_write_receipt_20260608.json",
+  codexKnowledgeMemoryId: "codex-knowledge-3a86b6bc791e427f9eeec8d53d9f3c79"
 };
 
 function assert(condition, message) {
@@ -165,17 +167,36 @@ function main() {
     assertAllFalseExcept(draft.guard, ["memory_candidate_mapping_created"], "draft.guard");
   });
 
-  check("accepted_sample_surfaces_reference_candidate", () => {
+  check("accepted_sample_surfaces_reference_candidate_and_later_codex_memory_receipt", () => {
     assert(metadata.memory_candidate.mapping_gate_ref === files.gate, "metadata mapping gate ref mismatch");
     assert(metadata.memory_candidate.memory_delta_candidate_ref === files.draft, "metadata draft ref mismatch");
-    assert(metadata.memory_candidate.write_performed === false, "metadata write must be false");
+    assert(metadata.memory_candidate.status === "codex_knowledge_memory_written", "metadata memory status mismatch");
+    assert(metadata.memory_candidate.write_performed === true, "metadata must record later Codex knowledge memory write");
+    assert(metadata.memory_candidate.memory_write_receipt_ref === expected.memoryWriteReceiptRef, "metadata memory receipt ref mismatch");
+    assert(metadata.memory_candidate.codex_knowledge_memory_id === expected.codexKnowledgeMemoryId, "metadata Codex memory id mismatch");
+    assert(metadata.memory_candidate.DailyNote_write_performed === false, "metadata DailyNote write must be false");
+    assert(metadata.memory_candidate.VCP_memory_write_performed === false, "metadata VCP memory write must be false");
+    assert(metadata.memory_effects.codex_knowledge_memory_written === true, "metadata memory effects must record Codex write");
+    assert(metadata.memory_effects.codex_knowledge_memory_receipt_ref === expected.memoryWriteReceiptRef, "metadata memory effects receipt mismatch");
+    assert(metadata.memory_effects.additional_memory_write_performed_after_codex_receipt === false, "metadata must not record extra memory write after receipt");
     assert(manifest.memory_candidate.mapping_gate_ref === files.gate, "manifest mapping gate ref mismatch");
     assert(manifest.memory_candidate.memory_delta_candidate_ref === files.draft, "manifest draft ref mismatch");
-    assert(manifest.memory_candidate.write_performed === false, "manifest write must be false");
+    assert(manifest.memory_candidate.status === "codex_knowledge_memory_written", "manifest memory status mismatch");
+    assert(manifest.memory_candidate.write_performed === true, "manifest must record later Codex knowledge memory write");
+    assert(manifest.memory_candidate.memory_write_receipt_ref === expected.memoryWriteReceiptRef, "manifest memory receipt ref mismatch");
+    assert(manifest.memory_candidate.codex_knowledge_memory_id === expected.codexKnowledgeMemoryId, "manifest Codex memory id mismatch");
+    assert(manifest.memory_candidate.DailyNote_write_performed === false, "manifest DailyNote write must be false");
+    assert(manifest.memory_candidate.VCP_memory_write_performed === false, "manifest VCP memory write must be false");
     assert(sourceEvidence.evidence_refs.memory_candidate_mapping_gate_ref === files.gate, "source evidence gate ref mismatch");
     assert(sourceEvidence.evidence_refs.memory_delta_candidate_ref === files.draft, "source evidence draft ref mismatch");
+    assert(sourceEvidence.evidence_refs.memory_write_receipt_ref === expected.memoryWriteReceiptRef, "source evidence memory receipt ref mismatch");
     assert(sourceEvidence.side_effects.memory_candidate_no_write_mapping_created === true, "source evidence mapping side effect mismatch");
-    assert(sourceEvidence.side_effects.Codex_knowledge_memory_write_performed === false, "source evidence Codex memory write must be false");
+    assert(sourceEvidence.side_effects.Codex_knowledge_memory_write_performed === true, "source evidence must record later Codex knowledge memory write");
+    assert(sourceEvidence.side_effects.Codex_knowledge_memory_id === expected.codexKnowledgeMemoryId, "source evidence Codex memory id mismatch");
+    assert(sourceEvidence.memory_effects.record_memory_attempts === 1, "source evidence record_memory attempts mismatch");
+    assert(sourceEvidence.memory_effects.successful_record_memory_writes === 1, "source evidence successful record_memory writes mismatch");
+    assert(sourceEvidence.memory_effects.vcptoolbox_dailynote_write_called === false, "source evidence VCPToolBox DailyNote call must be false");
+    assert(sourceEvidence.memory_effects.project_memory_write_allowed === false, "source evidence project memory write must be false");
   });
 
   check("source_artifact_and_archive_evidence_match", () => {
@@ -200,7 +221,10 @@ function main() {
     memory_write_can_execute_now: false,
     DailyNote_write_performed: false,
     VCP_memory_write_performed: false,
-    Codex_memory_write_performed: false,
+    Codex_memory_write_performed_by_mapping_gate: false,
+    Codex_memory_write_performed_after_separate_binding_ready_packet: true,
+    codex_knowledge_memory_id: expected.codexKnowledgeMemoryId,
+    memory_write_receipt_ref: expected.memoryWriteReceiptRef,
     check_count: checks.length,
     failed_count: 0,
     results: checks

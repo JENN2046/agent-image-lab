@@ -352,11 +352,19 @@ check("serum_trial_001_product_sample_source_evidence_matches_file", () =>
   serumTrial001SourceEvidence.verified_source_image.mime === serumTrial001ImageEvidence?.mime &&
   serumTrial001SourceEvidence.verified_source_image.bytes === serumTrial001ImageEvidence?.bytes
 );
-check("serum_trial_001_product_sample_no_memory_or_daily_note_write", () =>
+check("serum_trial_001_product_sample_codex_memory_effects_split", () =>
   serumTrial001Block.includes("write_to_memory_allowed: false") &&
   serumTrial001Block.includes("daily_note_write_allowed: false") &&
-  serumTrial001SourceEvidence.side_effects.Codex_knowledge_memory_write_performed === false &&
-  serumTrial001SourceEvidence.side_effects.project_DailyNote_writer_performed === false
+  serumTrial001Block.includes("memory_write_receipt_ref: reports/memory_write_receipts/r2r_v2_trial_001_codex_knowledge_memory_write_receipt_20260608.json") &&
+  serumTrial001Block.includes("codex_knowledge_memory_written: true") &&
+  serumTrial001Block.includes("codex_knowledge_memory_id: codex-knowledge-3a86b6bc791e427f9eeec8d53d9f3c79") &&
+  serumTrial001SourceEvidence.side_effects.Codex_knowledge_memory_write_performed === true &&
+  serumTrial001SourceEvidence.side_effects.Codex_knowledge_memory_id === "codex-knowledge-3a86b6bc791e427f9eeec8d53d9f3c79" &&
+  serumTrial001SourceEvidence.side_effects.project_DailyNote_writer_performed === false &&
+  serumTrial001SourceEvidence.memory_effects.codex_knowledge_memory_written === true &&
+  serumTrial001SourceEvidence.memory_effects.codex_knowledge_memory_receipt_ref === "reports/memory_write_receipts/r2r_v2_trial_001_codex_knowledge_memory_write_receipt_20260608.json" &&
+  serumTrial001Metadata.memory_effects.codex_knowledge_memory_written === true &&
+  serumTrial001Metadata.memory_effects.project_DailyNote_writer_performed === false
 );
 check("v7_34_hardening_doc_exists", () => fileExists(v734HardeningDocPath));
 check("v7_34_hardening_doc_records_memory_layer_split", () =>

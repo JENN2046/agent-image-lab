@@ -4765,3 +4765,38 @@ not_performed:
   - no push/tag/release/deploy
 recommended_next: issue a binding-ready Codex knowledge memory write packet with can_execute_now=true if the owner wants the real memory write.
 ```
+## Checkpoint - Runtime-To-Review V2 Trial 001 Codex Knowledge Memory Write Executed 2026-06-08
+
+```text
+phase: runtime_to_review_v2_trial_001_codex_knowledge_memory_write_executed_20260608
+status: completed_validated_codex_knowledge_memory_written
+result: TRIAL_001_CODEX_KNOWLEDGE_MEMORY_SINGLE_WRITE_COMMITTED
+summary: Issued a binding-ready memory execution packet for the Trial 001 accepted sample and executed exactly one record_memory call. The write targeted Codex knowledge only with target=knowledge and targetDiary=Codex knowledge. The tool accepted and committed the memory, returning memory id codex-knowledge-3a86b6bc791e427f9eeec8d53d9f3c79. No DailyNote or VCP dual-memory write was performed.
+changed_refs:
+  - reports/memory_write_authorization/r2r_v2_trial_001_codex_knowledge_memory_write_binding_ready_packet_20260608.json
+  - reports/memory_write_receipts/r2r_v2_trial_001_codex_knowledge_memory_write_receipt_20260608.json
+  - scripts/validate_runtime_to_review_v2_trial_001_codex_knowledge_memory_write_binding_ready_packet.js
+  - scripts/validate_runtime_to_review_v2_trial_001_codex_knowledge_memory_write_receipt.js
+  - accepted_samples/accepted_sample_registry.yaml
+  - accepted_samples/accepted_premium_skincare_serum_bottle_r2r_v2_trial_001_001/metadata.json
+  - accepted_samples/accepted_premium_skincare_serum_bottle_r2r_v2_trial_001_001/manifest.json
+  - accepted_samples/accepted_premium_skincare_serum_bottle_r2r_v2_trial_001_001/source_evidence.json
+  - scripts/validate_runtime_to_review_v2_trial_001_accepted_samples_promotion.js
+  - scripts/validate_runtime_to_review_v2_trial_001_memory_candidate_no_write_mapping_gate.js
+  - scripts/validate_v7_32_accepted_sample_registry_update.js
+validation_completed:
+  - node scripts\validate_runtime_to_review_v2_trial_001_codex_knowledge_memory_write_binding_ready_packet.js: passed
+  - node scripts\validate_runtime_to_review_v2_trial_001_codex_knowledge_memory_write_receipt.js: passed
+  - node scripts\validate_runtime_to_review_v2_trial_001_accepted_samples_promotion.js: passed
+  - node scripts\validate_runtime_to_review_v2_trial_001_memory_candidate_no_write_mapping_gate.js: passed
+  - node scripts\validate_v7_32_accepted_sample_registry_update.js: passed
+not_performed:
+  - no retry
+  - no DailyNote write
+  - no VCP memory write
+  - no provider/plugin/API call
+  - no image generation
+  - no push/tag/release/deploy
+  - no raw memory file path recorded in project files
+recommended_next: final local validation, exact-file staging package or local commit if needed; push remains separately gated.
+```
