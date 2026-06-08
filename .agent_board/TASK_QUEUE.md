@@ -1869,3 +1869,23 @@ remaining:
   - separate VCPToolBox repo review before any VCPToolBox commit
   - push remains separately gated
 ```
+
+## Queue - Runtime-To-Review V2 Trial 001 Codex Knowledge Memory Write Preflight 2026-06-08
+
+```text
+done:
+  - task: prepare Codex knowledge memory single-write preflight
+    evidence: reports/memory_write_authorization/r2r_v2_trial_001_codex_knowledge_memory_write_preflight_20260608.json.
+  - task: prepare exact Chinese payload
+    evidence: reports/memory_write_payloads/r2r_v2_trial_001_codex_knowledge_memory_write_payload_20260608.json.
+  - task: validate no-write memory boundary
+    evidence: scripts/validate_runtime_to_review_v2_trial_001_codex_knowledge_memory_write_preflight.js passed.
+in_progress:
+  - none
+blocked:
+  - none
+remaining:
+  - optional binding-ready Codex knowledge memory write packet
+  - optional exactly-one record_memory execution if requested
+  - DailyNote and VCP dual memory remain excluded
+```

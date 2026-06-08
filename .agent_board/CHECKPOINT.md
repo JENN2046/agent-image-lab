@@ -4740,3 +4740,28 @@ not_performed:
   - no VCPToolBox staging
 recommended_next: exact-file local commit if requested, then separate VCPToolBox review if needed.
 ```
+
+### Checkpoint Addendum - Runtime-To-Review V2 Trial 001 Codex Knowledge Memory Write Preflight 2026-06-08
+
+```text
+status: completed_validated_codex_knowledge_memory_write_preflight_no_write
+result: TRIAL_001_CODEX_KNOWLEDGE_MEMORY_SINGLE_WRITE_PREFLIGHT_PREPARED
+summary: Prepared a no-write preflight for a future single Codex knowledge memory write from the Trial 001 accepted sample. Added an exact Chinese payload, selected mcp__vcp_codex_memory.record_memory as the future target surface, fixed target=knowledge and targetDiary=Codex knowledge, excluded DailyNote and VCP dual memory, and kept can_execute_now=false.
+changed_refs:
+  - reports/memory_write_authorization/r2r_v2_trial_001_codex_knowledge_memory_write_preflight_20260608.json
+  - reports/memory_write_payloads/r2r_v2_trial_001_codex_knowledge_memory_write_payload_20260608.json
+  - scripts/validate_runtime_to_review_v2_trial_001_codex_knowledge_memory_write_preflight.js
+validation_completed:
+  - node scripts/validate_runtime_to_review_v2_trial_001_codex_knowledge_memory_write_preflight.js: passed
+  - node --check scripts/validate_runtime_to_review_v2_trial_001_codex_knowledge_memory_write_preflight.js: passed
+  - git diff --check: passed
+not_performed:
+  - no record_memory call
+  - no DailyNote write
+  - no VCP memory write
+  - no Codex knowledge memory write
+  - no provider/plugin/API call
+  - no image generation
+  - no push/tag/release/deploy
+recommended_next: issue a binding-ready Codex knowledge memory write packet with can_execute_now=true if the owner wants the real memory write.
+```
