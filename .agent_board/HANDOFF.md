@@ -4484,3 +4484,39 @@ not_performed_addendum:
   - no push/tag/release/deploy
 next_safe_action: exact-file stage and commit the AIL-side package if desired. VCPToolBox route/authorizer binding remains a later separate step and must not be touched in this AIL-only closeout.
 ```
+
+## Current Handoff Update - Runtime-To-Review V2 Trial 002 Review And Execution Preflight Templates 2026-06-08
+
+```text
+phase: runtime_to_review_v2_trial_002_lantern_ecommerce_hero_review_and_execution_preflight_templates_20260608
+status: completed_validated_local_templates_no_execute_external_route_pending
+workspace: A:\agent-image-lab\agent-image-lab-v0.2
+branch: master
+goal: Prepare Trial 002 review instructions and execution preflight template on the AIL side only.
+completed:
+  - Added reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_review_instruction_template_20260608.json.
+  - Added reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_execution_preflight_template_20260608.json.
+  - Added scripts/validate_runtime_to_review_v2_trial_002_review_and_execution_preflight_templates.js.
+decision_state:
+  - can_execute_now=false.
+  - binding_ready=false.
+  - future command is marked must_not_run_from_this_template.
+  - execution still requires a separate binding-ready packet after external route binding.
+validation_completed:
+  - node --check scripts\validate_runtime_to_review_v2_trial_002_review_and_execution_preflight_templates.js passed.
+  - node scripts\validate_runtime_to_review_v2_trial_002_review_and_execution_preflight_templates.js passed.
+  - node scripts\validate_runtime_to_review_v2_trial_002_ail_side_binding_preflight.js passed.
+  - node scripts\validate_runtime_to_review_v2_trial_002_activation_packet_no_execute.js passed.
+not_performed_addendum:
+  - no route HTTP request
+  - no provider/plugin/API call
+  - no image generation
+  - no output write
+  - no secret read
+  - no accepted_samples write
+  - no production candidate write
+  - no DailyNote or VCP memory write
+  - no VCPToolBox modification
+  - no push/tag/release/deploy
+next_safe_action: exact-file local commit for AIL-side templates. VCPToolBox remains untouched unless explicitly selected later.
+```

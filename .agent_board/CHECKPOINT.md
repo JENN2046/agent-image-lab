@@ -4861,3 +4861,33 @@ not_performed:
   - no push/tag/release/deploy
 recommended_next: exact-file stage and commit the AIL-side package if desired; VCPToolBox binding remains a later separate step.
 ```
+
+## Checkpoint - Runtime-To-Review V2 Trial 002 Review And Execution Preflight Templates 2026-06-08
+
+```text
+phase: runtime_to_review_v2_trial_002_lantern_ecommerce_hero_review_and_execution_preflight_templates_20260608
+status: completed_validated_local_templates_no_execute_external_route_pending
+result: TRIAL_002_REVIEW_AND_EXECUTION_PREFLIGHT_TEMPLATES_PREPARED_NO_EXECUTE
+summary: Added a Trial 002 review instruction template and a future execution preflight template. The review template tells the reviewer how to judge the lantern candidate after a future successful dispatch. The execution preflight template records the future one-image budget and hard stops, but explicitly keeps can_execute_now=false and marks the future command as must_not_run_from_this_template.
+changed_refs:
+  - reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_review_instruction_template_20260608.json
+  - reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_execution_preflight_template_20260608.json
+  - scripts/validate_runtime_to_review_v2_trial_002_review_and_execution_preflight_templates.js
+validation_completed:
+  - node --check scripts\validate_runtime_to_review_v2_trial_002_review_and_execution_preflight_templates.js: passed
+  - node scripts\validate_runtime_to_review_v2_trial_002_review_and_execution_preflight_templates.js: passed, 16 checks
+  - node scripts\validate_runtime_to_review_v2_trial_002_ail_side_binding_preflight.js: passed, 24 checks
+  - node scripts\validate_runtime_to_review_v2_trial_002_activation_packet_no_execute.js: passed, 20 checks
+not_performed:
+  - no route HTTP request
+  - no provider/plugin/API call
+  - no image generation
+  - no output write
+  - no secret read
+  - no accepted_samples write
+  - no production candidate write
+  - no DailyNote or VCP memory write
+  - no VCPToolBox modification
+  - no push/tag/release/deploy
+recommended_next: exact-file local commit for these AIL-side template files; keep VCPToolBox untouched until explicitly selected.
+```

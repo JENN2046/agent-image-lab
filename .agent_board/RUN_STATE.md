@@ -3917,3 +3917,42 @@ boundary_checks:
 blocking_reason_before_binding_ready: external_vcptoolbox_trial_002_internal_route_and_authorizer_not_bound
 next_safe_task: bind Trial 002 exact internal route/authorizer in VCPToolBox, then issue a binding-ready execution packet with can_execute_now=true.
 ```
+
+## Current Run State - Runtime-To-Review V2 Trial 002 Review And Execution Preflight Templates 2026-06-08
+
+```text
+phase: runtime_to_review_v2_trial_002_lantern_ecommerce_hero_review_and_execution_preflight_templates_20260608
+status: completed_validated_local_templates_no_execute_external_route_pending
+lane: Green local review/preflight template preparation
+goal: Add AIL-side Trial 002 review instructions and a future execution preflight template without running route/provider/plugin/API/image work.
+branch: master
+review_instruction_template_ref: reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_review_instruction_template_20260608.json
+execution_preflight_template_ref: reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_execution_preflight_template_20260608.json
+validator_ref: scripts/validate_runtime_to_review_v2_trial_002_review_and_execution_preflight_templates.js
+result:
+  - review instruction template gives Chinese plain-language review context, decision options, review questions, scoring weights, and promotion boundaries
+  - execution preflight template records one route / one provider / one plugin / one API / one image / zero retry for future use
+  - execution preflight template keeps can_execute_now=false and binding_ready=false
+  - future dispatch command is marked must_not_run_from_this_template and requires a separate binding-ready packet
+  - VCPToolBox Trial 002 route/authorizer remains a later separate blocker
+validation:
+  - node --check scripts\validate_runtime_to_review_v2_trial_002_review_and_execution_preflight_templates.js passed
+  - node scripts\validate_runtime_to_review_v2_trial_002_review_and_execution_preflight_templates.js passed, 16 checks
+  - node scripts\validate_runtime_to_review_v2_trial_002_ail_side_binding_preflight.js passed, 24 checks
+  - node scripts\validate_runtime_to_review_v2_trial_002_activation_packet_no_execute.js passed, 20 checks
+boundary_checks:
+  route_http_request_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  output_write_performed: false
+  secret_value_read_performed: false
+  accepted_samples_write_performed: false
+  production_candidate_write_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  push_tag_release_deploy_performed: false
+blocking_reason_before_execution: external_vcptoolbox_trial_002_internal_route_and_authorizer_not_bound
+next_safe_task: commit the AIL-side templates locally; do not touch VCPToolBox until explicitly reselected.
+```

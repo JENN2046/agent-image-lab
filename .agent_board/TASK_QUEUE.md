@@ -1961,3 +1961,24 @@ remaining:
   - execute exactly once only after packet validation and explicit execution intent
   - no retry, no accepted_samples/production/memory write before review
 ```
+
+## Queue - Runtime-To-Review V2 Trial 002 Review And Execution Preflight Templates 2026-06-08
+
+```text
+done:
+  - task: write Trial 002 review instruction template
+    evidence: reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_review_instruction_template_20260608.json.
+  - task: write Trial 002 execution preflight template
+    evidence: reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_execution_preflight_template_20260608.json.
+  - task: validate templates preserve no-execute boundaries
+    evidence: scripts/validate_runtime_to_review_v2_trial_002_review_and_execution_preflight_templates.js passed, 16 checks.
+in_progress:
+  - none
+blocked:
+  - task: future Trial 002 execution
+    reason: VCPToolBox exact Trial 002 internal route/authorizer remains unbound and templates do not authorize execution.
+remaining:
+  - exact-file local commit for AIL-side templates
+  - no VCPToolBox work in this AIL-only step
+  - no route/provider/plugin/API/image execution
+```
