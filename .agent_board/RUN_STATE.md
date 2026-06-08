@@ -3896,7 +3896,7 @@ result:
 validation:
   - node --check adapters\runtime\native_doubao_runtime_v2_trial_002_lantern_ecommerce_broker_dispatch_adapter.js passed
   - node --check scripts\validate_runtime_to_review_v2_trial_002_ail_side_binding_preflight.js passed
-  - node scripts\validate_runtime_to_review_v2_trial_002_ail_side_binding_preflight.js passed, 24 checks
+  - node scripts\validate_runtime_to_review_v2_trial_002_ail_side_binding_preflight.js passed, 25 checks
   - node scripts\validate_runtime_to_review_v2_trial_002_activation_packet_no_execute.js passed, 20 checks
   - node scripts\validate_runtime_to_review_v2_multi_prompt_controlled_trial_plan.js passed, 24 checks
   - node scripts\validate_prompt_schema.js --type prompt_package prompts\image_generation\product_lifestyle_premium_portable_led_camping_lantern_v2.yaml passed
@@ -3916,6 +3916,36 @@ boundary_checks:
   push_tag_release_deploy_performed: false
 blocking_reason_before_binding_ready: external_vcptoolbox_trial_002_internal_route_and_authorizer_not_bound
 next_safe_task: bind Trial 002 exact internal route/authorizer in VCPToolBox, then issue a binding-ready execution packet with can_execute_now=true.
+```
+
+## Current Run State Addendum - Trial 002 Failed Dispatch Output Directory Guard 2026-06-08
+
+```text
+phase: runtime_to_review_v2_trial_002_failed_dispatch_output_directory_guard_pr10
+status: completed_validated_local_pr_review_fix_pending_commit_push
+lane: Green local AIL PR feedback fix
+branch: codex/runtime-to-review-trial002-ail-preflight-20260608
+goal: Fix PR feedback so a missing, unreachable, or rejecting Trial 002 broker route cannot create the no-overwrite run directory before dispatch succeeds.
+changed_refs:
+  - adapters/runtime/native_doubao_runtime_v2_trial_002_lantern_ecommerce_broker_dispatch_adapter.js
+  - scripts/validate_runtime_to_review_v2_trial_002_ail_side_binding_preflight.js
+result:
+  - Trial 002 runtime delegate now validates the output directory path without creating it before broker dispatch.
+  - The validator now stubs a failed broker route and asserts output_write_performed=false, zero provider/plugin/API/image calls, and no output directory creation.
+validation:
+  - node --check adapters\runtime\native_doubao_runtime_v2_trial_002_lantern_ecommerce_broker_dispatch_adapter.js passed
+  - node --check scripts\validate_runtime_to_review_v2_trial_002_ail_side_binding_preflight.js passed
+  - node scripts\validate_runtime_to_review_v2_trial_002_ail_side_binding_preflight.js passed, 25 checks
+boundary_checks:
+  route_http_request_performed_by_validator_stub: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  output_write_performed: false
+  output_directory_created_on_failed_route: false
+  VCPToolBox_modified: false
+next_safe_task: run final local validators, exact-file stage this PR feedback fix, commit, and push the existing PR branch.
 ```
 
 ## Current Run State - Runtime-To-Review V2 Trial 002 Review And Execution Preflight Templates 2026-06-08
@@ -3938,7 +3968,7 @@ result:
 validation:
   - node --check scripts\validate_runtime_to_review_v2_trial_002_review_and_execution_preflight_templates.js passed
   - node scripts\validate_runtime_to_review_v2_trial_002_review_and_execution_preflight_templates.js passed, 16 checks
-  - node scripts\validate_runtime_to_review_v2_trial_002_ail_side_binding_preflight.js passed, 24 checks
+  - node scripts\validate_runtime_to_review_v2_trial_002_ail_side_binding_preflight.js passed, 25 checks
   - node scripts\validate_runtime_to_review_v2_trial_002_activation_packet_no_execute.js passed, 20 checks
 boundary_checks:
   route_http_request_performed: false

@@ -66,7 +66,38 @@ function check(id, fn) {
   }
 }
 
-function main() {
+async function checkAsync(id, fn) {
+  try {
+    const ok = await fn();
+    results.push({ check: id, passed: Boolean(ok) });
+    if (!ok) passed = false;
+  } catch (error) {
+    results.push({ check: id, passed: false, error: error.message });
+    passed = false;
+  }
+}
+
+function trial002RuntimeRequest(bridge, runner, adapter) {
+  const options = {
+    prompt_package_ref: promptRef,
+    output_directory: outputDir,
+    model: adapter.requiredModel,
+    max_plugin_calls: 1,
+    max_images_created: 1,
+    retry_allowed: false,
+    dryRun: false,
+    execution_authorized: true,
+    provider_binding_ref: runner.SECRETLESS_PROVIDER_BINDING_REF,
+    provider_binding_ref_redacted: true,
+    provider_binding_ref_is_secret: false,
+    secretless_runtime_required: true,
+    a5_activation_ref: "AUTH-R2R-V2-TRIAL-002-LANTERN-ECOMMERCE-HERO-20260608-AIL-SIDE-PREFLIGHT",
+  };
+  const preflight = runner.preflightCheck(options);
+  return bridge.buildSecretlessProviderRuntimeRequest(options, preflight);
+}
+
+async function main() {
   const packet = readJson(packetRef);
   const noExecutePacket = readJson(noExecutePacketRef);
   const criteria = readJson(criteriaRef);
@@ -222,7 +253,7 @@ function main() {
       a5_activation_ref: "AUTH-R2R-V2-TRIAL-002-LANTERN-ECOMMERCE-HERO-20260608-AIL-SIDE-PREFLIGHT",
     };
     const preflight = runner.preflightCheck(options);
-    const request = bridge.buildSecretlessProviderRuntimeRequest(options, preflight);
+    const request = trial002RuntimeRequest(bridge, runner, adapter);
     const issues = bridge.validateSecretlessProviderRuntimeRequest(request);
     return preflight.preflight_passed === true &&
       preflight.env_file_content_read_performed === false &&
@@ -324,6 +355,28 @@ function main() {
       runtime.secretless_provider_runtime_delegate_bound === true &&
       runtime.secretless_provider_runtime_bridge_id === bridge.BRIDGE_ID;
   });
+  await checkAsync("failed_route_does_not_create_output_directory", async () => {
+    if (fs.existsSync(repoPath(outputDir))) return false;
+    const request = trial002RuntimeRequest(bridge, runner, adapter);
+    const result = await adapter.realBoundOwnerRuntimeDelegate(request, {
+      postJson: async () => ({
+        ok: false,
+        statusCode: 0,
+        body: { ok: false, error: "test_route_missing" },
+      }),
+    });
+    return result.status === "BLOCKED_R2R_V2_TRIAL_002_BROKER_DISPATCH_FAILED_CLOSED" &&
+      result.blocker === "r2r_v2_trial_002_broker_route_unreachable" &&
+      result.output_write_performed === false &&
+      result.provider_contact_performed === false &&
+      result.plugin_call_performed === false &&
+      result.api_call_performed === false &&
+      result.image_generation_performed === false &&
+      result.calls_used.provider === 0 &&
+      result.calls_used.plugin === 0 &&
+      result.calls_used.api === 0 &&
+      !fs.existsSync(repoPath(outputDir));
+  });
   check("recommended_next_is_external_binding_then_binding_ready_packet", () =>
     packet.recommended_next === "bind_trial_002_internal_route_and_authorizer_in_vcptoolbox_then_issue_binding_ready_execution_packet_with_can_execute_now_true"
   );
@@ -354,4 +407,16 @@ function main() {
   if (!passed) process.exitCode = 1;
 }
 
-main();
+main().catch((error) => {
+  passed = false;
+  results.push({ check: "validator_uncaught_error", passed: false, error: error.message });
+  process.stdout.write(`${JSON.stringify({
+    passed,
+    validator,
+    packet_ref: packetRef,
+    check_count: results.length,
+    failed_count: results.filter((result) => !result.passed).length,
+    results,
+  }, null, 2)}\n`);
+  process.exitCode = 1;
+});
