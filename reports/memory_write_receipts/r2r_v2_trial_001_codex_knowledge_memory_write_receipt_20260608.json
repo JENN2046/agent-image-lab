@@ -1,0 +1,76 @@
+{
+  "schema": "agent_image_lab_codex_knowledge_memory_write_receipt.v1",
+  "receipt_id": "r2r_v2_trial_001_codex_knowledge_memory_write_receipt_20260608",
+  "created_at": "2026-06-08T16:30:13+08:00",
+  "task_id": "r2r_v2_trial_001_serum_detail_control",
+  "lane": "Amber_C_memory",
+  "envelope_id": "Smart Standing Authorization v3",
+  "status": "completed_codex_knowledge_memory_written",
+  "source_binding_ready_packet_ref": "reports/memory_write_authorization/r2r_v2_trial_001_codex_knowledge_memory_write_binding_ready_packet_20260608.json",
+  "source_payload_ref": "reports/memory_write_payloads/r2r_v2_trial_001_codex_knowledge_memory_write_payload_20260608.json",
+  "target_systems": [
+    "mcp__vcp_codex_memory.record_memory"
+  ],
+  "memory_write": {
+    "tool": "mcp__vcp_codex_memory.record_memory",
+    "target": "knowledge",
+    "targetDiary": "Codex knowledge",
+    "memoryId": "codex-knowledge-3a86b6bc791e427f9eeec8d53d9f3c79",
+    "title": "Agent Image Lab Trial 001 受控精华瓶样本经验",
+    "canonicalHash": "7ed8df1cd10dfaba0d56b222109299b61d09de37922e57b295a06980908415cf",
+    "idempotency_status": "committed",
+    "idempotency_replayed": false,
+    "decision": "accepted",
+    "validated": true,
+    "reusable": true,
+    "sensitivity": "none",
+    "visibility_requested": "project",
+    "raw_memory_file_path_redacted": true
+  },
+  "content_safety": {
+    "contains_secret": false,
+    "contains_private_raw_data": false,
+    "contains_image_binary": false,
+    "uses_project_relative_refs": true,
+    "raw_private_path_written_to_project_receipt": false
+  },
+  "daily_note_project_writer": {
+    "performed": false,
+    "reason": "This execution was scoped to Codex knowledge memory only. DailyNote was explicitly excluded by the binding-ready packet."
+  },
+  "vcp_memory_dual_write": {
+    "performed": false,
+    "reason": "This execution was scoped to Codex knowledge memory only. VCP dual memory write was explicitly excluded."
+  },
+  "evidence_refs": {
+    "accepted_sample_metadata_ref": "accepted_samples/accepted_premium_skincare_serum_bottle_r2r_v2_trial_001_001/metadata.json",
+    "runtime_receipt_ref": "reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_receipt.json",
+    "durable_archive_report_ref": "reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_durable_archive_execution_report_20260608.json",
+    "memory_candidate_mapping_gate_ref": "reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_memory_candidate_no_write_mapping_gate_20260608.json",
+    "preflight_ref": "reports/memory_write_authorization/r2r_v2_trial_001_codex_knowledge_memory_write_preflight_20260608.json",
+    "binding_ready_packet_ref": "reports/memory_write_authorization/r2r_v2_trial_001_codex_knowledge_memory_write_binding_ready_packet_20260608.json",
+    "payload_ref": "reports/memory_write_payloads/r2r_v2_trial_001_codex_knowledge_memory_write_payload_20260608.json"
+  },
+  "rollback_or_cleanup_available": "memory mutation requires separate exact memory mutation approval; local receipt files can be reverted by normal git revert before push",
+  "calls_used": {
+    "record_memory_attempts": 1,
+    "successful_record_memory_writes": 1,
+    "DailyNote_writer_calls": 0,
+    "VCP_memory_writer_calls": 0,
+    "provider_calls": 0,
+    "plugin_calls": 0,
+    "api_calls": 0
+  },
+  "guard": {
+    "record_memory_called": true,
+    "DailyNote_write_performed": false,
+    "VCP_memory_write_performed": false,
+    "Codex_memory_write_performed": true,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "retry_performed": false,
+    "push_tag_release_deploy_performed": false
+  }
+}

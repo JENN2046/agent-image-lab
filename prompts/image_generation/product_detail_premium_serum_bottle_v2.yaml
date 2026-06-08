@@ -1,0 +1,218 @@
+prompt_package_id: product_detail_premium_serum_bottle_v2
+package_id: product_detail_premium_serum_bottle_v2
+version: v2
+language: en
+mode: text_to_image
+reference_policy: text_only_no_image_input
+title: "Premium serum bottle controlled product-detail prompt package v2"
+purpose: "Derived from the successful attempt-018 serum route, but rewritten for product-detail control rather than a broad ecommerce hero image. This file does not contact providers, generate images, write memory, or create execution authorization."
+
+source_phase: runtime_to_review_v2_trial_001_prompt_correction
+source_prompt_package: prompts/image_generation/product_lifestyle_premium_serum_bottle_v1.yaml
+source_success_ref: reports/runtime_to_review_v1/secretless_serum_attempt_018_final_evidence_seal_20260606.json
+revision_reason: shot_role_must_be_reflected_in_prompt_not_only_packet_metadata
+status: draft_prompt_package_static_review_pending
+
+selected_product: premium_skincare_serum_bottle
+product_identity: single premium cosmetic skincare serum bottle with frosted translucent glass body, intentionally blank label panel, clean dropper cap, and credible full-bottle geometry
+locked_structure: one upright frosted translucent serum bottle, complete base, straight shoulders, centered blank label panel, smooth collar, clean symmetric dropper cap, simple glass pipette top
+product_brief_ref: briefs/product_brief_premium_serum_bottle_v1.md
+
+product_identity_detail:
+  product_type: premium_serum_bottle
+  product_category: cosmetic_skincare_bottle
+  category_terms:
+    - premium serum bottle
+    - skincare serum bottle
+    - frosted glass cosmetic bottle
+    - luxury beauty product detail
+  must_not_be:
+    - perfume bottle
+    - medicine bottle
+    - candle jar
+    - beverage bottle
+    - lotion pump bottle
+    - generic plastic container
+
+runner_prompt_mapping:
+  canonical_prompt_field: prompt
+  positive_prompt_alias: positive_prompt
+  positive_prompt_sync_required: true
+  runner_expected_prompt_field: prompt
+
+visual_intent:
+  shot_role: product_detail_controlled_studio
+  commercial_goal: product-fidelity test image for review, not final branded delivery
+  product_role: single serum bottle as the only subject
+  detail_task: prove cap geometry, glass material, intentionally blank label boundary, base visibility, and edge clarity
+  product_dominance: 70_to_85_percent_visual_importance
+  background_role: quiet neutral support only
+
+material_constraints:
+  - frosted translucent glass body with subtle internal depth
+  - amber serum or softly tinted internal liquid visible through glass
+  - satin white, warm silver, champagne metal, or soft neutral premium dropper cap
+  - intentionally blank label panel with no marks and no readable words
+  - controlled reflection along bottle edges, collar, cap, and base
+  - material must stay realistic product photography, not CGI, not toy plastic
+
+structure_constraints:
+  - one bottle only
+  - full bottle visible from pipette top to complete base
+  - straight centered vertical axis, no leaning or warped silhouette
+  - symmetric smooth collar under the dropper cap
+  - cap and pipette geometry must be clean, plausible, and not fused
+  - label panel must remain flat, centered, intentionally blank, and not broken
+  - no pump dispenser, no extra bottle, no packaging box by default
+
+scene_constraints:
+  - controlled studio tabletop or seamless neutral product surface
+  - warm-gray, ivory, pale stone, or soft neutral background
+  - minimal environment with no lifestyle props
+  - background must not create a broad hero scene or spa setting
+  - product edges and base contact shadow must remain readable
+  - no people, no hands, no flowers, no leaves, no towels, no stones, no clutter
+
+lighting_camera:
+  lighting: precise soft studio lighting for product-detail inspection
+  highlights: narrow controlled highlights that reveal glass thickness, shoulder line, collar, cap, label panel, and base edge
+  reflections: clean and believable, not noisy, not mirror glare
+  camera_angle: straight-on or very slight three-quarter front angle at product height
+  crop: close full-product detail framing, no cut-off pipette top, cap, shoulders, label, or base
+  focus: product sharp across cap, label, glass body, and bottom edge
+  realism: realistic commercial product photography, not CGI, not illustration
+
+forbidden_elements:
+  - ecommerce hero scene language that makes the product small
+  - broad lifestyle scene
+  - spa props
+  - flowers
+  - leaves
+  - towels
+  - stones
+  - packaging box
+  - extra bottles
+  - people
+  - hands
+  - readable brand text
+  - fake logo
+  - random letters
+  - watermark
+  - pump dispenser
+  - malformed dropper
+  - fused cap
+  - crooked cap
+  - warped pipette
+  - broken label
+  - cropped bottle bottom
+  - cut-off cap
+  - cheap plastic
+  - metallic bottle body
+  - perfume bottle drift
+  - medicine bottle drift
+  - over-stylized glow
+  - glare hiding product edges
+  - CGI look
+  - illustration
+  - cartoon
+  - low resolution
+
+prompt: |
+  Realistic controlled studio product-detail photography of a single premium skincare serum bottle. This is a product fidelity inspection shot, not a broad ecommerce hero scene and not a lifestyle scene. The bottle must remain the only subject and fill the frame with close full-product detail while staying fully visible from the glass pipette top and dropper cap down to the complete bottle base.
+
+  The bottle is frosted translucent glass with subtle internal depth and a softly tinted amber serum impression. It has a clean symmetric dropper cap, a smooth collar, a simple glass pipette top, straight shoulders, a stable vertical axis, and a centered intentionally blank label panel. The label area must be clean, flat, plain, and completely empty, with no fake text, no random letters, no logo, no decorative mark, and no broken label.
+
+  Use precise soft studio lighting designed to reveal product structure: narrow controlled highlights on the glass edges, shoulder line, collar, dropper cap, label panel, and base edge; clean believable reflections; soft contact shadow under the complete base; product sharp across cap, label, glass body, and bottom edge. The background is a quiet warm-gray, ivory, pale stone, or soft neutral studio surface that supports inspection and never turns into a spa scene or lifestyle setup.
+
+  Keep one complete serum bottle only, straight-on or very slight three-quarter front angle at product height, close full-product detail framing, realistic commercial product photography. No people, no hands, no props, no flowers, no leaves, no towels, no stones, no extra bottles, no packaging box, no readable text, no watermark, no pump dispenser, no perfume bottle drift, no medicine bottle drift, no cheap plastic, no metallic bottle body, no warped pipette, no crooked cap, no cropped bottle bottom, no cut-off cap, and no glare that hides product edges.
+
+positive_prompt: |
+  Realistic controlled studio product-detail photography of a single premium skincare serum bottle. This is a product fidelity inspection shot, not a broad ecommerce hero scene and not a lifestyle scene. The bottle must remain the only subject and fill the frame with close full-product detail while staying fully visible from the glass pipette top and dropper cap down to the complete bottle base.
+
+  The bottle is frosted translucent glass with subtle internal depth and a softly tinted amber serum impression. It has a clean symmetric dropper cap, a smooth collar, a simple glass pipette top, straight shoulders, a stable vertical axis, and a centered intentionally blank label panel. The label area must be clean, flat, plain, and completely empty, with no fake text, no random letters, no logo, no decorative mark, and no broken label.
+
+  Use precise soft studio lighting designed to reveal product structure: narrow controlled highlights on the glass edges, shoulder line, collar, dropper cap, label panel, and base edge; clean believable reflections; soft contact shadow under the complete base; product sharp across cap, label, glass body, and bottom edge. The background is a quiet warm-gray, ivory, pale stone, or soft neutral studio surface that supports inspection and never turns into a spa scene or lifestyle setup.
+
+  Keep one complete serum bottle only, straight-on or very slight three-quarter front angle at product height, close full-product detail framing, realistic commercial product photography. No people, no hands, no props, no flowers, no leaves, no towels, no stones, no extra bottles, no packaging box, no readable text, no watermark, no pump dispenser, no perfume bottle drift, no medicine bottle drift, no cheap plastic, no metallic bottle body, no warped pipette, no crooked cap, no cropped bottle bottom, no cut-off cap, and no glare that hides product edges.
+
+negative_prompt: |
+  broad ecommerce hero scene, lifestyle scene, spa setup, product too small, distant product,
+  readable brand text, fake text, random letters, fake logo, watermark, broken label,
+  people, hands, faces, model, flowers, leaves, towels, stones, boxes, extra bottles, extra products,
+  perfume bottle, medicine bottle, candle jar, beverage bottle, lotion pump bottle, generic plastic container,
+  pump dispenser, malformed dropper cap, fused cap, broken cap, crooked cap, impossible cap geometry, warped pipette,
+  distorted bottle, leaning bottle, warped silhouette, messy liquid distortion, cropped bottle bottom, cut-off cap,
+  cheap plastic material, metallic bottle body, noisy reflections, impossible reflections, harsh glare, mirror glare,
+  glare hiding product edge, over-stylized glow, background overpowering product,
+  CGI look, illustration, cartoon, low resolution
+
+negative_constraints:
+  product_identity:
+    - do not turn the serum bottle into a perfume bottle, medicine bottle, candle jar, beverage bottle, lotion pump bottle, or generic plastic container
+    - do not add extra bottles or product variants
+  structure:
+    - keep one complete frosted translucent glass serum bottle with a clean dropper cap
+    - do not crop the cap, pipette, shoulders, label panel, or bottle base
+    - do not create a pump dispenser
+    - do not create malformed, fused, broken, crooked, or impossible cap geometry
+  label:
+    - no readable brand logo
+    - no fake text
+    - no random text or letters
+    - no decorative label mark
+    - keep the label intentionally blank, not branded
+    - no broken label
+  material:
+    - do not make the bottle look like cheap plastic
+    - do not make the bottle body metallic
+    - do not hide product edges with glare or glow
+    - do not distort the liquid or bottle body
+  scene:
+    - no people
+    - no hands
+    - no props or spa setup
+    - no flowers, leaves, towels, stones, boxes, or clutter
+    - do not let the background overpower the inspection task
+
+acceptance_criteria:
+  selected_product_correct: true
+  premium_serum_bottle_read: true
+  product_detail_controlled_studio_role_visible: true
+  single_product_only: true
+  full_bottle_visible_from_pipette_to_base: true
+  no_cropped_bottle_bottom: true
+  frosted_translucent_glass_material: true
+  amber_serum_or_internal_depth_present: true
+  clean_dropper_cap_structure: true
+  cap_collar_and_pipette_geometry_plausible: true
+  label_panel_intentionally_blank_and_non_readable: true
+  no_readable_logo_or_fake_text: true
+  controlled_reflections: true
+  product_edges_readable: true
+  product_sharp_across_cap_label_body_and_base: true
+  neutral_studio_background_only: true
+  no_people_hands_props_extra_bottles: true
+  no_plastic_or_metallic_body_drift: true
+
+human_review_checklist:
+  - Does the image clearly read as a controlled product-detail studio shot, not a broad hero or lifestyle scene?
+  - Is exactly one premium skincare serum bottle present?
+  - Is the full bottle visible from pipette top and cap down to the complete base?
+  - Is the bottle vertical axis straight, with stable shoulders and a credible silhouette?
+  - Is the dropper cap, collar, and pipette geometry clean and plausible?
+  - Is the glass frosted or softly translucent with believable internal depth?
+  - Is the label panel intentionally blank, centered, plain, and free of fake text, decorative marks, or logos?
+  - Are product edges, glass highlights, label area, and base contact shadow readable?
+  - Is the background neutral and inspection-oriented rather than decorative or lifestyle-driven?
+  - Are people, hands, props, extra bottles, readable text, watermark, and packaging absent?
+  - Does the result avoid cheap plastic, metallic-body drift, perfume-bottle drift, or medicine-bottle drift?
+
+A5_authorization_required_later: true
+provider_contact_allowed: false
+plugin_call_allowed_by_this_file: false
+image_generation_allowed: false
+memory_write_allowed: false
+daily_note_write_allowed: false
+production_candidate_002_allowed: false
+accepted_samples_write_allowed: false
+runs_output_creation_allowed: false

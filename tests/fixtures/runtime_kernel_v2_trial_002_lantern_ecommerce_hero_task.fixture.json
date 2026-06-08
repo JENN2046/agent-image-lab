@@ -1,0 +1,14 @@
+{
+  "task_id": "runtime-v2-trial-002-lantern-ecommerce-hero-task-001",
+  "run_id": "runtime_v2_trial_002_lantern_ecommerce_hero_001",
+  "prompt_package_ref": "prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v2.yaml",
+  "provider_route": "native_doubao_guarded",
+  "provider_mode": "real_guarded",
+  "model_required": "doubao-seedream-5-0-260128",
+  "max_images": 1,
+  "output_scope": "run_directory_only",
+  "output_directory_ref": "runs/real_generation/runtime_to_review_v2_trial_002_lantern_ecommerce_hero/",
+  "review_required": true,
+  "secret_value_read_allowed": false,
+  "retry_allowed": false
+}

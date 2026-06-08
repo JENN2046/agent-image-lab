@@ -1,0 +1,153 @@
+{
+  "schema": "runtime_to_review_v2_activation_packet_no_execute.v1",
+  "packet_id": "r2r_v2_trial_002_lantern_ecommerce_hero_activation_packet_no_execute_20260608",
+  "created_at": "2026-06-08T00:00:00+08:00",
+  "status": "prepared_no_execute",
+  "can_execute_now": false,
+  "project": "Agent Image Lab",
+  "source_plan_ref": "docs/runtime_to_review_v2_multi_prompt_controlled_trial_plan.md",
+  "source_trial_001_closeout_ref": "reports/memory_write_receipts/r2r_v2_trial_001_codex_knowledge_memory_write_receipt_20260608.json",
+  "review_criteria_ref": "reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_review_criteria_no_execute_20260608.json",
+  "trial": {
+    "trial_id": "r2r_v2_trial_002_lantern_ecommerce_hero",
+    "trial_sequence": 2,
+    "product_family": "premium_portable_led_camping_lantern",
+    "shot_role": "ecommerce_square_hero",
+    "purpose": "Test whether the runtime-to-review contract transfers from Trial 001 serum detail control to a non-beauty hard-edge product while keeping one-image, one-call, zero-retry discipline for any later execution."
+  },
+  "visual_job_contract": {
+    "contract_id": "visual_job_contract_r2r_v2_trial_002_lantern_ecommerce_hero",
+    "contract_version": "v0.no_execute_packet",
+    "subject": "premium portable LED camping lantern",
+    "visual_goal": [
+      "square ecommerce hero product image",
+      "single modern rechargeable lantern as first visual focus",
+      "full handle, diffuser, lower-body control, body, and base visible",
+      "premium dark metal and warm frosted diffuser material fidelity"
+    ],
+    "prompt_package_ref": "prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v2.yaml",
+    "source_prompt_package_ref": "prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v1.yaml",
+    "prompt_package_reuse_policy": "derive_from_existing_lantern_prompt_lineage_but_bind_to_runtime_to_review_v2_trial_002_contract",
+    "constraints": {
+      "max_images": 1,
+      "retry_allowed": false,
+      "single_product_only": true,
+      "people_hands_faces_allowed": false,
+      "open_flame_or_smoke_allowed": false,
+      "readable_text_or_logo_allowed": false,
+      "extra_lanterns_allowed": false,
+      "wrong_product_type_allowed": false,
+      "no_private_path": true,
+      "secret_value_read_allowed": false
+    }
+  },
+  "shot_plan": {
+    "shot_plan_id": "shot_plan_r2r_v2_trial_002_lantern_ecommerce_hero",
+    "shot_count": 1,
+    "primary_shot": {
+      "shot_id": "lantern_ecommerce_square_hero_001",
+      "composition_goal": "square product-first ecommerce hero image with the lantern dominant, fully visible, and grounded on a restrained dark surface",
+      "material_focus": [
+        "warm frosted diffuser with readable texture",
+        "premium dark graphite or anodized metal body",
+        "plausible continuous handle",
+        "visible lower-body dimmer knob or side control",
+        "stable base and contact shadow"
+      ],
+      "risk_watch_items": [
+        "wrong product drift into flashlight, speaker, candle, humidifier, thermos, desk lamp, or vintage kerosene lantern",
+        "cropped or impossible handle",
+        "control detail missing or placed on the top cap",
+        "diffuser blown out or dirty",
+        "product too small in frame",
+        "scene overpowering product",
+        "people, hands, fire, smoke, text, logo, watermark, or extra lanterns"
+      ]
+    }
+  },
+  "review_policy": {
+    "review_policy_id": "review_policy_r2r_v2_trial_002_lantern_ecommerce_hero",
+    "criteria_ref": "reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_review_criteria_no_execute_20260608.json",
+    "required_status_after_generation": "generated_unreviewed",
+    "human_review_required_before_archive": true,
+    "accepted_samples_write_allowed_by_this_packet": false,
+    "production_candidate_write_allowed_by_this_packet": false,
+    "memory_write_default": false,
+    "memory_candidate_allowed_after_review": true,
+    "review_focus": [
+      "centered_product_scale",
+      "control_position_readability",
+      "cylindrical_geometry",
+      "premium_diffuser_and_body_material",
+      "no_people_hands_fire_smoke",
+      "no_text_logo_watermark_or_extra_lanterns"
+    ]
+  },
+  "execution_binding": {
+    "lane": "Amber_B_provider_image_future_only",
+    "target_runtime": "future_vcp_image_execution_broker_or_existing_secretless_runtime_to_review_route",
+    "provider_route": "native_doubao_guarded",
+    "provider_mode": "real_guarded",
+    "model_required": "doubao-seedream-5-0-260128",
+    "secretless_activation_required": true,
+    "exact_future_activation_id": "AUTH-PENDING-R2R-V2-TRIAL-002-LANTERN-ECOMMERCE-HERO-20260608",
+    "exact_future_confirmation_phrase": "RUNTIME_TO_REVIEW_V2_TRIAL_002_ONE_PROVIDER_ONE_IMAGE",
+    "dispatch_source_must_be_binding_not_payload_plugin_field": true,
+    "restricted_plugin_facade_required": true,
+    "binding_ready_packet_required_before_execution": true
+  },
+  "budget": {
+    "max_provider_calls": 1,
+    "max_plugin_calls": 1,
+    "max_api_calls": 1,
+    "max_images": 1,
+    "retry_allowed": false,
+    "max_live_probe_attempts": 1
+  },
+  "output_policy": {
+    "output_scope": "run_directory_only",
+    "output_directory_ref": "runs/real_generation/runtime_to_review_v2_trial_002_lantern_ecommerce_hero/",
+    "overwrite_existing_files_allowed": false,
+    "expected_artifact_record_ref": "reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_artifact_record.json",
+    "expected_receipt_ref": "reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_receipt.json",
+    "expected_review_bridge_ref": "review_console/live_receipt_bridge/r2r_v2_trial_002_lantern_ecommerce_hero/bridge_entry.json"
+  },
+  "stop_conditions": [
+    "missing_or_changed_prompt_package_ref",
+    "missing_or_changed_review_criteria_ref",
+    "output_directory_already_exists",
+    "missing_exact_activation_packet",
+    "can_execute_now_not_true_in_a_future_binding_ready_packet",
+    "provider_or_broker_binding_not_exact",
+    "budget_not_one_provider_one_plugin_one_api_one_image",
+    "retry_requested",
+    "secret_value_read_required",
+    "accepted_samples_or_production_or_memory_write_requested",
+    "push_tag_release_deploy_requested"
+  ],
+  "side_effect_flags": {
+    "route_http_request_performed": false,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "output_write_performed": false,
+    "real_manifest_read_performed": false,
+    "real_VCPChat_read_performed": false,
+    "real_VCPToolBox_read_performed": false,
+    "secret_value_read_performed": false,
+    "accepted_samples_write_performed": false,
+    "production_candidate_write_performed": false,
+    "DailyNote_write_performed": false,
+    "VCP_memory_write_performed": false,
+    "push_tag_release_deploy_performed": false
+  },
+  "validation_required": [
+    "node scripts/validate_runtime_to_review_v2_multi_prompt_controlled_trial_plan.js",
+    "node scripts/validate_prompt_schema.js --type prompt_package prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v2.yaml",
+    "node scripts/validate_runtime_to_review_v2_trial_002_activation_packet_no_execute.js",
+    "node scripts/validate_agent_board_state.js",
+    "git diff --check"
+  ],
+  "recommended_next": "review_this_packet_and_criteria_then_create_a_separate_binding_ready_execution_packet_only_if_trial_002_should_run"
+}

@@ -1,5 +1,103 @@
 # VALIDATION_LOG.md — Agent Image Lab
 
+## VALIDATION-20260608-RUNTIME-TO-REVIEW-V2-TRIAL-002-FAILED-DISPATCH-OUTPUT-DIRECTORY-GUARD-PR10
+
+Task: runtime_to_review_v2_trial_002_failed_dispatch_output_directory_guard_pr10
+
+Commands run:
+  - node --check adapters\runtime\native_doubao_runtime_v2_trial_002_lantern_ecommerce_broker_dispatch_adapter.js
+  - node --check scripts\validate_runtime_to_review_v2_trial_002_ail_side_binding_preflight.js
+  - node scripts\validate_runtime_to_review_v2_trial_002_ail_side_binding_preflight.js
+
+Result: ALL REQUIRED CHECKS PASSED
+
+Findings:
+  - Fixed PR feedback by removing the pre-dispatch mkdir for the Trial 002 run directory.
+  - The adapter now validates output_directory_ref before dispatch without creating the directory.
+  - Added fail-closed collision enforcement before dispatch when the Trial 002 output directory already exists.
+  - The validator added failed_route_does_not_create_output_directory and existing_output_directory_stops_before_dispatch, then passed 26 checks / 0 failures.
+
+Side effects:
+  - real_route_http_request_performed: false
+  - provider_contact_performed: false
+  - plugin_call_performed: false
+  - api_call_performed: false
+  - image_generation_performed: false
+  - output_directory_created_on_failed_route: false
+  - route_post_called_when_output_directory_exists: false
+  - VCPToolBox_modified: false
+
+## VALIDATION-20260608-RUNTIME-TO-REVIEW-V2-TRIAL-002-LANTERN-NO-EXECUTE-PACKET
+
+Task: runtime_to_review_v2_trial_002_lantern_ecommerce_hero_no_execute_packet_20260608
+
+Commands run:
+  - node scripts\validate_runtime_to_review_v2_trial_002_activation_packet_no_execute.js
+  - node scripts\validate_prompt_schema.js --type prompt_package prompts\image_generation\product_lifestyle_premium_portable_led_camping_lantern_v2.yaml
+  - node --check scripts\validate_runtime_to_review_v2_trial_002_activation_packet_no_execute.js
+  - node scripts\validate_runtime_to_review_v2_multi_prompt_controlled_trial_plan.js
+
+Result: ALL REQUIRED CHECKS PASSED
+
+Findings:
+  - Trial 002 no-execute packet was created for r2r_v2_trial_002_lantern_ecommerce_hero.
+  - Packet can_execute_now=false and requires a future binding-ready execution packet before any run.
+  - Review criteria define acceptance bar, scoring weights, and watch items for product identity, geometry, ecommerce hero composition, material/light control, safety, and pipeline learning value.
+  - Existing lantern v2 prompt package passed prompt schema validation.
+
+Warnings:
+  - This packet does not prove runtime binding exists for Trial 002 yet.
+  - Future real execution still requires a separate one-image binding-ready packet and must honor one provider / one plugin / one API / one image / zero retry.
+
+Not validated:
+  - No route HTTP request was performed.
+  - No provider/plugin/API call was performed.
+  - No image generation or output write was performed.
+  - No accepted_samples, production candidate, DailyNote, or VCP memory write was performed.
+  - No push, tag, release, or deploy was performed.
+
+Notes:
+  - This is a local Green no-execute preparation gate only.
+
+## VALIDATION-20260608-RUNTIME-TO-REVIEW-V2-TRIAL-001-CODEX-KNOWLEDGE-MEMORY-WRITE
+
+Task: runtime_to_review_v2_trial_001_codex_knowledge_memory_write_executed_20260608
+
+Commands run:
+  - node scripts\validate_runtime_to_review_v2_trial_001_codex_knowledge_memory_write_binding_ready_packet.js
+  - node scripts\validate_runtime_to_review_v2_trial_001_codex_knowledge_memory_write_receipt.js
+  - node scripts\validate_runtime_to_review_v2_trial_001_accepted_samples_promotion.js
+  - node scripts\validate_runtime_to_review_v2_trial_001_memory_candidate_no_write_mapping_gate.js
+  - node scripts\validate_v7_32_accepted_sample_registry_update.js
+  - node --check scripts\validate_runtime_to_review_v2_trial_001_codex_knowledge_memory_write_binding_ready_packet.js
+  - node --check scripts\validate_runtime_to_review_v2_trial_001_codex_knowledge_memory_write_receipt.js
+  - node --check scripts\validate_runtime_to_review_v2_trial_001_accepted_samples_promotion.js
+  - node --check scripts\validate_runtime_to_review_v2_trial_001_memory_candidate_no_write_mapping_gate.js
+
+Result: ALL REQUIRED CHECKS PASSED
+
+Findings:
+  - Binding-ready memory packet is scoped to mcp__vcp_codex_memory.record_memory, target=knowledge, targetDiary=Codex knowledge, max one call, and zero retry.
+  - Exactly one record_memory call was performed and accepted.
+  - Memory id: codex-knowledge-3a86b6bc791e427f9eeec8d53d9f3c79.
+  - Canonical hash: 7ed8df1cd10dfaba0d56b222109299b61d09de37922e57b295a06980908415cf.
+  - Project receipt records raw memory file path redacted.
+  - Accepted sample registry and capsule surfaces now reference the separate Codex knowledge memory receipt.
+  - Existing no-write mapping gate remains historically no-write; validators now distinguish that gate from the later separately authorized memory execution.
+
+Warnings:
+  - DailyNote and VCP dual-memory writes remain excluded.
+  - The external memory mutation itself is not reverted by local git revert; any future memory mutation requires a separate exact memory approval.
+
+Not validated:
+  - No DailyNote write was performed.
+  - No VCP memory write was performed.
+  - No provider/plugin/API call or image generation was performed.
+  - No push, tag, release, or deploy was performed.
+
+Notes:
+  - This validation records a completed Amber_C memory action under the active Smart Standing Authorization v3 envelope and the user's exact request.
+
 ## VALIDATION-20260601-RUNTIME-TO-REVIEW-V1-SERUM-BOTTLE-LIVE-PROBE-ATTEMPT-002
 
 Task: serum_bottle_live_probe_attempt_002_20260601

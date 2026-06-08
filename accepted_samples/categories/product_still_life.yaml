@@ -1,11 +1,12 @@
 category: product_still_life
-sample_count: 5
+sample_count: 6
 samples:
   - accepted_product_still_life_tennis_wallet_001
   - accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001
   - neutral_red_apple_seedream5_retry_006
   - accepted_premium_black_wireless_headphones_hero_ail_vis_17_001
   - accepted_premium_skincare_serum_bottle_secretless_attempt_018_001
+  - accepted_premium_skincare_serum_bottle_r2r_v2_trial_001_001
 recoverability_metadata:
   accepted_product_lifestyle_portable_led_camping_lantern_codex_v14_166_001:
     recoverability_status: workspace_local_verified
@@ -55,5 +56,21 @@ recoverability_metadata:
     import_record_ref: accepted_samples/accepted_premium_skincare_serum_bottle_secretless_attempt_018_001/metadata.json
     capsule_manifest_ref: accepted_samples/accepted_premium_skincare_serum_bottle_secretless_attempt_018_001/manifest.json
     source_evidence_ref: accepted_samples/accepted_premium_skincare_serum_bottle_secretless_attempt_018_001/source_evidence.json
+    portable_after_clone: false
+    artifact_recoverability_is_not_vcp_runtime_integration: true
+  accepted_premium_skincare_serum_bottle_r2r_v2_trial_001_001:
+    recoverability_status: workspace_local_verified
+    artifact_locator_scope: project_relative_runs
+    verification_mode: local_file_hash
+    verified_sha256: 60af66aa0f26fc8e26eabd0719408d92b4efdc21b2f26737ae3e6fce1c1f9f82
+    verified_dimensions: 1920x1920
+    verified_mime: image/jpeg
+    verification_record_ref: reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_artifact_record.json
+    durable_archive_ref: asset_archive/original_assets/by_sha256/60af66aa0f26fc8e26eabd0719408d92b4efdc21b2f26737ae3e6fce1c1f9f82.jpg
+    durable_archive_execution_report_ref: reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_durable_archive_execution_report_20260608.json
+    durable_archive_ready: true
+    import_record_ref: accepted_samples/accepted_premium_skincare_serum_bottle_r2r_v2_trial_001_001/metadata.json
+    capsule_manifest_ref: accepted_samples/accepted_premium_skincare_serum_bottle_r2r_v2_trial_001_001/manifest.json
+    source_evidence_ref: accepted_samples/accepted_premium_skincare_serum_bottle_r2r_v2_trial_001_001/source_evidence.json
     portable_after_clone: false
     artifact_recoverability_is_not_vcp_runtime_integration: true

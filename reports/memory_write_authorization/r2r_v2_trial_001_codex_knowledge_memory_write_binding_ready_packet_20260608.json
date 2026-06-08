@@ -1,0 +1,81 @@
+{
+  "schema": "agent_image_lab_codex_knowledge_memory_write_binding_ready_packet.v1",
+  "packet_id": "r2r_v2_trial_001_codex_knowledge_memory_write_binding_ready_packet_20260608",
+  "created_at": "2026-06-08T00:00:00+08:00",
+  "status": "completed_validated_binding_ready_pending_single_record_memory_call",
+  "lane": "Amber_C_memory",
+  "envelope_id": "Smart Standing Authorization v3",
+  "source_preflight_ref": "reports/memory_write_authorization/r2r_v2_trial_001_codex_knowledge_memory_write_preflight_20260608.json",
+  "payload_ref": "reports/memory_write_payloads/r2r_v2_trial_001_codex_knowledge_memory_write_payload_20260608.json",
+  "receipt_ref": "reports/memory_write_receipts/r2r_v2_trial_001_codex_knowledge_memory_write_receipt_20260608.json",
+  "can_execute_now": true,
+  "execute_once": true,
+  "retry_allowed": false,
+  "selected_tool": "mcp__vcp_codex_memory.record_memory",
+  "tool_arguments": {
+    "client_id": "codex",
+    "project_id": "agent-image-lab",
+    "task_id": "r2r_v2_trial_001_serum_detail_control",
+    "target": "knowledge",
+    "targetDiary": "Codex knowledge",
+    "title_ref": "reports/memory_write_payloads/r2r_v2_trial_001_codex_knowledge_memory_write_payload_20260608.json#/title",
+    "content_ref": "reports/memory_write_payloads/r2r_v2_trial_001_codex_knowledge_memory_write_payload_20260608.json#/content",
+    "evidence_ref": "reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_memory_candidate_no_write_mapping_gate_20260608.json",
+    "visibility": "project",
+    "sensitivity": "none",
+    "validated": true,
+    "reusable": true,
+    "tags": [
+      "AgentImageLab",
+      "runtime-to-review",
+      "Trial001",
+      "Codex knowledge",
+      "精华瓶",
+      "受控真实执行"
+    ]
+  },
+  "execution_limits": {
+    "max_record_memory_calls": 1,
+    "max_successful_writes": 1,
+    "max_retries": 0,
+    "secret_value_read_allowed": false,
+    "raw_private_data_print_allowed": false,
+    "DailyNote_write_allowed": false,
+    "VCP_memory_write_allowed": false,
+    "provider_plugin_api_allowed": false,
+    "image_generation_allowed": false
+  },
+  "post_write_required_evidence": [
+    "memoryId",
+    "canonicalHash",
+    "idempotency_status",
+    "validated",
+    "reusable"
+  ],
+  "rollback_or_cleanup_plan": "memory mutation requires a separate exact memory mutation approval; local receipt files can be reverted by normal git revert before push",
+  "stop_conditions": [
+    "record_memory_tool_unavailable",
+    "payload_missing_or_not_safe",
+    "target_not_knowledge",
+    "targetDiary_not_Codex_knowledge",
+    "request_would_call_DailyNote",
+    "request_would_call_VCP_memory_dual_write",
+    "request_would_read_secret_or_private_path",
+    "first_record_memory_call_fails",
+    "any_retry_would_be_needed",
+    "post_write_receipt_cannot_be_recorded"
+  ],
+  "guard_before_execution": {
+    "record_memory_called": false,
+    "DailyNote_write_performed": false,
+    "VCP_memory_write_performed": false,
+    "Codex_memory_write_performed": false,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "push_tag_release_deploy_performed": false
+  },
+  "recommended_next": "execute_exactly_one_record_memory_call_then_write_receipt",
+  "recommended_next_auto_execution_allowed": true
+}

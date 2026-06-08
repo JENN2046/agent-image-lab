@@ -1,0 +1,215 @@
+{
+  "schema": "runtime_to_review_v2_trial_001_exact_file_staging_package_draft.v1",
+  "package_id": "r2r_v2_trial_001_exact_file_staging_package_draft_20260608",
+  "created_at": "2026-06-08T00:00:00+08:00",
+  "status": "draft_validated_pending_human_stage_or_commit_decision",
+  "workspace": "agent-image-lab-v0.2",
+  "branch": "master",
+  "intent": "local_closeout_review_and_exact_file_staging_package_draft",
+  "remote_action_authorized": false,
+  "stage_performed": false,
+  "commit_performed": false,
+  "push_performed": false,
+  "summary": "Trial 001 local closeout package for runtime-to-review v2: prompt package, guarded execution packets and receipts, artifact import adapter, accepted_samples promotion, durable archive, memory-candidate no-write mapping, validators, and agent_board status surfaces.",
+  "exact_file_groups": {
+    "status_surfaces": [
+      ".agent_board/CHECKPOINT.md",
+      ".agent_board/HANDOFF.md",
+      ".agent_board/RUN_STATE.md",
+      ".agent_board/TASK_QUEUE.md"
+    ],
+    "runtime_binding_and_prompt": [
+      "adapters/runtime/native_doubao_runtime_v2_trial_001_serum_detail_broker_dispatch_adapter.js",
+      "scripts/native_doubao_secretless_provider_runtime_bridge.js",
+      "prompts/image_generation/product_detail_premium_serum_bottle_v2.yaml",
+      "tests/fixtures/runtime_kernel_v2_trial_001_serum_detail_control_task.fixture.json"
+    ],
+    "planning_support": [
+      "docs/runtime_to_review_v2_multi_prompt_controlled_trial_plan.md",
+      "tests/schema_examples/runtime_to_review_v2_multi_prompt_controlled_trial_plan.example.json",
+      "scripts/validate_runtime_to_review_v2_multi_prompt_controlled_trial_plan.js"
+    ],
+    "trial_001_execution_reports": [
+      "reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_activation_packet_no_execute_20260608.json",
+      "reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_binding_ready_execution_packet_20260608.json",
+      "reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_execution_attempt_001_failed_closed_20260608.json",
+      "reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_execution_attempt_002_failed_closed_20260608.json",
+      "reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_execution_attempt_003_failed_closed_20260608.json",
+      "reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_execution_attempt_004_success_20260608.json",
+      "reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_execution_readiness_preflight_20260608.json",
+      "reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_future_execution_packet_20260608.json",
+      "reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_rearm_packet_attempt_002_20260608.json",
+      "reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_rearm_packet_attempt_003_20260608.json",
+      "reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_rearm_packet_attempt_004_20260608.json",
+      "reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_receipt.json",
+      "reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_artifact_record.json",
+      "reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_review_decision_accepted_candidate_20260608.json",
+      "reports/runtime_to_review_v2/r2r_v2_trial_001_vcptoolbox_internal_authorizer_binding_receipt_20260608.json"
+    ],
+    "review_bridge": [
+      "review_console/live_receipt_bridge/r2r_v2_trial_001_serum_detail_control/bridge_entry.json"
+    ],
+    "accepted_samples_and_promotion": [
+      "accepted_samples/accepted_sample_registry.yaml",
+      "accepted_samples/categories/product_still_life.yaml",
+      "accepted_samples/accepted_premium_skincare_serum_bottle_r2r_v2_trial_001_001/metadata.json",
+      "accepted_samples/accepted_premium_skincare_serum_bottle_r2r_v2_trial_001_001/manifest.json",
+      "accepted_samples/accepted_premium_skincare_serum_bottle_r2r_v2_trial_001_001/source_evidence.json",
+      "reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_accepted_samples_promotion_gate_20260608.json"
+    ],
+    "durable_archive": [
+      "asset_archive/original_assets/by_sha256/60af66aa0f26fc8e26eabd0719408d92b4efdc21b2f26737ae3e6fce1c1f9f82.jpg",
+      "reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_durable_archive_authorization_20260608.json",
+      "reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_durable_archive_execution_report_20260608.json"
+    ],
+    "memory_candidate_no_write": [
+      "reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_memory_candidate_no_write_mapping_gate_20260608.json",
+      "reports/memory_delta_drafts/r2r_v2_trial_001_serum_detail_control_memory_delta_candidate_no_write_20260608.json"
+    ],
+    "validators": [
+      "scripts/validate_runtime_to_review_v2_trial_001_activation_packet_no_execute.js",
+      "scripts/validate_runtime_to_review_v2_trial_001_binding_ready_execution_packet.js",
+      "scripts/validate_runtime_to_review_v2_trial_001_execution_readiness_preflight.js",
+      "scripts/validate_runtime_to_review_v2_trial_001_exact_runtime_binding.js",
+      "scripts/validate_runtime_to_review_v2_trial_001_future_execution_packet.js",
+      "scripts/validate_runtime_to_review_v2_trial_001_vcptoolbox_internal_authorizer_binding.js",
+      "scripts/validate_runtime_to_review_v2_trial_001_accepted_samples_promotion.js",
+      "scripts/validate_runtime_to_review_v2_trial_001_durable_archive_gate.js",
+      "scripts/validate_runtime_to_review_v2_trial_001_memory_candidate_no_write_mapping_gate.js",
+      "scripts/validate_runtime_to_review_v2_trial_001_exact_file_staging_package_draft.js",
+      "scripts/validate_v7_32_accepted_sample_registry_update.js"
+    ],
+    "ignored_runtime_source_recommended_force_add": [
+      "runs/real_generation/runtime_to_review_v2_trial_001_serum_detail_control/7bb59380-abb4-4180-9fa6-6a71549aec41.jpg"
+    ]
+  },
+  "recommended_stage_sets": {
+    "metadata_and_code_only_without_binaries": {
+      "recommended": false,
+      "reason": "This leaves Trial 001 validators dependent on local ignored runtime output and weakens clone-after-commit reproducibility."
+    },
+    "full_reproducible_local_package_with_binaries": {
+      "recommended": true,
+      "requires_force_add_for_ignored_runtime_source": true,
+      "requires_binary_acceptance": true,
+      "binary_files": [
+        "runs/real_generation/runtime_to_review_v2_trial_001_serum_detail_control/7bb59380-abb4-4180-9fa6-6a71549aec41.jpg",
+        "asset_archive/original_assets/by_sha256/60af66aa0f26fc8e26eabd0719408d92b4efdc21b2f26737ae3e6fce1c1f9f82.jpg"
+      ],
+      "binary_total_bytes": 256760,
+      "reason": "The source runtime image is ignored but required by validators; the durable archive image is the stable recovery copy."
+    }
+  },
+  "exclude_from_agent_image_lab_stage": [
+    ".worktrees/",
+    ".worktrees/pr9-preview-sync/",
+    ".worktrees/runtime_to_review_v2_trial_001_import_probe/",
+    "A:/VCP/apps/VCPToolBox/"
+  ],
+  "separate_vcptoolbox_repo_package_review_required": {
+    "required_before_committing_vcptoolbox": true,
+    "repo": "A:/VCP/apps/VCPToolBox",
+    "known_related_candidates": [
+      "routes/admin/aiImageAgents.js",
+      "server.js"
+    ],
+    "do_not_mix_without_review": [
+      "AGENTS.md",
+      "docs/governance/UPSTREAM_ABSORB_LOG_20260528.md",
+      "dailynote/Codex/"
+    ],
+    "reason": "VCPToolBox is a separate repository with its own dirty worktree. It must not be staged as part of the Agent Image Lab repository package."
+  },
+  "exact_stage_command_draft": {
+    "normal_add": [
+      ".agent_board/CHECKPOINT.md",
+      ".agent_board/HANDOFF.md",
+      ".agent_board/RUN_STATE.md",
+      ".agent_board/TASK_QUEUE.md",
+      "accepted_samples/accepted_sample_registry.yaml",
+      "accepted_samples/categories/product_still_life.yaml",
+      "accepted_samples/accepted_premium_skincare_serum_bottle_r2r_v2_trial_001_001/metadata.json",
+      "accepted_samples/accepted_premium_skincare_serum_bottle_r2r_v2_trial_001_001/manifest.json",
+      "accepted_samples/accepted_premium_skincare_serum_bottle_r2r_v2_trial_001_001/source_evidence.json",
+      "adapters/runtime/native_doubao_runtime_v2_trial_001_serum_detail_broker_dispatch_adapter.js",
+      "docs/runtime_to_review_v2_multi_prompt_controlled_trial_plan.md",
+      "prompts/image_generation/product_detail_premium_serum_bottle_v2.yaml",
+      "reports/memory_delta_drafts/r2r_v2_trial_001_serum_detail_control_memory_delta_candidate_no_write_20260608.json",
+      "reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_accepted_samples_promotion_gate_20260608.json",
+      "reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_activation_packet_no_execute_20260608.json",
+      "reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_artifact_record.json",
+      "reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_binding_ready_execution_packet_20260608.json",
+      "reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_durable_archive_authorization_20260608.json",
+      "reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_durable_archive_execution_report_20260608.json",
+      "reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_execution_attempt_001_failed_closed_20260608.json",
+      "reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_execution_attempt_002_failed_closed_20260608.json",
+      "reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_execution_attempt_003_failed_closed_20260608.json",
+      "reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_execution_attempt_004_success_20260608.json",
+      "reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_execution_readiness_preflight_20260608.json",
+      "reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_exact_file_staging_package_draft_20260608.json",
+      "reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_future_execution_packet_20260608.json",
+      "reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_memory_candidate_no_write_mapping_gate_20260608.json",
+      "reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_rearm_packet_attempt_002_20260608.json",
+      "reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_rearm_packet_attempt_003_20260608.json",
+      "reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_rearm_packet_attempt_004_20260608.json",
+      "reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_receipt.json",
+      "reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_review_decision_accepted_candidate_20260608.json",
+      "reports/runtime_to_review_v2/r2r_v2_trial_001_vcptoolbox_internal_authorizer_binding_receipt_20260608.json",
+      "review_console/live_receipt_bridge/r2r_v2_trial_001_serum_detail_control/bridge_entry.json",
+      "scripts/native_doubao_secretless_provider_runtime_bridge.js",
+      "scripts/validate_runtime_to_review_v2_multi_prompt_controlled_trial_plan.js",
+      "scripts/validate_runtime_to_review_v2_trial_001_accepted_samples_promotion.js",
+      "scripts/validate_runtime_to_review_v2_trial_001_activation_packet_no_execute.js",
+      "scripts/validate_runtime_to_review_v2_trial_001_binding_ready_execution_packet.js",
+      "scripts/validate_runtime_to_review_v2_trial_001_durable_archive_gate.js",
+      "scripts/validate_runtime_to_review_v2_trial_001_exact_file_staging_package_draft.js",
+      "scripts/validate_runtime_to_review_v2_trial_001_exact_runtime_binding.js",
+      "scripts/validate_runtime_to_review_v2_trial_001_execution_readiness_preflight.js",
+      "scripts/validate_runtime_to_review_v2_trial_001_future_execution_packet.js",
+      "scripts/validate_runtime_to_review_v2_trial_001_memory_candidate_no_write_mapping_gate.js",
+      "scripts/validate_runtime_to_review_v2_trial_001_vcptoolbox_internal_authorizer_binding.js",
+      "scripts/validate_v7_32_accepted_sample_registry_update.js",
+      "tests/fixtures/runtime_kernel_v2_trial_001_serum_detail_control_task.fixture.json",
+      "tests/schema_examples/runtime_to_review_v2_multi_prompt_controlled_trial_plan.example.json"
+    ],
+    "force_add": [
+      "asset_archive/original_assets/by_sha256/60af66aa0f26fc8e26eabd0719408d92b4efdc21b2f26737ae3e6fce1c1f9f82.jpg",
+      "runs/real_generation/runtime_to_review_v2_trial_001_serum_detail_control/7bb59380-abb4-4180-9fa6-6a71549aec41.jpg"
+    ],
+    "forbidden": [
+      "git add .",
+      ".worktrees/",
+      "A:/VCP/apps/VCPToolBox/",
+      "node_modules/",
+      ".env",
+      ".env.local"
+    ]
+  },
+  "validation_required_before_stage_or_commit": [
+    "node scripts/validate_runtime_to_review_v2_multi_prompt_controlled_trial_plan.js",
+    "node scripts/validate_runtime_to_review_v2_trial_001_vcptoolbox_internal_authorizer_binding.js",
+    "node scripts/validate_runtime_to_review_v2_trial_001_accepted_samples_promotion.js",
+    "node scripts/validate_runtime_to_review_v2_trial_001_durable_archive_gate.js",
+    "node scripts/validate_runtime_to_review_v2_trial_001_memory_candidate_no_write_mapping_gate.js",
+    "node scripts/validate_v7_32_accepted_sample_registry_update.js",
+    "node scripts/validate_agent_board_state.js",
+    "node scripts/validate_runtime_to_review_v2_trial_001_exact_file_staging_package_draft.js",
+    "git diff --check"
+  ],
+  "historical_pre_dispatch_validators_not_final_after_success": [
+    "node scripts/validate_runtime_to_review_v2_trial_001_activation_packet_no_execute.js",
+    "node scripts/validate_runtime_to_review_v2_trial_001_future_execution_packet.js",
+    "node scripts/validate_runtime_to_review_v2_trial_001_binding_ready_execution_packet.js",
+    "node scripts/validate_runtime_to_review_v2_trial_001_execution_readiness_preflight.js",
+    "node scripts/validate_runtime_to_review_v2_trial_001_exact_runtime_binding.js"
+  ],
+  "known_validation_note": "The activation/future/binding/readiness/exact-runtime validators are pre-dispatch gates. They are intentionally not in the final post-execution validator set because attempt 004 created the no-overwrite output; after success they are expected to block duplicate dispatch at output_collision_clear or output collision checks.",
+  "go_no_go": {
+    "can_stage_exact_files_after_human_confirmation": true,
+    "can_commit_after_exact_staging_and_staged_diff_review": true,
+    "can_push": false,
+    "must_not_stage_dot_worktrees": true,
+    "must_not_mix_vcptoolbox_repo": true,
+    "must_not_use_git_add_dot": true
+  }
+}

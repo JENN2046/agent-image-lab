@@ -1,0 +1,86 @@
+{
+  "record_type": "metadata_only_accepted_sample_capsule_metadata",
+  "version": "v1",
+  "sample_id": "accepted_premium_skincare_serum_bottle_r2r_v2_trial_001_001",
+  "created_at": "2026-06-08T00:00:00+08:00",
+  "status": "accepted_candidate",
+  "source_phase": "runtime_to_review_v2_trial_001_serum_detail_control",
+  "provider": {
+    "provider_type": "project_plugin",
+    "plugin_id": "DoubaoGen",
+    "model": "doubao-seedream-5-0-260128",
+    "resolution_request": "1920x1920",
+    "non_target_model_observed": false
+  },
+  "artifact": {
+    "source_image_ref": "runs/real_generation/runtime_to_review_v2_trial_001_serum_detail_control/7bb59380-abb4-4180-9fa6-6a71549aec41.jpg",
+    "source_image_sha256": "60af66aa0f26fc8e26eabd0719408d92b4efdc21b2f26737ae3e6fce1c1f9f82",
+    "source_image_dimensions": "1920x1920",
+    "source_image_mime": "image/jpeg",
+    "source_image_extension": ".jpg",
+    "source_image_copied_or_moved": false,
+    "image_files_committed_to_git": false,
+    "durable_archive_ref": "asset_archive/original_assets/by_sha256/60af66aa0f26fc8e26eabd0719408d92b4efdc21b2f26737ae3e6fce1c1f9f82.jpg",
+    "durable_archive_sha256": "60af66aa0f26fc8e26eabd0719408d92b4efdc21b2f26737ae3e6fce1c1f9f82",
+    "durable_archive_ready": true
+  },
+  "review": {
+    "decision": "accepted_candidate",
+    "accepted_sample": true,
+    "production_candidate": false,
+    "commercial_delivery_ready": false,
+    "overall_score": 0.86,
+    "summary": "Runtime-to-review v2 Trial 001 accepted candidate. The sample validates blank-label serum bottle control, secretless activation, broker dispatch, and artifact-store import. It is useful as a reference sample, while final commercial delivery still needs brand label/copy and stronger polish."
+  },
+  "acceptance_summary": {
+    "prompt_subject_match": "pass",
+    "single_bottle_control_shot": "pass",
+    "full_bottle_visible": "pass",
+    "bottle_base_visible": "pass",
+    "blank_label": "pass",
+    "no_readable_text_logo_watermark": "pass",
+    "artifact_store_import": "pass",
+    "commercial_usability": "pass_with_brand_label_needed",
+    "memory_suitability": true
+  },
+  "known_minor_issues": [
+    "final_brand_delivery_requires_label_copy_or_brand_visual_design",
+    "high_end_commercial_polish_can_be_stronger"
+  ],
+  "refs": {
+    "prompt_package_ref": "prompts/image_generation/product_detail_premium_serum_bottle_v2.yaml",
+    "receipt_ref": "reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_receipt.json",
+    "artifact_record_ref": "reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_artifact_record.json",
+    "review_decision_ref": "reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_review_decision_accepted_candidate_20260608.json",
+    "promotion_gate_ref": "reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_accepted_samples_promotion_gate_20260608.json",
+    "memory_write_receipt_ref": "reports/memory_write_receipts/r2r_v2_trial_001_codex_knowledge_memory_write_receipt_20260608.json"
+  },
+  "durable_archive": {
+    "authorization_ref": "reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_durable_archive_authorization_20260608.json",
+    "execution_report_ref": "reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_durable_archive_execution_report_20260608.json",
+    "target_archive_path": "asset_archive/original_assets/by_sha256/60af66aa0f26fc8e26eabd0719408d92b4efdc21b2f26737ae3e6fce1c1f9f82.jpg",
+    "copy_performed": true,
+    "source_move_or_delete_performed": false,
+    "overwrite_performed": false
+  },
+  "memory_candidate": {
+    "mapping_gate_ref": "reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_memory_candidate_no_write_mapping_gate_20260608.json",
+    "memory_delta_candidate_ref": "reports/memory_delta_drafts/r2r_v2_trial_001_serum_detail_control_memory_delta_candidate_no_write_20260608.json",
+    "candidate_id": "memcand_r2r_v2_trial_001_serum_detail_control_20260608",
+    "status": "codex_knowledge_memory_written",
+    "write_performed": true,
+    "memory_write_receipt_ref": "reports/memory_write_receipts/r2r_v2_trial_001_codex_knowledge_memory_write_receipt_20260608.json",
+    "codex_knowledge_memory_id": "codex-knowledge-3a86b6bc791e427f9eeec8d53d9f3c79",
+    "DailyNote_write_performed": false,
+    "VCP_memory_write_performed": false
+  },
+  "memory_effects": {
+    "codex_knowledge_memory_written": true,
+    "codex_knowledge_memory_id": "codex-knowledge-3a86b6bc791e427f9eeec8d53d9f3c79",
+    "codex_knowledge_memory_receipt_ref": "reports/memory_write_receipts/r2r_v2_trial_001_codex_knowledge_memory_write_receipt_20260608.json",
+    "daily_note_write_allowed": false,
+    "project_DailyNote_writer_performed": false,
+    "vcp_long_term_memory_write_allowed": false,
+    "additional_memory_write_performed_after_codex_receipt": false
+  }
+}

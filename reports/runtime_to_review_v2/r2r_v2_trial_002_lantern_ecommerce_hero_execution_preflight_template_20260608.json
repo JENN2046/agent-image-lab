@@ -1,0 +1,121 @@
+{
+  "schema": "runtime_to_review_v2_execution_preflight_template.v1",
+  "template_id": "r2r_v2_trial_002_lantern_ecommerce_hero_execution_preflight_template_20260608",
+  "created_at": "2026-06-08T00:00:00+08:00",
+  "status": "prepared_execution_preflight_template_blocked_external_route_pending",
+  "trial_id": "r2r_v2_trial_002_lantern_ecommerce_hero",
+  "can_execute_now": false,
+  "binding_ready": false,
+  "dispatch_performed": false,
+  "activation_consumed": false,
+  "blocking_reason": "external_vcptoolbox_trial_002_internal_route_and_authorizer_not_bound",
+  "source_refs": {
+    "no_execute_packet_ref": "reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_activation_packet_no_execute_20260608.json",
+    "ail_side_binding_preflight_ref": "reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_ail_side_binding_preflight_20260608.json",
+    "review_instruction_template_ref": "reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_review_instruction_template_20260608.json",
+    "adapter_ref": "adapters/runtime/native_doubao_runtime_v2_trial_002_lantern_ecommerce_broker_dispatch_adapter.js",
+    "fixture_ref": "tests/fixtures/runtime_kernel_v2_trial_002_lantern_ecommerce_hero_task.fixture.json",
+    "prompt_package_ref": "prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v2.yaml"
+  },
+  "execution_budget_if_unblocked_later": {
+    "max_route_http_requests": 1,
+    "max_provider_calls": 1,
+    "max_plugin_calls": 1,
+    "max_api_calls": 1,
+    "max_images": 1,
+    "max_live_probe_attempts": 1,
+    "retry_allowed": false
+  },
+  "required_preflight_checks_before_future_can_execute_now": [
+    {
+      "check": "external_vcptoolbox_trial_002_route_and_authorizer_bound",
+      "required_now": true,
+      "current_result": "blocked_not_bound",
+      "must_be_true_before_execution": true
+    },
+    {
+      "check": "ail_side_binding_preflight_validator_passes",
+      "command": "node scripts/validate_runtime_to_review_v2_trial_002_ail_side_binding_preflight.js",
+      "current_result": "passed",
+      "must_be_true_before_execution": true
+    },
+    {
+      "check": "trial_002_no_execute_packet_still_valid",
+      "command": "node scripts/validate_runtime_to_review_v2_trial_002_activation_packet_no_execute.js",
+      "current_result": "passed",
+      "must_be_true_before_execution": true
+    },
+    {
+      "check": "prompt_schema_still_valid",
+      "command": "node scripts/validate_prompt_schema.js --type prompt_package prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v2.yaml",
+      "current_result": "passed",
+      "must_be_true_before_execution": true
+    },
+    {
+      "check": "output_collision_clear",
+      "paths_must_not_exist": [
+        "runs/real_generation/runtime_to_review_v2_trial_002_lantern_ecommerce_hero/",
+        "reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_receipt.json",
+        "reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_artifact_record.json",
+        "review_console/live_receipt_bridge/r2r_v2_trial_002_lantern_ecommerce_hero/bridge_entry.json"
+      ],
+      "must_be_true_before_execution": true
+    }
+  ],
+  "future_dispatch_command_after_external_binding_and_binding_ready_packet": {
+    "command": "node",
+    "args": [
+      "scripts/run_runtime_to_review_v1_guarded_live_probe.js",
+      "--input",
+      "tests/fixtures/runtime_kernel_v2_trial_002_lantern_ecommerce_hero_task.fixture.json",
+      "--provider-delegate-module",
+      "adapters/runtime/native_doubao_runtime_v1_provider_delegate.js",
+      "--owner-runtime-module",
+      "adapters/runtime/native_doubao_runtime_v2_trial_002_lantern_ecommerce_broker_dispatch_adapter.js",
+      "--confirm-live-provider-probe",
+      "RUNTIME_TO_REVIEW_V1_ONE_PROVIDER_ONE_IMAGE",
+      "--max-images",
+      "1"
+    ],
+    "must_not_run_from_this_template": true,
+    "must_not_add_retry_flags": true,
+    "must_not_override_prompt_or_output": true,
+    "requires_separate_binding_ready_packet_with_can_execute_now_true": true
+  },
+  "hard_stop_before_execution": [
+    "external_vcptoolbox_trial_002_route_binding_missing",
+    "output_directory_or_expected_receipt_already_exists",
+    "budget_drift_from_one_route_one_provider_one_plugin_one_api_one_image",
+    "retry_requested",
+    "secret_value_read_required",
+    "authorization_header_constructed_by_Agent_Image_Lab",
+    "accepted_samples_or_archive_or_production_or_memory_write_requested_before_review",
+    "push_tag_release_deploy_requested",
+    "destructive_git_or_filesystem_action_requested"
+  ],
+  "required_success_artifacts_after_future_dispatch": {
+    "receipt_ref": "reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_receipt.json",
+    "artifact_record_ref": "reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_artifact_record.json",
+    "review_bridge_ref": "review_console/live_receipt_bridge/r2r_v2_trial_002_lantern_ecommerce_hero/bridge_entry.json",
+    "initial_status": "generated_unreviewed",
+    "human_review_required_before_promotion": true
+  },
+  "side_effect_flags_at_template_creation": {
+    "route_http_request_performed": false,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "output_write_performed": false,
+    "real_manifest_read_performed": false,
+    "real_VCPChat_read_performed": false,
+    "real_VCPToolBox_read_performed": false,
+    "secret_value_read_performed": false,
+    "accepted_samples_write_performed": false,
+    "production_candidate_write_performed": false,
+    "DailyNote_write_performed": false,
+    "VCP_memory_write_performed": false,
+    "push_tag_release_deploy_performed": false
+  },
+  "recommended_next": "do_not_execute_from_this_template; when_external_route_is_bound_issue_separate_binding_ready_packet"
+}
