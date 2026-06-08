@@ -4441,3 +4441,46 @@ not_performed_addendum:
   - no push/tag/release/deploy
 next_safe_action: review packet/criteria; if approved, create a separate binding-ready execution packet before any real Trial 002 run.
 ```
+
+## Current Handoff Update - Runtime-To-Review V2 Trial 002 AIL-Side Binding Preflight 2026-06-08
+
+```text
+phase: runtime_to_review_v2_trial_002_lantern_ecommerce_hero_ail_side_binding_preflight_20260608
+status: completed_validated_local_ail_side_binding_preflight_external_route_pending
+workspace: A:\agent-image-lab\agent-image-lab-v0.2
+branch: master
+goal: Prepare AIL-side exact runtime binding for Trial 002 without real generation.
+completed:
+  - Added adapters/runtime/native_doubao_runtime_v2_trial_002_lantern_ecommerce_broker_dispatch_adapter.js.
+  - Added tests/fixtures/runtime_kernel_v2_trial_002_lantern_ecommerce_hero_task.fixture.json.
+  - Added Trial 002 prompt/output refs to scripts/native_doubao_secretless_provider_runtime_bridge.js.
+  - Added reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_ail_side_binding_preflight_20260608.json.
+  - Added scripts/validate_runtime_to_review_v2_trial_002_ail_side_binding_preflight.js.
+  - Added reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_ail_side_binding_exact_file_staging_package_draft_20260608.json.
+  - Added scripts/validate_runtime_to_review_v2_trial_002_ail_side_binding_exact_file_staging_package_draft.js.
+decision_state:
+  - can_execute_now=false.
+  - binding_ready=false.
+  - dispatch_performed=false.
+  - activation_consumed=false.
+  - blocking_reason_before_binding_ready=external_vcptoolbox_trial_002_internal_route_and_authorizer_not_bound.
+validation_completed:
+  - node --check adapter passed.
+  - node --check validator passed.
+  - node scripts\validate_runtime_to_review_v2_trial_002_ail_side_binding_preflight.js passed.
+  - node scripts\validate_runtime_to_review_v2_trial_002_activation_packet_no_execute.js passed.
+  - node scripts\validate_runtime_to_review_v2_multi_prompt_controlled_trial_plan.js passed.
+  - node scripts\validate_prompt_schema.js --type prompt_package prompts\image_generation\product_lifestyle_premium_portable_led_camping_lantern_v2.yaml passed.
+  - node scripts\validate_runtime_to_review_v2_trial_002_ail_side_binding_exact_file_staging_package_draft.js passed.
+not_performed_addendum:
+  - no route HTTP request
+  - no provider/plugin/API call
+  - no image generation
+  - no output write
+  - no secret read
+  - no accepted_samples write
+  - no production candidate write
+  - no DailyNote or VCP memory write
+  - no push/tag/release/deploy
+next_safe_action: exact-file stage and commit the AIL-side package if desired. VCPToolBox route/authorizer binding remains a later separate step and must not be touched in this AIL-only closeout.
+```

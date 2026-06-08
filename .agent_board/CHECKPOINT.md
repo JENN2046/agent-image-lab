@@ -4825,3 +4825,39 @@ not_performed:
   - no push/tag/release/deploy
 recommended_next: review the packet/criteria, then create a separate binding-ready execution packet only if Trial 002 should run.
 ```
+
+## Checkpoint - Runtime-To-Review V2 Trial 002 AIL-Side Binding Preflight 2026-06-08
+
+```text
+phase: runtime_to_review_v2_trial_002_lantern_ecommerce_hero_ail_side_binding_preflight_20260608
+status: completed_validated_local_ail_side_binding_preflight_external_route_pending
+result: TRIAL_002_AIL_SIDE_EXACT_BINDING_PREPARED_EXTERNAL_ROUTE_PENDING
+summary: Prepared the Agent Image Lab side of Trial 002 execution binding for the premium portable LED camping lantern ecommerce square hero. Added the exact runtime adapter, runtime fixture, secretless bridge allowlist entries, and an AIL-side binding preflight packet. This step intentionally does not flip can_execute_now=true because the matching VCPToolBox Trial 002 internal route and authorizer are not yet bound.
+changed_refs:
+  - scripts/native_doubao_secretless_provider_runtime_bridge.js
+  - adapters/runtime/native_doubao_runtime_v2_trial_002_lantern_ecommerce_broker_dispatch_adapter.js
+  - tests/fixtures/runtime_kernel_v2_trial_002_lantern_ecommerce_hero_task.fixture.json
+  - reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_ail_side_binding_preflight_20260608.json
+  - scripts/validate_runtime_to_review_v2_trial_002_ail_side_binding_preflight.js
+  - reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_ail_side_binding_exact_file_staging_package_draft_20260608.json
+  - scripts/validate_runtime_to_review_v2_trial_002_ail_side_binding_exact_file_staging_package_draft.js
+validation_completed:
+  - node --check adapters\runtime\native_doubao_runtime_v2_trial_002_lantern_ecommerce_broker_dispatch_adapter.js: passed
+  - node --check scripts\validate_runtime_to_review_v2_trial_002_ail_side_binding_preflight.js: passed
+  - node scripts\validate_runtime_to_review_v2_trial_002_ail_side_binding_preflight.js: passed, 24 checks
+  - node scripts\validate_runtime_to_review_v2_trial_002_activation_packet_no_execute.js: passed, 20 checks
+  - node scripts\validate_runtime_to_review_v2_multi_prompt_controlled_trial_plan.js: passed, 24 checks
+  - node scripts\validate_prompt_schema.js --type prompt_package prompts\image_generation\product_lifestyle_premium_portable_led_camping_lantern_v2.yaml: passed
+  - node scripts\validate_runtime_to_review_v2_trial_002_ail_side_binding_exact_file_staging_package_draft.js: passed, 10 checks
+not_performed:
+  - no route HTTP request
+  - no provider/plugin/API call
+  - no image generation
+  - no output write
+  - no secret read
+  - no accepted_samples write
+  - no production candidate write
+  - no DailyNote or VCP memory write
+  - no push/tag/release/deploy
+recommended_next: exact-file stage and commit the AIL-side package if desired; VCPToolBox binding remains a later separate step.
+```

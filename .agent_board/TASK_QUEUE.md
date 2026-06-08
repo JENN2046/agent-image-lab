@@ -1933,3 +1933,31 @@ remaining:
   - future execution, if chosen, must remain one image / one provider / one plugin / one API / zero retry
   - no real execution is authorized by this no-execute packet
 ```
+
+## Queue - Runtime-To-Review V2 Trial 002 AIL-Side Binding Preflight 2026-06-08
+
+```text
+done:
+  - task: add Trial 002 AIL-side runtime adapter
+    evidence: adapters/runtime/native_doubao_runtime_v2_trial_002_lantern_ecommerce_broker_dispatch_adapter.js.
+  - task: add Trial 002 runtime fixture
+    evidence: tests/fixtures/runtime_kernel_v2_trial_002_lantern_ecommerce_hero_task.fixture.json.
+  - task: extend AIL secretless bridge allowlist to exact Trial 002 prompt/output refs
+    evidence: scripts/native_doubao_secretless_provider_runtime_bridge.js.
+  - task: issue AIL-side binding preflight packet
+    evidence: reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_ail_side_binding_preflight_20260608.json.
+  - task: validate local binding without route/provider/plugin/API/image dispatch
+    evidence: scripts/validate_runtime_to_review_v2_trial_002_ail_side_binding_preflight.js passed, 24 checks.
+  - task: draft exact-file staging package for AIL-side closeout
+    evidence: reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_ail_side_binding_exact_file_staging_package_draft_20260608.json; package validator passed, 10 checks.
+in_progress:
+  - none
+blocked:
+  - task: Trial 002 binding-ready execution packet with can_execute_now=true
+    reason: VCPToolBox exact Trial 002 internal route/authorizer is not bound yet.
+remaining:
+  - bind Trial 002 exact internal route/authorizer in VCPToolBox
+  - after external binding, issue separate binding-ready execution packet
+  - execute exactly once only after packet validation and explicit execution intent
+  - no retry, no accepted_samples/production/memory write before review
+```
