@@ -1,3 +1,34 @@
+## Checkpoint - PR 11 Terminal Status Surface Sync 2026-06-08
+
+```text
+phase: review_console_preview_gates_onering_pr11_terminal_status_surface_sync_20260608
+status: terminal_status_surface_sync_pending_commit
+result: DRAFT_PR_11_OPENED_AND_TERMINAL_STATUS_SURFACE_SYNC_PREPARED
+summary: Committed the four existing .agent_board status-surface edits, pushed the current branch, and opened draft PR #11 against master. This checkpoint prepares the terminal status-surface sync so post-push follow-up is read-only remote/PR verification only.
+branch: codex/review-console-preview-gates-onering
+base: master
+pr_url: https://github.com/JENN2046/agent-image-lab/pull/11
+pr_state: open_draft
+published_commit:
+  - 5415d86e3e8838555eaea8b02f8abadef58e5634 docs: sync agent board status surfaces
+terminal_status_surface_sync: true
+post_push_followup: read_only_remote_sync_only
+no_followup_agent_board_write_after_push: true
+boundary_checks:
+  - git_add_dot_used: false
+  - force_push_or_history_rewrite_performed: false
+  - tag_release_deploy_performed: false
+  - provider_contact_performed: false
+  - plugin_call_performed: false
+  - api_call_performed: false
+  - image_generation_performed: false
+  - DailyNote_write_performed: false
+  - VCP_memory_write_performed: false
+  - dependency_change_performed: false
+  - secret_env_config_read_performed: false
+recommended_next: validate and push this terminal status-surface commit, then perform read-only remote/PR verification only.
+```
+
 ## Checkpoint - Master Ref Fast-forward Sync 2026-06-08
 
 ```text
