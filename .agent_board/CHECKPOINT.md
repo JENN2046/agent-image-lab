@@ -1,3 +1,82 @@
+## Checkpoint - Master Ref Fast-forward Sync 2026-06-08
+
+```text
+phase: master_ref_fast_forward_sync_20260608
+status: completed_validated_local_master_ref_ff_sync
+result: LOCAL_MASTER_REF_FAST_FORWARDED_TO_ORIGIN_MASTER_4B3C0D98_WITHOUT_CHECKOUT
+summary: After the user clarified the target branch was master, fetched origin, verified local master was only behind origin/master, and fast-forwarded the local master ref from 60fa4a65 to 4b3c0d98 without checking out master. This avoided overwriting the current dirty .agent_board status surfaces in the active worktree.
+current_worktree_branch: codex/review-console-preview-gates-onering
+synced_branch: master
+upstream: origin/master
+previous_master_head: 60fa4a659927c486834dac4a582af792d9813787
+new_master_head: 4b3c0d980d9392ed85a26f6326118b44fd2b0643
+validation_completed:
+  - git rev-list --left-right --count master...origin/master: 0 0
+  - git rev-parse master and git rev-parse origin/master: both 4b3c0d980d9392ed85a26f6326118b44fd2b0643
+  - node scripts/validate_agent_board_state.js: passed
+  - node scripts/recommend_validation_for_changed_files.js .agent_board/HANDOFF.md .agent_board/RUN_STATE.md .agent_board/TASK_QUEUE.md .agent_board/CHECKPOINT.md: passed, primary_profile targeted
+  - node scripts/validate_validation_manifest.js: passed
+  - npm run validate:smoke: passed with 33 checks
+  - npm run validate:targeted-plan: passed as dry-run with 108 selected commands
+  - git diff --check: passed with CRLF normalization warnings only
+  - git status --short --branch: current branch aligned with upstream and only .agent_board status-surface edits
+boundary_checks:
+  - checkout_performed: false
+  - worktree_overwrite_performed: false
+  - merge_commit_created: false
+  - rebase_performed: false
+  - push_tag_release_deploy_performed: false
+  - provider_contact_performed: false
+  - plugin_call_performed: false
+  - api_call_performed: false
+  - image_generation_performed: false
+  - DailyNote_write_performed: false
+  - VCP_memory_write_performed: false
+  - secret_env_config_read_performed: false
+recommended_next: review the local status-surface diff; commit only if explicitly requested; no remote write is authorized or needed.
+```
+
+## Checkpoint - Remote Fast-forward Sync 2026-06-08
+
+```text
+phase: remote_fast_forward_sync_current_branch_20260608
+status: completed_validated_local_ff_sync
+result: CURRENT_BRANCH_FAST_FORWARDED_TO_ORIGIN_REVIEW_CONSOLE_PREVIEW_GATES_ONERING_7E23BEC8
+summary: Fetched origin after the user reported remote updates, verified the current branch was only behind upstream by one commit, and fast-forwarded from b73c6b25 to 7e23bec8. The remote commit updates Review Console preview selection logic and the preview-display validator.
+branch: codex/review-console-preview-gates-onering
+upstream: origin/codex/review-console-preview-gates-onering
+previous_head: b73c6b25d4d75b8728447f1cced92daccb72174e
+new_head: 7e23bec88bd08baf81228a83c65d83a2642948ce
+changed_by_remote_commit:
+  - review_console/static_prototype/app.js
+  - scripts/validators/review_console/validate_review_console_preview_display_state.js
+validation_run_before_status_surface_sync:
+  - node --check review_console/static_prototype/app.js: passed
+  - node --check scripts/validators/review_console/validate_review_console_preview_display_state.js: passed
+  - npm run validate:review-console-preview-display: passed with 137 checks
+  - git diff --check: passed before .agent_board edits
+validation_run_after_status_surface_sync:
+  - node scripts/validate_agent_board_state.js: passed
+  - node scripts/recommend_validation_for_changed_files.js .agent_board/HANDOFF.md .agent_board/RUN_STATE.md .agent_board/TASK_QUEUE.md .agent_board/CHECKPOINT.md: passed, primary_profile targeted
+  - node scripts/validate_validation_manifest.js: passed
+  - npm run validate:smoke: passed with 33 checks
+  - npm run validate:targeted-plan: passed as dry-run with 108 selected commands
+  - git diff --check: passed with CRLF normalization warnings only
+  - git status --short --branch: branch aligned with upstream and only .agent_board status-surface edits
+boundary_checks:
+  - merge_commit_created: false
+  - rebase_performed: false
+  - push_tag_release_deploy_performed: false
+  - provider_contact_performed: false
+  - plugin_call_performed: false
+  - api_call_performed: false
+  - image_generation_performed: false
+  - DailyNote_write_performed: false
+  - VCP_memory_write_performed: false
+  - secret_env_config_read_performed: false
+recommended_next: review the local status-surface diff; commit only if explicitly requested; no remote write is authorized or needed.
+```
+
 ## Checkpoint - Tracked Preview Render P1 Fix 2026-06-08
 
 ```text
