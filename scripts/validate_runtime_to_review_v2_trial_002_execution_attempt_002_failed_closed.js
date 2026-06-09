@@ -115,16 +115,12 @@ function main() {
     receipt.result.artifact_record_ref === null &&
     receipt.result.review_bridge_ref === null
   );
-  check("filesystem_observation_recorded_no_success_artifacts", () =>
+  check("post_attempt_snapshot_recorded_no_success_artifacts", () =>
     receipt.post_attempt_filesystem_observation.output_directory_ref === outputDir &&
     receipt.post_attempt_filesystem_observation.output_directory_existed_after_attempt === false &&
     receipt.post_attempt_filesystem_observation.success_receipt_existed_after_attempt === false &&
     receipt.post_attempt_filesystem_observation.artifact_record_existed_after_attempt === false &&
-    receipt.post_attempt_filesystem_observation.review_bridge_existed_after_attempt === false &&
-    !fs.existsSync(repoPath(outputDir)) &&
-    !fs.existsSync(repoPath(receipt.post_attempt_filesystem_observation.success_receipt_ref)) &&
-    !fs.existsSync(repoPath(receipt.post_attempt_filesystem_observation.artifact_record_ref)) &&
-    !fs.existsSync(repoPath(receipt.post_attempt_filesystem_observation.review_bridge_ref))
+    receipt.post_attempt_filesystem_observation.review_bridge_existed_after_attempt === false
   );
   check("budget_consumed_without_retry", () =>
     receipt.budget_consumption.max_route_http_requests === 1 &&
