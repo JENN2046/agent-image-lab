@@ -5006,6 +5006,33 @@ not_performed:
 recommended_next: exact-file local commit for these AIL-side template files; keep VCPToolBox untouched until explicitly selected.
 ```
 
+## Checkpoint - Runtime-To-Review V2 Trial 002 Binding-Ready Precheck Packet 2026-06-09
+
+```text
+phase: runtime_to_review_v2_trial_002_lantern_ecommerce_hero_binding_ready_precheck_packet_20260609
+status: completed_validated_local_precheck_no_execute_external_route_pending
+result: TRIAL_002_BINDING_READY_PRECHECK_PACKET_PREPARED_NO_EXECUTE
+summary: Prepared a Trial 002 binding-ready precheck packet that records the exact requirements for a later can_execute_now=true execution packet without issuing that packet. The precheck keeps Trial 002 blocked on separate VCPToolBox route/authorizer proof and preserves one route / one provider / one plugin / one API / one image / zero retry.
+changed_refs:
+  - reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_binding_ready_precheck_packet_20260609.json
+  - scripts/validate_runtime_to_review_v2_trial_002_binding_ready_precheck_packet.js
+  - package.json
+  - scripts/validation_manifest.json
+validation_completed:
+  - node --check scripts\validate_runtime_to_review_v2_trial_002_binding_ready_precheck_packet.js: passed
+  - node scripts\validate_runtime_to_review_v2_trial_002_binding_ready_precheck_packet.js: passed, 18 checks
+  - node scripts\validate_runtime_to_review_v2_trial_002_ail_side_binding_preflight.js: passed, 26 checks
+  - node scripts\validate_runtime_to_review_v2_trial_002_review_and_execution_preflight_templates.js: passed, 16 checks
+not_performed:
+  - no route HTTP request
+  - no provider/plugin/API call
+  - no image generation
+  - no output write
+  - no VCPToolBox modification
+  - no memory/archive/promotion write
+recommended_next: obtain or prepare separate VCPToolBox Trial 002 route/authorizer binding proof; only after that issue a separate binding-ready execution packet with can_execute_now=true.
+```
+
 ## Checkpoint - Trial 002 Failed Dispatch Output Directory Guard PR10 2026-06-08
 
 ```text

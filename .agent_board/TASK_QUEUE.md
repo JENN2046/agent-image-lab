@@ -2033,6 +2033,8 @@ in_progress:
 blocked:
   - task: future Trial 002 execution
     reason: VCPToolBox exact Trial 002 internal route/authorizer remains unbound and templates do not authorize execution.
+  - task: Trial 002 binding-ready precheck packet
+    evidence: reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_binding_ready_precheck_packet_20260609.json keeps can_execute_now=false and requires separate VCPToolBox route/authorizer proof before any binding-ready execution packet.
 remaining:
   - exact-file local commit for AIL-side templates
   - no VCPToolBox work in this AIL-only step

@@ -4599,6 +4599,40 @@ not_performed_addendum:
 next_safe_action: exact-file stage and commit the AIL-side package if desired. VCPToolBox route/authorizer binding remains a later separate step and must not be touched in this AIL-only closeout.
 ```
 
+## Current Handoff Update - Runtime-To-Review V2 Trial 002 Binding-Ready Precheck Packet 2026-06-09
+
+```text
+phase: runtime_to_review_v2_trial_002_lantern_ecommerce_hero_binding_ready_precheck_packet_20260609
+status: completed_validated_local_precheck_no_execute_external_route_pending
+workspace: A:\agent-image-lab\agent-image-lab-v0.2
+branch: master
+goal: Prepare Trial 002 binding-ready preconditions without issuing can_execute_now=true and without touching VCPToolBox.
+completed:
+  - Added reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_binding_ready_precheck_packet_20260609.json.
+  - Added scripts/validate_runtime_to_review_v2_trial_002_binding_ready_precheck_packet.js.
+  - Registered npm script validate:runtime-to-review-trial-002-binding-ready-precheck.
+  - Registered targeted validation manifest entry runtime_to_review_trial_002_binding_ready_precheck.
+decision_state:
+  - can_execute_now=false.
+  - binding_ready=false.
+  - dispatch_performed=false.
+  - activation_consumed=false.
+  - external VCPToolBox route/authorizer proof remains required before any future binding-ready execution packet.
+validation_completed:
+  - node --check scripts\validate_runtime_to_review_v2_trial_002_binding_ready_precheck_packet.js passed.
+  - node scripts\validate_runtime_to_review_v2_trial_002_binding_ready_precheck_packet.js passed, 18 checks.
+  - node scripts\validate_runtime_to_review_v2_trial_002_ail_side_binding_preflight.js passed, 26 checks.
+  - node scripts\validate_runtime_to_review_v2_trial_002_review_and_execution_preflight_templates.js passed, 16 checks.
+not_performed_addendum:
+  - no route HTTP request
+  - no provider/plugin/API call
+  - no image generation
+  - no output write
+  - no VCPToolBox modification
+  - no memory/archive/promotion write
+next_safe_action: obtain or prepare separate VCPToolBox Trial 002 route/authorizer binding proof; then issue a separate binding-ready execution packet with can_execute_now=true.
+```
+
 ## Current Handoff Addendum - Trial 002 Failed Dispatch Output Directory Guard PR10 2026-06-08
 
 ```text
