@@ -1,3 +1,29 @@
+## Queue - Runtime-To-Review V2 Trial 002 Binding-Ready Execution Packet 2026-06-09
+
+```text
+done:
+  - task: fast-forward VCPToolBox local main
+    evidence: local main and origin/main are ddfc2b1f94616c42712d57e5eb3b3de4fc212b03.
+  - task: align AIL route payload with VCPToolBox output-ref agreement
+    evidence: adapter routeRequestBody includes plan.steps[0].output_directory_ref equal to visual_job_contract.output_directory_ref.
+  - task: issue binding-ready Trial 002 packet
+    evidence: reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_binding_ready_execution_packet_20260609.json has can_execute_now=true and dispatch_performed=false.
+  - task: add dedicated validator and manifest entry
+    evidence: scripts/validate_runtime_to_review_v2_trial_002_binding_ready_execution_packet.js and validation manifest entry pass.
+  - task: final status-surface validation and diff review
+    evidence: prompt schema, agent_board, binding-ready execution validator, git diff --check, and status review passed.
+  - task: package exact-file local closeout commit scope
+    evidence: only Trial 002 binding-ready packet/signing evidence files are allowlisted; git add dot remains forbidden.
+in_progress:
+  - none
+blocked:
+  - none
+remaining:
+  - execute Trial 002 exactly once only after explicit execution intent
+  - no retry without a fresh packet
+  - review generated_unreviewed candidate before any accepted_samples/archive/production/memory write
+```
+
 - [x] ID: runtime_to_review_v2_trial_001_vcptoolbox_internal_authorizer_binding_20260608
       Lane: Amber local external runtime integration with exact Trial 001 scope.
       Status: completed_validated_external_local_vcptoolbox_binding_no_generation.

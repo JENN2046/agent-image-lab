@@ -221,7 +221,9 @@ async function main() {
       body.plan.steps[0].plugin === "DoubaoGen" &&
       body.plan.steps[0].prompt === "PROMPT_PLACEHOLDER" &&
       body.plan.steps[0].model === adapter.requiredModel &&
-      body.plan.steps[0].resolution === "1920x1920";
+      body.plan.steps[0].resolution === "1920x1920" &&
+      body.plan.steps[0].output_directory_ref === outputDir &&
+      body.plan.steps[0].output_directory_ref === body.visual_job_contract.output_directory_ref;
   });
   check("adapter_imports_vcptoolbox_doubaogen_refs_to_artifact_store", () =>
     typeof adapter._private.candidateImageRef === "function" &&

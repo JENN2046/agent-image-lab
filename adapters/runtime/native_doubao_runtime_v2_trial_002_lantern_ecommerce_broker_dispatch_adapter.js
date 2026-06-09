@@ -137,6 +137,7 @@ function routeRequestBody({ prompt, model, outputDirectory }) {
         prompt,
         model,
         resolution,
+        output_directory_ref: outputDirectory,
       }],
     },
   };

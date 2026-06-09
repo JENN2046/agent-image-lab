@@ -1,3 +1,45 @@
+## Current Handoff Update - Runtime-To-Review V2 Trial 002 Binding-Ready Execution Packet 2026-06-09
+
+```text
+phase: runtime_to_review_v2_trial_002_lantern_ecommerce_hero_binding_ready_execution_packet_20260609
+status: completed_validated_binding_ready_packet_signed_no_dispatch_local_commit_packaged
+workspace: A:\agent-image-lab\agent-image-lab-v0.2
+branch: master
+goal: Fast-forward local VCPToolBox main to origin/main, then sign the AIL Trial 002 binding-ready execution packet.
+external_vcptoolbox_state:
+  - workspace: A:\AGENTS_OS_Workspace\runtime\VCPToolBox
+  - branch: main
+  - local_main_head: ddfc2b1f94616c42712d57e5eb3b3de4fc212b03
+  - origin_main_head: ddfc2b1f94616c42712d57e5eb3b3de4fc212b03
+  - PR230 merged route/authorizer/restricted facade proof: 51bbfad7f53c0acba43eddead1c1508519d2029d
+  - PR231 merged output-ref agreement proof: ddfc2b1f94616c42712d57e5eb3b3de4fc212b03
+packet: reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_binding_ready_execution_packet_20260609.json
+validator: scripts/validate_runtime_to_review_v2_trial_002_binding_ready_execution_packet.js
+completed:
+  - Fast-forwarded VCPToolBox local main to origin/main.
+  - Added plan.steps[0].output_directory_ref to the AIL Trial 002 broker route payload so it matches the new VCPToolBox output-ref agreement gate.
+  - Issued Trial 002 binding-ready execution packet with can_execute_now=true, binding_ready=true, dispatch_performed=false, activation_consumed=false.
+  - Locked one route HTTP request, one provider call, one plugin call, one API call, one image, and zero retry.
+  - Registered the new npm validator and validation manifest entry.
+  - Prepared exact-file local closeout commit scope for the authorization/binding evidence.
+validation_completed:
+  - npm run validate:runtime-to-review-trial-002-binding-ready-execution passed, 17 checks.
+  - npm run validate:runtime-to-review-trial-002-binding-ready-precheck passed, 18 checks.
+  - node scripts\validate_runtime_to_review_v2_trial_002_ail_side_binding_preflight.js passed, 26 checks.
+  - node scripts\validate_runtime_to_review_v2_trial_002_activation_packet_no_execute.js passed, 20 checks.
+  - node scripts\validate_runtime_to_review_v2_trial_002_review_and_execution_preflight_templates.js passed, 16 checks.
+not_performed:
+  - no route HTTP dispatch
+  - no provider/plugin/API call
+  - no image generation
+  - no output write
+  - no secret/env/config read
+  - no accepted_samples/production/DailyNote/VCP memory write
+  - no push, tag, release, or deploy
+local_commit_scope: exact-file local closeout commit for this packet/signing evidence only; no push.
+next_safe_action: execute exactly once only when the owner explicitly says to execute Trial 002.
+```
+
 ## Current Handoff Update - Runtime-To-Review V2 Trial 001 VCPToolBox Internal Authorizer Binding 2026-06-08
 
 ```text
