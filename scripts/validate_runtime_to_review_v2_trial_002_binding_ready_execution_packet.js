@@ -136,6 +136,7 @@ function main() {
   check("execution_binding_matches_adapter_fixture", () =>
     packet.execution_binding.target_runtime === adapterRef &&
     packet.execution_binding.target_runtime_module_id === adapter.moduleId &&
+    packet.execution_binding.activation_package_id === adapter.routeTaskId &&
     packet.execution_binding.prompt_package_ref === adapter.allowedPromptPackageRef &&
     packet.execution_binding.output_directory_ref === adapter.allowedOutputDirectory &&
     packet.execution_binding.path === adapter.routePath &&
@@ -189,6 +190,8 @@ function main() {
       packet.route_payload_output_ref_requirements["plan.steps[0].output_directory_ref"] === outputDir &&
       packet.route_payload_output_ref_requirements.refs_must_be_equal === true &&
       packet.route_payload_output_ref_requirements.refs_must_match_bound_directory === true &&
+      body.taskId === adapter.routeTaskId &&
+      body.activation.activation_package_id === adapter.routeTaskId &&
       body.visual_job_contract.output_directory_ref === outputDir &&
       body.plan.steps.length === 1 &&
       body.plan.steps[0].output_directory_ref === outputDir &&

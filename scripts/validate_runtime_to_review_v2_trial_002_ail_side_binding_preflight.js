@@ -153,7 +153,7 @@ async function main() {
     adapter.vcpToolBoxImageStoreRoot === "A:/VCP/apps/VCPToolBox/image/doubaogen" &&
     adapter.requiredModel === "doubao-seedream-5-0-260128" &&
     adapter.pipelineId === "runtime_to_review_v2_trial_002_lantern_ecommerce_hero" &&
-    adapter.routeTaskId === "AUTH-R2R-V2-TRIAL-002-LANTERN-ECOMMERCE-HERO-20260608-FUTURE-EXECUTION" &&
+    adapter.routeTaskId === "AUTH-R2R-V2-TRIAL-002-LANTERN-ECOMMERCE-HERO-20260609-BINDING-READY" &&
     adapter.routePath === "/internal/ai-image-agents/execute/r2r-v2-trial-002-lantern-ecommerce-hero" &&
     adapter.resolution === "1920x1920"
   );
@@ -207,6 +207,7 @@ async function main() {
     });
     return body.pipelineId === adapter.pipelineId &&
       body.taskId === adapter.routeTaskId &&
+      body.activation.activation_package_id === adapter.routeTaskId &&
       body.activation.confirmation_phrase === "RUNTIME_TO_REVIEW_V2_TRIAL_002_ONE_PROVIDER_ONE_IMAGE" &&
       body.activation.max_route_http_requests === 1 &&
       body.activation.max_provider_calls === 1 &&

@@ -1,3 +1,287 @@
+## Checkpoint - Runtime-To-Review V2 Trial 002 Memory Candidate No-Write Mapping 2026-06-09
+
+```text
+phase: runtime_to_review_v2_trial_002_lantern_ecommerce_hero_memory_candidate_no_write_mapping_gate_20260609
+status: completed_validated_memory_candidate_no_write_mapping_not_written
+result: TRIAL_002_MEMORY_CANDIDATE_NO_WRITE_MAPPING_CREATED
+summary: Opened exactly one separate follow-up gate after the Trial 002 accepted_candidate review decision: memory-candidate no-write mapping. The gate records how this lantern scene hero candidate could become future memory, but it does not select or call record_memory, DailyNote, VCP memory, accepted_samples promotion, durable archive, provider, plugin, or API.
+changed_refs:
+  - reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_memory_candidate_no_write_mapping_gate_20260609.json
+  - reports/memory_delta_drafts/r2r_v2_trial_002_lantern_ecommerce_hero_memory_delta_candidate_no_write_20260609.json
+  - scripts/validate_runtime_to_review_v2_trial_002_memory_candidate_no_write_mapping_gate.js
+  - package.json
+  - scripts/validation_manifest.json
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+validation_completed:
+  - node --check scripts\validate_runtime_to_review_v2_trial_002_memory_candidate_no_write_mapping_gate.js: passed
+  - npm run validate:runtime-to-review-trial-002-memory-candidate-no-write: passed, 9 checks
+  - npm run validate:validation-manifest: passed, validator_count 133
+decision:
+  - selected_gate: memory_candidate_no_write_mapping
+  - accepted_candidate: true
+  - commercial_delivery_ready: false
+  - memory_write_can_execute_now: false
+  - accepted_samples_promotion_allowed: false
+  - durable_archive_allowed: false
+not_performed:
+  - no record_memory call
+  - no DailyNote write
+  - no VCP memory write
+  - no Codex knowledge memory write
+  - no accepted_samples write
+  - no durable archive write
+  - no provider/plugin/API/image call
+  - no push/tag/release/deploy
+recommended_next: pause, or open a separate memory authorization preflight only if the owner wants an actual memory write.
+```
+
+## Checkpoint - Runtime-To-Review V2 Trial 002 Review Decision 2026-06-09
+
+```text
+phase: runtime_to_review_v2_trial_002_lantern_ecommerce_hero_review_decision_accepted_candidate_20260609
+status: completed_accepted_candidate_not_promoted
+result: TRIAL_002_REVIEW_DECISION_ACCEPTED_CANDIDATE
+summary: Performed visual review against the Trial 002 criteria and opened a separate review decision gate. The generated lantern candidate passes the minimum acceptance bar as a modern portable LED camping lantern scene hero. It is accepted as a candidate with minor watch items around strict SKU-main-image use and dark lower-body detail. This decision does not authorize accepted_samples, archive, production, DailyNote, or VCP memory writes.
+changed_refs:
+  - reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_review_decision_accepted_candidate_20260609.json
+  - reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_receipt.json
+  - reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_artifact_record.json
+  - review_console/live_receipt_bridge/r2r_v2_trial_002_lantern_ecommerce_hero/bridge_entry.json
+  - scripts/validate_runtime_to_review_v2_trial_002_review_decision_accepted_candidate.js
+  - scripts/validate_runtime_to_review_v2_trial_002_execution_attempt_003_success.js
+  - package.json
+  - scripts/validation_manifest.json
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+validation_completed:
+  - npm run validate:runtime-to-review-trial-002-review-decision: passed, 8 checks
+  - npm run validate:runtime-to-review-trial-002-attempt-003-success: passed, 12 checks
+decision:
+  - accepted_candidate: true
+  - total_score: 0.92
+  - commercial_delivery_ready: false
+  - next_gate_required: separate promotion/archive/memory candidate gate only if owner wants to advance
+not_performed:
+  - no provider/plugin/API/image call
+  - no accepted_samples write
+  - no archive write
+  - no production candidate write
+  - no DailyNote write
+  - no VCP memory write
+  - no push/tag/release/deploy
+recommended_next: decide whether to open a separate promotion/archive/memory-candidate gate, or pause with the accepted candidate recorded.
+```
+
+## Checkpoint - Runtime-To-Review V2 Trial 002 Attempt 003 Success 2026-06-09
+
+```text
+phase: runtime_to_review_v2_trial_002_lantern_ecommerce_hero_execution_attempt_003_success_20260609
+status: completed_provider_image_created_pending_human_review_no_retry
+result: TRIAL_002_ATTEMPT_003_SUCCESS_ONE_IMAGE_REVIEW_PENDING
+summary: Executed Trial 002 attempt 003 exactly once from the separate rearm packet after the full pre-dispatch validator chain passed. The VCPToolBox Trial 002 POST authorizer path worked, one provider/plugin/API budget was consumed, and one 1920x1920 JPEG was imported into the bound output directory. Success receipt, artifact record, review bridge, and attempt success receipt were materialized. The candidate remains pending human review; no promotion, archive, DailyNote, or VCP memory write occurred.
+changed_refs:
+  - runs/real_generation/runtime_to_review_v2_trial_002_lantern_ecommerce_hero/image/doubaogen/3e31d80a-5e43-4504-95bd-cef1decc720d.jpg
+  - reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_receipt.json
+  - reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_artifact_record.json
+  - review_console/live_receipt_bridge/r2r_v2_trial_002_lantern_ecommerce_hero/bridge_entry.json
+  - reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_execution_attempt_003_success_20260609.json
+  - scripts/validate_runtime_to_review_v2_trial_002_execution_attempt_003_success.js
+  - package.json
+  - scripts/validation_manifest.json
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+validation_completed:
+  - node scripts\validate_runtime_to_review_v2_trial_002_rearm_packet_attempt_003.js: passed, 20 checks
+  - npm run validate:runtime-to-review-trial-002-binding-ready-execution: passed, 17 checks
+  - npm run validate:runtime-to-review-trial-002-binding-ready-precheck: passed, 18 checks
+  - npm run validate:runtime-to-review-trial-002-attempt-001-failed-closed: passed, 11 checks
+  - npm run validate:runtime-to-review-trial-002-attempt-002-failed-closed: passed, 11 checks
+  - node scripts\validate_runtime_to_review_v2_trial_002_ail_side_binding_preflight.js: passed, 26 checks
+  - node scripts\validate_runtime_to_review_v2_trial_002_activation_packet_no_execute.js: passed, 20 checks
+  - node scripts\validate_runtime_to_review_v2_trial_002_review_and_execution_preflight_templates.js: passed, 16 checks
+  - node scripts\validate_prompt_schema.js --type prompt_package prompts\image_generation\product_lifestyle_premium_portable_led_camping_lantern_v2.yaml: passed
+  - git diff --check: passed with CRLF warnings only
+  - npm run validate:runtime-to-review-trial-002-attempt-003-success: passed, 12 checks
+output:
+  - path: runs/real_generation/runtime_to_review_v2_trial_002_lantern_ecommerce_hero/image/doubaogen/3e31d80a-5e43-4504-95bd-cef1decc720d.jpg
+  - bytes: 213479
+  - sha256: 775b9f584daaa28eebc5e1eb100479d3efd1ce0c30379c6750038e6930952f36
+  - dimensions: 1920x1920
+not_performed:
+  - no retry
+  - no accepted_samples write
+  - no production candidate write
+  - no DailyNote write
+  - no VCP memory write
+  - no push/tag/release/deploy
+recommended_next: perform human visual review of the Trial 002 candidate; if accepted, use a separate review decision gate before any promotion/archive/memory work.
+```
+
+## Checkpoint - Runtime-To-Review V2 Trial 002 Rearm Attempt 003 2026-06-09
+
+```text
+phase: runtime_to_review_v2_trial_002_lantern_ecommerce_hero_rearm_attempt_003_20260609
+status: completed_validated_bearer_bypass_fixed_attempt_003_rearmed_no_dispatch
+result: TRIAL_002_ATTEMPT_003_REARMED_POST_AUTHORIZER_REACHABLE_NO_GENERATION
+summary: Fixed the VCPToolBox Trial 002 POST secretless authorizer/Bearer bypass by allowing only loopback POST for the exact Trial 002 internal route to reach route-level authorization. Restarted vcp-main, verified HEAD 204, and verified an intentionally invalid POST now returns the Trial 002 payload validator instead of Bearer 401, with no provider/plugin/API/image/output side effects. Signed a separate attempt 003 rearm packet; no real image dispatch was performed.
+changed_refs:
+  - A:\AGENTS_OS_Workspace\runtime\VCPToolBox\server.js
+  - A:\AGENTS_OS_Workspace\runtime\VCPToolBox\tests\aiImageAgentsServerBinding.test.js
+  - reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_rearm_packet_attempt_003_20260609.json
+  - scripts/validate_runtime_to_review_v2_trial_002_rearm_packet_attempt_003.js
+  - package.json
+  - scripts/validation_manifest.json
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+validation_completed:
+  - VCPToolBox node --check server.js: passed
+  - VCPToolBox node --check tests\aiImageAgentsServerBinding.test.js: passed
+  - VCPToolBox node --test tests\aiImageAgentsServerBinding.test.js: passed, 7 tests
+  - VCPToolBox node --test tests\aiImageAgentsRoute.test.js: passed, 36 tests
+  - Trial 002 route HEAD: 204
+  - Trial 002 invalid no-generation POST: 200 / r2r_v2_trial_002_payload_unknown_fields / no provider-plugin-api-image-output
+  - npm run validate:runtime-to-review-trial-002-rearm-attempt-003: passed, 20 checks
+post_rearm_observation:
+  - output directory absent
+  - success receipt absent
+  - artifact record absent
+  - review bridge absent
+not_performed:
+  - no attempt 003 dispatch
+  - no provider contact
+  - no API call
+  - no image generation
+  - no output write
+  - no accepted_samples/production/DailyNote/VCP memory write
+  - no push/tag/release/deploy
+recommended_next: run final local validator chain and inspect diff; execute attempt 003 exactly once only after explicit owner execution instruction.
+```
+
+## Checkpoint - Runtime-To-Review V2 Trial 002 Attempt 002 Failed Closed 2026-06-09
+
+```text
+phase: runtime_to_review_v2_trial_002_lantern_ecommerce_hero_execution_attempt_002_failed_closed_20260609
+status: completed_failed_closed_bearer_required_no_image_no_retry
+result: TRIAL_002_ATTEMPT_002_FAILED_CLOSED_BEARER_REQUIRED_NO_IMAGE
+summary: Executed Trial 002 attempt 002 exactly once from the separate rearm packet. The route was no longer unreachable, but POST still failed closed with HTTP 401 Bearer required before provider/API/image execution. The attempt is consumed under the zero-retry rule.
+changed_refs:
+  - reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_execution_attempt_002_failed_closed_20260609.json
+  - scripts/validate_runtime_to_review_v2_trial_002_execution_attempt_002_failed_closed.js
+  - package.json
+  - scripts/validation_manifest.json
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+validation_completed:
+  - node scripts/validate_runtime_to_review_v2_trial_002_rearm_packet_attempt_002.js: passed, 16 checks
+  - npm run validate:runtime-to-review-trial-002-binding-ready-execution: passed, 17 checks
+  - npm run validate:runtime-to-review-trial-002-binding-ready-precheck: passed, 18 checks
+  - npm run validate:runtime-to-review-trial-002-attempt-001-failed-closed: passed, 11 checks
+  - node scripts\validate_runtime_to_review_v2_trial_002_ail_side_binding_preflight.js: passed, 26 checks
+  - node scripts\validate_runtime_to_review_v2_trial_002_activation_packet_no_execute.js: passed, 20 checks
+  - node scripts\validate_runtime_to_review_v2_trial_002_review_and_execution_preflight_templates.js: passed, 16 checks
+  - node scripts\validate_prompt_schema.js --type prompt_package prompts\image_generation\product_lifestyle_premium_portable_led_camping_lantern_v2.yaml: passed
+  - git diff --check: passed with CRLF warnings only
+  - npm run validate:runtime-to-review-trial-002-attempt-002-failed-closed: passed, 11 checks
+post_attempt_observation:
+  - output directory absent
+  - success receipt absent
+  - artifact record absent
+  - review bridge absent
+not_performed:
+  - no retry
+  - no provider contact
+  - no API call
+  - no image generation
+  - no output write
+  - no accepted_samples/production/DailyNote/VCP memory write
+  - no push/tag/release/deploy
+recommended_next: fix Trial 002 POST secretless authorizer path or Bearer bypass, then create a separate attempt 003 rearm packet before any future execution.
+```
+
+## Checkpoint - Runtime-To-Review V2 Trial 002 Rearm Attempt 002 2026-06-09
+
+```text
+phase: runtime_to_review_v2_trial_002_lantern_ecommerce_hero_rearm_attempt_002_20260609
+status: completed_validated_route_rearmed_packet_signed_no_dispatch
+result: TRIAL_002_ATTEMPT_002_REARMED_ROUTE_HEAD_204_NO_GENERATION
+summary: Restarted PM2 vcp-main with the AI image route, real execution, and native Doubao secretless delegate flags, then verified the exact Trial 002 internal broker route on 127.0.0.1:6005 returns HEAD 204. Fixed AIL adapter activation drift so Trial 002 dispatch will send the VCPToolBox exact binding-ready activation id. Signed a separate attempt 002 rearm packet; attempt 001 remains consumed and must not be rerun.
+changed_refs:
+  - adapters/runtime/native_doubao_runtime_v2_trial_002_lantern_ecommerce_broker_dispatch_adapter.js
+  - reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_rearm_packet_attempt_002_20260609.json
+  - scripts/validate_runtime_to_review_v2_trial_002_rearm_packet_attempt_002.js
+  - scripts/validate_runtime_to_review_v2_trial_002_binding_ready_execution_packet.js
+  - scripts/validate_runtime_to_review_v2_trial_002_ail_side_binding_preflight.js
+  - package.json
+  - scripts/validation_manifest.json
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+validation_completed:
+  - npm run validate:runtime-to-review-trial-002-rearm-attempt-002: passed, 16 checks
+  - npm run validate:runtime-to-review-trial-002-binding-ready-execution: passed, 17 checks
+  - node scripts\validate_runtime_to_review_v2_trial_002_ail_side_binding_preflight.js: passed, 26 checks
+not_performed:
+  - no route POST dispatch
+  - no provider/plugin/API call
+  - no image generation
+  - no output write
+  - no secret/env/config value read
+  - no accepted_samples/production/DailyNote/VCP memory write
+  - no push/tag/release/deploy
+recommended_next: run final local validator chain and inspect diff; execute attempt 002 exactly once only after explicit owner execution instruction.
+```
+
+## Checkpoint - Runtime-To-Review V2 Trial 002 Attempt 001 Failed Closed 2026-06-09
+
+```text
+phase: runtime_to_review_v2_trial_002_lantern_ecommerce_hero_execution_attempt_001_failed_closed_20260609
+status: completed_failed_closed_route_unreachable_no_image_no_retry
+result: TRIAL_002_ATTEMPT_001_FAILED_CLOSED_ROUTE_UNREACHABLE_NO_IMAGE
+summary: Trial 002 was executed exactly once from the binding-ready packet. All pre-dispatch validators passed, then the single dispatch command returned failed_closed because the local broker route was unreachable. No provider/plugin/API/image generation occurred, no output directory was created, and no success artifact/review bridge exists. The attempt is consumed under the zero-retry rule.
+post_attempt_observation: local port 6005 had no listener, matching route_unreachable.
+changed_refs:
+  - reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_execution_attempt_001_failed_closed_20260609.json
+  - scripts/validate_runtime_to_review_v2_trial_002_execution_attempt_001_failed_closed.js
+  - package.json
+  - scripts/validation_manifest.json
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+validation_completed:
+  - npm run validate:runtime-to-review-trial-002-binding-ready-execution: passed, 17 checks
+  - npm run validate:runtime-to-review-trial-002-binding-ready-precheck: passed, 18 checks
+  - node scripts\validate_runtime_to_review_v2_trial_002_ail_side_binding_preflight.js: passed, 26 checks
+  - node scripts\validate_runtime_to_review_v2_trial_002_activation_packet_no_execute.js: passed, 20 checks
+  - node scripts\validate_runtime_to_review_v2_trial_002_review_and_execution_preflight_templates.js: passed, 16 checks
+  - node scripts\validate_prompt_schema.js --type prompt_package prompts\image_generation\product_lifestyle_premium_portable_led_camping_lantern_v2.yaml: passed
+  - git diff --check: passed before dispatch
+  - npm run validate:runtime-to-review-trial-002-attempt-001-failed-closed: passed, 11 checks
+  - npm run validate:validation-manifest: passed
+  - node scripts\validate_agent_board_state.js: passed
+  - git diff --check: passed with line-ending warnings only
+not_performed:
+  - no retry
+  - no provider/plugin/API call
+  - no image generation
+  - no output write
+  - no accepted_samples/production/DailyNote/VCP memory write
+  - no push/tag/release/deploy
+recommended_next: start/restart the Trial 002 broker route and create a separate Trial 002 rearm packet before any future execution; do not rerun attempt 001.
+```
+
 ## Checkpoint - Runtime-To-Review V2 Trial 002 Binding-Ready Execution Packet 2026-06-09
 
 ```text

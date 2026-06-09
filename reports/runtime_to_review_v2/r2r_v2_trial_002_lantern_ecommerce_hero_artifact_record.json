@@ -1,0 +1,54 @@
+{
+  "schema": "runtime_to_review_v2_artifact_record.v1",
+  "artifact_record_id": "r2r_v2_trial_002_lantern_ecommerce_hero_artifact_record",
+  "created_at": "2026-06-09T16:31:08+08:00",
+  "trial_id": "r2r_v2_trial_002_lantern_ecommerce_hero",
+  "attempt_number": 3,
+  "status": "accepted_candidate",
+  "source_prompt_package_ref": "prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v2.yaml",
+  "provider_route": "native_doubao_guarded",
+  "provider_id": "doubao",
+  "plugin_id": "DoubaoGen",
+  "api_id": "generate_image",
+  "model_required": "doubao-seedream-5-0-260128",
+  "model_sent": "doubao-seedream-5-0-260128",
+  "output_files": [
+    {
+      "path": "runs/real_generation/runtime_to_review_v2_trial_002_lantern_ecommerce_hero/image/doubaogen/3e31d80a-5e43-4504-95bd-cef1decc720d.jpg",
+      "bytes": 213479,
+      "sha256": "775b9f584daaa28eebc5e1eb100479d3efd1ce0c30379c6750038e6930952f36",
+      "mime_type": "image/jpeg",
+      "dimensions": "1920x1920"
+    }
+  ],
+  "image_count": 1,
+  "review_policy": {
+    "current_review_status": "accepted_candidate",
+    "accepted_samples_write_allowed_now": false,
+    "production_candidate_write_allowed_now": false,
+    "DailyNote_write_allowed_now": false,
+    "VCP_memory_write_allowed_now": false
+  },
+  "visual_review_notes_initial": {
+    "review_performed": true,
+    "decision": "accepted_candidate",
+    "summary": "Modern portable LED camping lantern identity is clear; handle, diffuser, side control, body, and base are visible; blue-hour scene supports product-first hero use; no readable brand/text/logo/watermark, people, hands, fire, smoke, or extra lanterns observed.",
+    "watch_items": [
+      "foreground table is a little dominant for strict SKU-main-image use",
+      "lower body detail is subdued by night lighting",
+      "best treated as accepted scene hero candidate, not final commercial delivery"
+    ]
+  },
+  "human_review_decision": {
+    "reviewed_at": "2026-06-09T16:48:00+08:00",
+    "reviewer": "Codex visual reviewer",
+    "decision": "accepted_candidate",
+    "basis": "Passes Trial 002 minimum acceptance bar with minor watch items around SKU-style composition and dark lower-body detail.",
+    "commercial_delivery_ready": false,
+    "accepted_samples_write_allowed_by_this_decision": false,
+    "archive_or_memory_write_allowed_by_this_decision": false
+  },
+  "receipt_ref": "reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_receipt.json",
+  "review_bridge_ref": "review_console/live_receipt_bridge/r2r_v2_trial_002_lantern_ecommerce_hero/bridge_entry.json",
+  "review_decision_ref": "reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_review_decision_accepted_candidate_20260609.json"
+}
