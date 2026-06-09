@@ -4603,7 +4603,7 @@ next_safe_action: exact-file stage and commit the AIL-side package if desired. V
 
 ```text
 phase: runtime_to_review_v2_trial_002_failed_dispatch_output_directory_guard_pr10
-status: completed_validated_local_pr_review_fix_pending_commit_push
+status: completed_validated_pr10_merged_into_master
 workspace: A:\agent-image-lab\agent-image-lab-v0.2
 branch: codex/runtime-to-review-trial002-ail-preflight-20260608
 goal: Address PR feedback that Trial 002 failed dispatch must not create the no-overwrite run directory before broker success.
@@ -4622,7 +4622,7 @@ not_performed_addendum:
   - no output write
   - no route POST when output directory already exists
   - no VCPToolBox modification
-next_safe_action: run final validators, exact-file stage, local commit, and push the PR branch.
+next_safe_action: Trial 002 remains blocked on the separate VCPToolBox exact internal route/authorizer binding; after that, issue a separate binding-ready execution packet with can_execute_now=true.
 ```
 
 ## Current Handoff Update - Runtime-To-Review V2 Trial 002 Review And Execution Preflight Templates 2026-06-08

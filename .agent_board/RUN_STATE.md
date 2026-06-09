@@ -4048,7 +4048,7 @@ next_safe_task: bind Trial 002 exact internal route/authorizer in VCPToolBox, th
 
 ```text
 phase: runtime_to_review_v2_trial_002_failed_dispatch_output_directory_guard_pr10
-status: completed_validated_local_pr_review_fix_pending_commit_push
+status: completed_validated_pr10_merged_into_master
 lane: Green local AIL PR feedback fix
 branch: codex/runtime-to-review-trial002-ail-preflight-20260608
 goal: Fix PR feedback so a missing, unreachable, or rejecting Trial 002 broker route cannot create the no-overwrite run directory before dispatch succeeds.
@@ -4073,7 +4073,7 @@ boundary_checks:
   output_directory_created_on_failed_route: false
   route_post_called_when_output_directory_exists: false
   VCPToolBox_modified: false
-next_safe_task: run final local validators, exact-file stage this PR feedback fix, commit, and push the existing PR branch.
+next_safe_task: Trial 002 remains blocked on the separate VCPToolBox exact internal route/authorizer binding; after that, issue a separate binding-ready execution packet with can_execute_now=true.
 ```
 
 ## Current Run State - Runtime-To-Review V2 Trial 002 Review And Execution Preflight Templates 2026-06-08

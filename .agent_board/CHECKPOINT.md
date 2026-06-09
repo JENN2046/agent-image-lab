@@ -5010,7 +5010,7 @@ recommended_next: exact-file local commit for these AIL-side template files; kee
 
 ```text
 phase: runtime_to_review_v2_trial_002_failed_dispatch_output_directory_guard_pr10
-status: completed_validated_local_pr_review_fix_pending_commit_push
+status: completed_validated_pr10_merged_into_master
 result: TRIAL_002_FAILED_DISPATCH_NO_OUTPUT_DIRECTORY_SIDE_EFFECT
 summary: Addressed PR feedback by removing the pre-dispatch mkdir for the Trial 002 output directory and by enforcing the existing-output-directory stop condition before dispatch. The adapter now validates the requested output directory and fail-closes on collision before broker dispatch, so a missing, unreachable, rejecting, or stale-output route cannot consume call budget or leave runs/real_generation/runtime_to_review_v2_trial_002_lantern_ecommerce_hero/ in an unsafe state while reporting output_write_performed=false.
 changed_refs:
@@ -5028,5 +5028,5 @@ not_performed:
   - no output directory creation on failed route
   - no route POST when output directory already exists
   - no VCPToolBox modification
-recommended_next: run final validator set, exact-file stage, commit, and push the existing PR branch.
+recommended_next: Trial 002 remains blocked on the separate VCPToolBox exact internal route/authorizer binding; after that, issue a separate binding-ready execution packet with can_execute_now=true.
 ```
