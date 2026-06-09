@@ -21,7 +21,8 @@ result:
   - The resume baseline is the PR/head commit containing this status-sync record, not the parent merge commit 558c24bb.
   - No provider/plugin/API/image/memory/runtime execution was performed by this sync.
 boundary_checks:
-  local_master_equals_origin_master_before_status_surface_record: true
+  parent_fast_forward_target_verified_before_status_record: true
+  pr_head_remote_sync_must_be_checked_after_status_record: true
   push_tag_release_deploy_performed: false
   destructive_action_performed: false
 next_safe_task: continue new AIL work from the PR/head commit that includes this status-sync record, not from the parent merge commit.

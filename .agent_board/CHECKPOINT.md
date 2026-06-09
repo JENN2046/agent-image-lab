@@ -10,10 +10,12 @@ changed_refs:
   - .agent_board/RUN_STATE.md
   - .agent_board/TASK_QUEUE.md
   - .agent_board/CHECKPOINT.md
-validation_completed:
+pre_status_record_validation:
   - node scripts\validate_agent_board_state.js: passed
   - git diff --check: passed with CRLF normalization warnings only
-  - git rev-list --left-right --count master...origin/master: 0 0
+  - git rev-list --left-right --count master...origin/master: 0 0 before this status-sync record was committed
+post_status_record_validation_required:
+  - verify the PR/head commit containing this status-sync record against its remote tracking branch before treating the branch as synchronized
 not_performed:
   - no provider/plugin/API/image call
   - no memory write
