@@ -1,6 +1,9 @@
 ## Queue - PR13 Post-Merge Local Master Fast-Forward Sync 2026-06-09
 
 ```text
+terminal_status_surface_sync: true
+post_push_followup: read_only_remote_sync_only
+no_followup_agent_board_write_after_push: true
 done:
   - task: switch back to local master
     evidence: git switch master completed after PR13 branch was clean.
@@ -13,7 +16,8 @@ in_progress:
 blocked:
   - none
 remaining:
-  - continue from the PR/head commit that includes this status-sync record, not from the parent merge commit
+  - after this terminal status-surface sync is pushed or merged, run read-only PR/head and remote baseline verification only
+  - do not write another .agent_board follow-up sync
 ```
 
 ## Queue - Runtime-To-Review V2 Trial 002 Memory Candidate No-Write Mapping 2026-06-09

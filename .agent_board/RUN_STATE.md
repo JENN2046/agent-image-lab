@@ -4,6 +4,9 @@
 phase: pr13_post_merge_local_master_fast_forward_sync_20260609
 status: completed_local_master_aligned_with_origin_master
 lane: Green local repository sync plus status-surface baseline recording
+terminal_status_surface_sync: true
+post_push_followup: read_only_remote_sync_only
+no_followup_agent_board_write_after_push: true
 workspace: A:\agent-image-lab\agent-image-lab-v0.2
 branch: master
 remote_ref: origin/master
@@ -25,7 +28,7 @@ boundary_checks:
   pr_head_remote_sync_must_be_checked_after_status_record: true
   push_tag_release_deploy_performed: false
   destructive_action_performed: false
-next_safe_task: continue new AIL work from the PR/head commit that includes this status-sync record, not from the parent merge commit.
+next_safe_task: after this terminal status-surface sync is pushed or merged, run read-only PR/head and remote baseline verification only; do not write another .agent_board follow-up sync.
 ```
 
 ## Current Run State - Runtime-To-Review V2 Trial 002 Memory Candidate No-Write Mapping 2026-06-09

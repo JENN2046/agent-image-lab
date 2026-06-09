@@ -3,6 +3,9 @@
 ```text
 phase: pr13_post_merge_local_master_fast_forward_sync_20260609
 status: completed_local_master_aligned_with_origin_master
+terminal_status_surface_sync: true
+post_push_followup: read_only_remote_sync_only
+no_followup_agent_board_write_after_push: true
 workspace: A:\agent-image-lab\agent-image-lab-v0.2
 branch: master
 goal: Switch back to local master and fast-forward it to origin/master after PR13 merge.
@@ -27,7 +30,7 @@ not_performed:
   - no provider/plugin/API/image call
   - no memory write
   - no push/tag/release/deploy
-next_safe_action: continue AIL work from the PR/head commit that includes this status-sync record, not from the parent merge commit.
+next_safe_action: after this terminal status-surface sync is pushed or merged, run read-only PR/head and remote baseline verification only; do not write another .agent_board follow-up sync.
 ```
 
 ## Current Handoff Update - Runtime-To-Review V2 Trial 002 Memory Candidate No-Write Mapping 2026-06-09

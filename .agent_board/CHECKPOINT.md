@@ -4,6 +4,9 @@
 phase: pr13_post_merge_local_master_fast_forward_sync_20260609
 status: completed_local_master_aligned_with_origin_master
 result: PR13_MERGED_LOCAL_MASTER_FAST_FORWARDED
+terminal_status_surface_sync: true
+post_push_followup: read_only_remote_sync_only
+no_followup_agent_board_write_after_push: true
 summary: After PR13 was merged remotely, local master was switched back from codex/trial002-runtime-to-review-evidence and fast-forwarded to origin/master at 558c24bb. That commit is the remote fast-forward target; the resume baseline is the PR/head commit that contains this status-sync record, so future agents should not resume from the parent merge if these board entries are expected.
 changed_refs:
   - .agent_board/HANDOFF.md
@@ -20,7 +23,7 @@ not_performed:
   - no provider/plugin/API/image call
   - no memory write
   - no push/tag/release/deploy
-recommended_next: continue from the PR/head commit that includes this status-sync record, not from the parent merge commit.
+recommended_next: after this terminal status-surface sync is pushed or merged, run read-only PR/head and remote baseline verification only; do not write another .agent_board follow-up sync.
 ```
 
 ## Checkpoint - Runtime-To-Review V2 Trial 002 Memory Candidate No-Write Mapping 2026-06-09
