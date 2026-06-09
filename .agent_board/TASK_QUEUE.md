@@ -7,13 +7,13 @@ done:
   - task: fast-forward master to origin/master
     evidence: git merge --ff-only origin/master updated 49429503..558c24bb.
   - task: record post-fast-forward baseline
-    evidence: .agent_board hot status surfaces record master@558c24bb.
+    evidence: .agent_board hot status surfaces distinguish remote_fast_forward_target=558c24bb from the PR/head resume baseline that contains the status-sync record.
 in_progress:
   - none
 blocked:
   - none
 remaining:
-  - continue from master@558c24bb
+  - continue from the PR/head commit that includes this status-sync record, not from the parent merge commit
 ```
 
 ## Queue - Runtime-To-Review V2 Trial 002 Memory Candidate No-Write Mapping 2026-06-09
