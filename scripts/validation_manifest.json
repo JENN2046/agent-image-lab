@@ -374,6 +374,26 @@
       ]
     },
     {
+      "id": "runtime_to_review_trial_002_binding_ready_precheck",
+      "command": "npm run validate:runtime-to-review-trial-002-binding-ready-precheck",
+      "script": "scripts/validate_runtime_to_review_v2_trial_002_binding_ready_precheck_packet.js",
+      "tier": "targeted",
+      "domain": "runtime_to_review",
+      "status": "active",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_binding_ready_precheck_packet_20260609.json",
+        "reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_execution_preflight_template_20260608.json",
+        "reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_ail_side_binding_preflight_20260608.json",
+        "adapters/runtime/native_doubao_runtime_v2_trial_002_lantern_ecommerce_broker_dispatch_adapter.js",
+        "tests/fixtures/runtime_kernel_v2_trial_002_lantern_ecommerce_hero_task.fixture.json",
+        "prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v2.yaml"
+      ],
+      "required_for": [
+        "runtime_to_review_trial_002_binding_ready_precheck_patch"
+      ]
+    },
+    {
       "id": "runtime_to_review_serum_bottle_inactive_preflight",
       "command": "npm run validate:runtime-to-review-serum-bottle-inactive-preflight",
       "script": "scripts/validate_runtime_to_review_v1_serum_bottle_inactive_preflight_packet.js",
