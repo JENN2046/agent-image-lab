@@ -9,8 +9,8 @@ branch: master
 remote_ref: origin/master
 baseline_before_sync: 49429503
 remote_fast_forward_target: 558c24bb
-status_sync_record_source_commit: 4c068e12
-resume_baseline: current PR/head commit after this status-sync record; do not resume from 558c24bb when these board entries are expected
+status_sync_record_source: PR/head commit containing these .agent_board entries
+resume_baseline: same PR/head commit containing this status-sync record; do not resume from 558c24bb when these board entries are expected
 merge_commit: 558c24bb168d6688c5be72effca6eb42b0012cae
 merged_pr: https://github.com/JENN2046/agent-image-lab/pull/13
 sync_method: git switch master; git merge --ff-only origin/master
