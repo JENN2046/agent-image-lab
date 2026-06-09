@@ -1,3 +1,205 @@
+## Queue - Runtime-To-Review V2 Trial 002 Memory Candidate No-Write Mapping 2026-06-09
+
+```text
+done:
+  - task: choose one separate follow-up gate
+    evidence: selected memory_candidate_no_write_mapping, not promotion and not durable archive, because commercial_delivery_ready=false.
+  - task: create memory-candidate mapping gate
+    evidence: reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_memory_candidate_no_write_mapping_gate_20260609.json.
+  - task: create Chinese memory delta draft
+    evidence: reports/memory_delta_drafts/r2r_v2_trial_002_lantern_ecommerce_hero_memory_delta_candidate_no_write_20260609.json.
+  - task: add validator and manifest/package script
+    evidence: scripts/validate_runtime_to_review_v2_trial_002_memory_candidate_no_write_mapping_gate.js; package.json; scripts/validation_manifest.json.
+  - task: validate memory-candidate no-write gate
+    evidence: npm run validate:runtime-to-review-trial-002-memory-candidate-no-write passed, 9 checks; npm run validate:validation-manifest passed with validator_count 133.
+in_progress:
+  - none
+blocked:
+  - task: actual memory write
+    reason: this gate is mapping-only; writer target and authorization are not selected.
+  - task: accepted_samples promotion or durable archive
+    reason: owner asked to choose one gate and not mix promotion/archive/memory-candidate; selected gate was memory-candidate no-write.
+remaining:
+  - final local status-surface validation and diff review
+  - optional separate memory authorization preflight if the owner wants a real record_memory write later
+```
+
+## Queue - Runtime-To-Review V2 Trial 002 Review Decision 2026-06-09
+
+```text
+done:
+  - task: visually review Trial 002 attempt 003 candidate
+    evidence: candidate clearly reads as modern portable LED camping lantern; no brand/text/logo/watermark, people, hands, fire, smoke, or extra lantern observed.
+  - task: open separate review decision gate
+    evidence: reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_review_decision_accepted_candidate_20260609.json.
+  - task: update receipt/artifact/review bridge to accepted_candidate
+    evidence: receipt human_review_decision_ref set; artifact_record status accepted_candidate; review_bridge current_review_status accepted_candidate.
+  - task: validate review decision gate
+    evidence: npm run validate:runtime-to-review-trial-002-review-decision passed, 8 checks.
+in_progress:
+  - none
+blocked:
+  - task: accepted_samples/archive/memory promotion
+    reason: review decision does not authorize these writes; separate gate required.
+remaining:
+  - final local validation and diff review
+  - optional separate promotion/archive/memory-candidate gate if owner wants to advance this accepted candidate
+```
+
+## Queue - Runtime-To-Review V2 Trial 002 Attempt 003 Success 2026-06-09
+
+```text
+done:
+  - task: run attempt 003 pre-dispatch validators
+    evidence: rearm packet, binding-ready execution, binding-ready precheck, attempt 001/002 receipts, AIL-side binding preflight, no-execute packet, review templates, prompt schema, and git diff --check passed.
+  - task: execute exactly one Trial 002 attempt 003 dispatch
+    evidence: command consumed one attempt and returned completed_provider_image_created.
+  - task: record success receipt, artifact record, and review bridge
+    evidence: reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_receipt.json; reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_artifact_record.json; review_console/live_receipt_bridge/r2r_v2_trial_002_lantern_ecommerce_hero/bridge_entry.json.
+  - task: record attempt 003 success receipt
+    evidence: reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_execution_attempt_003_success_20260609.json.
+  - task: validate attempt 003 success evidence
+    evidence: npm run validate:runtime-to-review-trial-002-attempt-003-success passed, 12 checks.
+in_progress:
+  - none
+blocked:
+  - task: rerun attempt 003
+    reason: zero-retry one-shot attempt is consumed and succeeded.
+  - task: promotion/archive/memory write
+    reason: candidate is pending human review; separate review decision gate required first.
+remaining:
+  - run final validation and diff review for the success package
+  - perform human visual review of the generated Trial 002 candidate
+  - only after review decision, open separate promotion/archive/memory gate if appropriate
+```
+
+## Queue - Runtime-To-Review V2 Trial 002 Rearm Attempt 003 2026-06-09
+
+```text
+done:
+  - task: patch VCPToolBox Trial 002 POST Bearer bypass scope
+    evidence: A:\AGENTS_OS_Workspace\runtime\VCPToolBox\server.js now allows only loopback POST for the exact Trial 002 internal route to reach the route-level secretless authorizer.
+  - task: protect bypass scope with VCPToolBox binding tests
+    evidence: A:\AGENTS_OS_Workspace\runtime\VCPToolBox\tests\aiImageAgentsServerBinding.test.js keeps serum/Trial 001 POST behind Bearer and expects Trial 002 POST authorizer reachability.
+  - task: validate VCPToolBox local patch
+    evidence: node --check server.js; node --check tests\aiImageAgentsServerBinding.test.js; node --test tests\aiImageAgentsServerBinding.test.js; node --test tests\aiImageAgentsRoute.test.js passed.
+  - task: verify live no-generation route behavior
+    evidence: HEAD returned 204; intentionally invalid POST returned r2r_v2_trial_002_payload_unknown_fields with provider/plugin/API/image/output flags false.
+  - task: issue attempt 003 rearm packet
+    evidence: reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_rearm_packet_attempt_003_20260609.json.
+  - task: validate attempt 003 rearm packet
+    evidence: npm run validate:runtime-to-review-trial-002-rearm-attempt-003 passed, 20 checks.
+in_progress:
+  - none
+blocked:
+  - task: rerun attempt 001 or attempt 002
+    reason: both attempts are consumed under zero-retry.
+  - task: execute attempt 003 from this rearm/signing step
+    reason: packet requires a separate final execution instruction.
+remaining:
+  - run final local validation and diff review for the signing package
+  - execute attempt 003 exactly once only after explicit owner execution instruction
+  - no accepted_samples/archive/production/memory gate until a generated candidate exists and is reviewed
+```
+
+## Queue - Runtime-To-Review V2 Trial 002 Attempt 002 Failed Closed 2026-06-09
+
+```text
+done:
+  - task: run attempt 002 pre-dispatch validators
+    evidence: rearm packet, binding-ready execution, binding-ready precheck, attempt 001 receipt, AIL-side binding preflight, no-execute packet, review templates, prompt schema, and git diff --check passed.
+  - task: execute exactly one Trial 002 attempt 002 dispatch
+    evidence: command consumed one attempt and returned failed_closed.
+  - task: record failed-closed attempt 002 receipt
+    evidence: reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_execution_attempt_002_failed_closed_20260609.json.
+  - task: validate failed-closed attempt 002 receipt
+    evidence: npm run validate:runtime-to-review-trial-002-attempt-002-failed-closed passed, 11 checks.
+in_progress:
+  - none
+blocked:
+  - task: rerun attempt 002
+    reason: zero-retry rearm packet consumed attempt 002; a second POST would violate the one-shot budget.
+  - task: generate Trial 002 candidate
+    reason: POST is still blocked by Bearer authorization before plugin/provider/API/image execution.
+remaining:
+  - fix Trial 002 POST secretless authorizer path or Bearer bypass in VCPToolBox
+  - issue separate attempt 003 rearm packet after the fix
+  - no accepted_samples/archive/production/memory gate because no image exists
+```
+
+## Queue - Runtime-To-Review V2 Trial 002 Rearm Attempt 002 2026-06-09
+
+```text
+done:
+  - task: restart VCPToolBox vcp-main with Trial 002 route/runtime flags
+    evidence: pm2 vcp-main restarted; 127.0.0.1:6005 exact Trial 002 route HEAD returned 204.
+  - task: align AIL Trial 002 adapter activation with VCPToolBox authorizer
+    evidence: adapter routeTaskId is AUTH-R2R-V2-TRIAL-002-LANTERN-ECOMMERCE-HERO-20260609-BINDING-READY and validators check route body taskId plus activation_package_id.
+  - task: issue separate attempt 002 rearm packet
+    evidence: reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_rearm_packet_attempt_002_20260609.json.
+  - task: validate rearm packet without generation
+    evidence: npm run validate:runtime-to-review-trial-002-rearm-attempt-002 passed, 16 checks.
+in_progress:
+  - none
+blocked:
+  - task: rerun attempt 001
+    reason: attempt 001 was consumed under zero-retry; future execution must use attempt 002 rearm packet.
+remaining:
+  - final local validation and diff review for this rearm package
+  - execute attempt 002 only after explicit owner execution instruction
+  - no accepted_samples/archive/production/memory gate until a generated candidate exists and is reviewed
+```
+
+## Queue - Runtime-To-Review V2 Trial 002 Attempt 001 Failed Closed 2026-06-09
+
+```text
+done:
+  - task: run pre-dispatch validators
+    evidence: binding-ready execution, binding-ready precheck, AIL-side binding preflight, no-execute packet, review/execution templates, prompt schema, and git diff --check passed.
+  - task: execute exactly one Trial 002 dispatch
+    evidence: command consumed one attempt and returned failed_closed.
+  - task: record failed-closed receipt
+    evidence: reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_execution_attempt_001_failed_closed_20260609.json.
+  - task: validate failed-closed receipt
+    evidence: scripts/validate_runtime_to_review_v2_trial_002_execution_attempt_001_failed_closed.js passed, 11 checks.
+  - task: final status-surface validation and diff review
+    evidence: agent_board validator, validation manifest validator, failed-closed validator, git diff --check, and output path absence checks passed; 6005 had no listener.
+in_progress:
+  - none
+blocked:
+  - task: immediate rerun
+    reason: zero-retry packet consumed attempt 001; route was unreachable and no second dispatch is allowed without a new rearm gate.
+remaining:
+  - start/restart the Trial 002 broker route and prepare a separate rearm packet
+  - no accepted_samples/archive/production/memory gate because no image exists
+```
+
+## Queue - Runtime-To-Review V2 Trial 002 Binding-Ready Execution Packet 2026-06-09
+
+```text
+done:
+  - task: fast-forward VCPToolBox local main
+    evidence: local main and origin/main are ddfc2b1f94616c42712d57e5eb3b3de4fc212b03.
+  - task: align AIL route payload with VCPToolBox output-ref agreement
+    evidence: adapter routeRequestBody includes plan.steps[0].output_directory_ref equal to visual_job_contract.output_directory_ref.
+  - task: issue binding-ready Trial 002 packet
+    evidence: reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_binding_ready_execution_packet_20260609.json has can_execute_now=true and dispatch_performed=false.
+  - task: add dedicated validator and manifest entry
+    evidence: scripts/validate_runtime_to_review_v2_trial_002_binding_ready_execution_packet.js and validation manifest entry pass.
+  - task: final status-surface validation and diff review
+    evidence: prompt schema, agent_board, binding-ready execution validator, git diff --check, and status review passed.
+  - task: package exact-file local closeout commit scope
+    evidence: only Trial 002 binding-ready packet/signing evidence files are allowlisted; git add dot remains forbidden.
+in_progress:
+  - none
+blocked:
+  - none
+remaining:
+  - execute Trial 002 exactly once only after explicit execution intent
+  - no retry without a fresh packet
+  - review generated_unreviewed candidate before any accepted_samples/archive/production/memory write
+```
+
 - [x] ID: runtime_to_review_v2_trial_001_vcptoolbox_internal_authorizer_binding_20260608
       Lane: Amber local external runtime integration with exact Trial 001 scope.
       Status: completed_validated_external_local_vcptoolbox_binding_no_generation.

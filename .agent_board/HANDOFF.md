@@ -1,3 +1,291 @@
+## Current Handoff Update - Runtime-To-Review V2 Trial 002 Memory Candidate No-Write Mapping 2026-06-09
+
+```text
+phase: runtime_to_review_v2_trial_002_lantern_ecommerce_hero_memory_candidate_no_write_mapping_gate_20260609
+status: completed_validated_memory_candidate_no_write_mapping_not_written
+workspace: A:\agent-image-lab\agent-image-lab-v0.2
+branch: master
+goal: Open exactly one separate follow-up gate after the Trial 002 review decision, choosing memory-candidate no-write mapping rather than promotion or archive.
+selected_gate: memory_candidate_no_write_mapping
+gate_ref: reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_memory_candidate_no_write_mapping_gate_20260609.json
+memory_delta_candidate_ref: reports/memory_delta_drafts/r2r_v2_trial_002_lantern_ecommerce_hero_memory_delta_candidate_no_write_20260609.json
+source_review_decision: reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_review_decision_accepted_candidate_20260609.json
+source_image: runs/real_generation/runtime_to_review_v2_trial_002_lantern_ecommerce_hero/image/doubaogen/3e31d80a-5e43-4504-95bd-cef1decc720d.jpg
+decision: accepted_candidate
+commercial_delivery_ready: false
+completed:
+  - Chose memory-candidate no-write mapping because the candidate is accepted but not commercial-delivery-ready.
+  - Created a standalone gate that maps the reusable Trial 002 visual learning without selecting a writer.
+  - Created a Chinese memory delta draft that preserves prompt/image refs by project-relative path only.
+  - Added a dedicated validator and manifest/package script.
+validation_completed:
+  - node --check scripts\validate_runtime_to_review_v2_trial_002_memory_candidate_no_write_mapping_gate.js passed.
+  - npm run validate:runtime-to-review-trial-002-memory-candidate-no-write passed, 9 checks.
+  - npm run validate:validation-manifest passed, validator_count 133.
+not_performed:
+  - no record_memory call
+  - no DailyNote write
+  - no VCP memory write
+  - no Codex knowledge memory write
+  - no accepted_samples promotion
+  - no durable archive write
+  - no provider/plugin/API/image call
+  - no push/tag/release/deploy
+next_safe_action: either pause, or open a separate memory authorization preflight if the owner wants to actually write this candidate later. Do not treat this mapping gate as a memory write receipt.
+```
+
+## Current Handoff Update - Runtime-To-Review V2 Trial 002 Review Decision 2026-06-09
+
+```text
+phase: runtime_to_review_v2_trial_002_lantern_ecommerce_hero_review_decision_accepted_candidate_20260609
+status: completed_accepted_candidate_not_promoted
+workspace: A:\agent-image-lab\agent-image-lab-v0.2
+branch: master
+goal: Visually review Trial 002 attempt 003 and decide whether to open a separate review decision gate.
+review_decision: reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_review_decision_accepted_candidate_20260609.json
+output_file: runs/real_generation/runtime_to_review_v2_trial_002_lantern_ecommerce_hero/image/doubaogen/3e31d80a-5e43-4504-95bd-cef1decc720d.jpg
+decision: accepted_candidate
+score: 0.92
+commercial_delivery_ready: false
+completed:
+  - Reviewed the generated candidate against Trial 002 review criteria.
+  - Opened the review decision gate and recorded accepted_candidate.
+  - Updated artifact record, receipt, and review bridge to point at the decision.
+  - Preserved promotion/archive/memory blocks.
+validation_completed:
+  - npm run validate:runtime-to-review-trial-002-review-decision passed, 8 checks.
+  - npm run validate:runtime-to-review-trial-002-attempt-003-success passed, 12 checks.
+not_performed:
+  - no provider/plugin/API/image call
+  - no accepted_samples/production/archive/DailyNote/VCP memory write
+  - no push/tag/release/deploy
+next_safe_action: optional separate promotion/archive/memory-candidate gate if the owner wants to advance this accepted candidate; otherwise pause with accepted candidate evidence recorded.
+```
+
+## Current Handoff Update - Runtime-To-Review V2 Trial 002 Attempt 003 Success 2026-06-09
+
+```text
+phase: runtime_to_review_v2_trial_002_lantern_ecommerce_hero_execution_attempt_003_success_20260609
+status: completed_provider_image_created_pending_human_review_no_retry
+workspace: A:\agent-image-lab\agent-image-lab-v0.2
+branch: master
+goal: Execute Trial 002 attempt 003 exactly once, one image / one call / zero retry.
+source_rearm_packet: reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_rearm_packet_attempt_003_20260609.json
+attempt_success_receipt: reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_execution_attempt_003_success_20260609.json
+receipt: reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_receipt.json
+artifact_record: reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_artifact_record.json
+review_bridge: review_console/live_receipt_bridge/r2r_v2_trial_002_lantern_ecommerce_hero/bridge_entry.json
+output_file: runs/real_generation/runtime_to_review_v2_trial_002_lantern_ecommerce_hero/image/doubaogen/3e31d80a-5e43-4504-95bd-cef1decc720d.jpg
+completed:
+  - Ran the full attempt 003 pre-dispatch validator chain.
+  - Executed exactly one dispatch command with --max-images 1 and no retry flags.
+  - Generated one 1920x1920 JPEG under the bound Trial 002 output directory.
+  - Materialized receipt, artifact record, review bridge, and attempt success receipt.
+validation_completed:
+  - npm run validate:runtime-to-review-trial-002-attempt-003-success passed, 12 checks.
+output_integrity:
+  - bytes: 213479
+  - sha256: 775b9f584daaa28eebc5e1eb100479d3efd1ce0c30379c6750038e6930952f36
+  - dimensions: 1920x1920
+result:
+  - calls_used provider/plugin/API: 1/1/1
+  - image_count: 1
+  - current_review_status: pending_human_review
+not_performed:
+  - no retry
+  - no accepted_samples/production/DailyNote/VCP memory write
+  - no push/tag/release/deploy
+next_safe_action: perform human visual review of the Trial 002 candidate; do not rerun attempt 003; promotion/archive/memory require a separate gate after review decision.
+```
+
+## Current Handoff Update - Runtime-To-Review V2 Trial 002 Rearm Attempt 003 2026-06-09
+
+```text
+phase: runtime_to_review_v2_trial_002_lantern_ecommerce_hero_rearm_attempt_003_20260609
+status: completed_validated_bearer_bypass_fixed_attempt_003_rearmed_no_dispatch
+workspace: A:\agent-image-lab\agent-image-lab-v0.2
+branch: master
+goal: Fix VCPToolBox Trial 002 POST secretless authorizer/Bearer bypass, then sign a fresh attempt 003 rearm packet.
+external_vcptoolbox_state:
+  - workspace: A:\AGENTS_OS_Workspace\runtime\VCPToolBox
+  - branch: main
+  - head: ddfc2b1f94616c42712d57e5eb3b3de4fc212b03
+  - modified files: server.js; tests\aiImageAgentsServerBinding.test.js
+runtime_route_state:
+  - pm2 process: vcp-main
+  - pid_after_restart: 20340
+  - exact route HEAD: 204
+  - invalid no-generation POST: 200 with r2r_v2_trial_002_payload_unknown_fields
+rearm_packet: reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_rearm_packet_attempt_003_20260609.json
+validator: scripts/validate_runtime_to_review_v2_trial_002_rearm_packet_attempt_003.js
+completed:
+  - Scoped VCPToolBox Bearer bypass so only Trial 002 exact loopback POST reaches the route-level secretless authorizer.
+  - Kept serum bottle and Trial 001 POST behind Bearer.
+  - Restarted vcp-main with Trial 002 runtime flags.
+  - Verified HEAD 204 and invalid POST route-level payload rejection without generation side effects.
+  - Signed attempt 003 rearm packet with can_execute_now=true, dispatch_performed=false, activation_consumed=false.
+validation_completed:
+  - node --check server.js: passed in VCPToolBox
+  - node --check tests\aiImageAgentsServerBinding.test.js: passed in VCPToolBox
+  - node --test tests\aiImageAgentsServerBinding.test.js: passed in VCPToolBox
+  - node --test tests\aiImageAgentsRoute.test.js: passed in VCPToolBox
+  - npm run validate:runtime-to-review-trial-002-rearm-attempt-003: passed, 20 checks
+not_performed:
+  - no attempt 003 execution
+  - no provider/plugin/API call
+  - no image generation
+  - no output write
+  - no secret/env/config value read
+  - no accepted_samples/production/DailyNote/VCP memory write
+  - no push/tag/release/deploy
+next_safe_action: run the final AIL validation/diff closeout, then execute attempt 003 exactly once only if the owner explicitly says to execute attempt 003.
+```
+
+## Current Handoff Update - Runtime-To-Review V2 Trial 002 Attempt 002 Failed Closed 2026-06-09
+
+```text
+phase: runtime_to_review_v2_trial_002_lantern_ecommerce_hero_execution_attempt_002_failed_closed_20260609
+status: completed_failed_closed_bearer_required_no_image_no_retry
+workspace: A:\agent-image-lab\agent-image-lab-v0.2
+branch: master
+goal: Execute Trial 002 attempt 002 exactly once, one image / one call / zero retry.
+source_rearm_packet: reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_rearm_packet_attempt_002_20260609.json
+failed_closed_receipt: reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_execution_attempt_002_failed_closed_20260609.json
+validator: scripts/validate_runtime_to_review_v2_trial_002_execution_attempt_002_failed_closed.js
+completed:
+  - Ran the full pre-dispatch validator chain from the rearm packet.
+  - Executed exactly one dispatch command with --max-images 1 and no retry flags.
+  - Recorded the failed-closed receipt and validator.
+result:
+  - route was reachable.
+  - POST failed with sanitized HTTP 401 Bearer required.
+  - blocker: runtime_bridge_blocker_unauthorized_bearer_required_http_401.
+  - plugin/provider/API/image did not execute.
+  - output directory, success receipt, artifact record, and review bridge were not created.
+not_performed:
+  - no retry
+  - no provider contact
+  - no plugin call
+  - no API call
+  - no image generation
+  - no output write
+  - no accepted_samples/production/DailyNote/VCP memory write
+  - no push/tag/release/deploy
+next_safe_action: do not rerun attempt 002; fix the Trial 002 POST secretless authorizer path or Bearer bypass, then issue a separate attempt 003 rearm packet before any future Trial 002 execution.
+```
+
+## Current Handoff Update - Runtime-To-Review V2 Trial 002 Rearm Attempt 002 2026-06-09
+
+```text
+phase: runtime_to_review_v2_trial_002_lantern_ecommerce_hero_rearm_attempt_002_20260609
+status: completed_validated_route_rearmed_packet_signed_no_dispatch
+workspace: A:\agent-image-lab\agent-image-lab-v0.2
+branch: master
+goal: Bring up the 127.0.0.1:6005 Trial 002 broker route and sign a separate rearm packet without reusing attempt 001.
+external_vcptoolbox_state:
+  - workspace: A:\AGENTS_OS_Workspace\runtime\VCPToolBox
+  - branch: main
+  - head: ddfc2b1f94616c42712d57e5eb3b3de4fc212b03
+  - local code modified this turn: false
+runtime_route_state:
+  - pm2 process: vcp-main
+  - pid_after_restart: 31204
+  - flags enabled: ENABLE_AI_IMAGE_AGENTS_ROUTE, ENABLE_AI_IMAGE_REAL_EXECUTION, ENABLE_NATIVE_DOUBAO_SECRETLESS_RUNTIME_DELEGATE
+  - exact route HEAD: 204
+rearm_packet: reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_rearm_packet_attempt_002_20260609.json
+validator: scripts/validate_runtime_to_review_v2_trial_002_rearm_packet_attempt_002.js
+completed:
+  - Restarted vcp-main with the Trial 002 route/runtime flags.
+  - Verified http://127.0.0.1:6005/internal/ai-image-agents/execute/r2r-v2-trial-002-lantern-ecommerce-hero returns HEAD 204.
+  - Fixed AIL Trial 002 adapter routeTaskId to AUTH-R2R-V2-TRIAL-002-LANTERN-ECOMMERCE-HERO-20260609-BINDING-READY.
+  - Tightened validators so taskId and activation.activation_package_id must match the binding-ready id.
+  - Signed attempt 002 rearm packet with can_execute_now=true, dispatch_performed=false, activation_consumed=false.
+validation_completed:
+  - npm run validate:runtime-to-review-trial-002-rearm-attempt-002 passed, 16 checks.
+  - npm run validate:runtime-to-review-trial-002-binding-ready-execution passed, 17 checks.
+  - node scripts\validate_runtime_to_review_v2_trial_002_ail_side_binding_preflight.js passed, 26 checks.
+not_performed:
+  - no route POST dispatch
+  - no provider/plugin/API call
+  - no image generation
+  - no output write
+  - no secret/env/config value read
+  - no accepted_samples/production/DailyNote/VCP memory write
+  - no push/tag/release/deploy
+next_safe_action: run final local validation/diff review, then execute attempt 002 exactly once only if the owner explicitly says to execute it.
+```
+
+## Current Handoff Update - Runtime-To-Review V2 Trial 002 Attempt 001 Failed Closed 2026-06-09
+
+```text
+phase: runtime_to_review_v2_trial_002_lantern_ecommerce_hero_execution_attempt_001_failed_closed_20260609
+status: completed_failed_closed_route_unreachable_no_image_no_retry
+workspace: A:\agent-image-lab\agent-image-lab-v0.2
+branch: master
+goal: Execute Trial 002 exactly once from the binding-ready packet with one image / one call / zero retry.
+source_packet: reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_binding_ready_execution_packet_20260609.json
+failed_closed_receipt: reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_execution_attempt_001_failed_closed_20260609.json
+validator: scripts/validate_runtime_to_review_v2_trial_002_execution_attempt_001_failed_closed.js
+result:
+  - pre-dispatch validators passed.
+  - exactly one dispatch command was executed.
+  - route attempt failed closed with r2r_v2_trial_002_broker_route_unreachable.
+  - provider/plugin/API calls used: 0/0/0.
+  - image_count: 0.
+  - no output directory, success receipt, artifact record, or review bridge was created.
+  - post-attempt local port check found no listener on 6005.
+not_performed:
+  - no retry
+  - no provider/plugin/API call
+  - no image generation
+  - no output write
+  - no accepted_samples/production/DailyNote/VCP memory write
+  - no push/tag/release/deploy
+next_safe_action: do not rerun attempt 001; start/restart the Trial 002 broker route and issue a separate rearm packet before any future execution.
+```
+
+## Current Handoff Update - Runtime-To-Review V2 Trial 002 Binding-Ready Execution Packet 2026-06-09
+
+```text
+phase: runtime_to_review_v2_trial_002_lantern_ecommerce_hero_binding_ready_execution_packet_20260609
+status: completed_validated_binding_ready_packet_signed_no_dispatch_local_commit_packaged
+workspace: A:\agent-image-lab\agent-image-lab-v0.2
+branch: master
+goal: Fast-forward local VCPToolBox main to origin/main, then sign the AIL Trial 002 binding-ready execution packet.
+external_vcptoolbox_state:
+  - workspace: A:\AGENTS_OS_Workspace\runtime\VCPToolBox
+  - branch: main
+  - local_main_head: ddfc2b1f94616c42712d57e5eb3b3de4fc212b03
+  - origin_main_head: ddfc2b1f94616c42712d57e5eb3b3de4fc212b03
+  - PR230 merged route/authorizer/restricted facade proof: 51bbfad7f53c0acba43eddead1c1508519d2029d
+  - PR231 merged output-ref agreement proof: ddfc2b1f94616c42712d57e5eb3b3de4fc212b03
+packet: reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_binding_ready_execution_packet_20260609.json
+validator: scripts/validate_runtime_to_review_v2_trial_002_binding_ready_execution_packet.js
+completed:
+  - Fast-forwarded VCPToolBox local main to origin/main.
+  - Added plan.steps[0].output_directory_ref to the AIL Trial 002 broker route payload so it matches the new VCPToolBox output-ref agreement gate.
+  - Issued Trial 002 binding-ready execution packet with can_execute_now=true, binding_ready=true, dispatch_performed=false, activation_consumed=false.
+  - Locked one route HTTP request, one provider call, one plugin call, one API call, one image, and zero retry.
+  - Registered the new npm validator and validation manifest entry.
+  - Prepared exact-file local closeout commit scope for the authorization/binding evidence.
+validation_completed:
+  - npm run validate:runtime-to-review-trial-002-binding-ready-execution passed, 17 checks.
+  - npm run validate:runtime-to-review-trial-002-binding-ready-precheck passed, 18 checks.
+  - node scripts\validate_runtime_to_review_v2_trial_002_ail_side_binding_preflight.js passed, 26 checks.
+  - node scripts\validate_runtime_to_review_v2_trial_002_activation_packet_no_execute.js passed, 20 checks.
+  - node scripts\validate_runtime_to_review_v2_trial_002_review_and_execution_preflight_templates.js passed, 16 checks.
+not_performed:
+  - no route HTTP dispatch
+  - no provider/plugin/API call
+  - no image generation
+  - no output write
+  - no secret/env/config read
+  - no accepted_samples/production/DailyNote/VCP memory write
+  - no push, tag, release, or deploy
+local_commit_scope: exact-file local closeout commit for this packet/signing evidence only; no push.
+next_safe_action: execute exactly once only when the owner explicitly says to execute Trial 002.
+```
+
 ## Current Handoff Update - Runtime-To-Review V2 Trial 001 VCPToolBox Internal Authorizer Binding 2026-06-08
 
 ```text

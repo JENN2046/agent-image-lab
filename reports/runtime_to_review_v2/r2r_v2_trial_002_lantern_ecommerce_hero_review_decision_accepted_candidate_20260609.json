@@ -1,0 +1,90 @@
+{
+  "schema": "runtime_to_review_v2_visual_review_decision.v1",
+  "decision_id": "r2r_v2_trial_002_lantern_ecommerce_hero_review_decision_accepted_candidate_20260609",
+  "created_at": "2026-06-09T16:48:00+08:00",
+  "trial_id": "r2r_v2_trial_002_lantern_ecommerce_hero",
+  "attempt_number": 3,
+  "reviewer": "Codex visual reviewer",
+  "source_user_message": "做视觉审查，然后再决定是否开单独的 review decision gate。",
+  "decision": "accepted_candidate",
+  "commercial_delivery_ready": false,
+  "artifact_record_ref": "reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_artifact_record.json",
+  "receipt_ref": "reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_receipt.json",
+  "review_bridge_ref": "review_console/live_receipt_bridge/r2r_v2_trial_002_lantern_ecommerce_hero/bridge_entry.json",
+  "review_criteria_ref": "reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_review_criteria_no_execute_20260608.json",
+  "image": {
+    "path": "runs/real_generation/runtime_to_review_v2_trial_002_lantern_ecommerce_hero/image/doubaogen/3e31d80a-5e43-4504-95bd-cef1decc720d.jpg",
+    "sha256": "775b9f584daaa28eebc5e1eb100479d3efd1ce0c30379c6750038e6930952f36",
+    "mime_type": "image/jpeg",
+    "dimensions": "1920x1920"
+  },
+  "criteria_result": {
+    "single_product_only": "pass",
+    "modern_premium_led_camping_lantern_read": "pass",
+    "square_ecommerce_hero_framing": "pass",
+    "full_handle_diffuser_body_control_and_base_visible": "pass",
+    "product_first_visual_focus": "pass",
+    "control_position_readable": "pass",
+    "cylindrical_or_soft_rect_geometry_plausible": "pass",
+    "warm_frosted_diffuser_controlled_not_blown": "pass",
+    "premium_dark_metal_or_outdoor_electronics_material": "pass_with_minor_watch",
+    "grounded_table_or_surface_contact": "pass",
+    "early_blue_hour_or_refined_outdoor_support": "pass",
+    "no_people_hands_fire_smoke": "pass",
+    "no_readable_brand_text_logo_or_watermark": "pass",
+    "no_extra_lanterns_or_wrong_product_drift": "pass"
+  },
+  "scoring_result": {
+    "product_identity_and_geometry": {
+      "weight": 0.3,
+      "score": 0.28,
+      "notes": "Clearly reads as a modern rechargeable LED camping lantern. Handle, diffuser, side control, body, and base are visible and plausible."
+    },
+    "commercial_hero_composition": {
+      "weight": 0.25,
+      "score": 0.22,
+      "notes": "Product dominates the square frame and the blue-hour background supports it. The foreground table reflection is attractive but slightly large for a stricter SKU-style ecommerce image."
+    },
+    "material_and_light_control": {
+      "weight": 0.2,
+      "score": 0.18,
+      "notes": "Warm frosted diffuser is controlled and readable. Dark body feels premium, though lower body detail is intentionally subdued by the night lighting."
+    },
+    "safety_and_brand_cleanliness": {
+      "weight": 0.15,
+      "score": 0.15,
+      "notes": "No people, hands, faces, fire, smoke, extra product, readable brand, logo, watermark, or random text observed."
+    },
+    "pipeline_learning_value": {
+      "weight": 0.1,
+      "score": 0.09,
+      "notes": "Good evidence that Trial 001 product-geometry and review controls transfer to a hard-edge outdoor electronics product."
+    },
+    "total_score": 0.92
+  },
+  "accepted_reason_summary": {
+    "product_identity": "pass",
+    "geometry": "pass",
+    "commercial_hero_use": "accepted_scene_hero_not_final_sku_main_image",
+    "material_quality": "pass_with_minor_dark_body_watch",
+    "brand_cleanliness": "pass",
+    "safety": "pass",
+    "pipeline_transfer": "pass"
+  },
+  "watch_items_for_next_gate": [
+    "If the next target is a strict ecommerce SKU main image, use a cleaner background and reduce foreground table dominance.",
+    "Preserve the side control knob and handle geometry; both are important identity anchors.",
+    "Keep the diffuser warm but retain edge readability; avoid making the lower body too featureless in darker scenes.",
+    "Continue blocking logo/text/watermark and extra lantern drift."
+  ],
+  "explicit_non_actions": {
+    "accepted_samples_write_performed": false,
+    "production_candidate_write_performed": false,
+    "archive_write_performed": false,
+    "DailyNote_write_performed": false,
+    "VCP_memory_write_performed": false,
+    "Codex_memory_write_performed": false,
+    "push_tag_release_deploy_performed": false
+  },
+  "next_gate_required": "separate_promotion_archive_or_memory_candidate_gate_only_if_owner_wants_to_advance_this_accepted_candidate"
+}
