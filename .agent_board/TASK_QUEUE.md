@@ -120,7 +120,7 @@ blocked:
   - task: rerun attempt 002
     reason: zero-retry rearm packet consumed attempt 002; a second POST would violate the one-shot budget.
   - task: generate Trial 002 candidate
-    reason: POST is still blocked by Bearer authorization before provider/API/image execution.
+    reason: POST is still blocked by Bearer authorization before plugin/provider/API/image execution.
 remaining:
   - fix Trial 002 POST secretless authorizer path or Bearer bypass in VCPToolBox
   - issue separate attempt 003 rearm packet after the fix

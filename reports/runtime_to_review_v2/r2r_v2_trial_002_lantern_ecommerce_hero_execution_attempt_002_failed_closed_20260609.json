@@ -61,7 +61,7 @@
     "route_http_status_code": 401,
     "sanitized_http_error": "Unauthorized (Bearer <redacted> required)",
     "provider_contact_performed": false,
-    "plugin_call_performed": true,
+    "plugin_call_performed": false,
     "api_call_performed": false,
     "image_generation_performed": false,
     "output_write_performed": false,
@@ -103,7 +103,7 @@
   "side_effect_flags": {
     "route_http_request_performed": true,
     "provider_contact_performed": false,
-    "plugin_call_performed": true,
+    "plugin_call_performed": false,
     "api_call_performed": false,
     "image_generation_performed": false,
     "output_write_performed": false,
@@ -118,6 +118,7 @@
   "not_performed": [
     "no retry",
     "no provider contact",
+    "no plugin call",
     "no API call",
     "no image generation",
     "no output write",

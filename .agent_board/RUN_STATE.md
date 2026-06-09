@@ -169,13 +169,13 @@ result:
   - one dispatch command was run with --max-images 1 and no retry flags
   - route was reachable and returned HTTP 401 Bearer required
   - blocker: runtime_bridge_blocker_unauthorized_bearer_required_http_401
-  - provider/API/image did not run
+  - plugin/provider/API/image did not run
   - output directory and success artifact surfaces were not created
 boundary_checks:
   route_http_request_attempted: true
   route_http_status_code: 401
   provider_contact_performed: false
-  plugin_call_performed: true
+  plugin_call_performed: false
   api_call_performed: false
   image_generation_performed: false
   output_write_performed: false

@@ -102,9 +102,9 @@ function main() {
     !JSON.stringify(receipt).includes("Bearer ey") &&
     !JSON.stringify(receipt).includes("Bearer sk-")
   );
-  check("no_provider_api_image_or_output", () =>
+  check("no_provider_plugin_api_image_or_output", () =>
     receipt.result.provider_contact_performed === false &&
-    receipt.result.plugin_call_performed === true &&
+    receipt.result.plugin_call_performed === false &&
     receipt.result.api_call_performed === false &&
     receipt.result.image_generation_performed === false &&
     receipt.result.output_write_performed === false &&
@@ -136,7 +136,7 @@ function main() {
   check("side_effect_flags_match_failed_closed_boundary", () =>
     receipt.side_effect_flags.route_http_request_performed === true &&
     receipt.side_effect_flags.provider_contact_performed === false &&
-    receipt.side_effect_flags.plugin_call_performed === true &&
+    receipt.side_effect_flags.plugin_call_performed === false &&
     receipt.side_effect_flags.api_call_performed === false &&
     receipt.side_effect_flags.image_generation_performed === false &&
     receipt.side_effect_flags.output_write_performed === false &&
@@ -161,7 +161,7 @@ function main() {
     route_http_request_attempted: true,
     route_http_status_code: receipt.result.route_http_status_code,
     provider_contact_performed: false,
-    plugin_call_performed: true,
+    plugin_call_performed: false,
     api_call_performed: false,
     image_generation_performed: false,
     output_write_performed: false,

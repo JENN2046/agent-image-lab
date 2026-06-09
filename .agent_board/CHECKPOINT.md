@@ -172,7 +172,7 @@ recommended_next: run final local validator chain and inspect diff; execute atte
 phase: runtime_to_review_v2_trial_002_lantern_ecommerce_hero_execution_attempt_002_failed_closed_20260609
 status: completed_failed_closed_bearer_required_no_image_no_retry
 result: TRIAL_002_ATTEMPT_002_FAILED_CLOSED_BEARER_REQUIRED_NO_IMAGE
-summary: Executed Trial 002 attempt 002 exactly once from the separate rearm packet. The route was no longer unreachable, but POST still failed closed with HTTP 401 Bearer required before provider/API/image execution. The attempt is consumed under the zero-retry rule.
+summary: Executed Trial 002 attempt 002 exactly once from the separate rearm packet. The route was no longer unreachable, but POST still failed closed with HTTP 401 Bearer required before plugin/provider/API/image execution. The attempt is consumed under the zero-retry rule.
 changed_refs:
   - reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_execution_attempt_002_failed_closed_20260609.json
   - scripts/validate_runtime_to_review_v2_trial_002_execution_attempt_002_failed_closed.js
@@ -201,6 +201,7 @@ post_attempt_observation:
 not_performed:
   - no retry
   - no provider contact
+  - no plugin call
   - no API call
   - no image generation
   - no output write

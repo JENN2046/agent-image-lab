@@ -160,11 +160,12 @@ result:
   - route was reachable.
   - POST failed with sanitized HTTP 401 Bearer required.
   - blocker: runtime_bridge_blocker_unauthorized_bearer_required_http_401.
-  - provider/API/image did not execute.
+  - plugin/provider/API/image did not execute.
   - output directory, success receipt, artifact record, and review bridge were not created.
 not_performed:
   - no retry
   - no provider contact
+  - no plugin call
   - no API call
   - no image generation
   - no output write
