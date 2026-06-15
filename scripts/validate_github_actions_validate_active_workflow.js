@@ -37,8 +37,9 @@ function main() {
   add("push_to_master_enabled", includes(workflow, "push:") && includes(workflow, "      - master"));
   add("pull_request_to_master_enabled", includes(workflow, "pull_request:") && includes(workflow, "      - master"));
   add("permissions_are_read_only", includes(workflow, "permissions:\n  contents: read"));
-  add("uses_checkout_v4", hasLine(workflow, "uses: actions/checkout@v4"));
-  add("uses_setup_node_v4", hasLine(workflow, "uses: actions/setup-node@v4"));
+  add("uses_checkout_v6_node24_action", hasLine(workflow, "uses: actions/checkout@v6"));
+  add("uses_setup_node_v6_node24_action", hasLine(workflow, "uses: actions/setup-node@v6"));
+  add("does_not_use_deprecated_action_versions", !/actions\/(checkout|setup-node)@v4\b/.test(workflow));
   add("node_version_matches_local_baseline", hasLine(workflow, "node-version: 24.x"));
   add("npm_cache_enabled", hasLine(workflow, "cache: npm"));
   add("uses_lockfile_install", hasLine(workflow, "run: npm ci"));
