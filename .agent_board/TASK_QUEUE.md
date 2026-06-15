@@ -1,3 +1,29 @@
+## Queue - GitHub Actions Validate Active Workflow 2026-06-15
+
+```text
+done:
+  - task: add minimal GitHub Actions validate:active workflow
+    evidence: .github/workflows/validate-active.yml.
+  - task: add local workflow guard validator
+    evidence: scripts/validate_github_actions_validate_active_workflow.js.
+  - task: register validator in npm scripts and validate:active
+    evidence: package.json.
+  - task: register validator in validation manifest
+    evidence: scripts/validation_manifest.json; validator_count now 147.
+  - task: run local validation
+    evidence: validate:github-actions-validate-active-workflow, validate:validation-manifest, validate:active, validate:targeted-plan, and git diff --check passed.
+in_progress:
+  - none
+blocked:
+  - task: push workflow to GitHub and observe first remote CI run
+    reason: remote push requires explicit authorization.
+  - task: external VCPToolBox exact read
+    reason: current instruction did not exactly request the bounded external read action.
+remaining:
+  - review and exact-file commit the CI workflow guard changes
+  - push only after explicit authorization
+```
+
 ## Queue - VCPToolBox Image Execution Broker External Repo Exact Read Receipt Template No-Execute 2026-06-10
 
 ```text

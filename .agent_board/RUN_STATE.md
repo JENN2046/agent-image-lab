@@ -1,3 +1,50 @@
+## Current Run State - GitHub Actions Validate Active Workflow 2026-06-15
+
+```text
+phase: github_actions_validate_active_workflow_20260615
+status: completed_validated_local_ci_workflow_guard
+lane: Green local CI/validation ops; no remote workflow run
+goal: Make future remote checks observable by adding a minimal GitHub Actions workflow for validate:active and a local validator that guards that workflow.
+branch: master
+changed_refs:
+  - .github/workflows/validate-active.yml
+  - scripts/validate_github_actions_validate_active_workflow.js
+  - package.json
+  - scripts/validation_manifest.json
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/VALIDATION_LOG.md
+result:
+  - added push/pull_request workflow for master using checkout@v4, setup-node@v4, Node 24.x, npm ci, and npm run validate:active
+  - constrained workflow permissions to contents: read
+  - added validator checks for no secrets reference, no write permissions, no remote mutation commands, bounded timeout, lockfile install, and validate:active execution
+  - validator manifest count increased to 147
+validation:
+  - node --check scripts/validate_github_actions_validate_active_workflow.js passed
+  - JSON parse check for package.json and scripts/validation_manifest.json passed
+  - npm run validate:github-actions-validate-active-workflow passed, 15 checks
+  - npm run validate:validation-manifest passed with validator_count 147
+  - npm run validate:active passed
+  - npm run validate:targeted-plan passed
+  - git diff --check passed with LF/CRLF warnings only
+boundary_checks:
+  workflow_run_triggered: false
+  remote_write_performed: false
+  push_tag_release_deploy_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  dependency_change_performed: false
+  real_manifest_read_performed: false
+  real_VCPChat_read_performed: false
+  real_VCPToolBox_read_performed: false
+  secret_value_read_performed: false
+next_safe_task: review and exact-file commit the CI workflow guard changes; push requires explicit authorization.
+```
+
 ## Current Run State - VCPToolBox Image Execution Broker External Repo Exact Read Receipt Template No-Execute 2026-06-10
 
 ```text

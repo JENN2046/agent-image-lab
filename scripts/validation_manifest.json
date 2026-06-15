@@ -67,6 +67,25 @@
       ]
     },
     {
+      "id": "github_actions_validate_active_workflow",
+      "command": "node scripts/validate_github_actions_validate_active_workflow.js",
+      "script": "scripts/validate_github_actions_validate_active_workflow.js",
+      "tier": "targeted",
+      "domain": "ci_ops",
+      "status": "active",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        ".github/workflows/validate-active.yml",
+        "scripts/validate_github_actions_validate_active_workflow.js",
+        "scripts/validation_manifest.json",
+        "package.json"
+      ],
+      "required_for": [
+        "github_actions_validate_active_workflow_patch",
+        "ci_validate_active_guard"
+      ]
+    },
+    {
       "id": "closeout_status_summary",
       "command": "node scripts/validate_closeout_status_summary.js",
       "script": "scripts/validate_closeout_status_summary.js",

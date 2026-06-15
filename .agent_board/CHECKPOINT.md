@@ -1,3 +1,44 @@
+## Checkpoint - GitHub Actions Validate Active Workflow 2026-06-15
+
+```text
+status: COMPLETED_VALIDATED
+mode: A4_8 Green local CI/validation ops
+changed_by_this_task:
+  - .github/workflows/validate-active.yml
+  - scripts/validate_github_actions_validate_active_workflow.js
+  - package.json
+  - scripts/validation_manifest.json
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/VALIDATION_LOG.md
+pre_existing_dirty_worktree:
+  - none
+validation:
+  - node --check scripts/validate_github_actions_validate_active_workflow.js: passed
+  - JSON parse check for package.json and scripts/validation_manifest.json: passed
+  - npm run validate:github-actions-validate-active-workflow: passed, 15 checks
+  - npm run validate:validation-manifest: passed, validator_count 147
+  - npm run validate:active: passed
+  - npm run validate:targeted-plan: passed
+  - git diff --check: passed with LF/CRLF warnings only
+boundary:
+  workflow_run_triggered: false
+  remote_write_performed: false
+  push_tag_release_deploy_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  dependency_change_performed: false
+  real_manifest_read_performed: false
+  real_VCPChat_read_performed: false
+  real_VCPToolBox_read_performed: false
+  secret_value_read_performed: false
+recommended_next: review and exact-file commit the CI workflow guard changes; push requires explicit authorization.
+```
+
 ## Checkpoint - VCPToolBox Image Execution Broker External Repo Exact Read Receipt Template No-Execute 2026-06-10
 
 ```text

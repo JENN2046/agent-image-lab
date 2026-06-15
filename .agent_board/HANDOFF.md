@@ -1,3 +1,39 @@
+## Current Handoff Update - GitHub Actions Validate Active Workflow 2026-06-15
+
+```text
+phase: github_actions_validate_active_workflow_20260615
+status: completed_validated_local_ci_workflow_guard
+repository: <repo-root>
+branch: master
+goal: Add a minimal GitHub Actions workflow so future push and pull_request events can run the existing validate:active suite, with a local validator guarding the workflow shape.
+completed:
+  - added .github/workflows/validate-active.yml
+  - added scripts/validate_github_actions_validate_active_workflow.js
+  - added npm script validate:github-actions-validate-active-workflow
+  - inserted the GitHub Actions workflow validator into validate:active
+  - registered github_actions_validate_active_workflow in scripts/validation_manifest.json
+validation_completed:
+  - node --check scripts/validate_github_actions_validate_active_workflow.js passed
+  - JSON parse check for package.json and scripts/validation_manifest.json passed
+  - npm run validate:github-actions-validate-active-workflow passed, 15 checks
+  - npm run validate:validation-manifest passed with validator_count 147
+  - npm run validate:active passed
+  - npm run validate:targeted-plan passed
+  - git diff --check passed with LF/CRLF warnings only
+not_performed:
+  - no GitHub workflow run triggered
+  - no remote write
+  - no push
+  - no provider contact
+  - no plugin call
+  - no API call
+  - no image generation
+  - no real manifest/VCPChat/VCPToolBox read
+  - no secret/env/config/log/private data read
+  - no dependency change
+next_safe_action: review and exact-file commit the CI workflow guard changes, then push only after explicit authorization; external VCPToolBox exact read still requires a separate exact read instruction.
+```
+
 ## Current Handoff Update - VCPToolBox Image Execution Broker External Repo Exact Read Receipt Template No-Execute 2026-06-10
 
 ```text

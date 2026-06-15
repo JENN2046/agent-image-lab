@@ -1,3 +1,39 @@
+## VALIDATION-20260615-GITHUB-ACTIONS-VALIDATE-ACTIVE-WORKFLOW
+
+Task: github_actions_validate_active_workflow_20260615
+
+Commands run:
+  - node --check scripts\validate_github_actions_validate_active_workflow.js
+  - JSON parse check for package.json and scripts/validation_manifest.json
+  - npm run validate:github-actions-validate-active-workflow
+  - npm run validate:validation-manifest
+  - npm run validate:active
+  - npm run validate:targeted-plan
+  - git diff --check
+
+Result: ALL REQUIRED CHECKS PASSED
+
+Findings:
+  - A minimal GitHub Actions workflow now targets push and pull_request events on master.
+  - The workflow runs npm ci and npm run validate:active on Node 24.x.
+  - Workflow permissions are constrained to contents: read.
+  - The local validator checks no secrets reference, no write permissions, no remote mutation commands, bounded timeout, lockfile install, and validate:active execution.
+  - Validator manifest now contains 147 validators.
+
+Side effects:
+  - workflow_run_triggered: false
+  - remote_write_performed: false
+  - push_tag_release_deploy_performed: false
+  - provider_contact_performed: false
+  - plugin_call_performed: false
+  - api_call_performed: false
+  - image_generation_performed: false
+  - dependency_change_performed: false
+  - real_manifest_read_performed: false
+  - real_VCPChat_read_performed: false
+  - real_VCPToolBox_read_performed: false
+  - secret_value_read_performed: false
+
 ## VALIDATION-20260610-VCPTBX-IMAGE-EXECUTION-BROKER-EXTERNAL-REPO-EXACT-READ-RECEIPT-TEMPLATE-NO-EXECUTE
 
 Task: vcptoolbox_image_execution_broker_external_repo_exact_read_receipt_template_no_execute_20260610
