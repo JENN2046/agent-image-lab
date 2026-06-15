@@ -1,0 +1,100 @@
+{
+  "schema": "runtime_to_review_v2_review_feedback_prompt_patch_preview.v1",
+  "preview_id": "r2r_v2_review_feedback_prompt_patch_preview_20260616",
+  "created_at": "2026-06-16T00:00:00+08:00",
+  "status": "prepared_metadata_only_prompt_patch_preview",
+  "purpose": "Turn accepted Trial 002 review watch items into a concrete next prompt patch preview before any new live probe.",
+  "source_refs": {
+    "feedback_routing_fixture_ref": "reports/runtime_to_review_v2/r2r_v2_review_feedback_routing_min_fixture_20260615.json",
+    "source_prompt_package_ref": "prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v2.yaml",
+    "source_review_decision_ref": "reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_review_decision_accepted_candidate_20260609.json",
+    "source_review_criteria_ref": "reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_review_criteria_no_execute_20260608.json"
+  },
+  "decision_context": {
+    "trial_id": "r2r_v2_trial_002_lantern_ecommerce_hero",
+    "source_review_decision": "accepted_candidate",
+    "review_outcome": "pass_with_warnings",
+    "commercial_delivery_ready": false,
+    "route_action": "continue_same_product_family_with_tightened_prompt_constraints",
+    "shot_decision": "keep_scene_hero_or_split_strict_sku_main_image_if_delivery_target_changes",
+    "new_provider_run_allowed_now": false
+  },
+  "prompt_patch_preview": {
+    "target_prompt_package_if_later_approved": "prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v3.yaml",
+    "write_target_created_now": false,
+    "patch_mode": "preview_only_no_prompt_file_write",
+    "preserve": [
+      "single modern rechargeable LED camping lantern",
+      "full handle, diffuser, side control, body, and base visible",
+      "warm frosted diffuser with readable edges",
+      "premium outdoor electronics feel",
+      "no readable brand text, logo, watermark, people, hands, fire, smoke, or extra lanterns"
+    ],
+    "tighten": [
+      "for strict ecommerce SKU main image, use a cleaner background with less scene detail",
+      "reduce foreground table dominance and keep the surface secondary",
+      "keep lower body detail readable in darker blue-hour scenes",
+      "make the side control knob and attached handle geometry explicit identity anchors",
+      "carry review watch items into the next review criteria before any live probe"
+    ],
+    "avoid": [
+      "foreground surface becoming the visual subject",
+      "featureless dark lower body",
+      "losing side control knob or handle geometry",
+      "strict SKU request accidentally reusing the wider scene hero framing",
+      "new provider run before prompt patch preview review"
+    ]
+  },
+  "proposed_prompt_delta_preview": {
+    "visual_intent_delta": [
+      "If the next target is strict ecommerce SKU main image, keep the lantern as the same premium product but simplify the background from lifestyle campsite support to a cleaner product-first setting.",
+      "Keep the scene hero route alive separately; do not overwrite it with SKU requirements unless the delivery target changes."
+    ],
+    "composition_delta": [
+      "Reduce foreground table dominance; the surface should ground the product but stay visually quiet.",
+      "Keep the product larger than the surface reflection and make the full handle, diffuser, body, side control, and base readable."
+    ],
+    "material_delta": [
+      "Preserve warm frosted diffuser glow while retaining lower body detail.",
+      "The dark body must read as premium outdoor electronics, not a featureless silhouette."
+    ],
+    "negative_prompt_additions": [
+      "foreground table dominance",
+      "surface reflection becoming the main subject",
+      "featureless black lower body",
+      "missing side control knob",
+      "handle geometry lost or cropped",
+      "clean SKU request with busy campsite background"
+    ]
+  },
+  "review_before_write": {
+    "human_review_required_before_prompt_package_write": true,
+    "formal_prompt_package_write_allowed_now": false,
+    "future_prompt_package_validator_required": true,
+    "future_review_criteria_update_required": true,
+    "future_live_probe_requires_separate_exact_authorization": true
+  },
+  "no_execution_guard": {
+    "metadata_only": true,
+    "route_http_request_performed": false,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "output_write_performed": false,
+    "prompt_package_write_performed": false,
+    "image_binary_read_performed": false,
+    "image_binary_copy_or_move_performed": false,
+    "accepted_samples_write_performed": false,
+    "production_candidate_write_performed": false,
+    "DailyNote_write_performed": false,
+    "VCP_memory_write_performed": false,
+    "Codex_memory_write_performed": false,
+    "secret_value_read_performed": false,
+    "env_file_content_read_performed": false,
+    "raw_private_data_printed": false,
+    "push_tag_release_deploy_performed": false,
+    "destructive_action_performed": false
+  },
+  "recommended_next": "review_prompt_patch_preview_then_create_formal_v3_prompt_package_only_if_approved"
+}

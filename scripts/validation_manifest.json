@@ -585,6 +585,52 @@
       ]
     },
     {
+      "id": "runtime_to_review_feedback_routing",
+      "command": "npm run validate:runtime-to-review-feedback-routing",
+      "script": "scripts/validate_runtime_to_review_v2_review_feedback_routing_fixture.js",
+      "tier": "targeted",
+      "domain": "runtime_to_review",
+      "status": "active",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "reports/runtime_to_review_v2/r2r_v2_review_feedback_routing_min_fixture_20260615.json",
+        "reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_review_decision_accepted_candidate_20260609.json",
+        "reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_review_criteria_no_execute_20260608.json",
+        "docs/VISUAL_EVAL_RUBRIC.md",
+        "CURRENT_STATE.md",
+        "scripts/validate_runtime_to_review_v2_review_feedback_routing_fixture.js",
+        "package.json",
+        "scripts/validation_manifest.json"
+      ],
+      "required_for": [
+        "runtime_to_review_feedback_routing_fixture",
+        "visual_eval_to_next_prompt_routing_patch"
+      ]
+    },
+    {
+      "id": "runtime_to_review_feedback_prompt_patch_preview",
+      "command": "npm run validate:runtime-to-review-feedback-prompt-preview",
+      "script": "scripts/validate_runtime_to_review_v2_review_feedback_prompt_patch_preview.js",
+      "tier": "targeted",
+      "domain": "runtime_to_review",
+      "status": "active",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "reports/runtime_to_review_v2/r2r_v2_review_feedback_prompt_patch_preview_20260616.json",
+        "reports/runtime_to_review_v2/r2r_v2_review_feedback_routing_min_fixture_20260615.json",
+        "prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v2.yaml",
+        "reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_review_decision_accepted_candidate_20260609.json",
+        "reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_review_criteria_no_execute_20260608.json",
+        "scripts/validate_runtime_to_review_v2_review_feedback_prompt_patch_preview.js",
+        "package.json",
+        "scripts/validation_manifest.json"
+      ],
+      "required_for": [
+        "runtime_to_review_feedback_prompt_patch_preview",
+        "visual_eval_to_prompt_patch_preview"
+      ]
+    },
+    {
       "id": "runtime_to_review_trial_002_memory_candidate_no_write_mapping",
       "command": "npm run validate:runtime-to-review-trial-002-memory-candidate-no-write",
       "script": "scripts/validate_runtime_to_review_v2_trial_002_memory_candidate_no_write_mapping_gate.js",

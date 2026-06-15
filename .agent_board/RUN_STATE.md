@@ -1,3 +1,99 @@
+## Current Run State - Runtime To Review V2 Review Feedback Prompt Patch Preview 2026-06-16
+
+```text
+phase: runtime_to_review_v2_review_feedback_prompt_patch_preview_20260616
+status: completed_validated_local_green_preview
+lane: Green local metadata preview and validator; no prompt package write, runtime execution, image read, memory write, or external read
+goal: Convert accepted Trial 002 review feedback into a concrete prompt patch preview before any new provider run.
+changed_refs:
+  - reports/runtime_to_review_v2/r2r_v2_review_feedback_prompt_patch_preview_20260616.json
+  - scripts/validate_runtime_to_review_v2_review_feedback_prompt_patch_preview.js
+  - package.json
+  - scripts/validation_manifest.json
+  - docs/RUNTIME_TO_PRODUCTION_LANDING_ROADMAP.md
+  - CURRENT_STATE.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+result:
+  - Trial 002 watch items now have a concrete v3 prompt delta preview
+  - the preview preserves the accepted lantern identity while tightening cleaner background, foreground dominance, lower body readability, side control knob, and handle geometry
+  - formal v3 prompt package creation remains a separate review-gated Green task
+  - live provider/image probe remains separately gated
+  - validation manifest count is now 150
+validation:
+  - node --check scripts/validate_runtime_to_review_v2_review_feedback_prompt_patch_preview.js passed
+  - npm run validate:runtime-to-review-feedback-prompt-preview passed, 11 checks
+  - npm run validate:validation-manifest passed, validator_count 150
+  - npm run validate:runtime-to-review-feedback-routing passed, 12 checks
+  - node scripts/validate_agent_board_state.js passed
+  - npm run validate:active passed
+  - git diff --check passed with LF/CRLF warnings only
+  - added-lines and untracked-file boundary scans passed
+boundary_checks:
+  prompt_package_write_performed: false
+  route_http_request_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  output_write_performed: false
+  image_binary_read_performed: false
+  accepted_samples_write_performed: false
+  production_candidate_write_performed: false
+  memory_write_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  secret_value_read_performed: false
+next_safe_task: review prompt patch preview; if accepted, create formal v3 prompt package only as a separate Green task.
+```
+
+## Current Run State - Runtime To Review V2 Review Feedback Routing 2026-06-15
+
+```text
+phase: runtime_to_review_v2_review_feedback_routing_20260615
+status: completed_validated_local_green_fixture
+lane: Green local metadata fixture and validator; no runtime execution or external read
+goal: Turn review evidence into repeatable next prompt / shot routing before any new provider run.
+changed_refs:
+  - reports/runtime_to_review_v2/r2r_v2_review_feedback_routing_min_fixture_20260615.json
+  - scripts/validate_runtime_to_review_v2_review_feedback_routing_fixture.js
+  - package.json
+  - scripts/validation_manifest.json
+  - docs/RUNTIME_TO_PRODUCTION_LANDING_ROADMAP.md
+  - CURRENT_STATE.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+result:
+  - accepted Trial 002 watch items now route to concrete preserve/tighten/avoid prompt deltas
+  - rejected fixture routes stop or switch the shot plan before any retry
+  - patch fixture keeps the route alive but requires a prompt patch preview
+  - validation manifest count is now 149
+validation:
+  - node --check scripts/validate_runtime_to_review_v2_review_feedback_routing_fixture.js passed
+  - npm run validate:runtime-to-review-feedback-routing passed, 12 checks
+  - npm run validate:validation-manifest passed, validator_count 149
+  - npm run recommend:validation:next-commands passed
+boundary_checks:
+  route_http_request_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  output_write_performed: false
+  image_binary_read_performed: false
+  accepted_samples_write_performed: false
+  production_candidate_write_performed: false
+  memory_write_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  secret_value_read_performed: false
+next_safe_task: draft next prompt patch preview from feedback routing; keep live probe behind exact authorization.
+```
+
 ## Current Run State - Current State And Command Tiers 2026-06-15
 
 ```text

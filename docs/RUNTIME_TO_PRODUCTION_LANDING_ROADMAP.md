@@ -43,6 +43,8 @@ production last
 - `review_bridge_runtime_v1_readonly` 已接到 runtime v1 bridge metadata entry：它输出 metadata-only readonly review session，显示 run id、prompt ref、provider route、model sent/required、dimensions/hash、artifact/audit refs，并拒绝缺字段、failed result、secret/production/memory side effect、image binary read。
 - `review_decision_record_v1` 已接到 runtime v1 readonly session 和 retry 007 historical review note：它固定 `accept_sample_draft`、`reject_sample_draft`、`request_rework`、`provider_link_success_evidence_only`、`invalid_artifact` 五个 decision enum，只写 metadata-only local decision record，不复制图、不写 production、不写 memory。
 - `review_draft_registry_v1` 已接到 `review_decision_record.v1`：`accept_sample_draft` 生成 accepted draft，`reject_sample_draft` / `invalid_artifact` 生成 rejected draft，`request_rework` 生成 rework draft；所有 draft 都保持 `production_candidate: false`，retry 007 的 `provider_link_success_evidence_only` 只能生成 `no_registry_draft`。
+- `runtime_to_review_v2_review_feedback_routing` 已补一个 Green metadata-only fixture：它把 Trial 002 accepted review 的 watch items 和 `docs/VISUAL_EVAL_RUBRIC.md` 维度转成下一轮 prompt / shot routing，同时用 synthetic reject / patch cases 证明 rejected 会 stop or switch shot、patch 会收紧 prompt；它不执行 provider、不读图、不写 memory 或 production。
+- `runtime_to_review_v2_review_feedback_prompt_patch_preview` 已补一个 Green metadata-only preview：它把 Trial 002 accepted review 的 watch items 转成 v3 prompt package 候选 delta，明确 cleaner SKU 背景、降低前景桌面主导、保留 side control / handle 几何和 lower body detail；它不创建正式 v3 prompt 文件、不执行 provider、不读图、不写 memory 或 production。
 - `run_runtime_to_review_v1_fixture_smoke_flow.js` 已建立 no-provider fixture smoke flow：prompt fixture -> runtime v1 -> artifact record -> audit receipt -> review bridge entry -> readonly review session -> `request_rework` decision record -> rework draft registry metadata，全程不写文件、不读图像二进制、不触发 provider/plugin/API/image/memory/production。
 - Phase 7 validation split 已建立三层命令：`validate:runtime-to-review-default-local` 跑无 provider 默认本地链路；`validate:runtime-to-review-evidence` 校验已有 receipt/artifact/review evidence；`validate:runtime-to-review-guarded-live-probe-gate` 只校验 live probe 门禁不会默认执行。显式 live runner 为 `runtime-to-review:guarded-live-probe`，没有 provider delegate module 和精确确认短语时会 fail-closed。
 - `adapters/runtime/native_doubao_runtime_v1_provider_delegate.js` 已建立 NativeDoubao runtime v1 provider delegate module：它验证 `runtime_v1_provider_delegate_request.v1`，只映射到 secretless controlled bridge path，默认没有 bound owner runtime 时 fail-closed，不走 legacy `.env.local` secret-reading path。`validate:runtime-to-review-native-doubao-delegate` 用 fake runner 验证 provider-success shape 可被 runtime v1 接收，同时证明 validator 不执行 live probe。
@@ -221,8 +223,9 @@ production last
 1. Keep default local validation no-provider and repeatable.
 2. Run and review `validate:runtime-to-review-real-bound-owner-runtime-local-readiness` before relying on the real-bound owner runtime module.
 3. Run targeted real-bound owner-runtime validation after the owner-root sanitize fix.
-4. Execute `runtime-to-review:guarded-live-probe` only with `RUNTIME_TO_REVIEW_V1_ONE_PROVIDER_ONE_IMAGE`, the real bound owner runtime module, an explicit owner-provided VCPToolBox root, one provider/plugin/API call, one image max, and receipt/status sync.
-5. Start production workflow only after provider output can enter artifact / review / audit and human decision records safely.
+4. Review `runtime_to_review_v2_review_feedback_prompt_patch_preview`; create the formal v3 prompt package only after that preview is accepted.
+5. Execute `runtime-to-review:guarded-live-probe` only with `RUNTIME_TO_REVIEW_V1_ONE_PROVIDER_ONE_IMAGE`, the real bound owner runtime module, an explicit owner-provided VCPToolBox root, one provider/plugin/API call, one image max, and receipt/status sync.
+6. Start production workflow only after provider output can enter artifact / review / audit and human decision records safely.
 
 ## Anti-Drift Rules
 

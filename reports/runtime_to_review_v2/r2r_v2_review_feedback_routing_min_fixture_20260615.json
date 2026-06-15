@@ -1,0 +1,180 @@
+{
+  "schema": "runtime_to_review_v2_review_feedback_routing_fixture.v1",
+  "fixture_id": "r2r_v2_review_feedback_routing_min_fixture_20260615",
+  "created_at": "2026-06-15T00:00:00+08:00",
+  "status": "prepared_metadata_only_green_fixture",
+  "purpose": "Prove that review outcomes change the next prompt or shot routing before any new provider run.",
+  "source_refs": {
+    "visual_eval_rubric_ref": "docs/VISUAL_EVAL_RUBRIC.md",
+    "current_state_ref": "CURRENT_STATE.md",
+    "trial_002_review_decision_ref": "reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_review_decision_accepted_candidate_20260609.json",
+    "trial_002_review_criteria_ref": "reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_review_criteria_no_execute_20260608.json",
+    "trial_002_prompt_package_ref": "prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v2.yaml"
+  },
+  "routing_policy": {
+    "metadata_only": true,
+    "next_prompt_or_shot_decision_required_before_new_live_probe": true,
+    "provider_execution_allowed_now": false,
+    "image_generation_allowed_now": false,
+    "accepted_samples_write_allowed_now": false,
+    "production_candidate_write_allowed_now": false,
+    "memory_write_allowed_now": false,
+    "daily_note_write_allowed_now": false
+  },
+  "routing_cases": [
+    {
+      "case_id": "trial_002_accepted_candidate_watch_items_to_next_prompt",
+      "source_type": "tracked_review_decision",
+      "source_decision_ref": "reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_review_decision_accepted_candidate_20260609.json",
+      "review_decision": "accepted_candidate",
+      "review_outcome": "pass_with_warnings",
+      "commercial_delivery_ready": false,
+      "rubric_dimensions_used": [
+        "subject_integrity",
+        "composition",
+        "lighting",
+        "material_realism",
+        "commercial_usability",
+        "brand_or_style_fit",
+        "ai_artifact_risk",
+        "production_readiness",
+        "memory_suitability"
+      ],
+      "next_route": {
+        "route_action": "continue_same_product_family_with_tightened_prompt_constraints",
+        "shot_decision": "keep_scene_hero_or_split_strict_sku_main_image_if_delivery_target_changes",
+        "execution_allowed_now": false,
+        "prompt_delta": {
+          "preserve": [
+            "single modern rechargeable LED camping lantern",
+            "full handle, diffuser, side control, body, and base visible",
+            "warm frosted diffuser with readable edges",
+            "no readable brand text, logo, watermark, people, hands, fire, smoke, or extra lanterns"
+          ],
+          "tighten": [
+            "if the next target is strict ecommerce SKU main image, use a cleaner background",
+            "reduce foreground table dominance",
+            "keep lower body detail readable in darker scenes"
+          ],
+          "avoid": [
+            "foreground surface becoming the visual subject",
+            "featureless dark lower body",
+            "losing side control knob or handle geometry"
+          ]
+        },
+        "review_watch_items_carried_forward": [
+          "strict SKU main image may need a cleaner background",
+          "foreground table dominance should be reduced",
+          "side control knob and handle geometry must be preserved",
+          "lower body detail must remain readable"
+        ]
+      }
+    },
+    {
+      "case_id": "synthetic_rejected_identity_drift_to_shot_reset",
+      "source_type": "synthetic_negative_fixture",
+      "review_decision": "rejected_candidate",
+      "review_outcome": "reject",
+      "commercial_delivery_ready": false,
+      "failure_tags": [
+        "wrong_product_identity",
+        "geometry_drift",
+        "brand_or_text_contamination"
+      ],
+      "rubric_dimensions_used": [
+        "subject_integrity",
+        "composition",
+        "brand_or_style_fit",
+        "ai_artifact_risk",
+        "production_readiness"
+      ],
+      "next_route": {
+        "route_action": "stop_current_route_and_open_new_shot_plan",
+        "shot_decision": "reset_shot_plan_before_any_new_provider_run",
+        "execution_allowed_now": false,
+        "prompt_delta": {
+          "preserve": [],
+          "tighten": [
+            "rewrite subject identity before retry",
+            "lock single-product geometry before scene styling",
+            "block text, logo, watermark, and extra product drift"
+          ],
+          "avoid": [
+            "minor prompt patch without identity repair",
+            "reusing the rejected shot as an accepted-sample seed",
+            "promoting to memory or production from rejected evidence"
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "synthetic_patch_material_or_composition_to_prompt_patch",
+      "source_type": "synthetic_patch_fixture",
+      "review_decision": "needs_prompt_or_binding_revision",
+      "review_outcome": "patch",
+      "commercial_delivery_ready": false,
+      "failure_tags": [
+        "material_reading_borderline",
+        "composition_fixable"
+      ],
+      "rubric_dimensions_used": [
+        "composition",
+        "lighting",
+        "material_realism",
+        "commercial_usability",
+        "production_readiness"
+      ],
+      "next_route": {
+        "route_action": "patch_prompt_constraints_without_opening_new_product_route",
+        "shot_decision": "keep_product_route_change_prompt_and_review_criteria",
+        "execution_allowed_now": false,
+        "prompt_delta": {
+          "preserve": [
+            "same product family",
+            "same square ecommerce hero intent"
+          ],
+          "tighten": [
+            "make material character explicit",
+            "rebalance subject scale and negative space",
+            "carry watch item tags into next review criteria"
+          ],
+          "avoid": [
+            "route reset when the weakness is bounded",
+            "new provider run before prompt patch preview is reviewed"
+          ]
+        }
+      }
+    }
+  ],
+  "aggregate": {
+    "case_count": 3,
+    "tracked_accepted_case_count": 1,
+    "synthetic_negative_case_count": 2,
+    "accepted_routes_change_prompt_or_shot": true,
+    "rejected_routes_stop_or_switch_shot": true,
+    "patch_routes_require_prompt_patch": true,
+    "no_case_allows_execution_now": true,
+    "no_case_allows_memory_or_production_now": true
+  },
+  "side_effect_flags": {
+    "route_http_request_performed": false,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "output_write_performed": false,
+    "image_binary_read_performed": false,
+    "image_binary_copy_or_move_performed": false,
+    "accepted_samples_write_performed": false,
+    "production_candidate_write_performed": false,
+    "DailyNote_write_performed": false,
+    "VCP_memory_write_performed": false,
+    "Codex_memory_write_performed": false,
+    "secret_value_read_performed": false,
+    "env_file_content_read_performed": false,
+    "raw_private_data_printed": false,
+    "push_tag_release_deploy_performed": false,
+    "destructive_action_performed": false
+  },
+  "recommended_next": "draft_next_prompt_patch_preview_from_review_feedback_routing_before_any_new_live_probe"
+}

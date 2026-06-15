@@ -1,3 +1,70 @@
+## Current Handoff Update - Runtime To Review V2 Review Feedback Prompt Patch Preview 2026-06-16
+
+```text
+phase: runtime_to_review_v2_review_feedback_prompt_patch_preview_20260616
+status: completed_validated_local_green_preview
+repository: <repo-root>
+branch: master
+goal: Advance the runtime product loop by turning Trial 002 accepted review watch items into a concrete metadata-only v3 prompt patch preview before any new live probe.
+completed:
+  - added a metadata-only prompt patch preview for the next portable LED lantern prompt package candidate
+  - carried Trial 002 watch items into preserve / tighten / avoid prompt deltas
+  - kept the scene hero route separate from a possible strict SKU target
+  - added a targeted validator and npm/manifest registration
+  - updated runtime roadmap and current state pointers
+validation_completed:
+  - node --check scripts/validate_runtime_to_review_v2_review_feedback_prompt_patch_preview.js passed
+  - npm run validate:runtime-to-review-feedback-prompt-preview passed, 11 checks
+  - npm run validate:validation-manifest passed, validator_count 150
+  - npm run validate:runtime-to-review-feedback-routing passed, 12 checks
+  - node scripts/validate_agent_board_state.js passed
+  - npm run validate:active passed
+  - git diff --check passed with LF/CRLF warnings only
+  - added-lines and untracked-file boundary scans passed
+not_performed:
+  - no formal v3 prompt package write
+  - no provider contact
+  - no plugin call
+  - no API call
+  - no image generation
+  - no image binary read or copy
+  - no secret/env/config raw value read
+  - no real manifest/VCPChat/VCPToolBox read
+  - no memory write
+  - no production or accepted_samples write
+  - no dependency change
+  - no commit, push, tag, release, or deploy
+next_safe_action: review the prompt patch preview; if accepted, create the formal v3 prompt package as a separate Green task, while any live probe remains behind exact authorization.
+```
+
+## Current Handoff Update - Runtime To Review V2 Review Feedback Routing 2026-06-15
+
+```text
+phase: runtime_to_review_v2_review_feedback_routing_20260615
+status: completed_validated_local_green_fixture
+repository: <repo-root>
+branch: master
+goal: Pick and complete a small runtime roadmap task that advances the product loop by proving review feedback changes the next prompt or shot decision before another live run.
+completed:
+  - added a metadata-only review feedback routing fixture with accepted, rejected, and patch cases
+  - connected the tracked Trial 002 accepted review watch items to next prompt / shot routing
+  - added a targeted validator and npm/manifest registration
+  - updated runtime roadmap and current state pointers
+not_performed:
+  - no provider contact
+  - no plugin call
+  - no API call
+  - no image generation
+  - no image binary read or copy
+  - no secret/env/config raw value read
+  - no real manifest/VCPChat/VCPToolBox read
+  - no memory write
+  - no production or accepted_samples write
+  - no dependency change
+  - no commit, push, tag, release, or deploy
+next_safe_action: draft the next prompt patch preview from the review feedback routing fixture before any new live probe.
+```
+
 ## Current Handoff Update - Current State And Command Tiers 2026-06-15
 
 ```text

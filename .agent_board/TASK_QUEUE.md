@@ -1,3 +1,59 @@
+## Queue - Runtime To Review V2 Review Feedback Prompt Patch Preview 2026-06-16
+
+```text
+done:
+  - task: select the next Green product-loop step after feedback routing
+    evidence: selected metadata-only prompt patch preview instead of provider/live/memory work.
+  - task: create prompt patch preview
+    evidence: reports/runtime_to_review_v2/r2r_v2_review_feedback_prompt_patch_preview_20260616.json.
+  - task: add targeted validator and manifest registration
+    evidence: scripts/validate_runtime_to_review_v2_review_feedback_prompt_patch_preview.js; package.json; scripts/validation_manifest.json.
+  - task: update current roadmap/status pointers
+    evidence: docs/RUNTIME_TO_PRODUCTION_LANDING_ROADMAP.md; CURRENT_STATE.md.
+in_progress:
+  - none
+blocked:
+  - task: formal v3 prompt package write
+    reason: this task only prepared a preview; write the prompt package only after the preview is accepted.
+  - task: live provider/image probe
+    reason: this Green preview does not authorize route/provider/plugin/API/image execution.
+  - task: accepted_samples, production, archive, or memory write
+    reason: prompt patch preview only prepares the next prompt package decision; promotion and memory remain separate gates.
+  - task: push
+    reason: remote write requires explicit authorization.
+remaining:
+  - run final local validation
+  - review exact diff
+  - optionally exact-file stage/commit only after separate request
+```
+
+## Queue - Runtime To Review V2 Review Feedback Routing 2026-06-15
+
+```text
+done:
+  - task: choose a small runtime-roadmap task that advances the product loop
+    evidence: selected Green review feedback routing rather than provider/live/memory work.
+  - task: create feedback routing fixture
+    evidence: reports/runtime_to_review_v2/r2r_v2_review_feedback_routing_min_fixture_20260615.json.
+  - task: add targeted validator and manifest registration
+    evidence: scripts/validate_runtime_to_review_v2_review_feedback_routing_fixture.js; package.json; scripts/validation_manifest.json.
+  - task: update current roadmap/status pointers
+    evidence: docs/RUNTIME_TO_PRODUCTION_LANDING_ROADMAP.md; CURRENT_STATE.md.
+in_progress:
+  - none
+blocked:
+  - task: live provider/image probe
+    reason: this Green fixture does not authorize route/provider/plugin/API/image execution.
+  - task: accepted_samples, production, archive, or memory write
+    reason: feedback routing only decides next prompt/shot; promotion and memory remain separate gates.
+  - task: push
+    reason: remote write requires explicit authorization.
+remaining:
+  - run final local validation
+  - review exact diff
+  - optionally exact-file stage/commit only after separate request
+```
+
 ## Queue - Current State And Command Tiers 2026-06-15
 
 ```text

@@ -1,3 +1,84 @@
+## Checkpoint - Runtime To Review V2 Review Feedback Prompt Patch Preview 2026-06-16
+
+```text
+status: COMPLETED_VALIDATED
+mode: A4_8 Green local prompt patch preview
+changed_by_this_task:
+  - reports/runtime_to_review_v2/r2r_v2_review_feedback_prompt_patch_preview_20260616.json
+  - scripts/validate_runtime_to_review_v2_review_feedback_prompt_patch_preview.js
+  - package.json
+  - scripts/validation_manifest.json
+  - docs/RUNTIME_TO_PRODUCTION_LANDING_ROADMAP.md
+  - CURRENT_STATE.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+validation:
+  - node --check scripts/validate_runtime_to_review_v2_review_feedback_prompt_patch_preview.js: passed
+  - npm run validate:runtime-to-review-feedback-prompt-preview: passed, 11 checks
+  - npm run validate:validation-manifest: passed, validator_count 150
+  - npm run validate:runtime-to-review-feedback-routing: passed, 12 checks
+  - node scripts/validate_agent_board_state.js: passed
+  - npm run validate:active: passed
+  - git diff --check: passed with LF/CRLF warnings only
+  - added-lines and untracked-file boundary scans: passed
+boundary:
+  prompt_package_write_performed: false
+  route_http_request_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  output_write_performed: false
+  image_binary_read_performed: false
+  accepted_samples_write_performed: false
+  production_candidate_write_performed: false
+  memory_write_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  secret_value_read_performed: false
+recommended_next: review the prompt patch preview; if accepted, create the formal v3 prompt package only as a separate Green task.
+```
+
+## Checkpoint - Runtime To Review V2 Review Feedback Routing 2026-06-15
+
+```text
+status: COMPLETED_VALIDATED
+mode: A4_8 Green local review feedback routing fixture
+changed_by_this_task:
+  - reports/runtime_to_review_v2/r2r_v2_review_feedback_routing_min_fixture_20260615.json
+  - scripts/validate_runtime_to_review_v2_review_feedback_routing_fixture.js
+  - package.json
+  - scripts/validation_manifest.json
+  - docs/RUNTIME_TO_PRODUCTION_LANDING_ROADMAP.md
+  - CURRENT_STATE.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+validation:
+  - node --check scripts/validate_runtime_to_review_v2_review_feedback_routing_fixture.js: passed
+  - npm run validate:runtime-to-review-feedback-routing: passed, 12 checks
+  - npm run validate:validation-manifest: passed, validator_count 149
+  - npm run recommend:validation:next-commands: passed
+boundary:
+  route_http_request_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  output_write_performed: false
+  image_binary_read_performed: false
+  accepted_samples_write_performed: false
+  production_candidate_write_performed: false
+  memory_write_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  secret_value_read_performed: false
+recommended_next: draft the next prompt patch preview from feedback routing before any new live probe.
+```
+
 ## Checkpoint - Current State And Command Tiers 2026-06-15
 
 ```text
