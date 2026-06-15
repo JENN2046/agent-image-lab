@@ -1,3 +1,35 @@
+## Checkpoint - Current State And Command Tiers 2026-06-15
+
+```text
+status: COMPLETED_VALIDATED
+mode: A4_8 Green local orientation docs
+changed_by_this_task:
+  - CURRENT_STATE.md
+  - docs/COMMAND_TIERS.md
+  - README.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/VALIDATION_LOG.md
+validation:
+  - node scripts/validate_agent_board_state.js: passed
+  - npm run validate:active: passed
+  - git diff --check: passed with LF/CRLF warnings only
+boundary:
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  secret_value_read_performed: false
+  real_manifest_read_performed: false
+  real_VCPChat_read_performed: false
+  real_VCPToolBox_read_performed: false
+  memory_write_performed: false
+  production_write_performed: false
+recommended_next: complete exact-file local review and commit for the current eight-path package; do not expand into provider, memory, production, push, or VCP adapter implementation.
+```
+
 ## Checkpoint - Runtime To Review V1 Real Bound Owner Runtime Owner Root Sanitize 2026-06-15
 
 ```text

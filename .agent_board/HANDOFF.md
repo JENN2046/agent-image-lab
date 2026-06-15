@@ -1,3 +1,29 @@
+## Current Handoff Update - Current State And Command Tiers 2026-06-15
+
+```text
+phase: current_state_and_command_tiers_20260615
+status: completed_validated_local_docs
+repository: <repo-root>
+branch: master
+goal: Convert the latest product-pain review into a small local orientation package that reduces false readiness and command-risk confusion.
+completed:
+  - added CURRENT_STATE.md as a ready-for-what orientation surface
+  - added docs/COMMAND_TIERS.md to classify Green, Amber, and Red command families before execution
+  - added README pointer clarifying that local_full_autopilot_ready does not authorize provider/image/memory/production/push/tag/release/deploy
+not_performed:
+  - no provider contact
+  - no plugin call
+  - no API call
+  - no image generation
+  - no secret/env/config raw value read
+  - no real manifest/VCPChat/VCPToolBox read
+  - no memory write
+  - no production write
+  - no dependency change
+  - no push, tag, release, or deploy
+next_safe_action: exact-file local review and commit are allowed only for the current eight-path package; push remains separately gated.
+```
+
 ## Current Handoff Update - Runtime To Review V1 Real Bound Owner Runtime Owner Root Sanitize 2026-06-15
 
 ```text

@@ -1,3 +1,28 @@
+## Queue - Current State And Command Tiers 2026-06-15
+
+```text
+done:
+  - task: add current state orientation
+    evidence: CURRENT_STATE.md.
+  - task: add command tier orientation
+    evidence: docs/COMMAND_TIERS.md.
+  - task: add README ready-for-what pointer
+    evidence: README.md.
+in_progress:
+  - none
+blocked:
+  - task: live provider/image execution
+    reason: this orientation task does not authorize provider/plugin/API/image actions.
+  - task: memory write
+    reason: memory write remains behind a separate gate.
+  - task: push
+    reason: current instruction authorizes exact-file local commit only, not remote write.
+commit_followup:
+  - exact-file review and local commit are authorized only for the current eight-path package.
+remaining:
+  - push only after separate remote authorization
+```
+
 ## Queue - Runtime To Review V1 Real Bound Owner Runtime Owner Root Sanitize 2026-06-15
 
 ```text

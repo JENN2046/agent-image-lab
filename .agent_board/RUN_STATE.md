@@ -1,3 +1,41 @@
+## Current Run State - Current State And Command Tiers 2026-06-15
+
+```text
+phase: current_state_and_command_tiers_20260615
+status: completed_validated_local_docs
+lane: Green local documentation and orientation; no runtime or external read
+goal: Reduce operator confusion around ready-for-what language and command risk tiers after the real-bound owner runtime and CI updates.
+changed_refs:
+  - CURRENT_STATE.md
+  - docs/COMMAND_TIERS.md
+  - README.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/VALIDATION_LOG.md
+result:
+  - current-state orientation separates local governance readiness from real provider, production, and memory readiness
+  - command tiers classify Green validation, bounded Amber packets, and Red/default-stop commands
+  - README now points to the orientation docs before the long status stream
+validation:
+  - node scripts/validate_agent_board_state.js passed
+  - npm run validate:active passed
+  - git diff --check passed with LF/CRLF warnings only
+boundary_checks:
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  secret_value_read_performed: false
+  real_manifest_read_performed: false
+  real_VCPChat_read_performed: false
+  real_VCPToolBox_read_performed: false
+  memory_write_performed: false
+  production_write_performed: false
+next_safe_task: complete exact-file local review and commit for the current eight-path package; push remains separately gated.
+```
+
 ## Current Run State - Runtime To Review V1 Real Bound Owner Runtime Owner Root Sanitize 2026-06-15
 
 ```text

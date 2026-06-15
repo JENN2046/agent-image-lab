@@ -1,3 +1,31 @@
+## VALIDATION-20260615-CURRENT-STATE-AND-COMMAND-TIERS
+
+Task: current_state_and_command_tiers_20260615
+
+Commands run:
+  - node scripts\validate_agent_board_state.js
+  - npm run validate:active
+  - git diff --check
+
+Result: ALL REQUIRED CHECKS PASSED
+
+Findings:
+  - CURRENT_STATE.md added as a ready-for-what orientation surface.
+  - docs/COMMAND_TIERS.md added as command-risk classification guidance.
+  - README now points to both surfaces and clarifies local_full_autopilot_ready scope.
+
+Side effects:
+  - provider_contact_performed: false
+  - plugin_call_performed: false
+  - api_call_performed: false
+  - image_generation_performed: false
+  - secret_value_read_performed: false
+  - real_manifest_read_performed: false
+  - real_VCPChat_read_performed: false
+  - real_VCPToolBox_read_performed: false
+  - memory_write_performed: false
+  - production_write_performed: false
+
 ## VALIDATION-20260615-RUNTIME-TO-REVIEW-REAL-BOUND-OWNER-RUNTIME-OWNER-ROOT-SANITIZE
 
 Task: runtime_to_review_v1_real_bound_owner_runtime_owner_root_sanitize_20260615
