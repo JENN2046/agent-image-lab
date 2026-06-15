@@ -48,6 +48,7 @@ production last
 - `adapters/runtime/native_doubao_runtime_v1_provider_delegate.js` 已建立 NativeDoubao runtime v1 provider delegate module：它验证 `runtime_v1_provider_delegate_request.v1`，只映射到 secretless controlled bridge path，默认没有 bound owner runtime 时 fail-closed，不走 legacy `.env.local` secret-reading path。`validate:runtime-to-review-native-doubao-delegate` 用 fake runner 验证 provider-success shape 可被 runtime v1 接收，同时证明 validator 不执行 live probe。
 - 精确确认短语固定为 `RUNTIME_TO_REVIEW_V1_ONE_PROVIDER_ONE_IMAGE`。`validate:runtime-to-review-guarded-live-probe-gate` 现在验证 delegate module + 精确确认短语会通过 preflight-only，错误短语会阻断；这仍然不是 provider 执行。
 - `run_runtime_to_review_v1_guarded_live_probe.js` 已支持 `--owner-runtime-module`，用于把受控 secretless owner runtime 注入支持 factory 的 provider delegate module。`adapters/runtime/native_doubao_runtime_v1_owner_runtime_binding_contract.js` 是 no-provider owner-runtime contract：它让 delegate 绑定路径真实跑通，但返回 `BLOCKED_OWNER_RUNTIME_CONTRACT_NO_PROVIDER` 并保持 provider/plugin/API/image/secret flags 全 false。`validate:runtime-to-review-owner-runtime-binding` 验证 exact phrase + delegate + owner runtime preflight、错误短语阻断、缺失 owner module 阻断，以及 no-provider contract 非 preflight 路径 failed-closed。
+- `validate:runtime-to-review-real-bound-owner-runtime-local-readiness` 已补成本地 readiness gate：它在不要求本机 VCPToolBox 存在、不执行 live probe、不读取 secret/config 内容的前提下，固定 exact phrase、owner-runtime module path、child runtime 边界和 side-effect false 证据；real-bound owner runtime 已移除隐式本机 owner-root 候选路径，缺少显式 owner root 时会以 `owner_vcptoolbox_root_not_explicitly_configured` fail-closed。
 - Review Console 已有独立 runtime v1 readonly real-entry 静态入口：`review_console/static_prototype/runtime_v1_real_entry_viewer.html` 只加载 `runtime_v1_real_entry_session.js` 与 `runtime_v1_real_entry_viewer.js`，不依赖 `mock_data.js`；它显示 run id、prompt package ref、provider route/mode、model sent/required、dimensions/hash、artifact/audit refs、review status 与 guard fields，缺字段、image binary loaded、provider side effect 会被 validator 阻断。
 - Green fixture 可以走到 `completed_stub`，路径为 `queued -> gated -> executed_stub -> artifact_recorded -> artifact_adapter_stubbed -> review_pending -> completed_stub`。
 - Green fixture runtime result can be mapped to Review Console-readable `image_case_draft` and `review_session_draft` with no write actions.
@@ -218,9 +219,10 @@ production last
 推荐顺序：
 
 1. Keep default local validation no-provider and repeatable.
-2. Replace the no-provider owner runtime contract with a real bound owner runtime module that still does not read or print secret values from Codex.
-3. Execute `runtime-to-review:guarded-live-probe` only with `RUNTIME_TO_REVIEW_V1_ONE_PROVIDER_ONE_IMAGE`, the real bound owner runtime module, one provider/plugin/API call, one image max, and receipt/status sync.
-4. Start production workflow only after provider output can enter artifact / review / audit and human decision records safely.
+2. Run and review `validate:runtime-to-review-real-bound-owner-runtime-local-readiness` before relying on the real-bound owner runtime module.
+3. Run targeted real-bound owner-runtime validation after the owner-root sanitize fix.
+4. Execute `runtime-to-review:guarded-live-probe` only with `RUNTIME_TO_REVIEW_V1_ONE_PROVIDER_ONE_IMAGE`, the real bound owner runtime module, an explicit owner-provided VCPToolBox root, one provider/plugin/API call, one image max, and receipt/status sync.
+5. Start production workflow only after provider output can enter artifact / review / audit and human decision records safely.
 
 ## Anti-Drift Rules
 

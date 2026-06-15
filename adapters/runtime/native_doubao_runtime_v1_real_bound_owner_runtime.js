@@ -12,10 +12,6 @@ const secretlessBridge = require("../../scripts/native_doubao_secretless_provide
 
 const repoRoot = path.resolve(__dirname, "..", "..");
 const moduleId = "native_doubao_runtime_v1_real_bound_owner_runtime";
-const defaultVcpToolBoxRootCandidates = [
-  "A:\\VCP\\apps\\VCPToolBox",
-  "A:\\VCP\\VCPToolBox",
-];
 const ownerRuntimeChildScript = path.join(repoRoot, "scripts", "vcptoolbox_doubao_owner_runtime_child.js");
 const pluginRelativePath = path.join("Plugin", "DoubaoGen", "DoubaoGen.js");
 const pluginConfigRelativePath = path.join("Plugin", "DoubaoGen", "config.env");
@@ -93,22 +89,24 @@ function resolvePromptText(promptPackageRef) {
 
 function resolveVcpToolBoxRoot(options = {}) {
   const requested = options.vcpToolBoxRoot || process.env.AGENT_IMAGE_LAB_VCPTOOLBOX_ROOT;
-  if (requested) return path.resolve(requested);
-  const existingCandidate = defaultVcpToolBoxRootCandidates.find((candidate) => fs.existsSync(candidate));
-  return path.resolve(existingCandidate || defaultVcpToolBoxRootCandidates[0]);
+  if (typeof requested !== "string" || requested.trim() === "") return null;
+  return path.resolve(requested.trim());
 }
 
 function inspectRealBoundOwnerRuntimeReadiness(options = {}) {
   const vcpToolBoxRoot = resolveVcpToolBoxRoot(options);
-  const pluginEntry = path.join(vcpToolBoxRoot, pluginRelativePath);
-  const pluginConfig = path.join(vcpToolBoxRoot, pluginConfigRelativePath);
-  const pluginManifest = path.join(vcpToolBoxRoot, "Plugin", "DoubaoGen", "plugin-manifest.json");
+  const ownerRootConfigured = typeof vcpToolBoxRoot === "string" && vcpToolBoxRoot !== "";
+  const pluginEntry = ownerRootConfigured ? path.join(vcpToolBoxRoot, pluginRelativePath) : null;
+  const pluginConfig = ownerRootConfigured ? path.join(vcpToolBoxRoot, pluginConfigRelativePath) : null;
+  const pluginManifest = ownerRootConfigured ? path.join(vcpToolBoxRoot, "Plugin", "DoubaoGen", "plugin-manifest.json") : null;
   return {
     module_id: moduleId,
     vcp_toolbox_root_ref: "owner_configured_vcptoolbox_root",
-    plugin_entry_present: fs.existsSync(pluginEntry),
-    plugin_config_present: fs.existsSync(pluginConfig),
-    plugin_manifest_present: fs.existsSync(pluginManifest),
+    owner_root_explicitly_configured: ownerRootConfigured,
+    current_blocker: ownerRootConfigured ? null : "owner_vcptoolbox_root_not_explicitly_configured",
+    plugin_entry_present: ownerRootConfigured ? fs.existsSync(pluginEntry) : false,
+    plugin_config_present: ownerRootConfigured ? fs.existsSync(pluginConfig) : false,
+    plugin_manifest_present: ownerRootConfigured ? fs.existsSync(pluginManifest) : false,
     output_directory_allowed: allowedOutputDirectory,
     prompt_package_allowed: allowedPromptPackageRef,
     model_required: requiredModel,
@@ -198,6 +196,15 @@ function buildDoubaoPluginChildEnv({ outputDirectory, model, vcpToolBoxRoot }) {
 }
 
 function runDoubaoPlugin({ vcpToolBoxRoot, prompt, model, outputDirectory }) {
+  if (typeof vcpToolBoxRoot !== "string" || vcpToolBoxRoot.trim() === "") {
+    return Promise.resolve({
+      ok: false,
+      blocker: "owner_vcptoolbox_root_not_explicitly_configured",
+      provider_contact_performed: false,
+      plugin_call_performed: false,
+      api_call_performed: false,
+    });
+  }
   const pluginEntry = path.join(vcpToolBoxRoot, pluginRelativePath);
   const pluginConfig = path.join(vcpToolBoxRoot, pluginConfigRelativePath);
   if (!fs.existsSync(pluginEntry)) {
@@ -480,6 +487,7 @@ module.exports.requiredModel = requiredModel;
 module.exports.buildSafeChildEnv = buildSafeChildEnv;
 module.exports.buildDoubaoPluginChildEnv = buildDoubaoPluginChildEnv;
 module.exports._private = {
+  resolveVcpToolBoxRoot,
   extensionFromFormat,
   outputRefWithObservedExtension,
   inspectOutputFile,

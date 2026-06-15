@@ -1,3 +1,65 @@
+## Queue - Runtime To Review V1 Real Bound Owner Runtime Owner Root Sanitize 2026-06-15
+
+```text
+done:
+  - task: remove implicit owner-root defaults from real-bound runtime module
+    evidence: adapters/runtime/native_doubao_runtime_v1_real_bound_owner_runtime.js.
+  - task: require explicit owner root before plugin/config/manifest probing
+    evidence: owner_vcptoolbox_root_not_explicitly_configured blocker in module and validators.
+  - task: make targeted real-bound validation reproducible without a local VCPToolBox checkout
+    evidence: scripts/validate_runtime_to_review_v1_real_bound_owner_runtime_module.js fixture root.
+  - task: align readiness, next-live readiness, MVP validator expectations, roadmap, and readiness example
+    evidence: validator/doc/example/roadmap updates.
+  - task: run targeted validation
+    evidence: node --check, local readiness, real-bound runtime, next-live readiness, and validate:mvp passed.
+  - task: fix follow-up review blockers
+    evidence: .agent_board/HANDOFF.md no longer adds the private local owner-root literal; real-bound, local-readiness, and next-live validators explicitly block and restore global owner-root env during missing-root checks.
+in_progress:
+  - none
+blocked:
+  - task: live guarded probe
+    reason: no exact live probe instruction was given; provider/plugin/API/image action remains separately gated.
+  - task: owner VCPToolBox root source probe
+    reason: an explicit owner-provided VCPToolBox root is required before source probing.
+  - task: secret/config/env raw value read
+    reason: secret value and config content reads remain forbidden.
+remaining:
+  - exact-file stage/commit only if separately requested
+```
+
+## Queue - Runtime To Review V1 Real Bound Owner Runtime Local Readiness 2026-06-15
+
+```text
+done:
+  - task: create local readiness doc
+    evidence: docs/runtime_to_review_v1_real_bound_owner_runtime_local_readiness_check.md.
+  - task: create local readiness schema example
+    evidence: tests/schema_examples/runtime_to_review_v1_real_bound_owner_runtime_local_readiness_check.example.json.
+  - task: add local readiness validator
+    evidence: scripts/validate_runtime_to_review_v1_real_bound_owner_runtime_local_readiness.js.
+  - task: connect validator to package and manifest
+    evidence: package.json; scripts/validation_manifest.json; validator_count now 148.
+  - task: update runtime roadmap next tasks
+    evidence: docs/RUNTIME_TO_PRODUCTION_LANDING_ROADMAP.md.
+  - task: run local validation
+    evidence: node --check, validate:runtime-to-review-real-bound-owner-runtime-local-readiness, validate:validation-manifest, recommend:validation:next-commands, and git diff --check passed.
+in_progress:
+  - none
+blocked:
+  - task: live guarded probe
+    reason: no exact live probe instruction was given; provider/plugin/API/image action remains separately gated.
+  - task: real VCPToolBox source or manifest read
+    reason: this readiness gate is local and no-external-read.
+  - task: secret/config/env raw value read
+    reason: secret value and config content reads remain forbidden.
+  - task: targeted real-bound runtime execution
+    reason: active owner-root default candidates are recorded as follow-up risk and should be sanitized or explicitly confirmed first.
+remaining:
+  - sanitize or explicitly confirm active owner-root resolution before targeted real-bound validation
+  - run targeted real-bound owner-runtime validation only after the owner-root prerequisite is public/reproducible
+  - keep runtime-to-review:guarded-live-probe behind exact live authorization and receipt/status sync
+```
+
 ## Queue - GitHub Actions Validate Active Workflow 2026-06-15
 
 ```text

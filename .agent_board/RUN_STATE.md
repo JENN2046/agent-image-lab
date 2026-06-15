@@ -1,3 +1,110 @@
+## Current Run State - Runtime To Review V1 Real Bound Owner Runtime Owner Root Sanitize 2026-06-15
+
+```text
+phase: runtime_to_review_v1_real_bound_owner_runtime_owner_root_sanitize_20260615
+status: completed_validated_local_sanitize_no_provider_call
+lane: Green local sanitize plus runtime readiness validation; no live probe and no external runtime read
+goal: Make owner-root selection explicit and owner-provided before the real-bound owner runtime module can probe VCPToolBox plugin files.
+branch: master
+changed_refs:
+  - adapters/runtime/native_doubao_runtime_v1_real_bound_owner_runtime.js
+  - scripts/validate_runtime_to_review_v1_real_bound_owner_runtime_module.js
+  - scripts/validate_runtime_to_review_v1_real_bound_owner_runtime_local_readiness.js
+  - scripts/validate_runtime_to_review_v1_next_live_readiness_gate.js
+  - scripts/validate_mvp_core.js
+  - tests/schema_examples/runtime_to_review_v1_real_bound_owner_runtime_local_readiness_check.example.json
+  - docs/runtime_to_review_v1_real_bound_owner_runtime_local_readiness_check.md
+  - docs/RUNTIME_TO_PRODUCTION_LANDING_ROADMAP.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/VALIDATION_LOG.md
+result:
+  - active module no longer carries private local fallback owner-root candidates
+  - missing explicit owner root records owner_vcptoolbox_root_not_explicitly_configured and blocks before plugin/config/manifest probing
+  - real-bound validator now uses a local fixture root for reproducibility
+  - next-live readiness reports current owner runtime source as not ready until explicit owner root is provided
+validation:
+  - node --check adapters/runtime/native_doubao_runtime_v1_real_bound_owner_runtime.js passed
+  - node --check scripts/validate_runtime_to_review_v1_real_bound_owner_runtime_module.js passed
+  - node --check scripts/validate_runtime_to_review_v1_real_bound_owner_runtime_local_readiness.js passed
+  - node --check scripts/validate_runtime_to_review_v1_next_live_readiness_gate.js passed
+  - npm run validate:runtime-to-review-real-bound-owner-runtime-local-readiness passed, 80 checks
+  - npm run validate:runtime-to-review-real-bound-owner-runtime passed
+  - npm run validate:runtime-to-review-next-live-readiness passed
+  - npm run validate:mvp passed
+boundary_checks:
+  live_probe_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  output_write_performed: false
+  dependency_change_performed: false
+  real_manifest_read_performed: false
+  real_VCPChat_read_performed: false
+  real_VCPToolBox_read_performed: false
+  secret_value_read_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  accepted_samples_write_performed: false
+  production_candidate_write_performed: false
+next_safe_task: run final local validation and exact-file diff review; future live probe remains blocked until exact live authorization includes an explicit owner-provided VCPToolBox root.
+```
+
+## Current Run State - Runtime To Review V1 Real Bound Owner Runtime Local Readiness 2026-06-15
+
+```text
+phase: runtime_to_review_v1_real_bound_owner_runtime_local_readiness_check_20260615
+status: completed_validated_local_readiness_gate_no_provider_call
+lane: Green local runtime readiness; no live probe and no external runtime read
+goal: Make the pre-real-bound-owner-runtime readiness check reproducible without depending on local VCPToolBox presence.
+branch: master
+changed_refs:
+  - docs/runtime_to_review_v1_real_bound_owner_runtime_local_readiness_check.md
+  - tests/schema_examples/runtime_to_review_v1_real_bound_owner_runtime_local_readiness_check.example.json
+  - scripts/validate_runtime_to_review_v1_real_bound_owner_runtime_local_readiness.js
+  - docs/RUNTIME_TO_PRODUCTION_LANDING_ROADMAP.md
+  - package.json
+  - scripts/validation_manifest.json
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/VALIDATION_LOG.md
+result:
+  - local readiness doc/example/validator now lock the pre-real-bound owner-runtime boundary
+  - validator confirms exact preflight-only path, wrong phrase block, owner runtime factory presence, locked allowlists, safe child env, and child config-loading boundary
+  - validator records active owner-root default candidates as follow-up risk while avoiding VCPToolBox presence checks
+  - validation manifest count increased to 148
+validation:
+  - node --check scripts/validate_runtime_to_review_v1_real_bound_owner_runtime_local_readiness.js passed
+  - npm run validate:runtime-to-review-real-bound-owner-runtime-local-readiness passed, 68 checks
+  - npm run validate:validation-manifest passed with validator_count 148
+  - npm run recommend:validation:next-commands passed
+  - node scripts/validate_agent_board_state.js passed
+  - npm run validate:active passed
+  - git diff --check passed with LF/CRLF warnings only
+boundary_checks:
+  live_probe_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  output_write_performed: false
+  dependency_change_performed: false
+  real_manifest_read_performed: false
+  real_VCPChat_read_performed: false
+  real_VCPToolBox_read_performed: false
+  secret_value_read_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  accepted_samples_write_performed: false
+  production_candidate_write_performed: false
+next_safe_task: sanitize or explicitly confirm active owner-root resolution before targeted real-bound validation; keep live probe behind exact separate authorization.
+```
+
 ## Current Run State - GitHub Actions Validate Active Workflow 2026-06-15
 
 ```text

@@ -1,3 +1,95 @@
+## Current Handoff Update - Runtime To Review V1 Real Bound Owner Runtime Owner Root Sanitize 2026-06-15
+
+```text
+phase: runtime_to_review_v1_real_bound_owner_runtime_owner_root_sanitize_20260615
+status: completed_validated_local_sanitize_no_provider_call
+repository: <repo-root>
+branch: master
+goal: Remove the real-bound owner runtime module's implicit local owner-root prerequisite and require an explicit owner-provided VCPToolBox root.
+completed:
+  - removed implicit private local owner-root fallback candidates from adapters/runtime/native_doubao_runtime_v1_real_bound_owner_runtime.js
+  - added fail-closed blocker owner_vcptoolbox_root_not_explicitly_configured when no explicit owner root is supplied
+  - updated real-bound owner-runtime validation to use a local fixture root instead of a real local VCPToolBox checkout
+  - updated local readiness and next-live readiness validators to require explicit owner root before source probing
+  - updated MVP validation expectations, roadmap, readiness doc, and readiness example for the explicit-owner-root rule
+result:
+  - no hidden local path prerequisite remains for the module or readiness gates
+  - missing owner root blocks before plugin, provider, API, image, config, or manifest probing
+  - future live probe requires exact live authorization plus an explicit owner-provided VCPToolBox root
+validation_completed:
+  - node --check for the touched runtime and validator scripts passed
+  - npm run validate:runtime-to-review-real-bound-owner-runtime-local-readiness passed, 80 checks
+  - npm run validate:runtime-to-review-real-bound-owner-runtime passed
+  - npm run validate:runtime-to-review-next-live-readiness passed
+  - npm run validate:mvp passed
+not_performed:
+  - no live probe
+  - no provider contact
+  - no plugin call
+  - no API call
+  - no image generation
+  - no output write
+  - no real manifest/VCPChat/VCPToolBox read
+  - no secret/env/config raw value read
+  - no DailyNote/VCP memory write
+  - no accepted_samples or production candidate write
+  - no dependency change
+  - no commit, push, tag, release, or deploy
+next_safe_action: run final local validation, review the exact diff, then exact-file stage/commit only if separately requested.
+```
+
+## Current Handoff Update - Runtime To Review V1 Real Bound Owner Runtime Local Readiness 2026-06-15
+
+```text
+phase: runtime_to_review_v1_real_bound_owner_runtime_local_readiness_check_20260615
+status: completed_validated_local_readiness_gate_no_provider_call
+repository: <repo-root>
+branch: master
+goal: Add a reproducible local readiness gate before relying on the real-bound owner runtime module, without executing a live probe or requiring local VCPToolBox presence.
+completed:
+  - added docs/runtime_to_review_v1_real_bound_owner_runtime_local_readiness_check.md
+  - added tests/schema_examples/runtime_to_review_v1_real_bound_owner_runtime_local_readiness_check.example.json
+  - added scripts/validate_runtime_to_review_v1_real_bound_owner_runtime_local_readiness.js
+  - added npm script validate:runtime-to-review-real-bound-owner-runtime-local-readiness
+  - registered runtime_to_review_v1_real_bound_owner_runtime_local_readiness in scripts/validation_manifest.json
+  - updated docs/RUNTIME_TO_PRODUCTION_LANDING_ROADMAP.md immediate next tasks to run the local readiness gate before relying on the real-bound owner runtime module
+readiness_result:
+  - exact confirmation remains RUNTIME_TO_REVIEW_V1_ONE_PROVIDER_ONE_IMAGE
+  - exact preflight passes only in preflight-only mode and performs no provider/plugin/API/image action
+  - wrong confirmation phrase is blocked
+  - real-bound owner runtime module and factory are present
+  - output directory, prompt package, and model allowlists remain locked
+  - safe child env does not forward provider secret env keys
+  - child runtime owns plugin config loading and reports provider-key presence without value exposure
+  - local readiness does not require VCPToolBox checkout presence
+  - active owner-root default candidates are recorded as follow-up risk, not used by this readiness gate
+validation_completed:
+  - node --check scripts/validate_runtime_to_review_v1_real_bound_owner_runtime_local_readiness.js passed
+  - npm run validate:runtime-to-review-real-bound-owner-runtime-local-readiness passed, 68 checks
+  - npm run validate:validation-manifest passed with validator_count 148
+  - npm run recommend:validation:next-commands passed and includes the new readiness command
+  - node scripts/validate_agent_board_state.js passed
+  - npm run validate:active passed
+  - git diff --check passed with LF/CRLF warnings only
+repair_note:
+  - First two readiness validator runs failed because the preflight-only runner uses runner-specific side-effect field names.
+  - Narrow repair normalized absent runner fields to false in the readiness validator; runtime behavior was unchanged.
+not_performed:
+  - no live probe
+  - no provider contact
+  - no plugin call
+  - no API call
+  - no image generation
+  - no output write
+  - no real manifest/VCPChat/VCPToolBox read
+  - no secret/env/config/log/private data read
+  - no DailyNote/VCP memory write
+  - no accepted_samples or production candidate write
+  - no dependency change
+  - no commit, push, tag, release, or deploy
+next_safe_action: sanitize or explicitly confirm active owner-root resolution so the real-bound module has no hidden local-path prerequisite before targeted real-bound validation; live probe remains separately gated.
+```
+
 ## Current Handoff Update - GitHub Actions Validate Active Workflow 2026-06-15
 
 ```text

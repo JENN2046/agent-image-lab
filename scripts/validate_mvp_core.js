@@ -548,11 +548,15 @@ safeCheck("runtime_to_review_v1_next_live_readiness_gate", () => {
     result.second_live_probe_performed_by_validator === false &&
     result.exact_new_probe_authorization_required === true &&
     result.owner_runtime_secretless_source_required === true &&
-    result.owner_config_env_present_without_value_read === true &&
-    result.current_owner_runtime_source_ready === true &&
-    result.current_blocker === null &&
+    result.explicit_owner_root_required === true &&
+    result.owner_root_explicitly_configured_now === false &&
+    result.owner_config_env_present_without_value_read === false &&
+    result.current_owner_runtime_source_ready === false &&
+    result.current_blocker === "owner_vcptoolbox_root_not_explicitly_configured" &&
     result.real_bound_owner_runtime_safe_child_env_verified === true &&
     result.provider_secret_env_not_passed_to_child === true &&
+    result.explicit_owner_root_requirement_verified === true &&
+    result.missing_owner_root_blocked === true &&
     result.plugin_child_uses_dotenv_config_path === true &&
     result.owner_runtime_validator_skipped === true &&
     result.owner_runtime_validator_deferred_to_mvp === true &&

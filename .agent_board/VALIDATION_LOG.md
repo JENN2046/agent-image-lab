@@ -1,3 +1,99 @@
+## VALIDATION-20260615-RUNTIME-TO-REVIEW-REAL-BOUND-OWNER-RUNTIME-OWNER-ROOT-SANITIZE
+
+Task: runtime_to_review_v1_real_bound_owner_runtime_owner_root_sanitize_20260615
+
+Commands run:
+  - node --check adapters\runtime\native_doubao_runtime_v1_real_bound_owner_runtime.js
+  - node --check scripts\validate_runtime_to_review_v1_real_bound_owner_runtime_module.js
+  - node --check scripts\validate_runtime_to_review_v1_real_bound_owner_runtime_local_readiness.js
+  - node --check scripts\validate_runtime_to_review_v1_next_live_readiness_gate.js
+  - npm run validate:runtime-to-review-real-bound-owner-runtime-local-readiness
+  - npm run validate:runtime-to-review-real-bound-owner-runtime
+  - npm run validate:runtime-to-review-next-live-readiness
+  - AGENT_IMAGE_LAB_VCPTOOLBOX_ROOT=fake-local-root npm run validate:runtime-to-review-real-bound-owner-runtime
+  - AGENT_IMAGE_LAB_VCPTOOLBOX_ROOT=fake-local-root npm run validate:runtime-to-review-real-bound-owner-runtime-local-readiness
+  - AGENT_IMAGE_LAB_VCPTOOLBOX_ROOT=fake-local-root npm run validate:runtime-to-review-next-live-readiness
+  - npm run validate:mvp
+  - npm run validate:validation-manifest
+  - npm run recommend:validation:next-commands
+  - node scripts\validate_agent_board_state.js
+  - npm run validate:active
+  - git diff --check
+
+Result: ALL REQUIRED CHECKS PASSED
+
+Findings:
+  - The active real-bound owner runtime module no longer contains implicit private local owner-root fallback candidates.
+  - Missing explicit owner root now records owner_vcptoolbox_root_not_explicitly_configured and blocks before plugin/config/manifest probing.
+  - The targeted real-bound validator now uses a local fixture root for reproducible module validation.
+  - Next-live readiness now reports current owner runtime source as not ready until the owner supplies an explicit root.
+  - Follow-up review fix confirms validators explicitly block global owner-root env during missing-root checks.
+
+Side effects:
+  - live_probe_performed: false
+  - provider_contact_performed: false
+  - plugin_call_performed: false
+  - api_call_performed: false
+  - image_generation_performed: false
+  - output_write_performed: false
+  - dependency_change_performed: false
+  - real_manifest_read_performed: false
+  - real_VCPChat_read_performed: false
+  - real_VCPToolBox_read_performed: false
+  - secret_value_read_performed: false
+  - DailyNote_write_performed: false
+  - VCP_memory_write_performed: false
+  - accepted_samples_write_performed: false
+  - production_candidate_write_performed: false
+
+## VALIDATION-20260615-RUNTIME-TO-REVIEW-REAL-BOUND-OWNER-RUNTIME-LOCAL-READINESS
+
+Task: runtime_to_review_v1_real_bound_owner_runtime_local_readiness_check_20260615
+
+Commands run:
+  - node --check scripts\validate_runtime_to_review_v1_real_bound_owner_runtime_local_readiness.js
+  - npm run validate:runtime-to-review-real-bound-owner-runtime-local-readiness
+  - npm run validate:validation-manifest
+  - npm run recommend:validation:next-commands
+  - node scripts\validate_agent_board_state.js
+  - npm run validate:active
+  - git diff --check
+
+Result: ALL REQUIRED CHECKS PASSED
+
+Repair note:
+  - First two readiness validator runs failed because the preflight-only runner reports runner-specific side-effect fields.
+  - Narrow validator-only repair normalized the absent generic fields to false; runtime behavior was unchanged.
+
+Findings:
+  - Local readiness gate passes with 68 checks.
+  - Exact confirmation remains RUNTIME_TO_REVIEW_V1_ONE_PROVIDER_ONE_IMAGE.
+  - Exact preflight-only path passes without provider/plugin/API/image side effects.
+  - Wrong confirmation phrase is blocked.
+  - Real-bound owner runtime module and factory are present.
+  - Safe child env does not forward VOLCENGINE_API_KEY or arbitrary secret token keys.
+  - Child runtime loads plugin config inside the child process and reports provider-key presence without printing values.
+  - Local readiness does not require VCPToolBox checkout presence.
+  - Active owner-root default candidates are recorded as follow-up risk.
+  - Validator manifest now contains 148 validators.
+
+Side effects:
+  - live_probe_performed: false
+  - provider_contact_performed: false
+  - plugin_call_performed: false
+  - api_call_performed: false
+  - image_generation_performed: false
+  - output_write_performed: false
+  - dependency_change_performed: false
+  - real_manifest_read_performed: false
+  - real_VCPChat_read_performed: false
+  - real_VCPToolBox_read_performed: false
+  - secret_value_read_performed: false
+  - DailyNote_write_performed: false
+  - VCP_memory_write_performed: false
+  - accepted_samples_write_performed: false
+  - production_candidate_write_performed: false
+
 ## VALIDATION-20260615-GITHUB-ACTIONS-VALIDATE-ACTIVE-WORKFLOW
 
 Task: github_actions_validate_active_workflow_20260615

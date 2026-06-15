@@ -327,6 +327,29 @@
       ]
     },
     {
+      "id": "runtime_to_review_v1_real_bound_owner_runtime_local_readiness",
+      "command": "npm run validate:runtime-to-review-real-bound-owner-runtime-local-readiness",
+      "script": "scripts/validate_runtime_to_review_v1_real_bound_owner_runtime_local_readiness.js",
+      "tier": "targeted",
+      "domain": "runtime_to_review",
+      "status": "active",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "docs/runtime_to_review_v1_real_bound_owner_runtime_local_readiness_check.md",
+        "tests/schema_examples/runtime_to_review_v1_real_bound_owner_runtime_local_readiness_check.example.json",
+        "scripts/validate_runtime_to_review_v1_real_bound_owner_runtime_local_readiness.js",
+        "scripts/run_runtime_to_review_v1_guarded_live_probe.js",
+        "scripts/vcptoolbox_doubao_owner_runtime_child.js",
+        "adapters/runtime/native_doubao_runtime_v1_provider_delegate.js",
+        "adapters/runtime/native_doubao_runtime_v1_real_bound_owner_runtime.js",
+        "package.json",
+        "scripts/validation_manifest.json"
+      ],
+      "required_for": [
+        "runtime_owner_local_readiness_patch"
+      ]
+    },
+    {
       "id": "runtime_to_review_vcptoolbox_route_owner_runtime",
       "command": "node scripts/validate_runtime_to_review_v1_vcptoolbox_route_owner_runtime_module.js",
       "script": "scripts/validate_runtime_to_review_v1_vcptoolbox_route_owner_runtime_module.js",

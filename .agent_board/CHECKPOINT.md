@@ -1,3 +1,101 @@
+## Checkpoint - Runtime To Review V1 Real Bound Owner Runtime Owner Root Sanitize 2026-06-15
+
+```text
+status: COMPLETED_VALIDATED
+mode: A4_8 Green local owner-root sanitize and readiness validation
+changed_by_this_task:
+  - adapters/runtime/native_doubao_runtime_v1_real_bound_owner_runtime.js
+  - scripts/validate_runtime_to_review_v1_real_bound_owner_runtime_module.js
+  - scripts/validate_runtime_to_review_v1_real_bound_owner_runtime_local_readiness.js
+  - scripts/validate_runtime_to_review_v1_next_live_readiness_gate.js
+  - scripts/validate_mvp_core.js
+  - tests/schema_examples/runtime_to_review_v1_real_bound_owner_runtime_local_readiness_check.example.json
+  - docs/runtime_to_review_v1_real_bound_owner_runtime_local_readiness_check.md
+  - docs/RUNTIME_TO_PRODUCTION_LANDING_ROADMAP.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/VALIDATION_LOG.md
+pre_existing_dirty_worktree:
+  - runtime-to-review real-bound owner-runtime local readiness files from the immediately prior uncommitted local readiness task
+validation:
+  - node --check adapters/runtime/native_doubao_runtime_v1_real_bound_owner_runtime.js: passed
+  - node --check scripts/validate_runtime_to_review_v1_real_bound_owner_runtime_module.js: passed
+  - node --check scripts/validate_runtime_to_review_v1_real_bound_owner_runtime_local_readiness.js: passed
+  - node --check scripts/validate_runtime_to_review_v1_next_live_readiness_gate.js: passed
+  - npm run validate:runtime-to-review-real-bound-owner-runtime-local-readiness: passed, 80 checks
+  - npm run validate:runtime-to-review-real-bound-owner-runtime: passed
+  - npm run validate:runtime-to-review-next-live-readiness: passed
+  - npm run validate:mvp: passed
+boundary:
+  live_probe_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  output_write_performed: false
+  real_manifest_read_performed: false
+  real_VCPChat_read_performed: false
+  real_VCPToolBox_read_performed: false
+  secret_value_read_performed: false
+  dependency_change_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  accepted_samples_write_performed: false
+  production_candidate_write_performed: false
+recommended_next: finish final local validation and exact diff review; do not run a live probe until the owner provides an explicit VCPToolBox root inside exact live authorization.
+```
+
+## Checkpoint - Runtime To Review V1 Real Bound Owner Runtime Local Readiness 2026-06-15
+
+```text
+status: COMPLETED_VALIDATED
+mode: A4_8 Green local runtime readiness
+changed_by_this_task:
+  - docs/runtime_to_review_v1_real_bound_owner_runtime_local_readiness_check.md
+  - tests/schema_examples/runtime_to_review_v1_real_bound_owner_runtime_local_readiness_check.example.json
+  - scripts/validate_runtime_to_review_v1_real_bound_owner_runtime_local_readiness.js
+  - docs/RUNTIME_TO_PRODUCTION_LANDING_ROADMAP.md
+  - package.json
+  - scripts/validation_manifest.json
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/VALIDATION_LOG.md
+pre_existing_dirty_worktree:
+  - none
+validation:
+  - node --check scripts/validate_runtime_to_review_v1_real_bound_owner_runtime_local_readiness.js: passed
+  - npm run validate:runtime-to-review-real-bound-owner-runtime-local-readiness: passed, 68 checks
+  - npm run validate:validation-manifest: passed, validator_count 148
+  - npm run recommend:validation:next-commands: passed
+  - node scripts/validate_agent_board_state.js: passed
+  - npm run validate:active: passed
+  - git diff --check: passed with LF/CRLF warnings only
+repair_note:
+  - Initial readiness validator runs failed on absent generic side-effect fields from the preflight-only runner.
+  - Narrow validator-only repair normalized those runner fields to false; no runtime or runner behavior changed.
+boundary:
+  live_probe_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  output_write_performed: false
+  real_manifest_read_performed: false
+  real_VCPChat_read_performed: false
+  real_VCPToolBox_read_performed: false
+  secret_value_read_performed: false
+  dependency_change_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  accepted_samples_write_performed: false
+  production_candidate_write_performed: false
+recommended_next: sanitize or explicitly confirm active owner-root resolution before targeted real-bound validation; do not run live probe without exact separate authorization.
+```
+
 ## Checkpoint - GitHub Actions Validate Active Workflow 2026-06-15
 
 ```text

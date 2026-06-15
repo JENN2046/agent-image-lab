@@ -12,6 +12,7 @@ const realOwnerRuntimePath = "adapters/runtime/native_doubao_runtime_v1_real_bou
 const ownerRuntimeValidatorPath = "scripts/validate_runtime_to_review_v1_real_bound_owner_runtime_module.js";
 const mvpCorePath = "scripts/validate_mvp_core.js";
 const selfPath = "scripts/validate_runtime_to_review_v1_next_live_readiness_gate.js";
+const ownerRootEnvName = "AGENT_IMAGE_LAB_VCPTOOLBOX_ROOT";
 
 function assert(condition, message) {
   if (!condition) throw new Error(message);
@@ -36,6 +37,18 @@ function readJson(relativePath) {
   return JSON.parse(fs.readFileSync(repoPath(relativePath), "utf8"));
 }
 
+function withOwnerRootEnvBlocked(fn) {
+  const hadOwnerRootEnv = Object.prototype.hasOwnProperty.call(process.env, ownerRootEnvName);
+  const previousOwnerRootEnv = process.env[ownerRootEnvName];
+  delete process.env[ownerRootEnvName];
+  try {
+    return fn();
+  } finally {
+    if (hadOwnerRootEnv) process.env[ownerRootEnvName] = previousOwnerRootEnv;
+    else delete process.env[ownerRootEnvName];
+  }
+}
+
 function assertMvpCoversOwnerRuntimeValidator() {
   const mvpCore = fs.readFileSync(repoPath(mvpCorePath), "utf8");
   assert(
@@ -53,6 +66,8 @@ async function main() {
 
   let validatorResult = {
     plugin_child_uses_dotenv_config_path: true,
+    explicit_owner_root_required: true,
+    missing_owner_root_blocked: true,
   };
 
   if (skipOwnerRuntimeValidator) {
@@ -62,10 +77,12 @@ async function main() {
     runNode(["--check", ownerRuntimeValidatorPath]);
     runNode(["--check", selfPath]);
 
-    validatorResult = JSON.parse(runNode([ownerRuntimeValidatorPath]));
+    validatorResult = JSON.parse(withOwnerRootEnvBlocked(() => runNode([ownerRuntimeValidatorPath])));
     assert(validatorResult.passed === true, "real bound owner runtime module validator must pass");
     assert(validatorResult.safe_child_env_does_not_copy_process_env === true, "real bound runtime must not copy full process.env");
     assert(validatorResult.provider_secret_env_not_passed_to_child === true, "provider secret env must not pass to child runtime");
+    assert(validatorResult.explicit_owner_root_required === true, "real bound runtime must require explicit owner root");
+    assert(validatorResult.missing_owner_root_blocked === true, "real bound runtime must fail closed without explicit owner root");
   }
 
   const receipt = readJson(receiptPath);
@@ -79,9 +96,12 @@ async function main() {
   assert(receipt.production_candidate_created === false, "receipt must record no production candidate");
 
   const ownerRuntime = require(repoPath(realOwnerRuntimePath));
-  const readiness = ownerRuntime.inspectRealBoundOwnerRuntimeReadiness();
-  assert(readiness.plugin_entry_present === true, "VCPToolBox DoubaoGen plugin entry must remain discoverable");
-  assert(readiness.plugin_config_present === true, "VCPToolBox DoubaoGen config.env must exist before next live probe");
+  const readiness = withOwnerRootEnvBlocked(() => ownerRuntime.inspectRealBoundOwnerRuntimeReadiness());
+  assert(readiness.owner_root_explicitly_configured === false, "owner root must not be inferred from local defaults");
+  assert(readiness.current_blocker === "owner_vcptoolbox_root_not_explicitly_configured", "missing explicit owner root must block next live readiness");
+  assert(readiness.plugin_entry_present === false, "missing owner root must not probe VCPToolBox plugin entry");
+  assert(readiness.plugin_config_present === false, "missing owner root must not probe VCPToolBox config.env");
+  assert(readiness.plugin_manifest_present === false, "missing owner root must not probe VCPToolBox plugin manifest");
   assert(readiness.secret_value_read_performed === false, "readiness must not read secret values");
 
   process.stdout.write(`${JSON.stringify({
@@ -96,16 +116,21 @@ async function main() {
     second_live_probe_performed_by_validator: false,
     exact_new_probe_authorization_required: true,
     owner_runtime_secretless_source_required: true,
+    explicit_owner_root_required: true,
+    owner_root_explicitly_configured_now: readiness.owner_root_explicitly_configured === true,
+    owner_root_env_blocked_for_missing_root_checks: true,
     owner_config_env_present_without_value_read: readiness.plugin_config_present,
     acceptable_owner_runtime_sources: [
       "running_vcptoolbox_secretless_delegate_with_runtime_v1_output_scope",
-      "owner_provided_doubaogen_config_env_loaded_only_by_plugin_child_process"
+      "owner_provided_vcptoolbox_root_loaded_only_by_plugin_child_process"
     ],
-    current_owner_runtime_source_ready: readiness.plugin_config_present === true,
-    current_blocker: readiness.plugin_config_present === true ? null : "owner_runtime_secretless_source_not_bound_for_next_live_probe",
+    current_owner_runtime_source_ready: false,
+    current_blocker: readiness.current_blocker,
     real_bound_owner_runtime_module_present: true,
     real_bound_owner_runtime_safe_child_env_verified: true,
     provider_secret_env_not_passed_to_child: true,
+    explicit_owner_root_requirement_verified: validatorResult.explicit_owner_root_required === true,
+    missing_owner_root_blocked: validatorResult.missing_owner_root_blocked === true,
     plugin_child_uses_dotenv_config_path: validatorResult.plugin_child_uses_dotenv_config_path === true,
     owner_runtime_validator_skipped: skipOwnerRuntimeValidator,
     owner_runtime_validator_deferred_to_mvp: skipOwnerRuntimeValidator,
