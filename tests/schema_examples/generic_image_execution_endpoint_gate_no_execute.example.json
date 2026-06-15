@@ -1,0 +1,259 @@
+{
+  "generic_image_execution_endpoint_gate_no_execute": {
+    "phase": "generic_image_execution_endpoint_gate_no_execute_20260610",
+    "status": "local_generic_endpoint_gate_no_execute",
+    "parent_thin_ingress_plan_ref": "docs/compatibility_route_thin_ingress_plan_no_execute.md",
+    "parent_broker_proposal_ref": "docs/vcptoolbox_image_execution_broker_implementation_proposal_no_execute.md",
+    "parent_plan_ref": "docs/vcptoolbox_image_execution_broker_followup_plan.md",
+    "source_refs": {
+      "broker_followup_plan_ref": "docs/vcptoolbox_image_execution_broker_followup_plan.md",
+      "generation_channel_contract_ref": "docs/generation_channel_contract_preflight.md",
+      "image_run_capability_binding_template_ref": "docs/image_run_capability_binding_preflight_template.md",
+      "compatibility_route_thin_ingress_plan_ref": "docs/compatibility_route_thin_ingress_plan_no_execute.md",
+      "vcptoolbox_broker_implementation_proposal_ref": "docs/vcptoolbox_image_execution_broker_implementation_proposal_no_execute.md"
+    },
+    "gate_contract": {
+      "schema_id": "generic_image_execution_endpoint_gate.v1",
+      "owned_by": "VCPToolBox",
+      "prepared_by": "Agent_Image_Lab",
+      "authority_status": "migration_gate_only_no_enablement",
+      "generic_endpoint_candidate": "/internal/agent-image-lab/executions/run",
+      "generic_endpoint_enabled_now": false,
+      "migration_allowed_now": false,
+      "route_http_allowed_by_this_gate": false,
+      "external_repo_write_allowed_by_this_gate": false,
+      "provider_plugin_api_image_allowed_by_this_gate": false,
+      "secret_value_read_allowed": false,
+      "current_task_specific_endpoint_remains_as_shim": true,
+      "compatibility_routes_remain_shims": true,
+      "required_fields": [
+        "gate_id",
+        "generic_endpoint_candidate",
+        "generic_endpoint_enabled_now",
+        "migration_allowed_now",
+        "current_compatibility_routes",
+        "comparable_evidence_gate",
+        "pre_enable_requirements",
+        "endpoint_request_envelope",
+        "forbidden_payload_authority",
+        "migration_stages",
+        "rollback_or_route_restore_plan",
+        "validation_plan",
+        "future_authorization_packet_requirements",
+        "stop_conditions",
+        "execution_boundary"
+      ]
+    },
+    "gate": {
+      "gate_id": "generic_image_execution_endpoint_gate:runtime_to_review_v2",
+      "generic_endpoint_candidate": "/internal/agent-image-lab/executions/run",
+      "generic_endpoint_enabled_now": false,
+      "migration_allowed_now": false,
+      "current_compatibility_routes": [
+        {
+          "trial_id": "r2r_v2_trial_001_serum_detail_control",
+          "route_id_or_endpoint_ref": "/internal/ai-image-agents/execute/r2r-v2-trial-001-serum-detail-control",
+          "status": "compatibility_shim_until_broker_ready",
+          "replacement_allowed_now": false
+        },
+        {
+          "trial_id": "r2r_v2_trial_002_lantern_ecommerce_hero",
+          "route_id_or_endpoint_ref": "/internal/ai-image-agents/execute/r2r-v2-trial-002-lantern-ecommerce-hero",
+          "status": "compatibility_shim_until_broker_ready",
+          "replacement_allowed_now": false
+        }
+      ],
+      "comparable_evidence_gate": {
+        "minimum_rule": [
+          "at_least_two_v2_trials_with_comparable_artifact_review_evidence",
+          "or_one_trial_exposes_clear_repeated_runtime_boundary"
+        ],
+        "design_evidence_present": true,
+        "endpoint_enablement_evidence_sufficient_now": false,
+        "evidence_refs": [
+          "reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_artifact_record.json",
+          "reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_review_decision_accepted_candidate_20260608.json",
+          "reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_artifact_record.json",
+          "reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_review_decision_accepted_candidate_20260609.json"
+        ],
+        "remaining_enablement_gap": [
+          "exact VCPToolBox broker implementation authorization packet",
+          "validated VCPToolBox broker implementation",
+          "validated generic endpoint request envelope tests",
+          "rollback or route restore plan"
+        ]
+      },
+      "pre_enable_requirements": [
+        "generation_channel_contract_preflight_validated",
+        "image_run_capability_binding_preflight_template_validated",
+        "compatibility_route_thin_ingress_plan_validated",
+        "vcptoolbox_image_execution_broker_implementation_proposal_validated",
+        "generic_image_execution_endpoint_gate_validated",
+        "exact_external_repo_authorization_packet_issued",
+        "exact_VCPToolBox_allowed_files_verified",
+        "VCPToolBox_broker_implementation_validated",
+        "endpoint_request_envelope_contract_tests_passed",
+        "payload_cannot_select_provider_plugin_api_delegate_model_output_retry",
+        "artifact_receipt_review_queue_memory_candidate_gates_validated",
+        "rollback_or_route_restore_plan_present"
+      ],
+      "endpoint_request_envelope": {
+        "allowed_ref_fields": [
+          "activation_id_ref",
+          "visual_job_contract_ref",
+          "canonical_contract_hash_ref",
+          "image_run_capability_binding_preflight_ref",
+          "binding_packet_ref",
+          "output_policy_ref",
+          "restricted_plugin_facade_boundary_ref",
+          "artifact_receipt_gate_ref",
+          "review_queue_gate_ref",
+          "memory_candidate_gate_ref"
+        ],
+        "payload_may_include_business_prompt_text": false,
+        "payload_may_include_raw_prompt_text": false,
+        "payload_may_include_provider_or_plugin_config": false,
+        "payload_may_select_dispatch_target": false,
+        "payload_may_override_output_path": false,
+        "payload_may_override_retry_or_budget": false,
+        "authorization_header_constructed_by_AIL": false
+      },
+      "forbidden_payload_authority": [
+        "provider_id_selection",
+        "plugin_id_selection",
+        "api_id_selection",
+        "delegate_id_selection",
+        "model_selection",
+        "output_directory_selection",
+        "receipt_target_selection",
+        "review_queue_target_selection",
+        "retry_or_budget_selection",
+        "arbitrary_pluginManager_access",
+        "raw_prompt_or_raw_request_storage",
+        "accepted_samples_or_production_candidate_write",
+        "DailyNote_or_VCP_memory_write"
+      ],
+      "migration_stages": [
+        {
+          "stage_id": "stage_0_current",
+          "status": "active_now",
+          "rule": "task_specific_routes_remain_compatibility_shims"
+        },
+        {
+          "stage_id": "stage_1_no_execute_generic_gate",
+          "status": "completed_by_this_gate_when_validated",
+          "rule": "define evidence and pre-enable requirements without endpoint enablement"
+        },
+        {
+          "stage_id": "stage_2_external_repo_authorized_implementation",
+          "status": "future_exact_gate_required",
+          "rule": "implement broker and endpoint only inside exact VCPToolBox packet"
+        },
+        {
+          "stage_id": "stage_3_external_repo_validation",
+          "status": "future_exact_gate_required",
+          "rule": "prove broker, endpoint envelope, receipt, artifact, review queue, and rollback behavior"
+        },
+        {
+          "stage_id": "stage_4_controlled_migration",
+          "status": "future_exact_gate_required",
+          "rule": "keep route restore plan active until generic endpoint proves equivalent behavior"
+        }
+      ],
+      "rollback_or_route_restore_plan": {
+        "required_before_enable": true,
+        "minimum_required": [
+          "exact VCPToolBox files changed by endpoint implementation",
+          "exact route restore plan for each task-specific compatibility route",
+          "no generated artifacts to delete unless separately authorized",
+          "no dependency or lockfile rollback unless exact package action is authorized",
+          "no force push or history rewrite",
+          "route fallback must preserve Trial 001 and Trial 002 binding refs"
+        ]
+      },
+      "validation_plan": {
+        "local_AIL_no_execute_validation": [
+          "npm run validate:generic-image-execution-endpoint-gate-no-execute",
+          "npm run validate:vcptoolbox-image-execution-broker-implementation-proposal-no-execute",
+          "npm run validate:compatibility-route-thin-ingress-plan-no-execute",
+          "npm run validate:image-run-capability-binding-preflight-template",
+          "npm run validate:generation-channel-contract-preflight",
+          "npm run validate:vcptoolbox-image-execution-broker-followup-plan"
+        ],
+        "future_external_repo_validation_required": [
+          "exact VCPToolBox package/test command list from a future authorization packet",
+          "broker and endpoint unit tests proving payload cannot choose provider/plugin/API",
+          "compatibility route fallback tests",
+          "receipt/artifact/review bridge ref agreement tests",
+          "git diff --check inside VCPToolBox"
+        ]
+      },
+      "future_authorization_packet_requirements": {
+        "can_execute_now": false,
+        "required_before_any_endpoint_enablement": [
+          "exact local VCPToolBox workspace path verified without secret reads",
+          "current VCPToolBox branch and head verified",
+          "origin/main or target remote head verified",
+          "exact allowed external files",
+          "exact forbidden external files",
+          "exact route and broker implementation scope",
+          "exact validation commands",
+          "rollback_or_route_restore_plan",
+          "stop_conditions",
+          "no secret/env/config reads",
+          "no provider/plugin/API/image call during implementation validation unless separately activated",
+          "no push/tag/release/deploy"
+        ]
+      },
+      "stop_conditions": "gate_stop_conditions",
+      "execution_boundary": "execution_boundary"
+    },
+    "gate_stop_conditions": [
+      "generic_endpoint_enablement_requested",
+      "task_specific_route_removal_or_replacement_requested",
+      "external_vcptoolbox_read_or_write_without_exact_authorization_packet",
+      "route_http_request_requested",
+      "provider_plugin_api_or_image_generation_requested",
+      "payload_dispatch_authority_requested",
+      "secret_value_read_required",
+      "dependency_or_lockfile_change_requested_without_exact_package_action_list",
+      "historical_artifact_or_receipt_overwrite_requested",
+      "accepted_samples_production_daily_note_or_memory_write_requested_without_separate_gate",
+      "commit_push_tag_release_deploy_requested",
+      "force_push_history_rewrite_or_destructive_action_requested"
+    ],
+    "execution_boundary": {
+      "generic_endpoint_enabled": false,
+      "migration_allowed_now": false,
+      "route_http_request_performed": false,
+      "route_implementation_performed": false,
+      "broker_implementation_performed": false,
+      "external_VCPToolBox_read_performed": false,
+      "external_VCPToolBox_write_performed": false,
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "image_generation_performed": false,
+      "real_manifest_read_performed": false,
+      "real_VCPChat_read_performed": false,
+      "real_VCPToolBox_read_performed": false,
+      "secret_value_read_performed": false,
+      "dependency_change_performed": false,
+      "accepted_samples_write_performed": false,
+      "production_candidate_write_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "push_tag_release_deploy_performed": false
+    },
+    "completed_previous": "prepare_ail_core_vcp_adapter_split_plan_no_execute",
+    "completion_refs": [
+      "docs/ail_core_vcp_adapter_split_plan_no_execute.md",
+      "tests/schema_examples/ail_core_vcp_adapter_split_plan_no_execute.example.json",
+      "scripts/validate_ail_core_vcp_adapter_split_plan_no_execute.js"
+    ],
+    "recommended_next": "prepare_vcptoolbox_image_execution_broker_external_repo_authorization_packet_no_execute",
+    "automatic_real_execution_allowed_by_this_gate": false,
+    "external_repo_write_allowed_by_this_gate": false,
+    "generic_endpoint_enablement_allowed_by_this_gate": false
+  }
+}

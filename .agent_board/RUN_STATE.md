@@ -1,3 +1,944 @@
+## Current Run State - VCPToolBox Image Execution Broker External Repo Exact Read Receipt Template No-Execute 2026-06-10
+
+```text
+phase: vcptoolbox_image_execution_broker_external_repo_exact_read_receipt_template_no_execute_20260610
+status: completed_validated_local_exact_read_receipt_template_no_execute
+lane: Green local exact read receipt template plus validator, no external repo access
+goal: Define VCPToolBoxImageExecutionBrokerExternalRepoExactReadReceiptTemplate.v1 so a future exact VCPToolBox read can only produce a fixed sanitized receipt.
+branch: master
+changed_refs:
+  - docs/vcptoolbox_image_execution_broker_external_repo_exact_read_receipt_template_no_execute.md
+  - tests/schema_examples/vcptoolbox_image_execution_broker_external_repo_exact_read_receipt_template_no_execute.example.json
+  - scripts/validate_vcptoolbox_image_execution_broker_external_repo_exact_read_receipt_template_no_execute.js
+  - docs/vcptoolbox_image_execution_broker_external_repo_read_authorization_packet_no_execute.md
+  - tests/schema_examples/vcptoolbox_image_execution_broker_external_repo_read_authorization_packet_no_execute.example.json
+  - scripts/validate_vcptoolbox_image_execution_broker_external_repo_read_authorization_packet_no_execute.js
+  - docs/vcptoolbox_image_execution_broker_followup_plan.md
+  - tests/schema_examples/vcptoolbox_image_execution_broker_followup_plan.example.json
+  - scripts/validate_vcptoolbox_image_execution_broker_followup_plan.js
+  - docs/ail_core_vcp_adapter_split_plan_no_execute.md
+  - tests/schema_examples/ail_core_vcp_adapter_split_plan_no_execute.example.json
+  - scripts/validate_ail_core_vcp_adapter_split_plan_no_execute.js
+  - scripts/validate_vcptoolbox_image_execution_broker_external_repo_read_preflight_no_execute.js
+  - scripts/validate_vcptoolbox_image_execution_broker_external_repo_readiness_review_no_execute.js
+  - docs/runtime_to_review_v2_multi_prompt_controlled_trial_plan.md
+  - package.json
+  - scripts/validation_manifest.json
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/VALIDATION_LOG.md
+result:
+  - locked future receipt required fields, target directory, filename pattern, candidate matrix, forbidden fields, and required false evidence flags
+  - constrained future receipt to the same 5 git command ids and 6 candidate source paths as the read authorization packet
+  - required forbidden_paths_attempted to be empty, sanitized_summary_only=true, and next_write_gate_allowed=false in future receipt validation
+  - kept external repo read/write blocked now
+  - advanced broker followup latest completed step to prepare_vcptoolbox_image_execution_broker_external_repo_exact_read_receipt_template_no_execute
+validation:
+  - node --check scripts\validate_vcptoolbox_image_execution_broker_external_repo_exact_read_receipt_template_no_execute.js passed
+  - node --check scripts\validate_vcptoolbox_image_execution_broker_external_repo_read_authorization_packet_no_execute.js passed
+  - node --check scripts\validate_vcptoolbox_image_execution_broker_followup_plan.js passed
+  - node --check scripts\validate_ail_core_vcp_adapter_split_plan_no_execute.js passed
+  - node --check scripts\validate_vcptoolbox_image_execution_broker_external_repo_read_preflight_no_execute.js passed
+  - node --check scripts\validate_vcptoolbox_image_execution_broker_external_repo_readiness_review_no_execute.js passed
+  - JSON parse check for validation manifest, package.json, and edited examples passed
+  - npm run validate:vcptoolbox-image-execution-broker-external-repo-exact-read-receipt-template-no-execute passed, 22 checks
+  - npm run validate:vcptoolbox-image-execution-broker-external-repo-read-authorization-packet-no-execute passed, 24 checks
+  - npm run validate:vcptoolbox-image-execution-broker-followup-plan passed, 24 checks
+  - npm run validate:ail-core-vcp-adapter-split-plan-no-execute passed, 22 checks
+  - npm run validate:vcptoolbox-image-execution-broker-external-repo-read-preflight-no-execute passed, 23 checks
+  - npm run validate:vcptoolbox-image-execution-broker-external-repo-readiness-review-no-execute passed, 22 checks
+  - npm run validate:vcptoolbox-image-execution-broker-external-repo-authorization-packet-no-execute passed, 21 checks
+  - npm run validate:vcptoolbox-image-execution-broker-implementation-proposal-no-execute passed, 20 checks
+  - npm run validate:generic-image-execution-endpoint-gate-no-execute passed, 20 checks
+  - npm run validate:generation-channel-contract-preflight passed, 21 checks
+  - npm run validate:image-run-capability-binding-preflight-template passed, 17 checks
+  - npm run validate:compatibility-route-thin-ingress-plan-no-execute passed, 18 checks
+  - node scripts\validate_runtime_to_review_v2_multi_prompt_controlled_trial_plan.js passed, 24 checks
+  - npm run validate:validation-manifest passed with validator_count 146
+boundary_checks:
+  can_execute_now: false
+  external_VCPToolBox_read_performed: false
+  external_VCPToolBox_write_performed: false
+  external_repo_branch_or_head_checked: false
+  external_repo_target_files_checked: false
+  read_receipt_written_now: false
+  receipt_population_performed_now: false
+  real_local_vcptoolbox_path_recorded: false
+  raw_source_copy_performed: false
+  broker_implementation_performed: false
+  route_implementation_performed: false
+  generic_endpoint_enabled: false
+  route_http_request_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  dependency_change_performed: false
+  real_manifest_read_performed: false
+  real_VCPChat_read_performed: false
+  real_VCPToolBox_read_performed: false
+  secret_value_read_performed: false
+  accepted_samples_write_performed: false
+  production_candidate_write_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  Codex_memory_write_performed: false
+  push_tag_release_deploy_performed: false
+next_safe_task: perform_vcptoolbox_image_execution_broker_external_repo_exact_read_with_receipt_only_after_separate_authorization; do not execute the external read unless separately and exactly requested.
+```
+
+## Current Run State - VCPToolBox Image Execution Broker External Repo Read Authorization Packet No-Execute 2026-06-10
+
+```text
+phase: vcptoolbox_image_execution_broker_external_repo_read_authorization_packet_no_execute_20260610
+status: completed_validated_local_external_repo_read_authorization_packet_no_execute
+lane: Green local read authorization packet plus validator, no external repo access
+goal: Define VCPToolBoxImageExecutionBrokerExternalRepoReadAuthorizationPacket.v1 as the future one-action exact read request shape without performing the read.
+branch: master
+changed_refs:
+  - docs/vcptoolbox_image_execution_broker_external_repo_read_authorization_packet_no_execute.md
+  - tests/schema_examples/vcptoolbox_image_execution_broker_external_repo_read_authorization_packet_no_execute.example.json
+  - scripts/validate_vcptoolbox_image_execution_broker_external_repo_read_authorization_packet_no_execute.js
+  - docs/vcptoolbox_image_execution_broker_followup_plan.md
+  - tests/schema_examples/vcptoolbox_image_execution_broker_followup_plan.example.json
+  - scripts/validate_vcptoolbox_image_execution_broker_followup_plan.js
+  - docs/vcptoolbox_image_execution_broker_external_repo_read_preflight_no_execute.md
+  - tests/schema_examples/vcptoolbox_image_execution_broker_external_repo_read_preflight_no_execute.example.json
+  - scripts/validate_vcptoolbox_image_execution_broker_external_repo_read_preflight_no_execute.js
+  - docs/vcptoolbox_image_execution_broker_external_repo_readiness_review_no_execute.md
+  - tests/schema_examples/vcptoolbox_image_execution_broker_external_repo_readiness_review_no_execute.example.json
+  - scripts/validate_vcptoolbox_image_execution_broker_external_repo_readiness_review_no_execute.js
+  - docs/vcptoolbox_image_execution_broker_external_repo_authorization_packet_no_execute.md
+  - tests/schema_examples/vcptoolbox_image_execution_broker_external_repo_authorization_packet_no_execute.example.json
+  - scripts/validate_vcptoolbox_image_execution_broker_external_repo_authorization_packet_no_execute.js
+  - docs/ail_core_vcp_adapter_split_plan_no_execute.md
+  - tests/schema_examples/ail_core_vcp_adapter_split_plan_no_execute.example.json
+  - scripts/validate_ail_core_vcp_adapter_split_plan_no_execute.js
+  - docs/runtime_to_review_v2_multi_prompt_controlled_trial_plan.md
+  - package.json
+  - scripts/validation_manifest.json
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/VALIDATION_LOG.md
+result:
+  - locked the future read authorization packet as exact_external_repo_read_only
+  - constrained future read to one action, five git commands, six candidate files, and sanitized receipt output
+  - required the future read to stop before any write or runtime action
+  - kept external repo read/write blocked now
+  - advanced broker followup next step to perform_vcptoolbox_image_execution_broker_external_repo_exact_read_with_receipt_only_after_separate_authorization
+validation:
+  - node --check scripts\validate_vcptoolbox_image_execution_broker_external_repo_read_authorization_packet_no_execute.js passed
+  - node --check scripts\validate_vcptoolbox_image_execution_broker_followup_plan.js passed
+  - node --check scripts\validate_vcptoolbox_image_execution_broker_external_repo_read_preflight_no_execute.js passed
+  - node --check scripts\validate_vcptoolbox_image_execution_broker_external_repo_readiness_review_no_execute.js passed
+  - node --check scripts\validate_vcptoolbox_image_execution_broker_external_repo_authorization_packet_no_execute.js passed
+  - node --check scripts\validate_ail_core_vcp_adapter_split_plan_no_execute.js passed
+  - JSON parse check for validation manifest, package.json, and edited examples passed
+  - npm run validate:vcptoolbox-image-execution-broker-external-repo-read-authorization-packet-no-execute passed, 24 checks
+  - npm run validate:vcptoolbox-image-execution-broker-followup-plan passed, 23 checks
+  - npm run validate:vcptoolbox-image-execution-broker-external-repo-read-preflight-no-execute passed, 23 checks
+  - npm run validate:vcptoolbox-image-execution-broker-external-repo-readiness-review-no-execute passed, 22 checks
+  - npm run validate:vcptoolbox-image-execution-broker-external-repo-authorization-packet-no-execute passed, 21 checks
+  - npm run validate:ail-core-vcp-adapter-split-plan-no-execute passed, 22 checks
+  - npm run validate:vcptoolbox-image-execution-broker-implementation-proposal-no-execute passed, 20 checks
+  - npm run validate:generic-image-execution-endpoint-gate-no-execute passed, 20 checks
+  - npm run validate:generation-channel-contract-preflight passed, 21 checks
+  - npm run validate:image-run-capability-binding-preflight-template passed, 17 checks
+  - npm run validate:compatibility-route-thin-ingress-plan-no-execute passed, 18 checks
+  - node scripts\validate_runtime_to_review_v2_multi_prompt_controlled_trial_plan.js passed, 24 checks
+  - npm run validate:validation-manifest passed with validator_count 145
+  - git diff --check passed with LF/CRLF warnings only
+  - node scripts\validate_agent_board_state.js passed
+boundary_checks:
+  can_execute_now: false
+  external_VCPToolBox_read_performed: false
+  external_VCPToolBox_write_performed: false
+  external_repo_branch_or_head_checked: false
+  external_repo_target_files_checked: false
+  external_repo_package_or_test_commands_discovered: false
+  read_receipt_written_now: false
+  real_local_vcptoolbox_path_recorded: false
+  raw_source_copy_performed: false
+  broker_implementation_performed: false
+  route_implementation_performed: false
+  generic_endpoint_enabled: false
+  migration_allowed_now: false
+  route_http_request_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  dependency_change_performed: false
+  real_manifest_read_performed: false
+  real_VCPChat_read_performed: false
+  real_VCPToolBox_read_performed: false
+  secret_value_read_performed: false
+  accepted_samples_write_performed: false
+  production_candidate_write_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  Codex_memory_write_performed: false
+  push_tag_release_deploy_performed: false
+next_safe_task: perform_vcptoolbox_image_execution_broker_external_repo_exact_read_with_receipt_only_after_separate_authorization; do not execute the external read unless separately and exactly requested.
+```
+
+## Current Run State - VCPToolBox Image Execution Broker External Repo Read Preflight No-Execute 2026-06-10
+
+```text
+phase: vcptoolbox_image_execution_broker_external_repo_read_preflight_no_execute_20260610
+status: completed_validated_local_external_repo_read_preflight_no_execute
+lane: Green local read-preflight contract plus validator, no external repo access
+goal: Define VCPToolBoxImageExecutionBrokerExternalRepoReadPreflight.v1 as the verifiable future-read contract for how to read VCPToolBox before any real read occurs.
+branch: master
+changed_refs:
+  - docs/vcptoolbox_image_execution_broker_external_repo_read_preflight_no_execute.md
+  - tests/schema_examples/vcptoolbox_image_execution_broker_external_repo_read_preflight_no_execute.example.json
+  - scripts/validate_vcptoolbox_image_execution_broker_external_repo_read_preflight_no_execute.js
+  - docs/vcptoolbox_image_execution_broker_followup_plan.md
+  - tests/schema_examples/vcptoolbox_image_execution_broker_followup_plan.example.json
+  - scripts/validate_vcptoolbox_image_execution_broker_followup_plan.js
+  - docs/vcptoolbox_image_execution_broker_external_repo_readiness_review_no_execute.md
+  - tests/schema_examples/vcptoolbox_image_execution_broker_external_repo_readiness_review_no_execute.example.json
+  - scripts/validate_vcptoolbox_image_execution_broker_external_repo_readiness_review_no_execute.js
+  - docs/vcptoolbox_image_execution_broker_external_repo_authorization_packet_no_execute.md
+  - tests/schema_examples/vcptoolbox_image_execution_broker_external_repo_authorization_packet_no_execute.example.json
+  - scripts/validate_vcptoolbox_image_execution_broker_external_repo_authorization_packet_no_execute.js
+  - docs/ail_core_vcp_adapter_split_plan_no_execute.md
+  - tests/schema_examples/ail_core_vcp_adapter_split_plan_no_execute.example.json
+  - scripts/validate_ail_core_vcp_adapter_split_plan_no_execute.js
+  - docs/runtime_to_review_v2_multi_prompt_controlled_trial_plan.md
+  - package.json
+  - scripts/validation_manifest.json
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/VALIDATION_LOG.md
+result:
+  - locked the future external-read method into a local no-execute contract
+  - constrained future git context reads to 5 exact commands
+  - constrained future source reads to 6 exact candidate files
+  - set missing-file behavior to record_absent_without_creating
+  - required sanitized summaries, no raw source copy, no private path print, and no secret-bearing output
+  - kept external repo read/write blocked now
+  - advanced broker followup next step to prepare_vcptoolbox_image_execution_broker_external_repo_read_authorization_packet_no_execute
+validation:
+  - node --check scripts\validate_vcptoolbox_image_execution_broker_external_repo_read_preflight_no_execute.js passed
+  - node --check scripts\validate_vcptoolbox_image_execution_broker_followup_plan.js passed
+  - node --check scripts\validate_vcptoolbox_image_execution_broker_external_repo_readiness_review_no_execute.js passed
+  - node --check scripts\validate_vcptoolbox_image_execution_broker_external_repo_authorization_packet_no_execute.js passed
+  - node --check scripts\validate_ail_core_vcp_adapter_split_plan_no_execute.js passed
+  - JSON parse check for validation manifest, package.json, and edited examples passed
+  - npm run validate:vcptoolbox-image-execution-broker-external-repo-read-preflight-no-execute passed, 23 checks
+  - npm run validate:vcptoolbox-image-execution-broker-followup-plan passed, 22 checks
+  - npm run validate:vcptoolbox-image-execution-broker-external-repo-readiness-review-no-execute passed, 22 checks
+  - npm run validate:vcptoolbox-image-execution-broker-external-repo-authorization-packet-no-execute passed, 21 checks
+  - npm run validate:ail-core-vcp-adapter-split-plan-no-execute passed, 22 checks
+  - npm run validate:vcptoolbox-image-execution-broker-implementation-proposal-no-execute passed, 20 checks
+  - npm run validate:generic-image-execution-endpoint-gate-no-execute passed, 20 checks
+  - npm run validate:generation-channel-contract-preflight passed, 21 checks
+  - npm run validate:image-run-capability-binding-preflight-template passed, 17 checks
+  - npm run validate:compatibility-route-thin-ingress-plan-no-execute passed, 18 checks
+  - node scripts\validate_runtime_to_review_v2_multi_prompt_controlled_trial_plan.js passed, 24 checks
+  - npm run validate:validation-manifest passed with validator_count 144
+  - git diff --check passed with LF/CRLF warnings only
+  - node scripts\validate_agent_board_state.js passed
+boundary_checks:
+  can_execute_now: false
+  external_VCPToolBox_read_performed: false
+  external_VCPToolBox_write_performed: false
+  external_repo_branch_or_head_checked: false
+  external_repo_target_files_checked: false
+  external_repo_package_or_lockfile_read: false
+  external_test_discovery_performed: false
+  real_local_vcptoolbox_path_recorded: false
+  raw_source_copy_performed: false
+  broker_implementation_performed: false
+  route_implementation_performed: false
+  generic_endpoint_enabled: false
+  migration_allowed_now: false
+  route_http_request_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  dependency_change_performed: false
+  real_manifest_read_performed: false
+  real_VCPChat_read_performed: false
+  real_VCPToolBox_read_performed: false
+  secret_value_read_performed: false
+  accepted_samples_write_performed: false
+  production_candidate_write_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  Codex_memory_write_performed: false
+  push_tag_release_deploy_performed: false
+next_safe_task: prepare_vcptoolbox_image_execution_broker_external_repo_read_authorization_packet_no_execute; do not execute the external read, modify VCPToolBox, enable generic endpoint, run route HTTP, or execute image generation without a separate exact gate.
+```
+
+## Current Run State - VCPToolBox Image Execution Broker External Repo Readiness Review No-Execute 2026-06-10
+
+```text
+phase: vcptoolbox_image_execution_broker_external_repo_readiness_review_no_execute_20260610
+status: completed_validated_local_external_repo_readiness_review_no_execute
+lane: Green local readiness review plus validator, no external repo access
+goal: Define VCPToolBoxImageExecutionBrokerExternalRepoReadinessReview.v1 as a local readiness review before any future exact read-preflight template.
+branch: master
+changed_refs:
+  - docs/vcptoolbox_image_execution_broker_external_repo_readiness_review_no_execute.md
+  - tests/schema_examples/vcptoolbox_image_execution_broker_external_repo_readiness_review_no_execute.example.json
+  - scripts/validate_vcptoolbox_image_execution_broker_external_repo_readiness_review_no_execute.js
+  - docs/vcptoolbox_image_execution_broker_followup_plan.md
+  - tests/schema_examples/vcptoolbox_image_execution_broker_followup_plan.example.json
+  - scripts/validate_vcptoolbox_image_execution_broker_followup_plan.js
+  - docs/vcptoolbox_image_execution_broker_external_repo_authorization_packet_no_execute.md
+  - tests/schema_examples/vcptoolbox_image_execution_broker_external_repo_authorization_packet_no_execute.example.json
+  - scripts/validate_vcptoolbox_image_execution_broker_external_repo_authorization_packet_no_execute.js
+  - docs/ail_core_vcp_adapter_split_plan_no_execute.md
+  - tests/schema_examples/ail_core_vcp_adapter_split_plan_no_execute.example.json
+  - scripts/validate_ail_core_vcp_adapter_split_plan_no_execute.js
+  - docs/runtime_to_review_v2_multi_prompt_controlled_trial_plan.md
+  - package.json
+  - scripts/validation_manifest.json
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/VALIDATION_LOG.md
+result:
+  - reviewed local external-repo authorization packet as pass_ready_for_read_preflight_template
+  - kept real external read blocked until a separate exact read-preflight exists
+  - kept real external write blocked until read evidence and separate write confirmation exist
+  - recorded candidate external file allowlist as exact_candidate_only with 6 paths
+  - recorded deliberate unknowns for VCPToolBox workspace path, branch, head, remote head, target file existence, and package/test commands
+  - advanced broker followup next step to prepare_vcptoolbox_image_execution_broker_external_repo_read_preflight_no_execute
+validation:
+  - node --check scripts\validate_vcptoolbox_image_execution_broker_external_repo_readiness_review_no_execute.js passed
+  - node --check scripts\validate_vcptoolbox_image_execution_broker_followup_plan.js passed
+  - node --check scripts\validate_vcptoolbox_image_execution_broker_external_repo_authorization_packet_no_execute.js passed
+  - node --check scripts\validate_ail_core_vcp_adapter_split_plan_no_execute.js passed
+  - JSON parse check for validation manifest, package.json, and edited examples passed
+  - npm run validate:vcptoolbox-image-execution-broker-external-repo-readiness-review-no-execute passed, 21 checks
+  - npm run validate:vcptoolbox-image-execution-broker-followup-plan passed, 21 checks
+  - npm run validate:vcptoolbox-image-execution-broker-external-repo-authorization-packet-no-execute passed, 21 checks
+  - npm run validate:ail-core-vcp-adapter-split-plan-no-execute passed, 22 checks
+  - npm run validate:vcptoolbox-image-execution-broker-implementation-proposal-no-execute passed, 20 checks
+  - npm run validate:generic-image-execution-endpoint-gate-no-execute passed, 20 checks
+  - npm run validate:generation-channel-contract-preflight passed, 21 checks
+  - npm run validate:image-run-capability-binding-preflight-template passed, 17 checks
+  - npm run validate:compatibility-route-thin-ingress-plan-no-execute passed, 18 checks
+  - node scripts\validate_runtime_to_review_v2_multi_prompt_controlled_trial_plan.js passed, 24 checks
+  - npm run validate:validation-manifest passed with validator_count 143
+  - git diff --check passed with LF/CRLF warnings only
+boundary_checks:
+  can_execute_now: false
+  external_VCPToolBox_read_performed: false
+  external_VCPToolBox_write_performed: false
+  external_repo_branch_or_head_checked: false
+  external_repo_target_files_checked: false
+  broker_implementation_performed: false
+  route_implementation_performed: false
+  generic_endpoint_enabled: false
+  migration_allowed_now: false
+  route_http_request_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  dependency_change_performed: false
+  real_manifest_read_performed: false
+  real_VCPChat_read_performed: false
+  real_VCPToolBox_read_performed: false
+  secret_value_read_performed: false
+  accepted_samples_write_performed: false
+  production_candidate_write_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  Codex_memory_write_performed: false
+  push_tag_release_deploy_performed: false
+next_safe_task: prepare_vcptoolbox_image_execution_broker_external_repo_read_preflight_no_execute; do not read or modify VCPToolBox, enable generic endpoint, run route HTTP, or execute image generation without a separate exact gate.
+```
+
+## Current Run State - VCPToolBox Image Execution Broker External Repo Authorization Packet No-Execute 2026-06-10
+
+```text
+phase: vcptoolbox_image_execution_broker_external_repo_authorization_packet_no_execute_20260610
+status: completed_validated_local_external_repo_authorization_packet_no_execute
+lane: Green local authorization packet plus validator, no external repo access
+goal: Define VCPToolBoxImageExecutionBrokerExternalRepoAuthorizationPacket.v1 as a no-execute packet for future exact VCPToolBox broker work.
+branch: master
+changed_refs:
+  - docs/vcptoolbox_image_execution_broker_external_repo_authorization_packet_no_execute.md
+  - tests/schema_examples/vcptoolbox_image_execution_broker_external_repo_authorization_packet_no_execute.example.json
+  - scripts/validate_vcptoolbox_image_execution_broker_external_repo_authorization_packet_no_execute.js
+  - docs/vcptoolbox_image_execution_broker_followup_plan.md
+  - tests/schema_examples/vcptoolbox_image_execution_broker_followup_plan.example.json
+  - scripts/validate_vcptoolbox_image_execution_broker_followup_plan.js
+  - docs/ail_core_vcp_adapter_split_plan_no_execute.md
+  - tests/schema_examples/ail_core_vcp_adapter_split_plan_no_execute.example.json
+  - scripts/validate_ail_core_vcp_adapter_split_plan_no_execute.js
+  - docs/runtime_to_review_v2_multi_prompt_controlled_trial_plan.md
+  - package.json
+  - scripts/validation_manifest.json
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/VALIDATION_LOG.md
+result:
+  - defined target_system=VCPToolBox and target_repo=JENN2046/VCPToolBox with can_execute_now=false
+  - preserved candidate external files as future allowlist only
+  - required future exact read preflight before any VCPToolBox branch/head/file check
+  - required separate future write confirmation before any VCPToolBox modification
+  - blocked secrets, private paths, dependency changes, route HTTP, provider/plugin/API/image calls, generated artifacts, memory writes, commits, pushes, tags, releases, and deploys
+  - advanced broker followup next step to prepare_vcptoolbox_image_execution_broker_external_repo_readiness_review_no_execute
+validation:
+  - node --check scripts\validate_vcptoolbox_image_execution_broker_external_repo_authorization_packet_no_execute.js passed
+  - node --check scripts\validate_vcptoolbox_image_execution_broker_followup_plan.js passed
+  - node --check scripts\validate_ail_core_vcp_adapter_split_plan_no_execute.js passed
+  - JSON parse check for validation manifest, package.json, and edited examples passed
+  - npm run validate:vcptoolbox-image-execution-broker-external-repo-authorization-packet-no-execute passed, 20 checks
+  - npm run validate:vcptoolbox-image-execution-broker-followup-plan passed, 20 checks
+  - npm run validate:ail-core-vcp-adapter-split-plan-no-execute passed, 22 checks
+  - npm run validate:vcptoolbox-image-execution-broker-implementation-proposal-no-execute passed, 20 checks
+  - npm run validate:generic-image-execution-endpoint-gate-no-execute passed, 20 checks
+  - npm run validate:generation-channel-contract-preflight passed, 21 checks
+  - npm run validate:image-run-capability-binding-preflight-template passed, 17 checks
+  - npm run validate:compatibility-route-thin-ingress-plan-no-execute passed, 18 checks
+  - node scripts\validate_runtime_to_review_v2_multi_prompt_controlled_trial_plan.js passed, 24 checks
+  - npm run validate:validation-manifest passed with validator_count 142
+boundary_checks:
+  can_execute_now: false
+  external_VCPToolBox_read_performed: false
+  external_VCPToolBox_write_performed: false
+  external_repo_branch_or_head_checked: false
+  external_repo_target_files_checked: false
+  broker_implementation_performed: false
+  route_implementation_performed: false
+  generic_endpoint_enabled: false
+  migration_allowed_now: false
+  route_http_request_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  dependency_change_performed: false
+  real_manifest_read_performed: false
+  real_VCPChat_read_performed: false
+  real_VCPToolBox_read_performed: false
+  secret_value_read_performed: false
+  accepted_samples_write_performed: false
+  production_candidate_write_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  Codex_memory_write_performed: false
+  push_tag_release_deploy_performed: false
+next_safe_task: prepare_vcptoolbox_image_execution_broker_external_repo_readiness_review_no_execute; do not read or modify VCPToolBox, enable generic endpoint, run route HTTP, or execute image generation without a separate exact gate.
+```
+
+## Current Run State - AIL Core / VCP Adapter Split Plan No-Execute 2026-06-10
+
+```text
+phase: ail_core_vcp_adapter_split_plan_no_execute_20260610
+status: completed_validated_local_split_plan_no_execute
+lane: Green local split plan plus validator, no runtime implementation
+goal: Define AILCoreVCPAdapterSplitPlan.v1 as an ownership boundary between visual-domain objects and VCP execution refs.
+branch: master
+changed_refs:
+  - docs/ail_core_vcp_adapter_split_plan_no_execute.md
+  - tests/schema_examples/ail_core_vcp_adapter_split_plan_no_execute.example.json
+  - scripts/validate_ail_core_vcp_adapter_split_plan_no_execute.js
+  - docs/generic_image_execution_endpoint_gate_no_execute.md
+  - tests/schema_examples/generic_image_execution_endpoint_gate_no_execute.example.json
+  - scripts/validate_generic_image_execution_endpoint_gate_no_execute.js
+  - docs/vcptoolbox_image_execution_broker_followup_plan.md
+  - tests/schema_examples/vcptoolbox_image_execution_broker_followup_plan.example.json
+  - scripts/validate_vcptoolbox_image_execution_broker_followup_plan.js
+  - docs/runtime_to_review_v2_multi_prompt_controlled_trial_plan.md
+  - package.json
+  - scripts/validation_manifest.json
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/VALIDATION_LOG.md
+result:
+  - defined AILCoreVCPAdapterSplitPlan.v1 as split_plan_only_no_runtime_implementation
+  - assigned ProductBrief, ShotPlan, PromptLineage, VisualJobContract, ReviewPolicy, ImageCandidate, ReviewReport, AcceptedCandidate, ArchivePolicy, and MemorySuitabilityDecision to AIL Core
+  - assigned activation refs, ImageRunCapability refs, route/generic endpoint refs, broker request mapping, output policy mapping, receipt/artifact/review bridge mappings, and external authorization refs to VCP Adapter
+  - blocked provider/plugin/API/delegate/model/output/retry dispatch authority from AIL Core and payload
+  - kept review, archive, accepted sample, and memory suitability authority in AIL Core
+  - advanced broker followup next step to prepare_vcptoolbox_image_execution_broker_external_repo_authorization_packet_no_execute
+validation:
+  - node --check scripts\validate_ail_core_vcp_adapter_split_plan_no_execute.js passed
+  - node --check scripts\validate_generic_image_execution_endpoint_gate_no_execute.js passed
+  - node --check scripts\validate_vcptoolbox_image_execution_broker_followup_plan.js passed
+  - JSON parse check for validation manifest and edited examples passed
+  - npm run validate:ail-core-vcp-adapter-split-plan-no-execute passed, 22 checks
+  - npm run validate:generic-image-execution-endpoint-gate-no-execute passed, 20 checks
+  - npm run validate:vcptoolbox-image-execution-broker-followup-plan passed, 19 checks
+  - npm run validate:vcptoolbox-image-execution-broker-implementation-proposal-no-execute passed, 20 checks
+  - npm run validate:compatibility-route-thin-ingress-plan-no-execute passed, 18 checks
+  - npm run validate:generation-channel-contract-preflight passed, 21 checks
+  - npm run validate:image-run-capability-binding-preflight-template passed, 17 checks
+  - node scripts\validate_runtime_to_review_v2_multi_prompt_controlled_trial_plan.js passed, 24 checks
+  - npm run validate:validation-manifest passed, validator_count 141
+  - node scripts\validate_agent_board_state.js passed
+  - git diff --check passed with CRLF normalization warnings only
+boundary_checks:
+  adapter_code_write_performed: false
+  broker_implementation_performed: false
+  generic_endpoint_enabled: false
+  migration_allowed_now: false
+  route_http_request_performed: false
+  external_VCPToolBox_read_performed: false
+  external_VCPToolBox_write_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  dependency_change_performed: false
+  real_manifest_read_performed: false
+  real_VCPChat_read_performed: false
+  real_VCPToolBox_read_performed: false
+  secret_value_read_performed: false
+  accepted_samples_write_performed: false
+  production_candidate_write_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  Codex_memory_write_performed: false
+  push_tag_release_deploy_performed: false
+next_safe_task: prepare_vcptoolbox_image_execution_broker_external_repo_authorization_packet_no_execute; do not modify VCPToolBox, enable generic endpoint, write adapter code, run route HTTP, or execute image generation without a separate exact gate.
+```
+
+## Current Run State - Generic Image Execution Endpoint Gate No-Execute 2026-06-10
+
+```text
+phase: generic_image_execution_endpoint_gate_no_execute_20260610
+status: completed_validated_local_generic_endpoint_gate_no_execute
+lane: Green local endpoint migration gate plus validator, no endpoint enablement
+goal: Define GenericImageExecutionEndpointGate.v1 as a no-execute migration gate for /internal/agent-image-lab/executions/run.
+branch: master
+changed_refs:
+  - docs/generic_image_execution_endpoint_gate_no_execute.md
+  - tests/schema_examples/generic_image_execution_endpoint_gate_no_execute.example.json
+  - scripts/validate_generic_image_execution_endpoint_gate_no_execute.js
+  - docs/vcptoolbox_image_execution_broker_followup_plan.md
+  - tests/schema_examples/vcptoolbox_image_execution_broker_followup_plan.example.json
+  - scripts/validate_vcptoolbox_image_execution_broker_followup_plan.js
+  - docs/runtime_to_review_v2_multi_prompt_controlled_trial_plan.md
+  - package.json
+  - scripts/validation_manifest.json
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/VALIDATION_LOG.md
+result:
+  - defined GenericImageExecutionEndpointGate.v1 as migration_gate_only_no_enablement
+  - kept generic_endpoint_candidate=/internal/agent-image-lab/executions/run disabled
+  - kept migration_allowed_now=false and route_http_allowed_by_this_gate=false
+  - kept current task-specific Trial 001 and Trial 002 routes as compatibility shims
+  - distinguished design evidence from endpoint enablement evidence
+  - required exact VCPToolBox external-repo authorization, broker validation, endpoint envelope tests, and rollback/route restore plan before enablement
+  - advanced broker followup next step to prepare_ail_core_vcp_adapter_split_plan_no_execute
+validation:
+  - node --check scripts\validate_generic_image_execution_endpoint_gate_no_execute.js passed
+  - node --check scripts\validate_vcptoolbox_image_execution_broker_followup_plan.js passed
+  - JSON parse check for validation manifest and edited examples passed
+  - npm run validate:generic-image-execution-endpoint-gate-no-execute passed, 20 checks
+  - npm run validate:vcptoolbox-image-execution-broker-followup-plan passed, 19 checks
+  - npm run validate:vcptoolbox-image-execution-broker-implementation-proposal-no-execute passed, 20 checks
+  - npm run validate:compatibility-route-thin-ingress-plan-no-execute passed, 18 checks
+  - npm run validate:generation-channel-contract-preflight passed, 21 checks
+  - npm run validate:image-run-capability-binding-preflight-template passed, 17 checks
+  - node scripts\validate_runtime_to_review_v2_multi_prompt_controlled_trial_plan.js passed, 24 checks
+  - npm run validate:validation-manifest passed, validator_count 140
+  - node scripts\validate_agent_board_state.js passed
+  - git diff --check passed with CRLF normalization warnings only
+boundary_checks:
+  generic_endpoint_enabled: false
+  migration_allowed_now: false
+  route_http_request_performed: false
+  route_implementation_performed: false
+  broker_implementation_performed: false
+  external_VCPToolBox_read_performed: false
+  external_VCPToolBox_write_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  dependency_change_performed: false
+  real_manifest_read_performed: false
+  real_VCPChat_read_performed: false
+  real_VCPToolBox_read_performed: false
+  secret_value_read_performed: false
+  accepted_samples_write_performed: false
+  production_candidate_write_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  Codex_memory_write_performed: false
+  push_tag_release_deploy_performed: false
+next_safe_task: prepare_ail_core_vcp_adapter_split_plan_no_execute; do not modify VCPToolBox, enable generic endpoint, run route HTTP, or execute image generation without a separate exact gate.
+```
+
+## Current Run State - VCPToolBox Broker Implementation Proposal No-Execute 2026-06-10
+
+```text
+phase: vcptoolbox_image_execution_broker_implementation_proposal_no_execute_20260610
+status: completed_validated_local_external_repo_proposal_no_execute
+lane: Green local external-repo proposal plus validator, no external read/write
+goal: Define the future VCPToolBox broker implementation proposal packet with exact target repo, candidate files, forbidden actions, validation, rollback, and future authorization requirements.
+branch: master
+changed_refs:
+  - docs/vcptoolbox_image_execution_broker_implementation_proposal_no_execute.md
+  - tests/schema_examples/vcptoolbox_image_execution_broker_implementation_proposal_no_execute.example.json
+  - scripts/validate_vcptoolbox_image_execution_broker_implementation_proposal_no_execute.js
+  - docs/compatibility_route_thin_ingress_plan_no_execute.md
+  - tests/schema_examples/compatibility_route_thin_ingress_plan_no_execute.example.json
+  - scripts/validate_compatibility_route_thin_ingress_plan_no_execute.js
+  - docs/image_run_capability_binding_preflight_template.md
+  - tests/schema_examples/image_run_capability_binding_preflight_template.example.json
+  - scripts/validate_image_run_capability_binding_preflight_template.js
+  - docs/generation_channel_contract_preflight.md
+  - tests/schema_examples/generation_channel_contract_preflight.example.json
+  - scripts/validate_generation_channel_contract_preflight.js
+  - docs/vcptoolbox_image_execution_broker_followup_plan.md
+  - tests/schema_examples/vcptoolbox_image_execution_broker_followup_plan.example.json
+  - scripts/validate_vcptoolbox_image_execution_broker_followup_plan.js
+  - docs/runtime_to_review_v2_multi_prompt_controlled_trial_plan.md
+  - package.json
+  - scripts/validation_manifest.json
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/VALIDATION_LOG.md
+result:
+  - defined VCPToolBoxImageExecutionBrokerImplementationProposal.v1 as proposal_only_no_external_write
+  - recorded target_system=VCPToolBox and target_repo=JENN2046/VCPToolBox with external_repo_write_allowed_now=false
+  - captured candidate external files as a future exact allowlist, not as authorization to write
+  - required broker components for internal authorizer, capability registry, restricted plugin facade, artifact/receipt writer, review queue bridge, and memory candidate gate
+  - required future authorization packet before any VCPToolBox read/write
+  - advanced followup plan next step to prepare_generic_image_execution_endpoint_gate_no_execute
+validation:
+  - node --check scripts\validate_vcptoolbox_image_execution_broker_implementation_proposal_no_execute.js passed
+  - npm run validate:vcptoolbox-image-execution-broker-implementation-proposal-no-execute passed, 20 checks
+  - npm run validate:compatibility-route-thin-ingress-plan-no-execute passed, 18 checks
+  - npm run validate:image-run-capability-binding-preflight-template passed, 17 checks
+  - npm run validate:generation-channel-contract-preflight passed, 21 checks
+  - npm run validate:vcptoolbox-image-execution-broker-followup-plan passed, 19 checks
+  - node scripts\validate_runtime_to_review_v2_multi_prompt_controlled_trial_plan.js passed, 24 checks
+  - npm run validate:validation-manifest passed, validator_count 139
+  - node scripts\validate_agent_board_state.js passed
+  - git diff --check passed with CRLF normalization warnings only
+boundary_checks:
+  external_VCPToolBox_read_performed: false
+  external_VCPToolBox_write_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  route_http_request_performed: false
+  broker_implementation_performed: false
+  route_implementation_performed: false
+  generic_endpoint_enabled: false
+  dependency_change_performed: false
+  real_manifest_read_performed: false
+  real_VCPChat_read_performed: false
+  real_VCPToolBox_read_performed: false
+  secret_value_read_performed: false
+  accepted_samples_write_performed: false
+  production_candidate_write_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  Codex_memory_write_performed: false
+  push_tag_release_deploy_performed: false
+next_safe_task: prepare_generic_image_execution_endpoint_gate_no_execute; do not modify VCPToolBox, enable generic endpoint, run route HTTP, or execute image generation without a separate exact gate.
+```
+
+## Current Run State - Compatibility Route Thin Ingress Plan 2026-06-10
+
+```text
+phase: compatibility_route_thin_ingress_plan_no_execute_20260610
+status: completed_validated_local_thin_ingress_plan_no_execute
+lane: Green local route plan plus validator, no real execution
+goal: Constrain existing Trial-specific routes as identity-and-transport-only compatibility ingress while keeping execution authority in VisualJobContract plus VCPToolBox-owned binding refs.
+branch: master
+changed_refs:
+  - docs/compatibility_route_thin_ingress_plan_no_execute.md
+  - tests/schema_examples/compatibility_route_thin_ingress_plan_no_execute.example.json
+  - scripts/validate_compatibility_route_thin_ingress_plan_no_execute.js
+  - docs/image_run_capability_binding_preflight_template.md
+  - tests/schema_examples/image_run_capability_binding_preflight_template.example.json
+  - scripts/validate_image_run_capability_binding_preflight_template.js
+  - docs/generation_channel_contract_preflight.md
+  - tests/schema_examples/generation_channel_contract_preflight.example.json
+  - scripts/validate_generation_channel_contract_preflight.js
+  - docs/vcptoolbox_image_execution_broker_followup_plan.md
+  - tests/schema_examples/vcptoolbox_image_execution_broker_followup_plan.example.json
+  - scripts/validate_vcptoolbox_image_execution_broker_followup_plan.js
+  - docs/runtime_to_review_v2_multi_prompt_controlled_trial_plan.md
+  - package.json
+  - scripts/validation_manifest.json
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/VALIDATION_LOG.md
+result:
+  - defined CompatibilityRouteThinIngressPlan.v1 as compatibility_plan_only
+  - constrained Trial 001 and Trial 002 routes to identity_and_transport_only
+  - required route dispatch authority to remain false for provider/plugin/API/output/retry choices
+  - kept generic endpoint candidate /internal/agent-image-lab/executions/run disabled and migration_allowed_now=false
+  - advanced followup plan next step to prepare_vcptoolbox_image_execution_broker_implementation_proposal_no_execute
+validation:
+  - node --check scripts\validate_compatibility_route_thin_ingress_plan_no_execute.js passed
+  - npm run validate:compatibility-route-thin-ingress-plan-no-execute passed, 18 checks
+  - npm run validate:image-run-capability-binding-preflight-template passed, 17 checks
+  - npm run validate:generation-channel-contract-preflight passed, 21 checks
+  - npm run validate:vcptoolbox-image-execution-broker-followup-plan passed, 19 checks
+  - node scripts\validate_runtime_to_review_v2_multi_prompt_controlled_trial_plan.js passed, 24 checks
+  - npm run validate:validation-manifest passed, validator_count 138
+  - node scripts\validate_agent_board_state.js passed
+  - git diff --check passed with CRLF normalization warnings only
+boundary_checks:
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  route_http_request_performed: false
+  route_implementation_performed: false
+  generic_endpoint_enabled: false
+  external_VCPToolBox_write_performed: false
+  real_manifest_read_performed: false
+  real_VCPChat_read_performed: false
+  real_VCPToolBox_read_performed: false
+  secret_value_read_performed: false
+  accepted_samples_write_performed: false
+  production_candidate_write_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  Codex_memory_write_performed: false
+  push_tag_release_deploy_performed: false
+next_safe_task: prepare_vcptoolbox_image_execution_broker_implementation_proposal_no_execute; do not modify VCPToolBox, enable generic endpoint, run route HTTP, or execute image generation without a separate exact gate.
+```
+
+## Current Run State - ImageRunCapability Binding Preflight Template 2026-06-10
+
+```text
+phase: image_run_capability_binding_preflight_template_20260610
+status: completed_validated_local_binding_template_no_execute
+lane: Green local binding template plus validator, no real execution
+goal: Convert ImageRunCapabilityRef into a no-execute binding preflight template that validates against Trial 001/002 generation channel snapshots and binding-ready packets.
+branch: master
+changed_refs:
+  - docs/image_run_capability_binding_preflight_template.md
+  - tests/schema_examples/image_run_capability_binding_preflight_template.example.json
+  - scripts/validate_image_run_capability_binding_preflight_template.js
+  - docs/generation_channel_contract_preflight.md
+  - tests/schema_examples/generation_channel_contract_preflight.example.json
+  - scripts/validate_generation_channel_contract_preflight.js
+  - docs/vcptoolbox_image_execution_broker_followup_plan.md
+  - tests/schema_examples/vcptoolbox_image_execution_broker_followup_plan.example.json
+  - scripts/validate_vcptoolbox_image_execution_broker_followup_plan.js
+  - docs/runtime_to_review_v2_multi_prompt_controlled_trial_plan.md
+  - package.json
+  - scripts/validation_manifest.json
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/VALIDATION_LOG.md
+result:
+  - defined ImageRunCapabilityBindingPreflight.v1 as proposed_binding_template_only
+  - required VCPToolBox_internal_binding as dispatch authority and ail_payload_dispatch_authority=false
+  - converted Trial 001 and Trial 002 ImageRunCapabilityRef evidence into no-execute binding templates
+  - validated each template against parent generation snapshots and historical binding-ready packets while keeping can_execute_now=false
+  - advanced followup plan next step to prepare_compatibility_route_thin_ingress_plan_no_execute
+validation:
+  - node --check scripts\validate_image_run_capability_binding_preflight_template.js passed
+  - npm run validate:image-run-capability-binding-preflight-template passed, 17 checks
+  - npm run validate:generation-channel-contract-preflight passed, 21 checks
+  - npm run validate:vcptoolbox-image-execution-broker-followup-plan passed, 19 checks
+  - node scripts\validate_runtime_to_review_v2_multi_prompt_controlled_trial_plan.js passed, 24 checks
+  - npm run validate:validation-manifest passed, validator_count 137
+  - node scripts\validate_agent_board_state.js passed
+  - git diff --check passed with CRLF normalization warnings only
+boundary_checks:
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  route_http_request_performed: false
+  external_VCPToolBox_write_performed: false
+  real_manifest_read_performed: false
+  real_VCPChat_read_performed: false
+  real_VCPToolBox_read_performed: false
+  secret_value_read_performed: false
+  accepted_samples_write_performed: false
+  production_candidate_write_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  Codex_memory_write_performed: false
+  push_tag_release_deploy_performed: false
+next_safe_task: prepare_compatibility_route_thin_ingress_plan_no_execute; do not implement VCPToolBox broker, migrate endpoints, run route HTTP, or execute image generation from this template.
+```
+
+## Current Run State - AIL Generation Channel Contract Preflight 2026-06-09
+
+```text
+phase: ail_generation_channel_contract_preflight_20260609
+status: completed_validated_local_contract_no_execute
+lane: Green local contract plus validator, no real execution
+goal: Freeze VisualJobContract, ImageRunCapabilityRef, RestrictedPluginFacadeBoundary, ArtifactReceiptGate, ReviewQueueGate, and MemoryCandidateGate as a repo-local generation channel contract.
+branch: master
+changed_refs:
+  - docs/generation_channel_contract_preflight.md
+  - tests/schema_examples/generation_channel_contract_preflight.example.json
+  - scripts/validate_generation_channel_contract_preflight.js
+  - docs/vcptoolbox_image_execution_broker_followup_plan.md
+  - tests/schema_examples/vcptoolbox_image_execution_broker_followup_plan.example.json
+  - scripts/validate_vcptoolbox_image_execution_broker_followup_plan.js
+  - package.json
+  - scripts/validation_manifest.json
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/VALIDATION_LOG.md
+result:
+  - derived stable contract fields from Trial 001 and Trial 002 binding/artifact/review evidence
+  - required VisualJobContract to reference ImageRunCapabilityRef rather than dispatch arbitrary provider/plugin/API
+  - locked RestrictedPluginFacadeBoundary to DoubaoGen/generate_image/one call/no full pluginManager exposure
+  - locked ArtifactReceiptGate to receipt_ref, artifact_record_ref, and review_bridge_ref
+  - locked ReviewQueueGate and MemoryCandidateGate to delayed, reviewed, non-default writes
+  - advanced broker followup next step to prepare_image_run_capability_binding_preflight_template
+validation:
+  - node --check scripts\validate_generation_channel_contract_preflight.js passed
+  - npm run validate:generation-channel-contract-preflight passed, 21 checks
+  - npm run validate:vcptoolbox-image-execution-broker-followup-plan passed, 19 checks
+  - npm run validate:validation-manifest passed, validator_count 136
+  - node scripts\validate_agent_board_state.js passed
+  - git diff --check passed with CRLF normalization warnings only
+boundary_checks:
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  route_http_request_performed: false
+  external_VCPToolBox_write_performed: false
+  real_manifest_read_performed: false
+  real_VCPChat_read_performed: false
+  real_VCPToolBox_read_performed: false
+  secret_value_read_performed: false
+  accepted_samples_write_performed: false
+  production_candidate_write_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  Codex_memory_write_performed: false
+  push_tag_release_deploy_performed: false
+next_safe_task: prepare_image_run_capability_binding_preflight_template; do not run provider/image or modify VCPToolBox without a separate exact gate.
+```
+
+## Current Run State - VCPToolBox Image Execution Broker Followup Plan 2026-06-09
+
+```text
+phase: vcptoolbox_image_execution_broker_followup_plan_20260609
+status: completed_validated_local_plan_no_execute
+lane: Green local architecture planning plus validator, no real execution
+goal: Adapt the external Image Execution Broker draft into the repo's followup plan and route the next work to an AIL-side generation channel contract preflight.
+branch: master
+changed_refs:
+  - docs/vcptoolbox_image_execution_broker_followup_plan.md
+  - tests/schema_examples/vcptoolbox_image_execution_broker_followup_plan.example.json
+  - scripts/validate_vcptoolbox_image_execution_broker_followup_plan.js
+  - docs/runtime_to_review_v2_multi_prompt_controlled_trial_plan.md
+  - package.json
+  - scripts/validation_manifest.json
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+  - .agent_board/VALIDATION_LOG.md
+result:
+  - adopted docs/vcptoolbox_image_execution_broker_design_input_sanitized.md as sanitized repo-local design input
+  - translated the draft to current Runtime-To-Review V2 state instead of attempt-007-only route names
+  - set WP1 as ail_generation_channel_contract_preflight_no_execute
+  - kept full VCPToolBox broker implementation and generic endpoint migration behind later exact gates
+validation:
+  - node --check scripts\validate_vcptoolbox_image_execution_broker_followup_plan.js passed
+  - npm run validate:vcptoolbox-image-execution-broker-followup-plan passed, 19 checks
+  - node scripts\validate_runtime_to_review_v2_multi_prompt_controlled_trial_plan.js passed, 24 checks
+  - npm run validate:validation-manifest passed, validator_count 135
+  - node scripts\validate_agent_board_state.js passed
+  - git diff --check passed with CRLF normalization warnings only
+boundary_checks:
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  route_http_request_performed: false
+  external_VCPToolBox_write_performed: false
+  real_manifest_read_performed: false
+  real_VCPChat_read_performed: false
+  real_VCPToolBox_read_performed: false
+  secret_value_read_performed: false
+  accepted_samples_write_performed: false
+  production_candidate_write_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  push_tag_release_deploy_performed: false
+next_safe_task: prepare_ail_generation_channel_contract_preflight_no_execute; do not run provider/image or modify VCPToolBox without a separate exact gate.
+```
+
+## Current Run State - Runtime-To-Review V2 Trial 002 Memory Authorization Preflight 2026-06-09
+
+```text
+phase: runtime_to_review_v2_trial_002_lantern_ecommerce_hero_memory_authorization_preflight_20260609
+status: completed_validated_memory_authorization_preflight_no_write
+lane: Green local memory authorization preflight, no memory write
+goal: Decide whether the Trial 002 accepted candidate should advance toward a future memory write.
+branch: master
+preflight_ref: reports/memory_write_authorization/r2r_v2_trial_002_codex_knowledge_memory_authorization_preflight_20260609.json
+payload_ref: reports/memory_write_payloads/r2r_v2_trial_002_codex_knowledge_memory_write_payload_candidate_20260609.json
+source_candidate_id: memcand_r2r_v2_trial_002_lantern_ecommerce_hero_20260609
+source_artifact_sha256: 775b9f584daaa28eebc5e1eb100479d3efd1ce0c30379c6750038e6930952f36
+authorization_decision:
+  - decision: eligible_for_future_codex_knowledge_memory_write_packet
+  - recommended_future_writer: mcp__vcp_codex_memory.record_memory
+  - recommended_future_target: knowledge
+  - recommended_future_targetDiary: Codex knowledge
+  - can_execute_now: false
+  - authorization_granted_by_this_preflight: false
+result:
+  - Trial 002 remains accepted_candidate, not commercial_delivery_ready.
+  - The payload preview is Chinese, project-relative, reusable, non-secret, non-binary, and memory-safe.
+  - DailyNote and VCP dual-memory paths remain excluded; only a future single Codex knowledge packet is eligible.
+boundary_checks:
+  record_memory_called: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  Codex_memory_write_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  accepted_samples_write_performed: false
+  durable_archive_write_performed: false
+  production_candidate_write_performed: false
+  push_tag_release_deploy_performed: false
+validation:
+  - node --check scripts\validate_runtime_to_review_v2_trial_002_memory_authorization_preflight.js passed
+  - npm run validate:runtime-to-review-trial-002-memory-authorization-preflight passed, 9 checks
+  - npm run validate:validation-manifest passed, validator_count 134
+next_safe_task: pause, or prepare a separate binding-ready Codex knowledge memory write packet with one-call/zero-retry limits and receipt requirements.
+```
+
 ## Current Run State - PR13 Post-Merge Local Master Fast-Forward Sync 2026-06-09
 
 ```text

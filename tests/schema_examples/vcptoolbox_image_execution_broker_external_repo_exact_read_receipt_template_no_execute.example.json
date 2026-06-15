@@ -1,0 +1,315 @@
+{
+  "vcptoolbox_image_execution_broker_external_repo_exact_read_receipt_template_no_execute": {
+    "phase": "vcptoolbox_image_execution_broker_external_repo_exact_read_receipt_template_no_execute_20260610",
+    "status": "local_exact_read_receipt_template_no_execute",
+    "parent_read_authorization_packet_ref": "docs/vcptoolbox_image_execution_broker_external_repo_read_authorization_packet_no_execute.md",
+    "parent_followup_plan_ref": "docs/vcptoolbox_image_execution_broker_followup_plan.md",
+    "source_refs": {
+      "broker_followup_plan_ref": "docs/vcptoolbox_image_execution_broker_followup_plan.md",
+      "external_repo_read_authorization_packet_ref": "docs/vcptoolbox_image_execution_broker_external_repo_read_authorization_packet_no_execute.md",
+      "external_repo_read_preflight_ref": "docs/vcptoolbox_image_execution_broker_external_repo_read_preflight_no_execute.md",
+      "external_repo_readiness_review_ref": "docs/vcptoolbox_image_execution_broker_external_repo_readiness_review_no_execute.md",
+      "external_repo_authorization_packet_ref": "docs/vcptoolbox_image_execution_broker_external_repo_authorization_packet_no_execute.md",
+      "ail_core_vcp_adapter_split_plan_ref": "docs/ail_core_vcp_adapter_split_plan_no_execute.md"
+    },
+    "receipt_template_contract": {
+      "schema_id": "vcptoolbox_image_execution_broker_external_repo_exact_read_receipt_template.v1",
+      "prepared_by": "Agent_Image_Lab",
+      "target_system": "VCPToolBox",
+      "target_repo": "JENN2046/VCPToolBox",
+      "authority_status": "exact_read_receipt_template_only_no_external_access",
+      "template_result": "ready_for_future_exact_read_receipt_population",
+      "can_execute_now": false,
+      "external_repo_read_allowed_now": false,
+      "external_repo_write_allowed_now": false,
+      "receipt_write_allowed_now": false,
+      "receipt_population_allowed_now": false,
+      "route_http_allowed_now": false,
+      "provider_plugin_api_image_allowed_now": false,
+      "secret_value_read_allowed": false,
+      "dependency_change_allowed": false,
+      "raw_source_copy_allowed": false,
+      "private_path_print_allowed": false,
+      "push_allowed": false,
+      "required_fields": [
+        "receipt_schema_id",
+        "read_packet_id",
+        "read_authorization_packet_ref",
+        "receipt_template_ref",
+        "target_system",
+        "target_repo",
+        "workspace_verified_without_printing_private_path",
+        "workspace_private_path_recorded",
+        "current_branch",
+        "current_head",
+        "remote_tracking_head_or_unavailable",
+        "working_tree_status_summary",
+        "allowed_git_commands_used",
+        "allowed_file_reads_used",
+        "candidate_file_matrix",
+        "forbidden_paths_attempted",
+        "sanitized_summary_only",
+        "secret_value_read_performed",
+        "raw_source_copied_into_AIL",
+        "external_write_performed",
+        "route_http_request_performed",
+        "provider_plugin_api_image_performed",
+        "dependency_change_performed",
+        "read_receipt_written",
+        "next_write_gate_allowed",
+        "stop_reason",
+        "validation_summary"
+      ]
+    },
+    "future_receipt_target": {
+      "target_directory": "reports/external_repo_reads/",
+      "filename_pattern": "vcptoolbox_image_execution_broker_exact_read_receipt_<yyyymmdd>.json",
+      "target_write_allowed_now": false,
+      "overwrite_existing_receipt_allowed": false,
+      "receipt_must_reference_this_template": true,
+      "receipt_must_reference_read_authorization_packet": true
+    },
+    "authorized_future_git_commands": [
+      {
+        "id": "current_branch",
+        "command_template": "git -C <VCPTOOLBOX_WORKSPACE> branch --show-current",
+        "required_receipt_field": "current_branch"
+      },
+      {
+        "id": "working_tree_status",
+        "command_template": "git -C <VCPTOOLBOX_WORKSPACE> status --short",
+        "required_receipt_field": "working_tree_status_summary"
+      },
+      {
+        "id": "current_head",
+        "command_template": "git -C <VCPTOOLBOX_WORKSPACE> rev-parse HEAD",
+        "required_receipt_field": "current_head"
+      },
+      {
+        "id": "remote_tracking_head",
+        "command_template": "git -C <VCPTOOLBOX_WORKSPACE> rev-parse origin/main",
+        "required_receipt_field": "remote_tracking_head_or_unavailable"
+      },
+      {
+        "id": "recent_history",
+        "command_template": "git -C <VCPTOOLBOX_WORKSPACE> log --oneline --decorate -n 10",
+        "required_receipt_field": "validation_summary.recent_history_summary"
+      }
+    ],
+    "candidate_file_matrix_template": {
+      "entry_required_fields": [
+        "path",
+        "exists",
+        "read_attempted",
+        "if_missing",
+        "summary_fields",
+        "missing_or_conflict_notes",
+        "raw_source_included",
+        "secret_value_detected_or_read"
+      ],
+      "allowed_summary_fields": [
+        "path",
+        "exists",
+        "inferred_role",
+        "exported_symbol_names_if_obvious",
+        "import_dependency_names_if_obvious",
+        "route_or_module_boundary_summary",
+        "dispatch_authority_risk_summary",
+        "missing_or_conflict_notes"
+      ],
+      "entries": [
+        {
+          "path": "services/agentImageLab/ImageExecutionBroker.js",
+          "exists": "to_be_recorded_at_execution_time",
+          "read_attempted": "to_be_recorded_at_execution_time",
+          "if_missing": "record_absent_without_creating",
+          "summary_fields": [
+            "path",
+            "exists",
+            "inferred_role",
+            "exported_symbol_names_if_obvious",
+            "import_dependency_names_if_obvious",
+            "route_or_module_boundary_summary",
+            "dispatch_authority_risk_summary",
+            "missing_or_conflict_notes"
+          ],
+          "missing_or_conflict_notes": "to_be_recorded_at_execution_time",
+          "raw_source_included": false,
+          "secret_value_detected_or_read": false
+        },
+        {
+          "path": "services/agentImageLab/ImageRunCapabilityRegistry.js",
+          "exists": "to_be_recorded_at_execution_time",
+          "read_attempted": "to_be_recorded_at_execution_time",
+          "if_missing": "record_absent_without_creating",
+          "summary_fields": [
+            "path",
+            "exists",
+            "inferred_role",
+            "exported_symbol_names_if_obvious",
+            "import_dependency_names_if_obvious",
+            "route_or_module_boundary_summary",
+            "dispatch_authority_risk_summary",
+            "missing_or_conflict_notes"
+          ],
+          "missing_or_conflict_notes": "to_be_recorded_at_execution_time",
+          "raw_source_included": false,
+          "secret_value_detected_or_read": false
+        },
+        {
+          "path": "services/agentImageLab/RestrictedPluginFacade.js",
+          "exists": "to_be_recorded_at_execution_time",
+          "read_attempted": "to_be_recorded_at_execution_time",
+          "if_missing": "record_absent_without_creating",
+          "summary_fields": [
+            "path",
+            "exists",
+            "inferred_role",
+            "exported_symbol_names_if_obvious",
+            "import_dependency_names_if_obvious",
+            "route_or_module_boundary_summary",
+            "dispatch_authority_risk_summary",
+            "missing_or_conflict_notes"
+          ],
+          "missing_or_conflict_notes": "to_be_recorded_at_execution_time",
+          "raw_source_included": false,
+          "secret_value_detected_or_read": false
+        },
+        {
+          "path": "services/agentImageLab/ArtifactReceiptWriter.js",
+          "exists": "to_be_recorded_at_execution_time",
+          "read_attempted": "to_be_recorded_at_execution_time",
+          "if_missing": "record_absent_without_creating",
+          "summary_fields": [
+            "path",
+            "exists",
+            "inferred_role",
+            "exported_symbol_names_if_obvious",
+            "import_dependency_names_if_obvious",
+            "route_or_module_boundary_summary",
+            "dispatch_authority_risk_summary",
+            "missing_or_conflict_notes"
+          ],
+          "missing_or_conflict_notes": "to_be_recorded_at_execution_time",
+          "raw_source_included": false,
+          "secret_value_detected_or_read": false
+        },
+        {
+          "path": "routes/agentImageLabImageExecution.js",
+          "exists": "to_be_recorded_at_execution_time",
+          "read_attempted": "to_be_recorded_at_execution_time",
+          "if_missing": "record_absent_without_creating",
+          "summary_fields": [
+            "path",
+            "exists",
+            "inferred_role",
+            "exported_symbol_names_if_obvious",
+            "import_dependency_names_if_obvious",
+            "route_or_module_boundary_summary",
+            "dispatch_authority_risk_summary",
+            "missing_or_conflict_notes"
+          ],
+          "missing_or_conflict_notes": "to_be_recorded_at_execution_time",
+          "raw_source_included": false,
+          "secret_value_detected_or_read": false
+        },
+        {
+          "path": "tests/agentImageLab/imageExecutionBroker.test.js",
+          "exists": "to_be_recorded_at_execution_time",
+          "read_attempted": "to_be_recorded_at_execution_time",
+          "if_missing": "record_absent_without_creating",
+          "summary_fields": [
+            "path",
+            "exists",
+            "inferred_role",
+            "exported_symbol_names_if_obvious",
+            "import_dependency_names_if_obvious",
+            "route_or_module_boundary_summary",
+            "dispatch_authority_risk_summary",
+            "missing_or_conflict_notes"
+          ],
+          "missing_or_conflict_notes": "to_be_recorded_at_execution_time",
+          "raw_source_included": false,
+          "secret_value_detected_or_read": false
+        }
+      ]
+    },
+    "forbidden_receipt_fields": [
+      "raw_source_text",
+      "raw_private_paths",
+      "raw_secret_values",
+      "raw_env_values",
+      "full_file_dump",
+      "unrelated_file_content",
+      "write_patch",
+      "generated_artifact_path_with_content",
+      "package_or_lockfile_content"
+    ],
+    "required_false_evidence_flags": {
+      "workspace_private_path_recorded": false,
+      "secret_value_read_performed": false,
+      "raw_source_copied_into_AIL": false,
+      "external_write_performed": false,
+      "route_http_request_performed": false,
+      "provider_plugin_api_image_performed": false,
+      "dependency_change_performed": false,
+      "next_write_gate_allowed": false
+    },
+    "future_receipt_validation_rules": [
+      "receipt_schema_id equals vcptoolbox_image_execution_broker_external_repo_exact_read_receipt.v1",
+      "read_authorization_packet_ref matches docs/vcptoolbox_image_execution_broker_external_repo_read_authorization_packet_no_execute.md",
+      "receipt_template_ref matches docs/vcptoolbox_image_execution_broker_external_repo_exact_read_receipt_template_no_execute.md",
+      "allowed_git_commands_used contains only the five authorized command ids",
+      "allowed_file_reads_used contains only the six authorized candidate paths",
+      "candidate_file_matrix contains exactly the six authorized candidate paths",
+      "forbidden_paths_attempted is an empty array",
+      "sanitized_summary_only is true",
+      "all required false evidence flags are false",
+      "next_write_gate_allowed is false"
+    ],
+    "validation_plan": {
+      "local_AIL_no_execute_validation": [
+        "npm run validate:vcptoolbox-image-execution-broker-external-repo-exact-read-receipt-template-no-execute",
+        "npm run validate:vcptoolbox-image-execution-broker-external-repo-read-authorization-packet-no-execute",
+        "npm run validate:vcptoolbox-image-execution-broker-followup-plan",
+        "npm run validate:ail-core-vcp-adapter-split-plan-no-execute",
+        "npm run validate:validation-manifest"
+      ]
+    },
+    "execution_boundary": {
+      "can_execute_now": false,
+      "external_VCPToolBox_read_performed": false,
+      "external_VCPToolBox_write_performed": false,
+      "external_repo_branch_or_head_checked": false,
+      "external_repo_target_files_checked": false,
+      "read_receipt_written_now": false,
+      "receipt_population_performed_now": false,
+      "raw_source_copied_into_AIL": false,
+      "route_http_request_performed": false,
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "image_generation_performed": false,
+      "real_manifest_read_performed": false,
+      "real_VCPChat_read_performed": false,
+      "real_VCPToolBox_read_performed": false,
+      "secret_value_read_performed": false,
+      "dependency_change_performed": false,
+      "accepted_samples_write_performed": false,
+      "production_candidate_write_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "Codex_memory_write_performed": false,
+      "commit_performed": false,
+      "push_tag_release_deploy_performed": false
+    },
+    "completed_previous": "prepare_vcptoolbox_image_execution_broker_external_repo_exact_read_receipt_template_no_execute",
+    "recommended_next": "perform_vcptoolbox_image_execution_broker_external_repo_exact_read_with_receipt_only_after_separate_authorization",
+    "automatic_real_execution_allowed_by_this_template": false,
+    "external_repo_read_performed_by_this_template": false,
+    "external_repo_write_allowed_by_this_template": false,
+    "read_receipt_written_by_this_template": false,
+    "broker_implementation_allowed_by_this_template": false,
+    "generic_endpoint_enablement_allowed_by_this_template": false
+  }
+}

@@ -203,6 +203,22 @@ at least two v2 trials produce comparable artifact/review evidence, or after one
 trial exposes a clear repeated runtime boundary that should be encoded before
 more live calls.
 
+The adopted broker followup plan is
+`docs/vcptoolbox_image_execution_broker_followup_plan.md`. It turns the external
+VCPToolBox Image Execution Broker draft into the current project-local followup
+route:
+
+```yaml
+current_broker_followup_next: perform_vcptoolbox_image_execution_broker_external_repo_exact_read_with_receipt_only_after_separate_authorization
+current_broker_followup_completed_previous: prepare_vcptoolbox_image_execution_broker_external_repo_exact_read_receipt_template_no_execute
+external_repo_exact_read_receipt_template_ref: docs/vcptoolbox_image_execution_broker_external_repo_exact_read_receipt_template_no_execute.md
+external_repo_exact_read_receipt_template_status: completed_validated_no_execute_template_20260610
+external_draft_status: adopted_as_design_input_only
+full_VCPToolBox_broker_implementation_allowed_now: false
+generic_endpoint_migration_allowed_now: false
+real_execution_allowed_by_broker_followup_plan: false
+```
+
 ## Recommended Next
 
 ```yaml

@@ -1,0 +1,196 @@
+{
+  "compatibility_route_thin_ingress_plan_no_execute": {
+    "phase": "compatibility_route_thin_ingress_plan_no_execute_20260610",
+    "status": "local_thin_ingress_plan_no_execute",
+    "parent_binding_template_ref": "docs/image_run_capability_binding_preflight_template.md",
+    "parent_plan_ref": "docs/vcptoolbox_image_execution_broker_followup_plan.md",
+    "source_refs": {
+      "broker_followup_plan_ref": "docs/vcptoolbox_image_execution_broker_followup_plan.md",
+      "generation_channel_contract_ref": "docs/generation_channel_contract_preflight.md",
+      "image_run_capability_binding_template_ref": "docs/image_run_capability_binding_preflight_template.md",
+      "image_run_capability_binding_template_example_ref": "tests/schema_examples/image_run_capability_binding_preflight_template.example.json"
+    },
+    "thin_ingress_contract": {
+      "schema_id": "compatibility_route_thin_ingress_plan.v1",
+      "owned_by": "VCPToolBox",
+      "prepared_by": "Agent_Image_Lab",
+      "authority_status": "compatibility_plan_only",
+      "route_role": "identity_and_transport_only",
+      "current_endpoint_status": "compatibility_shim_until_broker_ready",
+      "generic_endpoint_candidate": "/internal/agent-image-lab/executions/run",
+      "generic_endpoint_enabled_now": false,
+      "route_http_allowed_by_this_plan": false,
+      "external_repo_write_allowed_by_this_plan": false,
+      "provider_dispatch_allowed_by_route": false,
+      "plugin_dispatch_allowed_by_route": false,
+      "api_dispatch_allowed_by_route": false,
+      "output_path_decision_allowed_by_route": false,
+      "retry_decision_allowed_by_route": false,
+      "required_fields": [
+        "route_id_or_endpoint_ref",
+        "route_identity",
+        "activation_id_ref",
+        "visual_job_contract_ref",
+        "canonical_contract_hash_ref",
+        "image_run_capability_binding_preflight_ref",
+        "binding_packet_ref",
+        "output_policy_ref",
+        "restricted_plugin_facade_boundary_ref",
+        "artifact_receipt_gate_ref",
+        "review_queue_gate_ref",
+        "memory_candidate_gate_ref",
+        "thin_ingress_constraints",
+        "migration_gate",
+        "stop_conditions",
+        "execution_boundary"
+      ]
+    },
+    "allowed_thin_ingress_behavior": [
+      "accept_activation_id_ref_as_identifier",
+      "accept_visual_job_contract_ref_as_identifier",
+      "accept_canonical_contract_hash_ref_as_identifier",
+      "accept_image_run_capability_binding_preflight_ref_as_identifier",
+      "map_task_specific_route_identity_to_already_bound_capability_template",
+      "pass_refs_forward_to_future_broker_only_after_separate_exact_gate",
+      "reject_payload_supplied_provider_plugin_api_delegate_model_output_retry_overrides"
+    ],
+    "forbidden_route_authority": [
+      "provider_id_selection",
+      "plugin_id_selection",
+      "api_id_selection",
+      "delegate_id_selection",
+      "model_selection",
+      "output_directory_selection",
+      "receipt_target_selection",
+      "review_queue_target_selection",
+      "retry_or_budget_selection",
+      "accepted_samples_or_production_candidate_write",
+      "DailyNote_or_VCP_memory_write",
+      "secret_or_auth_header_construction_by_AIL",
+      "full_pluginManager_access"
+    ],
+    "compatibility_routes": [
+      {
+        "trial_id": "r2r_v2_trial_001_serum_detail_control",
+        "route_id_or_endpoint_ref": "/internal/ai-image-agents/execute/r2r-v2-trial-001-serum-detail-control",
+        "route_identity": "task_specific_trial_001_compatibility_ingress",
+        "current_status": "compatibility_shim_until_broker_ready",
+        "route_replacement_allowed_now": false,
+        "activation_id_ref": "AUTH-R2R-V2-TRIAL-001-SERUM-DETAIL-CONTROL-20260608-BINDING-READY",
+        "visual_job_contract_ref": "ail_vjc_r2r_v2_trial_001_serum_detail_control",
+        "canonical_contract_hash_ref": "required_from_visual_job_contract",
+        "image_run_capability_binding_preflight_ref": "image_run_capability_binding_preflight:r2r_v2_trial_001_serum_detail_control",
+        "binding_packet_ref": "reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_binding_ready_execution_packet_20260608.json",
+        "output_policy_ref": {
+          "output_directory_ref": "runs/real_generation/runtime_to_review_v2_trial_001_serum_detail_control/",
+          "expected_receipt_ref": "reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_receipt.json",
+          "expected_artifact_record_ref": "reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_artifact_record.json",
+          "expected_review_bridge_ref": "review_console/live_receipt_bridge/r2r_v2_trial_001_serum_detail_control/bridge_entry.json"
+        },
+        "restricted_plugin_facade_boundary_ref": "restricted_plugin_facade_boundary:DoubaoGen.generate_image.native_doubao_runtime_v1_provider_delegate",
+        "artifact_receipt_gate_ref": "artifact_receipt_gate:r2r_v2_trial_001_serum_detail_control",
+        "review_queue_gate_ref": "review_queue_gate:r2r_v2_trial_001_serum_detail_control",
+        "memory_candidate_gate_ref": "memory_candidate_gate:r2r_v2_trial_001_serum_detail_control",
+        "thin_ingress_constraints": {
+          "route_role": "identity_and_transport_only",
+          "provider_dispatch_allowed_by_route": false,
+          "plugin_dispatch_allowed_by_route": false,
+          "api_dispatch_allowed_by_route": false,
+          "payload_override_allowed": false,
+          "secret_or_auth_header_construction_by_AIL": false,
+          "full_pluginManager_access": false
+        },
+        "migration_gate": "generic_endpoint_migration_gate",
+        "stop_conditions": "thin_ingress_stop_conditions",
+        "execution_boundary": "execution_boundary"
+      },
+      {
+        "trial_id": "r2r_v2_trial_002_lantern_ecommerce_hero",
+        "route_id_or_endpoint_ref": "/internal/ai-image-agents/execute/r2r-v2-trial-002-lantern-ecommerce-hero",
+        "route_identity": "task_specific_trial_002_compatibility_ingress",
+        "current_status": "compatibility_shim_until_broker_ready",
+        "route_replacement_allowed_now": false,
+        "activation_id_ref": "AUTH-R2R-V2-TRIAL-002-LANTERN-ECOMMERCE-HERO-20260609-BINDING-READY",
+        "visual_job_contract_ref": "ail_vjc_r2r_v2_trial_002_lantern_ecommerce_hero",
+        "canonical_contract_hash_ref": "required_from_visual_job_contract",
+        "image_run_capability_binding_preflight_ref": "image_run_capability_binding_preflight:r2r_v2_trial_002_lantern_ecommerce_hero",
+        "binding_packet_ref": "reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_binding_ready_execution_packet_20260609.json",
+        "output_policy_ref": {
+          "output_directory_ref": "runs/real_generation/runtime_to_review_v2_trial_002_lantern_ecommerce_hero/",
+          "expected_receipt_ref": "reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_receipt.json",
+          "expected_artifact_record_ref": "reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_artifact_record.json",
+          "expected_review_bridge_ref": "review_console/live_receipt_bridge/r2r_v2_trial_002_lantern_ecommerce_hero/bridge_entry.json"
+        },
+        "restricted_plugin_facade_boundary_ref": "restricted_plugin_facade_boundary:DoubaoGen.generate_image.native_doubao_runtime_v1_provider_delegate",
+        "artifact_receipt_gate_ref": "artifact_receipt_gate:r2r_v2_trial_002_lantern_ecommerce_hero",
+        "review_queue_gate_ref": "review_queue_gate:r2r_v2_trial_002_lantern_ecommerce_hero",
+        "memory_candidate_gate_ref": "memory_candidate_gate:r2r_v2_trial_002_lantern_ecommerce_hero",
+        "thin_ingress_constraints": {
+          "route_role": "identity_and_transport_only",
+          "provider_dispatch_allowed_by_route": false,
+          "plugin_dispatch_allowed_by_route": false,
+          "api_dispatch_allowed_by_route": false,
+          "payload_override_allowed": false,
+          "secret_or_auth_header_construction_by_AIL": false,
+          "full_pluginManager_access": false
+        },
+        "migration_gate": "generic_endpoint_migration_gate",
+        "stop_conditions": "thin_ingress_stop_conditions",
+        "execution_boundary": "execution_boundary"
+      }
+    ],
+    "generic_endpoint_migration_gate": {
+      "generic_endpoint_candidate": "/internal/agent-image-lab/executions/run",
+      "generic_endpoint_enabled_now": false,
+      "migration_allowed_now": false,
+      "required_before_enable": [
+        "compatibility_route_thin_ingress_plan_validated",
+        "VCPToolBox_broker_implementation_packet_exactly_authorized",
+        "VCPToolBox_broker_implementation_validated",
+        "generic_endpoint_gate_validated",
+        "comparable_trial_evidence_or_repeated_runtime_boundary_present",
+        "rollback_or_route_restore_plan_present"
+      ]
+    },
+    "thin_ingress_stop_conditions": [
+      "external_vcptoolbox_write_requested",
+      "real_route_or_broker_implementation_requested",
+      "route_http_request_requested",
+      "provider_plugin_api_or_image_generation_requested",
+      "route_dispatch_authority_requested",
+      "payload_override_authority_requested",
+      "secret_value_read_required",
+      "historical_artifact_or_receipt_overwrite_requested",
+      "generic_endpoint_enablement_without_separate_gate",
+      "accepted_samples_production_daily_note_or_memory_write_requested_without_separate_gate",
+      "push_tag_release_deploy_requested",
+      "force_push_history_rewrite_or_destructive_action_requested"
+    ],
+    "execution_boundary": {
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "image_generation_performed": false,
+      "route_http_request_performed": false,
+      "real_manifest_read_performed": false,
+      "real_VCPChat_read_performed": false,
+      "real_VCPToolBox_read_performed": false,
+      "external_VCPToolBox_write_performed": false,
+      "secret_value_read_performed": false,
+      "accepted_samples_write_performed": false,
+      "production_candidate_write_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "push_tag_release_deploy_performed": false
+    },
+    "completed_previous": "prepare_vcptoolbox_image_execution_broker_implementation_proposal_no_execute",
+    "completion_refs": [
+      "docs/vcptoolbox_image_execution_broker_implementation_proposal_no_execute.md",
+      "tests/schema_examples/vcptoolbox_image_execution_broker_implementation_proposal_no_execute.example.json",
+      "scripts/validate_vcptoolbox_image_execution_broker_implementation_proposal_no_execute.js"
+    ],
+    "recommended_next": "prepare_generic_image_execution_endpoint_gate_no_execute",
+    "automatic_real_execution_allowed_by_this_plan": false,
+    "external_repo_write_allowed_by_this_plan": false
+  }
+}

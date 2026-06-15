@@ -1,0 +1,395 @@
+{
+  "generation_channel_contract_preflight": {
+    "phase": "ail_generation_channel_contract_preflight_20260609",
+    "status": "local_contract_preflight_no_execute",
+    "parent_plan_ref": "docs/vcptoolbox_image_execution_broker_followup_plan.md",
+    "evidence_base": {
+      "trial_001": {
+        "binding_packet_ref": "reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_binding_ready_execution_packet_20260608.json",
+        "artifact_record_ref": "reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_artifact_record.json",
+        "review_decision_ref": "reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_review_decision_accepted_candidate_20260608.json",
+        "runtime_task_fixture_ref": "tests/fixtures/runtime_kernel_v2_trial_001_serum_detail_control_task.fixture.json"
+      },
+      "trial_002": {
+        "binding_packet_ref": "reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_binding_ready_execution_packet_20260609.json",
+        "artifact_record_ref": "reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_artifact_record.json",
+        "review_decision_ref": "reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_review_decision_accepted_candidate_20260609.json",
+        "memory_candidate_gate_ref": "reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_memory_candidate_no_write_mapping_gate_20260609.json",
+        "runtime_task_fixture_ref": "tests/fixtures/runtime_kernel_v2_trial_002_lantern_ecommerce_hero_task.fixture.json"
+      }
+    },
+    "contract_objects": {
+      "VisualJobContract": {
+        "schema_id": "ail_visual_job_contract.v1",
+        "owned_by": "Agent_Image_Lab",
+        "role": "visual_intent_and_constraints",
+        "required_fields": [
+          "contract_id",
+          "trial_id",
+          "product_family",
+          "product_category",
+          "subject",
+          "shot_id",
+          "shot_role",
+          "visual_goal",
+          "prompt_package_ref",
+          "output_directory_ref",
+          "review_policy_ref",
+          "image_run_capability_ref",
+          "expected_receipt_ref",
+          "expected_artifact_record_ref",
+          "expected_review_bridge_ref",
+          "canonical_contract_hash"
+        ],
+        "stable_constraints": {
+          "max_images": 1,
+          "retry_allowed": false,
+          "overwrite_existing_files_allowed": false,
+          "secret_value_read_allowed": false,
+          "review_required": true,
+          "initial_status_after_generation": "generated_unreviewed"
+        },
+        "must_not_include_dispatch_authority": [
+          "arbitrary_provider",
+          "arbitrary_plugin",
+          "arbitrary_api",
+          "arbitrary_delegate"
+        ]
+      },
+      "ShotPlan": {
+        "schema_id": "ail_shot_plan.v1",
+        "owned_by": "Agent_Image_Lab",
+        "role": "visual_strategy_for_one_generation_attempt",
+        "required_fields": [
+          "shot_id",
+          "shot_role",
+          "composition_intent",
+          "product_geometry_anchors",
+          "material_and_lighting_controls",
+          "background_or_context_policy",
+          "negative_controls",
+          "review_focus"
+        ],
+        "must_not_include": [
+          "provider_secret",
+          "plugin_secret",
+          "live_auth_header",
+          "arbitrary_runtime_route"
+        ]
+      },
+      "ReviewPolicy": {
+        "schema_id": "ail_review_policy.v1",
+        "owned_by": "Agent_Image_Lab",
+        "role": "post_generation_truth_gate",
+        "stable_defaults": {
+          "required_status_after_generation": "generated_unreviewed",
+          "human_review_required_before_archive": true,
+          "accepted_candidate_allowed_after_review": true,
+          "commercial_delivery_ready_default": false,
+          "accepted_samples_write_default": false,
+          "production_candidate_write_default": false,
+          "DailyNote_write_default": false,
+          "VCP_memory_write_default": false,
+          "memory_candidate_allowed_after_human_review": true
+        }
+      },
+      "ImageRunCapabilityRef": {
+        "schema_id": "image_run_capability_ref.v1",
+        "owned_by": "VCPToolBox",
+        "role": "internal_dispatch_authority_reference",
+        "carried_by_AIL_payload_as_ref_only": true,
+        "dispatch_rule": "VCPToolBox_internal_binding_is_authoritative",
+        "required_fields": [
+          "capability_ref_id",
+          "activation_id_ref",
+          "route_id_or_endpoint_ref",
+          "binding_packet_ref",
+          "provider_id_ref",
+          "plugin_id_ref",
+          "api_id_ref",
+          "delegate_id_ref",
+          "model_allowlist",
+          "budget",
+          "output_policy_ref"
+        ],
+        "stable_budget": {
+          "max_route_http_requests": 1,
+          "max_provider_calls": 1,
+          "max_plugin_calls": 1,
+          "max_api_calls": 1,
+          "max_images": 1,
+          "retry_allowed": false
+        }
+      },
+      "RestrictedPluginFacadeBoundary": {
+        "schema_id": "restricted_plugin_facade_boundary.v1",
+        "owned_by": "VCPToolBox",
+        "role": "plugin_safety_boundary",
+        "required_controls": {
+          "allowed_plugin_ref": "DoubaoGen",
+          "allowed_api_ref": "generate_image",
+          "allowed_delegate_ref": "required",
+          "max_calls": 1,
+          "distributed_fallback": false,
+          "manifest_scan_during_request": false,
+          "arbitrary_plugin_name": false,
+          "arbitrary_api_name": false,
+          "full_pluginManager_exposed_to_route": false
+        }
+      },
+      "ArtifactReceiptGate": {
+        "schema_id": "artifact_receipt_gate.v1",
+        "owned_by": "shared_boundary",
+        "role": "evidence_after_generation",
+        "required_success_refs": [
+          "receipt_ref",
+          "artifact_record_ref",
+          "review_bridge_ref"
+        ],
+        "artifact_record_required_fields": [
+          "schema",
+          "artifact_record_id",
+          "trial_id",
+          "status",
+          "source_prompt_package_ref",
+          "provider_route",
+          "provider_id",
+          "plugin_id",
+          "api_id",
+          "model_required",
+          "model_sent",
+          "output_files",
+          "image_count",
+          "receipt_ref",
+          "review_bridge_ref"
+        ],
+        "output_file_required_fields": [
+          "path",
+          "bytes",
+          "sha256",
+          "mime_type",
+          "dimensions"
+        ]
+      },
+      "ReviewQueueGate": {
+        "schema_id": "review_queue_gate.v1",
+        "owned_by": "Agent_Image_Lab",
+        "role": "human_review_before_archive_or_memory",
+        "allowed_decisions": [
+          "accepted_candidate",
+          "needs_revision",
+          "rejected"
+        ],
+        "default_post_review_writes": {
+          "accepted_samples_write_allowed": false,
+          "production_candidate_write_allowed": false,
+          "DailyNote_write_allowed": false,
+          "VCP_memory_write_allowed": false
+        }
+      },
+      "MemoryCandidateGate": {
+        "schema_id": "memory_candidate_gate.v1",
+        "owned_by": "Agent_Image_Lab",
+        "role": "delayed_reviewed_non_default_memory_path",
+        "can_exist_after_human_review": true,
+        "mapping_only_allowed": true,
+        "memory_write_default": false,
+        "required_for_actual_write": [
+          "separate_memory_authorization_gate",
+          "exact_memory_target",
+          "sanitized_payload_or_delta",
+          "post_write_receipt",
+          "rollback_or_cleanup_plan"
+        ],
+        "forbidden_without_separate_gate": [
+          "call_record_memory",
+          "call_daily_note_writer",
+          "call_vcp_memory_writer",
+          "accepted_samples_write",
+          "production_candidate_write"
+        ]
+      }
+    },
+    "trial_contract_snapshots": [
+      {
+        "trial_id": "r2r_v2_trial_001_serum_detail_control",
+        "visual_job_contract": {
+          "contract_id": "ail_vjc_r2r_v2_trial_001_serum_detail_control",
+          "product_family": "premium_skincare_serum",
+          "product_category": "skincare",
+          "subject": "premium_serum_bottle",
+          "shot_id": "serum_detail_control_001",
+          "shot_role": "product_detail_controlled_studio",
+          "visual_goal": [
+            "controlled detail product image",
+            "blank label boundary",
+            "full bottle and cap geometry"
+          ],
+          "prompt_package_ref": "prompts/image_generation/product_detail_premium_serum_bottle_v2.yaml",
+          "output_directory_ref": "runs/real_generation/runtime_to_review_v2_trial_001_serum_detail_control/",
+          "image_run_capability_ref": "image_run_capability_ref:r2r_v2_trial_001_serum_detail_control",
+          "expected_receipt_ref": "reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_receipt.json",
+          "expected_artifact_record_ref": "reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_artifact_record.json",
+          "expected_review_bridge_ref": "review_console/live_receipt_bridge/r2r_v2_trial_001_serum_detail_control/bridge_entry.json",
+          "canonical_contract_hash_required": true
+        },
+        "image_run_capability_ref": {
+          "capability_ref_id": "image_run_capability_ref:r2r_v2_trial_001_serum_detail_control",
+          "activation_id_ref": "AUTH-R2R-V2-TRIAL-001-SERUM-DETAIL-CONTROL-20260608-BINDING-READY",
+          "route_id_or_endpoint_ref": "/internal/ai-image-agents/execute/r2r-v2-trial-001-serum-detail-control",
+          "binding_packet_ref": "reports/runtime_to_review_v2/r2r_v2_trial_001_serum_detail_control_binding_ready_execution_packet_20260608.json",
+          "provider_id_ref": "doubao",
+          "plugin_id_ref": "DoubaoGen",
+          "api_id_ref": "generate_image",
+          "delegate_id_ref": "native_doubao_runtime_v1_provider_delegate",
+          "model_allowlist": [
+            "doubao-seedream-5-0-260128"
+          ],
+          "payload_must_not_dispatch_arbitrary_plugin_api": true
+        },
+        "shot_plan": {
+          "shot_id": "serum_detail_control_001",
+          "shot_role": "product_detail_controlled_studio",
+          "composition_intent": "single product detail control",
+          "product_geometry_anchors": [
+            "full_bottle_visible_from_pipette_to_base",
+            "cap_and_bottle_geometry"
+          ],
+          "material_and_lighting_controls": [
+            "material_reflection_control"
+          ],
+          "background_or_context_policy": "controlled_studio",
+          "negative_controls": [
+            "no_readable_text_logo_or_decorative_mark"
+          ],
+          "review_focus": [
+            "intentionally_blank_label_boundary",
+            "cap_and_bottle_geometry",
+            "material_reflection_control",
+            "no_readable_text_logo_or_decorative_mark"
+          ]
+        }
+      },
+      {
+        "trial_id": "r2r_v2_trial_002_lantern_ecommerce_hero",
+        "visual_job_contract": {
+          "contract_id": "ail_vjc_r2r_v2_trial_002_lantern_ecommerce_hero",
+          "product_family": "premium_portable_led_camping_lantern",
+          "product_category": "outdoor_electronics",
+          "subject": "portable_led_camping_lantern",
+          "shot_id": "lantern_ecommerce_hero_001",
+          "shot_role": "ecommerce_square_hero",
+          "visual_goal": [
+            "single premium portable LED camping lantern",
+            "square ecommerce scene hero",
+            "clear handle diffuser control body and base"
+          ],
+          "prompt_package_ref": "prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v2.yaml",
+          "output_directory_ref": "runs/real_generation/runtime_to_review_v2_trial_002_lantern_ecommerce_hero/",
+          "image_run_capability_ref": "image_run_capability_ref:r2r_v2_trial_002_lantern_ecommerce_hero",
+          "expected_receipt_ref": "reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_receipt.json",
+          "expected_artifact_record_ref": "reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_artifact_record.json",
+          "expected_review_bridge_ref": "review_console/live_receipt_bridge/r2r_v2_trial_002_lantern_ecommerce_hero/bridge_entry.json",
+          "canonical_contract_hash_required": true
+        },
+        "image_run_capability_ref": {
+          "capability_ref_id": "image_run_capability_ref:r2r_v2_trial_002_lantern_ecommerce_hero",
+          "activation_id_ref": "AUTH-R2R-V2-TRIAL-002-LANTERN-ECOMMERCE-HERO-20260609-BINDING-READY",
+          "route_id_or_endpoint_ref": "/internal/ai-image-agents/execute/r2r-v2-trial-002-lantern-ecommerce-hero",
+          "binding_packet_ref": "reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_binding_ready_execution_packet_20260609.json",
+          "provider_id_ref": "doubao",
+          "plugin_id_ref": "DoubaoGen",
+          "api_id_ref": "generate_image",
+          "delegate_id_ref": "native_doubao_runtime_v1_provider_delegate",
+          "model_allowlist": [
+            "doubao-seedream-5-0-260128"
+          ],
+          "payload_must_not_dispatch_arbitrary_plugin_api": true
+        },
+        "shot_plan": {
+          "shot_id": "lantern_ecommerce_hero_001",
+          "shot_role": "ecommerce_square_hero",
+          "composition_intent": "single product square ecommerce hero",
+          "product_geometry_anchors": [
+            "full_handle_diffuser_body_control_and_base_visible",
+            "control_position_readable",
+            "cylindrical_or_soft_rect_geometry_plausible"
+          ],
+          "material_and_lighting_controls": [
+            "warm_frosted_diffuser_controlled_not_blown",
+            "premium_dark_metal_or_outdoor_electronics_material"
+          ],
+          "background_or_context_policy": "premium_glamping_context_without_people",
+          "negative_controls": [
+            "no_people_hands_fire_smoke",
+            "no_readable_brand_text_logo_or_watermark",
+            "no_extra_products_or_duplicate_lanterns"
+          ],
+          "review_focus": [
+            "lantern_ecommerce_hero_readability",
+            "full_handle_diffuser_dimmer_body_and_base_visible",
+            "premium_glamping_context_without_people",
+            "warm_lantern_glow_control",
+            "no_brand_text_logo_watermark_or_readable_label",
+            "no_extra_products_or_duplicate_lanterns"
+          ]
+        }
+      }
+    ],
+    "restricted_plugin_facade_boundary": {
+      "allowed_plugin_ref": "DoubaoGen",
+      "allowed_api_ref": "generate_image",
+      "allowed_delegate_ref": "native_doubao_runtime_v1_provider_delegate",
+      "max_calls": 1,
+      "distributed_fallback": false,
+      "manifest_scan_during_request": false,
+      "arbitrary_plugin_name": false,
+      "arbitrary_api_name": false,
+      "full_pluginManager_exposed_to_route": false
+    },
+    "artifact_receipt_review_memory_gates": {
+      "artifact_record_schema": "runtime_to_review_v2_artifact_record.v1",
+      "success_evidence_required": [
+        "receipt_ref",
+        "artifact_record_ref",
+        "review_bridge_ref"
+      ],
+      "review_queue_required_before_archive": true,
+      "required_status_after_generation": "generated_unreviewed",
+      "accepted_candidate_allowed_after_review": true,
+      "commercial_delivery_ready_default": false,
+      "memory_candidate_default": "delayed_reviewed_non_default",
+      "memory_write_default": false,
+      "accepted_samples_write_default": false,
+      "production_candidate_write_default": false,
+      "DailyNote_write_default": false,
+      "VCP_memory_write_default": false
+    },
+    "execution_boundary": {
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "image_generation_performed": false,
+      "route_http_request_performed": false,
+      "real_manifest_read_performed": false,
+      "real_VCPChat_read_performed": false,
+      "real_VCPToolBox_read_performed": false,
+      "external_VCPToolBox_write_performed": false,
+      "secret_value_read_performed": false,
+      "accepted_samples_write_performed": false,
+      "production_candidate_write_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "push_tag_release_deploy_performed": false
+    },
+    "completed_previous": "prepare_vcptoolbox_image_execution_broker_implementation_proposal_no_execute",
+    "completion_refs": [
+      "docs/vcptoolbox_image_execution_broker_implementation_proposal_no_execute.md",
+      "tests/schema_examples/vcptoolbox_image_execution_broker_implementation_proposal_no_execute.example.json",
+      "scripts/validate_vcptoolbox_image_execution_broker_implementation_proposal_no_execute.js"
+    ],
+    "recommended_next": "prepare_generic_image_execution_endpoint_gate_no_execute",
+    "automatic_real_execution_allowed_by_this_contract": false,
+    "external_repo_write_allowed_by_this_contract": false
+  }
+}

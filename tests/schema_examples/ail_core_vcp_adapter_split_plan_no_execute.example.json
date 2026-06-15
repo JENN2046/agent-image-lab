@@ -1,0 +1,261 @@
+{
+  "ail_core_vcp_adapter_split_plan_no_execute": {
+    "phase": "ail_core_vcp_adapter_split_plan_no_execute_20260610",
+    "status": "local_split_plan_no_execute",
+    "parent_endpoint_gate_ref": "docs/generic_image_execution_endpoint_gate_no_execute.md",
+    "parent_plan_ref": "docs/vcptoolbox_image_execution_broker_followup_plan.md",
+    "source_refs": {
+      "broker_followup_plan_ref": "docs/vcptoolbox_image_execution_broker_followup_plan.md",
+      "generation_channel_contract_ref": "docs/generation_channel_contract_preflight.md",
+      "image_run_capability_binding_template_ref": "docs/image_run_capability_binding_preflight_template.md",
+      "compatibility_route_thin_ingress_plan_ref": "docs/compatibility_route_thin_ingress_plan_no_execute.md",
+      "generic_endpoint_gate_ref": "docs/generic_image_execution_endpoint_gate_no_execute.md",
+      "vcptoolbox_broker_implementation_proposal_ref": "docs/vcptoolbox_image_execution_broker_implementation_proposal_no_execute.md",
+      "external_repo_authorization_packet_ref": "docs/vcptoolbox_image_execution_broker_external_repo_authorization_packet_no_execute.md",
+      "external_repo_readiness_review_ref": "docs/vcptoolbox_image_execution_broker_external_repo_readiness_review_no_execute.md",
+      "external_repo_read_preflight_ref": "docs/vcptoolbox_image_execution_broker_external_repo_read_preflight_no_execute.md",
+      "external_repo_read_authorization_packet_ref": "docs/vcptoolbox_image_execution_broker_external_repo_read_authorization_packet_no_execute.md",
+      "external_repo_exact_read_receipt_template_ref": "docs/vcptoolbox_image_execution_broker_external_repo_exact_read_receipt_template_no_execute.md"
+    },
+    "split_contract": {
+      "schema_id": "ail_core_vcp_adapter_split_plan.v1",
+      "prepared_by": "Agent_Image_Lab",
+      "authority_status": "split_plan_only_no_runtime_implementation",
+      "adapter_code_write_allowed_now": false,
+      "broker_implementation_allowed_now": false,
+      "generic_endpoint_enablement_allowed_now": false,
+      "external_repo_write_allowed_now": false,
+      "route_http_allowed_now": false,
+      "provider_plugin_api_image_allowed_now": false,
+      "secret_value_read_allowed": false,
+      "required_fields": [
+        "split_plan_id",
+        "ail_core_owns",
+        "vcp_adapter_owns",
+        "shared_refs",
+        "forbidden_cross_boundary_moves",
+        "object_boundary_matrix",
+        "data_flow",
+        "pre_implementation_requirements",
+        "validation_plan",
+        "future_authorization_packet_requirements",
+        "stop_conditions",
+        "execution_boundary"
+      ]
+    },
+    "split_plan": {
+      "split_plan_id": "ail_core_vcp_adapter_split_plan:runtime_to_review_v2",
+      "ownership_rule": {
+        "ail_core_plain_meaning": "visual truth and production judgment",
+        "vcp_adapter_plain_meaning": "execution transport and evidence refs",
+        "route_plain_meaning": "transport only",
+        "broker_plain_meaning": "VCPToolBox-side execution coordinator",
+        "payload_plain_meaning": "refs only, not dispatch authority"
+      },
+      "ail_core_owns": [
+        "ProductBrief",
+        "ShotPlan",
+        "PromptLineage",
+        "VisualJobContract",
+        "ReviewPolicy",
+        "ImageCandidate",
+        "ReviewReport",
+        "AcceptedCandidate",
+        "ArchivePolicy",
+        "MemorySuitabilityDecision"
+      ],
+      "vcp_adapter_owns": [
+        "activation_binding_refs",
+        "ImageRunCapability refs",
+        "route_id_or_generic_endpoint_ref",
+        "broker_request_mapping",
+        "restricted_plugin_facade_boundary_ref",
+        "output_policy_ref_mapping",
+        "receipt evidence mapping",
+        "artifact_record_ref_mapping",
+        "review_bridge_ref_mapping",
+        "external_authorization_packet_refs"
+      ],
+      "shared_refs": [
+        "visual_job_contract_ref",
+        "canonical_contract_hash_ref",
+        "image_run_capability_binding_preflight_ref",
+        "artifact_receipt_gate_ref",
+        "review_queue_gate_ref",
+        "memory_candidate_gate_ref"
+      ],
+      "forbidden_cross_boundary_moves": [
+        "moving_provider_plugin_api_selection_into_AIL_Core",
+        "moving_secret_or_auth_header_construction_into_AIL_Core",
+        "moving_raw_prompt_or_raw_request_storage_into_VCP_Adapter",
+        "moving_review_decision_authority_into_VCP_Adapter",
+        "moving_memory_write_decision_into_VCP_Adapter",
+        "moving_archive_admission_decision_into_VCP_Adapter",
+        "moving_output_directory_decision_into_payload",
+        "moving_retry_budget_decision_into_payload",
+        "exposing_full_pluginManager_to_route_or_AIL_Core",
+        "allowing_generic_endpoint_payload_to_override_bound_refs"
+      ],
+      "object_boundary_matrix": {
+        "ProductBrief": {
+          "owner": "AIL_Core",
+          "may_reference_vcp_adapter": false,
+          "dispatch_authority": false
+        },
+        "ShotPlan": {
+          "owner": "AIL_Core",
+          "may_reference_vcp_adapter": false,
+          "dispatch_authority": false
+        },
+        "PromptLineage": {
+          "owner": "AIL_Core",
+          "may_reference_vcp_adapter": false,
+          "raw_prompt_storage_allowed": false
+        },
+        "VisualJobContract": {
+          "owner": "AIL_Core",
+          "may_reference_vcp_adapter": true,
+          "allowed_adapter_refs": [
+            "image_run_capability_ref",
+            "expected_receipt_ref",
+            "expected_artifact_record_ref",
+            "expected_review_bridge_ref"
+          ],
+          "dispatch_authority": false
+        },
+        "ImageRunCapabilityRef": {
+          "owner": "VCP_Adapter",
+          "source_of_truth": "VCPToolBox_binding_preflight",
+          "payload_override_allowed": false
+        },
+        "BrokerRequestMapping": {
+          "owner": "VCP_Adapter",
+          "allowed_input": "refs_from_VisualJobContract_and_binding_preflight",
+          "payload_provider_plugin_api_override_allowed": false
+        },
+        "ArtifactReceiptMapping": {
+          "owner": "VCP_Adapter",
+          "allowed_output": [
+            "receipt_ref",
+            "artifact_record_ref",
+            "review_bridge_ref"
+          ],
+          "raw_plugin_output_storage_allowed": false
+        },
+        "ReviewReport": {
+          "owner": "AIL_Core",
+          "may_reference_receipt_artifact_review_bridge": true,
+          "production_admission_authority": true
+        },
+        "MemorySuitabilityDecision": {
+          "owner": "AIL_Core",
+          "default_memory_write_allowed": false
+        }
+      },
+      "data_flow": [
+        "AIL Core ProductBrief / ShotPlan / ReviewPolicy",
+        "VisualJobContract refs",
+        "VCP Adapter binding refs and broker request mapping",
+        "future VCPToolBox Image Execution Broker",
+        "receipt_ref / artifact_record_ref / review_bridge_ref",
+        "AIL Core ReviewReport",
+        "AcceptedCandidate / ArchivePolicy / MemorySuitabilityDecision gates"
+      ],
+      "pre_implementation_requirements": [
+        "ail_core_vcp_adapter_split_plan_validated",
+        "generic_image_execution_endpoint_gate_validated",
+        "vcptoolbox_image_execution_broker_implementation_proposal_validated",
+        "vcptoolbox_image_execution_broker_external_repo_authorization_packet_validated",
+        "vcptoolbox_image_execution_broker_external_repo_readiness_review_validated",
+        "vcptoolbox_image_execution_broker_external_repo_read_preflight_validated",
+        "vcptoolbox_image_execution_broker_external_repo_read_authorization_packet_validated",
+        "vcptoolbox_image_execution_broker_external_repo_exact_read_receipt_template_validated",
+        "exact_external_repo_read_preflight_prepared_before_VCPToolBox_read",
+        "exact_external_repo_read_authorization_packet_prepared_before_VCPToolBox_read",
+        "exact_external_repo_read_receipt_template_prepared_before_VCPToolBox_read",
+        "exact_external_repo_authorization_packet_issued_before_VCPToolBox_write",
+        "exact_adapter_file_allowlist_defined_before_code_write",
+        "no secret/env/config reads",
+        "no route HTTP/provider/plugin/API/image call",
+        "no dependency or lockfile change without exact package/action list"
+      ],
+      "validation_plan": {
+        "local_AIL_no_execute_validation": [
+          "npm run validate:ail-core-vcp-adapter-split-plan-no-execute",
+          "npm run validate:vcptoolbox-image-execution-broker-external-repo-authorization-packet-no-execute",
+          "npm run validate:vcptoolbox-image-execution-broker-external-repo-readiness-review-no-execute",
+          "npm run validate:vcptoolbox-image-execution-broker-external-repo-read-preflight-no-execute",
+          "npm run validate:vcptoolbox-image-execution-broker-external-repo-read-authorization-packet-no-execute",
+          "npm run validate:vcptoolbox-image-execution-broker-external-repo-exact-read-receipt-template-no-execute",
+          "npm run validate:generic-image-execution-endpoint-gate-no-execute",
+          "npm run validate:vcptoolbox-image-execution-broker-followup-plan",
+          "npm run validate:validation-manifest"
+        ],
+        "future_code_validation_required": [
+          "exact adapter boundary tests proving AIL Core cannot choose provider/plugin/API",
+          "exact adapter mapping tests proving refs pass through unchanged",
+          "exact ReviewReport tests proving review/archive/memory decisions remain AIL-owned"
+        ]
+      },
+      "future_authorization_packet_requirements": {
+        "can_execute_now": false,
+        "required_before_any_code_or_external_repo_write": [
+          "exact allowed local AIL adapter files if local implementation is proposed",
+          "exact allowed external VCPToolBox files if external implementation is proposed",
+          "exact forbidden files",
+          "exact validation commands",
+          "rollback_or_cleanup_plan",
+          "stop_conditions",
+          "no secret/env/config reads",
+          "no provider/plugin/API/image call",
+          "no push/tag/release/deploy"
+        ]
+      },
+      "stop_conditions": "split_stop_conditions",
+      "execution_boundary": "execution_boundary"
+    },
+    "split_stop_conditions": [
+      "adapter_broker_route_ipc_preload_renderer_or_provider_executor_code_write_requested",
+      "external_vcptoolbox_read_or_write_without_exact_authorization_packet",
+      "generic_endpoint_enablement_requested",
+      "route_http_request_requested",
+      "provider_plugin_api_or_image_generation_requested",
+      "ail_core_or_payload_dispatch_authority_requested",
+      "review_archive_or_memory_authority_moved_to_vcp_adapter",
+      "secret_value_read_required",
+      "dependency_or_lockfile_change_requested_without_exact_package_action_list",
+      "historical_artifact_or_receipt_overwrite_requested",
+      "commit_push_tag_release_deploy_requested",
+      "force_push_history_rewrite_or_destructive_action_requested"
+    ],
+    "execution_boundary": {
+      "adapter_code_write_performed": false,
+      "broker_implementation_performed": false,
+      "generic_endpoint_enabled": false,
+      "migration_allowed_now": false,
+      "route_http_request_performed": false,
+      "external_VCPToolBox_read_performed": false,
+      "external_VCPToolBox_write_performed": false,
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "image_generation_performed": false,
+      "real_manifest_read_performed": false,
+      "real_VCPChat_read_performed": false,
+      "real_VCPToolBox_read_performed": false,
+      "secret_value_read_performed": false,
+      "dependency_change_performed": false,
+      "accepted_samples_write_performed": false,
+      "production_candidate_write_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "push_tag_release_deploy_performed": false
+    },
+    "completed_previous": "prepare_vcptoolbox_image_execution_broker_external_repo_exact_read_receipt_template_no_execute",
+    "recommended_next": "perform_vcptoolbox_image_execution_broker_external_repo_exact_read_with_receipt_only_after_separate_authorization",
+    "automatic_real_execution_allowed_by_this_plan": false,
+    "external_repo_read_allowed_by_this_plan": false,
+    "external_repo_write_allowed_by_this_plan": false,
+    "adapter_code_write_allowed_by_this_plan": false
+  }
+}

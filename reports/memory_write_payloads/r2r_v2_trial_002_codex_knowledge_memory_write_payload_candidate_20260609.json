@@ -1,0 +1,50 @@
+{
+  "schema": "agent_image_lab_codex_knowledge_memory_write_payload_candidate.v1",
+  "payload_id": "r2r_v2_trial_002_codex_knowledge_memory_write_payload_candidate_20260609",
+  "created_at": "2026-06-09T22:50:31+08:00",
+  "status": "prepared_candidate_no_write",
+  "source_authorization_preflight_ref": "reports/memory_write_authorization/r2r_v2_trial_002_codex_knowledge_memory_authorization_preflight_20260609.json",
+  "source_memory_delta_candidate_ref": "reports/memory_delta_drafts/r2r_v2_trial_002_lantern_ecommerce_hero_memory_delta_candidate_no_write_20260609.json",
+  "source_memory_candidate_mapping_gate_ref": "reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_memory_candidate_no_write_mapping_gate_20260609.json",
+  "target_system": "mcp__vcp_codex_memory.record_memory",
+  "target": "knowledge",
+  "targetDiary": "Codex knowledge",
+  "title": "Agent Image Lab Trial 002 露营灯场景 hero 样本经验",
+  "content": "Agent Image Lab Trial 002 完成了一次 runtime-to-review v2 受控真实生图链路迁移：从 Trial 001 的精华瓶产品结构控制，迁移到硬边户外电子产品露营灯。一张图、一次 provider/plugin/API 调用、零重试，最后得到 1920x1920 的现代便携 LED 露营灯场景型电商 hero 候选。可复用经验是：蓝调户外环境能增强场景感，但提示词和 review gate 必须继续锁住单一产品、完整手柄、暖色扩散罩、侧控件、机身、底座、无可读文字、无 logo、无水印、无人手、无明火、无烟和无额外灯具漂移。该样本已被评为 accepted_candidate，分数 0.92，但不是最终商用交付图；若下一轮目标是严格 SKU 主图，应降低前景桌面存在感，让下半部分结构更亮、更可检查。本条 payload 只是 Codex knowledge memory 写入候选预览，尚未写入 DailyNote、VCP memory 或 Codex knowledge memory，也未进入 accepted_samples、durable archive 或 production candidate。证据引用：reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_review_decision_accepted_candidate_20260609.json；reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_memory_candidate_no_write_mapping_gate_20260609.json；reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_artifact_record.json；reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_receipt.json。",
+  "metadata": {
+    "project": "Agent Image Lab",
+    "source_trial_id": "r2r_v2_trial_002_lantern_ecommerce_hero",
+    "source_candidate_id": "memcand_r2r_v2_trial_002_lantern_ecommerce_hero_20260609",
+    "source_decision": "accepted_candidate",
+    "commercial_delivery_ready": false,
+    "artifact_sha256": "775b9f584daaa28eebc5e1eb100479d3efd1ce0c30379c6750038e6930952f36",
+    "visibility_requested": "project",
+    "validated": true,
+    "reusable": true,
+    "sensitivity": "none",
+    "language": "zh-CN",
+    "write_recommendation": "future_codex_knowledge_only"
+  },
+  "content_safety": {
+    "contains_secret": false,
+    "contains_private_raw_data": false,
+    "contains_private_path": false,
+    "contains_image_binary": false,
+    "uses_project_relative_refs": true,
+    "daily_note_content": false
+  },
+  "guard": {
+    "record_memory_called": false,
+    "DailyNote_write_performed": false,
+    "VCP_memory_write_performed": false,
+    "Codex_memory_write_performed": false,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "accepted_samples_write_performed": false,
+    "durable_archive_write_performed": false,
+    "production_candidate_write_performed": false,
+    "push_tag_release_deploy_performed": false
+  }
+}

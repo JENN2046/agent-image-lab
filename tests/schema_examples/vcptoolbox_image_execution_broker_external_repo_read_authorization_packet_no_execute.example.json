@@ -1,0 +1,328 @@
+{
+  "vcptoolbox_image_execution_broker_external_repo_read_authorization_packet_no_execute": {
+    "phase": "vcptoolbox_image_execution_broker_external_repo_read_authorization_packet_no_execute_20260610",
+    "status": "local_external_repo_read_authorization_packet_no_execute",
+    "parent_read_preflight_ref": "docs/vcptoolbox_image_execution_broker_external_repo_read_preflight_no_execute.md",
+    "parent_readiness_review_ref": "docs/vcptoolbox_image_execution_broker_external_repo_readiness_review_no_execute.md",
+    "parent_authorization_packet_ref": "docs/vcptoolbox_image_execution_broker_external_repo_authorization_packet_no_execute.md",
+    "parent_followup_plan_ref": "docs/vcptoolbox_image_execution_broker_followup_plan.md",
+    "source_refs": {
+      "broker_followup_plan_ref": "docs/vcptoolbox_image_execution_broker_followup_plan.md",
+      "generation_channel_contract_ref": "docs/generation_channel_contract_preflight.md",
+      "image_run_capability_binding_template_ref": "docs/image_run_capability_binding_preflight_template.md",
+      "compatibility_route_thin_ingress_plan_ref": "docs/compatibility_route_thin_ingress_plan_no_execute.md",
+      "vcptoolbox_broker_implementation_proposal_ref": "docs/vcptoolbox_image_execution_broker_implementation_proposal_no_execute.md",
+      "generic_endpoint_gate_ref": "docs/generic_image_execution_endpoint_gate_no_execute.md",
+      "ail_core_vcp_adapter_split_plan_ref": "docs/ail_core_vcp_adapter_split_plan_no_execute.md",
+      "external_repo_authorization_packet_ref": "docs/vcptoolbox_image_execution_broker_external_repo_authorization_packet_no_execute.md",
+      "external_repo_readiness_review_ref": "docs/vcptoolbox_image_execution_broker_external_repo_readiness_review_no_execute.md",
+      "external_repo_read_preflight_ref": "docs/vcptoolbox_image_execution_broker_external_repo_read_preflight_no_execute.md",
+      "external_repo_exact_read_receipt_template_ref": "docs/vcptoolbox_image_execution_broker_external_repo_exact_read_receipt_template_no_execute.md"
+    },
+    "read_authorization_contract": {
+      "schema_id": "vcptoolbox_image_execution_broker_external_repo_read_authorization_packet.v1",
+      "prepared_by": "Agent_Image_Lab",
+      "target_system": "VCPToolBox",
+      "target_repo": "JENN2046/VCPToolBox",
+      "target_branch_required_before_future_write": "main",
+      "authority_status": "read_authorization_packet_only_no_external_access",
+      "packet_result": "ready_for_separate_exact_read_execution_with_receipt",
+      "can_execute_now": false,
+      "external_repo_read_allowed_now": false,
+      "external_repo_write_allowed_now": false,
+      "route_http_allowed_now": false,
+      "provider_plugin_api_image_allowed_now": false,
+      "secret_value_read_allowed": false,
+      "dependency_change_allowed": false,
+      "push_allowed": false,
+      "required_fields": [
+        "packet_id",
+        "target_system",
+        "target_repo",
+        "workspace_target_policy",
+        "requested_future_operation",
+        "authorized_future_git_commands",
+        "authorized_future_file_reads",
+        "forbidden_future_reads_or_actions",
+        "max_read_budget",
+        "sanitized_output_policy",
+        "read_execution_sequence",
+        "read_receipt_contract",
+        "validation_plan",
+        "stop_conditions",
+        "execution_boundary"
+      ]
+    },
+    "read_authorization_packet": {
+      "packet_id": "vcptoolbox_image_execution_broker_external_repo_read_authorization:runtime_to_review_v2",
+      "target_system": "VCPToolBox",
+      "target_repo": "JENN2046/VCPToolBox",
+      "target_branch_required_before_future_write": "main",
+      "workspace_target_policy": {
+        "workspace_ref": "VCPTOOLBOX_WORKSPACE_RESOLVED_AT_EXECUTION_TIME",
+        "private_local_path_recorded_now": false,
+        "raw_private_path_print_allowed": false,
+        "path_must_be_verified_without_secret_reads": true,
+        "workspace_must_be_git_repo": true,
+        "expected_remote_repo": "JENN2046/VCPToolBox",
+        "expected_future_write_branch": "main"
+      },
+      "requested_future_operation": {
+        "operation_id": "vcptoolbox_image_execution_broker_exact_external_repo_read",
+        "operation_type": "exact_external_repo_read_only",
+        "one_action_only": true,
+        "future_operation_requires_separate_execution_confirmation": true,
+        "future_write_requires_separate_confirmation": true,
+        "no_external_access_granted_by_this_packet_now": true,
+        "future_read_purpose": "verify branch, head, dirty state, and six candidate file summaries",
+        "future_read_output": "sanitized_read_receipt_only"
+      },
+      "authorized_future_git_commands": [
+        {
+          "id": "current_branch",
+          "command_template": "git -C <VCPTOOLBOX_WORKSPACE> branch --show-current",
+          "purpose": "verify current branch without network access",
+          "output_policy": "sanitized_single_line"
+        },
+        {
+          "id": "working_tree_status",
+          "command_template": "git -C <VCPTOOLBOX_WORKSPACE> status --short",
+          "purpose": "detect dirty external worktree before any read summary",
+          "output_policy": "summarized_status_only"
+        },
+        {
+          "id": "current_head",
+          "command_template": "git -C <VCPTOOLBOX_WORKSPACE> rev-parse HEAD",
+          "purpose": "record current local head for the read receipt",
+          "output_policy": "commit_sha_only"
+        },
+        {
+          "id": "remote_tracking_head",
+          "command_template": "git -C <VCPTOOLBOX_WORKSPACE> rev-parse origin/main",
+          "purpose": "record local remote-tracking head if present without fetch",
+          "output_policy": "commit_sha_only_or_unavailable"
+        },
+        {
+          "id": "recent_history",
+          "command_template": "git -C <VCPTOOLBOX_WORKSPACE> log --oneline --decorate -n 10",
+          "purpose": "summarize recent local context without remote writes",
+          "output_policy": "sanitized_commit_summary"
+        }
+      ],
+      "authorized_future_file_reads": [
+        {
+          "path": "services/agentImageLab/ImageExecutionBroker.js",
+          "purpose": "broker coordinator boundary",
+          "if_missing": "record_absent_without_creating"
+        },
+        {
+          "path": "services/agentImageLab/ImageRunCapabilityRegistry.js",
+          "purpose": "internal capability lookup and binding proof",
+          "if_missing": "record_absent_without_creating"
+        },
+        {
+          "path": "services/agentImageLab/RestrictedPluginFacade.js",
+          "purpose": "narrow plugin/API/delegate invocation facade",
+          "if_missing": "record_absent_without_creating"
+        },
+        {
+          "path": "services/agentImageLab/ArtifactReceiptWriter.js",
+          "purpose": "receipt and artifact evidence writer boundary",
+          "if_missing": "record_absent_without_creating"
+        },
+        {
+          "path": "routes/agentImageLabImageExecution.js",
+          "purpose": "thin ingress or future generic route binding",
+          "if_missing": "record_absent_without_creating"
+        },
+        {
+          "path": "tests/agentImageLab/imageExecutionBroker.test.js",
+          "purpose": "contract and dispatch-boundary tests",
+          "if_missing": "record_absent_without_creating"
+        }
+      ],
+      "forbidden_future_reads_or_actions": [
+        ".env",
+        "config.env",
+        "secrets",
+        "credentials",
+        "tokens",
+        "cookies",
+        "private_configs",
+        "logs",
+        "raw_private_data",
+        "package_json_or_lockfile_read",
+        "node_modules_or_dependency_tree_read",
+        "unrelated_source_tree_read",
+        "broad_repository_scan",
+        "raw_source_copy_into_AIL",
+        "route_http_probe",
+        "provider_plugin_api_or_image_call",
+        "generic_endpoint_enablement",
+        "accepted_samples_or_production_candidate_write",
+        "DailyNote_or_VCP_memory_write",
+        "generated_image_or_run_artifact_write",
+        "dependency_or_package_manager_change",
+        "external_repo_write",
+        "external_repo_commit_push_tag_release_deploy",
+        "force_push_history_rewrite_or_destructive_action"
+      ],
+      "max_read_budget": {
+        "max_git_commands": 5,
+        "max_candidate_source_files": 6,
+        "max_external_source_file_reads": 6,
+        "max_external_read_operations_total": 11,
+        "max_retry_per_failed_read": 0,
+        "network_access_allowed": false,
+        "external_write_allowed": false
+      },
+      "sanitized_output_policy": {
+        "raw_source_copy_into_AIL_allowed": false,
+        "raw_private_local_path_allowed": false,
+        "secret_value_print_allowed": false,
+        "full_file_dump_allowed": false,
+        "allowed_summary_fields": [
+          "path",
+          "exists",
+          "inferred_role",
+          "exported_symbol_names_if_obvious",
+          "import_dependency_names_if_obvious",
+          "route_or_module_boundary_summary",
+          "dispatch_authority_risk_summary",
+          "missing_or_conflict_notes"
+        ],
+        "forbidden_summary_fields": [
+          "raw_secret_values",
+          "raw_private_paths",
+          "raw_env_values",
+          "full_source_text",
+          "unrelated_file_content"
+        ]
+      },
+      "read_execution_sequence": [
+        "verify_workspace_without_printing_private_path",
+        "run_exact_authorized_git_commands",
+        "read_only_authorized_candidate_files_if_present",
+        "record_missing_candidate_files_as_absent",
+        "produce_sanitized_read_receipt",
+        "stop_before_any_write_or_runtime_action"
+      ],
+      "read_receipt_contract": {
+        "future_receipt_required": true,
+        "future_receipt_target_directory": "reports/external_repo_reads/",
+        "receipt_template_ref": "docs/vcptoolbox_image_execution_broker_external_repo_exact_read_receipt_template_no_execute.md",
+        "receipt_write_allowed_now": false,
+        "required_fields": [
+          "receipt_schema_id",
+          "read_packet_id",
+          "read_authorization_packet_ref",
+          "receipt_template_ref",
+          "target_system",
+          "target_repo",
+          "workspace_verified_without_printing_private_path",
+          "workspace_private_path_recorded",
+          "current_branch",
+          "current_head",
+          "remote_tracking_head_or_unavailable",
+          "working_tree_status_summary",
+          "allowed_git_commands_used",
+          "allowed_file_reads_used",
+          "candidate_file_matrix",
+          "forbidden_paths_attempted",
+          "sanitized_summary_only",
+          "secret_value_read_performed",
+          "raw_source_copied_into_AIL",
+          "external_write_performed",
+          "route_http_request_performed",
+          "provider_plugin_api_image_performed",
+          "dependency_change_performed",
+          "read_receipt_written",
+          "next_write_gate_allowed",
+          "stop_reason",
+          "validation_summary"
+        ],
+        "next_write_gate_allowed": false,
+        "next_write_gate_requires_separate_packet": true
+      },
+      "validation_plan": {
+        "local_AIL_no_execute_validation": [
+          "npm run validate:vcptoolbox-image-execution-broker-external-repo-read-authorization-packet-no-execute",
+          "npm run validate:vcptoolbox-image-execution-broker-external-repo-exact-read-receipt-template-no-execute",
+          "npm run validate:vcptoolbox-image-execution-broker-external-repo-read-preflight-no-execute",
+          "npm run validate:vcptoolbox-image-execution-broker-external-repo-readiness-review-no-execute",
+          "npm run validate:vcptoolbox-image-execution-broker-external-repo-authorization-packet-no-execute",
+          "npm run validate:vcptoolbox-image-execution-broker-followup-plan",
+          "npm run validate:ail-core-vcp-adapter-split-plan-no-execute",
+          "npm run validate:validation-manifest"
+        ],
+        "future_external_read_receipt_validation_required": [
+          "exact read receipt validates allowed git commands only",
+          "exact candidate file matrix matches six-path allowlist",
+          "forbidden path attempts equal empty list",
+          "secret_value_read_performed is false",
+          "raw_source_copied_into_AIL is false",
+          "external_write_performed is false",
+          "next_write_gate_allowed is false"
+        ]
+      },
+      "stop_conditions": "read_authorization_stop_conditions",
+      "execution_boundary": "execution_boundary"
+    },
+    "read_authorization_stop_conditions": [
+      "actual_external_vcptoolbox_read_requested_in_no_execute_phase",
+      "future_read_execution_without_separate_instruction_requested",
+      "raw_private_local_vcptoolbox_path_storage_or_print_requested",
+      "secret_env_cookie_token_private_config_log_package_lock_or_raw_private_data_read_required",
+      "external_file_outside_six_path_candidate_allowlist_requested",
+      "raw_vcptoolbox_source_copy_into_ail_requested",
+      "external_repo_write_requested",
+      "dependency_package_manager_or_lockfile_change_requested",
+      "generic_endpoint_enablement_requested",
+      "route_http_request_requested",
+      "provider_plugin_api_or_image_generation_requested",
+      "accepted_samples_production_memory_generated_artifact_or_receipt_write_requested_now",
+      "commit_push_tag_release_deploy_requested",
+      "force_push_history_rewrite_or_destructive_action_requested"
+    ],
+    "execution_boundary": {
+      "can_execute_now": false,
+      "external_VCPToolBox_read_performed": false,
+      "external_VCPToolBox_write_performed": false,
+      "external_repo_branch_or_head_checked": false,
+      "external_repo_target_files_checked": false,
+      "external_repo_package_or_test_commands_discovered": false,
+      "read_receipt_written_now": false,
+      "broker_implementation_performed": false,
+      "route_implementation_performed": false,
+      "generic_endpoint_enabled": false,
+      "migration_allowed_now": false,
+      "route_http_request_performed": false,
+      "provider_contact_performed": false,
+      "plugin_call_performed": false,
+      "api_call_performed": false,
+      "image_generation_performed": false,
+      "real_manifest_read_performed": false,
+      "real_VCPChat_read_performed": false,
+      "real_VCPToolBox_read_performed": false,
+      "secret_value_read_performed": false,
+      "dependency_change_performed": false,
+      "accepted_samples_write_performed": false,
+      "production_candidate_write_performed": false,
+      "DailyNote_write_performed": false,
+      "VCP_memory_write_performed": false,
+      "Codex_memory_write_performed": false,
+      "commit_performed": false,
+      "push_tag_release_deploy_performed": false
+    },
+    "exact_read_receipt_template_ref": "docs/vcptoolbox_image_execution_broker_external_repo_exact_read_receipt_template_no_execute.md",
+    "exact_read_receipt_template_status": "completed_validated_no_execute_template_20260610",
+    "receipt_template_result": "ready_for_future_exact_read_receipt_population",
+    "completed_previous": "prepare_vcptoolbox_image_execution_broker_external_repo_exact_read_receipt_template_no_execute",
+    "recommended_next": "perform_vcptoolbox_image_execution_broker_external_repo_exact_read_with_receipt_only_after_separate_authorization",
+    "automatic_real_execution_allowed_by_this_packet": false,
+    "external_repo_read_performed_by_this_packet": false,
+    "external_repo_write_allowed_by_this_packet": false,
+    "broker_implementation_allowed_by_this_packet": false,
+    "generic_endpoint_enablement_allowed_by_this_packet": false
+  }
+}

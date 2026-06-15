@@ -1,3 +1,443 @@
+## Queue - VCPToolBox Image Execution Broker External Repo Exact Read Receipt Template No-Execute 2026-06-10
+
+```text
+done:
+  - task: create exact read receipt template doc
+    evidence: docs/vcptoolbox_image_execution_broker_external_repo_exact_read_receipt_template_no_execute.md.
+  - task: create schema example with required future receipt fields, candidate file matrix template, forbidden receipt fields, false evidence flags, and no-execute boundary
+    evidence: tests/schema_examples/vcptoolbox_image_execution_broker_external_repo_exact_read_receipt_template_no_execute.example.json.
+  - task: add no-execute exact read receipt template validator
+    evidence: scripts/validate_vcptoolbox_image_execution_broker_external_repo_exact_read_receipt_template_no_execute.js.
+  - task: connect validator to package/manifest
+    evidence: package.json; scripts/validation_manifest.json; validator_count now 146.
+  - task: update read authorization packet to reference the fixed receipt template
+    evidence: docs/vcptoolbox_image_execution_broker_external_repo_read_authorization_packet_no_execute.md; tests/schema_examples/vcptoolbox_image_execution_broker_external_repo_read_authorization_packet_no_execute.example.json; scripts/validate_vcptoolbox_image_execution_broker_external_repo_read_authorization_packet_no_execute.js.
+  - task: update broker followup WP11 status and next step
+    evidence: docs/vcptoolbox_image_execution_broker_followup_plan.md; tests/schema_examples/vcptoolbox_image_execution_broker_followup_plan.example.json; scripts/validate_vcptoolbox_image_execution_broker_followup_plan.js.
+  - task: update split plan to require the receipt template before any future external read
+    evidence: docs/ail_core_vcp_adapter_split_plan_no_execute.md; tests/schema_examples/ail_core_vcp_adapter_split_plan_no_execute.example.json; scripts/validate_ail_core_vcp_adapter_split_plan_no_execute.js.
+  - task: update runtime multi-prompt plan broker pointer with receipt template status
+    evidence: docs/runtime_to_review_v2_multi_prompt_controlled_trial_plan.md; node scripts/validate_runtime_to_review_v2_multi_prompt_controlled_trial_plan.js passed.
+in_progress:
+  - none
+blocked:
+  - task: external VCPToolBox read
+    reason: this template only fixes future receipt shape; external_repo_read_allowed_now=false.
+  - task: external VCPToolBox write
+    reason: write requires future read evidence and a separate exact write gate.
+  - task: read receipt write
+    reason: receipt_write_allowed_now=false in this no-execute phase.
+  - task: receipt population
+    reason: receipt_population_allowed_now=false until a separate exact read execution instruction exists.
+  - task: external branch/head/file check
+    reason: future exact read execution must be separately and exactly requested.
+  - task: real broker implementation or route implementation
+    reason: implementation requires future read evidence and separate exact write confirmation.
+  - task: generic endpoint enablement
+    reason: endpoint migration remains separately gated.
+  - task: route HTTP or provider/plugin/API/image execution
+    reason: runtime execution remains separately gated.
+  - task: dependency change
+    reason: forbidden unless a future exact package/action list is authorized.
+remaining:
+  - perform_vcptoolbox_image_execution_broker_external_repo_exact_read_with_receipt_only_after_separate_authorization
+  - keep actual VCPToolBox write, broker code, generic endpoint enablement, and real image execution behind separate exact gates
+```
+
+## Queue - VCPToolBox Image Execution Broker External Repo Read Authorization Packet No-Execute 2026-06-10
+
+```text
+done:
+  - task: create external repo read authorization packet doc
+    evidence: docs/vcptoolbox_image_execution_broker_external_repo_read_authorization_packet_no_execute.md.
+  - task: create schema example with exact one-action read operation, exact git commands, exact source reads, sanitized receipt contract, stop conditions, and no-execute boundary
+    evidence: tests/schema_examples/vcptoolbox_image_execution_broker_external_repo_read_authorization_packet_no_execute.example.json.
+  - task: add no-execute read authorization packet validator
+    evidence: scripts/validate_vcptoolbox_image_execution_broker_external_repo_read_authorization_packet_no_execute.js.
+  - task: connect validator to package/manifest
+    evidence: package.json; scripts/validation_manifest.json; validator_count now 145.
+  - task: update broker followup WP10 status and next step
+    evidence: docs/vcptoolbox_image_execution_broker_followup_plan.md; tests/schema_examples/vcptoolbox_image_execution_broker_followup_plan.example.json; scripts/validate_vcptoolbox_image_execution_broker_followup_plan.js.
+  - task: update read-preflight, readiness review, authorization packet, and split plan to record read authorization packet and point next work to exact read with receipt
+    evidence: docs/vcptoolbox_image_execution_broker_external_repo_read_preflight_no_execute.md; docs/vcptoolbox_image_execution_broker_external_repo_readiness_review_no_execute.md; docs/vcptoolbox_image_execution_broker_external_repo_authorization_packet_no_execute.md; docs/ail_core_vcp_adapter_split_plan_no_execute.md; related examples and validators.
+  - task: update runtime broker pointer to exact read with receipt only after separate authorization
+    evidence: docs/runtime_to_review_v2_multi_prompt_controlled_trial_plan.md.
+in_progress:
+  - none
+blocked:
+  - task: external VCPToolBox read
+    reason: this packet only prepares the exact future read request shape; external_repo_read_allowed_now=false.
+  - task: external VCPToolBox write
+    reason: write requires future read evidence and a separate exact write gate.
+  - task: read receipt write
+    reason: receipt_write_allowed_now=false in this no-execute phase.
+  - task: external branch/head/file check
+    reason: future exact read execution must be separately and exactly requested.
+  - task: real broker implementation or route implementation
+    reason: implementation requires future read evidence and separate exact write confirmation.
+  - task: generic endpoint enablement
+    reason: endpoint migration remains separately gated.
+  - task: route HTTP or provider/plugin/API/image execution
+    reason: runtime execution remains separately gated.
+  - task: dependency change
+    reason: forbidden unless a future exact package/action list is authorized.
+remaining:
+  - perform_vcptoolbox_image_execution_broker_external_repo_exact_read_with_receipt_only_after_separate_authorization
+  - keep actual VCPToolBox write, broker code, generic endpoint enablement, and real image execution behind separate exact gates
+```
+
+## Queue - VCPToolBox Image Execution Broker External Repo Read Preflight No-Execute 2026-06-10
+
+```text
+done:
+  - task: create external repo read-preflight doc
+    evidence: docs/vcptoolbox_image_execution_broker_external_repo_read_preflight_no_execute.md.
+  - task: create schema example with exact future git commands, exact future source reads, sanitized output policy, receipt requirements, stop conditions, and no-execute boundary
+    evidence: tests/schema_examples/vcptoolbox_image_execution_broker_external_repo_read_preflight_no_execute.example.json.
+  - task: add no-execute read-preflight validator
+    evidence: scripts/validate_vcptoolbox_image_execution_broker_external_repo_read_preflight_no_execute.js.
+  - task: connect validator to package/manifest
+    evidence: package.json; scripts/validation_manifest.json; validator_count now 144.
+  - task: update broker followup WP9 status and next step
+    evidence: docs/vcptoolbox_image_execution_broker_followup_plan.md; tests/schema_examples/vcptoolbox_image_execution_broker_followup_plan.example.json; scripts/validate_vcptoolbox_image_execution_broker_followup_plan.js.
+  - task: update readiness review, authorization packet, and split plan to record read-preflight and point next work to read authorization packet
+    evidence: docs/vcptoolbox_image_execution_broker_external_repo_readiness_review_no_execute.md; docs/vcptoolbox_image_execution_broker_external_repo_authorization_packet_no_execute.md; docs/ail_core_vcp_adapter_split_plan_no_execute.md; related examples and validators.
+  - task: update runtime broker pointer to read authorization packet
+    evidence: docs/runtime_to_review_v2_multi_prompt_controlled_trial_plan.md.
+in_progress:
+  - none
+blocked:
+  - task: external VCPToolBox read
+    reason: this gate only locks how a future read must be performed; external_repo_read_allowed_now=false.
+  - task: external VCPToolBox write
+    reason: write requires future real read evidence and a separate exact write gate.
+  - task: external branch/head/file check
+    reason: future read authorization packet is required before the exact read commands may be executed.
+  - task: real broker implementation or route implementation
+    reason: implementation requires future read evidence and separate exact write confirmation.
+  - task: generic endpoint enablement
+    reason: endpoint migration remains separately gated.
+  - task: route HTTP or provider/plugin/API/image execution
+    reason: runtime execution remains separately gated.
+  - task: dependency change
+    reason: forbidden unless a future exact package/action list is authorized.
+remaining:
+  - prepare_vcptoolbox_image_execution_broker_external_repo_read_authorization_packet_no_execute
+  - keep actual VCPToolBox reads/writes, broker code, generic endpoint enablement, and real image execution behind separate exact gates
+```
+
+## Queue - VCPToolBox Image Execution Broker External Repo Readiness Review No-Execute 2026-06-10
+
+```text
+done:
+  - task: create external repo readiness review doc
+    evidence: docs/vcptoolbox_image_execution_broker_external_repo_readiness_review_no_execute.md.
+  - task: create schema example with local readiness criteria, deliberate unknowns, real read/write blockers, next read-preflight requirements, and no-execute boundary
+    evidence: tests/schema_examples/vcptoolbox_image_execution_broker_external_repo_readiness_review_no_execute.example.json.
+  - task: add no-execute readiness review validator
+    evidence: scripts/validate_vcptoolbox_image_execution_broker_external_repo_readiness_review_no_execute.js.
+  - task: connect validator to package/manifest
+    evidence: package.json; scripts/validation_manifest.json; validator_count now 143.
+  - task: update broker followup WP8 status and next step
+    evidence: docs/vcptoolbox_image_execution_broker_followup_plan.md; tests/schema_examples/vcptoolbox_image_execution_broker_followup_plan.example.json; scripts/validate_vcptoolbox_image_execution_broker_followup_plan.js.
+  - task: update authorization packet and split plan to record readiness review and point next work to read-preflight
+    evidence: docs/vcptoolbox_image_execution_broker_external_repo_authorization_packet_no_execute.md; docs/ail_core_vcp_adapter_split_plan_no_execute.md; related examples and validators.
+  - task: update runtime broker pointer to read-preflight
+    evidence: docs/runtime_to_review_v2_multi_prompt_controlled_trial_plan.md.
+in_progress:
+  - none
+blocked:
+  - task: external VCPToolBox read or write
+    reason: readiness review is no-execute and sets external_repo_read_allowed_now=false plus external_repo_write_allowed_now=false.
+  - task: external branch/head/file check
+    reason: next read-preflight template is still only a local no-execute preparation step.
+  - task: real broker implementation or route implementation
+    reason: implementation requires future read evidence and separate exact write confirmation.
+  - task: generic endpoint enablement
+    reason: endpoint migration remains separately gated.
+  - task: route HTTP or provider/plugin/API/image execution
+    reason: runtime execution remains separately gated.
+  - task: dependency change
+    reason: forbidden unless a future exact package/action list is authorized.
+remaining:
+  - prepare_vcptoolbox_image_execution_broker_external_repo_read_preflight_no_execute
+  - keep actual VCPToolBox reads/writes, broker code, generic endpoint enablement, and real image execution behind separate exact gates
+```
+
+## Queue - VCPToolBox Image Execution Broker External Repo Authorization Packet No-Execute 2026-06-10
+
+```text
+done:
+  - task: create external repo authorization packet doc
+    evidence: docs/vcptoolbox_image_execution_broker_external_repo_authorization_packet_no_execute.md.
+  - task: create schema example with exact target repo, future read preflight, write envelope, validation, rollback, stop conditions, and no-execute boundary
+    evidence: tests/schema_examples/vcptoolbox_image_execution_broker_external_repo_authorization_packet_no_execute.example.json.
+  - task: add no-execute authorization packet validator
+    evidence: scripts/validate_vcptoolbox_image_execution_broker_external_repo_authorization_packet_no_execute.js.
+  - task: connect validator to package/manifest
+    evidence: package.json; scripts/validation_manifest.json; validator_count now 142.
+  - task: update broker followup WP7 status and next step
+    evidence: docs/vcptoolbox_image_execution_broker_followup_plan.md; tests/schema_examples/vcptoolbox_image_execution_broker_followup_plan.example.json; scripts/validate_vcptoolbox_image_execution_broker_followup_plan.js.
+  - task: update split plan and runtime broker pointer to readiness review
+    evidence: docs/ail_core_vcp_adapter_split_plan_no_execute.md; docs/runtime_to_review_v2_multi_prompt_controlled_trial_plan.md.
+in_progress:
+  - none
+blocked:
+  - task: external VCPToolBox read or write
+    reason: this packet is no-execute and sets external_repo_read_allowed_now=false plus external_repo_write_allowed_now=false.
+  - task: real broker implementation or route implementation
+    reason: future VCPToolBox write requires a separate exact authorization after readiness review.
+  - task: external branch/head/file check
+    reason: future read preflight is required and was not executed by this packet.
+  - task: generic endpoint enablement
+    reason: endpoint migration remains separately gated.
+  - task: route HTTP or provider/plugin/API/image execution
+    reason: runtime execution remains separately gated.
+  - task: dependency change
+    reason: forbidden unless a future exact package/action list is authorized.
+remaining:
+  - prepare_vcptoolbox_image_execution_broker_external_repo_readiness_review_no_execute
+  - keep actual VCPToolBox reads/writes, broker code, generic endpoint enablement, and real image execution behind separate exact gates
+```
+
+## Queue - AIL Core / VCP Adapter Split Plan No-Execute 2026-06-10
+
+```text
+done:
+  - task: create AIL Core / VCP Adapter split plan doc
+    evidence: docs/ail_core_vcp_adapter_split_plan_no_execute.md.
+  - task: create schema example with ownership matrix, data flow, stop conditions, and no-execute boundary
+    evidence: tests/schema_examples/ail_core_vcp_adapter_split_plan_no_execute.example.json.
+  - task: add no-execute split plan validator
+    evidence: scripts/validate_ail_core_vcp_adapter_split_plan_no_execute.js.
+  - task: connect validator to package/manifest
+    evidence: package.json; scripts/validation_manifest.json; validator_count now 141.
+  - task: update broker followup WP6 status and next step
+    evidence: docs/vcptoolbox_image_execution_broker_followup_plan.md; tests/schema_examples/vcptoolbox_image_execution_broker_followup_plan.example.json; scripts/validate_vcptoolbox_image_execution_broker_followup_plan.js.
+in_progress:
+  - none
+blocked:
+  - task: adapter code write
+    reason: this split plan is no-execute and adapter_code_write_allowed_now=false.
+  - task: external VCPToolBox read or write
+    reason: requires a future exact external-repo authorization packet.
+  - task: enable /internal/agent-image-lab/executions/run
+    reason: generic endpoint enablement remains separately gated.
+  - task: route HTTP or provider/plugin/API/image execution
+    reason: future activation and runtime execution remain separately gated.
+  - task: dependency change
+    reason: forbidden unless a future exact package/action list is authorized.
+remaining:
+  - prepare_vcptoolbox_image_execution_broker_external_repo_authorization_packet_no_execute
+  - keep actual VCPToolBox writes, generic endpoint enablement, adapter code, and real image execution behind separate exact gates
+```
+
+## Queue - Generic Image Execution Endpoint Gate No-Execute 2026-06-10
+
+```text
+done:
+  - task: create generic endpoint migration gate doc
+    evidence: docs/generic_image_execution_endpoint_gate_no_execute.md.
+  - task: create schema example with disabled endpoint state, compatibility shims, evidence gate, envelope, rollback, and future authorization requirements
+    evidence: tests/schema_examples/generic_image_execution_endpoint_gate_no_execute.example.json.
+  - task: add no-execute endpoint gate validator
+    evidence: scripts/validate_generic_image_execution_endpoint_gate_no_execute.js.
+  - task: connect validator to package/manifest
+    evidence: package.json; scripts/validation_manifest.json; validator_count now 140.
+  - task: update broker followup WP5 status and next step
+    evidence: docs/vcptoolbox_image_execution_broker_followup_plan.md; tests/schema_examples/vcptoolbox_image_execution_broker_followup_plan.example.json; scripts/validate_vcptoolbox_image_execution_broker_followup_plan.js.
+in_progress:
+  - none
+blocked:
+  - task: enable /internal/agent-image-lab/executions/run
+    reason: this gate is no-execute and sets generic_endpoint_enabled_now=false plus migration_allowed_now=false.
+  - task: remove or replace task-specific compatibility routes
+    reason: Trial 001 and Trial 002 routes remain compatibility shims until a future exact migration gate validates.
+  - task: external VCPToolBox read or write
+    reason: requires a future exact external-repo authorization packet.
+  - task: route HTTP or provider/plugin/API/image execution
+    reason: future activation and runtime execution remain separately gated.
+  - task: dependency change
+    reason: forbidden unless a future exact package/action list is authorized.
+remaining:
+  - prepare_ail_core_vcp_adapter_split_plan_no_execute
+  - keep actual VCPToolBox writes, generic endpoint enablement, and real image execution behind separate exact gates
+```
+
+## Queue - VCPToolBox Broker Implementation Proposal No-Execute 2026-06-10
+
+```text
+done:
+  - task: create VCPToolBox broker implementation proposal doc
+    evidence: docs/vcptoolbox_image_execution_broker_implementation_proposal_no_execute.md.
+  - task: create schema example with candidate external file allowlist and future authorization requirements
+    evidence: tests/schema_examples/vcptoolbox_image_execution_broker_implementation_proposal_no_execute.example.json.
+  - task: add no-execute proposal validator
+    evidence: scripts/validate_vcptoolbox_image_execution_broker_implementation_proposal_no_execute.js.
+  - task: connect validator to package/manifest
+    evidence: package.json; scripts/validation_manifest.json; validator_count now 139.
+  - task: update parent contract/template and broker followup WP4 status
+    evidence: docs/compatibility_route_thin_ingress_plan_no_execute.md; docs/image_run_capability_binding_preflight_template.md; docs/generation_channel_contract_preflight.md; docs/vcptoolbox_image_execution_broker_followup_plan.md; related examples and validators.
+in_progress:
+  - none
+blocked:
+  - task: external VCPToolBox read or write
+    reason: proposal requires a future exact external-repo authorization packet before any VCPToolBox access.
+  - task: real broker implementation or route implementation
+    reason: this proposal is no-execute and external_repo_write_allowed_now=false.
+  - task: route HTTP or generic endpoint enablement
+    reason: next step is only a Green Lane generic endpoint migration gate.
+  - task: real provider/plugin/API/image execution
+    reason: provider/plugin/API/image actions remain separately gated.
+  - task: dependency change
+    reason: forbidden unless a future exact package/action list is authorized.
+remaining:
+  - prepare_generic_image_execution_endpoint_gate_no_execute
+  - keep actual VCPToolBox writes and generic endpoint enablement behind separate exact gates
+```
+
+## Queue - Compatibility Route Thin Ingress Plan 2026-06-10
+
+```text
+done:
+  - task: create compatibility route thin-ingress plan doc
+    evidence: docs/compatibility_route_thin_ingress_plan_no_execute.md.
+  - task: create schema example with Trial 001 and Trial 002 route shim instances
+    evidence: tests/schema_examples/compatibility_route_thin_ingress_plan_no_execute.example.json.
+  - task: add evidence-backed no-execute validator
+    evidence: scripts/validate_compatibility_route_thin_ingress_plan_no_execute.js.
+  - task: connect validator to package/manifest
+    evidence: package.json; scripts/validation_manifest.json; validator_count now 138.
+  - task: update parent contract/template and broker followup WP3 status
+    evidence: docs/image_run_capability_binding_preflight_template.md; docs/generation_channel_contract_preflight.md; docs/vcptoolbox_image_execution_broker_followup_plan.md; related examples and validators.
+in_progress:
+  - none
+blocked:
+  - task: real route implementation or generic endpoint enablement
+    reason: this plan is no-execute and sets route_http_allowed_by_this_plan=false plus generic_endpoint_enabled_now=false.
+  - task: external VCPToolBox broker implementation
+    reason: requires a separate exact external-repo packet and authorization boundary.
+  - task: real provider/plugin/API/image execution
+    reason: route is identity/transport only and cannot dispatch provider/plugin/API/model/output/retry.
+  - task: accepted_samples, production candidate, DailyNote, VCP memory, or Codex memory write
+    reason: ReviewQueue and MemoryCandidate gates keep writes delayed and separately authorized.
+remaining:
+  - prepare_vcptoolbox_image_execution_broker_implementation_proposal_no_execute
+  - keep actual VCPToolBox writes and generic endpoint migration behind separate exact gates
+```
+
+## Queue - ImageRunCapability Binding Preflight Template 2026-06-10
+
+```text
+done:
+  - task: create ImageRunCapability binding preflight template doc
+    evidence: docs/image_run_capability_binding_preflight_template.md.
+  - task: create schema example with Trial 001 and Trial 002 binding template instances
+    evidence: tests/schema_examples/image_run_capability_binding_preflight_template.example.json.
+  - task: add evidence-backed no-execute validator
+    evidence: scripts/validate_image_run_capability_binding_preflight_template.js.
+  - task: connect validator to package/manifest
+    evidence: package.json; scripts/validation_manifest.json; validator_count now 137.
+  - task: update parent contract and broker followup WP2 status
+    evidence: docs/generation_channel_contract_preflight.md; docs/vcptoolbox_image_execution_broker_followup_plan.md; related examples and validators.
+in_progress:
+  - none
+blocked:
+  - task: real provider/plugin/API/image execution
+    reason: this template is no-execute and sets can_execute_now=false.
+  - task: external VCPToolBox broker implementation
+    reason: requires a separate exact external-repo packet and authorization boundary.
+  - task: route HTTP or generic endpoint migration
+    reason: next step is only a Green Lane compatibility route thin-ingress plan.
+  - task: accepted_samples, production candidate, DailyNote, VCP memory, or Codex memory write
+    reason: ReviewQueue and MemoryCandidate gates keep writes delayed and separately authorized.
+remaining:
+  - prepare_compatibility_route_thin_ingress_plan_no_execute
+  - keep existing trial routes as compatibility shims until the thin-ingress plan validates
+```
+
+## Queue - AIL Generation Channel Contract Preflight 2026-06-09
+
+```text
+done:
+  - task: create generation channel contract preflight doc
+    evidence: docs/generation_channel_contract_preflight.md.
+  - task: create schema example with Trial 001 and Trial 002 snapshots
+    evidence: tests/schema_examples/generation_channel_contract_preflight.example.json.
+  - task: add evidence-backed validator
+    evidence: scripts/validate_generation_channel_contract_preflight.js.
+  - task: connect validator to package/manifest
+    evidence: package.json; scripts/validation_manifest.json; validator_count now 136.
+  - task: update broker followup WP1 status
+    evidence: docs/vcptoolbox_image_execution_broker_followup_plan.md; tests/schema_examples/vcptoolbox_image_execution_broker_followup_plan.example.json; scripts/validate_vcptoolbox_image_execution_broker_followup_plan.js.
+in_progress:
+  - none
+blocked:
+  - task: real provider/plugin/API/image execution
+    reason: this contract is no-execute and issues no activation packet.
+  - task: external VCPToolBox broker implementation
+    reason: requires a separate exact external-repo packet.
+  - task: accepted_samples, production candidate, DailyNote, VCP memory, or Codex memory write
+    reason: ReviewQueue and MemoryCandidate gates keep writes delayed and separately authorized.
+remaining:
+  - prepare_image_run_capability_binding_preflight_template
+  - keep existing trial routes as compatibility shims until binding preflight validates
+```
+
+## Queue - VCPToolBox Image Execution Broker Followup Plan 2026-06-09
+
+```text
+done:
+  - task: adopt external broker draft into repo-local plan
+    evidence: docs/vcptoolbox_image_execution_broker_followup_plan.md.
+  - task: add schema example and dedicated validator
+    evidence: tests/schema_examples/vcptoolbox_image_execution_broker_followup_plan.example.json; scripts/validate_vcptoolbox_image_execution_broker_followup_plan.js.
+  - task: connect validator to package/manifest
+    evidence: package.json; scripts/validation_manifest.json; validator_count now 135.
+  - task: link old multi-prompt broker extraction rule to the new followup plan
+    evidence: docs/runtime_to_review_v2_multi_prompt_controlled_trial_plan.md.
+  - task: validate local no-execute plan
+    evidence: npm run validate:vcptoolbox-image-execution-broker-followup-plan passed with 19 checks; node scripts\validate_runtime_to_review_v2_multi_prompt_controlled_trial_plan.js passed with 24 checks.
+in_progress:
+  - none
+blocked:
+  - task: full VCPToolBox Image Execution Broker implementation
+    reason: external VCPToolBox write requires a separate exact external-repo packet and authorization boundary.
+  - task: generic endpoint migration
+    reason: deferred until generation channel contract preflight and comparable trial evidence or a repeated runtime boundary exists.
+  - task: real provider/plugin/API/image execution
+    reason: this plan is no-execute and does not issue an activation packet.
+remaining:
+  - prepare_ail_generation_channel_contract_preflight_no_execute
+  - keep existing trial routes as compatibility shims until contract/binding preflight validates
+```
+
+## Queue - Runtime-To-Review V2 Trial 002 Memory Authorization Preflight 2026-06-09
+
+```text
+done:
+  - task: create memory authorization preflight
+    evidence: reports/memory_write_authorization/r2r_v2_trial_002_codex_knowledge_memory_authorization_preflight_20260609.json.
+  - task: prepare Codex knowledge payload preview
+    evidence: reports/memory_write_payloads/r2r_v2_trial_002_codex_knowledge_memory_write_payload_candidate_20260609.json.
+  - task: add dedicated validator and manifest/package entry
+    evidence: scripts/validate_runtime_to_review_v2_trial_002_memory_authorization_preflight.js; package.json; scripts/validation_manifest.json.
+  - task: validate no-write preflight
+    evidence: npm run validate:runtime-to-review-trial-002-memory-authorization-preflight passed, 9 checks; npm run validate:validation-manifest passed with validator_count 134.
+in_progress:
+  - none
+blocked:
+  - task: actual record_memory execution
+    reason: preflight does not grant execution authorization; a separate binding-ready packet and post-write receipt are required.
+  - task: DailyNote or VCP dual-memory write
+    reason: excluded by this preflight; Trial 002 is accepted_candidate but not commercial_delivery_ready.
+  - task: accepted_samples promotion, durable archive, or production candidate
+    reason: outside this memory authorization preflight and still separately gated.
+remaining:
+  - optional separate binding-ready Codex knowledge memory write packet
+  - actual record_memory call only after that future packet exists and is validated
+```
+
 ## Queue - PR13 Post-Merge Local Master Fast-Forward Sync 2026-06-09
 
 ```text
