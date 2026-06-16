@@ -1,3 +1,52 @@
+## Current Run State - Runtime To Review V2 Prompt Target Collision Guard 2026-06-16
+
+```text
+phase: runtime_to_review_v2_prompt_target_collision_guard_20260616
+status: completed_validated_local_green_guard
+lane: Green local metadata/validator guard; no prompt write, overwrite, runtime execution, image read, memory write, or external read
+goal: Prevent the review feedback prompt patch preview from accidentally targeting an existing tracked v3 prompt package for overwrite.
+changed_refs:
+  - reports/runtime_to_review_v2/r2r_v2_review_feedback_prompt_patch_preview_20260616.json
+  - scripts/validate_runtime_to_review_v2_review_feedback_prompt_patch_preview.js
+  - docs/RUNTIME_TO_PRODUCTION_LANDING_ROADMAP.md
+  - CURRENT_STATE.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+result:
+  - the preview now states that its original v3 target is an existing tracked prompt package
+  - write-to-existing-v3 and overwrite-existing-prompt-package are explicitly blocked
+  - the validator proves the collision from repository reality with git-tracked v3 evidence
+  - next prompt work is retargeted to a fresh non-colliding package only after preview acceptance
+validation:
+  - node --check scripts/validate_runtime_to_review_v2_review_feedback_prompt_patch_preview.js passed
+  - npm run validate:runtime-to-review-feedback-prompt-preview passed, 12 checks
+  - npm run validate:runtime-to-review-feedback-routing passed, 12 checks
+  - npm run validate:validation-manifest passed, validator_count 150
+  - node scripts/validate_agent_board_state.js passed
+  - npm run validate:active passed
+  - git diff --check passed with LF/CRLF warnings only
+  - added-lines and untracked-file boundary scans passed
+boundary_checks:
+  prompt_package_write_performed: false
+  existing_prompt_package_overwrite_performed: false
+  route_http_request_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  output_write_performed: false
+  image_binary_read_performed: false
+  accepted_samples_write_performed: false
+  production_candidate_write_performed: false
+  memory_write_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  secret_value_read_performed: false
+next_safe_task: if the preview is accepted, select a fresh non-colliding prompt package path before any formal prompt package write.
+```
+
 ## Current Run State - Runtime To Review V2 Review Feedback Prompt Patch Preview 2026-06-16
 
 ```text

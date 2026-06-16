@@ -109,6 +109,7 @@ runtime_roadmap: docs/RUNTIME_TO_PRODUCTION_LANDING_ROADMAP.md
 visual_rubric: docs/VISUAL_EVAL_RUBRIC.md
 review_feedback_routing: reports/runtime_to_review_v2/r2r_v2_review_feedback_routing_min_fixture_20260615.json
 review_feedback_prompt_patch_preview: reports/runtime_to_review_v2/r2r_v2_review_feedback_prompt_patch_preview_20260616.json
+review_feedback_prompt_target_guard: original preview target points at an existing tracked v3 prompt package; select a fresh non-colliding target before any formal write.
 core_vcp_split: docs/ail_core_vcp_adapter_split_plan_no_execute.md
 memory_policy:
   - memory_policy/write_permissions.md
@@ -125,7 +126,8 @@ Recommended order:
 1. Use `docs/COMMAND_TIERS.md` to classify risky commands before running them.
 2. Turn `docs/VISUAL_EVAL_RUBRIC.md` into a minimum repeatable eval fixture set.
 3. Review `runtime_to_review_v2_review_feedback_prompt_patch_preview`, then
-   create the formal v3 prompt package only if that preview is accepted.
+   choose a fresh non-colliding prompt package target only if that preview is
+   accepted; do not overwrite the existing tracked v3 prompt package.
 4. Keep memory write as a separate gate after human approval and suitability.
 
 No live provider, image generation, production write, or memory write is

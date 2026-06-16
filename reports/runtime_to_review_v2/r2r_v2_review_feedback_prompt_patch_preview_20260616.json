@@ -21,6 +21,11 @@
   },
   "prompt_patch_preview": {
     "target_prompt_package_if_later_approved": "prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v3.yaml",
+    "target_prompt_package_path_status": "existing_tracked_prompt_package_detected",
+    "formal_write_target_collision_detected": true,
+    "overwrite_existing_prompt_package_allowed": false,
+    "retarget_required_before_formal_write": true,
+    "formal_write_target_requirement": "select_a_fresh_non_colliding_prompt_package_path_before_any_prompt_package_write",
     "write_target_created_now": false,
     "patch_mode": "preview_only_no_prompt_file_write",
     "preserve": [
@@ -70,6 +75,8 @@
   "review_before_write": {
     "human_review_required_before_prompt_package_write": true,
     "formal_prompt_package_write_allowed_now": false,
+    "write_to_existing_v3_prompt_package_allowed_now": false,
+    "fresh_non_colliding_target_required_before_write": true,
     "future_prompt_package_validator_required": true,
     "future_review_criteria_update_required": true,
     "future_live_probe_requires_separate_exact_authorization": true
@@ -96,5 +103,5 @@
     "push_tag_release_deploy_performed": false,
     "destructive_action_performed": false
   },
-  "recommended_next": "review_prompt_patch_preview_then_create_formal_v3_prompt_package_only_if_approved"
+  "recommended_next": "review_prompt_patch_preview_then_select_fresh_non_colliding_prompt_package_target_only_if_approved"
 }

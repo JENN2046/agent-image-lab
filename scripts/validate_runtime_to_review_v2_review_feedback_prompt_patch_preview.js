@@ -12,6 +12,7 @@ const routingRef = "reports/runtime_to_review_v2/r2r_v2_review_feedback_routing_
 const promptRef = "prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v2.yaml";
 const decisionRef = "reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_review_decision_accepted_candidate_20260609.json";
 const criteriaRef = "reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_review_criteria_no_execute_20260608.json";
+const targetPromptRef = "prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v3.yaml";
 
 let passed = true;
 const results = [];
@@ -42,6 +43,19 @@ function runNodeCheck(relativePath) {
   return true;
 }
 
+function gitTracks(relativePath) {
+  try {
+    childProcess.execFileSync("git", ["ls-files", "--error-unmatch", relativePath], {
+      cwd: root,
+      encoding: "utf8",
+      stdio: ["ignore", "pipe", "pipe"],
+    });
+    return true;
+  } catch (_) {
+    return false;
+  }
+}
+
 function allFalseExceptMetadata(flags) {
   return flags &&
     Object.entries(flags).every(([key, value]) => key === "metadata_only" ? value === true : value === false);
@@ -69,6 +83,7 @@ function main() {
   const decision = readJson(decisionRef);
   const criteria = readJson(criteriaRef);
   const prompt = readText(promptRef);
+  const targetPrompt = readText(targetPromptRef);
   const acceptedCase = routing.routing_cases.find((item) =>
     item.case_id === "trial_002_accepted_candidate_watch_items_to_next_prompt"
   );
@@ -147,16 +162,31 @@ function main() {
   check("formal_write_and_live_probe_remain_gated", () =>
     preview.review_before_write.human_review_required_before_prompt_package_write === true &&
     preview.review_before_write.formal_prompt_package_write_allowed_now === false &&
+    preview.review_before_write.write_to_existing_v3_prompt_package_allowed_now === false &&
+    preview.review_before_write.fresh_non_colliding_target_required_before_write === true &&
     preview.review_before_write.future_prompt_package_validator_required === true &&
     preview.review_before_write.future_review_criteria_update_required === true &&
     preview.review_before_write.future_live_probe_requires_separate_exact_authorization === true
   );
+  check("existing_v3_target_collision_is_explicit_and_blocked", () =>
+    preview.prompt_patch_preview.target_prompt_package_if_later_approved === targetPromptRef &&
+    fs.existsSync(repoPath(targetPromptRef)) &&
+    gitTracks(targetPromptRef) &&
+    targetPrompt.includes("package_id: product_lifestyle_premium_portable_led_camping_lantern_v3") &&
+    targetPrompt.includes("source_phase: v14_085_pvos_lantern_v3_prompt_revision_plan") &&
+    preview.prompt_patch_preview.target_prompt_package_path_status === "existing_tracked_prompt_package_detected" &&
+    preview.prompt_patch_preview.formal_write_target_collision_detected === true &&
+    preview.prompt_patch_preview.overwrite_existing_prompt_package_allowed === false &&
+    preview.prompt_patch_preview.retarget_required_before_formal_write === true &&
+    preview.prompt_patch_preview.formal_write_target_requirement === "select_a_fresh_non_colliding_prompt_package_path_before_any_prompt_package_write"
+  );
   check("no_execution_guard_is_clean", () =>
     allFalseExceptMetadata(preview.no_execution_guard)
   );
-  check("recommended_next_is_formal_v3_only_if_approved", () =>
-    preview.recommended_next === "review_prompt_patch_preview_then_create_formal_v3_prompt_package_only_if_approved" &&
-    preview.prompt_patch_preview.target_prompt_package_if_later_approved === "prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v3.yaml"
+  check("recommended_next_requires_fresh_target_only_if_approved", () =>
+    preview.recommended_next === "review_prompt_patch_preview_then_select_fresh_non_colliding_prompt_package_target_only_if_approved" &&
+    preview.prompt_patch_preview.target_prompt_package_if_later_approved === targetPromptRef &&
+    preview.prompt_patch_preview.retarget_required_before_formal_write === true
   );
 
   const output = {
@@ -165,7 +195,9 @@ function main() {
     preview_ref: previewRef,
     source_routing_ref: routingRef,
     source_prompt_ref: promptRef,
-    target_prompt_package_if_later_approved: preview.prompt_patch_preview.target_prompt_package_if_later_approved,
+    preview_target_prompt_package_ref: preview.prompt_patch_preview.target_prompt_package_if_later_approved,
+    preview_target_collision_detected: preview.prompt_patch_preview.formal_write_target_collision_detected,
+    fresh_non_colliding_target_required_before_write: preview.review_before_write.fresh_non_colliding_target_required_before_write,
     route_action: preview.decision_context.route_action,
     prompt_package_write_performed: false,
     provider_contact_performed: false,

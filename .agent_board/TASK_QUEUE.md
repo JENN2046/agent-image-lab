@@ -1,3 +1,33 @@
+## Queue - Runtime To Review V2 Prompt Target Collision Guard 2026-06-16
+
+```text
+done:
+  - task: identify the next prompt-package readiness pain point
+    evidence: preview target points at an existing tracked v3 prompt package.
+  - task: make target collision explicit in the prompt patch preview
+    evidence: reports/runtime_to_review_v2/r2r_v2_review_feedback_prompt_patch_preview_20260616.json.
+  - task: tighten validator around repo-real target collision
+    evidence: scripts/validate_runtime_to_review_v2_review_feedback_prompt_patch_preview.js now checks git-tracked v3 and blocks overwrite/write-to-existing-v3.
+  - task: update current roadmap/status pointers
+    evidence: docs/RUNTIME_TO_PRODUCTION_LANDING_ROADMAP.md; CURRENT_STATE.md.
+in_progress:
+  - none
+blocked:
+  - task: overwrite existing v3 prompt package
+    reason: existing tracked prompt packages must not be overwritten by a feedback preview.
+  - task: formal prompt package write
+    reason: requires preview acceptance plus a fresh non-colliding prompt package target.
+  - task: live provider/image probe
+    reason: this Green guard does not authorize route/provider/plugin/API/image execution.
+  - task: accepted_samples, production, archive, or memory write
+    reason: prompt target guard only fixes the next prompt package boundary.
+  - task: push
+    reason: remote write requires explicit authorization.
+remaining:
+  - none for this Green guard package after exact-file local commit
+  - push remains blocked until explicit remote authorization
+```
+
 ## Queue - Runtime To Review V2 Review Feedback Prompt Patch Preview 2026-06-16
 
 ```text

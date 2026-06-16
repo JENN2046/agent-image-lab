@@ -1,3 +1,42 @@
+## Current Handoff Update - Runtime To Review V2 Prompt Target Collision Guard 2026-06-16
+
+```text
+phase: runtime_to_review_v2_prompt_target_collision_guard_20260616
+status: completed_validated_local_green_guard
+repository: <repo-root>
+branch: master
+goal: Fix the next prompt-package pain point by making the prompt patch preview acknowledge that its original v3 target is an existing tracked prompt package and must not be overwritten.
+completed:
+  - detected that prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v3.yaml already exists and is tracked
+  - updated the prompt patch preview with an explicit target-collision guard
+  - tightened the prompt preview validator so it proves the existing v3 collision and blocks overwrite/write-to-existing-v3
+  - updated roadmap/current-state/agent-board next steps away from "create formal v3" toward "select a fresh non-colliding target if the preview is accepted"
+validation_completed:
+  - node --check scripts/validate_runtime_to_review_v2_review_feedback_prompt_patch_preview.js passed
+  - npm run validate:runtime-to-review-feedback-prompt-preview passed, 12 checks
+  - npm run validate:runtime-to-review-feedback-routing passed, 12 checks
+  - npm run validate:validation-manifest passed, validator_count 150
+  - node scripts/validate_agent_board_state.js passed
+  - npm run validate:active passed
+  - git diff --check passed with LF/CRLF warnings only
+  - added-lines and untracked-file boundary scans passed
+not_performed:
+  - no formal prompt package write
+  - no existing v3 prompt package overwrite
+  - no provider contact
+  - no plugin call
+  - no API call
+  - no image generation
+  - no image binary read or copy
+  - no secret/env/config raw value read
+  - no real manifest/VCPChat/VCPToolBox read
+  - no memory write
+  - no production or accepted_samples write
+  - no dependency change
+  - no commit, push, tag, release, or deploy
+next_safe_action: if the owner accepts the preview, choose a fresh non-colliding prompt package target before writing any formal package; live probe still requires separate exact authorization.
+```
+
 ## Current Handoff Update - Runtime To Review V2 Review Feedback Prompt Patch Preview 2026-06-16
 
 ```text
