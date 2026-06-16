@@ -1,0 +1,111 @@
+{
+  "schema": "runtime_to_review_v2_review_feedback_fresh_prompt_target_selection.v1",
+  "selection_id": "r2r_v2_review_feedback_fresh_prompt_target_selection_20260616",
+  "created_at": "2026-06-16T00:00:00+08:00",
+  "status": "selected_metadata_only_fresh_non_colliding_prompt_target",
+  "purpose": "Select a fresh non-colliding future prompt package target after the Trial 002 prompt patch preview detected that its original v3 target already exists.",
+  "source_refs": {
+    "prompt_patch_preview_ref": "reports/runtime_to_review_v2/r2r_v2_review_feedback_prompt_patch_preview_20260616.json",
+    "visual_eval_min_repeatable_fixture_ref": "reports/runtime_to_review_v2/r2r_v2_visual_eval_min_repeatable_fixture_set_20260616.json",
+    "feedback_routing_fixture_ref": "reports/runtime_to_review_v2/r2r_v2_review_feedback_routing_min_fixture_20260615.json",
+    "source_prompt_package_ref": "prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v2.yaml",
+    "blocked_collision_target_ref": "prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v3.yaml",
+    "selected_fresh_target_ref": "prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v11.yaml"
+  },
+  "decision_context": {
+    "trial_id": "r2r_v2_trial_002_lantern_ecommerce_hero",
+    "source_review_decision": "accepted_candidate",
+    "review_outcome": "pass_with_warnings",
+    "route_action": "continue_same_product_family_with_tightened_prompt_constraints",
+    "prompt_patch_preview_accepted_for_formal_prompt_write": false,
+    "human_acceptance_required_before_prompt_package_write": true,
+    "target_selection_allowed_without_prompt_file_write": true,
+    "formal_prompt_package_write_allowed_now": false,
+    "new_provider_run_allowed_now": false
+  },
+  "target_selection": {
+    "blocked_collision_target": {
+      "path": "prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v3.yaml",
+      "path_status": "existing_tracked_prompt_package_detected",
+      "collision_detected": true,
+      "overwrite_allowed": false
+    },
+    "selected_fresh_target": {
+      "path": "prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v11.yaml",
+      "package_id": "product_lifestyle_premium_portable_led_camping_lantern_v11",
+      "version": "v11",
+      "selection_time_path_status": "absent_untracked_non_colliding",
+      "selection_time_highest_existing_numeric_version": "v10",
+      "selection_rule": "next_numeric_version_after_existing_lantern_prompt_packages",
+      "write_target_created_now": false,
+      "prompt_package_write_performed_now": false
+    },
+    "non_collision_requirements": [
+      "must not overwrite the existing tracked v3 package",
+      "must not reuse any existing v1-v10 lantern prompt package path",
+      "must use an exact new prompt package path if a later formal write is authorized",
+      "must preserve the scene hero route separately from a strict SKU route",
+      "must stay metadata-only until human acceptance of the prompt patch preview"
+    ]
+  },
+  "future_prompt_package_contract": {
+    "future_prompt_package_ref": "prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v11.yaml",
+    "future_package_id": "product_lifestyle_premium_portable_led_camping_lantern_v11",
+    "future_version": "v11",
+    "source_prompt_package_ref": "prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v2.yaml",
+    "source_prompt_patch_preview_ref": "reports/runtime_to_review_v2/r2r_v2_review_feedback_prompt_patch_preview_20260616.json",
+    "future_write_requires": [
+      "human acceptance of the prompt patch preview",
+      "exact-file prompt package write",
+      "prompt schema validation",
+      "review criteria update before live probe",
+      "separate exact live authorization before provider execution"
+    ],
+    "must_preserve_from_preview": [
+      "single modern rechargeable LED camping lantern",
+      "full handle, diffuser, side control, body, and base visible",
+      "warm frosted diffuser with readable edges",
+      "premium outdoor electronics feel",
+      "no readable brand text, logo, watermark, people, hands, fire, smoke, or extra lanterns"
+    ],
+    "must_tighten_from_preview": [
+      "cleaner background with less scene detail for strict ecommerce SKU main image",
+      "reduced foreground table dominance",
+      "readable lower body detail in blue-hour scenes",
+      "explicit side control knob and attached handle geometry",
+      "review watch items carried into the next review criteria before any live probe"
+    ],
+    "must_avoid_from_preview": [
+      "foreground surface becoming the visual subject",
+      "featureless dark lower body",
+      "losing side control knob or handle geometry",
+      "strict SKU request accidentally reusing the wider scene hero framing",
+      "new provider run before prompt patch preview review"
+    ]
+  },
+  "no_execution_guard": {
+    "metadata_only": true,
+    "route_http_request_performed": false,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "output_write_performed": false,
+    "prompt_package_write_performed": false,
+    "selected_prompt_file_created": false,
+    "existing_prompt_package_overwrite_performed": false,
+    "image_binary_read_performed": false,
+    "image_binary_copy_or_move_performed": false,
+    "accepted_samples_write_performed": false,
+    "production_candidate_write_performed": false,
+    "DailyNote_write_performed": false,
+    "VCP_memory_write_performed": false,
+    "Codex_memory_write_performed": false,
+    "secret_value_read_performed": false,
+    "env_file_content_read_performed": false,
+    "raw_private_data_printed": false,
+    "push_tag_release_deploy_performed": false,
+    "destructive_action_performed": false
+  },
+  "recommended_next": "wait_for_human_acceptance_before_formal_v11_prompt_package_write_or_continue_no_provider_validation_work"
+}

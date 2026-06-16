@@ -1,3 +1,35 @@
+## Queue - Runtime To Review V2 Fresh Prompt Target Selection 2026-06-16
+
+```text
+done:
+  - task: continue the automatic Green product loop after visual eval fixture set
+    evidence: selected the non-provider prompt target selection task instead of live provider/memory/production work.
+  - task: create fresh prompt target selection package
+    evidence: reports/runtime_to_review_v2/r2r_v2_review_feedback_fresh_prompt_target_selection_20260616.json.
+  - task: prove v3 collision and v11 non-collision
+    evidence: validator reports blocked v3 is tracked, selected v11 is absent/untracked, and highest existing numeric lantern prompt version is v10.
+  - task: add targeted validator and manifest registration
+    evidence: scripts/validate_runtime_to_review_v2_review_feedback_fresh_prompt_target_selection.js; package.json; scripts/validation_manifest.json.
+  - task: update current roadmap/status pointers
+    evidence: docs/RUNTIME_TO_PRODUCTION_LANDING_ROADMAP.md; CURRENT_STATE.md.
+in_progress:
+  - none
+blocked:
+  - task: formal v11 prompt package write
+    reason: prompt patch preview still requires human acceptance before any formal prompt package write.
+  - task: overwrite existing v3 prompt package
+    reason: v3 is an existing tracked prompt package and overwrite is explicitly blocked.
+  - task: live provider/image probe
+    reason: this Green target selection does not authorize route/provider/plugin/API/image execution.
+  - task: accepted_samples, production, archive, or memory write
+    reason: target selection only prepares a future prompt target; promotion and memory remain separate gates.
+  - task: push
+    reason: user authorized local commits but asked not to push yet.
+remaining:
+  - exact-file local commit for this target-selection package
+  - continue only with no-provider validation/readiness work unless human acceptance is provided for the prompt patch preview
+```
+
 ## Queue - Runtime To Review V2 Visual Eval Min Repeatable Fixture Set 2026-06-16
 
 ```text

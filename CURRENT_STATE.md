@@ -112,6 +112,9 @@ visual_eval_min_repeatable_fixture_set_status: "Turn `docs/VISUAL_EVAL_RUBRIC.md
 review_feedback_routing: reports/runtime_to_review_v2/r2r_v2_review_feedback_routing_min_fixture_20260615.json
 review_feedback_prompt_patch_preview: reports/runtime_to_review_v2/r2r_v2_review_feedback_prompt_patch_preview_20260616.json
 review_feedback_prompt_target_guard: original preview target points at an existing tracked v3 prompt package; select a fresh non-colliding target before any formal write.
+review_feedback_fresh_prompt_target_selection: reports/runtime_to_review_v2/r2r_v2_review_feedback_fresh_prompt_target_selection_20260616.json
+review_feedback_selected_future_prompt_target: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v11.yaml
+review_feedback_selected_future_prompt_target_status: "v11 is selected as the future fresh non-colliding target; formal prompt package write remains blocked until human acceptance of the prompt patch preview."
 core_vcp_split: docs/ail_core_vcp_adapter_split_plan_no_execute.md
 memory_policy:
   - memory_policy/write_permissions.md
@@ -129,10 +132,13 @@ Recommended order:
 2. Use `runtime_to_review_v2_visual_eval_min_repeatable_fixture_set` as the
    minimum repeatable review evidence before any fresh prompt target or live
    probe decision.
-3. Review `runtime_to_review_v2_review_feedback_prompt_patch_preview`, then
-   choose a fresh non-colliding prompt package target only if that preview is
-   accepted; do not overwrite the existing tracked v3 prompt package.
-4. Keep memory write as a separate gate after human approval and suitability.
+3. Use `runtime_to_review_v2_review_feedback_fresh_prompt_target_selection`
+   when preparing any later formal prompt package write; the selected future
+   target is `prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v11.yaml`,
+   and the existing tracked v3 prompt package must not be overwritten.
+4. Create a formal v11 prompt package only after human acceptance of the prompt
+   patch preview; keep the write exact-file, metadata-local, and no-provider.
+5. Keep memory write as a separate gate after human approval and suitability.
 
 No live provider, image generation, production write, or memory write is
 authorized by this file.
