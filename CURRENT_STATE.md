@@ -114,7 +114,9 @@ review_feedback_prompt_patch_preview: reports/runtime_to_review_v2/r2r_v2_review
 review_feedback_prompt_target_guard: original preview target points at an existing tracked v3 prompt package; select a fresh non-colliding target before any formal write.
 review_feedback_fresh_prompt_target_selection: reports/runtime_to_review_v2/r2r_v2_review_feedback_fresh_prompt_target_selection_20260616.json
 review_feedback_selected_future_prompt_target: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v11.yaml
-review_feedback_selected_future_prompt_target_status: "v11 is selected as the future fresh non-colliding target; formal prompt package write remains blocked until human acceptance of the prompt patch preview."
+review_feedback_selected_future_prompt_target_status: "v11 was selected as the fresh non-colliding target and must not overwrite the existing tracked v3 prompt package."
+review_feedback_formal_v11_prompt_package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v11.yaml
+review_feedback_formal_v11_prompt_package_status: "formal v11 prompt package now exists as a no-provider local draft from the human-accepted prompt patch preview; it is not live execution, memory, production, or accepted_samples authorization."
 core_vcp_split: docs/ail_core_vcp_adapter_split_plan_no_execute.md
 memory_policy:
   - memory_policy/write_permissions.md
@@ -136,9 +138,10 @@ Recommended order:
    when preparing any later formal prompt package write; the selected future
    target is `prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v11.yaml`,
    and the existing tracked v3 prompt package must not be overwritten.
-4. Create a formal v11 prompt package only after human acceptance of the prompt
-   patch preview; keep the write exact-file, metadata-local, and no-provider.
-5. Keep memory write as a separate gate after human approval and suitability.
+4. Use the formal v11 prompt package only as a no-provider local draft until the
+   next review criteria/preflight gate carries its watch items forward.
+5. Keep any live probe, production promotion, accepted_samples write, archive
+   write, or memory write behind separate exact authorization gates.
 
 No live provider, image generation, production write, or memory write is
 authorized by this file.

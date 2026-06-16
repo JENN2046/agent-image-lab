@@ -206,13 +206,25 @@ function main() {
     const currentState = readText("CURRENT_STATE.md");
     return currentState.includes("review_feedback_fresh_prompt_target_selection") &&
       currentState.includes(selectedTargetRef) &&
-      currentState.includes("formal prompt package write remains blocked until human acceptance");
+      (
+        currentState.includes("formal prompt package write remains blocked until human acceptance") ||
+        (
+          currentState.includes("review_feedback_formal_v11_prompt_package") &&
+          currentState.includes("formal v11 prompt package now exists as a no-provider local draft")
+        )
+      );
   });
   check("roadmap_names_fresh_target_selection", () => {
     const roadmap = readText("docs/RUNTIME_TO_PRODUCTION_LANDING_ROADMAP.md");
     return roadmap.includes("runtime_to_review_v2_review_feedback_fresh_prompt_target_selection") &&
       roadmap.includes(selectedTargetRef) &&
-      roadmap.includes("formal v11 prompt package draft remains blocked until human acceptance");
+      (
+        roadmap.includes("formal v11 prompt package draft remains blocked until human acceptance") ||
+        (
+          roadmap.includes("runtime_to_review_v2_formal_v11_prompt_package") &&
+          roadmap.includes("no provider, image, memory, production, or accepted_samples write")
+        )
+      );
   });
   check("no_execution_guard_is_clean", () =>
     allFalseExceptMetadata(selection.no_execution_guard)

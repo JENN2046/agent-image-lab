@@ -1,3 +1,35 @@
+## Queue - Runtime To Review V2 Formal V11 Prompt Package 2026-06-16
+
+```text
+done:
+  - task: accept the previously prepared prompt patch preview for a formal local package
+    evidence: owner requested "formal v11 prompt package" and the fresh target selection already points at v11.
+  - task: create formal v11 prompt package
+    evidence: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v11.yaml.
+  - task: carry preview deltas into the package
+    evidence: preserve/tighten/avoid lists and review watch items are represented in v11 and validated.
+  - task: protect existing v3 package
+    evidence: v11 validator checks v3 remains tracked and not overwritten.
+  - task: add targeted validator and manifest registration
+    evidence: scripts/validate_runtime_to_review_v2_formal_v11_prompt_package.js; package.json; scripts/validation_manifest.json.
+  - task: update current roadmap/status pointers
+    evidence: docs/RUNTIME_TO_PRODUCTION_LANDING_ROADMAP.md; CURRENT_STATE.md.
+in_progress:
+  - none
+blocked:
+  - task: live provider/image probe
+    reason: this Green prompt package does not authorize route/provider/plugin/API/image execution.
+  - task: accepted_samples, production, archive, or memory write
+    reason: v11 is a prompt package only; promotion and memory remain separate gates.
+  - task: overwrite existing v3 prompt package
+    reason: v3 is an existing tracked prompt package and overwrite remains explicitly blocked.
+  - task: push
+    reason: user allowed local commits but push remains a separate remote action.
+remaining:
+  - exact-file local commit may seal this package; push remains blocked until separate remote authorization
+  - next no-provider Green task: carry v11 watch items into a review criteria/preflight gate
+```
+
 ## Queue - Runtime To Review V2 Fresh Prompt Target Selection 2026-06-16
 
 ```text
