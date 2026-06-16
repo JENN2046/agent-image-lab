@@ -1,0 +1,298 @@
+{
+  "schema": "runtime_to_review_v2_visual_eval_min_repeatable_fixture_set.v1",
+  "fixture_id": "r2r_v2_visual_eval_min_repeatable_fixture_set_20260616",
+  "created_at": "2026-06-16T00:00:00+08:00",
+  "status": "prepared_metadata_only_green_fixture_set",
+  "purpose": "Turn the stable visual eval rubric into a minimum repeatable pass/patch/reject fixture set that can drive next prompt or shot decisions without any live provider run.",
+  "source_refs": {
+    "visual_eval_rubric_ref": "docs/VISUAL_EVAL_RUBRIC.md",
+    "current_state_ref": "CURRENT_STATE.md",
+    "review_feedback_routing_fixture_ref": "reports/runtime_to_review_v2/r2r_v2_review_feedback_routing_min_fixture_20260615.json",
+    "trial_002_review_decision_ref": "reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_review_decision_accepted_candidate_20260609.json",
+    "trial_002_review_criteria_ref": "reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_review_criteria_no_execute_20260608.json"
+  },
+  "score_policy": {
+    "score_min": 0,
+    "score_max": 5,
+    "core_outcomes": [
+      "pass",
+      "patch",
+      "reject"
+    ],
+    "pass_with_warnings_allowed_as_decision_note": true,
+    "notes_required": [
+      "summary",
+      "positive_reasons",
+      "watch_items",
+      "failure_tags",
+      "archive_or_next_step_action"
+    ]
+  },
+  "rubric_dimensions": [
+    "subject_integrity",
+    "composition",
+    "lighting",
+    "material_realism",
+    "commercial_usability",
+    "brand_or_style_fit",
+    "ai_artifact_risk",
+    "production_readiness",
+    "memory_suitability"
+  ],
+  "fixture_policy": {
+    "metadata_only": true,
+    "image_binary_read_allowed_now": false,
+    "provider_execution_allowed_now": false,
+    "image_generation_allowed_now": false,
+    "accepted_samples_write_allowed_now": false,
+    "production_candidate_write_allowed_now": false,
+    "memory_write_allowed_now": false,
+    "daily_note_write_allowed_now": false,
+    "live_probe_allowed_now": false
+  },
+  "cases": [
+    {
+      "case_id": "tracked_trial_002_pass_with_warnings_to_prompt_tightening",
+      "source_type": "tracked_review_decision",
+      "source_decision_ref": "reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_review_decision_accepted_candidate_20260609.json",
+      "source_routing_case_id": "trial_002_accepted_candidate_watch_items_to_next_prompt",
+      "core_outcome": "pass",
+      "decision_note": "pass_with_warnings",
+      "commercial_delivery_ready": false,
+      "dimension_scores": {
+        "subject_integrity": {
+          "score": 5,
+          "rationale": "The single modern rechargeable LED camping lantern identity is clear and stable."
+        },
+        "composition": {
+          "score": 4,
+          "rationale": "The product dominates the frame, with a watch item to reduce foreground table dominance for stricter SKU use."
+        },
+        "lighting": {
+          "score": 5,
+          "rationale": "Warm diffuser light and blue-hour support are coherent and readable."
+        },
+        "material_realism": {
+          "score": 4,
+          "rationale": "Premium outdoor electronics material reads well, with lower-body detail carried as a watch item."
+        },
+        "commercial_usability": {
+          "score": 4,
+          "rationale": "Usable as scene-hero evidence, but not final strict SKU delivery."
+        },
+        "brand_or_style_fit": {
+          "score": 5,
+          "rationale": "No brand text, logo, watermark, people, hands, fire, smoke, or extra lantern drift is present in the review decision."
+        },
+        "ai_artifact_risk": {
+          "score": 5,
+          "rationale": "No visible synthetic instability was escalated in the review decision."
+        },
+        "production_readiness": {
+          "score": 4,
+          "rationale": "Ready to continue as review evidence, not ready for production promotion."
+        },
+        "memory_suitability": {
+          "score": 3,
+          "rationale": "Useful learning evidence, but memory write remains behind a separate gate."
+        }
+      },
+      "required_notes": {
+        "summary": "Pass with warnings: keep the lantern route alive and carry watch items into the next prompt or shot decision.",
+        "positive_reasons": [
+          "single product identity is correct",
+          "commercial scene-hero composition is usable",
+          "warm diffuser and premium outdoor electronics cues are readable"
+        ],
+        "watch_items": [
+          "cleaner background may be needed for strict SKU use",
+          "foreground table dominance should be reduced",
+          "side control knob and handle geometry must be preserved",
+          "lower body detail must stay readable"
+        ],
+        "failure_tags": [],
+        "archive_or_next_step_action": "carry_watch_items_into_prompt_target_selection_before_any_live_probe"
+      },
+      "routing_alignment": {
+        "expected_route_action": "continue_same_product_family_with_tightened_prompt_constraints",
+        "expected_shot_decision": "keep_scene_hero_or_split_strict_sku_main_image_if_delivery_target_changes",
+        "execution_allowed_now": false,
+        "memory_or_production_allowed_now": false
+      }
+    },
+    {
+      "case_id": "synthetic_patch_material_or_composition_borderline",
+      "source_type": "synthetic_patch_fixture",
+      "source_routing_case_id": "synthetic_patch_material_or_composition_to_prompt_patch",
+      "core_outcome": "patch",
+      "decision_note": "bounded_fixable_weakness",
+      "commercial_delivery_ready": false,
+      "dimension_scores": {
+        "subject_integrity": {
+          "score": 4,
+          "rationale": "The product route remains viable."
+        },
+        "composition": {
+          "score": 3,
+          "rationale": "Scale or negative space needs prompt tightening before another run."
+        },
+        "lighting": {
+          "score": 4,
+          "rationale": "Lighting is coherent enough to preserve the route."
+        },
+        "material_realism": {
+          "score": 3,
+          "rationale": "Material character is borderline but fixable by prompt constraints."
+        },
+        "commercial_usability": {
+          "score": 3,
+          "rationale": "Commercial use is plausible after a bounded patch."
+        },
+        "brand_or_style_fit": {
+          "score": 4,
+          "rationale": "Style remains close to the intended route."
+        },
+        "ai_artifact_risk": {
+          "score": 4,
+          "rationale": "No hard artifact rejection condition is present."
+        },
+        "production_readiness": {
+          "score": 3,
+          "rationale": "Not ready to promote, but ready for a prompt patch."
+        },
+        "memory_suitability": {
+          "score": 3,
+          "rationale": "Potentially useful for learning after the patch path is resolved."
+        }
+      },
+      "required_notes": {
+        "summary": "Patch: keep the route alive and tighten material or composition constraints before any live probe.",
+        "positive_reasons": [
+          "same product family remains viable",
+          "weakness is bounded",
+          "route reset is not required"
+        ],
+        "watch_items": [
+          "make material character explicit",
+          "rebalance subject scale and negative space",
+          "carry watch item tags into the next review criteria"
+        ],
+        "failure_tags": [
+          "material_reading_borderline",
+          "composition_fixable"
+        ],
+        "archive_or_next_step_action": "patch_prompt_constraints_without_opening_new_product_route"
+      },
+      "routing_alignment": {
+        "expected_route_action": "patch_prompt_constraints_without_opening_new_product_route",
+        "expected_shot_decision": "keep_product_route_change_prompt_and_review_criteria",
+        "execution_allowed_now": false,
+        "memory_or_production_allowed_now": false
+      }
+    },
+    {
+      "case_id": "synthetic_reject_identity_drift_or_brand_contamination",
+      "source_type": "synthetic_negative_fixture",
+      "source_routing_case_id": "synthetic_rejected_identity_drift_to_shot_reset",
+      "core_outcome": "reject",
+      "decision_note": "critical_route_failure",
+      "commercial_delivery_ready": false,
+      "dimension_scores": {
+        "subject_integrity": {
+          "score": 1,
+          "rationale": "The product identity drifts away from the requested product."
+        },
+        "composition": {
+          "score": 2,
+          "rationale": "The current shot cannot be rescued with a minor prompt patch."
+        },
+        "lighting": {
+          "score": 3,
+          "rationale": "Lighting alone is not the blocker."
+        },
+        "material_realism": {
+          "score": 2,
+          "rationale": "Material trust is broken by geometry or product drift."
+        },
+        "commercial_usability": {
+          "score": 1,
+          "rationale": "The route is not commercially viable."
+        },
+        "brand_or_style_fit": {
+          "score": 1,
+          "rationale": "Text, logo, watermark, or extra-product drift would violate the route."
+        },
+        "ai_artifact_risk": {
+          "score": 2,
+          "rationale": "Synthetic instability is high enough to reduce trust."
+        },
+        "production_readiness": {
+          "score": 1,
+          "rationale": "The asset must not be promoted."
+        },
+        "memory_suitability": {
+          "score": 1,
+          "rationale": "Do not write memory from a rejected sample without a separate learning gate."
+        }
+      },
+      "required_notes": {
+        "summary": "Reject: stop the current route and open a new shot plan before any retry.",
+        "positive_reasons": [],
+        "watch_items": [
+          "rewrite subject identity before retry",
+          "lock single-product geometry before scene styling",
+          "block text, logo, watermark, and extra product drift"
+        ],
+        "failure_tags": [
+          "wrong_product_identity",
+          "geometry_drift",
+          "brand_or_text_contamination"
+        ],
+        "archive_or_next_step_action": "stop_current_route_and_open_new_shot_plan"
+      },
+      "routing_alignment": {
+        "expected_route_action": "stop_current_route_and_open_new_shot_plan",
+        "expected_shot_decision": "reset_shot_plan_before_any_new_provider_run",
+        "execution_allowed_now": false,
+        "memory_or_production_allowed_now": false
+      }
+    }
+  ],
+  "aggregate": {
+    "case_count": 3,
+    "core_outcomes_covered": [
+      "pass",
+      "patch",
+      "reject"
+    ],
+    "all_rubric_dimensions_covered_per_case": true,
+    "all_cases_have_required_notes": true,
+    "pass_case_carries_watch_items_forward": true,
+    "patch_case_keeps_route_alive_without_execution": true,
+    "reject_case_stops_or_switches_shot_before_retry": true,
+    "no_case_allows_execution_now": true,
+    "no_case_allows_memory_or_production_now": true
+  },
+  "side_effect_flags": {
+    "metadata_only": true,
+    "route_http_request_performed": false,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "output_write_performed": false,
+    "image_binary_read_performed": false,
+    "image_binary_copy_or_move_performed": false,
+    "accepted_samples_write_performed": false,
+    "production_candidate_write_performed": false,
+    "DailyNote_write_performed": false,
+    "VCP_memory_write_performed": false,
+    "Codex_memory_write_performed": false,
+    "secret_value_read_performed": false,
+    "env_file_content_read_performed": false,
+    "raw_private_data_printed": false,
+    "push_tag_release_deploy_performed": false,
+    "destructive_action_performed": false
+  },
+  "recommended_next": "use_min_repeatable_visual_eval_fixture_set_as_review_evidence_before_selecting_any_new_prompt_target_or_live_probe"
+}

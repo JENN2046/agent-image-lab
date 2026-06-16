@@ -1,3 +1,42 @@
+## Current Handoff Update - Runtime To Review V2 Visual Eval Min Repeatable Fixture Set 2026-06-16
+
+```text
+phase: runtime_to_review_v2_visual_eval_min_repeatable_fixture_set_20260616
+status: completed_validated_local_green_fixture_set
+repository: <repo-root>
+branch: master
+goal: Advance the no-live-provider product loop by turning docs/VISUAL_EVAL_RUBRIC.md into a minimum repeatable pass/patch/reject fixture set for review evidence.
+completed:
+  - added a metadata-only visual eval fixture set with pass, patch, and reject cases
+  - connected the pass case to the tracked Trial 002 accepted decision and routing watch items
+  - connected patch/reject cases to the existing synthetic routing cases
+  - added a targeted validator and npm/manifest registration
+  - updated runtime roadmap and current state pointers
+validation_completed:
+  - node --check scripts/validate_runtime_to_review_v2_visual_eval_min_repeatable_fixture_set.js passed
+  - npm run validate:runtime-to-review-visual-eval-min-fixture passed, 13 checks
+  - npm run validate:runtime-to-review-feedback-routing passed, 12 checks
+  - npm run validate:validation-manifest passed, validator_count 151
+  - node scripts/validate_agent_board_state.js passed
+  - npm run validate:active passed
+  - npm run recommend:validation:next-commands passed
+  - git diff --check passed with LF/CRLF warnings only
+  - added-lines and untracked-file boundary scans passed
+not_performed:
+  - no provider contact
+  - no plugin call
+  - no API call
+  - no image generation
+  - no image binary read or copy
+  - no secret/env/config raw value read
+  - no real manifest/VCPChat/VCPToolBox read
+  - no memory write
+  - no production or accepted_samples write
+  - no dependency change
+  - no commit, push, tag, release, or deploy
+next_safe_action: use the min repeatable visual eval fixture set as review evidence before selecting any fresh prompt target or live probe.
+```
+
 ## Current Handoff Update - Runtime To Review V2 Prompt Target Collision Guard 2026-06-16
 
 ```text

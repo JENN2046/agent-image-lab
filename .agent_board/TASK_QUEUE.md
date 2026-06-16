@@ -1,3 +1,31 @@
+## Queue - Runtime To Review V2 Visual Eval Min Repeatable Fixture Set 2026-06-16
+
+```text
+done:
+  - task: select the next no-live-provider Green product-loop task
+    evidence: selected minimum repeatable visual eval fixture set from CURRENT_STATE recommended local work.
+  - task: create pass/patch/reject visual eval fixture set
+    evidence: reports/runtime_to_review_v2/r2r_v2_visual_eval_min_repeatable_fixture_set_20260616.json.
+  - task: add targeted validator and manifest registration
+    evidence: scripts/validate_runtime_to_review_v2_visual_eval_min_repeatable_fixture_set.js; package.json; scripts/validation_manifest.json.
+  - task: update current roadmap/status pointers
+    evidence: docs/RUNTIME_TO_PRODUCTION_LANDING_ROADMAP.md; CURRENT_STATE.md.
+in_progress:
+  - none
+blocked:
+  - task: live provider/image probe
+    reason: this Green fixture set does not authorize route/provider/plugin/API/image execution.
+  - task: prompt target write or overwrite
+    reason: prompt target selection remains separate and must use a fresh non-colliding target if the preview is accepted.
+  - task: accepted_samples, production, archive, or memory write
+    reason: visual eval fixture set only prepares repeatable review evidence.
+  - task: push
+    reason: remote write requires explicit authorization.
+remaining:
+  - final exact diff review
+  - optionally exact-file stage/commit only after separate request
+```
+
 ## Queue - Runtime To Review V2 Prompt Target Collision Guard 2026-06-16
 
 ```text

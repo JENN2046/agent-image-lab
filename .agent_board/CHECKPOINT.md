@@ -1,3 +1,46 @@
+## Checkpoint - Runtime To Review V2 Visual Eval Min Repeatable Fixture Set 2026-06-16
+
+```text
+status: COMPLETED_VALIDATED
+mode: A4_8 Green local visual eval fixture set
+changed_by_this_task:
+  - reports/runtime_to_review_v2/r2r_v2_visual_eval_min_repeatable_fixture_set_20260616.json
+  - scripts/validate_runtime_to_review_v2_visual_eval_min_repeatable_fixture_set.js
+  - package.json
+  - scripts/validation_manifest.json
+  - docs/RUNTIME_TO_PRODUCTION_LANDING_ROADMAP.md
+  - CURRENT_STATE.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+validation:
+  - node --check scripts/validate_runtime_to_review_v2_visual_eval_min_repeatable_fixture_set.js: passed
+  - npm run validate:runtime-to-review-visual-eval-min-fixture: passed, 13 checks
+  - npm run validate:runtime-to-review-feedback-routing: passed, 12 checks
+  - npm run validate:validation-manifest: passed, validator_count 151
+  - node scripts/validate_agent_board_state.js: passed
+  - npm run validate:active: passed
+  - npm run recommend:validation:next-commands: passed
+  - git diff --check: passed with LF/CRLF warnings only
+  - added-lines and untracked-file boundary scans: passed
+boundary:
+  route_http_request_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  output_write_performed: false
+  image_binary_read_performed: false
+  accepted_samples_write_performed: false
+  production_candidate_write_performed: false
+  memory_write_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  secret_value_read_performed: false
+recommended_next: use the min repeatable visual eval fixture set as review evidence before selecting any fresh prompt target or live probe.
+```
+
 ## Checkpoint - Runtime To Review V2 Prompt Target Collision Guard 2026-06-16
 
 ```text

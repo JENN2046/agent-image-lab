@@ -110,6 +110,7 @@
     "validate:runtime-to-review-trial-002-attempt-003-success": "node scripts/validate_runtime_to_review_v2_trial_002_execution_attempt_003_success.js",
     "validate:runtime-to-review-trial-002-review-decision": "node scripts/validate_runtime_to_review_v2_trial_002_review_decision_accepted_candidate.js",
     "validate:runtime-to-review-feedback-routing": "node scripts/validate_runtime_to_review_v2_review_feedback_routing_fixture.js",
+    "validate:runtime-to-review-visual-eval-min-fixture": "node scripts/validate_runtime_to_review_v2_visual_eval_min_repeatable_fixture_set.js",
     "validate:runtime-to-review-feedback-prompt-preview": "node scripts/validate_runtime_to_review_v2_review_feedback_prompt_patch_preview.js",
     "validate:runtime-to-review-trial-002-memory-candidate-no-write": "node scripts/validate_runtime_to_review_v2_trial_002_memory_candidate_no_write_mapping_gate.js",
     "validate:runtime-to-review-trial-002-memory-authorization-preflight": "node scripts/validate_runtime_to_review_v2_trial_002_memory_authorization_preflight.js",
