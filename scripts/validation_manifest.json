@@ -766,6 +766,37 @@
       ]
     },
     {
+      "id": "runtime_to_review_formal_v11_guarded_live_activation_packet_draft",
+      "command": "npm run validate:runtime-to-review-formal-v11-activation-draft",
+      "script": "scripts/validate_runtime_to_review_v2_formal_v11_guarded_live_activation_packet_draft.js",
+      "tier": "targeted",
+      "domain": "runtime_to_review",
+      "status": "active",
+      "estimated_runtime_class": "fast",
+      "trigger_paths": [
+        "reports/runtime_to_review_v2/r2r_v2_formal_v11_guarded_live_activation_packet_draft_20260616.json",
+        "tests/fixtures/runtime_kernel_v2_formal_v11_lantern_sku_task.fixture.json",
+        "reports/runtime_to_review_v2/r2r_v2_formal_v11_live_activation_packet_checklist_20260616.json",
+        "reports/runtime_to_review_v2/r2r_v2_formal_v11_review_criteria_preflight_gate_20260616.json",
+        "prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v11.yaml",
+        "scripts/validate_runtime_to_review_v2_formal_v11_guarded_live_activation_packet_draft.js",
+        "scripts/validate_runtime_to_review_v2_formal_v11_live_activation_packet_checklist.js",
+        "scripts/validate_runtime_to_review_v2_formal_v11_review_criteria_preflight_gate.js",
+        "scripts/validate_runtime_to_review_v1_real_bound_owner_runtime_local_readiness.js",
+        "adapters/runtime/native_doubao_runtime_v1_real_bound_owner_runtime.js",
+        "adapters/runtime/native_doubao_runtime_v1_provider_delegate.js",
+        "scripts/run_runtime_to_review_v1_guarded_live_probe.js",
+        "package.json",
+        "scripts/validation_manifest.json",
+        "CURRENT_STATE.md",
+        "docs/RUNTIME_TO_PRODUCTION_LANDING_ROADMAP.md"
+      ],
+      "required_for": [
+        "runtime_to_review_formal_v11_guarded_live_activation_packet_draft",
+        "formal_v11_guarded_live_activation_packet_draft"
+      ]
+    },
+    {
       "id": "runtime_to_review_trial_002_memory_candidate_no_write_mapping",
       "command": "npm run validate:runtime-to-review-trial-002-memory-candidate-no-write",
       "script": "scripts/validate_runtime_to_review_v2_trial_002_memory_candidate_no_write_mapping_gate.js",

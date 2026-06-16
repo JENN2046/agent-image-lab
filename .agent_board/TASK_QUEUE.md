@@ -1,3 +1,34 @@
+## Queue - Runtime To Review V2 Formal V11 Guarded Live Activation Packet Draft 2026-06-16
+
+```text
+done:
+  - task: create inactive formal v11 guarded live activation packet draft
+    evidence: reports/runtime_to_review_v2/r2r_v2_formal_v11_guarded_live_activation_packet_draft_20260616.json.
+  - task: create formal v11 runtime task fixture
+    evidence: tests/fixtures/runtime_kernel_v2_formal_v11_lantern_sku_task.fixture.json.
+  - task: bind packet to checklist/gate/prompt/runtime chain
+    evidence: packet source refs include formal v11 activation checklist, formal v11 review criteria gate, formal v11 prompt package, real-bound owner runtime, provider delegate, and guarded runner.
+  - task: encode future exact command and preflight-only command shape
+    evidence: exact_live_command_shape_if_separately_activated and preflight_only_command_required_before_activation.
+  - task: encode receipt refs and owner-runtime scope alignment requirement
+    evidence: planned receipt/artifact/review refs and owner_runtime_scope_alignment_required=true.
+  - task: block execution from this draft
+    evidence: can_execute_now=false; execution_authorized_by_this_packet=false; live_probe_authorized_by_this_packet=false.
+in_progress:
+  - none
+blocked:
+  - task: live provider/image probe
+    reason: this Green draft does not authorize route/provider/plugin/API/image execution.
+  - task: accepted_samples, production, archive, or memory write
+    reason: draft only prepares future activation/receipt shape.
+  - task: push
+    reason: remote write requires separate explicit authorization.
+remaining:
+  - exact-file diff review
+  - exact-file local commit only if separately requested
+  - future live probe still requires separate exact owner authorization and a separate active packet
+```
+
 ## Queue - Runtime To Review V2 Formal V11 Live Activation Packet Checklist 2026-06-16
 
 ```text

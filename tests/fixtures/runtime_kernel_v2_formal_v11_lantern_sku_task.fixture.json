@@ -1,0 +1,16 @@
+{
+  "task_id": "runtime-v2-formal-v11-lantern-sku-task-001",
+  "run_id": "runtime_v2_formal_v11_lantern_sku_001",
+  "prompt_package_ref": "prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v11.yaml",
+  "provider_route": "native_doubao_guarded",
+  "provider_mode": "real_guarded",
+  "model_required": "doubao-seedream-5-0-260128",
+  "max_images": 1,
+  "output_scope": "run_directory_only",
+  "output_directory_ref": "runs/real_generation/runtime_to_review_v2_formal_v11_lantern_sku/",
+  "review_required": true,
+  "review_criteria_ref": "reports/runtime_to_review_v2/r2r_v2_formal_v11_review_criteria_preflight_gate_20260616.json",
+  "activation_checklist_ref": "reports/runtime_to_review_v2/r2r_v2_formal_v11_live_activation_packet_checklist_20260616.json",
+  "secret_value_read_allowed": false,
+  "retry_allowed": false
+}
