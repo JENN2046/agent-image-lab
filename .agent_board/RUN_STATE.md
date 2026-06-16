@@ -1,3 +1,56 @@
+## Current Run State - Runtime To Review V2 Formal V11 Review Criteria Preflight Gate 2026-06-16
+
+```text
+phase: runtime_to_review_v2_formal_v11_review_criteria_preflight_gate_20260616
+status: completed_validated_local_green_review_criteria_preflight_gate
+lane: Green local metadata review criteria/preflight gate and validator; no live probe, provider contact, runtime execution, image read, memory write, production write, accepted_samples write, archive write, or external read
+goal: Convert formal v11 prompt watch items into a repeatable review criteria/preflight gate before any exact live probe authorization.
+changed_refs:
+  - reports/runtime_to_review_v2/r2r_v2_formal_v11_review_criteria_preflight_gate_20260616.json
+  - scripts/validate_runtime_to_review_v2_formal_v11_review_criteria_preflight_gate.js
+  - package.json
+  - scripts/validation_manifest.json
+  - docs/RUNTIME_TO_PRODUCTION_LANDING_ROADMAP.md
+  - CURRENT_STATE.md
+  - .agent_board/HANDOFF.md
+  - .agent_board/RUN_STATE.md
+  - .agent_board/TASK_QUEUE.md
+  - .agent_board/CHECKPOINT.md
+result:
+  - formal v11 review criteria/preflight gate now exists and is bound to the v11 prompt package
+  - pass/patch/reject criteria carry the v11 clean SKU watch items forward
+  - pre-live gate requires separate exact authorization, exact phrase, explicit owner-provided root, and one-provider/one-image budgets
+  - validation manifest count is now 154
+validation:
+  - node --check scripts/validate_runtime_to_review_v2_formal_v11_review_criteria_preflight_gate.js passed
+  - npm run validate:runtime-to-review-formal-v11-review-criteria-preflight passed, 15 checks
+  - npm run validate:runtime-to-review-formal-v11-prompt-package passed, 13 checks
+  - npm run validate:runtime-to-review-feedback-fresh-prompt-target passed, 13 checks
+  - npm run validate:runtime-to-review-feedback-prompt-preview passed
+  - npm run validate:runtime-to-review-visual-eval-min-fixture passed
+  - npm run validate:runtime-to-review-feedback-routing passed
+  - npm run validate:validation-manifest passed, validator_count 154
+  - npm run validate:active passed
+boundary_checks:
+  live_probe_allowed_now: false
+  route_http_request_performed: false
+  provider_contact_performed: false
+  plugin_call_performed: false
+  api_call_performed: false
+  image_generation_performed: false
+  output_write_performed: false
+  image_binary_read_performed: false
+  accepted_samples_write_performed: false
+  production_candidate_write_performed: false
+  archive_write_performed: false
+  memory_write_performed: false
+  DailyNote_write_performed: false
+  VCP_memory_write_performed: false
+  secret_value_read_performed: false
+  push_tag_release_deploy_performed: false
+next_safe_task: exact-file local commit, then only a separate exact live probe authorization can proceed toward one-provider/one-image execution.
+```
+
 ## Current Run State - Runtime To Review V2 Formal V11 Prompt Package 2026-06-16
 
 ```text

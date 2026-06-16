@@ -1,3 +1,44 @@
+## Current Handoff Update - Runtime To Review V2 Formal V11 Review Criteria Preflight Gate 2026-06-16
+
+```text
+phase: runtime_to_review_v2_formal_v11_review_criteria_preflight_gate_20260616
+status: completed_validated_local_green_review_criteria_preflight_gate
+repository: <repo-root>
+branch: master
+goal: Carry the formal v11 prompt package watch items into a repeatable no-provider review criteria/preflight gate before any separate exact live probe authorization.
+completed:
+  - added a metadata-only formal v11 review criteria/preflight gate
+  - bound the gate to the formal v11 prompt package, old Trial 002 criteria, accepted review decision, prompt preview, fresh target selection, visual eval fixture set, and feedback routing fixture
+  - converted v11 clean SKU watch items into minimum acceptance criteria, weighted scoring rubric, pass/patch/reject contract, and pre-live stop conditions
+  - kept live_probe_allowed_now=false and required separate exact live authorization before any provider/plugin/API/image call
+  - added a targeted validator and npm/manifest registration
+  - updated runtime roadmap and current state pointers
+validation_completed:
+  - node --check scripts/validate_runtime_to_review_v2_formal_v11_review_criteria_preflight_gate.js passed
+  - npm run validate:runtime-to-review-formal-v11-review-criteria-preflight passed, 15 checks
+  - npm run validate:runtime-to-review-formal-v11-prompt-package passed, 13 checks
+  - npm run validate:runtime-to-review-feedback-fresh-prompt-target passed, 13 checks
+  - npm run validate:runtime-to-review-feedback-prompt-preview passed
+  - npm run validate:runtime-to-review-visual-eval-min-fixture passed
+  - npm run validate:runtime-to-review-feedback-routing passed
+  - npm run validate:validation-manifest passed, validator_count 154
+  - npm run validate:active passed
+not_performed:
+  - no live probe authorization
+  - no provider contact
+  - no plugin call
+  - no API call
+  - no image generation
+  - no image binary read or copy
+  - no secret/env/config raw value read
+  - no real manifest/VCPChat/VCPToolBox read
+  - no memory write
+  - no production, archive, or accepted_samples write
+  - no dependency change
+  - no push, tag, release, or deploy
+next_safe_action: exact-file local commit may seal this Green gate; after that, only a separate exact live authorization can cross into one-provider/one-image execution.
+```
+
 ## Current Handoff Update - Runtime To Review V2 Formal V11 Prompt Package 2026-06-16
 
 ```text

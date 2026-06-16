@@ -1,0 +1,181 @@
+{
+  "schema": "runtime_to_review_v2_formal_v11_review_criteria_preflight_gate.v1",
+  "gate_id": "r2r_v2_formal_v11_review_criteria_preflight_gate_20260616",
+  "created_at": "2026-06-16T00:00:00+08:00",
+  "status": "prepared_no_provider_review_criteria_preflight_gate",
+  "purpose": "Carry the formal v11 prompt package watch items into a repeatable review criteria and pre-live-probe gate before any separate exact live authorization.",
+  "trial_id": "r2r_v2_trial_002_lantern_ecommerce_hero",
+  "source_refs": {
+    "formal_v11_prompt_package_ref": "prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v11.yaml",
+    "source_review_criteria_ref": "reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_review_criteria_no_execute_20260608.json",
+    "source_review_decision_ref": "reports/runtime_to_review_v2/r2r_v2_trial_002_lantern_ecommerce_hero_review_decision_accepted_candidate_20260609.json",
+    "prompt_patch_preview_ref": "reports/runtime_to_review_v2/r2r_v2_review_feedback_prompt_patch_preview_20260616.json",
+    "fresh_prompt_target_selection_ref": "reports/runtime_to_review_v2/r2r_v2_review_feedback_fresh_prompt_target_selection_20260616.json",
+    "visual_eval_min_repeatable_fixture_ref": "reports/runtime_to_review_v2/r2r_v2_visual_eval_min_repeatable_fixture_set_20260616.json",
+    "feedback_routing_fixture_ref": "reports/runtime_to_review_v2/r2r_v2_review_feedback_routing_min_fixture_20260615.json"
+  },
+  "target_prompt_package": {
+    "path": "prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v11.yaml",
+    "package_id": "product_lifestyle_premium_portable_led_camping_lantern_v11",
+    "version": "v11",
+    "route": "clean_sku_product_first_blue_hour_lantern",
+    "scene_route_policy": "keep_wider_scene_hero_route_separate",
+    "existing_v3_overwrite_allowed": false
+  },
+  "review_intent": "Judge whether any future formal-v11 live result actually satisfies the clean SKU/product-first lantern constraints before it can enter accepted-sample, production, archive, or memory gates.",
+  "criteria_scope": {
+    "delivery_target": "strict_ecommerce_sku_main_image",
+    "product_family": "premium_portable_led_camping_lantern",
+    "prompt_version": "v11",
+    "not_a_scene_hero_route": true,
+    "not_a_live_probe_authorization": true
+  },
+  "minimum_acceptance_bar": {
+    "selected_product_correct": true,
+    "modern_premium_rechargeable_led_lantern_read": true,
+    "single_product_only": true,
+    "strict_ecommerce_sku_main_image_direction_present": true,
+    "product_first_visual_focus": true,
+    "product_dominance_72_to_82_percent": true,
+    "cleaner_background_less_scene_detail": true,
+    "scene_hero_route_not_overwritten": true,
+    "foreground_surface_secondary": true,
+    "surface_reflection_not_main_subject": true,
+    "lower_body_detail_readable": true,
+    "warm_frosted_diffuser_edges_readable": true,
+    "side_control_knob_visible": true,
+    "handle_geometry_attached_and_plausible": true,
+    "full_handle_diffuser_body_side_control_base_visible": true,
+    "no_readable_brand_text_or_logo": true,
+    "no_people_hands_fire_smoke_or_extra_lanterns": true
+  },
+  "scoring_rubric": {
+    "product_identity_and_structure": {
+      "weight": 0.25,
+      "pass_if": [
+        "clearly reads as one modern rechargeable LED camping lantern",
+        "full handle, diffuser, side control, body, and base are visible",
+        "side control knob and attached handle geometry are explicit identity anchors",
+        "does not drift into flashlight, candle, speaker, humidifier, thermos, desk lamp, smart speaker, or vintage kerosene lantern"
+      ]
+    },
+    "clean_sku_composition": {
+      "weight": 0.25,
+      "pass_if": [
+        "strict ecommerce SKU main image direction is clear",
+        "product dominates the first glance at roughly 72 to 82 percent visual importance",
+        "foreground surface is quiet, shallow, and secondary",
+        "surface reflection does not become the main subject"
+      ]
+    },
+    "background_route_control": {
+      "weight": 0.18,
+      "pass_if": [
+        "background is cleaner and less scene-dominant than a lifestyle campsite hero",
+        "busy campsite cues do not override product-first framing",
+        "wider scene hero route remains separate and is not overwritten by the SKU route"
+      ]
+    },
+    "material_and_light_readability": {
+      "weight": 0.17,
+      "pass_if": [
+        "warm frosted diffuser glow is controlled and edges remain readable",
+        "lower body detail remains visible in blue-hour lighting",
+        "dark body reads as premium outdoor electronics, not a featureless black silhouette or toy plastic"
+      ]
+    },
+    "brand_safety_and_production_gate_cleanliness": {
+      "weight": 0.15,
+      "pass_if": [
+        "no readable brand text, fake logo, watermark, people, hands, faces, fire, smoke, or extra lanterns",
+        "review notes are specific enough to route pass, patch, or reject without production promotion",
+        "accepted_samples, production, archive, DailyNote, and memory writes remain blocked unless a later exact gate authorizes them"
+      ]
+    }
+  },
+  "watch_items_from_formal_v11": [
+    "cleaner background with less scene detail for strict ecommerce SKU main image",
+    "foreground surface remains secondary and does not dominate",
+    "surface reflection does not become the main subject",
+    "lower body detail remains readable in blue-hour lighting",
+    "side control knob is visible enough to anchor product identity",
+    "attached handle geometry remains plausible and uncropped",
+    "wide scene hero route remains separate from strict SKU framing",
+    "no readable brand text, logo, watermark, people, hands, fire, smoke, or extra lanterns"
+  ],
+  "review_decision_contract": {
+    "allowed_review_outcomes": [
+      "pass",
+      "patch",
+      "reject"
+    ],
+    "pass_requires": [
+      "all minimum_acceptance_bar fields pass",
+      "weighted rubric score is at least 0.85",
+      "no critical watch item fails",
+      "side effect flags remain explainable and bounded"
+    ],
+    "patch_requires": [
+      "product identity is correct",
+      "no safety or brand-cleanliness critical failure",
+      "one or more v11 watch items need prompt or shot tightening"
+    ],
+    "reject_requires": [
+      "wrong product identity",
+      "missing required structure such as handle, diffuser, side control, or base",
+      "busy scene, brand text, people, fire, smoke, extra lanterns, or severe geometry failure"
+    ],
+    "route_actions": {
+      "pass": "create_metadata_only_accept_sample_draft_candidate_after_human_review",
+      "patch": "patch_prompt_or_review_criteria_without_opening_production",
+      "reject": "stop_current_v11_route_or_open_new_shot_plan"
+    },
+    "production_promotion_allowed_by_this_gate": false,
+    "memory_write_allowed_by_this_gate": false
+  },
+  "pre_live_probe_gate": {
+    "live_probe_allowed_now": false,
+    "separate_exact_live_authorization_required": true,
+    "required_future_exact_phrase": "RUNTIME_TO_REVIEW_V1_ONE_PROVIDER_ONE_IMAGE",
+    "required_prompt_package_ref": "prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v11.yaml",
+    "required_review_criteria_gate_ref": "reports/runtime_to_review_v2/r2r_v2_formal_v11_review_criteria_preflight_gate_20260616.json",
+    "required_owner_runtime_module": "adapters/runtime/native_doubao_runtime_v1_owner_runtime_binding_contract.js",
+    "required_owner_vcptoolbox_root": "explicit_owner_provided_root_only",
+    "max_provider_calls": 1,
+    "max_plugin_calls": 1,
+    "max_api_calls": 1,
+    "max_image_candidates": 1,
+    "receipt_and_status_sync_required": true,
+    "secret_value_read_allowed": false,
+    "raw_private_data_print_allowed": false,
+    "stop_conditions": [
+      "missing explicit owner-provided VCPToolBox root",
+      "wrong exact phrase",
+      "provider/plugin/API/image budget above one",
+      "attempt to read secret/env/config raw values",
+      "attempt to write accepted_samples, production, archive, DailyNote, or VCP memory from this gate",
+      "validation failure requiring non-obvious judgment"
+    ]
+  },
+  "side_effect_flags": {
+    "route_http_request_performed": false,
+    "provider_contact_performed": false,
+    "plugin_call_performed": false,
+    "api_call_performed": false,
+    "image_generation_performed": false,
+    "output_write_performed": false,
+    "image_binary_read_performed": false,
+    "accepted_samples_write_performed": false,
+    "production_candidate_write_performed": false,
+    "archive_write_performed": false,
+    "DailyNote_write_performed": false,
+    "VCP_memory_write_performed": false,
+    "Codex_memory_write_performed": false,
+    "secret_value_read_performed": false,
+    "env_file_content_read_performed": false,
+    "raw_private_data_printed": false,
+    "push_tag_release_deploy_performed": false,
+    "destructive_action_performed": false
+  },
+  "recommended_next": "review_formal_v11_criteria_preflight_then_wait_for_separate_exact_live_probe_authorization"
+}

@@ -117,6 +117,8 @@ review_feedback_selected_future_prompt_target: prompts/image_generation/product_
 review_feedback_selected_future_prompt_target_status: "v11 was selected as the fresh non-colliding target and must not overwrite the existing tracked v3 prompt package."
 review_feedback_formal_v11_prompt_package: prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v11.yaml
 review_feedback_formal_v11_prompt_package_status: "formal v11 prompt package now exists as a no-provider local draft from the human-accepted prompt patch preview; it is not live execution, memory, production, or accepted_samples authorization."
+review_feedback_formal_v11_review_criteria_preflight_gate: reports/runtime_to_review_v2/r2r_v2_formal_v11_review_criteria_preflight_gate_20260616.json
+review_feedback_formal_v11_review_criteria_preflight_gate_status: "formal v11 review criteria/preflight gate now carries the v11 watch items into a repeatable pass/patch/reject criteria set; it still does not authorize live probe, provider, image, memory, production, archive, or accepted_samples writes."
 core_vcp_split: docs/ail_core_vcp_adapter_split_plan_no_execute.md
 memory_policy:
   - memory_policy/write_permissions.md
@@ -138,8 +140,8 @@ Recommended order:
    when preparing any later formal prompt package write; the selected future
    target is `prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v11.yaml`,
    and the existing tracked v3 prompt package must not be overwritten.
-4. Use the formal v11 prompt package only as a no-provider local draft until the
-   next review criteria/preflight gate carries its watch items forward.
+4. Use the formal v11 review criteria/preflight gate as the no-provider review
+   contract before any separate exact live probe authorization.
 5. Keep any live probe, production promotion, accepted_samples write, archive
    write, or memory write behind separate exact authorization gates.
 

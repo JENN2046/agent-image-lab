@@ -1,3 +1,33 @@
+## Queue - Runtime To Review V2 Formal V11 Review Criteria Preflight Gate 2026-06-16
+
+```text
+done:
+  - task: create formal v11 review criteria/preflight gate
+    evidence: reports/runtime_to_review_v2/r2r_v2_formal_v11_review_criteria_preflight_gate_20260616.json.
+  - task: bind gate to v11 prompt and Trial 002 feedback chain
+    evidence: gate source refs include formal v11 prompt package, old criteria, accepted decision, prompt preview, fresh target selection, visual eval fixture, and routing fixture.
+  - task: encode v11 watch items into criteria
+    evidence: minimum acceptance bar, weighted scoring rubric, watch item list, and pass/patch/reject contract carry clean SKU constraints.
+  - task: block live execution from this gate
+    evidence: live_probe_allowed_now=false; provider/plugin/API/image budgets are future-only and require separate exact authorization.
+  - task: add targeted validator and manifest registration
+    evidence: scripts/validate_runtime_to_review_v2_formal_v11_review_criteria_preflight_gate.js; package.json; scripts/validation_manifest.json.
+  - task: update current roadmap/status pointers
+    evidence: docs/RUNTIME_TO_PRODUCTION_LANDING_ROADMAP.md; CURRENT_STATE.md.
+in_progress:
+  - none
+blocked:
+  - task: live provider/image probe
+    reason: this Green gate does not authorize route/provider/plugin/API/image execution.
+  - task: accepted_samples, production, archive, or memory write
+    reason: review criteria/preflight only prepares future decision quality; promotion and memory remain separate gates.
+  - task: push
+    reason: remote write requires separate explicit authorization after any local commit.
+remaining:
+  - exact-file local commit may seal this package
+  - next non-Green step requires separate exact live probe authorization
+```
+
 ## Queue - Runtime To Review V2 Formal V11 Prompt Package 2026-06-16
 
 ```text
