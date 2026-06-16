@@ -119,6 +119,8 @@ review_feedback_formal_v11_prompt_package: prompts/image_generation/product_life
 review_feedback_formal_v11_prompt_package_status: "formal v11 prompt package now exists as a no-provider local draft from the human-accepted prompt patch preview; it is not live execution, memory, production, or accepted_samples authorization."
 review_feedback_formal_v11_review_criteria_preflight_gate: reports/runtime_to_review_v2/r2r_v2_formal_v11_review_criteria_preflight_gate_20260616.json
 review_feedback_formal_v11_review_criteria_preflight_gate_status: "formal v11 review criteria/preflight gate now carries the v11 watch items into a repeatable pass/patch/reject criteria set; it still does not authorize live probe, provider, image, memory, production, archive, or accepted_samples writes."
+review_feedback_formal_v11_live_activation_packet_checklist: reports/runtime_to_review_v2/r2r_v2_formal_v11_live_activation_packet_checklist_20260616.json
+review_feedback_formal_v11_live_activation_packet_checklist_status: "formal v11 gate to guarded live probe exact activation checklist is fixed as an inactive Green preflight/receipt checklist; it is not live authorization and cannot execute provider, image, output, accepted_samples, production, archive, or memory writes."
 core_vcp_split: docs/ail_core_vcp_adapter_split_plan_no_execute.md
 memory_policy:
   - memory_policy/write_permissions.md
@@ -142,7 +144,9 @@ Recommended order:
    and the existing tracked v3 prompt package must not be overwritten.
 4. Use the formal v11 review criteria/preflight gate as the no-provider review
    contract before any separate exact live probe authorization.
-5. Keep any live probe, production promotion, accepted_samples write, archive
+5. Use the formal v11 live activation packet checklist before issuing any
+   separate exact guarded live probe activation packet.
+6. Keep any live probe, production promotion, accepted_samples write, archive
    write, or memory write behind separate exact authorization gates.
 
 No live provider, image generation, production write, or memory write is

@@ -115,6 +115,7 @@
     "validate:runtime-to-review-feedback-fresh-prompt-target": "node scripts/validate_runtime_to_review_v2_review_feedback_fresh_prompt_target_selection.js",
     "validate:runtime-to-review-formal-v11-prompt-package": "node scripts/validate_runtime_to_review_v2_formal_v11_prompt_package.js",
     "validate:runtime-to-review-formal-v11-review-criteria-preflight": "node scripts/validate_runtime_to_review_v2_formal_v11_review_criteria_preflight_gate.js",
+    "validate:runtime-to-review-formal-v11-live-activation-checklist": "node scripts/validate_runtime_to_review_v2_formal_v11_live_activation_packet_checklist.js",
     "validate:runtime-to-review-trial-002-memory-candidate-no-write": "node scripts/validate_runtime_to_review_v2_trial_002_memory_candidate_no_write_mapping_gate.js",
     "validate:runtime-to-review-trial-002-memory-authorization-preflight": "node scripts/validate_runtime_to_review_v2_trial_002_memory_authorization_preflight.js",
     "validate:vcptoolbox-image-execution-broker-followup-plan": "node scripts/validate_vcptoolbox_image_execution_broker_followup_plan.js",

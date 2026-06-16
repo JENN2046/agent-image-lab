@@ -1,3 +1,34 @@
+## Queue - Runtime To Review V2 Formal V11 Live Activation Packet Checklist 2026-06-16
+
+```text
+done:
+  - task: create inactive formal v11 live activation packet checklist
+    evidence: reports/runtime_to_review_v2/r2r_v2_formal_v11_live_activation_packet_checklist_20260616.json.
+  - task: bind checklist to formal v11 gate and guarded live probe chain
+    evidence: checklist source refs include formal v11 review gate, formal v11 prompt package, real-bound owner-runtime readiness validator/module, provider delegate, and guarded runner.
+  - task: encode future active packet preflight requirements
+    evidence: future_activation_packet_required and preflight_checklist require exact phrase, explicit owner root, one-attempt budget, receipt path, and validator chain.
+  - task: encode future receipt expectations
+    evidence: receipt_checklist requires activation/prompt/gate/runtime refs, call counts, output refs, artifact/audit/review refs, side-effect flags, and human review next step.
+  - task: block execution from this checklist
+    evidence: can_execute_now=false; checklist_authorizes_execution=false; live_probe_authorized_by_this_checklist=false.
+  - task: add targeted validator and manifest registration
+    evidence: scripts/validate_runtime_to_review_v2_formal_v11_live_activation_packet_checklist.js; package.json; scripts/validation_manifest.json.
+in_progress:
+  - none
+blocked:
+  - task: live provider/image probe
+    reason: this Green checklist does not authorize route/provider/plugin/API/image execution.
+  - task: accepted_samples, production, archive, or memory write
+    reason: checklist only prepares future activation/receipt discipline.
+  - task: push
+    reason: remote write requires separate explicit authorization.
+remaining:
+  - exact-file local commit authorized by owner request
+  - push remains separately gated
+  - future live probe still requires separate exact owner authorization and a separate active packet
+```
+
 ## Queue - Runtime To Review V2 Formal V11 Review Criteria Preflight Gate 2026-06-16
 
 ```text
