@@ -2,6 +2,7 @@
 
 const fs = require("fs");
 const path = require("path");
+const crypto = require("crypto");
 const { validateAndNormalizeHumanReview } = require("./validate_and_normalize_human_review.js");
 
 const EXIT_OK = 0;
@@ -18,6 +19,34 @@ function cloneJson(value) {
 
 function stableJson(value) {
   return JSON.stringify(value);
+}
+
+function snapshotDirectory(directoryPath) {
+  const entries = [];
+
+  function visit(currentPath) {
+    for (const name of fs.readdirSync(currentPath).sort()) {
+      const fullPath = path.join(currentPath, name);
+      const relativePath = path.relative(directoryPath, fullPath).replace(/\\/g, "/");
+      const stats = fs.statSync(fullPath);
+      if (stats.isDirectory()) {
+        entries.push({
+          path: `${relativePath}/`,
+          type: "directory"
+        });
+        visit(fullPath);
+      } else if (stats.isFile()) {
+        entries.push({
+          path: relativePath,
+          type: "file",
+          sha256: crypto.createHash("sha256").update(fs.readFileSync(fullPath)).digest("hex")
+        });
+      }
+    }
+  }
+
+  visit(directoryPath);
+  return stableJson(entries);
 }
 
 function violationPair(violation) {
@@ -62,6 +91,34 @@ function loadBaseInput() {
 }
 
 const MUTATIONS = {
+  EXPLICIT_SANITIZED_DRY_RUN_CONSENT_ACCEPTED(input) {
+    input.importRecord.consent_basis = "explicit_user_provided_sanitized_dry_run";
+  },
+  UNKNOWN_DRY_RUN_CONSENT_REJECTED(input) {
+    input.importRecord.consent_basis = "explicit_user_provided_sanitized_persistent_run";
+  },
+  PRODUCTION_REVIEW_CONSENT_REJECTED(input) {
+    input.importRecord.consent_basis = "production_review";
+  },
+  DRY_RUN_WITH_RAW_SOURCE_RETAINED_REJECTED(input) {
+    input.importRecord.consent_basis = "explicit_user_provided_sanitized_dry_run";
+    input.importRecord.sanitization_attestation.raw_source_retained = true;
+  },
+  DRY_RUN_WITH_PERSONAL_DATA_ATTESTATION_REJECTED(input) {
+    input.importRecord.consent_basis = "explicit_user_provided_sanitized_dry_run";
+    input.importRecord.sanitization_attestation.contains_personal_data = true;
+  },
+  DRY_RUN_WITH_SECRET_ATTESTATION_REJECTED(input) {
+    input.importRecord.consent_basis = "explicit_user_provided_sanitized_dry_run";
+    input.importRecord.sanitization_attestation.contains_secret = true;
+  },
+  DRY_RUN_INVALID_SAMPLE_REJECTED(input) {
+    input.importRecord.consent_basis = "explicit_user_provided_sanitized_dry_run";
+    input.importRecord.sample.review_scores.subject_fidelity = 6;
+  },
+  DRY_RUN_RESULT_NOT_PERSISTED(input) {
+    input.importRecord.consent_basis = "explicit_user_provided_sanitized_dry_run";
+  },
   RAW_PAYLOAD_KEY_PRESENT(input) {
     input.importRecord.raw_payload = "synthetic fixture only";
   },
@@ -272,7 +329,13 @@ function runCase(baseInput, caseDef) {
   mutate(input);
   const afterMutation = stableJson(input);
   const changed = before !== afterMutation;
+  const diskBefore = caseDef.assert_result_not_persisted === true
+    ? snapshotDirectory(__dirname)
+    : null;
   const result = validateAndNormalizeHumanReview(input);
+  const diskAfter = caseDef.assert_result_not_persisted === true
+    ? snapshotDirectory(__dirname)
+    : null;
   const afterValidation = stableJson(input);
   const expectedValid = caseDef.expected_valid === true;
   const skipMutationChangeCheck = caseDef.skip_mutation_change_check === true;
@@ -294,12 +357,16 @@ function runCase(baseInput, caseDef) {
   const explicitUnchangedCheckOk = caseDef.assert_input_unchanged === true
     ? inputUnchanged
     : true;
+  const resultNotPersistedOk = caseDef.assert_result_not_persisted === true
+    ? diskBefore === diskAfter
+    : true;
   const passed = (changed || skipMutationChangeCheck)
     && result.valid === expectedValid
     && comparison.matched
     && normalizedSampleOk
     && explicitNullCheckOk
     && explicitUnchangedCheckOk
+    && resultNotPersistedOk
     && inputUnchanged;
 
   return {
@@ -309,6 +376,7 @@ function runCase(baseInput, caseDef) {
     valid: result.valid,
     expected_valid: expectedValid,
     input_unchanged_by_validator: inputUnchanged,
+    result_not_persisted: resultNotPersistedOk,
     normalized_sample_is_null: result.normalized_sample === null,
     expected_violations: caseDef.expected_violations,
     missing_expected_violations: comparison.missing,
@@ -344,10 +412,10 @@ function runRegression() {
   }
 
   const cases = Array.isArray(manifest.required_cases) ? manifest.required_cases : [];
-  if (cases.length < 50) {
+  if (cases.length < 65) {
     failures.push({
       case_id: "REGRESSION_CASE_COUNT",
-      reason: "regression_total_must_be_at_least_50",
+      reason: "regression_total_must_be_at_least_65",
       total: cases.length
     });
   }

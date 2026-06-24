@@ -1,5 +1,5 @@
 {
-  "regression_version": "local_visual_eval.human_review_import_regression.v1.4.2",
+  "regression_version": "local_visual_eval.human_review_import_regression.v1.5",
   "import_schema_version": "1.0.0",
   "assertion_contract": {
     "asserts": [
@@ -20,6 +20,71 @@
     "no_disk_mutation": true
   },
   "required_cases": [
+    {
+      "case_id": "EXPLICIT_SANITIZED_DRY_RUN_CONSENT_ACCEPTED",
+      "expected_valid": true,
+      "expected_violations": []
+    },
+    {
+      "case_id": "UNKNOWN_DRY_RUN_CONSENT_REJECTED",
+      "expected_violations": [
+        {
+          "code": "INVALID_CONSENT_BASIS",
+          "path": "$.consent_basis"
+        }
+      ]
+    },
+    {
+      "case_id": "PRODUCTION_REVIEW_CONSENT_REJECTED",
+      "expected_violations": [
+        {
+          "code": "INVALID_CONSENT_BASIS",
+          "path": "$.consent_basis"
+        }
+      ]
+    },
+    {
+      "case_id": "DRY_RUN_WITH_RAW_SOURCE_RETAINED_REJECTED",
+      "expected_violations": [
+        {
+          "code": "RAW_SOURCE_RETENTION_FORBIDDEN",
+          "path": "$.sanitization_attestation.raw_source_retained"
+        }
+      ]
+    },
+    {
+      "case_id": "DRY_RUN_WITH_PERSONAL_DATA_ATTESTATION_REJECTED",
+      "expected_violations": [
+        {
+          "code": "SANITIZATION_ATTESTATION_FAILED",
+          "path": "$.sanitization_attestation.contains_personal_data"
+        }
+      ]
+    },
+    {
+      "case_id": "DRY_RUN_WITH_SECRET_ATTESTATION_REJECTED",
+      "expected_violations": [
+        {
+          "code": "SANITIZATION_ATTESTATION_FAILED",
+          "path": "$.sanitization_attestation.contains_secret"
+        }
+      ]
+    },
+    {
+      "case_id": "DRY_RUN_INVALID_SAMPLE_REJECTED",
+      "expected_violations": [
+        {
+          "code": "IMPORT_SAMPLE_INVALID",
+          "path": "$.sample.review_scores.subject_fidelity"
+        }
+      ]
+    },
+    {
+      "case_id": "DRY_RUN_RESULT_NOT_PERSISTED",
+      "expected_valid": true,
+      "assert_result_not_persisted": true,
+      "expected_violations": []
+    },
     {
       "case_id": "RAW_PAYLOAD_KEY_PRESENT",
       "expected_violations": [

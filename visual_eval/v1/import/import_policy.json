@@ -1,5 +1,5 @@
 {
-  "policy_version": "local_visual_eval.human_review_import_policy.v1.4.2",
+  "policy_version": "local_visual_eval.human_review_import_policy.v1.5",
   "compatible_import_schema_versions": [
     "1.0.0"
   ],
@@ -24,7 +24,8 @@
     "human_verified"
   ],
   "allowed_consent_basis": [
-    "synthetic_fixture"
+    "synthetic_fixture",
+    "explicit_user_provided_sanitized_dry_run"
   ],
   "required_source_disposition": "raw_source_not_retained",
   "raw_source_storage_allowed": false,

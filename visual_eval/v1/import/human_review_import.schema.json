@@ -42,7 +42,8 @@
     "consent_basis": {
       "type": "string",
       "enum": [
-        "synthetic_fixture"
+        "synthetic_fixture",
+        "explicit_user_provided_sanitized_dry_run"
       ]
     },
     "source_disposition": {

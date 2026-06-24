@@ -8,7 +8,7 @@ const EXIT_OK = 0;
 const EXIT_POLICY_ERROR = 2;
 const EXIT_TOOL_ERROR = 1;
 
-const REQUIRED_IMPORT_POLICY_VERSION = "local_visual_eval.human_review_import_policy.v1.4.2";
+const REQUIRED_IMPORT_POLICY_VERSION = "local_visual_eval.human_review_import_policy.v1.5";
 const REQUIRED_IMPORT_SCHEMA_VERSION = "1.0.0";
 const REQUIRED_ALLOWED_RECORD_ORIGINS = ["human_review_sanitized"];
 const REQUIRED_FORBIDDEN_RECORD_ORIGINS = [
@@ -17,7 +17,10 @@ const REQUIRED_FORBIDDEN_RECORD_ORIGINS = [
   "production_review",
   "human_verified"
 ];
-const REQUIRED_ALLOWED_CONSENT_BASIS = ["synthetic_fixture"];
+const REQUIRED_ALLOWED_CONSENT_BASIS = [
+  "synthetic_fixture",
+  "explicit_user_provided_sanitized_dry_run"
+];
 const IMPORT_KEYS = [
   "import_schema_version",
   "import_id",
@@ -655,6 +658,10 @@ function validateImportSchema(importSchema, violations) {
   }
   if (!importSchema.properties.reviewed_at || importSchema.properties.reviewed_at.pattern !== REVIEWED_AT_PATTERN_SOURCE) {
     addViolation(violations, "IMPORT_SCHEMA_INVALID", "$.importSchema.properties.reviewed_at", "Import schema must define reviewed_at pattern.");
+  }
+  if (!importSchema.properties.consent_basis
+    || !arraysEqual(importSchema.properties.consent_basis.enum, REQUIRED_ALLOWED_CONSENT_BASIS)) {
+    addViolation(violations, "IMPORT_SCHEMA_INVALID", "$.importSchema.properties.consent_basis", "Import schema must define exact consent basis values.");
   }
 }
 
