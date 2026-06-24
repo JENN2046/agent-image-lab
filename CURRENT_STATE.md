@@ -1,6 +1,6 @@
 # Current State
 
-Snapshot date: 2026-06-15
+Snapshot date: 2026-06-24
 
 Base contract: `AGENTS.md`
 
@@ -75,8 +75,32 @@ VCPToolBox root. Missing root fails closed with:
 owner_vcptoolbox_root_not_explicitly_configured
 ```
 
-A future live probe still requires exact owner authorization, exact confirmation,
-bounded call and image limits, receipt/status sync, and no secret value read.
+A future live probe still requires new explicit owner authorization, exact
+confirmation, bounded call and image limits, receipt/status sync, and no secret
+value read.
+
+## Formal V11 Route Freeze
+
+```yaml
+formal_v11_current_live_route: frozen
+formal_v11_packet: inactive_reference_only
+current_generic_direct_entry: quarantined_fail_closed
+activation_authorized: false
+runtime_authorized: false
+provider_authorized: false
+plugin_authorized: false
+api_authorized: false
+image_generation_authorized: false
+memory_write_authorized: false
+production_transition_authorized: false
+future_reopening_requires_new_explicit_owner_authorization: true
+immediate_next: CODEX-A0-011 committed quarantine static review
+product_route_after_quarantine_review: local visual eval / non-provider workflow planning
+local_visual_eval_executable_now: false
+```
+
+The inactive formal v11 packet remains a reference-only artifact. It is not a
+superseded executable artifact, not owner approval, and not live authorization.
 
 ## Product Pain Now
 
@@ -136,22 +160,18 @@ The next safe local product work is not another broad governance chain.
 
 Recommended order:
 
-1. Use `docs/COMMAND_TIERS.md` to classify risky commands before running them.
-2. Use `runtime_to_review_v2_visual_eval_min_repeatable_fixture_set` as the
-   minimum repeatable review evidence before any fresh prompt target or live
-   probe decision.
-3. Use `runtime_to_review_v2_review_feedback_fresh_prompt_target_selection`
-   when preparing any later formal prompt package write; the selected future
-   target is `prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v11.yaml`,
-   and the existing tracked v3 prompt package must not be overwritten.
-4. Use the formal v11 review criteria/preflight gate as the no-provider review
-   contract before any separate exact live probe authorization.
-5. Use the formal v11 live activation packet checklist before issuing any
-   separate exact guarded live probe activation packet.
-6. Review the inactive formal v11 guarded live activation packet draft before
-   any active packet is issued; it fixes shape but does not authorize execution.
-7. Keep any live probe, production promotion, accepted_samples write, archive
-   write, or memory write behind separate exact authorization gates.
+1. Run CODEX-A0-011 committed quarantine static review before treating this
+   quarantine as independently reviewed.
+2. Keep the formal v11 live route frozen. Do not create an activation packet,
+   do not use the generic confirmation phrase to start the runner, and do not
+   reopen the generic live-runner path from this state surface.
+3. After CODEX-A0-011, plan local visual eval / non-provider workflow re-entry
+   only. The local visual eval route is planning/review work, not executable
+   provider or image generation authorization.
+4. Use `runtime_to_review_v2_visual_eval_min_repeatable_fixture_set` as the
+   minimum repeatable review evidence before any future product-route decision.
+5. Keep any live probe, production promotion, accepted_samples write, archive
+   write, or memory write behind new separate exact authorization gates.
 
 No live provider, image generation, production write, or memory write is
 authorized by this file.
