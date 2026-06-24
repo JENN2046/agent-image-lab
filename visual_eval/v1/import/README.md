@@ -1,4 +1,4 @@
-# Sanitized Human Review Import Protocol v1.4.1
+# Sanitized Human Review Import Protocol v1.4.2
 
 This directory defines a local, metadata-only import protocol for sanitized human review wrappers.
 
@@ -22,6 +22,8 @@ The fixtures use `consent_basis: synthetic_fixture`. They do not prove that a re
 
 The wrapper contract fails closed when required wrapper fields are missing, when `import_id` is not a deterministic pseudonymous identifier, when `reviewed_at` is not valid ISO-8601 with an explicit timezone, or when the import schema or policy is missing, malformed, or weaker than the required contract. Allowed origins, consent basis, source disposition, sanitization attestation, and normalization behavior come from `import_policy.json`; the validator does not provide permissive default fallbacks.
 
+Policy semantic integrity is part of validation: mandatory regex rules must keep stable `rule_id` and `pattern_class` values, canonical minimum `code` / `pattern` / `flags`, and non-stateful flags only. The policy also keeps exact allowed and forbidden origins, exact consent basis, exact stable violation codes, exact unsafe pattern classes, and summary-only CLI output.
+
 ## Validation
 
 Run a fixture through the normalizer:
@@ -38,7 +40,7 @@ node visual_eval/v1/import/run_import_regression.js
 
 The normalizer rejects unsupported wrapper versions, unknown wrapper fields, missing wrapper fields, invalid import identifiers, invalid review timestamps, invalid import schema or policy contracts, invalid source labels, unsafe consent/source-retention states, failed sanitization attestations, unsafe reviewer aliases, personal data patterns, secret-like patterns, absolute paths, file URLs, UNC paths, parent traversal, credential-bearing URLs, raw payload fields, invalid visual samples, and sample decision mismatches.
 
-The regression runner uses exact `code` / `path` matching by default. Additional violations are rejected unless a case explicitly opts into them. Every invalid result must keep `normalized_sample: null`, and validation must not mutate the input object.
+The regression runner uses exact `code` / `path` matching by default. Additional violations are rejected unless a case explicitly opts into them. Every invalid result must keep `normalized_sample: null`, validation must not mutate the input object, and the import regression suite must contain at least 50 synthetic cases.
 
 Successful CLI output is a summary only. The in-memory API can return a normalized sample, but this protocol does not persist it.
 

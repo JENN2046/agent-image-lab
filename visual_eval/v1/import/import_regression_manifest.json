@@ -1,5 +1,5 @@
 {
-  "regression_version": "local_visual_eval.human_review_import_regression.v1.4.1",
+  "regression_version": "local_visual_eval.human_review_import_regression.v1.4.2",
   "import_schema_version": "1.0.0",
   "assertion_contract": {
     "asserts": [
@@ -20,6 +20,251 @@
     "no_disk_mutation": true
   },
   "required_cases": [
+    {
+      "case_id": "RAW_PAYLOAD_KEY_PRESENT",
+      "expected_violations": [
+        {
+          "code": "RAW_PAYLOAD_FIELD_FORBIDDEN",
+          "path": "$.raw_payload"
+        },
+        {
+          "code": "UNKNOWN_IMPORT_FIELD",
+          "path": "$.raw_payload"
+        }
+      ]
+    },
+    {
+      "case_id": "PROVIDER_PAYLOAD_KEY_PRESENT",
+      "expected_violations": [
+        {
+          "code": "RAW_PAYLOAD_FIELD_FORBIDDEN",
+          "path": "$.provider_payload"
+        },
+        {
+          "code": "UNKNOWN_IMPORT_FIELD",
+          "path": "$.provider_payload"
+        }
+      ]
+    },
+    {
+      "case_id": "COOKIE_KEY_PRESENT",
+      "expected_violations": [
+        {
+          "code": "SECRET_PATTERN_DETECTED",
+          "path": "$.cookie"
+        },
+        {
+          "code": "UNKNOWN_IMPORT_FIELD",
+          "path": "$.cookie"
+        }
+      ]
+    },
+    {
+      "case_id": "SESSION_KEY_PRESENT",
+      "expected_violations": [
+        {
+          "code": "SECRET_PATTERN_DETECTED",
+          "path": "$.session"
+        },
+        {
+          "code": "UNKNOWN_IMPORT_FIELD",
+          "path": "$.session"
+        }
+      ]
+    },
+    {
+      "case_id": "NOTES_CONTAIN_API_KEY_ASSIGNMENT",
+      "expected_violations": [
+        {
+          "code": "SECRET_PATTERN_DETECTED",
+          "path": "$.sample.reviewer_notes.summary"
+        }
+      ]
+    },
+    {
+      "case_id": "NOTES_CONTAIN_SK_PREFIX",
+      "expected_violations": [
+        {
+          "code": "SECRET_PATTERN_DETECTED",
+          "path": "$.sample.reviewer_notes.summary"
+        }
+      ]
+    },
+    {
+      "case_id": "NOTES_CONTAIN_JWT",
+      "expected_violations": [
+        {
+          "code": "SECRET_PATTERN_DETECTED",
+          "path": "$.sample.reviewer_notes.summary"
+        }
+      ]
+    },
+    {
+      "case_id": "WRONG_SOURCE_DISPOSITION",
+      "expected_violations": [
+        {
+          "code": "RAW_SOURCE_RETENTION_FORBIDDEN",
+          "path": "$.source_disposition"
+        }
+      ]
+    },
+    {
+      "case_id": "POLICY_UNSAFE_STRING_RULES_MISSING",
+      "expected_violations": [
+        {
+          "code": "IMPORT_POLICY_INVALID",
+          "path": "$.importPolicy.unsafe_string_rules"
+        }
+      ]
+    },
+    {
+      "case_id": "POLICY_FORBIDDEN_KEY_RULES_MISSING",
+      "expected_violations": [
+        {
+          "code": "IMPORT_POLICY_INVALID",
+          "path": "$.importPolicy.forbidden_key_rules"
+        }
+      ]
+    },
+    {
+      "case_id": "POLICY_REQUIRED_RULE_REMOVED",
+      "expected_violations": [
+        {
+          "code": "IMPORT_POLICY_INVALID",
+          "path": "$.importPolicy.unsafe_string_rules"
+        }
+      ]
+    },
+    {
+      "case_id": "POLICY_REQUIRED_RULE_PATTERN_WEAKENED",
+      "expected_violations": [
+        {
+          "code": "IMPORT_POLICY_INVALID",
+          "path": "$.importPolicy.unsafe_string_rules[0].pattern"
+        }
+      ]
+    },
+    {
+      "case_id": "POLICY_REQUIRED_RULE_CODE_CHANGED",
+      "expected_violations": [
+        {
+          "code": "IMPORT_POLICY_INVALID",
+          "path": "$.importPolicy.unsafe_string_rules[0].code"
+        }
+      ]
+    },
+    {
+      "case_id": "POLICY_DUPLICATE_RULE_ID",
+      "expected_violations": [
+        {
+          "code": "IMPORT_POLICY_INVALID",
+          "path": "$.importPolicy.unsafe_string_rules"
+        },
+        {
+          "code": "IMPORT_POLICY_INVALID",
+          "path": "$.importPolicy.unsafe_string_rules[1].rule_id"
+        }
+      ]
+    },
+    {
+      "case_id": "POLICY_STATEFUL_REGEX_FLAG",
+      "expected_violations": [
+        {
+          "code": "IMPORT_POLICY_INVALID",
+          "path": "$.importPolicy.unsafe_string_rules[0].flags"
+        }
+      ]
+    },
+    {
+      "case_id": "POLICY_INVALID_REGEX",
+      "expected_violations": [
+        {
+          "code": "IMPORT_POLICY_INVALID",
+          "path": "$.importPolicy.unsafe_string_rules[0].pattern"
+        }
+      ]
+    },
+    {
+      "case_id": "IMPORT_SCHEMA_EXTRA_PROPERTY",
+      "expected_violations": [
+        {
+          "code": "IMPORT_SCHEMA_INVALID",
+          "path": "$.importSchema.properties"
+        }
+      ]
+    },
+    {
+      "case_id": "IMPOSSIBLE_REVIEWED_AT_DATE",
+      "expected_violations": [
+        {
+          "code": "INVALID_REVIEWED_AT",
+          "path": "$.reviewed_at"
+        }
+      ]
+    },
+    {
+      "case_id": "POLICY_ALLOWED_ORIGINS_EXTRA",
+      "expected_violations": [
+        {
+          "code": "IMPORT_POLICY_INVALID",
+          "path": "$.importPolicy.allowed_record_origins"
+        }
+      ]
+    },
+    {
+      "case_id": "POLICY_FORBIDDEN_ORIGINS_MISSING",
+      "expected_violations": [
+        {
+          "code": "IMPORT_POLICY_INVALID",
+          "path": "$.importPolicy.forbidden_record_origins"
+        }
+      ]
+    },
+    {
+      "case_id": "POLICY_CONSENT_EXTRA",
+      "expected_violations": [
+        {
+          "code": "IMPORT_POLICY_INVALID",
+          "path": "$.importPolicy.allowed_consent_basis"
+        }
+      ]
+    },
+    {
+      "case_id": "POLICY_STABLE_CODES_EXTRA",
+      "expected_violations": [
+        {
+          "code": "IMPORT_POLICY_INVALID",
+          "path": "$.importPolicy.stable_violation_codes"
+        }
+      ]
+    },
+    {
+      "case_id": "POLICY_UNSAFE_CLASSES_EXTRA",
+      "expected_violations": [
+        {
+          "code": "IMPORT_POLICY_INVALID",
+          "path": "$.importPolicy.unsafe_pattern_classes"
+        }
+      ]
+    },
+    {
+      "case_id": "POLICY_NORMALIZATION_CLI_OUTPUT_WEAKENED",
+      "expected_violations": [
+        {
+          "code": "IMPORT_POLICY_INVALID",
+          "path": "$.importPolicy.normalization"
+        }
+      ]
+    },
+    {
+      "case_id": "POLICY_VERSION_MISMATCH",
+      "expected_violations": [
+        {
+          "code": "IMPORT_POLICY_INVALID",
+          "path": "$.importPolicy.policy_version"
+        }
+      ]
+    },
     {
       "case_id": "MISSING_IMPORT_ID",
       "expected_violations": [

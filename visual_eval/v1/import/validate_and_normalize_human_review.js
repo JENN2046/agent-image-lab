@@ -8,7 +8,16 @@ const EXIT_OK = 0;
 const EXIT_POLICY_ERROR = 2;
 const EXIT_TOOL_ERROR = 1;
 
+const REQUIRED_IMPORT_POLICY_VERSION = "local_visual_eval.human_review_import_policy.v1.4.2";
 const REQUIRED_IMPORT_SCHEMA_VERSION = "1.0.0";
+const REQUIRED_ALLOWED_RECORD_ORIGINS = ["human_review_sanitized"];
+const REQUIRED_FORBIDDEN_RECORD_ORIGINS = [
+  "human_review",
+  "real_customer_review",
+  "production_review",
+  "human_verified"
+];
+const REQUIRED_ALLOWED_CONSENT_BASIS = ["synthetic_fixture"];
 const IMPORT_KEYS = [
   "import_schema_version",
   "import_id",
@@ -48,6 +57,8 @@ const IMPORT_POLICY_KEYS = [
 const REVIEWER_ALIAS_PATTERN_SOURCE = "^[a-z][a-z0-9_]{2,63}$";
 const IMPORT_ID_PATTERN_SOURCE = "^import_[a-z0-9]+(?:_[a-z0-9]+)*_[0-9]{3}$";
 const REVIEWED_AT_PATTERN_SOURCE = "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{3})?(?:Z|[+-]\\d{2}:\\d{2})$";
+const REVIEWED_AT_COMPONENT_PATTERN = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(?:\.(\d{3}))?(Z|([+-])(\d{2}):(\d{2}))$/;
+const ALLOWED_REGEX_FLAGS = ["", "i"];
 const REQUIRED_UNSAFE_PATTERN_CLASSES = [
   "email_address",
   "telephone_number",
@@ -86,6 +97,108 @@ const EMITTED_VIOLATION_CODES = [
   "IMPORT_SAMPLE_INVALID",
   "IMPORT_DECISION_MISMATCH"
 ];
+const CANONICAL_FORBIDDEN_KEY_RULES = [
+  {
+    rule_id: "forbidden_key.raw_payload_field",
+    pattern_class: "raw_payload_field",
+    code: "RAW_PAYLOAD_FIELD_FORBIDDEN",
+    pattern: "(?:raw_payload|provider_payload|raw_transcript|source_text|original_payload)",
+    flags: "i"
+  },
+  {
+    rule_id: "forbidden_key.cookie_or_session_field",
+    pattern_class: "cookie_or_session_field",
+    code: "SECRET_PATTERN_DETECTED",
+    pattern: "(?:cookie|session)",
+    flags: "i"
+  }
+];
+const CANONICAL_UNSAFE_STRING_RULES = [
+  {
+    rule_id: "unsafe_string.credential_bearing_url",
+    pattern_class: "credential_bearing_url",
+    code: "CREDENTIAL_URL_DETECTED",
+    pattern: "[a-z][a-z0-9+.-]*://[^/\\s:@]+:[^/\\s:@]+@",
+    flags: "i"
+  },
+  {
+    rule_id: "unsafe_string.bearer_token",
+    pattern_class: "bearer_token",
+    code: "SECRET_PATTERN_DETECTED",
+    pattern: "\\bBearer\\s+[A-Za-z0-9._~+/-]+=*",
+    flags: "i"
+  },
+  {
+    rule_id: "unsafe_string.api_key_assignment",
+    pattern_class: "api_key_assignment",
+    code: "SECRET_PATTERN_DETECTED",
+    pattern: "\\b(?:api[_-]?key|token|password|secret)\\s*=",
+    flags: "i"
+  },
+  {
+    rule_id: "unsafe_string.secret_key_prefix",
+    pattern_class: "secret_key_prefix",
+    code: "SECRET_PATTERN_DETECTED",
+    pattern: "\\bsk-[A-Za-z0-9_-]{12,}\\b",
+    flags: ""
+  },
+  {
+    rule_id: "unsafe_string.jwt_like_token",
+    pattern_class: "jwt_like_token",
+    code: "SECRET_PATTERN_DETECTED",
+    pattern: "\\beyJ[A-Za-z0-9_-]+\\.[A-Za-z0-9_-]+\\.[A-Za-z0-9_-]+\\b",
+    flags: ""
+  },
+  {
+    rule_id: "unsafe_string.email_address",
+    pattern_class: "email_address",
+    code: "PERSONAL_DATA_PATTERN_DETECTED",
+    pattern: "\\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}\\b",
+    flags: "i"
+  },
+  {
+    rule_id: "unsafe_string.telephone_number",
+    pattern_class: "telephone_number",
+    code: "PERSONAL_DATA_PATTERN_DETECTED",
+    pattern: "(?:\\+\\d{1,3}[\\s.-]?)?(?:\\(?\\d{3}\\)?[\\s.-])\\d{3}[\\s.-]\\d{4}\\b",
+    flags: ""
+  },
+  {
+    rule_id: "unsafe_string.absolute_windows_path",
+    pattern_class: "absolute_windows_path",
+    code: "ABSOLUTE_PATH_DETECTED",
+    pattern: "(^|[^A-Za-z0-9])(?:[A-Za-z]:[\\\\/][^\\s\"'<>]*)",
+    flags: ""
+  },
+  {
+    rule_id: "unsafe_string.UNC_path",
+    pattern_class: "UNC_path",
+    code: "ABSOLUTE_PATH_DETECTED",
+    pattern: "\\\\\\\\[^\\\\/\\s]+\\\\[^\\\\/\\s]+",
+    flags: ""
+  },
+  {
+    rule_id: "unsafe_string.absolute_unix_path",
+    pattern_class: "absolute_unix_path",
+    code: "ABSOLUTE_PATH_DETECTED",
+    pattern: "(^|[\\s\"'(])/(?:home|Users|var|tmp|private|etc|mnt|opt|root)/[^\\s\"'<>]*",
+    flags: "i"
+  },
+  {
+    rule_id: "unsafe_string.file_url",
+    pattern_class: "file_url",
+    code: "ABSOLUTE_PATH_DETECTED",
+    pattern: "file://[^\\s\"'<>]*",
+    flags: "i"
+  },
+  {
+    rule_id: "unsafe_string.parent_directory_traversal",
+    pattern_class: "parent_directory_traversal",
+    code: "PATH_TRAVERSAL_DETECTED",
+    pattern: "(^|[\\s\"'(\\\\/])(?:\\.\\.|%2e%2e)([\\\\/]|$)",
+    flags: "i"
+  }
+];
 
 function readJson(filePath) {
   return JSON.parse(fs.readFileSync(filePath, "utf8"));
@@ -107,19 +220,42 @@ function cloneJson(value) {
   return JSON.parse(JSON.stringify(value));
 }
 
+function arraysEqual(left, right) {
+  return Array.isArray(left)
+    && Array.isArray(right)
+    && left.length === right.length
+    && left.every((value, index) => value === right[index]);
+}
+
 function sortViolations(violations) {
+  const seen = new Set();
   return violations.slice().sort((left, right) => {
     const pathCompare = left.path.localeCompare(right.path);
     if (pathCompare !== 0) {
       return pathCompare;
     }
     return left.code.localeCompare(right.code);
+  }).filter((violation) => {
+    const key = `${violation.code}\u0000${violation.path}`;
+    if (seen.has(key)) {
+      return false;
+    }
+    seen.add(key);
+    return true;
   });
 }
 
 function compilePolicyRegexRule(rule, pathRef, violations) {
   if (!isObject(rule)) {
     addViolation(violations, "IMPORT_POLICY_INVALID", pathRef, "Policy rule must be an object.");
+    return null;
+  }
+  if (!isNonEmptyString(rule.rule_id)) {
+    addViolation(violations, "IMPORT_POLICY_INVALID", `${pathRef}.rule_id`, "Policy rule id is required.");
+    return null;
+  }
+  if (!isNonEmptyString(rule.pattern_class)) {
+    addViolation(violations, "IMPORT_POLICY_INVALID", `${pathRef}.pattern_class`, "Policy rule pattern class is required.");
     return null;
   }
   if (!EMITTED_VIOLATION_CODES.includes(rule.code)) {
@@ -130,14 +266,33 @@ function compilePolicyRegexRule(rule, pathRef, violations) {
     addViolation(violations, "IMPORT_POLICY_INVALID", `${pathRef}.pattern`, "Policy rule pattern is required.");
     return null;
   }
+  const flags = typeof rule.flags === "string" ? rule.flags : "";
+  if (!ALLOWED_REGEX_FLAGS.includes(flags)) {
+    addViolation(violations, "IMPORT_POLICY_INVALID", `${pathRef}.flags`, "Policy rule flags are not allowed.");
+    return null;
+  }
   try {
     return {
       code: rule.code,
-      pattern: new RegExp(rule.pattern, typeof rule.flags === "string" ? rule.flags : ""),
+      pattern: new RegExp(rule.pattern, flags),
       message: isNonEmptyString(rule.message) ? rule.message : "Policy rule violated."
     };
   } catch (_error) {
     addViolation(violations, "IMPORT_POLICY_INVALID", `${pathRef}.pattern`, "Policy rule pattern must compile.");
+    return null;
+  }
+}
+
+function compileContractRegex(patternSource, flags, pathRef, violations) {
+  const normalizedFlags = typeof flags === "string" ? flags : "";
+  if (!ALLOWED_REGEX_FLAGS.includes(normalizedFlags)) {
+    addViolation(violations, "IMPORT_POLICY_INVALID", pathRef, "Contract regex flags are not allowed.");
+    return null;
+  }
+  try {
+    return new RegExp(patternSource, normalizedFlags);
+  } catch (_error) {
+    addViolation(violations, "IMPORT_POLICY_INVALID", pathRef, "Contract regex pattern must compile.");
     return null;
   }
 }
@@ -152,16 +307,92 @@ function compilePolicyRegexRules(rules, pathRef, violations) {
     .filter(Boolean);
 }
 
+function canonicalRulesArePresent(rules, canonicalRules) {
+  if (!Array.isArray(rules)) {
+    return false;
+  }
+  const byId = new Map(rules.map((rule) => [rule && rule.rule_id, rule]));
+  return canonicalRules.every((canonicalRule) => {
+    const rule = byId.get(canonicalRule.rule_id);
+    return isObject(rule)
+      && rule.pattern_class === canonicalRule.pattern_class
+      && rule.code === canonicalRule.code
+      && rule.pattern === canonicalRule.pattern
+      && (typeof rule.flags === "string" ? rule.flags : "") === canonicalRule.flags;
+  });
+}
+
+function validateRegexRuleCollection(rules, pathRef, canonicalRules, violations) {
+  if (!Array.isArray(rules) || rules.length === 0) {
+    addViolation(violations, "IMPORT_POLICY_INVALID", pathRef, "Policy regex rules are required.");
+    return;
+  }
+
+  const seenRuleIds = new Set();
+  const seenPatternClasses = new Set();
+  const byRuleId = new Map();
+
+  rules.forEach((rule, index) => {
+    const rulePath = `${pathRef}[${index}]`;
+    if (!isObject(rule)) {
+      addViolation(violations, "IMPORT_POLICY_INVALID", rulePath, "Policy rule must be an object.");
+      return;
+    }
+    if (!isNonEmptyString(rule.rule_id)) {
+      addViolation(violations, "IMPORT_POLICY_INVALID", `${rulePath}.rule_id`, "Policy rule id is required.");
+    } else if (seenRuleIds.has(rule.rule_id)) {
+      addViolation(violations, "IMPORT_POLICY_INVALID", `${rulePath}.rule_id`, "Policy rule id must be unique.");
+    } else {
+      seenRuleIds.add(rule.rule_id);
+      byRuleId.set(rule.rule_id, { rule, index });
+    }
+    if (!isNonEmptyString(rule.pattern_class)) {
+      addViolation(violations, "IMPORT_POLICY_INVALID", `${rulePath}.pattern_class`, "Policy rule pattern class is required.");
+    } else if (seenPatternClasses.has(rule.pattern_class)) {
+      addViolation(violations, "IMPORT_POLICY_INVALID", `${rulePath}.pattern_class`, "Policy rule pattern class must be unique.");
+    } else {
+      seenPatternClasses.add(rule.pattern_class);
+    }
+    compilePolicyRegexRule(rule, rulePath, violations);
+  });
+
+  for (const canonicalRule of canonicalRules) {
+    const match = byRuleId.get(canonicalRule.rule_id);
+    if (!match) {
+      addViolation(violations, "IMPORT_POLICY_INVALID", pathRef, "Mandatory policy rule is missing.");
+      continue;
+    }
+    const { rule, index } = match;
+    const rulePath = `${pathRef}[${index}]`;
+    if (rule.pattern_class !== canonicalRule.pattern_class) {
+      addViolation(violations, "IMPORT_POLICY_INVALID", `${rulePath}.pattern_class`, "Mandatory policy rule pattern class changed.");
+    }
+    if (rule.code !== canonicalRule.code) {
+      addViolation(violations, "IMPORT_POLICY_INVALID", `${rulePath}.code`, "Mandatory policy rule code changed.");
+    }
+    if (rule.pattern !== canonicalRule.pattern) {
+      addViolation(violations, "IMPORT_POLICY_INVALID", `${rulePath}.pattern`, "Mandatory policy rule pattern changed.");
+    }
+    if ((typeof rule.flags === "string" ? rule.flags : "") !== canonicalRule.flags) {
+      addViolation(violations, "IMPORT_POLICY_INVALID", `${rulePath}.flags`, "Mandatory policy rule flags changed.");
+    }
+  }
+}
+
 function buildPolicyContext(importSchema, importPolicy, violations) {
   const importIdPattern = isObject(importPolicy) && isObject(importPolicy.import_id_contract)
-    ? compilePolicyRegexRule({ code: "INVALID_IMPORT_ID", pattern: importPolicy.import_id_contract.pattern }, "$.importPolicy.import_id_contract.pattern", violations)
+    ? compileContractRegex(importPolicy.import_id_contract.pattern, "", "$.importPolicy.import_id_contract.pattern", violations)
     : null;
   const reviewedAtPattern = isObject(importPolicy) && isObject(importPolicy.reviewed_at_contract)
-    ? compilePolicyRegexRule({ code: "INVALID_REVIEWED_AT", pattern: importPolicy.reviewed_at_contract.pattern }, "$.importPolicy.reviewed_at_contract.pattern", violations)
+    ? compileContractRegex(importPolicy.reviewed_at_contract.pattern, "", "$.importPolicy.reviewed_at_contract.pattern", violations)
     : null;
   const reviewerAliasPattern = isObject(importPolicy) && isObject(importPolicy.reviewer_alias_contract)
-    ? compilePolicyRegexRule({ code: "INVALID_REVIEWER_ALIAS", pattern: importPolicy.reviewer_alias_contract.pattern }, "$.importPolicy.reviewer_alias_contract.pattern", violations)
+    ? compileContractRegex(importPolicy.reviewer_alias_contract.pattern, "", "$.importPolicy.reviewer_alias_contract.pattern", violations)
     : null;
+  const forbiddenKeyRulesUsable = isObject(importPolicy)
+    && canonicalRulesArePresent(importPolicy.forbidden_key_rules, CANONICAL_FORBIDDEN_KEY_RULES);
+  const unsafeStringRulesUsable = isObject(importPolicy)
+    && canonicalRulesArePresent(importPolicy.unsafe_string_rules, CANONICAL_UNSAFE_STRING_RULES);
 
   return {
     wrapperKeys: getSchemaWrapperKeys(importSchema),
@@ -174,13 +405,13 @@ function buildPolicyContext(importSchema, importPolicy, violations) {
       : [],
     requiredSourceDisposition: isObject(importPolicy) ? importPolicy.required_source_disposition : undefined,
     expectedAttestation: isObject(importPolicy) ? importPolicy.required_sanitization_attestation : null,
-    importIdPattern: importIdPattern ? importIdPattern.pattern : null,
-    reviewedAtPattern: reviewedAtPattern ? reviewedAtPattern.pattern : null,
-    reviewerAliasPattern: reviewerAliasPattern ? reviewerAliasPattern.pattern : null,
-    forbiddenKeyRules: isObject(importPolicy)
+    importIdPattern: importIdPattern || null,
+    reviewedAtPattern: reviewedAtPattern || null,
+    reviewerAliasPattern: reviewerAliasPattern || null,
+    forbiddenKeyRules: isObject(importPolicy) && forbiddenKeyRulesUsable
       ? compilePolicyRegexRules(importPolicy.forbidden_key_rules, "$.importPolicy.forbidden_key_rules", violations)
       : [],
-    unsafeStringRules: isObject(importPolicy)
+    unsafeStringRules: isObject(importPolicy) && unsafeStringRulesUsable
       ? compilePolicyRegexRules(importPolicy.unsafe_string_rules, "$.importPolicy.unsafe_string_rules", violations)
       : []
   };
@@ -264,11 +495,33 @@ function validateImportId(importId, importIdPattern, violations) {
 }
 
 function validateReviewedAt(reviewedAt, reviewedAtPattern, violations) {
-  if (typeof reviewedAt !== "string"
-    || reviewedAt.trim().length === 0
-    || !(reviewedAtPattern && reviewedAtPattern.test(reviewedAt))
-    || Number.isNaN(Date.parse(reviewedAt))) {
+  if (typeof reviewedAt !== "string" || reviewedAt.trim().length === 0 || !(reviewedAtPattern && reviewedAtPattern.test(reviewedAt))) {
     addViolation(violations, "INVALID_REVIEWED_AT", "$.reviewed_at", "Reviewed timestamp must be valid ISO-8601 with timezone.");
+    return;
+  }
+  const match = REVIEWED_AT_COMPONENT_PATTERN.exec(reviewedAt);
+  if (!match) {
+    addViolation(violations, "INVALID_REVIEWED_AT", "$.reviewed_at", "Reviewed timestamp must be valid ISO-8601 with timezone.");
+    return;
+  }
+  const year = Number(match[1]);
+  const month = Number(match[2]);
+  const day = Number(match[3]);
+  const hour = Number(match[4]);
+  const minute = Number(match[5]);
+  const second = Number(match[6]);
+  const offsetHour = match[8] === "Z" ? 0 : Number(match[10]);
+  const offsetMinute = match[8] === "Z" ? 0 : Number(match[11]);
+  const maxDay = new Date(Date.UTC(year, month, 0)).getUTCDate();
+  if (month < 1 || month > 12
+    || day < 1 || day > maxDay
+    || hour > 23
+    || minute > 59
+    || second > 59
+    || offsetHour > 23
+    || offsetMinute > 59
+    || Number.isNaN(Date.parse(reviewedAt))) {
+    addViolation(violations, "INVALID_REVIEWED_AT", "$.reviewed_at", "Reviewed timestamp must be a real calendar timestamp.");
   }
 }
 
@@ -310,8 +563,10 @@ function validateImportPolicy(importPolicy, violations) {
   }
   validateNoUnknownFields(importPolicy, IMPORT_POLICY_KEYS, "$.importPolicy", violations);
   validateRequiredFields(importPolicy, IMPORT_POLICY_KEYS, "$.importPolicy", "IMPORT_POLICY_INVALID", "Import policy field is required.", violations);
-  if (!Array.isArray(importPolicy.compatible_import_schema_versions)
-    || !importPolicy.compatible_import_schema_versions.includes(REQUIRED_IMPORT_SCHEMA_VERSION)) {
+  if (importPolicy.policy_version !== REQUIRED_IMPORT_POLICY_VERSION) {
+    addViolation(violations, "IMPORT_POLICY_INVALID", "$.importPolicy.policy_version", "Import policy version is invalid.");
+  }
+  if (!arraysEqual(importPolicy.compatible_import_schema_versions, [REQUIRED_IMPORT_SCHEMA_VERSION])) {
     addViolation(violations, "UNSUPPORTED_IMPORT_SCHEMA_VERSION", "$.importPolicy.compatible_import_schema_versions", "Import policy must support schema 1.0.0.");
   }
   if (!Array.isArray(importPolicy.required_import_fields)
@@ -319,10 +574,13 @@ function validateImportPolicy(importPolicy, violations) {
     || importPolicy.required_import_fields.some((key) => !IMPORT_KEYS.includes(key))) {
     addViolation(violations, "IMPORT_POLICY_INVALID", "$.importPolicy.required_import_fields", "Import policy must define exact required import fields.");
   }
-  if (!Array.isArray(importPolicy.allowed_record_origins) || importPolicy.allowed_record_origins.length === 0) {
+  if (!arraysEqual(importPolicy.allowed_record_origins, REQUIRED_ALLOWED_RECORD_ORIGINS)) {
     addViolation(violations, "IMPORT_POLICY_INVALID", "$.importPolicy.allowed_record_origins", "Import policy must define allowed origins.");
   }
-  if (!Array.isArray(importPolicy.allowed_consent_basis) || importPolicy.allowed_consent_basis.length === 0) {
+  if (!arraysEqual(importPolicy.forbidden_record_origins, REQUIRED_FORBIDDEN_RECORD_ORIGINS)) {
+    addViolation(violations, "IMPORT_POLICY_INVALID", "$.importPolicy.forbidden_record_origins", "Import policy must define exact forbidden origins.");
+  }
+  if (!arraysEqual(importPolicy.allowed_consent_basis, REQUIRED_ALLOWED_CONSENT_BASIS)) {
     addViolation(violations, "IMPORT_POLICY_INVALID", "$.importPolicy.allowed_consent_basis", "Import policy must define allowed consent basis.");
   }
   if (importPolicy.required_source_disposition !== "raw_source_not_retained") {
@@ -335,8 +593,7 @@ function validateImportPolicy(importPolicy, violations) {
     || ATTESTATION_KEYS.some((key) => importPolicy.required_sanitization_attestation[key] !== false)) {
     addViolation(violations, "IMPORT_POLICY_INVALID", "$.importPolicy.required_sanitization_attestation", "Import policy must require false sanitization attestation flags.");
   }
-  if (!Array.isArray(importPolicy.stable_violation_codes)
-    || EMITTED_VIOLATION_CODES.some((code) => !importPolicy.stable_violation_codes.includes(code))) {
+  if (!arraysEqual(importPolicy.stable_violation_codes, EMITTED_VIOLATION_CODES)) {
     addViolation(violations, "IMPORT_POLICY_INVALID", "$.importPolicy.stable_violation_codes", "Import policy must list every emitted violation code.");
   }
   if (!isObject(importPolicy.import_id_contract)
@@ -354,15 +611,15 @@ function validateImportPolicy(importPolicy, violations) {
     || importPolicy.reviewer_alias_contract.pattern !== REVIEWER_ALIAS_PATTERN_SOURCE) {
     addViolation(violations, "IMPORT_POLICY_INVALID", "$.importPolicy.reviewer_alias_contract", "Import policy must define reviewer alias contract.");
   }
-  if (!Array.isArray(importPolicy.unsafe_pattern_classes)
-    || REQUIRED_UNSAFE_PATTERN_CLASSES.some((patternClass) => !importPolicy.unsafe_pattern_classes.includes(patternClass))) {
+  if (!arraysEqual(importPolicy.unsafe_pattern_classes, REQUIRED_UNSAFE_PATTERN_CLASSES)) {
     addViolation(violations, "IMPORT_POLICY_INVALID", "$.importPolicy.unsafe_pattern_classes", "Import policy must list every required unsafe pattern class.");
   }
-  compilePolicyRegexRules(importPolicy.forbidden_key_rules, "$.importPolicy.forbidden_key_rules", violations);
-  compilePolicyRegexRules(importPolicy.unsafe_string_rules, "$.importPolicy.unsafe_string_rules", violations);
+  validateRegexRuleCollection(importPolicy.forbidden_key_rules, "$.importPolicy.forbidden_key_rules", CANONICAL_FORBIDDEN_KEY_RULES, violations);
+  validateRegexRuleCollection(importPolicy.unsafe_string_rules, "$.importPolicy.unsafe_string_rules", CANONICAL_UNSAFE_STRING_RULES, violations);
   if (!isObject(importPolicy.normalization)
     || importPolicy.normalization.persist_raw_source !== false
     || importPolicy.normalization.persist_wrapper !== false
+    || importPolicy.normalization.cli_success_output !== "summary_only"
     || importPolicy.normalization.normalized_sample_returned_in_memory_only !== true) {
     addViolation(violations, "IMPORT_POLICY_INVALID", "$.importPolicy.normalization", "Import policy must keep normalization in memory only.");
   }
@@ -385,7 +642,8 @@ function validateImportSchema(importSchema, violations) {
     addViolation(violations, "IMPORT_SCHEMA_INVALID", "$.importSchema.properties", "Import schema properties are required.");
     return;
   }
-  if (IMPORT_KEYS.some((key) => !Object.prototype.hasOwnProperty.call(importSchema.properties, key))) {
+  const propertyKeys = Object.keys(importSchema.properties);
+  if (!arraysEqual(propertyKeys.slice().sort(), IMPORT_KEYS.slice().sort())) {
     addViolation(violations, "IMPORT_SCHEMA_INVALID", "$.importSchema.properties", "Import schema must define every wrapper property.");
   }
   if (importSchema.properties.import_schema_version

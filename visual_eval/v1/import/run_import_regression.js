@@ -62,6 +62,85 @@ function loadBaseInput() {
 }
 
 const MUTATIONS = {
+  RAW_PAYLOAD_KEY_PRESENT(input) {
+    input.importRecord.raw_payload = "synthetic fixture only";
+  },
+  PROVIDER_PAYLOAD_KEY_PRESENT(input) {
+    input.importRecord.provider_payload = "synthetic fixture only";
+  },
+  COOKIE_KEY_PRESENT(input) {
+    input.importRecord.cookie = "synthetic fixture only";
+  },
+  SESSION_KEY_PRESENT(input) {
+    input.importRecord.session = "synthetic fixture only";
+  },
+  NOTES_CONTAIN_API_KEY_ASSIGNMENT(input) {
+    input.importRecord.sample.reviewer_notes.summary = "Synthetic note with api_key=example_value.";
+  },
+  NOTES_CONTAIN_SK_PREFIX(input) {
+    input.importRecord.sample.reviewer_notes.summary = "Synthetic note with sk-abcdefghijklmnop.";
+  },
+  NOTES_CONTAIN_JWT(input) {
+    input.importRecord.sample.reviewer_notes.summary = "Synthetic note with eyJabc.def.ghi token shape.";
+  },
+  WRONG_SOURCE_DISPOSITION(input) {
+    input.importRecord.source_disposition = "raw_source_retained";
+  },
+  POLICY_UNSAFE_STRING_RULES_MISSING(input) {
+    delete input.importPolicy.unsafe_string_rules;
+  },
+  POLICY_FORBIDDEN_KEY_RULES_MISSING(input) {
+    delete input.importPolicy.forbidden_key_rules;
+  },
+  POLICY_REQUIRED_RULE_REMOVED(input) {
+    input.importPolicy.unsafe_string_rules = input.importPolicy.unsafe_string_rules.filter((rule) => {
+      return rule.rule_id !== "unsafe_string.credential_bearing_url";
+    });
+  },
+  POLICY_REQUIRED_RULE_PATTERN_WEAKENED(input) {
+    input.importPolicy.unsafe_string_rules[0].pattern = ".*";
+  },
+  POLICY_REQUIRED_RULE_CODE_CHANGED(input) {
+    input.importPolicy.unsafe_string_rules[0].code = "SECRET_PATTERN_DETECTED";
+  },
+  POLICY_DUPLICATE_RULE_ID(input) {
+    input.importPolicy.unsafe_string_rules[1].rule_id = input.importPolicy.unsafe_string_rules[0].rule_id;
+  },
+  POLICY_STATEFUL_REGEX_FLAG(input) {
+    input.importPolicy.unsafe_string_rules[0].flags = "g";
+  },
+  POLICY_INVALID_REGEX(input) {
+    input.importPolicy.unsafe_string_rules[0].pattern = "[";
+  },
+  IMPORT_SCHEMA_EXTRA_PROPERTY(input) {
+    input.importSchema.properties.extra_wrapper_field = {
+      type: "string"
+    };
+  },
+  IMPOSSIBLE_REVIEWED_AT_DATE(input) {
+    input.importRecord.reviewed_at = "2026-02-30T10:00:00Z";
+  },
+  POLICY_ALLOWED_ORIGINS_EXTRA(input) {
+    input.importPolicy.allowed_record_origins.push("human_review");
+  },
+  POLICY_FORBIDDEN_ORIGINS_MISSING(input) {
+    input.importPolicy.forbidden_record_origins = input.importPolicy.forbidden_record_origins.filter((origin) => origin !== "human_review");
+  },
+  POLICY_CONSENT_EXTRA(input) {
+    input.importPolicy.allowed_consent_basis.push("human_verified");
+  },
+  POLICY_STABLE_CODES_EXTRA(input) {
+    input.importPolicy.stable_violation_codes.push("OPTIONAL_UNKNOWN_CODE");
+  },
+  POLICY_UNSAFE_CLASSES_EXTRA(input) {
+    input.importPolicy.unsafe_pattern_classes.push("optional_unknown_class");
+  },
+  POLICY_NORMALIZATION_CLI_OUTPUT_WEAKENED(input) {
+    input.importPolicy.normalization.cli_success_output = "full_record";
+  },
+  POLICY_VERSION_MISMATCH(input) {
+    input.importPolicy.policy_version = "local_visual_eval.human_review_import_policy.v1.4.1";
+  },
   MISSING_IMPORT_ID(input) {
     delete input.importRecord.import_id;
   },
@@ -265,10 +344,10 @@ function runRegression() {
   }
 
   const cases = Array.isArray(manifest.required_cases) ? manifest.required_cases : [];
-  if (cases.length < 32) {
+  if (cases.length < 50) {
     failures.push({
       case_id: "REGRESSION_CASE_COUNT",
-      reason: "regression_total_must_be_at_least_32",
+      reason: "regression_total_must_be_at_least_50",
       total: cases.length
     });
   }
