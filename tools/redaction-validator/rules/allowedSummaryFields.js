@@ -33,6 +33,7 @@ const ALLOWED_SUMMARY_PREFIXES = [
 
 const KNOWN_STRUCTURAL_KEYS = [
   'boundary_matrix',
+  'closeout',
   'entries',
   'non_permissions',
   'permissions',

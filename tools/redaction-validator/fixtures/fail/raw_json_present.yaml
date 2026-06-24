@@ -3,6 +3,7 @@
 
 execution_result:
   cdp_json_accessed: true
+  raw_json: true
   raw_json_recorded: true
   json_response: '{"id": "full-uuid-here", "type": "page", "title": "VCPChat"}'
   redacted_summary_only: false
