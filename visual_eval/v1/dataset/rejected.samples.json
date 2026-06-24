@@ -1,0 +1,448 @@
+[
+  {
+    "schema_version": "local_visual_eval.sample.v1",
+    "sample_id": "lv_eval_v1_2_rejected_lantern_001_subject_material",
+    "decision": "rejected",
+    "asset_ref": {
+      "kind": "metadata_only_reference",
+      "ref": "synthetic://local_visual_eval/v1.2/rejected/lantern_001_subject_material",
+      "image_binary_read_performed": false
+    },
+    "shot_id": "lantern_product_review_front_hero_matte_graphite",
+    "prompt_ref": "synthetic://local_visual_eval/v1.2/prompts/lantern_product_review_pack_001",
+    "review_scores": {
+      "subject_fidelity": 2,
+      "composition": 4,
+      "lighting": 4,
+      "material_realism": 2,
+      "commercial_fitness": 2
+    },
+    "failure_codes": [
+      "SUBJECT_DRIFT",
+      "MATERIAL_PLASTICITY"
+    ],
+    "correction_strategies": [
+      "Restate the object as one compact rechargeable LED lantern before any scene styling.",
+      "Specify matte graphite metal, frosted diffuser edge, rubber feet, and visible side control to prevent toy-like plastic."
+    ],
+    "reviewer_notes": {
+      "summary": "Rejected because the product reads closer to a generic glowing jar than the intended review lantern, and the body finish looks over-smoothed.",
+      "positive_reasons": [
+        "soft tabletop lighting could be reused after identity repair"
+      ],
+      "watch_items": [
+        "restore single-lantern silhouette",
+        "avoid featureless plastic body"
+      ]
+    },
+    "provenance": {
+      "metadata_only": true,
+      "provider_contact_performed": false,
+      "image_generation_performed": false,
+      "memory_write_performed": false
+    },
+    "created_at": "2026-06-24T00:00:00+08:00"
+  },
+  {
+    "schema_version": "local_visual_eval.sample.v1",
+    "sample_id": "lv_eval_v1_2_rejected_lantern_002_composition_commercial",
+    "decision": "rejected",
+    "asset_ref": {
+      "kind": "metadata_only_reference",
+      "ref": "synthetic://local_visual_eval/v1.2/rejected/lantern_002_composition_commercial",
+      "image_binary_read_performed": false
+    },
+    "shot_id": "lantern_product_review_tabletop_scale_comparison",
+    "prompt_ref": "synthetic://local_visual_eval/v1.2/prompts/lantern_product_review_pack_002",
+    "review_scores": {
+      "subject_fidelity": 4,
+      "composition": 2,
+      "lighting": 4,
+      "material_realism": 4,
+      "commercial_fitness": 1
+    },
+    "failure_codes": [
+      "COMPOSITION_IMBALANCE",
+      "COMMERCIAL_UNFITNESS"
+    ],
+    "correction_strategies": [
+      "Increase lantern scale to make it the clear review subject and keep props secondary.",
+      "Remove readable mock badges, watermark-like corner marks, and unrelated packaging text from the frame."
+    ],
+    "reviewer_notes": {
+      "summary": "Rejected because the lantern is crowded by oversized review props and the scene includes watermark-like markings that make it unusable commercially.",
+      "positive_reasons": [
+        "the handle and diffuser are still recognizable"
+      ],
+      "watch_items": [
+        "rebalance product scale",
+        "clear all fake text marks before retry"
+      ]
+    },
+    "provenance": {
+      "metadata_only": true,
+      "provider_contact_performed": false,
+      "image_generation_performed": false,
+      "memory_write_performed": false
+    },
+    "created_at": "2026-06-24T00:00:00+08:00"
+  },
+  {
+    "schema_version": "local_visual_eval.sample.v1",
+    "sample_id": "lv_eval_v1_2_rejected_lantern_003_detail_material",
+    "decision": "rejected",
+    "asset_ref": {
+      "kind": "metadata_only_reference",
+      "ref": "synthetic://local_visual_eval/v1.2/rejected/lantern_003_detail_material",
+      "image_binary_read_performed": false
+    },
+    "shot_id": "lantern_product_review_macro_handle_diffuser",
+    "prompt_ref": "synthetic://local_visual_eval/v1.2/prompts/lantern_product_review_pack_003",
+    "review_scores": {
+      "subject_fidelity": 3,
+      "composition": 4,
+      "lighting": 3,
+      "material_realism": 2,
+      "commercial_fitness": 2
+    },
+    "failure_codes": [
+      "DETAIL_OR_ANATOMY_ARTIFACT",
+      "MATERIAL_PLASTICITY"
+    ],
+    "correction_strategies": [
+      "Name the required handle hinge, diffuser seam, side button, and base ring as visible separate parts.",
+      "Reduce glow bloom so the frosted diffuser edge and metal body texture remain readable."
+    ],
+    "reviewer_notes": {
+      "summary": "Rejected because the handle geometry is warped into the diffuser and the illuminated surface reads melted rather than frosted.",
+      "positive_reasons": [
+        "macro framing could support detail review if the geometry is repaired"
+      ],
+      "watch_items": [
+        "separate hinge from diffuser",
+        "preserve material edge detail under glow"
+      ]
+    },
+    "provenance": {
+      "metadata_only": true,
+      "provider_contact_performed": false,
+      "image_generation_performed": false,
+      "memory_write_performed": false
+    },
+    "created_at": "2026-06-24T00:00:00+08:00"
+  },
+  {
+    "schema_version": "local_visual_eval.sample.v1",
+    "sample_id": "lv_eval_v1_2_rejected_lantern_004_subject_composition",
+    "decision": "rejected",
+    "asset_ref": {
+      "kind": "metadata_only_reference",
+      "ref": "synthetic://local_visual_eval/v1.2/rejected/lantern_004_subject_composition",
+      "image_binary_read_performed": false
+    },
+    "shot_id": "lantern_product_review_shelf_context_three_quarter",
+    "prompt_ref": "synthetic://local_visual_eval/v1.2/prompts/lantern_product_review_pack_004",
+    "review_scores": {
+      "subject_fidelity": 2,
+      "composition": 2,
+      "lighting": 4,
+      "material_realism": 4,
+      "commercial_fitness": 3
+    },
+    "failure_codes": [
+      "SUBJECT_DRIFT",
+      "COMPOSITION_IMBALANCE"
+    ],
+    "correction_strategies": [
+      "Remove desk-lamp and candle language; lock the subject as a portable LED lantern with handle and base.",
+      "Reframe to show the full handle, centered body, and clean negative space around the product."
+    ],
+    "reviewer_notes": {
+      "summary": "Rejected because the object drifts toward a small decorative lamp, while the crop cuts the handle and leaves the lantern subordinate to the shelf scene.",
+      "positive_reasons": [
+        "warm ambient direction is compatible with the lantern route"
+      ],
+      "watch_items": [
+        "keep full product inside frame",
+        "remove competing shelf objects"
+      ]
+    },
+    "provenance": {
+      "metadata_only": true,
+      "provider_contact_performed": false,
+      "image_generation_performed": false,
+      "memory_write_performed": false
+    },
+    "created_at": "2026-06-24T00:00:00+08:00"
+  },
+  {
+    "schema_version": "local_visual_eval.sample.v1",
+    "sample_id": "lv_eval_v1_2_rejected_lantern_005_commercial_detail",
+    "decision": "rejected",
+    "asset_ref": {
+      "kind": "metadata_only_reference",
+      "ref": "synthetic://local_visual_eval/v1.2/rejected/lantern_005_commercial_detail",
+      "image_binary_read_performed": false
+    },
+    "shot_id": "lantern_product_review_packshot_with_callouts",
+    "prompt_ref": "synthetic://local_visual_eval/v1.2/prompts/lantern_product_review_pack_005",
+    "review_scores": {
+      "subject_fidelity": 3,
+      "composition": 4,
+      "lighting": 4,
+      "material_realism": 3,
+      "commercial_fitness": 1
+    },
+    "failure_codes": [
+      "COMMERCIAL_UNFITNESS",
+      "DETAIL_OR_ANATOMY_ARTIFACT"
+    ],
+    "correction_strategies": [
+      "Remove pseudo-certification seals, unreadable feature labels, and any watermark-like overlay from the review packshot.",
+      "Require a distinct side dial, charging port, and flat base instead of fused decorative bumps."
+    ],
+    "reviewer_notes": {
+      "summary": "Rejected because fake callout text contaminates the commercial review surface and the side controls are fused into unstable shapes.",
+      "positive_reasons": [
+        "front-facing packshot angle is still appropriate"
+      ],
+      "watch_items": [
+        "block all pseudo-label text",
+        "review control geometry before acceptance"
+      ]
+    },
+    "provenance": {
+      "metadata_only": true,
+      "provider_contact_performed": false,
+      "image_generation_performed": false,
+      "memory_write_performed": false
+    },
+    "created_at": "2026-06-24T00:00:00+08:00"
+  },
+  {
+    "schema_version": "local_visual_eval.sample.v1",
+    "sample_id": "lv_eval_v1_2_rejected_lantern_006_material_composition_detail",
+    "decision": "rejected",
+    "asset_ref": {
+      "kind": "metadata_only_reference",
+      "ref": "synthetic://local_visual_eval/v1.2/rejected/lantern_006_material_composition_detail",
+      "image_binary_read_performed": false
+    },
+    "shot_id": "lantern_product_review_campsite_table_low_angle",
+    "prompt_ref": "synthetic://local_visual_eval/v1.2/prompts/lantern_product_review_pack_006",
+    "review_scores": {
+      "subject_fidelity": 3,
+      "composition": 2,
+      "lighting": 3,
+      "material_realism": 2,
+      "commercial_fitness": 2
+    },
+    "failure_codes": [
+      "MATERIAL_PLASTICITY",
+      "COMPOSITION_IMBALANCE",
+      "DETAIL_OR_ANATOMY_ARTIFACT"
+    ],
+    "correction_strategies": [
+      "Constrain the body to satin metal and textured rubber instead of glossy molded plastic.",
+      "Raise the camera and center the lantern so the base, diffuser, and handle are all visible.",
+      "Prevent handle twisting and base melting by naming clean circular geometry and separate parts."
+    ],
+    "reviewer_notes": {
+      "summary": "Rejected because the low angle overemphasizes the tabletop, the lantern body looks molded, and the handle and base show unstable geometry.",
+      "positive_reasons": [
+        "campsite table route remains usable after composition repair"
+      ],
+      "watch_items": [
+        "control foreground dominance",
+        "separate product components",
+        "improve material realism"
+      ]
+    },
+    "provenance": {
+      "metadata_only": true,
+      "provider_contact_performed": false,
+      "image_generation_performed": false,
+      "memory_write_performed": false
+    },
+    "created_at": "2026-06-24T00:00:00+08:00"
+  },
+  {
+    "schema_version": "local_visual_eval.sample.v1",
+    "sample_id": "lv_eval_v1_2_rejected_lantern_007_subject_commercial",
+    "decision": "rejected",
+    "asset_ref": {
+      "kind": "metadata_only_reference",
+      "ref": "synthetic://local_visual_eval/v1.2/rejected/lantern_007_subject_commercial",
+      "image_binary_read_performed": false
+    },
+    "shot_id": "lantern_product_review_outdoor_evening_lifestyle",
+    "prompt_ref": "synthetic://local_visual_eval/v1.2/prompts/lantern_product_review_pack_007",
+    "review_scores": {
+      "subject_fidelity": 2,
+      "composition": 4,
+      "lighting": 4,
+      "material_realism": 4,
+      "commercial_fitness": 1
+    },
+    "failure_codes": [
+      "SUBJECT_DRIFT",
+      "COMMERCIAL_UNFITNESS"
+    ],
+    "correction_strategies": [
+      "Reset the scene to a product-review lantern rather than a decorative candle centerpiece.",
+      "Remove open-flame cues, smoke, and off-route safety signals that make the image unsuitable for a rechargeable LED product."
+    ],
+    "reviewer_notes": {
+      "summary": "Rejected because the subject reads as a candle-style centerpiece and the scene implies open flame rather than a safe rechargeable lantern review.",
+      "positive_reasons": [
+        "evening ambience could work for a corrected LED lifestyle shot"
+      ],
+      "watch_items": [
+        "restore LED lantern identity",
+        "avoid unsafe flame semantics"
+      ]
+    },
+    "provenance": {
+      "metadata_only": true,
+      "provider_contact_performed": false,
+      "image_generation_performed": false,
+      "memory_write_performed": false
+    },
+    "created_at": "2026-06-24T00:00:00+08:00"
+  },
+  {
+    "schema_version": "local_visual_eval.sample.v1",
+    "sample_id": "lv_eval_v1_2_rejected_lantern_008_material_commercial",
+    "decision": "rejected",
+    "asset_ref": {
+      "kind": "metadata_only_reference",
+      "ref": "synthetic://local_visual_eval/v1.2/rejected/lantern_008_material_commercial",
+      "image_binary_read_performed": false
+    },
+    "shot_id": "lantern_product_review_neutral_background_glow_test",
+    "prompt_ref": "synthetic://local_visual_eval/v1.2/prompts/lantern_product_review_pack_008",
+    "review_scores": {
+      "subject_fidelity": 4,
+      "composition": 3,
+      "lighting": 2,
+      "material_realism": 2,
+      "commercial_fitness": 1
+    },
+    "failure_codes": [
+      "MATERIAL_PLASTICITY",
+      "COMMERCIAL_UNFITNESS"
+    ],
+    "correction_strategies": [
+      "Lower the neon glow and describe a translucent frosted diffuser with visible thickness and edge falloff.",
+      "Use a clean neutral background with no synthetic watermark shapes, mock review labels, or poster-like graphics."
+    ],
+    "reviewer_notes": {
+      "summary": "Rejected because the lantern surface looks like shiny toy plastic and the background carries graphic marks unsuitable for commercial review evidence.",
+      "positive_reasons": [
+        "single-product setup is recoverable"
+      ],
+      "watch_items": [
+        "avoid neon overexposure",
+        "keep background commercially clean"
+      ]
+    },
+    "provenance": {
+      "metadata_only": true,
+      "provider_contact_performed": false,
+      "image_generation_performed": false,
+      "memory_write_performed": false
+    },
+    "created_at": "2026-06-24T00:00:00+08:00"
+  },
+  {
+    "schema_version": "local_visual_eval.sample.v1",
+    "sample_id": "lv_eval_v1_2_rejected_lantern_009_subject_detail",
+    "decision": "rejected",
+    "asset_ref": {
+      "kind": "metadata_only_reference",
+      "ref": "synthetic://local_visual_eval/v1.2/rejected/lantern_009_subject_detail",
+      "image_binary_read_performed": false
+    },
+    "shot_id": "lantern_product_review_side_profile_control_panel",
+    "prompt_ref": "synthetic://local_visual_eval/v1.2/prompts/lantern_product_review_pack_009",
+    "review_scores": {
+      "subject_fidelity": 2,
+      "composition": 4,
+      "lighting": 4,
+      "material_realism": 3,
+      "commercial_fitness": 2
+    },
+    "failure_codes": [
+      "SUBJECT_DRIFT",
+      "DETAIL_OR_ANATOMY_ARTIFACT"
+    ],
+    "correction_strategies": [
+      "Specify one lantern only, with no duplicated mini lanterns or merged alternate product forms.",
+      "Keep the control panel rectangular, the handle continuous, and the diffuser unbroken in side profile."
+    ],
+    "reviewer_notes": {
+      "summary": "Rejected because the side profile shows fused duplicate forms and unstable controls, so it no longer supports a reliable product review read.",
+      "positive_reasons": [
+        "side-profile route is useful for control-panel evaluation"
+      ],
+      "watch_items": [
+        "eliminate duplicate product forms",
+        "verify control panel geometry"
+      ]
+    },
+    "provenance": {
+      "metadata_only": true,
+      "provider_contact_performed": false,
+      "image_generation_performed": false,
+      "memory_write_performed": false
+    },
+    "created_at": "2026-06-24T00:00:00+08:00"
+  },
+  {
+    "schema_version": "local_visual_eval.sample.v1",
+    "sample_id": "lv_eval_v1_2_rejected_lantern_010_composition_subject_material",
+    "decision": "rejected",
+    "asset_ref": {
+      "kind": "metadata_only_reference",
+      "ref": "synthetic://local_visual_eval/v1.2/rejected/lantern_010_composition_subject_material",
+      "image_binary_read_performed": false
+    },
+    "shot_id": "lantern_product_review_flatlay_accessory_context",
+    "prompt_ref": "synthetic://local_visual_eval/v1.2/prompts/lantern_product_review_pack_010",
+    "review_scores": {
+      "subject_fidelity": 2,
+      "composition": 2,
+      "lighting": 3,
+      "material_realism": 2,
+      "commercial_fitness": 2
+    },
+    "failure_codes": [
+      "COMPOSITION_IMBALANCE",
+      "SUBJECT_DRIFT",
+      "MATERIAL_PLASTICITY"
+    ],
+    "correction_strategies": [
+      "Make the lantern the largest object in the flatlay and reduce accessory count to two neutral scale cues.",
+      "Restate the exact rechargeable lantern identity with handle, diffuser, base, and side control.",
+      "Replace glossy melted surfaces with matte coated metal, textured grip, and a controlled frosted lens."
+    ],
+    "reviewer_notes": {
+      "summary": "Rejected because accessories dominate the flatlay, the product identity drifts into a generic gadget, and the material finish reads cheap and melted.",
+      "positive_reasons": [
+        "flatlay review format can work after scale and identity correction"
+      ],
+      "watch_items": [
+        "make product scale dominant",
+        "lock lantern identity",
+        "repair material cues"
+      ]
+    },
+    "provenance": {
+      "metadata_only": true,
+      "provider_contact_performed": false,
+      "image_generation_performed": false,
+      "memory_write_performed": false
+    },
+    "created_at": "2026-06-24T00:00:00+08:00"
+  }
+]

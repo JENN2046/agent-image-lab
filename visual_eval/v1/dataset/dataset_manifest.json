@@ -1,0 +1,64 @@
+{
+  "dataset_version": "local_visual_eval.dataset_seed.v1.2",
+  "visual_sample_schema_version": "local_visual_eval.sample.v1",
+  "taxonomy_version": "local_visual_eval.failure_taxonomy.v1",
+  "policy_version": "local_visual_eval.evaluation_policy.v1",
+  "accepted_count": 10,
+  "rejected_count": 10,
+  "total_count": 20,
+  "record_origin": "synthetic_seed",
+  "required_failure_codes": [
+    "SUBJECT_DRIFT",
+    "MATERIAL_PLASTICITY",
+    "COMPOSITION_IMBALANCE",
+    "DETAIL_OR_ANATOMY_ARTIFACT",
+    "COMMERCIAL_UNFITNESS"
+  ],
+  "minimum_occurrences_per_failure_code": 2,
+  "sample_files": {
+    "accepted": "accepted.samples.json",
+    "rejected": "rejected.samples.json"
+  },
+  "validation_contract": {
+    "metadata_only": true,
+    "provider_contact_performed": false,
+    "image_generation_performed": false,
+    "memory_write_performed": false,
+    "sample_id_scope": "global_unique",
+    "asset_ref_scope": "global_unique_synthetic_metadata_reference",
+    "accepted_policy": {
+      "required_count": 10,
+      "declared_decision": "accepted",
+      "computed_decision": "accepted",
+      "failure_codes": "empty"
+    },
+    "rejected_policy": {
+      "required_count": 10,
+      "declared_decision": "rejected",
+      "computed_decision": "rejected",
+      "minimum_blocking_failures_per_sample": 1,
+      "minimum_correction_strategies_per_sample": 1
+    },
+    "failure_coverage": {
+      "required_codes": [
+        "SUBJECT_DRIFT",
+        "MATERIAL_PLASTICITY",
+        "COMPOSITION_IMBALANCE",
+        "DETAIL_OR_ANATOMY_ARTIFACT",
+        "COMMERCIAL_UNFITNESS"
+      ],
+      "minimum_occurrences_per_failure_code": 2
+    },
+    "deterministic_summary_fields": [
+      "valid",
+      "dataset_version",
+      "total",
+      "accepted",
+      "rejected",
+      "failure_frequency",
+      "correction_strategy_presence",
+      "sample_ids_unique"
+    ],
+    "correction_strategy_assessment": "presence_only_not_effectiveness"
+  }
+}

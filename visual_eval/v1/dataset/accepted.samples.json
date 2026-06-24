@@ -1,0 +1,402 @@
+[
+  {
+    "schema_version": "local_visual_eval.sample.v1",
+    "sample_id": "lv_eval_v1_2_accepted_lantern_product_review_001",
+    "decision": "accepted",
+    "asset_ref": {
+      "kind": "metadata_only_reference",
+      "ref": "synthetic://local_visual_eval/v1.2/accepted_lantern_product_review_001",
+      "image_binary_read_performed": false
+    },
+    "shot_id": "lantern_product_review_clean_front_three_quarter",
+    "prompt_ref": "prompts/image_generation/local_visual_eval_lantern_product_review_v1.yaml#front_three_quarter",
+    "review_scores": {
+      "subject_fidelity": 5,
+      "composition": 4,
+      "lighting": 5,
+      "material_realism": 4,
+      "commercial_fitness": 4
+    },
+    "failure_codes": [],
+    "correction_strategies": [],
+    "reviewer_notes": {
+      "summary": "Accepted synthetic lantern review sample with stable product identity, clean front-facing readability, and clear rechargeable lantern details.",
+      "positive_reasons": [
+        "single lantern form is easy to identify",
+        "handle, diffuser, base, and control area remain readable",
+        "product-first framing supports review use"
+      ],
+      "watch_items": [
+        "keep base edge visible",
+        "avoid oversized background props"
+      ]
+    },
+    "provenance": {
+      "metadata_only": true,
+      "provider_contact_performed": false,
+      "image_generation_performed": false,
+      "memory_write_performed": false
+    },
+    "created_at": "2026-06-24T00:00:00+08:00"
+  },
+  {
+    "schema_version": "local_visual_eval.sample.v1",
+    "sample_id": "lv_eval_v1_2_accepted_lantern_product_review_002",
+    "decision": "accepted",
+    "asset_ref": {
+      "kind": "metadata_only_reference",
+      "ref": "synthetic://local_visual_eval/v1.2/accepted_lantern_product_review_002",
+      "image_binary_read_performed": false
+    },
+    "shot_id": "lantern_product_review_box_contents_layout",
+    "prompt_ref": "prompts/image_generation/local_visual_eval_lantern_product_review_v1.yaml#box_contents",
+    "review_scores": {
+      "subject_fidelity": 4,
+      "composition": 5,
+      "lighting": 5,
+      "material_realism": 4,
+      "commercial_fitness": 5
+    },
+    "failure_codes": [],
+    "correction_strategies": [],
+    "reviewer_notes": {
+      "summary": "Accepted synthetic box-contents review sample with organized accessories and a clearly dominant lantern subject.",
+      "positive_reasons": [
+        "lantern remains the primary product in the layout",
+        "accessories are separated without visual clutter",
+        "even tabletop lighting supports review clarity"
+      ],
+      "watch_items": [
+        "keep accessory count modest",
+        "avoid implying a real retail package"
+      ]
+    },
+    "provenance": {
+      "metadata_only": true,
+      "provider_contact_performed": false,
+      "image_generation_performed": false,
+      "memory_write_performed": false
+    },
+    "created_at": "2026-06-24T00:00:00+08:00"
+  },
+  {
+    "schema_version": "local_visual_eval.sample.v1",
+    "sample_id": "lv_eval_v1_2_accepted_lantern_product_review_003",
+    "decision": "accepted",
+    "asset_ref": {
+      "kind": "metadata_only_reference",
+      "ref": "synthetic://local_visual_eval/v1.2/accepted_lantern_product_review_003",
+      "image_binary_read_performed": false
+    },
+    "shot_id": "lantern_product_review_side_profile_scale_read",
+    "prompt_ref": "prompts/image_generation/local_visual_eval_lantern_product_review_v1.yaml#side_profile",
+    "review_scores": {
+      "subject_fidelity": 5,
+      "composition": 5,
+      "lighting": 4,
+      "material_realism": 4,
+      "commercial_fitness": 5
+    },
+    "failure_codes": [],
+    "correction_strategies": [],
+    "reviewer_notes": {
+      "summary": "Accepted synthetic side-profile sample that supports product review comparison through clear silhouette and balanced spacing.",
+      "positive_reasons": [
+        "side silhouette communicates handle height and body depth",
+        "neutral surrounding space helps scale judgment",
+        "materials stay believable under soft review lighting"
+      ],
+      "watch_items": [
+        "maintain diffuser edge separation",
+        "do not flatten the handle shape"
+      ]
+    },
+    "provenance": {
+      "metadata_only": true,
+      "provider_contact_performed": false,
+      "image_generation_performed": false,
+      "memory_write_performed": false
+    },
+    "created_at": "2026-06-24T00:00:00+08:00"
+  },
+  {
+    "schema_version": "local_visual_eval.sample.v1",
+    "sample_id": "lv_eval_v1_2_accepted_lantern_product_review_004",
+    "decision": "accepted",
+    "asset_ref": {
+      "kind": "metadata_only_reference",
+      "ref": "synthetic://local_visual_eval/v1.2/accepted_lantern_product_review_004",
+      "image_binary_read_performed": false
+    },
+    "shot_id": "lantern_product_review_warm_glow_tabletop",
+    "prompt_ref": "prompts/image_generation/local_visual_eval_lantern_product_review_v1.yaml#warm_glow_tabletop",
+    "review_scores": {
+      "subject_fidelity": 4,
+      "composition": 4,
+      "lighting": 5,
+      "material_realism": 5,
+      "commercial_fitness": 4
+    },
+    "failure_codes": [],
+    "correction_strategies": [],
+    "reviewer_notes": {
+      "summary": "Accepted synthetic tabletop glow sample with controlled illumination and convincing diffuser material.",
+      "positive_reasons": [
+        "warm output reads as intentional lantern illumination",
+        "diffuser and body materials remain distinct",
+        "scene supports product-review lighting assessment"
+      ],
+      "watch_items": [
+        "preserve detail in the lit diffuser",
+        "keep shadows from hiding the controls"
+      ]
+    },
+    "provenance": {
+      "metadata_only": true,
+      "provider_contact_performed": false,
+      "image_generation_performed": false,
+      "memory_write_performed": false
+    },
+    "created_at": "2026-06-24T00:00:00+08:00"
+  },
+  {
+    "schema_version": "local_visual_eval.sample.v1",
+    "sample_id": "lv_eval_v1_2_accepted_lantern_product_review_005",
+    "decision": "accepted",
+    "asset_ref": {
+      "kind": "metadata_only_reference",
+      "ref": "synthetic://local_visual_eval/v1.2/accepted_lantern_product_review_005",
+      "image_binary_read_performed": false
+    },
+    "shot_id": "lantern_product_review_control_button_macro",
+    "prompt_ref": "prompts/image_generation/local_visual_eval_lantern_product_review_v1.yaml#control_button_macro",
+    "review_scores": {
+      "subject_fidelity": 5,
+      "composition": 4,
+      "lighting": 4,
+      "material_realism": 5,
+      "commercial_fitness": 5
+    },
+    "failure_codes": [],
+    "correction_strategies": [],
+    "reviewer_notes": {
+      "summary": "Accepted synthetic control-detail sample with a believable close view of the lantern button area and surface finish.",
+      "positive_reasons": [
+        "control area is legible without inventing brand text",
+        "plastic and rubber surfaces read as distinct materials",
+        "macro framing is useful for product review notes"
+      ],
+      "watch_items": [
+        "avoid fake certification markings",
+        "keep depth of field from hiding the button edge"
+      ]
+    },
+    "provenance": {
+      "metadata_only": true,
+      "provider_contact_performed": false,
+      "image_generation_performed": false,
+      "memory_write_performed": false
+    },
+    "created_at": "2026-06-24T00:00:00+08:00"
+  },
+  {
+    "schema_version": "local_visual_eval.sample.v1",
+    "sample_id": "lv_eval_v1_2_accepted_lantern_product_review_006",
+    "decision": "accepted",
+    "asset_ref": {
+      "kind": "metadata_only_reference",
+      "ref": "synthetic://local_visual_eval/v1.2/accepted_lantern_product_review_006",
+      "image_binary_read_performed": false
+    },
+    "shot_id": "lantern_product_review_handle_hanging_demo",
+    "prompt_ref": "prompts/image_generation/local_visual_eval_lantern_product_review_v1.yaml#handle_hanging_demo",
+    "review_scores": {
+      "subject_fidelity": 4,
+      "composition": 5,
+      "lighting": 4,
+      "material_realism": 5,
+      "commercial_fitness": 4
+    },
+    "failure_codes": [],
+    "correction_strategies": [],
+    "reviewer_notes": {
+      "summary": "Accepted synthetic hanging-use sample with clear handle function and restrained context.",
+      "positive_reasons": [
+        "handle attachment reads as structurally plausible",
+        "lantern remains centered and unobstructed",
+        "context demonstrates use without distracting from review"
+      ],
+      "watch_items": [
+        "avoid unrealistic suspension tension",
+        "keep background texture secondary"
+      ]
+    },
+    "provenance": {
+      "metadata_only": true,
+      "provider_contact_performed": false,
+      "image_generation_performed": false,
+      "memory_write_performed": false
+    },
+    "created_at": "2026-06-24T00:00:00+08:00"
+  },
+  {
+    "schema_version": "local_visual_eval.sample.v1",
+    "sample_id": "lv_eval_v1_2_accepted_lantern_product_review_007",
+    "decision": "accepted",
+    "asset_ref": {
+      "kind": "metadata_only_reference",
+      "ref": "synthetic://local_visual_eval/v1.2/accepted_lantern_product_review_007",
+      "image_binary_read_performed": false
+    },
+    "shot_id": "lantern_product_review_material_texture_closeup",
+    "prompt_ref": "prompts/image_generation/local_visual_eval_lantern_product_review_v1.yaml#material_texture_closeup",
+    "review_scores": {
+      "subject_fidelity": 5,
+      "composition": 5,
+      "lighting": 5,
+      "material_realism": 4,
+      "commercial_fitness": 4
+    },
+    "failure_codes": [],
+    "correction_strategies": [],
+    "reviewer_notes": {
+      "summary": "Accepted synthetic material-detail sample with strong readability of matte housing, translucent diffuser, and small seams.",
+      "positive_reasons": [
+        "close framing still preserves lantern identity",
+        "surface textures are review-relevant",
+        "lighting reveals material contrast cleanly"
+      ],
+      "watch_items": [
+        "do not exaggerate scratches or wear",
+        "keep seam geometry consistent"
+      ]
+    },
+    "provenance": {
+      "metadata_only": true,
+      "provider_contact_performed": false,
+      "image_generation_performed": false,
+      "memory_write_performed": false
+    },
+    "created_at": "2026-06-24T00:00:00+08:00"
+  },
+  {
+    "schema_version": "local_visual_eval.sample.v1",
+    "sample_id": "lv_eval_v1_2_accepted_lantern_product_review_008",
+    "decision": "accepted",
+    "asset_ref": {
+      "kind": "metadata_only_reference",
+      "ref": "synthetic://local_visual_eval/v1.2/accepted_lantern_product_review_008",
+      "image_binary_read_performed": false
+    },
+    "shot_id": "lantern_product_review_outdoor_table_context",
+    "prompt_ref": "prompts/image_generation/local_visual_eval_lantern_product_review_v1.yaml#outdoor_table_context",
+    "review_scores": {
+      "subject_fidelity": 4,
+      "composition": 4,
+      "lighting": 4,
+      "material_realism": 5,
+      "commercial_fitness": 5
+    },
+    "failure_codes": [],
+    "correction_strategies": [],
+    "reviewer_notes": {
+      "summary": "Accepted synthetic outdoor-context sample that keeps the lantern reviewable while suggesting practical campsite use.",
+      "positive_reasons": [
+        "lantern is not obscured by contextual props",
+        "outdoor surface and ambient light feel plausible",
+        "commercial review framing remains calm and useful"
+      ],
+      "watch_items": [
+        "avoid making the scene look like a lifestyle ad only",
+        "preserve product edge contrast"
+      ]
+    },
+    "provenance": {
+      "metadata_only": true,
+      "provider_contact_performed": false,
+      "image_generation_performed": false,
+      "memory_write_performed": false
+    },
+    "created_at": "2026-06-24T00:00:00+08:00"
+  },
+  {
+    "schema_version": "local_visual_eval.sample.v1",
+    "sample_id": "lv_eval_v1_2_accepted_lantern_product_review_009",
+    "decision": "accepted",
+    "asset_ref": {
+      "kind": "metadata_only_reference",
+      "ref": "synthetic://local_visual_eval/v1.2/accepted_lantern_product_review_009",
+      "image_binary_read_performed": false
+    },
+    "shot_id": "lantern_product_review_charging_port_detail",
+    "prompt_ref": "prompts/image_generation/local_visual_eval_lantern_product_review_v1.yaml#charging_port_detail",
+    "review_scores": {
+      "subject_fidelity": 5,
+      "composition": 4,
+      "lighting": 5,
+      "material_realism": 5,
+      "commercial_fitness": 4
+    },
+    "failure_codes": [],
+    "correction_strategies": [],
+    "reviewer_notes": {
+      "summary": "Accepted synthetic charging-port review sample with credible detail and no brand or credential-like markings.",
+      "positive_reasons": [
+        "charging area is visible and useful for review",
+        "port cover and housing materials look plausible",
+        "lighting separates the detail from the lantern body"
+      ],
+      "watch_items": [
+        "avoid unreadable tiny labels",
+        "keep port placement consistent with the product body"
+      ]
+    },
+    "provenance": {
+      "metadata_only": true,
+      "provider_contact_performed": false,
+      "image_generation_performed": false,
+      "memory_write_performed": false
+    },
+    "created_at": "2026-06-24T00:00:00+08:00"
+  },
+  {
+    "schema_version": "local_visual_eval.sample.v1",
+    "sample_id": "lv_eval_v1_2_accepted_lantern_product_review_010",
+    "decision": "accepted",
+    "asset_ref": {
+      "kind": "metadata_only_reference",
+      "ref": "synthetic://local_visual_eval/v1.2/accepted_lantern_product_review_010",
+      "image_binary_read_performed": false
+    },
+    "shot_id": "lantern_product_review_final_hero_summary",
+    "prompt_ref": "prompts/image_generation/local_visual_eval_lantern_product_review_v1.yaml#final_hero_summary",
+    "review_scores": {
+      "subject_fidelity": 4,
+      "composition": 5,
+      "lighting": 5,
+      "material_realism": 5,
+      "commercial_fitness": 5
+    },
+    "failure_codes": [],
+    "correction_strategies": [],
+    "reviewer_notes": {
+      "summary": "Accepted synthetic final review hero sample with polished composition, believable materials, and clear commercial usability.",
+      "positive_reasons": [
+        "lantern identity is stable and review-ready",
+        "balanced lighting supports product inspection",
+        "composition is strong enough for accepted-sample reuse"
+      ],
+      "watch_items": [
+        "keep hero polish from hiding practical details",
+        "avoid adding brand-like marks"
+      ]
+    },
+    "provenance": {
+      "metadata_only": true,
+      "provider_contact_performed": false,
+      "image_generation_performed": false,
+      "memory_write_performed": false
+    },
+    "created_at": "2026-06-24T00:00:00+08:00"
+  }
+]
