@@ -1,0 +1,41 @@
+# Sanitized Human Review Import Protocol v1.4
+
+This directory defines a local, metadata-only import protocol for sanitized human review wrappers.
+
+It is an import protocol, not an actual import of real review data. The included fixtures are synthetic and exist only to test privacy validation, existing visual sample validation, deterministic normalization, and import regression behavior.
+
+## Contents
+
+- `human_review_import.schema.json`: strict wrapper shape for sanitized review imports.
+- `import_policy.json`: allowed source labels, attestation rules, unsafe pattern classes, and stable violation codes.
+- `validate_and_normalize_human_review.js`: standard-library validator and in-memory normalizer.
+- `import_regression_manifest.json`: required mutation cases and expected stable `code` / `path` assertions.
+- `run_import_regression.js`: standard-library in-memory mutation runner.
+- `fixtures/accepted.sanitized.review.json`: synthetic accepted wrapper fixture.
+- `fixtures/rejected.sanitized.review.json`: synthetic rejected wrapper fixture.
+
+## Boundaries
+
+This protocol does not store raw source payloads, does not write to the dataset, does not write to a registry, does not write memory, does not read real images, and does not call providers, APIs, plugins, VCPToolBox, VCPChat, or Electron.
+
+The fixtures use `consent_basis: synthetic_fixture`. They do not prove that a real reviewer exists, do not verify reviewer identity, and do not prove that real human review has occurred.
+
+## Validation
+
+Run a fixture through the normalizer:
+
+```bash
+node visual_eval/v1/import/validate_and_normalize_human_review.js visual_eval/v1/import/fixtures/accepted.sanitized.review.json
+```
+
+Run the import regression suite:
+
+```bash
+node visual_eval/v1/import/run_import_regression.js
+```
+
+The normalizer rejects unsupported wrapper versions, unknown wrapper fields, invalid source labels, unsafe consent/source-retention states, failed sanitization attestations, unsafe reviewer aliases, personal data patterns, secret-like patterns, absolute paths, path traversal, credential-bearing URLs, raw payload fields, invalid visual samples, and sample decision mismatches.
+
+Successful CLI output is a summary only. The in-memory API can return a normalized sample, but this protocol does not persist it.
+
+Future work may accept explicitly provided sanitized human review records under a separate task. That future step must still reject raw private data and must not infer real human review from these synthetic fixtures.

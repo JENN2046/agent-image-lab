@@ -1,0 +1,81 @@
+{
+  "schema_version": "local_visual_eval.human_review_import.schema.v1",
+  "title": "Sanitized Human Review Import Wrapper v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "import_schema_version",
+    "import_id",
+    "record_origin",
+    "reviewer_alias",
+    "reviewed_at",
+    "consent_basis",
+    "source_disposition",
+    "sanitization_attestation",
+    "sample"
+  ],
+  "properties": {
+    "import_schema_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "import_id": {
+      "type": "string"
+    },
+    "record_origin": {
+      "type": "string",
+      "enum": [
+        "human_review_sanitized"
+      ]
+    },
+    "reviewer_alias": {
+      "type": "string",
+      "description": "Pseudonymous reviewer identifier, not a real name, email, phone, URL, or path."
+    },
+    "reviewed_at": {
+      "type": "string"
+    },
+    "consent_basis": {
+      "type": "string",
+      "enum": [
+        "synthetic_fixture"
+      ]
+    },
+    "source_disposition": {
+      "type": "string",
+      "const": "raw_source_not_retained"
+    },
+    "sanitization_attestation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "raw_source_retained",
+        "contains_personal_data",
+        "contains_secret",
+        "contains_absolute_path"
+      ],
+      "properties": {
+        "raw_source_retained": {
+          "type": "boolean",
+          "const": false
+        },
+        "contains_personal_data": {
+          "type": "boolean",
+          "const": false
+        },
+        "contains_secret": {
+          "type": "boolean",
+          "const": false
+        },
+        "contains_absolute_path": {
+          "type": "boolean",
+          "const": false
+        }
+      }
+    },
+    "sample": {
+      "type": "object",
+      "description": "A complete Local Visual Eval sample v1 object validated by the existing visual sample validator."
+    }
+  }
+}

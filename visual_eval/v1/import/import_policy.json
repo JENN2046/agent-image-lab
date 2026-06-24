@@ -1,0 +1,77 @@
+{
+  "policy_version": "local_visual_eval.human_review_import_policy.v1",
+  "compatible_import_schema_versions": [
+    "1.0.0"
+  ],
+  "allowed_record_origins": [
+    "human_review_sanitized"
+  ],
+  "forbidden_record_origins": [
+    "human_review",
+    "real_customer_review",
+    "production_review",
+    "human_verified"
+  ],
+  "allowed_consent_basis": [
+    "synthetic_fixture"
+  ],
+  "required_source_disposition": "raw_source_not_retained",
+  "raw_source_storage_allowed": false,
+  "required_sanitization_attestation": {
+    "raw_source_retained": false,
+    "contains_personal_data": false,
+    "contains_secret": false,
+    "contains_absolute_path": false
+  },
+  "reviewer_alias_contract": {
+    "format": "pseudonymous_identifier",
+    "pattern_description": "lowercase letter followed by lowercase letters, digits, or underscores; no whitespace-only aliases",
+    "forbidden": [
+      "email",
+      "phone_number",
+      "full_person_name_field",
+      "absolute_path",
+      "URL",
+      "whitespace_only"
+    ]
+  },
+  "unsafe_pattern_classes": [
+    "email_address",
+    "telephone_number",
+    "bearer_token",
+    "api_key_assignment",
+    "secret_key_prefix",
+    "jwt_like_token",
+    "credential_bearing_url",
+    "absolute_windows_path",
+    "absolute_unix_path",
+    "UNC_path",
+    "file_url",
+    "parent_directory_traversal",
+    "raw_payload_field",
+    "cookie_or_session_field"
+  ],
+  "stable_violation_codes": [
+    "UNSUPPORTED_IMPORT_SCHEMA_VERSION",
+    "UNKNOWN_IMPORT_FIELD",
+    "INVALID_RECORD_ORIGIN",
+    "INVALID_CONSENT_BASIS",
+    "RAW_SOURCE_RETENTION_FORBIDDEN",
+    "SANITIZATION_ATTESTATION_FAILED",
+    "INVALID_REVIEWER_ALIAS",
+    "PERSONAL_DATA_PATTERN_DETECTED",
+    "SECRET_PATTERN_DETECTED",
+    "ABSOLUTE_PATH_DETECTED",
+    "PATH_TRAVERSAL_DETECTED",
+    "CREDENTIAL_URL_DETECTED",
+    "RAW_PAYLOAD_FIELD_FORBIDDEN",
+    "IMPORT_SAMPLE_INVALID",
+    "IMPORT_DECISION_MISMATCH"
+  ],
+  "normalization": {
+    "persist_raw_source": false,
+    "persist_wrapper": false,
+    "cli_success_output": "summary_only",
+    "normalized_sample_returned_in_memory_only": true
+  }
+}

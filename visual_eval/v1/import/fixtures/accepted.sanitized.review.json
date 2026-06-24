@@ -1,0 +1,55 @@
+{
+  "import_schema_version": "1.0.0",
+  "import_id": "import_fixture_accepted_001",
+  "record_origin": "human_review_sanitized",
+  "reviewer_alias": "reviewer_alpha",
+  "reviewed_at": "2026-06-01T10:00:00Z",
+  "consent_basis": "synthetic_fixture",
+  "source_disposition": "raw_source_not_retained",
+  "sanitization_attestation": {
+    "raw_source_retained": false,
+    "contains_personal_data": false,
+    "contains_secret": false,
+    "contains_absolute_path": false
+  },
+  "sample": {
+    "schema_version": "local_visual_eval.sample.v1",
+    "sample_id": "import_fixture_sample_accepted_001",
+    "decision": "accepted",
+    "asset_ref": {
+      "kind": "metadata_only_reference",
+      "ref": "synthetic://local_visual_eval/import/v1.4/accepted_fixture_001",
+      "image_binary_read_performed": false
+    },
+    "shot_id": "sanitized_import_lantern_review_front_three_quarter",
+    "prompt_ref": "prompts/image_generation/local_visual_eval_import_fixture_v1.yaml#accepted_front_three_quarter",
+    "review_scores": {
+      "subject_fidelity": 5,
+      "composition": 4,
+      "lighting": 5,
+      "material_realism": 4,
+      "commercial_fitness": 5
+    },
+    "failure_codes": [],
+    "correction_strategies": [],
+    "reviewer_notes": {
+      "summary": "Synthetic sanitized accepted review wrapper for a portable lantern sample with clear product identity and commercial readiness.",
+      "positive_reasons": [
+        "single lantern identity remains stable",
+        "materials and controls are readable",
+        "composition supports product review"
+      ],
+      "watch_items": [
+        "keep contextual props secondary",
+        "avoid adding readable brand marks"
+      ]
+    },
+    "provenance": {
+      "metadata_only": true,
+      "provider_contact_performed": false,
+      "image_generation_performed": false,
+      "memory_write_performed": false
+    },
+    "created_at": "2026-06-24T00:00:00+08:00"
+  }
+}

@@ -1,0 +1,182 @@
+{
+  "regression_version": "local_visual_eval.human_review_import_regression.v1.4",
+  "import_schema_version": "1.0.0",
+  "assertion_contract": {
+    "asserts": [
+      "valid",
+      "violations[].code",
+      "violations[].path"
+    ],
+    "does_not_assert": [
+      "violations[].message",
+      "full stdout",
+      "raw input value"
+    ],
+    "mutation_must_change_base_fixture": true,
+    "no_disk_mutation": true
+  },
+  "required_cases": [
+    {
+      "case_id": "UNSUPPORTED_IMPORT_SCHEMA_VERSION",
+      "expected_violations": [
+        {
+          "code": "UNSUPPORTED_IMPORT_SCHEMA_VERSION",
+          "path": "$.import_schema_version"
+        }
+      ]
+    },
+    {
+      "case_id": "UNKNOWN_IMPORT_TOP_LEVEL_FIELD",
+      "expected_violations": [
+        {
+          "code": "UNKNOWN_IMPORT_FIELD",
+          "path": "$.unexpected_field"
+        }
+      ]
+    },
+    {
+      "case_id": "WRONG_RECORD_ORIGIN",
+      "expected_violations": [
+        {
+          "code": "INVALID_RECORD_ORIGIN",
+          "path": "$.record_origin"
+        }
+      ]
+    },
+    {
+      "case_id": "HUMAN_ORIGIN_WITHOUT_SANITIZED_MARKER",
+      "expected_violations": [
+        {
+          "code": "INVALID_RECORD_ORIGIN",
+          "path": "$.record_origin"
+        }
+      ]
+    },
+    {
+      "case_id": "WRONG_CONSENT_BASIS",
+      "expected_violations": [
+        {
+          "code": "INVALID_CONSENT_BASIS",
+          "path": "$.consent_basis"
+        }
+      ]
+    },
+    {
+      "case_id": "RAW_SOURCE_RETAINED_TRUE",
+      "expected_violations": [
+        {
+          "code": "RAW_SOURCE_RETENTION_FORBIDDEN",
+          "path": "$.sanitization_attestation.raw_source_retained"
+        }
+      ]
+    },
+    {
+      "case_id": "PERSONAL_DATA_ATTESTATION_TRUE",
+      "expected_violations": [
+        {
+          "code": "SANITIZATION_ATTESTATION_FAILED",
+          "path": "$.sanitization_attestation.contains_personal_data"
+        }
+      ]
+    },
+    {
+      "case_id": "SECRET_ATTESTATION_TRUE",
+      "expected_violations": [
+        {
+          "code": "SANITIZATION_ATTESTATION_FAILED",
+          "path": "$.sanitization_attestation.contains_secret"
+        }
+      ]
+    },
+    {
+      "case_id": "ABSOLUTE_PATH_ATTESTATION_TRUE",
+      "expected_violations": [
+        {
+          "code": "SANITIZATION_ATTESTATION_FAILED",
+          "path": "$.sanitization_attestation.contains_absolute_path"
+        }
+      ]
+    },
+    {
+      "case_id": "REVIEWER_ALIAS_IS_EMAIL",
+      "expected_violations": [
+        {
+          "code": "PERSONAL_DATA_PATTERN_DETECTED",
+          "path": "$.reviewer_alias"
+        }
+      ]
+    },
+    {
+      "case_id": "NOTES_CONTAIN_EMAIL",
+      "expected_violations": [
+        {
+          "code": "PERSONAL_DATA_PATTERN_DETECTED",
+          "path": "$.sample.reviewer_notes.summary"
+        }
+      ]
+    },
+    {
+      "case_id": "NOTES_CONTAIN_PHONE",
+      "expected_violations": [
+        {
+          "code": "PERSONAL_DATA_PATTERN_DETECTED",
+          "path": "$.sample.reviewer_notes.watch_items[0]"
+        }
+      ]
+    },
+    {
+      "case_id": "NOTES_CONTAIN_BEARER_TOKEN",
+      "expected_violations": [
+        {
+          "code": "SECRET_PATTERN_DETECTED",
+          "path": "$.sample.reviewer_notes.summary"
+        }
+      ]
+    },
+    {
+      "case_id": "ASSET_REF_ABSOLUTE_WINDOWS_PATH",
+      "expected_violations": [
+        {
+          "code": "ABSOLUTE_PATH_DETECTED",
+          "path": "$.sample.asset_ref.ref"
+        }
+      ]
+    },
+    {
+      "case_id": "PROMPT_REF_UNIX_ABSOLUTE_PATH",
+      "expected_violations": [
+        {
+          "code": "ABSOLUTE_PATH_DETECTED",
+          "path": "$.sample.prompt_ref"
+        }
+      ]
+    },
+    {
+      "case_id": "ASSET_REF_UNC_PATH",
+      "expected_violations": [
+        {
+          "code": "ABSOLUTE_PATH_DETECTED",
+          "path": "$.sample.asset_ref.ref"
+        }
+      ]
+    },
+    {
+      "case_id": "REFERENCE_PATH_TRAVERSAL",
+      "expected_violations": [
+        {
+          "code": "PATH_TRAVERSAL_DETECTED",
+          "path": "$.sample.asset_ref.ref"
+        }
+      ]
+    },
+    {
+      "case_id": "CREDENTIAL_BEARING_URL",
+      "expected_violations": [
+        {
+          "code": "CREDENTIAL_URL_DETECTED",
+          "path": "$.sample.asset_ref.ref"
+        }
+      ]
+    }
+  ]
+}

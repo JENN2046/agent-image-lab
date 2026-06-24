@@ -1,0 +1,57 @@
+{
+  "import_schema_version": "1.0.0",
+  "import_id": "import_fixture_rejected_001",
+  "record_origin": "human_review_sanitized",
+  "reviewer_alias": "reviewer_beta",
+  "reviewed_at": "2026-06-01T10:05:00Z",
+  "consent_basis": "synthetic_fixture",
+  "source_disposition": "raw_source_not_retained",
+  "sanitization_attestation": {
+    "raw_source_retained": false,
+    "contains_personal_data": false,
+    "contains_secret": false,
+    "contains_absolute_path": false
+  },
+  "sample": {
+    "schema_version": "local_visual_eval.sample.v1",
+    "sample_id": "import_fixture_sample_rejected_001",
+    "decision": "rejected",
+    "asset_ref": {
+      "kind": "metadata_only_reference",
+      "ref": "synthetic://local_visual_eval/import/v1.4/rejected_fixture_001",
+      "image_binary_read_performed": false
+    },
+    "shot_id": "sanitized_import_lantern_review_material_failure",
+    "prompt_ref": "prompts/image_generation/local_visual_eval_import_fixture_v1.yaml#rejected_material_failure",
+    "review_scores": {
+      "subject_fidelity": 3,
+      "composition": 4,
+      "lighting": 3,
+      "material_realism": 2,
+      "commercial_fitness": 2
+    },
+    "failure_codes": [
+      "MATERIAL_PLASTICITY"
+    ],
+    "correction_strategies": [
+      "Restate matte coated metal, frosted diffuser edge, and separate rubber control details before retry."
+    ],
+    "reviewer_notes": {
+      "summary": "Synthetic sanitized rejected review wrapper for a lantern sample where material realism and commercial fitness fail the local policy.",
+      "positive_reasons": [
+        "single product route is recoverable"
+      ],
+      "watch_items": [
+        "reduce over-smoothed plastic finish",
+        "preserve diffuser edge detail"
+      ]
+    },
+    "provenance": {
+      "metadata_only": true,
+      "provider_contact_performed": false,
+      "image_generation_performed": false,
+      "memory_write_performed": false
+    },
+    "created_at": "2026-06-24T00:00:00+08:00"
+  }
+}
