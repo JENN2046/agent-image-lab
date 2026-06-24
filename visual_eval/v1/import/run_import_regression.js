@@ -20,6 +20,34 @@ function stableJson(value) {
   return JSON.stringify(value);
 }
 
+function violationPair(violation) {
+  return {
+    code: violation.code,
+    path: violation.path
+  };
+}
+
+function violationKey(violation) {
+  return `${violation.code}\u0000${violation.path}`;
+}
+
+function normalizeViolationPairs(violations) {
+  const seen = new Set();
+  const pairs = [];
+  for (const violation of violations.map(violationPair)) {
+    const key = violationKey(violation);
+    if (!seen.has(key)) {
+      seen.add(key);
+      pairs.push(violation);
+    }
+  }
+  return pairs.sort((left, right) => {
+    const leftKey = violationKey(left);
+    const rightKey = violationKey(right);
+    return leftKey.localeCompare(rightKey);
+  });
+}
+
 function loadBaseInput() {
   const baseDir = __dirname;
   const visualEvalDir = path.resolve(baseDir, "..");
@@ -34,6 +62,47 @@ function loadBaseInput() {
 }
 
 const MUTATIONS = {
+  MISSING_IMPORT_ID(input) {
+    delete input.importRecord.import_id;
+  },
+  MISSING_REVIEWED_AT(input) {
+    delete input.importRecord.reviewed_at;
+  },
+  EMPTY_IMPORT_ID(input) {
+    input.importRecord.import_id = "";
+  },
+  INVALID_IMPORT_ID(input) {
+    input.importRecord.import_id = "reviewer alpha";
+  },
+  INVALID_REVIEWED_AT(input) {
+    input.importRecord.reviewed_at = "2026-06-01 10:00:00";
+  },
+  IMPORT_SCHEMA_REQUIRED_FIELD_REMOVED(input) {
+    input.importSchema.required = input.importSchema.required.filter((field) => field !== "import_id");
+  },
+  IMPORT_POLICY_ORIGINS_MISSING(input) {
+    delete input.importPolicy.allowed_record_origins;
+  },
+  IMPORT_POLICY_CONSENT_MISSING(input) {
+    delete input.importPolicy.allowed_consent_basis;
+  },
+  IMPORT_POLICY_ATTESTATION_MISSING(input) {
+    delete input.importPolicy.required_sanitization_attestation;
+  },
+  EMBEDDED_WINDOWS_PATH_IN_NOTES(input) {
+    input.importRecord.sample.reviewer_notes.summary = "Synthetic note references C:\\Users\\Example\\review.png inside text.";
+  },
+  EMBEDDED_CREDENTIAL_URL_IN_NOTES(input) {
+    input.importRecord.sample.reviewer_notes.summary = "Synthetic note references https://user:pass@example.test/review.png inside text.";
+  },
+  EMBEDDED_FILE_URL_IN_NOTES(input) {
+    input.importRecord.sample.reviewer_notes.summary = "Synthetic note references file:///C:/Users/Example/review.png inside text.";
+  },
+  INVALID_RESULT_RETURNS_NO_NORMALIZED_SAMPLE(input) {
+    input.importRecord.import_schema_version = "9.9.9";
+  },
+  INPUT_OBJECT_REMAINS_UNCHANGED(_input) {
+  },
   UNSUPPORTED_IMPORT_SCHEMA_VERSION(input) {
     input.importRecord.import_schema_version = "9.9.9";
   },
@@ -90,11 +159,23 @@ const MUTATIONS = {
   }
 };
 
-function hasExpectedViolation(actualViolations, expectedViolation) {
-  return actualViolations.some((violation) => {
-    return violation.code === expectedViolation.code
-      && violation.path === expectedViolation.path;
-  });
+function compareViolationPairs(actualViolations, expectedViolations, allowAdditionalViolations) {
+  const actual = normalizeViolationPairs(actualViolations);
+  const expected = normalizeViolationPairs(expectedViolations);
+  const expectedKeys = new Set(expected.map(violationKey));
+  const actualKeys = new Set(actual.map(violationKey));
+  const missing = expected.filter((violation) => !actualKeys.has(violationKey(violation)));
+  const extra = allowAdditionalViolations
+    ? []
+    : actual.filter((violation) => !expectedKeys.has(violationKey(violation)));
+
+  return {
+    actual,
+    expected,
+    missing,
+    extra,
+    matched: missing.length === 0 && extra.length === 0
+  };
 }
 
 function runCase(baseInput, caseDef) {
@@ -110,24 +191,50 @@ function runCase(baseInput, caseDef) {
   const input = cloneJson(baseInput);
   const before = stableJson(input);
   mutate(input);
-  const changed = before !== stableJson(input);
+  const afterMutation = stableJson(input);
+  const changed = before !== afterMutation;
   const result = validateAndNormalizeHumanReview(input);
-  const missing = caseDef.expected_violations.filter((expectedViolation) => {
-    return !hasExpectedViolation(result.violations, expectedViolation);
-  });
-  const passed = changed && result.valid === false && missing.length === 0;
+  const afterValidation = stableJson(input);
+  const expectedValid = caseDef.expected_valid === true;
+  const skipMutationChangeCheck = caseDef.skip_mutation_change_check === true;
+  const inputUnchanged = afterMutation === afterValidation;
+  const expectedViolations = Array.isArray(caseDef.expected_violations)
+    ? caseDef.expected_violations
+    : [];
+  const comparison = compareViolationPairs(
+    result.violations,
+    expectedViolations,
+    caseDef.allow_additional_violations === true
+  );
+  const normalizedSampleOk = expectedValid
+    ? true
+    : result.normalized_sample === null;
+  const explicitNullCheckOk = caseDef.assert_normalized_sample_null === true
+    ? result.normalized_sample === null
+    : true;
+  const explicitUnchangedCheckOk = caseDef.assert_input_unchanged === true
+    ? inputUnchanged
+    : true;
+  const passed = (changed || skipMutationChangeCheck)
+    && result.valid === expectedValid
+    && comparison.matched
+    && normalizedSampleOk
+    && explicitNullCheckOk
+    && explicitUnchangedCheckOk
+    && inputUnchanged;
 
   return {
     case_id: caseDef.case_id,
     passed,
     changed,
     valid: result.valid,
+    expected_valid: expectedValid,
+    input_unchanged_by_validator: inputUnchanged,
+    normalized_sample_is_null: result.normalized_sample === null,
     expected_violations: caseDef.expected_violations,
-    missing_expected_violations: missing,
-    observed_violations: result.violations.map((violation) => ({
-      code: violation.code,
-      path: violation.path
-    }))
+    missing_expected_violations: comparison.missing,
+    extra_observed_violations: comparison.extra,
+    observed_violations: comparison.actual
   };
 }
 
@@ -135,7 +242,9 @@ function runRegression() {
   const baseDir = __dirname;
   const manifest = readJson(path.join(baseDir, "import_regression_manifest.json"));
   const baseInput = loadBaseInput();
+  const baseBeforeValidation = stableJson(baseInput);
   const baseResult = validateAndNormalizeHumanReview(baseInput);
+  const baseInputUnchanged = baseBeforeValidation === stableJson(baseInput);
   const failures = [];
 
   if (!baseResult.valid) {
@@ -148,8 +257,21 @@ function runRegression() {
       }))
     });
   }
+  if (!baseInputUnchanged) {
+    failures.push({
+      case_id: "BASE_IMPORT_INPUT_UNCHANGED",
+      reason: "base_input_must_not_be_mutated_by_validator"
+    });
+  }
 
   const cases = Array.isArray(manifest.required_cases) ? manifest.required_cases : [];
+  if (cases.length < 32) {
+    failures.push({
+      case_id: "REGRESSION_CASE_COUNT",
+      reason: "regression_total_must_be_at_least_32",
+      total: cases.length
+    });
+  }
   const caseResults = cases.map((caseDef) => runCase(baseInput, caseDef));
   for (const caseResult of caseResults) {
     if (!caseResult.passed) {

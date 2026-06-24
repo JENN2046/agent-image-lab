@@ -1,5 +1,5 @@
 {
-  "regression_version": "local_visual_eval.human_review_import_regression.v1.4",
+  "regression_version": "local_visual_eval.human_review_import_regression.v1.4.1",
   "import_schema_version": "1.0.0",
   "assertion_contract": {
     "asserts": [
@@ -7,6 +7,10 @@
       "violations[].code",
       "violations[].path"
     ],
+    "exact_violation_match_default": true,
+    "additional_violations_allowed_only_when_declared": true,
+    "invalid_result_requires_normalized_sample_null": true,
+    "input_object_must_remain_unchanged_after_validation": true,
     "does_not_assert": [
       "violations[].message",
       "full stdout",
@@ -16,6 +20,143 @@
     "no_disk_mutation": true
   },
   "required_cases": [
+    {
+      "case_id": "MISSING_IMPORT_ID",
+      "expected_violations": [
+        {
+          "code": "MISSING_IMPORT_FIELD",
+          "path": "$.import_id"
+        }
+      ]
+    },
+    {
+      "case_id": "MISSING_REVIEWED_AT",
+      "expected_violations": [
+        {
+          "code": "MISSING_IMPORT_FIELD",
+          "path": "$.reviewed_at"
+        }
+      ]
+    },
+    {
+      "case_id": "EMPTY_IMPORT_ID",
+      "expected_violations": [
+        {
+          "code": "INVALID_IMPORT_ID",
+          "path": "$.import_id"
+        }
+      ]
+    },
+    {
+      "case_id": "INVALID_IMPORT_ID",
+      "expected_violations": [
+        {
+          "code": "INVALID_IMPORT_ID",
+          "path": "$.import_id"
+        }
+      ]
+    },
+    {
+      "case_id": "INVALID_REVIEWED_AT",
+      "expected_violations": [
+        {
+          "code": "INVALID_REVIEWED_AT",
+          "path": "$.reviewed_at"
+        }
+      ]
+    },
+    {
+      "case_id": "IMPORT_SCHEMA_REQUIRED_FIELD_REMOVED",
+      "expected_violations": [
+        {
+          "code": "IMPORT_SCHEMA_INVALID",
+          "path": "$.importSchema.required"
+        }
+      ]
+    },
+    {
+      "case_id": "IMPORT_POLICY_ORIGINS_MISSING",
+      "expected_violations": [
+        {
+          "code": "IMPORT_POLICY_INVALID",
+          "path": "$.importPolicy.allowed_record_origins"
+        },
+        {
+          "code": "INVALID_RECORD_ORIGIN",
+          "path": "$.record_origin"
+        }
+      ]
+    },
+    {
+      "case_id": "IMPORT_POLICY_CONSENT_MISSING",
+      "expected_violations": [
+        {
+          "code": "IMPORT_POLICY_INVALID",
+          "path": "$.importPolicy.allowed_consent_basis"
+        },
+        {
+          "code": "INVALID_CONSENT_BASIS",
+          "path": "$.consent_basis"
+        }
+      ]
+    },
+    {
+      "case_id": "IMPORT_POLICY_ATTESTATION_MISSING",
+      "expected_violations": [
+        {
+          "code": "IMPORT_POLICY_INVALID",
+          "path": "$.importPolicy.required_sanitization_attestation"
+        }
+      ]
+    },
+    {
+      "case_id": "EMBEDDED_WINDOWS_PATH_IN_NOTES",
+      "expected_violations": [
+        {
+          "code": "ABSOLUTE_PATH_DETECTED",
+          "path": "$.sample.reviewer_notes.summary"
+        }
+      ]
+    },
+    {
+      "case_id": "EMBEDDED_CREDENTIAL_URL_IN_NOTES",
+      "expected_violations": [
+        {
+          "code": "CREDENTIAL_URL_DETECTED",
+          "path": "$.sample.reviewer_notes.summary"
+        },
+        {
+          "code": "PERSONAL_DATA_PATTERN_DETECTED",
+          "path": "$.sample.reviewer_notes.summary"
+        }
+      ]
+    },
+    {
+      "case_id": "EMBEDDED_FILE_URL_IN_NOTES",
+      "expected_violations": [
+        {
+          "code": "ABSOLUTE_PATH_DETECTED",
+          "path": "$.sample.reviewer_notes.summary"
+        }
+      ]
+    },
+    {
+      "case_id": "INVALID_RESULT_RETURNS_NO_NORMALIZED_SAMPLE",
+      "assert_normalized_sample_null": true,
+      "expected_violations": [
+        {
+          "code": "UNSUPPORTED_IMPORT_SCHEMA_VERSION",
+          "path": "$.import_schema_version"
+        }
+      ]
+    },
+    {
+      "case_id": "INPUT_OBJECT_REMAINS_UNCHANGED",
+      "expected_valid": true,
+      "assert_input_unchanged": true,
+      "skip_mutation_change_check": true,
+      "expected_violations": []
+    },
     {
       "case_id": "UNSUPPORTED_IMPORT_SCHEMA_VERSION",
       "expected_violations": [
@@ -101,6 +242,10 @@
       "case_id": "REVIEWER_ALIAS_IS_EMAIL",
       "expected_violations": [
         {
+          "code": "INVALID_REVIEWER_ALIAS",
+          "path": "$.reviewer_alias"
+        },
+        {
           "code": "PERSONAL_DATA_PATTERN_DETECTED",
           "path": "$.reviewer_alias"
         }
@@ -174,6 +319,10 @@
       "expected_violations": [
         {
           "code": "CREDENTIAL_URL_DETECTED",
+          "path": "$.sample.asset_ref.ref"
+        },
+        {
+          "code": "PERSONAL_DATA_PATTERN_DETECTED",
           "path": "$.sample.asset_ref.ref"
         }
       ]

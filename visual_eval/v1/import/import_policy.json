@@ -3,6 +3,17 @@
   "compatible_import_schema_versions": [
     "1.0.0"
   ],
+  "required_import_fields": [
+    "import_schema_version",
+    "import_id",
+    "record_origin",
+    "reviewer_alias",
+    "reviewed_at",
+    "consent_basis",
+    "source_disposition",
+    "sanitization_attestation",
+    "sample"
+  ],
   "allowed_record_origins": [
     "human_review_sanitized"
   ],
@@ -23,8 +34,19 @@
     "contains_secret": false,
     "contains_absolute_path": false
   },
+  "import_id_contract": {
+    "format": "deterministic_pseudonymous_identifier",
+    "pattern": "^import_[a-z0-9]+(?:_[a-z0-9]+)*_[0-9]{3}$",
+    "description": "The import id must be stable, pseudonymous, lowercase, underscore-delimited, and must not encode private identity or source paths."
+  },
+  "reviewed_at_contract": {
+    "format": "iso_8601_with_timezone",
+    "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{3})?(?:Z|[+-]\\d{2}:\\d{2})$",
+    "description": "The review timestamp must include an explicit Z or +/-HH:MM timezone."
+  },
   "reviewer_alias_contract": {
     "format": "pseudonymous_identifier",
+    "pattern": "^[a-z][a-z0-9_]{2,63}$",
     "pattern_description": "lowercase letter followed by lowercase letters, digits, or underscores; no whitespace-only aliases",
     "forbidden": [
       "email",
@@ -35,6 +57,89 @@
       "whitespace_only"
     ]
   },
+  "forbidden_key_rules": [
+    {
+      "code": "RAW_PAYLOAD_FIELD_FORBIDDEN",
+      "pattern": "(?:raw_payload|provider_payload|raw_transcript|source_text|original_payload)",
+      "flags": "i",
+      "message": "Raw payload fields are forbidden."
+    },
+    {
+      "code": "SECRET_PATTERN_DETECTED",
+      "pattern": "(?:cookie|session)",
+      "flags": "i",
+      "message": "Cookie or session fields are forbidden."
+    }
+  ],
+  "unsafe_string_rules": [
+    {
+      "code": "CREDENTIAL_URL_DETECTED",
+      "pattern": "[a-z][a-z0-9+.-]*://[^/\\s:@]+:[^/\\s:@]+@",
+      "flags": "i",
+      "message": "Credential-bearing URL is not allowed."
+    },
+    {
+      "code": "SECRET_PATTERN_DETECTED",
+      "pattern": "\\bBearer\\s+[A-Za-z0-9._~+/-]+=*",
+      "flags": "i",
+      "message": "Secret-like token is not allowed."
+    },
+    {
+      "code": "SECRET_PATTERN_DETECTED",
+      "pattern": "\\b(?:api[_-]?key|token|password|secret)\\s*=",
+      "flags": "i",
+      "message": "Secret-like assignment is not allowed."
+    },
+    {
+      "code": "SECRET_PATTERN_DETECTED",
+      "pattern": "\\bsk-[A-Za-z0-9_-]{12,}\\b",
+      "message": "Secret-like key prefix is not allowed."
+    },
+    {
+      "code": "SECRET_PATTERN_DETECTED",
+      "pattern": "\\beyJ[A-Za-z0-9_-]+\\.[A-Za-z0-9_-]+\\.[A-Za-z0-9_-]+\\b",
+      "message": "JWT-like token is not allowed."
+    },
+    {
+      "code": "PERSONAL_DATA_PATTERN_DETECTED",
+      "pattern": "\\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}\\b",
+      "flags": "i",
+      "message": "Personal data pattern is not allowed."
+    },
+    {
+      "code": "PERSONAL_DATA_PATTERN_DETECTED",
+      "pattern": "(?:\\+\\d{1,3}[\\s.-]?)?(?:\\(?\\d{3}\\)?[\\s.-])\\d{3}[\\s.-]\\d{4}\\b",
+      "message": "Telephone-like pattern is not allowed."
+    },
+    {
+      "code": "ABSOLUTE_PATH_DETECTED",
+      "pattern": "(^|[^A-Za-z0-9])(?:[A-Za-z]:[\\\\/][^\\s\"'<>]*)",
+      "message": "Absolute Windows path is not allowed."
+    },
+    {
+      "code": "ABSOLUTE_PATH_DETECTED",
+      "pattern": "\\\\\\\\[^\\\\/\\s]+\\\\[^\\\\/\\s]+",
+      "message": "UNC path is not allowed."
+    },
+    {
+      "code": "ABSOLUTE_PATH_DETECTED",
+      "pattern": "(^|[\\s\"'(])/(?:home|Users|var|tmp|private|etc|mnt|opt|root)/[^\\s\"'<>]*",
+      "flags": "i",
+      "message": "Absolute Unix path is not allowed."
+    },
+    {
+      "code": "ABSOLUTE_PATH_DETECTED",
+      "pattern": "file://[^\\s\"'<>]*",
+      "flags": "i",
+      "message": "File URL is not allowed."
+    },
+    {
+      "code": "PATH_TRAVERSAL_DETECTED",
+      "pattern": "(^|[\\s\"'(\\\\/])(?:\\.\\.|%2e%2e)([\\\\/]|$)",
+      "flags": "i",
+      "message": "Parent directory traversal is not allowed."
+    }
+  ],
   "unsafe_pattern_classes": [
     "email_address",
     "telephone_number",
@@ -54,6 +159,11 @@
   "stable_violation_codes": [
     "UNSUPPORTED_IMPORT_SCHEMA_VERSION",
     "UNKNOWN_IMPORT_FIELD",
+    "MISSING_IMPORT_FIELD",
+    "INVALID_IMPORT_ID",
+    "INVALID_REVIEWED_AT",
+    "IMPORT_SCHEMA_INVALID",
+    "IMPORT_POLICY_INVALID",
     "INVALID_RECORD_ORIGIN",
     "INVALID_CONSENT_BASIS",
     "RAW_SOURCE_RETENTION_FORBIDDEN",
