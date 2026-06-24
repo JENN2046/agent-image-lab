@@ -10,6 +10,8 @@ It is synthetic seed data. The samples are structured review records used to exe
 - `accepted.samples.json`: 10 synthetic metadata-only samples that compute to `accepted`.
 - `rejected.samples.json`: 10 synthetic metadata-only samples that compute to `rejected`.
 - `validate_dataset.js`: Node.js standard-library validator that imports the existing local `validateBundle`.
+- `dataset_regression_manifest.json`: stable in-memory mutation contract for validator regression checks.
+- `run_dataset_regression.js`: Node.js standard-library runner for dataset validator regression cases.
 
 ## Validation
 
@@ -38,5 +40,17 @@ Required failure codes:
 - `COMMERCIAL_UNFITNESS`
 
 This seed only measures correction strategy presence. It does not measure correction effectiveness.
+
+## Regression
+
+Run from the repository root:
+
+```bash
+node visual_eval/v1/dataset/run_dataset_regression.js
+```
+
+The regression runner loads the base dataset once, deep-copies it for each case, mutates only the in-memory copy, and calls `validateDatasetBundle`. It does not modify sample files or read image binaries.
+
+The v1.3 suite proves the validator rejects duplicate IDs, count drift, undercovered failure codes, missing required failure codes, synthetic data mislabeled as human, unsafe references, decision drift, missing correction strategies, and unknown failure codes. Regression assertions use stable violation `code` and `path` values, not full human-readable messages.
 
 Future dataset versions may include explicitly provided, sanitized human review records. Those records must be added under a separate task and must not be inferred from this synthetic seed.

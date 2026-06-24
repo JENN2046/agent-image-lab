@@ -1,0 +1,179 @@
+{
+  "regression_version": "local_visual_eval.dataset_regression.v1.3",
+  "dataset_version": "local_visual_eval.dataset_seed.v1.2",
+  "description": "In-memory mutation regression suite for the metadata-only local visual eval dataset validator.",
+  "assertion_contract": {
+    "asserts": [
+      "valid",
+      "violations[].code",
+      "violations[].path"
+    ],
+    "does_not_assert": [
+      "violations[].message",
+      "full stdout",
+      "human-readable prose"
+    ],
+    "mutation_must_change_base_bundle": true,
+    "no_disk_mutation": true
+  },
+  "reference_safety_contract": {
+    "legal_reference_forms": [
+      "synthetic://local_visual_eval/...",
+      "prompts/image_generation/*.yaml#fragment"
+    ],
+    "rejected_reference_forms": [
+      "Windows absolute path",
+      "UNC path",
+      "path traversal",
+      "file URL",
+      "credential-bearing URL",
+      "empty reference"
+    ]
+  },
+  "required_cases": [
+    {
+      "case_id": "DUPLICATE_ID_WITHIN_ACCEPTED",
+      "expected_violations": [
+        {
+          "code": "DUPLICATE_SAMPLE_ID",
+          "path": "$.acceptedSamples[1].sample_id"
+        }
+      ]
+    },
+    {
+      "case_id": "DUPLICATE_ID_ACROSS_DECISIONS",
+      "expected_violations": [
+        {
+          "code": "DUPLICATE_SAMPLE_ID",
+          "path": "$.rejectedSamples[0].sample_id"
+        }
+      ]
+    },
+    {
+      "case_id": "MANIFEST_ACCEPTED_COUNT_MISMATCH",
+      "expected_violations": [
+        {
+          "code": "MANIFEST_ACCEPTED_COUNT_MISMATCH",
+          "path": "$.manifest.accepted_count"
+        }
+      ]
+    },
+    {
+      "case_id": "MANIFEST_REJECTED_COUNT_MISMATCH",
+      "expected_violations": [
+        {
+          "code": "MANIFEST_REJECTED_COUNT_MISMATCH",
+          "path": "$.manifest.rejected_count"
+        }
+      ]
+    },
+    {
+      "case_id": "MANIFEST_TOTAL_COUNT_MISMATCH",
+      "expected_violations": [
+        {
+          "code": "MANIFEST_TOTAL_COUNT_MISMATCH",
+          "path": "$.manifest.total_count"
+        }
+      ]
+    },
+    {
+      "case_id": "FAILURE_CODE_UNDER_MINIMUM_COVERAGE",
+      "expected_violations": [
+        {
+          "code": "COVERAGE_UNDER_MINIMUM",
+          "path": "$.failure_frequency.MATERIAL_PLASTICITY"
+        }
+      ]
+    },
+    {
+      "case_id": "REQUIRED_FAILURE_CODE_MISSING",
+      "expected_violations": [
+        {
+          "code": "REQUIRED_FAILURE_CODE_MISSING",
+          "path": "$.manifest.required_failure_codes"
+        }
+      ]
+    },
+    {
+      "case_id": "SYNTHETIC_DATA_MISLABELED_AS_HUMAN",
+      "expected_violations": [
+        {
+          "code": "SYNTHETIC_DATA_MISLABELED_AS_HUMAN",
+          "path": "$.manifest.record_origin"
+        }
+      ]
+    },
+    {
+      "case_id": "ABSOLUTE_WINDOWS_REFERENCE",
+      "expected_violations": [
+        {
+          "code": "ABSOLUTE_WINDOWS_REFERENCE",
+          "path": "$.acceptedSamples[0].asset_ref.ref"
+        }
+      ]
+    },
+    {
+      "case_id": "UNC_REFERENCE",
+      "expected_violations": [
+        {
+          "code": "UNC_REFERENCE",
+          "path": "$.acceptedSamples[0].asset_ref.ref"
+        }
+      ]
+    },
+    {
+      "case_id": "PATH_TRAVERSAL_REFERENCE",
+      "expected_violations": [
+        {
+          "code": "PATH_TRAVERSAL_REFERENCE",
+          "path": "$.acceptedSamples[0].asset_ref.ref"
+        }
+      ]
+    },
+    {
+      "case_id": "CREDENTIAL_BEARING_URL_REFERENCE",
+      "expected_violations": [
+        {
+          "code": "CREDENTIAL_BEARING_URL_REFERENCE",
+          "path": "$.acceptedSamples[0].asset_ref.ref"
+        }
+      ]
+    },
+    {
+      "case_id": "DECLARED_ACCEPTED_COMPUTED_REJECTED",
+      "expected_violations": [
+        {
+          "code": "DECLARED_ACCEPTED_COMPUTED_REJECTED",
+          "path": "$.acceptedSamples[0].decision"
+        }
+      ]
+    },
+    {
+      "case_id": "DECLARED_REJECTED_COMPUTED_ACCEPTED",
+      "expected_violations": [
+        {
+          "code": "DECLARED_REJECTED_COMPUTED_ACCEPTED",
+          "path": "$.rejectedSamples[0].decision"
+        }
+      ]
+    },
+    {
+      "case_id": "REJECTED_WITHOUT_CORRECTION_STRATEGY",
+      "expected_violations": [
+        {
+          "code": "REJECTED_WITHOUT_CORRECTION_STRATEGY",
+          "path": "$.rejectedSamples[0].correction_strategies"
+        }
+      ]
+    },
+    {
+      "case_id": "UNKNOWN_FAILURE_CODE",
+      "expected_violations": [
+        {
+          "code": "UNKNOWN_FAILURE_CODE",
+          "path": "$.rejectedSamples[0].failure_codes[2]"
+        }
+      ]
+    }
+  ]
+}

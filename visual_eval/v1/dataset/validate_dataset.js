@@ -49,24 +49,39 @@ const SAMPLE_KEYS = [
 
 const DISALLOWED_STRING_PATTERNS = [
   {
-    code: "ABSOLUTE_PATH",
+    code: "ABSOLUTE_WINDOWS_REFERENCE",
     pattern: /^[A-Za-z]:[\\/]/,
     message: "value must not be a Windows absolute path"
   },
   {
-    code: "ABSOLUTE_PATH",
-    pattern: /^(?:\/|\\\\)/,
-    message: "value must not be an absolute or UNC path"
+    code: "UNC_REFERENCE",
+    pattern: /^\\\\/,
+    message: "value must not be a UNC path"
   },
   {
-    code: "UNAPPROVED_URL",
-    pattern: /^(?:https?|file):\/\//i,
-    message: "value must not be a real URL or file URL"
+    code: "ABSOLUTE_PATH_REFERENCE",
+    pattern: /^\//,
+    message: "value must not be an absolute path"
   },
   {
-    code: "URL_CREDENTIAL",
+    code: "PATH_TRAVERSAL_REFERENCE",
+    pattern: /(^|[\\/])(?:\.\.|%2e%2e)([\\/]|$)/i,
+    message: "value must not contain path traversal"
+  },
+  {
+    code: "CREDENTIAL_BEARING_URL_REFERENCE",
     pattern: /^[a-z][a-z0-9+.-]*:\/\/[^/\s:@]+:[^/\s:@]+@/i,
     message: "value must not contain URL credentials"
+  },
+  {
+    code: "FILE_URL_REFERENCE",
+    pattern: /^file:\/\//i,
+    message: "value must not be a file URL"
+  },
+  {
+    code: "UNAPPROVED_URL_REFERENCE",
+    pattern: /^https?:\/\//i,
+    message: "value must not be a real URL"
   },
   {
     code: "SECRET_LIKE_VALUE",
@@ -104,9 +119,11 @@ function cloneJson(value) {
 
 function sortViolations(violations) {
   return violations.slice().sort((left, right) => {
-    const leftKey = `${left.path}|${left.code}|${left.message}`;
-    const rightKey = `${right.path}|${right.code}|${right.message}`;
-    return leftKey.localeCompare(rightKey);
+    const pathCompare = left.path.localeCompare(right.path);
+    if (pathCompare !== 0) {
+      return pathCompare;
+    }
+    return left.code.localeCompare(right.code);
   });
 }
 
@@ -160,35 +177,49 @@ function validateManifest(manifest, schema, taxonomy, policy, violations) {
     return;
   }
 
+  const schemaVersion = schema
+    && schema.properties
+    && schema.properties.schema_version
+    && schema.properties.schema_version.const;
+
   if (manifest.dataset_version !== DATASET_VERSION) {
     addViolation(violations, "MANIFEST_INVALID", "$.manifest.dataset_version", `dataset_version must be ${DATASET_VERSION}`);
   }
-  if (manifest.visual_sample_schema_version !== schema.properties.schema_version.const) {
-    addViolation(violations, "MANIFEST_INVALID", "$.manifest.visual_sample_schema_version", "visual_sample_schema_version must match visual sample schema");
+  if (manifest.visual_sample_schema_version !== schemaVersion) {
+    addViolation(violations, "MANIFEST_SCHEMA_VERSION_MISMATCH", "$.manifest.visual_sample_schema_version", "visual_sample_schema_version must match visual sample schema");
   }
-  if (manifest.taxonomy_version !== taxonomy.taxonomy_version) {
+  if (manifest.taxonomy_version !== (taxonomy && taxonomy.taxonomy_version)) {
     addViolation(violations, "MANIFEST_INVALID", "$.manifest.taxonomy_version", "taxonomy_version must match taxonomy");
   }
-  if (manifest.policy_version !== policy.policy_version) {
+  if (manifest.policy_version !== (policy && policy.policy_version)) {
     addViolation(violations, "MANIFEST_INVALID", "$.manifest.policy_version", "policy_version must match policy");
   }
   if (manifest.accepted_count !== 10) {
-    addViolation(violations, "MANIFEST_INVALID", "$.manifest.accepted_count", "accepted_count must be 10");
+    addViolation(violations, "MANIFEST_ACCEPTED_COUNT_MISMATCH", "$.manifest.accepted_count", "accepted_count must be 10");
   }
   if (manifest.rejected_count !== 10) {
-    addViolation(violations, "MANIFEST_INVALID", "$.manifest.rejected_count", "rejected_count must be 10");
+    addViolation(violations, "MANIFEST_REJECTED_COUNT_MISMATCH", "$.manifest.rejected_count", "rejected_count must be 10");
   }
   if (manifest.total_count !== 20) {
-    addViolation(violations, "MANIFEST_INVALID", "$.manifest.total_count", "total_count must be 20");
+    addViolation(violations, "MANIFEST_TOTAL_COUNT_MISMATCH", "$.manifest.total_count", "total_count must be 20");
+  }
+  if (manifest.record_origin === "human_review") {
+    addViolation(violations, "SYNTHETIC_DATA_MISLABELED_AS_HUMAN", "$.manifest.record_origin", "synthetic seed dataset must not be marked as human_review");
   }
   if (manifest.record_origin !== "synthetic_seed") {
     addViolation(violations, "MANIFEST_INVALID", "$.manifest.record_origin", "record_origin must be synthetic_seed");
   }
-  if (manifest.record_origin === "human_review") {
-    addViolation(violations, "MANIFEST_INVALID", "$.manifest.record_origin", "synthetic seed dataset must not be marked as human_review");
-  }
-  if (!sameArray(manifest.required_failure_codes, REQUIRED_FAILURE_CODES)) {
-    addViolation(violations, "MANIFEST_INVALID", "$.manifest.required_failure_codes", "required_failure_codes must match the v1.2 contract order");
+  if (!Array.isArray(manifest.required_failure_codes)) {
+    addViolation(violations, "MANIFEST_INVALID", "$.manifest.required_failure_codes", "required_failure_codes must be an array");
+  } else {
+    for (const requiredCode of REQUIRED_FAILURE_CODES) {
+      if (!manifest.required_failure_codes.includes(requiredCode)) {
+        addViolation(violations, "REQUIRED_FAILURE_CODE_MISSING", "$.manifest.required_failure_codes", `${requiredCode} must be present`);
+      }
+    }
+    if (!sameArray(manifest.required_failure_codes, REQUIRED_FAILURE_CODES)) {
+      addViolation(violations, "MANIFEST_INVALID", "$.manifest.required_failure_codes", "required_failure_codes must match the v1.2 contract order");
+    }
   }
   if (manifest.minimum_occurrences_per_failure_code !== 2) {
     addViolation(violations, "MANIFEST_INVALID", "$.manifest.minimum_occurrences_per_failure_code", "minimum_occurrences_per_failure_code must be 2");
@@ -199,10 +230,10 @@ function validateManifest(manifest, schema, taxonomy, policy, violations) {
   } else {
     validateObjectKeys(manifest.sample_files, ["accepted", "rejected"], "$.manifest.sample_files", violations);
     if (manifest.sample_files.accepted !== "accepted.samples.json") {
-      addViolation(violations, "MANIFEST_INVALID", "$.manifest.sample_files.accepted", "accepted sample file must be accepted.samples.json");
+      addViolation(violations, "SAMPLE_FILE_NAME_MISMATCH", "$.manifest.sample_files.accepted", "accepted sample file must be accepted.samples.json");
     }
     if (manifest.sample_files.rejected !== "rejected.samples.json") {
-      addViolation(violations, "MANIFEST_INVALID", "$.manifest.sample_files.rejected", "rejected sample file must be rejected.samples.json");
+      addViolation(violations, "SAMPLE_FILE_NAME_MISMATCH", "$.manifest.sample_files.rejected", "rejected sample file must be rejected.samples.json");
     }
   }
 
@@ -239,7 +270,7 @@ function buildTaxonomyByCode(taxonomy) {
 }
 
 function validateCoverageContract(manifest, taxonomyByCode, violations) {
-  const codes = Array.isArray(manifest.required_failure_codes)
+  const codes = manifest && Array.isArray(manifest.required_failure_codes)
     ? manifest.required_failure_codes
     : [];
 
@@ -313,7 +344,7 @@ function validateSample(
     for (const violation of result.violations) {
       addViolation(
         violations,
-        `BUNDLE_${violation.code}`,
+        violation.code,
         `${samplePath}${violation.path === "$" ? "" : violation.path.slice(1)}`,
         violation.message
       );
@@ -352,23 +383,21 @@ function validateSample(
   }
 
   if (Array.isArray(sample.failure_codes)) {
-    for (const code of sample.failure_codes) {
+    sample.failure_codes.forEach((code, index) => {
       if (!taxonomyByCode.has(code)) {
-        addViolation(violations, "UNKNOWN_FAILURE_CODE", `${samplePath}.failure_codes`, `${code} is not defined in taxonomy`);
+        addViolation(violations, "UNKNOWN_FAILURE_CODE", `${samplePath}.failure_codes[${index}]`, `${code} is not defined in taxonomy`);
       }
-    }
+    });
   }
 }
 
-function validateDataset() {
-  const baseDir = __dirname;
-  const visualEvalDir = path.resolve(baseDir, "..");
-  const manifest = readJson(path.join(baseDir, "dataset_manifest.json"));
-  const accepted = readJson(path.join(baseDir, "accepted.samples.json"));
-  const rejected = readJson(path.join(baseDir, "rejected.samples.json"));
-  const schema = readJson(path.join(visualEvalDir, "visual_sample.schema.json"));
-  const taxonomy = readJson(path.join(visualEvalDir, "failure_taxonomy.json"));
-  const policy = readJson(path.join(visualEvalDir, "evaluation_policy.json"));
+function validateDatasetBundle(input) {
+  const manifest = input && input.manifest;
+  const acceptedInput = input && input.acceptedSamples;
+  const rejectedInput = input && input.rejectedSamples;
+  const schema = input && input.schema;
+  const taxonomy = input && input.taxonomy;
+  const policy = input && input.policy;
   const violations = [];
   const taxonomyByCode = buildTaxonomyByCode(taxonomy);
   const failureFrequency = {};
@@ -379,31 +408,31 @@ function validateDataset() {
   validateManifest(manifest, schema, taxonomy, policy, violations);
   validateCoverageContract(manifest, taxonomyByCode, violations);
 
-  if (!Array.isArray(accepted)) {
-    addViolation(violations, "DATASET_INVALID", "$.accepted", "accepted.samples.json must contain an array");
+  if (!Array.isArray(acceptedInput)) {
+    addViolation(violations, "DATASET_INVALID", "$.acceptedSamples", "acceptedSamples must be an array");
   }
-  if (!Array.isArray(rejected)) {
-    addViolation(violations, "DATASET_INVALID", "$.rejected", "rejected.samples.json must contain an array");
+  if (!Array.isArray(rejectedInput)) {
+    addViolation(violations, "DATASET_INVALID", "$.rejectedSamples", "rejectedSamples must be an array");
   }
 
-  const acceptedSamples = Array.isArray(accepted) ? accepted : [];
-  const rejectedSamples = Array.isArray(rejected) ? rejected : [];
+  const acceptedSamples = Array.isArray(acceptedInput) ? acceptedInput : [];
+  const rejectedSamples = Array.isArray(rejectedInput) ? rejectedInput : [];
   const total = acceptedSamples.length + rejectedSamples.length;
 
-  if (acceptedSamples.length !== manifest.accepted_count) {
-    addViolation(violations, "COUNT_MISMATCH", "$.accepted", "accepted sample count must match manifest");
+  if (isObject(manifest) && acceptedSamples.length !== manifest.accepted_count) {
+    addViolation(violations, "COUNT_MISMATCH", "$.acceptedSamples", "accepted sample count must match manifest");
   }
-  if (rejectedSamples.length !== manifest.rejected_count) {
-    addViolation(violations, "COUNT_MISMATCH", "$.rejected", "rejected sample count must match manifest");
+  if (isObject(manifest) && rejectedSamples.length !== manifest.rejected_count) {
+    addViolation(violations, "COUNT_MISMATCH", "$.rejectedSamples", "rejected sample count must match manifest");
   }
-  if (total !== manifest.total_count) {
+  if (isObject(manifest) && total !== manifest.total_count) {
     addViolation(violations, "COUNT_MISMATCH", "$.total", "total sample count must match manifest");
   }
   if (acceptedSamples.length !== 10) {
-    addViolation(violations, "COUNT_MISMATCH", "$.accepted", "accepted sample count must be exactly 10");
+    addViolation(violations, "COUNT_MISMATCH", "$.acceptedSamples", "accepted sample count must be exactly 10");
   }
   if (rejectedSamples.length !== 10) {
-    addViolation(violations, "COUNT_MISMATCH", "$.rejected", "rejected sample count must be exactly 10");
+    addViolation(violations, "COUNT_MISMATCH", "$.rejectedSamples", "rejected sample count must be exactly 10");
   }
 
   const seenSampleIds = new Set();
@@ -413,7 +442,7 @@ function validateDataset() {
   acceptedSamples.forEach((sample, index) => {
     validateSample(
       sample,
-      `$.accepted[${index}]`,
+      `$.acceptedSamples[${index}]`,
       "accepted",
       schema,
       taxonomy,
@@ -430,7 +459,7 @@ function validateDataset() {
   rejectedSamples.forEach((sample, index) => {
     validateSample(
       sample,
-      `$.rejected[${index}]`,
+      `$.rejectedSamples[${index}]`,
       "rejected",
       schema,
       taxonomy,
@@ -444,15 +473,17 @@ function validateDataset() {
     );
   });
 
+  const minimumCoverage = isObject(manifest)
+    ? manifest.minimum_occurrences_per_failure_code
+    : 2;
   for (const code of REQUIRED_FAILURE_CODES) {
-    if (failureFrequency[code] < manifest.minimum_occurrences_per_failure_code) {
+    if (failureFrequency[code] < minimumCoverage) {
       addViolation(violations, "COVERAGE_UNDER_MINIMUM", `$.failure_frequency.${code}`, `${code} must occur at least twice`);
     }
   }
 
   const sortedViolations = sortViolations(violations);
-  return {
-    valid: sortedViolations.length === 0,
+  const summary = {
     dataset_version: manifest && manifest.dataset_version ? manifest.dataset_version : DATASET_VERSION,
     total,
     accepted: acceptedSamples.length,
@@ -462,29 +493,42 @@ function validateDataset() {
       required: rejectedSamples.length,
       present: counters.rejectedWithCorrectionStrategy
     },
-    sample_ids_unique: seenSampleIds.size === total,
-    violations: sortedViolations
+    sample_ids_unique: seenSampleIds.size === total
   };
+
+  return {
+    valid: sortedViolations.length === 0,
+    violations: sortedViolations,
+    summary
+  };
+}
+
+function loadDatasetBundle() {
+  const baseDir = __dirname;
+  const visualEvalDir = path.resolve(baseDir, "..");
+  return {
+    manifest: readJson(path.join(baseDir, "dataset_manifest.json")),
+    acceptedSamples: readJson(path.join(baseDir, "accepted.samples.json")),
+    rejectedSamples: readJson(path.join(baseDir, "rejected.samples.json")),
+    schema: readJson(path.join(visualEvalDir, "visual_sample.schema.json")),
+    taxonomy: readJson(path.join(visualEvalDir, "failure_taxonomy.json")),
+    policy: readJson(path.join(visualEvalDir, "evaluation_policy.json"))
+  };
+}
+
+function validateDataset() {
+  return validateDatasetBundle(loadDatasetBundle());
 }
 
 function runCli() {
   try {
-    const summary = validateDataset();
-    const output = summary.valid
-      ? {
-        valid: summary.valid,
-        dataset_version: summary.dataset_version,
-        total: summary.total,
-        accepted: summary.accepted,
-        rejected: summary.rejected,
-        failure_frequency: summary.failure_frequency,
-        correction_strategy_presence: summary.correction_strategy_presence,
-        sample_ids_unique: summary.sample_ids_unique
-      }
-      : summary;
+    const result = validateDataset();
+    const output = result.valid
+      ? Object.assign({ valid: true }, result.summary)
+      : result;
 
     console.log(JSON.stringify(output, null, 2));
-    process.exit(summary.valid ? EXIT_OK : EXIT_POLICY_ERROR);
+    process.exit(result.valid ? EXIT_OK : EXIT_POLICY_ERROR);
   } catch (_error) {
     console.log(JSON.stringify({
       valid: false,
@@ -497,3 +541,8 @@ function runCli() {
 if (require.main === module) {
   runCli();
 }
+
+module.exports = {
+  validateDataset,
+  validateDatasetBundle
+};
