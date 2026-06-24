@@ -1,0 +1,522 @@
+{
+  "manifest_version": "local_visual_eval.robustness_manifest.v1",
+  "contract": {
+    "schema_version": "1.0.0",
+    "decision_values": [
+      "accepted",
+      "rejected"
+    ],
+    "score_type": "integer",
+    "score_range": {
+      "min": 0,
+      "max": 5
+    },
+    "score_fields": [
+      "subject_fidelity",
+      "composition",
+      "lighting",
+      "material_realism",
+      "commercial_fitness"
+    ],
+    "unknown_top_level_field": "reject",
+    "unknown_nested_field": "reject",
+    "unknown_failure_code": "reject",
+    "duplicate_failure_code": "reject",
+    "unsupported_schema_version": "reject",
+    "empty_correction_strategy": "reject",
+    "declared_computed_decision_mismatch": "reject",
+    "exit_codes": {
+      "success": 0,
+      "invalid_or_mismatch": 2,
+      "internal_error": 1
+    }
+  },
+  "cases": [
+    {
+      "case_id": "SCORE_FLOAT",
+      "target": "sample",
+      "base_ref": "fixtures/accepted.sample.json",
+      "mutations": [
+        {
+          "type": "set",
+          "path": [
+            "review_scores",
+            "subject_fidelity"
+          ],
+          "value": 4.5
+        }
+      ],
+      "expected_valid": false,
+      "expected_declared_decision": "accepted",
+      "expected_computed_decision": "unknown",
+      "expected_violation_codes": [
+        "SCORE_FLOAT"
+      ],
+      "expected_violation_paths": [
+        "$.review_scores.subject_fidelity"
+      ]
+    },
+    {
+      "case_id": "SCORE_BELOW_MIN",
+      "target": "sample",
+      "base_ref": "fixtures/accepted.sample.json",
+      "mutations": [
+        {
+          "type": "set",
+          "path": [
+            "review_scores",
+            "composition"
+          ],
+          "value": -1
+        }
+      ],
+      "expected_valid": false,
+      "expected_declared_decision": "accepted",
+      "expected_computed_decision": "unknown",
+      "expected_violation_codes": [
+        "SCORE_BELOW_MIN"
+      ],
+      "expected_violation_paths": [
+        "$.review_scores.composition"
+      ]
+    },
+    {
+      "case_id": "SCORE_ABOVE_MAX",
+      "target": "sample",
+      "base_ref": "fixtures/accepted.sample.json",
+      "mutations": [
+        {
+          "type": "set",
+          "path": [
+            "review_scores",
+            "lighting"
+          ],
+          "value": 6
+        }
+      ],
+      "expected_valid": false,
+      "expected_declared_decision": "accepted",
+      "expected_computed_decision": "unknown",
+      "expected_violation_codes": [
+        "SCORE_ABOVE_MAX"
+      ],
+      "expected_violation_paths": [
+        "$.review_scores.lighting"
+      ]
+    },
+    {
+      "case_id": "UNKNOWN_FAILURE_CODE",
+      "target": "sample",
+      "base_ref": "fixtures/accepted.sample.json",
+      "mutations": [
+        {
+          "type": "append",
+          "path": [
+            "failure_codes"
+          ],
+          "value": "NOT_IN_TAXONOMY"
+        }
+      ],
+      "expected_valid": false,
+      "expected_declared_decision": "accepted",
+      "expected_computed_decision": "accepted",
+      "expected_violation_codes": [
+        "UNKNOWN_FAILURE_CODE"
+      ],
+      "expected_violation_paths": [
+        "$.failure_codes[0]"
+      ]
+    },
+    {
+      "case_id": "ACCEPTED_WITH_BLOCKING_FAILURE",
+      "target": "sample",
+      "base_ref": "fixtures/accepted.sample.json",
+      "mutations": [
+        {
+          "type": "append",
+          "path": [
+            "failure_codes"
+          ],
+          "value": "SUBJECT_DRIFT"
+        }
+      ],
+      "expected_valid": false,
+      "expected_declared_decision": "accepted",
+      "expected_computed_decision": "rejected",
+      "expected_violation_codes": [
+        "ACCEPTED_WITH_BLOCKING_FAILURE",
+        "DECLARED_ACCEPTED_COMPUTED_REJECTED"
+      ],
+      "expected_violation_paths": [
+        "$.failure_codes",
+        "$.decision"
+      ]
+    },
+    {
+      "case_id": "REJECTED_WITHOUT_CORRECTION_STRATEGY",
+      "target": "sample",
+      "base_ref": "fixtures/rejected.sample.json",
+      "mutations": [
+        {
+          "type": "replace",
+          "path": [
+            "correction_strategies"
+          ],
+          "value": []
+        }
+      ],
+      "expected_valid": false,
+      "expected_declared_decision": "rejected",
+      "expected_computed_decision": "rejected",
+      "expected_violation_codes": [
+        "REJECTED_WITHOUT_CORRECTION_STRATEGY"
+      ],
+      "expected_violation_paths": [
+        "$.correction_strategies"
+      ]
+    },
+    {
+      "case_id": "DECLARED_ACCEPTED_COMPUTED_REJECTED",
+      "target": "sample",
+      "base_ref": "fixtures/accepted.sample.json",
+      "mutations": [
+        {
+          "type": "set",
+          "path": [
+            "review_scores",
+            "commercial_fitness"
+          ],
+          "value": 3
+        }
+      ],
+      "expected_valid": false,
+      "expected_declared_decision": "accepted",
+      "expected_computed_decision": "rejected",
+      "expected_violation_codes": [
+        "DECLARED_ACCEPTED_COMPUTED_REJECTED"
+      ],
+      "expected_violation_paths": [
+        "$.decision"
+      ]
+    },
+    {
+      "case_id": "DECLARED_REJECTED_COMPUTED_ACCEPTED",
+      "target": "sample",
+      "base_ref": "fixtures/accepted.sample.json",
+      "mutations": [
+        {
+          "type": "set",
+          "path": [
+            "decision"
+          ],
+          "value": "rejected"
+        },
+        {
+          "type": "append",
+          "path": [
+            "failure_codes"
+          ],
+          "value": "COMPOSITION_IMBALANCE"
+        },
+        {
+          "type": "append",
+          "path": [
+            "correction_strategies"
+          ],
+          "value": "Rebalance product scale while preserving the accepted product route."
+        }
+      ],
+      "expected_valid": false,
+      "expected_declared_decision": "rejected",
+      "expected_computed_decision": "accepted",
+      "expected_violation_codes": [
+        "DECLARED_REJECTED_COMPUTED_ACCEPTED"
+      ],
+      "expected_violation_paths": [
+        "$.decision"
+      ]
+    },
+    {
+      "case_id": "UNSUPPORTED_SCHEMA_VERSION",
+      "target": "sample",
+      "base_ref": "fixtures/accepted.sample.json",
+      "mutations": [
+        {
+          "type": "set",
+          "path": [
+            "schema_version"
+          ],
+          "value": "local_visual_eval.sample.v2"
+        }
+      ],
+      "expected_valid": false,
+      "expected_declared_decision": "accepted",
+      "expected_computed_decision": "unknown",
+      "expected_violation_codes": [
+        "UNSUPPORTED_SCHEMA_VERSION"
+      ],
+      "expected_violation_paths": [
+        "$.schema_version"
+      ]
+    },
+    {
+      "case_id": "UNKNOWN_TOP_LEVEL_FIELD",
+      "target": "sample",
+      "base_ref": "fixtures/accepted.sample.json",
+      "mutations": [
+        {
+          "type": "set",
+          "path": [
+            "unexpected_field"
+          ],
+          "value": true
+        }
+      ],
+      "expected_valid": false,
+      "expected_declared_decision": "accepted",
+      "expected_computed_decision": "unknown",
+      "expected_violation_codes": [
+        "UNKNOWN_TOP_LEVEL_FIELD"
+      ],
+      "expected_violation_paths": [
+        "$.unexpected_field"
+      ]
+    },
+    {
+      "case_id": "UNKNOWN_REVIEW_SCORE_FIELD",
+      "target": "sample",
+      "base_ref": "fixtures/accepted.sample.json",
+      "mutations": [
+        {
+          "type": "set",
+          "path": [
+            "review_scores",
+            "texture_quality"
+          ],
+          "value": 4
+        }
+      ],
+      "expected_valid": false,
+      "expected_declared_decision": "accepted",
+      "expected_computed_decision": "unknown",
+      "expected_violation_codes": [
+        "UNKNOWN_REVIEW_SCORE_FIELD"
+      ],
+      "expected_violation_paths": [
+        "$.review_scores.texture_quality"
+      ]
+    },
+    {
+      "case_id": "MALFORMED_PROVENANCE",
+      "target": "sample",
+      "base_ref": "fixtures/accepted.sample.json",
+      "mutations": [
+        {
+          "type": "set",
+          "path": [
+            "provenance",
+            "provider_contact_performed"
+          ],
+          "value": true
+        }
+      ],
+      "expected_valid": false,
+      "expected_declared_decision": "accepted",
+      "expected_computed_decision": "unknown",
+      "expected_violation_codes": [
+        "MALFORMED_PROVENANCE"
+      ],
+      "expected_violation_paths": [
+        "$.provenance.provider_contact_performed"
+      ]
+    },
+    {
+      "case_id": "DUPLICATE_FAILURE_CODE",
+      "target": "sample",
+      "base_ref": "fixtures/rejected.sample.json",
+      "mutations": [
+        {
+          "type": "append",
+          "path": [
+            "failure_codes"
+          ],
+          "value": "SUBJECT_DRIFT"
+        }
+      ],
+      "expected_valid": false,
+      "expected_declared_decision": "rejected",
+      "expected_computed_decision": "unknown",
+      "expected_violation_codes": [
+        "DUPLICATE_FAILURE_CODE"
+      ],
+      "expected_violation_paths": [
+        "$.failure_codes"
+      ]
+    },
+    {
+      "case_id": "EMPTY_CORRECTION_STRATEGY",
+      "target": "sample",
+      "base_ref": "fixtures/rejected.sample.json",
+      "mutations": [
+        {
+          "type": "set",
+          "path": [
+            "correction_strategies",
+            0
+          ],
+          "value": "   "
+        }
+      ],
+      "expected_valid": false,
+      "expected_declared_decision": "rejected",
+      "expected_computed_decision": "unknown",
+      "expected_violation_codes": [
+        "EMPTY_CORRECTION_STRATEGY"
+      ],
+      "expected_violation_paths": [
+        "$.correction_strategies[0]"
+      ]
+    },
+    {
+      "case_id": "POLICY_MISSING_CRITICAL_THRESHOLD",
+      "target": "policy",
+      "base_ref": "fixtures/accepted.sample.json",
+      "mutations": [
+        {
+          "type": "delete",
+          "path": [
+            "accepted_minimum_thresholds",
+            "lighting"
+          ]
+        }
+      ],
+      "expected_valid": false,
+      "expected_declared_decision": "accepted",
+      "expected_computed_decision": "unknown",
+      "expected_violation_codes": [
+        "POLICY_MISSING_CRITICAL_THRESHOLD"
+      ],
+      "expected_violation_paths": [
+        "$.accepted_minimum_thresholds.lighting"
+      ]
+    },
+    {
+      "case_id": "TAXONOMY_UNKNOWN_AFFECTED_SCORE",
+      "target": "taxonomy",
+      "base_ref": "fixtures/accepted.sample.json",
+      "mutations": [
+        {
+          "type": "append",
+          "path": [
+            "failure_types",
+            0,
+            "affected_scores"
+          ],
+          "value": "texture_quality"
+        }
+      ],
+      "expected_valid": false,
+      "expected_declared_decision": "accepted",
+      "expected_computed_decision": "unknown",
+      "expected_violation_codes": [
+        "TAXONOMY_UNKNOWN_AFFECTED_SCORE"
+      ],
+      "expected_violation_paths": [
+        "$.failure_types[0].affected_scores[2]"
+      ]
+    },
+    {
+      "case_id": "SAMPLE_MISSING_REQUIRED_FIELD",
+      "target": "sample",
+      "base_ref": "fixtures/accepted.sample.json",
+      "mutations": [
+        {
+          "type": "delete",
+          "path": [
+            "asset_ref"
+          ]
+        }
+      ],
+      "expected_valid": false,
+      "expected_declared_decision": "accepted",
+      "expected_computed_decision": "unknown",
+      "expected_violation_codes": [
+        "SAMPLE_MISSING_REQUIRED_FIELD"
+      ],
+      "expected_violation_paths": [
+        "$.asset_ref"
+      ]
+    },
+    {
+      "case_id": "FAILURE_CODES_WRONG_TYPE",
+      "target": "sample",
+      "base_ref": "fixtures/accepted.sample.json",
+      "mutations": [
+        {
+          "type": "replace",
+          "path": [
+            "failure_codes"
+          ],
+          "value": "SUBJECT_DRIFT"
+        }
+      ],
+      "expected_valid": false,
+      "expected_declared_decision": "accepted",
+      "expected_computed_decision": "unknown",
+      "expected_violation_codes": [
+        "FAILURE_CODES_WRONG_TYPE"
+      ],
+      "expected_violation_paths": [
+        "$.failure_codes"
+      ]
+    },
+    {
+      "case_id": "REVIEW_SCORE_BOOLEAN",
+      "target": "sample",
+      "base_ref": "fixtures/accepted.sample.json",
+      "mutations": [
+        {
+          "type": "set",
+          "path": [
+            "review_scores",
+            "material_realism"
+          ],
+          "value": true
+        }
+      ],
+      "expected_valid": false,
+      "expected_declared_decision": "accepted",
+      "expected_computed_decision": "unknown",
+      "expected_violation_codes": [
+        "REVIEW_SCORE_BOOLEAN"
+      ],
+      "expected_violation_paths": [
+        "$.review_scores.material_realism"
+      ]
+    },
+    {
+      "case_id": "EMPTY_REVIEWER_NOTES",
+      "target": "sample",
+      "base_ref": "fixtures/accepted.sample.json",
+      "mutations": [
+        {
+          "type": "set",
+          "path": [
+            "reviewer_notes",
+            "summary"
+          ],
+          "value": ""
+        }
+      ],
+      "expected_valid": false,
+      "expected_declared_decision": "accepted",
+      "expected_computed_decision": "unknown",
+      "expected_violation_codes": [
+        "EMPTY_REVIEWER_NOTES"
+      ],
+      "expected_violation_paths": [
+        "$.reviewer_notes.summary"
+      ]
+    }
+  ]
+}
