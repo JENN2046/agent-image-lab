@@ -1,0 +1,117 @@
+{
+  "taxonomy_version": "local_visual_eval.failure_taxonomy.v1",
+  "failure_types": [
+    {
+      "code": "SUBJECT_DRIFT",
+      "title": "Subject drift",
+      "description": "The sample no longer reads as the intended product, product family, or shot role.",
+      "severity": "critical",
+      "blocking": true,
+      "observable_signals": [
+        "wrong product type",
+        "missing primary product identity anchors",
+        "extra product variants dominate the frame"
+      ],
+      "recommended_corrections": [
+        "lock the product type before styling",
+        "repeat single-product identity anchors in the prompt",
+        "remove alternative-product language from the shot brief"
+      ],
+      "affected_scores": [
+        "subject_fidelity",
+        "commercial_fitness"
+      ]
+    },
+    {
+      "code": "MATERIAL_PLASTICITY",
+      "title": "Material plasticity",
+      "description": "The material reads as cheap, toy-like, over-smoothed, melted, or physically implausible.",
+      "severity": "major",
+      "blocking": true,
+      "observable_signals": [
+        "toy plastic finish",
+        "featureless lower body",
+        "blown diffuser surface",
+        "unconvincing metal or frosted material"
+      ],
+      "recommended_corrections": [
+        "make material character explicit",
+        "preserve body edge detail",
+        "control glow intensity and diffuser edge readability"
+      ],
+      "affected_scores": [
+        "material_realism",
+        "lighting",
+        "commercial_fitness"
+      ]
+    },
+    {
+      "code": "COMPOSITION_IMBALANCE",
+      "title": "Composition imbalance",
+      "description": "Framing, scale, foreground, or negative space prevents the product from reading as the clear commercial subject.",
+      "severity": "major",
+      "blocking": false,
+      "observable_signals": [
+        "foreground surface dominates",
+        "product is too small",
+        "handle or base is cropped",
+        "background scene overpowers the product"
+      ],
+      "recommended_corrections": [
+        "rebalance product scale",
+        "keep foreground secondary",
+        "reserve clean space around handle and base"
+      ],
+      "affected_scores": [
+        "composition",
+        "commercial_fitness"
+      ]
+    },
+    {
+      "code": "DETAIL_OR_ANATOMY_ARTIFACT",
+      "title": "Detail or anatomy artifact",
+      "description": "Important product details are warped, fused, missing, or synthetically unstable.",
+      "severity": "major",
+      "blocking": true,
+      "observable_signals": [
+        "warped handle",
+        "missing side control",
+        "broken base geometry",
+        "melted diffuser"
+      ],
+      "recommended_corrections": [
+        "name the required visible parts",
+        "block impossible geometry",
+        "tighten product detail review criteria"
+      ],
+      "affected_scores": [
+        "subject_fidelity",
+        "material_realism",
+        "commercial_fitness"
+      ]
+    },
+    {
+      "code": "COMMERCIAL_UNFITNESS",
+      "title": "Commercial unfitness",
+      "description": "The sample is not usable as review evidence for a product, campaign, or SKU route.",
+      "severity": "critical",
+      "blocking": true,
+      "observable_signals": [
+        "brand contamination",
+        "watermark or fake logo",
+        "unsafe or off-route scene",
+        "overall route not viable"
+      ],
+      "recommended_corrections": [
+        "remove readable brand text and watermark risks",
+        "reset the shot route before retry",
+        "split SKU and scene-hero routes when they conflict"
+      ],
+      "affected_scores": [
+        "commercial_fitness",
+        "composition",
+        "subject_fidelity"
+      ]
+    }
+  ]
+}

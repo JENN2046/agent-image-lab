@@ -1,0 +1,44 @@
+{
+  "schema_version": "local_visual_eval.sample.v1",
+  "sample_id": "lv_eval_v1_rejected_lantern_subject_material_failure",
+  "decision": "rejected",
+  "asset_ref": {
+    "kind": "metadata_only_reference",
+    "ref": "synthetic://local_visual_eval/v1/rejected_lantern_subject_material_failure",
+    "image_binary_read_performed": false
+  },
+  "shot_id": "premium_portable_led_camping_lantern_clean_sku_blue_hour",
+  "prompt_ref": "prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v11.yaml",
+  "review_scores": {
+    "subject_fidelity": 2,
+    "composition": 3,
+    "lighting": 4,
+    "material_realism": 2,
+    "commercial_fitness": 2
+  },
+  "failure_codes": [
+    "SUBJECT_DRIFT",
+    "MATERIAL_PLASTICITY"
+  ],
+  "correction_strategies": [
+    "Restate the single modern rechargeable LED camping lantern identity before scene styling.",
+    "Make matte graphite body, frosted diffuser edge, side control, handle, and base explicit."
+  ],
+  "reviewer_notes": {
+    "summary": "Rejected local sample: product identity and material trust are both below the deterministic policy bar.",
+    "positive_reasons": [
+      "lighting is not the primary blocker"
+    ],
+    "watch_items": [
+      "reset product identity before any retry",
+      "tighten material realism and lower body detail"
+    ]
+  },
+  "provenance": {
+    "metadata_only": true,
+    "provider_contact_performed": false,
+    "image_generation_performed": false,
+    "memory_write_performed": false
+  },
+  "created_at": "2026-06-24T00:00:00+08:00"
+}

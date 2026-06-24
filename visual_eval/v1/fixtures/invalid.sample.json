@@ -1,0 +1,30 @@
+{
+  "schema_version": "local_visual_eval.sample.v1",
+  "sample_id": "lv_eval_v1_invalid_missing_asset_ref",
+  "decision": "accepted",
+  "shot_id": "premium_portable_led_camping_lantern_clean_sku_blue_hour",
+  "prompt_ref": "prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v11.yaml",
+  "review_scores": {
+    "subject_fidelity": 5,
+    "composition": 4,
+    "lighting": 4,
+    "material_realism": 4,
+    "commercial_fitness": 4
+  },
+  "failure_codes": [],
+  "correction_strategies": [],
+  "reviewer_notes": {
+    "summary": "Invalid fixture: asset_ref is intentionally missing so the validator fails closed.",
+    "positive_reasons": [],
+    "watch_items": [
+      "missing required asset_ref"
+    ]
+  },
+  "provenance": {
+    "metadata_only": true,
+    "provider_contact_performed": false,
+    "image_generation_performed": false,
+    "memory_write_performed": false
+  },
+  "created_at": "2026-06-24T00:00:00+08:00"
+}

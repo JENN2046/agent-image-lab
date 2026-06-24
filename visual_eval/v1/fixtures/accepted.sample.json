@@ -1,0 +1,40 @@
+{
+  "schema_version": "local_visual_eval.sample.v1",
+  "sample_id": "lv_eval_v1_accepted_lantern_clean_sku",
+  "decision": "accepted",
+  "asset_ref": {
+    "kind": "metadata_only_reference",
+    "ref": "synthetic://local_visual_eval/v1/accepted_lantern_clean_sku",
+    "image_binary_read_performed": false
+  },
+  "shot_id": "premium_portable_led_camping_lantern_clean_sku_blue_hour",
+  "prompt_ref": "prompts/image_generation/product_lifestyle_premium_portable_led_camping_lantern_v11.yaml",
+  "review_scores": {
+    "subject_fidelity": 5,
+    "composition": 4,
+    "lighting": 5,
+    "material_realism": 4,
+    "commercial_fitness": 4
+  },
+  "failure_codes": [],
+  "correction_strategies": [],
+  "reviewer_notes": {
+    "summary": "Accepted local sample: single lantern identity is stable, product-first framing is clean, and material and lighting clear the policy bar.",
+    "positive_reasons": [
+      "single modern rechargeable LED camping lantern remains clear",
+      "full handle, diffuser, body, control, and base are represented",
+      "warm diffuser and cool blue-hour contrast fit the prompt route"
+    ],
+    "watch_items": [
+      "preserve lower body readability",
+      "keep foreground surface secondary"
+    ]
+  },
+  "provenance": {
+    "metadata_only": true,
+    "provider_contact_performed": false,
+    "image_generation_performed": false,
+    "memory_write_performed": false
+  },
+  "created_at": "2026-06-24T00:00:00+08:00"
+}

@@ -1,0 +1,174 @@
+{
+  "schema_version": "local_visual_eval.visual_sample.schema.v1",
+  "title": "Local Visual Eval Sample v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "sample_id",
+    "decision",
+    "asset_ref",
+    "shot_id",
+    "prompt_ref",
+    "review_scores",
+    "failure_codes",
+    "correction_strategies",
+    "reviewer_notes",
+    "provenance",
+    "created_at"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "local_visual_eval.sample.v1"
+    },
+    "sample_id": {
+      "type": "string"
+    },
+    "decision": {
+      "type": "string",
+      "enum": [
+        "accepted",
+        "rejected"
+      ]
+    },
+    "asset_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "ref",
+        "image_binary_read_performed"
+      ],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": [
+            "metadata_only_reference"
+          ]
+        },
+        "ref": {
+          "type": "string"
+        },
+        "image_binary_read_performed": {
+          "type": "boolean",
+          "const": false
+        }
+      }
+    },
+    "shot_id": {
+      "type": "string"
+    },
+    "prompt_ref": {
+      "type": "string"
+    },
+    "review_scores": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "subject_fidelity",
+        "composition",
+        "lighting",
+        "material_realism",
+        "commercial_fitness"
+      ],
+      "properties": {
+        "subject_fidelity": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 5
+        },
+        "composition": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 5
+        },
+        "lighting": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 5
+        },
+        "material_realism": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 5
+        },
+        "commercial_fitness": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 5
+        }
+      }
+    },
+    "failure_codes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "correction_strategies": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "reviewer_notes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "summary",
+        "positive_reasons",
+        "watch_items"
+      ],
+      "properties": {
+        "summary": {
+          "type": "string"
+        },
+        "positive_reasons": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "watch_items": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "metadata_only",
+        "provider_contact_performed",
+        "image_generation_performed",
+        "memory_write_performed"
+      ],
+      "properties": {
+        "metadata_only": {
+          "type": "boolean",
+          "const": true
+        },
+        "provider_contact_performed": {
+          "type": "boolean",
+          "const": false
+        },
+        "image_generation_performed": {
+          "type": "boolean",
+          "const": false
+        },
+        "memory_write_performed": {
+          "type": "boolean",
+          "const": false
+        }
+      }
+    },
+    "created_at": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "policy_version": "local_visual_eval.evaluation_policy.v1",
+  "compatible_sample_schema_versions": [
+    "local_visual_eval.sample.v1"
+  ],
+  "score_fields": [
+    "subject_fidelity",
+    "composition",
+    "lighting",
+    "material_realism",
+    "commercial_fitness"
+  ],
+  "critical_score_fields": [
+    "subject_fidelity",
+    "composition",
+    "lighting",
+    "material_realism",
+    "commercial_fitness"
+  ],
+  "accepted_minimum_thresholds": {
+    "subject_fidelity": 4,
+    "composition": 4,
+    "lighting": 4,
+    "material_realism": 4,
+    "commercial_fitness": 4
+  },
+  "blocking_failure_behavior": {
+    "accepted_with_blocking_failure": "reject_sample",
+    "rejected_with_blocking_failure": "valid_rejected"
+  },
+  "rejected_sample_requirements": {
+    "minimum_failure_codes": 1,
+    "minimum_correction_strategies": 1
+  },
+  "unknown_failure_code_behavior": "fail_closed",
+  "schema_version_compatibility": {
+    "missing_schema_version": "fail_closed",
+    "unsupported_schema_version": "fail_closed"
+  },
+  "deterministic_decision_rules": [
+    "Fail closed when schema, taxonomy, policy, or sample shape is invalid.",
+    "Fail closed when any unknown field is present in a strict object.",
+    "Fail closed when any failure code is not present in the taxonomy.",
+    "Compute rejected when any blocking failure code is present.",
+    "Compute rejected when any critical score is below its accepted minimum threshold.",
+    "Compute accepted only when all critical scores meet thresholds and no blocking failure code is present.",
+    "Require declared decision to equal computed decision."
+  ]
+}
